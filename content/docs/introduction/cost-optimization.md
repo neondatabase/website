@@ -6,7 +6,7 @@ summary: >-
   usage, including right-sizing, effective autoscaling, enabling scale to zero,
   and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2026-02-11T23:20:21.257Z'
+updatedOn: '2026-03-06T00:10:04.320Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -27,7 +27,7 @@ Compute is typically the largest component of your Neon bill. You're charged bas
 
 - **Manage persistent connections and scheduled jobs.** Applications that maintain long-lived connections or scheduled jobs (like cron tasks) can prevent your compute from scaling to zero, keeping it active 24/7. If these aren't critical, consider closing idle connections or adjusting job schedules to allow scale to zero during off-peak hours.
 
-- **Be aware of logical replication impact.** If you're using [logical replication](/docs/guides/logical-replication-neon), note that computes with active replication subscribers will not scale to zero, resulting in 24/7 compute usage. Plan accordingly and consider whether logical replication is necessary for all environments.
+- **Be aware of logical replication impact when replicating from Neon.** If you replicate data **from** Neon (Neon as the publisher) to an external destination, your compute stays active while subscribers are connected and will not [scale to zero](/docs/introduction/scale-to-zero), resulting in ongoing compute usage and higher bills. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) for details. Plan accordingly and consider whether outbound logical replication is necessary for all environments.
 
 - **Consider read replica costs.** [Read replicas](/docs/introduction/read-replicas) are billed as separate compute endpoints. If you have read replicas, they add to your total compute hours. Review whether all replicas are needed, and consider scale to zero settings for replicas used infrequently.
 
@@ -163,7 +163,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer.
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

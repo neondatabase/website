@@ -73,7 +73,7 @@ The `width` can be one of the following values:
 - An asterisk (\*) to use the next function argument as the width.
 - A string of the form `*n$` to use the `nth` function argument as the width.
 
-**t\*\***y\***\*pe**
+**type**
 
 `type` is the type of format conversion to use to produce the format specifier’s output.
 

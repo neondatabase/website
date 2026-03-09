@@ -1,11 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import TimelineSvg from 'images/pages/about/timeline/timeline.inline.svg';
 
 const ITEMS = [
   {
@@ -82,9 +82,9 @@ const Timeline = () => (
                   {item.link ? (
                     <Link
                       className={clsx(
-                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
-                        'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white md:hover:decoration-white/40',
-                        'md:after:absolute md:after:inset-0',
+                        'relative text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                        'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white',
+                        'after:absolute after:-inset-1.5',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}
                       to={item.link}
@@ -106,14 +106,7 @@ const Timeline = () => (
               </li>
             ))}
           </ol>
-          <Image
-            className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8"
-            width={1536}
-            height={56}
-            src="/images/pages/about/timeline.svg"
-            aria-hidden="true"
-            alt=""
-          />
+          <TimelineSvg className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8" />
         </div>
       </div>
     </Container>

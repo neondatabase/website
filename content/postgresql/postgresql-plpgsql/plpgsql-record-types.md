@@ -18,7 +18,7 @@ nextLink:
 
 ## Introduction to PL/pgSQL record types
 
-PostgreSQL provides a “type” called the `record` that is similar to the [row\-type](/postgresql/plpgsql-row-types/).
+PostgreSQL provides a “type” called the `record` that is similar to the [row\-type](/postgresql/postgresql-plpgsql/pl-pgsql-row-types).
 
 It’s important to note that a record isn’t a true type but rather a placeholder. Furthermore, the structure of a record variable will change when you reassign it to another value.
 
@@ -28,7 +28,7 @@ To declare a `record` variable, you simply use a variable name followed by the `
 variable_name record;
 ```
 
-A `record` variable is similar to a [row\-type variable](/postgresql/plpgsql-row-types/), which can hold only one row of a result set.
+A `record` variable is similar to a [row\-type variable](/postgresql/postgresql-plpgsql/pl-pgsql-row-types), which can hold only one row of a result set.
 
 Unlike a row\-type variable, a `record` variable lacks a predefined structure. Instead, the structure of a `record` variable is determined when an actual row is assigned to it via the [`select`](/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) or [`for`](plpgsql-for-loop) statement.
 

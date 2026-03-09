@@ -574,7 +574,7 @@ Each of [Neon's plans](/docs/introduction/plans) includes a certain number of co
 <details>
 <summary>**Where can I monitor compute hour usage?**</summary>
 
-You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
+You can monitor compute hour usage for a Neon project on the [Projects page](/docs/introduction/monitor-usage#projects-page). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage in the Neon Console](/docs/introduction/monitor-usage#view-usage-in-the-neon-console).
 
 </details>
 

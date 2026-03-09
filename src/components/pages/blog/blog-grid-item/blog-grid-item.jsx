@@ -3,25 +3,30 @@ import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
 
-const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => (
-  <BlogPostCard
-    className={clsx(
-      'py-8 last:pb-0 md:py-6',
-      isFeatured
-        ? '!pt-0'
-        : 'col-span-full border-t border-gray-new-15 py-8 first:border-0 first:pt-0',
-      '[&:nth-child(-n+2)]:-order-1 [&:nth-child(3)]:border-0',
-      className
-    )}
-    category={category}
-    fullSize={!isFeatured}
-    imageWidth={isFeatured ? 372 : 336}
-    imageHeight={isFeatured ? 209 : 189}
-    isPriority={isPriority}
-    withAuthorPhoto
-    {...post}
-  />
-);
+const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => {
+  // eslint-disable-next-line no-unused-vars
+  const { isFeatured: _, ...postProps } = post;
+
+  return (
+    <BlogPostCard
+      className={clsx(
+        'last:pb-0',
+        isFeatured
+          ? '!pt-0 pb-10'
+          : 'col-span-full border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:py-6',
+        className
+      )}
+      category={category}
+      isFeatured={isFeatured}
+      fullSize={!isFeatured}
+      imageWidth={isFeatured ? 560 : 336}
+      imageHeight={isFeatured ? 315 : 189}
+      isPriority={isPriority}
+      withAuthorPhoto
+      {...postProps}
+    />
+  );
+};
 
 BlogGridItem.propTypes = {
   className: PropTypes.string,

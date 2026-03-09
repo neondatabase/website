@@ -225,7 +225,7 @@ const faqItems = [
 const PricingPage = () => (
   <Layout>
     <Hero />
-    <Logos className="mt-32 xl:mt-[120px] lg:mt-[104px] md:mt-20" logos={logos} size="sm" />
+    <Logos className="mt-[104px] md:mt-20" logos={logos} size="sm" />
     <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
     <Features />
     <Faq items={faqItems} />

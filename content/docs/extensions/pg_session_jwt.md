@@ -6,7 +6,7 @@ summary: >-
   authenticated sessions using JSON Web Tokens (JWTs), including JWK validation
   and PostgREST compatibility for secure user identity handling.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.089Z'
+updatedOn: '2026-03-05T04:12:51.007Z'
 ---
 
 <InfoBlock>
@@ -14,7 +14,7 @@ updatedOn: '2026-02-15T20:51:54.089Z'
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/data-api/overview">Neon Data API</a>
   <a href="/docs/data-api/custom-authentication-providers">Custom authentication providers</a>
-  <a href="/docs/guides/neon-rls">Row-Level Security (RLS)</a>
+  <a href="/docs/guides/row-level-security">Row-Level Security (RLS)</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
@@ -143,6 +143,6 @@ When using the fallback mode without JWK validation, `request.jwt.claims` is a r
 - [pg_session_jwt on GitHub](https://github.com/neondatabase/pg_session_jwt)
 - [Neon Data API documentation](/docs/data-api/overview)
 - [Custom authentication providers](/docs/data-api/custom-authentication-providers)
-- [Row-Level Security guide](/docs/guides/neon-rls)
+- [Row-Level Security guide](/docs/guides/row-level-security)
 
 <NeedHelp/>

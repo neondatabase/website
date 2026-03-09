@@ -6,7 +6,7 @@ summary: >-
   from the client-side, generating backend signatures, and storing asset
   metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.580Z'
+updatedOn: '2026-03-05T04:12:51.010Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -19,7 +19,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 ## Create a Neon project
 
-1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
+1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudinary account and get credentials
@@ -461,6 +461,5 @@ This pattern separates media storage, processing, and delivery (handled by Cloud
 - [Cloudinary documentation](https://cloudinary.com/documentation)
 - [Cloudinary Upload API reference](https://cloudinary.com/documentation/image_upload_api_reference)
 - [Neon Documentation](/docs/introduction)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

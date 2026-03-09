@@ -188,6 +188,21 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/privacy-guide',
+        destination: '/privacy-policy',
+        permanent: true,
+      },
+      {
+        source: '/sensitive-data-terms',
+        destination: '/terms-of-service',
+        permanent: true,
+      },
+      {
+        source: '/programs/creators',
+        destination: '/programs/open-source',
+        permanent: true,
+      },
+      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
@@ -646,11 +661,7 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     config.module.rules.push({
-      test: (filePath) => {
-        const fileName = filePath.split('/').pop();
-
-        return fileName === 'rive.wasm';
-      },
+      test: /rive\.wasm$/,
       type: 'asset/resource',
       generator: {
         filename: 'static/[name].[hash][ext]',

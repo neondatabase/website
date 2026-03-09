@@ -1,132 +1,130 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import Link from 'components/shared/link/link';
-import ArrowIcon from 'icons/arrow-sm.inline.svg';
-import getLinkProps from 'utils/get-link-props';
+import Link from 'components/shared/link';
+import HasuraLogo from 'components/shared/logos/images/hasura.inline.svg';
+import VercelLogo from 'components/shared/logos/images/vercel.inline.svg';
+import LINKS from 'constants/links';
+import ArrowRightIcon from 'icons/arrow-right.inline.svg';
+import triangleIcon from 'icons/triangle.svg';
+import patternSvg1 from 'images/pages/case-studies/hero/pattern-1.svg';
+import patternSvg2 from 'images/pages/case-studies/hero/pattern-2.svg';
 
-import { CardPropTypes } from '../cards';
+const CARDS = [
+  {
+    logo: VercelLogo,
+    category: 'AI & Agents',
+    title:
+      '99.99% uptime without over-provisioning. <span>How Vercel uses autoscaling to keep Postgres stable.</span>',
+    linkText: 'Read case study',
+    linkUrl: `${LINKS.blog}/neon-postgres-on-vercel`,
+    background: {
+      src: patternSvg1,
+      width: 303,
+      height: 166,
+    },
+  },
+  {
+    logo: HasuraLogo,
+    category: 'fast-moving teams',
+    title:
+      'Database operations, made repeatable. <span>How Hasura standardizes provisioning across environments with Neon.</span>',
+    linkText: 'Read case study',
+    linkUrl: `${LINKS.blog}/neon-hasura-integration`,
+    background: {
+      src: patternSvg2,
+      width: 285,
+      height: 164,
+    },
+  },
+];
 
-import сardBg1 from './images/card-bg-1.jpg';
-import сardBg4 from './images/card-bg-4.jpg';
+const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, background }) => (
+  <Link className="group" to={linkUrl}>
+    <article className="relative flex h-[408px] w-full flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-[320px]">
+      <Image
+        className="absolute right-0 top-0 lt:h-auto lt:max-w-[55%] lg:max-w-[50%] sm:max-w-[40%]"
+        src={background.src}
+        width={background.width}
+        height={background.height}
+        alt=""
+        priority
+      />
+      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 sm:p-6 xs:p-5">
+        <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white sm:h-6 sm:max-w-[89px]" />
+        <div className="mt-auto flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
+            <span className="font-mono text-[13px] font-medium uppercase leading-none text-green-52 sm:text-[10px]">
+              {category}
+            </span>
 
-const cardBgImages = {
-  1: сardBg1,
-  4: сardBg4,
-};
-
-const FeaturedCard = ({
-  index,
-  title,
-  logo,
-  quote,
-  author,
-  externalUrl = '',
-  isInternal,
-  post = null,
-}) => {
-  const linkProps = getLinkProps({ externalUrl, isInternal, post });
-  const indexInGrid = index % 4;
-
-  return (
-    <li
-      className={clsx('h-[315px] sm:w-full', {
-        'w-[60%] lg:w-full': indexInGrid === 0 || indexInGrid === 3,
-        'lg:flex-1/2 flex-[30%] flex-grow sm:flex-none': indexInGrid === 1 || indexInGrid === 2,
-      })}
-    >
-      <Link
-        className={clsx(
-          'group relative z-10 flex h-full w-full flex-col justify-between overflow-hidden',
-          'rounded-xl border border-gray-new-15 bg-[#0A0A0A] px-6 py-5',
-          'xl:rounded-[10px] lg:rounded-lg md:w-full md:max-w-full'
-        )}
-        {...linkProps}
-      >
-        <Image
-          className="h-8 w-fit"
-          src={logo.mediaItemUrl}
-          alt={title}
-          width={logo.mediaDetails.width}
-          height={logo.mediaDetails.height}
-          priority
-        />
-        <figure className="w-full">
-          {quote && (
-            <>
-              <blockquote>
-                <div
-                  className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white before:content-['“'] after:content-['”'] sm:text-base [&_p]:inline"
-                  dangerouslySetInnerHTML={{ __html: `${quote.trim()}` }}
-                />
-              </blockquote>
-              {author && author.name && (
-                <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">
-                  {author.name}{' '}
-                  <cite>
-                    {author?.post && <span className="not-italic">— {author?.post}</span>}
-                  </cite>
-                </figcaption>
-              )}
-            </>
-          )}
-          <div
-            className={clsx(
-              'mt-[18px] inline-flex items-center text-[15px] leading-none tracking-tight lg:mt-4',
-              'text-white transition-colors duration-200 group-hover:text-green-45'
-            )}
-            {...linkProps}
-          >
-            Read story
-            <ArrowIcon className="ml-1.5" />
+            <h2
+              className="text-[28px] font-normal leading-tight tracking-tighter text-white lg:text-2xl md:text-[28px] sm:text-2xl xs:text-[20px] [&_span]:text-gray-new-60"
+              dangerouslySetInnerHTML={{ __html: title }}
+            />
           </div>
-        </figure>
-        {(index % 4 === 0 || index % 4 === 3) && (
+
+          <span className="inline-flex w-fit items-center gap-2 text-base font-medium leading-none tracking-tighter text-white sm:text-[15px]">
+            {linkText}
+            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-[transform,color] duration-200 group-hover:translate-x-[3px] group-hover:text-white" />
+          </span>
+        </div>
+      </div>
+    </article>
+  </Link>
+);
+
+FeaturedCard.propTypes = {
+  logo: PropTypes.elementType.isRequired,
+  category: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  linkText: PropTypes.string.isRequired,
+  linkUrl: PropTypes.string.isRequired,
+  background: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+const Hero = () => (
+  <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
+    <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
+      <div className="flex max-w-[960px] flex-col gap-5 lt:max-w-[864px] lg:max-w-[640px] md:max-w-none">
+        <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
-            className={clsx(
-              'pointer-events-none absolute inset-0 -z-10 size-full object-cover object-left',
-              index % 4 === 3 && 'lg:object-center'
-            )}
-            src={cardBgImages[(index % 4) + 1]}
-            width={704}
-            height={315}
+            src={triangleIcon}
             alt=""
-            priority
-            aria-hidden
+            width={12}
+            height={14}
+            aria-hidden="true"
+            className="sm:h-2.5 sm:w-2.5"
           />
-        )}
-      </Link>
-    </li>
-  );
-};
-
-FeaturedCard.propTypes = CardPropTypes;
-
-const Hero = ({ items }) => {
-  const featuredItems = items.filter((item) => item.caseStudyPost.isFeatured === true);
-
-  return (
-    <section className="hero safe-paddings pt-48 xl:pt-[152px] lg:pt-12 md:pt-9">
-      <Container className="flex flex-col items-center lg:!max-w-3xl md:px-5" size="960">
-        <h1 className="text-center font-title text-[68px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl sm:text-[32px]">
-          Explore success stories
+          <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 sm:text-[10px]">
+            Case studies
+          </span>
+        </div>
+        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white lt:text-[54px] lg:text-[40px] md:text-[32px]">
+          Real-world stories from teams shipping world-class products on Neon.
         </h1>
-        {!!featuredItems.length && (
-          <ul className="mt-12 flex w-full flex-wrap gap-8 xl:mt-10 lg:mt-8 lg:gap-7 sm:mt-7 sm:flex-col sm:gap-5">
-            {featuredItems.map(({ title, caseStudyPost }, index) => (
-              <FeaturedCard {...caseStudyPost} title={title} index={index} key={index} />
-            ))}
-          </ul>
-        )}
-      </Container>
-    </section>
-  );
-};
+      </div>
 
-Hero.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(CardPropTypes)).isRequired,
-};
+      <div className="grid grid-cols-2 gap-8 lg:gap-6 md:grid-cols-1 md:gap-6">
+        {CARDS.map(({ logo, category, title, linkText, linkUrl, background }, index) => (
+          <FeaturedCard
+            key={index}
+            logo={logo}
+            category={category}
+            title={title}
+            linkText={linkText}
+            linkUrl={linkUrl}
+            background={background}
+          />
+        ))}
+      </div>
+    </Container>
+  </section>
+);
 
 export default Hero;

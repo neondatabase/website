@@ -69,7 +69,7 @@ const TableOfContents = ({ items, isTemplate }) => {
 
   return (
     <>
-      <h3 className="mb-3.5 flex items-center gap-2 text-sm font-medium leading-none tracking-extra-tight">
+      <h3 className="mb-6 flex items-center gap-2 text-sm font-medium leading-none tracking-extra-tight">
         <TOCIcon className="size-3 shrink-0" aria-hidden />
         On this page
       </h3>

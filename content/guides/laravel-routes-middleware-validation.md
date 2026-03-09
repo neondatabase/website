@@ -550,7 +550,7 @@ This loads posts, their authors, comments on each post, and the user who made ea
 
 Indexes are crucial for query performance. They allow the database to find data without scanning the entire table.
 
-You can learn more about indexing in the [Neon documentation](/docs/postgres/indexes/).
+You can learn more about indexing in the [Neon documentation](/docs/postgresql/index-types).
 
 In Laravel migrations, you can add indexes like this:
 

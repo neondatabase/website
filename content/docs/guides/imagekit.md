@@ -5,7 +5,7 @@ summary: >-
   Step-by-step guide for integrating ImageKit.io with Neon to upload media files
   directly from the client-side and store their metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.582Z'
+updatedOn: '2026-03-05T04:12:51.011Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
@@ -18,7 +18,7 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 
 ## Create a Neon project
 
-1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
+1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an ImageKit.io account and get credentials
@@ -424,6 +424,5 @@ This pattern separates media storage, optimization, and delivery (handled by Ima
 
 - [ImageKit.io documentation](https://imagekit.io/docs)
 - [ImageKit.io Upload API](https://imagekit.io/docs/api-reference/upload-file/upload-file)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

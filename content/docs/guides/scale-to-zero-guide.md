@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.196Z'
+updatedOn: '2026-03-03T14:18:20.107Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active. On the Scale plan, you can configure the scale to zero threshold.
@@ -129,6 +129,10 @@ The Neon API includes a [Start endpoint](https://api-docs.neon.tech/reference/st
 </Admonition>
 
 You can try any of these methods and watch the status of your compute as it transitions from an **Idle** to an **Active** state.
+
+## Logical replication and scale to zero
+
+When you [replicate data from Neon](/docs/guides/logical-replication-guide#replicate-data-from-neon) (Neon as the publisher), a connected logical replication subscriber keeps the database active, so the compute will not scale to zero and you will have ongoing compute usage. This applies only when Neon is the publisher, not when replicating data into Neon from an external source. For details and other replication notices, see [Logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
 
 ## Session context considerations
 

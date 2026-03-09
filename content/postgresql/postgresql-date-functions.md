@@ -66,6 +66,7 @@ This section shows you how to use the date and time operators.
 
 This section shows you various date and time utility functions.
 
+- [DATE_BIN](postgresql-date-functions/postgresql-date_bin) – Bin a timestamp into a fixed-size interval aligned with a specified origin.
 - [DATE_TRUNC](postgresql-date-functions/postgresql-date_trunc) – Truncate a date.
 - [ISFINITE](postgresql-date-functions/postgresql-isfinite) – Check if a date, a timestamp, or an interval is finite or not (not \+/\-infinity).
 - [TIMEOFDAY](postgresql-date-functions/postgresql-timeofday) – Return the current date and time, like clock_timestamp, as a text string).

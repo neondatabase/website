@@ -4,12 +4,10 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { BLOG_CATEGORY_BASE_PATH, CATEGORY_COLORS, EXTRA_CATEGORIES } from 'constants/blog';
+import { BLOG_CATEGORY_BASE_PATH, EXTRA_CATEGORIES } from 'constants/blog';
 import LINKS from 'constants/links';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
-
-import Authors from '../authors';
 
 const BlogPostCard = ({
   className,
@@ -21,18 +19,15 @@ const BlogPostCard = ({
   category,
   categories,
   pageBlogPost,
-  author,
+  isFeatured = false,
+  isSmart = false,
   fullSize = false,
   withImageHover = true,
   imageWidth = null,
   imageHeight = null,
   isPriority = false,
 }) => {
-  const { largeCover, authors } = pageBlogPost || {};
-  const authorsData = authors?.map(({ author: { title, postAuthor } }) => ({
-    name: title,
-    photo: postAuthor?.image?.mediaItemUrl,
-  }));
+  const { largeCover } = pageBlogPost || {};
 
   const excerpt = subtitle || (content && getExcerpt(he.decode(content), 280));
 
@@ -65,22 +60,27 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'flex-row-reverse items-start gap-6 xl:gap-5 md:flex-col' : 'flex-col gap-4',
+        fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
+        isSmart &&
+          '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:!flex-col md:gap-x-0 md:gap-y-5',
         className
       )}
     >
       {largeCover && (
         <Link
           className={clsx(
-            'group aspect-[16/9] w-full overflow-hidden rounded-lg bg-[#181818]',
-            fullSize && 'col-span-6 xl:col-span-5'
+            'group overflow-hidden bg-[#181818]',
+            isSmart ? 'shrink-0' : 'aspect-[16/9] w-full',
+            fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
         >
           <Image
             className={clsx(
-              'size-full rounded-lg object-cover transition-transform duration-200',
-              withImageHover && 'group-hover:scale-110'
+              'transition-transform duration-200',
+              !isSmart && 'size-full',
+              fullSize ? 'object-contain' : !isSmart && 'object-cover',
+              withImageHover && !fullSize && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
             alt={largeCover?.altText || title}
@@ -94,22 +94,26 @@ const BlogPostCard = ({
       )}
       <div
         className={clsx(
-          'flex flex-col',
-          fullSize && largeCover ? 'w-[408px] shrink-0 md:w-full' : 'w-full'
+          'flex min-w-0 flex-col md:w-full',
+          fullSize && largeCover ? '' : 'mr-auto',
+          !isFeatured &&
+            'max-w-[684px] basis-[58%] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
+          isSmart &&
+            '!w-[424px] shrink-0 flex-col-reverse 2xl:!w-auto 2xl:min-w-0 2xl:shrink 2xl:!pr-0 md:!w-full md:gap-y-3'
         )}
       >
         <div
           className={clsx(
-            'flex gap-2 text-[13px] leading-none tracking-extra-tight',
-            fullSize ? 'mb-4' : 'mb-2'
+            'mb-8 flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
+            isSmart && '!mb-0 mt-auto'
           )}
         >
           {/* category */}
           {cat && (
             <Link
               className={clsx(
-                'rounded-sm font-medium',
-                CATEGORY_COLORS[cat.slug] || 'text-green-45'
+                'font-medium uppercase',
+                isFeatured ? 'text-green-45' : 'text-blue-70'
               )}
               to={cat.slug}
             >
@@ -120,43 +124,38 @@ const BlogPostCard = ({
           {/* date */}
           <time
             className={clsx(
-              'relative block shrink-0 uppercase leading-none tracking-extra-tight text-gray-new-60',
+              'relative block shrink-0 uppercase leading-none tracking-extra-tight text-gray-new-50',
               cat &&
-                'pl-[11px] before:absolute before:left-0 before:top-1/2 before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
+                'pl-4 before:absolute before:left-[3px] before:top-1/3 before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
             )}
             dateTime={date}
           >
             {formattedDate}
           </time>
         </div>
-        <Link className="group flex flex-col rounded-sm" to={link}>
+        <Link className={clsx('group flex flex-col', isSmart ? 'mt-0' : 'mt-auto')} to={link}>
           {/* title */}
           <h1
             className={clsx(
-              'font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80 md:text-lg',
-              fullSize ? 'text-2xl lg:text-xl' : 'text-xl'
+              'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
+              isSmart
+                ? 'line-clamp-3 text-2xl leading-tight md:text-[20px] sm:text-lg'
+                : 'text-[28px] font-normal leading-snug lt:text-2xl md:text-[20px] sm:text-lg'
             )}
           >
             {title}
           </h1>
           {/* excerpt */}
-          {fullSize && (
+          {excerpt && (
             <div
               className={clsx(
-                'mt-2 font-light tracking-extra-tight text-gray-new-90 lg:text-base md:text-[15px]',
-                largeCover ? 'line-clamp-2' : 'line-clamp-3'
+                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-base sm:text-[15px]',
+                largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}
             >
               {excerpt}
             </div>
           )}
-          {/* authors */}
-          {authorsData || author ? (
-            <Authors
-              className={clsx(fullSize ? 'mt-4' : 'mt-2.5')}
-              authors={authorsData || [author]}
-            />
-          ) : null}
         </Link>
       </div>
     </article>
@@ -197,10 +196,8 @@ BlogPostCard.propTypes = {
       })
     ),
   }),
-  author: PropTypes.shape({
-    name: PropTypes.string,
-    photo: PropTypes.string,
-  }),
+  isFeatured: PropTypes.bool,
+  isSmart: PropTypes.bool,
   fullSize: PropTypes.bool,
   withImageHover: PropTypes.bool,
   imageWidth: PropTypes.number.isRequired,

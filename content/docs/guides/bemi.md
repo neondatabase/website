@@ -8,7 +8,7 @@ summary: >-
   real-time change tracking.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:32.924Z'
+updatedOn: '2026-03-03T14:18:20.097Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
@@ -22,6 +22,10 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 - A [Bemi account](https://bemi.io/)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication in Neon
 
@@ -38,7 +42,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [[Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;

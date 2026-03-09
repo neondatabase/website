@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2026-02-16T13:09:07.971Z'
+updatedOn: '2026-03-06T18:28:34.023Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API"
@@ -217,6 +217,7 @@ For details, see [Poll operation status](/docs/manage/operations#poll-operation-
 
 - **700 requests per minute** (approximately 11 per second)
 - **40 requests per second** burst limit per route
+- **Organization API key creation** (`POST /organizations/{org_id}/api_keys`): 10 requests per second. Throttle requests or use retries with backoff when creating many keys. See [Manage organizations using the Neon API](/docs/manage/orgs-api) and [Manage API keys](/docs/manage/api-keys).
 
 Exceeding these limits returns `HTTP 429 Too Many Requests`. Implement retry logic with exponential backoff in your applications.
 
@@ -277,7 +278,7 @@ Manage the fundamental building blocks of your Neon account.
 
 Monitor resource consumption and configure usage limits.
 
-- [Monitor usage metrics](/docs/introduction/monitor-usage#retrieve-usage-metrics-with-the-neon-api): Retrieve usage data for projects and branches
+- [Monitor billing and usage](/docs/introduction/monitor-usage): Where to see usage and costs in the Console; links to consumption API for programmatic access
 - [Query consumption metrics](/docs/guides/consumption-metrics): Query project consumption metrics for usage-based plans. For legacy account and project endpoints, see [Query consumption metrics (legacy)](/docs/guides/consumption-metrics-legacy).
 - [Organization consumption](/docs/manage/orgs-api-consumption#account-level-metrics): Query usage metrics for organizations
 - [Configure consumption limits](/docs/guides/consumption-limits#configuring-quotas): Set and update quotas on compute, storage, and data transfer

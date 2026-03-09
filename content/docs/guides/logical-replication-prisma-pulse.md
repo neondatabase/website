@@ -8,7 +8,7 @@ summary: >-
   features.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.016Z'
+updatedOn: '2026-03-03T14:18:20.106Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
@@ -28,6 +28,10 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 - A [Neon account](https://console.neon.tech/)
 - A [Prisma Data Platform account](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication in Neon
 

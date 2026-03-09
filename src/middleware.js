@@ -28,6 +28,36 @@ function applyDocHeaders(response) {
   return response;
 }
 
+function trackLLMPageview(req) {
+  const url = req.nextUrl.href;
+  const referrer = req.headers.get('referer') || '';
+  const cookies = req.headers.get('cookie') || '';
+  const userAgent = req.headers.get('user-agent') || '';
+
+  // Match the payload shape the Zaraz JS tag sends to this endpoint
+  const payload = {
+    name: 'Pageview',
+    data: { llm_agent: true },
+    zarazData: {
+      c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
+      l: url,
+      r: referrer,
+    },
+    system: {
+      device: {
+        ip: '192.168.0.1',
+      },
+    },
+  };
+
+  // Fire and forget — do not await to avoid blocking the response
+  fetch('https://neonapi.io/t.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
+    body: JSON.stringify(payload),
+  }).catch(() => {});
+}
+
 export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
@@ -43,6 +73,7 @@ export async function middleware(req) {
     }
 
     if (isAIAgentRequest(req)) {
+      trackLLMPageview(req);
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {

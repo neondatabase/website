@@ -7,7 +7,7 @@ summary: >-
   stream real-time changes, including inserts, updates, and deletes, to various
   applications and services using logical replication.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.200Z'
+updatedOn: '2026-03-03T14:18:20.108Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -23,6 +23,10 @@ In this guide, we'll show you how to connect your Neon database to Sequin to sta
 - A [Sequin account](https://console.sequinstream.com/register)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication in Neon
 

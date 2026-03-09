@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-19T16:15:04.971Z'
+updatedOn: '2026-03-05T04:12:51.006Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -20,8 +20,8 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 
 ## Enable the Data API
 
-<Admonition type="tip">
-You can also enable the Data API programmatically using the Neon MCP Server. The `provision_neon_data_api` tool enables LLMs to provision HTTP-based Data API access for Neon databases with optional JWT authentication. See the [Neon MCP Server documentation](/docs/ai/neon-mcp-server#supported-actions-tools) for more information.
+<Admonition type="tip" title="Enable programmatically">
+You can also enable the Data API using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api) or the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page
@@ -328,7 +328,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **About the `sub` claim:**
 
-For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
+For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/row-level-security) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
 
 **Example: SELECT (GET)**
 

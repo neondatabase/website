@@ -5,7 +5,7 @@ summary: >-
   organization API keys, member management, and invitations, with distinctions
   between personal and organization API key usage.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.236Z'
+updatedOn: '2026-03-06T18:28:34.021Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -69,6 +69,8 @@ There are two types of organization API keys:
 - **Project-scoped organization API keys**: Provide limited, member-level access to specific projects within the organization. Any organization member can create a key for any organization-owned project.
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
+
+Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
 
 [Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
 

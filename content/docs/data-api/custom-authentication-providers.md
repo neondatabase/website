@@ -6,7 +6,7 @@ summary: >-
   enabling integration with existing systems that issue JSON Web Tokens (JWTs)
   like Auth0, Clerk, and AWS Cognito.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.070Z'
+updatedOn: '2026-03-05T04:12:51.006Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---
@@ -64,7 +64,7 @@ The key steps:
 1. Your auth provider issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction) to authenticated users.
 2. Your application passes these JWTs to the Data API in the `Authorization` header.
 3. Neon validates the tokens using your provider's [JWKS (JSON Web Key Set)](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets) URL.
-4. The Data API enforces [Row-Level Security policies](/docs/guides/neon-rls) based on the user identity in the JWT.
+4. The Data API enforces [Row-Level Security policies](/docs/guides/row-level-security) based on the user identity in the JWT.
 
 ## Add your authentication provider
 

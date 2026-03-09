@@ -77,7 +77,7 @@ const Table = () => {
   }, []);
 
   return (
-    <Container size="1152" className="flex flex-col lg:pr-0 md:pl-5">
+    <Container size="1152" className="flex flex-col lg:pr-0 md:pl-5 md:pr-0">
       <ul className="no-scrollbars px-4.5 relative flex w-full pb-2.5 lg:overflow-x-auto lg:overflow-y-hidden lg:pl-0 lg:pr-8 md:pr-5">
         {tableHeadings.map((key, i, arr) => {
           const isHighlightedColumn = key === 'launch';
@@ -121,7 +121,7 @@ const Table = () => {
                         key={index}
                       >
                         {isGroupTitle ? (
-                          <span className="whitespace-nowrap text-[18px] font-medium leading-snug tracking-tighter lg:text-xs">
+                          <span className="whitespace-nowrap text-[18px] font-medium leading-snug tracking-tighter">
                             {item[key]}
                           </span>
                         ) : (

@@ -67,7 +67,7 @@ List all schemas:
 \dn
 ```
 
-List all [stored procedures](/postgresql/postgresql-stored-procedures/) and functions:
+List all [stored procedures](/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures) and functions:
 
 ```text
 \df
@@ -426,7 +426,7 @@ UNION
 SELECT * FROM table2;
 ```
 
-Minus a result set using [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/) operator:
+Minus a result set using [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-except/) operator:
 
 ```sql
 SELECT * FROM table1

@@ -6,20 +6,18 @@ summary: >-
   integrates with your Neon database, allowing for branch-aware authentication
   and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-02-23T11:56:42.929Z'
+updatedOn: '2026-03-05T14:07:19.747Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
   - /docs/neon-auth/overview
   - /docs/neon-auth/claim-project
   - /docs/neon-auth/create-users
-  - /docs/neon-auth/api
   - /docs/neon-auth/how-it-works
   - /docs/neon-auth/best-practices
   - /docs/neon-auth/concepts/backend-integration
   - /docs/neon-auth/concepts/custom-user-data
   - /docs/guides/neon-auth-claim-project
-  - /docs/guides/neon-auth-api
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
 ---
@@ -47,7 +45,7 @@ Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to s
 
 Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Neon Auth currently supports Better Auth version **1.4.6**.
+Neon Auth currently supports Better Auth version **1.4.18**.
 
 ### When to use Neon Auth vs. self-hosting Better Auth
 

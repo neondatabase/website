@@ -71,7 +71,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = slug?.startsWith('/') ? slug : `${basePath}${slug}`;
+  const href = slug ? (slug.startsWith('/') ? slug : `${basePath}${slug}`) : undefined;
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;

@@ -3,9 +3,9 @@ import LINKS from 'constants/links';
 export default [
   {
     planId: 'free',
-    type: 'For basic use',
-    title: 'Free',
-    subtitle: 'No card required',
+    type: 'Free',
+    title: '$0',
+    subtitle: 'Build and learn free with no time limits and no credit card required.',
     price: 0,
     features: {
       database: {
@@ -46,8 +46,8 @@ export default [
   },
   {
     planId: 'launch',
-    type: 'For building products',
-    title: 'Launch',
+    type: 'Launch',
+    title: 'Usage-based',
     highlighted: true,
     hasDynamicPricing: true,
     computeRate: 0.106,
@@ -96,8 +96,8 @@ export default [
   },
   {
     planId: 'scale',
-    type: 'For production workloads',
-    title: 'Scale',
+    type: 'Scale',
+    title: 'Usage-based',
     hasDynamicPricing: true,
     computeRate: 0.222,
     storageRate: 0.35,

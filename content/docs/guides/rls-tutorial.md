@@ -6,7 +6,7 @@ summary: >-
   using Neon, demonstrating how to secure user data by enforcing access control
   at the database level with JWT authentication.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.048Z'
+updatedOn: '2026-03-05T04:12:51.012Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -31,7 +31,7 @@ For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (
 
 To get started, you'll need:
 
-- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls#current-limitations) regions are not currently supported).
+- **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: Azure regions are not currently supported).
 - **Neon Data API + Neon Auth example application**: Clone the sample [Neon Data API + Neon Auth repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth):
 
   ```bash
@@ -331,4 +331,4 @@ shared_policy                    | SELECT | (shared = true)                     
 (5 rows)
 ```
 
-To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).
+To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/data-api/get-started#what-is-authuserid-and-authuid).

@@ -7,11 +7,18 @@ import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+const DEPLOY_POSTGRES_API = '/api/deploy-postgres';
+const REF = 'neon-faster-page';
+
 const maskPassword = (uri) => {
-  const url = new URL(uri);
-  const [username, password] = `${url.username}:${url.password}`.split(':');
-  const maskedPassword = '*'.repeat(password.length);
-  return uri.replace(`${username}:${password}`, `${username}:${maskedPassword}`);
+  try {
+    const url = new URL(uri);
+    const [username, password] = `${url.username}:${url.password}`.split(':');
+    const maskedPassword = '*'.repeat(password.length);
+    return uri.replace(`${username}:${password}`, `${username}:${maskedPassword}`);
+  } catch {
+    return uri;
+  }
 };
 
 const DeployPostgresButton = () => {
@@ -19,14 +26,9 @@ const DeployPostgresButton = () => {
     isLoading: false,
     hasCreatedProject: false,
     error: null,
-    data: {
-      result: {
-        timeToProvision: 0,
-        project: { region_id: '' },
-        connectionUri: '',
-        hasCreatedProject: false,
-      },
-    },
+    connectionString: null,
+    claimUrl: null,
+    expiresAt: null,
   });
 
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
@@ -34,37 +36,59 @@ const DeployPostgresButton = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setFormState((prev) => ({ ...prev, isLoading: true }));
+    setFormState((prev) => ({ ...prev, isLoading: true, error: null }));
 
-    // @ts-ignore
-    sendGtagEvent('Button Clicked', { text: 'Deploy Postgres database per tenant' });
+    sendGtagEvent('Button Clicked', { text: 'Deploy Postgres (Claimable Postgres)' });
 
     try {
-      const response = await fetch(`/api/deploy-postgres`, {
+      const response = await fetch(DEPLOY_POSTGRES_API, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: REF }),
       });
 
-      const data = await response.json();
+      const rawText = await response.text();
+      let data = {};
+      try {
+        data = rawText ? JSON.parse(rawText) : {};
+      } catch {
+        // non-JSON response (e.g. HTML error page)
+      }
 
       if (!response.ok) {
-        throw new Error(data.error?.message || 'An error occurred');
+        setFormState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error:
+            data?.message ||
+            data?.error?.message ||
+            `HTTP ${response.status}: ${response.statusText}`,
+        }));
+        return;
+      }
+
+      if (!data?.connection_string) {
+        setFormState((prev) => ({
+          ...prev,
+          isLoading: false,
+          error: 'No connection string in response',
+        }));
+        return;
       }
 
       setFormState((prev) => ({
         ...prev,
         isLoading: false,
-        data,
         hasCreatedProject: true,
+        connectionString: data.connection_string,
+        claimUrl: data.claim_url || null,
+        expiresAt: data.expires_at || null,
       }));
     } catch (error) {
       setFormState((prev) => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'An error occurred',
+        error: error instanceof Error ? error.message : String(error),
       }));
     }
   };
@@ -76,7 +100,7 @@ const DeployPostgresButton = () => {
         <Button
           type="submit"
           disabled={formState.isLoading || formState.hasCreatedProject}
-          className="pointer-events-auto relative !font-semibold tracking-tighter disabled:cursor-wait disabled:opacity-50"
+          className="pointer-events-auto relative !font-semibold tracking-tighter disabled:cursor-default disabled:opacity-50"
           theme="secondary"
           size="xs"
         >
@@ -163,11 +187,11 @@ const DeployPostgresButton = () => {
 
               {formState.hasCreatedProject ? (
                 <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-white focus:outline-none">
-                  {maskPassword(formState.data.result.connectionUri)}
+                  {maskPassword(formState.connectionString)}
                 </span>
               ) : (
                 <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-[#AFB1B6]/50 focus:outline-none">
-                  postgresql://neondb_owner:v9wpX3xjEnKT@ep-misty-sound-a5169vmg.us-east-2.aws.neon.tech/neondb?sslmode=require
+                  postgresql://neondb_owner:***@ep-***.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
                 </span>
               )}
 
@@ -179,7 +203,7 @@ const DeployPostgresButton = () => {
                       type="button"
                       aria-label={isCopied ? 'Copied' : 'Copy'}
                       disabled={isCopied}
-                      onClick={() => handleCopy(formState.data.result.connectionUri)}
+                      onClick={() => handleCopy(formState.connectionString)}
                     >
                       {isCopied ? (
                         <svg
@@ -219,13 +243,30 @@ const DeployPostgresButton = () => {
             </div>
           </div>
         </div>
+        {formState.error && (
+          <p className="text-red-400 font-mono text-xs" role="alert">
+            {formState.error}
+          </p>
+        )}
         {formState.hasCreatedProject && (
-          <div className="flex items-center gap-1">
-            <p className="animate-in fade-in fade-in-overlay slide-in-from-bottom font-mono text-xs leading-relaxed tracking-extra-tight text-white opacity-90">
-              Instance auto-deletes after 1 hour. Refreshing and clicking again returns the same
-              connection string
-            </p>
-          </div>
+          <p className="animate-in fade-in fade-in-overlay slide-in-from-bottom -mb-px font-mono text-xs leading-relaxed tracking-extra-tight text-white opacity-90">
+            Database expires in 72 hours.{' '}
+            {formState.claimUrl ? (
+              <>
+                <a
+                  href={formState.claimUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[#4BFFC3] hover:underline"
+                >
+                  Claim it
+                </a>{' '}
+                to your Neon account to keep it.
+              </>
+            ) : (
+              'Claim it to your Neon account to keep it.'
+            )}
+          </p>
         )}
       </div>
     </div>

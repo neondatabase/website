@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
 import BlogSearch from 'components/shared/blog-search';
-import ChangelogForm from 'components/shared/changelog-form';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
@@ -15,37 +14,49 @@ import getMetadata from 'utils/get-metadata';
 const BlogCategoryPage = async ({ params: { slug } }) => {
   const category = await getCategoryBySlug(slug);
   const posts = await getPostsByCategorySlug(slug);
+  const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 
-  if (!posts || !category) return notFound();
+  if (!category) return notFound();
 
   return (
     <>
       <BlogHeader
-        className="lg:-top-[68px] md:-top-[62px] md:pb-16"
-        title="Blog"
+        className="border-b border-gray-new-20 pb-12 lg:-top-[68px] md:top-0 md:border-b-0 md:pb-0"
+        title={
+          <>
+            <span className="whitespace-nowrap">What we&rsquo;re shipping.</span>
+            <br />
+            <span className="whitespace-nowrap">What you&rsquo;re building.</span>
+          </>
+        }
+        rssTitle="What we're shipping. What you're building."
         category={category.name}
         basePath={BLOG_BASE_PATH}
+        withLabel
       />
       <Suspense fallback={null}>
-        <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">
-          <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-            {posts.slice(0, 10).map((post, index) => (
+        <BlogSearch
+          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:!static md:!right-auto md:!top-auto md:mt-4"
+          posts={validPosts}
+        >
+          <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
+            {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
+                className={index < 2 ? 'lg:!border-t-0 lg:!pt-0 md:!border-t-0 md:!pt-0' : ''}
                 post={post}
                 category={category}
                 isFeatured={post.isFeatured}
                 isPriority={index < 5}
               />
             ))}
-            {posts.length > 10 && (
+            {validPosts.length > 10 && (
               <ScrollLoader itemsCount={10}>
-                {posts.slice(10).map((post) => (
+                {validPosts.slice(10).map((post) => (
                   <BlogGridItem key={post.slug} post={post} category={category} />
                 ))}
               </ScrollLoader>
             )}
-            <ChangelogForm className="-order-1 col-span-2 md:col-span-1" />
           </div>
         </BlogSearch>
       </Suspense>

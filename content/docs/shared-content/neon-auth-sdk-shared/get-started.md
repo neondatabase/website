@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-02-17T17:13:56.590Z'
+updatedOn: '2026-03-05T14:07:19.752Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
@@ -10,7 +10,7 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 ## Add Neon Auth to a project
 
-Go to [neon.new](https://neon.new) to create a new Neon project.
+Go to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 
 Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
 
@@ -73,4 +73,4 @@ Want to learn more or go deeper?
 - [How Neon Auth works](/docs/guides/neon-auth-how-it-works) — See a before and after showing the benefits of having your user data right in your database
 - [Neon Auth tutorial](/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
 - [Best Practices & FAQ](/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting
-- [Neon Auth API Reference](/docs/guides/neon-auth-api) — Automate and manage Neon Auth via the API
+- [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api) — Automate and manage Neon Auth via the API

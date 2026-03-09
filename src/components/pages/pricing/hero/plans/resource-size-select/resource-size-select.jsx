@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import InfoIcon from 'components/shared/info-icon';
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
@@ -24,21 +23,18 @@ export const SCALE_RESOURCE_SIZES = [
 ];
 
 const getLoadType = (cuHours) => {
-  if (cuHours < 187.5) return 'Intermittent Load';
-  if (cuHours < 375) return 'Low Load';
-  if (cuHours <= 750) return 'Medium Load';
-  if (cuHours <= 3000) return 'High Load';
-  return 'XL Load';
+  if (cuHours < 187.5) return 'Intermittent load';
+  if (cuHours < 375) return 'Low load';
+  if (cuHours <= 750) return 'Medium load';
+  if (cuHours <= 3000) return 'High load';
+  return 'XL load';
 };
 
-const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, planId = '' }) => {
+const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
   const selectedOption = sizes?.find((size) => size.id === value) || sizes?.[1] || sizes?.[0];
-
-  // Generate dynamic tooltip text
-  const tooltipText = `Estimated cost of a ${selectedOption.cu} CU-hour,<br/> ${selectedOption.storage} GB database workload.`;
 
   useClickOutside([containerRef], () => setIsOpen(false));
 
@@ -65,40 +61,30 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="flex flex-nowrap items-center gap-1 text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
-        <span className="flex-shrink-0 whitespace-nowrap">Based on:</span>
+      <div className="flex flex-nowrap items-center gap-1.5 text-[15px] leading-snug text-gray-new-60">
+        <span className="flex-shrink-0 whitespace-nowrap tracking-extra-tight">Based on:</span>
         <button
           type="button"
-          className="group flex flex-1 items-center justify-between gap-1 rounded border border-gray-new-20 bg-gray-new-8 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
+          className="flex flex-1 items-center justify-between truncate border border-gray-new-30 bg-gray-new-8 py-1 pl-2.5 pr-1 text-left tracking-extra-tight text-gray-new-80 transition-colors hover:bg-gray-new-15 focus-visible:bg-gray-new-15 focus-visible:outline-none"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className="whitespace-nowrap text-gray-new-80">
+          <span className="truncate whitespace-nowrap text-gray-new-80">
             {getLoadType(selectedOption.cu)}, {selectedOption.storage} GB
           </span>
           <ChevronIcon
             className={clsx(
-              'h-3 w-3 flex-shrink-0 text-gray-new-60 transition-transform duration-200',
+              'size-[15px] flex-shrink-0 text-white opacity-60 transition-transform duration-200',
               isOpen && 'rotate-180'
             )}
             aria-hidden
           />
         </button>
-        <InfoIcon
-          className="relative top-0.5 flex-shrink-0"
-          tooltip={tooltipText}
-          tooltipId={`resource-size-${planId}`}
-          link={{
-            text: 'Read more.',
-            href: '#workload-cost-estimates',
-          }}
-          clickable
-        />
       </div>
 
       {isOpen && (
-        <div className="absolute left-[-24px] top-full z-20 mt-3 w-[calc(100%+48px)] border-y border-gray-new-30 bg-black-pure md:left-[-20px] md:w-[calc(100%+40px)]">
+        <div className="absolute left-0 top-[calc(100%-1px)] z-20 w-full border border-gray-new-30 bg-gray-new-8">
           <ul className="flex flex-col" role="listbox">
             {sizes.map((option) => {
               const isSelected = option.id === value;
@@ -106,15 +92,12 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
 
               return (
                 <li
-                  className="group border-x-0 border-b border-t-0 border-gray-new-20 bg-gray-new-8 transition-colors last:border-b-0 hover:bg-gray-new-15"
+                  className="border-x-0 border-b border-t-0 border-gray-new-30 bg-gray-new-8 text-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-15"
                   key={option.id}
                 >
                   <button
                     type="button"
-                    className={clsx(
-                      'w-full px-6 py-4 text-left font-mono text-sm leading-none tracking-extra-tight transition-colors md:px-5',
-                      isSelected ? 'text-white' : 'text-gray-new-70 group-hover:text-white'
-                    )}
+                    className="w-full px-3.5 py-2 text-left text-[15px] leading-snug tracking-extra-tight transition-colors"
                     role="option"
                     aria-selected={isSelected}
                     onClick={() => handleSelect(option.id)}
@@ -142,7 +125,6 @@ ResourceSizeSelect.propTypes = {
       storage: PropTypes.number.isRequired,
     })
   ),
-  planId: PropTypes.string,
 };
 
 export default ResourceSizeSelect;

@@ -7,7 +7,7 @@ summary: >-
   management of replication slots and implications for scaling.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.172Z'
+updatedOn: '2026-03-03T14:18:20.105Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -18,9 +18,9 @@ To avoid potential issues, please review the following notices carefully before 
 
 ### Neon as a publisher
 
-These notices apply when replicating data from Neon:
+These notices apply when replicating data **from** Neon (Neon as the publisher):
 
-- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
+- **Scale to zero and compute usage**: While a logical replication subscriber is connected, your Neon compute stays active and will not scale to zero. Neon does not "disable" scale to zero; the database is simply always active because replication keeps it in use, so the compute never becomes idle. This results in ongoing compute usage and can significantly affect your bill. For details, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero). If you are optimizing costs, see also [Cost optimization](/docs/introduction/cost-optimization).
 - **Removal of inactive replication slots**: To prevent storage bloat, \*\*Neon automatically removes _inactive_ replication slots after approximately 40 hours. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) for more information.
 - **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
@@ -31,7 +31,7 @@ These notices apply when replicating data from Neon:
 
 ## Logical replication and scale to zero
 
-Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
+Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature suspends a compute after 300 seconds (5 minutes) of inactivity. When you replicate data **from** Neon (Neon as publisher), a connected logical replication subscriber keeps the database in use, so the compute never becomes idle. Neon therefore does not suspend the compute; it remains active at all times while subscribers are connected. This applies only when Neon is the publisher (replicating from Neon to an external destination), not when Neon is the subscriber (replicating into Neon from an external source). Neon determines whether there are active replication connections by checking for `walsender` processes using the following query:
 
 ```sql
 SELECT *
