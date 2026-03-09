@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const CLAIMABLE_POSTGRES_API = 'https://pg.new/api/v1/database';
+const CLAIMABLE_POSTGRES_API = 'https://neon.new/api/v1/database';
 const DEFAULT_REF = 'neon-faster-page';
 
 export async function POST(request) {
