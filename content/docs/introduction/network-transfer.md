@@ -186,9 +186,15 @@ The response includes `data_transfer_bytes` in the branch object:
 
 ### Diagnosing a spike
 
-Neon does not provide per-query or per-connection network transfer breakdowns. To identify the source of a spike, use `hourly` granularity from the Consumption API to narrow down the time window, then correlate it with known operations: scheduled `pg_dump` jobs, logical replication initial syncs, application deployments, or changes to query patterns. If you have multiple projects, compare per-project hourly data to isolate which project is responsible. On the Free plan, compare `data_transfer_bytes` across branches using the branch detail API to identify which branch contributes the most. Once you identify the branch, connect to it and run the `pg_stat_statements` query above to find the top queries.
+Neon does not provide per-query or per-connection network transfer breakdowns. To identify the source of a spike, use `hourly` granularity from the Consumption API to narrow down the time window, then correlate it with known operations: scheduled `pg_dump` jobs, logical replication initial syncs, application deployments, or changes to query patterns. If you have multiple projects, compare per-project hourly data to isolate which project is responsible. On the Free plan, compare `data_transfer_bytes` across branches using the branch detail API to identify which branch contributes the most. Once you identify the branch, connect to it and run the `pg_stat_statements` queries below to find the top queries.
 
 To find which queries return the most rows, use the [`pg_stat_statements`](/docs/extensions/pg_stat_statements) extension. The `rows` column is not an exact byte count, but queries returning many rows or wide rows (TEXT, JSONB, BYTEA columns) are the most likely contributors to high network transfer.
+
+<Tabs labels={["Total rows", "Rows per execution", "Most frequent", "Longest running"]}>
+
+<TabItem>
+
+Queries that returned the most total rows across all executions:
 
 ```sql
 SELECT
@@ -197,9 +203,73 @@ SELECT
   rows AS total_rows,
   rows / calls AS avg_rows_per_call
 FROM pg_stat_statements
+WHERE calls > 0
 ORDER BY rows DESC
 LIMIT 10;
 ```
+
+</TabItem>
+
+<TabItem>
+
+Queries that return the most rows per execution, indicating poorly scoped SELECTs or missing pagination:
+
+```sql
+SELECT
+  query,
+  calls,
+  rows AS total_rows,
+  rows / calls AS avg_rows_per_call
+FROM pg_stat_statements
+WHERE calls > 0
+ORDER BY avg_rows_per_call DESC
+LIMIT 10;
+```
+
+</TabItem>
+
+<TabItem>
+
+Queries called most often, which compound transfer through volume:
+
+```sql
+SELECT
+  query,
+  calls,
+  rows AS total_rows,
+  rows / calls AS avg_rows_per_call
+FROM pg_stat_statements
+WHERE calls > 0
+ORDER BY calls DESC
+LIMIT 10;
+```
+
+</TabItem>
+
+<TabItem>
+
+Queries consuming the most total execution time. Not a direct measure of network transfer, but helps identify problem queries during a spike window:
+
+```sql
+SELECT
+  query,
+  calls,
+  rows AS total_rows,
+  round(total_exec_time::numeric, 2) AS total_exec_time_ms,
+  round((total_exec_time / calls)::numeric, 2) AS avg_exec_time_ms
+FROM pg_stat_statements
+WHERE calls > 0
+ORDER BY total_exec_time DESC
+LIMIT 10;
+```
+
+</TabItem>
+
+</Tabs>
+
+<Admonition type="tip">
+Statistics in `pg_stat_statements` accumulate until the compute restarts. In Neon, scaling to zero clears all statistics, so computes that recently woke up already have fresh data. For long-running computes, you can run `SELECT pg_stat_statements_reset();` to clear statistics before a specific time window you want to measure. This resets stats for all roles, so coordinate with anyone else who relies on them.
+</Admonition>
 
 For wire-level analysis of exact message sizes, see [Elephantshark](https://neon.com/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
 
