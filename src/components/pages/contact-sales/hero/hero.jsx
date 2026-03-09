@@ -43,7 +43,7 @@ const Hero = () => (
               We&apos;re happy to assist you with any questions about our tech, pricing plans,
               custom contract options, and migrations assistance.
             </p>
-            <ul className="flex flex-col gap-y-5 border-t border-gray-new-20 pt-7 xl:gap-y-3 xl:pt-5 lg:flex-row lg:flex-wrap lg:gap-x-5 lg:gap-y-3 lg:border-t-0 lg:pt-0 md:gap-x-4 md:gap-y-4">
+            <ul className="flex flex-col gap-y-5 border-t border-gray-new-20 pt-7 xl:gap-y-3 xl:pt-5 lg:flex-row lg:flex-wrap lg:gap-x-5 lg:gap-y-3 lg:border-t-0 lg:pt-0 md:gap-x-4 md:gap-y-2.5">
               {CERTIFICATES.map(({ title, description, icon }) => (
                 <li className="flex items-center gap-3 lg:gap-2.5 sm:gap-1.5" key={title}>
                   <Image
