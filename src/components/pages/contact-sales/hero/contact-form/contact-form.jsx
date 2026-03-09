@@ -79,6 +79,7 @@ const ContactForm = () => {
     register,
     reset,
     setValue,
+    watch,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
@@ -144,6 +145,9 @@ const ContactForm = () => {
       }
     }
   };
+
+  const reasonValue = watch('reasonForContact');
+  const companySizeValue = watch('companySize');
 
   const isDisabled = formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS;
 
@@ -217,7 +221,7 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={selectClassName}
+        inputClassName={`${selectClassName}${reasonValue !== 'hidden' ? ' !text-white' : ' !text-gray-new-50'}`}
         isDisabled={isDisabled}
         error={errors.reasonForContact?.message}
         {...register('reasonForContact')}
@@ -237,7 +241,7 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={selectClassName}
+        inputClassName={`${selectClassName}${companySizeValue !== 'hidden' ? ' !text-white' : ' !text-gray-new-50'}`}
         isDisabled={isDisabled}
         error={errors.companySize?.message}
         {...register('companySize')}
