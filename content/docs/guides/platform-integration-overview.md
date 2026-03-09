@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-03-04T20:15:14.438Z'
+updatedOn: '2026-03-09T15:58:12.488Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
