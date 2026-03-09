@@ -63,10 +63,10 @@ const schema = yup
   })
   .required();
 
-const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90';
+const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90 md:text-sm';
 const inputClassName =
-  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-gray-new-50 placeholder:!text-gray-new-50 focus:border-gray-new-90';
-const selectClassName = `${inputClassName} !pr-10`;
+  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-gray-new-50 placeholder:!text-gray-new-50 focus:border-gray-new-90 md:!text-[15px]';
+const selectClassName = `${inputClassName} !pr-10 !bg-[url(/images/chevron-down-gray.svg)]`;
 const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px]`;
 
 const AZURE_MIGRATION_MESSAGE = "I'd like to migrate my Azure managed account.";
@@ -222,7 +222,9 @@ const ContactForm = () => {
         error={errors.reasonForContact?.message}
         {...register('reasonForContact')}
       >
-        <option value="hidden" disabled hidden />
+        <option value="hidden" disabled hidden>
+          Demo/POC
+        </option>
         <option value="Demo/POC">Demo/POC</option>
         <option value="Enterprise Pricing">Enterprise Pricing</option>
         <option value="HIPAA">HIPAA</option>
@@ -240,7 +242,9 @@ const ContactForm = () => {
         error={errors.companySize?.message}
         {...register('companySize')}
       >
-        <option value="hidden" disabled hidden />
+        <option value="hidden" disabled hidden>
+          0-1 Employees
+        </option>
         <option value="0_1">0-1 Employees</option>
         <option value="2_4">2-4 Employees</option>
         <option value="5_19">5-19 Employees</option>
@@ -276,7 +280,7 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="!h-10 min-w-[152px] px-10 text-base font-medium tracking-tight sm:w-full sm:min-w-0"
+          className="min-w-[152px] px-10 sm:w-full sm:min-w-0"
           type="submit"
           theme="white-filled"
           size="new"
