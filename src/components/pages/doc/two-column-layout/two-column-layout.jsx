@@ -23,18 +23,18 @@ const TwoColumnStep = ({ title, children }) => (
   <li
     className={clsx(
       'two-column-step relative !mb-0 !mt-12 flex gap-4 !pl-0',
-      'after:absolute after:-bottom-[34px] after:left-[11px] after:top-[34px] after:w-px after:bg-gray-new-90',
+      'after:absolute after:-bottom-[34px] after:left-3.5 after:top-[34px] after:w-px after:bg-gray-new-80',
       'first:!mt-7 last:after:bottom-0',
-      'dark:after:bg-gray-new-20'
+      'dark:after:bg-gray-new-30'
     )}
   >
     {/* Step number badge */}
     <div
       className={clsx(
-        'flex size-6 shrink-0 items-center justify-center rounded-full border border-gray-new-80',
+        'flex size-7 shrink-0 items-center justify-center rounded-full bg-gray-new-20 font-mono font-medium tracking-extra-tight text-white ',
         'text-sm leading-none tracking-extra-tight text-gray-new-40',
         'before:content-[counter(section)] before:[counter-increment:section]',
-        'dark:border-gray-new-30 dark:text-gray-new-70'
+        'dark:bg-gray-new-90 dark:text-black-pure'
       )}
     />
 

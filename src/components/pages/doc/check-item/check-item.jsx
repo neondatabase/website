@@ -23,9 +23,9 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
         <input
           className={clsx(
             'remove-autocomplete-styles pointer-events-none appearance-none',
-            'absolute left-0 top-0.5 z-10 size-4 rounded-sm border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
+            'absolute left-0 top-0.5 z-10 size-4 border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
             'dark:border-gray-new-20 dark:hover:bg-white/5',
-            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-center before:bg-no-repeat',
+            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-[size:8px_8px] before:bg-center before:bg-no-repeat',
             'before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100',
             'dark:before:invert dark:checked:border-gray-new-20'
           )}
@@ -35,12 +35,12 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
           onChange={() => onToggle(id)}
         />
         <h3 className="m-0 text-lg font-medium leading-tight tracking-normal">
-          <Tag className="" href={href || null} {...otherProps}>
+          <Tag className="no-underline decoration-transparent" href={href || null} {...otherProps}>
             {title}
           </Tag>
         </h3>
       </label>
-      <div className="mt-2 pl-[30px] text-gray-new-20 dark:text-gray-new-80 md:mt-1.5 [&_p]:m-0 [&_p]:leading-snug [&_p]:tracking-tight">
+      <div className="mt-2 pl-[30px] text-gray-new-40 opacity-90 dark:text-gray-new-60 md:mt-1.5 [&_p]:m-0 [&_p]:text-base [&_p]:tracking-tight">
         {children}
       </div>
     </li>

@@ -12,7 +12,7 @@ updatedOn: '2026-02-27T19:55:46.376Z'
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
-<CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon." isIntro></CTA>
+<CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
 
 <Admonition type="note">
 **Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).

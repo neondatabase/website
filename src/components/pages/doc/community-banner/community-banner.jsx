@@ -28,21 +28,12 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
           {buttonText}
         </Button>
       </div>
-      {/* Blurred ellipse glow — Figma: dark rgba(79,232,176,0.3) blur 120px, light rgba(57,165,125,0.5) blur 120px */}
       <div
-        className="pointer-events-none absolute right-0 top-1/2 h-[307px] w-[272px] -translate-y-1/2 rounded-full dark:hidden"
-        style={{
-          background: 'rgba(57, 165, 125, 0.5)',
-          filter: 'blur(120px)',
-        }}
+        className="pointer-events-none absolute right-0 top-1/2 h-[307px] w-[272px] -translate-y-1/2 rounded-full bg-[rgba(57,165,125,.5)] blur-3xl dark:hidden"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute right-0 top-1/2 hidden h-[307px] w-[272px] -translate-y-1/2 rounded-full dark:block"
-        style={{
-          background: 'rgba(79, 232, 176, 0.3)',
-          filter: 'blur(120px)',
-        }}
+        className="pointer-events-none absolute right-0 top-1/2 hidden h-[307px] w-[272px] -translate-y-1/2 rounded-full bg-[rgba(79,232,176,.3)] blur-3xl dark:block"
         aria-hidden
       />
       <span className="absolute inset-0 h-full bg-[url('/docs/community-banner/discord-light.png')] bg-contain bg-right bg-no-repeat dark:bg-[url('/docs/community-banner/discord-dark.png')] 2xl:[background-position:calc(100%+40px)_50%] xl:bg-right md:[background-position:calc(100%+80px)_50%] sm:hidden" />

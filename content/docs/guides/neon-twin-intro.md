@@ -11,7 +11,7 @@ isDraft: false
 updatedOn: '2026-03-05T03:52:38.320Z'
 ---
 
-<CTA title="Explore our dev/test use case" description="Move development and testing to Neon; keep production right where it is.<br/><br/>Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>." isIntro></CTA>
+<CTA title="Explore our dev/test use case" description="Move development and testing to Neon; keep production right where it is.<br/><br/>Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>."></CTA>
 
 ## What is a Neon Twin?
 

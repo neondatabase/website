@@ -80,13 +80,12 @@ const DocCta = ({
   secondaryButtonUrl = null,
   command = null,
   trackingLabel = null,
-  isIntro = false,
   isTemplate = false,
 }) => (
   <figure
     className={clsx(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
-      isIntro ? 'my-11 p-5 md:my-8' : 'my-9 px-7 py-6',
+      'my-9 p-5 md:my-8',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
       'dark:border-gray-new-30 dark:bg-gray-new-10'
     )}
@@ -103,15 +102,13 @@ const DocCta = ({
         </div>
       </div>
     )}
-    {isIntro && (
-      <Image
-        className="absolute bottom-0 right-0 top-0 h-full w-auto object-cover"
-        src={patternImage}
-        alt=""
-        width={188}
-        height={163}
-      />
-    )}
+    <Image
+      className="absolute bottom-0 right-0 top-0 h-full w-auto object-cover"
+      src={patternImage}
+      alt=""
+      width={188}
+      height={163}
+    />
 
     <div
       className={clsx(
@@ -119,21 +116,13 @@ const DocCta = ({
         secondaryButtonText ? 'flex-col' : 'flex-row justify-between'
       )}
     >
-      <div className="flex flex-col gap-2.5">
-        <div
-          className={clsx(
-            'text-gray-new-8 dark:text-white',
-            isIntro
-              ? 'text-xl font-semibold leading-tight tracking-extra-tight'
-              : 'text-2xl font-medium leading-snug tracking-tighter'
-          )}
-        >
+      <div className="flex max-w-lg flex-col">
+        <div className="text-xl font-medium leading-tight tracking-extra-tight text-gray-new-8 dark:text-white">
           {title}
         </div>
         <p
           className={clsx(
-            '!m-0 !text-base !text-gray-new-20/90 dark:!text-gray-new-85',
-            isIntro ? '!tracking-extra-tight' : '!text-base !tracking-tight',
+            '!mb-0 !mt-2.5 !text-base !tracking-extra-tight !text-gray-new-20/90 dark:!text-gray-new-85/90',
             '[&_a]:inline-flex [&_a]:items-center [&_a]:font-medium [&_a]:text-black-pure [&_a]:no-underline',
             'duration-200 ease-in-out [&_svg]:shrink-0 [&_svg]:text-gray-new-30 [&_svg]:transition-transform',
             '[&>a:hover_svg]:translate-x-[3px]', // p > a:hover svg
@@ -144,16 +133,18 @@ const DocCta = ({
         {command && <CodeCommandBlock command={command} trackingLabel={trackingLabel} />}
       </div>
 
-      {!isIntro && (
+      {(!!buttonText || secondaryButtonText) && (
         <div className="relative z-10 flex flex-wrap items-center gap-5">
-          <Button
-            className="w-fit shrink-0 px-7 py-[14px] text-base font-medium leading-none tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
-            to={buttonUrl}
-            theme="white-filled-multi"
-            tagName="DocsCTA"
-          >
-            {buttonText}
-          </Button>
+          {!buttonText && buttonUrl && (
+            <Button
+              className="w-fit shrink-0 px-7 py-[14px] text-base font-medium leading-none tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
+              to={buttonUrl}
+              theme="white-filled-multi"
+              tagName="DocsCTA"
+            >
+              {buttonText}
+            </Button>
+          )}
           {secondaryButtonText && secondaryButtonUrl && (
             <Button
               className="w-fit shrink-0 border border-gray-new-60 bg-black-new/[0.02] px-7 py-[14px] text-base font-normal leading-none tracking-tight text-black-new hover:bg-black-new/[0.04] hover:text-black-new dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"

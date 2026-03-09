@@ -10,8 +10,8 @@ import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#2D8665] text-[#34D59A]',
-    borderClassName: 'border-[#2D8665] border-[#34D59A]',
+    titleClassName: 'text-[#2D8665] dark:text-green-52',
+    borderClassName: 'border-[#2D8665] dark:border-green-52',
     icon: NoteIcon,
   },
   important: {
@@ -30,8 +30,8 @@ const themes = {
     icon: WarningIcon,
   },
   info: {
-    titleClassName: 'text-[#426CE0] dark:text-[#648DFF]',
-    borderClassName: 'border-[#426CE0] dark:border-[#648DFF]',
+    titleClassName: 'text-[#426CE0] dark:text-blue-70',
+    borderClassName: 'border-[#426CE0] dark:border-blue-70',
     icon: InfoIcon,
   },
   comingSoon: {
@@ -41,7 +41,8 @@ const themes = {
   },
 };
 
-const textClassName = 'admonition-text mt-2.5 text-base [&_a]:rounded-sm';
+const textClassName =
+  'admonition-text mt-2.5 text-base text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;

@@ -13,7 +13,7 @@ updatedOn: '2026-03-04T20:15:14.445Z'
 
 The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and seamlessly transition ownership. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
 
-<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>." isIntro></CTA>
+<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>."></CTA>
 
 ## Simplified workflow
 

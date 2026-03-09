@@ -38,16 +38,16 @@ const Steps = ({ children }) => {
       {steps.map((step, index) => (
         <li
           className={clsx(
-            'numbered-step relative !mb-0 !mt-10 flex w-full items-start gap-3 !pl-0',
-            'before:flex before:size-7 before:items-center before:justify-center before:border before:border-gray-new-90 before:p-1.5 before:text-center before:font-mono before:text-sm before:font-medium before:leading-snug before:tracking-tight before:text-gray-new-40 before:content-[counter(section)] before:[counter-increment:section] before:dark:border-black-new before:dark:text-black-new',
+            'numbered-step relative !mb-0 !mt-8 flex w-full items-start gap-4 !pl-0',
+            'before:flex before:size-7 before:items-center before:justify-center before:rounded-full before:bg-gray-new-20 before:text-center before:font-mono before:text-sm before:font-medium before:leading-snug before:tracking-tight before:text-white before:content-[counter(section)] before:[counter-increment:section] dark:before:bg-gray-new-90 dark:before:text-black-pure',
             'after:absolute after:-bottom-[36px] after:left-3.5 after:top-[32px] after:w-px after:bg-gray-new-90 after:dark:bg-gray-new-80',
-            'first:!mt-7 last:after:bottom-0',
-            'dark:before:border dark:before:border-gray-new-20 dark:before:bg-transparent dark:before:text-gray-new-70 dark:after:bg-gray-new-15',
-            '[&_ol]:!list-decimal'
+            'first:!mt-0 last:after:bottom-0',
+            'dark:before:text-gray-new-70 dark:after:bg-gray-new-30',
+            '[&_h2]:text-2xl [&_ol]:!list-decimal'
           )}
           key={index}
         >
-          <div className="w-[calc(100%-100px)] flex-1 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+          <div className="w-[calc(100%-100px)] flex-1 [&>*:first-child]:mt-0 [&>*:first-child]:pt-0 [&>*:last-child]:mb-0 [&>*_*:last-child]:mb-0">
             {step}
           </div>
         </li>

@@ -137,7 +137,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
               />
             )}
           </div>
-          <span className="truncate text-base font-medium leading-snug tracking-extra-tight text-black-pure dark:text-white">
+          <span className="max-w-[calc(100%-2.5rem)] truncate text-base font-medium leading-snug tracking-extra-tight text-black-pure dark:text-white">
             {title}
           </span>
         </div>
