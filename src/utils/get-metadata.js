@@ -55,9 +55,9 @@ export default function getMetadata({
         { url: '/favicon/favicon.ico', sizes: '32x32' },
       ],
       apple: [
-        { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-        { url: '/apple-icon-152x152.png', sizes: '152x152', type: 'image/png' },
-        { url: '/apple-icon-120x120.png', sizes: '120x120', type: 'image/png' },
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+        { url: '/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+        { url: '/apple-touch-icon-120x120.png', sizes: '120x120', type: 'image/png' },
       ],
     },
     openGraph: {
