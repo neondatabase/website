@@ -5,10 +5,14 @@ summary: >-
   methods for individual and bulk transfers through the Console and API, along
   with necessary permissions and limitations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.119Z'
+updatedOn: '2026-03-06T15:01:47.923Z'
 ---
 
 You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.
+
+<Admonition type="note">
+Transferring a project does not affect its credentials or connection string. Your connected applications will continue to work without any disruption.
+</Admonition>
 
 ## Limits & requirements
 

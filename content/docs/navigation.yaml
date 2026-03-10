@@ -234,7 +234,7 @@
       items:
         - title: Connect to Neon
           slug: connect/connect-intro
-        - title: Drivers and connection types
+        - title: Choosing your connection method
           slug: connect/choose-connection
         - title: Connect from any app
           slug: connect/connect-from-any-app
@@ -461,6 +461,8 @@
                   slug: auth/guides/user-management
                 - title: Configure domains
                   slug: auth/guides/configure-domains
+                - title: Webhooks
+                  slug: auth/guides/webhooks
                 - title: Production checklist
                   slug: auth/production-checklist
                 - title: Manage Auth via the API
@@ -1061,6 +1063,8 @@
           slug: introduction/monitor-usage
         - title: Cost optimization
           slug: introduction/cost-optimization
+        - title: Network transfer costs
+          slug: introduction/network-transfer
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace

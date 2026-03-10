@@ -65,7 +65,7 @@ The following picture shows the default tablespaces:
 
 ## Functions
 
-A [function](/postgresql/postgresql-stored-procedures/) is a reusable block of SQL code that returns a scalar value of a set of rows.
+A [function](/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures) is a reusable block of SQL code that returns a scalar value of a set of rows.
 
 ![](/postgresqltutorial/postgresql-functions.png)
 
