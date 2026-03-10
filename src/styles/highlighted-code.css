@@ -4,8 +4,8 @@
     --shiki-color-background: transparent;
     --shiki-token-constant: #da0b51;
     --shiki-token-string: #078345;
-    --shiki-token-comment: #b3b3b3;
-    --shiki-token-keyword: #206cdf;
+    --shiki-token-comment: #797d86;
+    --shiki-token-keyword: #2d8665;
     --shiki-token-parameter: #a35200;
     --shiki-token-function: #078345;
     --shiki-token-string-expression: #078345;
@@ -20,7 +20,7 @@
     --shiki-color-background: transparent;
     --shiki-token-constant: #94b5f7;
     --shiki-token-string: #47d18c;
-    --shiki-token-comment: #b3b3b3;
+    --shiki-token-comment: #797d86;
     --shiki-token-keyword: #34d59a;
     --shiki-token-parameter: #ff990a;
     --shiki-token-function: #f7b983;
@@ -50,7 +50,7 @@
   pre .line {
     &.highlighted,
     &[data-highlighted-line] {
-      @apply bg-[rgba(0,85,255,0.08)] shadow-[inset_3px_0px_0px_0px_#0055ff] dark:bg-[rgba(0,229,153,0.08)] dark:shadow-[inset_3px_0px_0px_0px_#00E599];
+      @apply bg-[#EFEFF1] dark:bg-[#242427];
     }
   }
 

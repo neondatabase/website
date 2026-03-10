@@ -9,7 +9,7 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
-  transpilePackages: ['geist'],
+  transpilePackages: ['geist', 'react-icons'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [

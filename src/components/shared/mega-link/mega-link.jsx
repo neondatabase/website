@@ -9,8 +9,9 @@ import getFormattedDate from 'utils/get-formatted-date';
 const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
   <NextLink
     className={clsx(
-      'not-prose group my-9 flex items-center gap-9 border border-gray-new-20 px-6 py-5',
-      'transition-colors duration-200 hover:border-gray-new-30',
+      'not-prose group my-9 flex items-center gap-8 border border-gray-new-80 bg-[#E4F1EB]/40 py-5 pl-6 pr-5',
+      'transition-colors duration-200 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
+      'dark:border-gray-new-20 dark:bg-gray-new-8 dark:hover:border-gray-new-30 dark:hover:bg-gray-new-10',
       'sm:gap-3',
       className
     )}
@@ -43,11 +44,11 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
           </span>
         </div>
       )}
-      <h3 className="m-0 text-xl !font-normal leading-snug tracking-extra-tight sm:line-clamp-3">
+      <h3 className="m-0 text-xl !font-normal leading-snug tracking-extra-tight text-gray-new-8 dark:text-white sm:line-clamp-3">
         {title}
       </h3>
     </div>
-    <Chevron className="size-4 text-gray-new-50 transition-colors duration-200 group-hover:text-gray-new-60" />
+    <Chevron className="size-4 text-gray-new-20 transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white dark:group-hover:text-gray-new-80" />
   </NextLink>
 );
 
