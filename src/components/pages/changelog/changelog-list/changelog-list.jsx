@@ -1,11 +1,10 @@
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import ScrollLoader from 'components/shared/scroll-loader';
-import chevronIcon from 'icons/chevron-red.svg';
+import ChevronIcon from 'icons/arrow-label.inline.svg';
 import generateChangelogPath from 'utils/generate-changelog-path';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -21,7 +20,7 @@ const ChangelogPost = (post) => {
           'relative w-full pb-24 pt-10',
           'before:absolute before:-left-40 before:right-0 before:top-0 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
           'group-last:pb-0 dark:before:bg-gray-new-20',
-          'md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
+          'md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:pt-0 sm:before:hidden sm:after:hidden'
         )}
       >
         <Link
@@ -29,7 +28,7 @@ const ChangelogPost = (post) => {
           to={changelogPath}
         >
           <div className="flex w-32 items-center gap-1.5 py-[15px]">
-            <Image className="h-3.5 w-3 shrink-0" src={chevronIcon} alt="" width={12} height={14} />
+            <ChevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621] md:size-2.5" />
             <time className="uppercase" dateTime={date}>
               {dateLabel}
             </time>

@@ -6,7 +6,7 @@ import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
 
 const TwoColumnLayout = ({ children }) => (
   <ol
-    className="two-column-layout !mt-0 inline-flex w-full flex-col !pl-0"
+    className="two-column-layout !mt-12 inline-flex w-full flex-col !pl-0 xl:!mt-8"
     style={{
       counterReset: 'section',
     }}
@@ -23,7 +23,7 @@ const TwoColumnStep = ({ title, children }) => (
   <li
     className={clsx(
       'two-column-step relative !mb-0 !mt-12 flex gap-4 !pl-0',
-      'after:absolute after:-bottom-[34px] after:left-3.5 after:top-[34px] after:w-px after:bg-gray-new-80',
+      'after:absolute after:-bottom-11 after:left-[.8125rem] after:top-8 after:w-px after:bg-gray-new-80',
       'first:!mt-7 last:after:bottom-0',
       'dark:after:bg-gray-new-30'
     )}
@@ -46,7 +46,7 @@ const TwoColumnStep = ({ title, children }) => (
       )}
 
       {/* Content grid */}
-      <div className="grid flex-1 grid-cols-2 gap-x-6 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
+      <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
         {children}
       </div>
     </div>
@@ -59,12 +59,12 @@ TwoColumnStep.propTypes = {
 };
 
 const TwoColumnItem = ({ title, method, id, children }) => (
-  <li className="two-column-item relative !mb-0 !mt-12 block !pl-0">
+  <li className="two-column-item relative !mb-0 !mt-0 block border-b border-gray-new-90 py-14 !pl-0 first:border-t dark:border-gray-new-20 xl:py-10">
     {title && (
       <>
         <h2
           id={id}
-          className="anchor-heading group relative !mb-1 !mt-0 w-fit scroll-mt-20 text-2xl font-semibold leading-tight tracking-extra-tight lg:scroll-mt-5"
+          className="anchor-heading group relative !mb-1 !mt-0 w-fit scroll-mt-20 !pt-0 text-2xl font-semibold leading-tight tracking-extra-tight lg:scroll-mt-5"
         >
           <span>{title}</span>
           {id && (
@@ -92,7 +92,7 @@ const TwoColumnItem = ({ title, method, id, children }) => (
       </>
     )}
     {/* Content grid */}
-    <div className="grid flex-1 grid-cols-2 gap-x-6 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
+    <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
       {children}
     </div>
   </li>

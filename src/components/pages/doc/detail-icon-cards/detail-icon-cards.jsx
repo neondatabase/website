@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
-import chevronIcon from 'icons/chevron-red.svg';
+import СhevronIcon from 'icons/arrow-label.inline.svg';
 
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
@@ -205,7 +205,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
               />
               {withNumbers ? (
                 <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm font-medium uppercase leading-none">
-                  <Image src={chevronIcon} alt="" width={12} height={14} />
+                  <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
               ) : (

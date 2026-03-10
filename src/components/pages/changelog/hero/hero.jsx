@@ -19,12 +19,21 @@ const Hero = ({ className = null, withContainer = false }) => {
         })}
         size="sm"
       >
-        <h1 className="text-[48px] leading-dense tracking-tighter xl:text-4xl">{TITLE}</h1>
+        <h1 className="flex items-center justify-between text-[48px] leading-dense tracking-tighter xl:text-4xl [&_svg]:size-5">
+          {TITLE}
+          {!withContainer && (
+            <RssButton
+              className="relative top-1 hidden gap-x-1.5 !text-gray-new-40 dark:!text-gray-new-70 sm:flex"
+              size="sm"
+              basePath={CHANGELOG_BASE_PATH}
+            />
+          )}
+        </h1>
         <div className="mt-3.5 flex items-center justify-between text-gray-new-40 dark:text-gray-new-70 sm:flex-col sm:items-start sm:gap-y-4">
           <p className="text-xl leading-snug tracking-extra-tight">{DESCRIPTION}</p>
           {!withContainer && (
             <RssButton
-              className="!text-gray-new-40 dark:!text-gray-new-70"
+              className="flex gap-x-1.5 !text-gray-new-40 dark:!text-gray-new-70 sm:hidden"
               size="sm"
               basePath={CHANGELOG_BASE_PATH}
             />
