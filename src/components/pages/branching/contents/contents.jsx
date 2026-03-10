@@ -6,7 +6,7 @@ import { BRANCHING_BASE_PATH } from 'constants/branching';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const Contents = ({ contents }) => (
-  <section className="safe-paddings table-of-contents w-full pb-[220px] pt-[180px] xl:pt-[136px] lg:pt-[88px] md:pb-20 md:pt-20">
+  <section className="safe-paddings table-of-contents w-full py-[220px] xl:pt-[136px] lg:pt-[114px] md:pb-20 md:pt-[94px]">
     <Container className="w-full text-left" size="branching">
       <h2 className="mb-14 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[36px] lg:mb-11 md:mb-9 md:text-[28px]">
         Branching Workflows
