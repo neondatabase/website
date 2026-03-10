@@ -10,6 +10,8 @@ const styles = {
     md: 't-6xl font-medium leading-dense',
     'md-new':
       'font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[44px] md:text-[28px]',
+    'md-contact':
+      'font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[44px] md:text-[36px] xs:text-[32px]',
     '2sm':
       'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] sm:text-[30px]',
     sm: 't-4xl font-medium',
@@ -27,7 +29,7 @@ const HeadingBadge = ({ text }) => (
   </span>
 );
 
-const sizesWithCustomFont = new Set(['md-new']);
+const sizesWithCustomFont = new Set(['md-new', 'md-contact']);
 
 const Heading = forwardRef(
   (
