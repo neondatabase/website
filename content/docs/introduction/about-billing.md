@@ -27,9 +27,9 @@ updatedOn: '2026-02-06T22:07:33.080Z'
 
 <a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
 
-<a href="/docs/introduction/network-transfer" description="Monitor and reduce network transfer costs" icon="setup">Network transfer costs</a>
+<a href="/docs/introduction/cost-optimization" description="Strategies to manage and reduce your Neon costs" icon="setup">Cost optimization</a>
 
-<a href="/docs/introduction/cost-optimization" description="Strategies to manage and reduce your Neon costs across compute, storage, and data transfer" icon="setup">Cost optimization</a>
+<a href="/docs/introduction/network-transfer" description="Monitor and reduce network transfer costs" icon="setup">Network transfer costs</a>
 
 </DetailIconCards>
 
