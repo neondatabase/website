@@ -79,7 +79,6 @@ const ContactForm = () => {
     register,
     reset,
     setValue,
-    watch,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
@@ -145,9 +144,6 @@ const ContactForm = () => {
       }
     }
   };
-
-  const reasonValue = watch('reasonForContact');
-  const companySizeValue = watch('companySize');
 
   const isDisabled = formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS;
 
@@ -221,14 +217,12 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={`${selectClassName}${reasonValue !== 'hidden' ? ' !text-white' : ' !text-gray-new-50'}`}
+        inputClassName={selectClassName}
         isDisabled={isDisabled}
         error={errors.reasonForContact?.message}
         {...register('reasonForContact')}
       >
-        <option value="hidden" disabled hidden>
-          Demo/POC
-        </option>
+        <option value="hidden" disabled hidden />
         <option value="Demo/POC">Demo/POC</option>
         <option value="Enterprise Pricing">Enterprise Pricing</option>
         <option value="HIPAA">HIPAA</option>
@@ -241,14 +235,12 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={`${selectClassName}${companySizeValue !== 'hidden' ? ' !text-white' : ' !text-gray-new-50'}`}
+        inputClassName={selectClassName}
         isDisabled={isDisabled}
         error={errors.companySize?.message}
         {...register('companySize')}
       >
-        <option value="hidden" disabled hidden>
-          0-1 Employees
-        </option>
+        <option value="hidden" disabled hidden />
         <option value="0_1">0-1 Employees</option>
         <option value="2_4">2-4 Employees</option>
         <option value="5_19">5-19 Employees</option>
