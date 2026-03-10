@@ -39,10 +39,10 @@ const Steps = ({ children }) => {
         <li
           className={clsx(
             'numbered-step relative !mb-0 !mt-8 flex w-full items-start gap-4 !pl-0',
-            'before:flex before:size-7 before:items-center before:justify-center before:rounded-full before:bg-gray-new-20 before:text-center before:font-mono before:text-sm before:font-medium before:leading-snug before:tracking-tight before:text-white before:content-[counter(section)] before:[counter-increment:section] dark:before:bg-gray-new-90 dark:before:text-black-pure',
-            'after:absolute after:-bottom-[36px] after:left-3.5 after:top-[32px] after:w-px after:bg-gray-new-90 after:dark:bg-gray-new-80',
+            'before:flex before:size-7 before:items-center before:justify-center before:rounded-full before:bg-gray-new-20 before:text-center before:font-mono before:text-sm before:font-medium before:leading-snug before:tracking-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
+            'after:absolute after:-bottom-7 after:left-[.8125rem] after:top-8 after:w-px after:bg-gray-new-90 after:dark:bg-gray-new-80',
             'first:!mt-0 last:after:bottom-0',
-            'dark:before:text-gray-new-70 dark:after:bg-gray-new-30',
+            'dark:before:bg-gray-new-90 dark:before:text-black-pure dark:after:bg-gray-new-30',
             '[&_h2]:text-2xl [&_ol]:!list-decimal'
           )}
           key={index}

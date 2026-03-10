@@ -42,7 +42,7 @@ const themes = {
 };
 
 const textClassName =
-  'admonition-text mt-2.5 text-base text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
+  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;
@@ -52,7 +52,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
   return (
     <div
       className={clsx(
-        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
+        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 py-4 pl-[1.125rem] pr-5 dark:bg-gray-new-8',
         theme.borderClassName,
         '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
       )}

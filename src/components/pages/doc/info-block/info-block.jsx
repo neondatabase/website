@@ -7,7 +7,7 @@ const InfoBlock = ({ children }) => {
   if (!childrenArray.length) return null;
 
   return (
-    <div className="my-9 grid grid-cols-2 gap-8 sm:grid-cols-1 sm:gap-6">
+    <div className="info-block mb-12 mt-10 grid grid-cols-2 gap-8 border-b border-gray-new-90 pb-8 dark:border-gray-new-20 sm:grid-cols-1 sm:gap-6">
       <div>{childrenArray[0]}</div>
       {childrenArray.length > 1 && (
         <div className="flex flex-col gap-8 sm:gap-6">

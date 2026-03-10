@@ -76,7 +76,7 @@ const Post = ({
         >
           {breadcrumbs?.length > 0 && (
             <Breadcrumbs
-              className={clsx(isChangelog && 'pt-1')}
+              className={clsx(isChangelog && 'pt-1', '!mb-7')}
               breadcrumbs={breadcrumbs}
               baseUrl={breadcrumbsBaseUrl}
             />
@@ -96,7 +96,7 @@ const Post = ({
               </h1>
               {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
               {subtitle && (
-                <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+                <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
                   {subtitle}
                 </p>
               )}
