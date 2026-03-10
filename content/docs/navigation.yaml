@@ -6,6 +6,8 @@
     - section: Why Neon?
       icon: info
       items:
+        - title: Configure autoscaling
+          slug: get-started/test
         - title: Our mission
           slug: get-started/why-neon
         - title: Developer experience

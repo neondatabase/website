@@ -135,7 +135,7 @@ const DocCta = ({
 
       {(!!buttonText || secondaryButtonText) && (
         <div className="relative z-10 flex flex-wrap items-center gap-5">
-          {!buttonText && buttonUrl && (
+          {buttonText && buttonUrl && (
             <Button
               className="w-fit shrink-0 px-7 py-[14px] text-base font-medium leading-none tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
               to={buttonUrl}

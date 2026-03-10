@@ -26,7 +26,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
     withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
 
   return (
-    <div className="prompt-cards not-prose my-7">
+    <div className="prompt-cards not-prose my-9">
       <ul className="!my-0 grid grid-cols-4 gap-5 !p-0 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {displayedChildren.map((child, index) => {
           if (!child) return null;
@@ -103,11 +103,11 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
   };
 
   return (
-    <li className="!m-0 before:hidden">
+    <li className="!m-0 h-11 before:hidden">
       <button
         type="button"
         className={clsx(
-          'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 py-2.5 transition-all duration-200',
+          'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 transition-all duration-200',
           'border-gray-new-80 bg-[#E4F1EB]/40 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
           'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
           'focus:outline-none focus:ring-2 focus:ring-green-45 focus:ring-offset-2 dark:focus:ring-offset-gray-new-8',
@@ -137,7 +137,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
               />
             )}
           </div>
-          <span className="max-w-[calc(100%-2.5rem)] truncate text-base font-medium leading-snug tracking-extra-tight text-black-pure dark:text-white">
+          <span className="max-w-[calc(100%-2.5rem)] truncate text-base leading-snug tracking-extra-tight text-black-pure dark:text-white">
             {title}
           </span>
         </div>

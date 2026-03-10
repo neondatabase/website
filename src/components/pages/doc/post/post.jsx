@@ -96,12 +96,12 @@ const Post = ({
               </h1>
               {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
               {subtitle && (
-                <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+                <p className="mt-[18px] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
                   {subtitle}
                 </p>
               )}
               <Content
-                className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
+                className={clsx('mt-10 lg:mt-7 md:mt-5', isSplitLayout && 'split-layout')}
                 content={content}
                 isPostgres={isPostgres}
               />

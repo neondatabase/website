@@ -13,7 +13,7 @@ const linkClassName =
 const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
   <div
     className={clsx(
-      'mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-none tracking-extra-tight text-gray-new-40 dark:text-gray-new-60',
+      'mb-7 flex flex-wrap items-center gap-x-1.5 text-[15px] leading-none tracking-extra-tight text-gray-new-40 dark:text-gray-new-60',
       className
     )}
   >
@@ -35,7 +35,9 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
           ) : (
             <span
               className={clsx(
-                isLast ? 'text-black dark:text-white' : 'text-gray-new-40 dark:text-gray-new-60'
+                isLast
+                  ? 'text-gray-new-10 dark:text-gray-new-94'
+                  : 'text-gray-new-40 dark:text-gray-new-60'
               )}
             >
               {title}

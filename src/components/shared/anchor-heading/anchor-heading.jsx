@@ -59,7 +59,8 @@ const AnchorHeading = (Tag) => {
       <Tag
         id={id}
         className={clsx(
-          'anchor-heading group relative w-fit scroll-mt-20 font-medium leading-tight tracking-tighter lg:scroll-mt-5',
+          'anchor-heading group relative w-fit scroll-mt-20 font-medium leading-tight lg:scroll-mt-5',
+          Tag === 'h2' ? 'tracking-tighter' : 'tracking-extra-tight',
           className
         )}
       >
