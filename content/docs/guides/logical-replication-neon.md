@@ -55,7 +55,7 @@ An _inactive_ replication slot can be the result of a dead subscriber, where the
 
   This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 40 hours. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
 
-- If using Debezium, set [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) to `true` to ensure that `flush_lsn` progress is being reported. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
+- If using Debezium, set [lsn.flush.mode](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-lsn-flush-mode) to `connector` so that the connector reports `flush_lsn` progress. (The older property `flush.lsn.source=true` is deprecated but is automatically mapped to `lsn.flush.mode=connector` for backward compatibility.) For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
 ### What to do if your replication slot is removed
 
