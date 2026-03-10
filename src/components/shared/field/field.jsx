@@ -3,6 +3,8 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 
+import warningIcon from 'icons/input-warning.svg';
+
 export const FIELD_TAGS = {
   INPUT: 'input',
   TEXTAREA: 'textarea',
@@ -100,13 +102,7 @@ const Field = forwardRef(
           {errorTheme === 'tooltip' && (
             <>
               <span className="absolute left-2.5 top-0 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-l border-t border-[#FF3621]/50 bg-[linear-gradient(135deg,#000_0%,#000_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />
-              <Image
-                className="size-4 shrink-0"
-                src="/images/warning.svg"
-                alt=""
-                width={16}
-                height={16}
-              />
+              <Image className="size-4 shrink-0" src={warningIcon} alt="" width={16} height={16} />
             </>
           )}
           <p

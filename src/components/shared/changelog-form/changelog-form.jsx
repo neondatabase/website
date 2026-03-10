@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
-import InputWarningIcon from 'icons/input-warning.inline.svg';
+import warningIcon from 'icons/input-warning.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
@@ -165,8 +165,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
               : 'border-gray-new-90 dark:border-gray-new-15',
             formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
             'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
-            isBlog &&
-              '!bg-gray-new-8/60 backdrop-blur-lg transition-all duration-200',
+            isBlog && '!bg-gray-new-8/60 backdrop-blur-lg transition-all duration-200',
             isBlog &&
               (formState === FORM_STATES.ERROR
                 ? '!border-[rgba(255,54,33,0.5)]'
@@ -182,11 +181,15 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           onChange={handleInputChange}
         />
         {isBlog && formState === FORM_STATES.ERROR && (
-          <InputWarningIcon
+          <Image
             className={clsx(
-              'absolute top-[11px] size-4',
+              'absolute top-[11px] size-4 shrink-0',
               isSidebar ? 'right-[42px]' : 'right-[101px]'
             )}
+            src={warningIcon}
+            alt=""
+            width={16}
+            height={16}
           />
         )}
         <LazyMotion features={domAnimation}>
@@ -224,7 +227,12 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                   Subscribe
                 </span>
                 <SendIcon
-                  className={clsx(classNames.sendIcon, 'lg:hidden xs:block', isBlog && isSidebar && '!block', isInArticle && '!hidden')}
+                  className={clsx(
+                    classNames.sendIcon,
+                    'lg:hidden xs:block',
+                    isBlog && isSidebar && '!block',
+                    isInArticle && '!hidden'
+                  )}
                 />
               </m.button>
             )}
@@ -288,10 +296,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
       {!isBlog && <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />}
       {isBlog && (
         <Image
-          className={clsx(
-            'absolute bottom-0 z-10',
-            !isSidebar ? 'right-0' : 'left-0 w-full'
-          )}
+          className={clsx('absolute bottom-0 z-10', !isSidebar ? 'right-0' : 'left-0 w-full')}
           src={formBg}
           width={256}
           height={120}

@@ -55,19 +55,19 @@ const schema = yup
     email: yup
       .string()
       .email('Please enter a valid email')
-      .required('Email address is a required field')
+      .required('Required Field')
       .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
     companySize: yup.string().notOneOf(['hidden'], 'Required field'),
     reasonForContact: yup.string().notOneOf(['hidden'], 'Required field'),
-    message: yup.string().required('Message is a required field'),
+    message: yup.string().required('Required Field'),
   })
   .required();
 
 const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90 md:text-sm';
 const inputClassName =
-  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-white placeholder:!text-gray-new-50 focus:!border-white focus:!ring-1 focus:!ring-primary-1 md:!text-[15px]';
+  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-white placeholder:!text-gray-new-50 focus:!border-white md:!text-[15px]';
 const selectClassName = `${inputClassName} !pr-10 !bg-[url(/images/chevron-down-gray.svg)]`;
-const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px]`;
+const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px] focus:outline-offset-2 focus:outline-2 focus:outline-primary-1`;
 
 const AZURE_MIGRATION_MESSAGE = "I'd like to migrate my Azure managed account.";
 
