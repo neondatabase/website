@@ -2,6 +2,8 @@ import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 
 const markClassName = 'bg-[#287458] px-0.5 text-white';
+const paragraphClassName =
+  'text-[20px] tracking-tight text-gray-new-70 xl:text-[18px] lg:text-base md:text-[15px]';
 
 const Intro = () => (
   <section className="intro safe-paddings pt-[200px] xl:pt-[136px] lg:pt-28 md:pt-[88px]">
@@ -25,18 +27,18 @@ const Intro = () => (
           </SectionLabel>
 
           <div className="flex max-w-[416px] flex-col gap-y-7 lg:gap-y-5 md:mt-4 md:max-w-none md:gap-y-4">
-            <p className="text-[20px] tracking-tight text-gray-new-70 xl:text-[18px] lg:text-base md:text-[15px]">
+            <p className={paragraphClassName}>
               Every branch acts like a{' '}
-              <mark className={markClassName}>full copy of your database</mark>
-              created in under a second.
+              <mark className={markClassName}>full copy of your database</mark> created in under a
+              second.
             </p>
-            <p className="text-[20px] tracking-tight text-gray-new-70 xl:text-[18px] lg:text-base md:text-[15px]">
+            <p className={paragraphClassName}>
               Branches are <mark className={markClassName}>cost efficient,</mark> since they don’t
               duplicate storage and they scale to zero.
             </p>
-            <p className="text-[20px] tracking-tight text-gray-new-70 xl:text-[18px] lg:text-base md:text-[15px]">
+            <p className={paragraphClassName}>
               Use them as <mark className={markClassName}>environments</mark> for development, CI
-              runs, migrations, versioning, and more
+              runs, migrations, versioning, and more.
             </p>
           </div>
         </div>
