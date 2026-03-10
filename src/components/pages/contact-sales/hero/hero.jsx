@@ -35,7 +35,12 @@ const Hero = () => (
           <SectionLabel className="mb-5 lg:mb-[18px] md:mb-4" theme="white">
             Talk to us
           </SectionLabel>
-          <Heading className="text-pretty lg:max-w-2xl" tag="h1" size="md-contact" theme="white">
+          <Heading
+            className="text-pretty lg:max-w-2xl md:!text-[36px] xs:!text-[32px]"
+            tag="h1"
+            size="md-new"
+            theme="white"
+          >
             Start building faster with serverless Postgres
           </Heading>
           <div className="mt-auto flex flex-col gap-7 xl:gap-5 lg:gap-7">
@@ -63,7 +68,7 @@ const Hero = () => (
             </ul>
           </div>
         </div>
-        <div className="relative flex-1 max-w-xl lg:max-w-full">
+        <div className="relative max-w-xl flex-1 lg:max-w-full">
           <ContactForm />
         </div>
       </div>
