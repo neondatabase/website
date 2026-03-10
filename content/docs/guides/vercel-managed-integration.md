@@ -135,18 +135,10 @@ To verify preview branching works:
 
 ## Automatic branch cleanup
 
-Preview branches are automatically deleted when their corresponding Vercel deployments are deleted. This keeps your Neon project organized and reduces storage usage.
+Preview branches are automatically deleted when their corresponding Vercel deployments are permanently removed. The timing of this cleanup depends on [Vercel's deployment retention policy](https://vercel.com/docs/deployment-retention), which retains preview deployments for 6 months by default.
 
-**How it works:**
-
-- Each Git branch can have multiple Vercel deployments, all using the same Neon branch.
-- When the last deployment for a Git branch is deleted (manually or via Vercel's deployment retention policy), Neon automatically deletes the corresponding database branch.
-- Cleanup happens when deployments are deleted, which you can configure using [Vercel's retention policy settings](https://vercel.com/docs/deployment-retention). By default, Pre-Production Deployments (preview environments) are retained for 180 days:
-
-  ![Vercel retention policy defaults](/docs/guides/vercel_retention_policy_defaults.png)
-
-<Admonition type="note">
-This deployment-based cleanup differs from the [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration), which deletes branches when Git branches are deleted.
+<Admonition type="important" title="Preview branches may not be deleted for months">
+Because of Vercel's default retention settings, preview branches can persist long after a PR is closed. To understand the full timeline, reduce your retention policy, or set up immediate cleanup, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 </Admonition>
 
 ---
@@ -224,14 +216,10 @@ This removes database environment variables from your Vercel project but keeps t
 
 ### Manage branches created by the integration
 
-Preview branches are automatically deleted when their deployments expire, but you can also manually delete branches via:
-
-- [Neon Console](/docs/manage/branches#delete-a-branch) - Individual or bulk deletion
-- [Neon CLI](/docs/reference/cli-branches#delete) - Command line management
-- [Neon API](/docs/manage/branches#delete-a-branch-with-the-api) - Programmatic cleanup
+You can manually delete preview branches at any time via the [Neon Console](/docs/manage/branches#delete-a-branch), [Neon CLI](/docs/reference/cli-branches#delete), or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). For automated cleanup options, including GitHub Actions, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 <Admonition type="note" title="Unused branches are archived">
-Branches you don't delete are eventually archived, consuming archive storage space. See [Branch archiving](/docs/guides/branch-archiving).
+Branches you don't delete are eventually [archived](/docs/guides/branch-archiving), reducing storage costs but still consuming archive storage space.
 </Admonition>
 
 ---
