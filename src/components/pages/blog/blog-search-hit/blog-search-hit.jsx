@@ -7,7 +7,7 @@ const BlogSearchHit = ({ post }) => (
     className="col-span-full border-t border-gray-new-15 py-8 first:border-0 first:border-t-0 first:pt-0 last:pb-0"
     key={post.slug}
     imageWidth={336}
-    imageHeight={189}
+    imageHeight={176}
     fullSize
     {...post}
   />
