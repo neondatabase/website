@@ -22,8 +22,6 @@ updatedOn: '2026-02-15T20:51:54.114Z'
 </DocsList>
 </InfoBlock>
 
----
-
 ## Traditional database workflows are broken
 
 Modern software development is built around iteration. Teams create branches, open pull requests, spin up previews, run tests in isolation, and roll changes forward or back constantly. Code workflows evolved to support this reality.
