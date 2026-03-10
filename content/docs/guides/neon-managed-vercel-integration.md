@@ -192,12 +192,9 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 ### Branch cleanup
 
 **Automatic cleanup (recommended):**
-Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is deleted.
+Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is deleted. Cleanup runs the next time a preview deployment is created.
 
-<Admonition type="note">
-This Git-branch-based cleanup differs from the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), which deletes branches when deployments are deleted (either manually or automatically via Vercel's retention policies).
-
-</Admonition>
+Unlike the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), this cleanup is not affected by Vercel's deployment retention policies. For a full comparison and additional cleanup options, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 **Manual cleanup:**
 If needed, you can delete branches manually:
@@ -209,7 +206,7 @@ If needed, you can delete branches manually:
 <Admonition type="warning" title="Important cleanup considerations">
 - **Don't rename branches:** Renaming either the Git branch or Neon branch breaks name-matching logic and may cause unintended deletions
 - **Avoid child branches:** Creating child branches on preview branches prevents automatic deletion
-- **Role dependency:** The integration depends on the selected role - removing it will break the integration
+- **Role dependency:** The integration depends on the selected role; removing it will break the integration
 </Admonition>
 
 ### Disconnect integration

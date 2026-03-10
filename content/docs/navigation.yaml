@@ -727,6 +727,8 @@
                       slug: guides/vercel-managed-integration
                     - title: Neon-Managed (Connectable Account)
                       slug: guides/neon-managed-vercel-integration
+                    - title: Managing preview branch cleanup
+                      slug: guides/vercel-branch-cleanup
                     - title: Manual Setup
                       slug: guides/vercel-manual
                     - title: Connecting to Neon from Vercel
