@@ -66,64 +66,62 @@ const Post = ({
 
   return (
     <>
-      <div className="flex min-w-0 flex-1 justify-center">
-        <div
-          className={clsx(
-            'min-w-0 pb-32 lg:pb-24 md:pb-20',
-            isWideLayout && 'max-w-none',
-            className
-          )}
-        >
-          {breadcrumbs?.length > 0 && (
-            <Breadcrumbs
-              className={clsx(isChangelog && 'pt-1', '!mb-7')}
-              breadcrumbs={breadcrumbs}
-              baseUrl={breadcrumbsBaseUrl}
-            />
-          )}
+      <div
+        className={clsx(
+          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isWideLayout && 'max-w-none',
+          className
+        )}
+      >
+        {breadcrumbs?.length > 0 && (
+          <Breadcrumbs
+            className={clsx(isChangelog && 'pt-1', '!mb-7')}
+            breadcrumbs={breadcrumbs}
+            baseUrl={breadcrumbsBaseUrl}
+          />
+        )}
 
-          {isChangelog ? (
-            <Changelog currentSlug={currentSlug} posts={changelogPosts} />
-          ) : (
-            <article>
-              <h1
-                className={clsx(
-                  'text-balance text-[36px] font-medium leading-tight tracking-tighter md:text-[28px]',
-                  tag && 'inline'
-                )}
-              >
-                {title}
-              </h1>
-              {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-              {subtitle && (
-                <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
-                  {subtitle}
-                </p>
+        {isChangelog ? (
+          <Changelog currentSlug={currentSlug} posts={changelogPosts} />
+        ) : (
+          <article>
+            <h1
+              className={clsx(
+                'text-balance text-[36px] font-medium leading-tight tracking-tighter md:text-[28px]',
+                tag && 'inline'
               )}
-              <Content
-                className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
-                content={content}
-                isPostgres={isPostgres}
-              />
-            </article>
-          )}
-          {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
-
-          {!isChangelog && (
-            <NavigationLinks
-              className={clsx(isDocsIndex ? 'mt-14' : 'mt-6')}
-              previousLink={previousLink}
-              nextLink={nextLink}
-              basePath={navigationLinksBasePath}
+            >
+              {title}
+            </h1>
+            {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+            {subtitle && (
+              <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+                {subtitle}
+              </p>
+            )}
+            <Content
+              className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
+              content={content}
+              isPostgres={isPostgres}
             />
-          )}
-        </div>
+          </article>
+        )}
+        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
+
+        {!isChangelog && (
+          <NavigationLinks
+            className={clsx(isDocsIndex ? 'mt-14' : 'mt-6')}
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={navigationLinksBasePath}
+          />
+        )}
       </div>
 
       {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
       {!isWideLayout && !isChangelog && (
         <Aside
-          className="!ml-0 w-[312px] shrink-0 xl:hidden"
+          className="-left-20 !ml-0 w-[312px] shrink-0 3xl:left-auto xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
