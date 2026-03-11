@@ -32,7 +32,7 @@ This page provides the most commonly used PostgreSQL Math functions that help yo
 | [LN](postgresql-math-functions/postgresql-ln)                     | Return the natural logarithm of a numeric value.                                                | LN(3\)                  | 1\.0986  |
 | [LOG](postgresql-math-functions/postgresql-log)                   | Return the base 10 logarithms of a numeric value.                                               | LOG(1000\)              | 3        |
 | [LOG](postgresql-math-functions/postgresql-log)                   | Return the logarithm of a numeric value to a specified base.                                    | LOG(2, 64\)             | 6        |
-| [MIN_SCALE](postgresql-math-functions/postgresql-min_scale)       | Return the minimum scale of a number.                                                           | MIN_SCALE(12\.300\)     | 2        |
+| [MIN_SCALE](postgresql-math-functions/postgresql-min_scale)       | Return the minimum scale of a number.                                                           | MIN_SCALE(12\.300\)     | 1        |
 | [MOD](postgresql-math-functions/postgresql-mod)                   | Divide the first parameter by the second one and return the remainder.                          | MOD(10,4\)              | 2        |
 | [PI](postgresql-math-functions/postgresql-pi-function)            | Return the value of PI.                                                                         | PI()                    | 3\.14159 |
 | [POWER](postgresql-math-functions/postgresql-power)               | Raise a number to a specific power.                                                             | POWER(5, 3\)            | 125      |
