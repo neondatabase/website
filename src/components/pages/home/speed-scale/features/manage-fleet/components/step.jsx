@@ -47,8 +47,4 @@ Step.propTypes = {
   }),
 };
 
-Step.defaultProps = {
-  lineAnimation: undefined,
-};
-
 export default Step;

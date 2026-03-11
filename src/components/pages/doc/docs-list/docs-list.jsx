@@ -35,8 +35,9 @@ const DocsList = ({ title, theme = 'default', children }) => (
       </h3>
     )}
     <ul className="!m-0 !p-0">
-      {parsedChildren(children).map((child) => (
+      {parsedChildren(children).map((child, index) => (
         <li
+          key={index}
           className={clsx(
             '!mb-0 !mt-2 flex w-fit items-start gap-1.5 text-gray-new-20 before:hidden dark:text-gray-new-70',
             '[&_p]:my-0 [&_p]:pl-5 [&_p]:text-sm [&_p]:tracking-extra-tight',
