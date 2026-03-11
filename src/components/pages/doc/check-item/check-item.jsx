@@ -21,11 +21,14 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
 
   return (
     <li className="!m-0 before:hidden">
-      <WrapperTag className="relative block cursor-pointer pl-[30px]" htmlFor={!href ? id : null}>
+      <WrapperTag
+        className={clsx('relative block pl-[30px]', !href && 'cursor-pointer')}
+        htmlFor={!href ? id : null}
+      >
         <input
           className={clsx(
             'remove-autocomplete-styles appearance-none',
-            !href && 'pointer-events-none ',
+            !href ? 'pointer-events-none' : 'cursor-pointer',
             'absolute left-0 top-1 z-10 size-4 border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
             'dark:border-gray-new-20 dark:hover:bg-white/5',
             'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-[size:8px_8px] before:bg-center before:bg-no-repeat',
