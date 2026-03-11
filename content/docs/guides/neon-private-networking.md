@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-02-16T16:59:11.834Z'
+updatedOn: '2026-03-11T14:26:22.058Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
