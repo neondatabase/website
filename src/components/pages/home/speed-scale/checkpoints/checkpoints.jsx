@@ -22,6 +22,7 @@ const Checkpoints = () => (
         )}
         wrapperClassName="relative"
         src="/animations/pages/home/checkpoints.riv?20260114"
+        autoBind={false}
       />
     </div>
   </div>
