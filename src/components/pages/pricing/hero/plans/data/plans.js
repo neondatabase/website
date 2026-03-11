@@ -29,13 +29,13 @@ export default [
           },
         ],
       },
-      backend: {
-        title: 'Backend',
-        features: [{ title: 'Auth: 60k MAU' }, { title: 'PostgREST-compatible Data API' }],
-      },
       other: {
         title: 'Features',
-        features: [{ title: 'Branching' }, { title: 'Autoscaling' }, { title: 'Read replicas' }],
+        features: [
+          { title: 'Neon Auth: 60K MAUs' },
+          { title: '6-hr time travel/restores' },
+          { title: 'Access to Autoscaling, Branching, Read Replicas' },
+        ],
       },
     },
     button: {
@@ -72,19 +72,13 @@ export default [
           { title: 'Sizes up to 16 CU (64 GB RAM)' },
         ],
       },
-      backend: {
-        title: 'Backend',
-        features: [
-          { title: 'Auth: 1M MAU', info: '<p>More capacity available via support request</p>' },
-          {
-            title: 'Data API: 1B requests',
-            info: '<p>More capacity available via support request</p>',
-          },
-        ],
-      },
       other: {
         title: 'All features in free, plus...',
-        features: [{ title: '7-day time travel/restores' }, { title: '3-day metrics/logs in UI' }],
+        features: [
+          { title: 'Neon Auth: 1M MAUs' },
+          { title: '7-day time travel/restores' },
+          { title: '3-day metrics/logs in UI' },
+        ],
       },
     },
     button: {
@@ -121,23 +115,13 @@ export default [
           { title: 'Sizes up to 56 CU (224 GB RAM)' },
         ],
       },
-      backend: {
-        title: 'Backend',
-        features: [
-          { title: 'Auth: 1M MAU', info: '<p>More capacity available via support request</p>' },
-          {
-            title: 'Data API: 1B requests',
-            info: '<p>More capacity available via support request</p>',
-          },
-        ],
-      },
       other: {
         title: 'All features in launch, plus...',
         features: [
           { title: '30-day time travel/restores' },
           { title: '14-day metrics/logs in UI' },
           { title: 'Metrics/logs export (Otel, Datadog)' },
-          { title: 'Private network, IP rules' },
+          { title: 'Private network, IP Allow rules' },
           {
             title: 'SLAs, SOC2, HIPAA',
             info: '<p>HIPAA incurs additional costs.</p>',
