@@ -97,7 +97,7 @@ Get detailed information on a table.
 \d+ table_name
 ```
 
-Show a [stored procedure](/postgresql/postgresql-stored-procedures/) or function code:
+Show a [stored procedure](/postgresql/postgresql-plpgsql/postgresql-create-procedure) or [function](/postgresql/postgresql-plpgsql/postgresql-create-function) code:
 
 ```
 \df+ function_name
