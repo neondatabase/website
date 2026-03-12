@@ -44,7 +44,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
   <Link className="group" to={linkUrl}>
     <article className="relative flex h-[408px] w-full flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-[320px]">
       <Image
-        className="absolute right-0 top-0 lt:max-w-[55%] lt:h-auto lg:max-w-[50%] sm:max-w-[40%]"
+        className="absolute right-0 top-0 lt:h-auto lt:max-w-[55%] lg:max-w-[50%] sm:max-w-[40%]"
         src={background.src}
         width={background.width}
         height={background.height}
