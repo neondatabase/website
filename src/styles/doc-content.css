@@ -1,4 +1,10 @@
 @layer components {
+  --tw-prose-hr: border-gray-new-90;
+
+  .dark & {
+    --tw-prose-hr: border-gray-new-20;
+  }
+
   .code-block[data-has-filename='true'] {
     > pre {
       @apply rounded-none;
@@ -111,11 +117,12 @@
       @apply mt-10;
     }
 
-    @apply prose-h2:m-0 prose-h2:pt-7 prose-h2:text-[28px] prose-h2:font-medium prose-h2:leading-tight prose-h2:tracking-tighter;
+    @apply prose-h2:mb-0 prose-h2:mt-7 prose-h2:text-[28px] prose-h2:font-medium prose-h2:leading-tight prose-h2:tracking-tighter;
     @apply prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:tracking-extra-tight;
     @apply prose-h4:text-lg prose-h4:font-medium prose-h4:leading-snug prose-h4:tracking-extra-tight;
     @apply prose-p:mb-6 prose-p:mt-[18px] prose-p:text-lg prose-p:font-normal prose-p:leading-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
+    @apply prose-hr:mb-12 prose-hr:mt-8;
 
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
@@ -171,10 +178,6 @@
       ol {
         list-style-type: lower-alpha;
       }
-    }
-
-    hr {
-      @apply my-8;
     }
 
     h2,
