@@ -35,6 +35,7 @@ export default [
           { title: 'Neon Auth: 60K MAUs' },
           { title: '6-hr time travel/restores' },
           { title: 'Access to Autoscaling, Branching, Read Replicas' },
+          { title: 'Unlimited team members' },
         ],
       },
     },
