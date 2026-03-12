@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-02-27T19:55:46.378Z'
+updatedOn: '2026-03-12T17:34:43.558Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
