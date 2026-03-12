@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-03-04T20:15:14.442Z'
+updatedOn: '2026-03-09T15:58:12.491Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -59,28 +59,28 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-If you haven't created a database yet, run the following command to generate a [Claimable Postgres by Neon database](https://pg.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
+If you haven't created a database yet, run the following command to generate a [Claimable Postgres by Neon database](https://neon.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "bun", "deno"]}>
 
 ```bash
-  npm get-db
+  npm neon-new
 ```
 
 ```bash
-  yarn dlx get-db
+  yarn dlx neon-new
 ```
 
 ```bash
-  pnpm get-db
+  pnpm neon-new
 ```
 
 ```bash
-  bunx get-db
+  bunx neon-new
 ```
 
 ```bash
-  deno run -A get-db
+  deno run -A neon-new
 ```
 
 </CodeTabs>

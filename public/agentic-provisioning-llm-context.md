@@ -1,113 +1,101 @@
-# Agentic provisioning – LLM context
+---
+name: neon-provider-llm-context
+description: Context for agents using or developing the Agentic Provisioning Protocol (APP) with Neon. Covers where credentials come from (account request response), how to use the returned API key for the Neon API (projects, branches, connection strings), and provisioning resources. Use when the agent receives or uses APP credentials or implements APP flows.
+---
 
-> Context for LLMs and agents: agentic provisioning with Neon. Full documentation index: [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt)
+# Agentic provisioning with Neon
 
-## Purpose
-
-This page explains how to use the **API key** returned from the Agentic Provisioning Protocol (APP) account request to interact with Neon: create and manage projects, create branches for existing projects, get connection strings, and work with your Neon database via the Neon API.
+Context for LLMs and agents: use the **API key** from the APP account request to interact with Neon (projects, branches, connection strings, provisioning). Full documentation index: [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt).
 
 ---
 
-## Where the API key comes from
+## Part 1: APP credentials and Neon API
+
+### Where the API key comes from
 
 In the APP flow, the **orchestrator** (e.g. Stripe) calls the provider (Neon) to create or link an account for the developer:
 
 - **Endpoint:** `POST <provider_base_url>/provisioning/account_requests`
 - **Response (success):** `type: "credentials"` with:
-  - **`credentials.access_token`** — This is the **user-scoped API key** (Bearer token). Use it for all Neon API and provisioning calls for this user.
-  - **`credentials.account.id`** — The account (user) identifier.
+  - **`credentials.access_token`** — User-scoped API key (Bearer token). Use for all Neon API and APP provisioning calls for this user.
+  - **`credentials.account.id`** — Account (user) identifier (use when the protocol or APIs require an account/user ID).
 
-Use this key for **all user operations**: creating and managing projects, branches, databases, and getting connection strings.
+| Response field | How the agent uses it |
+|----------------|------------------------|
+| **`credentials.access_token`** | Send as `Authorization: Bearer <access_token>` on every Neon API request and on APP provisioning requests that act on this user (e.g. `POST .../provisioning/resources`). |
+| **`credentials.account.id`** | Use when linking resources to the correct user or when the API requires an account ID. |
 
----
+Use the same API key for all operations in this document (projects, branches, connection URIs, provisioning resources).
 
-## How to use the API key
+### How to use the API key
 
-1. **Send it on every request**  
-   Use HTTP Bearer authentication with the Neon API:
+- **Authentication:** `Authorization: Bearer <access_token>` on every request.
+- **Neon API base URL:** `https://console.neon.tech/api/v2/`
 
-   ```http
-   Authorization: Bearer <access_token>
-   ```
+Example — list the user's projects:
 
-   Use the same header when calling APP provisioning endpoints that act on the developer’s account (e.g. `POST .../provisioning/resources`).
+```bash
+curl 'https://console.neon.tech/api/v2/projects' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
 
-2. **Neon API base URL**  
-   All Neon API requests use:
+(Replace `$NEON_API_KEY` with the `access_token` from the account request.)
 
-   ```text
-   https://console.neon.tech/api/v2/
-   ```
+### Neon API operations (with the API key)
 
-   Example: list the user's projects:
+All of these use the same `Authorization: Bearer <access_token>` and base URL above.
 
-   ```bash
-   curl 'https://console.neon.tech/api/v2/projects' \
-     -H 'Accept: application/json' \
-     -H "Authorization: Bearer $NEON_API_KEY"
-   ```
+A full list of endpoints, request/response schemas, rate limits, and constraints is in [Neon REST API](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md).
 
-   (Replace `$NEON_API_KEY` with the `access_token` from the account request.)
+**Create a branch** — Optional body: `branch.parent_id` (omit to use project default branch), `endpoints` (e.g. `[{ "type": "read_write" }]` for compute). Example:
 
----
+```bash
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"endpoints":[{"type":"read_write"}],"branch":{}}'
+```
 
-## Creating branches for existing projects
-
-Use the user-scoped API key to create branches under any project the user has access to.
-
-- **Create a branch:**  
-  `POST /projects/{project_id}/branches`
-
-  Optional body: `branch.parent_id` (branch ID to branch from; omit to use the project’s default branch), `endpoints` (e.g. `[{ "type": "read_write" }]` to get a compute for the branch). Without a body, a branch is created from the default branch and no compute is created.
-
-  Example:
-
-  ```bash
-  curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
-    -H 'Accept: application/json' \
-    -H "Authorization: Bearer $NEON_API_KEY" \
-    -H 'Content-Type: application/json' \
-    -d '{"endpoints":[{"type":"read_write"}],"branch":{}}'
-  ```
-
-- **List branches:**  
-  `GET /projects/{project_id}/branches`  
-  Returns all branches for the project; use branch `id` (e.g. `br-...`) when getting connection URIs or creating child branches.
-
-- **Get connection string for a branch:**  
-  `GET /projects/{project_id}/connection_uri`  
-  Query params (optional): `branch_id`, `database_name`, `role_name`, `pooled`.  
-  Returns a Postgres connection string for that branch (and optionally database/role). Each branch has its own connection string.
+**Provisioning resources (APP)** — When the orchestrator provisions a resource (`POST .../provisioning/resources`), it sends the same Bearer token so the provider knows which user account to create the resource for. The response may include `access_configuration` (e.g. `connection_string`, `project_id`, `branch_id`, or `api_key` and `api_base_url`). Use the returned details with the same API key for further operations.
 
 ---
 
-## Other useful operations with the API key
+## Part 2: Neon documentation and features
 
-| Action | Method and path |
-|--------|------------------|
-| List user's projects | `GET /projects` |
-| Create a project | `POST /projects` (body: e.g. `name`, `region_id`, `pg_version`) |
-| Get connection URI (default branch) | `GET /projects/{project_id}/connection_uri` |
-| Get connection URI for a branch | `GET /projects/{project_id}/connection_uri?branch_id={branch_id}` |
-| Create branch | `POST /projects/{project_id}/branches` |
-| List branches | `GET /projects/{project_id}/branches` |
-| Delete branch | `DELETE /projects/{project_id}/branches/{branch_id}` |
-| List databases on a branch | `GET /projects/{project_id}/branches/{branch_id}/databases` |
-| Create database on a branch | `POST /projects/{project_id}/branches/{branch_id}/databases` |
-| List roles on a branch | `GET /projects/{project_id}/branches/{branch_id}/roles` |
+Neon is a serverless Postgres platform (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
 
-The API key is **user-scoped** and is used for all user operations. Use the same `Authorization: Bearer <access_token>` for all of these calls.
+**Fetching docs as Markdown:** Append `.md` to the URL (e.g. https://neon.com/docs/introduction/branching.md) or send `Accept: text/markdown` on the standard URL.
 
----
+**Docs index (all pages):** https://neon.com/docs/llms.txt — search here for a topic if not listed below.
 
-## Provisioning resources (APP)
+### Doc links by topic
 
-When the orchestrator provisions a **resource** (`POST .../provisioning/resources`), it sends the same Bearer token so the provider knows which user account to create the resource for. The response may include `access_configuration` with e.g. `connection_string`, `project_id`, `branch_id`, or (in an org-as-resource model) `api_key` and `api_base_url`. Use the returned details together with the same API key to create additional branches or projects as needed.
+| Topic | Use when | Link |
+|-------|----------|------|
+| What Is Neon | Architecture, terminology (orgs, projects, branches, endpoints) | [what-is-neon.md](https://neon.com/docs/ai/skills/neon-postgres/references/what-is-neon.md) |
+| Getting Started | First-time setup, connection strings, driver install, schema | [getting-started.md](https://neon.com/docs/ai/skills/neon-postgres/references/getting-started.md) |
+| Connection Methods & Drivers | Choosing transport/driver (TCP, HTTP, WebSocket, edge, serverless) | [connection-methods.md](https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md) |
+| Serverless Driver | `@neondatabase/serverless`, HTTP/WebSocket, runtime optimizations | [neon-serverless.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md) |
+| Neon JS SDK | Neon Auth + Data API, PostgREST-style queries, typed client | [neon-js.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md) |
+| Developer Tools | `npx neonctl@latest init`, VSCode, Neon MCP server | [devtools.md](https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md) |
+| Neon CLI | Terminal/scripts/CI with `neonctl` | [neon-cli.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md) |
+| Neon REST API | Direct HTTP automation, API key auth, rate limits, polling | [neon-rest-api.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md) |
+| Neon TypeScript SDK | Typed Neon control in TypeScript (`@neondatabase/api-client`) | [neon-typescript-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md) |
+| Neon Python SDK | Programmatic Neon management in Python (`neon-api`) | [neon-python-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md) |
+| Neon Auth | Managed auth, UI components, methods, Next.js/React integration | [neon-auth.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md) (see also Neon JS SDK) |
+| Branching | Isolated environments, preview deployments, branch lifecycle | [branching.md](https://neon.com/docs/ai/skills/neon-postgres/references/branching.md) |
+| Autoscaling | Compute scaling with workload, CU sizing | [autoscaling.md](https://neon.com/docs/introduction/autoscaling.md) |
+| Scale to Zero | Idle suspend/resume, cold-start trade-offs | [scale-to-zero.md](https://neon.com/docs/introduction/scale-to-zero.md) |
+| Instant Restore | Point-in-time recovery, branch from history, Time Travel | [branch-restore.md](https://neon.com/docs/introduction/branch-restore.md) |
+| Read Replicas | Read-only compute, analytics/reporting | [read-replicas.md](https://neon.com/docs/introduction/read-replicas.md) |
+| Connection Pooling | PgBouncer, `-pooler` hostnames, serverless concurrency | [connection-pooling.md](https://neon.com/docs/connect/connection-pooling.md) |
+| IP Allow Lists | Restrict access by IP/CIDR | [ip-allow.md](https://neon.com/docs/introduction/ip-allow.md) |
+| Logical Replication | CDC, external Postgres sync | [logical-replication-guide.md](https://neon.com/docs/guides/logical-replication-guide.md) |
 
----
+**Key points (brief):**
 
-## References
-
-- **Neon API reference:** [api-docs.neon.tech](https://api-docs.neon.tech/) — full endpoint list, request/response shapes, and parameters.
-- **Docs index (Markdown):** [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) — browsable list of Neon documentation URLs.
-- **Neon:** [neon.tech](https://neon.tech) — serverless Postgres.
+- **Branching:** Instant copy-on-write clones; each branch has its own compute endpoint.
+- **Scale to zero:** Idle compute suspends (default 5 min); first query after suspend has cold-start penalty; storage stays active.
+- **Connection pooling:** Add `-pooler` to endpoint hostnames for pooled connections; important in serverless.

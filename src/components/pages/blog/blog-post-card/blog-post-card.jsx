@@ -70,7 +70,7 @@ const BlogPostCard = ({
         <Link
           className={clsx(
             'group overflow-hidden bg-[#181818]',
-            isSmart ? 'shrink-0' : 'aspect-[16/9] w-full',
+            isSmart ? 'shrink-0' : 'aspect-[40/21] w-full',
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
