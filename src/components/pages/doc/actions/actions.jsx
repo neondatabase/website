@@ -307,7 +307,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
     <div
       className={clsx(
         'flex flex-col gap-3.5',
-        withBorder && 'mt-4 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70'
+        withBorder && 'mt-5 border-t border-gray-new-90 pt-5 dark:border-gray-new-20'
       )}
     >
       {isTemplate ? templateActions : docsActions}

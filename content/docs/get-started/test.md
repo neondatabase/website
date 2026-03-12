@@ -213,30 +213,143 @@ For the purposes of this tutorial, name the branch `dev/jordan`, following our r
 In practice, teams need databases to behave more like code:
 
 ```tsx filename="/server/api/auth/[...all].ts"
-  async function VideoComponent({ fileName }) {
-    const {blobs} = await list({
-      prefix: fileName, // [!code highlight]
-      limit: 2  // [!code highlight]
-    });
-    const { url } = blobs[0]; // [!code --]
-    const { url: captionsUrl } = blobs[1]; // [!code ++]
+export async function VideoComponent( // [!code --]
+export async function VideoComponentWrapper( // [!code ++]
+  fileName: string, // [!code highlight]
+  limit: number = 2, // [!code highlight]
+) {
+  const blobs = await list({
+    prefix: fileName, // [!code highlight]
+    limit, // [!code highlight]
+  });
 
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
+  const { url } = blobs[0]; // [!code --]
+  const { url: captionsUrl } = blobs[1]; // [!code ++]
 
-    return (
-      <video controls preload="none" aria-label="Video player">
+  const str = "ABC"
 
-        <source src={url} type="video/mp4" />
-        <track
-          src={captionsUrl}
-          kind="subtitles"
-          srcLang="en"
-          label="English">
-          Your browser does not support the video tag.
-      </video>
-    );
-  };
+  const captionsUrl =
+    blobs[1]?.url ?? `cap-${fileName}.vtt`; // [!code highlight]
+
+  // The return value is *not* serialized
+  return (
+    <video
+      controls
+      preload="none"
+      aria-label={`Video player: ${fileName}`}
+    >
+      <source src={safeUrl} type="video/mp4" />
+      <track
+        src={captionsUrl}
+        kind="subtitles"
+        srcLang="en"
+        label="English"
+      >
+        Embedded text node
+      </track>
+      {"string-expression"} {1 + 2}
+    </video>
+  );
+}
+```
+
+```tsx filename="all-tokens-1.tsx"
+// Comment with URL (may map to link token): https://neon.tech/docs
+
+type RequestOptions = {
+  retries: number;
+  timeoutMs?: number;
+};
+
+export async function fetchWithAllTokens(
+  url: string,                 // parameter
+  { retries, timeoutMs }: RequestOptions, // destructured parameter
+): Promise<string> {
+  const DEFAULT_TIMEOUT = 5_000;            // constant
+  const finalTimeout = timeoutMs ?? DEFAULT_TIMEOUT; // operator ??
+
+  let attempt = 0;
+  let lastError: Error | null = null;
+
+  while (attempt < retries) {              // operator <
+    try {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), finalTimeout);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "X-Neon-Example": "all-tokens",  // strings
+        },
+        signal: controller.signal,
+      });
+
+      clearTimeout(id);
+
+      if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`); // string-expression
+      }
+
+      const text = await response.text();
+      return text;
+    } catch (error) {
+      lastError = error as Error;
+      attempt++;                            // operator ++
+    }
+  }
+
+  return (
+    <div className="result-wrapper">
+      <h1>Embedded JSX content</h1>
+      <p>
+        Last error:{" "}
+        {lastError ? lastError.message : "No error recorded"}
+      </p>
+    </div>
+  ) as unknown as string;
+}
+```
+
+```bash filename="all-tokens-2.sh"
+#!/usr/bin/env bash
+
+# Simple script to exercise operators and strings
+
+PROJECT_ROOT="${PROJECT_ROOT:-/usr/local/neon}"  # string + operator :-
+LOG_FILE="$PROJECT_ROOT/logs/example.log"
+
+if [ ! -d "$PROJECT_ROOT" ]; then                # operators ! and -d
+  echo "Creating project root at $PROJECT_ROOT"
+  mkdir -p "$PROJECT_ROOT"
+fi
+
+echo "Starting example at $(date)" | tee -a "$LOG_FILE"
+
+for i in 1 2 3; do
+  if curl -fsS "https://neon.tech/health?try=$i" >>"$LOG_FILE" 2>&1; then
+    echo "Request $i succeeded"
+  else
+    echo "Request $i failed" >&2
+  fi
+done
+
+echo "Done."
+```
+
+```md filename="all-tokens-3.md"
+# Neon example doc
+
+Visit the [Neon docs](https://neon.tech/docs) for more information about
+serverless Postgres and best practices.
+
+You can run `npm run dev` locally and then open `http://localhost:3000`
+in your browser.
+
+> Tip: Combine environment variables like `NEON_DATABASE_URL` with your
+> framework's configuration system for best DX.
+
+- **Feature flag**: `experimental_all_tokens`
+- **Status**: _beta_
 ```
 
 - Engineers want isolated environments to test schema changes safely

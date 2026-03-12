@@ -48,7 +48,7 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
         {title}
       </h3>
     </div>
-    <Chevron className="size-4 text-gray-new-20 transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white dark:group-hover:text-gray-new-80" />
+    <Chevron className="size-4 text-gray-new-50 transition-colors duration-200 group-hover:text-gray-new-40 dark:text-gray-new-50 dark:group-hover:text-gray-new-80" />
   </NextLink>
 );
 

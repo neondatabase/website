@@ -30,7 +30,7 @@ const styles = {
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     outlined:
-      'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
+      'bg-black-pure/0.02 text-black-pure border-gray-new-60 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'outlined-new':
       'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':

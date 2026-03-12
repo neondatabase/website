@@ -1,10 +1,4 @@
 @layer components {
-  --tw-prose-hr: border-gray-new-90;
-
-  .dark & {
-    --tw-prose-hr: border-gray-new-20;
-  }
-
   .code-block[data-has-filename='true'] {
     > pre {
       @apply rounded-none;
@@ -85,7 +79,7 @@
   }
 
   .prose-doc {
-    @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
+    @apply max-w-none text-lg leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-black-pure prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
@@ -122,7 +116,7 @@
     @apply prose-h4:text-lg prose-h4:font-medium prose-h4:leading-snug prose-h4:tracking-extra-tight;
     @apply prose-p:mb-6 prose-p:mt-[18px] prose-p:text-lg prose-p:font-normal prose-p:leading-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
-    @apply prose-hr:mb-12 prose-hr:mt-8;
+    @apply prose-hr:mb-12 prose-hr:mt-8 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
 
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
@@ -132,8 +126,8 @@
       @apply scroll-mt-24 lg:scroll-mt-5;
     }
 
-    p > img {
-      @apply rounded border border-gray-new-94 dark:border-gray-new-20;
+    p img {
+      @apply border border-gray-new-90 dark:border-gray-new-20;
 
       &.no-border {
         @apply border-0;
@@ -233,7 +227,10 @@
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !leading-[1.75] dark:![text-shadow:unset];
+        @apply !font-mono text-sm !leading-normal dark:![text-shadow:unset];
+        > span {
+          @apply tracking-extra-tight;
+        }
       }
 
       @apply prose-code:text-black-new dark:prose-code:text-white;

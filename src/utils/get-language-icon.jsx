@@ -14,7 +14,6 @@ import {
   SiMarkdown,
   SiPhp,
   SiPostgresql,
-  SiPowershell,
   SiPrisma,
   SiPython,
   SiRuby,
@@ -88,8 +87,6 @@ const LANGUAGE_ICON_MAP = {
   mdx: SiMarkdown,
   // TOML / INI
   toml: SiToml,
-  // PowerShell
-  powershell: SiPowershell,
 };
 
 const getLanguageIcon = (language) => {
