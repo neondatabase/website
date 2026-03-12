@@ -56,8 +56,6 @@ export default {
   docsExtensionsPgVector: '/docs/extensions/pgvector',
   docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
   docsExtensionsTimescaledb: '/docs/extensions/timescaledb',
-
-  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   scaleToZero: '/docs/guides/scale-to-zero-guide',
@@ -110,5 +108,5 @@ export default {
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  claimablePostgres: 'https://pg.new/',
+  claimablePostgres: 'https://neon.new/',
 };

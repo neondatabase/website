@@ -339,17 +339,6 @@ The `ExternalCode` component allows embedding code content from external sources
 | showLineNumbers | boolean | false      | Shows line numbers in the code block                          |
 | className       | string  | ''         | Additional CSS classes to apply to the component              |
 
-### Examples
-
-```markdown
-<ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
-  language="markdown"
-  shouldWrap
-  showLineNumbers
-/>
-```
-
 ### Best Practices
 
 1. Always use raw URLs from the GitHub repository (for example, `https://raw.githubusercontent.com/...`).

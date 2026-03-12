@@ -7,7 +7,7 @@ summary: >-
   Neon resources.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.056Z'
+updatedOn: '2026-03-06T22:26:50.810Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -72,8 +72,6 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Building an AI chatbot with Neon](/guides/azure-ai-chatbot) - Create AI-powered chatbots with Neon and Azure
 - [Azure AI Search with Neon](/guides/azure-ai-search) - Implement search functionality using Azure AI Search and Neon
 - [AI-powered email assistant in Azure](/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure) - Create a personal AI email assistant in Azure
-- [SQL query assistant with .NET and Azure OpenAI](/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
-- [Generative feedback loops with Azure OpenAI](/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
 - [Build your first AI agent for Postgres on Azure](/guides/azure-ai-agent-service): Build an AI agent for Postgres using Azure AI Agent Service
 - [Semantic Kernel](/docs/ai/semantic-kernel): Build AI RAG and agentic workflows with Semantic Kernel and Neon
 
@@ -112,7 +110,3 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Building a robust JSON API with TypeScript](/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
 - [Azure Static Web Apps with Neon](/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
 - [Azure Logic Apps with Neon](/guides/azure-logic-apps): Integrate Neon with Azure Logic Apps
-
-## Security & access control
-
-- [Row-level security with Azure AD](/docs/guides/neon-rls-azure-ad) - Implement row-level security with Azure Active Directory

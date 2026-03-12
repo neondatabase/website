@@ -13,11 +13,11 @@ const sharedMdxComponents = {
   MigrationAssistant: 'shared-content/migration-assistant',
   NeonRLSDeprecation: 'shared-content/neon-rls-deprecation',
   LinkAPIKey: 'shared-content/manage-api-keys',
-  AIRule: 'shared-content/ai-rule-usage',
   NextSteps: 'shared-content/next-steps',
   MCPTools: 'shared-content/mcp-tools',
   PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
   EarlyAccessProps: 'shared-content/early-access-props',
+  AgentSkillsTip: 'shared-content/agent-skills-tip',
   // neon-auth-sdk-shared
   SdkOverview: 'shared-content/neon-auth-sdk-shared/overview',
   SdkStackApp: 'shared-content/neon-auth-sdk-shared/objects/stack-app',

@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-02-15T20:51:54.223Z'
+updatedOn: '2026-03-06T18:28:34.016Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -92,7 +92,7 @@ Navigate to your organization's **Settings** > **API keys** to view a list of ex
 
 <TabItem>
 
-To create an organization API key via the API, you need to use your personal API key. You also need to have admin-level permissions in the specified organization.
+To create an organization API key via the API, you need to use your personal API key. You also need to have admin-level permissions in the specified organization. This endpoint is rate limited to 10 requests per second; if you create many keys, throttle your requests or use retries with backoff.
 
 ```bash shouldWrap
 curl --request POST \

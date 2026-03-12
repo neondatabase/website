@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-27T20:43:26.149Z'
+updatedOn: '2026-03-05T04:12:51.006Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -328,7 +328,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **About the `sub` claim:**
 
-For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
+For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/row-level-security) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
 
 **Example: SELECT (GET)**
 

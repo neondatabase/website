@@ -23,7 +23,7 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
 
 ## Create a Neon Postgres Database
 
-1. If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech/) or [neon.new](https://neon.new/).
+1. If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech/).
 
 2. Retrieve connection details for your Neon Postgres database:
    - Navigate to the **Dashboard** of your Neon project.

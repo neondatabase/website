@@ -68,7 +68,7 @@ module.exports = {
     {
       name: 'AI',
       description:
-        'AI rules, MCP integrations, vector search, and tools for building AI-powered applications with Neon.',
+        'Agent Skills, MCP integrations, vector search, and tools for building AI-powered applications with Neon.',
     },
     {
       name: 'Auth',

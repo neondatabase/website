@@ -45,9 +45,7 @@ The Neon TypeScript SDK allows you to manage:
 - [**Organizations:**](/docs/manage/orgs-api) Manage organization settings, API keys, and members (for Neon organizational accounts).
 - [**Consumption Metrics:**](/docs/guides/consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
 
-<Admonition type="tip" title="AI Rules available">
-Working with AI coding assistants? Check out our [AI rules for the Neon TypeScript SDK](/docs/ai/ai-rules-neon-typescript-sdk) to help your AI assistant generate better code when managing Neon resources programmatically.
-</Admonition>
+<AgentSkillsTip skill_topic="the Neon TypeScript SDK for managing resources programmatically" />
 
 ## Quick Start
 

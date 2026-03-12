@@ -84,6 +84,8 @@ const Mermaid = ({ chart, className }) => {
   useEffect(() => {
     const renderChart = async () => {
       try {
+        await document.fonts.ready;
+
         const isDark = document.documentElement.classList.contains('dark');
 
         if (!mermaidAPI) {
@@ -91,6 +93,7 @@ const Mermaid = ({ chart, className }) => {
           mermaid.initialize({
             startOnLoad: false,
             ...getNeonTheme(isDark),
+            flowchart: { padding: 25 },
           });
           mermaidAPI = mermaid;
         }
@@ -147,7 +150,7 @@ const Mermaid = ({ chart, className }) => {
 
   return (
     <div
-      className={clsx('mermaid-container', className)}
+      className={clsx('mermaid-container not-prose', className)}
       ref={containerRef}
       dangerouslySetInnerHTML={{ __html: svg }}
     />

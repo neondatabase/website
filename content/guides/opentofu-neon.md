@@ -348,8 +348,6 @@ resource "neon_jwks_url" "auth_provider_jwks" {
 }
 ```
 
-> For a list of supported providers, see [Neon RLS: Supported Providers](/docs/guides/neon-rls#supported-providers).
-
 For more attributes and options on managing JWKS URLs, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/jwks_url.md)
 
 ### Advanced: VPC endpoint management (for Neon private networking)

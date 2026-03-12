@@ -6,7 +6,7 @@ summary: >-
   metadata, including setup instructions for creating a Neon project and
   configuring an S3 bucket.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.574Z'
+updatedOn: '2026-03-05T04:12:51.007Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -19,7 +19,7 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
 
 ## Create a Neon project
 
-1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
+1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an AWS account and S3 bucket
@@ -484,6 +484,5 @@ This pattern effectively separates file storage and delivery concerns (handled b
 
 - [AWS S3 documentation](https://docs.aws.amazon.com/s3/index.html)
 - [AWS: Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

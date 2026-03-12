@@ -6,7 +6,7 @@ summary: >-
   track metadata in your Neon database, utilizing R2's S3-compatible object
   storage capabilities.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.579Z'
+updatedOn: '2026-03-05T04:12:51.009Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
@@ -19,7 +19,7 @@ This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file
 
 ## Create a Neon project
 
-1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
+1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudflare account and R2 bucket
@@ -447,6 +447,5 @@ This pattern separates file storage and delivery (handled by R2) from structured
 
 - [Cloudflare R2 documentation](https://developers.cloudflare.com/r2/)
 - [Cloudflare presigned URLs](https://developers.cloudflare.com/r2/api/s3/presigned-urls/)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

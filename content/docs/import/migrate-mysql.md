@@ -6,7 +6,9 @@ summary: >-
   transformation processes.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.210Z'
+redirectFrom:
+  - /docs/import/import-from-mysql
+updatedOn: '2026-03-06T22:26:50.814Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

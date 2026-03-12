@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS) and authentication, demonstrating how to write
   queries from frontend code securely.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.570Z'
+updatedOn: '2026-03-04T15:52:43.554Z'
 ---
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -32,7 +32,7 @@ Before you begin, ensure you have:
 
 ### Create a Neon project with Auth and Data API
 
-1. Go to [neon.new](https://neon.new) to create a new Neon project
+1. Go to the [Neon Console](https://console.neon.tech) to create a new Neon project
 2. In the Neon Console, navigate to your project and go to the **Data API** page in the left sidebar
 3. Select **Neon Auth** as your authentication option (the default), then click **Enable**
 

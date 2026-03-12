@@ -6,7 +6,7 @@ summary: >-
   and management through the Neon SDK without direct installation or
   configuration by users.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.743Z'
+updatedOn: '2026-03-06T22:31:14.960Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -23,13 +23,13 @@ The following Better Auth plugins are currently supported in Neon Auth:
 
 ## Supported plugins
 
-| Plugin                                                 | Status                                                       |
-| ------------------------------------------------------ | ------------------------------------------------------------ |
-| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                                 |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                                 |
-| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                                 |
-| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (invitation emails, JWT token claims in progress) |
-| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                                 |
+| Plugin                                                 | Status                                          |
+| ------------------------------------------------------ | ----------------------------------------------- |
+| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                    |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                    |
+| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
+| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
+| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
 
 For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
 

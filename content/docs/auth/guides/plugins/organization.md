@@ -6,23 +6,131 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.039Z'
+updatedOn: '2026-03-06T22:31:14.964Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Organization plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Organization plugin.
-
-The Organization plugin allows you to build multi-tenant applications where users can create workspaces, invite other members, and manage permissions using roles.
+Neon Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for invitation emails and JWT token claims is currently in progress.
+The Organization plugin is currently in **Beta**. Support for JWT token claims is under development.
 </Admonition>
+
+## Why use this plugin?
+
+Use the Organization plugin when you need multi-tenancy in your app. It supports:
+
+- Multi-tenant apps where each tenant is an organization
+- Workspaces or groups that share a Neon branch (same database)
+- Inviting users and assigning roles: owner, admin, or member
+- Role-based access: owners and admins can manage the org; the member role has read-only access
+
+Better Auth also has a **Teams** feature (sub-groups within an org); that feature is not currently enabled in Neon Auth.
 
 ## Prerequisites
 
 - A Neon project with **Auth enabled**
 - A signed-in user (organizations are associated with users)
+
+## Configure the organization plugin
+
+The Organization plugin is enabled by default for each branch; you can disable it or change settings in the Console or via the API. If the plugin is disabled, your application users and admins cannot create or manage organizations, and any organization-related API calls will return an error.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+Open your project in the Neon Console, then go to **Auth** > **Configuration** > **Organizations** (per branch). From there you can customize:
+
+![Auth Configuration > Organizations in the Neon Console](/docs/auth/console-auth-organizations-config.png)
+
+- **Enable Organizations** (toggle): Turn the Organization plugin on or off for the branch. When off, all organization API calls are disabled and return an error.
+- **Limit:** Maximum total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10.
+- **Membership Limit:** Maximum number of members per organization (default: 100).
+- **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
+- **Send Invitation Email** (toggle): When on, invited users receive an email with an accept link. This requires **Verify email at signup** to be enabled in the Authentication configuration. Accepting the invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route that handles `/auth/accept-invitation?invitationId=<INV_ID>` in your application. When off, no email is sent and you handle invitations in your app (for example, via the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations)).
+
+</TabItem>
+
+<TabItem>
+
+You can also configure the plugin via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Use your API key in the `Authorization` header.
+
+**Get current plugin config (including organization):**
+
+```bash
+curl -X GET \
+  'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Example response (excerpt showing the `organization` object):
+
+```json
+{
+  "organization": {
+    "enabled": true,
+    "organization_limit": 10,
+    "membership_limit": 100,
+    "creator_role": "owner",
+    "send_invitation_email": false
+  }
+}
+```
+
+The full response includes other plugin configs (email provider, OAuth, etc.). `creator_role` is either `owner` or `admin`.
+
+**Update the organization plugin:**
+
+Send only the fields you want to change; all request body fields are optional.
+
+```bash
+curl -X PATCH \
+  'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins/organization' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "enabled": true,
+    "organization_limit": 10,
+    "membership_limit": 100,
+    "creator_role": "owner",
+    "send_invitation_email": false
+  }'
+```
+
+Example response:
+
+```json
+{
+  "enabled": true,
+  "organization_limit": 10,
+  "membership_limit": 100,
+  "creator_role": "owner",
+  "send_invitation_email": false
+}
+```
+
+**API fields reference**
+
+| Field                   | Type                        | Description                                                                                                                          |
+| :---------------------- | :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`               | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error.                       |
+| `organization_limit`    | number (≥ 1)                | Max total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10. |
+| `membership_limit`      | number (≥ 1)                | Max members per organization. Default: 100.                                                                                          |
+| `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.                       |
+| `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false.                    |
+
+**API Documentation**
+
+- [Get all plugin configurations](https://api-docs.neon.tech/reference/getneonauthpluginconfigs)
+- [Update organization plugin configuration](https://api-docs.neon.tech/reference/updateneonauthorganizationplugin)
+
+</TabItem>
+
+</Tabs>
 
 ## Organizations
 
@@ -216,7 +324,9 @@ const { data, error } = await authClient.organization.delete({
 Manage invitations to join an organization.
 
 <Admonition type="note" title="Invitation Emails">
-Invitation emails are not sent during the Beta phase. They will be supported in a future release. In the meantime, users can accept invitations using the [invitation ID](/docs/auth/guides/plugins/organization#accept-invitation) or by viewing them in their [invitation list](/docs/auth/guides/plugins/organization#list-user-invitations).
+Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app.
+
+When the email toggle is off, handle invitations in your app using the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations).
 </Admonition>
 
 ### Invite member

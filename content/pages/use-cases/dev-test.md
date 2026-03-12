@@ -33,7 +33,7 @@ author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon"
+url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
 />
 
 <Testimonial
@@ -87,7 +87,7 @@ author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon"
+url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
 />
 
 </TestimonialsWrapper>

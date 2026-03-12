@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-02-19T15:51:43.468Z'
+updatedOn: '2026-03-09T15:58:12.488Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -77,7 +77,7 @@ Use this approach when you want to create databases for your users without requi
 
 - [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
 - [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Claimable Postgres by Neon](https://pg.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [pg.new](https://pg.new/)
+- [Claimable Postgres by Neon](https://neon.new/): Try instant Postgres provisioning without signup using `npx neon-new` or at [neon.new](https://neon.new/)
 
 <DetailIconCards>
 

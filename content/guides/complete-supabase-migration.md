@@ -804,7 +804,6 @@ If your users were authenticated via OAuth providers like GitHub or Google in Su
 - [Migrate from Supabase](/docs/import/migrate-from-supabase)
 - [Getting started with Neon Data API](/docs/data-api/get-started)
 - [Neon Auth](/docs/neon-auth/overview)
-- [Neon RLS](/docs/guides/neon-rls)
 - [Getting started with Neon Auth and Next.js](/guides/neon-auth-nextjs)
 - [A Simple 3-Step Process to Migrate from Supabase Auth to Neon Auth](/blog/supabase-auth-neon-auth)
 - [Ship software faster using Neon branches as ephemeral environments](/branching)
