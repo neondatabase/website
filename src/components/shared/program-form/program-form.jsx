@@ -85,7 +85,7 @@ const ProgramForm = ({ type }) => {
         {description}
       </p>
       {formState !== FORM_STATES.SUCCESS ? (
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-6" noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
             <Field
               {...fieldProps}
@@ -120,10 +120,10 @@ const ProgramForm = ({ type }) => {
         </form>
       ) : (
         <div
-          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start"
+          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0"
           data-test="success-message"
         >
-          <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
+          <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
           <p className="text-[17px] font-light">
             We&apos;ve received your application and will be in touch soon.
           </p>

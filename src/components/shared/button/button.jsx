@@ -28,7 +28,7 @@ const styles = {
     'white-off-filled': 'bg-[#E4F1EB] text-gray-new-8',
     'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-filled-multi':
-      'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
+      'dark:bg-white dark:text-black-pure hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     outlined:
       'bg-black-pure/0.02 text-black-pure border-gray-new-60 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'outlined-new':

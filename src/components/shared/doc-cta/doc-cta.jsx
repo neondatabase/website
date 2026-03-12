@@ -85,7 +85,7 @@ const DocCta = ({
   <figure
     className={clsx(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
-      'my-9 p-5 md:my-8',
+      'my-9 p-5 pr-7 md:my-8',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
       'dark:border-gray-new-30 dark:bg-gray-new-10'
     )}
@@ -103,7 +103,7 @@ const DocCta = ({
       </div>
     )}
     <Image
-      className="absolute bottom-0 right-0 top-0 h-full w-auto object-cover"
+      className="absolute bottom-0 right-0 top-0 h-full w-auto object-cover sm:hidden"
       src={patternImage}
       alt=""
       width={188}
@@ -112,11 +112,11 @@ const DocCta = ({
 
     <div
       className={clsx(
-        'relative z-10 flex gap-5',
+        'relative z-10 flex gap-5 sm:flex-col sm:items-start sm:gap-y-4',
         secondaryButtonText ? 'flex-col' : 'flex-row justify-between'
       )}
     >
-      <div className="flex max-w-lg flex-col">
+      <div className="flex max-w-[490px] flex-col">
         <div className="text-xl font-medium leading-tight tracking-extra-tight text-gray-new-8 dark:text-white">
           {title}
         </div>

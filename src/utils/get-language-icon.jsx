@@ -26,66 +26,42 @@ import {
 } from 'react-icons/si';
 
 const LANGUAGE_ICON_MAP = {
-  // TypeScript
   typescript: SiTypescript,
   ts: SiTypescript,
   tsx: SiTypescript,
-  // JavaScript
   javascript: SiJavascript,
   js: SiJavascript,
   jsx: SiJavascript,
-  // Python
   python: SiPython,
   py: SiPython,
-  // Shell / Bash
   bash: SiBash,
   shell: SiBash,
   zsh: SiBash,
-  // SQL / Postgres
   sql: SiPostgresql,
   psql: SiPostgresql,
-  // JSON
   json: SiJson,
-  // YAML
   yaml: SiYaml,
   yml: SiYaml,
-  // Rust
   rust: SiRust,
-  // Go
   go: SiGo,
-  // Ruby
   ruby: SiRuby,
   erb: SiRuby,
-  // PHP
   php: SiPhp,
-  // Java
   java: SiJava,
-  // Kotlin
   kotlin: SiKotlin,
-  // C#
   csharp: SiCsharp,
-  // C++
   'c++': SiCplusplus,
   cpp: SiCplusplus,
-  // Elixir
   elixir: SiElixir,
-  // Terraform
   terraform: SiTerraform,
-  // GraphQL
   graphql: SiGraphql,
-  // CSS
   css: SiCss3,
-  // Svelte
   svelte: SiSvelte,
-  // Prisma
   prisma: SiPrisma,
-  // Astro
   astro: SiAstro,
-  // Markdown / MDX
   markdown: SiMarkdown,
   md: SiMarkdown,
   mdx: SiMarkdown,
-  // TOML / INI
   toml: SiToml,
 };
 

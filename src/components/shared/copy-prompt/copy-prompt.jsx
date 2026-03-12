@@ -1,11 +1,13 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Button from 'components/shared/button';
 import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
+import patternSvg from 'images/pages/docs/copy-prompt/pattern.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const DEFAULT_DISPLAY_TEXT = 'Use this pre-built prompt to get started faster.';
@@ -32,21 +34,28 @@ const CopyPrompt = (props) => {
   return (
     <figure
       className={clsx(
-        'not-prose my-5 flex items-center gap-x-6 rounded-[10px] px-7 py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-5',
-        'border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)]',
-        'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]'
+        'not-prose relative my-5 flex items-center justify-between gap-x-6 p-5 pr-6 sm:flex-col sm:items-start sm:gap-y-4',
+        'border border-gray-new-80 bg-[rgba(228,241,235,0.4)]',
+        'dark:border-gray-new-30 dark:bg-gray-new-10'
       )}
     >
-      <div className="text-gray-900 flex-1 whitespace-pre-line break-words text-base font-medium dark:text-gray-new-80">
+      <Image
+        className="absolute right-0 top-0 h-full w-auto object-cover sm:hidden"
+        src={patternSvg}
+        alt=""
+        width={188}
+        height={90}
+      />
+      <div className="relative z-10 max-w-[440px] flex-1 whitespace-pre-line break-words text-xl font-medium leading-tight tracking-extra-tight text-black-pure dark:text-white">
         {description}
       </div>
       <Button
-        className="inline-flex w-[140px] items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium xs:w-full"
-        theme="primary"
+        className="relative z-10 inline-flex items-center gap-2 px-6 py-3.5 text-base font-normal leading-none tracking-tight dark:font-medium"
+        theme="white-filled-multi"
         aria-label={copied ? 'Copied!' : buttonText}
         onClick={handleCopy}
       >
-        <CopyIcon className="h-4 w-4" />
+        <CopyIcon className="size-3.5" />
         {copied ? 'Copied!' : buttonText}
       </Button>
     </figure>

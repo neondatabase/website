@@ -30,6 +30,8 @@ Modern software development is built around iteration. Teams create branches, op
 
 <CTA title="Contact us" description="Neon and Lakebase represent two paths built on the same architectural foundation. Explore your options and get help deciding which service is the best fit." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />
 
+<CopyPrompt src="/prompts/elixir-ecto-prompt.md" description="Pre-built prompt for connecting Micronaut Kotlin applications to Neon Postgres"/>
+
 To overcome these challenges, many development teams are turning to microfrontends, which break down large frontend applications into smaller, independently deployable units. This shift not only accelerates development workflows but also enhances the end-user experience by optimizing performance.
 
 To overcome these challenges, many development teams are turning to microfrontends.
