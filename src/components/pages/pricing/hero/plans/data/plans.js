@@ -35,7 +35,12 @@ export default [
       },
       other: {
         title: 'Features',
-        features: [{ title: 'Branching' }, { title: 'Autoscaling' }, { title: 'Read replicas' }],
+        features: [
+          { title: 'Branching' },
+          { title: 'Autoscaling' },
+          { title: 'Read replicas' },
+          { title: 'Unlimited team members' },
+        ],
       },
     },
     button: {
