@@ -20,7 +20,8 @@ import getHtmlTableOfContents from 'utils/get-html-table-of-contents';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params }) => {
+const BlogPage = async (props0) => {
+  const params = await props0.params;
   const postResult = await getWpPostBySlug(params?.slug);
 
   const { post, relatedPosts } = postResult;
@@ -103,7 +104,8 @@ const BlogPage = async ({ params }) => {
   );
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const { post } = await getWpPostBySlug(slug);
 

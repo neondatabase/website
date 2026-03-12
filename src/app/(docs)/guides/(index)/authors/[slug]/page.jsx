@@ -15,7 +15,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const authorsData = getAuthors();
   if (!authorsData[params.slug]) return notFound();
   return getMetadata({
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const GuidesPage = async ({ params }) => {
+const GuidesPage = async (props) => {
+  const params = await props.params;
   const authorsData = getAuthors();
   const author = authorsData[params.slug];
 
@@ -52,7 +54,11 @@ const GuidesPage = async ({ params }) => {
           },
         ]}
       />
-      <BlogHeader title={`Guides by ${author.name}`} rssTitle={`Guides by ${author.name}`} basePath={GUIDES_BASE_PATH} />
+      <BlogHeader
+        title={`Guides by ${author.name}`}
+        rssTitle={`Guides by ${author.name}`}
+        basePath={GUIDES_BASE_PATH}
+      />
       <div className="guides">
         {posts.map((post) => (
           <GuideCard key={post.slug} {...post} />

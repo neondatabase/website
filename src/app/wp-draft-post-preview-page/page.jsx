@@ -50,7 +50,8 @@ const icons = {
   WARNING:
   You can't have a page in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
-const WpPageDraft = async ({ searchParams }) => {
+const WpPageDraft = async (props0) => {
+  const searchParams = await props0.searchParams;
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
@@ -163,7 +164,8 @@ const WpPageDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateViewport({ searchParams }) {
+export async function generateViewport(props) {
+  const searchParams = await props.searchParams;
   if (!searchParams?.id || !searchParams?.status) {
     return undefined;
   }
@@ -181,7 +183,8 @@ export async function generateViewport({ searchParams }) {
   };
 }
 
-export async function generateMetadata({ searchParams }) {
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams;
   if (!searchParams?.id || !searchParams?.status) {
     return null;
   }

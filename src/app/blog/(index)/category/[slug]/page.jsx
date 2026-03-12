@@ -11,7 +11,9 @@ import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'uti
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types
-const BlogCategoryPage = async ({ params: { slug } }) => {
+const BlogCategoryPage = async ({ params }) => {
+  const { slug } = await params;
+
   const category = await getCategoryBySlug(slug);
   const posts = await getPostsByCategorySlug(slug);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
@@ -43,7 +45,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:!pt-0 lg:!border-t-0 md:!pt-0 md:!border-t-0' : ''}
+                className={index < 2 ? 'lg:!border-t-0 lg:!pt-0 md:!border-t-0 md:!pt-0' : ''}
                 post={post}
                 category={category}
                 isFeatured={post.isFeatured}
@@ -64,7 +66,8 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   );
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const categories = await getAllCategories();
   const category = categories.find((cat) => cat.slug === params.slug);
 

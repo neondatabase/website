@@ -25,7 +25,8 @@ export async function generateStaticParams() {
   });
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
 
   let label = 'Changelog';
@@ -122,7 +123,8 @@ const ChangelogPost = async ({ currentSlug }) => {
   );
 };
 
-const ChangelogPostPage = async ({ params }) => {
+const ChangelogPostPage = async (props) => {
+  const params = await props.params;
   const currentSlug = params?.slug.join('/');
 
   return <ChangelogPost currentSlug={currentSlug} />;

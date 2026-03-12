@@ -12,6 +12,15 @@ const defaultConfig = {
   transpilePackages: ['geist'],
   images: {
     formats: ['image/avif', 'image/webp'],
+    localPatterns: [
+      {
+        pathname: '/docs/og',
+      },
+      {
+        pathname: '/**',
+        search: '',
+      },
+    ],
     remotePatterns: [
       {
         protocol: 'https',
@@ -608,32 +617,10 @@ const defaultConfig = {
       ],
     };
   },
-  webpack(config) {
-    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports not ending in ".inline.svg"
-      {
-        test: /(?<!inline)\.svg$/,
-        use: [
-          {
-            loader: require.resolve('url-loader'),
-            options: {
-              limit: 512,
-              publicPath: '/_next/static/svgs',
-              outputPath: 'static/svgs',
-              fallback: require.resolve('file-loader'),
-            },
-          },
-          {
-            loader: require.resolve('svgo-loader'),
-          },
-        ],
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.inline.svg$/i,
-        use: [
+  turbopack: {
+    rules: {
+      '*.inline.svg': {
+        loaders: [
           {
             loader: '@svgr/webpack',
             options: {
@@ -654,40 +641,21 @@ const defaultConfig = {
             },
           },
         ],
-      }
-    );
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i;
-
-    config.module.rules.push({
-      test: /rive\.wasm$/,
-      type: 'asset/resource',
-      generator: {
-        filename: 'static/[name].[hash][ext]',
+        as: '*.js',
       },
-    });
-
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      module: false,
-      path: false,
-      crypto: false,
-      stream: false,
-      assert: false,
-      http: false,
-      https: false,
-      os: false,
-      url: false,
-    };
-
-    config.experiments = {
-      ...config.experiments,
-      asyncWebAssembly: true,
-    };
-
-    return config;
+    },
+    resolveAlias: {
+      fs: { browser: './empty.js' },
+      module: { browser: './empty.js' },
+      path: { browser: './empty.js' },
+      crypto: { browser: './empty.js' },
+      stream: { browser: './empty.js' },
+      assert: { browser: './empty.js' },
+      http: { browser: './empty.js' },
+      https: { browser: './empty.js' },
+      os: { browser: './empty.js' },
+      url: { browser: './empty.js' },
+    },
   },
   env: {
     INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,

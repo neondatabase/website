@@ -19,7 +19,8 @@ const getPageType = async (slug) => {
   return null;
 };
 
-const SinglePage = async ({ params }) => {
+const SinglePage = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const pageType = await getPageType(slug);
 
@@ -36,7 +37,8 @@ const SinglePage = async ({ params }) => {
   return notFound();
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const pageType = await getPageType(slug);
 
@@ -59,7 +61,8 @@ export async function generateMetadata({ params }) {
   return null;
 }
 
-export async function generateViewport({ params }) {
+export async function generateViewport(props) {
+  const params = await props.params;
   const { slug } = params;
   const pageType = await getPageType(slug);
 

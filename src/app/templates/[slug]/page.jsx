@@ -15,7 +15,8 @@ import VercelIcon from 'images/pages/templates/vercel.inline.svg';
 import templates from 'utils/data/templates';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
 
   const template = templates.find((template) => template.slug === slug);
@@ -37,7 +38,8 @@ export async function generateStaticParams() {
   }));
 }
 
-const TemplatePage = ({ params }) => {
+const TemplatePage = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
