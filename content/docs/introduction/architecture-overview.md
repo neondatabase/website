@@ -1,5 +1,5 @@
 ---
-title: Neon architecture
+title: Neon's lakebase architecture
 subtitle: Serverless Postgres with decoupled compute and durable storage
 summary: >-
   Covers the architecture of Neon, a serverless Postgres database that separates
@@ -16,7 +16,7 @@ updatedOn: '2026-02-06T22:07:33.082Z'
 
 Instead of running Postgres as a single stateful system tied to a VM and its filesystem, Neon is a serverless database that splits the system into two independent layers: compute and storage. These layers communicate over the network, with a stream of write-ahead log (WAL) records connecting them.
 
-This separation is what allows Neon to behave like a serverless database. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
+This separation is what puts Neon in the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) of OLTP databases. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
 
 - **Ephemeral compute layer**: optimized for latency and execution. This layer runs Postgres, executing queries and transactions using RAM and local NVMe for performance. Compute nodes do not own durable state and can be replaced freely.
 - **Durable storage layer**: optimized for correctness, history, and scale. This layer defines durability by replicating WAL via quorum, materializes Postgres pages on demand, and stores long-term, immutable history in object storage.
@@ -24,6 +24,10 @@ This separation is what allows Neon to behave like a serverless database. Comput
 Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
 ![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
+
+<Admonition type="note" title="What is the difference between Neon and Lakebase?">
+Both products share the same architectural foundation but Lakebase comes with additional features integrating it with the rest of the Databricks Data and AI platform. For a full comparison, see [Neon and Lakebase](/docs/get-started/why-neon#neon-and-lakebase).
+</Admonition>
 
 ## Compute layer
 

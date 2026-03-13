@@ -65,7 +65,7 @@ For more details and how to connect to a read replica, see [Create and manage Re
 
 ## Read Replica architecture
 
-The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
+The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [lakebase architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
 
 ![read replica computes](/docs/introduction/read_replicas.png)
 
