@@ -47,7 +47,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 
 **Frictionless operations at scale**
 
-At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s architecture is built to address their different requirements directly.
+At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s lakebase architecture is built to address their different requirements directly.
 
 ### Operational efficiency
 

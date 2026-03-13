@@ -35,6 +35,7 @@ export default {
   docs: '/docs',
   docsHome: '/docs/introduction',
   api: '/docs/reference/api-reference',
+  architecture: '/docs/introduction/architecture-overview',
   auth: '/docs/neon-auth/overview',
   autoscaling: '/docs/introduction/autoscaling',
   billing: '/docs/introduction/about-billing',

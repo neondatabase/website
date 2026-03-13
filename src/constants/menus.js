@@ -6,41 +6,52 @@ export default {
       text: 'Product',
       sections: [
         {
-          title: 'Database',
+          title: 'Core Database',
           items: [
+            {
+              title: "Neon's lakebase architecture",
+              to: LINKS.architecture,
+              description: 'Storage-compute separation.',
+            },
             {
               title: 'Autoscaling',
               to: LINKS.autoscaling,
               description: 'Automatic instance sizing',
-{
-title: 'Serverless Architecture',
-to: 'https://neon.com/docs/introduction/architecture-overview',
-description: 'Storage and compute separation',
-},
-{
-title: 'Autoscaling',
-to: LINKS.autoscaling,
-description: 'Automatic instance sizing',
-},
+            },
             {
-              title: 'Branching',
-              to: LINKS.branching,
-              description: 'Faster Postgres workflows',
+              title: 'Read Replicas',
+              to: LINKS.readReplicas,
+              description: 'Instant, autoscaling replicas',
+            },
+            {
+              title: 'Point-in-time Restore',
+              to: LINKS.pointInTimeRestore,
+              description: 'Restore your database to a specific point in time',
             },
           ],
         },
         {
-          title: 'Backend',
+          title: 'Built-In Features',
           items: [
+            {
+              title: 'Database Branches',
+              to: LINKS.branching,
+              description: 'Faster Postgres workflows',
+            },
             {
               title: 'Authentication',
               to: LINKS.auth,
-              description: 'Managed authentication that branches with your database',
+              description: 'Auth for your App, built in to your DB',
             },
             {
               title: 'Data API',
               to: LINKS.dataApi,
               description: 'REST HTTP API for your database',
+            },
+            {
+              title: 'Connection Pooling',
+              to: LINKS.connectionPooling,
+              description: 'Efficiently manage database connections',
             },
           ],
         },

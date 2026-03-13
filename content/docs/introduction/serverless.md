@@ -12,13 +12,13 @@ updatedOn: '2026-02-15T20:51:54.218Z'
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
 
-Enabling serverless Postgres begins with Neon's [native decoupling of storage and compute](/blog/architecture-decisions-in-neon). By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
+Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview) — a native decoupling of storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 
 This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](/use-cases/database-per-tenant), as well as [database branching workflows](/branching) that accelerate development by enabling the management of dev/testing databases via CI/CD.
 
 ![Multi-tenant storage](/docs/introduction/neon_architecture_5.jpg)
 
-Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
+Read our [lakebase architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 
 ## What “serverless” means to us
 
