@@ -6,7 +6,7 @@ summary: >-
   Neon organizations, detailing what Admins, Members, and Collaborators can do
   at both the organization and project levels.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.244Z'
+updatedOn: '2026-03-13T00:00:00.000Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
@@ -63,6 +63,20 @@ The following table shows what each role can do regarding integrations:
 | Connect project to Neon-managed Vercel integration\* |  ✅   |   ✅   |      ❌      |
 
 \*Neon's Vercel-managed integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon-managed Vercel integration, projects must first be made available in Vercel before they can be connected to Neon.
+
+## Snapshot management
+
+The following table shows what each role can do with [snapshots](/docs/guides/snapshots):
+
+| Action                       | Admin | Member | Collaborator |
+| ---------------------------- | :---: | :----: | :----------: |
+| List snapshots               |  ✅   |   ✅   |      ✅      |
+| Create snapshots             |  ✅   |   ✅   |      ✅      |
+| Restore snapshots            |  ✅   |   ✅   |      ✅      |
+| Delete snapshots             |  ✅   |   ✅   |      ✅      |
+| Rename snapshots             |  ✅   |   ✅   |      ✅      |
+| View snapshot schedule       |  ✅   |   ✅   |      ✅      |
+| Set/update snapshot schedule |  ✅   |   ✅   |      ✅      |
 
 </Steps>
 
