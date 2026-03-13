@@ -10,8 +10,8 @@ import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#2D8665] text-[#34D59A]',
-    borderClassName: 'border-[#2D8665] border-[#34D59A]',
+    titleClassName: 'text-[#2D8665] dark:text-green-52',
+    borderClassName: 'border-[#2D8665] dark:border-green-52',
     icon: NoteIcon,
   },
   important: {
@@ -30,8 +30,8 @@ const themes = {
     icon: WarningIcon,
   },
   info: {
-    titleClassName: 'text-[#426CE0] dark:text-[#648DFF]',
-    borderClassName: 'border-[#426CE0] dark:border-[#648DFF]',
+    titleClassName: 'text-[#426CE0] dark:text-blue-70',
+    borderClassName: 'border-[#426CE0] dark:border-blue-70',
     icon: InfoIcon,
   },
   comingSoon: {
@@ -41,7 +41,8 @@ const themes = {
   },
 };
 
-const textClassName = 'admonition-text mt-2.5 text-base [&_a]:rounded-sm';
+const textClassName =
+  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;
@@ -51,7 +52,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
   return (
     <div
       className={clsx(
-        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
+        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 py-4 pl-[1.125rem] pr-5 dark:bg-gray-new-8',
         theme.borderClassName,
         '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
       )}

@@ -13,7 +13,9 @@ const SearchResults = ({ posts, className, children }) => {
 
   // Show "no results" message
   if (posts.length === 0) {
-    return <div className="w-full text-lg text-gray-new-70 md:pt-[96px]">No search results found</div>;
+    return (
+      <div className="w-full text-lg text-gray-new-70 md:pt-[96px]">No search results found</div>
+    );
   }
 
   // Show filtered results

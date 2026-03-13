@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import getLanguageIcon from 'utils/get-language-icon';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
@@ -36,6 +37,7 @@ const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
   filename = null,
+  language = null,
   trackingLabel = null,
   children,
   as: Tag = 'figure',
@@ -44,6 +46,14 @@ const CodeBlockWrapper = ({
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
+  const isSingleLineCode = code.trimEnd().split('\n').length === 1;
+  let copyButtonTopClassName = 'top-4';
+
+  if (filename) {
+    copyButtonTopClassName = 'top-[58px]';
+  } else if (isSingleLineCode) {
+    copyButtonTopClassName = 'top-[min(1rem,calc(50%-.8175rem))]';
+  }
 
   const handleCopyWithTracking = () => {
     handleCopy(code);
@@ -55,7 +65,7 @@ const CodeBlockWrapper = ({
   return (
     <Tag
       className={clsx(
-        'code-block group relative flex flex-col [&_pre]:min-w-full',
+        'code-block group/code-block relative flex flex-col [&_pre]:min-w-full',
         filename && 'overflow-hidden',
         className
       )}
@@ -63,16 +73,17 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="bg-grey-15 flex items-center justify-between gap-3 border-b border-gray-new-90 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
-          <span className="truncate">{filename}</span>
+        <div className="flex h-11 items-center gap-2 truncate border-b border-gray-new-80 bg-gray-new-98 px-4 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-70">
+          {getLanguageIcon(language)}
+          {filename}
         </div>
       )}
       {children}
 
       <button
         className={clsx(
-          'invisible absolute right-4 border border-gray-7 bg-white p-1.5 text-gray-new-50 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-new-90 group-hover:visible group-hover:opacity-100 dark:border-[#303236] dark:bg-gray-new-10 dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
-          filename ? 'top-[58px]' : 'top-4',
+          'invisible absolute right-4 border border-gray-new-80 bg-white p-1.5 text-gray-new-40 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-new-90 group-hover/code-block:visible group-hover/code-block:opacity-100 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          copyButtonTopClassName,
           copyButtonClassName
         )}
         type="button"
@@ -96,6 +107,7 @@ CodeBlockWrapper.propTypes = {
   className: PropTypes.string,
   copyButtonClassName: PropTypes.string,
   filename: PropTypes.string,
+  language: PropTypes.string,
   trackingLabel: PropTypes.string,
   children: PropTypes.node,
   as: PropTypes.string,

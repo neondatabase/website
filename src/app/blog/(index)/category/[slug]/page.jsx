@@ -43,7 +43,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:!pt-0 lg:!border-t-0 md:!pt-0 md:!border-t-0' : ''}
+                className={index < 2 ? 'lg:!border-t-0 lg:!pt-0 md:!border-t-0 md:!pt-0' : ''}
                 post={post}
                 category={category}
                 isFeatured={post.isFeatured}

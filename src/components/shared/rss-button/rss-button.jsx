@@ -3,7 +3,12 @@ import { PropTypes } from 'prop-types';
 
 import RSSLogo from 'icons/rss.inline.svg';
 
-const RssButton = ({ className, basePath, title }) => (
+const sizes = {
+  md: 'size-5',
+  sm: 'size-4',
+};
+
+const RssButton = ({ className, basePath, title, size = 'md' }) => (
   <a
     className={clsx(
       'text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-white',
@@ -12,7 +17,7 @@ const RssButton = ({ className, basePath, title }) => (
     href={`${basePath}rss.xml`}
     aria-label={`${title} RSS Feed`}
   >
-    <RSSLogo className="size-5" />
+    <RSSLogo className={sizes[size]} />
   </a>
 );
 
@@ -20,6 +25,7 @@ RssButton.propTypes = {
   className: PropTypes.string,
   basePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(Object.keys(sizes)),
 };
 
 export default RssButton;

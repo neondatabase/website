@@ -3,7 +3,7 @@
     @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
     @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-white sm:prose-a:break-words;
-    @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
+    @apply prose-figure:my-10 prose-img:my-10 prose-img:border prose-img:border-gray-new-90 dark:prose-img:border-gray-new-20 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
     @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
     @apply prose-pre:my-0 prose-pre:px-2;
 

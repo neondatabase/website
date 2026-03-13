@@ -1,14 +1,16 @@
 @layer components {
   :root {
-    --shiki-color-text: #18191b;
+    --shiki-color-text: #131415;
+    --shiki-foreground: #131415;
     --shiki-color-background: transparent;
-    --shiki-token-constant: #da0b51;
-    --shiki-token-string: #078345;
-    --shiki-token-comment: #b3b3b3;
-    --shiki-token-keyword: #206cdf;
+    --shiki-background: transparent;
+    --shiki-token-constant: #ec6f09;
+    --shiki-token-string: #8458d0;
+    --shiki-token-comment: #797d86;
+    --shiki-token-keyword: #2d8665;
     --shiki-token-parameter: #a35200;
-    --shiki-token-function: #078345;
-    --shiki-token-string-expression: #078345;
+    --shiki-token-function: #ec6f09;
+    --shiki-token-string-expression: #426ce0;
     --shiki-token-punctuation: #18191b;
     --shiki-token-link: #078345;
     --shiki-token-operator: #a86624;
@@ -16,15 +18,17 @@
   }
 
   .dark {
-    --shiki-color-text: #ffffff;
+    --shiki-color-text: #f9fafa;
+    --shiki-foreground: #f9fafa;
     --shiki-color-background: transparent;
+    --shiki-background: transparent;
     --shiki-token-constant: #94b5f7;
-    --shiki-token-string: #47d18c;
-    --shiki-token-comment: #b3b3b3;
+    --shiki-token-string: #ffed9c;
+    --shiki-token-comment: #797d86;
     --shiki-token-keyword: #34d59a;
     --shiki-token-parameter: #ff990a;
     --shiki-token-function: #f7b983;
-    --shiki-token-string-expression: #ffed9c;
+    --shiki-token-string-expression: #af93ea;
     --shiki-token-punctuation: #ffffff;
     --shiki-token-link: #47d18c;
     --shiki-token-operator: #ba8c5e;
@@ -50,7 +54,7 @@
   pre .line {
     &.highlighted,
     &[data-highlighted-line] {
-      @apply bg-[rgba(0,85,255,0.08)] shadow-[inset_3px_0px_0px_0px_#0055ff] dark:bg-[rgba(0,229,153,0.08)] dark:shadow-[inset_3px_0px_0px_0px_#00E599];
+      @apply bg-[#EFEFF1] dark:bg-[#242427];
     }
   }
 
@@ -71,7 +75,7 @@
   }
 
   code .line {
-    @apply pl-4 pr-10;
+    @apply mx-4 px-0;
   }
 
   code .line::after {
@@ -111,14 +115,19 @@
   }
 
   .has-diff code .line {
-    @apply pl-6;
+    @apply pl-4;
 
     &.diff {
+      &.add,
+      &.remove {
+        @apply before:absolute before:left-5 before:text-[#131415] dark:before:text-[#F9FAFA];
+      }
+
       &.add {
-        @apply bg-[#00E599]/10 before:absolute before:left-2 before:text-code-green-1 before:content-['+'];
+        @apply bg-[#EAF5EC] before:content-['+'] dark:bg-[#2C4830];
       }
       &.remove {
-        @apply bg-[#FF275D]/10 before:absolute before:left-2 before:text-code-red-1/50 before:content-['—'];
+        @apply bg-[#F9E6E6] before:content-['—'] dark:bg-[#481E1E];
       }
     }
   }

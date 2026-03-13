@@ -28,8 +28,8 @@ const createSchema = () =>
 const fieldProps = {
   theme: 'transparent',
   inputClassName:
-    'mt-3 rounded-none border-gray-new-90 dark:border-gray-new-20 dark:placeholder:text-gray-new-50',
-  labelClassName: 'text-sm !text-gray-new-10 dark:!text-gray-new-90',
+    'mt-3 rounded-none bg-black-new border-gray-new-80 placeholder:text-gray-new-50 dark:border-gray-new-20',
+  labelClassName: 'text-sm !text-gray-new-30 dark:!text-gray-new-90',
 };
 
 const ProgramForm = ({ type }) => {
@@ -75,13 +75,17 @@ const ProgramForm = ({ type }) => {
 
   return (
     <figure
-      className="doc-cta not-prose relative mb-[22px] mt-9 scroll-mt-20 border border-gray-new-90 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
+      className="doc-cta not-prose relative mb-[22px] mt-9 scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
     >
-      <h2 className="!p-0 !text-2xl !leading-snug">{title}</h2>
-      <p className="!mb-0 !mt-2 !text-lg text-gray-new-30 dark:text-gray-new-70">{description}</p>
+      <h2 className="p-0 text-2xl font-medium leading-snug tracking-extra-tight text-gray-new-8 dark:text-white">
+        {title}
+      </h2>
+      <p className="mb-0 mt-2 text-lg leading-normal tracking-tight text-gray-new-40 dark:text-gray-new-70">
+        {description}
+      </p>
       {formState !== FORM_STATES.SUCCESS ? (
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-6" noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
             <Field
               {...fieldProps}
@@ -116,10 +120,10 @@ const ProgramForm = ({ type }) => {
         </form>
       ) : (
         <div
-          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start"
+          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0"
           data-test="success-message"
         >
-          <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
+          <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
           <p className="text-[17px] font-light">
             We&apos;ve received your application and will be in touch soon.
           </p>

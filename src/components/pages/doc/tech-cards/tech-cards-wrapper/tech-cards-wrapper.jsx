@@ -15,13 +15,13 @@ const TechCardsWrapper = ({ children, withToggler }) => {
 
   return (
     <>
-      <ul className="not-prose !my-7 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
+      <ul className="not-prose !my-9 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
         {withToggler && !isOpen ? children.slice(0, 3) : children}
       </ul>
       {withToggler && (
         <button
           type="button"
-          className="mx-auto mt-4 flex items-center rounded-full bg-gray-new-98 px-[18px] py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-10 dark:text-gray-new-80 dark:hover:bg-gray-new-15"
+          className="mx-auto mt-4 flex items-center rounded-full bg-gray-new-98 px-5 py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-10 dark:text-gray-new-80 dark:hover:bg-gray-new-15"
           onClick={handleClick}
         >
           <span className="text-sm font-medium">{isOpen ? 'Hide' : 'Show more'}</span>

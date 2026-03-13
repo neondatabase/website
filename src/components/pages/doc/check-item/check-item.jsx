@@ -15,32 +15,45 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
   }).replace(/_/g, '');
 
   const isChecked = checklist.includes(id);
-  const Tag = href ? Link : 'div';
+  const WrapperTag = href ? 'div' : 'label';
+  const TitleTag = href ? Link : 'label';
+  const titleProps = href ? { href } : { htmlFor: id };
 
   return (
     <li className="!m-0 before:hidden">
-      <label className="relative block cursor-pointer pl-[30px]" htmlFor={id}>
+      <WrapperTag
+        className={clsx('relative block pl-[30px]', !href && 'cursor-pointer')}
+        htmlFor={!href ? id : null}
+      >
         <input
           className={clsx(
-            'remove-autocomplete-styles pointer-events-none appearance-none',
-            'absolute left-0 top-0.5 z-10 size-4 rounded-sm border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
+            'remove-autocomplete-styles appearance-none',
+            !href ? 'pointer-events-none' : 'cursor-pointer',
+            'absolute left-0 top-1 z-10 size-4 border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
             'dark:border-gray-new-20 dark:hover:bg-white/5',
-            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-center before:bg-no-repeat',
+            'before:absolute before:inset-0 before:z-10 before:bg-[url(/images/checklist.svg)] before:bg-[size:10px_10px] before:bg-center before:bg-no-repeat',
             'before:opacity-0 before:transition-opacity before:duration-200 checked:before:opacity-100',
-            'dark:before:invert dark:checked:border-gray-new-20'
+            'dark:before:invert dark:checked:border-gray-new-30'
           )}
           type="checkbox"
           id={id}
           checked={isChecked}
           onChange={() => onToggle(id)}
         />
-        <h3 className="m-0 text-lg font-medium leading-tight tracking-normal">
-          <Tag className="" href={href || null} {...otherProps}>
-            {title}
-          </Tag>
-        </h3>
-      </label>
-      <div className="mt-2 pl-[30px] text-gray-new-20 dark:text-gray-new-80 md:mt-1.5 [&_p]:m-0 [&_p]:leading-snug [&_p]:tracking-tight">
+        <TitleTag
+          className={clsx(
+            'm-0 w-fit cursor-pointer text-lg font-normal leading-tight tracking-normal',
+            'text-black-pure dark:text-white',
+            href &&
+              'underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100 sm:break-words'
+          )}
+          {...titleProps}
+          {...otherProps}
+        >
+          {title}
+        </TitleTag>
+      </WrapperTag>
+      <div className="mt-2 pl-[30px] text-gray-new-40 opacity-90 dark:text-gray-new-60 md:mt-1.5 [&_p]:m-0 [&_p]:text-base [&_p]:tracking-tight">
         {children}
       </div>
     </li>

@@ -47,9 +47,9 @@ cd my-app
 </details>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm install @neondatabase/auth@latest
 ```
 
@@ -66,9 +66,9 @@ Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label=".env">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename=".env"
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
@@ -88,9 +88,9 @@ Create a unified auth instance in `lib/auth/server.ts`. This single instance pro
 See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="lib/auth/server.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="lib/auth/server.ts"
 import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 export const auth = createNeonAuth({
@@ -110,9 +110,9 @@ export const auth = createNeonAuth({
 Create an API route handler that proxies auth requests. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
 export const { GET, POST } = auth.handler();
@@ -127,9 +127,9 @@ export const { GET, POST } = auth.handler();
 The middleware ensures users are authenticated before accessing protected routes. Create `proxy.ts` file in your project root:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="proxy.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="proxy.ts"
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
@@ -165,9 +165,9 @@ The server-side `auth` instance was already created in a previous step. The clie
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="lib/auth/client.ts">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="lib/auth/client.ts"
 'use client';
 
 import { createAuthClient } from '@neondatabase/auth/next';
@@ -216,9 +216,9 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
 </details>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="app/layout.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="app/layout.tsx"
 import { authClient } from '@/lib/auth/client'; // [!code ++]
 import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react'; // [!code ++]
 import type { Metadata } from "next";
@@ -278,9 +278,9 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="app/globals.css">
+<TwoColumnLayout.Block>
 
-```css
+```css filename="app/globals.css"
 @import "tailwindcss";
 @import "@neondatabase/auth/ui/tailwind"; // [!code ++]
 
@@ -480,7 +480,7 @@ export async function GET() {
 <TwoColumnLayout.Step title="Start your app">
 <TwoColumnLayout.Block>
 
-Start the development server, and then open http://localhost:3000/
+Start the development server, and then open [http://localhost:3000](http://localhost:3000)
 
 - Visit `/auth/sign-in` to sign in or sign up
 - Visit `/account/settings` to view account settings
@@ -493,9 +493,9 @@ Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- 
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm run dev
 ```
 

@@ -24,15 +24,15 @@ const Tabs = ({ labels = [], children }) => {
   };
 
   return (
-    <figure className="my-5 max-w-full overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
-      <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap gap-5 overflow-auto pl-5 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-90 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
+    <figure className="my-5 max-w-full overflow-hidden border border-gray-new-80 dark:border-gray-new-20">
+      <div className="no-scrollbars relative flex min-h-11 w-full flex-nowrap gap-5 overflow-auto bg-gray-new-98 pl-5 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
         {labels.map((label, index) => (
           <button
             className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b pb-3.5 pt-2.5 text-sm font-medium leading-none transition-colors duration-200 hover:text-black-new dark:hover:text-gray-new-80',
+              'relative z-10 cursor-pointer whitespace-nowrap border-b pb-3.5 pt-2.5 text-sm font-medium leading-none tracking-extra-tight transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
               index === currentIndex
-                ? 'border-black-new text-black-new after:opacity-100 dark:border-white dark:text-white'
-                : 'border-transparent text-gray-new-60'
+                ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
+                : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
             )}
             key={`lb-${index}`}
             type="button"
