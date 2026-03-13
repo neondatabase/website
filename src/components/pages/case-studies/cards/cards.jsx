@@ -134,7 +134,7 @@ const Cards = ({ items, categories }) => {
                 type="search"
                 placeholder="Search stories..."
                 value={searchQuery}
-                className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none md:text-base"
                 aria-label="Search case studies"
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -154,14 +154,17 @@ const Cards = ({ items, categories }) => {
                   type="search"
                   placeholder="Search stories..."
                   value={searchQuery}
-                  className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                  className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none md:text-base"
                   aria-label="Search case studies"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
 
-            <nav className="sticky top-24 flex flex-col gap-2 lg:static lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto lg:no-scrollbars md:flex-none md:-mx-5 md:px-5" aria-label="Case study categories">
+            <nav
+              className="lg:no-scrollbars sticky top-24 flex flex-col gap-2 lg:static lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto md:-mx-5 md:flex-none md:px-5"
+              aria-label="Case study categories"
+            >
               {categories.map(({ name, slug, featuredCaseStudy }) => {
                 const isActive = slug === activeCategory.slug;
                 const label = getCategoryLabel(slug) ?? name;

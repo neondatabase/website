@@ -78,7 +78,7 @@ const BlogPage = async ({ params }) => {
             {...pageBlogPost}
           />
           <ChangelogForm
-            className="col-start-4 col-end-10 mx-5 mt-4 mb-8 hidden xl:col-start-1 xl:col-end-9 lg:mx-0 lg:flex"
+            className="col-start-4 col-end-10 mx-5 mb-8 mt-4 hidden xl:col-start-1 xl:col-end-9 lg:mx-0 lg:flex"
             isBlog
           />
           <Content

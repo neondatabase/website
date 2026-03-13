@@ -80,10 +80,7 @@ const Testimonials = () => (
       className="pointer-events-none absolute right-0 top-0 h-full w-auto md:hidden"
       aria-hidden
     />
-    <Container
-      size="1280"
-      className="relative z-10"
-    >
+    <Container size="1280" className="relative z-10">
       <div className="flex flex-col border-l border-gray-new-50 pl-8 xl:pl-6 lg:pl-[18px] sm:border-l-0 sm:pl-0">
         <div className="flex items-end gap-2 sm:gap-1.5">
           <Image

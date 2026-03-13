@@ -76,8 +76,8 @@ const Hero = ({ title, description, date, category, authors, className = null })
           </span>
           {authors.length === 1 && (
             <>
-              <span className="">–</span>
-              <span className="mt-1 text-[15px] leading-dense tracking-extra-tight text-gray-new-70">
+              <span>–</span>
+              <span className="mt-0.5 text-[15px] leading-dense tracking-extra-tight text-gray-new-70">
                 {authors[0].author.postAuthor?.role}
               </span>
             </>

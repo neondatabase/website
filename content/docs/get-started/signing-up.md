@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-02-15T20:51:54.110Z'
+updatedOn: '2026-03-12T17:34:43.554Z'
 ---
 
 <InfoBlock>
@@ -81,6 +81,10 @@ The steps should be self-explanatory, but it's important to understand a few key
   - You can create additional branches for development, staging, previews, and other workflows as needed
 
 At this point, if you want to just get started connecting Neon to your toolchain, go to [Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+
+<Admonition type="tip" title="Working with a team?">
+Your organization is now set up. You can start inviting teammates immediately. See [Invite members](/docs/manage/orgs-manage#invite-members).
+</Admonition>
 
 ## Add sample data
 
