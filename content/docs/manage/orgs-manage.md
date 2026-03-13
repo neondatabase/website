@@ -39,6 +39,8 @@ To invite Members:
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
 
+To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
+
 ## Set permissions
 
 Permissions within the organization are exclusively managed by Admins. As an Admin:
