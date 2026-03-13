@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-02-15T20:51:54.114Z'
+updatedOn: '2026-03-13T18:10:11.938Z'
 ---
 
 ## Our mission

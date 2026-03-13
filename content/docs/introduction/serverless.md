@@ -7,7 +7,7 @@ summary: >-
   instant provisioning, automatic scaling, and usage-based billing, enabling
   efficient management of multiple databases without server maintenance.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.218Z'
+updatedOn: '2026-03-13T18:10:11.942Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.

@@ -1,15 +1,15 @@
 ---
 title: Neon vs Lakebase
-subtitle: Two products, one architectural foundation — how to choose
+subtitle: 'Two products, one architectural foundation — how to choose'
 summary: >-
   Compares Neon and Databricks Lakebase, two Postgres database platforms built
-  on the same lakebase architectural foundation but optimized for different environments
-  and team structures.
+  on the same lakebase architectural foundation but optimized for different
+  environments and team structures.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-02-06T22:07:33.082Z'
+updatedOn: '2026-03-13T18:10:11.941Z'
 ---
 
 In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
