@@ -16,7 +16,7 @@ updatedOn: '2026-02-06T22:07:33.082Z'
 
 Instead of running Postgres as a single stateful system tied to a VM and its filesystem, Neon is a serverless database that splits the system into two independent layers: compute and storage. These layers communicate over the network, with a stream of write-ahead log (WAL) records connecting them.
 
-This separation is what puts Neon in the lakebase category of OLTP databases. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
+This separation is what puts Neon in the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) of OLTP databases. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
 
 - **Ephemeral compute layer**: optimized for latency and execution. This layer runs Postgres, executing queries and transactions using RAM and local NVMe for performance. Compute nodes do not own durable state and can be replaced freely.
 - **Durable storage layer**: optimized for correctness, history, and scale. This layer defines durability by replicating WAL via quorum, materializes Postgres pages on demand, and stores long-term, immutable history in object storage.

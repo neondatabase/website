@@ -12,7 +12,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:33.082Z'
 ---
 
-In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the lakebase category and how to determine whether Neon or Lakebase is a better fit for your workload.
+In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
 
 ### Lakebase architecture: Postgres built on object storage
 
