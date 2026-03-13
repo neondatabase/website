@@ -192,6 +192,8 @@ updatedOn: '2026-02-06T22:07:32.986Z'
 
 <a href="/docs/guides/liquibase" title="Liquibase" description="Use Liquibase with Neon" icon="liquibase"></a>
 
+<a href="/docs/guides/pgfence" title="pgfence" description="Analyze migration safety with pgfence" icon="cli"></a>
+
 <a href="/docs/guides/prisma-migrations" title="Prisma" description="Schema migration with Neon Postgres and Prisma ORM" icon="prisma"></a>
 
 <a href="/docs/guides/rails-migrations" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
