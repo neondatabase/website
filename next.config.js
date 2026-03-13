@@ -12,6 +12,7 @@ const defaultConfig = {
   transpilePackages: ['geist'],
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85, 90, 95, 99, 100],
     localPatterns: [
       {
         pathname: '/docs/og',
@@ -618,6 +619,7 @@ const defaultConfig = {
     };
   },
   turbopack: {
+    root: __dirname,
     rules: {
       '*.inline.svg': {
         loaders: [
