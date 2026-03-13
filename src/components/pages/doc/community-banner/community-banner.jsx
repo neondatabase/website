@@ -18,11 +18,11 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
     <span className="absolute -top-px right-1.5 h-px w-[28%] bg-[radial-gradient(circle,rgba(0,229,153,0.7)0%,rgba(0,229,153,0.05)100%)] sm:hidden" />
     <div className="relative flex items-center overflow-hidden rounded-[10px] bg-[#0A0A0A] p-8 sm:p-6">
       <div>
-        <h2 className="!my-0 max-w-[334px] text-[26px] font-semibold leading-dense tracking-extra-tight text-white xs:text-2xl">
+        <h2 className="my-0! max-w-[334px] text-[26px] leading-dense font-semibold tracking-extra-tight text-white xs:text-2xl">
           {children}
         </h2>
         <Button
-          className="mt-5 !px-5 !py-2.5 !font-semibold !text-black-new hover:bg-[#00e5bf]"
+          className="mt-5 px-5! py-2.5! font-semibold! text-black-new! hover:bg-[#00e5bf]"
           to={buttonUrl}
           size="xs"
           theme="primary"
@@ -34,15 +34,15 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
         </Button>
       </div>
       <img
-        className="absolute right-0 top-0 !my-0 h-full md:hidden"
-        src={ellipse}
+        className="absolute top-0 right-0 my-0! h-full md:hidden"
+        src={ellipse.src}
         alt=""
         width={324}
         height={180}
         loading="lazy"
       />
       <Image
-        className="absolute right-0 top-0 !my-0 h-full w-auto [@media(max-width:500px)]:hidden"
+        className="absolute top-0 right-0 my-0! h-full w-auto [@media(max-width:500px)]:hidden"
         src={logos[logo]}
         alt=""
         width={280}

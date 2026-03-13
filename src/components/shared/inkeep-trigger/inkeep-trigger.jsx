@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import LINKS from 'constants/links';
 import { baseSettings, aiChatSettings } from 'lib/inkeep-settings';
@@ -13,8 +13,8 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import InkeepAIButton from './inkeep-ai-button';
 import InkeepSearch from './inkeep-search';
 
-const InkeepCustomTrigger = dynamic(
-  () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
+const InkeepModalSearchAndChat = dynamic(
+  () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalSearchAndChat),
   { ssr: false }
 );
 
@@ -36,8 +36,8 @@ const getTabsOrder = (pageType) => {
 };
 
 const modalViews = {
-  SEARCH: 'SEARCH',
-  AI_CHAT: 'AI_CHAT',
+  SEARCH: 'search',
+  AI_CHAT: 'chat',
 };
 
 /*
@@ -77,10 +77,6 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     }
   }, [pathname]);
 
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
   let themeMode;
   switch (true) {
     case theme === 'system':
@@ -104,9 +100,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     };
   }, []);
 
-  const inkeepCustomTriggerProps = {
-    isOpen,
-    onClose: handleClose,
+  const inkeepModalProps = {
     baseSettings: {
       ...baseSettings,
       colorMode: {
@@ -140,9 +134,8 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       },
     },
     modalSettings: {
-      defaultView: defaultModalView,
-      forceInitialDefaultView: true,
-      isModeSwitchingEnabled: false,
+      isOpen,
+      onOpenChange: setIsOpen,
     },
     searchSettings: {
       tabSettings: {
@@ -153,6 +146,9 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       ...aiChatSettings,
       ...(sharedChatId && { chatId: sharedChatId }),
     },
+    defaultView: defaultModalView,
+    forceDefaultView: true,
+    canToggleView: false,
   };
 
   const handleClick = (type) => {
@@ -170,7 +166,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       {!isNotFoundPage && (
         <InkeepAIButton className="shrink-0" handleClick={() => handleClick(modalViews.AI_CHAT)} />
       )}
-      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
+      <InkeepModalSearchAndChat {...inkeepModalProps} />
     </div>
   );
 };

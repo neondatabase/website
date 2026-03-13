@@ -10,7 +10,7 @@ const baseSettings = {
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
   customIcons: {
-    close: { custom: closeIcon },
+    close: { custom: closeIcon.src },
   },
   customCardSettings: [
     {

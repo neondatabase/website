@@ -3,14 +3,14 @@
 import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import { baseSettings, aiChatSettings } from 'lib/inkeep-settings';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const InkeepCustomTrigger = dynamic(
-  () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
+const InkeepModalChat = dynamic(
+  () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalChat),
   { ssr: false }
 );
 
@@ -24,10 +24,6 @@ const ButtonAiHelper = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
 
   let themeMode;
   switch (true) {
@@ -54,9 +50,7 @@ const ButtonAiHelper = ({
     [botName, placeholder, introMessage, quickQuestions]
   );
 
-  const inkeepCustomTriggerProps = {
-    isOpen,
-    onClose: handleClose,
+  const inkeepModalProps = {
     baseSettings: {
       ...baseSettings,
       colorMode: {
@@ -87,9 +81,8 @@ const ButtonAiHelper = ({
       },
     },
     modalSettings: {
-      defaultView: 'AI_CHAT',
-      forceInitialDefaultView: true,
-      isModeSwitchingEnabled: false,
+      isOpen,
+      onOpenChange: setIsOpen,
     },
     aiChatSettings: customAiChatSettings,
   };
@@ -99,7 +92,7 @@ const ButtonAiHelper = ({
       <Button className={className} theme="white-filled" size="new" onClick={handleButtonClick}>
         {children}
       </Button>
-      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
+      <InkeepModalChat {...inkeepModalProps} />
     </>
   );
 };
