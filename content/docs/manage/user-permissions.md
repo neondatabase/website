@@ -68,15 +68,15 @@ The following table shows what each role can do regarding integrations:
 
 The following table shows what each role can do with [snapshots](/docs/guides/snapshots):
 
-| Action                          | Admin | Member | Collaborator |
-| ------------------------------- | :---: | :----: | :----------: |
-| List snapshots                  |  ✅   |   ✅   |      ✅      |
-| Create snapshots                |  ✅   |   ✅   |      ✅      |
-| Restore snapshots               |  ✅   |   ✅   |      ✅      |
-| Delete snapshots                |  ✅   |   ✅   |      ✅      |
-| Rename snapshots                |  ✅   |   ✅   |      ✅      |
-| View snapshot schedule          |  ✅   |   ✅   |      ✅      |
-| Set/update snapshot schedule    |  ✅   |   ✅   |      ✅      |
+| Action                       | Admin | Member | Collaborator |
+| ---------------------------- | :---: | :----: | :----------: |
+| List snapshots               |  ✅   |   ✅   |      ✅      |
+| Create snapshots             |  ✅   |   ✅   |      ✅      |
+| Restore snapshots            |  ✅   |   ✅   |      ✅      |
+| Delete snapshots             |  ✅   |   ✅   |      ✅      |
+| Rename snapshots             |  ✅   |   ✅   |      ✅      |
+| View snapshot schedule       |  ✅   |   ✅   |      ✅      |
+| Set/update snapshot schedule |  ✅   |   ✅   |      ✅      |
 
 </Steps>
 
