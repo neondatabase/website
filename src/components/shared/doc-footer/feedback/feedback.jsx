@@ -28,7 +28,7 @@ const Feedback = ({ slug }) => {
     <div className="relative">
       <div
         className={clsx(
-          'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-x-0 xs:space-y-4',
+          'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-y-4 xs:space-x-0',
           isFeedbackSent ? 'invisible opacity-0' : 'visible opacity-100'
         )}
       >
@@ -56,7 +56,7 @@ const Feedback = ({ slug }) => {
       </div>
       <span
         className={clsx(
-          'absolute right-0 top-1/2 -translate-y-1/2 text-sm leading-tight transition-opacity duration-300',
+          'absolute top-1/2 right-0 -translate-y-1/2 text-sm leading-tight transition-opacity duration-300',
           isFeedbackSent ? 'visible opacity-100' : 'invisible opacity-0'
         )}
       >

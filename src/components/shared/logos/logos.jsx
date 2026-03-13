@@ -115,7 +115,7 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
       <ul
         key={index}
         className={clsx(
-          'logos-content !m-0 flex !p-0',
+          'logos-content m-0! flex p-0!',
           staticDesktop && 'w-full justify-between xl:w-auto xl:justify-normal',
           staticDesktop && index === 1 && 'hidden xl:flex'
         )}
@@ -125,7 +125,7 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
           const Logo = allLogos[logo];
           if (!Logo) return null;
           return (
-            <li key={index} className="!m-0 before:!content-none">
+            <li key={index} className="m-0! before:content-none!">
               <Logo className={clsx('w-auto', sizes[size], logoClassName)} />
             </li>
           );

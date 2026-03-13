@@ -53,10 +53,10 @@ const SubprocessorsForm = () => {
         'dark:border-gray-new-15 dark:bg-gray-new-10'
       )}
     >
-      <h2 className="!my-0 font-title text-2xl font-medium leading-dense tracking-extra-tight">
+      <h2 className="my-0! font-title text-2xl leading-dense font-medium tracking-extra-tight">
         {title}
       </h2>
-      <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
+      <p className="mt-2.5 leading-tight font-light text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
       {!isSent ? (
@@ -70,7 +70,7 @@ const SubprocessorsForm = () => {
               name="email"
               value={email}
               className={clsx(
-                'remove-autocomplete-styles h-10 flex-1 rounded border-none bg-gray-new-94 px-4 py-3 md:w-full',
+                'h-10 flex-1 rounded border-none bg-gray-new-94 px-4 py-3 remove-autocomplete-styles md:w-full',
                 'xl:text-sm',
                 'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
@@ -83,8 +83,8 @@ const SubprocessorsForm = () => {
 
           <Button
             className={clsx(
-              'px-6 py-3 font-semibold leading-none md:w-full',
-              !isValid && 'pointer-events-none select-none opacity-70'
+              'px-6 py-3 leading-none font-semibold md:w-full',
+              !isValid && 'pointer-events-none opacity-70 select-none'
             )}
             type="submit"
             theme="primary"

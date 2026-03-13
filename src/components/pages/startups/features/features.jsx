@@ -34,12 +34,12 @@ const FEATURES = [
 ];
 
 const Features = () => (
-  <section className="features mb-60 mt-[200px] xl:mb-[200px] xl:mt-[184px] lg:mb-40 lg:mt-36 md:mb-32 md:mt-24">
+  <section className="features mt-[200px] mb-60 lg:mt-36 lg:mb-40 xl:mt-[184px] xl:mb-[200px] md:mt-24 md:mb-32">
     <Container className="flex flex-col items-center gap-14 lg:gap-12 md:gap-10" size="1280">
-      <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:max-w-[540px] xl:text-5xl lg:text-[40px] md:text-[32px]">
+      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-extra-tight lg:text-[40px] xl:max-w-[540px] xl:text-5xl md:text-[32px]">
         Serverless Postgres, built for&nbsp;developers
       </h2>
-      <ul className="grid grid-cols-4 gap-12 xl:grid-cols-2 sm:grid-cols-1">
+      <ul className="grid grid-cols-4 gap-12 sm:grid-cols-1 xl:grid-cols-2">
         {FEATURES.map(({ icon, title, description }, index) => (
           <li className="max-w-[300px] md:max-w-xs" key={index}>
             <Image
@@ -50,7 +50,7 @@ const Features = () => (
               height={22}
               loading="lazy"
             />
-            <h3 className="text-xl font-medium leading-snug tracking-extra-tight">{title}</h3>
+            <h3 className="text-xl leading-snug font-medium tracking-extra-tight">{title}</h3>
             <p className="mt-2 leading-snug tracking-extra-tight text-gray-new-70">{description}</p>
           </li>
         ))}

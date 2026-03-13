@@ -63,7 +63,7 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="bg-grey-15 flex items-center justify-between gap-3 border-b border-gray-new-90 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
+        <div className="bg-grey-15 flex items-center justify-between gap-3 border-b border-gray-new-90 px-4 py-3.5 text-[13px] leading-none font-medium tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
           <span className="truncate">{filename}</span>
         </div>
       )}
@@ -71,7 +71,7 @@ const CodeBlockWrapper = ({
 
       <button
         className={clsx(
-          'invisible absolute right-4 border border-gray-7 bg-white p-1.5 text-gray-new-50 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-new-90 group-hover:visible group-hover:opacity-100 dark:border-[#303236] dark:bg-gray-new-10 dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          'invisible absolute right-4 border border-gray-7 bg-white p-1.5 text-gray-new-50 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 hover:bg-gray-new-90 lg:visible lg:opacity-100 dark:border-[#303236] dark:bg-gray-new-10 dark:text-gray-new-60 dark:hover:bg-gray-new-8',
           filename ? 'top-[58px]' : 'top-4',
           copyButtonClassName
         )}

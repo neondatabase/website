@@ -11,7 +11,7 @@ import noiseBackground from './image/noise-background.svg';
 const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
   <Link
     className={clsx(
-      'group relative flex h-[340px] w-[320px] !items-end overflow-hidden border border-gray-new-10 bg-black-pure p-6 lg:w-auto md:h-[240px] md:w-[320px]',
+      'group relative flex h-[340px] w-[320px] items-end! overflow-hidden border border-gray-new-10 bg-black-pure p-6 lg:w-auto md:h-[240px] md:w-[320px]',
       className
     )}
     to={links.whyNeon}
@@ -35,7 +35,7 @@ const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
     />
 
     <div className="flex flex-col gap-y-2">
-      <p className="flex items-baseline gap-x-2.5 whitespace-nowrap text-2xl font-medium leading-none tracking-tighter text-white lg:text-lg md:text-base">
+      <p className="flex items-baseline gap-x-2.5 text-2xl leading-none font-medium tracking-tighter whitespace-nowrap text-white lg:text-lg md:text-base">
         What is Neon
         <ArrowTopRightIcon className="-translate-x-2 scale-75 text-white opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100" />
       </p>

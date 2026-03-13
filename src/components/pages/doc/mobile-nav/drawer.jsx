@@ -88,7 +88,7 @@ DrawerFooter.propTypes = {
 const DrawerTitle = ({ className, ...props }) => (
   <DrawerPrimitive.Title
     data-slot="drawer-title"
-    className={clsx('text-lg font-semibold leading-none tracking-tight', className)}
+    className={clsx('text-lg leading-none font-semibold tracking-tight', className)}
     {...props}
   />
 );

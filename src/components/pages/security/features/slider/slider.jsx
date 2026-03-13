@@ -64,10 +64,10 @@ const Slider = ({ title, items }) => {
 
   return (
     <div className="features-slider">
-      <div className="relative mb-8 w-full overflow-hidden lg:mb-6 sm:mb-[18px]">
+      <div className="relative mb-8 w-full overflow-hidden sm:mb-[18px] lg:mb-6">
         <h3
           className={clsx(
-            'w-fit text-lg uppercase leading-none text-gray-new-50 lg:text-[13px]',
+            'w-fit text-lg leading-none text-gray-new-50 uppercase lg:text-[13px]',
             'after:pointer-events-none after:absolute after:top-1/2 after:ml-5 after:h-px after:w-full after:-translate-y-full after:bg-gray-new-20'
           )}
         >
@@ -75,7 +75,7 @@ const Slider = ({ title, items }) => {
         </h3>
       </div>
       <Swiper
-        className="!overflow-visible"
+        className="overflow-visible!"
         wrapperTag="ul"
         slidesPerView="auto"
         spaceBetween={12}
@@ -95,7 +95,7 @@ const Slider = ({ title, items }) => {
         {items.map(({ title, description, link, icon }) => (
           <SwiperSlide
             tag="li"
-            className="!h-[247px] !w-[422px] lg:!h-[229px] lg:!w-80"
+            className="h-[247px]! w-[422px]! lg:h-[229px]! lg:w-80!"
             key={title}
           >
             <div
@@ -109,10 +109,10 @@ const Slider = ({ title, items }) => {
                 <GradientBorder withBlend />
               </div>
               <div>
-                <h4 className="swiper-no-swiping w-fit text-lg font-medium leading-snug tracking-extra-tight lg:pointer-events-none lg:text-[15px]">
+                <h4 className="swiper-no-swiping w-fit text-lg leading-snug font-medium tracking-extra-tight lg:pointer-events-none lg:text-[15px]">
                   {title}
                 </h4>
-                <p className="swiper-no-swiping mt-2.5 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 lg:pointer-events-none lg:mt-2 lg:text-sm">
+                <p className="swiper-no-swiping mt-2.5 leading-snug font-light tracking-extra-tight text-pretty text-gray-new-70 lg:pointer-events-none lg:mt-2 lg:text-sm">
                   {description}
                 </p>
                 {link && (
@@ -128,13 +128,13 @@ const Slider = ({ title, items }) => {
                   </Link>
                 )}
               </div>
-              <GradientBorder className="!rounded-[10px]" withBlend />
+              <GradientBorder className="rounded-[10px]!" withBlend />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
       <div
-        className={clsx('mt-6 lg:mt-[18px] sm:mt-4', {
+        className={clsx('mt-6 sm:mt-4 lg:mt-[18px]', {
           hidden: items.length < 4,
           '2xl:block': items.length === 3,
           'sm:block': items.length === 2,

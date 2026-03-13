@@ -6,10 +6,10 @@
   }
 
   .admonition-text {
-    @apply text-base font-normal leading-normal tracking-tight dark:text-[#D7D8DB];
+    @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
     a {
-      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color,opacity] duration-200 ease-in-out hover:border-secondary-8 dark:border-b-0 dark:text-white dark:underline dark:decoration-dotted dark:underline-offset-[3px] dark:hover:opacity-80 sm:break-words;
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color,opacity] duration-200 ease-in-out hover:border-secondary-8 sm:break-words dark:border-b-0 dark:text-white dark:underline dark:decoration-dotted dark:underline-offset-[3px] dark:hover:opacity-80;
     }
     p:first-child {
       @apply mt-0;
@@ -72,9 +72,9 @@
   }
 
   .prose-doc {
-    @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
-    @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
+    @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90 prose-strong:text-gray-new-8 dark:prose-strong:text-gray-new-90;
+    @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-semibold prose-headings:text-black-new dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out prose-a:hover:decoration-[rgba(0,0,0,0.70)] prose-a:sm:break-words dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:prose-a:hover:decoration-[rgba(255,255,255,0.70)];
     @apply prose-pre:px-0;
 
     > * {
@@ -96,23 +96,23 @@
     }
 
     h2 {
-      @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter;
+      @apply m-0 pt-8 text-[28px] leading-tight font-medium tracking-tighter;
     }
 
     h3 {
-      @apply text-xl font-medium leading-snug tracking-extra-tight;
+      @apply text-xl leading-snug font-medium tracking-extra-tight;
     }
 
     h4 {
-      @apply text-lg font-medium leading-snug tracking-extra-tight;
+      @apply text-lg leading-snug font-medium tracking-extra-tight;
     }
 
     p {
-      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
+      @apply mt-[18px] mb-6 text-lg leading-normal font-normal tracking-tight text-black-new dark:text-gray-new-85;
     }
 
     .admonition h4 {
-      @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
+      @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
     }
 
     .anchor-heading {
@@ -144,9 +144,9 @@
       @apply my-6 pl-[34px] md:pl-4;
 
       > li {
-        @apply text-[18px] font-normal leading-normal text-gray-new-30 dark:text-gray-new-85;
+        @apply text-[18px] leading-normal font-normal text-gray-new-30 dark:text-gray-new-85;
         &::before {
-          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
+          @apply absolute top-0 -left-4 text-[18px] leading-normal font-normal text-gray-new-30 content-['-'] md:-left-3.5 dark:text-gray-new-85;
         }
       }
     }
@@ -217,19 +217,19 @@
         @apply px-0;
 
         > code {
-          @apply inline-block w-full px-6 py-1.5 !leading-relaxed wrap-anywhere;
+          @apply inline-block w-full px-6 py-1.5 leading-relaxed! wrap-anywhere;
         }
       }
 
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !leading-[1.75] !text-black-new dark:!text-white dark:![text-shadow:unset];
+        @apply font-mono! text-sm leading-[1.75]! text-black-new! dark:text-white! dark:[text-shadow:unset]!;
       }
     }
 
     :not(pre) > code {
-      @apply break-words rounded border border-gray-new-90 bg-gray-new-94 !px-1 !py-px !font-mono text-sm !font-normal leading-tight tracking-extra-tight !text-black-new dark:border-gray-new-30 dark:bg-black dark:!text-white;
+      @apply rounded border border-gray-new-90 bg-gray-new-94 px-1! py-px! font-mono! text-sm leading-tight font-normal! tracking-extra-tight break-words text-black-new! dark:border-gray-new-30 dark:bg-black dark:text-white!;
 
       &::before,
       &::after {
@@ -241,7 +241,7 @@
       code {
         white-space: break-spaces !important;
 
-        @apply !max-w-full !break-words;
+        @apply max-w-full! break-words!;
       }
     }
 
@@ -258,7 +258,7 @@
       @apply font-normal not-italic;
 
       p {
-        @apply my-0 text-lg font-normal leading-normal tracking-tight text-gray-new-8 dark:text-gray-new-85;
+        @apply my-0 text-lg leading-normal font-normal tracking-tight text-gray-new-8 dark:text-gray-new-85;
 
         &::before,
         &::after {
@@ -268,7 +268,7 @@
 
       cite,
       footer {
-        @apply mt-5 flex items-center gap-2.5 text-sm font-medium leading-tight tracking-tight text-gray-new-8 dark:text-gray-new-90;
+        @apply mt-5 flex items-center gap-2.5 text-sm leading-tight font-medium tracking-tight text-gray-new-8 dark:text-gray-new-90;
       }
     }
 
@@ -282,7 +282,7 @@
     }
 
     details summary {
-      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-new dark:text-white;
+      @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-new dark:text-white;
       list-style: none;
 
       &::-webkit-details-marker {
@@ -303,7 +303,7 @@
     }
 
     details > *:not(summary) {
-      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
+      @apply mt-6 pl-[26px] text-base leading-normal font-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
     }
 
     /* Ensure list items inside details have proper spacing */
@@ -344,7 +344,7 @@
     }
 
     pre {
-      @apply overflow-x-auto rounded-md !bg-gray-new-94/60 dark:!bg-gray-new-15;
+      @apply overflow-x-auto rounded-md bg-gray-new-94/60! dark:bg-gray-new-15!;
     }
 
     :not(pre) > code {
@@ -394,7 +394,7 @@
 
     p,
     ul {
-      @apply mt-7 xl:mt-6 lg:mt-5 sm:mt-4;
+      @apply mt-7 sm:mt-4 lg:mt-5 xl:mt-6;
     }
 
     strong {

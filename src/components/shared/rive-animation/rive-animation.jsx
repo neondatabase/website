@@ -56,14 +56,14 @@ const RiveAnimation = ({
     >
       {showLazyLoadHelper && (
         <span
-          className={clsx(intersectionClassName, 'absolute left-1/2 top-0 -z-10 h-full w-px')}
+          className={clsx(intersectionClassName, 'absolute top-0 left-1/2 -z-10 h-full w-px')}
           ref={wrapperRef}
           aria-hidden
         />
       )}
       <div
         className={clsx(
-          'size-full [&_canvas]:!h-full [&_canvas]:!w-full',
+          'size-full [&_canvas]:h-full! [&_canvas]:w-full!',
           {
             'pointer-events-none': isTouch,
           },

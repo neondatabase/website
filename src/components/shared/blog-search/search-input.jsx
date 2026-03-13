@@ -29,7 +29,7 @@ const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
   }, []);
 
   return (
-    <div className={clsx('absolute right-0 top-1 md:w-full', className)}>
+    <div className={clsx('absolute top-1 right-0 md:w-full', className)}>
       <div className="ais-SearchBox">
         <input
           ref={inputRef}

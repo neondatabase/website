@@ -6,19 +6,19 @@ import LINKS from 'constants/links';
 import CopyCodeButton from './copy-code-button';
 
 const CTA = () => (
-  <section className="cta safe-paddings relative bg-[#151617]">
-    <div className="absolute inset-0 z-10 pb-9 pt-14 xl:pb-5 xl:pt-12 lg:pt-9 md:pb-6 md:pt-[52px]">
+  <section className="cta relative bg-[#151617] safe-paddings">
+    <div className="absolute inset-0 z-10 pt-14 pb-9 lg:pt-9 xl:pt-12 xl:pb-5 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
-        <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
+        <h2 className="text-[80px] leading-none tracking-tighter lg:text-[44px] xl:text-[64px] md:text-[32px]">
           The world's most advanced <br /> Postgres platform.
         </h2>
 
         <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
-          <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter xl:max-w-[480px] xl:text-[24px] lg:max-w-[520px] lg:text-[20px] md:text-[18px]">
+          <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter lg:max-w-[520px] lg:text-[20px] xl:max-w-[480px] xl:text-[24px] md:text-[18px]">
             Trusted by developers, ready for agents. <br className="xs:hidden" /> Build and scale
             applications faster with Neon.
           </p>
-          <div className="mb-2 flex items-center gap-5 xl:gap-4 lg:mb-0 md:w-full md:flex-col md:items-stretch md:gap-y-3">
+          <div className="mb-2 flex items-center gap-5 lg:mb-0 xl:gap-4 md:w-full md:flex-col md:items-stretch md:gap-y-3">
             <Button theme="white-filled" size="new" to={LINKS.signup}>
               Get started
             </Button>
@@ -31,7 +31,7 @@ const CTA = () => (
               Read the docs
             </Button>
             <CopyCodeButton
-              className="inline-flex items-center gap-x-3 font-mono !font-medium"
+              className="inline-flex items-center gap-x-3 font-mono font-medium!"
               code="npx neonctl init"
               copyText="npx neonctl@latest init"
             />

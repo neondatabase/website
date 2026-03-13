@@ -11,7 +11,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
     <div className="flex items-center gap-x-1.5">
       <Link
         className={clsx(
-          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-gray-new-50'
+          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] leading-none font-medium -tracking-extra-tight text-gray-new-50 uppercase'
         )}
         to={BLOG_BASE_PATH}
       >
@@ -21,16 +21,16 @@ const Hero = ({ title, description, date, category, authors, className = null })
       </Link>
       <span className="text-sm leading-none text-gray-new-50">/</span>
       <Link
-        className="py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-blue-70"
+        className="py-2 font-mono text-[13px] leading-none font-medium -tracking-extra-tight text-blue-70 uppercase"
         to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
       >
         {category.name}
       </Link>
     </div>
-    <h1 className="post-title mt-4 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[36px] sm:text-[32px] xs:text-[28px]">
+    <h1 className="post-title mt-4 text-5xl leading-dense font-medium tracking-tighter sm:text-[32px] lg:text-[40px] xl:text-[44px] md:text-[36px] xs:text-[28px]">
       {title}
     </h1>
-    <p className="mt-5 text-xl leading-snug tracking-tight text-gray-new-70 md:text-lg sm:text-base">
+    <p className="mt-5 text-xl leading-snug tracking-tight text-gray-new-70 sm:text-base md:text-lg">
       {description}
     </p>
     <div className="mt-4 flex items-center justify-between gap-x-4 border-t border-[#303236] py-4 sm:flex-col sm:items-start sm:gap-y-3">
@@ -62,7 +62,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
           <span
             className={clsx(
               'post-author',
-              'text-[15px] font-medium leading-dense tracking-extra-tight transition-colors duration-200'
+              'text-[15px] leading-dense font-medium tracking-extra-tight transition-colors duration-200'
             )}
           >
             {authors.length === 1
@@ -85,7 +85,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
         </div>
       </div>
       <time
-        className="text-sm font-medium uppercase leading-none -tracking-extra-tight text-gray-new-60"
+        className="text-sm leading-none font-medium -tracking-extra-tight text-gray-new-60 uppercase"
         dateTime={date}
       >
         {date}

@@ -57,7 +57,7 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Tooltip
-      className={clsx('w-sm z-20 !rounded-lg !bg-gray-new-15 !px-4 !pb-[14px] !pt-3')}
+      className={clsx('z-20 w-sm rounded-lg! bg-gray-new-15! px-4! pt-3! pb-[14px]!')}
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"

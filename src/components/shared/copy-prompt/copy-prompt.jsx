@@ -37,7 +37,7 @@ const CopyPrompt = (props) => {
         'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]'
       )}
     >
-      <div className="text-gray-900 flex-1 whitespace-pre-line break-words text-base font-medium dark:text-gray-new-80">
+      <div className="text-gray-900 flex-1 text-base font-medium break-words whitespace-pre-line dark:text-gray-new-80">
         {description}
       </div>
       <Button

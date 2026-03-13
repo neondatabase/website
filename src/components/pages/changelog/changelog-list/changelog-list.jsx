@@ -16,14 +16,14 @@ const ChangelogPost = (post) => {
     <article className="group flex first:mt-0 lg:flex-col lg:space-y-3">
       <div
         className={clsx(
-          'relative ml-1.5 w-full pb-10 pl-7 before:absolute before:-left-1 before:top-2.5 before:z-10 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 after:absolute after:bottom-0 after:left-0 after:top-0 after:h-auto after:w-px after:bg-gray-7 group-first:after:top-2.5 group-last:pb-0 group-last:after:bottom-4 dark:before:bg-secondary-2 dark:after:bg-gray-2 md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
+          'relative ml-1.5 w-full pb-10 pl-7 group-last:pb-0 before:absolute before:top-2.5 before:-left-1 before:z-10 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 after:absolute after:top-0 after:bottom-0 after:left-0 after:h-auto after:w-px after:bg-gray-7 group-first:after:top-2.5 group-last:after:bottom-4 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden md:pb-7 dark:before:bg-secondary-2 dark:after:bg-gray-2'
         )}
       >
         <Link
           className="transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45"
           to={changelogPath}
         >
-          <h2 className="whitespace-nowrap font-title text-xl font-medium leading-normal">
+          <h2 className="font-title text-xl leading-normal font-medium whitespace-nowrap">
             <time dateTime={date}>{dateLabel}</time>
           </h2>
         </Link>

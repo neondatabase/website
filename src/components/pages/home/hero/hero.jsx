@@ -13,9 +13,9 @@ import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
 
 const Hero = () => (
-  <section className="hero safe-paddings relative mt-16 lg:mt-14">
+  <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container
-      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
+      className="relative z-30 pt-[409px] lg:pt-[208px] xl:px-16 xl:pt-[216px] md:px-5! md:pt-[212px]"
       size="1600"
     >
       <Link href="#backed-by-giants">
@@ -24,7 +24,7 @@ const Hero = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
+      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter sm:text-[28px] lg:max-w-[640px] lg:text-[44px] xl:max-w-[760px] xl:text-[52px] md:mt-4">
         Fast Postgres Databases <br />
         for Teams and Agents
       </h1>
@@ -38,8 +38,8 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 select-none border-t border-gray-new-20 pt-10 lg:mt-14 lg:pt-7 sm:mt-12">
-        <Logos className="max-w-full !p-0" logos={logos} size="md" />
+      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none sm:mt-12 lg:mt-14 lg:pt-7">
+        <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
 
@@ -53,7 +53,7 @@ const Hero = () => (
       <PauseableVideo
         className={clsx(
           'relative left-1/2 w-[1920px] -translate-x-1/2',
-          'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
+          'sm:hidden lg:-top-2 lg:w-[1016px] xl:-top-[50px] xl:w-[1304px]'
         )}
         width={1920}
         height={832}
@@ -77,7 +77,7 @@ const Hero = () => (
       />
     </div>
 
-    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-[165px] lg:h-[156px] sm:h-[258px]" />
+    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] sm:h-[258px] lg:h-[156px] xl:h-[165px]" />
   </section>
 );
 

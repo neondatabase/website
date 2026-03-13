@@ -1,5 +1,5 @@
 [data-radix-popper-content-wrapper] {
-  @apply !z-50;
+  @apply z-50!;
 }
 
 .TooltipContent {

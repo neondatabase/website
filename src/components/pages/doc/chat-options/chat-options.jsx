@@ -37,7 +37,7 @@ const themeClassNames = {
   default: {
     block: 'mt-12 hidden xl:block',
     title: 'w-fit',
-    list: 'not-prose !mt-7 grid list-none grid-cols-4 gap-x-4 gap-y-5 !p-0 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1',
+    list: 'not-prose mt-7! grid list-none grid-cols-4 gap-x-4 gap-y-5 p-0! md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1',
     item: 'flex items-center gap-3 w-fit',
   },
 };
@@ -55,7 +55,7 @@ const ChatOptions = ({ isSidebar = false }) => {
           const Icon = icon;
 
           return (
-            <li className={clsx('!m-0 before:hidden', className)} key={link}>
+            <li className={clsx('m-0! before:hidden', className)} key={link}>
               <Link
                 className={clsx('group', classNames.item)}
                 to={link}
@@ -74,7 +74,7 @@ const ChatOptions = ({ isSidebar = false }) => {
                 </div>
                 <p
                   className={
-                    isSidebar ? 'sr-only' : 'whitespace-nowrap leading-tight tracking-extra-tight'
+                    isSidebar ? 'sr-only' : 'leading-tight tracking-extra-tight whitespace-nowrap'
                   }
                 >
                   {title}

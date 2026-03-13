@@ -5,9 +5,9 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative h-[820px] border-b border-gray-new-20 xl:h-[854px] lg:h-[665px] md:h-[587px]">
+  <section className="hero relative h-[820px] border-b border-gray-new-20 safe-paddings lg:h-[665px] xl:h-[854px] md:h-[587px]">
     <Container
-      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[360px] xl:pt-[353px] lg:pb-10 lg:pt-[210px] md:justify-end md:gap-y-36 md:pt-0"
+      className="flex h-full w-full flex-col items-center justify-between pt-[360px] pb-12 lg:pt-[210px] lg:pb-10 xl:pt-[353px] md:justify-end md:gap-y-36 md:pt-0"
       size="1600"
     >
       <Heading
@@ -18,12 +18,12 @@ const Hero = () => (
       >
         Neon is the Postgres layer for the internet
       </Heading>
-      <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
-        <p className="max-w-[704px] font-sans text-xl font-normal leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-md lg:max-w-[640px] lg:text-lg md:max-w-80 md:text-[15px] ">
+      <div className="flex w-full items-center justify-between lg:flex-col lg:items-start lg:gap-y-6 xl:items-end">
+        <p className="max-w-[704px] font-sans text-xl leading-snug font-normal tracking-extra-tight text-gray-new-80 lg:max-w-[640px] lg:text-lg xl:max-w-md md:max-w-80 md:text-[15px]">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
           a new level of performance, reliability, and scale.
         </p>
-        <div className="flex items-center justify-center gap-x-5 xl:gap-4 xl:pb-2 lg:pb-0 md:w-full md:flex-col">
+        <div className="flex items-center justify-center gap-x-5 lg:pb-0 xl:gap-4 xl:pb-2 md:w-full md:flex-col">
           <Button
             size="lg-new"
             theme="white-filled"

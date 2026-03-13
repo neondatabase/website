@@ -32,7 +32,7 @@ const DATA = [
 ];
 
 const Features = () => (
-  <ul className="mt-[168px] flex flex-col gap-[200px] xl:mt-[120px] xl:gap-44 lg:gap-[132px] md:mt-[84px] md:gap-[104px]">
+  <ul className="mt-[168px] flex flex-col gap-[200px] lg:gap-[132px] xl:mt-[120px] xl:gap-44 md:mt-[84px] md:gap-[104px]">
     {DATA.map(
       (
         { className, contentClassName, title, description, link, animation, animationClassName },
@@ -40,14 +40,14 @@ const Features = () => (
       ) => (
         <li
           className={clsx(
-            'flex gap-48 2xl:gap-20 xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
+            'flex gap-48 2xl:gap-20 lg:flex-col lg:items-start lg:gap-[72px] xl:gap-16 md:gap-[52px]',
             className
           )}
           key={id}
         >
           <div
             className={clsx(
-              'w-[480px] shrink-0 xl:w-[352px] lg:w-[544px] sm:w-full',
+              'w-[480px] shrink-0 sm:w-full lg:w-[544px] xl:w-[352px]',
               contentClassName
             )}
           >
@@ -56,10 +56,10 @@ const Features = () => (
             </Heading>
             <Link
               className={clsx(
-                'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg font-medium leading-none tracking-extra-tight',
-                'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]',
-                '[&>svg]:!text-gray-new-70 [&>svg]:!transition-all',
-                'hover:!text-white [&:hover>svg]:!text-white'
+                'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg leading-none font-medium tracking-extra-tight',
+                'sm:gap-1.5 sm:text-[15px] lg:mt-5 xl:mt-[30px] md:mt-[14px]',
+                '[&>svg]:text-gray-new-70! [&>svg]:transition-all!',
+                'hover:text-white! [&:hover>svg]:text-white!'
               )}
               theme="white"
               to={link}

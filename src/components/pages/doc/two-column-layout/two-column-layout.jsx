@@ -6,7 +6,7 @@ import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
 
 const TwoColumnLayout = ({ children }) => (
   <ol
-    className="two-column-layout !mt-0 inline-flex w-full flex-col !pl-0"
+    className="two-column-layout mt-0! inline-flex w-full flex-col pl-0!"
     style={{
       counterReset: 'section',
     }}
@@ -22,9 +22,9 @@ TwoColumnLayout.propTypes = {
 const TwoColumnStep = ({ title, children }) => (
   <li
     className={clsx(
-      'two-column-step relative !mb-0 !mt-12 flex gap-4 !pl-0',
-      'after:absolute after:-bottom-[34px] after:left-[11px] after:top-[34px] after:w-px after:bg-gray-new-90',
-      'first:!mt-7 last:after:bottom-0',
+      'two-column-step relative mt-12! mb-0! flex gap-4 pl-0!',
+      'after:absolute after:top-[34px] after:-bottom-[34px] after:left-[11px] after:w-px after:bg-gray-new-90',
+      'first:mt-7! last:after:bottom-0',
       'dark:after:bg-gray-new-20'
     )}
   >
@@ -40,7 +40,7 @@ const TwoColumnStep = ({ title, children }) => (
 
     <div className="w-full">
       {title && (
-        <h3 className="col-span-2 !mb-3 !mt-0 text-xl font-semibold leading-tight tracking-extra-tight">
+        <h3 className="col-span-2 mt-0! mb-3! text-xl leading-tight font-semibold tracking-extra-tight">
           {title}
         </h3>
       )}
@@ -59,17 +59,17 @@ TwoColumnStep.propTypes = {
 };
 
 const TwoColumnItem = ({ title, method, id, children }) => (
-  <li className="two-column-item relative !mb-0 !mt-12 block !pl-0">
+  <li className="two-column-item relative mt-12! mb-0! block pl-0!">
     {title && (
       <>
         <h2
           id={id}
-          className="anchor-heading group relative !mb-1 !mt-0 w-fit scroll-mt-20 text-2xl font-semibold leading-tight tracking-extra-tight lg:scroll-mt-5"
+          className="anchor-heading group relative mt-0! mb-1! w-fit scroll-mt-20 text-2xl leading-tight font-semibold tracking-extra-tight lg:scroll-mt-5"
         >
           <span>{title}</span>
           {id && (
             <a
-              className="px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
+              className="px-2 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 sm:hidden"
               href={`#${id}`}
               aria-label={`Link to ${title}`}
             >
@@ -78,11 +78,11 @@ const TwoColumnItem = ({ title, method, id, children }) => (
           )}
         </h2>
         {method && (
-          <div className="mb-4 mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 mb-4 flex flex-wrap gap-2">
             {method.split(',').map((m, index) => (
               <span
                 key={index}
-                className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs font-medium leading-normal text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60"
+                className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs leading-normal font-medium text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60"
               >
                 {m.trim()}
               </span>
@@ -112,7 +112,7 @@ const TwoColumnBlock = ({ label, children }) => (
         {label}
       </div>
     )}
-    <div className="size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_img]:!m-0">
+    <div className="size-full [&_img]:m-0! [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
       {children}
     </div>
   </div>

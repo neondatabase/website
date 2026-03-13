@@ -42,11 +42,11 @@ const Animation = ({ className, state = 0 }) => {
 
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
+      <span className="absolute top-0 left-1/2 -z-10 h-full w-px" aria-hidden />
       <div
         className={clsx(
           'relative max-w-none xl:pointer-events-none',
-          '[&_canvas]:!h-full [&_canvas]:!w-full',
+          '[&_canvas]:h-full! [&_canvas]:w-full!',
           className
         )}
         ref={animationRef}

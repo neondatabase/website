@@ -282,11 +282,11 @@ const faqItems = [
 ];
 
 const EnterprisePage = () => (
-  <Layout headerClassName="!absolute !bg-transparent">
+  <Layout headerClassName="absolute! bg-transparent!">
     <Hero />
-    <Logos className="mt-[102px] xl:mt-[86px] lg:mt-[76px] md:mt-[68px]" logos={logos} />
+    <Logos className="mt-[102px] lg:mt-[76px] xl:mt-[86px] md:mt-[68px]" logos={logos} />
     <TestimonialNew
-      className="mt-[118px] xl:mt-[80px] lg:mt-[76px]"
+      className="mt-[118px] lg:mt-[76px] xl:mt-[80px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
       author={{
         name: 'Cody Jenkins',
@@ -300,7 +300,7 @@ const EnterprisePage = () => (
     <CaseStudies items={caseStudies} />
     <HowNeonHelps tabs={howNeonHelpsTabs} />
     <TestimonialNew
-      className="mt-[126px] xl:mt-[106px] lg:mt-[70px] md:mt-[58px]"
+      className="mt-[126px] lg:mt-[70px] xl:mt-[106px] md:mt-[58px]"
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
       author={{
         name: 'Alex Co',
@@ -310,7 +310,7 @@ const EnterprisePage = () => (
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
-      className="mt-[130px] xl:mt-[106px] lg:mt-[48px] md:mt-[62px]"
+      className="mt-[130px] lg:mt-[48px] xl:mt-[106px] md:mt-[62px]"
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
       author={{
         name: 'Robert Chandler',

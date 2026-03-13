@@ -64,7 +64,9 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         <Icon
           width={18}
           height={18}
-          className={!isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'}
+          className={clsx(
+            !isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'
+          )}
         />
         {!isDocs && (
           <span className="text-sm leading-none tracking-extra-tight">
@@ -74,7 +76,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         )}
       </Link>
     ))}
-    <div className="ml-1.5 flex gap-x-4 xl:ml-1 lg:hidden">
+    <div className="ml-1.5 flex gap-x-4 lg:hidden xl:ml-1">
       <Button
         className="h-9 px-[18px]"
         to={LINKS.login}

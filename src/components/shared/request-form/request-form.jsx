@@ -84,10 +84,10 @@ const RequestForm = ({ type }) => {
         'dark:border-gray-new-15 dark:bg-gray-new-10'
       )}
     >
-      <h2 className="!my-0 font-title text-2xl font-medium leading-dense tracking-extra-tight">
+      <h2 className="my-0! font-title text-2xl leading-dense font-medium tracking-extra-tight">
         {title}
       </h2>
-      <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
+      <p className="mt-2.5 leading-tight font-light text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
       {!isSent ? (
@@ -107,8 +107,8 @@ const RequestForm = ({ type }) => {
               <div className="relative">
                 <ComboboxInput
                   className={clsx(
-                    'h-10 w-full rounded border-none bg-gray-new-94 py-3 pl-4 pr-8 xl:text-sm',
-                    'focus:outline-none data-[focus]:outline-1 data-[focus]:-outline-offset-1 data-[focus]:outline-gray-new-70',
+                    'h-10 w-full rounded border-none bg-gray-new-94 py-3 pr-8 pl-4 xl:text-sm',
+                    'focus:outline-hidden data-[focus]:outline-1 data-[focus]:-outline-offset-1 data-[focus]:outline-gray-new-70',
                     'dark:bg-gray-new-15 dark:data-[focus]:outline-gray-new-30'
                   )}
                   displayValue={(option) => option?.name}
@@ -123,7 +123,7 @@ const RequestForm = ({ type }) => {
               <ComboboxOptions
                 anchor="bottom"
                 className={clsx(
-                  'z-50 !max-h-[200px] w-[var(--input-width)] rounded border border-gray-new-94 bg-gray-new-98',
+                  'z-50 max-h-[200px]! w-[var(--input-width)] rounded border border-gray-new-94 bg-gray-new-98',
                   '[--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
                   'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
                   'dark:border-gray-new-15 dark:bg-gray-new-10 dark:text-white'
@@ -136,7 +136,7 @@ const RequestForm = ({ type }) => {
                     key={index}
                     value={option}
                     className={clsx(
-                      'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
+                      'group flex min-h-10 cursor-pointer flex-wrap items-center gap-1.5 px-4 py-2 text-sm select-none data-[focus]:bg-gray-new-94',
                       'dark:data-[focus]:bg-gray-new-15'
                     )}
                   >
@@ -144,7 +144,7 @@ const RequestForm = ({ type }) => {
                     {option.id && (
                       <code
                         className={clsx(
-                          'whitespace-nowrap rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none',
+                          'rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none whitespace-nowrap',
                           'dark:bg-gray-new-20'
                         )}
                       >
@@ -157,7 +157,7 @@ const RequestForm = ({ type }) => {
                   <ComboboxOption
                     value={{ name: query }}
                     className={clsx(
-                      'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
+                      'group flex min-h-10 cursor-pointer flex-wrap items-center gap-1.5 px-4 py-2 text-sm select-none data-[focus]:bg-gray-new-94',
                       'dark:data-[focus]:bg-gray-new-15'
                     )}
                   >
@@ -173,7 +173,7 @@ const RequestForm = ({ type }) => {
               name="email"
               value={email}
               className={clsx(
-                'remove-autocomplete-styles h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 md:w-full',
+                'h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 remove-autocomplete-styles md:w-full',
                 '2xl:min-w-52 xl:min-w-40 xl:text-sm',
                 'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
@@ -186,8 +186,8 @@ const RequestForm = ({ type }) => {
 
           <Button
             className={clsx(
-              'px-6 py-3 font-semibold leading-none md:w-full',
-              !isValid && 'pointer-events-none select-none opacity-70'
+              'px-6 py-3 leading-none font-semibold md:w-full',
+              !isValid && 'pointer-events-none opacity-70 select-none'
             )}
             type="submit"
             theme="primary"

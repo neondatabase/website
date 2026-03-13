@@ -53,7 +53,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
       className={clsx(
         'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
         theme.borderClassName,
-        '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
+        '[&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:text-sm! [&_pre[data-language]]:bg-white! [&_pre[data-language]]:dark:bg-gray-new-8!'
       )}
     >
       <div className={clsx('flex items-center gap-1', theme.titleClassName)}>

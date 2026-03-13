@@ -23,13 +23,13 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
         <div className="flex gap-6 md:gap-4">
           <div className="flex items-center justify-start gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-green-45" aria-hidden />
-            <span className="justify-start text-base font-medium leading-none tracking-extra-tight text-gray-new-70 md:text-sm">
+            <span className="justify-start text-base leading-none font-medium tracking-extra-tight text-gray-new-70 md:text-sm">
               Read more
             </span>
           </div>
           <time
             dateTime={date.toISOString()}
-            className="text-base font-medium leading-none tracking-extra-tight text-gray-new-40 md:text-sm"
+            className="text-base leading-none font-medium tracking-extra-tight text-gray-new-40 md:text-sm"
           >
             {getFormattedDate(date)}
           </time>
@@ -38,12 +38,12 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
       {tag && (
         <div className="flex items-center gap-1.5">
           <PointerRight className="size-2.5" />
-          <span className="block font-mono text-xs font-medium uppercase leading-none text-gray-new-30 dark:text-gray-new-80">
+          <span className="block font-mono text-xs leading-none font-medium text-gray-new-30 uppercase dark:text-gray-new-80">
             {tag}
           </span>
         </div>
       )}
-      <h3 className="m-0 text-xl !font-normal leading-snug tracking-extra-tight sm:line-clamp-3">
+      <h3 className="m-0 text-xl leading-snug font-normal! tracking-extra-tight sm:line-clamp-3">
         {title}
       </h3>
     </div>

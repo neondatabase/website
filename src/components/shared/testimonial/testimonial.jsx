@@ -22,15 +22,15 @@ const Testimonial = ({
       <blockquote className="mt-6 lg:mt-4 md:mt-2.5">
         <p
           className={clsx(
-            'max-w-[796px] font-light leading-snug tracking-tighter xl:max-w-[706px] lg:max-w-[584px]',
+            'max-w-[796px] leading-snug font-light tracking-tighter lg:max-w-[584px] xl:max-w-[706px]',
             quoteClassName
           )}
         >
           {quote}
         </p>
       </blockquote>
-      <figcaption className="mt-5 text-lg leading-tight tracking-extra-tight text-white xl:text-base lg:mt-4 md:mt-2.5">
-        {name} <cite className="font-light not-italic text-gray-new-70">– {position}</cite>
+      <figcaption className="mt-5 text-lg leading-tight tracking-extra-tight text-white lg:mt-4 xl:text-base md:mt-2.5">
+        {name} <cite className="font-light text-gray-new-70 not-italic">– {position}</cite>
       </figcaption>
     </Container>
   </div>

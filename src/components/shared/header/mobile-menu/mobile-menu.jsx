@@ -39,7 +39,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
       )}
     >
       <Tag
-        className="relative flex w-full items-center py-7 text-2xl font-medium leading-none tracking-extra-tight sm:py-5 sm:text-xl"
+        className="relative flex w-full items-center py-7 text-2xl leading-none font-medium tracking-extra-tight sm:py-5 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
@@ -65,7 +65,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                   {sections.map(({ title, items }, index) => (
                     <li key={index}>
                       {title && (
-                        <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
+                        <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
                           {title}
                         </h3>
                       )}
@@ -78,7 +78,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                               isExternal={isExternal}
                               tagName="MobileMenu"
                             >
-                              <span className="text-lg font-medium leading-none tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                              <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure sm:text-base dark:text-white">
                                 {title}
                               </span>
 
@@ -133,7 +133,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
+      <div className="absolute top-3 right-7 z-50 hidden gap-5 sm:right-4 lg:flex lg:items-center lg:gap-x-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-black dark:text-white"
@@ -143,9 +143,9 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
         />
       </div>
       {isMobileMenuOpen && (
-        <nav className="safe-paddings fixed inset-0 z-40 hidden flex-col justify-between bg-white dark:bg-black-pure lg:flex">
+        <nav className="fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings lg:flex dark:bg-black-pure">
           <div
-            className={clsx('relative h-full pb-[101px] pt-14 sm:pb-[125px]', {
+            className={clsx('relative h-full pt-14 pb-[101px] sm:pb-[125px]', {
               'pt-[96px]': hasTopbar,
               'pb-[148px] sm:pb-[172px]': isDocPage,
             })}
@@ -157,7 +157,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             </ul>
             <div
               className={clsx(
-                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
+                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 sm:grid-cols-1 sm:p-5 dark:border-gray-new-20 dark:bg-black-pure',
                 { 'pb-20 sm:pb-[68px]': isDocPage }
               )}
             >

@@ -14,7 +14,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
       onClick={onClick}
     >
       <m.span
-        className="absolute left-1 top-2 block h-0.5 w-6 bg-current"
+        className="absolute top-2 left-1 block h-0.5 w-6 bg-current"
         variants={{
           initial: {
             top: 8,
@@ -29,7 +29,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-1 top-4 block h-0.5 w-6 bg-current"
+        className="absolute top-4 left-1 block h-0.5 w-6 bg-current"
         variants={{
           initial: {
             visibility: 'visible',
@@ -57,7 +57,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-[5px] top-4 h-0.5 w-[22px] bg-current"
+        className="absolute top-4 left-[5px] h-0.5 w-[22px] bg-current"
         variants={{
           initial: {
             rotate: '0deg',
@@ -72,7 +72,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-[5px] top-4 h-0.5 w-[22px] bg-current"
+        className="absolute top-4 left-[5px] h-0.5 w-[22px] bg-current"
         variants={{
           initial: {
             rotate: '0deg',

@@ -6,9 +6,9 @@ import { BRANCHING_BASE_PATH } from 'constants/branching';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const Contents = ({ contents }) => (
-  <section className="safe-paddings table-of-contents w-full pb-[220px] pt-[180px] xl:pt-[136px] lg:pt-[88px] md:pb-20 md:pt-20">
+  <section className="table-of-contents w-full pt-[180px] safe-paddings pb-[220px] lg:pt-[88px] xl:pt-[136px] md:pt-20 md:pb-20">
     <Container className="w-full text-left" size="branching">
-      <h2 className="mb-14 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[36px] lg:mb-11 md:mb-9 md:text-[28px]">
+      <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter lg:mb-11 xl:text-[36px] md:mb-9 md:text-[28px]">
         Branching Workflows
       </h2>
       <ul className="w-full">
@@ -18,7 +18,7 @@ const Contents = ({ contents }) => (
             key={id}
             id={id}
           >
-            <h3 className="font-mono text-xs font-medium uppercase leading-3 text-gray-new-60 md:text-[10px] md:leading-none">
+            <h3 className="font-mono text-xs leading-3 font-medium text-gray-new-60 uppercase md:text-[10px] md:leading-none">
               {section}
             </h3>
             <ol className="flex flex-col">
@@ -29,16 +29,16 @@ const Contents = ({ contents }) => (
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
-                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white xl:w-64 lg:w-auto">
+                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white lg:w-auto xl:w-64">
                         {title}
                       </span>
 
-                      <span className="font-normal leading-snug tracking-tight text-gray-new-50 md:hidden">
+                      <span className="leading-snug font-normal tracking-tight text-gray-new-50 md:hidden">
                         {description}
                       </span>
                     </span>
 
-                    <span className="ml-auto inline-flex shrink-0 items-center gap-2 font-medium leading-none tracking-extra-tight">
+                    <span className="ml-auto inline-flex shrink-0 items-center gap-2 leading-none font-medium tracking-extra-tight">
                       <span className="lg:hidden">Learn more</span>
                       <ArrowRightIcon
                         aria-hidden="true"

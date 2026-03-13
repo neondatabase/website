@@ -24,7 +24,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
 
   return (
     <>
-      <ul className="not-prose !my-7 grid grid-cols-5 gap-3 !p-0 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+      <ul className="not-prose my-7! grid grid-cols-5 gap-3 p-0! sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3">
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 
@@ -100,14 +100,14 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
   };
 
   return (
-    <li className="!m-0 before:hidden">
+    <li className="m-0! before:hidden">
       <button
         type="button"
         className={clsx(
           'group relative flex h-full w-full items-center gap-2.5 overflow-hidden rounded-lg border px-3 py-2.5 transition-all duration-200',
           'border-gray-new-90 bg-white hover:border-gray-new-80 hover:shadow-sm',
           'dark:border-gray-new-15 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
-          'focus:outline-none focus:ring-2 focus:ring-green-45 focus:ring-offset-2 dark:focus:ring-offset-gray-new-8',
+          'focus:ring-2 focus:ring-green-45 focus:ring-offset-2 focus:outline-hidden dark:focus:ring-offset-gray-new-8',
           isCopied && 'border-green-45 dark:border-green-45'
         )}
         disabled={!markdown}
@@ -134,7 +134,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
               />
             )}
           </div>
-          <span className="truncate text-sm font-medium leading-tight text-black-new dark:text-white">
+          <span className="truncate text-sm leading-tight font-medium text-black-new dark:text-white">
             {title}
           </span>
         </div>
@@ -142,7 +142,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
         {/* Copy indicator */}
         <div
           className={clsx(
-            'absolute right-2 top-1/2 -translate-y-1/2 transition-opacity duration-200',
+            'absolute top-1/2 right-2 -translate-y-1/2 transition-opacity duration-200',
             isCopied ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
           )}
         >

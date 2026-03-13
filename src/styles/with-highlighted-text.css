@@ -1,7 +1,5 @@
-@layer components {
-  .with-highlighted-text {
-    mark {
-      @apply bg-transparent text-secondary-8 dark:text-primary-1;
-    }
+@utility with-highlighted-text {
+  & mark {
+    @apply bg-transparent text-secondary-8 dark:text-primary-1;
   }
 }

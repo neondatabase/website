@@ -34,7 +34,7 @@ const CTANew = ({
   buttonUrl = LINKS.signup,
   buttonType = null,
 }) => (
-  <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
+  <section className={clsx('cta relative bg-[#151617] safe-paddings', className)}>
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
         <SectionLabel className="sm:mb-4" theme="white" icon={labelIcon}>
@@ -42,7 +42,7 @@ const CTANew = ({
         </SectionLabel>
         <div
           className={clsx(
-            'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none',
+            'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter sm:max-w-none lg:text-[40px] xl:max-w-[760px] xl:text-[44px] md:mt-4 md:text-[28px]',
             copyWrapperClassName
           )}
         >

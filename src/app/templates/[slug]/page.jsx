@@ -71,11 +71,11 @@ const TemplatePage = async (props) => {
     <Layout headerWithBorder isHeaderSticky>
       <section>
         <Container
-          className="relative mb-[104px] mt-12 w-full xl:mb-24 xl:mt-10 lg:mb-20 lg:mt-8 sm:mb-[72px] sm:mt-6"
+          className="relative mt-12 mb-[104px] w-full sm:mt-6 sm:mb-[72px] lg:mt-8 lg:mb-20 xl:mt-10 xl:mb-24"
           size="1344"
         >
           <Link
-            className="absolute left-8 top-0 flex items-baseline gap-x-1.5 font-medium leading-normal tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:text-green-45 dark:text-gray-new-60 dark:hover:text-green-45 lg:static lg:mx-auto lg:max-w-[512px]"
+            className="absolute top-0 left-8 flex items-baseline gap-x-1.5 leading-normal font-medium tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:text-green-45 lg:static lg:mx-auto lg:max-w-[512px] dark:text-gray-new-60 dark:hover:text-green-45"
             to={LINKS.templates}
           >
             <BackIcon />
@@ -83,21 +83,21 @@ const TemplatePage = async (props) => {
           </Link>
 
           <div className="mx-auto max-w-[512px] lg:mt-5">
-            <h1 className="font-title text-[44px] font-medium leading-none tracking-extra-tight xl:text-4xl lg:text-[32px] sm:text-[28px]">
+            <h1 className="font-title text-[44px] leading-none font-medium tracking-extra-tight sm:text-[28px] lg:text-[32px] xl:text-4xl">
               {name}
             </h1>
-            <p className="mt-3 text-lg font-light leading-snug tracking-extra-tight text-gray-new-20 dark:text-gray-new-80 sm:mt-2 sm:text-base">
+            <p className="mt-3 text-lg leading-snug font-light tracking-extra-tight text-gray-new-20 sm:mt-2 sm:text-base dark:text-gray-new-80">
               {description}
             </p>
-            <ul className="mt-10 xl:mt-8 lg:mt-7 sm:mt-6">
+            <ul className="mt-10 sm:mt-6 lg:mt-7 xl:mt-8">
               {items.map(
                 (item) =>
                   item.value.length > 0 && (
                     <li
-                      className="flex justify-between border-t border-gray-new-80/80 py-3.5 last:border-b dark:border-gray-new-15/80 sm:py-3"
+                      className="flex justify-between border-t border-gray-new-80/80 py-3.5 last:border-b sm:py-3 dark:border-gray-new-15/80"
                       key={item.label}
                     >
-                      <span className="font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-gray-new-90">
+                      <span className="leading-tight font-medium tracking-extra-tight text-gray-new-20 dark:text-gray-new-90">
                         {item.label}
                       </span>
                       <span className="leading-tight tracking-extra-tight text-gray-new-30 dark:text-gray-new-70">
@@ -107,7 +107,7 @@ const TemplatePage = async (props) => {
                   )
               )}
             </ul>
-            <div className="mt-10 flex justify-between xl:mt-8 lg:mt-7 sm:mt-6">
+            <div className="mt-10 flex justify-between sm:mt-6 lg:mt-7 xl:mt-8">
               <div className="flex flex-col gap-y-2.5">
                 <Link
                   className="flex items-center gap-x-1.5 leading-none tracking-extra-tight sm:text-sm"

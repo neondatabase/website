@@ -7,7 +7,7 @@ import GradientBorder from 'components/shared/gradient-border';
 const Cards = ({ data, isPriority, className }) => (
   <div
     className={clsx(
-      'mt-11 grid grid-cols-2 gap-5 lg:mt-8 lg:gap-4 md:mt-6 sm:grid-cols-1',
+      'mt-11 grid grid-cols-2 gap-5 sm:grid-cols-1 lg:mt-8 lg:gap-4 md:mt-6',
       className
     )}
   >
@@ -25,7 +25,7 @@ const Cards = ({ data, isPriority, className }) => (
             <div className="relative z-20 mb-5 size-[76px] lg:size-16 md:size-14">
               <Image
                 className={clsx(
-                  'absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 lg:scale-[0.85] md:scale-[0.74]',
+                  'absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 lg:scale-[0.85] md:scale-[0.74]',
                   logo.className
                 )}
                 src={logo.src}
@@ -39,30 +39,30 @@ const Cards = ({ data, isPriority, className }) => (
           )}
           <div className={clsx('relative z-20', banner && 'max-w-[504px] lg:max-w-[395px]')}>
             <h3
-              className="text-[18px] font-medium leading-snug tracking-extra-tight lg:text-base md:text-[15px]"
+              className="text-[18px] leading-snug font-medium tracking-extra-tight lg:text-base md:text-[15px]"
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <p
-              className="text-with-links mt-2.5 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 lg:mt-2 lg:text-[15px] md:text-sm sm:text-sm sm:font-light"
+              className="mt-2.5 text-with-links leading-snug font-light tracking-extra-tight text-pretty text-gray-new-70 sm:text-sm sm:font-light lg:mt-2 lg:text-[15px] md:text-sm"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
           {banner && (
             <>
               <Image
-                className="absolute bottom-0 right-0 z-10 max-w-none lg:-right-14 sm:-bottom-1 sm:-right-[52px]"
+                className="absolute right-0 bottom-0 z-10 max-w-none sm:-right-[52px] sm:-bottom-1 lg:-right-14"
                 src={banner.src}
                 alt={title}
                 width={banner.width}
                 height={banner.height}
               />
-              <span className="pointer-events-none absolute -top-10 right-1/3 h-40 w-40 -translate-y-1/2 rounded-[100%] bg-[#405ECA] opacity-35 blur-3xl sm:-left-32 sm:bottom-0 sm:right-auto sm:top-auto" />
-              <span className="pointer-events-none absolute -top-5 right-1/3 h-16 w-32 -translate-y-1/2 rotate-[33deg] rounded-[100%] bg-[#4F7CD2] opacity-35 blur-2xl sm:-left-11 sm:bottom-16 sm:right-auto sm:top-auto" />
+              <span className="pointer-events-none absolute -top-10 right-1/3 h-40 w-40 -translate-y-1/2 rounded-[100%] bg-[#405ECA] opacity-35 blur-3xl sm:top-auto sm:right-auto sm:bottom-0 sm:-left-32" />
+              <span className="pointer-events-none absolute -top-5 right-1/3 h-16 w-32 -translate-y-1/2 rotate-[33deg] rounded-[100%] bg-[#4F7CD2] opacity-35 blur-2xl sm:top-auto sm:right-auto sm:bottom-16 sm:-left-11" />
             </>
           )}
           <span
             className={clsx(
-              'pointer-events-none absolute left-5 top-5 size-16 rounded-full blur-xl lg:left-4 lg:top-4 lg:size-14 md:left-3 md:top-3 md:size-12',
+              'pointer-events-none absolute top-5 left-5 size-16 rounded-full blur-xl lg:top-4 lg:left-4 lg:size-14 md:top-3 md:left-3 md:size-12',
               highlightClassName
             )}
             aria-hidden

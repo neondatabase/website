@@ -61,7 +61,7 @@ const Toc = () => {
   }, [updateActiveSection]);
 
   return (
-    <div className="sticky top-0 z-10 pb-60 pt-40" ref={tocRef}>
+    <div className="sticky top-0 z-10 pt-40 pb-60" ref={tocRef}>
       <ul className="flex w-[224px] flex-col gap-y-1.5">
         {SECTIONS.map((section) => {
           const isActive = activeSection === section.id;
@@ -70,9 +70,9 @@ const Toc = () => {
             <li key={section.id}>
               <Link
                 className={clsx(
-                  'relative flex items-center gap-x-2.5 whitespace-nowrap rounded-sm py-1.5 pl-[18px]',
+                  'relative flex items-center gap-x-2.5 rounded-sm py-1.5 pl-[18px] whitespace-nowrap',
                   'text-[15px] leading-none tracking-tight transition-colors duration-200',
-                  'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
+                  'before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2',
                   'before:size-2 before:rounded-full before:transition-colors before:duration-200',
                   !isActive && 'text-gray-new-50',
                   currentTheme === 'dark' && 'hover:text-white',

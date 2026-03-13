@@ -169,7 +169,7 @@ const Calculator = () => {
     <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
-        <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
+        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:text-lg xl:text-xl">
           Use case
         </h3>
         <ul className="space-y-1.5 sm:space-y-4">
@@ -186,7 +186,7 @@ const Calculator = () => {
                 className="w-[98px] sm:w-full"
                 name={title}
                 labelClassName="hidden"
-                inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
+                inputClassName="remove-autocomplete-styles m-0! h-8! px-3! border-[1px]! border-gray-new-15! bg-[#0D0E10]! text-base! text-white placeholder:tracking-extra-tight focus:outline-hidden focus:border-white! sm:placeholder:text-sm bg-[center_right_12px]!"
                 tag="select"
                 defaultValue={inputParams[name]}
                 onChange={(e) => handleSelect(e, name)}
@@ -203,7 +203,7 @@ const Calculator = () => {
       </div>
       <DashedBorder />
       <div className="relative z-10 pt-6">
-        <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
+        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:text-lg xl:text-xl">
           Monthly cost: AWS RDS vs Neon
         </h3>
         <div className="flex justify-between sm:flex-col sm:gap-6">
@@ -213,7 +213,7 @@ const Calculator = () => {
               <div className="flex items-end gap-1.5">
                 <span
                   className={clsx(
-                    'bg-clip-text font-title  font-medium leading-none tracking-extra-tight text-transparent',
+                    'bg-clip-text font-title leading-none font-medium tracking-extra-tight text-transparent',
                     totalsFontSize,
                     'sm:text-[44px]',
                     valueClassName

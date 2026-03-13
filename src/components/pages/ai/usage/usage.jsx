@@ -47,12 +47,12 @@ const ITEMS = [
 ];
 
 const Usage = () => (
-  <section className="usage safe-paddings relative mt-[196px] xl:mt-[188px] lg:mt-[159px] md:mt-[102px]">
+  <section className="usage relative mt-[196px] safe-paddings lg:mt-[159px] xl:mt-[188px] md:mt-[102px]">
     <Container className="md:max-w-sm md:px-5" size="960">
-      <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
+      <h2 className="font-title text-5xl leading-none font-medium tracking-extra-tight lg:text-4xl xl:text-[44px] md:text-[32px]">
         Build LLM-backed applications
       </h2>
-      <p className="mt-3 max-w-lg text-balance text-lg leading-snug tracking-tight text-gray-new-70 lg:text-base md:text-wrap">
+      <p className="mt-3 max-w-lg text-lg leading-snug tracking-tight text-balance text-gray-new-70 lg:text-base md:text-wrap">
         Neon makes Postgres a powerful vector store, perfect for RAG apps that crave simplicity.
       </p>
       <Link
@@ -64,14 +64,14 @@ const Usage = () => (
         Start building
       </Link>
 
-      <ul className="mt-[78px] flex flex-col gap-[120px] xl:mt-[68px] lg:mt-[60px] lg:gap-[104px] md:mx-auto md:mt-10 md:mt-[60px] md:gap-14">
+      <ul className="mt-[78px] flex flex-col gap-[120px] lg:mt-[60px] lg:gap-[104px] xl:mt-[68px] md:mx-auto md:mt-10 md:mt-[60px] md:gap-14">
         {ITEMS.map(({ title, description, image, imageMobile }, index) => (
           <li
             className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-5"
             key={title}
           >
             <div>
-              <h3 className="text-2xl font-medium leading-snug tracking-extra-tight lg:text-xl md:text-xl">
+              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-xl">
                 {title}
               </h3>
               <p

@@ -1,19 +1,21 @@
+@reference "../../../../../styles/globals.css";
+
 .swiper {
-  @apply relative pb-7 lg:w-screen sm:pb-6;
+  @apply relative pb-7 sm:pb-6 lg:w-screen;
 
   &:before,
   &:after {
     @apply pointer-events-none absolute inset-y-0 z-10 w-[225px] content-[''];
-    @apply bg-gradient-to-r from-transparent to-black-pure;
-    @apply xl:w-[153px] lg:w-[185px] sm:hidden;
+    @apply bg-linear-to-r from-transparent to-black-pure;
+    @apply sm:hidden lg:w-[185px] xl:w-[153px];
   }
 
   &:before {
-    @apply left-0 hidden bg-gradient-to-l lg:block sm:hidden;
+    @apply left-0 hidden bg-linear-to-l sm:hidden lg:block;
   }
 
   &:after {
-    @apply right-0 bg-gradient-to-r;
+    @apply right-0 bg-linear-to-r;
   }
 }
 
@@ -22,13 +24,13 @@
 }
 
 .swiper-pagination {
-  @apply !bottom-0 flex gap-3.5;
+  @apply bottom-0! flex gap-3.5;
   @apply lg:justify-center;
 
   &-bullet {
-    @apply relative !m-0 h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100;
+    @apply relative m-0! h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100;
     @apply transition-colors duration-300 hover:bg-gray-new-15;
-    @apply before:absolute before:-inset-y-2 before:inset-x-0;
+    @apply before:absolute before:inset-x-0 before:-inset-y-2;
     @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
 
     &-active {

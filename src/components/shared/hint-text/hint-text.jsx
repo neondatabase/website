@@ -36,7 +36,7 @@ const HintText = ({
       })}
 
       <Tooltip
-        className="w-sm z-20 !bg-gray-new-15"
+        className="z-20 w-sm bg-gray-new-15!"
         id={`hint-text-${tooltipId}`}
         positionStrategy="fixed"
         place={tooltipPlace}

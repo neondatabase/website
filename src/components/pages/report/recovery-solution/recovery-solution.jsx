@@ -20,20 +20,20 @@ const DATA = [
 ];
 
 const RecoverySolution = () => (
-  <section className="recovery-solution safe-paddings mt-[126px] xl:mt-28 sm:mt-24">
+  <section className="recovery-solution mt-[126px] safe-paddings sm:mt-24 xl:mt-28">
     <Container
-      className="relative z-10 flex !max-w-xl flex-col items-start lg:!max-w-[642px]"
+      className="relative z-10 flex max-w-xl! flex-col items-start lg:max-w-[642px]!"
       size="xxs"
     >
-      <h2 className="font-title text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] lg:max-w-[440px] lg:text-[40px] sm:text-[32px]">
+      <h2 className="font-title text-5xl leading-dense font-medium tracking-tighter sm:text-[32px] lg:max-w-[440px] lg:text-[40px] xl:text-[44px]">
         Reduce your recovery time from hours to seconds
       </h2>
 
-      <ul className="mt-12 flex flex-col gap-y-12 lg:mt-10 lg:gap-y-10 sm:mt-7 sm:gap-y-6">
+      <ul className="mt-12 flex flex-col gap-y-12 sm:mt-7 sm:gap-y-6 lg:mt-10 lg:gap-y-10">
         {DATA.map(({ icon, title, description }, index) => (
-          <li className="flex flex-col gap-y-4 lg:gap-y-[18px] sm:gap-y-4" key={index}>
+          <li className="flex flex-col gap-y-4 sm:gap-y-4 lg:gap-y-[18px]" key={index}>
             <Image src={icon} width={28} height={28} alt="" />
-            <h3 className="-mt-1 text-[28px] font-medium leading-tight tracking-tighter text-gray-new-94 lg:text-[24px] sm:text-[20px]">
+            <h3 className="-mt-1 text-[28px] leading-tight font-medium tracking-tighter text-gray-new-94 sm:text-[20px] lg:text-[24px]">
               {title}
             </h3>
             <p className="text-lg leading-normal tracking-extra-tight text-gray-new-60 sm:text-base">
@@ -43,7 +43,7 @@ const RecoverySolution = () => (
         ))}
       </ul>
 
-      <p className="with-link-primary mt-12 text-lg leading-snug tracking-extra-tight text-gray-new-90 lg:mt-10 sm:mt-7 sm:text-base">
+      <p className="mt-12 text-lg leading-snug tracking-extra-tight with-link-primary text-gray-new-90 sm:mt-7 sm:text-base lg:mt-10">
         Want to see it in action?{' '}
         <a
           className="ml-2 tracking-tighter"

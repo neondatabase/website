@@ -123,7 +123,7 @@ const StepsSlider = ({ items }) => {
         </Swiper>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-16 h-8 lg:mx-0">
           <div className="absolute inset-x-0 top-1/2 -z-30 h-px w-full bg-migration-steps-slider-progress-bg" />
-          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden px-12 [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_72%,transparent_100%)] lg:px-12 md:mx-6 md:px-0 md:[mask-image:none]">
+          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_72%,transparent_100%)] px-12 lg:px-12 md:mx-6 md:[mask-image:none] md:px-0">
             <div
               ref={progressBarRef}
               className="absolute top-0 h-px w-0 bg-gray-new-30 transition-all duration-300 ease-linear"
@@ -133,7 +133,7 @@ const StepsSlider = ({ items }) => {
       </div>
 
       <Swiper
-        className="captions-swiper relative mb-12 mt-6 lg:mt-4"
+        className="captions-swiper relative mt-6 mb-12 lg:mt-4"
         key={isMobile ? 'mobile' : 'desktop'}
         effect={isMobile ? 'fade' : 'slide'} // effect won't work using breakpoints
         slidesPerView={isMobile ? 1 : 3}
@@ -169,11 +169,11 @@ const StepsSlider = ({ items }) => {
         {items.map(({ title, description, link }, index) => (
           <SwiperSlide tag="li" key={index} className="bg-black-pure">
             <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left lg:mr-0 lg:gap-2 md:mx-auto md:max-w-md md:items-center md:text-center">
-              <h3 className="swiper-no-swiping text-xl font-medium leading-dense tracking-tighter text-white lg:text-lg">
+              <h3 className="swiper-no-swiping text-xl leading-dense font-medium tracking-tighter text-white lg:text-lg">
                 {title}
               </h3>
               <p
-                className="text-16 font-regular swiper-no-swiping text-pretty leading-normal tracking-extra-tight text-gray-new-60 md:mx-2.5"
+                className="text-16 font-regular swiper-no-swiping leading-normal tracking-extra-tight text-pretty text-gray-new-60 md:mx-2.5"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
               {link && (

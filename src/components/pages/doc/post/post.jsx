@@ -79,7 +79,7 @@ const Post = ({
           <article>
             <h1
               className={clsx(
-                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
+                'text-[36px] leading-tight font-semibold tracking-extra-tight text-balance md:text-[28px]',
                 tag && 'inline'
               )}
             >
@@ -87,7 +87,7 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 md:mt-1.5 md:text-lg dark:text-gray-new-80">
                 {subtitle}
               </p>
             )}
@@ -114,7 +114,7 @@ const Post = ({
       {/* Regular pages: Show standard right sidebar */}
       {!isWideLayout && (
         <Aside
-          className="!ml-0 w-64 shrink-0 xl:hidden"
+          className="ml-0! w-64 shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}

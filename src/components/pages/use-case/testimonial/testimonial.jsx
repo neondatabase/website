@@ -10,10 +10,10 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
     className={clsx(
       'not-prose relative mt-7 w-full',
       !simpleMode && [
-        'rounded-lg bg-[#0D0E10] p-14 pb-8 pr-11',
-        'before:absolute before:left-6 before:top-6 before:size-16 before:bg-[url("/images/pages/variable-load/blockquote.svg")] before:bg-contain before:bg-no-repeat',
-        'xl:mt-6 lg:mt-5 lg:p-12 lg:pb-7 lg:pr-10 sm:mt-4 sm:p-6 sm:pb-7',
-        'lg:before:left-[22px] lg:before:top-[22px] lg:before:size-14 sm:before:hidden',
+        'rounded-lg bg-[#0D0E10] p-14 pr-11 pb-8',
+        'before:absolute before:top-6 before:left-6 before:size-16 before:bg-[url("/images/pages/variable-load/blockquote.svg")] before:bg-contain before:bg-no-repeat',
+        'sm:mt-4 sm:p-6 sm:pb-7 lg:mt-5 lg:p-12 lg:pr-10 lg:pb-7 xl:mt-6',
+        'sm:before:hidden lg:before:top-[22px] lg:before:left-[22px] lg:before:size-14',
       ],
       className
     )}
@@ -32,7 +32,7 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
           <div className="flex items-center gap-3 sm:gap-2">
             {author.avatar && (
               <Image
-                className="size-8 rounded-full grayscale lg:size-7 sm:size-5"
+                className="size-8 rounded-full grayscale sm:size-5 lg:size-7"
                 src={author.avatar}
                 width={author.avatar.width / 2}
                 height={author.avatar.height / 2}
@@ -40,10 +40,10 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
               />
             )}
             {author.name && (
-              <figcaption className="text-lg text-gray-new-60 lg:text-base sm:text-sm">
+              <figcaption className="text-lg text-gray-new-60 sm:text-sm lg:text-base">
                 {author.name}
                 {author.company && (
-                  <cite className="font-light not-italic text-gray-new-40">
+                  <cite className="font-light text-gray-new-40 not-italic">
                     {' '}
                     - {author.company}
                   </cite>
@@ -54,7 +54,7 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
         )}
         {url && (
           <Link
-            className="flex w-fit items-center text-sm font-medium leading-none tracking-[-0.03em]"
+            className="flex w-fit items-center text-sm leading-none font-medium tracking-[-0.03em]"
             to={url}
             theme="white"
             withArrow

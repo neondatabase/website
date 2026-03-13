@@ -174,9 +174,9 @@ const Form = ({
             <Field
               labelClassName="hidden"
               inputClassName={clsx(
-                '!bg-black-pure remove-autocomplete-styles !m-0 h-16 w-full appearance-none rounded-[50px] !border-[1px] bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-none disabled:opacity-100 md:h-14 md:pl-6 md:pr-16 md:placeholder:text-sm',
-                state === FORM_STATES.ERROR ? '!border-secondary-1' : '!border-green-45',
-                state === FORM_STATES.SUCCESS ? '!pr-14 text-green-45' : 'text-white'
+                'bg-black-pure! remove-autocomplete-styles m-0! h-16 w-full appearance-none rounded-[50px] border-[1px]! bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-hidden disabled:opacity-100 md:h-14 md:pl-6 md:pr-16 md:placeholder:text-sm',
+                state === FORM_STATES.ERROR ? 'border-secondary-1!' : 'border-green-45!',
+                state === FORM_STATES.SUCCESS ? 'pr-14! text-green-45' : 'text-white'
               )}
               name={simpleField.name}
               label={`${simpleField.label} *`}
@@ -185,14 +185,14 @@ const Form = ({
               placeholder={simpleField.placeholder}
               isDisabled={state === FORM_STATES.LOADING || state === FORM_STATES.SUCCESS}
               error={errors[simpleField.name]?.message}
-              errorClassName="bottom-auto top-full !text-center w-full max-w-full !translate-y-2"
+              errorClassName="bottom-auto top-full text-center! w-full max-w-full translate-y-2!"
               {...register(simpleField.name)}
             />
             <SubmitButton formState={state} text={submitText} simpleMode />
             {errorMessage && <ErrorMessage text={errorMessage} />}
           </div>
           <LinesIllustration
-            className="-!top-8 z-10 h-[150px] !w-[125%]"
+            className="-top-8! z-10 h-[150px] w-[125%]!"
             color={state === FORM_STATES.ERROR ? '#FF4C79' : '#00E599'}
             bgColor="#000"
           />
@@ -218,7 +218,7 @@ const Form = ({
           >
             <div className="space-y-6">
               {title && (
-                <h2 className="text-title text-center text-[32px] font-medium leading-tight tracking-tight sm:text-2xl">
+                <h2 className="text-title text-center text-[32px] leading-tight font-medium tracking-tight sm:text-2xl">
                   {title}
                 </h2>
               )}
@@ -253,11 +253,11 @@ const Form = ({
             >
               <span className="absolute inset-0 bg-[url('/images/noise.png')] bg-cover" />
               <span className="absolute inset-0 rounded-[inherit] border-image-azure-form-border" />
-              <span className="absolute -left-10 -top-12 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
-              <span className="absolute -left-24 -top-24 h-[220px] w-[410px] -rotate-[17deg] rounded-[100%] bg-azure-form-bg-top opacity-40 blur-[65px]" />
+              <span className="absolute -top-12 -left-10 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
+              <span className="absolute -top-24 -left-24 h-[220px] w-[410px] -rotate-[17deg] rounded-[100%] bg-azure-form-bg-top opacity-40 blur-[65px]" />
               <span className="absolute -right-9 bottom-9 h-36 w-[120px] translate-x-full rounded-[100%] bg-[#CF9FFF] blur-[52px]" />
-              <span className="absolute -bottom-6 -right-10 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
-              <span className="absolute -bottom-20 -right-32 h-[170px] w-[316px] rotate-[163deg] rounded-[100%] bg-azure-form-bg-bottom opacity-40 blur-[65px]" />
+              <span className="absolute -right-10 -bottom-6 z-10 size-[85px] rounded-full bg-white mix-blend-overlay blur-[30px]" />
+              <span className="absolute -right-32 -bottom-20 h-[170px] w-[316px] rotate-[163deg] rounded-[100%] bg-azure-form-bg-bottom opacity-40 blur-[65px]" />
             </span>
           )}
           {errorMessage && <ErrorMessage text={errorMessage} />}
@@ -274,7 +274,7 @@ const Form = ({
         )}
         {greenMode && (
           <LinesIllustration
-            className="-top-[25%] !h-[450px] !w-[145%]"
+            className="-top-[25%] h-[450px]! w-[145%]!"
             color="#00E599"
             bgColor="#000"
           />

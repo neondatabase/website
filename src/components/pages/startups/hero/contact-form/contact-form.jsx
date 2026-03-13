@@ -20,7 +20,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
     <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
-      <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+      <h3 className="font-title text-[32px] leading-none font-medium tracking-extra-tight sm:text-[28px]">
         Oops, looks like there's a technical problem
       </h3>
       <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
@@ -34,7 +34,7 @@ const ErrorMessage = ({ onClose }) => (
         </Link>
       </p>
     </div>
-    <button className="absolute right-4 top-4 z-20" type="button" onClick={onClose}>
+    <button className="absolute top-4 right-4 z-20" type="button" onClick={onClose}>
       <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
       <span className="sr-only">Close error message</span>
     </button>
@@ -130,7 +130,7 @@ const ContactForm = () => {
       className={clsx(
         'relative z-10 grid scroll-mt-10 gap-y-6 p-8',
         'rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg shadow-contact',
-        'xl:p-6 lg:gap-y-5 md:gap-y-6'
+        'lg:gap-y-5 xl:p-6 md:gap-y-6'
       )}
       method="POST"
       id="startups-form"
@@ -199,8 +199,8 @@ const ContactForm = () => {
       <div className="relative">
         <Button
           className={clsx(
-            'mt-1 h-[46px] w-full font-semibold lg:h-10 sm:mt-0',
-            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
+            'mt-1 h-[46px] w-full font-semibold sm:mt-0 lg:h-10',
+            formState === FORM_STATES.ERROR && 'pointer-events-none bg-secondary-1/50!'
           )}
           type="submit"
           theme="primary"

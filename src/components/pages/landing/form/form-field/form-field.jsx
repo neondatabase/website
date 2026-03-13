@@ -6,7 +6,7 @@ import { FORM_STATES } from 'constants/forms';
 
 const labelClassName = 'mb-0 block w-fit text-sm text-gray-new-70';
 const inputClassName =
-  'remove-autocomplete-styles m-0 !h-10 !border-[1px] !bg-white/[0.04] !text-base text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-none disabled:opacity-100 sm:placeholder:text-sm';
+  'remove-autocomplete-styles m-0 h-10! border-[1px]! bg-white/[0.04]! text-base! text-white placeholder:tracking-tight placeholder:text-gray-new-40 focus:outline-hidden disabled:opacity-100 sm:placeholder:text-sm';
 const errorClassName = 'w-full text-right text-xs leading-none';
 
 const fieldPropTypes = {
@@ -45,7 +45,7 @@ const Input = ({
     label={`${label}${required ? ' *' : ''}`}
     labelClassName={labelClassName}
     inputClassName={clsx(
-      '!mt-0',
+      'mt-0!',
       inputClassName,
       errors[name]?.type === 'domain-not-blacklisted' && 'sm:mb-8'
     )}
@@ -98,7 +98,7 @@ const CheckBox = ({ name, label, required, formState, errors, register, options 
     <div
       className={clsx(
         'mt-2.5 rounded border bg-white/[0.04] px-4 py-2 transition-colors duration-200',
-        errors[name]?.message ? '!border-secondary-1' : 'border-transparent'
+        errors[name]?.message ? 'border-secondary-1!' : 'border-transparent'
       )}
     >
       {options.map((option, index) => (
@@ -119,7 +119,7 @@ const CheckBox = ({ name, label, required, formState, errors, register, options 
     {errors[name]?.message && (
       <p
         className={clsx(
-          'absolute right-0 top-[calc(100%+0.5rem)] z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
+          'absolute top-[calc(100%+0.5rem)] right-0 z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:no-underline',
           errorClassName
         )}
         data-test="error-field-message"

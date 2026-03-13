@@ -11,14 +11,14 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
-  <footer className="safe-paddings relative z-30 mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
-    <Container className="flex justify-between gap-x-10 py-12 3xl:py-8 sm:py-5" size="1920">
+  <footer className="relative z-30 mt-auto border-t border-gray-new-90 bg-white safe-paddings dark:border-gray-new-20 dark:bg-black-pure">
+    <Container className="flex justify-between gap-x-10 py-12 sm:py-5 3xl:py-8" size="1920">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
           <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
           <span
             className={clsx(
-              'mt-3.5 block whitespace-nowrap text-[13px] leading-none tracking-extra-tight',
+              'mt-3.5 block text-[13px] leading-none tracking-extra-tight whitespace-nowrap',
               'text-gray-new-40 dark:text-gray-new-60',
               'xl:mt-3'
             )}
@@ -29,12 +29,12 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-        <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
+        <div className="flex flex-col items-start justify-between gap-y-5 sm:flex-col lg:w-full lg:flex-row">
           <StatusBadge />
           <p
             className={clsx(
               'flex gap-x-1 gap-y-1.5 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
-              '2xl:flex-col lg:flex-row sm:flex-col'
+              '2xl:flex-col sm:flex-col lg:flex-row'
             )}
           >
             <span>Made in SF and the World.</span>
@@ -43,10 +43,10 @@ const Footer = ({ hasThemesSupport = false }) => (
         </div>
       </div>
 
-      <div className="flex w-fit gap-x-[88px] xl:gap-x-6 lg:hidden">
+      <div className="flex w-fit gap-x-[88px] lg:hidden xl:gap-x-6">
         {MENUS.footer.map(({ heading, items }, index) => (
           <div className="grid content-start gap-y-7" key={index}>
-            <span className="text-[10px] uppercase leading-none text-gray-new-10 dark:text-white">
+            <span className="text-[10px] leading-none text-gray-new-10 uppercase dark:text-white">
               {heading}
             </span>
             <ul className="flex flex-col gap-y-5">
@@ -65,7 +65,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                   >
                     <Tag
                       className={clsx(
-                        'group/link relative -my-px flex cursor-pointer items-center whitespace-nowrap rounded-sm py-px',
+                        'group/link relative -my-px flex cursor-pointer items-center rounded-sm py-px whitespace-nowrap',
                         'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
                         'transition-colors duration-200 hover:text-black-pure',
                         'dark:text-gray-new-60 dark:hover:text-white'
@@ -100,11 +100,11 @@ const Footer = ({ hasThemesSupport = false }) => (
                     {hasSubmenu && (
                       <div
                         className={clsx(
-                          'absolute bottom-full right-0 z-50 min-w-[230px] pb-2.5',
+                          'absolute right-0 bottom-full z-50 min-w-[230px] pb-2.5',
                           'pointer-events-none opacity-0',
-                          'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
-                          'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
-                          'group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:[transform:none]'
+                          'origin-bottom-right [transform:rotateX(12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
+                          'group-hover:pointer-events-auto group-hover:visible group-hover:[transform:none] group-hover:opacity-100',
+                          'group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:[transform:none] group-focus-within:opacity-100'
                         )}
                       >
                         <ul
@@ -117,7 +117,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                           {links.map(({ text, to }) => (
                             <li key={text}>
                               <Link
-                                className="block whitespace-nowrap p-3 text-[15px] leading-dense tracking-extra-tight text-gray-new-10 transition-colors duration-200 hover:bg-gray-new-90 dark:text-gray-new-90 dark:hover:bg-gray-new-8"
+                                className="block p-3 text-[15px] leading-dense tracking-extra-tight whitespace-nowrap text-gray-new-10 transition-colors duration-200 hover:bg-gray-new-90 dark:text-gray-new-90 dark:hover:bg-gray-new-8"
                                 to={to}
                               >
                                 {text}

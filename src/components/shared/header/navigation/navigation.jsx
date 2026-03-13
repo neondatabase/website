@@ -244,12 +244,12 @@ const Navigation = () => {
             >
               <Button
                 className={clsx(
-                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                  'group/main-nav-trigger relative flex items-center gap-x-1 rounded-sm px-3.5 text-[15px] leading-normal! font-normal tracking-snug whitespace-pre transition-colors duration-200 group-hover/main-nav:text-gray-new-70 hover:text-white! xl:px-2.5',
                   {
-                    '-ml-3.5  xl:-ml-2.5 ': index === 0,
+                    '-ml-3.5 xl:-ml-2.5': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
-                    '!text-white': isActive,
-                    '!text-gray-new-70': activeMenuIndex !== null && !isActive,
+                    'text-white!': isActive,
+                    'text-gray-new-70!': activeMenuIndex !== null && !isActive,
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
                 )}

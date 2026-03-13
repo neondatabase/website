@@ -170,8 +170,8 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
   return (
     <ListComponent
       className={clsx(
-        'not-prose grid !p-0 sm:grid-cols-1',
-        compact ? '!my-7 grid-cols-2 gap-3' : '!my-10 grid-cols-2 gap-5'
+        'not-prose grid p-0! sm:grid-cols-1',
+        compact ? 'my-7! grid-cols-2 gap-3' : 'my-10! grid-cols-2 gap-5'
       )}
     >
       {React.Children.map(children, (child, index) => {
@@ -179,7 +179,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
         const Icon = icons[icon];
 
         return (
-          <li className="!m-0 flex before:hidden" key={index}>
+          <li className="m-0! flex before:hidden" key={index}>
             <Link
               className={clsx(
                 'relative flex w-full items-baseline rounded-[10px] border border-gray-new-94 transition-colors duration-200',
@@ -192,7 +192,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                     : 'gap-x-3.5 px-6 py-5',
                 'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
                 'hover:border-gray-new-80 hover:before:opacity-100',
-                'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
+                'sm:p-3 dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30'
               )}
               to={href}
               tagName="DocsNavCard"
@@ -207,8 +207,8 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                     : 'text-secondary-8 dark:text-green-45',
                   withNumbers
                     ? compact
-                      ? 'w-5 text-base font-medium leading-tight tracking-extra-tight'
-                      : 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
+                      ? 'w-5 text-base leading-tight font-medium tracking-extra-tight'
+                      : 'w-6 text-lg leading-tight font-medium tracking-extra-tight'
                     : compact
                       ? 'mt-0.5 h-3.5 w-3.5'
                       : 'mt-0.5 h-4 w-4'
@@ -221,7 +221,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                     className={clsx(
                       'h-full w-full',
                       withNumbers &&
-                        'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
+                        'dark:rounded dark:bg-linear-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
                     )}
                   >
                     <Icon className="h-full w-full" />
@@ -231,7 +231,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
               <div className="relative z-10 flex flex-col gap-x-2.5">
                 <h3
                   className={clsx(
-                    'text-balance font-semibold leading-tight text-black-new dark:text-white',
+                    'leading-tight font-semibold text-balance text-black-new dark:text-white',
                     compact ? 'text-base' : 'text-lg'
                   )}
                 >
@@ -240,7 +240,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                 {description && (
                   <p
                     className={clsx(
-                      'text-balance leading-normal text-gray-new-50 dark:text-gray-new-80',
+                      'leading-normal text-balance text-gray-new-50 dark:text-gray-new-80',
                       compact ? 'mt-1 text-xs' : 'text-sm',
                       withNumbers ? 'mt-1' : compact ? 'mt-1' : 'mt-2.5'
                     )}

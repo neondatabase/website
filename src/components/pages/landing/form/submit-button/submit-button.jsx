@@ -20,12 +20,12 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
         <m.button
           className={clsx(
             simpleMode
-              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] md:inset-y-[6.5px] md:right-[9px] md:flex md:h-10 md:w-10 md:items-center md:justify-center md:px-0 '
+              ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] md:inset-y-[6.5px] md:right-[9px] md:flex md:h-10 md:w-10 md:items-center md:justify-center md:px-0'
               : 'block h-12 w-full rounded-[60px] text-lg',
             isAzurePage && 'mt-7',
             !simpleMode && !isAzurePage && 'mt-9',
-            'bg-green-45 px-7 py-3 font-semibold leading-none tracking-tight text-black transition-colors duration-200 hover:bg-[#00FFAA] sm:text-base',
-            formState === FORM_STATES.ERROR && '!bg-secondary-1/50'
+            'bg-green-45 px-7 py-3 leading-none font-semibold tracking-tight text-black transition-colors duration-200 hover:bg-[#00FFAA] sm:text-base',
+            formState === FORM_STATES.ERROR && 'bg-secondary-1/50!'
           )}
           type="submit"
           initial="initial"
@@ -42,7 +42,7 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
         <m.div
           className={clsx(
             simpleMode
-              ? 'absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full'
+              ? 'absolute top-1/2 right-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full'
               : 'flex h-12 w-full items-center justify-center rounded-[60px]',
             isAzurePage && 'mt-7',
             !simpleMode && !isAzurePage && 'mt-9',
@@ -80,7 +80,7 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
         <m.div
           className={clsx(
             simpleMode
-              ? 'absolute right-3 top-1/2 -translate-y-1/2 rounded-full'
+              ? 'absolute top-1/2 right-3 -translate-y-1/2 rounded-full'
               : 'flex h-12 w-full items-center justify-center rounded-[60px]',
             isAzurePage && 'mt-7',
             !simpleMode && !isAzurePage && 'mt-9',

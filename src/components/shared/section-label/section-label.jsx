@@ -42,7 +42,7 @@ const SectionLabel = ({ className, theme = 'black', icon = 'arrow', children }) 
       )}
     >
       <IconRenderer />
-      <span className="font-mono text-xs font-medium uppercase leading-none md:text-[10px]">
+      <span className="font-mono text-xs leading-none font-medium uppercase md:text-[10px]">
         {children}
       </span>
     </div>

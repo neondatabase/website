@@ -30,18 +30,18 @@ const TAGS = [
 ];
 
 const TestReliably = () => (
-  <section className="test-reliably mt-[188px] xl:mt-[168px] lg:mt-[100px] md:mt-[61px]">
+  <section className="test-reliably mt-[188px] lg:mt-[100px] xl:mt-[168px] md:mt-[61px]">
     <Container className="lg:mx-0 md:mx-auto md:max-w-[640px]" size="960">
-      <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
-        <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
-          <p className="mb-3 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-[9px] md:text-[12px]">
+      <div className="flex items-start gap-16 sm:flex-col sm:gap-8 lg:justify-start lg:gap-16">
+        <div className="flex-1 sm:w-full lg:mt-0 xl:mt-1.5">
+          <p className="mb-3 text-base font-medium tracking-wide text-gray-new-50 uppercase lg:mb-4 lg:text-sm xl:mb-3 md:mb-[9px] md:text-[12px]">
             Test reliably
           </p>
-          <h2 className="text-5xl font-medium leading-tight tracking-[-0.03em] text-gray-new-60 xl:max-w-[860px] xl:text-[44px] lg:text-[36px] md:text-[24px] md:leading-snug md:tracking-tighter">
+          <h2 className="text-5xl leading-tight font-medium tracking-[-0.03em] text-gray-new-60 lg:text-[36px] xl:max-w-[860px] xl:text-[44px] md:text-[24px] md:leading-snug md:tracking-tighter">
             Most production issues originate from unreliable tests.{' '}
             <span className="text-white">
               Branch your{' '}
-              <span className="relative mx-0.5 -mb-2.5 inline-block xl:mx-0 lg:mx-1 md:-mt-0.5">
+              <span className="relative mx-0.5 -mb-2.5 inline-block lg:mx-1 xl:mx-0 md:-mt-0.5">
                 <Image
                   className="relative z-10 lg:size-11 md:-top-[3px] md:size-8"
                   src={database}
@@ -51,7 +51,7 @@ const TestReliably = () => (
                   quality={100}
                 />
                 <span
-                  className="absolute left-1/2 top-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
+                  className="absolute top-1/2 left-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
                   aria-hidden
                 />
               </span>{' '}

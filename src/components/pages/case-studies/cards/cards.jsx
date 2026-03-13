@@ -14,7 +14,7 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className="-ml-px -mt-px h-[170px]">
+    <li className="-mt-px -ml-px h-[170px]">
       <Link
         className={clsx(
           'group relative block h-full border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
@@ -119,22 +119,22 @@ const Cards = ({ items, categories }) => {
 
   return (
     <section
-      className="main safe-paddings mt-40 scroll-mt-20 xl:mt-[136px] lg:mt-[104px] md:mt-20"
+      className="main mt-40 scroll-mt-20 safe-paddings lg:mt-[104px] xl:mt-[136px] md:mt-20"
       id={activeCategory.slug}
     >
-      <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
-        <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-8">
-          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] sm:max-w-[430px] sm:text-[28px]">
+      <Container className="flex flex-col lg:max-w-[1216px]! md:px-5" size="1280">
+        <div className="sm:flex-col sm:items-stretch sm:gap-8 md:flex md:items-end md:gap-6">
+          <h2 className="max-w-[736px] text-[48px] leading-dense font-normal tracking-tighter text-white sm:max-w-[430px] sm:text-[28px] lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px]">
             See how teams are building and scaling their applications on Neon.
           </h2>
-          <div className="hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
+          <div className="hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 sm:w-full md:flex md:w-[280px] md:shrink-0">
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
               <input
                 type="search"
                 placeholder="Search stories..."
                 value={searchQuery}
-                className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base"
                 aria-label="Search case studies"
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -143,7 +143,7 @@ const Cards = ({ items, categories }) => {
         </div>
 
         {/* Two-column: sidebar (256px) + cards grid */}
-        <div className="mt-14 flex gap-16 lt:gap-12 lg:mt-12 lg:flex-col lg:gap-10 md:mt-9 md:gap-8 sm:mt-5 sm:gap-6">
+        <div className="mt-14 flex gap-16 sm:mt-5 sm:gap-6 lg:mt-12 lg:flex-col lg:gap-10 md:mt-9 md:gap-8 lt:gap-12">
           {/* Sidebar: search + vertical categories */}
           <aside className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
             {/* Search bar */}
@@ -154,14 +154,17 @@ const Cards = ({ items, categories }) => {
                   type="search"
                   placeholder="Search stories..."
                   value={searchQuery}
-                  className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                  className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base"
                   aria-label="Search case studies"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
 
-            <nav className="sticky top-24 flex flex-col gap-2 lg:static lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto lg:no-scrollbars md:flex-none md:-mx-5 md:px-5" aria-label="Case study categories">
+            <nav
+              className="sticky top-24 flex flex-col gap-2 lg:static lg:no-scrollbars lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto md:-mx-5 md:flex-none md:px-5"
+              aria-label="Case study categories"
+            >
               {categories.map(({ name, slug, featuredCaseStudy }) => {
                 const isActive = slug === activeCategory.slug;
                 const label = getCategoryLabel(slug) ?? name;
@@ -170,7 +173,7 @@ const Cards = ({ items, categories }) => {
                     key={slug}
                     href={`#${slug}`}
                     className={clsx(
-                      'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm uppercase leading-snug tracking-tight transition-colors hover:text-white lg:shrink-0 lg:whitespace-nowrap lg:border-b-2 lg:py-[3px]',
+                      'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white lg:shrink-0 lg:border-b-2 lg:py-[3px] lg:whitespace-nowrap',
                       isActive
                         ? 'text-white lg:border-green-45'
                         : 'text-gray-new-60 lg:border-transparent'
@@ -187,7 +190,7 @@ const Cards = ({ items, categories }) => {
             </nav>
           </aside>
 
-          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 pl-px pt-px lt:grid-cols-2 sm:grid-cols-1">
+          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 pt-px pl-px sm:grid-cols-1 lt:grid-cols-2">
             {filteredItems.map((item) => {
               const { id, title, caseStudyPost } = item;
               return <Card key={id} title={title} {...caseStudyPost} />;

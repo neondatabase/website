@@ -20,13 +20,13 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
     <Link
       to={linkUrl}
       className={clsx(
-        'group flex w-1/2 min-w-0 flex-col gap-3 rounded border border-gray-new-90 px-4 py-5 dark:border-gray-new-20 sm:w-full',
+        'group flex w-1/2 min-w-0 flex-col gap-3 rounded border border-gray-new-90 px-4 py-5 sm:w-full dark:border-gray-new-20',
         isNext ? 'ml-auto items-end' : 'items-start sm:hidden'
       )}
       tagName="DocsPagination"
       tagText={`${isNext ? 'Next' : 'Previous'}: ${link.title}`}
     >
-      <span className="flex items-center gap-1 text-sm font-normal leading-none text-gray-new-40 dark:text-gray-new-50">
+      <span className="flex items-center gap-1 text-sm leading-none font-normal text-gray-new-40 dark:text-gray-new-50">
         <ArrowIcon
           className={clsx('shrink-0', !isNext && 'rotate-180', isNext && 'order-1')}
           width={17}
@@ -38,9 +38,9 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
       </span>
       <span
         className={clsx(
-          'w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base font-medium leading-tight tracking-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
+          'w-full min-w-0 overflow-hidden text-base leading-tight font-medium tracking-tight text-ellipsis whitespace-nowrap transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
           isNext && 'text-right',
-          '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
+          '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:leading-none [&_code]:font-normal dark:[&_code]:bg-gray-new-15'
         )}
         dangerouslySetInnerHTML={{ __html: link.title }}
       />
@@ -54,7 +54,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
     <Link
       to={linkUrl}
       className={clsx(
-        'group flex w-1/2 min-w-0 max-w-[336px] items-center justify-between gap-6 border border-gray-new-20 py-4 pl-5 pr-4 lg:max-w-full sm:w-full sm:max-w-full sm:pr-5',
+        'group flex w-1/2 max-w-[336px] min-w-0 items-center justify-between gap-6 border border-gray-new-20 py-4 pr-4 pl-5 sm:w-full sm:max-w-full sm:pr-5 lg:max-w-full',
         isNext
           ? 'ml-auto flex-row items-end pr-4 sm:pr-5'
           : 'flex-row-reverse items-start pl-4 sm:hidden'
@@ -64,18 +64,18 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
     >
       <span
         className={clsx(
-          'flex min-w-0 max-w-[260px] flex-col',
+          'flex max-w-[260px] min-w-0 flex-col',
           isNext ? 'items-start text-left' : 'items-end text-end'
         )}
       >
-        <span className="flex items-center gap-1 text-xs font-normal leading-normal text-gray-new-50">
+        <span className="flex items-center gap-1 text-xs leading-normal font-normal text-gray-new-50">
           {showLabel && (isNext ? 'Next' : 'Previous')}
         </span>
         <span
           className={clsx(
-            'w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base font-normal leading-normal transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
+            'w-full min-w-0 overflow-hidden text-base leading-normal font-normal text-ellipsis whitespace-nowrap transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
             isNext ? 'text-right' : 'text-left',
-            '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
+            '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:leading-none [&_code]:font-normal dark:[&_code]:bg-gray-new-15'
           )}
           dangerouslySetInnerHTML={{ __html: link.title }}
         />

@@ -18,10 +18,10 @@ const Plans = () => {
   const [scaleSize, setScaleSize] = useState('xlarge');
 
   return (
-    <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
+    <div className="relative mt-16 w-full lg:mt-12 xl:mt-14 md:mx-0 md:mt-11 md:w-full">
       <h2 className="sr-only">Neon pricing plans</h2>
 
-      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-b border-t border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
+      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
         {plans.map(
           (
             {
@@ -98,14 +98,14 @@ const Plans = () => {
                 <div className="p-6 pb-2 md:p-5 md:pb-2">
                   <h3
                     className={clsx(
-                      'font-mono text-sm font-medium uppercase leading-none',
+                      'font-mono text-sm leading-none font-medium uppercase',
                       highlighted ? 'text-green-52' : 'text-gray-new-60'
                     )}
                   >
                     {type}
                   </h3>
                   <div className="mt-14 flex flex-col gap-4">
-                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-tighter lg:text-2xl">
+                    <h4 className="text-[28px] leading-none font-normal tracking-tighter whitespace-nowrap lg:text-2xl">
                       {title}
                     </h4>
                     {hasDynamicPricing ? (
@@ -122,7 +122,7 @@ const Plans = () => {
                           </div>
                           {tooltipText && (
                             <InfoIcon
-                              className="relative mt-0.5 inline-flex flex-shrink-0 align-baseline"
+                              className="relative mt-0.5 inline-flex shrink-0 align-baseline"
                               tooltip={tooltipText}
                               tooltipId={`resource-size-${planId}`}
                               link={{
@@ -142,7 +142,7 @@ const Plans = () => {
                         )}
                       </div>
                     ) : (
-                      <div className="flex flex-col gap-1.5 pb-px pt-3 md:pt-0">
+                      <div className="flex flex-col gap-1.5 pt-3 pb-px md:pt-0">
                         {subtitle && (
                           <p className="text-[15px] leading-snug -tracking-wide text-gray-new-60">
                             {subtitle}

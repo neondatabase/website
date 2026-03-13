@@ -70,11 +70,11 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
           className={clsx(
             'relative',
             'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
-            'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+            'after:bg-linear-to-b after:from-white after:to-transparent dark:after:from-black-pure dark:after:to-transparent'
           )}
         >
           <nav
-            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
+            className="z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll px-1 pt-11 pb-16"
             ref={navRef}
           >
             {renderContent}

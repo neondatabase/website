@@ -1,3 +1,5 @@
+@reference "../../../../../styles/globals.css";
+
 .swiper {
   @apply relative;
 
@@ -17,11 +19,11 @@
   }
 
   &:before {
-    @apply left-0 bg-gradient-to-l;
+    @apply left-0 bg-linear-to-l;
   }
 
   &:after {
-    @apply right-0 bg-gradient-to-r;
+    @apply right-0 bg-linear-to-r;
   }
 }
 
@@ -30,12 +32,12 @@
 }
 
 .swiper-pagination {
-  @apply !bottom-0 !left-5 flex gap-3.5;
+  @apply bottom-0! left-5! flex gap-3.5;
 
   &-bullet {
-    @apply relative !m-0 h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100 sm:w-12 xs:w-10;
+    @apply relative m-0! h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100 sm:w-12 xs:w-10;
     @apply transition-colors duration-300 hover:bg-gray-new-15;
-    @apply before:absolute before:-inset-y-2 before:inset-x-0;
+    @apply before:absolute before:inset-x-0 before:-inset-y-2;
     @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
 
     &-active {

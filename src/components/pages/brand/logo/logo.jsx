@@ -56,7 +56,7 @@ const Logo = () => (
             <Image src={logo.svgSrc} alt="Neon logo" width={157} height={45} priority unoptimized />
             <div
               className={clsx(
-                'absolute right-2.5 top-2.5 flex gap-2',
+                'absolute top-2.5 right-2.5 flex gap-2',
                 'opacity-0 transition-opacity duration-300',
                 'group-hover:opacity-100'
               )}

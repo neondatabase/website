@@ -79,17 +79,17 @@ const BlogDraft = async (props0) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="safe-paddings bg-black-pure">
-        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-3xl lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+      <div className="bg-black-pure safe-paddings">
+        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 2xl:px-10 lg:max-w-3xl lg:px-8 lg:pt-10 lg:pb-28 xl:gap-x-6 xl:pt-12 xl:pb-32 md:gap-x-0 md:px-4 md:pt-8 md:pb-20">
           <Hero
-            className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:col-span-full"
+            className="col-start-4 col-end-10 mx-5 lg:col-span-full xl:col-start-1 xl:col-end-9"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
             {...pageBlogPost}
           />
           <Content
-            className="post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="post-content col-start-4 col-end-10 mx-5 mt-4 lg:col-span-full lg:row-start-3 xl:col-start-1 xl:col-end-9"
             html={contentWithLazyBlocks}
           />
           <Aside title={title} slug={shareUrl} tableOfContents={tableOfContents} />
@@ -100,7 +100,7 @@ const BlogDraft = async (props0) => {
           />
           {relatedPosts.length > 0 && (
             <MoreArticles
-              className="col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mt-12 md:mt-11"
+              className="col-start-4 col-end-10 mx-5 mt-16 lg:mt-12 xl:col-start-1 xl:col-end-9 xl:mt-14 md:mt-11"
               posts={relatedPosts}
             />
           )}

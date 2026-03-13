@@ -54,7 +54,7 @@ const TopbarClient = ({ text, link }) => {
   return (
     <Link
       className={clsx(
-        'safe-paddings group relative z-50 h-9 w-full overflow-hidden px-4 py-2.5',
+        'group relative z-50 h-9 w-full overflow-hidden px-4 py-2.5 safe-paddings',
         'flex items-center justify-center',
         'border-b border-gray-new-90 bg-[#EBF5F0]',
         'focus-visible:-outline-offset-2',
@@ -67,8 +67,8 @@ const TopbarClient = ({ text, link }) => {
       <div className="relative z-10 -mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
         <span
           className={clsx(
-            'truncate text-sm font-medium leading-none tracking-extra-tight',
-            'xl:max-w-[790px] lg:max-w-[482px] sm:max-w-[calc(100vw-64px)]',
+            'truncate text-sm leading-none font-medium tracking-extra-tight',
+            'sm:max-w-[calc(100vw-64px)] lg:max-w-[482px] xl:max-w-[790px]',
             'text-black-pure transition-colors duration-200 group-hover:text-gray-new-40',
             'dark:text-white group-hover:dark:text-gray-new-70'
           )}
@@ -82,8 +82,8 @@ const TopbarClient = ({ text, link }) => {
       <Pattern className="2xl:hidden" src={rightPattern} isRight />
       <Pattern className="hidden 2xl:block xl:hidden" src={leftPatternXL} />
       <Pattern className="hidden 2xl:block xl:hidden" src={rightPatternXL} isRight />
-      <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} />
-      <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} isRight />
+      <Pattern className="hidden lg:hidden xl:block" src={leftPatternLG} />
+      <Pattern className="hidden lg:hidden xl:block" src={rightPatternLG} isRight />
       <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} />
       <Pattern className="hidden lg:block md:hidden" src={rightPatternSM} isRight />
       <Pattern className="hidden md:block" src={leftPatternXS} />

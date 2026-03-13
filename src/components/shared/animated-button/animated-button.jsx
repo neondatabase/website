@@ -10,7 +10,7 @@ import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
+  base: 'inline-flex items-center justify-center font-bold leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-hidden',
   size: {
     lg: 'text-lg py-[17px] px-11 2xl:py-4 2xl:px-9',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
@@ -125,7 +125,7 @@ const AnimatedButton = ({
     >
       <LazyMotion features={domAnimation}>
         <m.span
-          className="absolute left-0 top-0 rounded-full blur-xl"
+          className="absolute top-0 left-0 rounded-full blur-xl"
           variants={cursorBlurVariants}
           animate={cursorAnimationVariant}
           transition={{

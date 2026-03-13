@@ -89,7 +89,7 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
             return (
               <Tag
                 className={clsx(
-                  'group flex w-full items-center gap-x-2 whitespace-nowrap p-3',
+                  'group flex w-full items-center gap-x-2 p-3 whitespace-nowrap',
                   'text-left text-[15px] leading-dense tracking-extra-tight text-gray-new-10',
                   'transition-colors duration-200',
                   'hover:bg-gray-new-90 hover:text-gray-new-10',
@@ -119,15 +119,15 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
           open={open}
           onOpenChange={setOpen}
         >
-          <Toast.Title className="flex items-center gap-x-2 whitespace-nowrap text-sm leading-none tracking-snug">
+          <Toast.Title className="flex items-center gap-x-2 text-sm leading-none tracking-snug whitespace-nowrap">
             <CheckIcon />
             Copied to clipboard!
           </Toast.Title>
         </Toast.Root>
         <Toast.Viewport
           className={clsx(
-            'fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[245px] max-w-[100vw] list-none flex-col gap-[10px]',
-            'p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]'
+            'fixed right-0 bottom-0 z-[2147483647] m-0 flex w-[245px] max-w-[100vw] list-none flex-col gap-[10px]',
+            'p-[var(--viewport-padding)] outline-hidden [--viewport-padding:_25px]'
           )}
         />
       </Toast.Provider>

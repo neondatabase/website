@@ -20,7 +20,7 @@ const Menu = ({
 }) => (
   <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
-      className="flex items-center gap-2.5 rounded-sm text-[15px] font-medium leading-snug tracking-extra-tight"
+      className="flex items-center gap-2.5 rounded-sm text-[15px] leading-snug font-medium tracking-extra-tight"
       to={`${basePath}${slug}`}
       theme="blue-green"
     >
@@ -33,7 +33,7 @@ const Menu = ({
         if (item.section) {
           return (
             <li className="mt-4 first:mt-0" key={index}>
-              <div className="my-2 flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight">
+              <div className="my-2 flex items-center gap-2.5 text-[15px] leading-snug font-medium tracking-extra-tight">
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
                 {item.section}
               </div>

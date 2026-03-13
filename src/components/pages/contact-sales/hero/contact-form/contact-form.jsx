@@ -21,7 +21,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
     <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
-      <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+      <h3 className="font-title text-[32px] leading-none font-medium tracking-extra-tight sm:text-[28px]">
         Oops, looks like there&apos;s a technical problem
       </h3>
       <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
@@ -35,7 +35,7 @@ const ErrorMessage = ({ onClose }) => (
         </Link>
       </p>
     </div>
-    <button className="absolute right-4 top-4 z-20" type="button" onClick={onClose}>
+    <button className="absolute top-4 right-4 z-20" type="button" onClick={onClose}>
       <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
       <span className="sr-only">Close error message</span>
     </button>
@@ -144,7 +144,7 @@ const ContactForm = () => {
 
   return (
     <form
-      className="relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] bg-contact-form-bg p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5"
+      className="relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] bg-contact-form-bg p-8 shadow-contact sm:p-5 lg:gap-y-6 xl:gap-y-5 xl:p-[30px]"
       method="POST"
       id="contact-sales-form"
       onSubmit={handleSubmit(onSubmit)}
@@ -183,7 +183,7 @@ const ContactForm = () => {
         error={errors.email?.message}
         {...register('email')}
       />
-      <div className="flex gap-5 xl:gap-4 md:flex-col sm:contents sm:flex-col">
+      <div className="flex gap-5 sm:contents sm:flex-col xl:gap-4 md:flex-col">
         <Field
           className="shrink-0 basis-[55%]"
           name="companyWebsite"
@@ -240,7 +240,7 @@ const ContactForm = () => {
         {...register('message')}
       />
 
-      <div className="relative flex items-center justify-between gap-6 xl:gap-5 lg:gap-6 sm:flex-col sm:items-start sm:gap-5">
+      <div className="relative flex items-center justify-between gap-6 sm:flex-col sm:items-start sm:gap-5 lg:gap-6 xl:gap-5">
         <p className="text-light text-sm leading-snug text-gray-new-70 xl:tracking-tighter">
           By submitting you agree to the{' '}
           <Link className="text-nowrap text-white" to={LINKS.terms} theme="white-underlined">
@@ -258,8 +258,8 @@ const ContactForm = () => {
         </p>
         <Button
           className={clsx(
-            'min-w-[176px] py-[15px] font-medium 2xl:text-base xl:min-w-[138px] lg:min-w-[180px] sm:w-full sm:py-[13px]',
-            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
+            'min-w-[176px] py-[15px] font-medium 2xl:text-base sm:w-full sm:py-[13px] lg:min-w-[180px] xl:min-w-[138px]',
+            formState === FORM_STATES.ERROR && 'pointer-events-none bg-secondary-1/50!'
           )}
           type="submit"
           theme="primary"

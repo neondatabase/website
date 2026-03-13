@@ -25,11 +25,11 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
   }
 
   return (
-    <div className={clsx('relative z-10 h-[125px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
+    <div className={clsx('relative z-10 h-[125px] w-[240px] lg:w-[180px] xl:w-[200px]', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-52',
-          'text-2xl font-normal leading-snug tracking-tighter lg:text-xl'
+          'text-2xl leading-snug font-normal tracking-tighter lg:text-xl'
         )}
       >
         {label}
@@ -40,8 +40,8 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
       />
       <Button
         className={clsx(
-          'mt-5 h-[38px] w-full !text-[14px] tracking-extra-tight xl:!text-[14px] md:h-8',
-          isFeaturedPlan ? '!font-medium' : '!font-normal',
+          'mt-5 h-[38px] w-full text-[14px]! tracking-extra-tight xl:text-[14px]! md:h-8',
+          isFeaturedPlan ? 'font-medium!' : 'font-normal!',
           !isFeaturedPlan && 'bg-opacity-80'
         )}
         size="xs"
@@ -77,8 +77,8 @@ const Table = () => {
   }, []);
 
   return (
-    <Container size="1152" className="flex flex-col lg:pr-0 md:pl-5 md:pr-0">
-      <ul className="no-scrollbars px-4.5 relative flex w-full pb-2.5 lg:overflow-x-auto lg:overflow-y-hidden lg:pl-0 lg:pr-8 md:pr-5">
+    <Container size="1152" className="flex flex-col lg:pr-0 md:pr-0 md:pl-5">
+      <ul className="relative no-scrollbars flex w-full px-4.5 pb-2.5 lg:overflow-x-auto lg:overflow-y-hidden lg:pr-8 lg:pl-0 md:pr-5">
         {tableHeadings.map((key, i, arr) => {
           const isHighlightedColumn = key === 'launch';
           const isLabelsColumn = i === 0;
@@ -86,12 +86,12 @@ const Table = () => {
           return (
             <li
               className={clsx('relative pt-6 xl:pt-4', {
-                'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:left-0 lg:top-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
+                'z-30 flex-1 bg-black-pure lg:sticky lg:top-0 lg:left-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px] lt:min-w-[200px]':
                   isLabelsColumn,
-                'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
-                'before:absolute before:-bottom-2.5 before:-left-6 before:top-0 before:z-0 before:w-[288px] before:border before:border-gray-new-20 before:bg-gray-new-15/20 xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
+                'basis-[296px] lg:shrink-0 lg:basis-[240px] xl:basis-[252px]': !isLabelsColumn,
+                'before:absolute before:top-0 before:-bottom-2.5 before:-left-6 before:z-0 before:w-[288px] before:border before:border-gray-new-20 before:bg-gray-new-15/20 lg:before:w-[228px] xl:before:-left-5 xl:before:w-[248px]':
                   isHighlightedColumn,
-                '!basis-[240px] xl:!basis-[200px] lg:!basis-[240px] md:!basis-[190px]':
+                'basis-[240px]! lg:basis-[240px]! xl:basis-[200px]! md:basis-[190px]!':
                   i === tableHeadings.length - 1,
               })}
               key={key}
@@ -116,20 +116,20 @@ const Table = () => {
                             : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
                           i === 1 && 'lg:pl-5',
                           'before:opacity-0',
-                          'before:absolute before:-inset-y-px before:-left-4 before:z-0 before:w-4 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-left-4 before:z-0 before:w-4 before:rounded-tl-lg before:rounded-bl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         key={index}
                       >
                         {isGroupTitle ? (
-                          <span className="whitespace-nowrap text-[18px] font-medium leading-snug tracking-tighter">
+                          <span className="text-[18px] leading-snug font-medium tracking-tighter whitespace-nowrap">
                             {item[key]}
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-base font-normal leading-snug tracking-extra-tight">
+                            <span className="relative w-fit text-base leading-snug font-normal tracking-extra-tight">
                               {item[key].title}
                               {!!item.soon && (
-                                <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-gray-new-50 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
+                                <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] leading-none font-semibold tracking-wide text-gray-new-50 uppercase xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
                                   soon
                                 </span>
                               )}
@@ -138,7 +138,7 @@ const Table = () => {
                               (typeof item[key].subtitle === 'string' ? (
                                 <span
                                   className={clsx(
-                                    'mt-1 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50'
+                                    'mt-1 text-sm leading-snug font-light tracking-extra-tight text-gray-new-50'
                                   )}
                                   dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                                 />
@@ -148,7 +148,7 @@ const Table = () => {
                                   href={item[key].subtitle.href}
                                   className={clsx(
                                     'z-10 mt-1 block w-fit border-b border-dashed border-white/40',
-                                    'text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
+                                    'text-sm leading-snug font-light tracking-extra-tight text-gray-new-50',
                                     'transition-colors duration-200',
                                     'hover:border-gray-new-70'
                                   )}
@@ -172,7 +172,7 @@ const Table = () => {
                   } else if (typeof item[key] === 'object') {
                     const { title, info, moreLink } = item[key];
                     cell = (
-                      <div className="font-normal leading-snug tracking-extra-tight">
+                      <div className="leading-snug font-normal tracking-extra-tight">
                         {title}
                         {info && (
                           <span className="whitespace-nowrap">
@@ -194,7 +194,7 @@ const Table = () => {
                     cell = (
                       <span
                         className={clsx(
-                          'flex flex-col gap-y-1 font-normal leading-snug tracking-extra-tight text-gray-new-80',
+                          'flex flex-col gap-y-1 leading-snug font-normal tracking-extra-tight text-gray-new-80',
                           '[&_span]:text-sm [&_span]:text-gray-new-50',
                           '[&_a]:w-fit [&_a]:transition-colors [&_a]:duration-200',
                           '[&_a]:border-b [&_a]:border-dashed [&_a]:border-white/40 [&_a]:text-gray-new-80 [&_span_a]:text-gray-new-50',
@@ -219,19 +219,19 @@ const Table = () => {
                           : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
                         item[key] !== undefined && !rowsWithGroupTitles.includes(index),
                         i === arr.length - 1 &&
-                          'before:absolute before:-inset-y-px before:-right-4 before:z-0 before:w-4 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-right-4 before:z-0 before:w-4 before:rounded-tr-lg before:rounded-br-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
                       key={index}
                     >
                       <div
                         className={clsx(
-                          'max-w-[240px] xl:max-w-[200px] lg:max-w-[180px]',
+                          'max-w-[240px] lg:max-w-[180px] xl:max-w-[200px]',
                           i === 1 && 'lg:ml-5'
                         )}
                       >
                         {cell}
                         {item[`${key}_tooltip`] && (
-                          <Tooltip className="w-sm z-20" id={`${key}_tooltip_${index}`} />
+                          <Tooltip className="z-20 w-sm" id={`${key}_tooltip_${index}`} />
                         )}
                       </div>
                     </li>

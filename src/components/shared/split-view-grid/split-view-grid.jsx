@@ -16,19 +16,19 @@ const SplitViewGrid = ({
   size = 'md',
 }) => (
   <section className={clsx('features safe-paddings', className)}>
-    <Container className="grid-gap-x grid grid-cols-12" size="medium">
+    <Container className="grid grid-cols-12 grid-gap-x" size="medium">
       <div
         className={clsx(
-          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 lg:gap-x-4',
+          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new lg:gap-x-4 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6',
           {
-            'py-12 xl:py-8 lg:pb-10 lg:pt-9 md:py-8': size === 'md',
+            'py-12 lg:pt-9 lg:pb-10 xl:py-8 md:py-8': size === 'md',
             'py-11': size === 'sm',
           }
         )}
       >
         <div
           className={clsx(
-            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5',
+            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 lg:col-span-full lg:max-w-none lg:px-7 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 md:pr-3.5 md:pl-6',
             {
               'pl-12': size === 'md',
               'pl-11': size === 'sm',
@@ -38,14 +38,14 @@ const SplitViewGrid = ({
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (
-            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none -tracking-extra-tight text-green-45">
+            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs leading-none font-semibold -tracking-extra-tight text-green-45 uppercase">
               {label}
             </span>
           )}
           <h2
             className={clsx(
-              'mt-3 text-balance font-title font-medium leading-none',
-              'max-w-[322px] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]',
+              'mt-3 font-title leading-none font-medium text-balance',
+              'max-w-[322px] lg:max-w-none lg:text-4xl xl:max-w-[270px] xl:text-[44px] md:text-[32px]',
               {
                 'text-[52px] tracking-extra-tight': size === 'md',
                 'text-5xl tracking-tight': size === 'sm',
@@ -56,7 +56,7 @@ const SplitViewGrid = ({
             {title}
           </h2>
           <p
-            className={clsx('text-lg font-light leading-snug xl:text-base md:mt-2.5', {
+            className={clsx('text-lg leading-snug font-light xl:text-base md:mt-2.5', {
               'mt-4': size === 'md',
               'mt-5': size === 'sm',
             })}
@@ -66,7 +66,7 @@ const SplitViewGrid = ({
         </div>
         <ul
           className={clsx(
-            'col-start-5 col-end-11 grid grid-cols-2 xl:col-start-6 xl:col-end-13 xl:-ml-8 xl:mt-1.5 xl:gap-x-1 lg:col-span-full lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6',
+            'col-start-5 col-end-11 grid grid-cols-2 lg:col-span-full lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 xl:col-start-6 xl:col-end-13 xl:mt-1.5 xl:-ml-8 xl:gap-x-1 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6',
             {
               'mt-2 gap-x-10 gap-y-11 lg:ml-0': size === 'md',
               'mx-10 mt-1 gap-x-4 gap-y-11 lg:mx-0': size === 'sm',
@@ -76,7 +76,7 @@ const SplitViewGrid = ({
           {items.map(({ icon, title, description }, index) => (
             <li
               className={clsx(
-                'flex max-w-[290px] items-start gap-x-3.5 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:max-w-none md:gap-x-3',
+                'flex max-w-[290px] items-start gap-x-3.5 lg:max-w-[304px] lg:even:pr-0 xl:max-w-[248px] md:max-w-none md:gap-x-3',
                 size === 'md' && 'even:pr-4'
               )}
               key={index}
@@ -92,7 +92,7 @@ const SplitViewGrid = ({
               />
               <div className="flex flex-col">
                 <h3
-                  className={clsx('font-title font-medium leading-tight tracking-extra-tight', {
+                  className={clsx('font-title leading-tight font-medium tracking-extra-tight', {
                     'text-[22px] xl:text-xl': size === 'md',
                     'text-lg': size === 'sm',
                   })}
@@ -101,7 +101,7 @@ const SplitViewGrid = ({
                 </h3>
                 <p
                   className={clsx(
-                    'mt-2 font-light leading-snug text-gray-new-60',
+                    'mt-2 leading-snug font-light text-gray-new-60',
                     size === 'sm' && 'text-sm'
                   )}
                 >

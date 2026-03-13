@@ -71,7 +71,7 @@
   }
 
   code .line {
-    @apply pl-4 pr-10;
+    @apply pr-10 pl-4;
   }
 
   code .line::after {

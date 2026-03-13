@@ -15,7 +15,7 @@ const underlineCommonStyles =
   'relative cursor-pointer transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0 before:pointer-events-none';
 
 const styles = {
-  base: 'inline-flex !leading-none items-center',
+  base: 'inline-flex leading-none! items-center',
   size: {
     lg: 't-2xl font-semibold',
     md: 't-xl font-semibold',
@@ -110,7 +110,7 @@ const Link = forwardRef(
         )}
         {Icon && (
           <span className="whitespace-nowrap no-underline">
-            <Icon className="ml-1 inline-block !size-3.5 shrink-0 align-[-0.125em]" />
+            <Icon className="ml-1 inline-block size-3.5! shrink-0 align-[-0.125em]" />
           </span>
         )}
       </>

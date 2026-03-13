@@ -32,7 +32,7 @@ const links = [
 const SocialShare = ({ className = null, slug, title, withTopBorder = false }) => (
   <div
     className={clsx(
-      'safe-paddings flex items-center justify-between lg:justify-start lg:space-x-5',
+      'flex items-center justify-between safe-paddings lg:justify-start lg:space-x-5',
       className,
       {
         'border-t border-gray-new-15/70 pt-4': withTopBorder,

@@ -94,8 +94,8 @@ const ChangelogPost = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col pb-20 3xl:col-span-10 3xl:col-start-2 3xl:ml-0 2xl:col-span-11 2xl:col-start-1 xl:max-w-[calc(100vw-366px)] lg:ml-0 lg:max-w-full lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
-        <Hero className="flex justify-center lg:pt-16 md:py-10 sm:py-7" date={date} withContainer />
+      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col pb-20 2xl:col-span-11 2xl:col-start-1 sm:pb-8 lg:ml-0 lg:max-w-full lg:pt-0 xl:max-w-[calc(100vw-366px)] md:mx-auto md:pb-[70px] 3xl:col-span-10 3xl:col-start-2 3xl:ml-0">
+        <Hero className="flex justify-center sm:py-7 lg:pt-16 md:py-10" date={date} withContainer />
         <article className="relative flex w-full max-w-full flex-col items-start">
           {/* Special title for Algolia */}
           <h2 className="post-title">

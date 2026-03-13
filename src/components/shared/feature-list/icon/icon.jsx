@@ -77,11 +77,11 @@ const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
       {/* Progress line */}
       <span
         className={clsx(
-          'absolute left-[14px] top-8 z-10 h-full w-px',
+          'absolute top-8 left-[14px] z-10 h-full w-px',
           index < lastActive && 'bg-secondary-8 dark:bg-[#0B4C43]',
           index >= lastActive &&
             isActive &&
-            'bg-gradient-to-b from-secondary-8 to-gray-new-80 to-90% dark:from-[#0B4C43] dark:to-gray-new-15',
+            'bg-linear-to-b from-secondary-8 to-gray-new-80 to-90% dark:from-[#0B4C43] dark:to-gray-new-15',
           index >= lastActive && !isActive && 'bg-gray-new-80 dark:bg-gray-new-15',
           isLast && 'hidden'
         )}

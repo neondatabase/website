@@ -39,7 +39,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
       {tooltip && (
         <span
           className={clsx(
-            'pointer-events-none absolute left-0 top-full z-10 mt-1.5 whitespace-nowrap',
+            'pointer-events-none absolute top-full left-0 z-10 mt-1.5 whitespace-nowrap',
             'rounded-md bg-gray-new-8 px-2 py-1 text-xs text-white opacity-0',
             'transition-opacity duration-150 group-hover:opacity-100',
             'dark:bg-gray-new-90 dark:text-gray-new-8'

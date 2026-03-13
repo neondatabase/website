@@ -54,27 +54,27 @@ const ITEMS = [
 ];
 
 const CardsSupport = () => (
-  <section className="cards-support safe-paddings pt-[137px] xl:pt-[113px] lg:pt-[90px] md:pt-[26px]">
+  <section className="cards-support pt-[137px] safe-paddings lg:pt-[90px] xl:pt-[113px] md:pt-[26px]">
     <Container className="md:px-5" size="768">
       <header className="mx-auto flex flex-col items-center text-center">
-        <h2 className="max-w-md font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:max-w-[380px] lg:text-4xl md:max-w-[280px] md:text-[32px] md:tracking-tighter">
+        <h2 className="max-w-md font-title text-5xl leading-none font-medium tracking-extra-tight lg:max-w-[380px] lg:text-4xl xl:text-[44px] md:max-w-[280px] md:text-[32px] md:tracking-tighter">
           Multi-TB migrations? Get expert support
         </h2>
         <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
           Our team is here to guide you through even the most complex scenarios.
         </p>
       </header>
-      <ul className="mt-12 grid grid-cols-2 gap-5 lg:mt-10 md:mt-8 sm:grid-cols-1 xs:gap-3">
+      <ul className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-1 lg:mt-10 md:mt-8 xs:gap-3">
         {ITEMS.map(({ title, description, list, className }) => (
           <li
             key={title}
             className={clsx('relative rounded-xl bg-black-fog p-7 lg:p-6 md:p-5', className)}
           >
-            <h3 className="mb-2.5 text-balance text-xl font-medium leading-snug tracking-tight text-white lg:text-lg md:tracking-extra-tight">
+            <h3 className="mb-2.5 text-xl leading-snug font-medium tracking-tight text-balance text-white lg:text-lg md:tracking-extra-tight">
               {title}
             </h3>
             <p
-              className="text-pretty text-base font-normal leading-normal tracking-extra-tight text-gray-new-60 lg:text-[15px]"
+              className="text-base leading-normal font-normal tracking-extra-tight text-pretty text-gray-new-60 lg:text-[15px]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
             <div
@@ -85,7 +85,7 @@ const CardsSupport = () => (
               {list.map(({ icon, text }) => (
                 <li key={text} className="flex items-center gap-2.5">
                   <Image src={icon} alt="" width={20} height={20} quality={100} />
-                  <p className="text-base font-medium leading-none tracking-snug text-white lg:text-[15px]">
+                  <p className="text-base leading-none font-medium tracking-snug text-white lg:text-[15px]">
                     {text}
                   </p>
                 </li>

@@ -62,7 +62,7 @@ const BlogPostCard = ({
         'blog-post-card flex',
         fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
-          '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:!flex-col md:gap-x-0 md:gap-y-5',
+          'flex-row! gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:flex-col! md:gap-x-0 md:gap-y-5',
         className
       )}
     >
@@ -97,15 +97,15 @@ const BlogPostCard = ({
           'flex min-w-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
-            'max-w-[684px] basis-[58%] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
+            'max-w-[684px] basis-[58%] pr-20 lg:pr-0 md:w-full md:basis-auto lt:max-w-none lt:pr-8',
           isSmart &&
-            '!w-[424px] shrink-0 flex-col-reverse 2xl:!w-auto 2xl:min-w-0 2xl:shrink 2xl:!pr-0 md:!w-full md:gap-y-3'
+            'w-[424px]! shrink-0 flex-col-reverse 2xl:w-auto! 2xl:min-w-0 2xl:shrink 2xl:pr-0! md:w-full! md:gap-y-3'
         )}
       >
         <div
           className={clsx(
             'mb-8 flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
-            isSmart && '!mb-0 mt-auto'
+            isSmart && 'mt-auto mb-0!'
           )}
         >
           {/* category */}
@@ -124,9 +124,9 @@ const BlogPostCard = ({
           {/* date */}
           <time
             className={clsx(
-              'relative block shrink-0 uppercase leading-none tracking-extra-tight text-gray-new-50',
+              'relative block shrink-0 leading-none tracking-extra-tight text-gray-new-50 uppercase',
               cat &&
-                'pl-4 before:absolute before:left-[3px] before:top-1/3 before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
+                'pl-4 before:absolute before:top-1/3 before:left-[3px] before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
             )}
             dateTime={date}
           >
@@ -139,8 +139,8 @@ const BlogPostCard = ({
             className={clsx(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
-                ? 'line-clamp-3 text-2xl leading-tight md:text-[20px] sm:text-lg'
-                : 'text-[28px] font-normal leading-snug lt:text-2xl md:text-[20px] sm:text-lg'
+                ? 'line-clamp-3 text-2xl leading-tight sm:text-lg md:text-[20px]'
+                : 'text-[28px] leading-snug font-normal sm:text-lg md:text-[20px] lt:text-2xl'
             )}
           >
             {title}
@@ -149,7 +149,7 @@ const BlogPostCard = ({
           {excerpt && (
             <div
               className={clsx(
-                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-base sm:text-[15px]',
+                'mt-2 leading-snug font-light tracking-extra-tight text-gray-new-70 sm:text-[15px] lg:text-base md:text-base',
                 largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}
             >

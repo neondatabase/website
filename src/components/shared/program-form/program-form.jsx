@@ -29,7 +29,7 @@ const fieldProps = {
   theme: 'transparent',
   inputClassName:
     'mt-3 rounded-none border-gray-new-90 dark:border-gray-new-20 dark:placeholder:text-gray-new-50',
-  labelClassName: 'text-sm !text-gray-new-10 dark:!text-gray-new-90',
+  labelClassName: 'text-sm text-gray-new-10! dark:text-gray-new-90!',
 };
 
 const ProgramForm = ({ type }) => {
@@ -75,11 +75,11 @@ const ProgramForm = ({ type }) => {
 
   return (
     <figure
-      className="doc-cta not-prose relative mb-[22px] mt-9 scroll-mt-20 border border-gray-new-90 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
+      className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-90 px-7 py-6 sm:p-6 lg:scroll-mt-5 dark:border-gray-new-20 dark:shadow-contact"
       id={`${type}-form`}
     >
-      <h2 className="!p-0 !text-2xl !leading-snug">{title}</h2>
-      <p className="!mb-0 !mt-2 !text-lg text-gray-new-30 dark:text-gray-new-70">{description}</p>
+      <h2 className="p-0! text-2xl! leading-snug!">{title}</h2>
+      <p className="mt-2! mb-0! text-lg! text-gray-new-30 dark:text-gray-new-70">{description}</p>
       {formState !== FORM_STATES.SUCCESS ? (
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">
@@ -106,7 +106,7 @@ const ProgramForm = ({ type }) => {
           </div>
 
           <Button
-            className="mt-8 h-12 w-full px-6 text-base font-medium leading-none"
+            className="mt-8 h-12 w-full px-6 text-base leading-none font-medium"
             type="submit"
             theme="white-filled-multi"
             disabled={formState === FORM_STATES.LOADING}

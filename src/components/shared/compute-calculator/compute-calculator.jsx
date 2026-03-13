@@ -96,12 +96,12 @@ const ComputeCalculator = ({
     )}
   >
     <div className="relative z-10 pb-[18px]">
-      <h3 className="mb-5 text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
+      <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:mb-4 sm:text-lg xl:text-xl">
         Example deployment in RDS
       </h3>
       <ul
         className={clsx(
-          'space-y-2 !pl-0 tracking-extra-tight sm:text-sm sm:leading-snug',
+          'space-y-2 pl-0! tracking-extra-tight sm:text-sm sm:leading-snug',
           textSize === 'lg' ? 'text-lg' : 'text-base'
         )}
       >
@@ -123,14 +123,14 @@ const ComputeCalculator = ({
     <Calculator inputParamsBlock={inputParamsBlock} values={values} textSize={textSize} />
     <BgDecor hasBorder hasNoise hasPattern>
       <Image
-        className="absolute right-0 top-0 h-[776px] w-[617px] sm:hidden"
+        className="absolute top-0 right-0 h-[776px] w-[617px] sm:hidden"
         src={rightGlow}
         width={617}
         height={776}
         alt=""
       />
       <Image
-        className="absolute right-0 top-0 hidden h-[536px] w-[320px] sm:block"
+        className="absolute top-0 right-0 hidden h-[536px] w-[320px] sm:block"
         src={rightGlowMobile}
         width={430}
         height={650}

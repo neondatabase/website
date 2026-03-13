@@ -53,7 +53,7 @@ const StatusBadge = () => {
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span className="whitespace-nowrap text-sm leading-none tracking-extra-tight text-black-pure dark:text-white">
+      <span className="text-sm leading-none tracking-extra-tight whitespace-nowrap text-black-pure dark:text-white">
         {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>

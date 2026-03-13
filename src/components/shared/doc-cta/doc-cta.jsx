@@ -43,7 +43,7 @@ const DocCta = ({
     )}
   >
     {isTemplate && (
-      <div className="doc-cta-dots-mask mask-[url(/images/background-dots-cta.png)] mask-position-right mask-no-repeat mask-size-[980px_980px] pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="doc-cta-dots-mask mask-position-right pointer-events-none absolute inset-0 overflow-hidden mask-[url(/images/background-dots-cta.png)] mask-size-[980px_980px] mask-no-repeat">
         <div className="absolute inset-0">
           {ELLIPSES.map((ellipseClassName, i) => (
             <div
@@ -66,16 +66,16 @@ const DocCta = ({
           className={clsx(
             'text-gray-new-8 dark:text-white',
             isIntro
-              ? 'text-xl font-semibold leading-tight tracking-extra-tight'
-              : 'text-2xl font-medium leading-snug tracking-tighter'
+              ? 'text-xl leading-tight font-semibold tracking-extra-tight'
+              : 'text-2xl leading-snug font-medium tracking-tighter'
           )}
         >
           {title}
         </div>
         <p
           className={clsx(
-            '!m-0 !text-[#494B50] dark:!text-gray-new-85',
-            isIntro ? '!tracking-extra-tight' : '!text-base !tracking-tight',
+            'm-0! text-[#494B50]! dark:text-gray-new-85!',
+            isIntro ? 'tracking-extra-tight!' : 'text-base! tracking-tight!',
             '[&_a]:border-b [&_a]:border-transparent [&_a]:text-secondary-8 [&_a]:no-underline',
             '[&_a]:transition-[border-color] [&_a]:duration-200 [&_a]:ease-in-out hover:[&_a]:border-secondary-8',
             'dark:[&_a]:text-primary-1 dark:hover:[&_a]:border-primary-1'
@@ -84,10 +84,10 @@ const DocCta = ({
         />
         {command && (
           <CodeBlockWrapper
-            className="mt-4 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10 [&>pre]:!bg-transparent [&>pre]:p-3"
+            className="mt-4 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10 [&>pre]:bg-transparent! [&>pre]:p-3"
             trackingLabel={trackingLabel}
           >
-            <pre className="!my-0">
+            <pre className="my-0!">
               <code className="language-bash">{command}</code>
             </pre>
           </CodeBlockWrapper>
@@ -97,7 +97,7 @@ const DocCta = ({
       {!isIntro && (
         <div className="relative z-10 flex flex-wrap items-center gap-5">
           <Button
-            className="w-fit shrink-0 px-7 py-[14px] text-base font-medium leading-none tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
+            className="w-fit shrink-0 px-7 py-[14px] text-base leading-none font-medium tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
             to={buttonUrl}
             theme="white-filled-multi"
             tagName="DocsCTA"
@@ -106,7 +106,7 @@ const DocCta = ({
           </Button>
           {secondaryButtonText && secondaryButtonUrl && (
             <Button
-              className="w-fit shrink-0 border border-gray-new-60 bg-black-new/[0.02] px-7 py-[14px] text-base font-normal leading-none tracking-tight text-black-new hover:bg-black-new/[0.04] hover:text-black-new dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"
+              className="w-fit shrink-0 border border-gray-new-60 bg-black-new/[0.02] px-7 py-[14px] text-base leading-none font-normal tracking-tight text-black-new hover:bg-black-new/[0.04] hover:text-black-new dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"
               to={secondaryButtonUrl}
               theme="transparent"
               tagName="DocsCTASecondary"

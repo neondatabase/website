@@ -39,7 +39,7 @@ const Animation = ({ apiCode, sqlCode }) => {
       <ol
         className={clsx(
           'flex w-[736px] flex-col gap-12',
-          '2xl:w-auto xl:-ml-8 xl:gap-[30px] lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5',
+          '2xl:w-auto lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5 xl:-ml-8 xl:gap-[30px]',
           'sm:max-w-full sm:gap-[26px] sm:pt-1'
         )}
       >
@@ -62,21 +62,21 @@ const Animation = ({ apiCode, sqlCode }) => {
               <div
                 className={clsx(
                   'relative overflow-hidden bg-[#111215] px-6 py-[22px]',
-                  'xl:px-4 xl:py-[15px] lg:px-5 lg:py-[18px] sm:px-[14px] sm:py-3 xs:px-2.5 xs:py-2'
+                  'sm:px-[14px] sm:py-3 lg:px-5 lg:py-[18px] xl:px-4 xl:py-[15px] xs:px-2.5 xs:py-2'
                 )}
               >
                 <div
                   className={clsx(
-                    'relative z-10 flex items-center gap-2.5 bg-black-pure/80 backdrop-blur-[15px] xl:gap-2 sm:gap-1',
+                    'relative z-10 flex items-center gap-2.5 bg-black-pure/80 backdrop-blur-[15px] sm:gap-1 xl:gap-2',
                     codeWrapperClassName
                   )}
                 >
                   <span
-                    className="size-2 shrink-0 rounded-full bg-green-52 xl:size-1.5 lg:size-2 sm:size-[3px]"
+                    className="size-2 shrink-0 rounded-full bg-green-52 sm:size-[3px] lg:size-2 xl:size-1.5"
                     aria-hidden
                   />
                   <m.code
-                    className={clsx(codeClassName, 'whitespace-pre leading-none')}
+                    className={clsx(codeClassName, 'leading-none whitespace-pre')}
                     animate={{
                       opacity: isFrameActive('LOOP') ? 0 : 1,
                     }}
@@ -106,7 +106,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                   </m.code>
                 </div>
                 <Image
-                  className="pointer-events-none absolute left-0 top-0 h-full w-auto max-w-none sm:h-fit sm:w-full"
+                  className="pointer-events-none absolute top-0 left-0 h-full w-auto max-w-none sm:h-fit sm:w-full"
                   src={dotsPattern}
                   alt="Dots pattern"
                   width={763}
@@ -138,7 +138,7 @@ const Animation = ({ apiCode, sqlCode }) => {
             <Step index={1} title="Test and deploy <span>>></span>">
               <div
                 className={clsx(
-                  'relative flex flex-col gap-12 border border-gray-new-40 bg-black-pure xl:gap-7 lg:gap-9 sm:gap-4',
+                  'relative flex flex-col gap-12 border border-gray-new-40 bg-black-pure sm:gap-4 lg:gap-9 xl:gap-7',
                   codeWrapperClassName
                 )}
               >
@@ -158,8 +158,8 @@ const Animation = ({ apiCode, sqlCode }) => {
                 </m.div>
                 <button
                   className={clsx(
-                    'flex w-fit items-center gap-1.5 border border-gray-new-40 bg-black-pure py-2 pl-2.5 pr-3',
-                    'text-xs font-medium leading-none tracking-extra-tight',
+                    'flex w-fit items-center gap-1.5 border border-gray-new-40 bg-black-pure py-2 pr-3 pl-2.5',
+                    'text-xs leading-none font-medium tracking-extra-tight',
                     'xl:gap-1 xl:p-1.5 xl:pr-2 xl:text-[9px]',
                     'lg:gap-1.5 lg:pr-2.5 lg:text-[11px]',
                     'sm:gap-1 sm:p-[3px] sm:pr-1 sm:text-[6px]'
@@ -167,7 +167,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                   type="button"
                   disabled
                 >
-                  <PlayIcon className="size-3 xl:size-[9px] lg:size-3 sm:size-1.5" />
+                  <PlayIcon className="size-3 sm:size-1.5 lg:size-3 xl:size-[9px]" />
                   Run Query
                 </button>
               </div>

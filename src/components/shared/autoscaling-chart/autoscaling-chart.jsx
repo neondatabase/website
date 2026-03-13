@@ -678,7 +678,7 @@ const AutoscalingChart = ({
   };
 
   return (
-    <div ref={containerRef} className={clsx('text-gray-200 not-prose w-full')}>
+    <div ref={containerRef} className={clsx('not-prose text-gray-200 w-full')}>
       <div className="border border-gray-new-30 bg-gray-new-8">
         <div className={clsx(compact ? 'p-6' : 'p-8')}>
           {/* Header with controls */}
@@ -696,7 +696,7 @@ const AutoscalingChart = ({
               <div className="flex items-center justify-center gap-2.5">
                 <select
                   value={provisioningStrategy}
-                  className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-none"
+                  className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-hidden"
                   onChange={handleProvisioningStrategyChange}
                 >
                   <option value="p99.5+20">P99.5 + 20% (AWS default)</option>
@@ -719,15 +719,15 @@ const AutoscalingChart = ({
       {showStats && (
         <div className="flex flex-wrap items-start justify-center gap-0 sm:flex-col sm:items-stretch">
           {/* Autoscaling Stats - Combined Panel */}
-          <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
-            <h3 className="mb-3 mt-0 font-mono text-xs font-medium uppercase tracking-wide text-[#73bf69]">
+          <div className="-mt-[1px] -ml-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+            <h3 className="mt-0 mb-3 font-mono text-xs font-medium tracking-wide text-[#73bf69] uppercase">
               Autoscaling
             </h3>
             <div className="space-y-2 font-mono">
               <div className="flex items-baseline justify-between gap-4">
                 <span className="text-gray-400 text-sm">Compute</span>
                 <div className="text-right">
-                  <span className="text-xl font-light tabular-nums text-white">
+                  <span className="text-xl font-light text-white tabular-nums">
                     {stats.autoscalingCUHours}
                     <span className="text-gray-500 ml-2 text-xs font-normal">CU-hrs/mon</span>
                   </span>
@@ -743,7 +743,7 @@ const AutoscalingChart = ({
                     value={autoscalingCost}
                     step="0.001"
                     min="0"
-                    className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
+                    className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light text-white tabular-nums focus:border-[#73bf69] focus:outline-hidden"
                     onChange={(e) => setAutoscalingCost(parseFloat(e.target.value))}
                   />
                   <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
@@ -751,7 +751,7 @@ const AutoscalingChart = ({
               </div>
               <div className="flex items-baseline justify-between gap-4">
                 <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
-                <span className="text-2xl font-light tabular-nums text-white">
+                <span className="text-2xl font-light text-white tabular-nums">
                   ${stats.autoscalingCostTotal}
                 </span>
               </div>
@@ -761,15 +761,15 @@ const AutoscalingChart = ({
           {/* Provisioned Stats - Combined Panel */}
           {!autoscalingOnly && (
             <>
-              <div className="-ml-[1px] -mt-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6 sm:max-w-full">
-                <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#e8912d]">
+              <div className="-mt-[1px] -ml-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6 sm:max-w-full">
+                <h3 className="mt-0 mb-3 text-xs font-medium tracking-wide text-[#e8912d] uppercase">
                   Provisioned Equivalent
                 </h3>
                 <div className="space-y-2 font-mono">
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-gray-400 text-sm">Compute</span>
                     <div className="text-right">
-                      <div className="text-xl font-light tabular-nums text-white">
+                      <div className="text-xl font-light text-white tabular-nums">
                         {(stats.fixedCUHours / 720).toFixed(1)} vCPU /{' '}
                         {((stats.fixedCUHours / 720) * 4).toFixed(0)} GB
                       </div>
@@ -785,7 +785,7 @@ const AutoscalingChart = ({
                         value={fixedCost}
                         step="0.001"
                         min="0"
-                        className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
+                        className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light text-white tabular-nums focus:border-[#73bf69] focus:outline-hidden"
                         onChange={(e) => setFixedCost(parseFloat(e.target.value))}
                       />
                       <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
@@ -793,7 +793,7 @@ const AutoscalingChart = ({
                   </div>
                   <div className="flex items-baseline justify-between gap-4">
                     <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
-                    <span className="text-2xl font-light tabular-nums text-white">
+                    <span className="text-2xl font-light text-white tabular-nums">
                       ${stats.fixedCostTotal}
                     </span>
                   </div>
@@ -810,11 +810,11 @@ const AutoscalingChart = ({
               </div>
 
               {/* Comparison Summary - Redesigned */}
-              <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+              <div className="-mt-[1px] -ml-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
                 <div className="grid grid-cols-3 gap-0 font-mono sm:grid-cols-1">
                   {/* Compute Winner */}
                   <div className="px-4 text-center">
-                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                    <div className="text-gray-400 mb-2 text-xs tracking-wide uppercase">
                       Compute Winner
                     </div>
                     <div
@@ -839,8 +839,8 @@ const AutoscalingChart = ({
                   </div>
 
                   {/* Cost Winner */}
-                  <div className="border-l border-r border-gray-new-30 px-4 text-center">
-                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                  <div className="border-r border-l border-gray-new-30 px-4 text-center">
+                    <div className="text-gray-400 mb-2 text-xs tracking-wide uppercase">
                       Cost Winner
                     </div>
                     <div
@@ -865,7 +865,7 @@ const AutoscalingChart = ({
 
                   {/* Monthly Savings */}
                   <div className="px-4 text-center">
-                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                    <div className="text-gray-400 mb-2 text-xs tracking-wide uppercase">
                       Monthly Savings
                     </div>
                     <div>{stats.cheaper} saves</div>

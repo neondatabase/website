@@ -18,7 +18,7 @@ const TagCloud = ({ items, className, titleClassName, iconClassName }) => (
         />
         <span
           className={clsx(
-            'font-normal leading-none tracking-extra-tight text-gray-new-90 lg:text-sm',
+            'leading-none font-normal tracking-extra-tight text-gray-new-90 lg:text-sm',
             titleClassName
           )}
         >

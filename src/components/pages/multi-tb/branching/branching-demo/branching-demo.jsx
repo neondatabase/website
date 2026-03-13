@@ -222,7 +222,7 @@ const BranchingDemo = ({ className }) => {
                 <li
                   className={clsx('h-px w-[60px] transition-colors duration-300 lg:w-[40px]', {
                     'bg-[#0B4C43]': index < currentStep,
-                    'bg-gradient-to-r from-[#0B4C43] to-gray-new-15': index === currentStep,
+                    'bg-linear-to-r from-[#0B4C43] to-gray-new-15': index === currentStep,
                     'bg-gray-new-15': index > currentStep,
                   })}
                   aria-hidden
@@ -243,7 +243,7 @@ const BranchingDemo = ({ className }) => {
           />
           {currentStep === 0 ? (
             <Image
-              className="pointer-events-none absolute bottom-0 right-0 z-10 rounded-[10px] lg:bottom-[33px] lg:right-[-32px] lg:w-[410px]"
+              className="pointer-events-none absolute right-0 bottom-0 z-10 rounded-[10px] lg:right-[-32px] lg:bottom-[33px] lg:w-[410px]"
               src={branchingDemo}
               alt=""
               width={525}

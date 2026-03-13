@@ -43,7 +43,7 @@ const ExternalCode = async ({
     return (
       <CodeBlockWrapper
         className={clsx(
-          '[&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
+          '[&>pre]:my-0 [&>pre]:bg-gray-new-98! [&>pre]:dark:bg-gray-new-10!',
           shouldWrap && 'code-wrap',
           className
         )}

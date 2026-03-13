@@ -38,8 +38,8 @@ const Animation = ({ className }) => {
 
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
-      <div className={clsx('[&_canvas]:!h-full [&_canvas]:!w-full', className)} ref={animationRef}>
+      <span className="absolute top-0 left-1/2 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
+      <div className={clsx('[&_canvas]:h-full! [&_canvas]:w-full!', className)} ref={animationRef}>
         <RiveComponent />
       </div>
     </div>

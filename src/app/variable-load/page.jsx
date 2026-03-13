@@ -33,12 +33,12 @@ const VariableLoadPage = async () => {
 
   return (
     <Layout isHeaderSticky>
-      <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
+      <div className="flex flex-1 flex-col safe-paddings lg:block dark:bg-black-pure dark:text-white">
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] xl:gap-x-7 xl:pt-14 lg:block lg:gap-x-5 lg:pt-11 md:pt-8"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] lg:block lg:gap-x-5 lg:pt-11 xl:gap-x-7 xl:pt-14 md:pt-8"
           size="1344"
         >
-          <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2 lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8">
+          <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 sm:pb-8 lg:ml-0 lg:pt-0 xl:col-span-10 xl:col-start-2 md:mx-auto md:pb-[70px]">
             <article>
               <Hero />
               <Load title={tableOfContents[0]} />

@@ -43,8 +43,8 @@ const Aside = ({
         )}
 
         {author && (
-          <div className="mt-4 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:rounded-lg lg:bg-gray-new-95 lg:p-5 dark:lg:bg-gray-new-10">
-            <p className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-gray-new-60 dark:text-gray-new-50 lg:hidden">
+          <div className="mt-4 border-t border-gray-new-90 pt-4 lg:rounded-lg lg:bg-gray-new-95 lg:p-5 dark:border-gray-new-15/70 dark:lg:bg-gray-new-10">
+            <p className="mb-5 text-[12px] leading-none font-semibold -tracking-extra-tight text-gray-new-60 uppercase lg:hidden dark:text-gray-new-50">
               Author
             </p>
             <div className="flex items-start gap-2.5">
@@ -67,7 +67,7 @@ const Aside = ({
               </div>
             </div>
             {author.bio && (
-              <p className="mt-4 text-[14px] leading-normal text-gray-new-40 dark:text-gray-new-80 lg:text-sm md:mt-3">
+              <p className="mt-4 text-[14px] leading-normal text-gray-new-40 lg:text-sm md:mt-3 dark:text-gray-new-80">
                 {author.bio}
               </p>
             )}
@@ -75,7 +75,7 @@ const Aside = ({
               <div className="mt-2 flex items-center gap-4 md:mt-1.5">
                 {author.link && (
                   <Link
-                    className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45"
+                    className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:border-transparent! dark:border-green-45 dark:text-green-45"
                     to={author.link.url}
                     target="_blank"
                   >
@@ -83,7 +83,7 @@ const Aside = ({
                   </Link>
                 )}
                 <Link
-                  className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45"
+                  className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:border-transparent! dark:border-green-45 dark:text-green-45"
                   to={authorPagePath}
                 >
                   Other guides

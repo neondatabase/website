@@ -54,13 +54,13 @@ const ITEMS = [
 ];
 
 const Bento = () => (
-  <section className="bento safe-paddings mt-[200px] xl:mt-[192px] lg:mt-40 md:mt-[105px]">
-    <Container className="lg:!max-w-3xl md:px-5" size="960">
+  <section className="bento mt-[200px] safe-paddings lg:mt-40 xl:mt-[192px] md:mt-[105px]">
+    <Container className="lg:max-w-3xl! md:px-5" size="960">
       <div className="mx-auto flex max-w-[832px] flex-col text-pretty lg:max-w-xl">
-        <h2 className="max-w-2xl font-title text-5xl font-medium leading-none tracking-extra-tight xl:max-w-xl xl:text-[44px] lg:mr-10 lg:text-4xl md:mr-0 md:text-[32px]">
+        <h2 className="max-w-2xl font-title text-5xl leading-none font-medium tracking-extra-tight lg:mr-10 lg:text-4xl xl:max-w-xl xl:text-[44px] md:mr-0 md:text-[32px]">
           The database AI-native apps were waiting for
         </h2>
-        <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:text-balance lg:text-pretty lg:text-base md:mt-3">
+        <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base lg:text-pretty xl:text-balance md:mt-3">
           Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
           and compute, autoscales to zero, and lets agents create databases without friction.
         </p>
@@ -75,7 +75,7 @@ const Bento = () => (
           >
             <div className="absolute inset-x-0 bottom-0 z-10 p-6 pr-8 text-lg leading-snug tracking-extra-tight lg:p-5 lg:text-base">
               <h3 className="inline font-medium text-white">{title}</h3>{' '}
-              <p className="text-with-links inline font-light text-gray-new-60">{description}</p>
+              <p className="inline text-with-links font-light text-gray-new-60">{description}</p>
             </div>
             <div className="relative h-full shrink-0 overflow-hidden rounded-[inherit]">
               <Image

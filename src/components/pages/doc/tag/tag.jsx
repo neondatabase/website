@@ -17,7 +17,7 @@ const sizes = {
 const Tag = ({ className, label, size }) => (
   <span
     className={clsx(
-      'block w-fit whitespace-nowrap rounded-[40px] font-semibold uppercase leading-none',
+      'block w-fit rounded-[40px] leading-none font-semibold whitespace-nowrap uppercase',
       className,
       themes?.[label] || themes.default,
       sizes?.[size] || sizes.md

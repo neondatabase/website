@@ -37,7 +37,7 @@ const CaseStudies = ({ items }) => (
           to={link}
         >
           <div className="relative z-10 flex h-full flex-col justify-between">
-            <p className="relative text-xl font-medium leading-snug tracking-tight text-white xl:text-lg">
+            <p className="relative text-xl leading-snug font-medium tracking-tight text-white xl:text-lg">
               {title}{' '}
               <span
                 className="font-light text-gray-new-60 lg:block"
@@ -45,7 +45,7 @@ const CaseStudies = ({ items }) => (
               />
             </p>
             <Image
-              className="relative h-6 w-fit xl:h-5 sm:h-[18px]"
+              className="relative h-6 w-fit sm:h-[18px] xl:h-5"
               src={logo.src}
               alt={logo.alt}
               width={logo.width}

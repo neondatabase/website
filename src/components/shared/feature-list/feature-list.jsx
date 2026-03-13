@@ -61,14 +61,14 @@ const FeatureList = ({ className = '', icons = [], children }) => {
 
   return (
     <ul
-      className={clsx('feature-list !mt-8 flex flex-col gap-10 !p-0 sm:!mt-7 sm:gap-9', className)}
+      className={clsx('feature-list mt-8! flex flex-col gap-10 p-0! sm:mt-7! sm:gap-9', className)}
     >
       {features.map((feature, index) => {
         const title = getFeatureTitle(feature);
         const id = updateTitleById(title);
 
         return (
-          <li className="relative !m-0 flex gap-3 before:!content-none" key={id}>
+          <li className="relative m-0! flex gap-3 before:content-none!" key={id}>
             <Icon
               icon={icons[index] || ''}
               index={index}
@@ -76,7 +76,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
               lastActive={lastActive}
               setLastActive={setLastActive}
             />
-            <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:!m-0">
+            <div className="flex max-w-[664px] flex-col gap-3 tracking-tight! md:gap-2 [&>*]:m-0!">
               {feature}
             </div>
           </li>

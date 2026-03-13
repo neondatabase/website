@@ -55,12 +55,12 @@ const CtaBlock = ({
     >
       <div className={clsx(theme === 'column' && 'text-center', 'sm:text-center')}>
         {title && (
-          <h2 className={clsx(sizeClassNames[size].heading, '!my-0 text-gray-new-98')}>{title}</h2>
+          <h2 className={clsx(sizeClassNames[size].heading, 'my-0! text-gray-new-98')}>{title}</h2>
         )}
         {description && (
           <p
             className={clsx(
-              'text-pretty [&>a:hover]:cursor-pointer [&>a:hover]:underline [&>a]:text-primary-2',
+              'text-pretty [&>a]:text-primary-2 [&>a:hover]:cursor-pointer [&>a:hover]:underline',
               sizeClassNames[size].description,
               theme === 'column' && 'max-w-[520px]',
               hasDecor ? 'text-gray-new-98/70' : 'text-gray-new-60'
@@ -77,7 +77,7 @@ const CtaBlock = ({
       >
         <Button
           className={clsx(
-            'h-10 px-7 text-base !font-semibold tracking-tighter sm:w-full sm:max-w-sm',
+            'h-10 px-7 text-base font-semibold! tracking-tighter sm:w-full sm:max-w-sm',
             buttonClassName
           )}
           theme="primary"

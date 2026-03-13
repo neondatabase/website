@@ -29,7 +29,7 @@ const Authors = ({ authors, isPriority = false, className }) => {
       <div className="line-clamp-2 space-x-0.5 leading-none">
         {authors.map(({ name }, index) => (
           <span
-            className="text-sm font-medium leading-tight tracking-extra-tight text-gray-new-94"
+            className="text-sm leading-tight font-medium tracking-extra-tight text-gray-new-94"
             key={index}
           >
             {name}

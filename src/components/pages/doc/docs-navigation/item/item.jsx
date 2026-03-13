@@ -81,11 +81,11 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       <LinkTag
         className={clsx(
           'relative flex h-full items-center gap-1',
-          'whitespace-nowrap rounded-sm text-sm font-medium tracking-tight',
+          'rounded-sm text-sm font-medium tracking-tight whitespace-nowrap',
           'transition-colors duration-200',
-          'hover:text-black-new group-hover:text-black-new',
+          'group-hover:text-black-new hover:text-black-new',
           'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
-          'dark:after:bg-white dark:hover:text-white dark:group-hover:text-white',
+          'dark:group-hover:text-white dark:after:bg-white dark:hover:text-white',
           isLastActive
             ? 'text-black-new after:opacity-100 dark:text-white'
             : 'text-gray-new-30 dark:text-gray-new-70'
@@ -105,11 +105,11 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       {subnav && (
         <div
           className={clsx(
-            'absolute -left-5 top-[90%] z-10',
+            'absolute top-[90%] -left-5 z-10',
             'pointer-events-none opacity-0',
-            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
-            'focus-within:pointer-events-auto focus-within:visible focus-within:opacity-100 focus-within:[transform:none]'
+            'origin-top-left [transform:rotateX(-12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
+            'group-hover:pointer-events-auto group-hover:visible group-hover:[transform:none] group-hover:opacity-100',
+            'focus-within:pointer-events-auto focus-within:visible focus-within:[transform:none] focus-within:opacity-100'
           )}
         >
           <ul
@@ -120,10 +120,10 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
             )}
           >
             {subnav.map((item, index) => (
-              <li className={item.section && 'mt-2 first:mt-0'} key={index}>
+              <li className={clsx(item.section && 'mt-2 first:mt-0')} key={index}>
                 {item.section ? (
                   <>
-                    <span className="mb-3.5 block text-xs uppercase leading-none tracking-tight text-gray-new-50">
+                    <span className="mb-3.5 block text-xs leading-none tracking-tight text-gray-new-50 uppercase">
                       {item.section}
                     </span>
                     <ul className="flex flex-col gap-4">

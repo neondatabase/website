@@ -18,7 +18,7 @@ const BranchingDemoContent = ({
       step === 0 ? 'w-[400px] lg:w-[346px]' : 'w-[312px] lg:w-[270px]'
     )}
   >
-    <h3 className="mt-[67px] text-balance text-[28px] font-medium leading-tight tracking-tighter text-white lg:mt-8 lg:text-[24px]">
+    <h3 className="mt-[67px] text-[28px] leading-tight font-medium tracking-tighter text-balance text-white lg:mt-8 lg:text-[24px]">
       {title}
     </h3>
     <p
@@ -29,7 +29,7 @@ const BranchingDemoContent = ({
       {step === 5 ? (
         <div className="flex gap-4">
           <Button
-            className={clsx('h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight')}
+            className={clsx('h-8 px-4 text-[13px] leading-none font-medium tracking-extra-tight')}
             to={button.to}
             theme={button.theme}
           >
@@ -47,7 +47,7 @@ const BranchingDemoContent = ({
       ) : (
         <Button
           className={clsx(
-            'h-8 px-4 text-[13px] font-medium leading-none tracking-extra-tight',
+            'h-8 px-4 text-[13px] leading-none font-medium tracking-extra-tight',
             disabled && 'cursor-not-allowed',
             isLoading && 'cursor-progress'
           )}

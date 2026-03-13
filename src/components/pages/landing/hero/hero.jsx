@@ -42,22 +42,22 @@ const Hero = ({
   const hasDetails = detailsTitle && detailsDescription;
 
   return (
-    <section className={clsx('safe-paddings overflow-hidden', themes[theme].className)}>
+    <section className={clsx('overflow-hidden safe-paddings', themes[theme].className)}>
       <Container className="flex flex-col items-center" size="medium">
         <h1
           className={clsx(
-            'text-center font-title font-medium leading-none tracking-extra-tight',
+            'text-center font-title leading-none font-medium tracking-extra-tight',
             themes[theme].titleClassName
           )}
         >
           {title}
         </h1>
         <p
-          className="mx-auto mt-4 max-w-3xl text-center text-xl font-light leading-snug tracking-tight lg:text-lg md:max-w-[85%] md:text-base xs:max-w-full [&>a]:text-green-45"
+          className="mx-auto mt-4 max-w-3xl text-center text-xl leading-snug font-light tracking-tight lg:text-lg md:max-w-[85%] md:text-base xs:max-w-full [&>a]:text-green-45"
           dangerouslySetInnerHTML={{ __html: description }}
         />
         {simpleField ? (
-          <div className="mx-auto my-[75px] w-[504px] max-w-full md:my-16 md:max-w-[90%] sm:my-14">
+          <div className="mx-auto my-[75px] w-[504px] max-w-full sm:my-14 md:my-16 md:max-w-[90%]">
             <Form
               hubspotFormId={hubspotFormId}
               fieldGroups={fieldGroups}
@@ -74,8 +74,8 @@ const Hero = ({
               className={clsx(
                 'flex w-full justify-center lg:items-center',
                 hasDetails
-                  ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:flex-col sm:my-14'
-                  : 'my-[88px] lg:my-16 sm:my-14'
+                  ? 'my-[120px] gap-[86px] sm:my-14 lg:mx-auto lg:my-20 lg:flex-col xl:gap-10'
+                  : 'my-[88px] sm:my-14 lg:my-16'
               )}
             >
               <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
