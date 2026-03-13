@@ -119,13 +119,13 @@ The `allow_user_to_create_organization` field has been removed. To disable organ
 
 **API fields reference**
 
-| Field                   | Type                        | Description                                                                                                                          |
-| :---------------------- | :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled`               | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error.                       |
+| Field                   | Type                        | Description                                                                                                                                                                      |
+| :---------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`               | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error.                                                                   |
 | `organization_limit`    | number (≥ 0)                | Max total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Set to `0` to disable org creation entirely. Default: 1. |
-| `membership_limit`      | number (≥ 1)                | Max members per organization. Default: 100.                                                                                          |
-| `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.                       |
-| `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false.                    |
+| `membership_limit`      | number (≥ 1)                | Max members per organization. Default: 100.                                                                                                                                      |
+| `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.                                                                   |
+| `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false.                                                                |
 
 **API Documentation**
 
