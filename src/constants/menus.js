@@ -24,9 +24,9 @@ export default {
               description: 'Instant, autoscaling replicas',
             },
             {
-              title: 'Point-in-time Restore',
-              to: LINKS.pointInTimeRestore,
-              description: 'Restore your database to a specific point in time',
+              title: 'Instant Restore',
+              to: LINKS.instantRestore,
+              description: 'Instant recovery when mistakes happen',
             },
           ],
         },
