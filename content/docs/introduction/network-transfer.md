@@ -4,8 +4,9 @@ subtitle: Monitor and reduce data egress costs
 enableTableOfContents: true
 summary: >-
   Covers the monitoring and reduction of network transfer (egress) costs in
-  Neon, detailing public and private transfer types, common causes of high
-  usage, Console and API monitoring options, and strategies to reduce transfer.
+  Neon, including the egress optimizer agent skill, public and private transfer
+  types, common causes of high usage, Console and API monitoring, and strategies
+  to reduce transfer.
 updatedOn: '2026-03-09T20:42:56.530Z'
 ---
 
@@ -284,6 +285,14 @@ For broader cost reduction strategies across all billing metrics, see [Cost opti
 **Manage logical replication.** Initial table syncs can produce large spikes in network transfer. Dropping and re-creating a replication slot forces a new full sync, so avoid resetting slots as a troubleshooting step unless necessary. Replicate only the tables or columns you need by using row filters (WHERE clauses) and column lists on [`CREATE PUBLICATION`](https://www.postgresql.org/docs/current/sql-createpublication.html) (PostgreSQL 15+). Monitor replication lag and throughput to understand ongoing transfer volume.
 
 **Use Private Link for internal traffic.** If your application runs in AWS, [Private Networking](/docs/guides/neon-private-networking) (Scale plan) routes traffic over PrivateLink at $0.01/GB instead of $0.10/GB for public network transfer beyond the included allowance.
+
+### Use the egress optimizer agent skill
+
+An [agent skill](https://github.com/neondatabase/agent-skills) is available that guides your AI assistant through diagnosing and fixing application-side query patterns that cause excessive egress. The skill walks through analyzing your codebase for anti-patterns (such as `SELECT *`, missing pagination, high-frequency queries on static data, and application-side aggregation), applying fixes, and verifying with tests. To add it to your AI assistant:
+
+```bash
+npx skills add neondatabase/agent-skills -s neon-postgres-egress-optimizer
+```
 
 <Admonition type="tip">
 Building a platform on Neon? You can cap per-project network transfer with [consumption limits](/docs/guides/consumption-limits).
