@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-03-13T18:10:11.939Z'
+updatedOn: '2026-03-14T05:17:06.221Z'
 ---
 
 ## Top level overview
