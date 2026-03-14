@@ -19,7 +19,7 @@ const Changelog = ({ posts }) => (
   <>
     <Hero />
     <ChangelogForm className="mb-5 hidden xl:flex" />
-    <ChangelogList className="mt-4" posts={posts} />
+    <ChangelogList className="mt-16" posts={posts} />
   </>
 );
 
@@ -67,10 +67,18 @@ const Post = ({
   return (
     <>
       <div
-        className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none', className)}
+        className={clsx(
+          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isWideLayout && 'max-w-none',
+          className
+        )}
       >
         {breadcrumbs?.length > 0 && (
-          <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
+          <Breadcrumbs
+            className={clsx(isChangelog && 'pt-1', '!mb-7')}
+            breadcrumbs={breadcrumbs}
+            baseUrl={breadcrumbsBaseUrl}
+          />
         )}
 
         {isChangelog ? (
@@ -79,7 +87,7 @@ const Post = ({
           <article>
             <h1
               className={clsx(
-                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
+                'text-balance text-[36px] font-medium leading-tight tracking-tighter md:text-[28px]',
                 tag && 'inline'
               )}
             >
@@ -87,7 +95,7 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+              <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
                 {subtitle}
               </p>
             )}
@@ -98,23 +106,22 @@ const Post = ({
             />
           </article>
         )}
+        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
 
         {!isChangelog && (
           <NavigationLinks
-            className="mt-12 md:mt-10"
+            className={clsx(isDocsIndex ? 'mt-14' : 'mt-6')}
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}
           />
         )}
-
-        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
-      {/* Regular pages: Show standard right sidebar */}
-      {!isWideLayout && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
-          className="!ml-0 w-64 shrink-0 xl:hidden"
+          className="-left-20 !ml-0 w-[312px] shrink-0 3xl:left-auto xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}

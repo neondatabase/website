@@ -53,7 +53,7 @@ function trackLLMPageview(req) {
   // Fire and forget — do not await to avoid blocking the response
   fetch('https://neonapi.io/t.js', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${  userAgent}` },
+    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
     body: JSON.stringify(payload),
   }).catch(() => {});
 }

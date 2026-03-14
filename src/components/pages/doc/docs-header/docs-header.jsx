@@ -11,7 +11,7 @@ import DocsNavigation from '../docs-navigation';
 
 const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
   <div className="flex h-28 w-full items-center after:absolute after:left-0 after:right-0 after:top-16 after:h-px after:bg-gray-new-90 after:dark:bg-gray-new-20 lg:h-14 lg:after:hidden">
-    <Container className="z-10 w-full" size="1600">
+    <Container className="z-10 w-full" size="1920">
       <div className="flex h-16 w-full items-center justify-between lg:h-14 lg:pr-20">
         <div className="flex items-center gap-x-7">
           <Logo className="h-7" width={102} height={28} priority isHeader />
