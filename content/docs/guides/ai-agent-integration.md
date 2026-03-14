@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-27T19:55:46.376Z'
+updatedOn: '2026-03-14T03:21:15.120Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
