@@ -210,13 +210,13 @@
 
       thead {
         tr {
-          @apply border-b border-gray-new-90 dark:border-gray-new-20;
+          @apply border-b border-gray-new-80 dark:border-gray-new-20;
         }
       }
 
       tbody {
         tr {
-          @apply border-b border-gray-new-90 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
+          @apply border-b border-gray-new-80 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
         }
       }
     }
