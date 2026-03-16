@@ -564,14 +564,18 @@ const defaultConfig = {
     }));
 
     return {
-      // beforeFiles: resolve sub-index llms.txt files from public/ before the
-      // docs/[...slug] catch-all intercepts them (known Next.js behavior)
-      beforeFiles: [{ source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' }],
+      // beforeFiles: serve static files from public/docs/ before the
+      // docs/[...slug] catch-all intercepts them
+      beforeFiles: [
+        { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
+        { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+      ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
       afterFiles: [
-        // Serve /llms.txt from /docs/llms.txt (canonical location is public/docs/llms.txt)
+        // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
+        { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

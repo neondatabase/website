@@ -25,6 +25,7 @@ function applyDocHeaders(response) {
   response.headers.append('Vary', 'Accept');
   response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
   response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+  response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
   return response;
 }
 
@@ -121,6 +122,7 @@ export async function middleware(req) {
       const response = NextResponse.next();
       response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
       response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+      response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
       if (pathname.endsWith('.md')) {
         response.headers.set('X-Robots-Tag', 'noindex');
       }
