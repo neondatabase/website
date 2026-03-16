@@ -196,7 +196,7 @@ const RecoveryStories = () => {
             {isExpanded ? 'Show less' : 'Show more'}
             <span className="sr-only">recovery stories</span>
             <ArrowDownIcon
-              className={isExpanded && 'mt-0.5 rotate-180'}
+              className={isExpanded ? 'mt-0.5 rotate-180' : undefined}
               width={12}
               height={7}
               alt=""

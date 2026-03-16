@@ -60,7 +60,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
             </span>
 
             <h2
-              className="text-[28px] leading-tight font-normal tracking-tighter text-white sm:text-2xl lg:text-2xl md:text-[28px] xs:text-[20px] [&_span]:text-gray-new-60"
+              className="text-[28px] leading-tight font-normal tracking-tighter text-white sm:text-2xl md:text-[28px] lg:text-2xl xs:text-[20px] [&_span]:text-gray-new-60"
               dangerouslySetInnerHTML={{ __html: title }}
             />
           </div>
@@ -89,9 +89,9 @@ FeaturedCard.propTypes = {
 };
 
 const Hero = () => (
-  <section className="relative py-40 safe-paddings sm:py-10 lg:py-20 xl:py-36 md:py-14">
-    <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
-      <div className="flex max-w-[960px] flex-col gap-5 lg:max-w-[640px] md:max-w-none lt:max-w-[864px]">
+  <section className="relative py-40 safe-paddings sm:py-10 md:py-14 lg:py-20 xl:py-36">
+    <Container size="branching" className="flex flex-col gap-16 md:gap-10 lg:gap-14">
+      <div className="flex max-w-[960px] flex-col gap-5 md:max-w-none lg:max-w-[640px] lt:max-w-[864px]">
         <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
@@ -105,12 +105,12 @@ const Hero = () => (
             Case studies
           </span>
         </div>
-        <h1 className="text-[3.5rem] leading-[1.125] font-normal tracking-[-0.04em] text-white lg:text-[40px] md:text-[32px] lt:text-[54px]">
+        <h1 className="text-[3.5rem] leading-[1.125] font-normal tracking-[-0.04em] text-white md:text-[32px] lg:text-[40px] lt:text-[54px]">
           Real-world stories from teams shipping world-class products on Neon.
         </h1>
       </div>
 
-      <div className="grid grid-cols-2 gap-8 lg:gap-6 md:grid-cols-1 md:gap-6">
+      <div className="grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-6 lg:gap-6">
         {CARDS.map(({ logo, category, title, linkText, linkUrl, background }, index) => (
           <FeaturedCard
             key={index}

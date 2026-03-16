@@ -200,7 +200,7 @@ export default {
     },
     {
       rows: '1',
-      feature: 'Added Features',
+      feature: 'Account & Management',
     },
     {
       rows: '2',
@@ -239,6 +239,15 @@ export default {
       free: false,
       launch: false,
       scale: "<a href='/docs/security/compliance#soc-2'>Available</a>",
+    },
+    {
+      rows: '1',
+      feature: {
+        title: 'Team members',
+      },
+      free: 'Unlimited',
+      launch: 'Unlimited',
+      scale: 'Unlimited',
     },
     {
       rows: '1',

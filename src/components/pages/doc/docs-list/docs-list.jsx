@@ -30,19 +30,19 @@ const parsedChildren = (children) =>
 const DocsList = ({ title, theme = 'default', children }) => (
   <>
     {title && (
-      <h3 className="mt-0 mb-4 text-base leading-tight font-medium tracking-extra-tight">
+      <h3 className="mt-0 mb-3 text-base leading-tight font-medium tracking-extra-tight">
         {title}
       </h3>
     )}
-    <ul className="m-0! p-0!">
+    <ul className="m-0! flex flex-col gap-y-2 p-0!">
       {parsedChildren(children).map((child) => (
         <li
           className={clsx(
-            'mt-2! mb-0! flex w-fit items-start gap-1.5 text-gray-new-20 before:hidden dark:text-gray-new-70',
+            'group m-0! flex w-fit items-start gap-1.5 text-gray-new-30 before:hidden dark:text-gray-new-85',
             '[&_p]:my-0 [&_p]:pl-5 [&_p]:text-sm [&_p]:tracking-extra-tight',
-            '[&_a]:border-0 [&_a]:pl-5 [&_a]:text-sm [&_a]:tracking-extra-tight',
-            '[&_a]:text-inherit! [&:has(a)]:transition-colors [&:has(a)]:duration-200',
-            '[&:has(a)]:hover:text-secondary-8 [&:has(a)]:hover:dark:text-green-45'
+            '[&_a]:pl-5 [&_a]:text-sm [&_a]:tracking-extra-tight [&_a]:text-gray-new-30 [&_a]:no-underline! [&_a]:decoration-transparent [&_a]:dark:text-gray-new-85',
+            '[&:has(a)]:transition-colors [&:has(a)]:duration-200',
+            '[&_a]:hover:text-black-pure [&_a]:hover:dark:text-white [&:has(a)]:hover:text-black-pure [&:has(a)]:hover:dark:text-white'
           )}
         >
           <Icon theme={theme} className="pointer-events-none absolute left-0" />

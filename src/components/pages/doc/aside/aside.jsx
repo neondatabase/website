@@ -21,14 +21,14 @@ const Aside = ({
   return (
     <div
       className={clsx(
-        'relative -ml-6 w-full max-w-64 xl:hidden',
+        'relative -ml-6 w-full max-w-[312px] xl:hidden',
         isTemplate
           ? 'col-span-2 col-start-11 mt-4 min-w-64 justify-self-end 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto'
           : '',
         className
       )}
     >
-      <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
+      <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] w-full max-w-64 flex-col pb-5 2xl:justify-self-end">
         {enableTableOfContents && (
           <TableOfContents items={tableOfContents} isTemplate={isTemplate} />
         )}
@@ -67,7 +67,7 @@ const Aside = ({
               </div>
             </div>
             {author.bio && (
-              <p className="mt-4 text-[14px] leading-normal text-gray-new-40 lg:text-sm md:mt-3 dark:text-gray-new-80">
+              <p className="mt-4 text-[14px] leading-normal text-gray-new-40 md:mt-3 lg:text-sm dark:text-gray-new-80">
                 {author.bio}
               </p>
             )}

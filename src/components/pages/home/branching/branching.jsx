@@ -32,11 +32,11 @@ const FEATURES = [
 
 const Branching = () => (
   <section
-    className="branching relative scroll-mt-[60px] overflow-hidden pt-40 safe-paddings pb-60 lg:scroll-mt-0 lg:pt-20 lg:pb-[104px] xl:py-[136px] md:pt-16 md:pb-20"
+    className="branching relative scroll-mt-[60px] overflow-hidden pt-40 safe-paddings pb-60 md:pt-16 md:pb-20 lg:scroll-mt-0 lg:pt-20 lg:pb-[104px] xl:py-[136px]"
     id="branching"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden md:px-5!"
+      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block md:px-5! lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden"
       size="1600"
     >
       <div className="min-w-0">
@@ -53,9 +53,10 @@ const Branching = () => (
             'sm:-mr-5 sm:-ml-2.5 sm:w-[calc(100%+30px)]'
           )}
           src="/animations/pages/home/branching.riv?20260114"
+          autoBind={false}
           fit={Fit.Contain}
         />
-        <ul className="mt-11 grid grid-cols-3 gap-x-16 lg:mt-12 lg:gap-x-8 lg:px-8 xl:mt-9 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
+        <ul className="mt-11 grid grid-cols-3 gap-x-16 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0 lg:mt-12 lg:gap-x-8 lg:px-8 xl:mt-9">
           {FEATURES.map(({ icon, title, description }, index) => (
             <li key={index}>
               <div className="flex items-center gap-x-2.5">
@@ -71,7 +72,7 @@ const Branching = () => (
                   {title}
                 </h3>
               </div>
-              <p className="mt-2.5 text-base tracking-tight text-gray-new-50 lg:text-[14px] md:mt-1.5 md:pr-8">
+              <p className="mt-2.5 text-base tracking-tight text-gray-new-50 md:mt-1.5 md:pr-8 lg:text-[14px]">
                 {description}
               </p>
             </li>

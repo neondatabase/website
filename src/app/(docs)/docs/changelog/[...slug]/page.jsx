@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import { notFound, redirect } from 'next/navigation';
 
-import Hero from 'components/pages/changelog/hero';
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
+import SectionLabel from 'components/shared/section-label';
 import VERCEL_URL from 'constants/base';
 import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { CHANGELOG_BASE_PATH, CHANGELOG_SLUG_REGEX } from 'constants/docs';
+import ArrowLeftThinIcon from 'icons/arrow-left-thin.inline.svg';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllChangelogs } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
@@ -94,29 +95,32 @@ const ChangelogPost = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="col-span-9 col-start-3 -ml-6 flex max-w-[832px] flex-col pb-20 2xl:col-span-11 2xl:col-start-1 sm:pb-8 lg:ml-0 lg:max-w-full lg:pt-0 xl:max-w-[calc(100vw-366px)] md:mx-auto md:pb-[70px] 3xl:col-span-10 3xl:col-start-2 3xl:ml-0">
-        <Hero className="flex justify-center sm:py-7 lg:pt-16 md:py-10" date={date} withContainer />
+      <div className="mx-auto w-full max-w-[704px] pt-9 pb-40 md:pb-20 lg:pt-0 lg:pb-28 xl:pb-32">
+        <Link
+          className="group sticky top-40 -ml-64 inline-flex items-center gap-1.5 text-sm leading-none tracking-tight xl:static xl:ml-0"
+          to={CHANGELOG_BASE_PATH}
+          theme="gray-50"
+        >
+          <ArrowLeftThinIcon className="size-[14px] shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5" />
+          <span>Back to Changelog</span>
+        </Link>
+
+        <SectionLabel className="-mt-5 text-gray-new-20 xl:mt-4 dark:text-gray-new-80" theme="dark">
+          {date}
+        </SectionLabel>
+
         <article className="relative flex w-full max-w-full flex-col items-start">
           {/* Special title for Algolia */}
           <h2 className="post-title">
-            <time
-              className="mt-3 whitespace-nowrap text-gray-new-20 dark:text-gray-new-70"
-              dateTime={currentSlug}
-            >
+            <time className="sr-only" dateTime={currentSlug}>
               {date}
             </time>
             <span className="sr-only">– {title}</span>
           </h2>
-          <Content className="mt-8 w-full max-w-full prose-h3:text-xl" content={content} />
-          <Link
-            className="mt-10 lg:mt-8"
-            to={CHANGELOG_BASE_PATH}
-            size="sm"
-            theme="blue-green"
-            withArrow
-          >
-            Back to all changelog posts
-          </Link>
+          <Content
+            className="w-full max-w-full prose-h3:text-xl [&>*:first-child]:pt-4"
+            content={content}
+          />
         </article>
       </div>
     </>

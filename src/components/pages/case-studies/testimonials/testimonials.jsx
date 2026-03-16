@@ -37,10 +37,10 @@ const TESTIMONIALS = [
 
 const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
   <article className="flex h-[274px] flex-col justify-between lg:h-auto">
-    <div className="flex flex-col gap-9 lg:gap-6 md:gap-5">
+    <div className="flex flex-col gap-9 md:gap-5 lg:gap-6">
       <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit sm:h-6" />
       <blockquote
-        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
+        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black md:text-base xl:text-lg [&_span]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>
@@ -71,7 +71,7 @@ TestimonialCard.propTypes = {
 };
 
 const Testimonials = () => (
-  <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure lg:py-16 xl:py-20 md:py-14">
+  <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure md:py-14 lg:py-16 xl:py-20">
     <Image
       src={backgroundSvg}
       alt=""
@@ -95,11 +95,11 @@ const Testimonials = () => (
             backed by giants
           </span>
         </div>
-        <h2 className="mt-5 max-w-[800px] text-[48px] leading-dense font-normal tracking-tighter text-black sm:max-w-none sm:text-[28px] lg:max-w-[533px] lg:text-[32px] xl:max-w-[667px] xl:text-[40px] md:max-w-[400px] md:text-2xl lt:max-w-[600px] lt:text-[36px]">
+        <h2 className="mt-5 max-w-[800px] text-[48px] leading-dense font-normal tracking-tighter text-black sm:max-w-none sm:text-[28px] md:max-w-[400px] md:text-2xl lg:max-w-[533px] lg:text-[32px] xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px]">
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
-        <div className="mt-40 grid grid-cols-3 gap-12 sm:grid-cols-1 sm:gap-y-14 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 xl:mt-36 xl:gap-10 md:mt-14">
+        <div className="mt-40 grid grid-cols-3 gap-12 sm:grid-cols-1 sm:gap-y-14 md:mt-14 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 xl:mt-36 xl:gap-10">
           {TESTIMONIALS.map((item, index) => (
             <TestimonialCard key={index} {...item} />
           ))}

@@ -4,10 +4,10 @@ export const runtime = 'edge';
 export const preferredRegion = 'auto';
 
 export async function GET(request) {
-  const fontTitle = fetch(
-    new URL('../../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
+  const fontBreadcrumbs = fetch(
+    new URL('../../../../fonts/geist-mono/GeistMono-Regular.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const fontText = fetch(
+  const fontTitle = fetch(
     new URL('../../../../fonts/inter/Inter-Regular.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
   const logo = fetch(
@@ -17,9 +17,9 @@ export async function GET(request) {
     new URL('../../../../../public/images/og-image/docs-background.jpg', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  const [fontDataTitle, fontDataText, logoData, backgroundData] = await Promise.all([
+  const [fontDataBreadcrumbs, fontDataTitle, logoData, backgroundData] = await Promise.all([
+    fontBreadcrumbs,
     fontTitle,
-    fontText,
     logo,
     background,
   ]);
@@ -51,7 +51,7 @@ export async function GET(request) {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          padding: '44px 56px 76px',
+          padding: '56px 80px 80px 48px',
         }}
       >
         <img
@@ -60,25 +60,24 @@ export async function GET(request) {
           src={backgroundData}
           style={{ position: 'absolute', top: 0, left: 0 }}
         />
-        {hasLogo && <img width="235" height="64" src={logoData} />}
+        {hasLogo && <img width="199" height="56" src={logoData} />}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             marginTop: 'auto',
-            maxWidth: '890px',
+            maxWidth: '720px',
           }}
         >
           <div
             style={{
-              fontFamily: 'Inter',
+              fontFamily: 'Geist Mono',
               fontStyle: 'normal',
-              fontSize: 28,
+              fontSize: 24,
               lineHeight: 1,
               marginBottom: 24,
               letterSpacing: '0.02em',
               color: '#797D86',
-              whiteSpace: 'pre-wrap',
             }}
           >
             {ogBreadcrumbs}
@@ -91,14 +90,14 @@ export async function GET(request) {
               textOverflow: 'ellipsis',
               WebkitBoxOrient: 'vertical',
               WebkitLineClamp: 3,
-              fontFamily: 'ESBuild',
+              fontFamily: 'Inter',
               fontStyle: 'normal',
-              fontWeight: 500,
-              fontSize: 88,
-              lineHeight: 1,
-              paddingBottom: 10,
-              letterSpacing: '-0.03em',
+              fontWeight: 400,
+              fontSize: 80,
+              lineHeight: 1.125,
+              letterSpacing: '-0.04em',
               color: 'white',
+              textWrap: 'pretty',
             }}
           >
             {ogTitle}
@@ -110,14 +109,14 @@ export async function GET(request) {
         height: 630,
         fonts: [
           {
-            name: 'ESBuild',
-            data: fontDataTitle,
+            name: 'Geist Mono',
+            data: fontDataBreadcrumbs,
             style: 'normal',
-            weight: 500,
+            weight: 400,
           },
           {
             name: 'Inter',
-            data: fontDataText,
+            data: fontDataTitle,
             style: 'normal',
             weight: 400,
           },

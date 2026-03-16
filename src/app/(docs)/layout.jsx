@@ -21,11 +21,11 @@ const NeonDocsLayout = async ({ children }) => {
     >
       <div className="flex flex-1 safe-paddings lg:flex-col dark:bg-black-pure dark:text-white">
         <Container
-          className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 sm:pt-7 lg:block xl:pt-9"
-          size="1600"
+          className="flex w-full flex-1 gap-x-24 pt-11 sm:pt-7 lg:block xl:pt-9 2xl:gap-x-8"
+          size="1920"
         >
           <Sidebar
-            className="w-64 shrink-0 lg:hidden"
+            className="w-[312px] shrink-0 lg:hidden"
             navigation={navigation}
             basePath={DOCS_BASE_PATH}
             sdkNavigation={sdkNavigation}

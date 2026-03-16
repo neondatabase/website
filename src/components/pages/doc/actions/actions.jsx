@@ -22,20 +22,24 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
   const Tag = url ? Link : 'button';
 
   return (
-    <Tag
-      className={clsx(
-        'group relative flex w-fit items-center gap-x-2 rounded-sm text-gray-new-40',
-        'transition-colors duration-200 hover:text-secondary-8',
-        'dark:text-gray-new-60 dark:hover:text-primary-1'
-      )}
-      to={url}
-      target={url ? '_blank' : undefined}
-      rel={url ? 'noopener noreferrer' : undefined}
-      icon={url ? 'external' : undefined}
-      onClick={onClick}
-    >
-      <Icon className={clsx(`size-3.5`, iconClassName)} />
-      <span className="text-sm leading-none tracking-extra-tight">{text}</span>
+    <div className="group relative">
+      <Tag
+        className={clsx(
+          'relative flex h-3.5 w-full items-center justify-between rounded-sm text-gray-new-40',
+          'transition-colors duration-200 hover:text-black-pure',
+          'dark:text-gray-new-70 dark:hover:text-white'
+        )}
+        to={url}
+        target={url ? '_blank' : undefined}
+        rel={url ? 'noopener noreferrer' : undefined}
+        icon={url ? 'external' : undefined}
+        onClick={onClick}
+      >
+        <div className="flex items-center gap-x-2">
+          <Icon className={clsx(`size-3.5`, iconClassName)} />
+          <span className="text-sm leading-none tracking-extra-tight">{text}</span>
+        </div>
+      </Tag>
       {tooltip && (
         <span
           className={clsx(
@@ -48,7 +52,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
           {tooltip}
         </span>
       )}
-    </Tag>
+    </div>
   );
 };
 

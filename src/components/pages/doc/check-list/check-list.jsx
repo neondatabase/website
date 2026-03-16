@@ -57,28 +57,30 @@ const CheckList = ({ title, children }) => {
   return (
     <div
       className={clsx(
-        'checklist doc-cta mt-10! flex flex-col rounded-lg px-8 py-6',
-        'border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA,transparent)]',
-        'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_30%,#131415_75%)]',
-        'lg:px-6 lg:py-5 xl:mt-8! md:p-5 md:px-5 md:py-[18px]'
+        'checklist doc-cta mt-9! flex flex-col px-8 pt-6 pb-8',
+        'border border-gray-new-80',
+        'dark:border-gray-new-20',
+        'md:p-5 md:px-5 md:py-[18px] lg:px-6 lg:py-5 xl:mt-8!'
       )}
     >
-      <div className="flex items-start gap-3.5">
+      <div className="flex items-start gap-4">
         {title && (
-          <h2 className="m-0! leading-snug font-medium tracking-tighter lg:text-xl">{title}</h2>
+          <h2 className="m-0! pt-0! text-2xl leading-tight font-medium tracking-tighter lg:text-xl">
+            {title}
+          </h2>
         )}
         <span
           className={clsx(
-            'mt-[3px] rounded-full border px-2 py-[5px] text-[15px] leading-none font-medium tracking-extra-tight lg:mt-0',
+            'border px-2.5 py-1.5 font-mono text-sm leading-none font-medium lg:mt-0',
             progress === 100
               ? 'border-secondary-8/20 bg-secondary-8/10 text-secondary-8 dark:border-green-45/20 dark:bg-green-45/10 dark:text-green-45'
-              : 'border-gray-new-80 bg-gray-new-94 text-gray-new-20 dark:border-white/20 dark:bg-white/10 dark:text-gray-new-90'
+              : 'border-gray-new-70 bg-gray-new-94 text-black-pure dark:border-gray-new-20 dark:bg-gray-new-15/60 dark:text-gray-new-90'
           )}
         >
           {progress === 100 ? 'Complete' : `${progress}%`}
         </span>
       </div>
-      <ul className="mt-5! mb-0! flex flex-col gap-[18px] p-0! lg:mt-[18px]! lg:gap-4 md:mt-4!">
+      <ul className="mt-6! mb-0! flex flex-col gap-5 p-0! md:mt-4! lg:mt-[18px]! lg:gap-4">
         {childrenWithProps}
       </ul>
     </div>

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
-import InputWarningIcon from 'icons/input-warning.inline.svg';
+import warningIcon from 'icons/input-warning.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
@@ -110,7 +110,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         'changelog-form relative flex scroll-mt-20 rounded-lg bg-gray-new-94 safe-paddings',
         classNames.block,
         className,
-        'sm:flex-col sm:items-start sm:gap-2.5 lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10',
+        'sm:flex-col sm:items-start sm:gap-2.5 md:gap-10 lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px]',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         isBlog &&
           (!isSidebar
@@ -159,7 +159,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
             'h-[38px] w-full appearance-none pl-4 tracking-extra-tight remove-autocomplete-styles',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
-            'rounded-full border bg-white text-[13px] focus:outline-hidden lg:text-base xs:pr-20 dark:bg-black-new',
+            'rounded-full border bg-white text-[13px] focus:outline-hidden lg:text-base dark:bg-black-new xs:pr-20',
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-15',
@@ -181,11 +181,15 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           onChange={handleInputChange}
         />
         {isBlog && formState === FORM_STATES.ERROR && (
-          <InputWarningIcon
+          <Image
             className={clsx(
-              'absolute top-[11px] size-4',
+              'absolute top-[11px] size-4 shrink-0',
               isSidebar ? 'right-[42px]' : 'right-[101px]'
             )}
+            src={warningIcon}
+            alt=""
+            width={16}
+            height={16}
           />
         )}
         <LazyMotion features={domAnimation}>

@@ -18,10 +18,10 @@ const Plans = () => {
   const [scaleSize, setScaleSize] = useState('xlarge');
 
   return (
-    <div className="relative mt-16 w-full lg:mt-12 xl:mt-14 md:mx-0 md:mt-11 md:w-full">
+    <div className="relative mt-16 w-full md:mx-0 md:mt-11 md:w-full lg:mt-12 xl:mt-14">
       <h2 className="sr-only">Neon pricing plans</h2>
 
-      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
+      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 md:grid-cols-1 lg:grid-cols-2 lg:border-0">
         {plans.map(
           (
             {
@@ -144,7 +144,7 @@ const Plans = () => {
                     ) : (
                       <div className="flex flex-col gap-1.5 pt-3 pb-px md:pt-0">
                         {subtitle && (
-                          <p className="text-[15px] leading-snug -tracking-wide text-gray-new-60">
+                          <p className="text-[15px] leading-[1.7] -tracking-wide text-gray-new-60">
                             {subtitle}
                           </p>
                         )}
