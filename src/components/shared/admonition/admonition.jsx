@@ -42,7 +42,7 @@ const themes = {
 };
 
 const textClassName =
-  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
+  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm [&_li]:text-base [&_li]:leading-snug [&_li]:tracking-extra-tight [&_ul]:my-0 [&_ol]:my-0';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;

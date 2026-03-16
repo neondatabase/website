@@ -117,6 +117,8 @@
     @apply prose-p:mb-6 prose-p:mt-[18px] prose-p:text-lg prose-p:font-normal prose-p:leading-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
     @apply prose-hr:mb-12 prose-hr:mt-8 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
+    @apply prose-ol:my-3 prose-ul:my-6;
+    @apply prose-li:text-lg prose-li:tracking-tight prose-li:text-gray-new-30 dark:prose-li:text-gray-new-85;
 
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
@@ -136,7 +138,7 @@
 
     ul,
     ol {
-      @apply my-3 list-none;
+      @apply list-none;
 
       > li {
         @apply relative my-2.5 pl-0;
@@ -148,12 +150,12 @@
     }
 
     ul {
-      @apply my-6 pl-[34px] md:pl-4;
+      @apply pl-[34px] md:pl-4;
 
       > li {
-        @apply text-[18px] font-normal leading-normal text-gray-new-30 dark:text-gray-new-85;
+        @apply font-normal leading-normal;
         &::before {
-          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
+          @apply absolute -left-4 top-0 font-normal leading-normal text-gray-new-30 text-inherit content-['-'] dark:text-gray-new-85 md:-left-3.5;
         }
       }
     }
@@ -186,14 +188,24 @@
     }
 
     table {
-      @apply my-10 w-full leading-normal 2xl:min-w-[500px];
+      @apply my-10 w-full text-sm leading-normal 2xl:min-w-[500px];
+
+      th:first-child,
+      td:first-child {
+        @apply pl-0;
+      }
+
+      th:last-child,
+      td:last-child {
+        @apply pr-0;
+      }
 
       th {
-        @apply p-2.5 pt-0 text-left align-top;
+        @apply p-3 pt-0 text-left align-top font-medium leading-snug tracking-extra-tight;
       }
 
       td {
-        @apply p-2.5;
+        @apply p-3 leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-85;
       }
 
       thead {
@@ -286,11 +298,11 @@
     }
 
     details {
-      @apply relative -mb-px border border-gray-new-90 bg-transparent p-4 dark:border-gray-new-20;
+      @apply relative -mb-px border border-gray-new-80 bg-transparent p-4 dark:border-gray-new-20;
     }
 
     details summary {
-      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-new dark:text-white;
+      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-pure dark:text-white;
       list-style: none;
 
       &::-webkit-details-marker {
@@ -310,8 +322,16 @@
       transform: rotate(90deg);
     }
 
-    details > *:not(summary) {
+    details > *:not(summary):not(.code-block) {
       @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
+    }
+
+    details > * {
+      @apply prose-li:text-base prose-li:leading-snug prose-li:tracking-extra-tight;
+    }
+
+    details > .code-block {
+      @apply my-6 ml-[26px];
     }
 
     /* Ensure list items inside details have proper spacing */
