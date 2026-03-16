@@ -45,7 +45,7 @@ const Programs = () => (
       />
     </div>
 
-    <div className="relative -mt-px grid grid-cols-3 gap-x-[18px] border-t border-gray-new-30 lg:grid-cols-2 md:grid-cols-1">
+    <div className="relative -mt-px grid grid-cols-3 gap-x-[18px] border-t border-gray-new-30 md:grid-cols-1 lg:grid-cols-2">
       {PROGRAMS.map(({ type, title, description, url }, index) => (
         <div
           key={index}

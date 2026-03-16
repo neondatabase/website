@@ -39,7 +39,7 @@ const Animation = ({ apiCode, sqlCode }) => {
       <ol
         className={clsx(
           'flex w-[736px] flex-col gap-12',
-          '2xl:w-auto lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5 xl:-ml-8 xl:gap-[30px]',
+          'lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5 xl:-ml-8 xl:gap-[30px] 2xl:w-auto',
           'sm:max-w-full sm:gap-[26px] sm:pt-1'
         )}
       >

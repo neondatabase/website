@@ -53,7 +53,7 @@ const Hero = ({
           {title}
         </h1>
         <p
-          className="mx-auto mt-4 max-w-3xl text-center text-xl leading-snug font-light tracking-tight lg:text-lg md:max-w-[85%] md:text-base xs:max-w-full [&>a]:text-green-45"
+          className="mx-auto mt-4 max-w-3xl text-center text-xl leading-snug font-light tracking-tight md:max-w-[85%] md:text-base lg:text-lg xs:max-w-full [&>a]:text-green-45"
           dangerouslySetInnerHTML={{ __html: description }}
         />
         {simpleField ? (

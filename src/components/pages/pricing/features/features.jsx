@@ -56,12 +56,12 @@ const FEATURES = [
 ];
 
 const Features = () => (
-  <section className="features mt-[200px] scroll-mt-5 px-safe lg:mt-40 xl:mt-[184px] md:mt-[104px]">
+  <section className="features mt-[200px] scroll-mt-5 px-safe md:mt-[104px] lg:mt-40 xl:mt-[184px]">
     <Container size="1152" className="px-8">
       <h2
         className={clsx(
-          'indent-24 text-5xl leading-dense tracking-tighter text-pretty text-gray-new-50 lg:indent-16 md:indent-0',
-          'sm:px-0 lg:px-5 lg:text-[28px] lg:text-wrap xl:px-8 xl:text-[40px] md:text-[24px]',
+          'indent-24 text-5xl leading-dense tracking-tighter text-pretty text-gray-new-50 md:indent-0 lg:indent-16',
+          'sm:px-0 md:text-[24px] lg:px-5 lg:text-[28px] lg:text-wrap xl:px-8 xl:text-[40px]',
           '[&>strong]:font-normal [&>strong]:text-white'
         )}
       >
@@ -72,7 +72,7 @@ const Features = () => (
         className={clsx(
           'mt-16 -ml-8 grid grid-cols-3 gap-x-[85px]',
           'xl:ml-0 xl:gap-x-5 xl:pr-5',
-          'sm:grid-cols-1 sm:gap-y-7 lg:mt-12 lg:grid-cols-2 md:mt-10'
+          'sm:grid-cols-1 sm:gap-y-7 md:mt-10 lg:mt-12 lg:grid-cols-2'
         )}
       >
         {FEATURES.map(({ icon, title, description }) => (

@@ -27,7 +27,7 @@ const NeonPostgresLayout = async ({ children }) => {
     >
       <div className="flex flex-1 safe-paddings lg:block dark:bg-black-pure dark:text-white">
         <Container
-          className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 sm:pt-7 lg:block xl:pt-9"
+          className="flex w-full flex-1 gap-x-24 pt-11 sm:pt-7 lg:block xl:pt-9 2xl:gap-x-8"
           size="1600"
         >
           <Sidebar

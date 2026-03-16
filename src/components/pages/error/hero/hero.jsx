@@ -48,12 +48,12 @@ const Hero = ({ title, text, reset }) => {
   }, [pathname]);
 
   return (
-    <section className="flex grow flex-col pt-16 pb-24 lg:pt-0 md:py-14 xs:pt-10 dark:bg-black-pure dark:text-white">
+    <section className="flex grow flex-col pt-16 pb-24 md:py-14 lg:pt-0 dark:bg-black-pure dark:text-white xs:pt-10">
       <Container
         className="grid grow grid-cols-12 items-center gap-x-8 md:gap-x-0 md:gap-y-4"
         size="md"
       >
-        <div className="col-start-2 col-end-6 flex flex-col 2xl:col-start-1 lg:col-end-7 md:col-span-full">
+        <div className="col-start-2 col-end-6 flex flex-col md:col-span-full lg:col-end-7 2xl:col-start-1">
           <h1 className="font-title text-[58px] leading-none font-medium lg:text-4xl xl:text-5xl xl:leading-none">
             Ooops!
             <br />
@@ -65,7 +65,7 @@ const Hero = ({ title, text, reset }) => {
           </div>
         </div>
 
-        <div className="col-start-6 col-end-12 2xl:col-end-13 lg:col-start-7 md:col-span-full">
+        <div className="col-start-6 col-end-12 md:col-span-full lg:col-start-7 2xl:col-end-13">
           <Image
             className="w-full md:mx-auto md:max-w-xl"
             width={860}

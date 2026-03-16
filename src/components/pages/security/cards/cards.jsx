@@ -7,7 +7,7 @@ import GradientBorder from 'components/shared/gradient-border';
 const Cards = ({ data, isPriority, className }) => (
   <div
     className={clsx(
-      'mt-11 grid grid-cols-2 gap-5 sm:grid-cols-1 lg:mt-8 lg:gap-4 md:mt-6',
+      'mt-11 grid grid-cols-2 gap-5 sm:grid-cols-1 md:mt-6 lg:mt-8 lg:gap-4',
       className
     )}
   >
@@ -15,17 +15,17 @@ const Cards = ({ data, isPriority, className }) => (
       ({ title, description, logo, banner, borderClassName, highlightClassName }, index) => (
         <div
           className={clsx(
-            'relative overflow-hidden rounded-xl bg-security-card-bg p-6 lg:p-5 md:p-[18px]',
+            'relative overflow-hidden rounded-xl bg-security-card-bg p-6 md:p-[18px] lg:p-5',
             banner && 'col-span-2 sm:col-span-1 sm:pb-[203px]',
             className
           )}
           key={index}
         >
           {logo && (
-            <div className="relative z-20 mb-5 size-[76px] lg:size-16 md:size-14">
+            <div className="relative z-20 mb-5 size-[76px] md:size-14 lg:size-16">
               <Image
                 className={clsx(
-                  'absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 lg:scale-[0.85] md:scale-[0.74]',
+                  'absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 md:scale-[0.74] lg:scale-[0.85]',
                   logo.className
                 )}
                 src={logo.src}
@@ -39,11 +39,11 @@ const Cards = ({ data, isPriority, className }) => (
           )}
           <div className={clsx('relative z-20', banner && 'max-w-[504px] lg:max-w-[395px]')}>
             <h3
-              className="text-[18px] leading-snug font-medium tracking-extra-tight lg:text-base md:text-[15px]"
+              className="text-[18px] leading-snug font-medium tracking-extra-tight md:text-[15px] lg:text-base"
               dangerouslySetInnerHTML={{ __html: title }}
             />
             <p
-              className="mt-2.5 text-with-links leading-snug font-light tracking-extra-tight text-pretty text-gray-new-70 sm:text-sm sm:font-light lg:mt-2 lg:text-[15px] md:text-sm"
+              className="mt-2.5 text-with-links leading-snug font-light tracking-extra-tight text-pretty text-gray-new-70 sm:text-sm sm:font-light md:text-sm lg:mt-2 lg:text-[15px]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
@@ -62,7 +62,7 @@ const Cards = ({ data, isPriority, className }) => (
           )}
           <span
             className={clsx(
-              'pointer-events-none absolute top-5 left-5 size-16 rounded-full blur-xl lg:top-4 lg:left-4 lg:size-14 md:top-3 md:left-3 md:size-12',
+              'pointer-events-none absolute top-5 left-5 size-16 rounded-full blur-xl md:top-3 md:left-3 md:size-12 lg:top-4 lg:left-4 lg:size-14',
               highlightClassName
             )}
             aria-hidden

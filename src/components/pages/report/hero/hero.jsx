@@ -15,7 +15,7 @@ const Hero = () => (
         about failures, recovery times, and business impact. Here’s what they told us.
       </p>
       <Button
-        className="mt-[38px] px-5! py-4! leading-none font-semibold tracking-tighter whitespace-nowrap transition-colors duration-200 sm:mt-7 xl:mt-[36px] xl:text-base! md:mt-8"
+        className="mt-[38px] px-5! py-4! leading-none font-semibold tracking-tighter whitespace-nowrap transition-colors duration-200 sm:mt-7 md:mt-8 xl:mt-[36px] xl:text-base!"
         to="/report/Database_Recovery_Developer_Survey_2025_Neon.numbers"
         theme="primary"
         size="xs"

@@ -44,7 +44,7 @@ const UseCasesPage = async () => {
     <Layout>
       <Hero />
       <UseCaseCards
-        className="pt-24 pb-48 lg:pt-20 lg:pb-32 md:pt-16 md:pb-24"
+        className="pt-24 pb-48 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32"
         items={useCasesData}
       />
     </Layout>

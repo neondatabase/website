@@ -3,7 +3,7 @@ import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 const Step = ({ index, title, children, lineAnimation }) => (
-  <div className="relative pl-16 2xl:pl-[50px] sm:pl-7 lg:pl-[56px] xl:pl-11">
+  <div className="relative pl-16 sm:pl-7 lg:pl-[56px] xl:pl-11 2xl:pl-[50px]">
     <span className="absolute top-0 left-0 h-full w-10 sm:w-4 lg:w-8 xl:w-7">
       <span
         className={clsx(
@@ -27,7 +27,7 @@ const Step = ({ index, title, children, lineAnimation }) => (
     <h4
       className={clsx(
         'mb-6 text-xl leading-none tracking-extra-tight',
-        '2xl:text-lg sm:mb-[10px] sm:text-[9px] lg:mb-[18px] lg:text-lg xl:mb-4 xl:text-sm',
+        'sm:mb-[10px] sm:text-[9px] lg:mb-[18px] lg:text-lg xl:mb-4 xl:text-sm 2xl:text-lg',
         '[&>span]:font-mono [&>span]:text-gray-new-70'
       )}
       dangerouslySetInnerHTML={{ __html: title }}

@@ -32,7 +32,7 @@ const DATA = [
 ];
 
 const Features = () => (
-  <ul className="mt-[168px] flex flex-col gap-[200px] lg:gap-[132px] xl:mt-[120px] xl:gap-44 md:mt-[84px] md:gap-[104px]">
+  <ul className="mt-[168px] flex flex-col gap-[200px] md:mt-[84px] md:gap-[104px] lg:gap-[132px] xl:mt-[120px] xl:gap-44">
     {DATA.map(
       (
         { className, contentClassName, title, description, link, animation, animationClassName },
@@ -40,7 +40,7 @@ const Features = () => (
       ) => (
         <li
           className={clsx(
-            'flex gap-48 2xl:gap-20 lg:flex-col lg:items-start lg:gap-[72px] xl:gap-16 md:gap-[52px]',
+            'flex gap-48 md:gap-[52px] lg:flex-col lg:items-start lg:gap-[72px] xl:gap-16 2xl:gap-20',
             className
           )}
           key={id}
@@ -57,7 +57,7 @@ const Features = () => (
             <Link
               className={clsx(
                 'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg leading-none font-medium tracking-extra-tight',
-                'sm:gap-1.5 sm:text-[15px] lg:mt-5 xl:mt-[30px] md:mt-[14px]',
+                'sm:gap-1.5 sm:text-[15px] md:mt-[14px] lg:mt-5 xl:mt-[30px]',
                 '[&>svg]:text-gray-new-70! [&>svg]:transition-all!',
                 'hover:text-white! [&:hover>svg]:text-white!'
               )}

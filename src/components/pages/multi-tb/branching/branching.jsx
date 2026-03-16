@@ -10,12 +10,12 @@ import glass from 'images/pages/multi-tb/branching-demo/glass.jpg';
 import BranchingDemo from './branching-demo';
 
 const Branching = () => (
-  <section className="branching mt-[168px] overflow-hidden pb-[100px] lg:mt-24 md:mt-[68px]">
-    <Container className="max-w-3xl lg:mx-24 md:mx-auto md:max-w-sm" size="576" as="header">
-      <h2 className="pr-28 font-title text-[60px] leading-[90%] font-medium tracking-extra-tight text-white lg:max-w-[380px] lg:pr-20 lg:text-[40px] xl:max-w-[500px] xl:text-[52px] md:pr-10 md:text-[36px] md:leading-none">
+  <section className="branching mt-[168px] overflow-hidden pb-[100px] md:mt-[68px] lg:mt-24">
+    <Container className="max-w-3xl md:mx-auto md:max-w-sm lg:mx-24" size="576" as="header">
+      <h2 className="pr-28 font-title text-[60px] leading-[90%] font-medium tracking-extra-tight text-white md:pr-10 md:text-[36px] md:leading-none lg:max-w-[380px] lg:pr-20 lg:text-[40px] xl:max-w-[500px] xl:text-[52px]">
         Recover multi-TB in seconds.
       </h2>
-      <p className="mt-6 mb-3.5 text-lg leading-snug tracking-extra-tight text-balance text-gray-new-60 lg:mt-5 lg:mb-3 lg:text-base md:mt-4 md:mb-2 md:text-wrap">
+      <p className="mt-6 mb-3.5 text-lg leading-snug tracking-extra-tight text-balance text-gray-new-60 md:mt-4 md:mb-2 md:text-wrap lg:mt-5 lg:mb-3 lg:text-base">
         Neon has a unique storage architecture that records the entire history of your database.
         This allows you to revert to any point in time instantly, without duplicating data or
         replaying WAL.
@@ -30,11 +30,11 @@ const Branching = () => (
       </Link>
     </Container>
     <Container
-      className="mt-[50px] mb-14 lg:mx-0 lg:mt-11 lg:mb-12 md:mx-0 md:mt-[30px] md:mb-[32px] md:flex md:items-center"
+      className="mt-[50px] mb-14 md:mx-0 md:mt-[30px] md:mb-[32px] md:flex md:items-center lg:mx-0 lg:mt-11 lg:mb-12"
       size="960"
     >
-      <div className="relative flex h-[486px] flex-col rounded-[10px] bg-[#0A0A0B] lg:mx-auto lg:h-[412px] lg:max-w-[704px] md:mx-auto md:h-auto md:w-auto">
-        <div className="relative hidden shrink-0 overflow-hidden rounded-xl lg:w-[384px] md:block">
+      <div className="relative flex h-[486px] flex-col rounded-[10px] bg-[#0A0A0B] md:mx-auto md:h-auto md:w-auto lg:mx-auto lg:h-[412px] lg:max-w-[704px]">
+        <div className="relative hidden shrink-0 overflow-hidden rounded-xl md:block lg:w-[384px]">
           <Image
             className="sm:w-full"
             src={branchingDemoMobile}
@@ -64,8 +64,8 @@ const Branching = () => (
         <span className="absolute -bottom-[181px] -left-[181px] -z-30 size-[565px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(7,125,148,0.25)_0%,_rgba(7,125,148,0.00)_100%)] opacity-90" />
       </div>
     </Container>
-    <Container className="max-w-3xl lg:mx-8 md:mx-auto md:max-w-sm" size="768" as="footer">
-      <ul className="flex flex-row gap-16 text-2xl leading-snug font-normal tracking-extra-tight text-balance text-gray-new-60 lg:text-xl md:flex-col md:gap-6 md:pr-10 md:text-lg md:text-pretty">
+    <Container className="max-w-3xl md:mx-auto md:max-w-sm lg:mx-8" size="768" as="footer">
+      <ul className="flex flex-row gap-16 text-2xl leading-snug font-normal tracking-extra-tight text-balance text-gray-new-60 md:flex-col md:gap-6 md:pr-10 md:text-lg md:text-pretty lg:text-xl">
         <li className="flex-1">
           <p>
             <span className="text-white">For teams.</span> You have a reliable safety net protecting

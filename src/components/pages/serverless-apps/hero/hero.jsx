@@ -15,21 +15,21 @@ const features = [
 ];
 
 const Hero = () => (
-  <section className="hero pt-[90px] safe-paddings lg:pt-12 md:pt-9">
+  <section className="hero pt-[90px] safe-paddings md:pt-9 lg:pt-12">
     <Container className="flex flex-col items-center" size="960">
-      <h1 className="mx-auto text-center font-title text-[68px] leading-none font-medium tracking-extra-tight lg:text-5xl xl:text-[56px] xl:leading-[0.9] md:px-5 md:text-4xl">
+      <h1 className="mx-auto text-center font-title text-[68px] leading-none font-medium tracking-extra-tight md:px-5 md:text-4xl lg:text-5xl xl:text-[56px] xl:leading-[0.9]">
         Postgres for serverless apps
       </h1>
-      <p className="mt-4 text-center text-lg leading-snug font-light tracking-tighter text-gray-new-80 lg:mt-[14px] lg:text-base xl:font-normal xl:tracking-extra-tight md:mt-3">
+      <p className="mt-4 text-center text-lg leading-snug font-light tracking-tighter text-gray-new-80 md:mt-3 lg:mt-[14px] lg:text-base xl:font-normal xl:tracking-extra-tight">
         With thousands of connections, real-time autoscaling, and usage-based pricing
       </p>
       <div
         className={clsx(
           'relative mt-16 w-full overflow-hidden rounded-lg bg-[#0D0E10] pt-6 pr-10 pb-7 pl-8',
-          'lg:mt-12 lg:px-7 lg:py-6 xl:mt-14 md:mt-10 md:p-6'
+          'md:mt-10 md:p-6 lg:mt-12 lg:px-7 lg:py-6 xl:mt-14'
         )}
       >
-        <div className="relative z-10 flex w-full gap-5 lg:gap-0 md:flex-col md:gap-8">
+        <div className="relative z-10 flex w-full gap-5 md:flex-col md:gap-8 lg:gap-0">
           <div className="flex-1">
             <h2 className="text-2xl leading-snug font-medium tracking-tighter text-balance">
               Why use Neon for serverless architectures:
@@ -45,14 +45,14 @@ const Hero = () => (
                     alt="check"
                     priority
                   />
-                  <p className="tracking-extra-tight text-gray-new-90 lg:text-[15px] md:text-base">
+                  <p className="tracking-extra-tight text-gray-new-90 md:text-base lg:text-[15px]">
                     {feature}
                   </p>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="relative w-[270px] pl-11 lg:w-[254px] lg:pl-7 md:w-full md:border-t md:border-dashed md:border-white/10 md:pt-8 md:pl-0">
+          <div className="relative w-[270px] pl-11 md:w-full md:border-t md:border-dashed md:border-white/10 md:pt-8 md:pl-0 lg:w-[254px] lg:pl-7">
             <h3 className="text-xl leading-snug font-medium tracking-tighter text-balance md:text-2xl">
               Sign up to get the Free Plan, plus $100 in credits
             </h3>
@@ -70,7 +70,7 @@ const Hero = () => (
         <span className="pointer-events-none absolute -top-6 -right-5 h-[224px] w-[403px] -translate-y-full rounded-[100%] bg-[#00E5BF] opacity-80 mix-blend-plus-lighter blur-2xl" />
         <span className="pointer-events-none absolute -top-3 right-0 h-[273px] w-[230px] translate-x-1/2 -translate-y-full rounded-[100%] bg-[#CF9FFF] opacity-50 mix-blend-plus-lighter blur-2xl" />
         <span className="pointer-events-none absolute inset-px rounded-[inherit] bg-[url('/images/bg-pattern.png')] bg-[6px,3.45px]" />
-        <span className="pointer-events-none absolute top-5 right-[310px] bottom-6 border-l border-dashed border-white mix-blend-overlay lg:inset-y-6 lg:right-[282px] md:hidden" />
+        <span className="pointer-events-none absolute top-5 right-[310px] bottom-6 border-l border-dashed border-white mix-blend-overlay md:hidden lg:inset-y-6 lg:right-[282px]" />
         <GradientBorder className="border-image-serverless-apps-hero-border" />
       </div>
     </Container>

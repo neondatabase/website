@@ -174,7 +174,7 @@ const RequestForm = ({ type }) => {
               value={email}
               className={clsx(
                 'h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 remove-autocomplete-styles md:w-full',
-                '2xl:min-w-52 xl:min-w-40 xl:text-sm',
+                'xl:min-w-40 xl:text-sm 2xl:min-w-52',
                 'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
               )}

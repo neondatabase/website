@@ -47,12 +47,12 @@ const ITEMS = [
 ];
 
 const Usage = () => (
-  <section className="usage relative mt-[196px] safe-paddings lg:mt-[159px] xl:mt-[188px] md:mt-[102px]">
+  <section className="usage relative mt-[196px] safe-paddings md:mt-[102px] lg:mt-[159px] xl:mt-[188px]">
     <Container className="md:max-w-sm md:px-5" size="960">
-      <h2 className="font-title text-5xl leading-none font-medium tracking-extra-tight lg:text-4xl xl:text-[44px] md:text-[32px]">
+      <h2 className="font-title text-5xl leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-4xl xl:text-[44px]">
         Build LLM-backed applications
       </h2>
-      <p className="mt-3 max-w-lg text-lg leading-snug tracking-tight text-balance text-gray-new-70 lg:text-base md:text-wrap">
+      <p className="mt-3 max-w-lg text-lg leading-snug tracking-tight text-balance text-gray-new-70 md:text-wrap lg:text-base">
         Neon makes Postgres a powerful vector store, perfect for RAG apps that crave simplicity.
       </p>
       <Link
@@ -64,18 +64,18 @@ const Usage = () => (
         Start building
       </Link>
 
-      <ul className="mt-[78px] flex flex-col gap-[120px] lg:mt-[60px] lg:gap-[104px] xl:mt-[68px] md:mx-auto md:mt-10 md:mt-[60px] md:gap-14">
+      <ul className="mt-[78px] flex flex-col gap-[120px] md:mx-auto md:mt-10 md:mt-[60px] md:gap-14 lg:mt-[60px] lg:gap-[104px] xl:mt-[68px]">
         {ITEMS.map(({ title, description, image, imageMobile }, index) => (
           <li
-            className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-5"
+            className="grid grid-cols-2 items-center gap-16 md:grid-cols-1 md:gap-5 lg:gap-8"
             key={title}
           >
             <div>
-              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-xl">
+              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight md:text-xl lg:text-xl">
                 {title}
               </h3>
               <p
-                className="mt-2 text-lg leading-normal tracking-extra-tight text-gray-new-70 lg:text-base md:mt-2"
+                className="mt-2 text-lg leading-normal tracking-extra-tight text-gray-new-70 md:mt-2 lg:text-base"
                 dangerouslySetInnerHTML={{ __html: description }}
               />
             </div>

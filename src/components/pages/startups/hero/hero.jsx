@@ -37,19 +37,19 @@ const QUOTES = [
 ];
 
 const Hero = () => (
-  <section className="hero pt-[192px] lg:pt-16 xl:pt-[166px] md:pt-12">
+  <section className="hero pt-[192px] md:pt-12 lg:pt-16 xl:pt-[166px]">
     <Container className="xl:max-w-5xl" size="1280">
       <div className="relative flex justify-between gap-16 lg:mx-auto lg:max-w-lg lg:flex-col lg:gap-10 xl:gap-12">
-        <div className="flex max-w-xl flex-1 flex-col gap-10 lg:max-w-full xl:max-w-[460px] md:gap-8">
+        <div className="flex max-w-xl flex-1 flex-col gap-10 md:gap-8 lg:max-w-full xl:max-w-[460px]">
           <div className="flex flex-col lg:max-w-[448px]">
             <span className="mb-[18px] text-sm leading-none tracking-wide text-gray-new-50 uppercase lg:mb-3.5 lg:text-xs">
               Neon Startup Program
             </span>
-            <h1 className="w-fit font-title text-[56px] leading-none font-medium tracking-extra-tight lg:text-[40px] xl:text-[48px] md:text-[32px]">
+            <h1 className="w-fit font-title text-[56px] leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-[40px] xl:text-[48px]">
               Launch faster with
               <br /> $100K in Neon Credits
             </h1>
-            <p className="mt-4 text-lg leading-snug tracking-extra-tight text-balance text-gray-new-80 lg:mt-3.5 xl:text-base md:mt-3 md:text-[15px]">
+            <p className="mt-4 text-lg leading-snug tracking-extra-tight text-balance text-gray-new-80 md:mt-3 md:text-[15px] lg:mt-3.5 xl:text-base">
               Join the Startup Program and start building with the best database for developers:
               fast, scalable, and serverless.
             </p>

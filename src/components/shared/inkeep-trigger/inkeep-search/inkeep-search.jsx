@@ -29,7 +29,7 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
         <span
           className={clsx(
             'leading-none tracking-extra-tight text-gray-new-30 dark:text-gray-new-70',
-            isNotFoundPage ? 'text-xl lg:text-lg md:text-base' : 'text-[13px] lg:hidden'
+            isNotFoundPage ? 'text-xl md:text-base lg:text-lg' : 'text-[13px] lg:hidden'
           )}
         >
           Search{isNotFoundPage && ' for another page'}...

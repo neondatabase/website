@@ -15,7 +15,7 @@ const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'reto
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container
-      className="relative z-30 pt-[409px] lg:pt-[208px] xl:px-16 xl:pt-[216px] md:px-5! md:pt-[212px]"
+      className="relative z-30 pt-[409px] md:px-5! md:pt-[212px] lg:pt-[208px] xl:px-16 xl:pt-[216px]"
       size="1600"
     >
       <Link href="#backed-by-giants">
@@ -24,7 +24,7 @@ const Hero = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter sm:text-[28px] lg:max-w-[640px] lg:text-[44px] xl:max-w-[760px] xl:text-[52px] md:mt-4">
+      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter sm:text-[28px] md:mt-4 lg:max-w-[640px] lg:text-[44px] xl:max-w-[760px] xl:text-[52px]">
         Fast Postgres Databases <br />
         for Teams and Agents
       </h1>

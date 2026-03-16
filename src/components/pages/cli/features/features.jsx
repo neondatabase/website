@@ -34,13 +34,13 @@ const Features = () => (
   <section className="features my-20 safe-paddings sm:my-10 md:my-16">
     <Container size="960">
       <Heading
-        className="mx-auto max-w-3xl text-center text-[52px] leading-none font-medium tracking-extra-tight lg:max-w-xl lg:text-4xl xl:max-w-[640px] xl:text-[44px] md:max-w-md md:text-[32px]"
+        className="mx-auto max-w-3xl text-center text-[52px] leading-none font-medium tracking-extra-tight md:max-w-md md:text-[32px] lg:max-w-xl lg:text-4xl xl:max-w-[640px] xl:text-[44px]"
         tag="h2"
       >
         Cut out the clicks. Command Neon Postgres from the terminal
       </Heading>
       <CardItemsList
-        className="mt-14 gap-x-[18px] lg:gap-x-4 xl:mt-10 xl:gap-x-6 md:mt-8 md:gap-y-4"
+        className="mt-14 gap-x-[18px] md:mt-8 md:gap-y-4 lg:gap-x-4 xl:mt-10 xl:gap-x-6"
         items={items}
         size="lg"
       />

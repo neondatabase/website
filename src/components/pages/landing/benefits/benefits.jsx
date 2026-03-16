@@ -6,7 +6,7 @@ const Benefits = ({ title, description, items }) => (
   <section className="benefits safe-paddings">
     <Container className="" size="960">
       <div className="mx-auto max-w-[520px] text-center">
-        <h2 className="font-title text-5xl leading-none font-medium tracking-tight lg:text-4xl xl:text-[44px] md:text-[32px]">
+        <h2 className="font-title text-5xl leading-none font-medium tracking-tight md:text-[32px] lg:text-4xl xl:text-[44px]">
           {title}
         </h2>
         <p className="mt-[18px] text-lg leading-snug font-light text-gray-new-70">{description}</p>

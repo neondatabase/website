@@ -7,7 +7,7 @@ const SecondarySection = ({ children, title = null, className = '', wrapperClass
   <section className={clsx('overflow-hidden bg-[#E4F1EB] safe-paddings', wrapperClassName)}>
     {title && <h2 className="sr-only">{title}</h2>}
     <Container
-      className={clsx('py-40 lg:py-[90px] xl:max-w-[1100px]! xl:py-[136px] md:py-14', className)}
+      className={clsx('py-40 md:py-14 lg:py-[90px] xl:max-w-[1100px]! xl:py-[136px]', className)}
       size="small"
     >
       {children}

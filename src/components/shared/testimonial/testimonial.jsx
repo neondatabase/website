@@ -14,12 +14,12 @@ const Testimonial = ({
   <div className={clsx('testimonial safe-paddings', className)}>
     <Container className="flex flex-col items-center text-center" size="xs" as="figure">
       <QuoteIcon
-        className="h-[72px] w-[72px] xl:h-16 xl:w-16 md:h-12 md:w-12"
+        className="h-[72px] w-[72px] md:h-12 md:w-12 xl:h-16 xl:w-16"
         width={72}
         height={72}
         aria-hidden
       />
-      <blockquote className="mt-6 lg:mt-4 md:mt-2.5">
+      <blockquote className="mt-6 md:mt-2.5 lg:mt-4">
         <p
           className={clsx(
             'max-w-[796px] leading-snug font-light tracking-tighter lg:max-w-[584px] xl:max-w-[706px]',
@@ -29,7 +29,7 @@ const Testimonial = ({
           {quote}
         </p>
       </blockquote>
-      <figcaption className="mt-5 text-lg leading-tight tracking-extra-tight text-white lg:mt-4 xl:text-base md:mt-2.5">
+      <figcaption className="mt-5 text-lg leading-tight tracking-extra-tight text-white md:mt-2.5 lg:mt-4 xl:text-base">
         {name} <cite className="font-light text-gray-new-70 not-italic">– {position}</cite>
       </figcaption>
     </Container>

@@ -123,15 +123,15 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="features pt-40 safe-paddings lg:pt-[104px] xl:pt-[136px] md:pt-20">
+  <section className="features pt-40 safe-paddings md:pt-20 lg:pt-[104px] xl:pt-[136px]">
     <Container size="960">
-      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-tighter lg:text-[44px] xl:text-[48px] md:text-4xl">
+      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-tighter md:text-4xl lg:text-[44px] xl:text-[48px]">
         True serverless Postgres
       </h2>
-      <ul className="mt-20 flex flex-col gap-[120px] lg:mx-auto lg:mt-16 lg:max-w-3xl lg:gap-[104px] md:mt-14 md:max-w-sm md:gap-14">
+      <ul className="mt-20 flex flex-col gap-[120px] md:mt-14 md:max-w-sm md:gap-14 lg:mx-auto lg:mt-16 lg:max-w-3xl lg:gap-[104px]">
         {items.map(({ title, desctiprion, features, image, imageSm, imageText }, index) => (
           <li
-            className="grid grid-cols-2 items-center gap-16 lg:gap-8 md:grid-cols-1 md:gap-[18px]"
+            className="grid grid-cols-2 items-center gap-16 md:grid-cols-1 md:gap-[18px] lg:gap-8"
             key={title}
           >
             <div className="relative overflow-hidden rounded-[10px] lg:rounded-lg">
@@ -161,7 +161,7 @@ const Features = () => (
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20/30" />
             </div>
             <div className={clsx('relative', index % 2 === 1 && '-order-1 md:order-none')}>
-              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-lg">
+              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight md:text-lg lg:text-xl">
                 {title}
               </h3>
               <p

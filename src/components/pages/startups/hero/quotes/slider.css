@@ -28,7 +28,7 @@
 }
 
 .swiper-slide {
-  @apply h-auto pb-10 lg:pb-7 md:pb-6;
+  @apply h-auto pb-10 md:pb-6 lg:pb-7;
 }
 
 .swiper-pagination {

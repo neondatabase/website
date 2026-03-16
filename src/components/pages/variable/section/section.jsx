@@ -5,7 +5,7 @@ import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
 const Section = ({ className = null, title, children }) => (
   <div className={className}>
     <h2
-      className="group relative mb-7 w-fit pt-[72px] text-[36px] leading-tight font-medium tracking-tighter text-pretty lg:mb-5 lg:pt-14 lg:text-[28px] xl:mb-6 xl:pt-16 xl:text-[32px] md:mb-4 md:pt-11 md:text-2xl"
+      className="group relative mb-7 w-fit pt-[72px] text-[36px] leading-tight font-medium tracking-tighter text-pretty md:mb-4 md:pt-11 md:text-2xl lg:mb-5 lg:pt-14 lg:text-[28px] xl:mb-6 xl:pt-16 xl:text-[32px]"
       id={title.id}
     >
       <span dangerouslySetInnerHTML={{ __html: title.title }} />

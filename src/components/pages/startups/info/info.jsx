@@ -40,18 +40,18 @@ const CARDS = [
 ];
 
 const Info = () => (
-  <section className="info mt-[200px] lg:mt-36 xl:mt-[184px] md:mt-24">
+  <section className="info mt-[200px] md:mt-24 lg:mt-36 xl:mt-[184px]">
     <Container className="flex max-w-[896px] flex-col items-center gap-12 px-8 md:px-5">
-      <h2 className="text-center font-title text-5xl leading-none font-medium tracking-extra-tight lg:text-[36px] xl:text-[44px] md:text-[32px]">
+      <h2 className="text-center font-title text-5xl leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-[36px] xl:text-[44px]">
         Who’s the Neon
         <br />
         Startup Program for?
       </h2>
-      <ul className="grid grid-cols-2 gap-5 sm:grid-cols-1 lg:gap-6 md:gap-5">
+      <ul className="grid grid-cols-2 gap-5 sm:grid-cols-1 md:gap-5 lg:gap-6">
         {CARDS.map(({ title, description, features, button, isWide, className }, index) => (
           <li
             className={clsx(
-              'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5',
+              'relative rounded-xl bg-black-fog px-6 py-7 md:p-5 lg:p-6',
               isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
               className
             )}

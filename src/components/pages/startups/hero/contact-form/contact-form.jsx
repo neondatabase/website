@@ -130,13 +130,13 @@ const ContactForm = () => {
       className={clsx(
         'relative z-10 grid scroll-mt-10 gap-y-6 p-8',
         'rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg shadow-contact',
-        'lg:gap-y-5 xl:p-6 md:gap-y-6'
+        'md:gap-y-6 lg:gap-y-5 xl:p-6'
       )}
       method="POST"
       id="startups-form"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">
+      <div className="grid grid-cols-2 gap-6 md:contents md:flex-col md:gap-6 lg:gap-5">
         <Field
           name="firstname"
           label="First Name*"

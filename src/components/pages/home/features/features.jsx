@@ -48,11 +48,11 @@ const BORDER_CLASSNAME = 'absolute -bottom-1 -top-2 w-px bg-gray-new-20 xl:top-0
 
 const Features = () => (
   <section
-    className="features relative scroll-mt-[60px] safe-paddings pb-60 lg:scroll-mt-0 lg:pb-32 xl:pb-40 md:pb-24"
+    className="features relative scroll-mt-[60px] safe-paddings pb-60 md:pb-24 lg:scroll-mt-0 lg:pb-32 xl:pb-40"
     id="features"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden md:px-5!"
+      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block md:px-5! lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden"
       size="1600"
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
@@ -60,12 +60,12 @@ const Features = () => (
           icon="features"
           title="<strong>No platform fees.</strong> Enterprise-grade features available to everyone, without fixed fees or monthly minimums."
         />
-        <div className="relative mt-20 lg:mt-14 lg:max-w-[800px] xl:mt-16 md:mt-16">
-          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 xl:gap-y-10 md:grid-cols-1 md:gap-y-7">
+        <div className="relative mt-20 md:mt-16 lg:mt-14 lg:max-w-[800px] xl:mt-16">
+          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] md:grid-cols-1 md:gap-y-7 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 xl:gap-y-10">
             {ITEMS.map(({ icon, title, description }, index) => (
-              <li className="flex flex-col gap-y-[18px] lg:gap-y-4 md:gap-y-3" key={index}>
+              <li className="flex flex-col gap-y-[18px] md:gap-y-3 lg:gap-y-4" key={index}>
                 <Image
-                  className="pointer-events-none lg:size-5 md:size-4"
+                  className="pointer-events-none md:size-4 lg:size-5"
                   src={icon}
                   width={24}
                   height={24}
@@ -75,7 +75,7 @@ const Features = () => (
                 <p
                   className={clsx(
                     'max-w-[320px] text-[18px] leading-normal tracking-extra-tight text-pretty text-gray-new-50',
-                    'lg:w-[288px] lg:text-base lg:leading-snug xl:w-[256px] md:w-full md:max-w-full md:text-[15px]'
+                    'md:w-full md:max-w-full md:text-[15px] lg:w-[288px] lg:text-base lg:leading-snug xl:w-[256px]'
                   )}
                 >
                   <span className="text-white">{title}</span> {description}
@@ -83,11 +83,11 @@ const Features = () => (
               </li>
             ))}
           </ul>
-          <span className={clsx(BORDER_CLASSNAME, '-left-8 lg:-left-5 xl:-left-6 md:hidden')} />
+          <span className={clsx(BORDER_CLASSNAME, '-left-8 md:hidden lg:-left-5 xl:-left-6')} />
           <span
             className={clsx(
               BORDER_CLASSNAME,
-              'left-[calc((100%-128px)/3+32px)] lg:left-[calc(100%/2+12px)] xl:left-[calc((100%-128px)/3+38px)] md:hidden'
+              'left-[calc((100%-128px)/3+32px)] md:hidden lg:left-[calc(100%/2+12px)] xl:left-[calc((100%-128px)/3+38px)]'
             )}
           />
           <span

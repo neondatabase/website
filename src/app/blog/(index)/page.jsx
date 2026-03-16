@@ -18,7 +18,7 @@ const BlogPage = async () => {
   return (
     <>
       <BlogHeader
-        className="border-b border-gray-new-20 pb-12 lg:-top-[68px] md:top-0 md:border-b-0 md:pb-0"
+        className="border-b border-gray-new-20 pb-12 md:top-0 md:border-b-0 md:pb-0 lg:-top-[68px]"
         title={
           <>
             <span className="whitespace-nowrap">What we&rsquo;re shipping.</span>
@@ -35,11 +35,11 @@ const BlogPage = async () => {
           searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:static! md:right-auto! md:top-auto! md:mt-4"
           posts={validPosts}
         >
-          <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
+          <div className="grid grid-cols-2 gap-x-16 md:grid-cols-1 md:pt-[96px] xl:gap-x-5">
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:border-t-0! lg:pt-0! md:border-t-0! md:pt-0!' : ''}
+                className={index < 2 ? 'md:border-t-0! md:pt-0! lg:border-t-0! lg:pt-0!' : ''}
                 post={post}
                 isFeatured={post.isFeatured}
                 isPriority={index < 5}

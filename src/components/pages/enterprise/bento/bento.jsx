@@ -6,12 +6,12 @@ import React from 'react';
 import Container from 'components/shared/container';
 
 const Bento = ({ cards }) => (
-  <section className="bento mt-[202px] safe-paddings lg:mt-[128px] xl:mt-[160px] md:mt-[94px]">
+  <section className="bento mt-[202px] safe-paddings md:mt-[94px] lg:mt-[128px] xl:mt-[160px]">
     <Container
       className="sm:max-w-[360px]! lg:max-w-[704px]! xl:max-w-[1024px] xl:px-8"
       size="1152"
     >
-      <h2 className="mx-auto text-center font-title text-[48px] leading-none font-medium tracking-extra-tight lg:text-[36px] xl:text-[44px] md:text-[32px]">
+      <h2 className="mx-auto text-center font-title text-[48px] leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-[36px] xl:text-[44px]">
         Add Postgres to your platform or AI Agent
       </h2>
       <ul className="mx-auto mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-5 sm:grid-cols-1 sm:grid-rows-[repeat(6,minmax(298px,1fr))] sm:gap-y-[18px] lg:mt-9 lg:grid-rows-[318px_318px_318px] xl:mt-11 xl:grid-rows-[318px_318px]">

@@ -34,7 +34,7 @@ const Footer = ({ hasThemesSupport = false }) => (
           <p
             className={clsx(
               'flex gap-x-1 gap-y-1.5 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
-              '2xl:flex-col sm:flex-col lg:flex-row'
+              'sm:flex-col lg:flex-row 2xl:flex-col'
             )}
           >
             <span>Made in SF and the World.</span>

@@ -7,19 +7,19 @@ import LINKS from 'constants/links';
 const Try = () => (
   <section className="try mt-20 mb-36 safe-paddings sm:mt-10 sm:mb-20 md:mt-16 md:mb-32">
     <Container size="1152">
-      <div className="flex items-center justify-center gap-24 lg:gap-16 lg:px-0 xl:px-8 md:flex-col md:justify-center md:gap-10">
+      <div className="flex items-center justify-center gap-24 md:flex-col md:justify-center md:gap-10 lg:gap-16 lg:px-0 xl:px-8">
         <div className="flex-1 md:flex md:flex-col md:items-center">
           <Heading
-            className="max-w-sm text-[52px] leading-none font-medium tracking-extra-tight tracking-tighter lg:max-w-xl lg:text-4xl xl:max-w-[640px] xl:text-[44px] md:max-w-md md:text-center md:text-[32px]"
+            className="max-w-sm text-[52px] leading-none font-medium tracking-extra-tight tracking-tighter md:max-w-md md:text-center md:text-[32px] lg:max-w-xl lg:text-4xl xl:max-w-[640px] xl:text-[44px]"
             tag="h2"
           >
             Try Neon on the command&nbsp;line
           </Heading>
-          <p className="mt-4 text-lg leading-snug font-light tracking-extra-tight lg:mt-4 xl:text-lg md:mt-2.5 md:text-center md:text-base">
+          <p className="mt-4 text-lg leading-snug font-light tracking-extra-tight md:mt-2.5 md:text-center md:text-base lg:mt-4 xl:text-lg">
             The Neon CLI brings serverless Postgres to&nbsp;your&nbsp;terminal.
           </p>
           <AnimatedButton
-            className="relative mt-12 px-6 py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"
+            className="relative mt-12 px-6 py-[17px] text-lg font-semibold tracking-extra-tight md:mt-6 lg:mt-7"
             theme="primary"
             to={LINKS.cliInstall}
             isAnimated

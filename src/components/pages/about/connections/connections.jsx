@@ -35,13 +35,13 @@ const CONNECTIONS_DATA = [
 ];
 
 const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) => (
-  <article className="relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6">
+  <article className="relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 md:px-6 lg:px-7 lg:py-6">
     <Icon
       className="relative z-10 h-[52px] w-[52px] text-black-pure lg:h-11 lg:w-11"
       aria-hidden="true"
     />
 
-    <div className="relative z-10 mt-[87px] mb-6 flex flex-col gap-3 lg:mt-12 lg:gap-2.5 xl:mt-16 xl:gap-3 md:mt-10 md:mb-5">
+    <div className="relative z-10 mt-[87px] mb-6 flex flex-col gap-3 md:mt-10 md:mb-5 lg:mt-12 lg:gap-2.5 xl:mt-16 xl:gap-3">
       <h4 className="text-2xl leading-tight font-medium tracking-extra-tight text-black-pure lg:text-xl">
         {platform}
       </h4>
@@ -62,7 +62,7 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
     </Link>
 
     <div
-      className="pointer-events-none absolute top-0 right-0 h-full w-[320px] lg:w-[240px] xl:w-[280px] md:w-[220px]"
+      className="pointer-events-none absolute top-0 right-0 h-full w-[320px] md:w-[220px] lg:w-[240px] xl:w-[280px]"
       aria-hidden="true"
       style={{
         maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -83,20 +83,20 @@ ConnectionCard.propTypes = {
 };
 
 const Connections = () => (
-  <SecondarySection title="Community" className="pb-60 lg:pt-28 lg:pb-40 md:pt-20 md:pb-[104px]">
-    <header className="mb-16 lg:mb-14 md:mb-12">
+  <SecondarySection title="Community" className="pb-60 md:pt-20 md:pb-[104px] lg:pt-28 lg:pb-40">
+    <header className="mb-16 md:mb-12 lg:mb-14">
       <SectionLabel icon="arrow">Community</SectionLabel>
 
-      <h3 className="mt-5 max-w-[813px] text-5xl leading-dense font-normal tracking-tighter text-black-pure lg:max-w-[580px] lg:text-[36px] xl:mt-[18px] xl:max-w-[700px] xl:text-[40px] md:max-w-full md:text-[28px]">
+      <h3 className="mt-5 max-w-[813px] text-5xl leading-dense font-normal tracking-tighter text-black-pure md:max-w-full md:text-[28px] lg:max-w-[580px] lg:text-[36px] xl:mt-[18px] xl:max-w-[700px] xl:text-[40px]">
         Connect with us{' '}
         <span className="text-gray-new-40">wherever you work, build, and share your journey.</span>
       </h3>
 
-      <div className="mt-6 h-px w-full bg-gray-new-50 lg:mt-5 md:mt-[18px]" aria-hidden="true" />
+      <div className="mt-6 h-px w-full bg-gray-new-50 md:mt-[18px] lg:mt-5" aria-hidden="true" />
     </header>
 
     {/* Cards Grid */}
-    <ul className="grid grid-cols-3 gap-[31px] lg:gap-7 xl:gap-8 md:grid-cols-1 md:gap-6">
+    <ul className="grid grid-cols-3 gap-[31px] md:grid-cols-1 md:gap-6 lg:gap-7 xl:gap-8">
       {CONNECTIONS_DATA.map((card) => (
         <li key={card.platform}>
           <ConnectionCard {...card} />

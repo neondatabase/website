@@ -7,7 +7,7 @@ import quoteIcon from 'icons/quote.svg';
 
 const CompanyLogo = ({ className, src, width, isPriority }) => (
   <Image
-    className={clsx('h-9 lg:h-7 lg:w-auto md:h-6', className)}
+    className={clsx('h-9 md:h-6 lg:h-7 lg:w-auto', className)}
     src={src}
     width={width}
     height={36}
@@ -36,15 +36,15 @@ const TestimonialNew = ({
     <Container className="relative flex flex-col items-center px-16 md:px-5" size="960">
       {company && author ? (
         <CompanyLogo
-          className="mb-7 lg:mb-6 md:mb-5"
+          className="mb-7 md:mb-5 lg:mb-6"
           src={company.src}
           width={company.width}
           priority={isPriority}
         />
       ) : (
-        <div className="h-[68px] w-full lg:h-[60px] md:h-[52px]">
+        <div className="h-[68px] w-full md:h-[52px] lg:h-[60px]">
           <Image
-            className="absolute top-0 left-1/2 -z-10 -mt-7 -ml-2.5 -translate-x-1/2 lg:h-20 lg:w-auto md:h-[72px]"
+            className="absolute top-0 left-1/2 -z-10 -mt-7 -ml-2.5 -translate-x-1/2 md:h-[72px] lg:h-20 lg:w-auto"
             src={quoteIcon}
             width={104}
             height={89}
@@ -57,14 +57,14 @@ const TestimonialNew = ({
         <blockquote className="text-center">
           <p
             className={clsx(
-              'bg-[radial-gradient(66.11%_247.88%_at_50%_50%,#FFF_31.15%,rgba(255,255,255,0.1)_100%)] bg-clip-text text-[28px] leading-snug tracking-tighter text-transparent lg:text-2xl md:text-xl',
+              'bg-[radial-gradient(66.11%_247.88%_at_50%_50%,#FFF_31.15%,rgba(255,255,255,0.1)_100%)] bg-clip-text text-[28px] leading-snug tracking-tighter text-transparent md:text-xl lg:text-2xl',
               quoteClassName
             )}
           >
             {quote}
           </p>
         </blockquote>
-        <figcaption className="mt-5 flex h-[30px] items-center justify-center lg:mt-[18px] md:h-auto md:flex-col md:gap-2.5">
+        <figcaption className="mt-5 flex h-[30px] items-center justify-center md:h-auto md:flex-col md:gap-2.5 lg:mt-[18px]">
           {author ? (
             <>
               {author.avatar && (
@@ -78,7 +78,7 @@ const TestimonialNew = ({
                   priority={isPriority}
                 />
               )}
-              <span className="text-lg leading-tight font-light tracking-extra-tight text-gray-new-70 lg:text-base md:mx-auto md:flex md:flex-col md:items-center md:gap-1 md:text-center md:text-sm">
+              <span className="text-lg leading-tight font-light tracking-extra-tight text-gray-new-70 md:mx-auto md:flex md:flex-col md:items-center md:gap-1 md:text-center md:text-sm lg:text-base">
                 <span>{author.name}</span>
                 <cite className="ml-1.5 text-gray-new-50 not-italic before:mr-1.5 before:inline-flex before:h-px before:w-4 before:bg-gray-new-50 before:align-middle md:ml-0 md:before:hidden">
                   {author.position}

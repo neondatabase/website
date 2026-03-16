@@ -35,10 +35,10 @@ const VariableLoadPage = async () => {
     <Layout isHeaderSticky>
       <div className="flex flex-1 flex-col safe-paddings lg:block dark:bg-black-pure dark:text-white">
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] lg:block lg:gap-x-5 lg:pt-11 xl:gap-x-7 xl:pt-14 md:pt-8"
+          className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] md:pt-8 lg:block lg:gap-x-5 lg:pt-11 xl:gap-x-7 xl:pt-14"
           size="1344"
         >
-          <div className="col-span-6 col-start-4 -mx-10 flex flex-col 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 sm:pb-8 lg:ml-0 lg:pt-0 xl:col-span-10 xl:col-start-2 md:mx-auto md:pb-[70px]">
+          <div className="col-span-6 col-start-4 -mx-10 flex flex-col sm:pb-8 md:mx-auto md:pb-[70px] lg:ml-0 lg:pt-0 xl:col-span-10 xl:col-start-2 2xl:col-span-7 2xl:col-start-3 2xl:mx-0">
             <article>
               <Hero />
               <Load title={tableOfContents[0]} />
@@ -46,7 +46,7 @@ const VariableLoadPage = async () => {
               <Unique title={tableOfContents[2]} />
             </article>
           </div>
-          <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px] xl:hidden">
+          <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 xl:hidden 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]">
             <div
               className={clsx(
                 'sticky top-[104px]',

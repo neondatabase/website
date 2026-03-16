@@ -6,15 +6,15 @@ import { BRANCHING_BASE_PATH } from 'constants/branching';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const Contents = ({ contents }) => (
-  <section className="table-of-contents w-full pt-[180px] safe-paddings pb-[220px] lg:pt-[88px] xl:pt-[136px] md:pt-20 md:pb-20">
+  <section className="table-of-contents w-full pt-[180px] safe-paddings pb-[220px] md:pt-20 md:pb-20 lg:pt-[88px] xl:pt-[136px]">
     <Container className="w-full text-left" size="branching">
-      <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter lg:mb-11 xl:text-[36px] md:mb-9 md:text-[28px]">
+      <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter md:mb-9 md:text-[28px] lg:mb-11 xl:text-[36px]">
         Branching Workflows
       </h2>
       <ul className="w-full">
         {contents.map(({ section, id, items }) => (
           <li
-            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 lg:gap-6 lg:py-[19px] md:gap-5 md:py-[21px]"
+            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 md:gap-5 md:py-[21px] lg:gap-6 lg:py-[19px]"
             key={id}
             id={id}
           >
@@ -25,7 +25,7 @@ const Contents = ({ contents }) => (
               {items.map(({ title, description, slug }) => (
                 <li className="group/item -mt-px border-t border-gray-new-20" key={slug}>
                   <Link
-                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base lg:py-[18px] md:py-[14px]"
+                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base md:py-[14px] lg:py-[18px]"
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">

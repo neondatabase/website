@@ -54,23 +54,23 @@ const ITEMS = [
 ];
 
 const CardsSupport = () => (
-  <section className="cards-support pt-[137px] safe-paddings lg:pt-[90px] xl:pt-[113px] md:pt-[26px]">
+  <section className="cards-support pt-[137px] safe-paddings md:pt-[26px] lg:pt-[90px] xl:pt-[113px]">
     <Container className="md:px-5" size="768">
       <header className="mx-auto flex flex-col items-center text-center">
-        <h2 className="max-w-md font-title text-5xl leading-none font-medium tracking-extra-tight lg:max-w-[380px] lg:text-4xl xl:text-[44px] md:max-w-[280px] md:text-[32px] md:tracking-tighter">
+        <h2 className="max-w-md font-title text-5xl leading-none font-medium tracking-extra-tight md:max-w-[280px] md:text-[32px] md:tracking-tighter lg:max-w-[380px] lg:text-4xl xl:text-[44px]">
           Multi-TB migrations? Get expert support
         </h2>
         <p className="mt-3 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base">
           Our team is here to guide you through even the most complex scenarios.
         </p>
       </header>
-      <ul className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-1 lg:mt-10 md:mt-8 xs:gap-3">
+      <ul className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-1 md:mt-8 lg:mt-10 xs:gap-3">
         {ITEMS.map(({ title, description, list, className }) => (
           <li
             key={title}
-            className={clsx('relative rounded-xl bg-black-fog p-7 lg:p-6 md:p-5', className)}
+            className={clsx('relative rounded-xl bg-black-fog p-7 md:p-5 lg:p-6', className)}
           >
-            <h3 className="mb-2.5 text-xl leading-snug font-medium tracking-tight text-balance text-white lg:text-lg md:tracking-extra-tight">
+            <h3 className="mb-2.5 text-xl leading-snug font-medium tracking-tight text-balance text-white md:tracking-extra-tight lg:text-lg">
               {title}
             </h3>
             <p
@@ -78,7 +78,7 @@ const CardsSupport = () => (
               dangerouslySetInnerHTML={{ __html: description }}
             />
             <div
-              className="my-6 h-px w-full bg-white mix-blend-overlay lg:my-5 md:my-[18px]"
+              className="my-6 h-px w-full bg-white mix-blend-overlay md:my-[18px] lg:my-5"
               aria-hidden
             />
             <ul className="flex flex-col gap-[18px]">

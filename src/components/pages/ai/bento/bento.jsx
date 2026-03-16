@@ -54,22 +54,22 @@ const ITEMS = [
 ];
 
 const Bento = () => (
-  <section className="bento mt-[200px] safe-paddings lg:mt-40 xl:mt-[192px] md:mt-[105px]">
-    <Container className="lg:max-w-3xl! md:px-5" size="960">
+  <section className="bento mt-[200px] safe-paddings md:mt-[105px] lg:mt-40 xl:mt-[192px]">
+    <Container className="md:px-5 lg:max-w-3xl!" size="960">
       <div className="mx-auto flex max-w-[832px] flex-col text-pretty lg:max-w-xl">
-        <h2 className="max-w-2xl font-title text-5xl leading-none font-medium tracking-extra-tight lg:mr-10 lg:text-4xl xl:max-w-xl xl:text-[44px] md:mr-0 md:text-[32px]">
+        <h2 className="max-w-2xl font-title text-5xl leading-none font-medium tracking-extra-tight md:mr-0 md:text-[32px] lg:mr-10 lg:text-4xl xl:max-w-xl xl:text-[44px]">
           The database AI-native apps were waiting for
         </h2>
-        <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base lg:text-pretty xl:text-balance md:mt-3">
+        <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 lg:text-base lg:text-pretty xl:text-balance">
           Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
           and compute, autoscales to zero, and lets agents create databases without friction.
         </p>
       </div>
-      <ul className="mt-14 flex flex-wrap gap-5 lg:mt-12 lg:gap-4 md:mt-8 md:flex-col md:items-center">
+      <ul className="mt-14 flex flex-wrap gap-5 md:mt-8 md:flex-col md:items-center lg:mt-12 lg:gap-4">
         {ITEMS.map(({ title, description, image, imageMobile }, index) => (
           <li
             className={clsx(
-              'relative h-[384px] rounded-[14px] bg-[#0A0A0A] lg:h-[308px] md:h-[324px] md:w-80'
+              'relative h-[384px] rounded-[14px] bg-[#0A0A0A] md:h-[324px] md:w-80 lg:h-[308px]'
             )}
             key={title}
           >
@@ -79,7 +79,7 @@ const Bento = () => (
             </div>
             <div className="relative h-full shrink-0 overflow-hidden rounded-[inherit]">
               <Image
-                className="relative h-full w-auto lg:hidden md:block md:h-auto md:w-full"
+                className="relative h-full w-auto md:block md:h-auto md:w-full lg:hidden"
                 src={image}
                 alt=""
                 width={[0, 3].includes(index) ? 544 : 396}
@@ -88,7 +88,7 @@ const Bento = () => (
                 priority
               />
               <Image
-                className="relative hidden h-full w-auto lg:block md:hidden md:h-auto md:w-full"
+                className="relative hidden h-full w-auto md:hidden md:h-auto md:w-full lg:block"
                 src={imageMobile}
                 alt=""
                 width={[0, 3].includes(index) ? 414 : 274}

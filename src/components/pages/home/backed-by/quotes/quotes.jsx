@@ -125,7 +125,7 @@ const Quotes = () => {
                   <blockquote className="text-xl leading-snug text-pretty lg:text-[15px] xl:text-lg">
                     <AnimatedText text={text} highlight={highlight} />
                   </blockquote>
-                  <figcaption className="mt-5 block text-base leading-normal text-gray-new-15 not-italic xl:text-sm md:text-[13px]">
+                  <figcaption className="mt-5 block text-base leading-normal text-gray-new-15 not-italic md:text-[13px] xl:text-sm">
                     <AnimatedPosition author={author} position={post} />
                   </figcaption>
                 </m.figure>

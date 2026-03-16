@@ -11,12 +11,12 @@ const SpeedScale = () => (
   <section
     className={clsx(
       'speed-scale relative overflow-hidden border-t border-gray-new-40 safe-paddings pb-[120px]',
-      'lg:pb-20 xl:pb-[136px] md:pb-[52px]'
+      'md:pb-[52px] lg:pb-20 xl:pb-[136px]'
     )}
   >
     <StatusLine className="mt-2.5" />
     <div className="overflow-hidden">
-      <Container className="lg:px-16! xl:max-w-5xl xl:px-16 md:px-5!" size="1280">
+      <Container className="md:px-5! lg:px-16! xl:max-w-5xl xl:px-16" size="1280">
         <Header />
         <Features />
       </Container>

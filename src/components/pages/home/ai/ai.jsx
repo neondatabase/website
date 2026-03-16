@@ -14,16 +14,16 @@ const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode
 
 const AI = () => (
   <section
-    className="ai relative scroll-mt-[60px] overflow-hidden py-40 safe-paddings lg:scroll-mt-0 lg:pt-[120px] lg:pb-[118px] xl:pt-[137px] xl:pb-[135px] md:pt-24 md:pb-20"
+    className="ai relative scroll-mt-[60px] overflow-hidden py-40 safe-paddings md:pt-24 md:pb-20 lg:scroll-mt-0 lg:pt-[120px] lg:pb-[118px] xl:pt-[137px] xl:pb-[135px]"
     id="ai"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden md:px-5!"
+      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block md:px-5! lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden"
       size="1600"
     >
       <div className="min-w-0">
         <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and the LLM does the hard work." />
-        <div className="relative mt-[182px] pl-32 sm:mt-11 lg:-mx-8 lg:mt-[143px] lg:px-0 xl:mt-[174px] xl:-mr-8 xl:pl-16 md:mx-0">
+        <div className="relative mt-[182px] pl-32 sm:mt-11 md:mx-0 lg:-mx-8 lg:mt-[143px] lg:px-0 xl:mt-[174px] xl:-mr-8 xl:pl-16">
           <div className="pointer-events-none relative w-full sm:hidden">
             <Animation className="absolute -top-[86px] left-1/2 aspect-[941/658] size-[105%]! -translate-x-1/2 lg:-top-[60px] xl:-top-[72px]" />
             <Image
@@ -55,7 +55,7 @@ const AI = () => (
           </div>
         </div>
 
-        <div className="mt-[114px] flex items-center gap-11 sm:-mx-6 sm:flex-col sm:items-start sm:gap-7 lg:mt-20 xl:mt-[104px] xl:gap-[14px] md:mt-[58px]">
+        <div className="mt-[114px] flex items-center gap-11 sm:-mx-6 sm:flex-col sm:items-start sm:gap-7 md:mt-[58px] lg:mt-20 xl:mt-[104px] xl:gap-[14px]">
           <p className="w-[146px] shrink-0 leading-snug font-medium tracking-extra-tight text-gray-new-50 sm:w-full sm:text-center lg:text-[15px] xl:w-32">
             Connect MCP clients to Neon:
           </p>

@@ -7,9 +7,9 @@ import LINKS from 'constants/links';
 import sparks from './images/sparks.png';
 
 const Hero = () => (
-  <section className="hero relative mt-[136px] safe-paddings lg:mt-14 xl:mt-[126px] md:mt-12">
+  <section className="hero relative mt-[136px] safe-paddings md:mt-12 lg:mt-14 xl:mt-[126px]">
     <Container className="lg:max-w-[640px]!" size="832">
-      <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
+      <div className="relative mb-10 size-[72px] md:mb-7 md:size-14 lg:mb-8 lg:size-16 lg:rounded-[14px]">
         <Image
           className="relative z-10 size-full rounded-2xl shadow-[0px_5px_14px_0px_rgba(0,0,0,0.6)] md:rounded-xl"
           src={sparks}
@@ -28,7 +28,7 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <h1 className="max-w-3xl font-title text-[60px] leading-none font-medium tracking-extra-tight lg:max-w-xl lg:text-5xl xl:text-[56px] md:max-w-full md:text-[36px]">
+      <h1 className="max-w-3xl font-title text-[60px] leading-none font-medium tracking-extra-tight md:max-w-full md:text-[36px] lg:max-w-xl lg:text-5xl xl:text-[56px]">
         Neon for&nbsp;AI.{' '}
         <span className="text-gray-new-60">
           Designed for agents. Optimized for vectors. Backed{' '}
@@ -37,7 +37,7 @@ const Hero = () => (
         </span>
       </h1>
       <Button
-        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter lg:mt-7 md:mt-6 md:h-11 md:min-w-min md:px-10"
+        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter md:mt-6 md:h-11 md:min-w-min md:px-10 lg:mt-7"
         theme="primary"
         to={LINKS.signup}
         target="_blank"

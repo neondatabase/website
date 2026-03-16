@@ -13,7 +13,7 @@ const TemplatesPage = () => (
   <Layout headerWithBorder isHeaderSticky>
     <section className="flex flex-1 flex-col bg-black-pure safe-paddings text-white lg:block">
       <Container
-        className="grid w-full flex-1 grid-cols-5 pt-12 pb-[104px] sm:pt-6 lg:block lg:gap-x-5 lg:pt-9 lg:pb-20 xl:gap-x-7 xl:pb-24 md:pb-[72px]"
+        className="grid w-full flex-1 grid-cols-5 pt-12 pb-[104px] sm:pt-6 md:pb-[72px] lg:block lg:gap-x-5 lg:pt-9 lg:pb-20 xl:gap-x-7 xl:pb-24"
         size="960"
       >
         <div className="col-span-4 col-start-1 max-w-[703px]">

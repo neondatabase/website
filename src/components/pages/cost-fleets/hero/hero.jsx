@@ -4,13 +4,13 @@ import UseCaseCalculator from 'components/shared/use-case-calculator';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero relative overflow-hidden pt-[88px] safe-paddings lg:pt-11 xl:pt-14 md:pt-8">
+  <section className="hero relative overflow-hidden pt-[88px] safe-paddings md:pt-8 lg:pt-11 xl:pt-14">
     <Container size="xxs">
       <div className="px-8 sm:px-0">
-        <h1 className="text-6xl leading-dense font-semibold tracking-tighter lg:text-5xl xl:text-[56px] md:text-[36px] md:leading-tight">
+        <h1 className="text-6xl leading-dense font-semibold tracking-tighter md:text-[36px] md:leading-tight lg:text-5xl xl:text-[56px]">
           Neon for platforms
         </h1>
-        <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:mt-3 md:text-lg">
+        <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 md:mt-3 md:text-lg xl:text-xl">
           Use Neon to build your free tier for a fraction of the cost.
         </p>
       </div>

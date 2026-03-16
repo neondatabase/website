@@ -47,7 +47,7 @@ const TemplatePage = ({ params }) => {
     <Layout isHeaderSticky>
       <div className="flex flex-1 flex-col safe-paddings lg:block dark:bg-black-pure dark:text-white">
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-8 pt-[88px] pb-[116px] 2xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-12 lg:pb-20 xl:pt-[62px] xl:pb-24 md:pb-[72px]"
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pt-[88px] pb-[116px] md:pb-[72px] lg:block lg:gap-x-5 lg:pt-12 lg:pb-20 xl:pt-[62px] xl:pb-24 2xl:gap-x-7"
           size="1600"
         >
           <Post content={content} data={data} currentSlug={slug} />

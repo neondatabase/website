@@ -10,7 +10,7 @@ const SubProcessors = () => (
     <Container className="relative z-10" size="960">
       <div className="flex items-start gap-16 sm:flex-col sm:gap-8 lg:justify-center lg:gap-6">
         <div className="mt-10 grow-1 sm:mt-0 sm:w-full sm:text-center lg:mt-1.5 lg:w-[340px] lg:shrink-0">
-          <h2 className="font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight lg:text-[36px] xl:text-4xl md:text-[32px]">
+          <h2 className="font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight md:text-[32px] lg:text-[36px] xl:text-4xl">
             Sub-Processors
           </h2>
           <div className="mt-4 flex flex-col gap-2 text-with-links leading-snug tracking-extra-tight text-pretty text-gray-new-70 sm:text-sm sm:font-light lg:text-[15px]">
@@ -25,7 +25,7 @@ const SubProcessors = () => (
             </p>
           </div>
         </div>
-        <div className="relative shrink-0 overflow-hidden rounded-xl sm:w-full lg:shrink-[unset] md:grow">
+        <div className="relative shrink-0 overflow-hidden rounded-xl sm:w-full md:grow lg:shrink-[unset]">
           <Image
             className="sm:w-full"
             src={subprocessors}

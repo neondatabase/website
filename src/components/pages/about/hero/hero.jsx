@@ -5,13 +5,13 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero relative h-[820px] border-b border-gray-new-20 safe-paddings lg:h-[665px] xl:h-[854px] md:h-[587px]">
+  <section className="hero relative h-[820px] border-b border-gray-new-20 safe-paddings md:h-[587px] lg:h-[665px] xl:h-[854px]">
     <Container
-      className="flex h-full w-full flex-col items-center justify-between pt-[360px] pb-12 lg:pt-[210px] lg:pb-10 xl:pt-[353px] md:justify-end md:gap-y-36 md:pt-0"
+      className="flex h-full w-full flex-col items-center justify-between pt-[360px] pb-12 md:justify-end md:gap-y-36 md:pt-0 lg:pt-[210px] lg:pb-10 xl:pt-[353px]"
       size="1600"
     >
       <Heading
-        className="text-center lg:max-w-[544px] md:max-w-80"
+        className="text-center md:max-w-80 lg:max-w-[544px]"
         tag="h1"
         theme="white"
         size="md-new"
@@ -19,11 +19,11 @@ const Hero = () => (
         Neon is the Postgres layer for the internet
       </Heading>
       <div className="flex w-full items-center justify-between lg:flex-col lg:items-start lg:gap-y-6 xl:items-end">
-        <p className="max-w-[704px] font-sans text-xl leading-snug font-normal tracking-extra-tight text-gray-new-80 lg:max-w-[640px] lg:text-lg xl:max-w-md md:max-w-80 md:text-[15px]">
+        <p className="max-w-[704px] font-sans text-xl leading-snug font-normal tracking-extra-tight text-gray-new-80 md:max-w-80 md:text-[15px] lg:max-w-[640px] lg:text-lg xl:max-w-md">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
           a new level of performance, reliability, and scale.
         </p>
-        <div className="flex items-center justify-center gap-x-5 lg:pb-0 xl:gap-4 xl:pb-2 md:w-full md:flex-col">
+        <div className="flex items-center justify-center gap-x-5 md:w-full md:flex-col lg:pb-0 xl:gap-4 xl:pb-2">
           <Button
             size="lg-new"
             theme="white-filled"

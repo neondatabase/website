@@ -44,7 +44,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
   return (
     <ul
       className={clsx(
-        'grid grid-cols-3 2xl:gap-x-4 md:grid-cols-1',
+        'grid grid-cols-3 md:grid-cols-1 2xl:gap-x-4',
         isLarge ? 'md:gap-y-3.5' : 'md:gap-y-2.5',
         className
       )}
@@ -54,9 +54,9 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
         <li className="relative" key={index}>
           <Link
             className={clsx(
-              'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 lg:min-h-max xl:min-h-[165px] md:flex-row md:gap-x-3',
+              'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 md:flex-row md:gap-x-3 lg:min-h-max xl:min-h-[165px]',
               isLarge
-                ? 'p-5 sm:space-y-3 lg:p-4 lg:pb-5 xl:pb-4 md:flex-col md:p-5 md:pb-6'
+                ? 'p-5 sm:space-y-3 md:flex-col md:p-5 md:pb-6 lg:p-4 lg:pb-5 xl:pb-4'
                 : 'px-5 pt-5 pb-4 lg:p-4 xl:p-3.5',
               { 'pointer-events-none': isDisabled }
             )}
@@ -87,7 +87,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             />
             <div
               className={clsx(
-                isLarge ? 'mt-5 lg:mt-4' : 'mt-[38px] lg:mt-7 xl:mt-8 md:mt-0',
+                isLarge ? 'mt-5 lg:mt-4' : 'mt-[38px] md:mt-0 lg:mt-7 xl:mt-8',
                 'flex h-full flex-col'
               )}
             >
@@ -101,7 +101,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
               <p
                 className={clsx(
                   'mt-1.5 text-[15px] leading-tight font-light text-gray-new-70',
-                  isLarge ? 'mb-9 lg:mt-1.5 lg:mb-6 md:mt-1 md:mb-3.5' : 'md:mt-2.5'
+                  isLarge ? 'mb-9 md:mt-1 md:mb-3.5 lg:mt-1.5 lg:mb-6' : 'md:mt-2.5'
                 )}
                 dangerouslySetInnerHTML={{ __html: description }}
               />

@@ -72,7 +72,7 @@ const GridFeatures = ({
       >
         <h2
           className={clsx(
-            'font-title text-5xl leading-none font-medium tracking-extra-tight lg:text-4xl xl:text-[44px] md:text-[32px]',
+            'font-title text-5xl leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-4xl xl:text-[44px]',
             titleClassName
           )}
         >
@@ -80,7 +80,7 @@ const GridFeatures = ({
         </h2>
         <p
           className={clsx(
-            'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:mt-3',
+            'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 lg:text-base',
             descriptionClassName
           )}
         >
@@ -94,7 +94,7 @@ const GridFeatures = ({
       </header>
       <ul
         className={clsx(
-          'mt-[51px] grid grid-cols-3 gap-x-11 gap-y-10 sm:grid-cols-1 lg:mt-[42px] lg:grid-cols-2 lg:gap-x-12 lg:gap-y-10 xl:mx-auto xl:mt-[54px] xl:max-w-3xl xl:grid-cols-2 md:mx-0 md:gap-y-12',
+          'mt-[51px] grid grid-cols-3 gap-x-11 gap-y-10 sm:grid-cols-1 md:mx-0 md:gap-y-12 lg:mt-[42px] lg:grid-cols-2 lg:gap-x-12 lg:gap-y-10 xl:mx-auto xl:mt-[54px] xl:max-w-3xl xl:grid-cols-2',
           ulClassName
         )}
       >

@@ -35,7 +35,7 @@ const Tabs = ({ tabs }) => {
 
   return (
     <div className="mt-11 flex gap-10 md:mt-10 md:flex-col md:gap-6">
-      <ul className="flex w-[280px] shrink-0 grow flex-col gap-y-2.5 lg:w-[216px] md:w-full">
+      <ul className="flex w-[280px] shrink-0 grow flex-col gap-y-2.5 md:w-full lg:w-[216px]">
         {tabs.map(({ title }, index) => (
           <li key={index}>
             <button

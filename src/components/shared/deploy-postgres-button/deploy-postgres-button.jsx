@@ -173,7 +173,7 @@ const DeployPostgresButton = () => {
               className="absolute inset-[5px] z-10 rounded-[10px] border border-white/4 mix-blend-overlay"
               aria-hidden="true"
             />
-            <div className="border-opacity-[0.05] z-20 flex h-9 gap-x-3.5 rounded-[10px] bg-[#0c0d0d] pt-2.5 pl-[18px] tracking-extra-tight lg:gap-x-3 xl:rounded-lg xl:pl-4 md:gap-x-2.5 md:pl-[14px]">
+            <div className="border-opacity-[0.05] z-20 flex h-9 gap-x-3.5 rounded-[10px] bg-[#0c0d0d] pt-2.5 pl-[18px] tracking-extra-tight md:gap-x-2.5 md:pl-[14px] lg:gap-x-3 xl:rounded-lg xl:pl-4">
               <span className="absolute top-1/2 left-0 h-[450px] w-px -translate-y-1/2" />
               <span
                 className={clsx(

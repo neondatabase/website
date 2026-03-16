@@ -57,11 +57,11 @@ const Autoscaling = () => {
 
   return (
     <section
-      className="autoscaling relative scroll-mt-16 overflow-hidden bg-[#E4F1EB] pt-[88px] safe-paddings pb-[105px] lg:scroll-mt-0 lg:py-14 xl:pt-16 xl:pb-20 md:pt-9"
+      className="autoscaling relative scroll-mt-16 overflow-hidden bg-[#E4F1EB] pt-[88px] safe-paddings pb-[105px] md:pt-9 lg:scroll-mt-0 lg:py-14 xl:pt-16 xl:pb-20"
       id="autoscaling"
     >
       <Container
-        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden md:px-5!"
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block md:px-5! lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden"
         size="1600"
       >
         <div className="min-w-0">
@@ -71,7 +71,7 @@ const Autoscaling = () => {
             title="<strong>Advanced autoscaling.</strong> Keep scaling without worrying about capacity. Never overpay for resources you don’t use."
           />
 
-          <div className="group relative z-20 mt-16 w-fit lg:mt-12 xl:mt-14 md:mt-11">
+          <div className="group relative z-20 mt-16 w-fit md:mt-11 lg:mt-12 xl:mt-14">
             {TABS.map((item, index) => (
               <button
                 className={clsx(
@@ -79,7 +79,7 @@ const Autoscaling = () => {
                   'leading-none font-medium tracking-extra-tight',
                   'border border-gray-new-10 even:border-l-0',
                   'focus-visible:z-10',
-                  'lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 xl:h-10 xl:min-w-[130px] md:text-[14px]',
+                  'md:text-[14px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 xl:h-10 xl:min-w-[130px]',
                   index === activeItem
                     ? 'bg-white text-gray-new-10'
                     : 'bg-[#E4F1EB] text-gray-new-10/80 hover:bg-white/70 hover:text-gray-new-10'
@@ -161,11 +161,11 @@ const Autoscaling = () => {
             </div>
           </div>
 
-          <div className="relative z-20 mt-6 flex items-start justify-between gap-10 text-black-pure lg:mt-5 lg:flex-col lg:gap-10 xl:mt-6 md:gap-8">
+          <div className="relative z-20 mt-6 flex items-start justify-between gap-10 text-black-pure md:gap-8 lg:mt-5 lg:flex-col lg:gap-10 xl:mt-6">
             <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 lg:gap-x-7 xl:mt-0 xs:flex-col">
               {LEGEND.map((item, index) => (
                 <li
-                  className="flex items-center gap-x-2.5 text-[15px] leading-snug tracking-extra-tight whitespace-nowrap xl:gap-x-2 md:text-[14px]"
+                  className="flex items-center gap-x-2.5 text-[15px] leading-snug tracking-extra-tight whitespace-nowrap md:text-[14px] xl:gap-x-2"
                   key={index}
                 >
                   <Image src={item.icon} width={16} height={16} loading="lazy" alt="" />
@@ -173,7 +173,7 @@ const Autoscaling = () => {
                 </li>
               ))}
             </ul>
-            <p className="relative max-w-[480px] shrink-0 text-[18px] leading-normal tracking-extra-tight lg:right-0 lg:max-w-[480px] xl:-right-8 xl:max-w-[352px] md:text-[15px]">
+            <p className="relative max-w-[480px] shrink-0 text-[18px] leading-normal tracking-extra-tight md:text-[15px] lg:right-0 lg:max-w-[480px] xl:-right-8 xl:max-w-[352px]">
               By separating compute and storage, Neon automatically scales CPU, memory and storage
               to fit your workload.
             </p>

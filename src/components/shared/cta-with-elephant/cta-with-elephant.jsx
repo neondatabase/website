@@ -30,9 +30,9 @@ const CTAWithElephant = ({
   >
     <Container
       size="medium"
-      className="grid grid-cols-12 gap-x-10 lg:gap-x-4 xl:gap-x-6 md:grid-cols-1"
+      className="grid grid-cols-12 gap-x-10 md:grid-cols-1 lg:gap-x-4 xl:gap-x-6"
     >
-      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pt-16 pb-[164px] 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 lg:col-span-6 lg:pb-[54px] xl:col-start-1 xl:pt-20 xl:pb-[78px] md:col-span-full md:items-center md:text-center">
+      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pt-16 pb-[164px] md:col-span-full md:items-center md:text-center lg:col-span-6 lg:pb-[54px] xl:col-start-1 xl:pt-20 xl:pb-[78px] 2xl:col-span-5 2xl:col-start-2 2xl:pb-36">
         {label && (
           <GradientLabel className="mb-5" theme={labelTheme}>
             {label}
@@ -40,7 +40,7 @@ const CTAWithElephant = ({
         )}
         <Heading
           className={clsx(
-            'max-w-[500px] lg:max-w-[350px] xl:max-w-[400px] md:mx-auto',
+            'max-w-[500px] md:mx-auto lg:max-w-[350px] xl:max-w-[400px]',
             titleClassName
           )}
           tag="h2"
@@ -49,10 +49,10 @@ const CTAWithElephant = ({
         >
           {title}
         </Heading>
-        <p className="mt-3 max-w-[464px] text-lg leading-snug font-light lg:max-w-sm xl:max-w-[400px] xl:text-base md:mx-auto md:max-w-md">
+        <p className="mt-3 max-w-[464px] text-lg leading-snug font-light md:mx-auto md:max-w-md lg:max-w-sm xl:max-w-[400px] xl:text-base">
           {description}
         </p>
-        <div className="mt-9 flex items-center gap-x-8 sm:mt-6 sm:flex-col sm:gap-y-5 lg:gap-x-4 xl:mt-7 md:justify-center">
+        <div className="mt-9 flex items-center gap-x-8 sm:mt-6 sm:flex-col sm:gap-y-5 md:justify-center lg:gap-x-4 xl:mt-7">
           <AnimatedButton
             className={clsx(
               'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] sm:text-lg lg:text-base xl:py-[17px]',
@@ -78,9 +78,9 @@ const CTAWithElephant = ({
           )}
         </div>
       </div>
-      <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:z-20 md:col-span-full md:flex md:justify-center">
+      <div className="relative col-span-7 col-start-6 md:z-20 md:col-span-full md:flex md:justify-center 2xl:col-span-6 2xl:col-start-7">
         <Image
-          className="absolute bottom-0 left-0 w-[842px] max-w-none 2xl:w-[750px] lg:-left-28 lg:w-[553px] xl:-left-20 xl:w-[652px] md:static md:w-[591px]"
+          className="absolute bottom-0 left-0 w-[842px] max-w-none md:static md:w-[591px] lg:-left-28 lg:w-[553px] xl:-left-20 xl:w-[652px] 2xl:w-[750px]"
           src={illustration}
           width={842}
           height={482}

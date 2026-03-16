@@ -27,7 +27,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
         {category.name}
       </Link>
     </div>
-    <h1 className="post-title mt-4 text-5xl leading-dense font-medium tracking-tighter sm:text-[32px] lg:text-[40px] xl:text-[44px] md:text-[36px] xs:text-[28px]">
+    <h1 className="post-title mt-4 text-5xl leading-dense font-medium tracking-tighter sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] xs:text-[28px]">
       {title}
     </h1>
     <p className="mt-5 text-xl leading-snug tracking-tight text-gray-new-70 sm:text-base md:text-lg">

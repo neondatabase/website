@@ -7,9 +7,9 @@ import LINKS from 'constants/links';
 import claude from './images/claude.png';
 
 const Hero = () => (
-  <section className="hero relative pt-[134px] safe-paddings lg:pt-16 md:pt-12">
-    <Container className="lg:mx-8 md:mx-auto md:max-w-[640px]" size="768">
-      <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
+  <section className="hero relative pt-[134px] safe-paddings md:pt-12 lg:pt-16">
+    <Container className="md:mx-auto md:max-w-[640px] lg:mx-8" size="768">
+      <div className="relative mb-10 size-[72px] md:mb-7 md:size-14 lg:mb-8 lg:size-16 lg:rounded-[14px]">
         <Image
           className="relative z-10 size-full rounded-2xl shadow-[0px_5px_14px_0px_rgba(0,0,0,0.6)] md:rounded-xl"
           src={claude}
@@ -28,7 +28,7 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <h1 className="max-w-[646px] font-title text-[64px] leading-none font-medium tracking-extra-tight lg:max-w-xl lg:text-5xl xl:text-[56px] md:max-w-full md:text-4xl">
+      <h1 className="max-w-[646px] font-title text-[64px] leading-none font-medium tracking-extra-tight md:max-w-full md:text-4xl lg:max-w-xl lg:text-5xl xl:text-[56px]">
         Tools to migrate <br className="xs:hidden" />
         your database to Neon
       </h1>
@@ -37,7 +37,7 @@ const Hero = () => (
         minimal downtime.
       </p>
       <Button
-        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter lg:mt-7 lg:h-11 lg:px-8 lg:text-sm md:mt-6"
+        className="mt-9 h-12 min-w-40 px-[38px] font-semibold tracking-tighter md:mt-6 lg:mt-7 lg:h-11 lg:px-8 lg:text-sm"
         theme="primary"
         to={LINKS.docsMigration}
         target="_blank"

@@ -4,10 +4,10 @@ import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero relative overflow-hidden safe-paddings">
-    <h1 className="text-[56px] leading-dense font-semibold tracking-tighter lg:text-4xl xl:text-5xl md:text-[28px] md:leading-tight">
+    <h1 className="text-[56px] leading-dense font-semibold tracking-tighter md:text-[28px] md:leading-tight lg:text-4xl xl:text-5xl">
       Scale With Traffic
     </h1>
-    <p className="my-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:my-3 md:text-lg">
+    <p className="my-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 md:my-3 md:text-lg xl:text-xl">
       Neon scales CPU and memory automatically to match your app
     </p>
     <div className="prose-doc">
