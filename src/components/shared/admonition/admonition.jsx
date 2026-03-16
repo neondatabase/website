@@ -59,7 +59,9 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
     >
       <div className={clsx('flex items-center gap-1', theme.titleClassName)}>
         <Icon width={16} height={16} className="shrink-0" />
-        <h4 className="font-mono text-[13px] font-medium uppercase">{title || typeText}</h4>
+        <h4 className="font-mono text-[13px] font-medium uppercase leading-none -tracking-snug">
+          {title || typeText}
+        </h4>
       </div>
       {asHTML ? (
         <div className={textClassName} dangerouslySetInnerHTML={{ __html: children }} />
