@@ -38,13 +38,13 @@ const Developers = () => (
     <h2 className="sr-only">Developer-Focused Features</h2>
     <Container
       size="small"
-      className="pt-[153px] pb-[200px] md:pt-[88px] md:pb-[104px] lg:pt-[108px] lg:pb-[136px] xl:px-32 xl:pt-[136px] xl:pb-[184px]"
+      className="pt-[153px] pb-[200px] xl:px-32 xl:pt-[136px] xl:pb-[184px] lg:pt-[108px] lg:pb-[136px] md:pt-[88px] md:pb-[104px]"
     >
-      <p className="max-w-[800px] text-[64px] leading-none font-normal tracking-[-0.05em] text-white md:max-w-full md:text-[32px] lg:max-w-[544px] lg:text-[44px] xl:max-w-[696px] xl:text-[56px]">
+      <p className="max-w-[800px] text-[64px] leading-none font-normal tracking-[-0.05em] text-white xl:max-w-[696px] xl:text-[56px] lg:max-w-[544px] lg:text-[44px] md:max-w-full md:text-[32px]">
         Developers are at the center of everything we&nbsp;do.
       </p>
 
-      <ul className="mt-40 grid grid-cols-4 gap-x-20 md:mt-20 md:grid-cols-1 md:gap-y-14 lg:mt-28 lg:gap-16 xl:mt-[136px] xl:grid-cols-2 xl:gap-[72px]">
+      <ul className="mt-40 grid grid-cols-4 gap-x-20 xl:mt-[136px] xl:grid-cols-2 xl:gap-[72px] lg:mt-28 lg:gap-16 md:mt-20 md:grid-cols-1 md:gap-y-14">
         {FEATURES_DATA.map((feature, index) => {
           const Icon = feature.icon;
           return (
@@ -65,13 +65,13 @@ const Developers = () => (
               )}
             >
               <Icon
-                className="h-14 w-14 shrink-0 md:h-9 md:w-9 lg:h-11 lg:w-11 xl:h-[52px] xl:w-[52px]"
+                className="h-14 w-14 shrink-0 xl:h-[52px] xl:w-[52px] lg:h-11 lg:w-11 md:h-9 md:w-9"
                 aria-hidden="true"
               />
-              <h3 className="mt-6 text-[32px] leading-tight font-normal tracking-extra-tight text-white md:mt-[18px] lg:mt-5 lg:text-2xl xl:mt-6 xl:text-[28px]">
+              <h3 className="mt-6 text-[32px] leading-tight font-normal tracking-extra-tight text-white xl:mt-6 xl:text-[28px] lg:mt-5 lg:text-2xl md:mt-[18px]">
                 {feature.title}
               </h3>
-              <p className="mt-10 text-base leading-normal font-normal tracking-extra-tight text-gray-new-60 md:mt-5 lg:mt-7 xl:mt-9">
+              <p className="mt-10 text-base leading-normal font-normal tracking-extra-tight text-gray-new-60 xl:mt-9 lg:mt-7 md:mt-5">
                 {feature.description}
               </p>
             </li>

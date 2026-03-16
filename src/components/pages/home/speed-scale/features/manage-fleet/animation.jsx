@@ -39,7 +39,7 @@ const Animation = ({ apiCode, sqlCode }) => {
       <ol
         className={clsx(
           'flex w-[736px] flex-col gap-12',
-          'lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5 xl:-ml-8 xl:gap-[30px] 2xl:w-auto',
+          '2xl:w-auto xl:-ml-8 xl:gap-[30px] lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5',
           'sm:max-w-full sm:gap-[26px] sm:pt-1'
         )}
       >
@@ -62,17 +62,17 @@ const Animation = ({ apiCode, sqlCode }) => {
               <div
                 className={clsx(
                   'relative overflow-hidden bg-[#111215] px-6 py-[22px]',
-                  'sm:px-[14px] sm:py-3 lg:px-5 lg:py-[18px] xl:px-4 xl:py-[15px] xs:px-2.5 xs:py-2'
+                  'xl:px-4 xl:py-[15px] lg:px-5 lg:py-[18px] sm:px-[14px] sm:py-3 xs:px-2.5 xs:py-2'
                 )}
               >
                 <div
                   className={clsx(
-                    'relative z-10 flex items-center gap-2.5 bg-black-pure/80 backdrop-blur-[15px] sm:gap-1 xl:gap-2',
+                    'relative z-10 flex items-center gap-2.5 bg-black-pure/80 backdrop-blur-[15px] xl:gap-2 sm:gap-1',
                     codeWrapperClassName
                   )}
                 >
                   <span
-                    className="size-2 shrink-0 rounded-full bg-green-52 sm:size-[3px] lg:size-2 xl:size-1.5"
+                    className="size-2 shrink-0 rounded-full bg-green-52 xl:size-1.5 lg:size-2 sm:size-[3px]"
                     aria-hidden
                   />
                   <m.code
@@ -138,7 +138,7 @@ const Animation = ({ apiCode, sqlCode }) => {
             <Step index={1} title="Test and deploy <span>>></span>">
               <div
                 className={clsx(
-                  'relative flex flex-col gap-12 border border-gray-new-40 bg-black-pure sm:gap-4 lg:gap-9 xl:gap-7',
+                  'relative flex flex-col gap-12 border border-gray-new-40 bg-black-pure xl:gap-7 lg:gap-9 sm:gap-4',
                   codeWrapperClassName
                 )}
               >
@@ -167,7 +167,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                   type="button"
                   disabled
                 >
-                  <PlayIcon className="size-3 sm:size-1.5 lg:size-3 xl:size-[9px]" />
+                  <PlayIcon className="size-3 xl:size-[9px] lg:size-3 sm:size-1.5" />
                   Run Query
                 </button>
               </div>

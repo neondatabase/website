@@ -25,9 +25,9 @@ const NeonPostgresLayout = async ({ children }) => {
       isHeaderSticky
       hasThemesSupport
     >
-      <div className="flex flex-1 safe-paddings lg:block dark:bg-black-pure dark:text-white">
+      <div className="flex flex-1 safe-paddings dark:bg-black-pure dark:text-white lg:block">
         <Container
-          className="flex w-full flex-1 gap-x-24 pt-11 sm:pt-7 lg:block xl:pt-9 2xl:gap-x-8"
+          className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
           size="1600"
         >
           <Sidebar

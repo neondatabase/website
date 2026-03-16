@@ -20,7 +20,7 @@ const ChangelogPost = (post) => {
           'relative w-full pt-10 pb-24',
           'before:absolute before:top-0 before:right-0 before:-left-40 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
           'group-last:pb-0 dark:before:bg-gray-new-20',
-          'sm:ml-0 sm:max-w-full sm:pt-0 sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden md:pb-7'
+          'md:pb-7 sm:ml-0 sm:max-w-full sm:pt-0 sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
         )}
       >
         <Link

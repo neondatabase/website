@@ -60,7 +60,7 @@ const CheckList = ({ title, children }) => {
         'checklist doc-cta mt-9! flex flex-col px-8 pt-6 pb-8',
         'border border-gray-new-80',
         'dark:border-gray-new-20',
-        'md:p-5 md:px-5 md:py-[18px] lg:px-6 lg:py-5 xl:mt-8!'
+        'xl:mt-8! lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
       )}
     >
       <div className="flex items-start gap-4">
@@ -80,7 +80,7 @@ const CheckList = ({ title, children }) => {
           {progress === 100 ? 'Complete' : `${progress}%`}
         </span>
       </div>
-      <ul className="mt-6! mb-0! flex flex-col gap-5 p-0! md:mt-4! lg:mt-[18px]! lg:gap-4">
+      <ul className="mt-6! mb-0! flex flex-col gap-5 p-0! lg:mt-[18px]! lg:gap-4 md:mt-4!">
         {childrenWithProps}
       </ul>
     </div>

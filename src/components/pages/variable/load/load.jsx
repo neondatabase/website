@@ -19,9 +19,9 @@ const Load = ({ title }) => (
         require downtime.
       </p>
     </div>
-    <div className="mt-7 flex items-center justify-center gap-5 sm:mt-4 md:gap-3.5 lg:mt-5 lg:flex-col xl:mt-6">
+    <div className="mt-7 flex items-center justify-center gap-5 xl:mt-6 lg:mt-5 lg:flex-col md:gap-3.5 sm:mt-4">
       <Image
-        className="w-[470px] shrink-0 rounded-lg md:rounded lg:w-full lg:max-w-xl"
+        className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicAWS}
         width={470}
         height={338}
@@ -31,7 +31,7 @@ const Load = ({ title }) => (
         priority
       />
       <Image
-        className="w-[470px] shrink-0 rounded-lg md:rounded lg:w-full lg:max-w-xl"
+        className="w-[470px] shrink-0 rounded-lg lg:w-full lg:max-w-xl md:rounded"
         src={loadGraphicNeon}
         width={470}
         height={338}

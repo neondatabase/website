@@ -3,14 +3,14 @@ import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 const Step = ({ index, title, children, lineAnimation }) => (
-  <div className="relative pl-16 sm:pl-7 lg:pl-[56px] xl:pl-11 2xl:pl-[50px]">
-    <span className="absolute top-0 left-0 h-full w-10 sm:w-4 lg:w-8 xl:w-7">
+  <div className="relative pl-16 2xl:pl-[50px] xl:pl-11 lg:pl-[56px] sm:pl-7">
+    <span className="absolute top-0 left-0 h-full w-10 xl:w-7 lg:w-8 sm:w-4">
       <span
         className={clsx(
           'absolute -top-2 left-0 z-10 flex w-full justify-center bg-black-pure p-2.5',
           index !== 0 && 'h-full',
           'font-mono leading-none text-gray-new-60',
-          'sm:-top-[3px] sm:p-1 sm:text-[7px] lg:p-2 lg:text-sm xl:-top-1.5 xl:p-[7px] xl:text-[11px]'
+          'xl:-top-1.5 xl:p-[7px] xl:text-[11px] lg:p-2 lg:text-sm sm:-top-[3px] sm:p-1 sm:text-[7px]'
         )}
         aria-label={`Step ${index + 1}`}
       >
@@ -27,7 +27,7 @@ const Step = ({ index, title, children, lineAnimation }) => (
     <h4
       className={clsx(
         'mb-6 text-xl leading-none tracking-extra-tight',
-        'sm:mb-[10px] sm:text-[9px] lg:mb-[18px] lg:text-lg xl:mb-4 xl:text-sm 2xl:text-lg',
+        '2xl:text-lg xl:mb-4 xl:text-sm lg:mb-[18px] lg:text-lg sm:mb-[10px] sm:text-[9px]',
         '[&>span]:font-mono [&>span]:text-gray-new-70'
       )}
       dangerouslySetInnerHTML={{ __html: title }}

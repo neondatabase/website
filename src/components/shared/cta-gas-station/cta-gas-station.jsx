@@ -42,7 +42,7 @@ const CTAGasStation = ({ title = '', description = '', buttonText = '', buttonUr
   return (
     <section className="bg-black-pure pt-16 safe-paddings">
       <Container className="grid grid-cols-12 items-center gap-4" size="md">
-        <div className="z-10 col-span-4 col-start-2 mb-24 md:col-span-full lg:mb-12 xl:col-span-5 xl:col-start-1">
+        <div className="z-10 col-span-4 col-start-2 mb-24 xl:col-span-5 xl:col-start-1 lg:mb-12 md:col-span-full">
           <Heading
             className="whitespace-nowrap md:text-center [&>strong]:font-medium [&>strong]:text-green-45"
             tag="h2"
@@ -51,12 +51,12 @@ const CTAGasStation = ({ title = '', description = '', buttonText = '', buttonUr
           >
             {title || 'Still have <span class="text-green-45">questions?</span>'}
           </Heading>
-          <p className="mt-4 text-lg leading-snug font-light md:mx-auto md:mt-2 md:max-w-[550px] md:text-center xl:text-base">
+          <p className="mt-4 text-lg leading-snug font-light xl:text-base md:mx-auto md:mt-2 md:max-w-[550px] md:text-center">
             {description ||
               'Interested in learning more about our plans and pricing? Complete the form below to get in touch with our Sales team.'}
           </p>
           <AnimatedButton
-            className="mt-8 inline-flex px-14! py-5! text-lg! tracking-tight hover:bg-[#00FFAA] md:mx-auto md:flex md:w-48 lg:mt-6 xl:px-11! xl:py-[17px]!"
+            className="mt-8 inline-flex px-14! py-5! text-lg! tracking-tight hover:bg-[#00FFAA] xl:px-11! xl:py-[17px]! lg:mt-6 md:mx-auto md:flex md:w-48"
             theme="primary"
             to={buttonUrl || links.contactSales}
             size="sm"
@@ -76,7 +76,7 @@ const CTAGasStation = ({ title = '', description = '', buttonText = '', buttonUr
           ref={contentRef}
         >
           <Image
-            className="relative mx-auto min-h-[345px] sm:right-1/2 sm:left-1/2 sm:-mr-[50vw] sm:-ml-[50vw] sm:w-screen sm:min-w-[100vw] lg:min-h-0"
+            className="relative mx-auto min-h-[345px] lg:min-h-0 sm:right-1/2 sm:left-1/2 sm:-mr-[50vw] sm:-ml-[50vw] sm:w-screen sm:min-w-[100vw]"
             src={illustration}
             width={842}
             height={538}
@@ -86,7 +86,7 @@ const CTAGasStation = ({ title = '', description = '', buttonText = '', buttonUr
           <div ref={setRiveRef}>
             {isContentInView ? (
               <RiveComponent
-                className="absolute top-[184px] left-1/2 h-[140px] w-[89px] -translate-x-1/2 lg:hidden xl:top-[124px] xl:h-[78px] xl:w-[58px] 2xl:top-[142px] 2xl:h-[140px] 2xl:w-[74px]"
+                className="absolute top-[184px] left-1/2 h-[140px] w-[89px] -translate-x-1/2 2xl:top-[142px] 2xl:h-[140px] 2xl:w-[74px] xl:top-[124px] xl:h-[78px] xl:w-[58px] lg:hidden"
                 width={74}
                 height={140}
                 aria-hidden

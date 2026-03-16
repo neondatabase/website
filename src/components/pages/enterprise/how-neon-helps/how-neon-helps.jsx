@@ -6,9 +6,9 @@ import Container from 'components/shared/container';
 import Tabs from './tabs';
 
 const HowNeonHelps = ({ tabs }) => (
-  <section className="how-neon-helps mt-48 px-safe md:mt-24 lg:mt-32 xl:mt-40">
+  <section className="how-neon-helps mt-48 px-safe xl:mt-40 lg:mt-32 md:mt-24">
     <Container size="960">
-      <h2 className="max-w-[720px] font-title text-[48px] leading-none font-medium tracking-tighter md:mx-auto md:text-center md:text-[32px] lg:max-w-[480px] lg:text-[36px] xl:text-[44px]">
+      <h2 className="max-w-[720px] font-title text-[48px] leading-none font-medium tracking-tighter xl:text-[44px] lg:max-w-[480px] lg:text-[36px] md:mx-auto md:text-center md:text-[32px]">
         Accelerate development with confidence at every stage
       </h2>
       <Tabs tabs={tabs} />

@@ -1,9 +1,9 @@
 @utility grid-gap-x {
-  @apply gap-x-8 lg:gap-x-4 xl:gap-x-6;
+  @apply gap-x-8 xl:gap-x-6 lg:gap-x-4;
 }
 
 @utility grid-gap-y {
-  @apply gap-y-8 lg:gap-y-4 xl:gap-y-6;
+  @apply gap-y-8 xl:gap-y-6 lg:gap-y-4;
 }
 
 @utility grid-gap {

@@ -45,7 +45,7 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
             'm-0 w-fit cursor-pointer text-lg leading-tight font-normal tracking-normal',
             'text-black-pure dark:text-white',
             href &&
-              'underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure sm:break-words dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100'
+              'underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100 sm:break-words'
           )}
           {...titleProps}
           {...otherProps}
@@ -53,7 +53,7 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
           {title}
         </TitleTag>
       </WrapperTag>
-      <div className="mt-2 pl-[30px] text-gray-new-40 opacity-90 md:mt-1.5 dark:text-gray-new-60 [&_p]:m-0 [&_p]:text-base [&_p]:tracking-tight">
+      <div className="mt-2 pl-[30px] text-gray-new-40 opacity-90 dark:text-gray-new-60 md:mt-1.5 [&_p]:m-0 [&_p]:text-base [&_p]:tracking-tight">
         {children}
       </div>
     </li>

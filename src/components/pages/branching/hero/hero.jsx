@@ -4,16 +4,16 @@ import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pt-[104px] pb-20 md:min-h-[509px] md:pt-12 md:pb-20 lg:min-h-[525px] lg:pt-16 lg:pb-[88px] xl:min-h-[650px] xl:pt-20 xl:pb-[136px]">
+  <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pt-[104px] pb-20 xl:min-h-[650px] xl:pt-20 xl:pb-[136px] lg:min-h-[525px] lg:pt-16 lg:pb-[88px] md:min-h-[509px] md:pt-12 md:pb-20">
     <Container className="w-full text-left" size="branching">
       <SectionLabel icon="arrow" theme="white">
         Branching
       </SectionLabel>
-      <h1 className="mt-5 font-sans text-[60px] leading-dense font-normal tracking-tighter md:text-[32px] lg:mt-4 lg:text-[44px] xl:mt-[18px] xl:text-[52px]">
+      <h1 className="mt-5 font-sans text-[60px] leading-dense font-normal tracking-tighter xl:mt-[18px] xl:text-[52px] lg:mt-4 lg:text-[44px] md:text-[32px]">
         Mastering Database
         <br /> Branching Workflows
       </h1>
-      <p className="mt-6 text-lg leading-normal tracking-extra-tight text-gray-new-60 md:mt-4 md:text-[15px] lg:mt-[18px] lg:text-base xl:mt-5">
+      <p className="mt-6 text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:mt-[18px] lg:text-base md:mt-4 md:text-[15px]">
         Ship software faster using Neon branches
       </p>
     </Container>

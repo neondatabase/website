@@ -68,7 +68,7 @@ const Post = ({
     <>
       <div
         className={clsx(
-          'mx-auto min-w-0 pb-32 md:pb-20 lg:pb-24',
+          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
           isWideLayout && 'max-w-none',
           className
         )}
@@ -95,7 +95,7 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 md:mt-1.5 md:text-lg dark:text-gray-new-80">
+              <p className="mt-[1.125rem] text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
                 {subtitle}
               </p>
             )}
@@ -121,7 +121,7 @@ const Post = ({
       {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
       {!isWideLayout && !isChangelog && (
         <Aside
-          className="-left-20 ml-0! w-[312px] shrink-0 xl:hidden 3xl:left-auto"
+          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}

@@ -60,7 +60,7 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'min-w-0 flex-row-reverse gap-5 md:flex-col xl:gap-5' : 'flex-col gap-5',
+        fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
           'flex-row! gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:flex-col! md:gap-x-0 md:gap-y-5',
         className
@@ -97,9 +97,9 @@ const BlogPostCard = ({
           'flex min-w-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
-            'max-w-[684px] basis-[58%] pr-20 md:w-full md:basis-auto lg:pr-0 lt:max-w-none lt:pr-8',
+            'max-w-[684px] basis-[58%] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
           isSmart &&
-            'w-[424px]! shrink-0 flex-col-reverse md:w-full! md:gap-y-3 2xl:w-auto! 2xl:min-w-0 2xl:shrink 2xl:pr-0!'
+            'w-[424px]! shrink-0 flex-col-reverse 2xl:w-auto! 2xl:min-w-0 2xl:shrink 2xl:pr-0! md:w-full! md:gap-y-3'
         )}
       >
         <div
@@ -139,8 +139,8 @@ const BlogPostCard = ({
             className={clsx(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
-                ? 'line-clamp-3 text-2xl leading-tight sm:text-lg md:text-[20px]'
-                : 'text-[28px] leading-snug font-normal sm:text-lg md:text-[20px] lt:text-2xl'
+                ? 'line-clamp-3 text-2xl leading-tight md:text-[20px] sm:text-lg'
+                : 'text-[28px] leading-snug font-normal lt:text-2xl md:text-[20px] sm:text-lg'
             )}
           >
             {title}
@@ -149,7 +149,7 @@ const BlogPostCard = ({
           {excerpt && (
             <div
               className={clsx(
-                'mt-2 leading-snug font-light tracking-extra-tight text-gray-new-70 sm:text-[15px] md:text-base lg:text-base',
+                'mt-2 leading-snug font-light tracking-extra-tight text-gray-new-70 lg:text-base md:text-base sm:text-[15px]',
                 largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}
             >

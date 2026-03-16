@@ -110,11 +110,11 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         'changelog-form relative flex scroll-mt-20 rounded-lg bg-gray-new-94 safe-paddings',
         classNames.block,
         className,
-        'sm:flex-col sm:items-start sm:gap-2.5 md:gap-10 lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px]',
+        'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         isBlog &&
           (!isSidebar
-            ? 'overflow-hidden rounded-none! border border-gray-new-20 bg-[rgba(19,20,21,0.60)]! shadow-none! sm:flex-col! sm:items-start! sm:gap-5! dark:bg-none!'
+            ? 'overflow-hidden rounded-none! border border-gray-new-20 bg-[rgba(19,20,21,0.60)]! shadow-none! dark:bg-none! sm:flex-col! sm:items-start! sm:gap-5!'
             : 'gap-0! overflow-hidden rounded-none! border border-gray-new-20 bg-[rgba(19,20,21,0.60)]! p-3! shadow-none! dark:bg-none!')
       )}
       id="changelog-form"
@@ -159,7 +159,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
             'h-[38px] w-full appearance-none pl-4 tracking-extra-tight remove-autocomplete-styles',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
-            'rounded-full border bg-white text-[13px] focus:outline-hidden lg:text-base dark:bg-black-new xs:pr-20',
+            'rounded-full border bg-white text-[13px] focus:outline-hidden dark:bg-black-new lg:text-base xs:pr-20',
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-15',

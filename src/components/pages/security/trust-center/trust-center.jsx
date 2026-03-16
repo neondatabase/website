@@ -37,11 +37,11 @@ const FEATURES = [
 ];
 
 const TrustCenter = () => (
-  <section className="trust-center relative pt-40 safe-paddings md:pt-[104px] lg:pt-[120px] xl:pt-[136px]">
+  <section className="trust-center relative pt-40 safe-paddings xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
     <Container className="relative z-10" size="960">
-      <div className="flex gap-[72px] sm:flex-col sm:gap-10 md:mr-0 lg:mr-[52px] lg:justify-center lg:gap-9">
-        <div className="w-[280px] shrink-0 sm:w-full md:w-1/2 lg:w-[328px]">
-          <h2 className="font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight md:text-[32px] lg:text-[36px] xl:text-4xl">
+      <div className="flex gap-[72px] lg:mr-[52px] lg:justify-center lg:gap-9 md:mr-0 sm:flex-col sm:gap-10">
+        <div className="w-[280px] shrink-0 lg:w-[328px] md:w-1/2 sm:w-full">
+          <h2 className="font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[32px]">
             Trust Center
           </h2>
           <div className="mt-4 flex flex-col gap-2 text-with-links leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
@@ -58,7 +58,7 @@ const TrustCenter = () => (
             </p>
           </div>
         </div>
-        <div className="mt-4 grid grow grid-cols-2 gap-x-8 gap-y-9 sm:mt-0 md:max-w-full lg:mt-2 lg:max-w-[290px] lg:grid-cols-1 lg:gap-7">
+        <div className="mt-4 grid grow grid-cols-2 gap-x-8 gap-y-9 lg:mt-2 lg:max-w-[290px] lg:grid-cols-1 lg:gap-7 md:max-w-full sm:mt-0">
           {FEATURES.map(({ title, description, icon }) => (
             <div key={title}>
               <div className="flex items-start gap-2">

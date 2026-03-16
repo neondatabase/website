@@ -61,15 +61,15 @@ const BranchingPage = async (props) => {
 
   return (
     <Container
-      className="w-full pt-[88px] pb-[120px] md:pt-8 md:pb-[72px] lg:pt-11 lg:pb-20 xl:pt-16 xl:pb-24"
+      className="w-full pt-[88px] pb-[120px] xl:pt-16 xl:pb-24 lg:pt-11 lg:pb-20 md:pt-8 md:pb-[72px]"
       size="xxs"
     >
       <Breadcrumbs />
       <article>
-        <h1 className="font-sans text-5xl leading-dense font-normal tracking-tighter text-balance md:text-[32px] lg:text-[36px] xl:text-5xl">
+        <h1 className="font-sans text-5xl leading-dense font-normal tracking-tighter text-balance xl:text-5xl lg:text-[36px] md:text-[32px]">
           {title}
         </h1>
-        <Content className="mt-16 md:mt-10 lg:mt-12" content={content} />
+        <Content className="mt-16 lg:mt-12 md:mt-10" content={content} />
       </article>
       <div className="mt-14 md:mt-10">
         <p className="font-regular text-[28px] leading-tight tracking-[-0.05em] md:text-2xl">

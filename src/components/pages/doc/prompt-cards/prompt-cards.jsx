@@ -27,7 +27,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
 
   return (
     <div className="prompt-cards not-prose my-7">
-      <ul className="!my-0 grid grid-cols-4 gap-5 p-0! sm:grid-cols-2 md:grid-cols-3 lg:gap-3">
+      <ul className="!my-0 grid grid-cols-4 gap-5 p-0! lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 

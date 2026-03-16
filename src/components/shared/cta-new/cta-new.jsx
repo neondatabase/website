@@ -42,7 +42,7 @@ const CTANew = ({
         </SectionLabel>
         <div
           className={clsx(
-            'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter sm:max-w-none md:mt-4 md:text-[28px] lg:text-[40px] xl:max-w-[760px] xl:text-[44px]',
+            'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none',
             copyWrapperClassName
           )}
         >
@@ -68,7 +68,7 @@ const CTANew = ({
 
     <div className="pointer-events-none relative overflow-hidden">
       <Image
-        className="min-h-[550px] w-full object-cover md:min-h-[446px] lg:min-h-[486px]"
+        className="min-h-[550px] w-full object-cover lg:min-h-[486px] md:min-h-[446px]"
         src={ctaBackground}
         width={1920}
         height={610}

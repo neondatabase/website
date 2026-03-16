@@ -9,15 +9,15 @@ const contentClassName =
 
 const Post = ({ data: { title, subtitle, updatedOn = null }, content, currentSlug }) => (
   <div className={clsx(contentClassName, 'ml-7')}>
-    <h1 className="text-5xl leading-dense font-medium tracking-tighter text-wrap sm:text-[28px] lg:text-[36px] xl:text-[40px]">
+    <h1 className="text-5xl leading-dense font-medium tracking-tighter text-wrap xl:text-[40px] lg:text-[36px] sm:text-[28px]">
       {title}
     </h1>
     {subtitle && (
-      <p className="mt-[18px] text-xl leading-snug tracking-extra-tight text-gray-new-70 sm:mt-4 sm:text-lg md:text-base">
+      <p className="mt-[18px] text-xl leading-snug tracking-extra-tight text-gray-new-70 md:text-base sm:mt-4 sm:text-lg">
         {subtitle}
       </p>
     )}
-    <div className="mt-[76px] sm:mt-10 sm:pb-8 md:pb-[70px]">
+    <div className="mt-[76px] md:pb-[70px] sm:mt-10 sm:pb-8">
       <Content content={content} isTemplate />
       <DocFooter updatedOn={updatedOn} slug={currentSlug} />
     </div>

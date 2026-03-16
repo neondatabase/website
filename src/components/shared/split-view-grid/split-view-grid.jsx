@@ -19,16 +19,16 @@ const SplitViewGrid = ({
     <Container className="grid grid-cols-12 grid-gap-x" size="medium">
       <div
         className={clsx(
-          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new lg:gap-x-4 xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6',
+          'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 lg:gap-x-4',
           {
-            'py-12 md:py-8 lg:pt-9 lg:pb-10 xl:py-8': size === 'md',
+            'py-12 xl:py-8 lg:pt-9 lg:pb-10 md:py-8': size === 'md',
             'py-11': size === 'sm',
           }
         )}
       >
         <div
           className={clsx(
-            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start md:pr-3.5 md:pl-6 lg:col-span-full lg:max-w-none lg:px-7 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 2xl:min-w-0',
+            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pr-3.5 md:pl-6',
             {
               'pl-12': size === 'md',
               'pl-11': size === 'sm',
@@ -45,7 +45,7 @@ const SplitViewGrid = ({
           <h2
             className={clsx(
               'mt-3 font-title leading-none font-medium text-balance',
-              'max-w-[322px] md:text-[32px] lg:max-w-none lg:text-4xl xl:max-w-[270px] xl:text-[44px]',
+              'max-w-[322px] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]',
               {
                 'text-[52px] tracking-extra-tight': size === 'md',
                 'text-5xl tracking-tight': size === 'sm',
@@ -56,7 +56,7 @@ const SplitViewGrid = ({
             {title}
           </h2>
           <p
-            className={clsx('text-lg leading-snug font-light md:mt-2.5 xl:text-base', {
+            className={clsx('text-lg leading-snug font-light xl:text-base md:mt-2.5', {
               'mt-4': size === 'md',
               'mt-5': size === 'sm',
             })}
@@ -66,7 +66,7 @@ const SplitViewGrid = ({
         </div>
         <ul
           className={clsx(
-            'col-start-5 col-end-11 grid grid-cols-2 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6 lg:col-span-full lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 xl:col-start-6 xl:col-end-13 xl:mt-1.5 xl:-ml-8 xl:gap-x-1',
+            'col-start-5 col-end-11 grid grid-cols-2 xl:col-start-6 xl:col-end-13 xl:mt-1.5 xl:-ml-8 xl:gap-x-1 lg:col-span-full lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6',
             {
               'mt-2 gap-x-10 gap-y-11 lg:ml-0': size === 'md',
               'mx-10 mt-1 gap-x-4 gap-y-11 lg:mx-0': size === 'sm',
@@ -76,7 +76,7 @@ const SplitViewGrid = ({
           {items.map(({ icon, title, description }, index) => (
             <li
               className={clsx(
-                'flex max-w-[290px] items-start gap-x-3.5 md:max-w-none md:gap-x-3 lg:max-w-[304px] lg:even:pr-0 xl:max-w-[248px]',
+                'flex max-w-[290px] items-start gap-x-3.5 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:max-w-none md:gap-x-3',
                 size === 'md' && 'even:pr-4'
               )}
               key={index}

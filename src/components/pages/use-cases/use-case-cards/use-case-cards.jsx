@@ -79,7 +79,7 @@ const UseCaseCard = ({
     >
       {/* Decorative dots pattern (right side) */}
       <div
-        className="pointer-events-none absolute top-2 right-2 aspect-square h-full md:top-2 md:h-[296px] md:w-[312px] lg:h-[328px] lg:w-[312px]"
+        className="pointer-events-none absolute top-2 right-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:top-2 md:h-[296px] md:w-[312px]"
         style={{
           maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
           WebkitMaskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -91,13 +91,13 @@ const UseCaseCard = ({
 
       {/* Vertical divider (desktop/tablet) / Horizontal divider (mobile) */}
       <div
-        className="pointer-events-none absolute top-0 bottom-0 left-[480px] w-px bg-gray-new-30 md:top-[300px] md:right-0 md:bottom-auto md:left-0 md:h-px md:w-full lg:left-1/2"
+        className="pointer-events-none absolute top-0 bottom-0 left-[480px] w-px bg-gray-new-30 lg:left-1/2 md:top-[300px] md:right-0 md:bottom-auto md:left-0 md:h-px md:w-full"
         aria-hidden
       />
 
       {/* Left column content (top section on mobile) */}
-      <div className="relative z-10 flex w-[480px] shrink-0 flex-col justify-between bg-gray-new-8/70 p-8 md:h-[300px] md:w-full md:bg-transparent md:p-5 md:pb-6 lg:w-1/2 lg:p-7">
-        <div className="flex flex-col gap-6 md:gap-4 lg:gap-5">
+      <div className="relative z-10 flex w-[480px] shrink-0 flex-col justify-between bg-gray-new-8/70 p-8 lg:w-1/2 lg:p-7 md:h-[300px] md:w-full md:bg-transparent md:p-5 md:pb-6">
+        <div className="flex flex-col gap-6 lg:gap-5 md:gap-4">
           {/* Icon */}
           {IconComponent && (
             <IconComponent className="h-6 w-6 text-green-52 md:h-5 md:w-5" aria-hidden />
@@ -105,10 +105,10 @@ const UseCaseCard = ({
 
           {/* Title and description */}
           <div className="flex flex-col gap-2 md:gap-1.5">
-            <h3 className="text-[1.75rem] leading-snug tracking-tighter text-white md:text-xl lg:text-2xl">
+            <h3 className="text-[1.75rem] leading-snug tracking-tighter text-white lg:text-2xl md:text-xl">
               {title}
             </h3>
-            <p className="text-base leading-normal tracking-extra-tight text-gray-new-70 md:text-[0.9375rem] md:leading-snug lg:text-[0.9375rem] lg:leading-snug">
+            <p className="text-base leading-normal tracking-extra-tight text-gray-new-70 lg:text-[0.9375rem] lg:leading-snug md:text-[0.9375rem] md:leading-snug">
               {description}
             </p>
           </div>
@@ -152,11 +152,11 @@ const UseCaseCard = ({
       </div>
 
       {/* Right column content (bottom section on mobile) */}
-      <div className="relative z-10 flex flex-1 flex-col p-8 md:h-[300px] md:flex-none md:p-5 md:pt-6 lg:p-7">
+      <div className="relative z-10 flex flex-1 flex-col p-8 lg:p-7 md:h-[300px] md:flex-none md:p-5 md:pt-6">
         {/* Logo */}
         {logo && (
           <Image
-            className="max-h-7 w-fit md:max-h-5 lg:max-h-6"
+            className="max-h-7 w-fit lg:max-h-6 md:max-h-5"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
@@ -169,7 +169,7 @@ const UseCaseCard = ({
         {testimonial && (
           <div className="mt-auto">
             <blockquote
-              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] md:text-[0.9375rem] lg:text-base [&_mark]:bg-green-52/60 [&_mark]:px-1 [&_mark]:pb-px [&_mark]:text-white [&_p]:inline"
+              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-green-52/60 [&_mark]:px-1 [&_mark]:pb-px [&_mark]:text-white [&_p]:inline"
               dangerouslySetInnerHTML={{ __html: testimonial.quote }}
             />
             <p className="mt-3.5 text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 md:text-sm">
@@ -177,7 +177,7 @@ const UseCaseCard = ({
             </p>
             {testimonial.caseStudyLink && (
               <Link
-                className="mt-5 block w-fit border-b border-dashed border-gray-new-70/40 text-[0.9375rem] leading-none tracking-extra-tight text-gray-new-70 transition-colors duration-200 hover:border-white/70 hover:text-white md:mt-4 md:text-sm lg:mt-[18px]"
+                className="mt-5 block w-fit border-b border-dashed border-gray-new-70/40 text-[0.9375rem] leading-none tracking-extra-tight text-gray-new-70 transition-colors duration-200 hover:border-white/70 hover:text-white lg:mt-[18px] md:mt-4 md:text-sm"
                 to={testimonial.caseStudyLink}
               >
                 Read case study
@@ -219,9 +219,9 @@ UseCaseCard.propTypes = {
 
 const UseCaseCards = ({ className, items }) => (
   <section
-    className={clsx('use-case-cards pt-24 safe-paddings md:pt-16 lg:pt-20 xl:pt-[88px]', className)}
+    className={clsx('use-case-cards pt-24 safe-paddings xl:pt-[88px] lg:pt-20 md:pt-16', className)}
   >
-    <Container className="flex flex-col gap-11 lg:gap-8 xl:gap-10" size="960">
+    <Container className="flex flex-col gap-11 xl:gap-10 lg:gap-8" size="960">
       {items.map((item, index) => (
         <UseCaseCard key={index} {...item} index={index} />
       ))}

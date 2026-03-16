@@ -5,7 +5,7 @@ import GradientLabel from 'components/shared/gradient-label';
 const Details = ({ label, title, description }) => (
   <div className="w-[505px] max-w-full lg:mt-10">
     {label && <GradientLabel className="inline-block">{label}</GradientLabel>}
-    <h2 className="mt-3.5 font-title text-[52px] leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-4xl xl:text-[44px]">
+    <h2 className="mt-3.5 font-title text-[52px] leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
       {title}
     </h2>
     <div

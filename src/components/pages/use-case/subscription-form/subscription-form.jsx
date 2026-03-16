@@ -104,7 +104,7 @@ const SubscriptionForm = ({ title, description }) => {
     <figure
       className={clsx(
         'not-prose relative mt-12 flex w-full flex-col rounded-[10px] bg-gray-new-8',
-        'bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 sm:mt-6 sm:p-6 lg:mt-8 xl:mt-10'
+        'bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6'
       )}
     >
       <div className="relative z-10">

@@ -11,12 +11,12 @@ const SpeedScale = () => (
   <section
     className={clsx(
       'speed-scale relative overflow-hidden border-t border-gray-new-40 safe-paddings pb-[120px]',
-      'md:pb-[52px] lg:pb-20 xl:pb-[136px]'
+      'xl:pb-[136px] lg:pb-20 md:pb-[52px]'
     )}
   >
     <StatusLine className="mt-2.5" />
     <div className="overflow-hidden">
-      <Container className="md:px-5! lg:px-16! xl:max-w-5xl xl:px-16" size="1280">
+      <Container className="xl:max-w-5xl xl:px-16 lg:px-16! md:px-5!" size="1280">
         <Header />
         <Features />
       </Container>
@@ -26,7 +26,7 @@ const SpeedScale = () => (
       className={clsx(
         'pointer-events-none absolute -top-[130px] left-1/2 -z-10 aspect-[1.3] w-[1200px] -translate-x-[30%] rounded-[100%] opacity-15',
         'bg-[url("/images/pages/home/speed-scale/noise.png")] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_20%,transparent)]',
-        'lg:hidden xl:-top-20 xl:left-2/3 xl:w-[1000px] xl:opacity-10'
+        'xl:-top-20 xl:left-2/3 xl:w-[1000px] xl:opacity-10 lg:hidden'
       )}
       aria-hidden
     />

@@ -49,7 +49,7 @@ const Logomark = () => (
           )}
           key={index}
         >
-          <div className="group relative flex h-[200px] items-center justify-center md:h-[152px] lg:h-[164px]">
+          <div className="group relative flex h-[200px] items-center justify-center lg:h-[164px] md:h-[152px]">
             <Image
               className="md:w-[52px]"
               src={logo.svgSrc}

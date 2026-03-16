@@ -95,7 +95,7 @@ const ChangelogPost = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="mx-auto w-full max-w-[704px] pt-9 pb-40 md:pb-20 lg:pt-0 lg:pb-28 xl:pb-32">
+      <div className="mx-auto w-full max-w-[704px] pt-9 pb-40 xl:pb-32 lg:pt-0 lg:pb-28 md:pb-20">
         <Link
           className="group sticky top-40 -ml-64 inline-flex items-center gap-1.5 text-sm leading-none tracking-tight xl:static xl:ml-0"
           to={CHANGELOG_BASE_PATH}
@@ -105,7 +105,7 @@ const ChangelogPost = async ({ currentSlug }) => {
           <span>Back to Changelog</span>
         </Link>
 
-        <SectionLabel className="-mt-5 text-gray-new-20 xl:mt-4 dark:text-gray-new-80" theme="dark">
+        <SectionLabel className="-mt-5 text-gray-new-20 dark:text-gray-new-80 xl:mt-4" theme="dark">
           {date}
         </SectionLabel>
 

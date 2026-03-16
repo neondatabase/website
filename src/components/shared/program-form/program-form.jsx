@@ -75,7 +75,7 @@ const ProgramForm = ({ type }) => {
 
   return (
     <figure
-      className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-90 px-7 py-6 sm:p-6 lg:scroll-mt-5 dark:border-gray-new-20 dark:shadow-contact"
+      className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-90 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
     >
       <h2 className="p-0! text-2xl! leading-snug!">{title}</h2>

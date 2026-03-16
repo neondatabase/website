@@ -122,10 +122,10 @@ const Quotes = () => {
                     transition: { duration: FADE_DURATION, ease: [0.17, 0.17, 0.83, 0.83] },
                   }}
                 >
-                  <blockquote className="text-xl leading-snug text-pretty lg:text-[15px] xl:text-lg">
+                  <blockquote className="text-xl leading-snug text-pretty xl:text-lg lg:text-[15px]">
                     <AnimatedText text={text} highlight={highlight} />
                   </blockquote>
-                  <figcaption className="mt-5 block text-base leading-normal text-gray-new-15 not-italic md:text-[13px] xl:text-sm">
+                  <figcaption className="mt-5 block text-base leading-normal text-gray-new-15 not-italic xl:text-sm md:text-[13px]">
                     <AnimatedPosition author={author} position={post} />
                   </figcaption>
                 </m.figure>

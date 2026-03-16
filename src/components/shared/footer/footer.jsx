@@ -12,7 +12,7 @@ import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
   <footer className="relative z-30 mt-auto border-t border-gray-new-90 bg-white safe-paddings dark:border-gray-new-20 dark:bg-black-pure">
-    <Container className="flex justify-between gap-x-10 py-12 sm:py-5 3xl:py-8" size="1920">
+    <Container className="flex justify-between gap-x-10 py-12 3xl:py-8 sm:py-5" size="1920">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
           <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
@@ -29,12 +29,12 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-        <div className="flex flex-col items-start justify-between gap-y-5 sm:flex-col lg:w-full lg:flex-row">
+        <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
           <p
             className={clsx(
               'flex gap-x-1 gap-y-1.5 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
-              'sm:flex-col lg:flex-row 2xl:flex-col'
+              '2xl:flex-col lg:flex-row sm:flex-col'
             )}
           >
             <span>Made in SF and the World.</span>
@@ -43,7 +43,7 @@ const Footer = ({ hasThemesSupport = false }) => (
         </div>
       </div>
 
-      <div className="flex w-fit gap-x-[88px] lg:hidden xl:gap-x-6">
+      <div className="flex w-fit gap-x-[88px] xl:gap-x-6 lg:hidden">
         {MENUS.footer.map(({ heading, items }, index) => (
           <div className="grid content-start gap-y-7" key={index}>
             <span className="text-[10px] leading-none text-gray-new-10 uppercase dark:text-white">

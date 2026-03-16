@@ -169,7 +169,7 @@ const Calculator = () => {
     <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
-        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:text-lg xl:text-xl">
+        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:text-lg">
           Use case
         </h3>
         <ul className="space-y-1.5 sm:space-y-4">
@@ -203,7 +203,7 @@ const Calculator = () => {
       </div>
       <DashedBorder />
       <div className="relative z-10 pt-6">
-        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:text-lg xl:text-xl">
+        <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:text-lg">
           Monthly cost: AWS RDS vs Neon
         </h3>
         <div className="flex justify-between sm:flex-col sm:gap-6">

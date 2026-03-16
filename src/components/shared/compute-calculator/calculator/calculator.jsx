@@ -103,7 +103,7 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
     <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
-        <h3 className="text-2xl leading-snug font-medium tracking-tighter sm:text-lg xl:text-xl">
+        <h3 className="text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:text-lg">
           Input parameters
         </h3>
 
@@ -156,13 +156,13 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
             <div className="flex items-end gap-1.5">
               <span
                 className={clsx(
-                  'bg-clip-text pr-1 font-title text-6xl leading-none font-medium tracking-tighter text-transparent sm:text-4xl lg:pr-0.5 lg:text-5xl xl:text-[56px]',
+                  'bg-clip-text pr-1 font-title text-6xl leading-none font-medium tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
                   valueClassName
                 )}
               >
                 {totals[name]}
               </span>
-              <span className="mb-1 text-xl text-[#7485A9] sm:text-lg xl:mb-0">/{period}</span>
+              <span className="mb-1 text-xl text-[#7485A9] xl:mb-0 sm:text-lg">/{period}</span>
             </div>
             {text && (
               <p className="bg-variable-value-text bg-clip-text text-sm leading-dense font-light tracking-extra-tight text-transparent">

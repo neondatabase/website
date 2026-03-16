@@ -116,7 +116,7 @@ const SubscriptionForm = ({
   return (
     <form
       className={clsx(
-        'relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 md:before:w-[calc(100%+8px)] lg:mx-auto lg:max-w-[584px] xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 2xl:ml-2.5',
+        'relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]',
         className,
         sizeClassNames[size].form
       )}
@@ -127,7 +127,7 @@ const SubscriptionForm = ({
         {/* Input */}
         <input
           className={clsx(
-            'relative block w-full rounded-full border-black bg-white pr-[218px] leading-none font-semibold text-black placeholder-black outline-hidden transition-colors duration-200 remove-autocomplete-styles md:pr-20 lg:w-full lg:pl-5',
+            'relative block w-full rounded-full border-black bg-white pr-[218px] leading-none font-semibold text-black placeholder-black outline-hidden transition-colors duration-200 remove-autocomplete-styles lg:w-full lg:pl-5 md:pr-20',
             errorMessage && 'border-secondary-1',
             sizeClassNames[size].input
           )}
@@ -196,9 +196,9 @@ const SubscriptionForm = ({
               variants={appearAndExitAnimationVariants}
               aria-hidden
             >
-              <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 xl:h-[42px] xl:w-[42px] 2xl:h-[48px] 2xl:w-[48px]" />
+              <div className="h-[58px] w-[58px] rounded-full border-[6px] border-gray-2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]" />
               <svg
-                className="absolute top-1/2 left-1/2 xl:h-[42px] xl:w-[42px] 2xl:h-[48px] 2xl:w-[48px]"
+                className="absolute top-1/2 left-1/2 2xl:h-[48px] 2xl:w-[48px] xl:h-[42px] xl:w-[42px]"
                 width="58"
                 height="58"
                 viewBox="0 0 58 58"

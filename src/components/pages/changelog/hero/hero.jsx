@@ -23,17 +23,17 @@ const Hero = ({ className = null, withContainer = false }) => {
           {TITLE}
           {!withContainer && (
             <RssButton
-              className="relative top-1 hidden gap-x-1.5 !text-gray-new-40 sm:flex dark:text-gray-new-70!"
+              className="relative top-1 hidden gap-x-1.5 !text-gray-new-40 dark:text-gray-new-70! sm:flex"
               size="sm"
               basePath={CHANGELOG_BASE_PATH}
             />
           )}
         </h1>
-        <div className="mt-3.5 flex items-center justify-between text-gray-new-40 sm:flex-col sm:items-start sm:gap-y-4 dark:text-gray-new-70">
+        <div className="mt-3.5 flex items-center justify-between text-gray-new-40 dark:text-gray-new-70 sm:flex-col sm:items-start sm:gap-y-4">
           <p className="text-xl leading-snug tracking-extra-tight">{DESCRIPTION}</p>
           {!withContainer && (
             <RssButton
-              className="flex gap-x-1.5 !text-gray-new-40 sm:hidden dark:!text-gray-new-70"
+              className="flex gap-x-1.5 !text-gray-new-40 dark:!text-gray-new-70 sm:hidden"
               size="sm"
               basePath={CHANGELOG_BASE_PATH}
             />

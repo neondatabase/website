@@ -38,7 +38,7 @@ const GuidesPage = async (props) => {
     return <div className="w-full text-center text-lg">No guides yet</div>;
 
   return (
-    <div className="min-w-0 pb-32 md:pb-20 lg:pb-24">
+    <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
       <Breadcrumbs
         breadcrumbs={[
           {

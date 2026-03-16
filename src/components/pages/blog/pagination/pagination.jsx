@@ -22,7 +22,7 @@ const Pagination = ({ currentPageIndex, pageCount }) => {
   };
 
   return (
-    <div className="mt-10 safe-paddings md:mt-6 xl:mt-7 2xl:mt-8">
+    <div className="mt-10 safe-paddings 2xl:mt-8 xl:mt-7 md:mt-6">
       <Container size="xs">
         <ReactPaginate
           containerClassName="flex justify-center items-center"

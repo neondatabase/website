@@ -32,11 +32,11 @@ const FEATURES = [
 
 const Branching = () => (
   <section
-    className="branching relative scroll-mt-[60px] overflow-hidden pt-40 safe-paddings pb-60 md:pt-16 md:pb-20 lg:scroll-mt-0 lg:pt-20 lg:pb-[104px] xl:py-[136px]"
+    className="branching relative scroll-mt-[60px] overflow-hidden pt-40 safe-paddings pb-60 xl:py-[136px] lg:scroll-mt-0 lg:pt-20 lg:pb-[104px] md:pt-16 md:pb-20"
     id="branching"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block md:px-5! lg:px-16! xl:grid-cols-1 xl:px-16 xl:before:hidden"
+      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16! md:px-5!"
       size="1600"
     >
       <div className="min-w-0">
@@ -56,7 +56,7 @@ const Branching = () => (
           autoBind={false}
           fit={Fit.Contain}
         />
-        <ul className="mt-11 grid grid-cols-3 gap-x-16 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0 lg:mt-12 lg:gap-x-8 lg:px-8 xl:mt-9">
+        <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
           {FEATURES.map(({ icon, title, description }, index) => (
             <li key={index}>
               <div className="flex items-center gap-x-2.5">
@@ -72,7 +72,7 @@ const Branching = () => (
                   {title}
                 </h3>
               </div>
-              <p className="mt-2.5 text-base tracking-tight text-gray-new-50 md:mt-1.5 md:pr-8 lg:text-[14px]">
+              <p className="mt-2.5 text-base tracking-tight text-gray-new-50 lg:text-[14px] md:mt-1.5 md:pr-8">
                 {description}
               </p>
             </li>

@@ -42,21 +42,21 @@ const DATA = [
 ];
 
 const KeyInsights = () => (
-  <section className="key-insights mt-[134px] safe-paddings sm:mt-[88px] lg:mt-[100px] xl:mt-28">
+  <section className="key-insights mt-[134px] safe-paddings xl:mt-28 lg:mt-[100px] sm:mt-[88px]">
     <Container
       className="relative z-10 flex max-w-xl! flex-col items-start lg:max-w-[642px]!"
       size="xxs"
     >
-      <h2 className="font-title text-5xl leading-tight font-medium tracking-tight sm:text-[32px] lg:text-4xl xl:text-[44px]">
+      <h2 className="font-title text-5xl leading-tight font-medium tracking-tight xl:text-[44px] lg:text-4xl sm:text-[32px]">
         Key insights
       </h2>
-      <ul className="mt-12 flex flex-col gap-y-[42px] sm:mt-8 sm:gap-y-8 xl:mt-10 xl:gap-y-[38px]">
+      <ul className="mt-12 flex flex-col gap-y-[42px] xl:mt-10 xl:gap-y-[38px] sm:mt-8 sm:gap-y-8">
         {DATA.map(({ percentage, title, description }, index) => (
           <li className="flex flex-col" key={index}>
             <span className="bg-[linear-gradient(180deg,#00E599_24.85%,#007F55_68.32%)] bg-clip-text text-[36px] leading-none font-medium tracking-tighter text-transparent lg:text-[32px]">
               {percentage}
             </span>
-            <h3 className="mt-2 text-xl leading-snug font-medium tracking-tight text-gray-new-90 sm:text-[16px] lg:text-[18px]">
+            <h3 className="mt-2 text-xl leading-snug font-medium tracking-tight text-gray-new-90 lg:text-[18px] sm:text-[16px]">
               {title}
             </h3>
             <div className="relative mt-5 max-w-[536px] rounded-lg border border-gray-new-20 py-3 pr-5 pl-11">

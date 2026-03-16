@@ -14,7 +14,7 @@ const CTA = ({ title, description, buttonText, buttonUrl }) => (
         aria-hidden
       />
       <div className="sm:text-center">
-        <h2 className="max-w-sm font-title text-2xl leading-none font-medium tracking-tighter text-white sm:leading-tight md:my-0">
+        <h2 className="max-w-sm font-title text-2xl leading-none font-medium tracking-tighter text-white md:my-0 sm:leading-tight">
           {title}
         </h2>
         <p className="mt-2.5 text-sm leading-tight tracking-extra-tight text-gray-new-70">

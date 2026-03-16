@@ -6,15 +6,15 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Autoscaling = () => (
-  <section className="autoscaling pt-40 safe-paddings md:pt-20 lg:pt-[108px] xl:pt-[136px]">
+  <section className="autoscaling pt-40 safe-paddings xl:pt-[136px] lg:pt-[108px] md:pt-20">
     <Container className="flex flex-col items-center" size="960">
-      <header className="flex w-full justify-between sm:flex-col sm:items-center sm:gap-4 sm:text-center lg:gap-28">
-        <h2 className="max-w-md font-title text-[48px] leading-[0.9] font-medium tracking-tighter sm:max-w-full sm:text-[32px] lg:flex-1 lg:text-4xl xl:text-[44px] xl:leading-none">
+      <header className="flex w-full justify-between lg:gap-28 sm:flex-col sm:items-center sm:gap-4 sm:text-center">
+        <h2 className="max-w-md font-title text-[48px] leading-[0.9] font-medium tracking-tighter xl:text-[44px] xl:leading-none lg:flex-1 lg:text-4xl sm:max-w-full sm:text-[32px]">
           Thousands of connections and real-time autoscaling
         </h2>
         <p
           className={clsx(
-            'mt-1 max-w-md text-lg leading-snug font-light tracking-extra-tight text-gray-new-70 sm:max-w-full lg:mt-0 lg:flex-1 lg:text-base xl:font-normal xl:tracking-extra-tight',
+            'mt-1 max-w-md text-lg leading-snug font-light tracking-extra-tight text-gray-new-70 xl:font-normal xl:tracking-extra-tight lg:mt-0 lg:flex-1 lg:text-base sm:max-w-full',
             '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
           )}
         >
@@ -46,7 +46,7 @@ const Autoscaling = () => (
         </PauseableVideo>
         <p
           className={clsx(
-            'absolute bottom-0 left-0 z-10 max-w-[784px] p-6 font-light tracking-extra-tight text-pretty text-gray-new-80 sm:p-4 sm:text-sm md:p-5 lg:relative lg:max-w-[605px]',
+            'absolute bottom-0 left-0 z-10 max-w-[784px] p-6 font-light tracking-extra-tight text-pretty text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5 sm:p-4 sm:text-sm',
             '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
           )}
         >

@@ -209,12 +209,12 @@ const items = [
 ];
 
 const DemoList = () => (
-  <section className="demo-list my-20 safe-paddings md:my-10 lg:my-16">
+  <section className="demo-list my-20 safe-paddings lg:my-16 md:my-10">
     <Container className="grid grid-cols-12 grid-gap-x lg:grid-cols-1" size="medium">
-      <ul className="col-span-10 col-start-2 flex flex-col gap-y-20 md:gap-y-10 lg:col-span-full lg:col-start-1 lg:gap-y-16">
+      <ul className="col-span-10 col-start-2 flex flex-col gap-y-20 lg:col-span-full lg:col-start-1 lg:gap-y-16 md:gap-y-10">
         {items.map(({ category, categoryTextColor, items }, index) => (
           <li
-            className="mx-auto w-full max-w-[1048px] rounded-[10px] bg-black-new p-10 md:px-6 lg:p-8"
+            className="mx-auto w-full max-w-[1048px] rounded-[10px] bg-black-new p-10 lg:p-8 md:px-6"
             key={index}
           >
             <h2
@@ -229,10 +229,10 @@ const DemoList = () => (
             <ul className="mt-7">
               {items.map(({ title, description, sourceLink, demoLink }, index) => (
                 <li
-                  className="mt-6 flex items-center justify-between border-t border-gray-new-15/80 pt-6 first:mt-0 first:border-t-0 first:pt-0 md:mt-4 md:gap-y-6 md:pt-4 lg:flex-col lg:items-start lg:gap-y-8"
+                  className="mt-6 flex items-center justify-between border-t border-gray-new-15/80 pt-6 first:mt-0 first:border-t-0 first:pt-0 lg:flex-col lg:items-start lg:gap-y-8 md:mt-4 md:gap-y-6 md:pt-4"
                   key={index}
                 >
-                  <div className="max-w-[591px] lg:max-w-full xl:max-w-[500px]">
+                  <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">
                     <h3 className="max-w-[510px] text-2xl leading-tight font-medium -tracking-[0.05em] lg:text-xl">
                       {title}
                     </h3>

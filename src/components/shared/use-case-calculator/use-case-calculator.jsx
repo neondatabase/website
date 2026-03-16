@@ -7,10 +7,10 @@ import rightGlowMobile from './images/right-glow-mobile.png';
 import rightGlow from './images/right-glow.png';
 
 const UseCaseCalculator = () => (
-  <div className="relative mt-11 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6 md:mt-7 lg:mt-9 xl:mt-10">
+  <div className="relative mt-11 w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 xl:mt-10 lg:mt-9 md:mt-7 sm:p-6">
     <div className="relative z-10 pb-[18px]">
       <h2 className="sr-only">Use case</h2>
-      <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:mb-4 sm:text-lg xl:text-xl">
+      <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Costs estimator
       </h3>
       <div className="space-y-4 tracking-extra-tight text-gray-new-70">

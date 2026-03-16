@@ -109,7 +109,7 @@ const AiPage = () => (
     <Hero />
     <Bento />
     <TestimonialNew
-      className="mt-[200px] md:mt-[104px] lg:mt-[158px] xl:mt-[192px]"
+      className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"
       figureClassName="lg:max-w-[704px]"
       quoteClassName="text-pretty md:text-wrap"
       quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no&#8209;brainer."
@@ -123,7 +123,7 @@ const AiPage = () => (
       }}
     />
     <GridFeatures
-      className="mt-[199px] md:mt-[107px] lg:mt-[153px] xl:mt-[191px]"
+      className="mt-[199px] xl:mt-[191px] lg:mt-[153px] md:mt-[107px]"
       title="Add Postgres to your agent"
       titleClassName="md:text-pretty"
       description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
@@ -133,7 +133,7 @@ const AiPage = () => (
       logos={['anything', 'replit', 'same', 'solar', 'databutton']}
     />
     <TestimonialNew
-      className="mt-[200px] md:mt-[104px] lg:mt-[158px] xl:mt-[192px]"
+      className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"
       figureClassName="lg:max-w-[704px]"
       quoteClassName="text-pretty lg:text-wrap"
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
@@ -150,7 +150,7 @@ const AiPage = () => (
     <FeaturesCards />
     <Usage />
     <TestimonialNew
-      className="mt-[200px] md:mt-[107px] lg:mt-[160px] xl:mt-[192px]"
+      className="mt-[200px] xl:mt-[192px] lg:mt-[160px] md:mt-[107px]"
       figureClassName="lg:max-w-[704px]"
       quote="I did testing on vector databases, but I didn’t see a real advantage. Postgres with Pgvector covers everything I need."
       quoteClassName="text-balance lg:text-pretty"
@@ -161,7 +161,7 @@ const AiPage = () => (
       }}
     />
     <GridFeatures
-      className="mt-[200px] md:mt-[104px] lg:mt-[160px] xl:mt-[194px]"
+      className="mt-[200px] xl:mt-[194px] lg:mt-[160px] md:mt-[104px]"
       title="Neon's AI App Starter Kit"
       titleClassName="md:text-pretty"
       description="Neon's AI App Starter Kit offers resources, apps, and examples to kickstart Neon as your vector database."

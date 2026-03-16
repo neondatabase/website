@@ -6,15 +6,15 @@ import { BRANCHING_BASE_PATH } from 'constants/branching';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const Contents = ({ contents }) => (
-  <section className="table-of-contents w-full pt-[180px] safe-paddings pb-[220px] md:pt-20 md:pb-20 lg:pt-[88px] xl:pt-[136px]">
+  <section className="table-of-contents w-full pt-[180px] safe-paddings pb-[220px] xl:pt-[136px] lg:pt-[88px] md:pt-20 md:pb-20">
     <Container className="w-full text-left" size="branching">
-      <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter md:mb-9 md:text-[28px] lg:mb-11 xl:text-[36px]">
+      <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter xl:text-[36px] lg:mb-11 md:mb-9 md:text-[28px]">
         Branching Workflows
       </h2>
       <ul className="w-full">
         {contents.map(({ section, id, items }) => (
           <li
-            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 md:gap-5 md:py-[21px] lg:gap-6 lg:py-[19px]"
+            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 lg:gap-6 lg:py-[19px] md:gap-5 md:py-[21px]"
             key={id}
             id={id}
           >
@@ -25,11 +25,11 @@ const Contents = ({ contents }) => (
               {items.map(({ title, description, slug }) => (
                 <li className="group/item -mt-px border-t border-gray-new-20" key={slug}>
                   <Link
-                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base md:py-[14px] lg:py-[18px]"
+                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base lg:py-[18px] md:py-[14px]"
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
-                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white lg:w-auto xl:w-64">
+                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white xl:w-64 lg:w-auto">
                         {title}
                       </span>
 

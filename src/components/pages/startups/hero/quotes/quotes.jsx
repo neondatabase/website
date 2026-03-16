@@ -34,10 +34,10 @@ const Quotes = ({ items }) => (
     >
       {items.map(({ text, author, post }, index) => (
         <SwiperSlide tag="li" key={index}>
-          <p className="swiper-no-swiping relative text-xl leading-snug tracking-tighter md:text-base lg:text-lg">
+          <p className="swiper-no-swiping relative text-xl leading-snug tracking-tighter lg:text-lg md:text-base">
             {text}
           </p>
-          <div className="swiper-no-swiping mt-[18px] leading-tight font-light tracking-extra-tight md:mt-3 md:text-sm lg:mt-3.5">
+          <div className="swiper-no-swiping mt-[18px] leading-tight font-light tracking-extra-tight lg:mt-3.5 md:mt-3 md:text-sm">
             {author}
             {post && <span className="text-gray-new-50"> — {post}</span>}
           </div>

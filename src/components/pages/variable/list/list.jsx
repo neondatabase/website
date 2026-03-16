@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
 
 const List = ({ items }) => (
-  <ul className="max-w-[608px] space-y-4 pl-8 sm:pl-0 md:space-y-2.5 lg:space-y-3 xl:space-y-3.5">
+  <ul className="max-w-[608px] space-y-4 pl-8 xl:space-y-3.5 lg:space-y-3 md:space-y-2.5 sm:pl-0">
     {items.map(({ icon, text }, index) => (
       <li className="flex items-start" key={index}>
         {icon && (

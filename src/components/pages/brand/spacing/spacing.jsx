@@ -9,18 +9,18 @@ const Spacing = () => (
   <Section
     title="Spacing considerations"
     description="The safety area surrounding the Logo is defined by the height of our symbol."
-    className="mb-40 md:mb-[88px] lg:mb-28 xl:mb-32"
+    className="mb-40 xl:mb-32 lg:mb-28 md:mb-[88px]"
   >
-    <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-7 md:justify-start md:gap-20">
+    <div className="flex items-center justify-between md:justify-start md:gap-20 sm:flex-col sm:items-start sm:gap-7">
       <Image
-        className="md:w-48 lg:w-[238px]"
+        className="lg:w-[238px] md:w-48"
         src={logomarkSpacing}
         alt="Logo spacing"
         width={259}
         height={260}
       />
       <Image
-        className="md:w-80 lg:w-[384px]"
+        className="lg:w-[384px] md:w-80"
         src={logoSpacing}
         alt="Logo spacing"
         width={420}

@@ -231,7 +231,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
 
   return (
     <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
-      <DrawerTrigger className="group fixed right-0 bottom-0 left-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 outline-hidden lg:flex dark:border-gray-new-15 dark:bg-black-pure dark:text-white">
+      <DrawerTrigger className="group fixed right-0 bottom-0 left-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 outline-hidden dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
         <CornerIcon
           className="shrink-0 text-gray-new-60 transition-all duration-200 group-hover:text-black-new dark:group-hover:text-white"
           aria-hidden
@@ -243,7 +243,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
         />
       </DrawerTrigger>
 
-      <DrawerContent className="bottom-12 hidden h-[70dvh]! flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden lg:flex dark:border-[#27272A] dark:bg-black-pure dark:text-white">
+      <DrawerContent className="bottom-12 hidden h-[70dvh]! flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
         <div className="flex flex-1 flex-col overflow-y-auto p-6 pt-[15px] pb-8">
           <RecursiveList nodes={menu} currentPath={pathname} />

@@ -65,7 +65,7 @@ const Slider = ({ articles }) => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h2 className="font-title text-[36px] leading-none font-medium tracking-extra-tight text-white md:text-2xl lg:text-[28px] xl:text-[32px]">
+        <h2 className="font-title text-[36px] leading-none font-medium tracking-extra-tight text-white xl:text-[32px] lg:text-[28px] md:text-2xl">
           Keep reading
         </h2>
         <div
@@ -81,7 +81,7 @@ const Slider = ({ articles }) => {
       </div>
 
       <Swiper
-        className="mt-9 md:mt-5 lg:mt-[30px] xl:mt-8"
+        className="mt-9 xl:mt-8 lg:mt-[30px] md:mt-5"
         wrapperTag="ul"
         slidesPerView={1}
         spaceBetween={16}

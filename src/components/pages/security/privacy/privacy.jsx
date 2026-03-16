@@ -49,9 +49,9 @@ const CARDS = [
 ];
 
 const Privacy = () => (
-  <section className="compliance relative pt-40 safe-paddings md:pt-[104px] lg:pt-[120px] xl:pt-[136px]">
+  <section className="compliance relative pt-40 safe-paddings xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
     <Container className="relative z-10" size="960">
-      <h2 className="text-center font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight md:text-[28px] lg:text-[36px] xl:text-4xl">
+      <h2 className="text-center font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[28px]">
         Privacy & Regulations
       </h2>
       <Cards data={CARDS} />

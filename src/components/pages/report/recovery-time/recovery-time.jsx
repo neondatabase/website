@@ -10,13 +10,13 @@ const RecoveryTime = () => (
       size="xxs"
     >
       <Image
-        className="ml-2 sm:max-w-[260px] xl:max-w-[295px]"
+        className="ml-2 xl:max-w-[295px] sm:max-w-[260px]"
         src={percentIcon}
         width={330}
         height={178}
         alt=""
       />
-      <h2 className="mx-auto -mt-10 max-w-[465px] font-title text-[36px] leading-dense font-medium tracking-tighter sm:-mt-[30px] sm:text-[28px] lg:-mt-10 lg:max-w-[405px] lg:text-[32px]">
+      <h2 className="mx-auto -mt-10 max-w-[465px] font-title text-[36px] leading-dense font-medium tracking-tighter lg:-mt-10 lg:max-w-[405px] lg:text-[32px] sm:-mt-[30px] sm:text-[28px]">
         <span className="sr-only">68%</span> of teams requested faster point-in-time recovery
         solutions
       </h2>

@@ -38,7 +38,7 @@ const FilterGroup = ({
 
   return (
     <li
-      className="flex flex-col border-b border-gray-new-80/80 pt-5 pb-5 first:pt-0 last:border-b-0 last:pb-0 lg:pt-4 lg:pb-4 lg:last:border-b last:lg:pb-4 dark:border-gray-new-15/80"
+      className="flex flex-col border-b border-gray-new-80/80 pt-5 pb-5 first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-new-15/80 lg:pt-4 lg:pb-4 lg:last:border-b last:lg:pb-4"
       key={type}
     >
       <fieldset>
@@ -138,7 +138,7 @@ const FilterBar = ({
   return (
     <form>
       <input
-        className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-hidden lg:w-full dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40"
+        className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-hidden dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40 lg:w-full"
         type="search"
         placeholder="Search"
         onChange={handleSearch}

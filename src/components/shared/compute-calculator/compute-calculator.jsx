@@ -96,7 +96,7 @@ const ComputeCalculator = ({
     )}
   >
     <div className="relative z-10 pb-[18px]">
-      <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter sm:mb-4 sm:text-lg xl:text-xl">
+      <h3 className="mb-5 text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:mb-4 sm:text-lg">
         Example deployment in RDS
       </h3>
       <ul

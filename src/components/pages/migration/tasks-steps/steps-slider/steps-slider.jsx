@@ -81,7 +81,7 @@ const StepsSlider = ({ items }) => {
 
   return (
     <>
-      <div ref={swiperContainerRef} className="relative mt-12 md:mt-8 lg:mt-10">
+      <div ref={swiperContainerRef} className="relative mt-12 lg:mt-10 md:mt-8">
         <Swiper
           autoplay={{
             delay: 5000,
@@ -123,7 +123,7 @@ const StepsSlider = ({ items }) => {
         </Swiper>
         <div className="pointer-events-none absolute inset-x-0 bottom-0 mx-16 h-8 lg:mx-0">
           <div className="absolute inset-x-0 top-1/2 -z-30 h-px w-full bg-migration-steps-slider-progress-bg" />
-          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_72%,transparent_100%)] px-12 md:mx-6 md:[mask-image:none] md:px-0 lg:px-12">
+          <div className="absolute inset-x-0 top-1/2 -z-10 h-px overflow-hidden [mask-image:linear-gradient(to_right,#494B50_0%,#494B50_72%,transparent_100%)] px-12 lg:px-12 md:mx-6 md:[mask-image:none] md:px-0">
             <div
               ref={progressBarRef}
               className="absolute top-0 h-px w-0 bg-gray-new-30 transition-all duration-300 ease-linear"
@@ -168,7 +168,7 @@ const StepsSlider = ({ items }) => {
       >
         {items.map(({ title, description, link }, index) => (
           <SwiperSlide tag="li" key={index} className="bg-black-pure">
-            <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left md:mx-auto md:max-w-md md:items-center md:text-center lg:mr-0 lg:gap-2">
+            <div className="caption-content mx-8 flex flex-col items-start gap-2.5 text-left lg:mr-0 lg:gap-2 md:mx-auto md:max-w-md md:items-center md:text-center">
               <h3 className="swiper-no-swiping text-xl leading-dense font-medium tracking-tighter text-white lg:text-lg">
                 {title}
               </h3>

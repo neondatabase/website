@@ -68,7 +68,7 @@ const TopbarClient = ({ text, link }) => {
         <span
           className={clsx(
             'truncate text-sm leading-none font-medium tracking-extra-tight',
-            'sm:max-w-[calc(100vw-64px)] lg:max-w-[482px] xl:max-w-[790px]',
+            'xl:max-w-[790px] lg:max-w-[482px] sm:max-w-[calc(100vw-64px)]',
             'text-black-pure transition-colors duration-200 group-hover:text-gray-new-40',
             'dark:text-white group-hover:dark:text-gray-new-70'
           )}
@@ -80,12 +80,12 @@ const TopbarClient = ({ text, link }) => {
 
       <Pattern className="2xl:hidden" src={leftPattern} />
       <Pattern className="2xl:hidden" src={rightPattern} isRight />
-      <Pattern className="hidden xl:hidden 2xl:block" src={leftPatternXL} />
-      <Pattern className="hidden xl:hidden 2xl:block" src={rightPatternXL} isRight />
-      <Pattern className="hidden lg:hidden xl:block" src={leftPatternLG} />
-      <Pattern className="hidden lg:hidden xl:block" src={rightPatternLG} isRight />
-      <Pattern className="hidden md:hidden lg:block" src={leftPatternSM} />
-      <Pattern className="hidden md:hidden lg:block" src={rightPatternSM} isRight />
+      <Pattern className="hidden 2xl:block xl:hidden" src={leftPatternXL} />
+      <Pattern className="hidden 2xl:block xl:hidden" src={rightPatternXL} isRight />
+      <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} />
+      <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} isRight />
+      <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} />
+      <Pattern className="hidden lg:block md:hidden" src={rightPatternSM} isRight />
       <Pattern className="hidden md:block" src={leftPatternXS} />
     </Link>
   );

@@ -7,18 +7,18 @@ import CopyCodeButton from './copy-code-button';
 
 const CTA = () => (
   <section className="cta relative bg-[#151617] safe-paddings">
-    <div className="absolute inset-0 z-10 pt-14 pb-9 md:pt-[52px] md:pb-6 lg:pt-9 xl:pt-12 xl:pb-5">
+    <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
-        <h2 className="text-[80px] leading-none tracking-tighter md:text-[32px] lg:text-[44px] xl:text-[64px]">
+        <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
           The world's most advanced <br /> Postgres platform.
         </h2>
 
-        <div className="mt-auto flex items-end justify-between gap-x-14 md:gap-y-6 lg:flex-col lg:items-start lg:gap-y-5">
-          <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter md:text-[18px] lg:max-w-[520px] lg:text-[20px] xl:max-w-[480px] xl:text-[24px]">
+        <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
+          <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter xl:max-w-[480px] xl:text-[24px] lg:max-w-[520px] lg:text-[20px] md:text-[18px]">
             Trusted by developers, ready for agents. <br className="xs:hidden" /> Build and scale
             applications faster with Neon.
           </p>
-          <div className="mb-2 flex items-center gap-5 md:w-full md:flex-col md:items-stretch md:gap-y-3 lg:mb-0 xl:gap-4">
+          <div className="mb-2 flex items-center gap-5 xl:gap-4 lg:mb-0 md:w-full md:flex-col md:items-stretch md:gap-y-3">
             <Button theme="white-filled" size="new" to={LINKS.signup}>
               Get started
             </Button>
@@ -48,7 +48,7 @@ const CTA = () => (
           webm: ffmpeg -i cta-origin.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an cta.webm
       */}
       <PauseableVideo
-        className="aspect-[1920/944] max-h-[944px] w-full md:hidden lg:w-[1024px]"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
         videoClassName="size-full object-cover"
         width={1920}
         height={944}

@@ -69,9 +69,9 @@ const BlogPage = async (props0) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="safe-paddings">
-        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 md:px-4 md:pt-8 md:pb-20 lg:block lg:max-w-none lg:px-8 lg:pt-10 lg:pb-28 xl:gap-x-6 xl:pt-12 xl:pb-32 2xl:px-10">
+        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:block lg:max-w-none lg:px-8 lg:pt-10 lg:pb-28 md:px-4 md:pt-8 md:pb-20">
           <Hero
-            className="col-start-4 col-end-10 mx-5 lg:mx-0 xl:col-start-1 xl:col-end-9"
+            className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:mx-0"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -79,22 +79,22 @@ const BlogPage = async (props0) => {
             {...pageBlogPost}
           />
           <ChangelogForm
-            className="col-start-4 col-end-10 mx-5 mt-4 mb-8 hidden lg:mx-0 lg:flex xl:col-start-1 xl:col-end-9"
+            className="col-start-4 col-end-10 mx-5 mt-4 mb-8 hidden xl:col-start-1 xl:col-end-9 lg:mx-0 lg:flex"
             isBlog
           />
           <Content
-            className="post-content col-start-4 col-end-10 mx-5 mt-4 lg:mx-0 xl:col-start-1 xl:col-end-9"
+            className="post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:mx-0"
             html={contentWithLazyBlocks}
           />
           <Aside title={title} slug={shareUrl} tableOfContents={tableOfContents} />
           <SocialShare
-            className="col-span-full hidden sm:mt-8 md:mt-10 lg:mt-14 lg:flex"
+            className="col-span-full hidden lg:mt-14 lg:flex md:mt-10 sm:mt-8"
             title={title}
             slug={shareUrl}
           />
           {relatedPosts.length > 0 && (
             <MoreArticles
-              className="col-start-4 col-end-10 mx-5 mt-16 md:mt-10 lg:mx-0 lg:mt-12 xl:col-start-1 xl:col-end-9 xl:mt-14"
+              className="col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mx-0 lg:mt-12 md:mt-10"
               posts={relatedPosts}
             />
           )}

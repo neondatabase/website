@@ -25,7 +25,7 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
   }
 
   return (
-    <div className={clsx('relative z-10 h-[125px] w-[240px] lg:w-[180px] xl:w-[200px]', className)}>
+    <div className={clsx('relative z-10 h-[125px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-52',
@@ -40,7 +40,7 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
       />
       <Button
         className={clsx(
-          'mt-5 h-[38px] w-full text-[14px]! tracking-extra-tight md:h-8 xl:text-[14px]!',
+          'mt-5 h-[38px] w-full text-[14px]! tracking-extra-tight xl:text-[14px]! md:h-8',
           isFeaturedPlan ? 'font-medium!' : 'font-normal!',
           !isFeaturedPlan && 'bg-opacity-80'
         )}
@@ -77,8 +77,8 @@ const Table = () => {
   }, []);
 
   return (
-    <Container size="1152" className="flex flex-col md:pr-0 md:pl-5 lg:pr-0">
-      <ul className="relative no-scrollbars flex w-full px-4.5 pb-2.5 md:pr-5 lg:overflow-x-auto lg:overflow-y-hidden lg:pr-8 lg:pl-0">
+    <Container size="1152" className="flex flex-col lg:pr-0 md:pr-0 md:pl-5">
+      <ul className="relative no-scrollbars flex w-full px-4.5 pb-2.5 lg:overflow-x-auto lg:overflow-y-hidden lg:pr-8 lg:pl-0 md:pr-5">
         {tableHeadings.map((key, i, arr) => {
           const isHighlightedColumn = key === 'launch';
           const isLabelsColumn = i === 0;
@@ -86,12 +86,12 @@ const Table = () => {
           return (
             <li
               className={clsx('relative pt-6 xl:pt-4', {
-                'z-30 flex-1 bg-black-pure md:min-w-[180px] lg:sticky lg:top-0 lg:left-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] lt:min-w-[200px]':
+                'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:top-0 lg:left-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
                   isLabelsColumn,
-                'basis-[296px] lg:shrink-0 lg:basis-[240px] xl:basis-[252px]': !isLabelsColumn,
-                'before:absolute before:top-0 before:-bottom-2.5 before:-left-6 before:z-0 before:w-[288px] before:border before:border-gray-new-20 before:bg-gray-new-15/20 lg:before:w-[228px] xl:before:-left-5 xl:before:w-[248px]':
+                'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
+                'before:absolute before:top-0 before:-bottom-2.5 before:-left-6 before:z-0 before:w-[288px] before:border before:border-gray-new-20 before:bg-gray-new-15/20 xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
                   isHighlightedColumn,
-                'basis-[240px]! md:basis-[190px]! lg:basis-[240px]! xl:basis-[200px]!':
+                'basis-[240px]! xl:basis-[200px]! lg:basis-[240px]! md:basis-[190px]!':
                   i === tableHeadings.length - 1,
               })}
               key={key}
@@ -225,7 +225,7 @@ const Table = () => {
                     >
                       <div
                         className={clsx(
-                          'max-w-[240px] lg:max-w-[180px] xl:max-w-[200px]',
+                          'max-w-[240px] xl:max-w-[200px] lg:max-w-[180px]',
                           i === 1 && 'lg:ml-5'
                         )}
                       >

@@ -47,13 +47,13 @@ const ITEMS = [
 ];
 
 const TasksSteps = () => (
-  <section className="tasks-steps relative pt-[180px] safe-paddings md:pt-[90px] lg:pt-[131px] xl:pt-[157px]">
-    <Container className="relative md:mx-1 lg:mx-8" size="768">
+  <section className="tasks-steps relative pt-[180px] safe-paddings xl:pt-[157px] lg:pt-[131px] md:pt-[90px]">
+    <Container className="relative lg:mx-8 md:mx-1" size="768">
       <header className="max-w-[616px]">
-        <p className="mb-4 text-base font-medium tracking-wide text-gray-new-50 uppercase md:mb-3 md:text-[13px] lg:text-sm">
+        <p className="mb-4 text-base font-medium tracking-wide text-gray-new-50 uppercase lg:text-sm md:mb-3 md:text-[13px]">
           Postgres migrations, automated
         </p>
-        <h2 className="font-title text-5xl leading-none font-medium tracking-tighter md:text-[32px] md:text-pretty lg:text-[40px] xl:text-[44px] xl:text-balance">
+        <h2 className="font-title text-5xl leading-none font-medium tracking-tighter xl:text-[44px] xl:text-balance lg:text-[40px] md:text-[32px] md:text-pretty">
           No manual steps, no migration stress
         </h2>
       </header>

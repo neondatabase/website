@@ -64,7 +64,7 @@ const Slider = ({ title, items }) => {
 
   return (
     <div className="features-slider">
-      <div className="relative mb-8 w-full overflow-hidden sm:mb-[18px] lg:mb-6">
+      <div className="relative mb-8 w-full overflow-hidden lg:mb-6 sm:mb-[18px]">
         <h3
           className={clsx(
             'w-fit text-lg leading-none text-gray-new-50 uppercase lg:text-[13px]',
@@ -134,7 +134,7 @@ const Slider = ({ title, items }) => {
         ))}
       </Swiper>
       <div
-        className={clsx('mt-6 sm:mt-4 lg:mt-[18px]', {
+        className={clsx('mt-6 lg:mt-[18px] sm:mt-4', {
           hidden: items.length < 4,
           '2xl:block': items.length === 3,
           'sm:block': items.length === 2,

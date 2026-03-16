@@ -18,10 +18,10 @@ const Plans = () => {
   const [scaleSize, setScaleSize] = useState('xlarge');
 
   return (
-    <div className="relative mt-16 w-full md:mx-0 md:mt-11 md:w-full lg:mt-12 xl:mt-14">
+    <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
       <h2 className="sr-only">Neon pricing plans</h2>
 
-      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 md:grid-cols-1 lg:grid-cols-2 lg:border-0">
+      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
         {plans.map(
           (
             {

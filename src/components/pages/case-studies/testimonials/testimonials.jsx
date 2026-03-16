@@ -37,10 +37,10 @@ const TESTIMONIALS = [
 
 const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
   <article className="flex h-[274px] flex-col justify-between lg:h-auto">
-    <div className="flex flex-col gap-9 md:gap-5 lg:gap-6">
+    <div className="flex flex-col gap-9 lg:gap-6 md:gap-5">
       <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit sm:h-6" />
       <blockquote
-        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black md:text-base xl:text-lg [&_span]:bg-green-44/70"
+        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>
@@ -71,7 +71,7 @@ TestimonialCard.propTypes = {
 };
 
 const Testimonials = () => (
-  <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure md:py-14 lg:py-16 xl:py-20">
+  <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure xl:py-20 lg:py-16 md:py-14">
     <Image
       src={backgroundSvg}
       alt=""
@@ -81,7 +81,7 @@ const Testimonials = () => (
       aria-hidden
     />
     <Container size="1280" className="relative z-10">
-      <div className="flex flex-col border-l border-gray-new-50 pl-8 sm:border-l-0 sm:pl-0 lg:pl-[18px] xl:pl-6">
+      <div className="flex flex-col border-l border-gray-new-50 pl-8 xl:pl-6 lg:pl-[18px] sm:border-l-0 sm:pl-0">
         <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
@@ -95,11 +95,11 @@ const Testimonials = () => (
             backed by giants
           </span>
         </div>
-        <h2 className="mt-5 max-w-[800px] text-[48px] leading-dense font-normal tracking-tighter text-black sm:max-w-none sm:text-[28px] md:max-w-[400px] md:text-2xl lg:max-w-[533px] lg:text-[32px] xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px]">
+        <h2 className="mt-5 max-w-[800px] text-[48px] leading-dense font-normal tracking-tighter text-black xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px] lg:max-w-[533px] lg:text-[32px] md:max-w-[400px] md:text-2xl sm:max-w-none sm:text-[28px]">
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
-        <div className="mt-40 grid grid-cols-3 gap-12 sm:grid-cols-1 sm:gap-y-14 md:mt-14 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 xl:mt-36 xl:gap-10">
+        <div className="mt-40 grid grid-cols-3 gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 md:mt-14 sm:grid-cols-1 sm:gap-y-14">
           {TESTIMONIALS.map((item, index) => (
             <TestimonialCard key={index} {...item} />
           ))}

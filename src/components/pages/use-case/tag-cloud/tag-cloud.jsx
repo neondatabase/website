@@ -6,7 +6,7 @@ const TagCloud = ({ items, className, titleClassName, iconClassName }) => (
   <ul className={clsx('mt-6 flex flex-wrap', className)}>
     {items.map(({ title, icon }) => (
       <li
-        className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] md:h-[30px] md:gap-2 lg:h-[34px] lg:px-3"
+        className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px] md:gap-2"
         key={title}
       >
         <Image

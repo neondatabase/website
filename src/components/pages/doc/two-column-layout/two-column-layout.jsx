@@ -46,7 +46,7 @@ const TwoColumnStep = ({ title, children }) => (
       )}
 
       {/* Content grid */}
-      <div className="grid flex-1 grid-cols-2 gap-x-16 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6 2xl:gap-x-8">
+      <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
         {children}
       </div>
     </div>
@@ -59,7 +59,7 @@ TwoColumnStep.propTypes = {
 };
 
 const TwoColumnItem = ({ title, method, id, children }) => (
-  <li className="two-column-item relative mt-0! mb-0! block border-b border-gray-new-90 py-14 pl-0! first:border-t xl:py-10 dark:border-gray-new-20">
+  <li className="two-column-item relative mt-0! mb-0! block border-b border-gray-new-90 py-14 pl-0! first:border-t dark:border-gray-new-20 xl:py-10">
     {title && (
       <>
         <h2
@@ -92,7 +92,7 @@ const TwoColumnItem = ({ title, method, id, children }) => (
       </>
     )}
     {/* Content grid */}
-    <div className="grid flex-1 grid-cols-2 gap-x-16 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6 2xl:gap-x-8">
+    <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
       {children}
     </div>
   </li>

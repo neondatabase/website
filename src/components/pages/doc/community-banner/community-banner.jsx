@@ -36,7 +36,7 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
         className="pointer-events-none absolute top-1/2 right-0 hidden h-[307px] w-[272px] -translate-y-1/2 rounded-full bg-[rgba(79,232,176,.3)] blur-3xl dark:block"
         aria-hidden
       />
-      <span className="absolute inset-0 h-full bg-[url('/docs/community-banner/discord-light.png')] bg-contain bg-right bg-no-repeat sm:hidden md:[background-position:calc(100%+80px)_50%] dark:bg-[url('/docs/community-banner/discord-dark.png')] 3xl:[background-position:calc(100%+40px)_50%] [@media(min-width:1280px)_and_(max-width:1366px)]:[background-position:calc(100%+90px)_50%]" />
+      <span className="absolute inset-0 h-full bg-[url('/docs/community-banner/discord-light.png')] bg-contain bg-right bg-no-repeat dark:bg-[url('/docs/community-banner/discord-dark.png')] 3xl:[background-position:calc(100%+40px)_50%] md:[background-position:calc(100%+80px)_50%] sm:hidden [@media(min-width:1280px)_and_(max-width:1366px)]:[background-position:calc(100%+90px)_50%]" />
     </div>
   </section>
 );

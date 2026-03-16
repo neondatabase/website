@@ -13,7 +13,7 @@ const LogosSection = ({ logos, logosTitle = 'Powered by Neon.', containerClassNa
         containerClassName
       )}
     >
-      <div className="min-w-[144px] text-base leading-snug font-normal tracking-tight text-black-new md:max-w-full md:text-center dark:text-[#C9CBCF]">
+      <div className="min-w-[144px] text-base leading-snug font-normal tracking-tight text-black-new dark:text-[#C9CBCF] md:max-w-full md:text-center">
         {logosTitle}
       </div>
       <LogosWall logos={logos} size="sm" />

@@ -6,14 +6,14 @@ const Benefits = ({ title, description, items }) => (
   <section className="benefits safe-paddings">
     <Container className="" size="960">
       <div className="mx-auto max-w-[520px] text-center">
-        <h2 className="font-title text-5xl leading-none font-medium tracking-tight md:text-[32px] lg:text-4xl xl:text-[44px]">
+        <h2 className="font-title text-5xl leading-none font-medium tracking-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
           {title}
         </h2>
         <p className="mt-[18px] text-lg leading-snug font-light text-gray-new-70">{description}</p>
       </div>
-      <ul className="mt-12 flex flex-wrap justify-center gap-x-[72px] gap-y-10 sm:mt-8 lg:gap-8">
+      <ul className="mt-12 flex flex-wrap justify-center gap-x-[72px] gap-y-10 lg:gap-8 sm:mt-8">
         {items.map(({ icon, title, description }, index) => (
-          <li className="w-[272px] sm:w-full lg:w-[212px] xl:w-[248px]" key={index}>
+          <li className="w-[272px] xl:w-[248px] lg:w-[212px] sm:w-full" key={index}>
             <img
               className="shrink-0"
               src={icon}

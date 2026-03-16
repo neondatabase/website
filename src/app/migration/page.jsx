@@ -58,7 +58,7 @@ const MigrationPage = () => (
     <TaskSteps />
     <CardsSupport />
     <TestimonialNew
-      className="pt-[185px] md:pt-[97px] lg:pt-[136px] xl:pt-[161px]"
+      className="pt-[185px] xl:pt-[161px] lg:pt-[136px] md:pt-[97px]"
       quote="Database migrations are always a headache, but the Neon team made it a smooth process. Their support helped us troubleshoot performance issues and get everything running fast."
       quoteClassName="max-w-[670px] lg:max-w-[620px] md:max-w-[570px] sm:max-w-[300px] sm:mx-auto"
       author={{
@@ -68,7 +68,7 @@ const MigrationPage = () => (
       }}
     />
     <GridFeatures
-      className="mt-[185px] md:mt-[96px] lg:mt-[136px] xl:mt-[162px]"
+      className="mt-[185px] xl:mt-[162px] lg:mt-[136px] md:mt-[96px]"
       title="Why teams migrate to Neon"
       titleClassName="md:text-balance"
       headerClassName="max-w-[640px] lg:max-w-[560px] md:max-w-[500px]"

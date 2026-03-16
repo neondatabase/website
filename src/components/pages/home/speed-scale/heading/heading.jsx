@@ -5,7 +5,7 @@ const Heading = ({ className, children }) => (
   <h3
     className={clsx(
       'text-[28px] leading-snug tracking-extra-tight text-gray-new-50',
-      'md:text-base lg:text-xl xl:text-2xl',
+      'xl:text-2xl lg:text-xl md:text-base',
       '[&>strong]:font-normal [&>strong]:text-white',
       className
     )}

@@ -110,7 +110,7 @@ const WpPage = async ({ params }) => {
         if (isAzurePage) {
           return (
             <CTANew
-              className="mt-[70px] py-[250px] md:mt-8 md:py-[105px] lg:mt-12 lg:py-[130px] xl:mt-14 xl:py-[184px]"
+              className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
               copyWrapperClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
               {...props}
             />
@@ -128,12 +128,12 @@ const WpPage = async ({ params }) => {
       {templateName === 'Landing' ? (
         contentWithLazyBlocks
       ) : (
-        <article className="py-48 safe-paddings md:pt-6 md:pb-20 lg:pt-12 lg:pb-24 xl:py-32 2xl:py-40 3xl:py-44">
+        <article className="py-48 safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
           <Container size="xs">
             <h1 className="t-5xl font-title font-semibold">{title}</h1>
           </Container>
           <Container size="xs">
-            <Content className="prose-static mt-8 xl:mt-6 2xl:mt-7" content={content} asHTML />
+            <Content className="prose-static mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />
           </Container>
         </article>
       )}

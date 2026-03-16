@@ -30,9 +30,9 @@ const CTAWithElephant = ({
   >
     <Container
       size="medium"
-      className="grid grid-cols-12 gap-x-10 md:grid-cols-1 lg:gap-x-4 xl:gap-x-6"
+      className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
     >
-      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pt-16 pb-[164px] md:col-span-full md:items-center md:text-center lg:col-span-6 lg:pb-[54px] xl:col-start-1 xl:pt-20 xl:pb-[78px] 2xl:col-span-5 2xl:col-start-2 2xl:pb-36">
+      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pt-16 pb-[164px] 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:col-start-1 xl:pt-20 xl:pb-[78px] lg:col-span-6 lg:pb-[54px] md:col-span-full md:items-center md:text-center">
         {label && (
           <GradientLabel className="mb-5" theme={labelTheme}>
             {label}
@@ -40,7 +40,7 @@ const CTAWithElephant = ({
         )}
         <Heading
           className={clsx(
-            'max-w-[500px] md:mx-auto lg:max-w-[350px] xl:max-w-[400px]',
+            'max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto',
             titleClassName
           )}
           tag="h2"
@@ -49,13 +49,13 @@ const CTAWithElephant = ({
         >
           {title}
         </Heading>
-        <p className="mt-3 max-w-[464px] text-lg leading-snug font-light md:mx-auto md:max-w-md lg:max-w-sm xl:max-w-[400px] xl:text-base">
+        <p className="mt-3 max-w-[464px] text-lg leading-snug font-light xl:max-w-[400px] xl:text-base lg:max-w-sm md:mx-auto md:max-w-md">
           {description}
         </p>
-        <div className="mt-9 flex items-center gap-x-8 sm:mt-6 sm:flex-col sm:gap-y-5 md:justify-center lg:gap-x-4 xl:mt-7">
+        <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
             className={clsx(
-              'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] sm:text-lg lg:text-base xl:py-[17px]',
+              'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:py-[17px] lg:text-base sm:text-lg',
               buttonClassName
             )}
             theme="primary"
@@ -78,9 +78,9 @@ const CTAWithElephant = ({
           )}
         </div>
       </div>
-      <div className="relative col-span-7 col-start-6 md:z-20 md:col-span-full md:flex md:justify-center 2xl:col-span-6 2xl:col-start-7">
+      <div className="relative col-span-7 col-start-6 2xl:col-span-6 2xl:col-start-7 md:z-20 md:col-span-full md:flex md:justify-center">
         <Image
-          className="absolute bottom-0 left-0 w-[842px] max-w-none md:static md:w-[591px] lg:-left-28 lg:w-[553px] xl:-left-20 xl:w-[652px] 2xl:w-[750px]"
+          className="absolute bottom-0 left-0 w-[842px] max-w-none 2xl:w-[750px] xl:-left-20 xl:w-[652px] lg:-left-28 lg:w-[553px] md:static md:w-[591px]"
           src={illustration}
           width={842}
           height={482}

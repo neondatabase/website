@@ -47,7 +47,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
     <Link
       to={linkUrl}
       className={clsx(
-        'group flex w-1/2 max-w-[336px] min-w-0 items-center justify-between gap-6 border border-gray-new-20 py-4 pr-4 pl-5 sm:w-full sm:max-w-full sm:pr-5 lg:max-w-full',
+        'group flex w-1/2 max-w-[336px] min-w-0 items-center justify-between gap-6 border border-gray-new-20 py-4 pr-4 pl-5 lg:max-w-full sm:w-full sm:max-w-full sm:pr-5',
         isNext
           ? 'ml-auto flex-row items-end pr-4 sm:pr-5'
           : 'flex-row-reverse items-start pl-4 sm:hidden'

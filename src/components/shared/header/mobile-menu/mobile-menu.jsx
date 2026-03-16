@@ -76,7 +76,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                               isExternal={isExternal}
                               tagName="MobileMenu"
                             >
-                              <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure sm:text-base dark:text-white">
+                              <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white sm:text-base">
                                 {title}
                               </span>
 
@@ -131,7 +131,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute top-3 right-7 z-50 hidden gap-5 sm:right-4 lg:flex lg:items-center lg:gap-x-4">
+      <div className="absolute top-3 right-7 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-black dark:text-white"
@@ -141,7 +141,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
         />
       </div>
       {isMobileMenuOpen && (
-        <nav className="fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings lg:flex dark:bg-black-pure">
+        <nav className="fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings dark:bg-black-pure lg:flex">
           <div
             className={clsx('relative h-full pt-14 pb-[101px] sm:pb-[125px]', {
               'pt-[96px]': hasTopbar,
@@ -155,7 +155,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             </ul>
             <div
               className={clsx(
-                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 sm:grid-cols-1 sm:p-5 dark:border-gray-new-20 dark:bg-black-pure',
+                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
                 { 'pb-20 sm:pb-[68px]': isDocPage }
               )}
             >

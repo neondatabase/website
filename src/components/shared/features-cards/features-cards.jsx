@@ -39,7 +39,7 @@ const FeaturesCards = ({
 }) => (
   <section
     className={clsx(
-      'features relative mt-[200px] overflow-hidden safe-paddings md:mt-[104px] lg:mt-[161px] xl:mt-[194px]',
+      'features relative mt-[200px] overflow-hidden safe-paddings xl:mt-[194px] lg:mt-[161px] md:mt-[104px]',
       className
     )}
   >
@@ -52,7 +52,7 @@ const FeaturesCards = ({
       >
         <h2
           className={clsx(
-            'font-title text-5xl leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-4xl xl:text-[44px]',
+            'font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
             titleClassName
           )}
         >
@@ -60,7 +60,7 @@ const FeaturesCards = ({
         </h2>
         <p
           className={clsx(
-            'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 md:text-pretty lg:mt-3 lg:text-base',
+            'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3 lg:text-base md:text-pretty',
             descriptionClassName
           )}
         >
@@ -69,13 +69,13 @@ const FeaturesCards = ({
       </header>
       <ul
         className={clsx(
-          'mt-11 grid grid-cols-2 gap-5 md:grid-cols-1 md:gap-4 lg:mt-10',
+          'mt-11 grid grid-cols-2 gap-5 lg:mt-10 md:grid-cols-1 md:gap-4',
           ulClassName
         )}
       >
         {items.map(({ title, description, link, linkText, icon }) => (
           <li
-            className="relative flex size-full flex-col justify-between gap-12 rounded-lg bg-security-card-bg p-6 md:min-h-[262px] lg:gap-8 lg:p-5 xl:gap-[55px]"
+            className="relative flex size-full flex-col justify-between gap-12 rounded-lg bg-security-card-bg p-6 xl:gap-[55px] lg:gap-8 lg:p-5 md:min-h-[262px]"
             key={title}
           >
             <div className="relative flex size-12 items-center justify-center rounded-full bg-security-slide-icon-bg lg:size-11">

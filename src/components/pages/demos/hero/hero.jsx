@@ -39,22 +39,22 @@ const items = [
 ];
 
 const Hero = () => (
-  <section className="hero pt-36 safe-paddings md:pt-10 lg:pt-14 xl:pt-32">
+  <section className="hero pt-36 safe-paddings xl:pt-32 lg:pt-14 md:pt-10">
     <Container className="grid grid-cols-12 grid-gap-x lg:grid-cols-1" size="medium">
       <div className="col-span-10 col-start-2 lg:col-span-full lg:col-start-1">
-        <h1 className="font-title text-6xl leading-none font-medium tracking-extra-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px]">
+        <h1 className="font-title text-6xl leading-none font-medium tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-4xl sm:text-3xl">
           <span className="text-green-45">Serverless showcase:</span>
           <br /> build with Neon
         </h1>
-        <p className="mt-5 text-xl leading-snug font-light tracking-extra-tight md:text-base lg:text-xl">
+        <p className="mt-5 text-xl leading-snug font-light tracking-extra-tight lg:text-xl md:text-base">
           Explore interactive demos from the community and the Neon team.
         </p>
-        <div className="mt-20 md:mt-10 lg:mt-16">
+        <div className="mt-20 lg:mt-16 md:mt-10">
           <h2 className="flex items-center font-title text-xs leading-none font-medium -tracking-extra-tight text-green-45 uppercase">
             <span>Featured</span>
             <span className="ml-2 h-px grow bg-gray-new-20" />
           </h2>
-          <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-7 md:grid-cols-1 lg:grid-cols-2">
+          <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-7 lg:grid-cols-2 md:grid-cols-1">
             {items.map(({ image, imageWidth, imageHeight, title, demoLink, sourceLink }, index) => (
               <li
                 className={clsx(

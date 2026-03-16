@@ -34,12 +34,12 @@ const FEATURES = [
 ];
 
 const Features = () => (
-  <section className="features mt-[200px] mb-60 md:mt-24 md:mb-32 lg:mt-36 lg:mb-40 xl:mt-[184px] xl:mb-[200px]">
-    <Container className="flex flex-col items-center gap-14 md:gap-10 lg:gap-12" size="1280">
-      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-extra-tight md:text-[32px] lg:text-[40px] xl:max-w-[540px] xl:text-5xl">
+  <section className="features mt-[200px] mb-60 xl:mt-[184px] xl:mb-[200px] lg:mt-36 lg:mb-40 md:mt-24 md:mb-32">
+    <Container className="flex flex-col items-center gap-14 lg:gap-12 md:gap-10" size="1280">
+      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-extra-tight xl:max-w-[540px] xl:text-5xl lg:text-[40px] md:text-[32px]">
         Serverless Postgres, built for&nbsp;developers
       </h2>
-      <ul className="grid grid-cols-4 gap-12 sm:grid-cols-1 xl:grid-cols-2">
+      <ul className="grid grid-cols-4 gap-12 xl:grid-cols-2 sm:grid-cols-1">
         {FEATURES.map(({ icon, title, description }, index) => (
           <li className="max-w-[300px] md:max-w-xs" key={index}>
             <Image

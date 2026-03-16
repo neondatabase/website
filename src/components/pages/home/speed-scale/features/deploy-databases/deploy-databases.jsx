@@ -22,11 +22,11 @@ const DeployDatabases = () => {
   return (
     <div
       ref={ref}
-      className="relative max-w-none font-mono leading-none tracking-extra-tight sm:text-[7px] xl:text-xs"
+      className="relative max-w-none font-mono leading-none tracking-extra-tight xl:text-xs sm:text-[7px]"
     >
-      <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] sm:px-2.5 sm:py-2 xl:px-4 xl:py-3.5">
+      <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
         Databases deployed:
-        <span className="ml-7 text-gray-new-80 sm:ml-3 xl:ml-6">
+        <span className="ml-7 text-gray-new-80 xl:ml-6 sm:ml-3">
           {isMobile ? (
             TOTAL_DATABASES
           ) : (
@@ -34,17 +34,17 @@ const DeployDatabases = () => {
           )}
         </span>
       </div>
-      <div className="border-b border-l border-gray-new-50 pt-8 pb-[18px] pl-[18px] sm:pt-4 sm:pb-2 sm:pl-2 xl:pt-[26px] xl:pb-3.5 xl:pl-3.5">
-        <ul className="flex flex-col gap-9 sm:gap-4 xl:gap-[26px]">
+      <div className="border-b border-l border-gray-new-50 pt-8 pb-[18px] pl-[18px] xl:pt-[26px] xl:pb-3.5 xl:pl-3.5 sm:pt-4 sm:pb-2 sm:pl-2">
+        <ul className="flex flex-col gap-9 xl:gap-[26px] sm:gap-4">
           <LazyMotion features={domAnimation}>
             {ACTIVITY_DATA.map(({ day, activeCount, idleCount, activity }) => (
               <li className="flex flex-col gap-5" key={day}>
-                <div className="flex gap-[18px] sm:gap-2 xl:gap-[14px]">
-                  <span className="w-[90px] border-r border-gray-new-20 text-gray-new-70 sm:w-10 xl:w-[68px]">
+                <div className="flex gap-[18px] xl:gap-[14px] sm:gap-2">
+                  <span className="w-[90px] border-r border-gray-new-20 text-gray-new-70 xl:w-[68px] sm:w-10">
                     {day}
                   </span>
-                  <div className="flex gap-5 sm:gap-3 xl:gap-4">
-                    <div className="flex gap-2 sm:gap-1 xl:gap-1.5">
+                  <div className="flex gap-5 xl:gap-4 sm:gap-3">
+                    <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Active:
                       <span className="text-green-45">
                         {isMobile ? (
@@ -58,7 +58,7 @@ const DeployDatabases = () => {
                         )}
                       </span>
                     </div>
-                    <div className="flex gap-2 sm:gap-1 xl:gap-1.5">
+                    <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Idle:
                       <span className="text-gray-new-80">
                         {isMobile ? (
@@ -73,17 +73,17 @@ const DeployDatabases = () => {
                 <ul className="flex gap-2 xl:gap-1.5">
                   {activity.map((activity, hour) => (
                     <li
-                      className="flex shrink-0 flex-col items-center gap-3 sm:gap-1.5 xl:gap-2"
+                      className="flex shrink-0 flex-col items-center gap-3 xl:gap-2 sm:gap-1.5"
                       key={`${day}-${hour}`}
                     >
-                      <div className="grid grid-flow-col grid-cols-6 grid-rows-10 gap-[3px] sm:gap-px xl:gap-0.5">
+                      <div className="grid grid-flow-col grid-cols-6 grid-rows-10 gap-[3px] xl:gap-0.5 sm:gap-px">
                         {activity.split('').map((value, minute) => {
                           const delay = START_DELAY - 0.3 + hour * 0.1 + Math.random() * 0.2;
 
                           return (
                             <span
                               key={`${day}-${hour}-${minute}`}
-                              className="flex size-1.5 items-center justify-center sm:size-[3px] xl:size-[5px]"
+                              className="flex size-1.5 items-center justify-center xl:size-[5px] sm:size-[3px]"
                             >
                               {isMobile ? (
                                 <span
@@ -119,7 +119,7 @@ const DeployDatabases = () => {
                         })}
                       </div>
                       <time
-                        className="text-xs text-gray-new-50 sm:text-[5px] xl:text-[9px]"
+                        className="text-xs text-gray-new-50 xl:text-[9px] sm:text-[5px]"
                         dateTime={`${hour + 9}:00`}
                       >
                         {String(hour + 9).padStart(2, '0')}:00

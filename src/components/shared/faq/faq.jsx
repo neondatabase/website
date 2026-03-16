@@ -7,14 +7,14 @@ import Item from './item';
 
 const Faq = ({ items, className }) => (
   <section
-    className={clsx('faq mt-[200px] safe-paddings md:mt-[104px] lg:mt-40 xl:mt-[184px]', className)}
+    className={clsx('faq mt-[200px] safe-paddings xl:mt-[184px] lg:mt-40 md:mt-[104px]', className)}
     id="faq"
   >
-    <Container className="flex gap-x-16 md:gap-y-5 lg:flex-col lg:gap-y-10 xl:gap-x-8" size="1152">
+    <Container className="flex gap-x-16 xl:gap-x-8 lg:flex-col lg:gap-y-10 md:gap-y-5" size="1152">
       <h2
         className={clsx(
           'w-80 shrink-0 text-[44px] leading-dense tracking-[-0.05em] text-balance',
-          'md:text-[28px] lg:w-full xl:w-[288px] xl:text-[36px]'
+          'xl:w-[288px] xl:text-[36px] lg:w-full md:text-[28px]'
         )}
       >
         Your questions, <br className="lg:hidden" />

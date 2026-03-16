@@ -3,7 +3,7 @@
     @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-white;
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out prose-a:hover:decoration-white sm:prose-a:break-words;
-    @apply prose-figure:my-10 sm:prose-figure:my-6 md:prose-figure:my-8 prose-img:my-10 sm:prose-img:my-6 md:prose-img:my-8;
+    @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
     @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
     @apply prose-pre:my-0 prose-pre:px-2;
 
@@ -36,11 +36,11 @@
     }
 
     h2 {
-      @apply m-0 pt-8 text-[28px] leading-tight font-medium tracking-tighter sm:text-[20px] md:pt-6 md:text-[24px];
+      @apply m-0 pt-8 text-[28px] leading-tight font-medium tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
     }
 
     h3 {
-      @apply mt-7 text-xl leading-snug font-medium tracking-extra-tight sm:text-[18px] md:mt-5 md:text-lg;
+      @apply mt-7 text-xl leading-snug font-medium tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
     }
 
     h4 {
@@ -69,7 +69,7 @@
     }
 
     ul {
-      @apply pl-[34px] sm:pl-4 md:pl-5;
+      @apply pl-[34px] md:pl-5 sm:pl-4;
 
       > li {
         &::before {
@@ -211,7 +211,7 @@
       strong,
       b,
       p {
-        @apply my-0 text-xl leading-snug font-normal tracking-tighter sm:text-base md:text-lg;
+        @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
 
         &::before,
         &::after {
@@ -236,7 +236,7 @@
       }
 
       p {
-        @apply my-0 pt-11 text-2xl leading-snug font-normal not-italic sm:text-lg md:text-xl;
+        @apply my-0 pt-11 text-2xl leading-snug font-normal not-italic md:text-xl sm:text-lg;
 
         &::before,
         &::after {

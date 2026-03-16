@@ -53,7 +53,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
 
   return (
     <li
-      className="-mx-1 overflow-hidden border-b border-gray-new-15 px-1 py-[19px] last:border-0 md:py-[14px] xl:py-[18px]"
+      className="-mx-1 overflow-hidden border-b border-gray-new-15 px-1 py-[19px] last:border-0 xl:py-[18px] md:py-[14px]"
       id={id}
     >
       <button
@@ -89,7 +89,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
             className={clsx(
               'with-list-style pt-4 pr-[52px]',
               'text-[16px] leading-normal font-normal tracking-extra-tight text-gray-new-60',
-              'md:pt-3 md:pr-0 md:text-[15px] lg:pt-5 lg:pr-[50px] lg:leading-snug xl:pr-[52px]',
+              'xl:pr-[52px] lg:pt-5 lg:pr-[50px] lg:leading-snug md:pt-3 md:pr-0 md:text-[15px]',
               '[&_p+p]:mt-2',
               '[&_ul]:ml-0 [&_ul]:list-none [&_ul]:pl-4',
               '[&_li]:relative [&_li]:list-inside [&_li]:pl-4!',

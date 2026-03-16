@@ -9,7 +9,7 @@
     @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
     a {
-      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure sm:break-words dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100;
+      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100 sm:break-words;
     }
     p:first-child {
       @apply mt-0;
@@ -81,7 +81,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black-pure dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] prose-a:sm:break-words dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)];
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -152,7 +152,7 @@
       > li {
         @apply text-[18px] leading-normal font-normal text-gray-new-30 dark:text-gray-new-85;
         &::before {
-          @apply absolute top-0 -left-4 text-[18px] leading-normal font-normal text-gray-new-30 content-['-'] md:-left-3.5 dark:text-gray-new-85;
+          @apply absolute top-0 -left-4 text-[18px] leading-normal font-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
         }
       }
     }
@@ -402,7 +402,7 @@
 
     p,
     ul {
-      @apply mt-7 sm:mt-4 lg:mt-5 xl:mt-6;
+      @apply mt-7 xl:mt-6 lg:mt-5 sm:mt-4;
     }
 
     strong {

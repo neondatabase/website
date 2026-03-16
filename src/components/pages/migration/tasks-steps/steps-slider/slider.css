@@ -13,10 +13,10 @@
 }
 
 .swiper-pagination {
-  @apply relative bottom-0! mt-10 flex w-full gap-2 md:mt-7 md:justify-between lg:mt-8 lg:gap-0;
+  @apply relative bottom-0! mt-10 flex w-full gap-2 lg:mt-8 lg:gap-0 md:mt-7 md:justify-between;
 
   &-bullet {
-    @apply relative z-10 mx-0! flex flex-1 flex-col items-start gap-y-6 bg-transparent bg-none px-8 opacity-100 md:flex-initial md:px-0 lg:px-8;
+    @apply relative z-10 mx-0! flex flex-1 flex-col items-start gap-y-6 bg-transparent bg-none px-8 opacity-100 lg:px-8 md:flex-initial md:px-0;
     @apply h-auto w-auto;
 
     .bullet-number {

@@ -76,7 +76,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         )}
       </Link>
     ))}
-    <div className="ml-1.5 flex gap-x-4 lg:hidden xl:ml-1">
+    <div className="ml-1.5 flex gap-x-4 xl:ml-1 lg:hidden">
       <Button
         className="h-9 px-[18px]"
         to={LINKS.login}

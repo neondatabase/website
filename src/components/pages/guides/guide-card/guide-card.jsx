@@ -18,7 +18,7 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
             <h1 className="line-clamp-2 text-[20px] leading-tight font-semibold tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
               {title}
             </h1>
-            <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 sm:mt-1 dark:text-gray-new-50">
+            <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 dark:text-gray-new-50 sm:mt-1">
               {subtitle}
             </p>
             <div className="mt-3 flex items-center gap-2 sm:mt-2.5">
@@ -26,20 +26,20 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
                 <div className="flex items-center gap-2">
                   {author.photo && (
                     <Image
-                      className="block rounded-full sm:h-5 sm:w-5 md:h-6 md:w-6"
+                      className="block rounded-full md:h-6 md:w-6 sm:h-5 sm:w-5"
                       src={author.photo}
                       alt={author.name}
                       width={26}
                       height={26}
                     />
                   )}
-                  <span className="text-[15px] leading-none tracking-extra-tight text-gray-new-30 md:text-sm dark:text-gray-new-90">
+                  <span className="text-[15px] leading-none tracking-extra-tight text-gray-new-30 dark:text-gray-new-90 md:text-sm">
                     {author.name}
                   </span>
                 </div>
               )}
               <time
-                className="relative block shrink-0 pl-[11px] text-[15px] leading-none font-light tracking-extra-tight text-gray-new-50 uppercase before:absolute before:top-1/2 before:left-0 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 md:text-sm dark:text-gray-new-70 dark:before:bg-gray-new-30"
+                className="relative block shrink-0 pl-[11px] text-[15px] leading-none font-light tracking-extra-tight text-gray-new-50 uppercase before:absolute before:top-1/2 before:left-0 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 dark:text-gray-new-70 dark:before:bg-gray-new-30 md:text-sm"
                 dateTime={createdAt}
               >
                 {formattedDate}
