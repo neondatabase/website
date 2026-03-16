@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-02-06T22:07:32.886Z'
+updatedOn: '2026-03-13T18:10:11.934Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -47,7 +47,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 
 **Frictionless operations at scale**
 
-At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s architecture is built to address their different requirements directly.
+At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s lakebase architecture is built to address their different requirements directly.
 
 ### Operational efficiency
 

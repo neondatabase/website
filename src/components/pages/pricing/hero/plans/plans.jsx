@@ -144,7 +144,7 @@ const Plans = () => {
                     ) : (
                       <div className="flex flex-col gap-1.5 pb-px pt-3 md:pt-0">
                         {subtitle && (
-                          <p className="text-[15px] leading-snug -tracking-wide text-gray-new-60">
+                          <p className="text-[15px] leading-[1.7] -tracking-wide text-gray-new-60">
                             {subtitle}
                           </p>
                         )}

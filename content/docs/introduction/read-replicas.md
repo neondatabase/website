@@ -7,7 +7,7 @@ summary: >-
   read-only access to the same data as the primary compute without duplicating
   data, allowing for efficient scaling and resource management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.103Z'
+updatedOn: '2026-03-13T18:10:11.941Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
@@ -65,7 +65,7 @@ For more details and how to connect to a read replica, see [Create and manage Re
 
 ## Read Replica architecture
 
-The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
+The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [lakebase architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
 
 ![read replica computes](/docs/introduction/read_replicas.png)
 
