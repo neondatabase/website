@@ -354,12 +354,20 @@ Microfrontends share a page, each managing a feature within it. While this allow
 - Implement strategies for loading videos based on network conditions, especially for users with limited data plans.
 
 </Admonition>
-
 <Admonition type="note">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
 <Admonition type="tip">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
 <Admonition type="comingSoon">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
 <Admonition type="warning">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
 <Admonition type="important">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
+
+<Callout>
+
+When embedding videos from external platforms, consider the following best practices:
+
+- Size Optimization: Automatically serve correctly sized images for each device, using modern image formats like WebP and AVIF.
+- Implement strategies for loading videos based on network conditions, especially for users with limited data plans.
+
+</Callout>
 
 As databases grow into hundreds of gigabytes or terabytes, copying simply stops being viable. Teams either stop creating isolated environments, or they accept that non-production databases are no longer representative of reality.
 

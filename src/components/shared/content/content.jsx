@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
@@ -165,6 +166,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DefinitionList,
   FeatureList,
   Admonition,
+  Callout,
   CodeTabs,
   DetailIconCards,
   TechCards,
