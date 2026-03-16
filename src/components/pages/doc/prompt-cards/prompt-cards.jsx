@@ -2,7 +2,6 @@
 
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
@@ -10,6 +9,7 @@ import ICONS_CONFIG from 'config/docs-icons-config';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const CARDS_TO_SHOW = 12;
@@ -63,7 +63,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
           <span className="text-sm tracking-extra-tight">{isOpen ? 'Hide' : 'Show more'}</span>
           <span className="ml-1.5 flex h-auto w-3 shrink-0 items-center justify-center">
             <ChevronRight
-              className={clsx(
+              className={cn(
                 'block shrink-0 text-black-pure/50 transition-[transform,color] duration-200 dark:text-white/50',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}
@@ -106,7 +106,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
     <li className="m-0! before:hidden">
       <button
         type="button"
-        className={clsx(
+        className={cn(
           'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 py-2.5 transition-all duration-200',
           'border-gray-new-90 bg-[#E4F1EB]/40 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
           'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
@@ -119,7 +119,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
         <div className="relative z-10 flex min-w-0 flex-1 items-center gap-2.5">
           <div className="relative h-6 w-6 shrink-0">
             <img
-              className={clsx('h-full w-full object-contain', darkIconPath && 'dark:hidden')}
+              className={cn('h-full w-full object-contain', darkIconPath && 'dark:hidden')}
               src={lightIconPath}
               width={24}
               height={24}
@@ -144,7 +144,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
 
         {/* Copy indicator */}
         <div
-          className={clsx(
+          className={cn(
             'absolute top-1/2 right-2 -translate-y-1/2 text-gray-new-60 transition-opacity duration-200',
             isCopied ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'
           )}

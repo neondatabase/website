@@ -1,9 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const YoutubeIframe = ({ embedId, className, isDocPost = true }) => (
   <figure
-    className={clsx(
+    className={cn(
       'relative h-0 overflow-hidden pb-[56.25%]',
       className,
       isDocPost && 'not-prose my-8'

@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
@@ -21,6 +20,7 @@ import featuresScaleIcon from 'icons/landing/features/scalability.svg';
 import featuresStorageIcon from 'icons/landing/features/storage.svg';
 import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getWpPreviewPageData } from 'utils/api-pages';
+import { cn } from 'utils/cn';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -94,7 +94,7 @@ const WpPageDraft = async (props0) => {
 
         return (
           <SplitViewGrid
-            className={clsx(
+            className={cn(
               'mx-auto mt-16 max-w-[1265px]',
               isAzurePage ? 'mb-14' : 'mb-32',
               'lg:my-14'

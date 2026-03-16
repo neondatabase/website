@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 import IconCost from './images/icon-cost.inline.svg';
 import IconEasy from './images/icon-easy.inline.svg';
@@ -50,7 +49,7 @@ const Developers = () => (
           return (
             <li
               key={index}
-              className={clsx(
+              className={cn(
                 'relative flex flex-col',
                 {
                   'before:absolute before:top-0 before:-left-6 before:h-full before:w-px before:bg-gray-new-20 md:before:hidden':

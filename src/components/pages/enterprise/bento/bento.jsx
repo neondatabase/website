@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 const Bento = ({ cards }) => (
   <section className="bento mt-[202px] safe-paddings xl:mt-[160px] lg:mt-[128px] md:mt-[94px]">
@@ -17,7 +17,7 @@ const Bento = ({ cards }) => (
       <ul className="mx-auto mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-5 xl:mt-11 xl:grid-rows-[318px_318px] lg:mt-9 lg:grid-rows-[318px_318px_318px] sm:grid-cols-1 sm:grid-rows-[repeat(6,minmax(298px,1fr))] sm:gap-y-[18px]">
         {cards.map(({ title, description, image, imageLg, imageMd, className }, index) => (
           <li
-            className={clsx(
+            className={cn(
               className,
               'relative flex h-full flex-col overflow-hidden rounded-[14px] border border-[rgba(48,50,54,0.31)] bg-gray-new-10 p-6 xl:rounded-xl xl:p-5 sm:rounded-[11px] sm:pb-3'
             )}
@@ -27,7 +27,7 @@ const Bento = ({ cards }) => (
               <span className="font-medium text-white">{title}</span> {description}
             </p>
             <Image
-              className={clsx(
+              className={cn(
                 'absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-auto max-w-none min-w-full',
                 {
                   'lg:hidden': imageLg,
@@ -41,7 +41,7 @@ const Bento = ({ cards }) => (
               alt=""
             />
             <Image
-              className={clsx('absolute inset-0 z-10 hidden min-h-full max-w-none min-w-full', {
+              className={cn('absolute inset-0 z-10 hidden min-h-full max-w-none min-w-full', {
                 'lg:block': imageLg,
                 'sm:block': imageMd,
               })}

@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -8,6 +7,7 @@ import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
 import useWindowSize from 'hooks/use-window-size';
+import { cn } from 'utils/cn';
 
 const Tooltip = ({
   id = null,
@@ -27,7 +27,7 @@ const Tooltip = ({
   if (isTooltipVisible) {
     return createPortal(
       <ReactTooltip
-        className={clsx(
+        className={cn(
           'z-[9999] sm:max-w-[80vw]',
           'border! border-gray-new-30! bg-gray-new-8!',
           'px-4! py-3!',

@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 
 import { CodeTabsContext } from 'contexts/code-tabs-context';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const CodeTabs = ({ labels = [], reverse = false, children }) => {
@@ -32,7 +32,7 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
       <div className="relative mb-2.5 no-scrollbars flex w-full flex-nowrap gap-2 overflow-auto">
         {displayedLabels.map((label, index) => (
           <div
-            className={clsx(
+            className={cn(
               'relative z-10 cursor-pointer rounded-lg px-4 py-2.5 text-[13px] leading-none font-medium whitespace-nowrap transition-all duration-200',
               index === currentIndex
                 ? 'bg-black-new text-white shadow-md dark:bg-white dark:text-black-new'

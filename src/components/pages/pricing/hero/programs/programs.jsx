@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import bgPatternMob from './images/bg-pattern-mob.jpg';
 import bgPattern from './images/bg-pattern.jpg';
@@ -49,7 +49,7 @@ const Programs = () => (
       {PROGRAMS.map(({ type, title, description, url }, index) => (
         <div
           key={index}
-          className={clsx(
+          className={cn(
             'relative flex flex-col px-[18px] py-5',
             'border-r border-l border-gray-new-20',
             'first:border-l-0 first:pl-6 last:border-r-0 last:pr-6',
@@ -70,7 +70,7 @@ const Programs = () => (
             </p>
           </div>
           <Link
-            className={clsx(
+            className={cn(
               'mt-5 gap-2 text-base leading-none font-medium tracking-extra-tight',
               'text-gray-new-80 transition-colors hover:text-white',
               '[&_svg]:text-gray-new-60',

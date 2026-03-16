@@ -1,13 +1,14 @@
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const ANIMATION_DURATION = 0.2;
 
 const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
-      className={clsx('flex h-8 w-8 shrink', className)}
+      className={cn('flex h-8 w-8 shrink', className)}
       type="button"
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}

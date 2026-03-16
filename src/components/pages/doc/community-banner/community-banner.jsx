@@ -1,12 +1,12 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
+import { cn } from 'utils/cn';
 
 const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
   <section className="community-banner not-prose relative my-7">
     <div
-      className={clsx(
+      className={cn(
         'relative flex min-h-[194px] items-center overflow-hidden border px-8 pt-7 pb-7 sm:px-6 sm:pt-6 sm:pb-6',
         'border-gray-new-80 bg-[rgba(228,241,235,0.4)]',
         'dark:border-gray-new-30 dark:bg-gray-new-10'

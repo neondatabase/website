@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
@@ -7,6 +6,7 @@ import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import tableData from '../data/plans';
 
@@ -25,9 +25,9 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
   }
 
   return (
-    <div className={clsx('relative z-10 h-[125px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
+    <div className={cn('relative z-10 h-[125px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
       <h3
-        className={clsx(
+        className={cn(
           isFeaturedPlan && 'text-green-52',
           'text-2xl leading-snug font-normal tracking-tighter lg:text-xl'
         )}
@@ -39,7 +39,7 @@ const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan 
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
-        className={clsx(
+        className={cn(
           'mt-5 h-[38px] w-full text-[14px]! tracking-extra-tight xl:text-[14px]! md:h-8',
           isFeaturedPlan ? 'font-medium!' : 'font-normal!',
           !isFeaturedPlan && 'bg-opacity-80'
@@ -85,7 +85,7 @@ const Table = () => {
 
           return (
             <li
-              className={clsx('relative pt-6 xl:pt-4', {
+              className={cn('relative pt-6 xl:pt-4', {
                 'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:top-0 lg:left-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
                   isLabelsColumn,
                 'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
@@ -97,7 +97,7 @@ const Table = () => {
               key={key}
             >
               <TableHeading
-                className={clsx(i === 1 && 'lg:ml-5')}
+                className={cn(i === 1 && 'lg:ml-5')}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isHighlightedColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
@@ -108,7 +108,7 @@ const Table = () => {
                     const isGroupTitle = typeof item[key] === 'string';
                     return (
                       <li
-                        className={clsx(
+                        className={cn(
                           'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
                           index === 0 && 'border-t-0',
                           isGroupTitle
@@ -137,7 +137,7 @@ const Table = () => {
                             {item[key]?.subtitle &&
                               (typeof item[key].subtitle === 'string' ? (
                                 <span
-                                  className={clsx(
+                                  className={cn(
                                     'mt-1 text-sm leading-snug font-light tracking-extra-tight text-gray-new-50'
                                   )}
                                   dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
@@ -146,7 +146,7 @@ const Table = () => {
                                 <Link
                                   tabIndex={0}
                                   href={item[key].subtitle.href}
-                                  className={clsx(
+                                  className={cn(
                                     'z-10 mt-1 block w-fit border-b border-dashed border-white/40',
                                     'text-sm leading-snug font-light tracking-extra-tight text-gray-new-50',
                                     'transition-colors duration-200',
@@ -193,7 +193,7 @@ const Table = () => {
                     const isStringValue = typeof cellValue === 'string' && cellValue;
                     cell = (
                       <span
-                        className={clsx(
+                        className={cn(
                           'flex flex-col gap-y-1 leading-snug font-normal tracking-extra-tight text-gray-new-80',
                           '[&_span]:text-sm [&_span]:text-gray-new-50',
                           '[&_a]:w-fit [&_a]:transition-colors [&_a]:duration-200',
@@ -211,7 +211,7 @@ const Table = () => {
 
                   return (
                     <li
-                      className={clsx(
+                      className={cn(
                         'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
                         index === 0 && 'border-t-0',
                         rowsWithGroupTitles.includes(index)
@@ -224,7 +224,7 @@ const Table = () => {
                       key={index}
                     >
                       <div
-                        className={clsx(
+                        className={cn(
                           'max-w-[240px] xl:max-w-[200px] lg:max-w-[180px]',
                           i === 1 && 'lg:ml-5'
                         )}

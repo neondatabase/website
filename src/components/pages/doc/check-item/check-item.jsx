@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import slugify from 'slugify';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherProps }) => {
   const id = slugify(title, {
@@ -22,11 +22,11 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
   return (
     <li className="!m-0 before:hidden">
       <WrapperTag
-        className={clsx('relative block pl-[30px]', !href && 'cursor-pointer')}
+        className={cn('relative block pl-[30px]', !href && 'cursor-pointer')}
         htmlFor={!href ? id : null}
       >
         <input
-          className={clsx(
+          className={cn(
             'appearance-none remove-autocomplete-styles',
             !href ? 'pointer-events-none' : 'cursor-pointer',
             'absolute top-1 left-0 z-10 size-4 border border-gray-new-80 transition-colors duration-200 hover:bg-gray-new-95',
@@ -41,7 +41,7 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
           onChange={() => onToggle(id)}
         />
         <TitleTag
-          className={clsx(
+          className={cn(
             'm-0 w-fit cursor-pointer text-lg leading-tight font-normal tracking-normal',
             'text-black-pure dark:text-white',
             href &&

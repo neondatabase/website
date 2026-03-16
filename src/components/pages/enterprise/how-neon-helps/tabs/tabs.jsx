@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import React, { useState } from 'react';
 
 import infoIcon from 'icons/enterprise/info.svg';
 import lampIcon from 'icons/enterprise/lamp.svg';
+import { cn } from 'utils/cn';
 
 const variants = {
   open: {
@@ -39,7 +39,7 @@ const Tabs = ({ tabs }) => {
         {tabs.map(({ title }, index) => (
           <li key={index}>
             <button
-              className={clsx(
+              className={cn(
                 'w-full border-l-[3px] py-2.5 pl-3.5 text-left text-xl leading-snug font-medium tracking-tight text-gray-new-90 transition-all duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 lg:py-2 lg:text-lg',
                 index === activeTab
                   ? 'cursor-default border-primary-1 text-white'

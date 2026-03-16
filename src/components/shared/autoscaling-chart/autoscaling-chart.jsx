@@ -12,10 +12,11 @@ import {
   Filler,
   TimeScale,
 } from 'chart.js';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
+
+import { cn } from 'utils/cn';
 import 'chartjs-adapter-date-fns';
 
 import DATA from './data';
@@ -678,13 +679,13 @@ const AutoscalingChart = ({
   };
 
   return (
-    <div ref={containerRef} className={clsx('not-prose text-gray-200 w-full')}>
+    <div ref={containerRef} className={cn('not-prose text-gray-200 w-full')}>
       <div className="border border-gray-new-30 bg-gray-new-8">
-        <div className={clsx(compact ? 'p-6' : 'p-8')}>
+        <div className={cn(compact ? 'p-6' : 'p-8')}>
           {/* Header with controls */}
           <div className="mb-4 flex flex-col gap-3">
             <h1
-              className={clsx(
+              className={cn(
                 'text-center font-mono font-medium text-white',
                 compact ? 'text-base' : 'text-xl',
                 width === 'window' && !compact ? 'text-xl' : ''
@@ -709,7 +710,7 @@ const AutoscalingChart = ({
           </div>
 
           {/* Chart */}
-          <div className={clsx('bg-[#131415]', compact ? 'h-[250px] p-3' : 'h-[500px] p-5')}>
+          <div className={cn('bg-[#131415]', compact ? 'h-[250px] p-3' : 'h-[500px] p-5')}>
             <Line ref={chartRef} data={chartData} options={chartOptions} />
           </div>
         </div>
@@ -818,7 +819,7 @@ const AutoscalingChart = ({
                       Compute Winner
                     </div>
                     <div
-                      className={clsx(
+                      className={cn(
                         'font-bold',
                         stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       )}
@@ -826,7 +827,7 @@ const AutoscalingChart = ({
                       {stats.lessCompute}
                     </div>
                     <div
-                      className={clsx(
+                      className={cn(
                         'text-5xl font-bold tabular-nums',
                         stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       )}
@@ -844,7 +845,7 @@ const AutoscalingChart = ({
                       Cost Winner
                     </div>
                     <div
-                      className={clsx(
+                      className={cn(
                         'font-bold',
                         stats.cheaper === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       )}

@@ -1,9 +1,8 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 const Autoscaling = () => (
   <section className="autoscaling pt-40 safe-paddings xl:pt-[136px] lg:pt-[108px] md:pt-20">
@@ -13,7 +12,7 @@ const Autoscaling = () => (
           Thousands of connections and real-time autoscaling
         </h2>
         <p
-          className={clsx(
+          className={cn(
             'mt-1 max-w-md text-lg leading-snug font-light tracking-extra-tight text-gray-new-70 xl:font-normal xl:tracking-extra-tight lg:mt-0 lg:flex-1 lg:text-base sm:max-w-full',
             '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
           )}
@@ -45,7 +44,7 @@ const Autoscaling = () => (
           />
         </PauseableVideo>
         <p
-          className={clsx(
+          className={cn(
             'absolute bottom-0 left-0 z-10 max-w-[784px] p-6 font-light tracking-extra-tight text-pretty text-gray-new-80 lg:relative lg:max-w-[605px] md:p-5 sm:p-4 sm:text-sm',
             '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
           )}

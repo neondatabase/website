@@ -1,7 +1,6 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
 import RiveAnimation from 'components/shared/rive-animation';
+import { cn } from 'utils/cn';
 
 import Heading from '../heading';
 
@@ -15,7 +14,7 @@ const Checkpoints = () => (
     </Container>
     <div className="border-t border-b border-gray-new-20">
       <RiveAnimation
-        className={clsx(
+        className={cn(
           'pointer-events-none relative mx-auto aspect-[1920/500] w-full max-w-[1920px]',
           'lg:left-1/2 lg:w-[140vw] lg:-translate-x-1/2 md:w-[204vw]',
           '[&_canvas]:h-full! [&_canvas]:w-full!'

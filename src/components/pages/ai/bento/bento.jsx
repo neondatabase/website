@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
@@ -68,9 +67,7 @@ const Bento = () => (
       <ul className="mt-14 flex flex-wrap gap-5 lg:mt-12 lg:gap-4 md:mt-8 md:flex-col md:items-center">
         {ITEMS.map(({ title, description, image, imageMobile }, index) => (
           <li
-            className={clsx(
-              'relative h-[384px] rounded-[14px] bg-[#0A0A0A] lg:h-[308px] md:h-[324px] md:w-80'
-            )}
+            className="relative h-[384px] rounded-[14px] bg-[#0A0A0A] lg:h-[308px] md:h-[324px] md:w-80"
             key={title}
           >
             <div className="absolute inset-x-0 bottom-0 z-10 p-6 pr-8 text-lg leading-snug tracking-extra-tight lg:p-5 lg:text-base">

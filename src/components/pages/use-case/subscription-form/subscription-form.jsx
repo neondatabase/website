@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -11,6 +10,7 @@ import BgDecor from 'components/pages/use-case/bg-decor';
 import { HUBSPOT_USE_CASES_FORM_ID } from 'constants/forms';
 import ErrorIcon from 'icons/error.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
+import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 import blueGlow from './images/blue-glow.svg';
@@ -102,7 +102,7 @@ const SubscriptionForm = ({ title, description }) => {
 
   return (
     <figure
-      className={clsx(
+      className={cn(
         'not-prose relative mt-12 flex w-full flex-col rounded-[10px] bg-gray-new-8',
         'bg-[linear-gradient(127deg,#0F0F10_0%,#070708_81.66%)] p-8 xl:mt-10 lg:mt-8 sm:mt-6 sm:p-6'
       )}
@@ -116,7 +116,7 @@ const SubscriptionForm = ({ title, description }) => {
         </p>
         <form className="relative mt-[18px] w-full" id="content-form" onSubmit={handleSubmit}>
           <input
-            className={clsx(
+            className={cn(
               'h-12 w-full rounded-full remove-autocomplete-styles-apply-form',
               'bg-[linear-gradient(95deg,rgba(37,47,62,0.00)_75.17%,#252F3E_110.82%),rgba(24,25,27,0.80)]',
               'px-4 py-2.5 text-gray-new-70 placeholder:text-gray-new-40 focus:outline-hidden'
@@ -132,7 +132,7 @@ const SubscriptionForm = ({ title, description }) => {
             <AnimatePresence>
               {(formState === STATES.DEFAULT || formState === STATES.ERROR) && (
                 <m.button
-                  className={clsx(
+                  className={cn(
                     'absolute top-1 right-1 h-10 rounded-full bg-primary-1 px-[26px] leading-none font-semibold tracking-tighter text-black',
                     'hover:bg-[#00e5bf] sm:flex sm:w-10 sm:items-center sm:justify-center sm:px-0'
                   )}
@@ -147,7 +147,7 @@ const SubscriptionForm = ({ title, description }) => {
               )}
               {formState === STATES.LOADING && (
                 <m.div
-                  className={clsx(
+                  className={cn(
                     'absolute top-1/2 right-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-green-45'
                   )}
                   initial="initial"
@@ -192,7 +192,7 @@ const SubscriptionForm = ({ title, description }) => {
           </LazyMotion>
           {formState === STATES.ERROR && errorMessage && (
             <span
-              className={clsx(
+              className={cn(
                 'absolute top-full z-50 flex h-[42px] translate-y-3 items-center gap-x-2 rounded-md',
                 'border border-secondary-1/30 bg-[#21191d] px-3 text-sm leading-tight text-[#FF4B7A]',
                 'before:absolute before:-top-1.5 before:left-[22px] before:h-[11px] before:w-[11px] before:rotate-45',

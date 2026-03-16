@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import DotsPattern from 'images/dots-pattern.inline.svg';
+import { cn } from 'utils/cn';
 
 import ApiDrivenIcon from './icons/api-driven.inline.svg';
 import AutomationIcon from './icons/automation.inline.svg';
@@ -70,7 +70,7 @@ const UseCaseCard = ({
 
   return (
     <article
-      className={clsx(
+      className={cn(
         'relative flex h-[403px] overflow-hidden border border-gray-new-30 bg-black-pure',
         'lg:h-[349px]',
         'md:h-[600px] md:flex-col',
@@ -116,7 +116,7 @@ const UseCaseCard = ({
           {/* Learn more link */}
           {link && (
             <Link
-              className={clsx(
+              className={cn(
                 'flex w-fit items-center gap-2 text-base leading-none font-medium tracking-extra-tight lg:text-[0.9375rem]',
                 '[&>svg]:text-gray-new-70! [&>svg]:transition-all!',
                 'hover:text-white! [&:hover>svg]:text-white!'
@@ -219,7 +219,7 @@ UseCaseCard.propTypes = {
 
 const UseCaseCards = ({ className, items }) => (
   <section
-    className={clsx('use-case-cards pt-24 safe-paddings xl:pt-[88px] lg:pt-20 md:pt-16', className)}
+    className={cn('use-case-cards pt-24 safe-paddings xl:pt-[88px] lg:pt-20 md:pt-16', className)}
   >
     <Container className="flex flex-col gap-11 xl:gap-10 lg:gap-8" size="960">
       {items.map((item, index) => (

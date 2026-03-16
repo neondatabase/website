@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 const Section = ({ className, title, description, children }) => (
-  <section className={clsx('mt-[104px] xl:mt-20 lg:mt-16', className)}>
+  <section className={cn('mt-[104px] xl:mt-20 lg:mt-16', className)}>
     <Container size="768" className="lg:max-w-3xl!">
       <h2 className="text-4xl leading-dense font-medium tracking-tighter xl:text-[36px] lg:text-[32px] md:text-[28px]">
         {title}

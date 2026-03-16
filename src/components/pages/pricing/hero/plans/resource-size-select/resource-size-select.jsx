@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 export const LAUNCH_RESOURCE_SIZES = [
   { id: 'small', cu: 140, storage: 1 },
@@ -74,7 +74,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
             {getLoadType(selectedOption.cu)}, {selectedOption.storage} GB
           </span>
           <ChevronIcon
-            className={clsx(
+            className={cn(
               'size-[15px] shrink-0 text-white opacity-60 transition-transform duration-200',
               isOpen && 'rotate-180'
             )}

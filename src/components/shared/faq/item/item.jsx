@@ -1,10 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import useLocation from 'react-use/lib/useLocation';
+
+import { cn } from 'utils/cn';
 
 const variantsAnimation = {
   open: {
@@ -67,7 +68,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
           {question}
         </h3>
         <span
-          className={clsx(
+          className={cn(
             'mt-2.5 mr-2.5 h-2 w-2 shrink-0 transform border-t border-l border-gray-new-80 transition duration-300',
             isOpen ? 'rotate-[405deg]' : 'rotate-[225deg]'
           )}
@@ -86,7 +87,7 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
           }}
         >
           <div
-            className={clsx(
+            className={cn(
               'with-list-style pt-4 pr-[52px]',
               'text-[16px] leading-normal font-normal tracking-extra-tight text-gray-new-60',
               'xl:pr-[52px] lg:pt-5 lg:pr-[50px] lg:leading-snug md:pt-3 md:pr-0 md:text-[15px]',

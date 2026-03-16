@@ -1,7 +1,6 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,6 +14,7 @@ import Link from 'components/shared/link/link';
 import { FORM_STATES } from 'constants/forms';
 import LINKS from 'constants/links';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
+import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
 
 import ErrorMessage from './error-message';
@@ -173,7 +173,7 @@ const Form = ({
           <div className="relative z-20">
             <Field
               labelClassName="hidden"
-              inputClassName={clsx(
+              inputClassName={cn(
                 'bg-black-pure! remove-autocomplete-styles m-0! h-16 w-full appearance-none rounded-[50px] border-[1px]! bg-black-new pl-7 pr-48 text-base text-white placeholder:tracking-tight placeholder:text-gray-new-50 focus:outline-hidden disabled:opacity-100 md:h-14 md:pl-6 md:pr-16 md:placeholder:text-sm',
                 state === FORM_STATES.ERROR ? 'border-secondary-1!' : 'border-green-45!',
                 state === FORM_STATES.SUCCESS ? 'pr-14! text-green-45' : 'text-white'
@@ -205,13 +205,13 @@ const Form = ({
     <>
       <form className="relative w-full" method="POST" onSubmit={handleSubmit(onSubmit)}>
         <div
-          className={clsx(
+          className={cn(
             'relative z-20 rounded-[10px]',
             greenMode && 'bg-[linear-gradient(155deg,#00E59980,#00E5990D_50%,#00E59980_100%)] p-px'
           )}
         >
           <div
-            className={clsx(
+            className={cn(
               isAzurePage ? 'p-8 lg:p-6' : 'bg-black-new p-9 sm:px-5 sm:py-6',
               'rounded-[10px]'
             )}
@@ -226,7 +226,7 @@ const Form = ({
                 fieldGroups.map((fieldGroup, index) => (
                   <fieldset
                     key={index}
-                    className={clsx(
+                    className={cn(
                       fieldGroup.fields.length > 1 && 'flex gap-[30px] sm:flex-col sm:gap-6'
                     )}
                   >

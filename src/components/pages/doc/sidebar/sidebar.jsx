@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
+import { cn } from 'utils/cn';
 
 import Menu from '../menu';
 
@@ -70,10 +70,10 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   ) : null;
 
   return (
-    <aside className={clsx('relative -mt-11', className)}>
+    <aside className={cn('relative -mt-11', className)}>
       <div className="sticky top-28">
         <div
-          className={clsx(
+          className={cn(
             'relative',
             'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
             'after:bg-linear-to-b after:from-white after:to-transparent dark:after:from-black-pure dark:after:to-transparent'

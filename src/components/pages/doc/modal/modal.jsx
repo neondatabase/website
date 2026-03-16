@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
@@ -10,6 +9,7 @@ import useLocalStorage from 'hooks/use-local-storage';
 import CloseIcon from 'icons/close-small.inline.svg';
 // import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import SupportIcon from 'icons/docs/modal/support.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const icons = {
@@ -37,7 +37,7 @@ const Modal = ({ id, title, description, link }) => {
       <AnimatePresence>
         {isMounted && !isClosed && (
           <m.div
-            className={clsx(
+            className={cn(
               'fixed right-4 bottom-4 z-[100] flex w-80 flex-col rounded-lg border p-5 pt-[18px] xs:inset-x-3 xs:bottom-3 xs:w-auto',
               'border-gray-new-90 bg-gray-new-98 bg-[radial-gradient(73%_69%_at_100%_100%,rgba(217,238,242,0.5),rgba(217,238,242,0.1))]',
               'shadow-[0px_4px_10px_0px_rgba(0,0,0,.08),0px_4px_30px_0px_rgba(0,0,0,.06)]',

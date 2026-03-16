@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -13,6 +12,7 @@ import dbLoadLegendIcon from 'icons/home/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home/autoscaling/legend/resource.svg';
 import avoidImageMd from 'images/pages/home/autoscaling/avoid-illustration-md.png';
 import saveCostsImageMd from 'images/pages/home/autoscaling/save-costs-md.png';
+import { cn } from 'utils/cn';
 
 import Heading from '../heading';
 
@@ -74,7 +74,7 @@ const Autoscaling = () => {
           <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
             {TABS.map((item, index) => (
               <button
-                className={clsx(
+                className={cn(
                   'relative h-11 min-w-[134px] px-4 py-3 whitespace-nowrap transition-colors duration-200',
                   'leading-none font-medium tracking-extra-tight',
                   'border border-gray-new-10 even:border-l-0',
@@ -94,7 +94,7 @@ const Autoscaling = () => {
           </div>
 
           <div
-            className={clsx(
+            className={cn(
               'relative z-10 mt-6 w-max max-w-none overflow-hidden',
               '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
               'xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 lg:mt-5'
@@ -111,14 +111,14 @@ const Autoscaling = () => {
             </div>
             <div className="hidden justify-center md:flex">
               <Image
-                className={clsx('h-0 w-[768px] max-w-none', activeItem === 0 && 'h-auto!')}
+                className={cn('h-0 w-[768px] max-w-none', activeItem === 0 && 'h-auto!')}
                 src={avoidImageMd}
                 width={768}
                 height={560}
                 alt=""
               />
               <Image
-                className={clsx(
+                className={cn(
                   'h-0 w-[768px] max-w-none border-t border-gray-new-10',
                   activeItem === 1 && 'h-auto!'
                 )}

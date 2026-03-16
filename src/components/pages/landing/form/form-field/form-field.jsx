@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Field from 'components/shared/field';
 import { FORM_STATES } from 'constants/forms';
+import { cn } from 'utils/cn';
 
 const labelClassName = 'mb-0 block w-fit text-sm text-gray-new-70';
 const inputClassName =
@@ -44,12 +44,12 @@ const Input = ({
     name={name}
     label={`${label}${required ? ' *' : ''}`}
     labelClassName={labelClassName}
-    inputClassName={clsx(
+    inputClassName={cn(
       'mt-0!',
       inputClassName,
       errors[name]?.type === 'domain-not-blacklisted' && 'sm:mb-8'
     )}
-    wrapperClassName={clsx(
+    wrapperClassName={cn(
       'mt-2',
       isAzurePage && index === 0 && 'bg-azure-form-input-1',
       isAzurePage && index === 1 && 'bg-azure-form-input-2',
@@ -94,9 +94,9 @@ SelectBox.propTypes = fieldPropTypes;
 
 const CheckBox = ({ name, label, required, formState, errors, register, options }) => (
   <div className="relative">
-    <p className={clsx('leading-none', labelClassName)}>{`${label}${required ? ' *' : ''}`}</p>
+    <p className={cn('leading-none', labelClassName)}>{`${label}${required ? ' *' : ''}`}</p>
     <div
-      className={clsx(
+      className={cn(
         'mt-2.5 rounded border bg-white/[0.04] px-4 py-2 transition-colors duration-200',
         errors[name]?.message ? 'border-secondary-1!' : 'border-transparent'
       )}
@@ -118,7 +118,7 @@ const CheckBox = ({ name, label, required, formState, errors, register, options 
     </div>
     {errors[name]?.message && (
       <p
-        className={clsx(
+        className={cn(
           'absolute top-[calc(100%+0.5rem)] right-0 z-10 max-w-[350px] text-sm leading-none text-secondary-1 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:no-underline',
           errorClassName
         )}

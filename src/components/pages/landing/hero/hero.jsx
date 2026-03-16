@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 import Form from '../form';
 
@@ -42,10 +42,10 @@ const Hero = ({
   const hasDetails = detailsTitle && detailsDescription;
 
   return (
-    <section className={clsx('overflow-hidden safe-paddings', themes[theme].className)}>
+    <section className={cn('overflow-hidden safe-paddings', themes[theme].className)}>
       <Container className="flex flex-col items-center" size="medium">
         <h1
-          className={clsx(
+          className={cn(
             'text-center font-title leading-none font-medium tracking-extra-tight',
             themes[theme].titleClassName
           )}
@@ -71,14 +71,14 @@ const Hero = ({
         ) : (
           (formData || hasDetails) && (
             <div
-              className={clsx(
+              className={cn(
                 'flex w-full justify-center lg:items-center',
                 hasDetails
                   ? 'my-[120px] gap-[86px] xl:gap-10 lg:mx-auto lg:my-20 lg:flex-col sm:my-14'
                   : 'my-[88px] lg:my-16 sm:my-14'
               )}
             >
-              <div className={clsx('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
+              <div className={cn('max-w-[630px]', hasDetails ? 'w-1/2 lg:w-full' : 'w-full')}>
                 {formData && (
                   <Form
                     title={formTitle}

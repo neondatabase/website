@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
@@ -6,6 +5,7 @@ import LINKS from 'constants/links';
 import DiscordIcon from 'icons/chat-options/discord.inline.svg';
 import GitHubIcon from 'icons/chat-options/github.inline.svg';
 import VSCodeIcon from 'icons/chat-options/vscode.inline.svg';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -55,15 +55,15 @@ const ChatOptions = ({ isSidebar = false }) => {
           const Icon = icon;
 
           return (
-            <li className={clsx('m-0! before:hidden', className)} key={link}>
+            <li className={cn('m-0! before:hidden', className)} key={link}>
               <Link
-                className={clsx('group', classNames.item)}
+                className={cn('group', classNames.item)}
                 to={link}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
               >
                 <div
-                  className={clsx(
+                  className={cn(
                     'flex size-10 shrink-0 items-center justify-center rounded-lg border',
                     'transition-colors duration-200',
                     'border-gray-new-90 text-gray-new-50 group-hover:border-gray-new-80 group-hover:bg-gray-new-98',

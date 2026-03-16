@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 import highlight from 'lib/shiki';
+import { cn } from 'utils/cn';
 
 import CodeBlockWrapper from '../code-block-wrapper';
 
@@ -41,7 +41,7 @@ const CodeBlock = async ({
 
   return (
     <CodeBlockWrapper
-      className={clsx(
+      className={cn(
         'rounded-none border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-gray-new-98! [&>pre]:py-4 [&>pre]:dark:bg-transparent!',
         className,
         { 'code-wrap': meta?.includes('shouldWrap') }

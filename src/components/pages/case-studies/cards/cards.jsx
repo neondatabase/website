@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 import { useState, useMemo, useEffect, useCallback } from 'react';
@@ -8,6 +7,7 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import SearchIcon from 'icons/search.inline.svg';
+import { cn } from 'utils/cn';
 import getLinkProps from 'utils/get-link-props';
 
 const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
@@ -16,16 +16,11 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   return (
     <li className="-mt-px -ml-px h-[170px]">
       <Link
-        className={clsx(
-          'group relative block h-full border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
-        )}
+        className="group relative block h-full border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8"
         {...linkProps}
       >
         <div
-          className={clsx(
-            'relative z-10 flex size-full flex-col',
-            'items-center justify-center p-6'
-          )}
+          className={cn('relative z-10 flex size-full flex-col', 'items-center justify-center p-6')}
         >
           <Image
             className="h-8 w-fit"
@@ -172,7 +167,7 @@ const Cards = ({ items, categories }) => {
                   <Link
                     key={slug}
                     href={`#${slug}`}
-                    className={clsx(
+                    className={cn(
                       'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white lg:shrink-0 lg:border-b-2 lg:py-[3px] lg:whitespace-nowrap',
                       isActive
                         ? 'text-white lg:border-green-45'

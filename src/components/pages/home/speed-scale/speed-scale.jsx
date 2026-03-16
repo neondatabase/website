@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 import Checkpoints from './checkpoints';
 import Features from './features';
@@ -9,7 +8,7 @@ import StatusLine from './status-line';
 
 const SpeedScale = () => (
   <section
-    className={clsx(
+    className={cn(
       'speed-scale relative overflow-hidden border-t border-gray-new-40 safe-paddings pb-[120px]',
       'xl:pb-[136px] lg:pb-20 md:pb-[52px]'
     )}
@@ -23,7 +22,7 @@ const SpeedScale = () => (
       <Checkpoints />
     </div>
     <span
-      className={clsx(
+      className={cn(
         'pointer-events-none absolute -top-[130px] left-1/2 -z-10 aspect-[1.3] w-[1200px] -translate-x-[30%] rounded-[100%] opacity-15',
         'bg-[url("/images/pages/home/speed-scale/noise.png")] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_20%,transparent)]',
         'xl:-top-20 xl:left-2/3 xl:w-[1000px] xl:opacity-10 lg:hidden'

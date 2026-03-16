@@ -1,7 +1,6 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -14,6 +13,7 @@ import Link from 'components/shared/link';
 import { FORM_STATES } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
+import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -127,7 +127,7 @@ const ContactForm = () => {
 
   return (
     <form
-      className={clsx(
+      className={cn(
         'relative z-10 grid scroll-mt-10 gap-y-6 p-8',
         'rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg shadow-contact',
         'xl:p-6 lg:gap-y-5 md:gap-y-6'
@@ -198,7 +198,7 @@ const ContactForm = () => {
 
       <div className="relative">
         <Button
-          className={clsx(
+          className={cn(
             'mt-1 h-[46px] w-full font-semibold lg:h-10 sm:mt-0',
             formState === FORM_STATES.ERROR && 'pointer-events-none bg-secondary-1/50!'
           )}

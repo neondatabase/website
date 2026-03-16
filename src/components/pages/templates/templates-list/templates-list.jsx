@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const TemplatesList = ({ className, templates }) => (
-  <ul className={clsx('divide-y divide-gray-new-80/80 dark:divide-gray-new-15/80', className)}>
+  <ul className={cn('divide-y divide-gray-new-80/80 dark:divide-gray-new-15/80', className)}>
     {templates.map(({ name, description, slug, gitHubUrl }) => (
       <li className="pt-6 pb-6 first:pt-0 last:pb-0" key={gitHubUrl}>
         <Link

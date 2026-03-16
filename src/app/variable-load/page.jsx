@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import slugify from 'slugify';
 
 import Efficiency from 'components/pages/variable/efficiency';
@@ -11,6 +10,7 @@ import Layout from 'components/shared/layout';
 import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
 import SEO_DATA from 'constants/seo-data';
+import { cn } from 'utils/cn';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.variable);
@@ -48,7 +48,7 @@ const VariableLoadPage = async () => {
           </div>
           <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px] xl:hidden">
             <div
-              className={clsx(
+              className={cn(
                 'sticky top-[104px]',
                 'before:absolute before:-inset-5 before:-z-10 before:rounded-xl before:bg-black-pure/50 before:backdrop-blur'
               )}

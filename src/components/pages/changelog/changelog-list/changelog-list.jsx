@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import ScrollLoader from 'components/shared/scroll-loader';
 import ChevronIcon from 'icons/arrow-label.inline.svg';
+import { cn } from 'utils/cn';
 import generateChangelogPath from 'utils/generate-changelog-path';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -16,7 +16,7 @@ const ChangelogPost = (post) => {
   return (
     <article className="group flex first:mt-0 lg:flex-col lg:space-y-3">
       <div
-        className={clsx(
+        className={cn(
           'relative w-full pt-10 pb-24',
           'before:absolute before:top-0 before:right-0 before:-left-40 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
           'group-last:pb-0 dark:before:bg-gray-new-20',
@@ -47,12 +47,12 @@ const ChangelogPost = (post) => {
 };
 
 const ChangelogList = ({ className, posts }) => (
-  <div className={clsx('changelog-list sm:space-y-7', className)}>
+  <div className={cn('changelog-list sm:space-y-7', className)}>
     {posts.slice(0, 3).map((item) => (
       <ChangelogPost key={item.slug} {...item} />
     ))}
     {posts.length > 3 && (
-      <ScrollLoader className={clsx('sm:space-y-7', className)} itemsCount={3}>
+      <ScrollLoader className={cn('sm:space-y-7', className)} itemsCount={3}>
         {posts.slice(3).map((item) => (
           <ChangelogPost key={item.slug} {...item} />
         ))}

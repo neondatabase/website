@@ -1,14 +1,14 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import { LogosWall } from 'components/shared/logos';
+import { cn } from 'utils/cn';
 
 const LogosSection = ({ logos, logosTitle = 'Powered by Neon.', containerClassName }) => {
   if (!logos) return null;
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'mx-auto flex max-w-3xl items-center gap-4 md:flex-col md:gap-6',
         containerClassName
       )}

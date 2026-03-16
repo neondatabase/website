@@ -1,13 +1,13 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
   <figure
-    className={clsx(
+    className={cn(
       'not-prose relative mt-7 w-full',
       !simpleMode && [
         'rounded-lg bg-[#0D0E10] p-14 pr-11 pb-8',
@@ -20,7 +20,7 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
   >
     <div className="relative z-10">
       <blockquote
-        className={clsx(
+        className={cn(
           simpleMode ? 'text-2xl md:text-lg' : 'text-lg',
           'leading-snug tracking-tighter'
         )}

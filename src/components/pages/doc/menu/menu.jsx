@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from './icon';
 import Item from './item';
@@ -59,7 +59,7 @@ const Menu = ({
     {customType && (
       <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
         <Link
-          className={clsx(
+          className={cn(
             'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
             'text-gray-new-60 hover:text-black-new dark:hover:text-white'
           )}

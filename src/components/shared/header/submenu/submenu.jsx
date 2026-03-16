@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
+import { cn } from 'utils/cn';
 
 import MenuBanner from '../menu-banner';
 
@@ -17,7 +17,7 @@ const Submenu = ({
   handleSubmenuLeave,
 }) => (
   <div
-    className={clsx(
+    className={cn(
       'main-navigation-submenu absolute top-full left-0 z-40 -mt-px w-full overflow-hidden',
       'border-b border-gray-new-20 bg-black-pure',
       'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
@@ -38,7 +38,7 @@ const Submenu = ({
 
         return (
           <div
-            className={clsx(
+            className={cn(
               'absolute top-0 left-0 w-full',
               'transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
               isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'

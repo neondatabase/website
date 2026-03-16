@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { cn } from 'utils/cn';
 
 import AnimatedPosition from './animated-position';
 import AnimatedText from './animated-text';
@@ -107,7 +108,7 @@ const Quotes = () => {
             <AnimatePresence>
               {isActive && (
                 <m.figure
-                  className={clsx(
+                  className={cn(
                     'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
                     'font-mono tracking-extra-tight',
                     !isActive && 'pointer-events-none'

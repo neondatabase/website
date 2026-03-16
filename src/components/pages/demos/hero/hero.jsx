@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
+import { cn } from 'utils/cn';
 
 import databaseCopyIllustration from './images/database-copy.jpg';
 import provisioningIllustration from './images/provisioning.jpg';
@@ -57,7 +57,7 @@ const Hero = () => (
           <ul className="mt-6 grid grid-cols-10 grid-rows-2 gap-x-10 gap-y-7 lg:grid-cols-2 md:grid-cols-1">
             {items.map(({ image, imageWidth, imageHeight, title, demoLink, sourceLink }, index) => (
               <li
-                className={clsx(
+                className={cn(
                   index === 0
                     ? 'col-span-6 row-span-full lg:col-span-2'
                     : 'col-span-4 lg:col-span-1',
@@ -80,7 +80,7 @@ const Hero = () => (
                   priority
                 />
                 <h3
-                  className={clsx(
+                  className={cn(
                     'font-medium',
                     index === 0
                       ? 'mt-9 max-w-[630px] text-[28px] leading-dense tracking-tighter xl:text-2xl'

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Button from 'components/shared/button';
@@ -9,6 +8,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
+import { cn } from 'utils/cn';
 
 const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
 
@@ -51,7 +51,7 @@ const Hero = () => (
           webm: ffmpeg -i hero.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an hero.webm
       */}
       <PauseableVideo
-        className={clsx(
+        className={cn(
           'relative left-1/2 w-[1920px] -translate-x-1/2',
           'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
         )}

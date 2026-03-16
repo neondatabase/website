@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import TagCloud from 'components/pages/use-case/tag-cloud';
@@ -20,6 +19,7 @@ import paySm from 'images/pages/serverless-apps/features/pay-sm.jpg';
 import pay from 'images/pages/serverless-apps/features/pay.jpg';
 import provisioning from 'images/pages/serverless-apps/features/provisioning.jpg';
 import separation from 'images/pages/serverless-apps/features/separation.jpg';
+import { cn } from 'utils/cn';
 
 const items = [
   {
@@ -136,7 +136,7 @@ const Features = () => (
           >
             <div className="relative overflow-hidden rounded-[10px] lg:rounded-lg">
               <Image
-                className={clsx('rounded-[inherit]', imageSm && 'lg:hidden')}
+                className={cn('rounded-[inherit]', imageSm && 'lg:hidden')}
                 src={image.src}
                 width="448"
                 height={image.height}
@@ -145,7 +145,7 @@ const Features = () => (
               />
               {imageSm && (
                 <Image
-                  className={clsx('hidden rounded-[inherit] lg:block')}
+                  className={cn('hidden rounded-[inherit] lg:block')}
                   src={imageSm.src}
                   width="448"
                   height={imageSm.height}
@@ -160,12 +160,12 @@ const Features = () => (
               )}
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20/30" />
             </div>
-            <div className={clsx('relative', index % 2 === 1 && '-order-1 md:order-none')}>
+            <div className={cn('relative', index % 2 === 1 && '-order-1 md:order-none')}>
               <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-lg">
                 {title}
               </h3>
               <p
-                className={clsx(
+                className={cn(
                   'mt-2 text-lg leading-snug font-light tracking-extra-tight text-gray-new-70 lg:text-base',
                   '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
                 )}

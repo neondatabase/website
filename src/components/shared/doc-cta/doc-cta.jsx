@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import patternImage from 'images/pages/docs/cta/pattern.png';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import Button from '../button';
@@ -42,7 +42,7 @@ const CodeCommandBlock = ({ command, trackingLabel = null, className = '' }) => 
   return (
     <button
       type="button"
-      className={clsx(
+      className={cn(
         'group relative mt-4 w-full bg-gray-new-15 text-left text-white transition-colors duration-200 hover:bg-gray-new-30 dark:bg-[#E4F1EB] dark:text-gray-new-8 dark:hover:bg-white [&>pre]:!bg-transparent [&>pre]:p-3',
         className
       )}
@@ -83,7 +83,7 @@ const DocCta = ({
   isTemplate = false,
 }) => (
   <figure
-    className={clsx(
+    className={cn(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
       'my-9 p-5 md:my-8',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
@@ -96,7 +96,7 @@ const DocCta = ({
           {ELLIPSES.map((ellipseClassName, i) => (
             <div
               key={i}
-              className={clsx('absolute rounded-full mix-blend-color-dodge', ellipseClassName)}
+              className={cn('absolute rounded-full mix-blend-color-dodge', ellipseClassName)}
             />
           ))}
         </div>
@@ -111,7 +111,7 @@ const DocCta = ({
     />
 
     <div
-      className={clsx(
+      className={cn(
         'relative z-10 flex gap-5',
         secondaryButtonText ? 'flex-col' : 'flex-row justify-between'
       )}
@@ -121,7 +121,7 @@ const DocCta = ({
           {title}
         </div>
         <p
-          className={clsx(
+          className={cn(
             'mt-2.5! mb-0! text-base! tracking-extra-tight! text-gray-new-20/90! dark:text-gray-new-85/90!',
             '[&_a]:inline-flex [&_a]:items-center [&_a]:font-medium [&_a]:text-black-pure [&_a]:no-underline',
             'duration-200 ease-in-out [&_svg]:shrink-0 [&_svg]:text-gray-new-30 [&_svg]:transition-transform',

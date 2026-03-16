@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import Button from 'components/shared/button';
@@ -8,6 +7,7 @@ import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 import Submenu from '../submenu';
 
@@ -243,7 +243,7 @@ const Navigation = () => {
               onMouseLeave={() => handleMenuLeave(hasSubmenu)}
             >
               <Button
-                className={clsx(
+                className={cn(
                   'group/main-nav-trigger relative flex items-center gap-x-1 rounded-sm px-3.5 text-[15px] leading-normal! font-normal tracking-snug whitespace-pre transition-colors duration-200 group-hover/main-nav:text-gray-new-70 hover:text-white! xl:px-2.5',
                   {
                     '-ml-3.5 xl:-ml-2.5': index === 0,
@@ -268,7 +268,7 @@ const Navigation = () => {
                 {text}
                 {hasSubmenu && (
                   <ChevronIcon
-                    className={clsx(
+                    className={cn(
                       'text-gray-new-70 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-white',
                       { 'text-white': isActive }
                     )}

@@ -1,16 +1,16 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Link from 'components/shared/link';
 import links from 'constants/links';
 import ArrowTopRightIcon from 'icons/arrow-right.inline.svg';
+import { cn } from 'utils/cn';
 
 import bannerImage from './image/banner-pattern.svg';
 import noiseBackground from './image/noise-background.svg';
 
 const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
   <Link
-    className={clsx(
+    className={cn(
       'group relative flex h-[340px] w-[320px] items-end! overflow-hidden border border-gray-new-10 bg-black-pure p-6 lg:w-auto md:h-[240px] md:w-[320px]',
       className
     )}

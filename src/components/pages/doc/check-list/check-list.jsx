@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import slugify from 'slugify';
 
 import useLocalStorage from 'hooks/use-local-storage';
+import { cn } from 'utils/cn';
 
 const CheckList = ({ title, children }) => {
   const id =
@@ -56,7 +56,7 @@ const CheckList = ({ title, children }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'checklist doc-cta mt-9! flex flex-col px-8 pt-6 pb-8',
         'border border-gray-new-80',
         'dark:border-gray-new-20',
@@ -70,7 +70,7 @@ const CheckList = ({ title, children }) => {
           </h2>
         )}
         <span
-          className={clsx(
+          className={cn(
             'border px-2.5 py-1.5 font-mono text-sm leading-none font-medium lg:mt-0',
             progress === 100
               ? 'border-secondary-8/20 bg-secondary-8/10 text-secondary-8 dark:border-green-45/20 dark:bg-green-45/10 dark:text-green-45'

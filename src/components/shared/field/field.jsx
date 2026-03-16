@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 
 import warningIcon from 'icons/input-warning.svg';
+import { cn } from 'utils/cn';
 
 export const FIELD_TAGS = {
   INPUT: 'input',
@@ -53,9 +53,9 @@ const Field = forwardRef(
     },
     ref
   ) => (
-    <div className={clsx('relative flex flex-col items-start', className)}>
+    <div className={cn('relative flex flex-col items-start', className)}>
       <label
-        className={clsx(
+        className={cn(
           'leading-none text-gray-new-80',
           theme === 'checkbox' && 'w-fit cursor-pointer pl-7',
           isDisabled && 'cursor-default!',
@@ -65,9 +65,9 @@ const Field = forwardRef(
       >
         {label}
       </label>
-      <div className={clsx('w-full rounded', wrapperClassName)}>
+      <div className={cn('w-full rounded', wrapperClassName)}>
         <Tag
-          className={clsx(
+          className={cn(
             baseStyles,
             themes[theme],
             {
@@ -98,7 +98,7 @@ const Field = forwardRef(
       </div>
 
       {error && (
-        <div className={clsx(errorThemes[errorTheme], errorClassName)}>
+        <div className={cn(errorThemes[errorTheme], errorClassName)}>
           {errorTheme === 'tooltip' && (
             <>
               <span className="absolute top-0 left-2.5 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-t border-l border-[#FF3621]/50 bg-[linear-gradient(135deg,#000_0%,#000_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />

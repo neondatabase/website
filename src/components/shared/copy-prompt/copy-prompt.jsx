@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Button from 'components/shared/button';
 import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const DEFAULT_DISPLAY_TEXT = 'Use this pre-built prompt to get started faster.';
@@ -31,7 +31,7 @@ const CopyPrompt = (props) => {
 
   return (
     <figure
-      className={clsx(
+      className={cn(
         'not-prose my-5 flex items-center gap-x-6 rounded-[10px] px-7 py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-5',
         'border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)]',
         'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]'

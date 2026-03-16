@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
@@ -8,6 +7,7 @@ import React, { forwardRef } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -77,7 +77,7 @@ const Link = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       size && theme && styles.base,
       styles.size[size],
       styles.theme[theme],
@@ -103,7 +103,7 @@ const Link = forwardRef(
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
           <ArrowRightIcon
-            className={clsx(
+            className={cn(
               '-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]',
               arrowClassName
             )}

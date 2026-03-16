@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -8,12 +7,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Link from 'components/shared/link';
 import ChevronRight from 'icons/chevron-right.inline.svg';
+import { cn } from 'utils/cn';
 
 import 'swiper/css';
 
 const Button = ({ prev = false, disabled, handleClick }) => (
   <button
-    className={clsx(
+    className={cn(
       'group relative flex size-8 items-center justify-center rounded-full bg-gray-new-20 text-gray-new-60 transition-colors duration-200 hover:bg-gray-new-30 md:size-7',
       disabled && 'pointer-events-none opacity-50'
     )}
@@ -23,7 +23,7 @@ const Button = ({ prev = false, disabled, handleClick }) => (
   >
     <span className="sr-only">{prev ? 'prev slide' : 'next slide'}</span>
     <ChevronRight
-      className={clsx('w-2.5 text-inherit md:w-2', prev ? '-ml-0.5 rotate-180' : 'ml-0.5')}
+      className={cn('w-2.5 text-inherit md:w-2', prev ? '-ml-0.5 rotate-180' : 'ml-0.5')}
     />
   </button>
 );
@@ -69,9 +69,7 @@ const Slider = ({ articles }) => {
           Keep reading
         </h2>
         <div
-          className={clsx(
-            articles.length < 2 ? 'hidden' : articles.length < 4 && 'hidden md:block'
-          )}
+          className={cn(articles.length < 2 ? 'hidden' : articles.length < 4 && 'hidden md:block')}
         >
           <div className="flex gap-3">
             <Button handleClick={handlePrevClick} disabled={isBeginning} prev />
@@ -129,7 +127,7 @@ const Slider = ({ articles }) => {
                   rel={url ? 'noopener noreferrer' : undefined}
                 >
                   <h3
-                    className={clsx(
+                    className={cn(
                       'text-lg leading-tight font-medium tracking-extra-tight text-white',
                       'transition-colors duration-200 group-hover:text-green-45'
                     )}

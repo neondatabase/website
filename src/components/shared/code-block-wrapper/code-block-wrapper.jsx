@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
@@ -62,7 +62,7 @@ const CodeBlockWrapper = ({
 
   return (
     <Tag
-      className={clsx(
+      className={cn(
         'code-block group/code-block relative flex flex-col [&_pre]:min-w-full',
         filename && 'overflow-hidden',
         className
@@ -78,7 +78,7 @@ const CodeBlockWrapper = ({
       {children}
 
       <button
-        className={clsx(
+        className={cn(
           'invisible absolute right-4 border border-gray-7 bg-white p-1.5 text-gray-new-50 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover/code-block:visible group-hover/code-block:opacity-100 hover:bg-gray-new-90 dark:border-[#303236] dark:bg-gray-new-10 dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
           copyButtonTopClassName,
           copyButtonClassName

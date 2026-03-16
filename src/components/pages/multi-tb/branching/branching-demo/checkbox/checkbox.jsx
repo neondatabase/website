@@ -1,6 +1,7 @@
-import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { cn } from 'utils/cn';
 
 const CustomCheckbox = ({ checked, onChange, id, label, tabIndex, disabled }) => (
   <>
@@ -15,7 +16,7 @@ const CustomCheckbox = ({ checked, onChange, id, label, tabIndex, disabled }) =>
       onChange={onChange}
     />
     <div
-      className={clsx(
+      className={cn(
         'flex size-3 items-center justify-center rounded-full lg:size-[9px]',
         'border border-white mix-blend-overlay transition-colors',
         'peer-checked:border-0 peer-checked:bg-white peer-checked:mix-blend-normal',

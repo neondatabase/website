@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useRef, useState, useMemo } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -94,7 +94,7 @@ const AnimatedButton = ({
     setCursorAnimationVariant('default');
   };
 
-  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+  const className = cn(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
   const cssProperties = {
     '--color': animationColor,
@@ -107,7 +107,7 @@ const AnimatedButton = ({
 
   return isAnimated ? (
     <Tag
-      className={clsx('animated-button', className)}
+      className={cn('animated-button', className)}
       style={cssProperties}
       to={to}
       ref={buttonRef}

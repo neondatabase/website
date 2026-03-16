@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -6,6 +5,7 @@ import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import GradientLabel from '../gradient-label';
 
@@ -26,7 +26,7 @@ const CTAWithElephant = ({
   linkTarget = undefined,
 }) => (
   <section
-    className={clsx('cta-with-elephant overflow-hidden bg-black-pure safe-paddings', className)}
+    className={cn('cta-with-elephant overflow-hidden bg-black-pure safe-paddings', className)}
   >
     <Container
       size="medium"
@@ -39,7 +39,7 @@ const CTAWithElephant = ({
           </GradientLabel>
         )}
         <Heading
-          className={clsx(
+          className={cn(
             'max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto',
             titleClassName
           )}
@@ -54,7 +54,7 @@ const CTAWithElephant = ({
         </p>
         <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
-            className={clsx(
+            className={cn(
               'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:py-[17px] lg:text-base sm:text-lg',
               buttonClassName
             )}

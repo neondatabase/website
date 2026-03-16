@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { cn } from 'utils/cn';
 
 const Steps = ({ children }) => {
   // Split content into steps by h2 headings
@@ -37,10 +38,10 @@ const Steps = ({ children }) => {
     >
       {steps.map((step, index) => (
         <li
-          className={clsx(
+          className={cn(
             'numbered-step relative mt-8! mb-0! flex w-full items-start gap-4 pl-0!',
             'before:flex before:size-7 before:items-center before:justify-center before:rounded-full before:bg-gray-new-20 before:text-center before:font-mono before:text-sm before:leading-snug before:font-medium before:tracking-tight before:text-white before:content-[counter(section)] before:[counter-increment:section]',
-            'after:absolute after:top-8 after:-bottom-7 after:left-[.8125rem] after:w-px after:bg-gray-new-90 after:dark:bg-gray-new-80',
+            'after:absolute after:top-8 after:-bottom-7 after:left-[.8125rem] after:w-px after:bg-gray-new-90 dark:after:bg-gray-new-80',
             'first:mt-0! last:after:bottom-0',
             'dark:before:bg-gray-new-90 dark:before:text-black-pure dark:after:bg-gray-new-30',
             '[&_h2]:text-2xl [&_ol]:list-decimal!'

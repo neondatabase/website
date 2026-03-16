@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import he from 'he';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -6,6 +5,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link/link';
 import { BLOG_CATEGORY_BASE_PATH, EXTRA_CATEGORIES } from 'constants/blog';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -58,7 +58,7 @@ const BlogPostCard = ({
 
   return (
     <article
-      className={clsx(
+      className={cn(
         'blog-post-card flex',
         fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
@@ -68,7 +68,7 @@ const BlogPostCard = ({
     >
       {largeCover && (
         <Link
-          className={clsx(
+          className={cn(
             'group overflow-hidden bg-[#181818]',
             isSmart ? 'shrink-0' : 'aspect-[40/21] w-full',
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
@@ -76,7 +76,7 @@ const BlogPostCard = ({
           to={link}
         >
           <Image
-            className={clsx(
+            className={cn(
               'transition-transform duration-200',
               !isSmart && 'size-full',
               fullSize ? 'object-contain' : !isSmart && 'object-cover',
@@ -93,7 +93,7 @@ const BlogPostCard = ({
         </Link>
       )}
       <div
-        className={clsx(
+        className={cn(
           'flex min-w-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
@@ -103,7 +103,7 @@ const BlogPostCard = ({
         )}
       >
         <div
-          className={clsx(
+          className={cn(
             'mb-8 flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
             isSmart && 'mt-auto mb-0!'
           )}
@@ -111,10 +111,7 @@ const BlogPostCard = ({
           {/* category */}
           {cat && (
             <Link
-              className={clsx(
-                'font-medium uppercase',
-                isFeatured ? 'text-green-45' : 'text-blue-70'
-              )}
+              className={cn('font-medium uppercase', isFeatured ? 'text-green-45' : 'text-blue-70')}
               to={cat.slug}
             >
               {cat.name}
@@ -123,7 +120,7 @@ const BlogPostCard = ({
 
           {/* date */}
           <time
-            className={clsx(
+            className={cn(
               'relative block shrink-0 leading-none tracking-extra-tight text-gray-new-50 uppercase',
               cat &&
                 'pl-4 before:absolute before:top-1/3 before:left-[3px] before:inline-block before:size-[3px] before:rounded-full before:bg-gray-new-30'
@@ -133,10 +130,10 @@ const BlogPostCard = ({
             {formattedDate}
           </time>
         </div>
-        <Link className={clsx('group flex flex-col', isSmart ? 'mt-0' : 'mt-auto')} to={link}>
+        <Link className={cn('group flex flex-col', isSmart ? 'mt-0' : 'mt-auto')} to={link}>
           {/* title */}
           <h1
-            className={clsx(
+            className={cn(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
                 ? 'line-clamp-3 text-2xl leading-tight md:text-[20px] sm:text-lg'
@@ -148,7 +145,7 @@ const BlogPostCard = ({
           {/* excerpt */}
           {excerpt && (
             <div
-              className={clsx(
+              className={cn(
                 'mt-2 leading-snug font-light tracking-extra-tight text-gray-new-70 lg:text-base md:text-base sm:text-[15px]',
                 largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}

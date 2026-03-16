@@ -1,9 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const UseCaseList = ({ theme, children }) => (
   <div
-    className={clsx(
+    className={cn(
       '[&_ul]:pl-[34px]!',
       '[&_li]:before:top-[3px]! [&_li]:before:-left-7! [&_li]:before:size-4!',
       '[&_li]:before:bg-transparent!',

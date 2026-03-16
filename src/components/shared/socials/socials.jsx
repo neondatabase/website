@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
@@ -6,6 +5,7 @@ import DiscordIcon from 'icons/discord-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
 import YouTubeIcon from 'icons/youtube-sm.inline.svg';
+import { cn } from 'utils/cn';
 
 const socialLinks = [
   {
@@ -37,7 +37,7 @@ const Socials = ({ withTitle = true }) => (
         Follow us
       </span>
     )}
-    <ul className={clsx('flex flex-wrap gap-4', withTitle && 'mt-3')}>
+    <ul className={cn('flex flex-wrap gap-4', withTitle && 'mt-3')}>
       {socialLinks.map(({ name, url, icon: Icon }, index) => (
         <li className="flex items-center" key={index}>
           <a

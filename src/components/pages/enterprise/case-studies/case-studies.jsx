@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -7,6 +6,7 @@ import Container from 'components/shared/container/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import arrowRightIcon from 'icons/enterprise/arrow-right.svg';
+import { cn } from 'utils/cn';
 
 import linesMd from './images/lines-md.svg';
 import lines from './images/lines.svg';
@@ -59,7 +59,7 @@ const CaseStudies = ({ items }) => (
                 </p>
                 <div className="relative flex items-center gap-x-2.5 md:mt-4">
                   <Image
-                    className={clsx(
+                    className={cn(
                       'pointer-events-none h-6 w-fit shrink-0 transition-opacity duration-300 lg:h-5 md:h-[18px]',
                       'opacity-80 group-hover:opacity-100'
                     )}
@@ -69,7 +69,7 @@ const CaseStudies = ({ items }) => (
                     alt=""
                   />
                   <Image
-                    className={clsx(
+                    className={cn(
                       'pointer-events-none -mb-px shrink-0 transition-opacity duration-300 md:w-2.5',
                       'opacity-0 group-hover:opacity-100'
                     )}
@@ -81,7 +81,7 @@ const CaseStudies = ({ items }) => (
                 </div>
               </div>
               <span
-                className={clsx(
+                className={cn(
                   'pointer-events-none absolute inset-px',
                   'opacity-0 transition-opacity duration-300 group-hover:opacity-100',
                   {

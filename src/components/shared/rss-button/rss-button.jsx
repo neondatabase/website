@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
 
 import RSSLogo from 'icons/rss.inline.svg';
+import { cn } from 'utils/cn';
 
 const sizes = {
   md: 'size-5',
@@ -10,7 +10,7 @@ const sizes = {
 
 const RssButton = ({ className, basePath, title, size = 'md' }) => (
   <a
-    className={clsx(
+    className={cn(
       'text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-white',
       className
     )}

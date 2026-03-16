@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { m, AnimatePresence, LazyMotion, domAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -12,6 +11,7 @@ import useLocalStorage from 'hooks/use-local-storage';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import ErrorIcon from 'icons/subscription-form-error.inline.svg';
 import SendIcon from 'icons/subscription-form-send.inline.svg';
+import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
 
 const appearAndExitAnimationVariants = {
@@ -115,7 +115,7 @@ const SubscriptionForm = ({
 
   return (
     <form
-      className={clsx(
+      className={cn(
         'relative ml-[14px] before:absolute before:h-full before:w-full before:rounded-full before:bg-secondary-2 2xl:ml-2.5 xl:ml-2 xl:before:-bottom-2 xl:before:-left-2 lg:mx-auto lg:max-w-[584px] md:before:w-[calc(100%+8px)]',
         className,
         sizeClassNames[size].form
@@ -126,7 +126,7 @@ const SubscriptionForm = ({
       <LazyMotion features={domAnimation}>
         {/* Input */}
         <input
-          className={clsx(
+          className={cn(
             'relative block w-full rounded-full border-black bg-white pr-[218px] leading-none font-semibold text-black placeholder-black outline-hidden transition-colors duration-200 remove-autocomplete-styles lg:w-full lg:pl-5 md:pr-20',
             errorMessage && 'border-secondary-1',
             sizeClassNames[size].input
@@ -166,7 +166,7 @@ const SubscriptionForm = ({
               variants={appearAndExitAnimationVariants}
             >
               <Button
-                className={clsx(
+                className={cn(
                   'absolute top-1/2 -translate-y-1/2 md:h-14 md:w-14 md:rounded-full md:p-0',
                   sizeClassNames[size].button
                 )}
@@ -186,7 +186,7 @@ const SubscriptionForm = ({
         <AnimatePresence>
           {formState === 'loading' && (
             <m.div
-              className={clsx(
+              className={cn(
                 'absolute top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-black',
                 sizeClassNames[size].loading
               )}
@@ -228,7 +228,7 @@ const SubscriptionForm = ({
         <AnimatePresence>
           {(formState === 'success' || formState === 'error') && (
             <m.div
-              className={clsx('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
+              className={cn('absolute top-1/2 -translate-y-1/2', sizeClassNames[size].success)}
               initial="initial"
               animate="animate"
               exit="exit"
@@ -237,12 +237,12 @@ const SubscriptionForm = ({
             >
               {formState === 'success' && (
                 <CheckIcon
-                  className={clsx(sizeClassNames[size].stateIcon)}
+                  className={cn(sizeClassNames[size].stateIcon)}
                   data-test="success-message"
                 />
               )}
               {formState === 'error' && (
-                <ErrorIcon className={clsx(sizeClassNames[size].stateIcon)} />
+                <ErrorIcon className={cn(sizeClassNames[size].stateIcon)} />
               )}
             </m.div>
           )}

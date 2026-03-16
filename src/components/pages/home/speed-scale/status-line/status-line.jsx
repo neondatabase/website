@@ -1,10 +1,10 @@
 'use client';
 
-import cn from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 import { getNeonStatus, NEON_STATUS } from 'utils/get-neon-status';
 
 const LinesPattern = ({ size, className }) => (

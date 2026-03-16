@@ -1,8 +1,7 @@
-import clsx from 'clsx';
-
 import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
+import { cn } from 'utils/cn';
 
 const CARDS = [
   {
@@ -50,7 +49,7 @@ const Info = () => (
       <ul className="grid grid-cols-2 gap-5 lg:gap-6 md:gap-5 sm:grid-cols-1">
         {CARDS.map(({ title, description, features, button, isWide, className }, index) => (
           <li
-            className={clsx(
+            className={cn(
               'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5',
               isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
               className

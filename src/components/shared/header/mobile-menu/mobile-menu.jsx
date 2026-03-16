@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
@@ -13,6 +12,7 @@ import MENUS from 'constants/menus';
 import { TopbarContext } from 'contexts/topbar-context';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down-thin.inline.svg';
+import { cn } from 'utils/cn';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
@@ -33,7 +33,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
 
   return (
     <li
-      className={clsx(
+      className={cn(
         'shrink-0 overflow-hidden border-b border-gray-new-94 last:border-b-0 dark:border-gray-new-20',
         { 'pb-14 sm:pb-10': isMenuItemOpen }
       )}
@@ -143,7 +143,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
       {isMobileMenuOpen && (
         <nav className="fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings dark:bg-black-pure lg:flex">
           <div
-            className={clsx('relative h-full pt-14 pb-[101px] sm:pb-[125px]', {
+            className={cn('relative h-full pt-14 pb-[101px] sm:pb-[125px]', {
               'pt-[96px]': hasTopbar,
               'pb-[148px] sm:pb-[172px]': isDocPage,
             })}
@@ -154,7 +154,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
               ))}
             </ul>
             <div
-              className={clsx(
+              className={cn(
                 'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
                 { 'pb-20 sm:pb-[68px]': isDocPage }
               )}

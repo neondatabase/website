@@ -1,15 +1,15 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import { FORM_STATES } from 'constants/forms';
 import CheckIcon from 'icons/check.inline.svg';
+import { cn } from 'utils/cn';
 
 const FormFooter = ({ formState, successMessage, items, isAzurePage = false }) => {
   if (!(formState === FORM_STATES.SUCCESS || items?.length > 0)) return null;
 
   return (
     <div
-      className={clsx(
+      className={cn(
         isAzurePage ? 'absolute inset-x-0 top-full pt-5' : 'relative z-20 mt-10 sm:px-4'
       )}
     >

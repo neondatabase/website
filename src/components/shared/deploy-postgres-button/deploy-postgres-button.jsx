@@ -1,10 +1,10 @@
 'use client';
 
-import { clsx } from 'clsx';
 import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const DEPLOY_POSTGRES_API = '/api/deploy-postgres';
@@ -176,7 +176,7 @@ const DeployPostgresButton = () => {
             <div className="border-opacity-[0.05] z-20 flex h-9 gap-x-3.5 rounded-[10px] bg-[#0c0d0d] pt-2.5 pl-[18px] tracking-extra-tight xl:rounded-lg xl:pl-4 lg:gap-x-3 md:gap-x-2.5 md:pl-[14px]">
               <span className="absolute top-1/2 left-0 h-[450px] w-px -translate-y-1/2" />
               <span
-                className={clsx(
+                className={cn(
                   'relative mt-1.5 h-1.5 w-1.5 rounded-full shadow-[0px_0px_9px_0px_#4BFFC3] transition-[background-color,box-shadow] duration-300 xl:h-[5px] xl:w-[5px]',
                   formState.hasCreatedProject && 'bg-[#00E599]'
                 )}

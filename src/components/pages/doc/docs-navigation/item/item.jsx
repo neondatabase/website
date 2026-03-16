@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from '../../menu/icon';
 
@@ -33,7 +33,7 @@ const SubItem = ({ icon, title, slug, basePath }) => {
 
   return (
     <Link
-      className={clsx(
+      className={cn(
         'flex items-center gap-2 rounded-sm leading-none tracking-tight transition-colors duration-200',
         'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
       )}
@@ -77,9 +77,9 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
   const isLastActive = isActive && activeItems.at(-1) === slug;
 
   return (
-    <li className={clsx('relative hover:z-10', subnav && 'group')}>
+    <li className={cn('relative hover:z-10', subnav && 'group')}>
       <LinkTag
-        className={clsx(
+        className={cn(
           'relative flex h-full items-center gap-1',
           'rounded-sm text-sm leading-snug tracking-extra-tight whitespace-nowrap',
           'transition-colors duration-200',
@@ -95,7 +95,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
         {title}
         {subnav && (
           <ChevronIcon
-            className={clsx(
+            className={cn(
               'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white',
               isLastActive ? 'text-black-new dark:text-white' : 'text-gray-new-50'
             )}
@@ -104,7 +104,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       </LinkTag>
       {subnav && (
         <div
-          className={clsx(
+          className={cn(
             'absolute top-[90%] -left-5 z-10',
             'pointer-events-none opacity-0',
             'origin-top-left [transform:rotateX(-12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
@@ -113,14 +113,14 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
           )}
         >
           <ul
-            className={clsx(
+            className={cn(
               'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
               'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]',
               'dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
           >
             {subnav.map((item, index) => (
-              <li className={clsx(item.section && 'mt-2 first:mt-0')} key={index}>
+              <li className={cn(item.section && 'mt-2 first:mt-0')} key={index}>
                 {item.section ? (
                   <>
                     <span className="mb-3.5 block text-xs leading-none tracking-tight text-gray-new-50 uppercase">

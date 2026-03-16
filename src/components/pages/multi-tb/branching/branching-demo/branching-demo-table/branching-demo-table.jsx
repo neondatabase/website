@@ -1,8 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { cn } from 'utils/cn';
 
 import Checkbox from '../checkbox';
 
@@ -72,7 +73,7 @@ const BranchingDemoTable = ({
             </div>
             {TABLE_COLUMNS.map((column) => (
               <div
-                className={clsx(
+                className={cn(
                   column.id === 'id' && 'w-[52px] lg:mr-[29px] lg:w-[43px]',
                   column.id === 'singer' && 'w-[100px] lg:mr-[29px] lg:w-[75px]',
                   column.id === 'song' ? 'mr-0 flex-1' : 'mr-10 lg:mr-7'
@@ -87,7 +88,7 @@ const BranchingDemoTable = ({
             {tableRows.map((row) => (
               <li
                 key={row.id}
-                className={clsx(
+                className={cn(
                   'group relative flex h-full px-3 py-[13px] lg:px-2 lg:pt-2.5 lg:pb-[9px]',
                   'before:pointer-events-none before:absolute before:inset-0 before:mix-blend-overlay before:last:rounded-b-[10px]',
                   'after:pointer-events-none after:absolute after:inset-0 after:-bottom-px after:mx-3 after:border-b after:border-white after:mix-blend-overlay after:last:hidden',
@@ -128,7 +129,7 @@ const BranchingDemoTable = ({
                 )}
                 {TABLE_COLUMNS.map((column) => (
                   <div
-                    className={clsx(
+                    className={cn(
                       getColumnWidth(column.id, isLoading),
                       column.id === 'id' ? 'mr-10 font-medium lg:mr-[29px]' : 'font-normal',
                       column.id === 'song' ? 'text-gray-new-80' : 'text-white'

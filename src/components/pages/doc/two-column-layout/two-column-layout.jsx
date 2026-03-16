@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
+import { cn } from 'utils/cn';
 
 const TwoColumnLayout = ({ children }) => (
   <ol
@@ -21,7 +21,7 @@ TwoColumnLayout.propTypes = {
 
 const TwoColumnStep = ({ title, children }) => (
   <li
-    className={clsx(
+    className={cn(
       'two-column-step relative mt-12! mb-0! flex gap-4 pl-0!',
       'after:absolute after:top-8 after:-bottom-11 after:left-[.8125rem] after:w-px after:bg-gray-new-80',
       'first:mt-7! last:after:bottom-0',
@@ -30,7 +30,7 @@ const TwoColumnStep = ({ title, children }) => (
   >
     {/* Step number badge */}
     <div
-      className={clsx(
+      className={cn(
         'flex size-7 shrink-0 items-center justify-center rounded-full bg-gray-new-20 font-mono font-medium tracking-extra-tight text-white',
         'text-sm leading-none tracking-extra-tight text-gray-new-40',
         'before:content-[counter(section)] before:[counter-increment:section]',

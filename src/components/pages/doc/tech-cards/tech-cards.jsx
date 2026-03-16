@@ -1,13 +1,13 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import TechCardsWrapper from './tech-cards-wrapper';
@@ -27,7 +27,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
       return (
         <li className="m-0! before:hidden">
           <NextLink
-            className={clsx(
+            className={cn(
               'relative flex h-full flex-col justify-between overflow-hidden rounded-[10px] border border-gray-new-90 px-6 py-5 transition-colors duration-200',
               'before:absolute before:inset-px before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA_0%,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
               'hover:border-gray-new-80 hover:before:opacity-100',
@@ -41,7 +41,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
           >
             <div className="relative z-10">
               <img
-                className={clsx('h-9 w-auto shrink-0', darkIconPath && 'dark:hidden')}
+                className={cn('h-9 w-auto shrink-0', darkIconPath && 'dark:hidden')}
                 src={lightIconPath}
                 width={36}
                 height={36}

@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import everythingMobile from './images/everything-mobile.jpg';
 import everything from './images/everything.jpg';
@@ -80,7 +80,7 @@ const Usage = () => (
               />
             </div>
             <div
-              className={clsx(
+              className={cn(
                 'relative shrink-0 overflow-hidden rounded-[14px] md:-order-1',
                 index % 2 === 0 && '-order-1'
               )}

@@ -1,10 +1,10 @@
 'use client';
 
 import { useThrottleCallback } from '@react-hook/throttle';
-import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const SECTIONS = [
   { id: 'ai', title: 'AI', theme: 'dark' },
@@ -69,7 +69,7 @@ const Toc = () => {
           return (
             <li key={section.id}>
               <Link
-                className={clsx(
+                className={cn(
                   'relative flex items-center gap-x-2.5 rounded-sm py-1.5 pl-[18px] whitespace-nowrap',
                   'text-[15px] leading-none tracking-tight transition-colors duration-200',
                   'before:absolute before:top-1/2 before:left-0 before:-translate-y-1/2',

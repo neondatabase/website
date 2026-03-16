@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
+import { cn } from 'utils/cn';
 
 import Calculator from './calculator';
 import leftGlowMobile from './images/left-glow-mobile.png';
@@ -90,7 +90,7 @@ const ComputeCalculator = ({
   textSize = 'lg',
 }) => (
   <div
-    className={clsx(
+    className={cn(
       'not-prose relative w-full overflow-hidden rounded-lg bg-[#0D0E10] px-8 py-6 sm:p-6',
       className
     )}
@@ -100,7 +100,7 @@ const ComputeCalculator = ({
         Example deployment in RDS
       </h3>
       <ul
-        className={clsx(
+        className={cn(
           'space-y-2 pl-0! tracking-extra-tight sm:text-sm sm:leading-snug',
           textSize === 'lg' ? 'text-lg' : 'text-base'
         )}

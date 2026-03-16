@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import ArrowIcon from './images/arrow.inline.svg';
 
@@ -19,7 +19,7 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
   return (
     <Link
       to={linkUrl}
-      className={clsx(
+      className={cn(
         'group flex w-1/2 min-w-0 flex-col gap-3 sm:w-full',
         isNext ? 'ml-auto items-end' : 'items-start sm:hidden'
       )}
@@ -30,7 +30,7 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
         {showLabel && (link.index || (isNext ? 'Next' : 'Previous'))}{' '}
       </span>
       <span
-        className={clsx(
+        className={cn(
           'w-full min-w-0 overflow-hidden text-sm leading-snug font-medium tracking-extra-tight text-ellipsis whitespace-nowrap text-green-44 transition-colors duration-200 group-hover:text-green-52 dark:text-green-44 dark:group-hover:text-green-52',
           isNext && 'text-right',
           '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:leading-none [&_code]:font-normal dark:[&_code]:bg-gray-new-15'
@@ -46,7 +46,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
   return (
     <Link
       to={linkUrl}
-      className={clsx(
+      className={cn(
         'group flex w-1/2 max-w-[336px] min-w-0 items-center justify-between gap-6 border border-gray-new-20 py-4 pr-4 pl-5 lg:max-w-full sm:w-full sm:max-w-full sm:pr-5',
         isNext
           ? 'ml-auto flex-row items-end pr-4 sm:pr-5'
@@ -56,7 +56,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
       tagText={`${isNext ? 'Next' : 'Previous'}: ${link.title}`}
     >
       <span
-        className={clsx(
+        className={cn(
           'flex max-w-[260px] min-w-0 flex-col',
           isNext ? 'items-start text-left' : 'items-end text-end'
         )}
@@ -65,7 +65,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
           {showLabel && (isNext ? 'Next' : 'Previous')}
         </span>
         <span
-          className={clsx(
+          className={cn(
             'w-full min-w-0 overflow-hidden text-base leading-normal font-normal text-ellipsis whitespace-nowrap transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1',
             isNext ? 'text-right' : 'text-left',
             '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:leading-none [&_code]:font-normal dark:[&_code]:bg-gray-new-15'
@@ -74,7 +74,7 @@ const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = t
         />
       </span>
       <ArrowIcon
-        className={clsx('shrink-0 text-gray-new-60', !isNext && 'rotate-180', isNext && 'order-1')}
+        className={cn('shrink-0 text-gray-new-60', !isNext && 'rotate-180', isNext && 'order-1')}
         width={16}
         height={16}
         aria-hidden="true"
@@ -122,7 +122,7 @@ const NavigationLinks = ({
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex w-full border-t border-gray-new-80 dark:border-gray-new-20',
         branchingVariant ? 'gap-8 md:gap-6' : 'gap-10 pt-6 md:gap-6',
         className

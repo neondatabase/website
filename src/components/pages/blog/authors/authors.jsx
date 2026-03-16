@@ -1,17 +1,18 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const Authors = ({ authors, isPriority = false, className }) => {
   const isMultipleAuthors = authors.length > 1;
 
   return (
-    <div className={clsx('flex items-center gap-2', className)}>
+    <div className={cn('flex items-center gap-2', className)}>
       {authors.map(
         ({ name, photo }, index) =>
           photo && (
             <Image
-              className={clsx(
+              className={cn(
                 'shrink-0 rounded-full',
                 index > 0 && '-ml-4',
                 isMultipleAuthors && 'outline outline-1 outline-black-pure'

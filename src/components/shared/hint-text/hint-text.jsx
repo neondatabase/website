@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/shared/tooltip';
+import { cn } from 'utils/cn';
 
 const HintText = ({
   className,
@@ -21,7 +21,7 @@ const HintText = ({
         if (index !== 1) return part;
         return (
           <strong
-            className={clsx(
+            className={cn(
               'relative border-b border-dashed pb-px font-medium',
               !greenHighlight && 'text-white before:border-gray-new-90',
               greenHighlight && 'text-green-45 before:border-green-45'

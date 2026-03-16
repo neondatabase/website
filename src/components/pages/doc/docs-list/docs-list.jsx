@@ -1,17 +1,17 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import DocsLink from 'components/pages/doc/docs-link';
+import { cn } from 'utils/cn';
 
 import CheckIcon from './images/check.inline.svg';
 import GitHubIcon from './images/github.inline.svg';
 import PageIcon from './images/page.inline.svg';
 
 const Icon = ({ theme = 'default', className = null }) => {
-  if (theme === 'docs') return <PageIcon className={clsx('top-1', className)} aria-hidden />;
-  if (theme === 'repo') return <GitHubIcon className={clsx('top-1', className)} aria-hidden />;
-  return <CheckIcon className={clsx('top-[5px]', className)} aria-hidden />;
+  if (theme === 'docs') return <PageIcon className={cn('top-1', className)} aria-hidden />;
+  if (theme === 'repo') return <GitHubIcon className={cn('top-1', className)} aria-hidden />;
+  return <CheckIcon className={cn('top-[5px]', className)} aria-hidden />;
 };
 
 Icon.propTypes = {
@@ -37,7 +37,7 @@ const DocsList = ({ title, theme = 'default', children }) => (
     <ul className="m-0! flex flex-col gap-y-2 p-0!">
       {parsedChildren(children).map((child) => (
         <li
-          className={clsx(
+          className={cn(
             'group m-0! flex w-fit items-start gap-1.5 text-gray-new-30 before:hidden dark:text-gray-new-85',
             '[&_p]:my-0 [&_p]:pl-5 [&_p]:text-sm [&_p]:tracking-extra-tight',
             '[&_a]:pl-5 [&_a]:text-sm [&_a]:tracking-extra-tight [&_a]:text-gray-new-30 [&_a]:no-underline! [&_a]:decoration-transparent [&_a]:dark:text-gray-new-85',

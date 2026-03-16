@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -7,6 +6,7 @@ import ChangelogForm from 'components/shared/changelog-form';
 import Link from 'components/shared/link';
 import TableOfContents from 'components/shared/table-of-contents';
 import { GUIDES_BASE_PATH } from 'constants/guides';
+import { cn } from 'utils/cn';
 
 const Aside = ({
   isTemplate,
@@ -20,7 +20,7 @@ const Aside = ({
   const authorPagePath = author ? `${GUIDES_BASE_PATH}authors/${author.slug}` : null;
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative -ml-6 w-full max-w-[312px] xl:hidden',
         isTemplate
           ? 'col-span-2 col-start-11 mt-4 min-w-64 justify-self-end 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto'

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -7,6 +6,7 @@ import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import iconCursor from 'icons/ai/features-cards/cursor.svg';
 import iconMCPServer from 'icons/ai/features-cards/mcp-server.svg';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -38,20 +38,20 @@ const FeaturesCards = ({
   ulClassName,
 }) => (
   <section
-    className={clsx(
+    className={cn(
       'features relative mt-[200px] overflow-hidden safe-paddings xl:mt-[194px] lg:mt-[161px] md:mt-[104px]',
       className
     )}
   >
     <Container className="relative z-10 md:max-w-sm md:px-5" size="960">
       <header
-        className={clsx(
+        className={cn(
           'mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]',
           headerClassName
         )}
       >
         <h2
-          className={clsx(
+          className={cn(
             'font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
             titleClassName
           )}
@@ -59,7 +59,7 @@ const FeaturesCards = ({
           {title}
         </h2>
         <p
-          className={clsx(
+          className={cn(
             'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3 lg:text-base md:text-pretty',
             descriptionClassName
           )}
@@ -68,10 +68,7 @@ const FeaturesCards = ({
         </p>
       </header>
       <ul
-        className={clsx(
-          'mt-11 grid grid-cols-2 gap-5 lg:mt-10 md:grid-cols-1 md:gap-4',
-          ulClassName
-        )}
+        className={cn('mt-11 grid grid-cols-2 gap-5 lg:mt-10 md:grid-cols-1 md:gap-4', ulClassName)}
       >
         {items.map(({ title, description, link, linkText, icon }) => (
           <li

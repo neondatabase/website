@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
@@ -6,6 +5,7 @@ import SectionLabel from 'components/shared/section-label';
 import databaseIcon from 'icons/home/database.svg';
 import databricksIcon from 'icons/home/databricks.svg';
 import bgNoise from 'images/pages/home/backed-by/bg-noise.jpg';
+import { cn } from 'utils/cn';
 
 import Quotes from './quotes';
 
@@ -34,7 +34,7 @@ const BackedBy = () => (
         <div className="flex-1 border-l border-gray-new-50 px-8 xl:pr-0 xl:pl-6 lg:pl-[18px] sm:border-none sm:pl-0">
           <SectionLabel className="mb-5 md:mb-4">Backed by giants</SectionLabel>
           <h2
-            className={clsx(
+            className={cn(
               'text-[44px] leading-dense tracking-tighter text-gray-new-40',
               'xl:text-[36px] lg:text-2xl md:text-xl',
               '[&>strong]:font-normal [&>strong]:text-black-pure'
@@ -45,7 +45,7 @@ const BackedBy = () => (
           </h2>
           <ul className="mt-[216px] flex gap-[92px] xl:mt-[136px] xl:gap-16 lg:gap-8 md:gap-5 sm:mt-9 xs:flex-col xs:gap-7">
             {ITEMS.map(({ icon, title, description, className }) => (
-              <li className={clsx(className, 'lg:w-40 sm:w-[220px]')} key={title}>
+              <li className={cn(className, 'lg:w-40 sm:w-[220px]')} key={title}>
                 <Image
                   className="mb-5 xl:mb-4 lg:mb-3.5 lg:size-7 md:size-6 sm:size-5"
                   src={icon}
@@ -64,7 +64,7 @@ const BackedBy = () => (
           </ul>
         </div>
         <div
-          className={clsx(
+          className={cn(
             'flex w-[480px] flex-col justify-between border-l border-gray-new-50 px-8',
             'xl:w-[340px] xl:pr-0 xl:pl-5 lg:w-64 lg:pl-[18px] sm:w-full sm:border-none sm:pl-0'
           )}

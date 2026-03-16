@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import { cn } from 'utils/cn';
 
 const SearchResults = ({ posts, className, children }) => {
   // Show children when no search query is active
@@ -20,7 +20,7 @@ const SearchResults = ({ posts, className, children }) => {
 
   // Show filtered results
   return (
-    <div className={clsx('search-results md:pt-[96px]', className)}>
+    <div className={cn('search-results md:pt-[96px]', className)}>
       {posts.map((post, index) => (
         <>
           <div role="status" aria-live="polite" className="sr-only">

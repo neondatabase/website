@@ -1,15 +1,15 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import CtrlKIcon from 'icons/ctrl-k.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
+import { cn } from 'utils/cn';
 
 const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false }) => (
-  <div className={clsx('relative flex items-center justify-between', className)}>
+  <div className={cn('relative flex items-center justify-between', className)}>
     <button
-      className={clsx(
+      className={cn(
         'flex items-center justify-between border-gray-new-90 bg-white transition-colors duration-200 hover:border-gray-new-70',
         'dark:border-gray-new-20 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
         isNotFoundPage
@@ -19,15 +19,15 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
       type="button"
       onClick={() => handleClick('SEARCH')}
     >
-      <span className={clsx('flex items-center', isNotFoundPage ? 'gap-x-2.5' : 'gap-x-1.5')}>
+      <span className={cn('flex items-center', isNotFoundPage ? 'gap-x-2.5' : 'gap-x-1.5')}>
         <SearchIcon
-          className={clsx(
+          className={cn(
             'text-gray-new-30 dark:text-gray-new-70',
             isNotFoundPage ? 'h-5 w-5' : 'size-3.5 lg:size-6 lg:text-black-new lg:dark:text-white'
           )}
         />
         <span
-          className={clsx(
+          className={cn(
             'leading-none tracking-extra-tight text-gray-new-30 dark:text-gray-new-70',
             isNotFoundPage ? 'text-xl lg:text-lg md:text-base' : 'text-[13px] lg:hidden'
           )}
@@ -36,7 +36,7 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
         </span>
       </span>
       <span className="rounded-sm border border-gray-new-90 p-[3px] dark:border-gray-new-20 lg:hidden">
-        <CtrlKIcon className={clsx('h-auto w-6 text-gray-new-10 dark:text-gray-new-50')} />
+        <CtrlKIcon className={cn('h-auto w-6 text-gray-new-10 dark:text-gray-new-50')} />
       </span>
     </button>
   </div>

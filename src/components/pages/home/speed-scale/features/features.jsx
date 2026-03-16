@@ -1,7 +1,6 @@
-import clsx from 'clsx';
-
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import Heading from '../heading';
 
@@ -39,14 +38,14 @@ const Features = () => (
         id
       ) => (
         <li
-          className={clsx(
+          className={cn(
             'flex gap-48 2xl:gap-20 xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
             className
           )}
           key={id}
         >
           <div
-            className={clsx(
+            className={cn(
               'w-[480px] shrink-0 xl:w-[352px] lg:w-[544px] sm:w-full',
               contentClassName
             )}
@@ -55,7 +54,7 @@ const Features = () => (
               <strong>{title}</strong> {description}
             </Heading>
             <Link
-              className={clsx(
+              className={cn(
                 'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg leading-none font-medium tracking-extra-tight',
                 'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]',
                 '[&>svg]:text-gray-new-70! [&>svg]:transition-all!',

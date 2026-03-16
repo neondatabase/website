@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const Item = ({
@@ -66,7 +66,7 @@ const Item = ({
   return (
     <LazyMotion features={domAnimation}>
       <a
-        className={clsx(
+        className={cn(
           'flex items-start gap-2 rounded-sm py-0 text-sm leading-snug font-normal tracking-extra-tight',
           'transition-colors duration-200',
           isActive
@@ -80,7 +80,7 @@ const Item = ({
         {numberedStep && (
           <>
             <span
-              className={clsx(
+              className={cn(
                 'z-10 flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-[10px] leading-none font-normal tracking-extra-tight outline outline-[3px] outline-white transition-colors duration-200 dark:outline-black-new',
                 currentAnchor === id || index < currentIndex
                   ? 'bg-gray-new-15 text-white dark:bg-gray-new-94 dark:text-black-new'
@@ -90,7 +90,7 @@ const Item = ({
               {numberedStep}
             </span>
             <span
-              className={clsx(
+              className={cn(
                 'absolute top-[3px] left-2 h-full w-px transition-colors duration-200 group-last:hidden',
                 currentAnchor === id || index < currentIndex
                   ? 'bg-gray-new-40 dark:bg-gray-new-60'
@@ -104,7 +104,7 @@ const Item = ({
       <AnimatePresence initial={false}>
         {shouldRenderSubItems && (
           <m.ul
-            className={clsx(
+            className={cn(
               numberedStep
                 ? 'ml-[34px]'
                 : 'relative mt-3 flex flex-col gap-3 pl-4 before:absolute before:top-0 before:bottom-0 before:left-0 before:w-px before:bg-gray-new-80 dark:before:bg-gray-new-15/70'
@@ -116,7 +116,7 @@ const Item = ({
           >
             {items.map((item, subIndex) => (
               <li
-                className={clsx(
+                className={cn(
                   'relative before:absolute before:top-0 before:bottom-0 before:-left-4 before:w-px before:bg-gray-new-15/70 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-white',
                   item.id === currentAnchor && 'before:opacity-100'
                 )}

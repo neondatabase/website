@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
+
+import { cn } from 'utils/cn';
 
 const styles = {
   size: {
@@ -43,7 +44,7 @@ const Heading = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       !sizesWithCustomFont.has(size) && 'font-title',
       styles.size[size],
       styles.theme[theme],

@@ -1,13 +1,13 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
 import quoteIcon from 'icons/quote.svg';
+import { cn } from 'utils/cn';
 
 const CompanyLogo = ({ className, src, width, isPriority }) => (
   <Image
-    className={clsx('h-9 lg:h-7 lg:w-auto md:h-6', className)}
+    className={cn('h-9 lg:h-7 lg:w-auto md:h-6', className)}
     src={src}
     width={width}
     height={36}
@@ -32,7 +32,7 @@ const TestimonialNew = ({
   company,
   isPriority,
 }) => (
-  <div className={clsx('testimonial-new safe-paddings', className)}>
+  <div className={cn('testimonial-new safe-paddings', className)}>
     <Container className="relative flex flex-col items-center px-16 md:px-5" size="960">
       {company && author ? (
         <CompanyLogo
@@ -53,10 +53,10 @@ const TestimonialNew = ({
           />
         </div>
       )}
-      <figure className={clsx('max-w-[840px] lg:max-w-[620px]', figureClassName)}>
+      <figure className={cn('max-w-[840px] lg:max-w-[620px]', figureClassName)}>
         <blockquote className="text-center">
           <p
-            className={clsx(
+            className={cn(
               'bg-[radial-gradient(66.11%_247.88%_at_50%_50%,#FFF_31.15%,rgba(255,255,255,0.1)_100%)] bg-clip-text text-[28px] leading-snug tracking-tighter text-transparent lg:text-2xl md:text-xl',
               quoteClassName
             )}

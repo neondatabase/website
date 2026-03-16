@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import { FORM_STATES } from 'constants/forms';
 import FormCheckIcon from 'icons/subscription-form-check.inline.svg';
+import { cn } from 'utils/cn';
 
 import SendIcon from './images/send.inline.svg';
 
@@ -18,7 +18,7 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
     <AnimatePresence>
       {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
         <m.button
-          className={clsx(
+          className={cn(
             simpleMode
               ? 'absolute inset-y-2.5 right-3 h-11 rounded-[80px] md:inset-y-[6.5px] md:right-[9px] md:flex md:h-10 md:w-10 md:items-center md:justify-center md:px-0'
               : 'block h-12 w-full rounded-[60px] text-lg',
@@ -35,12 +35,12 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
           variants={appearAndExitAnimationVariants}
         >
           {simpleMode && <SendIcon className="hidden h-6 w-6 md:block" />}
-          <span className={clsx(simpleMode && 'md:hidden')}>{text}</span>
+          <span className={cn(simpleMode && 'md:hidden')}>{text}</span>
         </m.button>
       )}
       {formState === FORM_STATES.LOADING && (
         <m.div
-          className={clsx(
+          className={cn(
             simpleMode
               ? 'absolute top-1/2 right-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full'
               : 'flex h-12 w-full items-center justify-center rounded-[60px]',
@@ -78,7 +78,7 @@ const SubmitButton = ({ formState, text, simpleMode = false, isAzurePage = false
       )}
       {formState === FORM_STATES.SUCCESS && (
         <m.div
-          className={clsx(
+          className={cn(
             simpleMode
               ? 'absolute top-1/2 right-3 -translate-y-1/2 rounded-full'
               : 'flex h-12 w-full items-center justify-center rounded-[60px]',

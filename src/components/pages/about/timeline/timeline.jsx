@@ -1,11 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import TimelineSvg from 'images/pages/about/timeline/timeline.inline.svg';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -62,13 +61,13 @@ const Timeline = () => (
             {ITEMS.map((item, index) => (
               <li
                 key={index}
-                className={clsx(
+                className={cn(
                   '-ml-px border-l border-gray-new-30',
                   index % 2 === 0 ? 'self-end' : 'self-start'
                 )}
               >
                 <div
-                  className={clsx(
+                  className={cn(
                     'relative flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
                     index % 2 === 0 && 'justify-end'
                   )}
@@ -81,7 +80,7 @@ const Timeline = () => (
                   </time>
                   {item.link ? (
                     <Link
-                      className={clsx(
+                      className={cn(
                         'relative text-xl leading-snug font-normal tracking-extra-tight text-white xl:text-lg md:text-[15px]',
                         'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white',
                         'after:absolute after:-inset-1.5',
@@ -94,7 +93,7 @@ const Timeline = () => (
                     </Link>
                   ) : (
                     <p
-                      className={clsx(
+                      className={cn(
                         'text-xl leading-snug font-normal tracking-extra-tight text-white xl:text-lg md:text-[15px]',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}

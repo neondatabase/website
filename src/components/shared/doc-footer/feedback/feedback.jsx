@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useSessionStorage from 'react-use/lib/useSessionStorage';
 
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import ThumbsDownIcon from './images/thumbs-down.inline.svg';
@@ -27,7 +27,7 @@ const Feedback = ({ slug }) => {
   return (
     <div className="relative">
       <div
-        className={clsx(
+        className={cn(
           'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-y-4 xs:space-x-0',
           isFeedbackSent ? 'invisible opacity-0' : 'visible opacity-100'
         )}
@@ -55,7 +55,7 @@ const Feedback = ({ slug }) => {
         </div>
       </div>
       <span
-        className={clsx(
+        className={cn(
           'absolute top-1/2 right-0 -translate-y-1/2 text-sm leading-tight transition-opacity duration-300',
           isFeedbackSent ? 'visible opacity-100' : 'invisible opacity-0'
         )}

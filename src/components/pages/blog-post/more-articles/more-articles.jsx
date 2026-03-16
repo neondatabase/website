@@ -1,12 +1,12 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
 import triangleIcon from 'icons/triangle.svg';
+import { cn } from 'utils/cn';
 
 const MoreArticles = ({ className = null, posts }) => (
-  <section className={clsx('more-articles flex flex-col', className)}>
+  <section className={cn('more-articles flex flex-col', className)}>
     <h2 className="flex items-center gap-x-2 font-mono text-xs leading-none -tracking-extra-tight text-gray-new-80 uppercase">
       <Image className="" src={triangleIcon} alt="" width={12} height={14} aria-hidden="true" />
       <span className="">More from Neon</span>

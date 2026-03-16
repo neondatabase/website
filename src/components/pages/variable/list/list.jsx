@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const List = ({ items }) => (
   <ul className="max-w-[608px] space-y-4 pl-8 xl:space-y-3.5 lg:space-y-3 md:space-y-2.5 sm:pl-0">
@@ -12,7 +13,7 @@ const List = ({ items }) => (
           </div>
         )}
         <div
-          className={clsx(
+          className={cn(
             !icon && [
               'relative pl-3.5',
               'before:absolute before:top-[11px] before:left-0 before:block before:size-1 before:rounded-[1px] before:bg-white',

@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
+import { cn } from 'utils/cn';
 
 const instancePrices = {
   prod: 2.25,
@@ -120,7 +120,7 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
                     key={title}
                   >
                     <p
-                      className={clsx(
+                      className={cn(
                         'leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight',
                         textSize === 'lg' ? 'text-lg' : 'text-base'
                       )}
@@ -155,7 +155,7 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
             <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
             <div className="flex items-end gap-1.5">
               <span
-                className={clsx(
+                className={cn(
                   'bg-clip-text pr-1 font-title text-6xl leading-none font-medium tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
                   valueClassName
                 )}

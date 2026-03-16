@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 
 import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
+import { cn } from 'utils/cn';
 import { emailRegexp } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -48,7 +48,7 @@ const SubprocessorsForm = () => {
 
   return (
     <figure
-      className={clsx(
+      className={cn(
         'doc-cta not-prose my-5 rounded-[10px] border border-gray-new-94 bg-gray-new-98 px-7 py-6 sm:p-6',
         'dark:border-gray-new-15 dark:bg-gray-new-10'
       )}
@@ -69,7 +69,7 @@ const SubprocessorsForm = () => {
               type="email"
               name="email"
               value={email}
-              className={clsx(
+              className={cn(
                 'h-10 flex-1 rounded border-none bg-gray-new-94 px-4 py-3 remove-autocomplete-styles md:w-full',
                 'xl:text-sm',
                 'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
@@ -82,7 +82,7 @@ const SubprocessorsForm = () => {
           )}
 
           <Button
-            className={clsx(
+            className={cn(
               'px-6 py-3 leading-none font-semibold md:w-full',
               !isValid && 'pointer-events-none opacity-70 select-none'
             )}

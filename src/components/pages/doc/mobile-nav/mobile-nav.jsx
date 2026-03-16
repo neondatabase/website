@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import CornerIcon from 'icons/corner-left.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from '../menu/icon';
 
@@ -68,7 +68,7 @@ const NodeLink = ({ className, node }) => {
 
   return (
     <Comp
-      className={clsx(
+      className={cn(
         'flex h-10 w-full flex-1 items-center gap-x-2 pr-7 text-sm leading-snug tracking-tight hover:text-black-new dark:hover:text-white',
         node.section
           ? 'font-medium text-black-new dark:text-white'
@@ -109,7 +109,7 @@ const RecursiveItem = ({ node, currentPath }) => {
     return (
       <li>
         <NodeLink
-          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          className={cn(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
           node={node}
         />
       </li>
@@ -120,11 +120,11 @@ const RecursiveItem = ({ node, currentPath }) => {
     return (
       <li>
         <NodeLink
-          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          className={cn(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
           node={node}
         />
         <ul
-          className={clsx(
+          className={cn(
             'flex flex-col',
             node.nav && 'mt-[5px]',
             node.depth > 1 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
@@ -142,7 +142,7 @@ const RecursiveItem = ({ node, currentPath }) => {
     <li>
       <Collapsible open={open} onOpenChange={setOpen}>
         <CollapsibleTrigger
-          className={clsx(
+          className={cn(
             'group flex h-10 w-full items-center justify-between px-0 text-left',
             'leading-snug tracking-tight transition-colors duration-200',
             'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
@@ -159,7 +159,7 @@ const RecursiveItem = ({ node, currentPath }) => {
           {node.nav && (
             <div className="mt-[5px]">
               <NodeLink
-                className={clsx(
+                className={cn(
                   'text-[15px]! font-medium',
                   isActive
                     ? 'text-secondary-8! dark:text-primary-1!'
@@ -170,7 +170,7 @@ const RecursiveItem = ({ node, currentPath }) => {
             </div>
           )}
           <ul
-            className={clsx(
+            className={cn(
               'flex flex-col',
               node.nav && 'mt-[5px]',
               node.depth > 0 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'

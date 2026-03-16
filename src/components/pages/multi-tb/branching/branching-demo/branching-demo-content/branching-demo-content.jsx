@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
+import { cn } from 'utils/cn';
 
 const BranchingDemoContent = ({
   title,
@@ -13,7 +13,7 @@ const BranchingDemoContent = ({
   step,
 }) => (
   <div
-    className={clsx(
+    className={cn(
       'z-20 flex flex-col items-start',
       step === 0 ? 'w-[400px] lg:w-[346px]' : 'w-[312px] lg:w-[270px]'
     )}
@@ -29,7 +29,7 @@ const BranchingDemoContent = ({
       {step === 5 ? (
         <div className="flex gap-4">
           <Button
-            className={clsx('h-8 px-4 text-[13px] leading-none font-medium tracking-extra-tight')}
+            className={cn('h-8 px-4 text-[13px] leading-none font-medium tracking-extra-tight')}
             to={button.to}
             theme={button.theme}
           >
@@ -46,7 +46,7 @@ const BranchingDemoContent = ({
         </div>
       ) : (
         <Button
-          className={clsx(
+          className={cn(
             'h-8 px-4 text-[13px] leading-none font-medium tracking-extra-tight',
             disabled && 'cursor-not-allowed',
             isLoading && 'cursor-progress'

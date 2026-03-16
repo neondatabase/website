@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
+import { cn } from 'utils/cn';
 
 const rsdCostParams = {
   storageCostPerGB: 0.115, // B17
@@ -212,7 +212,7 @@ const Calculator = () => {
               <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
               <div className="flex items-end gap-1.5">
                 <span
-                  className={clsx(
+                  className={cn(
                     'bg-clip-text font-title leading-none font-medium tracking-extra-tight text-transparent',
                     totalsFontSize,
                     'sm:text-[44px]',

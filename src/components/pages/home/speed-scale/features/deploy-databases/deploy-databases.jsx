@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import CountingNumber from 'components/shared/animation/counting-number';
+import { cn } from 'utils/cn';
 
 import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS, START_DELAY } from './data';
 
@@ -87,10 +87,7 @@ const DeployDatabases = () => {
                             >
                               {isMobile ? (
                                 <span
-                                  className={clsx(
-                                    'block size-full',
-                                    value === '0' && 'scale-[0.33]'
-                                  )}
+                                  className={cn('block size-full', value === '0' && 'scale-[0.33]')}
                                   style={{ backgroundColor: ACTIVITY_COLORS[Number(value)] }}
                                 />
                               ) : (
@@ -119,7 +116,7 @@ const DeployDatabases = () => {
                         })}
                       </div>
                       <time
-                        className="text-xs text-gray-new-50 xl:text-[9px] sm:text-[5px]"
+                        className="text-xs leading-none text-gray-new-50 xl:text-[9px] sm:text-[5px]"
                         dateTime={`${hour + 9}:00`}
                       >
                         {String(hour + 9).padStart(2, '0')}:00

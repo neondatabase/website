@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
+import { cn } from 'utils/cn';
 
 const SplitViewGrid = ({
   className = null,
@@ -15,10 +15,10 @@ const SplitViewGrid = ({
   ctaText = '',
   size = 'md',
 }) => (
-  <section className={clsx('features safe-paddings', className)}>
+  <section className={cn('features safe-paddings', className)}>
     <Container className="grid grid-cols-12 grid-gap-x" size="medium">
       <div
-        className={clsx(
+        className={cn(
           'col-span-10 col-start-2 grid grid-cols-10 gap-x-10 rounded-2xl bg-black-new xl:col-span-full xl:col-start-1 xl:grid-cols-12 xl:items-center xl:gap-x-6 lg:gap-x-4',
           {
             'py-12 xl:py-8 lg:pt-9 lg:pb-10 md:py-8': size === 'md',
@@ -27,7 +27,7 @@ const SplitViewGrid = ({
         )}
       >
         <div
-          className={clsx(
+          className={cn(
             'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pr-3.5 md:pl-6',
             {
               'pl-12': size === 'md',
@@ -43,7 +43,7 @@ const SplitViewGrid = ({
             </span>
           )}
           <h2
-            className={clsx(
+            className={cn(
               'mt-3 font-title leading-none font-medium text-balance',
               'max-w-[322px] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]',
               {
@@ -56,7 +56,7 @@ const SplitViewGrid = ({
             {title}
           </h2>
           <p
-            className={clsx('text-lg leading-snug font-light xl:text-base md:mt-2.5', {
+            className={cn('text-lg leading-snug font-light xl:text-base md:mt-2.5', {
               'mt-4': size === 'md',
               'mt-5': size === 'sm',
             })}
@@ -65,7 +65,7 @@ const SplitViewGrid = ({
           </p>
         </div>
         <ul
-          className={clsx(
+          className={cn(
             'col-start-5 col-end-11 grid grid-cols-2 xl:col-start-6 xl:col-end-13 xl:mt-1.5 xl:-ml-8 xl:gap-x-1 lg:col-span-full lg:mt-10 lg:gap-x-10 lg:gap-y-10 lg:px-7 md:mt-[30px] md:grid-cols-1 md:gap-y-7 md:px-6',
             {
               'mt-2 gap-x-10 gap-y-11 lg:ml-0': size === 'md',
@@ -75,7 +75,7 @@ const SplitViewGrid = ({
         >
           {items.map(({ icon, title, description }, index) => (
             <li
-              className={clsx(
+              className={cn(
                 'flex max-w-[290px] items-start gap-x-3.5 xl:max-w-[248px] lg:max-w-[304px] lg:even:pr-0 md:max-w-none md:gap-x-3',
                 size === 'md' && 'even:pr-4'
               )}
@@ -92,7 +92,7 @@ const SplitViewGrid = ({
               />
               <div className="flex flex-col">
                 <h3
-                  className={clsx('font-title leading-tight font-medium tracking-extra-tight', {
+                  className={cn('font-title leading-tight font-medium tracking-extra-tight', {
                     'text-[22px] xl:text-xl': size === 'md',
                     'text-lg': size === 'sm',
                   })}
@@ -100,7 +100,7 @@ const SplitViewGrid = ({
                   {title}
                 </h3>
                 <p
-                  className={clsx(
+                  className={cn(
                     'mt-2 leading-snug font-light text-gray-new-60',
                     size === 'sm' && 'text-sm'
                   )}

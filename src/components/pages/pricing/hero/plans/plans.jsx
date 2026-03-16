@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
+import { cn } from 'utils/cn';
 
 import plans from './data/plans';
 import Features from './features';
@@ -88,7 +88,7 @@ const Plans = () => {
 
             return (
               <li
-                className={clsx(
+                className={cn(
                   'group relative flex min-h-full flex-col border-l border-gray-new-30 last:border-r',
                   'lg:border lg:pb-[66px] lg:first:border-r-0 lg:last:pb-0',
                   'md:pb-0 md:first:border'
@@ -97,7 +97,7 @@ const Plans = () => {
               >
                 <div className="p-6 pb-2 md:p-5 md:pb-2">
                   <h3
-                    className={clsx(
+                    className={cn(
                       'font-mono text-sm leading-none font-medium uppercase',
                       highlighted ? 'text-green-52' : 'text-gray-new-60'
                     )}

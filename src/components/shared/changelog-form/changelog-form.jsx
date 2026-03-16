@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -12,6 +11,7 @@ import warningIcon from 'icons/input-warning.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
+import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime, emailRegexp } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -106,7 +106,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'changelog-form relative flex scroll-mt-20 rounded-lg bg-gray-new-94 safe-paddings',
         classNames.block,
         className,
@@ -122,7 +122,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
       {isBlog ? (
         <div className="relative z-20">
           <h2
-            className={clsx(
+            className={cn(
               'leading-snug font-medium tracking-tighter text-white',
               !isSidebar ? 'text-xl sm:text-lg' : 'text-base'
             )}
@@ -135,17 +135,14 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         </div>
       ) : (
         <h2
-          className={clsx(
-            classNames.title,
-            'leading-snug font-medium tracking-tighter xs:text-base'
-          )}
+          className={cn(classNames.title, 'leading-snug font-medium tracking-tighter xs:text-base')}
         >
           Subscribe to our changelog.
           <br /> No spam, guaranteed.
         </h2>
       )}
       <form
-        className={clsx(
+        className={cn(
           'relative z-20 w-full flex-1',
           isBlog && isSidebar && 'mt-8',
           isBlog && !isSidebar && 'min-w-[292px] sm:min-w-0'
@@ -155,7 +152,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         onSubmit={handleSubmit}
       >
         <input
-          className={clsx(
+          className={cn(
             'h-[38px] w-full appearance-none pl-4 tracking-extra-tight remove-autocomplete-styles',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
@@ -182,7 +179,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         />
         {isBlog && formState === FORM_STATES.ERROR && (
           <Image
-            className={clsx(
+            className={cn(
               'absolute top-[11px] size-4 shrink-0',
               isSidebar ? 'right-[42px]' : 'right-[101px]'
             )}
@@ -196,7 +193,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           <AnimatePresence>
             {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
               <m.button
-                className={clsx(
+                className={cn(
                   'absolute inset-y-1 right-1 rounded-full outline-hidden',
                   'h-[30px] min-w-16 px-6',
                   'text-black-new transition-colors duration-200',
@@ -217,7 +214,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                 variants={appearAndExitAnimationVariants}
               >
                 <span
-                  className={clsx(
+                  className={cn(
                     classNames.sendText,
                     'text-[13px] font-semibold tracking-extra-tight xs:hidden',
                     isBlog && isSidebar && 'hidden!',
@@ -227,7 +224,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                   Subscribe
                 </span>
                 <SendIcon
-                  className={clsx(
+                  className={cn(
                     classNames.sendIcon,
                     'lg:hidden xs:block',
                     isBlog && isSidebar && 'block!',
@@ -282,7 +279,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
 
         {!isBlog && formState === FORM_STATES.ERROR && errorMessage && (
           <span
-            className={clsx(
+            className={cn(
               'absolute top-full left-1/2 -translate-x-1/2 whitespace-nowrap',
               'text-xs leading-none tracking-extra-tight text-secondary-1',
               classNames.errorMessage
@@ -296,7 +293,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
       {!isBlog && <GradientBorder className="hidden rounded-[10px]! dark:block" withBlend />}
       {isBlog && (
         <Image
-          className={clsx('absolute bottom-0 z-10', !isSidebar ? 'right-0' : 'left-0 w-full')}
+          className={cn('absolute bottom-0 z-10', !isSidebar ? 'right-0' : 'left-0 w-full')}
           src={formBg}
           width={256}
           height={120}

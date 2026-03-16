@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Button from 'components/shared/button';
@@ -6,6 +5,7 @@ import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border';
 import LINKS from 'constants/links';
 import checkIcon from 'icons/serverless-apps/check.svg';
+import { cn } from 'utils/cn';
 
 const features = [
   'CPU, memory, and storage scale automatically with your workload.',
@@ -24,7 +24,7 @@ const Hero = () => (
         With thousands of connections, real-time autoscaling, and usage-based pricing
       </p>
       <div
-        className={clsx(
+        className={cn(
           'relative mt-16 w-full overflow-hidden rounded-lg bg-[#0D0E10] pt-6 pr-10 pb-7 pl-8',
           'xl:mt-14 lg:mt-12 lg:px-7 lg:py-6 md:mt-10 md:p-6'
         )}

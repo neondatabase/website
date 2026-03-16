@@ -1,8 +1,9 @@
-import clsx from 'clsx';
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
+
+import { cn } from 'utils/cn';
 
 import ChevronRightIcon from './images/chevron-right.inline.svg';
 
@@ -49,7 +50,7 @@ const FilterGroup = ({
         >
           <div className="flex items-center gap-3">
             <ChevronRightIcon
-              className={clsx(
+              className={cn(
                 'hidden h-5 w-5 transition-transform duration-200 lg:block',
                 isOpen && 'rotate-90'
               )}

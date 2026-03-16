@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
+import { cn } from 'utils/cn';
 
 const TechCardsWrapper = ({ children, withToggler }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const TechCardsWrapper = ({ children, withToggler }) => {
           <span className="text-sm font-medium">{isOpen ? 'Hide' : 'Show more'}</span>
           <span className="ml-2.5 flex size-3 items-center justify-center">
             <ChevronRight
-              className={clsx(
+              className={cn(
                 'block shrink-0 transition-[transform,color] duration-200',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}

@@ -1,21 +1,21 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, tag }) => (
   <li className="flex gap-x-2">
     <span
-      className={clsx(
+      className={cn(
         'mt-[3px] size-3.5 shrink-0 border-[3px] border-black-pure',
         highlighted ? 'bg-green-52' : 'bg-gray-new-90'
       )}
       aria-hidden
     />
     <p
-      className={clsx(
+      className={cn(
         'text-[15px] leading-snug tracking-extra-tight',
         highlighted ? 'text-white' : 'text-gray-new-80'
       )}

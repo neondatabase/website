@@ -1,12 +1,12 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import GradientBorder from 'components/shared/gradient-border';
+import { cn } from 'utils/cn';
 
 const Cards = ({ data, isPriority, className }) => (
   <div
-    className={clsx(
+    className={cn(
       'mt-11 grid grid-cols-2 gap-5 lg:mt-8 lg:gap-4 md:mt-6 sm:grid-cols-1',
       className
     )}
@@ -14,7 +14,7 @@ const Cards = ({ data, isPriority, className }) => (
     {data.map(
       ({ title, description, logo, banner, borderClassName, highlightClassName }, index) => (
         <div
-          className={clsx(
+          className={cn(
             'relative overflow-hidden rounded-xl bg-security-card-bg p-6 lg:p-5 md:p-[18px]',
             banner && 'col-span-2 sm:col-span-1 sm:pb-[203px]',
             className
@@ -24,7 +24,7 @@ const Cards = ({ data, isPriority, className }) => (
           {logo && (
             <div className="relative z-20 mb-5 size-[76px] lg:size-16 md:size-14">
               <Image
-                className={clsx(
+                className={cn(
                   'absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 lg:scale-[0.85] md:scale-[0.74]',
                   logo.className
                 )}
@@ -37,7 +37,7 @@ const Cards = ({ data, isPriority, className }) => (
               />
             </div>
           )}
-          <div className={clsx('relative z-20', banner && 'max-w-[504px] lg:max-w-[395px]')}>
+          <div className={cn('relative z-20', banner && 'max-w-[504px] lg:max-w-[395px]')}>
             <h3
               className="text-[18px] leading-snug font-medium tracking-extra-tight lg:text-base md:text-[15px]"
               dangerouslySetInnerHTML={{ __html: title }}
@@ -61,7 +61,7 @@ const Cards = ({ data, isPriority, className }) => (
             </>
           )}
           <span
-            className={clsx(
+            className={cn(
               'pointer-events-none absolute top-5 left-5 size-16 rounded-full blur-xl lg:top-4 lg:left-4 lg:size-14 md:top-3 md:left-3 md:size-12',
               highlightClassName
             )}

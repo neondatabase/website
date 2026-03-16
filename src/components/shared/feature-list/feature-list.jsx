@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import slugify from 'slugify';
+
+import { cn } from 'utils/cn';
 
 import Icon, { ICONS } from './icon';
 
@@ -60,9 +61,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
     });
 
   return (
-    <ul
-      className={clsx('feature-list mt-8! flex flex-col gap-10 p-0! sm:mt-7! sm:gap-9', className)}
-    >
+    <ul className={cn('feature-list mt-8! flex flex-col gap-10 p-0! sm:mt-7! sm:gap-9', className)}>
       {features.map((feature, index) => {
         const title = getFeatureTitle(feature);
         const id = updateTitleById(title);

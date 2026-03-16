@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container/container';
@@ -9,6 +8,7 @@ import logicalReplication from 'icons/migration/cards-support/logical-replicatio
 import phasedCutover from 'icons/migration/cards-support/phased-cutover.svg';
 import schemaAdjustments from 'icons/migration/cards-support/schema-adjustments.svg';
 import versionMigrations from 'icons/migration/cards-support/version-migrations.svg';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -68,7 +68,7 @@ const CardsSupport = () => (
         {ITEMS.map(({ title, description, list, className }) => (
           <li
             key={title}
-            className={clsx('relative rounded-xl bg-black-fog p-7 lg:p-6 md:p-5', className)}
+            className={cn('relative rounded-xl bg-black-fog p-7 lg:p-6 md:p-5', className)}
           >
             <h3 className="mb-2.5 text-xl leading-snug font-medium tracking-tight text-balance text-white lg:text-lg md:tracking-extra-tight">
               {title}

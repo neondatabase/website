@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -69,7 +69,7 @@ const Button = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       styles.base,
       styles.size[size],
       styles.theme[theme],

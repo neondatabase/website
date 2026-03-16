@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 import { useState } from 'react';
@@ -9,12 +8,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
+import { cn } from 'utils/cn';
 
 import 'swiper/css';
 
 const Button = ({ prev = false, disabled, handleClick }) => (
   <button
-    className={clsx(
+    className={cn(
       'group relative flex size-11 items-center justify-center rounded-full border border-gray-new-15 bg-gray-new-8',
       'transition-colors duration-200 hover:border-gray-new-20 hover:bg-gray-new-10 lg:size-8',
       disabled ? 'pointer-events-none text-gray-new-60 opacity-90' : 'text-gray-new-90'
@@ -24,7 +24,7 @@ const Button = ({ prev = false, disabled, handleClick }) => (
     onClick={handleClick}
   >
     <span className="sr-only">{prev ? 'Previous slide' : 'Next slide'}</span>
-    <Chevron className={clsx('w-[11px] text-inherit lg:w-2', prev ? '-ml-1 rotate-180' : 'ml-1')} />
+    <Chevron className={cn('w-[11px] text-inherit lg:w-2', prev ? '-ml-1 rotate-180' : 'ml-1')} />
   </button>
 );
 
@@ -66,7 +66,7 @@ const Slider = ({ title, items }) => {
     <div className="features-slider">
       <div className="relative mb-8 w-full overflow-hidden lg:mb-6 sm:mb-[18px]">
         <h3
-          className={clsx(
+          className={cn(
             'w-fit text-lg leading-none text-gray-new-50 uppercase lg:text-[13px]',
             'after:pointer-events-none after:absolute after:top-1/2 after:ml-5 after:h-px after:w-full after:-translate-y-full after:bg-gray-new-20'
           )}
@@ -99,7 +99,7 @@ const Slider = ({ title, items }) => {
             key={title}
           >
             <div
-              className={clsx(
+              className={cn(
                 'relative flex size-full flex-col justify-between rounded-lg p-6 lg:p-4',
                 link ? 'bg-security-card-link-bg' : 'bg-security-card-bg'
               )}
@@ -134,7 +134,7 @@ const Slider = ({ title, items }) => {
         ))}
       </Swiper>
       <div
-        className={clsx('mt-6 lg:mt-[18px] sm:mt-4', {
+        className={cn('mt-6 lg:mt-[18px] sm:mt-4', {
           hidden: items.length < 4,
           '2xl:block': items.length === 3,
           'sm:block': items.length === 2,

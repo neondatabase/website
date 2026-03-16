@@ -1,8 +1,7 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
+import { cn } from 'utils/cn';
 
 const items = [
   {
@@ -218,7 +217,7 @@ const DemoList = () => (
             key={index}
           >
             <h2
-              className={clsx(
+              className={cn(
                 'flex items-center text-xs leading-none font-semibold tracking-extra-tight uppercase',
                 categoryTextColor
               )}
