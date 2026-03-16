@@ -6,7 +6,7 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-02-16T13:08:22.377Z'
+updatedOn: '2026-03-14T03:21:15.120Z'
 layout: wide
 ---
 

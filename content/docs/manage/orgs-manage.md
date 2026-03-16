@@ -4,7 +4,7 @@ summary: >-
   Covers the management of Neon organizations, including creating organizations,
   inviting members, and setting permissions based on assigned roles.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.238Z'
+updatedOn: '2026-03-13T19:35:31.437Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -38,6 +38,8 @@ To invite Members:
 <Admonition type="note" title="Invites not received?">
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
+
+To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
 
 ## Set permissions
 
@@ -99,11 +101,10 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free plan
 
-You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
+You can only have one Free organization per account. If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
 
 To downgrade, your org must:
 
-- Have only one member (just you)
 - Stay within Free plan limits (storage, projects, branches, etc.)
 
 If you need help or think you should be able to downgrade, use the **Request support** option during the downgrade process.

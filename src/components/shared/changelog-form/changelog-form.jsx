@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
-import InputWarningIcon from 'icons/input-warning.inline.svg';
+import warningIcon from 'icons/input-warning.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
@@ -181,11 +181,15 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           onChange={handleInputChange}
         />
         {isBlog && formState === FORM_STATES.ERROR && (
-          <InputWarningIcon
+          <Image
             className={clsx(
-              'absolute top-[11px] size-4',
+              'absolute top-[11px] size-4 shrink-0',
               isSidebar ? 'right-[42px]' : 'right-[101px]'
             )}
+            src={warningIcon}
+            alt=""
+            width={16}
+            height={16}
           />
         )}
         <LazyMotion features={domAnimation}>

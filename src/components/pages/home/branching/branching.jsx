@@ -53,6 +53,7 @@ const Branching = () => (
             'sm:-mr-5 sm:-ml-2.5 sm:w-[calc(100%+30px)]'
           )}
           src="/animations/pages/home/branching.riv?20260114"
+          autoBind={false}
           fit={Fit.Contain}
         />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
