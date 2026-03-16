@@ -32,6 +32,8 @@ Modern software development is built around iteration. Teams create branches, op
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" description="Pre-built prompt for connecting Micronaut Kotlin applications to Neon Postgres"/>
 
+<RequestForm type="extension" />
+
 To overcome these challenges, many development teams are turning to microfrontends, which break down large frontend applications into smaller, independently deployable units. This shift not only accelerates development workflows but also enhances the end-user experience by optimizing performance.
 
 To overcome these challenges, many development teams are turning to microfrontends.
@@ -352,14 +354,6 @@ Microfrontends share a page, each managing a feature within it. While this allow
 - Implement strategies for loading videos based on network conditions, especially for users with limited data plans.
 
 </Admonition>
-<GoodToKnow>
-
-When embedding videos from external platforms, consider the following best practices:
-
-- Size Optimization: Automatically serve correctly sized images for each device, using modern image formats like WebP and AVIF.
-- Implement strategies for loading videos based on network conditions, especially for users with limited data plans.
-
-</GoodToKnow>
 
 <Admonition type="note">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
 <Admonition type="tip">We’re developing automatic HTTP–WebSocket switching. Check our roadmap and Friday Changelog for upcoming features.</Admonition>
@@ -392,3 +386,131 @@ None of this is a tooling problem at the application layer. It’s a database mo
 2. Implicitly, by using fill which causes the image to expand to fill its parent element.
 
 </details>
+
+**What changed**  
+You render Neon Auth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
+
+#### Sign up page
+
+<CodeTabs labels={["Before (Stack Auth)", "After (Better Auth)"]}>
+
+```tsx
+import { SignUp } from '@stackframe/stack';
+
+export default function SignUpPage() {
+  return <SignUp />;
+}
+```
+
+```tsx
+import { AuthView } from '@neondatabase/auth/react';
+
+export default function SignUpPage() {
+  return <AuthView pathname="sign-up" />;
+}
+```
+
+</CodeTabs>
+
+**What changed**  
+You swap the dedicated `<SignUp />` component for the same `AuthView` component, configured with the `"sign-up"` pathname.
+
+#### User button
+
+<CodeTabs labels={["Before (Stack Auth)", "After (Better Auth)"]}>
+
+```tsx
+import { UserButton } from '@stackframe/stack';
+
+export function Header() {
+  return <UserButton />;
+}
+```
+
+```tsx
+import { UserButton } from '@neondatabase/auth/react';
+
+export function Header() {
+  return <UserButton />;
+}
+```
+
+</CodeTabs>
+
+**What changed**  
+You keep the same `UserButton` API but import it from the Neon Auth UI package and mark the component as client-side.
+
+### Replace hooks (#nextjs-replace-hooks)
+
+<CodeTabs labels={["Before (Stack Auth)", "After (Better Auth)"]}>
+
+```tsx
+'use client';
+import { useUser } from '@stackframe/stack';
+
+export function MyComponent() {
+  const user = useUser();
+  return <div>{user ? `Hello, ${user.displayName}` : 'Not logged in'}</div>;
+}
+```
+
+```tsx
+'use client';
+import { useSession } from '@/lib/auth/client';
+
+export function MyComponent() {
+  const { data } = useSession();
+  const user = data?.user;
+
+  return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
+}
+```
+
+</CodeTabs>
+
+**What changed**  
+Instead of `useUser()`, you call `useSession()` hook from `authClient` and read the user & session data from response.
+
+### Update provider setup (#nextjs-update-provider)
+
+<CodeTabs labels={["Before (Stack Auth)", "After (Better Auth)"]}>
+
+```tsx
+import { StackProvider, StackTheme } from '@stackframe/stack';
+import { stackServerApp } from './stack';
+
+export default function RootLayout({ children }) {
+  return (
+    <StackProvider app={stackServerApp}>
+      <StackTheme>{children}</StackTheme>
+    </StackProvider>
+  );
+}
+```
+
+```tsx
+'use client';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import '@neondatabase/auth/ui/css';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth/client';
+
+export default function RootLayout({ children }) {
+  const router = useRouter();
+
+  return (
+    <NeonAuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={router.refresh}
+      Link={Link}
+    >
+      {children}
+    </NeonAuthUIProvider>
+  );
+}
+```
+
+</CodeTabs>
