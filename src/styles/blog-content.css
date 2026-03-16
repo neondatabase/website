@@ -1,4 +1,4 @@
-@layer components {
+@layer utilities {
   .prose-blog {
     @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-white;

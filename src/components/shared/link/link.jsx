@@ -81,9 +81,9 @@ const Link = forwardRef(
       size && theme && styles.base,
       styles.size[size],
       styles.theme[theme],
-      additionalClassName,
       withArrow && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere',
-      icon && !withArrow && 'group inline'
+      icon && !withArrow && 'group inline',
+      additionalClassName
     );
 
     const Icon = icons[icon];

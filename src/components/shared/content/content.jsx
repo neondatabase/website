@@ -213,16 +213,18 @@ const Content = ({
   isReleaseNote = false,
   isPostgres = false,
   isTemplate = false,
-}) => (
-  <div
-    className={cn(
-      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
-      className
-    )}
-  >
-    {asHTML ? (
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    ) : (
+}) => {
+  const rootClassName = cn(
+    'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+    className
+  );
+
+  if (asHTML) {
+    return <div className={rootClassName} dangerouslySetInnerHTML={{ __html: content }} />;
+  }
+
+  return (
+    <div className={rootClassName}>
       <MDXRemote
         components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
@@ -238,9 +240,9 @@ const Content = ({
           blockDangerousJS: true,
         }}
       />
-    )}
-  </div>
-);
+    </div>
+  );
+};
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

@@ -13,21 +13,17 @@ const SearchResults = ({ posts, className, children }) => {
 
   // Show "no results" message
   if (posts.length === 0) {
-    return (
-      <div className="w-full text-lg text-gray-new-70 md:pt-[96px]">No search results found</div>
-    );
+    return <div className="w-full text-lg text-gray-new-70 md:pt-24">No search results found</div>;
   }
 
   // Show filtered results
   return (
-    <div className={cn('search-results md:pt-[96px]', className)}>
+    <div className={cn('search-results md:pt-24', className)}>
+      <div role="status" aria-live="polite" className="sr-only">
+        {posts.length} results found
+      </div>
       {posts.map((post, index) => (
-        <>
-          <div role="status" aria-live="polite" className="sr-only">
-            {posts.length} results found
-          </div>
-          <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />
-        </>
+        <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />
       ))}
     </div>
   );

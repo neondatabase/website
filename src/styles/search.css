@@ -1,5 +1,5 @@
-.ais-SearchBox {
-  &-input {
+@layer components {
+  .ais-SearchBox-input {
     @apply flex h-10 w-[288px] shrink-0 grow cursor-text items-center pr-36 pb-px pl-[30px] search-cancel:appearance-none;
     @apply xl:w-[202px] xl:pr-10 lg:w-[288px] lg:pr-36;
     @apply border border-gray-new-90 bg-white bg-[url('/images/icons/search-light.svg')] bg-[left_10px_center] bg-no-repeat outline-hidden;
@@ -10,12 +10,12 @@
     @apply md:w-full md:text-base;
   }
 
-  &-reset {
+  .ais-SearchBox-reset {
     @apply absolute top-1/2 right-32 z-10 -translate-y-1/2 dark:fill-white;
   }
 
-  &-submit,
-  &-loadingIndicator {
+  .ais-SearchBox-submit,
+  .ais-SearchBox-loadingIndicator {
     @apply hidden;
   }
 }

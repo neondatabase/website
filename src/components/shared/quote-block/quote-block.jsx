@@ -118,7 +118,7 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
         <figcaption className="mt-5 flex items-center gap-2.5 md:mt-4">
           <div className="relative overflow-hidden rounded-full">
             <Image
-              className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
+              className="pointer-events-none m-0! size-8 rounded-full object-cover sm:h-7 sm:w-7"
               src={avatar}
               alt={name}
               width={32}
