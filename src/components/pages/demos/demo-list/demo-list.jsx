@@ -228,7 +228,10 @@ const DemoList = () => (
             <ul className="mt-7">
               {items.map(({ title, description, sourceLink, demoLink }, index) => (
                 <li
-                  className="mt-6 flex items-center justify-between border-t border-gray-new-15/80 pt-6 first:mt-0 first:border-t-0 first:pt-0 lg:flex-col lg:items-start lg:gap-y-8 md:mt-4 md:gap-y-6 md:pt-4"
+                  className={cn(
+                    'flex items-center justify-between lg:flex-col lg:items-start lg:gap-y-8 md:gap-y-6',
+                    index > 0 && 'mt-6 border-t border-gray-new-15/80 pt-6 md:mt-4 md:pt-4'
+                  )}
                   key={index}
                 >
                   <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">

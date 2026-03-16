@@ -29,7 +29,7 @@ const fieldProps = {
   theme: 'transparent',
   inputClassName:
     'mt-3 rounded-none border-gray-new-90 dark:border-gray-new-20 dark:placeholder:text-gray-new-50',
-  labelClassName: 'text-sm text-gray-new-10! dark:text-gray-new-90!',
+  labelClassName: 'text-sm leading-none! text-gray-new-10! dark:text-gray-new-90!',
 };
 
 const ProgramForm = ({ type }) => {
@@ -79,7 +79,9 @@ const ProgramForm = ({ type }) => {
       id={`${type}-form`}
     >
       <h2 className="p-0! text-2xl! leading-snug!">{title}</h2>
-      <p className="mt-2! mb-0! text-lg! text-gray-new-30 dark:text-gray-new-70">{description}</p>
+      <p className="mt-2! mb-0! text-lg! leading-normal text-gray-new-30 dark:text-gray-new-70">
+        {description}
+      </p>
       {formState !== FORM_STATES.SUCCESS ? (
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6">

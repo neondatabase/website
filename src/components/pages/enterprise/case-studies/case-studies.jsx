@@ -24,7 +24,7 @@ const CaseStudies = ({ items }) => (
       size="960"
     >
       <div>
-        <h2 className="font-title text-[52px] font-medium tracking-tighter xl:text-5xl lg:text-4xl md:text-[32px]">
+        <h2 className="font-title text-[52px] font-medium tracking-tighter xl:text-5xl/normal lg:text-4xl/normal md:text-[32px]">
           Neon’s impact
         </h2>
         <p className="-mt-1 text-lg leading-snug tracking-tight text-gray-new-80 lg:text-base md:mt-0">

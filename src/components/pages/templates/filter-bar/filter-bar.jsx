@@ -39,7 +39,7 @@ const FilterGroup = ({
 
   return (
     <li
-      className="flex flex-col border-b border-gray-new-80/80 pt-5 pb-5 first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-new-15/80 lg:pt-4 lg:pb-4 lg:last:border-b last:lg:pb-4"
+      className="flex flex-col border-b border-gray-new-80/80 pt-5 pb-5 first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-new-15/80 lg:pt-4 lg:pb-4 lg:first:pt-0 lg:last:border-b last:lg:pb-4"
       key={type}
     >
       <fieldset>

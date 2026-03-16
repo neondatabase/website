@@ -152,7 +152,7 @@ const WpPageDraft = async (props0) => {
       ) : (
         <article className="py-48 safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
           <Container size="xs">
-            <h1 className="t-5xl font-title font-semibold">{title}</h1>
+            <h1 className="t-5xl font-title leading-normal font-semibold">{title}</h1>
           </Container>
           <Container size="xs">
             <Content className="prose-static mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />

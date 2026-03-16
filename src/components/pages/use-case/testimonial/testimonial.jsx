@@ -40,7 +40,7 @@ const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
               />
             )}
             {author.name && (
-              <figcaption className="text-lg text-gray-new-60 lg:text-base sm:text-sm">
+              <figcaption className="text-lg/normal text-gray-new-60 lg:text-base sm:text-sm/normal">
                 {author.name}
                 {author.company && (
                   <cite className="font-light text-gray-new-40 not-italic">

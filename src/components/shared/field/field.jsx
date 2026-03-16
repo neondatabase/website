@@ -82,13 +82,13 @@ const Field = forwardRef(
               'border-secondary-1!': !!error && errorTheme !== 'tooltip',
             },
             !error && '',
-            isDisabled && '!cursor-default',
+            isDisabled && 'cursor-default!',
             inputClassName
           )}
           ref={ref}
           id={theme === 'checkbox' ? value : name}
           name={name}
-          value={theme === 'checkbox' ? value : null}
+          value={theme === 'checkbox' ? value : undefined}
           type={type}
           disabled={isDisabled}
           {...otherProps}

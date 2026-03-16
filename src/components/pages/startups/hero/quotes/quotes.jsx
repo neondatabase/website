@@ -13,7 +13,7 @@ import 'swiper/css/autoplay';
 import './slider.css';
 
 const Quotes = ({ items }) => (
-  <div className="relative pt-9 lg:pt-6">
+  <div className="startups-quotes relative pt-9 lg:pt-6">
     <Image
       className="absolute top-0 -left-2.5 lg:-left-1.5 lg:w-[51px]"
       src={quoteIcon}

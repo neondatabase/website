@@ -16,7 +16,7 @@ import { ANIMATION_CONFIG, CONNECTION_STRING } from './data';
 import useAnimationTimeline from './use-animation-timeline';
 
 export const codeWrapperClassName = cn(
-  'block overflow-hidden p-5',
+  'flex overflow-hidden p-5',
   'xl:p-[14px] lg:p-[18px] md:p-5 sm:p-2'
 );
 

@@ -7,7 +7,7 @@ const Hero = () => (
       <h1 className="text-[56px] leading-dense tracking-tighter xl:text-5xl lg:text-4xl md:text-[32px]">
         Brand Guidelines
       </h1>
-      <p className="mt-4 max-w-[544px] text-xl tracking-extra-tight text-gray-new-60 xl:mt-3.5 xl:text-base lg:mt-3 md:mt-2">
+      <p className="mt-4 max-w-[544px] text-xl/normal tracking-extra-tight text-gray-new-60 xl:mt-3.5 xl:text-base lg:mt-3 md:mt-2">
         Official assets and guidelines to help you reference the Neon brand, including our logo,
         content and trademarks.
       </p>

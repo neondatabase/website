@@ -8,6 +8,22 @@ import { cn } from 'utils/cn';
 
 import Icon, { ICONS } from './icon';
 
+const extractTextContent = (node) => {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextContent).join('');
+  }
+
+  if (React.isValidElement(node)) {
+    return extractTextContent(node.props.children);
+  }
+
+  return '';
+};
+
 const FeatureList = ({ className = '', icons = [], children }) => {
   const [lastActive, setLastActive] = useState(0);
   // Split content into features by h2/h3 headings
@@ -45,9 +61,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
     );
 
     if (heading && heading.props && heading.props.children) {
-      return typeof heading.props.children === 'string'
-        ? heading.props.children
-        : React.Children.toArray(heading.props.children).join('');
+      return extractTextContent(heading.props.children);
     }
 
     return `Feature ${features.indexOf(feature) + 1}`;
@@ -64,10 +78,10 @@ const FeatureList = ({ className = '', icons = [], children }) => {
     <ul className={cn('feature-list mt-8! flex flex-col gap-10 p-0! sm:mt-7! sm:gap-9', className)}>
       {features.map((feature, index) => {
         const title = getFeatureTitle(feature);
-        const id = updateTitleById(title);
+        const id = updateTitleById(title) || `feature-${index + 1}`;
 
         return (
-          <li className="relative m-0! flex gap-3 before:content-none!" key={id}>
+          <li className="relative m-0! flex gap-3 before:content-none!" key={`${id}-${index}`}>
             <Icon
               icon={icons[index] || ''}
               index={index}

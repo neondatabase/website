@@ -28,13 +28,6 @@
     }
   }
 
-  .numbered-steps {
-    p,
-    li {
-      @apply text-base text-gray-new-30/90 dark:text-gray-new-85/90;
-    }
-  }
-
   .table-wrapper {
     @apply 2xl:-mx-4 2xl:overflow-x-auto 2xl:px-4;
   }
@@ -80,6 +73,13 @@
 }
 
 @layer utilities {
+  .numbered-steps {
+    p,
+    li {
+      @apply text-base text-gray-new-30/90 dark:text-gray-new-85/90;
+    }
+  }
+
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black-pure dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
@@ -351,6 +351,8 @@
     ol {
       counter-reset: item;
       @apply m-0 p-0;
+      padding-inline-start: 0 !important;
+      padding-left: 0 !important;
     }
 
     ol > li {
@@ -383,7 +385,7 @@
   }
 
   .prose-variable {
-    @apply text-lg tracking-extra-tight text-gray-new-70 sm:text-base;
+    @apply text-lg/normal tracking-extra-tight text-gray-new-70 sm:text-base;
 
     p,
     ul {

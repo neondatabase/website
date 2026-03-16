@@ -8,21 +8,21 @@ import workflowIcon from 'icons/cli/workflow.svg';
 
 const items = [
   {
-    icon: workflowIcon,
+    icon: workflowIcon.src,
     title: 'Your full Neon workflow',
     description: 'Manage projects, databases, branches, roles, and&nbsp;more.',
     linkText: 'View all Neon CLI commands',
     url: LINKS.cliReference,
   },
   {
-    icon: scriptIcon,
+    icon: scriptIcon.src,
     title: 'Script and automate',
     description: 'Use the Neon CLI to script almost any&nbsp;action in&nbsp;Neon.',
     linkText: 'Learn about branching with the CLI',
     url: '/docs/guides/branching-neon-cli',
   },
   {
-    icon: contributeIcon,
+    icon: contributeIcon.src,
     title: 'Contribute',
     description: 'Neon CLI is open source. Contribute&nbsp;to our GitHub&nbsp;repo.',
     linkText: 'Contribute to Neon CLI',

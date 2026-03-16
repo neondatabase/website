@@ -11,13 +11,9 @@ const Contents = ({ contents }) => (
       <h2 className="mb-14 font-sans text-5xl leading-dense font-normal tracking-tighter xl:text-[36px] lg:mb-11 md:mb-9 md:text-[28px]">
         Branching Workflows
       </h2>
-      <ul className="w-full">
+      <ul className="flex w-full flex-col gap-y-10">
         {contents.map(({ section, id, items }) => (
-          <li
-            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 lg:gap-6 lg:py-[19px] md:gap-5 md:py-[21px]"
-            key={id}
-            id={id}
-          >
+          <li className="flex flex-col gap-8 lg:gap-6 md:gap-5" key={id} id={id}>
             <h3 className="font-mono text-xs leading-3 font-medium text-gray-new-60 uppercase md:text-[10px] md:leading-none">
               {section}
             </h3>

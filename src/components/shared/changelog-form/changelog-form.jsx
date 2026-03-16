@@ -123,8 +123,8 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         <div className="relative z-20">
           <h2
             className={cn(
-              'leading-snug font-medium tracking-tighter text-white',
-              !isSidebar ? 'text-xl sm:text-lg' : 'text-base'
+              'font-medium tracking-tighter text-white',
+              !isSidebar ? 'text-xl/snug sm:text-lg/snug' : 'text-base/snug'
             )}
           >
             Subscribe to our changelog

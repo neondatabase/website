@@ -79,9 +79,9 @@ const Features = () => (
           <li
             className={cn(
               'flex flex-col gap-[18px] border-l border-gray-new-20',
-              'py-2 pl-8 [&:nth-child(n+4)]:pt-14',
-              'xl:px-6 xl:py-0 xl:[&:nth-child(n+4)]:pt-10',
-              'lg:gap-4 lg:px-[18px] lg:py-1.5 lg:[&:nth-child(n+3)]:pt-[38px]',
+              'py-2 pl-8 nth-[n+4]:pt-14',
+              'xl:px-6 xl:py-0 xl:nth-[n+4]:pt-10',
+              'lg:gap-4 lg:px-[18px] lg:py-1.5 lg:nth-[n+3]:pt-[38px]',
               'md:border-0 sm:gap-3 sm:p-0!'
             )}
             key={title}
@@ -94,7 +94,7 @@ const Features = () => (
               alt=""
               loading="lazy"
             />
-            <div className="text-lg tracking-extra-tight lg:text-base lg:leading-snug sm:text-[15px]">
+            <div className="text-lg/normal tracking-extra-tight lg:text-base lg:leading-snug sm:text-[15px]">
               <h3 className="inline text-white">{title}</h3>{' '}
               <p
                 className={cn(
