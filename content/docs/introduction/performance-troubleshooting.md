@@ -13,15 +13,15 @@ Slow database performance can come from the platform layer (cold starts, compute
 
 ## Quick reference
 
-| Symptom | Likely cause | What to check | Guide |
-| --- | --- | --- | --- |
-| [First query is slow after idle](#first-query-is-slow-after-idle) | Scale-to-zero reactivation | Compute status on Branches page | [Scale to zero](/docs/introduction/scale-to-zero) |
-| [Everything is slow regardless of query](#app-and-database-are-in-different-regions) | App and database in different regions | Region settings in Neon Console | [Latency and timeouts](/docs/connect/connection-latency) |
-| [Everything slows down under load](#everything-slows-down-under-load) | Compute at minimum size | Monitoring dashboard (CPU, RAM) | [Autoscaling](/docs/introduction/autoscaling) |
-| [Connections fail or time out](#connections-fail-or-time-out) | Max connections exhausted | Connection count on Monitoring dashboard | [Connection pooling](/docs/connect/connection-pooling) |
-| [Prepared statements or SET commands fail](#prepared-statements-or-set-commands-fail) | PgBouncer transaction mode | Connection string (`-pooler` in hostname) | [Connection pooling](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode) |
-| [Reads are slow but writes are fine](#reads-are-slow-but-writes-are-fine) | Primary overloaded with reads | Read vs. write ratio in your workload | [Read replicas](/docs/introduction/read-replicas) |
-| [Specific queries are slow](#finding-slow-queries) | Missing indexes, poor query plans | Query Performance tab, `pg_stat_statements` | [Finding slow queries](#finding-slow-queries) |
+| Symptom                                                                               | Likely cause                          | What to check                               | Guide                                                                                         |
+| ------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [First query is slow after idle](#first-query-is-slow-after-idle)                     | Scale-to-zero reactivation            | Compute status on Branches page             | [Scale to zero](/docs/introduction/scale-to-zero)                                             |
+| [Everything is slow regardless of query](#app-and-database-are-in-different-regions)  | App and database in different regions | Region settings in Neon Console             | [Latency and timeouts](/docs/connect/connection-latency)                                      |
+| [Everything slows down under load](#everything-slows-down-under-load)                 | Compute at minimum size               | Monitoring dashboard (CPU, RAM)             | [Autoscaling](/docs/introduction/autoscaling)                                                 |
+| [Connections fail or time out](#connections-fail-or-time-out)                         | Max connections exhausted             | Connection count on Monitoring dashboard    | [Connection pooling](/docs/connect/connection-pooling)                                        |
+| [Prepared statements or SET commands fail](#prepared-statements-or-set-commands-fail) | PgBouncer transaction mode            | Connection string (`-pooler` in hostname)   | [Connection pooling](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode) |
+| [Reads are slow but writes are fine](#reads-are-slow-but-writes-are-fine)             | Primary overloaded with reads         | Read vs. write ratio in your workload       | [Read replicas](/docs/introduction/read-replicas)                                             |
+| [Specific queries are slow](#finding-slow-queries)                                    | Missing indexes, poor query plans     | Query Performance tab, `pg_stat_statements` | [Finding slow queries](#finding-slow-queries)                                                 |
 
 ## Platform layer
 
@@ -91,11 +91,11 @@ If your read queries are slow while writes perform normally, your primary comput
 
 Neon provides tools to help you identify which queries are consuming the most time and resources.
 
-| Tool | What it shows | Guide |
-| --- | --- | --- |
-| [Query Performance](/docs/introduction/monitor-query-performance) tab | Top queries by execution time, sorted by total or mean duration | [Monitor query performance](/docs/introduction/monitor-query-performance) |
-| [Active Queries](/docs/introduction/monitor-active-queries) | Currently running queries and their duration | [Monitor active queries](/docs/introduction/monitor-active-queries) |
-| [pg_stat_statements](/docs/extensions/pg_stat_statements) | Aggregated statistics: execution count, mean/total time, rows returned, buffer I/O | [pg_stat_statements](/docs/extensions/pg_stat_statements) |
+| Tool                                                                  | What it shows                                                                      | Guide                                                                     |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [Query Performance](/docs/introduction/monitor-query-performance) tab | Top queries by execution time, sorted by total or mean duration                    | [Monitor query performance](/docs/introduction/monitor-query-performance) |
+| [Active Queries](/docs/introduction/monitor-active-queries)           | Currently running queries and their duration                                       | [Monitor active queries](/docs/introduction/monitor-active-queries)       |
+| [pg_stat_statements](/docs/extensions/pg_stat_statements)             | Aggregated statistics: execution count, mean/total time, rows returned, buffer I/O | [pg_stat_statements](/docs/extensions/pg_stat_statements)                 |
 
 Start with the **Query Performance** monitoring tab for a quick overview, then use `pg_stat_statements` to dig into specific queries.
 
