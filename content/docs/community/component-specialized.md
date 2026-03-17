@@ -57,7 +57,7 @@ Embed code from external sources or files.
 
 **Live preview:**
 
-<ExternalCode url="https://raw.githubusercontent.com/neondatabase/website/refs/heads/main/content/docs/README.md" />
+_[External code loaded from GitHub README.md with syntax highlighting]_
 
 Example of external code loading (mocked for showcase):
 
