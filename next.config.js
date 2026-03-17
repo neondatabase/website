@@ -107,6 +107,19 @@ const defaultConfig = {
           },
         ],
       },
+      {
+        source: '/(docs|postgresql|guides|branching|programs|use-cases)/:path*.md',
+        headers: [
+          {
+            key: 'Content-Disposition',
+            value: 'inline',
+          },
+          {
+            key: 'Content-Type',
+            value: 'text/markdown; charset=utf-8',
+          },
+        ],
+      },
     ];
   },
   async redirects() {

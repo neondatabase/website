@@ -65,7 +65,7 @@ ActionItem.propTypes = {
   tooltip: PropTypes.string,
 };
 
-const CopyMarkdownButton = ({ rawFileLink }) => {
+const CopyMarkdownButton = ({ markdownPath }) => {
   const [status, setStatus] = useState('default'); // 'default' | 'copied' | 'failed'
 
   const getButtonText = () => {
@@ -76,7 +76,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
 
   const copyPageToClipboard = async () => {
     try {
-      const response = await fetch(rawFileLink);
+      const response = await fetch(markdownPath);
       const content = await response.text();
       copyToClipboard(content);
       setStatus('copied');
@@ -103,7 +103,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
 };
 
 CopyMarkdownButton.propTypes = {
-  rawFileLink: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string.isRequired,
 };
 
 /* Disabled for now - kept for possible future use
@@ -181,32 +181,33 @@ const CopyNeonCLIButton = () => {
 
 const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
-  const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+  const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
   const gitHubLink = `${githubBase}${gitHubPath}`;
-  const rawFileLink = `${githubRawBase}${gitHubPath}`;
+  const markdownPath = `/${gitHubPath.replace('content/', '')}`;
+  const markdownUrl = `${siteUrl}${markdownPath}`;
   const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const AI_CHATBOTS = [
     {
       name: 'ChatGPT',
       enabled: true,
-      generateLink: (rawFileLink) =>
-        `https://chatgpt.com/?hints=search&q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://chatgpt.com/?hints=search&q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: ChatGptIcon,
     },
     {
       name: 'Claude',
       enabled: true,
-      generateLink: (rawFileLink) =>
-        `https://claude.ai/new?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://claude.ai/new?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: ClaudeIcon,
     },
     {
       name: 'Perplexity',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://www.perplexity.ai/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://www.perplexity.ai/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: PerplexityIcon,
     },
 
@@ -214,28 +215,28 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
     {
       name: 'Gemini',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://gemini.google.com/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://gemini.google.com/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: GeminiIcon,
     },
     {
       name: 'DeepSeek',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://chat.deepseek.com/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://chat.deepseek.com/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: DeepSeekIcon,
     },
   ];
 
   const docsActions = (
     <>
-      <CopyMarkdownButton rawFileLink={rawFileLink} />
+      <CopyMarkdownButton markdownPath={markdownPath} />
       {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
         <ActionItem
           key={bot.name}
           icon={bot.icon}
           text={`Open in ${bot.name}`}
-          url={bot.generateLink(rawFileLink)}
+          url={bot.generateLink(markdownUrl)}
           tooltip={`Open this page in ${bot.name}`}
           onClick={() =>
             sendGtagEvent('Action Clicked', {
