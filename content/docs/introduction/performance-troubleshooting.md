@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-03-16T00:00:00.000Z'
 ---
 
-Multiple factors can make a Neon database feel slow, from cold starts after idle periods to missing indexes on hot queries. Use this page to narrow down the cause and find the right fix.
+Slow database performance can come from the platform layer (cold starts, compute sizing, connection limits) or the database layer (missing indexes, bloated tables, lock contention). This page helps you match your symptoms to the right fix.
 
 ## Quick reference
 
