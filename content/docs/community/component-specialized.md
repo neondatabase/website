@@ -52,12 +52,12 @@ Enhanced code blocks and external code embedding.
 Embed code from external sources or files.
 
 ```mdx
-<ExternalCode src="https://raw.githubusercontent.com/neondatabase/neon/master/README.md" />
+<ExternalCode url="https://raw.githubusercontent.com/neondatabase/neon/master/README.md" />
 ```
 
 **Live preview:**
 
-_[External code loaded from GitHub README.md with syntax highlighting]_
+<ExternalCode url="https://raw.githubusercontent.com/neondatabase/website/refs/heads/main/content/docs/README.md" />
 
 Example of external code loading (mocked for showcase):
 
