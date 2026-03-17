@@ -17,6 +17,7 @@ import jorgeFerreiroAvatar from 'images/authors/jorge-ferreiro.jpg';
 import julianBenegasAvatar from 'images/authors/julian-benegas.jpg';
 import lincolnBergesonAvatar from 'images/authors/lincoln-bergeson.jpg';
 import martinSkowAvatar from 'images/authors/martin-skow.jpg';
+import oliJuhlAvatar from 'images/authors/oli-juhl.png';
 import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
@@ -83,6 +84,10 @@ const quotes = {
     name: 'Julian Benegas',
     avatar: julianBenegasAvatar,
   },
+  'oli-juhl': {
+    name: 'Oli Juhl',
+    avatar: oliJuhlAvatar,
+  },
   'oliver-stenbom': {
     name: 'Oliver Stenbom',
     avatar: oliverStenbomAvatar,
@@ -116,15 +121,17 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
         </blockquote>
 
         <figcaption className="mt-5 flex items-center gap-2.5 md:mt-4">
-          <div className="relative overflow-hidden rounded-full">
-            <Image
-              className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
-              src={avatar}
-              alt={name}
-              width={32}
-              height={32}
-            />
-          </div>
+          {avatar && (
+            <div className="relative overflow-hidden rounded-full">
+              <Image
+                className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
+                src={avatar}
+                alt={name}
+                width={32}
+                height={32}
+              />
+            </div>
+          )}
           <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
             {name}
             <span className="font-normal text-gray-new-70 dark:text-[#A1A1AA]">
