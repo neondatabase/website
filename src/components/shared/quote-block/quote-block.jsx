@@ -85,7 +85,7 @@ const quotes = {
     avatar: julianBenegasAvatar,
   },
   'oli-juhl': {
-    name: 'Oli Juhl',
+    name: 'Oliver Juhl',
     avatar: oliJuhlAvatar,
   },
   'oliver-stenbom': {
