@@ -1,5 +1,5 @@
 ---
-title: Why is it slow?
+title: Performance troubleshooting
 subtitle: Diagnose and fix slow queries, connections, and compute performance
 summary: >-
   A decision tree for diagnosing performance issues in Neon, covering platform
