@@ -9,7 +9,7 @@ const Task = () => (
     <Container className="relative lg:mx-8 md:mx-auto md:max-w-sm md:px-5" size="768">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 md:flex-col md:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
-          <p className="mb-4 text-base font-medium tracking-wide text-gray-new-50 uppercase xl:mb-3 lg:mb-4 lg:text-sm md:mb-3 md:text-[13px]">
+          <p className="mb-4 text-base leading-normal font-medium tracking-wide text-gray-new-50 uppercase xl:mb-3 lg:mb-4 lg:text-sm md:mb-3 md:text-[13px]">
             import data assistant
           </p>
           <h2 className="font-title text-5xl leading-none font-medium tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[32px]">

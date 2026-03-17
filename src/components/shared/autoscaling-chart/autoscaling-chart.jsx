@@ -710,7 +710,7 @@ const AutoscalingChart = ({
           </div>
 
           {/* Chart */}
-          <div className={cn('bg-[#131415]', compact ? 'h-[250px] p-3' : 'h-[500px] p-5')}>
+          <div className={cn('bg-gray-new-8', compact ? 'h-[250px] p-3' : 'h-[500px] p-5')}>
             <Line ref={chartRef} data={chartData} options={chartOptions} />
           </div>
         </div>
@@ -720,7 +720,7 @@ const AutoscalingChart = ({
       {showStats && (
         <div className="flex flex-wrap items-start justify-center gap-0 sm:flex-col sm:items-stretch">
           {/* Autoscaling Stats - Combined Panel */}
-          <div className="-mt-[1px] -ml-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+          <div className="-mt-px -ml-px border border-gray-new-30 bg-gray-new-8 p-6">
             <h3 className="mt-0 mb-3 font-mono text-xs font-medium tracking-wide text-[#73bf69] uppercase">
               Autoscaling
             </h3>
@@ -762,7 +762,7 @@ const AutoscalingChart = ({
           {/* Provisioned Stats - Combined Panel */}
           {!autoscalingOnly && (
             <>
-              <div className="-mt-[1px] -ml-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6 sm:max-w-full">
+              <div className="-mt-px -ml-px max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6 sm:max-w-full">
                 <h3 className="mt-0 mb-3 text-xs font-medium tracking-wide text-[#e8912d] uppercase">
                   Provisioned Equivalent
                 </h3>
@@ -811,7 +811,7 @@ const AutoscalingChart = ({
               </div>
 
               {/* Comparison Summary - Redesigned */}
-              <div className="-mt-[1px] -ml-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+              <div className="-mt-px -ml-px border border-gray-new-30 bg-gray-new-8 p-6">
                 <div className="grid grid-cols-3 gap-0 font-mono sm:grid-cols-1">
                   {/* Compute Winner */}
                   <div className="px-4 text-center">
@@ -828,7 +828,7 @@ const AutoscalingChart = ({
                     </div>
                     <div
                       className={cn(
-                        'text-5xl font-bold tabular-nums',
+                        'text-5xl/normal font-bold tabular-nums',
                         stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       )}
                     >
@@ -853,7 +853,7 @@ const AutoscalingChart = ({
                       {stats.cheaper}
                     </div>
                     <div
-                      className={`text-5xl font-bold tabular-nums ${
+                      className={`text-5xl/normal font-bold tabular-nums ${
                         stats.cheaper === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       }`}
                     >
@@ -870,7 +870,7 @@ const AutoscalingChart = ({
                       Monthly Savings
                     </div>
                     <div>{stats.cheaper} saves</div>
-                    <div className="text-blue-400 text-5xl font-bold tabular-nums">
+                    <div className="text-blue-400 text-5xl/normal font-bold tabular-nums">
                       ${Math.round(stats.monthlySavings)}
                     </div>
                     <div className="text-gray-400 text-sm">per month</div>

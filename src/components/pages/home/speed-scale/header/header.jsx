@@ -14,7 +14,7 @@ const Header = () => (
       </h2>
       <p
         className={cn(
-          'mt-6 max-w-[736px] text-lg tracking-extra-tight text-gray-new-60',
+          'mt-6 max-w-[736px] text-lg leading-normal tracking-extra-tight text-gray-new-60',
           'lg:mt-5 lg:text-base lg:leading-snug md:mt-[18px] sm:text-[15px]'
         )}
       >

@@ -110,11 +110,11 @@ const Table = () => {
                       <li
                         className={cn(
                           'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
-                          index === 0 && 'border-t-0',
                           isGroupTitle
                             ? 'h-[86px] justify-end border-t pb-[18px] lg:h-[66px]'
                             : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
                           i === 1 && 'lg:pl-5',
+                          index === 0 && 'border-t-0',
                           'before:opacity-0',
                           'before:absolute before:-inset-y-px before:-left-4 before:z-0 before:w-4 before:rounded-tl-lg before:rounded-bl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}

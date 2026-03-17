@@ -56,7 +56,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             className={cn(
               'group flex h-full min-h-[176px] flex-col rounded-[10px] border border-gray-new-15 xl:min-h-[165px] lg:min-h-max md:flex-row md:gap-x-3',
               isLarge
-                ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:flex-col md:p-5 md:pb-6 sm:space-y-3'
+                ? 'p-5 xl:pb-4 lg:p-4 lg:pb-5 md:flex-col md:p-5 md:pb-6'
                 : 'px-5 pt-5 pb-4 xl:p-3.5 lg:p-4',
               { 'pointer-events-none': isDisabled }
             )}
@@ -87,7 +87,7 @@ const CardItemsList = ({ className = null, items, ariaHidden = false, size = 'md
             />
             <div
               className={cn(
-                isLarge ? 'mt-5 lg:mt-4' : 'mt-[38px] xl:mt-8 lg:mt-7 md:mt-0',
+                isLarge ? 'mt-5 lg:mt-4 sm:mt-3' : 'mt-[38px] xl:mt-8 lg:mt-7 md:mt-0',
                 'flex h-full flex-col'
               )}
             >

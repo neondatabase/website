@@ -110,7 +110,7 @@ const Plans = () => {
                     </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex min-h-7 items-center gap-1.5">
                           <div className="leading-snug">
                             <span className="text-[15px] -tracking-wide text-gray-new-60">
                               Typical spend:

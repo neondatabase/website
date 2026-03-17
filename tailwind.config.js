@@ -231,7 +231,9 @@ module.exports = {
           'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
           'linear-gradient(0deg, #0D0E12, #0D0E12)',
         'migration-card-right-bg':
-          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+          'linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
         'migration-steps-slider-progress-bg':
           'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
         'template-cta':
