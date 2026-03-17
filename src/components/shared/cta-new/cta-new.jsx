@@ -11,11 +11,11 @@ import { cn } from 'utils/cn';
 import ctaBackground from './images/cta-bg.jpg';
 
 const CONTACT_SALES_AI_SETTINGS = {
-  botName: 'Neon Sales AI',
+  aiAssistantName: 'Neon Sales AI',
   placeholder: 'How do I get started?',
   introMessage:
-    "<p>Hi!<br>I'm an AI assistant here to help you learn about Neon and answer any questions you have.</p><p>Feel free to ask about pricing, features, enterprise solutions, or anything else!</p>",
-  quickQuestions: [
+    "Hi!\nI'm an AI assistant here to help you learn about Neon and answer any questions you have.\n\nFeel free to ask about pricing, features, enterprise solutions, or anything else!",
+  exampleQuestions: [
     'How to get a Demo request?',
     'What are the Enterprise Pricing?',
     'HIPAA Compliance',

@@ -3,10 +3,10 @@
 import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
-import { baseSettings, aiChatSettings } from 'lib/inkeep-settings';
+import { aiChatSettings, getInkeepBaseSettings } from 'lib/inkeep-settings';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const InkeepModalChat = dynamic(
@@ -17,13 +17,14 @@ const InkeepModalChat = dynamic(
 const ButtonAiHelper = ({
   className,
   children,
-  botName = aiChatSettings.botName,
+  aiAssistantName = aiChatSettings.aiAssistantName,
   placeholder = aiChatSettings.placeholder,
   introMessage = aiChatSettings.introMessage,
-  quickQuestions = aiChatSettings.quickQuestions,
+  exampleQuestions = aiChatSettings.exampleQuestions,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
+  const latestInputMessageRef = useRef('');
 
   let themeMode;
   switch (true) {
@@ -42,44 +43,30 @@ const ButtonAiHelper = ({
   const customAiChatSettings = useMemo(
     () => ({
       ...aiChatSettings,
-      botName,
+      aiAssistantName,
       placeholder,
       introMessage,
-      quickQuestions,
+      exampleQuestions,
+      onInputMessageChange: (message) => {
+        latestInputMessageRef.current = message;
+      },
     }),
-    [botName, placeholder, introMessage, quickQuestions]
+    [aiAssistantName, placeholder, introMessage, exampleQuestions]
   );
 
+  const handleInkeepEvent = (event) => {
+    if (event.eventName !== 'user_message_submitted') return;
+
+    const payload = latestInputMessageRef.current ? { text: latestInputMessageRef.current } : {};
+    sendGtagEvent('AI Chat Message Submitted', payload);
+    latestInputMessageRef.current = '';
+  };
+
   const inkeepModalProps = {
-    baseSettings: {
-      ...baseSettings,
-      colorMode: {
-        forcedColorMode: themeMode,
-      },
-      theme: {
-        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css', '/inkeep/css/chat.css'],
-        components: {
-          AIChatPageWrapper: {
-            defaultProps: {
-              size: 'expand',
-              variant: 'no-shadow',
-            },
-          },
-        },
-        tokens: {
-          colors: {
-            'grayDark.900': '#09090B',
-          },
-        },
-      },
-      optOutFunctionalCookies: true,
-      logEventCallback: (event) => {
-        const { eventName, properties } = event;
-        if (eventName === 'chat_message_submitted') {
-          sendGtagEvent('AI Chat Message Submitted', { text: properties.content });
-        }
-      },
-    },
+    baseSettings: getInkeepBaseSettings({
+      onEvent: handleInkeepEvent,
+      themeMode,
+    }),
     modalSettings: {
       isOpen,
       onOpenChange: setIsOpen,
@@ -100,10 +87,10 @@ const ButtonAiHelper = ({
 ButtonAiHelper.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  botName: PropTypes.string,
+  aiAssistantName: PropTypes.string,
   placeholder: PropTypes.string,
   introMessage: PropTypes.string,
-  quickQuestions: PropTypes.arrayOf(PropTypes.string),
+  exampleQuestions: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ButtonAiHelper;
