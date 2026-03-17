@@ -985,6 +985,8 @@
           items:
             - title: Overview
               slug: introduction/monitoring
+            - title: Why is it slow?
+              slug: introduction/performance-troubleshooting
             - title: Monitoring dashboard
               slug: introduction/monitoring-page
             - title: System operations
