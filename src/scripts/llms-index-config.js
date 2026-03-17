@@ -29,6 +29,7 @@ module.exports = {
   //   name:        must match the derived section name (from directory path or route key)
   //   description: optional text below the ## heading (omit for no description)
   //   collapse:         optional; replaces all entries with one link { title, url, description }
+  //                     Index-only: does not affect llms-full.txt (collapsed sections are included in full)
   //   subIndex:         optional; moves full listing to a separate file, shows only highlights inline
   //                     { outputPath, url, highlights: ['path/to/file.md', ...] }
   //   subsectionOrder:        optional; explicit ordering for subsections (unlisted ones sort alphabetically after)
@@ -234,4 +235,15 @@ module.exports = {
       sourcePath: 'reference/glossary.md',
     },
   ],
+
+  // Configuration for llms-full.txt (single file with all doc content).
+  // Uses shared excludePaths, EXCLUDED_DIRS, EXCLUDED_FILES from this config.
+  // Section `collapse` settings are index-only and do not apply here.
+  fullText: {
+    // Routes from CONTENT_ROUTES to skip entirely.
+    excludeRoutes: ['docs/changelog', 'postgresql', 'guides', 'branching', 'use-cases', 'programs'],
+    // When true, do not exclude additionalResources[].sourcePath files
+    // (e.g., glossary.md stays in its natural section instead of being excluded).
+    includeAdditionalResourcePaths: true,
+  },
 };

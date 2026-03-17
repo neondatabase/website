@@ -37,7 +37,7 @@ const DocsList = ({ title, theme = 'default', children }) => (
     <ul className="m-0! flex flex-col gap-y-2 p-0!">
       {parsedChildren(children).map((child, index) => (
         <li
-          key={React.isValidElement(child) && child.key != null ? child.key : index}
+          key={index}
           className={cn(
             'group m-0! flex w-fit items-start gap-1.5 text-gray-new-30 before:hidden dark:text-gray-new-85',
             '[&_p]:my-0 [&_p]:pl-5 [&_p]:text-sm [&_p]:tracking-extra-tight',

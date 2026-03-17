@@ -21,6 +21,7 @@ export const viewport = {
   viewportFit: 'cover',
 };
 
+// Theme class set client-side by next-themes; suppressHydrationWarning avoids server/client mismatch.
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
   <html
