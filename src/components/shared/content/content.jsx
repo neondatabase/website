@@ -117,8 +117,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
               isTemplate && 'rounded-lg'
             )}
             src={src}
-            width={isReleaseNote ? 762 : 796}
-            height={isReleaseNote ? 428 : 447}
+            width={704}
+            height={447}
             style={{ width: '100%', height: '100%' }}
             title={title !== 'no-border' ? title : undefined}
             {...rest}
