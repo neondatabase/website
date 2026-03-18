@@ -9,7 +9,7 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
-  transpilePackages: ['geist'],
+  transpilePackages: ['geist', 'react-icons'],
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 95, 99, 100],
@@ -114,6 +114,19 @@ const defaultConfig = {
           {
             key: 'Cross-Origin-Opener-Policy',
             value: 'same-origin',
+          },
+        ],
+      },
+      {
+        source: '/(docs|postgresql|guides|branching|programs|use-cases)/:path*.md',
+        headers: [
+          {
+            key: 'Content-Disposition',
+            value: 'inline',
+          },
+          {
+            key: 'Content-Type',
+            value: 'text/markdown; charset=utf-8',
           },
         ],
       },

@@ -43,12 +43,12 @@ const CodeCommandBlock = ({ command, trackingLabel = null, className = '' }) => 
     <button
       type="button"
       className={cn(
-        'group relative mt-4 w-full bg-gray-new-15 text-left text-white transition-colors duration-200 hover:bg-gray-new-30 dark:bg-[#E4F1EB] dark:text-gray-new-8 dark:hover:bg-white [&>pre]:!bg-transparent [&>pre]:p-3',
+        'group relative mt-4 w-full bg-gray-new-15 text-left text-white transition-colors duration-200 hover:bg-gray-new-30 dark:bg-[#E4F1EB] dark:text-gray-new-8 dark:hover:bg-white [&>pre]:bg-transparent! [&>pre]:p-3',
         className
       )}
       onClick={handleCopyWithTracking}
     >
-      <pre className="!my-0">
+      <pre className="my-0!">
         <code className="language-bash text-white dark:text-gray-new-8">
           <span className="mr-1.5 ml-1 text-gray-new-60 dark:text-gray-new-30">$</span>
           {command}
@@ -85,7 +85,7 @@ const DocCta = ({
   <figure
     className={cn(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
-      'my-9 p-5 md:my-8',
+      'my-9 p-5 pr-7 md:my-8',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
       'dark:border-gray-new-30 dark:bg-gray-new-10'
     )}
@@ -103,7 +103,7 @@ const DocCta = ({
       </div>
     )}
     <Image
-      className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover"
+      className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover sm:hidden"
       src={patternImage}
       alt=""
       width={188}
@@ -112,11 +112,11 @@ const DocCta = ({
 
     <div
       className={cn(
-        'relative z-10 flex gap-5',
+        'relative z-10 flex gap-5 sm:flex-col sm:items-start sm:gap-y-4',
         secondaryButtonText ? 'flex-col' : 'flex-row justify-between'
       )}
     >
-      <div className="flex max-w-lg flex-col">
+      <div className="flex max-w-[490px] flex-col">
         <div className="text-xl leading-tight font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
           {title}
         </div>
@@ -135,7 +135,7 @@ const DocCta = ({
 
       {(!!buttonText || secondaryButtonText) && (
         <div className="relative z-10 flex flex-wrap items-center gap-5">
-          {!buttonText && buttonUrl && (
+          {buttonText && buttonUrl && (
             <Button
               className="w-fit shrink-0 px-7 py-[14px] text-base leading-none font-medium tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
               to={buttonUrl}
@@ -147,7 +147,7 @@ const DocCta = ({
           )}
           {secondaryButtonText && secondaryButtonUrl && (
             <Button
-              className="w-fit shrink-0 border border-gray-new-60 bg-black-new/[0.02] px-7 py-[14px] text-base leading-none font-normal tracking-tight text-black-new hover:bg-black-new/[0.04] hover:text-black-new dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"
+              className="w-fit shrink-0 border border-gray-new-60 bg-black-new/2 px-7 py-[14px] text-base leading-none font-normal tracking-tight text-black-new hover:bg-black-new/4 hover:text-black-new dark:border-gray-new-40 dark:bg-white/2 dark:text-white dark:hover:bg-white/4 dark:hover:text-white"
               to={secondaryButtonUrl}
               theme="transparent"
               tagName="DocsCTASecondary"

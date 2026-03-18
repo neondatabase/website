@@ -57,15 +57,15 @@ const CheckList = ({ title, children }) => {
   return (
     <div
       className={cn(
-        'checklist doc-cta mt-9! flex flex-col px-8 pt-6 pb-8',
+        'checklist doc-cta mt-9! flex flex-col bg-white px-8 pt-6 pb-8',
         'border border-gray-new-80',
-        'dark:border-gray-new-20',
+        'dark:border-gray-new-20 dark:bg-black-pure',
         'xl:mt-8! lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
       )}
     >
       <div className="flex items-start gap-4">
         {title && (
-          <h2 className="m-0! pt-0! text-2xl leading-tight font-medium tracking-tighter lg:text-xl">
+          <h2 className="m-0! pt-0! text-2xl leading-tight font-medium tracking-tighter text-black-pure dark:text-white lg:text-xl">
             {title}
           </h2>
         )}

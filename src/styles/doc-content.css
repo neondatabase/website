@@ -81,9 +81,9 @@
   }
 
   .prose-doc {
-    @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
+    @apply max-w-none text-lg leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black-pure dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-1 prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out prose-a:hover:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:prose-a:hover:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-1 prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -113,11 +113,12 @@
       @apply mt-10;
     }
 
-    @apply prose-h2:m-0 prose-h2:pt-7 prose-h2:text-[28px] prose-h2:leading-tight prose-h2:font-medium prose-h2:tracking-tighter;
-    @apply prose-h3:text-xl prose-h3:leading-tight prose-h3:font-medium prose-h3:tracking-tighter;
+    @apply prose-h2:mt-7 prose-h2:mb-0 prose-h2:text-[28px] prose-h2:leading-tight prose-h2:font-medium prose-h2:tracking-tighter;
+    @apply prose-h3:text-xl prose-h3:leading-snug prose-h3:font-medium prose-h3:tracking-extra-tight;
     @apply prose-h4:text-lg prose-h4:leading-snug prose-h4:font-medium prose-h4:tracking-extra-tight;
-    @apply prose-p:mt-4.5 prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
+    @apply prose-p:mt-[18px] prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
+    @apply prose-hr:mt-8 prose-hr:mb-12 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
 
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
@@ -127,8 +128,8 @@
       @apply scroll-mt-24 lg:scroll-mt-5;
     }
 
-    p > img {
-      @apply rounded border border-gray-new-94 dark:border-gray-new-20;
+    p img {
+      @apply border border-gray-new-90 dark:border-gray-new-20;
 
       &.no-border {
         @apply border-0;
@@ -167,10 +168,6 @@
       ol {
         list-style-type: lower-alpha;
       }
-    }
-
-    hr {
-      @apply my-8;
     }
 
     h2,
@@ -226,14 +223,17 @@
       > code {
         text-shadow: unset;
 
-        @apply font-mono! text-sm leading-[1.75]! dark:[text-shadow:unset]!;
+        @apply font-mono! text-sm leading-normal! dark:text-shadow-[unset]!;
+        > span {
+          @apply tracking-extra-tight;
+        }
       }
 
       @apply prose-code:text-black-new dark:prose-code:text-white;
     }
 
     :not(pre) > code {
-      @apply rounded border border-gray-new-90 bg-gray-new-94 px-1! py-px! font-mono! text-sm leading-tight font-normal! tracking-extra-tight break-words text-black-new! dark:border-gray-new-30 dark:bg-black dark:text-white!;
+      @apply inline-flex items-center justify-center rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight break-words text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
 
       @apply before:hidden after:hidden;
     }
