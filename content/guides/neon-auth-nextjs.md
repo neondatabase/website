@@ -4,7 +4,7 @@ subtitle: Learn how to setup Neon Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2025-12-26T00:00:00.000Z'
+updatedOn: '2026-03-17T00:00:00.000Z'
 ---
 
 This guide walks you through building a demo todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
@@ -32,7 +32,7 @@ You'll need to create a Neon project and enable Neon Auth.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
 3.  **Copy your credentials:**
-    - **Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+    - **Auth URL:** Found on the **Auth** page under Configuration (e.g., `https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth`).
       ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
       ![Connection modal](/docs/connect/connection_details.png)
@@ -51,7 +51,7 @@ Create a new Next.js project and install dependencies.
 2.  **Install dependencies:**
 
     ```bash
-    npm install @neondatabase/neon-js@latest @neondatabase/serverless drizzle-orm
+    npm install @neondatabase/auth@latest @neondatabase/serverless drizzle-orm
     npm install -D drizzle-kit dotenv @types/node
     ```
 
@@ -59,9 +59,14 @@ Create a new Next.js project and install dependencies.
 
 Create a `.env` file in the root of your project.
 
+<Admonition type="note">
+Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a secure cookie secret with `openssl rand -base64 32`.
+</Admonition>
+
 ```env
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
-NEON_AUTH_BASE_URL="https://ep-xxx.neon.tech/neondb/auth"
+NEON_AUTH_BASE_URL="https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth"
+NEON_AUTH_COOKIE_SECRET="your-secret-at-least-32-characters-long"
 ```
 
 ## Set up Drizzle ORM
@@ -223,13 +228,28 @@ Now you have Drizzle ORM set up with Neon Auth and a `todos` table ready for use
 
 Integrate Neon Auth into your Next.js application for authentication and session management.
 
+### Create auth server instance
+
+Create a file `lib/auth/server.ts` at the root of your project. This single instance provides all server-side auth functionality: `.handler()` for API routes, `.middleware()` for route protection, and `.getSession()` for accessing session data.
+
+```typescript
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+```
+
 ### Create Auth client
 
-Create a file `lib/auth/client.ts` at the root of your project to initialize the Neon Auth client.
+Create a file `lib/auth/client.ts` at the root of your project to initialize the Neon Auth client for browser-side auth operations.
 
 ```typescript
 'use client';
-import { createAuthClient } from '@neondatabase/neon-js/auth/next';
+import { createAuthClient } from '@neondatabase/auth/next';
 
 export const authClient = createAuthClient();
 ```
@@ -239,9 +259,9 @@ export const authClient = createAuthClient();
 Create `app/api/auth/[...path]/route.ts`. This file will handle authentication API requests on the server side.
 
 ```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
+import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = authApiHandler();
+export const { GET, POST } = auth.handler();
 ```
 
 ### Add Neon Auth UI provider
@@ -252,7 +272,7 @@ This setup also adds a global header containing a `UserButton` from [Neon Auth U
 
 ```tsx shouldWrap
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider, UserButton } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
 import './globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -280,7 +300,7 @@ This ensures that the required Tailwind styles for Neon Auth UI components are i
 
 ```css {2}
 @import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth/ui/tailwind';
 
 /* ... your existing styles ... */
 ```
@@ -294,7 +314,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     Create `app/auth/[path]/page.tsx`. This page will render the Neon Auth sign-in/sign-up UI.
 
     ```tsx shouldWrap
-    import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+    import { AuthView } from '@neondatabase/auth/react';
 
     export const dynamicParams = false;
 
@@ -314,8 +334,8 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     Create `app/account/[path]/page.tsx`. This page renders the Neon Auth account management UI, including features such as profile settings, password updates, and more.
 
     ```tsx shouldWrap
-    import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
-    import { accountViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
+    import { AccountView } from '@neondatabase/auth/react';
+    import { accountViewPaths } from '@neondatabase/auth/react/ui/server';
 
     export const dynamicParams = false;
 
@@ -343,16 +363,16 @@ Create `app/actions.ts` with the following content:
 ```typescript shouldWrap
 'use server';
 
-import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
+import { auth } from '@/lib/auth/server';
 import { db } from '@/app/db';
 import { todos } from '@/app/db/schema';
 import { eq, desc, and } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 async function getAuthUser() {
-  const { user } = await neonAuth();
-  if (!user) throw new Error('Unauthorized');
-  return user;
+  const { data: session } = await auth.getSession();
+  if (!session?.user) throw new Error('Unauthorized');
+  return session.user;
 }
 
 export async function getTodos() {
@@ -393,7 +413,7 @@ export async function deleteTodo(id: number) {
 The file defines five Server Actions that handle authentication and database operations:
 
 1. `getAuthUser()`
-   - Calls `neonAuth()` to get the current user.
+   - Calls `auth.getSession()` to get the current user.
    - Throws an error if no user is authenticated.
    - Used internally by all other actions to enforce authentication.
 
@@ -424,18 +444,27 @@ To protect certain routes and ensure only authenticated users can access them, c
 Create `proxy.ts` in the root of your project with the following content:
 
 ```typescript
-import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next/server';
+import { auth } from '@/lib/auth/server';
+import { NextRequest } from 'next/server';
 
-export default neonAuthMiddleware({
+const authMiddleware = auth.middleware({
   loginUrl: '/auth/sign-in',
 });
 
+export default function middleware(request: NextRequest) {
+  if (request.headers.has('Next-Action')) {
+    return;
+  }
+  return authMiddleware(request);
+}
+
 export const config = {
-  matcher: ['/'],
+  matcher: ['/', '/account/:path*'],
 };
+
 ```
 
-The middleware uses `neonAuthMiddleware` to check if a user is authenticated when accessing the root path (`/`). If not authenticated, the user is redirected to the sign-in page (`/auth/sign-in`).
+The middleware uses `auth.middleware()` to check if a user is authenticated when accessing protected routes (`/` and `/account/:path*`). If not authenticated, the user is redirected to the sign-in page (`/auth/sign-in`). Requests with a `Next-Action` header (server actions) are allowed through without the auth check, since authentication is handled within the server actions themselves.
 
 ## Create frontend components
 
@@ -543,15 +572,17 @@ Here is how you can retrieve user information across different parts of the Next
 
 **Server components (RSC)**
 
-In Server components, you can access session data using the `neonAuth` helper to retrieve the current `session` and `user` objects. This is ideal for initial page loads and conditional rendering based on auth state.
+In Server components, you can access session data using the `auth` instance to retrieve the current `session` and `user` objects. This is ideal for initial page loads and conditional rendering based on auth state.
 
 Create `app/server-profile/page.tsx`:
 
 ```tsx
-import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
+import { auth } from '@/lib/auth/server';
+
+export const dynamic = 'force-dynamic';
 
 export default async function ServerProfilePage() {
-  const { session, user } = await neonAuth();
+  const { data: session } = await auth.getSession();
 
   return (
     <div className="mx-auto max-w-xl space-y-4 p-6">
@@ -561,20 +592,20 @@ export default async function ServerProfilePage() {
         <p>
           <strong>Status:</strong> {session ? '✅ Authenticated' : '❌ Guest'}
         </p>
-        {user && (
+        {session?.user && (
           <p>
-            <strong>User ID:</strong> {user.id}
+            <strong>User ID:</strong> {session.user.id}
           </p>
         )}
-        {user && (
+        {session?.user && (
           <p>
-            <strong>Email:</strong> {user.email}
+            <strong>Email:</strong> {session.user.email}
           </p>
         )}
       </div>
 
       <pre className="overflow-auto rounded bg-black p-4 text-xs text-white">
-        {JSON.stringify({ session, user }, null, 2)}
+        {JSON.stringify({ session: session?.session, user: session?.user }, null, 2)}
       </pre>
     </div>
   );
@@ -631,25 +662,24 @@ export default function ClientProfilePage() {
 
 **API routes (route handlers)**
 
-You can also secure API routes by validating the session using `neonAuth()` within your route handlers. This is useful for building RESTful endpoints that require authentication.
+You can also secure API routes by validating the session using `auth.getSession()` within your route handlers. This is useful for building RESTful endpoints that require authentication.
 
 Create `app/api/profile/route.ts`:
 
 ```tsx
-import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
-import { NextResponse } from 'next/server';
+import { auth } from '@/lib/auth/server';
 
 export async function GET() {
-  // Validate session on the server
-  const { session, user } = await neonAuth();
+  const { data: session } = await auth.getSession();
 
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!session?.user) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  return NextResponse.json({
+  return Response.json({
     message: 'Secure data retrieved',
-    user: user,
+    session: session.session,
+    user: session.user,
   });
 }
 ```
@@ -659,7 +689,7 @@ export async function GET() {
 
 ## Deploying the application
 
-When you’re ready to deploy your Next.js application, you can use any platform that supports Next.js, such as Vercel, Netlify or VPS providers. Be sure to configure the required environment variables (`DATABASE_URL` and `NEON_AUTH_BASE_URL`) in your deployment settings.
+When you’re ready to deploy your Next.js application, you can use any platform that supports Next.js, such as Vercel, Netlify or VPS providers. Be sure to configure the required environment variables (`DATABASE_URL`, `NEON_AUTH_BASE_URL`, and `NEON_AUTH_COOKIE_SECRET`) in your deployment settings.
 
 After deployment, add your production URLs to the **Your trusted domains** section in the Neon Auth settings to ensure authentication functions correctly.
 
