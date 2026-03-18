@@ -1,0 +1,758 @@
+{
+  "aaikansh-agrawal": {
+    "name": "Aaikansh Agrawal",
+    "role": "Growth Marketer @ DronaHQ",
+    "url": null,
+    "photo": "/images/blog/authors/aaikansh-agrawal.jpeg",
+    "photoAlt": null
+  },
+  "adi-griever": {
+    "name": "Adi Griever",
+    "role": "Back End Golang Developer",
+    "url": null,
+    "photo": "/images/blog/authors/adi-griever.jpg",
+    "photoAlt": "Adi Griever"
+  },
+  "akshat-agrawal": {
+    "name": "Akshat Agrawal",
+    "role": "Product at Codeium",
+    "url": null,
+    "photo": "/images/blog/authors/akshat-agrawal.png",
+    "photoAlt": "Akshat Agrawal"
+  },
+  "anastasia-lubennikova": {
+    "name": "Anastasia Lubennikova",
+    "role": "Software Engineer",
+    "url": "https://twitter.com/alubennikova",
+    "photo": "/images/blog/authors/anastasia-lubennikova.png",
+    "photoAlt": null
+  },
+  "andre-landgraf": {
+    "name": "Andre Landgraf",
+    "role": "Senior Developer Advocate",
+    "url": null,
+    "photo": "/images/blog/authors/andre-landgraf.png",
+    "photoAlt": "Andre Landgraf"
+  },
+  "andreas-scherbaum": {
+    "name": "Andreas Scherbaum",
+    "role": "Postgres Performance Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/andreas-scherbaum.png",
+    "photoAlt": null
+  },
+  "andrew-hamilton": {
+    "name": "Andrew Hamilton",
+    "role": "Chief Technology Officer at Layer",
+    "url": null,
+    "photo": "/images/blog/authors/andrew-hamilton.png",
+    "photoAlt": null
+  },
+  "andrew-tate": {
+    "name": "Andrew Tate",
+    "role": "Software Developer",
+    "url": null,
+    "photo": "/images/blog/authors/andrew-tate.jpg",
+    "photoAlt": "Andrew Tate"
+  },
+  "andy-claremont": {
+    "name": "Andy Claremont",
+    "role": "Community & Ecosystem @ Glide",
+    "url": null,
+    "photo": "/images/blog/authors/andy-claremont.png",
+    "photoAlt": null
+  },
+  "andy-hattemer": {
+    "name": "Andy Hattemer",
+    "role": "Head of Growth",
+    "url": null,
+    "photo": "/images/blog/authors/andy-hattemer.jpeg",
+    "photoAlt": null
+  },
+  "anna-stepanyan": {
+    "name": "Anna Stepanyan",
+    "role": "Head of Product",
+    "url": null,
+    "photo": "/images/blog/authors/anna-stepanyan.png",
+    "photoAlt": "Anna Stepanyan"
+  },
+  "arjun-rajeswaran": {
+    "name": "Arjun Rajeswaran",
+    "role": "VP Revenue",
+    "url": null,
+    "photo": "/images/blog/authors/arjun-rajeswaran.jpg",
+    "photoAlt": null
+  },
+  "arseni-kravchenko": {
+    "name": "Arseni Kravchenko",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/arseni-kravchenko.png",
+    "photoAlt": "Arseni Kravchenko"
+  },
+  "atila": {
+    "name": "Atila Fassina",
+    "role": "Full Stack Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/atila.png",
+    "photoAlt": "Atila"
+  },
+  "atli-cervantes": {
+    "name": "Atli Cervantes",
+    "role": "Head of PLG Sales",
+    "url": null,
+    "photo": "/images/blog/authors/atli-cervantes.jpg",
+    "photoAlt": "Atli Cervantes"
+  },
+  "barry-grenon": {
+    "name": "Barry Grenon",
+    "role": "Technical Writer",
+    "url": null,
+    "photo": "/images/blog/authors/barry-grenon.png",
+    "photoAlt": "Barry Grenon"
+  },
+  "ben-hagan": {
+    "name": "Ben Hagan",
+    "role": "Product Manager",
+    "url": null,
+    "photo": "/images/blog/authors/ben-hagan.png",
+    "photoAlt": "Ben Hagan"
+  },
+  "bereket-engida": {
+    "name": "Bereket Engida",
+    "role": "Creator of Better Auth",
+    "url": null,
+    "photo": "/images/blog/authors/bereket-engida.jpg",
+    "photoAlt": "Bereket Engida"
+  },
+  "bojan-serafimov": {
+    "name": "Bojan Serafimov",
+    "role": "Software Engineer",
+    "url": "https://twitter.com/Bojan93112526",
+    "photo": "/images/blog/authors/bojan-serafimov.jpeg",
+    "photoAlt": null
+  },
+  "brad-van-vugt": {
+    "name": "Brad Van Vugt",
+    "role": "Growth Product Manager",
+    "url": null,
+    "photo": "/images/blog/authors/brad-van-vugt.jpg",
+    "photoAlt": "Brad Van Vugt"
+  },
+  "brandon-strittmatter": {
+    "name": "Brandon Strittmatter",
+    "role": "Co-Founder & CEO at Outerbase",
+    "url": null,
+    "photo": "/images/blog/authors/brandon-strittmatter.jpg",
+    "photoAlt": "Brandon Strittmatter"
+  },
+  "brian-holt": {
+    "name": "Brian Holt",
+    "role": "Staff Product Manager",
+    "url": null,
+    "photo": "/images/blog/authors/brian-holt.png",
+    "photoAlt": "Brian Holt"
+  },
+  "brian-morrison": {
+    "name": "Brian Morrison",
+    "role": "Software Developer at Clerk",
+    "url": null,
+    "photo": "/images/blog/authors/brian-morrison.png",
+    "photoAlt": "Brian Morrison"
+  },
+  "bryan-clark": {
+    "name": "Bryan Clark",
+    "role": "VP Product",
+    "url": null,
+    "photo": "/images/blog/authors/bryan-clark.jpg",
+    "photoAlt": "Bryan Clark"
+  },
+  "busra-demir": {
+    "name": "Busra Demir",
+    "role": "Lead Security Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/busra-demir.jpg",
+    "photoAlt": null
+  },
+  "carl-thomas": {
+    "name": "Carl Thomas",
+    "role": "Head of Design",
+    "url": null,
+    "photo": "/images/blog/authors/carl-thomas.png",
+    "photoAlt": "Carl Thomas"
+  },
+  "carlota-soto": {
+    "name": "Carlota Soto",
+    "role": "Product Marketing Lead",
+    "url": null,
+    "photo": "/images/blog/authors/carlota-soto.jpg",
+    "photoAlt": null
+  },
+  "charly-poly": {
+    "name": "Charly Poly",
+    "role": "Product Marketing at Inngest",
+    "url": "https://www.linkedin.com/in/charly-poly/",
+    "photo": "/images/blog/authors/charly-poly.png",
+    "photoAlt": "Charly Poly Avatar"
+  },
+  "christian-schwarz-2": {
+    "name": "Christian Schwarz",
+    "role": "Systems Software Engineer",
+    "url": "https://x.com/problame",
+    "photo": "/images/blog/authors/christian-schwarz-2.jpg",
+    "photoAlt": null
+  },
+  "daniel-price": {
+    "name": "Daniel Price",
+    "role": "Technical Writer",
+    "url": null,
+    "photo": "/images/blog/authors/daniel-price.webp",
+    "photoAlt": "Daniel Price"
+  },
+  "david-gomes": {
+    "name": "David Gomes",
+    "role": "Engineering Team",
+    "url": "https://davidgomes.com/",
+    "photo": "/images/blog/authors/david-gomes.jpeg",
+    "photoAlt": null
+  },
+  "deepesh-genani": {
+    "name": "Deepesh Genani",
+    "role": "Software Developer (external)",
+    "url": null,
+    "photo": "/images/blog/authors/deepesh-genani.png",
+    "photoAlt": "Deepesh Genani"
+  },
+  "dian-m-fay": {
+    "name": "Dian M Fay",
+    "role": "Senior Data Architect",
+    "url": null,
+    "photo": "/images/blog/authors/dian-m-fay.png",
+    "photoAlt": "Dian M Fay"
+  },
+  "dom-eccleston": {
+    "name": "Dom Eccleston",
+    "role": "Software Engineer @ Unkey",
+    "url": null,
+    "photo": "/images/blog/authors/dom-eccleston.png",
+    "photoAlt": null
+  },
+  "eduard-dyckman": {
+    "name": "Eduard Dyckman",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/eduard-dyckman.jpg",
+    "photoAlt": "Eduard Dyckman Photo"
+  },
+  "em-sharnoff": {
+    "name": "Em Sharnoff",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/em-sharnoff.jpg",
+    "photoAlt": null
+  },
+  "eric-goldman": {
+    "name": "Eric Goldman",
+    "role": "Co-founder at Sequin",
+    "url": null,
+    "photo": "/images/blog/authors/eric-goldman.png",
+    "photoAlt": "Eric Goldman"
+  },
+  "erik-grinaker": {
+    "name": "Erik Grinaker",
+    "role": "Backend Developer",
+    "url": null,
+    "photo": "/images/blog/authors/erik-grinaker.jpg",
+    "photoAlt": "Erik Grinaker"
+  },
+  "evan-shortiss": {
+    "name": "Evan Shortiss",
+    "role": "Developer Advocate",
+    "url": "https://twitter.com/evanshortiss",
+    "photo": "/images/blog/authors/evan-shortiss.jpg",
+    "photoAlt": "Evan Shortiss' Headshot"
+  },
+  "evgenii-kniazev": {
+    "name": "Evgenii Kniazev",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/evgenii-kniazev.png",
+    "photoAlt": "Evgenii Kniazev"
+  },
+  "evis-drenova": {
+    "name": "Evis Drenova",
+    "role": "CEO/Co-founder @ Neosync",
+    "url": null,
+    "photo": "/images/blog/authors/evis-drenova.jpg",
+    "photoAlt": null
+  },
+  "fedor-dikarev": {
+    "name": "Fedor Dikarev",
+    "role": "Member of Technical Staff",
+    "url": null,
+    "photo": "/images/blog/authors/fedor-dikarev.png",
+    "photoAlt": "Fedor Dikarev"
+  },
+  "felipe-freitag": {
+    "name": "Felipe Freitag",
+    "role": "Flashboard Founder",
+    "url": null,
+    "photo": "/images/blog/authors/felipe-freitag.png",
+    "photoAlt": "Felipe Freitag"
+  },
+  "george-mackerron": {
+    "name": "George MacKerron",
+    "role": "Software Developer",
+    "url": null,
+    "photo": "/images/blog/authors/george-mackerron.png",
+    "photoAlt": "George MacKerron"
+  },
+  "guillaume-rivals": {
+    "name": "Guillaume Rivals",
+    "role": "Lead Engineer, Growth",
+    "url": null,
+    "photo": "/images/blog/authors/guillaume-rivals.png",
+    "photoAlt": "Guillaume Rivals"
+  },
+  "gustavo-salomao": {
+    "name": "Gustavo Salomão",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/gustavo-salomao.png",
+    "photoAlt": "Gustavo Salomão"
+  },
+  "hayla-westhead": {
+    "name": "Hayla Westhead",
+    "role": "Lead Legal Counsel",
+    "url": "https://www.linkedin.com/in/hayla-westhead/",
+    "photo": "/images/blog/authors/hayla-westhead.jpg",
+    "photoAlt": null
+  },
+  "heikki-linnakangas": {
+    "name": "Heikki Linnakangas",
+    "role": "Co-Founder at Neon",
+    "url": "https://twitter.com/HLinnakangas",
+    "photo": "/images/blog/authors/heikki-linnakangas.jpg",
+    "photoAlt": null
+  },
+  "igor-rekun": {
+    "name": "Igor Rekun",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/igor-rekun.png",
+    "photoAlt": "Igor Rekun"
+  },
+  "ilya-tkachov": {
+    "name": "Ilya Tkachov",
+    "role": "Co-founder & CEO wispbit.com",
+    "url": null,
+    "photo": "/images/blog/authors/ilya-tkachov.jpg",
+    "photoAlt": null
+  },
+  "jacob-prall": {
+    "name": "Jacob Prall",
+    "role": "Senior Developer Advocate @ Airbyte",
+    "url": null,
+    "photo": "/images/blog/authors/jacob-prall.jpg",
+    "photoAlt": null
+  },
+  "jeff-christoffersen": {
+    "name": "Jeffrey Christoffersen",
+    "role": "Staff Product Designer",
+    "url": null,
+    "photo": "/images/blog/authors/jeff-christoffersen.png",
+    "photoAlt": "Jeff Christoffersen"
+  },
+  "joe-drumgoole": {
+    "name": "Joe Drumgoole",
+    "role": "Head of Developer Relations",
+    "url": null,
+    "photo": "/images/blog/authors/joe-drumgoole.jpg",
+    "photoAlt": null
+  },
+  "john-spray": {
+    "name": "John Spray",
+    "role": "Engineering Manager Storage",
+    "url": null,
+    "photo": "/images/blog/authors/john-spray.jpg",
+    "photoAlt": null
+  },
+  "krishna-b-parab": {
+    "name": "Krishna B. Parab",
+    "role": "Kiro Product Marketing, AWS",
+    "url": null,
+    "photo": "/images/blog/authors/krishna-b-parab.jpg",
+    "photoAlt": "Krishna B. Parab"
+  },
+  "lachezar-petkov": {
+    "name": "Lachezar Petkov",
+    "role": "Senior Product Designer",
+    "url": null,
+    "photo": "/images/blog/authors/lachezar-petkov.jpg",
+    "photoAlt": "Lachezar Petkov"
+  },
+  "lassi-polonen": {
+    "name": "Lassi Pölönen",
+    "role": "Member of Technical Staff",
+    "url": null,
+    "photo": "/images/blog/authors/lassi-polonen.jpeg",
+    "photoAlt": null
+  },
+  "luca-cittadini": {
+    "name": "Luca Cittadini",
+    "role": "Member of Technical Staff",
+    "url": null,
+    "photo": "/images/blog/authors/luca-cittadini.jpeg",
+    "photoAlt": null
+  },
+  "luis-neves": {
+    "name": "Luís Neves",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/luis-neves.png",
+    "photoAlt": "Luís Neves"
+  },
+  "luis-tavares": {
+    "name": "Luis Tavares",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/luis-tavares.png",
+    "photoAlt": "Luis Tavares"
+  },
+  "mahmoud-abdelwahab": {
+    "name": "Mahmoud Abdelwahab",
+    "role": "Developer Advocate",
+    "url": null,
+    "photo": "/images/blog/authors/mahmoud-abdelwahab.png",
+    "photoAlt": "Mahmoud Abdelwahab"
+  },
+  "marc-dupuis": {
+    "name": "Marc Dupuis",
+    "role": "Co-founder at Fabi.ai",
+    "url": null,
+    "photo": "/images/blog/authors/marc-dupuis.png",
+    "photoAlt": null
+  },
+  "marcus-lowe": {
+    "name": "Marcus Lowe",
+    "role": "Co-Founder / CEO, Anything",
+    "url": null,
+    "photo": "/images/blog/authors/marcus-lowe.png",
+    "photoAlt": null
+  },
+  "mario-cadenas": {
+    "name": "Mario Cadenas",
+    "role": "Senior Software Engineer",
+    "url": "https://www.mariocadenas.dev/",
+    "photo": "/images/blog/authors/mario-cadenas.png",
+    "photoAlt": "Mario Cadenas"
+  },
+  "marta-paes": {
+    "name": "Marta Paes",
+    "role": "Head of Developer Experience, Materialize",
+    "url": null,
+    "photo": "/images/blog/authors/marta-paes.jpg",
+    "photoAlt": null
+  },
+  "matt-palmer": {
+    "name": "Matt Palmer",
+    "role": "Developer Advocate at Replit",
+    "url": null,
+    "photo": "/images/blog/authors/matt-palmer.png",
+    "photoAlt": "Matt Palmer"
+  },
+  "matt-sherman": {
+    "name": "Matt Sherman",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/matt-sherman.png",
+    "photoAlt": "Matt Sherman"
+  },
+  "mervin-praison": {
+    "name": "Mervin Praison",
+    "role": "AI Engineer",
+    "url": "https://www.youtube.com/@MervinPraison",
+    "photo": "/images/blog/authors/mervin-praison.png",
+    "photoAlt": "Mervin Praison"
+  },
+  "mihai-bojin": {
+    "name": "Mihai Bojin",
+    "role": "Director of Engineering",
+    "url": null,
+    "photo": "/images/blog/authors/mihai-bojin.png",
+    "photoAlt": "Mihai Bojin"
+  },
+  "mikael-lirbank": {
+    "name": "Mikael Lirbank",
+    "role": "Software developer",
+    "url": null,
+    "photo": "/images/blog/authors/mikael-lirbank.png",
+    "photoAlt": "Mikael Lirbank"
+  },
+  "mike-jerome": {
+    "name": "Mike Jerome",
+    "role": "Product Manager",
+    "url": null,
+    "photo": "/images/blog/authors/mike-jerome.png",
+    "photoAlt": "Mike Jerome"
+  },
+  "monica-steinke": {
+    "name": "Monica Steinke",
+    "role": "Technical Product Manager",
+    "url": null,
+    "photo": "/images/blog/authors/monica-steinke.png",
+    "photoAlt": "Monica Steinke"
+  },
+  "nikita-shamgunov": {
+    "name": "Nikita Shamgunov",
+    "role": "CEO at Neon",
+    "url": "https://twitter.com/nikitabase",
+    "photo": "/images/blog/authors/nikita-shamgunov.jpg",
+    "photoAlt": null
+  },
+  "nikolai-rekubratskii": {
+    "name": "Nikolai Rekubratskii",
+    "role": "Data Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/nikolai-rekubratskii.jpg",
+    "photoAlt": "Nikolai Rekubratskii"
+  },
+  "noa-rogoszinski": {
+    "name": "Noa Rogoszinski",
+    "role": "DevRel Engineer at Ariga",
+    "url": null,
+    "photo": "/images/blog/authors/noa-rogoszinski.png",
+    "photoAlt": "Noa Rogoszinski"
+  },
+  "paul-scanlon": {
+    "name": "Paul Scanlon",
+    "role": "Technical Product Marketing Manager",
+    "url": null,
+    "photo": "/images/blog/authors/paul-scanlon.jpg",
+    "photoAlt": "Paul Scanlon"
+  },
+  "pedro-figueiredo": {
+    "name": "Pedro Figueiredo",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/pedro-figueiredo.png",
+    "photoAlt": "Pedro Figueiredo"
+  },
+  "peter-bendel": {
+    "name": "Peter Bendel",
+    "role": "Postgres Performance Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/peter-bendel.jpg",
+    "photoAlt": null
+  },
+  "phil-sheffield": {
+    "name": "Phil Sheffield",
+    "role": "Member of Product Staff",
+    "url": null,
+    "photo": "/images/blog/authors/phil-sheffield.png",
+    "photoAlt": null
+  },
+  "ran-sheinberg": {
+    "name": "Ran Sheinberg",
+    "role": "Co-Founder and CPO of xpander.ai",
+    "url": null,
+    "photo": "/images/blog/authors/ran-sheinberg.jpg",
+    "photoAlt": "Ran Sheinberg"
+  },
+  "raouf-chebri": {
+    "name": "Raouf Chebri",
+    "role": "Senior Developer Advocate",
+    "url": null,
+    "photo": "/images/blog/authors/raouf-chebri.jpg",
+    "photoAlt": "raouf-chebri"
+  },
+  "rishi-raj-jain": {
+    "name": "Rishi Raj Jain",
+    "role": "Solutions Engineer",
+    "url": "https://twitter.com/rishi_raj_jain_",
+    "photo": "/images/blog/authors/rishi-raj-jain.jpg",
+    "photoAlt": "Rishi Raj Jain"
+  },
+  "rodney-sherwin-shibu": {
+    "name": "Rodney Sherwin Shibu",
+    "role": "Member of Technical Staff",
+    "url": null,
+    "photo": "/images/blog/authors/rodney-sherwin-shibu.png",
+    "photoAlt": "Rodney Sherwin Shibu"
+  },
+  "roman-zaynetdinov": {
+    "name": "Roman Zaynetdinov",
+    "role": "Backend Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/roman-zaynetdinov.png",
+    "photoAlt": "Roman Zaynetdinov"
+  },
+  "rory-de-zoete": {
+    "name": "Rory de Zoete",
+    "role": "Lead Site Reliability Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/rory-de-zoete.jpg",
+    "photoAlt": null
+  },
+  "rotem-tamir": {
+    "name": "Rotem Tamir",
+    "role": "Сo-founder & CTO at Ariga",
+    "url": null,
+    "photo": "/images/blog/authors/rotem-tamir.png",
+    "photoAlt": "Rotem Tamir"
+  },
+  "ruslan-talpa": {
+    "name": "Ruslan Talpa",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/ruslan-talpa.png",
+    "photoAlt": "Ruslan Talpa"
+  },
+  "russ-dias": {
+    "name": "Russ Dias",
+    "role": "Full Stack Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/russ-dias.jpg",
+    "photoAlt": "Russ Dias"
+  },
+  "ryan-vogel": {
+    "name": "Ryan Vogel",
+    "role": "Developer Advocate",
+    "url": null,
+    "photo": "/images/blog/authors/ryan-vogel.png",
+    "photoAlt": "Ryan Vogel"
+  },
+  "sai-srirampur": {
+    "name": "Sai Srirampur",
+    "role": "Product at PeerDB/ClickHouse",
+    "url": null,
+    "photo": "/images/blog/authors/sai-srirampur.png",
+    "photoAlt": "Sai Srirampur"
+  },
+  "sam-aybar": {
+    "name": "Sam Aybar",
+    "role": "Developer Advocate, PolyScale.ai",
+    "url": null,
+    "photo": "/images/blog/authors/sam-aybar.jpeg",
+    "photoAlt": null
+  },
+  "sam-harrison": {
+    "name": "Sam Harrison",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/sam-harrison.png",
+    "photoAlt": "Sam Harrison photo"
+  },
+  "sam-kleinman": {
+    "name": "Sam Kleinman",
+    "role": "Backend Engineer",
+    "url": "https://github.com/tychoish",
+    "photo": "/images/blog/authors/sam-kleinman.jpg",
+    "photoAlt": null
+  },
+  "savannah-longoria": {
+    "name": "Savannah Longoria",
+    "role": "Developer Advocate",
+    "url": null,
+    "photo": "/images/blog/authors/savannah-longoria.png",
+    "photoAlt": "Savannah Longoria"
+  },
+  "scott-cate": {
+    "name": "Scott Cate",
+    "role": "301.Pro Founder",
+    "url": null,
+    "photo": "/images/blog/authors/scott-cate.png",
+    "photoAlt": "Scott Cate"
+  },
+  "sheldon-niu": {
+    "name": "Sheldon Niu",
+    "role": "CEO at AskYourDatabase",
+    "url": null,
+    "photo": "/images/blog/authors/sheldon-niu.jpg",
+    "photoAlt": "Sheldon Niu"
+  },
+  "shridhar-deshmukh": {
+    "name": "Shridhar Deshmukh",
+    "role": "Software Engineer",
+    "url": null,
+    "photo": "/images/blog/authors/shridhar-deshmukh.png",
+    "photoAlt": "Shridhar Deshmukh"
+  },
+  "stas-kelvich": {
+    "name": "Stas Kelvich",
+    "role": "Co-Founder at Neon",
+    "url": "https://twitter.com/kelvich",
+    "photo": "/images/blog/authors/stas-kelvich.jpg",
+    "photoAlt": null
+  },
+  "stephen-siegert": {
+    "name": "Stephen Siegert",
+    "role": "Developer Advocate",
+    "url": "https://twitter.com/siegerts",
+    "photo": "/images/blog/authors/stephen-siegert.jpeg",
+    "photoAlt": "Stephen Siegert"
+  },
+  "taraneh-dohmer": {
+    "name": "Taraneh Dohmer",
+    "role": "Developer Marketing Manager",
+    "url": null,
+    "photo": "/images/blog/authors/taraneh-dohmer.png",
+    "photoAlt": null
+  },
+  "thorsten-ries": {
+    "name": "Thorsten Rieß",
+    "role": "Sr. Software Engineer at traconiq",
+    "url": null,
+    "photo": "/images/blog/authors/thorsten-ries.jpg",
+    "photoAlt": "Thorsten Rieß"
+  },
+  "tony-holdstock-brown": {
+    "name": "Tony Holdstock-Brown",
+    "role": "CEO of Inngest",
+    "url": null,
+    "photo": "/images/blog/authors/tony-holdstock-brown.jpg",
+    "photoAlt": "Tony Holdstock-Brown Photo"
+  },
+  "tristan-partin": {
+    "name": "Tristan Partin",
+    "role": "Software Developer",
+    "url": null,
+    "photo": "/images/blog/authors/tristan-partin.jpg",
+    "photoAlt": "Tristan Partin"
+  },
+  "tyler-rockwood": {
+    "name": "Tyler Rockwood",
+    "role": "Software Engineer @ Redpanda",
+    "url": null,
+    "photo": "/images/blog/authors/tyler-rockwood.jpeg",
+    "photoAlt": null
+  },
+  "victor-ditadi": {
+    "name": "Victor Ditadi",
+    "role": "Senior Software Engineer",
+    "url": "https://www.victorditadi.com/",
+    "photo": "/images/blog/authors/victor-ditadi.png",
+    "photoAlt": "Victor Ditadi"
+  },
+  "will-adams": {
+    "name": "Will Adams",
+    "role": "Senior Customer Success Manager",
+    "url": null,
+    "photo": "/images/blog/authors/will-adams.jpg",
+    "photoAlt": "Will Adams"
+  },
+  "will-chen": {
+    "name": "Will Chen",
+    "role": "Dyad Founder",
+    "url": null,
+    "photo": "/images/blog/authors/will-chen.png",
+    "photoAlt": null
+  },
+  "yan-cui": {
+    "name": "Yan Cui",
+    "role": "Independent Consultant",
+    "url": null,
+    "photo": "/images/blog/authors/yan-cui.png",
+    "photoAlt": "Yan Cui"
+  }
+}
