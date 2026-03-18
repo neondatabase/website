@@ -11,7 +11,7 @@ import BranchingDemo from './branching-demo';
 
 const Branching = () => (
   <section className="branching mt-[168px] overflow-hidden pb-[100px] lg:mt-24 md:mt-[68px]">
-    <Container className="max-w-3xl lg:mx-24 md:mx-auto md:max-w-sm" size="576" as="header">
+    <Container className="lg:mx-24 md:mx-auto md:max-w-sm" size="576" as="header">
       <h2 className="pr-28 font-title text-[60px] leading-[90%] font-medium tracking-extra-tight text-white xl:max-w-[500px] xl:text-[52px] lg:max-w-[380px] lg:pr-20 lg:text-[40px] md:pr-10 md:text-[36px] md:leading-none">
         Recover multi-TB in seconds.
       </h2>

@@ -67,7 +67,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
 
           <span className="inline-flex w-fit items-center gap-2 text-base leading-none font-medium tracking-tighter text-white sm:text-[15px]">
             {linkText}
-            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-[transform,color] duration-200 group-hover:translate-x-[3px] group-hover:text-white" />
+            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-[translate,color] duration-200 group-hover:translate-x-[3px] group-hover:text-white" />
           </span>
         </div>
       </div>
@@ -105,7 +105,7 @@ const Hero = () => (
             Case studies
           </span>
         </div>
-        <h1 className="text-[3.5rem] leading-[1.125] font-normal tracking-[-0.04em] text-white lt:text-[54px] lg:text-[40px] md:text-[32px]">
+        <h1 className="text-[3.5rem] leading-[1.125] font-normal tracking-tighter text-white lt:text-[54px] lg:text-[40px] md:text-[32px]">
           Real-world stories from teams shipping world-class products on Neon.
         </h1>
       </div>

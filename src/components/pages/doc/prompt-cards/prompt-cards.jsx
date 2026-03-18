@@ -64,7 +64,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
           <span className="ml-1.5 flex h-auto w-3 shrink-0 items-center justify-center">
             <ChevronRight
               className={cn(
-                'block shrink-0 text-black-pure/50 transition-[transform,color] duration-200 dark:text-white/50',
+                'block shrink-0 text-black-pure/50 transition-[rotate,color] duration-200 dark:text-white/50',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}
             />

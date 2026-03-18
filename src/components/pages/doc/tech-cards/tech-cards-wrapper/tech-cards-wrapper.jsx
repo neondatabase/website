@@ -28,7 +28,7 @@ const TechCardsWrapper = ({ children, withToggler }) => {
           <span className="ml-2.5 flex size-3 items-center justify-center">
             <ChevronRight
               className={cn(
-                'block shrink-0 transition-[transform,color] duration-200',
+                'block shrink-0 transition-[rotate,color] duration-200',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}
             />
