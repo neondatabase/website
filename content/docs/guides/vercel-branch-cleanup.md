@@ -31,7 +31,9 @@ updatedOn: '2026-03-10T00:00:00.000Z'
 
 When you use Neon's Vercel integration, a Neon database branch is created for each Git branch that has a preview deployment. These are called preview branches. The two integration types handle cleanup of these branches differently:
 
-- **Vercel-Managed Integration**: Neon deletes a preview branch when its last associated Vercel deployment is permanently removed. This is tied to [Vercel's deployment retention policy](https://vercel.com/docs/deployment-retention).
+- **Vercel-Managed Integration**: Neon deletes a preview branch when its last associated Vercel deployment is deleted. This can happen in two ways:
+  - Vercel **automatically** removes it through its [deployment retention policy](https://vercel.com/docs/deployment-retention) (which can take months).
+  - You **manually** delete the Vercel deployment (which triggers immediate Neon cleanup)
 - **Neon-Managed Integration**: Neon deletes a preview branch when the corresponding Git branch no longer exists in your repository. This is triggered the next time a preview deployment is created.
 
 <Admonition type="tip" title="Using the Neon-Managed integration?">
@@ -42,25 +44,28 @@ If you're using the **Neon-Managed integration**, your branch cleanup is based o
 
 ## Why branches aren't cleaned up immediately
 
-If you're using the **Vercel-Managed integration**, you might expect preview branches to be deleted when you close a PR or delete a Git branch. That doesn't happen because cleanup is tied to **deployment deletion**, not Git branch deletion.
-
-Here's the timeline:
+If you're using the **Vercel-Managed integration**, you might expect preview branches to be deleted when you close a PR or delete a Git branch. That doesn't happen because cleanup is tied to **deployment deletion**, not Git branch deletion. Manually deleting a Vercel deployment triggers immediate Neon branch cleanup, but most teams rely on Vercel's automatic retention, which follows this timeline:
 
 1. **Vercel retains preview deployments for 6 months by default.** As of [October 2025](https://vercel.com/changelog/updated-defaults-for-deployment-retention), Vercel's default retention for pre-production deployments is 180 days. The clock starts when the deployment is created, not when the PR is closed.
-2. **After retention expires, there's a 30-day recovery period.** During this window, Vercel holds the deployment in a recoverable state. Only after this period ends is the deployment permanently deleted. See [Restoring a deleted deployment](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment).
+2. **After retention expires, there's a 30-day recovery period.** During this window, Vercel holds the deployment in a recoverable state. Only after this period ends is the deployment permanently deleted. Errored or canceled deployments may be removed sooner. See [Restoring a deleted deployment](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment).
 3. **Neon deletes the branch after permanent deletion.** Neon receives a cleanup webhook from Vercel only after the deployment is permanently removed.
 
-In the worst case (a deployment created moments before the PR is closed), this means up to **~7 months** before the Neon branch is automatically deleted. In practice, the delay is often shorter for long-running PRs.
+In the worst case (a deployment created moments before the PR is closed), this means up to **~7 months** before the Neon branch is automatically deleted.
 
 ### Retention exceptions
 
 Even with a reduced retention policy, Vercel always keeps certain deployments. Per [Vercel's documentation](https://vercel.com/docs/deployment-retention#exceptions-to-the-retention-policy), these deployments are never deleted:
 
+- The last 10 deployments created in the project (regardless of state)
+- The last 20 production deployments in Ready state
 - The last 20 non-production deployments in Ready state
-- The last 10 deployments created in the project
-- Deployments with custom aliases or branch aliases
+- Deployments with a production alias
+- Deployments targeted by a branch alias for a custom environment
+- Non-production deployments with any custom alias assigned
 
-Neon branches associated with these retained deployments won't be automatically deleted regardless of your Vercel retention settings. In practice, this means that if your project has 20 or fewer preview deployments, **none of them will be auto-deleted by Vercel's retention policy** since they all fall within the "last 20" exception.
+In a typical setup, production deployments use your main Neon branch rather than creating separate preview branches. The exceptions most relevant to preview branch cleanup are the "last 20 non-production" and "last 10 created" rules.
+
+Neon branches associated with these retained deployments won't be automatically deleted regardless of your Vercel retention settings. Note that these exceptions apply to *deployments*, not branches. A single branch can have multiple deployments, so the number of protected branches depends on how deployments are distributed across them.
 
 The following screenshot shows Vercel's default retention policy settings, where pre-production deployments are set to 180 days:
 
@@ -70,7 +75,7 @@ The following screenshot shows Vercel's default retention policy settings, where
 
 ## Reducing Vercel's retention policy
 
-Lowering the retention period reduces how long Vercel keeps deployments before marking them for deletion. This is most effective for projects with many preview deployments. If your project has 20 or fewer, the [retention exceptions](#retention-exceptions) may prevent automatic cleanup entirely, and the [GitHub Action approach](#github-action-on-pr-close-recommended) is a better option.
+Lowering the retention period reduces how long Vercel keeps deployments before marking them for deletion. This is most effective for projects with many preview deployments. For projects with low deployment activity, [retention exceptions](#retention-exceptions) may prevent automatic cleanup entirely, and the [GitHub Action approach](#github-action-on-pr-close-recommended) is a better option.
 
 To adjust your retention settings:
 
@@ -80,7 +85,7 @@ To adjust your retention settings:
 4. Set **Pre-Production Deployments** to the shortest available duration
 5. Save
 
-Keep in mind that the [30-day recovery period](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) still applies after retention expires. Your total minimum delay before a branch is cleaned up is the retention duration plus 30 days.
+Keep in mind that the [30-day recovery period](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) still applies after retention expires. For automatic cleanup, your total minimum delay is the retention duration plus 30 days. To avoid this wait, you can [delete deployments manually](#delete-vercel-deployments) or use a [GitHub Action](#github-action-on-pr-close-recommended).
 
 For more details, see [Vercel's deployment retention documentation](https://vercel.com/docs/deployment-retention#setting-a-deployment-retention-policy).
 
@@ -92,7 +97,13 @@ You can also set a default retention policy for all new projects in your Vercel 
 
 ## Workarounds for immediate cleanup
 
-If reducing retention isn't fast enough, you can delete Neon branches directly using existing Neon tools. The GitHub Action approach is the most practical for teams that want cleanup the moment a PR closes.
+If reducing retention isn't fast enough, you can trigger immediate cleanup by deleting deployments or branches directly.
+
+### Delete Vercel deployments
+
+You can delete Vercel preview deployments from the Vercel dashboard, or programmatically using the [Vercel CLI](https://vercel.com/docs/cli/remove) (`vercel remove`) or the [Vercel API](https://vercel.com/docs/rest-api/endpoints/deployments#delete-a-deployment) (`DELETE /v13/deployments/{id}`). When you delete the last deployment associated with a Git branch, Neon receives a webhook and deletes the corresponding preview branch immediately. This avoids leaving behind a broken preview deployment, since both the deployment and the database branch are removed together.
+
+This approach is practical for cleaning up a small number of branches manually. You can also automate Vercel deployment deletion in CI by calling the Vercel API on PR close. See Vercel's [Managing Deployments](https://vercel.com/docs/deployments/managing-deployments) documentation for details on deleting deployments programmatically.
 
 ### GitHub Action on PR close (recommended)
 
@@ -119,6 +130,10 @@ The Vercel integration creates Neon branches using the naming pattern `preview/<
 This workflow requires a `NEON_PROJECT_ID` [repository variable](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables) and a `NEON_API_KEY` [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). Find your project ID on the **Project Settings** page in the Neon Console, and create an API key under **Account Settings > API Keys**.
 
 This action is safe to use alongside automatic cleanup. If the action deletes the branch first, the cleanup webhook that eventually fires from Vercel will find the branch already gone and handle it gracefully.
+
+<Admonition type="note">
+Deleting a Neon branch invalidates any Vercel preview deployments that depend on it. Those deployments will fail on database connections. This is usually acceptable since the PR is already closed, but be aware if your team revisits preview URLs after merging.
+</Admonition>
 
 For more GitHub Actions branching workflows, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
 
