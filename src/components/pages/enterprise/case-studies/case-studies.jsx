@@ -113,7 +113,7 @@ const CaseStudies = ({ items }) => (
         Explore all case studies
       </Link>
       <Image
-        className="pointer-events-none absolute left-0 top-2 -z-10 w-[1216px] max-w-none xl:-left-[22px] xl:top-0 xl:w-[1070px] lg:-left-4 lg:top-[23px] lg:w-[800px] md:hidden"
+        className="pointer-events-none absolute left-1/2 top-2 -z-10 w-[1216px] max-w-none -translate-x-1/2 xl:top-0 xl:w-[1070px] lg:top-[23px] lg:w-[800px] md:hidden"
         src={lines}
         width={1216}
         height={444}
