@@ -65,7 +65,7 @@ Even with a reduced retention policy, Vercel always keeps certain deployments. P
 
 In a typical setup, production deployments use your main Neon branch rather than creating separate preview branches. The exceptions most relevant to preview branch cleanup are the "last 20 non-production" and "last 10 created" rules.
 
-Neon branches associated with these retained deployments won't be automatically deleted regardless of your Vercel retention settings. Note that these exceptions apply to *deployments*, not branches. A single branch can have multiple deployments, so the number of protected branches depends on how deployments are distributed across them.
+Neon branches associated with these retained deployments won't be automatically deleted regardless of your Vercel retention settings. Note that these exceptions apply to _deployments_, not branches. A single branch can have multiple deployments, so the number of protected branches depends on how deployments are distributed across them.
 
 The following screenshot shows Vercel's default retention policy settings, where pre-production deployments are set to 180 days:
 
