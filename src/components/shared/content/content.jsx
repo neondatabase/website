@@ -29,8 +29,7 @@ import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
-import Testimonial from 'components/pages/use-case/testimonial';
-import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
+import QuoteBlocksWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
@@ -185,8 +184,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   LatencyCalculator,
   // TODO: revert to CTA: isTemplate ? CtaBlock : DocCta when design is ready
   CTA: (props) => <DocCta isTemplate={isTemplate} {...props} />,
-  Testimonial,
-  TestimonialsWrapper,
+  QuoteBlocksWrapper,
   UseCaseList,
   UseCaseContext,
   ComputeCalculator,
