@@ -9,6 +9,7 @@ import AlbertsonsLogo from './images/albertsons.inline.svg';
 import AnythingLogo from './images/anything.inline.svg';
 import BasehubLogo from './images/basehub.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
+import BitsoLogo from './images/bitso.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
 import ClaudeLogo from './images/claude.inline.svg';
@@ -23,6 +24,7 @@ import DoorDashLogo from './images/door-dash.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
+import FramerLogo from './images/framer.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
@@ -47,7 +49,6 @@ import WindsurfLogo from './images/windsurf.inline.svg';
 import WordwareLogo from './images/wordware.inline.svg';
 import WundergraphLogo from './images/wundergraph.inline.svg';
 import ZedLogo from './images/zed.inline.svg';
-import ZimmerBioLogo from './images/zimmer-biomet.inline.svg';
 
 const allLogos = {
   adobe: AdobeLogo,
@@ -56,6 +57,7 @@ const allLogos = {
   anything: AnythingLogo,
   basehub: BasehubLogo,
   bcg: BCGLogo,
+  bitso: BitsoLogo,
   branch: BranchLogo,
   bunnyshell: BunnyshellLogo,
   claude: ClaudeLogo,
@@ -71,6 +73,7 @@ const allLogos = {
   eqt: EqtLogo,
   'fabric-io': FabricIoLogo,
   fl0: Fl0Logo,
+  framer: FramerLogo,
   genomics: GenomicsLogo,
   hasura: HasuraLogo,
   illa: IllaLogo,
@@ -92,7 +95,6 @@ const allLogos = {
   wordware: WordwareLogo,
   wundergraph: WundergraphLogo,
   zed: ZedLogo,
-  zimmer: ZimmerBioLogo,
   meta: MetaLogo,
   pepsi: PepsiLogo,
 };

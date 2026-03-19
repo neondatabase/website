@@ -10,7 +10,17 @@ import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 
-const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
+const logos = [
+  'replit',
+  'outfront',
+  'doordash',
+  'bcg',
+  'pepsi',
+  'retool',
+  'meta',
+  'bitso',
+  'framer',
+];
 
 const Hero = () => (
   <section className="hero safe-paddings relative mt-16 lg:mt-14">
