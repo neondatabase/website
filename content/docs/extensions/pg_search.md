@@ -16,7 +16,7 @@ redirectFrom:
 
 <Admonition type="warning" title="Neon's support for pg_search has been deprecated.">
 
-As of March 19, 2026, `pg_search` is longer available for new Neon projects. Depending on your use case, consider these alternatives:
+As of March 19, 2026, the `pg_search` extension is deprecated on Neon. Depending on your use case, consider these alternatives:
 
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
 - **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
