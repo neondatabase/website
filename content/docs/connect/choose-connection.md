@@ -109,7 +109,7 @@ The [Neon serverless driver](/docs/serverless/serverless-driver) supports two tr
 
 ### Data API
 
-The [Data API](/docs/data-api/overview) provides a REST interface to your database over HTTP. It works in browsers, edge runtimes, and anywhere you can make HTTP requests. It integrates with Neon Auth and enforces PostgreSQL [Row-Level Security](/docs/guides/row-level-security), making it suitable for client-side apps that query the database directly.
+The [Data API](/docs/data-api/overview) provides a REST interface to your database over HTTP. It works in browsers, edge runtimes, and anywhere you can make HTTP requests. It validates JWTs from any authentication provider and enforces PostgreSQL [Row-Level Security](/docs/guides/row-level-security), making it suitable for client-side apps that query the database directly.
 
 ## ORM compatibility
 

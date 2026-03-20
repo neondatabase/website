@@ -81,7 +81,7 @@ Removing an authentication provider invalidates all tokens issued by that provid
 </Admonition>
 
 <Admonition type="tip" title="Auth API reference">
-If you're using Neon Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl) for details.
+If you're using Neon Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Neon Auth](/docs/data-api/get-started#testing-with-neon-auth) for details.
 </Admonition>
 
 ## Advanced settings
@@ -255,7 +255,7 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-<Admonition type="danger" title="Immediate effect">
+<Admonition type="warning" title="Immediate effect">
 Disabling the Data API immediately terminates all active connections and blocks all incoming HTTP requests. Any applications, edge functions, or websites relying on the API will stop working instantly. Re-enabling the Data API creates a fresh instance with default settings; the previous configuration is not restored.
 </Admonition>
 

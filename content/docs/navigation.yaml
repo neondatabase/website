@@ -400,7 +400,7 @@
 
             - section: Tools
               items:
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: SQL to REST API Translator
                   slug: data-api/sql-to-rest
@@ -486,7 +486,7 @@
 
             - section: Reference
               items:
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: Next.js Server SDK
                   slug: auth/reference/nextjs-server
@@ -658,7 +658,7 @@
               items:
                 - title: Overview
                   slug: reference/sdk
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: Neon API TypeScript SDK
                   slug: reference/typescript-sdk

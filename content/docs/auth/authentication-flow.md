@@ -166,7 +166,7 @@ ORDER BY "createdAt" DESC;
 
 ## Data API integration
 
-When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. The user ID is available via the `auth.uid()` function, enabling Row-Level Security policies to grant data access based on the authenticated user.
+When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. The user ID is available via the `auth.uid()` function, enabling Row-Level Security policies to grant data access based on the authenticated user. The Data API also works with [other authentication providers](/docs/data-api/custom-authentication-providers) that issue JWTs, such as Auth0, Clerk, and Firebase.
 
 **Example RLS policy:**
 
