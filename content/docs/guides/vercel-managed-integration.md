@@ -135,7 +135,7 @@ To verify preview branching works:
 
 ## Automatic branch cleanup
 
-Preview branches are automatically deleted when their corresponding Vercel deployments are permanently removed. The timing of this cleanup depends on [Vercel's deployment retention policy](https://vercel.com/docs/deployment-retention), which retains preview deployments for 6 months by default.
+Preview branches are automatically deleted when their corresponding Vercel deployments are removed. The timing of this cleanup depends on [Vercel's deployment retention policy](https://vercel.com/docs/deployment-retention), which retains preview deployments for 6 months by default.
 
 <Admonition type="important" title="Preview branches may not be deleted for months">
 Because of Vercel's default retention settings, preview branches can persist long after a PR is closed. To understand the full timeline, reduce your retention policy, or set up immediate cleanup, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
