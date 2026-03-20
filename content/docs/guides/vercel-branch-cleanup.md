@@ -47,8 +47,8 @@ If you're using the **Neon-Managed integration**, your branch cleanup is based o
 If you're using the **Vercel-Managed integration**, you might expect preview branches to be deleted when you close a PR or delete a Git branch. That doesn't happen because cleanup is tied to **deployment deletion**, not Git branch deletion. Manually deleting a Vercel deployment triggers immediate Neon branch cleanup, but most teams rely on Vercel's automatic retention, which follows this timeline:
 
 1. **Vercel retains preview deployments for 6 months by default.** As of [October 2025](https://vercel.com/changelog/updated-defaults-for-deployment-retention), Vercel's default retention for pre-production deployments is 180 days. The clock starts when the deployment is created, not when the PR is closed.
-2. **Vercel's cleanup job runs asynchronously.** After the retention period expires, Vercel marks the deployment for deletion in a batch process. This typically happens within hours to days of the expiration date, not instantly. Vercel also offers a [30-day recovery window](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) to restore deleted deployments, but this does not delay cleanup for connected integrations.
-3. **Neon deletes the branch when Vercel marks the deployment for deletion.** Neon receives a cleanup webhook at this point and removes the corresponding preview branch immediately.
+2. **Vercel's cleanup job runs asynchronously.** After the retention period expires, Vercel deletes the deployment in a batch process. This typically happens within hours to days of the expiration date, not instantly. Vercel offers a [30-day recovery window](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) to restore deleted deployments, but this does not delay cleanup for connected integrations.
+3. **Neon deletes the branch when Vercel deletes the deployment.** Neon receives a cleanup webhook and removes the corresponding preview branch immediately.
 
 In the worst case (a deployment created moments before the PR is closed), this means up to **~6 months** before the Neon branch is automatically deleted.
 
@@ -58,7 +58,7 @@ Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment
 
 ### Retention exceptions
 
-Vercel keeps a minimum number of recent deployments regardless of your retention settings. See [Vercel's retention exceptions](https://vercel.com/docs/deployment-retention#exceptions-to-the-retention-policy) for the full list. In practice, expect around 10 recent deployments to be protected from deletion. Neon branches associated with these deployments won't be automatically cleaned up. Use the [GitHub Action approach](#github-action-on-pr-close-recommended) for those.
+Vercel keeps a minimum number of recent deployments regardless of your retention settings. See [Vercel's retention exceptions](https://vercel.com/docs/deployment-retention#exceptions-to-the-retention-policy) for details. Neon branches associated with these retained deployments won't be automatically cleaned up. Use the [GitHub Action approach](#github-action-on-pr-close-recommended) for those.
 
 These exceptions protect _deployments_, not branches. A single branch can have multiple deployments, so the number of protected branches depends on how deployments are distributed across them.
 
@@ -70,7 +70,7 @@ The following screenshot shows Vercel's default retention policy settings, where
 
 ## Reducing Vercel's retention policy
 
-Lowering the retention period reduces how long Vercel keeps deployments before marking them for deletion. This is most effective for projects with many preview deployments. For projects with low deployment activity, [retention exceptions](#retention-exceptions) may prevent automatic cleanup entirely, and the [GitHub Action approach](#github-action-on-pr-close-recommended) is a better option.
+Lowering the retention period reduces how long Vercel keeps deployments before deleting them. This is most effective for projects with many preview deployments. For projects with low deployment activity, [retention exceptions](#retention-exceptions) may prevent automatic cleanup entirely, and the [GitHub Action approach](#github-action-on-pr-close-recommended) is a better option.
 
 To adjust your retention settings:
 
