@@ -90,7 +90,7 @@ neon roles create --name databricks_replication
 <TabItem>
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID/roles' \
+curl "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID/roles" \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
