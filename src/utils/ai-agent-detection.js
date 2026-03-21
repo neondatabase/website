@@ -79,8 +79,8 @@ export function buildAgent404Response(pathname) {
 
 Find what you need:
 
-- [All Neon documentation](/docs/llms.txt) — Table of contents for all Neon docs
-- [Full documentation text](/docs/llms-full.txt) — Complete Neon docs in one file
-- [Neon API reference](/docs/reference/api-reference.md) — API endpoints and usage
+- [All Neon documentation](/docs/llms.txt): Table of contents for all Neon docs
+- [Full documentation text](/docs/llms-full.txt): Complete Neon docs in one file
+- [Neon API reference](/docs/reference/api-reference.md): API endpoints and usage
 `;
 }
