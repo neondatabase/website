@@ -6,7 +6,11 @@ import { checkCookie, getReferer } from 'app/actions';
 import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
 
-import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import {
+  isAIAgentRequest,
+  getMarkdownPath,
+  buildAgent404Response,
+} from './utils/ai-agent-detection';
 import llmsRedirectMap from './utils/llms-redirect-map.json';
 
 const SITE_URL =
@@ -29,7 +33,7 @@ function applyDocHeaders(response) {
   return response;
 }
 
-function trackLLMPageview(req) {
+function trackLLMPageview(req, { is404 = false } = {}) {
   const url = req.nextUrl.href;
   const referrer = req.headers.get('referer') || '';
   const cookies = req.headers.get('cookie') || '';
@@ -38,7 +42,7 @@ function trackLLMPageview(req) {
   // Match the payload shape the Zaraz JS tag sends to this endpoint
   const payload = {
     name: 'Pageview',
-    data: { llm_agent: true },
+    data: { llm_agent: true, llm_404: is404 },
     zarazData: {
       c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
       l: url,
@@ -74,29 +78,17 @@ export async function middleware(req) {
     }
 
     if (isAIAgentRequest(req)) {
-      trackLLMPageview(req);
+      let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
         try {
           const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
-
           const response = await fetch(markdownUrl);
 
-          if (!response.ok) {
-            // Only log unexpected errors (500, network issues, etc.)
-            if (response.status !== 404) {
-              console.error('[AI Agent] Failed to fetch markdown', {
-                pathname,
-                markdownPath,
-                status: response.status,
-              });
-            }
-            // Fall through to isContentRoute below
-          } else {
+          if (response.ok) {
+            trackLLMPageview(req);
             const markdown = await response.text();
-
-            // Return markdown content directly with appropriate headers
             return applyDocHeaders(
               new NextResponse(markdown, {
                 status: 200,
@@ -109,10 +101,33 @@ export async function middleware(req) {
               })
             );
           }
+          agentHit404 = response.status === 404;
+          if (!agentHit404) {
+            console.error('[AI Agent] Failed to fetch markdown', {
+              pathname,
+              markdownPath,
+              status: response.status,
+            });
+          }
         } catch (error) {
           console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
-          // Fall through to isContentRoute below
         }
+      }
+
+      trackLLMPageview(req, { is404: agentHit404 });
+
+      if (agentHit404) {
+        return applyDocHeaders(
+          new NextResponse(buildAgent404Response(pathname), {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/markdown; charset=utf-8',
+              'Cache-Control': 'public, max-age=60, s-maxage=300',
+              'X-Content-Source': 'agent-404',
+              'X-Robots-Tag': 'noindex',
+            },
+          })
+        );
       }
     }
 

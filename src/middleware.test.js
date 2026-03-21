@@ -57,16 +57,15 @@ describe('Middleware - AI Agent Integration Tests', () => {
   });
 
   // Helper to mock a successful markdown fetch.
-  // The default fetch mock handles trackLLMPageview's analytics call,
-  // while mockResolvedValueOnce is consumed by the markdown fetch
-  // (the second fetch call in the middleware).
+  // The markdown fetch fires first, then trackLLMPageview fires after
+  // (on the success early-return path), so mocks must be in that order.
   const mockMarkdownFetch = (content = '# Test Markdown') => {
     global.fetch
-      .mockResolvedValueOnce({ ok: true }) // analytics (trackLLMPageview)
       .mockResolvedValueOnce({
         ok: true,
         text: () => Promise.resolve(content),
-      });
+      }) // markdown fetch (first call)
+      .mockResolvedValueOnce({ ok: true }); // analytics (trackLLMPageview, second call)
   };
 
   describe('Content routes - AI Agents should get markdown', () => {
@@ -172,25 +171,42 @@ describe('Middleware - AI Agent Integration Tests', () => {
   });
 
   describe('Error handling', () => {
-    it('should fallback to next() when markdown fetch fails with 404', async () => {
+    it('should return agent-friendly 404 markdown when markdown fetch returns 404', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
       global.fetch
-        .mockResolvedValueOnce({ ok: true }) // analytics
-        .mockResolvedValueOnce({ ok: false, status: 404 }); // markdown 404
+        .mockResolvedValueOnce({ ok: false, status: 404 }) // markdown 404
+        .mockResolvedValueOnce({ ok: true }); // analytics
 
       const response = await middleware(req);
 
       expect(global.fetch).toHaveBeenCalled();
-      expect(response.type).toBe('next');
+      expect(response).toBeInstanceOf(Response);
+      expect(response.headers.get('X-Content-Source')).toBe('agent-404');
+      const text = await response.text();
+      expect(text).toContain('/docs/non-existent');
+      expect(text).toContain('/docs/llms.txt');
+      expect(text).toContain('/docs/llms-full.txt');
+    });
+
+    it('should use shorter cache TTL for agent 404 responses', async () => {
+      const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
+
+      global.fetch
+        .mockResolvedValueOnce({ ok: false, status: 404 })
+        .mockResolvedValueOnce({ ok: true });
+
+      const response = await middleware(req);
+
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
     });
 
     it('should fallback to next() when markdown fetch throws error', async () => {
       const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
 
       global.fetch
-        .mockResolvedValueOnce({ ok: true }) // analytics
-        .mockRejectedValueOnce(new Error('Network error')); // markdown fetch throws
+        .mockRejectedValueOnce(new Error('Network error')) // markdown fetch throws
+        .mockResolvedValueOnce({ ok: true }); // analytics (still fires after catch)
 
       const response = await middleware(req);
 
