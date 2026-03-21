@@ -9,7 +9,7 @@ vi.mock('next/server', () => ({
     }
 
     static next() {
-      return { type: 'next' };
+      return { type: 'next', headers: new Headers() };
     }
 
     static redirect(url) {
@@ -23,8 +23,13 @@ vi.mock('app/actions', () => ({
   getReferer: vi.fn(() => Promise.resolve('')),
 }));
 
-// Mock fetch globally
-global.fetch = vi.fn();
+// Mock fetch globally — default returns a safe no-op response so
+// trackLLMPageview's fire-and-forget fetch never throws or consumes
+// the targeted mockResolvedValueOnce set up by individual tests.
+global.fetch = vi.fn(() => Promise.resolve({ ok: true }));
+
+// Ensure SITE_URL is defined so the error-fallback redirect doesn't throw
+process.env.NEXT_PUBLIC_DEFAULT_SITE_URL = 'https://neon.com';
 
 // Now import middleware after all mocks are set up
 let middleware;
@@ -38,24 +43,30 @@ describe('Middleware - AI Agent Integration Tests', () => {
     vi.clearAllMocks();
   });
 
-  // Helper to create mock request
   const createMockRequest = (pathname, userAgent = '', accept = '') => ({
     nextUrl: {
       pathname,
+      origin: 'https://neon.com',
+      href: `https://neon.com${pathname}`,
     },
-    url: `https://neon.tech${pathname}`,
+    url: `https://neon.com${pathname}`,
     headers: new Map([
       ['user-agent', userAgent],
       ['accept', accept],
     ]),
   });
 
-  // Helper to mock successful GitHub markdown fetch
+  // Helper to mock a successful markdown fetch.
+  // The default fetch mock handles trackLLMPageview's analytics call,
+  // while mockResolvedValueOnce is consumed by the markdown fetch
+  // (the second fetch call in the middleware).
   const mockMarkdownFetch = (content = '# Test Markdown') => {
-    global.fetch.mockResolvedValueOnce({
-      ok: true,
-      text: () => Promise.resolve(content),
-    });
+    global.fetch
+      .mockResolvedValueOnce({ ok: true }) // analytics (trackLLMPageview)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: () => Promise.resolve(content),
+      });
   };
 
   describe('Content routes - AI Agents should get markdown', () => {
@@ -79,7 +90,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(response).toBeInstanceOf(Response);
         const text = await response.text();
         expect(text).toContain(`# ${name} Content`);
-        expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
+        expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
         expect(response.headers.get('X-Content-Source')).toBe('markdown');
       });
 
@@ -138,7 +149,11 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
         const response = await middleware(req);
 
-        expect(global.fetch).not.toHaveBeenCalled();
+        // Analytics fetch fires (trackLLMPageview), but no markdown fetch
+        const markdownFetchCalls = global.fetch.mock.calls.filter(
+          ([url]) => url !== 'https://neonapi.io/t.js'
+        );
+        expect(markdownFetchCalls).toHaveLength(0);
         expect(response.type).toBe('next');
       });
 
@@ -147,7 +162,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
         const response = await middleware(req);
 
-        expect(global.fetch).not.toHaveBeenCalled();
+        const markdownFetchCalls = global.fetch.mock.calls.filter(
+          ([url]) => url !== 'https://neonapi.io/t.js'
+        );
+        expect(markdownFetchCalls).toHaveLength(0);
         expect(response.type).toBe('next');
       });
     });
@@ -157,10 +175,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it('should fallback to next() when markdown fetch fails with 404', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
-      global.fetch.mockResolvedValueOnce({
-        ok: false,
-        status: 404,
-      });
+      global.fetch
+        .mockResolvedValueOnce({ ok: true }) // analytics
+        .mockResolvedValueOnce({ ok: false, status: 404 }); // markdown 404
 
       const response = await middleware(req);
 
@@ -171,7 +188,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it('should fallback to next() when markdown fetch throws error', async () => {
       const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
 
-      global.fetch.mockRejectedValueOnce(new Error('Network error'));
+      global.fetch
+        .mockResolvedValueOnce({ ok: true }) // analytics
+        .mockRejectedValueOnce(new Error('Network error')); // markdown fetch throws
 
       const response = await middleware(req);
 
@@ -197,7 +216,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(response.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
     });
   });
 
