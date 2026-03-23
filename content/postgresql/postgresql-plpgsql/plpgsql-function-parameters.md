@@ -33,7 +33,7 @@ The following table illustrates the parameter modes:
 
 The following function finds a film by its id and returns the title of the film:
 
-```csssqlsql
+```plsql
 create or replace function find_film_by_id(p_film_id int)
 returns varchar
 language plpgsql
@@ -60,7 +60,7 @@ Because we don’t specify the mode for `p_film_id` parameter, it takes the `in`
 
 The following shows how to call the find_film_by_id() function to find the title of the film with the id 100:
 
-```sql
+```plsql
 select * from find_film_by_id(1);
 ```
 
@@ -83,13 +83,13 @@ Note that PostgreSQL has supported the `out` parameters since version 8\.1\.
 
 To define `out` parameters, you explicitly precede the parameter name with the `out` keyword as follows:
 
-```
+```plsql
 out parameter_name type
 ```
 
 The following example defines the `get_film_stat` function that has three `out` parameters:
 
-```
+```plsql
 create or replace function get_film_stat(
     out min_len int,
     out max_len int,
@@ -111,7 +111,7 @@ In the `get_film_stat` function, we select the min, max, and average film length
 
 The following statement calls the `get_film_stat` function:
 
-```sql
+```plsql
 select get_film_stat();
 ```
 
@@ -126,7 +126,7 @@ Output:
 
 The output of the function is a record. To make the output separated as columns, you use the following statement:
 
-```
+```plsql
 select * from get_film_stat();
 ```
 
@@ -147,7 +147,7 @@ It means that the caller can pass an argument to a function. The function change
 
 The following `swap` function accepts two integers and swap their values:
 
-```sql
+```plsql
 create or replace function swap(
 	inout x int,
 	inout y int
@@ -161,7 +161,7 @@ end; $$;
 
 The following statement calls the `swap()` function:
 
-```sql
+```plsql
 select * from swap(10,20);
 ```
 

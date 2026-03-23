@@ -24,7 +24,7 @@ The `returns setof` option allows you to return one or more rows with a predefin
 
 Here’s the syntax for creating a function that returns a set of rows:
 
-```sql
+```plsql
 create or replace function function_name(parameters)
 returns setof row_structure
 as
@@ -46,7 +46,7 @@ In this syntax:
 
 To call a function with the `returns setof`, you use the following statement:
 
-```sql
+```plsql
 SELECT function_name(argument);
 ```
 
@@ -54,19 +54,19 @@ It’ll return a single column containing an array of all columns of the returne
 
 To retrieve data from a specific column of the return rows, you specify the dot (.) and column name after the function call:
 
-```sql
+```plsql
 SELECT (function_name(argument)).column_name;
 ```
 
 If you want to retrieve data from all columns of the returned rows, you can use the `.*` like this:
 
-```sql
+```plsql
 SELECT (function_name(argument)).*;
 ```
 
 Alternatively, you can call the function using the `SELECT...FROM` statement:
 
-```sql
+```plsql
 SELECT * FROM function_name(argument);
 ```
 
@@ -76,7 +76,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 ![Film table](/postgresqltutorial/film_table.png)First, define a function that retrieves a film by its id from the `film` table:
 
-```sql
+```plsql
 create or replace function find_film_by_id(
 	p_id int
 )
@@ -93,13 +93,13 @@ language plpgsql;
 
 Second, call the `find_film_by_id()` function:
 
-```sql
+```plsql
 SELECT find_film_by_id(100);
 ```
 
 Output:
 
-```sql
+```
 
                                    find_film_by_id
 
@@ -112,7 +112,7 @@ The output is an array that contains column data.
 
 Third, retrieve the title of the film with id 100:
 
-```sql
+```plsql
 select (find_film_by_id(100)).title;
 ```
 
@@ -127,13 +127,13 @@ Output:
 
 Fourth, retrieve the data from all columns of the returned row:
 
-```sql
+```plsql
 SELECT * FROM find_film_by_id(100);
 ```
 
 Output:
 
-```sql
+```
 -[ RECORD 1 ]----+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 film_id          | 100
 title            | Brooklyn Desert

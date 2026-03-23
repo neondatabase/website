@@ -26,7 +26,7 @@ The `ROLLUP` assumes a hierarchy among the input columns and generates all group
 
 For example, the `CUBE (c1,c2,c3)` makes all eight possible grouping sets:
 
-```phpsql
+```
 (c1, c2, c3)
 (c1, c2)
 (c2, c3)
@@ -40,7 +40,7 @@ For example, the `CUBE (c1,c2,c3)` makes all eight possible grouping sets:
 
 However, the `ROLLUP(c1,c2,c3)` generates only four grouping sets, assuming the hierarchy `c1 > c2 > c3` as follows:
 
-```sql
+```
 (c1, c2, c3)
 (c1, c2)
 (c1)
@@ -105,7 +105,7 @@ VALUES
 
 The following query uses the `ROLLUP` clause to find the number of products sold by brand (subtotal) and by all brands and segments (total).
 
-```
+```sql
 SELECT
     brand,
     segment,

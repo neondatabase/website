@@ -6,7 +6,7 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.120Z'
+updatedOn: '2026-03-20T18:23:32.448Z'
 layout: wide
 ---
 
@@ -342,3 +342,4 @@ SELECT * FROM neon_auth.user;
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Learn how to branch your auth](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory

@@ -22,7 +22,7 @@ Like the [UNION](postgresql-union) and [EXCEPT](postgresql-except) operators, th
 
 Here is the basic syntax of the `INTERSECT` operator:
 
-```plaintextsql
+```sql
 SELECT select_list
 FROM A
 INTERSECT
@@ -117,7 +117,7 @@ Let’s explore some examples of using the `INTERSECT` operator.
 
 The following example uses the `INTERSECT` operator to retrieve the popular films that are also top\-rated:
 
-```plaintext
+```sql
 SELECT *
 FROM most_popular_films
 INTERSECT
@@ -141,7 +141,7 @@ The result set returns one film that appears on both tables.
 
 The following statement uses the `INTERSECT` operator to find the most popular films which are also the top\-rated films and sort the films by release year:
 
-```plaintext
+```sql
 SELECT *
 FROM most_popular_films
 INTERSECT

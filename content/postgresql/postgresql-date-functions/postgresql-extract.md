@@ -131,7 +131,7 @@ Output:
 
 The following example uses the `EXTRACT()` function to extract the century from a timestamp:
 
-```
+```sql
 SELECT EXTRACT(CENTURY FROM TIMESTAMP '2016-12-31 13:30:15') century;
 ```
 
@@ -267,7 +267,7 @@ Output:
 
 The following example uses the `EXTRACT()` function to extract the millisecond from a timestamp:
 
-```
+```sql
 SELECT EXTRACT(MILLISECONDS FROM TIMESTAMP '2016-12-31 13:30:15') ms;
 ```
 
@@ -330,7 +330,7 @@ SELECT
 
 Result:
 
-```sql
+```
 2
 ```
 
@@ -347,7 +347,7 @@ SELECT
 
 Result:
 
-```sql
+```
 5
 ```
 
@@ -364,7 +364,7 @@ SELECT
 
 Result:
 
-```sql
+```
 4
 ```
 
@@ -381,7 +381,7 @@ SELECT
 
 Result:
 
-```sql
+```
 3
 ```
 
@@ -398,7 +398,7 @@ SELECT
 
 Result:
 
-```sql
+```
 2
 ```
 
@@ -415,7 +415,7 @@ SELECT
 
 Result:
 
-```sql
+```
 1
 ```
 
@@ -432,7 +432,7 @@ SELECT
 
 Result:
 
-```sql
+```
 1000
 ```
 
@@ -449,7 +449,7 @@ SELECT
 
 Result:
 
-```sql
+```
 1000000
 ```
 
@@ -467,7 +467,7 @@ SELECT
 
 Result:
 
-```sql
+```
 6
 ```
 
@@ -485,7 +485,7 @@ SELECT
 
 Result:
 
-```sql
+```
 1
 ```
 
@@ -502,7 +502,7 @@ SELECT
 
 Result:
 
-```sql
+```
 19
 ```
 

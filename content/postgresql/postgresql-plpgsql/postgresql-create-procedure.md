@@ -26,7 +26,7 @@ PostgreSQL 11 introduced stored procedures that support transactions.
 
 To define a new stored procedure, you use the `create procedure` statement with the following syntax:
 
-```sqlsql
+```plsql
 create [or replace] procedure procedure_name(parameter_list)
 language plpgsql
 as $$
@@ -48,13 +48,13 @@ Parameters in stored procedures can have the `in` and `inout` modes but cannot h
 
 A stored procedure does not return a value. You cannot use the `return` statement with a value inside a store procedure like this:
 
-```sql
+```plsql
 return expression;
 ```
 
 However, you can use the `return` statement without the `expression` to stop the stored procedure immediately:
 
-```
+```plsql
 return;
 ```
 
@@ -64,7 +64,7 @@ If you want to return a value from a stored procedure, you can use parameters wi
 
 We will use the following `accounts` table for the demonstration:
 
-```sql
+```plsql
 drop table if exists accounts;
 
 create table accounts (
@@ -83,7 +83,7 @@ values('Alice',10000);
 
 The following statement shows the data from the `accounts` table:
 
-```sql
+```plsql
 select * from accounts;
 ```
 
@@ -99,7 +99,7 @@ Output:
 
 The following example creates a stored procedure named `transfer` that transfers a specified amount of money from one account to another.
 
-```
+```plsql
 create or replace procedure transfer(
    sender int,
    receiver int,
@@ -126,19 +126,19 @@ end;$$;
 
 To call a stored procedure, you use the `CALL` statement as follows:
 
-```sql
+```plsql
 call stored_procedure_name(argument_list);
 ```
 
 For example, this statement invokes the `transfer` stored procedure to transfer `$1,000` from Bob’s account to Alice’s account.
 
-```sql
+```plsql
 call transfer(1,2,1000);
 ```
 
 The following statement verifies the data in the `accounts` table after the transfer:
 
-```sql
+```plsql
 SELECT * FROM accounts;
 ```
 

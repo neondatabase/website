@@ -30,7 +30,7 @@ The following is a step\-by\-step tutorial to uninstall PostgreSQL from Ubuntu:
 
 Open the SSH terminal and run the following command to remove PostgreSQL from Ubuntu:
 
-```xmlsql
+```bash
 sudo apt-get --purge remove postgresql
 ```
 
@@ -38,7 +38,7 @@ sudo apt-get --purge remove postgresql
 
 Run the following command to show all installed PostgreSQL packages:
 
-```sql
+```bash
 dpkg -l | grep postgres
 ```
 
@@ -46,7 +46,7 @@ The command will return a list of installed PostgreSQL packages.
 
 To uninstall PostgreSQL completely, you need to remove all of these packages using the following command:
 
-```
+```bash
 sudo apt-get --purge remove <package_name>
 ```
 
@@ -58,7 +58,7 @@ Typically, you may have several packages such as `postgresql`, and `postgresql-c
 
 Remove the PostgreSQL’s related directories by executing the following commands:
 
-```
+```bash
 sudo rm -rf /var/lib/postgresql/
 sudo rm -rf /var/log/postgresql/
 sudo rm -rf /etc/postgresql/
@@ -76,7 +76,7 @@ sudo deluser postgres
 
 Finally, you can verify the uninstallation of PostgreSQL by using the following command:
 
-```
+```bash
 psql --version
 
 ```

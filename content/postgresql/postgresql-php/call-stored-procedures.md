@@ -20,7 +20,7 @@ nextLink:
 
 Let’s create a simple [stored procedure](call-stored-procedures) named `add()` that returns the product of two integers using plpgsql.
 
-```phpsql
+```sql
 CREATE OR REPLACE FUNCTION add(
     a INTEGER,
     b INTEGER)
@@ -41,22 +41,22 @@ To call a stored procedure that returns one value, you use these steps:
 
 The following `add()` method demonstrates how to call the `add()` stored procedure in PostgreSQL database.
 
-```text
-   /**
-     * Call a simple stored procedure
-     * @param int $a
-     * @param int $b
-     * @return int
-     */
-    public function add($a, $b) {
-        $stmt = $this->pdo->prepare('SELECT * FROM add(:a,:b)');
-        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
-        $stmt->execute([
-            ':a' => $a,
-            ':b' => $b
-        ]);
-        return $stmt->fetchColumn(0);
-    }
+```php
+/**
+ * Call a simple stored procedure
+ * @param int $a
+ * @param int $b
+ * @return int
+ */
+public function add($a, $b) {
+    $stmt = $this->pdo->prepare('SELECT * FROM add(:a,:b)');
+    $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+    $stmt->execute([
+        ':a' => $a,
+        ':b' => $b
+    ]);
+    return $stmt->fetchColumn(0);
+}
 ```
 
 To test the `add()` method, you use the following code in the `index.php` file:
@@ -87,7 +87,7 @@ try {
 
 We will use the `accounts`, `plans`, and `account_plans` tables for the sake of demonstration. The following `get_accounts()` stored procedure returns a result set that contains complete data of accounts.
 
-```php
+```plsql
 CREATE OR REPLACE FUNCTION get_accounts()
   RETURNS TABLE(id integer,
                 first_name character varying,
@@ -112,30 +112,30 @@ The steps of calling a stored procedure that returns a result set are the same a
 
 The following `getAccounts()` method demonstrates how to call the `get_accounts()` stored procedure in PHP.
 
-```text
-   /**
-     * Call a stored procedure that returns a result set
-     * @return array
-     */
-    function getAccounts() {
-        $stmt = $this->pdo->query('SELECT * FROM get_accounts()');
-        $accounts = [];
-        while ($row = $stmt->fetch()) {
-            $accounts[] = [
-                'id' => $row['id'],
-                'first_name' => $row['first_name'],
-                'last_name' => $row['last_name'],
-                'plan' => $row['plan'],
-                'effective_date' => $row['effective_date']
-            ];
-        }
-        return $accounts;
+```php
+/**
+ * Call a stored procedure that returns a result set
+ * @return array
+ */
+function getAccounts() {
+    $stmt = $this->pdo->query('SELECT * FROM get_accounts()');
+    $accounts = [];
+    while ($row = $stmt->fetch()) {
+        $accounts[] = [
+            'id' => $row['id'],
+            'first_name' => $row['first_name'],
+            'last_name' => $row['last_name'],
+            'plan' => $row['plan'],
+            'effective_date' => $row['effective_date']
+        ];
     }
+    return $accounts;
+}
 ```
 
 To test the `getAccounts()` method, you use the following code in the `account.php` file.
 
-```
+```php
 <?php
 require 'vendor/autoload.php';
 

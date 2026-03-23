@@ -79,7 +79,7 @@ CREATE DATABASE sales;
 
 Third, create a new role called `alice`:
 
-```
+```sql
 create role alice
 with login
 password 'Password';
@@ -95,7 +95,7 @@ alter role alice createdb;
 
 Fifth, grant all privileges on the `sales` database to `alice`:
 
-```php
+```sql
 grant all privileges on database sales to alice;
 ```
 
@@ -174,7 +174,7 @@ drop role alice;
 
 PostgreSQL issued the following error:
 
-```sql
+```
 ERROR:  role "alice" cannot be dropped because some objects depend on it
 DETAIL:  privileges for database sales
 3 objects in database sales

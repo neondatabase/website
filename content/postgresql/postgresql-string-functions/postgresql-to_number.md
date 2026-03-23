@@ -22,7 +22,7 @@ The PostgreSQL `TO_NUMBER()` function allows you to convert a string to a number
 
 Here’s the basic syntax of the `TO_NUMBER()` function:
 
-```csssql
+```sql
 TO_NUMBER(string, format)
 ```
 
@@ -63,7 +63,7 @@ Let’s take a look at some examples of using the `TO_NUMBER()` function to unde
 
 The following example uses the `TO_NUMBER()` function to convert the string `'12,345.6-'` to a number.
 
-```
+```sql
 SELECT
     TO_NUMBER(
         '12,345.6-',
@@ -95,7 +95,7 @@ The TO_NUMBER() parses the input string `'12,345.6-'` according to the format `'
 
 The following example uses the `TO_NUMBER()` function to convert a money amount to a number:
 
-```css
+```sql
 SELECT
     TO_NUMBER(
         '$1,234,567.89',
@@ -105,7 +105,7 @@ SELECT
 
 Here is the result:
 
-```sql
+```
 to_number
 -----------
  1234567.89
@@ -129,7 +129,7 @@ Since the provided format matches the input string, the function parses the stri
 
 If you don’t specify .99 in the format string, the `TO_NUMBER()` function will not parse the part after the decimal place. For example:
 
-```http
+```sql
 SELECT
     TO_NUMBER(
         '1,234,567.89',
@@ -150,7 +150,7 @@ It returned `1234567` instead of `1234567.89` as follows:
 
 The following statement uses the `TO_NUMBER()` function to convert a string to a number but the format string does not match:
 
-```
+```sql
 SELECT TO_NUMBER('1,234,567.89', '999G999.99');
 ```
 

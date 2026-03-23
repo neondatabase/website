@@ -6,7 +6,7 @@ summary: >-
   enabling authentication, installing the Neon SDK, and setting up environment
   variables.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.113Z'
+updatedOn: '2026-03-20T18:23:32.444Z'
 layout: wide
 ---
 
@@ -472,5 +472,6 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
 
 <NeedHelp/>

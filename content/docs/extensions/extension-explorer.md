@@ -7,7 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2026-02-06T22:07:32.828Z'
+updatedOn: '2026-03-19T19:40:30.841Z'
 ---
 
 Browse supported Postgres extensions by category.
@@ -246,8 +246,6 @@ Browse supported Postgres extensions by category.
 <a href="/docs/extensions/dict_int" description="Provides a text search dictionary template for indexing integer data in Postgres" icon="search">dict_int</a>
 
 <a href="/docs/extensions/fuzzystrmatch" description="Provides several functions to determine similarities and distance between strings in Postgres" icon="search">fuzzystrmatch</a>
-
-<a href="/docs/extensions/pg_search" description="An Elasticsearch alternative for full-text search and analytics on Postgres" icon="search">pg_search</a>
 
 <a href="/docs/extensions/pg_trgm" description="Provides functions and operators for determining the similarity of alphanumeric text based on trigram matching, and index operator classes for fast string similarity search" icon="search">pg_trgm</a>
 

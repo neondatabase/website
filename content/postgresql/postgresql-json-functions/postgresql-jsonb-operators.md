@@ -32,7 +32,7 @@ Let's set up a sample table and take some examples of using PostgreSQL JSONB ope
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `products` that has a JSONB column to store JSON data:
 
-```csssql
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     data JSONB
@@ -236,7 +236,7 @@ json #>> text[] → text
 
 For example, the following statement uses the operator (`#>>`) to extract the `color` from the `attributes` subobject of the `data` object as text strings:
 
-```
+```sql
 SELECT
   data #>>'{attributes, color}' AS colors
 FROM

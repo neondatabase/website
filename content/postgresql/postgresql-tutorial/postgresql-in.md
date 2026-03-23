@@ -22,7 +22,7 @@ The `IN` operator allows you to check whether a value matches any value in a lis
 
 Here’s the basic syntax of the `IN` operator:
 
-```phpsqlsql
+```sql
 value IN (value1,value2,...)
 ```
 
@@ -48,7 +48,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 The following example uses the `IN` operator to retrieve information about the film with id 1, 2, and 3:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -71,7 +71,7 @@ Output:
 
 The following statement uses the equal (`=`) and `OR` operators instead of the `IN` operator, which is equivalent to the query above:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -131,7 +131,7 @@ We’ll use the `payment` table from the [sample database](../postgresql-getting
 
 The following statement uses the IN operator to find payments whose payment dates are in a list of dates: `2007-02-15` and `2007-02-16`:
 
-```
+```sql
 SELECT
   payment_id,
   amount,
@@ -144,7 +144,7 @@ WHERE
 
 Output:
 
-```css
+```
 payment_id | amount |        payment_date
 ------------+--------+----------------------------
       17503 |   7.99 | 2007-02-15 22:25:46.996577
@@ -160,7 +160,7 @@ To match the values in the `payment_date` column with a list of dates, you need 
 
 To do that you use the `::` [cast operator](postgresql-cast):
 
-```
+```sql
 payment_date::date
 ```
 
@@ -170,7 +170,7 @@ For example, if the timestamp value is `2007-02-15 22:25:46.996577`, the cast op
 
 To negate the `IN` operator, you use the `NOT IN` operator. Here’s the basic syntax of the `NOT IN` operator:
 
-```xml
+```sql
 value NOT IN (value1, value2, ...)
 ```
 
@@ -186,7 +186,7 @@ value <> value1 AND value <> value2 AND ...
 
 The following example uses the `NOT IN` operator to retrieve films whose id is not 1, 2, or 3:
 
-```
+```sql
 SELECT
   film_id,
   title
@@ -213,7 +213,7 @@ Output:
 
 The following query retrieves the same set of data but uses the not\-equal (`<>`) and [`AND`](postgresql-and) operators:
 
-```
+```sql
 SELECT
   film_id,
   title

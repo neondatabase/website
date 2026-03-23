@@ -24,7 +24,7 @@ If a [trigger is disabled](managing-postgresql-trigger), it doesn’t activate w
 
 To enable a trigger or all triggers associated with a table, you use the `ALTER TABLE ... ENABLE TRIGGER` statement:
 
-```
+```sql
 ALTER TABLE table_name
 ENABLE TRIGGER trigger_name |  ALL;
 ```
@@ -38,14 +38,14 @@ In this syntax:
 
 The following statement enables the `salary_before_update` trigger on the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 ENABLE TRIGGER salary_before_update;
 ```
 
 The following example enables all triggers that belong to the `employees` table:
 
-```
+```sql
 ALTER TABLE employees
 ENABLE TRIGGER ALL;
 ```

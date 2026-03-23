@@ -24,7 +24,7 @@ More specifically, the `jsonb_set()` function allows you to replace an array ele
 
 Here’s the syntax of the `jsonb_set()` function:
 
-```sqlsql
+```sql
 jsonb_set(
    target jsonb,
    path text[],
@@ -50,7 +50,7 @@ Let’s explore some examples of using the PostgreSQL `jsonb_set()` function
 
 The following example uses the `jsonb_set()` function to update an existing element in a JSON array:
 
-```text
+```sql
  SELECT jsonb_set('[1,2,3]', '{0}', '-1');
 ```
 
@@ -73,7 +73,7 @@ The `jsonb_set()` function sets the first element of the array to \-1 and return
 
 To insert the number 4 after the 3rd element, you use a non\-existing path to the 4th element as follows:
 
-```text
+```sql
  SELECT jsonb_set('[1,2,3]', '{4}', '4');
 ```
 
@@ -183,7 +183,7 @@ Output:
 
 The following example uses the `jsonb_set()` to modify a key/value pair in a nested JSON object:
 
-```
+```sql
 SELECT
   jsonb_set(
     '{"name":"John Doe", "address" : { "city": "San Francisco"}}',

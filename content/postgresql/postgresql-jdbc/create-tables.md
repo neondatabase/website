@@ -83,7 +83,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, connect to the `sales` database on the local PostgreSQL server using the `psql` client tool:
 
-```java
+```bash
 psql -U postgres -d sales
 ```
 
@@ -91,13 +91,13 @@ It’ll prompt you for a password.
 
 Third, use the `\dt` command to [show tables](../postgresql-administration/postgresql-show-tables) in the `sales` database:
 
-```java
+```
 \dt
 ```
 
 Output:
 
-```java
+```
           List of relations
  Schema |   Name   | Type  |  Owner
 --------+----------+-------+----------

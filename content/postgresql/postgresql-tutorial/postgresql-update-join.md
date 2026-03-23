@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL UPDATE Join'
 page_title: 'PostgreSQL UPDATE Join with Practical Examples'
-page_description: 'this tutorial shows you how to use the PostgreSQL UPDATE join syntax to update data in a table based on values in another table.'
+page_description: 'This tutorial shows you how to use the PostgreSQL UPDATE join syntax to update data in a table based on values in another table.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update-join/'
 ogImage: '/postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png'
 updatedOn: '2024-02-01T08:42:46+00:00'
@@ -33,7 +33,7 @@ To join a table (table1\) with another table (table2\) in the `UPDATE` statemen
 
 For each row of the table `table1`, the `UPDATE` statement examines every row of the table `table2`.
 
-If the values in the `c2` column of table `table1` equals the values in the `c2` column of table `table2`, the `UPDATE` statement updates the value in the `c1` column of the table `table1` the new value (`new_value`).
+If the values in the `c2` column of table `table1` equals the values in the `c2` column of table `table2`, the `UPDATE` statement updates the value in the `c1` column of the table `table1` with the new value (`new_value`).
 
 ## PostgreSQL UPDATE JOIN example
 

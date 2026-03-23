@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS employees;
 
 Suppose that when the name of an employee changes, you want to log it in a separate table called `employee_audits` :
 
-```
+```sql
 CREATE TABLE employee_audits (
    id INT GENERATED ALWAYS AS IDENTITY,
    employee_id INT NOT NULL,

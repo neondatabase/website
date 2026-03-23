@@ -22,7 +22,7 @@ The PostgreSQL `UPDATE` statement allows you to update data in one or more colum
 
 Here’s the basic syntax of the `UPDATE` statement:
 
-```shellsqlsql
+```sql
 UPDATE table_name
 SET column1 = value1,
     column2 = value2,
@@ -50,7 +50,7 @@ The `count` is the number of rows updated including rows whose values did not ch
 
 The `UPDATE` statement has an optional `RETURNING` clause that returns the updated rows:
 
-```
+```sql
 UPDATE table_name
 SET column1 = value1,
     column2 = value2,
@@ -80,7 +80,7 @@ CREATE TABLE courses(
 INSERT INTO courses( course_name, price, description, published_date)
 VALUES
 ('PostgreSQL for Developers', 299.99, 'A complete PostgreSQL for Developers', '2020-07-13'),
-('PostgreSQL Admininstration', 349.99, 'A PostgreSQL Guide for DBA', NULL),
+('PostgreSQL Administration', 349.99, 'A PostgreSQL Guide for DBA', NULL),
 ('PostgreSQL High Performance', 549.99, NULL, NULL),
 ('PostgreSQL Bootcamp', 777.99, 'Learn PostgreSQL via Bootcamp', '2013-07-11'),
 ('Mastering PostgreSQL', 999.98, 'Mastering PostgreSQL in 21 Days', '2012-06-30');
@@ -95,7 +95,7 @@ Output:
  course_id |         course_name         | price  |             description              | published_date
 -----------+-----------------------------+--------+--------------------------------------+----------------
          1 | PostgreSQL for Developers   | 299.99 | A complete PostgreSQL for Developers | 2020-07-13
-         2 | PostgreSQL Admininstration  | 349.99 | A PostgreSQL Guide for DBA           | null
+         2 | PostgreSQL Administration  | 349.99 | A PostgreSQL Guide for DBA           | null
          3 | PostgreSQL High Performance | 549.99 | null                                 | null
          4 | PostgreSQL Bootcamp         | 777.99 | Learn PostgreSQL via Bootcamp        | 2013-07-11
          5 | Mastering PostgreSQL        | 999.98 | Mastering PostgreSQL in 21 Days      | 2012-06-30
@@ -106,7 +106,7 @@ Output:
 
 The following statement uses the `UPDATE` statement to update the course with id 3 by changing the `published_date` to `'2020-08-01'`.
 
-```
+```sql
 UPDATE courses
 SET published_date = '2020-08-01'
 WHERE course_id = 3;
@@ -114,13 +114,13 @@ WHERE course_id = 3;
 
 The statement returns the following message indicating that one row has been updated:
 
-```sql
+```
 UPDATE 1
 ```
 
 The following statement retrieves the course with id 3 to verify the update:
 
-```
+```sql
 SELECT course_id, course_name, published_date
 FROM courses
 WHERE course_id = 3;
@@ -139,7 +139,7 @@ Output:
 
 The following statement uses the `UPDATE` statement update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
 
-```
+```sql
 UPDATE courses
 SET published_date = '2020-07-01'
 WHERE course_id = 2
@@ -159,7 +159,7 @@ Output:
 
 The following statement uses an `UPDATE` statement to increase the price of all the courses 5%:
 
-```
+```sql
 UPDATE courses
 SET price = price * 1.05;
 ```
@@ -174,13 +174,13 @@ UPDATE 5
 
 The following statement retrieves data from the `courses` table to verify the update:
 
-```
+```sql
 SELECT * FROM courses;
 ```
 
 Output:
 
-```
+```sql
 SELECT
   course_name,
   price

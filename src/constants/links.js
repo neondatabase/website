@@ -54,7 +54,6 @@ export default {
   instantRestore: '/docs/introduction/branch-restore',
   manageBilling: '/docs/introduction/manage-billing',
   migrationIntro: '/docs/import/migrate-intro',
-  pgSearch: '/docs/extensions/pg_search',
   docsExtensionsPgVector: '/docs/extensions/pgvector',
   docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
   docsExtensionsTimescaledb: '/docs/extensions/timescaledb',

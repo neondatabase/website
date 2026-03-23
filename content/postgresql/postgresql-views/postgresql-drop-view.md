@@ -22,7 +22,7 @@ The `DROP VIEW` statement allows you to remove a view from the database.
 
 Here’s the basic syntax of the `DROP VIEW` statement:
 
-```sqlsql
+```sql
 DROP VIEW [IF EXISTS] view_name
 [CASCADE | RESTRICT];
 ```
@@ -56,7 +56,7 @@ We’ll use the following tables `film`, `film_category`, and `category` from th
 
 The following statement creates a new view called `film_info` based on the `film`, `film_category`, and `category` tables:
 
-```shell
+```sql
 CREATE VIEW film_info AS
 SELECT
   film_id,
@@ -158,14 +158,14 @@ The `film_info` has a dependent object which is the view `horror_film`.
 
 To drop the view `film_info`, you need to drop its dependent object first or use the `CASCADE` option like this:
 
-```http
+```sql
 DROP VIEW film_info
 CASCADE;
 ```
 
 This statement drops the `film_info` view as well as its dependent object which is the `horror_film`. It issued the following notice:
 
-```sql
+```
 NOTICE:  drop cascades to view horror_film
 ```
 
@@ -173,7 +173,7 @@ NOTICE:  drop cascades to view horror_film
 
 The following statement uses a single `DROP VIEW` statement to drop multiple views:
 
-```
+```sql
 DROP VIEW film_length_stat, film_category_stat;
 ```
 

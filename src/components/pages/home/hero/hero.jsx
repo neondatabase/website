@@ -10,7 +10,17 @@ import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 import { cn } from 'utils/cn';
 
-const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
+const logos = [
+  'replit',
+  'outfront',
+  'doordash',
+  'bcg',
+  'pepsi',
+  'retool',
+  'meta',
+  'bitso',
+  'framer',
+];
 
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">

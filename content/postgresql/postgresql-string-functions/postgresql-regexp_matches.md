@@ -22,7 +22,7 @@ The `REGEXP_MATCHES()` function allows you to extract substrings from a string b
 
 Here’s the basic syntax for the PostgreSQL `REGEXP_MATCHES()` function:
 
-```csssql
+```sql
 REGEXP_MATCHES(source_string, pattern [, flags])
 ```
 
@@ -50,7 +50,7 @@ Let’s explore some examples of using the `REGEXP_MATCHES()` function.
 
 The following example uses the `REGEXP_MATCHES()` function to extract hashtags such as `PostgreSQL` and `REGEXP_MATCHES` from a string:
 
-```php
+```sql
 SELECT
     REGEXP_MATCHES('Learning #PostgreSQL #REGEXP_MATCHES',
          '#([A-Za-z0-9_]+)',
@@ -79,7 +79,7 @@ The result set has two rows, each is an [array](../postgresql-tutorial/postgresq
 
 If you want to transform the elements of the array into separate rows, you can use the `UNNEST()` function:
 
-```
+```sql
 SELECT
     UNNEST(REGEXP_MATCHES('Learning #PostgreSQL #REGEXP_MATCHES',
          '#([A-Za-z0-9_]+)',
@@ -103,7 +103,7 @@ We’ll use the following `film` table from the [sample database](../postgresql-
 
 ![](/postgresqltutorial/film.png)The following statement uses the `REGEXP_MATCHES()` function to retrieve films with descriptions containing the word `Cat` or `Dog`:
 
-```
+```sql
 SELECT
   REGEXP_MATCHES(description, 'Cat | Dog ') cat_or_dog,
   description

@@ -35,7 +35,7 @@ The `SELECT` statement has the following clauses:
 - Join with other tables using [joins](postgresql-joins) such as [`INNER JOIN`](postgresql-inner-join), [`LEFT JOIN`](postgresql-left-join), [`FULL OUTER JOIN`](postgresql-full-outer-join), [`CROSS JOIN`](postgresql-cross-join) clauses.
 - Perform set operations using [`UNION`](postgresql-union), [`INTERSECT`](postgresql-intersect), and [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-except/).
 
-In this tutorial, you are going to focus on the `SELECT`and `FROM` clauses.
+In this tutorial, you are going to focus on the `SELECT` and `FROM` clauses.
 
 ## PostgreSQL SELECT statement syntax
 
@@ -43,7 +43,7 @@ Let's start with the basic form of the `SELECT` statement that retrieves data fr
 
 The following illustrates the syntax of the `SELECT` statement:
 
-```phpsqlsql
+```sql
 SELECT
    select_list
 FROM
@@ -82,7 +82,7 @@ postgres=#
 
 Second, switch the current database to dvdrental:
 
-```php
+```
 \c dvdrental
 ```
 
@@ -92,7 +92,7 @@ Third, execute the query in the following examples.
 
 This example uses the `SELECT` statement to find the first names of all customers from the `customer` table:
 
-```
+```sql
 SELECT first_name FROM customer;
 ```
 
@@ -115,7 +115,7 @@ Notice that we added a semicolon (`;`) at the end of the `SELECT` statement. The
 
 The following query uses the `SELECT` statement to retrieve first name, last name, and email of customers from the `customer` table:
 
-```
+```sql
 SELECT
    first_name,
    last_name,
@@ -141,7 +141,7 @@ The output shows three corresponding columns first_name, last_name, and email.
 
 The following query uses the `SELECT *` statement to retrieve data from all columns of the `customer` table:
 
-```
+```sql
 SELECT * FROM customer;
 ```
 
@@ -173,7 +173,7 @@ The asterisk (\*) shorthand should be reserved solely for the ad\-hoc queries th
 
 The following example uses the `SELECT` statement to return the full names and emails of all customers from the `customer` table:
 
-```
+```sql
 SELECT
    first_name || ' ' || last_name,
    email
@@ -196,19 +196,19 @@ In this example, we used the [concatenation operator](../postgresql-string-funct
 
 Notice the first column of the output doesn't have a name but `?column?`. To assign a name to a column temporarily in the query, you can use a [column alias](postgresql-column-alias):
 
-```
+```sql
 expression AS column_alias
 ```
 
 The AS keyword is optional. Therefore, you can use a shorter syntax:
 
-```
+```sql
 expression column_alias
 ```
 
 For example, you can assign a column alias full_name to the first column of the query as follows:
 
-```
+```sql
 SELECT
    first_name || ' ' || last_name full_name,
    email
@@ -233,7 +233,7 @@ The `FROM` clause of the `SELECT` statement is optional. Therefore, you can omit
 
 Typically, you use the `SELECT` clause with a function to retrieve the function result. For example:
 
-```
+```sql
 SELECT NOW();
 ```
 

@@ -98,7 +98,7 @@ In this case, the upsert operation can be handy to handle the following situatio
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-```
+```sql
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (1, 'A', 16.99, 120)
 ON CONFLICT(id)
@@ -109,7 +109,7 @@ DO UPDATE SET
 
 Output:
 
-```sql
+```
 INSERT 0 1
 ```
 
@@ -121,7 +121,7 @@ The `DO UPDATE` changes the price and quantity of the product to the new values 
 
 The following statement verifies the update:
 
-```
+```sql
 SELECT * FROM inventory
 WHERE id = 1;
 ```
@@ -139,7 +139,7 @@ Output:
 
 The following example uses the `INSERT ... ON CONFLICT` statement to insert a new row into the `inventory` table:
 
-```
+```sql
 INSERT INTO inventory (id, name, price, quantity)
 VALUES (4, 'D', 29.99, 20)
 ON CONFLICT(id)
@@ -150,7 +150,7 @@ DO UPDATE SET
 
 Output:
 
-```sql
+```
 INSERT 0 1
 ```
 
@@ -158,7 +158,7 @@ In this case, the statement [inserts a new row](../postgresql-python/insert) int
 
 The following statement verifies the insert:
 
-```
+```sql
 SELECT * FROM inventory
 ORDER BY id;
 ```

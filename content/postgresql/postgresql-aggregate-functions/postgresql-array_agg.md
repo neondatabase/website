@@ -22,7 +22,7 @@ The PostgreSQL `ARRAY_AGG()` function is an aggregate function that accepts a se
 
 The following shows the syntax of the `ARRAY_AGG()` function:
 
-```css
+```sql
 ARRAY_AGG(expression [ORDER BY [sort_expression {ASC | DESC}], [...])
 ```
 

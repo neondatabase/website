@@ -29,7 +29,7 @@ const Item = ({
       setIsUserScrolling(false);
     }
 
-    const element = document.querySelector(anchor);
+    const element = document.getElementById(anchor.replace(/^#/, ''));
     if (element) {
       // Account for scroll margin and header offset
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;

@@ -20,7 +20,7 @@ nextLink:
 
 First, open a terminal and [connect to the PostgreSQL database server](../postgresql-getting-started/connect-to-postgresql-database):
 
-```plaintextsql
+```bash
 psql -U postgres
 ```
 
@@ -40,7 +40,7 @@ Third, change the current database to `elearning`:
 
 Fourth, [create a new role](../postgresql-administration/postgresql-roles) (user) with the name `ed`:
 
-```
+```sql
 CREATE ROLE ed WITH LOGIN PASSWORD 'YourPassword';
 ```
 
@@ -55,7 +55,7 @@ TO ed;
 
 Finally, exit the psql database:
 
-```sql
+```
 exit
 ```
 
@@ -184,7 +184,7 @@ Npgsql 7\.0 or later supports a new concept called data source. The data source 
 
 To create a new data source, you call the Create() method of the NpgsqlDataSource class:
 
-```
+```cs
 string connectionString = ConfigurationHelper.GetConnectionString("DefaultConnection");
 await using var dataSource = NpgsqlDataSource.Create(connectionString);
 ```
@@ -195,7 +195,7 @@ Typically, you create and use a single data source object through your applicati
 
 Sometimes, you may want to deal with the database connection manually. In such cases, you can use the data source object to create a new database connection:
 
-```sql
+```cs
 await using var conn = await dataSource.OpenConnectionAsync();
 ```
 

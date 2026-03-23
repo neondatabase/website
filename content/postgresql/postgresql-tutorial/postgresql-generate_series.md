@@ -24,7 +24,7 @@ The `generate_series()` function allows you to generate a series of numbers or [
 
 The following shows the syntax of `generate_series()` function that generates a series of numbers from `start` to `stop` with an optional `step` size:
 
-```sqlsql
+```sql
 generate_series (start,stop[,step])
 ```
 
@@ -182,7 +182,7 @@ Let’s explore some real\-world examples of using the `generate_series()` funct
 
 The following example uses the `generate_series()` function with the [random()](../postgresql-math-functions/postgresql-random) function to create a series of five random numbers between 100 and 200:
 
-```
+```sql
 SELECT floor(random()* (200-100+ 1) + 100) rand
 FROM generate_series(1,5);
 ```

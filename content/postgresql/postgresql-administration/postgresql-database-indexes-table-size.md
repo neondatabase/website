@@ -26,7 +26,7 @@ select pg_relation_size('actor');
 
 The `pg_relation_size()` function returns the size of a specific table in bytes:
 
-```sql
+```
 pg_relation_size
 ------------------
             16384
@@ -159,7 +159,7 @@ The `pg_indexes_size()` function accepts the OID or table name as the argument a
 
 For example, to get the total size of all indexes attached to the `film` table, you use the following statement:
 
-```
+```sql
 SELECT
     pg_size_pretty (pg_indexes_size('actor')) size;
 ```

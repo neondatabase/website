@@ -20,7 +20,7 @@ nextLink:
 
 The following illustrates the syntax of the `CURRENT_TIME` function:
 
-```phpsqlsql
+```sql
 CURRENT_TIME(precision)
 ```
 
@@ -38,7 +38,7 @@ Let’s explore some examples of using the `CURRENT_TIME` function.
 
 The following example uses the CURRENT_TIME function to get the current time with the timezone:
 
-```
+```sql
 SELECT CURRENT_TIME;
 ```
 
@@ -77,7 +77,7 @@ The `CURRENT_TIME` function can be used as the default value of `TIME` columns. 
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `log`:
 
-```
+```sql
 CREATE TABLE log (
     id SERIAL PRIMARY KEY,
     message VARCHAR(255) NOT NULL,
@@ -90,7 +90,7 @@ The `log` table has the `created_at` column with the default value is the result
 
 Second, [insert a row](../postgresql-tutorial/postgresql-insert) into the `log` table:
 
-```
+```sql
 INSERT INTO log( message )
 VALUES('Testing the CURRENT_TIME function');
 ```

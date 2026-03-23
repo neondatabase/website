@@ -85,7 +85,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, execute the `update.py` module:
 
-```css
+```bash
 python update.py
 ```
 
@@ -105,7 +105,7 @@ Second, change the current database to `suppliers`:
 
 Third, retrieve data from the `vendors` table with the vendor id 1:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -116,7 +116,7 @@ WHERE
 
 Output:
 
-```shell
+```
  vendor_id | vendor_name
 -----------+-------------
          1 | 3M Corp

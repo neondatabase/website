@@ -20,7 +20,7 @@ nextLink:
 
 When [creating a table](postgresql-create-table), you can define a default value for a column in the table using the `DEFAULT` constraint. Here’s the basic syntax:
 
-```phpsql
+```sql
 CREATE TABLE table_name(
     column1 type,
     column2 type DEFAULT default_value,
@@ -58,14 +58,14 @@ CREATE TABLE table_name(
 When inserting a new row into a table, you can ignore the column that has a default value. In this case, PostgreSQL will use the default value for the insertion:
 
 ```sql
-INSERT INTO table_name(column1, colum3)
+INSERT INTO table_name(column1, column3)
 VALUES(value1, value2);
 ```
 
 If you specify the column with a default constraint in the `INSERT` statement and want to use the default value for the insertion, you can use the `DEFAULT` keyword as follows:
 
 ```sql
-INSERT INTO table_name(column1, column2, colum3)
+INSERT INTO table_name(column1, column2, column3)
 VALUES(value1,DEFAULT,value2);
 ```
 
@@ -89,7 +89,7 @@ In this syntax:
 
 To drop a default value later, you can also use the `ALTER TABLE ... ALTER COLUMN ... DROP DEFAULT` statement:
 
-```php
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column2
 DROP DEFAULT;
@@ -109,7 +109,7 @@ Let’s take some examples of using the `DEFAULT` constraint to specify a defaul
 
 First, [create a new table](postgresql-create-table) called `products` to store product data:
 
-```php
+```sql
 CREATE TABLE products(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -244,7 +244,7 @@ Since we don’t specify a value for the `configuration` column, PostgreSQL uses
 
 To remove the default JSONB value from the `configuration` column of the `settings` table, you can use the following `ALTER TABLE` statement:
 
-```
+```sql
 ALTER TABLE settings
 ALTER COLUMN configuration
 DROP DEFAULT;

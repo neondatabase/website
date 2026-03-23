@@ -6,7 +6,7 @@ summary: >-
   components, including enabling authentication, installing the SDK, configuring
   environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.117Z'
+updatedOn: '2026-03-20T18:23:32.446Z'
 layout: wide
 ---
 
@@ -508,3 +508,4 @@ npm run dev
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Learn how to branch your auth](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory

@@ -22,7 +22,7 @@ The `CURRENT_DATE` function returns the current date in the default time zone of
 
 Here is the basic syntax of the `CURRENT_DATE` function:
 
-```phpsql
+```sql
 CURRENT_DATE
 ```
 
@@ -38,7 +38,7 @@ Let’s explore some examples of using the `CURRENT_DATE` function.
 
 The following example shows how to use the `CURRENT_DATE` function to get the current date:
 
-```
+```sql
 SELECT CURRENT_DATE;
 ```
 
@@ -58,7 +58,7 @@ You can use the `CURRENT_DATE` in the `WHERE` clause to filter data based on the
 
 For example, you can retrieve the rentals placed today by comparing the rental date in the `rental` table with the result of the `CURRENT_DATE` function:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -71,7 +71,7 @@ WHERE
 
 First, create a new table called `employees` with the `date_of_birth` column and insert some data into the table:
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -88,7 +88,7 @@ RETURNING *;
 
 Output:
 
-```php
+```
  id |    name     | birth_date
 ----+-------------+------------
   1 | John Doe    | 1992-05-15
@@ -102,7 +102,7 @@ INSERT 0 3
 
 Second, calculate the age of employees using the `CURRENT_DATE` function:
 
-```
+```sql
 SELECT
   name,
   date_of_birth,
@@ -116,7 +116,7 @@ ORDER BY
 
 Output:
 
-```php
+```
     name     | date_of_birth |   today    | age
 -------------+---------------+------------+-----
  Bob Johnson | 1998-11-10    | 2024-01-26 |  25
@@ -131,7 +131,7 @@ In practice, you often use the `CURRENT_DATE` function as a default value of a c
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `delivery`:
 
-```
+```sql
 CREATE TABLE delivery(
   delivery_id SERIAL PRIMARY KEY,
   product VARCHAR(255) NOT NULL,
@@ -143,7 +143,7 @@ In the `delivery` table, the `delivery_date`is set with the default value genera
 
 Second, [insert a new row](../postgresql-tutorial/postgresql-insert) into the `delivery` table:
 
-```
+```sql
 INSERT INTO delivery(product)
 VALUES
   ('Sample screen protector');
@@ -153,7 +153,7 @@ In this `INSERT` statement, we do not specify the delivery date. Therefore, Post
 
 Third, verify the insert:
 
-```
+```sql
 SELECT * FROM delivery;
 ```
 

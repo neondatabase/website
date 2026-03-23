@@ -22,7 +22,7 @@ The `REPLACE()` function replaces all occurrences of a substring with a new one 
 
 Here’s the syntax of the PostgreSQL `REPLACE()` function:
 
-```phpsqlsql
+```sql
 REPLACE(source, from_text, to_text);
 ```
 
@@ -59,7 +59,7 @@ In this example, the `REPLACE()` function replaces all the characters `'A'` with
 
 If you want to search and replace a substring in a table column, you use the following syntax:
 
-```
+```sql
 UPDATE
   table_name
 SET
@@ -120,7 +120,7 @@ The output indicates that three rows were updated.
 
 Third, verify the update by retrieving data from the `customer` table:
 
-```
+```sql
 SELECT * FROM posts;
 ```
 

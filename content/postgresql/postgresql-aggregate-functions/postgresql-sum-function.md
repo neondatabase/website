@@ -22,7 +22,7 @@ The PostgreSQL `SUM()` is an aggregate function that returns the sum of values i
 
 Here’s the basic syntax of the `SUM()` function:
 
-```csssqlsql
+```sql
 SUM(DISTINCT expression)
 ```
 
@@ -75,7 +75,7 @@ WHERE
 
 Output:
 
-```shell
+```
  sum
 ------
  null
@@ -103,7 +103,7 @@ WHERE
 
 Output:
 
-```shell
+```
  total
 -------
      0
@@ -142,7 +142,7 @@ Output:
 
 The following query retrieves the top five customers who made the highest payments:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -175,7 +175,7 @@ To filter group sums based on a specific condition, you use the `SUM()` function
 
 The following example retrieves customers who have made payments exceeding 200:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) AS total
@@ -206,7 +206,7 @@ See the following `rental` table from the [sample database](../postgresql-gettin
 ![](/postgresqltutorial/rental.png)
 The following statement uses the `SUM()` function to calculate the total rental days:
 
-```
+```sql
 SELECT
   SUM(return_date - rental_date)
 FROM
@@ -215,7 +215,7 @@ FROM
 
 Output:
 
-```shell
+```
            sum
 -------------------------
  71786 days 190098:21:00
@@ -229,7 +229,7 @@ How it works.
 
 The following example uses the `SUM()` function to calculate the total duration by customers:
 
-```
+```sql
 SELECT
   first_name || ' ' || last_name full_name,
   SUM(return_date - rental_date) rental_duration

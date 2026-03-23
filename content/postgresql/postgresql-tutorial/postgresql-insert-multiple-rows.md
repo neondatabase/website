@@ -20,7 +20,7 @@ nextLink:
 
 To insert multiple rows into a table using a single [`INSERT`](postgresql-insert) statement, you use the following syntax:
 
-```shellsql
+```sql
 INSERT INTO table_name (column_list)
 VALUES
     (value_list_1),
@@ -89,7 +89,7 @@ INSERT 0 3
 
 To verify the inserts, you use the following statement:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -109,7 +109,7 @@ Output:
 
 The following statement uses the `INSERT` statement to insert two rows into the `contacts` table and returns the inserted rows:
 
-```
+```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
     ('Alice', 'Johnson', 'alice.johnson@example.com'),
@@ -132,7 +132,7 @@ INSERT 0 2
 
 If you just want to return the inserted id list, you can specify the `id` column in the `RETURNING` clause like this:
 
-```
+```sql
 INSERT INTO contacts (first_name, last_name, email)
 VALUES
     ('Eva', 'Williams', 'eva.williams@example.com'),

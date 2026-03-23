@@ -30,7 +30,7 @@ Here’s the step for creating a `BEFORE TRUNCATE` trigger:
 
 First, [define a user\-defined function](../postgresql-plpgsql/postgresql-create-function) that will execute before the `TRUNCATE` event:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -94,7 +94,7 @@ Output:
 
 Third, define a function that will execute when a `TRUNCATE` event occurs:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION before_truncate_companies()
 RETURNS TRIGGER AS
 $$
@@ -123,7 +123,7 @@ TRUNCATE TABLE companies;
 
 Output:
 
-```sql
+```
 NOTICE:  Truncating the companies table is not allowed
 TRUNCATE TABLE
 ```

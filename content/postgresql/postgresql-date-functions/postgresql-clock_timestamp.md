@@ -70,7 +70,7 @@ SELECT
 
 Output:
 
-```sql
+```
 -[ RECORD 1 ]---+------------------------------
 clock_timestamp | 2024-03-20 14:51:21.92144-07
 pg_sleep        |

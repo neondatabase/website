@@ -92,7 +92,7 @@ Output:
 
 The following statement adds the `HAVING`clause to select the only customers who have been spending more than `200`:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount) amount
@@ -123,7 +123,7 @@ See the following `customer` table from the [sample database](../postgresql-gett
 ![customer table](/postgresqltutorial/customer-table.png)
 The following query uses the `GROUP BY` clause to find the number of customers per store:
 
-```
+```sql
 SELECT
   store_id,
   COUNT (customer_id)
@@ -145,7 +145,7 @@ Output:
 
 The following statement adds the `HAVING` clause to select a store that has more than 300 customers:
 
-```
+```sql
 SELECT
   store_id,
   COUNT (customer_id)

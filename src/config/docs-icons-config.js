@@ -106,6 +106,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/database.svg',
     darkIconPath: null,
   },
+  databricks: {
+    name: 'databricks',
+    lightIconPath: '/images/technology-logos/databricks.svg',
+    darkIconPath: null,
+  },
   datadog: {
     name: 'datadog',
     lightIconPath: '/images/technology-logos/datadog.svg',

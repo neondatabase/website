@@ -124,7 +124,7 @@ SELECT LOG('64x');
 
 Error:
 
-```sql
+```
 ERROR:  invalid input syntax for type double precision: "64x"
 LINE 1: SELECT LOG('64x');                  ^
 ```

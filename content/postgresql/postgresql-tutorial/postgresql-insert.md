@@ -22,14 +22,14 @@ The PostgreSQL `INSERT` statement allows you to insert a new row into a table.
 
 Here’s the basic syntax of the `INSERT` statement:
 
-```shellsqlsql
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …);
 ```
 
 In this syntax:
 
-- First, specify the name of the table (`table1`) that you want to insert data after the `INSERT INTO` keywords and a list of comma\-separated columns (`colum1, column2, ....`).
+- First, specify the name of the table (`table1`) that you want to insert data after the `INSERT INTO` keywords and a list of comma\-separated columns (`column1, column2, ....`).
 - Second, supply a list of comma\-separated values in parentheses `(value1, value2, ...)` after the `VALUES` keyword. The column and value lists must be in the same order.
 
 The `INSERT` statement returns a command tag with the following form:
@@ -55,7 +55,7 @@ The `INSERT` statement has an optional `RETURNING` clause that returns the infor
 
 If you want to return the entire inserted row, you use an asterisk (`*`) after the `RETURNING` keyword:
 
-```
+```sql
 INSERT INTO table1(column1, column2, …)
 VALUES (value1, value2, …)
 RETURNING *;
@@ -122,7 +122,7 @@ PostgreSQL automatically generates a sequential number for the [serial column](p
 
 The following [`SELECT`](postgresql-select) statement shows the contents of the `links` table:
 
-```
+```sql
 SELECT	* FROM links;
 ```
 
@@ -152,7 +152,7 @@ INSERT 0 1
 
 The following statement verifies the insert:
 
-```
+```sql
 SELECT * FROM links;
 ```
 
@@ -201,7 +201,7 @@ To get the last inserted ID from the inserted row, you use the `RETURNING` claus
 
 For example, the following statement inserts a new row into the `links` table and returns the last inserted id:
 
-```
+```sql
 INSERT INTO links (url, name)
 VALUES('https://www.postgresql.org','PostgreSQL')
 RETURNING id;

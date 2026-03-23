@@ -46,7 +46,7 @@ The `POSITION()` function returns zero (0\) if the substring is not found in the
 
 The following example returns the position of the `'Tutorial'` in the string `'PostgreSQL Tutorial'`:
 
-```
+```sql
 SELECT POSITION('Tutorial' IN 'PostgreSQL Tutorial');
 ```
 
@@ -63,7 +63,7 @@ Note that the `POSITION()` function searches for the substring case\-insensitive
 
 See the following example:
 
-```
+```sql
 SELECT POSITION('tutorial' IN 'PostgreSQL Tutorial');
 ```
 
@@ -99,7 +99,7 @@ The `POSITION()` function returns the location of the first instance of the subs
 
 For example:
 
-```
+```sql
 SELECT POSITION('is' IN 'This is a cat');
 ```
 

@@ -24,7 +24,7 @@ To call a PostgreSQL stored procedure in a Python program, you follow these step
 
 First, [create a new database connection](connect) to the PostgreSQL database server by calling the `connect()` function:
 
-```pythonsql
+```python
 conn = psycopg2.connect(config)
 ```
 
@@ -73,13 +73,13 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, connect to the `suppliers` database on the local PostgreSQL server:
 
-```python
+```bash
 psql -U postgres -d suppliers
 ```
 
 Third, create a new stored procedure called `add_new_part()`:
 
-```
+```sql
 CREATE OR REPLACE PROCEDURE add_new_part(
 	new_part_name varchar,
 	new_vendor_name varchar
@@ -114,7 +114,7 @@ First, create a new module called `call_stored_procedure.py` file in the project
 
 Second, define the following `add_part()` function that calls the `add_new_part()` stored procedure from the `suppliers` database:
 
-```sql
+```python
 import psycopg2
 from config import load_config
 
@@ -145,7 +145,7 @@ if __name__ == '__main__':
 
 Execute the following command to run the `call_stored_procedure.py` module:
 
-```plaintext
+```bash
 python call_stored_procedure.py
 ```
 
@@ -153,7 +153,7 @@ python call_stored_procedure.py
 
 Execute the following statement to retrieve data from the `parts`, `vendors`, and `vendor_parts` tables to verify the result:
 
-```
+```sql
 SELECT * FROM parts;
 SELECT * FROM vendors;
 SELECT * FROM vendor_parts;

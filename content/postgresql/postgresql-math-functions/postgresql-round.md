@@ -20,7 +20,7 @@ The PostgreSQL `ROUND()` function rounds a numeric value to its nearest [integer
 
 The following illustrates the syntax of the `ROUND()` function:
 
-```css
+```sql
 ROUND (source [ , n ] )
 ```
 
@@ -64,27 +64,27 @@ If you use both arguments, the `ROUND()` function returns a `numeric` value.
 
 The following example shows how to round a decimal using the `ROUND()` function:
 
-```css
+```sql
 SELECT
     ROUND( 10.4 );
 ```
 
 Because the nearest integer of 10\.4 is 10, the function returns 10 as expected:
 
-```css
+```
 10
 ```
 
 The following example rounds 10\.5:
 
-```
+```sql
 SELECT
     ROUND( 10.5 );
 ```
 
 Output:
 
-```css
+```
 11
 ```
 
@@ -92,27 +92,27 @@ Output:
 
 The following example uses the `ROUND()` function to round a number to the one with 2 decimal places:
 
-```
+```sql
 SELECT
     ROUND( 10.812, 2 );
 ```
 
 Result:
 
-```css
+```
 10.81
 ```
 
 And another example of rounding a decimal to 2 decimal places:
 
-```css
+```sql
 SELECT
     ROUND( 10.817, 2 );
 ```
 
 Result:
 
-```css
+```
 10.82
 ```
 
@@ -124,7 +124,7 @@ We will use the following `payment` and `customer` tables in the [sample databas
 
 ![customer and payment tables](/postgresqltutorial/customer-and-payment-tables.png)The following statement retrieves the average rental fee that each customer has paid.
 
-```php
+```sql
 SELECT
     first_name,
     last_name,
@@ -157,7 +157,7 @@ first_name  |  last_name   | avg_rental
 
 The following statement calculates the average number of rentals per customer:
 
-```
+```sql
 WITH rental(customer_id,rent) AS
 (
     SELECT

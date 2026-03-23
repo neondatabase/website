@@ -76,7 +76,7 @@ SELECT NOW(), PG_SLEEP(3), NOW();
 
 Output:
 
-```sql
+```
 -[ RECORD 1 ]---------------------------
 now      | 2024-03-21 02:26:37.710939-07
 pg_sleep |
@@ -95,7 +95,7 @@ SELECT CLOCK_TIMESTAMP(), PG_SLEEP(3), CLOCK_TIMESTAMP();
 
 Output:
 
-```sql
+```
 -[ RECORD 1 ]---+------------------------------
 clock_timestamp | 2024-03-21 02:27:03.181753-07
 pg_sleep        |

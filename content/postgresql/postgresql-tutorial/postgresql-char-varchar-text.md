@@ -50,7 +50,7 @@ Unlike `VARCHAR`, The `CHARACTER` or `CHAR` without the length, specifier (`n`) 
 
 Different from other database systems, in PostgreSQL, there is no performance difference among the three character types.
 
-In most cases, you should use `TEXT`or `VARCHAR` and use the `VARCHAR(n)` only when you want PostgreSQL to check the length.
+In most cases, you should use `TEXT` or `VARCHAR` and use the `VARCHAR(n)` only when you want PostgreSQL to check the length.
 
 ## PostgreSQL character type examples
 
@@ -58,7 +58,7 @@ Let’s take a look at an example to understand how the `CHAR`, `VARCHAR`, and `
 
 First, [create a new table](postgresql-create-table) called `character_tests`:
 
-```shellsql
+```sql
 CREATE TABLE character_tests (
   id serial PRIMARY KEY,
   x CHAR (1),
@@ -80,7 +80,7 @@ VALUES
 
 PostgreSQL issued an error:
 
-```sql
+```
 ERROR:  value too long for type character(1)
 ```
 
@@ -100,7 +100,7 @@ VALUES
 
 PostgreSQL issues a different error:
 
-```sql
+```
 ERROR:  value too long for type character varying(10)
 ```
 
@@ -108,7 +108,7 @@ This is because we attempted to insert a string with more than 10 characters int
 
 The following statement inserts a new row into the `character_tests` table successfully.
 
-```shell
+```sql
 INSERT INTO character_tests (x, y, z)
 VALUES
   (

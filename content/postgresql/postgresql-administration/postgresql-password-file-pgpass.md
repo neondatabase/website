@@ -57,13 +57,13 @@ First, open a text editor like Notepad.
 
 Second, enter the connection for your PostgreSQL database in the above format. For example:
 
-```css
+```
 localhost:5432:*:postgres:moreSecure
 ```
 
 Third, save the file with the name `pgpass.conf` with the following file path:
 
-```xml
+```
 C:\Users\<YourUsername>\AppData\Roaming\postgresql\pgpass.conf
 ```
 
@@ -75,7 +75,7 @@ First, open a terminal.
 
 Second, use a text editor like Vi, or Nano to create a `.pgpass` file:
 
-```css
+```bash
 nano ~/.pgpass
 ```
 
@@ -89,7 +89,7 @@ Fourth, save the file and exit.
 
 Finally, ensure security by giving the .pgpass file has proper permissions:
 
-```
+```bash
 chmod 600 ~/.pgpass
 
 ```
@@ -98,7 +98,7 @@ chmod 600 ~/.pgpass
 
 After you create the `.pgpass` file, you can use psql without having to specify a password each time:
 
-```
+```bash
 psql -h hostname -p port -d database -U username
 ```
 

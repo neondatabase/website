@@ -22,7 +22,7 @@ PostgreSQL `LAG()` function allows you to access data of the previous row from t
 
 Here’s the basic syntax of the `LAG()` function:
 
-```phpsqlsql
+```sql
 LAG(expression [,offset [,default_value]])
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -105,7 +105,7 @@ Here is the data from the `sales` function:
 
 This example uses the `LAG()` function to return the sales amount of the current year and the previous year of the group id 1:
 
-```
+```sql
 SELECT
   year,
   amount,

@@ -50,7 +50,7 @@ The sequence name must be distinct from any other sequences, tables, [indexes](.
 
 Specify the [data type](postgresql-data-types) of the sequence. The valid data type is [`SMALLINT`](postgresql-integer), [`INT`](postgresql-interval), and [`BIGINT`](postgresql-integer). The default data type is `BIGINT` if you skip it.
 
-The data type of the sequence which determines the sequence’s minimum and maximum values.
+The data type of the sequence determines the sequence’s minimum and maximum values.
 
 ### \[ INCREMENT \[ BY ] increment ]
 
@@ -226,7 +226,7 @@ In this syntax:
 
 ### PostgreSQL DROP SEQUENCE statement examples
 
-This statement drops the table `order_details`. Since the sequence `order_item_id` associates with the `item_id` of the `order_details`, it is also dropped automatically:
+This statement drops the table `order_details`. Since the sequence `order_item_id` is associated with the `item_id` of the `order_details`, it is also dropped automatically:
 
 ```sql
 DROP TABLE order_details;

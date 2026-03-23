@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.206Z'
+updatedOn: '2026-03-20T16:01:10.991Z'
 ---
 
 ## Overview
@@ -34,6 +34,10 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Neon Auth support**   | ✅ Auto-provisioned on preview branches                                                               | ✅ Auto-provisioned on preview branches                                                                      | Manual setup required                           |
 | **Branch cleanup**      | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
+
+<Admonition type="note" title="Branch cleanup timing">
+Branch cleanup behavior differs between the two integrations. Vercel-Managed cleanup depends on Vercel's deployment retention policy, which can delay branch deletion by months. Neon-Managed cleanup is triggered by Git branch deletion. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup) for details, workarounds, and recommendations.
+</Admonition>
 
 ---
 

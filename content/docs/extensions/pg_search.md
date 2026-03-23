@@ -6,14 +6,28 @@ summary: >-
   and analytics in Postgres, utilizing BM25 indexing for high-relevance results
   and advanced text search capabilities.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.089Z'
+updatedOn: '2026-03-20T11:17:24.718Z'
+redirectFrom:
+  - /guides/pg-search
+  - /guides/pg-search/
+  - /guides/pg-search-vs-tsvector
+  - /guides/pg-search-vs-tsvector/
 ---
+
+<Admonition type="warning" title="Neon's support for pg_search has been deprecated.">
+
+As of March 19, 2026, `pg_search` is longer available for new Neon projects. Depending on your use case, consider these alternatives:
+
+- **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
+- **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
+- **Semantic/vector search**: [`pgvector`](/docs/extensions/pgvector) for embedding-based search
+- **BM25 search**: [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
+
+</Admonition>
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
 
 `pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
-
-<CTA />
 
 In this guide, you'll learn how to enable `pg_search` on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches on your Postgres database.
 

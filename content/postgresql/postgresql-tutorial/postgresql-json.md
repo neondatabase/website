@@ -32,7 +32,7 @@ An object is defined as an unordered collection of key\-value pairs enclosed in 
 
 For example, the following illustrates a JSON object that represents a film:
 
-```jsonsqlsql
+```json
 {"title": "Chamber Italian", "release_year": 2006, "length": 117}
 ```
 
@@ -45,7 +45,7 @@ An array is an ordered list of values enclosed in square brackets `[]`. The valu
 For example, the following shows an array that stores three film titles as strings:
 
 ```json
-["Chamber Italian", "Grosse Wonderful", " Airport Pollock"]
+["Chamber Italian", "Grosse Wonderful", "Airport Pollock"]
 ```
 
 ### Data types in JSON
@@ -93,7 +93,7 @@ Let’s take some examples of storing JSON data in the PostgreSQL database.
 
 First, [create a new table](postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -215,7 +215,7 @@ Output:
 
 Sixth, retrieve the products with the colors black and white using the `->>` operator in the [WHERE](postgresql-where) clause:
 
-```
+```sql
 SELECT
   id,
   name,
@@ -240,7 +240,7 @@ Output:
 
 First, create a table called `contacts` for storing the contact persons:
 
-```
+```sql
 CREATE TABLE contacts(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE contacts(
 );
 ```
 
-The `phones` column has the JSONB data type. We’ll store both work phone and personal number numbers in a JSON array in the `phones` column.
+The `phones` column has the JSONB data type. We’ll store both work phone and personal phone numbers in a JSON array in the `phones` column.
 
 Second, insert new rows into the `contacts` table:
 
@@ -272,7 +272,7 @@ Output:
 
 Third, retrieve the contacts with the work phone numbers from the `contacts` table:
 
-```
+```sql
 SELECT
   name,
   phones ->> 0 "work phone"

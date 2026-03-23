@@ -24,7 +24,7 @@ PostgreSQL does not directly support the `SHOW DATABASES` statement but offers y
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server:
 
-```phpsql
+```bash
 psql -U postgres
 ```
 
@@ -53,7 +53,7 @@ It’ll show the following output:
 
 To display more information on databases, you can use the `\l+` command:
 
-```shell
+```
 \l+
 ```
 
@@ -61,7 +61,7 @@ To display more information on databases, you can use the `\l+` command:
 
 The following statement retrieves the database names from the `pg_database` view:
 
-```shell
+```sql
 SELECT datname FROM pg_database;
 ```
 

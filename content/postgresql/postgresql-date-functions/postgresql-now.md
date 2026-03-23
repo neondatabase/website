@@ -22,13 +22,13 @@ The `NOW()` function returns the current date and time with the time zone of the
 
 Here’s the basic syntax of the `NOW()` function:
 
-```csssql
+```sql
 NOW()
 ```
 
 The `NOW()` function doesn’t require any argument. Its return type is the [timestamp with time zone](../postgresql-tutorial/postgresql-timestamp). For example:
 
-```
+```sql
 SELECT NOW();
 ```
 
@@ -80,13 +80,13 @@ Partial output:
 
 If you want to get the current date and time without a timezone, you can cast it explicitly as follows:
 
-```
+```sql
 SELECT NOW()::timestamp;
 ```
 
 Output:
 
-```php
+```
             now
 ----------------------------
  2017-03-17 18:37:29.229991
@@ -111,7 +111,7 @@ SELECT (NOW() + interval '1 day') AS this_time_tomorrow;
 
 Output:
 
-```php
+```
       this_time_tomorrow
 -------------------------------
  2024-01-28 04:16:28.308575+02

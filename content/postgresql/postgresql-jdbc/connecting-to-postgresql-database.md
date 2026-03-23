@@ -20,13 +20,13 @@ nextLink:
 
 First, open the Command Prompt on Windows or the Terminal on Unix\-like systems and connect to the local PostgreSQL database server using `psql` client tool:
 
-```php
+```bash
 psql -U postgres
 ```
 
 Second, create a new database called `sales`:
 
-```
+```sql
 CREATE DATABASE sales;
 ```
 

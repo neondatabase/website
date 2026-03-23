@@ -1,16 +1,19 @@
 ---
-title: Neon Auth & Data API TypeScript SDKs
-subtitle: Reference documentation for building applications with Neon Auth and Data API
+title: Neon TypeScript SDK
+subtitle: Reference documentation for authentication and Data API database queries
 summary: >-
   Covers the setup and usage of the Neon TypeScript SDK for implementing
   authentication and database operations in applications, including various
   adapter options for different frameworks.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-02-15T20:51:54.261Z'
+updatedOn: '2026-03-20T21:22:58.813Z'
 ---
 
-The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
+This page documents `@neondatabase/neon-js`, which combines Neon Auth and the Data API in a single client. Neon also publishes standalone packages:
+
+- [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
+- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Neon Auth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 

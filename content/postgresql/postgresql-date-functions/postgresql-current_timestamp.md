@@ -22,7 +22,7 @@ The `CURRENT_TIMESTAMP` function returns the current date and time with the time
 
 Here’s the basic syntax of the PostgreSQL `CURRENT_TIMESTAMP()` function:
 
-```sqlsql
+```sql
 CURRENT_TIMESTAMP(precision)
 ```
 

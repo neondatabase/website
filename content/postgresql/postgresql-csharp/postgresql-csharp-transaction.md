@@ -20,13 +20,13 @@ nextLink:
 
 First, open a terminal and connect to the `elearning` database using the `ed` user using `psql` program:
 
-```plaintextsql
+```bash
 psql -U ed -d elearning
 ```
 
 Second, [create a new table](../postgresql-tutorial/postgresql-create-table) called `invoices`:
 
-```plaintext
+```sql
 CREATE TABLE invoices (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     student_id INT NOT NULL,
@@ -67,7 +67,7 @@ Output:
 
 Finally, exit the psql program:
 
-```cs
+```
 exit
 ```
 
@@ -154,7 +154,7 @@ catch (NpgsqlException ex)
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```cs
+```bash
 psql -U ed -d elearning
 ```
 
@@ -162,7 +162,7 @@ It’ll prompt you to enter a password for the `ed` user. Input the valid passwo
 
 Second, retrieve data from the `enrollments` table:
 
-```cs
+```sql
 SELECT * FROM enrollments;
 ```
 
@@ -177,7 +177,7 @@ Output:
 
 Third, retrieve data from the `invoices` table:
 
-```cs
+```sql
 SELECT * FROM invoices;
 ```
 

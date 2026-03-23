@@ -54,7 +54,7 @@ PostgreSQL provides the `plpgsql.check_asserts` configuration parameter to enabl
 
 The following example uses the `assert` statement to check if the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) has data:
 
-```sql
+```plsql
 do $$
 declare
    film_count integer;
@@ -71,7 +71,7 @@ Because the `film` table has data, the block did not issue any message.
 
 The following example issues an error because the number of films from the film table is not greater than `1,000`.
 
-```sql
+```plsql
 do $$
 declare
    film_count integer;
@@ -86,7 +86,7 @@ end$$;
 
 Output:
 
-```shell
+```
 ERROR:  1000 Film found, check the film table
 CONTEXT:  PL/pgSQL function inline_code_block line 9 at ASSERT
 SQL state: P0004

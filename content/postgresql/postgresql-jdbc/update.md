@@ -29,7 +29,7 @@ To update data in a table of a PostgreSQL database, you follow these steps:
 
 The following defines the `update()` method that changes the `name` and `price` of a product specified by product id:
 
-```javasql
+```java
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ int affectedRows = 0;
 
 Third, establish a connection and create a `PreparedStatement` object:
 
-```
+```java
 try (var conn  = DB.connect();
      var pstmt = conn.prepareStatement(sql)) {
 // ...
@@ -128,13 +128,13 @@ Updated Rows: 1
 
 First, open the Command Prompt on Windows or Terminal on Linux and connect to the PostgreSQL server:
 
-```plaintext
+```bash
 psql -U postgres -d sales
 ```
 
 Second, retrieve the product with id 1 to verify the update:
 
-```
+```sql
 SELECT * FROM products
 WHERE id = 1;
 ```

@@ -22,7 +22,7 @@ The `exit` statement allows you to prematurely terminate a loop including an unc
 
 The following shows the syntax of the `exit` statement:
 
-```csssql
+```plsql
 exit [label] [when boolean_expression]
 ```
 
@@ -33,11 +33,11 @@ In this syntax:
 
 The following statements are equivalent:
 
-```php
+```plsql
 exit when counter > 10;
 ```
 
-```php
+```plsql
 if counter > 10 then
    exit;
 end if;
@@ -49,7 +49,7 @@ Besides terminating a loop, you can use the `exit` statement to exit a block spe
 
 In this case, the control is passed to the statement after the `end` keyword of the current block:
 
-```css
+```plsql
 <<block_label>>
 BEGIN
     -- some code
@@ -66,7 +66,7 @@ Let’s take some examples of using the PL/pgSQL `exit` statement.
 
 The following example illustrates how to use the `exit` statement in unconditional loops:
 
-```php
+```plsql
 do
 $$
 declare
@@ -92,7 +92,7 @@ $$
 
 Output:
 
-```http
+```
 NOTICE:  (i,j): (1,1)
 NOTICE:  (i,j): (1,2)
 NOTICE:  (i,j): (1,3)
@@ -116,7 +116,7 @@ The second `exit` statement terminates the inner loop when `j` is greater than `
 
 The following example places the label of the outer loop in the second `exit` statement:
 
-```php
+```plsql
 do
 $$
 declare
@@ -142,7 +142,7 @@ $$
 
 Output:
 
-```http
+```
 NOTICE:  (i,j): (1,1)
 NOTICE:  (i,j): (1,2)
 NOTICE:  (i,j): (1,3)
@@ -154,7 +154,7 @@ In this example, the second `exit` statement terminates the outer loop when `j` 
 
 The following example illustrates how to use the `exit` statement to terminate a block:
 
-```php
+```plsql
 do
 $$
 begin
@@ -172,19 +172,19 @@ $$
 
 Output
 
-```http
+```
 NOTICE:  End of block
 ```
 
 In this example, the exit statement terminates the `simple_block` immediately:
 
-```php
+```plsql
 exit simple_block;
 ```
 
 This statement will never be reached:
 
-```
+```plsql
 raise notice '%', 'unreachable!';
 ```
 

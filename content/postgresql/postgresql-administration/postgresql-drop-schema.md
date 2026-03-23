@@ -20,7 +20,7 @@ nextLink:
 
 The `DROP SCHEMA` removes a [schema](postgresql-schema) and all of its objects from a database. The following illustrates the syntax of the `DROP SCHEMA` statement:
 
-```css
+```sql
 DROP SCHEMA [IF EXISTS] schema_name
 [ CASCADE | RESTRICT ];
 ```
@@ -35,7 +35,7 @@ To execute the `DROP SCHEMA` statement, you must be the owner of the schema that
 
 PostgreSQL allows you to drop multiple schemas at the same time by using a single `DROP SCHEMA` statement:
 
-```css
+```sql
 DROP SCHEMA [IF EXISTS] schema_name1 [,schema_name2,...]
 [CASCADE | RESTRICT];
 ```
@@ -50,7 +50,7 @@ Note that the following examples use schemas created in the [`CREATE SCHEMA`](po
 
 This example uses the `DROP SCHEMA` statement to remove the accounting schema:
 
-```css
+```sql
 DROP SCHEMA IF EXISTS accounting;
 ```
 
@@ -64,7 +64,7 @@ To refresh the schemas in the list, right\-click the Schemas node and select the
 
 The following example uses the `DROP SCHEMA` statement to drop multiple schemas `finance` and `marketing` using a single statement:
 
-```
+```sql
 DROP SCHEMA IF EXISTS finance, marketing;
 ```
 
@@ -74,7 +74,7 @@ DROP SCHEMA IF EXISTS finance, marketing;
 
 This statement drops the `scm` schema:
 
-```
+```sql
 DROP SCHEMA scm;
 ```
 
@@ -90,14 +90,14 @@ SQL state: 2BP01
 
 So, if the schema is not empty and you want to remove the schema and its objects, you must use the `CASCADE` option:
 
-```
+```sql
 DROP SCHEMA scm CASCADE;
 ```
 
 ![PostgreSQL DROP Schema - drop a non-empty schema](/postgresqltutorial/PostgreSQL-DROP-Schema-drop-a-non-empty-schema.png)
 Similarly, you can drop the `sales` schema and its objects using the following statement:
 
-```
+```sql
 DROP SCHEMA sales CASCADE;
 ```
 

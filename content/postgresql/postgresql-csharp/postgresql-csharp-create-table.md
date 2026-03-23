@@ -24,7 +24,7 @@ To create a new table in a PostgreSQL database from a C\# program, you follow th
 
 First, construct a [`CREATE TABLE`](../postgresql-tutorial/postgresql-create-table) statement:
 
-```cssql
+```cs
 var sql = "CREATE TABLE  ...";
 ```
 
@@ -129,7 +129,7 @@ using var dataSource = NpgsqlDataSource.Create(connectionString);
 
 After that, iterate over the statements list and execute each statement by calling the `ExecuteNonQueryAsync()` method:
 
-```
+```cs
 foreach (var statement in statements)
 {
     await using var cmd = dataSource.CreateCommand(statement);
@@ -147,7 +147,7 @@ Console.WriteLine($"Error: {ex.Message}");
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```cs
+```bash
 psql -U ed -d elearning
 ```
 
@@ -155,13 +155,13 @@ It’ll prompt you to enter a password for the `ed` user. Input the valid passwo
 
 Second, run the `\dt` command to [show all tables](../postgresql-administration/postgresql-show-tables) in the `elearning` database:
 
-```cs
+```
 \dt
 ```
 
 Output:
 
-```cs
+```
  Schema |    Name     | Type  | Owner
 --------+-------------+-------+-------
  public | courses     | table | ed

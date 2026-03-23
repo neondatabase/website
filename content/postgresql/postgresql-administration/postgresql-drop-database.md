@@ -22,7 +22,7 @@ The `DROP DATABASE` statement deletes a database from a PostgreSQL server.
 
 Here’s the basic syntax of the `DROP DATABASE` statement:
 
-```httpsqlsql
+```sql
 DROP DATABASE [IF EXISTS] database_name
 [WITH (FORCE)]
 ```
@@ -64,7 +64,7 @@ psql -U postgres
 
 Second, drop the database `hr` using the following `DROP DATABASE` statement:
 
-```
+```sql
 DROP DATABASE hr;
 ```
 
@@ -99,7 +99,7 @@ DROP DATABASE
 
 First, establish a connection to the PostgreSQL server using the `psql` tool:
 
-```
+```bash
 psql -U postgres
 ```
 
@@ -107,7 +107,7 @@ Next, open the second connection to the PostgreSQL server. You can use psql, pgA
 
 Then, attempt to delete the `test` database from the first session:
 
-```
+```sql
 DROP DATABASE test;
 ```
 
@@ -124,7 +124,7 @@ To drop the database that has active connections, you can use the `FORCE` option
 
 After that, find the connections to the `test` database by retrieving data from the `pg_stat_activity` view:
 
-```
+```sql
 SELECT
   datname,
   pid,
@@ -151,13 +151,13 @@ The `test` database has one connection from `localhost`. Therefore, it’s safe 
 
 Finally, terminate the connections to the `test` database and drop it using the `WITH (FORCE)` option:
 
-```
+```sql
 DROP DATABASE test WITH (FORCE)
 ```
 
 Output:
 
-```
+```sql
 DROP DATABASE
 ```
 

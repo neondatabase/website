@@ -22,7 +22,7 @@ The `loop` defines an unconditional loop that executes a block of code repeatedl
 
 The following illustrates the syntax of the `loop` statement:
 
-```sqlsql
+```plsql
 <<label>>
 loop
    statements;
@@ -31,7 +31,7 @@ end loop;
 
 Typically, you use an [`if`](plpgsql-if-else-statements) statement to terminate the loop based on a condition like this:
 
-```sql
+```plsql
 <<label>>
 loop
    statements;
@@ -45,7 +45,7 @@ The `exit` statement terminates the loop immediately.
 
 It’s possible to place a loop statement inside another loop statement. When a `loop` statement is placed inside another `loop` statement, it is called a nested loop:
 
-```sql
+```plsql
 <<outer>>
 loop
    statements;
@@ -67,7 +67,7 @@ Let’s explore some examples of using the loop statement.
 
 The following example uses a `loop` statement to display five numbers from 1 to five:
 
-```sql
+```plsql
 do $$
 
 declare
@@ -91,7 +91,7 @@ $$;
 
 Output:
 
-```http
+```
 NOTICE:  1
 NOTICE:  2
 NOTICE:  3
@@ -103,25 +103,25 @@ How it works.
 
 First, declare a variable `counter` and initialize its value to zero:
 
-```php
+```plsql
 counter int := 0;
 ```
 
 Second, increase the value of the `counter` variable by one in each iteration of the loop:
 
-```
+```plsql
 counter = counter + 1;
 ```
 
 Third, display the current value of the `counter`:
 
-```
+```plsql
 raise notice '%', counter;
 ```
 
 Finally, terminate the loop if the current value of the `counter` variable is 5:
 
-```
+```plsql
 if counter = 5 then
    exit;
 end if;
@@ -131,13 +131,13 @@ Since the initial value of the `counter` is zero, the loop executes five times b
 
 In practice, you can combine the `if` and `exit` statements into a single statement like this:
 
-```php
+```plsql
 exit when counter = 5;
 ```
 
 For example:
 
-```sql
+```plsql
 do $$
 
 declare
@@ -161,7 +161,7 @@ Note that you will learn more about the [exit statement](plpgsql-exit) in the up
 
 The following example illustrates how to use a loop label:
 
-```sql
+```plsql
 do $$
 
 declare
@@ -182,7 +182,7 @@ $$;
 
 Output:
 
-```http
+```
 NOTICE:  1
 NOTICE:  2
 NOTICE:  3
@@ -202,7 +202,7 @@ It’ll be more practical to use a loop label when you have a nested loop.
 
 The following example illustrates how to use a nested loop with labels:
 
-```sql
+```plsql
 do $$
 
 declare
@@ -233,7 +233,7 @@ $$;
 
 Output:
 
-```http
+```
 NOTICE:  (1, 1)
 NOTICE:  (1, 2)
 NOTICE:  (1, 3)
@@ -249,7 +249,7 @@ How it works.
 
 First, declare two variables `row_var` and `col_var`, and initialize their values to zero:
 
-```
+```plsql
 row_var int := 0;
 col_var int := 0;
 ```

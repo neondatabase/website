@@ -22,7 +22,7 @@ The `jsonb_object_keys()` function allows you to extract the keys of a [JSON](..
 
 Here’s the basic syntax of the `jsonb_object_keys()` function:
 
-```phpsqlsql
+```sql
 jsonb_object_keys(json_object)
 ```
 
@@ -129,7 +129,7 @@ Output:
 
 The following example shows how to dynamically access values corresponding to each key retrieved using `jsonb_object_keys()`:
 
-```
+```sql
 SELECT
     id,
     key,

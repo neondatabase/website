@@ -45,7 +45,6 @@ export const metadata = getMetadata(SEO_DATA.enterprise);
 const logos = [
   'eqt',
   'openai',
-  'zimmer',
   'outfront',
   'adobe',
   'genomics',
@@ -57,6 +56,8 @@ const logos = [
   'bcg',
   'wordware',
   'commure',
+  'bitso',
+  'framer',
 ];
 
 const features = [

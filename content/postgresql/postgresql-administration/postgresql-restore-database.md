@@ -28,7 +28,7 @@ The `pg_restore` tool allows you to restore the PostgreSQL database from an arch
 
 Here’s the syntax of the `pg_restore` command:
 
-```csssql
+```bash
 pg_restore [connection-option] [option] [filename]
 ```
 
@@ -59,7 +59,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, back up the dvdrental database to a directory such as D:\\backup\\
 
-```css
+```bash
 pg_dump -U postgres -d dvdrental -F tar -f d:\backup\dvdrental.tar
 
 ```
@@ -68,19 +68,19 @@ It’ll prompt you to enter the password for the user `postgres`. After entering
 
 Third, connect to the PostgreSQL server:
 
-```php
+```bash
 psql -U postgres
 ```
 
 Fourth, drop the `dvdrental` database:
 
-```
+```sql
 drop database dvdrental;
 ```
 
 Fifth, create a new empty `dvdrental` database:
 
-```
+```sql
 create database dvdrental;
 ```
 
@@ -92,13 +92,13 @@ exit
 
 Seven, restore the dvdrental database from the backup file using the pg_restore tool:
 
-```php
+```bash
 pg_restore -U postgres -d dvdrental D:/backup/dvdrental.tar
 ```
 
 Eight, connect to the dvdrental database:
 
-```
+```bash
 psql -U postgres -d dvdrental
 ```
 

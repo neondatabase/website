@@ -79,7 +79,7 @@ Output:
 
 It is equivalent to the following query:
 
-```
+```sql
 SELECT
     film_id,
     title
@@ -118,7 +118,7 @@ Output:
 
 The following statement returns the next five films after the first five films sorted by titles:
 
-```
+```sql
 SELECT
     film_id,
     title

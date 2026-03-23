@@ -24,7 +24,7 @@ The `jsonb_agg()` function can be particularly useful when you want to create a 
 
 Here’s the syntax of the `jsonb_agg()` function:
 
-```sqlsql
+```sql
 jsonb_agg(expression)
 ```
 
@@ -235,7 +235,7 @@ The `employees` table:
 
 Third, use the `jsonb_agg()` function to retrieve departments and a list of employees for each department in the form of a JSON array:
 
-```
+```sql
 SELECT
   department_name,
   jsonb_agg (employee_name) AS employees

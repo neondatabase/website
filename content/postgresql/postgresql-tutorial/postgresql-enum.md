@@ -139,7 +139,7 @@ ORDER BY priority;
 
 PostgreSQL issues the following error:
 
-```sql
+```
 ERROR:  invalid input value for enum priority: "HIGH"
 LINE 3: WHERE priority = 'HIGH'
                          ^
@@ -156,7 +156,7 @@ RETURNING *;
 
 Error:
 
-```sql
+```
 ERROR:  invalid input value for enum priority: "urgent"
 LINE 3:    ('Revise the enum tutorial', 'urgent', '2019-01-02')
                                         ^

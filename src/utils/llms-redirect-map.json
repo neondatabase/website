@@ -302,6 +302,8 @@
   "guides-oauth-integration.txt": "/docs/guides/oauth-integration.md",
   "guides-opentelemetry.txt": "/docs/guides/opentelemetry.md",
   "guides-outerbase.txt": "/docs/guides/outerbase.md",
+  "guides-pg-search.txt": "/docs/extensions/pg_search.md",
+  "guides-pg-search-vs-tsvector.txt": "/docs/extensions/pg_search.md",
   "guides-phoenix.txt": "/docs/guides/phoenix.md",
   "guides-platform-integration-overview.txt": "/docs/guides/platform-integration-overview.md",
   "guides-postgrest.txt": "/docs/guides/postgrest.md",

@@ -22,7 +22,7 @@ The `MAKE_INTERVAL()` function allows you to create an [interval](../postgresql-
 
 Here’s the syntax of the `MAKE_INTERVAL()` function:
 
-```csssqlsql
+```sql
 MAKE_INTERVAL ( [ years int [, months int [, weeks int [, days int [, hours int [, mins int [, secs double precision ]]]]]]] ) → interval
 ```
 
@@ -58,7 +58,7 @@ Let’s explore some examples of using the `MAKE_INTERVAL()` function.
 
 The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 1 year, 2 months, 3 days, and 4 hours:
 
-```
+```sql
 SELECT
   MAKE_INTERVAL(
     years => 3, months => 6, days => 15, hours => 4
@@ -131,7 +131,7 @@ Output:
 
 Third, use the `MAKE_INTERVAL()` function to create intervals from the data stored in the `time_data` table:
 
-```
+```sql
 SELECT
   MAKE_INTERVAL(
     year, month, 0, day, hour, minute, second

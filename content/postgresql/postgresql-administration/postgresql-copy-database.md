@@ -24,7 +24,7 @@ Sometimes, you want to copy a PostgreSQL database within a database server for t
 
 PostgreSQL makes it easy to do so via the [`CREATE DATABASE`](https://www.postgrepgsqltutorial.com/postgrepgsql-create-database/) statement, as follows:
 
-```sqlsql
+```sql
 CREATE DATABASE targetdb
 WITH TEMPLATE sourcedb;
 ```
@@ -71,7 +71,7 @@ If the size of the source database is big and the connection between the databas
 
 First, dump the source database into a file.
 
-```
+```bash
 pg_dump -U postgres -d sourcedb -f sourcedb.sql
 ```
 
@@ -95,7 +95,7 @@ The following steps illustrate how to copy the `dvdrental` database from the loc
 
 First, dump the `dvdrental` database into a dump file such as `dvdrental.sql`:
 
-```sql
+```bash
 pg_dump -U postgres -O dvdrental -f dvdrental.sql
 ```
 

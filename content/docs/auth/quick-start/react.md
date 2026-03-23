@@ -6,7 +6,7 @@ summary: >-
   covering project setup, SDK installation, environment variable configuration,
   and client setup for authentication methods.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.119Z'
+updatedOn: '2026-03-20T18:23:32.447Z'
 layout: wide
 ---
 
@@ -260,5 +260,6 @@ SELECT * FROM neon_auth.user;
 ## Next steps
 
 - [Learn about Neon Auth concepts](/docs/auth/overview)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
 - [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
 - [View complete SDK reference](/docs/reference/javascript-sdk)

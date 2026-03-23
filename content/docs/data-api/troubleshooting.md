@@ -6,7 +6,7 @@ summary: >-
   including permission errors and JWT validation failures, along with steps to
   resolve them.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.073Z'
+updatedOn: '2026-03-20T21:22:58.811Z'
 ---
 
 <InfoBlock>
@@ -93,7 +93,7 @@ Navigate to your Auth URL with `/reference` appended (for example, `https://ep-e
 3. Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
 4. Use that JWT in your Data API requests.
 
-For step-by-step instructions, see [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl).
+For step-by-step instructions, see [Testing with Neon Auth](/docs/data-api/get-started#testing-with-neon-auth).
 
 ## Permission denied for table
 
@@ -210,7 +210,7 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/openapi.json' \
   -H 'Authorization: Bearer YOUR_JWT_TOKEN'
 ```
 
-To get a JWT token for testing, see [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl).
+To get a JWT token for testing, see [Testing with Neon Auth](/docs/data-api/get-started#testing-with-neon-auth).
 
 ## New table not found or returns empty schema
 

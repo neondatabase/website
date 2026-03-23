@@ -20,7 +20,7 @@ nextLink:
 
 First, [connect to the PostgreSQL database server](../postgresql-jdbc/connecting-to-postgresql-database) using the `postgres` user:
 
-```shellsql
+```bash
 psql -U postgres
 ```
 
@@ -32,19 +32,19 @@ Password:
 
 Once you enter the password for the `postgres` user, you will see the following PostgreSQL command prompt:
 
-```shell
+```
 postgres=#
 ```
 
 Second, use the `\du` to list all user accounts (or roles) in the current PostgreSQL database server:
 
-```shell
+```
 \du
 ```
 
 ![](/postgresqltutorial/PostgreSQL-List-User-Example-1.png)If you want to show more information, you can use the `\du+` command:
 
-```shell
+```
 postgres=#\du+
 ```
 
@@ -54,7 +54,7 @@ The `\du+` command adds column called `description`.
 
 The following statement returns all users in the current database server by [querying data](../postgresql-tutorial/postgresql-select) from the `pg_catalog.pg_user` catalog:
 
-```
+```sql
 SELECT usename AS role_name,
   CASE
      WHEN usesuper AND usecreatedb THEN

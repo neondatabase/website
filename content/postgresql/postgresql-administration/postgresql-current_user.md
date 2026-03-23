@@ -22,7 +22,7 @@ The PostgreSQL `CURRENT_USER` is a function that returns the name of the current
 
 Here’s the syntax of the `CURRENT_USER` function:
 
-```sqlsql
+```sql
 CURRENT_USER
 ```
 
@@ -66,7 +66,7 @@ WITH LOGIN PASSWORD 'SecurePass1';
 
 Fourth, change the role of the current user to `bob`:
 
-```
+```sql
 SET ROLE bob;
 ```
 

@@ -20,7 +20,7 @@ nextLink:
 
 The following illustrates the syntax of the `LOCALTIMESTAMP` function:
 
-```csssql
+```sql
 LOCALTIMESTAMP(precision)
 ```
 
@@ -44,7 +44,7 @@ Let’s explore some examples of using the `LOCALTIMESTAMP` function
 
 The following example uses the `LOCALTIMESTAMP` function to get the current date and time of the transaction:
 
-```
+```sql
 SELECT LOCALTIMESTAMP;
 ```
 
@@ -61,7 +61,7 @@ Output:
 
 To get the timestamp of the current transaction with specific fractional seconds precision, you use the `precision` argument as follows:
 
-```css
+```sql
 SELECT LOCALTIMESTAMP(2);
 ```
 

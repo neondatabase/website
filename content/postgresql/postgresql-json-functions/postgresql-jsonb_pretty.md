@@ -22,7 +22,7 @@ The `jsonb_pretty()` function allows you to convert a given [JSONB](../postgresq
 
 Here’s the basic syntax of the `jsonb_pretty()` function:
 
-```jsonsql
+```sql
 jsonb_pretty(jsonb_value)
 ```
 
@@ -67,7 +67,7 @@ Output:
 
 First, create a new table called recipes:
 
-```json
+```sql
 CREATE TABLE recipes (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,

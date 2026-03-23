@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-03-12T17:34:43.558Z'
+updatedOn: '2026-03-20T18:23:32.452Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -61,7 +61,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
-| [Support](#support)                                   | Community                                  | Standard (billing issues only)       | Standard, Business, or Production                                                                 |
+| [Support](#support)                                   | Community                                  | Billing support                      | Standard, Business, or Production                                                                 |
 
 ## Plan features
 

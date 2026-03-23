@@ -4,7 +4,7 @@ summary: >-
   Covers the support plans, channels, and policies available for Neon users,
   detailing how to access support based on their specific pricing plan.
 enableTableOfContents: true
-updatedOn: '2026-02-18T18:59:48.108Z'
+updatedOn: '2026-03-20T18:23:32.455Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -35,7 +35,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [SLA](#response-time-sla)                                                     |         -         |        -        |        -         |     &check;      |      &check;       |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>\*</sup> [Support tickets](#support-tickets) are only supported for billing-related issues under this support plan, which means Neon Launch plan users can only create support tickets if the issue is related to billing.</small><br/>
+<small><sup>\*</sup> Under **Billing support** (Launch plan), you can only use [support tickets](#support-tickets) for **billing-related** issues. **Scale** plan and higher can use support tickets for **any** Neon issue. On paid plans, **Request billing support** on the [Billing](/docs/introduction/manage-billing#view-the-billing-page) page is the dedicated path for invoice and billing questions.</small><br/>
 <small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee for Standard, Business, and Production support plans.</small>
 </div>
 
@@ -51,7 +51,7 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Select **Ask AI assistant** from the Resources menu (`?`) in the Neon Console.
+- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the AI assistant so you can ask questions about Neon.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
@@ -63,22 +63,18 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-Paying users can raise a support ticket in the Neon Console. You can access support in two ways:
+**Launch** plan (**Billing support**): you can get help with **billing and invoices** (for example through [Request billing support](/docs/introduction/manage-billing#request-billing-support) on the Billing page). Support tickets tied to the console are limited to **billing-related** issues on this plan.
 
-1. **Direct access**: Select **Request Support** from the Resources menu (`?`) at the top of the Neon Console
-2. **Via AI assistant**: Select **Ask AI assistant** from the Resources menu, ask your question, and if the assistant is unable to resolve the problem, ask it to create a support ticket
+**Scale** plan (**Standard support**) and plans with **Business** or **Production** support: you can open support tickets for **any** Neon issue. **Business** and **Production** add SLA response times on top of that.
 
-Support options available based on your plan:
+You can reach the ticketing flow in these ways:
 
-- **Launch** plan users can open support tickets for **billing-related issues only**
-- **Scale** plan users can open a support ticket for any Neon issue
-- **Business** and **Production** plan users can open a support ticket for any Neon issue with SLA response times
+1. **AI assistant**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the **AI assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
+2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Technical Support** from the Help menu (`?`) to reach the AI assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
 </Admonition>
-
-![Resources menu in Neon Console](/docs/introduction/get_help.png)
 
 ### Slack channel
 
@@ -135,7 +131,7 @@ Neon will make commercially reasonable efforts to resolve any Issues submitted b
 
 ### Billing issues
 
-If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
+If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Paid plans can use **Request billing support** on the **Billing** page in the Neon Console; see [Request billing support](/docs/introduction/manage-billing#request-billing-support). Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
 
 ### Etiquette
 
@@ -172,7 +168,7 @@ Neon will make commercially reasonable efforts to resolve any Issues submitted b
 
 ### Billing issues
 
-If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
+If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Where available in the Neon Console, paid plans can use **Request billing support** on the **Billing** page; see [Request billing support](/docs/introduction/manage-billing#request-billing-support). Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
 
 ### Response times
 

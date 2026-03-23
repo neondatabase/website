@@ -24,7 +24,7 @@ Note that the scale of a number is a number of fractional decimal digits.
 
 Here’s the syntax of the `TRIM_SCALE()` function:
 
-```csssql
+```sql
 TRIM_SCALE(numeric_value)
 ```
 
@@ -63,7 +63,7 @@ We’ll show you an example of using the `TRIM_SCALE()` function to standardize 
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `products` to store product data:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

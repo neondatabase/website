@@ -33,7 +33,7 @@ To construct JSON path expressions, you can use the combination of the following
 
 To extract specific elements from a JSON path `jsonb_path_query()` function:
 
-```sqlsql
+```sql
 jsonb_path_query(jsonb_data, json_path)
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 The JSON data in the `info` column of the `person` table looks like the following:
 
-```sql
+```json
 {
   "name": "John",
   "age": 30,
@@ -245,7 +245,7 @@ It returns no row because the JSON object does not have the `email` key.
 
 The following statement extracts the `email` key but uses the `strict` mode for the JSON path:
 
-```
+```sql
 SELECT
   jsonb_path_query(info, 'strict $.email')
 FROM

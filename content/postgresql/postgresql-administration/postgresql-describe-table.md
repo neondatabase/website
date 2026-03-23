@@ -24,7 +24,7 @@ PostgreSQL does not support the `DESCRIBE`statement. However, you can query the 
 
 First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using the `psql` tool:
 
-```shellsql
+```shell
 psql -U postgres
 ```
 
@@ -32,13 +32,13 @@ It’ll prompt you to enter a password for the `postgres` user.
 
 Second, change the current database to `dvdrental` [sample database](../postgresql-getting-started/postgresql-sample-database):
 
-```shell
+```
 \c dvdrental
 ```
 
 Third, execute the `\d table_name` to or `\d+ table_name` to show the structure of a table. For example, the following shows the structure of the `film` table in the sample database:
 
-```php
+```
 \d film
 ```
 
@@ -85,7 +85,7 @@ The `information_schema.columns` catalog contains the information on columns of 
 
 For example:
 
-```php
+```sql
 SELECT
   column_name,
   data_type,

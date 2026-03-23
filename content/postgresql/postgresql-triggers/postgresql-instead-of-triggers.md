@@ -26,7 +26,7 @@ To create an `INSTEAD OF` trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when a trigger is fired:
 
-```sqlsql
+```plsql
 CREATE OR REPLACE FUNCTION fn_trigger()
 RETURNS TRIGGER AS
 $$
@@ -98,7 +98,7 @@ JOIN salaries s ON e.employee_id = s.employee_id;
 
 After that, create a function that will execute when the `INSTEAD` `OF` trigger associated with the view activates:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION update_employee_salaries()
 RETURNS TRIGGER AS
 $$
@@ -137,7 +137,7 @@ If you delete a row from the `employee_salaries` view, the `INSTEAD OF` trigger 
 
 Finally, create an `INSTEAD OF` trigger that will be fired for the `INSERT`, `UPDATE`, or `DELETE` on the `employee_salaries` view:
 
-```
+```sql
 CREATE TRIGGER instead_of_employee_salaries
 INSTEAD OF INSERT OR UPDATE OR DELETE
 ON employee_salaries

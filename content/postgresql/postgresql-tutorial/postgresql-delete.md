@@ -22,7 +22,7 @@ The PostgreSQL `DELETE` statement allows you to delete one or more rows from a t
 
 The following shows the basic syntax of the `DELETE` statement:
 
-```shellsql
+```sql
 DELETE FROM table_name
 WHERE condition;
 ```
@@ -125,7 +125,7 @@ DELETE 1
 
 The following statement uses the `DELETE` statement to delete the row with id 100:
 
-```shell
+```sql
 DELETE FROM todos
 WHERE id = 100;
 ```
@@ -140,7 +140,7 @@ DELETE 0
 
 The following statement uses the `DELETE` statement to delete the row with id 2 and return the deleted row to the client:
 
-```
+```sql
 DELETE FROM todos
 WHERE id = 2
 RETURNING *;
@@ -159,7 +159,7 @@ PostgreSQL returns the following deleted row:
 
 The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the value in the completed column `true` and return deleted rows:
 
-```
+```sql
 DELETE FROM todos
 WHERE completed = true
 RETURNING *;
@@ -186,13 +186,13 @@ It deleted four rows from the `todos` table.
 
 The following statement uses the `DELETE` statement without a `WHERE` clause to delete all rows from the `todos` table:
 
-```
+```sql
 DELETE FROM todos;
 ```
 
 Output:
 
-```
+```sql
 DELETE 4
 ```
 

@@ -22,7 +22,7 @@ The `RPAD()` function allows you to extend a string to a length by appending spe
 
 Here’s the basic syntax of the `RPAD()` function:
 
-```sqlsql
+```sql
 RPAD(string, length, fill)
 ```
 
@@ -93,7 +93,7 @@ Output:
 
 The following example uses the `RPAD()` function to truncate the titles if their lengths are more than 10 characters:
 
-```
+```sql
 SELECT
   title, RPAD(title, 10, '') result
 FROM

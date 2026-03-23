@@ -87,7 +87,8 @@
     @apply prose-pre:px-0;
 
     > * {
-      &:first-child:not(.info-block) {
+      /* Do not zero top margin on first heading: page `h1` + first `h2`/`h3` looked cramped */
+      &:first-child:not(.info-block):not(h2):not(h3):not(h4) {
         @apply mt-0;
       }
       &:first-child:is(.info-block) + .two-column-layout {
@@ -120,20 +121,19 @@
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
     @apply prose-hr:mt-8 prose-hr:mb-12 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
 
+    /* Slightly less than `prose-h2:mt-7` so the first section under the page title is not too airy */
+    > h2:first-child,
+    > h3:first-child,
+    > h4:first-child {
+      @apply mt-5;
+    }
+
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
     }
 
     .anchor-heading {
       @apply scroll-mt-24 lg:scroll-mt-5;
-    }
-
-    p img {
-      @apply border border-gray-new-90 dark:border-gray-new-20;
-
-      &.no-border {
-        @apply border-0;
-      }
     }
 
     ul,
@@ -175,6 +175,15 @@
       & + hr {
         @apply mt-0;
       }
+    }
+
+    /* Heading directly after heading (`prose-h2:mb-0` removed space before the next block) */
+    h1 + h2,
+    h1 + h3,
+    h2 + h3,
+    h2 + h4,
+    h3 + h4 {
+      @apply mt-5;
     }
 
     .table-wrapper {
@@ -233,7 +242,10 @@
     }
 
     :not(pre) > code {
-      @apply inline-flex items-center justify-center rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight break-words text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
+      @apply inline rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
 
       @apply before:hidden after:hidden;
     }

@@ -30,7 +30,7 @@ The materialized views can be useful in many cases that require fast data access
 
 To create a materialized view, you use the `CREATE MATERIALIZED VIEW` statement as follows:
 
-```phpsql
+```sql
 CREATE MATERIALIZED VIEW [IF NOT EXISTS] view_name
 AS
 query
@@ -100,13 +100,13 @@ WITH NO DATA;
 
 Because of the `WITH NO DATA` option, you cannot query data from the view. If you attempt to do so, you’ll get the following error message:
 
-```php
+```sql
 SELECT * FROM rental_by_category;
 ```
 
 Output:
 
-```sql
+```
 [Err] ERROR: materialized view "rental_by_category" has not been populated
 HINT: Use the REFRESH MATERIALIZED VIEW command.
 ```
@@ -153,7 +153,7 @@ From now on, you can refresh the data in the `rental_by_category` view using the
 
 However, to refresh it with `CONCURRENTLY` option, you need to create a `UNIQUE` index for the view first.
 
-```
+```sql
 CREATE UNIQUE INDEX rental_category
 ON rental_by_category (category);
 ```

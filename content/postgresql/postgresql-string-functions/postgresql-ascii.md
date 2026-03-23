@@ -42,7 +42,7 @@ The `ASCII()` function returns an integer that represents the ASCII code value o
 
 The following example uses the `ASCII()` function to get the ASCII code values of the character `A` and `a`:
 
-```
+```sql
 SELECT
     ASCII( 'A' ),
     ASCII( 'a' );
@@ -63,7 +63,7 @@ The function returns the ASCII code of the letter A which is 65 as follows:
 ![PostgreSQL ASCII function - string example](/postgresqltutorial/PostgreSQL-ASCII-function-string-example.png)
 The following example illustrates how to use the `ASCII()` function to get the Unicode code point of a UTF\-8 character:
 
-```text
+```sql
  SELECT
     ASCII( 'Ω' );
 ```

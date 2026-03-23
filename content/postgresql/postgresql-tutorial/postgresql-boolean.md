@@ -1,6 +1,6 @@
 ---
 title: 'PostgreSQL Boolean Data Type with Practical Examples'
-page_title: 'PostgresQL BOOLEAN Data Type with Practical Examples'
+page_title: 'PostgreSQL BOOLEAN Data Type with Practical Examples'
 page_description: 'In this tutorial, you will learn about the PostgreSQL Boolean data type and how to use it in designing the database tables.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-boolean/'
 ogImage: '/postgresqltutorial/PostgreSQL-Boolean-300x146.png'

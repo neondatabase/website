@@ -28,7 +28,7 @@ If you define a [user\-defined data type](postgresql-user-defined-data-types), P
 
 To define a column with an array type, you use the following syntax:
 
-```csssql
+```sql
 column_name datatype []
 ```
 
@@ -36,7 +36,7 @@ In the syntax, we define a one\-dimensional array of the datatype.
 
 For example, the following statement creates a new table called `contacts` with the `phones` column defined with an array of text.
 
-```css
+```sql
 CREATE TABLE contacts (
   id SERIAL PRIMARY KEY,
   name VARCHAR (100),
@@ -58,7 +58,7 @@ column_name data_type [][]
 
 The following statement inserts a new contact into the `contacts` table.
 
-```
+```sql
 INSERT INTO contacts (name, phones)
 VALUES('John Doe',ARRAY [ '(408)-589-5846','(408)-589-5555' ]);
 ```
@@ -106,7 +106,7 @@ By default, PostgreSQL uses one\-based numbering for array elements. It means th
 
 The following statement retrieves the contact’s name and the first phone number:
 
-```
+```sql
 SELECT
   name,
   phones [ 1 ]
@@ -129,7 +129,7 @@ You can use the array element in the [WHERE clause](postgresql-where) as the con
 
 For example, the following query finds the contacts who have the phone number `(408)-589-58423` as the second phone number:
 
-```
+```sql
 SELECT
   name
 FROM
@@ -153,7 +153,7 @@ PostgreSQL allows you to update each element of an array or the whole array.
 
 The following statement updates the second phone number of `William Gate`.
 
-```
+```sql
 UPDATE contacts
 SET phones [2] = '(408)-589-5843'
 WHERE ID = 3
@@ -217,7 +217,7 @@ Output:
 
 PostgreSQL provides the `unnest()` function to expand an array to a list of rows. For example, the following query expands all phone numbers of the `phones` array.
 
-```
+```sql
 SELECT
   name,
   unnest(phones)

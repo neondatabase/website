@@ -44,7 +44,7 @@ DROP TRIGGER trigger_name;
 
 First, [create a function](../postgresql-plpgsql/postgresql-create-function) that validates the username of a staff. The username is not null and its length must be at least 8\.
 
-```sql
+```plsql
 CREATE FUNCTION check_staff_user()
     RETURNS TRIGGER
 AS $$

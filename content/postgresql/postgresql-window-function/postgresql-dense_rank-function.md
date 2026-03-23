@@ -24,7 +24,7 @@ For each partition, the `DENSE_RANK()` function returns the same rank for the ro
 
 The following shows the syntax of the `DENSE_RANK()` function:
 
-```csssql
+```sql
 DENSE_RANK() OVER (
     [PARTITION BY partition_expression, ... ]
     ORDER BY sort_expression [ASC | DESC], ...
@@ -39,7 +39,7 @@ The `PARITION BY` clause is optional. If you skip it, the `DENSE_RANK()` functio
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) named `dense_ranks` that has one column:
 
-```php
+```sql
 CREATE TABLE dense_ranks (
 	c VARCHAR(10)
 );
@@ -47,7 +47,7 @@ CREATE TABLE dense_ranks (
 
 Second, [insert some rows](../postgresql-tutorial/postgresql-insert) into the `dense_ranks` table:
 
-```
+```sql
 INSERT INTO dense_ranks(c)
 VALUES('A'),('A'),('B'),('C'),('C'),('D'),('E');
 ```
@@ -61,7 +61,7 @@ SELECT c from dense_ranks;
 ![](/postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png)
 Fourth, use the `DENSE_RANK()` function to assign a rank to each row in the result set:
 
-```
+```sql
 SELECT
 	c,
 	DENSE_RANK() OVER (
@@ -87,7 +87,7 @@ We will use the `products` table to demonstrate the `DENSE_RANK()` function.
 
 This statement uses the `DENSE_RANK()` function to rank products by list prices:
 
-```
+```sql
 SELECT
 	product_id,
 	product_name,
@@ -110,7 +110,7 @@ The `DENSE_RANK()` function assigned a rank to each product based on the price o
 
 The following example assigns a rank to every product in each product group:
 
-```
+```sql
 SELECT
 	product_id,
 	product_name,
@@ -133,7 +133,7 @@ In this example, the `PARTITION BY` clause distributed the products into product
 
 The following statement uses the `DENSE_RANK()` function with a CTE to return the most expensive product in each product group:
 
-```
+```sql
 WITH cte AS(
 	SELECT
 		product_id,

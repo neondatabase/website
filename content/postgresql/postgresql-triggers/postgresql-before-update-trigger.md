@@ -39,7 +39,7 @@ To create a `BEFORE UPDATE` trigger, you follow these steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute when the `BEFORE UPDATE` trigger fires:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -77,7 +77,7 @@ CREATE TABLE employees (
 
 Next, define a trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception) if the new salary is lower than the current salary. The trigger will prevent the update when the exception occurs.
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION fn_before_update_salary()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -130,7 +130,7 @@ WHERE id = 1;
 
 The `BEFORE UPDATE` trigger raises the following exception:
 
-```sql
+```
 ERROR:  New salary cannot be less than current salary
 CONTEXT:  PL/pgSQL function fn_before_update_salary() line 4 at RAISE
 ```

@@ -30,7 +30,7 @@ To create a new role in a PostgreSQL server, you use the `CREATE ROLE` statement
 
 Here’s the basic syntax of the `CREATE ROLE` statement:
 
-```sqlsqlsql
+```sql
 CREATE ROLE role_name;
 ```
 
@@ -84,7 +84,7 @@ In `psql`, you can use the `\du` command to show all roles that you create incl
 
 Output:
 
-```shell
+```
                              List of roles
  Role name |                         Attributes
 -----------+------------------------------------------------------------
@@ -122,7 +122,7 @@ Note that you place the password in single quotes (`'`).
 
 Here’s the new roles list:
 
-```shell
+```
  Role name |                         Attributes
 -----------+------------------------------------------------------------
  alice     |
@@ -132,7 +132,7 @@ Here’s the new roles list:
 
 Now, you can use the role `alice` to log in to the PostgreSQL database server using the `psql` client tool:
 
-```
+```bash
 psql -U alice
 ```
 
@@ -157,7 +157,7 @@ Notice that only a superuser role can create another superuser role.
 
 If you want to create roles that have the database creation privilege, you can use the `CREATEDB` attribute:
 
-```
+```sql
 CREATE ROLE dba
 CREATEDB
 LOGIN
@@ -174,7 +174,7 @@ VALID UNTIL 'timestamp'
 
 For example, the following statement creates a `dev_api` role with password valid until the end of 2049:
 
-```
+```sql
 CREATE ROLE dev_api WITH
 LOGIN
 PASSWORD 'securePass1'
@@ -202,11 +202,11 @@ CONNECTION LIMIT 1000;
 
 The following `psql` command shows all the roles that we have created so far:
 
-```shell
+```
 \du
 ```
 
-```shell
+```
                              List of roles
  Role name |                         Attributes
 -----------+------------------------------------------------------------

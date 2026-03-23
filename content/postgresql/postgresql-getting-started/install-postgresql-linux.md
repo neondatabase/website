@@ -30,20 +30,20 @@ In this tutorial, we’ll show you how to install PostgreSQL 16 on Ubuntu 22\.04
 
 First, update the package index and install the necessary packages:
 
-```shellsql
+```shell
 sudo apt update
 sudo apt install gnupg2 wget
 ```
 
 Second, add the PostgreSQL repository:
 
-```
+```shell
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
 Third, import the repository signing key:
 
-```sql
+```shell
 curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
 ```
 
@@ -69,7 +69,7 @@ sudo systemctl start postgresql
 
 Third, enable PostgreSQL service:
 
-```php
+```shell
 sudo systemctl enable postgresql
 ```
 
@@ -77,7 +77,7 @@ sudo systemctl enable postgresql
 
 PostgreSQL stores the configuration in the `postgresql.conf` file. You can edit the `postgresql.conf` using any text editor such as nano and vim.
 
-```
+```shell
 sudo nano /etc/postgresql/16/main/postgresql.conf
 ```
 
@@ -89,7 +89,7 @@ listen_addresses = '*'
 
 Configure PostgreSQL to use md5 password authentication in the `pg_hba.conf` file. This is necessary if you want to enable remote connections :
 
-```
+```shell
 sudo sed -i '/^host/s/ident/md5/' /etc/postgresql/16/main/pg_hba.conf
 sudo sed -i '/^local/s/peer/trust/' /etc/postgresql/16/main/pg_hba.conf
 echo "host all all 0.0.0.0/0 md5" | sudo tee -a /etc/postgresql/16/main/pg_hba.conf
@@ -103,7 +103,7 @@ sudo systemctl restart postgresql
 
 Allow PostgreSQL port through the firewall:
 
-```
+```shell
 sudo ufw allow 5432/tcp
 ```
 
@@ -111,13 +111,13 @@ sudo ufw allow 5432/tcp
 
 First, connect to the PostgreSQL server using the `postgres` user:
 
-```
+```shell
 sudo -u postgres psql
 ```
 
 Second, set a password for `postgres` user:
 
-```shell
+```sql
 ALTER USER postgres PASSWORD '<password>';
 ```
 
@@ -125,7 +125,7 @@ Replace the `<password>` with the one you want.
 
 Third, quit the psql:
 
-```shell
+```
 \q
 ```
 
@@ -151,13 +151,13 @@ sudo -u postgres psql
 
 Fourth, create the `dvdrental` database using the [`CREATE DATABASE`](../postgresql-administration/postgresql-create-database) statement:
 
-```shell
+```sql
 create database dvdrental;
 ```
 
 Fifth, quit the `psql` by using the `\q` command:
 
-```shell
+```
 \q
 ```
 
@@ -175,19 +175,19 @@ psql
 
 Eighth, switch to the `dvdental` database:
 
-```shell
+```
 \c dvdrental
 ```
 
 Finally, enter the following command to get the number of films in the `film` table:
 
-```shell
+```sql
 select count(*) from film;
 ```
 
 Here is the output:
 
-```shell
+```
 count
 -------
 1000

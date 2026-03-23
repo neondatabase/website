@@ -18,7 +18,7 @@ nextLink:
 
 To change the password of a [PostgreSQL user](postgresql-roles), you use the `ALTER ROLE` statement as follows:
 
-```sqlsql
+```sql
 ALTER ROLE username
 WITH PASSWORD 'password';
 ```
