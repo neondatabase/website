@@ -192,6 +192,11 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
+    it('should resolve individual changelog entries to changelog content path', () => {
+      const result = getMarkdownPath('/docs/changelog/2026-03-13');
+      expect(result).toBe('/md/changelog/2026-03-13.md');
+    });
+
     it('should exclude /use-cases/multi-tb', () => {
       const result = getMarkdownPath('/use-cases/multi-tb');
       expect(result).toBeNull();

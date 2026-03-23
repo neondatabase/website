@@ -589,6 +589,7 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services
