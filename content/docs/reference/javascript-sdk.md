@@ -1005,10 +1005,10 @@ const { data, error } = await client
 
 Each adapter exposes a different API surface for authentication. Using the wrong method for your adapter is a common source of errors.
 
-| Adapter                  | Sign in                                     | Sign up                               |
-| ------------------------ | ------------------------------------------- | ------------------------------------- |
-| BetterAuthVanillaAdapter | `auth.signIn.email({ email, password })`    | `auth.signUp.email({ email, password })` |
-| BetterAuthReactAdapter   | `auth.signIn.email({ email, password })`    | `auth.signUp.email({ email, password })` |
-| SupabaseAuthAdapter      | `auth.signInWithPassword({ email, password })` | `auth.signUp({ email, password })`    |
+| Adapter                  | Sign in                                        | Sign up                                  |
+| ------------------------ | ---------------------------------------------- | ---------------------------------------- |
+| BetterAuthVanillaAdapter | `auth.signIn.email({ email, password })`       | `auth.signUp.email({ email, password })` |
+| BetterAuthReactAdapter   | `auth.signIn.email({ email, password })`       | `auth.signUp.email({ email, password })` |
+| SupabaseAuthAdapter      | `auth.signInWithPassword({ email, password })` | `auth.signUp({ email, password })`       |
 
 For common authentication troubleshooting (missing environment variables, CSS conflicts, wrong imports), see [Auth troubleshooting](/docs/auth/troubleshooting).
