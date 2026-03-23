@@ -91,6 +91,26 @@ _Note: Roundtrip counts are estimates and vary based on authentication and confi
 
 We recommend using a standard Postgres TCP driver (like [node-postgres](https://node-postgres.com/)) and implementing a connection pool. This will give you the best performance by paying the connection cost once and reusing the connection for subsequent queries. See Vercel's [Connection pooling with Vercel Functions](https://vercel.com/guides/connection-pooling-with-functions) guide for implementation details.
 
+Here is a complete example using Drizzle ORM with `attachDatabasePool` from `@vercel/functions`:
+
+```typescript
+// src/lib/db/client.ts
+import { attachDatabasePool } from '@vercel/functions';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
+
+import * as schema from './schema';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+attachDatabasePool(pool);
+
+export const db = drizzle({ client: pool, schema });
+```
+
+`attachDatabasePool` handles the connection lifecycle for you: the first request establishes a TCP connection, subsequent requests reuse it instantly, and idle connections close gracefully before Vercel suspends the function.
+
 <Admonition type="note" title="A note on benchmarking">
 Before migrating, we recommend you benchmark both connection methods on your own app. While TCP with pooling is the new default, some applications with a very high number of cold starts might, in edge cases, still see an advantage from the low initial connection time of the HTTP driver.
 </Admonition>
