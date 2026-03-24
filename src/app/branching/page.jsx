@@ -1,5 +1,6 @@
 import Contents from 'components/pages/branching/contents';
 import Hero from 'components/pages/branching/hero';
+import Intro from 'components/pages/branching/intro';
 import SEO_DATA from 'constants/seo-data';
 import { getIndexContent } from 'utils/api-branching';
 import getMetadata from 'utils/get-metadata';
@@ -12,6 +13,7 @@ const BranchingIndexPage = async () => {
   return (
     <>
       <Hero />
+      <Intro />
       <Contents contents={contents} />
     </>
   );
