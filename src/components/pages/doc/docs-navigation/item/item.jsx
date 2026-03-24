@@ -5,6 +5,11 @@ import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import {
+  getDocsVersionFromPathname,
+  getVersionedDocsBasePath,
+  stripDocsVersionFromPathname,
+} from 'utils/docs-versioning';
 
 import Icon from '../../menu/icon';
 
@@ -58,7 +63,11 @@ SubItem.propTypes = {
 const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiveItems }) => {
   const LinkTag = slug ? Link : 'button';
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
+  const isDocsBasePath = basePath.startsWith('/docs/');
+  const docsVersion = isDocsBasePath ? getDocsVersionFromPathname(pathname) : null;
+  const resolvedBasePath = docsVersion ? getVersionedDocsBasePath(docsVersion) : basePath;
+  const normalizedPathname = docsVersion ? stripDocsVersionFromPathname(pathname) : pathname;
+  const currentSlug = normalizedPathname.replace(basePath, '');
 
   const [isActive, setIsActive] = useState(false);
 
@@ -71,7 +80,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = slug ? (slug.startsWith('/') ? slug : `${basePath}${slug}`) : undefined;
+  const href = slug ? (slug.startsWith('/') ? slug : `${resolvedBasePath}${slug}`) : undefined;
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;
@@ -129,13 +138,13 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
                     <ul className="flex flex-col gap-4">
                       {item.items.map((item, index) => (
                         <li key={index}>
-                          <SubItem {...item} basePath={basePath} />
+                          <SubItem {...item} basePath={resolvedBasePath} />
                         </li>
                       ))}
                     </ul>
                   </>
                 ) : (
-                  <SubItem {...item} basePath={basePath} />
+                  <SubItem {...item} basePath={resolvedBasePath} />
                 )}
               </li>
             ))}

@@ -14,6 +14,7 @@ import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import Tag from '../tag';
+import VersionFallbackNotice from '../version-fallback-notice';
 
 const Changelog = ({ posts }) => (
   <>
@@ -50,6 +51,7 @@ const Post = ({
   gitHubPath,
   tableOfContents,
   author,
+  effectiveDocsVersion = null,
   className = 'max-w-[704px] lg:max-w-none',
 }) => {
   const modal = MODALS.find(
@@ -73,6 +75,9 @@ const Post = ({
           className
         )}
       >
+        {!isPostgres && !isChangelog && (
+          <VersionFallbackNotice effectiveVersion={effectiveDocsVersion} />
+        )}
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs
             className={clsx(isChangelog && 'pt-1', '!mb-7')}
@@ -175,6 +180,10 @@ Post.propTypes = {
       title: PropTypes.string,
     }),
     photo: PropTypes.string,
+  }),
+  effectiveDocsVersion: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }),
   className: PropTypes.string,
 };

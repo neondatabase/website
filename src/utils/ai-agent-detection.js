@@ -2,6 +2,7 @@
 // Detects if a request is coming from an AI agent based on User-Agent header
 
 import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
+import { parseDocsVersionedSlug } from 'utils/docs-versioning';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
@@ -44,17 +45,30 @@ export function isAIAgentRequest(request) {
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
+  let normalizedPath = path;
+
+  // Normalize versioned docs routes:
+  // /docs/v2/foo -> /docs/foo
+  // /docs/latest/foo -> /docs/foo
+  if (path.startsWith('docs/')) {
+    const { contentSlug } = parseDocsVersionedSlug(path.replace(/^docs\/?/, '').split('/'));
+    if (contentSlug) {
+      normalizedPath = `docs/${contentSlug}`;
+    } else {
+      normalizedPath = 'docs';
+    }
+  }
 
   // Early return for excluded routes and files
   const isExcluded =
-    EXCLUDED_ROUTES.some((route) => path === route) ||
+    EXCLUDED_ROUTES.some((route) => normalizedPath === route) ||
     EXCLUDED_FILES.some((file) => pathname.endsWith(file));
 
   if (isExcluded) return null;
 
   // Find the matching route
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
-    (route) => path === route || path.startsWith(`${route}/`)
+    (route) => normalizedPath === route || normalizedPath.startsWith(`${route}/`)
   );
 
   if (!matchedRoute) return null;
@@ -65,7 +79,7 @@ export function getMarkdownPath(pathname) {
   const publicPath = contentPath.replace('content/', '/md/');
 
   // Extract slug after the matched route
-  const slug = path === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
+  const slug = normalizedPath === matchedRoute ? '' : normalizedPath.replace(`${matchedRoute}/`, '');
   const mdSlug = slug.endsWith('.md') ? slug : `${slug}.md`;
 
   // Build the full public path: /md/{directory}/{slug}.md

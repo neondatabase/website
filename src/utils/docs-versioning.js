@@ -1,0 +1,117 @@
+const {
+  DOCS_DEFAULT_VERSION_ID,
+  DOCS_LATEST_VERSION_ID,
+  DOCS_VERSIONS,
+} = require('../constants/docs-versions');
+
+const DOCS_VERSION_PREFIX = '/docs/';
+const docsVersionsById = DOCS_VERSIONS.reduce((acc, version) => {
+  acc[version.id] = version;
+  return acc;
+}, {});
+
+const isDocsVersionId = (segment) => !!segment && !!docsVersionsById[segment];
+
+const getLatestContentReadyVersionId = () => {
+  const latestReadyVersion = [...DOCS_VERSIONS].reverse().find((version) => version.isContentReady);
+  return latestReadyVersion?.id || DOCS_DEFAULT_VERSION_ID;
+};
+
+const resolveLatestDocsVersionId = () => {
+  const configuredLatestVersion = docsVersionsById[DOCS_LATEST_VERSION_ID];
+  if (configuredLatestVersion?.isContentReady) {
+    return configuredLatestVersion.id;
+  }
+  return getLatestContentReadyVersionId();
+};
+
+const normalizeDocsVersionId = (versionId) => {
+  if (!versionId) return resolveLatestDocsVersionId();
+  if (versionId === 'latest') return resolveLatestDocsVersionId();
+  return isDocsVersionId(versionId) ? versionId : resolveLatestDocsVersionId();
+};
+
+const resolveDocsVersion = (requestedVersionId) => {
+  const normalizedRequestedVersionId = normalizeDocsVersionId(requestedVersionId);
+  const requestedVersion = docsVersionsById[normalizedRequestedVersionId];
+
+  if (requestedVersion?.isContentReady) {
+    return {
+      requestedVersion,
+      requestedVersionId: requestedVersion.id,
+      effectiveVersion: requestedVersion,
+      effectiveVersionId: requestedVersion.id,
+      isFallback: false,
+    };
+  }
+
+  const fallbackVersion = docsVersionsById[DOCS_DEFAULT_VERSION_ID];
+  return {
+    requestedVersion,
+    requestedVersionId: requestedVersion.id,
+    effectiveVersion: fallbackVersion,
+    effectiveVersionId: fallbackVersion.id,
+    isFallback: true,
+  };
+};
+
+const parseDocsVersionedSlug = (segments = []) => {
+  if (!Array.isArray(segments) || segments.length === 0) {
+    return {
+      hasVersionPrefix: false,
+      requestedVersionId: resolveLatestDocsVersionId(),
+      contentSlug: '',
+    };
+  }
+
+  const [firstSegment, ...restSegments] = segments;
+  if (firstSegment === 'latest' || isDocsVersionId(firstSegment)) {
+    return {
+      hasVersionPrefix: true,
+      requestedVersionId: normalizeDocsVersionId(firstSegment),
+      contentSlug: restSegments.join('/'),
+    };
+  }
+
+  return {
+    hasVersionPrefix: false,
+    requestedVersionId: resolveLatestDocsVersionId(),
+    contentSlug: segments.join('/'),
+  };
+};
+
+const stripDocsVersionFromPathname = (pathname) => {
+  if (!pathname || !pathname.startsWith(DOCS_VERSION_PREFIX)) return pathname;
+  const withoutPrefix = pathname.slice(DOCS_VERSION_PREFIX.length);
+  const segments = withoutPrefix.split('/').filter(Boolean);
+  if (segments.length === 0) return pathname;
+  if (segments[0] === 'latest' || isDocsVersionId(segments[0])) {
+    const remaining = segments.slice(1).join('/');
+    return remaining ? `${DOCS_VERSION_PREFIX}${remaining}` : DOCS_VERSION_PREFIX;
+  }
+  return pathname;
+};
+
+const getVersionedDocsBasePath = (versionId) => `${DOCS_VERSION_PREFIX}${versionId}/`;
+
+const getDocsVersionFromPathname = (pathname) => {
+  if (!pathname || !pathname.startsWith(DOCS_VERSION_PREFIX)) return null;
+  const withoutPrefix = pathname.slice(DOCS_VERSION_PREFIX.length);
+  const [firstSegment] = withoutPrefix.split('/').filter(Boolean);
+  if (!firstSegment) return null;
+  if (firstSegment === 'latest' || isDocsVersionId(firstSegment)) {
+    return firstSegment;
+  }
+  return null;
+};
+
+module.exports = {
+  isDocsVersionId,
+  normalizeDocsVersionId,
+  resolveLatestDocsVersionId,
+  resolveDocsVersion,
+  parseDocsVersionedSlug,
+  stripDocsVersionFromPathname,
+  getVersionedDocsBasePath,
+  getDocsVersionFromPathname,
+};

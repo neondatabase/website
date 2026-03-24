@@ -6,8 +6,14 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
+import {
+  getDocsVersionFromPathname,
+  getVersionedDocsBasePath,
+  stripDocsVersionFromPathname,
+} from 'utils/docs-versioning';
 
 import Menu from '../menu';
+import VersionSwitcher from '../version-switcher';
 
 const containsActiveSlug = (menu, slug) => {
   if (menu.slug === slug) return true;
@@ -38,9 +44,19 @@ const getActiveMenu = (navigation, slug) => {
   return flatMenus?.find((item) => containsActiveSlug(item, slug));
 };
 
-const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
+const Sidebar = ({
+  className = null,
+  navigation,
+  basePath,
+  customType,
+  sdkNavigation,
+  showVersionSwitcher = false,
+}) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
+  const normalizedPathname = stripDocsVersionFromPathname(pathname);
+  const currentSlug = normalizedPathname.replace(basePath, '');
+  const pathnameVersion = getDocsVersionFromPathname(pathname);
+  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
   const menu = getActiveMenu(navigation, currentSlug);
   const navRef = useRef(null);
 
@@ -62,11 +78,11 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   const renderContent = sdkTOC ? (
     <SDKTableOfContents
       title={sdkTOC.title}
-      url={`${basePath}${currentSlug}`}
+      url={`${docsBasePath}${currentSlug}`}
       sections={sdkTOC.sections}
     />
   ) : menu ? (
-    <Menu basePath={basePath} {...menu} customType={customType} />
+    <Menu basePath={docsBasePath} {...menu} customType={customType} />
   ) : null;
 
   return (
@@ -80,9 +96,10 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
           )}
         >
           <nav
-            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-11 dark:border-gray-new-20"
+            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-4 dark:border-gray-new-20"
             ref={navRef}
           >
+            {showVersionSwitcher && <VersionSwitcher className="mb-7" />}
             {renderContent}
           </nav>
         </div>
@@ -105,6 +122,7 @@ Sidebar.propTypes = {
       sections: PropTypes.array,
     })
   ),
+  showVersionSwitcher: PropTypes.bool,
 };
 
 export default Sidebar;

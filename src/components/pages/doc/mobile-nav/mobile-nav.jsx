@@ -6,6 +6,11 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import {
+  getDocsVersionFromPathname,
+  getVersionedDocsBasePath,
+  stripDocsVersionFromPathname,
+} from 'utils/docs-versioning';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import CornerIcon from 'icons/corner-left.inline.svg';
 
@@ -13,6 +18,7 @@ import Icon from '../menu/icon';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible';
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
+import VersionSwitcher from '../version-switcher';
 
 const isExternalSlug = (slug) => typeof slug === 'string' && /^https?:\/\//.test(slug);
 const isWebsiteSlug = (slug) => typeof slug === 'string' && slug.startsWith('/');
@@ -201,6 +207,9 @@ RecursiveItem.propTypes = {
 
 const RecursiveList = ({ nodes, currentPath }) => (
   <ul className="flex flex-col gap-y-2.5">
+    <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-[calc(100%-16px)] after:-translate-x-1/2 after:bg-gray-new-20">
+      <VersionSwitcher isMobileMenu />
+    </li>
     {nodes.map((node, idx) => (
       <RecursiveItem key={idx} node={node} currentPath={currentPath} />
     ))}
@@ -215,6 +224,8 @@ RecursiveList.propTypes = {
 const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const pathnameVersion = getDocsVersionFromPathname(pathname);
+  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
 
   useEffect(() => {
     setOpen(false);
@@ -223,8 +234,8 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
   const onOpenChange = useCallback((next) => setOpen(next), []);
 
   const menu = useMemo(
-    () => transformNavigation(navigation || [], basePath),
-    [navigation, basePath]
+    () => transformNavigation(navigation || [], docsBasePath),
+    [navigation, docsBasePath]
   );
 
   if (!menu.length) return null;
