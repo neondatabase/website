@@ -88,7 +88,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
           'flex w-full items-center justify-between border border-transparent py-2 text-left',
           isMobileMenu
             ? 'px-0'
-            : 'px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8',
+            : 'px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8'
         )}
         type="button"
         aria-haspopup="listbox"
@@ -98,7 +98,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
         <span className="flex items-center gap-3">
           <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
             {visualSelectedVersion.isDeprecated ? (
-              <ArchiveIcon className="text-new-gray-60 size-[22px] shrink-0 dark:text-gray-new-40" />
+              <ArchiveIcon className="size-[22px] shrink-0 text-gray-new-60 dark:text-gray-new-40" />
             ) : (
               <FileCopiesIcon className="size-[22px] shrink-0 text-green-44 dark:text-green-52" />
             )}
@@ -118,7 +118,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
           </span>
         </span>
 
-        <img src={chevronsUpDownIcon} className="size-4 shrink-0" />
+        <img src={chevronsUpDownIcon} className="size-4 shrink-0" alt="" aria-hidden />
       </button>
       {isOpen && (
         <div className="absolute left-0 right-0 z-20 mt-1 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-new">
