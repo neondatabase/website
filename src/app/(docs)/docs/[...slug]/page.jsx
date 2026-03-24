@@ -2,11 +2,11 @@
 import { notFound, redirect } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
-import { DOCS_VERSIONS } from 'constants/docs-versions';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
-import LINKS from 'constants/links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import { DOCS_VERSIONS } from 'constants/docs-versions';
+import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
 import {
@@ -35,7 +35,7 @@ const hasLegacyVersionPost = (slug, latestVersionId) => {
 
 const resolveDocVersionedSource = (currentSlug, requestedVersionId) => {
   const versionResolution = resolveDocsVersion(requestedVersionId);
-  const effectiveVersion = versionResolution.effectiveVersion;
+  const { effectiveVersion } = versionResolution;
 
   const sourceDocsDirPath = getDocsContentPathForVersion(effectiveVersion);
   const post = getPostBySlug(currentSlug, sourceDocsDirPath);

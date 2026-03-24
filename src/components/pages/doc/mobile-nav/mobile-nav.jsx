@@ -6,19 +6,18 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import ChevronIcon from 'icons/chevron-down.inline.svg';
+import CornerIcon from 'icons/corner-left.inline.svg';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
-import CornerIcon from 'icons/corner-left.inline.svg';
 
 import Icon from '../menu/icon';
+import VersionSwitcher from '../version-switcher';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible';
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
-import VersionSwitcher from '../version-switcher';
 
 const isExternalSlug = (slug) => typeof slug === 'string' && /^https?:\/\//.test(slug);
 const isWebsiteSlug = (slug) => typeof slug === 'string' && slug.startsWith('/');
