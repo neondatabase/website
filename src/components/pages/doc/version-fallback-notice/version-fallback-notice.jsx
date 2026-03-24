@@ -7,10 +7,7 @@ import InfoWarningIcon from 'icons/docs/sidebar/info-warning-icon.inline.svg';
 
 import { useDocsVersionContext } from '../version-context';
 
-const VersionFallbackNotice = ({
-  className = null,
-  effectiveVersion = null,
-}) => {
+const VersionFallbackNotice = ({ className = null, effectiveVersion = null }) => {
   const context = useDocsVersionContext();
   const effective = effectiveVersion || context.effectiveVersion;
   const isDeprecatedView = !!effective?.isDeprecated;
@@ -20,7 +17,7 @@ const VersionFallbackNotice = ({
   return (
     <div
       className={clsx(
-        'dark:border-orange-35/45 dark:bg-orange-35/10 dark:text-orange-35 mb-7 flex items-start gap-2 border border-[#F99D5180] px-4 py-3 text-sm leading-snug tracking-extra-tight text-[#F99D51]',
+        'mb-7 flex items-start gap-2 border border-[#EC6F0980] bg-[#FEF6F0] px-4 py-3 text-sm leading-snug tracking-extra-tight text-[#EC6F09] dark:border-[#F99D5180] dark:bg-[#0F0905] dark:text-[#F99D51]',
         className
       )}
     >

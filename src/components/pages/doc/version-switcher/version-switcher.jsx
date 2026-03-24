@@ -85,8 +85,13 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
     <div className={clsx('relative', className)} ref={containerRef}>
       <button
         className={clsx(
-          'flex w-full items-center justify-between py-2 text-left transition-colors',
-          isMobileMenu ? 'px-0' : 'px-2.5'
+          'flex w-full items-center justify-between border border-transparent py-2 text-left',
+          isMobileMenu
+            ? 'px-0'
+            : 'px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8',
+          isOpen &&
+            !isMobileMenu &&
+            '!border-gray-new-90 bg-gray-new-98 dark:!border-gray-new-20 dark:bg-gray-new-8'
         )}
         type="button"
         aria-haspopup="listbox"
@@ -94,7 +99,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
         onClick={() => setIsOpen((open) => !open)}
       >
         <span className="flex items-center gap-2">
-          <span className="flex items-center justify-center border border-gray-new-20 p-1.5">
+          <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
             <img
               src={visualSelectedVersion.isDeprecated ? archiveIcon : fileCopiesIcon}
               className="size-[22px] shrink-0"
@@ -104,12 +109,12 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
             <span
               className={clsx(
                 isMobileMenu ? 'text-[16px]' : 'text-[15px]',
-                'truncate font-medium leading-tight tracking-extra-tight text-white'
+                'truncate font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-white'
               )}
             >
               {visualSelectedVersion.label}
             </span>
-            <span className="truncate text-[13px] leading-tight tracking-extra-tight text-gray-new-70">
+            <span className="truncate text-[13px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70">
               {visualSelectedVersion.release}
             </span>
           </span>
@@ -117,34 +122,36 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
         <img src={chevronsUpDownIcon} className="size-4 shrink-0" />
       </button>
       {isOpen && (
-        <div className="absolute left-0 right-0 z-20 mt-1 border border-gray-new-20 bg-black-new">
-          <ul role="listbox" className="divide-y divide-gray-new-20">
+        <div className="absolute left-0 right-0 z-20 mt-1 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-new">
+          <ul role="listbox" className="divide-y divide-gray-new-90 dark:divide-gray-new-20">
             {versions.map((version) => {
               const isSelected = version.id === visualSelectedVersionId;
               return (
                 <li key={version.id} role="option" aria-selected={isSelected}>
                   <button
-                    className="flex w-full items-center justify-between px-2.5 py-2 text-left transition-colors hover:bg-gray-new-8"
+                    className="flex w-full items-center justify-between px-2.5 py-2 text-left hover:bg-gray-new-98 dark:hover:bg-gray-new-8"
                     type="button"
                     onClick={() => navigateToVersion(version.id)}
                   >
                     <span className="flex items-center gap-2">
-                      <span className="flex items-center justify-center border border-gray-new-20 p-1.5">
+                      <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
                         <img
                           src={version.isDeprecated ? archiveIcon : fileCopiesIcon}
                           className="size-[22px] shrink-0"
                         />
                       </span>
                       <span className="flex flex-col">
-                        <span className="truncate text-[13px] font-medium leading-tight tracking-extra-tight">
+                        <span className="truncate text-[13px] font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-white">
                           {version.label}
                         </span>
-                        <span className="truncate text-[11px] leading-tight tracking-extra-tight text-gray-new-70">
+                        <span className="truncate text-[11px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70">
                           {version.release}
                         </span>
                       </span>
                     </span>
-                    {isSelected && <CheckIcon className="size-3.5 shrink-0 text-green-45" />}
+                    {isSelected && (
+                      <CheckIcon className="size-3.5 shrink-0 text-green-44 dark:text-green-52" />
+                    )}
                   </button>
                 </li>
               );

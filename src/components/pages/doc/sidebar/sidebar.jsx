@@ -88,21 +88,13 @@ const Sidebar = ({
   return (
     <aside className={clsx('relative -mt-11', className)}>
       <div className="sticky top-28">
-        <div
-          className={clsx(
-            'relative',
-            'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
-            'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
-          )}
+        <nav
+          className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-4 dark:border-gray-new-20"
+          ref={navRef}
         >
-          <nav
-            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-4 dark:border-gray-new-20"
-            ref={navRef}
-          >
-            {showVersionSwitcher && <VersionSwitcher className="mb-7" />}
-            {renderContent}
-          </nav>
-        </div>
+          {showVersionSwitcher && <VersionSwitcher className="mb-7" />}
+          {renderContent}
+        </nav>
       </div>
     </aside>
   );
