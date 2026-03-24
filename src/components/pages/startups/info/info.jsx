@@ -7,11 +7,11 @@ import GradientBorder from 'components/shared/gradient-border/index';
 const CARDS = [
   {
     title: 'Who can apply?',
-    description:
-      'Venture-backed startups with at least $1M in funding that have launched in the past 12 months.',
+    description: 'Early-stage, venture-backed startups with at least $1M in funding.',
     features: [
-      'You’ve raised less than $5M in total funding.',
+      'You’ve raised at least $1M in total funding.',
       'You’re building an early-stage product or MVP.',
+      'You’re backed by venture capital, and your funding is verifiable.',
     ],
     className: 'bg-startups-info-card-1',
   },
