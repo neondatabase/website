@@ -57,7 +57,7 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Tooltip
-      className={cn('z-20 w-sm rounded-lg! bg-gray-new-15! px-4! pt-3! pb-[14px]!')}
+      className="is-[.react-tooltip]:bg-gray-new-15! z-20 w-sm px-4! pt-3! pb-3.5!"
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"

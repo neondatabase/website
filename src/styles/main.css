@@ -21,12 +21,17 @@
     -moz-appearance: textfield !important;
   }
 
+  [role='button'],
+  button {
+    @apply cursor-pointer;
+  }
+
   a,
   button,
   input,
   pre,
   select {
-    @apply outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38A57D];
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38A57D];
   }
 }
 

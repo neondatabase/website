@@ -9,7 +9,7 @@ import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex cursor-pointer items-center justify-center leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-hidden',
+  base: 'inline-flex cursor-pointer items-center justify-center leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200',
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm font-semibold',
     'lg-new':

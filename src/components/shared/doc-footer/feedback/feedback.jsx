@@ -41,7 +41,7 @@ const Feedback = ({ slug }) => {
             type="button"
             onClick={() => handleFeedbackClick(true, slug)}
           >
-            <ThumbsUpIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-[#38A57D] group-active:text-[#38A57D] dark:text-gray-new-85" />
+            <ThumbsUpIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-[#38A57D] group-active:text-[#38A57D] dark:text-gray-new-85 group-hover:dark:text-[#38A57D] group-active:dark:text-[#38A57D]" />
             <span>Yes</span>
           </button>
           <button
@@ -49,7 +49,7 @@ const Feedback = ({ slug }) => {
             type="button"
             onClick={() => handleFeedbackClick(false, slug)}
           >
-            <ThumbsDownIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-new-85" />
+            <ThumbsDownIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-new-85 group-hover:dark:text-secondary-1 group-active:dark:text-secondary-1" />
             <span>No</span>
           </button>
         </div>

@@ -28,8 +28,8 @@ const Tooltip = ({
     return createPortal(
       <ReactTooltip
         className={cn(
-          'z-[9999] sm:max-w-[80vw]',
-          'border! border-gray-new-30! bg-gray-new-8!',
+          '12342213 z-[9999] sm:max-w-[80vw]',
+          'border! border-gray-new-30! bg-gray-new-8',
           'px-4! py-3!',
           'shadow-[0px_4px_30px_0px_rgba(0,0,0,0.8)]!',
           'text-[15px]! leading-snug! tracking-tighter! text-gray-new-80!',
