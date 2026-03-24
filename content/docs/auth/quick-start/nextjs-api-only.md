@@ -6,17 +6,25 @@ summary: >-
   enabling authentication, installing the Neon SDK, and setting up environment
   variables.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.444Z'
+updatedOn: '2026-03-23T15:16:28.132Z'
 layout: wide
+redirectFrom:
+  - /docs/auth/quick-start/nextjs
+  - /docs/auth/quick-start/nextjs/
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-<Admonition type="note">
-Upgrading from Neon Auth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
 </Admonition>
 
-This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. To use our pre-built UI components instead, see the [UI components guide](/docs/auth/quick-start/nextjs).
+This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. For pre-built UI components, see the [UI components reference](/docs/auth/reference/ui-components) and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples). Upgrading from v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1).
 
 <TwoColumnLayout>
 

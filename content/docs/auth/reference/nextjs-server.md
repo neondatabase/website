@@ -8,7 +8,7 @@ summary: >-
   management and middleware creation.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-02-16T13:08:22.378Z'
+updatedOn: '2026-03-23T12:18:17.915Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -906,7 +906,7 @@ If you're upgrading from Neon Auth SDK v0.1, see the [migration guide](/docs/aut
 
 - [Client SDK Reference](/docs/reference/javascript-sdk) - Client-side authentication
 - [UI Components Reference](/docs/auth/reference/ui-components) - Pre-built auth UI
-- [Next.js Quickstart](/docs/auth/quick-start/nextjs) - Getting started guide
+- [Next.js quick start](/docs/auth/quick-start/nextjs-api-only) - Getting started guide
 - [Migration Guide](/docs/auth/migrate/from-auth-v0.1) - Upgrading from v0.1
 
 <NeedHelp/>

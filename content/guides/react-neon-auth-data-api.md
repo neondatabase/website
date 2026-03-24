@@ -368,7 +368,7 @@ For more details, see [Set up OAuth](/docs/auth/guides/setup-oauth).
 
 Neon Auth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
 
-As outlined in the [Neon Auth React UI guide](/docs/auth/quick-start/react-router-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
+As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
 Create `src/pages/Auth.tsx`:
 
@@ -741,7 +741,7 @@ The complete source code for this example is available on GitHub.
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
+- [UI components reference](/docs/auth/reference/ui-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 - [Getting started with Neon Data API](/docs/data-api/get-started)

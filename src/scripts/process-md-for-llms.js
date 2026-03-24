@@ -1455,6 +1455,10 @@ function getPageUrl(inputPath, baseContentDir) {
   const relativePath = path.relative(baseContentDir, inputPath);
   // Remove .md extension and convert to URL path
   const urlPath = relativePath.replace(/\.md$/, '');
+  // Changelog entries live in content/changelog/ but are served under /docs/changelog/
+  if (urlPath.startsWith('changelog/')) {
+    return `${BASE_URL}/docs/${urlPath}`;
+  }
   return `${BASE_URL}/${urlPath}`;
 }
 

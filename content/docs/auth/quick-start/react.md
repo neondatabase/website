@@ -6,11 +6,23 @@ summary: >-
   covering project setup, SDK installation, environment variable configuration,
   and client setup for authentication methods.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.447Z'
+updatedOn: '2026-03-23T15:16:28.133Z'
 layout: wide
+redirectFrom:
+  - /docs/auth/quick-start/react-router-components
+  - /docs/auth/quick-start/react-router-components/
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
 
 <TwoColumnLayout>
 

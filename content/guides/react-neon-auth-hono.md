@@ -503,7 +503,7 @@ This also includes Neon Auth's Tailwind styles required for the authentication c
 
 Neon provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
 
-As outlined in the [Neon Auth React UI guide](/docs/auth/quick-start/react-router-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
+As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
 Create `src/pages/Auth.tsx`:
 
@@ -737,7 +737,7 @@ The complete source code for this example is available on GitHub:
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
 - [Neon Auth JWT Plugin](/docs/auth/guides/plugins/jwt)
-- [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
+- [UI components reference](/docs/auth/reference/ui-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 - [Connect a Hono application to Neon](/docs/guides/hono)
