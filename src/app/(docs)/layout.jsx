@@ -5,10 +5,11 @@ import { DocsVersionProvider } from 'components/pages/doc/version-context';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { getNavigation, getSDKNavigation } from 'utils/api-docs';
+import { getNavigation, getNavigationByDocsVersion, getSDKNavigation } from 'utils/api-docs';
 
 const NeonDocsLayout = async ({ children }) => {
   const navigation = await getNavigation();
+  const navigationByVersion = getNavigationByDocsVersion();
   const sdkNavigation = getSDKNavigation();
 
   return (
@@ -29,13 +30,18 @@ const NeonDocsLayout = async ({ children }) => {
             <Sidebar
               className="w-[312px] shrink-0 lg:hidden"
               navigation={navigation}
+              navigationByVersion={navigationByVersion}
               basePath={DOCS_BASE_PATH}
               sdkNavigation={sdkNavigation}
               showVersionSwitcher
             />
             {children}
           </Container>
-          <MobileNav navigation={navigation} basePath={DOCS_BASE_PATH} />
+          <MobileNav
+            navigation={navigation}
+            navigationByVersion={navigationByVersion}
+            basePath={DOCS_BASE_PATH}
+          />
         </div>
       </DocsVersionProvider>
     </Layout>

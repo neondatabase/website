@@ -9,6 +9,7 @@ import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
+  resolveLatestDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
@@ -47,6 +48,7 @@ const getActiveMenu = (navigation, slug) => {
 const Sidebar = ({
   className = null,
   navigation,
+  navigationByVersion = null,
   basePath,
   customType,
   sdkNavigation,
@@ -56,8 +58,11 @@ const Sidebar = ({
   const normalizedPathname = stripDocsVersionFromPathname(pathname);
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
+  const latestVersionId = resolveLatestDocsVersionId();
+  const effectiveVersionId = pathnameVersion || latestVersionId;
+  const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
   const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
-  const menu = getActiveMenu(navigation, currentSlug);
+  const menu = getActiveMenu(activeNavigation, currentSlug);
   const navRef = useRef(null);
 
   // Get SDK TOC for current page from pre-loaded data
@@ -103,6 +108,7 @@ const Sidebar = ({
 Sidebar.propTypes = {
   className: PropTypes.string,
   navigation: PropTypes.array.isRequired,
+  navigationByVersion: PropTypes.objectOf(PropTypes.array),
   basePath: PropTypes.string.isRequired,
   customType: PropTypes.shape({
     title: PropTypes.string,

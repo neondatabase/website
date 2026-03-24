@@ -11,6 +11,7 @@ import CornerIcon from 'icons/corner-left.inline.svg';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
+  resolveLatestDocsVersionId,
 } from 'utils/docs-versioning';
 
 import Icon from '../menu/icon';
@@ -206,7 +207,7 @@ RecursiveItem.propTypes = {
 
 const RecursiveList = ({ nodes, currentPath }) => (
   <ul className="flex flex-col gap-y-2.5">
-    <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-[calc(100%-16px)] after:-translate-x-1/2 after:bg-gray-new-20">
+    <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-gray-new-80 dark:after:bg-gray-new-20">
       <VersionSwitcher isMobileMenu />
     </li>
     {nodes.map((node, idx) => (
@@ -220,10 +221,17 @@ RecursiveList.propTypes = {
   currentPath: PropTypes.string.isRequired,
 };
 
-const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
+const MobileMenu = ({
+  navigation,
+  navigationByVersion = null,
+  basePath,
+  title = 'Neon Docs',
+}) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const pathnameVersion = getDocsVersionFromPathname(pathname);
+  const effectiveVersionId = pathnameVersion || resolveLatestDocsVersionId();
+  const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
   const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
 
   useEffect(() => {
@@ -233,8 +241,8 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
   const onOpenChange = useCallback((next) => setOpen(next), []);
 
   const menu = useMemo(
-    () => transformNavigation(navigation || [], docsBasePath),
-    [navigation, docsBasePath]
+    () => transformNavigation(activeNavigation || [], docsBasePath),
+    [activeNavigation, docsBasePath]
   );
 
   if (!menu.length) return null;
@@ -269,6 +277,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
 
 MobileMenu.propTypes = {
   navigation: PropTypes.array.isRequired,
+  navigationByVersion: PropTypes.objectOf(PropTypes.array),
   basePath: PropTypes.string.isRequired,
   title: PropTypes.string,
 };

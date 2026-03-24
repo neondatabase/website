@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import { DOCS_HOME_SLUG } from 'constants/docs';
 import useClickOutside from 'hooks/use-click-outside';
-import archiveIcon from 'icons/archive-drawer.svg';
 import CheckIcon from 'icons/check-arrow.inline.svg';
+import ArchiveIcon from 'icons/docs/sidebar/archive-drawer.inline.svg';
 import chevronsUpDownIcon from 'icons/docs/sidebar/chevrons-up-down.svg';
-import fileCopiesIcon from 'icons/file-copies.svg';
+import FileCopiesIcon from 'icons/docs/sidebar/file-copies.inline.svg';
 import {
   getDocsVersionFromPathname,
   normalizeDocsVersionId,
@@ -89,23 +89,21 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
           isMobileMenu
             ? 'px-0'
             : 'px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8',
-          isOpen &&
-            !isMobileMenu &&
-            '!border-gray-new-90 bg-gray-new-98 dark:!border-gray-new-20 dark:bg-gray-new-8'
         )}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((open) => !open)}
       >
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-3">
           <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
-            <img
-              src={visualSelectedVersion.isDeprecated ? archiveIcon : fileCopiesIcon}
-              className="size-[22px] shrink-0"
-            />
+            {visualSelectedVersion.isDeprecated ? (
+              <ArchiveIcon className="text-new-gray-60 size-[22px] shrink-0 dark:text-gray-new-40" />
+            ) : (
+              <FileCopiesIcon className="size-[22px] shrink-0 text-green-44 dark:text-green-52" />
+            )}
           </span>
-          <span className="flex flex-col gap-2">
+          <span className={clsx('flex flex-col', isMobileMenu ? 'gap-1' : 'gap-2')}>
             <span
               className={clsx(
                 isMobileMenu ? 'text-[16px]' : 'text-[15px]',
@@ -119,6 +117,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
             </span>
           </span>
         </span>
+
         <img src={chevronsUpDownIcon} className="size-4 shrink-0" />
       </button>
       {isOpen && (
@@ -135,16 +134,22 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
                   >
                     <span className="flex items-center gap-2">
                       <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
-                        <img
-                          src={version.isDeprecated ? archiveIcon : fileCopiesIcon}
-                          className="size-[22px] shrink-0"
-                        />
+                        {version.isDeprecated ? (
+                          <ArchiveIcon className="text-new-gray-60 size-[22px] shrink-0 dark:text-gray-new-40" />
+                        ) : (
+                          <FileCopiesIcon className="size-[22px] shrink-0 text-green-44 dark:text-green-52" />
+                        )}
                       </span>
                       <span className="flex flex-col">
-                        <span className="truncate text-[13px] font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-white">
+                        <span
+                          className={clsx(
+                            'truncate font-medium leading-tight tracking-extra-tight',
+                            isMobileMenu ? 'text-[16px]' : 'text-[15px]'
+                          )}
+                        >
                           {version.label}
                         </span>
-                        <span className="truncate text-[11px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70">
+                        <span className="truncate text-[13px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70">
                           {version.release}
                         </span>
                       </span>

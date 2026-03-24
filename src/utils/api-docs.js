@@ -3,6 +3,7 @@ const fs = require('fs');
 const jsYaml = require('js-yaml');
 
 const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
+const { DOCS_VERSIONS } = require('../constants/docs-versions');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
@@ -25,8 +26,22 @@ const getAllPosts = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getNavigation = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8'));
+const getNavigationFilePath = (docsContentPath = DOCS_DIR_PATH) => {
+  const versionedPath = `${process.cwd()}/${docsContentPath}/navigation.yaml`;
+  if (fs.existsSync(versionedPath)) return versionedPath;
+  return `${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`;
+};
+
+const getNavigation = (docsContentPath = DOCS_DIR_PATH) => {
+  const navigationFilePath = getNavigationFilePath(docsContentPath);
+  return jsYaml.load(fs.readFileSync(navigationFilePath, 'utf8'));
+};
+
+const getNavigationByDocsVersion = () =>
+  DOCS_VERSIONS.reduce((acc, version) => {
+    acc[version.id] = getNavigation(version.docsContentPath || DOCS_DIR_PATH);
+    return acc;
+  }, {});
 
 const getSDKNavigation = () =>
   jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sdk-navigation.yaml`, 'utf8'));
@@ -76,6 +91,7 @@ const getAllChangelogs = async () => {
 
 module.exports = {
   getNavigation,
+  getNavigationByDocsVersion,
   getSDKNavigation,
   getNavigationLinks,
   getAllChangelogs,
