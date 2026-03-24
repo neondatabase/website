@@ -593,6 +593,7 @@ const defaultConfig = {
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Versioned docs currently use the same markdown artifacts as the default docs version.
         { source: '/docs/:version(v[0-9]+|latest)/:path*.md', destination: '/md/docs/:path*.md' },
+        { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

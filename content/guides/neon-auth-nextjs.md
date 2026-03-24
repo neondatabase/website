@@ -712,7 +712,7 @@ The complete source code for this example is available on GitHub.
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [Use Neon Auth with Next.js](/docs/auth/quick-start/nextjs)
+- [Use Neon Auth with Next.js (API methods)](/docs/auth/quick-start/nextjs-api-only)
 - [Neon Auth UI components](/docs/auth/reference/ui-components)
 
 <NeedHelp />

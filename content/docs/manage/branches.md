@@ -8,7 +8,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-02-23T11:56:42.936Z'
+updatedOn: '2026-03-23T18:26:17.516Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -40,15 +40,19 @@ To create a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches**.
 3. Click **New branch** to open the branch creation dialog.
-4. Specify a branch name.
-5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
-
-<Admonition type="note">
-When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/introduction/restore-window).
-</Admonition>
-
-6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
-7. Click **Create new branch**.
+   ![Create branch dialog](/docs/manage/create_branch.png)
+4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (e.g, `production`) is selected, but you can choose any existing branch in your project.
+5. Specify a branch name, or leave it blank to use the default generated name.
+6. Select what to include in the new branch:
+   - **Current data**: Creates a copy of the parent branch’s latest data and schema, resulting in an isolated database that reflects the parent at the time of creation.
+   - **Past data**: Creates a copy using data from a specific past date and time of the parent branch. The parent branch must have the relevant history.
+     <Admonition type="note">
+     You can only specify a date and time that falls within your [restore window](/docs/introduction/restore-window).
+     </Admonition>
+   - **Schema only**: Replicates only the database schema (tables, views, roles, etc.) from the parent branch, without copying any of the actual data. This is useful for testing migrations or building new test data without exposing sensitive real-world data. See [Schema-only branches](/docs/guides/branching-schema-only).
+   - **Anonymized data**: Creates a branch with masked sensitive data. You can configure data anonymization rules to protect personally identifiable information while preserving realistic data sets for development. See [Data anonymization](/docs/workflows/data-anonymization).
+7. Configure auto-deletion: By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable expiration entirely. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+8. Click **Create** to create your branch.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
 

@@ -6,7 +6,7 @@ summary: >-
   integrates with your Neon database, allowing for branch-aware authentication
   and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.443Z'
+updatedOn: '2026-03-23T15:16:28.131Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -26,8 +26,27 @@ redirectFrom:
 
 Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
 
-<Admonition type="note" title="Before you start">
-Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to see what's supported and what's coming next.
+## Quick start guides
+
+Choose your framework to get started:
+
+<TechCards>
+
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Quick start with API methods" icon="next-js"></a>
+
+<a href="/docs/auth/quick-start/react" title="React" description="Quick start with API methods" icon="react"></a>
+
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
+
+</TechCards>
+
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
 </Admonition>
 
 ## Why Neon Auth?
@@ -129,22 +148,6 @@ export default function App() {
   Spin up complete environments instantly with database and auth together
 
 See [Branching authentication](/docs/auth/branching-authentication) for details on how auth branches with your database.
-
-## Quick start guides
-
-Choose your framework to get started:
-
-<TechCards>
-
-<a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With UI components" icon="next-js"></a>
-
-<a href="/docs/auth/quick-start/react" title="React (API methods)" description="Build your own auth UI" icon="react"></a>
-
-<a href="/docs/auth/quick-start/react-router-components" title="React" description="With UI components" icon="react"></a>
-
-<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
-
-</TechCards>
 
 ## Example applications
 

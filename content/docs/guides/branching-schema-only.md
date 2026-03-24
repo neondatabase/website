@@ -6,7 +6,7 @@ summary: >-
   replicate only the database schema from a source branch without copying
   sensitive data, ensuring a secure environment for development and testing.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.140Z'
+updatedOn: '2026-03-23T18:26:17.513Z'
 ---
 
 <FeatureBeta />
@@ -23,13 +23,15 @@ You can create schema-only branches in the Neon Console or using the Neon API, i
 
 To create a schema-only branch from the Neon Console:
 
-1. In the console, select your project.
+1. Select your project.
 2. Select **Branches**.
-3. Click **Create branch** to open the branch creation dialog.
-4. Under **Include**, Select the **Schema-only** option.
-5. Provide a name for the branch.
-6. In the **From Branch** field, select the source branch. The schema from the source branch will be copied to your new schema-only branch.
-7. Click **Create branch**.
+3. Click **New branch** to open the branch creation dialog.
+   ![Create branch dialog](/docs/guides/create_schema_only_branch.png)
+4. Select a **Parent branch**. The schema from this branch will be copied to your new schema-only branch. By default, your project's default branch is selected, but you can choose any existing branch in your project.
+5. Specify a branch name, or leave it blank to use the default generated name.
+6. Select the **Schema only** option.
+7. Configure auto-deletion: By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable expiration entirely. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+8. Click **Create** to create your schema-only branch.
 
 </TabItem>
 

@@ -6,11 +6,15 @@ summary: >-
   pre-built UI components, including enabling Neon Auth, creating a React app,
   and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.446Z'
+updatedOn: '2026-03-23T12:18:17.921Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="note" title="Archived copy">
+This quick start is kept in the repo for reference but is not published on [neon.com/docs](https://neon.com/docs). Use the [React quick start (API methods)](/docs/auth/quick-start/react), the [UI components reference](/docs/auth/reference/ui-components), and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) instead.
+</Admonition>
 
 <TwoColumnLayout>
 

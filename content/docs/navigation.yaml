@@ -433,19 +433,9 @@
             - section: Quickstarts
               items:
                 - title: Next.js
-                  slug: auth/quick-start/nextjs
-                  items:
-                    - title: UI components
-                      slug: auth/quick-start/nextjs
-                    - title: API methods
-                      slug: auth/quick-start/nextjs-api-only
+                  slug: auth/quick-start/nextjs-api-only
                 - title: React
                   slug: auth/quick-start/react
-                  items:
-                    - title: UI components
-                      slug: auth/quick-start/react-router-components
-                    - title: API methods
-                      slug: auth/quick-start/react
                 - title: TanStack Router
                   slug: auth/quick-start/tanstack-router
 
@@ -520,6 +510,8 @@
               slug: guides/row-level-security
             - title: Simplify RLS with Drizzle
               slug: guides/rls-drizzle
+            - title: Run RLS queries with Drizzle ORM
+              slug: guides/rls-query-execution
 
     - section: AI
       items:
