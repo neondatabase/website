@@ -104,6 +104,10 @@ function buildHeader() {
     `> This file contains the full Neon documentation. For a table of contents, see ${BASE_URL}/docs/llms.txt`,
     '',
   ];
+  if (config.agentInstructions) {
+    lines.push(config.agentInstructions);
+    lines.push('');
+  }
   return lines.join('\n');
 }
 
