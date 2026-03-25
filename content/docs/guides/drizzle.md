@@ -337,6 +337,27 @@ Successfully queried the database: [ { id: 1, name: 'John Doe' } ]
 
 </Steps>
 
+## Using Neon branches with Drizzle
+
+You can point Drizzle at different Neon [branches](/docs/introduction/branching) per environment by selecting the connection string based on `NODE_ENV` (or any other environment variable):
+
+```typescript
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
+
+const getBranchUrl = () => {
+  const env = process.env.NODE_ENV;
+  if (env === 'development') return process.env.DEV_DATABASE_URL;
+  if (env === 'test') return process.env.TEST_DATABASE_URL;
+  return process.env.DATABASE_URL;
+};
+
+const sql = neon(getBranchUrl()!);
+export const db = drizzle({ client: sql });
+```
+
+Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string --branch-id <branch-id>`).
+
 ## Resources
 
 - [Get Started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)

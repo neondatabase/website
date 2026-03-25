@@ -455,6 +455,8 @@
                   slug: auth/guides/webhooks
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Troubleshooting
+                  slug: auth/troubleshooting
                 - title: Manage Auth via the API
                   slug: auth/guides/manage-auth-api
 
