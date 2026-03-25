@@ -7,7 +7,12 @@ import Content from 'components/pages/blog-post/content';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
+import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import Admonition from 'components/shared/admonition';
+import BlogQuote from 'components/shared/blog-quote';
+import Button from 'components/shared/button';
 import ChangelogForm from 'components/shared/changelog-form';
+import EmbedTweet from 'components/shared/embed-tweet';
 import LINKS from 'constants/links';
 import { getAllBlogPosts, getBlogPostBySlug } from 'utils/api-blog';
 import getFormattedDate from 'utils/get-formatted-date';
@@ -67,6 +72,7 @@ const BlogPage = async (props0) => {
             html={
               <MDXRemote
                 source={content}
+                components={{ Admonition, BlogQuote, Button, EmbedTweet, YoutubeIframe }}
                 options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               />
             }
