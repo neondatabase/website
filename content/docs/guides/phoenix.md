@@ -16,6 +16,99 @@ This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframe
 
 It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
 
+Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Phoenix app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Phoenix project
+
+[Create a Phoenix project](https://hexdocs.pm/phoenix/installation.html#phoenix) if you do not have one:
+
+```bash
+# install phx.new if you haven't already
+# mix archive.install hex phx_new
+mix phx.new hello
+```
+
+## Run neon init
+
+1. From your Phoenix project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Phoenix app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Build and run the Phoenix application
+
+To compile the app in production mode, run the following command:
+
+```bash
+MIX_ENV=prod mix compile
+```
+
+To compile assets for the production mode, run the following command:
+
+```bash
+MIX_ENV=prod mix assets.deploy
+```
+
+For each deployment, a secret key is required for encrypting and signing data. Run the following command to generate the key:
+
+```bash
+mix phx.gen.secret
+```
+
+When you run the following command, you can expect to see the Phoenix application at [http://localhost:4001](http://localhost:4001):
+
+```bash shouldWrap
+PORT=4001 \
+MIX_ENV=prod \
+PHX_HOST=localhost \
+DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require&channel_binding=require" \
+SECRET_KEY_BASE=".../..." \
+mix phx.server
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To connect Neon in a Phoenix application using manual setup:
+
 <Steps>
 
 ## Create a Neon project
@@ -145,7 +238,15 @@ SECRET_KEY_BASE=".../..." \
 mix phx.server
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

@@ -13,18 +13,99 @@ updatedOn: '2026-02-06T22:07:32.954Z'
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"
 description="Pre-built prompt for connecting .NET Entity Framework projects to Neon Postgres."/>
 
-This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.
+This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 <Admonition type="note">
 The same configuration steps can be used for any .NET application using Entity Framework Core, including ASP.NET Core MVC, Blazor, or console applications.
 </Admonition>
 
-To connect to Neon from an Entity Framework application:
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a .NET project and add dependencies](#create-a-net-project-and-add-dependencies)
-3. [Configure Entity Framework](#configure-entity-framework)
-4. [Run the application](#run-the-application)
+<TabItem>
+
+To connect your Entity Framework app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a .NET project
+
+1. Create a new ASP.NET Core Web API project and change to the newly created directory:
+
+   ```bash
+   dotnet new webapi -n NeonEfExample
+   cd NeonEfExample
+   ```
+
+2. Delete the files `WeatherForecast.cs` and `Controllers/WeatherForecastController.cs` as we won't be using them:
+
+   ```bash
+   rm WeatherForecast.cs Controllers/WeatherForecastController.cs
+   ```
+
+3. Install required packages
+
+    <Admonition type="important" title="IMPORTANT">
+    Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
+    </Admonition>
+
+   ```bash
+   dotnet tool install --global dotnet-ef --version YOUR_DOTNET_VERSION
+   dotnet add package Microsoft.EntityFrameworkCore.Design --version YOUR_DOTNET_VERSION
+   ```
+
+## Run neon init
+
+1. From your Entity Framework project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Entity Framework app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the application
+
+1. Start the application:
+
+   ```bash
+   dotnet run
+   ```
+
+2. Test the connection by navigating to [`http://localhost:5001/swagger`](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from an Entity Framework application:
+
+<Steps>
 
 ## Create a Neon project
 
@@ -158,7 +239,7 @@ If you do not have one already, create a Neon project.
    builder.Services.AddControllers();
 
    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-       options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+       options.UseNpgsql(builder.Configuration.GetConnectionString("TodoDbConnection")));
 
    builder.Services.AddEndpointsApiExplorer();
    builder.Services.AddSwaggerGen();
@@ -197,6 +278,16 @@ If you do not have one already, create a Neon project.
    ```
 
 2. Test the connection by navigating to [`http://localhost:5001/swagger`](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
+
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

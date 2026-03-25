@@ -12,7 +12,88 @@ updatedOn: '2026-02-15T20:51:54.192Z'
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"
 description="Pre-built prompt for connecting RedwoodSDK applications to Neon Postgres"/>
 
-[RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
+[RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your RedwoodSDK app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a RedwoodSDK project
+
+1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Quickstart](https://docs.rwsdk.com/getting-started/quick-start/).
+
+2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
+
+    ```bash
+    cd my-redwood-app
+    npm install
+    ```
+
+## Run neon init
+
+1. From your RedwoodSDK project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your RedwoodSDK app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run your RedwoodSDK application
+
+Generate the required Wrangler types for RedwoodSDK to detect environment variables:
+
+```bash
+npx wrangler types
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Navigate to ([localhost:5173](http://localhost:5173)) in your browser. You should see a response similar to the following, indicating a successful connection to your Neon database:
+
+```text
+PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+```
+
+> The specific version may vary depending on the PostgreSQL version of your Neon project.
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
 
 To create a Neon project and access it from a RedwoodSDK application:
 
@@ -125,7 +206,15 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 > The specific version may vary depending on the PostgreSQL version of your Neon project.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

@@ -18,6 +18,149 @@ Using Reflex, you can build frontend and backend applications using Python to ma
 
 To connect to Neon from a Reflex application:
 
+Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Reflex app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Reflex project
+
+To set up a Reflex project, you need to install the Reflex CLI and create a new project.
+
+### Create the project directory
+
+Create a new directory for your Reflex project and navigate to it:
+
+```bash
+mkdir with_reflex
+cd with_reflex
+```
+
+### Create a virtual environment
+
+It's recommended to use a virtual environment to manage your project dependencies. In this example, `venv` is used to create a virtual environment. You can use any other virtual environment manager of your choice like `poetry`, `pipenv`, or `uv`.
+
+To create a virtual environment, run the following command in your project directory:
+
+<CodeTabs labels={["MacOS/Linux", "Windows"]}>
+
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+
+    ```shell
+    py -3 -m venv .venv
+    .venv\Scripts\activate
+    ```
+
+</CodeTabs>
+
+### Install the required packages
+
+Install Reflex and `python-dotenv` to manage environment variables:
+
+```bash
+pip install reflex python-dotenv
+```
+
+To initialize the Reflex app, run the following command:
+
+```bash
+reflex init
+```
+
+When prompted choose: **A blank Reflex app** (option 1). You should see output similar to the following:
+
+```bash
+$ reflex init
+──────────────────────────────────────────── Initializing with_reflex ─────────────────────────────────────────────
+[07:20:37] Initializing the web directory.                                                             console.py:231
+
+Get started with a template:
+(0) Try our free AI builder.
+(1) A blank Reflex app.
+(2) Premade templates built by the Reflex team.
+Which template would you like to use? (0): 1
+[07:20:39] Initializing the app directory.                                                             console.py:231
+Success: Initialized with_reflex using the blank template.
+```
+
+When the project is initialized, Reflex CLI creates a project directory. This directory will contain the following files and directories:
+
+```
+with_reflex
+├── .web
+├── assets
+├── with_reflex
+│   ├── __init__.py
+│   └── with_reflex.py
+└── rxconfig.py
+```
+
+The `rxconfig.py` file contains the project configuration settings. This is where the database connection settings will be defined.
+
+## Run neon init
+
+1. From your Reflex project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Reflex app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the Reflex app
+
+To run the Reflex app, use the following command in your project directory:
+
+```bash
+reflex run
+```
+
+This command starts the Reflex development server. You can access the app by navigating to `http://localhost:3000` in your web browser.
+
+You should see the Customer Data App interface, where you can add, view, and delete customer records stored in your Neon Postgres database.
+
+![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Reflex application:
+
 <Steps>
 
 ## Create a Neon project
@@ -467,7 +610,15 @@ You should see the Customer Data App interface, where you can add, view, and del
 
 ![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 You can find the complete code for the Customer Data App mentioned in this guide on GitHub.
 

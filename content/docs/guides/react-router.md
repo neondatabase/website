@@ -9,7 +9,89 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.036Z'
 ---
 
-[React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.
+[React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your React Router app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a React Router project
+
+Create a React Router project using the following command:
+
+```shell
+npx create-react-router@latest with-react-router --yes
+cd with-react-router
+```
+
+## Run neon init
+
+1. From your React Router project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your React Router app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+### Generate types
+
+Run the following command to generate types for your routes:
+
+```shell
+npm run typecheck
+```
+
+### Start the development server
+
+With the types generated, start the development server:
+
+```shell
+npm run dev
+```
+
+Now, navigate to [http://localhost:5173/version](http://localhost:5173/version) in your browser. You should see a page displaying the version of your Neon Postgres database.
+
+```text shouldWrap
+Database Version
+PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
 
 To create a Neon project and access it from a React Router application:
 
@@ -180,7 +262,15 @@ Database Version
 PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

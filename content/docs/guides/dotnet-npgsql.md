@@ -14,7 +14,7 @@ description="Pre-built prompt for connecting .NET applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a .NET (C#) application using [Npgsql](https://www.npgsql.org/), a .NET data provider for PostgreSQL.
 
-You'll build a console application that demonstrates how to connect to your Neon database and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll build a console application that demonstrates how to connect to your Neon database and perform basic Create, Read, Update, and Delete (CRUD) operations. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 <Admonition type="note">
 The same configuration steps can be used for any .NET application type, including ASP.NET Core Web API, MVC, Blazor, or Windows Forms applications.
@@ -22,9 +22,90 @@ The same configuration steps can be used for any .NET application type, includin
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - The [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later.
   > _Other versions of .NET may work, but this guide is primarily tested with .NET 8._
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your .NET app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a .NET project
+
+For your .NET project, you will create a project directory and add the required packages using the `dotnet` CLI.
+
+1.  Create a new console application and change into the newly created directory.
+
+    ```bash
+    dotnet new console -o NeonLibraryExample
+    cd NeonLibraryExample
+    ```
+
+    > Open this directory in your preferred code editor (for example, VS Code, Visual Studio).
+
+2.  Add the required NuGet packages using `dotnet add package`.
+    - `Microsoft.Extensions.Configuration.Json`: To read configuration from `appsettings.json`.
+    - `Microsoft.Extensions.Configuration.Binder`: To bind configuration values to objects.
+
+    ```bash
+    dotnet add package Microsoft.Extensions.Configuration.Json
+    dotnet add package Microsoft.Extensions.Configuration.Binder
+    ```
+
+## Run neon init
+
+1. From your .NET project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your .NET app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the application
+
+From your project directory, run:
+
+```bash
+dotnet run
+```
+
+Your AI assistant can help you build `Program.cs` and verify the output matches the examples in this guide.
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a .NET (Npgsql) application:
 
 <Steps>
 
@@ -430,7 +511,15 @@ dotnet run
 
 This command would compile and execute your application, connecting to the Neon database and performing all the CRUD operations defined in `Program.cs` as described above. You should see output in your console similar to the examples provided in the previous sections, indicating the success of each operation.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps: Using an ORM or framework
 

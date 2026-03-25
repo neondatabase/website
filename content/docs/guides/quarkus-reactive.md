@@ -12,9 +12,86 @@ updatedOn: '2026-02-06T22:07:33.034Z'
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"
 description="Pre-built prompt for connecting Quarkus applications to Neon using Reactive SQL Client"/>
 
-[Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.
+[Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 To connect to Neon from a Quarkus application:
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Quarkus app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Quarkus project and add dependencies
+
+Create a Quarkus project using the [Quarkus CLI](https://quarkus.io/guides/cli-tooling):
+
+```shell
+quarkus create app neon-with-quarkus \
+--name neon-with-quarkus \
+--package-name com.neon.tech \
+--extensions reactive-pg-client,resteasy-reactive
+```
+
+You now have a Quarkus project in a folder named `neon-with-quarkus` with the Reactive Postgres client and RESTEasy Reactive extensions installed.
+
+## Run neon init
+
+1. From your Quarkus project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Quarkus app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the application
+
+Start the application in development mode using the Quarkus CLI from the root of the project directory:
+
+```shell
+quarkus dev
+```
+
+Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) in your web browser. Your Neon database's Postgres version will be returned. For example:
+
+```
+PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Quarkus (Reactive) application:
 
 <Steps>
 
@@ -104,6 +181,14 @@ Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) 
 PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>

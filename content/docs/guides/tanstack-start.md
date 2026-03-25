@@ -15,9 +15,69 @@ updatedOn: '2026-03-09T15:58:12.491Z'
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
 description="Pre-built prompt for connecting TanStack Start applications to Neon"/>
 
-TanStack Start is an open-source, fully type-safe web framework for building feature rich React and Solid based applications using the TanStack ecosystem.
+TanStack Start is an open-source, fully type-safe web framework for building feature rich React and Solid based applications using the TanStack ecosystem. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-To create a Neon project and access it from a Start application:
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your TanStack Start app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a TanStack Start project
+
+Create a Start project if you do not have one. For instructions see the [quick start guides](https://tanstack.com/start/latest), in the [TanStack](https://tanstack.com/) documentation.
+
+## Run neon init
+
+1. From your TanStack Start project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your TanStack Start app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+When you run `npm run dev` you can expect to see the following on [localhost:3000](http://localhost:3000/):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a TanStack Start application:
 
 <Steps>
 
@@ -252,7 +312,15 @@ When you run `npm run dev` you can expect to see the following on [localhost:300
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ### Where to upload and serve files?
 

@@ -12,13 +12,88 @@ updatedOn: '2026-02-06T22:07:33.049Z'
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
 description="Pre-built prompt for connecting Ruby on Rails to Neon Postgres"/>
 
-[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
+[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect a Ruby on Rails application to a Neon Postgres database.
 
-To connect to Neon from a Ruby on Rails application:
+To connect to Neon from a Ruby on Rails application, choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 <Admonition type="note">
 This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
 </Admonition>
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Ruby on Rails app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Ruby on Rails project and add dependencies
+
+Create a Rails project using the [Rails CLI](https://guides.rubyonrails.org/command_line.html), and specify PostgreSQL as the database type:
+
+```shell
+gem install rails
+rails new neon-with-rails --database=postgresql
+```
+
+You now have a Rails project in a folder named `neon-with-rails`.
+
+## Run neon init
+
+1. From your Ruby on Rails project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Ruby on Rails app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the application
+
+Start the application using the Rails CLI from the root of the project:
+
+```shell
+bin/rails server -e development
+```
+
+Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon database's Postgres version will be displayed. For example:
+
+```
+PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To connect to Neon from a Ruby on Rails application using manual setup:
 
 <Steps>
 
@@ -118,7 +193,15 @@ Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon d
 PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Schema migration with Ruby on Rails
 

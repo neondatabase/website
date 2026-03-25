@@ -12,9 +12,69 @@ updatedOn: '2026-02-06T22:07:33.028Z'
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
 description="Pre-built prompt for connecting Nuxt applications to Neon."/>
 
-[Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
+[Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-To create a Neon project and access it from a Nuxt.js application:
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Nuxt app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Nuxt project
+
+Create a Nuxt project if you do not have one. For instructions, see [Create a Nuxt Project](https://nuxt.com/docs/getting-started/installation#new-project), in the Nuxt documentation.
+
+## Run neon init
+
+1. From your Nuxt project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Nuxt app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Nuxt application:
 
 <Steps>
 
@@ -102,7 +162,15 @@ When you run `npm run dev` you can expect to see the following on [localhost:300
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

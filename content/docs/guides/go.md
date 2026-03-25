@@ -16,12 +16,89 @@ description="Pre-built prompt for connecting Go applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
 
-You'll learn how to connect to your Neon database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll learn how to connect to your Neon database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - Go 1.18 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Go app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Go project
+
+For your Go project, create a project directory, initialize a Go module, and add the required libraries.
+
+1.  Create a project directory and change into it.
+
+    ```bash
+    mkdir neon-go-quickstart
+    cd neon-go-quickstart
+    ```
+
+    > Open the directory in your preferred code editor (for example, VS Code, GoLand).
+
+2.  Initialize a Go module. This command creates a `go.mod` file to track your project's dependencies.
+
+    ```bash
+    go mod init neon-go-quickstart
+    ```
+
+3.  Add the required Go packages using `go get`.
+    - `godotenv`: A helper library to manage environment variables from a `.env` file.
+
+    ```bash
+    go get github.com/joho/godotenv
+    ```
+
+    This will download the package and add it to your `go.mod` and `go.sum` files.
+
+## Run neon init
+
+1. From your Go project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Go app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Go application:
 
 <Steps>
 
@@ -457,7 +534,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps: Using an ORM or framework
 

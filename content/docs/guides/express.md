@@ -12,9 +12,76 @@ updatedOn: '2026-02-06T22:07:32.963Z'
 <CopyPrompt src="/prompts/express-prompt.md"
 description="Pre-built prompt for connecting ExpressJS applications to Neon Postgres"/>
 
-This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
+This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-To connect to Neon from an Express application:
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Express app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create an Express project
+
+Create an Express project and change to the newly created directory.
+
+```shell
+mkdir neon-express-example
+cd neon-express-example
+npm init -y
+npm install express
+```
+
+## Run neon init
+
+1. From your Express project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Express app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run index.js
+
+Run `node index.js` to view the result on [localhost:4242](localhost:4242) as follows:
+
+```shell
+{ version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from an Express application:
 
 <Steps>
 
@@ -150,7 +217,15 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

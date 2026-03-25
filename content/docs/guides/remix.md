@@ -9,13 +9,75 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.042Z'
 ---
 
+<CopyPrompt src="/prompts/remix-prompt.md" description="Pre-built prompt for connecting Remix applications to Neon"/>
+
 <Admonition type="note">
 Remix is now React Router v7. The features of the Remix framework have been merged into React Router v7. If you are starting a new project, we recommend using React Router. Follow our [React Router guide](/docs/guides/react-router) to connect to Neon.
 
 For more information, see the [Remix announcement](https://remix.run/blog/merging-remix-and-react-router).
 </Admonition>
 
-Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Remix app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Remix project
+
+Create a Remix project if you do not have one. For instructions, see [Quick Start](https://remix.run/docs/en/main/start/quickstart), in the Remix documentation.
+
+## Run neon init
+
+1. From your Remix project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Remix app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
 
 To create a Neon project and access it from a Remix application:
 
@@ -167,7 +229,15 @@ When you run `npm run dev` you can expect to see the following on [localhost:300
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

@@ -13,9 +13,69 @@ updatedOn: '2026-02-15T20:51:54.115Z'
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
 description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
-Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
+Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-To create a Neon project and access it from an Astro site or application:
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Astro app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create an Astro project
+
+Create an Astro project if you do not have one. For instructions, see [Getting Started](https://docs.astro.build/en/getting-started/), in the Astro documentation.
+
+## Run neon init
+
+1. From your Astro project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Astro app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+When you run `npm run dev` you can expect to see something like the following when you visit `localhost:4321`:
+
+```shell shouldWrap
+PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from an Astro application:
 
 <Steps>
 
@@ -159,14 +219,6 @@ const data = response[0].version;
 You can also initialize the database connection directly in each `.astro` file, but using a shared utility file is recommended for maintainability and code organization.
 </Admonition>
 
-#### Run the app
-
-When you run `npm run dev` you can expect to see something like the following when you visit `localhost:4321`:
-
-```shell shouldWrap
-PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
-```
-
 ### Server Endpoints (API Routes)
 
 In your server endpoints (API Routes) in Astro application, import the database client from your utility file:
@@ -219,15 +271,23 @@ export async function GET() {
 
 </CodeTabs>
 
-#### Run the app
+## Run the app
 
-When you run `npm run dev` you can expect to see something like the following when you visit the `localhost:4321/api` route:
+When you run `npm run dev` you can expect to see the Postgres version string on `localhost:4321` (Page Components) or `localhost:4321/api` (API Routes):
 
 ```shell shouldWrap
-{ version: 'PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit' }
+PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 
