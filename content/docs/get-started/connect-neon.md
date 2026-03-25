@@ -13,6 +13,15 @@ updatedOn: '2026-02-06T22:07:32.886Z'
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
 
+<Admonition type="tip" title="Connect to Neon with one command">
+Run `npx neonctl@latest init` from your project directory to create a Neon account (or sign in), set up a project, store your connection string in `.env`, and install dev tooling for your environment — all in one step. For details, see [neon init](/docs/reference/cli-init).
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
+
 ## Get your connection string
 
 From your Neon **Project Dashboard**, click the **Connect** button to open the **Connection Details** modal. Select your branch, database, and role. Your connection string appears automatically.
@@ -226,9 +235,7 @@ psql postgresql://username:password@hostname:5432/database?sslmode=require&chann
 
 Store your connection string in an environment variable (like `DATABASE_URL`) rather than hardcoding it in your application.
 
-## Next steps
-
-This covers the basics. For more connection options and detailed guidance:
+## Additional resources
 
 <DetailIconCards>
 
@@ -239,6 +246,18 @@ This covers the basics. For more connection options and detailed guidance:
 <a href="/docs/get-started/languages" description="Connection examples for JavaScript, Python, Go, Rust, and other languages" icon="code">Language guides</a>
 
 <a href="/docs/serverless/serverless-driver" description="Connect from serverless and edge environments using HTTP or WebSockets" icon="audio-jack">Serverless driver</a>
+
+</DetailIconCards>
+
+## Next steps
+
+Now that you're connected, explore what makes Neon different:
+
+<DetailIconCards>
+
+<a href="/docs/guides/branching-intro" description="Create instant copy-on-write branches for development, testing, previews, and safe migrations" icon="split-branch">Database branching</a>
+
+<a href="/docs/auth/overview" description="Add managed user authentication (signup, login, sessions, social OAuth) stored directly in your database" icon="lock-landscape">Set up Neon Auth</a>
 
 </DetailIconCards>
 

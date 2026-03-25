@@ -28,6 +28,15 @@ updatedOn: '2026-03-12T17:34:43.554Z'
 </DocsList>
 </InfoBlock>
 
+<Admonition type="tip" title="Using an AI coding agent?">
+Run `npx neonctl@latest init` from your project directory to set up Neon automatically — it handles account creation, project setup, connection string configuration, and dev tooling installation in one step. See [neon init](/docs/reference/cli-init) for details.
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
+
 This tutorial walks you through your first steps using Neon as your Postgres database. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
 
 ## About branching

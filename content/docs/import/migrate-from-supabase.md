@@ -1,20 +1,16 @@
 ---
-title: Migrate from Supabase to Neon Postgres
-subtitle: Learn how to migrate your database from Supabase to Neon Postgres using
-  pg_dump and pg_restore
+title: Migrate from Supabase to Neon
+subtitle: Migrate your database and authentication from Supabase to Neon
 summary: >-
-  How to migrate a database from Supabase to Neon Postgres using `pg_dump` and
-  `pg_restore`, including preparation steps and prerequisites for a successful
-  transfer.
+  How to migrate your database from Supabase to Neon using `pg_dump` and
+  `pg_restore`, and how to switch from Supabase Auth to Neon Auth.
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.074Z'
 ---
 
-This guide describes how to migrate a database from Supabase to Neon Postgres.
-
-We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+This guide covers how to migrate both your database and your authentication from Supabase to Neon. The database migration below uses standard Postgres tooling (`pg_dump` / `pg_restore`). If you also use Supabase Auth, see [Migrate Supabase Auth to Neon Auth](#migrate-supabase-auth-to-neon-auth) at the bottom of this page.
 
 <Admonition type="note">
 You can also replicate data from Supabase for a near-zero downtime migration. See [Replicate data from Supabase](/docs/guides/logical-replication-supabase-to-neon).
@@ -206,5 +202,21 @@ For more information on the Postgres utilities used in this guide, refer to the 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
 - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
+
+## Migrate Supabase Auth to Neon Auth
+
+If your Supabase project uses Supabase Auth, Neon includes [Neon Auth](/docs/auth/overview) — a managed authentication service that provides a Supabase-compatible client API. The migration involves three main changes:
+
+1. **Swap the SDK** — Replace `@supabase/supabase-js` with `@neondatabase/neon-js`
+2. **Update environment variables** — Replace your Supabase URL and anon key with your Neon Auth URL and Data API URL
+3. **Update client initialization** — Point the client at Neon Auth with the `SupabaseAuthAdapter`
+
+After that, your existing auth calls (`signUp`, `signInWithPassword`, `signInWithOAuth`, `getUser`, `getSession`, `signOut`) and database queries (`client.from().select()`) work without code changes.
+
+<Admonition type="important">
+Existing password-based users cannot be migrated due to different hashing algorithms. They'll need to create new accounts or re-authenticate via OAuth. This works best for new projects, early development, or apps rebuilding their auth layer.
+</Admonition>
+
+For the full step-by-step guide, including code examples, environment variable setup, and API compatibility details, see [Migrate from Supabase Auth to Neon Auth](/docs/auth/migrate/from-supabase).
 
 <NeedHelp/>
