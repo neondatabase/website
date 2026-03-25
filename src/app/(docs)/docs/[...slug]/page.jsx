@@ -42,18 +42,58 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
   const legacyVersion = getLegacyDocsVersion();
   const latestDocsPath = getDocsContentPathForVersion(latestVersion);
   const legacyDocsPath = getDocsContentPathForVersion(legacyVersion);
-  const latestPost = getPostBySlug(currentSlug, latestDocsPath);
-  const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
   const slugVersioningMode = getDocsSlugVersioningMode(currentSlug);
-  const supportsDualVersioning =
-    slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.DUAL && Boolean(latestPost) && Boolean(legacyPost);
+
+  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LEGACY_ONLY) {
+    if (hasVersionPrefix) {
+      redirect(`${LINKS.docs}/${currentSlug}`);
+    }
+
+    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
+    return {
+      post: legacyPost,
+      effectiveVersion: legacyVersion,
+      sourceDocsDirPath: legacyDocsPath,
+      supportsVersioning: false,
+    };
+  }
+
+  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
+    if (hasVersionPrefix) {
+      redirect(`${LINKS.docs}/${currentSlug}`);
+    }
+
+    const latestPost = getPostBySlug(currentSlug, latestDocsPath);
+    if (latestPost) {
+      return {
+        post: latestPost,
+        effectiveVersion: latestVersion,
+        sourceDocsDirPath: latestDocsPath,
+        supportsVersioning: false,
+      };
+    }
+
+    // Defensive fallback for partial migration state.
+    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
+    return {
+      post: legacyPost,
+      effectiveVersion: legacyVersion,
+      sourceDocsDirPath: legacyDocsPath,
+      supportsVersioning: false,
+    };
+  }
 
   if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.DUAL) {
+    const latestPost = getPostBySlug(currentSlug, latestDocsPath);
+    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
+    const supportsDualVersioning = Boolean(latestPost) && Boolean(legacyPost);
+
     if (supportsDualVersioning) {
       const versionResolution = resolveDocsVersion(requestedVersionId);
       const { effectiveVersion } = versionResolution;
-      const sourceDocsDirPath = getDocsContentPathForVersion(effectiveVersion);
-      const post = getPostBySlug(currentSlug, sourceDocsDirPath);
+      const useLatestSource = effectiveVersion.id === latestVersion.id;
+      const post = useLatestSource ? latestPost : legacyPost;
+      const sourceDocsDirPath = useLatestSource ? latestDocsPath : legacyDocsPath;
 
       return {
         post,
@@ -85,23 +125,11 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
     };
   }
 
-  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
-    if (hasVersionPrefix) {
-      redirect(`${LINKS.docs}/${currentSlug}`);
-    }
-
-    return {
-      post: latestPost || legacyPost,
-      effectiveVersion: latestPost ? latestVersion : legacyVersion,
-      sourceDocsDirPath: latestPost ? latestDocsPath : legacyDocsPath,
-      supportsVersioning: false,
-    };
-  }
-
   if (hasVersionPrefix) {
     redirect(`${LINKS.docs}/${currentSlug}`);
   }
 
+  const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
   return {
     post: legacyPost,
     effectiveVersion: legacyVersion,

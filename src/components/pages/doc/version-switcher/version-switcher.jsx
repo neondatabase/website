@@ -135,7 +135,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
                     <span className="flex items-center gap-2">
                       <span className="flex items-center justify-center border border-gray-new-90 p-1.5 dark:border-gray-new-20">
                         {version.isDeprecated ? (
-                          <ArchiveIcon className="text-new-gray-60 size-[22px] shrink-0 dark:text-gray-new-40" />
+                          <ArchiveIcon className="size-[22px] shrink-0 text-gray-new-60 dark:text-gray-new-40" />
                         ) : (
                           <FileCopiesIcon className="size-[22px] shrink-0 text-green-44 dark:text-green-52" />
                         )}

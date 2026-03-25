@@ -20,7 +20,7 @@ const dualVersionDocsSlugs = new Set(DOCS_DUAL_VERSION_SLUGS);
 const isDocsVersionId = (segment) => !!segment && !!docsVersionsById[segment];
 
 const getLatestContentReadyVersionId = () => {
-  const latestReadyVersion = [...DOCS_VERSIONS].reverse().find((version) => version.isContentReady);
+  const latestReadyVersion = DOCS_VERSIONS.find((version) => version.isContentReady);
   return latestReadyVersion?.id || DOCS_DEFAULT_VERSION_ID;
 };
 
@@ -90,8 +90,6 @@ const isLatestOnlyDocsSlug = (slug) =>
 const isDualVersionDocsSlug = (slug) => {
   const normalizedSlug = normalizeDocsSlug(slug);
   if (!normalizedSlug) return false;
-  const ruleMode = getDocsSlugVersioningMode(normalizedSlug);
-  if (ruleMode !== DOCS_SLUG_VERSIONING_MODES.DUAL) return false;
   return dualVersionDocsSlugs.has(normalizedSlug);
 };
 
