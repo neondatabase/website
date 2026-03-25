@@ -19,36 +19,58 @@
 - **Setup for New Projects:** If the user does not have a project yet, run the following command:
 
   ```bash
-  npx create-react-router@latest my-app --yes
+  npx create-react-router@latest with-react-router --yes
+  cd with-react-router
   ```
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open React Router project as follows:
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1.  **Prompt the user to select a PostgreSQL driver.** Present the following options (same order as the Neon docs):
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for applications deployed on Vercel or Netlify.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
     *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    *   **`@neondatabase/serverless` (Neon serverless driver):** Optimized for serverless and edge-style deployments with HTTP connections.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
 2.  Based on the user's selection, run the corresponding installation command.
 
     ```bash
-    # For @neondatabase/serverless
-    npm install @neondatabase/serverless
+    # For pg (node-postgres)
+    npm install pg
 
     # For postgres (postgres.js)
     npm install postgres
 
-    # For pg (node-postgres)
-    npm install pg
+    # For @neondatabase/serverless (Neon serverless driver)
+    npm install @neondatabase/serverless
     ```
 
 ---
@@ -59,7 +81,7 @@ When this prompt is triggered, automatically configure the open React Router pro
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -89,18 +111,26 @@ This involves two steps: defining the new route and creating the file that handl
 1.  **Create a new file** at `app/routes/version.tsx`.
 2.  Populate it with the code block that corresponds to the driver selected in Step 1. This file contains both the server-side `loader` function and the client-side React `Component`.
 
-    ##### Option A: Using `@neondatabase/serverless`
+    ##### Option A: Using `pg` (node-postgres)
 
     ```tsx title="app/routes/version.tsx"
-    import { neon } from '@neondatabase/serverless';
+    import { Pool } from 'pg';
     import type { Route } from './+types/version';
 
+    // The loader function runs on the server
     export async function loader() {
-      const sql = neon(process.env.DATABASE_URL!);
-      const response = await sql`SELECT version()`;
-      return { version: response[0].version as string };
+      const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+      const client = await pool.connect();
+      try {
+        const { rows } = await client.query('SELECT version()');
+        return { version: rows[0].version };
+      } finally {
+        client.release();
+        await pool.end();
+      }
     }
 
+    // The component runs in the browser
     export default function Version({ loaderData }: Route.ComponentProps) {
       return (
         <div>
@@ -117,12 +147,14 @@ This involves two steps: defining the new route and creating the file that handl
     import postgres from 'postgres';
     import type { Route } from './+types/version';
 
+    // The loader function runs on the server
     export async function loader() {
-      const sql = postgres(process.env.DATABASE_URL!);
+      const sql = postgres(process.env.DATABASE_URL as string);
       const response = await sql`SELECT version()`;
       return { version: response[0].version };
     }
 
+    // The component runs in the browser
     export default function Version({ loaderData }: Route.ComponentProps) {
       return (
         <div>
@@ -133,24 +165,20 @@ This involves two steps: defining the new route and creating the file that handl
     }
     ```
 
-    ##### Option C: Using `pg` (node-postgres)
+    ##### Option C: Using `@neondatabase/serverless`
 
     ```tsx title="app/routes/version.tsx"
-    import { Pool } from 'pg';
+    import { neon } from '@neondatabase/serverless';
     import type { Route } from './+types/version';
 
+    // The loader function runs on the server
     export async function loader() {
-      const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-      const client = await pool.connect();
-      try {
-        const { rows } = await client.query('SELECT version()');
-        return { version: rows[0].version };
-      } finally {
-        client.release();
-        await pool.end();
-      }
+      const sql = neon(process.env.DATABASE_URL as string);
+      const response = await sql`SELECT version()`;
+      return { version: response[0].version };
     }
 
+    // The component runs in the browser
     export default function Version({ loaderData }: Route.ComponentProps) {
       return (
         <div>
@@ -168,22 +196,23 @@ This involves two steps: defining the new route and creating the file that handl
 Once the file modifications are complete:
 
 1.  Verify the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
-2.  **Generate route types.** This is a required step. Run the following command to fix typescript errors:
+2.  **Generate types** for your routes (required). Run:
     ```bash
     npm run typecheck
     ```
-3.  **Start the development server:**
+3.  **Start the development server** (after types are generated):
     ```bash
     npm run dev
     ```
-4.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:5173/version` in their browser. They should see a page displaying the PostgreSQL version from their Neon database.
+4.  Inform the user that the setup is complete. Open [http://localhost:5173/version](http://localhost:5173/version). They should see **Database Version** and the PostgreSQL version string from Neon (for example, a line starting with `PostgreSQL` and ending with `64-bit`).
+5.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The project has `@react-router/dev` and a supported PostgreSQL driver installed.
+- The project has `@react-router/dev` and a supported PostgreSQL driver installed (`pg`, `postgres`, or `@neondatabase/serverless`).
 - A `.env` file is present or has been created with a `DATABASE_URL` key.
 - The `app/routes.ts` file includes a route definition for `'version'` pointing to `./routes/version.tsx`.
 - The `app/routes/version.tsx` file exists and exports both an `async function loader()` and a default `Component`.

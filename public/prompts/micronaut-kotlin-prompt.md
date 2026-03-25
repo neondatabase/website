@@ -17,30 +17,49 @@
 ## 📋 Prerequisites
 
 - This prompt must be run inside an existing Micronaut project directory. Do not proceed if no Micronaut project is detected. You can identify a Micronaut project by the presence of Micronaut libraries in the `build.gradle.kts` file's dependency management section.
-- **Setup for New Projects:** If the user does not have a project yet, run the following command. This command scaffolds a new project with all required features.
+- **Setup for new projects:** If the user does not have a project yet, run (same as the manual guide):
 
   ```bash
-  mn create-app with-micronaut-kotlin --lang=kotlin --jdk=21 --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
+  mn create-app with-micronaut-kotlin \
+    --lang=kotlin \
+    --jdk=21 \
+    --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
   ```
+
+  After creation, ensure `build.gradle.kts` contains `kotlin { jvmToolchain(21) }` inside the `kotlin` block.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Micronaut project as follows:
 
 ### 1. Verify Project Setup and Dependencies
 
-1.  **Check `build.gradle.kts`:** Ensure the project includes the necessary dependencies for this task. Look for implementations related to `micronaut-data-jdbc`, `micronaut-flyway`, and `postgresql`. If they are missing, add the necessary packages.
+1.  **Check `build.gradle.kts`:** Ensure the project was created with (or includes) the features **`postgres`**, **`jdbc-hikari`**, **`flyway`**, **`data-jdbc`**, and **`yaml`** as in the guide. If features are missing, prefer recreating with `mn create-app` using those flags, or add the equivalent Micronaut dependencies.
 
-2.  **Ensure JDK Compatibility:** Check the `build.gradle.kts` file for the following block. If it is not present, add it inside the `kotlin { ... }` block to ensure compatibility with modern JDKs.
-
-    ```kotlin
-    // build.gradle.kts
-    kotlin {
-        jvmToolchain(21)
-    }
-    ```
+2.  **JDK 21:** Ensure the `kotlin { jvmToolchain(21) }` block exists inside `build.gradle.kts` as in the manual guide.
 
 ---
 
@@ -66,7 +85,7 @@ When this prompt is triggered, automatically configure the open Micronaut projec
         default:
           enabled: true
     ```
-3.  Direct the user to find their connection details in the **Neon Console → Project → Connect**. Explain that they need the host, database name, user, and password.
+3.  Direct the user to the **Connect** button on the **Project Dashboard** in the Neon Console to obtain host, database name, user, and password. See [Connect from any application](https://neon.tech/docs/connect/connect-from-any-app) if needed.
 
 ---
 
@@ -169,15 +188,23 @@ Once the file modifications are complete:
     ```bash
     ./gradlew run
     ```
-3.  Inform the user that the setup is complete. On startup, they will see logs from Hikari (connection pool) and Flyway (database migration). To test the API, they can use `curl`:
+3.  Inform the user that the setup is complete. On startup, they should see Hikari and Flyway logs similar to the guide, then the server at `http://localhost:8080`. Test with `curl`:
 
     ```bash
     # Get all books
     curl http://localhost:8080/books
 
+    # Get a specific book by ID
+    curl http://localhost:8080/books/1
+
     # Create a new book
-    curl -X POST -H "Content-Type: application/json" -d '{"title":"The Great Gatsby","author":"F. Scott Fitzgerald"}' http://localhost:8080/books
+    curl -X POST \
+      -H "Content-Type: application/json" \
+      -d '{"title":"The Great Gatsby","author":"F. Scott Fitzgerald"}' \
+      http://localhost:8080/books
     ```
+
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 

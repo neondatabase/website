@@ -2,297 +2,281 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Node.js project to connect to a Neon Postgres database.
 
-**Purpose:** To install the necessary npm packages and provide a complete, working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle within a robust, multi-table database transaction.
+**Purpose:** To install the chosen client library, configure `.env`, and add `create_table.js`, `read_data.js`, `update_data.js`, and `delete_data.js` that exercise a `books` table—matching the Neon JavaScript guide’s **Connect manually** tab (including `pg`, `@neondatabase/serverless`, and `postgres.js` patterns).
 
 **Scope:**
-- Assumes the user is working within a Node.js project directory.
-- Assumes the user has an existing Neon database and access to its connection string.
+- Assumes a Node.js project directory.
+- Assumes server-side execution only (never expose `DATABASE_URL` in browser code).
 
 ✅ Read and understand the entire instruction set before executing.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
 
-When this prompt is triggered, automatically configure the open Node.js project as follows:
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
 
-Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it exclusively for all subsequent dependency and script commands. While the examples below use `npm`, substitute the appropriate commands for your project's manager.
+```bash
+npx neonctl@latest init
+```
 
-### 1. Select a Database Driver
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
 
-First, ask the user to choose their preferred Node.js Postgres driver and proceed based on their selection:
-1.  **`pg` (node-postgres)**: The classic, most widely-used driver.
-2.  **`postgres.js`**: A modern, high-performance driver with a great developer experience.
-3.  **`@neondatabase/serverless`**: The Neon serverless driver, optimized for serverless functions (HTTP).
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
 
----
-
-### 2. Configure Project and Install Dependencies
-
-1.  Check if a `package.json` file exists. If not, create one by running:
-    ```bash
-    npm init -y
-    ```
-2.  Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
-3.  Based on the user's driver selection, run the appropriate `npm install` command:
-    *   **If `pg` is chosen:**
-        ```bash
-        npm install pg dotenv
-        ```
-    *   **If `postgres.js` is chosen:**
-        ```bash
-        npm install postgres dotenv
-        ```
-    *   **If `@neondatabase/serverless` is chosen:**
-        ```bash
-        npm install @neondatabase/serverless dotenv
-        ```
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
 
 ---
 
-### 3. Verify the `.env` File
+## 🛠️ Step 2: Manual setup (fallback)
 
-- Check for the presence of a `.env` file at the root of the project.
-- If it doesn't exist, create one and advise the user to add their Neon database connection string.
-- Provide the following format and instruct the user to replace the placeholders:
-  
-  ```dotenv title=".env"
-  DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
-  ```
+Use this section only if:
 
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
----
+Identify the package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it consistently. Examples below use `npm`.
 
-### 4. Create an Example Script with a Two-Table Transaction
+### 1. Choose a driver
 
-Modify the project's main file (e.g., `index.js`). Apply the following logic:
+Ask the user which client to use:
 
-- **If the file is empty or contains only boilerplate**, replace the entire file content with the appropriate JavaScript code block below.
-- **If the file contains custom user code, preserve it.** Comment out the existing code and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new code block after the commented section.
+1. **`pg` (node-postgres)**
+2. **`@neondatabase/serverless`**
+3. **`postgres` (postgres.js)**
 
-#### Option 1: `pg` (node-postgres)
-```javascript title="index.js"
+### 2. Project setup and installs
+
+1. `npm init -y` if `package.json` is missing.
+2. Add `"type": "module"` to `package.json`.
+3. Install:
+
+- **pg:** `npm install pg dotenv`
+- **Neon serverless:** `npm install @neondatabase/serverless dotenv`
+- **postgres.js:** `npm install postgres dotenv`
+
+### 3. `.env`
+
+Create `.env` with:
+
+```dotenv
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```
+
+Use **Neon Console → Connect** (Node.js snippet is fine). Replace placeholders with real values.
+
+### 4. Scripts (`books` table)
+
+Create four files in the project root. Keep the same SQL, logging, and flow as the Neon JavaScript guide (**Connect manually** → Examples).
+
+| File | Purpose |
+|------|---------|
+| `create_table.js` | `DROP`/`CREATE books`, insert sample rows |
+| `read_data.js` | `SELECT * FROM books ORDER BY publication_year` |
+| `update_data.js` | `UPDATE` Dune’s `in_stock` to `true` |
+| `delete_data.js` | `DELETE` the `1984` row |
+
+#### `pg` (node-postgres) — full reference
+
+`create_table.js`
+
+```javascript
 import 'dotenv/config';
 import { Pool } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { require: true },
+  ssl: {
+    require: true,
+  },
 });
 
-async function main() {
+async function setup() {
   const client = await pool.connect();
   try {
-    console.log("Connection successful!");
+    console.log('Connection established');
 
-    // Setup schema
+    await client.query('DROP TABLE IF EXISTS books;');
+    console.log('Finished dropping table (if it existed).');
+
     await client.query(`
-      DROP TABLE IF EXISTS books;
-      DROP TABLE IF EXISTS authors;
-      CREATE TABLE authors (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL
-      );
       CREATE TABLE books (
-        id SERIAL PRIMARY KEY,
-        title TEXT NOT NULL,
-        author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE
+          id SERIAL PRIMARY KEY,
+          title VARCHAR(255) NOT NULL,
+          author VARCHAR(255),
+          publication_year INT,
+          in_stock BOOLEAN DEFAULT TRUE
       );
     `);
-    console.log("Schema created.");
+    console.log('Finished creating table.');
 
-    // --- Start Transaction ---
-    await client.query('BEGIN');
-    console.log("\nTransaction started.");
+    await client.query(
+      'INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);',
+      ['The Catcher in the Rye', 'J.D. Salinger', 1951, true]
+    );
+    console.log('Inserted a single book.');
 
-    try {
-      // CREATE: Insert an author and their book
-      const authorRes = await client.query("INSERT INTO authors (name) VALUES ($1) RETURNING id;", ["George Orwell"]);
-      const authorId = authorRes.rows[0].id;
-      console.log(`CREATE: Author 'George Orwell' inserted with ID: ${authorId}`);
-      
-      await client.query("INSERT INTO books (title, author_id) VALUES ($1, $2);", ["1984", authorId]);
-      console.log("CREATE: Book '1984' inserted.");
+    const booksToInsert = [
+      { title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, in_stock: true },
+      { title: '1984', author: 'George Orwell', year: 1949, in_stock: true },
+      { title: 'Dune', author: 'Frank Herbert', year: 1965, in_stock: false },
+    ];
 
-      // READ: Verify the data
-      const { rows } = await client.query(
-        "SELECT b.title, a.name AS author FROM books b JOIN authors a ON b.author_id = a.id WHERE a.id = $1;",
-        [authorId]
+    for (const book of booksToInsert) {
+      await client.query(
+        'INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);',
+        [book.title, book.author, book.year, book.in_stock]
       );
-      console.log(`READ: Fetched '${rows[0].title}' by ${rows[0].author}`);
-      
-      // UPDATE: Change the book's title
-      await client.query("UPDATE books SET title = $1 WHERE author_id = $2;", ["Nineteen Eighty-Four", authorId]);
-      console.log("UPDATE: Book title updated.");
-
-      // DELETE: Remove the author (which cascades to the book)
-      await client.query("DELETE FROM authors WHERE id = $1;", [authorId]);
-      console.log("DELETE: Author and their books deleted.");
-
-      await client.query('COMMIT');
-      console.log("Transaction committed successfully.\n");
-    } catch (e) {
-      await client.query('ROLLBACK');
-      console.error("Transaction rolled back.");
-      throw e;
     }
-
+    console.log('Inserted 3 rows of data.');
   } catch (err) {
-    console.error("Database operation failed:", err);
+    console.error('Connection failed.', err.stack);
   } finally {
-    if (client) client.release();
-    await pool.end();
+    client.release();
+    pool.end();
   }
 }
 
-main();
+setup();
 ```
 
-#### Option 2: `postgres.js`
-```javascript title="index.js"
+`read_data.js`
+
+```javascript
 import 'dotenv/config';
-import postgres from 'postgres';
+import { Pool } from 'pg';
 
-const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
 
-async function main() {
+async function readData() {
+  const client = await pool.connect();
   try {
-    console.log("Connection successful!");
-    
-    // Setup schema
-    await sql`DROP TABLE IF EXISTS books;`;
-    await sql`DROP TABLE IF EXISTS authors;`;
-    await sql`
-      CREATE TABLE authors (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL
+    console.log('Connection established');
+
+    const { rows } = await client.query('SELECT * FROM books ORDER BY publication_year;');
+
+    console.log('\n--- Book Library ---');
+    rows.forEach((row) => {
+      console.log(
+        `ID: ${row.id}, Title: ${row.title}, Author: ${row.author}, Year: ${row.publication_year}, In Stock: ${row.in_stock}`
       );
-    `;
-    await sql`
-      CREATE TABLE books (
-        id SERIAL PRIMARY KEY,
-        title TEXT NOT NULL,
-        author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE
-      );
-    `;
-    console.log("Schema created.");
-
-    // --- Start Transaction ---
-    await sql.begin(async (sql) => {
-      console.log("\nTransaction started.");
-      
-      // CREATE: Insert an author and their book
-      const [author] = await sql`INSERT INTO authors (name) VALUES ('George Orwell') RETURNING id;`;
-      console.log(`CREATE: Author 'George Orwell' inserted with ID: ${author.id}`);
-
-      await sql`INSERT INTO books (title, author_id) VALUES ('1984', ${author.id});`;
-      console.log("CREATE: Book '1984' inserted.");
-      
-      // READ: Verify the data
-      const [book] = await sql`
-        SELECT b.title, a.name as author FROM books b JOIN authors a ON b.author_id = a.id WHERE a.id = ${author.id};
-      `;
-      console.log(`READ: Fetched '${book.title}' by ${book.author}`);
-
-      // UPDATE: Change the book's title
-      await sql`UPDATE books SET title = 'Nineteen Eighty-Four' WHERE author_id = ${author.id};`;
-      console.log("UPDATE: Book title updated.");
-      
-      // DELETE: Remove the author (which cascades to the book)
-      await sql`DELETE FROM authors WHERE id = ${author.id};`;
-      console.log("DELETE: Author and their books deleted.");
     });
-    console.log("Transaction committed successfully.\n");
-
+    console.log('--------------------\n');
   } catch (err) {
-    console.error("Database operation failed:", err);
+    console.error('Connection failed.', err.stack);
   } finally {
-    await sql.end();
+    client.release();
+    pool.end();
   }
 }
 
-main();
+readData();
 ```
 
-#### Option 3: `@neondatabase/serverless` (HTTP)
-```javascript title="index.js"
+`update_data.js`
+
+```javascript
 import 'dotenv/config';
-import { neon } from '@neondatabase/serverless';
+import { Pool } from 'pg';
 
-const sql = neon(process.env.DATABASE_URL);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
 
-async function main() {
+async function updateData() {
+  const client = await pool.connect();
   try {
-    console.log("Connection successful!");
+    console.log('Connection established');
 
-    // Setup schema
-    await sql`DROP TABLE IF EXISTS books;`;
-    await sql`DROP TABLE IF EXISTS authors;`;
-    await sql`
-      CREATE TABLE authors (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL
-      );
-    `;
-    await sql`
-      CREATE TABLE books (
-        id SERIAL PRIMARY KEY,
-        title TEXT NOT NULL,
-        author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE
-      );
-    `;
-    console.log("Schema created.");
-
-    // --- Start Transaction ---
-    // The `transaction` function executes all queries atomically and non interactively. Send all queries as an array.
-    console.log("\nTransaction started.");
-    await sql.transaction([
-      sql`INSERT INTO authors (name) VALUES ('George Orwell')`,
-      sql`INSERT INTO books (title, author_id) SELECT '1984', id FROM authors WHERE name = 'George Orwell'`,
-      sql`UPDATE books SET title = 'Nineteen Eighty-Four' WHERE author_id = (SELECT id FROM authors WHERE name = 'George Orwell')`,
-      sql`DELETE FROM authors WHERE name = 'George Orwell'`,
-    ]);
-    console.log("Transaction executed: Author/Book created, updated, and deleted.");
-    console.log("Transaction committed successfully.\n");
-
+    await client.query('UPDATE books SET in_stock = $1 WHERE title = $2;', [true, 'Dune']);
+    console.log("Updated stock status for 'Dune'.");
   } catch (err) {
-    console.error("Database operation failed:", err);
+    console.error('Connection failed.', err.stack);
+  } finally {
+    client.release();
+    pool.end();
   }
 }
 
-main();
+updateData();
 ```
+
+`delete_data.js`
+
+```javascript
+import 'dotenv/config';
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    require: true,
+  },
+});
+
+async function deleteData() {
+  const client = await pool.connect();
+  try {
+    console.log('Connection established');
+
+    await client.query('DELETE FROM books WHERE title = $1;', ['1984']);
+    console.log("Deleted the book '1984' from the table.");
+  } catch (err) {
+    console.error('Connection failed.', err.stack);
+  } finally {
+    client.release();
+    pool.end();
+  }
+}
+
+deleteData();
+```
+
+#### `@neondatabase/serverless` and `postgres.js`
+
+Mirror the **Neon JavaScript guide** CodeTabs for those drivers: same four filenames and SQL, swapping in `neon(process.env.DATABASE_URL)` with tagged templates (including the multi-row insert for serverless) or `postgres(..., { ssl: 'require' })` with `sql.end()` in `finally` as shown there.
 
 ---
 
 ## 🚀 Next Steps
 
-Once the setup is complete:
+1. Verify `DATABASE_URL` in `.env`.
+2. Run scripts in order:
 
-1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
-2.  Run the application:
-    ```bash
-    node index.js
-    ```
-3.  If successful, the output should show messages indicating the success of each step and the final transaction commit.
+```bash
+node create_table.js
+node read_data.js
+node update_data.js
+node read_data.js
+node delete_data.js
+node read_data.js
+```
+
+3. **Authentication:** Mention [Neon Auth](https://neon.tech/docs/auth/overview) when relevant.
 
 ---
 
 ## ✅ Validation Rules for AI
 
-Before suggesting code or making edits, ensure:
-- The `package.json` file contains `"type": "module"`.
-- A `.env` file is present or has been created.
-- The connection string is loaded from the environment, not hardcoded.
-- **All SQL operations use parameterized queries** to prevent SQL injection (`$1` for `pg`, tagged templates for `postgres.js` and `@neondatabase/serverless`).
-- **The primary business logic is wrapped in a transaction block** that is idiomatic for the chosen driver (`BEGIN`/`COMMIT` for `pg`, `sql.begin` for `postgres.js`, `sql.transaction` for the serverless driver).
-- Connections/pools are properly closed at the end of the script (`pool.end()` for `pg`, `sql.end()` for `postgres.js`).
+- `package.json` includes `"type": "module"` and the correct dependency for the chosen driver.
+- `.env` uses the canonical Neon URL shape (`sslmode=require`, `channel_binding=require`, explicit host/port as provided by Neon).
+- Four scripts exist with the guide’s SQL, logging, and driver-specific connection patterns.
+- Parameterized queries: `$n` for `pg`; tagged templates for Neon serverless and `postgres.js`.
+- No database credentials in client-side bundles.
 
 ---
 
 ## ❌ Do Not
 
-- Do not hardcode credentials in any `.js` file.
-- Do not output the contents of the `.env` file or the user's connection string in any response.
-- Do not expose database logic on the client-side. All code must be for a server-side Node.js environment.
+- Do not hardcode credentials in `.js` files.
+- Do not expose `DATABASE_URL` or `.env` contents in assistant output.
+- Do not merge the guide’s four scripts into a single demo file for this flow.

@@ -22,7 +22,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Ruby on Rails project as follows:
 
@@ -47,20 +68,31 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
 2.  Add the following line to the `.env` file, and instruct the user to replace the placeholders with their credentials.
-    - **Crucially, the connection string must end with a `/` and should not include a specific database name.** Rails will manage the database name (`_development`, `_test`) automatically based on the environment. Inform this clearly to the user when you prompt them.
+    - **Crucially, do not put a database name after the final `/`.** Rails picks the database name per environment (`_development`, `_test`). This matches the Neon Ruby on Rails guide.
     ```
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/"
+    DATABASE_URL=postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/
     ```
-3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
-4.  Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
+3.  Prompt the user to get connection details from **Neon Console → Project → Dashboard → Connect**.
+4.  Inform the user that the role needs **CREATEDB** (default Neon roles include this via `neon_superuser`).
+5.  From the project root, load the URL and create the development database (same as the guide):
+    ```bash
+    source .env
+    bin/rails db:create
+    ```
 
 ---
 
 ### 3. Create or Update MVC for Database Test
 
-To avoid potential naming collisions with generators, directly create or overwrite the necessary files.
+If the controller does not exist yet, generate it:
 
-1.  **Ensure the controller exists with the correct content.** Create or replace the file at `app/controllers/home_controller.rb`:
+```bash
+rails g controller home index
+```
+
+Then set the files as follows.
+
+1.  **Controller** at `app/controllers/home_controller.rb`:
     ```ruby title="app/controllers/home_controller.rb"
     class HomeController < ApplicationController
       def index
@@ -94,20 +126,15 @@ To avoid potential naming collisions with generators, directly create or overwri
 
 Once the setup is complete:
 
-1.  Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string is modified to remove the database name and ends with a trailing slash (`/`).
-2.  Install any new gems by running:
+1.  Remind the user that `DATABASE_URL` must omit the database name and end with `/` after the host (and port if present).
+2.  Run `bundle install` if gems changed.
+3.  Load env and create the DB if not already done: `source .env` then `bin/rails db:create`.
+4.  Start the app on **port 3000** (guide command):
     ```bash
-    bundle install
+    bin/rails server -e development
     ```
-3.  Create the development database:
-    ```bash
-    bin/rails db:create
-    ```
-4.  Start the Rails server:
-    ```bash
-    bin/rails server
-    ```
-5.  To test the connection, visit `http://localhost:3000` in a browser. The page should display the PostgreSQL version reported by your Neon database.
+5.  Open [http://localhost:3000/](http://localhost:3000/). The page should show the Postgres `version()` string from Neon.
+6.  **Authentication:** Mention [Neon Auth](https://neon.tech/docs/auth/overview) when relevant.
 
 ---
 
@@ -116,7 +143,7 @@ Once the setup is complete:
 Before suggesting code or making edits, ensure:
 - The `Gemfile` contains both the `pg` and `dotenv-rails` gems.
 - A `.env` file is present or has been created.
-- The `DATABASE_URL` format in the `.env` template ends with a `/` and contains no database name.
+- The `DATABASE_URL` in `.env` ends with `/` after the host (and port) and contains **no** database name segment (Rails adds `_development` / `_test`).
 - The connection string is loaded from the environment, not hardcoded in any `.rb` or `.yml` files.
 - The controller, view, and routes files (`home_controller.rb`, `home/index.html.erb`, `routes.rb`) are created or updated with the specified content.
 - The `root 'home#index'` route is correctly defined in `config/routes.rb`.

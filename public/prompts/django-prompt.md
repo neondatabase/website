@@ -13,7 +13,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Django project as follows:
 
@@ -183,6 +204,7 @@ Once the file modifications are complete:
     venv/bin/python manage.py runserver
     ```
 4.  Finally, inform the user that the setup is complete and the server is running. To test the connection, they can visit `http://localhost:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
+5.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 

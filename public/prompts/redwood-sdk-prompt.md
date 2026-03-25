@@ -24,27 +24,48 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open RedwoodSDK project as follows:
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options, explaining the benefits of each:
+1.  **Prompt the user to select a PostgreSQL driver.** Present the following options (same order as the Neon docs), explaining the benefits of each:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. This is the ideal choice for RedwoodSDK as it runs on Cloudflare Workers.
-    *   **`postgres` (postgres.js):** A fast, full-featured client that also works well in the Cloudflare Workers environment.
+    *   **`postgres` (postgres.js):** A fast, full-featured client that works well in the Cloudflare Workers environment.
+    *   **`@neondatabase/serverless` (Neon serverless driver):** Optimized for serverless and edge functions with HTTP connections; a strong fit for RedwoodSDK on Cloudflare Workers.
 
    Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
 2.  Based on the user's selection, run the corresponding installation command:
 
     ```bash
-    # For @neondatabase/serverless
-    npm install @neondatabase/serverless
-
     # For postgres (postgres.js)
     npm install postgres
+
+    # For @neondatabase/serverless (Neon serverless driver)
+    npm install @neondatabase/serverless
     ```
 
 ---
@@ -55,7 +76,7 @@ When this prompt is triggered, automatically configure the open RedwoodSDK proje
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from their Neon project.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Dashboard → Connect**.
@@ -70,7 +91,26 @@ To provide a clear way to verify the setup, modify a page component to query the
 2.  **Replace the contents of this file** to implement a database query.
 3.  **Use the code block that corresponds to the driver selected in Step 1.**
 
-    #### Option A: Using `@neondatabase/serverless`
+    #### Option A: Using `postgres` (postgres.js)
+
+    ```typescript title="src/app/pages/Home.tsx"
+    import { RequestInfo } from "rwsdk/worker";
+    import postgres from 'postgres';
+    import { env } from "cloudflare:workers";
+
+    async function getData() {
+      const sql = postgres(env.DATABASE_URL, { ssl: 'require' });
+      const response = await sql`SELECT version()`;
+      return response[0].version;
+    }
+
+    export async function Home({ ctx }: RequestInfo) {
+      const data = await getData();
+      return <>{data}</>;
+    }
+    ```
+
+    #### Option B: Using `@neondatabase/serverless`
 
     ```typescript title="src/app/pages/Home.tsx"
     import { RequestInfo } from "rwsdk/worker";
@@ -89,25 +129,6 @@ To provide a clear way to verify the setup, modify a page component to query the
     }
     ```
 
-    #### Option B: Using `postgres` (postgres.js)
-
-    ```typescript title="src/app/pages/Home.tsx"
-    import { RequestInfo } from "rwsdk/worker";
-    import postgres from 'postgres';
-    import { env } from "cloudflare:workers";
-
-    async function getData() {
-      const sql = postgres(env.DATABASE_URL);
-      const response = await sql`SELECT version()`;
-      return response[0].version;
-    }
-
-    export async function Home({ ctx }: RequestInfo) {
-      const data = await getData();
-      return <>{data}</>;
-    }
-    ```
-
 ---
 
 ## 🚀 Next Steps
@@ -115,22 +136,23 @@ To provide a clear way to verify the setup, modify a page component to query the
 Once the file modifications are complete:
 
 1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if the placeholder value is still present.
-2.  Generate the correct TypeScript types for the environment variables. This step is needed to fix the Typescript errors.
+2.  **Run your RedwoodSDK application:** generate Wrangler types so RedwoodSDK detects environment variables:
     ```bash
     npx wrangler types
     ```
-3.  Start the RedwoodSDK development server:
+3.  Start the development server:
     ```bash
     npm run dev
     ```
-4.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:5173` in their browser. They should see a page displaying the PostgreSQL version from their Neon database.
+4.  Open [http://localhost:5173](http://localhost:5173). The browser should show a response similar to a PostgreSQL `version()` string (the exact text depends on the Neon project’s Postgres version).
+5.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- A supported PostgreSQL driver (`@neondatabase/serverless` or `postgres`) is installed as a dependency in `package.json`.
+- A supported PostgreSQL driver (`postgres` or `@neondatabase/serverless`) is installed as a dependency in `package.json`.
 - A `.env` file is present or has been created with a `DATABASE_URL` placeholder.
 - The test component correctly imports the `env` object from `cloudflare:workers` to access environment variables.
 - The test component correctly imports and uses the chosen database driver.

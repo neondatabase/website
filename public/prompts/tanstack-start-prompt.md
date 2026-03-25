@@ -25,42 +25,63 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the TanStack Start project as follows:
 
 ### 1. Install Dependencies
 
-1. **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1. **Prompt the user to select a PostgreSQL driver.** Present the following options (same order as the Neon docs):
 
-    - **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections.
-    - **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
     - **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    - **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    - **`@neondatabase/serverless` (Neon serverless driver):** Optimized for serverless and edge-style deployments with HTTP connections.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
 2. Based on the user's selection, run the corresponding installation command:
 
     ```bash
-    # For @neondatabase/serverless
-    npm install @neondatabase/serverless
+    # For pg (node-postgres)
+    npm install pg
 
     # For postgres (postgres.js)
     npm install postgres
 
-    # For pg (node-postgres)
-    npm install pg
+    # For @neondatabase/serverless (Neon serverless driver)
+    npm install @neondatabase/serverless
     ```
 
 ---
 
 ### 2. Configure Environment Variables
 
-1. Check for the presence of a `.env.local` file at the root of the project. If it doesn't exist, create one.
-2. Add the following `DATABASE_URL` parameter to the `.env.local` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
-```dotenv title=".env.local"
-DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+```dotenv title=".env"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 3. Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -69,26 +90,53 @@ DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=requi
 
 ### 3. Create a Centralized Database Module
 
-To manage the database connection efficiently and prevent exposing credentials, create a single, server-only module.
+To manage the database connection efficiently and prevent exposing credentials, create server-only modules under `src/data`.
 
-1. Create a new directory `src/data`.
-2. Inside it, create a file named `db.ts`.
-3. **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export a reusable database client.
+1. Create a new directory `src/data` if it does not exist.
+2. Create `src/data/get-neon-data.ts` for **Server Functions**. **Use the code block that corresponds to the driver selected in Step 1.**
 
-#### Option A: Using `@neondatabase/serverless`
+#### Option A: Using `pg` (node-postgres)
 
-  ```typescript title="data/db"
+  ```typescript title="src/data/get-neon-data.ts"
+  import { Pool } from 'pg';
   import { createServerFn } from "@tanstack/react-start";
-  import { neon } from "@neondatabase/serverless";
 
-  export const getServerlessDriverData = createServerFn({
-    method: "GET",
-  }).handler(async () => {
-    if (process.env.DATABASE_URL == null) {
-      console.warn("[Error]: Missing database url");
-      throw new Error("Missing database url");
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
+
+  export const getData = createServerFn({ method: "GET" }).handler(async () => {
+    const client = await pool.connect();
+    try {
+      const { rows } = await client.query('SELECT version()');
+      return rows[0].version;
+    } finally {
+      client.release();
     }
+  });
+  ```
 
+#### Option B: Using `postgres` (postgres.js)
+
+  ```typescript title="src/data/get-neon-data.ts"
+  import postgres from 'postgres';
+  import { createServerFn } from "@tanstack/react-start";
+
+  export const getData = createServerFn({ method: "GET" }).handler(async () => {
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    const response = await sql`SELECT version()`;
+    return response[0].version;
+  });
+  ```
+
+#### Option C: Using `@neondatabase/serverless`
+
+  ```typescript title="src/data/get-neon-data.ts"
+  import { neon } from "@neondatabase/serverless";
+  import { createServerFn } from "@tanstack/react-start";
+
+  export const getData = createServerFn({ method: "GET" }).handler(async () => {
     const sql = neon(process.env.DATABASE_URL);
     const response = await sql`SELECT version()`;
 
@@ -96,126 +144,63 @@ To manage the database connection efficiently and prevent exposing credentials, 
   });
   ```
 
-#### Option B: Using `postgres` (postgres.js)
+3. Create `src/data/get-neon-data-static.ts` for **Static Server Functions** (same driver as Step 1). **Use the code block that corresponds to the selected driver.**
 
-  ```typescript title="data/db"
-  import { createServerFn } from "@tanstack/react-start";
-  import postgres from "postgres";
+#### Option A: Using `pg` (node-postgres)
 
-  export const getPostgresJsData = createServerFn({ method: "GET" }).handler(
-    async () => {
-      if (process.env.DATABASE_URL == null) {
-        console.warn("[Error]: Missing database url");
-        throw new Error("Missing database url");
-      }
-
-      const sql = postgres(process.env.DATABASE_URL, {
-        ssl: "require",
-      });
-      const response = await sql`SELECT version()`;
-      return response[0].version;
-    },
-  );
-  ```
-
-#### Option C: Using `pg` (node-postgres)
-
-  ```typescript title="data/db"
-  import { createServerFn } from "@tanstack/react-start";
-  import { Pool } from "pg";
-
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  });
-
-  export const getNodePostgresData = createServerFn({ method: "GET" }).handler(
-    async () => {
-      const client = await pool.connect();
-      try {
-        const { rows } = await client.query("SELECT version()");
-        return rows[0].version;
-      } finally {
-        client.release();
-      }
-    },
-  );
-  ```
-
-5. Create an additional file inside the `src/data` directory called `static-db.ts`.
-4. **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export a reusable database client.
-
-#### Option A: Using `@neondatabase/serverless`
-
-```typescript title="data/static-db.ts"
-import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+```typescript title="src/data/get-neon-data-static.ts"
+import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
-
-import { neon } from "@neondatabase/serverless";
-
-export const getServerlessDriverData = createServerFn({ method: "GET" })
-.middleware([staticFunctionMiddleware])
-.handler(async () => {
-  if (process.env.DATABASE_URL == null) {
-    console.warn("[Error]: Missing database url");
-    throw new Error("Missing database url");
-  }
-
-  const sql = neon(process.env.DATABASE_URL);
-  const response = await sql`SELECT version()`;
-
-  return response[0].version;
-});
-
-```
-
-#### Option B: Using `postgres` (postgres.js)
-
-```typescript title="data/static-db.ts"
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
-import { createServerFn } from "@tanstack/react-start";
-
-import postgres from "postgres";
-
-export const getPostgresJsData = createServerFn({ method: "GET" })
-.middleware([staticFunctionMiddleware])
-.handler(async () => {
-  if (process.env.DATABASE_URL == null) {
-    console.warn("[Error]: Missing database url");
-    throw new Error("Missing database url");
-  }
-
-  const sql = postgres(process.env.DATABASE_URL, {
-    ssl: "require",
-  });
-  const response = await sql`SELECT version()`;
-  return response[0].version;
-});
-```
-
-#### Option C: Using `pg` (node-postgres)
-
-```typescript title="data/static-db.ts"
-import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
-import { createServerFn } from "@tanstack/react-start";
-
-import { Pool } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
-export const getNodePostgresData = createServerFn({ method: "GET" })
+export const getData = createServerFn({ method: "GET" })
   .middleware([staticFunctionMiddleware])
   .handler(async () => {
     const client = await pool.connect();
     try {
-      const { rows } = await client.query("SELECT version()");
+      const { rows } = await client.query('SELECT version()');
       return rows[0].version;
     } finally {
       client.release();
     }
+  });
+```
+
+#### Option B: Using `postgres` (postgres.js)
+
+```typescript title="src/data/get-neon-data-static.ts"
+import postgres from 'postgres';
+import { createServerFn } from "@tanstack/react-start";
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+
+export const getData = createServerFn({ method: "GET" })
+  .middleware([staticFunctionMiddleware])
+  .handler(async () => {
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    const response = await sql`SELECT version()`;
+    return response[0].version;
+  });
+```
+
+#### Option C: Using `@neondatabase/serverless`
+
+```typescript title="src/data/get-neon-data-static.ts"
+import { neon } from "@neondatabase/serverless";
+import { createServerFn } from "@tanstack/react-start";
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+
+export const getData = createServerFn({ method: "GET" })
+  .middleware([staticFunctionMiddleware])
+  .handler(async () => {
+    const sql = neon(process.env.DATABASE_URL);
+    const response = await sql`SELECT version()`;
+
+    return response[0].version;
   });
 ```
 
@@ -227,207 +212,71 @@ Implement the following examples to showcase different TanStack Start patterns.
 
 #### 4.A: Server Function
 
-Modify the main page to fetch and display the database version on the server.
-**Replace the contents of `app/page.tsx`** with the code corresponding to the selected driver.
+Update the root route so the loader calls your server function: `createFileRoute`, `loader`, and `RouteComponent` displaying loader data (same pattern as the Neon TanStack Start guide).
 
-##### Option A: For `@neondatabase/serverless`
+**Update `src/routes/index.tsx`** (or the project’s root route file) as follows. The pattern is the same for every driver; only the import path for `getData` stays `../data/get-neon-data.ts`.
 
-```tsx title="src/routes/index.js"
+```tsx title="src/routes/index.tsx"
 import { createFileRoute } from "@tanstack/react-router";
-
-// data
-import { getServerlessDriverData } from "../data/db.ts";
+import { getData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    return getServerlessDriverData();
+    return getData();
   },
 
-  component: App,
+  component: RouteComponent,
 });
 
-function App() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
-}
-```
-
-##### Option B: For `postgres`
-
-```tsx title="src/routes/index.js"
-import { createFileRoute } from "@tanstack/react-router";
-
-// data
-import { getPostgresJsData } from "../data/db.ts";
-
-export const Route = createFileRoute("/")({
-  loader: async () => {
-    return getPostgresJsData();
-  },
-
-  component: App,
-});
-
-function App() {
-  const data = Route.useLoaderData();
-
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
-}
-```
-
-##### Option C: For `pg` (node-postgres)
-
-```tsx title="src/routes/index.js"
-import { createFileRoute } from "@tanstack/react-router";
-
-// data
-import { getNodePostgresData } from "../data/db.ts";
-
-export const Route = createFileRoute("/")({
-  loader: async () => {
-    return getNodePostgresData();
-  },
-
-  component: App,
-});
-
-function App() {
-  const data = Route.useLoaderData();
-
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
+  return <>{data}</>;
 }
 ```
 
 #### 4.B: Static Server Functions
 
-Create a new page to demonstrate TanStack start's static server function and the integration with neon.
-**Create a new file at `src/routes/static-server-function.tsx`** with the code corresponding to the selected driver.
+_Be aware Static Server Functions are executed at build time, and cached as a static asset for pre-rendering or static generation._
 
-##### Option A: For `@neondatabase/serverless`
+**Create `src/routes/static-server-function.tsx`** using the same route pattern, importing `getData` from `../data/get-neon-data-static.ts`:
 
-```tsx title="src/routes/static-server-function.js"
+```tsx title="src/routes/static-server-function.tsx"
 import { createFileRoute } from "@tanstack/react-router";
-import { getServerlessDriverData } from "../data/static-db";
+import { getData } from "../data/get-neon-data-static.ts";
 
 export const Route = createFileRoute("/static-server-function")({
   loader: async () => {
-    return getServerlessDriverData();
+    return getData();
   },
 
-  component: App,
+  component: RouteComponent,
 });
 
-function App() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
+  return <>{data}</>;
 }
 ```
 
-##### Option B: For `postgres`
-
-```tsx title="src/routes/static-server-function.js"
-import { createFileRoute } from "@tanstack/react-router";
-import { getPostgresJsData } from "../data/static-db";
-
-export const Route = createFileRoute("/static-server-function")({
-  loader: async () => {
-    return getPostgresJsData();
-  },
-
-  component: App,
-});
-
-function App() {
-  const data = Route.useLoaderData();
-
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
-}
-```
-
-##### Option C: For `pg` (node-postgres)
-
-```tsx title="src/routes/static-server-function.js"
-import { createFileRoute } from "@tanstack/react-router";
-import { getNodePostgresData } from "../data/static-db";
-
-export const Route = createFileRoute("/static-server-function")({
-  loader: async () => {
-    return getNodePostgresData();
-  },
-
-  component: App,
-});
-
-function App() {
-  const data = Route.useLoaderData();
-
-  return (
-    <div className="container">
-      <h1>Serverless Driver</h1>
-      <p>Data loaded from a Neon serverless driver instance.</p>
-
-      <p style={{ marginTop: "3rem" }}>Postgres version:</p>
-      <p>{data}</p>
-    </div>
-  );
-}
-```
+## 🚀 Next Steps
 
 Once the file modifications are complete:
 
-1. Verify the user has correctly set their `DATABASE_URL` in the `.env.local` file. Do not proceed if placeholder values are still present.
+1. Verify the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
 2. Start the TanStack Start development server:
 
 ```bash
   npm run dev
 ```
 
-3. Inform the user that the setup is complete. To test the different connection patterns, they can visit:
-  
-- `http://localhost:3000` to see the **Server Function**.
-- `http://localhost:3000/static-server-function` to see the **Static Server Function**.
+3. Inform the user that the setup is complete. When you run `npm run dev`, you can expect to see the Postgres version string on [localhost:3000](http://localhost:3000/):
+
+- `http://localhost:3000` for the **Server Function** example.
+- `http://localhost:3000/static-server-function` for the **Static Server Function** example.
+
+4. **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
@@ -435,8 +284,8 @@ Once the file modifications are complete:
 
 Before suggesting code or making edits, ensure:
 
-- The project has `start` and a supported PostgreSQL driver installed.
-- A `.env.local` file is present or has been created with a `DATABASE_URL` key.
+- The project has `start` and a supported PostgreSQL driver installed (`pg`, `postgres`, or `@neondatabase/serverless`).
+- A `.env` file is present or has been created with a `DATABASE_URL` key.
 - For the `pg` driver, ensure the client connection is properly released in a `finally` block.
 
 ---

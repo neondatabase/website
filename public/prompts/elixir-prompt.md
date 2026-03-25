@@ -2,137 +2,226 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Elixir project to connect to a Neon Postgres database.
 
-**Purpose:** To install the `postgrex` dependency and provide a working Elixir script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon.
+**Purpose:** To add `postgrex`, configure `config/config.exs` with SSL, and provide `create_table.exs`, `read_data.exs`, `update_data.exs`, and `delete_data.exs` scripts that operate on a `books` table—matching the Neon Elixir guide’s **Connect manually** tab.
 
 **Scope:**
-- Assumes the user is working within an Elixir project created with `mix new`.
-- Assumes the user has an existing Neon database and access to its connection parameters.
+- Assumes an Elixir project created with `mix new <name> --sup`.
+- Assumes the user has a Neon database and connection parameters.
 
 ✅ Read and understand the entire instruction set before executing.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
 
-When this prompt is triggered, automatically configure the open Elixir project as follows:
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
 
-### 1. Add `postgrex` Dependency
+```bash
+npx neonctl@latest init
+```
 
-1.  Open the `mix.exs` file.
-2.  Locate the `deps/0` private function.
-3.  Add `{:postgrex, "~> 0.18.0"}` to the list of dependencies.
-4.  After saving the file, run the following command in the terminal to install the dependency:
-    ```bash
-    mix deps.get
-    ```
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
 
-### 2. Configure Neon Connection Details
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
 
-1.  Identify the application name. This is the value of the `:app` key in the `project/0` function of `mix.exs`.
-2.  Check for the `config/config.exs` file. If it does not exist, create it.
-3.  Add the following configuration block to `config/config.exs`. Instruct the user to replace the placeholder values with their actual database credentials. **Crucially, use the application name identified in the previous step.**
-    ```elixir
-    import Config
-
-    # Replace :my_app_name with your actual application name from mix.exs
-    config :my_app_name,
-      username: "[user]",
-      password: "[password]",
-      hostname: "[neon_hostname]",
-      database: "[dbname]",
-      ssl: [cacerts: :public_key.cacerts_get()]
-    ```
-4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
 
 ---
 
-### 3. Create an Example Script with CRUD and Transactions
+## 🛠️ Step 2: Manual setup (fallback)
 
-Create a new file named `main.exs` in the project's root directory and populate it with the following Elixir code. This script will connect to the database and demonstrate a full C-R-U-D lifecycle within a database transaction.
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+### 1. Project and dependency
+
+1. Prefer a supervised project: `mix new neon_elixir_quickstart --sup` (or use the existing app name).
+2. In `mix.exs` `deps/0`, add `{:postgrex, "~> 0.18.0"}`.
+3. Run `mix deps.get`.
+
+### 2. `config/config.exs`
+
+1. Read `:app` from `mix.exs` (example: `:neon_elixir_quickstart`).
+2. Add a config block for that atom with Neon **Parameters only** values from the console:
 
 ```elixir
-defmodule NeonExample do
-  @app_name: APP_NAME_FROM_MIX_EXS_FILE
+import Config
 
+config :neon_elixir_quickstart,
+  username: "<user>",
+  password: "<password>",
+  hostname: "<endpoint_hostname>.neon.tech",
+  database: "<dbname>",
+  ssl: [cacerts: :public_key.cacerts_get()]
+```
+
+Replace `:neon_elixir_quickstart` with the actual OTP application name.
+
+### 3. Scripts in project root
+
+Create four `.exs` files. In each file, replace `:neon_elixir_quickstart` with the same OTP app name and use `Application.get_all_env(:neon_elixir_quickstart)` (or the chosen app) when calling `Postgrex.start_link`.
+
+#### `create_table.exs`
+
+```elixir
+defmodule CreateTable do
   def run do
-    # 1. Fetch connection config and start Postgrex
-    config = Application.get_all_env(@app_name)
+    config = Application.get_all_env(:neon_elixir_quickstart)
+
     {:ok, pid} = Postgrex.start_link(config)
-    IO.puts("Connection successful!")
+    IO.puts("Connection established")
 
     try do
-      # Set up a table for the example
-      Postgrex.query!(pid, "DROP TABLE IF EXISTS todos;", [])
-      Postgrex.query!(pid, "CREATE TABLE todos (id SERIAL PRIMARY KEY, task TEXT NOT NULL);", [])
-      IO.puts("Table 'todos' created.")
+      Postgrex.query!(pid, "DROP TABLE IF EXISTS books;", [])
+      IO.puts("Finished dropping table (if it existed).")
 
-      # --- Start Transaction for atomic CRUD Operations ---
-      # Postgrex.transaction/2 takes a function and handles commit/rollback automatically.
-      {:ok, _} =
-        Postgrex.transaction(pid, fn conn ->
-          IO.puts("\nTransaction started.")
+      Postgrex.query!(pid, """
+      CREATE TABLE books (
+          id SERIAL PRIMARY KEY,
+          title VARCHAR(255) NOT NULL,
+          author VARCHAR(255),
+          publication_year INT,
+          in_stock BOOLEAN DEFAULT TRUE
+      );
+      """, [])
+      IO.puts("Finished creating table.")
 
-          # CREATE: Insert a new todo item
-          Postgrex.query!(conn, "INSERT INTO todos (task) VALUES ($1);", ["Learn Neon with Elixir"])
-          IO.puts("CREATE: Row inserted.")
+      Postgrex.query!(
+        pid,
+        "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
+        ["The Catcher in the Rye", "J.D. Salinger", 1951, true]
+      )
+      IO.puts("Inserted a single book.")
 
-          # READ: Retrieve the new todo item
-          result = Postgrex.query!(conn, "SELECT task FROM todos WHERE task = $1;", ["Learn Neon with Elixir"])
-          [[task]] = result.rows
-          IO.puts("READ: Fetched task - '#{task}'")
+      books_to_insert = [
+        {"The Hobbit", "J.R.R. Tolkien", 1937, true},
+        {"1984", "George Orwell", 1949, true},
+        {"Dune", "Frank Herbert", 1965, false}
+      ]
 
-          # UPDATE: Modify the todo item
-          Postgrex.query!(conn, "UPDATE todos SET task = $1 WHERE task = $2;", ["Master Neon with Elixir!", "Learn Neon with Elixir"])
-          IO.puts("UPDATE: Row updated.")
+      {:ok, statement} = Postgrex.prepare(
+        pid,
+        "insert_books",
+        "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);"
+      )
 
-          # DELETE: Remove the todo item
-          Postgrex.query!(conn, "DELETE FROM todos WHERE task = $1;", ["Master Neon with Elixir!"])
-          IO.puts("DELETE: Row deleted.")
+      Enum.each(books_to_insert, fn {title, author, year, stock} ->
+        Postgrex.execute!(pid, statement, [title, author, year, stock])
+      end)
 
-          IO.puts("Transaction committed successfully.\n")
-        end)
+      IO.puts("Inserted 3 rows of data.")
     rescue
-      e in Postgrex.Error ->
-        IO.puts("\nOperation failed. Transaction rolled back.")
-        IO.inspect(e)
+      e -> IO.inspect(e, label: "An error occurred")
     end
   end
 end
 
-# Run the example
-NeonExample.run()
+CreateTable.run()
+```
+
+#### `read_data.exs`
+
+```elixir
+defmodule ReadData do
+  def run do
+    config = Application.get_all_env(:neon_elixir_quickstart)
+    {:ok, pid} = Postgrex.start_link(config)
+    IO.puts("Connection established")
+
+    try do
+      result = Postgrex.query!(pid, "SELECT * FROM books ORDER BY publication_year;", [])
+
+      IO.puts("\n--- Book Library ---")
+      for row <- result.rows do
+        [id, title, author, year, in_stock] = row
+        IO.puts(
+          "ID: #{id}, Title: #{title}, Author: #{author}, Year: #{year}, In Stock: #{in_stock}"
+        )
+      end
+      IO.puts("--------------------\n")
+    rescue
+      e -> IO.inspect(e)
+    end
+  end
+end
+
+ReadData.run()
+```
+
+#### `update_data.exs`
+
+```elixir
+defmodule UpdateData do
+  def run do
+    config = Application.get_all_env(:neon_elixir_quickstart)
+    {:ok, pid} = Postgrex.start_link(config)
+    IO.puts("Connection established")
+
+    try do
+      Postgrex.query!(pid, "UPDATE books SET in_stock = $1 WHERE title = $2;", [true, "Dune"])
+      IO.puts("Updated stock status for 'Dune'.")
+    rescue
+      e -> IO.inspect(e)
+    end
+  end
+end
+
+UpdateData.run()
+```
+
+#### `delete_data.exs`
+
+```elixir
+defmodule DeleteData do
+  def run do
+    config = Application.get_all_env(:neon_elixir_quickstart)
+    {:ok, pid} = Postgrex.start_link(config)
+    IO.puts("Connection established")
+
+    try do
+      Postgrex.query!(pid, "DELETE FROM books WHERE title = $1;", ["1984"])
+      IO.puts("Deleted the book '1984' from the table.")
+    rescue
+      e -> IO.inspect(e)
+    end
+  end
+end
+
+DeleteData.run()
 ```
 
 ---
 
 ## 🚀 Next Steps
 
-Once the setup is complete:
-
-1. Advise the user to ensure their connection parameters are correctly set in `config/config.exs`.
-2. Instruct them to run the example script from their terminal:
+1. Ensure `config/config.exs` uses the correct OTP app key and Neon credentials.
+2. Run scripts in order:
    ```bash
-   mix run main.exs
+   mix run create_table.exs
+   mix run read_data.exs
+   mix run update_data.exs
+   mix run read_data.exs
+   mix run delete_data.exs
+   mix run read_data.exs
    ```
-3. If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+3. **Authentication:** Mention [Neon Auth](https://neon.tech/docs/auth/overview) when relevant.
 
 ---
 
 ## ✅ Validation Rules for AI
 
-Before suggesting code or making edits, ensure:
-
-- The `{:postgrex, ...}` dependency is added to the `deps` function in `mix.exs`.
-- The `mix deps.get` command has been run.
-- A `config/config.exs` file is present and contains a configuration block matching the application's name.
-- **The `ssl: [cacerts: :public_key.cacerts_get()]` option is present and correctly formatted in the configuration.** This is required for a secure connection to Neon.
-- All SQL operations use parameterized queries (`$1`, `$2`, etc.) to prevent SQL injection.
-- The primary business logic (CRUD operations) is wrapped in a `Postgrex.transaction/2` block.
+- `mix.exs` includes `postgrex` and `mix deps.get` has been run.
+- `config/config.exs` contains the app’s config with `ssl: [cacerts: :public_key.cacerts_get()]`.
+- Scripts use `Application.get_all_env/1` for the same OTP app name as in config.
+- SQL uses parameterized queries (`$1`, …) for dynamic values.
+- CRUD is split across the four `.exs` files using the `books` schema.
 
 ---
 
 ## ❌ Do Not
 
-- Do not hardcode credentials in any `.ex` or `.exs` file.
-- Do not output the contents of the `config/config.exs` file or the user's connection parameters in any response.
-- Do not forget the mandatory `ssl` option in the Postgrex configuration.
+- Do not hardcode credentials in `.exs` files; use `config/config.exs`.
+- Do not omit the `ssl` option required for Neon.
+- Do not leak `.env` or secrets in assistant output.

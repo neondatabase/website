@@ -1,89 +1,179 @@
-# 💡 AI Prompt: Connect Astro to Neon Postgres (Serverless Driver)
+# 💡 AI Prompt: Connect Astro to Neon Postgres
 
-**Purpose:** Connect the currently open Astro project to a Neon Postgres database using the `@neondatabase/serverless` driver.
+**Purpose:** Connect the currently open Astro project to a Neon Postgres database using the same client options as the Neon Astro guide: `pg` (node-postgres), `postgres` (postgres.js), or `@neondatabase/serverless`.
 
 **Scope:**
-- Assumes the Astro projects was created via `npm create astro@latest`
-- Assumes the user has an existing Neon database and access to its connection string
-- Must be run inside an open Astro project directory
+- Assumes the Astro project was created via `npm create astro@latest` (or equivalent).
+- Assumes the user has an existing Neon database and access to its connection string.
+- Must be run inside an open Astro project directory.
 
 ✅ Read and understand the entire instruction set before executing
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Astro project as follows:
 
-### 1. Install the Neon serverless driver
+### 1. Install dependencies
 
-Run:
+1. **Prompt the user to select a PostgreSQL driver.** Present the following options (same order as the Neon docs):
 
-```
-npm install @neondatabase/serverless
-```
+   - **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+   - **`postgres` (postgres.js):** A fast, full-featured client for Node.js.
+   - **`@neondatabase/serverless` (Neon serverless driver):** HTTP-based driver suited to serverless and edge-style deployments.
 
----
+   Do not proceed until the user chooses one.
+
+2. Run the matching install:
+
+   ```bash
+   # For pg (node-postgres)
+   npm install pg
+
+   # For postgres (postgres.js)
+   npm install postgres
+
+   # For @neondatabase/serverless (Neon serverless driver)
+   npm install @neondatabase/serverless
+   ```
 
 ### 2. Enable on-demand rendering
 
 Run:
 
+```bash
+npx astro add node
 ```
-npx astro add node --yes
+
+This enables [on-demand rendering](https://docs.astro.build/en/guides/on-demand-rendering/) (SSR) so pages and API routes can query the database at request time. Without it, database access in production may only run at build time.
+
+### 3. Store Neon credentials
+
+- Ensure a `.env` file exists at the project root.
+- Add (or update) `DATABASE_URL` using the user's real values from **Neon Console → Project → Connect**:
+
+  ```dotenv title=".env"
+  DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+  ```
+
+- **Do not hardcode** credentials in application source. Astro loads `.env` automatically; do not require `dotenv` for this.
+
+### 4. Create `src/lib/neon.ts` (or `src/lib/neon.js`)
+
+Centralize the client. **Use the block for the driver chosen in step 1.**
+
+#### Option A: `pg` (node-postgres)
+
+```typescript title="src/lib/neon.ts"
+import { Pool } from 'pg';
+
+export const pool = new Pool({
+  connectionString: import.meta.env.DATABASE_URL,
+  ssl: true
+});
 ```
 
-This enables server-side rendering (SSR) so pages can fetch fresh data on each request. Without this, the database will only be queried at build time.
+#### Option B: `postgres` (postgres.js)
 
----
+```typescript title="src/lib/neon.ts"
+import postgres from 'postgres';
 
-### 3. Create a database utility file
+export const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+```
 
-Create `src/lib/neon.ts` with:
+#### Option C: `@neondatabase/serverless`
 
-```typescript
+```typescript title="src/lib/neon.ts"
 import { neon } from '@neondatabase/serverless';
 
 export const sql = neon(import.meta.env.DATABASE_URL);
 ```
 
-This centralizes your database configuration following best practices.
+### 5. Query from a page (`.astro` frontmatter)
 
+In a page such as `src/pages/index.astro`, query in the frontmatter between `---` fences.
+
+#### Option A: `pg`
+
+```astro
+---
+import { pool } from '../lib/neon';
+
+const client = await pool.connect();
+
+let data = null;
+
+try {
+  const response = await client.query('SELECT version()');
+  data = response.rows[0].version;
+} finally {
+  client.release();
+}
 ---
 
-### 4. Verify that there is an `.env` file
-
-- Check for the presence of a `.env` file at the root of the project.
-- If it doesn't exist, advise the user to create one and add the following line, replacing the connection string with the one copied from their Neon project,
-
-  ```
-  DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
-  ```
-
-- **Do not hardcode** credentials directly in the code.
-- Prompt the user to get their connection string from the **Neon Console → Project → Connect**
-
----
-
-### 5. Update the Astro project to use the Neon driver server-side
-
-#### `.astro` frontmatter
-
+{data}
 ```
+
+#### Option B: `postgres` or Option C: `@neondatabase/serverless` (both use exported `sql`)
+
+```astro
+---
 import { sql } from '../lib/neon';
 
 const response = await sql`SELECT version()`;
 const data = response[0].version;
+---
+
+{data}
 ```
 
-```
-<h1>Postgres version:</h1>
-<p>{data}</p>
+You may add markup around `{data}` (for example a heading) as long as the import and query pattern matches the guide.
+
+### 6. Optional: API route `src/pages/api/index.ts`
+
+#### Option A: `pg`
+
+```typescript title="src/pages/api/index.ts"
+import { pool } from '../../lib/neon';
+
+export async function GET() {
+  const client = await pool.connect();
+  let data = {};
+  try {
+    const { rows } = await client.query('SELECT version()');
+    data = rows[0];
+  } finally {
+    client.release();
+  }
+  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
+}
 ```
 
-#### API route (`src/pages/api/index.ts`)
+#### Option B / C: `postgres` or `@neondatabase/serverless`
 
-```
+```typescript title="src/pages/api/index.ts"
 import { sql } from '../../lib/neon';
 
 export async function GET() {
@@ -98,18 +188,18 @@ export async function GET() {
 
 Once setup is complete:
 
-1. Advise the user to start that Astro dev server:
+1. Advise the user to run the Astro dev server:
 
-  ```
+   ```bash
    npm run dev
-  ```
+   ```
 
-2. To test the app, open the browser and visit:
+2. **Run the app:** when you run `npm run dev`, you can expect to see the Postgres version string on `localhost:4321` (page) or `localhost:4321/api` (API route):
 
-   - `http://localhost:4321` to test `.astro` output
-   - `http://localhost:4321/api` to test API route
+   - `http://localhost:4321` for the `.astro` page output
+   - `http://localhost:4321/api` for the API route JSON
 
-You should see the Postgres version returned by your Neon database.
+3. **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
@@ -117,23 +207,22 @@ You should see the Postgres version returned by your Neon database.
 
 Before suggesting code or making edits, ensure:
 
-- The `@neondatabase/serverless` package is used exclusively
-- The Node.js adapter is installed (`npx astro add node`)
-- A `src/lib/neon.ts` utility file is created and exports the `sql` function
-- Code imports from the utility file (`import { sql } from '../lib/neon'`), not inline initialization
-- Queries are server-side only (not in client JS or components)
-- The connection string is loaded from `import.meta.env.DATABASE_URL`
-- A `.env` file is present or has been created
-- No use of `dotenv` (Astro loads `.env` automatically)
+- Exactly one of `pg`, `postgres`, or `@neondatabase/serverless` is installed and used consistently in the utility file, page, and API route.
+- The Node adapter is added (`npx astro add node`) so on-demand rendering works in production.
+- A `src/lib/neon` utility exists: either `export const pool` (pg) or `export const sql` (postgres.js / Neon serverless).
+- Page and API code import from that utility; queries run server-side only (frontmatter or `GET` handler), not in client-side scripts.
+- The connection string is read via `import.meta.env.DATABASE_URL`.
+- A `.env` file is present or created with `DATABASE_URL` in the canonical Neon format (placeholders until the user pastes a real string).
+- Do not suggest installing or configuring `dotenv` for Astro's built-in env loading.
 
 ---
 
 ## ❌ Do Not
 
-- Do not use `pg`, `postgres.js`, or any other Postgres client
-- Do not hardcode credentials
-- Do not run database code on the client
-- Do not suggest installing or configuring `dotenv`
+- Do not mix two different drivers in the same code path.
+- Do not hardcode credentials.
+- Do not run database code in client-only Astro islands without a server endpoint.
+- Do not output the user's connection string in logs or assistant replies.
 
 ---
 

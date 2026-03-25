@@ -2,196 +2,188 @@
 
 **Role:** You are an expert software agent specializing in .NET and Entity Framework. Your task is to configure the current .NET project to connect to a Neon Postgres database.
 
-**Purpose:** To install the required NuGet packages, configure an Entity Framework `DbContext`, and provide a working C# code example that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management using EF Core.
+**Purpose:** To scaffold an ASP.NET Core Web API with Entity Framework Core and Npgsql as in the manual guide: `Todo` model, `ApplicationDbContext`, `TodoController`, `appsettings.json` connection string, `Program.cs` wiring, and EF migrations.
 
 **Scope:**
-- Assumes the user has an open .NET project (e.g., a Console App created via `dotnet new console`).
-- Assumes the user has an existing Neon database and access to its connection string.
+- Prefer an ASP.NET Core Web API project (`dotnet new webapi`) as in the guide; assumes the user has an existing Neon database and access to its connection string.
+- Package versions must match the project's .NET SDK (`dotnet --version`).
 
 ✅ Read and understand the entire instruction set before executing.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
 
-When this prompt is triggered, automatically configure the open .NET project as follows:
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
 
-### 1. Install Required NuGet Packages and Tools
-
-1.  Run the following `dotnet` CLI commands to add the necessary packages to the project:
-
-    ```bash
-    dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL && \
-    dotnet add package Microsoft.EntityFrameworkCore.Design && \
-    dotnet add package Microsoft.Extensions.Configuration.Json && \
-    dotnet add package Microsoft.Extensions.Configuration.Binder
-    ```
-
-2.  Ensure the EF Core command-line tool is installed globally. If not, install it.
-
-    ```bash
-    dotnet tool install --global dotnet-ef
-    ```
-
----
-
-### 2. Verify the `appsettings.json` File
-
-- Check for the presence of an `appsettings.json` file at the root of the project.
-- If it doesn't exist, create one and add the following JSON structure. Advise the user to replace the placeholder with their connection string copied from the Neon project.
-
-  ```json
-  {
-    "ConnectionStrings": {
-      "DefaultConnection": "Host=<hostname>;Database=<dbname>;Username=<user>;Password=<password>;SSL Mode=Require;Channel Binding=Require"
-    }
-  }
-  ```
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**, making sure to select **.NET** from the dropdown.
-
----
-
-### 3. Create the Design-Time DbContext Factory
-
-Create a new file named `ApplicationDbContextFactory.cs` at the root of the project. This factory class is necessary for EF Core tools to create the `DbContext` at design time.
-
-#### C# Code for `ApplicationDbContextFactory.cs`:
-
-```csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-
-public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
-{
-    public ApplicationDbContext CreateDbContext(string[] args)
-    {
-        var config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
-
-        var connectionString = config.GetConnectionString("DefaultConnection");
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseNpgsql(connectionString);
-
-        return new ApplicationDbContext(optionsBuilder.Options);
-    }
-}
+```bash
+npx neonctl@latest init
 ```
 
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
 ---
 
-### 4. Update `Program.cs` with a Full CRUD and Transaction Example
+## 🛠️ Step 2: Manual setup (fallback)
 
-Modify the `Program.cs` file to include all necessary code for a self-contained EF Core example. This includes the model, the `DbContext`, and the main execution logic.
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
-- **If `Program.cs` contains only the default template code** (e.g., `Console.WriteLine("Hello, World!");`), replace the entire file content with the C# code block below.
-- **If `Program.cs` contains custom user code, preserve it**. Comment out the existing code with a note like `// Existing code commented out to add Neon EF Core example` and append the new C# code block.
+When this prompt is triggered, configure the project to match the **Connect manually** Entity Framework guide.
 
-#### C# Code to Add:
+### 1. Create or align the Web API project and install packages
 
-```csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+1. If starting fresh, create the project and remove unused template files:
 
-// --- 1. Define the Data Model ---
-public class Todo
-{
-    public int Id { get; set; }
-    public required string Task { get; set; }
-    public bool IsComplete { get; set; } = false;
-}
+   ```bash
+   dotnet new webapi -n NeonEfExample
+   cd NeonEfExample
+   rm WeatherForecast.cs Controllers/WeatherForecastController.cs
+   ```
 
-// --- 2. Define the EF Core DbContext ---
-public class ApplicationDbContext : DbContext
-{
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
-    public DbSet<Todo> Todos => Set<Todo>();
-}
+2. Install the EF Core global tool and packages. **Use a package version that matches the project's .NET version** (run `dotnet --version` and substitute for `YOUR_DOTNET_VERSION`):
 
-// --- 3. Main Application Logic ---
-public class Program
-{
-    public static async Task Main(string[] args)
-    {
-        // Build configuration to read from appsettings.json
-        var config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
+   ```bash
+   dotnet tool install --global dotnet-ef --version YOUR_DOTNET_VERSION
+   dotnet add package Microsoft.EntityFrameworkCore.Design --version YOUR_DOTNET_VERSION
+   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version YOUR_DOTNET_VERSION
+   ```
 
-        var connectionString = config.GetConnectionString("DefaultConnection");
-        if (string.IsNullOrEmpty(connectionString))
-        {
-            Console.WriteLine("Connection string 'DefaultConnection' not found in appsettings.json.");
-            return;
-        }
+---
 
-        // Configure DbContext options
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseNpgsql(connectionString);
+### 2. Add the model, DbContext, controller, and configuration
 
-        // Instantiate and use the context
-        await using var context = new ApplicationDbContext(optionsBuilder.Options);
+1. **`Models/Todo.cs`**
 
-        try
-        {
-            // Apply any pending migrations automatically on startup
-            await context.Database.MigrateAsync();
-            Console.WriteLine("Database connection successful and migrations applied.");
+   ```csharp
+   namespace NeonEfExample.Models
+   {
+       public class Todo
+       {
+           public int Id { get; set; }
+           public string? Title { get; set; }
+           public bool IsComplete { get; set; }
+       }
+   }
+   ```
 
-            // Start a transaction for atomic CRUD operations
-            await using var transaction = await context.Database.BeginTransactionAsync();
-            Console.WriteLine("\n--- Transaction Started ---");
+2. **`Data/ApplicationDbContext.cs`**
 
-            try
-            {
-                // CREATE: Add a new todo item
-                Console.WriteLine("\n[CREATE] Inserting a new todo...");
-                var newTodo = new Todo { Task = "Learn Neon with EF Core" };
-                context.Todos.Add(newTodo);
-                await context.SaveChangesAsync();
-                Console.WriteLine($"Inserted: Id = {newTodo.Id}, Task = '{newTodo.Task}'");
+   ```csharp
+   using Microsoft.EntityFrameworkCore;
+   using NeonEfExample.Models;
 
-                // READ: Retrieve the new todo item
-                Console.WriteLine("\n[READ] Fetching the new todo by ID...");
-                var fetchedTodo = await context.Todos.FindAsync(newTodo.Id);
-                Console.WriteLine($"Fetched: Id = {fetchedTodo!.Id}, Task = '{fetchedTodo.Task}'");
+   namespace NeonEfExample.Data
+   {
+       public class ApplicationDbContext : DbContext
+       {
+           public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+               : base(options)
+           {
+           }
 
-                // UPDATE: Mark the todo as complete
-                Console.WriteLine("\n[UPDATE] Marking the todo as complete...");
-                fetchedTodo.IsComplete = true;
-                fetchedTodo.Task = "Master Neon with EF Core!";
-                await context.SaveChangesAsync();
-                Console.WriteLine($"Updated: Id = {fetchedTodo.Id}, Task = '{fetchedTodo.Task}', IsComplete = {fetchedTodo.IsComplete}");
+           public DbSet<Todo> Todos => Set<Todo>();
+       }
+   }
+   ```
 
-                // DELETE: Remove the todo item
-                Console.WriteLine("\n[DELETE] Deleting the todo...");
-                context.Todos.Remove(fetchedTodo);
-                await context.SaveChangesAsync();
-                Console.WriteLine($"Deleted todo with Id = {fetchedTodo.Id}.");
+3. **`appsettings.json` / `appsettings.Development.json`** — add (or merge) a connection string named **`TodoDbConnection`**:
 
-                // Commit the transaction
-                await transaction.CommitAsync();
-                Console.WriteLine("\n--- Transaction Committed Successfully ---\n");
-            }
-            catch (Exception ex)
-            {
-                // Rollback the transaction on error
-                Console.WriteLine("\n--- Rolling back transaction due to an error ---");
-                await transaction.RollbackAsync();
-                Console.WriteLine($"Error: {ex.Message}");
-                throw;
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("\nOperation failed.");
-            Console.WriteLine(e.Message);
-        }
-    }
-}
+   ```json
+   {
+     "ConnectionStrings": {
+       "TodoDbConnection": "Host=your-neon-host;Database=your-db;Username=your-username;Password=your-password;SSL Mode=Require"
+     }
+   }
+   ```
+
+   Prompt the user to copy values from **Neon Console → Project → Dashboard → Connect** (**.NET**).
+
+4. **`Controllers/TodoController.cs`**
+
+   ```csharp
+   using Microsoft.AspNetCore.Mvc;
+   using Microsoft.EntityFrameworkCore;
+   using NeonEfExample.Data;
+   using NeonEfExample.Models;
+
+   namespace NeonEfExample.Controllers
+   {
+       [ApiController]
+       [Route("api/[controller]")]
+       public class TodoController : ControllerBase
+       {
+           private readonly ApplicationDbContext _context;
+
+           public TodoController(ApplicationDbContext context)
+           {
+               _context = context;
+           }
+
+           [HttpGet]
+           public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
+           {
+               return await _context.Todos.ToListAsync();
+           }
+
+           [HttpPost]
+           public async Task<ActionResult<Todo>> PostTodo(Todo todo)
+           {
+               _context.Todos.Add(todo);
+               await _context.SaveChangesAsync();
+               return CreatedAtAction(nameof(GetTodos), new { id = todo.Id }, todo);
+           }
+       }
+   }
+   ```
+
+5. **`Program.cs`** — align with the guide (register DbContext with **`TodoDbConnection`**, Swagger, dev URL on port 5001):
+
+   ```csharp
+   using Microsoft.EntityFrameworkCore;
+   using NeonEfExample.Data;
+
+   var builder = WebApplication.CreateBuilder(args);
+
+   builder.Services.AddControllers();
+
+   builder.Services.AddDbContext<ApplicationDbContext>(options =>
+       options.UseNpgsql(builder.Configuration.GetConnectionString("TodoDbConnection")));
+
+   builder.Services.AddEndpointsApiExplorer();
+   builder.Services.AddSwaggerGen();
+
+   var app = builder.Build();
+
+   app.UseSwagger();
+   app.UseSwaggerUI();
+   app.UseAuthorization();
+   app.MapControllers();
+
+   if (app.Environment.IsDevelopment())
+   {
+       app.Run("http://localhost:5001");
+   }
+   else
+   {
+       app.UseHttpsRedirection();
+       app.Run();
+   }
+   ```
+
+---
+
+### 3. Create and apply the initial migration
+
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
 ```
 
 ---
@@ -200,30 +192,27 @@ public class Program
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their `DefaultConnection` in the `appsettings.json` file. Do not proceed if placeholder values are still present.
-2.  Create the initial database migration. This file tells EF Core how to create the database schema.
-    ```bash
-    dotnet ef migrations add InitialCreate
-    ```
-3.  Run the application. The code is configured to automatically apply the migration to the database.
-    ```bash
-    dotnet run
-    ```
-4.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+1. Verify `TodoDbConnection` in `appsettings.json` (or `appsettings.Development.json`) has real Neon values, not placeholders.
+2. Run the API:
+
+   ```bash
+   dotnet run
+   ```
+
+3. Open [`http://localhost:5001/swagger`](http://localhost:5001/swagger) and use Swagger to create and list Todo items.
+4. **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The `Npgsql.EntityFrameworkCore.PostgreSQL` and `Microsoft.EntityFrameworkCore.Design` packages are added.
-- An `ApplicationDbContextFactory.cs` file exists and its class implements `IDesignTimeDbContextFactory<ApplicationDbContext>`.
-- An `appsettings.json` file is present or has been created and added to `.gitignore` (if applicable).
-- The connection string is loaded from configuration, not hardcoded.
-- A class inheriting from `DbContext` is defined and correctly configured with `UseNpgsql`.
-- **Database persistence is handled via `SaveChangesAsync()`**.
-- **The primary business logic (CRUD operations) is wrapped in an EF Core transaction block** (`context.Database.BeginTransactionAsync`, `CommitAsync`, `RollbackAsync`).
-- The example code includes a call to `context.Database.MigrateAsync()` to automatically set up the schema.
+- `Microsoft.EntityFrameworkCore.Design` and `Npgsql.EntityFrameworkCore.PostgreSQL` are added with versions matching the project's .NET SDK.
+- The global `dotnet-ef` tool is installed with a version compatible with that SDK.
+- `appsettings` defines **`TodoDbConnection`** and `Program.cs` uses the same name with `UseNpgsql`.
+- `ApplicationDbContext`, `Todo` model, and `TodoController` match the guide patterns.
+- Migrations are created with `dotnet ef migrations add InitialCreate` and applied with `dotnet ef database update`.
+- The connection string is not hardcoded in `.cs` files.
 
 ---
 

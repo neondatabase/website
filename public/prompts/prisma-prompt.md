@@ -13,7 +13,31 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+### Instructions (for AI-enabled editors)
 
 When this prompt is triggered, automatically configure the open TypeScript/Node.js project as follows:
 
@@ -60,7 +84,7 @@ DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[db
 
 ### 4. Configure prisma.config.ts
 
-Create a `prisma.config.ts` file in the project root. This is required for Prisma 7+ to configure the CLI:
+Create a `prisma.config.ts` file in the project root. This tells Prisma CLI where to connect for migrations and other commands (required for Prisma 7+):
 
 ```typescript title="prisma.config.ts"
 import 'dotenv/config'
@@ -76,7 +100,7 @@ export default defineConfig({
 
 ### 5. Update Prisma Schema
 
-Update `prisma/schema.prisma`. **Important:** In Prisma 7+, do NOT include a `url` property in the datasource block:
+Update `prisma/schema.prisma`. **Important:** In Prisma 7+, do not include a `url` property in the `datasource` block. The connection is configured via `prisma.config.ts` (CLI) and the adapter (runtime).
 
 ```prisma title="prisma/schema.prisma"
 generator client {
@@ -98,15 +122,15 @@ model User {
 
 ### 6. Create Prisma Client with Neon Adapter
 
-Create `src/db.ts` to instantiate Prisma Client with the Neon serverless driver:
+Create `src/db.ts` to instantiate Prisma Client with the Neon adapter (for example):
 
 ```typescript title="src/db.ts"
 import 'dotenv/config'
 import { PrismaClient } from './generated/prisma'
 import { PrismaNeon } from '@prisma/adapter-neon'
 
-const adapter = new PrismaNeon({ 
-  connectionString: process.env.DATABASE_URL! 
+const adapter = new PrismaNeon({
+  connectionString: process.env.DATABASE_URL!,
 })
 
 export const prisma = new PrismaClient({ adapter })
@@ -176,6 +200,7 @@ Once the setup is complete:
     npx tsx src/main.ts
     ```
 5.  If successful, the output should show log messages for each C-R-U-D step.
+6.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Role:** You are an expert software agent specializing in TypeScript and the Nuxt.js framework. Your task is to configure the current Nuxt.js project to connect to a Neon Postgres database.
 
-**Purpose:** To connect the current Nuxt.js project to Neon Postgres by installing a database driver, securely configuring environment variables via runtime config, creating a server-only database module, and implementing both a server-rendered page and an API route to validate the connection.
+**Purpose:** To connect the current Nuxt.js project to Neon Postgres by installing a database driver, wiring `NUXT_DATABASE_URL` through `runtimeConfig`, and adding a server API route that runs `SELECT version()` (using `defineCachedEventHandler` for `@neondatabase/serverless`, as in the Neon Nuxt guide).
 
 **Scope:**
 - Must be run inside an existing Nuxt.js project directory.
@@ -25,7 +25,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Nuxt.js project as follows:
 
@@ -54,128 +75,108 @@ When this prompt is triggered, automatically configure the open Nuxt.js project 
 
 ---
 
-### 2. Configure Environment Variables
+### 2. Configure Environment Variables and Runtime Config
 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `NUXT_DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+2.  Add `NUXT_DATABASE_URL` and **prompt the user to replace the placeholder** with their connection string from Neon.
 
     ```dotenv title=".env"
-    NUXT_DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    NUXT_DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
-4.  **Update the Nuxt configuration** to expose the environment variable securely to the server side. Open `nuxt.config.ts` and add the `runtimeConfig` block:
+4.  **Update Nuxt configuration** so server code reads `databaseUrl` from runtime config, matching the Neon Nuxt guide:
 
     ```typescript title="nuxt.config.ts"
     export default defineNuxtConfig({
-      // Other config...
       runtimeConfig: {
-        databaseUrl: process.env.NUXT_DATABASE_URL,
+        databaseUrl: '',
       },
-    })
+    });
     ```
+
+    At runtime, Nuxt overlays this with the `NUXT_DATABASE_URL` value from the environment (including `.env` during `npm run dev`).
 
 ---
 
-### 3. Create a Centralized Database Module
+### 3. Server API route: `SELECT version()`
 
-To manage the database connection according to Nuxt conventions, create a server-only utility file.
+Create `server/api/version.get.ts` using the pattern for the selected driver.
 
-1.  Ensure the `server/utils/` directory exists. If not, create it.
-2.  Create a new file at `server/utils/db.ts`.
-3.  **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export the database client.
+#### Option A: Using `@neondatabase/serverless` (`defineCachedEventHandler`, as in the guide)
 
-    #### Option A: Using `@neondatabase/serverless`
+```typescript title="server/api/version.get.ts"
+import { neon } from '@neondatabase/serverless';
 
-    ```typescript title="server/utils/db.ts"
-    import { neon } from '@neondatabase/serverless';
+export default defineCachedEventHandler(
+  async () => {
+    const { databaseUrl } = useRuntimeConfig();
+    const db = neon(databaseUrl);
+    const result = await db`SELECT version()`;
+    return result;
+  },
+  {
+    maxAge: 60 * 60 * 24, // cache for a day; adjust as needed
+  },
+);
+```
 
-    const config = useRuntimeConfig();
-    export const sql = neon(config.databaseUrl);
-    ```
+#### Option B: Using `postgres` (postgres.js)
 
-    #### Option B: Using `postgres` (postgres.js)
+```typescript title="server/api/version.get.ts"
+import postgres from 'postgres';
 
-    ```typescript title="server/utils/db.ts"
-    import postgres from 'postgres';
+export default defineEventHandler(async () => {
+  const { databaseUrl } = useRuntimeConfig();
+  const sql = postgres(databaseUrl, { ssl: 'require' });
+  return await sql`SELECT version()`;
+});
+```
 
-    const config = useRuntimeConfig();
-    export const sql = postgres(config.databaseUrl);
-    ```
+#### Option C: Using `pg` (node-postgres)
 
-    #### Option C: Using `pg` (node-postgres)
+```typescript title="server/api/version.get.ts"
+import { Pool } from 'pg';
 
-    ```typescript title="server/utils/db.ts"
-    import { Pool } from 'pg';
-
-    const config = useRuntimeConfig();
-    export const pool = new Pool({
-      connectionString: config.databaseUrl,
-    });
-    ```
+export default defineEventHandler(async () => {
+  const { databaseUrl } = useRuntimeConfig();
+  const pool = new Pool({
+    connectionString: databaseUrl,
+    ssl: true,
+  });
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query('SELECT version()');
+    return rows;
+  } finally {
+    client.release();
+  }
+});
+```
 
 ---
 
-### 4. Create Examples to Test the Connection
+### 4. Optional: Show the version on the home page
 
-Implement an API route to fetch data and a page to display it.
+The Neon serverless example returns an array of rows from `` db`SELECT version()` ``. You can use `useFetch('/api/version')` and read the first row’s `version` field.
 
-#### 4.A: Create an API Route
-
-1.  Create a new file at `server/api/version.get.ts`.
-2.  Populate it with the code corresponding to the driver selected in Step 1.
-
-    ##### Option A & B: For `@neondatabase/serverless` or `postgres`
-
-    ```typescript title="server/api/version.get.ts"
-    import { sql } from '../utils/db';
-
-    export default defineEventHandler(async () => {
-      const result = await sql`SELECT version()`;
-      return result[0];
-    });
-    ```
-
-    ##### Option C: For `pg` (node-postgres)
-
-    ```typescript title="server/api/version.get.ts"
-    import { pool } from '../utils/db';
-
-    export default defineEventHandler(async () => {
-      const client = await pool.connect();
-      try {
-        const { rows } = await client.query('SELECT version()');
-        return rows[0];
-      } finally {
-        client.release();
-      }
-    });
-    ```
-
-#### 4.B: Create a Page to Display the Data
-
-Modify the main page to fetch data from the new API route.
-**Replace the contents of `app/app.vue`** with the following code. This component is driver-agnostic.
-
-```vue title="app/app.vue"
+```vue title="app.vue"
 <script setup lang="ts">
-const { data, error } = await useFetch('/api/version');
+const { data } = await useFetch('/api/version');
+const version = computed(() => {
+  const row = Array.isArray(data.value) ? data.value[0] : null;
+  return row && typeof row === 'object' && 'version' in row ? (row as { version: string }).version : '';
+});
 </script>
 
 <template>
   <main>
-    <h1>Nuxt.js + Neon</h1>
-    <div v-if="data">
-      <p>Successfully connected to Postgres. Version:</p>
-      <pre>{{ data.version }}</pre>
-    </div>
-    <div v-else-if="error">
-      <p>Failed to connect:</p>
-      <pre>{{ error.message }}</pre>
-    </div>
+    <pre v-if="version">{{ version }}</pre>
   </main>
 </template>
 ```
+
+Use `app.vue`, `pages/index.vue`, or your project’s root page path as appropriate.
 
 ---
 
@@ -188,20 +189,20 @@ Once the file modifications are complete:
     ```bash
     npm run dev
     ```
-3.  Inform the user that the setup is complete. To test the connection, they can:
-    *   Visit `http://localhost:3000` to see the server-rendered page displaying the PostgreSQL version.
-    *   Visit `http://localhost:3000/api/version` to see a JSON response from the API route.
+3.  Inform the user that the setup is complete. They can open `http://localhost:3000/api/version` for the JSON from `SELECT version()`, and the home page (if updated) to see the version text, consistent with the Neon Nuxt guide.
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The project has `nuxt`, and a supported PostgreSQL driver installed.
-- A `.env` file is present or has been created with a `NUXT_DATABASE_URL` key.
-- `nuxt.config.ts` correctly defines a `runtimeConfig.databaseUrl`.
-- A server utility exists at `server/utils/db.ts` and correctly uses `useRuntimeConfig`.
-- An API route exists at `server/api/version.get.ts` and uses the database client.
+- The project has `nuxt` and a supported PostgreSQL driver installed (`@neondatabase/serverless`, `postgres`, or `pg`).
+- A `.env` file defines `NUXT_DATABASE_URL` with the placeholder connection string format from the guide.
+- `nuxt.config.ts` sets `runtimeConfig.databaseUrl` to `''` (or equivalent) so `NUXT_DATABASE_URL` can populate it at runtime.
+- For `@neondatabase/serverless`, `server/api/version.get.ts` uses `defineCachedEventHandler`, `neon(databaseUrl)`, and `` db`SELECT version()` `` with an intentional `maxAge`.
+- For `postgres` (postgres.js), the handler uses `{ ssl: 'require' }`.
+- For `pg` (node-postgres), the handler uses `ssl: true` on the pool and releases the client in `finally`.
 
 ---
 

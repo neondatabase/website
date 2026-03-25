@@ -4,11 +4,6 @@
 
 **Purpose:** To connect the current Next.js project to Neon Postgres by installing a database driver, configuring environment variables, creating a centralized database module, and implementing examples for Server Components, Server Actions, and API Routes.
 
-**Scope:**
-- Must be run inside an existing Next.js App Router project directory.
-- Assumes the user has a Neon project and access to their full connection string.
-- All modifications will follow Next.js conventions for server-side logic, environment variables, and data handling.
-
 ✅ Read and understand the entire instruction set before executing.
 
 ---
@@ -16,7 +11,7 @@
 ## 📋 Prerequisites
 
 - This prompt must be run inside an existing Next.js project directory. Do not proceed if no Next.js project is detected. You can identify a Next.js project by the presence of `next` in the `dependencies` section of `package.json`.
-- **Setup for New Projects:** If the user does not have a nextjs project yet, run the following command to create one:
+- **Setup for New Projects:** If the user does not have a Next.js project yet, run the following command to create one:
 
   ```bash
   npx create-next-app@latest my-nextjs-app --yes
@@ -24,9 +19,30 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
 
-When this prompt is triggered, automatically configure the open Next.js project as follows:
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+Configure the open Next.js project as follows:
 
 ### 1. Install Dependencies
 
@@ -55,11 +71,11 @@ When this prompt is triggered, automatically configure the open Next.js project 
 
 ### 2. Configure Environment Variables
 
-1.  Check for the presence of a `.env.local` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env.local` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
-    ```dotenv title=".env.local"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    ```dotenv title=".env"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
@@ -85,14 +101,17 @@ To manage the database connection efficiently and prevent exposing credentials, 
 
     ```typescript title="app/lib/db.ts"
     import postgres from 'postgres';
-    export const sql = postgres(process.env.DATABASE_URL!);
+    export const sql = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
     ```
 
     #### Option C: Using `pg` (node-postgres)
 
     ```typescript title="app/lib/db.ts"
     import { Pool } from 'pg';
-    export const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+    export const pool = new Pool({
+      connectionString: process.env.DATABASE_URL!,
+      ssl: true,
+    });
     ```
 
 ---
@@ -115,19 +134,14 @@ import { sql } from '@/app/lib/db';
 
 export const dynamic = 'force-dynamic';
 
-async function getDbVersion() {
-  const result = await sql`SELECT version()`;
-  return result[0].version as string;
+async function getData() {
+  const response = await sql`SELECT version()`;
+  return response[0].version as string;
 }
 
-export default async function Home() {
-  const version = await getDbVersion();
-  return (
-    <main>
-      <h1>Next.js + Neon</h1>
-      <p>PostgreSQL Version: {version}</p>
-    </main>
-  );
+export default async function Page() {
+  const data = await getData();
+  return <>{data}</>;
 }
 ```
 
@@ -138,7 +152,7 @@ import { pool } from '@/app/lib/db';
 
 export const dynamic = 'force-dynamic';
 
-async function getDbVersion() {
+async function getData() {
   const client = await pool.connect();
   try {
     const { rows } = await client.query('SELECT version()');
@@ -148,14 +162,9 @@ async function getDbVersion() {
   }
 }
 
-export default async function Home() {
-  const version = await getDbVersion();
-  return (
-    <main>
-      <h1>Next.js + Neon</h1>
-      <p>PostgreSQL Version: {version}</p>
-    </main>
-  );
+export default async function Page() {
+  const data = await getData();
+  return <>{data}</>;
 }
 ```
 
@@ -168,36 +177,20 @@ Create a new page with a form that uses a Server Action to insert data.
 
 ```tsx title="app/action/page.tsx"
 import { sql } from '@/app/lib/db';
-import { revalidatePath } from 'next/cache';
 
-export default async function ActionPage() {
-  async function createComment(formData: FormData) {
+export default async function Page() {
+  async function create(formData: FormData) {
     'use server';
-    const comment = formData.get('comment') as string;
+    await sql`CREATE TABLE IF NOT EXISTS comments (comment TEXT)`;
+    const comment = formData.get('comment');
     await sql`INSERT INTO comments (comment) VALUES (${comment})`;
-    revalidatePath('/action');
-  }
-
-  async function getComments() {
-    await sql`CREATE TABLE IF NOT EXISTS comments (id SERIAL PRIMARY KEY, comment TEXT)`;
-    const comments = await sql`SELECT * FROM comments`;
-    return comments;
   }
 
   return (
-    <div>
-      <h2>Server Action Example</h2>
-      <form action={createComment}>
-        <input type="text" name="comment" placeholder="Add a comment" />
-        <button type="submit">Submit</button>
-      </form>
-      <h3>Comments:</h3>
-      <ul>
-        {await getComments().then((comments) =>
-          comments.map((c: any) => <li key={c.id}>{c.comment}</li>)
-        )}
-      </ul>
-    </div>
+    <form action={create}>
+      <input type="text" placeholder="write a comment" name="comment" />
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 ```
@@ -206,46 +199,25 @@ export default async function ActionPage() {
 
 ```tsx title="app/action/page.tsx"
 import { pool } from '@/app/lib/db';
-import { revalidatePath } from 'next/cache';
 
-export default async function ActionPage() {
-  async function createComment(formData: FormData) {
+export default async function Page() {
+  async function create(formData: FormData) {
     'use server';
-    const comment = formData.get('comment') as string;
     const client = await pool.connect();
     try {
+      await client.query('CREATE TABLE IF NOT EXISTS comments (comment TEXT)');
+      const comment = formData.get('comment');
       await client.query('INSERT INTO comments (comment) VALUES ($1)', [comment]);
-    } finally {
-      client.release();
-    }
-    revalidatePath('/action');
-  }
-
-  async function getComments() {
-    const client = await pool.connect();
-    try {
-      await client.query('CREATE TABLE IF NOT EXISTS comments (id SERIAL PRIMARY KEY, comment TEXT)');
-      const res = await client.query('SELECT * FROM comments');
-      return res.rows;
     } finally {
       client.release();
     }
   }
 
   return (
-    <div>
-      <h2>Server Action Example</h2>
-      <form action={createComment}>
-        <input type="text" name="comment" placeholder="Add a comment" />
-        <button type="submit">Submit</button>
-      </form>
-      <h3>Comments:</h3>
-      <ul>
-        {await getComments().then((comments) =>
-          comments.map((c: any) => <li key={c.id}>{c.comment}</li>)
-        )}
-      </ul>
-    </div>
+    <form action={create}>
+      <input type="text" placeholder="write a comment" name="comment" />
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 ```
@@ -262,8 +234,9 @@ import { sql } from '@/app/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const result = await sql`SELECT version()`;
-  return NextResponse.json(result[0]);
+  const response = await sql`SELECT version()`;
+  const { version } = response[0];
+  return NextResponse.json({ version });
 }
 ```
 
@@ -277,7 +250,8 @@ export async function GET() {
   const client = await pool.connect();
   try {
     const { rows } = await client.query('SELECT version()');
-    return NextResponse.json(rows[0]);
+    const { version } = rows[0];
+    return NextResponse.json({ version });
   } finally {
     client.release();
   }
@@ -290,7 +264,7 @@ export async function GET() {
 
 Once the file modifications are complete:
 
-1.  Verify the user has correctly set their `DATABASE_URL` in the `.env.local` file. Do not proceed if placeholder values are still present.
+1.  Verify the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
 2.  Start the Next.js development server:
     ```bash
     npm run dev
@@ -299,6 +273,7 @@ Once the file modifications are complete:
     *   `http://localhost:3000` to see the **Server Component**.
     *   `http://localhost:3000/action` to test the **Server Action** form.
     *   `http://localhost:3000/api/version` to test the **Serverless API Route**.
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database. For Next.js-specific setup, see the [Neon Auth Next.js quickstart](https://neon.tech/docs/auth/quick-start/nextjs-api-only).
 
 ---
 
@@ -306,10 +281,11 @@ Once the file modifications are complete:
 
 Before suggesting code or making edits, ensure:
 - The project has `next` and a supported PostgreSQL driver installed.
-- A `.env.local` file is present or has been created with a `DATABASE_URL` key.
-- A server-only module exists at `app/lib/db.ts` and exports the database client.
+- A `.env` file is present or has been created with a `DATABASE_URL` key.
+- A server-only module exists at `app/lib/db.ts` and exports the database client (`sql` or `pool`).
 - All server-side code (Server Components, Server Actions, API routes) correctly imports the client from `@/app/lib/db`.
-- For the `pg` driver, ensure the client connection is properly released in a `finally` block.
+- For `pg`, the pool uses `ssl: true`; for `postgres` (postgres.js), the client uses `{ ssl: 'require' }`.
+- For the `pg` driver, ensure the client connection is properly released in a `finally` block where `connect()` is used.
 
 ---
 

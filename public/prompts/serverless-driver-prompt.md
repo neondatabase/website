@@ -29,7 +29,16 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 2. Install Required Packages
+## 2. Neon Auth (if the app needs user authentication)
+
+If the application requires user authentication (signup, login, sessions, social OAuth), Neon includes **Neon Auth** — a managed authentication service stored directly in the Postgres database. It is built on Better Auth and supports branching (auth state copies with database branches for preview environments).
+
+- Run `npx neonctl@latest init` to configure Neon Auth alongside your database setup, or see the [Neon Auth overview](https://neon.com/docs/auth/overview) for manual configuration.
+- If migrating from Supabase Auth, Neon provides a Supabase-compatible client API. See [Migrate from Supabase Auth](https://neon.com/docs/auth/migrate/from-supabase).
+
+---
+
+## 3. Install Required Packages
 
 - Ensure the following packages are installed at the specified versions (or higher, if compatible):
   - `drizzle-orm@0.44.2`
@@ -43,13 +52,13 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 3. Node.js Version Requirement
+## 4. Node.js Version Requirement
 
 - Ensure the project uses Node.js v19 or higher.
 
 ---
 
-## 4. Environment Variable Standardization
+## 5. Environment Variable Standardization
 
 - Search all code, environment files, and deployment configs for any database connection string variable other than `DATABASE_URL` (e.g., `POSTGRES_URL`).
 - Replace all such variables with `DATABASE_URL` in code, `.env` files, and deployment configs.
@@ -57,7 +66,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 5. Update Drizzle ORM and Neon Integration
+## 6. Update Drizzle ORM and Neon Integration
 
 - Search the project for the file(s) where Drizzle ORM is initialized (look for imports from `drizzle-orm`, `@neondatabase/serverless`, or database connection setup).
 - Update the code in those file(s) to use the Neon serverless driver as follows:
@@ -74,7 +83,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 6. Update Migration Runner
+## 7. Update Migration Runner
 
 - Search for migration scripts or files (e.g., those that run Drizzle migrations).
 - Ensure migrations use a Drizzle database object created with the Neon driver, not just `sql`.
@@ -84,7 +93,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 7. Query Usage
+## 8. Query Usage
 
 - Search for all SQL query usage in the codebase.
 - Ensure the `neon` function is used as a template function for SQL queries:
@@ -96,7 +105,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 8. Checklist (Enforce All)
+## 9. Checklist (Enforce All)
 
 - All code, environment files, and deployment configs use `DATABASE_URL` for the connection string.
 - All required packages are at compatible, up-to-date versions.
@@ -111,7 +120,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 9. Run Migrations and Seed Database
+## 10. Run Migrations and Seed Database
 
 - After provisioning a new database, determine if the project defines migration and/or seed scripts (e.g., by checking `package.json`).
 - If such scripts exist, output instructions to the user to run them (e.g., `pnpm db:migrate`, `pnpm db:seed`) to initialize the schema and data.
@@ -119,7 +128,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 - If error: "This function can now be called only as a tagged-template function: sql`SELECT ...`", update all dependencies and ensure correct driver usage.
 - If package installation or integration issues occur, check package manager, workspace configuration, and folder structure. Only output solutions that pass all checklist items. If any check fails, revise the output until full compliance is achieved.

@@ -2,17 +2,38 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Java Maven project to connect to a Neon Postgres database.
 
-**Purpose:** To add the necessary Maven dependencies and provide a working script in Java that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon using the PostgreSQL JDBC driver.
+**Purpose:** To add the PostgreSQL JDBC and `dotenv-java` dependencies and scaffold the same JDBC examples as the manual guide: `CreateTable`, `ReadData`, `UpdateData`, and `DeleteData` under `com.neon.quickstart`, using `DATABASE_URL` from a root `.env` file.
 
 **Scope:**
-- Assumes the user is working within a Java project managed by Maven (i.e., a `pom.xml` file is present).
+- Assumes a Maven project (e.g. `artifactId` `neon-java-jdbc`, `groupId` `com.neon.quickstart` from `mvn archetype:generate` as in the guide), or an equivalent layout with `src/main/java/com/neon/quickstart/`.
 - Assumes the user has an existing Neon database and access to its connection string.
 
 ✅ Read and understand the entire instruction set before executing.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Java project as follows:
 
@@ -154,24 +175,31 @@ public class App {
 
 Once the setup is complete:
 
-1.  Advise the user to ensure their connection string is correctly set in the `.env` file.
-2.  Instruct them to compile and run the application from their terminal. They will need to replace `com.example.neonapp.App` with their project's main class.
-    ```bash
-    mvn compile exec:java -Dexec.mainClass="com.example.neonapp.App"
-    ```
-3.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+1. Ensure `DATABASE_URL` in `.env` is correct.
+2. Run the examples in order (adjust the main class if the package is not `com.neon.quickstart`):
+
+   ```bash
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.CreateTable"
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.UpdateData"
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.DeleteData"
+   mvn exec:java -Dexec.mainClass="com.neon.quickstart.ReadData"
+   ```
+
+3. Compare console output to the guide’s sample output for each step.
+4. **Authentication:** If the app needs user authentication, mention [Neon Auth](https://neon.tech/docs/auth/overview).
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The `pom.xml` file contains the `postgresql` and `dotenv-java` dependencies in the `<dependencies>` section.
-- A `.env` file is present or has been created.
-- The connection string is loaded from the environment, not hardcoded.
-- **All SQL operations (INSERT, UPDATE, DELETE) use `PreparedStatement`** for parameterization to prevent SQL injection. Do not use `Statement` for queries with user-provided data.
-- **The primary business logic (CRUD operations) is wrapped in a transaction block** (`conn.setAutoCommit(false)`, `conn.commit()`, `conn.rollback()`).
-- The JDBC `Connection` and other resources are properly closed, preferably using `try-with-resources` or a `finally` block.
+- The `pom.xml` file contains the `postgresql` (42.7.3) and `dotenv-java` (3.2.0) dependencies in the `<dependencies>` section.
+- A root `.env` file defines `DATABASE_URL` in the JDBC format from the guide.
+- The connection string is loaded via `Dotenv.load()`, not hardcoded in `.java` files.
+- **DDL** in `CreateTable` may use `Statement` as in the guide; **INSERT/UPDATE/DELETE** use **`PreparedStatement`** with bind parameters.
+- Use **`try-with-resources`** for `Connection`, `Statement`, `PreparedStatement`, and `ResultSet` where applicable.
 
 ---
 

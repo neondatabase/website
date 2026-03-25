@@ -2,123 +2,157 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Python project to connect to a Neon Postgres database using SQLAlchemy.
 
-**Purpose:** To correctly set up a virtual environment, install the required dependencies, and provide a working code example for connecting to a Neon Postgres database.
+**Purpose:** To install the Postgres driver and SQLAlchemy, then provide examples aligned with the SQLAlchemy guide’s manual tab: a direct `psycopg2` connection string and an SQLAlchemy `create_engine` URL.
 
 **Scope:**
 - Must be run inside an existing Python project directory.
-- Assumes the user has a Neon project and access to their database connection string.
+- Assumes the user has a Neon project and can copy connection details from the Neon Console.
 - All package installations must occur within an active Python virtual environment.
 
 ✅ Read and understand the entire instruction set before executing.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Python project as follows:
 
 ### 1. Ensure a Virtual Environment is Active
 
-This is a mandatory first step.
-- Check for a virtual environment directory (e.g., `venv`, `.venv`) in the project.
-- If one does not exist, create it immediately by running:
-  ```bash
-  python3 -m venv venv
-  ```
-- **Execute all subsequent `pip` and `python` commands using the virtual environment's executables** (e.g., `venv/bin/python`, `venv/bin/pip`).
+- Check for a virtual environment (e.g., `venv`, `.venv`) in the project root.
+- If one does not exist, create it: `python3 -m venv venv`.
+- Run subsequent `pip` / `python` commands with that environment activated or via `venv/bin/pip` and `venv/bin/python`.
 
 ---
 
 ### 2. Install Dependencies
 
-Install the required Python packages into the virtual environment.
+The guide’s manual tab installs **`psycopg2-binary`** and assumes **SQLAlchemy** is available (see prerequisites in the guide).
 
 ```bash
-venv/bin/pip install SQLAlchemy psycopg2-binary python-dotenv
+pip install SQLAlchemy psycopg2-binary python-dotenv
 ```
-- **`SQLAlchemy`**: The core SQL toolkit and ORM.
-- **`psycopg2-binary`**: The modern, high-performance PostgreSQL driver for Python.
-- **`python-dotenv`**: To load the database connection string from a `.env` file.
+
+Use `python-dotenv` when loading credentials from `.env` (the guide’s code blocks use inline variables; agents should prefer env vars and never commit secrets).
 
 ---
 
-### 3. Configure Environment Variables
+### 3. Connection Details
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the `DATABASE_URL` variable to the `.env` file. **Prompt the user to replace the placeholder value** with their full connection string from the Neon console.
+Users obtain host, user, password, database, and port from **Neon Console → Project → Connect**.
 
-    ```dotenv title=".env"
-    DATABASE_URL="postgresql://<user>:<password>@<host>.neon.tech/<dbname>?sslmode=require"
-    ```
+**Psycopg2 keyword connection string** (same shape as the guide’s “hello neon” example—substitute real values or read from `os.getenv`):
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+```python
+# Example structure from the guide (use env vars in real projects, not literals)
+conn_str = (
+    f"dbname={PROJECT} user={USERNAME} password={PASSWORD} "
+    f"host={HOST} port={PORT} sslmode=require channel_binding=require"
+)
+conn = psycopg2.connect(conn_str)
+```
+
+**SQLAlchemy engine URL** (same pattern as the guide):
+
+```python
+conn_str = (
+    f"postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}"
+    f"?sslmode=require&channel_binding=require"
+)
+engine = create_engine(conn_str)
+```
+
+If using `.env`, define variables such as `PGUSER`, `PGPASSWORD`, `PGHOST`, `PGPORT`, `PGDATABASE` (or a single `DATABASE_URL` that already matches the `postgresql://...?sslmode=require&channel_binding=require` form) and build the strings in code—**do not commit secrets**.
 
 ---
 
-### 4. Create an Example Connection Script
+### 4. Example Script
 
-To provide a clear and testable example, create a new file named `main.py` in the project root with the following content. This script connects to the database, fetches the PostgreSQL version, and prints it to the console.
+Create a small script (e.g. `main.py`) that mirrors the guide: SQLAlchemy engine + a simple query. Prefer `create_engine` + `text()` for SQLAlchemy 2.x style.
 
 ```python title="main.py"
 import os
+
+import psycopg2
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Get the database connection string from the environment
-database_url = os.getenv("DATABASE_URL")
+USERNAME = os.getenv("PGUSER")
+PASSWORD = os.getenv("PGPASSWORD")
+HOST = os.getenv("PGHOST")
+PORT = os.getenv("PGPORT", "5432")
+DATABASE = os.getenv("PGDATABASE")
 
-if not database_url:
-    raise ValueError("DATABASE_URL environment variable is not set.")
+# Optional: quick raw check (guide "hello neon" pattern)
+conn_info = (
+    f"dbname={DATABASE} user={USERNAME} password={PASSWORD} "
+    f"host={HOST} port={PORT} sslmode=require channel_binding=require"
+)
+with psycopg2.connect(conn_info) as conn:
+    with conn.cursor() as cur:
+        cur.execute("SELECT 'hello neon';")
+        print("psycopg2:", cur.fetchall())
 
-try:
-    # Create a SQLAlchemy engine.
-    engine = create_engine(database_url)
+# SQLAlchemy engine (guide pattern)
+url = (
+    f"postgresql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}"
+    f"?sslmode=require&channel_binding=require"
+)
+engine = create_engine(url)
 
-    # Connect to the database and execute a query
-    with engine.connect() as connection:
-        print("Connection to Neon successful!")
-        
-        # Execute a simple query to get the database version
-        result = connection.execute(text("SELECT version();"))
-        db_version = result.scalar_one()
-        
-        print(f"PostgreSQL Version: {db_version}")
-
-except Exception as e:
-    print(f"An error occurred: {e}")
-
+with engine.connect() as connection:
+    result = connection.execute(text("SELECT version();"))
+    print("SQLAlchemy:", result.scalar_one())
 ```
+
+Adjust imports if the project does not use `python-dotenv`; then load configuration the way the app already does.
+
+**Pool / idle compute:** For long-lived apps, mention `pool_pre_ping=True` and `pool_recycle` per the [SQLAlchemy + Neon guide](https://neon.tech/docs/guides/sqlalchemy) if they see disconnect errors after idle periods.
 
 ---
 
 ## 🚀 Next Steps
 
-Once the file modifications are complete:
-
-1.  Prompt the user to confirm that their Neon `DATABASE_URL` is correctly set in the `.env` file.
-2.  Run the example script to test the connection:
-    ```bash
-    venv/bin/python main.py
-    ```
-3.  If the connection is successful, the output will show "Connection to Neon successful!" followed by the PostgreSQL version of their database.
+1. Run the script with the venv’s Python: `python main.py` (or your filename).
+2. For migrations, point to [SQLAlchemy Migrations with Neon](https://neon.tech/docs/guides/sqlalchemy-migrations).
+3. **Authentication:** If needed, mention [Neon Auth](https://neon.tech/docs/auth/overview).
 
 ---
 
 ## ✅ Validation Rules for AI
 
-Before suggesting code or making edits, ensure:
-- A Python virtual environment exists and is intended for use.
-- The `SQLAlchemy`, `psycopg2-binary`, and `python-dotenv` packages are installed in the virtual environment.
-- A `.env` file is present or has been created.
-- The example script (`main.py`) correctly loads the `DATABASE_URL` from the environment using `os.getenv()`.
+- Virtual environment exists; install **`SQLAlchemy`**, **`psycopg2-binary`**, and (if using `.env`) **`python-dotenv`** in that environment.
+- Connection strings include **`sslmode=require`** and **`channel_binding=require`** in the same forms as the guide (`postgresql://...` for SQLAlchemy; keyword/libpq string for `psycopg2.connect`).
+- No credentials committed in source; use env vars or `.env` (gitignored).
+- Prefer SQLAlchemy **2.0.33+** when choosing versions, per the guide’s connection-errors section.
 
 ---
 
 ## ❌ Do Not
 
-- **Do not install packages globally** or outside of an active Python virtual environment.
-- **Do not hardcode credentials** or the connection string in any Python source code file.
-- Do not output the contents of the `.env` file or the user's connection string in any response.
+- **Do not install packages globally** outside the project virtual environment.
+- **Do not hardcode** Neon passwords or connection strings in tracked files.
+- Do not echo `.env` contents or live secrets in chat output.

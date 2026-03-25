@@ -2,7 +2,7 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Laravel project to connect to a Neon Postgres database.
 
-**Purpose:** To connect the current Laravel project to Neon Postgres and creating a working example to validate the connection.
+**Purpose:** To set Laravel’s database environment variables for a Neon Postgres connection, matching the Neon Laravel guide’s **Connect manually** steps.
 
 **Scope:**
 - Assumes the user has a Neon project and access to their connection parameters.
@@ -19,84 +19,57 @@
   ```bash
   composer create-project laravel/laravel project_name
   ```
-- **PHP PostgreSQL Extension**: Before you begin, ensure your PHP environment has the PostgreSQL driver installed and enabled. This is typically the `pdo_pgsql` extension. If it is missing, `php artisan migrate` and `php artisan serve` will fail with a could not find driver error.
+- **PHP PostgreSQL extension:** Ensure `pdo_pgsql` (and a working `libpq`) is installed so Laravel can connect.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Laravel project as follows:
 
-### 1. Configure Environment Variables
+### 1. Configure `.env` for Neon
 
-1.  Locate the `.env` file at the root of the project. If it does not exist, create one.
-2.  Update the file with the following database connection variables. **Prompt the user to replace the placeholder values** with their actual credentials from Neon.
+1. Open the `.env` file at the project root (create it from `.env.example` if needed).
+2. Replace the database block so it matches the Neon Laravel guide placeholders. Use **5432** for `DB_PORT` unless the user’s Neon connection specifies otherwise.
 
-    ```dotenv title=".env"
-    DB_CONNECTION=pgsql
-    DB_HOST="aws-0-us-west-1.pooler.neon.tech"
-    DB_PORT=5432
-    DB_DATABASE="neondb"
-    DB_USERNAME="your_neon_user"
-    DB_PASSWORD="your_neon_password"
-    ```
+```dotenv
+DB_CONNECTION=pgsql
+DB_HOST=<endpoint_hostname>.neon.tech
+DB_PORT=5432
+DB_DATABASE=<dbname>
+DB_USERNAME=<user>
+DB_PASSWORD=<password>
+```
 
-3.  Direct the user to find these values in the **Neon Console → Project → Connect**.
+3. Direct the user to **Neon Console → Project → Dashboard → Connect** for host, database, user, password, and port.
 
----
+> A full connection string form (if used instead of discrete vars) should look like:
+> `postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require`
 
-### 2. Create an Example to Test the Connection
+### 2. Connection troubleshooting (optional)
 
-To provide a clear way to verify the setup, create a simple route and view that displays the PostgreSQL version from the connected Neon database.
-
-1.  **Create a view:**
-    - Create a new file named `neon.blade.php` inside the `resources/views` directory.
-    - Add the following content to the file:
-
-    ```php title="resources/views/neon.blade.php"
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>Laravel + Neon</title>
-      </head>
-      <body>
-        <h1>Neon Connection Successful!</h1>
-        <p><strong>PostgreSQL Version:</strong> {{ $db_version }}</p>
-      </body>
-    </html>
-    ```
-
-2.  **Create a route:**
-    - Open the `routes/web.php` file.
-    - Add the following route to fetch the database version and render the view. Ensure the `DB` facade is imported.
-
-    ```php title="routes/web.php"
-    <?php
-
-    use Illuminate\Support\Facades\Route;
-    use Illuminate\Support\Facades\DB; // <-- Add this import
-
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/', function () {
-        try {
-            // Execute a raw query to get the database version
-            $result = DB::select('select version()');
-            $db_version = $result[0]->version;
-        } catch (\Exception $e) {
-            // If the connection fails, display an error message
-            $db_version = 'Error: Could not connect to the database. ' . $e->getMessage();
-        }
-
-        // Pass the version to the view
-        return view('neon', ['db_version' => $db_version]);
-    });
-    ```
+If an older client reports the endpoint ID / SNI error, follow Neon’s [connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified) workarounds (for example `options=endpoint%3D<endpoint-id>` on the URL or embedding the endpoint ID in the password field as documented there).
 
 ---
 
@@ -104,33 +77,26 @@ To provide a clear way to verify the setup, create a simple route and view that 
 
 Once the file modifications are complete:
 
-1.  Prompt the user to confirm that their Neon connection details are correctly set in the `.env` file.
-2.  Clear any cached configuration to ensure the new database settings are loaded:
-    ```bash
-    php artisan config:clear
-    ```
-3.  Run the initial database migrations to test write access to the database:
-    ```bash
-    php artisan migrate
-    ```
-4.  Start the Laravel development server:
-    ```bash
-    php artisan serve
-    ```
-5.  Finally, inform the user that the setup is complete. To test the connection, they can visit `http://127.0.0.1:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
+1. Prompt the user to confirm Neon values in `.env`.
+2. Clear cached config so Laravel picks up changes:
+   ```bash
+   php artisan config:clear
+   ```
+3. Run migrations or other database tasks as the app requires (for example `php artisan migrate`).
+4. Serve the app when appropriate (`php artisan serve` or the user’s hosting setup).
+5. **Authentication:** If the app needs user authentication, mention [Neon Auth](https://neon.tech/docs/auth/overview).
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- A `.env` file is present or has been created.
-- The `.env` file contains the `DB_CONNECTION=pgsql` variable and the host, database, user, and password variables.
+- `.env` sets `DB_CONNECTION=pgsql` and includes `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` aligned with Neon’s connection details.
+- Credentials are loaded via `env()` / `.env`, not hardcoded in `config/database.php` or committed files.
 
 ---
 
 ## ❌ Do Not
 
-- **Do not hardcode credentials** or sensitive information in `config/database.php` or any other source code file. Always use the `env()` helper.
-- **Do not output the contents of the `.env` file** or the user's connection string in any response.
-- Do not modify existing user routes, but replace the default welcome route with the test route if it exists.
+- Do not hardcode credentials in PHP source files; use environment configuration.
+- Do not output the contents of `.env` or raw connection strings in responses.
