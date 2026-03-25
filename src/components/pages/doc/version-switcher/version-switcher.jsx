@@ -85,10 +85,10 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
     <div className={clsx('relative', className)} ref={containerRef}>
       <button
         className={clsx(
-          'flex w-full items-center justify-between border border-transparent py-2 text-left',
+          'flex items-center justify-between border border-transparent py-2 text-left',
           isMobileMenu
-            ? 'px-0'
-            : 'px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8'
+            ? 'w-full px-0'
+            : '-mx-2.5 w-[calc(100%+1.25rem)] px-2.5 hover:border-gray-new-90 hover:bg-gray-new-98 hover:dark:border-gray-new-20 hover:dark:bg-gray-new-8'
         )}
         type="button"
         aria-haspopup="listbox"
@@ -118,10 +118,10 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
           </span>
         </span>
 
-        <img src={chevronsUpDownIcon} className="size-4 shrink-0" alt="" aria-hidden />
+        <img src={chevronsUpDownIcon} alt="" className="size-4 shrink-0" />
       </button>
       {isOpen && (
-        <div className="absolute left-0 right-0 z-20 mt-1 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-new">
+        <div className="absolute -inset-x-2.5 z-20 mt-1 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-new">
           <ul role="listbox" className="divide-y divide-gray-new-90 dark:divide-gray-new-20">
             {versions.map((version) => {
               const isSelected = version.id === visualSelectedVersionId;

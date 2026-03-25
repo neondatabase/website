@@ -103,10 +103,15 @@ const Sidebar = ({
     <aside className={clsx('relative -mt-11', className)}>
       <div className="sticky top-28">
         <nav
-          className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-4 dark:border-gray-new-20"
+          className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-2.5 pr-8 pt-4 dark:border-gray-new-20"
           ref={navRef}
         >
-          {showVersionSwitcher && supportsVersioningForSlug && <VersionSwitcher className="mb-7" />}
+          {showVersionSwitcher && supportsVersioningForSlug && (
+            <>
+              <VersionSwitcher className="mb-3.5" />
+              <div className="mb-6 h-px w-full bg-gray-new-90 dark:bg-gray-new-20" />
+            </>
+          )}
           {renderContent}
         </nav>
       </div>

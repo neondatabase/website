@@ -110,6 +110,30 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
   };
 };
 
+const resolveSidebarContext = async ({ currentSlug, sourceDocsDirPath }) => {
+  const sourceSidebar = getNavigation(sourceDocsDirPath);
+  const sourceFlatSidebar = await getFlatSidebar(sourceSidebar);
+  const sourceBreadcrumbs = getBreadcrumbs(currentSlug, sourceFlatSidebar);
+
+  if (sourceBreadcrumbs.length > 0 || sourceDocsDirPath === DOCS_DIR_PATH) {
+    return {
+      sidebar: sourceSidebar,
+      flatSidebar: sourceFlatSidebar,
+      breadcrumbs: sourceBreadcrumbs,
+    };
+  }
+
+  // Fallback to legacy navigation while v2 navigation is still incomplete.
+  const fallbackSidebar = getNavigation(DOCS_DIR_PATH);
+  const fallbackFlatSidebar = await getFlatSidebar(fallbackSidebar);
+
+  return {
+    sidebar: fallbackSidebar,
+    flatSidebar: fallbackFlatSidebar,
+    breadcrumbs: getBreadcrumbs(currentSlug, fallbackFlatSidebar),
+  };
+};
+
 export async function generateStaticParams() {
   const latestVersion = getLatestDocsVersion();
   const legacyVersion = getLegacyDocsVersion();
@@ -171,9 +195,7 @@ export async function generateMetadata({ params }) {
   const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
 
-  const sidebar = getNavigation(sourceDocsDirPath);
-  const flatSidebar = await getFlatSidebar(sidebar);
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const { breadcrumbs } = await resolveSidebarContext({ currentSlug, sourceDocsDirPath });
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
   const encodedCategory = category && Buffer.from(category).toString('base64');
 
@@ -217,11 +239,8 @@ const DocPost = async ({ params }) => {
     hasVersionPrefix && supportsVersioning
       ? getVersionedDocsBasePath(requestedVersionId)
       : DOCS_BASE_PATH;
-  const sidebar = getNavigation(sourceDocsDirPath);
-  const flatSidebar = await getFlatSidebar(sidebar);
+  const { flatSidebar, breadcrumbs } = await resolveSidebarContext({ currentSlug, sourceDocsDirPath });
   const allChangelogPosts = await getAllChangelogs();
-
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${sourceDocsDirPath}/${currentSlug}.md`;
 
