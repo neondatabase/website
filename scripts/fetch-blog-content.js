@@ -1,32 +1,61 @@
 #!/usr/bin/env node
 
-// Load env vars from .env then .env.local (later file wins), so this works
-// in local dev as well as CI/Vercel where the var is set in the environment.
 require('dotenv').config({ path: '.env' });
 require('dotenv').config({ path: '.env.local' });
 
-const { execSync } = require('child_process');
 const fs = require('fs');
+const path = require('path');
 
-const BRANCH = process.env.BLOG_CONTENT_BRANCH || 'main';
 const BLOG_DIR = 'content/blog';
-const TOKEN = process.env.BLOG_GITHUB_TOKEN;
+const CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
+const BATCH_SIZE = 50;
 
-if (fs.existsSync(BLOG_DIR)) {
-  console.log(`Blog content already present at ${BLOG_DIR}, skipping clone`);
-  process.exit(0);
+async function main() {
+  if (fs.existsSync(BLOG_DIR)) {
+    console.log(`Blog content already present at ${BLOG_DIR}, skipping`);
+    return;
+  }
+
+  console.log(`Fetching blog content from ${CDN_BASE}...`);
+
+  const manifestRes = await fetch(`${CDN_BASE}/manifest.json`);
+  if (!manifestRes.ok) throw new Error(`Failed to fetch manifest: ${manifestRes.status}`);
+  const { posts: slugs } = await manifestRes.json();
+
+  fs.mkdirSync(path.join(BLOG_DIR, 'posts'), { recursive: true });
+  fs.mkdirSync(path.join(BLOG_DIR, 'authors'), { recursive: true });
+  fs.mkdirSync(path.join(BLOG_DIR, 'categories'), { recursive: true });
+
+  // Download posts in batches to avoid connection limits
+  let downloaded = 0;
+  for (let i = 0; i < slugs.length; i += BATCH_SIZE) {
+    const batch = slugs.slice(i, i + BATCH_SIZE);
+    await Promise.all(
+      batch.map(async (slug) => {
+        const res = await fetch(`${CDN_BASE}/posts/${slug}.md`);
+        if (!res.ok) throw new Error(`Failed to fetch post "${slug}": ${res.status}`);
+        fs.writeFileSync(path.join(BLOG_DIR, 'posts', `${slug}.md`), await res.text());
+      })
+    );
+    downloaded += batch.length;
+    process.stdout.write(`\r  ${downloaded}/${slugs.length} posts`);
+  }
+  console.log();
+
+  const [authorsRes, categoriesRes] = await Promise.all([
+    fetch(`${CDN_BASE}/authors/data.json`),
+    fetch(`${CDN_BASE}/categories/data.json`),
+  ]);
+  if (!authorsRes.ok) throw new Error(`Failed to fetch authors: ${authorsRes.status}`);
+  if (!categoriesRes.ok) throw new Error(`Failed to fetch categories: ${categoriesRes.status}`);
+
+  fs.writeFileSync(path.join(BLOG_DIR, 'authors', 'data.json'), await authorsRes.text());
+  fs.writeFileSync(path.join(BLOG_DIR, 'categories', 'data.json'), await categoriesRes.text());
+
+  console.log(`Done: ${slugs.length} posts fetched`);
 }
 
-if (!TOKEN) {
-  console.log('BLOG_GITHUB_TOKEN not set — skipping blog content fetch');
-  process.exit(0);
-}
-
-console.log(`Fetching blog content (branch: ${BRANCH})...`);
-execSync(
-  `git clone --depth 1 --branch ${BRANCH} https://x-token:${TOKEN}@github.com/neondatabase/blog.git ${BLOG_DIR}`,
-  { stdio: 'inherit' }
-);
-
-const postCount = fs.readdirSync(`${BLOG_DIR}/posts`).length;
-console.log(`Blog content fetched: ${postCount} posts`);
+main().catch((err) => {
+  console.error('Error fetching blog content:', err.message);
+  process.exit(1);
+});
