@@ -16,8 +16,8 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { DOCS_VERSIONS } = require('../constants/docs-versions');
 const { DOCS_SLUG_VERSIONING_MODES } = require('../constants/docs-versioned-slugs');
+const { DOCS_VERSIONS } = require('../constants/docs-versions');
 const {
   getDocsSlugVersioningMode,
   isDualVersionDocsSlug,
@@ -423,7 +423,7 @@ function generateIndexText(versionedOrganizedDocs, canonicalOrganized = null) {
   return `${lines.join('\n').trim()}\n`;
 }
 
-function generateVersionIndexText({ version, isLatest, organized }) {
+function generateVersionIndexText({ version, organized }) {
   const lines = [];
   const versionTitle = version.label;
 
