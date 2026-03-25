@@ -1,4 +1,10 @@
 const {
+  DOCS_DUAL_VERSION_SLUGS,
+  DOCS_DEFAULT_SLUG_VERSIONING_MODE,
+  DOCS_SLUG_VERSIONING_MODES,
+  DOCS_VERSIONING_RULES,
+} = require('../constants/docs-versioned-slugs');
+const {
   DOCS_DEFAULT_VERSION_ID,
   DOCS_LATEST_VERSION_ID,
   DOCS_VERSIONS,
@@ -9,6 +15,7 @@ const docsVersionsById = DOCS_VERSIONS.reduce((acc, version) => {
   acc[version.id] = version;
   return acc;
 }, {});
+const dualVersionDocsSlugs = new Set(DOCS_DUAL_VERSION_SLUGS);
 
 const isDocsVersionId = (segment) => !!segment && !!docsVersionsById[segment];
 
@@ -23,6 +30,14 @@ const resolveLatestDocsVersionId = () => {
     return configuredLatestVersion.id;
   }
   return getLatestContentReadyVersionId();
+};
+
+const resolveLegacyDocsVersionId = () => {
+  const latestVersionId = resolveLatestDocsVersionId();
+  const legacyVersion = DOCS_VERSIONS.find(
+    (version) => version.id !== latestVersionId && version.isContentReady
+  );
+  return legacyVersion?.id || latestVersionId;
 };
 
 const normalizeDocsVersionId = (versionId) => {
@@ -53,6 +68,31 @@ const resolveDocsVersion = (requestedVersionId) => {
     effectiveVersionId: fallbackVersion.id,
     isFallback: true,
   };
+};
+
+const normalizeDocsSlug = (slug) => {
+  if (!slug || typeof slug !== 'string') return '';
+  return slug.replace(/^\/+|\/+$/g, '');
+};
+
+const getDocsSlugVersioningMode = (slug) => {
+  const normalizedSlug = normalizeDocsSlug(slug);
+  const rule = DOCS_VERSIONING_RULES[normalizedSlug];
+  return rule?.mode || DOCS_DEFAULT_SLUG_VERSIONING_MODE;
+};
+
+const isLegacyOnlyDocsSlug = (slug) =>
+  getDocsSlugVersioningMode(slug) === DOCS_SLUG_VERSIONING_MODES.LEGACY_ONLY;
+
+const isLatestOnlyDocsSlug = (slug) =>
+  getDocsSlugVersioningMode(slug) === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY;
+
+const isDualVersionDocsSlug = (slug) => {
+  const normalizedSlug = normalizeDocsSlug(slug);
+  if (!normalizedSlug) return false;
+  const ruleMode = getDocsSlugVersioningMode(normalizedSlug);
+  if (ruleMode !== DOCS_SLUG_VERSIONING_MODES.DUAL) return false;
+  return dualVersionDocsSlugs.has(normalizedSlug);
 };
 
 const parseDocsVersionedSlug = (segments = []) => {
@@ -105,13 +145,49 @@ const getDocsVersionFromPathname = (pathname) => {
   return null;
 };
 
+const resolveDocsHrefWithBasePath = (slug, basePath) => {
+  if (!slug || typeof slug !== 'string') return slug;
+
+  const baseVersion = getDocsVersionFromPathname(basePath);
+  const isDocsBasePath = typeof basePath === 'string' && basePath.startsWith('/docs/');
+
+  // Relative docs slug (e.g. "auth/overview")
+  if (!slug.startsWith('/')) {
+    if (!isDocsBasePath) return `${basePath}${slug}`;
+    const contentSlug = normalizeDocsSlug(slug);
+    if (!contentSlug) return '/docs/';
+    if (baseVersion && isDualVersionDocsSlug(contentSlug)) {
+      return `${getVersionedDocsBasePath(baseVersion)}${contentSlug}`;
+    }
+    return `/docs/${contentSlug}`;
+  }
+
+  if (!slug.startsWith('/docs/')) return slug;
+
+  const normalizedDocsPath = stripDocsVersionFromPathname(slug);
+  const contentSlug = normalizeDocsSlug(normalizedDocsPath.replace(/^\/docs\/?/, ''));
+
+  if (baseVersion && isDualVersionDocsSlug(contentSlug)) {
+    return `${getVersionedDocsBasePath(baseVersion)}${contentSlug}`;
+  }
+
+  return normalizedDocsPath;
+};
+
 module.exports = {
   isDocsVersionId,
   normalizeDocsVersionId,
   resolveLatestDocsVersionId,
+  resolveLegacyDocsVersionId,
   resolveDocsVersion,
+  normalizeDocsSlug,
+  getDocsSlugVersioningMode,
+  isLegacyOnlyDocsSlug,
+  isLatestOnlyDocsSlug,
   parseDocsVersionedSlug,
   stripDocsVersionFromPathname,
   getVersionedDocsBasePath,
   getDocsVersionFromPathname,
+  resolveDocsHrefWithBasePath,
+  isDualVersionDocsSlug,
 };

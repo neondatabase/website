@@ -5,6 +5,7 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import { DOCS_SLUG_VERSIONING_MODES } from 'constants/docs-versioned-slugs';
 import { DOCS_VERSIONS } from 'constants/docs-versions';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
@@ -12,7 +13,10 @@ import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from
 import {
   getVersionedDocsBasePath,
   parseDocsVersionedSlug,
+  isDualVersionDocsSlug,
+  getDocsSlugVersioningMode,
   resolveDocsVersion,
+  resolveLegacyDocsVersionId,
   resolveLatestDocsVersionId,
 } from 'utils/docs-versioning';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
@@ -28,43 +32,120 @@ const isUnusedOrSharedContent = (slug) =>
 
 const getDocsContentPathForVersion = (version) => version?.docsContentPath || DOCS_DIR_PATH;
 
-const hasLegacyVersionPost = (slug, latestVersionId) => {
-  const legacyVersions = DOCS_VERSIONS.filter((version) => version.id !== latestVersionId);
-  return legacyVersions.some((version) => !!getPostBySlug(slug, getDocsContentPathForVersion(version)));
-};
+const getDocsVersionById = (versionId) => DOCS_VERSIONS.find((version) => version.id === versionId);
 
-const resolveDocVersionedSource = (currentSlug, requestedVersionId) => {
-  const versionResolution = resolveDocsVersion(requestedVersionId);
-  const { effectiveVersion } = versionResolution;
+const getLatestDocsVersion = () => getDocsVersionById(resolveLatestDocsVersionId());
+const getLegacyDocsVersion = () => getDocsVersionById(resolveLegacyDocsVersionId());
 
-  const sourceDocsDirPath = getDocsContentPathForVersion(effectiveVersion);
-  const post = getPostBySlug(currentSlug, sourceDocsDirPath);
+const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix }) => {
+  const latestVersion = getLatestDocsVersion();
+  const legacyVersion = getLegacyDocsVersion();
+  const latestDocsPath = getDocsContentPathForVersion(latestVersion);
+  const legacyDocsPath = getDocsContentPathForVersion(legacyVersion);
+  const latestPost = getPostBySlug(currentSlug, latestDocsPath);
+  const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
+  const slugVersioningMode = getDocsSlugVersioningMode(currentSlug);
+  const supportsDualVersioning =
+    slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.DUAL && Boolean(latestPost) && Boolean(legacyPost);
+
+  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.DUAL) {
+    if (supportsDualVersioning) {
+      const versionResolution = resolveDocsVersion(requestedVersionId);
+      const { effectiveVersion } = versionResolution;
+      const sourceDocsDirPath = getDocsContentPathForVersion(effectiveVersion);
+      const post = getPostBySlug(currentSlug, sourceDocsDirPath);
+
+      return {
+        post,
+        effectiveVersion,
+        sourceDocsDirPath,
+        supportsVersioning: true,
+      };
+    }
+
+    if (hasVersionPrefix) {
+      redirect(`${LINKS.docs}/${currentSlug}`);
+    }
+
+    // Defensive fallback for partial migration state.
+    if (latestPost) {
+      return {
+        post: latestPost,
+        effectiveVersion: latestVersion,
+        sourceDocsDirPath: latestDocsPath,
+        supportsVersioning: false,
+      };
+    }
+
+    return {
+      post: legacyPost,
+      effectiveVersion: legacyVersion,
+      sourceDocsDirPath: legacyDocsPath,
+      supportsVersioning: false,
+    };
+  }
+
+  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
+    if (hasVersionPrefix) {
+      redirect(`${LINKS.docs}/${currentSlug}`);
+    }
+
+    return {
+      post: latestPost || legacyPost,
+      effectiveVersion: latestPost ? latestVersion : legacyVersion,
+      sourceDocsDirPath: latestPost ? latestDocsPath : legacyDocsPath,
+      supportsVersioning: false,
+    };
+  }
+
+  if (hasVersionPrefix) {
+    redirect(`${LINKS.docs}/${currentSlug}`);
+  }
 
   return {
-    post,
-    effectiveVersion,
-    sourceDocsDirPath,
+    post: legacyPost,
+    effectiveVersion: legacyVersion,
+    sourceDocsDirPath: legacyDocsPath,
+    supportsVersioning: false,
   };
 };
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const latestVersion = getLatestDocsVersion();
+  const legacyVersion = getLegacyDocsVersion();
+  const latestPosts = await getAllPosts(getDocsContentPathForVersion(latestVersion));
+  const legacyPosts = await getAllPosts(getDocsContentPathForVersion(legacyVersion));
+  const posts = [...(latestPosts || []), ...(legacyPosts || [])];
 
   if (!posts) return notFound();
 
-  const versionIds = DOCS_VERSIONS.map((version) => version.id);
+  const versionIds = DOCS_VERSIONS.filter((version) => version.isContentReady).map(
+    (version) => version.id
+  );
+  const latestPostSlugs = new Set((latestPosts || []).map(({ slug }) => slug));
+  const legacyPostSlugs = new Set((legacyPosts || []).map(({ slug }) => slug));
+  const allSlugs = [...new Set(posts.map(({ slug }) => slug))];
 
-  return posts.flatMap(({ slug }) => {
+  return allSlugs.flatMap((slug) => {
     const slugsArray = slug.split('/');
 
-    return [
+    const params = [
       {
         slug: slugsArray,
       },
-      ...versionIds.map((versionId) => ({
-        slug: [versionId, ...slugsArray],
-      })),
     ];
+
+    const isDualVersionSlug =
+      isDualVersionDocsSlug(slug) && latestPostSlugs.has(slug) && legacyPostSlugs.has(slug);
+    if (isDualVersionSlug) {
+      params.push(
+        ...versionIds.map((versionId) => ({
+          slug: [versionId, ...slugsArray],
+        }))
+      );
+    }
+
+    return params;
   });
 }
 
@@ -78,26 +159,19 @@ export async function generateMetadata({ params }) {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const { post } = resolveDocVersionedSource(currentSlug, requestedVersionId);
-
   const isChangelog = currentSlug === 'changelog';
+  const { post, sourceDocsDirPath, supportsVersioning } = isChangelog
+    ? { post: null, sourceDocsDirPath: DOCS_DIR_PATH, supportsVersioning: false }
+    : resolveDocSource({ currentSlug, requestedVersionId, hasVersionPrefix });
 
   if (!isChangelog && !post) {
-    const latestVersionId = resolveLatestDocsVersionId();
-    const isLatestRequest = requestedVersionId === latestVersionId;
-    if (isLatestRequest && currentSlug !== 'introduction') {
-      const existsInLegacy = hasLegacyVersionPost(currentSlug, latestVersionId);
-      if (existsInLegacy) {
-        redirect(`${LINKS.docs}/introduction`);
-      }
-    }
     return notFound();
   }
 
   const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
 
-  const sidebar = getNavigation();
+  const sidebar = getNavigation(sourceDocsDirPath);
   const flatSidebar = await getFlatSidebar(sidebar);
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
@@ -107,13 +181,13 @@ export async function generateMetadata({ params }) {
     title: `${title} - Neon Docs`,
     description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
-    pathname: hasVersionPrefix
+    pathname: hasVersionPrefix && supportsVersioning
       ? `${LINKS.docs}/${requestedVersionId}/${currentSlug}`
       : `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
-    markdownPath: hasVersionPrefix
+    markdownPath: hasVersionPrefix && supportsVersioning
       ? `/docs/${requestedVersionId}/${currentSlug}.md`
       : `/docs/${currentSlug}.md`,
   });
@@ -126,22 +200,25 @@ const DocPost = async ({ params }) => {
     requestedVersionId,
     contentSlug: currentSlug,
   } = parseDocsVersionedSlug(slug);
-  const {
-    post,
-    effectiveVersion,
-    sourceDocsDirPath,
-  } = resolveDocVersionedSource(currentSlug, requestedVersionId);
-  const versionedBasePath = hasVersionPrefix
-    ? getVersionedDocsBasePath(requestedVersionId)
-    : DOCS_BASE_PATH;
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getNavigation();
-  const flatSidebar = await getFlatSidebar(sidebar);
-
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+  const { post, effectiveVersion, sourceDocsDirPath, supportsVersioning } = isChangelogIndex
+    ? {
+        post: null,
+        effectiveVersion: null,
+        sourceDocsDirPath: DOCS_DIR_PATH,
+        supportsVersioning: false,
+      }
+    : resolveDocSource({ currentSlug, requestedVersionId, hasVersionPrefix });
+  const versionedBasePath =
+    hasVersionPrefix && supportsVersioning
+      ? getVersionedDocsBasePath(requestedVersionId)
+      : DOCS_BASE_PATH;
+  const sidebar = getNavigation(sourceDocsDirPath);
+  const flatSidebar = await getFlatSidebar(sidebar);
   const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
@@ -149,14 +226,6 @@ const DocPost = async ({ params }) => {
   const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${sourceDocsDirPath}/${currentSlug}.md`;
 
   if (!isChangelogIndex && !post) {
-    const latestVersionId = resolveLatestDocsVersionId();
-    const isLatestRequest = requestedVersionId === latestVersionId;
-    if (isLatestRequest && currentSlug !== 'introduction') {
-      const existsInLegacy = hasLegacyVersionPost(currentSlug, latestVersionId);
-      if (existsInLegacy) {
-        redirect(`${LINKS.docs}/introduction`);
-      }
-    }
     return notFound();
   }
 
@@ -172,7 +241,7 @@ const DocPost = async ({ params }) => {
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         navigationLinksBasePath={versionedBasePath}
-        effectiveDocsVersion={effectiveVersion}
+        effectiveDocsVersion={supportsVersioning ? effectiveVersion : null}
         changelogActiveLabel="all"
         isChangelog
       />
@@ -209,7 +278,7 @@ const DocPost = async ({ params }) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
-        effectiveDocsVersion={effectiveVersion}
+        effectiveDocsVersion={supportsVersioning ? effectiveVersion : null}
       />
     </>
   );

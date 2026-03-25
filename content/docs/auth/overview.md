@@ -1,178 +1,202 @@
 ---
-title: Neon Auth
-subtitle: Managed authentication that branches with your database
+title: Legacy Neon Auth with Stack Auth
+subtitle: For existing users only (not available for new projects)
 summary: >-
-  Covers the setup of Neon Auth, a managed authentication service that
-  integrates with your Neon database, allowing for branch-aware authentication
-  and seamless testing of authentication workflows in isolated environments.
+  Covers the setup and functionality of the legacy Neon Auth system using Stack
+  Auth for existing users, detailing user management and data synchronization
+  within a Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.131Z'
-redirectFrom:
-  - /docs/neon-auth/quick-start/nextjs
-  - /docs/auth/migrate/from-stack-auth
-  - /docs/neon-auth/overview
-  - /docs/neon-auth/claim-project
-  - /docs/neon-auth/create-users
-  - /docs/neon-auth/how-it-works
-  - /docs/neon-auth/best-practices
-  - /docs/neon-auth/concepts/backend-integration
-  - /docs/neon-auth/concepts/custom-user-data
-  - /docs/guides/neon-auth-claim-project
-  - /docs/guides/neon-auth-how-it-works
-  - /docs/guides/neon-auth-best-practices
+tag: archived
+noindex: true
+updatedOn: '2026-02-15T20:51:54.041Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<Admonition type="warning" title="You are viewing legacy documentation">
+**This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
 
-Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
-
-## Quick start guides
-
-Choose your framework to get started:
-
-<TechCards>
-
-<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Quick start with API methods" icon="next-js"></a>
-
-<a href="/docs/auth/quick-start/react" title="React" description="Quick start with API methods" icon="react"></a>
-
-<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
-
-</TechCards>
-
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
-
-```bash
-npx neonctl@latest init
-```
-
+**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
-## Why Neon Auth?
+## What is legacy Neon Auth?
 
-- **Identity lives in your database**  
-  All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
+Neon Auth brings authentication and user management natively to your Neon Postgres database.
 
-- **Zero server management**  
-  Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
+### Why use Neon Auth?
 
-- **Auth that branches with your data**  
-  Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
+Neon Auth helps you move faster by handling the auth stack for you:
 
-## Built on Better Auth
+- **Add auth to your app in minutes**: SDKs for Next.js and React
+- **No more custom sync code**: user profiles are always up-to-date in your database, ready for SQL joins and analytics.
+- **Built-in support for teams, roles, and permissions**.
 
-Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
+## How it works
 
-Neon Auth currently supports Better Auth version **1.4.18**.
+When you set up Neon Auth, we create a `neon_auth` schema in your database. As users authenticate and manage their profiles in Neon Auth, you'll see them appear in your list of users on the **Auth** page.
 
-### When to use Neon Auth vs. self-hosting Better Auth
+![Users in Neon Auth](/docs/guides/identity_users.png)
 
-Neon Auth is a managed authentication service that integrates seamlessly with Neon's architecture and offerings:
+**User data is immediately available in your database**
 
-- **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
-- **Built-in Data API integration**: JWT token validation for the Data API has native support for Neon Auth.
-- **No infrastructure to manage**: Neon Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
-- **Shared OAuth credentials for testing**: Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
+User data is available in the `neon_auth.users_sync` table shortly after the Neon Auth processes the updates. Here's an example query to inspect the synchronized data:
 
-Self-hosting Better Auth makes sense if you need:
-
-- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Neon Auth.
-- Full control over your auth code and the ability to run it inside your own infrastructure.
-
-For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
-
-As Neon Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
-
-## Basic usage
-
-Enable Auth in your Neon project, then add authentication to your app.
-
-**For Next.js (server-side):**
-
-See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
-
-```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/auth/next/server';
-
-export const auth = createNeonAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
-});
+```sql
+SELECT * FROM neon_auth.users_sync;
 ```
 
-```typescript filename="app/api/auth/[...path]/route.ts"
-import { auth } from '@/lib/auth/server';
+| id          | name          | email             | created_at          | updated_at          | deleted_at | raw_json                         |
+| ----------- | ------------- | ----------------- | ------------------- | ------------------- | ---------- | -------------------------------- |
+| d37b6a30... | Jordan Rivera | jordan@company.co | 2025-05-09 16:15:00 | null                | null       | `{\"id\": \"d37b6a30...\", ...}` |
+| 51e491df... | Sam Patel     | sam@startup.dev   | 2025-02-27 18:36:00 | 2025-02-27 18:36:00 | null       | `{\"id\": \"51e491df...\", ...}` |
 
-export const { GET, POST } = auth.handler();
+The following columns are included in the `neon_auth.users_sync` table:
+
+- `raw_json`: Complete user profile as JSON
+- `id`: The unique ID of the user
+- `name`: The user's display name
+- `email`: The user's primary email
+- `created_at`: When the user signed up
+- `deleted_at`: When the user was deleted, if applicable (nullable)
+- `updated_at`: When the user was last updated, if applicable (nullable)
+
+Updates to user profiles in Neon Auth are automatically reflected in your database.
+
+<Admonition type="note">
+Do not try to change the `neon_auth.users_sync` table name. It's needed for the synchronization process to work correctly.
+</Admonition>
+
+For detailed integration patterns, foreign key examples, and best practices, see [Database Integration](/docs/auth/legacy/database-integration).
+
+## Environment variables and SDK keys
+
+To use Stack Auth with your Neon project, you need these environment variables:
+
+```env
+NEXT_PUBLIC_STACK_PROJECT_ID=your-project-id
+NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=your-client-key
+STACK_SECRET_SERVER_KEY=your-server-secret
 ```
 
-**For React/Vite (client-side):**
+### Getting your keys
 
-See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation.
+You can get these keys from the Neon Console **Auth** page, or by using the Neon API.
 
-```typescript filename="src/auth.ts"
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+Generates SDK keys for your auth provider integration. These keys are used to set up your frontend and backend SDKs.
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+Required parameters:
+
+- `project_id`: Your Neon project ID
+- `auth_provider`: The authentication provider (currently `"stack"`)
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/keys' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack"
+     }' | jq
 ```
 
-```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
-import { authClient } from './auth';
+Example response:
 
-export default function App() {
-  return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" />
-    </NeonAuthUIProvider>
-  );
+```json shouldWrap
+{
+  "auth_provider": "stack",
+  "auth_provider_project_id": "project-id-123",
+  "pub_client_key": "pck_example...",
+  "secret_server_key": "ssk_example...",
+  "jwks_url": "https://api.stack-auth.com/api/v1/projects/project-id-123/.well-known/jwks.json",
+  "schema_name": "neon_auth",
+  "table_name": "users_sync"
 }
 ```
 
-## Use cases
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
 
-- **Production authentication**  
-  Use Neon Auth as the identity system for your app. Store users, sessions, and OAuth configuration directly in Postgres, and pair with RLS for secure, database-centric access control.
+## Claiming your Stack Auth project
 
-- **Preview environments**  
-  Test full authentication flows in Vercel previews with real users and sessions
+Neon Auth is powered by Stack Auth under the hood. By default, Neon manages your authentication for you, so you do not typically need to interact with Stack Auth directly. However, there are cases where you may want to take direct control of your authentication project in the Stack Auth dashboard.
 
-- **Multi-tenant SaaS**  
-  Test complex org and role hierarchies safely in isolated branches
+### Why claim a project?
 
-- **CI/CD workflows**  
-  Run end-to-end auth tests without touching production. The [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action) supports retrieving branch-specific auth URLs for testing authentication flows in GitHub Actions workflows.
+Most Neon Auth features can be built using the SDKs, without claiming your project.
 
-- **Development workflows**  
-  Spin up complete environments instantly with database and auth together
+Right now, you need to claim your project if you want to:
 
-See [Branching authentication](/docs/auth/branching-authentication) for details on how auth branches with your database.
+- Add or manage OAuth providers (register client IDs/secrets, set callback URLs)
+- Enable production mode and enforce production security settings
+- Manage multiple projects or separate production and development environments directly in Stack Auth
 
-## Example applications
+<Steps>
 
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples)—Next.js and React apps, cross-subdomain setups, the Organization plugin, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
+### Claim via the Neon console
 
-## Availability
+1. Go to your project's **Auth** page, **Configuration** tab in the Neon Console.
+2. Click **Claim project** in the Claim project section.
+3. Follow the prompts to select the Stack Auth account that should receive ownership.
 
-Neon Auth is currently available for AWS regions only. Azure support is not yet available.
+After claiming, you'll have direct access to manage your project in the Stack Auth dashboard, while maintaining the integration with your Neon database.
 
-Neon Auth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
+You can also find your current project ID here, as well as the JWKS URL you need to set up [RLS in your Neon Auth project](/docs/auth/legacy/database-integration#row-level-security-rls).
 
-## Pricing
+### Claim via the API
 
-Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
+You can also claim your project programmatically:
 
-- **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU
-- **Scale**: Up to 1M MAU
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/auth/transfer_ownership' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --data '{
+       "project_id": "project-id",
+       "auth_provider": "stack"
+     }'
+```
 
-An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, request an increase in the [console feedback form](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22).
+Open the returned URL in your browser to complete the claim process.
+See [Neon Auth API Reference](https://api-docs.neon.tech/reference/transferneonauthownership) for more details.
 
-See [Neon plans](/docs/introduction/plans#auth) for more details.
+<Admonition type="note">
+After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
+</Admonition>
 
-## Migration from Stack Auth
+</Steps>
 
-If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
+## Migrating to Neon Auth with Better Auth
+
+Ready to upgrade to Neon Auth with Better Auth? See our comprehensive [migration guide](/docs/auth/migrate/from-legacy-auth).
+
+### Benefits of upgrading
+
+- **Native branching support** - Auth branches automatically with your database
+- **Simplified configuration** - One URL instead of four keys
+- **Direct database access** - No webhooks, no sync delays
+- **Open-source foundation** - Built on Better Auth
+
+### Migration guide includes
+
+- Side-by-side code comparisons
+- Package and component replacements
+- Environment variable updates
+- Step-by-step instructions
+
+[View Migration Guide →](/docs/auth/migrate/from-legacy-auth)
+
+## Additional resources
+
+### Stack Auth documentation
+
+For SDK documentation, components, hooks, and client-side authentication:
+
+- [Stack Auth Official Docs](https://docs.stack-auth.com)
+- [Stack Auth Components](https://docs.stack-auth.com/sdk/components)
+- [Stack Auth API Reference](https://docs.stack-auth.com/api)
+
+### Neon technical docs
+
+- [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

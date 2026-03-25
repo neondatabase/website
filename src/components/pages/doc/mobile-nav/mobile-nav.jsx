@@ -11,7 +11,10 @@ import CornerIcon from 'icons/corner-left.inline.svg';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  resolveLatestDocsVersionId,
+  isDualVersionDocsSlug,
+  resolveDocsHrefWithBasePath,
+  resolveLegacyDocsVersionId,
+  stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
 import Icon from '../menu/icon';
@@ -28,9 +31,9 @@ const resolveHref = (slug, basePath) => {
 
   if (isExternalSlug(slug)) return slug;
 
-  if (isWebsiteSlug(slug)) return slug;
+  if (isWebsiteSlug(slug)) return resolveDocsHrefWithBasePath(slug, basePath);
 
-  return `${basePath}${slug}`;
+  return resolveDocsHrefWithBasePath(slug, basePath);
 };
 
 function transformNavigationNode(raw, basePath, depth = 0) {
@@ -205,11 +208,13 @@ RecursiveItem.propTypes = {
   currentPath: PropTypes.string.isRequired,
 };
 
-const RecursiveList = ({ nodes, currentPath }) => (
+const RecursiveList = ({ nodes, currentPath, showVersionSwitcher = false }) => (
   <ul className="flex flex-col gap-y-2.5">
-    <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-gray-new-80 dark:after:bg-gray-new-20">
-      <VersionSwitcher isMobileMenu />
-    </li>
+    {showVersionSwitcher && (
+      <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-gray-new-80 dark:after:bg-gray-new-20">
+        <VersionSwitcher isMobileMenu />
+      </li>
+    )}
     {nodes.map((node, idx) => (
       <RecursiveItem key={idx} node={node} currentPath={currentPath} />
     ))}
@@ -219,6 +224,7 @@ const RecursiveList = ({ nodes, currentPath }) => (
 RecursiveList.propTypes = {
   nodes: PropTypes.array.isRequired,
   currentPath: PropTypes.string.isRequired,
+  showVersionSwitcher: PropTypes.bool,
 };
 
 const MobileMenu = ({
@@ -229,10 +235,16 @@ const MobileMenu = ({
 }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const normalizedPathname = stripDocsVersionFromPathname(pathname);
+  const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
-  const effectiveVersionId = pathnameVersion || resolveLatestDocsVersionId();
+  const legacyVersionId = resolveLegacyDocsVersionId();
+  const supportsVersioningForSlug = isDualVersionDocsSlug(currentSlug);
+  const effectiveVersionId =
+    pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
-  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
+  const docsBasePath =
+    pathnameVersion && supportsVersioningForSlug ? getVersionedDocsBasePath(pathnameVersion) : basePath;
 
   useEffect(() => {
     setOpen(false);
@@ -264,7 +276,11 @@ const MobileMenu = ({
       <DrawerContent className="bottom-12 hidden !h-[70dvh] flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
         <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-8 pt-[15px]">
-          <RecursiveList nodes={menu} currentPath={pathname} />
+          <RecursiveList
+            nodes={menu}
+            currentPath={pathname}
+            showVersionSwitcher={supportsVersioningForSlug}
+          />
         </div>
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-10 w-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_73.36%)] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.00)_0%,#09090B_73.36%)]"

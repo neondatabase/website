@@ -17,7 +17,13 @@ const path = require('path');
 const matter = require('gray-matter');
 
 const { DOCS_VERSIONS } = require('../constants/docs-versions');
-const { resolveLatestDocsVersionId } = require('../utils/docs-versioning');
+const { DOCS_SLUG_VERSIONING_MODES } = require('../constants/docs-versioned-slugs');
+const {
+  getDocsSlugVersioningMode,
+  isDualVersionDocsSlug,
+  resolveLatestDocsVersionId,
+  resolveLegacyDocsVersionId,
+} = require('../utils/docs-versioning');
 
 const config = require('./llms-index-config');
 
@@ -213,7 +219,12 @@ function organizeDocs(docs) {
 /**
  * Build section order: configured sections first, then remaining alphabetically
  */
-function getSectionOrder(organized) {
+function getSectionOrder(organized, options = {}) {
+  const { includeConfiguredSections = true } = options;
+  if (!includeConfiguredSections) {
+    return Object.keys(organized).sort();
+  }
+
   const configuredNames = config.sections.map((s) => s.name);
   const allSections = Object.keys(organized);
   const ordered = [];
@@ -285,12 +296,13 @@ function sortDocsVersionsByPriority(versions, latestVersionId) {
   });
 }
 
-function renderVersionPages(lines, organized) {
-  const sections = getSectionOrder(organized);
+function renderVersionPages(lines, organized, options = {}) {
+  const { includeConfiguredSections = true, includeCollapsedSections = true } = options;
+  const sections = getSectionOrder(organized, { includeConfiguredSections });
   for (const section of sections) {
     const sectionConfig = getSectionConfig(section);
     const sectionData = organized[section];
-    if (!sectionData && !sectionConfig?.collapse) continue;
+    if (!sectionData && (!includeCollapsedSections || !sectionConfig?.collapse)) continue;
 
     lines.push(`#### ${section}`);
     lines.push('');
@@ -300,7 +312,7 @@ function renderVersionPages(lines, organized) {
       lines.push('');
     }
 
-    if (sectionConfig?.collapse) {
+    if (includeCollapsedSections && sectionConfig?.collapse) {
       const collapsed = sectionConfig.collapse;
       const description = collapsed.description ? `: ${collapsed.description}` : '';
       lines.push(`- [${collapsed.title}](${collapsed.url})${description}`);
@@ -349,7 +361,7 @@ function renderVersionPages(lines, organized) {
   }
 }
 
-function generateIndexText(versionedOrganizedDocs) {
+function generateIndexText(versionedOrganizedDocs, canonicalOrganized = null) {
   const lines = [];
 
   lines.push('# Neon Postgres');
@@ -364,8 +376,6 @@ function generateIndexText(versionedOrganizedDocs) {
   }
 
   if (versionedOrganizedDocs.length > 0) {
-    const latestEntry = versionedOrganizedDocs.find((entry) => entry.isLatest);
-
     lines.push('## Documentation');
     lines.push('');
     lines.push(`- [Documentation Index](${BASE_URL}/docs/llms.txt): Primary Neon documentation index`);
@@ -403,10 +413,10 @@ function generateIndexText(versionedOrganizedDocs) {
     }
     lines.push('');
 
-    if (latestEntry) {
-      lines.push('## Latest version pages');
+    if (canonicalOrganized) {
+      lines.push('## Documentation pages');
       lines.push('');
-      renderVersionPages(lines, latestEntry.organized);
+      renderVersionPages(lines, canonicalOrganized);
     }
   }
 
@@ -415,21 +425,48 @@ function generateIndexText(versionedOrganizedDocs) {
 
 function generateVersionIndexText({ version, isLatest, organized }) {
   const lines = [];
-  const cleanVersionId = version.id.replace(/^v/i, '');
-  const versionTitle = isLatest ? `${version.label} (current)` : version.label;
+  const versionTitle = version.label;
 
   lines.push('# Neon Postgres');
   lines.push('');
   lines.push(`Version-specific documentation index for ${versionTitle}.`);
   lines.push('');
   lines.push(`- Canonical docs index: ${BASE_URL}/docs/llms.txt`);
-  lines.push(`- This version root: ${BASE_URL}/docs/${isLatest ? '' : `${version.id}/`}introduction`);
+  lines.push(`- Versioned docs base path: ${BASE_URL}/docs/${version.id}/`);
   lines.push('');
-  lines.push(`## ${isLatest ? 'Current' : `${cleanVersionId}.x`} documentation pages`);
+  lines.push(`## ${version.id} versioned documentation pages`);
   lines.push('');
-  renderVersionPages(lines, organized);
+
+  if (!organized || Object.keys(organized).length === 0) {
+    lines.push('No versioned pages are currently available for this docs version.');
+    lines.push('');
+  } else {
+    renderVersionPages(lines, organized, {
+      includeConfiguredSections: false,
+      includeCollapsedSections: false,
+    });
+  }
 
   return `${lines.join('\n').trim()}\n`;
+}
+
+function selectCanonicalDocByMode({ docPath, latestDoc, legacyDoc }) {
+  const docsSlug = docPath.replace(/\.md$/, '');
+  const mode = getDocsSlugVersioningMode(docsSlug);
+
+  if (mode === DOCS_SLUG_VERSIONING_MODES.DUAL) {
+    if (latestDoc && legacyDoc && isDualVersionDocsSlug(docsSlug)) {
+      return latestDoc;
+    }
+    return latestDoc || legacyDoc || null;
+  }
+
+  if (mode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
+    return latestDoc || legacyDoc || null;
+  }
+
+  // LEGACY_ONLY (default): canonical /docs route serves legacy docs.
+  return legacyDoc || null;
 }
 
 async function main() {
@@ -439,6 +476,7 @@ async function main() {
   const projectRoot = path.resolve(__dirname, '../..');
   const contentPath = path.join(projectRoot, 'content');
   const latestVersionId = resolveLatestDocsVersionId();
+  const legacyVersionId = resolveLegacyDocsVersionId();
   const docsVersions = sortDocsVersionsByPriority(
     DOCS_VERSIONS.filter((version) => version.isContentReady),
     latestVersionId
@@ -460,20 +498,74 @@ async function main() {
     versionedOrganizedDocs.push({
       version,
       isLatest,
+      docs,
       organized,
       docsCount: docs.length,
     });
     console.log(`  ${version.label} (${version.docsContentPath}): ${docs.length} files`);
   }
 
-  const totalDocs = versionedOrganizedDocs.reduce((acc, item) => acc + item.docsCount, 0);
-  console.log(`\nTotal: ${totalDocs} documents across ${versionedOrganizedDocs.length} versions\n`);
+  const latestEntry = versionedOrganizedDocs.find((entry) => entry.version.id === latestVersionId);
+  const legacyEntry = versionedOrganizedDocs.find((entry) => entry.version.id === legacyVersionId);
 
-  const indexContent = generateIndexText(versionedOrganizedDocs);
+  const latestDocsByPath = new Map((latestEntry?.docs || []).map((doc) => [doc.path, doc]));
+  const legacyDocsByPath = new Map((legacyEntry?.docs || []).map((doc) => [doc.path, doc]));
+  const allPaths = new Set([...legacyDocsByPath.keys(), ...latestDocsByPath.keys()]);
+
+  const canonicalDocs = [];
+  for (const docPath of allPaths) {
+    const latestDoc = latestDocsByPath.get(docPath);
+    const legacyDoc = legacyDocsByPath.get(docPath);
+    const chosenDoc = selectCanonicalDocByMode({ docPath, latestDoc, legacyDoc });
+    if (!chosenDoc) continue;
+    canonicalDocs.push({
+      ...chosenDoc,
+      url: `${BASE_URL}/docs/${chosenDoc.path}`,
+    });
+  }
+
+  applyReclassifications(canonicalDocs);
+  const canonicalOrganized = organizeDocs(canonicalDocs);
+  console.log(`  Canonical (/docs): ${canonicalDocs.length} files`);
+
+  // Versioned routes are available only for DUAL slugs that exist in both latest and legacy content.
+  const versionedRoutePaths = new Set(
+    (latestEntry?.docs || [])
+      .filter((latestDoc) => {
+        const docsSlug = latestDoc.path.replace(/\.md$/, '');
+        return (
+          isDualVersionDocsSlug(docsSlug) &&
+          legacyDocsByPath.has(latestDoc.path) &&
+          latestDocsByPath.has(latestDoc.path)
+        );
+      })
+      .map((doc) => doc.path)
+  );
+  console.log(`  Versioned routes (/docs/{version}/): ${versionedRoutePaths.size} files`);
+
+  const totalVersionedDocs = versionedOrganizedDocs.reduce((acc, item) => acc + item.docsCount, 0);
+  console.log(
+    `\nTotal: ${totalVersionedDocs} documents across ${versionedOrganizedDocs.length} versions`
+  );
+  console.log(`Canonical docs count: ${canonicalDocs.length}\n`);
+
+  const indexContent = generateIndexText(versionedOrganizedDocs, canonicalOrganized);
   const versionedIndexes = versionedOrganizedDocs.map((entry) => ({
     versionId: entry.version.id,
     isLatest: entry.isLatest,
-    content: generateVersionIndexText(entry),
+    content: generateVersionIndexText((() => {
+      const versionedDocsForEntry = (entry.docs || [])
+        .filter((doc) => versionedRoutePaths.has(doc.path))
+        .map((doc) => ({
+          ...doc,
+          url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
+        }));
+      applyReclassifications(versionedDocsForEntry);
+      return {
+        ...entry,
+        organized: organizeDocs(versionedDocsForEntry),
+      };
+    })()),
   }));
 
   if (dryRun) {

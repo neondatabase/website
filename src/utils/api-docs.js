@@ -7,12 +7,12 @@ const { DOCS_VERSIONS } = require('../constants/docs-versions');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
-const getAllPosts = async () => {
-  const slugs = await getPostSlugs(DOCS_DIR_PATH);
+const getAllPosts = async (docsContentPath = DOCS_DIR_PATH) => {
+  const slugs = await getPostSlugs(docsContentPath);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, DOCS_DIR_PATH)) return;
-      const data = getPostBySlug(slug, DOCS_DIR_PATH);
+      if (!getPostBySlug(slug, docsContentPath)) return;
+      const data = getPostBySlug(slug, docsContentPath);
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {

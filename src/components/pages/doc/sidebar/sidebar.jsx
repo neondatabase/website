@@ -9,7 +9,8 @@ import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  resolveLatestDocsVersionId,
+  isDualVersionDocsSlug,
+  resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
@@ -58,10 +59,15 @@ const Sidebar = ({
   const normalizedPathname = stripDocsVersionFromPathname(pathname);
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
-  const latestVersionId = resolveLatestDocsVersionId();
-  const effectiveVersionId = pathnameVersion || latestVersionId;
+  const legacyVersionId = resolveLegacyDocsVersionId();
+  const supportsVersioningForSlug = isDualVersionDocsSlug(currentSlug);
+  const effectiveVersionId =
+    pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
-  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
+  const shouldUseVersionedBasePath = Boolean(pathnameVersion && supportsVersioningForSlug);
+  const docsBasePath = shouldUseVersionedBasePath
+    ? getVersionedDocsBasePath(pathnameVersion)
+    : basePath;
   const menu = getActiveMenu(activeNavigation, currentSlug);
   const navRef = useRef(null);
 
@@ -80,15 +86,18 @@ const Sidebar = ({
     return null;
   }
 
-  const renderContent = sdkTOC ? (
-    <SDKTableOfContents
-      title={sdkTOC.title}
-      url={`${docsBasePath}${currentSlug}`}
-      sections={sdkTOC.sections}
-    />
-  ) : menu ? (
-    <Menu basePath={docsBasePath} {...menu} customType={customType} />
-  ) : null;
+  let renderContent = null;
+  if (sdkTOC) {
+    renderContent = (
+      <SDKTableOfContents
+        title={sdkTOC.title}
+        url={`${docsBasePath}${currentSlug}`}
+        sections={sdkTOC.sections}
+      />
+    );
+  } else if (menu) {
+    renderContent = <Menu basePath={docsBasePath} {...menu} customType={customType} />;
+  }
 
   return (
     <aside className={clsx('relative -mt-11', className)}>
@@ -97,7 +106,7 @@ const Sidebar = ({
           className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-4 dark:border-gray-new-20"
           ref={navRef}
         >
-          {showVersionSwitcher && <VersionSwitcher className="mb-7" />}
+          {showVersionSwitcher && supportsVersioningForSlug && <VersionSwitcher className="mb-7" />}
           {renderContent}
         </nav>
       </div>

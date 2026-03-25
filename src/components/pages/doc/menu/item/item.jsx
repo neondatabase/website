@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
+import { resolveDocsHrefWithBasePath } from 'utils/docs-versioning';
 
 import Tag from '../../tag';
 
@@ -30,8 +31,7 @@ const Item = ({
   const [isCollapsed, setIsCollapsed] = useState(!isActiveMenu);
 
   const externalSlug = slug?.startsWith('http') ? slug : null;
-  const websiteSlug = slug?.startsWith('/') ? slug : null;
-  const docSlug = `${basePath}${slug}`;
+  const docSlug = resolveDocsHrefWithBasePath(slug, basePath);
 
   const LinkTag = slug ? Link : 'button';
 
@@ -61,7 +61,7 @@ const Item = ({
           isActive && isSubmenu && !items?.length && 'before:opacity-100'
         )}
         type={slug ? undefined : 'button'}
-        to={slug ? externalSlug || websiteSlug || docSlug : undefined}
+        to={slug ? externalSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
         icon={externalSlug && 'external'}
         tabIndex={isHidden ? -1 : undefined}

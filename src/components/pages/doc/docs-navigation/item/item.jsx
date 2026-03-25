@@ -8,6 +8,7 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
+  resolveDocsHrefWithBasePath,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
@@ -80,7 +81,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = slug ? (slug.startsWith('/') ? slug : `${resolvedBasePath}${slug}`) : undefined;
+  const href = slug ? resolveDocsHrefWithBasePath(slug, resolvedBasePath) : undefined;
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;
