@@ -69,13 +69,13 @@ const Post = ({
       <div
         className={cn(
           'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
-          isWideLayout && 'max-w-none',
-          className
+          className,
+          isWideLayout && 'max-w-none'
         )}
       >
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs
-            className={cn(isChangelog && 'pt-1', '!mb-7')}
+            className={cn(isChangelog && 'pt-1', 'mb-7!')}
             breadcrumbs={breadcrumbs}
             baseUrl={breadcrumbsBaseUrl}
           />

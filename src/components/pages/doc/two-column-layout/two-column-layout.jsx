@@ -32,7 +32,7 @@ const TwoColumnStep = ({ title, children }) => (
     <div
       className={cn(
         'flex size-7 shrink-0 items-center justify-center rounded-full bg-gray-new-20 font-mono font-medium tracking-extra-tight text-white',
-        'text-sm leading-none tracking-extra-tight text-gray-new-40',
+        'text-sm leading-none tracking-extra-tight',
         'before:content-[counter(section)] before:[counter-increment:section]',
         'dark:bg-gray-new-90 dark:text-black-pure'
       )}
