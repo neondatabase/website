@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 
 import DocsNavigation from '../docs-navigation';
 
-const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
+const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient, isLoggedIn }) => (
   <div className="flex h-28 w-full items-center bg-white backdrop-blur-xl after:absolute after:left-0 after:right-0 after:top-16 after:h-px after:bg-gray-new-90 dark:bg-black-new after:dark:bg-gray-new-20 lg:h-14 lg:after:hidden">
     <Container className="z-10 w-full" size="1920">
       <div className="flex h-16 w-full items-center justify-between lg:h-14 lg:pr-20">
@@ -25,7 +25,7 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         <div className="absolute left-1/2 flex -translate-x-1/2 gap-2.5 xl:relative xl:left-0 xl:translate-x-0 lg:hidden">
           <InkeepTrigger docPageType={docPageType} />
         </div>
-        <Sidebar className="lg:hidden" isClient={isClient} isDocs />
+        <Sidebar className="lg:hidden" isClient={isClient} isLoggedIn={isLoggedIn} isDocs />
       </div>
       <div className="h-12 lg:hidden">
         <DocsNavigation navigation={navigation} basePath={basePath} />
@@ -43,6 +43,7 @@ DocsHeader.propTypes = {
   basePath: PropTypes.string.isRequired,
   navigation: PropTypes.array.isRequired,
   isClient: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
 };
 
 export default DocsHeader;

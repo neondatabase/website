@@ -44,7 +44,7 @@ const SOCIALS = [
   },
 ];
 
-const Sidebar = ({ isClient, isDocs, className }) => (
+const Sidebar = ({ isClient, isDocs, isLoggedIn, className }) => (
   <div className={clsx('flex items-center lg:hidden', isDocs ? 'gap-x-6' : 'gap-x-8', className)}>
     <div className={clsx('flex items-center', isDocs ? 'gap-x-4' : 'gap-x-6')}>
       {SOCIALS.map(({ id, to, icon: Icon, label, hasStars }) => (
@@ -79,24 +79,38 @@ const Sidebar = ({ isClient, isDocs, className }) => (
       ))}
     </div>
     <div className={clsx('flex', isDocs ? 'gap-x-2' : 'gap-x-3.5')}>
-      <Button
-        className="h-9 px-[18px]"
-        to={LINKS.login}
-        theme="outlined"
-        size="xxs"
-        tagName="Header"
-      >
-        Log in
-      </Button>
-      <Button
-        className="h-9 px-[18px]"
-        to={LINKS.signup}
-        theme="white-filled-multi"
-        size="xxs"
-        tagName="Header"
-      >
-        Sign up
-      </Button>
+      {isLoggedIn ? (
+        <Button
+          className="h-9 px-[18px]"
+          to={LINKS.console}
+          theme="white-filled-multi"
+          size="xxs"
+          tagName="Header"
+        >
+          Go to Console
+        </Button>
+      ) : (
+        <>
+          <Button
+            className="h-9 px-[18px]"
+            to={LINKS.login}
+            theme="outlined"
+            size="xxs"
+            tagName="Header"
+          >
+            Log in
+          </Button>
+          <Button
+            className="h-9 px-[18px]"
+            to={LINKS.signup}
+            theme="white-filled-multi"
+            size="xxs"
+            tagName="Header"
+          >
+            Sign up
+          </Button>
+        </>
+      )}
     </div>
   </div>
 );
@@ -104,6 +118,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
 Sidebar.propTypes = {
   isClient: PropTypes.bool,
   isDocs: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
   className: PropTypes.string,
 };
 

@@ -125,7 +125,7 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
+const MobileMenu = ({ isDocPage = false, docPageType = null, isLoggedIn = false }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
   const { hasTopbar } = useContext(TopbarContext);
 
@@ -155,28 +155,43 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             </ul>
             <div
               className={clsx(
-                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
+                'absolute inset-x-0 bottom-0 grid gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:p-5',
+                isLoggedIn ? 'grid-cols-1' : 'grid-cols-2 sm:grid-cols-1',
                 { 'pb-20 sm:pb-[68px]': isDocPage }
               )}
             >
-              <Button
-                className="h-9 border border-gray-new-40 px-[18px]"
-                to={LINKS.login}
-                theme="transparent"
-                size="xxs"
-                tagName="MobileMenu"
-              >
-                Log in
-              </Button>
-              <Button
-                className="h-9 px-[18px]"
-                to={LINKS.signup}
-                theme="white-filled-multi"
-                size="xxs"
-                tagName="MobileMenu"
-              >
-                Sign up
-              </Button>
+              {isLoggedIn ? (
+                <Button
+                  className="h-9 px-[18px]"
+                  to={LINKS.console}
+                  theme="white-filled-multi"
+                  size="xxs"
+                  tagName="MobileMenu"
+                >
+                  Go to Console
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    className="h-9 border border-gray-new-40 px-[18px]"
+                    to={LINKS.login}
+                    theme="transparent"
+                    size="xxs"
+                    tagName="MobileMenu"
+                  >
+                    Log in
+                  </Button>
+                  <Button
+                    className="h-9 px-[18px]"
+                    to={LINKS.signup}
+                    theme="white-filled-multi"
+                    size="xxs"
+                    tagName="MobileMenu"
+                  >
+                    Sign up
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </nav>
@@ -188,6 +203,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 MobileMenu.propTypes = {
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
 };
 
 export default MobileMenu;

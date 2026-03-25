@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import { checkCookie } from 'app/actions';
 import DocsHeader from 'components/pages/doc/docs-header';
 import Container from 'components/shared/container';
 import Logo from 'components/shared/logo';
@@ -9,7 +10,7 @@ import MobileMenu from './mobile-menu';
 import Navigation from './navigation';
 import Sidebar from './sidebar';
 
-const Header = ({
+const Header = async ({
   className = null,
   theme = null,
   isSticky = false,
@@ -20,38 +21,43 @@ const Header = ({
   docsBasePath = null,
   customType = null,
   isClient = false,
-}) => (
-  <>
-    <HeaderWrapper
-      className={className}
-      isSticky={isSticky}
-      isStickyOverlay={isStickyOverlay}
-      theme={theme}
-    >
-      {isDocPage ? (
-        <DocsHeader
-          customType={customType}
-          docPageType={docPageType}
-          isClient={isClient}
-          navigation={docsNavigation}
-          basePath={docsBasePath}
-        />
-      ) : (
-        <Container
-          className="!static z-10 flex w-full items-center justify-between md:px-8 sm:px-5"
-          size="1920"
-        >
-          <div className="flex items-center gap-x-[92px] xl:gap-x-10">
-            <Logo width={102} height={28} priority isHeader />
-            <Navigation />
-          </div>
-          <Sidebar isClient={isClient} />
-        </Container>
-      )}
-    </HeaderWrapper>
-    <MobileMenu isDocPage={isDocPage} docPageType={docPageType} />
-  </>
-);
+}) => {
+  const isLoggedIn = await checkCookie('neon_login_indicator');
+
+  return (
+    <>
+      <HeaderWrapper
+        className={className}
+        isSticky={isSticky}
+        isStickyOverlay={isStickyOverlay}
+        theme={theme}
+      >
+        {isDocPage ? (
+          <DocsHeader
+            customType={customType}
+            docPageType={docPageType}
+            isClient={isClient}
+            isLoggedIn={isLoggedIn}
+            navigation={docsNavigation}
+            basePath={docsBasePath}
+          />
+        ) : (
+          <Container
+            className="!static z-10 flex w-full items-center justify-between md:px-8 sm:px-5"
+            size="1920"
+          >
+            <div className="flex items-center gap-x-[92px] xl:gap-x-10">
+              <Logo width={102} height={28} priority isHeader />
+              <Navigation />
+            </div>
+            <Sidebar isClient={isClient} isLoggedIn={isLoggedIn} />
+          </Container>
+        )}
+      </HeaderWrapper>
+      <MobileMenu isDocPage={isDocPage} docPageType={docPageType} isLoggedIn={isLoggedIn} />
+    </>
+  );
+};
 
 Header.propTypes = {
   className: PropTypes.string,
