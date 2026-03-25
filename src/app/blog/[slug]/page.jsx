@@ -1,28 +1,22 @@
 import { notFound } from 'next/navigation';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 
 import Aside from 'components/pages/blog-post/aside';
-import CodeBlock from 'components/pages/blog-post/code-block';
-import CodeTabs from 'components/pages/blog-post/code-tabs';
 import Content from 'components/pages/blog-post/content';
-import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
-import Quote from 'components/pages/blog-post/quote';
 import SocialShare from 'components/pages/blog-post/social-share';
-import Admonition from 'components/shared/admonition';
 import ChangelogForm from 'components/shared/changelog-form';
 import LINKS from 'constants/links';
-import { getAllWpPosts, getWpPostBySlug } from 'utils/api-wp';
+import { getAllBlogPosts, getBlogPostBySlug } from 'utils/api-blog';
 import getFormattedDate from 'utils/get-formatted-date';
-import getHtmlTableOfContents from 'utils/get-html-table-of-contents';
+import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
 import getMetadata from 'utils/get-metadata';
-import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
 const BlogPage = async (props0) => {
   const params = await props0.params;
-  const postResult = await getWpPostBySlug(params?.slug);
-
-  const { post, relatedPosts } = postResult;
+  const { post, relatedPosts } = getBlogPostBySlug(params?.slug);
 
   if (!post) {
     return notFound();
@@ -32,19 +26,7 @@ const BlogPage = async (props0) => {
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
   const formattedDate = getFormattedDate(date);
 
-  const tableOfContents = getHtmlTableOfContents(content);
-
-  const contentWithLazyBlocks = getReactContentWithLazyBlocks(
-    content,
-    {
-      blogpostcode: CodeBlock,
-      blogpostcodetabs: CodeTabs,
-      blogpostcta: CTA,
-      blogpostquote: Quote,
-      blogpostadmonition: (props) => <Admonition {...props} asHTML />,
-    },
-    true
-  );
+  const tableOfContents = getMarkdownTableOfContents(content);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -82,7 +64,12 @@ const BlogPage = async (props0) => {
           />
           <Content
             className="post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:mx-0"
-            html={contentWithLazyBlocks}
+            html={
+              <MDXRemote
+                source={content}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
+            }
           />
           <Aside title={title} slug={shareUrl} tableOfContents={tableOfContents} />
           <SocialShare
@@ -105,7 +92,7 @@ const BlogPage = async (props0) => {
 export async function generateMetadata(props) {
   const params = await props.params;
   const { slug } = params;
-  const { post } = await getWpPostBySlug(slug);
+  const { post } = getBlogPostBySlug(slug);
 
   if (!post) return notFound();
 
@@ -141,9 +128,7 @@ export async function generateMetadata(props) {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllWpPosts();
-
-  return posts.map((post) => ({
+  return getAllBlogPosts().map((post) => ({
     slug: post.slug,
   }));
 }

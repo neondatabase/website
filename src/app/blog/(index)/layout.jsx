@@ -1,6 +1,6 @@
 import Sidebar from 'components/pages/blog/sidebar';
 import Container from 'components/shared/container';
-import { getAllCategories } from 'utils/api-wp';
+import { getAllCategories } from 'utils/api-blog';
 
 // eslint-disable-next-line react/prop-types
 const BlogPageLayout = async ({ children }) => {

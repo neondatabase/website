@@ -1,12 +1,12 @@
 import Rss from 'rss';
 
 import { BLOG_BASE_PATH } from 'constants/blog';
-import { getAllWpPosts } from 'utils/api-wp';
+import { getAllBlogPosts } from 'utils/api-blog';
 
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
-  const allBlogPosts = await getAllWpPosts();
+  const allBlogPosts = getAllBlogPosts();
 
   const feed = new Rss({
     id: BLOG_BASE_PATH,

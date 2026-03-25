@@ -6,7 +6,7 @@ import BlogSearch from 'components/shared/blog-search';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH } from 'constants/blog';
 import SEO_DATA from 'constants/seo-data';
-import { getAllPosts } from 'utils/api-wp';
+import { getAllPosts } from 'utils/api-blog';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({ ...SEO_DATA.blog, rssPathname: `${BLOG_BASE_PATH}rss.xml` });

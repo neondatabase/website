@@ -7,7 +7,7 @@ import BlogSearch from 'components/shared/blog-search';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
-import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-wp';
+import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-blog';
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types
