@@ -5,7 +5,10 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { DOCS_SLUG_VERSIONING_MODES } from 'constants/docs-versioned-slugs';
+import {
+  DOCS_SLUG_VERSIONING_MODES,
+  DOCS_UNVERSIONED_SLUGS,
+} from 'constants/docs-versioned-slugs';
 import { DOCS_VERSIONS } from 'constants/docs-versions';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
@@ -29,6 +32,11 @@ const isUnusedOrSharedContent = (slug) =>
   slug.includes('shared-content/') ||
   slug.includes('README') ||
   slug.includes('GUIDE_TEMPLATE');
+
+const isUnversionedSlug = (slug) =>
+  DOCS_UNVERSIONED_SLUGS.some(
+    (prefix) => slug === prefix || slug.startsWith(`${prefix}/`)
+  );
 
 const getDocsContentPathForVersion = (version) => version?.docsContentPath || DOCS_DIR_PATH;
 
@@ -212,6 +220,11 @@ export async function generateMetadata(props) {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
+  // Redirect versioned URLs for utility pages to canonical URL
+  if (hasVersionPrefix && isUnversionedSlug(currentSlug)) {
+    redirect(`${LINKS.docs}/${currentSlug}`);
+  }
+
   const isChangelog = currentSlug === 'changelog';
   const { post, sourceDocsDirPath, supportsVersioning } = isChangelog
     ? { post: null, sourceDocsDirPath: DOCS_DIR_PATH, supportsVersioning: false }
@@ -254,6 +267,11 @@ const DocPost = async (props) => {
   } = parseDocsVersionedSlug(slug);
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
+
+  // Redirect versioned URLs for utility pages to canonical URL
+  if (hasVersionPrefix && isUnversionedSlug(currentSlug)) {
+    redirect(`${LINKS.docs}/${currentSlug}`);
+  }
 
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;

@@ -21,9 +21,14 @@ const DOCS_DUAL_VERSION_SLUGS = Object.entries(DOCS_VERSIONING_RULES)
   .filter(([, rule]) => rule?.mode === DOCS_SLUG_VERSIONING_MODES.DUAL)
   .map(([slug]) => slug);
 
+// Slugs that should never be versioned - always redirect to canonical URL.
+// These are utility/index pages that don't have version-specific content.
+const DOCS_UNVERSIONED_SLUGS = ['changelog', 'introduction', 'release-notes'];
+
 module.exports = {
   DOCS_SLUG_VERSIONING_MODES,
   DOCS_DEFAULT_SLUG_VERSIONING_MODE,
   DOCS_VERSIONING_RULES,
   DOCS_DUAL_VERSION_SLUGS,
+  DOCS_UNVERSIONED_SLUGS,
 };
