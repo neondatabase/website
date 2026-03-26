@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import BgDecor from 'components/pages/use-case/bg-decor';
 import Button from 'components/shared/button';
+import { cn } from 'utils/cn';
 
 const sizeClassNames = {
   sm: {
@@ -40,7 +40,7 @@ const CtaBlock = ({
   hasDecor = true,
 }) => (
   <div
-    className={clsx(
+    className={cn(
       'cta-on-template not-prose relative w-full overflow-hidden rounded-lg',
       sizeClassNames[size].block,
       hasDecor ? 'bg-[#09090B] bg-template-cta' : 'bg-black-new',
@@ -48,19 +48,19 @@ const CtaBlock = ({
     )}
   >
     <div
-      className={clsx(
+      className={cn(
         'relative z-10 flex gap-6 sm:flex-col sm:items-center',
         themeClassNames[theme].container
       )}
     >
-      <div className={clsx(theme === 'column' && 'text-center', 'sm:text-center')}>
+      <div className={cn(theme === 'column' && 'text-center', 'sm:text-center')}>
         {title && (
-          <h2 className={clsx(sizeClassNames[size].heading, '!my-0 text-gray-new-98')}>{title}</h2>
+          <h2 className={cn(sizeClassNames[size].heading, 'my-0! text-gray-new-98')}>{title}</h2>
         )}
         {description && (
           <p
-            className={clsx(
-              'text-pretty [&>a:hover]:cursor-pointer [&>a:hover]:underline [&>a]:text-primary-2',
+            className={cn(
+              'text-pretty [&>a]:text-primary-2 [&>a:hover]:cursor-pointer [&>a:hover]:underline',
               sizeClassNames[size].description,
               theme === 'column' && 'max-w-[520px]',
               hasDecor ? 'text-gray-new-98/70' : 'text-gray-new-60'
@@ -70,14 +70,14 @@ const CtaBlock = ({
         )}
       </div>
       <div
-        className={clsx(
+        className={cn(
           theme === 'column' &&
             'flex w-full justify-center gap-6 sm:flex-col sm:items-center sm:gap-5'
         )}
       >
         <Button
-          className={clsx(
-            'h-10 px-7 text-base !font-semibold tracking-tighter sm:w-full sm:max-w-sm',
+          className={cn(
+            'h-10 px-7 text-base font-semibold! tracking-tighter sm:w-full sm:max-w-sm',
             buttonClassName
           )}
           theme="primary"

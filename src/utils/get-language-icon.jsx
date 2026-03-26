@@ -1,4 +1,3 @@
-import { FaJava } from 'react-icons/fa6';
 import {
   SiAstro,
   SiCplusplus,
@@ -11,6 +10,7 @@ import {
   SiJson,
   SiKotlin,
   SiMarkdown,
+  SiOpenjdk,
   SiPhp,
   SiPostgresql,
   SiPrisma,
@@ -47,10 +47,11 @@ const LANGUAGE_ICON_MAP = {
   ruby: SiRuby,
   erb: SiRuby,
   php: SiPhp,
-  java: FaJava,
+  java: SiOpenjdk,
   kotlin: SiKotlin,
   csharp: TbBrandCSharp,
-  'c++': SiCplusplus,
+  'c#': TbBrandCSharp,
+  kotlin: SiKotlin,
   cpp: SiCplusplus,
   elixir: SiElixir,
   terraform: SiTerraform,

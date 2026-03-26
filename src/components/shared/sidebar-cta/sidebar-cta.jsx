@@ -14,7 +14,7 @@ const SidebarCta = ({
       <h4 className="text-lg font-bold">{title}</h4>
       <p className="text-gray-600 dark:text-gray-400 text-sm">{description}</p>
       <Button
-        className="pointer-events-auto relative !font-semibold tracking-tighter"
+        className="pointer-events-auto relative font-semibold! tracking-tighter"
         theme="primary"
         size="xs"
         to={cta_url}

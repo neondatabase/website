@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import XIcon from 'icons/x-icon.inline.svg';
+import { cn } from 'utils/cn';
 
 const objectToGetParams = (object) => {
   const params = Object.entries(object)
@@ -70,8 +70,8 @@ const TwitterShareButton = ({
 
   return (
     <Button
-      className={clsx(
-        'relative flex items-center gap-4 px-6 py-[18px] pr-7 font-sans text-xl font-semibold leading-none tracking-extra-tight text-white transition duration-200 lg:px-8 xs:px-3 xs:py-2',
+      className={cn(
+        'relative flex items-center gap-4 px-6 py-[18px] pr-7 font-sans text-xl leading-none font-semibold tracking-extra-tight text-white transition duration-200 lg:px-8 xs:px-3 xs:py-2',
         additionalClassName
       )}
       type="button"
@@ -79,7 +79,7 @@ const TwitterShareButton = ({
       theme="code-copy"
       onClick={handleTwitterShare}
     >
-      <XIcon className={clsx('shrink-0', iconSize === 'default' ? 'h-[26px]' : 'h-[14px]')} />
+      <XIcon className={cn('shrink-0', iconSize === 'default' ? 'h-[26px]' : 'h-[14px]')} />
       <span>{children}</span>
     </Button>
   );

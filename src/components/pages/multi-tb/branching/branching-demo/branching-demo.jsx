@@ -1,7 +1,6 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
@@ -12,6 +11,7 @@ import LINKS from 'constants/links';
 import useBranchingDemo from 'hooks/use-branching-demo';
 import useToast from 'hooks/use-toast';
 import branchingDemo from 'images/pages/multi-tb/branching-demo/branching-demo.jpg';
+import { cn } from 'utils/cn';
 
 import BranchingDemoContent from './branching-demo-content';
 import BranchingDemoTable from './branching-demo-table';
@@ -192,7 +192,7 @@ const BranchingDemo = ({ className }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative flex flex-1 flex-col overflow-hidden px-24 py-8 pt-[18px] lg:px-12 lg:py-[76px] lg:pt-7',
         className
       )}
@@ -202,7 +202,7 @@ const BranchingDemo = ({ className }) => {
           {Object.values(STEPS).map(({ iconClassName }, index) => (
             <React.Fragment key={index}>
               <li
-                className={clsx(
+                className={cn(
                   'relative flex size-7 items-center justify-center rounded-full transition-colors lg:size-6',
                   'after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:border after:transition-colors',
                   index <= currentStep
@@ -211,7 +211,7 @@ const BranchingDemo = ({ className }) => {
                 )}
               >
                 <span
-                  className={clsx(
+                  className={cn(
                     'size-[18px] transition-colors lg:size-[14px]',
                     iconClassName,
                     index <= currentStep ? 'bg-white' : 'bg-gray-new-30'
@@ -220,9 +220,9 @@ const BranchingDemo = ({ className }) => {
               </li>
               {index < Object.keys(STEPS).length - 1 && (
                 <li
-                  className={clsx('h-px w-[60px] transition-colors duration-300 lg:w-[40px]', {
+                  className={cn('h-px w-[60px] transition-colors duration-300 lg:w-[40px]', {
                     'bg-[#0B4C43]': index < currentStep,
-                    'bg-gradient-to-r from-[#0B4C43] to-gray-new-15': index === currentStep,
+                    'bg-linear-to-r from-[#0B4C43] to-gray-new-15': index === currentStep,
                     'bg-gray-new-15': index > currentStep,
                   })}
                   aria-hidden
@@ -243,7 +243,7 @@ const BranchingDemo = ({ className }) => {
           />
           {currentStep === 0 ? (
             <Image
-              className="pointer-events-none absolute bottom-0 right-0 z-10 rounded-[10px] lg:bottom-[33px] lg:right-[-32px] lg:w-[410px]"
+              className="pointer-events-none absolute right-0 bottom-0 z-10 rounded-[10px] lg:right-[-32px] lg:bottom-[33px] lg:w-[410px]"
               src={branchingDemo}
               alt=""
               width={525}

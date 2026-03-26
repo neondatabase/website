@@ -6,7 +6,7 @@
   }
 
   .admonition-text {
-    @apply text-base font-normal leading-normal tracking-tight dark:text-[#D7D8DB];
+    @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
     a {
       @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100 sm:break-words;
@@ -25,13 +25,6 @@
 
     pre {
       @apply overflow-x-auto;
-    }
-  }
-
-  .numbered-steps {
-    p,
-    li {
-      @apply text-base text-gray-new-30/90 dark:text-gray-new-85/90;
     }
   }
 
@@ -77,11 +70,20 @@
       }
     }
   }
+}
+
+@layer utilities {
+  .numbered-steps {
+    p,
+    li {
+      @apply text-base text-gray-new-30/90 dark:text-gray-new-85/90;
+    }
+  }
 
   .prose-doc {
     @apply max-w-none text-lg leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
-    @apply prose-headings:font-sans prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-black-pure prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
+    @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black-pure dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-1 prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -112,12 +114,12 @@
       @apply mt-10;
     }
 
-    @apply prose-h2:mb-0 prose-h2:mt-7 prose-h2:text-[28px] prose-h2:font-medium prose-h2:leading-tight prose-h2:tracking-tighter;
-    @apply prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:tracking-extra-tight;
-    @apply prose-h4:text-lg prose-h4:font-medium prose-h4:leading-snug prose-h4:tracking-extra-tight;
-    @apply prose-p:mb-6 prose-p:mt-[18px] prose-p:text-lg prose-p:font-normal prose-p:leading-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
+    @apply prose-h2:mt-7 prose-h2:mb-0 prose-h2:text-[28px] prose-h2:leading-tight prose-h2:font-medium prose-h2:tracking-tighter;
+    @apply prose-h3:text-xl prose-h3:leading-snug prose-h3:font-medium prose-h3:tracking-extra-tight;
+    @apply prose-h4:text-lg prose-h4:leading-snug prose-h4:font-medium prose-h4:tracking-extra-tight;
+    @apply prose-p:mt-[18px] prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
-    @apply prose-hr:mb-12 prose-hr:mt-8 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
+    @apply prose-hr:mt-8 prose-hr:mb-12 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
 
     /* Slightly less than `prose-h2:mt-7` so the first section under the page title is not too airy */
     > h2:first-child,
@@ -127,7 +129,7 @@
     }
 
     .admonition h4 {
-      @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
+      @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
     }
 
     .anchor-heading {
@@ -151,22 +153,16 @@
       @apply my-6 pl-[34px] md:pl-4;
 
       > li {
-        @apply text-[18px] font-normal leading-normal text-gray-new-30 dark:text-gray-new-85;
-        &::before {
-          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
-        }
+        @apply text-[18px] leading-normal font-normal text-gray-new-30 dark:text-gray-new-85;
+        @apply before:absolute before:top-0 before:-left-4 before:text-[18px] before:leading-normal before:font-normal before:text-gray-new-30 before:content-['-'] dark:before:text-gray-new-85 before:md:-left-3.5;
       }
     }
 
     ol {
-      @apply list-decimal pl-[38px] md:pl-5;
+      @apply list-decimal pl-9.5 md:pl-5;
 
       li {
-        @apply pl-1.5;
-
-        &::marker {
-          @apply pl-1 text-black-new dark:text-gray-new-90;
-        }
+        @apply pl-1.5 marker:pl-1 marker:text-black-new dark:marker:text-gray-new-90;
       }
 
       ol {
@@ -229,14 +225,14 @@
         @apply px-0;
 
         > code {
-          @apply inline-block w-full px-6 py-1.5 !leading-relaxed wrap-anywhere;
+          @apply inline-block w-full px-6 py-1.5 leading-relaxed! wrap-anywhere;
         }
       }
 
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !leading-normal dark:![text-shadow:unset];
+        @apply font-mono! text-sm leading-normal! dark:text-shadow-[unset]!;
         > span {
           @apply tracking-extra-tight;
         }
@@ -246,22 +242,19 @@
     }
 
     :not(pre) > code {
-      @apply inline rounded border border-gray-new-70 bg-gray-new-98 !px-1 !py-px !font-mono text-sm !font-normal leading-[1.2] tracking-extra-tight !text-black-pure dark:border-gray-new-30 dark:bg-black-new dark:!text-white;
+      @apply inline rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
       overflow-wrap: anywhere;
       word-break: break-word;
       white-space: normal;
 
-      &::before,
-      &::after {
-        @apply hidden;
-      }
+      @apply before:hidden after:hidden;
     }
 
     .code-wrap {
       code {
         white-space: break-spaces !important;
 
-        @apply !max-w-full !break-words;
+        @apply max-w-full! break-words!;
       }
     }
 
@@ -278,17 +271,14 @@
       @apply font-normal not-italic;
 
       p {
-        @apply my-0 text-lg font-normal leading-normal tracking-tight text-gray-new-8 dark:text-gray-new-85;
+        @apply my-0 text-lg leading-normal font-normal tracking-tight text-gray-new-8 dark:text-gray-new-85;
 
-        &::before,
-        &::after {
-          @apply hidden;
-        }
+        @apply before:hidden after:hidden;
       }
 
       cite,
       footer {
-        @apply mt-5 flex items-center gap-2.5 text-sm font-medium leading-tight tracking-tight text-gray-new-8 dark:text-gray-new-90;
+        @apply mt-5 flex items-center gap-2.5 text-sm leading-tight font-medium tracking-tight text-gray-new-8 dark:text-gray-new-90;
       }
     }
 
@@ -302,19 +292,14 @@
     }
 
     details summary {
-      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-new dark:text-white;
+      @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-new dark:text-white;
       list-style: none;
+
+      @apply marker:hidden;
+      @apply before:size-3.5 before:shrink-0 before:origin-center before:rotate-0 before:bg-current before:transition-transform before:duration-200 before:ease-linear before:content-[''] before:[clip-path:polygon(30%_22%,30%_78%,78%_50%)];
 
       &::-webkit-details-marker {
         @apply hidden;
-      }
-
-      &::marker {
-        @apply hidden;
-      }
-
-      &::before {
-        @apply size-3.5 shrink-0 origin-center rotate-0 bg-current transition-transform duration-200 ease-linear content-[''] [clip-path:polygon(30%_22%,30%_78%,78%_50%)];
       }
     }
 
@@ -323,7 +308,7 @@
     }
 
     details > *:not(summary) {
-      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
+      @apply mt-6 pl-[26px] text-base leading-normal font-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
     }
 
     /* Ensure list items inside details have proper spacing */
@@ -364,7 +349,7 @@
     }
 
     pre {
-      @apply overflow-x-auto rounded-md !bg-gray-new-94/60 dark:!bg-gray-new-15;
+      @apply overflow-x-auto rounded-md bg-gray-new-94/60! dark:bg-gray-new-15!;
     }
 
     :not(pre) > code {
@@ -378,6 +363,8 @@
     ol {
       counter-reset: item;
       @apply m-0 p-0;
+      padding-inline-start: 0 !important;
+      padding-left: 0 !important;
     }
 
     ol > li {
@@ -410,7 +397,7 @@
   }
 
   .prose-variable {
-    @apply text-lg tracking-extra-tight text-gray-new-70 sm:text-base;
+    @apply text-lg/normal tracking-extra-tight text-gray-new-70 sm:text-base;
 
     p,
     ul {

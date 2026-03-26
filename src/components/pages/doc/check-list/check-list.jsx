@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import slugify from 'slugify';
 
 import useLocalStorage from 'hooks/use-local-storage';
+import { cn } from 'utils/cn';
 
 const CheckList = ({ title, children }) => {
   const id =
@@ -56,22 +56,22 @@ const CheckList = ({ title, children }) => {
 
   return (
     <div
-      className={clsx(
-        'checklist doc-cta !mt-9 flex flex-col bg-white px-8 pb-8 pt-6',
+      className={cn(
+        'checklist doc-cta mt-9! flex flex-col bg-white px-8 pt-6 pb-8',
         'border border-gray-new-80',
         'dark:border-gray-new-20 dark:bg-black-pure',
-        'xl:!mt-8 lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
+        'xl:mt-8! lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
       )}
     >
       <div className="flex items-start gap-4">
         {title && (
-          <h2 className="!m-0 !pt-0 text-2xl font-medium leading-tight tracking-tighter text-black-pure dark:text-white lg:text-xl">
+          <h2 className="m-0! pt-0! text-2xl leading-tight font-medium tracking-tighter text-black-pure dark:text-white lg:text-xl">
             {title}
           </h2>
         )}
         <span
-          className={clsx(
-            'border px-2.5 py-1.5 font-mono text-sm font-medium leading-none lg:mt-0',
+          className={cn(
+            'border px-2.5 py-1.5 font-mono text-sm leading-none font-medium lg:mt-0',
             progress === 100
               ? 'border-secondary-8/20 bg-secondary-8/10 text-secondary-8 dark:border-green-45/20 dark:bg-green-45/10 dark:text-green-45'
               : 'border-gray-new-70 bg-gray-new-94 text-black-pure dark:border-gray-new-20 dark:bg-gray-new-15/60 dark:text-gray-new-90'
@@ -80,7 +80,7 @@ const CheckList = ({ title, children }) => {
           {progress === 100 ? 'Complete' : `${progress}%`}
         </span>
       </div>
-      <ul className="!mb-0 !mt-6 flex flex-col gap-5 !p-0 lg:!mt-[18px] lg:gap-4 md:!mt-4">
+      <ul className="mt-6! mb-0! flex flex-col gap-5 p-0! lg:mt-[18px]! lg:gap-4 md:mt-4!">
         {childrenWithProps}
       </ul>
     </div>

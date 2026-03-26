@@ -5,7 +5,7 @@ import Toc from './toc';
 const TocWrapper = ({ children }) => (
   <div className="relative">
     {/* Position TOC absolutely aligned with container (max-width: 1600px) + left padding (32px) */}
-    <div className="absolute bottom-0 left-[calc(50%-min(100vw,1600px)/2+32px)] top-0 h-full xl:hidden">
+    <div className="absolute top-0 bottom-0 left-[calc(50%-min(100vw,1600px)/2+32px)] h-full xl:hidden">
       <Toc />
     </div>
     {children}

@@ -201,7 +201,8 @@ export async function generateStaticParams() {
   });
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const {
     hasVersionPrefix,
@@ -243,7 +244,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const DocPost = async ({ params }) => {
+const DocPost = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const {
     hasVersionPrefix,

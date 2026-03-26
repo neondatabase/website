@@ -5,11 +5,11 @@ import Heading from '../heading';
 
 const Auth = () => (
   <section
-    className="auth safe-paddings relative scroll-mt-[60px] pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
+    className="auth relative scroll-mt-[60px] safe-paddings pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
     id="auth"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
+      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16! md:px-5!"
       size="1600"
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">

@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-import clsx from 'clsx';
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
@@ -7,6 +6,7 @@ import Image from 'next/image';
 
 import EmbedTweet from 'components/shared/embed-tweet';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import AnchorHeading from '../components/shared/anchor-heading';
 import ImageZoom from '../components/shared/image-zoom';
@@ -73,7 +73,7 @@ const sharedComponents = {
     return (
       <ImageZoom src={urlWithoutSize} isDark>
         <Image
-          className={clsx('', className)}
+          className={cn(className)}
           src={urlWithoutSize}
           width={width || 975}
           height={height || 512}
@@ -146,9 +146,9 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
 
             return caption ? (
               <figure>
-                <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                <Component className={cn('my-0', imgClassName)} {...otherImgProps} />
                 <figcaption
-                  className={clsx('flex justify-center text-center', captionClassName)}
+                  className={cn('flex justify-center text-center', captionClassName)}
                   {...otherCaptionProps}
                 >
                   {domToReact(caption)}
@@ -173,10 +173,10 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
             return (
               <figure className="image-with-link">
                 <Link to={linkHref} {...otherLinkProps}>
-                  <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                  <Component className={cn('my-0', imgClassName)} {...otherImgProps} />
                   {caption && (
                     <figcaption
-                      className={clsx('flex justify-center text-center', captionClassName)}
+                      className={cn('flex justify-center text-center', captionClassName)}
                       {...otherCaptionProps}
                     >
                       {domToReact(caption)}

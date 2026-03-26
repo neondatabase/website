@@ -1,8 +1,7 @@
-import clsx from 'clsx';
-
 import Button from 'components/shared/button';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 const Header = () => (
   <div className="pt-60 xl:pt-40 lg:pt-[116px] md:pt-[102px]">
@@ -14,8 +13,8 @@ const Header = () => (
         Speed and scale for agents. And devs.
       </h2>
       <p
-        className={clsx(
-          'mt-6 max-w-[736px] text-lg tracking-extra-tight text-gray-new-60',
+        className={cn(
+          'mt-6 max-w-[736px] text-lg leading-normal tracking-extra-tight text-gray-new-60',
           'lg:mt-5 lg:text-base lg:leading-snug md:mt-[18px] sm:text-[15px]'
         )}
       >

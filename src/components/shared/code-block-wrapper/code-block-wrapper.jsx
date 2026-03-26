@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import { cn } from 'utils/cn';
 import getLanguageIcon from 'utils/get-language-icon';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -64,7 +64,7 @@ const CodeBlockWrapper = ({
 
   return (
     <Tag
-      className={clsx(
+      className={cn(
         'code-block group/code-block relative flex flex-col [&_pre]:min-w-full',
         filename && 'overflow-hidden',
         className
@@ -73,7 +73,7 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="flex h-11 items-center gap-2 truncate border-b border-gray-new-80 bg-gray-new-98 px-4 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-70">
+        <div className="flex h-11 items-center gap-2 truncate border-b border-gray-new-80 bg-gray-new-98 px-4 text-[13px] leading-none font-medium tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-70">
           {getLanguageIcon(language)}
           {filename}
         </div>
@@ -81,8 +81,8 @@ const CodeBlockWrapper = ({
       {children}
 
       <button
-        className={clsx(
-          'invisible absolute right-4 border border-gray-new-80 bg-white p-1.5 text-gray-new-40 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-gray-new-90 group-hover/code-block:visible group-hover/code-block:opacity-100 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+        className={cn(
+          'invisible absolute right-4 border border-gray-new-80 bg-white p-1.5 text-gray-new-40 opacity-0 transition-[background-color,opacity,visibility] duration-200 group-hover/code-block:visible group-hover/code-block:opacity-100 hover:bg-gray-new-90 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
           copyButtonTopClassName,
           copyButtonClassName
         )}

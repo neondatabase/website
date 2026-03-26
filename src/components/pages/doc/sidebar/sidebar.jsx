@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
@@ -13,6 +12,7 @@ import {
   resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
+import { cn } from 'utils/cn';
 
 import Menu from '../menu';
 import VersionSwitcher from '../version-switcher';
@@ -100,7 +100,7 @@ const Sidebar = ({
   }
 
   return (
-    <aside className={clsx('relative -mt-11', className)}>
+    <aside className={cn('relative -mt-11', className)}>
       <div className="sticky top-28">
         <nav
           className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-2.5 pr-8 pt-4 dark:border-gray-new-20"

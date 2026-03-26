@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -6,6 +5,7 @@ import AnimatedButton from 'components/shared/animated-button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import GradientLabel from '../gradient-label';
 
@@ -26,20 +26,20 @@ const CTAWithElephant = ({
   linkTarget = undefined,
 }) => (
   <section
-    className={clsx('cta-with-elephant safe-paddings overflow-hidden bg-black-pure', className)}
+    className={cn('cta-with-elephant overflow-hidden bg-black-pure safe-paddings', className)}
   >
     <Container
       size="medium"
       className="grid grid-cols-12 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1"
     >
-      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pb-[164px] pt-16 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:col-start-1 xl:pb-[78px] xl:pt-20 lg:col-span-6 lg:pb-[54px] md:col-span-full md:items-center md:text-center">
+      <div className="relative z-10 col-span-4 col-start-2 flex flex-col items-start pt-16 pb-[164px] 2xl:col-span-5 2xl:col-start-2 2xl:pb-36 xl:col-start-1 xl:pt-20 xl:pb-[78px] lg:col-span-6 lg:pb-[54px] md:col-span-full md:items-center md:text-center">
         {label && (
           <GradientLabel className="mb-5" theme={labelTheme}>
             {label}
           </GradientLabel>
         )}
         <Heading
-          className={clsx(
+          className={cn(
             'max-w-[500px] xl:max-w-[400px] lg:max-w-[350px] md:mx-auto',
             titleClassName
           )}
@@ -49,12 +49,12 @@ const CTAWithElephant = ({
         >
           {title}
         </Heading>
-        <p className="mt-3 max-w-[464px] text-lg font-light leading-snug xl:max-w-[400px] xl:text-base lg:max-w-sm md:mx-auto md:max-w-md">
+        <p className="mt-3 max-w-[464px] text-lg leading-snug font-light xl:max-w-[400px] xl:text-base lg:max-w-sm md:mx-auto md:max-w-md">
           {description}
         </p>
         <div className="mt-9 flex items-center gap-x-8 xl:mt-7 lg:gap-x-4 md:justify-center sm:mt-6 sm:flex-col sm:gap-y-5">
           <AnimatedButton
-            className={clsx(
+            className={cn(
               'inline-flex py-5 text-lg tracking-extra-tight hover:bg-[#00FFAA] xl:py-[17px] lg:text-base sm:text-lg',
               buttonClassName
             )}

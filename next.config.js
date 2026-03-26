@@ -12,6 +12,16 @@ const defaultConfig = {
   transpilePackages: ['geist', 'react-icons'],
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85, 90, 95, 99, 100],
+    localPatterns: [
+      {
+        pathname: '/docs/og',
+      },
+      {
+        pathname: '/**',
+        search: '',
+      },
+    ],
     remotePatterns: [
       {
         protocol: 'https',
@@ -564,6 +574,78 @@ const defaultConfig = {
         destination: 'https://get.neon.com/student-25',
         permanent: false,
       },
+      // Deprecated Neon Azure Native ISV docs (EOL); redirect to docs home
+      {
+        source: '/docs/manage/azure',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migrate-from-azure-native',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-deploy',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-manage',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-develop',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/billing-azure-marketplace',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/get-started/azure-get-started',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      // Same deprecated Azure Native ISV slugs as raw `.md` URLs (rewrites otherwise miss file)
+      {
+        source: '/docs/manage/azure.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/import/migrate-from-azure-native.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-deploy.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-manage.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/azure/azure-develop.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/billing-azure-marketplace.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/get-started/azure-get-started.md',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -630,32 +712,11 @@ const defaultConfig = {
       ],
     };
   },
-  webpack(config) {
-    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports not ending in ".inline.svg"
-      {
-        test: /(?<!inline)\.svg$/,
-        use: [
-          {
-            loader: require.resolve('url-loader'),
-            options: {
-              limit: 512,
-              publicPath: '/_next/static/svgs',
-              outputPath: 'static/svgs',
-              fallback: require.resolve('file-loader'),
-            },
-          },
-          {
-            loader: require.resolve('svgo-loader'),
-          },
-        ],
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.inline.svg$/i,
-        use: [
+  turbopack: {
+    root: __dirname,
+    rules: {
+      '*.inline.svg': {
+        loaders: [
           {
             loader: '@svgr/webpack',
             options: {
@@ -676,40 +737,21 @@ const defaultConfig = {
             },
           },
         ],
-      }
-    );
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i;
-
-    config.module.rules.push({
-      test: /rive\.wasm$/,
-      type: 'asset/resource',
-      generator: {
-        filename: 'static/[name].[hash][ext]',
+        as: '*.js',
       },
-    });
-
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      module: false,
-      path: false,
-      crypto: false,
-      stream: false,
-      assert: false,
-      http: false,
-      https: false,
-      os: false,
-      url: false,
-    };
-
-    config.experiments = {
-      ...config.experiments,
-      asyncWebAssembly: true,
-    };
-
-    return config;
+    },
+    resolveAlias: {
+      fs: { browser: './empty.js' },
+      module: { browser: './empty.js' },
+      path: { browser: './empty.js' },
+      crypto: { browser: './empty.js' },
+      stream: { browser: './empty.js' },
+      assert: { browser: './empty.js' },
+      http: { browser: './empty.js' },
+      https: { browser: './empty.js' },
+      os: { browser: './empty.js' },
+      url: { browser: './empty.js' },
+    },
   },
   env: {
     INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,

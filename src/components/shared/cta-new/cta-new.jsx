@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -7,15 +6,16 @@ import ButtonAiHelper from 'components/shared/button-ai-helper';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import ctaBackground from './images/cta-bg.jpg';
 
 const CONTACT_SALES_AI_SETTINGS = {
-  botName: 'Neon Sales AI',
+  aiAssistantName: 'Neon Sales AI',
   placeholder: 'How do I get started?',
   introMessage:
-    "<p>Hi!<br>I'm an AI assistant here to help you learn about Neon and answer any questions you have.</p><p>Feel free to ask about pricing, features, enterprise solutions, or anything else!</p>",
-  quickQuestions: [
+    "Hi!\nI'm an AI assistant here to help you learn about Neon and answer any questions you have.\n\nFeel free to ask about pricing, features, enterprise solutions, or anything else!",
+  exampleQuestions: [
     'How to get a Demo request?',
     'What are the Enterprise Pricing?',
     'HIPAA Compliance',
@@ -34,14 +34,14 @@ const CTANew = ({
   buttonUrl = LINKS.signup,
   buttonType = null,
 }) => (
-  <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
+  <section className={cn('cta relative bg-[#151617] safe-paddings', className)}>
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
         <SectionLabel className="sm:mb-4" theme="white" icon={labelIcon}>
           {label}
         </SectionLabel>
         <div
-          className={clsx(
+          className={cn(
             'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none',
             copyWrapperClassName
           )}

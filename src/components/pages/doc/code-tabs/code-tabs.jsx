@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 
 import { CodeTabsContext } from 'contexts/code-tabs-context';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const CodeTabs = ({ labels = [], reverse = false, children }) => {
@@ -29,11 +29,11 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
   return (
     <div className="my-0 max-w-full">
       {/* Tabs above code block */}
-      <div className="no-scrollbars relative mb-2.5 flex w-full flex-nowrap gap-2 overflow-auto">
+      <div className="relative mb-2.5 no-scrollbars flex w-full flex-nowrap gap-2 overflow-auto">
         {displayedLabels.map((label, index) => (
           <div
-            className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap rounded-lg px-4 py-2.5 text-[13px] font-medium leading-none transition-all duration-200',
+            className={cn(
+              'relative z-10 cursor-pointer rounded-lg px-4 py-2.5 text-[13px] leading-none font-medium whitespace-nowrap transition-all duration-200',
               index === currentIndex
                 ? 'bg-black-new text-white shadow-md dark:bg-white dark:text-black-new'
                 : 'bg-gray-new-94 text-gray-new-40 hover:bg-gray-new-90 hover:text-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-70 dark:hover:bg-gray-new-20 dark:hover:text-gray-new-90'

@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import ScrollLoader from 'components/shared/scroll-loader';
 import ChevronIcon from 'icons/arrow-label.inline.svg';
+import { cn } from 'utils/cn';
 import generateChangelogPath from 'utils/generate-changelog-path';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -16,15 +16,15 @@ const ChangelogPost = (post) => {
   return (
     <article className="group flex first:mt-0 lg:flex-col lg:space-y-3">
       <div
-        className={clsx(
-          'relative w-full pb-24 pt-10',
-          'before:absolute before:-left-40 before:right-0 before:top-0 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
+        className={cn(
+          'relative w-full pt-10 pb-24',
+          'before:absolute before:top-0 before:right-0 before:-left-40 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
           'group-last:pb-0 dark:before:bg-gray-new-20',
-          'md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:pt-0 sm:before:hidden sm:after:hidden'
+          'md:pb-7 sm:ml-0 sm:max-w-full sm:pt-0 sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
         )}
       >
         <Link
-          className="absolute -left-40 right-0 top-10 shrink-0 whitespace-nowrap font-mono text-[13px] font-medium leading-none text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
+          className="absolute top-10 right-0 -left-40 shrink-0 font-mono text-[13px] leading-none font-medium whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
           to={changelogPath}
         >
           <div className="flex w-32 items-center gap-1.5 py-[15px]">
@@ -47,12 +47,12 @@ const ChangelogPost = (post) => {
 };
 
 const ChangelogList = ({ className, posts }) => (
-  <div className={clsx('changelog-list sm:space-y-7', className)}>
+  <div className={cn('changelog-list sm:space-y-7', className)}>
     {posts.slice(0, 3).map((item) => (
       <ChangelogPost key={item.slug} {...item} />
     ))}
     {posts.length > 3 && (
-      <ScrollLoader className={clsx('sm:space-y-7', className)} itemsCount={3}>
+      <ScrollLoader className={cn('sm:space-y-7', className)} itemsCount={3}>
         {posts.slice(3).map((item) => (
           <ChangelogPost key={item.slug} {...item} />
         ))}

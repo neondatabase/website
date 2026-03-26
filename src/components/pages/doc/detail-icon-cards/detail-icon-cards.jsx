@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
 import СhevronIcon from 'icons/arrow-label.inline.svg';
+import { cn } from 'utils/cn';
 
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
@@ -173,9 +173,9 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
 
   return (
     <ListComponent
-      className={clsx(
-        'detail-icon-cards not-prose grid !p-0 sm:grid-cols-1',
-        compact ? '!my-7 grid-cols-2 gap-3' : '!my-10 grid-cols-2 gap-5'
+      className={cn(
+        'detail-icon-cards not-prose grid p-0! sm:grid-cols-1',
+        compact ? 'my-7! grid-cols-2 gap-3' : 'my-10! grid-cols-2 gap-5'
       )}
     >
       {React.Children.map(children, (child, index) => {
@@ -183,9 +183,9 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
         const Icon = icons[icon];
 
         return (
-          <li className="!m-0 flex min-h-[169px] !pl-0 before:hidden" key={index}>
+          <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
             <Link
-              className={clsx(
+              className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
                 withNumbers
                   ? 'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]'
@@ -201,10 +201,10 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                 alt=""
                 width={342}
                 height={172}
-                className="absolute right-0 top-0 z-0"
+                className="absolute top-0 right-0 z-0"
               />
               {withNumbers ? (
-                <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm font-medium uppercase leading-none">
+                <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm leading-none font-medium uppercase">
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
@@ -213,15 +213,15 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
               )}
               <div className="mt-auto flex flex-col gap-1.5">
                 <h3
-                  className={clsx(
-                    'text-lg font-medium leading-snug tracking-extra-tight',
+                  className={cn(
+                    'text-lg leading-snug font-medium tracking-extra-tight',
                     !withNumbers && 'dark:text-white'
                   )}
                 >
                   {children}
                 </h3>
                 <p
-                  className={clsx(
+                  className={cn(
                     'text-base leading-snug tracking-extra-tight',
                     !withNumbers && 'text-gray-new-50 dark:text-gray-new-60'
                   )}

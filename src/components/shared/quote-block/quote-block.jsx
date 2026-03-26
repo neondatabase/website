@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -22,6 +21,7 @@ import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
 import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
+import { cn } from 'utils/cn';
 
 const quotes = {
   'dhruv-amin': {
@@ -114,9 +114,9 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
   const { avatar, name } = authorData;
 
   return (
-    <section className={clsx('quote my-8 border-l-2 border-green-44 pl-6', className)}>
+    <section className={cn('quote my-8 border-l-2 border-green-44 pl-6', className)}>
       <figure className="my-10 lg:my-8 md:my-6">
-        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl !font-normal leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[18px] sm:leading-snug">
+        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl leading-snug font-normal! tracking-tighter text-black-new dark:text-gray-9 sm:text-[18px] sm:leading-snug">
           &quot;{quote}&quot;
         </blockquote>
 
@@ -132,7 +132,7 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
               />
             </div>
           )}
-          <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
+          <div className="text-base leading-snug font-medium tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
             {name}
             <span className="font-normal text-gray-new-70 dark:text-[#A1A1AA]">
               <span className="mx-1.5">—</span>

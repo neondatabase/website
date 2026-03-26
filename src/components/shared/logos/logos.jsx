@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
+import { cn } from 'utils/cn';
 
 import AdobeLogo from './images/adobe.inline.svg';
 import AKQALogo from './images/akqa.inline.svg';
@@ -107,7 +107,7 @@ const sizes = {
 
 const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop }) => (
   <div
-    className={clsx(
+    className={cn(
       'logos flex w-full overflow-hidden',
       staticDesktop ? 'xl:logos-animated' : 'logos-animated',
       className
@@ -116,8 +116,8 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
     {Array.from({ length: 2 }).map((_, index) => (
       <ul
         key={index}
-        className={clsx(
-          'logos-content !m-0 flex !p-0',
+        className={cn(
+          'logos-content m-0! flex p-0!',
           staticDesktop && 'w-full justify-between xl:w-auto xl:justify-normal',
           staticDesktop && index === 1 && 'hidden xl:flex'
         )}
@@ -127,8 +127,8 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
           const Logo = allLogos[logo];
           if (!Logo) return null;
           return (
-            <li key={index} className="!m-0 before:!content-none">
-              <Logo className={clsx('w-auto', sizes[size], logoClassName)} />
+            <li key={index} className="m-0! before:content-none!">
+              <Logo className={cn('w-auto', sizes[size], logoClassName)} />
             </li>
           );
         })}
@@ -146,7 +146,7 @@ LogosWall.propTypes = {
 };
 
 const Logos = ({ className, logoClassName, withGreenFade, logos, size, staticDesktop }) => (
-  <Container size="1100" className={clsx('w-full', className)}>
+  <Container size="1100" className={cn('w-full', className)}>
     <div className="relative select-none">
       <LogosWall
         logos={logos}
@@ -158,7 +158,7 @@ const Logos = ({ className, logoClassName, withGreenFade, logos, size, staticDes
         <LogosWall
           className="logos-central-mask absolute inset-0"
           logos={logos}
-          logoClassName={clsx('fill-green-45', logoClassName)}
+          logoClassName={cn('fill-green-45', logoClassName)}
           size={size}
           staticDesktop={staticDesktop}
         />

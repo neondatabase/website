@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Button from 'components/shared/button';
@@ -9,6 +8,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
+import { cn } from 'utils/cn';
 
 const logos = [
   'replit',
@@ -23,9 +23,9 @@ const logos = [
 ];
 
 const Hero = () => (
-  <section className="hero safe-paddings relative mt-16 lg:mt-14">
+  <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container
-      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
+      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
       size="1600"
     >
       <Link href="#backed-by-giants">
@@ -48,8 +48,8 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 select-none border-t border-gray-new-20 pt-10 lg:mt-14 lg:pt-7 sm:mt-12">
-        <Logos className="max-w-full !p-0" logos={logos} size="md" />
+      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 lg:pt-7 sm:mt-12">
+        <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
 
@@ -61,7 +61,7 @@ const Hero = () => (
           webm: ffmpeg -i hero.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an hero.webm
       */}
       <PauseableVideo
-        className={clsx(
+        className={cn(
           'relative left-1/2 w-[1920px] -translate-x-1/2',
           'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
         )}

@@ -1,16 +1,16 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useRef, useState, useMemo } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex items-center justify-center font-bold !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
+  base: 'inline-flex items-center justify-center font-bold leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-hidden',
   size: {
     lg: 'text-lg py-[17px] px-11 2xl:py-4 2xl:px-9',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8',
@@ -94,7 +94,7 @@ const AnimatedButton = ({
     setCursorAnimationVariant('default');
   };
 
-  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+  const className = cn(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
   const cssProperties = {
     '--color': animationColor,
@@ -107,7 +107,7 @@ const AnimatedButton = ({
 
   return isAnimated ? (
     <Tag
-      className={clsx('animated-button', className)}
+      className={cn('animated-button', className)}
       style={cssProperties}
       to={to}
       ref={buttonRef}
@@ -125,7 +125,7 @@ const AnimatedButton = ({
     >
       <LazyMotion features={domAnimation}>
         <m.span
-          className="absolute left-0 top-0 rounded-full blur-xl"
+          className="absolute top-0 left-0 rounded-full blur-xl"
           variants={cursorBlurVariants}
           animate={cursorAnimationVariant}
           transition={{

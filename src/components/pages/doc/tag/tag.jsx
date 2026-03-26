@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const themes = {
   new: 'text-[#00B87B] dark:text-green-45 bg-[#00B87B]/10 dark:bg-green-45/10',
@@ -16,8 +17,8 @@ const sizes = {
 
 const Tag = ({ className, label, size }) => (
   <span
-    className={clsx(
-      'block w-fit whitespace-nowrap rounded-[40px] font-semibold uppercase leading-none',
+    className={cn(
+      'block w-fit rounded-[40px] leading-none font-semibold whitespace-nowrap uppercase',
       className,
       themes?.[label] || themes.default,
       sizes?.[size] || sizes.md

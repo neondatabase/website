@@ -66,7 +66,7 @@ CREATE TABLE salaries (
     effective_date DATE NOT NULL,
     salary DECIMAL(10, 2) NOT NULL DEFAULT 0,
     PRIMARY KEY (employee_id, effective_date),
-    FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE
 );
 ```
 
@@ -120,7 +120,7 @@ BEGIN
 	WHERE employee_id = NEW.employee_id;
 
     ELSIF TG_OP = 'DELETE' THEN
-        DELETE FROM salaries
+        DELETE FROM employees
 	WHERE employee_id = OLD.employee_id;
     END IF;
     RETURN NULL;

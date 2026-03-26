@@ -34,10 +34,10 @@ const TestReliably = () => (
     <Container className="lg:mx-0 md:mx-auto md:max-w-[640px]" size="960">
       <div className="flex items-start gap-16 lg:justify-start lg:gap-16 sm:flex-col sm:gap-8">
         <div className="flex-1 xl:mt-1.5 lg:mt-0 sm:w-full">
-          <p className="mb-3 text-base font-medium uppercase tracking-wide text-gray-new-50 xl:mb-3 lg:mb-4 lg:text-sm md:mb-[9px] md:text-[12px]">
+          <p className="mb-3 text-base font-medium tracking-wide text-gray-new-50 uppercase xl:mb-3 lg:mb-4 lg:text-sm md:mb-[9px] md:text-[12px]">
             Test reliably
           </p>
-          <h2 className="text-5xl font-medium leading-tight tracking-[-0.03em] text-gray-new-60 xl:max-w-[860px] xl:text-[44px] lg:text-[36px] md:text-[24px] md:leading-snug md:tracking-tighter">
+          <h2 className="text-5xl leading-tight font-medium tracking-[-0.03em] text-gray-new-60 xl:max-w-[860px] xl:text-[44px] lg:text-[36px] md:text-[24px] md:leading-snug md:tracking-tighter">
             Most production issues originate from unreliable tests.{' '}
             <span className="text-white">
               Branch your{' '}
@@ -51,7 +51,7 @@ const TestReliably = () => (
                   quality={100}
                 />
                 <span
-                  className="absolute left-1/2 top-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
+                  className="absolute top-1/2 left-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
                   aria-hidden
                 />
               </span>{' '}

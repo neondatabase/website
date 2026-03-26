@@ -26,7 +26,8 @@ export async function generateStaticParams() {
   });
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
 
   let label = 'Changelog';
@@ -94,7 +95,7 @@ const ChangelogPost = async ({ currentSlug }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
-      <div className="mx-auto w-full max-w-[704px] pb-40 pt-9 xl:pb-32 lg:pb-28 lg:pt-0 md:pb-20">
+      <div className="mx-auto w-full max-w-[704px] pt-9 pb-40 xl:pb-32 lg:pt-0 lg:pb-28 md:pb-20">
         <Link
           className="group sticky top-40 -ml-64 inline-flex items-center gap-1.5 text-sm leading-none tracking-tight xl:static xl:ml-0"
           to={CHANGELOG_BASE_PATH}
@@ -126,7 +127,8 @@ const ChangelogPost = async ({ currentSlug }) => {
   );
 };
 
-const ChangelogPostPage = async ({ params }) => {
+const ChangelogPostPage = async (props) => {
+  const params = await props.params;
   const currentSlug = params?.slug.join('/');
 
   return <ChangelogPost currentSlug={currentSlug} />;

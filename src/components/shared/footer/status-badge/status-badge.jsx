@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import { getNeonStatus, NEON_STATUS } from 'utils/get-neon-status';
 
 const statusData = {
@@ -48,12 +48,12 @@ const StatusBadge = () => {
       ref={ref}
     >
       <span
-        className={clsx(
+        className={cn(
           'h-1.5 w-1.5 rounded-full',
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span className="whitespace-nowrap text-sm leading-none tracking-extra-tight text-black-pure dark:text-white">
+      <span className="text-sm leading-none tracking-extra-tight whitespace-nowrap text-black-pure dark:text-white">
         {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>

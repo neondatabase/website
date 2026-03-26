@@ -11,7 +11,9 @@ import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'uti
 import getMetadata from 'utils/get-metadata';
 
 // eslint-disable-next-line react/prop-types
-const BlogCategoryPage = async ({ params: { slug } }) => {
+const BlogCategoryPage = async ({ params }) => {
+  const { slug } = await params;
+
   const category = await getCategoryBySlug(slug);
   const posts = await getPostsByCategorySlug(slug);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
@@ -36,14 +38,14 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
       />
       <Suspense fallback={null}>
         <BlogSearch
-          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:!static md:!right-auto md:!top-auto md:mt-4"
+          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:static! md:right-auto! md:top-auto! md:mt-4"
           posts={validPosts}
         >
           <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:!border-t-0 lg:!pt-0 md:!border-t-0 md:!pt-0' : ''}
+                className={index < 2 ? 'lg:border-t-0! lg:pt-0! md:border-t-0! md:pt-0!' : ''}
                 post={post}
                 category={category}
                 isFeatured={post.isFeatured}
@@ -64,7 +66,8 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   );
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const categories = await getAllCategories();
   const category = categories.find((cat) => cat.slug === params.slug);
 

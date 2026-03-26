@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
 
@@ -8,6 +7,7 @@ import LINKS from 'constants/links';
 import FacebookIcon from 'icons/facebook-sm.inline.svg';
 import LinkedinIcon from 'icons/linkedin-sm.inline.svg';
 import XIcon from 'icons/x.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const links = [
@@ -31,8 +31,8 @@ const links = [
 
 const SocialShare = ({ className = null, slug, title, withTopBorder = false }) => (
   <div
-    className={clsx(
-      'safe-paddings flex items-center justify-between lg:justify-start lg:space-x-5',
+    className={cn(
+      'flex items-center justify-between safe-paddings lg:justify-start lg:space-x-5',
       className,
       {
         'border-t border-gray-new-15/70 pt-4': withTopBorder,

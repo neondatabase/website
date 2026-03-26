@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import DotsPattern from 'images/dots-pattern.inline.svg';
+import { cn } from 'utils/cn';
 
 import ApiDrivenIcon from './icons/api-driven.inline.svg';
 import AutomationIcon from './icons/automation.inline.svg';
@@ -70,7 +70,7 @@ const UseCaseCard = ({
 
   return (
     <article
-      className={clsx(
+      className={cn(
         'relative flex h-[403px] overflow-hidden border border-gray-new-30 bg-black-pure',
         'lg:h-[349px]',
         'md:h-[600px] md:flex-col',
@@ -79,7 +79,7 @@ const UseCaseCard = ({
     >
       {/* Decorative dots pattern (right side) */}
       <div
-        className="pointer-events-none absolute right-2 top-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:top-2 md:h-[296px] md:w-[312px]"
+        className="pointer-events-none absolute top-2 right-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:top-2 md:h-[296px] md:w-[312px]"
         style={{
           maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
           WebkitMaskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -91,7 +91,7 @@ const UseCaseCard = ({
 
       {/* Vertical divider (desktop/tablet) / Horizontal divider (mobile) */}
       <div
-        className="pointer-events-none absolute bottom-0 left-[480px] top-0 w-px bg-gray-new-30 lg:left-1/2 md:bottom-auto md:left-0 md:right-0 md:top-[300px] md:h-px md:w-full"
+        className="pointer-events-none absolute top-0 bottom-0 left-[480px] w-px bg-gray-new-30 lg:left-1/2 md:top-[300px] md:right-0 md:bottom-auto md:left-0 md:h-px md:w-full"
         aria-hidden
       />
 
@@ -116,10 +116,10 @@ const UseCaseCard = ({
           {/* Learn more link */}
           {link && (
             <Link
-              className={clsx(
-                'flex w-fit items-center gap-2 text-base font-medium leading-none tracking-extra-tight lg:text-[0.9375rem]',
-                '[&>svg]:!text-gray-new-70 [&>svg]:!transition-all',
-                'hover:!text-white [&:hover>svg]:!text-white'
+              className={cn(
+                'flex w-fit items-center gap-2 text-base leading-none font-medium tracking-extra-tight lg:text-[0.9375rem]',
+                '[&>svg]:text-gray-new-70! [&>svg]:transition-all!',
+                'hover:text-white! [&:hover>svg]:text-white!'
               )}
               theme="white"
               to={link}
@@ -141,7 +141,7 @@ const UseCaseCard = ({
                   key={tagTitle}
                 >
                   {TagIconComponent && <TagIconComponent className="" aria-hidden />}
-                  <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 md:text-[0.625rem]">
+                  <span className="font-mono text-xs leading-none font-medium text-gray-new-80 uppercase md:text-[0.625rem]">
                     {tagTitle}
                   </span>
                 </li>
@@ -219,7 +219,7 @@ UseCaseCard.propTypes = {
 
 const UseCaseCards = ({ className, items }) => (
   <section
-    className={clsx('use-case-cards safe-paddings pt-24 xl:pt-[88px] lg:pt-20 md:pt-16', className)}
+    className={cn('use-case-cards pt-24 safe-paddings xl:pt-[88px] lg:pt-20 md:pt-16', className)}
   >
     <Container className="flex flex-col gap-11 xl:gap-10 lg:gap-8" size="960">
       {items.map((item, index) => (

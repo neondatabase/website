@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -10,6 +9,7 @@ import easy from 'icons/migration/grid-features/easy.svg';
 import fullyManaged from 'icons/migration/grid-features/fully-managed.svg';
 import reliability from 'icons/migration/grid-features/reliability.svg';
 import serverlessAutoscaling from 'icons/migration/grid-features/serverless-autoscaling.svg';
+import { cn } from 'utils/cn';
 
 import LogosSection from './logos-section';
 
@@ -62,24 +62,24 @@ const GridFeatures = ({
   logosTitle = 'Powered by Neon.',
   logos,
 }) => (
-  <section className={clsx('grid-features safe-paddings', className)}>
-    <Container className={clsx('md:px-5 sm:!max-w-sm', containerClassName)} size={containerSize}>
+  <section className={cn('grid-features safe-paddings', className)}>
+    <Container className={cn('md:px-5 sm:max-w-sm!', containerClassName)} size={containerSize}>
       <header
-        className={clsx(
+        className={cn(
           'mx-auto flex max-w-3xl flex-col items-center text-center md:max-w-[500px]',
           headerClassName
         )}
       >
         <h2
-          className={clsx(
-            'font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
+          className={cn(
+            'font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]',
             titleClassName
           )}
         >
           {title}
         </h2>
         <p
-          className={clsx(
+          className={cn(
             'mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:mt-3',
             descriptionClassName
           )}
@@ -93,7 +93,7 @@ const GridFeatures = ({
         )}
       </header>
       <ul
-        className={clsx(
+        className={cn(
           'mt-[51px] grid grid-cols-3 gap-x-11 gap-y-10 xl:mx-auto xl:mt-[54px] xl:max-w-3xl xl:grid-cols-2 lg:mt-[42px] lg:grid-cols-2 lg:gap-x-12 lg:gap-y-10 md:mx-0 md:gap-y-12 sm:grid-cols-1',
           ulClassName
         )}
@@ -108,11 +108,11 @@ const GridFeatures = ({
               height={22}
               quality={100}
             />
-            <h3 className="text-xl font-semibold leading-snug tracking-extra-tight lg:text-lg">
+            <h3 className="text-xl leading-snug font-semibold tracking-extra-tight lg:text-lg">
               {title}
             </h3>
             <p
-              className="mt-2 text-pretty leading-snug tracking-extra-tight text-gray-new-70 lg:text-wrap"
+              className="mt-2 leading-snug tracking-extra-tight text-pretty text-gray-new-70 lg:text-wrap"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </li>

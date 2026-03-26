@@ -25,10 +25,6 @@ updatedOn: '2026-03-20T18:23:32.452Z'
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-<Admonition type="note">
-If you signed up with Neon through **Azure Marketplace**, see [Azure Marketplace](/docs/introduction/billing-azure-marketplace) for plan and billing information specific to Azure users.
-</Admonition>
-
 ---
 
 ## Plan overview

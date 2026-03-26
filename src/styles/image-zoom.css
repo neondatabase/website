@@ -1,3 +1,5 @@
+@reference "./globals.css";
+
 [data-rmiz-modal-overlay='visible'] {
   @apply dark:bg-black;
 }

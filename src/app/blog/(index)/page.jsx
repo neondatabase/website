@@ -32,14 +32,14 @@ const BlogPage = async () => {
       />
       <Suspense fallback={null}>
         <BlogSearch
-          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:!static md:!right-auto md:!top-auto md:mt-4"
+          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:static! md:right-auto! md:top-auto! md:mt-4"
           posts={validPosts}
         >
           <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:!border-t-0 lg:!pt-0 md:!border-t-0 md:!pt-0' : ''}
+                className={index < 2 ? 'lg:border-t-0! lg:pt-0! md:border-t-0! md:pt-0!' : ''}
                 post={post}
                 isFeatured={post.isFeatured}
                 isPriority={index < 5}

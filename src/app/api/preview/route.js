@@ -24,7 +24,7 @@ export async function GET(request) {
     });
   }
 
-  draftMode().enable();
+  (await draftMode()).enable();
 
   const redirectSearchParams = new URLSearchParams({
     id,

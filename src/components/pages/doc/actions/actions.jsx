@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -16,6 +15,7 @@ import MarkdownIcon from 'icons/docs/markdown.inline.svg';
 import PerplexityIcon from 'icons/docs/perplexity.inline.svg';
 import VSCodeIcon from 'icons/docs/vscode.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) => {
@@ -24,7 +24,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
   return (
     <div className="group relative">
       <Tag
-        className={clsx(
+        className={cn(
           'relative flex h-3.5 w-full items-center justify-between rounded-sm text-gray-new-40',
           'transition-colors duration-200 hover:text-black-pure',
           'dark:text-gray-new-70 dark:hover:text-white'
@@ -36,14 +36,14 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
         onClick={onClick}
       >
         <div className="flex items-center gap-x-2">
-          <Icon className={clsx(`size-3.5`, iconClassName)} />
+          <Icon className={cn(`size-3.5`, iconClassName)} />
           <span className="text-sm leading-none tracking-extra-tight">{text}</span>
         </div>
       </Tag>
       {tooltip && (
         <span
-          className={clsx(
-            'pointer-events-none absolute left-0 top-full z-10 mt-1.5 whitespace-nowrap',
+          className={cn(
+            'pointer-events-none absolute top-full left-0 z-10 mt-1.5 whitespace-nowrap',
             'rounded-md bg-gray-new-8 px-2 py-1 text-xs text-white opacity-0',
             'transition-opacity duration-150 group-hover:opacity-100',
             'dark:bg-gray-new-90 dark:text-gray-new-8'
@@ -306,7 +306,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex flex-col gap-3.5',
         withBorder && 'mt-5 border-t border-gray-new-90 pt-5 dark:border-gray-new-20'
       )}

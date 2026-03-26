@@ -12,15 +12,15 @@ import Section from '../section';
 
 const items = [
   {
-    icon: autoscaleIcon,
+    icon: autoscaleIcon.src,
     text: 'Neon is serverless Postgres. Instead of provisioning a fixed CPU/memory, you specify an autoscaling range. ',
   },
   {
-    icon: performanceIcon,
+    icon: performanceIcon.src,
     text: 'Your database will autoscale up and down automatically between those limits, matching your app’s traffic.',
   },
   {
-    icon: resizeIcon,
+    icon: resizeIcon.src,
     text: 'Autoscaling is nearly instantaneous, without downtime. Read about <a href="/docs/guides/autoscaling-algorithm">our autoscaling algorithm</a> and how it compares to other serverless databases.',
   },
 ];

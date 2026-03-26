@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
@@ -8,6 +7,7 @@ import React, { forwardRef } from 'react';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -15,7 +15,7 @@ const underlineCommonStyles =
   'relative cursor-pointer transition-colors duration-500 before:absolute before:-bottom-1.5 before:left-0 before:h-1.5 before:w-full before:transition-all before:duration-500 hover:before:bottom-full hover:before:opacity-0 before:pointer-events-none';
 
 const styles = {
-  base: 'inline-flex !leading-none items-center',
+  base: 'inline-flex leading-none! items-center',
   size: {
     lg: 't-2xl font-semibold',
     md: 't-xl font-semibold',
@@ -77,13 +77,13 @@ const Link = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       size && theme && styles.base,
       styles.size[size],
       styles.theme[theme],
-      additionalClassName,
       withArrow && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere',
-      icon && !withArrow && 'group inline'
+      icon && !withArrow && 'group inline',
+      additionalClassName
     );
 
     const Icon = icons[icon];
@@ -103,7 +103,7 @@ const Link = forwardRef(
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
           <ArrowRightIcon
-            className={clsx(
+            className={cn(
               '-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]',
               arrowClassName
             )}
@@ -111,7 +111,7 @@ const Link = forwardRef(
         )}
         {Icon && (
           <span className="whitespace-nowrap no-underline">
-            <Icon className="ml-1 inline-block !size-3.5 shrink-0 align-[-0.125em]" />
+            <Icon className="ml-1 inline-block size-3.5! shrink-0 align-[-0.125em]" />
           </span>
         )}
       </>

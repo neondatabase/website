@@ -153,7 +153,7 @@ const AutoscalingViz = ({
       className="not-prose w-full border border-gray-new-30 bg-gray-new-8 p-4 md:p-8"
     >
       <div className="mb-6">
-        <span className="text-pretty indent-24 text-3xl font-normal leading-dense tracking-tighter text-gray-new-50 [&>strong]:font-normal [&>strong]:text-white">
+        <span className="indent-24 text-3xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 [&>strong]:font-normal [&>strong]:text-white">
           The average {label} on Neon uses <strong>{multiplier}x less compute</strong> than
           provisioned equivalent.
         </span>
@@ -173,7 +173,7 @@ const AutoscalingViz = ({
       >
         {/* Provisioned Column (Left) */}
         <div className="flex flex-col items-center gap-3">
-          <div className="font-mono text-sm font-medium uppercase tracking-wide text-[#e8912d]">
+          <div className="font-mono text-sm font-medium tracking-wide text-[#e8912d] uppercase">
             Provisioned
           </div>
           <div
@@ -225,7 +225,7 @@ const AutoscalingViz = ({
 
         {/* Autoscaling Column (Right) */}
         <div className="flex flex-col items-center gap-3">
-          <div className="font-mono text-sm font-medium uppercase tracking-wide text-[#73bf69]">
+          <div className="font-mono text-sm font-medium tracking-wide text-[#73bf69] uppercase">
             Autoscaling
           </div>
           <div

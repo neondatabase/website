@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import DownloadIcon from 'icons/download.inline.svg';
+import { cn } from 'utils/cn';
 
 import Section from '../section';
 import { handleDownload } from '../utils';
@@ -43,7 +43,7 @@ const Logomark = () => (
     <ul className="grid grid-cols-4 gap-4 md:grid-cols-2">
       {logos.map((logo, index) => (
         <li
-          className={clsx(
+          className={cn(
             index < 2 && 'bg-white',
             index >= 2 && 'border border-gray-new-30 bg-black-pure'
           )}
@@ -59,14 +59,14 @@ const Logomark = () => (
               unoptimized
             />
             <div
-              className={clsx(
-                'absolute right-2.5 top-2.5 flex gap-2',
+              className={cn(
+                'absolute top-2.5 right-2.5 flex gap-2',
                 'opacity-0 transition-opacity duration-300',
                 'group-hover:opacity-100'
               )}
             >
               <button
-                className={clsx(
+                className={cn(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'
@@ -78,7 +78,7 @@ const Logomark = () => (
                 <DownloadIcon className="h-3.5 w-3.5" />
               </button>
               <button
-                className={clsx(
+                className={cn(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'

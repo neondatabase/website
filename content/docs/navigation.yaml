@@ -455,6 +455,8 @@
                   slug: auth/guides/webhooks
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Troubleshooting
+                  slug: auth/troubleshooting
                 - title: Manage Auth via the API
                   slug: auth/guides/manage-auth-api
 
@@ -1063,21 +1065,6 @@
           slug: introduction/network-transfer
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
-        - title: Azure Marketplace
-          slug: introduction/billing-azure-marketplace
-
-    - title: Neon on Azure
-      icon: azure
-      slug: manage/azure
-      items:
-        - title: Migrate from Neon on Azure
-          slug: import/migrate-from-azure-native
-        - title: Deploy Neon on Azure
-          slug: azure/azure-deploy
-        - title: Manage Neon on Azure
-          slug: azure/azure-manage
-        - title: Develop with Neon on Azure
-          slug: azure/azure-develop
 
     - title: Security & compliance
       icon: security

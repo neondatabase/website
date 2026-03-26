@@ -1,45 +1,30 @@
-.swiper {
-  @apply relative;
+@reference "../../../../../styles/globals.css";
 
-  &:before,
-  &:after {
-    @apply pointer-events-none absolute inset-y-0 z-10 hidden w-5 content-[''];
-    @apply from-transparent to-black-pure;
-  }
+.startups-quotes .swiper {
+  @apply relative;
+  @apply before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:z-10 before:hidden before:w-5 before:bg-linear-to-l before:from-transparent before:to-black-pure before:content-[''];
+  @apply after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:z-10 after:hidden after:w-5 after:bg-linear-to-r after:from-transparent after:to-black-pure after:content-[''];
 
   &.swiper-initialized {
-    @apply -mx-5 px-5;
-
-    &:before,
-    &:after {
-      @apply block;
-    }
-  }
-
-  &:before {
-    @apply left-0 bg-gradient-to-l;
-  }
-
-  &:after {
-    @apply right-0 bg-gradient-to-r;
+    @apply -mx-5 px-5 before:block after:block;
   }
 }
 
-.swiper-slide {
+.startups-quotes .swiper-slide {
   @apply h-auto pb-10 lg:pb-7 md:pb-6;
 }
 
-.swiper-pagination {
-  @apply !bottom-0 !left-5 flex gap-3.5;
+.startups-quotes .swiper-pagination {
+  @apply bottom-0! left-5! flex gap-3.5;
+}
 
-  &-bullet {
-    @apply relative !m-0 h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100 sm:w-12 xs:w-10;
-    @apply transition-colors duration-300 hover:bg-gray-new-15;
-    @apply before:absolute before:-inset-y-2 before:inset-x-0;
-    @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
+.startups-quotes .swiper-pagination-bullet {
+  @apply relative m-0! h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100 sm:w-12 xs:w-10;
+  @apply transition-colors duration-300 hover:bg-gray-new-15;
+  @apply before:absolute before:inset-x-0 before:-inset-y-2;
+  @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
+}
 
-    &-active {
-      @apply after:animate-slide-in;
-    }
-  }
+.startups-quotes .swiper-pagination-bullet-active {
+  @apply after:animate-slide-in;
 }

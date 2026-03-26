@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
+import { cn } from 'utils/cn';
 
 import plans from './data/plans';
 import Features from './features';
@@ -21,7 +21,7 @@ const Plans = () => {
     <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
       <h2 className="sr-only">Neon pricing plans</h2>
 
-      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-b border-t border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
+      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-t border-b border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
         {plans.map(
           (
             {
@@ -88,7 +88,7 @@ const Plans = () => {
 
             return (
               <li
-                className={clsx(
+                className={cn(
                   'group relative flex min-h-full flex-col border-l border-gray-new-30 last:border-r',
                   'lg:border lg:pb-[66px] lg:first:border-r-0 lg:last:pb-0',
                   'md:pb-0 md:first:border'
@@ -97,20 +97,20 @@ const Plans = () => {
               >
                 <div className="p-6 pb-2 md:p-5 md:pb-2">
                   <h3
-                    className={clsx(
-                      'font-mono text-sm font-medium uppercase leading-none',
+                    className={cn(
+                      'font-mono text-sm leading-none font-medium uppercase',
                       highlighted ? 'text-green-52' : 'text-gray-new-60'
                     )}
                   >
                     {type}
                   </h3>
                   <div className="mt-14 flex flex-col gap-4">
-                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-tighter lg:text-2xl">
+                    <h4 className="text-[28px] leading-none font-normal tracking-tighter whitespace-nowrap lg:text-2xl">
                       {title}
                     </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex min-h-7 items-center gap-1.5">
                           <div className="leading-snug">
                             <span className="text-[15px] -tracking-wide text-gray-new-60">
                               Typical spend:
@@ -122,7 +122,7 @@ const Plans = () => {
                           </div>
                           {tooltipText && (
                             <InfoIcon
-                              className="relative mt-0.5 inline-flex flex-shrink-0 align-baseline"
+                              className="relative mt-0.5 inline-flex shrink-0 align-baseline"
                               tooltip={tooltipText}
                               tooltipId={`resource-size-${planId}`}
                               link={{
@@ -142,7 +142,7 @@ const Plans = () => {
                         )}
                       </div>
                     ) : (
-                      <div className="flex flex-col gap-1.5 pb-px pt-3 md:pt-0">
+                      <div className="flex flex-col gap-1.5 pt-3 pb-px md:pt-0">
                         {subtitle && (
                           <p className="text-[15px] leading-[1.7] -tracking-wide text-gray-new-60">
                             {subtitle}

@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState, useMemo } from 'react';
 
 import Field from 'components/shared/field';
+import { cn } from 'utils/cn';
 
 const instancePrices = {
   prod: 2.25,
@@ -103,24 +103,24 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
     <>
       <DashedBorder />
       <div className="relative z-10 py-[18px] sm:py-4">
-        <h3 className="text-2xl font-medium leading-snug tracking-tighter xl:text-xl sm:text-lg">
+        <h3 className="text-2xl leading-snug font-medium tracking-tighter xl:text-xl sm:text-lg">
           Input parameters
         </h3>
 
         <div className="space-y-6 pt-6">
           {inputParamsBlock.map(({ title, items }) => (
             <div key={title}>
-              <p className="mb-3.5 font-medium uppercase leading-none tracking-extra-tight text-gray-new-40 sm:text-sm">
+              <p className="mb-3.5 leading-none font-medium tracking-extra-tight text-gray-new-40 uppercase sm:text-sm">
                 {title}
               </p>
-              <ul className="space-y-1.5 !pl-0 sm:space-y-4">
+              <ul className="space-y-1.5 pl-0! sm:space-y-4">
                 {items.map(({ name, title, values }) => (
                   <li
                     className="flex items-center justify-between gap-2 before:hidden sm:flex-col sm:items-start"
                     key={title}
                   >
                     <p
-                      className={clsx(
+                      className={cn(
                         'leading-none tracking-extra-tight text-gray-new-90 sm:text-base sm:leading-tight',
                         textSize === 'lg' ? 'text-lg' : 'text-base'
                       )}
@@ -130,7 +130,7 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
                       className="w-[98px] sm:w-full"
                       name={title}
                       labelClassName="hidden"
-                      inputClassName="remove-autocomplete-styles !m-0 !h-8 !px-3 !border-[1px] !border-gray-new-15 !bg-[#0D0E10] !text-base text-white placeholder:tracking-extra-tight focus:outline-none !focus:border-white sm:placeholder:text-sm !bg-[center_right_12px]"
+                      inputClassName="remove-autocomplete-styles m-0! h-8! px-3! border-[1px]! border-gray-new-15! bg-[#0D0E10]! text-base! text-white placeholder:tracking-extra-tight focus:outline-hidden focus:border-white! sm:placeholder:text-sm bg-[center_right_12px]!"
                       tag="select"
                       defaultValue={inputParams[name]}
                       onChange={(e) => handleSelect(e, name)}
@@ -155,8 +155,8 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
             <p className="mb-2.5 leading-dense tracking-extra-tight lg:mb-2">{title}</p>
             <div className="flex items-end gap-1.5">
               <span
-                className={clsx(
-                  'bg-clip-text pr-1 font-title text-6xl font-medium leading-none tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
+                className={cn(
+                  'bg-clip-text pr-1 font-title text-6xl leading-none font-medium tracking-tighter text-transparent xl:text-[56px] lg:pr-0.5 lg:text-5xl sm:text-4xl',
                   valueClassName
                 )}
               >
@@ -165,7 +165,7 @@ const Calculator = ({ inputParamsBlock, values, textSize = 'lg' }) => {
               <span className="mb-1 text-xl text-[#7485A9] xl:mb-0 sm:text-lg">/{period}</span>
             </div>
             {text && (
-              <p className="bg-variable-value-text bg-clip-text text-sm font-light leading-dense tracking-extra-tight text-transparent">
+              <p className="bg-variable-value-text bg-clip-text text-sm leading-dense font-light tracking-extra-tight text-transparent">
                 {text}
               </p>
             )}

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
@@ -7,6 +6,7 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/discord.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
+import { cn } from 'utils/cn';
 import { getGitHubStars } from 'utils/get-github-data';
 
 const formatStars = (starsCount) => {
@@ -45,11 +45,11 @@ const SOCIALS = [
 ];
 
 const Sidebar = ({ isClient, isDocs, className }) => (
-  <div className={clsx('flex items-center lg:hidden', isDocs ? 'gap-x-6' : 'gap-x-8', className)}>
-    <div className={clsx('flex items-center', isDocs ? 'gap-x-4' : 'gap-x-6')}>
+  <div className={cn('flex items-center lg:hidden', isDocs ? 'gap-x-6' : 'gap-x-8', className)}>
+    <div className={cn('flex items-center', isDocs ? 'gap-x-4' : 'gap-x-6')}>
       {SOCIALS.map(({ id, to, icon: Icon, label, hasStars }) => (
         <Link
-          className={clsx(
+          className={cn(
             'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200',
             isDocs && 'size-8 justify-center border border-gray-new-60 dark:border-gray-new-40',
             isDocs
@@ -65,7 +65,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
           <Icon
             width={18}
             height={18}
-            className={clsx(
+            className={cn(
               !isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'
             )}
           />
@@ -78,7 +78,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         </Link>
       ))}
     </div>
-    <div className={clsx('flex', isDocs ? 'gap-x-2' : 'gap-x-3.5')}>
+    <div className={cn('flex', isDocs ? 'gap-x-2' : 'gap-x-3.5')}>
       <Button
         className="h-9 px-[18px]"
         to={LINKS.login}

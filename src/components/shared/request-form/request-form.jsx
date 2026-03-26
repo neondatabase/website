@@ -7,13 +7,13 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from '@headlessui/react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState, useEffect, useMemo } from 'react';
 
 import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 import { emailRegexp } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -79,15 +79,15 @@ const RequestForm = ({ type }) => {
 
   return (
     <figure
-      className={clsx(
+      className={cn(
         'doc-cta not-prose my-5 rounded-[10px] border border-gray-new-94 bg-gray-new-98 px-7 py-6 sm:p-6',
         'dark:border-gray-new-15 dark:bg-gray-new-10'
       )}
     >
-      <h2 className="!my-0 font-title text-2xl font-medium leading-dense tracking-extra-tight">
+      <h2 className="my-0! font-title text-2xl leading-dense font-medium tracking-extra-tight">
         {title}
       </h2>
-      <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
+      <p className="mt-2.5 leading-tight font-light text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
       {!isSent ? (
@@ -106,10 +106,10 @@ const RequestForm = ({ type }) => {
             >
               <div className="relative">
                 <ComboboxInput
-                  className={clsx(
-                    'h-10 w-full rounded border-none bg-gray-new-94 py-3 pl-4 pr-8 xl:text-sm',
-                    'focus:outline-none data-[focus]:outline-1 data-[focus]:-outline-offset-1 data-[focus]:outline-gray-new-70',
-                    'dark:bg-gray-new-15 dark:data-[focus]:outline-gray-new-30'
+                  className={cn(
+                    'h-10 w-full rounded border-none bg-gray-new-94 py-3 pr-8 pl-4 xl:text-sm',
+                    'focus:outline-hidden data-focus:outline-1 data-focus:-outline-offset-1 data-focus:outline-gray-new-70',
+                    'dark:bg-gray-new-15 dark:data-focus:outline-gray-new-30'
                   )}
                   displayValue={(option) => option?.name}
                   autoComplete="off"
@@ -122,10 +122,10 @@ const RequestForm = ({ type }) => {
               </div>
               <ComboboxOptions
                 anchor="bottom"
-                className={clsx(
-                  'z-50 !max-h-[200px] w-[var(--input-width)] rounded border border-gray-new-94 bg-gray-new-98',
+                className={cn(
+                  'z-50 max-h-[200px]! w-[var(--input-width)] rounded border border-gray-new-94 bg-gray-new-98',
                   '[--anchor-gap:var(--spacing-1)] [--anchor-max-height:50vh] empty:invisible',
-                  'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0',
+                  'transition duration-100 ease-in data-leave:data-closed:opacity-0',
                   'dark:border-gray-new-15 dark:bg-gray-new-10 dark:text-white'
                 )}
                 modal={false}
@@ -135,16 +135,16 @@ const RequestForm = ({ type }) => {
                   <ComboboxOption
                     key={index}
                     value={option}
-                    className={clsx(
-                      'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
-                      'dark:data-[focus]:bg-gray-new-15'
+                    className={cn(
+                      'group flex min-h-10 cursor-pointer flex-wrap items-center gap-1.5 px-4 py-2 text-sm select-none data-[focus]:bg-gray-new-94',
+                      'dark:data-focus:bg-gray-new-15'
                     )}
                   >
                     {option.name}
                     {option.id && (
                       <code
-                        className={clsx(
-                          'whitespace-nowrap rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none',
+                        className={cn(
+                          'rounded-sm bg-gray-new-90 px-1.5 py-1 text-xs leading-none whitespace-nowrap',
                           'dark:bg-gray-new-20'
                         )}
                       >
@@ -156,9 +156,9 @@ const RequestForm = ({ type }) => {
                 {extendedOptions && query !== '' && !matchingOption && (
                   <ComboboxOption
                     value={{ name: query }}
-                    className={clsx(
-                      'group flex min-h-10 cursor-pointer select-none flex-wrap items-center gap-1.5 px-4 py-2 text-sm data-[focus]:bg-gray-new-94',
-                      'dark:data-[focus]:bg-gray-new-15'
+                    className={cn(
+                      'group flex min-h-10 cursor-pointer flex-wrap items-center gap-1.5 px-4 py-2 text-sm select-none data-focus:bg-gray-new-94',
+                      'dark:data-focus:bg-gray-new-15'
                     )}
                   >
                     Other: {query}
@@ -172,8 +172,8 @@ const RequestForm = ({ type }) => {
               type="email"
               name="email"
               value={email}
-              className={clsx(
-                'remove-autocomplete-styles h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 md:w-full',
+              className={cn(
+                'h-10 min-w-64 rounded border-none bg-gray-new-94 px-4 py-3 remove-autocomplete-styles md:w-full',
                 '2xl:min-w-52 xl:min-w-40 xl:text-sm',
                 'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
                 'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
@@ -185,9 +185,9 @@ const RequestForm = ({ type }) => {
           )}
 
           <Button
-            className={clsx(
-              'px-6 py-3 font-semibold leading-none md:w-full',
-              !isValid && 'pointer-events-none select-none opacity-70'
+            className={cn(
+              'px-6 py-3 leading-none font-semibold md:w-full',
+              !isValid && 'pointer-events-none opacity-70 select-none'
             )}
             type="submit"
             theme="primary"

@@ -32,7 +32,8 @@ export async function generateStaticParams() {
   });
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const currentSlug = slug.join('/');
 
@@ -55,7 +56,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const PostgresTutorial = async ({ params }) => {
+const PostgresTutorial = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const currentSlug = slug.join('/');
 

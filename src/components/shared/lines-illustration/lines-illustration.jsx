@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useId } from 'react';
+
+import { cn } from 'utils/cn';
 
 const LinesIllustration = ({ className: additionalClassName, color, bgColor }) => {
   const id = useId();
@@ -11,7 +12,7 @@ const LinesIllustration = ({ className: additionalClassName, color, bgColor }) =
   return (
     <LazyMotion features={domAnimation}>
       <m.span
-        className={clsx(
+        className={cn(
           'pointer-events-none absolute -top-1/2 left-1/2 -z-10 block h-[130px] w-[113%] -translate-x-1/2',
           additionalClassName
         )}

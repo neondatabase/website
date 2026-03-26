@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import TagCloud from 'components/pages/use-case/tag-cloud';
@@ -20,6 +19,7 @@ import paySm from 'images/pages/serverless-apps/features/pay-sm.jpg';
 import pay from 'images/pages/serverless-apps/features/pay.jpg';
 import provisioning from 'images/pages/serverless-apps/features/provisioning.jpg';
 import separation from 'images/pages/serverless-apps/features/separation.jpg';
+import { cn } from 'utils/cn';
 
 const items = [
   {
@@ -123,9 +123,9 @@ const items = [
 ];
 
 const Features = () => (
-  <section className="features safe-paddings pt-40 xl:pt-[136px] lg:pt-[104px] md:pt-20">
+  <section className="features pt-40 safe-paddings xl:pt-[136px] lg:pt-[104px] md:pt-20">
     <Container size="960">
-      <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-tighter xl:text-[48px] lg:text-[44px] md:text-4xl">
+      <h2 className="text-center font-title text-[52px] leading-none font-medium tracking-tighter xl:text-[48px] lg:text-[44px] md:text-4xl">
         True serverless Postgres
       </h2>
       <ul className="mt-20 flex flex-col gap-[120px] lg:mx-auto lg:mt-16 lg:max-w-3xl lg:gap-[104px] md:mt-14 md:max-w-sm md:gap-14">
@@ -136,7 +136,7 @@ const Features = () => (
           >
             <div className="relative overflow-hidden rounded-[10px] lg:rounded-lg">
               <Image
-                className={clsx('rounded-[inherit]', imageSm && 'lg:hidden')}
+                className={cn('rounded-[inherit]', imageSm && 'lg:hidden')}
                 src={image.src}
                 width="448"
                 height={image.height}
@@ -145,7 +145,7 @@ const Features = () => (
               />
               {imageSm && (
                 <Image
-                  className={clsx('hidden rounded-[inherit] lg:block')}
+                  className={cn('hidden rounded-[inherit] lg:block')}
                   src={imageSm.src}
                   width="448"
                   height={imageSm.height}
@@ -154,20 +154,20 @@ const Features = () => (
                 />
               )}
               {imageText && (
-                <p className="absolute inset-x-0 bottom-0 text-pretty p-4 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 lg:px-3 lg:py-2.5 lg:text-[13px] sm:px-2.5 sm:py-2 xs:text-[3.6vw]">
+                <p className="absolute inset-x-0 bottom-0 p-4 text-sm leading-snug font-light tracking-extra-tight text-pretty text-gray-new-50 lg:px-3 lg:py-2.5 lg:text-[13px] sm:px-2.5 sm:py-2 xs:text-[3.6vw]">
                   {imageText}
                 </p>
               )}
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] border border-gray-new-20/30" />
             </div>
-            <div className={clsx('relative', index % 2 === 1 && '-order-1 md:order-none')}>
-              <h3 className="text-2xl font-medium leading-snug tracking-extra-tight lg:text-xl md:text-lg">
+            <div className={cn('relative', index % 2 === 1 && '-order-1 md:order-none')}>
+              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-lg">
                 {title}
               </h3>
               <p
-                className={clsx(
-                  'mt-2 text-lg font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base',
-                  '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300'
+                className={cn(
+                  'mt-2 text-lg leading-snug font-light tracking-extra-tight text-gray-new-70 lg:text-base',
+                  '[&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:border-gray-new-70'
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
               />

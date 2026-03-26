@@ -1,8 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { cn } from 'utils/cn';
 
 import Checkbox from '../checkbox';
 
@@ -65,14 +66,14 @@ const BranchingDemoTable = ({
         </span>
       </div>
       <div className="relative mt-3.5 overflow-hidden rounded-[10px] border border-transparent">
-        <div className="relative overflow-hidden bg-[#121417] bg-opacity-80 p-px">
-          <div className="relative flex px-3 py-3.5 text-[15px] font-medium leading-snug tracking-extra-tight text-gray-new-60 after:pointer-events-none after:absolute after:inset-0 after:border-b after:border-white after:mix-blend-overlay lg:px-2 lg:py-2 lg:text-[12px]">
+        <div className="relative overflow-hidden bg-[#121417]/80 p-px">
+          <div className="relative flex px-3 py-3.5 text-[15px] leading-snug font-medium tracking-extra-tight text-gray-new-60 after:pointer-events-none after:absolute after:inset-0 after:border-b after:border-white after:mix-blend-overlay lg:px-2 lg:py-2 lg:text-[12px]">
             <div className="relative mr-3 w-3 lg:mr-[9px] lg:w-[9px]" aria-hidden="true">
               <span className="sr-only">Choose</span>
             </div>
             {TABLE_COLUMNS.map((column) => (
               <div
-                className={clsx(
+                className={cn(
                   column.id === 'id' && 'w-[52px] lg:mr-[29px] lg:w-[43px]',
                   column.id === 'singer' && 'w-[100px] lg:mr-[29px] lg:w-[75px]',
                   column.id === 'song' ? 'mr-0 flex-1' : 'mr-10 lg:mr-7'
@@ -87,14 +88,14 @@ const BranchingDemoTable = ({
             {tableRows.map((row) => (
               <li
                 key={row.id}
-                className={clsx(
-                  'group relative flex h-full px-3 py-[13px] lg:px-2 lg:pb-[9px] lg:pt-2.5',
+                className={cn(
+                  'group relative flex h-full px-3 py-[13px] lg:px-2 lg:pt-2.5 lg:pb-[9px]',
                   'before:pointer-events-none before:absolute before:inset-0 before:mix-blend-overlay before:last:rounded-b-[10px]',
                   'after:pointer-events-none after:absolute after:inset-0 after:-bottom-px after:mx-3 after:border-b after:border-white after:mix-blend-overlay after:last:hidden',
                   !isLoading &&
                     isCheckboxInteractive &&
-                    'cursor-pointer hover:before:bg-white hover:before:opacity-50 focus:outline-none focus:before:bg-white focus:before:opacity-50',
-                  'last:rounded-b-[10px] last:pb-[18px] last:pt-4 lg:last:pb-3 lg:last:pt-2.5',
+                    'cursor-pointer hover:before:bg-white hover:before:opacity-50 focus:outline-hidden focus:before:bg-white focus:before:opacity-50',
+                  'last:rounded-b-[10px] last:pt-4 last:pb-[18px] lg:last:pt-2.5 lg:last:pb-3',
                   row.id === lastAddedRowId && 'bg-[rgba(0,229,153,0.08)]'
                 )}
                 role="option"
@@ -128,7 +129,7 @@ const BranchingDemoTable = ({
                 )}
                 {TABLE_COLUMNS.map((column) => (
                   <div
-                    className={clsx(
+                    className={cn(
                       getColumnWidth(column.id, isLoading),
                       column.id === 'id' ? 'mr-10 font-medium lg:mr-[29px]' : 'font-normal',
                       column.id === 'song' ? 'text-gray-new-80' : 'text-white'
@@ -150,7 +151,7 @@ const BranchingDemoTable = ({
           </ul>
         </div>
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] border border-white mix-blend-overlay" />
-        <span className="pointer-events-none absolute right-[-337px] top-[-335px] size-[600px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(92,129,182,0.26)_0%,_rgba(92,129,182,0.00)_100%)] opacity-30" />
+        <span className="pointer-events-none absolute top-[-335px] right-[-337px] size-[600px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(92,129,182,0.26)_0%,_rgba(92,129,182,0.00)_100%)] opacity-30" />
         <span className="pointer-events-none absolute bottom-[-177px] left-[-209px] size-[330px] bg-[radial-gradient(50%_50%_at_50%_50%,_rgba(38,128,146,0.25)_0%,_rgba(38,128,146,0.00)_100%)] opacity-30" />
       </div>
     </div>

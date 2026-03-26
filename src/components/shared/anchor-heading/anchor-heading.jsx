@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import React from 'react';
 import slugify from 'slugify';
+
+import { cn } from 'utils/cn';
 
 import HashIcon from './images/hash.inline.svg';
 
@@ -58,20 +59,20 @@ const AnchorHeading = (Tag) => {
     return (
       <Tag
         id={id}
-        className={clsx(
-          'anchor-heading group relative w-fit scroll-mt-20 font-medium leading-tight lg:scroll-mt-5',
+        className={cn(
+          'anchor-heading group relative w-fit scroll-mt-20 leading-tight font-medium lg:scroll-mt-5',
           Tag === 'h2' ? 'tracking-tighter' : 'tracking-extra-tight',
           className
         )}
       >
         <span>{cleanedChildren}</span>
         <a
-          className="rounded-full px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-offset-0 group-hover:opacity-100 sm:hidden"
+          className="rounded-full px-2 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-offset-0 sm:hidden"
           href={`#${id}`}
           aria-label={`Link to ${extractText(children)}`}
         >
           <HashIcon
-            className={clsx('inline text-green-44 dark:text-green-52', {
+            className={cn('inline text-green-44 dark:text-green-52', {
               'w-3.5': Tag === 'h2',
               'w-3': Tag === 'h3',
             })}

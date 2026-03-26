@@ -1,9 +1,7 @@
-@layer components {
-  .safe-paddings {
-    @apply px-safe;
+@utility safe-paddings {
+  @apply px-safe;
+}
 
-    footer& {
-      @apply pb-safe;
-    }
-  }
+footer.safe-paddings {
+  @apply pb-safe;
 }

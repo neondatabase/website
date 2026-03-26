@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import { cn } from 'utils/cn';
 
 const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => {
   // eslint-disable-next-line no-unused-vars
@@ -9,10 +9,10 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
 
   return (
     <BlogPostCard
-      className={clsx(
+      className={cn(
         'last:pb-0',
         isFeatured
-          ? '!pt-0 pb-10'
+          ? 'pt-0! pb-10'
           : 'col-span-full border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:py-6',
         className
       )}

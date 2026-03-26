@@ -26,6 +26,28 @@
   }
 }
 
+div[class*='bg-overlay-light'][class*='backdrop-blur-sm'][class*='z-overlay'] {
+  backdrop-filter: blur(0px);
+  background: rgba(12, 13, 13, 0.3);
+}
+
+div[class*='z-overlay'][class*='text-inherit'][class*='rounded-md'][class*='shadow-lg'] {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #C9CBCF;
+  background: #FAFAFA;
+  border-radius: 8px;
+}
+
+[data-theme='dark'] div[class*='bg-overlay-light'][class*='backdrop-blur-sm'][class*='z-overlay'] {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme='dark'] div[class*='z-overlay'][class*='text-inherit'][class*='rounded-md'][class*='shadow-lg'] {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid #27272A;
+  background: #09090B;
+}
+
 @media (max-width: 528px) {
   .ikp-modal__closeTrigger:hover{
     background: transparent;
