@@ -7,8 +7,8 @@ import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
-import { resolveDocsHrefWithBasePath } from 'utils/docs-versioning';
 import { cn } from 'utils/cn';
+import { resolveDocsHrefWithBasePath } from 'utils/docs-versioning';
 
 import Tag from '../../tag';
 

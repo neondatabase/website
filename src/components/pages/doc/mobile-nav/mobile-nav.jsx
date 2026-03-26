@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import CornerIcon from 'icons/corner-left.inline.svg';
+import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
@@ -15,7 +16,6 @@ import {
   resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
-import { cn } from 'utils/cn';
 
 import Icon from '../menu/icon';
 import VersionSwitcher from '../version-switcher';

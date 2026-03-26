@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
+import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
@@ -12,7 +13,6 @@ import {
   resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
-import { cn } from 'utils/cn';
 
 import Menu from '../menu';
 import VersionSwitcher from '../version-switcher';

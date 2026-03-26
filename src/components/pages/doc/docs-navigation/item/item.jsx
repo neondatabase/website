@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
   resolveDocsHrefWithBasePath,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
-import { cn } from 'utils/cn';
 
 import Icon from '../../menu/icon';
 
