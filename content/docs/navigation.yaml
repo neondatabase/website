@@ -496,13 +496,8 @@
 
             - section: Legacy (archive)
               items:
-                - title: Stack Auth
-                  slug: auth/legacy/overview
-                  items:
-                    - title: Introduction
-                      slug: auth/legacy/overview
-                    - title: Database integration
-                      slug: auth/legacy/database-integration
+                - title: Database integration
+                  slug: auth/legacy/database-integration
 
         - title: Postgres RLS
           icon: lock
