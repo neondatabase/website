@@ -17,24 +17,95 @@ updatedOn: '2026-02-15T20:51:54.189Z'
 <CopyPrompt src="/prompts/prisma-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
 
-Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This guide shows you how to connect a Prisma application to Neon using the recommended setup with the Neon serverless driver adapter.
+Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This guide describes how to connect to Neon from Prisma. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-## Prerequisites
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
 
-- A [Neon account and project](/docs/get-started-with-neon/signing-up)
-- Node.js 18+ installed
-- A Node.js or TypeScript project (or create a new one)
+<TabItem>
 
-## Setup
+To connect your Prisma app to Neon using AI-assisted setup:
 
-### Step 1: Install dependencies
+<Steps>
+
+## Create a Prisma project
+
+Set up a Node.js or TypeScript project if you do not have one.
+
+## Run neon init
+
+1. From your Prisma project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Prisma app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+You're connected. You can now use Prisma Client in your application:
+
+```typescript
+import { prisma } from './db'
+
+const users = await prisma.user.findMany()
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and connect from Prisma:
+
+<Steps>
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project.
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
+
+## Install dependencies
 
 ```bash
 npm install @prisma/client @prisma/adapter-neon dotenv
 npm install prisma --save-dev
 ```
 
-### Step 2: Get your connection strings
+## Get your connection strings
 
 From your Neon Console, click **Connect** and copy both connection strings:
 
@@ -57,7 +128,7 @@ DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[db
 The pooled connection has `-pooler` in the hostname. The direct connection does not. Both are available in your Neon Console.
 </Admonition>
 
-### Step 3: Configure your Prisma schema
+## Configure your Prisma schema
 
 If you don't have a Prisma schema yet, run `npx prisma init` to create one. Then update `prisma/schema.prisma`:
 
@@ -83,7 +154,7 @@ model User {
 In Prisma 7+, do not include a `url` property in the datasource block. The connection is configured via `prisma.config.ts` and the adapter.
 </Admonition>
 
-### Step 4: Create prisma.config.ts
+## Create prisma.config.ts
 
 Create a `prisma.config.ts` file in your project root. This tells Prisma CLI where to connect for migrations and other commands:
 
@@ -99,7 +170,7 @@ export default defineConfig({
 })
 ```
 
-### Step 5: Create your Prisma Client
+## Create your Prisma Client
 
 Create a file to instantiate Prisma Client with the Neon adapter (for example, `src/db.ts`):
 
@@ -115,7 +186,7 @@ const adapter = new PrismaNeon({
 export const prisma = new PrismaClient({ adapter })
 ```
 
-### Step 6: Generate client and push schema
+## Generate client and push schema
 
 ```bash
 npx prisma generate
@@ -129,6 +200,8 @@ import { prisma } from './db'
 
 const users = await prisma.user.findMany()
 ```
+
+</Steps>
 
 ## Why two connection strings?
 
@@ -213,6 +286,14 @@ datasource db {
 The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 </details>
+
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps
 

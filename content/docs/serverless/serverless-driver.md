@@ -41,7 +41,7 @@ The Neon serverless driver is also available as a [JavaScript Registry (JSR)](ht
 
 ## Configure your Neon database connection
 
-You can obtain a connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Your Neon connection string will look something like this:
+If you haven't set up Neon yet, **run `npx neonctl@latest init`** to auto-configure your connection string in `.env`. Otherwise, you can obtain a connection string by clicking the **Connect** button on your **Project Dashboard**. Your Neon connection string will look something like this:
 
 ```shell
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -543,5 +543,6 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 - [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers)
+- [Neon Auth](/docs/auth/overview) — managed user authentication stored in your database
 
 <NeedHelp/>

@@ -9,38 +9,99 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.995Z'
 ---
 
-Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
+<CopyPrompt src="/prompts/knex-prompt.md" description="Pre-built prompt for connecting Node.js applications with Knex to Neon"/>
 
-- [Connect to Neon from Knex](#connect-to-neon-from-knex)
-- [Use connection pooling with Knex](#use-connection-pooling-with-knex)
-- [Performance tips](#performance-tips)
+Knex is an open-source SQL query builder for Postgres. This guide explains how to connect Knex to Neon. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-## Connect to Neon from Knex
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
 
-To establish a basic connection from Knex to Neon, perform the following steps:
+<TabItem>
 
-1. Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
-   The connection string includes the user name, password, hostname, and database name.
+To connect your Knex app to Neon using AI-assisted setup:
 
-2. Update the Knex's initialization in your application to the following:
+<Steps>
 
-   ```typescript {2-5}
-   export const client = knex({
-     client: 'pg',
-     connection: {
-       connectionString: process.env.DATABASE_URL,
-     },
-   });
+## Create a Knex project
+
+Set up a Node.js or TypeScript project if you do not have one.
+
+## Run neon init
+
+1. From your project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
 
-   Your setting will appear similar to the following:
+3. **Restart your editor** to pick up the new tooling.
 
-   ```text shouldWrap
-   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
-   ```
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Knex app to connect to Neon
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and connect from Knex:
+
+<Steps>
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project.
+
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
+
+## Store your Neon credentials
+
+Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. We recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+
+```text shouldWrap
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+```
+
+## Configure the Postgres client
+
+Update the Knex initialization in your application to the following:
+
+```typescript {2-5}
+export const client = knex({
+  client: 'pg',
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+  },
+});
+```
+
+</Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Use connection pooling with Knex
 

@@ -2,7 +2,7 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Go project to connect to a Neon Postgres database.
 
-**Purpose:** To install the `pgx` and `godotenv` dependencies and provide a working Go script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon.
+**Purpose:** To install the `pgx` and `godotenv` dependencies and provide working Go programs that demonstrate Create, Read, Update, and Delete (CRUD) against a `books` table, matching the Neon Go guide.
 
 **Scope:**
 - Assumes the user is working within a Go project directory.
@@ -12,40 +12,58 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Go project as follows:
 
-### 1. Initialize Go Module and Add Dependencies
+### 1. Initialize Go module and add dependencies
 
-1.  Check if a `go.mod` file exists. If it does not, initialize a new module. You can use the current directory name as the module path.
-    ```bash
-    go mod init my-neon-go-app
-    ```
-2.  Run `go get` to download and add the required packages to the module:
-    ```bash
-    go get github.com/jackc/pgx/v5 github.com/joho/godotenv
-    ```
+1. If `go.mod` is missing, initialize a module (use the project folder name or `neon-go-quickstart`):
+   ```bash
+   go mod init neon-go-quickstart
+   ```
+2. Add packages:
+   ```bash
+   go get github.com/jackc/pgx/v5 github.com/joho/godotenv
+   ```
 
----
+### 2. Verify the `.env` file
 
-### 2. Verify the `.env` File
+- Ensure a `.env` file exists at the project root.
+- Use this format; the user replaces placeholders from **Neon Console → Project → Dashboard → Connect**:
 
-- Check for the presence of a `.env` file at the root of the project.
-- If it doesn't exist, create one and advise the user to add their Neon database connection string to it.
-- Provide the following format and instruct the user to replace the placeholders:
   ```
-  DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+  DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
   ```
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
----
+### 3. Example programs (`books` table)
 
-### 3. Create an Example Go Script with CRUD and Transactions
+Create four files in the project root, each `package main`:
 
-Create a new file named `main.go` and populate it with the following Go code. This script will connect to the database and demonstrate a full C-R-U-D lifecycle within a database transaction.
+#### `create_table.go`
 
-```go title="main.go"
+```go
 package main
 
 import (
@@ -58,87 +76,235 @@ import (
 )
 
 func main() {
-	// 1. Load environment variables
-	if err := godotenv.Load(); err != nil {
+	err := godotenv.Load()
+	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
 		os.Exit(1)
 	}
 
 	connString := os.Getenv("DATABASE_URL")
 	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL environment variable not set\n")
+		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
 		os.Exit(1)
 	}
 
 	ctx := context.Background()
 
-	// 2. Establish connection
 	conn, err := pgx.Connect(ctx, connString)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
 	defer conn.Close(ctx)
-	fmt.Println("Connection successful!")
 
-	// Set up a table for the example
-	_, err = conn.Exec(ctx, "DROP TABLE IF EXISTS todos; CREATE TABLE todos (id SERIAL PRIMARY KEY, task TEXT NOT NULL);")
+	fmt.Println("Connection established")
+
+	_, err = conn.Exec(ctx, "DROP TABLE IF EXISTS books;")
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to create table: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to drop table: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("Table 'todos' created.")
+	fmt.Println("Finished dropping table (if it existed).")
 
-	// --- Start Transaction for atomic CRUD Operations ---
-	tx, err := conn.Begin(ctx)
+	_, err = conn.Exec(ctx, `
+        CREATE TABLE books (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255),
+            publication_year INT,
+            in_stock BOOLEAN DEFAULT TRUE
+        );
+    `)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to begin transaction: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to create table: %v\n", err)
 		os.Exit(1)
 	}
-	// Defer a rollback in case of panic or error. The rollback will be ignored if the transaction is already committed.
-	defer tx.Rollback(ctx)
+	fmt.Println("Finished creating table.")
 
-	fmt.Println("\nTransaction started.")
-
-	// CREATE: Insert a new todo item
-	_, err = tx.Exec(ctx, "INSERT INTO todos (task) VALUES ($1);", "Learn Neon with Go")
+	_, err = conn.Exec(ctx,
+		"INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
+		"The Catcher in the Rye", "J.D. Salinger", 1951, true,
+	)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "CREATE failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to insert single row: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("CREATE: Row inserted.")
+	fmt.Println("Inserted a single book.")
 
-	// READ: Retrieve the new todo item
-	var task string
-	err = tx.QueryRow(ctx, "SELECT task FROM todos WHERE task = $1;", "Learn Neon with Go").Scan(&task)
+	booksToInsert := [][]interface{}{
+		{"The Hobbit", "J.R.R. Tolkien", 1937, true},
+		{"1984", "George Orwell", 1949, true},
+		{"Dune", "Frank Herbert", 1965, false},
+	}
+
+	copyCount, err := conn.CopyFrom(
+		ctx,
+		pgx.Identifier{"books"},
+		[]string{"title", "author", "publication_year", "in_stock"},
+		pgx.CopyFromRows(booksToInsert),
+	)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "READ failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to copy rows: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Printf("READ: Fetched task - '%s'\n", task)
+	fmt.Printf("Inserted %d rows of data.\n", copyCount)
+}
+```
 
-	// UPDATE: Modify the todo item
-	_, err = tx.Exec(ctx, "UPDATE todos SET task = $1 WHERE task = $2;", "Master Neon with Go!", "Learn Neon with Go")
+#### `read_data.go`
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	err := godotenv.Load()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "UPDATE failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("UPDATE: Row updated.")
 
-	// DELETE: Remove the todo item
-	_, err = tx.Exec(ctx, "DELETE FROM todos WHERE task = $1;", "Master Neon with Go!")
+	connString := os.Getenv("DATABASE_URL")
+	if connString == "" {
+		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+		os.Exit(1)
+	}
+
+	ctx := context.Background()
+	conn, err := pgx.Connect(ctx, connString)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "DELETE failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("DELETE: Row deleted.")
+	defer conn.Close(ctx)
+	fmt.Println("Connection established")
 
-	// --- Commit Transaction ---
-	if err := tx.Commit(ctx); err != nil {
-		fmt.Fprintf(os.Stderr, "Transaction commit failed: %v\n", err)
+	rows, err := conn.Query(ctx, "SELECT * FROM books ORDER BY publication_year;")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Query failed: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println("Transaction committed successfully.\n")
+	defer rows.Close()
+
+	fmt.Println("\n--- Book Library ---")
+	for rows.Next() {
+		var id, publicationYear int
+		var title, author string
+		var inStock bool
+
+		err := rows.Scan(&id, &title, &author, &publicationYear, &inStock)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Failed to scan row: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %t\n",
+			id, title, author, publicationYear, inStock)
+	}
+	fmt.Println("--------------------\n")
+
+	if err := rows.Err(); err != nil {
+		fmt.Fprintf(os.Stderr, "Error during rows iteration: %v\n", err)
+		os.Exit(1)
+	}
+}
+```
+
+#### `update_data.go`
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+		os.Exit(1)
+	}
+
+	connString := os.Getenv("DATABASE_URL")
+	if connString == "" {
+		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+		os.Exit(1)
+	}
+
+	ctx := context.Background()
+	conn, err := pgx.Connect(ctx, connString)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	defer conn.Close(ctx)
+	fmt.Println("Connection established")
+
+	_, err = conn.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2;", true, "Dune")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Updated stock status for 'Dune'.")
+}
+```
+
+#### `delete_data.go`
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+		os.Exit(1)
+	}
+
+	connString := os.Getenv("DATABASE_URL")
+	if connString == "" {
+		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+		os.Exit(1)
+	}
+
+	ctx := context.Background()
+	conn, err := pgx.Connect(ctx, connString)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	defer conn.Close(ctx)
+	fmt.Println("Connection established")
+
+	_, err = conn.Exec(ctx, "DELETE FROM books WHERE title = $1;", "1984")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Delete failed: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println("Deleted the book '1984' from the table.")
 }
 ```
 
@@ -148,23 +314,28 @@ func main() {
 
 Once the setup is complete:
 
-1.  Advise the user to ensure their connection string is correctly set in the `.env` file.
-2.  Instruct them to run the application from their terminal:
-    ```bash
-    go run main.go
-    ```
-3.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+1. Advise the user to set `DATABASE_URL` in `.env`.
+2. Run the examples in order:
+   ```bash
+   go run create_table.go
+   go run read_data.go
+   go run update_data.go
+   go run read_data.go
+   go run delete_data.go
+   go run read_data.go
+   ```
+3. **Authentication:** If the app needs user authentication, mention [Neon Auth](https://neon.tech/docs/auth/overview).
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The `go.mod` file is present and lists `github.com/jackc/pgx/v5` and `github.com/joho/godotenv` as dependencies.
-- A `.env` file is present or has been created.
-- The connection string is loaded from an environment variable via `os.Getenv("DATABASE_URL")`.
-- **All SQL operations (INSERT, UPDATE, DELETE) use parameterized queries** (`$1`, `$2`, etc.) to prevent SQL injection.
-- **The primary business logic (CRUD operations) is wrapped in a `pgx` transaction block** (`conn.Begin`, `tx.Commit`, `tx.Rollback`).
+- `go.mod` includes `github.com/jackc/pgx/v5` and `github.com/joho/godotenv`.
+- A `.env` file exists or is created with `DATABASE_URL` using `sslmode=require` and `channel_binding=require` in the connection string.
+- The connection string is read with `os.Getenv("DATABASE_URL")` after `godotenv.Load()`.
+- **Parameterized queries** (`$1`, `$2`, etc.) are used for all dynamic SQL.
+- CRUD is split across `create_table.go`, `read_data.go`, `update_data.go`, and `delete_data.go` using the `books` schema above.
 - A `context.Context` is used for all database operations.
 
 ---
@@ -173,4 +344,4 @@ Before suggesting code or making edits, ensure:
 
 - Do not hardcode credentials in any `.go` file.
 - Do not output the contents of the `.env` file or the user's connection string in any response.
-- Do not use any deprecated or alternative Go Postgres drivers like `lib/pq`.
+- Do not use deprecated drivers such as `lib/pq` for this flow.

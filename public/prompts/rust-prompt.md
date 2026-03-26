@@ -12,7 +12,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open Rust project as follows:
 
@@ -52,126 +73,278 @@ Based on the user's selection, run the appropriate `cargo add` command. **The `p
 
 ---
 
-### 4. Create an Example `main.rs` Script
+### 4. Configure multiple binaries
 
-Modify the `src/main.rs` file to include code that connects to the database and demonstrates a full C-R-U-D lifecycle within a database transaction. Apply the following logic:
+Create one Rust binary per CRUD step (`create_table`, `read_data`, `update_data`, `delete_data`). Append to `Cargo.toml`:
 
-- **If `src/main.rs` contains only the default `cargo new` template code** (i.e., `fn main() { println!("Hello, world!"); }`), replace the entire file content with the appropriate Rust code block below.
-- **If `src/main.rs` contains any custom user code, preserve it.** Comment out the existing code by wrapping it in a block comment (`/* ... */`) and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new Rust code block (Synchronous or Asynchronous) after the commented section.
+```toml
+[[bin]]
+name = "create_table"
+path = "src/create_table.rs"
 
-#### Option 1: `postgres` (Synchronous)
-```rust title="src/main.rs"
+[[bin]]
+name = "read_data"
+path = "src/read_data.rs"
+
+[[bin]]
+name = "update_data"
+path = "src/update_data.rs"
+
+[[bin]]
+name = "delete_data"
+path = "src/delete_data.rs"
+```
+
+Remove the default entry point when these bins are the examples:
+
+```bash
+rm src/main.rs
+```
+
+### 5. Source files (`books` table)
+
+Use `dotenvy`, `openssl` (`SslConnector` / `SslMethod::tls()`), and `postgres_openssl::MakeTlsConnector` to build TLS. Load `DATABASE_URL` with `dotenvy::dotenv` and `std::env::var("DATABASE_URL")?`.
+
+Below is the **synchronous `postgres`** implementation for all four binaries (same logic as the Neon Rust guide). For **`tokio-postgres`**, mirror the guide’s async pattern: `#[tokio::main]`, `tokio_postgres::connect`, `tokio::spawn` the connection future, then `.await` each call—see the async `create_table.rs` example after the sync sources, and apply the same structure to `read_data`, `update_data`, and `delete_data` using the SQL from the sync versions.
+
+#### `src/create_table.rs` (`postgres` sync)
+
+```rust
 use dotenvy::dotenv;
-use openssl::ssl::{SslConnector, SslMethod};
 use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
 use std::env;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 1. Load environment variables
+
     dotenv()?;
     let conn_string = env::var("DATABASE_URL")?;
 
-    // 2. Set up the TLS connector required by Neon
     let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    // 3. Establish connection
     let mut client = Client::connect(&conn_string, connector)?;
-    println!("Connection successful!");
+    println!("Connection established");
 
-    // Set up a table for the example
-    client.batch_execute("DROP TABLE IF EXISTS todos; CREATE TABLE todos (id SERIAL PRIMARY KEY, task TEXT NOT NULL);")?;
-    println!("Table 'todos' created.");
+    client.batch_execute("DROP TABLE IF EXISTS books;")?;
+    println!("Finished dropping table (if it existed).");
 
-    // --- Start Transaction for atomic CRUD Operations ---
+    client.batch_execute(
+        "CREATE TABLE books (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255),
+            publication_year INT,
+            in_stock BOOLEAN DEFAULT TRUE
+        );"
+    )?;
+    println!("Finished creating table.");
+
+    client.execute(
+        "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4)",
+        &[&"The Catcher in the Rye", &"J.D. Salinger", &1951, &true],
+    )?;
+    println!("Inserted a single book.");
+
     let mut transaction = client.transaction()?;
-    println!("\nTransaction started.");
+    println!("Starting transaction to insert multiple books...");
 
-    // CREATE: Insert a new todo item
-    transaction.execute("INSERT INTO todos (task) VALUES ($1)", &[&"Learn Neon with Rust"])?;
-    println!("CREATE: Row inserted.");
+    let books_to_insert = [
+        ("The Hobbit", "J.R.R. Tolkien", 1937, true),
+        ("1984", "George Orwell", 1949, true),
+        ("Dune", "Frank Herbert", 1965, false),
+    ];
 
-    // READ: Retrieve the new todo item
-    let row = transaction.query_one("SELECT task FROM todos WHERE task = $1", &[&"Learn Neon with Rust"])?;
-    let task: &str = row.get(0);
-    println!("READ: Fetched task - '{}'", task);
+    for book in &books_to_insert {
+        transaction.execute(
+            "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4)",
+            &[&book.0, &book.1, &book.2, &book.3],
+        )?;
+    }
 
-    // UPDATE: Modify the todo item
-    transaction.execute("UPDATE todos SET task = $1 WHERE task = $2", &[&"Master Neon with Rust!", &"Learn Neon with Rust"])?;
-    println!("UPDATE: Row updated.");
-
-    // DELETE: Remove the todo item
-    transaction.execute("DELETE FROM todos WHERE task = $1", &[&"Master Neon with Rust!"])?;
-    println!("DELETE: Row deleted.");
-
-    // --- Commit Transaction ---
     transaction.commit()?;
-    println!("Transaction committed successfully.\n");
+    println!("Inserted 3 rows of data.");
 
     Ok(())
 }
 ```
 
-#### Option 2: `tokio-postgres` (Asynchronous)
-```rust title="src/main.rs"
+#### `src/read_data.rs` (`postgres` sync)
+
+```rust
+use dotenvy::dotenv;
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::env;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenv()?;
+    let conn_string = env::var("DATABASE_URL")?;
+
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
+
+    let mut client = Client::connect(&conn_string, connector)?;
+    println!("Connection established");
+
+    let rows = client.query("SELECT * FROM books ORDER BY publication_year;", &[])?;
+
+    println!("\n--- Book Library ---");
+    for row in rows {
+        let id: i32 = row.get("id");
+        let title: &str = row.get("title");
+        let author: &str = row.get("author");
+        let year: i32 = row.get("publication_year");
+        let in_stock: bool = row.get("in_stock");
+        println!("ID: {}, Title: {}, Author: {}, Year: {}, In Stock: {}", id, title, author, year, in_stock);
+    }
+    println!("--------------------\n");
+
+    Ok(())
+}
+```
+
+#### `src/update_data.rs` (`postgres` sync)
+
+```rust
+use dotenvy::dotenv;
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::env;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenv()?;
+    let conn_string = env::var("DATABASE_URL")?;
+
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
+
+    let mut client = Client::connect(&conn_string, connector)?;
+    println!("Connection established");
+
+    let updated_rows = client.execute(
+        "UPDATE books SET in_stock = $1 WHERE title = $2",
+        &[&true, &"Dune"],
+    )?;
+
+    if updated_rows > 0 {
+        println!("Updated stock status for 'Dune'.");
+    } else {
+        println!("'Dune' not found or stock status already up to date.");
+    }
+
+    Ok(())
+}
+```
+
+#### `src/delete_data.rs` (`postgres` sync)
+
+```rust
+use dotenvy::dotenv;
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::env;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    dotenv()?;
+    let conn_string = env::var("DATABASE_URL")?;
+
+    let builder = SslConnector::builder(SslMethod::tls())?;
+    let connector = MakeTlsConnector::new(builder.build());
+
+    let mut client = Client::connect(&conn_string, connector)?;
+    println!("Connection established");
+
+    let deleted_rows = client.execute(
+        "DELETE FROM books WHERE title = $1",
+        &[&"1984"],
+    )?;
+
+    if deleted_rows > 0 {
+        println!("Deleted the book '1984' from the table.");
+    } else {
+        println!("'1984' not found in the table.");
+    }
+
+    Ok(())
+}
+```
+
+#### `src/create_table.rs` (`tokio-postgres` async reference)
+
+```rust
+use tokio_postgres;
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
 use postgres_openssl::MakeTlsConnector;
 use std::env;
-use tokio_postgres::Error;
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
-    // 1. Load environment variables
-    dotenv().ok();
-    let conn_string = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
-    // 2. Set up the TLS connector required by Neon
-    let builder = SslConnector::builder(SslMethod::tls()).unwrap();
+    dotenv()?;
+    let conn_string = env::var("DATABASE_URL")?;
+
+    let builder = SslConnector::builder(SslMethod::tls())?;
     let connector = MakeTlsConnector::new(builder.build());
 
-    // 3. Establish connection
     let (mut client, connection) = tokio_postgres::connect(&conn_string, connector).await?;
+    println!("Connection established");
+
     tokio::spawn(async move {
         if let Err(e) = connection.await {
             eprintln!("connection error: {}", e);
         }
     });
-    println!("Connection successful!");
 
-    // Set up a table for the example
-    client.batch_execute("DROP TABLE IF EXISTS todos; CREATE TABLE todos (id SERIAL PRIMARY KEY, task TEXT NOT NULL);").await?;
-    println!("Table 'todos' created.");
+    client.batch_execute("DROP TABLE IF EXISTS books;").await?;
+    println!("Finished dropping table (if it existed).");
 
-    // --- Start Transaction for atomic CRUD Operations ---
+    client.batch_execute(
+        "CREATE TABLE books (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(255) NOT NULL,
+            author VARCHAR(255),
+            publication_year INT,
+            in_stock BOOLEAN DEFAULT TRUE
+        );"
+    ).await?;
+    println!("Finished creating table.");
+
+    client.execute(
+        "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4)",
+        &[&"The Catcher in the Rye", &"J.D. Salinger", &1951, &true],
+    ).await?;
+    println!("Inserted a single book.");
+
     let transaction = client.transaction().await?;
-    println!("\nTransaction started.");
+    println!("Starting transaction to insert multiple books...");
 
-    // CREATE: Insert a new todo item
-    transaction.execute("INSERT INTO todos (task) VALUES ($1)", &[&"Learn Neon with Rust"]).await?;
-    println!("CREATE: Row inserted.");
+    let books_to_insert = [
+        ("The Hobbit", "J.R.R. Tolkien", 1937, true),
+        ("1984", "George Orwell", 1949, true),
+        ("Dune", "Frank Herbert", 1965, false),
+    ];
 
-    // READ: Retrieve the new todo item
-    let row = transaction.query_one("SELECT task FROM todos WHERE task = $1", &[&"Learn Neon with Rust"]).await?;
-    let task: &str = row.get(0);
-    println!("READ: Fetched task - '{}'", task);
+    for book in &books_to_insert {
+        transaction.execute(
+            "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4)",
+            &[&book.0, &book.1, &book.2, &book.3],
+        ).await?;
+    }
 
-    // UPDATE: Modify the todo item
-    transaction.execute("UPDATE todos SET task = $1 WHERE task = $2", &[&"Master Neon with Rust!", &"Learn Neon with Rust"]).await?;
-    println!("UPDATE: Row updated.");
-
-    // DELETE: Remove the todo item
-    transaction.execute("DELETE FROM todos WHERE task = $1", &[&"Master Neon with Rust!"]).await?;
-    println!("DELETE: Row deleted.");
-
-    // --- Commit Transaction ---
     transaction.commit().await?;
-    println!("Transaction committed successfully.\n");
+    println!("Inserted 3 rows of data.");
 
     Ok(())
 }
 ```
+
+For **`tokio-postgres`**, implement `read_data.rs`, `update_data.rs`, and `delete_data.rs` by translating the synchronous versions above: same queries and logging, but use `#[tokio::main]`, `tokio_postgres::connect`, the `tokio::spawn` connection loop, and `.await` on `query`, `execute`, etc., matching the Neon Rust guide’s tokio-postgres tabs for those files.
 
 ---
 
@@ -179,25 +352,31 @@ async fn main() -> Result<(), Error> {
 
 Once the setup is complete:
 
-1.  Advise the user to ensure their connection string is correctly set in the `.env` file.
-2.  Instruct them to compile and run the application from their terminal:
-    ```bash
-    cargo run
-    ```
-3.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+1. Advise the user to set `DATABASE_URL` in `.env` using the canonical Neon format (including `sslmode=require` and `channel_binding=require`).
+2. Run the binaries in order:
+   ```bash
+   cargo run --bin create_table
+   cargo run --bin read_data
+   cargo run --bin update_data
+   cargo run --bin read_data
+   cargo run --bin delete_data
+   cargo run --bin read_data
+   ```
+3. **Authentication:** If the app needs user authentication, mention [Neon Auth](https://neon.tech/docs/auth/overview).
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- **The `postgres-openssl`, `openssl`, and `dotenvy` crates are always included**, as they are mandatory for secure connections and configuration.
-- A `.env` file is present or has been created.
-- The connection string is loaded from the environment, not hardcoded.
-- The `MakeTlsConnector` is correctly configured and used for the connection.
-- **All SQL operations (INSERT, UPDATE, DELETE) use parameterized queries** (`$1`, `$2`, etc.) to prevent SQL injection.
-- The primary business logic (CRUD operations) is wrapped in a transaction block.
-- - **Ensure correct mutability based on the driver:** In `tokio-postgres`, the `client` must be mutable to start a transaction, but the returned `transaction` object is not. In the synchronous `postgres` crate, both the `client` and the `transaction` objects must be declared as mutable.
+- **`postgres-openssl`, `openssl`, and `dotenvy` are always included** for TLS and env loading; add either `postgres` or `tokio-postgres` plus `tokio` with features `"tokio/full"` when using the async stack.
+- A `.env` file exists with `DATABASE_URL` in the canonical Neon format.
+- The connection string is read from the environment, not hardcoded.
+- `MakeTlsConnector` wraps an `SslConnector` built with `SslMethod::tls()` for every connection.
+- **Parameterized queries** (`$1`, `$2`, …) are used for all dynamic SQL.
+- `Cargo.toml` defines the four `[[bin]]` targets and the default `src/main.rs` is removed when those examples are the only mains.
+- **`postgres` (sync):** `Client::connect` and `mut client` / `mut transaction` where the guide requires it.
+- **`tokio-postgres` (async):** `tokio::spawn` drives the connection future; `client` is `mut` where needed for transactions; all I/O is `.await`ed.
 
 ---
 

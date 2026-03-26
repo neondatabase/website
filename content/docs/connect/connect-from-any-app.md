@@ -25,10 +25,15 @@ updatedOn: '2026-02-06T22:07:32.786Z'
 </DocsList>
 </InfoBlock>
 
-You can connect to your Neon database from any application. The standard method is to copy your [connection string](#get-a-connection-string-from-the-neon-console) from the Neon console and use it in your app or client. For a streamlined development experience, you can also use the [Neon VS Code extension](#connect-with-the-neon-vs-code-extension) to manage connections, browse schemas, and run queries directly in your editor.
+You can connect to your Neon database from any application that supports Postgres. This page covers how to find and use your connection string.
 
-<Admonition type="important">
-You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
+<Admonition type="tip" title="Connect to Neon with one command">
+Run `npx neonctl@latest init` from your project directory to create a Neon account (or sign in), set up a project, store your connection string in `.env`, and install dev tooling for your environment — all in one step. For details, see [neon init](/docs/reference/cli-init).
+
+```bash
+npx neonctl@latest init
+```
+
 </Admonition>
 
 ## Get a connection string from the Neon console
@@ -128,5 +133,9 @@ Additionally, Neon provides a low-latency serverless driver that supports connec
 - Some older Postgres client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support, which means that a connection workaround may be required. For more information, see [Connection errors: The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 - Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For examples, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
 - When connecting from BI tools like Metabase, Tableau, or Power BI, we recommend using a **read replica** instead of your main database compute. BI tools often run long or resource-intensive queries, which can impact performance on your primary branch. Read replicas can scale independently and handle these workloads without affecting your main production traffic. To learn more, see [Neon read replicas](/docs/introduction/read-replicas).
+
+<Admonition type="tip" title="Need user authentication?">
+Neon includes [Neon Auth](/docs/auth/overview), a managed authentication service that provides user signup, login, sessions, and social OAuth providers — stored directly in your Neon database. Auth state branches with your database, so you can test real auth workflows in preview environments. See the [Neon Auth overview](/docs/auth/overview) to get started.
+</Admonition>
 
 <NeedHelp/>

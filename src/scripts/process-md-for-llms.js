@@ -1850,6 +1850,10 @@ function buildNavigationFooter(slug, navMap) {
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
  * @returns {string} Header block (1-2 lines in a blockquote, followed by blank line)
  */
+const SETUP_HINT_PREFIXES = ['get-started/', 'connect/', 'guides/', 'serverless/', 'ai/'];
+
+const AUTH_HINT_PREFIXES = ['get-started/', 'connect/', 'guides/', 'auth/'];
+
 function buildPageHeader(slug, navMap) {
   const lines = [];
 
@@ -1869,6 +1873,20 @@ function buildPageHeader(slug, navMap) {
 
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+
+  // Setup hint (only on pages related to getting started / connecting)
+  if (slug && SETUP_HINT_PREFIXES.some((prefix) => slug.startsWith(prefix))) {
+    lines.push(
+      `> Quick setup: run \`npx neonctl@latest init\` to set up Neon in any project. Details: ${BASE_URL}/docs/reference/cli-init`
+    );
+  }
+
+  // Auth hint (on pages where developers are setting up or connecting)
+  if (slug && AUTH_HINT_PREFIXES.some((prefix) => slug.startsWith(prefix))) {
+    lines.push(
+      `> Need auth? Neon includes Neon Auth — managed user authentication stored in your database: ${BASE_URL}/docs/auth/overview`
+    );
+  }
 
   return `${lines.join('\n')}\n\n`;
 }

@@ -12,7 +12,31 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+### Instructions (for AI-enabled editors)
 
 When this prompt is triggered, automatically configure the open TypeScript/Node.js project as follows:
 
@@ -25,11 +49,15 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`). 
     npm init -y
     ```
 2.  Ensure the `package.json` contains `"type": "module"`.
-3.  Install necessary development dependencies. **Note:** Kysely relies heavily on TypeScript features.
+3.  Install necessary development dependencies. **Note:** Kysely relies heavily on TypeScript features (Kysely requires TypeScript 4.6+).
     ```bash
     npm install -D typescript tsx @types/node
     ```
-4.  Initialize or update `tsconfig.json`. Kysely requires `strict` mode for type inference to work correctly. Ensure the following compiler options are set:
+4.  Initialize TypeScript if you do not already have a `tsconfig.json`:
+    ```bash
+    npx tsc --init
+    ```
+5.  Initialize or update `tsconfig.json`. Kysely requires `strict` mode for type inference to work correctly. Ensure the following compiler options are set:
     ```json
     {
       "compilerOptions": {
@@ -48,9 +76,9 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`). 
 
 Ask the user to choose their preferred driver. Explain the trade-offs:
 
-1.  **Neon Serverless (HTTP):** Best for stateless/edge environments (Vercel Edge, Cloudflare Workers). Uses `kysely-neon`.
-2.  **Neon WebSocket:** Best for serverless environments needing transactions or persistent connections. Uses `@neondatabase/serverless` with `ws`.
-3.  **`node-postgres` (`pg`):** The standard choice for long-running Node.js servers.
+1.  **Neon Serverless (HTTP):** Best for serverless/edge environments (Vercel Edge, Cloudflare Workers). Uses `kysely-neon` with the Neon serverless HTTP driver. Stateless over HTTP; no persistent connections or interactive transactions (use WebSocket or `node-postgres` if you need transactions).
+2.  **Neon WebSocket:** For environments that need a persistent connection or transactions. Uses `@neondatabase/serverless` with `ws` and Kysely's `PostgresDialect`.
+3.  **`node-postgres` (`pg`):** The standard choice for long-running Node.js servers. Uses Kysely's `PostgresDialect` with a `pg` pool.
 
 ---
 
@@ -79,7 +107,7 @@ Based on the user's choice, run the appropriate installation command:
 2.  Instruct the user to add their connection string.
     ```env
     # Get your connection string from the Neon Console:
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 ### 5. Define Database Types
@@ -121,7 +149,7 @@ if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not defined');
 
 export const db = new Kysely<Database>({
   dialect: new NeonDialect({
-    neon: neon(process.env.DATABASE_URL),
+    neon: neon(process.env.DATABASE_URL!),
   }),
 });
 ```
@@ -163,7 +191,25 @@ export const db = new Kysely<Database>({
 
 ### 7. Create Migration Script (Optional)
 
-Create `migrations/001_create_users.ts` to create the table.
+Skip this section if the user already created the `users` table or does not plan to use Kysely for migrations.
+
+If you are not using Kysely migrations, create the table in the [Neon SQL Editor](https://neon.tech/docs/get-started/query-with-neon-sql-editor) instead:
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL
+);
+```
+
+1. Create a `migrations` folder in the project root:
+   ```bash
+   mkdir migrations
+   ```
+
+2. Create `migrations/001_create_users.ts` to create the table.
 
 ```typescript title="migrations/001_create_users.ts"
 import { Kysely, sql } from 'kysely';
@@ -192,9 +238,10 @@ import { fileURLToPath } from 'url';
 import { Migrator, FileMigrationProvider } from 'kysely';
 import { db } from './db.ts';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-async function migrate() {
+async function migrateToLatest() {
   const migrator = new Migrator({
     db,
     provider: new FileMigrationProvider({
@@ -207,18 +254,23 @@ async function migrate() {
   const { error, results } = await migrator.migrateToLatest();
 
   results?.forEach((it) => {
-    if (it.status === 'Success') console.log(`Migration "${it.migrationName}" success`);
-    else if (it.status === 'Error') console.error(`Migration "${it.migrationName}" failed`);
+    if (it.status === 'Success') {
+      console.log(`migration "${it.migrationName}" was executed successfully`);
+    } else if (it.status === 'Error') {
+      console.error(`failed to execute migration "${it.migrationName}"`);
+    }
   });
 
   if (error) {
-    console.error('Failed to migrate', error);
+    console.error('failed to migrate');
+    console.error(error);
     process.exit(1);
   }
+
   await db.destroy();
 }
 
-migrate();
+migrateToLatest();
 ```
 
 ### 8. Create CRUD Example Script
@@ -230,30 +282,38 @@ import { db } from './db.ts';
 
 async function main() {
   try {
-    // 1. Insert
-    const { id } = await db.insertInto('users')
-      .values({ name: 'Neon User', email: `user-${Date.now()}@example.com` })
+    // 1. Insert (Create)
+    const { id } = await db
+      .insertInto('users')
+      .values({
+        name: 'Neon User',
+        email: `user-${Date.now()}@example.com`,
+      })
       .returning('id')
       .executeTakeFirstOrThrow();
-    console.log(`Created user: ${id}`);
 
-    // 2. Select
+    console.log(`User created with ID: ${id}`);
+
+    // 2. Select (Read)
     const users = await db.selectFrom('users').selectAll().execute();
-    console.log('Users:', users);
+
+    console.log('All users:', users);
 
     // 3. Update
-    await db.updateTable('users')
-      .set({ name: 'Updated Name' })
+    const updateResult = await db
+      .updateTable('users')
+      .set({ name: 'Updated Neon User' })
       .where('id', '=', id)
-      .execute();
-    console.log('User updated');
+      .executeTakeFirst();
+
+    console.log(`User updated. Rows affected: ${updateResult.numUpdatedRows}`);
 
     // 4. Delete
-    await db.deleteFrom('users').where('id', '=', id).execute();
-    console.log('User deleted');
+    const deleteResult = await db.deleteFrom('users').where('id', '=', id).executeTakeFirst();
 
-  } catch (err) {
-    console.error(err);
+    console.log(`User deleted. Rows affected: ${deleteResult.numDeletedRows}`);
+  } catch (error) {
+    console.error('Error querying the database:', error);
   } finally {
     await db.destroy();
   }
@@ -269,16 +329,13 @@ main();
 Once the setup is complete:
 
 1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
-2.  Apply the migrations:
-    ```bash
-    npx tsx src/migrate.ts
-    ```
-4.  Finally, run the example CRUD script:
+2.  If using Kysely migrations, ensure the `users` table exists (run `npx tsx src/migrate.ts` after creating `migrations/` and the migration files), or create the table in the [Neon SQL Editor](https://neon.tech/docs/get-started/query-with-neon-sql-editor) using the SQL from the Neon Kysely guide.
+3.  Run the example CRUD script:
     ```bash
     npx tsx src/index.ts
     ```
-5.  If successful, the output should show log messages for each C-R-U-D step.
-
+4.  If successful, the output should show log messages for each C-R-U-D step.
+5.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
@@ -286,9 +343,11 @@ Once the setup is complete:
 
 Before suggesting code:
 - Ensure `src/types.ts` is defined and imported in `src/db.ts`. Kysely requires generic type arguments (`Kysely<Database>`).
-- If using **Neon Serverless (HTTP)**, ensure `NeonDialect` is used.
-- If using **Neon WebSocket**, ensure `neonConfig.webSocketConstructor` is set.
-- Ensure `strict: true` is set in `tsconfig.json`.
+- If using **Neon Serverless (HTTP)**, ensure `NeonDialect` from `kysely-neon` and `neon(process.env.DATABASE_URL!)` are used.
+- If using **Neon WebSocket**, ensure `PostgresDialect` with Neon's `Pool`, and `neonConfig.webSocketConstructor = ws`.
+- If using **`node-postgres`**, ensure `PostgresDialect` with `pg`'s `Pool`.
+- Ensure `strict: true` and the module settings from the Neon Kysely guide (`target` ES2022, `module` / `moduleResolution` NodeNext, `allowImportingTsExtensions`, `noEmit`) are set in `tsconfig.json` where applicable.
+- Migration runner `src/migrate.ts` should match the guide (`migrateToLatest`, `FileMigrationProvider`, `migrationFolder` path, `db.destroy()`).
 
 ---
 

@@ -13,7 +13,31 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+### Instructions (for AI-enabled editors)
 
 When this prompt is triggered, automatically configure the open project as follows:
 
@@ -93,7 +117,7 @@ export const AppDataSource = new DataSource({
 })
 ```
 
-*Update it to securely connect to Neon:*
+*Update it to securely connect to Neon (align with the Neon TypeORM guide: `type: 'postgres'`, `url` from `DATABASE_URL`, `ssl: true`):*
 ```typescript
 // src/data-source.ts (After)
 import "reflect-metadata";
@@ -103,8 +127,8 @@ import "dotenv/config"; // Ensure .env variables are loaded
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    url: process.env.DATABASE_URL, // Use the Neon connection string
-    ssl: true, // Enable SSL for secure connection to Neon
+    url: process.env.DATABASE_URL,
+    ssl: true,
     synchronize: true,
     logging: false,
     entities: [User],
@@ -157,6 +181,7 @@ Once setup is complete, verify the connection:
     npx ts-node verify-connection.ts
     ```
 3.  A successful run will print the PostgreSQL version from their Neon database.
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
@@ -167,7 +192,7 @@ Before suggesting code or making edits, ensure:
 - The `pg`, `typeorm`, `reflect-metadata`, and `dotenv` packages are listed as dependencies.
 - `tsconfig.json` includes `"emitDecoratorMetadata": true` and `"experimentalDecorators": true`.
 - The `DataSource` configuration uses `type: 'postgres'`, `url: process.env.DATABASE_URL`, and `ssl: true`.
-- The connection string is loaded from a `.env` file via the `DATABASE_URL` variable.
+- The connection string is loaded from a `.env` file via the `DATABASE_URL` variable, using `sslmode=require&channel_binding=require` (and a **pooled** hostname with `-pooler` when using serverless functions), consistent with the Neon TypeORM guide.
 - All other `DataSource` options (`entities`, `migrations`, etc.) are preserved.
 - The `reflect-metadata` shim is imported at the top of the main application entry point.
 

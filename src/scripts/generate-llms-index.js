@@ -270,6 +270,10 @@ function generateIndexText(organized, collapsedEntries = []) {
     lines.push(config.intro);
     lines.push('');
   }
+  if (config.agentInstructions) {
+    lines.push(config.agentInstructions);
+    lines.push('');
+  }
 
   const sections = getSectionOrder(organized);
 

@@ -21,14 +21,101 @@ This guide describes how to create a Neon project and connect to it from a Node.
 
 You'll learn how to connect to your Neon database from a JavaScript application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
+Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
 <Admonition type="important" title="Connect from the Server-Side Only">
 Your database connection string contains sensitive credentials and must **never** be exposed in client-side javascript code (for example, in a browser). All database operations should be handled in a secure, server-side environment like a Node.js backend or a serverless function.
 </Admonition>
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - [Node.js](https://nodejs.org/) v18 or later.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your JavaScript app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a JavaScript project
+
+1.  Create a project directory and change into it.
+
+    ```bash
+    mkdir neon-nodejs-quickstart
+    cd neon-nodejs-quickstart
+    ```
+
+    > Open the directory in your preferred code editor (for example, VS Code).
+
+2.  Initialize a new Node.js project. The `-y` flag accepts all the default settings.
+
+    ```bash
+    npm init -y
+    ```
+
+3.  Open your `package.json` file and add the following line into it:
+
+    ```json
+    {
+      // other properties
+      "type": "module"
+    }
+    ```
+
+    This allows you to use ES module syntax (`import`) in your JavaScript files.
+
+## Run neon init
+
+1. From your JavaScript project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your JavaScript app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+Run your application to verify the connection:
+
+```shell
+node app.js
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a JavaScript application:
 
 <Steps>
 
@@ -663,7 +750,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps: Using an ORM or framework
 

@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { Children, useState, useEffect, useContext } from 'react';
+import { Children, useContext, useEffect, useState } from 'react';
 
 import { TabsContext } from 'contexts/tabs-context';
 import { cn } from 'utils/cn';
@@ -9,16 +9,17 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 const Tabs = ({ labels = [], children }) => {
   const { activeTab, setActiveTab } = useContext(TabsContext);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    const tmp = labels.indexOf(activeTab);
-    if (tmp !== -1) setCurrentIndex(tmp);
-  }, [activeTab, labels]);
+    setHasMounted(true);
+  }, []);
+
+  const derivedIndex = labels.indexOf(activeTab);
+  const currentIndex = hasMounted && derivedIndex !== -1 ? derivedIndex : 0;
 
   const handleTabClick = (index) => {
     const label = labels[index];
-    setCurrentIndex(index);
     setActiveTab(label);
     sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
   };

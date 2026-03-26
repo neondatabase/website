@@ -11,6 +11,15 @@ updatedOn: '2026-02-06T22:07:32.788Z'
 
 This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](/docs/get-started/connect-neon).
 
+<Admonition type="tip" title="Connect to Neon with one command">
+Run `npx neonctl@latest init` from your project directory to create a Neon account (or sign in), set up a project, store your connection string in `.env`, and install dev tooling for your environment — all in one step. For details, see [neon init](/docs/reference/cli-init).
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
+
 ## Getting started with connections
 
 <DetailIconCards>

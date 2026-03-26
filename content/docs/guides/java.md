@@ -18,13 +18,112 @@ description="Pre-built prompt for connecting Java applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Java.
 
-You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations.
+You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - [Java Development Kit (JDK) 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or later.
 - [Apache Maven](https://maven.apache.org/install.html) to manage project dependencies.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Java app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Java project
+
+Create a project using the Maven `archetype:generate` command. This sets up a standard Java project structure.
+
+1.  Run the following command in your terminal to generate a new Maven project. This command creates a simple Java project with the `maven-archetype-quickstart` archetype.
+
+    ```bash
+    mvn archetype:generate \
+        -DarchetypeGroupId=org.apache.maven.archetypes \
+        -DarchetypeArtifactId=maven-archetype-quickstart \
+        -DarchetypeVersion=1.5 \
+        -DgroupId=com.neon.quickstart \
+        -DartifactId=neon-java-jdbc \
+        -DinteractiveMode=false
+    ```
+
+2.  Change into the newly created project directory.
+
+    ```bash
+    cd neon-java-jdbc
+    ```
+
+    > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
+
+3.  Add the `dotenv-java` library as a dependency in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add this within the `<dependencies>` section.
+
+    ```xml title="pom.xml"
+    <dependencies>
+      <dependency>
+        <groupId>io.github.cdimascio</groupId>
+        <artifactId>dotenv-java</artifactId>
+        <version>3.2.0</version>
+      </dependency>
+    </dependencies>
+    ```
+
+    <Admonition type="note" title="Note">
+    Make sure to add this to the `<dependencies>` section. A common mistake is adding it to `<dependencyManagement>`, which only declares a version but doesn't actually include the library in your build.
+    </Admonition>
+
+    Save the file.
+
+4.  Compile the project to download the dependencies.
+
+    ```bash
+    mvn clean compile
+    ```
+
+    This command compiles your Java code and downloads the required dependencies specified in `pom.xml`.
+
+## Run neon init
+
+1. From your Java project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Java app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Java application:
 
 <Steps>
 
@@ -403,7 +502,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps: Using an ORM or framework
 

@@ -12,7 +12,31 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
+
+### Instructions (for AI-enabled editors)
 
 When this prompt is triggered, automatically configure the open TypeScript/Node.js project as follows:
 
@@ -257,6 +281,7 @@ Once the setup is complete:
     npx tsx src/index.ts
     ```
 5.  If successful, the output should show log messages for each C-R-U-D step.
+6.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
@@ -265,10 +290,11 @@ Once the setup is complete:
 Before suggesting code or making edits, ensure:
 - The user's choice of driver adapter is respected throughout the setup.
 - The project's detected package manager is used for all commands.
-- The `drizzle.config.ts` file is correctly configured.
-- The `src/db.ts` file uses the correct Drizzle adapter (`neon-http`, `neon-serverless`, or `node-postgres`) and underlying driver (`@neondatabase/serverless` or `pg`) based on the selection.
+- The `drizzle.config.ts` file is correctly configured (`schema`, `out`, `dialect`, `dbCredentials.url`).
+- The `src/db.ts` file uses the correct Drizzle adapter (`neon-http`, `neon-serverless`, `node-postgres`, or `postgres-js`) and matching packages based on the selection.
 - **If the Neon WebSocket driver is chosen,** ensure `ws` is a dependency and `neonConfig.webSocketConstructor = ws;` is present.
-- **If a connection pool is created (`node-postgres` or WebSocket),** ensure it is exported from `src/db.ts` and the `finally` block in `src/index.ts` correctly closes it.
+- **For Neon WebSocket, `node-postgres`, and `postgres.js`,** ensure the example script closes the client in `finally` via `db.$client.end()` when available. **Neon HTTP** has no persistent client to close.
+- The `demo_users` schema matches the guide (`id`, `name` only) unless the user explicitly asks for different columns.
 
 ---
 

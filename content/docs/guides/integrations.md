@@ -16,6 +16,8 @@ updatedOn: '2026-03-20T18:41:23.214Z'
 
 <TechCards>
 
+<a href="/docs/auth/overview" title="Neon Auth" description="Managed user authentication stored directly in your Neon database" icon="auth"></a>
+
 <a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
 
 <a href="/docs/guides/auth-authjs" title="Auth.js" description="Authenticate Neon Postgres application users with Auth.js" icon="auth"></a>

@@ -12,26 +12,81 @@ updatedOn: '2026-02-15T20:51:54.148Z'
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
 
-<InfoBlock>
-<DocsList title="What you will learn:">
-<p>How to connect from Drizzle using different drivers</p>
-<p>How to configure Drizzle Kit for migrations</p>
-</DocsList>
+Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide describes how to connect to Neon from Drizzle. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-<DocsList title="Related resources" theme="docs">
-  <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
-  <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-</DocsList>
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
 
-<DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
-</DocsList>
+<TabItem>
 
-</InfoBlock>
+To connect your Drizzle app to Neon using AI-assisted setup:
 
-Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Neon Postgres database using Drizzle ORM.
+<Steps>
 
-To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
+## Create a Drizzle project
+
+1. Create a new directory and initialize a Node.js project:
+
+   ```bash
+   mkdir my-drizzle-neon-project
+   cd my-drizzle-neon-project
+   npm init -y
+   ```
+
+## Run neon init
+
+1. From your Drizzle project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Drizzle app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+Run the script using `tsx`:
+
+```bash
+npx tsx src/index.ts
+```
+
+You should see output similar to the following, indicating that the user was inserted and queried successfully:
+
+```bash
+Successfully queried the database: [ { id: 1, name: 'John Doe' } ]
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and connect from Drizzle:
 
 <Steps>
 
@@ -335,7 +390,15 @@ You should see output similar to the following, indicating that the user was ins
 Successfully queried the database: [ { id: 1, name: 'John Doe' } ]
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Using Neon branches with Drizzle
 
@@ -357,6 +420,14 @@ export const db = drizzle({ client: sql });
 ```
 
 Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string --branch-id <branch-id>`).
+
+## Source code
+
+<DetailIconCards>
+
+<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge" description="Next.js Edge Functions with Drizzle and Neon" icon="github">Next.js Edge Functions with Drizzle</a>
+
+</DetailIconCards>
 
 ## Resources
 

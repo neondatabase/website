@@ -16,12 +16,69 @@ updatedOn: '2026-02-15T20:51:54.194Z'
 <CopyPrompt src="/prompts/rust-prompt.md" 
 description="Pre-built prompt for connecting Rust applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
+This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - The Rust toolchain. If you do not have it installed, install it from the [official Rust website](https://www.rust-lang.org/tools/install).
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Rust app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Rust project
+
+Create a new Rust project using `cargo`:
+
+```bash
+cargo new neon-rust-quickstart
+cd neon-rust-quickstart
+```
+
+## Run neon init
+
+1. From your Rust project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate Rust crates
+- Configuring your Rust app to connect to Neon
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Rust application:
 
 <Steps>
 
@@ -35,7 +92,7 @@ If you do not have one already, create a Neon project.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Rust application.
 
-## Create a Rust project
+## Create a Rust project and add dependencies
 
 For your Rust project, use `cargo` to create a new project and add the required library dependencies (called "crates").
 
@@ -664,7 +721,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

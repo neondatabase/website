@@ -12,6 +12,12 @@
           slug: get-started/dev-experience
         - title: Built to scale
           slug: get-started/built-to-scale
+        - title: Neon vs Supabase
+          slug: get-started/neon-vs-supabase
+        - title: Neon vs RDS / Aurora
+          slug: get-started/neon-vs-rds-aurora
+        - title: Neon vs Lakebase
+          slug: introduction/neon-and-lakebase
 
     - section: Start with Neon
       icon: start
@@ -324,6 +330,8 @@
               slug: guides/sveltekit
             - title: Symfony
               slug: guides/symfony
+            - title: TanStack
+              slug: guides/tanstack-start
             - title: Hono
               slug: guides/hono
             - title: RedwoodSDK

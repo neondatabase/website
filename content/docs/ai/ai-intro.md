@@ -13,7 +13,7 @@ updatedOn: '2026-02-06T22:07:32.721Z'
 
 This guide collects resources for building AI applications with Neon Postgres. You'll find core concepts, starter applications, framework integrations, and deployment guides. Use these resources to build applications like RAG chatbots, semantic search engines, or custom AI tools.
 
-<CTA title="Start building AI apps with Neon" description="Sign up for Neon Postgres and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Start building AI apps with Neon" description="Sign up and run npx neonctl@latest init from your project to set up Neon, configure your connection, and install dev tooling in one step." buttonText="Get Started" buttonUrl="https://console.neon.tech/signup" />
 
 ## Getting started
 
@@ -24,6 +24,8 @@ Learn the fundamentals of building AI applications with Neon:
 <a href="/docs/ai/ai-concepts" description="Learn the fundamentals of embeddings and vector search for AI applications" icon="openai">AI concepts</a>
 
 <a href="/docs/extensions/pgvector" description="Get started with pgvector for storing and querying vector embeddings" icon="openai">pgvector extension</a>
+
+<a href="/docs/auth/overview" description="Managed user authentication stored in your database — works with AI starter apps" icon="lock-landscape">Neon Auth</a>
 
 </DetailIconCards>
 

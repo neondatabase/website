@@ -114,5 +114,6 @@ Then resume from where they left off.
 | Connection String  | https://neon.com/docs/connect/connect-from-any-app.md |
 | Frameworks Guide   | https://neon.com/docs/get-started/frameworks.md       |
 | ORMs Guide         | https://neon.com/docs/get-started/orms.md             |
+| Neon Auth          | https://neon.com/docs/auth/overview.md                |
 | VSCode Extension   | https://neon.com/docs/local/vscode-extension.md       |
 | MCP Server         | https://neon.com/docs/ai/neon-mcp-server.md           |

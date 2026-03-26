@@ -11,6 +11,8 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:32.888Z'
 ---
 
+Each guide walks you through connecting your framework to Neon — the fastest way is to run `npx neonctl@latest init` from your project. If your app needs user authentication, see [Neon Auth](/docs/auth/overview) for managed signup, login, and sessions stored directly in your database.
+
 <TechCards>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>

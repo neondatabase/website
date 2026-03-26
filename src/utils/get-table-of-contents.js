@@ -6,6 +6,9 @@ const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
+const countAllItems = (items) =>
+  items.reduce((sum, item) => sum + 1 + (item.items ? countAllItems(item.items) : 0), 0);
+
 const extractCustomId = (text) => {
   const match = text.match(/\(#([^)]+)\)$/);
   if (match) {
@@ -23,8 +26,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   while (headings.length > 0) {
     const currentHeading = headings[0];
 
-    // Handle object format
-    const { isNumbered, stepsIndex } = currentHeading;
+    const { isNumbered, stepsIndex, tabLabel, tabGroupLabels } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
@@ -48,6 +50,11 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
         index: localIndex,
       };
 
+      if (tabLabel) {
+        tocItem.tabLabel = tabLabel;
+        tocItem.tabGroupLabels = tabGroupLabels;
+      }
+
       localIndex += 1;
 
       if (isNumbered) {
@@ -64,7 +71,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
 
         if (nextDepth > currentLevel) {
           tocItem.items = buildNestedToc(headings, currentLevel + 1, localIndex);
-          localIndex += tocItem.items.length;
+          localIndex += countAllItems(tocItem.items);
         }
       }
 
@@ -121,36 +128,127 @@ const getTableOfContents = (content) => {
     }
   }
 
-  const codeBlockRegex = /```[\s\S]*?```/g;
-  const headingRegex = /^(#+)\s(.*)$/gm;
-  const contentWithoutCodeBlocks = content.replace(codeBlockRegex, '');
+  // Split content into ordered segments (non-tab content and individual
+  // TabItem content) so that headings are extracted per-segment.  This
+  // avoids false matches when the same heading text appears in multiple tabs.
+  //
+  // Depth-aware matching: handles nested <Tabs>/<TabItem> (e.g. driver-
+  // selection tabs inside a guide's manual tab) by tracking open/close depth.
+  const findMatchingClose = (text, searchFrom, openPattern, closePattern) => {
+    let depth = 1;
+    const combined = new RegExp(`(${openPattern})|(${closePattern})`, 'g');
+    combined.lastIndex = searchFrom;
+    let m;
+    while ((m = combined.exec(text)) !== null) {
+      if (m[1]) depth++;
+      else if (m[2]) depth--;
+      if (depth === 0) return { start: m.index, end: m.index + m[0].length };
+    }
+    return null;
+  };
 
-  // Get all headings first
-  const allHeadings = contentWithoutCodeBlocks.match(headingRegex) || [];
+  const tabsBlocks = [];
+  const tabsOpenRegex = /<Tabs[^>]*labels=\{(\[.*?\])\}[^>]*>/g;
+  let tabsMatch;
+  while ((tabsMatch = tabsOpenRegex.exec(content)) !== null) {
+    const afterOpen = tabsMatch.index + tabsMatch[0].length;
+    const closeInfo = findMatchingClose(content, afterOpen, '<Tabs[^>]*>', '<\\/Tabs>');
+    if (closeInfo) {
+      tabsBlocks.push({
+        index: tabsMatch.index,
+        fullEnd: closeInfo.end,
+        labels: tabsMatch[1],
+        innerContent: content.substring(afterOpen, closeInfo.start),
+      });
+      tabsOpenRegex.lastIndex = closeInfo.end;
+    }
+  }
 
-  // Find steps sections
-  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
-  const stepsMatches = [...content.matchAll(stepsRegex)];
+  const segments = [];
+  let lastEnd = 0;
 
-  // Convert headings to objects while preserving order
-  const arr = allHeadings.map((heading) => {
-    // Check if this heading is inside any Steps section and is h2
-    let stepsIndex = -1;
-    const isInSteps = stepsMatches.some((match, index) => {
-      const stepsContent = match[0];
-      if (stepsContent.includes(heading) && /^##\s(.*)$/gm.test(heading)) {
-        stepsIndex = index;
-        return true;
+  for (const block of tabsBlocks) {
+    if (block.index > lastEnd) {
+      segments.push({
+        content: content.substring(lastEnd, block.index),
+        tabLabel: null,
+        tabGroupLabels: null,
+      });
+    }
+
+    let labels;
+    try {
+      labels = JSON.parse(block.labels);
+    } catch {
+      lastEnd = block.fullEnd;
+      continue;
+    }
+
+    const tabItems = [];
+    const tiOpenRegex = /<TabItem>/g;
+    let tiMatch;
+    while ((tiMatch = tiOpenRegex.exec(block.innerContent)) !== null) {
+      const afterTiOpen = tiMatch.index + tiMatch[0].length;
+      const tiClose = findMatchingClose(
+        block.innerContent,
+        afterTiOpen,
+        '<TabItem[^>]*>',
+        '<\\/TabItem>'
+      );
+      if (tiClose) {
+        tabItems.push(block.innerContent.substring(afterTiOpen, tiClose.start));
+        tiOpenRegex.lastIndex = tiClose.end;
       }
-      return false;
+    }
+
+    tabItems.forEach((tiContent, idx) => {
+      segments.push({
+        content: tiContent,
+        tabLabel: labels[idx] || `Tab ${idx + 1}`,
+        tabGroupLabels: labels,
+      });
     });
 
-    return {
-      title: heading,
-      isNumbered: isInSteps,
-      stepsIndex: isInSteps ? stepsIndex : -1,
-    };
-  });
+    lastEnd = block.fullEnd;
+  }
+
+  if (lastEnd < content.length) {
+    segments.push({ content: content.substring(lastEnd), tabLabel: null, tabGroupLabels: null });
+  }
+
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  const headingRegex = /^(#+)\s(.*)$/gm;
+  const stepsRegex = /<Steps>([\s\S]*?)<\/Steps>/g;
+
+  const arr = [];
+  let stepsCounter = 0;
+
+  for (const segment of segments) {
+    const stripped = segment.content.replace(codeBlockRegex, '');
+    const headings = stripped.match(headingRegex) || [];
+    const segmentSteps = [...segment.content.matchAll(stepsRegex)];
+    const stepsBase = stepsCounter;
+    stepsCounter += segmentSteps.length;
+
+    for (const heading of headings) {
+      let stepsIndex = -1;
+      const isInSteps = segmentSteps.some((match, localIdx) => {
+        if (match[0].includes(heading) && /^##\s/.test(heading)) {
+          stepsIndex = stepsBase + localIdx;
+          return true;
+        }
+        return false;
+      });
+
+      arr.push({
+        title: heading,
+        isNumbered: isInSteps,
+        stepsIndex: isInSteps ? stepsIndex : -1,
+        tabLabel: segment.tabLabel,
+        tabGroupLabels: segment.tabGroupLabels,
+      });
+    }
+  }
 
   return buildNestedToc(arr, 1);
 };

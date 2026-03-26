@@ -12,7 +12,77 @@ updatedOn: '2026-02-15T20:51:54.164Z'
 <CopyPrompt src="/prompts/hono-prompt.md"
 description="Pre-built prompt for connecting Hono applications to Neon Postgres"/>
 
-[Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
+[Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Hono app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Hono project
+
+Create a Hono project if you do not have one. For instructions, see [Quick Start](https://hono.dev/docs/getting-started/basic), in the Hono documentation.
+
+## Run neon init
+
+1. From your Hono project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Hono app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+Start your Hono development server. You can use the following command:
+
+```bash
+npm run dev
+```
+
+Navigate to your application's URL ([localhost:3000](http://localhost:3000)). You should see a JSON response with the PostgreSQL version:
+
+```json shouldWrap
+{
+  "version": "PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+}
+```
+
+> The specific version may vary depending on the PostgreSQL version you are using.
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
 
 To create a Neon project and access it from a Hono application:
 
@@ -153,7 +223,15 @@ Navigate to your application's URL ([localhost:3000](http://localhost:3000)). Yo
 
 > The specific version may vary depending on the PostgreSQL version you are using.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

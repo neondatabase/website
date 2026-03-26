@@ -12,11 +12,65 @@ updatedOn: '2026-02-06T22:07:33.062Z'
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
 description="Pre-built prompt for connecting Node.js applications to Neon using TypeORM."/>
 
-TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
+TypeORM is an open-source ORM that lets you to manage and interact with your database. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-- [Connect to Neon from TypeORM](#connect-to-neon-from-typeorm)
-- [Use connection pooling with TypeORM](#use-connection-pooling-with-typeorm)
-- [Connection timeouts](#connection-timeouts)
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your TypeORM app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a TypeORM project
+
+Install TypeORM and its required packages if they are not already in your project:
+
+```bash
+npm install typeorm reflect-metadata dotenv
+```
+
+For a new TypeORM project, you can run `npx typeorm init --database postgres` to scaffold a starter layout.
+
+## Run neon init
+
+1. From your TypeORM project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your TypeORM app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
 
 ## Connect to Neon from TypeORM
 
@@ -86,5 +140,13 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 <Admonition type="note">
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
+
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>

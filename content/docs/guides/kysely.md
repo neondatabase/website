@@ -12,23 +12,131 @@ updatedOn: '2026-02-15T20:51:54.167Z'
 <CopyPrompt src="/prompts/kysely-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Kysely."/>
 
-<InfoBlock>
-<DocsList title="What you will learn:">
-<p>How to connect from Kysely using different drivers</p>
-<p>How to define TypeScript schemas for Kysely</p>
-<p>How to run migrations and queries</p>
-</DocsList>
+Kysely is a modern, type-safe SQL query builder for TypeScript. This guide describes how to connect to Neon from Kysely. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
-<DocsList title="Related resources" theme="docs">
-  <a href="https://kysely.dev/docs/intro">Kysely Documentation</a>
-  <a href="https://github.com/kysely-org/kysely-neon">kysely-neon GitHub</a>
-</DocsList>
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
 
-</InfoBlock>
+<TabItem>
 
-Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Neon Postgres database using Kysely.
+To connect your Kysely app to Neon using AI-assisted setup:
 
-To connect a TypeScript/Node.js project to Neon using Kysely, follow these steps:
+<Steps>
+
+## Create a Kysely project
+
+1. Create a new directory, initialize a Node.js project, and set up TypeScript:
+
+   Create a new directory for your project and navigate into it:
+
+   ```bash
+   mkdir my-kysely-neon-project
+   cd my-kysely-neon-project
+   ```
+
+   Initialize a new Node.js project:
+
+   ```bash
+   npm init -y
+   ```
+
+   Install TypeScript and initialize a configuration file (Kysely requires TypeScript 4.6+):
+
+   ```bash
+   npm install -D typescript tsx @types/node
+   npx tsc --init
+   ```
+
+   Configure your `tsconfig.json` for type safety and module resolution. Ensure you have at least the following settings:
+
+   ```json {4-9}
+   {
+     "compilerOptions": {
+       // ... other settings ...
+       "target": "ES2022",
+       "module": "NodeNext",
+       "moduleResolution": "NodeNext",
+       "strict": true,
+       "allowImportingTsExtensions": true,
+       "noEmit": true
+     }
+   }
+   ```
+
+   Configure your `package.json` to use ES modules by updating or adding the following line:
+
+   ```json {3}
+   {
+     // ... other settings ...
+     "type": "module"
+   }
+   ```
+
+## Run neon init
+
+1. From your Kysely project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Kysely app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+Run the script using `tsx`:
+
+```bash
+npx tsx src/index.ts
+```
+
+You should see output indicating that the user was created and then fetched from the database.
+
+```bash
+$ npx tsx src/index.ts
+User created with ID: 1
+All users: [
+  {
+    id: 1,
+    name: 'Neon User',
+    email: 'user-1765528647146@example.com',
+    created_at: 2025-12-12T08:37:27.456Z
+  }
+]
+User updated. Rows affected: 1
+User deleted. Rows affected: 1
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and connect from Kysely:
 
 <Steps>
 
@@ -415,9 +523,18 @@ User updated. Rows affected: 1
 User deleted. Rows affected: 1
 ```
 
-For more advanced use cases, such as complex filters, joins, transactions, and subqueries, please refer to the [Kysely documentation](https://kysely.dev/docs/intro).
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
 
 </Steps>
+
+</TabItem>
+
+</Tabs>
+
+
+For more advanced use cases, such as complex filters, joins, transactions, and subqueries, please refer to the [Kysely documentation](https://kysely.dev/docs/intro).
 
 ## Learn more
 

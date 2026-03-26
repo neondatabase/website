@@ -77,6 +77,13 @@ const CopyMarkdownButton = ({ markdownPath }) => {
   const copyPageToClipboard = async () => {
     try {
       const response = await fetch(markdownPath);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch markdown (${response.status})`);
+      }
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('text/html')) {
+        throw new Error('Received HTML instead of markdown');
+      }
       const content = await response.text();
       copyToClipboard(content);
       setStatus('copied');

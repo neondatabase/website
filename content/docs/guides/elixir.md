@@ -15,10 +15,74 @@ This guide describes how to create a Neon project and connect to it from an Elix
 
 You'll learn how to connect to your Neon database from an Elixir application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
+Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
+
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
 - Elixir v1.12 or later. If you do not have Elixir installed, see the [official installation guide](https://elixir-lang.org/install.html).
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Elixir app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create an Elixir project
+
+For your Elixir project, create a project directory using `mix`.
+
+Create a new supervised Elixir project and change into the directory.
+
+```bash
+mix new neon_elixir_quickstart --sup
+cd neon_elixir_quickstart
+```
+
+> Open this directory in your preferred code editor (for example, VS Code).
+
+## Run neon init
+
+1. From your Elixir project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Elixir app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To connect to Neon from an Elixir application using manual setup:
 
 <Steps>
 
@@ -353,7 +417,15 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Next steps: Using an ORM or framework
 

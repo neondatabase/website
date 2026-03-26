@@ -2,7 +2,7 @@
 
 **Role:** You are an expert software agent responsible for configuring the current Elixir Phoenix project to connect to a Neon Postgres database.
 
-**Purpose:** To correctly configure the Ecto Repo for a secure Neon connection and add a new API endpoint that demonstrates a successful database query.
+**Purpose:** To configure the Ecto Repo using `.env`, `config/dev.exs`, `config/runtime.exs`, and `config/test.exs`, then install dependencies and create databases—matching the Neon Phoenix guide’s **Connect manually** flow (including production-style `mix phx.server` on **port 4001**).
 
 **Scope:**
 - Assumes the user has a Neon project and has access to their connection parameters.
@@ -13,129 +13,154 @@
 
 ## 📋 Prerequisites
 
-- This prompt should be run from the root of an existing Phoenix project, which can be identified by the presence of a `mix.exs` file.
-- **Setup for New Projects:** If the user does not have a Phoenix project, create one using the following commands:
-
-  1.  First, ensure the Phoenix project generator is installed:
-      ```bash
-      mix archive.install hex phx_new
-      ```
-  2.  Next, create the new Phoenix application:
-      ```bash
-      mix phx.new my_phoenix_app
-      ```
+- This prompt should be run from the root of an existing Phoenix project (`mix.exs` present).
+- **New projects:** Install the generator if needed (`mix archive.install hex phx_new`), then `mix phx.new hello` (or the user’s app name). When prompted, you may defer `mix deps.get` until after config, as in the guide.
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
 
-When this prompt is triggered inside a valid Phoenix project, automatically configure it as follows:
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
 
-### 1. Identify Application Name and Modules
+```bash
+npx neonctl@latest init
+```
 
-1.  Open the `mix.exs` file.
-2.  Locate the `project/0` function and identify the value of the `:app` key (e.g., `:my_app`).
-3.  Based on the app name, determine the primary application module (e.g., `MyApp`) and the web module (e.g., `MyAppWeb`). These will be used to configure the Repo and the Router.
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
 
-### 2. Configure the Development Database Connection
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
 
-1.  Open the `config/dev.exs` file.
-2.  Locate the configuration block for the Ecto Repo (it will look like `config :my_app, MyApp.Repo, ...`).
-3.  Replace the default configuration with the following structure. Instruct the user to substitute the placeholder values with their actual Neon database credentials. **Crucially, ensure the `ssl` option is included.**
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
 
-    ```elixir
-    # In config/dev.exs
-    # Replace :my_app and MyApp with your actual application names
-    config :my_app, MyApp.Repo,
-      # ==> Replace these with your Neon credentials
-      username: "[user]",
-      password: "[password]",
-      hostname: "[neon_hostname]",
-      database: "[dbname]",
-      # <== End of user-specific credentials
-      stacktrace: true,
-      show_sensitive_data_on_connection_error: true,
-      pool_size: 10,
-      # This SSL option is REQUIRED to connect to Neon
-      ssl: [cacerts: :public_key.cacerts_get()]
-    ```
-4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
+---
 
-### 3. Create a Database Version Check API Endpoint
+## 🛠️ Step 2: Manual setup (fallback)
 
-This will provide a simple, stateless way to verify that the database connection is working correctly.
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
-1.  **Add a new route:** Open `lib/my_app_web/router.ex` (replace `my_app_web` with the correct web module name). Inside the `scope "/api", MyAppWeb do` block, add the following route:
-    ```elixir
-    # In lib/my_app_web/router.ex
-    get "/db_version", DBCheckController, :version
-    ```
+When this prompt is triggered inside a valid Phoenix project, configure it as follows.
 
-2.  **Create a new controller:** Create a new file named `lib/my_app_web/controllers/db_check_controller.ex`. Populate it with the following code. **Remember to replace `MyAppWeb` and `MyApp.Repo` with the correct module names.**
+### 1. Application name and modules
 
-    ```elixir
-    # In lib/my_app_web/controllers/db_check_controller.ex
-    defmodule MyAppWeb.DBCheckController do
-      use MyAppWeb, :controller
+1. Open `mix.exs` and read `:app` (for example `:hello`).
+2. Derive the Repo module (for example `Hello.Repo`) and config namespace (`:hello`).
 
-      # Replace MyApp.Repo with your actual Repo module
-      alias MyApp.Repo
+### 2. Store Neon credentials in `.env`
 
-      def version(conn, _params) do
-        # Execute a raw SQL query to get the PostgreSQL version
-        {:ok, result} = Ecto.Adapters.SQL.query(Repo, "SELECT version();", [])
+Create or update `.env` at the project root:
 
-        # The result is a list with one row and one column
-        [[version_string]] = result.rows
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```
 
-        # Return the version string as a JSON response
-        json(conn, %{version: version_string})
-      end
-    end
-    ```
+Use **Neon Console → Project → Dashboard → Connect** for values.
+
+### 3. Configure `config/dev.exs`
+
+Update the `config :your_app, YourApp.Repo` block with the user’s **username**, **password**, **hostname**, and **database** from the connection string. Keep troubleshooting fields as in the guide and **require SSL**:
+
+```elixir
+config :hello, Hello.Repo,
+  username: "<user>",
+  password: "<password>",
+  hostname: "<endpoint_hostname>.neon.tech",
+  database: "<dbname>",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10,
+  ssl: [cacerts: :public_key.cacerts_get()]
+```
+
+> `:ssl` with `cacerts: :public_key.cacerts_get()` is required for Neon (Postgrex verifies server certificates).
+
+### 4. Configure `config/runtime.exs`
+
+Ensure the Repo block includes SSL and uses the runtime `database_url` (the guide adds):
+
+```elixir
+config :hello, Hello.Repo,
+  ssl: [cacerts: :public_key.cacerts_get()],
+  url: database_url,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  socket_options: maybe_ipv6
+```
+
+(Keep the surrounding `if config_env() == :prod` structure Phoenix generates; merge these keys into the existing Repo config for production.)
+
+### 5. Configure `config/test.exs`
+
+Point the test Repo at Neon with SSL, using a **test database name** derived from the app (the guide uses a name like `with_phoenix_test` plus `MIX_TEST_PARTITION`):
+
+```elixir
+config :hello, Hello.Repo,
+  username: "<user>",
+  password: "<password>",
+  hostname: "<endpoint_hostname>.neon.tech",
+  database: "your_app_test#{System.get_env("MIX_TEST_PARTITION")}",
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: System.schedulers_online() * 2,
+  ssl: [cacerts: :public_key.cacerts_get()]
+```
+
+Adjust `database:` to match the user’s chosen test DB name and Neon branch setup.
+
+### 6. Install dependencies and create databases
+
+```bash
+mix deps.get
+mix ecto.create
+MIX_ENV=test mix ecto.create
+```
+
+### 7. Build and run (production-style, port **4001**)
+
+Match the guide’s production compile and asset steps, then serve on **4001**:
+
+```bash
+MIX_ENV=prod mix compile
+MIX_ENV=prod mix assets.deploy
+mix phx.gen.secret
+```
+
+Run the server (user supplies real `DATABASE_URL` and `SECRET_KEY_BASE`):
+
+```bash
+PORT=4001 \
+MIX_ENV=prod \
+PHX_HOST=localhost \
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require" \
+SECRET_KEY_BASE="<output_of_mix_phx_gen_secret>" \
+mix phx.server
+```
+
+Open [http://localhost:4001](http://localhost:4001).
 
 ---
 
 ## 🚀 Next Steps
 
-Once the file modifications are complete:
-
-1.  Verify the user has correctly set their connection string in `config/dev.exs`. Do not proceed if placeholder value are still present.
-2.  Fetch the project's dependencies:
-    ```bash
-    mix deps.get
-    ```
-3.  Create the database in Neon using the Ecto mix task. This will also create the `schema_migrations` table.
-    ```bash
-    mix ecto.create
-    ```
-4.  Start the Phoenix server:
-    ```bash
-    mix phx.server
-    ```
-5.  To verify the connection, instruct the user to open a new terminal and run the following `curl` command:
-    ```bash
-    curl http://localhost:4000/api/db_version
-    # Expected output: {"version":"PostgreSQL XX.XX on ..."}
-    ```
+1. Confirm `DATABASE_URL` and Repo SSL options are set for every environment that hits Neon.
+2. After `mix deps.get`, run `mix ecto.create` and `MIX_ENV=test mix ecto.create` when setting up fresh databases.
+3. Use **port 4001** and `MIX_ENV=prod` with `mix phx.server` when following the guide’s production-style local run.
+4. **Authentication:** Mention [Neon Auth](https://neon.tech/docs/auth/overview) when relevant.
 
 ---
 
 ## ✅ Validation Rules for AI
 
-Before suggesting code or making edits, ensure:
--   A Phoenix project structure is detected (i.e., `mix.exs`, `config/`, `lib/`).
--   The `config/dev.exs` file contains an Ecto Repo configuration block matching the application's name.
--   **The `ssl: [cacerts: :public_key.cacerts_get()]` option is present and correctly formatted in the Repo configuration.** This is a mandatory requirement for connecting to Neon.
--   A new route for `GET /api/db_version` is added to `lib/my_app_web/router.ex`.
--   A new controller file, `lib/my_app_web/controllers/db_check_controller.ex`, has been created.
--   The controller uses `Ecto.Adapters.SQL.query/3` to execute a query against the application's configured `Repo`.
+- Phoenix layout is present (`mix.exs`, `config/`, `lib/`).
+- `.env` (or runtime env) provides `DATABASE_URL` in the canonical Neon format.
+- `config/dev.exs`, `config/runtime.exs` (prod Repo), and `config/test.exs` Repo configs include `ssl: [cacerts: :public_key.cacerts_get()]`.
+- Database creation steps use `mix ecto.create` and `MIX_ENV=test mix ecto.create` as in the guide.
+- Production-style local run uses `PORT=4001` and `mix phx.server` with `MIX_ENV=prod`.
 
 ---
 
 ## ❌ Do Not
 
--   Do not hardcode user credentials in any file other than the `config/{env}.exs` files.
--   Do not output the user's connection parameters or the contents of their config files in any response.
--   **Do not forget the mandatory `ssl` option in the Ecto Repo configuration.** Connection will fail without it.
--   Do not modify any files other than `config/dev.exs`, `lib/my_app_web/router.ex`, and the new controller file.
+- Do not hardcode secrets in committed files beyond what the user explicitly manages in env-specific config.
+- Do not omit the Repo `ssl` options required for Postgrex + Neon.
+- Do not assume **port 4000** for the guide’s production-style command; the manual tab uses **4001**.

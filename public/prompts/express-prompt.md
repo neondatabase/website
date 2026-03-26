@@ -25,7 +25,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open ExpressJS project as follows:
 
@@ -43,16 +64,13 @@ When this prompt is triggered, automatically configure the open ExpressJS projec
 
     ```bash
     # For @neondatabase/serverless
-    npm install @neondatabase/serverless
+    npm install @neondatabase/serverless dotenv
 
     # For postgres (postgres.js)
-    npm install postgres
+    npm install postgres dotenv
 
     # For pg (node-postgres)
-    npm install pg
-
-    # Install dotenv for all options
-    npm i dotenv
+    npm install pg dotenv
     ```
 
 ---
@@ -63,7 +81,7 @@ When this prompt is triggered, automatically configure the open ExpressJS projec
 2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
 3.  Direct the user to find this value in the **Neon Console → Project → Dashboard → Connect**.
@@ -81,30 +99,22 @@ To provide a clear way to verify the setup, create a main application file that 
 
     ```javascript title="index.js"
     require('dotenv').config();
+
     const express = require('express');
     const { neon } = require('@neondatabase/serverless');
 
     const app = express();
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4242;
 
-    const sql = neon(process.env.DATABASE_URL);
-
-    app.get('/', async (req, res) => {
-      try {
-        const [result] = await sql`SELECT version()`;
-        const version = result?.version || 'No version found';
-        res.json({
-          message: 'Connection successful!',
-          version: version,
-        });
-      } catch (error) {
-        console.error('Database query failed:', error);
-        res.status(500).json({ error: 'Failed to connect to the database.' });
-      }
+    app.get('/', async (_, res) => {
+      const sql = neon(`${process.env.DATABASE_URL}`);
+      const response = await sql`SELECT version()`;
+      const { version } = response[0];
+      res.json({ version });
     });
 
     app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(`Listening to http://localhost:${PORT}`);
     });
     ```
 
@@ -112,30 +122,22 @@ To provide a clear way to verify the setup, create a main application file that 
 
     ```javascript title="index.js"
     require('dotenv').config();
+
     const express = require('express');
     const postgres = require('postgres');
 
     const app = express();
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4242;
 
-    const sql = postgres(process.env.DATABASE_URL);
-
-    app.get('/', async (req, res) => {
-      try {
-        const [result] = await sql`SELECT version()`;
-        const version = result?.version || 'No version found';
-        res.json({
-          message: 'Connection successful!',
-          version: version,
-        });
-      } catch (error) {
-        console.error('Database query failed:', error);
-        res.status(500).json({ error: 'Failed to connect to the database.' });
-      }
+    app.get('/', async (_, res) => {
+      const sql = postgres(`${process.env.DATABASE_URL}`);
+      const response = await sql`SELECT version()`;
+      const { version } = response[0];
+      res.json({ version });
     });
 
     app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(`Listening to http://localhost:${PORT}`);
     });
     ```
 
@@ -143,38 +145,26 @@ To provide a clear way to verify the setup, create a main application file that 
 
     ```javascript title="index.js"
     require('dotenv').config();
-    const express = require('express');
+
     const { Pool } = require('pg');
+    const express = require('express');
 
     const app = express();
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4242;
 
-    // Create a connection pool. The pool will manage connections for you.
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL
-    });
-
-    app.get('/', async (req, res) => {
-      let client;
-      try {
-        client = await pool.connect();
-        const { rows } = await client.query('SELECT version()');
-        const version = rows[0]?.version || 'No version found';
-        res.json({
-          message: 'Connection successful!',
-          version: version,
-        });
-      } catch (error) {
-        console.error('Database query failed:', error);
-        res.status(500).json({ error: 'Failed to connect to the database.' });
-      } finally {
-        // Make sure to release the client back to the pool
-        client?.release();
-      }
+    app.get('/', async (_, res) => {
+      const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+      });
+      const client = await pool.connect();
+      const result = await client.query('SELECT version()');
+      client.release();
+      const { version } = result.rows[0];
+      res.json({ version });
     });
 
     app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(`Listening to http://localhost:${PORT}`);
     });
     ```
 
@@ -189,18 +179,19 @@ Once the file modifications are complete:
     ```bash
     node index.js
     ```
-3.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:3000` in their browser. They should see a JSON response containing the PostgreSQL version from their Neon database.
+3.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:4242` in their browser. They should see a JSON response with a `version` field from their Neon database.
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- A supported PostgreSQL driver (`@neondatabase/serverless`, `postgres`, or `pg`) is installed as a dependency in `package.json`.
+- A supported PostgreSQL driver (`@neondatabase/serverless`, `postgres`, or `pg`) and `dotenv` are installed as dependencies in `package.json`.
 - A `.env` file is present or has been created with a `DATABASE_URL` placeholder.
 - An `index.js` file is present and contains a root (`/`) route handler.
-- The test route correctly imports and uses the chosen driver's syntax.
-- The connection logic is wrapped in a `try...catch` block to handle potential errors gracefully.
+- Default port is **4242** (or `process.env.PORT`); listen callback logs `Listening to http://localhost:${PORT}`.
+- The test route returns JSON `{ version }` and follows the Neon Express guide patterns (client created inside the handler for Neon serverless and postgres.js; `Pool` inside the handler for `pg`).
 
 ---
 

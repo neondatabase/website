@@ -9,11 +9,84 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.933Z'
 ---
 
-This guide describes how to create a Neon project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
+<CopyPrompt src="/prompts/bun-prompt.md" description="Pre-built prompt for connecting Bun applications to Neon"/>
+
+This guide describes how to create a Neon project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Choose **Connect with neon init** for a quick, guided setup or **Connect manually** for step-by-step instructions.
 
 <Admonition type="note">
 The same configuration steps can be used for [Hono](https://hono.dev/docs/getting-started/bun), [Elysia](https://elysiajs.com), and other Bun-based web frameworks.
 </Admonition>
+
+<Tabs labels={["Connect with neon init", "Connect manually"]}>
+
+<TabItem>
+
+To connect your Bun app to Neon using AI-assisted setup:
+
+<Steps>
+
+## Create a Bun project
+
+Create a Bun project if you do not have one:
+
+```shell
+mkdir bun-neon-example
+cd bun-neon-example
+bun init -y
+```
+
+## Run neon init
+
+1. From your Bun project root, run [`neon init`](/docs/reference/cli-init):
+
+   ```bash
+   npx neonctl@latest init
+   ```
+
+2. Follow the interactive prompts to sign up for Neon (or log in) and select your editor(s). This installs the AI development tooling for your coding environment:
+   - MCP server
+   - Agent skills
+   - IDE extensions
+   - Plugins
+
+3. **Restart your editor** to pick up the new tooling.
+
+## Ask your AI assistant to get started
+
+Open your AI assistant's chat and type:
+
+> Get started with Neon
+
+Your AI assistant will walk you through:
+
+- Creating a database branch in a new or existing Neon project
+- Storing the connection string in your project's `.env` file
+- Installing the appropriate client libraries
+- Configuring your Bun app to connect to Neon
+- Setting up [Neon Auth](/docs/auth/overview) for managed authentication, if your app needs it
+
+## Run the app
+
+Run `bun run index.ts` (or `bun index.js`) to view the result.
+
+```shell
+$ bun run index.ts
+{
+  version: "PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit",
+}
+```
+
+</Steps>
+
+<Admonition type="tip">
+For details on what `neon init` creates and how to customize it, see the [CLI init reference](/docs/reference/cli-init).
+</Admonition>
+
+</TabItem>
+
+<TabItem>
+
+To create a Neon project and access it from a Bun application:
 
 <Steps>
 
@@ -97,7 +170,7 @@ getPgVersion();
 
 </CodeTabs>
 
-## Run index.ts
+## Run the app
 
 Run `bun run index.ts` (or `bun index.js`) to view the result.
 
@@ -108,7 +181,15 @@ $ bun run index.ts
 }
 ```
 
+## Add authentication (optional)
+
+If your app requires user authentication, Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service that branches with your database.
+
 </Steps>
+
+</TabItem>
+
+</Tabs>
 
 ## Source code
 

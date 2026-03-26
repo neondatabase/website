@@ -26,7 +26,28 @@
 
 ---
 
-## 🛠️ Instructions (for AI-enabled editors)
+## ⚡ Step 1: Try neon init (recommended)
+
+If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+
+```bash
+npx neonctl@latest init
+```
+
+`neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
+
+After it completes, instruct the user to **restart their editor**. Once restarted, you can guide them through an interactive "Get started with Neon" flow to create a project, obtain a connection string, store it in the project, install client libraries, and configure the app, including optional [Neon Auth](https://neon.tech/docs/auth/overview) setup.
+
+**If `neon init` succeeds, skip to [Next Steps](#-next-steps).** The rest of the manual instructions below are not needed.
+
+---
+
+## 🛠️ Step 2: Manual setup (fallback)
+
+Use this section only if:
+- Your environment does not support running terminal commands
+- `neon init` is unavailable or failed
+- The user explicitly prefers manual configuration
 
 When this prompt is triggered, automatically configure the open SolidStart project as follows:
 
@@ -34,25 +55,25 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1.  **Prompt the user to select a PostgreSQL driver.** Present the following options (same order as the Neon docs):
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The best choice for SolidStart applications deployed to Vercel, Netlify, or Cloudflare.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
     *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    *   **`postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
+    *   **`@neondatabase/serverless` (Neon serverless driver):** Optimized for serverless and edge-style deployments with HTTP connections.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
 2.  Based on the user's selection, run the corresponding installation command.
 
     ```bash
-    # For @neondatabase/serverless
-    npm install @neondatabase/serverless
+    # For pg (node-postgres)
+    npm install pg
 
     # For postgres (postgres.js)
     npm install postgres
 
-    # For pg (node-postgres)
-    npm install pg
+    # For @neondatabase/serverless (Neon serverless driver)
+    npm install @neondatabase/serverless
     ```
 
 ---
@@ -60,13 +81,13 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 ### 2. Configure Environment Variables
 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete pooled connection string from Neon.
+2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>-pooler.neon.tech/<dbname>?sslmode=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project Dashboard → Connect button**. Make sure to select **Pooled connection** for better performance with serverless applications.
+3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -236,16 +257,17 @@ Once the file modifications are complete:
     ```bash
     npm run dev
     ```
-3.  Inform the user that the setup is complete. To test the connection, they can:
-    *   Visit `http://localhost:3000` in their browser to see the server-rendered page displaying the PostgreSQL version.
-    *   Visit `http://localhost:3000/api/version` to see a JSON response from the API route.
+3.  Inform the user that the setup is complete. When you run `npm run dev`, you can expect to see the Postgres version string on [localhost:3000](http://localhost:3000/):
+    *   Visit `http://localhost:3000` for the server-rendered page (Page component).
+    *   Visit `http://localhost:3000/api/test` for the API route JSON response.
+4.  **Authentication:** If the app needs user authentication, let the user know about [Neon Auth](https://neon.tech/docs/auth/overview), a managed authentication service that branches with the database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- A supported PostgreSQL driver (`@neondatabase/serverless`, `postgres`, or `pg`) is installed.
+- A supported PostgreSQL driver (`pg`, `postgres`, or `@neondatabase/serverless`) is installed.
 - A `.env` file is present or has been created with a `DATABASE_URL` key.
 
 ---
@@ -254,4 +276,4 @@ Before suggesting code or making edits, ensure:
 
 - **Do not hardcode credentials** or sensitive information in any `.ts` or `.tsx` source code file. Always use `process.env`.
 - **Do not output the user's connection string** in any response or log.
-- Do not delete or modify other user-defined routes or components. Only modify `src/routes/index.tsx` and create `src/routes/api/version.ts` as specified.
+- Do not delete or modify other user-defined routes or components. Only modify `src/routes/index.tsx` and create `src/routes/api/test.ts` as specified.
