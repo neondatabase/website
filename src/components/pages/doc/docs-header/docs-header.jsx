@@ -13,7 +13,7 @@ import DocsNavigation from '../docs-navigation';
 const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
   <div
     className={clsx(
-      'flex h-28 w-full items-center bg-white backdrop-blur-xl dark:bg-black-pure lg:h-14 ',
+      'flex h-28 w-full items-center bg-white backdrop-blur-xl dark:bg-black-pure lg:h-14',
       'after:absolute after:left-0 after:right-0 after:top-28 after:h-px after:bg-gray-new-90 after:dark:bg-gray-new-20 lg:after:hidden',
       'before:absolute before:left-0 before:right-0 before:top-16 before:h-px before:bg-gray-new-90 before:dark:bg-gray-new-20 lg:before:hidden'
     )}
