@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
@@ -54,6 +53,7 @@ import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
+import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
 import FeatureList from '../feature-list';
@@ -110,7 +110,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       return (
         <ImageZoom src={src}>
           <Image
-            className={clsx(
+            className={cn(
               className,
               { 'no-border': title === 'no-border' },
               isTemplate && 'rounded-lg'
@@ -130,7 +130,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     return src.includes('?') ? (
       // Authors can use anchor tags to make images float right/left
       <Image
-        className={clsx(
+        className={cn(
           className,
           {
             'no-border':
@@ -148,7 +148,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     ) : (
       <Image
-        className={clsx(className, { 'no-border': title === 'no-border' })}
+        className={cn(className, { 'no-border': title === 'no-border' })}
         src={src}
         width={200}
         height={100}
@@ -213,16 +213,18 @@ const Content = ({
   isReleaseNote = false,
   isPostgres = false,
   isTemplate = false,
-}) => (
-  <div
-    className={clsx(
-      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
-      className
-    )}
-  >
-    {asHTML ? (
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    ) : (
+}) => {
+  const rootClassName = cn(
+    'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+    className
+  );
+
+  if (asHTML) {
+    return <div className={rootClassName} dangerouslySetInnerHTML={{ __html: content }} />;
+  }
+
+  return (
+    <div className={rootClassName}>
       <MDXRemote
         components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
@@ -238,9 +240,9 @@ const Content = ({
           blockDangerousJS: true,
         }}
       />
-    )}
-  </div>
-);
+    </div>
+  );
+};
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

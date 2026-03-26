@@ -29,7 +29,7 @@ To delete data from a Java program, you follow these steps:
 
 The following example adds a delete() function to the `ProductDB` class to delete a product by id:
 
-```javasql
+```java
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -108,13 +108,13 @@ Deleted Rows: 1
 
 First, open the Command Prompt on Windows or Terminal on Linux and connect to the PostgreSQL server:
 
-```
+```bash
 psql -U postgres -d sales
 ```
 
 Second, retrieve the product with id 1 to verify the deletion:
 
-```plaintext
+```sql
 SELECT * FROM products
 WHERE id = 1;
 ```

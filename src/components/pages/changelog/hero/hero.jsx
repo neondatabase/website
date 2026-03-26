@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import RssButton from 'components/shared/rss-button';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
+import { cn } from 'utils/cn';
 
 const TITLE = 'Changelog';
 const DESCRIPTION = 'The latest product updates from Neon';
@@ -12,9 +12,9 @@ const Hero = ({ className = null, withContainer = false }) => {
   const Tag = withContainer ? Container : 'div';
 
   return (
-    <div className={clsx('changelog-hero mt-10 text-black-pure dark:text-white', className)}>
+    <div className={cn('changelog-hero mt-10 text-black-pure dark:text-white', className)}>
       <Tag
-        className={clsx('mb-6 sm:mb-7', {
+        className={cn('mb-6 sm:mb-7', {
           'flex flex-col justify-center text-center': withContainer,
         })}
         size="sm"
@@ -23,7 +23,7 @@ const Hero = ({ className = null, withContainer = false }) => {
           {TITLE}
           {!withContainer && (
             <RssButton
-              className="relative top-1 hidden gap-x-1.5 !text-gray-new-40 dark:!text-gray-new-70 sm:flex"
+              className="relative top-1 hidden gap-x-1.5 !text-gray-new-40 dark:text-gray-new-70! sm:flex"
               size="sm"
               basePath={CHANGELOG_BASE_PATH}
             />

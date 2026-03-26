@@ -21,9 +21,14 @@ export const viewport = {
   viewportFit: 'cover',
 };
 
+// Theme class set client-side by next-themes; suppressHydrationWarning avoids server/client mismatch.
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}>
+  <html
+    lang="en"
+    className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}
+    suppressHydrationWarning
+  >
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />

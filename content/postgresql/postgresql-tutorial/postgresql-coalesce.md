@@ -22,7 +22,7 @@ The `COALESCE()` function accepts a list of arguments and returns the first non\
 
 Here’s the basic syntax of the `COALESCE()` function:
 
-```sqlsql
+```sql
 COALESCE (argument_1, argument_2, …);
 ```
 
@@ -55,7 +55,7 @@ Since both arguments are non\-null, the function returns the first argument:
 
 The following example uses the `COALESCE()` function to return the first non\-null argument:
 
-```
+```sql
 SELECT COALESCE (NULL, 2 , 1);
 ```
 
@@ -68,13 +68,13 @@ Because the first argument is NULL and the second argument is non\-null, the fun
 (1 row)
 ```
 
-In practice, you often use the `COLAESCE()` function to substitute a default value for null when querying data from nullable columns.
+In practice, you often use the `COALESCE()` function to substitute a default value for null when querying data from nullable columns.
 
 For example, if you want to display the excerpt from a blog post and the excerpt is not provided, you can use the first 150 characters of the content of the post.
 
 To achieve this, you can use the `COALESCE` function as follows:
 
-```
+```sql
 SELECT
   COALESCE (
     excerpt,
@@ -143,7 +143,7 @@ The issue is that the `discount` of the product `D` is null. Therefore, the net 
 
 With an assumption that if the discount is null, the net price is zero, you can use the `COALESCE()` function in the query as follows:
 
-```
+```sql
 SELECT
   product,
   (
@@ -171,7 +171,7 @@ Besides using the `COALESCE()` function, you can use the [CASE](postgresql-case)
 
 For example, the following query uses the `CASE` expression to achieve the same result:
 
-```
+```sql
 SELECT
   product,
   (

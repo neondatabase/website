@@ -22,7 +22,7 @@ A column alias allows you to assign a column or an expression in the select list
 
 The following illustrates the syntax of using a column alias:
 
-```phpsqlsql
+```sql
 SELECT column_name AS alias_name
 FROM table_name;
 ```
@@ -112,13 +112,13 @@ FROM
 
 If a column alias contains one or more spaces, you need to surround it with double quotes like this:
 
-```
+```sql
 column_name AS "column alias"
 ```
 
 For example:
 
-```
+```sql
 SELECT
     first_name || ' ' || last_name "full name"
 FROM

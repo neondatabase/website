@@ -24,7 +24,7 @@ The `LEFT JOIN` can be useful for selecting rows from one table that do not have
 
 Here’s the basic syntax of the `LEFT JOIN` clause:
 
-```sqlsql
+```sql
 SELECT
   select_list
 FROM

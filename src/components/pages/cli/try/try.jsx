@@ -5,17 +5,17 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Try = () => (
-  <section className="try safe-paddings mb-36 mt-20 md:mb-32 md:mt-16 sm:mb-20 sm:mt-10">
+  <section className="try mt-20 mb-36 safe-paddings md:mt-16 md:mb-32 sm:mt-10 sm:mb-20">
     <Container size="1152">
       <div className="flex items-center justify-center gap-24 xl:px-8 lg:gap-16 lg:px-0 md:flex-col md:justify-center md:gap-10">
         <div className="flex-1 md:flex md:flex-col md:items-center">
           <Heading
-            className="max-w-sm text-[52px] font-medium leading-none tracking-extra-tight tracking-tighter xl:max-w-[640px] xl:text-[44px] lg:max-w-xl lg:text-4xl md:max-w-md md:text-center md:text-[32px]"
+            className="max-w-sm text-[52px] leading-none font-medium tracking-extra-tight tracking-tighter xl:max-w-[640px] xl:text-[44px] lg:max-w-xl lg:text-4xl md:max-w-md md:text-center md:text-[32px]"
             tag="h2"
           >
             Try Neon on the command&nbsp;line
           </Heading>
-          <p className="mt-4 text-lg font-light leading-snug tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:text-center md:text-base">
+          <p className="mt-4 text-lg leading-snug font-light tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:text-center md:text-base">
             The Neon CLI brings serverless Postgres to&nbsp;your&nbsp;terminal.
           </p>
           <AnimatedButton

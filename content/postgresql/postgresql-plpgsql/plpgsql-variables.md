@@ -28,7 +28,7 @@ Variables are scoped to the block in which they’re declared. It means that var
 
 The following illustrates the syntax of declaring a variable.
 
-```sqlsqlsql
+```plsql
 variable_name data_type [= expression];
 ```
 
@@ -42,13 +42,13 @@ Please note that you can use either `:=` or `=` assignment operator to set an in
 
 To assign a value to a variable, you can use the assignment operator (\=) as follows:
 
-```sql
+```plsql
 variable_name = value;
 ```
 
 Alternatively, you can use the `:=` assignment operator:
 
-```
+```plsql
 variable_name := value;
 ```
 
@@ -58,7 +58,7 @@ variable_name := value;
 
 The following example shows how to declare and initialize variables:
 
-```
+```plsql
 do $$
 declare
    counter    integer = 1;
@@ -76,7 +76,7 @@ end $$;
 
 Output:
 
-```css
+```
 notice: 1 John Doe has been paid 20.5 USD;
 ```
 
@@ -94,7 +94,7 @@ Second, display the values of the variables using the `raise notice` statement.
 
 The following example shows how to assign a value to a variable:
 
-```php
+```plsql
 do $$
 declare
 	first_name VARCHAR(50);
@@ -107,7 +107,7 @@ $$;
 
 Output:
 
-```php
+```
 NOTICE:  The first name is John
 DO
 ```
@@ -116,19 +116,19 @@ How it works.
 
 First, declare a variable in the declaration block:
 
-```sql
+```plsql
 first_name VARCHAR(50);
 ```
 
 Second, split a string literal into two parts using a space, return the first part, and assign it to the `first_name` variable:
 
-```
+```plsql
 first_name = split_part('John Doe',' ', 1);
 ```
 
 Third, display the value of the `first_name` variable using the `raise notice` statement:
 
-```sql
+```plsql
 raise notice 'The first name is %', first_name;
 ```
 
@@ -136,7 +136,7 @@ raise notice 'The first name is %', first_name;
 
 PostgreSQL evaluates the initial value of a variable and assigns it when the block is entered. For example:
 
-```
+```plsql
 do $$
 declare
    created_at time = clock_timestamp();
@@ -149,7 +149,7 @@ end $$;
 
 Here is the output:
 
-```shell
+```
 NOTICE:  14:23:33.064008
 NOTICE:  14:23:33.064008
 ```
@@ -169,13 +169,13 @@ The `%type` provides the data type of a table column or another variable. Typica
 
 The following illustrates how to declare a variable with the data type of a table column:
 
-```sql
+```plsql
 variable_name table_name.column_name%type;
 ```
 
 The following shows how to declare a variable with the data type of another variable:
 
-```sql
+```plsql
 variable_name variable%type;
 ```
 
@@ -183,7 +183,7 @@ We’ll use the following `film` table from the [sample database](../postgresql-
 
 ![](/postgresqltutorial/film.png)This example uses the type\-copying technique to declare variables that hold values that come from the `film` table:
 
-```
+```plsql
 do
 $$
 declare
@@ -203,7 +203,7 @@ end; $$;
 
 Output:
 
-```php
+```
 NOTICE:  Film title id 100: Brooklyn Deserts
 DO
 ```
@@ -226,7 +226,7 @@ When you declare a variable in a subblock with the same name as another variable
 
 To access a variable in the outer block, you use the block label to qualify its name, as shown in the following example:
 
-```sql
+```plsql
 do
 $$
 <<outer_block>>
@@ -249,7 +249,7 @@ begin
 end outer_block $$;
 ```
 
-```http
+```
 NOTICE:  The current value of the counter is 1
 NOTICE:  Counter in the subblock is 10
 NOTICE:  Counter in the outer block is 1

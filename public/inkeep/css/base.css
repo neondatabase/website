@@ -54,3 +54,40 @@
     opacity: 0.48;
   }
 }
+
+.ikp-ai-chat-tagline__container {
+  align-items: center;
+}
+
+.ikp-ai-chat-tagline__container > a:after {
+  content: '&';
+  color: #889096;
+  margin-left: 0.75rem;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ikp-ai-chat-tagline__container:after {
+  content: '';
+  width: 64px;
+  height: 18px;
+  background: url('/inkeep/images/neon-logo.svg?updated=2025-01-15');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+}
+
+[data-theme='dark'] .ikp-ai-chat-tagline__container > a:after {
+  color: #ffffff7a;
+}
+
+[data-theme='dark'] .ikp-ai-chat-tagline__container:after {
+  background: url('/inkeep/images/neon-white-logo.svg?updated=2025-01-15');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  opacity: 0.48;
+}

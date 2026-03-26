@@ -37,7 +37,7 @@ To create a database and load data from an archive file, you follow these steps:
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using **psql** tool:
 
-```phpsql
+```bash
 psql -U postgres
 ```
 
@@ -59,13 +59,13 @@ postgres=#
 
 Second, create a new database called `dvdrental` using [`CREATE DATABASE`](../postgresql-administration/postgresql-create-database) statement:
 
-```php
+```sql
 CREATE DATABASE dvdrental;
 ```
 
 Output:
 
-```
+```sql
 CREATE DATABASE
 ```
 
@@ -98,7 +98,7 @@ Note that other databases such as `postgres`, `template0`, and `template1` are t
 
 Fourth, disconnect from the PostgreSQL server and exit the `psql` using the `exit` command:
 
-```php
+```
 exit
 ```
 
@@ -108,7 +108,7 @@ Fifth, download the sample database (`dvdrental.zip`) and extract the `tar` file
 
 Sixth, load the `dvdrental` database using the `pg_restore` command:
 
-```css
+```bash
 pg_restore -U postgres -d dvdrental D:\sampledb\postgres\dvdrental.tar
 ```
 
@@ -119,7 +119,7 @@ In this command:
 
 It’ll prompt you to enter the password for the `postgres` user. Enter the password for the `postgres` user and press the Enter (or Return key):
 
-```php
+```
 Password:
 ```
 
@@ -129,7 +129,7 @@ It’ll take about seconds to load data stored in the `dvdrental.tar` file into 
 
 First, connect to the PostgreSQL server using the `psql` command:
 
-```
+```bash
 psql -U postgres
 ```
 
@@ -147,7 +147,7 @@ dvdrental=#
 
 Third, display all tables in the `dvdrental` database:
 
-```php
+```
 \dt
 ```
 

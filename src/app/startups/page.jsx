@@ -8,7 +8,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.startups);
 
 const ContactSales = () => (
-  <Layout className="overflow-hidden" headerClassName="!bg-transparent">
+  <Layout className="overflow-hidden" headerClassName="bg-transparent!">
     <Hero />
     <Info />
     <Features />

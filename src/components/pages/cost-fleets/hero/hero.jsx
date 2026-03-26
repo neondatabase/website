@@ -4,10 +4,10 @@ import UseCaseCalculator from 'components/shared/use-case-calculator';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative overflow-hidden pt-[88px] xl:pt-14 lg:pt-11 md:pt-8">
+  <section className="hero relative overflow-hidden pt-[88px] safe-paddings xl:pt-14 lg:pt-11 md:pt-8">
     <Container size="xxs">
       <div className="px-8 sm:px-0">
-        <h1 className="text-6xl font-semibold leading-dense tracking-tighter xl:text-[56px] lg:text-5xl md:text-[36px] md:leading-tight">
+        <h1 className="text-6xl leading-dense font-semibold tracking-tighter xl:text-[56px] lg:text-5xl md:text-[36px] md:leading-tight">
           Neon for platforms
         </h1>
         <p className="mt-4 text-2xl leading-snug tracking-extra-tight text-gray-new-80 xl:text-xl md:mt-3 md:text-lg">
@@ -21,7 +21,7 @@ const Hero = () => (
           its usage-based pricing and scale-to-zero. Via its developer-friendly API, you can{' '}
           <strong>run thousands of Postgres databases without a DBA</strong>.
         </p>
-        <p className="!mt-4">
+        <p className="mt-4!">
           Companies like{' '}
           <Link to="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases">
             Retool

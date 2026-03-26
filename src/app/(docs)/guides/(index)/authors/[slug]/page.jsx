@@ -15,7 +15,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const authorsData = getAuthors();
   if (!authorsData[params.slug]) return notFound();
   return getMetadata({
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const GuidesPage = async ({ params }) => {
+const GuidesPage = async (props) => {
+  const params = await props.params;
   const authorsData = getAuthors();
   const author = authorsData[params.slug];
 

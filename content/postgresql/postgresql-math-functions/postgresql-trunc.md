@@ -20,7 +20,7 @@ The PostgreSQL `TRUNC()` function returns a number truncated to a whole number o
 
 The following illustrates the syntax of the PostgreSQL `TRUNC()` function:
 
-```css
+```sql
 TRUNC(number [, precision])
 ```
 
@@ -52,14 +52,14 @@ The PostgreSQL `TRUNC()` function returns the same [numeric data type](../postgr
 
 The following example uses the `TRUNC()` function to truncate a number to an integer:
 
-```css
+```sql
 SELECT
     TRUNC(10.6);
 ```
 
 The result is:
 
-```css
+```
 10
 ```
 
@@ -67,7 +67,7 @@ The result is:
 
 The following statement truncates a number to 2 decimal places:
 
-```
+```sql
  SELECT
     TRUNC(
         1.234,
@@ -77,7 +77,7 @@ The following statement truncates a number to 2 decimal places:
 
 Here is the result:
 
-```css
+```
 1.23
 ```
 
@@ -85,7 +85,7 @@ Here is the result:
 
 Consider the following example:
 
-```css
+```sql
 SELECT
     TRUNC(150.45,-2)
 ```
@@ -102,7 +102,7 @@ See the following `film`, `film_category`, and `category` tables in the [sample 
 
 ![film film_category category tables](/postgresqltutorial/film-film_category-category-tables.png)The following statement calculates the average rental rate by film category:
 
-```
+```sql
 SELECT
     NAME,
     TRUNC(AVG( rental_rate ),2)

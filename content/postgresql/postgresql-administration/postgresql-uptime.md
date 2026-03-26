@@ -20,13 +20,13 @@ nextLink:
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server:
 
-```csssql
+```bash
 psql -U postgres
 ```
 
 Second, execute the following query to get the PostgreSQL uptime:
 
-```
+```sql
 SELECT
   date_trunc(
     'second',
@@ -53,7 +53,7 @@ Output:
 
 You can then calculate the uptime based on the current time and the start time returned by the `pg_postmaster_start_time()` function:
 
-```css
+```sql
 SELECT current_timestamp - pg_postmaster_start_time() uptime;
 ```
 
@@ -68,7 +68,7 @@ Output:
 
 You can truncate the microsecond from the uptime using the [`DATE_TRUNC()`](../postgresql-date-functions/postgresql-date_trunc) function to make the output more human\-readable:
 
-```css
+```sql
 SELECT
   date_trunc(
     'second',

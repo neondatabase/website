@@ -47,7 +47,7 @@ We’ll use the `actor` table from the [sample database](../postgresql-getting-s
 ![](/postgresqltutorial/actor.png)
 The following example retrieves the row with id 10 from the actor table and assigns it to a row variable:
 
-```sql
+```plsql
 do
 $$
 declare

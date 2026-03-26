@@ -110,7 +110,7 @@ SELECT
 
 Output:
 
-```sql
+```
 -[ RECORD 1 ]-------+------------------------------
 statement_timestamp | 2024-03-20 13:52:55.861004-07
 pg_sleep            |

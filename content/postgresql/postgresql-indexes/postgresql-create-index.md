@@ -26,7 +26,7 @@ To create an index on one or more columns of a table, you use the `CREATE INDEX`
 
 Here’s the basic syntax of the `CREATE INDEX` statement:
 
-```phpsql
+```sql
 CREATE INDEX [IF NOT EXISTS] index_name
 ON table_name(column1, column2, ...);
 ```
@@ -55,7 +55,7 @@ psql -U postgres -d dvdrental
 
 Second, execute the following [query](../postgresql-tutorial/postgresql-select) to find the address whose phone number is `223664661973`:
 
-```
+```sql
 SELECT
   address_id,
   address,
@@ -80,7 +80,7 @@ To find the row whose value in the `phone` column is `223664661973`, PostgreSQL 
 
 Third, show the query plan using the following `EXPLAIN` statement::
 
-```
+```sql
 EXPLAIN SELECT
   address_id,
   address,
@@ -106,7 +106,7 @@ The output indicates that the query optimizer has to perform a sequential scan o
 
 Fourth, [create an index](postgresql-create-index) for the values in the `phone` column of the `address` table using the `CREATE INDEX` statement:
 
-```php
+```sql
 CREATE INDEX idx_address_phone
 ON address(phone);
 ```
@@ -146,7 +146,7 @@ More specifically, the `address_pkey` index was created for the [primary key](..
 
 Fifth, execute the following query again:
 
-```php
+```sql
 EXPLAIN SELECT
   address_id,
   address,

@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+
+import { cn } from 'utils/cn';
 
 import DarkThemeIcon from '../images/dark-theme.inline.svg';
 import LightThemeIcon from '../images/light-theme.inline.svg';
@@ -19,9 +20,9 @@ const ThemeSelect = ({ className = null }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative flex gap-x-1 rounded-full border border-gray-new-80 dark:border-gray-new-20',
-        'after:pointer-events-none after:absolute after:-left-px after:-top-px after:h-7 after:w-7 after:rounded-full after:border after:border-inherit',
+        'after:pointer-events-none after:absolute after:-top-px after:-left-px after:h-7 after:w-7 after:rounded-full after:border after:border-inherit',
         'after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.34,1,0.64,1)] after:will-change-transform',
         {
           'after:translate-x-0': theme === 'system',
@@ -35,8 +36,8 @@ const ThemeSelect = ({ className = null }) => {
     >
       {themes.map((_theme) => {
         const isSelected = _theme === theme;
-        const themeIconClassNames = clsx('text-gray-new-50 dark:text-gray-new-70', {
-          '!text-black-pure dark:!text-white': isSelected,
+        const themeIconClassNames = cn('text-gray-new-50 dark:text-gray-new-70', {
+          'text-black-pure! dark:text-white!': isSelected,
         });
 
         return (

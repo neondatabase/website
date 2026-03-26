@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from '../../menu/icon';
 
@@ -33,7 +33,7 @@ const SubItem = ({ icon, title, slug, basePath }) => {
 
   return (
     <Link
-      className={clsx(
+      className={cn(
         'flex items-center gap-2 rounded-sm leading-none tracking-tight transition-colors duration-200',
         'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
       )}
@@ -77,15 +77,15 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
   const isLastActive = isActive && activeItems.at(-1) === slug;
 
   return (
-    <li className={clsx('relative hover:z-10', subnav && 'group')}>
+    <li className={cn('relative hover:z-10', subnav && 'group')}>
       <LinkTag
-        className={clsx(
+        className={cn(
           'relative flex h-full items-center gap-1',
-          'whitespace-nowrap rounded-sm text-sm leading-snug tracking-extra-tight',
+          'rounded-sm text-sm leading-snug tracking-extra-tight whitespace-nowrap',
           'transition-colors duration-200',
-          'hover:text-black-new group-hover:text-black-new',
+          'group-hover:text-black-new hover:text-black-new',
           'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
-          'dark:after:bg-white dark:hover:text-white dark:group-hover:text-white',
+          'dark:group-hover:text-white dark:after:bg-white dark:hover:text-white',
           isLastActive
             ? 'text-black-new after:opacity-100 dark:text-white'
             : 'text-gray-new-30 dark:text-gray-new-70'
@@ -95,7 +95,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
         {title}
         {subnav && (
           <ChevronIcon
-            className={clsx(
+            className={cn(
               'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white',
               isLastActive ? 'text-black-new dark:text-white' : 'text-gray-new-50'
             )}
@@ -104,26 +104,26 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       </LinkTag>
       {subnav && (
         <div
-          className={clsx(
-            'absolute -left-5 top-[90%] z-10',
+          className={cn(
+            'absolute top-[90%] -left-5 z-10',
             'pointer-events-none opacity-0',
-            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
-            'focus-within:pointer-events-auto focus-within:visible focus-within:opacity-100 focus-within:[transform:none]'
+            'origin-top-left [transform:rotateX(-12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
+            'group-hover:pointer-events-auto group-hover:visible group-hover:[transform:none] group-hover:opacity-100',
+            'focus-within:pointer-events-auto focus-within:visible focus-within:[transform:none] focus-within:opacity-100'
           )}
         >
           <ul
-            className={clsx(
+            className={cn(
               'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
               'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]',
               'dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
           >
             {subnav.map((item, index) => (
-              <li className={clsx(item.section && 'mt-2 first:mt-0')} key={index}>
+              <li className={cn(item.section && 'mt-2 first:mt-0')} key={index}>
                 {item.section ? (
                   <>
-                    <span className="mb-3.5 block text-xs uppercase leading-none tracking-tight text-gray-new-50">
+                    <span className="mb-3.5 block text-xs leading-none tracking-tight text-gray-new-50 uppercase">
                       {item.section}
                     </span>
                     <ul className="flex flex-col gap-4">

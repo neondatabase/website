@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/shared/tooltip';
 import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
 import tooltipSvg from 'icons/tooltip.svg';
+import { cn } from 'utils/cn';
 
 function getTooltipHtml(info, link) {
   if (!link) return info;
@@ -31,7 +31,7 @@ const InfoIcon = ({
 }) => (
   <span
     {...(clickable && { tabIndex: 0 })}
-    className={clsx(
+    className={cn(
       'group/info relative rounded-full focus-visible:outline-primary-2',
       clickable && 'cursor-pointer',
       className
@@ -57,7 +57,7 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Tooltip
-      className={clsx('w-sm z-20 !rounded-lg !bg-gray-new-15 !px-4 !pb-[14px] !pt-3')}
+      className="is-[.react-tooltip]:bg-gray-new-15! z-20 w-sm px-4! pt-3! pb-3.5!"
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"

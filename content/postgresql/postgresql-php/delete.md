@@ -32,7 +32,7 @@ We will use the `stocks` table for the demonstration. If you have not created th
 
 Let’s create a new class named StockDB that contains all the methods for deleting data in a table.
 
-```phpsql
+```php
 <?php
 namespace PostgreSQLTutorial;
 
@@ -62,41 +62,41 @@ class StockDB {
 The following `delete()` method deletes a row specified by id from the `stocks` table
 
 ```php
-   /**
-     * Delete a row in the stocks table specified by id
-     * @param int $id
-     * @return the number row deleted
-     */
-    public function delete($id) {
-        $sql = 'DELETE FROM stocks WHERE id = :id';
+/**
+ * Delete a row in the stocks table specified by id
+ * @param int $id
+ * @return the number row deleted
+ */
+public function delete($id) {
+    $sql = 'DELETE FROM stocks WHERE id = :id';
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id);
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':id', $id);
 
-        $stmt->execute();
+    $stmt->execute();
 
-        return $stmt->rowCount();
-    }
+    return $stmt->rowCount();
+}
 ```
 
 The following `deleteAll()` method deletes all rows from the `stocks` table.
 
 ```php
-   /**
-     * Delete all rows in the stocks table
-     * @return int the number of rows deleted
-     */
-    public function deleteAll() {
+/**
+ * Delete all rows in the stocks table
+ * @return int the number of rows deleted
+ */
+public function deleteAll() {
 
-        $stmt = $this->pdo->prepare('DELETE FROM stocks');
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
+    $stmt = $this->pdo->prepare('DELETE FROM stocks');
+    $stmt->execute();
+    return $stmt->rowCount();
+}
 ```
 
 Before running the methods, we query the data from the `stocks` table.
 
-```php
+```
 stocks=# SELECT * FROM stocks
 stocks-# ORDER BY id;
  id | symbol |        company
@@ -110,7 +110,7 @@ stocks-# ORDER BY id;
 
 Use the following code in the index.php file to delete the row with id 1\.
 
-```sql
+```php
 <?php
 
 require 'vendor/autoload.php';
@@ -141,7 +141,7 @@ The number of row(s) deleted: 1
 
 We query data from the stocks table again to verify.
 
-```sql
+```
 stocks=# SELECT * FROM stocks
 stocks-# ORDER BY id;
  id | symbol |    company
@@ -156,7 +156,7 @@ The row with id 1 was deleted as expected.
 
 In the `index.php` file, modify the code to call the `deleteAll()` method instead of the `delete()` method and execute it. The following is the output of the script:
 
-```sql
+```
 The number of row(s) deleted: 3
 ```
 

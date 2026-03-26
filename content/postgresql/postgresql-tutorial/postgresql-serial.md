@@ -22,7 +22,7 @@ In PostgreSQL, a [sequence](postgresql-sequences) is a special kind of database 
 
 When [creating a new table](postgresql-create-table), the sequence can be created through the `SERIAL` pseudo\-type as follows:
 
-```phpsql
+```sql
 CREATE TABLE table_name(
     id SERIAL
 );
@@ -122,7 +122,7 @@ You can pass a sequence name to the  `currval()` function to get the recent v
 SELECT currval(pg_get_serial_sequence('fruits', 'id'));
 ```
 
-```sql
+```
 currval
 ---------
 2
@@ -141,7 +141,7 @@ VALUES('Banana')
 RETURNING id;
 ```
 
-```sql
+```
 id
 ----
 3
@@ -156,7 +156,7 @@ If one client rolls back the transaction, the sequence number of that client wil
 
 First, create a new table called `baskets` without a primary key column:
 
-```
+```sql
 CREATE TABLE baskets(
     name VARCHAR(255) NOT NULL
 );
@@ -164,7 +164,7 @@ CREATE TABLE baskets(
 
 Second, add a `SERIAL` column to the `baskets` table:
 
-```php
+```sql
 ALTER TABLE baskets
 ADD COLUMN id SERIAL PRIMARY KEY;
 ```

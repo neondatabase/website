@@ -37,7 +37,7 @@ const QuoteBlocksWrapper = ({ children }) => {
   const [direction, setDirection] = useState('right');
 
   return (
-    <section className="mb-20 mt-8 flex flex-col gap-y-3 md:mb-12">
+    <section className="mt-8 mb-20 flex flex-col gap-y-3 md:mb-12">
       <div className="flex justify-end gap-x-2.5">
         <button
           className="flex h-8 w-8 items-center justify-center border border-gray-new-80 bg-white transition-colors duration-200 hover:bg-gray-new-94 dark:border-gray-new-20 dark:bg-gray-new-10 dark:hover:bg-gray-new-15"

@@ -22,7 +22,7 @@ The `TO_DATE()` function converts a [string](../postgresql-tutorial/postgresql-c
 
 Here’s the basic syntax of the `TO_DATE()` function:
 
-```phpsql
+```sql
 TO_DATE(text,format);
 ```
 

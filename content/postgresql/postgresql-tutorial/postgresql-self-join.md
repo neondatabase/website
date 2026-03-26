@@ -24,7 +24,7 @@ To form a self\-join, you specify the same table twice with [different table ali
 
 The following query uses an [`INNER JOIN`](postgresql-inner-join) that joins the table to itself:
 
-```sqlsql
+```sql
 SELECT select_list
 FROM table_name t1
 INNER JOIN table_name t2 ON join_predicate;
@@ -94,7 +94,7 @@ In this `employee` table, the `manager_id` column references the `employee_id` c
 
 The `manager_id` column indicates the direct relationship, showing the manager to whom the employee reports.
 
-If the `manager_id` column contains NULL, which signifies that the respective employee does not report to anyone, essentially holding the top managerial position.
+If the `manager_id` column contains NULL, it signifies that the respective employee does not report to anyone, essentially holding the top managerial position.
 
 The following query uses the self\-join to find who reports to whom:
 
@@ -132,7 +132,7 @@ Notice that the top manager does not appear on the output.
 
 To include the top manager in the result set, you use the [`LEFT JOIN`](postgresql-left-join) instead of [`INNER JOIN`](postgresql-inner-join) clause as shown in the following query:
 
-```
+```sql
 SELECT
   e.first_name || ' ' || e.last_name employee,
   m.first_name || ' ' || m.last_name manager

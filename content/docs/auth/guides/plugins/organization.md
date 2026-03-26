@@ -6,7 +6,7 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-03-06T22:31:14.964Z'
+updatedOn: '2026-03-20T18:23:32.442Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -32,6 +32,10 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 - A Neon project with **Auth enabled**
 - A signed-in user (organizations are associated with users)
+
+## Example application
+
+**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Neon Auth apps, see [Example applications](/docs/auth/overview#example-applications).
 
 ## Configure the organization plugin
 
@@ -113,7 +117,7 @@ Example response:
 }
 ```
 
-**API fields reference**
+### API fields reference
 
 | Field                   | Type                        | Description                                                                                                                          |
 | :---------------------- | :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
@@ -123,7 +127,7 @@ Example response:
 | `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.                       |
 | `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false.                    |
 
-**API Documentation**
+### API Documentation
 
 - [Get all plugin configurations](https://api-docs.neon.tech/reference/getneonauthpluginconfigs)
 - [Update organization plugin configuration](https://api-docs.neon.tech/reference/updateneonauthorganizationplugin)

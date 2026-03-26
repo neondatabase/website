@@ -24,7 +24,7 @@ To call a PostgreSQL function from a Python program, you use the following steps
 
 First, [create a new database connection](connect) to the PostgreSQL server by calling the `connect()` function of the `psycopg2` module.
 
-```pythonsql
+```python
 conn = psycopg2.connect(config)
 ```
 
@@ -38,7 +38,7 @@ cur = conn.cursor()
 
 Then, pass the name of the function and the optionally pass values to the `callproc()` method of the `cursor` object:
 
-```sql
+```python
 cur.callproc('function_name', (value1,value2))
 ```
 
@@ -73,13 +73,13 @@ Let’s take an example of calling a PostgreSQL function from Python.
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the `suppliers` database:
 
-```python
+```bash
 psql -U postgres -d suppliers
 ```
 
 Second, execute the following command to create a new function called `get_parts_by_vendors()` that returns a list of parts by a specified vendor:
 
-```
+```plsql
 CREATE OR REPLACE FUNCTION get_parts_by_vendor(id INTEGER)
   RETURNS TABLE(part_id INTEGER, part_name VARCHAR) AS
 $$
@@ -104,7 +104,7 @@ First, create a new module in the project directory called `call_function.py`:
 
 Second, define a new function called `get_parts()` that calls the `get_parts_by_vendors()` function in PostgreSQL:
 
-```
+```python
 import psycopg2
 from config import load_config
 
@@ -142,13 +142,13 @@ if __name__ == '__main__':
 
 Run the following command to execute the `call_function.py` module:
 
-```css
+```bash
 python call_function.py
 ```
 
 Output:
 
-```json
+```
 [(1, 'SIM Tray'), (5, 'Home Button'), (6, 'LTE Modem')]
 ```
 

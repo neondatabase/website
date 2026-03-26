@@ -1,7 +1,8 @@
-import clsx from 'clsx';
 import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
+
+import { cn } from 'utils/cn';
 
 const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration }) => {
   const parsedContent = useMemo(() => {
@@ -67,7 +68,7 @@ const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration
         tabIndex: -1,
       },
       codeProps: {
-        className: clsx(codeClassName, codeElement.props.className),
+        className: cn(codeClassName, codeElement.props.className),
       },
     };
   }, [targetText, codeClassName]);

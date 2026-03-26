@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -16,6 +15,7 @@ import MarkdownIcon from 'icons/docs/markdown.inline.svg';
 import PerplexityIcon from 'icons/docs/perplexity.inline.svg';
 import VSCodeIcon from 'icons/docs/vscode.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) => {
@@ -24,7 +24,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
   return (
     <div className="group relative">
       <Tag
-        className={clsx(
+        className={cn(
           'relative flex h-3.5 w-full items-center justify-between rounded-sm text-gray-new-40',
           'transition-colors duration-200 hover:text-black-pure',
           'dark:text-gray-new-70 dark:hover:text-white'
@@ -36,14 +36,14 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName, tooltip }) 
         onClick={onClick}
       >
         <div className="flex items-center gap-x-2">
-          <Icon className={clsx(`size-3.5`, iconClassName)} />
+          <Icon className={cn(`size-3.5`, iconClassName)} />
           <span className="text-sm leading-none tracking-extra-tight">{text}</span>
         </div>
       </Tag>
       {tooltip && (
         <span
-          className={clsx(
-            'pointer-events-none absolute left-0 top-full z-10 mt-1.5 whitespace-nowrap',
+          className={cn(
+            'pointer-events-none absolute top-full left-0 z-10 mt-1.5 whitespace-nowrap',
             'rounded-md bg-gray-new-8 px-2 py-1 text-xs text-white opacity-0',
             'transition-opacity duration-150 group-hover:opacity-100',
             'dark:bg-gray-new-90 dark:text-gray-new-8'
@@ -65,7 +65,7 @@ ActionItem.propTypes = {
   tooltip: PropTypes.string,
 };
 
-const CopyMarkdownButton = ({ rawFileLink }) => {
+const CopyMarkdownButton = ({ markdownPath }) => {
   const [status, setStatus] = useState('default'); // 'default' | 'copied' | 'failed'
 
   const getButtonText = () => {
@@ -76,7 +76,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
 
   const copyPageToClipboard = async () => {
     try {
-      const response = await fetch(rawFileLink);
+      const response = await fetch(markdownPath);
       const content = await response.text();
       copyToClipboard(content);
       setStatus('copied');
@@ -103,7 +103,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
 };
 
 CopyMarkdownButton.propTypes = {
-  rawFileLink: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string.isRequired,
 };
 
 /* Disabled for now - kept for possible future use
@@ -181,32 +181,33 @@ const CopyNeonCLIButton = () => {
 
 const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
-  const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+  const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
   const gitHubLink = `${githubBase}${gitHubPath}`;
-  const rawFileLink = `${githubRawBase}${gitHubPath}`;
+  const markdownPath = `/${gitHubPath.replace('content/', '')}`;
+  const markdownUrl = `${siteUrl}${markdownPath}`;
   const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const AI_CHATBOTS = [
     {
       name: 'ChatGPT',
       enabled: true,
-      generateLink: (rawFileLink) =>
-        `https://chatgpt.com/?hints=search&q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://chatgpt.com/?hints=search&q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: ChatGptIcon,
     },
     {
       name: 'Claude',
       enabled: true,
-      generateLink: (rawFileLink) =>
-        `https://claude.ai/new?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://claude.ai/new?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: ClaudeIcon,
     },
     {
       name: 'Perplexity',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://www.perplexity.ai/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://www.perplexity.ai/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: PerplexityIcon,
     },
 
@@ -214,28 +215,28 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
     {
       name: 'Gemini',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://gemini.google.com/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://gemini.google.com/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: GeminiIcon,
     },
     {
       name: 'DeepSeek',
       enabled: false,
-      generateLink: (rawFileLink) =>
-        `https://chat.deepseek.com/?q=Read+from+${rawFileLink}+so+I+can+ask+questions+about+it.`,
+      generateLink: (url) =>
+        `https://chat.deepseek.com/?q=Read+from+${url}+so+I+can+ask+questions+about+it.`,
       icon: DeepSeekIcon,
     },
   ];
 
   const docsActions = (
     <>
-      <CopyMarkdownButton rawFileLink={rawFileLink} />
+      <CopyMarkdownButton markdownPath={markdownPath} />
       {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
         <ActionItem
           key={bot.name}
           icon={bot.icon}
           text={`Open in ${bot.name}`}
-          url={bot.generateLink(rawFileLink)}
+          url={bot.generateLink(markdownUrl)}
           tooltip={`Open this page in ${bot.name}`}
           onClick={() =>
             sendGtagEvent('Action Clicked', {
@@ -305,7 +306,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex flex-col gap-3.5',
         withBorder && 'mt-5 border-t border-gray-new-90 pt-5 dark:border-gray-new-20'
       )}

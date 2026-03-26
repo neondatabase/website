@@ -24,7 +24,7 @@ The `MAX()` function can be useful in many cases. For example, you can use it to
 
 Here’s the syntax of the `MAX` function:
 
-```csssql
+```sql
 MAX(expression);
 ```
 
@@ -60,7 +60,7 @@ Output:
 
 The following example uses the `MAX()` function in a subquery to get the detailed payment information:
 
-```
+```sql
 SELECT
   payment_id,
   customer_id,
@@ -98,7 +98,7 @@ You can combine the `MAX`function with the [`GROUP BY`](../postgresql-tutorial/p
 
 The following example uses the `MAX()` function with a `GROUP BY` clause to retrieve the highest payment paid by each customer.
 
-```
+```sql
 SELECT
   customer_id,
   MAX (amount)
@@ -123,7 +123,7 @@ Output:
 
 If you use the `MAX()` function in a [`HAVING`](../postgresql-tutorial/postgresql-having) clause, you can apply a filter for a group. For example, the following query uses the `MAX()` function to select the highest payment made by each customer and includes those that are over `8.99`:
 
-```
+```sql
 SELECT
   customer_id,
   MAX (amount)

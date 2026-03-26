@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -7,6 +6,7 @@ import autoscalingIcon from 'icons/home/autoscaling.svg';
 import branchingIcon from 'icons/home/branching.svg';
 import featuresIcon from 'icons/home/features.svg';
 import performanceIcon from 'icons/home/performance.svg';
+import { cn } from 'utils/cn';
 
 const ICONS = {
   auth: authIcon,
@@ -18,7 +18,7 @@ const ICONS = {
 
 const Heading = ({ className = '', theme = 'dark', icon, title }) => (
   <div
-    className={clsx(
+    className={cn(
       'flex max-w-[960px] flex-col gap-y-14',
       'xl:max-w-[800px] xl:gap-y-12',
       'lg:max-w-xl lg:gap-y-7',
@@ -36,9 +36,9 @@ const Heading = ({ className = '', theme = 'dark', icon, title }) => (
       />
     )}
     <h2
-      className={clsx(
-        'text-pretty indent-24 text-[48px] font-normal leading-dense tracking-tighter [&>strong]:font-normal',
-        'xl:text-[40px] lg:text-wrap lg:indent-16 lg:text-[28px] md:indent-0 md:text-[24px]',
+      className={cn(
+        'indent-24 text-[48px] leading-dense font-normal tracking-tighter text-pretty [&>strong]:font-normal',
+        'xl:text-[40px] lg:indent-16 lg:text-[28px] lg:text-wrap md:indent-0 md:text-[24px]',
         theme === 'dark' && 'text-gray-new-50 [&>strong]:text-white',
         theme === 'light' && 'text-gray-new-40 [&>strong]:text-black-pure'
       )}

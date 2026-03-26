@@ -119,7 +119,7 @@ SET ROLE postgres;
 
 Output:
 
-```sql
+```
 ERROR:  permission denied to set role "postgres"
 ```
 

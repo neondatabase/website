@@ -75,13 +75,13 @@ const ProgramForm = ({ type }) => {
 
   return (
     <figure
-      className="doc-cta not-prose relative mb-[22px] mt-9 scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
+      className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
     >
-      <h2 className="p-0 text-2xl font-medium leading-snug tracking-extra-tight text-gray-new-8 dark:text-white">
+      <h2 className="p-0 text-2xl leading-snug font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
         {title}
       </h2>
-      <p className="mb-0 mt-2 text-lg leading-normal tracking-tight text-gray-new-40 dark:text-gray-new-70">
+      <p className="mt-2 mb-0 text-lg leading-normal tracking-tight text-gray-new-40 dark:text-gray-new-70">
         {description}
       </p>
       {formState !== FORM_STATES.SUCCESS ? (
@@ -110,7 +110,7 @@ const ProgramForm = ({ type }) => {
           </div>
 
           <Button
-            className="mt-8 h-12 w-full px-6 text-base font-medium leading-none"
+            className="mt-8 h-12 w-full px-6 text-base leading-none font-medium"
             type="submit"
             theme="white-filled-multi"
             disabled={formState === FORM_STATES.LOADING}

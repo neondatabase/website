@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
@@ -10,6 +9,7 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import LinuxIcon from 'icons/linux.inline.svg';
 import MacOSIcon from 'icons/macos.inline.svg';
 import WindowsIcon from 'icons/windows.inline.svg';
+import { cn } from 'utils/cn';
 
 const icons = {
   linux: LinuxIcon,
@@ -48,8 +48,8 @@ const CodeTabsNavigation = ({ codeSnippets, highlightedCodeSnippets }) => {
           const Icon = icons[iconName];
           return (
             <button
-              className={clsx(
-                'relative flex-1 px-3.5 py-3 transition-colors duration-200 after:absolute after:left-0 after:top-full after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white',
+              className={cn(
+                'relative flex-1 px-3.5 py-3 transition-colors duration-200 after:absolute after:top-full after:left-0 after:-mt-px after:h-0.5 after:w-full after:transition-colors after:duration-200 hover:text-white',
                 index === activeItem
                   ? 'text-white after:bg-green-45 md:after:bg-transparent'
                   : 'text-gray-new-60 after:bg-transparent'

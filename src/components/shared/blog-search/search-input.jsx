@@ -1,8 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
+
+import { cn } from 'utils/cn';
 
 const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
   const inputRef = useRef(null);
@@ -29,11 +30,11 @@ const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
   }, []);
 
   return (
-    <div className={clsx('absolute right-0 top-1 md:w-full', className)}>
+    <div className={cn('absolute top-1 right-0 md:w-full', className)}>
       <div className="ais-SearchBox">
         <input
           ref={inputRef}
-          className={clsx('ais-SearchBox-input', asPlaceholder && 'pointer-events-none')}
+          className={cn('ais-SearchBox-input', asPlaceholder && 'pointer-events-none')}
           disabled={asPlaceholder}
           placeholder="Search..."
           aria-label="Search blog posts"

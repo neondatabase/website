@@ -1,21 +1,21 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, tag }) => (
   <li className="flex gap-x-2">
     <span
-      className={clsx(
-        'mt-[3px] size-3.5 flex-shrink-0 border-[3px] border-black-pure',
+      className={cn(
+        'mt-[3px] size-3.5 shrink-0 border-[3px] border-black-pure',
         highlighted ? 'bg-green-52' : 'bg-gray-new-90'
       )}
       aria-hidden
     />
     <p
-      className={clsx(
+      className={cn(
         'text-[15px] leading-snug tracking-extra-tight',
         highlighted ? 'text-white' : 'text-gray-new-80'
       )}
@@ -46,7 +46,7 @@ const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, ta
         />
       )}
       {tag && (
-        <span className="ml-1.5 inline-flex h-5 items-center border border-green-52/20 bg-green-52/[0.08] px-2 font-mono text-[13px] font-medium uppercase leading-none text-green-52">
+        <span className="ml-1.5 inline-flex h-5 items-center border border-green-52/20 bg-green-52/[0.08] px-2 font-mono text-[13px] leading-none font-medium text-green-52 uppercase">
           {tag}
         </span>
       )}
@@ -71,7 +71,7 @@ Feature.propTypes = {
 const Features = ({ title, features, type, highlighted }) => (
   <div className="flex flex-col gap-y-3.5 px-6 py-4 md:px-5">
     {title && (
-      <p className="font-mono text-xs font-medium uppercase leading-none tracking-extra-tight text-gray-new-50">
+      <p className="font-mono text-xs leading-none font-medium tracking-extra-tight text-gray-new-50 uppercase">
         {title}
       </p>
     )}

@@ -68,7 +68,7 @@ SELECT JUSTIFY_INTERVAL('30 hours');
 
 Output:
 
-```sql
+```
 justify_interval
 ------------------
  1 day 06:00:00

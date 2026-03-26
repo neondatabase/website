@@ -20,7 +20,8 @@ import getHtmlTableOfContents from 'utils/get-html-table-of-contents';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params }) => {
+const BlogPage = async (props0) => {
+  const params = await props0.params;
   const postResult = await getWpPostBySlug(params?.slug);
 
   const { post, relatedPosts } = postResult;
@@ -68,7 +69,7 @@ const BlogPage = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="safe-paddings">
-        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:block lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:px-4 md:pb-20 md:pt-8">
+        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:block lg:max-w-none lg:px-8 lg:pt-10 lg:pb-28 md:px-4 md:pt-8 md:pb-20">
           <Hero
             className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:mx-0"
             title={title}
@@ -78,7 +79,7 @@ const BlogPage = async ({ params }) => {
             {...pageBlogPost}
           />
           <ChangelogForm
-            className="col-start-4 col-end-10 mx-5 mb-8 mt-4 hidden xl:col-start-1 xl:col-end-9 lg:mx-0 lg:flex"
+            className="col-start-4 col-end-10 mx-5 mt-4 mb-8 hidden xl:col-start-1 xl:col-end-9 lg:mx-0 lg:flex"
             isBlog
           />
           <Content
@@ -103,7 +104,8 @@ const BlogPage = async ({ params }) => {
   );
 };
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const { post } = await getWpPostBySlug(slug);
 

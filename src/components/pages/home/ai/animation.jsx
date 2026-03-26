@@ -7,12 +7,12 @@ import {
   useViewModelInstanceTrigger,
   Alignment,
 } from '@rive-app/react-canvas';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
+import { cn } from 'utils/cn';
 
 const Animation = ({ className }) => {
   const [wrapperRef, isWrapperIntersecting] = useInView({
@@ -37,9 +37,9 @@ const Animation = ({ className }) => {
   }, [startTrigger, isWrapperIntersecting]);
 
   return (
-    <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
-      <div className={clsx('[&_canvas]:!h-full [&_canvas]:!w-full', className)} ref={animationRef}>
+    <div className={cn('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+      <span className="absolute top-0 left-1/2 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
+      <div className={cn('[&_canvas]:h-full! [&_canvas]:w-full!', className)} ref={animationRef}>
         <RiveComponent />
       </div>
     </div>

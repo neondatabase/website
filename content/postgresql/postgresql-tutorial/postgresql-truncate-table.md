@@ -22,7 +22,7 @@ To remove all data from a table, you use the [`DELETE`](postgresql-delete) state
 
 The `TRUNCATE TABLE` statement deletes all data from a table very fast. Here’s the basic syntax of the `TRUNCATE TABLE` statement:
 
-```phpsqlsql
+```sql
 TRUNCATE TABLE table_name;
 ```
 
@@ -96,7 +96,7 @@ Output:
 
 Third, delete all data from the `products` table using the `TRUNCATE TABLE` statement:
 
-```
+```sql
 TRUNCATE TABLE products;
 ```
 
@@ -110,7 +110,7 @@ TRUNCATE TABLE
 
 First, create a table called `customers` and insert data into it:
 
-```
+```sql
 CREATE TABLE customers(
    id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -202,7 +202,7 @@ The reason is that the `orders` table is referenced by the `order_items` table. 
 
 Third, truncate data from both `orders` and `order_items` tables:
 
-```
+```sql
 TRUNCATE TABLE orders CASCADE;
 ```
 
@@ -219,7 +219,7 @@ Note that the `TRUNCATE TABLE` statement uses the `RESTRICT` option by default t
 
 Besides removing data, you may want to reset the values of the [identity column](postgresql-identity-column) by using the `RESTART IDENTITY` option like this:
 
-```
+```sql
 TRUNCATE TABLE table_name
 RESTART IDENTITY;
 ```

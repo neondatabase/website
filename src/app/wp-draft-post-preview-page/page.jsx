@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
@@ -21,6 +20,7 @@ import featuresScaleIcon from 'icons/landing/features/scalability.svg';
 import featuresStorageIcon from 'icons/landing/features/storage.svg';
 import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getWpPreviewPageData } from 'utils/api-pages';
+import { cn } from 'utils/cn';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -50,7 +50,8 @@ const icons = {
   WARNING:
   You can't have a page in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
-const WpPageDraft = async ({ searchParams }) => {
+const WpPageDraft = async (props0) => {
+  const searchParams = await props0.searchParams;
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
@@ -93,7 +94,7 @@ const WpPageDraft = async ({ searchParams }) => {
 
         return (
           <SplitViewGrid
-            className={clsx(
+            className={cn(
               'mx-auto mt-16 max-w-[1265px]',
               isAzurePage ? 'mb-14' : 'mb-32',
               'lg:my-14'
@@ -149,9 +150,9 @@ const WpPageDraft = async ({ searchParams }) => {
       {templateName === 'Landing' ? (
         contentWithLazyBlocks
       ) : (
-        <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pb-24 lg:pt-12 md:pb-20 md:pt-6">
+        <article className="py-48 safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
           <Container size="xs">
-            <h1 className="t-5xl font-title font-semibold">{title}</h1>
+            <h1 className="t-5xl font-title leading-normal font-semibold">{title}</h1>
           </Container>
           <Container size="xs">
             <Content className="prose-static mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />
@@ -163,7 +164,8 @@ const WpPageDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateViewport({ searchParams }) {
+export async function generateViewport(props) {
+  const searchParams = await props.searchParams;
   if (!searchParams?.id || !searchParams?.status) {
     return undefined;
   }
@@ -181,7 +183,8 @@ export async function generateViewport({ searchParams }) {
   };
 }
 
-export async function generateMetadata({ searchParams }) {
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams;
   if (!searchParams?.id || !searchParams?.status) {
     return null;
   }

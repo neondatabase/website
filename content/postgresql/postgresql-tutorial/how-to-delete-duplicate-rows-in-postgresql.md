@@ -72,7 +72,7 @@ If the table has few rows, you can easily see which ones are duplicates immediat
 
 The find the duplicate rows, you use the following statement:
 
-```
+```sql
 SELECT
     fruit,
     COUNT( fruit )
@@ -100,7 +100,7 @@ Output:
 
 The following statement uses the `DELETE USING` statement to remove duplicate rows:
 
-```
+```sql
 DELETE FROM
     basket a
         USING basket b
@@ -136,7 +136,7 @@ The output indicates that the statement removes the duplicate rows with the lowe
 
 If you want to keep the duplicate rows with the lowest id, you need to flip the operator in the `WHERE` clause:
 
-```
+```sql
 DELETE  FROM
     basket a
         USING basket b
@@ -172,7 +172,7 @@ The output indicates that duplicate rows with the lowest ids are retained.
 
 The following statement uses a subquery to delete duplicate rows and keep the row with the lowest id.
 
-```
+```sql
 DELETE FROM basket
 WHERE id IN
     (SELECT id

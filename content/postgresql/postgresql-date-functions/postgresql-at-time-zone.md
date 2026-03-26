@@ -24,7 +24,7 @@ The `AT TIME ZONE` operator can be useful when you want to perform timezone conv
 
 Here’s the syntax of the `AT TIME ZONE` operator:
 
-```csssqlsql
+```sql
 timestamp_expression AT TIME ZONE target_timezone
 ```
 
@@ -64,7 +64,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp to Coordinated Universal time (UTC):
 
-```
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'UTC';
 ```
 
@@ -81,7 +81,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp with time zone to UTC:
 
-```css
+```sql
 SELECT TIMESTAMP WITH TIME ZONE '2024-03-21 10:00:00-04' AT TIME ZONE 'UTC';
 ```
 
@@ -98,7 +98,7 @@ Output:
 
 The following query uses the `AT TIME ZONE` operator to convert a timestamp to Pacific Standard Time (PST) from the default time zone:
 
-```css
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'PST';
 ```
 
@@ -115,7 +115,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp using a time zone offset:
 
-```css
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE '-08:00';
 ```
 
@@ -132,7 +132,7 @@ Output:
 
 The following example uses the `AT TIME ZONE` operator to convert a timestamp using a named time zone:
 
-```css
+```sql
 SELECT TIMESTAMP '2024-03-21 10:00:00' AT TIME ZONE 'America/New_York';
 ```
 

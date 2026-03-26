@@ -1455,6 +1455,10 @@ function getPageUrl(inputPath, baseContentDir) {
   const relativePath = path.relative(baseContentDir, inputPath);
   // Remove .md extension and convert to URL path
   const urlPath = relativePath.replace(/\.md$/, '');
+  // Changelog entries live in content/changelog/ but are served under /docs/changelog/
+  if (urlPath.startsWith('changelog/')) {
+    return `${BASE_URL}/docs/${urlPath}`;
+  }
   return `${BASE_URL}/${urlPath}`;
 }
 
@@ -1915,6 +1919,21 @@ function addNavigationContext(content, relativePath, navMap) {
 }
 
 /**
+ * Reverse addNavigationContext — strip the header and footer it prepends/appends.
+ * Lives here so it stays in sync with buildPageHeader() and buildNavigationFooter().
+ */
+function stripNavigationContext(content) {
+  let stripped = content.replace(
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n\n/,
+    ''
+  );
+
+  stripped = stripped.replace(/\n---\n\n## Related docs \([^)]*\)\n[\s\S]*$/, '\n');
+
+  return stripped;
+}
+
+/**
  * Process a directory recursively
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
@@ -2001,6 +2020,7 @@ module.exports = {
   buildNavigationFooter,
   buildPageHeader,
   addNavigationContext,
+  stripNavigationContext,
 };
 
 /**

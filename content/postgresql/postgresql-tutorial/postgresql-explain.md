@@ -26,13 +26,13 @@ The most important and useful information that the `EXPLAIN` statement returns a
 
 The following shows the syntax of the `EXPLAIN` statement:
 
-```csssql
+```sql
 EXPLAIN [ ( option [, ...] ) ] sql_statement;
 ```
 
 where `option` can be one of the following:
 
-```php
+```sql
 ANALYZE [ boolean ]
 VERBOSE [ boolean ]
 COSTS [ boolean ]
@@ -50,7 +50,7 @@ The `ANALYZE` option causes the `sql_statement` to be executed first and then ac
 
 The `ANALYZE` statement executes the SQL statement and discards the output information, therefore, if you want to analyze any statement such as [`INSERT`](postgresql-insert), [`UPDATE`](postgresql-update), or [`DELETE`](postgresql-delete) without affecting the data, you should wrap the `EXPLAIN ANALYZE` in a transaction, as follows:
 
-```
+```sql
 BEGIN;
     EXPLAIN ANALYZE sql_statement;
 ROLLBACK;
@@ -84,7 +84,7 @@ Specify the output format of the query plan such as `TEXT`, `XML`, `JSON`, and `
 
 The following statement shows the plan for a simple query on the  `film` table:
 
-```
+```sql
 EXPLAIN SELECT * FROM film;
 ```
 
@@ -93,7 +93,7 @@ The output is as follows:
 ![PostgreSQL EXPLAIN - shows plan for a simple query](/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png)
 The following example shows the plan for a query that returns a film by a specific `film_id`.
 
-```
+```sql
 EXPLAIN SELECT * FROM film WHERE film_id = 100;
 ```
 
@@ -104,7 +104,7 @@ Because the `film_id` is indexed, the statement returned a different plan. In th
 
 To suppress the cost, you can use the `COSTS` option:
 
-```
+```sql
 EXPLAIN (COSTS FALSE) SELECT
     *
 FROM
@@ -116,7 +116,7 @@ WHERE
 ![PostgreSQL EXPLAIN - shows plan without costs](/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-without-costs.png)
 The following example displays the plan for a query that uses an aggregate function:
 
-```
+```sql
 EXPLAIN SELECT COUNT(*) FROM film;
 ```
 
@@ -125,7 +125,7 @@ The output is:
 ![PostgreSQL EXPLAIN - shows plan with an aggregate function](/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-with-an-aggregate-function.png)
 The following example returns a plan for a statement that joins multiple tables:
 
-```
+```sql
 EXPLAIN
 SELECT
     f.film_id,
@@ -146,7 +146,7 @@ The output is:
 ![PostgreSQL EXPLAIN - shows plan for a join](/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-join.png)
 To add the actual runtime statistics to the output, you need to execute the statement using the `ANALYZE` option:
 
-```
+```sql
 EXPLAIN ANALYZE
     SELECT
         f.film_id,

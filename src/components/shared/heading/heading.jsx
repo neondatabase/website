@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
+
+import { cn } from 'utils/cn';
 
 const styles = {
   size: {
@@ -22,7 +23,7 @@ const styles = {
 };
 
 const HeadingBadge = ({ text }) => (
-  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-primary-1 lg:text-[10px]">
+  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] leading-none font-semibold -tracking-extra-tight text-primary-1 uppercase lg:text-[10px]">
     {text}
   </span>
 );
@@ -43,7 +44,7 @@ const Heading = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       !sizesWithCustomFont.has(size) && 'font-title',
       styles.size[size],
       styles.theme[theme],

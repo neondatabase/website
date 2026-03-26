@@ -22,7 +22,7 @@ The `SIGN()` function allows you to determine the sign of a number.
 
 Here’s the syntax of the `SIGN()` function:
 
-```phpsql
+```sql
 SIGN(numeric_value)
 ```
 
@@ -130,7 +130,7 @@ How it works.
 
 If you want to reuse the result of the LAG() function, you can use a [common table expression](../postgresql-tutorial/postgresql-cte):
 
-```
+```sql
 WITH sales_data AS (
     SELECT
         year,

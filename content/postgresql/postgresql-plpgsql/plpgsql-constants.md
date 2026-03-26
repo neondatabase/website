@@ -26,7 +26,7 @@ The following are the reasons to use constants:
 
 First, constants make code more readable and maintainable. Suppose you have the following formula:
 
-```sqlsql
+```plsql
 selling_price = net_price + net_price * 0.1;
 ```
 
@@ -34,7 +34,7 @@ In this formula, the magic value 0\.1 does not convey any meaning.
 
 However, when using the following formula, the meaning for determining the selling price becomes clear:
 
-```sql
+```plsql
 selling_price = net_price + net_price * vat;
 ```
 
@@ -50,7 +50,7 @@ So how do you define a constant in PL/pgSQL?
 
 To define a constant in PL/pgSQL, you use the following syntax:
 
-```sql
+```plsql
 constant_name constant data_type = expression;
 ```
 
@@ -64,7 +64,7 @@ In this syntax:
 
 The following example declares a constant named `vat` that stores the value\-added tax and calculates the selling price from the net price:
 
-```sql
+```plsql
 do $$
 declare
    vat constant numeric = 0.1;
@@ -76,13 +76,13 @@ end $$;
 
 Output:
 
-```sql
+```plsql
 NOTICE:  The selling price is 22.55
 ```
 
 Now, if you try to change the value of the constant as follows:
 
-```sql
+```plsql
 do $$
 declare
    vat constant numeric = 0.1;
@@ -95,7 +95,7 @@ end $$;
 
 You will get the following error message:
 
-```sql
+```
 ERROR: "vat" is declared CONSTANT
 SQL state: 22005
 Character: 155
@@ -103,7 +103,7 @@ Character: 155
 
 Similar to the default value of a [variable](plpgsql-variables), PostgreSQL evaluates the value for the constant when the block is entered at run\-time, not compile\-time. For example:
 
-```sql
+```plsql
 do $$
 declare
    started_at constant time := clock_timestamp();

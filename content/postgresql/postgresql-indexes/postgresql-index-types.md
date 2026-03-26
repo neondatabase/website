@@ -26,7 +26,7 @@ B\-tree is a self\-balancing tree that maintains sorted data and allows searches
 
 PostgreSQL query planner will consider using a B\-tree index whenever index columns are involved in a comparison that uses one of the following operators:
 
-```phpsql
+```sql
 <
 <=
 =
@@ -39,7 +39,7 @@ IS NOT NULL
 
 In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchor at the beginning of the pattern, for example:
 
-```
+```sql
 column_name LIKE 'foo%'
 column_name LIKE 'bar%'
 column_name  ~ '^foo'
@@ -55,7 +55,7 @@ Hash indexes can handle only simple equality comparison (\=). It means that when
 
 To create a hash index, you use the `CREATE INDEX` statement with the `HASH` index type in the `USING` clause as follows:
 
-```
+```sql
 CREATE INDEX index_name
 ON table_name USING HASH (indexed_column);
 ```

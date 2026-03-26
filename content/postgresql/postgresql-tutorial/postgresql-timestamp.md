@@ -34,7 +34,7 @@ Internally, PostgreSQL stores the `timestamptz` in UTC value.
 
 Notice that both `timestamp` and `timestamptz` uses 8 bytes for storing the timestamp values as shown in the following query:
 
-```csssqlsql
+```sql
 SELECT
   typname,
   typlen
@@ -60,7 +60,7 @@ It’s important to note that PostgreSQL stores `timestamptz` values in the data
 
 Let’s take a look at an example of using the `timestamp` and `timestamptz`to have a better understanding of how PostgreSQL handles them.
 
-First, [create a table](postgresql-create-table) that consists of both `timestamp` the `timestamptz` columns.
+First, [create a table](postgresql-create-table) that consists of both `timestamp` and `timestamptz` columns.
 
 ```sql
 CREATE TABLE timestamp_demo (
@@ -88,7 +88,7 @@ SHOW TIMEZONE;
 (1 row)
 ```
 
-Then, [insert a new row](postgresql-insert) into the `timstamp_demo`table:
+Then, [insert a new row](postgresql-insert) into the `timestamp_demo` table:
 
 ```sql
 INSERT INTO timestamp_demo (ts, tstz)
@@ -178,7 +178,7 @@ Output:
 
 To get the current time without a date, you use the `CURRENT_TIME` function:
 
-```css
+```sql
 SELECT CURRENT_TIME;
 ```
 
@@ -256,7 +256,7 @@ Output:
 
 First, create a new table called `department`:
 
-```php
+```sql
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
@@ -269,7 +269,7 @@ The default values for the `created_at` and `updated_at` columns are the current
 
 Second, insert a new row into the `department` table without specifying the values for the `created_at` and `updated_at` columns:
 
-```
+```sql
 INSERT INTO department(name)
 VALUES('IT')
 RETURNING *;
@@ -294,7 +294,7 @@ Note that MySQL offers the `ON UPDATE CURRENT_TIMESTAMP` to automatically update
 
 Third, create a `BEFORE UPDATE` trigger to update the `updated_at` column of the `department` table:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -311,7 +311,7 @@ EXECUTE FUNCTION update_updated_at();
 
 Fourth, update the name of the IT department to ITD without specifying a value for the `updated_at` column:
 
-```
+```sql
 UPDATE department
 SET name = 'ITD'
 WHERE id = 1

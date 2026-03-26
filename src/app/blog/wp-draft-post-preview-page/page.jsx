@@ -29,7 +29,8 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   WARNING:
   You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
-const BlogDraft = async ({ searchParams }) => {
+const BlogDraft = async (props0) => {
+  const searchParams = await props0.searchParams;
   // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
   await Promise.resolve(JSON.stringify(searchParams));
 
@@ -78,8 +79,8 @@ const BlogDraft = async ({ searchParams }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="safe-paddings bg-black-pure">
-        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-3xl lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+      <div className="bg-black-pure safe-paddings">
+        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pt-20 pb-40 2xl:px-10 xl:gap-x-6 xl:pt-12 xl:pb-32 lg:max-w-3xl lg:px-8 lg:pt-10 lg:pb-28 md:gap-x-0 md:px-4 md:pt-8 md:pb-20">
           <Hero
             className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
@@ -110,7 +111,8 @@ const BlogDraft = async ({ searchParams }) => {
   );
 };
 
-export async function generateMetadata({ searchParams }) {
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams;
   if (!searchParams?.id || !searchParams?.status) {
     return null;
   }

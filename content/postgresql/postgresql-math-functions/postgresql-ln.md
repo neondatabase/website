@@ -104,7 +104,7 @@ SELECT LN('10x') result;
 
 The function raises an error because it cannot convert the string ’10x’ to a number:
 
-```sql
+```
 ERROR:  invalid input syntax for type double precision: "10x"
 LINE 1: SELECT LN('10x') result;
                   ^

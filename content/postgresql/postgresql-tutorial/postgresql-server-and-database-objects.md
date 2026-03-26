@@ -75,7 +75,7 @@ Operators are symbolic functions. PostgreSQL allows you to define custom operato
 
 ## Casts
 
-Casts enable you to convert one data type into another data type. Casts backed by functions to perform the conversion. You can also create your casts to override the default casting provided by PostgreSQL.
+Casts enable you to convert one data type into another data type. Casts are backed by functions to perform the conversion. You can also create your casts to override the default casting provided by PostgreSQL.
 
 ## Sequence
 

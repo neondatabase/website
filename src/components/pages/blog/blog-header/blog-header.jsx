@@ -1,20 +1,20 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import RssButton from 'components/shared/rss-button';
 import SectionLabel from 'components/shared/section-label';
 import Socials from 'components/shared/socials';
+import { cn } from 'utils/cn';
 
 const BlogHeader = ({ className, title, rssTitle, category, basePath, withLabel = false }) => (
   <div
-    className={clsx(
+    className={cn(
       'relative mb-12 flex w-full items-end justify-between gap-5 lg:mb-2 md:mb-8 sm:flex-col sm:items-start sm:gap-5',
       className
     )}
   >
     <div>
       {withLabel && (
-        <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4 sm:!gap-2 [&>img]:sm:!h-[14px] [&>img]:sm:!w-3 [&>span]:sm:!text-xs">
+        <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4 sm:gap-2! [&>img]:sm:!h-[14px] [&>img]:sm:!w-3 [&>span]:sm:text-xs!">
           Blog
         </SectionLabel>
       )}

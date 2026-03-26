@@ -86,7 +86,7 @@ Output:
 
 Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
 
-```
+```sql
 CREATE TABLE contact_backup
 AS TABLE contacts;
 ```

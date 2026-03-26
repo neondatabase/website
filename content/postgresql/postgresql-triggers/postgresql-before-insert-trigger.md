@@ -24,7 +24,7 @@ A `BEFORE INSERT` trigger is activated before an `INSERT` event occurs on a tabl
 
 First, define a trigger function that will execute before the `INSERT` event occurs:
 
-```sqlsql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -71,7 +71,7 @@ CREATE TABLE inventory_stat(
 
 Third, define a function that increases the total quantity in the `inventory_stat` before a row is inserted into the `inventory` table:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION update_total_qty()
 RETURNS TRIGGER
 LANGUAGE PLPGSQL
@@ -99,7 +99,7 @@ If the inventory_stat table has no rows, the function inserts a new row with the
 
 Fourth, define a `BEFORE INSERT` trigger associated with the `inventory` table:
 
-```
+```sql
 CREATE TRIGGER inventory_before_insert
 BEFORE INSERT
 ON inventory
@@ -126,7 +126,7 @@ Output:
 
 Sixth, retrieve data from the `inventory_stat` table:
 
-```
+```sql
 SELECT * FROM inventory_stat;
 ```
 

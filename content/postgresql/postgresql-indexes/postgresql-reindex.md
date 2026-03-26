@@ -24,7 +24,7 @@ Additionally, when you create an index without the `CONCURRENTLY` option, the in
 
 In such cases, you can rebuild the index. To rebuild the index, you can use the `REINDEX` statement as follows:
 
-```plaintextsql
+```sql
 REINDEX [ ( option, ...) ]
 { INDEX | TABLE | SCHEMA | DATABASE | SYSTEM }
 name;
@@ -80,7 +80,7 @@ psql -U postgres -d dvdrental
 
 Second, rebuild all indexes in the `film` table of the `dvdrental` database using the `REINDEX` statement:
 
-```plaintext
+```sql
 REINDEX (verbose, concurrently)
 TABLE film;
 ```
@@ -102,7 +102,7 @@ Since the statement uses the `VERBOSE` option, the `REINDEX` statement displays 
 
 Third, rebuild all indexes in the `dvdrental` database using the `REINDEX` statement:
 
-```
+```sql
 REINDEX DATABASE dvdrental;
 ```
 

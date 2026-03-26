@@ -22,7 +22,7 @@ In PostgreSQL, a view is a named query stored in the database server. To create 
 
 Here's the basic syntax of the `CREATE VIEW` statement:
 
-```phpsql
+```sql
 CREATE VIEW view_name
 AS
   query;
@@ -63,7 +63,7 @@ CREATE VIEW
 
 The following query data from the `contact` view:
 
-```
+```sql
 SELECT * FROM contact;
 ```
 
@@ -82,7 +82,7 @@ Output:
 
 The following example creates a view based on the tables `customer`, `address`, `city`, and `country`:
 
-```
+```sql
 CREATE VIEW customer_info AS
 SELECT
   first_name,
@@ -120,7 +120,7 @@ Output:
 
 The following statement creates a view called `customer_usa` based on the `customer_info` view. The `customer_usa` returns the customers who are in the `United States`:
 
-```
+```sql
 CREATE VIEW customer_usa
 AS
 SELECT
@@ -152,7 +152,7 @@ Output:
 
 To change the defining query of a view, you use the `CREATE OR REPLACE VIEW` statement:
 
-```
+```sql
 CREATE OR REPLACE VIEW view_name
 AS
   query;
@@ -180,7 +180,7 @@ To display a view on `psql`, you follow these steps:
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server:
 
-```
+```shell
 psql -U postgres
 ```
 

@@ -22,7 +22,7 @@ To extract an element of a JSON array as a `JSONB` value, you use the `->` opera
 
 Here’s the syntax for using the `->` operator:
 
-```phpsqlsql
+```sql
 json_array -> n
 ```
 
@@ -220,7 +220,7 @@ CREATE TABLE requests(
 
 Second, insert some rows into the `requests` table:
 
-```
+```sql
 INSERT INTO requests (request_date, employee_id, data)
 VALUES
    ('2024-02-23',1, '{"current_position": "Software Engineer", "new_position": "Senior Software Engineer", "effective_date": "2024-03-01"}'),
@@ -288,7 +288,7 @@ Output:
 
 The following example attempts to extract a value of a non\-existing key from a JSON object:
 
-```
+```sql
 SELECT
   data ->> 'position' position
 FROM

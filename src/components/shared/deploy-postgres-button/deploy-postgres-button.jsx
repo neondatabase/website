@@ -1,10 +1,10 @@
 'use client';
 
-import { clsx } from 'clsx';
 import React, { useState } from 'react';
 
 import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const DEPLOY_POSTGRES_API = '/api/deploy-postgres';
@@ -100,7 +100,7 @@ const DeployPostgresButton = () => {
         <Button
           type="submit"
           disabled={formState.isLoading || formState.hasCreatedProject}
-          className="pointer-events-auto relative !font-semibold tracking-tighter disabled:cursor-default disabled:opacity-50"
+          className="pointer-events-auto relative font-semibold! tracking-tighter disabled:cursor-default disabled:opacity-50"
           theme="secondary"
           size="xs"
         >
@@ -164,19 +164,19 @@ const DeployPostgresButton = () => {
 
       <div className="w-full space-y-1.5">
         <div className="relative flex w-full max-w-4xl flex-col space-y-3 sm:overflow-hidden">
-          <div className="relative z-10 rounded-[14px] bg-white bg-opacity-[0.03] p-1 backdrop-blur-[4px] xl:rounded-xl ">
+          <div className="relative z-10 rounded-[14px] bg-white/3 p-1 backdrop-blur-[4px] xl:rounded-xl">
             <div
-              className="absolute inset-0 z-10 rounded-[inherit] border border-white/[0.04]"
+              className="absolute inset-0 z-10 rounded-[inherit] border border-white/4"
               aria-hidden="true"
             />
             <div
-              className="absolute inset-[5px] z-10 rounded-[10px] border border-white/[0.04] mix-blend-overlay"
+              className="absolute inset-[5px] z-10 rounded-[10px] border border-white/4 mix-blend-overlay"
               aria-hidden="true"
             />
-            <div className="z-20 flex h-9 gap-x-3.5 rounded-[10px] border-opacity-[0.05] bg-[#0c0d0d] pl-[18px] pt-2.5 tracking-extra-tight xl:rounded-lg xl:pl-4 lg:gap-x-3 md:gap-x-2.5 md:pl-[14px]">
-              <span className="absolute left-0 top-1/2 h-[450px] w-px -translate-y-1/2" />
+            <div className="border-opacity-[0.05] z-20 flex h-9 gap-x-3.5 rounded-[10px] bg-[#0c0d0d] pt-2.5 pl-[18px] tracking-extra-tight xl:rounded-lg xl:pl-4 lg:gap-x-3 md:gap-x-2.5 md:pl-[14px]">
+              <span className="absolute top-1/2 left-0 h-[450px] w-px -translate-y-1/2" />
               <span
-                className={clsx(
+                className={cn(
                   'relative mt-1.5 h-1.5 w-1.5 rounded-full shadow-[0px_0px_9px_0px_#4BFFC3] transition-[background-color,box-shadow] duration-300 xl:h-[5px] xl:w-[5px]',
                   formState.hasCreatedProject && 'bg-[#00E599]'
                 )}
@@ -186,11 +186,11 @@ const DeployPostgresButton = () => {
               </span>
 
               {formState.hasCreatedProject ? (
-                <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-white focus:outline-none">
+                <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-white focus:outline-hidden">
                   {maskPassword(formState.connectionString)}
                 </span>
               ) : (
-                <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-[#AFB1B6]/50 focus:outline-none">
+                <span className="h-4 w-full overflow-clip bg-transparent font-mono text-xs text-[#AFB1B6]/50 focus:outline-hidden">
                   postgresql://neondb_owner:***@ep-***.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
                 </span>
               )}
@@ -199,7 +199,7 @@ const DeployPostgresButton = () => {
                 {formState.hasCreatedProject && (
                   <div>
                     <button
-                      className="absolute right-5 top-3.5 z-30 bg-[#0c0d0d]"
+                      className="absolute top-3.5 right-5 z-30 bg-[#0c0d0d]"
                       type="button"
                       aria-label={isCopied ? 'Copied' : 'Copy'}
                       disabled={isCopied}

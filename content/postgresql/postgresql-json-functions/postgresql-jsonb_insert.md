@@ -24,7 +24,7 @@ More specifically, the `jsonb_insert()` function allows you to add a new element
 
 Here’s the syntax of the `jsonb_insert()` function:
 
-```phpsqlsql
+```sql
 jsonb_insert(
    target jsonb,
    path text[],
@@ -50,7 +50,7 @@ Let’s take some examples of using the PostgreSQL `jsonb_insert()` function
 
 The following example uses the `jsonb_insert()` function to insert a new element into a JSON array:
 
-```text
+```sql
  SELECT jsonb_insert('[1,2,3]', '{0}', '0');
 ```
 
@@ -159,7 +159,7 @@ In this case, you need to use the `jsonb_set()` function to replace the key valu
 
 The following example uses the `jsonb_insert()` to add a new key/value pair to a nested JSON object:
 
-```
+```sql
 SELECT
   jsonb_insert(
     '{"name":"John Doe", "address" : { "city": "San Francisco"}}',

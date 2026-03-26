@@ -37,7 +37,7 @@ The `pg_dump` extracts a PostgreSQL database into a script file or other archive
 
 Here’s the syntax of the `pg_dump` command:
 
-```csssql
+```bash
 pg_dump [connection_option] [option] [dbname]
 ```
 
@@ -71,7 +71,7 @@ Unlike the `pg_dump` tool which backups individual databases or objects, the `pg
 
 Here’s the syntax for `pg_dumpall` command:
 
-```css
+```bash
 pg_dump [connection_option] [option]
 ```
 
@@ -104,7 +104,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, execute the following `pg_dump` to back up the `dvdrental` database on the local server:
 
-```css
+```bash
 pg_dump -U postgres -d dvdrental -F tar -f d:\backup\dvdrental.tar
 ```
 
@@ -117,7 +117,7 @@ In this command:
 
 After you run the command, `pg_dump` will prompt you to enter a password for the `postgres` user:
 
-```css
+```
 password:;
 ```
 
@@ -131,7 +131,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, run the `pg_dumpall` command to back up all databases in the local PostgreSQL server into the all_databases.sql file:
 
-```
+```bash
 pg_dumpall -U postgres > D:\backup\all_databases.sql
 ```
 
@@ -139,19 +139,19 @@ This command will prompt you to enter a password for each database in the Postgr
 
 To suppress the password prompt, you can use the `-w` option:
 
-```
+```bash
 pg_dumpall -U postgres > D:\backup\all_databases.sql
 ```
 
 However, you need to use a [password file](postgresql-password-file-pgpass) with the following entry:
 
-```css
+```
 hostname:port:database:username:password
 ```
 
 For example:
 
-```css
+```
 localhost:5432:*:postgres:SecurePass1
 ```
 
@@ -163,19 +163,19 @@ Sometimes, you want to backup only database object definitions, not the data. Th
 
 To back up objects in all databases, including roles, tablespaces, databases, schemas, tables, indexes, triggers, functions, constraints, views, ownerships, and privileges, you use the following command:
 
-```plaintext
+```bash
 pg_dumpall --schema-only > d:\backup\schemas.sql
 ```
 
 If you want to back up role definition only, use the following command:
 
-```plaintext
+```bash
 pg_dumpall --roles-only > D:\backup\roles.sql
 ```
 
 If you want to back up [tablespaces](postgresql-create-tablespace 'PostgreSQL Tablespaces') definition, use the following command:
 
-```plaintext
+```bash
 pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 ```
 
@@ -220,7 +220,7 @@ First, open a text editor.
 
 Second, write a shell script to generate a backup file with a date and timestamp:
 
-```shell
+```bash
 #!/bin/bash
 
 # Set variables for database connection
@@ -245,13 +245,13 @@ Third, save the script with a `.sh` extension such as `backup.sh`.
 
 Fourth, make the script executable by executing the following command on your terminal:
 
-```css
+```bash
 chmod +x backup_script.sh
 ```
 
 Fifth, run the script by executing it in your terminal:
 
-```
+```bash
 ./backup.sh
 ```
 

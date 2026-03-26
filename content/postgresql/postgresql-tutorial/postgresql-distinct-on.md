@@ -20,7 +20,7 @@ nextLink:
 
 The `DISTINCT ON` clause allows you to retrieve unique rows based on specified columns. Here’s the basic syntax of the `DISTINCT ON` clause:
 
-```phpsqlsql
+```sql
 SELECT
   DISTINCT ON (column1, column2,...) column1,
   column2,
@@ -47,7 +47,7 @@ Let’s take an example of using the `DISTINCT ON` clause to understand it bette
 
 First, [create a table](postgresql-create-table) called student `scores` to store the student’s scores:
 
-```
+```sql
 CREATE TABLE student_scores (
   id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE student_scores (
 
 Second, [insert rows](postgresql-insert-multiple-rows) into the `student_scores` table:
 
-```
+```sql
 INSERT INTO student_scores (name, subject, score)
 VALUES
   ('Alice', 'Math', 90),

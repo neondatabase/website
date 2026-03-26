@@ -34,7 +34,7 @@ Individual roles can be members of multiple group roles. This allows for flexibl
 
 Creating a group role is like creating a role by using the [`CREATE ROLE`](postgresql-roles) statement:
 
-```sqlsqlsql
+```sql
 CREATE ROLE group_role;
 ```
 
@@ -50,7 +50,7 @@ CREATE ROLE sales;
 
 When you use the `\du` command in the `psql` tool, you will see that the group roles are listed together with individual roles:
 
-```shell
+```
                              List of roles
  Role name |                         Attributes
 -----------+------------------------------------------------------------
@@ -81,7 +81,7 @@ In this syntax:
 
 For example, the following statement creates a new role `alice` and adds it to the group role `sales`:
 
-```
+```sql
 GRANT sales TO alice;
 ```
 
@@ -107,7 +107,7 @@ PASSWORD 'SecurePass1';
 
 The following grants the `SELECT` privilege on the rental table to the `sales` group role:
 
-```
+```sql
 GRANT SELECT ON rental TO sales;
 ```
 
@@ -117,13 +117,13 @@ Let’s test it out.
 
 First, connect to the PostgreSQL server using the `alice` role:
 
-```
+```bash
 psql -U alice -d dvdrental
 ```
 
 Second, retrieve data from the rental table:
 
-```
+```sql
 SELECT count(*) FROM rental;
 ```
 
@@ -142,7 +142,7 @@ The output indicates that the role `alice` has the `SELECT` privilege on the `re
 
 To remove a role from a group role, you use the `REVOKE` statement:
 
-```
+```sql
 REVOKE group_role FROM role;
 ```
 

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -7,6 +6,7 @@ import ChangelogForm from 'components/shared/changelog-form';
 import Link from 'components/shared/link';
 import TableOfContents from 'components/shared/table-of-contents';
 import { GUIDES_BASE_PATH } from 'constants/guides';
+import { cn } from 'utils/cn';
 
 const Aside = ({
   isTemplate,
@@ -20,7 +20,7 @@ const Aside = ({
   const authorPagePath = author ? `${GUIDES_BASE_PATH}authors/${author.slug}` : null;
   return (
     <div
-      className={clsx(
+      className={cn(
         'relative -ml-6 w-full max-w-[312px] xl:hidden',
         isTemplate
           ? 'col-span-2 col-start-11 mt-4 min-w-64 justify-self-end 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto'
@@ -44,7 +44,7 @@ const Aside = ({
 
         {author && (
           <div className="mt-4 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70 lg:rounded-lg lg:bg-gray-new-95 lg:p-5 dark:lg:bg-gray-new-10">
-            <p className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-gray-new-60 dark:text-gray-new-50 lg:hidden">
+            <p className="mb-5 text-[12px] leading-none font-semibold -tracking-extra-tight text-gray-new-60 uppercase dark:text-gray-new-50 lg:hidden">
               Author
             </p>
             <div className="flex items-start gap-2.5">
@@ -75,7 +75,7 @@ const Aside = ({
               <div className="mt-2 flex items-center gap-4 md:mt-1.5">
                 {author.link && (
                   <Link
-                    className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45"
+                    className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:border-transparent! dark:border-green-45 dark:text-green-45"
                     to={author.link.url}
                     target="_blank"
                   >
@@ -83,7 +83,7 @@ const Aside = ({
                   </Link>
                 )}
                 <Link
-                  className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:!border-transparent dark:border-green-45 dark:text-green-45"
+                  className="block w-fit border-b border-secondary-8 text-[14px] leading-tight text-secondary-8 transition-colors duration-200 hover:border-transparent! dark:border-green-45 dark:text-green-45"
                   to={authorPagePath}
                 >
                   Other guides

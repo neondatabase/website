@@ -1,11 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { forwardRef, useEffect, useCallback, useRef, useImperativeHandle } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { cn } from 'utils/cn';
 
 const PauseableVideo = forwardRef(
   ({ children, width, height, poster, loop = true, className, videoClassName }, ref) => {
@@ -63,10 +64,10 @@ const PauseableVideo = forwardRef(
 
     return (
       <LazyMotion features={domAnimation}>
-        <div className={clsx('relative overflow-hidden', className)} ref={setContainerRef}>
+        <div className={cn('relative overflow-hidden', className)} ref={setContainerRef}>
           {/* TODO: Need to reconsider the use of placeholder for video which gets around the layout shift issue */}
           <Image
-            className={clsx('relative', videoClassName)}
+            className={cn('relative', videoClassName)}
             src={
               poster ||
               `data:image/svg+xml;charset=utf-8,%3Csvg width='${width}' height='${height}' xmlns='http://www.w3.org/2000/svg' version='1.1'%3E%3C/svg%3E`
@@ -80,7 +81,7 @@ const PauseableVideo = forwardRef(
           <AnimatePresence>
             {isVideoLoaded && (
               <m.video
-                className={clsx('absolute inset-0', videoClassName)}
+                className={cn('absolute inset-0', videoClassName)}
                 ref={videoRef}
                 controls={false}
                 width={width}

@@ -24,7 +24,7 @@ The `ORDER BY` clause allows you to sort rows returned by a `SELECT` clause in 
 
 The following illustrates the syntax of the `ORDER BY` clause:
 
-```csssqlsql
+```sql
 SELECT
   select_list
 FROM
@@ -142,14 +142,14 @@ In the database world, `NULL` is a marker that indicates the missing data or the
 When you sort rows that contain `NULL`, you can specify the order of `NULL` with other non\-null values by using the `NULLS FIRST` or `NULLS LAST` option of the `ORDER BY` clause:
 
 ```sql
-ORDER BY sort_expresssion [ASC | DESC] [NULLS FIRST | NULLS LAST]
+ORDER BY sort_expression [ASC | DESC] [NULLS FIRST | NULLS LAST]
 ```
 
 The `NULLS FIRST` option places `NULL` before other non\-null values and the `NULLS LAST` option places `NULL` after other non\-null values.
 
 Let’s [create a table](postgresql-create-table) for the demonstration.
 
-```php
+```sql
 -- create a new table
 CREATE TABLE sort_demo(num INT);
 
@@ -203,7 +203,7 @@ Null display is "null".
 
 So if you use the `ASC` option, the `ORDER BY` clause uses the `NULLS LAST` option by default. Therefore, the following query returns the same result:
 
-```
+```sql
 SELECT
   num
 FROM

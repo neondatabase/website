@@ -24,7 +24,7 @@ Unfortunately, PostgreSQL does not support the `SHOW TABLES` statement directly 
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL using psql client tool:
 
-```phpsql
+```bash
 psql -U postgres
 ```
 
@@ -36,7 +36,7 @@ Second, change the current database to the one that you want to show tables:
 
 Note that you can connect to a specific database when you log in to the PostgreSQL database server:
 
-```
+```bash
 psql -U postgres -d dvdrental
 ```
 
@@ -74,7 +74,7 @@ Output:
 
 To get more information on tables, you can use the `\dt+` command. It will add the `size` and `description` columns:
 
-```php
+```
 \dt+
 ```
 
@@ -104,7 +104,7 @@ Output:
 
 To show the details of a specific table, you can specify the name of the table after the \\d command:
 
-```php
+```
 \d table_name
 ```
 
@@ -144,7 +144,7 @@ Triggers:
 
 The following statement retrieves the table in PostgreSQL from the `pg_catalog.pg_tables` view:
 
-```php
+```sql
 SELECT *
 FROM pg_catalog.pg_tables
 WHERE schemaname != 'pg_catalog' AND

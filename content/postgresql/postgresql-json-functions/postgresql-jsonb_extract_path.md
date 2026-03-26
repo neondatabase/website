@@ -40,7 +40,7 @@ To navigate through the nested objects or array, you can chain these path compon
 
 Suppose you have the following JSON object:
 
-```sql
+```json
 {
   "employee": {
     "name": "John Doe",

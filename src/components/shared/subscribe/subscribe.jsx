@@ -37,10 +37,10 @@ const links = [
 ];
 
 const Subscribe = () => (
-  <section className="safe-paddings my-44 2xl:my-40 xl:my-32 lg:my-24 md:my-20" id="subscribe">
-    <Container className="grid-gap-x grid grid-cols-12 items-center lg:block" size="medium">
+  <section className="my-44 safe-paddings 2xl:my-40 xl:my-32 lg:my-24 md:my-20" id="subscribe">
+    <Container className="grid grid-cols-12 items-center grid-gap-x lg:block" size="medium">
       <Image
-        className="col-span-5 lg:!hidden"
+        className="col-span-5 lg:hidden!"
         src={illustration}
         alt=""
         loading="lazy"
@@ -59,7 +59,7 @@ const Subscribe = () => (
         />
 
         <div className="mt-[94px] flex items-center space-x-[38px] 2xl:mt-[74px] 2xl:space-x-8 xl:mt-16 xl:space-x-7 lg:mt-12 lg:flex-col lg:space-x-0">
-          <span className="t-3xl font-bold !leading-none">Join us:</span>
+          <span className="t-3xl leading-none! font-bold">Join us:</span>
           <ul className="flex space-x-[26px] 2xl:space-x-5 xl:space-x-[18px] lg:mt-3.5">
             {links.map(({ icon, to, name }, index) => (
               <li className="relative" key={index}>

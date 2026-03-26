@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -18,10 +17,12 @@ import jorgeFerreiroAvatar from 'images/authors/jorge-ferreiro.jpg';
 import julianBenegasAvatar from 'images/authors/julian-benegas.jpg';
 import lincolnBergesonAvatar from 'images/authors/lincoln-bergeson.jpg';
 import martinSkowAvatar from 'images/authors/martin-skow.jpg';
+import oliJuhlAvatar from 'images/authors/oli-juhl.png';
 import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
 import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
+import { cn } from 'utils/cn';
 
 const quotes = {
   'dhruv-amin': {
@@ -84,6 +85,10 @@ const quotes = {
     name: 'Julian Benegas',
     avatar: julianBenegasAvatar,
   },
+  'oli-juhl': {
+    name: 'Oliver Juhl',
+    avatar: oliJuhlAvatar,
+  },
   'oliver-stenbom': {
     name: 'Oliver Stenbom',
     avatar: oliverStenbomAvatar,
@@ -123,9 +128,9 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
   if (!name) return null;
 
   return (
-    <section className={clsx('quote my-8 border-l-2 border-green-44 pl-6', className)}>
+    <section className={cn('quote my-8 border-l-2 border-green-44 pl-6', className)}>
       <figure className="flex flex-col gap-5">
-        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl font-normal leading-snug tracking-extra-tight text-black-pure dark:text-white sm:text-lg">
+        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl leading-snug font-normal tracking-extra-tight text-black-pure dark:text-white sm:text-lg">
           &quot;{actualQuote}&quot;
         </blockquote>
 
@@ -147,7 +152,7 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
               {company && (
                 <>
                   <span className="font-normal text-gray-new-40 dark:text-gray-new-70">—</span>
-                  <cite className="font-normal not-italic text-gray-new-40 dark:text-gray-new-70">
+                  <cite className="font-normal text-gray-new-40 not-italic dark:text-gray-new-70">
                     {company}
                   </cite>
                 </>
@@ -156,7 +161,7 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
           </div>
           {link && (
             <Link
-              className="shrink-0 text-base font-medium leading-none tracking-tight text-black-pure no-underline dark:text-white"
+              className="shrink-0 text-base leading-none font-medium tracking-tight text-black-pure no-underline dark:text-white"
               arrowClassName="text-gray-new-40 dark:text-gray-new-70"
               to={link}
               withArrow

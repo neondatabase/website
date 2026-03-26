@@ -24,7 +24,7 @@ PostgreSQL uses `true`, `'t'`, `'true'`, `'y'`, `'yes'`, `'1'` to represent `tru
 
 A boolean expression is an expression that evaluates to a boolean value. For example, the expression `1<>1` is a boolean expression that evaluates to `false`:
 
-```phpsqlsql
+```sql
 SELECT 1 <> 1 AS result;
 ```
 
@@ -162,9 +162,9 @@ Output:
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration:
 
-![](/postgresqltutorial/film.png)The following example uses the `OR` operator in the `WHERE` clause to find the films that have a rental rate is `0.99` or `2.99`:
+![](/postgresqltutorial/film.png)The following example uses the `OR` operator in the `WHERE` clause to find the films that have a rental rate of `0.99` or `2.99`:
 
-```
+```sql
 SELECT
   title,
   rental_rate

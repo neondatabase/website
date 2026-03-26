@@ -1,9 +1,9 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import DownloadIcon from 'icons/download.inline.svg';
+import { cn } from 'utils/cn';
 
 import Section from '../section';
 import { handleDownload } from '../utils';
@@ -48,21 +48,21 @@ const Logo = () => (
       {logos.map((logo, index) => (
         <li key={index}>
           <div
-            className={clsx(
+            className={cn(
               'group relative flex h-[180px] items-center justify-center',
               logo.className
             )}
           >
             <Image src={logo.svgSrc} alt="Neon logo" width={157} height={45} priority unoptimized />
             <div
-              className={clsx(
-                'absolute right-2.5 top-2.5 flex gap-2',
+              className={cn(
+                'absolute top-2.5 right-2.5 flex gap-2',
                 'opacity-0 transition-opacity duration-300',
                 'group-hover:opacity-100'
               )}
             >
               <button
-                className={clsx(
+                className={cn(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'
@@ -74,7 +74,7 @@ const Logo = () => (
                 <DownloadIcon className="h-3.5 w-3.5" />
               </button>
               <button
-                className={clsx(
+                className={cn(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'

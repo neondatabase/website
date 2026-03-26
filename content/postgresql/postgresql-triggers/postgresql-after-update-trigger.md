@@ -39,7 +39,7 @@ To create a `AFTER UPDATE` trigger, you use the following steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute when the `AFTER UPDATE` trigger fires:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -90,7 +90,7 @@ CREATE TABLE salary_changes (
 
 Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION log_salary_change()
 RETURNS TRIGGER
 AS
@@ -106,7 +106,7 @@ $$ LANGUAGE plpgsql;
 
 Fourth, define an `AFTER UPDATE` trigger that calls the `log_salary_change()` function after an update occurs to the `salary` column of the `salaries` table:
 
-```
+```sql
 CREATE TRIGGER after_update_salary_trigger
 AFTER UPDATE OF salary ON salaries
 FOR EACH ROW
@@ -143,7 +143,7 @@ WHERE id = 1;
 
 Seventh, retrieve the data from `salary_changes` table:
 
-```
+```sql
 SELECT * FROM salary_changes;
 ```
 

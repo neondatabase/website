@@ -45,7 +45,7 @@ To create an event trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when the event trigger fires:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION event_trigger_function_name()
 RETURNS EVENT_TRIGGER
 AS
@@ -86,7 +86,7 @@ The `audits` table will record the username, event, command, and timestamp when 
 
 Second, define an event trigger function that executes whenever a relevant event occurs:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION audit_command()
 RETURNS EVENT_TRIGGER
 AS $$

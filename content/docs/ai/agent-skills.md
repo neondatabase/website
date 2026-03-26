@@ -2,7 +2,7 @@
 title: Agent Skills
 subtitle: Teach your AI coding assistant how to work with Neon
 enableTableOfContents: true
-updatedOn: '2026-03-04T00:00:00.000Z'
+updatedOn: '2026-03-20T18:23:32.432Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -60,7 +60,7 @@ See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
 
 ### neonctl init
 
-The `neonctl init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server for your editor, installs the Neon extension for Cursor and VS Code, and installs agent skills at the project level:
+The `neonctl init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
 
 ```bash
 npx neonctl@latest init

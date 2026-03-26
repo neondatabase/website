@@ -40,7 +40,7 @@ First, create a new file named insert.py.
 
 Second, define a `insert_vendor()` function in the insert.py file:
 
-```pythonsql
+```python
 import psycopg2
 from config import load_config
 
@@ -107,7 +107,7 @@ def insert_many_vendors(vendor_list):
 
 The following uses the `insert_vendor()` and `insert_many_vendors()` functions to insert one and multiple rows into the `vendors` table:
 
-```css
+```python
 if __name__ == '__main__':
     insert_vendor("3M Co.")
 
@@ -127,7 +127,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, run the following command to execute the `insert.py` module:
 
-```
+```bash
 python insert.py
 ```
 
@@ -135,7 +135,7 @@ python insert.py
 
 First, [connect to the PostgreSQL server](connect) using the `psql`:
 
-```
+```bash
 psql -U postgres
 ```
 
@@ -147,7 +147,7 @@ Second, change the current database to `suppliers`:
 
 Third, retrieve data from the `vendors` table:
 
-```
+```sql
 SELECT * FROM vendors;
 ```
 

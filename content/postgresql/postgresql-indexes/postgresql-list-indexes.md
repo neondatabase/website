@@ -36,7 +36,7 @@ The `pg_indexes` view consists of five columns:
 
 The following statement lists all indexes of the schema `public` in the current database:
 
-```phpsql
+```sql
 SELECT
     tablename,
     indexname,
@@ -78,7 +78,7 @@ WHERE
 
 For example, to list all the indexes for the `customer` table, you use the following statement:
 
-```
+```sql
 SELECT
     indexname,
     indexdef

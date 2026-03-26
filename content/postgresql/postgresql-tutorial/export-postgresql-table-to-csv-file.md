@@ -18,7 +18,7 @@ nextLink:
 
 In the previous tutorial, we showed you how to [import data from a CSV file into a table](import-csv-file-into-posgresql-table). We will use the same `persons` table for importing data from a CSV file.
 
-![posgresql export csv](/postgresqltutorial/posgresql-import-csv.jpg)
+![postgresql export csv](/postgresqltutorial/posgresql-import-csv.jpg)
 The following statement retrieves the data from the `persons` table.
 
 ```sql
@@ -41,7 +41,7 @@ The `COPY` statement allows you to export data from a table to a CSV file.
 
 For example, if you want to export the data of the `persons` table to a CSV file named `persons_db.csv` in the `C:\temp` folder, you can use the following statement:
 
-```
+```sql
 COPY persons TO 'C:\temp\persons_db.csv' DELIMITER ',' CSV HEADER;
 ```
 
@@ -59,7 +59,7 @@ In this example, the COPY statement exports all data from all columns of the `pe
 
 For example, the following statement exports data from the `first_name`, `last_name`, and `email` columns of the `persons` table to `person_partial_db.csv`
 
-```
+```sql
 COPY persons(first_name,last_name,email)
 TO 'C:\temp\persons_partial_db.csv' DELIMITER ',' CSV HEADER;
 ```

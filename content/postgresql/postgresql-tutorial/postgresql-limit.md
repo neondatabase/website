@@ -105,7 +105,7 @@ How it works.
 
 To retrieve 4 films starting from the fourth one ordered by `film_id`, you can use both `LIMIT` and `OFFSET` clauses as follows:
 
-```
+```sql
 SELECT
   film_id,
   title,
@@ -133,7 +133,7 @@ How it works.
 
 - First, sort films by film id in ascending order.
 - Second, skip the first three rows using the `OFFSET 3` clause.
-- Second, take the next four rows using the `LIMIT 4` clause.
+- Third, take the next four rows using the `LIMIT 4` clause.
 
 ### 3\) Using LIMIT to get top/bottom N rows
 
@@ -141,7 +141,7 @@ Typically, you often use the `LIMIT` clause to select rows with the highest or l
 
 The following example uses the `LIMIT` clause to retrieve the top 10 most expensive films by rental rate:
 
-```
+```sql
 SELECT
   film_id,
   title,

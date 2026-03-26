@@ -1,12 +1,12 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 import CountingNumber from 'components/shared/animation/counting-number';
+import { cn } from 'utils/cn';
 
 import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS, START_DELAY } from './data';
 
@@ -34,7 +34,7 @@ const DeployDatabases = () => {
           )}
         </span>
       </div>
-      <div className="border-b border-l border-gray-new-50 pb-[18px] pl-[18px] pt-8 xl:pb-3.5 xl:pl-3.5 xl:pt-[26px] sm:pb-2 sm:pl-2 sm:pt-4">
+      <div className="border-b border-l border-gray-new-50 pt-8 pb-[18px] pl-[18px] xl:pt-[26px] xl:pb-3.5 xl:pl-3.5 sm:pt-4 sm:pb-2 sm:pl-2">
         <ul className="flex flex-col gap-9 xl:gap-[26px] sm:gap-4">
           <LazyMotion features={domAnimation}>
             {ACTIVITY_DATA.map(({ day, activeCount, idleCount, activity }) => (
@@ -87,10 +87,7 @@ const DeployDatabases = () => {
                             >
                               {isMobile ? (
                                 <span
-                                  className={clsx(
-                                    'block size-full',
-                                    value === '0' && 'scale-[0.33]'
-                                  )}
+                                  className={cn('block size-full', value === '0' && 'scale-[0.33]')}
                                   style={{ backgroundColor: ACTIVITY_COLORS[Number(value)] }}
                                 />
                               ) : (
@@ -119,7 +116,7 @@ const DeployDatabases = () => {
                         })}
                       </div>
                       <time
-                        className="text-xs text-gray-new-50 xl:text-[9px] sm:text-[5px]"
+                        className="text-xs leading-none text-gray-new-50 xl:text-[9px] sm:text-[5px]"
                         dateTime={`${hour + 9}:00`}
                       >
                         {String(hour + 9).padStart(2, '0')}:00
@@ -133,7 +130,7 @@ const DeployDatabases = () => {
         </ul>
       </div>
       <span
-        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-transparent from-70% to-black-pure"
+        className="pointer-events-none absolute inset-0 z-10 bg-linear-to-r from-transparent from-70% to-black-pure"
         aria-hidden
       />
     </div>

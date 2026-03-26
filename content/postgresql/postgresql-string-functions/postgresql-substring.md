@@ -22,7 +22,7 @@ The `SUBSTRING()` function allows you to extract a substring from a string and r
 
 Here’s the basic syntax of the `SUBSTRING()` function:
 
-```sqlsql
+```sql
 SUBSTRING(string, start_position, length)
 ```
 
@@ -66,7 +66,7 @@ In the example, we extract a substring that has a length of 8, starting at the
 
 ![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the first 8 characters from the PostgreSQL string:
 
-```
+```sql
 SELECT
   SUBSTRING ('PostgreSQL', 8);
 ```
@@ -85,7 +85,7 @@ In this example, we extract a substring started at position 8 and omit the `leng
 
 The following examples use the alternative syntax of the `SUBSTRING()` function:
 
-```
+```sql
 SELECT
   SUBSTRING ('PostgreSQL' FROM 1 FOR 8),
   SUBSTRING ('PostgreSQL' FROM 8);
@@ -107,7 +107,7 @@ We’ll use the `customer` table from the [sample database](../postgresql-gettin
 ![customer table](/postgresqltutorial/customer.png)
 The following example uses the `SUBSTRING()` function to retrieve the initial names of customers by extracting the first character of value in the `first_name` column:
 
-```
+```sql
 SELECT
   first_name,
   SUBSTRING(first_name, 1, 1) AS initial
@@ -133,7 +133,7 @@ In addition to the SQL\-standard substring function, PostgreSQL allows you to ex
 
 The following illustrates the syntax of the substring function with POSIX regular expression:
 
-```
+```sql
 SUBSTRING(string, pattern);
 ```
 
@@ -169,7 +169,7 @@ Output:
 
 Besides the POSIX regular expression pattern, you can use the SQL regular expression pattern to extract a substring from a string using the following syntax:
 
-```
+```sql
 SUBSTRING(string FROM pattern FOR escape-character)
 ```
 

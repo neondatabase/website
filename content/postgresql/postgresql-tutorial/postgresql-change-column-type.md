@@ -20,7 +20,7 @@ nextLink:
 
 To change the [data type](postgresql-time) of a column, you use the [`ALTER TABLE`](postgresql-alter-table) statement as follows:
 
-```sqlsql
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name
 [SET DATA] TYPE new_data_type;
@@ -94,7 +94,7 @@ Output:
 
 The following example uses the `ALTER TABLE ... ALTER COLUMN` statement to change the data type of the `name` column to [`VARCHAR`](postgresql-char-varchar-text):
 
-```
+```sql
 ALTER TABLE assets
 ALTER COLUMN name TYPE VARCHAR(255);
 ```
@@ -111,7 +111,7 @@ The output indicates that the statement successfully changed the type of the col
 
 The following statement changes the data types of `description` and `location` columns from [`TEXT`](postgresql-char-varchar-text) to `VARCHAR`:
 
-```
+```sql
 ALTER TABLE assets
     ALTER COLUMN location TYPE VARCHAR(255),
     ALTER COLUMN description TYPE VARCHAR(255);
@@ -127,14 +127,14 @@ ALTER TABLE
 
 The following example uses the `ALTER TABLE ... ALTER COLUMN` statement to change the data type of the `asset_no` column to [integer](postgresql-integer):
 
-```
+```sql
 ALTER TABLE assets
 ALTER COLUMN asset_no TYPE INT;
 ```
 
 PostgreSQL issued an error and a helpful hint:
 
-```sql
+```
 ERROR:  column "asset_no" cannot be cast automatically to type integer
 HINT:  You might need to specify "USING asset_no::integer".
 ```

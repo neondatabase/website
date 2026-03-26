@@ -46,7 +46,7 @@ export default function getMetadata({
         'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
       },
     },
-    manifest: `${SITE_URL}/manifest.json`,
+    manifest: '/manifest.json',
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
     icons: {

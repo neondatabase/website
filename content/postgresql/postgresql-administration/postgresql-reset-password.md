@@ -32,7 +32,7 @@ The following steps show you how to reset a password for the `postgres` user:
 
 **Step 2**. Edit the `pg_dba.conf` file and change all local connections from `scram-sha-256` to `trust`. By doing this, you can log in to the PostgreSQL database server without using a password.
 
-```phpsqlsql
+```
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 
 # IPv4 local connections:
@@ -49,7 +49,7 @@ host    replication     all             ::1/128                 trust
 
 Alternatively, you can run the following command from the Command Prompt (notice that you need to run the Command Prompt as the Administrator):
 
-```
+```bash
 pg_ctl -D "C:\Program Files\PostgreSQL\16\data" restart
 ```
 
@@ -57,7 +57,7 @@ The `"C:\Program Files\PostgreSQL\16\data"` is the data directory.
 
 **Step 4**. Connect to PostgreSQL database server using any tool such as psql or pgAdmin:
 
-```
+```bash
 psql -U postgres
 ```
 

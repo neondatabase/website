@@ -14,7 +14,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
 
   const post = getPostBySlug(slug, PROGRAMS_DIR_PATH);
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const ProgramPage = async ({ params }) => {
+const ProgramPage = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const currentSlug = `programs/${slug}`;
 

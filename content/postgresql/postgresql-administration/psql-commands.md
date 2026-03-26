@@ -20,7 +20,7 @@ nextLink:
 
 The following command [connects to a database](../postgresql-jdbc/connecting-to-postgresql-database) under a specific user. After pressing `Enter` PostgreSQL will ask for the password of the user.
 
-```phpsql
+```bash
 psql -d database -U  user -W
 ```
 
@@ -176,7 +176,7 @@ For example, if you want to know detailed information on the [ALTER TABLE](../po
 
 To turn on query execution time, you use the `\timing` command.
 
-```sql
+```
 dvdrental=# \timing
 Timing is on.
 dvdrental=# select count(*) from film;
@@ -191,7 +191,7 @@ dvdrental=#
 
 You use the same command `\timing` to turn it off.
 
-```sql
+```
 dvdrental=# \timing
 Timing is off.
 dvdrental=#

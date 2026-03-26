@@ -24,7 +24,7 @@ The `GENERATED AS IDENTITY` constraint is the SQL standard\-conforming variant o
 
 The following illustrates the syntax of the `GENERATED AS IDENTITY` constraint:
 
-```shellsql
+```sql
 column_name type
 GENERATED { ALWAYS | BY DEFAULT }
 AS IDENTITY[ ( sequence_option ) ]
@@ -76,7 +76,7 @@ VALUES (2, 'Green');
 
 PostgreSQL issued the following error:
 
-```sql
+```
 [Err] ERROR:  cannot insert into column "color_id"
 DETAIL:  Column "color_id" is an identity column defined as GENERATED ALWAYS.
 HINT:  Use OVERRIDING SYSTEM VALUE to override.
@@ -203,14 +203,14 @@ ALTER COLUMN shape_id ADD GENERATED ALWAYS AS IDENTITY;
 
 Note that the `shape_id` needs to have the [`NOT NULL`](postgresql-not-null-constraint) constraint so that it can be changed to an identity column. Otherwise, you’ll get the following error:
 
-```sql
+```
 ERROR:  column "shape_id" of relation "shape" must be declared NOT NULL before identity can be added
 SQL state: 55000
 ```
 
 The following command describes the `shape` table in psql tool:
 
-```shell
+```
 \d shape
 ```
 
@@ -222,7 +222,7 @@ It returns the following output which is what we expected:
 
 You can change the characteristics of an existing identity column by using the following `ALTER TABLE` statement:
 
-```shell
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name
 { SET GENERATED { ALWAYS| BY DEFAULT } |
@@ -249,7 +249,7 @@ As you can see from the output, the `shape_id` column changed from `GENERATED AL
 
 The following statement removes the `GENERATED AS IDENTITY` constraint from an existing table:
 
-```
+```sql
 ALTER TABLE table_name
 ALTER COLUMN column_name
 DROP IDENTITY [ IF EXISTS ]

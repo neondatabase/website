@@ -22,7 +22,7 @@ The PostgreSQL unique index enforces the uniqueness of values in one or multiple
 
 To create a unique index, you use the following `CREATE UNIQUE INDEX` statement:
 
-```phpsql
+```sql
 CREATE UNIQUE INDEX index_name
 ON table_name (column [, ...])
 [ NULLS [ NOT ] DISTINCT ];
@@ -88,7 +88,7 @@ Here is the output:
 
 First, [add a column](../postgresql-tutorial/postgresql-add-column) named `mobile_phone` to the `employees` table:
 
-```http
+```sql
 ALTER TABLE employees
 ADD mobile_phone VARCHAR(20);
 ```
@@ -118,7 +118,7 @@ VALUES ('Jane','Doe','jane.doe@example.com', '(408)-555-1234');
 
 PostgreSQL issues the following error due to the duplicate mobile phone number:
 
-```sql
+```
 ERROR:  duplicate key value violates unique constraint "idx_employees_mobile_phone"
 DETAIL:  Key (mobile_phone)=((408)-555-1234) already exists.
 ```

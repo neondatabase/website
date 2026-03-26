@@ -6,7 +6,7 @@ summary: >-
   through the Admin plugin APIs in Neon, enabling the creation and updating of
   user accounts and their authentication states.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.744Z'
+updatedOn: '2026-03-23T12:18:17.902Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -34,7 +34,7 @@ The Admin plugin provides APIs to manage your users and their authentication sta
 
 You can call Admin plugin methods using the Neon SDK auth client.
 
-> If you haven’t set up Neon Auth yet, follow our [Quick start guides](/docs/auth/overview#quick-start-guides) to get started and create an `authClient`.
+> If you haven’t set up Neon Auth yet, follow the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start to create an `authClient`.
 
 ### Create a user
 

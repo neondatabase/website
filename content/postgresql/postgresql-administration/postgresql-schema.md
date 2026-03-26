@@ -24,7 +24,7 @@ A schema allows you to organize and namespace database objects within a database
 
 To access an object in a schema, you need to qualify the object by using the following syntax:
 
-```css
+```
 schema_name.object_name
 ```
 
@@ -32,13 +32,13 @@ A database may contain one or more schemas. However, a schema belongs to only on
 
 For example, you may have `sales` schema that has `staff` table and the `public` schema which also has the `staff` table. When you refer to the `staff` table you must qualify it as follows:
 
-```css
+```
 public.staff
 ```
 
 Or
 
-```css
+```
 sales.staff
 ```
 
@@ -51,7 +51,7 @@ Schemas can be very useful in the following scenarios:
 
 PostgreSQL automatically creates a schema called `public` for every new database. Whatever object you create without specifying the schema name, PostgreSQL will place it into this `public` schema. Therefore, the following statements are equivalent:
 
-```css
+```sql
 CREATE TABLE table_name(
   ...
 );
@@ -59,7 +59,7 @@ CREATE TABLE table_name(
 
 and
 
-```
+```sql
 CREATE TABLE public.table_name(
    ...
 );
@@ -77,7 +77,7 @@ The first schema in the search path is called the current schema. Note that when
 
 The `current_schema()` function returns the current schema:
 
-```php
+```sql
 SELECT current_schema();
 ```
 
@@ -94,7 +94,7 @@ This is why PostgreSQL uses `public` for every new object that you create.
 
 To view the current search path, you use the `SHOW` command in `psql` tool:
 
-```php
+```sql
 SHOW search_path;
 ```
 
@@ -114,19 +114,19 @@ In this output:
 
 To create a new schema, you use the `CREATE SCHEMA` statement:
 
-```php
+```sql
 CREATE SCHEMA sales;
 ```
 
 To add the new schema to the search path, you use the following command:
 
-```
+```sql
 SET search_path TO sales, public;
 ```
 
 Now, if you create a new table named `staff` without specifying the schema name, PostgreSQL will put this `staff` table into the `sales` schema:
 
-```php
+```sql
 CREATE TABLE staff(
     staff_id SERIAL PRIMARY KEY,
     first_name VARCHAR(45) NOT NULL,
@@ -139,25 +139,25 @@ The following picture shows the new schema `sales` and the `staff` table that be
 
 ![PostgreSQL Schema Example](/postgresqltutorial/PostgreSQL-Schema-Example.png)To access the `staff` table in the `sales` schema you can use one of the following statements:
 
-```css
+```sql
 SELECT * FROM staff;
 ```
 
 and
 
-```
+```sql
 SELECT * FROM sales.staff;
 ```
 
 The `public` schema is the second element in the search path, so to access the `staff` table in the public schema, you must qualify the table name as follows:
 
-```css
+```sql
 SELECT * FROM public.staff;
 ```
 
 If you use the following command, you will need to explicitly refer to objects in the `public` schema using a fully qualified name:
 
-```php
+```sql
 SET search_path TO public;
 ```
 
@@ -169,14 +169,14 @@ Users can only access objects in the schemas that they own. It means they cannot
 
 To allow users to access the objects in the schema that they do not own, you must grant the `USAGE` privilege of the schema to the users:
 
-```
+```sql
 GRANT USAGE ON SCHEMA schema_name
 TO role_name;
 ```
 
 To allow users to create objects in the schema that they do not own, you need to grant them the `CREATE` privilege of the schema to the users:
 
-```
+```sql
 GRANT CREATE ON SCHEMA schema_name
 TO user_name;
 ```

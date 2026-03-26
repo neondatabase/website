@@ -33,7 +33,7 @@ If there is an exception or error, you can cancel the change using the `rollback
 
 The typical usage of the transaction in PHP PDO is as follows:
 
-```phpsqlsql
+```php
 <?php
 
 try {
@@ -64,7 +64,7 @@ We’ll create the following tables for the demonstration:
 
 The following [CREATE TABLE](../postgresql-tutorial/postgresql-create-table) statements create the three tables:
 
-```php
+```sql
 CREATE TABLE accounts(
    id SERIAL PRIMARY KEY,
    first_name CHARACTER VARYING(100),
@@ -103,77 +103,77 @@ At the beginning of the method, you call the `beginTransaction()` method of the 
 
 If all the steps succeed, you call the `commit()` method to save the changes. If an exception occurs in any step, you roll back the changes by calling the `rollback()` method in the `catch` block:
 
-```text
-   /**
-     * Add a new account
-     * @param string $firstName
-     * @param string $lastName
-     * @param int $planId
-     * @param date $effectiveDate
-     */
-    public function addAccount($firstName, $lastName, $planId, $effectiveDate) {
-        try {
-            // start the transaction
-            $this->pdo->beginTransaction();
+```php
+/**
+ * Add a new account
+ * @param string $firstName
+ * @param string $lastName
+ * @param int $planId
+ * @param date $effectiveDate
+ */
+public function addAccount($firstName, $lastName, $planId, $effectiveDate) {
+    try {
+        // start the transaction
+        $this->pdo->beginTransaction();
 
-            // insert an account and get the ID back
-            $accountId = $this->insertAccount($firstName, $lastName);
+        // insert an account and get the ID back
+        $accountId = $this->insertAccount($firstName, $lastName);
 
-            // add plan for the account
-            $this->insertPlan($accountId, $planId, $effectiveDate);
+        // add plan for the account
+        $this->insertPlan($accountId, $planId, $effectiveDate);
 
-            // commit the changes
-            $this->pdo->commit();
-        } catch (\PDOException $e) {
-            // rollback the changes
-            $this->pdo->rollBack();
-            throw $e;
-        }
+        // commit the changes
+        $this->pdo->commit();
+    } catch (\PDOException $e) {
+        // rollback the changes
+        $this->pdo->rollBack();
+        throw $e;
     }
+}
 ```
 
 The `addAccount()` method uses two other private methods: `insertAccount()` and `insertPlan()` as shown in the following:
 
 ```php
-   /**
-     *
-     * @param string $firstName
-     * @param string $lastName
-     * @return int
-     */
-    private function insertAccount($firstName, $lastName) {
-        $stmt = $this->pdo->prepare(
-                'INSERT INTO accounts(first_name,last_name) '
-                . 'VALUES(:first_name,:last_name)');
+/**
+ *
+ * @param string $firstName
+ * @param string $lastName
+ * @return int
+ */
+private function insertAccount($firstName, $lastName) {
+    $stmt = $this->pdo->prepare(
+            'INSERT INTO accounts(first_name,last_name) '
+            . 'VALUES(:first_name,:last_name)');
 
-        $stmt->execute([
-            ':first_name' => $firstName,
-            ':last_name' => $lastName
-        ]);
+    $stmt->execute([
+        ':first_name' => $firstName,
+        ':last_name' => $lastName
+    ]);
 
-        return $this->pdo->lastInsertId('accounts_id_seq');
-    }
+    return $this->pdo->lastInsertId('accounts_id_seq');
+}
 ```
 
 ```php
-   /**
-     * insert a new plan for an account
-     * @param int $accountId
-     * @param int $planId
-     * @param int $effectiveDate
-     * @return bool
-     */
-    private function insertPlan($accountId, $planId, $effectiveDate) {
-        $stmt = $this->pdo->prepare(
-                'INSERT INTO account_plans(account_id,plan_id,effective_date) '
-                . 'VALUES(:account_id,:plan_id,:effective_date)');
+/**
+ * insert a new plan for an account
+ * @param int $accountId
+ * @param int $planId
+ * @param int $effectiveDate
+ * @return bool
+ */
+private function insertPlan($accountId, $planId, $effectiveDate) {
+    $stmt = $this->pdo->prepare(
+            'INSERT INTO account_plans(account_id,plan_id,effective_date) '
+            . 'VALUES(:account_id,:plan_id,:effective_date)');
 
-        return $stmt->execute([
-                    ':account_id' => $accountId,
-                    ':plan_id' => $planId,
-                    ':effective_date' => $effectiveDate,
-        ]);
-    }
+    return $stmt->execute([
+                ':account_id' => $accountId,
+                ':plan_id' => $planId,
+                ':effective_date' => $effectiveDate,
+    ]);
+}
 ```
 
 To test the `AccountDB` class, you use the following code in the `index.php` file.

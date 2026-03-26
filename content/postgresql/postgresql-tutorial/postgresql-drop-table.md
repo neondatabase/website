@@ -20,7 +20,7 @@ nextLink:
 
 To drop a table from the database, you use the `DROP TABLE` statement as follows:
 
-```shellsql
+```sql
 DROP TABLE [IF EXISTS] table_name
 [CASCADE | RESTRICT];
 ```
@@ -63,17 +63,17 @@ DROP TABLE author;
 
 PostgreSQL issues an error because the `author` table does not exist.
 
-```sql
+```
 [Err] ERROR:  table "author" does not exist
 ```
 
 To avoid the error, you can use the `IF EXISTS` option like this.
 
-```shell
+```sql
 DROP TABLE IF EXISTS author;
 ```
 
-```sql
+```
 NOTICE:  table "author" does not exist, skipping DROP TABLE
 ```
 
@@ -83,7 +83,7 @@ The output indicates that PostgreSQL issued a notice instead of an error.
 
 The following [creates new tables](postgresql-create-table 'PostgreSQL CREATE TABLE') called `authors` and `pages`. The `pages` table has a foreign key that references the `authors` table.
 
-```shell
+```sql
 CREATE TABLE authors (
   author_id INT PRIMARY KEY,
   firstname VARCHAR (50) NOT NULL,
@@ -107,7 +107,7 @@ DROP TABLE IF EXISTS authors;
 
 Because the `authors` table has a dependent object which is a foreign key that references the `pages` table, PostgreSQL issues an error message:
 
-```sql
+```
 ERROR:  cannot drop table authors because other objects depend on it
 DETAIL:  constraint pages_author_id_fkey on table pages depends on table authors
 HINT:  Use DROP ... CASCADE to drop the dependent objects too.
@@ -115,7 +115,7 @@ HINT:  Use DROP ... CASCADE to drop the dependent objects too.
 
 In this case, you need to remove all dependent objects first before dropping the `author` table or use `CASCADE` option as follows:
 
-```shell
+```sql
 DROP TABLE authors CASCADE;
 ```
 
@@ -123,7 +123,7 @@ This statement deletes the `authors` table as well as the constraint in the `pag
 
 If the `DROP TABLE` statement removes the dependent objects of the table that are being dropped, it will issue a notice like this:
 
-```sql
+```
 NOTICE:  drop cascades to constraint pages_author_id_fkey on table pages
 DROP TABLE
 ```
@@ -132,7 +132,7 @@ DROP TABLE
 
 The following statements create two tables for the demo purposes:
 
-```
+```sql
 CREATE TABLE tvshows(
   tvshow_id INT GENERATED ALWAYS AS IDENTITY,
   title VARCHAR,

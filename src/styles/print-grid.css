@@ -1,5 +1,5 @@
 .horizontal-line {
-  @apply absolute left-0 right-0 z-10 h-0.5 bg-gray-1;
+  @apply absolute right-0 left-0 z-10 h-0.5 bg-gray-1;
 }
 
 .vertical-line {
@@ -31,7 +31,7 @@
 
   &::before {
     content: '';
-    @apply absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-1;
+    @apply absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-1;
   }
 
   &.circle-with-text {
@@ -44,7 +44,7 @@
     &::after {
       content: attr(data-text);
       font-size: 15px;
-      @apply absolute top-1/2 -translate-y-1/2 whitespace-nowrap bg-black font-semibold uppercase leading-relaxed tracking-wide text-gray-2;
+      @apply absolute top-1/2 -translate-y-1/2 bg-black leading-relaxed font-semibold tracking-wide whitespace-nowrap text-gray-2 uppercase;
     }
 
     &.circle-with-text-right {

@@ -22,7 +22,7 @@ PostgreSQL provides the `TIME` data type that allows you to store the time data 
 
 Here’s the syntax for declaring a column with the `TIME` data type:
 
-```phpsqlsql
+```sql
 column_name TIME(precision);
 ```
 
@@ -32,7 +32,7 @@ The `TIME` data type requires 8 bytes and its allowed range is from `00:00:00` t
 
 The following illustrates the common formats of the `TIME` values:
 
-```sql
+```
 HH:MI
 HH:MI:SS
 HHMISS
@@ -48,7 +48,7 @@ For example:
 
 To use a time value with the precision, you can utilize the following formats:
 
-```sql
+```
 MI:SS.pppppp
 HH:MI:SS.pppppp
 HHMISS.pppppp
@@ -111,7 +111,7 @@ Besides the `TIME` data type, PostgreSQL provides the `TIME WITH TIME ZONE` data
 
 The following statement illustrates how to declare a column whose data type is `TIME WITH TIME ZONE`:
 
-```
+```sql
 column TIME WITH TIME ZONE
 ```
 
@@ -119,7 +119,7 @@ The storage size of the `TIME WITH TIME ZONE` data type is 12 bytes, allowing yo
 
 The following are some examples of the `TIME WITH TIME ZONE` type:
 
-```sql
+```
 04:05:06 PST
 04:05:06.789-8
 ```
@@ -250,7 +250,7 @@ SELECT time '10:00' - time '02:00' AS result;
 
 Output:
 
-```php
+```
   result
 ----------
  08:00:00

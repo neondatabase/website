@@ -52,7 +52,7 @@ CREATE TABLE employees(
 
 Second, [create a function](../postgresql-plpgsql/postgresql-create-function) that raises an exception if the new salary is greater than the old one 100%:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION check_salary()
   RETURNS TRIGGER
   LANGUAGE PLPGSQL
@@ -95,7 +95,7 @@ WHERE employee_id = 1;
 
 The trigger was fired and issued the following error:
 
-```shell
+```
 ERROR:  The salary increment cannot that high.
 CONTEXT:  PL/pgSQL function check_salary() line 4 at RAISE
 SQL state: P0001
@@ -113,8 +113,8 @@ RENAME TO salary_before_update;
 
 If you use psql tool, you can view all triggers associated with a table using the `\dS` command:
 
-```shell
- \dS employees
+```
+\dS employees
 ```
 
 Notice that the letter `S` is uppercase.

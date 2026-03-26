@@ -29,6 +29,22 @@ Neon’s design intentionally keeps object storage off the critical path. Object
 Both products share the same architectural foundation but Lakebase comes with additional features integrating it with the rest of the Databricks Data and AI platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
+## Resource hierarchy
+
+While the sections below describe Neon's physical architecture, the platform organizes resources into a logical hierarchy:
+
+| Concept          | Description                                                           | Relationship              |
+| ---------------- | --------------------------------------------------------------------- | ------------------------- |
+| Organization     | Highest-level container for billing, users, and projects              | Contains Projects         |
+| Project          | Primary container for all database resources for an application       | Contains Branches         |
+| Branch           | Lightweight, copy-on-write clone of database state                    | Contains Databases, Roles |
+| Compute Endpoint | Running PostgreSQL instance (CPU/RAM for queries)                     | Attached to a Branch      |
+| Database         | Logical container for data (tables, schemas, views)                   | Exists within a Branch    |
+| Role             | PostgreSQL role for authentication and authorization                  | Belongs to a Branch       |
+| Operation        | Async action by the control plane (creating branch, starting compute) | Associated with Project   |
+
+For details on each concept, see the [glossary](/docs/reference/glossary).
+
 ## Compute layer
 
 The compute layer is where Postgres actually runs. Each Neon compute node is a standard Postgres instance: it parses SQL, plans queries, executes transactions, enforces MVCC, and manages locks and indexes. From the perspective of the query engine, nothing about Postgres itself is rewritten or replaced.

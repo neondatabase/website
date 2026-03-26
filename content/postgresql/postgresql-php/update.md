@@ -32,7 +32,7 @@ We will use the `stocks` table that we created in the [creating table tutorial](
 
 The `updateStock()` method of the `PostgreSQLPHPUpdate` class updates the data in the `stocks` table based on a specified id.
 
-```phpsqlsql
+```php
 <?php
 
 namespace PostgreSQLTutorial;
@@ -117,7 +117,7 @@ In the index.php script, we connected to the PostgreSQL database and called the 
 ![PostgreSQL PHP Update](/postgresqltutorial/PostgreSQL-PHP-Update.png)
 Before running the script, we query data from the stocks table to see its current data.
 
-```
+```sql
 SELECT
     id, symbol, company
 FROM

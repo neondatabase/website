@@ -35,7 +35,7 @@ A virtual generated column is like a [view](../postgresql-views), whereas a stor
 
 Typically, you define a generated column when [creating a table](postgresql-create-table) with the following syntax:
 
-```plaintextsql
+```sql
 CREATE TABLE table_name(
    ...,
    column_name type GENERATED ALWAYS AS (expression ) STORED | VIRTUAL,
@@ -108,7 +108,7 @@ Output:
 
 First, create a table called `products` that stores the product information:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -127,7 +127,7 @@ list_price = list_price + (list_price * tax / 100)) - (list_price * discount / 1
 
 Second, insert rows into the `products` table:
 
-```
+```sql
 INSERT INTO products (name, list_price, tax, discount)
 VALUES
     ('A', 100.00, 10.00, 5.00),

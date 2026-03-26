@@ -20,7 +20,7 @@ nextLink:
 
 The factorial of a non\-negative integer n is the product of all positive integers less than or equal to `n`:
 
-```plaintextsql
+```
 n!=n×(n−1)×(n−2)×…×2×1
 ```
 
@@ -36,7 +36,7 @@ In this syntax, `n` is the number that you want to calculate the factorial. The 
 
 If n is negative, the factorial() function will issue an error:
 
-```sql
+```
 ERROR:  factorial of a negative number is undefined
 ```
 
@@ -46,7 +46,7 @@ Let’s take some examples of using the `factorial()` function.
 
 The following example uses the `factorial()` function to calculate the factorial of the number 10:
 
-```
+```sql
 SELECT factorial(5);
 ```
 

@@ -24,7 +24,7 @@ It’s important to note that a record isn’t a true type but rather a placehol
 
 To declare a `record` variable, you simply use a variable name followed by the `record` keyword like this:
 
-```sql
+```plsql
 variable_name record;
 ```
 
@@ -34,7 +34,7 @@ Unlike a row\-type variable, a `record` variable lacks a predefined structure. I
 
 To access a field in the record, you use the dot notation (`.`) syntax like this:
 
-```sql
+```plsql
 record_variable.field_name;
 ```
 
@@ -48,7 +48,7 @@ Let’s take some examples of using the record variables.
 
 The following example illustrates how to use the record variable with the `select into` statement:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -77,7 +77,7 @@ How it works.
 
 The following shows how to use a record variable in a `for loop` statement:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -96,7 +96,7 @@ $$;
 
 Here is the partial output:
 
-```shell
+```
 NOTICE:  Hall Cassidy (51)
 NOTICE:  Champion Flatliners (51)
 NOTICE:  Deep Crusade (51)

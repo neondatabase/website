@@ -28,7 +28,7 @@ If you [create a table](postgresql-create-table) that has a `DATE` column and wa
 
 For example, the following statement creates the `documents` table that has the `posting_date` column with the `DATE` data type.
 
-```phpsqlsql
+```sql
 CREATE TABLE documents (
   document_id SERIAL PRIMARY KEY,
   header_text VARCHAR (255) NOT NULL,
@@ -77,7 +77,7 @@ RETURNING *;
 
 Output:
 
-```css
+```
  employee_id | first_name | last_name | birth_date | hire_date
 -------------+------------+-----------+------------+------------
            1 | Shannon    | Freeman   | 1980-01-01 | 2005-01-01
@@ -93,7 +93,7 @@ INSERT 0 3
 
 To get the current date and time, you use the built\-in `NOW()` function:
 
-```
+```sql
 SELECT NOW();
 ```
 
@@ -108,7 +108,7 @@ Output:
 
 To get the date part only (without the time part), you use the cast operator (::) to cast a `DATETIME` value to a `DATE` value:
 
-```
+```sql
 SELECT NOW()::date;
 ```
 
@@ -123,7 +123,7 @@ Output:
 
 A quick way to get the current date is to use the `CURRENT_DATE` function:
 
-```
+```sql
 SELECT CURRENT_DATE;
 ```
 
@@ -147,7 +147,7 @@ The `TO_CHAR()` function accepts two parameters. The first parameter is the valu
 
 For example, to display the current date in `dd/mm/yyyy` format, you use the following statement:
 
-```
+```sql
 SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
 ```
 

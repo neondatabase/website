@@ -33,7 +33,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, use the `psql` command to connect to the PostgreSQL server:
 
-```shellsql
+```bash
 psql -U postgres
 ```
 
@@ -44,7 +44,7 @@ In this command:
 
 The command will prompt you to enter the password for the `postgres` user:
 
-```shell
+```
 Password for user postgres:
 ```
 
@@ -62,7 +62,7 @@ Connecting to the PostgreSQL server will grant you a session. A session is long-
 
 Third, execute the following command to retrieve the PostgreSQL version:
 
-```plaintext
+```sql
 SELECT version();
 ```
 
@@ -79,7 +79,7 @@ The output will look like:
 
 To show the current database, you can use the following command:
 
-```
+```sql
 SELECT current_database();
 ```
 
@@ -94,7 +94,7 @@ Output:
 
 To show the IP address and port of the current connection, you can execute the following command:
 
-```
+```sql
 SELECT
   inet_server_addr(),
   inet_server_port();

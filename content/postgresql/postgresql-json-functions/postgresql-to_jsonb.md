@@ -22,7 +22,7 @@ The `to_jsonb()` function allows you to convert an SQL value to a `JSONB` value.
 
 Here’s the syntax of the `to_jsonb()` function:
 
-```sqlsql
+```sql
 to_jsonb ( value ) → jsonb
 ```
 
@@ -155,7 +155,7 @@ Output:
 
 We’ll use the `to_jsonb()` function to convert data in the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) to `JSONB` values:
 
-```
+```sql
 SELECT
   to_jsonb(title),
   to_jsonb(length)

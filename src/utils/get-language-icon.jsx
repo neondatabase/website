@@ -2,7 +2,6 @@ import {
   SiAstro,
   SiCplusplus,
   SiCss,
-  SiDotnet,
   SiElixir,
   SiGo,
   SiGnubash,
@@ -24,6 +23,7 @@ import {
   SiTypescript,
   SiYaml,
 } from 'react-icons/si';
+import { TbBrandCSharp } from 'react-icons/tb';
 
 const LANGUAGE_ICON_MAP = {
   typescript: SiTypescript,
@@ -49,8 +49,8 @@ const LANGUAGE_ICON_MAP = {
   php: SiPhp,
   java: SiOpenjdk,
   kotlin: SiKotlin,
-  csharp: SiDotnet,
-  'c++': SiCplusplus,
+  csharp: TbBrandCSharp,
+  'c#': TbBrandCSharp,
   cpp: SiCplusplus,
   elixir: SiElixir,
   terraform: SiTerraform,

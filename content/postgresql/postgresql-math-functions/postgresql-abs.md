@@ -20,7 +20,7 @@ The PostgreSQL `ABS()` function returns the absolute value of a number.
 
 The following illustrates the syntax of the `ABS()` function:
 
-```csssql
+```sql
 ABS(numeric_expression)
 ```
 
@@ -40,7 +40,7 @@ The `ABS()` function returns a value whose [data type](../postgresql-tutorial/po
 
 Besides the ABS() function, you can use the absolute operator @:
 
-```
+```sql
 @ expression
 ```
 
@@ -50,13 +50,13 @@ In this syntax, the `@` operator returns the absolute value of the `expression`.
 
 The following example shows how to use the `ABS()` function to calculate the absolute value of a number:
 
-```
+```sql
 SELECT ABS(-10.25) result;
 ```
 
 The result is:
 
-```css
+```
  result
 --------
   10.25
@@ -66,7 +66,7 @@ The result is:
 
 The following statement uses an expression for the `ABS()` function:
 
-```
+```sql
 SELECT ABS( 100 - 250 ) result;
 ```
 
@@ -81,7 +81,7 @@ Here is the result:
 
 Besides the `ABS()` function, you can use the absolute operator `@`, for example:
 
-```
+```sql
 SELECT @ -15 as result
 ```
 

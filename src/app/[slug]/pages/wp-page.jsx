@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
 import Azure from 'components/pages/landing/azure';
@@ -20,6 +19,7 @@ import featuresScaleIcon from 'icons/landing/features/scalability.svg';
 import featuresStorageIcon from 'icons/landing/features/storage.svg';
 import featuresTimerIcon from 'icons/landing/features/timer.svg';
 import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
+import { cn } from 'utils/cn';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -72,7 +72,7 @@ const WpPage = async ({ params }) => {
 
         return (
           <SplitViewGrid
-            className={clsx(
+            className={cn(
               'mx-auto mt-16 max-w-[1265px]',
               isAzurePage ? 'mb-14' : 'mb-32',
               'lg:my-14'
@@ -128,9 +128,9 @@ const WpPage = async ({ params }) => {
       {templateName === 'Landing' ? (
         contentWithLazyBlocks
       ) : (
-        <article className="safe-paddings py-48 3xl:py-44 2xl:py-40 xl:py-32 lg:pb-24 lg:pt-12 md:pb-20 md:pt-6">
+        <article className="py-48 safe-paddings 3xl:py-44 2xl:py-40 xl:py-32 lg:pt-12 lg:pb-24 md:pt-6 md:pb-20">
           <Container size="xs">
-            <h1 className="t-5xl font-title font-semibold">{title}</h1>
+            <h1 className="t-5xl font-title leading-normal font-semibold">{title}</h1>
           </Container>
           <Container size="xs">
             <Content className="prose-static mt-8 2xl:mt-7 xl:mt-6" content={content} asHTML />

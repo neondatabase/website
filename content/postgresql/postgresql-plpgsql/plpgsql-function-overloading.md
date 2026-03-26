@@ -26,7 +26,7 @@ When you call an overloaded function, PostgreSQL selects the best candidate func
 
 The following `get_rental_duration()` function returns the total rental days of a specified customer:
 
-```sqlsql
+```plsql
 create or replace function get_rental_duration(
 	p_customer_id integer
 )
@@ -51,7 +51,7 @@ The `get_rental_function` function has the `p_customer_id` as an `in` parameter.
 
 The following returns the number of rental days of customer id 232:
 
-```sql
+```plsql
 SELECT get_rental_duration(232);
 ```
 
@@ -68,7 +68,7 @@ Suppose that you want to know the rental duration of a customer from a specific 
 
 To do that, you can add one more parameter `p_from_date` to the `get_retal_duration()` function. Alternatively, you can develop a new function with the same name but have two parameters like this:
 
-```
+```plsql
 create or replace function get_rental_duration(
 	p_customer_id integer,
 	p_from_date date
@@ -99,7 +99,7 @@ In other words, the `get_rental_duration(integer)` function is overloaded by t
 
 The following statement returns the rental duration of the customer id `232` since `July 1st 2005`:
 
-```sql
+```plsql
 SELECT get_rental_duration(232,'2005-07-01');
 ```
 
@@ -117,7 +117,7 @@ Note that if you omit the second argument, PostgreSQL will call the `get_rental_
 
 In the `get_rental_duration(integer,date)` function, if you want to set a default value to the second argument like this:
 
-```
+```plsql
 create or replace function get_rental_duration(
 	p_customer_id integer,
 	p_from_date date default '2005-01-01'
@@ -143,13 +143,13 @@ end; $$
 
 The following calls the `get_rental_duration()` function and passes the customer id 232:
 
-```sql
+```plsql
 SELECT get_rental_duration(232);
 ```
 
 Error:
 
-```sql
+```
 ERROR:  function get_rental_duration(integer) is not unique
 LINE 1: SELECT get_rental_duration(232);
                ^
@@ -162,7 +162,7 @@ In this case, PostgreSQL could not choose the best candidate function to execute
 
 In this scenario, you have three functions:
 
-```
+```plsql
 get_rental_duration(p_customer_id integer);
 get_rental_duration(p_customer_id integer, p_from_date date)
 get_rental_duration(p_customer_id integer, p_from_date date default '2005-01-01'

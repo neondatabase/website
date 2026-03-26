@@ -123,6 +123,10 @@ projects = neon.projects(org_id=org_id)
 - `role_password_reveal(project_id, branch_id, role_name)`: Reveals the password for a given role.
 - `role_password_reset(project_id, branch_id, role_name)`: Resets the password for a given role.
 
+### Manage Organizations
+
+- `organization(org_id)`: Returns details for a specific organization.
+
 ### Manage Operations
 
 - `operations(project_id)`: Returns a list of operations for a given project.

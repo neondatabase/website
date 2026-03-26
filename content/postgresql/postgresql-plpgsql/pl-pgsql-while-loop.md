@@ -45,7 +45,7 @@ The following flowchart illustrates the `while` loop statement:
 
 The following example uses the `while` loop statement to display the value of a `counter`:
 
-```sql
+```plsql
 do $$
 
 declare
@@ -62,7 +62,7 @@ $$;
 
 Output:
 
-```shell
+```
 NOTICE:  Counter 0
 NOTICE:  Counter 1
 NOTICE:  Counter 2

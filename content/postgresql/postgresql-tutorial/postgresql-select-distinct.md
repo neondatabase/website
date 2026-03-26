@@ -24,7 +24,7 @@ The `SELECT DISTINCT` clause can be applied to one or more columns in the select
 
 The following illustrates the syntax of the `DISTINCT` clause:
 
-```sqlsqlsql
+```sql
 SELECT
   DISTINCT column1
 FROM
@@ -63,7 +63,7 @@ Note that you will learn how to [create a table](postgresql-create-table) and [i
 
 First, create the `colors` table that has three columns: `id`, `bcolor` and `fcolor` using the following [`CREATE TABLE`](postgresql-create-table) statement:
 
-```
+```sql
 CREATE TABLE colors(
   id SERIAL PRIMARY KEY,
   bcolor VARCHAR,
@@ -177,11 +177,11 @@ In this example, the query uses the values from both `bcolor` and `fcolor` colum
 
 In practice, you often use the `SELECT DISTINCT` clause to analyze the uniqueness of values in a column.
 
-For example, you may want to know how many rental rates for films from the `film` table:
+For example, you may want to know the rental rates for films from the `film` table:
 
 ![PostgreSQL SELECT DISTINCT - sample table](/postgresqltutorial/film.png)To achieve this, you can specify the `rental_rate` column in the `SELECT DISTINCT` clause as follows:
 
-```
+```sql
 SELECT DISTINCT
   rental_rate
 FROM

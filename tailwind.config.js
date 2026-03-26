@@ -6,16 +6,6 @@ module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    screens: {
-      '3xl': { max: '1919px' },
-      '2xl': { max: '1599px' },
-      xl: { max: '1279px' },
-      lt: { max: '1127px' },
-      lg: { max: '1023px' },
-      md: { max: '767px' },
-      sm: { max: '639px' },
-      xs: { max: '413px' },
-    },
     colors: {
       inherit: 'inherit',
       current: 'currentColor',
@@ -241,7 +231,9 @@ module.exports = {
           'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
           'linear-gradient(0deg, #0D0E12, #0D0E12)',
         'migration-card-right-bg':
-          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+          'linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
         'migration-steps-slider-progress-bg':
           'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
         'template-cta':
@@ -384,6 +376,26 @@ module.exports = {
     require('tailwindcss-safe-area'),
     require('@tailwindcss/typography'),
     require('@headlessui/tailwindcss'),
+    require('tailwindcss/plugin')(({ addVariant }) => {
+      // Tailwind v4 doesn't preserve the desired cascade for overlapping
+      // desktop-first max-width aliases. Narrower breakpoints get an extra
+      // selector repetition so `sm:` reliably overrides `lg:` on mobile.
+      const addMaxVariant = (name, maxWidth, specificityMultiplier) => {
+        addVariant(name, {
+          [`@media (max-width: ${maxWidth})`]: {
+            ['&'.repeat(specificityMultiplier)]: '@slot',
+          },
+        });
+      };
+      addMaxVariant('3xl', '119.9375rem', 1);
+      addMaxVariant('2xl', '99.9375rem', 2);
+      addMaxVariant('xl', '79.9375rem', 3);
+      addMaxVariant('lt', '70.4375rem', 4);
+      addMaxVariant('lg', '63.9375rem', 5);
+      addMaxVariant('md', '47.9375rem', 6);
+      addMaxVariant('sm', '39.9375rem', 7);
+      addMaxVariant('xs', '25.8125rem', 8);
+    }),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),

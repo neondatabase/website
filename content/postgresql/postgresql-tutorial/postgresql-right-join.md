@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL RIGHT JOIN'
 page_title: 'PostgreSQL RIGHT JOIN'
-page_description: 'You will how to use PostgreSQL RIGHT JOIN to join two tables and return rows from the right table that may or may not have matching rows in the left table.'
+page_description: 'You will learn how to use PostgreSQL RIGHT JOIN to join two tables and return rows from the right table that may or may not have matching rows in the left table.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join/'
 ogImage: '/postgresqltutorial/PostgreSQL-Join-Right-Join.png'
 updatedOn: '2024-01-18T03:45:01+00:00'
@@ -24,7 +24,7 @@ The `RIGHT JOIN` can be useful when you want to find rows in the right table tha
 
 Here’s the basic syntax of the `RIGHT JOIN` clause:
 
-```sqlsql
+```sql
 SELECT
   select_list
 FROM
@@ -94,7 +94,7 @@ Output:
 ![PostgreSQL RIGHT JOIN example](/postgresqltutorial/PostgreSQL-RIGHT-JOIN-example.png)
 You can rewrite the above query using table aliases:
 
-```
+```sql
 SELECT
   f.film_id,
   f.title,

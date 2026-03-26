@@ -1,15 +1,15 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex cursor-pointer items-center justify-center !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
+  base: 'inline-flex cursor-pointer items-center justify-center leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200',
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm font-semibold',
     'lg-new':
@@ -69,7 +69,7 @@ const Button = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       styles.base,
       styles.size[size],
       styles.theme[theme],

@@ -21,7 +21,7 @@ nextLink:
 
 To add a new column to an existing table, you use the [`ALTER TABLE`](postgresql-alter-table) `ADD COLUMN` statement as follows:
 
-```phpsqlsql
+```sql
 ALTER TABLE table_name
 ADD COLUMN new_column_name data_type constraint;
 ```
@@ -93,7 +93,7 @@ Indexes:
 
 First, add the `fax` and `email` columns to the `customers` table:
 
-```php
+```sql
 ALTER TABLE customers
 ADD COLUMN fax VARCHAR (25),
 ADD COLUMN email VARCHAR (400);
@@ -126,7 +126,7 @@ The output shows the `fax` and `email` columns were added to the `customers` tab
 
 First, [insert data](postgresql-insert) into the `customers` table:
 
-```
+```sql
 INSERT INTO
    customers (customer_name)
 VALUES
@@ -152,14 +152,14 @@ INSERT 0 3
 
 Second, attempt to add the `contact_name` column to the `customers` table:
 
-```
+```sql
 ALTER TABLE customers
 ADD COLUMN contact_name VARCHAR(255) NOT NULL;
 ```
 
 PostgreSQL issued an error:
 
-```sql
+```
 ERROR:  column "contact_name" of relation "customers" contains null values
 ```
 

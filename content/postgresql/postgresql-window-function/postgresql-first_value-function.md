@@ -22,7 +22,7 @@ The `FIRST_VALUE()` function returns a value evaluated against the first row in 
 
 The following is the syntax of the `FIRST_VALUE()` function:
 
-```css
+```sql
 FIRST_VALUE ( expression )
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -30,7 +30,7 @@ OVER (
 
 ```
 
-```
+```sql
 FIRST_VALUE ( expression )
 OVER (
     [PARTITION BY partition_expression, ... ]
@@ -70,7 +70,7 @@ We will use the `products` table created in the window function tutorial for the
 
 The following statement uses the `FIRST_VALUE()` function to return all products and also the product which has the lowest price:
 
-```
+```sql
 SELECT
     product_id,
     product_name,
@@ -97,7 +97,7 @@ In this example:
 
 This statement uses the `FIRST_VALUE()` function to return all products grouped by the product group. And for each product group, it returns the product with the lowest price:
 
-```
+```sql
 SELECT
     product_id,
     product_name,

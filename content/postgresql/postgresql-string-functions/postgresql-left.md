@@ -48,7 +48,7 @@ Let’s look at some examples of using the `LEFT()` function.
 
 The following example shows how to get the first character of a string `'ABC'`:
 
-```
+```sql
 SELECT LEFT('ABC',1);
 ```
 
@@ -63,7 +63,7 @@ The result is
 
 To get the first two characters of the string ‘ABC’, you use 2 instead of 1 for the `n` argument:
 
-```
+```sql
 SELECT LEFT('ABC',2);
 ```
 
@@ -78,7 +78,7 @@ Here is the result:
 
 The following statement demonstrates how to use a negative integer:
 
-```
+```sql
 SELECT LEFT('ABC',-2);
 ```
 
@@ -95,7 +95,7 @@ See the following customer table in the sample database:
 
 The following statement uses the `LEFT()` function to get the initials and the `COUNT()` function to return the number of customers for each initial.
 
-```
+```sql
 SELECT LEFT(first_name, 1) initial,
     COUNT(*)
 FROM customer

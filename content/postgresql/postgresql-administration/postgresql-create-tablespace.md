@@ -65,13 +65,13 @@ Notice that this statement used Unix\-style slashes for the directory path. Addi
 
 To list all tablespaces in the current PostgreSQL database server, you use the `\db` command:
 
-```shell
+```
 \db
 ```
 
 Output:
 
-```shell
+```
             List of tablespaces
     Name    |  Owner   |     Location
 ------------+----------+-------------------
@@ -83,7 +83,7 @@ Output:
 
 The `\db+` command shows more information such as size and access privileges:
 
-```shell
+```
 \db+
 ```
 
@@ -123,7 +123,7 @@ VALUES('2020-08-01',1);
 
 Since the `ts_primary` tablespace has some data, you can view its information using the following command in psql:
 
-```shell
+```
 \db+ ts_primary
 ```
 

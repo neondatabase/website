@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from './icon';
 import Item from './item';
@@ -20,7 +20,7 @@ const Menu = ({
 }) => (
   <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
-      className="flex items-center gap-2.5 rounded-sm text-[15px] font-medium leading-snug tracking-extra-tight"
+      className="flex items-center gap-2.5 rounded-sm text-[15px] leading-snug font-medium tracking-extra-tight"
       to={`${basePath}${slug}`}
       theme="blue-green"
     >
@@ -33,7 +33,7 @@ const Menu = ({
         if (item.section) {
           return (
             <li className="mt-4 first:mt-0" key={index}>
-              <div className="my-2 flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight">
+              <div className="my-2 flex items-center gap-2.5 text-[15px] leading-snug font-medium tracking-extra-tight">
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
                 {item.section}
               </div>
@@ -59,7 +59,7 @@ const Menu = ({
     {customType && (
       <div className="border-t border-gray-new-94 pt-4 dark:border-gray-new-10">
         <Link
-          className={clsx(
+          className={cn(
             'flex w-full items-start gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
             'text-gray-new-60 hover:text-black-new dark:hover:text-white'
           )}

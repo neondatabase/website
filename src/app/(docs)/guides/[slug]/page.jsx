@@ -19,7 +19,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const post = getPostBySlug(slug, GUIDES_DIR_PATH);
 
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const GuidePost = async ({ params }) => {
+const GuidePost = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const posts = await getAllGuides();
   const navigationLinks = getNavigationLinks(slug, posts);

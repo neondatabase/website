@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
+import { cn } from 'utils/cn';
 
 const TechCardsWrapper = ({ children, withToggler }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,7 @@ const TechCardsWrapper = ({ children, withToggler }) => {
 
   return (
     <>
-      <ul className="not-prose !my-9 grid grid-cols-3 gap-5 !p-0 sm:grid-cols-1">
+      <ul className="not-prose my-9! grid grid-cols-3 gap-5 p-0! sm:grid-cols-1">
         {withToggler && !isOpen ? children.slice(0, 3) : children}
       </ul>
       {withToggler && (
@@ -27,8 +27,8 @@ const TechCardsWrapper = ({ children, withToggler }) => {
           <span className="text-sm font-medium">{isOpen ? 'Hide' : 'Show more'}</span>
           <span className="ml-2.5 flex size-3 items-center justify-center">
             <ChevronRight
-              className={clsx(
-                'block shrink-0 transition-[transform,color] duration-200 ',
+              className={cn(
+                'block shrink-0 transition-[rotate,color] duration-200',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}
             />

@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-03-05T14:07:19.743Z'
+updatedOn: '2026-03-20T21:22:58.806Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -117,7 +117,7 @@ The `delete_data` field controls whether the system removes the `neon_auth` sche
 - **`true`**: Deletes the `neon_auth` schema and all auth tables (users, sessions, accounts).
 - **`false`** (default): Disables the auth service but leaves the schema and data intact. You can re-enable later without losing user data.
 
-<Admonition type="danger">
+<Admonition type="warning">
 Setting `delete_data` to `true` permanently removes all auth data from the database. You cannot undo this.
 </Admonition>
 

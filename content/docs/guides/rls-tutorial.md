@@ -6,7 +6,7 @@ summary: >-
   using Neon, demonstrating how to secure user data by enforcing access control
   at the database level with JWT authentication.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.012Z'
+updatedOn: '2026-03-20T21:22:58.812Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -40,7 +40,7 @@ To get started, you'll need:
 
   Follow the instructions in the README to set up Neon Data API with Neon Auth, configure environment variables, and run database migrations.
 
-  > When enabling Neon Data API, ensure you select **Neon Auth** with Neon Data API.
+  > This sample app uses Neon Auth, so select **Neon Auth** when enabling the Data API. If you're using a different auth provider, see [Custom authentication providers](/docs/data-api/custom-authentication-providers).
 
 <Steps>
 

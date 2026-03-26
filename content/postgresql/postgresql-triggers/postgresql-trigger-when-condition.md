@@ -55,7 +55,7 @@ CREATE TABLE customer_stats (
 
 Third, create an [AFTER INSERT trigger](postgresql-after-insert-trigger) that inserts a row into the `customer_stats` table when a new row is inserted into the `orders` table:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION insert_customer_stats()
 RETURNS TRIGGER
 AS $$
@@ -74,7 +74,7 @@ EXECUTE FUNCTION insert_customer_stats();
 
 Fourth, define an `AFTER UPDATE` trigger on the `orders` table with a condition:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION update_customer_stats()
 RETURNS TRIGGER
 AS

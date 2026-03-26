@@ -1,10 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useSessionStorage from 'react-use/lib/useSessionStorage';
 
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import ThumbsDownIcon from './images/thumbs-down.inline.svg';
@@ -27,8 +27,8 @@ const Feedback = ({ slug }) => {
   return (
     <div className="relative">
       <div
-        className={clsx(
-          'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-x-0 xs:space-y-4',
+        className={cn(
+          'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-y-4 xs:space-x-0',
           isFeedbackSent ? 'invisible opacity-0' : 'visible opacity-100'
         )}
       >
@@ -41,7 +41,7 @@ const Feedback = ({ slug }) => {
             type="button"
             onClick={() => handleFeedbackClick(true, slug)}
           >
-            <ThumbsUpIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-[#38A57D] group-active:text-[#38A57D] dark:text-gray-new-85" />
+            <ThumbsUpIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-[#38A57D] group-active:text-[#38A57D] dark:text-gray-new-85 group-hover:dark:text-[#38A57D] group-active:dark:text-[#38A57D]" />
             <span>Yes</span>
           </button>
           <button
@@ -49,14 +49,14 @@ const Feedback = ({ slug }) => {
             type="button"
             onClick={() => handleFeedbackClick(false, slug)}
           >
-            <ThumbsDownIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-new-85" />
+            <ThumbsDownIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-new-85 group-hover:dark:text-secondary-1 group-active:dark:text-secondary-1" />
             <span>No</span>
           </button>
         </div>
       </div>
       <span
-        className={clsx(
-          'absolute right-0 top-1/2 -translate-y-1/2 text-sm leading-tight transition-opacity duration-300',
+        className={cn(
+          'absolute top-1/2 right-0 -translate-y-1/2 text-sm leading-tight transition-opacity duration-300',
           isFeedbackSent ? 'visible opacity-100' : 'invisible opacity-0'
         )}
       >

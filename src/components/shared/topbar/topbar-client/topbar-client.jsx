@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
@@ -8,6 +7,7 @@ import { useContext, useEffect } from 'react';
 import Link from 'components/shared/link';
 import { TopbarContext } from 'contexts/topbar-context';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import leftPatternLG from './images/left-pattern-lg.png';
@@ -22,7 +22,7 @@ import rightPattern from './images/right-pattern.png';
 
 const Pattern = ({ src, isRight, className }) => (
   <Image
-    className={clsx(
+    className={cn(
       'pointer-events-none absolute top-0 z-0 h-9 w-auto',
       isRight ? 'right-0' : 'left-0',
       className
@@ -53,8 +53,8 @@ const TopbarClient = ({ text, link }) => {
 
   return (
     <Link
-      className={clsx(
-        'safe-paddings group relative z-50 h-9 w-full overflow-hidden px-4 py-2.5',
+      className={cn(
+        'group relative z-50 h-9 w-full overflow-hidden px-4 py-2.5 safe-paddings',
         'flex items-center justify-center',
         'border-b border-gray-new-90 bg-[#EBF5F0]',
         'focus-visible:-outline-offset-2',
@@ -66,8 +66,8 @@ const TopbarClient = ({ text, link }) => {
     >
       <div className="relative z-10 -mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
         <span
-          className={clsx(
-            'truncate text-sm font-medium leading-none tracking-extra-tight',
+          className={cn(
+            'truncate text-sm leading-none font-medium tracking-extra-tight',
             'xl:max-w-[790px] lg:max-w-[482px] sm:max-w-[calc(100vw-64px)]',
             'text-black-pure transition-colors duration-200 group-hover:text-gray-new-40',
             'dark:text-white group-hover:dark:text-gray-new-70'

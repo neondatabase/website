@@ -147,7 +147,7 @@ catch (NpgsqlException ex)
 
 Output:
 
-```cs
+```
 Sophia  5/10/2024
 James   5/10/2024
 Isabella        5/10/2024

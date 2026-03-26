@@ -24,7 +24,7 @@ To delete a row from a table in a PostgreSQL database from a C\# program, you us
 
 First, construct a [`DELETE`](../postgresql-tutorial/postgresql-delete) statement that deletes one or more rows from a specified table:
 
-```cssql
+```cs
 var sql = "DELETE.. ";
 ```
 
@@ -110,7 +110,7 @@ string connectionString = ConfigurationHelper.GetConnectionString("DefaultConnec
 
 Third, create a data source that represents the PostgreSQL database:
 
-```
+```cs
 await using var dataSource = NpgsqlDataSource.Create(connectionString);
 ```
 
@@ -142,7 +142,7 @@ catch (NpgsqlException ex)
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```cs
+```bash
 psql -U ed -d elearning
 ```
 
@@ -150,14 +150,14 @@ It’ll prompt you to enter a password for the `ed` user. Input the valid passwo
 
 Second, query the row with id 1 from the `students` table:
 
-```cs
+```sql
 SELECT * FROM students
 WHERE id = 1;
 ```
 
 Output:
 
-```cs
+```
  id | first_name | last_name | email | registration_date
 ----+------------+-----------+-------+-------------------
 (0 rows)

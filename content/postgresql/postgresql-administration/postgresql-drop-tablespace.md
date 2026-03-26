@@ -22,7 +22,7 @@ The `DROP TABLESPACE` statement delete a tablespace from a database:
 
 Here’s the syntax of the `DROP TABLE` statement:
 
-```phpsqlsql
+```sql
 DROP TABLESPACE [IF EXISTS] tablespace_name;
 ```
 
@@ -41,26 +41,26 @@ Let’s explore some examples of using the `DROP TABLESPACE` statement.
 
 First, open the Command Prompt or Terminal on a Unix\-like system and create a new directory for the tablespace such as `C:\pgdata\demo`:
 
-```sql
+```bash
 mkdir C:\pgdata\sample
 ```
 
 Next, connect to the PostgreSQL server:
 
-```
+```bash
 psql -U postgres
 ```
 
 Then, create a new tablespace called sample_ts:
 
-```
+```sql
 CREATE TABLESPACE sample_ts
 LOCATION 'C:/pgdata/demo';
 ```
 
 After that, drop the `sample_ts` tablespace using the `DROP TABLESPACE` statement:
 
-```
+```sql
 DROP TABLESPACE sample_ts;
 ```
 
@@ -74,13 +74,13 @@ exit
 
 First, create a new directory called `C:/pgdata/demo` on your server. Replace the path with the actual one that you use:
 
-```php
+```bash
 mkdir C:\pgdata\demo
 ```
 
 Second, [create a new tablespace](postgresql-create-tablespace 'PostgreSQL Creating Tablespace') named `demo` and map it to the `c:\pgdata\demo` directory.
 
-```
+```sql
 CREATE TABLESPACE demo_ts
 LOCATION 'C:/pgdata/demo';
 ```
@@ -100,7 +100,7 @@ Fourth, connect to the `demodb` database:
 
 Fifth, [create a new table](../postgresql-tutorial/postgresql-create-table 'PostgreSQL CREATE TABLE') named `test`in the `dbdemo` and set it `tablespace` to `demo_ts`:
 
-```
+```sql
 CREATE TABLE test (
   id serial PRIMARY KEY,
   title VARCHAR (255) NOT NULL
@@ -115,7 +115,7 @@ DROP TABLESPACE demo_ts;
 
 PostgreSQL issues an error:
 
-```sql
+```
 [Err] ERROR: tablespace "demo_ts" is not empty
 ```
 
@@ -129,13 +129,13 @@ Seventh, connect to the `postgres` database:
 
 Eight, drop the `demodb` database:
 
-```
+```sql
 DROP DATABASE demodb;
 ```
 
 Ninth, drop the `demo_ts` tablespace:
 
-```
+```sql
 DROP TABLESPACE demo_ts;
 ```
 

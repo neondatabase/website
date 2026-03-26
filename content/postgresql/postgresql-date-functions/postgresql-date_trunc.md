@@ -22,7 +22,7 @@ The `DATE_TRUNC()` function truncates a [`TIMESTAMP`](../postgresql-tutorial/pos
 
 Here’s the basic syntax of the `DATE_TRUNC` function:
 
-```sqlsql
+```sql
 DATE_TRUNC(field, source [,time_zone])
 ```
 
@@ -167,7 +167,7 @@ Output:
 
 The following example uses the `DATE_TRUNC()` function to count the number of rentals by staff per year:
 
-```
+```sql
 SELECT
 	staff_id,
 	date_trunc('year', rental_date) y,

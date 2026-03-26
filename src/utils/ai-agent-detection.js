@@ -71,3 +71,16 @@ export function getMarkdownPath(pathname) {
   // Build the full public path: /md/{directory}/{slug}.md
   return slug ? `${publicPath}/${mdSlug}` : `${publicPath}.md`;
 }
+
+export function buildAgent404Response(pathname) {
+  return `# Page Not Found
+
+\`${pathname}\` does not exist in Neon documentation.
+
+Find what you need:
+
+- [All Neon documentation](/docs/llms.txt): Table of contents for all Neon docs
+- [Full documentation text](/docs/llms-full.txt): Complete Neon docs in one file
+- [Neon API reference](/docs/reference/api-reference.md): API endpoints and usage
+`;
+}

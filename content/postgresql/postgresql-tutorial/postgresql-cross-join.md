@@ -34,7 +34,7 @@ Because a `CROSS JOIN` may generate a large result set, you should use it carefu
 
 Here’s the basic syntax of the `CROSS JOIN` syntax:
 
-```sqlsql
+```sql
 SELECT
   select_list
 FROM
@@ -122,7 +122,7 @@ In practice, you can find the `CROSS JOIN` useful when you need to combine data 
 
 Suppose you have a table for `employees` and `shifts`, and you want to create a schedule that lists all possible combinations of employees and shifts to explore various staffing scenarios:
 
-```
+```sql
 SELECT *
 FROM employees
 CROSS JOIN shift;

@@ -48,7 +48,7 @@ psql -U postgres
 
 Second, [create a new user role](postgresql-roles) called `joe` that can log in to the PostgreSQL server:
 
-```
+```sql
 create role joe
 login
 password 'YourPassword';
@@ -79,7 +79,7 @@ SELECT * FROM candidates;
 
 PostgreSQL issued an error:
 
-```sql
+```
 ERROR:  permission denied for table candidates
 ```
 
@@ -110,7 +110,7 @@ VALUES('Joe','Com','joe.com@example.com','408-111-2222');
 
 PostgreSQL issued the following error because `joe` does not have the `INSERT` privilege on the `candidates` table:
 
-```sql
+```
 ERROR:  permission denied for table candidates
 ```
 

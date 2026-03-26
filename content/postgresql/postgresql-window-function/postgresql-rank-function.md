@@ -24,7 +24,7 @@ For each partition, the rank of the first row is 1\. The `RANK()` function adds 
 
 The following illustrates the syntax of the `RANK()` function:
 
-```csssql
+```sql
 RANK() OVER (
     [PARTITION BY partition_expression, ... ]
     ORDER BY sort_expression [ASC | DESC], ...
@@ -42,7 +42,7 @@ The `RANK()` function can be useful for creating top\-N and bottom\-N reports.
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) named `ranks` that contains one column:
 
-```
+```sql
 CREATE TABLE ranks (
 	c VARCHAR(10)
 );
@@ -50,14 +50,14 @@ CREATE TABLE ranks (
 
 Second, [insert some rows](../postgresql-tutorial/postgresql-insert) into the `ranks` table:
 
-```
+```sql
 INSERT INTO ranks(c)
 VALUES('A'),('A'),('B'),('B'),('B'),('C'),('E');
 ```
 
 Third, query data from the `ranks` table:
 
-```
+```sql
 SELECT
 	c
 FROM
@@ -67,7 +67,7 @@ FROM
 ![PostgreSQL RANK function - sample table](/postgresqltutorial/PostgreSQL-RANK-function-sample-table.png)
 Fourth, use the `RANK()` function to assign ranks to the rows in the result set of `ranks` table:
 
-```
+```sql
 SELECT
 	c,
 	RANK () OVER (
@@ -97,7 +97,7 @@ This picture shows the data of the `products` table:
 
 This example uses the `RANK()` function to assign a rank to each product by its price:
 
-```
+```sql
 SELECT
 	product_id,
 	product_name,
@@ -118,7 +118,7 @@ The `RANK()` function calculated a rank for each row within the whole result set
 
 The following example uses the `RANK()` function to assign a rank to every product in each product group:
 
-```
+```sql
 SELECT
 	product_id,
 	product_name,

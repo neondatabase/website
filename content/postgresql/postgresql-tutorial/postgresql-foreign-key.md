@@ -38,7 +38,7 @@ To define a foreign key, you can use a foreign key constraint.
 
 The following illustrates a foreign key constraint syntax:
 
-```csssqlsql
+```sql
 [CONSTRAINT fk_name]
    FOREIGN KEY(fk_columns)
    REFERENCES parent_table(parent_key_columns)
@@ -69,7 +69,7 @@ PostgreSQL supports the following actions:
 
 The following statements create the `customers` and `contacts` tables:
 
-```shell
+```sql
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS contacts;
 
@@ -132,7 +132,7 @@ WHERE customer_id = 1;
 
 Because of the `ON DELETE NO ACTION`, PostgreSQL issues a constraint violation because the referencing rows of the customer id 1 still exist in the `contacts` table:
 
-```sql
+```
 ERROR:  update or delete on table "customers" violates foreign key constraint "fk_customer" on table "contacts"
 DETAIL:  Key (customer_id)=(1) is still referenced from table "contacts".
 SQL state: 23503
@@ -146,7 +146,7 @@ The `SET NULL` automatically sets `NULL` to the foreign key columns in the refer
 
 First, drop the sample tables and re\-create them with the foreign key that uses the `SET NULL` action in the `ON DELETE` clause:
 
-```
+```sql
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
 
@@ -217,7 +217,7 @@ The `ON DELETE CASCADE` automatically deletes all the referencing rows in the ch
 
 The following statements recreate the sample tables with the delete action of the `fk_customer` changes to `CASCADE`:
 
-```
+```sql
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
 
@@ -259,7 +259,7 @@ WHERE customer_id = 1;
 
 Because of the `ON DELETE CASCADE` action, all the referencing rows in the `contacts` table are automatically deleted:
 
-```
+```sql
 SELECT * FROM contacts;
 ```
 
@@ -280,7 +280,7 @@ The `ON DELETE SET DEFAULT` sets the default value to the foreign key column of 
 
 To add a foreign key constraint to the existing table, you use the following form of the [ALTER TABLE](postgresql-alter-table) statement:
 
-```
+```sql
 ALTER TABLE child_table
 ADD CONSTRAINT constraint_name
 FOREIGN KEY (fk_columns)

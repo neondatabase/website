@@ -6,11 +6,20 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.120Z'
+updatedOn: '2026-03-23T15:16:28.134Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
 
 <TwoColumnLayout>
 
@@ -342,3 +351,4 @@ SELECT * FROM neon_auth.user;
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Learn how to branch your auth](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory

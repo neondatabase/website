@@ -1,10 +1,10 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import GradientBorder from 'components/shared/gradient-border/index';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import everythingMobile from './images/everything-mobile.jpg';
 import everything from './images/everything.jpg';
@@ -47,12 +47,12 @@ const ITEMS = [
 ];
 
 const Usage = () => (
-  <section className="usage safe-paddings relative mt-[196px] xl:mt-[188px] lg:mt-[159px] md:mt-[102px]">
+  <section className="usage relative mt-[196px] safe-paddings xl:mt-[188px] lg:mt-[159px] md:mt-[102px]">
     <Container className="md:max-w-sm md:px-5" size="960">
-      <h2 className="font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
+      <h2 className="font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-4xl md:text-[32px]">
         Build LLM-backed applications
       </h2>
-      <p className="mt-3 max-w-lg text-balance text-lg leading-snug tracking-tight text-gray-new-70 lg:text-base md:text-wrap">
+      <p className="mt-3 max-w-lg text-lg leading-snug tracking-tight text-balance text-gray-new-70 lg:text-base md:text-wrap">
         Neon makes Postgres a powerful vector store, perfect for RAG apps that crave simplicity.
       </p>
       <Link
@@ -71,7 +71,7 @@ const Usage = () => (
             key={title}
           >
             <div>
-              <h3 className="text-2xl font-medium leading-snug tracking-extra-tight lg:text-xl md:text-xl">
+              <h3 className="text-2xl leading-snug font-medium tracking-extra-tight lg:text-xl md:text-xl">
                 {title}
               </h3>
               <p
@@ -80,7 +80,7 @@ const Usage = () => (
               />
             </div>
             <div
-              className={clsx(
+              className={cn(
                 'relative shrink-0 overflow-hidden rounded-[14px] md:-order-1',
                 index % 2 === 0 && '-order-1'
               )}

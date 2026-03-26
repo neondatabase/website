@@ -24,7 +24,7 @@ To delete data from the PostgreSQL table in Python, you use the following steps:
 
 First, [create a new database connection](connect) by calling the `connect()` function of the `psycopg2` module.
 
-```pythonsql
+```python
 conn = psycopg2.connect(config)
 ```
 
@@ -40,25 +40,25 @@ Then, execute the [DELETE](../postgresql-tutorial/postgresql-delete) statement. 
 
 The `DELETE` statement with a placeholder for the value of the `id` field is as follows:
 
-```python
+```sql
 DELETE FROM table_1 WHERE id = %s;
 ```
 
 To bind value `value1` to the placeholder, you call the `execute()` method and pass the input value as a tuple to the second parameter like the following:
 
-```sql
+```python
 cur.execute(delete_sql, (value1,))
 ```
 
 After that, save the changes to the database permanently by calling the `commit()` method of the `connection` object.
 
-```sql
+```python
 conn.commit()
 ```
 
 Finally, close the communication with the PostgreSQL database server by calling the `close()` method of the `cursor` and `connection` objects.
 
-```sql
+```python
 cur.close()
 conn.close()
 ```
@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
 Now we run the Python program to delete the part with the part id 1\.
 
-```python
+```bash
 python delete.py
 ```
 
@@ -116,7 +116,7 @@ The number of deleted rows:  1
 
 Retrieve data from the `parts` table again to confirm the deletion:
 
-```
+```sql
 SELECT * FROM parts;
 ```
 

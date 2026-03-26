@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
+import { cn } from 'utils/cn';
 
 import MenuBanner from '../menu-banner';
 
@@ -17,13 +17,13 @@ const Submenu = ({
   handleSubmenuLeave,
 }) => (
   <div
-    className={clsx(
-      'main-navigation-submenu absolute left-0 top-full z-40 -mt-px w-full overflow-hidden',
+    className={cn(
+      'main-navigation-submenu absolute top-full left-0 z-40 -mt-px w-full overflow-hidden',
       'border-b border-gray-new-20 bg-black-pure',
       'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
       {
         'pointer-events-none': activeMenuIndex === null,
-        '!pointer-events-auto': activeMenuIndex !== null,
+        'pointer-events-auto!': activeMenuIndex !== null,
       }
     )}
     style={{ height: `${containerHeight}px` }}
@@ -38,8 +38,8 @@ const Submenu = ({
 
         return (
           <div
-            className={clsx(
-              'absolute left-0 top-0 w-full',
+            className={cn(
+              'absolute top-0 left-0 w-full',
               'transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
               isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
             )}
@@ -52,7 +52,7 @@ const Submenu = ({
           >
             {sections.length > 0 && (
               <Container
-                className="flex w-full gap-x-40 overflow-hidden pb-20 pt-7 xl:gap-x-8"
+                className="flex w-full gap-x-40 overflow-hidden pt-7 pb-20 xl:gap-x-8"
                 size="1920"
               >
                 <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-5 xl:pl-[143px]" role="menu">
@@ -60,7 +60,7 @@ const Submenu = ({
                     <li key={sectionIndex} role="none">
                       {title && (
                         <span
-                          className="mb-6 block text-[10px] font-medium uppercase leading-none tracking-snug text-gray-new-50"
+                          className="mb-6 block text-[10px] leading-none font-medium tracking-snug text-gray-new-50 uppercase"
                           id={`submenu-${index}-section-${sectionIndex}`}
                         >
                           {title}
@@ -76,7 +76,7 @@ const Submenu = ({
                         {items?.map(({ title, description, to, isExternal }) => (
                           <li key={title} role="none">
                             <Link
-                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60  transition-colors duration-200 hover:text-gray-new-80`}
+                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60 transition-colors duration-200 hover:text-gray-new-80`}
                               to={to}
                               isExternal={isExternal}
                               tagName="Navigation"
@@ -85,7 +85,7 @@ const Submenu = ({
                               tabIndex={isActive ? 0 : -1}
                               onKeyDown={handleSubmenuNavigation(index)}
                             >
-                              <span className="text-lg font-medium leading-none text-white group-hover:text-gray-new-80">
+                              <span className="text-lg leading-none font-medium text-white group-hover:text-gray-new-80">
                                 {title}
                               </span>
                               {description}
