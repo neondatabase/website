@@ -6,7 +6,6 @@ const {
 } = require('../constants/docs-versioned-slugs');
 const {
   DOCS_DEFAULT_VERSION_ID,
-  DOCS_LATEST_VERSION_ID,
   DOCS_VERSIONS,
 } = require('../constants/docs-versions');
 
@@ -25,7 +24,7 @@ const getLatestContentReadyVersionId = () => {
 };
 
 const resolveLatestDocsVersionId = () => {
-  const configuredLatestVersion = docsVersionsById[DOCS_LATEST_VERSION_ID];
+  const configuredLatestVersion = docsVersionsById[DOCS_DEFAULT_VERSION_ID];
   if (configuredLatestVersion?.isContentReady) {
     return configuredLatestVersion.id;
   }
