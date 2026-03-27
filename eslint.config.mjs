@@ -37,8 +37,8 @@ export default [
   },
 
   {
-    files: ['cypress/**/*.{js,jsx}'],
     ...cypressPlugin.configs.recommended,
+    files: ['cypress/**/*.{js,jsx}'],
   },
 
   {
