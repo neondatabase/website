@@ -1059,6 +1059,8 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Usage and cost calculations
+          slug: introduction/usage-calculations
         - title: Cost optimization
           slug: introduction/cost-optimization
         - title: Network transfer costs
