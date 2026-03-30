@@ -271,6 +271,15 @@ function generateIndexText(organized, collapsedEntries = []) {
     lines.push('');
   }
 
+  if (config.commonQueries && config.commonQueries.length > 0) {
+    lines.push('## Common Queries');
+    lines.push('');
+    for (const q of config.commonQueries) {
+      lines.push(`- ${q.label}: ${q.url}`);
+    }
+    lines.push('');
+  }
+
   const sections = getSectionOrder(organized);
 
   for (const section of sections) {

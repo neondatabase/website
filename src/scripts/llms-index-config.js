@@ -25,6 +25,13 @@ module.exports = {
     'This is the primary index. Sections with many pages show key pages and link to full sub-indexes.',
   ].join(' '),
 
+  // Quick-reference links emitted as "## Common Queries" before the section list.
+  commonQueries: [
+    { label: 'Pricing & Plans', url: 'https://neon.com/docs/introduction/plans.md' },
+    { label: 'Regions', url: 'https://neon.com/docs/introduction/regions.md' },
+    { label: 'API Reference', url: 'https://neon.com/docs/reference/api-reference.md' },
+  ],
+
   // Sections in display order. Unlisted sections append alphabetically at the end.
   //   name:        must match the derived section name (from directory path or route key)
   //   description: optional text below the ## heading (omit for no description)
