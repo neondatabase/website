@@ -1,5 +1,3 @@
- 
- 
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
