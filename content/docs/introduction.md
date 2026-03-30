@@ -4,6 +4,12 @@ summary: >-
   How to set up Neon, a serverless Postgres solution, with commands for
   launching, signing up, connecting to tech stacks, and integrating branching
   into workflows.
+redirectFrom:
+  - /guides/neon-azure-integration
+  - /guides/azure-service-connector
+  - /guides/azure-todo-static-web-app
+  - /guides/azure-functions-referral-system
+  - /guides/neon-mcp-server-github-copilot-vs-code
 updatedOn: '2026-03-14T03:21:15.122Z'
 ---
 
