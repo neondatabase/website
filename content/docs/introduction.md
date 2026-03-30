@@ -9,7 +9,6 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-  - /guides/neon-mcp-server-github-copilot-vs-code
 updatedOn: '2026-03-14T03:21:15.122Z'
 ---
 
