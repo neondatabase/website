@@ -36,8 +36,8 @@ let middleware;
 
 describe('Middleware - AI Agent Integration Tests', () => {
   beforeAll(async () => {
-    const middlewareModule = await import('./middleware.js');
-    middleware = middlewareModule.middleware;
+    const middlewareModule = await import('./proxy.js');
+    middleware = middlewareModule.proxy;
   });
   beforeEach(() => {
     vi.clearAllMocks();
@@ -212,6 +212,49 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(global.fetch).toHaveBeenCalled();
       expect(response.type).toBe('next');
+    });
+  });
+
+  describe('Direct .md URL handling for non-agent requests', () => {
+    it('should serve markdown directly for existing .md URLs', async () => {
+      const req = createMockRequest(
+        '/docs/introduction/existing-doc.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      global.fetch.mockResolvedValueOnce({
+        ok: true,
+        text: () => Promise.resolve('# Existing doc'),
+      });
+
+      const response = await middleware(req);
+
+      expect(response).toBeInstanceOf(Response);
+      expect(response.status).toBe(200);
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+      expect(await response.text()).toContain('# Existing doc');
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    it('should return markdown 404 page for non-agent .md URLs that do not exist', async () => {
+      const req = createMockRequest(
+        '/docs/introduction/foobar.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      global.fetch.mockResolvedValueOnce({ ok: false, status: 404 });
+
+      const response = await middleware(req);
+
+      expect(response).toBeInstanceOf(Response);
+      expect(response.status).toBe(404);
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(response.headers.get('X-Content-Source')).toBe('md-404');
+      expect(await response.text()).toContain('/docs/introduction/foobar.md');
+      expect(global.fetch).toHaveBeenCalledTimes(1);
     });
   });
 
