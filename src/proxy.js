@@ -224,6 +224,7 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/llms/:path*', // Legacy .txt redirect
+    '/pricing', // Agent-friendly pricing page
     '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
   ],
 };
