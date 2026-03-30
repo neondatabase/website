@@ -19,7 +19,7 @@ const Submenu = ({
   <div
     className={cn(
       'main-navigation-submenu absolute top-full left-0 z-40 -mt-px w-full overflow-hidden',
-      'border-b border-gray-new-20 bg-black-pure',
+      'border-b border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure',
       'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
       {
         'pointer-events-none': activeMenuIndex === null,
@@ -76,7 +76,7 @@ const Submenu = ({
                         {items?.map(({ title, description, to, isExternal }) => (
                           <li key={title} role="none">
                             <Link
-                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60 transition-colors duration-200 hover:text-gray-new-80`}
+                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60`}
                               to={to}
                               isExternal={isExternal}
                               tagName="Navigation"
@@ -85,7 +85,7 @@ const Submenu = ({
                               tabIndex={isActive ? 0 : -1}
                               onKeyDown={handleSubmenuNavigation(index)}
                             >
-                              <span className="text-lg leading-none font-medium text-white group-hover:text-gray-new-80">
+                              <span className="text-lg leading-none font-medium text-black-pure transition-colors duration-200 group-hover:text-gray-new-20 dark:text-white dark:group-hover:text-gray-new-80">
                                 {title}
                               </span>
                               {description}

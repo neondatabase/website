@@ -54,7 +54,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
             isDocs && 'size-8 justify-center border border-gray-new-60 dark:border-gray-new-40',
             isDocs
               ? 'rounded-full text-gray-new-10 hover:border-black-new hover:text-black-new dark:text-gray-new-90 dark:hover:border-gray-new-40 dark:hover:text-white'
-              : 'rounded-sm text-white hover:text-gray-new-70'
+              : 'rounded-sm text-black-pure hover:text-gray-new-30 dark:text-white dark:hover:text-gray-new-70'
           )}
           key={id}
           to={to}
@@ -66,7 +66,8 @@ const Sidebar = ({ isClient, isDocs, className }) => (
             width={18}
             height={18}
             className={cn(
-              !isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'
+              !isDocs &&
+                'text-gray-new-20 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 dark:group-hover:text-gray-new-80'
             )}
           />
           {!isDocs && (

@@ -296,7 +296,7 @@ Manual snapshot limits per plan:
 - **Launch**: 10 manual snapshots
 - **Scale**: 10 manual snapshots
 
-**Pricing**: Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
+**Pricing**: Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
 
 Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
 
@@ -540,7 +540,7 @@ Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
 
 How is storage charged for snapshots?
-: Snapshots are currently free during beta and will be charged based on GB-month storage at a rate lower than standard project storage after general availability.
+: Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
 
 Is storage cost different for archived branches?
 : No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.

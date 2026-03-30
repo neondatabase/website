@@ -55,6 +55,7 @@ The response includes metrics that map directly to usage-based billing line item
 - **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days, and 1 year, respectively.
 - **`org_id`** (string, required): Organization for which the project consumption metrics should be returned.
+- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 
 ### Date format, range, and granularity
 
@@ -72,7 +73,6 @@ Date-time values are automatically rounded according to the specified granularit
 
 ### Optional parameters
 
-- **`metrics`** (array of strings): List of metrics to include in the response. If omitted, all metrics are returned. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 - **`project_ids`** (array of strings, 0-100 items): Filter to specific project IDs. If omitted, the response contains all projects. Can be an array of parameter values or a comma-separated list in a single parameter value.
 - **`limit`** (integer, 1-100): Number of projects in the response. Default: `10`.
 - **`cursor`** (string): Cursor value from the previous response to get the next batch of projects.

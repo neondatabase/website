@@ -24,7 +24,7 @@ const ChangelogPost = (post) => {
         )}
       >
         <Link
-          className="absolute top-10 right-0 -left-40 shrink-0 font-mono text-[13px] leading-none font-medium whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
+          className="absolute top-7 right-0 -left-40 shrink-0 font-mono text-[13px] leading-none font-medium whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
           to={changelogPath}
         >
           <div className="flex w-32 items-center gap-1.5 py-[15px]">

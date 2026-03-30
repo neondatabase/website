@@ -82,6 +82,19 @@ Both endpoints return the configuration in the same format:
 }
 ```
 
+### Delete a webhook
+
+To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Neon Auth's default delivery behavior for all events.
+
+```bash
+curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -d '{
+    "enabled": false
+  }'
+```
+
 ## Payload structure
 
 All events share a common JSON envelope:

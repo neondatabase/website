@@ -26,7 +26,7 @@ const HeaderWrapper = ({
     <div
       className={cn(
         'navigation-overlay',
-        'pointer-events-none fixed inset-0 z-40 bg-black-pure/80 opacity-0 transition-opacity delay-150 duration-200'
+        'pointer-events-none fixed inset-0 z-40 bg-white/80 opacity-0 transition-opacity delay-150 duration-200 dark:bg-black-pure/80'
       )}
     />
   </>
