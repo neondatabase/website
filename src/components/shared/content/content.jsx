@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import ChatOptions from 'components/pages/doc/chat-options';
@@ -80,7 +79,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       <table {...props} />
     </div>
   ),
-  undefined: (props) => <Fragment {...props} />,
+  undefined: (props) => <>{props.children}</>,
   pre: (props) => {
     const codeElement = props?.children;
     const code = codeElement?.props?.children;
