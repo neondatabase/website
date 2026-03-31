@@ -28,7 +28,7 @@ const Topbar = async () => {
     if (!topbar?.text || !topbar?.link) return null;
 
     return <TopbarClient {...topbar} />;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 };

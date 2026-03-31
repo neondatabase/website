@@ -59,8 +59,9 @@ export async function GET(request) {
           height="630"
           src={backgroundData}
           style={{ position: 'absolute', top: 0, left: 0 }}
+          alt=""
         />
-        {hasLogo && <img width="199" height="56" src={logoData} />}
+        {hasLogo && <img width="199" height="56" src={logoData} alt="" />}
         <div
           style={{
             display: 'flex',

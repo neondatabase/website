@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';

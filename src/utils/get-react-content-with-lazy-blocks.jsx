@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
@@ -21,7 +20,7 @@ function isJSON(string) {
 
   try {
     JSON.parse(string);
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 
@@ -213,9 +212,12 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const props = transformProps(attributesToProps(domNode.attribs));
           const children = domToReact(domNode.children);
           return (
-            <video {...props} playsInline={props.playsInline ?? true} crossOrigin="anonymous">
-              {children}
-            </video>
+            <>
+              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+              <video {...props} playsInline={props.playsInline ?? true} crossOrigin="anonymous">
+                {children}
+              </video>
+            </>
           );
         }
 

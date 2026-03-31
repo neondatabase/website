@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
 import { BLOG_BASE_PATH } from 'constants/blog';

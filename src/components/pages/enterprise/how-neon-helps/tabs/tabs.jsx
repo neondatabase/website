@@ -3,7 +3,7 @@
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import infoIcon from 'icons/enterprise/info.svg';
 import lampIcon from 'icons/enterprise/lamp.svg';

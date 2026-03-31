@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
@@ -155,6 +155,8 @@ const Link = forwardRef(
     );
   }
 );
+
+Link.displayName = 'Link';
 
 Link.propTypes = {
   className: PropTypes.string,

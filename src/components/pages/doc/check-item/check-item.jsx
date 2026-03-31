@@ -1,7 +1,6 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React from 'react';
 import slugify from 'slugify';
 
 import Link from 'components/shared/link';

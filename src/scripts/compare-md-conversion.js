@@ -87,7 +87,7 @@ Options:
     try {
       execSync(`diff -u "${inputPath}" "${tempFile}"`, { stdio: 'inherit' });
       console.log('(no differences)');
-    } catch (e) {
+    } catch (_e) {
       // diff returns exit code 1 when there are differences
     }
   }
@@ -104,7 +104,7 @@ Options:
       try {
         execSync(`diff -u "${pythonPath}" "${tempFile}"`, { stdio: 'inherit' });
         console.log('(no differences)');
-      } catch (e) {
+      } catch (_e) {
         // diff returns exit code 1 when there are differences
       }
     }

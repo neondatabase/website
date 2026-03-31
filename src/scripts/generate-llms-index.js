@@ -76,7 +76,7 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
     let entries;
     try {
       entries = await fs.readdir(currentPath, { withFileTypes: true });
-    } catch (err) {
+    } catch (_err) {
       return;
     }
 

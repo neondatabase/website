@@ -2,7 +2,6 @@
 
 import * as Toast from '@radix-ui/react-toast';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import { cn } from 'utils/cn';
 

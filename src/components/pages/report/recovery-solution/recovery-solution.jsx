@@ -51,7 +51,7 @@ const RecoverySolution = () => (
           target="_blank"
           rel="noreferrer"
         >
-          Here's a demo →
+          Here&apos;s a demo →
         </a>
       </p>
     </Container>

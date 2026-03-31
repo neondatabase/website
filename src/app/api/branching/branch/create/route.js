@@ -4,7 +4,6 @@ import LINKS from 'constants/links';
 
 import { handleInsertBranchConnection, scheduleBranchDeletion } from '../../utils';
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST() {
   try {
     const start = performance.now();

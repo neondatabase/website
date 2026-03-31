@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Container from 'components/shared/container';
 import { cn } from 'utils/cn';

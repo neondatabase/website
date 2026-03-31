@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 
 import { CodeTabsContext } from 'contexts/code-tabs-context';
 import { cn } from 'utils/cn';

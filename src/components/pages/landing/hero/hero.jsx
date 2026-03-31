@@ -28,7 +28,7 @@ const Hero = ({
   detailsLabel,
   detailsTitle,
   detailsDescription,
-  isAzurePage,
+  isAzurePage: _isAzurePage,
   ...restProps
 }) => {
   const fieldGroups = formData?.formFieldGroups;

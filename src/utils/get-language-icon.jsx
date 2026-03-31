@@ -51,7 +51,6 @@ const LANGUAGE_ICON_MAP = {
   kotlin: SiKotlin,
   csharp: TbBrandCSharp,
   'c#': TbBrandCSharp,
-  kotlin: SiKotlin,
   cpp: SiCplusplus,
   elixir: SiElixir,
   terraform: SiTerraform,

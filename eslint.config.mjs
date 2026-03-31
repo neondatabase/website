@@ -59,6 +59,8 @@ export default [
     },
     settings: {
       'import/resolver': { node: { paths: ['src'] } },
+      'import/internal-regex':
+        '^(app|components|constants|contexts|hooks|icons|images|lib|styles|utils)/',
       react: { version: 'detect' },
     },
     rules: {
@@ -81,11 +83,19 @@ export default [
       'import/no-unresolved': 'off',
       'import/named': 'off',
       'import/order': [
-        'error',
+        'warn',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
         },
       ],
       'jsx-a11y/label-has-associated-control': [

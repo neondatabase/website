@@ -8,7 +8,6 @@ const requestSchema = yup.object({
   branchId: yup.string().required('Branch ID is required'),
 });
 
-// eslint-disable-next-line import/prefer-default-export
 async function handler(request) {
   try {
     const body = await request.json();

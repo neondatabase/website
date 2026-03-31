@@ -26,7 +26,6 @@ const copySvgToClipboard = async () => {
     const svgContent = await response.text();
     copyToClipboard(svgContent);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Failed to copy SVG content: ', error);
   }
 };

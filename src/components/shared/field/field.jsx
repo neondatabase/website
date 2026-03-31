@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import warningIcon from 'icons/input-warning.svg';
 import { cn } from 'utils/cn';
@@ -115,6 +115,8 @@ const Field = forwardRef(
     </div>
   )
 );
+
+Field.displayName = 'Field';
 
 Field.propTypes = {
   className: PropTypes.string,

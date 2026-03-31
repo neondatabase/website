@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
   TimeScale,
+  // eslint-disable-next-line import/namespace
 } from 'chart.js';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState, useCallback } from 'react';

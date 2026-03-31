@@ -54,7 +54,7 @@ const ExternalCode = async ({
         {parse(html)}
       </CodeBlockWrapper>
     );
-  } catch (error) {
+  } catch (_error) {
     return <FallbackMessage url={url} />;
   }
 };

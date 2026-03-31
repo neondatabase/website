@@ -4,7 +4,6 @@ import BlogPostCard from 'components/pages/blog/blog-post-card';
 import { cn } from 'utils/cn';
 
 const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => {
-  // eslint-disable-next-line no-unused-vars
   const { isFeatured: _, ...postProps } = post;
 
   return (

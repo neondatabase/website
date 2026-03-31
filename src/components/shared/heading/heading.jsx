@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from 'utils/cn';
 
@@ -86,6 +86,8 @@ const Heading = forwardRef(
     );
   }
 );
+
+Heading.displayName = 'Heading';
 
 HeadingBadge.propTypes = {
   text: PropTypes.string.isRequired,
