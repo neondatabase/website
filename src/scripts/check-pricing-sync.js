@@ -293,7 +293,8 @@ const CROSS_SOURCE_CHECKS = [
   { id: 'autoscaling-scale', label: 'Autoscaling / Sizes (Scale)',
     comp: 'Sizes', docs: 'Autoscaling', plan: 'scale',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
-    agentLabel: 'Autoscaling' },
+    agentLabel: 'Autoscaling',
+    agentValue: () => 'Autoscaling up to 16 CU; fixed up to 56 CU (224 GB RAM)' },
   { id: 'scale-to-zero-free', label: 'Scale to zero (Free)',
     comp: 'Scale to zero', docs: 'Scale to zero', plan: 'free',
     norm: extractCore(/after (\d+)\s*min/i, 'After $1 min'),
@@ -600,10 +601,11 @@ function generatePricingMarkdown(componentData, docsTable) {
   lines.push('- Free plan quotas (100 CU-hours, 0.5 GB) are per project; compute suspends when monthly limits are reached.');
   lines.push('- Read replicas are separate computes and count toward CU-hours.');
   lines.push('- To control costs, set autoscaling limits and keep scale-to-zero enabled. Suspended computes do not accrue CU-hours.');
+  lines.push("- Scale's higher CU-hour rate covers its additional production features. No separate fees for features listed in the table.");
   lines.push('- Child branch storage is billed on the minimum of accumulated changes or logical data size. Paid plans: up to 16 TB per branch.');
   lines.push('- Instant restore storage is charged only on root branches, not child branches.');
   lines.push('- Snapshots are free during Beta; $0.09/GB-month starting May 1, 2026.');
-  lines.push('- Max branches per project is 5,000 on paid plans (10/25 included; Free max is 10).');
+  lines.push('- Max branches per project is 5,000 on paid plans (10/25 included). Free is capped at 10.');
   lines.push('- Public network transfer includes data sent via logical replication.');
   lines.push('- Early-stage startups can apply for credits: https://neon.com/startups');
   lines.push('- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md');
