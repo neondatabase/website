@@ -595,6 +595,8 @@ function generatePricingMarkdown(componentData, docsTable) {
   }
 
   lines.push('');
+  lines.push('All plans include: multi-AZ storage, autoscaling, database branching, read replicas, connection pooling via PgBouncer, Postgres extensions (pgvector, PostGIS, TimescaleDB, etc.), full management API and CLI, and a Data API for querying over HTTP.');
+  lines.push('');
   lines.push('Notes:');
   lines.push('- "-" means the feature is not available on that plan.');
   lines.push('- No monthly minimum on paid plans. Invoices under $0.50 are not collected.');
@@ -608,6 +610,7 @@ function generatePricingMarkdown(componentData, docsTable) {
   lines.push('- Max branches per project is 5,000 on paid plans (10/25 included). Free is capped at 10.');
   lines.push('- Public network transfer includes data sent via logical replication.');
   lines.push('- Early-stage startups can apply for credits: https://neon.com/startups');
+  lines.push('- Open source program: credits, referrals, and promotion for Postgres OSS projects: https://neon.com/programs/open-source.md');
   lines.push('- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md');
 
   lines.push('');
