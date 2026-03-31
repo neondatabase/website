@@ -27,7 +27,7 @@ module.exports = {
 
   // Quick-reference links emitted as "## Common Queries" before the section list.
   commonQueries: [
-    { label: 'Pricing & Plans', url: 'https://neon.com/pricing.md' },
+    { label: 'Pricing and Plans', url: 'https://neon.com/pricing.md' },
     { label: 'Regions', url: 'https://neon.com/docs/introduction/regions.md' },
     { label: 'API Reference', url: 'https://neon.com/docs/reference/api-reference.md' },
   ],
