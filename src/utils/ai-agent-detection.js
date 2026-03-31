@@ -3,6 +3,10 @@
 
 import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
 
+const ROUTE_ALIASES = {
+  pricing: '/md/docs/introduction/plans.md',
+};
+
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
   const accept = request.headers.get('accept') || '';
@@ -44,6 +48,8 @@ export function isAIAgentRequest(request) {
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
+
+  if (ROUTE_ALIASES[path]) return ROUTE_ALIASES[path];
 
   // Early return for excluded routes and files
   const isExcluded =

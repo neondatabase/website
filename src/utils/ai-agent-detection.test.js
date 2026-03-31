@@ -231,9 +231,21 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for /pricing', () => {
-      const result = getMarkdownPath('/pricing');
+    it('should return null for /blog', () => {
+      const result = getMarkdownPath('/blog');
       expect(result).toBeNull();
+    });
+  });
+
+  describe('Route aliases', () => {
+    it('should resolve /pricing to the plans doc', () => {
+      const result = getMarkdownPath('/pricing');
+      expect(result).toBe('/md/docs/introduction/plans.md');
+    });
+
+    it('should resolve /pricing/ with trailing slash', () => {
+      const result = getMarkdownPath('/pricing/');
+      expect(result).toBe('/md/docs/introduction/plans.md');
     });
   });
 

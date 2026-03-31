@@ -672,6 +672,7 @@ const defaultConfig = {
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
+        { source: '/pricing.md', destination: '/md/docs/introduction/plans.md' },
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

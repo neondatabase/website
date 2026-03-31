@@ -224,6 +224,7 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/llms/:path*', // Legacy .txt redirect
+    '/pricing', // Alias to /docs/introduction/plans markdown
     '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
   ],
 };
