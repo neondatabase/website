@@ -596,13 +596,17 @@ function generatePricingMarkdown(componentData, docsTable) {
   lines.push('');
   lines.push('Notes:');
   lines.push('- "-" means the feature is not available on that plan.');
-  lines.push('- No monthly minimum on paid plans. You pay only for what you use.');
-  lines.push('- Free plan quotas (100 CU-hours, 0.5 GB) are per project. Paid plans meter from zero independently.');
-  lines.push('- To control costs, set autoscaling limits (acts as a cost ceiling) and keep scale-to-zero enabled on non-production branches.');
-  lines.push('- Branches are like git branches for your database: used for dev/test, preview environments, and migrations.');
-  lines.push('- Auth refers to Neon Auth, a built-in authentication layer (https://neon.com/docs/auth/overview.md).');
-  lines.push('- Early-stage startups with venture funding can apply for credits: https://neon.com/startups');
-  lines.push('- There is also an Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md');
+  lines.push('- No monthly minimum on paid plans. Invoices under $0.50 are not collected.');
+  lines.push('- Free plan quotas (100 CU-hours, 0.5 GB) are per project; compute suspends when monthly limits are reached.');
+  lines.push('- Read replicas are separate computes and count toward CU-hours.');
+  lines.push('- To control costs, set autoscaling limits and keep scale-to-zero enabled. Suspended computes do not accrue CU-hours.');
+  lines.push('- Child branch storage is billed on the minimum of accumulated changes or logical data size. Paid plans: up to 16 TB per branch.');
+  lines.push('- Instant restore storage is charged only on root branches, not child branches.');
+  lines.push('- Snapshots are free during Beta; $0.09/GB-month starting May 1, 2026.');
+  lines.push('- Max branches per project is 5,000 on paid plans (10/25 included; Free max is 10).');
+  lines.push('- Public network transfer includes data sent via logical replication.');
+  lines.push('- Early-stage startups can apply for credits: https://neon.com/startups');
+  lines.push('- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md');
 
   lines.push('');
   lines.push('Get started: https://neon.com/signup');
