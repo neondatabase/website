@@ -685,4 +685,15 @@ You can find the source code for the applications described in this guide on Git
 - [tokio-postgres crate documentation](https://docs.rs/tokio-postgres/latest/tokio_postgres/)
 - [Tokio async runtime](https://tokio.rs/)
 
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- The TLS/SSL connector setup is mandatory. Neon requires a secure connection, and the `postgres-openssl` and `openssl` crates must be included. The connection will fail without the `SslConnector` / `MakeTlsConnector` setup shown in the examples.
+- Mutability matters for transactions. In the synchronous `postgres` crate, both the `client` and the `transaction` must be declared as `mut`. In `tokio-postgres`, the `client` must be `mut` to call `.transaction()`, but the returned transaction object is not `mut`. Getting this wrong causes compile errors.
+- Use `dotenvy` (not `dotenv`) for loading `.env` files. The `dotenv` crate is unmaintained; `dotenvy` is the actively maintained fork.
+- Always use parameterized queries (`$1`, `$2`, etc.) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings.
+- Do not hardcode credentials in `.rs` files. Use environment variables via `dotenvy` and `std::env::var`. For more information, see [Security overview](/docs/security/security-overview).
+
+</details>
+
 <NeedHelp/>
