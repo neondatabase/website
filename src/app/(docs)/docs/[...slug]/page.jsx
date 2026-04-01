@@ -52,20 +52,6 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
   const legacyDocsPath = getDocsContentPathForVersion(legacyVersion);
   const slugVersioningMode = getDocsSlugVersioningMode(currentSlug);
 
-  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LEGACY_ONLY) {
-    if (hasVersionPrefix) {
-      redirect(`${LINKS.docs}/${currentSlug}`);
-    }
-
-    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
-    return {
-      post: legacyPost,
-      effectiveVersion: legacyVersion,
-      sourceDocsDirPath: legacyDocsPath,
-      supportsVersioning: false,
-    };
-  }
-
   if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
     if (hasVersionPrefix) {
       redirect(`${LINKS.docs}/${currentSlug}`);
@@ -133,17 +119,7 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
     };
   }
 
-  if (hasVersionPrefix) {
-    redirect(`${LINKS.docs}/${currentSlug}`);
-  }
-
-  const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
-  return {
-    post: legacyPost,
-    effectiveVersion: legacyVersion,
-    sourceDocsDirPath: legacyDocsPath,
-    supportsVersioning: false,
-  };
+  return null;
 };
 
 const resolveSidebarContext = async ({ currentSlug, sourceDocsDirPath }) => {

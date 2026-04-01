@@ -2,7 +2,8 @@ const fs = require('fs');
 
 const slugify = require('slugify');
 
-const sharedMdxComponents = require('../../content/docs/shared-content');
+const sharedMdxComponents = require('../../content/docs-v2/shared-content');
+const { DOCS_DIR_PATH } = require('../constants/content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
@@ -104,7 +105,7 @@ const getTableOfContents = (content) => {
     const props = parseProps(propsString);
 
     const fileName = sharedMdxComponents[componentName];
-    const mdFilePath = `content/docs/${fileName}.md`;
+    const mdFilePath = `${DOCS_DIR_PATH}/${fileName}.md`;
 
     // Check if the MD file exists
     if (fs.existsSync(mdFilePath)) {

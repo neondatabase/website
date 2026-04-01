@@ -14,7 +14,7 @@ const DOCS_VERSIONS = [
     id: 'v1',
     label: 'Version 1',
     release: '1.13.4',
-    docsContentPath: 'content/docs',
+    docsContentPath: 'content/docs-v1',
     isContentReady: true,
     isDeprecated: true,
   },

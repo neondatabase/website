@@ -1,5 +1,5 @@
 const CONTENT_DIR_PATH = 'content';
-const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs`;
+const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs-v2`;
 const GUIDES_DIR_PATH = `${CONTENT_DIR_PATH}/guides`;
 const BRANCHING_DIR_PATH = `${CONTENT_DIR_PATH}/branching`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;

@@ -80,9 +80,6 @@ const getDocsSlugVersioningMode = (slug) => {
   return rule?.mode || DOCS_DEFAULT_SLUG_VERSIONING_MODE;
 };
 
-const isLegacyOnlyDocsSlug = (slug) =>
-  getDocsSlugVersioningMode(slug) === DOCS_SLUG_VERSIONING_MODES.LEGACY_ONLY;
-
 const isLatestOnlyDocsSlug = (slug) =>
   getDocsSlugVersioningMode(slug) === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY;
 
@@ -179,7 +176,6 @@ module.exports = {
   resolveDocsVersion,
   normalizeDocsSlug,
   getDocsSlugVersioningMode,
-  isLegacyOnlyDocsSlug,
   isLatestOnlyDocsSlug,
   parseDocsVersionedSlug,
   stripDocsVersionFromPathname,

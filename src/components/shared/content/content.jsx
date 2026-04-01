@@ -55,7 +55,7 @@ import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import { cn } from 'utils/cn';
 
-import sharedMdxComponents from '../../../../content/docs/shared-content';
+import sharedMdxComponents from '../../../../content/docs-v2/shared-content';
 import FeatureList from '../feature-list';
 import LogosSection from '../grid-features/logos-section';
 import QuickLinks from '../quick-links';

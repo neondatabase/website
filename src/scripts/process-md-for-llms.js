@@ -296,7 +296,7 @@ function loadSharedContent(templateName, props = {}) {
     return [];
   }
 
-  const templatePath = path.join(projectRoot, 'content/docs/shared-content', `${templateName}.md`);
+  const templatePath = path.join(projectRoot, 'content/docs-v2/shared-content', `${templateName}.md`);
 
   // Check cache first
   let rawContent = sharedContentCache.get(templatePath);

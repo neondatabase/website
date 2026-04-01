@@ -1,12 +1,11 @@
 const DOCS_SLUG_VERSIONING_MODES = {
-  LEGACY_ONLY: 'legacy-only',
   DUAL: 'dual',
   LATEST_ONLY: 'latest-only',
 };
 
 // Default mode for slugs without an explicit rule.
-// Current rollout keeps most docs on legacy content.
-const DOCS_DEFAULT_SLUG_VERSIONING_MODE = DOCS_SLUG_VERSIONING_MODES.LEGACY_ONLY;
+// Most docs live only in docs-v2 (latest); only explicitly versioned slugs use legacy.
+const DOCS_DEFAULT_SLUG_VERSIONING_MODE = DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY;
 
 // Per-slug overrides for docs versioning behavior.
 // Use DUAL while both versions are kept live behind a switcher.

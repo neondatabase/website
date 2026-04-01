@@ -461,12 +461,8 @@ function selectCanonicalDocByMode({ docPath, latestDoc, legacyDoc }) {
     return latestDoc || legacyDoc || null;
   }
 
-  if (mode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
-    return latestDoc || legacyDoc || null;
-  }
-
-  // LEGACY_ONLY (default): canonical /docs route serves legacy docs.
-  return legacyDoc || null;
+  // LATEST_ONLY (default)
+  return latestDoc || legacyDoc || null;
 }
 
 async function main() {

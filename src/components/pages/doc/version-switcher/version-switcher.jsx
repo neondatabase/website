@@ -118,7 +118,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
           </span>
         </span>
 
-        <img src={chevronsUpDownIcon} alt="" className="size-4 shrink-0" />
+        <img src={chevronsUpDownIcon.src} alt="" className="size-4 shrink-0" />
       </button>
       {isOpen && (
         <div className="absolute -inset-x-2.5 z-20 mt-1 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-new">
