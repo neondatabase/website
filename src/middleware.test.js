@@ -256,6 +256,38 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(await response.text()).toContain('/docs/introduction/foobar.md');
       expect(global.fetch).toHaveBeenCalledTimes(1);
     });
+
+    it('should pass through static .md files under docs/ai/ without rewriting', async () => {
+      const req = createMockRequest(
+        '/docs/ai/skills/neon-postgres/references/neon-serverless.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      const response = await middleware(req);
+
+      const markdownFetchCalls = global.fetch.mock.calls.filter(
+        ([url]) => url !== 'https://neonapi.io/t.js'
+      );
+      expect(markdownFetchCalls).toHaveLength(0);
+      expect(response.type).toBe('next');
+    });
+
+    it('should pass through static .md files under docs/ai/ for AI agents too', async () => {
+      const req = createMockRequest(
+        '/docs/ai/skills/neon-postgres/references/neon-serverless.md',
+        'Claude/1.0',
+        'text/html'
+      );
+
+      const response = await middleware(req);
+
+      const markdownFetchCalls = global.fetch.mock.calls.filter(
+        ([url]) => url !== 'https://neonapi.io/t.js'
+      );
+      expect(markdownFetchCalls).toHaveLength(0);
+      expect(response.type).toBe('next');
+    });
   });
 
   describe('Response headers validation', () => {
