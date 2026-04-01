@@ -64,7 +64,7 @@ For your .NET project, you will create a project directory and add the required 
 
 ## Store your Neon connection string
 
-This application uses `appsettings.json` for configuration, which is the standard .NET approach. You do not need a `.env` file for this guide.
+Create a file named `appsettings.json` in your project's root directory. This is the standard .NET approach for storing configuration data like connection strings.
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
 2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
@@ -497,7 +497,8 @@ You can find the source code for the application described in this guide on GitH
 - Always use parameterized queries (`@param` placeholders) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings. This prevents SQL injection.
 - Wrap related database operations in a transaction (`BeginTransactionAsync` / `CommitAsync` / `RollbackAsync`). Always call `RollbackAsync` in the catch block and re-throw the exception with `throw;` to avoid silently swallowing errors.
 - Use `await using` for `NpgsqlConnection`, `NpgsqlCommand`, and `NpgsqlDataReader` to ensure resources are properly disposed.
-- Do not hardcode credentials in `.cs` files or `appsettings.json` that is committed to version control. In production, use environment variables or a secure secrets manager. For more information, see [Security overview](/docs/security/security-overview).
+- This application uses `appsettings.json` for configuration, not a `.env` file. Do not create a `.env` file — it is not read by the application.
+- Do not hardcode credentials in `.cs` files or commit `appsettings.json` with real credentials to version control. In production, use environment variables or a secure secrets manager. For more information, see [Security overview](/docs/security/security-overview).
 
 </details>
 
