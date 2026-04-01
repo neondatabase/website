@@ -130,7 +130,15 @@ cost = billable_GB x $0.10
 
 ### Granularity and precision
 
-Using `granularity=hourly` gives the most precise match to Neon's internal billing calculations. Branch allowances are evaluated per hour: each hour's child branch count is compared to the plan allowance independently. Coarser granularity averages out within-bucket fluctuations, so daily or monthly queries may slightly underestimate billable branch-hours compared to the actual invoice. Daily granularity is a close approximation that's accurate enough for most use cases. Monthly granularity covers up to 12 months and is useful for trend analysis, but is the least precise for allowance calculations and bill reconciliation.
+Each granularity has a lookback limit. If your `from` timestamp falls outside it, the API returns `406 Not Acceptable`.
+
+| Granularity | Lookback limit | Best for |
+|---|---|---|
+| `hourly` | Last 168 hours (~7 days) | Exact billing match, branch allowance accuracy |
+| `daily` | Last 60 days | Full-month reports, cost reconciliation |
+| `monthly` | Last 12 months | Trend analysis across billing periods |
+
+These limits are measured from the current server time, not from billing period boundaries. Using `granularity=hourly` gives the most precise match to Neon's internal billing calculations because branch allowances are evaluated per hour. Coarser granularity averages out within-bucket fluctuations, so daily or monthly queries may slightly underestimate billable branch-hours compared to the actual invoice.
 
 ## Quick project snapshot
 
@@ -171,7 +179,7 @@ The result should closely match the costs in your weekly email. Small difference
 - **Timing**: your query's `to` timestamp may differ slightly from the snapshot used for the email.
 - **Rounding**: display rounding in the email versus full-precision calculation.
 
-For the most accurate match, use `granularity=hourly` and align your `from`/`to` with your `consumption_period_start` (available in the [project snapshot](#quick-project-snapshot) response) and the email's generation time.
+For the closest match, use `granularity=daily` and align `from`/`to` with your `consumption_period_start` (from the [project snapshot](#quick-project-snapshot)), or store hourly consumption by polling periodically.
 
 ## Free plan
 
