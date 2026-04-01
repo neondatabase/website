@@ -64,7 +64,7 @@ For your .NET project, you will create a project directory and add the required 
 
 ## Store your Neon connection string
 
-Create a file named `appsettings.json` in your project's root directory. This is the standard .NET approach for storing configuration data like connection strings.
+This application uses `appsettings.json` for configuration, which is the standard .NET approach. You do not need a `.env` file for this guide.
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
 2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
