@@ -1,10 +1,4 @@
 const {
-  DOCS_DUAL_VERSION_SLUGS,
-  DOCS_DEFAULT_SLUG_VERSIONING_MODE,
-  DOCS_SLUG_VERSIONING_MODES,
-  DOCS_VERSIONING_RULES,
-} = require('../constants/docs-versioned-slugs');
-const {
   DOCS_DEFAULT_VERSION_ID,
   DOCS_VERSIONS,
 } = require('../constants/docs-versions');
@@ -14,7 +8,6 @@ const docsVersionsById = DOCS_VERSIONS.reduce((acc, version) => {
   acc[version.id] = version;
   return acc;
 }, {});
-const dualVersionDocsSlugs = new Set(DOCS_DUAL_VERSION_SLUGS);
 
 const isDocsVersionId = (segment) => !!segment && !!docsVersionsById[segment];
 
@@ -74,20 +67,6 @@ const normalizeDocsSlug = (slug) => {
   return slug.replace(/^\/+|\/+$/g, '');
 };
 
-const getDocsSlugVersioningMode = (slug) => {
-  const normalizedSlug = normalizeDocsSlug(slug);
-  const rule = DOCS_VERSIONING_RULES[normalizedSlug];
-  return rule?.mode || DOCS_DEFAULT_SLUG_VERSIONING_MODE;
-};
-
-const isLatestOnlyDocsSlug = (slug) =>
-  getDocsSlugVersioningMode(slug) === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY;
-
-const isDualVersionDocsSlug = (slug) => {
-  const normalizedSlug = normalizeDocsSlug(slug);
-  if (!normalizedSlug) return false;
-  return dualVersionDocsSlugs.has(normalizedSlug);
-};
 
 const parseDocsVersionedSlug = (segments = []) => {
   if (!Array.isArray(segments) || segments.length === 0) {
@@ -150,7 +129,7 @@ const resolveDocsHrefWithBasePath = (slug, basePath) => {
     if (!isDocsBasePath) return `${basePath}${slug}`;
     const contentSlug = normalizeDocsSlug(slug);
     if (!contentSlug) return '/docs/';
-    if (baseVersion && isDualVersionDocsSlug(contentSlug)) {
+    if (baseVersion) {
       return `${getVersionedDocsBasePath(baseVersion)}${contentSlug}`;
     }
     return `/docs/${contentSlug}`;
@@ -161,7 +140,7 @@ const resolveDocsHrefWithBasePath = (slug, basePath) => {
   const normalizedDocsPath = stripDocsVersionFromPathname(slug);
   const contentSlug = normalizeDocsSlug(normalizedDocsPath.replace(/^\/docs\/?/, ''));
 
-  if (baseVersion && isDualVersionDocsSlug(contentSlug)) {
+  if (baseVersion) {
     return `${getVersionedDocsBasePath(baseVersion)}${contentSlug}`;
   }
 
@@ -175,12 +154,9 @@ module.exports = {
   resolveLegacyDocsVersionId,
   resolveDocsVersion,
   normalizeDocsSlug,
-  getDocsSlugVersioningMode,
-  isLatestOnlyDocsSlug,
   parseDocsVersionedSlug,
   stripDocsVersionFromPathname,
   getVersionedDocsBasePath,
   getDocsVersionFromPathname,
   resolveDocsHrefWithBasePath,
-  isDualVersionDocsSlug,
 };

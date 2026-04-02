@@ -5,12 +5,13 @@ import { DocsVersionProvider } from 'components/pages/doc/version-context';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { getNavigation, getNavigationByDocsVersion, getSDKNavigation } from 'utils/api-docs';
+import { getNavigation, getNavigationByDocsVersion, getSDKNavigation, getDualVersionSlugs } from 'utils/api-docs';
 
 const NeonDocsLayout = async ({ children }) => {
   const navigation = await getNavigation();
   const navigationByVersion = getNavigationByDocsVersion();
   const sdkNavigation = getSDKNavigation();
+  const dualVersionSlugs = getDualVersionSlugs();
 
   return (
     <Layout
@@ -33,6 +34,7 @@ const NeonDocsLayout = async ({ children }) => {
               navigationByVersion={navigationByVersion}
               basePath={DOCS_BASE_PATH}
               sdkNavigation={sdkNavigation}
+              dualVersionSlugs={dualVersionSlugs}
               showVersionSwitcher
             />
             {children}
@@ -41,6 +43,7 @@ const NeonDocsLayout = async ({ children }) => {
             navigation={navigation}
             navigationByVersion={navigationByVersion}
             basePath={DOCS_BASE_PATH}
+            dualVersionSlugs={dualVersionSlugs}
           />
         </div>
       </DocsVersionProvider>

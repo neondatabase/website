@@ -11,7 +11,6 @@ import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  isDualVersionDocsSlug,
   resolveDocsHrefWithBasePath,
   resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
@@ -231,6 +230,7 @@ const MobileMenu = ({
   navigation,
   navigationByVersion = null,
   basePath,
+  dualVersionSlugs = [],
   title = 'Neon Docs',
 }) => {
   const [open, setOpen] = useState(false);
@@ -239,7 +239,7 @@ const MobileMenu = ({
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
   const legacyVersionId = resolveLegacyDocsVersionId();
-  const supportsVersioningForSlug = isDualVersionDocsSlug(currentSlug);
+  const supportsVersioningForSlug = dualVersionSlugs.includes(currentSlug);
   const effectiveVersionId =
     pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
@@ -295,6 +295,7 @@ MobileMenu.propTypes = {
   navigation: PropTypes.array.isRequired,
   navigationByVersion: PropTypes.objectOf(PropTypes.array),
   basePath: PropTypes.string.isRequired,
+  dualVersionSlugs: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
 };
 

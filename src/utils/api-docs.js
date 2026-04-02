@@ -3,7 +3,7 @@ const fs = require('fs');
 const jsYaml = require('js-yaml');
 
 const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
-const { DOCS_VERSIONS } = require('../constants/docs-versions');
+const { DOCS_VERSIONS, DOCS_DEFAULT_VERSION_ID } = require('../constants/docs-versions');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
@@ -89,6 +89,35 @@ const getAllChangelogs = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
+const getDualVersionSlugs = () => {
+  const legacyVersion = DOCS_VERSIONS.find(
+    (v) => v.id !== DOCS_DEFAULT_VERSION_ID && v.isContentReady
+  );
+  if (!legacyVersion) return [];
+
+  const legacyDir = `${process.cwd()}/${legacyVersion.docsContentPath}`;
+  const latestDir = `${process.cwd()}/${DOCS_DIR_PATH}`;
+  const slugs = [];
+
+  const scanDir = (dir, prefix = '') => {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const relPath = prefix ? `${prefix}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) {
+        scanDir(`${dir}/${entry.name}`, relPath);
+      } else if (entry.name.endsWith('.md')) {
+        const slug = relPath.replace(/\.md$/, '');
+        if (fs.existsSync(`${latestDir}/${slug}.md`)) {
+          slugs.push(slug);
+        }
+      }
+    }
+  };
+
+  scanDir(legacyDir);
+  return slugs;
+};
+
 module.exports = {
   getNavigation,
   getNavigationByDocsVersion,
@@ -96,4 +125,5 @@ module.exports = {
   getNavigationLinks,
   getAllChangelogs,
   getAllPosts,
+  getDualVersionSlugs,
 };

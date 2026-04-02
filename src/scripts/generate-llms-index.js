@@ -16,11 +16,8 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { DOCS_SLUG_VERSIONING_MODES } = require('../constants/docs-versioned-slugs');
 const { DOCS_VERSIONS } = require('../constants/docs-versions');
 const {
-  getDocsSlugVersioningMode,
-  isDualVersionDocsSlug,
   resolveLatestDocsVersionId,
   resolveLegacyDocsVersionId,
 } = require('../utils/docs-versioning');
@@ -450,18 +447,7 @@ function generateVersionIndexText({ version, organized }) {
   return `${lines.join('\n').trim()}\n`;
 }
 
-function selectCanonicalDocByMode({ docPath, latestDoc, legacyDoc }) {
-  const docsSlug = docPath.replace(/\.md$/, '');
-  const mode = getDocsSlugVersioningMode(docsSlug);
-
-  if (mode === DOCS_SLUG_VERSIONING_MODES.DUAL) {
-    if (latestDoc && legacyDoc && isDualVersionDocsSlug(docsSlug)) {
-      return latestDoc;
-    }
-    return latestDoc || legacyDoc || null;
-  }
-
-  // LATEST_ONLY (default)
+function selectCanonicalDoc({ latestDoc, legacyDoc }) {
   return latestDoc || legacyDoc || null;
 }
 
@@ -512,7 +498,7 @@ async function main() {
   for (const docPath of allPaths) {
     const latestDoc = latestDocsByPath.get(docPath);
     const legacyDoc = legacyDocsByPath.get(docPath);
-    const chosenDoc = selectCanonicalDocByMode({ docPath, latestDoc, legacyDoc });
+    const chosenDoc = selectCanonicalDoc({ latestDoc, legacyDoc });
     if (!chosenDoc) continue;
     canonicalDocs.push({
       ...chosenDoc,
@@ -524,17 +510,10 @@ async function main() {
   const canonicalOrganized = organizeDocs(canonicalDocs);
   console.log(`  Canonical (/docs): ${canonicalDocs.length} files`);
 
-  // Versioned routes are available only for DUAL slugs that exist in both latest and legacy content.
+  // Versioned routes are pages that exist in both latest and legacy content.
   const versionedRoutePaths = new Set(
     (latestEntry?.docs || [])
-      .filter((latestDoc) => {
-        const docsSlug = latestDoc.path.replace(/\.md$/, '');
-        return (
-          isDualVersionDocsSlug(docsSlug) &&
-          legacyDocsByPath.has(latestDoc.path) &&
-          latestDocsByPath.has(latestDoc.path)
-        );
-      })
+      .filter((doc) => legacyDocsByPath.has(doc.path) && latestDocsByPath.has(doc.path))
       .map((doc) => doc.path)
   );
   console.log(`  Versioned routes (/docs/{version}/): ${versionedRoutePaths.size} files`);

@@ -5,10 +5,7 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import {
-  DOCS_SLUG_VERSIONING_MODES,
-  DOCS_UNVERSIONED_SLUGS,
-} from 'constants/docs-versioned-slugs';
+import { DOCS_UNVERSIONED_SLUGS } from 'constants/docs-versioned-slugs';
 import { DOCS_VERSIONS } from 'constants/docs-versions';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
@@ -16,8 +13,6 @@ import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from
 import {
   getVersionedDocsBasePath,
   parseDocsVersionedSlug,
-  isDualVersionDocsSlug,
-  getDocsSlugVersioningMode,
   resolveDocsVersion,
   resolveLegacyDocsVersionId,
   resolveLatestDocsVersionId,
@@ -50,67 +45,40 @@ const resolveDocSource = ({ currentSlug, requestedVersionId, hasVersionPrefix })
   const legacyVersion = getLegacyDocsVersion();
   const latestDocsPath = getDocsContentPathForVersion(latestVersion);
   const legacyDocsPath = getDocsContentPathForVersion(legacyVersion);
-  const slugVersioningMode = getDocsSlugVersioningMode(currentSlug);
 
-  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.LATEST_ONLY) {
+  const latestPost = getPostBySlug(currentSlug, latestDocsPath);
+  const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
+  const supportsVersioning = Boolean(latestPost) && Boolean(legacyPost);
+
+  if (supportsVersioning) {
+    const { effectiveVersion } = resolveDocsVersion(requestedVersionId);
+    const useLatest = effectiveVersion.id === latestVersion.id;
+    return {
+      post: useLatest ? latestPost : legacyPost,
+      effectiveVersion,
+      sourceDocsDirPath: useLatest ? latestDocsPath : legacyDocsPath,
+      supportsVersioning: true,
+    };
+  }
+
+  // Latest-only: redirect versioned URL to canonical
+  if (latestPost) {
     if (hasVersionPrefix) {
       redirect(`${LINKS.docs}/${currentSlug}`);
     }
-
-    const latestPost = getPostBySlug(currentSlug, latestDocsPath);
-    if (latestPost) {
-      return {
-        post: latestPost,
-        effectiveVersion: latestVersion,
-        sourceDocsDirPath: latestDocsPath,
-        supportsVersioning: false,
-      };
-    }
-
-    // Defensive fallback for partial migration state.
-    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
     return {
-      post: legacyPost,
-      effectiveVersion: legacyVersion,
-      sourceDocsDirPath: legacyDocsPath,
+      post: latestPost,
+      effectiveVersion: latestVersion,
+      sourceDocsDirPath: latestDocsPath,
       supportsVersioning: false,
     };
   }
 
-  if (slugVersioningMode === DOCS_SLUG_VERSIONING_MODES.DUAL) {
-    const latestPost = getPostBySlug(currentSlug, latestDocsPath);
-    const legacyPost = getPostBySlug(currentSlug, legacyDocsPath);
-    const supportsDualVersioning = Boolean(latestPost) && Boolean(legacyPost);
-
-    if (supportsDualVersioning) {
-      const versionResolution = resolveDocsVersion(requestedVersionId);
-      const { effectiveVersion } = versionResolution;
-      const useLatestSource = effectiveVersion.id === latestVersion.id;
-      const post = useLatestSource ? latestPost : legacyPost;
-      const sourceDocsDirPath = useLatestSource ? latestDocsPath : legacyDocsPath;
-
-      return {
-        post,
-        effectiveVersion,
-        sourceDocsDirPath,
-        supportsVersioning: true,
-      };
+  // Legacy-only: canonical URL redirects to versioned, wrong version redirects to correct one
+  if (legacyPost) {
+    if (!hasVersionPrefix || requestedVersionId !== legacyVersion.id) {
+      redirect(`${getVersionedDocsBasePath(legacyVersion.id)}${currentSlug}`);
     }
-
-    if (hasVersionPrefix) {
-      redirect(`${LINKS.docs}/${currentSlug}`);
-    }
-
-    // Defensive fallback for partial migration state.
-    if (latestPost) {
-      return {
-        post: latestPost,
-        effectiveVersion: latestVersion,
-        sourceDocsDirPath: latestDocsPath,
-        supportsVersioning: false,
-      };
-    }
-
     return {
       post: legacyPost,
       effectiveVersion: legacyVersion,
@@ -171,14 +139,20 @@ export async function generateStaticParams() {
       },
     ];
 
-    const isDualVersionSlug =
-      isDualVersionDocsSlug(slug) && latestPostSlugs.has(slug) && legacyPostSlugs.has(slug);
+    const isDualVersionSlug = latestPostSlugs.has(slug) && legacyPostSlugs.has(slug);
     if (isDualVersionSlug) {
       params.push(
         ...versionIds.map((versionId) => ({
           slug: [versionId, ...slugsArray],
         }))
       );
+    }
+
+    // Legacy-only: pre-render the versioned path so the redirect from canonical can resolve
+    const isLegacyOnlySlug = !latestPostSlugs.has(slug) && legacyPostSlugs.has(slug);
+    if (isLegacyOnlySlug) {
+      const legacyVersion = getLegacyDocsVersion();
+      params.push({ slug: [legacyVersion.id, ...slugsArray] });
     }
 
     return params;
@@ -284,7 +258,7 @@ const DocPost = async (props) => {
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         navigationLinksBasePath={versionedBasePath}
-        effectiveDocsVersion={supportsVersioning ? effectiveVersion : null}
+        effectiveDocsVersion={supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null}
         changelogActiveLabel="all"
         isChangelog
       />
@@ -321,7 +295,7 @@ const DocPost = async (props) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
-        effectiveDocsVersion={supportsVersioning ? effectiveVersion : null}
+        effectiveDocsVersion={supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null}
       />
     </>
   );

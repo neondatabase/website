@@ -9,7 +9,6 @@ import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  isDualVersionDocsSlug,
   resolveLegacyDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
@@ -53,6 +52,7 @@ const Sidebar = ({
   basePath,
   customType,
   sdkNavigation,
+  dualVersionSlugs = [],
   showVersionSwitcher = false,
 }) => {
   const pathname = usePathname();
@@ -60,7 +60,7 @@ const Sidebar = ({
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
   const legacyVersionId = resolveLegacyDocsVersionId();
-  const supportsVersioningForSlug = isDualVersionDocsSlug(currentSlug);
+  const supportsVersioningForSlug = dualVersionSlugs.includes(currentSlug);
   const effectiveVersionId =
     pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
@@ -134,6 +134,7 @@ Sidebar.propTypes = {
       sections: PropTypes.array,
     })
   ),
+  dualVersionSlugs: PropTypes.arrayOf(PropTypes.string),
   showVersionSwitcher: PropTypes.bool,
 };
 

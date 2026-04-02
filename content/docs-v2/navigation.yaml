@@ -429,7 +429,8 @@
                   slug: auth/branching-authentication
                 - title: Roadmap
                   slug: auth/roadmap
-
+                - title: Database integration
+                  slug: auth/database-integration
             - section: Quickstarts
               items:
                 - title: Next.js
