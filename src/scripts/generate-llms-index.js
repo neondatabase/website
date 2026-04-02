@@ -529,12 +529,15 @@ async function main() {
     versionId: entry.version.id,
     isLatest: entry.isLatest,
     content: generateVersionIndexText((() => {
-      const versionedDocsForEntry = (entry.docs || [])
-        .filter((doc) => versionedRoutePaths.has(doc.path))
-        .map((doc) => ({
-          ...doc,
-          url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
-        }));
+      // Latest version: only dual-version pages (accessible at /docs/v2/slug)
+      // Legacy versions: all pages (dual-version + legacy-only)
+      const docsToInclude = entry.isLatest
+        ? (entry.docs || []).filter((doc) => versionedRoutePaths.has(doc.path))
+        : (entry.docs || []);
+      const versionedDocsForEntry = docsToInclude.map((doc) => ({
+        ...doc,
+        url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
+      }));
       applyReclassifications(versionedDocsForEntry);
       return {
         ...entry,
