@@ -39,11 +39,11 @@ Older endpoints (`/consumption_history/account` and `/consumption_history/projec
 | API metric name | What it measures | Raw unit | Billing unit |
 |---|---|---|---|
 | `compute_unit_seconds` | CPU time weighted by compute size | CU-seconds | CU-hours |
-| `root_branch_bytes_month` | Storage on the default branch | byte-hours | GB-months |
+| `root_branch_bytes_month` | Storage on root branches | byte-hours | GB-months |
 | `child_branch_bytes_month` | Storage on child branches (delta from parent) | byte-hours | GB-months |
 | `instant_restore_bytes_month` | Instant restore (point-in-time recovery / PITR) history | byte-hours | GB-months |
-| `public_network_transfer_bytes` | Egress over the public network | bytes | GB |
-| `private_network_transfer_bytes` | Egress over private networking (Scale+) | bytes | GB |
+| `public_network_transfer_bytes` | Outbound (egress) data over the public network | bytes | GB |
+| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+) | bytes | GB |
 | `extra_branches_month` | All child branches per hour (subtract plan allowance before billing) | branch-hours | branch-months |
 
 A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumulates 2 CU-seconds for every wall-clock second it runs.
@@ -92,7 +92,7 @@ If the API returns `"value": 2500000000000` for `root_branch_bytes_month`:
 1. Convert: 2500000000000 / 744 / 1000000000 = 3.36 GB-months
 2. Cost: 3.36 x $0.35 = **$1.18**
 
-## Key concepts
+## Billing mechanics
 
 ### The 744 constant
 
@@ -100,7 +100,12 @@ Neon defines a billing month as exactly 744 hours (31 x 24). This constant is us
 
 ### Byte-hours
 
-Storage metrics are reported as byte-hours: bytes stored multiplied by hours held. For example, 2 GB stored for a full day produces 2000000000 x 24 = 48000000000 byte-hours. Over a full 31-day month that's 48000000000 x 31 = 1488000000000 byte-hours, which converts to 1488000000000 / 744 / 1000000000 = 2.0 GB-months, costing 2.0 x $0.35 = $0.70.
+Storage metrics are reported as byte-hours: bytes stored multiplied by hours held. For example, 2 GB stored for a full 31-day month:
+
+1. Per-day byte-hours: 2000000000 x 24 = 48000000000
+2. Full-month byte-hours: 48000000000 x 31 = 1488000000000
+3. Convert: 1488000000000 / 744 / 1000000000 = 2.0 GB-months
+4. Cost: 2.0 x $0.35 = **$0.70**
 
 ### Branch-hours and the allowance
 
@@ -140,28 +145,7 @@ Each granularity has a lookback limit. If your `from` timestamp falls outside it
 
 These limits are measured from the current server time, not from billing period boundaries. Using `granularity=hourly` gives the most precise match to Neon's internal billing calculations because branch allowances are evaluated per hour. Coarser granularity averages out within-bucket fluctuations, so daily or monthly queries may slightly underestimate billable branch-hours compared to the actual invoice.
 
-## Quick project snapshot
-
-You can also get the current billing period's totals for a single project without specifying date ranges:
-
-```sh
-curl "https://console.neon.tech/api/v2/projects/${PROJECT_ID}" \
-  -H "Authorization: Bearer ${NEON_API_KEY}"
-```
-
-The response includes:
-
-| Field | What it tells you |
-|---|---|
-| `compute_time_seconds` | Total CPU-seconds this billing period. Divide by 3600 for CU-hours. |
-| `active_time_seconds` | Wall-clock seconds endpoints were running. Divide `compute_time_seconds` by this value to get your average compute size in CUs (weighted average if the compute was resized during the period). |
-| `data_storage_bytes_hour` | Byte-hours of storage. Divide by hours elapsed for average size, or by 744 x 1000000000 for GB-months. |
-| `data_transfer_bytes` | Egress traffic in bytes. Divide by 1000000000 for GB. |
-| `consumption_period_start` | Start of the billing cycle. All consumption fields reset here. |
-
-These field names differ from the consumption history metrics. `compute_time_seconds` corresponds to `compute_unit_seconds`; `data_storage_bytes_hour` combines root, child, and instant restore storage; `data_transfer_bytes` combines public and private transfer. This endpoint is useful for spot-checking a single project without querying the full consumption history. It also works on the [Free plan](#free-plan), which does not have access to the consumption history API.
-
-## Understanding your bill
+## Reconciling your bill
 
 Neon sends a weekly usage email that includes per-metric costs. You can also check charges to date on the [Billing page](/docs/introduction/monitor-usage#billing-page) in the Console. Those costs are calculated using the same formulas described above: raw API values converted to billing units, multiplied by the plan rate, with allowances subtracted where applicable.
 
@@ -179,15 +163,36 @@ The result should closely match the costs in your weekly email. Small difference
 - **Timing**: your query's `to` timestamp may differ slightly from the snapshot used for the email.
 - **Rounding**: display rounding in the email versus full-precision calculation.
 
-For the closest match, use `granularity=daily` and align `from`/`to` with your `consumption_period_start` (from the [project snapshot](#quick-project-snapshot)), or store hourly consumption by polling periodically.
+For the closest match, use `granularity=daily` and align `from`/`to` with your billing period start (visible on the [Billing page](/docs/introduction/monitor-usage#billing-page)), or store hourly consumption by polling periodically.
 
-## Free plan
+<Admonition type="tip" title="Optimize your costs">
+For strategies to reduce your costs across compute, storage, branches, and data transfer, see [Cost optimization](/docs/introduction/cost-optimization). For network transfer specifically, see [Reduce network transfer costs](/docs/introduction/network-transfer).
+</Admonition>
 
-The V2 consumption history endpoint is not available on the Free plan. You can still track your usage through two endpoints.
+## Tracking usage on the Free plan
+
+The consumption history API requires a paid plan. On the Free plan, you can track usage with the project detail and branch detail endpoints:
 
 ### Project snapshot
 
-Use `GET /projects/{project_id}` (see [Quick project snapshot](#quick-project-snapshot) above) to check compute time, data transfer, and storage for the current billing period.
+Use `GET /projects/{project_id}` to check compute time, data transfer, and storage for the current billing period:
+
+```sh
+curl "https://console.neon.tech/api/v2/projects/${PROJECT_ID}" \
+  -H "Authorization: Bearer ${NEON_API_KEY}"
+```
+
+The response includes:
+
+| Field | What it tells you |
+|---|---|
+| `compute_time_seconds` | Total CU-seconds this billing period (weighted by compute size). Divide by 3600 for CU-hours. |
+| `active_time_seconds` | Wall-clock seconds endpoints were running. Divide `compute_time_seconds` by this value to get your average compute size in CUs. |
+| `data_storage_bytes_hour` | Byte-hours of storage (combines root, child, and instant restore). Divide by hours elapsed for average size, or by 744 x 1000000000 for GB-months. |
+| `data_transfer_bytes` | Data transfer in bytes (combines public and private). Divide by 1000000000 for GB. |
+| `consumption_period_start` | Start of the billing cycle. All consumption fields reset here. |
+
+On paid plans, the [consumption history API](#fetch-your-usage) provides these as separate metrics: `compute_time_seconds` corresponds to `compute_unit_seconds`, `data_storage_bytes_hour` splits into `root_branch_bytes_month`, `child_branch_bytes_month`, and `instant_restore_bytes_month`, and `data_transfer_bytes` splits into `public_network_transfer_bytes` and `private_network_transfer_bytes`.
 
 ### Branch storage
 
@@ -204,6 +209,3 @@ Each branch in the response includes a `logical_size` field (bytes). Sum across 
 
 See the [Neon Free plan docs](/docs/introduction/plans#free-plan) for current limits. Exceeding them suspends compute or blocks creation. There are no costs on the Free plan.
 
----
-
-To reduce your costs across compute, storage, branches, and data transfer, see [Cost optimization](/docs/introduction/cost-optimization). For network transfer specifically, see [Reduce network transfer costs](/docs/introduction/network-transfer).
