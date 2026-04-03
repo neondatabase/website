@@ -46,7 +46,7 @@ Let’s take some examples of using the `select into` statement.
 
 The following example uses the `select into` statement to retrieve the number of actors from the `actor` table and assign it to the `actor_count` variable:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -65,7 +65,7 @@ $$;
 
 Output:
 
-```shell
+```
 NOTICE:  The number of actors: 200
 ```
 
@@ -79,7 +79,7 @@ In this example:
 
 The following example uses the `select into` statement to assign the first and last names of the actor id 1 to two variables:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -100,7 +100,7 @@ $$;
 
 Output:
 
-```http
+```
 NOTICE:  Penelope Guiness
 ```
 
@@ -115,7 +115,7 @@ v_last_name varchar;
 
 Second, retrieve the `first_name` and `last_name` of the actor id 1 from the `actor` table and assign them to the `v_first_name` and `v_last_name` variables:
 
-```
+```sql
 select first_name, last_name
 into v_first_name, v_last_name
 from actor
@@ -130,7 +130,7 @@ raise notice '% %', v_first_name, v_last_name;
 
 Because we assign data retrieved from the `first_name` and `last_name` columns of the `actor` table, we can use the type\-copying technique to declare the `v_first_name` and `v_last_name` variables:
 
-```sql
+```plsql
 do
 $$
 declare

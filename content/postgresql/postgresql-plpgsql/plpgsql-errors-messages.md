@@ -20,7 +20,7 @@ nextLink:
 
 In PL/pgSQL, you use the `raise` statement to issue a message. Here's the syntax of the `raise` statement:
 
-```csssql
+```plsql
 raise level format;
 ```
 
@@ -45,13 +45,13 @@ The `format` is a string that specifies the message. The `format` uses percentag
 
 The number of placeholders must be the same as the number of arguments. Otherwise, PostgreSQL will issue an error:
 
-```sql
+```
 [Err] ERROR:  too many parameters specified for raise
 ```
 
 The following example illustrates the `raise` statement that reports different messages at the current time.
 
-```
+```plsql
 do $$
 begin
   raise info 'information message %', now() ;
@@ -64,7 +64,7 @@ end $$;
 
 Output:
 
-```sql
+```
 info:  information message 2015-09-10 21:17:39.398+07
 warning:  warning message 2015-09-10 21:17:39.398+07
 notice:  notice message 2015-09-10 21:17:39.398+07
@@ -78,7 +78,7 @@ To raise an error, you use the `exception` level after the `raise` statement. Th
 
 Besides raising an error, you can add more information by using the following additional clause:
 
-```sql
+```plsql
 using option = expression
 ```
 
@@ -92,7 +92,7 @@ The `expression` is a string\-valued expression.
 
 The following example raises a duplicate email error message:
 
-```sql
+```plsql
 do $$
 declare
   email varchar(255) := 'john.doe@example.com';
@@ -105,7 +105,7 @@ begin
 end $$;
 ```
 
-```sql
+```
 ERROR:  duplicate email: john.doe@example.com
 HINT:  check the email again
 CONTEXT:  PL/pgSQL function inline_code_block line 8 at RAISE
@@ -113,7 +113,7 @@ CONTEXT:  PL/pgSQL function inline_code_block line 8 at RAISE
 
 The following examples illustrate how to raise an `SQLSTATE` and its corresponding condition:
 
-```sql
+```plsql
 do $$
 begin
 	--...
@@ -121,7 +121,7 @@ begin
 end $$;
 ```
 
-```sql
+```plsql
 do $$
 begin
 	--...

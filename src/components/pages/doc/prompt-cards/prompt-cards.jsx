@@ -2,7 +2,6 @@
 
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
@@ -10,7 +9,10 @@ import ICONS_CONFIG from 'config/docs-icons-config';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
+
+const CARDS_TO_SHOW = 12;
 
 const PromptCards = ({ children = null, withToggler = false }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +22,12 @@ const PromptCards = ({ children = null, withToggler = false }) => {
   };
 
   const childrenArray = React.Children.toArray(children).filter(Boolean);
-  const displayedChildren = withToggler && !isOpen ? childrenArray.slice(0, 10) : childrenArray;
+  const displayedChildren =
+    withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
 
   return (
-    <>
-      <ul className="not-prose !my-7 grid grid-cols-5 gap-3 !p-0 xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+    <div className="prompt-cards not-prose my-9">
+      <ul className="my-0! grid grid-cols-4 gap-5 p-0! lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 
@@ -54,21 +57,21 @@ const PromptCards = ({ children = null, withToggler = false }) => {
       {withToggler && (
         <button
           type="button"
-          className="mx-auto mt-4 flex items-center rounded-full bg-gray-new-98 px-[18px] py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:bg-gray-new-10 dark:text-gray-new-80 dark:hover:bg-gray-new-15"
+          className="mx-auto mt-[18px] flex items-center rounded-full border border-gray-new-80 px-[18px] py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15"
           onClick={handleToggle}
         >
-          <span className="text-sm font-medium">{isOpen ? 'Hide' : 'Show more'}</span>
-          <span className="ml-2.5 flex size-3 items-center justify-center">
+          <span className="text-sm tracking-extra-tight">{isOpen ? 'Hide' : 'Show more'}</span>
+          <span className="ml-1.5 flex h-auto w-3 shrink-0 items-center justify-center">
             <ChevronRight
-              className={clsx(
-                'block shrink-0 transition-[transform,color] duration-200',
+              className={cn(
+                'block shrink-0 text-black-pure/50 transition-[rotate,color] duration-200 dark:text-white/50',
                 isOpen ? '-rotate-90' : 'rotate-90'
               )}
             />
           </span>
         </button>
       )}
-    </>
+    </div>
   );
 };
 
@@ -100,14 +103,14 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
   };
 
   return (
-    <li className="!m-0 before:hidden">
+    <li className="m-0! h-11 before:hidden">
       <button
         type="button"
-        className={clsx(
-          'group relative flex h-full w-full items-center gap-2.5 overflow-hidden rounded-lg border px-3 py-2.5 transition-all duration-200',
-          'border-gray-new-90 bg-white hover:border-gray-new-80 hover:shadow-sm',
-          'dark:border-gray-new-15 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
-          'focus:outline-none focus:ring-2 focus:ring-green-45 focus:ring-offset-2 dark:focus:ring-offset-gray-new-8',
+        className={cn(
+          'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 transition-all duration-200',
+          'border-gray-new-80 bg-[#E4F1EB]/40 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
+          'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
+          'focus:ring-2 focus:ring-green-45 focus:ring-offset-2 focus:outline-hidden dark:focus:ring-offset-gray-new-8',
           isCopied && 'border-green-45 dark:border-green-45'
         )}
         disabled={!markdown}
@@ -116,7 +119,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
         <div className="relative z-10 flex min-w-0 flex-1 items-center gap-2.5">
           <div className="relative h-6 w-6 shrink-0">
             <img
-              className={clsx('h-full w-full object-contain', darkIconPath && 'dark:hidden')}
+              className={cn('h-full w-full object-contain', darkIconPath && 'dark:hidden')}
               src={lightIconPath}
               width={24}
               height={24}
@@ -134,22 +137,22 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
               />
             )}
           </div>
-          <span className="truncate text-sm font-medium leading-tight text-black-new dark:text-white">
+          <span className="max-w-[calc(100%-2.5rem)] truncate text-base leading-snug tracking-extra-tight text-black-pure dark:text-white">
             {title}
           </span>
         </div>
 
         {/* Copy indicator */}
         <div
-          className={clsx(
-            'absolute right-2 top-1/2 -translate-y-1/2 transition-opacity duration-200',
-            isCopied ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+          className={cn(
+            'absolute top-1/2 right-2 -translate-y-1/2 text-gray-new-60 transition-opacity duration-200',
+            isCopied ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'
           )}
         >
           {isCopied ? (
             <CheckIcon className="h-3.5 w-3.5 text-green-45" />
           ) : (
-            <CopyIcon className="h-3.5 w-3.5 text-gray-new-30 dark:text-gray-new-60" />
+            <CopyIcon className="h-3.5 w-3.5" />
           )}
         </div>
       </button>

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
@@ -8,6 +7,7 @@ import clockIcon from 'icons/home/features/clock.svg';
 import connectionsIcon from 'icons/home/features/connections.svg';
 import keyIcon from 'icons/home/features/key.svg';
 import shieldIcon from 'icons/home/features/shield.svg';
+import { cn } from 'utils/cn';
 
 import Heading from '../heading';
 
@@ -48,11 +48,11 @@ const BORDER_CLASSNAME = 'absolute -bottom-1 -top-2 w-px bg-gray-new-20 xl:top-0
 
 const Features = () => (
   <section
-    className="features safe-paddings relative scroll-mt-[60px] pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
+    className="features relative scroll-mt-[60px] safe-paddings pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
     id="features"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
+      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16! md:px-5!"
       size="1600"
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
@@ -73,8 +73,8 @@ const Features = () => (
                   alt=""
                 />
                 <p
-                  className={clsx(
-                    'max-w-[320px] text-pretty text-[18px] leading-normal tracking-extra-tight text-gray-new-50',
+                  className={cn(
+                    'max-w-[320px] text-[18px] leading-normal tracking-extra-tight text-pretty text-gray-new-50',
                     'xl:w-[256px] lg:w-[288px] lg:text-base lg:leading-snug md:w-full md:max-w-full md:text-[15px]'
                   )}
                 >
@@ -83,15 +83,15 @@ const Features = () => (
               </li>
             ))}
           </ul>
-          <span className={clsx(BORDER_CLASSNAME, '-left-8 xl:-left-6 lg:-left-5 md:hidden')} />
+          <span className={cn(BORDER_CLASSNAME, '-left-8 xl:-left-6 lg:-left-5 md:hidden')} />
           <span
-            className={clsx(
+            className={cn(
               BORDER_CLASSNAME,
               'left-[calc((100%-128px)/3+32px)] xl:left-[calc((100%-128px)/3+38px)] lg:left-[calc(100%/2+12px)] md:hidden'
             )}
           />
           <span
-            className={clsx(
+            className={cn(
               BORDER_CLASSNAME,
               'right-[calc((100%-128px)/3+32px)] xl:right-[calc((100%-128px)/3+24px)] lg:hidden'
             )}

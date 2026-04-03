@@ -24,10 +24,10 @@ In PostgreSQL, a temporary table is a table that exists only during a database s
 
 To create a temporary table, you use the `CREATE TEMPORARY TABLE` statement:
 
-```sqlsqlsql
+```sql
 CREATE TEMPORARY TABLE table_name(
    column1 datatype(size) constraint,
-   column1 datatype(size) constraint,
+   column2 datatype(size) constraint,
    ...,
    table_constraints
 );
@@ -68,7 +68,7 @@ Output:
 
 If you open a second database session and query data from the `mytemp` table, you’ll get an error
 
-```
+```sql
 SELECT * FROM mytemp;
 ```
 
@@ -91,7 +91,7 @@ When you create a temporary table that shares the same name as a permanent table
 
 First, [create a table](postgresql-create-table) named `customers`:
 
-```
+```sql
 CREATE TABLE customers(
    id SERIAL PRIMARY KEY,
    name VARCHAR NOT NULL
@@ -152,7 +152,7 @@ SELECT * FROM public.customers;
 
 To drop a temporary table, you use the [`DROP TABLE`](postgresql-drop-table) statement. The following statement uses the `DROP TABLE` statement to drop a temporary table:
 
-```
+```sql
 DROP TABLE temp_table_name;
 ```
 

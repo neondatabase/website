@@ -304,7 +304,7 @@ function loadSharedContent(templateName, props = {}) {
     try {
       rawContent = fsSync.readFileSync(templatePath, 'utf-8');
       sharedContentCache.set(templatePath, rawContent);
-    } catch (err) {
+    } catch (_err) {
       console.warn(`Shared content not found: ${templatePath}`);
       return [];
     }
@@ -1300,7 +1300,6 @@ function transformNode(node) {
     }
 
     // Unknown component - preserve with label and warn
-    // eslint-disable-next-line no-console
     console.warn(`[LLM Processor] Unknown component: <${componentName}>`);
     unknownComponents.push({ name: componentName, file: currentFile || 'unknown' });
 
@@ -1455,7 +1454,96 @@ function getPageUrl(inputPath, baseContentDir) {
   const relativePath = path.relative(baseContentDir, inputPath);
   // Remove .md extension and convert to URL path
   const urlPath = relativePath.replace(/\.md$/, '');
+  // Changelog entries live in content/changelog/ but are served under /docs/changelog/
+  if (urlPath.startsWith('changelog/')) {
+    return `${BASE_URL}/docs/${urlPath}`;
+  }
   return `${BASE_URL}/${urlPath}`;
+}
+
+/**
+ * Build aggregated markdown for docs/changelog.md from content/changelog/*.md
+ * Entries are appended newest-first and run through the same MDX->MD processor.
+ */
+async function buildAggregatedChangelogMarkdown(rootDir) {
+  if (!rootDir) return '';
+
+  const changelogDir = path.join(rootDir, 'content', 'changelog');
+  let entries = [];
+
+  try {
+    entries = await fs.readdir(changelogDir, { withFileTypes: true });
+  } catch {
+    return '';
+  }
+
+  const changelogFiles = entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+    .map((entry) => entry.name)
+    .sort((a, b) => b.localeCompare(a));
+
+  if (changelogFiles.length === 0) return '';
+
+  const sections = ['## Entries\n'];
+
+  for (const fileName of changelogFiles) {
+    const changelogPath = path.join(changelogDir, fileName);
+    const slug = fileName.replace(/\.md$/, '');
+    const raw = await fs.readFile(changelogPath, 'utf-8');
+    const previousFile = currentFile;
+    let markdown = '';
+    currentFile = changelogPath;
+
+    try {
+      const entryPageUrl = `${BASE_URL}/docs/changelog/${slug}`;
+      ({ markdown } = await processRawMdx(raw, entryPageUrl));
+    } finally {
+      currentFile = previousFile;
+    }
+
+    sections.push(`\n---\n\n### ${slug}\n\n${markdown}\n`);
+  }
+
+  return `${sections.join('')}\n`;
+}
+
+/**
+ * Run the shared MDX -> markdown pipeline on raw file contents.
+ * Used by both single-file processing and aggregated changelog generation.
+ */
+async function processRawMdx(raw, pageUrl) {
+  await loadDependencies();
+
+  // Pre-fetch any external code URLs before MDX transformation.
+  await prefetchExternalCode(raw);
+
+  const { data: frontmatter, content } = matter(raw);
+
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkMdx)
+    .use(remarkTransformMdxComponents)
+    .use(remarkCleanCodeBlocks)
+    .use(remarkAbsoluteUrls, pageUrl);
+
+  const tree = processor.parse(content);
+  processor.runSync(tree);
+
+  let markdown = toMarkdown(tree, getMarkdownOptions());
+
+  // Convert any remaining relative URLs to absolute (catches URLs in serialized content)
+  markdown = markdown.replace(/\]\(\/([^)]+)\)/g, `](${BASE_URL}/$1)`);
+
+  // Also convert anchor-only links in serialized content
+  if (pageUrl) {
+    markdown = markdown.replace(/\]\(#([^)]+)\)/g, `](${pageUrl}#$1)`);
+  }
+
+  return {
+    frontmatter,
+    markdown: markdown.trim(),
+  };
 }
 
 /**
@@ -1511,7 +1599,6 @@ async function prefetchExternalCode(content) {
     if (result.content) {
       externalCodeCache.set(result.url, result.content);
     } else {
-      // eslint-disable-next-line no-console
       console.warn(
         `[LLM Processor] Failed to fetch external code: ${result.url} (${result.error})`
       );
@@ -1531,8 +1618,6 @@ async function prefetchExternalCode(content) {
  * @param {string} [rootDir] - Project root directory (for shared content)
  */
 async function processFile(inputPath, pageUrl, rootDir) {
-  await loadDependencies();
-
   // Set current file for error reporting
   currentFile = inputPath;
 
@@ -1542,35 +1627,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
   }
 
   const raw = await fs.readFile(inputPath, 'utf-8');
-
-  // Pre-fetch any external code URLs
-  await prefetchExternalCode(raw);
-
-  // Extract frontmatter
-  const { data: frontmatter, content } = matter(raw);
-
-  // Parse MDX into AST
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkMdx)
-    .use(remarkTransformMdxComponents)
-    .use(remarkCleanCodeBlocks)
-    .use(remarkAbsoluteUrls, pageUrl);
-
-  const tree = processor.parse(content);
-  processor.runSync(tree);
-
-  // Serialize back to markdown with shared options (includes custom text handler)
-  let markdown = toMarkdown(tree, getMarkdownOptions());
-
-  // Convert any remaining relative URLs to absolute (catches URLs in serialized content)
-  markdown = markdown.replace(/\]\(\/([^)]+)\)/g, `](${BASE_URL}/$1)`);
-
-  // Also convert anchor-only links in serialized content
-  if (pageUrl) {
-    markdown = markdown.replace(/\]\(#([^)]+)\)/g, `](${pageUrl}#$1)`);
-  }
+  const { frontmatter, markdown } = await processRawMdx(raw, pageUrl);
 
   // Build output with frontmatter-based header
   let output = '';
@@ -1586,6 +1643,15 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // }
 
   output += `${markdown.trim()}\n`;
+
+  // docs/changelog.md is a dynamic page in the app router. To provide useful
+  // markdown for AI agents, append all dated changelog entries here.
+  const relativeInputPath = rootDir
+    ? path.relative(rootDir, inputPath).split(path.sep).join('/')
+    : inputPath.split(path.sep).join('/');
+  if (relativeInputPath === 'content/docs/changelog.md') {
+    output += `\n${await buildAggregatedChangelogMarkdown(rootDir)}`;
+  }
 
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
@@ -1851,6 +1917,21 @@ function addNavigationContext(content, relativePath, navMap) {
 }
 
 /**
+ * Reverse addNavigationContext — strip the header and footer it prepends/appends.
+ * Lives here so it stays in sync with buildPageHeader() and buildNavigationFooter().
+ */
+function stripNavigationContext(content) {
+  let stripped = content.replace(
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n\n/,
+    ''
+  );
+
+  stripped = stripped.replace(/\n---\n\n## Related docs \([^)]*\)\n[\s\S]*$/, '\n');
+
+  return stripped;
+}
+
+/**
  * Process a directory recursively
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
@@ -1874,7 +1955,6 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
         await fs.writeFile(outputPath, result);
         console.log(`✓ ${relativePath}`);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(`✗ ${relativePath}: ${error.message}`);
         processingErrors.push({ file: inputPath, error: error.message });
       }
@@ -1937,6 +2017,7 @@ module.exports = {
   buildNavigationFooter,
   buildPageHeader,
   addNavigationContext,
+  stripNavigationContext,
 };
 
 /**

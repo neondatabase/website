@@ -233,6 +233,16 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10' ...
 curl 'https://console.neon.tech/api/v2/projects?limit=10&cursor=...' ...
 ```
 
+### Important constraints
+
+Keep these constraints in mind when building automation with the Neon API:
+
+- You **cannot delete** a project's root or default branch.
+- You **cannot delete** a branch that has child branches. Delete all children first.
+- Creating a new role **may drop existing connections** to the active compute endpoint.
+- A branch can have only one `read_write` endpoint but multiple `read_only` endpoints.
+- Operations older than 6 months may be removed from Neon's systems.
+
 ## SDKs and tools
 
 Instead of using curl, you can use our official SDKs:

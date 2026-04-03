@@ -22,7 +22,7 @@ The MOD() function allows you to perform a modulo operation, returning the remai
 
 Here’s the basic syntax of the PostgreSQL `MOD()` function:
 
-```css
+```sql
 MOD(dividend,divisor)
 ```
 
@@ -43,7 +43,7 @@ Let’s explore some examples of using the MOD() function.
 
 The following example uses the `MOD()` function to get the remainder of two integers:
 
-```
+```sql
 SELECT MOD(15,4);
 ```
 
@@ -58,7 +58,7 @@ Output:
 
 The following statement uses the `MOD()` function to get the remainder of 15 and \-5:
 
-```
+```sql
 SELECT MOD(15,-4);
 ```
 
@@ -73,7 +73,7 @@ Output:
 
 But the following statement returns a negative result:
 
-```
+```sql
 SELECT MOD(-15,4);
 ```
 
@@ -89,7 +89,7 @@ The remainder is a negative number:
 
 Similarly, the following statement returns the same negative remainder number:
 
-```
+```sql
 SELECT MOD(-15,-4);
 ```
 
@@ -106,13 +106,13 @@ Output:
 
 The following example uses the `MOD()` function to calculate the remainder when dividing 10\.5 by 3, resulting in 1\.5:
 
-```
+```sql
 SELECT MOD(10.5, 3);
 ```
 
 Output:
 
-```css
+```
  mod
 -----
  1.5

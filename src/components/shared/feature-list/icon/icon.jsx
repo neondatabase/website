@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -10,6 +9,7 @@ import DatabaseIcon from 'icons/features-icon/database.inline.svg';
 import LockIcon from 'icons/features-icon/lock.inline.svg';
 import ScaleIcon from 'icons/features-icon/scale.inline.svg';
 import SpeedometerIcon from 'icons/features-icon/speedometer.inline.svg';
+import { cn } from 'utils/cn';
 
 export const ICONS = {
   agent: AgentIcon,
@@ -46,14 +46,14 @@ const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
     <div className="relative flex w-7">
       <div className="relative z-20 -m-1 size-9 bg-white p-1 dark:bg-black-pure">
         <div
-          className={clsx(
+          className={cn(
             'relative flex size-7 items-center justify-center overflow-hidden rounded-full',
             !isActive && 'border border-gray-new-80 dark:border-gray-new-15'
           )}
           ref={ref}
         >
           <div
-            className={clsx(
+            className={cn(
               'absolute inset-0 z-0 rounded-full drop-shadow-[0_0_10px_#087d696b] transition-opacity duration-300',
               isActive ? 'opacity-100' : 'opacity-0',
               'before:absolute before:inset-0 before:rounded-full',
@@ -64,7 +64,7 @@ const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
           <span className="absolute inset-0 z-10 rounded-full border border-black/90 mix-blend-overlay dark:border-white/90" />
           {IconComponent && (
             <div
-              className={clsx(
+              className={cn(
                 'relative z-20 flex size-full items-center justify-center transition-colors duration-300',
                 isActive ? 'text-white' : 'text-gray-new-80 dark:text-gray-new-15'
               )}
@@ -76,12 +76,12 @@ const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
       </div>
       {/* Progress line */}
       <span
-        className={clsx(
-          'absolute left-[14px] top-8 z-10 h-full w-px',
+        className={cn(
+          'absolute top-8 left-[14px] z-10 h-full w-px',
           index < lastActive && 'bg-secondary-8 dark:bg-[#0B4C43]',
           index >= lastActive &&
             isActive &&
-            'bg-gradient-to-b from-secondary-8 to-gray-new-80 to-90% dark:from-[#0B4C43] dark:to-gray-new-15',
+            'bg-linear-to-b from-secondary-8 to-gray-new-80 to-90% dark:from-[#0B4C43] dark:to-gray-new-15',
           index >= lastActive && !isActive && 'bg-gray-new-80 dark:bg-gray-new-15',
           isLast && 'hidden'
         )}

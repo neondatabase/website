@@ -48,13 +48,13 @@ const Hero = ({ title, text, reset }) => {
   }, [pathname]);
 
   return (
-    <section className="flex grow flex-col pb-24 pt-16 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
+    <section className="flex grow flex-col pt-16 pb-24 dark:bg-black-pure dark:text-white lg:pt-0 md:py-14 xs:pt-10">
       <Container
         className="grid grow grid-cols-12 items-center gap-x-8 md:gap-x-0 md:gap-y-4"
         size="md"
       >
         <div className="col-start-2 col-end-6 flex flex-col 2xl:col-start-1 lg:col-end-7 md:col-span-full">
-          <h1 className="font-title text-[58px] font-medium leading-none xl:text-5xl xl:leading-none lg:text-4xl">
+          <h1 className="font-title text-[58px] leading-none font-medium xl:text-5xl xl:leading-none lg:text-4xl">
             Ooops!
             <br />
             {title}

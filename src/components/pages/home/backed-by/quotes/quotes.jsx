@@ -1,9 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { cn } from 'utils/cn';
 
 import AnimatedPosition from './animated-position';
 import AnimatedText from './animated-text';
@@ -107,7 +108,7 @@ const Quotes = () => {
             <AnimatePresence>
               {isActive && (
                 <m.figure
-                  className={clsx(
+                  className={cn(
                     'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
                     'font-mono tracking-extra-tight',
                     !isActive && 'pointer-events-none'
@@ -122,10 +123,10 @@ const Quotes = () => {
                     transition: { duration: FADE_DURATION, ease: [0.17, 0.17, 0.83, 0.83] },
                   }}
                 >
-                  <blockquote className="text-pretty text-xl leading-snug xl:text-lg lg:text-[15px]">
+                  <blockquote className="text-xl leading-snug text-pretty xl:text-lg lg:text-[15px]">
                     <AnimatedText text={text} highlight={highlight} />
                   </blockquote>
-                  <figcaption className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm md:text-[13px]">
+                  <figcaption className="mt-5 block text-base leading-normal text-gray-new-15 not-italic xl:text-sm md:text-[13px]">
                     <AnimatedPosition author={author} position={post} />
                   </figcaption>
                 </m.figure>

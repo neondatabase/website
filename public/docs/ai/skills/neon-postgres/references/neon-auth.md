@@ -84,7 +84,7 @@ export default async function DashboardPage() {
 
 **6. UI setup** — Add the provider, CSS, and page components. See [UI Components](#ui-components) below for `NeonAuthUIProvider`, CSS imports, `AuthView`, and `AccountView` setup.
 
-See the [Next.js quickstart](https://neon.com/docs/auth/quick-start/nextjs.md) and [server SDK reference](https://neon.com/docs/auth/reference/nextjs-server.md) for the full setup.
+See the [Next.js quick start](https://neon.com/docs/auth/quick-start/nextjs-api-only.md) and [server SDK reference](https://neon.com/docs/auth/reference/nextjs-server.md) for the full setup.
 
 ### Environment Variables (Next.js)
 
@@ -134,7 +134,7 @@ UI components (`AuthView`, `SignedIn`, etc.) work without an adapter.
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
-See the [React quickstart with UI components](https://neon.com/docs/auth/quick-start/react-router-components.md) and [React API-only quickstart](https://neon.com/docs/auth/quick-start/react.md) for the full setup.
+See the [UI components reference](https://neon.com/docs/auth/reference/ui-components.md), [React quick start](https://neon.com/docs/auth/quick-start/react.md), and [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) for the full setup.
 
 ## UI Components
 
@@ -399,10 +399,8 @@ createAuthClient();
 | Topic                | URL                                                               |
 | -------------------- | ----------------------------------------------------------------- |
 | Auth Overview        | https://neon.com/docs/auth/overview.md                            |
-| Next.js Quickstart   | https://neon.com/docs/auth/quick-start/nextjs.md                  |
-| Next.js API-only     | https://neon.com/docs/auth/quick-start/nextjs-api-only.md         |
-| React with UI        | https://neon.com/docs/auth/quick-start/react-router-components.md |
-| React API Methods    | https://neon.com/docs/auth/quick-start/react.md                   |
+| Next.js quick start  | https://neon.com/docs/auth/quick-start/nextjs-api-only.md         |
+| React quick start    | https://neon.com/docs/auth/quick-start/react.md                   |
 | TanStack Router      | https://neon.com/docs/auth/quick-start/tanstack-router.md         |
 | Server SDK Reference | https://neon.com/docs/auth/reference/nextjs-server.md             |
 | UI Components Ref    | https://neon.com/docs/auth/reference/ui-components.md             |

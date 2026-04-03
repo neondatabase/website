@@ -136,7 +136,7 @@ offset
         setHighlightedJsOwnAuth(jsHtmlOwn);
         setHighlightedCurl(curlHtml);
         setHighlightedHttp(httpHtml);
-      } catch (e) {
+      } catch (_e) {
         // silently ignore highlight errors
       }
     };

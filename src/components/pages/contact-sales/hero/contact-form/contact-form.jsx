@@ -1,10 +1,9 @@
 'use client';
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -22,7 +21,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
     <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
-      <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+      <h3 className="font-title text-[32px] leading-none font-medium tracking-extra-tight sm:text-[28px]">
         Oops, looks like there&apos;s a technical problem
       </h3>
       <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
@@ -36,7 +35,7 @@ const ErrorMessage = ({ onClose }) => (
         </Link>
       </p>
     </div>
-    <button className="absolute right-4 top-4 z-20" type="button" onClick={onClose}>
+    <button className="absolute top-4 right-4 z-20" type="button" onClick={onClose}>
       <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
       <span className="sr-only">Close error message</span>
     </button>
@@ -290,7 +289,7 @@ const ContactForm = () => {
         </Button>
       </div>
       <Image
-        className="absolute -bottom-px -right-px -z-10 max-w-none"
+        className="absolute -right-px -bottom-px -z-10 max-w-none"
         src={formPattern}
         alt=""
         width={576}

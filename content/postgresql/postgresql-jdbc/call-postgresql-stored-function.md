@@ -30,7 +30,7 @@ To call the `initcap()` function, you follow these steps:
 
 The following example creates a new class named `Util` and defines a static method `properCase()` that calls the `initcap()` function in PostgreSQL:
 
-```javasql
+```java
 import java.sql.SQLException;
 import java.sql.Types;
 
@@ -52,7 +52,7 @@ public class Util {
 
 The following illustrates how to use the `properCase()` method of the `Util` class:
 
-```sql
+```java
 public class Main {
     public static void main(String[] args) {
         var greeting = Util.properCase("hello joe");
@@ -63,7 +63,7 @@ public class Main {
 
 Output:
 
-```sql
+```
 Hello Joe
 ```
 
@@ -75,13 +75,13 @@ Let’s take an example of calling a stored function in PostgreSQL from a Java p
 
 First, open Command Prompt on Windows or Terminal on Unix\-like systems and connect to the sales database on your PostgreSQL server:
 
-```
+```bash
 psql -U postgres -d sales
 ```
 
 Second, create a function that finds the products by name based on a specified pattern:
 
-```
+```java
 create or replace function find_products (
 	p_pattern varchar
 )
@@ -111,7 +111,7 @@ end; $$
 
 Third, exit the psql:
 
-```php
+```
 exit
 ```
 

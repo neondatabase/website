@@ -97,13 +97,13 @@ psql -U postgres
 
 Second, execute the `CREATE DATABASE` statement to a new database with default parameters:
 
-```
+```sql
 CREATE DATABASE sales;
 ```
 
 Output:
 
-```php
+```
 CREATE DATABASE
 ```
 
@@ -155,7 +155,7 @@ Output:
 
 The following example uses the `CREATE DATABASE` statement to create a database named `hr` with some parameters:
 
-```
+```sql
 CREATE DATABASE hr
 WITH
    ENCODING = 'UTF8'

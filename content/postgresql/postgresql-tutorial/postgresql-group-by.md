@@ -97,7 +97,7 @@ The `GROUP BY` clause is useful when used in conjunction with an [aggregate fun
 
 The following query uses the `GROUP BY` clause to retrieve the total payment paid by each customer:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount)
@@ -128,7 +128,7 @@ In this example, the `GROUP BY` clause groups the payments by the customer id. F
 
 The following statement uses the [`ORDER BY`](postgresql-order-by) clause with `GROUP BY` clause to sort the groups by total payments:
 
-```
+```sql
 SELECT
   customer_id,
   SUM (amount)
@@ -156,7 +156,7 @@ Output:
 
 The following statement uses the `GROUP BY` clause to retrieve the total payment for each customer and display the customer name and amount:
 
-```
+```sql
 SELECT
   first_name || ' ' || last_name full_name,
   SUM (amount) amount
@@ -188,7 +188,7 @@ In this example, we join the `payment` table with the `customer` table using an 
 
 The following example uses the `GROUP BY` clause with the [`COUNT()`](../postgresql-aggregate-functions/postgresql-count-function) function to count the number of payments processed by each staff:
 
-```
+```sql
 SELECT
 	staff_id,
 	COUNT (payment_id)
@@ -214,7 +214,7 @@ In this example, the `GROUP BY` clause divides the rows in the `payment` table i
 
 The following example uses a `GROUP BY` clause to group rows by values in two columns:
 
-```
+```sql
 SELECT
   customer_id,
   staff_id,
@@ -247,7 +247,7 @@ In this example, the `GROUP BY` clause divides the rows in the `payment` table b
 
 The following example uses the `GROUP BY` clause to group the payments by payment date:
 
-```
+```sql
 SELECT
   payment_date::date payment_date,
   SUM(amount) sum

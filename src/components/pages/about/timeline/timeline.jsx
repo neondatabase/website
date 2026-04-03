@@ -1,11 +1,10 @@
 'use client';
 
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import TimelineSvg from 'images/pages/about/timeline/timeline.inline.svg';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -47,9 +46,9 @@ const ITEMS = [
 ];
 
 const Timeline = () => (
-  <section className="timeline safe-paddings overflow-hidden pb-[200px] pt-40 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[88px] md:pb-[104px] md:pt-[72px]">
+  <section className="timeline overflow-hidden pt-40 safe-paddings pb-[200px] xl:pt-[136px] xl:pb-[184px] lg:pt-[88px] lg:pb-[136px] md:pt-[72px] md:pb-[104px]">
     <Container size="1600">
-      <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
+      <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl leading-dense font-normal tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
         Our mission is to deliver Postgres{' '}
         <span className="text-gray-new-50">
           as a cloud service designed to help teams build scalable, dependable applications faster
@@ -62,27 +61,27 @@ const Timeline = () => (
             {ITEMS.map((item, index) => (
               <li
                 key={index}
-                className={clsx(
+                className={cn(
                   '-ml-px border-l border-gray-new-30',
                   index % 2 === 0 ? 'self-end' : 'self-start'
                 )}
               >
                 <div
-                  className={clsx(
+                  className={cn(
                     'relative flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
                     index % 2 === 0 && 'justify-end'
                   )}
                 >
                   <time
                     dateTime={item.dateTime}
-                    className="whitespace-nowrap font-mono text-base font-normal leading-none tracking-extra-tight text-gray-new-50 xl:text-sm md:text-xs"
+                    className="font-mono text-base leading-none font-normal tracking-extra-tight whitespace-nowrap text-gray-new-50 xl:text-sm md:text-xs"
                   >
                     {item.date}
                   </time>
                   {item.link ? (
                     <Link
-                      className={clsx(
-                        'relative text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                      className={cn(
+                        'relative text-xl leading-snug font-normal tracking-extra-tight text-white xl:text-lg md:text-[15px]',
                         'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white',
                         'after:absolute after:-inset-1.5',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
@@ -94,8 +93,8 @@ const Timeline = () => (
                     </Link>
                   ) : (
                     <p
-                      className={clsx(
-                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                      className={cn(
+                        'text-xl leading-snug font-normal tracking-extra-tight text-white xl:text-lg md:text-[15px]',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}
                     >

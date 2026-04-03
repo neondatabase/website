@@ -40,7 +40,7 @@ The `MD5()` function returns a string in [`TEXT`](../postgresql-tutorial/postgre
 
 The following example shows how to use the `MD5()` function to return the MD5 hash of the message `'PostgreSQL MD5'`:
 
-```
+```sql
 SELECT MD5('PostgreSQL MD5');
 ```
 

@@ -1,0 +1,23 @@
+<svg width="342" height="172" viewBox="0 0 342 172" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<mask id="mask0_26975_43356" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="342" height="172">
+<path d="M341.5 0.5V171.5H0.5V0.5H341.5Z" fill="black" stroke="#303236"/>
+</mask>
+<g mask="url(#mask0_26975_43356)">
+<mask id="mask1_26975_43356" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="4" width="340" height="166">
+<rect width="340" height="166" transform="translate(0 4)" fill="url(#pattern0_26975_43356)"/>
+</mask>
+<g mask="url(#mask1_26975_43356)">
+<rect x="1" y="1" width="340" height="169" fill="url(#paint0_linear_26975_43356)"/>
+</g>
+</g>
+<defs>
+<pattern id="pattern0_26975_43356" patternContentUnits="objectBoundingBox" width="0.0235294" height="0.0481928">
+<use xlink:href="#image0_26975_43356" transform="scale(0.00294118 0.0060241)"/>
+</pattern>
+<linearGradient id="paint0_linear_26975_43356" x1="341" y1="1" x2="285.444" y2="131.537" gradientUnits="userSpaceOnUse">
+<stop stop-color="#39A57D" stop-opacity="0.4"/>
+<stop offset="1" stop-color="#39A57D" stop-opacity="0"/>
+</linearGradient>
+<image id="image0_26975_43356" width="8" height="8" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAABdJREFUGBljYGBg+A/FQAoTMGEKDUcRAATwAgFGIXEOAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>

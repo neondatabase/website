@@ -89,7 +89,7 @@ We’ll use the `rental` and `staff` tables from the [sample database](../postgr
 
 The following example join a CTE with a table to find the staff and rental count for each:
 
-```
+```sql
 WITH cte_rental AS (
   SELECT
     staff_id,
@@ -128,7 +128,7 @@ Output:
 
 The following example uses multiple CTEs to calculate various statistics related to films and customers:
 
-```
+```sql
 WITH film_stats AS (
     -- CTE 1: Calculate film statistics
     SELECT

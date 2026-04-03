@@ -1,17 +1,16 @@
-import clsx from 'clsx';
-
 import Button from 'components/shared/button';
 import Container from 'components/shared/container/container';
 import GradientBorder from 'components/shared/gradient-border/index';
+import { cn } from 'utils/cn';
 
 const CARDS = [
   {
     title: 'Who can apply?',
-    description:
-      'Venture-backed startups with at least $1M in funding that have launched in the past 12 months.',
+    description: 'Early-stage, venture-backed startups with at least $1M in funding.',
     features: [
-      'You’ve raised less than $5M in total funding.',
+      'You’ve raised at least $1M in total funding.',
       'You’re building an early-stage product or MVP.',
+      'You’re backed by venture capital, and your funding is verifiable.',
     ],
     className: 'bg-startups-info-card-1',
   },
@@ -42,7 +41,7 @@ const CARDS = [
 const Info = () => (
   <section className="info mt-[200px] xl:mt-[184px] lg:mt-36 md:mt-24">
     <Container className="flex max-w-[896px] flex-col items-center gap-12 px-8 md:px-5">
-      <h2 className="text-center font-title text-5xl font-medium leading-none tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
+      <h2 className="text-center font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
         Who’s the Neon
         <br />
         Startup Program for?
@@ -50,7 +49,7 @@ const Info = () => (
       <ul className="grid grid-cols-2 gap-5 lg:gap-6 md:gap-5 sm:grid-cols-1">
         {CARDS.map(({ title, description, features, button, isWide, className }, index) => (
           <li
-            className={clsx(
+            className={cn(
               'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5',
               isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
               className
@@ -59,7 +58,7 @@ const Info = () => (
           >
             <div className="flex flex-col gap-6">
               <div>
-                <h3 className="text-2xl font-medium leading-none tracking-tighter">{title}</h3>
+                <h3 className="text-2xl leading-none font-medium tracking-tighter">{title}</h3>
                 <p className="mt-2.5 max-w-[464px] tracking-extra-tight text-gray-new-50">
                   {description}
                 </p>
@@ -71,7 +70,7 @@ const Info = () => (
                     {features.map((feature, index) => (
                       <li className="flex gap-2.5" key={index}>
                         <span className="check-new-icon mt-1 size-4 shrink-0 bg-green-45" />
-                        <span className="text-lg font-medium leading-snug tracking-extra-tight">
+                        <span className="text-lg leading-snug font-medium tracking-extra-tight">
                           {feature}
                         </span>
                       </li>

@@ -65,7 +65,7 @@ SELECT MAKE_TIME(25,30,45);
 
 Error:
 
-```sql
+```
 ERROR:  time field value out of range: 25:30:45
 ```
 

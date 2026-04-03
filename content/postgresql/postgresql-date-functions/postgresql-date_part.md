@@ -22,7 +22,7 @@ The `DATE_PART()` function allows you to extract a subfield from a date or time 
 
 The following illustrates the basic syntax for the `DATE_PART()` function:
 
-```sqlsql
+```sql
 DATE_PART(field, source)
 ```
 
@@ -95,7 +95,7 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the quarter from a timestamp:
 
-```
+```sql
 SELECT date_part('quarter',TIMESTAMP '2017-01-01');
 ```
 
@@ -112,7 +112,7 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the month from a timestamp:
 
-```
+```sql
 SELECT date_part('month',TIMESTAMP '2017-09-30');
 ```
 
@@ -129,7 +129,7 @@ Output:
 
 The following example uses the `DATE_PART()` function to extract the decade from a timestamp:
 
-```text
+```sql
  SELECT date_part('decade',TIMESTAMP '2017-09-30');
 ```
 
@@ -146,7 +146,7 @@ Output:
 
 To extract the week number from a time stamp, you pass the week as the first argument:
 
-```
+```sql
 SELECT date_part('week',TIMESTAMP '2017-09-30');
 ```
 
@@ -197,7 +197,7 @@ Output:
 
 To extract the hour, minute, and second, from a time stamp, you pass the corresponding value hour, minute, and second to the `DATE_PART()` function:
 
-```
+```sql
 SELECT date_part('hour',TIMESTAMP '2017-03-18 10:20:30') h,
        date_part('minute',TIMESTAMP '2017-03-18 10:20:30') m,
        date_part('second',TIMESTAMP '2017-03-18 10:20:30') s;

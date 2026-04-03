@@ -28,7 +28,7 @@ NULL is very special. It does not equal anything, even itself. The expression `N
 
 To check if a value is NULL or not, you use the [`IS NULL`](postgresql-is-null) boolean operator. For example, the following expression returns true if the value in the email address is NULL.
 
-```phpsqlsql
+```sql
 email_address IS NULL
 ```
 
@@ -38,7 +38,7 @@ The `IS NOT NULL` operator negates the result of the `IS NULL` operator.
 
 To control whether a column can accept NULL, you use the `NOT NULL` constraint:
 
-```php
+```sql
 CREATE TABLE table_name(
    ...
    column_name data_type NOT NULL,
@@ -52,7 +52,7 @@ If a column has a `NOT NULL` constraint, any attempt to [insert](postgresql-inse
 
 The following `CREATE TABLE` statement creates a new table name `invoices` with the not\-null constraints.
 
-```
+```sql
 CREATE TABLE invoices(
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
@@ -151,7 +151,7 @@ SET qty = NULL;
 
 PostgreSQL issued an error message:
 
-```sql
+```
 [Err] ERROR:  null value in column "qty" violates not-null constraint
 DETAIL:  Failing row contains (1, make for infosys inc., ABC, null, 2015-09-01, 2015-09-01).
 ```

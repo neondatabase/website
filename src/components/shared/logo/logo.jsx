@@ -1,7 +1,6 @@
 'use client';
 
 import * as Toast from '@radix-ui/react-toast';
-import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -12,6 +11,7 @@ import LogoDarkIcon from 'icons/logo-dark.inline.svg';
 import LogoLightIcon from 'icons/logo-light.inline.svg';
 import logoDarkSvg from 'images/logo-dark.svg';
 import logoLightSvg from 'images/logo-light.svg';
+import { cn } from 'utils/cn';
 
 import Link from '../link';
 
@@ -26,7 +26,6 @@ const copySvgToClipboard = async () => {
     const svgContent = await response.text();
     copyToClipboard(svgContent);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Failed to copy SVG content: ', error);
   }
 };
@@ -67,16 +66,16 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
         onContextMenu={isHeader ? handleContextMenu : undefined}
       >
         <span className="sr-only">Neon</span>
-        <LogoLightIcon className={clsx('dark:hidden', className)} width={width} height={height} />
+        <LogoLightIcon className={cn('dark:hidden', className)} width={width} height={height} />
         <LogoDarkIcon
-          className={clsx('hidden dark:block', className)}
+          className={cn('hidden dark:block', className)}
           width={width}
           height={height}
         />
       </Link>
       {isHeader && clicked && (
         <div
-          className={clsx(
+          className={cn(
             'absolute top-10 z-50 flex min-w-[200px] flex-col items-start gap-1',
             'border border-gray-new-80 bg-gray-new-98 p-2',
             'shadow-[0_10px_20px_0_rgba(0,0,0,0.06)]',
@@ -88,8 +87,8 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
             const Tag = url ? 'a' : 'button';
             return (
               <Tag
-                className={clsx(
-                  'group flex w-full items-center gap-x-2 whitespace-nowrap p-3',
+                className={cn(
+                  'group flex w-full items-center gap-x-2 p-3 whitespace-nowrap',
                   'text-left text-[15px] leading-dense tracking-extra-tight text-gray-new-10',
                   'transition-colors duration-200',
                   'hover:bg-gray-new-90 hover:text-gray-new-10',
@@ -107,7 +106,7 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
       )}
       <Toast.Provider swipeDirection="right">
         <Toast.Root
-          className={clsx(
+          className={cn(
             'rounded-lg border border-gray-new-94 bg-white px-[18px] py-3.5 text-gray-new-30',
             'shadow-[rgba(14,18,22,0.35)_0px_10px_38px_-10px,_rgba(14,18,22,0.2)_0px_10px_20px_-15px]',
             'data-[state=open]:animate-slideIn data-[state=closed]:animate-hide',
@@ -119,15 +118,15 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
           open={open}
           onOpenChange={setOpen}
         >
-          <Toast.Title className="flex items-center gap-x-2 whitespace-nowrap text-sm leading-none tracking-snug">
+          <Toast.Title className="flex items-center gap-x-2 text-sm leading-none tracking-snug whitespace-nowrap">
             <CheckIcon />
             Copied to clipboard!
           </Toast.Title>
         </Toast.Root>
         <Toast.Viewport
-          className={clsx(
-            'fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[245px] max-w-[100vw] list-none flex-col gap-[10px]',
-            'p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]'
+          className={cn(
+            'fixed right-0 bottom-0 z-[2147483647] m-0 flex w-[245px] max-w-[100vw] list-none flex-col gap-[10px]',
+            'p-[var(--viewport-padding)] outline-hidden [--viewport-padding:_25px]'
           )}
         />
       </Toast.Provider>

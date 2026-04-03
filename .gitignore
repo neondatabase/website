@@ -68,6 +68,8 @@ public/robots.txt
 # ignore generated markdown/llms files
 public/md
 public/docs/**/llms.txt
+public/docs/llms-full.txt
+public/pricing.md
 
 # Mac files
 .DS_Store

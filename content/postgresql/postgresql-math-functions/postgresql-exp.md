@@ -24,7 +24,7 @@ In PostgreSQL, you can use the `EXP()` function to calculate the exponential of 
 
 Here’s the syntax of the `EXP()` function:
 
-```plaintextsql
+```sql
 EXP(n)
 ```
 
@@ -97,7 +97,7 @@ In this example, the EXP() function converts the string ’10’ to the number 1
 
 The following example raises an error because the function fails to convert the string ’10x’ to a number:
 
-```plaintext
+```sql
 SELECT EXP('10X') result;
 ```
 

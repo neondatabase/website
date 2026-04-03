@@ -46,13 +46,13 @@ If you prefer working with command, you can follow these steps to restart Postgr
 
 Stop the PostgreSQL service using the following command:
 
-```xmlsql
+```bash
 net stop postgresql-x64-<version>
 ```
 
 You need to replace `<version>` with your [PostgreSQL version](postgresql-version) number. For example:
 
-```xml
+```bash
 net stop postgresql-x64-16
 ```
 
@@ -65,13 +65,13 @@ The postgresql-x64-16 - PostgreSQL Server 16 service was stopped successfully.
 
 After the service has stopped, type the following command and press `Enter` to start the PostgreSQL service:
 
-```
+```bash
 net start postgresql-x64-<version>
 ```
 
 For example:
 
-```xml
+```bash
 net start postgresql-x64-16
 ```
 
@@ -101,7 +101,7 @@ It assumes that the `bin` directory is included in the `PATH` environment variab
 
 Type the following `pg_ctl` command and press `Enter`:
 
-```
+```bash
 pg_ctl -D "C:\Program Files\PostgreSQL\<version>\data" restart
 ```
 
@@ -109,7 +109,7 @@ Note that you need to replace the `<version>` with the actual version of your Po
 
 For example, to restart PostgreSQL 16\.x, you can execute the following command:
 
-```
+```bash
 pg_ctl -D "C:\Program Files\PostgreSQL\16\data" restart
 ```
 

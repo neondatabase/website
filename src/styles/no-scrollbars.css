@@ -1,10 +1,8 @@
-@layer utilities {
-  .no-scrollbars {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+@utility no-scrollbars {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

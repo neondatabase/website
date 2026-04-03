@@ -22,8 +22,8 @@ const UseCaseContext = () => {
   if (!showContext) return null;
 
   return (
-    <div className="admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 border-primary-2 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10 [&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm">
-      <h4 className="text-xs font-bold uppercase text-primary-2">Important Context About Neon</h4>
+    <div className="admonition not-prose mt-5 flex flex-col rounded-[1px] border-l-4 border-primary-2 bg-gray-new-98 px-5 py-4 leading-normal dark:bg-gray-new-10 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:text-sm! [&_pre[data-language]]:bg-white! [&_pre[data-language]]:dark:bg-gray-new-8!">
+      <h4 className="text-xs font-bold text-primary-2 uppercase">Important Context About Neon</h4>
       <div className="admonition-text mt-1.5 text-base">
         <p>
           Neon is a Postgres Database service. We take the world’s most loved database and deliver

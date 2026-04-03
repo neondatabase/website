@@ -22,7 +22,7 @@ The `NULLIF()` function is one of the most common conditional expressions provid
 
 Here’s the basic syntax of the `NULLIF` function:
 
-```phpsqlsql
+```sql
 NULLIF(argument_1,argument_2);
 ```
 
@@ -69,7 +69,7 @@ Output:
 
 The following example uses the `NULLIF()` function with two unequal text arguments:
 
-```
+```sql
 SELECT NULLIF ('A', 'B');
 ```
 
@@ -87,7 +87,7 @@ Output:
 
 First, [create a table](postgresql-create-table) called `posts`:
 
-```
+```sql
 CREATE TABLE posts (
   id serial primary key,
   title VARCHAR (255) NOT NULL,
@@ -149,7 +149,7 @@ Output:
 
 Unfortunately, there is a mix between null value and ” (empty) in the `excerpt` column. To address this issue, you can use the `NULLIF` function:
 
-```
+```sql
 SELECT
   id,
   title,
@@ -183,12 +183,12 @@ Another good example of using the `NULLIF` function is to prevent division\-by\-
 
 First, [create a new table](postgresql-create-table) named members:
 
-```
+```sql
 CREATE TABLE members (
   id serial PRIMARY KEY,
   first_name VARCHAR (50) NOT NULL,
   last_name VARCHAR (50) NOT NULL,
-  gender SMALLINT NOT NULL -- 1: male, 2 female
+  gender SMALLINT NOT NULL -- 1: male, 2: female
 );
 ```
 
@@ -216,7 +216,7 @@ Output:
 
 Third, calculate the ratio between male and female members:
 
-```
+```sql
 SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
@@ -236,7 +236,7 @@ In this example, we use the [SUM function](../postgresql-aggregate-functions/pos
 
 Fourth, delete a female member:
 
-```
+```sql
 DELETE FROM members
 WHERE gender = 2;
 ```
@@ -254,13 +254,13 @@ FROM
 
 We got the following error message:
 
-```http
+```
 ERROR:  division by zero
 ```
 
 The reason is that the number of females is zero now. To prevent this division by zero error, you can use the `NULLIF` function as follows:
 
-```
+```sql
 SELECT
   (
     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (

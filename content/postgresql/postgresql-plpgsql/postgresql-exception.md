@@ -24,7 +24,7 @@ To recover from the error, you can use the `exception` clause in the `begin...en
 
 Here’s the syntax of the `exception` clause:
 
-```sql
+```plsql
 <<label>>
 declare
    ...
@@ -66,7 +66,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 The following example issues an error because the film id 2000 does not exist.
 
-```sql
+```plsql
 do
 $$
 declare
@@ -86,7 +86,7 @@ language plpgsql;
 
 Output:
 
-```shell
+```
 ERROR:  query returned no rows
 CONTEXT:  PL/pgSQL function inline_code_block line 6 at SQL statement
 SQL state: P0002
@@ -94,7 +94,7 @@ SQL state: P0002
 
 The following example uses the `exception` clause to catch the `no_data_found` exception and report a more meaningful message:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -116,7 +116,7 @@ $$;
 
 Output:
 
-```shell
+```
 ERROR:  film 2000 not found
 CONTEXT:  PL/pgSQL function inline_code_block line 14 at RAISE
 SQL state: P0001
@@ -126,7 +126,7 @@ SQL state: P0001
 
 The following example illustrates how to handle the `too_many_rows` exception:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -147,7 +147,7 @@ $$;
 
 Output:
 
-```shell
+```
 ERROR:  Search query returns too many rows
 CONTEXT:  PL/pgSQL function inline_code_block line 15 at RAISE
 SQL state: P0001
@@ -159,7 +159,7 @@ In this example, the `too_many_rows` exception occurs because the [`select into`
 
 The following example illustrates how to catch multiple exceptions:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -184,7 +184,7 @@ $$;
 
 Output:
 
-```shell
+```
 ERROR:  The with length 90 is not unique
 CONTEXT:  PL/pgSQL function inline_code_block line 17 at RAISE
 SQL state: P0001
@@ -194,7 +194,7 @@ SQL state: P0001
 
 The following example is the same as the one above except that it uses the `SQLSTATE` codes instead of the condition names:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -219,7 +219,7 @@ $$;
 
 Output:
 
-```shell
+```
 ERROR:  film with length 30 not found
 CONTEXT:  PL/pgSQL function inline_code_block line 15 at RAISE
 SQL state: P0001

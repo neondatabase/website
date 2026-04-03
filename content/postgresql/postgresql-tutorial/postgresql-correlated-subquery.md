@@ -24,7 +24,7 @@ Unlike a regular subquery, PostgreSQL evaluates the correlated subquery once for
 
 Since PostgreSQL reevaluates the correlated subquery for every row in the outer query, this may lead to performance issues, especially when dealing with large datasets.
 
-A correlated subquery can be useful when you need to perform a query that depends on the values of the current being processed.
+A correlated subquery can be useful when you need to perform a query that depends on the values of the current row being processed.
 
 ## PostgreSQL correlated subquery example
 
@@ -58,7 +58,7 @@ How it works.
 
 The outer query retrieves id, title, length, and rating from the `film` table that has the alias `f`:
 
-```
+```sql
 SELECT film_id, title, length, rating
 FROM film f
 WHERE length > (...)

@@ -32,7 +32,7 @@ To create a `BEFORE DELETE` trigger, follow these steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute before a `DELETE` operation:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -96,7 +96,7 @@ Output:
 
 Then, create a `BEFORE DELETE` trigger function that [raises an exception](../postgresql-plpgsql/postgresql-exception):
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION fn_before_delete_product()
 RETURNS TRIGGER
 AS
@@ -126,7 +126,7 @@ WHERE id = 1;
 
 Error:
 
-```sql
+```
 ERROR:  Deletion from the products table is not allowed.
 CONTEXT:  PL/pgSQL function fn_before_delete_product() line 3 at RAISE
 ```

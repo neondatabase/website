@@ -24,7 +24,7 @@ To ensure that any data modification made through a view adheres to certain cond
 
 Typically, you specify the `WITH CHECK OPTION` when creating a view using the `CREATE VIEW` statement:
 
-```phpsqlsql
+```sql
 CREATE VIEW view_name AS
 query
 WITH CHECK OPTION;
@@ -43,7 +43,7 @@ The `LOCAL` scope restricts the check option enforcement to the current view onl
 
 Here’s the syntax for creating a view with the `WITH LOCAL CHECK OPTION`:
 
-```php
+```sql
 CREATE VIEW view_name AS
 query
 WITH LOCAL CHECK OPTION;
@@ -51,7 +51,7 @@ WITH LOCAL CHECK OPTION;
 
 The `CASCADED` scope extends the check option enforcement to all underlying views of the current view. Here’s the syntax for creating a view with the `WITH CASCADED CHECK OPTION`.
 
-```php
+```sql
 CREATE VIEW view_name AS
 query
 WITH CASCADED CHECK OPTION;
@@ -67,7 +67,7 @@ Let’s take some examples of using the `WITH CHECK OPTION`.
 
 The following statements [create a new table](../postgresql-tutorial/postgresql-create-table) called `employees` and [insert data into it](../postgresql-tutorial/postgresql-insert-multiple-rows):
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -131,7 +131,7 @@ Output:
 
 Third, insert a new row into the `employees` table via the `fte` view:
 
-```
+```sql
 INSERT INTO fte(first_name, last_name, department_id, employee_type)
 VALUES ('John', 'Smith', 1, 'Contractor');
 ```
@@ -170,7 +170,7 @@ VALUES ('John', 'Snow', 1, 'Contractor');
 
 Error:
 
-```sql
+```
 ERROR:  new row violates check option for view "fte"
 DETAIL:  Failing row contains (12, John, Snow, 1, Contractor).
 ```
@@ -250,7 +250,7 @@ Since we use the `WITH LOCAL CHECK OPTION`, PostgreSQL checks only the `fte_1` v
 
 Fourth, insert a new row into the `employees` table via the `fte_1` view:
 
-```
+```sql
 INSERT INTO fte_1(first_name, last_name, department_id, employee_type)
 VALUES ('Miller', 'Jackson', 1, 'Contractor');
 ```
@@ -263,7 +263,7 @@ department_id = 1
 
 Fifth, query data from the `employees` table:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -286,7 +286,7 @@ Output:
 
 First, recreate the view `fte_1` with the `WITH CASCADED CHECK OPTION`:
 
-```
+```sql
 CREATE OR REPLACE VIEW fte_1
 AS
 SELECT

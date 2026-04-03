@@ -7,11 +7,11 @@ import {
   useViewModelInstanceNumber,
   useViewModelInstanceBoolean,
 } from '@rive-app/react-canvas';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
+import { cn } from 'utils/cn';
 
 const Animation = ({ className, state = 0 }) => {
   const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
@@ -41,12 +41,12 @@ const Animation = ({ className, state = 0 }) => {
   }, [state, setStateInstance]);
 
   return (
-    <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
+    <div className={cn('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+      <span className="absolute top-0 left-1/2 -z-10 h-full w-px" aria-hidden />
       <div
-        className={clsx(
+        className={cn(
           'relative max-w-none xl:pointer-events-none',
-          '[&_canvas]:!h-full [&_canvas]:!w-full',
+          '[&_canvas]:h-full! [&_canvas]:w-full!',
           className
         )}
         ref={animationRef}

@@ -32,7 +32,7 @@ If you use the try\-with\-resources statement, you don’t need to explicitly ca
 
 Use the `getConnection()` method of the `DriverManager` class to establish a connection to the PostgreSQL server.
 
-```javasql
+```java
 return DriverManager.getConnection(url, user, password);
 ```
 
@@ -163,13 +163,13 @@ while (rs.next()) {
 
 Finally, return the products list:
 
-```css
+```java
 return products;
 ```
 
 The following shows how to use the findAll() method of the ProductDB class to retrieve all data from the products table and display each in the standard output:
 
-```sql
+```java
 public class Main {
     public static void main(String[] args) {
 
@@ -184,7 +184,7 @@ public class Main {
 
 Output:
 
-```sql
+```
 Product{id=5, name='Bluetooth Headphones', price=199.0}
 Product{id=8, name='Car Mount', price=29.98}
 Product{id=1, name='Phone Case', price=19.99}
@@ -201,7 +201,7 @@ Product{id=4, name='Wireless Charger', price=35.99}
 
 The following defines a method called findById() to find the product by id:
 
-```sql
+```java
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -236,13 +236,13 @@ How it works.
 
 First, construct a SELECT that selects a product by id and use the question mark (?) as the placeholder:
 
-```sql
+```java
 var sql = "SELECT id, name, price FROM products WHERE id=?";
 ```
 
 Second, open a connection to the database and create a `PreparedStatement` object:
 
-```sql
+```java
 try (var conn =  DB.connect();
      var pstmt = conn.prepareStatement(sql)) {
 //...
@@ -250,19 +250,19 @@ try (var conn =  DB.connect();
 
 Third, bind the id to the statement:
 
-```sql
+```java
 pstmt.setInt(1, id);
 ```
 
 Fourth, execute the statement using the `executeQuery()` method of the PreparedStatement object:
 
-```
+```java
 var rs = pstmt.executeQuery();
 ```
 
 Fifth, process the result set if the row with specified id exists and return the Product object:
 
-```sql
+```java
 if (rs.next()) {
     return new Product(
         rs.getInt("id"),
@@ -274,7 +274,7 @@ if (rs.next()) {
 
 The following shows how to use the `findById()` in the `main()` method of the Main() class to retrieve the product with id 1 from the `products` table:
 
-```sql
+```java
 public class Main {
     public static void main(String[] args) {
 
@@ -288,7 +288,7 @@ public class Main {
 
 Output:
 
-```sql
+```java
 Product{id=1, name='Phone Case', price=19.99}
 ```
 

@@ -88,4 +88,6 @@ neon me -o json
 }
 ```
 
+In JSON output, `max_autoscaling_limit` is a numeric value in compute units. A value of `0` means no autoscaling limit is configured.
+
 <NeedHelp/>

@@ -45,7 +45,6 @@ export const metadata = getMetadata(SEO_DATA.enterprise);
 const logos = [
   'eqt',
   'openai',
-  'zimmer',
   'outfront',
   'adobe',
   'genomics',
@@ -57,6 +56,8 @@ const logos = [
   'bcg',
   'wordware',
   'commure',
+  'bitso',
+  'framer',
 ];
 
 const features = [
@@ -282,7 +283,7 @@ const faqItems = [
 ];
 
 const EnterprisePage = () => (
-  <Layout headerClassName="!absolute !bg-transparent">
+  <Layout headerClassName="absolute! bg-transparent!">
     <Hero />
     <Logos className="mt-[102px] xl:mt-[86px] lg:mt-[76px] md:mt-[68px]" logos={logos} />
     <TestimonialNew

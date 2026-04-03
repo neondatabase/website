@@ -6,7 +6,7 @@ summary: >-
   steps for creating a new project with the desired version and considerations
   for compatibility and performance testing.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.126Z'
+updatedOn: '2026-04-01T22:00:00.000Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -60,6 +60,10 @@ Alternatively, you can apply these configurations after migrating your data.
   - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
     If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
+
+  <Admonition type="important">
+  Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+  </Admonition>
 
 - **Logical replication**
 

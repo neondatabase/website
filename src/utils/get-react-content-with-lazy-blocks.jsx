@@ -1,5 +1,3 @@
-/* eslint-disable no-case-declarations */
-import clsx from 'clsx';
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
@@ -7,6 +5,7 @@ import Image from 'next/image';
 
 import EmbedTweet from 'components/shared/embed-tweet';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import AnchorHeading from '../components/shared/anchor-heading';
 import ImageZoom from '../components/shared/image-zoom';
@@ -21,7 +20,7 @@ function isJSON(string) {
 
   try {
     JSON.parse(string);
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 
@@ -73,7 +72,7 @@ const sharedComponents = {
     return (
       <ImageZoom src={urlWithoutSize} isDark>
         <Image
-          className={clsx('', className)}
+          className={cn(className)}
           src={urlWithoutSize}
           width={width || 975}
           height={height || 512}
@@ -146,9 +145,9 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
 
             return caption ? (
               <figure>
-                <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                <Component className={cn('my-0', imgClassName)} {...otherImgProps} />
                 <figcaption
-                  className={clsx('flex justify-center text-center', captionClassName)}
+                  className={cn('flex justify-center text-center', captionClassName)}
                   {...otherCaptionProps}
                 >
                   {domToReact(caption)}
@@ -173,10 +172,10 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
             return (
               <figure className="image-with-link">
                 <Link to={linkHref} {...otherLinkProps}>
-                  <Component className={clsx('my-0', imgClassName)} {...otherImgProps} />
+                  <Component className={cn('my-0', imgClassName)} {...otherImgProps} />
                   {caption && (
                     <figcaption
-                      className={clsx('flex justify-center text-center', captionClassName)}
+                      className={cn('flex justify-center text-center', captionClassName)}
                       {...otherCaptionProps}
                     >
                       {domToReact(caption)}
@@ -213,9 +212,12 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const props = transformProps(attributesToProps(domNode.attribs));
           const children = domToReact(domNode.children);
           return (
-            <video {...props} playsInline={props.playsInline ?? true} crossOrigin="anonymous">
-              {children}
-            </video>
+            <>
+              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+              <video {...props} playsInline={props.playsInline ?? true} crossOrigin="anonymous">
+                {children}
+              </video>
+            </>
           );
         }
 

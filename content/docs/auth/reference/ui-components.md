@@ -6,7 +6,7 @@ summary: >-
   `@neondatabase/neon-js`, including installation, provider setup, and
   configuration of common props for customization.
 enableTableOfContents: true
-updatedOn: '2026-02-16T13:08:22.379Z'
+updatedOn: '2026-03-23T12:18:17.917Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -242,5 +242,5 @@ function Dashboard() {
 
 ## Next Steps
 
-- See [React with Neon Auth UI](/docs/auth/quick-start/react-router-components) for a complete example
-- Check the [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) for programmatic auth methods
+- See the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) for runnable apps that use these components
+- Check the [Neon TypeScript SDK](/docs/reference/javascript-sdk) for programmatic auth methods

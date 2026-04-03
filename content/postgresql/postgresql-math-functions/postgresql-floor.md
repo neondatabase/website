@@ -20,7 +20,7 @@ The PostgreSQL `FLOOR()` function returns a number rounded down to the next whol
 
 The syntax of the `FLOOR()` function is as follows:
 
-```css
+```sql
 FLOOR(numeric_expression)
 ```
 
@@ -40,7 +40,7 @@ The `FLOOR()` function returns a value whose data type is the same as the input 
 
 The following example shows how to use the `FLOOR()` function to round a number down to the nearest integer:
 
-```
+```sql
 SELECT
     FLOOR( 150.75 );
 ```
@@ -56,7 +56,7 @@ See the following `payment` table in the [sample database](../postgresql-getting
 ![payment table](/postgresqltutorial/payment-table.png)
 The following statement returns the floor of the amount paid by the customer:
 
-```
+```sql
 SELECT
     customer_id,
     FLOOR(SUM( amount )) amount_paid

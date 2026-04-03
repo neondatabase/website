@@ -22,7 +22,7 @@ The `NUMERIC` type can store numbers with a lot of digits. Typically, you use th
 
 Here’s the syntax for declaring a column with the `NUMERIC` type:
 
-```shellsqlsql
+```sql
 column_name NUMERIC(precision, scale)
 ```
 
@@ -39,7 +39,7 @@ The scale of the `NUMERIC` type can be zero, positive, or negative.
 
 PostgreSQL 15 or later allows you to declare a numeric column with a negative scale.
 
-The following declares the price column with the numeric type that can store total numbers with 7 digits, 5 before the decimal points and 2 digits after the decimal point:
+The following declares the price column with the numeric type that can store total numbers with 7 digits, 5 before the decimal point and 2 digits after the decimal point:
 
 ```sql
 price NUMERIC(7,2)
@@ -47,7 +47,7 @@ price NUMERIC(7,2)
 
 If you use a negative scale, you can store up to precision \+ scale digits on the left and no digits on the right of the decimal point. For example:
 
-```
+```sql
 amount NUMERIC(5,-2)
 ```
 
@@ -55,7 +55,7 @@ In this example, you can store up to 7 digits before and 0 digits after the deci
 
 The following example shows how to declare a column of type numeric with a zero scale:
 
-```
+```sql
 quantity NUMERIC(5, 0)
 ```
 
@@ -67,7 +67,7 @@ quantity NUMERIC(5)
 
 If you omit precision and scale, they will default to 131072 and 16383, respectively.
 
-```
+```sql
 NUMERIC
 ```
 
@@ -81,7 +81,7 @@ DECIMAL(p,s)
 
 If you prefer a shorter name, you can use the name DEC because DEC and DECIMAL are the same type:
 
-```
+```sql
 DEC(p,s)
 ```
 
@@ -107,7 +107,7 @@ If you store a value with a scale greater than the declared scale of the `NUMERI
 
 First, [create a new table](postgresql-create-table) called `products`:
 
-```
+```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -143,14 +143,14 @@ Output:
 
 If you store a value whose precision exceeds the declared precision, PostgreSQL will raise an error as shown in the following example:
 
-```
+```sql
 INSERT INTO products (name, price)
 VALUES('Phone',123456.21);
 ```
 
 PostgreSQL issued the following error:
 
-```sql
+```
 ERROR:  numeric field overflow
 DETAIL:  A field with precision 5, scale 2 must round to an absolute value less than 10^3.
 ```
@@ -161,7 +161,7 @@ In addition to holding numeric values, the `NUMERIC` type can also hold a specia
 
 The following example updates the price of product id 1 to `NaN` :
 
-```
+```sql
 UPDATE products
 SET price = 'NaN'
 WHERE id = 1;
@@ -206,7 +206,7 @@ Output:
 (2 rows)
 ```
 
-The output indicates that the `NaN` is greater than `500.21`
+The output indicates that the `NaN` is greater than `500.21`.
 
 ## Summary
 

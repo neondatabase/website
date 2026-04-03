@@ -40,15 +40,15 @@ const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
     <div className="flex flex-col gap-9 lg:gap-6 md:gap-5">
       <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit sm:h-6" />
       <blockquote
-        className="font-mono text-[20px] font-normal leading-snug -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
+        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>
     <div className="mt-auto flex flex-col gap-1 lg:mt-5">
-      <span className="font-mono text-[15px] font-medium leading-snug -tracking-wide text-[#242628]">
+      <span className="font-mono text-[15px] leading-snug font-medium -tracking-wide text-[#242628]">
         {author}
       </span>
-      <span className="font-mono text-[15px] font-normal leading-snug -tracking-wide text-[#242628]">
+      <span className="font-mono text-[15px] leading-snug font-normal -tracking-wide text-[#242628]">
         {role}
       </span>
     </div>
@@ -71,13 +71,13 @@ TestimonialCard.propTypes = {
 };
 
 const Testimonials = () => (
-  <section className="safe-paddings relative overflow-hidden bg-[#E4F1EB] py-40 text-black-pure xl:py-20 lg:py-16 md:py-14">
+  <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure xl:py-20 lg:py-16 md:py-14">
     <Image
       src={backgroundSvg}
       alt=""
       width={1175}
       height={896}
-      className="pointer-events-none absolute right-0 top-0 h-full w-auto md:hidden"
+      className="pointer-events-none absolute top-0 right-0 h-full w-auto md:hidden"
       aria-hidden
     />
     <Container size="1280" className="relative z-10">
@@ -91,11 +91,11 @@ const Testimonials = () => (
             className="sm:h-2.5 sm:w-2.5"
             aria-hidden
           />
-          <span className="font-mono text-xs font-medium uppercase leading-none text-[#303236] sm:text-[10px]">
+          <span className="font-mono text-xs leading-none font-medium text-[#303236] uppercase sm:text-[10px]">
             backed by giants
           </span>
         </div>
-        <h2 className="mt-5 max-w-[800px] text-[48px] font-normal leading-dense tracking-tighter text-black xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px] lg:max-w-[533px] lg:text-[32px] md:max-w-[400px] md:text-2xl sm:max-w-none sm:text-[28px]">
+        <h2 className="mt-5 max-w-[800px] text-[48px] leading-dense font-normal tracking-tighter text-black xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px] lg:max-w-[533px] lg:text-[32px] md:max-w-[400px] md:text-2xl sm:max-w-none sm:text-[28px]">
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>

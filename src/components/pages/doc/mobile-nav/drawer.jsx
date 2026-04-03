@@ -1,9 +1,9 @@
 'use client';
 
-import { clsx } from 'clsx';
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
+
+import { cn } from 'utils/cn';
 
 const Drawer = ({ shouldScaleBackground = true, ...props }) => (
   <DrawerPrimitive.Root
@@ -30,7 +30,7 @@ const DrawerClose = ({ ...props }) => <DrawerPrimitive.Close data-slot="drawer-c
 const DrawerOverlay = ({ className, ...props }) => (
   <DrawerPrimitive.Overlay
     data-slot="drawer-overlay"
-    className={clsx('fixed inset-0 z-50 bg-[#C9CBCF]/80 dark:bg-black/80', className)}
+    className={cn('fixed inset-0 z-50 bg-[#C9CBCF]/80 dark:bg-black/80', className)}
     {...props}
   />
 );
@@ -44,7 +44,7 @@ const DrawerContent = ({ className, children, ...props }) => (
     <DrawerOverlay />
     <DrawerPrimitive.Content
       data-slot="drawer-content"
-      className={clsx(
+      className={cn(
         'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border',
         className
       )}
@@ -64,7 +64,7 @@ DrawerContent.propTypes = {
 const DrawerHeader = ({ className, ...props }) => (
   <div
     data-slot="drawer-header"
-    className={clsx('grid gap-1.5 p-4 text-center sm:text-left', className)}
+    className={cn('grid gap-1.5 p-4 text-center sm:text-left', className)}
     {...props}
   />
 );
@@ -76,7 +76,7 @@ DrawerHeader.propTypes = {
 const DrawerFooter = ({ className, ...props }) => (
   <div
     data-slot="drawer-footer"
-    className={clsx('mt-auto flex flex-col gap-2 p-4', className)}
+    className={cn('mt-auto flex flex-col gap-2 p-4', className)}
     {...props}
   />
 );
@@ -88,7 +88,7 @@ DrawerFooter.propTypes = {
 const DrawerTitle = ({ className, ...props }) => (
   <DrawerPrimitive.Title
     data-slot="drawer-title"
-    className={clsx('text-lg font-semibold leading-none tracking-tight', className)}
+    className={cn('text-lg leading-none font-semibold tracking-tight', className)}
     {...props}
   />
 );
@@ -100,7 +100,7 @@ DrawerTitle.propTypes = {
 const DrawerDescription = ({ className, ...props }) => (
   <DrawerPrimitive.Description
     data-slot="drawer-description"
-    className={clsx('text-muted-foreground text-sm', className)}
+    className={cn('text-muted-foreground text-sm', className)}
     {...props}
   />
 );

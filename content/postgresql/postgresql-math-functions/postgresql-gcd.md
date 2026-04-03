@@ -28,7 +28,7 @@ PostgreSQL 13 or later offers a built\-in `gcd()` function that allows you to fi
 
 Here’s the syntax of the `gcd()` function:
 
-```sqlsql
+```sql
 gcd(a, b)
 ```
 
@@ -205,7 +205,7 @@ If you use the earlier versions of PostgreSQL, you will not be able to use the b
 
 However, you can create the following gcd() function using PL/pgSQL:
 
-```
+```sql
 CREATE OR REPLACE FUNCTION gcd(a INTEGER, b INTEGER)
 RETURNS INTEGER AS $$
    DECLARE
@@ -241,7 +241,7 @@ Output:
 
 Using a recursive query to calculate the GCD of multiple values is quite complex. To make it simple, you can define an aggregate GCD function based on the built\-in `gcd()` function as follows:
 
-```
+```sql
 CREATE AGGREGATE gcd_agg(bigint) (
     SFUNC = gcd,
     STYPE = bigint
@@ -250,7 +250,7 @@ CREATE AGGREGATE gcd_agg(bigint) (
 
 To calculate the GCD of all numbers in the value column of the numbers table, you can use the `gcd_agg()` function as follows:
 
-```
+```sql
 SELECT gcd_agg(value)
 FROM numbers;
 ```

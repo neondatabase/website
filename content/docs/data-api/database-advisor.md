@@ -34,6 +34,8 @@ You can also retrieve advisor issues via the [Neon API](https://api-docs.neon.te
 GET /projects/{project_id}/advisors
 ```
 
+This endpoint requires Data API to be enabled for the target project and branch.
+
 Optional query parameters:
 
 - `branch_id`: Target branch (defaults to the primary branch)

@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
+import { cn } from 'utils/cn';
 
 const themeClassName = {
   green: {
@@ -15,15 +16,15 @@ const themeClassName = {
 
 const GradientLabel = ({ className = '', children, theme = 'green' }) => (
   <span
-    className={clsx(
+    className={cn(
       'relative before:absolute before:inset-0 before:z-10 before:rounded-[40px] before:bg-black-new after:absolute after:-inset-px after:rounded-[40px]',
       className,
       themeClassName[theme].wrapper
     )}
   >
     <span
-      className={clsx(
-        'relative z-20 block rounded-[40px] px-[13px] py-1.5 text-sm font-medium leading-none',
+      className={cn(
+        'relative z-20 block rounded-[40px] px-[13px] py-1.5 text-sm leading-none font-medium',
         themeClassName[theme].text
       )}
     >

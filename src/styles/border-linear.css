@@ -1,9 +1,7 @@
-@layer utilities {
-  .border-linear {
-    @apply border border-transparent;
-    mask:
-      linear-gradient(#fff 0 0) padding-box,
-      linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-  }
+@utility border-linear {
+  @apply border border-transparent;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }

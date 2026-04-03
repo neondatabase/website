@@ -28,7 +28,7 @@ Note that the indexes on expressions are also known as functional indexes.
 
 Here’s the basic syntax for creating an index on expression:
 
-```phpsql
+```sql
 CREATE INDEX index_name
 ON table_name (expression);
 ```
@@ -77,7 +77,7 @@ It returns one matching row.
 
 Second, use the `EXPLAIN` statement to show the query plan:
 
-```
+```sql
 EXPLAIN
 SELECT
     customer_id,
@@ -103,7 +103,7 @@ The output indicates that the query uses the `idx_last_name` index to improve th
 
 Third, find customers whose last name is `purdy` in lowercase:
 
-```php
+```sql
 EXPLAIN
 SELECT
     customer_id,
@@ -129,7 +129,7 @@ However, this time PostgreSQL could not utilize the index for lookup. To enhance
 
 Fourth, define an index on expression using the `CREATE INDEX` statement:
 
-```php
+```sql
 CREATE INDEX idx_ic_last_name
 ON customer(LOWER(last_name));
 ```

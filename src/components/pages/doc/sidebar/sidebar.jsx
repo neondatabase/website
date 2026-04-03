@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
+import { cn } from 'utils/cn';
 
 import Menu from '../menu';
 
@@ -53,6 +53,12 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
     }
   }, [menu]);
 
+  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+
+  if (isChangelogIndex) {
+    return null;
+  }
+
   const renderContent = sdkTOC ? (
     <SDKTableOfContents
       title={sdkTOC.title}
@@ -64,17 +70,17 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   ) : null;
 
   return (
-    <aside className={clsx('relative -mt-10', className)}>
+    <aside className={cn('relative -mt-11', className)}>
       <div className="sticky top-28">
         <div
-          className={clsx(
+          className={cn(
             'relative',
             'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
-            'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+            'after:bg-linear-to-b after:from-white after:to-transparent dark:after:from-black-pure dark:after:to-transparent'
           )}
         >
           <nav
-            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
+            className="z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pt-11 pr-8 pb-16 pl-1 dark:border-gray-new-20"
             ref={navRef}
           >
             {renderContent}

@@ -67,7 +67,7 @@ VALUES('jack','doe','john.doe@example.com');
 
 PostgreSQL issued an error message.
 
-```sql
+```
 [Err] ERROR:  duplicate key value violates unique constraint "person_email_key"
 DETAIL:  Key (email)=(john.doe@example.com) already exists.
 ```

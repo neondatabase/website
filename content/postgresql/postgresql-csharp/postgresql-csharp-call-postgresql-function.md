@@ -63,7 +63,7 @@ We’ll create a new function in the PostgreSQL server and call it from a C\# pr
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```plaintext
+```bash
 psql -U ed -d elearning
 ```
 

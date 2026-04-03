@@ -28,13 +28,13 @@ Let’s take a look at an example of renaming a database.
 
 First, open the Command Prompt on Windows or Terminal on a Unix\-like system and connect to the PostgreSQL server:
 
-```sqlsql
+```bash
 psql -U postgres
 ```
 
 Second, create a new database called db:
 
-```
+```sql
 CREATE DATABASE db;
 ```
 
@@ -56,7 +56,7 @@ WHERE datname = 'db';
 
 The query returned the following output:
 
-```shell
+```
 -[ RECORD 1 ]----+------------------------------
 datid            | 35918
 datname          | db
@@ -85,7 +85,7 @@ In practice, a database may have many active connections. In this case, you need
 
 Fifth, terminate all the connections to the `db` database:
 
-```
+```sql
 SELECT
     pg_terminate_backend (pid)
 FROM

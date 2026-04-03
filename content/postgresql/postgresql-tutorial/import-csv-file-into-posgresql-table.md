@@ -1,7 +1,7 @@
 ---
 title: 'Import CSV File Into PostgreSQL Table'
-page_title: 'Import CSV File Into PosgreSQL Table'
-page_description: 'In this tutorial, you will learn how to to import a CSV file into a PosgreSQL table using the COPY command or pgAdmin client tool.'
+page_title: 'Import CSV File Into PostgreSQL Table'
+page_description: 'In this tutorial, you will learn how to import a CSV file into a PostgreSQL table using the COPY command or pgAdmin client tool.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/import-csv-file-into-posgresql-table/'
 ogImage: '/postgresqltutorial/posgresql-import-csv.jpg'
 updatedOn: '2024-02-01T14:45:15+00:00'
@@ -24,7 +24,7 @@ First, [create a new table](postgresql-create-table) named `persons` with the fo
 - `dob` date of birth
 - `email`: the email address
 
-```shellsql
+```sql
 CREATE TABLE persons (
   id SERIAL,
   first_name VARCHAR(50),
@@ -62,7 +62,7 @@ COPY 2
 
 It means that two rows have been copied. Let’s check the `persons` table.
 
-```
+```sql
 SELECT * FROM persons;
 ```
 

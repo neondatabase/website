@@ -28,7 +28,7 @@ EXISTS (subquery)
 
 Typically, you use the `EXISTS` operator in the [`WHERE`](postgresql-where) clause of a `SELECT` statement:
 
-```
+```sql
 SELECT
   select_list
 FROM
@@ -88,7 +88,7 @@ We will use the following `customer` and `payment` tables in the [sample databas
 
 The following example uses the `EXISTS` operator to check if the payment value is zero exists in the `payment` table:
 
-```
+```sql
 SELECT
   EXISTS(
     SELECT
@@ -113,7 +113,7 @@ Output:
 
 The following example uses the `EXISTS` operator to find customers who have paid at least one rental with an amount greater than 11:
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -156,7 +156,7 @@ In this example, for each customer in the `customer` table, the subquery checks 
 
 The following example uses the `NOT EXISTS` operator to find customers who have not made any payment more than 11\.
 
-```
+```sql
 SELECT
   first_name,
   last_name
@@ -179,7 +179,7 @@ ORDER BY
 
 Here is the output:
 
-```sql
+```
 first_name  |  last_name
 -------------+--------------
  Aaron       | Selby

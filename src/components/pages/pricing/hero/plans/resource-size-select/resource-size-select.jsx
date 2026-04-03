@@ -1,11 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 export const LAUNCH_RESOURCE_SIZES = [
   { id: 'small', cu: 140, storage: 1 },
@@ -62,10 +62,10 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
   return (
     <div ref={containerRef} className="relative">
       <div className="flex flex-nowrap items-center gap-1.5 text-[15px] leading-snug text-gray-new-60">
-        <span className="flex-shrink-0 whitespace-nowrap tracking-extra-tight">Based on:</span>
+        <span className="shrink-0 tracking-extra-tight whitespace-nowrap">Based on:</span>
         <button
           type="button"
-          className="flex flex-1 items-center justify-between truncate border border-gray-new-30 bg-gray-new-8 py-1 pl-2.5 pr-1 text-left tracking-extra-tight text-gray-new-80 transition-colors hover:bg-gray-new-15 focus-visible:bg-gray-new-15 focus-visible:outline-none"
+          className="flex flex-1 items-center justify-between truncate border border-gray-new-30 bg-gray-new-8 py-1 pr-1 pl-2.5 text-left tracking-extra-tight text-gray-new-80 transition-colors hover:bg-gray-new-15 focus-visible:bg-gray-new-15 focus-visible:outline-hidden"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
@@ -74,8 +74,8 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
             {getLoadType(selectedOption.cu)}, {selectedOption.storage} GB
           </span>
           <ChevronIcon
-            className={clsx(
-              'size-[15px] flex-shrink-0 text-white opacity-60 transition-transform duration-200',
+            className={cn(
+              'size-[15px] shrink-0 text-white opacity-60 transition-transform duration-200',
               isOpen && 'rotate-180'
             )}
             aria-hidden
@@ -84,7 +84,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
       </div>
 
       {isOpen && (
-        <div className="absolute left-0 top-[calc(100%-1px)] z-20 w-full border border-gray-new-30 bg-gray-new-8">
+        <div className="absolute top-[calc(100%-1px)] left-0 z-20 w-full border border-gray-new-30 bg-gray-new-8">
           <ul className="flex flex-col" role="listbox">
             {sizes.map((option) => {
               const isSelected = option.id === value;
@@ -92,7 +92,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
 
               return (
                 <li
-                  className="border-x-0 border-b border-t-0 border-gray-new-30 bg-gray-new-8 text-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-15"
+                  className="border-x-0 border-t-0 border-b border-gray-new-30 bg-gray-new-8 text-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-15"
                   key={option.id}
                 >
                   <button

@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React, { createContext, useMemo } from 'react';
+import { createContext, useMemo } from 'react';
 
 import useLocalStorage from 'hooks/use-local-storage';
 

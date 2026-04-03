@@ -207,7 +207,7 @@ function findSimilarFiles(imagePath) {
     });
 
     return similarFiles.map((file) => path.join(dir, file));
-  } catch (err) {
+  } catch (_err) {
     return [];
   }
 }

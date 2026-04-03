@@ -22,7 +22,7 @@ Most PHP distributions include the PostgreSQL extension `PDO_PGSQL` by default s
 
 However, if this is not the case, you can enable the extension by editing the `php.ini` file to uncomment the following line:
 
-```shellsqlsql
+```php
 ;extension=php_pdo_pgsql.dll
 ```
 
@@ -42,7 +42,7 @@ First, create the  `postgresqlphpconnect` folder in the webroot folder to stor
 
 Next, create the `app` folder and a new `composer.json` file in the  `postgresqlphpconnect` folder with the following content:
 
-```sql
+```json
 {
     "autoload": {
         "psr-4": {
@@ -56,7 +56,7 @@ It means that every class that you create in the `app` folder will map to the `P
 
 Then, go to the window terminal, navigate to the  `postgresqlphpconnect` folder, and type the following command:
 
-```sql
+```bash
 composer update
 ```
 
@@ -83,13 +83,13 @@ The project structure will look like the following picture:
 
 First, [create a new database](../postgresql-administration/postgresql-create-database) named `stocks` for the demonstration.
 
-```
+```sql
 CREATE DATABASE stocks;
 ```
 
 Next, use the `database.ini` file to store the PostgreSQL database parameters as follows:
 
-```sql
+```ini
 host=localhost
 port=5432
 database=stocks
@@ -99,7 +99,7 @@ password=postgres
 
 Then, create a new class called `Connection` in the `Connection.php` file.
 
-```sql
+```php
 <?php
 
 namespace PostgreSQLTutorial;
@@ -194,13 +194,13 @@ PHP throws a `\PDOException` if there is an exception occurs when connecting to 
 
 Run the following composer command to update the autoload files:
 
-```css
+```bash
 composer dump-autoload -o
 ```
 
 Output:
 
-```sql
+```
 Generating optimized autoload files
 ```
 

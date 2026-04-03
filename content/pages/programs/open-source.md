@@ -8,6 +8,8 @@ image: '/images/social-previews/programs/open-source.jpg'
 
 <ProgramForm type="openSource" />
 
+<QuoteBlock quote="With Neon's serverless Postgres and the support from the Open Source Program, integrating a scalable database into Medusa was straightforward and fast. The developer experience has been outstanding, and it's helped us deliver a frictionless experience to our users." author="oli-juhl" role="CTO MedusaJS" />
+
 If you're building open source tools that use Postgres, we want to help you scale. Selected projects receive up to $5,000 yearly in platform credits, enrollment in a cash referral program, and marketing support to expand your project's visibility.
 
 ## What You'll Get

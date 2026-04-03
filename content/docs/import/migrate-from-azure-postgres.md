@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.068Z'
+updatedOn: '2026-04-01T22:00:00.000Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -259,6 +259,10 @@ After successfully migrating and verifying your data on Neon, you can:
 ## Other migration options
 
 This section discusses migration options other than using logical replication.
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) when you run `pg_dump` or `pg_restore` against Neon.
+</Admonition>
 
 - **pg_dump and pg_restore**
 

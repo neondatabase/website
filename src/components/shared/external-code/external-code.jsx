@@ -1,9 +1,9 @@
-import clsx from 'clsx';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
 import Admonition from 'components/shared/admonition';
 import highlight from 'lib/shiki';
+import { cn } from 'utils/cn';
 
 import CodeBlockWrapper from '../code-block-wrapper';
 
@@ -42,8 +42,8 @@ const ExternalCode = async ({
 
     return (
       <CodeBlockWrapper
-        className={clsx(
-          '[&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
+        className={cn(
+          '[&>pre]:my-0 [&>pre]:bg-gray-new-98! [&>pre]:dark:bg-gray-new-10!',
           shouldWrap && 'code-wrap',
           className
         )}
@@ -54,7 +54,7 @@ const ExternalCode = async ({
         {parse(html)}
       </CodeBlockWrapper>
     );
-  } catch (error) {
+  } catch (_error) {
     return <FallbackMessage url={url} />;
   }
 };

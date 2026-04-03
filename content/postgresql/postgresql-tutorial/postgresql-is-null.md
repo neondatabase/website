@@ -22,7 +22,7 @@ In the database world, NULL means missing information or not applicable. NULL is
 
 The comparison of NULL with a value will always result in NULL. Additionally, NULL is not equal to NULL so the following expression returns NULL:
 
-```phpsqlsql
+```sql
 SELECT null = null AS result;
 ```
 
@@ -49,7 +49,7 @@ The `IS NULL` operator returns true if the `value` is NULL or false otherwise.
 
 To negate the `IS NULL` operator, you use the `IS NOT NULL` operator:
 
-```php
+```sql
 value IS NOT NULL
 ```
 
@@ -72,7 +72,7 @@ Please note that the `psql` program displays `NULL` as an empty string by defaul
 
 The following example uses the `IS NULL` operator to find the addresses from the `address` table that the `address2` column contains `NULL`:
 
-```php
+```sql
 SELECT
   address,
   address2
@@ -98,7 +98,7 @@ Output:
 
 The following example uses the `IS NOT NULL` operator to retrieve the address that has the `address2` not NULL:
 
-```
+```sql
 SELECT
   address,
   address2

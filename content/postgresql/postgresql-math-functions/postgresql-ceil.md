@@ -20,7 +20,7 @@ The PostgreSQL `CEIL()` function returns a number rounded up to the next whole n
 
 The following illustrates the syntax of the `CEIL()` function:
 
-```css
+```sql
 CEIL(numeric_expression)
 ```
 
@@ -40,7 +40,7 @@ The `CEIL()` function returns a value whose data type is the same as the input a
 
 The following statement illustrates how to use the `CEIL()` function to round a number up to the nearest integer:
 
-```
+```sql
 SELECT
     CEIL( 200.25 );
 ```
@@ -58,7 +58,7 @@ Let’s take the `customer` and `payment` tables in the [sample database](../pos
 
 ![customer and payment tables](/postgresqltutorial/customer-and-payment-tables.png)The following example calculates the ceiling of amounts paid by customers for rentals:
 
-```
+```sql
 SELECT
     first_name,
     last_name,

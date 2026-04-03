@@ -22,7 +22,7 @@ The `drop procedure` statement deletes one or more [stored procedures](postgresq
 
 The following illustrates the syntax of the `drop procedure` statement:
 
-```sql
+```plsql
 drop procedure [if exists] procedure_name (argument_list)
 [cascade | restrict]
 ```
@@ -36,7 +36,7 @@ In this syntax:
 
 To drop multiple stored procedures, you specify a comma\-separated list of stored procedure names after the `drop procedure` keyword like this:
 
-```sql
+```plsql
 drop procedure [if exists] name1, name2, ...;
 ```
 
@@ -47,7 +47,7 @@ Let’s create a couple of stored procedures that manage actors so that you can 
 ![](/postgresqltutorial/actor.png)
 The following `insert_actor()` stored procedure [inserts a new row](../postgresql-tutorial/postgresql-insert) into the `actor` table. It accepts two arguments which are the first name and last name of the actor.
 
-```sql
+```plsql
 create or replace procedure insert_actor(
 	fname varchar,
 	lname varchar)
@@ -62,7 +62,7 @@ $$;
 
 The following `insert_actor` stored procedure also inserts a row into the `actor` table. However, it accepts one argument which is the full name of the actor. The `insert_actor()` uses the [`split_part()`](../postgresql-string-functions/postgresql-split_part) function to split the full name into first name and last name before inserting them into the `actor` table.
 
-```sql
+```plsql
 create or replace procedure insert_actor(
 	full_name varchar
 )
@@ -88,7 +88,7 @@ $$;
 
 The following stored procedure [deletes](../postgresql-tutorial/postgresql-delete) an actor by id:
 
-```sql
+```plsql
 create or replace procedure delete_actor(
 	p_actor_id int
 )
@@ -103,7 +103,7 @@ $$;
 
 The following stored procedure [updates](../postgresql-tutorial/postgresql-update) the first name and last name of an actor:
 
-```sql
+```plsql
 create or replace procedure update_actor(
 	p_actor_id int,
 	fname varchar,
@@ -124,13 +124,13 @@ $$;
 
 First, attempt to drop the `insert_actor` stored procedure:
 
-```sql
+```plsql
 drop procedure insert_actor;
 ```
 
 PostgreSQL issued the following error:
 
-```shell
+```
 ERROR:  procedure name "insert_actor" is not unique
 HINT:  Specify the argument list to select the procedure unambiguously.
 SQL state: 42725
@@ -140,25 +140,25 @@ Because there are two `insert_actor` stored procedures, you need to specify the 
 
 Second, drop the `insert_actor(varchar)` stored procedure that accepts one argument:
 
-```sql
+```plsql
 drop procedure insert_actor(varchar);
 ```
 
 Since the `insert_actor` stored procedure is unique now, you can drop it without specifying the argument list:
 
-```sql
+```plsql
 drop procedure insert_actor;
 ```
 
 It is the same as:
 
-```sql
+```plsql
 drop procedure insert_actor(varchar,varchar);
 ```
 
 Third, remove two stored procedures using a single `drop procedure` statement:
 
-```sql
+```plsql
 drop procedure
 	delete_actor,
 	update_actor;

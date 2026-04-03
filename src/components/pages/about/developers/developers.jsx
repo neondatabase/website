@@ -1,6 +1,5 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 
 import IconCost from './images/icon-cost.inline.svg';
 import IconEasy from './images/icon-easy.inline.svg';
@@ -34,13 +33,13 @@ const FEATURES_DATA = [
 ];
 
 const Developers = () => (
-  <section className="developers safe-paddings bg-black-pure">
+  <section className="developers bg-black-pure safe-paddings">
     <h2 className="sr-only">Developer-Focused Features</h2>
     <Container
       size="small"
-      className="pb-[200px] pt-[153px] xl:px-32 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[108px] md:pb-[104px] md:pt-[88px]"
+      className="pt-[153px] pb-[200px] xl:px-32 xl:pt-[136px] xl:pb-[184px] lg:pt-[108px] lg:pb-[136px] md:pt-[88px] md:pb-[104px]"
     >
-      <p className="max-w-[800px] text-[64px] font-normal leading-none tracking-[-0.05em] text-white xl:max-w-[696px] xl:text-[56px] lg:max-w-[544px] lg:text-[44px] md:max-w-full md:text-[32px]">
+      <p className="max-w-[800px] text-[64px] leading-none font-normal tracking-[-0.05em] text-white xl:max-w-[696px] xl:text-[56px] lg:max-w-[544px] lg:text-[44px] md:max-w-full md:text-[32px]">
         Developers are at the center of everything we&nbsp;do.
       </p>
 
@@ -50,10 +49,10 @@ const Developers = () => (
           return (
             <li
               key={index}
-              className={clsx(
+              className={cn(
                 'relative flex flex-col',
                 {
-                  'before:absolute before:-left-6 before:top-0 before:h-full before:w-px before:bg-gray-new-20 md:before:hidden':
+                  'before:absolute before:top-0 before:-left-6 before:h-full before:w-px before:bg-gray-new-20 md:before:hidden':
                     index > 0,
                 },
                 {
@@ -68,10 +67,10 @@ const Developers = () => (
                 className="h-14 w-14 shrink-0 xl:h-[52px] xl:w-[52px] lg:h-11 lg:w-11 md:h-9 md:w-9"
                 aria-hidden="true"
               />
-              <h3 className="mt-6 text-[32px] font-normal leading-tight tracking-extra-tight text-white xl:mt-6 xl:text-[28px] lg:mt-5 lg:text-2xl md:mt-[18px]">
+              <h3 className="mt-6 text-[32px] leading-tight font-normal tracking-extra-tight text-white xl:mt-6 xl:text-[28px] lg:mt-5 lg:text-2xl md:mt-[18px]">
                 {feature.title}
               </h3>
-              <p className="mt-10 text-base font-normal leading-normal tracking-extra-tight text-gray-new-60 xl:mt-9 lg:mt-7 md:mt-5">
+              <p className="mt-10 text-base leading-normal font-normal tracking-extra-tight text-gray-new-60 xl:mt-9 lg:mt-7 md:mt-5">
                 {feature.description}
               </p>
             </li>

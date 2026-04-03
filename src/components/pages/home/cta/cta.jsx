@@ -6,11 +6,11 @@ import LINKS from 'constants/links';
 import CopyCodeButton from './copy-code-button';
 
 const CTA = () => (
-  <section className="cta safe-paddings relative bg-[#151617]">
-    <div className="absolute inset-0 z-10 pb-9 pt-14 xl:pb-5 xl:pt-12 lg:pt-9 md:pb-6 md:pt-[52px]">
+  <section className="cta relative bg-[#151617] safe-paddings">
+    <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
         <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
-          The world's most advanced <br /> Postgres platform.
+          The world&apos;s most advanced <br /> Postgres platform.
         </h2>
 
         <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
@@ -31,7 +31,7 @@ const CTA = () => (
               Read the docs
             </Button>
             <CopyCodeButton
-              className="inline-flex items-center gap-x-3 font-mono !font-medium"
+              className="inline-flex items-center gap-x-3 font-mono font-medium!"
               code="npx neonctl init"
               copyText="npx neonctl@latest init"
             />

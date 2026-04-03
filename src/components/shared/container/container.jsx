@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
+
+import { cn } from 'utils/cn';
 
 const styles = {
   size: {
@@ -36,7 +37,7 @@ const Container = forwardRef(
     const Tag = as;
     return (
       <Tag
-        className={clsx(
+        className={cn(
           'relative mx-auto lg:max-w-none lg:px-8 md:px-5',
           styles.size[size],
           className
@@ -49,6 +50,8 @@ const Container = forwardRef(
     );
   }
 );
+
+Container.displayName = 'Container';
 
 Container.propTypes = {
   className: PropTypes.string,

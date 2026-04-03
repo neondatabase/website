@@ -22,7 +22,7 @@ To change the structure of an existing table, you use PostgreSQL `ALTER TABLE` s
 
 The following illustrates the basic syntax of the `ALTER TABLE` statement:
 
-```shellsql
+```sql
 ALTER TABLE table_name action;
 ```
 
@@ -173,14 +173,14 @@ INSERT INTO links(link_title,url,target)
 VALUES('PostgreSQL','http://www.postgresql.org/','whatever');
 ```
 
-```sql
+```
 ERROR:  new row for relation "links" violates check constraint "links_target_check"
 DETAIL:  Failing row contains (2, PostgreSQL, http://www.postgresql.org/, whatever).DETAIL:  Failing row contains (2, PostgreSQL, http://www.postgresql.org/, whatever).
 ```
 
 The following statement adds a `UNIQUE` constraint to the `url` column of the `links` table:
 
-```shell
+```sql
 ALTER TABLE links
 ADD CONSTRAINT unique_url UNIQUE ( url );
 ```
@@ -194,14 +194,14 @@ VALUES('PostgreSQL','https://neon.com/postgresql/');
 
 It causes an error due to the unique_url constraint:
 
-```sql
+```
 ERROR:  duplicate key value violates unique constraint "unique_url"
 DETAIL:  Key (url)=(/postgresql/) already exists.
 ```
 
 The following statement changes the name of the `links` table to `urls`:
 
-```
+```sql
 ALTER TABLE links
 RENAME TO urls;
 ```

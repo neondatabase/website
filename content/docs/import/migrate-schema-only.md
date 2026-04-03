@@ -6,12 +6,16 @@ summary: >-
   detailing how to dump and modify a database schema for compatibility with
   Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.077Z'
+updatedOn: '2026-04-01T22:00:00.000Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.
 
 A schema-only migration may be necessary in certain scenarios. For example, when replicating data between two Postgres instances, the tables defined in your publication on the source database must also exist in the destination database, and they must have the same table names and columns. A schema dump and reload in this case may be faster than trying to manually create the required schema on the destination database.
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+</Admonition>
 
 <Steps>
 

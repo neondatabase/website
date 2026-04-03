@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.006Z'
+updatedOn: '2026-03-20T21:22:58.810Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -30,15 +30,12 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-### 2. Configure Neon Auth (optional)
+### 2. Configure authentication
 
-The **Use Neon Auth** checkbox allows you to enable [Neon Auth](/docs/auth/overview) as your authentication provider for the Data API. When enabled, Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
+All requests to the Data API require a valid JWT token, so you need an authentication provider. You can configure one now or add it later from the Data API **Settings** tab. The Data API works with any provider that issues JWTs.
 
-If you prefer to use a different authentication provider (such as Auth0, Clerk, or Firebase Auth), leave this checkbox unchecked and configure your provider later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for details.
-
-<Admonition type="note" title="Authentication required">
-All requests to the Data API require authentication with a valid JWT token.
-</Admonition>
+- **Neon Auth**: Check the **Use Neon Auth** checkbox to enable [Neon Auth](/docs/auth/overview) as your provider. Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
+- **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.
 
 ### 3. Configure schema access (optional)
 
@@ -66,7 +63,7 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 
 Enable this checkbox unless you need to manage permissions manually. If you leave it unchecked, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
 
-### 4. Click Enable Data API
+### 4. Enable Data API
 
 Click **Enable Data API** to activate the Data API. Once enabled, you'll see the Data API page.
 
@@ -76,7 +73,7 @@ On the **API** tab, you'll see:
 
 - **API URL**: Your REST API endpoint for accessing your database
 - **Refresh schema cache**: A button to update the Data API when you make schema changes
-- **Security section**: Options to configure Neon Auth and enable Row-Level Security on your tables
+- **Security section**: Options to configure authentication and enable Row-Level Security on your tables
 
 <Admonition type="warning">
 If you have tables without RLS enabled, you'll see a warning that authenticated users can view all rows in those tables. We'll show you how to add RLS in the next step.
@@ -229,11 +226,11 @@ You can connect to the Data API using a client library or direct HTTP requests.
 
 Install a client library and run your first query. Choose the option that matches your authentication provider:
 
-<Tabs labels={["Neon Auth", "Other authentication provider"]}>
+<Tabs labels={["Neon Auth", "Any authentication provider"]}>
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using Neon Auth. This library handles token management automatically.
+Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Neon Auth](/docs/auth/overview). This library handles token management automatically.
 
 **1. Install**
 
@@ -270,7 +267,7 @@ console.log(data);
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) if you're using another authentication provider like [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
+Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 
@@ -286,7 +283,7 @@ Provide a function that retrieves the JWT token from your authentication system.
 import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
 
 const getTokenFromAuthSystem = async (): Promise<string> => {
-  // Retrieve the JWT token from your auth system
+  // Retrieve the JWT token from your auth system (e.g., Auth0, Clerk, Firebase)
   return 'your-jwt-token';
 };
 
@@ -322,9 +319,8 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **Where to get the JWT token:**
 
-- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
-- **Neon Auth (programmatic)**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
-- **Other providers**: Retrieve the token from your auth provider's SDK (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
+- **Your auth provider's SDK**: Retrieve the token using your provider's API (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
+- **Neon Auth**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Neon Auth](#testing-with-neon-auth) below).
 
 **About the `sub` claim:**
 
@@ -355,13 +351,9 @@ curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
 
 </Steps>
 
-## Testing with Postman or cURL
+## Testing with Neon Auth
 
-If you're using Neon Auth and want to test the Data API without building an application first, you can obtain a JWT token using the interactive Auth API reference UI or any HTTP client (the examples below use cURL).
-
-<Admonition type="note" title="Neon Auth only">
-This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
-</Admonition>
+If you're using [Neon Auth](/docs/auth/overview) and want to test the Data API without building an application first, you can obtain a JWT token using the interactive Auth API reference UI or any HTTP client (the examples below use cURL). If you're using a different provider, obtain JWT tokens through your provider's authentication flow and use them in the `Authorization: Bearer` header as shown in the [HTTP examples above](#option-2-direct-http-requests).
 
 <Tabs labels={["Auth API reference UI", "cURL"]}>
 
@@ -493,12 +485,12 @@ The Data API supports full CRUD operations and advanced queries. Here's a quick 
 | `.limit()`  | Limit rows returned | `.limit(10)`                                 |
 | `.single()` | Return single row   | `.select('*').eq('id', 1).single()`          |
 
-For the complete list of methods and detailed examples, see the [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk).
+For the complete list of methods and detailed examples, see the [Neon TypeScript SDK](/docs/reference/javascript-sdk).
 
 ## Next steps
 
 - [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
-- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
+- [Neon TypeScript SDK](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
 - [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
 - [SQL to REST Converter](/docs/data-api/sql-to-rest): Convert SQL queries to API calls
 - [Row-Level Security with Neon](/docs/guides/row-level-security): Secure your data at the database level

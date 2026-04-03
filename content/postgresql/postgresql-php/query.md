@@ -28,25 +28,25 @@ We will use the `stocks` table created in the [creating table tutorial](create-t
 
 The following `all()` method selects all rows in the `stocks` table.
 
-```phpsql
-   /**
-     * Return all rows in the stocks table
-     * @return array
-     */
-    public function all() {
-        $stmt = $this->pdo->query('SELECT id, symbol, company '
-                . 'FROM stocks '
-                . 'ORDER BY symbol');
-        $stocks = [];
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $stocks[] = [
-                'id' => $row['id'],
-                'symbol' => $row['symbol'],
-                'company' => $row['company']
-            ];
-        }
-        return $stocks;
+```php
+/**
+ * Return all rows in the stocks table
+ * @return array
+ */
+public function all() {
+    $stmt = $this->pdo->query('SELECT id, symbol, company '
+            . 'FROM stocks '
+            . 'ORDER BY symbol');
+    $stocks = [];
+    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        $stocks[] = [
+            'id' => $row['id'],
+            'symbol' => $row['symbol'],
+            'company' => $row['company']
+        ];
     }
+    return $stocks;
+}
 ```
 
 To test the `all()` method, we use the following code in the `index.php` file.

@@ -146,7 +146,7 @@ The following diagram illustrates the tables and their relationships:
 
 The following command executes the `create_tables.py` module that calls the `create_tables()` function:
 
-```python
+```bash
 python create_table.py
 ```
 
@@ -154,7 +154,7 @@ python create_table.py
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL server using the `psql` client tool.
 
-```python
+```bash
 psql -U postgres
 ```
 
@@ -162,19 +162,19 @@ It’ll prompt you for a password for the `postgres` user.
 
 Second, change the current database to `suppliers`:
 
-```python
+```
 \c suppliers
 ```
 
 Third, [show tables](../postgresql-administration/postgresql-show-tables) in the `suppliers` database using the `\dt` command:
 
-```python
+```
 \dt
 ```
 
 Output:
 
-```python
+```
              List of relations
  Schema |     Name      | Type  |  Owner
 --------+---------------+-------+----------

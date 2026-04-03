@@ -7,13 +7,17 @@ summary: >-
   directory structure and code configuration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.181Z'
+updatedOn: '2026-04-01T22:00:00.000Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.
 
 <Admonition type="note">
 To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started/signing-up#sign-up) to learn how.
+</Admonition>
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) for `PROD_DATABASE_URL` and `DEV_DATABASE_URL` when they point to Neon.
 </Admonition>
 
 ## Create the workflow

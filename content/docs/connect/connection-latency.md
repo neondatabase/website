@@ -44,10 +44,10 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your scale to zero configuration
 
-Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. To disable scale to zero, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. To disable scale to zero, see [Edit a compute](/docs/manage/computes#edit-a-compute).
 
 <Admonition type="important">
-If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
+If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
 </Admonition>
 
 To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
@@ -73,7 +73,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 
 ### Place your application and database in the same region
 
-A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For information about moving your database to a different region, see [Import data from another Neon project](/docs/import/migrate-from-neon).
+A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For planning a move to another region, see [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) and [Import data from another Neon project](/docs/import/migrate-from-neon).
 
 ### Increase your connection timeout
 
@@ -125,7 +125,7 @@ DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?connect_tim
 </CodeTabs>
 
 <Admonition type="note">
-If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#connection-pool-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#troubleshooting) for information about configuring your Prisma connection pool size and pool timeout settings.
 </Admonition>
 
 Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.

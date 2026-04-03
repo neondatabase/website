@@ -24,7 +24,7 @@ In other words, the `FULL OUTER JOIN` combines the results of both the [left joi
 
 Here’s the basic syntax of `FULL OUTER JOIN` clause:
 
-```sqlsql
+```sql
 SELECT select_list
 FROM table1
 FULL OUTER JOIN table2
@@ -124,7 +124,7 @@ Output:
 (5 rows)
 ```
 
-```
+```sql
 SELECT * FROM employees;
 ```
 
@@ -146,7 +146,7 @@ Output:
 
 Let’s take some examples of using the `FULL OUTER JOIN` clause.
 
-### 1\) Basic FULL OUTER JOIN examaple
+### 1\) Basic FULL OUTER JOIN example
 
 The following query uses the `FULL OUTER JOIN` to query data from both `employees` and `departments` tables:
 
@@ -207,7 +207,7 @@ Output:
 
 The result shows that the `Production` department does not have any employees.
 
-The following example use the `FULL OUTER JOIN` cluase with a `WHERE` clause to find employees who do not belong to any department:
+The following example use the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
 
 ```sql
 SELECT
@@ -230,7 +230,7 @@ Output:
 (1 row)
 ```
 
-The output shows that `Juila Mcqueen` does not belong to any department.
+The output shows that `Julia Mcqueen` does not belong to any department.
 
 ## Summary
 

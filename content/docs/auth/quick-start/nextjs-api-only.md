@@ -6,17 +6,25 @@ summary: >-
   enabling authentication, installing the Neon SDK, and setting up environment
   variables.
 enableTableOfContents: true
-updatedOn: '2026-02-16T13:08:22.369Z'
+updatedOn: '2026-03-23T15:16:28.132Z'
 layout: wide
+redirectFrom:
+  - /docs/auth/quick-start/nextjs
+  - /docs/auth/quick-start/nextjs/
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-<Admonition type="note">
-Upgrading from Neon Auth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
 </Admonition>
 
-This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. To use our pre-built UI components instead, see the [UI components guide](/docs/auth/quick-start/nextjs).
+This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. For pre-built UI components, see the [UI components reference](/docs/auth/reference/ui-components) and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples). Upgrading from v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1).
 
 <TwoColumnLayout>
 
@@ -49,9 +57,9 @@ cd my-app
 </details>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm install @neondatabase/auth@latest
 ```
 
@@ -68,9 +76,9 @@ Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label=".env.local">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename=".env.local"
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
@@ -90,9 +98,9 @@ Create a unified auth instance in `lib/auth/server.ts`. This single instance pro
 See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="lib/auth/server.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="lib/auth/server.ts"
 import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 export const auth = createNeonAuth({
@@ -114,7 +122,7 @@ Create an API route handler that proxies auth requests. All Neon Auth APIs will 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
 
-```typescript
+```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
 export const { GET, POST } = auth.handler();
@@ -129,9 +137,9 @@ export const { GET, POST } = auth.handler();
 The middleware ensures users are authenticated before accessing protected routes. Create `proxy.ts` file in your project root:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="proxy.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="proxy.ts"
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
@@ -165,9 +173,9 @@ The server-side `auth` instance was already created in a previous step. The clie
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="lib/auth/client.ts">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="lib/auth/client.ts"
 'use client';
 
 import { createAuthClient } from '@neondatabase/auth/next';
@@ -386,9 +394,9 @@ export default function SignInForm() {
 In last step, lets create the home page and display authenticated user status:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="app/page.tsx">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="app/page.tsx"
 import { auth } from '@/lib/auth/server';
 import Link from 'next/link';
 
@@ -445,9 +453,9 @@ Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- 
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm run dev
 ```
 
@@ -472,5 +480,6 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
 
 <NeedHelp/>

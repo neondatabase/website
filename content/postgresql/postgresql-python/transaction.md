@@ -33,7 +33,7 @@ The `connection` class has two methods for concluding a transaction:
 
 Closing a connection object by calling the close() method or deleting it using `del` will also trigger an implicit rollback:
 
-```csssql
+```python
 conn.close()
 ```
 
@@ -49,7 +49,7 @@ The `autocommit` mode can be particularly useful when executing statements that 
 
 The following shows a typical pattern for managing a transaction in `psycopg2`:
 
-```
+```python
 import psycopg2
 
 conn = None
@@ -175,7 +175,7 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, run the following command to execute the `transaction.py` module:
 
-```css
+```bash
 python transaction.py
 ```
 
@@ -183,13 +183,13 @@ python transaction.py
 
 First, connect to the `suppliers` on the PostgreSQL server:
 
-```python
+```bash
 psql -U postgres -d suppliers
 ```
 
 Second, retrieve data from the `parts` table:
 
-```
+```sql
 SELECT * FROM parts;
 ```
 
@@ -209,7 +209,7 @@ Output:
 
 Third, query data from the `vendor_parts` table:
 
-```
+```sql
 SELECT * FROM vendor_parts;
 ```
 
@@ -239,7 +239,7 @@ Let’s insert another part, but this time, we intentionally use an invalid vend
 
 The program should not add a new part without assigning it to a vendor.
 
-```
+```python
 if __name__ == '__main__':
     # no rows inserted into the parts and vendor_parts tables
     add_part('Power Amplifier', (99,))

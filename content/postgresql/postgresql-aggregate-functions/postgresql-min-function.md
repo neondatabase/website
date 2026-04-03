@@ -24,7 +24,7 @@ To find the minimum value in a column of a table, you pass the column name the `
 
 Here’s the basic syntax of the `MIN()` function:
 
-```csssqlsql
+```sql
 MIN(expression)
 ```
 
@@ -62,7 +62,7 @@ The query returns 0\.99, which is the lowest rental rate.
 
 The following example uses the `MIN()` function in a subquery to get the film information of the film with the lowest rental rate:
 
-```php
+```sql
 SELECT
   film_id,
   title,
@@ -101,7 +101,7 @@ In practice, you often use the `MIN` function with the [`GROUP BY`](../postgresq
 
 The following statement uses the `MIN()` function with the `GROUP BY` clause to find the lowest replacement cost of films by category:
 
-```
+```sql
 SELECT
   name category,
   MIN(replacement_cost) replacement_cost
@@ -134,7 +134,7 @@ It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutori
 
 The following query uses the `MIN()` function to find the lowest replacement costs of films grouped by category, selecting only groups with replacement costs greater than `9.99`:
 
-```
+```sql
 SELECT
   name category,
   MIN(replacement_cost) replacement_cost
@@ -167,7 +167,7 @@ It’s possible to use the  `MIN()` function with other aggregate functions suc
 
 The following example uses the `MIN()` and `MAX()` function to find the shortest and longest films by category:
 
-```
+```sql
 SELECT
   name category,
   MIN(length) min_length,

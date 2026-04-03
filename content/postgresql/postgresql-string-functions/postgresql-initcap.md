@@ -24,7 +24,7 @@ Technically, words are defined as sequences of alphanumeric characters separated
 
 Here’s the basic syntax of the `INITCAP()` function:
 
-```sqlsql
+```sql
 INITCAP(text)
 ```
 
@@ -61,7 +61,7 @@ In practice, you often use the `INITCAP()` function to format blog titles, autho
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `blog_posts` and insert some rows into it:
 
-```
+```sql
 CREATE TABLE blog_posts(
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL
@@ -92,7 +92,7 @@ Output:
 
 Second, use the `INITCAP()` function to [update](../postgresql-tutorial/postgresql-update) the titles in the `blog_posts` table to the proper case:
 
-```
+```sql
 UPDATE blog_posts
 SET title = INITCAP(title)
 RETURNING *;

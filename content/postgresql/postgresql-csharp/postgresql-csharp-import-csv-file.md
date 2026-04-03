@@ -240,7 +240,7 @@ foreach(var student in ReadStudentsFromCSV(csvFilePath)) {
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```cs
+```bash
 psql -U ed -d elearning
 ```
 
@@ -248,7 +248,7 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, query data from the `students` table:
 
-```cs
+```sql
 SELECT * FROM students;
 ```
 

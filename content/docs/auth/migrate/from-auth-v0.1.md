@@ -6,7 +6,7 @@ summary: >-
   changes such as a unified API, session caching, and explicit configuration
   requirements.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.755Z'
+updatedOn: '2026-03-23T12:18:17.908Z'
 ---
 
 This guide helps you migrate from Neon Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.
@@ -390,7 +390,7 @@ npm run dev
 
 - [Next.js Server SDK Reference](/docs/auth/reference/nextjs-server) - Complete API documentation
 - [Neon Auth SDK Changelog](https://github.com/neondatabase/neon-js/blob/main/packages/auth/CHANGELOG.md#020-beta1)
-- [Next.js Integration Guide](/docs/auth/quick-start/nextjs)
+- [Next.js integration guide](/docs/auth/quick-start/nextjs-api-only)
 - [Neon Auth Overview](/docs/auth/overview)
 
 <NeedHelp/>

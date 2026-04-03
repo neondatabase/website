@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import Button from 'components/shared/button';
@@ -8,6 +7,7 @@ import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import { cn } from 'utils/cn';
 
 import Submenu from '../submenu';
 
@@ -243,13 +243,13 @@ const Navigation = () => {
               onMouseLeave={() => handleMenuLeave(hasSubmenu)}
             >
               <Button
-                className={clsx(
-                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                className={cn(
+                  'group/main-nav-trigger relative flex items-center gap-x-1 rounded-sm px-3.5 text-[15px] leading-normal! font-normal tracking-snug whitespace-pre transition-colors duration-200 group-hover/main-nav:text-gray-new-30 hover:text-black-pure! dark:group-hover/main-nav:text-gray-new-70 dark:hover:text-white! xl:px-2.5',
                   {
-                    '-ml-3.5  xl:-ml-2.5 ': index === 0,
+                    '-ml-3.5 xl:-ml-2.5': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
-                    '!text-white': isActive,
-                    '!text-gray-new-70': activeMenuIndex !== null && !isActive,
+                    'text-black-pure! dark:text-white!': isActive,
+                    'text-gray-new-30! dark:text-gray-new-70!': activeMenuIndex !== null && !isActive,
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
                 )}
@@ -268,9 +268,9 @@ const Navigation = () => {
                 {text}
                 {hasSubmenu && (
                   <ChevronIcon
-                    className={clsx(
-                      'text-gray-new-70 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-white',
-                      { 'text-white': isActive }
+                    className={cn(
+                      'text-gray-new-30 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-black-pure dark:text-gray-new-70 dark:group-hover/main-nav-trigger:text-white',
+                      { 'text-black-pure dark:text-white': isActive }
                     )}
                     aria-hidden="true"
                   />

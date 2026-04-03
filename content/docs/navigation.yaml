@@ -65,7 +65,7 @@
               slug: import/migrate-from-render
             - title: Supabase
               slug: import/migrate-from-supabase
-            - title: Migrate from a Neon project
+            - title: Neon to Neon
               slug: import/migrate-from-neon
             - title: Schema-only
               slug: import/migrate-schema-only
@@ -91,6 +91,17 @@
           items:
             - title: AWS DMS
               slug: import/migrate-aws-dms
+
+        - title: Region migration
+          items:
+            - title: Overview
+              slug: import/region-migration
+            - title: Neon to another region
+              slug: import/migrate-neon-to-another-region
+            - title: Neon to Lakebase
+              slug: guides/migrate-neon-to-lakebase
+            - title: Postgres-compatible export
+              slug: guides/export-neon-postgres-compatible
 
         - title: CSV
           slug: import/import-from-csv
@@ -400,7 +411,7 @@
 
             - section: Tools
               items:
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: SQL to REST API Translator
                   slug: data-api/sql-to-rest
@@ -433,19 +444,9 @@
             - section: Quickstarts
               items:
                 - title: Next.js
-                  slug: auth/quick-start/nextjs
-                  items:
-                    - title: UI components
-                      slug: auth/quick-start/nextjs
-                    - title: API methods
-                      slug: auth/quick-start/nextjs-api-only
+                  slug: auth/quick-start/nextjs-api-only
                 - title: React
                   slug: auth/quick-start/react
-                  items:
-                    - title: UI components
-                      slug: auth/quick-start/react-router-components
-                    - title: API methods
-                      slug: auth/quick-start/react
                 - title: TanStack Router
                   slug: auth/quick-start/tanstack-router
 
@@ -465,6 +466,8 @@
                   slug: auth/guides/webhooks
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Troubleshooting
+                  slug: auth/troubleshooting
                 - title: Manage Auth via the API
                   slug: auth/guides/manage-auth-api
 
@@ -486,7 +489,7 @@
 
             - section: Reference
               items:
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: Next.js Server SDK
                   slug: auth/reference/nextjs-server
@@ -520,6 +523,8 @@
               slug: guides/row-level-security
             - title: Simplify RLS with Drizzle
               slug: guides/rls-drizzle
+            - title: Run RLS queries with Drizzle ORM
+              slug: guides/rls-query-execution
 
     - section: AI
       items:
@@ -658,7 +663,7 @@
               items:
                 - title: Overview
                   slug: reference/sdk
-                - title: Neon Auth & Data API TypeScript SDKs
+                - title: Neon TypeScript SDK
                   slug: reference/javascript-sdk
                 - title: Neon API TypeScript SDK
                   slug: reference/typescript-sdk
@@ -727,6 +732,8 @@
                       slug: guides/vercel-managed-integration
                     - title: Neon-Managed (Connectable Account)
                       slug: guides/neon-managed-vercel-integration
+                    - title: Managing preview branch cleanup
+                      slug: guides/vercel-branch-cleanup
                     - title: Manual Setup
                       slug: guides/vercel-manual
                     - title: Connecting to Neon from Vercel
@@ -1063,27 +1070,14 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Usage and cost calculations
+          slug: introduction/usage-calculations
         - title: Cost optimization
           slug: introduction/cost-optimization
         - title: Network transfer costs
           slug: introduction/network-transfer
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
-        - title: Azure Marketplace
-          slug: introduction/billing-azure-marketplace
-
-    - title: Neon on Azure
-      icon: azure
-      slug: manage/azure
-      items:
-        - title: Migrate from Neon on Azure
-          slug: import/migrate-from-azure-native
-        - title: Deploy Neon on Azure
-          slug: azure/azure-deploy
-        - title: Manage Neon on Azure
-          slug: azure/azure-manage
-        - title: Develop with Neon on Azure
-          slug: azure/azure-develop
 
     - title: Security & compliance
       icon: security

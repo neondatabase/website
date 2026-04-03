@@ -1,15 +1,15 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const styles = {
-  base: 'inline-flex cursor-pointer items-center justify-center !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
+  base: 'inline-flex cursor-pointer items-center justify-center leading-none! text-center whitespace-nowrap rounded-full transition-colors duration-200',
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm font-semibold',
     'lg-new':
@@ -28,9 +28,9 @@ const styles = {
     'white-off-filled': 'bg-[#E4F1EB] text-gray-new-8',
     'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-filled-multi':
-      'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
+      'dark:bg-white dark:text-black-pure hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     outlined:
-      'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
+      'bg-black-pure/0.02 text-black-pure border-gray-new-60 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'outlined-new':
       'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
@@ -69,7 +69,7 @@ const Button = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
+    const className = cn(
       styles.base,
       styles.size[size],
       styles.theme[theme],

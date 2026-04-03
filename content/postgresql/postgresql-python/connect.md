@@ -22,25 +22,25 @@ First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
 
 Second, create a new directory to store the project files such as `suppliers`:
 
-```plaintextsql
+```bash
 mkdir suppliers
 ```
 
 Third, [create a new virtual environment](https://www.pythontutorial.net/python-basics/python-virtual-environments/) called `venv` using the built\-in `venv` module:
 
-```plaintext
+```bash
 python -m venv venv
 ```
 
 Finally, activate the virtual environment on Windows:
 
-```plaintext
+```bash
 venv/scripts/activate
 ```
 
 on Unix\-like systems:
 
-```plaintext
+```bash
 source venv/bin/activate
 ```
 
@@ -48,13 +48,13 @@ source venv/bin/activate
 
 First, install the `psycopg2` package using the following `pip` command:
 
-```shell
+```bash
 pip install psycopg2
 ```
 
 Second, create the `requirements.txt` file:
 
-```python
+```bash
 pip freeze > requirements.txt
 ```
 
@@ -62,19 +62,19 @@ pip freeze > requirements.txt
 
 First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using the `psql` client tool:
 
-```python
+```bash
 psql -U postgres
 ```
 
 Second, [create a new database](../postgresql-administration/postgresql-create-database) called `suppliers`:
 
-```python
+```sql
 CREATE DATABASE suppliers;
 ```
 
 Third, exit the `psql`:
 
-```sql
+```
 exit
 ```
 
@@ -82,7 +82,7 @@ exit
 
 First, create a configuration file called `database.ini` in the project directory to store database connection parameters:
 
-```python
+```ini
 [postgresql]
 host=localhost
 database=suppliers
@@ -123,7 +123,7 @@ By using the `database.ini`, you can change the PostgreSQL connection parameters
 
 Notice that if you git source control, you need to add the `database.ini` to the `.gitignore` file to avoid committing sensitive information to a public repository like GitHub:
 
-```python
+```
 database.ini
 ```
 
@@ -161,7 +161,7 @@ conn = psycopg2.connect("dbname=suppliers user=YourUsername password=YourPasswor
 
 Alternatively, you can use keyword arguments:
 
-```
+```python
 conn = psycopg2.connect(
     host="localhost",
     database="suppliers",
@@ -190,13 +190,13 @@ In `psycopg2`, the `with` statement doesn't automatically close the database con
 
 To execute the `connect.py` file, you use the following command:
 
-```shell
+```bash
 python connect.py
 ```
 
 Output:
 
-```shell
+```
 Connected to the PostgreSQL server.
 ```
 

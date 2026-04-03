@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { isAIAgentRequest, getMarkdownPath } from './ai-agent-detection';
+import { isAIAgentRequest, getMarkdownPath, buildAgent404Response } from './ai-agent-detection';
 
 describe('isAIAgentRequest', () => {
   // Helper to create mock request objects
@@ -192,6 +192,11 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
+    it('should resolve individual changelog entries to changelog content path', () => {
+      const result = getMarkdownPath('/docs/changelog/2026-03-13');
+      expect(result).toBe('/md/changelog/2026-03-13.md');
+    });
+
     it('should exclude /use-cases/multi-tb', () => {
       const result = getMarkdownPath('/use-cases/multi-tb');
       expect(result).toBeNull();
@@ -252,5 +257,29 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/guides/logical-replication.md');
       expect(result).toBe('/md/docs/guides/logical-replication.md');
     });
+  });
+});
+
+describe('buildAgent404Response', () => {
+  it('should include the pathname in the response', () => {
+    const result = buildAgent404Response('/docs/manage/nonexistent-page');
+    expect(result).toContain('`/docs/manage/nonexistent-page`');
+  });
+
+  it('should include links to llms.txt and llms-full.txt', () => {
+    const result = buildAgent404Response('/docs/some-page');
+    expect(result).toContain('/docs/llms.txt');
+    expect(result).toContain('/docs/llms-full.txt');
+  });
+
+  it('should include a link to the API reference', () => {
+    const result = buildAgent404Response('/docs/some-page');
+    expect(result).toContain('/docs/reference/api-reference.md');
+  });
+
+  it('should work with deeply nested paths', () => {
+    const result = buildAgent404Response('/docs/guides/deeply/nested/path');
+    expect(result).toContain('`/docs/guides/deeply/nested/path`');
+    expect(result).toContain('/docs/llms.txt');
   });
 });

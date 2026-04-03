@@ -40,6 +40,15 @@ export function isAIAgentRequest(request) {
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
 
+// Non-content pages with handcrafted agent-friendly markdown (maps to public/)
+const CUSTOM_MARKDOWN_PATHS = {
+  pricing: '/pricing.md',
+};
+
+// Paths under content routes that are static files in public/ (not generated into public/md/).
+// The middleware should pass these through so Next.js serves them directly.
+const STATIC_DOC_PREFIXES = ['docs/ai/'];
+
 // Convert URL path to markdown file path
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
@@ -51,6 +60,10 @@ export function getMarkdownPath(pathname) {
     EXCLUDED_FILES.some((file) => pathname.endsWith(file));
 
   if (isExcluded) return null;
+
+  if (STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix))) return null;
+
+  if (CUSTOM_MARKDOWN_PATHS[path]) return CUSTOM_MARKDOWN_PATHS[path];
 
   // Find the matching route
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
@@ -70,4 +83,17 @@ export function getMarkdownPath(pathname) {
 
   // Build the full public path: /md/{directory}/{slug}.md
   return slug ? `${publicPath}/${mdSlug}` : `${publicPath}.md`;
+}
+
+export function buildAgent404Response(pathname) {
+  return `# Page Not Found
+
+\`${pathname}\` does not exist in Neon documentation.
+
+Find what you need:
+
+- [All Neon documentation](/docs/llms.txt): Table of contents for all Neon docs
+- [Full documentation text](/docs/llms-full.txt): Complete Neon docs in one file
+- [Neon API reference](/docs/reference/api-reference.md): API endpoints and usage
+`;
 }

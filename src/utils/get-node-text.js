@@ -14,6 +14,7 @@ export default function getNodeText(node) {
 
       if ('props' in node) return getNodeText(node.props.children);
     }
+    // falls through
 
     default:
       console.warn('Unresolved `node` of type:', typeof node, node);

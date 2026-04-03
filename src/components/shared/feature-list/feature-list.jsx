@@ -1,11 +1,28 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import slugify from 'slugify';
 
+import { cn } from 'utils/cn';
+
 import Icon, { ICONS } from './icon';
+
+const extractTextContent = (node) => {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(extractTextContent).join('');
+  }
+
+  if (React.isValidElement(node)) {
+    return extractTextContent(node.props.children);
+  }
+
+  return '';
+};
 
 const FeatureList = ({ className = '', icons = [], children }) => {
   const [lastActive, setLastActive] = useState(0);
@@ -44,9 +61,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
     );
 
     if (heading && heading.props && heading.props.children) {
-      return typeof heading.props.children === 'string'
-        ? heading.props.children
-        : React.Children.toArray(heading.props.children).join('');
+      return extractTextContent(heading.props.children);
     }
 
     return `Feature ${features.indexOf(feature) + 1}`;
@@ -60,15 +75,13 @@ const FeatureList = ({ className = '', icons = [], children }) => {
     });
 
   return (
-    <ul
-      className={clsx('feature-list !mt-8 flex flex-col gap-10 !p-0 sm:!mt-7 sm:gap-9', className)}
-    >
+    <ul className={cn('feature-list mt-8! flex flex-col gap-10 p-0! sm:mt-7! sm:gap-9', className)}>
       {features.map((feature, index) => {
         const title = getFeatureTitle(feature);
-        const id = updateTitleById(title);
+        const id = updateTitleById(title) || `feature-${index + 1}`;
 
         return (
-          <li className="relative !m-0 flex gap-3 before:!content-none" key={id}>
+          <li className="relative m-0! flex gap-3 before:content-none!" key={`${id}-${index}`}>
             <Icon
               icon={icons[index] || ''}
               index={index}
@@ -76,7 +89,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
               lastActive={lastActive}
               setLastActive={setLastActive}
             />
-            <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:!m-0">
+            <div className="flex max-w-[664px] flex-col gap-3 tracking-tight! md:gap-2 [&>*]:m-0!">
               {feature}
             </div>
           </li>

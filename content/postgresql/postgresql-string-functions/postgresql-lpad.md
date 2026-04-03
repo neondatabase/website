@@ -22,7 +22,7 @@ The LPAD() function pad a string on the left to a specified length with a sequen
 
 Here’s the basic syntax of the `LPAD()` function:
 
-```csssql
+```sql
 LPAD(string, length[, fill])
 ```
 
@@ -54,7 +54,7 @@ Let’s see some examples of using the `LPAD()` function.
 
 The following statement uses the `LPAD()` function to pad the ‘\*’ on the left of the string ‘PostgreSQL’:
 
-```
+```sql
 SELECT LPAD('PostgreSQL',15,'*');
 ```
 
@@ -73,7 +73,7 @@ In this example, the length of the `PostgreSQL` string is 10, and the result str
 
 The following example uses the `LPAD()` function to pad zeros at the beginning of the string to a length of five characters:
 
-```
+```sql
 SELECT LPAD('123',5,'0') result;
 ```
 
@@ -88,7 +88,7 @@ Output:
 
 If you want to pad a number, you need to convert that number to a string before padding. For example:
 
-```
+```sql
 SELECT LPAD(123::text,5,'0') result;
 ```
 
@@ -107,7 +107,7 @@ See the following `customer` and `payment` tables from the [sample database](../
 
 ![customer and payment tables](/postgresqltutorial/customer-and-payment-tables.png)The following statement illustrates how to use the `LPAD()` function to draw a chart based on the sum of payments per customer.
 
-```
+```sql
 SELECT first_name || ' ' || last_name fullname,
     SUM(amount) total,
     LPAD('*', CAST(TRUNC(SUM(amount) / 10) AS INT), '*') chart

@@ -22,7 +22,7 @@ First, open Command Prompt on Windows or Terminal on a Unix\-like system.
 
 Second, run the following command:
 
-```csssql
+```bash
 psql --version
 ```
 
@@ -34,13 +34,13 @@ First, connect to the PostgreSQL server using psql or GUI tools like pgAdmin.
 
 For example, you can connect to the PostgreSQL server using psql:
 
-```
+```bash
 psql -U postgres
 ```
 
 Second, run the following statement to retrieve the version:
 
-```
+```sql
 SELECT version();
 
 ```
@@ -60,7 +60,7 @@ First, connect to the PostgreSQL database using psql or a PostgreSQL client.
 
 Second, execute the following query to get the PostgreSQL version:
 
-```css
+```sql
 SELECT
   setting
 FROM

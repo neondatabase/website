@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import ChangelogList from 'components/pages/changelog/changelog-list';
@@ -12,6 +11,7 @@ import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import { cn } from 'utils/cn';
 
 import Tag from '../tag';
 
@@ -19,7 +19,7 @@ const Changelog = ({ posts }) => (
   <>
     <Hero />
     <ChangelogForm className="mb-5 hidden xl:flex" />
-    <ChangelogList className="mt-4" posts={posts} />
+    <ChangelogList className="mt-16" posts={posts} />
   </>
 );
 
@@ -67,10 +67,18 @@ const Post = ({
   return (
     <>
       <div
-        className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none', className)}
+        className={cn(
+          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          className,
+          isWideLayout && 'max-w-none'
+        )}
       >
         {breadcrumbs?.length > 0 && (
-          <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
+          <Breadcrumbs
+            className={cn(isChangelog && 'pt-1', 'mb-7!')}
+            breadcrumbs={breadcrumbs}
+            baseUrl={breadcrumbsBaseUrl}
+          />
         )}
 
         {isChangelog ? (
@@ -78,8 +86,8 @@ const Post = ({
         ) : (
           <article>
             <h1
-              className={clsx(
-                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
+              className={cn(
+                'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
                 tag && 'inline'
               )}
             >
@@ -87,34 +95,33 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+              <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
                 {subtitle}
               </p>
             )}
             <Content
-              className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
+              className={cn('mt-10 lg:mt-7 md:mt-5', isSplitLayout && 'split-layout')}
               content={content}
               isPostgres={isPostgres}
             />
           </article>
         )}
+        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
 
         {!isChangelog && (
           <NavigationLinks
-            className="mt-12 md:mt-10"
+            className={cn(isDocsIndex ? 'mt-14' : 'mt-6')}
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}
           />
         )}
-
-        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
-      {/* Regular pages: Show standard right sidebar */}
-      {!isWideLayout && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
-          className="!ml-0 w-64 shrink-0 xl:hidden"
+          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}

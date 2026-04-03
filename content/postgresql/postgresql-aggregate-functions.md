@@ -28,7 +28,7 @@ Aggregate functions perform a calculation on a set of rows and return a single
 
 In practice, you often use the aggregate functions with the [`GROUP BY`](postgresql-tutorial/postgresql-group-by) clause in the [`SELECT`](postgresql-tutorial/postgresql-select) statement:
 
-```csssql
+```sql
 SELECT column1, AGGREGATE_FUNCTION(column2)
 FROM table1
 GROUP BY column1;
@@ -66,7 +66,7 @@ Noted that we use the [`ROUND()`](postgresql-math-functions/postgresql-round) fu
 
 To calculate the average replacement cost of the `Drama` films whose category id is 7, you use the following statement:
 
-```css
+```sql
 SELECT
   ROUND(
     AVG(replacement_cost),
@@ -93,7 +93,7 @@ Here is the result:
 
 To get the number of films, you use the `COUNT(*)` function as follows:
 
-```css
+```sql
 SELECT
   COUNT(*)
 FROM
@@ -111,7 +111,7 @@ Output:
 
 To get the number of drama films, you use the following statement:
 
-```
+```sql
 SELECT
   COUNT(*) drama_films
 FROM
@@ -136,7 +136,7 @@ The result shows that there are 62 drama films:
 
 The following statement returns the maximum replacement cost of films.
 
-```
+```sql
 SELECT
   MAX(replacement_cost)
 FROM
@@ -154,7 +154,7 @@ Output:
 
 To get the films that have the maximum replacement cost, you use the following query:
 
-```css
+```sql
 SELECT
   film_id,
   title
@@ -173,7 +173,7 @@ ORDER BY
 
 Output:
 
-```sql
+```
 film_id |          title
 ---------+-------------------------
       34 | Arabia Dogma
@@ -190,7 +190,7 @@ The subquery returned the maximum replacement cost which then was used by the ou
 
 The following example uses the `MIN()` function to return the minimum replacement cost of films:
 
-```
+```sql
 SELECT
   MIN(replacement_cost)
 FROM
@@ -208,7 +208,7 @@ Output:
 
 To get the films that have the minimum replacement cost, you use the following query:
 
-```plaintext
+```sql
 SELECT
   film_id,
   title
@@ -242,7 +242,7 @@ Output:
 
 The following statement uses the `SUM()` function to calculate the total length of films grouped by film’s rating:
 
-```
+```sql
 SELECT
   rating,
   SUM(rental_duration)

@@ -121,7 +121,7 @@ Output:
 
 Third, determine if a value in the `word` column is a palindrome using the `REVERSE()` function:
 
-```
+```sql
 SELECT
   word,
   REVERSE(word),

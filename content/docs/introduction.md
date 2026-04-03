@@ -4,17 +4,21 @@ summary: >-
   How to set up Neon, a serverless Postgres solution, with commands for
   launching, signing up, connecting to tech stacks, and integrating branching
   into workflows.
-updatedOn: '2026-02-06T22:07:33.079Z'
+redirectFrom:
+  - /guides/neon-azure-integration
+  - /guides/azure-service-connector
+  - /guides/azure-todo-static-web-app
+  - /guides/azure-functions-referral-system
+updatedOn: '2026-03-14T03:21:15.122Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
-<CTA 
-  title="Set up Neon in one command" 
-  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>"
+<CTA
+  title="Set up Neon in one command"
+  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more<svg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg' style='display:inline-block;vertical-align:middle;margin-left:8px' aria-hidden='true'><path d='M11.1084 10.9211L14.9999 7.02965L11.1084 3.13816' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/><path d='M0.938093 7.03198L13.666 7.03198' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/></svg></a>"
   command="npx neonctl@latest init"
   trackingLabel="Copy neonctl init - docs intro"
-  isIntro
 />
 
 ## Get started

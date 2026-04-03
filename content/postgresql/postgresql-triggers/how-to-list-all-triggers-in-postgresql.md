@@ -38,7 +38,7 @@ ORDER BY
 
 Sample output:
 
-```sql
+```
 table_name |         trigger_name
 ------------+-------------------------------
  employees  | after_delete_employee_trigger

@@ -10,10 +10,10 @@ const HighAvailability = () => (
   <section className="high-availability mt-[242px] xl:mt-[224px] lg:mt-[167px] md:mt-[112px]">
     <Container className="lg:mx-8 md:mx-0" size="960" as="header">
       <div className="text-center">
-        <h2 className="font-title text-[56px] font-medium leading-none tracking-extra-tight text-white xl:text-[48px] lg:text-[40px] md:mx-10 md:text-[32px]">
+        <h2 className="font-title text-[56px] leading-none font-medium tracking-extra-tight text-white xl:text-[48px] lg:text-[40px] md:mx-10 md:text-[32px]">
           High availability, no standbys
         </h2>
-        <p className="mx-auto mt-4 max-w-[640px] text-pretty text-lg leading-snug tracking-extra-tight text-gray-new-60 lg:mt-3 lg:max-w-xl lg:text-base md:mx-4">
+        <p className="mx-auto mt-4 max-w-[640px] text-lg leading-snug tracking-extra-tight text-pretty text-gray-new-60 lg:mt-3 lg:max-w-xl lg:text-base md:mx-4">
           Multi-AZ by design. Neon replicates your data at the storage layer across multiple AZs,
           removing the need for full-size standby instances.
         </p>

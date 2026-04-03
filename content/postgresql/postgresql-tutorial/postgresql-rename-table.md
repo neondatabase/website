@@ -14,13 +14,13 @@ nextLink:
   slug: 'postgresql-tutorial/postgresql-add-column'
 ---
 
-**Summary**: in this tutorial, you will show how to rename a table using the PostgreSQL `ALTER TABLE RENAME TO` statement.
+**Summary**: in this tutorial, you will learn how to rename a table using the PostgreSQL `ALTER TABLE RENAME TO` statement.
 
 ## Introduction to PostgreSQL RENAME TABLE statement
 
 To change the name of an existing table, you use the `ALTER TABLE... RENAME TO` statement as follows:
 
-```phpsql
+```sql
 ALTER TABLE table_name
 RENAME TO new_table_name;
 ```
@@ -78,7 +78,7 @@ Indexes:
 
 Third, change the name of the `vendors` table to `suppliers` using the `ALTER TABLE...RENAME TO` statement:
 
-```php
+```sql
 ALTER TABLE vendors
 RENAME TO suppliers;
 ```
@@ -101,7 +101,7 @@ Notice that the name of the table changed but the [sequence](postgresql-sequence
 
 First, create new tables called `customers` and `groups`:
 
-```php
+```sql
 CREATE TABLE customer_groups(
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL
@@ -164,7 +164,7 @@ The output indicates that the foreign key constraint was updated and referenced 
 
 Fifth, show the `customer_data` view in psql:
 
-```php
+```
 \d+ customer_data
 ```
 

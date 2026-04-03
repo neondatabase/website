@@ -34,7 +34,7 @@ To create an `AFTER` `INSERT` trigger, you follow these steps:
 
 First, [define a function](../postgresql-plpgsql/postgresql-create-function) that will execute when the trigger is activated:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
@@ -92,7 +92,7 @@ The memberships table has three columns id, member_id, and membership_type:
 
 Third, define a trigger function that inserts a default free membership for every member:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION create_membership_after_insert()
 RETURNS TRIGGER AS $$
 BEGIN

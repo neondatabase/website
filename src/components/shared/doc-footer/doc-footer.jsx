@@ -1,14 +1,14 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 
 import Feedback from './feedback';
 import LastUpdatedDate from './last-updated-date';
 
 const DocFooter = ({ updatedOn, slug, className, withFeedback = true, tocLink = null }) => (
   <div
-    className={clsx(
+    className={cn(
       'mt-[76px] flex items-center justify-between pt-3 sm:flex-col sm:space-y-4',
       className
     )}
@@ -22,7 +22,7 @@ const DocFooter = ({ updatedOn, slug, className, withFeedback = true, tocLink = 
       </Link>
     )}
     <div
-      className={clsx(
+      className={cn(
         'flex items-center justify-between gap-6 sm:flex-col sm:items-start sm:gap-4',
         !tocLink && 'w-full'
       )}

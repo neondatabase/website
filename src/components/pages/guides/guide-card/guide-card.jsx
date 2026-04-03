@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
@@ -11,11 +10,11 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
   const formattedDate = getFormattedDate(createdAt);
 
   return (
-    <article className="border-b border-gray-new-15/20 pb-5 pt-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80">
+    <article className="border-b border-gray-new-15/20 pt-6 pb-5 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80">
       <Link className="group" to={`${LINKS.guides}/${slug}`}>
         <div className="flex flex-col gap-y-[18px] sm:gap-y-4">
           <div className="max-w-[832px]">
-            <h1 className="line-clamp-2 text-[20px] font-semibold leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+            <h1 className="line-clamp-2 text-[20px] leading-tight font-semibold tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
               {title}
             </h1>
             <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 dark:text-gray-new-50 sm:mt-1">
@@ -39,7 +38,7 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
                 </div>
               )}
               <time
-                className="relative block shrink-0 pl-[11px] text-[15px] font-light uppercase leading-none tracking-extra-tight text-gray-new-50 before:absolute before:left-0 before:top-1/2 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 dark:text-gray-new-70 dark:before:bg-gray-new-30 md:text-sm"
+                className="relative block shrink-0 pl-[11px] text-[15px] leading-none font-light tracking-extra-tight text-gray-new-50 uppercase before:absolute before:top-1/2 before:left-0 before:inline-block before:h-[3px] before:w-[3px] before:rounded-full before:bg-gray-new-70 dark:text-gray-new-70 dark:before:bg-gray-new-30 md:text-sm"
                 dateTime={createdAt}
               >
                 {formattedDate}

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -17,10 +16,12 @@ import jorgeFerreiroAvatar from 'images/authors/jorge-ferreiro.jpg';
 import julianBenegasAvatar from 'images/authors/julian-benegas.jpg';
 import lincolnBergesonAvatar from 'images/authors/lincoln-bergeson.jpg';
 import martinSkowAvatar from 'images/authors/martin-skow.jpg';
+import oliJuhlAvatar from 'images/authors/oli-juhl.png';
 import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
 import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
+import { cn } from 'utils/cn';
 
 const quotes = {
   'dhruv-amin': {
@@ -83,6 +84,10 @@ const quotes = {
     name: 'Julian Benegas',
     avatar: julianBenegasAvatar,
   },
+  'oli-juhl': {
+    name: 'Oliver Juhl',
+    avatar: oliJuhlAvatar,
+  },
   'oliver-stenbom': {
     name: 'Oliver Stenbom',
     avatar: oliverStenbomAvatar,
@@ -109,23 +114,25 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
   const { avatar, name } = authorData;
 
   return (
-    <section className={clsx('quote my-8 border-l-2 border-green-44 pl-6', className)}>
+    <section className={cn('quote my-8 border-l-2 border-green-44 pl-6', className)}>
       <figure className="my-10 lg:my-8 md:my-6">
-        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl !font-normal leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[18px] sm:leading-snug">
+        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl leading-snug font-normal! tracking-tighter text-black-new dark:text-gray-9 sm:text-[18px] sm:leading-snug">
           &quot;{quote}&quot;
         </blockquote>
 
         <figcaption className="mt-5 flex items-center gap-2.5 md:mt-4">
-          <div className="relative overflow-hidden rounded-full">
-            <Image
-              className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
-              src={avatar}
-              alt={name}
-              width={32}
-              height={32}
-            />
-          </div>
-          <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
+          {avatar && (
+            <div className="relative overflow-hidden rounded-full">
+              <Image
+                className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
+                src={avatar}
+                alt={name}
+                width={32}
+                height={32}
+              />
+            </div>
+          )}
+          <div className="text-base leading-snug font-medium tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
             {name}
             <span className="font-normal text-gray-new-70 dark:text-[#A1A1AA]">
               <span className="mx-1.5">—</span>

@@ -81,7 +81,7 @@ It returns the following output:
 
 Second, retrieve cities from the `city` table where `country_id` is `103`:
 
-```
+```sql
 SELECT
   city
 FROM
@@ -110,7 +110,7 @@ Output:
 
 Instead of executing two queries, you can combine them into one, making the first query as a subquery and the second query as the main query as follows:
 
-```
+```sql
 SELECT
   city
 FROM
@@ -172,7 +172,7 @@ Output:
 
 Second, use the query above as a subquery to retrieve the film title from the `film` table:
 
-```
+```sql
 SELECT
   film_id,
   title

@@ -5,6 +5,7 @@ This guide documents the MDX-to-markdown processor for LLM consumption.
 ## Overview
 
 The processor converts MDX documentation files into clean markdown that AI agents can understand. It:
+
 - Parses MDX using the unified/remark ecosystem (AST-based)
 - Transforms MDX components into plain markdown equivalents
 - Preserves standard HTML elements like `<details>`
@@ -113,27 +114,27 @@ See existing handlers in the code for examples of each pattern.
 
 **Transform components** (MDX -> markdown):
 
-| Component | Output |
-|-----------|--------|
-| Admonition | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`) |
-| CodeTabs | `Tab: label` + code blocks |
-| Tabs/TabItem | `Tab: label` + content (labels from parent Tabs) |
-| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, FeatureList | Container -- extracts children |
-| DetailIconCards | Bullet list with links and descriptions |
-| TechCards | Bullet list using `title` attribute (self-closing `<a>` elements) |
-| DocsList | Title + bullet list (handles nested `<a>` and `<p>`) |
-| CheckList/CheckItem | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
-| ExternalCode | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback) |
-| TwoColumnLayout.* | Section headings with method signatures |
-| LinkPreview | Link with optional preview text |
-| MegaLink | `**tag** title [Learn more](url)` |
-| QuoteBlock | Blockquote with attribution |
-| Testimonial | Blockquote with author name/company |
-| YoutubeIframe | `Watch on YouTube: url` |
-| CommunityBanner | Text + link |
-| PromptCards | List of AI coding prompt links |
-| CTA | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link |
-| ProgramForm | Hardcoded text for form types |
+| Component                                                          | Output                                                                                           |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| Admonition                                                         | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
+| CodeTabs                                                           | `Tab: label` + code blocks                                                                       |
+| Tabs/TabItem                                                       | `Tab: label` + content (labels from parent Tabs)                                                 |
+| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, FeatureList | Container -- extracts children                                                                   |
+| DetailIconCards                                                    | Bullet list with links and descriptions                                                          |
+| TechCards                                                          | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
+| DocsList                                                           | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
+| CheckList/CheckItem                                                | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
+| ExternalCode                                                       | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
+| TwoColumnLayout.\*                                                 | Section headings with method signatures                                                          |
+| LinkPreview                                                        | Link with optional preview text                                                                  |
+| MegaLink                                                           | `**tag** title [Learn more](url)`                                                                |
+| QuoteBlock                                                         | Blockquote with attribution                                                                      |
+| Testimonial                                                        | Blockquote with author name/company                                                              |
+| YoutubeIframe                                                      | `Watch on YouTube: url`                                                                          |
+| CommunityBanner                                                    | Text + link                                                                                      |
+| PromptCards                                                        | List of AI coding prompt links                                                                   |
+| CTA                                                                | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
+| ProgramForm                                                        | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
 FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing
@@ -160,7 +161,7 @@ Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown
 
 Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `docs/changelog`, `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not.
 
-## Legacy /llms/*.txt Redirects
+## Legacy /llms/\*.txt Redirects
 
 The old system used `public/llms/` for hand-maintained `.txt` files; that's deprecated and the dir is no longer used. `src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. Do not add new entries to the map; it is static and will be removed in the future. New docs get their `.md` URLs from the build. The map was generated once by a now-deleted one-time script.
 

@@ -31,7 +31,7 @@ Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This g
 
 ```bash
 npm install @prisma/client @prisma/adapter-neon dotenv
-npm install prisma --save-dev
+npm install prisma tsx --save-dev
 ```
 
 ### Step 2: Get your connection strings
@@ -130,6 +130,50 @@ import { prisma } from './db'
 const users = await prisma.user.findMany()
 ```
 
+To verify the full setup, create a `src/main.ts` script that exercises CRUD operations:
+
+```typescript
+import { prisma } from './db'
+
+async function main() {
+  // CREATE
+  const newUser = await prisma.user.create({
+    data: { name: 'Alice', email: `alice-${Date.now()}@example.com` },
+  })
+  console.log('Created user:', newUser)
+
+  // READ
+  const foundUser = await prisma.user.findUnique({ where: { id: newUser.id } })
+  console.log('Found user:', foundUser)
+
+  // UPDATE
+  const updatedUser = await prisma.user.update({
+    where: { id: newUser.id },
+    data: { name: 'Alice Smith' },
+  })
+  console.log('Updated user:', updatedUser)
+
+  // DELETE
+  await prisma.user.delete({ where: { id: newUser.id } })
+  console.log('Deleted user.')
+}
+
+main()
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })
+```
+
+Run it with:
+
+```bash
+npx tsx src/main.ts
+```
+
 ## Why two connection strings?
 
 Neon uses connection pooling to efficiently manage database connections in serverless environments:
@@ -224,5 +268,16 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 - [Prisma documentation](https://www.prisma.io/docs/)
 - [Prisma connection management](https://www.prisma.io/docs/guides/performance-and-optimization/connection-management)
 - [PostgreSQL connector reference](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
+
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- Import `PrismaClient` from `./generated/prisma` (or your configured `output` path), not from `@prisma/client`. The import path changed in Prisma 7.
+- Do not install `@neondatabase/serverless` or `ws` as separate packages. The `@prisma/adapter-neon` package bundles everything needed for the Neon connection.
+- In Prisma 7+, do not include a `url` property in the `prisma/schema.prisma` datasource block. The connection is configured via `prisma.config.ts` and the adapter.
+- You need both a pooled connection (`DATABASE_URL`) for your application and a direct connection (`DIRECT_URL`) for Prisma CLI commands.
+- Call `prisma.$disconnect()` in a `.finally()` block when running standalone scripts. Omitting this can leave connections open.
+
+</details>
 
 <NeedHelp/>

@@ -27,7 +27,7 @@ const TAGS = [
 ];
 
 const Hero = () => (
-  <section className="sub-hero safe-paddings relative pt-[120px] xl:pt-[112px] lg:pt-24 md:pt-16">
+  <section className="sub-hero relative pt-[120px] safe-paddings xl:pt-[112px] lg:pt-24 md:pt-16">
     <Container className="lg:mx-24 md:mx-auto md:max-w-[640px]" size="576">
       <div className="relative mb-4 size-[46px] lg:mb-4 lg:size-10 lg:rounded-[10px] md:mb-0 md:size-14">
         <Image
@@ -40,11 +40,11 @@ const Hero = () => (
           priority
         />
         <span
-          className="absolute left-1/2 top-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
+          className="absolute top-1/2 left-1/2 size-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6AFFE6] opacity-15 blur-xl"
           aria-hidden
         />
       </div>
-      <p className="text-[28px] font-medium leading-snug tracking-tighter text-white lg:text-[24px] md:text-[20px]">
+      <p className="text-[28px] leading-snug font-medium tracking-tighter text-white lg:text-[24px] md:text-[20px]">
         Every minute waiting for that AWS RDS instance to restore is costing your company anywhere
         {` `}
         <br className="hidden md:block" />
@@ -58,10 +58,10 @@ const Hero = () => (
         </Link>
         .
       </p>
-      <h2 className="mt-[136px] font-title text-[60px] font-medium leading-none tracking-extra-tight xl:mt-[128px] xl:text-[52px] lg:mt-[112px] lg:text-[44px] md:mt-[74px] md:text-[36px]">
+      <h2 className="mt-[136px] font-title text-[60px] leading-none font-medium tracking-extra-tight xl:mt-[128px] xl:text-[52px] lg:mt-[112px] lg:text-[44px] md:mt-[74px] md:text-[36px]">
         Break the RDS cycle.
       </h2>
-      <div className="mb-7 mt-10 flex flex-col gap-[18px] text-xl font-normal leading-normal tracking-extra-tight text-gray-new-60 lg:mb-6 lg:mt-7 lg:text-[18px] md:mb-[22px] md:mt-6 md:text-base">
+      <div className="mt-10 mb-7 flex flex-col gap-[18px] text-xl leading-normal font-normal tracking-extra-tight text-gray-new-60 lg:mt-7 lg:mb-6 lg:text-[18px] md:mt-6 md:mb-[22px] md:text-base">
         <p>
           <span className="text-white">With AWS RDS</span>, backups and recovery take hours,
           replication lag adds uncertainty, and anticipating workloads feels like a constant gamble.
@@ -75,7 +75,7 @@ const Hero = () => (
 
       <TagCloud items={TAGS} className="gap-4 lg:mt-4" titleClassName="text-[16px]" />
       <MegaLink
-        className="!my-16 xl:!my-14 lg:!my-12 md:!my-10"
+        className="my-16! xl:my-14! lg:my-12! md:my-10!"
         title="The real impact of slow Postgres restores for businesses: lost revenue and customer trust."
         date={new Date('2025-04-11')}
         url="/blog/the-true-cost-of-slow-postgres-restores"

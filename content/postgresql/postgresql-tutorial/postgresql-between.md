@@ -86,7 +86,7 @@ Output:
 
 The following example uses the `NOT BETWEEN` operator to find payments with the `payment_id` not between `17503` and `17505`:
 
-```
+```sql
 SELECT
   payment_id,
   amount
@@ -100,7 +100,7 @@ ORDER BY
 
 Output:
 
-```sql
+```
 payment_id | amount
 ------------+--------
       17506 |   2.99
@@ -117,7 +117,7 @@ If you want to check a value against a date range, you use the literal date in I
 
 The following example uses the `BETWEEN` operator to find payments whose payment dates are between `2007-02-15` and `2007-02-20` and amount more than 10:
 
-```
+```sql
 SELECT
   customer_id,
   payment_id,

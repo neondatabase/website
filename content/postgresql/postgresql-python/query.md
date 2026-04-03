@@ -24,7 +24,7 @@ To query data from one or more PostgreSQL tables in Python, you use the followin
 
 First, [establish a connection to the PostgreSQL server](connect) by calling the `connect()` function of the `psycopg2` module.
 
-```pythonsql
+```python
 conn = psycopg2.connect(config)
 ```
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
 Output:
 
-```python
+```
 The number of parts:  8
 (1, '3M Corp')
 (2, 'AKM Semiconductor Inc.')
@@ -106,7 +106,7 @@ The number of parts:  8
 
 The following `get_parts()` function uses the `fetchall()` method of the cursor object to fetch rows from the result set and display all the parts in the `parts` table.
 
-```sql
+```python
 import psycopg2
 from config import load_config
 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
     get_vendors()
 ```
 
-```python
+```
 The number of parts:  8
 (1, '3M Corp')
 (2, 'AKM Semiconductor Inc.')

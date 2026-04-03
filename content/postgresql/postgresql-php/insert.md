@@ -36,28 +36,28 @@ Let’s create a new class named `PostgreSQLPHPInsert` in the `app` folder and t
 
 The following `insertStock()` method inserts a new row into the `stocks` table.
 
-```phpsql
-    /**
-     * insert a new row into the stocks table
-     * @param type $symbol
-     * @param type $company
-     * @return the id of the inserted row
-     */
-    public function insertStock($symbol, $company) {
-        // prepare statement for insert
-        $sql = 'INSERT INTO stocks(symbol,company) VALUES(:symbol,:company)';
-        $stmt = $this->pdo->prepare($sql);
+```php
+/**
+ * insert a new row into the stocks table
+ * @param type $symbol
+ * @param type $company
+ * @return the id of the inserted row
+ */
+public function insertStock($symbol, $company) {
+    // prepare statement for insert
+    $sql = 'INSERT INTO stocks(symbol,company) VALUES(:symbol,:company)';
+    $stmt = $this->pdo->prepare($sql);
 
-        // pass values to the statement
-        $stmt->bindValue(':symbol', $symbol);
-        $stmt->bindValue(':company', $company);
+    // pass values to the statement
+    $stmt->bindValue(':symbol', $symbol);
+    $stmt->bindValue(':company', $company);
 
-        // execute the insert statement
-        $stmt->execute();
+    // execute the insert statement
+    $stmt->execute();
 
-        // return generated id
-        return $this->pdo->lastInsertId('stocks_id_seq');
-    }
+    // return generated id
+    return $this->pdo->lastInsertId('stocks_id_seq');
+}
 ```
 
 First, construct an `INSERT` statement that uses two named placed holders: `:symbol` and `:company` for binding values later.
@@ -77,24 +77,24 @@ the `PDO_PGSQL` extension requires us to specify the name of the sequence object
 The following `insertStockList()` method inserts multiple rows into the `stocks` table.
 
 ```php
-   /**
-     * Insert multiple stocks into the stocks table
-     * @param array $stocks
-     * @return a list of inserted ID
-     */
-    public function insertStockList($stocks) {
-        $sql = 'INSERT INTO stocks(symbol,company) VALUES(:symbol,:company)';
-        $stmt = $this->pdo->prepare($sql);
+/**
+ * Insert multiple stocks into the stocks table
+ * @param array $stocks
+ * @return a list of inserted ID
+ */
+public function insertStockList($stocks) {
+    $sql = 'INSERT INTO stocks(symbol,company) VALUES(:symbol,:company)';
+    $stmt = $this->pdo->prepare($sql);
 
-        $idList = [];
-        foreach ($stocks as $stock) {
-            $stmt->bindValue(':symbol', $stock['symbol']);
-            $stmt->bindValue(':company', $stock['company']);
-            $stmt->execute();
-            $idList[] = $this->pdo->lastInsertId('stocks_id_seq');
-        }
-        return $idList;
+    $idList = [];
+    foreach ($stocks as $stock) {
+        $stmt->bindValue(':symbol', $stock['symbol']);
+        $stmt->bindValue(':company', $stock['company']);
+        $stmt->execute();
+        $idList[] = $this->pdo->lastInsertId('stocks_id_seq');
     }
+    return $idList;
+}
 ```
 
 The method accepts an array of stocks and calls the `execute()` method multiple times to insert multiple rows into the `stocks` table. It returns a list of inserted IDs.

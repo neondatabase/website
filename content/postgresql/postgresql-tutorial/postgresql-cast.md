@@ -24,7 +24,7 @@ There are many cases in which you want to convert a value of one [type](postgres
 
 Here’s the basic syntax of the type `CAST()` function:
 
-```phpsqlsql
+```sql
 CAST(<code>value</code> AS target_type );
 ```
 
@@ -76,7 +76,7 @@ Output:
 
 If the expression cannot be converted to the target type, PostgreSQL will raise an error. For example:
 
-```
+```sql
 SELECT
   CAST ('10C' AS INTEGER);
 ```
@@ -90,7 +90,7 @@ LINE 2:  CAST ('10C' AS INTEGER);
 
 This example uses the `CAST()` function to convert a string to a [date](postgresql-date):
 
-```php
+```sql
 SELECT
    CAST ('2015-01-01' AS DATE),
    CAST ('01-OCT-2015' AS DATE);
@@ -111,21 +111,21 @@ In this example, we converted `2015-01-01` literal string into `January 1st 2015
 
 The following example uses the CAST() function to convert a string `'10.2'` into a double:
 
-```
+```sql
 SELECT
 	CAST ('10.2' AS DOUBLE);
 ```
 
 Whoops, we got the following error message:
 
-```sql
+```
 [Err] ERROR:  type "double" does not exist
 LINE 2:  CAST ('10.2' AS DOUBLE)
 ```
 
 To fix this, you need to use `DOUBLE PRECISION` instead of `DOUBLE` as follows:
 
-```css
+```sql
 SELECT
    CAST ('10.2' AS DOUBLE PRECISION);
 ```
@@ -143,7 +143,7 @@ Output:
 
 This example uses the `CAST()` to convert the string ‘true’, ‘T’ to true and ‘false’, ‘F’ to false:
 
-```css
+```sql
 SELECT
    CAST('true' AS BOOLEAN),
    CAST('false' as BOOLEAN),
@@ -165,7 +165,7 @@ Output:
 
 This example uses the cast operator (::) to convert a string to a [timestamp](postgresql-timestamp):
 
-```
+```sql
 SELECT '2019-06-15 14:30:20'::timestamp;
 ```
 
@@ -182,7 +182,7 @@ Output:
 
 This example uses the cast operator to convert a string to an [interval](postgresql-interval):
 
-```php
+```sql
 SELECT
   '15 minute' :: interval,
   '2 hour' :: interval,
@@ -204,7 +204,7 @@ Output:
 
 The following example uses the `CAST()` to convert a timestamp to a date:
 
-```
+```sql
 SELECT CAST('2024-02-01 12:34:56' AS DATE);
 ```
 
@@ -221,7 +221,7 @@ Output:
 
 The following example uses `CAST()` function to convert an interval to text:
 
-```
+```sql
 SELECT CAST('30 days' AS TEXT);
 ```
 
@@ -238,7 +238,7 @@ Output:
 
 The following example uses the `CAST()` function to convert JSON to JSONB:
 
-```
+```sql
 SELECT CAST('{"name": "John"}' AS JSONB);
 ```
 
@@ -255,7 +255,7 @@ Output:
 
 The following example uses `CAST()` function to convert double precision to integer:
 
-```
+```sql
 SELECT CAST(9.99 AS INTEGER);
 ```
 
@@ -272,13 +272,13 @@ Output:
 
 The following example uses `CAST()` function to convert an array to text:
 
-```
+```sql
 SELECT CAST(ARRAY[1, 2, 3] AS TEXT);
 ```
 
 Output:
 
-```php
+```
   array
 ---------
  {1,2,3}
@@ -289,7 +289,7 @@ Output:
 
 The following example shows how to use the cast operator (::) to convert text to an array:
 
-```php
+```sql
 SELECT '{1,2,3}'::INTEGER[] AS result_array;
 ```
 
@@ -306,7 +306,7 @@ Output:
 
 First, [create](postgresql-create-table) a `ratings` table that consists of two columns: `id` and `rating`:
 
-```
+```sql
 CREATE TABLE ratings (
   id SERIAL PRIMARY KEY,
   rating VARCHAR (1) NOT NULL
@@ -357,7 +357,7 @@ Now, we have to convert all values in the `rating` column into integers, all ot
 
 To achieve this, you can use the [`CASE`](../postgresql-plpgsql/plpgsql-case-statement) expression with the type `CAST` as shown in the following query:
 
-```
+```sql
 SELECT
   id,
   CASE WHEN rating~E'^\\d+$' THEN CAST (rating AS INTEGER) ELSE 0 END as rating

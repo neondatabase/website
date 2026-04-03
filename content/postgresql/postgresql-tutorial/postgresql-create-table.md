@@ -22,7 +22,7 @@ Typically, a relational database consists of multiple related tables. Tables all
 
 To create a new table, you use the `CREATE TABLE` statement. Here’s the basic syntax of the `CREATE TABLE` statement:
 
-```phpsql
+```sql
 CREATE TABLE [IF NOT EXISTS] table_name (
    column1 datatype(length) column_constraint,
    column2 datatype(length) column_constraint,
@@ -93,7 +93,7 @@ We’ll show you step\-by\-step how to create the `accounts` table using the psq
 
 First, open the Command Prompt on Windows or Terminal on Unix\-like systems and connect to the PostgreSQL:
 
-```
+```bash
 psql -U postgres
 ```
 
@@ -111,13 +111,13 @@ postgres=#
 
 Second, connect to the `dvdrental` database:
 
-```php
+```
 \c dvdrental
 ```
 
 Third, enter the following `CREATE TABLE` statement and press Enter:
 
-```
+```sql
 CREATE TABLE accounts (
   user_id SERIAL PRIMARY KEY,
   username VARCHAR (50) UNIQUE NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE accounts (
 
 Output:
 
-```php
+```
 CREATE TABLE
 ```
 

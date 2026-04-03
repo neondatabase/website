@@ -41,19 +41,19 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
       aria-hidden="true"
     />
 
-    <div className="relative z-10 mb-6 mt-[87px] flex flex-col gap-3 xl:mt-16 xl:gap-3 lg:mt-12 lg:gap-2.5 md:mb-5 md:mt-10">
-      <h4 className="text-2xl font-medium leading-tight tracking-extra-tight text-black-pure lg:text-xl">
+    <div className="relative z-10 mt-[87px] mb-6 flex flex-col gap-3 xl:mt-16 xl:gap-3 lg:mt-12 lg:gap-2.5 md:mt-10 md:mb-5">
+      <h4 className="text-2xl leading-tight font-medium tracking-extra-tight text-black-pure lg:text-xl">
         {platform}
       </h4>
-      <p className="text-lg font-normal leading-snug tracking-tight text-gray-new-20 lg:text-base">
+      <p className="text-lg leading-snug font-normal tracking-tight text-gray-new-20 lg:text-base">
         {description}
       </p>
     </div>
 
     <Link
       to={href}
-      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure lg:text-sm"
-      arrowClassName="text-gray-new-40 transition-colors duration-200 group-hover:text-black"
+      className="relative z-10 mt-auto flex items-center gap-2 text-base leading-none font-medium tracking-extra-tight text-black-pure lg:text-sm"
+      arrowClassName="text-gray-new-40 transition-[translate,colors] duration-200 group-hover:text-black"
       aria-label={`${linkText} - ${platform}`}
       isExternal
       withArrow
@@ -62,7 +62,7 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
     </Link>
 
     <div
-      className="pointer-events-none absolute right-0 top-0 h-full w-[320px] xl:w-[280px] lg:w-[240px] md:w-[220px]"
+      className="pointer-events-none absolute top-0 right-0 h-full w-[320px] xl:w-[280px] lg:w-[240px] md:w-[220px]"
       aria-hidden="true"
       style={{
         maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -83,11 +83,11 @@ ConnectionCard.propTypes = {
 };
 
 const Connections = () => (
-  <SecondarySection title="Community" className="pb-60 lg:pb-40 lg:pt-28 md:pb-[104px] md:pt-20">
+  <SecondarySection title="Community" className="pb-60 lg:pt-28 lg:pb-40 md:pt-20 md:pb-[104px]">
     <header className="mb-16 lg:mb-14 md:mb-12">
       <SectionLabel icon="arrow">Community</SectionLabel>
 
-      <h3 className="mt-5 max-w-[813px] text-5xl font-normal leading-dense tracking-tighter text-black-pure xl:mt-[18px] xl:max-w-[700px] xl:text-[40px] lg:max-w-[580px] lg:text-[36px] md:max-w-full md:text-[28px]">
+      <h3 className="mt-5 max-w-[813px] text-5xl leading-dense font-normal tracking-tighter text-black-pure xl:mt-[18px] xl:max-w-[700px] xl:text-[40px] lg:max-w-[580px] lg:text-[36px] md:max-w-full md:text-[28px]">
         Connect with us{' '}
         <span className="text-gray-new-40">wherever you work, build, and share your journey.</span>
       </h3>

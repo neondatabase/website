@@ -22,7 +22,7 @@ The `BOOL_AND()` is an aggregate function that allows you to aggregate boolean v
 
 The following shows the syntax of the `BOOL_AND()` function:
 
-```sqlsql
+```sql
 BOOL_AND(expression)
 ```
 
@@ -157,7 +157,7 @@ The output indicates that teams B and C have projects that are active (or NULL) 
 
 The following example uses the `BOOL_AND()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) and [HAVING](../postgresql-tutorial/postgresql-having) clauses to retrieve teams that have active projects:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_AND(active) active_projects

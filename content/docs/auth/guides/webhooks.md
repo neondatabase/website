@@ -5,7 +5,7 @@ summary: >-
   Configure webhooks to receive notifications for authentication events like OTP
   delivery, magic link delivery, and user creation in Neon Auth.
 enableTableOfContents: true
-updatedOn: '2026-03-07T00:41:46.019Z'
+updatedOn: '2026-03-27T00:00:00.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -13,6 +13,8 @@ updatedOn: '2026-03-07T00:41:46.019Z'
 Neon Auth webhooks send HTTP POST requests to your server when authentication events occur.
 
 By default, Neon Auth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
+
+For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Neon Auth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
 
 ## Supported events
 
@@ -80,6 +82,19 @@ Both endpoints return the configuration in the same format:
   ],
   "timeout_seconds": 5
 }
+```
+
+### Delete a webhook
+
+To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Neon Auth's default delivery behavior for all events.
+
+```bash
+curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -d '{
+    "enabled": false
+  }'
 ```
 
 ## Payload structure

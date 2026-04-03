@@ -20,7 +20,7 @@ nextLink:
 
 To concatenate two or more strings into a single string, you can use the string concatenation operator \|\| as shown in the following example:
 
-```csssqlsql
+```sql
 SELECT
    'John' || ' ' || 'Doe' AS full_name;
 ```
@@ -37,7 +37,7 @@ Output:
 
 The following statement uses the concatenation operator (`||`) to concatenate a string with `NULL`:
 
-```
+```sql
 SELECT
    'John' || NULL result;
 ```
@@ -96,7 +96,7 @@ We'll use the `customer` table from the [sample database](/postgresql/postgresql
 
 ![customer table](/postgresqltutorial/customer.png)The following statement uses the `CONCAT()` function to concatenate values in the `first_name`, a space, and values in the `last_name` columns of the `customer` table into a single string:
 
-```
+```sql
 SELECT
   CONCAT (first_name, ' ', last_name) AS full_name
 FROM
@@ -122,7 +122,7 @@ Output:
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `contacts` and [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into it:
 
-```
+```sql
 CREATE TABLE contacts (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -158,7 +158,7 @@ INSERT 0 5
 
 Second, use the `CONCAT()` function to concatenate the values in the `name`, `email`, and `phone` columns of the `contacts` table:
 
-```
+```sql
 SELECT
   CONCAT(name, ' ', '(', email, ')', ' ', phone) contact
 FROM

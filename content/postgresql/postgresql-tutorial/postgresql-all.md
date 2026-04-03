@@ -118,7 +118,7 @@ The query returns one row with a salary of 75K greater than the highest salary o
 
 The following example uses the `ALL` operator for employees who have salaries less than all managers:
 
-```
+```sql
 SELECT
   *
 FROM

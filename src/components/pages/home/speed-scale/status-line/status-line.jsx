@@ -1,10 +1,10 @@
 'use client';
 
-import cn from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import Container from 'components/shared/container';
+import { cn } from 'utils/cn';
 import { getNeonStatus, NEON_STATUS } from 'utils/get-neon-status';
 
 const LinesPattern = ({ size, className }) => (
@@ -38,14 +38,13 @@ const StatusLine = ({ className }) => {
         setCurrentStatus(status);
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
         console.error(error);
       });
   }, []);
 
   return (
     <Container
-      className="2xl:max-w-[1280px] xl:max-w-5xl xl:pl-16 lg:pl-16 md:pl-5 md:pr-3"
+      className="2xl:max-w-[1280px] xl:max-w-5xl xl:pl-16 lg:pl-16 md:pr-3 md:pl-5"
       size="1600"
     >
       <div
@@ -66,7 +65,7 @@ const StatusLine = ({ className }) => {
         <LinesPattern size={4} className="-mr-0.5 basis-11 xl:mr-0 xl:basis-14 lg:basis-[42px]" />
         <LinesPattern size={8} className="basis-[175px] xl:basis-[240px] lg:flex-1" />
         <LinesPattern size={18} className="basis-[190px] xl:hidden" />
-        <span className="ml-2.5 mr-1 shrink-0 xl:ml-0">
+        <span className="mr-1 ml-2.5 shrink-0 xl:ml-0">
           [ STATUS: {statusData[currentStatus]} ]
         </span>
         <LinesPattern

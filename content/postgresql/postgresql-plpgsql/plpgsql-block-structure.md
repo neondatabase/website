@@ -45,25 +45,25 @@ The declaration section is where you [declare all variables](plpgsql-variables) 
 
 The syntax for declaring a variable is as follows:
 
-```sql
+```plsql
 variable_name type = initial_value;
 ```
 
 For example, the following declares a variable called `counter` with the type `int` and has an initial value of zero:
 
-```
+```plsql
 counter int = 0;
 ```
 
 Sometimes, you’ll see the :\= operator instead of \= operator. They have the same meaning:
 
-```
+```plsql
 counter int := 0;
 ```
 
 The initial value is optional. For example, you can declare a variable called `max` with the type `int` like this:
 
-```
+```plsql
 max int;
 ```
 
@@ -75,7 +75,7 @@ The body section is where you place the code. Each statement in the body section
 
 The following example illustrates a simple block. Because the block has no name, it is called an anonymous block.
 
-```
+```plsql
 do $$
 <<first_block>>
 declare
@@ -93,7 +93,7 @@ end first_block $$;
 
 Output:
 
-```php
+```
 NOTICE:  The number of films is 1000
 DO
 ```
@@ -104,7 +104,7 @@ To execute a block from pgAdmin, you click the **Execute** button as shown in th
 
 The anonymous block has to be surrounded by single quotes like this:
 
-```sql
+```plsql
 '<<first_block>>
 declare
   film_count integer := 0;
@@ -122,7 +122,7 @@ However, we use the [dollar\-quoted string constant syntax](dollar-quoted-string
 
 In the declaration section, we declare a [variable](plpgsql-variables) `film_count` and initialize its value to zero.
 
-```sql
+```plsql
 film_count integer = 0;
 ```
 
@@ -155,7 +155,7 @@ The following picture illustrates an outer block and subblocks:
 ![plpgsql block structure](/postgresqltutorial/plpgsql-block-structure.png)
 Typically, you divide a large block into smaller, more logical subblocks. The following example illustrates how to use a subblock inside a block:
 
-```php
+```plsql
 do
 $$
 <<outer>>
@@ -176,7 +176,7 @@ $$
 
 Output:
 
-```php
+```
 NOTICE:  x=1 y=3
 DO
 ```

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -24,7 +23,7 @@ export async function GET(request) {
     });
   }
 
-  draftMode().enable();
+  (await draftMode()).enable();
 
   const redirectSearchParams = new URLSearchParams({
     id,

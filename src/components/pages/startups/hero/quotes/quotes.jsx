@@ -13,9 +13,9 @@ import 'swiper/css/autoplay';
 import './slider.css';
 
 const Quotes = ({ items }) => (
-  <div className="relative pt-9 lg:pt-6">
+  <div className="startups-quotes relative pt-9 lg:pt-6">
     <Image
-      className="absolute -left-2.5 top-0 lg:-left-1.5 lg:w-[51px]"
+      className="absolute top-0 -left-2.5 lg:-left-1.5 lg:w-[51px]"
       src={quoteIcon}
       width={69}
       height={52}
@@ -37,7 +37,7 @@ const Quotes = ({ items }) => (
           <p className="swiper-no-swiping relative text-xl leading-snug tracking-tighter lg:text-lg md:text-base">
             {text}
           </p>
-          <div className="swiper-no-swiping mt-[18px] font-light leading-tight tracking-extra-tight lg:mt-3.5 md:mt-3 md:text-sm">
+          <div className="swiper-no-swiping mt-[18px] leading-tight font-light tracking-extra-tight lg:mt-3.5 md:mt-3 md:text-sm">
             {author}
             {post && <span className="text-gray-new-50"> — {post}</span>}
           </div>

@@ -16,7 +16,7 @@ nextLink:
 
 SQL Server supports [`ISNULL`](http://www.sqlservertutorial.net/sql-server-system-functions/sql-server-isnull-function/) function that replaces `NULL` with a specified replacement value:
 
-```php
+```sql
 ISNULL(expression, replacement)
 ```
 
@@ -26,7 +26,7 @@ PostgreSQL does not have the `ISNULL` function. However, you can use the [`COALE
 
 Note that the `COALESCE` function returns the first non\-null argument, so the following syntax has a similar effect as the `ISNULL` function above:
 
-```
+```sql
 COALESCE(expression,replacement)
 ```
 
@@ -34,7 +34,7 @@ For the `COALESCE` example, check out the [`COALESCE`](postgresql-coalesce) func
 
 In addition to `COALESCE` function, you can use the [`CASE`](postgresql-case) expression:
 
-```
+```sql
 SELECT
     CASE WHEN expression IS NULL
             THEN replacement

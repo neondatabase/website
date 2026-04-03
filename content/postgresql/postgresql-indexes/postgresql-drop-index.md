@@ -20,7 +20,7 @@ nextLink:
 
 Sometimes, you may want to remove an existing index from the database system. To do it, you use the `DROP INDEX` statement as follows:
 
-```phpsql
+```sql
 DROP INDEX  [ CONCURRENTLY] [ IF EXISTS ]  index_name
 [ CASCADE | RESTRICT ];
 ```
@@ -100,7 +100,7 @@ Output:
 
 This is because the query optimizer thinks that it is more optimal to just scan the entire table to locate the row. Hence, the `idx_actor_first_name` is not useful in this case, you can remove it:
 
-```
+```sql
 DROP INDEX idx_actor_first_name;
 ```
 

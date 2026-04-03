@@ -7,14 +7,15 @@ summary: >-
   page, updating payment methods, downloading invoices, changing plans, and
   account deletion.
 enableTableOfContents: true
-updatedOn: '2026-02-19T02:27:13.545Z'
+updatedOn: '2026-03-20T18:23:32.449Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to access the Billing page</p>
-<p>How to update your billing information</p>
+<p>How to update payment method, billing email, and billing details</p>
 <p>How to download invoices</p>
+<p>How to request billing support</p>
 <p>How to change plans</p>
 <p>How to prevent further monthly charges</p>
 <p>How to delete your account</p>
@@ -23,6 +24,7 @@ updatedOn: '2026-02-19T02:27:13.545Z'
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/plans">Neon plans</a>
 <a href="/docs/introduction/monitor-usage">Monitoring billing and usage</a>
+<a href="/docs/introduction/support">Support</a>
 </DocsList>
 </InfoBlock>
 
@@ -36,17 +38,21 @@ To access your **Billing** page:
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu to view the charges to date.
 
-On the **Billing** page, you will find a summary outlining current charges and the details of your plan, your payment information, and your monthly invoices.
+The **Billing** page has a sidebar with **Billing summary** and **Payment info**. **Billing summary** shows **This month's summary**: your billing period, plan details (including **Change plan**), and **Charges to date**. **Payment info** shows how you pay, your billing email, and company or address details (see [Update your payment method](#update-your-payment-method) and [Update billing details](#update-billing-details-company-and-address)).
+
+At the top of the page, **View past invoices** opens your invoices. If you are on a **paid** plan, **Request billing support** appears next to it (see [Request billing support](#request-billing-support)).
 
 ## Update your payment method
+
+The **Payment info** view explains that **charges are applied to your card on the first day of the month**.
 
 To update your payment method:
 
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Navigate to the **Payment info** section of the page.
-1. Locate **Payment method** and click **Edit**.
+1. In the sidebar, select **Payment info**.
+1. In the **Payment method** card, select **Edit**.
 
 If you are unable to update your payment method, please [contact support](/docs/introduction/support).
 
@@ -67,10 +73,22 @@ To update your billing email:
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Navigate to the **Payment info** section of the page.
-1. Locate **Billing email** and click **Edit**.
+1. In the sidebar, select **Payment info**.
+1. In the **Billing email** card, select **Edit**.
 
 If you are unable to update your billing email, please [contact support](/docs/introduction/support).
+
+## Update billing details (company and address)
+
+To update the company name, address, postal or ZIP code, country, or VAT or tax ID shown on your account:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. In the sidebar, select **Payment info**.
+1. In the **Billing Info** card, select **Edit**.
+
+If you are unable to update this information, please [contact support](/docs/introduction/support).
 
 ## Invoices
 
@@ -83,22 +101,33 @@ To download an invoice:
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Navigate to the **Invoices** section of the page.
-1. Find the invoice you want to download and select **Download** from the menu.
+1. Select **View past invoices**.
+1. Find the invoice you want and open its actions menu, then select **Download**.
 
 <Admonition type="note">
 When an invoice is paid, Neon's billing system sends a payment confirmation email to the address associated with the Neon account.
 </Admonition>
 
-### Request a refund
+### Request billing support
 
-If you find an issue with your invoice, you can request a refund. The request will be reviewed by the Neon billing team.
+If you have a question or problem with billing or an invoice, you can contact the billing team from the **Billing** page. This is available on **paid** plans.
+
+#### From the Billing page header
 
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Click the "View past invoices" button.
-1. Find the invoice you want to request a refund for, and select **Request credit note** from the menu. Enter a problem description explaining the reason for the request.
+1. Select **Request billing support**.
+1. In the form, choose the **related invoice** (if you have invoices) and describe how we can help, then submit.
+
+If you have no invoices yet, **Request billing support** may appear disabled with a short explanation.
+
+#### From past invoices
+
+1. On the **Billing** page, select **View past invoices**.
+1. For the invoice you care about, open the actions menu (`...`) and select **Request support**. The same form opens with that invoice pre-selected.
+
+You can still use **Download** from the invoice menu to save a PDF. For other support paths (for example **Launch** plan limits on ticket topics), see [Support](/docs/introduction/support).
 
 ## Change your plan
 

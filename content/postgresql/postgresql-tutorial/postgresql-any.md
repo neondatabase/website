@@ -22,7 +22,7 @@ The PostgreSQL `ANY` operator compares a value with a set of values returned by 
 
 Here’s the basic syntax of  the `ANY` operator:
 
-```csssql
+```sql
 expression operator ANY(subquery)
 ```
 
@@ -113,18 +113,18 @@ Output:
 
 Third, retrieve the data from the `managers` table:
 
-```
+```sql
 SELECT * FROM managers;
 ```
 
 Output:
 
 ```text
- id | first_name | last_name |  type   |  salary
-----+------------+-----------+---------+----------
-  1 | John       | Doe       | manager | 60000.00
-  2 | Jane       | Smith     | manager | 55000.00
-  3 | Alice      | Johnson   | manager | 58000.00
+ id | first_name | last_name |  salary
+----+------------+-----------+----------
+  1 | John       | Doe       |  60000.00
+  2 | Jane       | Smith     |  55000.00
+  3 | Alice      | Johnson   |  58000.00
 (3 rows)
 ```
 
@@ -132,7 +132,7 @@ Output:
 
 The following statement uses the ANY operator to find employees who have the salary the same as manager:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -160,7 +160,7 @@ How it works.
 
 First, execute the subquery in the `ANY` operator that returns the salary of managers:
 
-```
+```sql
 SELECT salary FROM managers;
 ```
 
@@ -181,7 +181,7 @@ Second, compare the salary of each row in the `employees` table with the values 
 
 The following example uses the `ANY` operator to find employees who have salaries greater than the manager’s salaries:
 
-```
+```sql
 SELECT
   *
 FROM
@@ -214,7 +214,7 @@ The output indicates that the two employees have a higher salary than the manage
 
 The following example uses the `ANY` operator to find employees who have salaries less than the manager’s salaries:
 
-```
+```sql
 SELECT
   *
 FROM

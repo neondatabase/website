@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { m, LazyMotion, domAnimation } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -13,6 +12,7 @@ import dbLoadLegendIcon from 'icons/home/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home/autoscaling/legend/resource.svg';
 import avoidImageMd from 'images/pages/home/autoscaling/avoid-illustration-md.png';
 import saveCostsImageMd from 'images/pages/home/autoscaling/save-costs-md.png';
+import { cn } from 'utils/cn';
 
 import Heading from '../heading';
 
@@ -57,11 +57,11 @@ const Autoscaling = () => {
 
   return (
     <section
-      className="autoscaling safe-paddings relative scroll-mt-16 overflow-hidden bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:scroll-mt-0 lg:py-14 md:pt-9"
+      className="autoscaling relative scroll-mt-16 overflow-hidden bg-[#E4F1EB] pt-[88px] safe-paddings pb-[105px] xl:pt-16 xl:pb-20 lg:scroll-mt-0 lg:py-14 md:pt-9"
       id="autoscaling"
     >
       <Container
-        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16! md:px-5!"
         size="1600"
       >
         <div className="min-w-0">
@@ -74,9 +74,9 @@ const Autoscaling = () => {
           <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
             {TABS.map((item, index) => (
               <button
-                className={clsx(
-                  'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
-                  'font-medium leading-none tracking-extra-tight',
+                className={cn(
+                  'relative h-11 min-w-[134px] px-4 py-3 whitespace-nowrap transition-colors duration-200',
+                  'leading-none font-medium tracking-extra-tight',
                   'border border-gray-new-10 even:border-l-0',
                   'focus-visible:z-10',
                   'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 md:text-[14px]',
@@ -94,7 +94,7 @@ const Autoscaling = () => {
           </div>
 
           <div
-            className={clsx(
+            className={cn(
               'relative z-10 mt-6 w-max max-w-none overflow-hidden',
               '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
               'xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 lg:mt-5'
@@ -111,16 +111,16 @@ const Autoscaling = () => {
             </div>
             <div className="hidden justify-center md:flex">
               <Image
-                className={clsx('h-0 w-[768px] max-w-none', activeItem === 0 && '!h-auto')}
+                className={cn('h-0 w-[768px] max-w-none', activeItem === 0 && 'h-auto!')}
                 src={avoidImageMd}
                 width={768}
                 height={560}
                 alt=""
               />
               <Image
-                className={clsx(
+                className={cn(
                   'h-0 w-[768px] max-w-none border-t border-gray-new-10',
-                  activeItem === 1 && '!h-auto'
+                  activeItem === 1 && 'h-auto!'
                 )}
                 src={saveCostsImageMd}
                 width={768}
@@ -138,7 +138,7 @@ const Autoscaling = () => {
 
                   return (
                     <m.p
-                      className="text-pretty font-mono uppercase text-[#285D49] xl:text-sm lg:text-xs"
+                      className="font-mono leading-normal text-pretty text-[#285D49] uppercase xl:text-sm lg:text-xs"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
@@ -165,7 +165,7 @@ const Autoscaling = () => {
             <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
               {LEGEND.map((item, index) => (
                 <li
-                  className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-extra-tight xl:gap-x-2 md:text-[14px]"
+                  className="flex items-center gap-x-2.5 text-[15px] leading-snug tracking-extra-tight whitespace-nowrap xl:gap-x-2 md:text-[14px]"
                   key={index}
                 >
                   <Image src={item.icon} width={16} height={16} loading="lazy" alt="" />

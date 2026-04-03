@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { decodeFont } from '@rive-app/react-canvas';
 
 const fontCache = new Map();
@@ -79,7 +78,7 @@ export const clearFontCache = () => {
   fontCache.forEach((font) => {
     try {
       font.unref();
-    } catch (error) {
+    } catch (_error) {
       // Ignore errors
     }
   });

@@ -1,7 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-console */
-
 /**
  * Post-build script to process MDX content into LLM-friendly markdown
  *

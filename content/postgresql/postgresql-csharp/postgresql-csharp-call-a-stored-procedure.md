@@ -22,7 +22,7 @@ The following are the steps for calling a PostgreSQL stored procedure in C\#:
 
 First, create a data source that represents the PostgreSQL database:
 
-```cssql
+```cs
 await using var dataSource = NpgsqlDataSource.Create(connectionString);
 ```
 
@@ -53,7 +53,7 @@ We’ll create a new stored procedure in the PostgreSQL server and call it from 
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```plaintext
+```bash
 psql -U ed -d elearning
 ```
 
@@ -183,13 +183,13 @@ Finally, show the error message if any exceptions occur:
 
 First, connect to the `elearning` database using the `ed` user:
 
-```plaintext
+```bash
 psql -U ed -d elearning
 ```
 
 Second, retrieve data from the enrollments table:
 
-```plaintext
+```sql
 SELECT * FROM enrollments;
 ```
 
@@ -205,7 +205,7 @@ Output:
 
 Third, retrieve data from the invoices table:
 
-```
+```sql
  SELECT * FROM invoices;
 ```
 

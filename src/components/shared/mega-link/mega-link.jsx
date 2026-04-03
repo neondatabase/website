@@ -1,16 +1,17 @@
-import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import PointerRight from 'icons/pointer-right-red.inline.svg';
+import { cn } from 'utils/cn';
 import getFormattedDate from 'utils/get-formatted-date';
 
 const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
   <NextLink
-    className={clsx(
-      'not-prose group my-9 flex items-center gap-9 border border-gray-new-20 px-6 py-5',
-      'transition-colors duration-200 hover:border-gray-new-30',
+    className={cn(
+      'not-prose group my-9 flex items-center gap-8 border border-gray-new-80 bg-[#E4F1EB]/40 py-5 pr-5 pl-6',
+      'transition-colors duration-200 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
+      'dark:border-gray-new-20 dark:bg-gray-new-8 dark:hover:border-gray-new-30 dark:hover:bg-gray-new-10',
       'sm:gap-3',
       className
     )}
@@ -23,13 +24,13 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
         <div className="flex gap-6 md:gap-4">
           <div className="flex items-center justify-start gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-green-45" aria-hidden />
-            <span className="justify-start text-base font-medium leading-none tracking-extra-tight text-gray-new-70 md:text-sm">
+            <span className="justify-start text-base leading-none font-medium tracking-extra-tight text-gray-new-70 md:text-sm">
               Read more
             </span>
           </div>
           <time
             dateTime={date.toISOString()}
-            className="text-base font-medium leading-none tracking-extra-tight text-gray-new-40 md:text-sm"
+            className="text-base leading-none font-medium tracking-extra-tight text-gray-new-40 md:text-sm"
           >
             {getFormattedDate(date)}
           </time>
@@ -38,16 +39,16 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
       {tag && (
         <div className="flex items-center gap-1.5">
           <PointerRight className="size-2.5" />
-          <span className="block font-mono text-xs font-medium uppercase leading-none text-gray-new-30 dark:text-gray-new-80">
+          <span className="block font-mono text-xs leading-none font-medium text-gray-new-30 uppercase dark:text-gray-new-80">
             {tag}
           </span>
         </div>
       )}
-      <h3 className="m-0 text-xl !font-normal leading-snug tracking-extra-tight sm:line-clamp-3">
+      <h3 className="m-0 text-xl leading-snug font-normal! tracking-extra-tight text-gray-new-8 dark:text-white sm:line-clamp-3">
         {title}
       </h3>
     </div>
-    <Chevron className="size-4 text-gray-new-50 transition-colors duration-200 group-hover:text-gray-new-60" />
+    <Chevron className="size-4 text-gray-new-50 transition-colors duration-200 group-hover:text-gray-new-40 dark:text-gray-new-50 dark:group-hover:text-gray-new-80" />
   </NextLink>
 );
 

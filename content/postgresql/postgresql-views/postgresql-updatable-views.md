@@ -56,7 +56,7 @@ We’ll take some examples of creating updatable views.
 
 The following statements create a table called `cities` and [insert some rows](../postgresql-tutorial/postgresql-insert-multiple-rows) into the table:
 
-```phpsql
+```sql
 CREATE TABLE cities (
     id SERIAL PRIMARY KEY ,
     name VARCHAR(255),
@@ -154,7 +154,7 @@ Output:
 
 Sixth, delete a row from the `cities` table via the `city_us` view:
 
-```
+```sql
 DELETE FROM city_us
 WHERE id = 21;
 ```

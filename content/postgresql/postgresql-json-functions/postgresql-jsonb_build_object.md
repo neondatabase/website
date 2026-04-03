@@ -94,7 +94,7 @@ SELECT
 
 It returns the following error:
 
-```sql
+```
 ERROR:  argument list must have even number of elements
 HINT:  The arguments of jsonb_build_object() must consist of alternating keys and values.
 ```

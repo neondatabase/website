@@ -1,9 +1,10 @@
 ---
 title: Replicate data to Databricks with Lakeflow Connect
-subtitle: Learn how to replicate data from Neon to Databricks Lakehouse using the Lakeflow Connect PostgreSQL connector
+subtitle: Learn how to replicate data from Neon to Databricks Lakehouse using the
+  Lakeflow Connect PostgreSQL connector
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-19T00:00:00.000Z'
+updatedOn: '2026-03-20T18:41:23.218Z'
 ---
 
 Neon's logical replication feature lets you stream changes from your Neon Postgres database into external systems. This guide shows how to use Databricks Lakeflow Connect's PostgreSQL connector to replicate data from Neon Postgres into Databricks Lakehouse using PostgreSQL logical replication.
@@ -88,6 +89,8 @@ neon roles create --name databricks_replication
 </TabItem>
 
 <TabItem>
+
+Set `PROJECT_ID` and `BRANCH_ID` from your Neon project (for example from the project URL in the Console or via the Neon API).
 
 ```bash
 curl "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID/roles" \
@@ -177,7 +180,7 @@ Lakeflow Connect uses Unity Catalog connections to store JDBC connection details
    - **Database**: your Neon database name
    - **User**: `databricks_replication` (or the replication role you created).
    - **Password**: the password for that role. You can obtain the password from the **Connect** modal on the Neon project dashboard.
-6. Create he connection.
+6. Create the connection.
 7. On the **Catalog basics** page, test your connection. You will need to provide the name of your PostgreSQL database.
 8. Click next to grant catalog access. Specify the users, groups, and service principals that have privileges on this catalog. Additionally, set up workspace-catalog bindings to isolate user data access.
 

@@ -22,7 +22,7 @@ The `DIV()` function is a useful tool for performing integer division. Unlike th
 
 Here’s the basic syntax of the `DIV()` function:
 
-```sqlsql
+```sql
 DIV(dividend, divisor)
 ```
 
@@ -41,7 +41,7 @@ Let’s explore some examples of using the `DIV()` function.
 
 The following uses the `DIV()` function to return the result of dividing 10 by 3:
 
-```
+```sql
 SELECT DIV(10,3) as result;
 ```
 
@@ -62,7 +62,7 @@ Unlike regular division, the `DIV()` function truncates any fractional part of t
 
 You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
 
-```
+```sql
 SELECT
   title,
   DIV(length, 30) * 30 as bin
@@ -96,7 +96,7 @@ In this example, we group the lengths of films into bins of 30 minutes.
 
 First, [create a new table](../postgresql-tutorial/postgresql-create-table) called `employees` and [insert some data into it](../postgresql-tutorial/postgresql-insert-multiple-rows):
 
-```
+```sql
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -126,7 +126,7 @@ Output:
 
 Second, calculate the age of each employee:
 
-```
+```sql
 SELECT name, DIV(EXTRACT(YEAR FROM AGE(current_date, birthdate)), 1) AS age
 FROM employees;
 ```

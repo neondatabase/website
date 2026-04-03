@@ -1,0 +1,230 @@
+import { NextResponse } from 'next/server';
+
+import { checkCookie, getReferer } from 'app/actions';
+import { CONTENT_ROUTES } from 'constants/content';
+import LINKS from 'constants/links';
+
+import {
+  isAIAgentRequest,
+  getMarkdownPath,
+  buildAgent404Response,
+} from './utils/ai-agent-detection';
+import llmsRedirectMap from './utils/llms-redirect-map.json';
+
+const SITE_URL =
+  process.env.VERCEL_ENV === 'preview'
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+function isContentRoute(pathname) {
+  const path = pathname.slice(1).replace(/\/$/, ''); // strip leading + trailing slashes
+  return Object.keys(CONTENT_ROUTES).some(
+    (route) => path === route || path.startsWith(`${route}/`)
+  );
+}
+
+function applyDocHeaders(response) {
+  response.headers.append('Vary', 'Accept');
+  response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
+  response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+  response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
+  return response;
+}
+
+function trackLLMPageview(req, { is404 = false } = {}) {
+  const url = req.nextUrl.href;
+  const referrer = req.headers.get('referer') || '';
+  const cookies = req.headers.get('cookie') || '';
+  const userAgent = req.headers.get('user-agent') || '';
+
+  // Match the payload shape the Zaraz JS tag sends to this endpoint
+  const payload = {
+    name: 'Pageview',
+    data: { llm_agent: true, llm_404: is404 },
+    zarazData: {
+      c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
+      l: url,
+      r: referrer,
+    },
+    system: {
+      device: {
+        ip: '192.168.0.1',
+      },
+    },
+  };
+
+  // Fire and forget — do not await to avoid blocking the response
+  fetch('https://neonapi.io/t.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
+    body: JSON.stringify(payload),
+  }).catch(() => {});
+}
+
+export async function proxy(req) {
+  try {
+    const { pathname } = req.nextUrl;
+
+    // Legacy /llms/*.txt redirect (deprecated URLs -> canonical .md URLs)
+    if (pathname.startsWith('/llms/')) {
+      const filename = pathname.replace('/llms/', '');
+      const target = llmsRedirectMap[filename];
+      if (target) {
+        return NextResponse.redirect(new URL(target, req.url), { status: 301 });
+      }
+      // No match in map = fall through to 404 naturally
+    }
+
+    if (isAIAgentRequest(req)) {
+      let agentHit404 = false;
+      const markdownPath = getMarkdownPath(pathname);
+
+      if (markdownPath) {
+        try {
+          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+          const response = await fetch(markdownUrl);
+
+          if (response.ok) {
+            trackLLMPageview(req);
+            const markdown = await response.text();
+            return applyDocHeaders(
+              new NextResponse(markdown, {
+                status: 200,
+                headers: {
+                  'Content-Type': 'text/markdown; charset=utf-8',
+                  'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                  'X-Content-Source': 'markdown',
+                  'X-Robots-Tag': 'noindex',
+                },
+              })
+            );
+          }
+          agentHit404 = response.status === 404;
+          if (!agentHit404) {
+            console.error('[AI Agent] Failed to fetch markdown', {
+              pathname,
+              markdownPath,
+              status: response.status,
+            });
+          }
+        } catch (error) {
+          console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
+        }
+      }
+
+      trackLLMPageview(req, { is404: agentHit404 });
+
+      if (agentHit404) {
+        return applyDocHeaders(
+          new NextResponse(buildAgent404Response(pathname), {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/markdown; charset=utf-8',
+              'Cache-Control': 'public, max-age=60, s-maxage=300',
+              'X-Content-Source': 'agent-404',
+              'X-Robots-Tag': 'noindex',
+            },
+          })
+        );
+      }
+    }
+
+    // Apply doc headers to all content route responses (.md URLs and HTML pages).
+    // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
+    if (isContentRoute(pathname)) {
+      if (pathname.endsWith('.md')) {
+        const markdownPath = getMarkdownPath(pathname);
+
+        if (markdownPath) {
+          try {
+            const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+            const response = await fetch(markdownUrl);
+
+            if (response.ok) {
+              const markdown = await response.text();
+              return applyDocHeaders(
+                new NextResponse(markdown, {
+                  status: 200,
+                  headers: {
+                    'Content-Type': 'text/markdown; charset=utf-8',
+                    'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                    'X-Content-Source': 'markdown',
+                    'X-Robots-Tag': 'noindex',
+                  },
+                })
+              );
+            }
+
+            if (response.status === 404) {
+              return applyDocHeaders(
+                new NextResponse(buildAgent404Response(pathname), {
+                  status: 404,
+                  headers: {
+                    'Content-Type': 'text/markdown; charset=utf-8',
+                    'Cache-Control': 'public, max-age=60, s-maxage=300',
+                    'X-Content-Source': 'md-404',
+                    'X-Robots-Tag': 'noindex',
+                  },
+                })
+              );
+            }
+          } catch (error) {
+            console.error('[.md] Error serving markdown', { pathname, error: error.message });
+          }
+        }
+      }
+
+      const response = NextResponse.next();
+      response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
+      response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+      response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
+      if (pathname.endsWith('.md')) {
+        response.headers.set('X-Robots-Tag', 'noindex');
+      }
+      return response;
+    }
+
+    // Check if the user is logged in
+    try {
+      const isLoggedIn = await checkCookie('neon_login_indicator');
+      if (pathname === '/' && isLoggedIn) {
+        try {
+          const referer = await getReferer();
+          // If user is already browsing the site, show them the homepage
+          if (
+            referer.includes(process.env.VERCEL_BRANCH_URL) ||
+            referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
+          ) {
+            return NextResponse.redirect(new URL('/home', req.url));
+          }
+        } catch (error) {
+          console.error('Error getting referer:', error);
+        }
+        // If user came from external source, redirect to console
+        return NextResponse.redirect(LINKS.console);
+      }
+      // If not logged in but on /home, redirect to main homepage
+      if (pathname === '/home' && !isLoggedIn) {
+        return NextResponse.redirect(new URL(SITE_URL));
+      }
+    } catch (error) {
+      console.error('Error checking login indicator:', error);
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Middleware execution error:', error);
+    // General error fallback
+    return NextResponse.redirect(new URL(SITE_URL));
+  }
+}
+
+export const config = {
+  matcher: [
+    '/', // Check if the user is logged in
+    '/home', // Check if the user is logged in
+    '/llms/:path*', // Legacy .txt redirect
+    '/pricing', // Agent-friendly pricing page
+    '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
+  ],
+};

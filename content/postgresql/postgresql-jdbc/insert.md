@@ -24,7 +24,7 @@ We’ll use the `products` table from the `sales` database for the demonstration
 
 The following creates `Product.java` file and defines the `Product` class with three properties `id`, `name`, and `price`. These properties correspond to the columns in the `products` table:
 
-```javasqlsql
+```java
 public class Product {
     private int id;
     private String name;
@@ -183,7 +183,7 @@ public class Main {
 
 If you run the program, it’ll show the following output:
 
-```java
+```
 Inserted id:1
 ```
 
@@ -191,7 +191,7 @@ Inserted id:1
 
 Connect to the `sales` database and retrieve the data from the `products` table to verify the insert:
 
-```plaintext
+```sql
 SELECT * FROM products;
 ```
 
@@ -240,7 +240,7 @@ How it works.
 
 First, initialize an `INSERT` statement:
 
-```
+```java
 var sql = "INSERT INTO products(name,price) "
           + "VALUES(?,?)";
 ```
@@ -303,13 +303,13 @@ public class Main {
 
 Connect to the `sales` database and query data from the `products` table to verify the inserts:
 
-```java
+```sql
 SELECT * FROM products;
 ```
 
 Output:
 
-```php
+```
  id |         name         | price
 ----+----------------------+--------
   1 | Phone Case           |  19.99

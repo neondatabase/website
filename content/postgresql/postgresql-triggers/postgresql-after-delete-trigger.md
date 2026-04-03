@@ -32,7 +32,7 @@ To create an `AFTER DELETE` trigger, you follow these steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute after a `DELETE` operation:
 
-```sqlsql
+```plsql
 CREATE OR REPLACE FUNCTION trigger_function_name()
 RETURNS TRIGGER AS
 $$
@@ -93,7 +93,7 @@ Output:
 
 Third, create another table named `employee_archives` for archiving deleted employees:
 
-```
+```sql
 CREATE TABLE employee_archives(
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE employee_archives(
 
 Fourth, define a function that [inserts](../postgresql-tutorial/postgresql-insert) a deleted employee into the `employee_archives` table:
 
-```sql
+```plsql
 CREATE OR REPLACE FUNCTION archive_deleted_employee()
 RETURNS TRIGGER
 AS
@@ -150,7 +150,7 @@ The `AFTER INSERT` trigger will be activated that calls the `archive_deleted_emp
 
 Seventh, retrieve data from the `employee_archives` table:
 
-```
+```sql
 SELECT * FROM employee_archives;
 ```
 

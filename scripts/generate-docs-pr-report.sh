@@ -5,7 +5,8 @@
 # This script generates reports of merged PRs from monitored repositories.
 #
 # Release Types:
-#   - "branch": Repos with release branches (e.g., rc/release-control-plane/*)
+#   - "branch": Repos with release branches (e.g., rc/release-*/* and/or
+#     long-lived branches like release-console; optional release_branch_grep in JSON)
 #   - "tag": Repos with release tags (e.g., v1.2.3, release-compute-11092)
 #   - "direct": Repos without formal releases (PRs merge directly to main)
 #
@@ -56,6 +57,14 @@ if [[ "$SINCE_DATE" =~ ([0-9]+)\ days?\ ago ]]; then
 else
     # For absolute dates like "2026-01-20", use as-is or parse
     SINCE_DATE_COMPARE=$(date -u -j -f "%Y-%m-%d" "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null || date -u -d "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null || echo "$SINCE_DATE")
+fi
+
+# For git log --since, use start of SINCE_DATE_COMPARE (UTC) when it is a calendar
+# day so merges on that day are included. Plain "N days ago" is rolling-time and
+# can drop same-calendar-day commits (e.g. Mar 13 10:00Z when run Mar 19 evening).
+GIT_LOG_SINCE="$SINCE_DATE"
+if [[ "$SINCE_DATE_COMPARE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    GIT_LOG_SINCE="${SINCE_DATE_COMPARE}T00:00:00Z"
 fi
 
 mkdir -p "$REPORT_DIR"
@@ -244,6 +253,7 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
     repo=$(jq -r ".repos[$i].github_repo" "$CONFIG_FILE")
     organize=$(jq -r ".repos[$i].organize_by_category" "$CONFIG_FILE")
     group_by_component=$(jq -r ".repos[$i].group_by_release_component // \"false\"" "$CONFIG_FILE")
+    branch_grep=$(jq -r ".repos[$i].release_branch_grep // \"rc/release-\"" "$CONFIG_FILE")
 
     [ ! -d "$path/.git" ] && continue
 
@@ -255,8 +265,9 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
     REPO_HAD_RELEASES=false
 
     if [ "$rel_type" == "branch" ]; then
-        # Find recent release branches (control-plane and console)
-        for branch in $(git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/remotes/origin | grep "rc/release-" | head -5); do
+        # Find recent release branches (RC branches and/or long-lived release-* lines).
+        # release_branch_grep is an extended regex (grep -E); default matches rc/release-* only.
+        for branch in $(git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/remotes/origin | grep -E "$branch_grep" | head -25); do
             # Check if branch HEAD is recent (using UTC dates)
             branch_date=$(git log -1 --format=%aI "$branch" 2>/dev/null | cut -d'T' -f1)
 
@@ -277,7 +288,7 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
     elif [ "$rel_type" == "direct" ]; then
         # Direct merges to main (no releases)
         # Get merged PRs since the time window
-        git log --since="$SINCE_DATE" --first-parent main --format="%s" | \
+        git log --since="$GIT_LOG_SINCE" --first-parent main --format="%s" | \
         while read -r line; do
             # Skip release markers and plain branch merges (without PR numbers)
             echo "$line" | grep -qE "^(chore\(release\)|Release)" && continue
@@ -301,8 +312,9 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
                 pr=$(echo "$line" | grep -oE '#[0-9]+' | head -1 | tr -d '#' || echo "")
                 [ -n "$pr" ] && line=$(echo "$line" | sed "s|(#${pr})|([#${pr}](https://github.com/${org}/${repo}/pull/${pr}))|")
             else
-                # No PR number found, skip
-                continue
+                # Squash or direct push: subject has no (#NN) — still list for triage
+                [ -z "$line" ] && continue
+                line="$line (direct commit on main, no PR in message)"
             fi
 
             echo "Uncategorized|$line"
@@ -359,7 +371,7 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
                     [[ "$tag_date" < "$SINCE_DATE_COMPARE" ]] && continue
                     prev=$(git describe --abbrev=0 "$tag_name^" 2>/dev/null || echo "")
                     range="${prev:+$prev..}$tag_name"
-                    git log --since="$SINCE_DATE" --oneline --no-merges "$range" --format="%s" 2>/dev/null | head -30 | \
+                    git log --since="$GIT_LOG_SINCE" --oneline --no-merges "$range" --format="%s" 2>/dev/null | head -30 | \
                     while read -r line; do
                         echo "$line" | grep -qE "^(chore\(release\)|Release)" && continue
                         pr=$(echo "$line" | grep -oE '#[0-9]+' | head -1 | tr -d '#' || echo "")

@@ -6,7 +6,7 @@ summary: >-
   and management through the Neon SDK without direct installation or
   configuration by users.
 enableTableOfContents: true
-updatedOn: '2026-03-06T22:31:14.960Z'
+updatedOn: '2026-03-20T18:23:32.441Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -30,6 +30,8 @@ The following Better Auth plugins are currently supported in Neon Auth:
 | [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
 | [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
 | [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
+
+For more runnable Neon Auth samples, see [Example applications](/docs/auth/overview#example-applications). The **Organization** plugin demo is **[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)**; see the [Organization plugin](/docs/auth/guides/plugins/organization) page for context.
 
 For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
 

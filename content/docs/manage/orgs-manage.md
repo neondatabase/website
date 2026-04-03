@@ -4,7 +4,7 @@ summary: >-
   Covers the management of Neon organizations, including creating organizations,
   inviting members, and setting permissions based on assigned roles.
 enableTableOfContents: true
-updatedOn: '2026-03-12T17:34:43.560Z'
+updatedOn: '2026-03-13T19:35:31.437Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -38,6 +38,8 @@ To invite Members:
 <Admonition type="note" title="Invites not received?">
 If invite emails aren't received, they may be in spam or quarantined. Recipients should check these folders and mark Neon emails as safe.
 </Admonition>
+
+To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
 
 ## Set permissions
 

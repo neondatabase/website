@@ -61,7 +61,7 @@ const SDKTableOfContents = ({ title, url, sections }) => {
   return (
     <div className="flex flex-col gap-6">
       <Link
-        className="flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight"
+        className="flex items-center gap-2.5 text-[15px] leading-snug font-medium tracking-extra-tight"
         to={url}
         theme="blue-green"
       >
@@ -70,7 +70,7 @@ const SDKTableOfContents = ({ title, url, sections }) => {
       </Link>
       {sections.map((section, sectionIdx) => (
         <div key={sectionIdx}>
-          <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-new-40 dark:text-gray-new-70">
+          <h4 className="mb-2 text-xs font-semibold tracking-wide text-gray-new-40 uppercase dark:text-gray-new-70">
             {section.section}
           </h4>
           <ul className="space-y-1">

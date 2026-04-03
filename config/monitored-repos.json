@@ -8,8 +8,9 @@
       "github_repo": "neon-cloud",
       "release_type": "branch",
       "release_pattern": "rc/release-*/*",
+      "release_branch_grep": "rc/release-|/release-(console|control-plane|billing-jobs|billing-manager|lbm|neon-auth|forecasting)($|/)|lakebase-ui/release-",
       "organize_by_category": true,
-      "comment": "Includes both control-plane and console releases"
+      "comment": "RC branches (rc/release-*) plus long-lived release integration branches (release-console, release-control-plane, etc.)"
     },
     {
       "name": "hadron",
@@ -54,9 +55,10 @@
       "github_url": "git@github.com:neondatabase/neon-js.git",
       "github_org": "neondatabase",
       "github_repo": "neon-js",
-      "release_type": "tag",
+      "release_type": "direct",
       "release_pattern": "*",
-      "organize_by_category": false
+      "organize_by_category": false,
+      "comment": "Monorepo ships via tags per package, but main moves without a new tag; use first-parent main like other direct repos"
     },
     {
       "name": "neon-api-python",
@@ -84,9 +86,10 @@
       "github_url": "git@github.com:neondatabase/neon-drizzle-studio-changelog.git",
       "github_org": "neondatabase",
       "github_repo": "neon-drizzle-studio-changelog",
-      "release_type": "tag",
+      "release_type": "direct",
       "release_pattern": "v*",
-      "organize_by_category": false
+      "organize_by_category": false,
+      "comment": "Releases are merge PRs to main; only legacy tag is 0.0.18 (no new tags)"
     },
     {
       "name": "mcp-server-neon",
@@ -114,9 +117,10 @@
       "github_url": "git@github.com:neondatabase/create-branch-action.git",
       "github_org": "neondatabase",
       "github_repo": "create-branch-action",
-      "release_type": "tag",
+      "release_type": "direct",
       "release_pattern": "v*",
-      "organize_by_category": false
+      "organize_by_category": false,
+      "comment": "Releases merge to main; tags (e.g. v6) are not cut every merge — track merge commits on main"
     },
     {
       "name": "delete-branch-action",

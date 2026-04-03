@@ -66,6 +66,10 @@ Save the connection details as you will need them in the next steps.
    - Click the "Test Connection" button to verify the connection details.
    - If successful, click "Finish" to save the connection. Your new database connection will appear in the left sidebar.
 
+<Admonition type="tip">
+To prevent Neon's scale-to-zero feature from interrupting an idle connection, configure a keepalive ping in DBeaver. Right-click your connection, select **Edit Connection**, go to **Connection Settings** > **Initialization**, and set **Keep-Alive (seconds)** to `60`. This sends a periodic ping to keep the connection active.
+</Admonition>
+
 ## Basic Operations in DBeaver
 
 ### 1. Running SQL Queries

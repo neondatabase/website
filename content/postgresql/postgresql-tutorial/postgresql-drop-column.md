@@ -21,7 +21,7 @@ nextLink:
 
 To drop a column of a table, you use the `DROP COLUMN` clause in the [`ALTER TABLE`](postgresql-alter-table) statement as follows:
 
-```shellsql
+```sql
 ALTER TABLE table_name
 DROP COLUMN column_name;
 ```
@@ -154,14 +154,14 @@ The output indicates that the statement removes both the `category_id` column an
 
 First, attempt to remove the `publisher_id` column from the `books` table:
 
-```shell
+```sql
 ALTER TABLE books
 DROP COLUMN publisher_id;
 ```
 
 PostgreSQL issued the following error:
 
-```sql
+```
 ERROR:  cannot drop table books column publisher_id because other objects depend on it
 DETAIL:  view book_info depends on table books column publisher_id
 HINT:  Use DROP ... CASCADE to drop the dependent objects too.
@@ -170,14 +170,14 @@ HINT:  Use DROP ... CASCADE to drop the dependent objects too.
 
 The output states that the `book_info` view is using the column `publisher_id` of the `books` table. You need to use the `CASCADE` option to remove both the `publisher_id` column and `book_info` view as shown in the following statement:
 
-```php
+```sql
 ALTER TABLE books
 DROP COLUMN publisher_id CASCADE;
 ```
 
 The statement issued the following notice indicating that the view book_info was also removed:
 
-```sql
+```
 NOTICE:  drop cascades to view book_info
 ALTER TABLE
 ```

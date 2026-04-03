@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import { getHighlightedCodeArray } from 'lib/shiki';
+import { cn } from 'utils/cn';
 
 import CodeTabsNavigation from './code-tabs-navigation';
 
@@ -30,7 +30,7 @@ const CodeTabs = async ({ className = null }) => {
   const highlightedCodeSnippets = await getHighlightedCodeArray(codeSnippets);
 
   return (
-    <div className={clsx(className, 'rounded-[10px] bg-black-new')}>
+    <div className={cn(className, 'rounded-[10px] bg-black-new')}>
       <CodeTabsNavigation
         codeSnippets={codeSnippets}
         highlightedCodeSnippets={highlightedCodeSnippets}

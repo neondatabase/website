@@ -7,7 +7,7 @@ summary: >-
   reliable database transfers.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.079Z'
+updatedOn: '2026-04-01T22:00:00.000Z'
 ---
 
 <InfoBlock>
@@ -50,6 +50,10 @@ This guide walks you through using `pgcopydb` to migrate data to Neon.
 
 <Admonition type="note">
 Logical replication with `pgcopydb clone --follow` is not supported on Neon. You can still use `pgcopydb` for a one-time data migration to Neon.
+</Admonition>
+
+<Admonition type="important">
+`pgcopydb` uses `pg_dump` and `pg_restore` under the hood. Avoid using a [pooled connection string](/docs/reference/glossary#pooled-connection-string) for Neon in `PGCOPYDB_SOURCE_PGURI` or `PGCOPYDB_TARGET_PGURI`. Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 </Admonition>
 
 ## Prerequisites

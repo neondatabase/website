@@ -29,7 +29,7 @@ Domains are useful for centralizing the management of fields with common constra
 
 The following statement [create a table](postgresql-create-table) named `mailing_list`:
 
-```sqlsql
+```sql
 CREATE TABLE mailing_list (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR NOT NULL,
@@ -71,7 +71,7 @@ VALUES('Jame V','Doe','james.doe@example.com');
 
 PostgreSQL issued the following error because the first name contains a space:
 
-```sql
+```
 ERROR:  value for domain contact_name violates check constraint "contact_name_check"
 
 ```
@@ -87,7 +87,7 @@ To change or remove a domain, you use the `ALTER DOMAIN` or `DROP DOMAIN` respec
 
 To view all domains in the current database, you use the `\dD` command as follows:
 
-```sql
+```
 test=#\dD
                                      List of domains
  Schema |     Name     |       Type        | Modifier |               Check
@@ -129,7 +129,7 @@ The `CREATE TYPE` statement allows you to create a composite type, which can be 
 
 Suppose you want to have a function that returns several values: `film_id`, `title`, and `release_year`. The first step is to create a type e.g., `film_summary` as follows:
 
-```
+```sql
 CREATE TYPE film_summary AS (
     film_id INT,
     title VARCHAR,
@@ -167,7 +167,7 @@ To change a user\-defined type, you use the `ALTER TYPE` statement. To remove a 
 
 If you use the `psql` program, you can list all user\-defined types in the current database using the `\dT` or `\dT+` command:
 
-```sql
+```
 dvdrental=# \dT
          List of data types
  Schema |     Name     | Description

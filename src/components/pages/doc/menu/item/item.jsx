@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
+import { cn } from 'utils/cn';
 
 import Tag from '../../tag';
 
@@ -51,13 +51,13 @@ const Item = ({
   return (
     <li className="group/item flex flex-col">
       <LinkTag
-        className={clsx(
+        className={cn(
           'group relative flex w-full gap-2 rounded-sm py-2 pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           isActive && !items?.length
-            ? 'font-medium text-secondary-8 dark:text-primary-1'
-            : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',
+            ? 'font-medium text-green-44 dark:text-green-52'
+            : 'font-normal text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white',
           isSubmenu &&
-            'before:absolute before:inset-y-0 before:-left-[13px] before:w-px before:bg-secondary-8 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-primary-1',
+            'before:absolute before:inset-y-0 before:-left-[13px] before:w-px before:bg-green-44 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-green-52',
           isActive && isSubmenu && !items?.length && 'before:opacity-100'
         )}
         type={slug ? undefined : 'button'}
@@ -72,9 +72,7 @@ const Item = ({
           {title}&nbsp;
           {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
         </span>
-        {items?.length && (
-          <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />
-        )}
+        {items?.length && <Chevron className={cn('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />}
       </LinkTag>
       {items?.length && (
         <LazyMotion features={domAnimation}>

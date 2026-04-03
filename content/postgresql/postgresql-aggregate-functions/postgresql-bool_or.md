@@ -22,7 +22,7 @@ The `BOOL_OR()` is an aggregate function that allows you to aggregate boolean va
 
 Here’s the syntax of the `BOOL_OR()` function:
 
-```sqlsql
+```sql
 bool_or(expression)
 ```
 
@@ -154,7 +154,7 @@ The output indicates that teams A and B have active members whereas team C does 
 
 The following example uses the `BOOL_OR()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) and [HAVING](../postgresql-tutorial/postgresql-having) clauses to retrieve teams that have active members:
 
-```
+```sql
 SELECT
   team_name,
   BOOL_OR(active) active_member_exists

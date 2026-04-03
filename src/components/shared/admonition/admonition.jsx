@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import ComingSoonIcon from 'icons/docs/admonition/coming-soon.inline.svg';
@@ -7,11 +6,12 @@ import InfoIcon from 'icons/docs/admonition/info.inline.svg';
 import NoteIcon from 'icons/docs/admonition/note.inline.svg';
 import TipIcon from 'icons/docs/admonition/tip.inline.svg';
 import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
+import { cn } from 'utils/cn';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#2D8665] text-[#34D59A]',
-    borderClassName: 'border-[#2D8665] border-[#34D59A]',
+    titleClassName: 'text-[#2D8665] dark:text-green-52',
+    borderClassName: 'border-[#2D8665] dark:border-green-52',
     icon: NoteIcon,
   },
   important: {
@@ -30,8 +30,8 @@ const themes = {
     icon: WarningIcon,
   },
   info: {
-    titleClassName: 'text-[#426CE0] dark:text-[#648DFF]',
-    borderClassName: 'border-[#426CE0] dark:border-[#648DFF]',
+    titleClassName: 'text-[#426CE0] dark:text-blue-70',
+    borderClassName: 'border-[#426CE0] dark:border-blue-70',
     icon: InfoIcon,
   },
   comingSoon: {
@@ -41,7 +41,8 @@ const themes = {
   },
 };
 
-const textClassName = 'admonition-text mt-2.5 text-base [&_a]:rounded-sm';
+const textClassName =
+  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;
@@ -50,13 +51,13 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
 
   return (
     <div
-      className={clsx(
-        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
+      className={cn(
+        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 py-4 pr-5 pl-[1.125rem] dark:bg-gray-new-8',
         theme.borderClassName,
-        '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
+        '[&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:text-sm! [&_pre[data-language]]:bg-white! [&_pre[data-language]]:dark:bg-gray-new-8!'
       )}
     >
-      <div className={clsx('flex items-center gap-1', theme.titleClassName)}>
+      <div className={cn('flex items-center gap-1', theme.titleClassName)}>
         <Icon width={16} height={16} className="shrink-0" />
         <h4 className="font-mono text-[13px] font-medium uppercase">{title || typeText}</h4>
       </div>

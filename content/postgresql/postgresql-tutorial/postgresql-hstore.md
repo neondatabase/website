@@ -272,7 +272,7 @@ FROM
 
 To convert hstore data to sets, you use the  `each()` function as follows:
 
-```
+```sql
 SELECT
 	title,
 	(EACH(attr) ).*

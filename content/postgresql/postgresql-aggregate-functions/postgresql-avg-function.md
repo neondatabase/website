@@ -22,7 +22,7 @@ The `AVG()` function is one of the most commonly used aggregate functions in Pos
 
 Here is the syntax of the `AVG()` function:
 
-```sqlsql
+```sql
 AVG(column)
 ```
 
@@ -55,7 +55,7 @@ FROM payment;
 
 Output:
 
-```shell
+```
         avg
 --------------------
  4.2006056453822965
@@ -71,7 +71,7 @@ FROM payment;
 
 Output:
 
-```shell
+```
  avg
 ------
  4.20
@@ -82,7 +82,7 @@ Output:
 
 The following query returns the average payment made by customers. Because we use `DISTINCT` PostgreSQL takes unique amounts and calculates the average.
 
-```css
+```sql
 SELECT AVG(DISTINCT amount)::numeric(10,2)
 FROM payment;
 ```
@@ -102,7 +102,7 @@ Notice that the result is different from the first example that does not use the
 
 The following query uses the `AVG()` function with the `SUM()` function to calculate the total payment made by customers and the average of all transactions.
 
-```css
+```sql
 SELECT
 	AVG(amount)::numeric(10,2),
 	SUM(amount)::numeric(10,2)
@@ -111,9 +111,9 @@ FROM
 ```
 
 ```text
- avg  |   sum
+  avg  |   sum
 ------+----------
- 4.20 | 61312.04
+  4.20 | 61312.04
 (1 row)
 ```
 
@@ -126,7 +126,7 @@ Typically, you use the AVG() function with the GROUP BY clause to calculate the 
 
 The following example uses the `AVG()` function with `GROUP BY` clause to calculate the average amount paid by each customer:
 
-```
+```sql
 SELECT
   customer_id,
   first_name,
@@ -161,7 +161,7 @@ You can use the `AVG()` function in the `HAVING` clause to filter groups based o
 
 The following example uses the `AVG()` function to calculate the average payment of each customer and return only the ones who paid higher than 5 USD:
 
-```
+```sql
 SELECT
   customer_id,
   first_name,
@@ -214,7 +214,7 @@ Let’s see the behavior of the `AVG()` function when its input has NULL.
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) named `t1`.
 
-```
+```sql
 CREATE TABLE t1 (
   id serial PRIMARY KEY,
   amount INTEGER

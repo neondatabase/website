@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
@@ -8,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import CornerIcon from 'icons/corner-left.inline.svg';
+import { cn } from 'utils/cn';
 
 import Icon from '../menu/icon';
 
@@ -68,7 +68,7 @@ const NodeLink = ({ className, node }) => {
 
   return (
     <Comp
-      className={clsx(
+      className={cn(
         'flex h-10 w-full flex-1 items-center gap-x-2 pr-7 text-sm leading-snug tracking-tight hover:text-black-new dark:hover:text-white',
         node.section
           ? 'font-medium text-black-new dark:text-white'
@@ -109,7 +109,7 @@ const RecursiveItem = ({ node, currentPath }) => {
     return (
       <li>
         <NodeLink
-          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          className={cn(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
           node={node}
         />
       </li>
@@ -120,11 +120,11 @@ const RecursiveItem = ({ node, currentPath }) => {
     return (
       <li>
         <NodeLink
-          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          className={cn(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
           node={node}
         />
         <ul
-          className={clsx(
+          className={cn(
             'flex flex-col',
             node.nav && 'mt-[5px]',
             node.depth > 1 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
@@ -142,7 +142,7 @@ const RecursiveItem = ({ node, currentPath }) => {
     <li>
       <Collapsible open={open} onOpenChange={setOpen}>
         <CollapsibleTrigger
-          className={clsx(
+          className={cn(
             'group flex h-10 w-full items-center justify-between px-0 text-left',
             'leading-snug tracking-tight transition-colors duration-200',
             'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
@@ -159,18 +159,18 @@ const RecursiveItem = ({ node, currentPath }) => {
           {node.nav && (
             <div className="mt-[5px]">
               <NodeLink
-                className={clsx(
-                  '!text-[15px] font-medium',
+                className={cn(
+                  'text-[15px]! font-medium',
                   isActive
-                    ? '!text-secondary-8 dark:!text-primary-1'
-                    : '!text-black-new dark:!text-white'
+                    ? 'text-secondary-8! dark:text-primary-1!'
+                    : 'text-black-new! dark:text-white!'
                 )}
                 node={node}
               />
             </div>
           )}
           <ul
-            className={clsx(
+            className={cn(
               'flex flex-col',
               node.nav && 'mt-[5px]',
               node.depth > 0 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
@@ -231,7 +231,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
 
   return (
     <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
-      <DrawerTrigger className="group fixed bottom-0 left-0 right-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 outline-none dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
+      <DrawerTrigger className="group fixed right-0 bottom-0 left-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 outline-hidden dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
         <CornerIcon
           className="shrink-0 text-gray-new-60 transition-all duration-200 group-hover:text-black-new dark:group-hover:text-white"
           aria-hidden
@@ -243,9 +243,9 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
         />
       </DrawerTrigger>
 
-      <DrawerContent className="bottom-12 hidden !h-[70dvh] flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
+      <DrawerContent className="bottom-12 hidden h-[70dvh]! flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
-        <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-8 pt-[15px]">
+        <div className="flex flex-1 flex-col overflow-y-auto p-6 pt-[15px] pb-8">
           <RecursiveList nodes={menu} currentPath={pathname} />
         </div>
         <div

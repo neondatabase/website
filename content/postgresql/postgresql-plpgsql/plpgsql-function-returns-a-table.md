@@ -18,7 +18,7 @@ nextLink:
 
 To define a function that returns a table, you use the following form of the [create function](postgresql-create-function) statement:
 
-```sqlsqlsql
+```plsql
 create or replace function function_name (
    parameter_list
 )
@@ -36,7 +36,7 @@ $$;
 
 Instead of returning a single value, this syntax allows you to return a table with a specified column list:
 
-```sql
+```plsql
 returns table ( column_list )
 ```
 
@@ -44,7 +44,7 @@ We will use the `film` table from the [sample database](../postgresql-getting-st
 
 ![](/postgresqltutorial/film.png)The following function returns all films whose titles match a particular pattern using the [ILIKE operator](../postgresql-tutorial/postgresql-like).
 
-```sql
+```plsql
 create or replace function get_film (
   p_pattern varchar
 )
@@ -75,7 +75,7 @@ Since the [data type](../postgresql-tutorial/postgresql-data-types) of `release_
 
 The following shows how to call the `get_film()` function:
 
-```sql
+```plsql
 SELECT * FROM get_film ('Al%');
 ```
 
@@ -99,7 +99,7 @@ Output:
 
 If you call the function using the following statement, PostgreSQL returns a table that consists of one column that holds an array of rows:
 
-```
+```plsql
 SELECT get_film ('Al%');
 ```
 
@@ -123,7 +123,7 @@ Output:
 
 In practice, you often process each row before appending it to the function’s result set:
 
-```
+```plsql
 create or replace function get_film (
 	p_pattern varchar,
 	p_year int
@@ -160,7 +160,7 @@ The `return next` statement adds a row to the returned table of the function.
 
 The following illustrates how to call the `get_film()` function:
 
-```sql
+```plsql
 SELECT * FROM get_film ('%er', 2006);
 ```
 

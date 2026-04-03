@@ -22,7 +22,7 @@ Sometimes, you may want to return values from [stored procedures](postgresql-cre
 
 Here’s the basic syntax for creating a stored procedure with `INOUT` parameters:
 
-```sql
+```plsql
 create or replace procedure sp_name(
     inout parameter type, ...
 )
@@ -37,13 +37,13 @@ language plpgsql;
 
 To call a stored procedure, you use the `call` statement without providing the `INOUT` parameters:
 
-```sql
+```plsql
 call sp_name();
 ```
 
 If you call a stored procedure with `INOUT` parameters in an [anonymous block](plpgsql-block-structure), you need to pass arguments to the stored procedure call as follows:
 
-```sql
+```plsql
 do
 $$
    declare
@@ -68,7 +68,7 @@ Let’s take some examples of creating stored procedures with `INOUT` parameters
 
 First, create a stored procedure that counts the number of rows from the `film` table:
 
-```sql
+```plsql
 create or replace procedure count_film(
     inout total_film int default 0
 )
@@ -84,7 +84,7 @@ language plpgsql;
 
 Second, call the stored procedure without providing the `total_film` parameter:
 
-```sql
+```plsql
 call count_film();
 ```
 
@@ -99,7 +99,7 @@ Output:
 
 Third, call the stored procedure `count_film()` in an anonymous block:
 
-```sql
+```plsql
 do
 $$
 declare
@@ -113,7 +113,7 @@ $$;
 
 Output:
 
-```sql
+```
 NOTICE:  Total film: 1000
 ```
 
@@ -121,7 +121,7 @@ NOTICE:  Total film: 1000
 
 First, create a new stored procedure that retrieves the film statistics including film count, total length, and average rental rate:
 
-```sql
+```plsql
 create or replace procedure film_stat(
    inout total_film int default 0,
    inout total_length int default 0,
@@ -145,7 +145,7 @@ language plpgsql;
 
 Second, call the stored procedure `film_stat()`:
 
-```sql
+```plsql
 call film_stat();
 ```
 

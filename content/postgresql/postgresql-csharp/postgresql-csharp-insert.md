@@ -158,7 +158,7 @@ catch (NpgsqlException ex)
 
 First, open a terminal and connect to the `elearning` database using the `ed` user:
 
-```cs
+```bash
 psql -U ed -d elearning
 ```
 
@@ -166,13 +166,13 @@ It'll prompt you to enter a password for the `ed` user. Input the valid password
 
 Second, query data from the `students` table:
 
-```cs
+```sql
 SELECT * FROM students;
 ```
 
 Output:
 
-```cs
+```
  id | first_name | last_name |       email        | registration_date
 ----+------------+-----------+--------------------+-------------------
   1 | John       | Doe       | john.doe@example.com | 2024-05-20

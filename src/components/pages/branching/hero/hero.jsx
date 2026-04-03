@@ -4,12 +4,12 @@ import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pb-20 pt-[104px] xl:min-h-[650px] xl:pb-[136px] xl:pt-20 lg:min-h-[525px] lg:pb-[88px] lg:pt-16 md:min-h-[509px] md:pb-20 md:pt-12">
+  <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pt-[104px] pb-20 xl:min-h-[650px] xl:pt-20 xl:pb-[136px] lg:min-h-[525px] lg:pt-16 lg:pb-[88px] md:min-h-[509px] md:pt-12 md:pb-20">
     <Container className="w-full text-left" size="branching">
       <SectionLabel icon="arrow" theme="white">
         Branching
       </SectionLabel>
-      <h1 className="mt-5 font-sans text-[60px] font-normal leading-dense tracking-tighter xl:mt-[18px] xl:text-[52px] lg:mt-4 lg:text-[44px] md:text-[32px]">
+      <h1 className="mt-5 font-sans text-[60px] leading-dense font-normal tracking-tighter xl:mt-[18px] xl:text-[52px] lg:mt-4 lg:text-[44px] md:text-[32px]">
         Mastering Database
         <br /> Branching Workflows
       </h1>

@@ -65,7 +65,7 @@ Let’s see how to format interval values for input and output.
 
 PostgreSQL provides you with the following verbose syntax to write the interval values:
 
-```
+```sql
 quantity unit [quantity unit...] [direction]
 ```
 
@@ -257,7 +257,7 @@ SELECT
 
 In addition, the `justify_interval` function adjusts interval using `justifydays` and  `justifyhours` with additional sign adjustments:
 
-```
+```sql
 SELECT
     justify_interval(interval '1 year -1 hour');
 ```
@@ -306,7 +306,7 @@ INSERT 0 2
 
 Third, extract components (days, hours, minutes) from values in the `interval` column:
 
-```
+```sql
 SELECT
     event_name,
     duration,
@@ -328,7 +328,7 @@ Output:
 
 Fourth, retrieve the events with a duration longer than one day:
 
-```
+```sql
 SELECT *
 FROM event
 WHERE duration > INTERVAL '1 day';
@@ -345,7 +345,7 @@ Output:
 
 Finally, calculate the total duration for all events:
 
-```
+```sql
 SELECT
     SUM(duration) AS total_duration
 FROM event
@@ -363,7 +363,7 @@ Output:
 
 To make the output more clear, you can extract components of the total duration using a common table expression (CTE):
 
-```
+```sql
 WITH cte AS(
    SELECT SUM(duration) AS total_duration
    FROM event

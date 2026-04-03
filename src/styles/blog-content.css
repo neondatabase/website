@@ -1,7 +1,7 @@
-@layer components {
+@layer utilities {
   .prose-blog {
     @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
-    @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
+    @apply prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-white;
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-white sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
     @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
@@ -31,20 +31,20 @@
 
     a {
       > code {
-        @apply !text-white transition-colors duration-200;
+        @apply text-white! transition-colors duration-200;
       }
     }
 
     h2 {
-      @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
+      @apply m-0 pt-8 text-[28px] leading-tight font-medium tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
     }
 
     h3 {
-      @apply mt-7 text-xl font-medium leading-snug tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
+      @apply mt-7 text-xl leading-snug font-medium tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
     }
 
     h4 {
-      @apply mt-6 text-lg font-medium leading-snug tracking-extra-tight md:mt-4 md:text-base;
+      @apply mt-6 text-lg leading-snug font-medium tracking-extra-tight md:mt-4 md:text-base;
     }
 
     h5 {
@@ -52,7 +52,7 @@
     }
 
     p {
-      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-gray-new-85 md:mb-5 md:mt-4 md:text-base;
+      @apply mt-[18px] mb-6 text-lg leading-normal font-normal tracking-tight text-gray-new-85 md:mt-4 md:mb-5 md:text-base;
     }
 
     ul,
@@ -60,7 +60,7 @@
       @apply my-6 list-none md:my-5;
 
       > li {
-        @apply relative my-2.5 pl-0 text-[18px] font-normal leading-normal text-gray-new-85 md:text-base;
+        @apply relative my-2.5 pl-0 text-[18px] leading-normal font-normal text-gray-new-85 md:text-base;
 
         ol {
           @apply md:pl-4;
@@ -73,7 +73,7 @@
 
       > li {
         &::before {
-          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-85 content-['–'] md:-left-3.5 md:text-base;
+          @apply absolute top-0 -left-4 text-[18px] leading-normal font-normal text-gray-new-85 content-['–'] md:-left-3.5 md:text-base;
         }
       }
     }
@@ -117,7 +117,7 @@
     }
 
     pre {
-      @apply rounded-none border border-gray-new-20 !bg-black-pure px-0;
+      @apply rounded-none border border-gray-new-20 bg-black-pure! px-0;
       scrollbar-width: none;
       -ms-overflow-style: none;
 
@@ -129,23 +129,23 @@
         @apply px-0;
 
         > code {
-          @apply inline-block w-full px-6 !leading-relaxed;
+          @apply inline-block w-full px-6 leading-relaxed!;
         }
       }
 
       > code {
         text-shadow: unset !important;
 
-        @apply !font-mono !text-sm !text-white;
+        @apply font-mono! text-sm! text-white!;
       }
 
       + button {
-        @apply !border-gray-new-20 !bg-black-pure !text-gray-new-60 hover:!text-white;
+        @apply border-gray-new-20! bg-black-pure! text-gray-new-60! hover:text-white!;
       }
     }
 
     :not(pre) > code {
-      @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-0.5 !font-mono text-base !font-normal leading-none text-white;
+      @apply rounded! border border-gray-new-30 bg-black-new px-1! py-0.5! font-mono! text-base leading-none font-normal! text-white;
 
       &::before,
       &::after {
@@ -154,15 +154,15 @@
     }
 
     kbd {
-      @apply inline-block rounded border border-gray-new-30 bg-gray-new-15 px-1.5 py-0.5 font-mono text-sm font-normal leading-none text-gray-new-80;
-      box-shadow: 0 2px 0 theme('colors.gray-new.20');
+      @apply inline-block rounded border border-gray-new-30 bg-gray-new-15 px-1.5 py-0.5 font-mono text-sm leading-none font-normal text-gray-new-80;
+      box-shadow: 0 2px 0 #303236;
     }
 
     .code-wrap {
       code {
         white-space: break-spaces !important;
 
-        @apply !max-w-full !break-words;
+        @apply max-w-full! break-words!;
       }
     }
 
@@ -184,7 +184,7 @@
         @apply relative h-0 overflow-hidden pb-[56.25%];
 
         iframe {
-          @apply absolute left-0 top-0 h-full w-full;
+          @apply absolute top-0 left-0 h-full w-full;
         }
       }
     }
@@ -197,11 +197,11 @@
       @apply border-l-2;
 
       h4 {
-        @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
+        @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
       }
 
       a {
-        @apply text-white underline decoration-white/40 decoration-dashed underline-offset-4 transition-none hover:!text-white hover:decoration-white hover:!opacity-100;
+        @apply text-white underline decoration-white/40 decoration-dashed underline-offset-4 transition-none hover:text-white! hover:decoration-white hover:opacity-100!;
       }
     }
 
@@ -211,7 +211,7 @@
       strong,
       b,
       p {
-        @apply my-0 text-xl font-normal leading-snug tracking-tighter md:text-lg sm:text-base;
+        @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
 
         &::before,
         &::after {
@@ -220,7 +220,7 @@
       }
 
       cite {
-        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-extra-tight text-gray-new-70;
+        @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
 
         em {
           @apply not-italic;
@@ -236,7 +236,7 @@
       }
 
       p {
-        @apply my-0 pt-11 text-2xl font-normal not-italic leading-snug md:text-xl sm:text-lg;
+        @apply my-0 pt-11 text-2xl leading-snug font-normal not-italic md:text-xl sm:text-lg;
 
         &::before,
         &::after {
@@ -245,7 +245,7 @@
       }
 
       cite {
-        @apply mt-3.5 inline-flex font-normal not-italic leading-none tracking-extra-tight text-gray-new-70;
+        @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
 
         em {
           @apply not-italic;

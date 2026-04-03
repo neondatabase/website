@@ -1,11 +1,11 @@
 'use client';
 
 import { Alignment, Fit } from '@rive-app/react-canvas';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 import useRiveAnimation from 'hooks/use-rive-animation';
+import { cn } from 'utils/cn';
 
 const RiveAnimation = ({
   className = '',
@@ -48,22 +48,18 @@ const RiveAnimation = ({
 
   return (
     <div
-      className={clsx(
-        'transition-opacity',
-        isReady ? 'opacity-100' : 'opacity-0',
-        wrapperClassName
-      )}
+      className={cn('transition-opacity', isReady ? 'opacity-100' : 'opacity-0', wrapperClassName)}
     >
       {showLazyLoadHelper && (
         <span
-          className={clsx(intersectionClassName, 'absolute left-1/2 top-0 -z-10 h-full w-px')}
+          className={cn(intersectionClassName, 'absolute top-0 left-1/2 -z-10 h-full w-px')}
           ref={wrapperRef}
           aria-hidden
         />
       )}
       <div
-        className={clsx(
-          'size-full [&_canvas]:!h-full [&_canvas]:!w-full',
+        className={cn(
+          'size-full [&_canvas]:h-full! [&_canvas]:w-full!',
           {
             'pointer-events-none': isTouch,
           },

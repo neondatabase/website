@@ -28,7 +28,7 @@ const CERTIFICATES = [
 ];
 
 const Hero = () => (
-  <section className="hero relative z-10 grow overflow-hidden bg-black-pure py-40 xl:pb-24 xl:pt-32 lg:py-24 md:py-24">
+  <section className="hero relative z-10 grow overflow-hidden bg-black-pure py-40 xl:pt-32 xl:pb-24 lg:py-24 md:py-24">
     <Container size="1280">
       <div className="flex min-h-[578px] justify-between gap-16 xl:min-h-0 xl:gap-10 lg:flex-col lg:gap-12">
         <div className="flex max-w-[544px] flex-1 flex-col lg:max-w-full">
@@ -44,7 +44,7 @@ const Hero = () => (
             Start shipping faster with serverless Postgres
           </Heading>
           <div className="mt-auto flex flex-col gap-7 xl:gap-5 lg:gap-7">
-            <p className="max-w-[544px] text-pretty text-lg leading-normal tracking-tight text-gray-new-70 xl:text-base lg:mt-[18px] lg:max-w-xl">
+            <p className="max-w-[544px] text-lg leading-normal tracking-tight text-pretty text-gray-new-70 xl:text-base lg:mt-[18px] lg:max-w-xl">
               We&apos;re happy to assist you with any questions about our tech, pricing plans,
               custom contract options, and migrations assistance.
             </p>

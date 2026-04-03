@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import Button from 'components/shared/button';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
+import { cn } from 'utils/cn';
 
 const CopyCodeButton = ({ code = '', copyText = code }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -17,14 +17,14 @@ const CopyCodeButton = ({ code = '', copyText = code }) => {
       copyToClipboard(copyText);
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1500);
-    } catch (e) {
+    } catch (_e) {
       setIsCopied(false);
     }
   };
 
   return (
     <Button
-      className="group inline-flex w-[34.2%] items-center justify-between gap-x-3 !rounded-none !px-4 font-mono !font-medium hover:bg-[#F6FDFA] xl:w-[300px] lg:w-[36%] lg:!px-3 sm:w-full"
+      className="group inline-flex w-[34.2%] items-center justify-between gap-x-3 rounded-none! px-4! font-mono font-medium! hover:bg-[#F6FDFA] xl:w-[300px] lg:w-[36%] lg:px-3! sm:w-full"
       theme="white-off-filled"
       size="new"
       onClick={handleCopyToClipboard}
@@ -34,7 +34,7 @@ const CopyCodeButton = ({ code = '', copyText = code }) => {
       </span>
       {isCopied ? (
         <CopiedIcon
-          className={clsx(
+          className={cn(
             'text-gray-new-40 transition-colors duration-200 group-hover:text-black-pure',
             isCopied && 'text-black-pure'
           )}
@@ -42,7 +42,7 @@ const CopyCodeButton = ({ code = '', copyText = code }) => {
         />
       ) : (
         <CopyIcon
-          className={clsx(
+          className={cn(
             'text-gray-new-40 transition-colors duration-200 group-hover:text-black-pure',
             isCopied && 'text-black-pure'
           )}

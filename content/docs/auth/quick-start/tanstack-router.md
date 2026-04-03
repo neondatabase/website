@@ -6,11 +6,20 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-02-16T13:08:22.377Z'
+updatedOn: '2026-03-23T15:16:28.134Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="tip" title="Using an AI coding tool?">
+Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+
+```bash
+npx neonctl@latest init
+```
+
+</Admonition>
 
 <TwoColumnLayout>
 
@@ -37,9 +46,9 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
 Create a new TanStack Router app using the file-router template.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npx create-tsrouter-app@latest my-app --template file-router --tailwind
 ```
 
@@ -52,9 +61,9 @@ npx create-tsrouter-app@latest my-app --template file-router --tailwind
 Install the Neon Auth SDK and UI library:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 cd my-app && npm install @neondatabase/neon-js@latest
 ```
 
@@ -71,9 +80,9 @@ Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label=".env">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename=".env"
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
@@ -105,9 +114,9 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 Create a `src/auth.ts` file to initialize the auth client:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/auth.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
 
@@ -141,9 +150,9 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 </details>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/routes/\_\_root.tsx">
+<TwoColumnLayout.Block>
 
-```tsx {4-5,9,22}
+```tsx filename="src/routes/__root.tsx" {4-5,9,22}
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
@@ -179,9 +188,9 @@ export const Route = createRootRoute({
 Create a route to handle authentication views (sign in, sign up, etc.). Create `src/routes/auth.$pathname.tsx`:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/routes/auth.$pathname.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="src/routes/auth.$pathname.tsx"
 import { createFileRoute } from '@tanstack/react-router';
 import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
 
@@ -215,9 +224,9 @@ function Auth() {
 Create a route to handle account management views. Create `src/routes/account.$pathname.tsx`:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/routes/account.$pathname.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="src/routes/account.$pathname.tsx"
 import { createFileRoute } from '@tanstack/react-router';
 import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
 
@@ -253,9 +262,9 @@ You can protect your routes using the `SignedIn` and `RedirectToSignIn` componen
 Update `src/routes/index.tsx` to protect the home page:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/routes/index.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="src/routes/index.tsx"
 import { createFileRoute } from '@tanstack/react-router';
 import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from '@/auth';
@@ -310,9 +319,9 @@ function Home() {
 Start the development server, then open [http://localhost:3000](http://localhost:3000). You'll be redirected to the sign-in page.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm run dev
 ```
 
@@ -327,9 +336,9 @@ As users sign up, their profiles are stored in your Neon database in the `neon_a
 Query your users table in the SQL Editor to see your new users:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="SQL Editor">
+<TwoColumnLayout.Block>
 
-```sql
+```sql filename="SQL Editor"
 SELECT * FROM neon_auth.user;
 ```
 
@@ -342,3 +351,4 @@ SELECT * FROM neon_auth.user;
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Learn how to branch your auth](/docs/auth/branching-authentication)
+- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory

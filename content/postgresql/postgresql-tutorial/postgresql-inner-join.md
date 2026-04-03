@@ -117,7 +117,7 @@ Output:
 
 To make the query shorter, you can use the table aliases:
 
-```
+```sql
 SELECT
   c.customer_id,
   c.first_name,

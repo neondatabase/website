@@ -6,7 +6,7 @@ summary: >-
   usage, including right-sizing, effective autoscaling, enabling scale to zero,
   and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2026-03-06T00:10:04.320Z'
+updatedOn: '2026-03-20T16:01:10.992Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -135,7 +135,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [contact the Neon Sales team](/contact-sales).
+Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 </details>
 
@@ -160,6 +160,8 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 - **Use branch expiration.** Set automatic deletion timestamps on temporary branches using [branch expiration](/docs/guides/branch-expiration) to ensure they're cleaned up when no longer needed.
 
 - **Automate cleanup.** Consider implementing automated cleanup scripts using the [Neon API](/docs/manage/branches#branching-with-the-neon-api) or [Neon CLI](/docs/guides/branching-neon-cli) to stay within your plan's branch allowance.
+
+- **Check Vercel retention settings.** If you use the Vercel-Managed integration, Vercel's default deployment retention policy can delay automatic branch cleanup by months. Reduce the retention period or set up a GitHub Action for immediate cleanup. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 ## Public data transfer
 
