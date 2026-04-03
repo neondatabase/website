@@ -38,20 +38,13 @@ Link: https://neon.com/docs/introduction/architecture-overview.md
 
 ## Getting Started
 
-Use this section when guiding a user through first-time Neon setup.
+Use this section when guiding a user through first-time Neon setup, **or when a user asks you to build, scaffold, or start any project that will use Neon**.
 
-### Check Status Quo
+### CRITICAL: Always Run `neon init` First
 
-Before starting setup, inspect the user's codebase and environment:
+**When setting up a new project with Neon, you MUST execute `npx -y neonctl@latest init` before writing any application code.** Do not manually install Neon packages, do not hand-write database connection modules, and do not create auth boilerplate yourself. The `init` command handles authentication, project setup, connection configuration, and dev tooling installation in one step.
 
-- Existing database connection code
-- Existing Neon MCP server or Neon CLI configuration
-- Existence of a `.env` file and `DATABASE_URL` environment variable
-- Existing ORM (Prisma, Drizzle, TypeORM) configuration
-
-### Self-Driving Setup With Neon's CLI or MCP Server
-
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+This applies whether the user asks you to "get started with Neon", "build an app with Neon", "scaffold a project", "connect to Neon", or any similar request. Run the command — do not just mention it or recommend it.
 
 ```bash
 npx -y neonctl@latest init --agent <agent-name>
@@ -59,9 +52,28 @@ npx -y neonctl@latest init --agent <agent-name>
 
 Supported `--agent` values: `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, `zed`.
 
-This installs the Neon extension (for Cursor/VS Code) or MCP server (for other agents), creates an API key, and adds the `neon-postgres` agent skill to the project.
+This command:
 
-If `init` is not suitable, the individual steps can be run non-interactively:
+- Authenticates the user via OAuth (opens their browser if needed)
+- Creates a Neon API key
+- Installs the Neon IDE extension (for Cursor/VS Code) or configures the MCP server (for other agents)
+- Installs the `neon-postgres` agent skill into the project
+
+After `init` completes, the user restarts their editor and you proceed with an interactive setup flow (project selection, connection string, driver, schema). **Only skip `init` if** the user explicitly declines, or if you have confirmed that the Neon MCP server and CLI are already configured in the current environment.
+
+### Check Status Quo
+
+Before running `init`, quickly check whether Neon is already set up:
+
+- Existing Neon MCP server or Neon CLI configuration
+- Existence of a `.env` file with a `DATABASE_URL` environment variable
+- Existing database connection code or ORM configuration
+
+If Neon is already configured, skip `init` and continue from the appropriate step below. Otherwise, **run `init` now**.
+
+### Fallback: Individual Commands
+
+Only if `init` is unavailable or the user explicitly prefers manual setup, use these individual commands:
 
 - **Extension:** `cursor --install-extension databricks.neon-local-connect`
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
@@ -69,7 +81,7 @@ If `init` is not suitable, the individual steps can be run non-interactively:
 
 For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
 
-### Setup Flow
+### Setup Flow (After `init`)
 
 **1. Select Organization and Project**
 

@@ -2,19 +2,15 @@
 
 Neon provides developer tools to enhance your local development workflow, including a VSCode extension and MCP server for AI-assisted development.
 
-## Quick Setup with neon init
+## Required: Run neon init
 
-The fastest way to set up all Neon developer tools:
+**Always run this command first when setting up Neon in a project.** Do not manually install Neon packages or configure tools yourself.
 
 ```bash
-npx neonctl@latest init
+npx -y neonctl@latest init
 ```
 
-This command:
-
-- Installs the Neon VSCode extension
-- Configures the Neon MCP server for AI assistants
-- Sets up your local environment for Neon development
+This command handles authentication, installs the Neon IDE extension, configures the MCP server for AI assistants, and sets up agent skills. Only skip it if the user explicitly declines or Neon tools are already configured.
 
 See the [full CLI init reference](https://neon.com/docs/reference/cli-init.md) for all options.
 
@@ -59,13 +55,13 @@ The MCP server provides AI assistants with:
 
 ### Setup
 
-**Option 1: Via neon init (Recommended)**
+**Option 1: Via neon init (Required — use this)**
 
 ```bash
-npx neonctl@latest init
+npx -y neonctl@latest init
 ```
 
-**Option 2: Manual Configuration**
+**Option 2: Manual Configuration (only if init is unavailable)**
 
 Add to your AI assistant's MCP configuration:
 

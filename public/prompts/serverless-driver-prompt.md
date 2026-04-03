@@ -33,7 +33,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 If the application requires user authentication (signup, login, sessions, social OAuth), Neon includes **Neon Auth** — a managed authentication service stored directly in the Postgres database. It is built on Better Auth and supports branching (auth state copies with database branches for preview environments).
 
-- Run `npx neonctl@latest init` to configure Neon Auth alongside your database setup, or see the [Neon Auth overview](https://neon.com/docs/auth/overview) for manual configuration.
+- Run `npx -y neonctl@latest init` to configure Neon Auth alongside your database setup, or see the [Neon Auth overview](https://neon.com/docs/auth/overview) for manual configuration.
 - If migrating from Supabase Auth, Neon provides a Supabase-compatible client API. See [Migrate from Supabase Auth](https://neon.com/docs/auth/migrate/from-supabase).
 
 ---

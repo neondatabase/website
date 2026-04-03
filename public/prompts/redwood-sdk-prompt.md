@@ -24,12 +24,12 @@
 
 ---
 
-## ⚡ Step 1: Try neon init (recommended)
+## ⚡ Step 1: Run neon init (REQUIRED)
 
-If you can execute terminal commands, start by running `neon init`. This is the fastest path to a fully configured project.
+**You MUST execute this command before writing any code or installing any packages.** Do not skip this step. Do not manually replicate what it does.
 
 ```bash
-npx neonctl@latest init
+npx -y neonctl@latest init
 ```
 
 `neon init` handles everything automatically: it authenticates the user with Neon (sign up or log in), then installs the AI development tooling for the user's coding environment (MCP server, agent skills, IDE extensions, and plugins).
@@ -40,12 +40,11 @@ After it completes, instruct the user to **restart their editor**. Once restarte
 
 ---
 
-## 🛠️ Step 2: Manual setup (fallback)
+## 🛠️ Step 2: Manual setup (fallback — only if `init` is unavailable)
 
-Use this section only if:
-- Your environment does not support running terminal commands
-- `neon init` is unavailable or failed
-- The user explicitly prefers manual configuration
+Use this section **only** if:
+- `neon init` failed or is unavailable in this environment
+- The user explicitly asked for manual configuration
 
 When this prompt is triggered, automatically configure the open RedwoodSDK project as follows:
 

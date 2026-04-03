@@ -2,32 +2,36 @@
 
 Interactive guide for setting up a Neon project and connecting it to code.
 
-## Check Status Quo
+## Step 0: Run `neon init` (Required)
 
-Inspect the user's codebase and environment to see if they have already integrated Neon and to better understand their needs and constraints.
-
-Specifically check for:
-
-- Existing database connection code
-- Existing Neon MCP server or Neon CLI configuration
-- Existence of a `.env` file and `DATABASE_URL` environment variable
-- Existing ORM (Prisma, Drizzle, TypeORM) configuration
-
-## Self-Driving Setup With Neon's CLI or MCP Server
-
-You can offer the user to inspect the existing connected Neon projects or create new ones using the Neon CLI or MCP server.
-
-If the MCP server and CLI aren't set up yet, ask the user for permission to run:
+**Before writing any code or installing any packages, execute `neon init`.** This is not optional — it is the required first step for any new Neon project setup.
 
 ```bash
-npx neonctl@latest init
+npx -y neonctl@latest init
 ```
 
-This will install the Neon VSCode extension (if applicable) and the Neon MCP server and `neon-postgres` agent skill. Alternatively, you can offer to install the Neon CLI. Install instructions here: https://neon.com/docs/reference/cli-install.md
+This command authenticates the user, installs the Neon IDE extension or MCP server, creates an API key, and adds agent skills to the project. It replaces the need to manually install `@neondatabase/serverless`, `@neondatabase/auth`, or any other Neon packages yourself.
 
-Either CLI or MCP server can be used to manage Neon projects and databases on the user's behalf. If the user prefers to manually get started with Neon, then you can guide them through the setup process instead of using the CLI or MCP server directly. See `https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md` for details.
+**Do not skip this step.** Do not manually replicate what `init` does. Run the command and wait for it to complete before proceeding.
 
-Since the Neon CLI and MCP server do interact with database resources, it's important to verify the user is comfortable with the security implications of running these tools.
+The only exceptions for skipping `init`:
+
+- The user explicitly says they want manual setup
+- You have confirmed the Neon MCP server and CLI are already configured (check for existing MCP config, `.env` with `DATABASE_URL`, or Neon CLI availability)
+
+After `init` completes, the user should restart their editor.
+
+## Check Status Quo
+
+Before running `init`, quickly check whether Neon is already set up:
+
+- Existing Neon MCP server or Neon CLI configuration
+- Existence of a `.env` file and `DATABASE_URL` environment variable
+- Existing database connection code or ORM (Prisma, Drizzle, TypeORM) configuration
+
+If Neon is already configured, skip `init` and continue from the appropriate setup flow step. Otherwise, run `init` now.
+
+Since the Neon CLI and MCP server interact with database resources, verify the user is comfortable with running these tools.
 
 ## Setup Flow
 

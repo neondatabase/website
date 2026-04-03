@@ -1877,7 +1877,7 @@ function buildPageHeader(slug, navMap) {
   // Setup hint (only on pages related to getting started / connecting)
   if (slug && SETUP_HINT_PREFIXES.some((prefix) => slug.startsWith(prefix))) {
     lines.push(
-      `> Quick setup: run \`npx neonctl@latest init\` to set up Neon in any project. Details: ${BASE_URL}/docs/reference/cli-init`
+      `> REQUIRED first step: run \`npx -y neonctl@latest init\` before writing any code. Do not manually install Neon packages. Details: ${BASE_URL}/docs/reference/cli-init`
     );
   }
 
