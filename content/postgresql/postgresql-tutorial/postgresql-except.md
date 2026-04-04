@@ -14,7 +14,7 @@ nextLink:
   slug: 'postgresql-tutorial/postgresql-grouping-sets'
 ---
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXCEPT` operator to return a result set containing the rows in the first query that does not appear in the output of the second query.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXCEPT` operator to return a result set containing the rows in the first query that do not appear in the output of the second query.
 
 ## Introduction to the PostgreSQL EXCEPT operator
 
