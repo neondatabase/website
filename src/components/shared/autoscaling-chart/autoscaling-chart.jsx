@@ -11,7 +11,7 @@ import {
   Legend,
   Filler,
   TimeScale,
-} from 'chart.js';
+} from 'chart.js'; // eslint-disable-line import/namespace
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';

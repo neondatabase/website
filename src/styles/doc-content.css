@@ -29,11 +29,11 @@
   }
 
   .table-wrapper {
-    @apply 2xl:-mx-4 2xl:overflow-x-auto 2xl:px-4;
+    @apply my-10 max-h-[70vh] overflow-auto 2xl:-mx-4 2xl:px-4;
   }
 
   .table {
-    @apply my-10 w-full leading-normal 2xl:min-w-[500px];
+    @apply w-full leading-normal 2xl:min-w-[500px];
 
     .func_table_entry,
     .catalog_table_entry {
@@ -194,7 +194,7 @@
     }
 
     .table-wrapper {
-      @apply 2xl:-mx-4 2xl:overflow-x-auto 2xl:px-4;
+      @apply my-10 max-h-[70vh] overflow-auto 2xl:-mx-4 2xl:px-4;
     }
 
     table {
@@ -219,6 +219,8 @@
       }
 
       thead {
+        @apply sticky top-0 z-10 bg-white dark:bg-black-pure;
+
         tr {
           @apply border-b border-gray-new-80 dark:border-gray-new-20;
         }

@@ -84,7 +84,7 @@ const CopyMarkdownButton = ({ markdownPath }) => {
       setTimeout(() => {
         setStatus('default');
       }, 2000);
-    } catch (error) {
+    } catch (_error) {
       setStatus('failed');
       setTimeout(() => {
         setStatus('default');
@@ -161,7 +161,7 @@ const CopyNeonCLIButton = () => {
       setTimeout(() => {
         setStatus('default');
       }, 2000);
-    } catch (error) {
+    } catch (_error) {
       setStatus('failed');
       setTimeout(() => {
         setStatus('default');

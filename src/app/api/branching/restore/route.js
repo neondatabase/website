@@ -7,7 +7,6 @@ const requestSchema = yup.object({
   branchId: yup.string().required('Branch ID is required'),
 });
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST(request) {
   try {
     const body = await request.json();

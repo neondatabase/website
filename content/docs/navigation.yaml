@@ -65,7 +65,7 @@
               slug: import/migrate-from-render
             - title: Supabase
               slug: import/migrate-from-supabase
-            - title: Migrate from a Neon project
+            - title: Neon to Neon
               slug: import/migrate-from-neon
             - title: Schema-only
               slug: import/migrate-schema-only
@@ -91,6 +91,17 @@
           items:
             - title: AWS DMS
               slug: import/migrate-aws-dms
+
+        - title: Region migration
+          items:
+            - title: Overview
+              slug: import/region-migration
+            - title: Neon to another region
+              slug: import/migrate-neon-to-another-region
+            - title: Neon to Lakebase
+              slug: guides/migrate-neon-to-lakebase
+            - title: Postgres-compatible export
+              slug: guides/export-neon-postgres-compatible
 
         - title: CSV
           slug: import/import-from-csv
@@ -1059,6 +1070,8 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Usage and cost calculations
+          slug: introduction/usage-calculations
         - title: Cost optimization
           slug: introduction/cost-optimization
         - title: Network transfer costs

@@ -1,40 +1,24 @@
 ---
 title: Import Data Assistant
-subtitle: Move your database to Neon using our automated import tool
+subtitle: Import a database under 10 GB to Neon using our automated import tool
 summary: >-
-  How to use the Import Data Assistant to automatically transfer your existing
-  database to Neon by providing a connection string, or to migrate data between
+  How to use the Import Data Assistant to import an existing Postgres database
+  under 10 GB to Neon using a connection string, or to migrate data between
   Neon projects.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-02-15T20:51:54.206Z'
+updatedOn: '2026-04-01T18:00:00.000Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
 
-When you're ready to move your data to Neon, our Import Data Assistant can help you automatically copy your existing database to Neon. You only need to provide a connection string to get started.
+The **Import Data Assistant** can help you automatically import your existing database. The assistant supports databases **smaller than 10 GB**; you only need a connection string to get started.
 
 <FeatureBetaProps feature_name="Import Data Assistant"/>
 
 <Admonition type="tip" title="Migrate between Neon projects">
-You can also use the **Import Data Assistant** to migrate data between Neon projects. This is useful if you want to upgrade to a newer Postgres version (for example, from Postgres 16 to 17), or move your database to a different region. Just create a new project with the desired Postgres version or region, then use the database connection string from your existing Neon project to import the data into the new one.
+In additiion to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
 </Admonition>
-
-## Ways to import
-
-The Import Data Assistant always creates a **new branch** for your imported data. There are two ways to launch the import:
-
-1. **From the Projects page:**  
-   Start from the project list to create a new project and import your data into a new branch as part of the flow.
-
-   ![Import Data Assistant from Projects page](/docs/import/import_data_assistant_project.png)
-
-2. **From within a project:**  
-   Use the Getting Started widget on a project dashboard to import your data into a new branch of the existing project.
-
-   ![Import Data Assistant from Quick Start widget](/docs/import/import_data_assistant_quickstart_widget.png)
-
-Both options use the same automated import process; just provide your database connection string and we'll handle the rest.
 
 ## Before you start
 
@@ -42,67 +26,67 @@ You'll need:
 
 - A **Neon account**. Sign up at [Neon](https://neon.tech) if you don't have one.
 - A **connection string** to your current database in this format:
+
   ```
   postgresql://username:password@host:port/database?sslmode=require&channel_binding=require
   ```
-- **Admin privileges** on your source database. We recommend using a superuser or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
-- A database **smaller than 10 GB** in size for automated import
-- We recommend migrating to a Neon project created in the same region as your current database. This helps ensure a faster import. There is a 1-hour time limit on import operations.
+
+  If you are migrating a database from one Neon project to another, you need the connection string for the source database, which you can access from the **Connect** modal on the project dashboard.
+
+- **Admin privileges** on your source database. We recommend using a superuser if migrating from another platform, or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
+- A database **smaller than 10 GB** in size for automated import. For larger databases, use [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
+- Unless you are intentionally migrating to a different region, we recommend migrating to a Neon project created in the same region as your current database for a faster import. There is a 1-hour time limit on import operations.
+- For other constraints that apply to this flow, see [Known limitations](#known-limitations).
 
 <Steps>
 
-## Check Compatibility
+## Launch the assistant
 
-Enter your database connection string and we'll verify:
+Launch the assistant from the **Projects** page:
 
-- Database size is within the current 10 GB limit
+![Import Data Assistant from Projects page](/docs/import/import_data_assistant_project.png)
+
+## Check compatibility
+
+Enter your database connection string and click **Run Checks**.
+
+![Import Data Assistant run checks](/docs/import/import_data_assistant_run_checks.png)
+
+We'll verify the following:
+
+- Database size is within the 10 GB limit
 - Postgres version compatibility (Postgres 14 to 17)
 - Extension compatibility
 - Region availability
 
-## Import Your Data
+## Create a new Neon project
 
-Once checks pass, we'll:
+Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**.
 
-- Create a new branch for your imported data.
-- Copy your data automatically using `pg_dump` and `pg_restore`.
-- Verify that the import completed successfully.
+![Import Data Assistant create project](/docs/import/import_data_assistant_create_project.png)
+
+## Start import process
+
+Back in the assistant, click the **Start import process** button.
 
 <Admonition type="note">
-During import, your source database remains untouched; we only read from it to create a copy in Neon.
+During import, your source database remains untouched. We only read from it to create a copy in Neon.
 </Admonition>
-
-### Known Limitations
-
-- Currently limited to databases **smaller than 10GB**. We are actively working on supporting bigger workloads. In the meantime, contact support if you are looking to migrate bigger databases.
-- There is a 1-hour limit on import operations. For faster imports, we recommend importing to a Neon project created in the same region as your source database.
-- The feature is supported in **AWS regions** only.
-- Supabase and Heroku databases are not supported due to unsupported Postgres extensions.
-- Databases running on **IPv6 are not supported yet**.
-- AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
-
-## Next Steps
-
-After a successful import:
-
-1. Find your newly imported database branch on the **Branches** page of your project.
-
-   ![Branches page showing imported branch](/docs/import/import_data_assistant_branch.png)
-
-   _Imported branches are typically named with a timestamp, as shown here._
-
-2. Run some test queries to ensure everything imported correctly.
-3. Click on the three dots next to the branch name and select **Set as default** to make it your default branch.
-4. Optional cleanup:
-   - Delete the old branches (`production` and `development`) if they are no longer needed.
-   - Rename the new branch to `production` for clarity and consistency.
-5. Switch your connection string to point to your new Neon database.
 
 </Steps>
 
-## Need Help?
+### Known limitations
 
-- For **technical issues**: [Contact support](/docs/introduction/support)
-- For **provider-specific questions**: Let us know what database provider you're using when you contact us
+- Supabase and Heroku databases are not supported due to unsupported Postgres extensions.
+- Databases running on **IPv6 are not supported**.
+- AWS RDS is generally supported, though some incompatibilities may exist. Support for other providers may vary.
 
-If your database import failed for any reason, please [contact our support team](/docs/introduction/support). We're here to help you get up and running.
+## Next steps
+
+After a successful import:
+
+1. Run some test queries to ensure everything imported correctly.
+2. If you've migrated from another Neon project, remove your old project if it's no longer needed.
+3. Switch the connection string in your app to point to your new Neon database.
+
+<NeedHelp/>

@@ -304,7 +304,7 @@ function loadSharedContent(templateName, props = {}) {
     try {
       rawContent = fsSync.readFileSync(templatePath, 'utf-8');
       sharedContentCache.set(templatePath, rawContent);
-    } catch (err) {
+    } catch (_err) {
       console.warn(`Shared content not found: ${templatePath}`);
       return [];
     }
@@ -1300,7 +1300,6 @@ function transformNode(node) {
     }
 
     // Unknown component - preserve with label and warn
-    // eslint-disable-next-line no-console
     console.warn(`[LLM Processor] Unknown component: <${componentName}>`);
     unknownComponents.push({ name: componentName, file: currentFile || 'unknown' });
 
@@ -1600,7 +1599,6 @@ async function prefetchExternalCode(content) {
     if (result.content) {
       externalCodeCache.set(result.url, result.content);
     } else {
-      // eslint-disable-next-line no-console
       console.warn(
         `[LLM Processor] Failed to fetch external code: ${result.url} (${result.error})`
       );
@@ -1957,7 +1955,6 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
         await fs.writeFile(outputPath, result);
         console.log(`✓ ${relativePath}`);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(`✗ ${relativePath}: ${error.message}`);
         processingErrors.push({ file: inputPath, error: error.message });
       }

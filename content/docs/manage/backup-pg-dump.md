@@ -6,13 +6,15 @@ summary: >-
   utility and restore it with `pg_restore`, including installation instructions
   and connection string recommendations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.113Z'
+updatedOn: '2026-03-30T12:00:00.000Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
 
+The same **`pg_dump`** flow applies when you **export** data for a **region migration** or a **Postgres-compatible export from Neon**. For path selection (another Neon region, Lakebase, or export), see **[Region migration](/docs/import/region-migration)**.
+
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 </Admonition>
 
 ## Prerequisites
@@ -81,7 +83,7 @@ Following this procedure will create a database backup locally, where you're run
    - `-d`: Specifies the [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING) for your Neon database.
    - `-f <dump_file_name>`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
-   For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
+   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
 
 ## Restoring a backup with `pg_restore`
 
@@ -115,10 +117,10 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
 
    The example above includes these arguments:
    - `-v`: Runs `pg_restore` in verbose mode, allowing you to monitor what happens during the restore operation.
-   - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Before you begin](#before-you-begin).
+   - `-d`: Specifies the Neon database to connect to. The value is a Neon database connection string. See [Prerequisites](#prerequisites).
    - `<dump_file_name>` is the name of the dump file you created with `pg_dump`.
 
-   For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pgdump-and-pgrestore-options).
+   For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
 
 ## `pg_dump` and `pg_restore` example
 

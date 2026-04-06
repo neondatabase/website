@@ -21,7 +21,11 @@ You'll learn how to connect to your Neon database from a Go application, and per
 ## Prerequisites
 
 - A Neon account. If you do not have one, see [Sign up](https://console.neon.tech/signup).
-- Go 1.18 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
+- Go 1.21 or later. If you do not have Go installed, see the [official installation guide](https://go.dev/doc/install).
+
+<Admonition type="note">
+The latest version of `pgx/v5` (v5.9.1+) requires Go 1.25. If you are using an older Go version, pin to a compatible release: `go get github.com/jackc/pgx/v5@v5.7.4`.
+</Admonition>
 
 <Steps>
 
@@ -457,7 +461,94 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+### Using transactions
+
+The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction. The `defer tx.Rollback(ctx)` pattern ensures the transaction is rolled back if the function exits before committing.
+
+```go title="transaction_example.go"
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
+)
+
+func main() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+		os.Exit(1)
+	}
+
+	connString := os.Getenv("DATABASE_URL")
+	if connString == "" {
+		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+		os.Exit(1)
+	}
+
+	ctx := context.Background()
+	conn, err := pgx.Connect(ctx, connString)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	defer conn.Close(ctx)
+
+	// Begin a transaction
+	tx, err := conn.Begin(ctx)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to begin transaction: %v\n", err)
+		os.Exit(1)
+	}
+	// Defer a rollback in case anything fails. If the transaction
+	// is committed successfully, the rollback is a no-op.
+	defer tx.Rollback(ctx)
+
+	// All operations use the tx object, not conn
+	_, err = tx.Exec(ctx, "INSERT INTO books (title, author, publication_year) VALUES ($1, $2, $3)", "Brave New World", "Aldous Huxley", 1932)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Insert failed: %v\n", err)
+		os.Exit(1)
+	}
+
+	_, err = tx.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2", false, "Brave New World")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Commit the transaction
+	if err := tx.Commit(ctx); err != nil {
+		fmt.Fprintf(os.Stderr, "Commit failed: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Transaction committed successfully.")
+}
+```
+
+Run with:
+
+```bash
+go run transaction_example.go
+```
+
 </Steps>
+
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- Do not use `lib/pq`. It is a deprecated Go Postgres driver. Use `pgx/v5` as shown in this guide.
+- Always use parameterized queries (`$1`, `$2`, etc.) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings.
+- Wrap related database operations in a transaction (`conn.Begin` / `tx.Commit` / `tx.Rollback`). Use `defer tx.Rollback(ctx)` immediately after `conn.Begin` as a safety net.
+- Always use `context.Context` for database operations. This enables cancellation and timeout control.
+- Do not hardcode credentials in `.go` files. Use environment variables via `godotenv` and `os.Getenv`. For more information, see [Security overview](/docs/security/security-overview).
+
+</details>
 
 ## Next steps: Using an ORM or framework
 

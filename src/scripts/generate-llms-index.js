@@ -76,7 +76,7 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
     let entries;
     try {
       entries = await fs.readdir(currentPath, { withFileTypes: true });
-    } catch (err) {
+    } catch (_err) {
       return;
     }
 
@@ -268,6 +268,15 @@ function generateIndexText(organized, collapsedEntries = []) {
   }
   if (config.intro) {
     lines.push(config.intro);
+    lines.push('');
+  }
+
+  if (config.commonQueries && config.commonQueries.length > 0) {
+    lines.push('## Common Queries');
+    lines.push('');
+    for (const q of config.commonQueries) {
+      lines.push(`- ${q.label}: ${q.url}`);
+    }
     lines.push('');
   }
 

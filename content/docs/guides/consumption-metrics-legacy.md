@@ -20,7 +20,7 @@ Using the Neon API, you can query consumption metrics with the legacy endpoints:
 Issuing calls to these APIs does not wake a project's compute endpoints.
 
 <Admonition type="tip">
-**Which API should I use?** For metrics that match your **invoice** on a usage-based plan, use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. Use the endpoints on this page when you need **legacy metrics** (for example, on a legacy plan or for compatibility). Legacy endpoints can be called on any paid plan but always return legacy metrics only.
+**Which API should I use?** For metrics that match your **invoice** on a usage-based plan, use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. For a guide to converting those metrics into billing units and calculating costs, see [Usage and cost calculations](/docs/introduction/usage-calculations). Use the endpoints on this page when you need **legacy metrics** (for example, on a legacy plan or for compatibility). Legacy endpoints can be called on any paid plan but always return legacy metrics only.
 </Admonition>
 
 ## Request overview

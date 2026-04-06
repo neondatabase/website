@@ -95,7 +95,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           setFormState(FORM_STATES.DEFAULT);
           setEmail('');
         }, loadingAnimationStartedTime + 3000);
-      } catch (error) {
+      } catch (_error) {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.ERROR);
           setErrorMessage('Please reload the page and try again');

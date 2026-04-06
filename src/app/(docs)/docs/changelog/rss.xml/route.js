@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
 import { CHANGELOG_DIR_PATH } from 'constants/content';

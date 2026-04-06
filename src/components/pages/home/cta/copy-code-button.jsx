@@ -16,7 +16,7 @@ const CopyCodeButton = ({ className, code = '', copyText = code }) => {
       copyToClipboard(copyText);
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1500);
-    } catch (e) {
+    } catch (_e) {
       setIsCopied(false);
     }
   };

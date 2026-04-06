@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 

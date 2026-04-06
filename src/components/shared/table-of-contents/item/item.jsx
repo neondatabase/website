@@ -49,9 +49,7 @@ const Item = ({
     });
 
     // changing hash without default jumps to anchor
-    // eslint-disable-next-line no-restricted-globals
     if (history.pushState) {
-      // eslint-disable-next-line no-restricted-globals
       history.pushState({}, '', anchor);
     } else {
       // old browser support

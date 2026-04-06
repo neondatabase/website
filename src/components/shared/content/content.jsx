@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import Callout from 'components/pages/doc/callout';
@@ -15,7 +13,6 @@ import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
-// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -82,8 +79,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       <table {...props} />
     </div>
   ),
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  undefined: (props) => <Fragment {...props} />,
+  undefined: (props) => <>{props.children}</>,
   pre: (props) => {
     const codeElement = props?.children;
     const code = codeElement?.props?.children;
@@ -204,7 +200,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ...sharedComponents,
 });
 
-// eslint-disable-next-line no-return-assign
 const Content = ({
   className = null,
   content,

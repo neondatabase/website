@@ -6,6 +6,8 @@ summary: >-
   Covers the setup of connecting MCP clients like Cursor, Claude Code, and VS
   Code to the Neon Postgres database, including quick setup, OAuth
   authentication, and local server options.
+redirectFrom:
+  - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
 updatedOn: '2026-03-20T18:23:32.438Z'
 ---

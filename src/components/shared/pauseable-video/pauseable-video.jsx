@@ -36,7 +36,6 @@ const PauseableVideo = forwardRef(
       const playPromise = videoElement.play();
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
-          // eslint-disable-next-line no-console
           console.error('Error attempting to play video:', error);
         });
       }
@@ -105,6 +104,8 @@ const PauseableVideo = forwardRef(
     );
   }
 );
+
+PauseableVideo.displayName = 'PauseableVideo';
 
 PauseableVideo.propTypes = {
   children: PropTypes.node.isRequired,

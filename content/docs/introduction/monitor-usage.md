@@ -53,7 +53,7 @@ If you have questions or want to change the billing metrics defined in your cont
 
 On **usage-based plans** (Launch, Scale, Agent, and Enterprise), use the **project consumption metrics** API. It returns metrics that align with usage-based billing and match your invoice.
 
-See [Querying consumption metrics](/docs/guides/consumption-metrics) for the endpoint, required and optional parameters, example requests and responses, pagination, polling behavior, and building usage dashboards.
+See [Querying consumption metrics](/docs/guides/consumption-metrics) for the endpoint, required and optional parameters, example requests and responses, pagination, polling behavior, and building usage dashboards. For a guide to converting the raw API values into billing units and calculating your costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
 <Admonition type="tip" title="Optimize your costs">
 For strategies to reduce your Neon costs across compute, storage, branches, and data transfer, see [Cost optimization](/docs/introduction/cost-optimization).

@@ -8,7 +8,6 @@ const requestSchema = yup.object({
   branchId: yup.string().optional(),
 });
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST(request) {
   try {
     const body = await request.json();

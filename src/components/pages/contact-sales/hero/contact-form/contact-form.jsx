@@ -1,10 +1,9 @@
 'use client';
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 

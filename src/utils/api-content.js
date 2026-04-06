@@ -19,7 +19,7 @@ const getPostBySlug = (slug, pathname) => {
     const excerpt = getExcerpt(content, 200);
 
     return { data, content, excerpt };
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 };
