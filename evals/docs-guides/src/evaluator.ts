@@ -58,7 +58,13 @@ export async function runDeterministicChecks(
 
   // Check .env file exists (anywhere under /app)
   const envCheck = await dockerExec(container, 'find /app -name ".env" -type f 2>/dev/null | head -1');
-  const envFileExists = envCheck.stdout.trim().length > 0;
+  let envFileExists = envCheck.stdout.trim().length > 0;
+
+  // For Elixir, C# we use config.exs/dev.exs, appsettings.json, etc. as the credential store instead of .env, so we won't check for hardcoded creds if no .env file is found
+  if (!envFileExists) {
+    envFileExists = await dockerExec(container, 'find /app -type f \\( -name "config.exs" -o -name "dev.exs" -o -name "appsettings.json" \\) 2>/dev/null | head -1')
+      .then(res => res.stdout.trim().length > 0);
+  }
 
   // Check no hardcoded credentials in source files
   const connMatch = connectionString.match(/npg_[a-zA-Z0-9]+/);

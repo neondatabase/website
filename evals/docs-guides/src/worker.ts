@@ -145,7 +145,7 @@ export async function runWorker(
     '',
     'Requirements:',
     '- Follow the guide closely. Do not add features beyond what the guide demonstrates.',
-    '- Store credentials in a .env file, never hardcode them in source files.',
+    '- Prioritize storing credentials in a .env file, but if the guide uses a different method such as config.exs for Elixir, appsettings.json for C#, etc., use that method as shown in the guide.',
     '- After setup is complete, verify the connection works by running the application.',
     '- If the app is a web server, start it and confirm it responds. If it is a script, run it and confirm the output shows a successful Neon connection.',
   ].join('\n');

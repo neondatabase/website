@@ -18,7 +18,7 @@ Did the agent install the correct packages/drivers? No unnecessary, deprecated, 
 Did the code follow best practices?
 - Error handling (try/catch, proper HTTP status codes)
 - Connection cleanup (client.release(), pool.end(), disconnect)
-- Environment variables for credentials (not hardcoded)
+- Credentials are not hardcoded; sensitive values are managed via environment variables or secure configuration mechanisms (e.g., `config.exs` for Elixir, `appsettings.json` for C# etc.), as appropriate for the language/framework
 - .env file with dotenv or framework-native env loading
 
 ### stayed_in_scope
