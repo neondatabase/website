@@ -1,5 +1,14 @@
 import slugify from 'slugify';
 
+const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
+
+const extractCustomId = (text) => {
+  const match = text.match(CUSTOM_ID_PATTERN);
+  return match?.[1] || match?.[2] || null;
+};
+
+const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
+
 const getMarkdownTableOfContents = (markdown) => {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const headings = [];
@@ -9,10 +18,9 @@ const getMarkdownTableOfContents = (markdown) => {
     const level = match[1].length - 1; // ## → 1, ### → 2
     const rawText = match[2].trim();
 
-    // Support explicit custom IDs: ## Heading {#custom-id}
-    const customIdMatch = rawText.match(/\{#([^}]+)\}$/);
-    const customId = customIdMatch?.[1] || null;
-    const cleanText = rawText.replace(/\s*\{#[^}]+\}$/, '').trim();
+    // Support explicit custom IDs in both `(#custom-id)` and `{#custom-id}` forms.
+    const customId = extractCustomId(rawText);
+    const cleanText = stripCustomId(rawText);
 
     // Preserve inline code for display, strip for slug
     const title = cleanText.replace(/`([^`]+)`/g, '<code>$1</code>');
