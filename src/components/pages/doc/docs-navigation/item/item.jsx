@@ -107,14 +107,14 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
           className={cn(
             'absolute top-[90%] -left-5 z-10',
             'pointer-events-none opacity-0',
-            'origin-top-left [transform:rotateX(-12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
-            'group-hover:pointer-events-auto group-hover:visible group-hover:[transform:none] group-hover:opacity-100',
-            'focus-within:pointer-events-auto focus-within:visible focus-within:[transform:none] focus-within:opacity-100'
+            'origin-top-left transform-[rotateX(-12deg)_scale(0.9)] transition-[opacity,transform] duration-200',
+            'group-hover:pointer-events-auto group-hover:visible group-hover:transform-none group-hover:opacity-100',
+            'focus-within:pointer-events-auto focus-within:visible focus-within:transform-none focus-within:opacity-100'
           )}
         >
           <ul
             className={cn(
-              'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
+              'relative flex w-max min-w-40 flex-col gap-4 border p-4',
               'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]',
               'dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
