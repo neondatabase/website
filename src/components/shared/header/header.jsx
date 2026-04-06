@@ -24,6 +24,7 @@ const Header = ({
   <>
     <HeaderWrapper
       className={className}
+      isDocPage={isDocPage}
       isSticky={isSticky}
       isStickyOverlay={isStickyOverlay}
       theme={theme}

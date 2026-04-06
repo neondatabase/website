@@ -70,7 +70,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   ) : null;
 
   return (
-    <aside className={cn('relative -mt-11', className)}>
+    <aside className={cn('relative -mt-12', className)}>
       <div className="sticky top-28">
         <div
           className={cn(
