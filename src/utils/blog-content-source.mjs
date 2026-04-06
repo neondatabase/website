@@ -196,7 +196,7 @@ const getOctokit = (token) =>
 const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
   if (!owner || !repo || !token) {
     throw new BlogContentConfigError(
-      'BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_REPO_TOKEN are required for branch content'
+      'BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_GITHUB_TOKEN are required for branch content'
     );
   }
 
@@ -247,7 +247,7 @@ const readBlogSnapshotFromGitHubBranch = async ({ owner, repo, branch, token }) 
       authorization: `Bearer ${token}`,
       'user-agent': BLOG_CONTENT_USER_AGENT,
     },
-    next: { revalidate: 30 },
+    cache: 'no-store',
   });
 
   if (!response.ok) {
@@ -265,7 +265,7 @@ const readBlogSnapshotFromGitHubBranch = async ({ owner, repo, branch, token }) 
   try {
     await extractTarballToDirectory(response, tempDir);
 
-    return readBlogSnapshotFromDirectory({
+    return await readBlogSnapshotFromDirectory({
       rootDir: tempDir,
       source: 'branch',
       branch,

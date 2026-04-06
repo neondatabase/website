@@ -84,7 +84,7 @@ function getBlogRepoConfig() {
   return {
     owner: process.env.BLOG_REPO_OWNER,
     repo: process.env.BLOG_REPO_NAME,
-    token: process.env.BLOG_REPO_TOKEN,
+    token: process.env.BLOG_GITHUB_TOKEN,
   };
 }
 
@@ -92,7 +92,7 @@ function getBlogRepoHttpsUrl() {
   const { owner, repo, token } = getBlogRepoConfig();
 
   if (!owner || !repo || !token) {
-    throw new Error('BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_REPO_TOKEN are required');
+    throw new Error('BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_GITHUB_TOKEN are required');
   }
 
   return `https://x-access-token:${token}@github.com/${owner}/${repo}.git`;

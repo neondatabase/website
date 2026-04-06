@@ -72,7 +72,7 @@ const getCdnSnapshot = async () =>
 const getBranchSnapshot = async (branch) => {
   const owner = process.env.BLOG_REPO_OWNER;
   const repo = process.env.BLOG_REPO_NAME;
-  const token = process.env.BLOG_REPO_TOKEN;
+  const token = process.env.BLOG_GITHUB_TOKEN;
 
   return getRemoteSnapshot(`branch:${owner}:${repo}:${branch}`, REMOTE_BRANCH_CACHE_TTL_MS, () =>
     readBlogSnapshotFromGitHubBranch({
