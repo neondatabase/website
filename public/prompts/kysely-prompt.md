@@ -352,6 +352,8 @@ Before suggesting code:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - Do not hardcode credentials in any `.ts` file.
 - Do not output the contents of the `.env` file or the user's connection string in any response.
 - Do not omit the `Database` interface definition; Kysely provides no type safety without it.

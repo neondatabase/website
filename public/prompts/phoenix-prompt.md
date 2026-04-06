@@ -160,6 +160,8 @@ Open [http://localhost:4001](http://localhost:4001).
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - Do not hardcode secrets in committed files beyond what the user explicitly manages in env-specific config.
 - Do not omit the Repo `ssl` options required for Postgrex + Neon.
 - Do not assume **port 4000** for the guide’s production-style command; the manual tab uses **4001**.

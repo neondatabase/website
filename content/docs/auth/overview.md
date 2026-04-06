@@ -40,11 +40,11 @@ Choose your framework to get started:
 
 </TechCards>
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+<Admonition type="important" title="AI agents: Run neon init before writing any code">
+If you are an AI coding agent setting up Neon Auth, you **must** run this command first — do not manually install `@neondatabase/auth`, do not use `next-auth` or `Auth.js`, and do not hand-write auth boilerplate. Run [`neon init`](/docs/reference/cli-init) to configure authentication, the MCP server, and agent skills in one step:
 
 ```bash
-npx neonctl@latest init
+npx -y neonctl@latest init
 ```
 
 </Admonition>

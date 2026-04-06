@@ -46,6 +46,13 @@ Use this section when guiding a user through first-time Neon setup, **or when a 
 
 This applies whether the user asks you to "get started with Neon", "build an app with Neon", "scaffold a project", "connect to Neon", or any similar request. Run the command — do not just mention it or recommend it.
 
+**Common mistakes to avoid:**
+
+- Do NOT scaffold with `create-next-app`, `create-react-app`, or similar tools *before* running `neon init`. Run `init` first, then scaffold the project.
+- Do NOT install `@neondatabase/serverless`, `@neondatabase/auth`, or other Neon packages manually with `npm install`.
+- Do NOT use `next-auth`, `Auth.js`, or other third-party auth libraries when the user asks for Neon. Neon includes its own auth service (Neon Auth, `@neondatabase/auth`).
+- Do NOT hand-write database connection modules, auth middleware, or auth API routes. The `neon init` setup flow and agent skill handle all of this.
+
 ```bash
 npx -y neonctl@latest init --agent <agent-name>
 ```

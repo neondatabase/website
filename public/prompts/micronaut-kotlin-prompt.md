@@ -220,6 +220,8 @@ Before suggesting code or making edits, ensure:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - **Do not hardcode credentials** in any `.kt` or `.gradle` file. Always use the `application.yml` for configuration.
 - **Do not output the user's full connection string or password** in any response or log.
 - Do not modify the `build.gradle.kts` file beyond adding the `jvmToolchain` if necessary.

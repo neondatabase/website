@@ -214,6 +214,8 @@ Before suggesting code or making edits, ensure:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - **Do not hardcode credentials** or sensitive information in any source code file. Use `process.env.DATABASE_URL` via `dotenv/config` in `db.server.ts` as in the guide.
 - **Do not output the user's connection string** in any response or log.
 - **Do not import `db.server.ts` into `+page.svelte`.** Data must flow from `+page.server.ts` through the `data` prop.

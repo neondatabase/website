@@ -240,6 +240,8 @@ Before suggesting code or making edits, ensure:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - Do not hardcode credentials in `app.js` or any other file.
 - Do not output the user's `.env` values or connection string in responses.
 - Do not expose database connection code to browser bundles; this guide is for server-side Node.js only.

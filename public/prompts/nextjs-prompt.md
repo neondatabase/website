@@ -290,6 +290,8 @@ Before suggesting code or making edits, ensure:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use `next-auth`, `Auth.js`, or other third-party auth libraries** when the user asks for Neon. Use Neon Auth (`@neondatabase/auth`) instead.
 - **Do not hardcode credentials** or sensitive information in any source code file. Always use `process.env`.
 - **Do not output the user's connection string** in any response or log.
 - **Do not import from `app/lib/db.ts` into any Client Component** (files marked with `"use client"`). This module is for server-side use only.

@@ -217,6 +217,8 @@ Before suggesting code or making edits, ensure:
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - Do not hardcode credentials in any `.ts`, `.prisma`, or `.json` file.
 - Do not output the contents of the `.env` file or the user's connection string in any response.
 - **Do not import `PrismaClient` from `@prisma/client`. Always use the generated client path: `./generated/prisma`.**

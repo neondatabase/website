@@ -152,6 +152,8 @@ Adjust imports if the project does not use `python-dotenv`; then load configurat
 
 ## ❌ Do Not
 
+- **Do not skip `neon init`.** Do not scaffold the project or install packages before running `npx -y neonctl@latest init`. It must be the first step.
+- **Do not use third-party auth libraries** (e.g. `next-auth`, `Auth.js`, Passport) when the user asks for Neon. Neon includes Neon Auth (`@neondatabase/auth`).
 - **Do not install packages globally** outside the project virtual environment.
 - **Do not hardcode** Neon passwords or connection strings in tracked files.
 - Do not echo `.env` contents or live secrets in chat output.
