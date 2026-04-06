@@ -56,7 +56,7 @@ The `--sup` option ensures that the application has a supervision tree, which is
 
 1. Add the Ecto and the Postgrex driver dependencies to the `mix.exs` file by updating the `deps` definition in the file to include those items. For example:
 
-   ```bash
+   ```elixir
    defp deps do
      [
        {:ecto_sql, "~> 3.0"},
@@ -152,7 +152,7 @@ defmodule Friends.Repo.Migrations.CreatePeople do
 end
 ```
 
-Add code to the migration file to create a table called `people`. For example:
+Add code to the migration file to create a table called `people`. Including `timestamps()` will automatically generate `inserted_at` and `updated_at` columns. For example:
 
 ```elixir
 defmodule Friends.Repo.Migrations.CreatePeople do
@@ -163,6 +163,8 @@ defmodule Friends.Repo.Migrations.CreatePeople do
       add :first_name, :string
       add :last_name, :string
       add :age, :integer
+
+      timestamps()
     end
   end
 end
@@ -191,6 +193,122 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 
 </Steps>
 
+## Examples
+
+This section demonstrates how to map your Elixir application to the database table and perform operations within an Ecto transaction.
+
+### Create an Ecto schema
+
+To interact with the `people` table using Elixir structs, you need an Ecto Schema. Create a new file `lib/friends/person.ex` and add the following code:
+
+```elixir
+defmodule Friends.Person do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "people" do
+    field :first_name, :string
+    field :last_name, :string
+    field :age, :integer
+
+    timestamps()
+  end
+
+  def changeset(person, attrs) do
+    person
+    |> cast(attrs, [:first_name, :last_name, :age])
+    |> validate_required([:first_name, :last_name])
+  end
+end
+```
+
+### Execute a CRUD transaction
+
+Create a new file named `main.exs` in your project's root directory. This script demonstrates a full Create, Read, Update, and Delete lifecycle wrapped within a single database transaction. Wrapping operations in a transaction ensures that they either all succeed together or fail together.
+
+```elixir
+defmodule NeonEctoExample do
+  alias Friends.Repo
+  alias Friends.Person
+
+  def run do
+    IO.puts("Starting Neon Ecto example...")
+
+    # Repo.transaction ensures all operations inside either succeed together or fail together.
+    Repo.transaction(fn ->
+      IO.puts("\n--- Transaction Started ---")
+
+      # 1. CREATE
+      IO.puts("\n[CREATE] Inserting a new person...")
+      {:ok, person} =
+        %Person{}
+        |> Person.changeset(%{first_name: "Ada", last_name: "Lovelace", age: 36})
+        |> Repo.insert()
+      IO.puts("Inserted: #{inspect(person)}")
+
+      # 2. READ
+      IO.puts("\n[READ] Fetching the new person by ID...")
+      fetched_person = Repo.get!(Person, person.id)
+      IO.puts("Fetched: #{inspect(fetched_person)}")
+
+      # 3. UPDATE
+      IO.puts("\n[UPDATE] Updating the person's age...")
+      changeset = Person.changeset(fetched_person, %{age: 37})
+      {:ok, updated_person} = Repo.update(changeset)
+      IO.puts("Updated: #{inspect(updated_person)}")
+
+      # 4. DELETE
+      IO.puts("\n[DELETE] Deleting the person...")
+      {:ok, deleted_person} = Repo.delete(updated_person)
+      IO.puts("Deleted: #{inspect(deleted_person)}")
+
+      # Verify deletion
+      IO.puts("\nVerifying deletion...")
+      is_deleted = is_nil(Repo.get(Person, deleted_person.id))
+      IO.puts("Person with ID #{deleted_person.id} exists? #{not is_deleted}")
+
+      IO.puts("\n--- Transaction Committed Successfully ---\n")
+    end)
+  end
+end
+
+# Ensure the Ecto Repo is started before running the script
+_ = Application.ensure_all_started(:friends)
+
+NeonEctoExample.run()
+```
+
+Run the script from your terminal using the following command:
+
+```bash
+mix run main.exs
+```
+
+When the code runs successfully, you will see output detailing each operation executed within the transaction:
+
+```text
+Starting Neon Ecto example...
+
+--- Transaction Started ---
+
+[CREATE] Inserting a new person...
+Inserted: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 36, ...}
+
+[READ] Fetching the new person by ID...
+Fetched: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 36, ...}
+
+[UPDATE] Updating the person's age...
+Updated: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 37, ...}
+
+[DELETE] Deleting the person...
+Deleted: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 37, ...}
+
+Verifying deletion...
+Person with ID 1 exists? false
+
+--- Transaction Committed Successfully ---
+```
+
 ## Application code
 
 You can find the application code for the example above on GitHub.
@@ -201,7 +319,7 @@ You can find the application code for the example above on GitHub.
 
 ## Next steps
 
-The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
+The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to structure your database logic, create advanced schemas and run complex queries.
 
 ## Usage notes
 
