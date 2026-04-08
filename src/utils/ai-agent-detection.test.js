@@ -187,9 +187,9 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should exclude /docs/changelog', () => {
+    it('should resolve /docs/changelog to custom markdown path', () => {
       const result = getMarkdownPath('/docs/changelog');
-      expect(result).toBeNull();
+      expect(result).toBe('/md/docs/changelog.md');
     });
 
     it('should resolve individual changelog entries to changelog content path', () => {
@@ -231,9 +231,9 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for /pricing', () => {
+    it('should resolve /pricing to custom markdown path', () => {
       const result = getMarkdownPath('/pricing');
-      expect(result).toBeNull();
+      expect(result).toBe('/pricing.md');
     });
   });
 

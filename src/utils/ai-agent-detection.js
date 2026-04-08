@@ -40,9 +40,11 @@ export function isAIAgentRequest(request) {
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
 
-// Non-content pages with handcrafted agent-friendly markdown (maps to public/)
+// Paths where the generic CONTENT_ROUTES resolver produces the wrong markdown
+// path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md',
+  'docs/changelog': '/md/docs/changelog.md',
 };
 
 // Paths under content routes that are static files in public/ (not generated into public/md/).
