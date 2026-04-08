@@ -14,7 +14,7 @@ description="Pre-built prompt for connecting Elixir applications to Neon with Ec
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
-The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
+The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html) (1.15 or later required by current Postgrex versions).
 
 To connect to Neon from Elixir with Ecto:
 
@@ -56,7 +56,7 @@ The `--sup` option ensures that the application has a supervision tree, which is
 
 1. Add the Ecto and the Postgrex driver dependencies to the `mix.exs` file by updating the `deps` definition in the file to include those items. For example:
 
-   ```bash
+   ```elixir
    defp deps do
      [
        {:ecto_sql, "~> 3.0"},
@@ -91,6 +91,7 @@ Follow these steps to complete the configuration:
      username: "alex",
      password: "AbC123dEf",
      hostname: "ep-cool-darkness-123456.us-west-2.aws.neon.tech",
+     pool_size: 10,
      ssl: [cacerts: :public_key.cacerts_get()]
    ```
 
@@ -151,7 +152,7 @@ defmodule Friends.Repo.Migrations.CreatePeople do
 end
 ```
 
-Add code to the migration file to create a table called `people`. For example:
+Add code to the migration file to create a table called `people`. Including `timestamps()` will automatically generate `inserted_at` and `updated_at` columns. For example:
 
 ```elixir
 defmodule Friends.Repo.Migrations.CreatePeople do
@@ -162,6 +163,8 @@ defmodule Friends.Repo.Migrations.CreatePeople do
       add :first_name, :string
       add :last_name, :string
       add :age, :integer
+
+      timestamps()
     end
   end
 end
@@ -190,6 +193,122 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 
 </Steps>
 
+## Examples
+
+This section demonstrates how to map your Elixir application to the database table and perform operations within an Ecto transaction.
+
+### Create an Ecto schema
+
+To interact with the `people` table using Elixir structs, you need an Ecto Schema. Create a new file `lib/friends/person.ex` and add the following code:
+
+```elixir
+defmodule Friends.Person do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "people" do
+    field :first_name, :string
+    field :last_name, :string
+    field :age, :integer
+
+    timestamps()
+  end
+
+  def changeset(person, attrs) do
+    person
+    |> cast(attrs, [:first_name, :last_name, :age])
+    |> validate_required([:first_name, :last_name])
+  end
+end
+```
+
+### Execute a CRUD transaction
+
+Create a new file named `main.exs` in your project's root directory. This script demonstrates a full Create, Read, Update, and Delete lifecycle wrapped within a single database transaction. Wrapping operations in a transaction ensures that they either all succeed together or fail together.
+
+```elixir
+defmodule NeonEctoExample do
+  alias Friends.Repo
+  alias Friends.Person
+
+  def run do
+    IO.puts("Starting Neon Ecto example...")
+
+    # Repo.transaction ensures all operations inside either succeed together or fail together.
+    Repo.transaction(fn ->
+      IO.puts("\n--- Transaction Started ---")
+
+      # 1. CREATE
+      IO.puts("\n[CREATE] Inserting a new person...")
+      {:ok, person} =
+        %Person{}
+        |> Person.changeset(%{first_name: "Ada", last_name: "Lovelace", age: 36})
+        |> Repo.insert()
+      IO.puts("Inserted: #{inspect(person)}")
+
+      # 2. READ
+      IO.puts("\n[READ] Fetching the new person by ID...")
+      fetched_person = Repo.get!(Person, person.id)
+      IO.puts("Fetched: #{inspect(fetched_person)}")
+
+      # 3. UPDATE
+      IO.puts("\n[UPDATE] Updating the person's age...")
+      changeset = Person.changeset(fetched_person, %{age: 37})
+      {:ok, updated_person} = Repo.update(changeset)
+      IO.puts("Updated: #{inspect(updated_person)}")
+
+      # 4. DELETE
+      IO.puts("\n[DELETE] Deleting the person...")
+      {:ok, deleted_person} = Repo.delete(updated_person)
+      IO.puts("Deleted: #{inspect(deleted_person)}")
+
+      # Verify deletion
+      IO.puts("\nVerifying deletion...")
+      is_deleted = is_nil(Repo.get(Person, deleted_person.id))
+      IO.puts("Person with ID #{deleted_person.id} exists? #{not is_deleted}")
+
+      IO.puts("\n--- Transaction Committed Successfully ---\n")
+    end)
+  end
+end
+
+# Ensure the Ecto Repo is started before running the script
+_ = Application.ensure_all_started(:friends)
+
+NeonEctoExample.run()
+```
+
+Run the script from your terminal using the following command:
+
+```bash
+mix run main.exs
+```
+
+When the code runs successfully, you will see output detailing each operation executed within the transaction:
+
+```text
+Starting Neon Ecto example...
+
+--- Transaction Started ---
+
+[CREATE] Inserting a new person...
+Inserted: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 36, ...}
+
+[READ] Fetching the new person by ID...
+Fetched: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 36, ...}
+
+[UPDATE] Updating the person's age...
+Updated: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 37, ...}
+
+[DELETE] Deleting the person...
+Deleted: %Friends.Person{id: 1, first_name: "Ada", last_name: "Lovelace", age: 37, ...}
+
+Verifying deletion...
+Person with ID 1 exists? false
+
+--- Transaction Committed Successfully ---
+```
+
 ## Application code
 
 You can find the application code for the example above on GitHub.
@@ -200,11 +319,23 @@ You can find the application code for the example above on GitHub.
 
 ## Next steps
 
-The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
+The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to structure your database logic, create advanced schemas and run complex queries.
 
 ## Usage notes
 
 - Suppose you have `PGHOST` environment variable on your system set to something other than your Neon hostname. In that case, this hostname will be used instead of the Neon `hostname` defined in your Ecto Repo configuration when running `mix ecto` commands. To avoid this issue, you can either set the `PGHOST` environment variable to your Neon hostname or specify `PGHOST=""` when running `mix ecto` commands; for example: `PGHOST="" mix ecto.migrate`.
 - Neon's _Scale to Zero_ feature scales computes to zero after 300 seconds (5 minutes) of inactivity, which can result in a `connection not available` error when running `mix ecto` commands. Typically, a Neon compute takes a few hundred milliseconds to transition from `Idle` to `Active`. Wait a second or two and try running the command again. Alternatively, consider the strategies outlined in [Connection latency and timeouts](/docs/connect/connection-latency) to manage connection issues resulting from compute suspension.
+
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- Do not add `:ecto_sql` or `:postgrex` to the `:extra_applications` list in `mix.exs`. These dependencies are started automatically by the runtime as OTP applications. Adding them to `:extra_applications` can cause startup errors.
+- The `ssl: [cacerts: :public_key.cacerts_get()]` option is mandatory. The connection to Neon will fail without it.
+- Include `pool_size: 10` (or an appropriate value) in the Repo configuration.
+- Use `Repo.transaction/1` to wrap related database operations that must succeed or fail together. The Ecto Getting Started Guide covers this in detail.
+- This guide hardcodes credentials in `config/config.exs` for simplicity. For production, use `config/runtime.exs` with `System.get_env/1` instead. If you use env vars, make sure they are exported (`export DB_HOST=...`), not just sourced via `source .env` — shell variables set with `source` are not visible to child processes like `mix`.
+- Do not hardcode credentials in source files committed to version control. For more information, see [Security overview](/docs/security/security-overview).
+
+</details>
 
 <NeedHelp/>
