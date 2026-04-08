@@ -65,11 +65,14 @@ export function getMarkdownPath(pathname) {
 
   if (STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix))) return null;
 
-  if (CUSTOM_MARKDOWN_PATHS[path]) return CUSTOM_MARKDOWN_PATHS[path];
+  // Normalize .md suffix so /branching.md matches the branching route
+  const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
 
-  // Find the matching route
+  if (CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized])
+    return CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized];
+
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
-    (route) => path === route || path.startsWith(`${route}/`)
+    (route) => normalized === route || path.startsWith(`${route}/`)
   );
 
   if (!matchedRoute) return null;
@@ -80,7 +83,7 @@ export function getMarkdownPath(pathname) {
   const publicPath = contentPath.replace('content/', '/md/');
 
   // Extract slug after the matched route
-  const slug = path === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
+  const slug = normalized === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
   const mdSlug = slug.endsWith('.md') ? slug : `${slug}.md`;
 
   // Build the full public path: /md/{directory}/{slug}.md

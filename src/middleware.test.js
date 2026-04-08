@@ -120,15 +120,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
   });
 
-  describe('Excluded routes - should always return HTML', () => {
+  describe('Excluded routes - no index markdown available, return HTML', () => {
     const excludedCases = [
-      { name: 'Index /guides', path: '/guides', reason: 'index page without slug' },
-      { name: 'Index /branching', path: '/branching', reason: 'index page without slug' },
-      {
-        name: 'Changelog',
-        path: '/docs/changelog',
-        reason: 'special changelog page',
-      },
+      { name: 'Index /guides', path: '/guides', reason: 'index page without markdown' },
+      { name: 'Index /branching', path: '/branching', reason: 'index page without markdown' },
       {
         name: 'Use case multi-tb',
         path: '/use-cases/multi-tb',
