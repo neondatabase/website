@@ -17,7 +17,7 @@ import featuresReplicasIcon from 'icons/landing/features/replica.svg';
 import featuresScaleIcon from 'icons/landing/features/scalability.svg';
 import featuresStorageIcon from 'icons/landing/features/storage.svg';
 import featuresTimerIcon from 'icons/landing/features/timer.svg';
-import { getLandingPages, getWpPageBySlug, getStaticPages } from 'utils/api-pages';
+import { getWpPageBySlug } from 'utils/api-pages';
 import { cn } from 'utils/cn';
 import { getHubspotFormData } from 'utils/forms';
 import getMetadata from 'utils/get-metadata';
@@ -148,15 +148,6 @@ export async function generateViewport({ params }) {
   return {
     themeColor: '#000000',
   };
-}
-
-export async function generateStaticParams() {
-  const staticPages = await getStaticPages();
-  const landingPages = await getLandingPages();
-
-  return [...staticPages, ...landingPages].map((node) => ({
-    slug: node.slug,
-  }));
 }
 
 export async function generateMetadata({ params }) {

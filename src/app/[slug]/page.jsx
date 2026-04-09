@@ -8,6 +8,9 @@ import { getWpPageBySlug } from 'utils/api-pages';
 const getPageType = async (slug) => {
   const templatePage = getPostBySlug(slug, TEMPLATE_PAGES_DIR_PATH);
   if (templatePage) {
+    const { template } = templatePage.data || {};
+    if (template === 'Static') return 'static';
+    if (template === 'Landing') return 'landing';
     return 'template';
   }
 
@@ -23,6 +26,16 @@ const SinglePage = async (props) => {
   const params = await props.params;
   const { slug } = params;
   const pageType = await getPageType(slug);
+
+  if (pageType === 'landing') {
+    const { default: LandingPage } = await import('./pages/landing-page');
+    return <LandingPage params={params} />;
+  }
+
+  if (pageType === 'static') {
+    const { default: StaticPage } = await import('./pages/static-page');
+    return <StaticPage params={params} />;
+  }
 
   if (pageType === 'template') {
     const { default: TemplatePage } = await import('./pages/template-page');
@@ -41,6 +54,22 @@ export async function generateMetadata(props) {
   const params = await props.params;
   const { slug } = params;
   const pageType = await getPageType(slug);
+
+  if (pageType === 'landing') {
+    const mod = await import('./pages/landing-page');
+    if (mod.generateMetadata) {
+      return mod.generateMetadata({ params });
+    }
+    return null;
+  }
+
+  if (pageType === 'static') {
+    const mod = await import('./pages/static-page');
+    if (mod.generateMetadata) {
+      return mod.generateMetadata({ params });
+    }
+    return null;
+  }
 
   if (pageType === 'template') {
     const mod = await import('./pages/template-page');
