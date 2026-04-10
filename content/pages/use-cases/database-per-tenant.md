@@ -55,8 +55,8 @@ This approach gives you the isolation you’re looking for, but it comes at a st
 - **High operational burden** - You’ll soon need a dedicated team just to handle instance provisioning, monitoring, patching, and scaling logistics. Even basic tasks become complex at scale.
 - **Slow setups** - Spinning up a new RDS instance can take minutes, not seconds—far from ideal from the end-user experience.
 
-<Testimonial
-text="Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive"
+<QuoteBlock
+quote="Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive"
 author={{
   name: 'Joey Teunissen',
   company: 'CTO at Opusflow',

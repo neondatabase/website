@@ -102,13 +102,15 @@ const DocCta = ({
         </div>
       </div>
     )}
-    <Image
-      className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover sm:hidden"
-      src={patternImage}
-      alt=""
-      width={188}
-      height={163}
-    />
+    {!isTemplate && (
+      <Image
+        className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover sm:hidden"
+        src={patternImage}
+        alt=""
+        width={188}
+        height={163}
+      />
+    )}
 
     <div
       className={cn(

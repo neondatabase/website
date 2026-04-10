@@ -38,7 +38,7 @@ After signing up, you'll start with a `production` branch:
 
 - `production` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
 
-You can create additional branches for development, staging, and other environments. For development branches, consider using a smaller compute size (0.25-1 CU) to optimize costs, while keeping production appropriately sized for your workload.
+You can create additional branches for development, staging, and other environments. For development branches, consider using a smaller compute size (0.25-1 CU) to optimize costs, while keeping production appropriately sized for your workload. All computes scale to zero after 5 minutes of inactivity by default, which keeps costs low for development branches. On paid plans, you can disable this for production if you need always-active compute. See [Scale to zero](/docs/introduction/scale-to-zero).
 
 <Steps>
 

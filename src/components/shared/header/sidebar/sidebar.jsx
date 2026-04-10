@@ -66,7 +66,8 @@ const Sidebar = ({ isClient, isDocs, className }) => (
             width={18}
             height={18}
             className={cn(
-              !isDocs && 'text-gray-new-20 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 dark:group-hover:text-gray-new-80'
+              !isDocs &&
+                'text-gray-new-20 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 dark:group-hover:text-gray-new-80'
             )}
           />
           {!isDocs && (

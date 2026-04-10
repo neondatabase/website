@@ -102,15 +102,15 @@ function extractCore(pattern, replacement) {
   };
 }
 
-const boolNorm = (v) =>
-  v && v !== '--'
-    ? String(v).toLowerCase().includes('yes') ||
-      String(v).toLowerCase().includes('included') ||
-      String(v).toLowerCase().includes('available') ||
-      v === 'Yes'
-      ? 'yes'
-      : 'no'
-    : 'no';
+// const boolNorm = (v) =>
+//   v && v !== '--'
+//     ? String(v).toLowerCase().includes('yes') ||
+//       String(v).toLowerCase().includes('included') ||
+//       String(v).toLowerCase().includes('available') ||
+//       v === 'Yes'
+//       ? 'yes'
+//       : 'no'
+//     : 'no';
 
 // ---------------------------------------------------------------------------
 // Source 1: Load pricing page component data
@@ -230,223 +230,532 @@ const CROSS_SOURCE_CHECKS = [
   { id: 'price-launch', comp: null, docs: 'Price', plan: 'launch', agentLabel: 'Price' },
   { id: 'price-scale', comp: null, docs: 'Price', plan: 'scale', agentLabel: 'Price' },
   { id: 'who-free', comp: null, docs: "Who it's for", plan: 'free', agentLabel: "Who it's for" },
-  { id: 'who-launch', comp: null, docs: "Who it's for", plan: 'launch', agentLabel: "Who it's for" },
+  {
+    id: 'who-launch',
+    comp: null,
+    docs: "Who it's for",
+    plan: 'launch',
+    agentLabel: "Who it's for",
+  },
   { id: 'who-scale', comp: null, docs: "Who it's for", plan: 'scale', agentLabel: "Who it's for" },
 
   // --- Organization & Projects ---
-  { id: 'team-members-free', label: 'Team members (Free)',
-    comp: 'Team members', docs: 'Organization members', plan: 'free',
+  {
+    id: 'team-members-free',
+    label: 'Team members (Free)',
+    comp: 'Team members',
+    docs: 'Organization members',
+    plan: 'free',
     norm: (v) => normalizeValue(v)?.toLowerCase(),
-    agentLabel: 'Organization members' },
-  { id: 'team-members-launch', label: 'Team members (Launch)',
-    comp: 'Team members', docs: 'Organization members', plan: 'launch',
+    agentLabel: 'Organization members',
+  },
+  {
+    id: 'team-members-launch',
+    label: 'Team members (Launch)',
+    comp: 'Team members',
+    docs: 'Organization members',
+    plan: 'launch',
     norm: (v) => normalizeValue(v)?.toLowerCase(),
-    agentLabel: 'Organization members' },
-  { id: 'team-members-scale', label: 'Team members (Scale)',
-    comp: 'Team members', docs: 'Organization members', plan: 'scale',
+    agentLabel: 'Organization members',
+  },
+  {
+    id: 'team-members-scale',
+    label: 'Team members (Scale)',
+    comp: 'Team members',
+    docs: 'Organization members',
+    plan: 'scale',
     norm: (v) => normalizeValue(v)?.toLowerCase(),
-    agentLabel: 'Organization members' },
-  { id: 'projects-free', label: 'Projects (Free)',
-    comp: 'Projects', docs: 'Projects', plan: 'free', norm: extractNumber,
-    agentLabel: 'Projects' },
-  { id: 'projects-launch', label: 'Projects (Launch)',
-    comp: 'Projects', docs: 'Projects', plan: 'launch', norm: extractNumber,
-    agentLabel: 'Projects' },
-  { id: 'projects-scale', label: 'Projects (Scale)',
-    comp: 'Projects', docs: 'Projects', plan: 'scale', norm: extractNumber,
-    agentLabel: 'Projects' },
-  { id: 'branches-free', label: 'Branches (Free)',
-    comp: 'Branches per project', docs: 'Branches', plan: 'free', norm: extractNumber,
-    agentLabel: 'Branches per project' },
-  { id: 'branches-launch', label: 'Branches (Launch)',
-    comp: 'Branches per project', docs: 'Branches', plan: 'launch', norm: extractNumber,
-    agentLabel: 'Branches per project' },
-  { id: 'branches-scale', label: 'Branches (Scale)',
-    comp: 'Branches per project', docs: 'Branches', plan: 'scale', norm: extractNumber,
-    agentLabel: 'Branches per project' },
-  { id: 'extra-branches-launch', label: 'Extra branches (Launch)',
-    comp: 'Additional branches', docs: 'Extra branches', plan: 'launch', norm: extractBranchRate,
-    agentLabel: 'Extra branches' },
-  { id: 'extra-branches-scale', label: 'Extra branches (Scale)',
-    comp: 'Additional branches', docs: 'Extra branches', plan: 'scale', norm: extractBranchRate,
-    agentLabel: 'Extra branches' },
+    agentLabel: 'Organization members',
+  },
+  {
+    id: 'projects-free',
+    label: 'Projects (Free)',
+    comp: 'Projects',
+    docs: 'Projects',
+    plan: 'free',
+    norm: extractNumber,
+    agentLabel: 'Projects',
+  },
+  {
+    id: 'projects-launch',
+    label: 'Projects (Launch)',
+    comp: 'Projects',
+    docs: 'Projects',
+    plan: 'launch',
+    norm: extractNumber,
+    agentLabel: 'Projects',
+  },
+  {
+    id: 'projects-scale',
+    label: 'Projects (Scale)',
+    comp: 'Projects',
+    docs: 'Projects',
+    plan: 'scale',
+    norm: extractNumber,
+    agentLabel: 'Projects',
+  },
+  {
+    id: 'branches-free',
+    label: 'Branches (Free)',
+    comp: 'Branches per project',
+    docs: 'Branches',
+    plan: 'free',
+    norm: extractNumber,
+    agentLabel: 'Branches per project',
+  },
+  {
+    id: 'branches-launch',
+    label: 'Branches (Launch)',
+    comp: 'Branches per project',
+    docs: 'Branches',
+    plan: 'launch',
+    norm: extractNumber,
+    agentLabel: 'Branches per project',
+  },
+  {
+    id: 'branches-scale',
+    label: 'Branches (Scale)',
+    comp: 'Branches per project',
+    docs: 'Branches',
+    plan: 'scale',
+    norm: extractNumber,
+    agentLabel: 'Branches per project',
+  },
+  {
+    id: 'extra-branches-launch',
+    label: 'Extra branches (Launch)',
+    comp: 'Additional branches',
+    docs: 'Extra branches',
+    plan: 'launch',
+    norm: extractBranchRate,
+    agentLabel: 'Extra branches',
+  },
+  {
+    id: 'extra-branches-scale',
+    label: 'Extra branches (Scale)',
+    comp: 'Additional branches',
+    docs: 'Extra branches',
+    plan: 'scale',
+    norm: extractBranchRate,
+    agentLabel: 'Extra branches',
+  },
 
   // --- Compute ---
-  { id: 'compute-rate-free', label: 'Compute rate (Free)',
-    comp: 'Rates', docs: 'Compute', plan: 'free',
+  {
+    id: 'compute-rate-free',
+    label: 'Compute rate (Free)',
+    comp: 'Rates',
+    docs: 'Compute',
+    plan: 'free',
     norm: extractCore(/(\d+)\s*CU/i, '$1 CU-hours'),
-    agentLabel: 'Compute' },
-  { id: 'compute-rate-launch', label: 'Compute rate (Launch)',
-    comp: 'Rates', docs: 'Compute', plan: 'launch', norm: extractRate,
-    agentLabel: 'Compute' },
-  { id: 'compute-rate-scale', label: 'Compute rate (Scale)',
-    comp: 'Rates', docs: 'Compute', plan: 'scale', norm: extractRate,
-    agentLabel: 'Compute' },
-  { id: 'autoscaling-free', label: 'Autoscaling / Sizes (Free)',
-    comp: 'Sizes', docs: 'Autoscaling', plan: 'free',
-    norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
-    agentLabel: 'Autoscaling' },
-  { id: 'autoscaling-launch', label: 'Autoscaling / Sizes (Launch)',
-    comp: 'Sizes', docs: 'Autoscaling', plan: 'launch',
-    norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
-    agentLabel: 'Autoscaling' },
-  { id: 'autoscaling-scale', label: 'Autoscaling / Sizes (Scale)',
-    comp: 'Sizes', docs: 'Autoscaling', plan: 'scale',
+    agentLabel: 'Compute',
+  },
+  {
+    id: 'compute-rate-launch',
+    label: 'Compute rate (Launch)',
+    comp: 'Rates',
+    docs: 'Compute',
+    plan: 'launch',
+    norm: extractRate,
+    agentLabel: 'Compute',
+  },
+  {
+    id: 'compute-rate-scale',
+    label: 'Compute rate (Scale)',
+    comp: 'Rates',
+    docs: 'Compute',
+    plan: 'scale',
+    norm: extractRate,
+    agentLabel: 'Compute',
+  },
+  {
+    id: 'autoscaling-free',
+    label: 'Autoscaling / Sizes (Free)',
+    comp: 'Sizes',
+    docs: 'Autoscaling',
+    plan: 'free',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
     agentLabel: 'Autoscaling',
-    agentValue: () => 'Autoscaling up to 16 CU; fixed up to 56 CU (224 GB RAM)' },
-  { id: 'scale-to-zero-free', label: 'Scale to zero (Free)',
-    comp: 'Scale to zero', docs: 'Scale to zero', plan: 'free',
+  },
+  {
+    id: 'autoscaling-launch',
+    label: 'Autoscaling / Sizes (Launch)',
+    comp: 'Sizes',
+    docs: 'Autoscaling',
+    plan: 'launch',
+    norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
+    agentLabel: 'Autoscaling',
+  },
+  {
+    id: 'autoscaling-scale',
+    label: 'Autoscaling / Sizes (Scale)',
+    comp: 'Sizes',
+    docs: 'Autoscaling',
+    plan: 'scale',
+    norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
+    agentLabel: 'Autoscaling',
+    agentValue: () => 'Autoscaling up to 16 CU; fixed up to 56 CU (224 GB RAM)',
+  },
+  {
+    id: 'scale-to-zero-free',
+    label: 'Scale to zero (Free)',
+    comp: 'Scale to zero',
+    docs: 'Scale to zero',
+    plan: 'free',
     norm: extractCore(/after (\d+)\s*min/i, 'After $1 min'),
-    agentLabel: 'Scale to zero' },
-  { id: 'scale-to-zero-launch', label: 'Scale to zero (Launch)',
-    comp: 'Scale to zero', docs: 'Scale to zero', plan: 'launch',
+    agentLabel: 'Scale to zero',
+  },
+  {
+    id: 'scale-to-zero-launch',
+    label: 'Scale to zero (Launch)',
+    comp: 'Scale to zero',
+    docs: 'Scale to zero',
+    plan: 'launch',
     norm: extractCore(/after (\d+)\s*min/i, 'After $1 min'),
-    agentLabel: 'Scale to zero' },
-  { id: 'scale-to-zero-scale', label: 'Scale to zero (Scale)',
-    comp: 'Scale to zero', docs: 'Scale to zero', plan: 'scale',
-    norm: (v) => normalizeValue(v)?.toLowerCase().replace(/\s*\([^)]*\)/, ''),
-    agentLabel: 'Scale to zero' },
+    agentLabel: 'Scale to zero',
+  },
+  {
+    id: 'scale-to-zero-scale',
+    label: 'Scale to zero (Scale)',
+    comp: 'Scale to zero',
+    docs: 'Scale to zero',
+    plan: 'scale',
+    norm: (v) =>
+      normalizeValue(v)
+        ?.toLowerCase()
+        .replace(/\s*\([^)]*\)/, ''),
+    agentLabel: 'Scale to zero',
+  },
 
   // --- Storage ---
-  { id: 'storage-free', label: 'Storage (Free)',
-    comp: 'Database', docs: 'Storage', plan: 'free',
+  {
+    id: 'storage-free',
+    label: 'Storage (Free)',
+    comp: 'Database',
+    docs: 'Storage',
+    plan: 'free',
     norm: extractCore(/([\d.]+\s*GB)/i),
-    agentLabel: 'Storage' },
-  { id: 'storage-rate-launch', label: 'Storage rate (Launch)',
-    comp: 'Database', docs: 'Storage', plan: 'launch', norm: extractRate,
-    agentLabel: 'Storage' },
-  { id: 'storage-rate-scale', label: 'Storage rate (Scale)',
-    comp: 'Database', docs: 'Storage', plan: 'scale', norm: extractRate,
-    agentLabel: 'Storage' },
-  { id: 'instant-restore-launch', label: 'Instant restore (Launch)',
-    comp: 'History', docs: 'Instant restore', plan: 'launch', norm: extractRate,
-    agentLabel: 'Instant restore' },
-  { id: 'instant-restore-scale', label: 'Instant restore (Scale)',
-    comp: 'History', docs: 'Instant restore', plan: 'scale', norm: extractRate,
-    agentLabel: 'Instant restore' },
-  { id: 'restore-window-free', label: 'Restore window (Free)',
-    comp: 'Restore window', docs: 'Restore window', plan: 'free',
+    agentLabel: 'Storage',
+  },
+  {
+    id: 'storage-rate-launch',
+    label: 'Storage rate (Launch)',
+    comp: 'Database',
+    docs: 'Storage',
+    plan: 'launch',
+    norm: extractRate,
+    agentLabel: 'Storage',
+  },
+  {
+    id: 'storage-rate-scale',
+    label: 'Storage rate (Scale)',
+    comp: 'Database',
+    docs: 'Storage',
+    plan: 'scale',
+    norm: extractRate,
+    agentLabel: 'Storage',
+  },
+  {
+    id: 'instant-restore-launch',
+    label: 'Instant restore (Launch)',
+    comp: 'History',
+    docs: 'Instant restore',
+    plan: 'launch',
+    norm: extractRate,
+    agentLabel: 'Instant restore',
+  },
+  {
+    id: 'instant-restore-scale',
+    label: 'Instant restore (Scale)',
+    comp: 'History',
+    docs: 'Instant restore',
+    plan: 'scale',
+    norm: extractRate,
+    agentLabel: 'Instant restore',
+  },
+  {
+    id: 'restore-window-free',
+    label: 'Restore window (Free)',
+    comp: 'Restore window',
+    docs: 'Restore window',
+    plan: 'free',
     norm: extractCore(/(\d+)\s*hours?/i, '$1 hours'),
     agentLabel: 'Restore window',
-    agentValue: () => '6 hours (1 GB limit)' },
-  { id: 'restore-window-launch', label: 'Restore window (Launch)',
-    comp: 'Restore window', docs: 'Restore window', plan: 'launch',
+    agentValue: () => '6 hours (1 GB limit)',
+  },
+  {
+    id: 'restore-window-launch',
+    label: 'Restore window (Launch)',
+    comp: 'Restore window',
+    docs: 'Restore window',
+    plan: 'launch',
     norm: extractCore(/(\d+)\s*days?/i, '$1 days'),
-    agentLabel: 'Restore window' },
-  { id: 'restore-window-scale', label: 'Restore window (Scale)',
-    comp: 'Restore window', docs: 'Restore window', plan: 'scale',
+    agentLabel: 'Restore window',
+  },
+  {
+    id: 'restore-window-scale',
+    label: 'Restore window (Scale)',
+    comp: 'Restore window',
+    docs: 'Restore window',
+    plan: 'scale',
     norm: extractCore(/(\d+)\s*days?/i, '$1 days'),
-    agentLabel: 'Restore window' },
+    agentLabel: 'Restore window',
+  },
   { id: 'snapshots-free', comp: null, docs: 'Snapshots', plan: 'free', agentLabel: 'Snapshots' },
-  { id: 'snapshots-launch', comp: null, docs: 'Snapshots', plan: 'launch', agentLabel: 'Snapshots' },
+  {
+    id: 'snapshots-launch',
+    comp: null,
+    docs: 'Snapshots',
+    plan: 'launch',
+    agentLabel: 'Snapshots',
+  },
   { id: 'snapshots-scale', comp: null, docs: 'Snapshots', plan: 'scale', agentLabel: 'Snapshots' },
 
   // --- Network ---
-  { id: 'network-free', label: 'Public network transfer (Free)',
-    comp: 'Public network transfer', docs: 'Public network transfer', plan: 'free',
+  {
+    id: 'network-free',
+    label: 'Public network transfer (Free)',
+    comp: 'Public network transfer',
+    docs: 'Public network transfer',
+    plan: 'free',
     norm: extractCore(/(\d+)\s*GB/i, '$1 GB'),
-    agentLabel: 'Public network transfer (egress)' },
-  { id: 'network-launch', label: 'Public network transfer (Launch)',
-    comp: 'Public network transfer', docs: 'Public network transfer', plan: 'launch',
+    agentLabel: 'Public network transfer (egress)',
+  },
+  {
+    id: 'network-launch',
+    label: 'Public network transfer (Launch)',
+    comp: 'Public network transfer',
+    docs: 'Public network transfer',
+    plan: 'launch',
     norm: extractCore(/(\d+)\s*GB\s*included/i, '$1 GB included'),
-    agentLabel: 'Public network transfer (egress)' },
-  { id: 'network-scale', label: 'Public network transfer (Scale)',
-    comp: 'Public network transfer', docs: 'Public network transfer', plan: 'scale',
+    agentLabel: 'Public network transfer (egress)',
+  },
+  {
+    id: 'network-scale',
+    label: 'Public network transfer (Scale)',
+    comp: 'Public network transfer',
+    docs: 'Public network transfer',
+    plan: 'scale',
     norm: extractCore(/(\d+)\s*GB\s*included/i, '$1 GB included'),
-    agentLabel: 'Public network transfer (egress)' },
-  { id: 'private-network-scale', label: 'Private network transfer (Scale)',
-    comp: 'Private network transfer', docs: 'Private network transfer', plan: 'scale',
+    agentLabel: 'Public network transfer (egress)',
+  },
+  {
+    id: 'private-network-scale',
+    label: 'Private network transfer (Scale)',
+    comp: 'Private network transfer',
+    docs: 'Private network transfer',
+    plan: 'scale',
     norm: extractRate,
-    agentLabel: 'Private network transfer' },
+    agentLabel: 'Private network transfer',
+  },
 
   // --- Auth ---
-  { id: 'auth-free', label: 'Auth MAU (Free)',
-    comp: 'MAU', docs: 'Auth', plan: 'free',
+  {
+    id: 'auth-free',
+    label: 'Auth MAU (Free)',
+    comp: 'MAU',
+    docs: 'Auth',
+    plan: 'free',
     norm: extractCore(/(60k|60,?000)/i, '60k'),
-    agentLabel: 'Auth (MAU)' },
-  { id: 'auth-launch', label: 'Auth MAU (Launch)',
-    comp: 'MAU', docs: 'Auth', plan: 'launch',
+    agentLabel: 'Auth (MAU)',
+  },
+  {
+    id: 'auth-launch',
+    label: 'Auth MAU (Launch)',
+    comp: 'MAU',
+    docs: 'Auth',
+    plan: 'launch',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
-    agentLabel: 'Auth (MAU)' },
-  { id: 'auth-scale', label: 'Auth MAU (Scale)',
-    comp: 'MAU', docs: 'Auth', plan: 'scale',
+    agentLabel: 'Auth (MAU)',
+  },
+  {
+    id: 'auth-scale',
+    label: 'Auth MAU (Scale)',
+    comp: 'MAU',
+    docs: 'Auth',
+    plan: 'scale',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
-    agentLabel: 'Auth (MAU)' },
+    agentLabel: 'Auth (MAU)',
+  },
 
   // --- Monitoring & Observability ---
-  { id: 'monitoring-free', label: 'Monitoring (Free)',
-    comp: 'Monitoring retention', docs: 'Monitoring', plan: 'free', norm: normalizeValue,
-    agentLabel: 'Monitoring retention' },
-  { id: 'monitoring-launch', label: 'Monitoring (Launch)',
-    comp: 'Monitoring retention', docs: 'Monitoring', plan: 'launch', norm: normalizeValue,
-    agentLabel: 'Monitoring retention' },
-  { id: 'monitoring-scale', label: 'Monitoring (Scale)',
-    comp: 'Monitoring retention', docs: 'Monitoring', plan: 'scale', norm: normalizeValue,
-    agentLabel: 'Monitoring retention' },
-  { id: 'metrics-export-scale', label: 'Metrics/logs export (Scale)',
-    comp: 'Metrics and Logs export', docs: 'Metrics/logs export', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('included') || v === 'Yes' ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'Metrics/logs export' },
+  {
+    id: 'monitoring-free',
+    label: 'Monitoring (Free)',
+    comp: 'Monitoring retention',
+    docs: 'Monitoring',
+    plan: 'free',
+    norm: normalizeValue,
+    agentLabel: 'Monitoring retention',
+  },
+  {
+    id: 'monitoring-launch',
+    label: 'Monitoring (Launch)',
+    comp: 'Monitoring retention',
+    docs: 'Monitoring',
+    plan: 'launch',
+    norm: normalizeValue,
+    agentLabel: 'Monitoring retention',
+  },
+  {
+    id: 'monitoring-scale',
+    label: 'Monitoring (Scale)',
+    comp: 'Monitoring retention',
+    docs: 'Monitoring',
+    plan: 'scale',
+    norm: normalizeValue,
+    agentLabel: 'Monitoring retention',
+  },
+  {
+    id: 'metrics-export-scale',
+    label: 'Metrics/logs export (Scale)',
+    comp: 'Metrics and Logs export',
+    docs: 'Metrics/logs export',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('included') || v === 'Yes'
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'Metrics/logs export',
+  },
 
   // --- Compliance & Security (component preferred — separate rows beat combined cell) ---
-  { id: 'protected-branches-free', comp: null, docs: 'Compliance and security', plan: 'free',
+  {
+    id: 'protected-branches-free',
+    comp: null,
+    docs: 'Compliance and security',
+    plan: 'free',
     agentLabel: 'Protected branches',
-    agentValue: (v) => v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--' },
-  { id: 'protected-branches-launch', comp: null, docs: 'Compliance and security', plan: 'launch',
+    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
+  },
+  {
+    id: 'protected-branches-launch',
+    comp: null,
+    docs: 'Compliance and security',
+    plan: 'launch',
     agentLabel: 'Protected branches',
-    agentValue: (v) => v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--' },
-  { id: 'protected-branches-scale', comp: null, docs: 'Compliance and security', plan: 'scale',
+    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
+  },
+  {
+    id: 'protected-branches-scale',
+    comp: null,
+    docs: 'Compliance and security',
+    plan: 'scale',
     agentLabel: 'Protected branches',
-    agentValue: (v) => v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--' },
-  { id: 'ip-allow-scale', label: 'IP Allow (Scale)',
-    comp: 'IP Allow Rules', docs: 'Compliance and security', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('ip allow') || v === 'Yes' ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'IP Allow', prefer: 'component' },
-  { id: 'private-networking-scale', label: 'Private Networking (Scale)',
-    comp: 'Private Networking', docs: 'Compliance and security', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('private networking') || v === 'Yes' ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'Private Networking', prefer: 'component' },
-  { id: 'hipaa-scale', label: 'HIPAA (Scale)',
-    comp: 'HIPAA Compliance', docs: 'Compliance and security', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('hipaa') || String(v).toLowerCase().includes('available')
-        ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'HIPAA', prefer: 'component' },
-  { id: 'soc2-scale', label: 'SOC 2 (Scale)',
-    comp: 'SOC 2 Report Access', docs: 'Compliance and security', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('soc') || String(v).toLowerCase().includes('available')
-        ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'SOC 2', prefer: 'component' },
-  { id: 'uptime-sla-scale', label: 'Uptime SLA (Scale)',
-    comp: '__hero:sla', docs: 'Uptime SLA', plan: 'scale',
-    norm: (v) => v && v !== '--'
-      ? String(v).toLowerCase().includes('sla') || v === 'Yes' ? 'yes' : 'no'
-      : 'no',
-    agentLabel: 'Uptime SLA' },
+    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
+  },
+  {
+    id: 'ip-allow-scale',
+    label: 'IP Allow (Scale)',
+    comp: 'IP Allow Rules',
+    docs: 'Compliance and security',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('ip allow') || v === 'Yes'
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'IP Allow',
+    prefer: 'component',
+  },
+  {
+    id: 'private-networking-scale',
+    label: 'Private Networking (Scale)',
+    comp: 'Private Networking',
+    docs: 'Compliance and security',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('private networking') || v === 'Yes'
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'Private Networking',
+    prefer: 'component',
+  },
+  {
+    id: 'hipaa-scale',
+    label: 'HIPAA (Scale)',
+    comp: 'HIPAA Compliance',
+    docs: 'Compliance and security',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('hipaa') || String(v).toLowerCase().includes('available')
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'HIPAA',
+    prefer: 'component',
+  },
+  {
+    id: 'soc2-scale',
+    label: 'SOC 2 (Scale)',
+    comp: 'SOC 2 Report Access',
+    docs: 'Compliance and security',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('soc') || String(v).toLowerCase().includes('available')
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'SOC 2',
+    prefer: 'component',
+  },
+  {
+    id: 'uptime-sla-scale',
+    label: 'Uptime SLA (Scale)',
+    comp: '__hero:sla',
+    docs: 'Uptime SLA',
+    plan: 'scale',
+    norm: (v) =>
+      v && v !== '--'
+        ? String(v).toLowerCase().includes('sla') || v === 'Yes'
+          ? 'yes'
+          : 'no'
+        : 'no',
+    agentLabel: 'Uptime SLA',
+  },
 
   // --- Support ---
-  { id: 'support-free', label: 'Support (Free)',
-    comp: 'Support Plans', docs: 'Support', plan: 'free',
-    norm: (v) => normalizeValue(v)?.toLowerCase().replace(/\s*\(discord\)/, ''),
-    agentLabel: 'Support' },
-  { id: 'support-launch', label: 'Support (Launch)',
-    comp: 'Support Plans', docs: 'Support', plan: 'launch',
-    norm: (v) => normalizeValue(v)?.toLowerCase().replace(/\s*support/, '').replace(/\s*only/, ''),
-    agentLabel: 'Support' },
-  { id: 'support-scale', label: 'Support (Scale)',
-    comp: 'Support Plans', docs: 'Support', plan: 'scale',
+  {
+    id: 'support-free',
+    label: 'Support (Free)',
+    comp: 'Support Plans',
+    docs: 'Support',
+    plan: 'free',
+    norm: (v) =>
+      normalizeValue(v)
+        ?.toLowerCase()
+        .replace(/\s*\(discord\)/, ''),
+    agentLabel: 'Support',
+  },
+  {
+    id: 'support-launch',
+    label: 'Support (Launch)',
+    comp: 'Support Plans',
+    docs: 'Support',
+    plan: 'launch',
+    norm: (v) =>
+      normalizeValue(v)
+        ?.toLowerCase()
+        .replace(/\s*support/, '')
+        .replace(/\s*only/, ''),
+    agentLabel: 'Support',
+  },
+  {
+    id: 'support-scale',
+    label: 'Support (Scale)',
+    comp: 'Support Plans',
+    docs: 'Support',
+    plan: 'scale',
     norm: (v) => normalizeValue(v)?.toLowerCase(),
-    agentLabel: 'Support' },
+    agentLabel: 'Support',
+  },
 ];
 
 // Hero numeric rates vs component table string rates
@@ -538,9 +847,7 @@ function runChecks(componentData, docsTable) {
   const uncoveredComponent = Object.keys(componentData.tableRows).filter(
     (k) => !coveredComponentKeys.has(k) && !COMPONENT_CATEGORY_ROWS.has(k)
   );
-  const uncoveredDocs = Object.keys(docsTable).filter(
-    (k) => !coveredDocsKeys.has(k)
-  );
+  const uncoveredDocs = Object.keys(docsTable).filter((k) => !coveredDocsKeys.has(k));
 
   return { results, uncoveredComponent, uncoveredDocs };
 }
@@ -595,23 +902,39 @@ function generatePricingMarkdown(componentData, docsTable) {
   }
 
   lines.push('');
-  lines.push('All plans include: multi-AZ storage, autoscaling, database branching, read replicas, connection pooling via PgBouncer, Postgres extensions (pgvector, PostGIS, TimescaleDB, etc.), full management API and CLI, and a Data API for querying over HTTP.');
+  lines.push(
+    'All plans include: multi-AZ storage, autoscaling, database branching, read replicas, connection pooling via PgBouncer, Postgres extensions (pgvector, PostGIS, TimescaleDB, etc.), full management API and CLI, and a Data API for querying over HTTP.'
+  );
   lines.push('');
   lines.push('Notes:');
   lines.push('- "-" means the feature is not available on that plan.');
   lines.push('- No monthly minimum on paid plans. Invoices under $0.50 are not collected.');
-  lines.push('- Free plan quotas (100 CU-hours, 0.5 GB) are per project; compute suspends when monthly limits are reached.');
+  lines.push(
+    '- Free plan quotas (100 CU-hours, 0.5 GB) are per project; compute suspends when monthly limits are reached.'
+  );
   lines.push('- Read replicas are separate computes and count toward CU-hours.');
-  lines.push('- To control costs, set autoscaling limits and keep scale-to-zero enabled. Suspended computes do not accrue CU-hours.');
-  lines.push("- Scale's higher CU-hour rate covers its additional production features. No separate fees for features listed in the table.");
-  lines.push('- Child branch storage is billed on the minimum of accumulated changes or logical data size. Paid plans: up to 16 TB per branch.');
+  lines.push(
+    '- To control costs, set autoscaling limits and keep scale-to-zero enabled. Suspended computes do not accrue CU-hours.'
+  );
+  lines.push(
+    "- Scale's higher CU-hour rate covers its additional production features. No separate fees for features listed in the table."
+  );
+  lines.push(
+    '- Child branch storage is billed on the minimum of accumulated changes or logical data size. Paid plans: up to 16 TB per branch.'
+  );
   lines.push('- Instant restore storage is charged only on root branches, not child branches.');
   lines.push('- Snapshots are free during Beta; $0.09/GB-month starting May 1, 2026.');
-  lines.push('- Max branches per project is 5,000 on paid plans (10/25 included). Free is capped at 10.');
+  lines.push(
+    '- Max branches per project is 5,000 on paid plans (10/25 included). Free is capped at 10.'
+  );
   lines.push('- Public network transfer includes data sent via logical replication.');
   lines.push('- Early-stage startups can apply for credits: https://neon.com/startups');
-  lines.push('- Open source program: credits, referrals, and promotion for Postgres OSS projects: https://neon.com/programs/open-source.md');
-  lines.push('- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md');
+  lines.push(
+    '- Open source program: credits, referrals, and promotion for Postgres OSS projects: https://neon.com/programs/open-source.md'
+  );
+  lines.push(
+    '- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md'
+  );
 
   lines.push('');
   lines.push('Get started: https://neon.com/signup');

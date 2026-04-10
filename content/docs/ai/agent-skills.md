@@ -16,6 +16,8 @@ redirectFrom:
 
 Agent Skills provide your AI coding assistant with structured context about Neon's features, APIs, and best practices. With skills installed, your assistant produces more accurate code and avoids common mistakes when working with Neon.
 
+<YoutubeIframe embedId="NN251KTjAo8" />
+
 ## Install
 
 There are several ways to install the Neon skill depending on your editor and workflow.

@@ -1,3 +1,3 @@
-import TestimonialsWrapper from './testimonials-wrapper';
+import QuoteBlocksWrapper from './testimonials-wrapper';
 
-export default TestimonialsWrapper;
+export default QuoteBlocksWrapper;

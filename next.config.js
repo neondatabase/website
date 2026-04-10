@@ -658,6 +658,15 @@ const defaultConfig = {
       destination: `/md/${route}/:path*.md`,
     }));
 
+    // /:path*.md above requires at least one segment after the route name,
+    // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    const indexRewrites = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        destination: `/md/${route}.md`,
+      }));
+
     return {
       // beforeFiles: serve static files from public/docs/ before the
       // docs/[...slug] catch-all intercepts them
@@ -672,6 +681,7 @@ const defaultConfig = {
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
+        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

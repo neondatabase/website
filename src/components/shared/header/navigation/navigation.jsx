@@ -249,7 +249,8 @@ const Navigation = () => {
                     '-ml-3.5 xl:-ml-2.5': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
                     'text-black-pure! dark:text-white!': isActive,
-                    'text-gray-new-30! dark:text-gray-new-70!': activeMenuIndex !== null && !isActive,
+                    'text-gray-new-30! dark:text-gray-new-70!':
+                      activeMenuIndex !== null && !isActive,
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
                 )}

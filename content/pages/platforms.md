@@ -20,8 +20,8 @@ Neon is the best Postgres provider for deploying one-database-per-user fleets at
 - Custom branching and PITR - instant copies and rollbacks, no manual backups
 - All of this is available across multiple regions, with autoscaling and high availability
 
-<Testimonial
-text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage 300,000+ projects with minimal engineering overhead."
+<QuoteBlock
+quote="We’ve been able to automate virtually all database management tasks via the Neon API. We manage 300,000+ projects with minimal engineering overhead."
 author={{
 name: 'Himanshu Bandoth',
 company: 'Software Engineer at Retool',
@@ -87,8 +87,8 @@ You can use these to:
 
 [Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
 
-<Testimonial
-text="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
+<QuoteBlock
+quote="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
 author={{
 name: 'Edouard Bonlieu',
 company: 'co-founder and CPO at Koyeb',

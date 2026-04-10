@@ -46,6 +46,8 @@ You don’t need to pick instance sizes when creating a Neon branch: only your m
 
 When a database is not actively handling queries, Neon [automatically scales compute all the way down to zero](https://neon.com/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical.
 
+For production workloads where cold starts are not acceptable, paid plan users can disable scale to zero to keep their compute always active. See [Scale to zero](/docs/introduction/scale-to-zero).
+
 **What this means for DX**
 
 Scale to zero is a foundational capability for the Neon experience, allowing us to offer:

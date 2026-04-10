@@ -36,7 +36,7 @@ const ChangelogPost = (post) => {
         </Link>
 
         <Content
-          className="-mt-7 prose-h3:mt-[18px] prose-h3:text-lg"
+          className="prose-h3:mt-[18px] prose-h3:text-lg"
           content={content}
           withoutAnchorHeading
           isReleaseNote

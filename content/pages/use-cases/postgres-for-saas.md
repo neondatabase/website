@@ -27,8 +27,8 @@ Serverless
 **The result:**
 Teams ship faster and more efficiently, with less risk of outage during times that matter most.
 
-<Testimonial
-text="In GCP, we had to constantly think about provisioning new instances and migrating data, which added operational overhead. With Neon, we can start small and scale up. We don’t have to think about some level of operational stuff. That’s awesome."
+<QuoteBlock
+quote="In GCP, we had to constantly think about provisioning new instances and migrating data, which added operational overhead. With Neon, we can start small and scale up. We don’t have to think about some level of operational stuff. That’s awesome."
 author={{
   name: 'Paul Dlug',
   company: 'CTO of Comigo.ai',
@@ -105,8 +105,8 @@ If your SaaS project could benefit from multitenancy, Neon makes it simple to cr
 
 [Learn how to build this](/docs/guides/multitenancy)
 
-<Testimonial
-text="The ability to spawn databases that can scale down to zero is incredibly helpful and a model fits well with our one database per customer architecture"
+<QuoteBlock
+quote="The ability to spawn databases that can scale down to zero is incredibly helpful and a model fits well with our one database per customer architecture"
 author={{
   name: 'Guido Marucci',
   company: 'co-founder at Cedalio',

@@ -27,29 +27,28 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
   };
 
   return (
-    <div className="my-0 max-w-full">
+    <div className="my-0 max-w-full overflow-hidden border border-gray-new-80 dark:border-gray-new-20 [&_.code-block]:my-0 [&_.code-block]:!border-none">
       {/* Tabs above code block */}
-      <div className="relative mb-2.5 no-scrollbars flex w-full flex-nowrap gap-2 overflow-auto">
+      <div className="relative no-scrollbars flex min-h-11 w-full flex-nowrap gap-5 overflow-auto bg-gray-new-98 pl-5 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
         {displayedLabels.map((label, index) => (
-          <div
+          <button
             className={cn(
-              'relative z-10 cursor-pointer rounded-lg px-4 py-2.5 text-[13px] leading-none font-medium whitespace-nowrap transition-all duration-200',
+              'relative z-10 cursor-pointer border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-extra-tight whitespace-nowrap transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
               index === currentIndex
-                ? 'bg-black-new text-white shadow-md dark:bg-white dark:text-black-new'
-                : 'bg-gray-new-94 text-gray-new-40 hover:bg-gray-new-90 hover:text-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-70 dark:hover:bg-gray-new-20 dark:hover:text-gray-new-90'
+                ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
+                : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
             )}
             key={`lb-${index}`}
-            tabIndex="0"
-            role="button"
+            type="button"
             onClick={() => handleTabClick(index)}
             onKeyDown={() => handleTabClick(index)}
           >
             {label}
-          </div>
+          </button>
         ))}
       </div>
       {/* Code block container */}
-      <div className="overflow-hidden border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10 [&_.code-block]:my-0">
+      <div className="overflow-hidden bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
         {displayedChildren.map((child, index) => {
           if (index !== currentIndex) return null;
           return <Fragment key={index}>{child}</Fragment>;

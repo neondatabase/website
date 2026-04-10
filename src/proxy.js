@@ -17,9 +17,10 @@ const SITE_URL =
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 function isContentRoute(pathname) {
-  const path = pathname.slice(1).replace(/\/$/, ''); // strip leading + trailing slashes
+  const path = pathname.slice(1).replace(/\/$/, '');
+  const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
   return Object.keys(CONTENT_ROUTES).some(
-    (route) => path === route || path.startsWith(`${route}/`)
+    (route) => normalized === route || path.startsWith(`${route}/`)
   );
 }
 
@@ -226,5 +227,6 @@ export const config = {
     '/llms/:path*', // Legacy .txt redirect
     '/pricing', // Agent-friendly pricing page
     '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
+    '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
   ],
 };

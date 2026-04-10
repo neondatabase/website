@@ -6,11 +6,18 @@ import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 
 import DocsNavigation from '../docs-navigation';
 
 const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
-  <div className="flex h-28 w-full items-center bg-white backdrop-blur-xl after:absolute after:top-16 after:right-0 after:left-0 after:h-px after:bg-gray-new-90 dark:bg-black-pure dark:after:bg-gray-new-20 lg:h-14 lg:after:hidden">
+  <div
+    className={cn(
+      'flex h-28 w-full items-center bg-white backdrop-blur-xl dark:bg-black-pure lg:h-14',
+      'after:absolute after:top-28 after:right-0 after:left-0 after:h-px after:bg-gray-new-90 dark:after:bg-gray-new-20 lg:after:hidden',
+      'before:absolute before:top-16 before:right-0 before:left-0 before:h-px before:bg-gray-new-90 dark:before:bg-gray-new-20 lg:before:hidden'
+    )}
+  >
     <Container className="z-10 w-full" size="1920">
       <div className="flex h-16 w-full items-center justify-between lg:h-14 lg:pr-20">
         <div className="flex items-center gap-x-7">

@@ -117,11 +117,12 @@
     @apply prose-h2:mt-7 prose-h2:mb-0 prose-h2:text-[28px] prose-h2:leading-tight prose-h2:font-medium prose-h2:tracking-tighter;
     @apply prose-h3:text-xl prose-h3:leading-snug prose-h3:font-medium prose-h3:tracking-extra-tight;
     @apply prose-h4:text-lg prose-h4:leading-snug prose-h4:font-medium prose-h4:tracking-extra-tight;
-    @apply prose-p:mt-[18px] prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
+    @apply prose-p:mt-[1.125rem] prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-30 dark:prose-p:text-gray-new-80;
     @apply prose-strong:font-medium prose-strong:text-gray-new-20 dark:prose-strong:text-gray-new-90;
     @apply prose-hr:mt-8 prose-hr:mb-12 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
+    @apply prose-ol:my-3 prose-ul:my-6;
+    @apply prose-li:text-lg prose-li:tracking-tight prose-li:text-gray-new-30 dark:prose-li:text-gray-new-85;
 
-    /* Slightly less than `prose-h2:mt-7` so the first section under the page title is not too airy */
     > h2:first-child,
     > h3:first-child,
     > h4:first-child {
@@ -136,9 +137,15 @@
       @apply scroll-mt-24 lg:scroll-mt-5;
     }
 
+    p img {
+      &.no-border {
+        @apply border-0;
+      }
+    }
+
     ul,
     ol {
-      @apply my-3 list-none;
+      @apply list-none;
 
       > li {
         @apply relative my-2.5 pl-0;
@@ -150,10 +157,10 @@
     }
 
     ul {
-      @apply my-6 pl-[34px] md:pl-4;
+      @apply pl-[34px] md:pl-4;
 
       > li {
-        @apply text-[18px] leading-normal font-normal text-gray-new-30 dark:text-gray-new-85;
+        @apply text-[18px] leading-normal font-normal;
         @apply before:absolute before:top-0 before:-left-4 before:text-[18px] before:leading-normal before:font-normal before:text-gray-new-30 before:content-['-'] dark:before:text-gray-new-85 before:md:-left-3.5;
       }
     }
@@ -191,27 +198,37 @@
     }
 
     table {
-      @apply w-full leading-normal 2xl:min-w-[500px];
+      @apply my-10 w-full text-sm leading-normal 2xl:min-w-[500px];
+
+      th:first-child,
+      td:first-child {
+        @apply pl-0;
+      }
+
+      th:last-child,
+      td:last-child {
+        @apply pr-0;
+      }
 
       th {
-        @apply p-2.5 text-left align-top;
+        @apply p-3 pt-0 text-left align-top leading-snug font-medium tracking-extra-tight;
       }
 
       td {
-        @apply p-2.5;
+        @apply p-3 leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-85;
       }
 
       thead {
         @apply sticky top-0 z-10 bg-white dark:bg-black-pure;
-        
+
         tr {
-          @apply border-b border-gray-new-90 dark:border-gray-new-20;
+          @apply border-b border-gray-new-80 dark:border-gray-new-20;
         }
       }
 
       tbody {
         tr {
-          @apply border-b border-gray-new-90 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
+          @apply border-b border-gray-new-80 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
         }
       }
     }
@@ -244,7 +261,10 @@
     }
 
     :not(pre) > code {
-      @apply inline-flex items-center justify-center break-words rounded border border-gray-new-70 bg-gray-new-98 !px-1 !py-px !font-mono text-sm !font-normal leading-[1.2] tracking-extra-tight !text-black-pure dark:border-gray-new-30 dark:bg-black-new dark:!text-white;
+      @apply inline-flex items-center justify-center rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight break-words text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: normal;
 
       @apply before:hidden after:hidden;
     }
@@ -259,7 +279,7 @@
 
     iframe,
     video {
-      @apply mx-auto my-5 rounded-md;
+      @apply mx-auto my-5 border border-gray-new-90 dark:border-gray-new-20;
     }
 
     .gatsby-resp-image-wrapper {
@@ -287,11 +307,11 @@
     }
 
     details {
-      @apply relative -mb-px border border-gray-new-90 bg-transparent p-4 dark:border-gray-new-20;
+      @apply relative -mb-px border border-gray-new-80 bg-transparent p-4 dark:border-gray-new-20;
     }
 
     details summary {
-      @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-new dark:text-white;
+      @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-pure dark:text-white;
       list-style: none;
 
       @apply marker:hidden;
@@ -306,8 +326,16 @@
       transform: rotate(90deg);
     }
 
-    details > *:not(summary) {
+    details > *:not(summary):not(.code-block) {
       @apply mt-6 pl-[26px] text-base leading-normal font-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
+    }
+
+    details > * {
+      @apply prose-li:text-base prose-li:leading-snug prose-li:tracking-extra-tight;
+    }
+
+    details > .code-block {
+      @apply my-6 ml-[26px];
     }
 
     /* Ensure list items inside details have proper spacing */

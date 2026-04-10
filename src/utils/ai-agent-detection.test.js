@@ -187,9 +187,14 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should exclude /docs/changelog', () => {
+    it('should resolve /docs/changelog to custom markdown path', () => {
       const result = getMarkdownPath('/docs/changelog');
-      expect(result).toBeNull();
+      expect(result).toBe('/md/docs/changelog.md');
+    });
+
+    it('should resolve /docs/changelog.md to custom markdown path', () => {
+      const result = getMarkdownPath('/docs/changelog.md');
+      expect(result).toBe('/md/docs/changelog.md');
     });
 
     it('should resolve individual changelog entries to changelog content path', () => {
@@ -231,9 +236,9 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for /pricing', () => {
+    it('should resolve /pricing to custom markdown path', () => {
       const result = getMarkdownPath('/pricing');
-      expect(result).toBeNull();
+      expect(result).toBe('/pricing.md');
     });
   });
 
@@ -256,6 +261,26 @@ describe('getMarkdownPath', () => {
     it('should not double .md for nested paths ending with .md', () => {
       const result = getMarkdownPath('/docs/guides/logical-replication.md');
       expect(result).toBe('/md/docs/guides/logical-replication.md');
+    });
+
+    it('should map /branching.md to /md/branching.md (file may not exist)', () => {
+      const result = getMarkdownPath('/branching.md');
+      expect(result).toBe('/md/branching.md');
+    });
+
+    it('should map /guides.md to /md/guides.md (file may not exist)', () => {
+      const result = getMarkdownPath('/guides.md');
+      expect(result).toBe('/md/guides.md');
+    });
+
+    it('should map /postgresql.md to /md/postgresql.md (file may not exist)', () => {
+      const result = getMarkdownPath('/postgresql.md');
+      expect(result).toBe('/md/postgresql.md');
+    });
+
+    it('should map /programs.md to /md/pages/programs.md (file may not exist)', () => {
+      const result = getMarkdownPath('/programs.md');
+      expect(result).toBe('/md/pages/programs.md');
     });
   });
 });
