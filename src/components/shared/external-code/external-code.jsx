@@ -48,6 +48,7 @@ const ExternalCode = async ({
           className
         )}
         data-line-numbers={showLineNumbers}
+        copyCode={text}
         copyButtonClassName={copyButtonClassName}
         {...otherProps}
       >
