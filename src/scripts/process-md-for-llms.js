@@ -1841,14 +1841,15 @@ function buildNavigationFooter(slug, navMap) {
 
 /**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line. Includes the location line
- * only if the page is in the navigation map with breadcrumbs.
+ * Always includes the documentation index line and feedback instruction.
+ * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
- * @returns {string} Header block (1-2 lines in a blockquote, followed by blank line)
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap) {
+function buildPageHeader(slug, navMap, relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -1867,6 +1868,15 @@ function buildPageHeader(slug, navMap) {
 
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+
+  // Feedback instruction (always, with page path baked in when available)
+  const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
+  const feedbackBody = pagePath
+    ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
+    : `{"feedback": "describe the issue"}`;
+  lines.push(
+    `> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to ${BASE_URL}/api/docs-feedback with ${feedbackBody}`
+  );
 
   return `${lines.join('\n')}\n\n`;
 }
@@ -1902,7 +1912,7 @@ function addNavigationContext(content, relativePath, navMap) {
   const slug = getNavSlug(relativePath);
 
   // Page header (always added -- index line for all pages, location line when in nav map)
-  const header = buildPageHeader(slug, navMap);
+  const header = buildPageHeader(slug, navMap, relativePath);
   let result = header + content;
 
   // Navigation footer (only for pages in the nav map)
@@ -1922,7 +1932,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
