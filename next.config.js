@@ -646,6 +646,11 @@ const defaultConfig = {
         destination: '/docs/introduction',
         permanent: true,
       },
+      {
+        source: '/neon-on-azure',
+        destination: '/docs/guides/neon-azure-integration',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

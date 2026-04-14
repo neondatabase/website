@@ -8,7 +8,9 @@ const readYaml = (filePath) => yaml.load(fs.readFileSync(filePath, 'utf-8'));
 // Strips legacy <p> wrappers from WP-migrated quotes.
 const formatQuote = (quote) => {
   if (!quote) return '';
-  return String(quote).replace(/<\/?p>/g, '').trim();
+  return String(quote)
+    .replace(/<\/?p>/g, '')
+    .trim();
 };
 
 export const getUseCasesData = () => {
@@ -90,5 +92,17 @@ export const getCaseStudiesCategories = () => {
     ];
   } catch (_e) {
     return [{ name: 'All', slug: 'all' }];
+  }
+};
+
+export const getTopbarData = () => {
+  try {
+    const topbar = readYaml(path.join(process.cwd(), 'content/config/topbar.yaml'));
+
+    if (!topbar || typeof topbar !== 'object') return null;
+
+    return topbar;
+  } catch (_e) {
+    return null;
   }
 };

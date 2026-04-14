@@ -33,6 +33,7 @@
     "test:unit:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@emotion/memoize": "0.7.4",
     "@codemirror/lang-sql": "^6.9.1",
     "@headlessui/react": "^2.2.9",
     "@headlessui/tailwindcss": "^0.2.2",
@@ -147,7 +148,6 @@
     "shiki": "^1.1.1",
     "svgo-loader": "^4.0.0",
     "tailwindcss": "^4.2.1",
-    "turndown": "^7.2.4",
     "url-loader": "^4.1.1",
     "vitest": "^4.0.2"
   }
