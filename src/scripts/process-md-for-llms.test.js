@@ -69,6 +69,44 @@ describe('MDX to Markdown Conversion', () => {
       expect(result).not.toContain('<FeatureBeta');
     });
 
+    it('should expand AzureRegionsDeprecation shared content', async () => {
+      const inputPath = 'content/docs/introduction/regions.md';
+      const pageUrl = 'https://neon.com/docs/introduction/regions';
+      const projectRoot = process.cwd();
+
+      const result = await processFile(inputPath, pageUrl, projectRoot);
+
+      expect(result).toContain('Azure regions');
+      expect(result).toContain('April 7, 2026');
+      expect(result).not.toContain('<AzureRegionsDeprecation');
+    });
+
+    it('should expand ConsumptionAccountApiDeprecation shared content', async () => {
+      const inputPath = 'content/docs/guides/consumption-limits.md';
+      const pageUrl = 'https://neon.com/docs/guides/consumption-limits';
+      const projectRoot = process.cwd();
+
+      const result = await processFile(inputPath, pageUrl, projectRoot);
+
+      expect(result).toContain('consumption_history/account');
+      expect(result).toContain('deprecated');
+      expect(result).not.toContain('<ConsumptionAccountApiDeprecation');
+    });
+
+    it('should unwrap QuoteBlocksWrapper and preserve all quotes', async () => {
+      const inputPath = 'content/pages/use-cases/dev-test.md';
+      const pageUrl = 'https://neon.com/use-cases/dev-test';
+      const projectRoot = process.cwd();
+
+      const result = await processFile(inputPath, pageUrl, projectRoot);
+
+      expect(result).not.toContain('<QuoteBlocksWrapper');
+      expect(result).not.toContain('</QuoteBlocksWrapper>');
+      expect(result).toContain('Jonathan Reyes');
+      expect(result).toContain('Léonard Henriquez');
+      expect(result).toContain('Alex Co');
+    });
+
     it('should convert TwoColumnLayout in reference docs', async () => {
       const inputPath = 'content/docs/auth/reference/nextjs-server.md';
       const pageUrl = 'https://neon.com/docs/auth/reference/nextjs-server';
@@ -92,7 +130,7 @@ describe('MDX to Markdown Conversion', () => {
   // Test specific component conversions with inline MDX
   describe('Component conversions', () => {
     // Helper to process inline MDX content
-    async function processInlineMdx(mdxContent, pageUrl = 'https://neon.com/test') {
+    async function processInlineMdx(mdxContent, pageUrl = 'https://neon.com/test', rootDir) {
       const tempPath = '/tmp/test-mdx-conversion.md';
       const fullContent = `---
 title: Test
@@ -100,7 +138,7 @@ title: Test
 
 ${mdxContent}`;
       await fs.writeFile(tempPath, fullContent);
-      return processFile(tempPath, pageUrl);
+      return processFile(tempPath, pageUrl, rootDir);
     }
 
     it('should convert Admonition to bold label', async () => {
@@ -326,13 +364,54 @@ ${mdxContent}`;
       expect(result).not.toContain('<MegaLink');
     });
 
-    it('should convert QuoteBlock to blockquote with attribution', async () => {
+    it('should convert QuoteBlock with string slug to blockquote with title-cased name', async () => {
       const result = await processInlineMdx(`
 <QuoteBlock quote="Neon is amazing for serverless." author="jane-doe" role="CTO at Startup" />
 `);
       expect(result).toContain('> Neon is amazing for serverless.');
-      expect(result).toContain('> — jane-doe, CTO at Startup');
+      expect(result).toContain('> — Jane Doe, CTO at Startup');
+      expect(result).not.toContain('jane-doe');
       expect(result).not.toContain('<QuoteBlock');
+    });
+
+    it('should resolve QuoteBlock slug from quote-block.jsx map', async () => {
+      const result = await processInlineMdx(
+        `
+<QuoteBlock quote="Fast provisioning." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
+`,
+        'https://neon.com/test',
+        process.cwd()
+      );
+      expect(result).toContain('> — Lincoln Bergeson, Infrastructure Engineer at Replit');
+      expect(result).not.toContain('lincoln-bergeson');
+    });
+
+    it('should convert QuoteBlock with object author', async () => {
+      const result = await processInlineMdx(`
+<QuoteBlock quote="Branching is great." author={{ name: 'Jane Doe', company: 'Acme Corp' }} />
+`);
+      expect(result).toContain('> Branching is great.');
+      expect(result).toContain('> — Jane Doe, Acme Corp');
+      expect(result).not.toContain('name:');
+      expect(result).not.toContain('<QuoteBlock');
+    });
+
+    it('should include QuoteBlock link prop as case study link', async () => {
+      const result = await processInlineMdx(`
+<QuoteBlock quote="Scales well." author="some-person" role="Engineer" link="/blog/case-study" />
+`);
+      expect(result).toContain('[Read case study](https://neon.com/blog/case-study)');
+    });
+
+    it('should handle QuoteBlock with object author and link in real file', async () => {
+      const inputPath = 'content/pages/use-cases/dev-test.md';
+      const pageUrl = 'https://neon.com/use-cases/dev-test';
+      const result = await processFile(inputPath, pageUrl, process.cwd());
+
+      expect(result).toContain('— Jonathan Reyes, Principal Engineer at Dispatch');
+      expect(result).not.toContain("name: 'Jonathan Reyes'");
+      expect(result).toContain('Read case study');
+      expect(result).toContain('https://neon.com/blog/');
     });
 
     it('should convert Testimonial to blockquote', async () => {

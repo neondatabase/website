@@ -119,7 +119,7 @@ See existing handlers in the code for examples of each pattern.
 | Admonition                                                         | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
 | CodeTabs                                                           | `Tab: label` + code blocks                                                                       |
 | Tabs/TabItem                                                       | `Tab: label` + content (labels from parent Tabs)                                                 |
-| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, FeatureList | Container -- extracts children                                                                   |
+| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |
 | DetailIconCards                                                    | Bullet list with links and descriptions                                                          |
 | TechCards                                                          | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
 | DocsList                                                           | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
@@ -128,7 +128,7 @@ See existing handlers in the code for examples of each pattern.
 | TwoColumnLayout.\*                                                 | Section headings with method signatures                                                          |
 | LinkPreview                                                        | Link with optional preview text                                                                  |
 | MegaLink                                                           | `**tag** title [Learn more](url)`                                                                |
-| QuoteBlock                                                         | Blockquote with attribution                                                                      |
+| QuoteBlock                                                         | Blockquote with attribution (object or slug author), optional case-study link                    |
 | Testimonial                                                        | Blockquote with author name/company                                                              |
 | YoutubeIframe                                                      | `Watch on YouTube: url`                                                                          |
 | CommunityBanner                                                    | Text + link                                                                                      |
@@ -137,7 +137,7 @@ See existing handlers in the code for examples of each pattern.
 | ProgramForm                                                        | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 
