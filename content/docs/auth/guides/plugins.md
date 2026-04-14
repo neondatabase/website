@@ -28,10 +28,11 @@ The following Better Auth plugins are currently supported in Neon Auth:
 | [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                    |
 | [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                    |
 | [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported                                    |
 | [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
 | [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
 
-For more runnable Neon Auth samples, see [Example applications](/docs/auth/overview#example-applications). The **Organization** plugin demo is **[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)**; see the [Organization plugin](/docs/auth/guides/plugins/organization) page for context.
+For more runnable Neon Auth samples, see [Example applications](/docs/auth/overview#example-applications). The **Organization** plugin demo is **[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** and the **Magic Link** demo is **[neon-auth-magic-link-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-magic-link-example)**.
 
 For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
 

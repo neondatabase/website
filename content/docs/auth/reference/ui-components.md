@@ -58,6 +58,7 @@ function App() {
 | `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                                  | `avatar={{ size: 256, extension: 'webp' }}`              |
 | `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings                           | See example below                                        |
 | `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                                              | `credentials={{ forgotPassword: true }}`                 |
+| `magicLink`                  | `boolean`                | Enable passwordless magic link sign-in option                            | `magicLink`                                              |
 
 ### Enable OAuth Providers
 
@@ -212,6 +213,35 @@ import '@neondatabase/auth-ui/css';
 
 function App() {
   return <AuthView pathname="sign-in" />;
+}
+```
+
+### Next.js App Router
+
+Create a route file at `app/auth/[path]/page.tsx` to render `AuthView` for sign-in, sign-up, and other auth views:
+
+```tsx
+import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { authViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return Object.values(authViewPaths).map((path) => ({ path }));
+}
+
+export default async function AuthPage({
+  params,
+}: {
+  params: Promise<{ path: string }>;
+}) {
+  const { path } = await params;
+
+  return (
+    <main className="flex min-h-screen items-center justify-center p-4">
+      <AuthView path={path} />
+    </main>
+  );
 }
 ```
 

@@ -144,14 +144,14 @@ The `user` object fields are all optional and vary by event. Available fields: `
 
 | Field        | Type         | Description                                   |
 | ------------ | ------------ | --------------------------------------------- |
-| `link_type`  | string       | `"email-verification"` or `"forget-password"` |
+| `link_type`  | string       | `"sign-in"`, `"email-verification"`, or `"forget-password"` |
 | `link_url`   | string       | Full verification URL with embedded token     |
 | `token`      | string       | Raw token for building custom redirect URLs   |
 | `expires_at` | ISO datetime | Expiry time                                   |
 | `ip_address` | string       | Requester's IP address                        |
 | `user_agent` | string       | Requester's user agent                        |
 
-Magic links do not include a `delivery_preference` field. Your webhook handler determines the delivery channel.
+The `"sign-in"` link type is sent when a user signs in via the [Magic Link plugin](/docs/auth/guides/plugins/magic-link). Magic links do not include a `delivery_preference` field. Your webhook handler determines the delivery channel.
 
 ### `user.before_create` and `user.created` event data
 

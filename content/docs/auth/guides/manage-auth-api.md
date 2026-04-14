@@ -133,6 +133,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/email_and_password` | GET, PATCH               | Configure email/password authentication                      |
 | `/users`              | POST, DELETE, PUT        | Create, delete, and manage user roles                        |
 | `/plugins`            | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins) |
+| `/plugins/magic-link` | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link) |
 | `/webhooks`           | GET, PUT                 | Configure webhook notifications                              |
 | `/allow_localhost`    | GET, PATCH               | Toggle localhost access for development                      |
 | `/send_test_email`    | POST                     | Send a test email to verify email configuration              |
