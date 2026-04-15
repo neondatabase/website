@@ -421,6 +421,16 @@
     .wp-block-table {
       @apply md:-mx-4 md:overflow-x-auto md:px-4;
     }
+
+    .table-wrapper {
+      @apply max-h-none! overflow-x-auto!;
+    }
+
+    .table-wrapper table,
+    .wp-block-table table {
+      table-layout: fixed !important;
+      overflow-wrap: break-word !important;
+    }
   }
 
   .prose-variable {
