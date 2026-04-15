@@ -241,6 +241,7 @@ Keep these constraints in mind when building automation with the Neon API:
 - You **cannot delete** a branch that has child branches. Delete all children first.
 - Creating a new role **may drop existing connections** to the active compute endpoint.
 - A branch can have only one `read_write` endpoint but multiple `read_only` endpoints.
+- Neon limits overlapping **operations** on a project. One response may still list several operations when they belong to the same request. Requests that try to schedule new work while conflicting operations are still running return `423 Locked`. Retry with exponential backoff, or poll for completion first. See [Handle concurrent operation errors](/docs/manage/operations#handle-concurrent-operation-errors).
 - Operations older than 6 months may be removed from Neon's systems.
 
 ## SDKs and tools

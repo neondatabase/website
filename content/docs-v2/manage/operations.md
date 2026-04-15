@@ -338,4 +338,54 @@ For attribute definitions, find the [Get operation details](https://api-docs.neo
 
 Possible operation `status` values include: `scheduling`, `running`, `finished`, `failed`, `cancelling`, `cancelled`, and `skipped`. Only `finished`, `skipped`, and `cancelled` are **terminal statuses**, meaning the operation will not proceed further from these states. Note that `failed` is **not** terminal, as an operation in a `failed` state can still be retried.
 
+## Handle concurrent operation errors
+
+Neon limits overlapping operations on a project. One API response can still list several operations (for example `create_branch` and `start_compute`) when they are part of the same request. If you try to start more work while the project is already busy with conflicting operations, the API returns **`423 Locked`**.
+
+This can happen when:
+
+- Your own API requests overlap. For example, creating a branch before a previous branch creation has finished.
+- A system-initiated operation is running, such as a [platform maintenance](/docs/manage/platform-maintenance) task or a periodic [availability check](#view-operations).
+
+Following [Poll operation status](#poll-operation-status) limits conflicts from your own overlapping requests. You can still get `423` if a system-initiated operation starts between your poll and your next call, so keep [retry handling](#retry-with-exponential-backoff) as a fallback.
+
+### Retry with exponential backoff
+
+If the API returns **`423 Locked`**, retry the same request after a short wait, increasing the delay between attempts (exponential backoff), and stop after a maximum number of tries. The example below starts at 0.1 seconds and doubles the wait on each attempt, up to five attempts.
+
+```bash
+#!/usr/bin/env bash
+# Retries a create-branch request when the response is 423 Locked.
+# Set PROJECT_ID and NEON_API_KEY. Replace br-main-abc123 with a parent branch id from your project.
+
+MAX_RETRIES=5
+DELAY=0.1  # 100 msec
+
+for ATTEMPT in $(seq 1 "$MAX_RETRIES"); do
+  response=$(curl -s -w "\n%{http_code}" \
+    "https://console.neon.tech/api/v2/projects/${PROJECT_ID}/branches" \
+    -H 'Accept: application/json' \
+    -H "Authorization: Bearer ${NEON_API_KEY}" \
+    -H 'Content-Type: application/json' \
+    -d '{"endpoints":[{"type":"read_write"}],"branch":{"parent_id":"br-main-abc123"}}')
+
+  http_code=$(echo "$response" | tail -n1)
+  body=$(echo "$response" | sed '$d')
+
+  if [ "$http_code" != "423" ]; then
+    echo "$body"
+    exit 0
+  fi
+
+  echo "Project locked, retrying in ${DELAY}s (attempt ${ATTEMPT}/${MAX_RETRIES})..." >&2
+  sleep "$DELAY"
+  DELAY=$(awk -v d="$DELAY" 'BEGIN { printf "%.10g", d * 2 }')
+done
+
+echo "Max retries reached" >&2
+exit 1
+```
+
+Replace `br-main-abc123` with a branch id from your project. See [Create a branch with the API](/docs/manage/branches#create-a-branch-with-the-api) for the full request shape.
+
 <NeedHelp/>
