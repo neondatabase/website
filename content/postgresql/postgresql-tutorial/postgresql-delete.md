@@ -157,7 +157,7 @@ PostgreSQL returns the following deleted row:
 
 ### 3\) Using PostgreSQL DELETE to delete multiple rows from the table
 
-The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the value in the completed column `true` and return deleted rows:
+The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the completed column `true` and return deleted rows:
 
 ```sql
 DELETE FROM todos
