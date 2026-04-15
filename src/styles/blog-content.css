@@ -253,7 +253,7 @@
       }
     }
 
-    .wp-block-separator {
+    hr {
       @apply border-gray-new-20;
     }
   }
