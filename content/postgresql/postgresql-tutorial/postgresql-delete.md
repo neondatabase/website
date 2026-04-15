@@ -54,7 +54,7 @@ WHERE condition
 RETURNING id;
 ```
 
-If you delete data from a table based on data from another table, you can use the [DELETE JOIN](postgresql-delete-join) statement.
+If you want to delete data from a table based on data from another table, you can use the [DELETE JOIN](postgresql-delete-join) statement.
 
 To delete data that have a [foreign key](postgresql-foreign-key) relationship, you use the `ON DELETE CASCADE` option.
 
