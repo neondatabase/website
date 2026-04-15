@@ -431,6 +431,10 @@
       table-layout: fixed !important;
       overflow-wrap: break-word !important;
     }
+
+    .anchor-heading span > svg {
+      display: none;
+    }
   }
 
   .prose-variable {
