@@ -68,6 +68,8 @@ const SHARED_CONTENT_COMPONENTS = {
   NextSteps: 'next-steps',
   NewPricing: 'new-pricing',
   EarlyAccess: 'early-access',
+  AzureRegionsDeprecation: 'azure-regions-deprecation',
+  ConsumptionAccountApiDeprecation: 'consumption-account-api-deprecation',
 };
 
 /**
@@ -159,6 +161,62 @@ function getAttr(node, name) {
   }
 
   return undefined;
+}
+
+/**
+ * Parse an object-style author attribute from an MDX JSX node.
+ * Handles author={{ name: '...', company: '...' }} expressions.
+ * @returns {{ name: string, company: string }} or null if not an object expression
+ */
+function parseAuthorObject(node, attrName = 'author') {
+  const attr = node.attributes?.find((a) => a.type === 'mdxJsxAttribute' && a.name === attrName);
+  if (!attr || attr.value?.type !== 'mdxJsxAttributeValueExpression') return null;
+
+  const expr = attr.value.value || '';
+  const nameMatch = expr.match(/name:\s*['"]([^'"]+)['"]/);
+  const companyMatch = expr.match(/company:\s*['"]([^'"]+)['"]/);
+
+  if (!nameMatch && !companyMatch) return null;
+  return { name: nameMatch ? nameMatch[1] : '', company: companyMatch ? companyMatch[1] : '' };
+}
+
+/**
+ * QuoteBlock slug-to-name map, loaded once from the React component source.
+ */
+let quoteBlockNameMap = null;
+
+function loadQuoteBlockNameMap() {
+  if (quoteBlockNameMap) return quoteBlockNameMap;
+  quoteBlockNameMap = new Map();
+
+  if (!projectRoot) return quoteBlockNameMap;
+
+  const filePath = path.join(projectRoot, 'src/components/shared/quote-block/quote-block.jsx');
+  try {
+    const source = fsSync.readFileSync(filePath, 'utf-8');
+    const regex = /'([^']+)':\s*\{\s*name:\s*'([^']+)'/g;
+    let match;
+    while ((match = regex.exec(source)) !== null) {
+      quoteBlockNameMap.set(match[1], match[2]);
+    }
+  } catch {
+    // File not found (e.g. tests without full repo) — title-case fallback will handle it
+  }
+
+  return quoteBlockNameMap;
+}
+
+/**
+ * Resolve a slug like "lincoln-bergeson" to a human name.
+ * Tries the quote-block map first, then falls back to title-casing.
+ */
+function resolveAuthorSlug(slug) {
+  const map = loadQuoteBlockNameMap();
+  if (map.has(slug)) return map.get(slug);
+  return slug
+    .split('-')
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(' ');
 }
 
 /**
@@ -298,7 +356,11 @@ function loadSharedContent(templateName, props = {}) {
     return [];
   }
 
-  const templatePath = path.join(projectRoot, 'content/docs-v2/shared-content', `${templateName}.md`);
+  const templatePath = path.join(
+    projectRoot,
+    'content/docs-v2/shared-content',
+    `${templateName}.md`
+  );
 
   // Check cache first
   let rawContent = sharedContentCache.get(templatePath);
@@ -306,7 +368,7 @@ function loadSharedContent(templateName, props = {}) {
     try {
       rawContent = fsSync.readFileSync(templatePath, 'utf-8');
       sharedContentCache.set(templatePath, rawContent);
-    } catch (err) {
+    } catch (_err) {
       console.warn(`Shared content not found: ${templatePath}`);
       return [];
     }
@@ -1132,22 +1194,45 @@ const componentHandlers = {
 
   /**
    * QuoteBlock -> blockquote with attribution
-   * <QuoteBlock quote="..." author="name" role="title" />
+   * Supports author={{ name, company }} objects and author="slug" + role="..." strings.
+   * String slugs are resolved to human names via the quote-block.jsx map.
+   * Optional link prop emits a "Read case study" link.
    */
   QuoteBlock(node) {
-    const quote = getAttr(node, 'quote');
-    const author = getAttr(node, 'author') || '';
-    const role = getAttr(node, 'role') || '';
-
+    const quote = getAttr(node, 'quote') || getAttr(node, 'text') || '';
     if (!quote) return null;
 
     const children = [{ type: 'paragraph', children: [{ type: 'text', value: quote }] }];
 
-    if (author || role) {
-      const attribution = [author, role].filter(Boolean).join(', ');
+    // Try object author first (author={{ name: '...', company: '...' }})
+    const parsed = parseAuthorObject(node, 'author');
+    if (parsed && (parsed.name || parsed.company)) {
+      const attribution = [parsed.name, parsed.company].filter(Boolean).join(', ');
       children.push({
         type: 'paragraph',
         children: [{ type: 'text', value: `— ${attribution}` }],
+      });
+    } else {
+      // Fall back to string author + role
+      const authorSlug = getAttr(node, 'author') || '';
+      const role = getAttr(node, 'role') || '';
+      if (authorSlug || role) {
+        const authorName = authorSlug ? resolveAuthorSlug(authorSlug) : '';
+        const attribution = [authorName, role].filter(Boolean).join(', ');
+        children.push({
+          type: 'paragraph',
+          children: [{ type: 'text', value: `— ${attribution}` }],
+        });
+      }
+    }
+
+    // Include link prop as "Read case study" link
+    const link = getAttr(node, 'link');
+    if (link) {
+      const url = link.startsWith('/') ? `https://neon.com${link}` : link;
+      children.push({
+        type: 'paragraph',
+        children: [{ type: 'link', url, children: [{ type: 'text', value: 'Read case study' }] }],
       });
     }
 
@@ -1162,22 +1247,11 @@ const componentHandlers = {
     const text = getAttr(node, 'text');
     if (!text) return null;
 
-    // author is an object expression, try to parse it
-    let authorName = '';
-    let company = '';
-    const authorAttr = node.attributes?.find((a) => a.name === 'author');
-    if (authorAttr?.value?.type === 'mdxJsxAttributeValueExpression') {
-      const expr = authorAttr.value.value || '';
-      const nameMatch = expr.match(/name:\s*['"]([^'"]+)['"]/);
-      const companyMatch = expr.match(/company:\s*['"]([^'"]+)['"]/);
-      if (nameMatch) authorName = nameMatch[1];
-      if (companyMatch) company = companyMatch[1];
-    }
-
+    const parsed = parseAuthorObject(node, 'author');
     const children = [{ type: 'paragraph', children: [{ type: 'text', value: text }] }];
 
-    if (authorName || company) {
-      const attribution = [authorName, company].filter(Boolean).join(', ');
+    if (parsed && (parsed.name || parsed.company)) {
+      const attribution = [parsed.name, parsed.company].filter(Boolean).join(', ');
       children.push({
         type: 'paragraph',
         children: [{ type: 'text', value: `— ${attribution}` }],
@@ -1198,6 +1272,13 @@ const componentHandlers = {
    * TestimonialsWrapper -> container, extract children
    */
   TestimonialsWrapper(node) {
+    return node.children || null;
+  },
+
+  /**
+   * QuoteBlocksWrapper -> same as TestimonialsWrapper (carousel UI; emit all children for LLMs)
+   */
+  QuoteBlocksWrapper(node) {
     return node.children || null;
   },
 
@@ -1302,7 +1383,6 @@ function transformNode(node) {
     }
 
     // Unknown component - preserve with label and warn
-    // eslint-disable-next-line no-console
     console.warn(`[LLM Processor] Unknown component: <${componentName}>`);
     unknownComponents.push({ name: componentName, file: currentFile || 'unknown' });
 
@@ -1602,7 +1682,6 @@ async function prefetchExternalCode(content) {
     if (result.content) {
       externalCodeCache.set(result.url, result.content);
     } else {
-      // eslint-disable-next-line no-console
       console.warn(
         `[LLM Processor] Failed to fetch external code: ${result.url} (${result.error})`
       );
@@ -1717,6 +1796,7 @@ function clearState() {
   processingErrors.length = 0;
   externalCodeCache.clear();
   sharedContentCache.clear();
+  quoteBlockNameMap = null;
   navigationMap = null;
 }
 
@@ -1845,14 +1925,15 @@ function buildNavigationFooter(slug, navMap) {
 
 /**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line. Includes the location line
- * only if the page is in the navigation map with breadcrumbs.
+ * Always includes the documentation index line and feedback instruction.
+ * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
- * @returns {string} Header block (1-2 lines in a blockquote, followed by blank line)
+ * @param {string} [relativePath] - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap) {
+function buildPageHeader(slug, navMap, relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -1871,6 +1952,15 @@ function buildPageHeader(slug, navMap) {
 
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+
+  // Feedback instruction (always, with page path baked in when available)
+  const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
+  const feedbackBody = pagePath
+    ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
+    : `{"feedback": "describe the issue"}`;
+  lines.push(
+    `> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to ${BASE_URL}/api/docs-feedback with ${feedbackBody}`
+  );
 
   return `${lines.join('\n')}\n\n`;
 }
@@ -1906,7 +1996,7 @@ function addNavigationContext(content, relativePath, navMap) {
   const slug = getNavSlug(relativePath);
 
   // Page header (always added -- index line for all pages, location line when in nav map)
-  const header = buildPageHeader(slug, navMap);
+  const header = buildPageHeader(slug, navMap, relativePath);
   let result = header + content;
 
   // Navigation footer (only for pages in the nav map)
@@ -1926,7 +2016,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
@@ -1959,7 +2049,6 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
         await fs.writeFile(outputPath, result);
         console.log(`✓ ${relativePath}`);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(`✗ ${relativePath}: ${error.message}`);
         processingErrors.push({ file: inputPath, error: error.message });
       }

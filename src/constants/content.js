@@ -19,13 +19,7 @@ const CONTENT_ROUTES = {
   programs: PROGRAMS_DIR_PATH,
 };
 
-const EXCLUDED_ROUTES = [
-  'docs/changelog',
-  'guides',
-  'branching',
-  'use-cases/multi-tb',
-  'use-cases/serverless-apps',
-];
+const EXCLUDED_ROUTES = ['guides', 'branching', 'use-cases/multi-tb', 'use-cases/serverless-apps'];
 
 const EXCLUDED_FILES = ['rss.xml'];
 

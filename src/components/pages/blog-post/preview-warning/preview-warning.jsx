@@ -17,7 +17,6 @@ const PreviewBar = () => {
         throw new Error('Something went wrong while exiting preview mode');
       }
     } catch (error) {
-      /* eslint-disable no-console */
       console.error(error);
     }
   }, [router]);

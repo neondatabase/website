@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-14T03:21:15.120Z'
+updatedOn: '2026-04-03T12:00:00.000Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -361,7 +361,7 @@ Use snapshots (branches) for versions you want to keep beyond the [restore windo
 <Admonition type="important">
 **Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
 
-**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
+**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
 </Admonition>
 
 Example creating a snapshot:
@@ -465,6 +465,8 @@ This workflow prevents common issues like development data contaminating product
 ## Monitoring and billing
 
 ### Track usage per project
+
+<ConsumptionAccountApiDeprecation/>
 
 You can use the Neon API to retrieve consumption metrics for your organizations and projects using these endpoints:
 

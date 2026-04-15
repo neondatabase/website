@@ -104,7 +104,6 @@ const Mermaid = ({ chart, className }) => {
         setSvg(renderedSvg);
         setError(null);
       } catch (err) {
-        // eslint-disable-next-line
         console.error('Mermaid rendering error:', err);
         setError(err.message);
       }

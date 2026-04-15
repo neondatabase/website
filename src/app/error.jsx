@@ -13,7 +13,6 @@ import SEO_DATA from 'constants/seo-data';
 */
 const ErrorPage = ({ error, reset }) => {
   useEffect(() => {
-    // eslint-disable-next-line no-console
     console.error(error);
   }, [error]);
 

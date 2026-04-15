@@ -7,7 +7,7 @@ summary: >-
   manage projects, branches, databases, and other resources within the Neon
   platform, simplifying API interactions and resource management.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.266Z'
+updatedOn: '2026-04-03T12:00:00.000Z'
 ---
 
 <InfoBlock>
@@ -471,6 +471,8 @@ To give you a better overview of the SDK, here are some of the key methods avail
 - `restartProjectEndpoint(projectId: string, endpointId: string)`: Restarts an endpoint.
 
 ### Retrieve Consumption Metrics
+
+<ConsumptionAccountApiDeprecation/>
 
 - `getConsumptionHistoryPerAccount(query: GetConsumptionHistoryPerAccountParams)`: Retrieves account consumption metrics.
 - `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.

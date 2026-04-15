@@ -48,13 +48,14 @@ const ExternalCode = async ({
           className
         )}
         data-line-numbers={showLineNumbers}
+        copyCode={text}
         copyButtonClassName={copyButtonClassName}
         {...otherProps}
       >
         {parse(html)}
       </CodeBlockWrapper>
     );
-  } catch (error) {
+  } catch (_error) {
     return <FallbackMessage url={url} />;
   }
 };

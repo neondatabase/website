@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
@@ -14,7 +13,6 @@ import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
-// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -27,8 +25,7 @@ import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
-import Testimonial from 'components/pages/use-case/testimonial';
-import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
+import QuoteBlocksWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
@@ -82,8 +79,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       <table {...props} />
     </div>
   ),
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  undefined: (props) => <Fragment {...props} />,
+  undefined: (props) => <>{props.children}</>,
   pre: (props) => {
     const codeElement = props?.children;
     const code = codeElement?.props?.children;
@@ -105,6 +101,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
+    // AVIF/WebP optimization can flatten PNG/GIF alpha to black; keep originals for local /docs/ rasters.
+    const unoptimizedPreserveAlpha =
+      typeof src === 'string' && /^\/docs\/.+\.(png|gif)$/i.test(src);
+
     // No zoom on PostgreSQLTutorial Images
     if (!isPostgres) {
       return (
@@ -116,10 +116,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
               isTemplate && 'rounded-lg'
             )}
             src={src}
-            width={isReleaseNote ? 762 : 796}
-            height={isReleaseNote ? 428 : 447}
+            width={704}
+            height={447}
             style={{ width: '100%', height: '100%' }}
             title={title !== 'no-border' ? title : undefined}
+            unoptimized={unoptimizedPreserveAlpha}
             {...rest}
           />
           {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
@@ -165,6 +166,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DefinitionList,
   FeatureList,
   Admonition,
+  Callout,
   CodeTabs,
   DetailIconCards,
   TechCards,
@@ -183,8 +185,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   LatencyCalculator,
   // TODO: revert to CTA: isTemplate ? CtaBlock : DocCta when design is ready
   CTA: (props) => <DocCta isTemplate={isTemplate} {...props} />,
-  Testimonial,
-  TestimonialsWrapper,
+  QuoteBlocksWrapper,
   UseCaseList,
   UseCaseContext,
   ComputeCalculator,
@@ -204,7 +205,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ...sharedComponents,
 });
 
-// eslint-disable-next-line no-return-assign
 const Content = ({
   className = null,
   content,

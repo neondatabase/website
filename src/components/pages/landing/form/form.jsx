@@ -158,7 +158,7 @@ const Form = ({
           setErrorMessage('Please reload the page and try again');
         }, loadingAnimationStartedTime);
       }
-    } catch (error) {
+    } catch (_error) {
       doNowOrAfterSomeTime(() => {
         setState(FORM_STATES.ERROR);
         setErrorMessage('Please reload the page and try again');

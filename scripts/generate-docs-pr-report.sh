@@ -91,12 +91,114 @@ cat > "$REPORT" << EOF
 
 EOF
 
+# Git pull results (populated by update_monitored_repos)
+GIT_PULL_OK=()
+GIT_PULL_FAIL=()
+GIT_PULL_SKIP=()
+
+# Run git pull on each monitored repo and record outcome (uses process substitution
+# so arrays persist; a plain pipe to while would run in a subshell on bash 3.2).
+update_monitored_repos() {
+    local name path_raw path err_file err_line
+    while IFS=$'\t' read -r name path_raw; do
+        path=$(echo "$path_raw" | sed "s|^~|$REPOS_BASE|")
+        if [[ ! -d "$path" ]]; then
+            GIT_PULL_SKIP+=("$name - path not found: $path")
+            continue
+        fi
+        if [[ ! -d "$path/.git" ]]; then
+            GIT_PULL_SKIP+=("$name - not a git repository")
+            continue
+        fi
+        err_file=$(mktemp)
+        if (cd "$path" && git pull --quiet 2>"$err_file"); then
+            GIT_PULL_OK+=("$name")
+        else
+            err_line=$(head -n 1 "$err_file" 2>/dev/null | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            if [[ -n "$err_line" ]]; then
+                GIT_PULL_FAIL+=("$name - $err_line")
+            else
+                GIT_PULL_FAIL+=("$name - git pull failed")
+            fi
+        fi
+        rm -f "$err_file"
+    done < <(jq -r '.repos[] | [.name, .path] | @tsv' "$CONFIG_FILE")
+}
+
+# Append git pull status section to the markdown report (call after main report body is written).
+append_git_pull_status_to_report() {
+    local out="$1"
+    {
+        echo ""
+        echo "---"
+        echo ""
+        echo "## Repository \`git pull\` status"
+        echo ""
+        echo "Each monitored repository was updated with \`git pull\` on the current branch before commits were analyzed."
+        echo ""
+        if [[ ${#GIT_PULL_OK[@]} -gt 0 ]]; then
+            echo "### Pulled successfully (${#GIT_PULL_OK[@]})"
+            echo ""
+            for r in "${GIT_PULL_OK[@]}"; do
+                echo "- **$r**"
+            done
+            echo ""
+        fi
+        if [[ ${#GIT_PULL_FAIL[@]} -gt 0 ]]; then
+            echo "### Pull failed (${#GIT_PULL_FAIL[@]})"
+            echo ""
+            for r in "${GIT_PULL_FAIL[@]}"; do
+                echo "- $r"
+            done
+            echo ""
+        fi
+        if [[ ${#GIT_PULL_SKIP[@]} -gt 0 ]]; then
+            echo "### Skipped (${#GIT_PULL_SKIP[@]})"
+            echo ""
+            for r in "${GIT_PULL_SKIP[@]}"; do
+                echo "- $r"
+            done
+            echo ""
+        fi
+    } >> "$out"
+}
+
+# Print git pull summary to stdout (after the report file is complete).
+print_git_pull_status_console() {
+    echo ""
+    echo "======================================"
+    echo "Git pull summary"
+    echo "======================================"
+    echo "OK:      ${#GIT_PULL_OK[@]}"
+    echo "Failed:  ${#GIT_PULL_FAIL[@]}"
+    echo "Skipped: ${#GIT_PULL_SKIP[@]}"
+    if [[ ${#GIT_PULL_OK[@]} -gt 0 ]]; then
+        echo ""
+        echo "Pulled successfully:"
+        for r in "${GIT_PULL_OK[@]}"; do
+            echo "  - $r"
+        done
+    fi
+    if [[ ${#GIT_PULL_FAIL[@]} -gt 0 ]]; then
+        echo ""
+        echo "Pull failed:"
+        for r in "${GIT_PULL_FAIL[@]}"; do
+            echo "  - $r"
+        done
+    fi
+    if [[ ${#GIT_PULL_SKIP[@]} -gt 0 ]]; then
+        echo ""
+        echo "Skipped:"
+        for r in "${GIT_PULL_SKIP[@]}"; do
+            echo "  - $r"
+        done
+    fi
+    echo ""
+}
+
 # Update all repos
 echo "Updating repositories..."
-jq -r '.repos[] | "\(.path)"' "$CONFIG_FILE" | while read -r path; do
-    path=$(echo "$path" | sed "s|^~|$REPOS_BASE|")
-    [ -d "$path/.git" ] && (cd "$path" && git pull --quiet 2>/dev/null) || true
-done
+update_monitored_repos
 echo ""
 
 REPO_COUNT=$(jq '.repos | length' "$CONFIG_FILE")
@@ -455,6 +557,8 @@ if [ ${#REPOS_WITHOUT_RELEASES[@]} -gt 0 ]; then
     echo "" >> "$REPORT"
 fi
 
+append_git_pull_status_to_report "$REPORT"
+
 echo ""
 echo "======================================"
 echo "✅ Report Generated"
@@ -465,3 +569,4 @@ echo "Open report: [docs-pr-report-$TIMESTAMP.md](file://$REPORT)"
 echo ""
 echo "Releases: $FOUND_RELEASES"
 echo "Repos with releases: ${#REPOS_WITH_RELEASES[@]}/$REPO_COUNT"
+print_git_pull_status_console

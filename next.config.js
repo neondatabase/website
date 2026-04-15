@@ -658,6 +658,15 @@ const defaultConfig = {
       destination: `/md/${route}/:path*.md`,
     }));
 
+    // /:path*.md above requires at least one segment after the route name,
+    // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    const indexRewrites = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        destination: `/md/${route}.md`,
+      }));
+
     return {
       // beforeFiles: serve static files from public/docs/ before the
       // docs/[...slug] catch-all intercepts them
@@ -665,7 +674,10 @@ const defaultConfig = {
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Keep versioned llms-full fallback until per-version full artifacts are generated.
-        { source: '/docs/:version(v[0-9]+|latest)/llms-full.txt', destination: '/docs/llms-full.txt' },
+        {
+          source: '/docs/:version(v[0-9]+|latest)/llms-full.txt',
+          destination: '/docs/llms-full.txt',
+        },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -676,6 +688,7 @@ const defaultConfig = {
         // Versioned docs currently use the same markdown artifacts as the default docs version.
         { source: '/docs/:version(v[0-9]+|latest)/:path*.md', destination: '/md/docs/:path*.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
+        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

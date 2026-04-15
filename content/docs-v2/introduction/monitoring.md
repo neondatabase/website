@@ -27,6 +27,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitor-query-performance" description="View and analyze query performance for your Neon database" icon="research">Query performance</a>
 
+<a href="/docs/data-api/database-advisor" description="Detect Data API security and performance issues, in the console or via API" icon="warning">Data API Advisors</a>
+
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with pg_stat_statements" icon="metrics">pg_stat_statements</a>
 
 </DetailIconCards>

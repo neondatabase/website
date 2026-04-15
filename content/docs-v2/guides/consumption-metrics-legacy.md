@@ -7,8 +7,10 @@ summary: >-
   (active time, compute time, written data, synthetic storage). For usage-based
   plans, use Query consumption metrics instead.
 enableTableOfContents: true
-updatedOn: '2026-02-16T13:09:07.968Z'
+updatedOn: '2026-04-03T12:00:00.000Z'
 ---
+
+<ConsumptionAccountApiDeprecation/>
 
 Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. You can call these endpoints on **legacy plans** (Scale, Business, Enterprise) or **usage-based plans** (Launch, Scale, Agent, Enterprise). The difference is that they only return **legacy metrics** (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics instead.
 
@@ -20,7 +22,7 @@ Using the Neon API, you can query consumption metrics with the legacy endpoints:
 Issuing calls to these APIs does not wake a project's compute endpoints.
 
 <Admonition type="tip">
-**Which API should I use?** For metrics that match your **invoice** on a usage-based plan, use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. Use the endpoints on this page when you need **legacy metrics** (for example, on a legacy plan or for compatibility). Legacy endpoints can be called on any paid plan but always return legacy metrics only.
+**Which API should I use?** For metrics that match your **invoice** on a usage-based plan, use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. For a guide to converting those metrics into billing units and calculating costs, see [Usage and cost calculations](/docs/introduction/usage-calculations). Use the endpoints on this page when you need **legacy metrics** (for example, on a legacy plan or for compatibility). Legacy endpoints can be called on any paid plan but always return legacy metrics only.
 </Admonition>
 
 ## Request overview

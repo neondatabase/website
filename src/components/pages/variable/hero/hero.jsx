@@ -12,7 +12,7 @@ const Hero = () => (
     </p>
     <div className="prose-doc">
       <Admonition type="note" title="TL;DR">
-        <p>If your app has variable traffic, here's how Neon can save you time and money:</p>
+        <p>If your app has variable traffic, here&apos;s how Neon can save you time and money:</p>
         <ul>
           <li>
             Databases autoscale. CPU and memory scale up and down automatically. When you see

@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-console */
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
@@ -20,9 +18,10 @@ const SITE_URL =
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 function isContentRoute(pathname) {
-  const path = pathname.slice(1).replace(/\/$/, ''); // strip leading + trailing slashes
+  const path = pathname.slice(1).replace(/\/$/, '');
+  const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
   return Object.keys(CONTENT_ROUTES).some(
-    (route) => path === route || path.startsWith(`${route}/`)
+    (route) => normalized === route || path.startsWith(`${route}/`)
   );
 }
 
@@ -157,6 +156,48 @@ export async function proxy(req) {
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
     // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
     if (isContentRoute(pathname)) {
+      if (pathname.endsWith('.md')) {
+        const markdownPath = getMarkdownPath(pathname);
+
+        if (markdownPath) {
+          try {
+            const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+            const response = await fetch(markdownUrl);
+
+            if (response.ok) {
+              const markdown = await response.text();
+              return applyDocHeaders(
+                new NextResponse(markdown, {
+                  status: 200,
+                  headers: {
+                    'Content-Type': 'text/markdown; charset=utf-8',
+                    'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                    'X-Content-Source': 'markdown',
+                    'X-Robots-Tag': 'noindex',
+                  },
+                })
+              );
+            }
+
+            if (response.status === 404) {
+              return applyDocHeaders(
+                new NextResponse(buildAgent404Response(pathname), {
+                  status: 404,
+                  headers: {
+                    'Content-Type': 'text/markdown; charset=utf-8',
+                    'Cache-Control': 'public, max-age=60, s-maxage=300',
+                    'X-Content-Source': 'md-404',
+                    'X-Robots-Tag': 'noindex',
+                  },
+                })
+              );
+            }
+          } catch (error) {
+            console.error('[.md] Error serving markdown', { pathname, error: error.message });
+          }
+        }
+      }
+
       const response = NextResponse.next();
       applyDocHeaders(response, pathname, { includeVary: false });
       if (pathname.endsWith('.md')) {
@@ -205,6 +246,8 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/llms/:path*', // Legacy .txt redirect
+    '/pricing', // Agent-friendly pricing page
     '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
+    '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
   ],
 };

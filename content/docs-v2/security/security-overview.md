@@ -2,13 +2,14 @@
 title: Security overview
 summary: >-
   Covers the security measures implemented by Neon, including SSL/TLS encryption
-  for secure connections, password enforcement with 60-bit entropy, and the use
-  of a proxy to protect against unauthorized access.
+  for secure connections, password enforcement with 60-bit entropy, abuse of
+  resources and unauthorized modifications policy, and the use of a proxy to
+  protect against unauthorized access.
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-02-15T20:51:54.267Z'
+updatedOn: '2026-04-09T18:00:00.000Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -119,11 +120,17 @@ To avoid leaking secrets, follow these security best practices:
 
 If you have questions about this integration or need help securing your credentials, contact us at `security@neon.tech`.
 
+## Abuse of resources
+
+Users must not engage in activities that result in unintended or non-permitted use of Neon resources, or that disrupt or degrade the service for other users. Prohibited activities include, but are not limited to, intentional or unintentional denial-of-service attacks, exceeding [rate limits](/docs/reference/api-reference#rate-limiting), using Neon for distributed computing projects, using Neon as general-purpose file storage, or other usage that falls outside the intended resource usage and limits of the applicable [Neon plan](/docs/introduction/plans).
+
+## Unauthorized modifications
+
+Tampering with Neon's infrastructure, configurations, or any restricted settings is prohibited. Doing so will be considered a violation of our terms. This includes attempts to alter Neon-managed serverless configurations or storage settings without proper authorization.
+
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](/security.txt) file.
-
-Neon also has a [private bug bounty program with Hackerone](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 

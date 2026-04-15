@@ -13,7 +13,7 @@ updatedOn: '2026-02-27T19:55:46.377Z'
 <Admonition type="note" title="Snapshots in Beta">
 The **Snapshots** feature is now in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
-**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
+**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.

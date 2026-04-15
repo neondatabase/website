@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 

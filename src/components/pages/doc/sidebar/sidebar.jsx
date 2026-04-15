@@ -81,6 +81,9 @@ const Sidebar = ({
   }, [menu]);
 
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+  const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
+  const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
+  const hasBorder = !isGuidesRoute;
 
   if (isChangelogIndex) {
     return null;
@@ -100,10 +103,13 @@ const Sidebar = ({
   }
 
   return (
-    <aside className={cn('relative -mt-11', className)}>
+    <aside className={cn('relative -mt-12', className)}>
       <div className="sticky top-28">
         <nav
-          className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-2.5 pr-8 pt-4 dark:border-gray-new-20"
+          className={cn(
+            'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
+            hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
+          )}
           ref={navRef}
         >
           {showVersionSwitcher && supportsVersioningForSlug && (

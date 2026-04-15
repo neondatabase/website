@@ -6,7 +6,7 @@ summary: >-
   and analytics in Postgres, utilizing BM25 indexing for high-relevance results
   and advanced text search capabilities.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:42:16.419Z'
+updatedOn: '2026-04-03T12:00:00.000Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -16,7 +16,11 @@ redirectFrom:
 
 <Admonition type="warning" title="Neon's support for pg_search has been deprecated.">
 
-As of March 19, 2026, `pg_search` is no longer available for new Neon projects. Depending on your use case, consider these alternatives:
+As of March 19, 2026, `pg_search` is no longer available for new Neon projects.
+
+**If you already use `pg_search`:** you will continue to have access to the extension on existing projects. Our team will contact you to discuss alternative options and deprecation timelines. You do not need to take action before we reach out.
+
+Depending on your use case, consider these alternatives:
 
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
 - **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching

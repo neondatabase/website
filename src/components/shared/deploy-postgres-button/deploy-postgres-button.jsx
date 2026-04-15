@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Button from 'components/shared/button';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';

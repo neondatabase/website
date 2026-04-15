@@ -9,14 +9,10 @@ summary: >-
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.208Z'
+updatedOn: '2026-03-30T12:00:00.000Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
-
-<Admonition type="tip" title="Quick guidance">
-If you can't afford downtime, use [Logical Replication](/docs/guides/logical-replication-guide). For Postgres databases under 10GB with some downtime flexibility, [Import Data Assistant](/docs/import/import-data-assistant) is the easiest option. For larger Postgres databases where downtime is acceptable, choose between [pg_dump/restore](/docs/import/migrate-from-postgres) (simplest) or [pgcopydb](/docs/import/pgcopydb) (fastest).
-</Admonition>
 
 ## Migration methods
 
@@ -28,6 +24,14 @@ If you can't afford downtime, use [Logical Replication](/docs/guides/logical-rep
 | [Logical Replication](/docs/guides/logical-replication-guide) | Production Postgres workloads          | Any size      | Near-zero               | High            | Minimal downtime              |
 | [pgloader](#provider-specific-guides)                         | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
 | [AWS DMS](/docs/import/migrate-aws-dms)                       | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
+
+<Admonition type="tip" title="Quick guidance">
+If you can't afford downtime, use [Logical Replication](/docs/guides/logical-replication-guide). For Postgres databases under 10GB with some downtime flexibility, [Import Data Assistant](/docs/import/import-data-assistant) is the easiest option. For larger Postgres databases where downtime is acceptable, choose between [pg_dump/restore](/docs/import/migrate-from-postgres) (simplest) or [pgcopydb](/docs/import/pgcopydb) (fastest).
+</Admonition>
+
+## Region migration
+
+If you need your Neon **database** in a different **region**, or a **Postgres-compatible export** from Neon, start with **[Region migration](/docs/import/region-migration)** for paths and tradeoffs. For **Neon-to-Neon** moves, use **[Migrate to another Neon region](/docs/import/migrate-neon-to-another-region)**. A project stays in one region; you create a **new** Neon project in the target region and migrate your **data**, or export. For a **piped** `pg_dump | pg_restore` between Neon projects, see **[Migrate data from another Neon project](/docs/import/migrate-from-neon)**.
 
 ## Provider-specific guides
 

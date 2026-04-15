@@ -19,7 +19,6 @@ const getAllPosts = async () => {
         content,
       } = data;
 
-      // eslint-disable-next-line consistent-return
       return {
         title,
         subtitle,

@@ -91,7 +91,7 @@ const SubscriptionForm = ({ title, description }) => {
             setErrorMessage('Please reload the page and try again');
           }, loadingAnimationStartedTime);
         }
-      } catch (error) {
+      } catch (_error) {
         doNowOrAfterSomeTime(() => {
           setFormState(STATES.ERROR);
           setErrorMessage('Please reload the page and try again');

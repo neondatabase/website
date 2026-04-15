@@ -1,7 +1,6 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import LinkPreview from 'components/pages/doc/link-preview';
 import Link from 'components/shared/link';

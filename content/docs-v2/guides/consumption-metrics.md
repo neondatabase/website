@@ -13,13 +13,11 @@ enableTableOfContents: true
 updatedOn: '2026-02-16T13:09:07.969Z'
 ---
 
-Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans.
+Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
 | API                               | Endpoint                           | Description                                                                                                                            | Plan availability                |
 | --------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
-
-Issuing calls to this API does not wake a project's compute endpoints.
 
 <Admonition type="tip">
 **Which API should I use?** If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use the [project metrics API](#request-overview) below; it is the only endpoint that returns metrics matching your invoice. You can also call the [legacy APIs](/docs/guides/consumption-metrics-legacy) (account and project) on usage-based or legacy plans, but they only return legacy metrics and will not match your invoice on a usage-based plan.
@@ -39,15 +37,17 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/projects
 
 The response includes metrics that map directly to usage-based billing line items:
 
-| Metric                           | Unit    | Description                                                        |
-| -------------------------------- | ------- | ------------------------------------------------------------------ |
-| `compute_unit_seconds`           | Seconds | Compute usage measured in compute unit seconds                     |
-| `root_branch_bytes_month`        | Bytes   | Storage consumed by root branches                                  |
-| `child_branch_bytes_month`       | Bytes   | Storage consumed by child branches (delta from parent)             |
-| `instant_restore_bytes_month`    | Bytes   | Change history storage for point-in-time restore                   |
-| `public_network_transfer_bytes`  | Bytes   | Data transfer over the public internet                             |
-| `private_network_transfer_bytes` | Bytes   | Data transfer over private networks (for example, AWS PrivateLink) |
-| `extra_branches_month`           | Count   | Extra branches beyond your plan's included allowance               |
+| Metric                           | Raw unit     | Billing unit   | Description                                                        |
+| -------------------------------- | ------------ | -------------- | ------------------------------------------------------------------ |
+| `compute_unit_seconds`           | CU-seconds   | CU-hours       | CPU time weighted by compute size                                  |
+| `root_branch_bytes_month`        | byte-hours   | GB-months      | Storage consumed by root branches                                  |
+| `child_branch_bytes_month`       | byte-hours   | GB-months      | Storage consumed by child branches (delta from parent)             |
+| `instant_restore_bytes_month`    | byte-hours   | GB-months      | Instant restore (PITR) history storage                             |
+| `public_network_transfer_bytes`  | bytes        | GB             | Data transfer over the public internet                             |
+| `private_network_transfer_bytes` | bytes        | GB             | Data transfer over private networks (for example, AWS PrivateLink) |
+| `extra_branches_month`           | branch-hours | branch-months  | All child branches per hour (subtract plan allowance before billing) |
+
+To convert these raw values into human-readable billing units and calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
 ### Required parameters
 
@@ -55,6 +55,7 @@ The response includes metrics that map directly to usage-based billing line item
 - **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days, and 1 year, respectively.
 - **`org_id`** (string, required): Organization for which the project consumption metrics should be returned.
+- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 
 ### Date format, range, and granularity
 
@@ -72,7 +73,6 @@ Date-time values are automatically rounded according to the specified granularit
 
 ### Optional parameters
 
-- **`metrics`** (array of strings): List of metrics to include in the response. If omitted, all metrics are returned. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 - **`project_ids`** (array of strings, 0-100 items): Filter to specific project IDs. If omitted, the response contains all projects. Can be an array of parameter values or a comma-separated list in a single parameter value.
 - **`limit`** (integer, 1-100): Number of projects in the response. Default: `10`.
 - **`cursor`** (string): Cursor value from the previous response to get the next batch of projects.
@@ -160,7 +160,7 @@ curl --request GET \
 </details>
 
 <Admonition type="tip">
-You can also query individual metrics by specifying only the ones you need in the `metrics` parameter.
+You can also query individual metrics by specifying only the ones you need in the `metrics` parameter. Metrics with a value of zero for a given timeframe may be omitted from the response.
 </Admonition>
 
 For full API details including all parameters and response schema, see [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2). To build a request for a custom time range, use the prompt below with an AI assistant.
@@ -171,13 +171,13 @@ The following sections cover paging through many projects, polling behavior, and
 
 ## Pagination
 
-The project consumption metrics endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value (the project ID of the last project in the list). To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, and `granularity` as your first request.
+The project consumption metrics endpoint uses cursor-based pagination. The response includes a `pagination` object with a `cursor` value (the project ID of the last project in the list). To get the next page, send another request with that `cursor` in the query string and the same `from`, `to`, `granularity`, `org_id`, and `metrics` as your first request.
 
 Example request for the next page (using the `cursor` from the previous response):
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID' \
+     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```

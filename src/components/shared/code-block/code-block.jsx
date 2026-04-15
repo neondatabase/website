@@ -36,7 +36,9 @@ const CodeBlock = async ({
   const meta = children?.props?.meta || '';
   const filename = getFileNameFromMeta(meta);
   const trackingLabel = getTrackingLabelFromMeta(meta);
-  const code = children?.props?.children?.trim() || '';
+  const code = (
+    typeof children?.props?.children === 'string' ? children.props.children : ''
+  ).trim();
   const html = await highlight(code, language, meta);
 
   return (
@@ -49,6 +51,7 @@ const CodeBlock = async ({
       filename={filename}
       language={language}
       trackingLabel={trackingLabel}
+      copyCode={code}
       data-line-numbers={meta?.includes('showLineNumbers')}
       copyButtonClassName={copyButtonClassName}
       {...otherProps}

@@ -25,7 +25,7 @@ const getAuthor = (id) => {
     }
 
     throw new Error(`Author with ID '${id}' not found.`);
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 };
@@ -44,7 +44,6 @@ const getAllGuides = async () => {
       } = data;
       const authorData = getAuthor(author);
 
-      // eslint-disable-next-line consistent-return
       return {
         title,
         subtitle,

@@ -19,7 +19,6 @@ const getAllPosts = async (docsContentPath = DOCS_DIR_PATH) => {
         data: { title, subtitle, isDraft, redirectFrom },
         content,
       } = data;
-      // eslint-disable-next-line consistent-return
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
     .filter(Boolean)
@@ -74,7 +73,6 @@ const getAllChangelogs = async () => {
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
 
-      // eslint-disable-next-line consistent-return
       return {
         title: title || content.match(/# (.*)/)?.[1],
         slug: slugWithoutFirstSlash,

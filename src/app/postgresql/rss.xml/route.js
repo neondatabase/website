@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
 import { POSTGRESQL_BASE_PATH } from 'constants/docs';

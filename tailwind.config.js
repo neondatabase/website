@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 

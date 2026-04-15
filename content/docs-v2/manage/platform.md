@@ -7,7 +7,7 @@ summary: >-
   Covers the management of user access, project resources, and collaboration
   within the Neon platform, including account types, permissions, project setup,
   and database management.
-updatedOn: '2026-02-06T22:07:33.120Z'
+updatedOn: '2026-04-09T18:30:00.000Z'
 ---
 
 ## Access & collaboration

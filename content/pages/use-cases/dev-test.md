@@ -25,36 +25,36 @@ Try this workflow in Neon right away. You can follow the steps [in this guide](/
 
 ---
 
-<TestimonialsWrapper>
+<QuoteBlocksWrapper>
 
-<Testimonial
-text="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
+<QuoteBlock
+quote="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
 author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
 />
 
-<Testimonial
-text="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
+<QuoteBlock
+quote="When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production."
 author={{
   name: 'Léonard Henriquez',
   company: 'Co-founder and CTO, Topo.io',
 }}
-url="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
+link="/blog/why-topo-io-switched-from-amazon-rds-to-neon"
 />
 
-<Testimonial
-text="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
+<QuoteBlock
+quote="RDS becomes a bottleneck if you don’t have full-time DevOps dedicated to it."
 author={{
   name: 'Joey Teunissen',
   company: 'CTO at OpusFlow',
 }}
-url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers"
+link="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers"
 />
 
-</TestimonialsWrapper>
+</QuoteBlocksWrapper>
 
 **Provisioning instances is slow. Once they're live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
 
@@ -70,27 +70,27 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 ---
 
-<TestimonialsWrapper>
+<QuoteBlocksWrapper>
 
-<Testimonial
-text="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away"
+<QuoteBlock
+quote="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away"
 author={{
   name: 'Alex Co',
   company: 'Head of Platform Engineering at Mindvalley',
 }}
-url="/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches"
+link="/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches"
 />
 
-<Testimonial
-text="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments."
+<QuoteBlock
+quote="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments."
 author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
 />
 
-</TestimonialsWrapper>
+</QuoteBlocksWrapper>
 
 We get it—migrating a production database is a big project, but you can still improve your non-pod experience by moving your dev/test environments to Neon.
 
@@ -212,26 +212,26 @@ textSize="md"
 
 Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling).\*\*
 
-<TestimonialsWrapper>
-  
-<Testimonial
-text="Neon worked out of the box, handling hundreds of Lambdas without any connection issues. On top of that, Neon costs us 1/6 of what we were paying with AWS."
+<QuoteBlocksWrapper>
+
+<QuoteBlock
+quote="Neon worked out of the box, handling hundreds of Lambdas without any connection issues. On top of that, Neon costs us 1/6 of what we were paying with AWS."
 author={{
   name: 'Cody Jenkins',
   company: 'Head of Engineering at Invenco',
 }}
 />
 
-<Testimonial
-text="We had to overprovision our database to handle our spiky traffic, and even then, the writer database would get overwhelmed. We provision 10x more than we need on average to keep things running smoothly."
+<QuoteBlock
+quote="We had to overprovision our database to handle our spiky traffic, and even then, the writer database would get overwhelmed. We provision 10x more than we need on average to keep things running smoothly."
 author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon"
+link="/blog/how-dispatch-speeds-up-development-with-neon"
 />
 
-</TestimonialsWrapper>
+</QuoteBlocksWrapper>
 
 ## Get Started in Two Steps
 

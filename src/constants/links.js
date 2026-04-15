@@ -69,6 +69,8 @@ export default {
   terms: '/terms-of-service',
   privacy: '/privacy-policy',
   privacyPolicy: '/privacy-policy',
+  modernSlaveryStatement: 'https://www.databricks.com/legal/modern-slavery-policy-statement',
+  californiaPolicy: '/privacy-policy#california-privacy-rights',
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',

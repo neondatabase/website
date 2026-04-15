@@ -134,7 +134,6 @@ const getWpPostsByCategorySlug = cache(async (slug) => {
   const first = isProduction ? BLOG_POSTS_PER_PAGE : BLOG_POSTS_FOR_PREVIEW;
 
   while (true) {
-    // eslint-disable-next-line no-await-in-loop
     const { nodes: posts, pageInfo } = await fetchWpPostsByCategorySlug(slug, first, afterCursor);
 
     allPosts = allPosts.concat(posts);

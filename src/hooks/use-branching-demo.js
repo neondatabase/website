@@ -32,7 +32,6 @@ export default function useBranchingDemo() {
       const result = await apiCall('size', { branchId });
       setDatabaseSize(result.size);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('[Database Size] Error:', error);
     } finally {
       setIsSizeLoading(false);

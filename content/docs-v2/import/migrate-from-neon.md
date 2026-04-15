@@ -1,39 +1,25 @@
 ---
 title: Migrate data from another Neon project
 summary: >-
-  Covers the migration of a database between Neon projects using `pg_dump` and
-  `pg_restore`, including considerations for connection types, Postgres version
-  upgrades, and alternative migration methods.
+  Migrate between Neon projects by piping `pg_dump` to `pg_restore`, a compact
+  option for smaller databases and CLI workflows. Also covers alternatives
+  (Import Data Assistant, separate dump and restore, logical replication).
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2026-02-06T22:07:33.071Z'
+updatedOn: '2026-04-01T20:00:00.000Z'
 ---
 
-This guide describes how to migrate a database from one Neon project to another by piping data from `pg_dump` to `pg_restore`.
+This guide describes how to migrate a database from one Neon project to another by **piping** output from **`pg_dump`** straight into **`pg_restore`** (`pg_dump ... | pg_restore ...`). That runs the dump and restore in one step without writing an intermediate dump file on disk.
 
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
-</Admonition>
-
-Use these instructions to:
-
-- Import a database from a Neon project created in one region to a project created in another region.
-- Import a database from a Neon project created with one Postgres version to a Neon project created with another Postgres version.
-
-<Admonition type="tip">
-
-You can also use these alternative methods to migrate data between Neon projects:
-
-- **Import Data Assistant**: A fast and simple option for databases under 10 GB. See [Import Data Assistant](/docs/import/import-data-assistant).
-- **Logical replication**: Move your data from one Neon project to another. Consider this option for large databases requiring near-zero downtime. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
-
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 </Admonition>
 
 ## Important considerations
 
-- **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications. We also recommend familiarizing yourself with the changes in the new version of Postgres, especially those affecting compatibility. For information about those changes, please refer to the official Postgres [Release 15](https://www.postgresql.org/docs/release/15.0/) or [Release 16](https://www.postgresql.org/docs/16/release-16.html) documentation.
-- **Piping considerations**: Piping is not recommended for large datasets, as it is susceptible to failures during lengthy migration operations (see [Pipe pg_dump to pg_restore](/docs/import/migrate-from-postgres#pipe-pgdump-to-pgrestore) for more information). If your dataset is large, we recommend performing the dump and restore as separate operations. For instructions, see [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
+- **Upgrading the Postgres version**: When upgrading to a new version of Postgres, always test thoroughly before migrating your production systems or applications.
+- **Piping considerations**: Piping simplifies the operation, but for large or complex datasets, we highly recommend a **separate** dump and restore. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
 ## Import data from another project
 
@@ -45,7 +31,7 @@ To import your data from another Neon project:
 
 3. Retrieve the connection strings for the new and existing Neon databases.
 
-   You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Connections strings have this format:
+   You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Connection strings have this format:
 
    ```bash shouldWrap
    postgresql://[user]:[password]@[neon_hostname]/[dbname]
@@ -73,6 +59,8 @@ To import your data from another Neon project:
    - `-d`: Specifies the database name or connection string.
 
 5. Run the command from your terminal or command window.
-6. If you no longer require the old project, you can remove it. See [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
+6. Run some test queries on the target database to ensure everything imported correctly.
+7. Switch the connection string in your app to point to your new Neon database.
+8. If you no longer need the old Neon project, you can remove it. See [Delete a project](/docs/manage/projects#delete-a-project) for instructions.
 
 <NeedHelp/>

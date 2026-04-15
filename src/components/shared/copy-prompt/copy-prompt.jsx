@@ -46,7 +46,7 @@ const CopyPrompt = (props) => {
         width={188}
         height={90}
       />
-      <div className="relative z-10 max-w-[440px] flex-1 text-xl leading-tight font-medium tracking-extra-tight break-words whitespace-pre-line text-black-pure dark:text-white">
+      <div className="relative z-10 max-w-[440px] flex-1 text-xl leading-tight font-medium tracking-extra-tight wrap-break-word whitespace-pre-line text-black-pure dark:text-white">
         {description}
       </div>
       <Button

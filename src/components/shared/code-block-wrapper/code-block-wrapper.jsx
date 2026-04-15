@@ -39,13 +39,16 @@ const CodeBlockWrapper = ({
   filename = null,
   language = null,
   trackingLabel = null,
+  copyCode = null,
   children,
   as: Tag = 'figure',
   ...otherProps
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
+  // copyCode bypasses extractTextFromNode, which can't traverse RSC lazy chunks in children
+  const code =
+    copyCode ?? extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
   const isSingleLineCode = code.trimEnd().split('\n').length === 1;
   let copyButtonTopClassName = 'top-4';
 
@@ -109,6 +112,7 @@ CodeBlockWrapper.propTypes = {
   filename: PropTypes.string,
   language: PropTypes.string,
   trackingLabel: PropTypes.string,
+  copyCode: PropTypes.string,
   children: PropTypes.node,
   as: PropTypes.string,
 };

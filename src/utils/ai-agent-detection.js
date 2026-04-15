@@ -41,6 +41,17 @@ export function isAIAgentRequest(request) {
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
 
+// Paths where the generic CONTENT_ROUTES resolver produces the wrong markdown
+// path (or no path at all). Maps directly to the correct static file in public/.
+const CUSTOM_MARKDOWN_PATHS = {
+  pricing: '/pricing.md',
+  'docs/changelog': '/md/docs/changelog.md',
+};
+
+// Paths under content routes that are static files in public/ (not generated into public/md/).
+// The middleware should pass these through so Next.js serves them directly.
+const STATIC_DOC_PREFIXES = ['docs/ai/'];
+
 // Convert URL path to markdown file path
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
@@ -66,9 +77,16 @@ export function getMarkdownPath(pathname) {
 
   if (isExcluded) return null;
 
-  // Find the matching route
+  if (STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix))) return null;
+
+  // Normalize .md suffix so /branching.md matches the branching route
+  const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
+
+  if (CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized])
+    return CUSTOM_MARKDOWN_PATHS[path] || CUSTOM_MARKDOWN_PATHS[normalized];
+
   const matchedRoute = Object.keys(CONTENT_ROUTES).find(
-    (route) => normalizedPath === route || normalizedPath.startsWith(`${route}/`)
+    (route) => normalized === route || path.startsWith(`${route}/`)
   );
 
   if (!matchedRoute) return null;
@@ -79,7 +97,7 @@ export function getMarkdownPath(pathname) {
   const publicPath = contentPath.replace('content/', '/md/');
 
   // Extract slug after the matched route
-  const slug = normalizedPath === matchedRoute ? '' : normalizedPath.replace(`${matchedRoute}/`, '');
+  const slug = normalized === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
   const mdSlug = slug.endsWith('.md') ? slug : `${slug}.md`;
 
   // Build the full public path: /md/{directory}/{slug}.md

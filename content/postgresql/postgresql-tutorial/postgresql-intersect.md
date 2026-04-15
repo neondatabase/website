@@ -135,7 +135,7 @@ Output:
 (2 rows)
 ```
 
-The result set returns one film that appears on both tables.
+The result set returns two films that appear on both tables.
 
 ### 2\) Using the INTERSECT operator with ORDER BY clause example
 

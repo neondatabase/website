@@ -136,7 +136,7 @@ offset
         setHighlightedJsOwnAuth(jsHtmlOwn);
         setHighlightedCurl(curlHtml);
         setHighlightedHttp(httpHtml);
-      } catch (e) {
+      } catch (_e) {
         // silently ignore highlight errors
       }
     };
@@ -177,13 +177,21 @@ offset
                 'HTTP',
               ]}
             >
-              <CodeBlockWrapper>{parse(highlightedJsNeonAuth || '')}</CodeBlockWrapper>
+              <CodeBlockWrapper copyCode={jsOutputNeonAuth}>
+                {parse(highlightedJsNeonAuth || '')}
+              </CodeBlockWrapper>
 
-              <CodeBlockWrapper>{parse(highlightedJsOwnAuth || '')}</CodeBlockWrapper>
+              <CodeBlockWrapper copyCode={jsOutputOwnAuth}>
+                {parse(highlightedJsOwnAuth || '')}
+              </CodeBlockWrapper>
 
-              <CodeBlockWrapper>{parse(highlightedCurl || '')}</CodeBlockWrapper>
+              <CodeBlockWrapper copyCode={curlOutput}>
+                {parse(highlightedCurl || '')}
+              </CodeBlockWrapper>
 
-              <CodeBlockWrapper>{parse(highlightedHttp || '')}</CodeBlockWrapper>
+              <CodeBlockWrapper copyCode={httpOutput}>
+                {parse(highlightedHttp || '')}
+              </CodeBlockWrapper>
             </CodeTabs>
           )}
         </div>

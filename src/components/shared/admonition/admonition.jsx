@@ -42,7 +42,7 @@ const themes = {
 };
 
 const textClassName =
-  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm';
+  'admonition-text mt-2.5 text-base leading-normal tracking-extra-tight text-gray-new-20 dark:text-gray-new-85 [&_a]:rounded-sm [&_li]:text-base [&_li]:leading-snug [&_li]:tracking-extra-tight [&_ul]:my-0 [&_ol]:my-0';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type === 'comingSoon' ? 'Coming soon' : type;
@@ -59,7 +59,9 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
     >
       <div className={cn('flex items-center gap-1', theme.titleClassName)}>
         <Icon width={16} height={16} className="shrink-0" />
-        <h4 className="font-mono text-[13px] font-medium uppercase">{title || typeText}</h4>
+        <h4 className="font-mono text-[13px] leading-none font-medium -tracking-snug uppercase">
+          {title || typeText}
+        </h4>
       </div>
       {asHTML ? (
         <div className={textClassName} dangerouslySetInnerHTML={{ __html: children }} />

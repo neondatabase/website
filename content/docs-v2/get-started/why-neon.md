@@ -28,6 +28,8 @@ Neon is built on a distributed, cloud-native architecture that separates storage
 
 ## What makes Neon different
 
+<YoutubeIframe embedId="wLAeC-r4kfE" />
+
 ### Serverless Postgres, built from first principles
 
 Neon isn’t “Postgres-like”: it is Postgres, with full compatibility across ORMs, extensions, and frameworks. But Neon’s defining characteristic lies in its architecture, which translates into serverless behavior that isn’t layered on but foundational to the system.

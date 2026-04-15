@@ -119,7 +119,7 @@ See existing handlers in the code for examples of each pattern.
 | Admonition                                                         | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
 | CodeTabs                                                           | `Tab: label` + code blocks                                                                       |
 | Tabs/TabItem                                                       | `Tab: label` + content (labels from parent Tabs)                                                 |
-| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, FeatureList | Container -- extracts children                                                                   |
+| Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |
 | DetailIconCards                                                    | Bullet list with links and descriptions                                                          |
 | TechCards                                                          | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
 | DocsList                                                           | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
@@ -128,7 +128,7 @@ See existing handlers in the code for examples of each pattern.
 | TwoColumnLayout.\*                                                 | Section headings with method signatures                                                          |
 | LinkPreview                                                        | Link with optional preview text                                                                  |
 | MegaLink                                                           | `**tag** title [Learn more](url)`                                                                |
-| QuoteBlock                                                         | Blockquote with attribution                                                                      |
+| QuoteBlock                                                         | Blockquote with attribution (object or slug author), optional case-study link                    |
 | Testimonial                                                        | Blockquote with author name/company                                                              |
 | YoutubeIframe                                                      | `Watch on YouTube: url`                                                                          |
 | CommunityBanner                                                    | Text + link                                                                                      |
@@ -137,7 +137,7 @@ See existing handlers in the code for examples of each pattern.
 | ProgramForm                                                        | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 
@@ -159,7 +159,7 @@ Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown
 
 `src/utils/ai-agent-detection.js` detects AI agents by Accept header (`text/markdown`) and User-Agent patterns (`chatgpt`, `openai`, `claude`, `anthropic`, `cursor`, `windsurf`, `perplexity`, `copilot`, `axios`, `got`). The middleware has layered error handling (outer try-catch, inner try-catch for fetch, 404 fallback to HTML).
 
-Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `docs/changelog`, `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not.
+Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not. `docs/changelog` is handled via `CUSTOM_MARKDOWN_PATHS` and serves the full generated changelog markdown.
 
 ## Legacy /llms/\*.txt Redirects
 
@@ -221,7 +221,7 @@ curl -s http://localhost:3001/llms.txt | head -5
 ## Known Issues
 
 - Near-empty files for `docs/shared-content/*` (template snippets, not standalone pages)
-- Near-empty `docs/changelog.md` (content is dynamic, already excluded from serving)
+- `docs/changelog.md` is generated by the build and served via `CUSTOM_MARKDOWN_PATHS`
 - AI summary generation not implemented (would require OpenAI API)
 - SDK components (SdkStackApp, etc.) not implemented (legacy StackAuth, not needed)
 - ~1,400 files process in ~8 seconds

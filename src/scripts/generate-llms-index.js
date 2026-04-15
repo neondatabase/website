@@ -81,7 +81,7 @@ async function scanDirectory(dirPath, baseContentPath, routeKey, options = {}) {
     let entries;
     try {
       entries = await fs.readdir(currentPath, { withFileTypes: true });
-    } catch (err) {
+    } catch (_err) {
       return;
     }
 
@@ -258,10 +258,7 @@ function orderSubsections(sectionName, subsectionNames) {
 }
 
 function findDocsByPaths(paths, sectionData) {
-  const allDocs = [
-    ...sectionData._files,
-    ...Object.values(sectionData._subsections).flat(),
-  ];
+  const allDocs = [...sectionData._files, ...Object.values(sectionData._subsections).flat()];
   const byPath = new Map(allDocs.map((doc) => [doc.path, doc]));
 
   return paths.map((p) => byPath.get(p)).filter(Boolean);
@@ -318,8 +315,8 @@ function renderVersionPages(lines, organized, options = {}) {
     }
 
     if (sectionConfig?.subIndex?.highlights?.length) {
-      const highlightedDocs = findDocsByPaths(sectionConfig.subIndex.highlights, sectionData).sort((a, b) =>
-        a.title.localeCompare(b.title)
+      const highlightedDocs = findDocsByPaths(sectionConfig.subIndex.highlights, sectionData).sort(
+        (a, b) => a.title.localeCompare(b.title)
       );
       for (const doc of highlightedDocs) {
         const description = doc.subtitle ? `: ${doc.subtitle}` : '';
@@ -327,9 +324,7 @@ function renderVersionPages(lines, organized, options = {}) {
       }
 
       if (sectionConfig.subIndex.url) {
-        lines.push(
-          `- [View all ${section.toLowerCase()} pages](${sectionConfig.subIndex.url})`
-        );
+        lines.push(`- [View all ${section.toLowerCase()} pages](${sectionConfig.subIndex.url})`);
       }
       lines.push('');
       continue;
@@ -375,7 +370,9 @@ function generateIndexText(versionedOrganizedDocs, canonicalOrganized = null) {
   if (versionedOrganizedDocs.length > 0) {
     lines.push('## Documentation');
     lines.push('');
-    lines.push(`- [Documentation Index](${BASE_URL}/docs/llms.txt): Primary Neon documentation index`);
+    lines.push(
+      `- [Documentation Index](${BASE_URL}/docs/llms.txt): Primary Neon documentation index`
+    );
     lines.push(
       `- [Full Documentation](${BASE_URL}/docs/llms-full.txt): Complete Neon documentation text`
     );
@@ -528,22 +525,24 @@ async function main() {
   const versionedIndexes = versionedOrganizedDocs.map((entry) => ({
     versionId: entry.version.id,
     isLatest: entry.isLatest,
-    content: generateVersionIndexText((() => {
-      // Latest version: only dual-version pages (accessible at /docs/v2/slug)
-      // Legacy versions: all pages (dual-version + legacy-only)
-      const docsToInclude = entry.isLatest
-        ? (entry.docs || []).filter((doc) => versionedRoutePaths.has(doc.path))
-        : (entry.docs || []);
-      const versionedDocsForEntry = docsToInclude.map((doc) => ({
-        ...doc,
-        url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
-      }));
-      applyReclassifications(versionedDocsForEntry);
-      return {
-        ...entry,
-        organized: organizeDocs(versionedDocsForEntry),
-      };
-    })()),
+    content: generateVersionIndexText(
+      (() => {
+        // Latest version: only dual-version pages (accessible at /docs/v2/slug)
+        // Legacy versions: all pages (dual-version + legacy-only)
+        const docsToInclude = entry.isLatest
+          ? (entry.docs || []).filter((doc) => versionedRoutePaths.has(doc.path))
+          : entry.docs || [];
+        const versionedDocsForEntry = docsToInclude.map((doc) => ({
+          ...doc,
+          url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
+        }));
+        applyReclassifications(versionedDocsForEntry);
+        return {
+          ...entry,
+          organized: organizeDocs(versionedDocsForEntry),
+        };
+      })()
+    ),
   }));
 
   if (dryRun) {
