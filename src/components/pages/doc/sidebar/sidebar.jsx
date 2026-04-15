@@ -54,6 +54,9 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   }, [menu]);
 
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+  const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
+  const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
+  const hasBorder = !isGuidesRoute;
 
   if (isChangelogIndex) {
     return null;
@@ -80,7 +83,10 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
           )}
         >
           <nav
-            className="z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pt-11 pr-8 pb-16 pl-1 dark:border-gray-new-20"
+            className={cn(
+              'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
+              hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
+            )}
             ref={navRef}
           >
             {renderContent}

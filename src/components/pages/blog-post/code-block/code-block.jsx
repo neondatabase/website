@@ -14,7 +14,11 @@ const CodeBlock = async (props) => {
 
   const highlightCode = await highlight(codeContent, props.language);
 
-  return <CodeBlockWrapper>{parse(highlightCode)}</CodeBlockWrapper>;
+  return (
+    <CodeBlockWrapper copyCode={typeof codeContent === 'string' ? codeContent : undefined}>
+      {parse(highlightCode)}
+    </CodeBlockWrapper>
+  );
 };
 
 CodeBlock.propTypes = {

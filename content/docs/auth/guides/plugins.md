@@ -6,7 +6,7 @@ summary: >-
   and management through the Neon SDK without direct installation or
   configuration by users.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.441Z'
+updatedOn: '2026-04-09T23:59:58.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -16,7 +16,7 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/), which support
 <Admonition type="info" title="Plugins are managed by Neon Auth">
 Neon Auth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Neon Auth exposes a supported subset of plugins through the Neon SDK.
 
-More granular controls like enabling/disabling specific plugins and customizing plugin behavior are on the roadmap.
+For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Auth** > **Plugins** (beta) in the Neon Console, or use the Neon API. Additional plugin options may still arrive over time; see the [Neon Auth roadmap](/docs/auth/roadmap).
 </Admonition>
 
 The following Better Auth plugins are currently supported in Neon Auth:

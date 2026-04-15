@@ -87,7 +87,7 @@ In this example:
 
 We’ll use the `rental` and `staff` tables from the [sample database](../postgresql-getting-started/postgresql-sample-database) in this example:
 
-The following example join a CTE with a table to find the staff and rental count for each:
+The following example joins a CTE with a table to find the staff and rental count for each:
 
 ```sql
 WITH cte_rental AS (

@@ -45,13 +45,13 @@ export async function GET(request) {
         }}
       >
         <img
-          width="1200"
-          height="630"
+          width={1200}
+          height={630}
           src={backgroundData}
           style={{ position: 'absolute', top: 0, left: 0 }}
           alt=""
         />
-        <img width="235" height="64" src={logoData} alt="" />
+        <img width={235} height={64} src={logoData} alt="" />
         <div
           style={{
             display: 'flex',

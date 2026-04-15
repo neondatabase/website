@@ -6,7 +6,7 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.442Z'
+updatedOn: '2026-04-09T23:59:59.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -45,9 +45,9 @@ The Organization plugin is enabled by default for each branch; you can disable i
 
 <TabItem>
 
-Open your project in the Neon Console, then go to **Auth** > **Configuration** > **Organizations** (per branch). From there you can customize:
+Open your project in the Neon Console, then go to **Auth** > **Plugins** (beta) and use the **Organizations** section (per branch). This tab is available when your project uses Neon Auth with **Better Auth**; other Auth settings, including your **Auth URL**, stay on the **Configuration** tab. From there you can customize:
 
-![Auth Configuration > Organizations in the Neon Console](/docs/auth/console-auth-organizations-config.png)
+![Neon Console Auth Plugins tab with Organizations settings](/docs/changelog/neon_auth_plugins_organizations.png)
 
 - **Enable Organizations** (toggle): Turn the Organization plugin on or off for the branch. When off, all organization API calls are disabled and return an error.
 - **Limit:** Maximum total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10.

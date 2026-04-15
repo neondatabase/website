@@ -72,6 +72,6 @@ After the first year, we'll review your project's progress and impact. If your p
 <details>
 <summary>**How does the referral program work?**</summary>
 
-Once accepted into the program, you'll receive a unique referral link. When users sign up for Neon through your link and spend $10 or more, you'll receive $10. There's no cap on referral earnings, and payouts are processed monthly through GitHub Sponsors.
+Once accepted into the program, you'll receive a unique referral link. When users sign up for Neon through your link and spend $20 or more, you'll receive $20. There's no cap on referral earnings, and payouts are processed monthly through GitHub Sponsors.
 
 </details>
