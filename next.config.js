@@ -211,6 +211,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/privacy-policy',
+        destination: 'https://www.databricks.com/legal/privacynotice',
+        permanent: true,
+      },
+      {
         source: '/privacy-guide',
         destination: 'https://www.databricks.com/legal/privacynotice',
         permanent: true,
