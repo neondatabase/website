@@ -162,7 +162,17 @@ module.exports = {
     {
       name: 'PostgreSQL',
       description:
-        'Postgres query optimization, indexing strategies, version upgrades, and general Postgres usage with Neon.',
+        'Postgres functions, data types, query optimization, indexing strategies, version upgrades, and general Postgres usage with Neon.',
+      subsectionOrder: ['General', 'Functions', 'Data Types'],
+      subIndex: {
+        outputPath: 'public/docs/postgresql/llms.txt',
+        url: 'https://neon.com/docs/postgresql/llms.txt',
+        highlights: [
+          'postgresql/query-reference.md',
+          'postgresql/query-performance.md',
+          'postgresql/index-types.md',
+        ],
+      },
     },
     {
       name: 'Security',
@@ -198,11 +208,9 @@ module.exports = {
   // For the "docs" route, paths are relative to content/docs/.
   excludePaths: [
     'azure/',
-    'functions/',
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
-    'get-started/production-readiness.md',
     'guides/GUIDE_TEMPLATE.md',
     'introduction.md',
   ],
@@ -223,7 +231,9 @@ module.exports = {
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
     { pathPrefix: 'reference/cli-', section: 'Neon CLI' },
-    { pathPrefix: 'data-types/', section: 'Extensions' },
+    { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
+    { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
+    { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },
   ],
 
   // Route keys from CONTENT_ROUTES to collapse instead of scanning.

@@ -392,7 +392,7 @@ function generateSubIndexText(sectionName, sectionConf, sectionData) {
     lines.push('');
   }
 
-  lines.push(`Parent index: ${BASE_URL}/docs/llms.txt`);
+  lines.push(`[Parent index](${BASE_URL}/docs/llms.txt)`);
   lines.push('');
 
   const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
