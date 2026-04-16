@@ -270,7 +270,7 @@ const ContactForm = () => {
           </Link>{' '}
           and acknowledge the{' '}
           <Link className="decoration-dashed" to={LINKS.privacyPolicy} theme="grey-85-underlined">
-            Privacy Policy
+            Privacy Notice
           </Link>
           .
         </p>
