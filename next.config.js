@@ -212,7 +212,7 @@ const defaultConfig = {
       },
       {
         source: '/privacy-guide',
-        destination: '/privacy-policy',
+        destination: 'https://www.databricks.com/legal/privacynotice',
         permanent: true,
       },
       {
