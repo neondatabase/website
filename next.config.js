@@ -200,6 +200,212 @@ const defaultConfig = {
         destination: '/postgresql/tutorial',
         permanent: true,
       },
+      // PostgreSQL URL deduplication redirects (old postgresql-xxx → xxx)
+      {
+        source: '/postgresql/postgresql-18/:path*',
+        destination: '/postgresql/18/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-18',
+        destination: '/postgresql/18',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-18-new-features',
+        destination: '/postgresql/18-new-features',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-administration/:path*',
+        destination: '/postgresql/administration/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-administration',
+        destination: '/postgresql/administration',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-advanced',
+        destination: '/postgresql/advanced',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-aggregate-functions/:path*',
+        destination: '/postgresql/aggregate-functions/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-aggregate-functions',
+        destination: '/postgresql/aggregate-functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-api',
+        destination: '/postgresql/api',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-cheat-sheet',
+        destination: '/postgresql/cheat-sheet',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-csharp/:path*',
+        destination: '/postgresql/csharp/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-csharp',
+        destination: '/postgresql/csharp',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-date-functions/:path*',
+        destination: '/postgresql/date-functions/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-date-functions',
+        destination: '/postgresql/date-functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-functions',
+        destination: '/postgresql/functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-getting-started/:path*',
+        destination: '/postgresql/getting-started/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-getting-started',
+        destination: '/postgresql/getting-started',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-indexes/:path*',
+        destination: '/postgresql/indexes/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-indexes',
+        destination: '/postgresql/indexes',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-jdbc/:path*',
+        destination: '/postgresql/jdbc/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-jdbc',
+        destination: '/postgresql/jdbc',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-json-functions/:path*',
+        destination: '/postgresql/json-functions/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-json-functions',
+        destination: '/postgresql/json-functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-math-functions/:path*',
+        destination: '/postgresql/math-functions/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-math-functions',
+        destination: '/postgresql/math-functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-php/:path*',
+        destination: '/postgresql/php/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-php',
+        destination: '/postgresql/php',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-plpgsql/:path*',
+        destination: '/postgresql/plpgsql/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-plpgsql',
+        destination: '/postgresql/plpgsql',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-python/:path*',
+        destination: '/postgresql/python/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-python',
+        destination: '/postgresql/python',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-string-functions/:path*',
+        destination: '/postgresql/string-functions/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-string-functions',
+        destination: '/postgresql/string-functions',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-triggers/:path*',
+        destination: '/postgresql/triggers/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-triggers',
+        destination: '/postgresql/triggers',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-tutorial/:path*',
+        destination: '/postgresql/tutorial/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-tutorial',
+        destination: '/postgresql/tutorial',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-views/:path*',
+        destination: '/postgresql/views/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-views',
+        destination: '/postgresql/views',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-window-function/:path*',
+        destination: '/postgresql/window-function/:path*',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/postgresql-window-function',
+        destination: '/postgresql/window-function',
+        permanent: true,
+      },
       {
         source: '/blog/the-non-obviousness-of-postgres-roles',
         destination: '/blog/postgres-roles',
