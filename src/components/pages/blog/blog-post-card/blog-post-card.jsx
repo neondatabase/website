@@ -168,7 +168,7 @@ BlogPostCard.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  excerpt: PropTypes.string.isRequired,
+  excerpt: PropTypes.string,
   slug: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   category: PropTypes.string,

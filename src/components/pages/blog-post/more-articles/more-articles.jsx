@@ -15,7 +15,7 @@ const MoreArticles = ({ className = null, posts, routeConfig = DEFAULT_BLOG_ROUT
     </h2>
 
     <div className="mt-8 flex flex-col md:mt-6">
-      {posts.map((post, index) => (
+      {posts.map(({ excerpt: _excerpt, subtitle: _subtitle, ...post }, index) => (
         <BlogPostCard
           key={index}
           {...post}

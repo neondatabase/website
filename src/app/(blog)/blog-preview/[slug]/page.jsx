@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import resolveBlogPreviewRequest from 'app/blog-preview/blog-preview';
 import BlogPreviewBanner from 'components/pages/blog/blog-preview-banner';
 import Aside from 'components/pages/blog-post/aside';
+import CodeBlock from 'components/pages/blog-post/code-block';
 import Content from 'components/pages/blog-post/content';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
@@ -22,6 +23,16 @@ import { getBlogPostBySlug, getBlogSnapshot } from 'utils/api-blog';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
 import getMetadata from 'utils/get-metadata';
+
+const renderBlogCodeBlockFromPre = async (props) => {
+  const codeElement = props?.children;
+  const rawCode =
+    typeof codeElement?.props?.children === 'string' ? codeElement.props.children : '';
+  const className = codeElement?.props?.className || codeElement?.props?.class || '';
+  const languageMatch = className.match(/language-([a-z0-9-]+)/i);
+
+  return <CodeBlock language={languageMatch ? languageMatch[1] : 'bash'}>{rawCode}</CodeBlock>;
+};
 
 const BlogPreviewPostPage = async ({ params, searchParams }) => {
   const { slug: routeSlug } = await params;
@@ -89,6 +100,7 @@ const BlogPreviewPostPage = async ({ params, searchParams }) => {
                 components={{
                   h2: AnchorHeading('h2'),
                   h3: AnchorHeading('h3'),
+                  pre: renderBlogCodeBlockFromPre,
                   Admonition,
                   BlogQuote,
                   Button,
