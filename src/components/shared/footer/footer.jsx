@@ -58,8 +58,17 @@ const Footer = ({ hasThemesSupport = false }) => (
               >
                 Privacy Notice
               </Link>
-              <Link className="hover:text-gray-new-20 dark:hover:text-gray-new-80" to={LINKS.terms}>
+              <Link
+                className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
+                to={LINKS.websiteTerms}
+              >
                 Terms of Use
+              </Link>
+              <Link
+                className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
+                to={LINKS.platformTerms}
+              >
+                Neon Platform Terms
               </Link>
               <Link
                 className="hover:text-gray-new-20 dark:hover:text-gray-new-80"

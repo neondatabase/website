@@ -216,6 +216,16 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/terms-of-service',
+        destination: '/platform-terms',
+        permanent: true,
+      },
+      {
+        source: '/dpa',
+        destination: '/platform-terms#3.4',
+        permanent: true,
+      },
+      {
         source: '/sensitive-data-terms',
         destination: 'https://www.databricks.com/legal/terms-of-use',
         permanent: true,

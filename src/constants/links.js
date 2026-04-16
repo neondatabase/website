@@ -65,8 +65,9 @@ export default {
   whyNeon: '/docs/get-started/why-neon',
 
   // Legal
-  dpa: '/dpa',
-  terms: 'https://www.databricks.com/legal/terms-of-use',
+  dpa: '/platform-terms#3.4',
+  websiteTerms: 'https://www.databricks.com/legal/terms-of-use',
+  platformTerms: '/platform-terms',
   privacy: '/privacy-policy',
   privacyPolicy: '/privacy-policy',
   modernSlaveryStatement: 'https://www.databricks.com/legal/modern-slavery-policy-statement',
