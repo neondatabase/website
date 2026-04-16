@@ -104,7 +104,7 @@ The denylist table:
 
 ### 1\) Basic PostgreSQL delete join example
 
-The following statement deletes rows in the `members` table with the phone number exists in the `denylist` table:
+The following statement deletes rows in the `member` table if the phone number exists in the `denylist` table:
 
 ```sql
 DELETE FROM member
@@ -120,7 +120,7 @@ DELETE 2
 
 The output indicates that the `DELETE` statement has deleted two rows from the `member` table.
 
-Verify the deletion by retrieving data from the `contacts` table:
+Verify the deletion by retrieving data from the `member` table:
 
 ```sql
 SELECT * FROM member;
