@@ -406,6 +406,512 @@ const defaultConfig = {
         destination: '/postgresql/window-function',
         permanent: true,
       },
+      // PostgreSQL tutorial file URL deduplication redirects
+      {
+        source: '/postgresql/tutorial/postgresql-add-column',
+        destination: '/postgresql/tutorial/add-column',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-alias',
+        destination: '/postgresql/tutorial/alias',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-all',
+        destination: '/postgresql/tutorial/all',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-alter-table',
+        destination: '/postgresql/tutorial/alter-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-and',
+        destination: '/postgresql/tutorial/and',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-any',
+        destination: '/postgresql/tutorial/any',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-array',
+        destination: '/postgresql/tutorial/array',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-between',
+        destination: '/postgresql/tutorial/between',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-boolean',
+        destination: '/postgresql/tutorial/boolean',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-bytea-data-type',
+        destination: '/postgresql/tutorial/bytea-data-type',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-case',
+        destination: '/postgresql/tutorial/case',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-cast',
+        destination: '/postgresql/tutorial/cast',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-change-column-type',
+        destination: '/postgresql/tutorial/change-column-type',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-char-varchar-text',
+        destination: '/postgresql/tutorial/char-varchar-text',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-check-constraint',
+        destination: '/postgresql/tutorial/check-constraint',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-coalesce',
+        destination: '/postgresql/tutorial/coalesce',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-column-alias',
+        destination: '/postgresql/tutorial/column-alias',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-composite-types',
+        destination: '/postgresql/tutorial/composite-types',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-copy-table',
+        destination: '/postgresql/tutorial/copy-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-correlated-subquery',
+        destination: '/postgresql/tutorial/correlated-subquery',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-create-table-as',
+        destination: '/postgresql/tutorial/create-table-as',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-create-table',
+        destination: '/postgresql/tutorial/create-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-cross-join',
+        destination: '/postgresql/tutorial/cross-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-cte',
+        destination: '/postgresql/tutorial/cte',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-cube',
+        destination: '/postgresql/tutorial/cube',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-data-types',
+        destination: '/postgresql/tutorial/data-types',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-date',
+        destination: '/postgresql/tutorial/date',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-default-value',
+        destination: '/postgresql/tutorial/default-value',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-delete-cascade',
+        destination: '/postgresql/tutorial/delete-cascade',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-delete-join',
+        destination: '/postgresql/tutorial/delete-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-delete',
+        destination: '/postgresql/tutorial/delete',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-distinct-on',
+        destination: '/postgresql/tutorial/distinct-on',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-double-precision-type',
+        destination: '/postgresql/tutorial/double-precision-type',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-drop-column',
+        destination: '/postgresql/tutorial/drop-column',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-drop-table',
+        destination: '/postgresql/tutorial/drop-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-enum',
+        destination: '/postgresql/tutorial/enum',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-except',
+        destination: '/postgresql/tutorial/except',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-exists',
+        destination: '/postgresql/tutorial/exists',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-explain',
+        destination: '/postgresql/tutorial/explain',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-fetch',
+        destination: '/postgresql/tutorial/fetch',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-foreign-key',
+        destination: '/postgresql/tutorial/foreign-key',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-full-outer-join',
+        destination: '/postgresql/tutorial/full-outer-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-generate_series',
+        destination: '/postgresql/tutorial/generate_series',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-generated-columns',
+        destination: '/postgresql/tutorial/generated-columns',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-group-by',
+        destination: '/postgresql/tutorial/group-by',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-grouping-sets',
+        destination: '/postgresql/tutorial/grouping-sets',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-having',
+        destination: '/postgresql/tutorial/having',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-hstore',
+        destination: '/postgresql/tutorial/hstore',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-identity-column',
+        destination: '/postgresql/tutorial/identity-column',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-in',
+        destination: '/postgresql/tutorial/in',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-inner-join',
+        destination: '/postgresql/tutorial/inner-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-insert-multiple-rows',
+        destination: '/postgresql/tutorial/insert-multiple-rows',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-insert',
+        destination: '/postgresql/tutorial/insert',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-integer',
+        destination: '/postgresql/tutorial/integer',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-intersect',
+        destination: '/postgresql/tutorial/intersect',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-interval',
+        destination: '/postgresql/tutorial/interval',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-is-null',
+        destination: '/postgresql/tutorial/is-null',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-isnull',
+        destination: '/postgresql/tutorial/isnull',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-joins',
+        destination: '/postgresql/tutorial/joins',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-json',
+        destination: '/postgresql/tutorial/json',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-left-join',
+        destination: '/postgresql/tutorial/left-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-like',
+        destination: '/postgresql/tutorial/like',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-limit',
+        destination: '/postgresql/tutorial/limit',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-merge',
+        destination: '/postgresql/tutorial/merge',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-natural-join',
+        destination: '/postgresql/tutorial/natural-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-not-null-constraint',
+        destination: '/postgresql/tutorial/not-null-constraint',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-nullif',
+        destination: '/postgresql/tutorial/nullif',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-numeric',
+        destination: '/postgresql/tutorial/numeric',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-or',
+        destination: '/postgresql/tutorial/or',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-order-by',
+        destination: '/postgresql/tutorial/order-by',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-primary-key',
+        destination: '/postgresql/tutorial/primary-key',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-random-range',
+        destination: '/postgresql/tutorial/random-range',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-real-data-type',
+        destination: '/postgresql/tutorial/real-data-type',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-recursive-query',
+        destination: '/postgresql/tutorial/recursive-query',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-rename-column',
+        destination: '/postgresql/tutorial/rename-column',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-rename-table',
+        destination: '/postgresql/tutorial/rename-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-right-join',
+        destination: '/postgresql/tutorial/right-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-rollup',
+        destination: '/postgresql/tutorial/rollup',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-select-distinct',
+        destination: '/postgresql/tutorial/select-distinct',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-select-into',
+        destination: '/postgresql/tutorial/select-into',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-select',
+        destination: '/postgresql/tutorial/select',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-self-join',
+        destination: '/postgresql/tutorial/self-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-sequences',
+        destination: '/postgresql/tutorial/sequences',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-serial',
+        destination: '/postgresql/tutorial/serial',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-server-and-database-objects',
+        destination: '/postgresql/tutorial/server-and-database-objects',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-subquery',
+        destination: '/postgresql/tutorial/subquery',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-temporary-table',
+        destination: '/postgresql/tutorial/temporary-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-time',
+        destination: '/postgresql/tutorial/time',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-timestamp',
+        destination: '/postgresql/tutorial/timestamp',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-transaction',
+        destination: '/postgresql/tutorial/transaction',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-truncate-table',
+        destination: '/postgresql/tutorial/truncate-table',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-union',
+        destination: '/postgresql/tutorial/union',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-unique-constraint',
+        destination: '/postgresql/tutorial/unique-constraint',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-update-join',
+        destination: '/postgresql/tutorial/update-join',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-update',
+        destination: '/postgresql/tutorial/update',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-upsert',
+        destination: '/postgresql/tutorial/upsert',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-user-defined-data-types',
+        destination: '/postgresql/tutorial/user-defined-data-types',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-uuid',
+        destination: '/postgresql/tutorial/uuid',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-vs-mysql',
+        destination: '/postgresql/tutorial/vs-mysql',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-where',
+        destination: '/postgresql/tutorial/where',
+        permanent: true,
+      },
+      {
+        source: '/postgresql/tutorial/postgresql-xml-data-type',
+        destination: '/postgresql/tutorial/xml-data-type',
+        permanent: true,
+      },
       {
         source: '/blog/the-non-obviousness-of-postgres-roles',
         destination: '/blog/postgres-roles',

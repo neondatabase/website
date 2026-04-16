@@ -29,107 +29,107 @@
           title: Install PostgreSQL on Linux
     - section: Querying Data
       items:
-        - slug: tutorial/postgresql-select
+        - slug: tutorial/select
           title: SELECT
-        - slug: tutorial/postgresql-column-alias
+        - slug: tutorial/column-alias
           title: Column Aliases
-        - slug: tutorial/postgresql-order-by
+        - slug: tutorial/order-by
           title: ORDER BY
-        - slug: tutorial/postgresql-select-distinct
+        - slug: tutorial/select-distinct
           title: SELECT DISTINCT
-        - slug: tutorial/postgresql-distinct-on
+        - slug: tutorial/distinct-on
           title: DISTINCT ON
     - section: Filtering Data
       items:
-        - slug: tutorial/postgresql-where
+        - slug: tutorial/where
           title: WHERE
-        - slug: tutorial/postgresql-and
+        - slug: tutorial/and
           title: AND Operator
-        - slug: tutorial/postgresql-or
+        - slug: tutorial/or
           title: OR Operator
-        - slug: tutorial/postgresql-limit
+        - slug: tutorial/limit
           title: LIMIT
-        - slug: tutorial/postgresql-fetch
+        - slug: tutorial/fetch
           title: FETCH
-        - slug: tutorial/postgresql-in
+        - slug: tutorial/in
           title: IN
-        - slug: tutorial/postgresql-between
+        - slug: tutorial/between
           title: BETWEEN
-        - slug: tutorial/postgresql-like
+        - slug: tutorial/like
           title: LIKE
-        - slug: tutorial/postgresql-is-null
+        - slug: tutorial/is-null
           title: IS NULL
     - section: Join Tables
       items:
-        - slug: tutorial/postgresql-joins
+        - slug: tutorial/joins
           title: Joins
-        - slug: tutorial/postgresql-alias
+        - slug: tutorial/alias
           title: Table Aliases
-        - slug: tutorial/postgresql-inner-join
+        - slug: tutorial/inner-join
           title: INNER JOIN
-        - slug: tutorial/postgresql-left-join
+        - slug: tutorial/left-join
           title: LEFT JOIN
-        - slug: tutorial/postgresql-right-join
+        - slug: tutorial/right-join
           title: RIGHT JOIN
-        - slug: tutorial/postgresql-self-join
+        - slug: tutorial/self-join
           title: SELF-JOIN
-        - slug: tutorial/postgresql-full-outer-join
+        - slug: tutorial/full-outer-join
           title: FULL OUTER JOIN
-        - slug: tutorial/postgresql-cross-join
+        - slug: tutorial/cross-join
           title: Cross Join
-        - slug: tutorial/postgresql-natural-join
+        - slug: tutorial/natural-join
           title: Natural Join
     - section: Group Data
       items:
-        - slug: tutorial/postgresql-group-by
+        - slug: tutorial/group-by
           title: GROUP BY
-        - slug: tutorial/postgresql-having
+        - slug: tutorial/having
           title: HAVING
-        - slug: tutorial/postgresql-grouping-sets
+        - slug: tutorial/grouping-sets
           title: GROUPING SETS
-        - slug: tutorial/postgresql-cube
+        - slug: tutorial/cube
           title: CUBE
-        - slug: tutorial/postgresql-rollup
+        - slug: tutorial/rollup
           title: ROLLUP
     - section: Set Operations
       items:
-        - slug: tutorial/postgresql-union
+        - slug: tutorial/union
           title: UNION
-        - slug: tutorial/postgresql-intersect
+        - slug: tutorial/intersect
           title: INTERSECT
-        - slug: tutorial/postgresql-except
+        - slug: tutorial/except
           title: EXCEPT
     - section: Common Table Expression (CTE)
       items:
-        - slug: tutorial/postgresql-cte
+        - slug: tutorial/cte
           title: Common Table Expression (CTE)
-        - slug: tutorial/postgresql-recursive-query
+        - slug: tutorial/recursive-query
           title: Recursive CTE
     - section: Modifying Data
       items:
-        - slug: tutorial/postgresql-insert
+        - slug: tutorial/insert
           title: INSERT
-        - slug: tutorial/postgresql-insert-multiple-rows
+        - slug: tutorial/insert-multiple-rows
           title: INSERT Multiple Rows
-        - slug: tutorial/postgresql-update
+        - slug: tutorial/update
           title: UPDATE
-        - slug: tutorial/postgresql-update-join
+        - slug: tutorial/update-join
           title: UPDATE Join
-        - slug: tutorial/postgresql-delete
+        - slug: tutorial/delete
           title: DELETE
-        - slug: tutorial/postgresql-delete-join
+        - slug: tutorial/delete-join
           title: DELETE Join
-        - slug: tutorial/postgresql-delete-cascade
+        - slug: tutorial/delete-cascade
           title: DELETE CASCADE
         - slug: tutorial/how-to-delete-duplicate-rows-in-postgresql
           title: Delete Duplicate Rows
-        - slug: tutorial/postgresql-upsert
+        - slug: tutorial/upsert
           title: Upsert
-        - slug: tutorial/postgresql-merge
+        - slug: tutorial/merge
           title: MERGE
     - section: Transactions
       items:
-        - slug: tutorial/postgresql-transaction
+        - slug: tutorial/transaction
           title: PostgreSQL Transaction
     - section: Import / Export
       items:
@@ -139,137 +139,137 @@
           title: Export Table to CSV File
     - section: Subquery
       items:
-        - slug: tutorial/postgresql-subquery
+        - slug: tutorial/subquery
           title: Subquery
-        - slug: tutorial/postgresql-correlated-subquery
+        - slug: tutorial/correlated-subquery
           title: Correlated Subquery
-        - slug: tutorial/postgresql-any
+        - slug: tutorial/any
           title: ANY Operator
-        - slug: tutorial/postgresql-all
+        - slug: tutorial/all
           title: ALL Operator
-        - slug: tutorial/postgresql-exists
+        - slug: tutorial/exists
           title: EXISTS Operator
     - section: Managing Tables
       items:
-        - slug: tutorial/postgresql-data-types
+        - slug: tutorial/data-types
           title: PostgreSQL Data Types
-        - slug: tutorial/postgresql-create-table
+        - slug: tutorial/create-table
           title: Create Table
-        - slug: tutorial/postgresql-select-into
+        - slug: tutorial/select-into
           title: Select Into
-        - slug: tutorial/postgresql-create-table-as
+        - slug: tutorial/create-table-as
           title: Create Table As
-        - slug: tutorial/postgresql-serial
+        - slug: tutorial/serial
           title: SERIAL
-        - slug: tutorial/postgresql-sequences
+        - slug: tutorial/sequences
           title: Sequences
-        - slug: tutorial/postgresql-identity-column
+        - slug: tutorial/identity-column
           title: Identity Column
-        - slug: tutorial/postgresql-generated-columns
+        - slug: tutorial/generated-columns
           title: Generated Columns
-        - slug: tutorial/postgresql-alter-table
+        - slug: tutorial/alter-table
           title: Alter Table
-        - slug: tutorial/postgresql-rename-table
+        - slug: tutorial/rename-table
           title: Rename Table
-        - slug: tutorial/postgresql-add-column
+        - slug: tutorial/add-column
           title: Add Column
-        - slug: tutorial/postgresql-drop-column
+        - slug: tutorial/drop-column
           title: Drop Column
-        - slug: tutorial/postgresql-change-column-type
+        - slug: tutorial/change-column-type
           title: Change Column's Data Type
-        - slug: tutorial/postgresql-rename-column
+        - slug: tutorial/rename-column
           title: Rename Column
-        - slug: tutorial/postgresql-drop-table
+        - slug: tutorial/drop-table
           title: Drop Table
-        - slug: tutorial/postgresql-temporary-table
+        - slug: tutorial/temporary-table
           title: Temporary Table
-        - slug: tutorial/postgresql-truncate-table
+        - slug: tutorial/truncate-table
           title: Truncate Table
-        - slug: tutorial/postgresql-copy-table
+        - slug: tutorial/copy-table
           title: Copy Table
     - section: Database Constraints
       items:
-        - slug: tutorial/postgresql-primary-key
+        - slug: tutorial/primary-key
           title: Primary Key
-        - slug: tutorial/postgresql-foreign-key
+        - slug: tutorial/foreign-key
           title: Foreign Key
-        - slug: tutorial/postgresql-check-constraint
+        - slug: tutorial/check-constraint
           title: CHECK Constraint
-        - slug: tutorial/postgresql-unique-constraint
+        - slug: tutorial/unique-constraint
           title: UNIQUE Constraint
-        - slug: tutorial/postgresql-not-null-constraint
+        - slug: tutorial/not-null-constraint
           title: NOT NULL Constraint
-        - slug: tutorial/postgresql-default-value
+        - slug: tutorial/default-value
           title: DEFAULT Constraint
     - section: PostgreSQL Data Types
       items:
-        - slug: tutorial/postgresql-boolean
+        - slug: tutorial/boolean
           title: Boolean
-        - slug: tutorial/postgresql-char-varchar-text
+        - slug: tutorial/char-varchar-text
           title: CHAR, VARCHAR, and TEXT
-        - slug: tutorial/postgresql-numeric
+        - slug: tutorial/numeric
           title: NUMERIC
-        - slug: tutorial/postgresql-double-precision-type
+        - slug: tutorial/double-precision-type
           title: DOUBLE PRECISION
-        - slug: tutorial/postgresql-real-data-type
+        - slug: tutorial/real-data-type
           title: REAL
-        - slug: tutorial/postgresql-integer
+        - slug: tutorial/integer
           title: Integer
-        - slug: tutorial/postgresql-serial
+        - slug: tutorial/serial
           title: SERIAL
-        - slug: tutorial/postgresql-date
+        - slug: tutorial/date
           title: DATE
-        - slug: tutorial/postgresql-timestamp
+        - slug: tutorial/timestamp
           title: TIMESTAMP
-        - slug: tutorial/postgresql-interval
+        - slug: tutorial/interval
           title: Interval
-        - slug: tutorial/postgresql-time
+        - slug: tutorial/time
           title: TIME
-        - slug: tutorial/postgresql-uuid
+        - slug: tutorial/uuid
           title: UUID
-        - slug: tutorial/postgresql-json
+        - slug: tutorial/json
           title: JSON
-        - slug: tutorial/postgresql-hstore
+        - slug: tutorial/hstore
           title: HSTORE
-        - slug: tutorial/postgresql-array
+        - slug: tutorial/array
           title: Array
-        - slug: tutorial/postgresql-user-defined-data-types
+        - slug: tutorial/user-defined-data-types
           title: User-defined Data Types
-        - slug: tutorial/postgresql-enum
+        - slug: tutorial/enum
           title: Enum
-        - slug: tutorial/postgresql-xml-data-type
+        - slug: tutorial/xml-data-type
           title: XML
-        - slug: tutorial/postgresql-bytea-data-type
+        - slug: tutorial/bytea-data-type
           title: BYTEA
-        - slug: tutorial/postgresql-composite-types
+        - slug: tutorial/composite-types
           title: Composite Types
     - section: Conditional Expressions & Operators
       items:
-        - slug: tutorial/postgresql-case
+        - slug: tutorial/case
           title: CASE
-        - slug: tutorial/postgresql-coalesce
+        - slug: tutorial/coalesce
           title: COALESCE
-        - slug: tutorial/postgresql-isnull
+        - slug: tutorial/isnull
           title: ISNULL
-        - slug: tutorial/postgresql-nullif
+        - slug: tutorial/nullif
           title: NULLIF
-        - slug: tutorial/postgresql-cast
+        - slug: tutorial/cast
           title: CAST
     - section: Performance
       items:
-        - slug: tutorial/postgresql-explain
+        - slug: tutorial/explain
           title: EXPLAIN
     - section: Useful Techniques
       items:
-        - slug: tutorial/postgresql-server-and-database-objects
+        - slug: tutorial/server-and-database-objects
           title: Server and Database Objects
         - slug: tutorial/compare-two-tables-in-postgresql
           title: Compare Two Tables
-        - slug: tutorial/postgresql-generate_series
+        - slug: tutorial/generate_series
           title: generate_series() Function
-        - slug: tutorial/postgresql-random-range
+        - slug: tutorial/random-range
           title: Random Number in Range
-        - slug: tutorial/postgresql-vs-mysql
+        - slug: tutorial/vs-mysql
           title: PostgreSQL vs. MySQL
 - nav: Administration
   slug: administration
