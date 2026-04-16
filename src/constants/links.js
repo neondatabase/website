@@ -66,7 +66,7 @@ export default {
 
   // Legal
   dpa: '/dpa',
-  terms: '/terms-of-service',
+  terms: 'https://www.databricks.com/legal/terms-of-use',
   privacy: '/privacy-policy',
   privacyPolicy: '/privacy-policy',
   modernSlaveryStatement: 'https://www.databricks.com/legal/modern-slavery-policy-statement',

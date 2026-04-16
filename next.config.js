@@ -217,7 +217,7 @@ const defaultConfig = {
       },
       {
         source: '/sensitive-data-terms',
-        destination: '/terms-of-service',
+        destination: 'https://www.databricks.com/legal/terms-of-use',
         permanent: true,
       },
       {
