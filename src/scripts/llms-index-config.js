@@ -171,10 +171,25 @@ module.exports = {
     },
     {
       name: 'Extensions',
-      collapse: {
-        title: 'Postgres extensions',
-        url: 'https://neon.com/docs/extensions/pg-extensions.md',
-        description: 'Supported extensions, versions, and install/update instructions',
+      description: 'Postgres extensions supported by Neon, with install and usage instructions.',
+      subIndex: {
+        outputPath: 'public/docs/extensions/llms.txt',
+        url: 'https://neon.com/docs/extensions/llms.txt',
+        highlights: [
+          'extensions/pg-extensions.md',
+          'extensions/pg_stat_statements.md',
+          'extensions/pgvector.md',
+          'extensions/pgcrypto.md',
+        ],
+      },
+    },
+    {
+      name: 'Community',
+      description: 'Contributor guides, component architecture, and documentation standards.',
+      subIndex: {
+        outputPath: 'public/docs/community/llms.txt',
+        url: 'https://neon.com/docs/community/llms.txt',
+        highlights: ['community/contribution-guide.md', 'community/llms-markdown-guide.md'],
       },
     },
   ],
@@ -183,12 +198,9 @@ module.exports = {
   // For the "docs" route, paths are relative to content/docs/.
   excludePaths: [
     'azure/',
-    'community/',
     'functions/',
-    'data-types/',
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
-    'auth/migrate/from-legacy-auth',
     'changelog.md',
     'get-started/production-readiness.md',
     'guides/GUIDE_TEMPLATE.md',
@@ -209,7 +221,10 @@ module.exports = {
 
   // Prefix-based reclassification (first match wins). More maintainable than
   // listing individual files when an entire path subtree should move together.
-  reclassifyPrefixes: [{ pathPrefix: 'reference/cli-', section: 'Neon CLI' }],
+  reclassifyPrefixes: [
+    { pathPrefix: 'reference/cli-', section: 'Neon CLI' },
+    { pathPrefix: 'data-types/', section: 'Extensions' },
+  ],
 
   // Route keys from CONTENT_ROUTES to collapse instead of scanning.
   // Each becomes a single link in the Additional Resources section.
