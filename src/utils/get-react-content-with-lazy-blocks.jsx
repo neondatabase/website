@@ -3,7 +3,6 @@ import isBoolean from 'lodash.isboolean';
 import isEmpty from 'lodash.isempty';
 import Image from 'next/image';
 
-import EmbedTweet from 'components/shared/embed-tweet';
 import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
 
@@ -185,20 +184,6 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
               </figure>
             );
           }
-        }
-
-        if (domNode.attribs?.class?.includes('wp-block-embed-twitter')) {
-          const props = transformProps(attributesToProps(domNode.attribs));
-
-          const { children } = domNode.children[0];
-
-          children.forEach((child) => {
-            if (child.type === 'tag' && child.name === 'blockquote') {
-              child.attribs['data-theme'] = 'dark';
-            }
-          });
-
-          return <EmbedTweet {...props}>{domToReact(children)}</EmbedTweet>;
         }
 
         if (domNode.attribs?.class?.includes('wp-block-heading')) {

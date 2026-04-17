@@ -1,6 +1,6 @@
 import { execFileSync } from 'child_process';
 
-import { BLOG_POSTS_FOR_PREVIEW, EXTRA_CATEGORIES } from 'constants/blog';
+import { EXTRA_CATEGORIES } from 'constants/blog';
 import { getAllChangelogs } from 'utils/api-docs';
 import { getAllGuides } from 'utils/api-guides';
 import {
@@ -178,11 +178,7 @@ const mapPostToListShape = (postEntry, authorsData, categoriesData) => {
   };
 };
 
-const getMappedBlogPosts = async ({
-  previewBranch = null,
-  strictBranch = false,
-  fullList = false,
-} = {}) => {
+const getMappedBlogPosts = async ({ previewBranch = null, strictBranch = false } = {}) => {
   const snapshot = await getResolvedBlogSnapshot({ previewBranch, strictBranch });
   const isProduction = isPreviewProductionFilterEnabled();
 
@@ -198,15 +194,6 @@ const getMappedBlogPosts = async ({
 
   posts.sort((left, right) => new Date(right.date) - new Date(left.date));
 
-  return fullList || isProduction ? posts : posts.slice(0, BLOG_POSTS_FOR_PREVIEW);
-};
-
-const getMappedPreviewBlogPosts = async (options = {}) => {
-  const posts = await getMappedBlogPosts({
-    ...options,
-    fullList: true,
-  });
-
   return posts;
 };
 
@@ -216,7 +203,7 @@ export const getAllBlogPosts = async (options = {}) => getMappedBlogPosts(option
 
 export const getAllBlogCategories = async (options = {}) => {
   const snapshot = await getResolvedBlogSnapshot(options);
-  const posts = await getMappedPreviewBlogPosts(options);
+  const posts = await getMappedBlogPosts(options);
   const counts = {};
 
   posts.forEach((post) => {
@@ -256,7 +243,7 @@ export const getPostsByCategorySlug = async (slug, options = {}) => {
     if (slug === 'changelog') return getAllChangelogs();
   }
 
-  const posts = await getMappedPreviewBlogPosts(options);
+  const posts = await getMappedBlogPosts(options);
 
   return posts.filter((post) => post.categories.nodes.some((category) => category.slug === slug));
 };
@@ -316,7 +303,7 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
     },
   };
 
-  const relatedPosts = (await getMappedPreviewBlogPosts(options))
+  const relatedPosts = (await getMappedBlogPosts(options))
     .filter((relatedPost) => relatedPost.slug !== slug)
     .slice(0, 3);
 
