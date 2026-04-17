@@ -548,6 +548,8 @@
                   slug: ai/agent-skills
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
+                - title: Codex plugin
+                  slug: ai/ai-codex-plugin
                 - title: Cursor plugin
                   slug: ai/ai-cursor-plugin
                 - title: GitHub Copilot agents

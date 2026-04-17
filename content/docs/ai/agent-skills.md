@@ -2,7 +2,7 @@
 title: Agent Skills
 subtitle: Teach your AI coding assistant how to work with Neon
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.432Z'
+updatedOn: '2026-04-16T18:23:32.432Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -59,6 +59,12 @@ If you're using Claude Code, install the Neon plugin for skills and MCP integrat
 ```
 
 See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
+
+### Codex plugin
+
+If you're using OpenAI Codex, install the **Neon Postgres** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon Postgres app (MCP), the main Neon skill, and the egress optimizer skill.
+
+See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
 ### neonctl init
 

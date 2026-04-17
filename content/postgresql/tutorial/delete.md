@@ -54,7 +54,7 @@ WHERE condition
 RETURNING id;
 ```
 
-If you delete data from a table based on data from another table, you can use the [DELETE JOIN](postgresql-delete-join) statement.
+If you want to delete data from a table based on data from another table, you can use the [DELETE JOIN](postgresql-delete-join) statement.
 
 To delete data that have a [foreign key](postgresql-foreign-key) relationship, you use the `ON DELETE CASCADE` option.
 
@@ -157,7 +157,7 @@ PostgreSQL returns the following deleted row:
 
 ### 3\) Using PostgreSQL DELETE to delete multiple rows from the table
 
-The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the value in the completed column `true` and return deleted rows:
+The following statement uses the `DELETE` statement to delete all rows from the `todos` table with the value in the completed column `true` and return deleted rows:
 
 ```sql
 DELETE FROM todos

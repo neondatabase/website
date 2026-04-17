@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL INTERSECT Operator'
   slug: 'postgresql-tutorial/postgresql-intersect'
 nextLink:
-  title: 'PostgreSQL GROUPING SETS'
-  slug: 'postgresql-tutorial/postgresql-grouping-sets'
+  title: 'PostgreSQL CTE'
+  slug: 'postgresql-tutorial/postgresql-cte'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXCEPT` operator to return a result set containing the rows in the first query that do not appear in the output of the second query.
