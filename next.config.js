@@ -651,6 +651,11 @@ const defaultConfig = {
         destination: '/docs/guides/neon-azure-integration',
         permanent: true,
       },
+      {
+        source: '/neon-business-sla',
+        destination: '/sla',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
