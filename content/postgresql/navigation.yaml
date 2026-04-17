@@ -15,7 +15,7 @@
       items:
         - slug: getting-started/what-is-postgresql
           title: What is PostgreSQL?
-        - slug: getting-started/postgresql-sample-database
+        - slug: getting-started/sample-database
           title: PostgreSQL Sample Database
         - slug: getting-started/install-postgresql
           title: Install PostgreSQL on Windows
@@ -277,93 +277,93 @@
   items:
     - section: Manage Databases
       items:
-        - slug: administration/postgresql-create-database
+        - slug: administration/create-database
           title: Create Database
-        - slug: administration/postgresql-alter-database
+        - slug: administration/alter-database
           title: Alter Database
-        - slug: administration/postgresql-rename-database
+        - slug: administration/rename-database
           title: Rename Database
-        - slug: administration/postgresql-drop-database
+        - slug: administration/drop-database
           title: Drop Database
-        - slug: administration/postgresql-copy-database
+        - slug: administration/copy-database
           title: Copy a Database
-        - slug: administration/postgresql-database-indexes-table-size
+        - slug: administration/database-indexes-table-size
           title: Get Database Object Sizes
         - slug: administration/postgres-change-database-owner
           title: Change Database Owner
     - section: Manage Schemas
       items:
-        - slug: administration/postgresql-schema
+        - slug: administration/schema
           title: Schema
-        - slug: administration/postgresql-create-schema
+        - slug: administration/create-schema
           title: Create Schema
-        - slug: administration/postgresql-alter-schema
+        - slug: administration/alter-schema
           title: Alter Schema
-        - slug: administration/postgresql-drop-schema
+        - slug: administration/drop-schema
           title: Drop Schema
     - section: Manage Tablespaces
       items:
-        - slug: administration/postgresql-create-tablespace
+        - slug: administration/create-tablespace
           title: Creating Tablespaces
-        - slug: administration/postgresql-alter-tablespace
+        - slug: administration/alter-tablespace
           title: Changing Tablespaces
-        - slug: administration/postgresql-drop-tablespace
+        - slug: administration/drop-tablespace
           title: Deleting Tablespaces
     - section: Roles & Privileges
       items:
-        - slug: administration/postgresql-roles
+        - slug: administration/roles
           title: Create Roles
-        - slug: administration/postgresql-grant
+        - slug: administration/grant
           title: Grant Privileges
-        - slug: administration/postgresql-revoke
+        - slug: administration/revoke
           title: Revoke Privileges
-        - slug: administration/postgresql-alter-role
+        - slug: administration/alter-role
           title: Alter roles
-        - slug: administration/postgresql-drop-role
+        - slug: administration/drop-role
           title: Drop Roles
-        - slug: administration/postgresql-role-membership
+        - slug: administration/role-membership
           title: Role Membership
-        - slug: administration/postgresql-set-role
+        - slug: administration/set-role
           title: SET ROLE Statement
-        - slug: administration/postgresql-current_user
+        - slug: administration/current_user
           title: CURRENT_USER
-        - slug: administration/postgresql-list-users
+        - slug: administration/list-users
           title: List Roles
-        - slug: administration/postgresql-change-password
+        - slug: administration/change-password
           title: Change Password
         - slug: administration/create-superuser-postgresql
           title: Create Superusers
-        - slug: administration/postgresql-row-level-security
+        - slug: administration/row-level-security
           title: PostgreSQL Row-Level Security
     - section: Backup & Restore
       items:
-        - slug: administration/postgresql-backup-database
+        - slug: administration/backup-database
           title: Backup Databases
-        - slug: administration/postgresql-restore-database
+        - slug: administration/restore-database
           title: Restore Databases
     - section: Administration Tips
       items:
-        - slug: administration/postgresql-reset-password
+        - slug: administration/reset-password
           title: Reset Password
-        - slug: administration/postgresql-describe-table
+        - slug: administration/describe-table
           title: Describe Table
-        - slug: administration/postgresql-show-databases
+        - slug: administration/show-databases
           title: Show Databases
-        - slug: administration/postgresql-show-tables
+        - slug: administration/show-tables
           title: Show Tables
         - slug: administration/psql-commands
           title: Practical psql Commands
         - slug: administration/restart-postgresql-windows
           title: Restart PostgreSQL on Windows
-        - slug: administration/postgresql-restart-ubuntu
+        - slug: administration/restart-ubuntu
           title: Restart PostgreSQL on Ubuntu
-        - slug: administration/postgresql-version
+        - slug: administration/version
           title: Get PostgreSQL Version
-        - slug: administration/postgresql-uptime
+        - slug: administration/uptime
           title: Check PostgreSQL Uptime
-        - slug: administration/postgresql-password-file-pgpass
+        - slug: administration/password-file-pgpass
           title: Password File (.pgpass)
-        - slug: administration/postgresql-pg_terminate_backend
+        - slug: administration/pg_terminate_backend
           title: Terminate Backend Connections
         - slug: administration/uninstall-postgresql-ubuntu
           title: Uninstall PostgreSQL on Ubuntu
@@ -418,44 +418,44 @@
       items:
         - slug: views/managing-postgresql-views
           title: Create Views
-        - slug: views/postgresql-drop-view
+        - slug: views/drop-view
           title: Drop Views
-        - slug: views/postgresql-updatable-views
+        - slug: views/updatable-views
           title: Create Updatable Views
-        - slug: views/postgresql-views-with-check-option
+        - slug: views/views-with-check-option
           title: WITH CHECK OPTION
-        - slug: views/postgresql-materialized-views
+        - slug: views/materialized-views
           title: Materialized Views
-        - slug: views/postgresql-recursive-view
+        - slug: views/recursive-view
           title: Recursive View
-        - slug: views/postgresql-alter-view
+        - slug: views/alter-view
           title: Alter Views
-        - slug: views/postgresql-list-views
+        - slug: views/list-views
           title: Listing Views
     - title: PostgreSQL Indexes
       slug: indexes
       items:
-        - slug: indexes/postgresql-create-index
+        - slug: indexes/create-index
           title: Create Indexes
-        - slug: indexes/postgresql-unique-index
+        - slug: indexes/unique-index
           title: Unique Indexes
-        - slug: indexes/postgresql-index-on-expression
+        - slug: indexes/index-on-expression
           title: Indexes on Expressions
-        - slug: indexes/postgresql-partial-index
+        - slug: indexes/partial-index
           title: Partial Indexes
-        - slug: indexes/postgresql-multicolumn-indexes
+        - slug: indexes/multicolumn-indexes
           title: Multicolumn Indexes
-        - slug: indexes/postgresql-reindex
+        - slug: indexes/reindex
           title: Reindexing with REINDEX
-        - slug: indexes/postgresql-list-indexes
+        - slug: indexes/list-indexes
           title: Display Indexes
-        - slug: indexes/postgresql-drop-index
+        - slug: indexes/drop-index
           title: Drop Indexes
-        - slug: indexes/postgresql-index-types
+        - slug: indexes/index-types
           title: Types of Indexes
-        - slug: indexes/postgresql-full-text-search
+        - slug: indexes/full-text-search
           title: Full Text Search
-        - slug: indexes/postgresql-json-index
+        - slug: indexes/json-index
           title: JSON Index
     - title: PostgreSQL Triggers
       slug: triggers
@@ -464,25 +464,25 @@
           title: Introduction
         - slug: triggers/creating-first-trigger-postgresql
           title: CREATE TRIGGER
-        - slug: triggers/postgresql-drop-trigger
+        - slug: triggers/drop-trigger
           title: DROP TRIGGER
-        - slug: triggers/postgresql-alter-trigger
+        - slug: triggers/alter-trigger
           title: ALTER TRIGGER
-        - slug: triggers/postgresql-after-insert-trigger
+        - slug: triggers/after-insert-trigger
           title: AFTER INSERT Trigger
-        - slug: triggers/postgresql-before-insert-trigger
+        - slug: triggers/before-insert-trigger
           title: BEFORE INSERT Trigger
-        - slug: triggers/postgresql-before-update-trigger
+        - slug: triggers/before-update-trigger
           title: BEFORE UPDATE Trigger
-        - slug: triggers/postgresql-after-update-trigger
+        - slug: triggers/after-update-trigger
           title: AFTER UPDATE Trigger
-        - slug: triggers/postgresql-before-delete-trigger
+        - slug: triggers/before-delete-trigger
           title: BEFORE DELETE Trigger
-        - slug: triggers/postgresql-after-delete-trigger
+        - slug: triggers/after-delete-trigger
           title: AFTER DELETE Trigger
-        - slug: triggers/postgresql-instead-of-triggers
+        - slug: triggers/instead-of-triggers
           title: INSTEAD OF Triggers
-        - slug: triggers/postgresql-before-truncate-trigger
+        - slug: triggers/before-truncate-trigger
           title: BEFORE TRUNCATE Trigger
         - slug: triggers/managing-postgresql-trigger
           title: Disable Triggers
@@ -490,9 +490,9 @@
           title: Enable Triggers
         - slug: triggers/how-to-list-all-triggers-in-postgresql
           title: List All Triggers
-        - slug: triggers/postgresql-event-trigger
+        - slug: triggers/event-trigger
           title: Event Triggers
-        - slug: triggers/postgresql-trigger-when-condition
+        - slug: triggers/trigger-when-condition
           title: Conditional Triggers
     - title: PostgreSQL PL/pgSQL
       slug: plpgsql
@@ -535,17 +535,17 @@
           title: Row Types
         - slug: plpgsql/plpgsql-errors-messages
           title: Error Messages
-        - slug: plpgsql/postgresql-exception
+        - slug: plpgsql/exception
           title: Exception Handling
-        - slug: plpgsql/postgresql-create-function
+        - slug: plpgsql/create-function
           title: CREATE FUNCTION
-        - slug: plpgsql/postgresql-create-procedure
+        - slug: plpgsql/create-procedure
           title: CREATE PROCEDURE
-        - slug: plpgsql/postgresql-drop-function
+        - slug: plpgsql/drop-function
           title: DROP FUNCTION
-        - slug: plpgsql/postgresql-drop-procedure
+        - slug: plpgsql/drop-procedure
           title: DROP PROCEDURE
-        - slug: plpgsql/postgresql-stored-procedure-with-inout-parameters
+        - slug: plpgsql/stored-procedure-with-inout-parameters
           title: Stored Procedure with INOUT Parameters
         - slug: plpgsql/introduction-to-postgresql-stored-procedures
           title: Introduction to Stored Procedures
@@ -562,274 +562,274 @@
     - title: PostgreSQL Aggregate Functions
       slug: aggregate-functions
       items:
-        - slug: aggregate-functions/postgresql-array_agg
+        - slug: aggregate-functions/array_agg
           title: ARRAY_AGG
-        - slug: aggregate-functions/postgresql-avg-function
+        - slug: aggregate-functions/avg-function
           title: AVG
-        - slug: aggregate-functions/postgresql-bool_and
+        - slug: aggregate-functions/bool_and
           title: BOOL_AND
-        - slug: aggregate-functions/postgresql-bool_or
+        - slug: aggregate-functions/bool_or
           title: BOOL_OR
-        - slug: aggregate-functions/postgresql-count-function
+        - slug: aggregate-functions/count-function
           title: COUNT
-        - slug: aggregate-functions/postgresql-max-function
+        - slug: aggregate-functions/max-function
           title: MAX
-        - slug: aggregate-functions/postgresql-min-function
+        - slug: aggregate-functions/min-function
           title: MIN
-        - slug: aggregate-functions/postgresql-string_agg-function
+        - slug: aggregate-functions/string_agg-function
           title: STRING_AGG
-        - slug: aggregate-functions/postgresql-sum-function
+        - slug: aggregate-functions/sum-function
           title: SUM
     - title: Date Functions
       slug: date-functions
       items:
-        - slug: date-functions/postgresql-age
+        - slug: date-functions/age
           title: AGE
-        - slug: date-functions/postgresql-at-time-zone
+        - slug: date-functions/at-time-zone
           title: AT TIME ZONE Operator
-        - slug: date-functions/postgresql-clock_timestamp
+        - slug: date-functions/clock_timestamp
           title: CLOCK_TIMESTAMP
-        - slug: date-functions/postgresql-current_date
+        - slug: date-functions/current_date
           title: CURRENT_DATE
-        - slug: date-functions/postgresql-current_time
+        - slug: date-functions/current_time
           title: CURRENT_TIME
-        - slug: date-functions/postgresql-current_timestamp
+        - slug: date-functions/current_timestamp
           title: CURRENT_TIMESTAMP
-        - slug: date-functions/postgresql-date_part
+        - slug: date-functions/date_part
           title: DATE_PART
-        - slug: date-functions/postgresql-date_trunc
+        - slug: date-functions/date_trunc
           title: DATE_TRUNC
-        - slug: date-functions/postgresql-extract
+        - slug: date-functions/extract
           title: EXTRACT
-        - slug: date-functions/postgresql-isfinite
+        - slug: date-functions/isfinite
           title: ISFINITE
-        - slug: date-functions/postgresql-justify_days
+        - slug: date-functions/justify_days
           title: JUSTIFY_DAYS
-        - slug: date-functions/postgresql-justify_hours
+        - slug: date-functions/justify_hours
           title: JUSTIFY_HOURS
-        - slug: date-functions/postgresql-justify_interval
+        - slug: date-functions/justify_interval
           title: JUSTIFY_INTERVAL
-        - slug: date-functions/postgresql-localtime
+        - slug: date-functions/localtime
           title: LOCALTIME
-        - slug: date-functions/postgresql-localtimestamp
+        - slug: date-functions/localtimestamp
           title: LOCALTIMESTAMP
-        - slug: date-functions/postgresql-make_date
+        - slug: date-functions/make_date
           title: MAKE_DATE
-        - slug: date-functions/postgresql-make_interval
+        - slug: date-functions/make_interval
           title: MAKE_INTERVAL
-        - slug: date-functions/postgresql-make_time
+        - slug: date-functions/make_time
           title: MAKE_TIME
-        - slug: date-functions/postgresql-now
+        - slug: date-functions/now
           title: NOW
-        - slug: date-functions/postgresql-pg_sleep
+        - slug: date-functions/pg_sleep
           title: PG_SLEEP
-        - slug: date-functions/postgresql-statement_timestamp
+        - slug: date-functions/statement_timestamp
           title: STATEMENT_TIMESTAMP
-        - slug: date-functions/postgresql-timeofday
+        - slug: date-functions/timeofday
           title: TIMEOFDAY
-        - slug: date-functions/postgresql-to_date
+        - slug: date-functions/to_date
           title: TO_DATE
-        - slug: date-functions/postgresql-to_timestamp
+        - slug: date-functions/to_timestamp
           title: TO_TIMESTAMP
     - title: JSON Functions
       slug: json-functions
       items:
-        - slug: json-functions/postgresql-json-extract
+        - slug: json-functions/json-extract
           title: Extracting JSON Data
-        - slug: json-functions/postgresql-jsonb-operators
+        - slug: json-functions/jsonb-operators
           title: JSONB Operators
-        - slug: json-functions/postgresql-jsonb_agg
+        - slug: json-functions/jsonb_agg
           title: jsonb_agg
-        - slug: json-functions/postgresql-jsonb_array_elements
+        - slug: json-functions/jsonb_array_elements
           title: jsonb_array_elements
-        - slug: json-functions/postgresql-jsonb_array_elements_text
+        - slug: json-functions/jsonb_array_elements_text
           title: jsonb_array_elements_text
-        - slug: json-functions/postgresql-jsonb_array_length
+        - slug: json-functions/jsonb_array_length
           title: jsonb_array_length
-        - slug: json-functions/postgresql-jsonb_build_array
+        - slug: json-functions/jsonb_build_array
           title: jsonb_build_array
-        - slug: json-functions/postgresql-jsonb_build_object
+        - slug: json-functions/jsonb_build_object
           title: jsonb_build_object
-        - slug: json-functions/postgresql-jsonb_each
+        - slug: json-functions/jsonb_each
           title: jsonb_each
-        - slug: json-functions/postgresql-jsonb_each_text
+        - slug: json-functions/jsonb_each_text
           title: jsonb_each_text
-        - slug: json-functions/postgresql-jsonb_extract_path
+        - slug: json-functions/jsonb_extract_path
           title: jsonb_extract_path
-        - slug: json-functions/postgresql-jsonb_extract_path_text
+        - slug: json-functions/jsonb_extract_path_text
           title: jsonb_extract_path_text
-        - slug: json-functions/postgresql-jsonb_insert
+        - slug: json-functions/jsonb_insert
           title: jsonb_insert
-        - slug: json-functions/postgresql-jsonb_object
+        - slug: json-functions/jsonb_object
           title: jsonb_object
-        - slug: json-functions/postgresql-jsonb_object_agg
+        - slug: json-functions/jsonb_object_agg
           title: jsonb_object_agg
-        - slug: json-functions/postgresql-jsonb_object_keys
+        - slug: json-functions/jsonb_object_keys
           title: jsonb_object_keys
-        - slug: json-functions/postgresql-json-path
+        - slug: json-functions/json-path
           title: JSON Path
-        - slug: json-functions/postgresql-jsonb_path_exists
+        - slug: json-functions/jsonb_path_exists
           title: jsonb_path_exists
-        - slug: json-functions/postgresql-jsonb_path_query
+        - slug: json-functions/jsonb_path_query
           title: jsonb_path_query
-        - slug: json-functions/postgresql-jsonb_path_query_array
+        - slug: json-functions/jsonb_path_query_array
           title: jsonb_path_query_array
-        - slug: json-functions/postgresql-jsonb_path_query_first
+        - slug: json-functions/jsonb_path_query_first
           title: jsonb_path_query_first
-        - slug: json-functions/postgresql-jsonb_pretty
+        - slug: json-functions/jsonb_pretty
           title: jsonb_pretty
-        - slug: json-functions/postgresql-jsonb_set
+        - slug: json-functions/jsonb_set
           title: jsonb_set
-        - slug: json-functions/postgresql-jsonb_strip_nulls
+        - slug: json-functions/jsonb_strip_nulls
           title: jsonb_strip_nulls
-        - slug: json-functions/postgresql-jsonb_to_record
+        - slug: json-functions/jsonb_to_record
           title: jsonb_to_record
-        - slug: json-functions/postgresql-jsonb_populate_record
+        - slug: json-functions/jsonb_populate_record
           title: jsonb_populate_record
-        - slug: json-functions/postgresql-jsonb_populate_recordset
+        - slug: json-functions/jsonb_populate_recordset
           title: jsonb_populate_recordset
-        - slug: json-functions/postgresql-jsonb_typeof
+        - slug: json-functions/jsonb_typeof
           title: jsonb_typeof
-        - slug: json-functions/postgresql-row_to_json
+        - slug: json-functions/row_to_json
           title: row_to_json
-        - slug: json-functions/postgresql-to_jsonb
+        - slug: json-functions/to_jsonb
           title: to_jsonb
     - title: Math Functions
       slug: math-functions
       items:
-        - slug: math-functions/postgresql-abs
+        - slug: math-functions/abs
           title: ABS
-        - slug: math-functions/postgresql-cbrt
+        - slug: math-functions/cbrt
           title: CBRT
-        - slug: math-functions/postgresql-ceil
+        - slug: math-functions/ceil
           title: CEIL
-        - slug: math-functions/postgresql-degrees
+        - slug: math-functions/degrees
           title: DEGREES
-        - slug: math-functions/postgresql-div
+        - slug: math-functions/div
           title: DIV
-        - slug: math-functions/postgresql-exp
+        - slug: math-functions/exp
           title: EXP
-        - slug: math-functions/postgresql-factorial
+        - slug: math-functions/factorial
           title: FACTORIAL
-        - slug: math-functions/postgresql-floor
+        - slug: math-functions/floor
           title: FLOOR
-        - slug: math-functions/postgresql-gcd
+        - slug: math-functions/gcd
           title: GCD
-        - slug: math-functions/postgresql-lcm
+        - slug: math-functions/lcm
           title: LCM
-        - slug: math-functions/postgresql-ln
+        - slug: math-functions/ln
           title: LN
-        - slug: math-functions/postgresql-log
+        - slug: math-functions/log
           title: LOG
-        - slug: math-functions/postgresql-mod
+        - slug: math-functions/mod
           title: MOD
-        - slug: math-functions/postgresql-min_scale
+        - slug: math-functions/min_scale
           title: MIN_SCALE
-        - slug: math-functions/postgresql-pi-function
+        - slug: math-functions/pi-function
           title: PI
-        - slug: math-functions/postgresql-power
+        - slug: math-functions/power
           title: POWER
-        - slug: math-functions/postgresql-radians
+        - slug: math-functions/radians
           title: RADIANS
-        - slug: math-functions/postgresql-random
+        - slug: math-functions/random
           title: RANDOM
-        - slug: math-functions/postgresql-round
+        - slug: math-functions/round
           title: ROUND
-        - slug: math-functions/postgresql-scale
+        - slug: math-functions/scale
           title: SCALE
-        - slug: math-functions/postgresql-sign
+        - slug: math-functions/sign
           title: SIGN
-        - slug: math-functions/postgresql-sqrt
+        - slug: math-functions/sqrt
           title: SQRT
-        - slug: math-functions/postgresql-trim_scale
+        - slug: math-functions/trim_scale
           title: TRIM_SCALE
-        - slug: math-functions/postgresql-trunc
+        - slug: math-functions/trunc
           title: TRUNC
-        - slug: math-functions/postgresql-width_bucket
+        - slug: math-functions/width_bucket
           title: WIDTH_BUCKET
     - title: String Functions
       slug: string-functions
       items:
-        - slug: string-functions/postgresql-ascii
+        - slug: string-functions/ascii
           title: ASCII
-        - slug: string-functions/postgresql-chr
+        - slug: string-functions/chr
           title: CHR
-        - slug: string-functions/postgresql-concat-function
+        - slug: string-functions/concat-function
           title: CONCAT
-        - slug: string-functions/postgresql-concat_ws
+        - slug: string-functions/concat_ws
           title: CONCAT_WS
-        - slug: string-functions/postgresql-format
+        - slug: string-functions/format
           title: FORMAT
-        - slug: string-functions/postgresql-initcap
+        - slug: string-functions/initcap
           title: INITCAP
-        - slug: string-functions/postgresql-left
+        - slug: string-functions/left
           title: LEFT
-        - slug: string-functions/postgresql-length-function
+        - slug: string-functions/length-function
           title: LENGTH
-        - slug: string-functions/postgresql-lower
+        - slug: string-functions/lower
           title: LOWER
-        - slug: string-functions/postgresql-lpad
+        - slug: string-functions/lpad
           title: LPAD
-        - slug: string-functions/postgresql-ltrim
+        - slug: string-functions/ltrim
           title: LTRIM
-        - slug: string-functions/postgresql-md5
+        - slug: string-functions/md5
           title: MD5
-        - slug: string-functions/postgresql-position
+        - slug: string-functions/position
           title: POSITION
-        - slug: string-functions/postgresql-regexp_matches
+        - slug: string-functions/regexp_matches
           title: REGEXP_MATCHES
         - slug: string-functions/regexp_replace
           title: REGEXP_REPLACE
-        - slug: string-functions/postgresql-repeat
+        - slug: string-functions/repeat
           title: REPEAT
-        - slug: string-functions/postgresql-reverse
+        - slug: string-functions/reverse
           title: REVERSE
-        - slug: string-functions/postgresql-replace
+        - slug: string-functions/replace
           title: REPLACE
-        - slug: string-functions/postgresql-right
+        - slug: string-functions/right
           title: RIGHT
-        - slug: string-functions/postgresql-rpad
+        - slug: string-functions/rpad
           title: RPAD
-        - slug: string-functions/postgresql-rtrim
+        - slug: string-functions/rtrim
           title: RTRIM
-        - slug: string-functions/postgresql-split_part
+        - slug: string-functions/split_part
           title: SPLIT_PART
-        - slug: string-functions/postgresql-substring
+        - slug: string-functions/substring
           title: SUBSTRING
-        - slug: string-functions/postgresql-to_char
+        - slug: string-functions/to_char
           title: TO_CHAR
-        - slug: string-functions/postgresql-to_number
+        - slug: string-functions/to_number
           title: TO_NUMBER
-        - slug: string-functions/postgresql-translate
+        - slug: string-functions/translate
           title: TRANSLATE
-        - slug: string-functions/postgresql-trim-function
+        - slug: string-functions/trim-function
           title: TRIM
-        - slug: string-functions/postgresql-upper
+        - slug: string-functions/upper
           title: UPPER
     - title: Window Functions
       slug: window-function
       items:
-        - slug: window-function/postgresql-cume_dist-function
+        - slug: window-function/cume_dist-function
           title: CUME_DIST
-        - slug: window-function/postgresql-dense_rank-function
+        - slug: window-function/dense_rank-function
           title: DENSE_RANK
-        - slug: window-function/postgresql-first_value-function
+        - slug: window-function/first_value-function
           title: FIRST_VALUE
-        - slug: window-function/postgresql-lag-function
+        - slug: window-function/lag-function
           title: LAG
-        - slug: window-function/postgresql-last_value-function
+        - slug: window-function/last_value-function
           title: LAST_VALUE
-        - slug: window-function/postgresql-lead-function
+        - slug: window-function/lead-function
           title: LEAD
-        - slug: window-function/postgresql-nth_value-function
+        - slug: window-function/nth_value-function
           title: NTH_VALUE
-        - slug: window-function/postgresql-ntile-function
+        - slug: window-function/ntile-function
           title: NTILE
-        - slug: window-function/postgresql-percent_rank-function
+        - slug: window-function/percent_rank-function
           title: PERCENT_RANK
-        - slug: window-function/postgresql-rank-function
+        - slug: window-function/rank-function
           title: RANK
-        - slug: window-function/postgresql-row_number
+        - slug: window-function/row_number
           title: ROW_NUMBER
 - nav: API
   title: API
@@ -838,27 +838,27 @@
     - title: PostgreSQL C#
       slug: csharp
       items:
-        - slug: csharp/postgresql-csharp-connect
+        - slug: csharp/csharp-connect
           title: Connect to Database Using C#
-        - slug: csharp/postgresql-csharp-call-a-stored-procedure
+        - slug: csharp/csharp-call-a-stored-procedure
           title: Call a Stored Procedure using C#
-        - slug: csharp/postgresql-csharp-call-postgresql-function
+        - slug: csharp/csharp-call-postgresql-function
           title: Call PostgreSQL Functions using C#
-        - slug: csharp/postgresql-csharp-connect
+        - slug: csharp/csharp-connect
           title: Connect to PostgreSQL using C#
-        - slug: csharp/postgresql-csharp-create-table
+        - slug: csharp/csharp-create-table
           title: Create Tables using C#
-        - slug: csharp/postgresql-csharp-delete
+        - slug: csharp/csharp-delete
           title: Delete Data from a Table using C#
-        - slug: csharp/postgresql-csharp-import-csv-file
+        - slug: csharp/csharp-import-csv-file
           title: Import Data from CSV using C#
-        - slug: csharp/postgresql-csharp-insert
+        - slug: csharp/csharp-insert
           title: Insert Data Into Tables using C#
-        - slug: csharp/postgresql-csharp-select
+        - slug: csharp/csharp-select
           title: Select Data in a Table using C#
-        - slug: csharp/postgresql-csharp-transaction
+        - slug: csharp/csharp-transaction
           title: PostgreSQL Transactions in C#
-        - slug: csharp/postgresql-csharp-update
+        - slug: csharp/csharp-update
           title: Update Data in a Table in C#
     - title: PostgreSQL PHP
       slug: php
@@ -877,7 +877,7 @@
           title: Query Data From PostgresQL using PDO
         - slug: php/call-stored-procedures
           title: Call PostgreSQL Stored Procedures in PHP
-        - slug: php/postgresql-blob
+        - slug: php/blob
           title: Manage with BLOB in PHP
         - slug: php/delete
           title: Delete Data From a Table in PHP
@@ -896,7 +896,7 @@
           title: Query Data in Python
         - slug: python/transaction
           title: Handle Transactions in Python
-        - slug: python/postgresql-python-call-postgresql-functions
+        - slug: python/python-call-postgresql-functions
           title: Call PostgreSQL Functions in Python
         - slug: python/call-stored-procedures
           title: Call PostgreSQL Stored Procedures in Python
