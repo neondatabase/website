@@ -11,6 +11,7 @@ import {
   readBlogSnapshotFromGitHubBranch,
   readLocalBlogSnapshot,
 } from 'utils/blog-content-source.mjs';
+import getExcerpt from 'utils/get-excerpt';
 
 const DEFAULT_CDN_BASE = 'https://blog.neonapi.io/blog';
 const REMOTE_BRANCH_CACHE_TTL_MS = 30 * 1000;
@@ -143,6 +144,8 @@ const mapAuthor = (slug, authorsData) => {
 
 const mapPostToListShape = (postEntry, authorsData, categoriesData) => {
   const { slug, data: frontmatter } = postEntry;
+  const excerpt =
+    frontmatter.excerpt || frontmatter.description || getExcerpt(postEntry.content, 280);
   const categorySlugs =
     frontmatter.categories || (frontmatter.category ? [frontmatter.category] : []);
   const categoryNodes = categorySlugs.map((categorySlug) => {
@@ -160,7 +163,8 @@ const mapPostToListShape = (postEntry, authorsData, categoriesData) => {
     date: frontmatter.date,
     modifiedGmt: frontmatter.updatedOn || frontmatter.date,
     title: frontmatter.title,
-    excerpt: frontmatter.excerpt || frontmatter.description || '',
+    subtitle: frontmatter.subtitle || '',
+    excerpt,
     isFeatured: frontmatter.isFeatured || false,
     categories: { nodes: categoryNodes },
     pageBlogPost: {

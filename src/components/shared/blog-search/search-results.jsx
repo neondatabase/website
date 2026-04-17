@@ -41,8 +41,8 @@ SearchResults.propTypes = {
       PropTypes.shape({
         slug: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        subtitle: PropTypes.string.isRequired,
-        excerpt: PropTypes.string.isRequired,
+        subtitle: PropTypes.string,
+        excerpt: PropTypes.string,
       })
     ),
     PropTypes.oneOf([null]),
