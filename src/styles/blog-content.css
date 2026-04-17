@@ -205,29 +205,6 @@
       }
     }
 
-    .wp-block-quote {
-      @apply my-8 border-l-2 border-green-44 pl-6 font-mono font-normal not-italic sm:pl-4;
-
-      strong,
-      b,
-      p {
-        @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
-
-        &::before,
-        &::after {
-          @apply hidden;
-        }
-      }
-
-      cite {
-        @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
-
-        em {
-          @apply not-italic;
-        }
-      }
-    }
-
     .wp-block-pullquote {
       @apply my-8;
 
@@ -257,4 +234,35 @@
       @apply border-gray-new-20;
     }
   }
+}
+
+.prose-blog > blockquote {
+  @apply my-8 border-l-2 border-green-44 pl-6 font-mono font-normal not-italic sm:pl-4;
+}
+
+.prose-blog > blockquote strong,
+.prose-blog > blockquote b,
+.prose-blog > blockquote p {
+  @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
+
+  &::before,
+  &::after {
+    @apply hidden;
+  }
+}
+
+.prose-blog > blockquote cite {
+  @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
+}
+
+.prose-blog > blockquote cite em {
+  @apply not-italic;
+}
+
+.prose-blog .blog-svg-scroll {
+  @apply my-10 h-auto w-full overflow-x-auto md:my-8 sm:my-6;
+}
+
+.prose-blog .blog-svg-scroll > svg {
+  @apply block max-w-none;
 }
