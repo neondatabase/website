@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable no-await-in-loop, no-console, no-continue, no-restricted-syntax */
+ 
 
 require('dotenv').config({ path: '.env' });
 
@@ -106,6 +106,7 @@ async function resolveRemoteSnapshotForBranch(moduleApi, branch) {
     readBlogSnapshotFromGitHubBranch,
   } = moduleApi;
   const { owner, repo, token } = getBlogRepoConfig();
+  const cdnUrl = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
 
   if (branch && branch !== 'main') {
     try {
@@ -122,14 +123,29 @@ async function resolveRemoteSnapshotForBranch(moduleApi, branch) {
         error instanceof BlogContentBranchNotFoundError ||
         error instanceof BlogContentConfigError
       ) {
-        return readBlogSnapshotFromCdn(process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog');
+        try {
+          return await readBlogSnapshotFromCdn(cdnUrl);
+        } catch (cdnError) {
+          const fallbackReason =
+            error instanceof BlogContentBranchNotFoundError
+              ? `matching blog branch "${branch}" was not found in ${owner}/${repo}`
+              : 'blog repo credentials are incomplete for branch-based bootstrap';
+
+          throw new Error(
+            `Failed to load blog content for website branch "${branch}": ${fallbackReason}, then CDN fallback ${cdnUrl} failed. ${cdnError.message}`
+          );
+        }
       }
 
       throw error;
     }
   }
 
-  return readBlogSnapshotFromCdn(process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog');
+  try {
+    return await readBlogSnapshotFromCdn(cdnUrl);
+  } catch (error) {
+    throw new Error(`Failed to load blog content from CDN ${cdnUrl}. ${error.message}`);
+  }
 }
 
 async function handleSync(options) {

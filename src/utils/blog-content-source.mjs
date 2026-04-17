@@ -12,6 +12,11 @@ import * as tar from 'tar';
 
 const BLOG_CONTENT_DIRNAME = 'content/blog';
 const BLOG_CONTENT_USER_AGENT = 'neon-next-blog-loader/1.0';
+const BLOG_CDN_FETCH_CONCURRENCY = Number.parseInt(
+  process.env.BLOG_CDN_FETCH_CONCURRENCY || '6',
+  10
+);
+const BLOG_CDN_FETCH_RETRIES = Number.parseInt(process.env.BLOG_CDN_FETCH_RETRIES || '2', 10);
 
 class BlogContentBranchNotFoundError extends Error {
   constructor(branch) {
@@ -25,6 +30,17 @@ class BlogContentConfigError extends Error {
   constructor(message) {
     super(message);
     this.name = 'BlogContentConfigError';
+  }
+}
+
+class BlogContentFetchError extends Error {
+  constructor(message, details = {}) {
+    super(message, details.cause ? { cause: details.cause } : undefined);
+    this.name = 'BlogContentFetchError';
+    this.url = details.url || null;
+    this.slug = details.slug || null;
+    this.status = details.status || null;
+    this.attempt = details.attempt || null;
   }
 }
 
@@ -74,6 +90,83 @@ const createSnapshot = ({
   categoriesRaw,
 });
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const formatFetchErrorDetails = (error) => {
+  const parts = [];
+
+  if (error?.name) {
+    parts.push(error.name);
+  }
+
+  if (error?.code) {
+    parts.push(`code=${error.code}`);
+  }
+
+  if (error?.message) {
+    parts.push(error.message);
+  }
+
+  if (error?.cause?.name) {
+    parts.push(`cause=${error.cause.name}`);
+  }
+
+  if (error?.cause?.code) {
+    parts.push(`causeCode=${error.cause.code}`);
+  }
+
+  if (error?.cause?.message) {
+    parts.push(`causeMessage=${error.cause.message}`);
+  }
+
+  return parts.join('; ');
+};
+
+const shouldRetryFetch = ({ status = null, error = null }) => {
+  if ([408, 429, 500, 502, 503, 504].includes(status)) {
+    return true;
+  }
+
+  const retryableCodes = new Set([
+    'ECONNRESET',
+    'ENETUNREACH',
+    'ETIMEDOUT',
+    'EAI_AGAIN',
+    'UND_ERR_BODY_TIMEOUT',
+    'UND_ERR_CONNECT_TIMEOUT',
+    'UND_ERR_HEADERS_TIMEOUT',
+    'UND_ERR_SOCKET',
+  ]);
+
+  return retryableCodes.has(error?.code) || retryableCodes.has(error?.cause?.code);
+};
+
+const getRetryDelayMs = (attempt) => 250 * 2 ** (attempt - 1);
+
+const mapWithConcurrency = async (items, limit, mapper) => {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+
+  const workerCount = Math.max(1, Math.min(limit, items.length || 1));
+
+  await Promise.all(
+    Array.from({ length: workerCount }, async () => {
+      while (true) {
+        const currentIndex = nextIndex;
+
+        if (currentIndex >= items.length) {
+          return;
+        }
+
+        nextIndex += 1;
+        results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+      }
+    })
+  );
+
+  return results;
+};
+
 const readPostsFromDirectory = async (postsDir) => {
   try {
     const files = (await fs.readdir(postsDir)).filter((fileName) => fileName.endsWith('.md'));
@@ -120,30 +213,70 @@ const readBlogSnapshotFromDirectory = async ({
   });
 };
 
-const fetchText = async (url, init = {}) => {
-  let response;
+const fetchText = async (url, init = {}, context = {}) => {
+  const attempts = context.attempts || BLOG_CDN_FETCH_RETRIES + 1;
 
-  try {
-    response = await fetch(url, {
-      ...init,
-      headers: {
-        'user-agent': BLOG_CONTENT_USER_AGENT,
-        ...(init.headers || {}),
-      },
-    });
-  } catch (error) {
-    throw new Error(`Failed to fetch ${url}: ${error.message}`);
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    let response;
+
+    try {
+      response = await fetch(url, {
+        ...init,
+        headers: {
+          'user-agent': BLOG_CONTENT_USER_AGENT,
+          ...(init.headers || {}),
+        },
+      });
+    } catch (error) {
+      if (attempt < attempts && shouldRetryFetch({ error })) {
+        await sleep(getRetryDelayMs(attempt));
+        continue;
+      }
+
+      const target = context.slug ? `post "${context.slug}" (${url})` : url;
+
+      throw new BlogContentFetchError(
+        `Failed to fetch ${target} after ${attempt}/${attempts} attempts: ${formatFetchErrorDetails(
+          error
+        )}`,
+        {
+          attempt,
+          cause: error,
+          slug: context.slug,
+          url,
+        }
+      );
+    }
+
+    if (!response.ok) {
+      if (attempt < attempts && shouldRetryFetch({ status: response.status })) {
+        await sleep(getRetryDelayMs(attempt));
+        continue;
+      }
+
+      const target = context.slug ? `post "${context.slug}" (${url})` : url;
+
+      throw new BlogContentFetchError(
+        `Failed to fetch ${target} after ${attempt}/${attempts} attempts: HTTP ${response.status}`,
+        {
+          attempt,
+          slug: context.slug,
+          status: response.status,
+          url,
+        }
+      );
+    }
+
+    return response.text();
   }
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: ${response.status}`);
-  }
-
-  return response.text();
+  throw new BlogContentFetchError(`Failed to fetch ${url}: exhausted all retry attempts`, {
+    url,
+  });
 };
 
-const fetchJson = async (url, init = {}) => {
-  const raw = await fetchText(url, init);
+const fetchJson = async (url, init = {}, context = {}) => {
+  const raw = await fetchText(url, init, context);
 
   return {
     data: JSON.parse(raw),
@@ -152,19 +285,29 @@ const fetchJson = async (url, init = {}) => {
 };
 
 const readBlogSnapshotFromCdn = async (baseUrl) => {
-  const manifest = await fetchJson(joinUrl(baseUrl, 'manifest.json'), {
-    next: { revalidate: 60 },
-  });
+  const manifest = await fetchJson(
+    joinUrl(baseUrl, 'manifest.json'),
+    {
+      next: { revalidate: 60 },
+    },
+    { attempts: BLOG_CDN_FETCH_RETRIES + 1 }
+  );
   const slugs = manifest.data?.posts || [];
 
   const [authorsResult, categoriesResult, posts] = await Promise.all([
     fetchJson(joinUrl(baseUrl, 'authors/data.json'), { next: { revalidate: 60 } }),
     fetchJson(joinUrl(baseUrl, 'categories/data.json'), { next: { revalidate: 60 } }),
-    Promise.all(
-      slugs.map(async (slug) => {
-        const raw = await fetchText(joinUrl(baseUrl, `posts/${slug}.md`), {
-          next: { revalidate: 60 },
-        });
+    mapWithConcurrency(slugs, BLOG_CDN_FETCH_CONCURRENCY, async (slug) => {
+      const url = joinUrl(baseUrl, `posts/${slug}.md`);
+
+      try {
+        const raw = await fetchText(
+          url,
+          {
+            next: { revalidate: 60 },
+          },
+          { attempts: BLOG_CDN_FETCH_RETRIES + 1, slug }
+        );
         const { data, content } = matter(raw);
 
         return {
@@ -174,8 +317,16 @@ const readBlogSnapshotFromCdn = async (baseUrl) => {
           data,
           content,
         };
-      })
-    ),
+      } catch (error) {
+        if (error instanceof BlogContentFetchError) {
+          throw error;
+        }
+
+        throw new Error(
+          `Failed to parse frontmatter for post "${slug}" from ${url}: ${error.message}`
+        );
+      }
+    }),
   ]);
 
   return createSnapshot({
@@ -362,6 +513,7 @@ export {
   BLOG_CONTENT_DIRNAME,
   BlogContentBranchNotFoundError,
   BlogContentConfigError,
+  BlogContentFetchError,
   compareSnapshots,
   createSnapshotFileMap,
   hasLocalBlogContent,
