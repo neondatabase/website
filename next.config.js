@@ -656,6 +656,11 @@ const defaultConfig = {
         destination: '/sla',
         permanent: true,
       },
+      {
+        source: '/msa',
+        destination: '/platform-terms',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
