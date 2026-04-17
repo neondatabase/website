@@ -436,10 +436,15 @@ const componentHandlers = {
     // Check if children contain block-level content (lists, code blocks, etc.)
     const hasBlockContent = node.children?.some(
       (c) =>
-        c.type === 'list' || c.type === 'code' || c.type === 'heading' || c.type === 'blockquote'
+        c.type === 'list' ||
+        c.type === 'code' ||
+        c.type === 'heading' ||
+        c.type === 'blockquote' ||
+        c.type === 'mdxJsxFlowElement' ||
+        c.type === 'mdxJsxTextElement'
     );
 
-    if (hasBlockContent) {
+    if (hasBlockContent || title) {
       // Return label as its own paragraph, followed by children as block nodes
       return [
         {
@@ -474,10 +479,9 @@ const componentHandlers = {
     visit({ type: 'root', children: node.children }, 'code', (codeNode) => {
       const label = labels[codeBlockIndex] || `Option ${codeBlockIndex + 1}`;
 
-      // Add label as plain text (matches Python output)
       children.push({
         type: 'paragraph',
-        children: [{ type: 'text', value: `Tab: ${label}` }],
+        children: [{ type: 'strong', children: [{ type: 'text', value: label }] }],
       });
 
       // Add the code block
@@ -505,10 +509,9 @@ const componentHandlers = {
         // Get label from Tabs labels array, or fallback to TabItem's own label attribute
         const label = labels[tabIndex] || getAttr(child, 'label') || `Tab ${tabIndex + 1}`;
 
-        // Add tab label (not bold, to match Python output)
         result.push({
           type: 'paragraph',
-          children: [{ type: 'text', value: `Tab: ${label}` }],
+          children: [{ type: 'strong', children: [{ type: 'text', value: label }] }],
         });
 
         // Add tab content (will be recursively transformed)
@@ -534,7 +537,7 @@ const componentHandlers = {
     return [
       {
         type: 'paragraph',
-        children: [{ type: 'text', value: `Tab: ${label}` }],
+        children: [{ type: 'strong', children: [{ type: 'text', value: label }] }],
       },
       ...content,
     ];
@@ -976,11 +979,10 @@ const componentHandlers = {
       return {
         type: 'paragraph',
         children: [
-          { type: 'text', value: 'Apply for the Agent Plan: ' },
           {
             type: 'link',
             url: `${BASE_URL}/use-cases/ai-agents`,
-            children: [{ type: 'text', value: `${BASE_URL}/use-cases/ai-agents` }],
+            children: [{ type: 'text', value: 'Apply for the Agent Plan' }],
           },
         ],
       };
@@ -1084,11 +1086,10 @@ const componentHandlers = {
     return {
       type: 'paragraph',
       children: [
-        { type: 'text', value: 'Watch on YouTube: ' },
         {
           type: 'link',
           url: `https://youtube.com/watch?v=${videoId}`,
-          children: [{ type: 'text', value: `https://youtube.com/watch?v=${videoId}` }],
+          children: [{ type: 'text', value: 'Watch on YouTube' }],
         },
       ],
     };
@@ -1136,7 +1137,7 @@ const componentHandlers = {
     return {
       type: 'paragraph',
       children: [
-        { type: 'text', value: childText ? `${childText} ` : '' },
+        { type: 'text', value: childText ? `${childText}: ` : '' },
         {
           type: 'link',
           url: buttonUrl,

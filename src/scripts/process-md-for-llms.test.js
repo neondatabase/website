@@ -46,10 +46,10 @@ describe('MDX to Markdown Conversion', () => {
 
       const result = await processFile(inputPath, pageUrl);
 
-      // Should have converted CodeTabs to Tab labels (plain text, not bold)
-      expect(result).toContain('Tab: node-postgres');
-      expect(result).toContain('Tab: postgres.js');
-      expect(result).toContain('Tab: Neon serverless driver');
+      // Should have converted CodeTabs to bold labels
+      expect(result).toContain('**node-postgres**');
+      expect(result).toContain('**postgres.js**');
+      expect(result).toContain('**Neon serverless driver**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');
@@ -453,8 +453,7 @@ Description of feature two.
       const result = await processInlineMdx(`
 <YoutubeIframe embedId="dQw4w9WgXcQ" />
 `);
-      expect(result).toContain('Watch on YouTube:');
-      expect(result).toContain('https://youtube.com/watch?v=dQw4w9WgXcQ');
+      expect(result).toContain('[Watch on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)');
       expect(result).not.toContain('<YoutubeIframe');
     });
 
@@ -501,8 +500,8 @@ print('hello')
 </TabItem>
 </Tabs>
 `);
-      expect(result).toContain('Tab: JavaScript');
-      expect(result).toContain('Tab: Python');
+      expect(result).toContain('**JavaScript**');
+      expect(result).toContain('**Python**');
       expect(result).toContain("console.log('hello')");
       expect(result).toContain("print('hello')");
       expect(result).not.toContain('<Tabs');
@@ -887,6 +886,76 @@ See [CONN_MAX_AGE](https://example.com).
       const billingHeader = buildPageHeader('introduction/about-billing', navMap);
       expect(billingHeader).not.toContain('Plans and billing > Plans and billing');
       expect(billingHeader).toContain('> This page location:');
+    });
+  });
+
+  describe('Component conversion test page (snapshot)', () => {
+    it('should convert every component without raw MDX leaks', async () => {
+      const fixturePath = 'src/scripts/fixtures/mdx-conversion-test.md';
+      const pageUrl = 'https://neon.com/docs/test/mdx-conversion-test';
+      const result = await processFile(fixturePath, pageUrl, process.cwd());
+
+      // No raw MDX component tags should survive conversion
+      const componentNames = [
+        'Admonition',
+        'CodeTabs',
+        'Tabs',
+        'TabItem',
+        'Steps',
+        'DetailIconCards',
+        'TechCards',
+        'DocsList',
+        'InfoBlock',
+        'DefinitionList',
+        'CheckList',
+        'CheckItem',
+        'CTA',
+        'TwoColumnLayout',
+        'LinkPreview',
+        'YoutubeIframe',
+        'CommunityBanner',
+        'PromptCards',
+        'MegaLink',
+        'QuoteBlock',
+        'Testimonial',
+        'FeatureList',
+        'ProgramForm',
+        'FeatureBeta',
+        'EarlyAccess',
+        'FeatureBetaProps',
+        'EarlyAccessProps',
+        'AgentSkillsTip',
+        'MCPTools',
+        'LinkAPIKey',
+        'LRNotice',
+        'ComingSoon',
+        'PrivatePreview',
+        'PrivatePreviewEnquire',
+        'PublicPreview',
+        'LRBeta',
+        'MigrationAssistant',
+        'NextSteps',
+        'NewPricing',
+        'AzureRegionsDeprecation',
+        'ConsumptionAccountApiDeprecation',
+        'CopyPrompt',
+        'NeedHelp',
+        'Comment',
+        'Video',
+        'UserButton',
+        'RequestForm',
+        'Suspense',
+        'SqlToRestConverter',
+        'LogosSection',
+        'ComputeCalculator',
+        'UseCaseContext',
+      ];
+
+      for (const name of componentNames) {
+        expect(result).not.toContain(`<${name}`);
+      }
+
+      expect(result).toMatchSnapshot();
     });
   });
 });
