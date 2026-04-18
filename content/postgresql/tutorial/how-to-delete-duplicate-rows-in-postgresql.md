@@ -70,7 +70,7 @@ The output indicates some duplicate rows such as 2 apples and 3 oranges in the `
 
 If the table has few rows, you can easily see which ones are duplicates immediately. However, this is not the case with a table that has lots of rows.
 
-The find the duplicate rows, you use the following statement:
+To find the duplicate rows, you use the following statement:
 
 ```sql
 SELECT
