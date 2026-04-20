@@ -82,7 +82,7 @@ Refer to the following guide for instructions.
 
 Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
 
-Branches with expiration are particularly useful for:
+Branches with expiration work well for:
 
 - CI/CD pipeline testing environments
 - Feature development with known lifespans

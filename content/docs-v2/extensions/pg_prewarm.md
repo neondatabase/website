@@ -13,7 +13,7 @@ You can use the `pg_prewarm` extension to preload data into the Postgres buffer 
 
 <CTA />
 
-In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache.
+This guide covers the `pg_prewarm` extension: how to enable it and how to use it to prewarm your Postgres buffer cache.
 
 <Admonition type="note">
 The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).

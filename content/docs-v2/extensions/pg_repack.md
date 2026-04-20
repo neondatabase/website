@@ -13,7 +13,7 @@ Postgres, like any database system, can accumulate bloat over time due to freque
 
 <CTA />
 
-This guide provides an introduction to the `pg_repack` extension and how to leverage it within your Neon database. You'll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
+This guide covers the `pg_repack` extension and how to use it in your Neon database. You'll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
 
 <Admonition type="important">
 Before using `pg_repack` on Neon, review the [Storage impact on Neon](#best-practices-and-considerations) section to understand how repack operations temporarily increase your project storage due to WAL generation and your [restore window](/docs/introduction/restore-window) setting.

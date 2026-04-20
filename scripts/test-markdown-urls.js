@@ -535,7 +535,7 @@ function buildTests() {
   );
 
   add('404 handling', fake404Path, 'accept-md', [
-    (r) => expectStatus(r.status, 200),
+    (r) => expectStatus(r.status, 404),
     (r) => expectContentType(r.contentType, 'text/markdown'),
     (r) => expectBodyContains(r.body, 'Page Not Found'),
     (r) => expectBodyContains(r.body, '/docs/llms.txt'),
@@ -545,7 +545,7 @@ function buildTests() {
   ]);
 
   add('404 handling', fake404Path, 'agent-ua', [
-    (r) => expectStatus(r.status, 200),
+    (r) => expectStatus(r.status, 404),
     (r) => expectContentType(r.contentType, 'text/markdown'),
     (r) => expectBodyContains(r.body, 'Page Not Found'),
     (r) => expectHeader(r.headers, 'x-content-source', 'agent-404'),

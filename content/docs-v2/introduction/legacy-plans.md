@@ -14,7 +14,7 @@ If you're on a legacy paid plan, you will automatically be switched to a new pla
 <Admonition type="important">
 You cannot upgrade or downgrade to a legacy plan. See our [current usage-based plans](/docs/introduction/plans) for options.
 
-If you signed up through **Azure Marketplace**, you remain on a [legacy plan](/docs/introduction/legacy-plans) — for both Free and paid.
+If you signed up through **Azure Marketplace**, you remain on a [legacy plan](/docs/introduction/legacy-plans), including both Free and paid tiers.
 </Admonition>
 
 ---
@@ -202,7 +202,7 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 
 ## Extra usage
 
-Neon legacy plans include monthly **allowances** for storage, compute, and projects. If you're on a paid plan and exceed those allowances, you're automatically billed for extra usage—no manual action required. The types of extra usage available vary by plan.
+Neon legacy plans include monthly **allowances** for storage, compute, and projects. If you're on a paid plan and exceed those allowances, you're automatically billed for extra usage with no manual action required. The types of extra usage available vary by plan.
 
 If your usage exceeds a plan allowance and that type of extra usage is supported, it's automatically allocated and billed on your monthly invoice.
 
@@ -211,7 +211,7 @@ If your usage exceeds a plan allowance and that type of extra usage is supported
 For example, the Launch plan includes 10 GB of storage. If you use more than that, you're charged $1.75 per additional GB-month. The same logic applies to Scale and Business, with lower rates at higher plan tiers.
 
 <Admonition type="note">
-In billing, “allocation” refers to a billable increase in your storage allowance—not physical provisioning of space.
+In billing, “allocation” refers to a billable increase in your storage allowance, not physical provisioning of space.
 </Admonition>
 
 #### Extra projects
@@ -247,7 +247,7 @@ In Neon, storage consists of your total **data size** and **history**.
 
 - **Data size**
 
-  This component of Neon storage is similar to what you might expect from most database services — it's simply the size of your data across all of your Neon projects and branches. You can think of it as a snapshot of your data.
+  This component of Neon storage is similar to what you'd expect from most database services: it's simply the size of your data across all of your Neon projects and branches. You can think of it as a snapshot of your data.
 
 - **History**
 
@@ -379,7 +379,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 - **Set a reasonable history window** &#8212; We recommend setting your restore window to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
 - **Use VACUUM FULL sparingly** &#8212; Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
 - **Consider timing** &#8212; Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
-- **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
+- **Manual VACUUM for scale to zero users**: In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it’s safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
 
   To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
 
@@ -625,7 +625,7 @@ Your project has exceeded the data transfer quota. Upgrade your plan to increase
 
 If you hit the data transfer limit on the Free plan, you can upgrade your plan from the **Billing** page in your Neon account. For details, see [Change your plan](/docs/introduction/manage-billing#change-your-plan).
 
-For paid plans, Neon applies a reasonable usage policy—there’s no fixed limit, but usage should remain within what’s typical for most workloads. If usage is unusually high, Neon may reach out to discuss your use case and plan options.
+For paid plans, Neon applies a reasonable usage policy. There’s no fixed limit, but usage should remain within what’s typical for most workloads. If usage is unusually high, Neon may reach out to discuss your use case and plan options.
 
 You can monitor your data transfer usage on the **Project Dashboard** or **Billing** page.
 

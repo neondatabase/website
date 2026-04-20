@@ -4,14 +4,16 @@ import Testimonials from 'components/pages/case-studies/testimonials';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
-import { getAllWpCaseStudiesPosts, getAllWpCaseStudiesCategories } from 'utils/api-wp';
+import { getCaseStudiesData, getCaseStudiesCategories } from 'utils/api-local-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.caseStudies);
 
-const CaseStudiesPage = async () => {
-  const caseStudies = await getAllWpCaseStudiesPosts();
-  const categories = await getAllWpCaseStudiesCategories();
+export const dynamic = 'force-static';
+
+const CaseStudiesPage = () => {
+  const caseStudies = getCaseStudiesData();
+  const categories = getCaseStudiesCategories();
 
   return (
     <Layout>
@@ -31,5 +33,3 @@ const CaseStudiesPage = async () => {
 };
 
 export default CaseStudiesPage;
-
-export const revalidate = 60;

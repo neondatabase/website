@@ -18,11 +18,11 @@ There are many ways to contribute to the Neon community:
 - **Neon Docs**: Share suggestions, contribute content, or write new guides to help others working with Neon. Check out our [Documentation Contribution Guide](/docs/community/contribution-guide) to get started. You can also create visual diagrams using our [Mermaid Diagrams Guide](/docs/community/mermaid-diagrams). If you want to consume our docs as markdown (e.g. for LLMs or APIs), see [Using Neon docs as markdown](/docs/community/llms-markdown-guide).
 - **Community Guides**: Share your knowledge by writing a guide about Neon or Postgres. These guides can help developers learn new technologies, techniques, and best practices. Submit your guide to our [Community Guides](/guides) page by forking the [Neon website repository](https://github.com/neondatabase/website) and creating a PR to add it to the [/content/guides](https://github.com/neondatabase/website/tree/main/content/guides) directory.
 - **Examples and applications**: Share examples and applications that demonstrate how to integrate Neon with different tools and platforms. Post your examples on our [Discord Server](https://discord.gg/92vNTzKDGp) or contribute to the [Neon examples repository](https://github.com/neondatabase/examples).
-- **Code contributions**: Contribute to Neon's development by fixing bugs, proposing new features, or submitting code to [Neon's GitHub repositories](https://github.com/neondatabase). It's a great way to learn about Neon's architecture.
+- **Code contributions**: Contribute to Neon's development by fixing bugs, proposing new features, or submitting code to [Neon's GitHub repositories](https://github.com/neondatabase). It's also a good way to dig into how Neon is built.
 
 ## Join the Discussion
 
-Connect with the community and share your insights on our Discord Server and X (Twitter). Also, subscribe to the Neon YouTube channel for videos and presentations.
+Join us on Discord and X (Twitter), and subscribe to the Neon YouTube channel for videos and presentations.
 
 - [Neon Discord Server](https://discord.gg/92vNTzKDGp)
 - [X (Twitter)](https://twitter.com/neondatabase)

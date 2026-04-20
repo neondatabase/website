@@ -11,8 +11,6 @@ updatedOn: '2026-02-06T22:07:32.822Z'
 
 `tsvector` is a specialized Postgres data type designed for full-text search operations. It represents a document in a form optimized for text search, where each word is reduced to its root form (lexeme) and stored with information about its position and importance.
 
-In Postgres, the `tsvector` data type is useful for implementing efficient full-text search capabilities, allowing for fast and flexible searching across large volumes of text data.
-
 <CTA />
 
 ## Storage and syntax

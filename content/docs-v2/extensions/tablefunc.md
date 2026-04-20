@@ -385,7 +385,7 @@ FROM connectby(
 
 ## Conclusion
 
-The `tablefunc` extension in Postgres is a powerful tool for reshaping and analyzing data. It provides essential functions like `normal_rand()` for generating random numbers, `crosstab()` for creating pivot tables, and `connectby()` for traversing hierarchical data structures.
+The `tablefunc` extension gives you functions for reshaping and analyzing data in Postgres: `normal_rand()` for generating random numbers, `crosstab()` for pivot tables, and `connectby()` for traversing hierarchical data.
 
 ## Resources
 

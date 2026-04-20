@@ -20,7 +20,7 @@ const Animation = ({ className }) => {
     threshold: 0.4,
   });
   const { isReady, animationRef, rive, RiveComponent } = useRiveAnimation({
-    src: '/animations/pages/home/speed-scale-ide.riv?2025121142',
+    src: '/animations/pages/home/speed-scale-ide.riv?202604171944',
     fit: Fit.Contain,
     alignment: Alignment.Center,
     threshold: 0,

@@ -13,7 +13,7 @@ LangChain is a popular framework for working with AI, Vectors, and embeddings. L
 
 ## Initialize Postgres Vector Store
 
-LangChain simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing streamlined methods for these tasks.
+LangChain handles document insertion and embedding generation through its vector store methods.
 
 Here's how you can initialize Postgres Vector with LangChain:
 

@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.074Z'
 ---
 
-The `btree_gin` extension for Postgres provides a specialized set of **GIN operator classes** that allow common, "B-tree-like" data types to be included in **GIN indexes**. This is particularly useful for scenarios where you need to create **multicolumn GIN indexes** that combine complex data types (like arrays or JSONB) with simpler types such as integers, timestamps, or text. Ultimately, `btree_gin` helps you leverage the power of GIN for a broader range of indexing needs, optimizing queries across diverse data structures.
+The `btree_gin` extension for Postgres provides a specialized set of **GIN operator classes** that allow common, "B-tree-like" data types to be included in **GIN indexes**. Use it when you need **multicolumn GIN indexes** that combine complex data types (like arrays or JSONB) with simpler types such as integers, timestamps, or text. Ultimately, `btree_gin` extends GIN to a broader range of indexing needs, optimizing queries across diverse data structures.
 
 Consider a scenario where an application needs to query blog posts based on a set of `tags` (an array) and a `publication_date` (a timestamp). The `btree_gin` extension allows for a single, optimized index to service both conditions, potentially offering significant performance gains over alternative indexing strategies.
 
@@ -49,7 +49,7 @@ ON orders
 USING GIN (order_date, product_tags);
 ```
 
-This composite index can then be leveraged by Postgres to optimize queries filtering on both `order_date` and `product_tags` simultaneously, such as:
+Postgres can then use this composite index to optimize queries filtering on both `order_date` and `product_tags` simultaneously, such as:
 
 ```sql
 SELECT * FROM orders
@@ -146,7 +146,7 @@ FROM products
 WHERE attributes @> '{"material": "cotton"}' AND price < 50.00;
 ```
 
-The `idx_products_attributes_price` index facilitates efficient resolution of both the JSONB containment check and the numeric inequality.
+The `idx_products_attributes_price` index handles both the JSONB containment check and the numeric inequality efficiently.
 
 ## Important considerations and Best practices
 

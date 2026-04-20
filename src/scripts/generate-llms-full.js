@@ -189,10 +189,12 @@ async function main() {
     }
 
     const stripped = stripNavigationContext(content);
-    parts.push(`--- DOCUMENT SOURCE: ${file.url} ---\n\n${stripped.trim()}\n`);
+    parts.push(`--- [Document source](${file.url}) ---\n\n${stripped.trim()}\n`);
   }
 
-  parts.push(`---\n\nFor all past changelog entries, see https://neon.com/docs/changelog.md\n`);
+  parts.push(
+    `---\n\nFor all past changelog entries, see [changelog](https://neon.com/docs/changelog.md)\n`
+  );
 
   if (readErrors > 0) {
     console.warn(`\nWarning: ${readErrors} file(s) missing from public/md/`);

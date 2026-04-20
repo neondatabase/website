@@ -266,11 +266,11 @@ const ContactForm = () => {
         <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
           By submitting you agree to the{' '}
           <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
-            Terms Service
+            Terms of Use
           </Link>{' '}
           and acknowledge the{' '}
           <Link className="decoration-dashed" to={LINKS.privacyPolicy} theme="grey-85-underlined">
-            Privacy Policy
+            Privacy Notice
           </Link>
           .
         </p>

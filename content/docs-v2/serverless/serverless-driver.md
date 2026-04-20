@@ -306,7 +306,7 @@ For additional details, see [transaction(...) function](https://github.com/neond
 
 ### Using transactions with JWT self-verification
 
-When using Row-Level Security (RLS) to secure backend SQL with the Neon serverless driver, you may need to set JWT claims within a transaction context. This is particularly useful for custom JWT verification flows in backend APIs, where you want to ensure user-specific access to rows according to RLS policies.
+When using Row-Level Security (RLS) to secure backend SQL with the Neon serverless driver, you may need to set JWT claims within a transaction context. Use this for custom JWT verification flows in backend APIs, where you want to ensure user-specific access to rows according to RLS policies.
 
 Here's an example of how to use the `transaction()` function with self-verified JWT claims:
 

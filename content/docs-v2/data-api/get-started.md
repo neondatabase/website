@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-03-20T21:22:58.810Z'
 ---
 
-In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
+This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
 
 ## Before you begin
 

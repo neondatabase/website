@@ -6,7 +6,7 @@ summary: >-
   roles, permissions, and the process for creating and overseeing organizations
   and their associated projects.
 enableTableOfContents: true
-updatedOn: '2026-03-12T17:34:43.559Z'
+updatedOn: '2026-04-16T19:00:00.000Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
@@ -24,7 +24,7 @@ Organizations have two main member roles:
 - **Admin**: Full control over the organization and all its projects.
 - **Member**: Access to all organization projects, but cannot modify org settings or delete projects.
 
-For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
+For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page. That page also explains [which roles receive certain organization emails](/docs/manage/user-permissions#email-notifications) (for example, alerts when a project is close to its storage limit).
 
 You can also [auto-provision members by email domain](/docs/manage/orgs-add-members-by-domain) so that users whose email matches a verified domain are added to the organization automatically when they sign up or log in.
 

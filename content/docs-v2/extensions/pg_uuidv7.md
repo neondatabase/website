@@ -56,7 +56,7 @@ This function converts a given `TIMESTAMPTZ` value into a version 7 UUID. It tak
 1. `ts TIMESTAMPTZ`: The timestamp to embed in the UUID.
 2. `zero_random_bits BOOLEAN` (optional, defaults to `false`):
    - If `false` (default), the random bits portion of the UUID will be filled with new random data. This is useful for creating a UUID tied to a specific past or future time but still unique.
-   - If `true`, the random bits portion of the UUID will be set to all zeros. This is particularly useful for creating boundary UUIDs for time-range queries (for example, the earliest possible UUID for a given timestamp).
+   - If `true`, the random bits portion of the UUID will be set to all zeros. Use this to create boundary UUIDs for time-range queries (for example, the earliest possible UUID for a given timestamp).
 
 #### Generating a UUID for a specific timestamp with random bits
 
@@ -154,7 +154,7 @@ UUIDv4 is purely random. While excellent for uniqueness, its randomness leads to
 
 ## Conclusion
 
-The `pg_uuidv7` extension provides a robust and efficient way to work with version 7 UUIDs in Postgres. By embedding a timestamp, UUIDv7s offer the global uniqueness of traditional UUIDs while also being chronologically sortable. This makes them an excellent choice for primary keys and indexed columns in applications where time-ordering and query performance on time-based data are critical.
+The `pg_uuidv7` extension gives you a clean way to work with version 7 UUIDs in Postgres. By embedding a timestamp, UUIDv7s offer the global uniqueness of traditional UUIDs while also being chronologically sortable. This makes them an excellent choice for primary keys and indexed columns in applications where time-ordering and query performance on time-based data are critical.
 
 ## Resources
 

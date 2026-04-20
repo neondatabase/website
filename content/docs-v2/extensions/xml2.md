@@ -223,7 +223,7 @@ END $$;
 
 ## Conclusion
 
-The `xml2` extension provides powerful tools for working with XML data in Postgres. It allows you to parse, query, and transform XML documents using XPath and XSLT. This can be particularly useful for applications that need to handle XML data efficiently within the database.
+The `xml2` extension lets you parse, query, and transform XML documents using XPath and XSLT directly within Postgres.
 
 ## Resources
 

@@ -156,11 +156,11 @@ Execute SQL queries directly in your IDE with the integrated SQL Editor:
 1. **From Schema View**: Right-click any table and select "Query Table" for a pre-filled SELECT query.
 2. **From Command Palette**: Use `Ctrl+Shift+P` and search for "Neon: Open SQL Editor".
 
-The SQL Editor integrates seamlessly with your database connection, so you can query any database in your current branch without additional setup.
+The SQL Editor connects directly to your database connection, so you can query any database in your current branch without additional setup.
 
 ## Table data editor
 
-View and edit your table data with a powerful, spreadsheet-like interface:
+View and edit your table data with a spreadsheet-like interface:
 
 ### Viewing data
 

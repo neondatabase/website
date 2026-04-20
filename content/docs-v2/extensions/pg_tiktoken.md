@@ -26,7 +26,7 @@ For example, consider the sentence "Neon is serverless Postgres." It can be divi
 
 The `pg_tiktoken` offers two functions:
 
-- `tiktoken_encode`: Accepts text inputs and returns tokenized output, allowing you to seamlessly tokenize your text data.
+- `tiktoken_encode`: Accepts text inputs and returns tokenized output.
 - `tiktoken_count`: Counts the number of tokens in a given text. This feature helps you adhere to text length limits, such as those set by OpenAI's language models.
 
 ## Install the `pg_tiktoken` extension

@@ -348,7 +348,7 @@ CREATE INDEX idx_articles_tag_ids_gin ON articles USING GIN (tag_ids gin__int_op
 
 ## Conclusion
 
-The intarray extension provides a powerful set of tools within Postgres for efficiently managing and querying integer arrays. Its rich functions and operators are designed to significantly improve performance, particularly during complex array operations.
+The `intarray` extension adds functions and operators for managing and querying integer arrays in Postgres, with significant performance improvements for complex array operations.
 
 ## Resources
 

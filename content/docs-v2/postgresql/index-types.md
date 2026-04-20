@@ -11,7 +11,7 @@ redirectFrom:
 updatedOn: '2026-03-03T03:22:12.749Z'
 ---
 
-Indexes are a powerful tool to optimize query performance in relational databases like Neon Postgres. They allow the database engine to quickly locate and retrieve specific rows, significantly speeding up data access. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.
+Indexes speed up query performance in relational databases like Neon Postgres by allowing the database engine to quickly locate and retrieve specific rows. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.
 
 <CTA />
 
@@ -53,7 +53,7 @@ CREATE INDEX idx_users_timestamp ON users (created_at);
 
 ### Use B-tree Indexes in Postgres
 
-B-tree indexes are efficient for both equality and range queries on sortable data. They are particularly useful for columns frequently used in `WHERE` clauses, `JOIN` conditions, and `ORDER BY` clauses.
+B-tree indexes are efficient for both equality and range queries on sortable data. Use them for columns frequently appearing in `WHERE` clauses, `JOIN` conditions, and `ORDER BY` clauses.
 
 ```sql
 -- Equality search
@@ -280,7 +280,7 @@ This is useful when you frequently query based on some computation or function o
 
 ## Conclusion
 
-Indexes are powerful tools for optimizing query performance in Postgres. By understanding the different types of indexes and their appropriate use cases, you can significantly enhance the efficiency of your database queries. However, remember to monitor the impact of indexes on your overall database performance, as they do introduce some overhead for write operations and storage.
+Understanding the different index types and their use cases can significantly improve the efficiency of your database queries. However, remember to monitor the impact of indexes on your overall database performance, as they do introduce some overhead for write operations and storage.
 
 ## Resources
 

@@ -3,13 +3,13 @@ title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 summary: >-
   Covers the guidelines for contributing to the Neon documentation, including
-  how to edit files on GitHub, submit pull requests, and utilize templates for
+  how to edit files on GitHub, submit pull requests, and use templates for
   creating new guides.
 enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.064Z'
 ---
 
-This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
+This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
 - You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
@@ -19,9 +19,9 @@ This page provides guidelines for contributing to the Neon documentation. Our go
 
 ## Why should you contribute?
 
-Open-source projects are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
+Open-source projects are always evolving. Contributing to documentation is a good starting point for open source beginners, and a way for experienced developers to share knowledge with the community.
 
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
+By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or a topic that's missing, we'd love to have your contribution.
 
 ## How to contribute
 
@@ -83,7 +83,7 @@ The Neon documentation file structure reflects the navigation you see on the web
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `navigation.yaml`, which you can find at the root of the `/docs` directory.
+This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in `navigation.yaml`, which you can find at the root of the `/docs` directory.
 
 Refer to the [## Navigation](https://github.com/neondatabase/website/blob/main/content/docs/README.md#navigation) in the docs README for more information on how to update the sidebar.
 
@@ -104,13 +104,13 @@ The only required attribute is `title`, which becomes the page title that appear
 
 Frontmatter attributes include:
 
-| Attribute             | Description                                                                                                                                                                                                                  |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| subtitle              | A secondary title or description that appears on the page, under the main title.                                                                                                                                             |
-| enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether or not to generate a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections. |
-| isDraft               | Adding this attribute and setting it to `true` prevents the page from becoming a documentation page and being searchable. Include this option to avoid publishing the content before its ready.                              |
-| redirectFrom          | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.                                                                                 |
-| updatedOn             | This attribute is added automatically. You do not need to add it.                                                                                                                                                            |
+| Attribute             | Description                                                                                                                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| subtitle              | A secondary title or description that appears on the page, under the main title.                                                                                                                                      |
+| enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether to generate a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections. |
+| isDraft               | Adding this attribute and setting it to `true` prevents the page from becoming a documentation page and being searchable. Include this option to avoid publishing the content before it's ready.                      |
+| redirectFrom          | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.                                                                          |
+| updatedOn             | This attribute is added automatically. You do not need to add it.                                                                                                                                                     |
 
 Example:
 
@@ -294,7 +294,7 @@ To add an image to your Markdown file, add an entry that looks like this:
 
 ## Style Guide
 
-This section outlines the stylistic elements that we do our best to follow in the Neon documentation.
+This section covers the style conventions we follow.
 
 ### Voice and language
 
@@ -418,7 +418,7 @@ For the full list of tools, see [AI tools for documentation](/docs/community/ai-
 
 ## Additional Resources
 
-When contributing to Neon documentation, you may find these additional resources helpful:
+These resources are also worth bookmarking:
 
 - **[Component Guide](/docs/community/component-guide)**: Complete reference for common MDX components
 - **[Component Specialized Guide](/docs/community/component-specialized)**: Advanced and specialized components

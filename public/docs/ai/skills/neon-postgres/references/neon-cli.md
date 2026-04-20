@@ -72,7 +72,7 @@ neonctl branches delete <branch-id> --project-id <project-id>
 neonctl connection-string --project-id <project-id>
 
 # Get connection string for specific branch
-neonctl connection-string --project-id <project-id> --branch-id <branch-id>
+neonctl connection-string <branch-id-or-name> --project-id <project-id>
 
 # Get pooled connection string
 neonctl connection-string --project-id <project-id> --pooled
@@ -92,13 +92,13 @@ neonctl sql --file schema.sql --project-id <project-id>
 
 ```bash
 # List databases
-neonctl databases list --project-id <project-id> --branch-id <branch-id>
+neonctl databases list --project-id <project-id> --branch <branch-id-or-name>
 
 # Create database
 neonctl databases create --project-id <project-id> --name mydb
 
 # List roles
-neonctl roles list --project-id <project-id> --branch-id <branch-id>
+neonctl roles list --project-id <project-id> --branch <branch-id-or-name>
 ```
 
 ## Output Formats

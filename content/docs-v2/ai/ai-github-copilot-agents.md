@@ -2,8 +2,8 @@
 title: Neon agents for GitHub Copilot
 subtitle: Custom agents for safe database migrations and query optimization in VS Code
 summary: >-
-  Covers the setup of custom agents for GitHub Copilot that facilitate safe
-  database migrations and query optimization in VS Code, utilizing Neon's
+  Covers the setup of custom agents for GitHub Copilot that support safe
+  database migrations and query optimization in VS Code, using Neon's
   branching workflow for efficient development.
 enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.032Z'
@@ -110,7 +110,7 @@ Once installed, invoke the agents in GitHub Copilot Chat by mentioning their nam
 
 ## How branching keeps your data safe
 
-Both agents leverage Neon's instant branching to create isolated environments for testing. This means:
+Both agents use Neon's instant branching to create isolated environments for testing. This means:
 
 - **No changes to production**: All migrations and optimizations are tested on temporary branches first
 - **Full data copy**: Test branches include a complete copy of your schema and data

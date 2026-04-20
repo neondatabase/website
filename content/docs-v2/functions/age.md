@@ -12,7 +12,7 @@ updatedOn: '2026-02-06T22:07:32.852Z'
 
 The Postgres `age()` function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 
-This function is particularly useful for calculating ages, durations, or time intervals in various applications. For example, you can use it to determine a person's age, calculate the time elapsed since an event, or find the duration of a process or subscription.
+Use it for calculating ages, durations, or time intervals. For example, you can use it to determine a person's age, calculate the time elapsed since an event, or find the duration of a process or subscription.
 
 <CTA />
 

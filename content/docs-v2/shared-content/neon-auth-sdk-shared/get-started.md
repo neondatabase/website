@@ -4,7 +4,7 @@ updatedOn: '2026-03-05T14:07:19.752Z'
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
-Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
+Neon Auth lets you add authentication to your app in seconds. User data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
 
 <Steps>
 
@@ -44,7 +44,7 @@ Or **add Neon Auth** to an existing project.
 
 ## Create users in the Console (optional)
 
-You can create test users directly from the Neon Console — no app integration required. This is useful for development or testing.
+You can create test users directly from the Neon Console without any app integration. This is useful for development or testing.
 
 ![Create user in Neon Console](/docs/guides/neon_auth_create_user.png)
 
@@ -52,7 +52,7 @@ Now you can [see your users in the database](#see-your-users-in-the-database).
 
 ## See your users in the database
 
-As users sign up or log in — through your app or by creating test users in the Console — their profiles are synced to your Neon database in the `neon_auth.users_sync` table.
+As users sign up or log in (through your app or by creating test users in the Console), their profiles are synced to your Neon database in the `neon_auth.users_sync` table.
 
 Query your users table in the SQL Editor to see your new user:
 
@@ -70,7 +70,7 @@ SELECT * FROM neon_auth.users_sync;
 
 Want to learn more or go deeper?
 
-- [How Neon Auth works](/docs/guides/neon-auth-how-it-works) — See a before and after showing the benefits of having your user data right in your database
-- [Neon Auth tutorial](/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
-- [Best Practices & FAQ](/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting
-- [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api) — Automate and manage Neon Auth via the API
+- [How Neon Auth works](/docs/guides/neon-auth-how-it-works): See a before and after showing the benefits of having your user data right in your database
+- [Neon Auth tutorial](/docs/guides/neon-auth-demo): Walk through our demo app for more examples of how Neon Auth can simplify your code
+- [Best Practices & FAQ](/docs/guides/neon-auth-best-practices): Tips, patterns, and troubleshooting
+- [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api): Automate and manage Neon Auth via the API

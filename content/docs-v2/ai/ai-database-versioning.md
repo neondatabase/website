@@ -102,6 +102,8 @@ curl --request POST \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
+**Response:** The JSON body includes a `snapshot` object. It may include optional **`full_size`** and **`diff_size`** (bytes) for storage size; the same fields appear when you [list](https://api-docs.neon.tech/reference/listsnapshots) or [update](https://api-docs.neon.tech/reference/updatesnapshot) snapshots. See [Snapshot size fields in API responses](/docs/guides/backup-restore#snapshot-size-fields-in-api-responses).
+
 **When to create snapshots:**
 
 - Start of each agent session

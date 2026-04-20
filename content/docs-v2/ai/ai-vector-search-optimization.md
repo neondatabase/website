@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.728Z'
 ---
 
-This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
+This guide covers how to use `pgvector` for vector similarity searches. We'll address the following key questions:
 
 1. How to profile your vector search queries, when using `pgvector`?
 2. When to use indexes and tradeoffs between the available options?
@@ -160,7 +160,7 @@ We've experimented with `lists` equal to 1000, 2000, and 4000, and `probes` equa
 
 Although there is a substantial gain in recall for increasing the number of `probes`, you will reach a point of diminishing returns when recall plateaus and execution time increases.
 
-Therefore, we encourage experimenting with different values for `probes` and `lists` to achieve optimal search performance for your queries. Good places to start are:
+Try different values for `probes` and `lists` to find the right balance for your dataset. Good places to start:
 
 - Using a `lists` size equal to rows / 1000 for tables with up to 1 million rows, and `sqrt(rows)` for larger datasets.
 - Start with a `probes` value equal to lists / 10 for tables up to 1 million rows, and `sqrt(lists)` for larger datasets.

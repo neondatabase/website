@@ -11,7 +11,7 @@ updatedOn: '2026-02-06T22:07:32.853Z'
 
 The Postgres `array_length()` function is used to determine the length of an array along a specified dimension.
 
-It's particularly useful when working with multi-dimensional arrays or when you need to perform operations based on the size of an array. Examples include data analysis where you might need to filter rows based on the number of elements in an array column. Another use case might be application development where you need to validate the size of array inputs since Postgres doesn't natively have a fixed-size array data type.
+Use it when working with multi-dimensional arrays or when you need to perform operations based on the size of an array. Examples include data analysis where you might need to filter rows based on the number of elements in an array column. Another use case might be application development where you need to validate the size of array inputs since Postgres doesn't natively have a fixed-size array data type.
 
 <CTA />
 

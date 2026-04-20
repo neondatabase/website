@@ -34,6 +34,7 @@ A practical guide for the most commonly used MDX components in Neon documentatio
 - [Content organization](#content-organization) - Structure and navigation components
 - [Interactive elements](#interactive-elements) - UI elements and forms
 - [Common shared components](#common-shared-components) - Reusable content
+- [External content](#external-content) - Embedding external code and video
 
 ---
 
@@ -83,6 +84,40 @@ Critical content demanding immediate user attention due to potential risks.
 <Admonition type="comingSoon">
 Information about features that are coming soon.
 </Admonition>
+
+---
+
+### Callout
+
+Highlighted block for supplementary information the reader should notice, but that doesn't carry the urgency of an Admonition. Use it for tips, best practices, or "good to know" context. The default label is "Good to know".
+
+```mdx
+<Callout title="Before you start">
+
+Make sure you have Node.js 18+ installed.
+
+</Callout>
+```
+
+**Live preview:**
+
+<Callout title="Before you start">
+
+Make sure you have Node.js 18+ installed.
+
+</Callout>
+
+**Props:**
+
+| Prop       | Type   | Default        | Description                         |
+| ---------- | ------ | -------------- | ----------------------------------- |
+| `children` | node   | (required)     | Content rendered inside the callout |
+| `title`    | string | `Good to know` | Label displayed in the header       |
+
+**When to use Callout vs Admonition:**
+
+- **Callout** — supplementary context, best practices, or neutral "good to know" information.
+- **Admonition** — warnings, important notices, tips with urgency, or coming-soon flags. Use when missing the information could cause user error.
 
 ---
 
@@ -448,7 +483,7 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 
 ### InfoBlock
 
-InfoBlock creates a multi-column layout for organizing related content sections. It's particularly useful for creating "at-a-glance" summaries at the top of documentation pages, combining learning objectives with related resources. Use two columns.
+InfoBlock creates a multi-column layout for organizing related content sections. Use it for "at-a-glance" summaries at the top of documentation pages, combining learning objectives with related resources. Use two columns.
 
 **Key Features:**
 
@@ -488,6 +523,72 @@ InfoBlock creates a multi-column layout for organizing related content sections.
 <a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
 </DocsList>
 </InfoBlock>
+
+---
+
+### TwoColumnLayout
+
+Two-column layout for tutorials and reference documentation. Use `TwoColumnLayout.Step` for numbered tutorial steps, `TwoColumnLayout.Item` for reference items.
+
+Add `layout: wide` to the page frontmatter when using this component, to hide the right sidebar and give the layout more room.
+
+````mdx
+<TwoColumnLayout>
+
+<TwoColumnLayout.Step title="Install dependencies">
+<TwoColumnLayout.Block>
+
+Install the required packages.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+</TwoColumnLayout>
+````
+
+**Subcomponents:**
+
+| Subcomponent             | Props                   | Purpose                                    |
+| ------------------------ | ----------------------- | ------------------------------------------ |
+| `TwoColumnLayout.Step`   | `title`                 | Numbered step for tutorials                |
+| `TwoColumnLayout.Item`   | `title`, `method`, `id` | Reference item                             |
+| `TwoColumnLayout.Block`  | `label` (optional)      | Content block within a step or item        |
+| `TwoColumnLayout.Footer` | —                       | Full-width content at the bottom of a step |
+
+See [Neon Auth with Next.js](/docs/auth/quick-start/nextjs-api-only) for a live example.
+
+---
+
+### FeatureList
+
+Visual list of features, split by `##` and `###` headings. Supports an optional `icons` prop.
+
+```mdx
+<FeatureList>
+
+### Instant provisioning
+
+Create databases in seconds.
+
+### Autoscaling
+
+Scale compute up and down automatically.
+
+</FeatureList>
+```
+
+To add icons, pass an array of icon names (see `src/components/shared/feature-list/icon/icon.jsx` for available icons):
+
+```mdx
+<FeatureList icons={['agent', 'speedometer']}>
+```
 
 ---
 
@@ -573,6 +674,28 @@ Prominent call-to-action buttons for important actions.
 
 ---
 
+### CopyPrompt
+
+Displays a copyable LLM prompt from a file. Use when providing a pre-built prompt to help users get started faster. Prompt files go in `public/prompts/`.
+
+```mdx
+<CopyPrompt
+  src="/prompts/my-prompt.md"
+  displayText="Use this pre-built prompt to get started faster."
+  buttonText="Copy prompt"
+/>
+```
+
+**Props:**
+
+| Prop          | Type   | Default                                            | Description                                  |
+| ------------- | ------ | -------------------------------------------------- | -------------------------------------------- |
+| `src`         | string | (required)                                         | Path to the prompt file in `public/prompts/` |
+| `displayText` | string | `Use this pre-built prompt to get started faster.` | CTA text shown to the left                   |
+| `buttonText`  | string | `Copy prompt`                                      | Button label                                 |
+
+---
+
 ### NeedHelp
 
 Support widget for getting assistance.
@@ -623,21 +746,62 @@ Status indicator for beta features with custom feature name.
 
 ---
 
+## External content
+
+Components for embedding content from outside the repo.
+
+### ExternalCode
+
+Embed code from an external URL with syntax highlighting. Always use raw GitHub URLs.
+
+```mdx
+<ExternalCode
+  url="https://raw.githubusercontent.com/neondatabase/neon/main/README.md"
+  language="markdown"
+/>
+```
+
+**Props:**
+
+| Prop              | Type    | Default               | Description                      |
+| ----------------- | ------- | --------------------- | -------------------------------- |
+| `url`             | string  | (required)            | Raw URL to the file              |
+| `language`        | string  | (auto from extension) | Language for syntax highlighting |
+| `showLineNumbers` | boolean | false                 | Show line numbers                |
+| `shouldWrap`      | boolean | false                 | Enable code wrapping             |
+
+### YoutubeIframe
+
+Embeds a YouTube video player.
+
+```mdx
+<YoutubeIframe embedId="IcoOpnAcO1Y" />
+```
+
+Pass the video ID from the YouTube URL (the part after `v=`).
+
+---
+
 ## Best practices
 
 ### Component selection
 
-- **[Admonition](#admonition)** for important callouts
+- **[Admonition](#admonition)** for urgent callouts and warnings
+- **[Callout](#callout)** for supplementary "good to know" context
 - **[Steps](#steps)** for sequential instructions
 - **[CodeTabs](#codetabs)** for multi-language examples
 - **[TechCards](#techcards)** for technology showcases
+- **[TwoColumnLayout](#twocolumnlayout)** for tutorials and reference docs requiring a two-column layout
+- **[FeatureList](#featurelist)** for listing product features visually
 - **[CheckList](#checklist)** for setup guides
+- **[CopyPrompt](#copyprompt)** for providing a copyable LLM prompt
 - **[InfoBlock](#infoblock)** for page introductions with multiple content sections
 - **[DocsList](#docslist)** for simple navigation lists with theming options
 
 ### Content organization tips
 
 - Use [InfoBlock](#infoblock) at the top of pages to provide quick orientation
+- Add `layout: wide` to frontmatter when using [TwoColumnLayout](#twocolumnlayout)
 - For [TechCards](#techcards), always check that the SVG file exists in `/public/images/technology-logos/`
 - For [DetailIconCards](#detailiconcards), use only icon names that are mapped in the component code
 - Choose [DocsList](#docslist) themes based on content type: default for tasks, `docs` for documentation, `repo` for code

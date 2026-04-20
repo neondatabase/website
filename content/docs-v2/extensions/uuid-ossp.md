@@ -3,7 +3,7 @@ title: The uuid-ossp extension
 subtitle: Generate Universally Unique Identifiers (UUIDs) in your Postgres database
 summary: >-
   Covers the setup of the `uuid-ossp` extension in Postgres on Neon, detailing
-  how to enable it and utilize various functions for generating different types
+  how to enable it and use various functions for generating different types
   of UUIDs for unique data identification.
 enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.851Z'
@@ -41,7 +41,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 - `uuid_generate_v1()`:
 
-  The `uuid_generate_v1()` function generates UUIDs based on the [version 1 algorithm](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2.2). Version 1 UUIDs are time-based, meaning they incorporate the current timestamp and the MAC address of the computer where the UUID is generated. This approach leverages the uniqueness of hardware identifiers and precise time to create UUIDs that are likely to be unique across different systems and over time.
+  The `uuid_generate_v1()` function generates UUIDs based on the [version 1 algorithm](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2.2). Version 1 UUIDs are time-based, meaning they incorporate the current timestamp and the MAC address of the computer where the UUID is generated. This approach uses hardware identifiers and precise timestamps to create UUIDs that are likely to be unique across different systems and over time.
 
   ```sql
   SELECT uuid_generate_v1();
@@ -123,7 +123,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 ### UUID constants
 
-`uuid-ossp` also provides functions to return predefined UUID constants, which are particularly useful as standard namespace identifiers for Version 3 and Version 5 UUID generation:
+`uuid-ossp` also provides functions to return predefined UUID constants. These are the standard namespace identifiers used for Version 3 and Version 5 UUID generation:
 
 - **`uuid_nil()`: The Nil UUID constant**
 

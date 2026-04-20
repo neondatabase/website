@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.854Z'
 ---
 
-You can use the `array_to_json` function to convert a Postgres array into its `JSON` representation, transforming an array of values into a `JSON` array. This helps facilitate integration with web services, APIs, and web frameworks that heavily rely on `JSON`.
+You can use the `array_to_json` function to convert a Postgres array into its `JSON` representation, transforming an array of values into a `JSON` array. This makes it easier to integrate with web services, APIs, and web frameworks that rely on `JSON`.
 
 <CTA />
 
@@ -101,7 +101,7 @@ VALUES (2, 123, 2), (2, 456, 3), (2, 789, 4);
   6 |       2 |        789 |        4
 ```
 
-You can utilize `array_to_json` to create a clean and efficient `JSON` representation of the cart contents for a specific user.
+Use `array_to_json` to create a `JSON` representation of the cart contents for a specific user.
 
 In the example below, the `row_to_json` function converts each row of the result set into a `JSON` object.
 

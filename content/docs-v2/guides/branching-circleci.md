@@ -114,7 +114,7 @@ When the `neon/run_tests` job runs, it performs the following steps automaticall
 
 The `neon/run_tests` job automatically sets the `DATABASE_URL` environment variable, which contains your database connection string.
 
-This means that any tool, migration script, or test runner that relies on `DATABASE_URL` can use it directly without extra configuration. For example, a migration command such as `npx drizzle-kit migrate` or a test command like `npm test` can connect to the Neon branch seamlessly using the provided connection string. Alternatively, you can use the individual connection parameters (`PGHOST`, `PGUSER`, `PGPASSWORD`, etc.) if your tools require them.
+This means that any tool, migration script, or test runner that relies on `DATABASE_URL` can use it directly without extra configuration. For example, a migration command such as `npx drizzle-kit migrate` or a test command like `npm test` can connect to the Neon branch using the provided connection string. Alternatively, you can use the individual connection parameters (`PGHOST`, `PGUSER`, `PGPASSWORD`, etc.) if your tools require them.
 
 ### Example: CircleCI configuration
 

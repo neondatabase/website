@@ -6,7 +6,7 @@ summary: >-
   Neon organizations, detailing what Admins, Members, and Collaborators can do
   at both the organization and project levels.
 enableTableOfContents: true
-updatedOn: '2026-03-16T19:56:48.034Z'
+updatedOn: '2026-04-17T23:00:00.000Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
@@ -80,9 +80,10 @@ The following table shows what each role can do with [snapshots](/docs/guides/sn
 
 </Steps>
 
-## Notes and limitations
+## Notes and limitations (#notes-and-limitations)
 
 - **Branch management**: All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
 - **Permissions and roles**: The current permissions system may not meet all needs for granular control. Share your feedback and requirements for more detailed permissions settings via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+- <a id="email-notifications" aria-hidden="true"></a>**Email notifications**: For **organization-owned** projects, Neon sends **approaching maximum storage** notification emails to **organization Admins** only, not to all Members. Admins are responsible for billing and plan limits at the organization level, which aligns with who can [manage organization billing](/docs/manage/user-permissions#organization-management).
 
 <NeedHelp/>

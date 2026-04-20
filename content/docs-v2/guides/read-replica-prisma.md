@@ -15,7 +15,7 @@ A key benefit of read replicas is that you can distribute read requests to one o
 
 For more information about Neon's read replica feature, see [Read replicas](/docs/introduction/read-replicas).
 
-In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
+This guide shows how to use Neon read replicas to scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
 
 ## Prerequisites
 

@@ -34,7 +34,7 @@ When working with geospatial data or range types, GiST indexes are often the go-
 
 More often than not, queries need to filter on both GiST-friendly columns (for example, `location GEOMETRY`, `booking_period TSTZRANGE`) and B-tree friendly columns (for example, `status TEXT`, `created_at TIMESTAMPTZ`, `item_id INTEGER`). While Postgres can use separate indexes, a combined index can be more efficient.
 
-The `btree_gist` extension facilitates this by providing GiST **operator classes** for many standard B-tree-indexable data types. These operator classes tell the GiST indexing mechanism how to handle these scalar types within its framework.
+The `btree_gist` extension does this by providing GiST **operator classes** for many standard B-tree-indexable data types. These operator classes tell the GiST indexing mechanism how to handle these scalar types within its framework.
 
 For instance, with `btree_gist` (and often `postgis` for geometry types), a single GiST index can be defined on `(event_location GEOMETRY, event_timestamp TIMESTAMPTZ)`.
 
@@ -122,7 +122,7 @@ The `idx_map_events_geom_date` index allows Postgres to efficiently process both
 
 `btree_gist` is essential for creating exclusion constraints that involve B-tree types alongside GiST-native types like ranges.
 
-This is particularly useful in scenarios like room bookings, where you want to ensure that no two bookings overlap for the same room.
+Room bookings are a classic example: you need to ensure no two bookings overlap for the same room.
 
 #### Table schema
 
@@ -144,7 +144,7 @@ ADD CONSTRAINT no_overlapping_bookings
 EXCLUDE USING GIST (room_id WITH =, booking_period WITH &&);
 ```
 
-The `WITH =` operator for `room_id` leverages `btree_gist`, and `WITH &&` (overlap) is native to range types with GiST.
+The `WITH =` operator for `room_id` uses `btree_gist`, and `WITH &&` (overlap) is native to range types with GiST.
 
 #### Example operations
 
@@ -171,7 +171,7 @@ VALUES (102, '[2025-04-10 15:00, 2025-04-10 17:00)');
 
 ## Conclusion
 
-The `btree_gist` extension provides a vital bridge, allowing standard B-tree-indexable data types to be included in GiST indexes. This facilitates efficient multi-column queries across diverse data types (for example, spatial and temporal) and enables the creation of sophisticated exclusion constraints.
+The `btree_gist` extension provides a vital bridge, allowing standard B-tree-indexable data types to be included in GiST indexes. This enables efficient multi-column queries across diverse data types (for example, spatial and temporal) and supports sophisticated exclusion constraints.
 
 ## Resources
 

@@ -60,7 +60,7 @@ For more, including configuring multiple read replicas, refer to [Read Replicas]
 
 ## Drizzle ORM
 
-With Drizzle ORM, you can leverage the `withReplicas()` function to direct `SELECT` queries to read replicas, and create, delete, and update operations to your primary compute, as shown in the following example:
+With Drizzle ORM, you can use the `withReplicas()` function to direct `SELECT` queries to read replicas, and create, delete, and update operations to your primary compute, as shown in the following example:
 
 ```javascript
 import { sql } from 'drizzle-orm';

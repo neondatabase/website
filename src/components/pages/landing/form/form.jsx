@@ -267,7 +267,7 @@ const Form = ({
             Neon will contact you at the information above with relevant content, products, and
             services. You may unsubscribe at any time. For more info, see our{' '}
             <Link className="whitespace-nowrap" to={LINKS.privacyPolicy} theme="green-underlined">
-              Privacy Policy
+              Privacy Notice
             </Link>
             .
           </p>

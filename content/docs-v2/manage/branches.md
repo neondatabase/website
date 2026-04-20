@@ -285,7 +285,7 @@ A branch created by an [instant restore](#branch-restore) operation. When you re
 
 ### Branch with expiration
 
-A branch with an expiration timestamp is automatically deleted when the expiration time is reached. Any branch can have an expiration timestamp added or removed at any time. This feature is particularly useful for temporary development and testing environments.
+A branch with an expiration timestamp is automatically deleted when the expiration time is reached. Any branch can have an expiration timestamp added or removed at any time. Use it for temporary development and testing environments.
 
 ## Branching with the Neon CLI
 

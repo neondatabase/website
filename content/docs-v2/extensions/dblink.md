@@ -218,7 +218,7 @@ While `dblink` provides direct connectivity, Postgres' Foreign Data Wrappers (FD
 
 ## Conclusion
 
-The `dblink` extension provides a powerful mechanism for connecting to and querying remote Postgres databases from your Neon project. Whether you need to perform one-off data pulls or build complex cross-database applications, `dblink` offers the flexibility to execute arbitrary queries on remote instances. Remember to prioritize security when managing connections and credentials. For more structured and potentially more secure access, consider exploring the capabilities of Foreign Data Wrappers.
+`dblink` lets you connect to and query remote Postgres databases from your Neon project. It's flexible enough for one-off data pulls or complex cross-database queries. Keep security in mind when managing connections and credentials. For more structured access, see [postgres_fdw](/docs/extensions/postgres_fdw).
 
 ## Reference
 

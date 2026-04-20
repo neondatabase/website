@@ -209,6 +209,6 @@ If you're working with sensitive data and need to avoid copying production data 
 
 ### Automatic branch cleanup
 
-To prevent branch accumulation and manage resources effectively, you can set branches to automatically expire and be deleted after a specified time period. This is particularly useful for temporary environments like CI/CD test branches or time-limited preview deployments. See [Branch expiration](/docs/guides/branch-expiration) for details on configuring automatic branch deletion.
+To prevent branch accumulation and manage resources effectively, you can set branches to automatically expire and be deleted after a specified time period. This is a good fit for temporary environments like CI/CD test branches or time-limited preview deployments. See [Branch expiration](/docs/guides/branch-expiration) for details on configuring automatic branch deletion.
 
 <NeedHelp/>

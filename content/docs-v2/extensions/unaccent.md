@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.850Z'
 ---
 
-The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.
+The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. Use it in multilingual applications where users might not consistently use accents when typing search queries.
 
 Imagine a user searching for "Hôtel" but only typing "Hotel". Without `unaccent`, the database might not find the intended results. With `unaccent`, you can ensure that searches are more forgiving and return relevant results regardless of accent variations.
 
@@ -114,7 +114,7 @@ id | name
 
 ### Case-insensitive and accent-insensitive searching with `ILIKE`
 
-For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This is particularly useful for free-text search scenarios.
+For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This comes in handy for free-text search scenarios.
 
 ```sql
 SELECT * FROM product WHERE unaccent(name) ILIKE unaccent('%cafe%');
@@ -172,7 +172,7 @@ Once you have this `IMMUTABLE` wrapper function, you can create indexes on it:
 CREATE INDEX idx_products_name_unaccent ON products (f_unaccent(name));
 ```
 
-Now, queries using `f_unaccent(name)` in the `WHERE` clause can effectively utilize this index, significantly improving performance for accent-insensitive searches.
+Now, queries using `f_unaccent(name)` in the `WHERE` clause can use this index, significantly improving performance for accent-insensitive searches.
 
 ```sql
 SELECT * FROM products WHERE f_unaccent(name) = f_unaccent('cafe');

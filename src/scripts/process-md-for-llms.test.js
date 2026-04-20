@@ -46,10 +46,10 @@ describe('MDX to Markdown Conversion', () => {
 
       const result = await processFile(inputPath, pageUrl);
 
-      // Should have converted CodeTabs to Tab labels (plain text, not bold)
-      expect(result).toContain('Tab: node-postgres');
-      expect(result).toContain('Tab: postgres.js');
-      expect(result).toContain('Tab: Neon serverless driver');
+      // Should have converted CodeTabs to bold labels
+      expect(result).toContain('**node-postgres**');
+      expect(result).toContain('**postgres.js**');
+      expect(result).toContain('**Neon serverless driver**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');
@@ -453,8 +453,7 @@ Description of feature two.
       const result = await processInlineMdx(`
 <YoutubeIframe embedId="dQw4w9WgXcQ" />
 `);
-      expect(result).toContain('Watch on YouTube:');
-      expect(result).toContain('https://youtube.com/watch?v=dQw4w9WgXcQ');
+      expect(result).toContain('[Watch on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)');
       expect(result).not.toContain('<YoutubeIframe');
     });
 
@@ -501,8 +500,8 @@ print('hello')
 </TabItem>
 </Tabs>
 `);
-      expect(result).toContain('Tab: JavaScript');
-      expect(result).toContain('Tab: Python');
+      expect(result).toContain('**JavaScript**');
+      expect(result).toContain('**Python**');
       expect(result).toContain("console.log('hello')");
       expect(result).toContain("print('hello')");
       expect(result).not.toContain('<Tabs');
@@ -636,7 +635,7 @@ See [CONN_MAX_AGE](https://example.com).
       const navMap = buildNavigationMap(rootDir);
 
       // Check a known postgresql page
-      const selectEntry = navMap.get('postgresql-tutorial/postgresql-select');
+      const selectEntry = navMap.get('tutorial/select');
       expect(selectEntry).toBeDefined();
       expect(selectEntry.urlPrefix).toBe('postgresql');
       expect(selectEntry.siblings.length).toBeGreaterThan(0);
@@ -784,18 +783,14 @@ See [CONN_MAX_AGE](https://example.com).
       );
       expect(header).toBe(
         '> This page location: Neon Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue", "path": "/docs/auth/guides/password-reset"}\n\n'
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
 
     it('should include only index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line for pages with empty breadcrumbs', () => {
@@ -808,27 +803,18 @@ See [CONN_MAX_AGE](https://example.com).
       });
 
       const header = buildPageHeader('top-level/page', navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should deduplicate consecutive identical ancestors', () => {
@@ -869,8 +855,7 @@ See [CONN_MAX_AGE](https://example.com).
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toBe(
         '> This page location: Backend > Neon Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
 
@@ -887,6 +872,76 @@ See [CONN_MAX_AGE](https://example.com).
       const billingHeader = buildPageHeader('introduction/about-billing', navMap);
       expect(billingHeader).not.toContain('Plans and billing > Plans and billing');
       expect(billingHeader).toContain('> This page location:');
+    });
+  });
+
+  describe('Component conversion test page (snapshot)', () => {
+    it('should convert every component without raw MDX leaks', async () => {
+      const fixturePath = 'src/scripts/fixtures/mdx-conversion-test.md';
+      const pageUrl = 'https://neon.com/docs/test/mdx-conversion-test';
+      const result = await processFile(fixturePath, pageUrl, process.cwd());
+
+      // No raw MDX component tags should survive conversion
+      const componentNames = [
+        'Admonition',
+        'CodeTabs',
+        'Tabs',
+        'TabItem',
+        'Steps',
+        'DetailIconCards',
+        'TechCards',
+        'DocsList',
+        'InfoBlock',
+        'DefinitionList',
+        'CheckList',
+        'CheckItem',
+        'CTA',
+        'TwoColumnLayout',
+        'LinkPreview',
+        'YoutubeIframe',
+        'CommunityBanner',
+        'PromptCards',
+        'MegaLink',
+        'QuoteBlock',
+        'Testimonial',
+        'FeatureList',
+        'ProgramForm',
+        'FeatureBeta',
+        'EarlyAccess',
+        'FeatureBetaProps',
+        'EarlyAccessProps',
+        'AgentSkillsTip',
+        'MCPTools',
+        'LinkAPIKey',
+        'LRNotice',
+        'ComingSoon',
+        'PrivatePreview',
+        'PrivatePreviewEnquire',
+        'PublicPreview',
+        'LRBeta',
+        'MigrationAssistant',
+        'NextSteps',
+        'NewPricing',
+        'AzureRegionsDeprecation',
+        'ConsumptionAccountApiDeprecation',
+        'CopyPrompt',
+        'NeedHelp',
+        'Comment',
+        'Video',
+        'UserButton',
+        'RequestForm',
+        'Suspense',
+        'SqlToRestConverter',
+        'LogosSection',
+        'ComputeCalculator',
+        'UseCaseContext',
+      ];
+
+      for (const name of componentNames) {
+        expect(result).not.toContain(`<${name}`);
+      }
+
+      expect(result).toMatchSnapshot();
     });
   });
 });

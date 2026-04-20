@@ -4,7 +4,7 @@ subtitle: Understand how the Data API authenticates requests and enforces databa
   permissions.
 summary: >-
   Covers the authentication process of the Neon Data API, detailing how it
-  utilizes PostgreSQL's security model to enforce role privileges and Row-Level
+  uses PostgreSQL's security model to enforce role privileges and Row-Level
   Security for database access control.
 enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.069Z'
@@ -20,7 +20,7 @@ updatedOn: '2026-02-15T20:51:54.069Z'
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system; it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
+The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system; it acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
 
 Securing your data involves two layers:
 
@@ -53,7 +53,7 @@ If a request arrives with no `Authorization` header, the API switches to the `an
 
 The API determines the role based on the `role` claim in the JWT. If you issue your own tokens with a custom role claim (for example, `"role": "admin"`), the API will attempt to switch to a Postgres role named `admin`. You must ensure this role exists in your database and has the correct permissions.
 
-The following Layers explain how to configure these roles for secure access.
+The sections below explain how to configure these roles.
 
 ## Layer 1: Table Privileges
 

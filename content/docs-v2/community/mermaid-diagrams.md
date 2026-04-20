@@ -51,7 +51,7 @@ flowchart TD
 
 ## Using AI to generate diagrams
 
-At Neon, we use **Cursor** and **Claude** (or ChatGPT) extensively to generate Mermaid diagrams. Here's how to leverage AI for creating diagrams:
+At Neon, we use **Cursor** and **Claude** (or ChatGPT) extensively to generate Mermaid diagrams. Here's how to use AI to create diagrams:
 
 ### Using Cursor AI
 

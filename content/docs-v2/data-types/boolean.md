@@ -26,7 +26,7 @@ A boolean value is stored as a single byte.
 
 ## Example usage
 
-Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not.
+Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active.
 
 The query below creates a `users` table and inserts some sample data:
 

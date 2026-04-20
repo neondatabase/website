@@ -8,7 +8,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.114Z'
 ---
 
-In this guide, you'll learn how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
+This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
 
 <Admonition type="note">
 This is part two of a two-part guide. Make sure you've completed [part 1](/docs/manage/backups-aws-s3-backup-part-1) first.

@@ -100,7 +100,7 @@ As you scale, following a project-per-user design means eventually managing thou
 
 ### Dev/test environments
 
-In Neon, [database branching](/docs/introduction/branching) is a powerful feature that enables you to create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
+In Neon, [database branching](/docs/introduction/branching) lets you create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
 
 To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS.
 
@@ -266,7 +266,7 @@ if (options.name) {
 }
 ```
 
-This script utilizes the `commander` library to create a simple command-line interface (CLI) and the Neon API's `createProject` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
+This script uses the `commander` library to create a simple command-line interface (CLI) and the Neon API's `createProject` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
 
 To execute the script and create a new Neon project named "ACME Corp" with PostgreSQL version 16 in the aws-us-east-1 region, run:
 

@@ -18,7 +18,7 @@ While Postgres natively supports partitioning a table, `pg_partman` helps set up
 
 <CTA />
 
-In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance.
+This guide covers how to set up `pg_partman` with Neon: why partitioning helps, how to enable the extension, how to create partitioned tables, and how to automate partition maintenance.
 
 <Admonition type="note">
 `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
@@ -97,7 +97,7 @@ CREATE TABLE measurement_y2006m02 PARTITION OF measurement
 ALTER TABLE measurement DETACH PARTITION measurement_y2005m10;
 ```
 
-`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It is particularly useful when partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance.
+`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It's designed for cases where partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance.
 
 ## Example: Partitioning user-activity data
 

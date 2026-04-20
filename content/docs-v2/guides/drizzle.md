@@ -356,7 +356,7 @@ const sql = neon(getBranchUrl()!);
 export const db = drizzle({ client: sql });
 ```
 
-Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string --branch-id <branch-id>`).
+Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string <branch-id-or-name> --project-id <project-id>`).
 
 ## Resources
 

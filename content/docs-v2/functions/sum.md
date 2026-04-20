@@ -11,7 +11,7 @@ updatedOn: '2026-02-15T20:51:54.104Z'
 
 The Postgres `sum()` function calculates the total of a set of numeric values.
 
-It's used in data analysis and reporting to compute totals across rows in a table or grouped data. This function is particularly useful in financial applications for calculating total revenue or expenses, in inventory management for summing up quantities, or in analytics for aggregating metrics across various dimensions.
+It's used in data analysis and reporting to compute totals across rows in a table or grouped data. Use it in financial applications for revenue and expense totals, in inventory management for quantity sums, or in analytics for aggregating metrics.
 
 <CTA />
 

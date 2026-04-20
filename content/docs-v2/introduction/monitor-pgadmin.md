@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.091Z'
 ---
 
-pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics.
+pgAdmin is a database management tool for Postgres that supports various database tasks, including monitoring performance metrics.
 
 ![PgAdmin monitoring dashboard](/docs/introduction/pgadmin_monitor.png)
 

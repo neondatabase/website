@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.077Z'
 ---
 
-The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.
+The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It works well for semi-structured data or data without a rigid schema.
 
 <CTA />
 
@@ -253,7 +253,7 @@ CREATE INDEX gin_idx_attributes ON product USING gin (attributes);
 
 ## Conclusion
 
-The `hstore` extension offers a powerful and flexible way to handle semi-structured data in Postgres. This guide provides an overview of using `hstore`, including creating records and querying on its attributes. It also covers some of the common operators and functions available for `hstore` data.
+The `hstore` extension is a flexible option for semi-structured data in Postgres. This guide covers creating records, querying on attributes, and the common operators and functions available for `hstore` data.
 
 ## Resources
 
