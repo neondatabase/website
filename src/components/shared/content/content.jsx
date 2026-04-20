@@ -37,7 +37,6 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
-import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
@@ -194,7 +193,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Steps,
   TwoColumnLayout,
   LogosSection,
-  DeployPostgresButton,
   ChatOptions,
   CheckList,
   CheckItem,
