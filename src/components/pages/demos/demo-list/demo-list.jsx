@@ -5,6 +5,19 @@ import { cn } from 'utils/cn';
 
 const items = [
   {
+    category: 'Latency benchmarks',
+    categoryTextColor: 'text-green-45',
+    items: [
+      {
+        title: "Latency between cloud hosting platforms and Neon's Postgres regions",
+        description:
+          "An open-source dashboard measuring real-world latency between serverless platforms and Neon's Postgres database regions.",
+        demoLink: '/demos/regional-latency',
+        sourceLink: 'https://github.com/neondatabase-labs/latency-benchmarks',
+      },
+    ],
+  },
+  {
     category: 'DB-per-user',
     categoryTextColor: 'text-pink-90',
     items: [
@@ -40,13 +53,6 @@ const items = [
     category: 'Branching',
     categoryTextColor: 'text-blue-80',
     items: [
-      {
-        title: 'Neon Twitter',
-        description:
-          "A microblogging application designed to demonstrate the database branching capability of Neon Serverless Postgres with Neon's GitHub Actions.",
-        demoLink: 'https://neon-twitter.vercel.app/',
-        sourceLink: 'https://github.com/neondatabase/neon_twitter',
-      },
       {
         title: 'Preview Branches',
         description:
