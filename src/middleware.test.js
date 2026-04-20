@@ -177,6 +177,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(global.fetch).toHaveBeenCalled();
       expect(response).toBeInstanceOf(Response);
+      expect(response.status).toBe(404);
       expect(response.headers.get('X-Content-Source')).toBe('agent-404');
       const text = await response.text();
       expect(text).toContain('/docs/non-existent');
@@ -193,6 +194,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
+      expect(response.status).toBe(404);
       expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
     });
 

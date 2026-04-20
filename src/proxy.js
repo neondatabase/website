@@ -118,7 +118,7 @@ export async function proxy(req) {
       if (agentHit404) {
         return applyDocHeaders(
           new NextResponse(buildAgent404Response(pathname), {
-            status: 200,
+            status: 404,
             headers: {
               'Content-Type': 'text/markdown; charset=utf-8',
               'Cache-Control': 'public, max-age=60, s-maxage=300',
