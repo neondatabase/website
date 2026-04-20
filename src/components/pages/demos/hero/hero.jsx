@@ -5,7 +5,6 @@ import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
 import { cn } from 'utils/cn';
 
-import databaseCopyIllustration from './images/database-copy.jpg';
 import provisioningIllustration from './images/provisioning.jpg';
 import trackingLatencyIllustration from './images/tracking-latency.jpg';
 
@@ -26,15 +25,6 @@ const items = [
       "Tracking the latency between cloud hosting platforms and Neon's Postgres database regions",
     demoLink: '/demos/regional-latency',
     sourceLink: 'https://github.com/neondatabase-labs/latency-benchmarks',
-  },
-  {
-    image: databaseCopyIllustration,
-    imageWidth: 464,
-    imageHeight: 216,
-    title:
-      'Create a copy of your database, make changes to it, and restore it to the original state in milliseconds',
-    demoLink: 'https://neon-demos-branching.vercel.app/',
-    sourceLink: 'https://github.com/neondatabase/branching-demo',
   },
 ];
 
