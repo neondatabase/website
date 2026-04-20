@@ -151,7 +151,7 @@ See [Branching authentication](/docs/auth/branching-authentication) for details 
 
 ## Example applications
 
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples). It includes Next.js and React apps, cross-subdomain setups, the Organization plugin, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
+Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including the [Organization plugin](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example) and [Phone Number](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login) demos, Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
 
 ## Availability
 

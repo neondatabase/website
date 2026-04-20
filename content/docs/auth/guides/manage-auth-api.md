@@ -125,17 +125,18 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
 
-| Endpoint              | Methods                  | Description                                                  |
-| --------------------- | ------------------------ | ------------------------------------------------------------ |
-| `/domains`            | GET, POST, DELETE        | Manage trusted redirect domains                              |
-| `/oauth_providers`    | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)             |
-| `/email_provider`     | GET, PATCH               | Configure the email provider                                 |
-| `/email_and_password` | GET, PATCH               | Configure email/password authentication                      |
-| `/users`              | POST, DELETE, PUT        | Create, delete, and manage user roles                        |
-| `/plugins`            | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins) |
-| `/webhooks`           | GET, PUT                 | Configure webhook notifications                              |
-| `/allow_localhost`    | GET, PATCH               | Toggle localhost access for development                      |
-| `/send_test_email`    | POST                     | Send a test email to verify email configuration              |
+| Endpoint                | Methods                  | Description                                                                 |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------- |
+| `/domains`              | GET, POST, DELETE        | Manage trusted redirect domains                                             |
+| `/oauth_providers`      | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                            |
+| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
+| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
+| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
+| `/plugins`              | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                |
+| `/plugins/phone_number` | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number) |
+| `/webhooks`             | GET, PUT                 | Configure webhook notifications                                             |
+| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
+| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
 
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 

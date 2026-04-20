@@ -30,8 +30,9 @@ The following Better Auth plugins are currently supported in Neon Auth:
 | [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
 | [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
 | [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
+| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported                                    |
 
-For more runnable Neon Auth samples, see [Example applications](/docs/auth/overview#example-applications). The **Organization** plugin demo is **[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)**; see the [Organization plugin](/docs/auth/guides/plugins/organization) page for context.
+For more runnable Neon Auth samples, see [Example applications](/docs/auth/overview#example-applications). The **Organization** plugin demo is **[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** and the **Phone Number** demo is **[nextjs-phone-login](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login)**.
 
 For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
 
