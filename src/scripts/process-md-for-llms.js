@@ -1920,15 +1920,15 @@ function buildNavigationFooter(slug, navMap) {
 
 /**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line and feedback instruction.
+ * Always includes the documentation index line.
  * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
- * @param {string} [relativePath] - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @param {string} [_relativePath] - Path relative to content/ (currently unused; kept for API stability)
  * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap, relativePath) {
+function buildPageHeader(slug, navMap, _relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -1947,15 +1947,6 @@ function buildPageHeader(slug, navMap, relativePath) {
 
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
-
-  // Feedback instruction (always, with page path baked in when available)
-  const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
-  const feedbackBody = pagePath
-    ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
-    : `{"feedback": "describe the issue"}`;
-  lines.push(
-    `> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to ${BASE_URL}/api/docs-feedback with ${feedbackBody}`
-  );
 
   return `${lines.join('\n')}\n\n`;
 }
