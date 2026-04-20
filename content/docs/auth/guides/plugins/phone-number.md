@@ -135,7 +135,7 @@ export async function POST(request: Request) {
   const payload = await request.json(); // verify the signature first in production
 
   if (payload.event_type === 'send.otp' && payload.event_data.delivery_preference === 'sms') {
-    const toNumber = payload.user?.phone_number ?? payload.event_data.phone_number;
+    const toNumber = payload.user?.phone_number;
     if (!toNumber) {
       return NextResponse.json({ error: 'missing phone number' }, { status: 400 });
     }
@@ -154,7 +154,7 @@ export async function POST(request: Request) {
 ```
 
 <Admonition type="note" title="User context for first OTPs">
-If an unauthenticated user requests their first OTP against a phone number that is not yet linked to any account, the webhook `user` object may only contain `phone_number`. Your handler should fall back to `event_data.phone_number` when the user has not been resolved, as shown above.
+When an unauthenticated user requests their first phone OTP (no prior account linked to that phone number), the webhook `user` object contains the `phone_number` only. Do not rely on `user.name`, `user.email`, or other profile fields when templating the SMS for first-time sends.
 </Admonition>
 
 For a runnable Next.js handler, signature verification, and a local tunneling setup, see the [nextjs-phone-login example](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login).
@@ -194,7 +194,7 @@ For a complete working form with resend, error handling, and attempt-budget awar
 
 ## Use Phone Number alongside UI components
 
-Unlike Email OTP and Magic Link, `NeonAuthUIProvider` does not expose a `phoneNumber` prop, and the pre-built `AuthView` does not render a phone sign-in UI. If you're using Neon Auth UI components, render your own phone sign-in form next to `AuthView` on the sign-in route:
+Unlike Email OTP, `NeonAuthUIProvider` does not expose a `phoneNumber` prop, and the pre-built `AuthView` does not render a phone sign-in UI. If you're using Neon Auth UI components, render your own phone sign-in form next to `AuthView` on the sign-in route:
 
 ```tsx shouldWrap filename="app/auth/[path]/page.tsx"
 import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
