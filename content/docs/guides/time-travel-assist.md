@@ -123,7 +123,7 @@ In the `branch` field, specify the name of the branch you want to connect to. Om
 Example:
 
 ```bash
-neon connetion-string main@2024-04-21T00:00:00Z
+neon connection-string main@2024-04-21T00:00:00Z
 postgresql://alex:AbC123dEf@br-broad-mouse-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require&options=neon_timestamp%3A2024-04-21T00%3A00%3A00Z
 ```
 

@@ -105,7 +105,7 @@ After Codex has finished development on its isolated database branch, the new sc
 If Codex indicated it created a branch with a specific ID (e.g., `br-nameless-cloud-123456`), you can easily retrieve its connection string using the [Neon CLI](/docs/reference/neon-cli):
 
 ```bash
-neon connection-string --branch-id <branch-id>
+neon connection-string <branch-id-or-name>
 ```
 
 Set this connection string in your local environment variables to thoroughly test the application against the new schema.
