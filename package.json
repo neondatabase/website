@@ -30,7 +30,9 @@
     "test:unit": "vitest",
     "test:unit:ui": "vitest --ui",
     "test:unit:run": "vitest run",
-    "test:unit:coverage": "vitest run --coverage"
+    "test:unit:coverage": "vitest run --coverage",
+    "check:docs": "vitest run scripts/docs-checks/**/__tests__/*.test.js",
+    "check:docs:neonctl": "vitest run scripts/docs-checks/neonctl/__tests__/neonctl-docs.test.js"
   },
   "dependencies": {
     "@emotion/memoize": "0.7.4",

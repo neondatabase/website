@@ -1,0 +1,624 @@
+{
+  "neonctlVersion": "2.22.0",
+  "generatedAt": "2026-04-20T00:50:56.131Z",
+  "globalOptions": {
+    "help": {
+      "type": "boolean"
+    },
+    "api-key": {
+      "type": "string"
+    },
+    "context-file": {
+      "type": "string"
+    },
+    "color": {
+      "type": "boolean"
+    },
+    "analytics": {
+      "type": "boolean"
+    },
+    "config-dir": {
+      "type": "string"
+    },
+    "output": {
+      "type": "string",
+      "alias": "o",
+      "choices": ["json", "yaml", "table"]
+    }
+  },
+  "commands": {
+    "auth": {
+      "aliases": ["login"],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        }
+      },
+      "commands": {}
+    },
+    "me": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        }
+      },
+      "commands": {}
+    },
+    "orgs": {
+      "aliases": ["org"],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "projects": {
+      "aliases": ["project"],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": ["id"],
+          "options": {},
+          "commands": {}
+        },
+        "recover": {
+          "name": "recover",
+          "aliases": [],
+          "positionals": ["id"],
+          "options": {},
+          "commands": {}
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": ["id"],
+          "options": {},
+          "commands": {}
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": ["id"],
+          "options": {
+            "block-vpc-connections": {
+              "type": "boolean"
+            },
+            "block-public-connections": {
+              "type": "boolean"
+            },
+            "hipaa": {
+              "type": "boolean"
+            },
+            "cu": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "block-public-connections": {
+              "type": "boolean"
+            },
+            "block-vpc-connections": {
+              "type": "boolean"
+            },
+            "hipaa": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "region-id": {
+              "type": "string"
+            },
+            "org-id": {
+              "type": "string"
+            },
+            "psql": {
+              "type": "boolean"
+            },
+            "database": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "set-context": {
+              "type": "boolean"
+            },
+            "cu": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string"
+            },
+            "recoverable-only": {
+              "type": "boolean"
+            }
+          },
+          "commands": {}
+        }
+      }
+    },
+    "ip-allow": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        }
+      },
+      "commands": {
+        "reset": {
+          "name": "reset",
+          "aliases": [],
+          "positionals": ["ips..."],
+          "options": {},
+          "commands": {}
+        },
+        "remove": {
+          "name": "remove",
+          "aliases": [],
+          "positionals": ["ips..."],
+          "options": {},
+          "commands": {}
+        },
+        "add": {
+          "name": "add",
+          "aliases": [],
+          "positionals": ["ips..."],
+          "options": {
+            "protected-only": {
+              "type": "boolean"
+            }
+          },
+          "commands": {}
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "vpc": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "project": {
+          "name": "project",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "project-id": {
+              "type": "string"
+            }
+          },
+          "commands": {
+            "remove": {
+              "name": "remove",
+              "aliases": [],
+              "positionals": ["id"],
+              "options": {},
+              "commands": {}
+            },
+            "restrict": {
+              "name": "restrict",
+              "aliases": ["update"],
+              "positionals": ["id"],
+              "options": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "commands": {}
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {}
+            }
+          }
+        },
+        "endpoint": {
+          "name": "endpoint",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string"
+            },
+            "region-id": {
+              "type": "string",
+              "required": true
+            }
+          },
+          "commands": {
+            "status": {
+              "name": "status",
+              "aliases": [],
+              "positionals": ["id"],
+              "options": {},
+              "commands": {}
+            },
+            "remove": {
+              "name": "remove",
+              "aliases": [],
+              "positionals": ["id"],
+              "options": {},
+              "commands": {}
+            },
+            "assign": {
+              "name": "assign",
+              "aliases": ["update", "add"],
+              "positionals": ["id"],
+              "options": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "commands": {}
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {}
+            }
+          }
+        }
+      }
+    },
+    "branches": {
+      "aliases": ["branch"],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        }
+      },
+      "commands": {
+        "schema-diff": {
+          "name": "schema-diff",
+          "aliases": ["sd"],
+          "positionals": ["base-branch", "compare-source[@(timestamp|lsn)]"],
+          "options": {
+            "database": {
+              "type": "string",
+              "alias": "db"
+            }
+          },
+          "commands": {}
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {},
+          "commands": {}
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {},
+          "commands": {}
+        },
+        "add-compute": {
+          "name": "add-compute",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {
+            "type": {
+              "type": "string"
+            },
+            "cu": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "set-expiration": {
+          "name": "set-expiration",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {
+            "expires-at": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "set-default": {
+          "name": "set-default",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {},
+          "commands": {}
+        },
+        "rename": {
+          "name": "rename",
+          "aliases": [],
+          "positionals": ["id|name", "new-name"],
+          "options": {},
+          "commands": {}
+        },
+        "restore": {
+          "name": "restore",
+          "aliases": [],
+          "positionals": ["target-id|name", "source>[@(timestamp|lsn)"],
+          "options": {
+            "preserve-under-name": {
+              "type": "unknown"
+            }
+          },
+          "commands": {}
+        },
+        "reset": {
+          "name": "reset",
+          "aliases": [],
+          "positionals": ["id|name"],
+          "options": {
+            "parent": {
+              "type": "boolean"
+            },
+            "preserve-under-name": {
+              "type": "unknown"
+            }
+          },
+          "commands": {}
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "unknown"
+            },
+            "parent": {
+              "type": "string"
+            },
+            "compute": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string"
+            },
+            "suspend-timeout": {
+              "type": "number"
+            },
+            "cu": {
+              "type": "string"
+            },
+            "psql": {
+              "type": "boolean"
+            },
+            "annotation": {
+              "type": "string",
+              "hidden": true
+            },
+            "schema-only": {
+              "type": "boolean"
+            },
+            "expires-at": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "databases": {
+      "aliases": ["database", "db"],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        }
+      },
+      "commands": {
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": ["database"],
+          "options": {},
+          "commands": {}
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "required": true
+            },
+            "owner-name": {
+              "type": "string"
+            }
+          },
+          "commands": {}
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "roles": {
+      "aliases": ["role"],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        }
+      },
+      "commands": {
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": ["role"],
+          "options": {},
+          "commands": {}
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "required": true
+            },
+            "no-login": {
+              "type": "boolean"
+            }
+          },
+          "commands": {}
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "operations": {
+      "aliases": ["operation"],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        }
+      },
+      "commands": {
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {}
+        }
+      }
+    },
+    "connection-string": {
+      "aliases": ["cs"],
+      "positionals": ["branch"],
+      "options": {
+        "project-id": {
+          "type": "string"
+        },
+        "role-name": {
+          "type": "string"
+        },
+        "database-name": {
+          "type": "string"
+        },
+        "pooled": {
+          "type": "boolean"
+        },
+        "prisma": {
+          "type": "boolean"
+        },
+        "endpoint-type": {
+          "type": "string"
+        },
+        "extended": {
+          "type": "boolean"
+        },
+        "psql": {
+          "type": "boolean"
+        },
+        "ssl": {
+          "type": "string"
+        }
+      },
+      "commands": {}
+    },
+    "set-context": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string"
+        },
+        "org-id": {
+          "type": "string"
+        }
+      },
+      "commands": {}
+    },
+    "init": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "string",
+          "alias": "a"
+        },
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        }
+      },
+      "commands": {}
+    }
+  }
+}
