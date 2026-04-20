@@ -20,7 +20,7 @@ import {
 
 import { useDocsVersionContext } from '../version-context';
 
-const VersionSwitcher = ({ className, isMobileMenu = false }) => {
+const VersionSwitcher = ({ className, isMobileMenu = false, supportsVersioning = true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const pathname = usePathname();
@@ -107,7 +107,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
             <span
               className={clsx(
                 isMobileMenu ? 'text-[16px]' : 'text-[15px]',
-                'truncate font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-white'
+                'truncate leading-tight font-medium tracking-extra-tight text-gray-new-20 dark:text-white'
               )}
             >
               {visualSelectedVersion.label}
@@ -128,7 +128,10 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
               return (
                 <li key={version.id} role="option" aria-selected={isSelected}>
                   <button
-                    className="flex w-full items-center justify-between px-2.5 py-2 text-left hover:bg-gray-new-98 dark:hover:bg-gray-new-8"
+                    className={clsx(
+                      'flex w-full items-center justify-between px-2.5 py-2 text-left hover:bg-gray-new-98 dark:hover:bg-gray-new-8',
+                      !supportsVersioning && !isSelected && 'pointer-events-none opacity-50'
+                    )}
                     type="button"
                     onClick={() => navigateToVersion(version.id)}
                   >
@@ -143,7 +146,7 @@ const VersionSwitcher = ({ className, isMobileMenu = false }) => {
                       <span className="flex flex-col">
                         <span
                           className={clsx(
-                            'truncate font-medium leading-tight tracking-extra-tight',
+                            'truncate leading-tight font-medium tracking-extra-tight',
                             isMobileMenu ? 'text-[16px]' : 'text-[15px]'
                           )}
                         >
@@ -173,4 +176,5 @@ export default VersionSwitcher;
 VersionSwitcher.propTypes = {
   className: PropTypes.string,
   isMobileMenu: PropTypes.bool,
+  supportsVersioning: PropTypes.bool,
 };

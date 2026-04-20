@@ -440,8 +440,7 @@
                   slug: auth/branching-authentication
                 - title: Roadmap
                   slug: auth/roadmap
-                - title: Database integration
-                  slug: auth/database-integration
+
             - section: Quickstarts
               items:
                 - title: Next.js
@@ -505,11 +504,6 @@
                   slug: auth/migrate/from-legacy-auth
                 - title: From Supabase
                   slug: auth/migrate/from-supabase
-
-            - section: Legacy (archive)
-              items:
-                - title: Database integration
-                  slug: auth/legacy/database-integration
 
         - title: Postgres RLS
           icon: lock

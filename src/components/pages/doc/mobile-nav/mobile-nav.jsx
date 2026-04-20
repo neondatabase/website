@@ -12,7 +12,7 @@ import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
   resolveDocsHrefWithBasePath,
-  resolveLegacyDocsVersionId,
+  resolveLatestDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
@@ -207,11 +207,16 @@ RecursiveItem.propTypes = {
   currentPath: PropTypes.string.isRequired,
 };
 
-const RecursiveList = ({ nodes, currentPath, showVersionSwitcher = false }) => (
+const RecursiveList = ({
+  nodes,
+  currentPath,
+  showVersionSwitcher = false,
+  supportsVersioning = true,
+}) => (
   <ul className="flex flex-col gap-y-2.5">
     {showVersionSwitcher && (
       <li className="relative pb-4 after:absolute after:bottom-0 after:left-1/2 after:h-px after:w-full after:-translate-x-1/2 after:bg-gray-new-80 dark:after:bg-gray-new-20">
-        <VersionSwitcher isMobileMenu />
+        <VersionSwitcher supportsVersioning={supportsVersioning} isMobileMenu />
       </li>
     )}
     {nodes.map((node, idx) => (
@@ -224,6 +229,7 @@ RecursiveList.propTypes = {
   nodes: PropTypes.array.isRequired,
   currentPath: PropTypes.string.isRequired,
   showVersionSwitcher: PropTypes.bool,
+  supportsVersioning: PropTypes.bool,
 };
 
 const MobileMenu = ({
@@ -238,13 +244,10 @@ const MobileMenu = ({
   const normalizedPathname = stripDocsVersionFromPathname(pathname);
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
-  const legacyVersionId = resolveLegacyDocsVersionId();
   const supportsVersioningForSlug = dualVersionSlugs.includes(currentSlug);
-  const effectiveVersionId =
-    pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
+  const effectiveVersionId = pathnameVersion || resolveLatestDocsVersionId();
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
-  const docsBasePath =
-    pathnameVersion && supportsVersioningForSlug ? getVersionedDocsBasePath(pathnameVersion) : basePath;
+  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
 
   useEffect(() => {
     setOpen(false);
@@ -275,11 +278,12 @@ const MobileMenu = ({
 
       <DrawerContent className="bottom-12 hidden h-[70dvh]! flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
-        <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-8 pt-[15px]">
+        <div className="flex flex-1 flex-col overflow-y-auto p-6 pt-[15px] pb-8">
           <RecursiveList
             nodes={menu}
             currentPath={pathname}
-            showVersionSwitcher={supportsVersioningForSlug}
+            showVersionSwitcher={dualVersionSlugs.length > 0}
+            supportsVersioning={supportsVersioningForSlug}
           />
         </div>
         <div

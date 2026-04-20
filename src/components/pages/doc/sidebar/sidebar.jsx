@@ -9,7 +9,7 @@ import { cn } from 'utils/cn';
 import {
   getDocsVersionFromPathname,
   getVersionedDocsBasePath,
-  resolveLegacyDocsVersionId,
+  resolveLatestDocsVersionId,
   stripDocsVersionFromPathname,
 } from 'utils/docs-versioning';
 
@@ -59,15 +59,10 @@ const Sidebar = ({
   const normalizedPathname = stripDocsVersionFromPathname(pathname);
   const currentSlug = normalizedPathname.replace(basePath, '');
   const pathnameVersion = getDocsVersionFromPathname(pathname);
-  const legacyVersionId = resolveLegacyDocsVersionId();
   const supportsVersioningForSlug = dualVersionSlugs.includes(currentSlug);
-  const effectiveVersionId =
-    pathnameVersion && supportsVersioningForSlug ? pathnameVersion : legacyVersionId;
+  const effectiveVersionId = pathnameVersion || resolveLatestDocsVersionId();
   const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
-  const shouldUseVersionedBasePath = Boolean(pathnameVersion && supportsVersioningForSlug);
-  const docsBasePath = shouldUseVersionedBasePath
-    ? getVersionedDocsBasePath(pathnameVersion)
-    : basePath;
+  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
   const menu = getActiveMenu(activeNavigation, currentSlug);
   const navRef = useRef(null);
 
@@ -107,14 +102,14 @@ const Sidebar = ({
       <div className="sticky top-28">
         <nav
           className={cn(
-            'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
+            'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-2.5',
             hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
           )}
           ref={navRef}
         >
-          {showVersionSwitcher && supportsVersioningForSlug && (
+          {showVersionSwitcher && (
             <>
-              <VersionSwitcher className="mb-3.5" />
+              <VersionSwitcher className="mb-3.5" supportsVersioning={supportsVersioningForSlug} />
               <div className="mb-6 h-px w-full bg-gray-new-90 dark:bg-gray-new-20" />
             </>
           )}
