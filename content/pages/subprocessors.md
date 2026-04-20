@@ -31,6 +31,7 @@ We will only use the information you provide on this form to process your reques
 Neon may use the following Sub-processors to deliver the Services to you:
 
 | Vendor Name | Location | Purpose |
+| --- | --- | --- |
 | Salesforce | United States | Customer service software |
 | Grafana | United States | Infrastructure service provider |
 | Amazon Web Services | United States | Infrastructure service provider |
