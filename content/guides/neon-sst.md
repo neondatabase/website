@@ -232,7 +232,7 @@ NEON_ORG_ID="<YOUR_NEON_ORG_ID>"
 
 ### Define the resources
 
-Add the following code to your `sst.config.ts` file. This code creates a Neon project and makes the connection string available to the API using resource linking.
+Add the following code to your `sst.config.ts` file. This code creates a Neon project with a custom role and database, then makes the connection string available to the API using resource linking.
 
 ```typescript title="sst.config.ts"
 /// <reference path="./.sst/platform/config.d.ts" />
@@ -256,10 +256,38 @@ export default $config({
       historyRetentionSeconds: 21600,
     });
 
+    const branch = new neon.Branch('MainBranch', {
+      projectId: myAppProject.id,
+      name: 'main',
+    });
+
+    new neon.Endpoint('MainEndpoint', {
+      projectId: myAppProject.id,
+      branchId: branch.id,
+      type: 'read_write',
+    });
+
+    const appUser = new neon.Role('AppUser', {
+      projectId: myAppProject.id,
+      branchId: branch.id,
+      name: 'application_user',
+    });
+
+    new neon.Database('ServiceDb', {
+      projectId: myAppProject.id,
+      branchId: branch.id,
+      name: 'service_database',
+      ownerName: appUser.name,
+    });
+
+    // project.connectionUri uses the default role and database (neondb),
+    // so we build the URL from our custom role and database instead
+    const connectionString = $interpolate`postgresql://${appUser.name}:${appUser.password}@${myAppProject.databaseHost}/service_database?sslmode=require`;
+
     // Make the connection string linkable
     const db = new sst.Linkable('NeonDB', {
       properties: {
-        connectionString: myAppProject.connectionUri,
+        connectionString,
       },
     });
 
@@ -275,9 +303,10 @@ export default $config({
 
 The above code does the following:
 
-1.  Creates a Neon project named `my-sst-project`.
-2.  Defines a linkable resource `NeonDB` that exposes the `connectionString` property from the Neon project.
-3.  Creates an AWS Lambda function named `MyApi` using the handler defined in `src/index.ts`, and links it to the `NeonDB` resource. This makes the connection string available to the Lambda function.
+1.  Creates a Neon project named `my-sst-project` with a branch, endpoint, custom role (`application_user`), and database (`service_database`).
+2.  Builds a connection string from the custom role's credentials and database name. This is necessary because `project.connectionUri` connects with the default role to the default `neondb` database.
+3.  Defines a linkable resource `NeonDB` that exposes the manually constructed `connectionString`.
+4.  Creates an AWS Lambda function named `MyApi` using the handler defined in `src/index.ts`, and links it to the `NeonDB` resource. This makes the connection string available to the Lambda function.
 
 ### Install dependencies
 
@@ -338,8 +367,12 @@ SST 3.17.14  ready!
 
 ~  Deploy
 
-|  Created     MyApi sst:aws:Function → MyApiRole aws:iam:Role (2.5s)
 |  Created     MyAppProject neon:index:Project (5.5s)
+|  Created     MainBranch neon:index:Branch
+|  Created     MainEndpoint neon:index:Endpoint (1.1s)
+|  Created     AppUser neon:index:Role
+|  Created     ServiceDb neon:index:Database (1.5s)
+|  Created     MyApi sst:aws:Function → MyApiRole aws:iam:Role (2.5s)
 |  Created     MyApi sst:aws:Function → MyApiCode aws:s3:BucketObjectv2 (5.2s)
 |  Created     MyApi sst:aws:Function → MyApiFunction aws:lambda:Function (8.0s)
 |  Created     MyApi sst:aws:Function → MyApiUrl aws:lambda:FunctionUrl (1.2s)
