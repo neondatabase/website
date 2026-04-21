@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL ALL Operator'
   slug: 'postgresql-tutorial/postgresql-all'
 nextLink:
-  title: 'PostgreSQL CTE'
-  slug: 'postgresql-tutorial/postgresql-cte'
+  title: 'PostgreSQL Data Types'
+  slug: 'postgresql-tutorial/data-types'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXISTS` operator to test for the existence of rows in a subquery.
@@ -192,7 +192,7 @@ first_name  |  last_name
 
 ### 3\) EXISTS and NULL example
 
-The following example returns all rows from the `customers` table because the subquery in the `EXISTS` operator returns `NULL`:
+The following example returns all rows from the `customer` table because the subquery in the `EXISTS` operator returns `NULL`:
 
 ```sql
 SELECT
