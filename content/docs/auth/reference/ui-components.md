@@ -11,7 +11,7 @@ updatedOn: '2026-03-23T12:18:17.917Z'
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These components are built with [Better Auth UI](https://better-auth-ui.com/) and work with Neon Auth.
+Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Neon Auth.
 
 ## Installation
 
@@ -143,7 +143,7 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 | Component    | Purpose                                           | Key Props  | Docs                                                         |
 | ------------ | ------------------------------------------------- | ---------- | ------------------------------------------------------------ |
-| `<AuthView>` | All-in-one auth UI with sign-in and sign-up forms | `pathname` | [auth-view](https://better-auth-ui.com/components/auth-view) |
+| `<AuthView>` | All-in-one auth UI with sign-in and sign-up forms | `pathname` | [auth-view](https://legacy.better-auth-ui.com/components/auth-view) |
 
 **Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
 
@@ -153,12 +153,12 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 | Component            | Purpose                               | Key Props              | Docs                                                                             |
 | -------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
-| `<UserButton>`       | User menu dropdown with avatar        | -                      | [user-button](https://better-auth-ui.com/components/user-button)                 |
-| `<UserAvatar>`       | Profile picture with Gravatar support | `user`, `size`         | [user-avatar](https://better-auth-ui.com/components/user-avatar)                 |
-| `<SignedIn>`         | Conditional rendering when signed in  | `children`, `fallback` | [signed-in](https://better-auth-ui.com/components/signed-in)                     |
-| `<SignedOut>`        | Conditional rendering when signed out | `children`, `fallback` | [signed-out](https://better-auth-ui.com/components/signed-out)                   |
-| `<RedirectToSignIn>` | Redirect helper to sign-in page       | `redirectTo`           | [redirect-to-sign-in](https://better-auth-ui.com/components/redirect-to-sign-in) |
-| `<RedirectToSignUp>` | Redirect helper to sign-up page       | `redirectTo`           | [redirect-to-sign-up](https://better-auth-ui.com/components/redirect-to-sign-up) |
+| `<UserButton>`       | User menu dropdown with avatar        | -                      | [user-button](https://legacy.better-auth-ui.com/components/user-button)                 |
+| `<UserAvatar>`       | Profile picture with Gravatar support | `user`, `size`         | [user-avatar](https://legacy.better-auth-ui.com/components/user-avatar)                 |
+| `<SignedIn>`         | Conditional rendering when signed in  | `children`, `fallback` | [signed-in](https://legacy.better-auth-ui.com/components/signed-in)                     |
+| `<SignedOut>`        | Conditional rendering when signed out | `children`, `fallback` | [signed-out](https://legacy.better-auth-ui.com/components/signed-out)                   |
+| `<RedirectToSignIn>` | Redirect helper to sign-in page       | `redirectTo`           | [redirect-to-sign-in](https://legacy.better-auth-ui.com/components/redirect-to-sign-in) |
+| `<RedirectToSignUp>` | Redirect helper to sign-up page       | `redirectTo`           | [redirect-to-sign-up](https://legacy.better-auth-ui.com/components/redirect-to-sign-up) |
 
 ## Styling
 
@@ -191,7 +191,7 @@ This imports only the theme variables. Your Tailwind build generates the utility
 Never import both paths. This causes duplicate styles.
 </Admonition>
 
-For customization options, see **Styling** details within each Better Auth UI component docs page. Example: [Auth View styling](https://better-auth-ui.com/components/auth-view#styling).
+For customization options, see **Styling** details within each Better Auth UI component docs page. Example: [Auth View styling](https://legacy.better-auth-ui.com/components/auth-view#styling).
 
 ## Example Usage
 
