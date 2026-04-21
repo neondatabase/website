@@ -1070,6 +1070,9 @@
           slug: introduction/agent-plan
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Spending limit
+          slug: introduction/spending-limit
+          tag: new
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
