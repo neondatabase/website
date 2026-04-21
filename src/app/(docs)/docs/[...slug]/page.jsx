@@ -29,9 +29,7 @@ const isUnusedOrSharedContent = (slug) =>
   slug.includes('GUIDE_TEMPLATE');
 
 const isUnversionedSlug = (slug) =>
-  DOCS_UNVERSIONED_SLUGS.some(
-    (prefix) => slug === prefix || slug.startsWith(`${prefix}/`)
-  );
+  DOCS_UNVERSIONED_SLUGS.some((prefix) => slug === prefix || slug.startsWith(`${prefix}/`));
 
 const getDocsContentPathForVersion = (version) => version?.docsContentPath || DOCS_DIR_PATH;
 
@@ -176,9 +174,15 @@ export async function generateMetadata(props) {
   }
 
   const isChangelog = currentSlug === 'changelog';
-  const { post, sourceDocsDirPath, supportsVersioning } = isChangelog
+  const docSource = isChangelog
     ? { post: null, sourceDocsDirPath: DOCS_DIR_PATH, supportsVersioning: false }
     : resolveDocSource({ currentSlug, requestedVersionId, hasVersionPrefix });
+
+  if (!isChangelog && !docSource) {
+    return notFound();
+  }
+
+  const { post, sourceDocsDirPath, supportsVersioning } = docSource;
 
   if (!isChangelog && !post) {
     return notFound();
@@ -195,15 +199,17 @@ export async function generateMetadata(props) {
     title: `${title} - Neon Docs`,
     description: isChangelog ? 'The latest product updates from Neon' : post.excerpt,
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
-    pathname: hasVersionPrefix && supportsVersioning
-      ? `${LINKS.docs}/${requestedVersionId}/${currentSlug}`
-      : `${LINKS.docs}/${currentSlug}`,
+    pathname:
+      hasVersionPrefix && supportsVersioning
+        ? `${LINKS.docs}/${requestedVersionId}/${currentSlug}`
+        : `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
-    markdownPath: hasVersionPrefix && supportsVersioning
-      ? `/docs/${requestedVersionId}/${currentSlug}.md`
-      : `/docs/${currentSlug}.md`,
+    markdownPath:
+      hasVersionPrefix && supportsVersioning
+        ? `/docs/${requestedVersionId}/${currentSlug}.md`
+        : `/docs/${currentSlug}.md`,
   });
 }
 
@@ -225,7 +231,7 @@ const DocPost = async (props) => {
 
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
-  const { post, effectiveVersion, sourceDocsDirPath, supportsVersioning } = isChangelogIndex
+  const docSource = isChangelogIndex
     ? {
         post: null,
         effectiveVersion: null,
@@ -233,14 +239,25 @@ const DocPost = async (props) => {
         supportsVersioning: false,
       }
     : resolveDocSource({ currentSlug, requestedVersionId, hasVersionPrefix });
+
+  if (!isChangelogIndex && !docSource) {
+    return notFound();
+  }
+
+  const { post, effectiveVersion, sourceDocsDirPath, supportsVersioning } = docSource;
   const versionedBasePath =
     hasVersionPrefix && supportsVersioning
       ? getVersionedDocsBasePath(requestedVersionId)
       : DOCS_BASE_PATH;
-  const { flatSidebar, breadcrumbs } = await resolveSidebarContext({ currentSlug, sourceDocsDirPath });
+  const { flatSidebar, breadcrumbs } = await resolveSidebarContext({
+    currentSlug,
+    sourceDocsDirPath,
+  });
   const allChangelogPosts = await getAllChangelogs();
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${sourceDocsDirPath}/${currentSlug}.md`;
+  const gitHubPath = isChangelogIndex
+    ? CHANGELOG_DIR_PATH
+    : `${sourceDocsDirPath}/${currentSlug}.md`;
 
   if (!isChangelogIndex && !post) {
     return notFound();
@@ -258,7 +275,9 @@ const DocPost = async (props) => {
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         navigationLinksBasePath={versionedBasePath}
-        effectiveDocsVersion={supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null}
+        effectiveDocsVersion={
+          supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null
+        }
         changelogActiveLabel="all"
         isChangelog
       />
@@ -295,7 +314,9 @@ const DocPost = async (props) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
-        effectiveDocsVersion={supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null}
+        effectiveDocsVersion={
+          supportsVersioning || effectiveVersion?.isDeprecated ? effectiveVersion : null
+        }
       />
     </>
   );
