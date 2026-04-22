@@ -42,8 +42,6 @@ const isLocalDevelopment = () => process.env.NODE_ENV === 'development';
 
 const isProductionWebsite = () => process.env.VERCEL_ENV === 'production';
 
-const isPreviewProductionFilterEnabled = () => process.env.VERCEL_ENV === 'production';
-
 const getRemoteSnapshot = async (cacheKey, ttlMs, loader) => {
   const now = Date.now();
   const cachedValue = remoteSnapshotCache.get(cacheKey);
@@ -178,9 +176,8 @@ const mapPostToListShape = (postEntry, authorsData, categoriesData) => {
   };
 };
 
-const getMappedBlogPosts = async ({ previewBranch = null, strictBranch = false } = {}) => {
-  const snapshot = await getResolvedBlogSnapshot({ previewBranch, strictBranch });
-  const isProduction = isPreviewProductionFilterEnabled();
+const getMappedBlogPostsFromSnapshot = (snapshot) => {
+  const isProduction = isProductionWebsite();
 
   const posts = snapshot.posts
     .map((postEntry) => {
@@ -197,13 +194,16 @@ const getMappedBlogPosts = async ({ previewBranch = null, strictBranch = false }
   return posts;
 };
 
+const getMappedBlogPosts = async ({ previewBranch = null, strictBranch = false } = {}) =>
+  getMappedBlogPostsFromSnapshot(await getResolvedBlogSnapshot({ previewBranch, strictBranch }));
+
 export const getBlogSnapshot = async (options = {}) => getResolvedBlogSnapshot(options);
 
 export const getAllBlogPosts = async (options = {}) => getMappedBlogPosts(options);
 
 export const getAllBlogCategories = async (options = {}) => {
   const snapshot = await getResolvedBlogSnapshot(options);
-  const posts = await getMappedBlogPosts(options);
+  const posts = getMappedBlogPostsFromSnapshot(snapshot);
   const counts = {};
 
   posts.forEach((post) => {
@@ -278,7 +278,7 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
   const snapshot = await getResolvedBlogSnapshot(options);
   const postEntry = snapshot.posts.find((entry) => entry.slug === slug);
 
-  if (!postEntry || (postEntry.data?.draft && isPreviewProductionFilterEnabled())) {
+  if (!postEntry || (postEntry.data?.draft && isProductionWebsite())) {
     return { post: null, relatedPosts: [] };
   }
 
@@ -303,7 +303,7 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
     },
   };
 
-  const relatedPosts = (await getMappedBlogPosts(options))
+  const relatedPosts = getMappedBlogPostsFromSnapshot(snapshot)
     .filter((relatedPost) => relatedPost.slug !== slug)
     .slice(0, 3);
 
