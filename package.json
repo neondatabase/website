@@ -39,8 +39,8 @@
     "check:docs:neonctl": "vitest run scripts/docs-checks/neonctl/__tests__/neonctl-docs.test.js"
   },
   "dependencies": {
-    "@emotion/memoize": "0.7.4",
     "@codemirror/lang-sql": "^6.9.1",
+    "@emotion/memoize": "0.7.4",
     "@headlessui/react": "^2.2.9",
     "@headlessui/tailwindcss": "^0.2.2",
     "@hookform/resolvers": "^3.3.4",
@@ -75,8 +75,6 @@
     "framer-motion": "^12.36.0",
     "geist": "^1.5.1",
     "glob": "^10.5.0",
-    "graphql": "^16.8.1",
-    "graphql-request": "^6.1.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.5",
     "he": "^1.2.0",
