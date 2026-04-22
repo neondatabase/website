@@ -27,9 +27,23 @@ module.exports = {
 
   // Quick-reference links emitted as "## Common Queries" before the section list.
   commonQueries: [
-    { label: 'Pricing and Plans', url: 'https://neon.com/pricing.md' },
-    { label: 'Regions', url: 'https://neon.com/docs/introduction/regions.md' },
-    { label: 'API Reference', url: 'https://neon.com/docs/reference/api-reference.md' },
+    { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
+    {
+      label: 'Choose a connection method (drivers, pooling, serverless)',
+      url: 'https://neon.com/docs/connect/choose-connection.md',
+    },
+    {
+      label: 'Troubleshoot connection errors and timeouts',
+      url: 'https://neon.com/docs/connect/connection-errors.md',
+    },
+    {
+      label: 'pgvector extension for vector search and embeddings',
+      url: 'https://neon.com/docs/extensions/pgvector.md',
+    },
+    {
+      label: 'Neon API reference (projects, branches, databases, endpoints)',
+      url: 'https://neon.com/docs/reference/api-reference.md',
+    },
   ],
 
   // Sections in display order. Unlisted sections append alphabetically at the end.
