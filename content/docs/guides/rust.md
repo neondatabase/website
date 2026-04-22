@@ -688,6 +688,7 @@ You can find the source code for the applications described in this guide on Git
 <details>
 <summary>**Notes for AI-assisted setup**</summary>
 
+- Ask the user which Rust Postgres driver they want to use: `postgres` (synchronous) or `tokio-postgres` (asynchronous). Only after they choose, proceed with the relevant code and instructions for that driver.
 - The TLS/SSL connector setup is mandatory. Neon requires a secure connection, and the `postgres-openssl` and `openssl` crates must be included. The connection will fail without the `SslConnector` / `MakeTlsConnector` setup shown in the examples.
 - Mutability matters for transactions. In the synchronous `postgres` crate, both the `client` and the `transaction` must be declared as `mut`. In `tokio-postgres`, the `client` must be `mut` to call `.transaction()`, but the returned transaction object is not `mut`. Getting this wrong causes compile errors.
 - Use `dotenvy` (not `dotenv`) for loading `.env` files. The `dotenv` crate is unmaintained; `dotenvy` is the actively maintained fork.
