@@ -1,6 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,6 +17,9 @@ import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { cn } from 'utils/cn';
 import { doNowOrAfterSomeTime } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
+
+import LINKS from '../../../../../constants/links';
+import formPattern from '../../../../../images/pages/contact-sales/form-pattern.png';
 
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
@@ -61,7 +65,9 @@ const schema = yup
   })
   .required();
 
-const labelClassName = 'text-sm text-gray-new-90';
+const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90 md:text-sm';
+const inputClassName =
+  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-white placeholder:!text-gray-new-50 focus:!border-white';
 
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
@@ -128,39 +134,49 @@ const ContactForm = () => {
   return (
     <form
       className={cn(
-        'relative z-10 grid scroll-mt-10 gap-y-6 p-8',
-        'rounded-xl border border-gray-new-10 bg-[#020203]/70 bg-contact-form-bg shadow-contact',
-        'xl:p-6 lg:gap-y-5 md:gap-y-6'
+        'relative z-10 grid scroll-mt-10 gap-y-6 overflow-hidden border border-gray-new-20 bg-black-pure/80 px-8 py-7',
+        'xl:gap-5 xl:px-7 xl:py-6 lg:max-w-full md:px-5 md:py-5'
       )}
       method="POST"
       id="startups-form"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <h2 className="text-xl leading-snug font-medium tracking-tighter text-white">
+        Apply to the Neon Startups Program
+      </h2>
       <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">
         <Field
+          className="gap-y-2"
+          errorTheme="tooltip"
           name="firstname"
           label="First Name*"
           autoComplete="name"
           placeholder="Jane"
           theme="transparent"
           labelClassName={labelClassName}
+          inputClassName={inputClassName}
           error={errors.firstname?.message}
           isDisabled={isDisabled}
           {...register('firstname')}
         />
         <Field
+          className="gap-y-2"
+          errorTheme="tooltip"
           name="lastname"
           label="Last Name*"
           autoComplete="name"
           placeholder="Doe"
           theme="transparent"
           labelClassName={labelClassName}
+          inputClassName={inputClassName}
           error={errors.lastname?.message}
           isDisabled={isDisabled}
           {...register('lastname')}
         />
       </div>
       <Field
+        className="gap-y-2"
+        errorTheme="tooltip"
         name="email"
         label="Company Email Address*"
         type="email"
@@ -168,26 +184,33 @@ const ContactForm = () => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
+        inputClassName={inputClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
       />
       <Field
+        className="gap-y-2"
+        errorTheme="tooltip"
         name="companyWebsite"
         label="Company Website*"
         placeholder="your.company.com"
         theme="transparent"
         labelClassName={labelClassName}
+        inputClassName={inputClassName}
         isDisabled={isDisabled}
         error={errors.companyWebsite?.message}
         {...register('companyWebsite')}
       />
       <Field
+        className="gap-y-2"
+        errorTheme="tooltip"
         name="investor"
         label="Major Investor, Accelerator, etc.*"
         placeholder="Y Combinator, Techstars, etc."
         theme="transparent"
         labelClassName={labelClassName}
+        inputClassName={inputClassName}
         isDisabled={isDisabled}
         error={errors.investor?.message}
         {...register('investor')}
@@ -196,20 +219,40 @@ const ContactForm = () => {
       {/* Hidden field for ajs_anonymous_id - not submitted to HubSpot */}
       <input type="hidden" name="ajs_anonymous_id" {...register('ajs_anonymous_id')} />
 
-      <div className="relative">
+      <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
+        <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
+          By submitting you agree to the{' '}
+          <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
+            Terms of Use
+          </Link>{' '}
+          and acknowledge the{' '}
+          <Link className="decoration-dashed" to={LINKS.privacyPolicy} theme="grey-85-underlined">
+            Privacy Notice
+          </Link>
+          .
+        </p>
         <Button
-          className={cn(
-            'mt-1 h-[46px] w-full font-semibold lg:h-10 sm:mt-0',
-            formState === FORM_STATES.ERROR && 'pointer-events-none bg-secondary-1/50!'
-          )}
+          className="min-w-[152px] px-10 sm:w-full sm:min-w-0"
           type="submit"
-          theme="primary"
-          size="xs"
-          disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
+          theme="white-filled"
+          size="new"
+          disabled={
+            formState === FORM_STATES.LOADING ||
+            formState === FORM_STATES.SUCCESS ||
+            formState === FORM_STATES.ERROR
+          }
         >
           {formState === FORM_STATES.SUCCESS ? 'Applied!' : 'Apply Now'}
         </Button>
       </div>
+      <Image
+        className="absolute -right-px -bottom-px -z-10 max-w-none"
+        src={formPattern}
+        alt=""
+        width={576}
+        height={228}
+        priority
+      />
       {isBroken && <ErrorMessage onClose={() => setIsBroken(false)} />}
     </form>
   );

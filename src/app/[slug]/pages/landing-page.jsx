@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
-
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import Benefits from 'components/pages/landing/benefits';
@@ -42,7 +41,9 @@ const LandingHero = async ({ hubspotFormId, ...restProps }) => {
 
 const LandingFormCopy = async ({ hubspotFormId, ...restProps }) => {
   const formData = hubspotFormId ? await getHubspotFormData(hubspotFormId) : null;
-  return <Hero theme="form-copy" formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+  return (
+    <Hero theme="form-copy" formData={formData} hubspotFormId={hubspotFormId} {...restProps} />
+  );
 };
 
 const LandingFeatures = ({ features = [], ...restProps }) => {
@@ -69,6 +70,7 @@ const LandingCtaNew = (props) => (
   <CTANew
     className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
     copyWrapperClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
+    label={props.label || 'Get started'}
     {...props}
   />
 );
