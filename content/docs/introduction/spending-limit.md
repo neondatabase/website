@@ -1,7 +1,6 @@
 ---
 title: Spending limit
-subtitle: Set a monthly cap on your organization's Neon charges and get email
-  alerts when spending approaches it
+subtitle: Manage your organization's spending with better visibility and control
 enableTableOfContents: true
 tag: new
 ---
@@ -23,12 +22,12 @@ tag: new
 
 ## About spending limits
 
-A spending limit is a monthly cap on your organization's Neon charges. When spending approaches the limit, organization admins receive email alerts so they can take action before the bill grows further.
+A spending limit helps you control your organization's Neon spending. When charges approach the limit, organization admins receive email alerts so they can take action before the bill grows further.
 
 Spending limits are available on the Launch and Scale plans. You manage them from the **Billing** page in the Neon Console.
 
 <Admonition type="comingSoon" title="Automatic project suspension">
-Currently, email alerts are the only available action. Automatic project suspension is coming soon: when the limit is reached, project compute will pause until you raise the limit or the billing cycle resets.
+Currently, email alerts are the only available action. Automatic project suspension is coming soon: When the limit is reached, projects' computes will pause until you raise the limit or the next monthly billing period begins.
 </Admonition>
 
 ## Who can set a spending limit
