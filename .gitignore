@@ -94,5 +94,5 @@ package-lock.json
 # Evals directory (test validation for documentation)
 .evals/
 
-# Blog content gets automatically imported from another repo
+# Blog content gets imported automatically
 content/blog

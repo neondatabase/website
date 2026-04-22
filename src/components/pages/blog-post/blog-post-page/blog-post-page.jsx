@@ -35,6 +35,11 @@ const mdxComponents = {
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
   pre: renderBlogCodeBlockFromPre,
+  table: (props) => (
+    <div className="table-wrapper">
+      <table {...props} />
+    </div>
+  ),
   Admonition,
   BlogQuote,
   CodeTabs,
