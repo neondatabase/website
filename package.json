@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
-    "predev": "node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
+    "prebuild": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
+    "predev": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
