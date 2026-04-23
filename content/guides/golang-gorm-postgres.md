@@ -73,38 +73,38 @@ Create a new file named `main.go` with the following code:
 package main
 
 import (
-	"fmt"
-	"log"
+ "fmt"
+ "log"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+ "gorm.io/driver/postgres"
+ "gorm.io/gorm"
+ "gorm.io/gorm/logger"
 )
 
 func main() {
-	// Connection string for Neon Postgres
-	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+ // Connection string for Neon Postgres
+ dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
-	// Connect to the database
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info), // Set to Info level for development
-	})
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
+ // Connect to the database
+ db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+  Logger: logger.Default.LogMode(logger.Info), // Set to Info level for development
+ })
+ if err != nil {
+  log.Fatalf("Failed to connect to database: %v", err)
+ }
 
-	// Get the underlying SQL DB object
-	sqlDB, err := db.DB()
-	if err != nil {
-		log.Fatalf("Failed to get DB object: %v", err)
-	}
+ // Get the underlying SQL DB object
+ sqlDB, err := db.DB()
+ if err != nil {
+  log.Fatalf("Failed to get DB object: %v", err)
+ }
 
-	// Verify connection
-	if err := sqlDB.Ping(); err != nil {
-		log.Fatalf("Failed to ping DB: %v", err)
-	}
+ // Verify connection
+ if err := sqlDB.Ping(); err != nil {
+  log.Fatalf("Failed to ping DB: %v", err)
+ }
 
-	fmt.Println("Successfully connected to Neon Postgres database!")
+ fmt.Println("Successfully connected to Neon Postgres database!")
 }
 ```
 
@@ -150,32 +150,32 @@ Let's create a simple blogging application with `User` and `Post` models. These 
 package main
 
 import (
-	"time"
+ "time"
 
-	"gorm.io/gorm"
+ "gorm.io/gorm"
 )
 
 // User represents a user in the system
 type User struct {
-	ID        uint           `gorm:"primaryKey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-	Name      string         `gorm:"size:255;not null"`
-	Email     string         `gorm:"size:255;not null;uniqueIndex"`
-	Posts     []Post         `gorm:"foreignKey:UserID"`
+ ID        uint           `gorm:"primaryKey"`
+ CreatedAt time.Time
+ UpdatedAt time.Time
+ DeletedAt gorm.DeletedAt `gorm:"index"`
+ Name      string         `gorm:"size:255;not null"`
+ Email     string         `gorm:"size:255;not null;uniqueIndex"`
+ Posts     []Post         `gorm:"foreignKey:UserID"`
 }
 
 // Post represents a blog post
 type Post struct {
-	ID        uint           `gorm:"primaryKey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-	Title     string         `gorm:"size:255;not null"`
-	Content   string         `gorm:"type:text"`
-	UserID    uint           `gorm:"not null"`
-	User      User           `gorm:"foreignKey:UserID"`
+ ID        uint           `gorm:"primaryKey"`
+ CreatedAt time.Time
+ UpdatedAt time.Time
+ DeletedAt gorm.DeletedAt `gorm:"index"`
+ Title     string         `gorm:"size:255;not null"`
+ Content   string         `gorm:"type:text"`
+ UserID    uint           `gorm:"not null"`
+ User      User           `gorm:"foreignKey:UserID"`
 }
 ```
 
@@ -206,15 +206,15 @@ Here's how to set up automatic migrations:
 
 ```go
 func main() {
-	// Connection setup (as shown above)
+ // Connection setup (as shown above)
 
-	// Auto-migrate the schema
-	err = db.AutoMigrate(&User{}, &Post{})
-	if err != nil {
-		log.Fatalf("Failed to migrate database: %v", err)
-	}
+ // Auto-migrate the schema
+ err = db.AutoMigrate(&User{}, &Post{})
+ if err != nil {
+  log.Fatalf("Failed to migrate database: %v", err)
+ }
 
-	fmt.Println("Database migrated successfully!")
+ fmt.Println("Database migrated successfully!")
 }
 ```
 
@@ -244,24 +244,24 @@ Let's add a user and a blog post to our database:
 ```go
 // Create a new user
 user := User{
-	Name:  "John Doe",
-	Email: "john@example.com",
+ Name:  "John Doe",
+ Email: "john@example.com",
 }
 result := db.Create(&user)
 if result.Error != nil {
-	log.Fatalf("Failed to create user: %v", result.Error)
+ log.Fatalf("Failed to create user: %v", result.Error)
 }
 fmt.Printf("Created user with ID: %d\n", user.ID)
 
 // Create a post for the user
 post := Post{
-	Title:   "Getting Started with GORM and Neon",
-	Content: "GORM makes it easy to work with databases in Go...",
-	UserID:  user.ID,
+ Title:   "Getting Started with GORM and Neon",
+ Content: "GORM makes it easy to work with databases in Go...",
+ UserID:  user.ID,
 }
 result = db.Create(&post)
 if result.Error != nil {
-	log.Fatalf("Failed to create post: %v", result.Error)
+ log.Fatalf("Failed to create post: %v", result.Error)
 }
 fmt.Printf("Created post with ID: %d\n", post.ID)
 ```
@@ -288,7 +288,7 @@ Let's look at different ways to retrieve data from our database:
 var retrievedUser User
 result = db.First(&retrievedUser, user.ID)
 if result.Error != nil {
-	log.Fatalf("Failed to retrieve user: %v", result.Error)
+ log.Fatalf("Failed to retrieve user: %v", result.Error)
 }
 fmt.Printf("Retrieved user: %s (%s)\n", retrievedUser.Name, retrievedUser.Email)
 
@@ -296,7 +296,7 @@ fmt.Printf("Retrieved user: %s (%s)\n", retrievedUser.Name, retrievedUser.Email)
 var userWithPosts User
 result = db.Preload("Posts").First(&userWithPosts, user.ID)
 if result.Error != nil {
-	log.Fatalf("Failed to retrieve user with posts: %v", result.Error)
+ log.Fatalf("Failed to retrieve user with posts: %v", result.Error)
 }
 fmt.Printf("User %s has %d posts\n", userWithPosts.Name, len(userWithPosts.Posts))
 
@@ -304,7 +304,7 @@ fmt.Printf("User %s has %d posts\n", userWithPosts.Name, len(userWithPosts.Posts
 var users []User
 result = db.Where("name LIKE ?", "%John%").Find(&users)
 if result.Error != nil {
-	log.Fatalf("Failed to find users: %v", result.Error)
+ log.Fatalf("Failed to find users: %v", result.Error)
 }
 fmt.Printf("Found %d users with 'John' in their name\n", len(users))
 ```
@@ -336,16 +336,16 @@ Let's look at how to update our user and post records:
 // Update a user's email
 result = db.Model(&user).Update("email", "johndoe@example.com")
 if result.Error != nil {
-	log.Fatalf("Failed to update user: %v", result.Error)
+ log.Fatalf("Failed to update user: %v", result.Error)
 }
 
 // Update multiple fields at once
 result = db.Model(&post).Updates(Post{
-	Title:   "Updated: Getting Started with GORM and Neon",
-	Content: "Updated content about GORM and Neon...",
+ Title:   "Updated: Getting Started with GORM and Neon",
+ Content: "Updated content about GORM and Neon...",
 })
 if result.Error != nil {
-	log.Fatalf("Failed to update post: %v", result.Error)
+ log.Fatalf("Failed to update post: %v", result.Error)
 }
 ```
 
@@ -373,13 +373,13 @@ Let's see how to perform both types of deletions:
 // Soft delete a post (with GORM's DeletedAt field)
 result = db.Delete(&post)
 if result.Error != nil {
-	log.Fatalf("Failed to delete post: %v", result.Error)
+ log.Fatalf("Failed to delete post: %v", result.Error)
 }
 
 // Hard delete a post (permanently remove from database)
 result = db.Unscoped().Delete(&post)
 if result.Error != nil {
-	log.Fatalf("Failed to permanently delete post: %v", result.Error)
+ log.Fatalf("Failed to permanently delete post: %v", result.Error)
 }
 ```
 
@@ -415,23 +415,23 @@ tx := db.Begin()
 // Perform operations within the transaction
 user := User{Name: "Transaction User", Email: "tx@example.com"}
 if err := tx.Create(&user).Error; err != nil {
-	tx.Rollback() // Rollback if there's an error
-	log.Fatalf("Failed to create user in transaction: %v", err)
+ tx.Rollback() // Rollback if there's an error
+ log.Fatalf("Failed to create user in transaction: %v", err)
 }
 
 post := Post{
-	Title:   "Post in Transaction",
-	Content: "This post is created in a transaction",
-	UserID:  user.ID,
+ Title:   "Post in Transaction",
+ Content: "This post is created in a transaction",
+ UserID:  user.ID,
 }
 if err := tx.Create(&post).Error; err != nil {
-	tx.Rollback() // Rollback if there's an error
-	log.Fatalf("Failed to create post in transaction: %v", err)
+ tx.Rollback() // Rollback if there's an error
+ log.Fatalf("Failed to create post in transaction: %v", err)
 }
 
 // Commit the transaction
 if err := tx.Commit().Error; err != nil {
-	log.Fatalf("Failed to commit transaction: %v", err)
+ log.Fatalf("Failed to commit transaction: %v", err)
 }
 ```
 
@@ -453,25 +453,25 @@ For a more elegant and concise approach, GORM provides a transaction helper meth
 
 ```go
 err := db.Transaction(func(tx *gorm.DB) error {
-	user := User{Name: "Transaction User", Email: "tx@example.com"}
-	if err := tx.Create(&user).Error; err != nil {
-		return err
-	}
+ user := User{Name: "Transaction User", Email: "tx@example.com"}
+ if err := tx.Create(&user).Error; err != nil {
+  return err
+ }
 
-	post := Post{
-		Title:   "Post in Transaction",
-		Content: "This post is created in a transaction",
-		UserID:  user.ID,
-	}
-	if err := tx.Create(&post).Error; err != nil {
-		return err
-	}
+ post := Post{
+  Title:   "Post in Transaction",
+  Content: "This post is created in a transaction",
+  UserID:  user.ID,
+ }
+ if err := tx.Create(&post).Error; err != nil {
+  return err
+ }
 
-	return nil
+ return nil
 })
 
 if err != nil {
-	log.Fatalf("Transaction failed: %v", err)
+ log.Fatalf("Transaction failed: %v", err)
 }
 ```
 
@@ -500,16 +500,16 @@ db.Raw("SELECT * FROM users WHERE name = ?", "John").Scan(&users)
 
 // Complex queries
 var userStats []struct {
-	UserName  string
-	PostCount int
+ UserName  string
+ PostCount int
 }
 db.Table("users").
-	Select("users.name as user_name, COUNT(posts.id) as post_count").
-	Joins("left join posts on posts.user_id = users.id").
-	Where("users.deleted_at IS NULL").
-	Group("users.name").
-	Having("COUNT(posts.id) > ?", 1).
-	Find(&userStats)
+ Select("users.name as user_name, COUNT(posts.id) as post_count").
+ Joins("left join posts on posts.user_id = users.id").
+ Where("users.deleted_at IS NULL").
+ Group("users.name").
+ Having("COUNT(posts.id) > ?", 1).
+ Find(&userStats)
 ```
 
 Let's examine these different approaches:
@@ -540,21 +540,21 @@ GORM provides a comprehensive set of hooks for various operations, you can find 
 ```go
 // Define hooks in your model
 type User struct {
-	// ... fields as defined earlier
-	Password string `gorm:"size:255;not null"`
+ // ... fields as defined earlier
+ Password string `gorm:"size:255;not null"`
 }
 
 // BeforeCreate is called before a record is created
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
-	// For demonstration purposes - in real apps use proper password hashing!
-	u.Password = "hashed_" + u.Password
-	return
+ // For demonstration purposes - in real apps use proper password hashing!
+ u.Password = "hashed_" + u.Password
+ return
 }
 
 // AfterFind is called after a record is retrieved
 func (u *User) AfterFind(tx *gorm.DB) (err error) {
-	// Custom logic after a user is found
-	return
+ // Custom logic after a user is found
+ return
 }
 ```
 
@@ -672,33 +672,33 @@ Here's how to create a Go function to run migrations programmatically:
 package main
 
 import (
-	"log"
+ "log"
 
-	"github.com/golang-migrate/migrate/v4"
-	_ "github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/golang-migrate/migrate/v4/source/file"
+ "github.com/golang-migrate/migrate/v4"
+ _ "github.com/golang-migrate/migrate/v4/database/postgres"
+ _ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 func runMigrations() {
-	m, err := migrate.New(
-		"file://migrations",
-		"postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require",
-	)
-	if err != nil {
-		log.Fatalf("Failed to create migration instance: %v", err)
-	}
+ m, err := migrate.New(
+  "file://migrations",
+  "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require",
+ )
+ if err != nil {
+  log.Fatalf("Failed to create migration instance: %v", err)
+ }
 
-	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
-		log.Fatalf("Failed to run migrations: %v", err)
-	}
+ if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+  log.Fatalf("Failed to run migrations: %v", err)
+ }
 
-	log.Println("Migrations completed successfully")
+ log.Println("Migrations completed successfully")
 }
 
 func main() {
-	runMigrations()
+ runMigrations()
 
-	// Continue with your application...
+ // Continue with your application...
 }
 ```
 
@@ -730,9 +730,9 @@ Let's look at how to query efficiently with GORM:
 
 ```go
 var users []struct {
-	ID    uint
-	Name  string
-	Email string
+ ID    uint
+ Name  string
+ Email string
 }
 db.Model(&User{}).Select("id", "name", "email").Where("id > ?", 10).Find(&users)
 ```
@@ -754,10 +754,10 @@ GORM provides the `FindInBatches` method to simplify this pattern:
 ```go
 // Find in batches
 db.Model(&User{}).Where("active = ?", true).FindInBatches(&results, 100, func(tx *gorm.DB, batch int) error {
-	for _, result := range results {
-		// Process result...
-	}
-	return nil
+ for _, result := range results {
+  // Process result...
+ }
+ return nil
 })
 ```
 
@@ -778,10 +778,10 @@ Proper indexing is essential for query performance. With GORM, you can define in
 
 ```go
 type User struct {
-	ID      uint   `gorm:"primaryKey"`
-	Name    string `gorm:"index:idx_name_email,unique"`
-	Email   string `gorm:"index:idx_name_email,unique"`
-	Address string `gorm:"index"`
+ ID      uint   `gorm:"primaryKey"`
+ Name    string `gorm:"index:idx_name_email,unique"`
+ Email   string `gorm:"index:idx_name_email,unique"`
+ Address string `gorm:"index"`
 }
 ```
 
@@ -797,146 +797,146 @@ Let's put everything together in a complete application example:
 package main
 
 import (
-	"fmt"
-	"log"
-	"time"
+ "fmt"
+ "log"
+ "time"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+ "gorm.io/driver/postgres"
+ "gorm.io/gorm"
+ "gorm.io/gorm/logger"
 )
 
 // User model
 type User struct {
-	gorm.Model
-	Name     string `gorm:"size:255;not null"`
-	Email    string `gorm:"size:255;not null;uniqueIndex"`
-	Password string `gorm:"size:255;not null"`
-	Posts    []Post `gorm:"foreignKey:UserID"`
+ gorm.Model
+ Name     string `gorm:"size:255;not null"`
+ Email    string `gorm:"size:255;not null;uniqueIndex"`
+ Password string `gorm:"size:255;not null"`
+ Posts    []Post `gorm:"foreignKey:UserID"`
 }
 
 // BeforeCreate hook for User
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
-	// Simulate password hashing
-	u.Password = "hashed_" + u.Password
-	return
+ // Simulate password hashing
+ u.Password = "hashed_" + u.Password
+ return
 }
 
 // Post model
 type Post struct {
-	gorm.Model
-	Title   string `gorm:"size:255;not null"`
-	Content string `gorm:"type:text"`
-	UserID  uint   `gorm:"not null"`
-	User    User   `gorm:"foreignKey:UserID"`
+ gorm.Model
+ Title   string `gorm:"size:255;not null"`
+ Content string `gorm:"type:text"`
+ UserID  uint   `gorm:"not null"`
+ User    User   `gorm:"foreignKey:UserID"`
 }
 
 func main() {
-	// Connection string for Neon Postgres
-	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+ // Connection string for Neon Postgres
+ dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
-	// Connect to the database
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
+ // Connect to the database
+ db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+  Logger: logger.Default.LogMode(logger.Info),
+ })
+ if err != nil {
+  log.Fatalf("Failed to connect to database: %v", err)
+ }
 
-	// Get the underlying SQL DB object
-	sqlDB, err := db.DB()
-	if err != nil {
-		log.Fatalf("Failed to get DB object: %v", err)
-	}
+ // Get the underlying SQL DB object
+ sqlDB, err := db.DB()
+ if err != nil {
+  log.Fatalf("Failed to get DB object: %v", err)
+ }
 
-	// Configure connection pool
-	sqlDB.SetMaxIdleConns(5)
-	sqlDB.SetMaxOpenConns(10)
-	sqlDB.SetConnMaxLifetime(time.Hour)
-	sqlDB.SetConnMaxIdleTime(30 * time.Minute)
+ // Configure connection pool
+ sqlDB.SetMaxIdleConns(5)
+ sqlDB.SetMaxOpenConns(10)
+ sqlDB.SetConnMaxLifetime(time.Hour)
+ sqlDB.SetConnMaxIdleTime(30 * time.Minute)
 
-	// Auto-migrate the schema
-	err = db.AutoMigrate(&User{}, &Post{})
-	if err != nil {
-		log.Fatalf("Failed to migrate database: %v", err)
-	}
+ // Auto-migrate the schema
+ err = db.AutoMigrate(&User{}, &Post{})
+ if err != nil {
+  log.Fatalf("Failed to migrate database: %v", err)
+ }
 
-	// Create a new user
-	user := User{
-		Name:     "John Doe",
-		Email:    "john@example.com",
-		Password: "secret123",
-	}
+ // Create a new user
+ user := User{
+  Name:     "John Doe",
+  Email:    "john@example.com",
+  Password: "secret123",
+ }
 
-	result := db.Create(&user)
-	if result.Error != nil {
-		log.Fatalf("Failed to create user: %v", result.Error)
-	}
-	fmt.Printf("Created user with ID: %d\n", user.ID)
+ result := db.Create(&user)
+ if result.Error != nil {
+  log.Fatalf("Failed to create user: %v", result.Error)
+ }
+ fmt.Printf("Created user with ID: %d\n", user.ID)
 
-	// Create posts for the user
-	posts := []Post{
-		{Title: "First Post", Content: "Content of first post", UserID: user.ID},
-		{Title: "Second Post", Content: "Content of second post", UserID: user.ID},
-	}
+ // Create posts for the user
+ posts := []Post{
+  {Title: "First Post", Content: "Content of first post", UserID: user.ID},
+  {Title: "Second Post", Content: "Content of second post", UserID: user.ID},
+ }
 
-	result = db.Create(&posts)
-	if result.Error != nil {
-		log.Fatalf("Failed to create posts: %v", result.Error)
-	}
+ result = db.Create(&posts)
+ if result.Error != nil {
+  log.Fatalf("Failed to create posts: %v", result.Error)
+ }
 
-	// Retrieve user with posts
-	var userWithPosts User
-	result = db.Preload("Posts").First(&userWithPosts, user.ID)
-	if result.Error != nil {
-		log.Fatalf("Failed to retrieve user with posts: %v", result.Error)
-	}
+ // Retrieve user with posts
+ var userWithPosts User
+ result = db.Preload("Posts").First(&userWithPosts, user.ID)
+ if result.Error != nil {
+  log.Fatalf("Failed to retrieve user with posts: %v", result.Error)
+ }
 
-	fmt.Printf("Retrieved user: %s (%s)\n", userWithPosts.Name, userWithPosts.Email)
-	fmt.Printf("User has %d posts:\n", len(userWithPosts.Posts))
+ fmt.Printf("Retrieved user: %s (%s)\n", userWithPosts.Name, userWithPosts.Email)
+ fmt.Printf("User has %d posts:\n", len(userWithPosts.Posts))
 
-	for i, post := range userWithPosts.Posts {
-		fmt.Printf("  %d. %s: %s\n", i+1, post.Title, post.Content)
-	}
+ for i, post := range userWithPosts.Posts {
+  fmt.Printf("  %d. %s: %s\n", i+1, post.Title, post.Content)
+ }
 
-	// Use transactions for related operations
-	err = db.Transaction(func(tx *gorm.DB) error {
-		// Update user's email
-		if err := tx.Model(&user).Update("email", "john.doe@example.com").Error; err != nil {
-			return err
-		}
+ // Use transactions for related operations
+ err = db.Transaction(func(tx *gorm.DB) error {
+  // Update user's email
+  if err := tx.Model(&user).Update("email", "john.doe@example.com").Error; err != nil {
+   return err
+  }
 
-		// Update first post's title
-		if err := tx.Model(&posts[0]).Update("title", "Updated: First Post").Error; err != nil {
-			return err
-		}
+  // Update first post's title
+  if err := tx.Model(&posts[0]).Update("title", "Updated: First Post").Error; err != nil {
+   return err
+  }
 
-		return nil
-	})
+  return nil
+ })
 
-	if err != nil {
-		log.Fatalf("Transaction failed: %v", err)
-	}
+ if err != nil {
+  log.Fatalf("Transaction failed: %v", err)
+ }
 
-	fmt.Println("Transaction completed successfully")
+ fmt.Println("Transaction completed successfully")
 
-	// Query with raw SQL
-	var stats []struct {
-		UserName  string
-		PostCount int
-	}
+ // Query with raw SQL
+ var stats []struct {
+  UserName  string
+  PostCount int
+ }
 
-	db.Raw(`
-		SELECT u.name as user_name, COUNT(p.id) as post_count
-		FROM users u
-		LEFT JOIN posts p ON u.id = p.user_id
-		WHERE u.deleted_at IS NULL
-		GROUP BY u.name
-	`).Scan(&stats)
+ db.Raw(`
+  SELECT u.name as user_name, COUNT(p.id) as post_count
+  FROM users u
+  LEFT JOIN posts p ON u.id = p.user_id
+  WHERE u.deleted_at IS NULL
+  GROUP BY u.name
+ `).Scan(&stats)
 
-	for _, stat := range stats {
-		fmt.Printf("User %s has written %d posts\n", stat.UserName, stat.PostCount)
-	}
+ for _, stat := range stats {
+  fmt.Printf("User %s has written %d posts\n", stat.UserName, stat.PostCount)
+ }
 }
 ```
 

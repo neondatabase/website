@@ -28,21 +28,21 @@ The following `get_rental_duration()` function returns the total rental days of 
 
 ```plsql
 create or replace function get_rental_duration(
-	p_customer_id integer
+ p_customer_id integer
 )
 returns integer
 language plpgsql
 as $$
 declare
-	rental_duration integer;
+ rental_duration integer;
 begin
-	select
-		sum( extract(day from return_date - rental_date))
-	into rental_duration
+ select
+  sum( extract(day from return_date - rental_date))
+ into rental_duration
     from rental
-	where customer_id = p_customer_id;
+ where customer_id = p_customer_id;
 
-	return rental_duration;
+ return rental_duration;
 end; $$
 
 ```
@@ -70,25 +70,25 @@ To do that, you can add one more parameter `p_from_date` to the `get_retal_durat
 
 ```plsql
 create or replace function get_rental_duration(
-	p_customer_id integer,
-	p_from_date date
+ p_customer_id integer,
+ p_from_date date
 )
 returns integer
 language plpgsql
 as $$
 declare
-	rental_duration integer;
+ rental_duration integer;
 begin
-	-- get the rental duration based on customer_id
-	-- and rental date
-	select sum( extract( day from return_date + '12:00:00' - rental_date))
-	into rental_duration
-	from rental
-	where customer_id = p_customer_id and
-		  rental_date >= p_from_date;
+ -- get the rental duration based on customer_id
+ -- and rental date
+ select sum( extract( day from return_date + '12:00:00' - rental_date))
+ into rental_duration
+ from rental
+ where customer_id = p_customer_id and
+    rental_date >= p_from_date;
 
-	-- return the rental duration in days
-	return rental_duration;
+ -- return the rental duration in days
+ return rental_duration;
 end; $$
 
 ```
@@ -119,24 +119,24 @@ In the `get_rental_duration(integer,date)` function, if you want to set a defaul
 
 ```plsql
 create or replace function get_rental_duration(
-	p_customer_id integer,
-	p_from_date date default '2005-01-01'
+ p_customer_id integer,
+ p_from_date date default '2005-01-01'
 )
 returns integer
 language plpgsql
 as $$
 declare
-	rental_duration integer;
+ rental_duration integer;
 begin
-	select sum(
-		extract( day from return_date + '12:00:00' - rental_date)
-	)
-	into rental_duration
-	from rental
-	where customer_id= p_customer_id and
-		  rental_date >= p_from_date;
+ select sum(
+  extract( day from return_date + '12:00:00' - rental_date)
+ )
+ into rental_duration
+ from rental
+ where customer_id= p_customer_id and
+    rental_date >= p_from_date;
 
-	return rental_duration;
+ return rental_duration;
 
 end; $$
 ```

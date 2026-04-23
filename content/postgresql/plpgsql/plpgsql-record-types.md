@@ -52,15 +52,15 @@ The following example illustrates how to use the record variable with the `selec
 do
 $$
 declare
-	rec record;
+ rec record;
 begin
-	-- select the film
-	select film_id, title, length
-	into rec
-	from film
-	where film_id = 200;
+ -- select the film
+ select film_id, title, length
+ into rec
+ from film
+ where film_id = 200;
 
-	raise notice '% % %', rec.film_id, rec.title, rec.length;
+ raise notice '% % %', rec.film_id, rec.title, rec.length;
 
 end;
 $$
@@ -81,15 +81,15 @@ The following shows how to use a record variable in a `for loop` statement:
 do
 $$
 declare
-	rec record;
+ rec record;
 begin
-	for rec in select title, length
-			from film
-			where length > 50
-			order by length
-	loop
-		raise notice '% (%)', rec.title, rec.length;
-	end loop;
+ for rec in select title, length
+   from film
+   where length > 50
+   order by length
+ loop
+  raise notice '% (%)', rec.title, rec.length;
+ end loop;
 end;
 $$;
 ```

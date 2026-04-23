@@ -32,7 +32,7 @@ For CI/CD or non-interactive environments, use an API key:
 export NEON_API_KEY=your-api-key
 ```
 
-Get your API key from: https://console.neon.tech/app/settings/api-keys
+Get your API key from: <https://console.neon.tech/app/settings/api-keys>
 
 ## Common Commands
 
@@ -144,11 +144,11 @@ Example GitHub Actions workflow:
 
 | Topic          | URL                                                      |
 | -------------- | -------------------------------------------------------- |
-| CLI Reference  | https://neon.com/docs/reference/neon-cli.md              |
-| CLI Install    | https://neon.com/docs/reference/cli-install.md           |
-| CLI Auth       | https://neon.com/docs/reference/cli-auth.md              |
-| CLI Projects   | https://neon.com/docs/reference/cli-projects.md          |
-| CLI Branches   | https://neon.com/docs/reference/cli-branches.md          |
-| CLI Connection | https://neon.com/docs/reference/cli-connection-string.md |
+| CLI Reference  | <https://neon.com/docs/reference/neon-cli.md>              |
+| CLI Install    | <https://neon.com/docs/reference/cli-install.md>           |
+| CLI Auth       | <https://neon.com/docs/reference/cli-auth.md>              |
+| CLI Projects   | <https://neon.com/docs/reference/cli-projects.md>          |
+| CLI Branches   | <https://neon.com/docs/reference/cli-branches.md>          |
+| CLI Connection | <https://neon.com/docs/reference/cli-connection-string.md> |
 
 See the [full CLI docs](https://neon.com/docs/reference/neon-cli.md) for the complete command reference.

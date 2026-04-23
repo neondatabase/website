@@ -36,8 +36,8 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 The `earthdistance` extension offers two main ways to represent geographic points and calculate distances:
 
-1.  **Using the `earth` type:** This approach involves converting latitude and longitude coordinates into a special `earth` data type (which is a domain over `cube`, representing a point in 3D Cartesian coordinates based on a spherical earth model). Distances are calculated in meters.
-2.  **Using the native `point` type:** This approach uses the built-in `point` type in Postgres, where the first component is longitude and the second is latitude. It provides a specific operator for distance calculation, which returns results in statute miles.
+1. **Using the `earth` type:** This approach involves converting latitude and longitude coordinates into a special `earth` data type (which is a domain over `cube`, representing a point in 3D Cartesian coordinates based on a spherical earth model). Distances are calculated in meters.
+2. **Using the native `point` type:** This approach uses the built-in `point` type in Postgres, where the first component is longitude and the second is latitude. It provides a specific operator for distance calculation, which returns results in statute miles.
 
 ### The `earth` data type and associated functions
 
@@ -182,7 +182,7 @@ Output:
 
 For applications with many locations that require frequent radius searches or nearest-neighbor queries, indexing is crucial. GiST indexes are used with the `earth` type functions (`ll_to_earth`, `earth_box`).
 
-1.  **Create a GiST index on the `earth` representation of your coordinates:**
+1. **Create a GiST index on the `earth` representation of your coordinates:**
     This index will be on the result of the `ll_to_earth()` function applied to your latitude and longitude columns.
 
     ```sql
@@ -191,7 +191,7 @@ For applications with many locations that require frequent radius searches or ne
     USING GIST (ll_to_earth(latitude, longitude));
     ```
 
-2.  **Perform an indexed radius search:**
+2. **Perform an indexed radius search:**
 
     Let's find locations within 1000 km of San Francisco `(37.7749° N, -122.4194° W)`.
 

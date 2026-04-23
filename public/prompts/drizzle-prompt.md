@@ -5,6 +5,7 @@
 **Purpose:** To install the necessary packages, configure Drizzle Kit for migrations, define a database schema, and provide a working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle.
 
 **Scope:**
+
 - Assumes the user is working within a Node.js project directory.
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -20,19 +21,21 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`, e
 
 ### 1. Initialize Project
 
-1.  Check if a `package.json` file exists. If not, create one by running:
+1. Check if a `package.json` file exists. If not, create one by running:
+
     ```bash
     npm init -y
     ```
-2.  Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
+
+2. Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
 
 ### 2. Select a Driver Adapter
 
 First, ask the user to choose their preferred driver and Drizzle adapter. Explain the use cases to help them decide:
 
-1.  **Neon Serverless (HTTP):** Recommended for short-lived, stateless environments like Vercel Edge Functions or AWS Lambda. Each query is a separate `fetch` request, offering very low latency for individual operations.
-2.  **Neon WebSocket:** Ideal for long-running applications like a standard Node.js server. It maintains a persistent WebSocket connection, which is more efficient for applications with frequent queries.
-3.  **`node-postgres` (`pg`):** The classic, most widely-used driver for Node.js. A stable and mature choice that connects to Neon like any other Postgres database.
+1. **Neon Serverless (HTTP):** Recommended for short-lived, stateless environments like Vercel Edge Functions or AWS Lambda. Each query is a separate `fetch` request, offering very low latency for individual operations.
+2. **Neon WebSocket:** Ideal for long-running applications like a standard Node.js server. It maintains a persistent WebSocket connection, which is more efficient for applications with frequent queries.
+3. **`node-postgres` (`pg`):** The classic, most widely-used driver for Node.js. A stable and mature choice that connects to Neon like any other Postgres database.
 
 ---
 
@@ -40,17 +43,20 @@ First, ask the user to choose their preferred driver and Drizzle adapter. Explai
 
 Based on the user's choice, run the appropriate installation command:
 
-*   **If 'Neon Serverless (HTTP)' is chosen:**
+- **If 'Neon Serverless (HTTP)' is chosen:**
+
     ```bash
     npm install drizzle-orm @neondatabase/serverless dotenv
     npm install -D drizzle-kit typescript tsx
     ```
-*   **If 'Neon WebSocket' is chosen:**
+- **If 'Neon WebSocket' is chosen:**
+
     ```bash
     npm install drizzle-orm @neondatabase/serverless dotenv ws
     npm install -D drizzle-kit typescript tsx @types/ws
     ```
-*   **If '`node-postgres`' is chosen:**
+- **If '`node-postgres`' is chosen:**
+
     ```bash
     npm install drizzle-orm pg dotenv
     npm install -D drizzle-kit typescript tsx @types/pg
@@ -58,8 +64,9 @@ Based on the user's choice, run the appropriate installation command:
 
 ### 4. Configure Environment
 
-1.  Check for a `.env` file at the root of the project. If it does not exist, create it.
-2.  Advise the user to add their Neon database connection string to the `.env` file. Provide the following format and instruct the user to replace the placeholders.
+1. Check for a `.env` file at the root of the project. If it does not exist, create it.
+2. Advise the user to add their Neon database connection string to the `.env` file. Provide the following format and instruct the user to replace the placeholders.
+
     ```env
     # Get your connection string from the Neon Console:
     # Project -> Dashboard -> Connect
@@ -113,6 +120,7 @@ export type NewUser = typeof demoUsers.$inferInsert;
 Create a `src/db.ts` file with the content corresponding to the user's chosen driver.
 
 #### Option 1: Neon Serverless (HTTP) Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
@@ -127,6 +135,7 @@ export const db = drizzle(sql);
 ```
 
 #### Option 2: Neon WebSocket Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-serverless';
@@ -145,6 +154,7 @@ export const db = drizzle(pool);
 ```
 
 #### Option 3: `node-postgres` Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
@@ -243,26 +253,33 @@ Modify the `scripts` section of `package.json` to add commands for migrations.
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
-2.  Generate the initial migration file:
+1. Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
+2. Generate the initial migration file:
+
     ```bash
     npm run db:generate
     ```
-3.  Next, apply the migration to their Neon database:
+
+3. Next, apply the migration to their Neon database:
+
     ```bash
     npm run db:migrate
     ```
-4.  Finally, run the example CRUD script:
+
+4. Finally, run the example CRUD script:
+
     ```bash
     npx tsx src/index.ts
     ```
-5.  If successful, the output should show log messages for each C-R-U-D step.
+
+5. If successful, the output should show log messages for each C-R-U-D step.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The user's choice of driver adapter is respected throughout the setup.
 - The project's detected package manager is used for all commands.
 - The `drizzle.config.ts` file is correctly configured.

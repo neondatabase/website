@@ -49,13 +49,13 @@ The following `insert_actor()` stored procedure [inserts a new row](../postgresq
 
 ```plsql
 create or replace procedure insert_actor(
-	fname varchar,
-	lname varchar)
+ fname varchar,
+ lname varchar)
 language plpgsql
 as $$
 begin
-	insert into actor(first_name, last_name)
-	values('John','Doe');
+ insert into actor(first_name, last_name)
+ values('John','Doe');
 end;
 $$;
 ```
@@ -64,24 +64,24 @@ The following `insert_actor` stored procedure also inserts a row into the `actor
 
 ```plsql
 create or replace procedure insert_actor(
-	full_name varchar
+ full_name varchar
 )
 language plpgsql
 as $$
 declare
-	fname varchar;
-	lname varchar;
+ fname varchar;
+ lname varchar;
 begin
-	-- split the fullname into first & last name
-	select
-		split_part(full_name,' ', 1),
-		split_part(full_name,' ', 2)
-	into fname,
-	     lname;
+ -- split the fullname into first & last name
+ select
+  split_part(full_name,' ', 1),
+  split_part(full_name,' ', 2)
+ into fname,
+      lname;
 
-	-- insert first & last name into the actor table
-	insert into actor(first_name, last_name)
-	values(fname, lname);
+ -- insert first & last name into the actor table
+ insert into actor(first_name, last_name)
+ values(fname, lname);
 end;
 $$;
 ```
@@ -90,13 +90,13 @@ The following stored procedure [deletes](../postgresql-tutorial/postgresql-delet
 
 ```plsql
 create or replace procedure delete_actor(
-	p_actor_id int
+ p_actor_id int
 )
 language plpgsql
 as $$
 begin
-	delete from actor
-	where actor_id = p_actor_id;
+ delete from actor
+ where actor_id = p_actor_id;
 end;
 $$;
 ```
@@ -105,17 +105,17 @@ The following stored procedure [updates](../postgresql-tutorial/postgresql-updat
 
 ```plsql
 create or replace procedure update_actor(
-	p_actor_id int,
-	fname varchar,
-	lname varchar
+ p_actor_id int,
+ fname varchar,
+ lname varchar
 )
 language plpgsql
 as $$
 begin
-	update actor
-	set first_name = fname,
-	    last_name = lname
-	where actor_id = p_actor_id;
+ update actor
+ set first_name = fname,
+     last_name = lname
+ where actor_id = p_actor_id;
 end;
 $$;
 ```
@@ -160,8 +160,8 @@ Third, remove two stored procedures using a single `drop procedure` statement:
 
 ```plsql
 drop procedure
-	delete_actor,
-	update_actor;
+ delete_actor,
+ update_actor;
 ```
 
 ## Summary

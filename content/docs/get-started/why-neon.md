@@ -85,7 +85,7 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - Neon delivers on reliability, performance, and compliance
 
 <Admonition type="tip" title="Keep reading">
-  Check out our [success stories](https://neon.com/case-studies), [use cases](https://neon.com/use-cases/serverless-apps), and the [Startup Program](https://neon.com/startups). 
+  Check out our [success stories](https://neon.com/case-studies), [use cases](https://neon.com/use-cases/serverless-apps), and the [Startup Program](https://neon.com/startups).
 </Admonition>
 
 ### Agents & codegen: From prompt to app

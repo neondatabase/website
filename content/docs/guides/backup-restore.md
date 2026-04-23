@@ -442,7 +442,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 <TabItem>
 
-1.  **Restore the snapshot to a new branch**
+1. **Restore the snapshot to a new branch**
 
     The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint:
 
@@ -476,7 +476,7 @@ Use this option if you need to inspect the restored data before you switch over 
           If you will finalize the restore later or plan multiple restores, include `target_branch_id` during the restore call to anchor the operation to the correct target branch.
        </Admonition>
 
-2.  **Inspect the new branch**
+2. **Inspect the new branch**
 
     After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint.
 
@@ -487,7 +487,7 @@ Use this option if you need to inspect the restored data before you switch over 
       --header 'authorization: Bearer $NEON_API_KEY' |jq
     ```
 
-3.  **Finalize the restore**
+3. **Finalize the restore**
 
     If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
     - Moves your original branch's computes to the new branch and restarts the computes.

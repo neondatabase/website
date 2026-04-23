@@ -232,6 +232,7 @@ SELECT * FROM mytable;  -- ERROR: relation "mytable" does not exist
 1. **Use a direct connection** when you need persistent session settings
 2. **Specify schema explicitly** in your queries: `SELECT * FROM myschema.mytable`
 3. **Set at the role level** (persists across transactions):
+
    ```sql
    ALTER ROLE user1 SET search_path TO myschema, public;
    ```

@@ -12,7 +12,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:33.057Z'
 ---
 
-<CopyPrompt src="/prompts/symfony-prompt.md" 
+<CopyPrompt src="/prompts/symfony-prompt.md"
 description="Pre-built prompt for connecting Symfony applications to Neon using Doctrine ORM."/>
 
 Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.

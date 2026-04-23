@@ -14,16 +14,18 @@ Following this guide, you’ll build an asynchronous product management API and 
 Before starting, ensure you have the following tools and services ready:
 
 - pip : Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+
   ```bash
   pip --version
   ```
+
 - Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
 
 ## Setting up the Project
 
 Follow these steps to set up your project and virtual environment:
 
-1.  Create a `uv` project
+1. Create a `uv` project
 
     If you don't already have uv installed, you can install it with:
 
@@ -39,7 +41,7 @@ Follow these steps to set up your project and virtual environment:
 
     This will create a new project directory called `async_postgres`. Open this directory in your code editor of your choice.
 
-2.  Set Up the Virtual Environment
+2. Set Up the Virtual Environment
 
         You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
@@ -59,7 +61,7 @@ Follow these steps to set up your project and virtual environment:
 
         You should see `(async_postgres)` in your terminal now, this means that your virtual environment is activated.
 
-3.  Install Dependencies
+3. Install Dependencies
 
     Next, add all the necessary dependencies for your project:
 
@@ -74,7 +76,7 @@ Follow these steps to set up your project and virtual environment:
     - `Loguru` : A logging library
     - `Python-dotenv` : To load environment variables from a .env file
 
-4.  Create the project structure
+4. Create the project structure
 
     Now, create the following directory structure to organize your project files:
 

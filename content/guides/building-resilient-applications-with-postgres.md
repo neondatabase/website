@@ -87,9 +87,9 @@ A robust solution is to make your write operations **idempotent**. An idempotent
 
 The pattern works as follows:
 
-1.  **Generate a unique key**: Before the first attempt of a transaction, your application generates a unique identifier (e.g., a UUID). This key represents this specific operation and will be used for all retries of it.
+1. **Generate a unique key**: Before the first attempt of a transaction, your application generates a unique identifier (e.g., a UUID). This key represents this specific operation and will be used for all retries of it.
 
-2.  **Add a unique constraint**: In your database schema, add a column to your target table to store this idempotency key. This column must have a `UNIQUE` constraint.
+2. **Add a unique constraint**: In your database schema, add a column to your target table to store this idempotency key. This column must have a `UNIQUE` constraint.
 
     ```sql shouldWrap
     CREATE TABLE orders (
@@ -101,7 +101,7 @@ The pattern works as follows:
     );
     ```
 
-3.  **Include the key in your transaction**: When your application performs the `INSERT` operation, it includes the generated idempotency key.
+3. **Include the key in your transaction**: When your application performs the `INSERT` operation, it includes the generated idempotency key.
 
     ```sql shouldWrap
     -- In your application code
@@ -114,7 +114,7 @@ The pattern works as follows:
     VALUES ('f47ac10b-58cc-4372-a567-0e02b2c3d479', 123, 2);
     ```
 
-4.  **Handle the outcome and retries**:
+4. **Handle the outcome and retries**:
     - If the first attempt succeeds, the key is stored in the database.
     - If the connection drops and your application retries the transaction with the **same idempotency key**, the database's `UNIQUE` constraint will prevent a duplicate insert. The database will return a `unique_violation` error (SQLSTATE `23505`).
     - Your application's retry logic should catch this specific `unique_violation` error and interpret it as a **successful commit from a previous attempt**, not as a failure. It can then safely proceed, knowing the operation is complete.
@@ -882,11 +882,11 @@ PostgreSQL version: PostgreSQL 17.5 (aa1f746) on x86_64-pc-linux-gnu, compiled b
 
 ##### What's happening in the logs:
 
-1.  **`[pg] A background error occurred...`**: This is the first sign of trouble. The `client.on('error', ...)` listener catches the unexpected connection termination, preventing the application from crashing.
-2.  **`Query failed with error...`**: The `catch` block is triggered when the code attempts the `COMMIT` on the now-dead connection. The `pg` client immediately throws the error `Client has encountered a connection error and is not queryable`.
-3.  **`Failed to rollback transaction...`**: This is expected. The `ROLLBACK` also fails because the client is not queryable. The database server will automatically roll back the uncommitted transaction on its own.
-4.  **`Retrying... Attempt 1.`**: This is the payoff. The retry library catches the thrown error and, because `isTransientError` returned `true`, it initiates a new attempt.
-5.  **`Query successful!`**: The retry succeeds. The pool provides a new, healthy connection, the entire operation is re-executed, and this time it completes without interruption.
+1. **`[pg] A background error occurred...`**: This is the first sign of trouble. The `client.on('error', ...)` listener catches the unexpected connection termination, preventing the application from crashing.
+2. **`Query failed with error...`**: The `catch` block is triggered when the code attempts the `COMMIT` on the now-dead connection. The `pg` client immediately throws the error `Client has encountered a connection error and is not queryable`.
+3. **`Failed to rollback transaction...`**: This is expected. The `ROLLBACK` also fails because the client is not queryable. The database server will automatically roll back the uncommitted transaction on its own.
+4. **`Retrying... Attempt 1.`**: This is the payoff. The retry library catches the thrown error and, because `isTransientError` returned `true`, it initiates a new attempt.
+5. **`Query successful!`**: The retry succeeds. The pool provides a new, healthy connection, the entire operation is re-executed, and this time it completes without interruption.
 
 This successful test run proves that your application can withstand a sudden compute restart, handle the resulting errors, and recover gracefully to complete its task.
 

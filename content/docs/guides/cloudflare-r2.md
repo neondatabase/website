@@ -19,18 +19,18 @@ This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file
 
 ## Create a Neon project
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudflare account and R2 bucket
 
-1.  Sign up for or log in to your [Cloudflare account](https://dash.cloudflare.com/sign-up/r2).
-2.  Navigate to **R2** in the Cloudflare dashboard sidebar.
-3.  Click **Create bucket**, provide a unique bucket name (for example, `my-neon-app-files`), and click **Create bucket**.
+1. Sign up for or log in to your [Cloudflare account](https://dash.cloudflare.com/sign-up/r2).
+2. Navigate to **R2** in the Cloudflare dashboard sidebar.
+3. Click **Create bucket**, provide a unique bucket name (for example, `my-neon-app-files`), and click **Create bucket**.
     ![Create R2 Bucket](/docs/guides/cloudflare-r2-create-bucket.png)
-4.  Generate R2 API credentials (**Access Key ID** and **Secret Access Key**) by following [Create an R2 API Token](https://developers.cloudflare.com/r2/api/tokens/). Select **Object Read & Write** permissions. Copy these credentials securely.
-5.  Obtain your Cloudflare **Account ID** by following [Find your Account ID](https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-your-account-id).
-6.  For this example, enable public access to your bucket URL by following [Allow public access to your bucket](https://developers.cloudflare.com/r2/buckets/public-buckets/#enable-managed-public-access). Note your bucket's public URL (for example, `https://pub-xxxxxxxx.r2.dev`).
+4. Generate R2 API credentials (**Access Key ID** and **Secret Access Key**) by following [Create an R2 API Token](https://developers.cloudflare.com/r2/api/tokens/). Select **Object Read & Write** permissions. Copy these credentials securely.
+5. Obtain your Cloudflare **Account ID** by following [Find your Account ID](https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-your-account-id).
+6. For this example, enable public access to your bucket URL by following [Allow public access to your bucket](https://developers.cloudflare.com/r2/buckets/public-buckets/#enable-managed-public-access). Note your bucket's public URL (for example, `https://pub-xxxxxxxx.r2.dev`).
 
     <Admonition type="note" title="Public access">
     Public access makes all objects readable via URL; consider private buckets and signed URLs for sensitive data in production.
@@ -60,7 +60,7 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 We need a table in Neon to store metadata about the objects uploaded to R2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS r2_files (
@@ -72,7 +72,7 @@ We need a table in Neon to store metadata about the objects uploaded to R2.
     );
     ```
 
-2.  Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
+2. Run the SQL statement. You can add other relevant columns (file size, content type, etc.) depending on your application needs.
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `r2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -86,8 +86,8 @@ A common pattern with S3-compatible storage like R2 involves **presigned upload 
 
 This requires two backend endpoints:
 
-1.  `/presign-upload`: Generates the temporary presigned URL for the client to upload a file directly to R2.
-2.  `/save-metadata`: Records the metadata in Neon after the client confirms a successful upload to R2.
+1. `/presign-upload`: Generates the temporary presigned URL for the client to upload a file directly to R2.
+2. `/save-metadata`: Records the metadata in Neon after the client confirms a successful upload to R2.
 
 <Tabs labels={["JavaScript", "Python"]}>
 
@@ -201,9 +201,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the AWS S3 client (`s3`) configured for R2 using environment variables.
-2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
-3.  **Upload endpoints**:
+1. **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the AWS S3 client (`s3`) configured for R2 using environment variables.
+2. **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
+3. **Upload endpoints**:
     - **`/presign-upload`:** Generates a temporary secure URL (`presignedUrl`) that allows uploading a file with a specific `objectKey` and `contentType` directly to R2 using `@aws-sdk/client-s3`. It returns the URL, key, and public URL.
     - **`/save-metadata`:** Called by the client _after_ it successfully uploads the file to R2. It saves the `objectKey`, the final `file_url`, and the `userId` into the `r2_files` table in Neon using `@neondatabase/serverless`.
 
@@ -339,12 +339,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework, the R2 client (`s3_client` using `boto3`), and the PostgreSQL client (`psycopg2`) using environment variables.
-2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
-3.  **Upload endpoints**:
+1. **Setup:** Initializes the Flask web framework, the R2 client (`s3_client` using `boto3`), and the PostgreSQL client (`psycopg2`) using environment variables.
+2. **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
+3. **Upload endpoints**:
     - **`/presign-upload`:** Generates a temporary secure URL (`presignedUrl`) that allows uploading a file with a specific `objectKey` and `contentType` directly to R2 using `boto3`. It returns the URL, key, and public URL.
     - **`/save-metadata`:** Called by the client _after_ it successfully uploads the file to R2. It saves the `objectKey`, the final `file_url`, and the `userId` into the `r2_files` table in Neon using `psycopg2`.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4. In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 
@@ -354,7 +354,7 @@ if __name__ == "__main__":
 
 Testing the presigned URL flow involves multiple steps:
 
-1.  **Get presigned URL:** Send a `POST` request to your `/presign-upload` endpoint with a JSON body containing `fileName` and `contentType`.
+1. **Get presigned URL:** Send a `POST` request to your `/presign-upload` endpoint with a JSON body containing `fileName` and `contentType`.
 
     ```bash
     curl -X POST http://localhost:3000/presign-upload \
@@ -375,7 +375,7 @@ Testing the presigned URL flow involves multiple steps:
 
     Note the `presignedUrl`, `objectKey`, and `publicFileUrl` from the response. You will use these in the next steps.
 
-2.  **Upload file to R2:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request.
+2. **Upload file to R2:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request.
 
     ```bash
     curl -X PUT "<PRESIGNED_URL>" \
@@ -385,7 +385,7 @@ Testing the presigned URL flow involves multiple steps:
 
     A successful upload typically returns HTTP `200 OK` with no body.
 
-3.  **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `objectKey` and `publicFileUrl` obtained in step 1.
+3. **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `objectKey` and `publicFileUrl` obtained in step 1.
 
     ```bash
     curl -X POST http://localhost:3000/save-metadata \

@@ -84,24 +84,24 @@ For example, the following creates a function named `get_triggers()` that return
 ```sql
 create or replace function get_triggers()
 returns table (
-	table_name text,
-	trigger_name text
+ table_name text,
+ trigger_name text
 )
 language plpgsql
 as
 $$
 begin
-	return query select
-	  trg.event_object_table::text AS table_name,
-	  trg.trigger_name::text
-	from
-	  information_schema.triggers trg
-	group by
-	  table_name,
-	  trg.trigger_name
-	order by
-	  table_name,
-	  trg.trigger_name;
+ return query select
+   trg.event_object_table::text AS table_name,
+   trg.trigger_name::text
+ from
+   information_schema.triggers trg
+ group by
+   table_name,
+   trg.trigger_name
+ order by
+   table_name,
+   trg.trigger_name;
 end;
 $$;
 ```
@@ -117,29 +117,29 @@ The following creates a function `get_triggers()` that accepts a table name and 
 ```sql
 
 create or replace function get_triggers(
-	p_table_name text
+ p_table_name text
 )
 returns table (
-	table_name text,
-	trigger_name text
+ table_name text,
+ trigger_name text
 )
 language plpgsql
 as
 $$
 begin
-	return query select
-	  event_object_table::text AS table_name,
-	  trg.trigger_name::text
-	from
-	  information_schema.triggers trg
-	where
-	   event_object_table = p_table_name
-	group by
-	  table_name,
-	  trg.trigger_name
-	order by
-	  table_name,
-	  trg.trigger_name;
+ return query select
+   event_object_table::text AS table_name,
+   trg.trigger_name::text
+ from
+   information_schema.triggers trg
+ where
+    event_object_table = p_table_name
+ group by
+   table_name,
+   trg.trigger_name
+ order by
+   table_name,
+   trg.trigger_name;
 end;
 $$;
 ```

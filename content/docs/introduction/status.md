@@ -22,10 +22,10 @@ The Neon status page tracks the following components:
 - **Database Connectivity** – Ability to connect to active Neon database projects via Postgres protocol
 - **Project/Branch Operations** – Operations including project creation, autosuspend, compute starts, and branch operations
 - **Console API** – The Neon Console management API
-- **Console Frontend** – The management UI at https://console.neon.tech/
-- **Account Creation** – The signup process at https://console.neon.tech/signup, including team invites
-- **Console Login** – The login process at https://console.neon.tech/login
-- **Website** – The Neon website at https://neon.com/
+- **Console Frontend** – The management UI at <https://console.neon.tech/>
+- **Account Creation** – The signup process at <https://console.neon.tech/signup>, including team invites
+- **Console Login** – The login process at <https://console.neon.tech/login>
+- **Website** – The Neon website at <https://neon.com/>
 
 <Admonition type="note" title="Updates and maintenance notices">
 Neon performs occasional platform maintenance and applies regular updates to your project's computes, but these maintenance activities and updates are not posted to the Neon status page. To stay informed about maintenance operations and updates, watch for notices in the Neon Console and your project settings. See [Maintenance & updates overview](/docs/manage/maintenance-updates-overview) for details.

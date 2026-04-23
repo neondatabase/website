@@ -185,8 +185,8 @@ Table bloat occurs primarily when `UPDATE` or `DELETE` operations are performed.
 
 In our `customers` table example:
 
-1.  We inserted 10,000 rows.
-2.  We then deleted half of these rows (`DELETE FROM customers WHERE customer_id % 2 = 0;`). These 5,000 deleted rows become "dead tuples".
+1. We inserted 10,000 rows.
+2. We then deleted half of these rows (`DELETE FROM customers WHERE customer_id % 2 = 0;`). These 5,000 deleted rows become "dead tuples".
 
 The `pgstattuple('customers')` output _before_ running `VACUUM` was:
 

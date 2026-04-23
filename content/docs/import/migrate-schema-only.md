@@ -25,9 +25,9 @@ To dump only the schema from a database, you can run a `pg_dump` command similar
 
 ```sql
 pg_dump --schema-only \
-	--no-privileges \
-	"postgresql://role:password@hostname:5432/dbname" \
-	> schema_dump.sql
+ --no-privileges \
+ "postgresql://role:password@hostname:5432/dbname" \
+ > schema_dump.sql
 ```
 
 - With the `--schema-only` option, only object definitions are dumped. Data is excluded.
@@ -72,8 +72,8 @@ After making any necessary modifications, load the dumped schema using `psql`:
 
 ```sql
 psql \
-	"postgresql://role:password@hostname:5432/dbname" \
-	< schema_dump.sql
+ "postgresql://role:password@hostname:5432/dbname" \
+ < schema_dump.sql
 ```
 
 After you've loaded the schema, you can view the result with this `psql` command:

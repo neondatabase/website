@@ -5,6 +5,7 @@
 **Purpose:** To connect the current Next.js project to Neon Postgres by installing a database driver, configuring environment variables, creating a centralized database module, and implementing examples for Server Components, Server Actions, and API Routes.
 
 **Scope:**
+
 - Must be run inside an existing Next.js App Router project directory.
 - Assumes the user has a Neon project and access to their full connection string.
 - All modifications will follow Next.js conventions for server-side logic, environment variables, and data handling.
@@ -30,15 +31,15 @@ When this prompt is triggered, automatically configure the open Next.js project 
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1. **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for applications deployed on Vercel.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
-    *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    - **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for applications deployed on Vercel.
+    - **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    - **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
-2.  Based on the user's selection, run the corresponding installation command:
+2. Based on the user's selection, run the corresponding installation command:
 
     ```bash
     # For @neondatabase/serverless
@@ -55,14 +56,14 @@ When this prompt is triggered, automatically configure the open Next.js project 
 
 ### 2. Configure Environment Variables
 
-1.  Check for the presence of a `.env.local` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env.local` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+1. Check for the presence of a `.env.local` file at the root of the project. If it doesn't exist, create one.
+2. Add the following `DATABASE_URL` parameter to the `.env.local` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env.local"
     DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+3. Direct the user to find this value in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -70,9 +71,9 @@ When this prompt is triggered, automatically configure the open Next.js project 
 
 To manage the database connection efficiently and prevent exposing credentials, create a single, server-only module.
 
-1.  Create a new directory `app/lib`.
-2.  Inside it, create a file named `db.ts`.
-3.  **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export a reusable database client.
+1. Create a new directory `app/lib`.
+2. Inside it, create a file named `db.ts`.
+3. **Use the code block that corresponds to the driver selected in Step 1** to populate this file. This module will initialize and export a reusable database client.
 
     #### Option A: Using `@neondatabase/serverless`
 
@@ -290,21 +291,24 @@ export async function GET() {
 
 Once the file modifications are complete:
 
-1.  Verify the user has correctly set their `DATABASE_URL` in the `.env.local` file. Do not proceed if placeholder values are still present.
-2.  Start the Next.js development server:
+1. Verify the user has correctly set their `DATABASE_URL` in the `.env.local` file. Do not proceed if placeholder values are still present.
+2. Start the Next.js development server:
+
     ```bash
     npm run dev
     ```
-3.  Inform the user that the setup is complete. To test the different connection patterns, they can visit:
-    *   `http://localhost:3000` to see the **Server Component**.
-    *   `http://localhost:3000/action` to test the **Server Action** form.
-    *   `http://localhost:3000/api/version` to test the **Serverless API Route**.
+
+3. Inform the user that the setup is complete. To test the different connection patterns, they can visit:
+    - `http://localhost:3000` to see the **Server Component**.
+    - `http://localhost:3000/action` to test the **Server Action** form.
+    - `http://localhost:3000/api/version` to test the **Serverless API Route**.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The project has `next` and a supported PostgreSQL driver installed.
 - A `.env.local` file is present or has been created with a `DATABASE_URL` key.
 - A server-only module exists at `app/lib/db.ts` and exports the database client.

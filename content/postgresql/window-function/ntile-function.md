@@ -60,13 +60,13 @@ We’ll use the `sales_stats` table created in the [`CUME_DIST()`](postgresql-cu
 
 ```sql
 SELECT
-	year,
-	name,
-	amount
+ year,
+ name,
+ amount
 FROM
-	actual_sales
+ actual_sales
 ORDER BY
-	year, name;
+ year, name;
 ```
 
 ![sales_stats table](/postgresqltutorial/sales_stats-table.png)
@@ -77,15 +77,15 @@ This example uses the `NTILE()` function to distribute rows into 3 buckets:
 
 ```sql
 SELECT
-	name,
-	amount,
-	NTILE(3) OVER(
-		ORDER BY amount
-	)
+ name,
+ amount,
+ NTILE(3) OVER(
+  ORDER BY amount
+ )
 FROM
-	sales_stats
+ sales_stats
 WHERE
-	year = 2019;
+ year = 2019;
 
 ```
 
@@ -99,14 +99,14 @@ This example uses the `NTILE()` function to divide rows in the `sales_stats` tab
 
 ```sql
 SELECT
-	name,
-	amount,
-	NTILE(3) OVER(
-		PARTITION BY year
-		ORDER BY amount
-	)
+ name,
+ amount,
+ NTILE(3) OVER(
+  PARTITION BY year
+  ORDER BY amount
+ )
 FROM
-	sales_stats;
+ sales_stats;
 
 ```
 

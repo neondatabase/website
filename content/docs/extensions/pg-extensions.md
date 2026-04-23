@@ -160,7 +160,7 @@ SET neon.allow_unstable_extensions = 'true';
 ```
 
 <Admonition type="note">
-"Unstable" doesn’t mean the extension is buggy. It means that we have not yet met service level expectations for the extension, often related to testing and Neon integration requirements. 
+"Unstable" doesn’t mean the extension is buggy. It means that we have not yet met service level expectations for the extension, often related to testing and Neon integration requirements.
 </Admonition>
 
 **Things to know about experimental extensions:**

@@ -169,15 +169,15 @@ The following example uses the `DATE_TRUNC()` function to count the number of re
 
 ```sql
 SELECT
-	staff_id,
-	date_trunc('year', rental_date) y,
-	COUNT (rental_id) rental
+ staff_id,
+ date_trunc('year', rental_date) y,
+ COUNT (rental_id) rental
 FROM
-	rental
+ rental
 GROUP BY
-	staff_id, y
+ staff_id, y
 ORDER BY
-	staff_id;
+ staff_id;
 ```
 
 Output:

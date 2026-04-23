@@ -37,9 +37,9 @@ Production (main)                Preview Branch (preview-pr-123)
 
 After branching, the environments operate independently:
 
-1.  **Data Isolation:** Changes in one branch don't affect others. Creating a user in a preview branch does not create them in production.
-2.  **Config Isolation:** You can modify auth settings (for example, email templates, token settings) in the branch without affecting the parent.
-3.  **Endpoint Isolation:** Each branch gets a unique Auth API URL. Tokens issued in one branch are not valid in another.
+1. **Data Isolation:** Changes in one branch don't affect others. Creating a user in a preview branch does not create them in production.
+2. **Config Isolation:** You can modify auth settings (for example, email templates, token settings) in the branch without affecting the parent.
+3. **Endpoint Isolation:** Each branch gets a unique Auth API URL. Tokens issued in one branch are not valid in another.
 
 ```
 Production Branch              Preview Branch
@@ -58,9 +58,9 @@ Neon Auth works with your branch's **default** database (typically `neondb`) and
 
 Sessions do not transfer between branches. If you sign in to your production app and then visit your staging environment:
 
-1.  The session _record_ exists in the staging database (if it was created before the branch happened).
-2.  However, your browser's _cookie_ is scoped to the production domain.
-3.  Therefore, you will need to sign in again on the staging environment.
+1. The session _record_ exists in the staging database (if it was created before the branch happened).
+2. However, your browser's _cookie_ is scoped to the production domain.
+3. Therefore, you will need to sign in again on the staging environment.
 
 This isolation is intentional and prevents security issues like sessions accidentally working across environments or test actions affecting production users.
 
@@ -109,10 +109,10 @@ When building full-stack applications, you often deploy "Preview Deployments" (u
 
 You can automate this using GitHub Actions. When a PR is opened:
 
-1.  Create a Neon branch.
-2.  Deploy your frontend/backend to a preview URL.
-3.  Inject the **Branch Auth URL** into the preview deployment's environment variables.
-4.  Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+1. Create a Neon branch.
+2. Deploy your frontend/backend to a preview URL.
+3. Inject the **Branch Auth URL** into the preview deployment's environment variables.
+4. Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
 
 Because the branch contains a snapshot of production data, the preview environment is fully functional immediately. You can log in with real test accounts that exist in production, but any actions taken (changing passwords, updating profiles) happen in isolation.
 
@@ -128,11 +128,11 @@ For applications with complex Role-Based Access Control (RBAC) or multi-tenant a
 
 **The workflow:**
 
-1.  Create a branch `refactor-rbac`.
-2.  This branch contains your real production users and their existing role assignments.
-3.  Modify your RLS policies in the branch.
-4.  You can log in as a "Manager" user and verify they can only view the appropriate data.
-5.  If the policy is incorrect and you accidentally expose data or lock a user out, **it only affects the branch**. Production users are never impacted.
+1. Create a branch `refactor-rbac`.
+2. This branch contains your real production users and their existing role assignments.
+3. Modify your RLS policies in the branch.
+4. You can log in as a "Manager" user and verify they can only view the appropriate data.
+5. If the policy is incorrect and you accidentally expose data or lock a user out, **it only affects the branch**. Production users are never impacted.
 
 ### 5. Major refactors and "v2" betas
 
@@ -142,9 +142,9 @@ With Neon Auth, you can spin up a complete parallel environment for your new ver
 
 **The workflow:**
 
-1.  **Branch production:** Create a branch named `v2-beta` from your main production database. This clones your entire application state, including the `neon_auth` schema containing all user identities and hashed passwords.
-2.  **Deploy v2:** Deploy your new application code (for example, to `beta.myapp.com`) and point it to the `v2-beta` branch's Auth URL.
-3.  **Seamless login:** Existing users can visit your new v2 site and **log in immediately using their existing credentials**. They do not need to sign up again or reset their passwords.
+1. **Branch production:** Create a branch named `v2-beta` from your main production database. This clones your entire application state, including the `neon_auth` schema containing all user identities and hashed passwords.
+2. **Deploy v2:** Deploy your new application code (for example, to `beta.myapp.com`) and point it to the `v2-beta` branch's Auth URL.
+3. **Seamless login:** Existing users can visit your new v2 site and **log in immediately using their existing credentials**. They do not need to sign up again or reset their passwords.
 
 This allows you to test radical architectural changes such as renaming database columns, changing table structures, or modifying authentication flows in a live environment. Your v1 application remains completely unaffected, while your v2 beta feels like a production-ready extension of your platform.
 
@@ -160,10 +160,10 @@ With Neon, an agent can programmatically provision its own "sandbox." Because Ne
 
 **The workflow:**
 
-1.  **Provision:** The Agent uses the Neon API to create a new database branch. It instantly receives a dedicated Auth URL for that specific environment.
-2.  **Interact:** The Agent uses tools like Playwright or Puppeteer to interact with the application, registering new users and performing real login flows against the branch's auth service.
-3.  **Validate:** The Agent runs a test suite to verify that the code it generated works correctly with the database schema, RLS policies, and authentication rules.
-4.  **Teardown:** Once the task is complete, the Agent deletes the branch, cleaning up all data and auth state.
+1. **Provision:** The Agent uses the Neon API to create a new database branch. It instantly receives a dedicated Auth URL for that specific environment.
+2. **Interact:** The Agent uses tools like Playwright or Puppeteer to interact with the application, registering new users and performing real login flows against the branch's auth service.
+3. **Validate:** The Agent runs a test suite to verify that the code it generated works correctly with the database schema, RLS policies, and authentication rules.
+4. **Teardown:** Once the task is complete, the Agent deletes the branch, cleaning up all data and auth state.
 
 Agents can spin up full-stack environments (Database + Auth + Compute) in seconds and run autonomous test loops against real user-facing security flows, with no manual setup.
 

@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.167Z'
 ---
 
-<CopyPrompt src="/prompts/kysely-prompt.md" 
+<CopyPrompt src="/prompts/kysely-prompt.md"
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Kysely."/>
 
 <InfoBlock>
@@ -83,9 +83,9 @@ Configure your `package.json` to use ES modules by updating or adding the follow
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 ## Get your connection string
 
@@ -269,11 +269,13 @@ export const db = new Kysely<Database>({
 
 Kysely manages migrations using TypeScript files. Create a migration to create the `users` table using Kysely's schema builder.
 
-1.  Create a folder named `migrations` in your project's root directory:
+1. Create a folder named `migrations` in your project's root directory:
+
     ```bash
     mkdir migrations
     ```
-2.  Create a file `migrations/001_create_users.ts`:
+
+2. Create a file `migrations/001_create_users.ts`:
 
     ```typescript
     import { Kysely, sql } from 'kysely';
@@ -293,7 +295,7 @@ Kysely manages migrations using TypeScript files. Create a migration to create t
     }
     ```
 
-3.  Create a script to run the migration `src/migrate.ts`.
+3. Create a script to run the migration `src/migrate.ts`.
 
     ```typescript
     import * as path from 'path';
@@ -337,7 +339,8 @@ Kysely manages migrations using TypeScript files. Create a migration to create t
     migrateToLatest();
     ```
 
-4.  Run the migration:
+4. Run the migration:
+
     ```bash
     npx tsx src/migrate.ts
     ```

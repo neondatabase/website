@@ -120,18 +120,18 @@ After creating the database, make sure to copy the connection details (such as *
 
 ## Step 2: Create an Azure Function to Manage Products
 
-1.  **Sign in to Azure**
+1. **Sign in to Azure**
 
     If you don't already have an account, sign up on the Microsoft [Azure](https://portal.azure.com/) portal.
 
     We will initialize an Azure Functions project where we will create an **HTTP Trigger function** in Visual Studio Code (VS Code) using the **Azure Functions extension**.
 
-2.  **Install the Azure Functions extension**:
+2. **Install the Azure Functions extension**:
     - Open VS Code, or install [Visual Studio Code](https://code.visualstudio.com/) if it's not yet installed.
     - Go to the extensions tab or press `Ctrl+Shift+X`.
     - Search for "Azure Functions" and install the official extension.
 
-3.  **Create an Azure Functions Project**
+3. **Create an Azure Functions Project**
 
     Open the command palette or press `Ctrl+Shift+P` to open the command palette.
     - Type `Azure Functions: Create New Project...` and select that option.
@@ -143,7 +143,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     Once confirmed, the project will be created with some default code.
 
-4.  **Install the Postgres client**
+4. **Install the Postgres client**
 
     In the terminal of your Azure Functions project, install either [Neon serverless driver](/docs/serverless/serverless-driver) or the `node-postgres` (`pg`) package, which will be used to connect to Postgres:
 
@@ -159,7 +159,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     </CodeTabs>
 
-5.  **Azure Functions Core Tools**
+5. **Azure Functions Core Tools**
 
     Install Azure Functions Core Tools to run functions locally.
 
@@ -186,7 +186,7 @@ After creating the database, make sure to copy the connection details (such as *
 
     </Admonition>
 
-6.  **Configure Environment Variables**
+6. **Configure Environment Variables**
 
     On the Neon dashboard, go to `Connection string`, select `Node.js`, and click `.env`. Then, click `show password` and copy the database connection string. If you don't click `show password`, you'll copy a connection string without the password (which is masked).
 
@@ -198,7 +198,7 @@ After creating the database, make sure to copy the connection details (such as *
     DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
     ```
 
-7.  **Modify the `local.settings.json` file**
+7. **Modify the `local.settings.json` file**
 
     The `local.settings.json` file is used by Azure Functions for **local executions**. Azure Functions does not directly read the `.env` file. Instead, it relies on `local.settings.json` to inject environment variable values during local execution. In production, you will define the same settings through `App Settings` in the Azure portal.
 
@@ -221,7 +221,7 @@ After creating the database, make sure to copy the connection details (such as *
     npm install dotenv
     ```
 
-8.  **Manage Each Table**
+8. **Manage Each Table**
 
     a. Create a separate file for each table in the `database/` folder.
 

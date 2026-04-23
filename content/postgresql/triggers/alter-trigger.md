@@ -59,11 +59,11 @@ CREATE OR REPLACE FUNCTION check_salary()
   AS
 $$
 BEGIN
-	IF (NEW.salary - OLD.salary) / OLD.salary >= 1 THEN
-		RAISE 'The salary increment cannot that high.';
-	END IF;
+ IF (NEW.salary - OLD.salary) / OLD.salary >= 1 THEN
+  RAISE 'The salary increment cannot that high.';
+ END IF;
 
-	RETURN NEW;
+ RETURN NEW;
 END;
 $$
 ```

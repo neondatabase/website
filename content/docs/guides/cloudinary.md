@@ -19,14 +19,14 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 ## Create a Neon project
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudinary account and get credentials
 
-1.  Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
-2.  Once logged in, navigate to your **Account settings**.
-3.  Find your **Product Environment Credentials** which include:
+1. Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
+2. Once logged in, navigate to your **Account settings**.
+3. Find your **Product Environment Credentials** which include:
     - **Cloud Name**
     - **API Key**
     - **API Secret**
@@ -38,7 +38,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 We need a table in Neon to store metadata about the assets uploaded to Cloudinary.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS cloudinary_files (
@@ -51,7 +51,7 @@ We need a table in Neon to store metadata about the assets uploaded to Cloudinar
     );
     ```
 
-2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (for example, `version`, `format`, `width`, `height`, `tags`).
+2. Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (for example, `version`, `format`, `width`, `height`, `tags`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
@@ -65,8 +65,8 @@ The recommended secure approach for client-side uploads to Cloudinary involves *
 
 This requires two backend endpoints:
 
-1.  `/generate-signature`: Generates a signature, timestamp, and provides the API key for the client upload.
-2.  `/save-metadata`: Receives asset metadata from the client after a successful Cloudinary upload and saves it to the Neon database.
+1. `/generate-signature`: Generates a signature, timestamp, and provides the API key for the client upload.
+2. `/save-metadata`: Receives asset metadata from the client after a successful Cloudinary upload and saves it to the Neon database.
 
 <Tabs labels={["JavaScript", "Python"]}>
 
@@ -174,9 +174,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes the Neon client (`sql`), Hono (`app`), and configures the Cloudinary Node.js SDK using environment variables.
-2.  **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic.**
-3.  **API endpoints:**
+1. **Setup:** Initializes the Neon client (`sql`), Hono (`app`), and configures the Cloudinary Node.js SDK using environment variables.
+2. **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic.**
+3. **API endpoints:**
     - **`/generate-signature` (GET):** Creates a current `timestamp`. Uses `cloudinary.utils.api_sign_request` with the parameters to sign (at minimum, the timestamp) and your `API Secret` to generate a `signature`. It returns the `signature`, `timestamp`, and your `API Key` to the client. These are needed for the client's direct upload request to Cloudinary.
     - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. The client sends the relevant asset metadata received from Cloudinary (`public_id`, `secure_url`, `resource_type`). The endpoint saves this information, along with the `userId`, into the `cloudinary_files` table in Neon.
 
@@ -326,12 +326,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes Flask (`app`), the database connection function, and configures the Cloudinary Python SDK using environment variables.
-2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
-3.  **API endpoints:**
+1. **Setup:** Initializes Flask (`app`), the database connection function, and configures the Cloudinary Python SDK using environment variables.
+2. **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
+3. **API endpoints:**
     - **`/generate-signature` (GET):** Gets the current `timestamp`. Uses `cloudinary.utils.api_sign_request` with the parameters to sign and your `API Secret` to generate the `signature`. Returns the `signature`, `timestamp`, and `API Key` to the client.
     - **`/save-metadata` (POST):** Called by the client _after_ a successful direct upload to Cloudinary. It receives asset metadata from the client, validates required fields (`public_id`, `secure_url`, `resource_type`), and saves this along with the `userId` into the `cloudinary_files` table using `psycopg2`.
-4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
+4. **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
 </TabItem>
 
@@ -341,7 +341,7 @@ if __name__ == "__main__":
 
 This workflow involves getting a signature from your backend, using it to upload directly to Cloudinary, and then notifying your backend.
 
-1.  **Get signature and parameters:** Send a `GET` request to your backend's `/generate-signature` endpoint.
+1. **Get signature and parameters:** Send a `GET` request to your backend's `/generate-signature` endpoint.
 
     ```bash
     curl -X GET http://localhost:3000/generate-signature
@@ -358,7 +358,7 @@ This workflow involves getting a signature from your backend, using it to upload
     }
     ```
 
-2.  **Upload file directly to Cloudinary:** Use the obtained `signature`, `timestamp`, `api_key`, and the file path to send a `POST` request with `multipart/form-data` directly to the Cloudinary Upload API. The URL includes your **Cloud Name**.
+2. **Upload file directly to Cloudinary:** Use the obtained `signature`, `timestamp`, `api_key`, and the file path to send a `POST` request with `multipart/form-data` directly to the Cloudinary Upload API. The URL includes your **Cloud Name**.
 
     ```bash
     curl -X POST https://api.cloudinary.com/v1_1/<YOUR_CLOUD_NAME>/image/upload \
@@ -399,7 +399,7 @@ This workflow involves getting a signature from your backend, using it to upload
 
     > Note the `public_id`, `secure_url`, and `resource_type` in the response. These are needed for the next step.
 
-3.  **Save metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint with the key details received from Cloudinary in Step 2.
+3. **Save metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint with the key details received from Cloudinary in Step 2.
 
     ```bash
     curl -X POST http://localhost:3000/save-metadata \

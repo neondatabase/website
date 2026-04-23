@@ -12,7 +12,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:33.054Z'
 ---
 
-<CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
+<CopyPrompt src="/prompts/sqlalchemy-prompt.md"
 description="Pre-built prompt for connecting SQLAlchemy to Neon Postgres"/>
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.

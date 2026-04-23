@@ -42,9 +42,9 @@ We use the [CREATE TABLE statement](postgresql-create-table) to create the `book
 
 ```sql
 CREATE TABLE books (
-	id serial primary key,
-	title VARCHAR (255),
-	attr hstore
+ id serial primary key,
+ title VARCHAR (255),
+ attr hstore
 );
 ```
 
@@ -99,9 +99,9 @@ Postgresql hstore provides the `->` operator to query the value of a specific 
 
 ```sql
 SELECT
-	attr -> 'ISBN-13' AS isbn
+ attr -> 'ISBN-13' AS isbn
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore query key](/postgresqltutorial/postgresql-hstore-query-key.jpg)
@@ -112,11 +112,11 @@ You can use the `->` operator in the [`WHERE`](postgresql-where) clause to filte
 
 ```sql
 SELECT
-	title, attr -> 'weight' AS weight
+ title, attr -> 'weight' AS weight
 FROM
-	books
+ books
 WHERE
-	attr -> 'ISBN-13' = '978-1449370000';
+ attr -> 'ISBN-13' = '978-1449370000';
 
 ```
 
@@ -135,10 +135,10 @@ Now, you can check to see if the `"freeshipping" => "yes"` pair has been added s
 
 ```sql
 SELECT
-	title,
+ title,
         attr -> 'freeshipping' AS freeshipping
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore add key-value](/postgresqltutorial/postgresql-hstore-add-key-value.jpg)
@@ -171,9 +171,9 @@ SELECT
   attr->'publisher' as publisher,
   attr
 FROM
-	books
+ books
 WHERE
-	attr ? 'publisher';
+ attr ? 'publisher';
 ```
 
 ![postgesql hstore check key](/postgresqltutorial/postgesql-hstore-check-key.jpg)
@@ -184,11 +184,11 @@ You can query based on the hstore key\-value pair using the @\> operator. The fo
 
 ```sql
 SELECT
-	title
+ title
 FROM
-	books
+ books
 WHERE
-	attr @> '"weight"=>"11.2 ounces"' :: hstore;
+ attr @> '"weight"=>"11.2 ounces"' :: hstore;
 ```
 
 ![postgresql hstore check key-pair](/postgresqltutorial/postgresql-hstore-check-key-pair.jpg)
@@ -199,11 +199,11 @@ You can query the rows whose hstore column contains multiple keys using `?&` op
 
 ```sql
 SELECT
-	title
+ title
 FROM
-	books
+ books
 WHERE
-	attr ?& ARRAY [ 'language', 'weight' ];
+ attr ?& ARRAY [ 'language', 'weight' ];
 ```
 
 ![postgresql hstore check multiple keys](/postgresqltutorial/postgresql-hstore-check-multiple-keys.jpg)
@@ -215,9 +215,9 @@ To get all keys from an hstore column, you use the `akeys()` function as follows
 
 ```sql
 SELECT
-	akeys (attr)
+ akeys (attr)
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore akeys function](/postgresqltutorial/postgresql-hstore-akeys-function.jpg)
@@ -225,9 +225,9 @@ Or you can use the `skey()` function if you want PostgreSQL to return the resul
 
 ```sql
 SELECT
-	skeys (attr)
+ skeys (attr)
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore skeys function](/postgresqltutorial/postgresql-hstore-skeys-function.jpg)
@@ -238,18 +238,18 @@ Like keys, you can get all values from an hstore column using the  `avals()` fu
 
 ```sql
 SELECT
-	avals (attr)
+ avals (attr)
 FROM
-	books;
+ books;
 ```
 
 [![postgresql hstore avals function](/postgresqltutorial/postgresql-hstore-avals-function.jpg)](/postgresqltutorial/postgresql-hstore-avals-function.jpg)Or you can use the  `svals()` function if you want to get the result as a set.
 
 ```sql
 SELECT
-	svals (attr)
+ svals (attr)
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore svals](/postgresqltutorial/postgresql-hstore-svals.jpg)
@@ -274,10 +274,10 @@ To convert hstore data to sets, you use the  `each()` function as follows:
 
 ```sql
 SELECT
-	title,
-	(EACH(attr) ).*
+ title,
+ (EACH(attr) ).*
 FROM
-	books;
+ books;
 ```
 
 ![postgresql hstore to sets](/postgresqltutorial/postgresql-hstore-to-sets.jpg)

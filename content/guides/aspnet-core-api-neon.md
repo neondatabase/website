@@ -372,6 +372,7 @@ Open Postman and create the following requests:
    - **Description**: Creates a new product.
    - Set to `POST`, enter `https://localhost:5001/api/products`, and go to **Body** → **raw** → **JSON**.
    - Add:
+
      ```json
      {
        "name": "New Product",
@@ -379,12 +380,14 @@ Open Postman and create the following requests:
        "description": "Sample product"
      }
      ```
+
    - Click **Send**. Expect a `201 Created` response.
 
 3. `PUT`: `/api/products/{id}`
    - **Description**: Updates a product.
    - Set to `PUT`, enter `https://localhost:5001/api/products/1`.
    - Add:
+
      ```json
      {
        "id": 1,
@@ -393,6 +396,7 @@ Open Postman and create the following requests:
        "description": "Updated description"
      }
      ```
+
    - Click **Send**. You should receive a `204 No Content`.
 
 4. `DELETE`: `/api/products/{id}`

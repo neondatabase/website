@@ -83,29 +83,29 @@ Second, create a function that finds the products by name based on a specified p
 
 ```java
 create or replace function find_products (
-	p_pattern varchar
+ p_pattern varchar
 )
 returns table (
-	p_id int,
-	p_name varchar,
-	p_price decimal
+ p_id int,
+ p_name varchar,
+ p_price decimal
 )
 language plpgsql
 as $$
 declare
     var_r record;
 begin
-	for var_r in(
-		select id, name, price
-		from products
-		where name ilike p_pattern
+ for var_r in(
+  select id, name, price
+  from products
+  where name ilike p_pattern
     )
-	loop
-		p_id := var_r.id;
-		p_name := var_r.name;
-		p_price := var_r.price;
+ loop
+  p_id := var_r.id;
+  p_name := var_r.name;
+  p_price := var_r.price;
         return next;
-	end loop;
+ end loop;
 end; $$
 ```
 

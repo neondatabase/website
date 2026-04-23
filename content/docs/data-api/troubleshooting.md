@@ -146,6 +146,7 @@ In the Neon Console, go to the **Data API** page. If a table has RLS disabled, y
    ```
 
 2. Create a policy to control access. For example, to let users see only their own rows:
+
    ```sql
    CREATE POLICY "Users see own data" ON your_table_name
      FOR ALL TO authenticated

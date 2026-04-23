@@ -297,9 +297,9 @@ This query will find items matching **'shoes'** and then present them in order f
 ```text
 description           | category | rating | score
 ----------------------+----------+--------+-------------
-  Generic shoes       |	Footwear |	 4   |	2.8772602
-  Sleek running shoes |	Footwear |	 5   |	2.4849067
-  White jogging shoes |	Footwear |   3   |	2.4849067
+  Generic shoes       | Footwear |  4   | 2.8772602
+  Sleek running shoes | Footwear |  5   | 2.4849067
+  White jogging shoes | Footwear |   3   | 2.4849067
 (3 rows)
 ```
 

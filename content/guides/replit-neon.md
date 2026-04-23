@@ -34,8 +34,8 @@ You can also follow along with the video below to see the step-by-step process:
 
 ### Create App with Replit Agent
 
-1.  Navigate to [replit.com](https://replit.com) and log into your Replit account, ensuring you are under a Core or Teams subscription.
-2.  Click on [Create App](https://replit.com/new) to begin. You'll be presented with the chat interface for Replit Agent.
+1. Navigate to [replit.com](https://replit.com) and log into your Replit account, ensuring you are under a Core or Teams subscription.
+2. Click on [Create App](https://replit.com/new) to begin. You'll be presented with the chat interface for Replit Agent.
 
     ![Replit Agent Create App](/docs/guides/replit-agent-create-new-app.png)
 
@@ -112,9 +112,9 @@ A quick review of the generated code will reveal that Replit Agent has defaulted
 
 After iteratively refining and testing your AI MCQ Generator application, you're ready to deploy it to a production environment. Replit simplifies the deployment process, enabling you to host your application online with just a few clicks.
 
-1.  Click the "Deploy" button situated in the top-right corner of the Replit IDE.
-2.  Review and adjust [deployment settings](https://youtu.be/sXP5d0k1atk) as needed. For simple applications, default settings are typically sufficient.
-3.  Confirm deployment initiation by clicking "Deploy" again.
+1. Click the "Deploy" button situated in the top-right corner of the Replit IDE.
+2. Review and adjust [deployment settings](https://youtu.be/sXP5d0k1atk) as needed. For simple applications, default settings are typically sufficient.
+3. Confirm deployment initiation by clicking "Deploy" again.
 
     ![Replit Agent Deploy App](/docs/guides/replit-agent-deploy-app.png)
 

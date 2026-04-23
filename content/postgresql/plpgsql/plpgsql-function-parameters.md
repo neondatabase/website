@@ -100,7 +100,7 @@ begin
 
   select min(length),
          max(length),
-		 avg(length)::numeric(5,1)
+   avg(length)::numeric(5,1)
   into min_len, max_len, avg_len
   from film;
 
@@ -149,8 +149,8 @@ The following `swap` function accepts two integers and swap their values:
 
 ```plsql
 create or replace function swap(
-	inout x int,
-	inout y int
+ inout x int,
+ inout y int
 )
 language plpgsql
 as $$

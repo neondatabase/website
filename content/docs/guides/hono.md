@@ -22,15 +22,15 @@ To create a Neon project and access it from a Hono application:
 
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 ## Create a Hono project and add dependencies
 
-1.  Create a Hono project if you do not have one. For instructions, see [Quick Start](https://hono.dev/docs/getting-started/basic), in the Hono documentation.
+1. Create a Hono project if you do not have one. For instructions, see [Quick Start](https://hono.dev/docs/getting-started/basic), in the Hono documentation.
 
-2.  Add project dependencies using one of the following commands:
+2. Add project dependencies using one of the following commands:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 

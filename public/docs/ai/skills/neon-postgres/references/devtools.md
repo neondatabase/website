@@ -83,7 +83,7 @@ Add to your AI assistant's MCP configuration:
 }
 ```
 
-Get your API key from: https://console.neon.tech/app/settings/api-keys
+Get your API key from: <https://console.neon.tech/app/settings/api-keys>
 
 ### Common MCP Operations
 
@@ -103,7 +103,7 @@ See the [full MCP server docs](https://neon.com/docs/ai/neon-mcp-server.md) for 
 
 | Topic              | URL                                             |
 | ------------------ | ----------------------------------------------- |
-| CLI Init Command   | https://neon.com/docs/reference/cli-init.md     |
-| VSCode Extension   | https://neon.com/docs/local/vscode-extension.md |
-| MCP Server         | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI Reference | https://neon.com/docs/reference/neon-cli.md     |
+| CLI Init Command   | <https://neon.com/docs/reference/cli-init.md>     |
+| VSCode Extension   | <https://neon.com/docs/local/vscode-extension.md> |
+| MCP Server         | <https://neon.com/docs/ai/neon-mcp-server.md>     |
+| Neon CLI Reference | <https://neon.com/docs/reference/neon-cli.md>     |

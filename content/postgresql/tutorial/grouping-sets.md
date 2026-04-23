@@ -296,22 +296,22 @@ See the following example:
 
 ```sql
 SELECT
-	GROUPING(brand) grouping_brand,
-	GROUPING(segment) grouping_segment,
-	brand,
-	segment,
-	SUM (quantity)
+ GROUPING(brand) grouping_brand,
+ GROUPING(segment) grouping_segment,
+ brand,
+ segment,
+ SUM (quantity)
 FROM
-	sales
+ sales
 GROUP BY
-	GROUPING SETS (
-		(brand),
-		(segment),
-		()
-	)
+ GROUPING SETS (
+  (brand),
+  (segment),
+  ()
+ )
 ORDER BY
-	brand,
-	segment;
+ brand,
+ segment;
 ```
 
 ![PostgreSQL GROUPING SETS - GROUPING function.](/postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-1.png)As shown in the screenshot, when the value in the `grouping_brand` is 0, the `sum` column shows the subtotal of the `brand`.
@@ -322,23 +322,23 @@ You can use the `GROUPING()` function in the `HAVING` clause to find the subtota
 
 ```sql
 SELECT
-	GROUPING(brand) grouping_brand,
-	GROUPING(segment) grouping_segment,
-	brand,
-	segment,
-	SUM (quantity)
+ GROUPING(brand) grouping_brand,
+ GROUPING(segment) grouping_segment,
+ brand,
+ segment,
+ SUM (quantity)
 FROM
-	sales
+ sales
 GROUP BY
-	GROUPING SETS (
-		(brand),
-		(segment),
-		()
-	)
+ GROUPING SETS (
+  (brand),
+  (segment),
+  ()
+ )
 HAVING GROUPING(brand) = 0
 ORDER BY
-	brand,
-	segment;
+ brand,
+ segment;
 ```
 
 ![PostgreSQL GROUPING SETS - GROUPING function in HAVING clause](/postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-in-HAVING-clause.png)

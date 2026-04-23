@@ -165,8 +165,8 @@ CREATE TABLE contacts(
    PRIMARY KEY(contact_id),
    CONSTRAINT fk_customer
       FOREIGN KEY(customer_id)
-	  REFERENCES customers(customer_id)
-	  ON DELETE SET NULL
+   REFERENCES customers(customer_id)
+   ON DELETE SET NULL
 );
 ```
 
@@ -236,8 +236,8 @@ CREATE TABLE contacts(
    PRIMARY KEY(contact_id),
    CONSTRAINT fk_customer
       FOREIGN KEY(customer_id)
-	  REFERENCES customers(customer_id)
-	  ON DELETE CASCADE
+   REFERENCES customers(customer_id)
+   ON DELETE CASCADE
 );
 
 INSERT INTO customers(customer_name)

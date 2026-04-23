@@ -32,9 +32,9 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 The `tablefunc` extension provides the following key functions:
 
-1.  **`normal_rand()`**: Generates a series of random numbers following a normal (Gaussian) distribution.
-2.  **`crosstab()`**: Transforms data from a "long" format to a "wide" format, creating pivot tables.
-3.  **`connectby()`**: Traverses hierarchical data, such as organizational charts or bill-of-materials structures.
+1. **`normal_rand()`**: Generates a series of random numbers following a normal (Gaussian) distribution.
+2. **`crosstab()`**: Transforms data from a "long" format to a "wide" format, creating pivot tables.
+3. **`connectby()`**: Traverses hierarchical data, such as organizational charts or bill-of-materials structures.
 
 Let's explore each function in detail.
 
@@ -127,7 +127,7 @@ FROM crosstab(
 
 **Breaking down the query:**
 
-1.  **`crosstab('source_sql_query_as_string')`**:
+1. **`crosstab('source_sql_query_as_string')`**:
 
     The `source_sql_query_as_string` must return three columns:
     - **Row identifier**: Values in this column become distinct rows in the output (for example, `product`).
@@ -136,7 +136,7 @@ FROM crosstab(
 
     Crucially, this source query **must** be sorted by the first column, then the second (`ORDER BY 1, 2`). This ensures `crosstab` processes data correctly (for example, `Q1` comes before `Q2`).
 
-2.  **`AS ct(column_definitions)`**:
+2. **`AS ct(column_definitions)`**:
     - Because `crosstab` returns a generic `SETOF record`, you must explicitly define the structure of the output table.
     - `ct`: An alias for the resulting table.
     - `product TEXT`: Corresponds to the first column of the `source_sql_query`. Its data type should match.
@@ -216,20 +216,20 @@ FROM crosstab(
 
 **How the `crosstab(source_sql, category_sql)` works:**
 
-1.  **`source_sql` (the first query string):**
+1. **`source_sql` (the first query string):**
     - This query fetches your raw data.
     - It must provide:
-      1.  The column(s) that will identify each row in your final table (here, `student_name`).
-      2.  The column whose values will become your new column headers (here, `subject`).
-      3.  The column whose values will fill the cells of your new table (here, `score`).
+      1. The column(s) that will identify each row in your final table (here, `student_name`).
+      2. The column whose values will become your new column headers (here, `subject`).
+      3. The column whose values will fill the cells of your new table (here, `score`).
     - It's very important to `ORDER BY` the row identifier column(s) (for example, `ORDER BY student_name` or `ORDER BY 1`).
 
-2.  **`category_sql` (the second query string):**
+2. **`category_sql` (the second query string):**
     - This query's job is to produce a single column containing the exact list of categories you want as your new column headers.
     - The order of categories returned by this query determines the order of your new columns in the final pivot table.
     - In our example, `$$SELECT s FROM unnest(ARRAY['Math', 'Science', 'English', 'History']) AS s$$` provides the list: 'Math', then 'Science', then 'English', then 'History'.
 
-3.  **`AS ct(student TEXT, math_score INT, ...)`:**
+3. **`AS ct(student TEXT, math_score INT, ...)`:**
     - This part defines the structure of your final output table.
     - The first column(s) here (`student TEXT`) must match the type and number of your row identifier columns from `source_sql`.
     - The following columns (`math_score INT`, `science_score INT`, etc.) must match, in order, the categories produced by `category_sql`. Their data type should match the `value` column from `source_sql` (the `score` column, which is `INT`).
@@ -247,9 +247,9 @@ For instance, if you use `crosstab3()`, the output table structure will implicit
 
 No explicit `AS (...)` clause is needed. Remember that the source SQL query provided to `crosstabN` must still:
 
-1.  Return three columns: `row_identifier`, `category`, `value`.
-2.  Be sorted using `ORDER BY 1, 2`.
-3.  The `value` column (third column of the source query) should be `TEXT` or cast to `TEXT`, as it populates the `category_X TEXT` output columns. The `row_identifier` (first column) also populates the `row_name TEXT` output column.
+1. Return three columns: `row_identifier`, `category`, `value`.
+2. Be sorted using `ORDER BY 1, 2`.
+3. The `value` column (third column of the source query) should be `TEXT` or cast to `TEXT`, as it populates the `category_X TEXT` output columns. The `row_identifier` (first column) also populates the `row_name TEXT` output column.
 
 **Example using `crosstab3()`:**
 
@@ -348,12 +348,12 @@ FROM connectby(
 **How `connectby()` works:**
 
 - **Parameters:**
-  1.  `table_name TEXT`: Name of the table containing the hierarchy.
-  2.  `key_field TEXT`: Name of the column storing the unique ID for each item.
-  3.  `parent_key_field TEXT`: Name of the column storing the ID of the parent item.
-  4.  `start_with_value TEXT`: The `key_field` value of the item from which to start the traversal (must be provided as text).
-  5.  `max_depth INTEGER`: Maximum number of levels to traverse (0 means no limit).
-  6.  `branch_delimiter TEXT`: A string used to construct the `branch_path` output column.
+  1. `table_name TEXT`: Name of the table containing the hierarchy.
+  2. `key_field TEXT`: Name of the column storing the unique ID for each item.
+  3. `parent_key_field TEXT`: Name of the column storing the ID of the parent item.
+  4. `start_with_value TEXT`: The `key_field` value of the item from which to start the traversal (must be provided as text).
+  5. `max_depth INTEGER`: Maximum number of levels to traverse (0 means no limit).
+  6. `branch_delimiter TEXT`: A string used to construct the `branch_path` output column.
 
 - **Output Definition `AS t(...)`**:
   You must define the structure of the output table:

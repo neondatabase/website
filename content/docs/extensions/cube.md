@@ -329,14 +329,14 @@ LIMIT 3;
 
 ## Practical applications
 
-1.  **Geographic Information systems (GIS)**:
+1. **Geographic Information systems (GIS)**:
     - Storing latitude/longitude/altitude points.
     - Defining bounding boxes for map features.
-2.  **Business Intelligence (BI) / OLAP**:
+2. **Business Intelligence (BI) / OLAP**:
     - Representing data points in a multidimensional space (for example, sales by `product_category_id`, `region_id`, `time_id`).
     - Filtering data based on ranges in multiple dimensions.
-3.  **Scientific computing**: Storing points or regions in n-dimensional parameter spaces for experiments or simulations.
-4.  **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (for example, temperature, humidity, pressure) at a specific time.
+3. **Scientific computing**: Storing points or regions in n-dimensional parameter spaces for experiments or simulations.
+4. **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (for example, temperature, humidity, pressure) at a specific time.
 
     **Example:**
 

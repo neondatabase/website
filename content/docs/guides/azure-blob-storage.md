@@ -18,25 +18,25 @@ This guide demonstrates how to integrate Azure Blob Storage with Neon by storing
 
 ## Create a Neon project
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Azure account, storage account, and container
 
-1.  Sign up for or log in to your [Azure Account](https://azure.microsoft.com/free/).
-2.  Navigate to [Storage accounts](https://portal.azure.com/#create/Microsoft.StorageAccount) in the Azure portal.
-3.  Click **+ Create**. Fill in the required details: select a Subscription, create or select a Resource group, provide a unique Storage account name (for example, `myneonappblobstorage`), choose a Region (for example, `East US`), and select performance/redundancy options (Standard/LRS is fine for this example). Click **Review + create**, then **Create**.
+1. Sign up for or log in to your [Azure Account](https://azure.microsoft.com/free/).
+2. Navigate to [Storage accounts](https://portal.azure.com/#create/Microsoft.StorageAccount) in the Azure portal.
+3. Click **+ Create**. Fill in the required details: select a Subscription, create or select a Resource group, provide a unique Storage account name (for example, `myneonappblobstorage`), choose a Region (for example, `East US`), and select performance/redundancy options (Standard/LRS is fine for this example). Click **Review + create**, then **Create**.
     ![Azure Storage Account Creation](/docs/guides/azure-blob-storage-creation.png)
-4.  Once the storage account is deployed, go to the resource.
-5.  In the storage account menu, under **Data storage**, click **Containers**.
-6.  Click **+ Container**. Provide a name for your container (for example, `uploads`), set the **Public access level** to **Private (no anonymous access)**. This is the recommended setting for security; we will use SAS tokens for controlled access. Click **Create**.
+4. Once the storage account is deployed, go to the resource.
+5. In the storage account menu, under **Data storage**, click **Containers**.
+6. Click **+ Container**. Provide a name for your container (for example, `uploads`), set the **Public access level** to **Private (no anonymous access)**. This is the recommended setting for security; we will use SAS tokens for controlled access. Click **Create**.
     ![Azure Storage Container Creation](/docs/guides/azure-blob-storage-container-creation.png)
 
     <Admonition type="note" title="Public access vs. SAS tokens">
      While you *can* set container access levels to allow public read access (`Blob` or `Container`), it's generally more secure to keep containers private and use **Shared Access Signatures (SAS)** tokens for both uploads and downloads. SAS tokens provide temporary, granular permissions. This guide focuses on using SAS tokens for uploads. For serving files, you can either generate read-only SAS tokens on demand or, if needed, set the container to public `Blob` access.
     </Admonition>
 
-7.  **Get connection string:**
+7. **Get connection string:**
     - In your storage account menu, under **Security + networking**, click **Access keys**.
     - Copy one of the **Connection strings**. This will be used by your backend application to authenticate with Azure Blob Storage. Store it securely.
       ![Azure Storage Account Access Keys](/docs/guides/azure-blob-storage-access-keys.png)
@@ -61,7 +61,7 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 We need a table in Neon to store metadata about the blobs uploaded to Azure Storage.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the blob name, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS azure_files (
@@ -73,7 +73,7 @@ We need a table in Neon to store metadata about the blobs uploaded to Azure Stor
     );
     ```
 
-2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size`).
+2. Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `azure_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -87,8 +87,8 @@ The recommended pattern for client-side uploads to Azure Blob Storage involves *
 
 This requires two backend endpoints:
 
-1.  `/generate-upload-sas`: Generates the temporary SAS URL for the client.
-2.  `/save-metadata`: Records the metadata in Neon after the client confirms successful upload.
+1. `/generate-upload-sas`: Generates the temporary SAS URL for the client.
+2. `/save-metadata`: Records the metadata in Neon after the client confirms successful upload.
 
 <Tabs labels={["JavaScript", "Python"]}>
 
@@ -202,9 +202,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes Neon client (`sql`), Hono (`app`), and Azure `BlobServiceClient` using the connection string.
-2.  **Authentication:** Placeholder `authMiddleware` needs replacing with actual user validation.
-3.  **Upload endpoints:**
+1. **Setup:** Initializes Neon client (`sql`), Hono (`app`), and Azure `BlobServiceClient` using the connection string.
+2. **Authentication:** Placeholder `authMiddleware` needs replacing with actual user validation.
+3. **Upload endpoints:**
     - **`/generate-upload-sas`:** Creates a unique `blobName`, gets a `BlockBlobClient`, and generates a SAS token using `generateBlobSASQueryParameters` with write permissions (`w`) and a short expiry. It returns the full `sasUrl` (base URL + SAS token), the `blobName`, and the base `fileUrl`.
     - **`/save-metadata`:** Called by the client _after_ successful upload. Saves the `blobName`, base `fileUrl`, and `userId` into the `azure_files` table in Neon.
 
@@ -360,12 +360,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes Flask, `BlobServiceClient`, and `psycopg2` using environment variables.
-2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic**.
-3.  **Upload endpoints:**
+1. **Setup:** Initializes Flask, `BlobServiceClient`, and `psycopg2` using environment variables.
+2. **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic**.
+3. **Upload endpoints:**
     - **`/generate-upload-sas`:** Creates a unique `blobName`, gets the base `fileUrl`, and generates a SAS token using `generate_blob_sas` with write permissions and a short expiry. Returns the full `sasUrl`, `blobName`, and base `fileUrl`.
     - **`/save-metadata`:** Called by the client _after_ successful upload. Saves the `blobName`, base `fileUrl`, and `userId` into the `azure_files` table using `psycopg2`.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4. In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 
@@ -375,7 +375,7 @@ if __name__ == "__main__":
 
 Testing the SAS URL flow involves multiple steps:
 
-1.  **Get SAS URL:** Send a `POST` request to your `/generate-upload-sas` endpoint with a JSON body containing `fileName` and `contentType`.
+1. **Get SAS URL:** Send a `POST` request to your `/generate-upload-sas` endpoint with a JSON body containing `fileName` and `contentType`.
     **Using cURL:**
 
     ```bash
@@ -397,7 +397,7 @@ Testing the SAS URL flow involves multiple steps:
 
     Note the `sasUrl`, `blobName`, and `fileUrl` from the response. You will use these in the next steps.
 
-2.  **Upload file to Azure:** Use the received `sasUrl` to upload the actual file using an HTTP `PUT` request. You also need to set the `Content-Type` header to match what was specified during SAS generation and `x-ms-blob-type: BlockBlob`.
+2. **Upload file to Azure:** Use the received `sasUrl` to upload the actual file using an HTTP `PUT` request. You also need to set the `Content-Type` header to match what was specified during SAS generation and `x-ms-blob-type: BlockBlob`.
     **Using cURL:**
 
     ```bash
@@ -409,7 +409,7 @@ Testing the SAS URL flow involves multiple steps:
 
     A successful upload returns HTTP `201 Created`.
 
-3.  **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `blobName` and base `fileUrl` from step 1.
+3. **Save metadata:** Send a `POST` request to your `/save-metadata` endpoint with the `blobName` and base `fileUrl` from step 1.
     **Using cURL:**
 
     ```bash

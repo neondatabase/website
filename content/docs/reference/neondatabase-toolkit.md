@@ -75,9 +75,9 @@ deno add jsr:@neon/toolkit
 
 The toolkit requires a Neon API key to interact with your account.
 
-1.  Log in to the [Neon Console](https://console.neon.tech/).
-2.  Navigate to [Account settings > API keys](https://console.neon.tech/app/settings/api-keys).
-3.  Click **Generate new API key**, give it a name, and copy the key.
+1. Log in to the [Neon Console](https://console.neon.tech/).
+2. Navigate to [Account settings > API keys](https://console.neon.tech/app/settings/api-keys).
+3. Click **Generate new API key**, give it a name, and copy the key.
 
 For security, it's best to use this key as an environment variable.
 

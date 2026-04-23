@@ -28,16 +28,16 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a RedwoodSDK project and add dependencies
 
-1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Quickstart](https://docs.rwsdk.com/getting-started/quick-start/).
+1. Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Quickstart](https://docs.rwsdk.com/getting-started/quick-start/).
 
-2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
+2. Navigate into your new project directory and install the RedwoodSDK dependencies:
 
     ```bash
     cd my-redwood-app
     npm install
     ```
 
-3.  Add project dependencies depending on the PostgreSQL driver you wish to use (`postgres.js` or `@neondatabase/serverless`):
+3. Add project dependencies depending on the PostgreSQL driver you wish to use (`postgres.js` or `@neondatabase/serverless`):
 
     <CodeTabs reverse={true} labels={["postgres.js", "Neon serverless driver"]}>
 

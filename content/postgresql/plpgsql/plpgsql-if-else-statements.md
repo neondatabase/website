@@ -59,7 +59,7 @@ begin
 
   if not found then
      raise notice'The film % could not be found',
-	    input_film_id;
+     input_film_id;
   end if;
 end $$;
 ```
@@ -117,7 +117,7 @@ begin
 
   if not found then
      raise notice 'The film % could not be found',
-	    input_film_id;
+     input_film_id;
   else
      raise notice 'The film title is %', selected_film.title;
   end if;
@@ -175,18 +175,18 @@ begin
      raise notice 'Film not found';
   else
       if v_film.length >0 and v_film.length <= 50 then
-		 len_description := 'Short';
-	  elsif v_film.length > 50 and v_film.length < 120 then
-		 len_description := 'Medium';
-	  elsif v_film.length > 120 then
-		 len_description := 'Long';
-	  else
-		 len_description := 'N/A';
-	  end if;
+   len_description := 'Short';
+   elsif v_film.length > 50 and v_film.length < 120 then
+   len_description := 'Medium';
+   elsif v_film.length > 120 then
+   len_description := 'Long';
+   else
+   len_description := 'N/A';
+   end if;
 
-	  raise notice 'The % film is %.',
-	     v_film.title,
-	     len_description;
+   raise notice 'The % film is %.',
+      v_film.title,
+      len_description;
   end if;
 end $$;
 ```

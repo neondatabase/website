@@ -17,10 +17,10 @@ This integration is powered by SST's support for over 150 Pulumi and Terraform p
 
 Before you start, ensure you have the following:
 
-1.  **Node.js**: This guide uses Node.js. If you don't have it installed, download it from [nodejs.org](https://nodejs.org/).
-2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-3.  **Neon API key**: Generate an API key from the Neon Console by navigating to your Account Settings > API Keys. This key is necessary for the provider to authenticate with the Neon API.
-4.  **AWS Account**: An AWS account is required to deploy the Hono API to AWS Lambda. If you don't have one, you can create it at [aws.amazon.com](https://aws.amazon.com/).
+1. **Node.js**: This guide uses Node.js. If you don't have it installed, download it from [nodejs.org](https://nodejs.org/).
+2. **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
+3. **Neon API key**: Generate an API key from the Neon Console by navigating to your Account Settings > API Keys. This key is necessary for the provider to authenticate with the Neon API.
+4. **AWS Account**: An AWS account is required to deploy the Hono API to AWS Lambda. If you don't have one, you can create it at [aws.amazon.com](https://aws.amazon.com/).
 
 ## Create a new SST app
 
@@ -60,7 +60,7 @@ $ npx sst@latest init
 
 ## Set up the Neon provider in SST
 
-1.  **Add the Neon provider**
+1. **Add the Neon provider**
 
     To add the Neon provider to your SST app, run the following command in your project's root directory:
 
@@ -70,7 +70,7 @@ $ npx sst@latest init
 
     This command updates your `sst.config.ts` to include the Neon provider, installs the necessary packages, and makes the `neon` namespace globally available in your configuration.
 
-2.  **Configure authentication and organization ID**
+2. **Configure authentication and organization ID**
 
     The Neon provider requires your API key for authentication. The recommended approach is to set it as an environment variable. You will also need your organization ID, which can be found in the Neon Console under Account Settings > Organization.
     ![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
@@ -275,9 +275,9 @@ export default $config({
 
 The above code does the following:
 
-1.  Creates a Neon project named `my-sst-project`.
-2.  Defines a linkable resource `NeonDB` that exposes the `connectionString` property from the Neon project.
-3.  Creates an AWS Lambda function named `MyApi` using the handler defined in `src/index.ts`, and links it to the `NeonDB` resource. This makes the connection string available to the Lambda function.
+1. Creates a Neon project named `my-sst-project`.
+2. Defines a linkable resource `NeonDB` that exposes the `connectionString` property from the Neon project.
+3. Creates an AWS Lambda function named `MyApi` using the handler defined in `src/index.ts`, and links it to the `NeonDB` resource. This makes the connection string available to the Lambda function.
 
 ### Install dependencies
 

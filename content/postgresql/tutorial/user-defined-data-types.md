@@ -105,9 +105,9 @@ To get all domains in a specific schema, you use the following query:
 SELECT typname
 FROM pg_catalog.pg_type
   JOIN pg_catalog.pg_namespace
-  	ON pg_namespace.oid = pg_type.typnamespace
+   ON pg_namespace.oid = pg_type.typnamespace
 WHERE
-	typtype = 'd' and nspname = '<schema_name>';
+ typtype = 'd' and nspname = '<schema_name>';
 ```
 
 The following statement returns domains in the `public` schema of the current database:
@@ -116,9 +116,9 @@ The following statement returns domains in the `public` schema of the current da
 SELECT typname
 FROM pg_catalog.pg_type
   JOIN pg_catalog.pg_namespace
-  	ON pg_namespace.oid = pg_type.typnamespace
+   ON pg_namespace.oid = pg_type.typnamespace
 WHERE
-	typtype = 'd' and nspname = 'public';
+ typtype = 'd' and nspname = 'public';
 ```
 
 ![](/postgresqltutorial/PostgreSQL-User-defined-Type-Example.png)

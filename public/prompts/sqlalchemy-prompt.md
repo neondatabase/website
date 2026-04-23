@@ -5,6 +5,7 @@
 **Purpose:** To correctly set up a virtual environment, install the required dependencies, and provide a working code example for connecting to a Neon Postgres database.
 
 **Scope:**
+
 - Must be run inside an existing Python project directory.
 - Assumes the user has a Neon project and access to their database connection string.
 - All package installations must occur within an active Python virtual environment.
@@ -20,11 +21,14 @@ When this prompt is triggered, automatically configure the open Python project a
 ### 1. Ensure a Virtual Environment is Active
 
 This is a mandatory first step.
+
 - Check for a virtual environment directory (e.g., `venv`, `.venv`) in the project.
 - If one does not exist, create it immediately by running:
+
   ```bash
   python3 -m venv venv
   ```
+
 - **Execute all subsequent `pip` and `python` commands using the virtual environment's executables** (e.g., `venv/bin/python`, `venv/bin/pip`).
 
 ---
@@ -36,6 +40,7 @@ Install the required Python packages into the virtual environment.
 ```bash
 venv/bin/pip install SQLAlchemy psycopg2-binary python-dotenv
 ```
+
 - **`SQLAlchemy`**: The core SQL toolkit and ORM.
 - **`psycopg2-binary`**: The modern, high-performance PostgreSQL driver for Python.
 - **`python-dotenv`**: To load the database connection string from a `.env` file.
@@ -44,14 +49,14 @@ venv/bin/pip install SQLAlchemy psycopg2-binary python-dotenv
 
 ### 3. Configure Environment Variables
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the `DATABASE_URL` variable to the `.env` file. **Prompt the user to replace the placeholder value** with their full connection string from the Neon console.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the `DATABASE_URL` variable to the `.env` file. **Prompt the user to replace the placeholder value** with their full connection string from the Neon console.
 
     ```dotenv title=".env"
     DATABASE_URL="postgresql://<user>:<password>@<host>.neon.tech/<dbname>?sslmode=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+3. Direct the user to find this value in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -98,18 +103,21 @@ except Exception as e:
 
 Once the file modifications are complete:
 
-1.  Prompt the user to confirm that their Neon `DATABASE_URL` is correctly set in the `.env` file.
-2.  Run the example script to test the connection:
+1. Prompt the user to confirm that their Neon `DATABASE_URL` is correctly set in the `.env` file.
+2. Run the example script to test the connection:
+
     ```bash
     venv/bin/python main.py
     ```
-3.  If the connection is successful, the output will show "Connection to Neon successful!" followed by the PostgreSQL version of their database.
+
+3. If the connection is successful, the output will show "Connection to Neon successful!" followed by the PostgreSQL version of their database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A Python virtual environment exists and is intended for use.
 - The `SQLAlchemy`, `psycopg2-binary`, and `python-dotenv` packages are installed in the virtual environment.
 - A `.env` file is present or has been created.

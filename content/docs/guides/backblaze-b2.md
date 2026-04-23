@@ -19,16 +19,16 @@ This guide demonstrates how to integrate Backblaze B2 with Neon by storing file 
 
 ## Create a Neon project
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Backblaze account and B2 bucket
 
-1.  Sign up for or log in to your [Backblaze account](https://www.backblaze.com/sign-up/cloud-storage?referrer=getstarted).
-2.  Navigate to **B2 Cloud Storage** > **Buckets** in the left sidebar.
-3.  Click **Create a Bucket**. Provide a globally unique bucket name (for example, `my-neon-app-b2-files`), choose whether files should be **Private** or **Public**. For this guide, we'll use **Public** for simplicity, but **Private** is recommended for production applications where you want to control access to files.
+1. Sign up for or log in to your [Backblaze account](https://www.backblaze.com/sign-up/cloud-storage?referrer=getstarted).
+2. Navigate to **B2 Cloud Storage** > **Buckets** in the left sidebar.
+3. Click **Create a Bucket**. Provide a globally unique bucket name (for example, `my-neon-app-b2-files`), choose whether files should be **Private** or **Public**. For this guide, we'll use **Public** for simplicity, but **Private** is recommended for production applications where you want to control access to files.
     ![Create B2 Bucket](/docs/guides/backblaze-b2-create-bucket.png)
-4.  **Create application key:**
+4. **Create application key:**
     - Navigate to **B2 Cloud Storage** > **Application Keys** in the left sidebar.
     - Click **+ Add a New Application Key**.
     - Give the key a name (for example, `neon-app-b2-key`).
@@ -38,7 +38,7 @@ This guide demonstrates how to integrate Backblaze B2 with Neon by storing file 
     - Click **Create New Key**.
     - Copy the **Key ID** and **Application Key**. These will be used in your application to authenticate with B2.
       ![Create B2 Application Key](/docs/guides/backblaze-b2-create-app-key.png)
-5.  **Find S3 endpoint:**
+5. **Find S3 endpoint:**
     - Navigate back to **B2 Cloud Storage** > **Buckets**.
     - Find your bucket and note the **Endpoint** URL listed (for example, `s3.us-west-000.backblazeb2.com`). You'll need this S3-compatible endpoint for the SDK configuration.
       ![B2 Bucket Endpoint](/docs/guides/backblaze-b2-bucket-endpoint.png)
@@ -58,7 +58,7 @@ Here’s an example CORS configuration allowing `http://localhost:3000` to view 
 
 We need a table in Neon to store metadata about the objects uploaded to B2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS b2_files (
@@ -72,7 +72,7 @@ We need a table in Neon to store metadata about the objects uploaded to B2.
 
     > Storing the full public `file_url` is only useful if the bucket is public. For private buckets, you'll typically only store the `object_key` and generate presigned download URLs on demand.
 
-2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size` if needed).
+2. Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size` if needed).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -86,8 +86,8 @@ Leveraging B2's S3 compatibility, the recommended pattern for client-side upload
 
 This requires two backend endpoints:
 
-1.  `/presign-b2-upload`: Generates the temporary presigned URL.
-2.  `/save-b2-metadata`: Records the metadata in Neon after the client confirms successful upload.
+1. `/presign-b2-upload`: Generates the temporary presigned URL.
+2. `/save-b2-metadata`: Records the metadata in Neon after the client confirms successful upload.
 
 <Tabs labels={["JavaScript", "Python"]}>
 
@@ -197,9 +197,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes Neon (`sql`), Hono (`app`), and the AWS S3 client (`s3`) configured with the B2 endpoint, region (extracted from endpoint), and B2 Application Key credentials.
-2.  **Authentication:** A placeholder `authMiddleware` is included. **Replace this with real authentication logic.** It currently just sets a static `userId` for demonstration.
-3.  **Upload endpoints:**
+1. **Setup:** Initializes Neon (`sql`), Hono (`app`), and the AWS S3 client (`s3`) configured with the B2 endpoint, region (extracted from endpoint), and B2 Application Key credentials.
+2. **Authentication:** A placeholder `authMiddleware` is included. **Replace this with real authentication logic.** It currently just sets a static `userId` for demonstration.
+3. **Upload endpoints:**
     - **`/presign-b2-upload`:** Generates a temporary secure URL (`presignedUrl`) using `@aws-sdk/s3-request-presigner` that allows uploading a file directly to B2. It returns the URL, the generated `objectKey`, and the standard S3 public URL.
     - **`/save-b2-metadata`:** Called by the client after successful upload. Saves the `objectKey`, `file_url`, and `userId` into the `b2_files` table in Neon using `@neondatabase/serverless`.
 
@@ -349,12 +349,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes Flask, `boto3` S3 client configured for B2 (endpoint, region, credentials), and `psycopg2`.
-2.  **Authentication:** Placeholder `get_authenticated_user_id` needs replacing.
-3.  **Upload endpoints:**
+1. **Setup:** Initializes Flask, `boto3` S3 client configured for B2 (endpoint, region, credentials), and `psycopg2`.
+2. **Authentication:** Placeholder `get_authenticated_user_id` needs replacing.
+3. **Upload endpoints:**
     - **`/presign-b2-upload`:** Generates `object_key` and optional `public_file_url`. Uses `boto3`'s `generate_presigned_url` for `'put_object'` to get a temporary upload URL.
     - **`/save-b2-metadata`:** Called after client upload. Saves `object_key`, `public_file_url` (can be `None`), and `userId` to the `b2_files` table. Includes basic error handling for duplicates.
-4.  In production, use a global PostgreSQL connection pool.
+4. In production, use a global PostgreSQL connection pool.
 
 </TabItem>
 
@@ -364,7 +364,7 @@ if __name__ == "__main__":
 
 Testing the presigned URL flow involves multiple steps:
 
-1.  **Get presigned URL:** Send a `POST` request to your `/presign-b2-upload` endpoint with a JSON body containing `fileName` and `contentType`.
+1. **Get presigned URL:** Send a `POST` request to your `/presign-b2-upload` endpoint with a JSON body containing `fileName` and `contentType`.
     **Using cURL:**
 
     ```bash
@@ -386,7 +386,7 @@ Testing the presigned URL flow involves multiple steps:
 
     Note the `presignedUrl`, `objectKey`, and `publicFileUrl` from the response. You will use these in the next steps
 
-2.  **Upload file to B2:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request. The `Content-Type` header must match the one used to generate the URL.
+2. **Upload file to B2:** Use the received `presignedUrl` to upload the actual file using an HTTP `PUT` request. The `Content-Type` header must match the one used to generate the URL.
     **Using cURL:**
 
     ```bash
@@ -397,7 +397,7 @@ Testing the presigned URL flow involves multiple steps:
 
     Replace `<PRESIGNED_URL>` with the actual URL from step 1. A successful upload typically returns HTTP `200 OK`.
 
-3.  **Save metadata:** Send a `POST` request to your `/save-b2-metadata` endpoint with the `objectKey` and optionally `publicFileUrl` from step 1.
+3. **Save metadata:** Send a `POST` request to your `/save-b2-metadata` endpoint with the `objectKey` and optionally `publicFileUrl` from step 1.
     **Using cURL:**
 
     ```bash

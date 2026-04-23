@@ -71,6 +71,10 @@ This adds the MCP config to your editor's configuration files. Add `-g` for glob
 
 For Local setup, you'll need a [Neon API key](/docs/manage/api-keys#creating-api-keys).
 
+## Kiro
+
+Use the **Add to Kiro** badge at the top of the [**Neon MCP Server** README on GitHub](https://github.com/neondatabase/mcp-server-neon) (next to **Install in Cursor**) for one-click setup with the Neon remote MCP URL. The same badges also appear on [Neon MCP Server overview](/docs/ai/neon-mcp-server#one-click-install-cursor-and-kiro). For manual configuration, Kiro reads **`~/.kiro/settings/mcp.json`** (global) or **`.kiro/settings/mcp.json`** (project). See [Kiro MCP documentation](https://kiro.dev/docs/mcp/) and [neondatabase/mcp-server-neon#228](https://github.com/neondatabase/mcp-server-neon/pull/228).
+
 ## Cursor
 
 <Tabs labels={["Quick Setup", "OAuth", "Local"]}>
@@ -96,9 +100,9 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
 </TabItem>
 <TabItem>
 
-1.  Open Cursor. Create a `.cursor` directory in your project root if needed.
-2.  Create or open the `mcp.json` file in the `.cursor` directory.
-3.  Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your Neon API key:
+1. Open Cursor. Create a `.cursor` directory in your project root if needed.
+2. Create or open the `mcp.json` file in the `.cursor` directory.
+3. Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your Neon API key:
 
     ```json
     {
@@ -111,7 +115,7 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
     }
     ```
 
-4.  Save the configuration file. Cursor may detect the change or require a restart.
+4. Save the configuration file. Cursor may detect the change or require a restart.
 
 </TabItem>
 </Tabs>
@@ -325,10 +329,10 @@ For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/clin
 <Tabs labels={["OAuth", "Local"]}>
 <TabItem>
 
-1.  Open Windsurf and navigate to the Cascade assistant sidebar.
-2.  Click the hammer (MCP) icon, then **Configure** which opens up the "Manage MCPs" configuration file.
-3.  Click on "View raw config" to open the raw configuration file in Windsurf.
-4.  Add the "Neon" server entry within the `mcpServers` object:
+1. Open Windsurf and navigate to the Cascade assistant sidebar.
+2. Click the hammer (MCP) icon, then **Configure** which opens up the "Manage MCPs" configuration file.
+3. Click on "View raw config" to open the raw configuration file in Windsurf.
+4. Add the "Neon" server entry within the `mcpServers` object:
 
     ```json
     {
@@ -341,17 +345,17 @@ For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/clin
     }
     ```
 
-5.  Save the file.
-6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
-7.  When the OAuth window opens in your browser, review the requested permissions and click **Authorize** to complete the connection.
+5. Save the file.
+6. Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
+7. When the OAuth window opens in your browser, review the requested permissions and click **Authorize** to complete the connection.
 
 </TabItem>
 <TabItem>
 
-1.  Open Windsurf and navigate to the Cascade assistant sidebar.
-2.  Click the hammer (MCP) icon, then **Configure** which opens up the "Manage MCPs" configuration file.
-3.  Click on "View raw config" to open the raw configuration file in Windsurf.
-4.  Add the "Neon" server entry within the `mcpServers` object:
+1. Open Windsurf and navigate to the Cascade assistant sidebar.
+2. Click the hammer (MCP) icon, then **Configure** which opens up the "Manage MCPs" configuration file.
+3. Click on "View raw config" to open the raw configuration file in Windsurf.
+4. Add the "Neon" server entry within the `mcpServers` object:
 
     ```json
     {
@@ -366,8 +370,8 @@ For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/clin
 
     > Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
-5.  Save the file.
-6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
+5. Save the file.
+6. Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
 
 </TabItem>
 </Tabs>
@@ -474,9 +478,11 @@ When using the remote MCP server with OAuth authentication, you might encounter 
 This typically occurs when there are issues with cached OAuth credentials. To resolve this:
 
 1. Remove the MCP authentication cache directory:
+
    ```bash
    rm -rf ~/.mcp-auth
    ```
+
 2. Restart your MCP client application
 3. The OAuth flow will start fresh, allowing you to properly authenticate
 

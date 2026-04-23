@@ -427,7 +427,7 @@ For a real-world example, see this sample PR and its corresponding workflow run:
 
 - **Sample PR**: [rishi-raj-jain/preview-branches-with-netlify#32](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/32)
 - **Automated Comment** (with preview and Neon links): [View the GitHub Comment](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/32#issuecomment-3575723043)
-- **Branch Deletion Workflow**: https://github.com/rishi-raj-jain/preview-branches-with-netlify/actions/runs/19671544817
+- **Branch Deletion Workflow**: <https://github.com/rishi-raj-jain/preview-branches-with-netlify/actions/runs/19671544817>
 
 All that was needed for this sample was a simple file edit in the PR. The workflow then generated a dedicated database branch, deployed a preview on Netlify, and posted the preview/comment automatically.
 

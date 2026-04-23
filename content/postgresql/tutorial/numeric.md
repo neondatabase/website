@@ -185,7 +185,7 @@ Output:
 (2 rows)
 ```
 
-Typically, the `NaN` is not equal to any number including itself. It means that the expression `NaN = NaN` returns `false`. You’ll find this implementation [in JavaScript for [NaN](https://www.javascripttutorial.net/javascript-nan/)](https://www.javascripttutorial.net/javascript-nan/).
+Typically, the `NaN` is not equal to any number including itself. It means that the expression `NaN = NaN` returns `false`. You’ll find this implementation [in JavaScript for [NaN](https://www.javascripttutorial.net/javascript-nan/)](<https://www.javascripttutorial.net/javascript-nan/>).
 
 But in PostgreSQL, two `NaN` values are equal. Also, `NaN` values are greater than regular numbers such as 1, 2, 3\. This implementation allows PostgreSQL to sort `NUMERIC` values and use them in tree\-based [indexes](../postgresql-indexes).
 

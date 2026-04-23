@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.190Z'
 ---
 
-<CopyPrompt src="/prompts/python-prompt.md" 
+<CopyPrompt src="/prompts/python-prompt.md"
 description="Pre-built prompt for connecting Python applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers. We'll cover [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the latest generation of the popular synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
@@ -28,9 +28,9 @@ You'll learn how to connect to your Neon database from a Python application and 
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Python application.
 
@@ -38,7 +38,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your Python project, create a project directory, set up a virtual environment, and install the required libraries.
 
-1.  Create a project directory and change into it.
+1. Create a project directory and change into it.
 
     ```bash
     mkdir neon-python-quickstart
@@ -47,7 +47,7 @@ For your Python project, create a project directory, set up a virtual environmen
 
     > Open the directory in your preferred code editor (for example, VS Code, PyCharm).
 
-2.  Create and activate a Python virtual environment. This isolates your project's dependencies from your system's Python environment.
+2. Create and activate a Python virtual environment. This isolates your project's dependencies from your system's Python environment.
 
     <CodeTabs labels={["MacOS / Linux / Windows Subsystem for Linux (WSL)", "Windows"]}>
 
@@ -69,7 +69,7 @@ For your Python project, create a project directory, set up a virtual environmen
 
     </CodeTabs>
 
-3.  Install the required libraries using `pip`.
+3. Install the required libraries using `pip`.
     - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3).
     - `psycopg2-binary`: An older, widely-used synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
@@ -85,14 +85,16 @@ For your Python project, create a project directory, set up a virtual environmen
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
     ![Connection modal](/docs/connect/connection_details.png)
-3.  Copy the connection string, which includes your password.
-4.  Add the connection string to your `.env` file as shown below.
+3. Copy the connection string, which includes your password.
+4. Add the connection string to your `.env` file as shown below.
+
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+
     > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples

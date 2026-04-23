@@ -5,6 +5,7 @@
 **Purpose:** To install the required NuGet packages, configure an Entity Framework `DbContext`, and provide a working C# code example that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management using EF Core.
 
 **Scope:**
+
 - Assumes the user has an open .NET project (e.g., a Console App created via `dotnet new console`).
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -18,7 +19,7 @@ When this prompt is triggered, automatically configure the open .NET project as 
 
 ### 1. Install Required NuGet Packages and Tools
 
-1.  Run the following `dotnet` CLI commands to add the necessary packages to the project:
+1. Run the following `dotnet` CLI commands to add the necessary packages to the project:
 
     ```bash
     dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL && \
@@ -27,7 +28,7 @@ When this prompt is triggered, automatically configure the open .NET project as 
     dotnet add package Microsoft.Extensions.Configuration.Binder
     ```
 
-2.  Ensure the EF Core command-line tool is installed globally. If not, install it.
+2. Ensure the EF Core command-line tool is installed globally. If not, install it.
 
     ```bash
     dotnet tool install --global dotnet-ef
@@ -47,6 +48,7 @@ When this prompt is triggered, automatically configure the open .NET project as 
     }
   }
   ```
+
 - Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**, making sure to select **.NET** from the dropdown.
 
 ---
@@ -200,22 +202,27 @@ public class Program
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their `DefaultConnection` in the `appsettings.json` file. Do not proceed if placeholder values are still present.
-2.  Create the initial database migration. This file tells EF Core how to create the database schema.
+1. Verify the user has correctly set their `DefaultConnection` in the `appsettings.json` file. Do not proceed if placeholder values are still present.
+2. Create the initial database migration. This file tells EF Core how to create the database schema.
+
     ```bash
     dotnet ef migrations add InitialCreate
     ```
-3.  Run the application. The code is configured to automatically apply the migration to the database.
+
+3. Run the application. The code is configured to automatically apply the migration to the database.
+
     ```bash
     dotnet run
     ```
-4.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+
+4. If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The `Npgsql.EntityFrameworkCore.PostgreSQL` and `Microsoft.EntityFrameworkCore.Design` packages are added.
 - An `ApplicationDbContextFactory.cs` file exists and its class implements `IDesignTimeDbContextFactory<ApplicationDbContext>`.
 - An `appsettings.json` file is present or has been created and added to `.gitignore` (if applicable).

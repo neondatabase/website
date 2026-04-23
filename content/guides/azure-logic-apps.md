@@ -103,6 +103,7 @@ For our order processing workflow, we'll use an HTTP trigger that listens for ne
 1. Click "Add a trigger"
 1. Search for "When an HTTP request is received" and select it
 1. For the payload schema you can use the following example:
+
    ```json
    {
      "type": "object",
@@ -120,6 +121,7 @@ For our order processing workflow, we'll use an HTTP trigger that listens for ne
      "required": ["customer_email", "product_name", "quantity"]
    }
    ```
+
 1. Click "Save" which will generate a URL that you can use to trigger the workflow
 
 ### Step 2: Add a Postgres Connection
@@ -149,6 +151,7 @@ With the database connection set up, you can now insert the order data into the 
    - product_name: `@triggerBody()?['productName']`
    - quantity: `@triggerBody()?['quantity']`
 1. If you were to check "Code View", you would see the following JSON:
+
    ```json
    {
      "type": "ApiConnection",
@@ -169,6 +172,7 @@ With the database connection set up, you can now insert the order data into the 
      "runAfter": {}
    }
    ```
+
 1. After adding the database action, click "Save"
 
 ### Step 3: Test the Workflow
@@ -178,6 +182,7 @@ To test the workflow, let's use the Azure Logic Apps run interface:
 1. Go to the Logic App Designer
 1. Click the "Run" dropdown and select "Run with payload" to trigger the workflow
 1. Under "Request body", enter sample order data:
+
    ```json
    {
      "customerEmail": "test@example.com",
@@ -185,6 +190,7 @@ To test the workflow, let's use the Azure Logic Apps run interface:
      "quantity": 2
    }
    ```
+
 1. Click "Run" to execute the workflow
 1. Check the database to verify that the order was inserted
 

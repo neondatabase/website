@@ -11,9 +11,9 @@ In a production application, internal tooling is often critical for operations a
 
 This guide demonstrates how to build an **internal admin dashboard** using Neon Auth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
 
-1.  **A user table:** To list all registered users in your application.
-2.  **Moderation controls:** To ban and unban users instantly.
-3.  **Impersonation:** To log in as any user for troubleshooting purposes.
+1. **A user table:** To list all registered users in your application.
+2. **Moderation controls:** To ban and unban users instantly.
+3. **Impersonation:** To log in as any user for troubleshooting purposes.
 
 ## Prerequisites
 
@@ -28,12 +28,12 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
-2.  **Enable Neon Auth:**
+1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
+2. **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
-3.  **Copy your Auth URL:**
+3. **Copy your Auth URL:**
 
     Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
     ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
@@ -42,8 +42,8 @@ You'll need to create a Neon project and enable Neon Auth.
 
 To use the Admin APIs, you must perform the operations as an authenticated user with the `admin` role. You cannot grant this role via the API initially; you must assign your first admin via the Neon Console.
 
-1.  **Create a user:** Go to your application URL or use the Neon Console to create an user (e.g., `admin@example.com`).
-2.  **Assign role:**
+1. **Create a user:** Go to your application URL or use the Neon Console to create an user (e.g., `admin@example.com`).
+2. **Assign role:**
     - In the Neon Console, go to **Auth** -> **Users**.
     - Find your user, click the three-dot menu, and select **Make admin**.
 

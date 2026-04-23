@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.000Z'
 ---
 
-<CopyPrompt src="/prompts/laravel-prompt.md" 
+<CopyPrompt src="/prompts/laravel-prompt.md"
 description="Pre-built prompt for connecting Laravel to Neon Postgres"/>
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.

@@ -99,7 +99,7 @@ SELECT
     price,
     LAST_VALUE(product_name)
     OVER(
-	PARTITION BY group_id
+ PARTITION BY group_id
         ORDER BY price
         RANGE BETWEEN
             UNBOUNDED PRECEDING AND

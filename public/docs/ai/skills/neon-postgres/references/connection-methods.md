@@ -16,14 +16,14 @@ For non-TypeScript languages, connect from a secure backend server using your la
 
 | Language/Framework  | Documentation                                 |
 | ------------------- | --------------------------------------------- |
-| Django (Python)     | https://neon.com/docs/guides/django.md        |
-| SQLAlchemy (Python) | https://neon.com/docs/guides/sqlalchemy.md    |
-| Elixir Ecto         | https://neon.com/docs/guides/elixir-ecto.md   |
-| Laravel (PHP)       | https://neon.com/docs/guides/laravel.md       |
-| Ruby on Rails       | https://neon.com/docs/guides/ruby-on-rails.md |
-| Go                  | https://neon.com/docs/guides/go.md            |
-| Rust                | https://neon.com/docs/guides/rust.md          |
-| Java                | https://neon.com/docs/guides/java.md          |
+| Django (Python)     | <https://neon.com/docs/guides/django.md>        |
+| SQLAlchemy (Python) | <https://neon.com/docs/guides/sqlalchemy.md>    |
+| Elixir Ecto         | <https://neon.com/docs/guides/elixir-ecto.md>   |
+| Laravel (PHP)       | <https://neon.com/docs/guides/laravel.md>       |
+| Ruby on Rails       | <https://neon.com/docs/guides/ruby-on-rails.md> |
+| Go                  | <https://neon.com/docs/guides/go.md>            |
+| Rust                | <https://neon.com/docs/guides/rust.md>          |
+| Java                | <https://neon.com/docs/guides/java.md>          |
 
 **TypeScript/JavaScript** → Continue to step 2.
 
@@ -111,10 +111,10 @@ Popular TypeScript/JavaScript ORMs all work with Neon:
 
 | ORM     | Drivers Supported                               | Documentation                           |
 | ------- | ----------------------------------------------- | --------------------------------------- |
-| Drizzle | `pg`, `postgres.js`, `@neondatabase/serverless` | https://neon.com/docs/guides/drizzle.md |
-| Kysely  | `pg`, `postgres.js`, `@neondatabase/serverless` | https://neon.com/docs/guides/kysely.md  |
-| Prisma  | `pg`, `@neondatabase/serverless`                | https://neon.com/docs/guides/prisma.md  |
-| TypeORM | `pg`                                            | https://neon.com/docs/guides/typeorm.md |
+| Drizzle | `pg`, `postgres.js`, `@neondatabase/serverless` | <https://neon.com/docs/guides/drizzle.md> |
+| Kysely  | `pg`, `postgres.js`, `@neondatabase/serverless` | <https://neon.com/docs/guides/kysely.md>  |
+| Prisma  | `pg`, `@neondatabase/serverless`                | <https://neon.com/docs/guides/prisma.md>  |
+| TypeORM | `pg`                                            | <https://neon.com/docs/guides/typeorm.md> |
 
 All ORMs support both TCP drivers and Neon's serverless driver depending on your platform.
 
@@ -172,8 +172,8 @@ Then provide:
 
 | Topic                      | URL                                                       |
 | -------------------------- | --------------------------------------------------------- |
-| Choosing Connection Method | https://neon.com/docs/connect/choose-connection.md        |
-| Serverless Driver          | https://neon.com/docs/serverless/serverless-driver.md     |
-| JavaScript SDK             | https://neon.com/docs/reference/javascript-sdk.md         |
-| Connection Pooling         | https://neon.com/docs/connect/connection-pooling.md       |
-| Vercel Connection Methods  | https://neon.com/docs/guides/vercel-connection-methods.md |
+| Choosing Connection Method | <https://neon.com/docs/connect/choose-connection.md>        |
+| Serverless Driver          | <https://neon.com/docs/serverless/serverless-driver.md>     |
+| JavaScript SDK             | <https://neon.com/docs/reference/javascript-sdk.md>         |
+| Connection Pooling         | <https://neon.com/docs/connect/connection-pooling.md>       |
+| Vercel Connection Methods  | <https://neon.com/docs/guides/vercel-connection-methods.md> |

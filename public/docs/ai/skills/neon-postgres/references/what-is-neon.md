@@ -34,7 +34,7 @@ See the [official introduction](https://neon.com/docs/introduction.md) for compl
 
 | Topic                  | URL                                                         |
 | ---------------------- | ----------------------------------------------------------- |
-| Architecture           | https://neon.com/docs/introduction/architecture-overview.md |
-| Plans & Billing        | https://neon.com/docs/introduction/about-billing.md         |
-| Regions                | https://neon.com/docs/introduction/regions.md               |
-| Postgres Compatibility | https://neon.com/docs/reference/compatibility.md            |
+| Architecture           | <https://neon.com/docs/introduction/architecture-overview.md> |
+| Plans & Billing        | <https://neon.com/docs/introduction/about-billing.md>         |
+| Regions                | <https://neon.com/docs/introduction/regions.md>               |
+| Postgres Compatibility | <https://neon.com/docs/reference/compatibility.md>            |

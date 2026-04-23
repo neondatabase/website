@@ -74,7 +74,7 @@ AS $$
 BEGIN
 
     -- Enroll the student in the course
-	INSERT INTO enrollments (student_id, course_id, enrolled_date)
+ INSERT INTO enrollments (student_id, course_id, enrolled_date)
     VALUES (p_student_id, p_course_id, p_invoice_date);
 
     -- Create a new invoice for the student

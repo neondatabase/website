@@ -17,8 +17,8 @@ In this guide, you'll learn how to set up and self-host Medusa using [Neon](http
 
 Before you begin, ensure you have the following:
 
-1.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-2.  **Node.js & package manager:** A Node-compatible runtime (Node.js v20+, Bun, or Deno) and a package manager (`npm`, `yarn`, `pnpm`, or `bun`).
+1. **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
+2. **Node.js & package manager:** A Node-compatible runtime (Node.js v20+, Bun, or Deno) and a package manager (`npm`, `yarn`, `pnpm`, or `bun`).
     > This guide uses Node.js with `npm`, but you can adapt the commands to your preferred runtime and package manager.
 
 <Steps>
@@ -27,12 +27,12 @@ Before you begin, ensure you have the following:
 
 You'll first need to create a Neon database. Follow these steps:
 
-1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
+1. Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
     <Admonition type="tip">
     When creating your Neon project, choose a region that is geographically close to your Medusa server to minimize latency and improve overall performance of your Medusa application.
     </Admonition>
 
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+2. Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
 
     <Admonition type="important">
     Use the non-pooled connection string for setup. Medusa needs it to run the initial migrations. After installation you can switch to the pooled version to improve performance.
@@ -62,10 +62,10 @@ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 
 ### Installation steps
 
-1.  **Follow the prompts:** The CLI will ask a few questions to configure your setup:
+1. **Follow the prompts:** The CLI will ask a few questions to configure your setup:
     - **Project name:** Enter a name for your project (for example, `medusa-neon-store`).
     - **Frontend starter:** Choose whether to install the Next.js Starter Storefront or skip it depending on your preference.
-2.  **Automatic setup:**
+2. **Automatic setup:**
     - The tool will install the Medusa backend and optionally the Next.js Starter Storefront.
     - **Crucially**, it will use your Neon connection string to:
       - Update the backend's configuration file.
@@ -107,9 +107,9 @@ Following successful registration, you will be redirected to the Medusa Admin da
 
 After the installation is complete, you can optionally verify the tables in the Neon Console:
 
-1.  Navigate to your Neon Project dashboard.
-2.  Click the **Tables** tab.
-3.  You should see all the Medusa tables created in your database.
+1. Navigate to your Neon Project dashboard.
+2. Click the **Tables** tab.
+3. You should see all the Medusa tables created in your database.
 
 ![Medusa Tables in Neon](/docs/guides/medusa-neon-tables.png)
 
@@ -119,22 +119,26 @@ Your Medusa application is now fully configured to use Neon as its database. You
 
 ### Local development
 
-1.  Navigate into your new project directory:
+1. Navigate into your new project directory:
+
     ```bash
     cd medusa-neon-store
     ```
-2.  Start the Medusa backend server:
+
+2. Start the Medusa backend server:
+
     ```bash
     npm run dev
     ```
+
     Your Medusa backend should now be running locally and accessible at `http://localhost:9000/app`.
 
 ### Deployment to a self-hosted environment
 
 For deployment to a VPS (like DigitalOcean, AWS EC2) or a dedicated platform (like Render, Fly.io), the process is the same as deploying any standard Medusa application. Ensure you configure the database connection to point to your Neon database.
 
-1.  Set the `DATABASE_URL` environment variable in your deployment environment to your Neon connection string.
-2.  Follow the self-hosting deployment instructions in the [Medusa documentation](https://docs.medusajs.com/resources/deployment#self-hosting-medusa) to deploy your Medusa backend and the storefront.
+1. Set the `DATABASE_URL` environment variable in your deployment environment to your Neon connection string.
+2. Follow the self-hosting deployment instructions in the [Medusa documentation](https://docs.medusajs.com/resources/deployment#self-hosting-medusa) to deploy your Medusa backend and the storefront.
 
 You can optionally enable IP whitelisting in the Neon Console to restrict database access to only your Medusa server's IP address for enhanced security. Learn more: [Neon IP Allow](/docs/introduction/ip-allow)
 

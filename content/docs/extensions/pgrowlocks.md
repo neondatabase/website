@@ -67,7 +67,7 @@ Now, to create some row locks, you would typically use multiple database session
 
 **Scenario setup (to be performed in separate `psql` sessions or database connections):**
 
-1.  **In Session 1:** Start a transaction and update Alice's account (for example, her balance), but do not commit. This will place an exclusive lock on Alice's row.
+1. **In Session 1:** Start a transaction and update Alice's account (for example, her balance), but do not commit. This will place an exclusive lock on Alice's row.
 
     ```sql
     -- In Session 1
@@ -76,7 +76,8 @@ Now, to create some row locks, you would typically use multiple database session
     -- Do not COMMIT or ROLLBACK yet
     ```
 
-2.  **In Session 2:** Start a transaction and select Bob's account with `FOR UPDATE`. This will place an exclusive lock on Bob's row.
+2. **In Session 2:** Start a transaction and select Bob's account with `FOR UPDATE`. This will place an exclusive lock on Bob's row.
+
     ```sql
     -- In Session 2
     BEGIN;

@@ -30,8 +30,8 @@ This process ensures that database-dependent E2E tests are run in a clean, predi
 
 ## Setting up your Neon database
 
-1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+1. Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
+2. Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
 
     ![Connection modal](/docs/connect/connection_details.png)
 
@@ -47,7 +47,7 @@ This guide uses a Next.js application with Cypress, but the core principles of d
 
 We'll start with a pre-configured example repository that includes a simple Todo app, a Drizzle ORM schema, and a Cypress test suite.
 
-1.  Clone the repository and install its dependencies:
+1. Clone the repository and install its dependencies:
 
     ```bash
     git clone https://github.com/dhanushreddy291/neon-cypress-example
@@ -56,21 +56,21 @@ We'll start with a pre-configured example repository that includes a simple Todo
     cp .env.example .env
     ```
 
-2.  Open the `.env` file and add the Neon database connection string you copied earlier.
+2. Open the `.env` file and add the Neon database connection string you copied earlier.
 
-3.  Apply the initial schema migrations to your production database branch:
+3. Apply the initial schema migrations to your production database branch:
 
     ```bash
     npm run db:migrate
     ```
 
-4.  Start the development server to verify the application is working:
+4. Start the development server to verify the application is working:
 
     ```bash
     npm run dev
     ```
 
-5.  In a new terminal, run the Cypress tests locally to confirm they pass (ensure the Next.js development server is still running):
+5. In a new terminal, run the Cypress tests locally to confirm they pass (ensure the Next.js development server is still running):
 
     ```bash
     npm run cypress:open
@@ -94,7 +94,7 @@ We'll start with a pre-configured example repository that includes a simple Todo
 
     > All tests should pass successfully.
 
-6.  Initialize a new Git repository and push your code to GitHub:
+6. Initialize a new Git repository and push your code to GitHub:
 
     > For instructions on creating a new repository on GitHub, see [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
 
@@ -114,13 +114,13 @@ We'll start with a pre-configured example repository that includes a simple Todo
 
 The [Neon GitHub integration](/docs/guides/neon-github-integration) securely connects your Neon project to your repository. It automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable in your repository, which are required for your GitHub Actions workflow.
 
-1.  In the Neon Console, navigate to the **Integrations** page for your project.
-2.  Locate the **GitHub** card and click **Add**.
+1. In the Neon Console, navigate to the **Integrations** page for your project.
+2. Locate the **GitHub** card and click **Add**.
     ![GitHub App card](/docs/guides/github_card.png)
-3.  On the **GitHub** drawer, click **Install GitHub App**.
-4.  If you have more than one GitHub account, select the account where you want to install the GitHub app.
-5.  Select the GitHub repository to connect to your Neon project, and click **Connect**.
-6.  **Add Production Database Secret**:
+3. On the **GitHub** drawer, click **Install GitHub App**.
+4. If you have more than one GitHub account, select the account where you want to install the GitHub app.
+5. Select the GitHub repository to connect to your Neon project, and click **Connect**.
+6. **Add Production Database Secret**:
     - Navigate to your GitHub repository's **Settings** > **Secrets and variables** > **Actions**.
     - Create a new repository secret called `DATABASE_URL`.
     - Paste the connection string for your `production` branch (copied from the Neon Console).
@@ -272,27 +272,27 @@ The workflow is divided into three jobs:
 
 ### Create branch & test job
 
-1.  **Branch Creation**: Uses Neon's `create-branch-action` to create a database branch named `preview/pr-{number}-{branch_name}`, which inherits the schema and data from your primary branch.
-2.  **Migration and Build**: Installs dependencies, runs schema migrations against the new branch, and builds the Next.js application. The branch-specific connection string from the `create-branch-action` output is used for these steps.
-3.  **Cypress Test Execution**: The official `cypress-io/github-action` is used to run the tests. The `wait-on` parameter ensures that tests only begin after the application server is responding. Videos of the test runs are always uploaded as artifacts, and screenshots are uploaded if any tests fail.
-4.  **Schema Diff**: Neon's `schema-diff-action` compares the schema of the preview branch against the parent branch and posts a summary comment to the pull request, making database changes easy to review.
+1. **Branch Creation**: Uses Neon's `create-branch-action` to create a database branch named `preview/pr-{number}-{branch_name}`, which inherits the schema and data from your primary branch.
+2. **Migration and Build**: Installs dependencies, runs schema migrations against the new branch, and builds the Next.js application. The branch-specific connection string from the `create-branch-action` output is used for these steps.
+3. **Cypress Test Execution**: The official `cypress-io/github-action` is used to run the tests. The `wait-on` parameter ensures that tests only begin after the application server is responding. Videos of the test runs are always uploaded as artifacts, and screenshots are uploaded if any tests fail.
+4. **Schema Diff**: Neon's `schema-diff-action` compares the schema of the preview branch against the parent branch and posts a summary comment to the pull request, making database changes easy to review.
 
 ### Cleanup job
 
-1.  **Branch Deletion**: When the pull request is closed, the `delete-branch-action` removes the temporary database branch to free up resources.
-2.  **Apply Migrations to Production**: If the pull request was merged, the job checks out the code and applies any new migrations to the production database branch using the `DATABASE_URL` secret.
+1. **Branch Deletion**: When the pull request is closed, the `delete-branch-action` removes the temporary database branch to free up resources.
+2. **Apply Migrations to Production**: If the pull request was merged, the job checks out the code and applies any new migrations to the production database branch using the `DATABASE_URL` secret.
 
 ## Test the workflow
 
 To see the pipeline in action, you can introduce a schema change, update the application's UI, and add a new test.
 
-1.  Create a new feature branch in your local repository:
+1. Create a new feature branch in your local repository:
 
     ```bash
     git checkout -b feature/add-created-at
     ```
 
-2.  Modify the database schema in `app/db/schema.ts` by adding a `created_at` column:
+2. Modify the database schema in `app/db/schema.ts` by adding a `created_at` column:
 
     ```typescript {1,7}
     import { pgTable, text, bigint, boolean, timestamp } from 'drizzle-orm/pg-core';
@@ -307,7 +307,7 @@ To see the pipeline in action, you can introduce a schema change, update the app
     export type Todo = typeof todos.$inferSelect;
     ```
 
-3.  Update the UI component in `app/todos.tsx` to display the new timestamp:
+3. Update the UI component in `app/todos.tsx` to display the new timestamp:
 
     ```tsx {6,13}
     // app/todos.tsx
@@ -321,7 +321,7 @@ To see the pipeline in action, you can introduce a schema change, update the app
     </li>
     ```
 
-4.  Add a new Cypress test in `cypress/e2e/todos.cy.ts` to verify the timestamp is displayed correctly:
+4. Add a new Cypress test in `cypress/e2e/todos.cy.ts` to verify the timestamp is displayed correctly:
 
     ```typescript
     // cypress/e2e/todos.cy.ts
@@ -344,7 +344,7 @@ To see the pipeline in action, you can introduce a schema change, update the app
     });
     ```
 
-5.  Commit your changes and push the branch to GitHub:
+5. Commit your changes and push the branch to GitHub:
 
     ```bash
     git add .
@@ -352,7 +352,7 @@ To see the pipeline in action, you can introduce a schema change, update the app
     git push origin feature/add-created-at
     ```
 
-6.  Open a pull request on GitHub.
+6. Open a pull request on GitHub.
 
 When the pull request is opened, the GitHub Action will start automatically. You can monitor its progress in the "Actions" tab. The workflow will create a database branch, run tests, and post a schema diff. Once merged, it will update your production database and clean up the temporary resources.
 

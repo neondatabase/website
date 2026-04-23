@@ -72,13 +72,17 @@ This method uses Neon's managed server and OAuth authentication.
 
 1. Open your terminal.
 2. Add the Neon MCP server to Claude Code with the following command:
+
    ```sh
    claude mcp add --transport http neon https://mcp.neon.tech/mcp
    ```
+
 3. Start a new session of `claude` to trigger the OAuth authentication flow:
+
    ```sh
    claude
    ```
+
 4. You can also trigger authentication with `/mcp` within Claude Code.
 
 <Admonition type="tip">
@@ -108,6 +112,7 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
    > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
 
 3. Start a new Claude Code session with the `claude` command and start using the Neon MCP server:
+
    ```sh
    claude
    ```

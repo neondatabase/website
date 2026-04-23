@@ -18,6 +18,15 @@ The **Neon MCP Server** is an open-source tool that lets you interact with your 
 
 ## Quick setup
 
+### One-click install (Cursor and Kiro)
+
+These links match the badges on the [**Neon MCP Server** GitHub README](https://github.com/neondatabase/mcp-server-neon): they open your tool with the Neon remote MCP URL (`https://mcp.neon.tech/mcp`) pre-filled so you can authorize without editing JSON first.
+
+[![Install MCP Server in Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D)
+[![Add to Kiro](https://kiro.dev/images/add-to-kiro.svg)](https://kiro.dev/launch/mcp/add?name=Neon&config=%7B%22url%22%3A%20%22https%3A//mcp.neon.tech/mcp%22%7D)
+
+For manual Kiro paths and more context, see [PR #228](https://github.com/neondatabase/mcp-server-neon/pull/228) and [Kiro MCP documentation](https://kiro.dev/docs/mcp/).
+
 The fastest way to set up Neon's MCP Server is with one command:
 
 ```bash

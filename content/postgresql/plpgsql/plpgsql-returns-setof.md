@@ -78,7 +78,7 @@ We’ll use the `film` table from the [sample database](../postgresql-getting-st
 
 ```plsql
 create or replace function find_film_by_id(
-	p_id int
+ p_id int
 )
 returns setof film
 as

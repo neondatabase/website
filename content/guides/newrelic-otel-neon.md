@@ -31,18 +31,18 @@ Before you begin, ensure you have the following:
 
 First, you need the correct credentials from New Relic to send OpenTelemetry data. This involves getting your Ingest License Key and the correct OTLP endpoint URL.
 
-1.  Log in to your [New Relic account](https://one.newrelic.com/).
-2.  Create a New Relic License Key:
+1. Log in to your [New Relic account](https://one.newrelic.com/).
+2. Create a New Relic License Key:
     - Click on your user icon in the bottom left corner.
     - Select **API keys** from the menu.
       <Admonition type="tip">
       If you get stuck in New Relic's onboarding screens and don't see a way to proceed, try opening the Logs or Data Explorer pages in a new browser tab. This can sometimes let you access the main New Relic UI and continue with your setup.
       </Admonition>
       ![New Relic API keys page](/docs/guides/new_relic_api_keys.png)
-3.  On the API keys page, create a key of the type `INGEST - LICENSE`. Save the key as you won't be able to view it again.
+3. On the API keys page, create a key of the type `INGEST - LICENSE`. Save the key as you won't be able to view it again.
     ![New Relic API Keys page showing license key types](/docs/guides/new_relic_copy_key.png)
 
-4.  Identify your OTLP endpoint URL. The URL depends on your region.
+4. Identify your OTLP endpoint URL. The URL depends on your region.
     - For US regions, use: `https://otlp.nr-data.net`
     - For EU regions, use: `https://otlp.eu01.nr-data.net`
 
@@ -54,11 +54,11 @@ First, you need the correct credentials from New Relic to send OpenTelemetry dat
 
 Now, you will use the credentials from New Relic to configure the integration in your Neon project.
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) and select your project.
-2.  From the sidebar, go to the **Integrations** page.
-3.  Find the **OpenTelemetry** card and click **Add**.
+1. Navigate to the [Neon Console](https://console.neon.tech) and select your project.
+2. From the sidebar, go to the **Integrations** page.
+3. Find the **OpenTelemetry** card and click **Add**.
     ![Neon Integrations page with OpenTelemetry card](/docs/guides/neon-add-otel.png)
-4.  A sidebar form will open. Fill in the configuration details using the information you gathered from New Relic:
+4. A sidebar form will open. Fill in the configuration details using the information you gathered from New Relic:
     - **Telemetry to export:** Check both **Metrics** and **Postgres logs** to send all available data.
     - **Connection:** Select **HTTP**.
     - **Endpoint:** Paste the OTLP endpoint URL from New Relic.
@@ -79,9 +79,9 @@ Now, you will use the credentials from New Relic to configure the integration in
 
 To confirm that your integration is working:
 
-1.  Go back to your New Relic One platform.
-2.  From the left navigation menu, select **Logs**.
-3.  You should see log data from your Neon project appearing in the log stream. You can use the filter bar to query for your specific service, for example: `service.name: 'neon'`.
+1. Go back to your New Relic One platform.
+2. From the left navigation menu, select **Logs**.
+3. You should see log data from your Neon project appearing in the log stream. You can use the filter bar to query for your specific service, for example: `service.name: 'neon'`.
     <Admonition type="note">
     It may take a few minutes for the first logs and metrics to appear after you enable the integration.
     </Admonition>
@@ -108,20 +108,20 @@ These auto-created service entities can be safely ignored. The correct way to vi
 
 You'll create a new dashboard from scratch to visualize your Neon metrics using the New Relic Query Language (NRQL).
 
-1.  From the left navigation menu in New Relic, select **Dashboards**.
-2.  Click the **Create a dashboard** button.
-3.  Select **Create a new dashboard** option, which starts you with a blank dashboard.
-4.  Give your new dashboard a descriptive name, such as `Neon Project Metrics`, and click **Create**.
+1. From the left navigation menu in New Relic, select **Dashboards**.
+2. Click the **Create a dashboard** button.
+3. Select **Create a new dashboard** option, which starts you with a blank dashboard.
+4. Give your new dashboard a descriptive name, such as `Neon Project Metrics`, and click **Create**.
 
 ### Create your first chart
 
 Add a chart to visualize a specific metric.
 
-1.  On your blank dashboard, click on **+ Add a new chart** button by hovering over the empty space.
+1. On your blank dashboard, click on **+ Add a new chart** button by hovering over the empty space.
     ![New Relic dashboard with Add a new chart button](/docs/guides/newrelic-create-new-chart.png)
-2.  Select **Add a chart**.
-3.  In the query builder, you will use NRQL to select and visualize your metric data.
-4.  To visualize the maximum number of active connections to your Neon database over time, enter the following NRQL query:
+2. Select **Add a chart**.
+3. In the query builder, you will use NRQL to select and visualize your metric data.
+4. To visualize the maximum number of active connections to your Neon database over time, enter the following NRQL query:
 
     ```sql
     FROM Metric SELECT max(neon_connection_counts)
@@ -132,15 +132,15 @@ Add a chart to visualize a specific metric.
 
     This query selects the maximum value of the `neon_connection_counts` metric, which represents the number of active connections to your database, and displays it as a time series over the last 10 minutes with data points every minute.
 
-5.  Click **Run** to see the chart populated with data.
-6.  You can customize the chart's appearance (e.g., line chart, area chart) using the panel on the right. Chose the style that best represents your data.
+5. Click **Run** to see the chart populated with data.
+6. You can customize the chart's appearance (e.g., line chart, area chart) using the panel on the right. Chose the style that best represents your data.
 
     > For example, select the **Line** chart type for a clear view of connection trends over time as shown below.
     > ![New Relic query builder with NRQL example](/docs/guides/newrelic-nrql-example.png)
 
-7.  To view the metric on your dashboard, simply click on **Add to dashboard** on the bottom right of the query builder.
-8.  Your chart will now appear on your dashboard. You can resize and rearrange it as needed.
-9.  To add a title, click the three-dot menu (...) in the chart's corner, select Edit, and enter a descriptive name like **Max Active Connections**. Click **Apply changes** to apply the new title. This menu also allows for other customizations, such as colors and thresholds.
+7. To view the metric on your dashboard, simply click on **Add to dashboard** on the bottom right of the query builder.
+8. Your chart will now appear on your dashboard. You can resize and rearrange it as needed.
+9. To add a title, click the three-dot menu (...) in the chart's corner, select Edit, and enter a descriptive name like **Max Active Connections**. Click **Apply changes** to apply the new title. This menu also allows for other customizations, such as colors and thresholds.
     ![New Relic chart with Edit option](/docs/guides/newrelic-edit-chart.png)
 
     Your final chart should look something like this:
@@ -169,6 +169,7 @@ Here are some example NRQL queries for other useful metrics:
   ```
 
 - **Memory usage (active bytes):**
+
   ```sql
   SELECT max(host_memory_active_bytes) from Metric
   WHERE host_memory_active_bytes is NOT NULL TIMESERIES 1 minute since 10 minutes ago

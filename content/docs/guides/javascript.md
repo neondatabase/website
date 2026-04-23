@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.166Z'
 ---
 
-<CopyPrompt src="/prompts/javascript-prompt.md" 
+<CopyPrompt src="/prompts/javascript-prompt.md"
 description="Pre-built prompt for connecting JavaScript applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Node.js application using popular Postgres clients:
@@ -36,9 +36,9 @@ Your database connection string contains sensitive credentials and must **never*
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your JavaScript application.
 
@@ -46,7 +46,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your Node.js project, create a project directory, initialize it with `npm`, and install the required libraries.
 
-1.  Create a project directory and change into it.
+1. Create a project directory and change into it.
 
     ```bash
     mkdir neon-nodejs-quickstart
@@ -55,13 +55,13 @@ For your Node.js project, create a project directory, initialize it with `npm`, 
 
     > Open the directory in your preferred code editor (for example, VS Code).
 
-2.  Initialize a new Node.js project. The `-y` flag accepts all the default settings.
+2. Initialize a new Node.js project. The `-y` flag accepts all the default settings.
 
     ```bash
     npm init -y
     ```
 
-3.  Install the required libraries using `npm`.
+3. Install the required libraries using `npm`.
 
     <CodeTabs labels={["node-postgres (pg)", "Neon serverless driver", "postgres.js"]}>
 
@@ -79,7 +79,7 @@ For your Node.js project, create a project directory, initialize it with `npm`, 
 
     </CodeTabs>
 
-4.  Open your `package.json` file and add the following line into it:
+4. Open your `package.json` file and add the following line into it:
 
     ```json
     {
@@ -94,14 +94,16 @@ For your Node.js project, create a project directory, initialize it with `npm`, 
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string, keeping your credentials separate from your source code.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
     ![Connection modal](/docs/connect/connection_details.png)
-3.  Select **Node.js** from the connection string dropdown and copy the full connection string.
-4.  Add the connection string to your `.env` file as shown below.
+3. Select **Node.js** from the connection string dropdown and copy the full connection string.
+4. Add the connection string to your `.env` file as shown below.
+
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+
     > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples

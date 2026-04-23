@@ -29,8 +29,8 @@ By the end of this guide, you'll have a CI/CD pipeline where database-dependent 
 
 ## Setting up your Neon database
 
-1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+1. Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
+2. Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
 
     ![Connection modal](/docs/connect/connection_details.png)
 
@@ -99,13 +99,13 @@ Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-pl
 
 The [Neon GitHub integration](/docs/guides/neon-github-integration) securely connects your Neon project to your repository. It automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable in your repository, which are required for your GitHub Actions workflow.
 
-1.  In the Neon Console, navigate to the **Integrations** page for your project.
-2.  Locate the **GitHub** card and click **Add**.
+1. In the Neon Console, navigate to the **Integrations** page for your project.
+2. Locate the **GitHub** card and click **Add**.
     ![GitHub App card](/docs/guides/github_card.png)
-3.  On the **GitHub** drawer, click **Install GitHub App**.
-4.  If you have more than one GitHub account, select the account where you want to install the GitHub app.
-5.  Select the GitHub repository to connect to your Neon project, and click **Connect**.
-6.  **Add Production Database Secret**:
+3. On the **GitHub** drawer, click **Install GitHub App**.
+4. If you have more than one GitHub account, select the account where you want to install the GitHub app.
+5. Select the GitHub repository to connect to your Neon project, and click **Connect**.
+6. **Add Production Database Secret**:
     - Navigate to your GitHub repository's **Settings** > **Secrets and variables** > **Actions**.
     - Create a new repository secret called `DATABASE_URL`.
     - Paste the connection string for your `production` branch (copied from the Neon Console).
@@ -305,13 +305,13 @@ This job runs when a pull request is opened, reopened, or synchronized:
 
 You can test the entire pipeline by making a schema change, updating the UI, and adding a new Playwright test to validate it.
 
-1.  Create a new feature branch in your local repository:
+1. Create a new feature branch in your local repository:
 
     ```bash
     git checkout -b feature/add-created-at
     ```
 
-2.  Modify the database schema in `app/db/schema.ts` to include a `created_at` timestamp:
+2. Modify the database schema in `app/db/schema.ts` to include a `created_at` timestamp:
 
     ```typescript {1,7}
     import { pgTable, text, bigint, boolean, timestamp } from 'drizzle-orm/pg-core';
@@ -324,7 +324,7 @@ You can test the entire pipeline by making a schema change, updating the UI, and
     });
     ```
 
-3.  Update the UI component in `app/todos.tsx` to display the new timestamp:
+3. Update the UI component in `app/todos.tsx` to display the new timestamp:
 
     ```tsx {6,13}
     // app/todos.tsx
@@ -346,7 +346,7 @@ You can test the entire pipeline by making a schema change, updating the UI, and
     </li>;
     ```
 
-4.  Add a new Playwright test in `tests/todos.spec.ts` to verify that the timestamp is displayed:
+4. Add a new Playwright test in `tests/todos.spec.ts` to verify that the timestamp is displayed:
 
     ```typescript
     // tests/todos.spec.ts
@@ -365,7 +365,7 @@ You can test the entire pipeline by making a schema change, updating the UI, and
     });
     ```
 
-5.  Commit your changes and push the branch to GitHub:
+5. Commit your changes and push the branch to GitHub:
 
     ```bash
     git add .
@@ -373,7 +373,7 @@ You can test the entire pipeline by making a schema change, updating the UI, and
     git push origin feature/add-created-at
     ```
 
-6.  Open a pull request on GitHub.
+6. Open a pull request on GitHub.
 
 Once the PR is opened, the GitHub Actions workflow will trigger. You can watch as it creates a new database branch, runs migrations, starts your app, and successfully runs the Playwright tests including the new one you just added. The workflow will post a schema diff comment on the PR, and once merged, it will apply the changes to your production database and clean up the preview branch.
 

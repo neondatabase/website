@@ -58,6 +58,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZXhwIjoxNjgwMDAwMDAwfQ.8Gj_9bJj
    ```
 
 3. The signature verifies the token hasn't been tampered with
+
    ```go
    // Signing the token with our secret
    tokenString, err := token.SignedString([]byte(jwtSecret))
@@ -1062,18 +1063,18 @@ To wire everything up, we need to register our routes with the appropriate middl
 package main
 
 import (
-	"log"
-	"net/http"
-	"os"
-	"time"
+ "log"
+ "net/http"
+ "os"
+ "time"
 
-	"github.com/yourusername/auth-system/auth"
-	"github.com/yourusername/auth-system/db"
-	"github.com/yourusername/auth-system/handlers"
-	"github.com/yourusername/auth-system/middleware"
-	"github.com/yourusername/auth-system/models"
-	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
+ "github.com/yourusername/auth-system/auth"
+ "github.com/yourusername/auth-system/db"
+ "github.com/yourusername/auth-system/handlers"
+ "github.com/yourusername/auth-system/middleware"
+ "github.com/yourusername/auth-system/models"
+ "github.com/gorilla/mux"
+ "github.com/joho/godotenv"
 )
 
 // loadEnv loads environment variables from .env file

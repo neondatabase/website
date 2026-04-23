@@ -18,7 +18,7 @@ updatedOn: '2026-01-13T19:29:46.137Z'
 
 ## Getting started
 
-Simply go to https://www.app.build/ and authenticate, start chatting ti build!
+Simply go to <https://www.app.build/> and authenticate, start chatting ti build!
 
 **Note:** the CLI is now deprecated. `npx @app.build/cli` will give you an error.
 

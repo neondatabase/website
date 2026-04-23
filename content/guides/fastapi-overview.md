@@ -42,10 +42,13 @@ Let's start by creating a new project directory and setting up a virtual environ
 
 3. Activate the virtual environment:
    - On Windows:
+
      ```bash
      venv\Scripts\activate
      ```
+
    - On macOS and Linux:
+
      ```bash
      source venv/bin/activate
      ```
@@ -334,6 +337,7 @@ Let's test this out using `httpie`, a command-line HTTP client:
    ```
 
 6. Retrieve a specific talk:
+
    ```bash
    http http://127.0.0.1:8000/talks/1
    ```

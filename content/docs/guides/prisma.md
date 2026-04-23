@@ -14,7 +14,7 @@ redirectFrom:
 updatedOn: '2026-02-15T20:51:54.189Z'
 ---
 
-<CopyPrompt src="/prompts/prisma-prompt.md" 
+<CopyPrompt src="/prompts/prisma-prompt.md"
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
 
 Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This guide shows you how to connect a Prisma application to Neon using the recommended setup with the Neon serverless driver adapter.

@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:32.948Z'
 ---
 
-<CopyPrompt src="/prompts/django-prompt.md" 
+<CopyPrompt src="/prompts/django-prompt.md"
 description="Pre-built prompt for connecting Django applications to Neon"/>
 
 To connect to Neon from a Django application:
@@ -32,6 +32,7 @@ python3 -m venv venv
 source venv/bin/activate   # macOS / Linux
 # venv\Scripts\activate    # Windows
 ```
+
 </Admonition>
 
 ## Install the PostgreSQL driver

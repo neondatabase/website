@@ -92,9 +92,9 @@ Example output (random part will be fixed):
 
 Using version 7 UUIDs in your database schema can provide several advantages over traditional UUIDs, especially in scenarios where time-based ordering is important. Here are some key benefits:
 
-1.  **Improved Indexing performance:** Because UUIDv7s are time-ordered, new entries are typically inserted towards the end of an index (for example, a B-tree index on a UUIDv7 primary key). This leads to better data locality, reduced page splits, and less index fragmentation compared to random UUIDs (like v4). This can significantly boost insert performance and make range scans more efficient.
-2.  **Natural sortability:** UUIDv7s can be sorted chronologically by their value, which is useful for ordering records by creation time without needing a separate timestamp column for this purpose.
-3.  **Distributed systems friendliness:** Like all UUIDs, v7 can be generated independently across multiple nodes without coordination, ensuring global uniqueness. The time-ordered property adds benefits for distributed databases that might later need to merge or sort data by generation time.
+1. **Improved Indexing performance:** Because UUIDv7s are time-ordered, new entries are typically inserted towards the end of an index (for example, a B-tree index on a UUIDv7 primary key). This leads to better data locality, reduced page splits, and less index fragmentation compared to random UUIDs (like v4). This can significantly boost insert performance and make range scans more efficient.
+2. **Natural sortability:** UUIDv7s can be sorted chronologically by their value, which is useful for ordering records by creation time without needing a separate timestamp column for this purpose.
+3. **Distributed systems friendliness:** Like all UUIDs, v7 can be generated independently across multiple nodes without coordination, ensuring global uniqueness. The time-ordered property adds benefits for distributed databases that might later need to merge or sort data by generation time.
 
 ## Example usage
 

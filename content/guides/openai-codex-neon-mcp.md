@@ -36,9 +36,11 @@ To allow Codex to interact with your Neon database, you'll need to generate a Ne
    > Choose a **project-scoped** API key to restrict Codex's access to this specific project.
 3. Copy the generated API key to your clipboard. You'll need this to authenticate the MCP server.
 4. Set up your project context by running the following command in your terminal:
+
    ```bash
    neon set-context --project-id <your-project-id> --org-id <your-org-id>
    ```
+
    You can find your Neon Project ID and Organization ID in the [Neon Console](https://console.neon.tech/). This step generates a `.neon` file in your project directory, which OpenAI Codex uses to access details about your Neon project when making API calls to the MCP server.
 
 ## Step 2: Configure the Neon MCP server

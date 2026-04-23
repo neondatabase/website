@@ -45,8 +45,8 @@ The interval values are very useful when doing [date](postgresql-date) or time a
 
 ```sql
 SELECT
-	now(),
-	now() - INTERVAL '1 year 3 hours 20 minutes'
+ now(),
+ now() - INTERVAL '1 year 3 hours 20 minutes'
              AS "3 hours 20 minutes ago of last year";
 ```
 

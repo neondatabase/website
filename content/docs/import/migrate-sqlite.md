@@ -51,7 +51,7 @@ When converting a database, SQLite's type affinities are mapped to appropriate P
 
 If you don't have a database to migrate, you can create a sample database for this tutorial. This requires the `sqlite3` command-line tool, typically pre-installed on macOS and Linux.
 
-1.  Create a file named `seed.sql`. This schema defines `authors` and `books` tables, including a `published_date` column stored as `TEXT` to demonstrate type casting.
+1. Create a file named `seed.sql`. This schema defines `authors` and `books` tables, including a `published_date` column stored as `TEXT` to demonstrate type casting.
 
     ```sql title="seed.sql"
     -- Create the authors table
@@ -85,7 +85,7 @@ If you don't have a database to migrate, you can create a sample database for th
     (3, 'Pride and Prejudice', '1813-01-28', 4.7);
     ```
 
-2.  Create the SQLite database `sample_library.db` from the schema file:
+2. Create the SQLite database `sample_library.db` from the schema file:
 
     ```shell
     sqlite3 sample_library.db < seed.sql
@@ -190,8 +190,8 @@ This is quick, but it will create primary key columns as `bigint` rather than `s
 
 For fine-grained control, a `pgloader` load file is the best approach. Here, we'll create a load file that uses the `CAST` clause to:
 
-1.  Convert `INTEGER PRIMARY KEY` columns to `SERIAL`. This makes the Postgres schema cleaner and more idiomatic.
-2.  Cast the `TEXT` `published_date` column to the native `DATE` type in Postgres.
+1. Convert `INTEGER PRIMARY KEY` columns to `SERIAL`. This makes the Postgres schema cleaner and more idiomatic.
+2. Cast the `TEXT` `published_date` column to the native `DATE` type in Postgres.
 
 Create a file named `sqlite_advanced.load` with the following content. Replace the Neon connection string and file path if necessary.
 

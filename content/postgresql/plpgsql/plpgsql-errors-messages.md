@@ -101,7 +101,7 @@ begin
   -- ...
   -- report duplicate email
   raise exception 'duplicate email: %', email
-		using hint = 'check the email again';
+  using hint = 'check the email again';
 end $$;
 ```
 
@@ -116,16 +116,16 @@ The following examples illustrate how to raise an `SQLSTATE` and its correspondi
 ```plsql
 do $$
 begin
-	--...
-	raise sqlstate '77777';
+ --...
+ raise sqlstate '77777';
 end $$;
 ```
 
 ```plsql
 do $$
 begin
-	--...
-	raise invalid_regular_expression;
+ --...
+ raise invalid_regular_expression;
 end $$;
 ```
 

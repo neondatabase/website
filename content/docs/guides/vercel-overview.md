@@ -72,11 +72,11 @@ For automated integrations, follow this simple flow:
 ## Integration options overview
 
 <DetailIconCards>
-<a href="/docs/guides/vercel-managed-integration" title="Vercel-Managed Integration" 
+<a href="/docs/guides/vercel-managed-integration" title="Vercel-Managed Integration"
    description="Create and manage Neon databases directly from your Vercel dashboard. Supports preview branches." icon="vercel">Vercel-Managed Integration</a>
-<a href="/docs/guides/neon-managed-vercel-integration" title="Neon-Managed Integration" 
+<a href="/docs/guides/neon-managed-vercel-integration" title="Neon-Managed Integration"
    description="Link an existing Neon project to Vercel and keep billing in Neon. Supports preview branches." icon="neon">Neon-Managed Integration</a>
-<a href="/docs/guides/vercel-manual" title="Manual Connection" 
+<a href="/docs/guides/vercel-manual" title="Manual Connection"
    description="Connect your Vercel project to a Neon database manually." icon="gear">Manual Connection</a>
 </DetailIconCards>
 

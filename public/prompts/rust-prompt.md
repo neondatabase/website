@@ -5,6 +5,7 @@
 **Purpose:** To install the necessary crates and provide a working Rust script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon.
 
 **Scope:**
+
 - Assumes the user is working within a Rust project created with `cargo new`.
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -19,8 +20,9 @@ When this prompt is triggered, automatically configure the open Rust project as 
 ### 1. Select a Database Driver
 
 First, ask the user to choose their preferred Rust Postgres driver and proceed based on their selection:
-1.  **`postgres`**: A robust synchronous driver.
-2.  **`tokio-postgres`**: A high-performance asynchronous driver for the Tokio runtime.
+
+1. **`postgres`**: A robust synchronous driver.
+2. **`tokio-postgres`**: A high-performance asynchronous driver for the Tokio runtime.
 
 ---
 
@@ -28,11 +30,13 @@ First, ask the user to choose their preferred Rust Postgres driver and proceed b
 
 Based on the user's selection, run the appropriate `cargo add` command. **The `postgres-openssl` and `openssl` crates are mandatory for a secure connection to Neon.**
 
-*   **If `postgres` (sync) is chosen:**
+- **If `postgres` (sync) is chosen:**
+
     ```bash
     cargo add postgres postgres-openssl openssl dotenvy
     ```
-*   **If `tokio-postgres` (async) is chosen:**
+- **If `tokio-postgres` (async) is chosen:**
+
     ```bash
     cargo add tokio --features full
     cargo add tokio-postgres postgres-openssl openssl dotenvy
@@ -45,9 +49,11 @@ Based on the user's selection, run the appropriate `cargo add` command. **The `p
 - Check for the presence of a `.env` file at the root of the project.
 - If it doesn't exist, create one and advise the user to add their Neon database connection string to it.
 - Provide the following format and instruct the user to replace the placeholders:
+
   ```
   DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require"
   ```
+
 - Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
 ---
@@ -60,6 +66,7 @@ Modify the `src/main.rs` file to include code that connects to the database and 
 - **If `src/main.rs` contains any custom user code, preserve it.** Comment out the existing code by wrapping it in a block comment (`/* ... */`) and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new Rust code block (Synchronous or Asynchronous) after the commented section.
 
 #### Option 1: `postgres` (Synchronous)
+
 ```rust title="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -114,6 +121,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 #### Option 2: `tokio-postgres` (Asynchronous)
+
 ```rust title="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -179,18 +187,21 @@ async fn main() -> Result<(), Error> {
 
 Once the setup is complete:
 
-1.  Advise the user to ensure their connection string is correctly set in the `.env` file.
-2.  Instruct them to compile and run the application from their terminal:
+1. Advise the user to ensure their connection string is correctly set in the `.env` file.
+2. Instruct them to compile and run the application from their terminal:
+
     ```bash
     cargo run
     ```
-3.  If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
+
+3. If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - **The `postgres-openssl`, `openssl`, and `dotenvy` crates are always included**, as they are mandatory for secure connections and configuration.
 - A `.env` file is present or has been created.
 - The connection string is loaded from the environment, not hardcoded.

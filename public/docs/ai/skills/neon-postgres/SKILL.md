@@ -15,7 +15,7 @@ The Neon documentation is the source of truth for all Neon-related information. 
 
 Any Neon doc page can be fetched as markdown in two ways:
 
-1. **Append `.md` to the URL** (simplest): https://neon.com/docs/introduction/branching.md
+1. **Append `.md` to the URL** (simplest): <https://neon.com/docs/introduction/branching.md>
 2. **Request `text/markdown`** on the standard URL: `curl -H "Accept: text/markdown" https://neon.com/docs/introduction/branching`
 
 Both return the same markdown content. Use whichever method your tools support.
@@ -28,13 +28,13 @@ The docs index lists every available page with its URL and a short description:
 https://neon.com/docs/llms.txt
 ```
 
-Common doc URLs are organized in the topic links below. If you need a page not listed here, search the docs index: https://neon.com/docs/llms.txt. Don't guess URLs.
+Common doc URLs are organized in the topic links below. If you need a page not listed here, search the docs index: <https://neon.com/docs/llms.txt>. Don't guess URLs.
 
 ## What Is Neon
 
 Use this for architecture explanations and terminology (organizations, projects, branches, endpoints) before giving implementation advice.
 
-Link: https://neon.com/docs/introduction/architecture-overview.md
+Link: <https://neon.com/docs/introduction/architecture-overview.md>
 
 ## Getting Started
 
@@ -67,7 +67,7 @@ If `init` is not suitable, the individual steps can be run non-interactively:
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <agent-name> -y`
 
-For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+For full CLI installation options, see <https://neon.com/docs/reference/cli-install.md>
 
 ### Setup Flow
 
@@ -81,15 +81,15 @@ Use MCP server or CLI to get the connection string. Store it in `.env` as `DATAB
 
 **3. Pick Connection Method & Driver**
 
-Refer to the connection methods guide to pick the correct driver based on deployment platform: https://neon.com/docs/connect/choose-connection.md
+Refer to the connection methods guide to pick the correct driver based on deployment platform: <https://neon.com/docs/connect/choose-connection.md>
 
 **4. User Authentication with Neon Auth (if needed)**
 
-Skip for CLI tools, scripts, or apps without user accounts. If the app needs auth: use MCP server `provision_neon_auth` tool, then see the auth overview (https://neon.com/docs/auth/overview.md) for setup. For auth + database queries, see the JavaScript SDK reference (https://neon.com/docs/reference/javascript-sdk.md).
+Skip for CLI tools, scripts, or apps without user accounts. If the app needs auth: use MCP server `provision_neon_auth` tool, then see the auth overview (<https://neon.com/docs/auth/overview.md>) for setup. For auth + database queries, see the JavaScript SDK reference (<https://neon.com/docs/reference/javascript-sdk.md>).
 
 **5. ORM Setup (optional)**
 
-Check for existing ORM (Prisma, Drizzle, TypeORM). If none, ask if they want one. For Drizzle integration, see https://neon.com/docs/guides/drizzle.md.
+Check for existing ORM (Prisma, Drizzle, TypeORM). If none, ask if they want one. For Drizzle integration, see <https://neon.com/docs/guides/drizzle.md>.
 
 **6. Schema Setup**
 
@@ -108,19 +108,19 @@ Remind users to use environment variables for credentials, never commit connecti
 
 Use this when you need to pick the correct transport and driver based on runtime constraints (TCP, HTTP, WebSocket, edge, serverless, long-running).
 
-Link: https://neon.com/docs/connect/choose-connection.md
+Link: <https://neon.com/docs/connect/choose-connection.md>
 
 ### Serverless Driver
 
 Use this for `@neondatabase/serverless` patterns, including HTTP queries, WebSocket transactions, and runtime-specific optimizations.
 
-Link: https://neon.com/docs/serverless/serverless-driver.md
+Link: <https://neon.com/docs/serverless/serverless-driver.md>
 
 ### Neon JS SDK
 
 Use this for combined Neon Auth + Data API workflows with PostgREST-style querying and typed client setup.
 
-Link: https://neon.com/docs/reference/javascript-sdk.md
+Link: <https://neon.com/docs/reference/javascript-sdk.md>
 
 ## Developer Tools
 
@@ -128,16 +128,16 @@ Use this for local development enablement with `npx -y neonctl@latest init --age
 
 | Tool             | URL                                             |
 | ---------------- | ----------------------------------------------- |
-| CLI Init Command | https://neon.com/docs/reference/cli-init.md     |
-| VSCode Extension | https://neon.com/docs/local/vscode-extension.md |
-| MCP Server       | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI         | https://neon.com/docs/reference/neon-cli.md     |
+| CLI Init Command | <https://neon.com/docs/reference/cli-init.md>     |
+| VSCode Extension | <https://neon.com/docs/local/vscode-extension.md> |
+| MCP Server       | <https://neon.com/docs/ai/neon-mcp-server.md>     |
+| Neon CLI         | <https://neon.com/docs/reference/neon-cli.md>     |
 
 ### Neon CLI
 
 Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.
 
-Link: https://neon.com/docs/reference/neon-cli.md
+Link: <https://neon.com/docs/reference/neon-cli.md>
 
 ## Neon Admin API
 
@@ -147,27 +147,27 @@ The Neon Admin API can be used to manage Neon resources programmatically. It is 
 
 Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
 
-Link: https://neon.com/docs/reference/api-reference.md
+Link: <https://neon.com/docs/reference/api-reference.md>
 
 ### Neon TypeScript SDK
 
 Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
 
-Link: https://neon.com/docs/reference/typescript-sdk.md
+Link: <https://neon.com/docs/reference/typescript-sdk.md>
 
 ### Neon Python SDK
 
 Use this when implementing programmatic Neon management in Python with the `neon-api` package.
 
-Link: https://neon.com/docs/reference/python-sdk.md
+Link: <https://neon.com/docs/reference/python-sdk.md>
 
 ## Neon Auth
 
 Use this for managed user authentication setup, UI components, auth methods, and Neon Auth integration pitfalls in Next.js and React apps.
 
-Link: https://neon.com/docs/auth/overview.md
+Link: <https://neon.com/docs/auth/overview.md>
 
-Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth alone. See https://neon.com/docs/connect/choose-connection.md for more details.
+Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth alone. See <https://neon.com/docs/connect/choose-connection.md> for more details.
 
 ## Branching
 
@@ -179,13 +179,13 @@ Key points:
 - Each branch has its own compute endpoint.
 - Use the neonctl CLI or MCP server to create, inspect, and compare branches.
 
-Link: https://neon.com/docs/introduction/branching.md
+Link: <https://neon.com/docs/introduction/branching.md>
 
 ## Autoscaling
 
 Use this when the user needs compute to scale automatically with workload and wants guidance on CU sizing and runtime behavior.
 
-Link: https://neon.com/docs/introduction/autoscaling.md
+Link: <https://neon.com/docs/introduction/autoscaling.md>
 
 ## Scale to Zero
 
@@ -197,7 +197,7 @@ Key points:
 - First query after suspend typically has a cold-start penalty (around hundreds of ms)
 - Storage remains active while compute is suspended.
 
-Link: https://neon.com/docs/introduction/scale-to-zero.md
+Link: <https://neon.com/docs/introduction/scale-to-zero.md>
 
 ## Instant Restore
 
@@ -209,7 +209,7 @@ Key points:
 - Users can create branches from historical points-in-time.
 - Time Travel queries can be used for historical inspection workflows.
 
-Link: https://neon.com/docs/introduction/branch-restore.md
+Link: <https://neon.com/docs/introduction/branch-restore.md>
 
 ## Read Replicas
 
@@ -221,7 +221,7 @@ Key points:
 - Creation is fast and scaling is independent from primary compute.
 - Typical use cases: analytics, reporting, and read-heavy APIs.
 
-Link: https://neon.com/docs/introduction/read-replicas.md
+Link: <https://neon.com/docs/introduction/read-replicas.md>
 
 ## Connection Pooling
 
@@ -233,13 +233,13 @@ Key points:
 - Add `-pooler` to endpoint hostnames to use pooled connections.
 - Pooling is especially important in serverless runtimes with bursty concurrency.
 
-Link: https://neon.com/docs/connect/connection-pooling.md
+Link: <https://neon.com/docs/connect/connection-pooling.md>
 
 ## IP Allow Lists
 
 Use this when the user needs to restrict database access by trusted networks, IPs, or CIDR ranges.
 
-Link: https://neon.com/docs/introduction/ip-allow.md
+Link: <https://neon.com/docs/introduction/ip-allow.md>
 
 ## Logical Replication
 
@@ -250,4 +250,4 @@ Key points:
 - Neon supports native logical replication workflows.
 - Useful for replicating to/from external Postgres systems.
 
-Link: https://neon.com/docs/guides/logical-replication-guide.md
+Link: <https://neon.com/docs/guides/logical-replication-guide.md>

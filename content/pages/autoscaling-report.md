@@ -96,7 +96,7 @@ Across the entire Neon platform in December 2025, the average production databas
 When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.1/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">50% lower compute costs on Neon</span> on average.
 
 <Admonition title="Why is cost savings less than compute savings?" type="info">
-  Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
+  Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices.
   
   Autoscaling platforms run a distributed system that automatically handles high availability and keeps warm pools of capacity ready for databases that are autoscaling up. This requires additional compute and puts a small price premium on the base CU-hour rate for autoscaling relative to provisioned.
   
@@ -138,7 +138,7 @@ This highlights another weak point of provisioned databases. **You can't buy exa
 
 [Neon read-replicas](/docs/introduction/read-replicas) are different than those in provisioned platforms because they don't replicate or duplicate data. They read from the same storage as the primary compute. This has a few benefits:
 
-<svg viewBox="0 0 900 320" style={{width: '100%', maxWidth: '56rem', margin: '2rem auto'}} xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 900 320" style={{width: '100%', maxWidth: '56rem', margin: '2rem auto'}} xmlns="<http://www.w3.org/2000/svg">>
 <text x="180" y="35" textAnchor="middle" fill="#73bf69" fontFamily="monospace" fontSize="16px" fontWeight="500">NEON</text>
 <rect x="60" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
 <text x="115" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Primary</text>

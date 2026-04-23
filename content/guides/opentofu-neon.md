@@ -39,13 +39,13 @@ This provider is a Terraform provider compatible with OpenTofu. It is not mainta
 
 Before you begin, ensure you have the following:
 
-1.  **OpenTofu CLI installed:** If you don't have OpenTofu installed, download and install it from the [official OpenTofu website](https://opentofu.org/docs/intro/install/).
-2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
-3.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
+1. **OpenTofu CLI installed:** If you don't have OpenTofu installed, download and install it from the [official OpenTofu website](https://opentofu.org/docs/intro/install/).
+2. **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
+3. **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
 ## Set up the OpenTofu Neon provider
 
-1.  **Create a project directory:**
+1. **Create a project directory:**
     Create a new directory for your OpenTofu project and navigate into it.
 
     ```shell
@@ -53,7 +53,7 @@ Before you begin, ensure you have the following:
     cd neon-opentofu-project
     ```
 
-2.  **Create a `main.tf` file:**
+2. **Create a `main.tf` file:**
     This file will contain your OpenTofu configuration. Start by declaring the required Neon provider. OpenTofu can use providers from the tofu registry.
 
     ```terraform
@@ -68,8 +68,9 @@ Before you begin, ensure you have the following:
     provider "neon" {}
     ```
 
-3.  **Initialize OpenTofu:**
+3. **Initialize OpenTofu:**
     Run the `tofu init` command in your project directory. This command downloads and installs the Neon provider.
+
     ```shell
     tofu init
     ```
@@ -78,7 +79,7 @@ Before you begin, ensure you have the following:
 
 The Neon provider needs your Neon API key to manage resources. You can configure it in two ways:
 
-1.  **Directly in the provider block (Less secure):**
+1. **Directly in the provider block (Less secure):**
     For quick testing, you can **hardcode your API key** directly within `provider "neon"` block. However, this method isn't recommended for production environments or shared configurations. A more secure alternative is to retrieve the API key from a secrets management service like [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) or [HashiCorp Vault](https://developer.hashicorp.com/vault), and then update your provider block to reflect this.
 
     ```terraform
@@ -87,7 +88,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
     }
     ```
 
-2.  **Using environment variables:**
+2. **Using environment variables:**
     The provider will automatically use the `NEON_API_KEY` environment variable if set.
 
     ```shell
@@ -383,25 +384,27 @@ For more attributes and options on managing VPC endpoint restrictions, refer to 
 
 Once you have defined your resources:
 
-1.  **Format and validate:**
+1. **Format and validate:**
 
     ```shell
     tofu fmt
     tofu validate
     ```
 
-2.  **Plan:**
+2. **Plan:**
     Run `tofu plan` to see what actions OpenTofu will take.
 
     ```shell
     tofu plan -out=tfplan
     ```
 
-3.  **Apply:**
+3. **Apply:**
     Run `tofu apply` to create the resources in Neon.
+
     ```shell
     tofu apply tfplan
     ```
+
     OpenTofu will ask for confirmation. Type `yes` to confirm.
 
 You have now successfully created and managed Neon resources using OpenTofu! You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
@@ -416,9 +419,9 @@ Both methods involve telling OpenTofu about an existing resource and associating
 
 Ensure your OpenTofu environment is configured for the Neon provider as described previously:
 
-1.  Define the provider in your `main.tf`.
-2.  Run `tofu init`.
-3.  Configure authentication for the Neon provider.
+1. Define the provider in your `main.tf`.
+2. Run `tofu init`.
+3. Configure authentication for the Neon provider.
 
 ### Neon resource IDs for import
 
@@ -445,8 +448,8 @@ Project -> Branch -> Endpoint -> Role -> Database
 
 For each Neon resource you want to import:
 
-1.  **Write a resource block:** Add a corresponding minimal `resource` block to your OpenTofu configuration file (e.g., `main.tf`).
-2.  **Run `tofu import`:** Execute the import command: `tofu import <tofu_resource_address> <neon_resource_id>`.
+1. **Write a resource block:** Add a corresponding minimal `resource` block to your OpenTofu configuration file (e.g., `main.tf`).
+2. **Run `tofu import`:** Execute the import command: `tofu import <tofu_resource_address> <neon_resource_id>`.
 
 #### Example: Importing resources using `tofu import` CLI
 
@@ -538,7 +541,7 @@ All other configurable attributes will be populated into OpenTofu's state file f
 
 #### Run the import commands in order
 
-1.  **Import the project:**
+1. **Import the project:**
 
     ```shell
     tofu import neon_project.my_app_project "actual_project_id_from_neon"
@@ -564,7 +567,7 @@ All other configurable attributes will be populated into OpenTofu's state file f
     your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
-2.  **Import the development branch:**
+2. **Import the development branch:**
 
     ```shell
     tofu import neon_branch.dev_branch "actual_dev_branch_id_from_neon"
@@ -593,7 +596,7 @@ All other configurable attributes will be populated into OpenTofu's state file f
     your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
-3.  **Import the development compute endpoint:**
+3. **Import the development compute endpoint:**
 
     ```shell
     tofu import neon_endpoint.dev_endpoint "actual_dev_endpoint_id_from_neon"
@@ -622,7 +625,7 @@ All other configurable attributes will be populated into OpenTofu's state file f
     your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
-4.  **Import the application user role:**
+4. **Import the application user role:**
 
     ```shell
     tofu import neon_role.app_user "actual_project_id_from_neon/actual_dev_branch_id_from_neon/application_user"
@@ -648,7 +651,7 @@ All other configurable attributes will be populated into OpenTofu's state file f
     your OpenTofu state and will henceforth be managed by OpenTofu.
     ```
 
-5.  **Import the service database:**
+5. **Import the service database:**
 
     ```shell
     tofu import neon_database.service_db "actual_project_id_from_neon/actual_dev_branch_id_from_neon/service_specific_database"
@@ -785,21 +788,21 @@ You need to replace the IDs in the `import` blocks with the actual IDs of your e
 
 After importing your resources using either method, you need to ensure that your HCL configuration accurately reflects the current state of the imported resources. This is an iterative process where you will:
 
-1.  **Run `tofu plan`:**
+1. **Run `tofu plan`:**
 
     ```shell
     tofu plan
     ```
 
-2.  **Understanding the plan output:**
+2. **Understanding the plan output:**
     OpenTofu will compare your HCL `resource` blocks against the detailed state just imported from Neon.
     - The plan will likely propose to **add many attributes** to your HCL blocks. These are the actual current values of your Neon resources.
     - You might see "update in-place" actions, for example, for `neon_endpoint` it might show `+ branch_id = "your-branch-id"`. This is normal as OpenTofu reconciles the explicit configuration (where `branch_id` might be a reference that has now resolved to a concrete ID) with the imported state.
 
-3.  **Update your HCL (`main.tf`):**
+3. **Update your HCL (`main.tf`):**
     Carefully review the `tofu plan` output. Your primary goal is to update your HCL `resource` blocks to accurately match the actual, imported state of your resources, or to define your desired state if you intend to make changes. Copy the relevant attributes and their values from the plan output into your HCL.
 
-4.  **Repeat `tofu plan`:**
+4. **Repeat `tofu plan`:**
     After updating your HCL, run `tofu plan` again. Iterate until `tofu plan` shows "No changes. Your infrastructure matches the configuration." or only shows changes you intentionally want to make.
 
 ### Verify and reconcile

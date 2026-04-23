@@ -24,7 +24,7 @@ Among other things, you can use PgHero to:
 - Explain, analyze, and visualize queries
 
 <Admonition type="note">
-Neon does not currently support monitoring tools or platforms that require installing an agent on the Postgres host system, but please keep an eye on our [roadmap](/docs/introduction/roadmap) for future integrations that enable these monitoring options. 
+Neon does not currently support monitoring tools or platforms that require installing an agent on the Postgres host system, but please keep an eye on our [roadmap](/docs/introduction/roadmap) for future integrations that enable these monitoring options.
 </Admonition>
 
 ## How to install PgHero
@@ -54,6 +54,6 @@ Finally, run this command, replacing `$NEON_DB` with your Neon database connecti
 docker run -ti -e DATABASE_URL='$NEON_DB' -p 8080:8080 ankane/pghero
 ```
 
-Then visit http://localhost:8080 in your browser to open the PgHero Dashboard.
+Then visit <http://localhost:8080> in your browser to open the PgHero Dashboard.
 
 <NeedHelp/>

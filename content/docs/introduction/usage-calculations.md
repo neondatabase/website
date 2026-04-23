@@ -21,8 +21,8 @@ The [consumption history endpoint](https://api-docs.neon.tech/reference/getconsu
 curl "https://console.neon.tech/api/v2/consumption_history/v2/projects?\
 org_id=${ORG_ID}&from=2026-03-01T00:00:00Z&to=2026-04-01T00:00:00Z&\
 granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,\
-child_branch_bytes_month,instant_restore_bytes_month,extra_branches_month,\
-public_network_transfer_bytes,private_network_transfer_bytes&limit=100" \
+child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,\
+extra_branches_month,public_network_transfer_bytes,private_network_transfer_bytes&limit=100" \
   -H "Authorization: Bearer ${NEON_API_KEY}"
 ```
 
@@ -34,7 +34,7 @@ Required parameters: `org_id`, `from`, `to`, `granularity`, `metrics`. Optional:
 Older endpoints (`/consumption_history/account` and `/consumption_history/projects`) return different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
 </Admonition>
 
-## The seven billable metrics
+## The eight billable metrics
 
 | API metric name | What it measures | Raw unit | Billing unit |
 |---|---|---|---|
@@ -42,6 +42,7 @@ Older endpoints (`/consumption_history/account` and `/consumption_history/projec
 | `root_branch_bytes_month` | Storage on root branches | byte-hours | GB-months |
 | `child_branch_bytes_month` | Storage on child branches (delta from parent) | byte-hours | GB-months |
 | `instant_restore_bytes_month` | Instant restore (point-in-time recovery / PITR) history | byte-hours | GB-months |
+| `snapshot_storage_bytes_month` | Storage for branch snapshots (manual and scheduled) | byte-hours | GB-months |
 | `public_network_transfer_bytes` | Outbound (egress) data over the public network | bytes | GB |
 | `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+) | bytes | GB |
 | `extra_branches_month` | All child branches per hour (subtract plan allowance before billing) | branch-hours | branch-months |
@@ -72,6 +73,7 @@ Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs
 | Root storage | GB-months x rate | $0.35/GB-mo | $0.35/GB-mo |
 | Child storage | GB-months x rate | $0.35/GB-mo | $0.35/GB-mo |
 | Instant restore | GB-months x rate | $0.20/GB-mo | $0.20/GB-mo |
+| Snapshot storage | GB-months x rate | $0.09/GB-mo (from May 1, 2026) | $0.09/GB-mo (from May 1, 2026) |
 | Public transfer | max(0, org_total_GB - 100) x rate | $0.10/GB | $0.10/GB |
 | Private transfer | GB x rate | n/a | $0.01/GB |
 | Extra branches | branch-months x rate | $1.50/mo | $1.50/mo |
@@ -192,7 +194,7 @@ The response includes:
 | `data_transfer_bytes` | Data transfer in bytes (combines public and private). Divide by 1000000000 for GB. |
 | `consumption_period_start` | Start of the billing cycle. All consumption fields reset here. |
 
-On paid plans, the [consumption history API](#fetch-your-usage) provides these as separate metrics: `compute_time_seconds` corresponds to `compute_unit_seconds`, `data_storage_bytes_hour` splits into `root_branch_bytes_month`, `child_branch_bytes_month`, and `instant_restore_bytes_month`, and `data_transfer_bytes` splits into `public_network_transfer_bytes` and `private_network_transfer_bytes`.
+On paid plans, the [consumption history API](#fetch-your-usage) provides these as separate metrics: `compute_time_seconds` corresponds to `compute_unit_seconds`, `data_storage_bytes_hour` splits into `root_branch_bytes_month`, `child_branch_bytes_month`, and `instant_restore_bytes_month`, and `data_transfer_bytes` splits into `public_network_transfer_bytes` and `private_network_transfer_bytes`. Snapshot storage appears as `snapshot_storage_bytes_month` on the v2 consumption endpoint.
 
 ### Branch storage
 
@@ -208,4 +210,3 @@ Each branch in the response includes a `logical_size` field (bytes). Sum across 
 ### Free plan limits
 
 See the [Neon Free plan docs](/docs/introduction/plans#free-plan) for current limits. Exceeding them suspends compute or blocks creation. There are no costs on the Free plan.
-

@@ -24,8 +24,8 @@ The Neon Data API is designed to be secure by default. It relies on PostgreSQL's
 
 Securing your data involves two layers:
 
-1.  **Role Privileges (GRANT):** Determining which tables the API is allowed to access.
-2.  **Row-Level Security (RLS):** Determining which specific rows a user is allowed to see.
+1. **Role Privileges (GRANT):** Determining which tables the API is allowed to access.
+2. **Row-Level Security (RLS):** Determining which specific rows a user is allowed to see.
 
 ## API Roles
 
@@ -135,7 +135,7 @@ CREATE TABLE posts (
 
 ### Example workflow
 
-1.  **Enable RLS on the table:**
+1. **Enable RLS on the table:**
 
     ```sql
     ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
@@ -143,7 +143,8 @@ CREATE TABLE posts (
 
     _Once enabled, all access is blocked by default until a policy is created._
 
-2.  **Create a policy:**
+2. **Create a policy:**
+
     ```sql
     CREATE POLICY "User owns data" ON posts
       FOR ALL

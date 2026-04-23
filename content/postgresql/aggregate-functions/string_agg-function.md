@@ -53,7 +53,7 @@ This example uses the `STRING_AGG()` function to return a list of actor’s name
 SELECT
     f.title,
     STRING_AGG (
-	a.first_name || ' ' || a.last_name,
+ a.first_name || ' ' || a.last_name,
         ','
        ORDER BY
         a.first_name,

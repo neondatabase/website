@@ -106,7 +106,7 @@ To test the e-commerce store in action, prepare a build and run the preview serv
 yarn build && yarn serve
 ```
 
-The app should now be running on [localhost:3000](http://localhost:3000). Navigate to http://localhost:3000/products/online-course to view the product display page of **Online Course** product.
+The app should now be running on [localhost:3000](http://localhost:3000). Navigate to <http://localhost:3000/products/online-course> to view the product display page of **Online Course** product.
 
 ![Online course page](/guides/images/payload/906a90a5-a17c-4573-8e45-87b67606f0c6.png)
 

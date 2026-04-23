@@ -42,7 +42,7 @@ do
 $$
 begin
    for counter in 1..5 loop
-	raise notice 'counter: %', counter;
+ raise notice 'counter: %', counter;
    end loop;
 end;
 $$;
@@ -118,11 +118,11 @@ declare
     f record;
 begin
     for f in select title, length
-	       from film
-	       order by length desc, title
-	       limit 10
+        from film
+        order by length desc, title
+        limit 10
     loop
-	raise notice '%(% mins)', f.title, f.length;
+ raise notice '%(% mins)', f.title, f.length;
     end loop;
 end;
 $$
@@ -170,30 +170,30 @@ do $$
 declare
     -- sort by 1: title, 2: release year
     sort_type smallint := 1;
-	-- return the number of films
-	rec_count int := 10;
-	-- use to iterate over the film
-	rec record;
-	-- dynamic query
+ -- return the number of films
+ rec_count int := 10;
+ -- use to iterate over the film
+ rec record;
+ -- dynamic query
     query text;
 begin
 
-	query := 'select title, release_year from film ';
+ query := 'select title, release_year from film ';
 
-	if sort_type = 1 then
-		query := query || 'order by title';
-	elsif sort_type = 2 then
-	  query := query || 'order by release_year';
-	else
-	   raise 'invalid sort type %s', sort_type;
-	end if;
+ if sort_type = 1 then
+  query := query || 'order by title';
+ elsif sort_type = 2 then
+   query := query || 'order by release_year';
+ else
+    raise 'invalid sort type %s', sort_type;
+ end if;
 
-	query := query || ' limit $1';
+ query := query || ' limit $1';
 
-	for rec in execute query using rec_count
+ for rec in execute query using rec_count
         loop
-	     raise notice '% - %', rec.release_year, rec.title;
-	end loop;
+      raise notice '% - %', rec.release_year, rec.title;
+ end loop;
 end;
 $$
 ```

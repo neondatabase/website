@@ -66,7 +66,7 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 
    <Admonition type="tip">
    To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (for example, `NEON_DATABASE_URL`) with your connection string as its value.
-     
+
      ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
 
    Then, in the connection tab, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.

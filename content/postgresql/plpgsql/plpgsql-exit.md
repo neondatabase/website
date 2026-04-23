@@ -77,14 +77,14 @@ begin
   loop
      i = i + 1;
      exit when i > 3;
-	 -- inner loop
-	 j = 0;
+  -- inner loop
+  j = 0;
      <<inner_loop>>
      loop
-		j = j + 1;
-		exit when j > 3;
-		raise notice '(i,j): (%,%)', i, j;
-	 end loop inner_loop;
+  j = j + 1;
+  exit when j > 3;
+  raise notice '(i,j): (%,%)', i, j;
+  end loop inner_loop;
   end loop outer_loop;
 end;
 $$
@@ -127,14 +127,14 @@ begin
   loop
      i = i + 1;
      exit when i > 3;
-	 -- inner loop
-	 j = 0;
+  -- inner loop
+  j = 0;
      <<inner_loop>>
      loop
-		j = j + 1;
-		exit outer_loop when j > 3;
-		raise notice '(i,j): (%,%)', i, j;
-	 end loop inner_loop;
+  j = j + 1;
+  exit outer_loop when j > 3;
+  raise notice '(i,j): (%,%)', i, j;
+  end loop inner_loop;
   end loop outer_loop;
 end;
 $$
@@ -161,9 +161,9 @@ begin
 
   <<simple_block>>
    begin
-  	 exit simple_block;
+    exit simple_block;
          -- for demo purposes
-	 raise notice '%', 'unreachable!';
+  raise notice '%', 'unreachable!';
    end;
    raise notice '%', 'End of block';
 end;

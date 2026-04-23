@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.187Z'
 ---
 
-<CopyPrompt src="/prompts/prisma-prompt.md" 
+<CopyPrompt src="/prompts/prisma-prompt.md"
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
 
 This tutorial walks you through building a Node.js application with Prisma ORM and Neon, focusing on how to create and apply schema migrations. You'll build a simple book catalog API while learning the migration workflow.

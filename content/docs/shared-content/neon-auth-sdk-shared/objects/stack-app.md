@@ -82,6 +82,7 @@ In React apps, use `"cookie"` to store tokens in browser cookies.
 - `"memory"`: Uses in-memory storage (both React and Next.js)
 - `{ accessToken: string, refreshToken: string }`: Uses provided tokens (both React and Next.js)
 - `Request`: Uses the provided request object (server-side only)
+
 </details>
 
 #### baseUrl

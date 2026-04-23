@@ -106,22 +106,22 @@ DECLARE
     p_employee_id INT;
 BEGIN
     IF TG_OP = 'INSERT' THEN
-	-- insert a new employee
+ -- insert a new employee
         INSERT INTO employees(name)
         VALUES (NEW.name)
-	RETURNING employee_id INTO p_employee_id;
+ RETURNING employee_id INTO p_employee_id;
 
-	-- insert salary for the employee
+ -- insert salary for the employee
         INSERT INTO salaries(employee_id, effective_date, salary)
-	VALUES (p_employee_id, NEW.effective_date, NEW.salary);
+ VALUES (p_employee_id, NEW.effective_date, NEW.salary);
     ELSIF TG_OP = 'UPDATE' THEN
         UPDATE salaries
-	SET salary = NEW.salary
-	WHERE employee_id = NEW.employee_id;
+ SET salary = NEW.salary
+ WHERE employee_id = NEW.employee_id;
 
     ELSIF TG_OP = 'DELETE' THEN
         DELETE FROM employees
-	WHERE employee_id = OLD.employee_id;
+ WHERE employee_id = OLD.employee_id;
     END IF;
     RETURN NULL;
 END;

@@ -398,14 +398,14 @@ createAuthClient();
 
 | Topic                | URL                                                               |
 | -------------------- | ----------------------------------------------------------------- |
-| Auth Overview        | https://neon.com/docs/auth/overview.md                            |
-| Next.js quick start  | https://neon.com/docs/auth/quick-start/nextjs-api-only.md         |
-| React quick start    | https://neon.com/docs/auth/quick-start/react.md                   |
-| TanStack Router      | https://neon.com/docs/auth/quick-start/tanstack-router.md         |
-| Server SDK Reference | https://neon.com/docs/auth/reference/nextjs-server.md             |
-| UI Components Ref    | https://neon.com/docs/auth/reference/ui-components.md             |
-| Client SDK Reference | https://neon.com/docs/reference/javascript-sdk.md                 |
-| v0.1 Migration Guide | https://neon.com/docs/auth/migrate/from-auth-v0.1.md              |
-| OAuth Setup          | https://neon.com/docs/auth/guides/setup-oauth.md                  |
-| Email Verification   | https://neon.com/docs/auth/guides/email-verification.md           |
-| Branching Auth       | https://neon.com/docs/auth/branching-authentication.md            |
+| Auth Overview        | <https://neon.com/docs/auth/overview.md>                            |
+| Next.js quick start  | <https://neon.com/docs/auth/quick-start/nextjs-api-only.md>         |
+| React quick start    | <https://neon.com/docs/auth/quick-start/react.md>                   |
+| TanStack Router      | <https://neon.com/docs/auth/quick-start/tanstack-router.md>         |
+| Server SDK Reference | <https://neon.com/docs/auth/reference/nextjs-server.md>             |
+| UI Components Ref    | <https://neon.com/docs/auth/reference/ui-components.md>             |
+| Client SDK Reference | <https://neon.com/docs/reference/javascript-sdk.md>                 |
+| v0.1 Migration Guide | <https://neon.com/docs/auth/migrate/from-auth-v0.1.md>              |
+| OAuth Setup          | <https://neon.com/docs/auth/guides/setup-oauth.md>                  |
+| Email Verification   | <https://neon.com/docs/auth/guides/email-verification.md>           |
+| Branching Auth       | <https://neon.com/docs/auth/branching-authentication.md>            |

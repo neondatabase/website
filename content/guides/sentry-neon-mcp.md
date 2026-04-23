@@ -59,6 +59,7 @@ The Sentry MCP server allows your AI agent to access stack traces, error details
 
 1. In the root of your project, create a new file named `.cursor/mcp.json` (if it doesn’t already exist).
 2. Open the file and add the following configuration to connect to Sentry’s MCP server:
+
    ```json
    {
      "mcpServers": {
@@ -68,6 +69,7 @@ The Sentry MCP server allows your AI agent to access stack traces, error details
      }
    }
    ```
+
 3. Save the file.
 4. In Cursor, go to **Settings > Tools & MCPs** and enable the Sentry MCP server. You may be asked to authenticate with Sentry to grant Cursor access to your projects. Complete the authentication flow.
 

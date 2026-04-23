@@ -11,7 +11,7 @@ redirectFrom:
 updatedOn: '2026-02-15T20:51:54.157Z'
 ---
 
-<CopyPrompt src="/prompts/golang-prompt.md" 
+<CopyPrompt src="/prompts/golang-prompt.md"
 description="Pre-built prompt for connecting Go applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
@@ -33,9 +33,9 @@ The latest version of `pgx/v5` (v5.9.1+) requires Go 1.25. If you are using an o
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Go application.
 
@@ -43,7 +43,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your Go project, create a project directory, initialize a Go module, and add the required libraries.
 
-1.  Create a project directory and change into it.
+1. Create a project directory and change into it.
 
     ```bash
     mkdir neon-go-quickstart
@@ -52,13 +52,13 @@ For your Go project, create a project directory, initialize a Go module, and add
 
     > Open the directory in your preferred code editor (for example, VS Code, GoLand).
 
-2.  Initialize a Go module. This command creates a `go.mod` file to track your project's dependencies.
+2. Initialize a Go module. This command creates a `go.mod` file to track your project's dependencies.
 
     ```bash
     go mod init neon-go-quickstart
     ```
 
-3.  Add the required Go packages using `go get`.
+3. Add the required Go packages using `go get`.
     - `pgx/v5`: The database driver for connecting to Postgres.
     - `godotenv`: A helper library to manage environment variables from a `.env` file.
 
@@ -72,14 +72,16 @@ For your Go project, create a project directory, initialize a Go module, and add
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
     ![Connection modal](/docs/connect/connection_details.png)
-3.  Copy the connection string, which includes your password.
-4.  Add the connection string to your `.env` file as shown below.
+3. Copy the connection string, which includes your password.
+4. Add the connection string to your `.env` file as shown below.
+
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+
     > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Examples
@@ -94,51 +96,51 @@ In your project directory, create a file named `create_table.go`. This script co
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
+ "context"
+ "fmt"
+ "os"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
+ "github.com/jackc/pgx/v5"
+ "github.com/joho/godotenv"
 )
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+ // Load environment variables from .env file
+ err := godotenv.Load()
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+  os.Exit(1)
+ }
 
-	// Get the connection string from the environment variable
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
+ // Get the connection string from the environment variable
+ connString := os.Getenv("DATABASE_URL")
+ if connString == "" {
+  fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+  os.Exit(1)
+ }
 
-	ctx := context.Background()
+ ctx := context.Background()
 
-	// Connect to the database
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
+ // Connect to the database
+ conn, err := pgx.Connect(ctx, connString)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+  os.Exit(1)
+ }
+ defer conn.Close(ctx)
 
-	fmt.Println("Connection established")
+ fmt.Println("Connection established")
 
-	// Drop the table if it already exists
-	_, err = conn.Exec(ctx, "DROP TABLE IF EXISTS books;")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to drop table: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Finished dropping table (if it existed).")
+ // Drop the table if it already exists
+ _, err = conn.Exec(ctx, "DROP TABLE IF EXISTS books;")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to drop table: %v\n", err)
+  os.Exit(1)
+ }
+ fmt.Println("Finished dropping table (if it existed).")
 
-	// Create a new table
-	_, err = conn.Exec(ctx, `
+ // Create a new table
+ _, err = conn.Exec(ctx, `
         CREATE TABLE books (
             id SERIAL PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
@@ -147,42 +149,42 @@ func main() {
             in_stock BOOLEAN DEFAULT TRUE
         );
     `)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to create table: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Finished creating table.")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to create table: %v\n", err)
+  os.Exit(1)
+ }
+ fmt.Println("Finished creating table.")
 
-	// Insert a single book record
-	_, err = conn.Exec(ctx,
-		"INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
-		"The Catcher in the Rye", "J.D. Salinger", 1951, true,
-	)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to insert single row: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Inserted a single book.")
+ // Insert a single book record
+ _, err = conn.Exec(ctx,
+  "INSERT INTO books (title, author, publication_year, in_stock) VALUES ($1, $2, $3, $4);",
+  "The Catcher in the Rye", "J.D. Salinger", 1951, true,
+ )
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to insert single row: %v\n", err)
+  os.Exit(1)
+ }
+ fmt.Println("Inserted a single book.")
 
-	// Data to be inserted
-	booksToInsert := [][]interface{}{
-		{"The Hobbit", "J.R.R. Tolkien", 1937, true},
-		{"1984", "George Orwell", 1949, true},
-		{"Dune", "Frank Herbert", 1965, false},
-	}
+ // Data to be inserted
+ booksToInsert := [][]interface{}{
+  {"The Hobbit", "J.R.R. Tolkien", 1937, true},
+  {"1984", "George Orwell", 1949, true},
+  {"Dune", "Frank Herbert", 1965, false},
+ }
 
-	// Use CopyFrom for efficient bulk insertion
-	copyCount, err := conn.CopyFrom(
-		ctx,
-		pgx.Identifier{"books"},
-		[]string{"title", "author", "publication_year", "in_stock"},
-		pgx.CopyFromRows(booksToInsert),
-	)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to copy rows: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Printf("Inserted %d rows of data.\n", copyCount)
+ // Use CopyFrom for efficient bulk insertion
+ copyCount, err := conn.CopyFrom(
+  ctx,
+  pgx.Identifier{"books"},
+  []string{"title", "author", "publication_year", "in_stock"},
+  pgx.CopyFromRows(booksToInsert),
+ )
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to copy rows: %v\n", err)
+  os.Exit(1)
+ }
+ fmt.Printf("Inserted %d rows of data.\n", copyCount)
 }
 ```
 
@@ -218,64 +220,64 @@ In your project directory, create a file named `read_data.go`. This script conne
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
+ "context"
+ "fmt"
+ "os"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
+ "github.com/jackc/pgx/v5"
+ "github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+ err := godotenv.Load()
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+  os.Exit(1)
+ }
 
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
+ connString := os.Getenv("DATABASE_URL")
+ if connString == "" {
+  fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+  os.Exit(1)
+ }
 
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
+ ctx := context.Background()
+ conn, err := pgx.Connect(ctx, connString)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+  os.Exit(1)
+ }
+ defer conn.Close(ctx)
+ fmt.Println("Connection established")
 
-	// Fetch all rows from the books table
-	rows, err := conn.Query(ctx, "SELECT * FROM books ORDER BY publication_year;")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Query failed: %v\n", err)
-		os.Exit(1)
-	}
-	defer rows.Close()
+ // Fetch all rows from the books table
+ rows, err := conn.Query(ctx, "SELECT * FROM books ORDER BY publication_year;")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Query failed: %v\n", err)
+  os.Exit(1)
+ }
+ defer rows.Close()
 
-	fmt.Println("\n--- Book Library ---")
-	for rows.Next() {
-		var id, publicationYear int
-		var title, author string
-		var inStock bool
+ fmt.Println("\n--- Book Library ---")
+ for rows.Next() {
+  var id, publicationYear int
+  var title, author string
+  var inStock bool
 
-		err := rows.Scan(&id, &title, &author, &publicationYear, &inStock)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to scan row: %v\n", err)
-			os.Exit(1)
-		}
-		fmt.Printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %t\n",
-			id, title, author, publicationYear, inStock)
-	}
-	fmt.Println("--------------------\n")
+  err := rows.Scan(&id, &title, &author, &publicationYear, &inStock)
+  if err != nil {
+   fmt.Fprintf(os.Stderr, "Failed to scan row: %v\n", err)
+   os.Exit(1)
+  }
+  fmt.Printf("ID: %d, Title: %s, Author: %s, Year: %d, In Stock: %t\n",
+   id, title, author, publicationYear, inStock)
+ }
+ fmt.Println("--------------------\n")
 
-	if err := rows.Err(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error during rows iteration: %v\n", err)
-		os.Exit(1)
-	}
+ if err := rows.Err(); err != nil {
+  fmt.Fprintf(os.Stderr, "Error during rows iteration: %v\n", err)
+  os.Exit(1)
+ }
 }
 ```
 
@@ -315,44 +317,44 @@ In your project directory, create a file named `update_data.go`. This script con
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
+ "context"
+ "fmt"
+ "os"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
+ "github.com/jackc/pgx/v5"
+ "github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+ err := godotenv.Load()
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+  os.Exit(1)
+ }
 
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
+ connString := os.Getenv("DATABASE_URL")
+ if connString == "" {
+  fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+  os.Exit(1)
+ }
 
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
+ ctx := context.Background()
+ conn, err := pgx.Connect(ctx, connString)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+  os.Exit(1)
+ }
+ defer conn.Close(ctx)
+ fmt.Println("Connection established")
 
-	// Update a data row in the table
-	_, err = conn.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2;", true, "Dune")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
-		os.Exit(1)
-	}
+ // Update a data row in the table
+ _, err = conn.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2;", true, "Dune")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
+  os.Exit(1)
+ }
 
-	fmt.Println("Updated stock status for 'Dune'.")
+ fmt.Println("Updated stock status for 'Dune'.")
 }
 ```
 
@@ -393,43 +395,43 @@ In your project directory, create a file named `delete_data.go`. This script con
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
+ "context"
+ "fmt"
+ "os"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
+ "github.com/jackc/pgx/v5"
+ "github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+ err := godotenv.Load()
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+  os.Exit(1)
+ }
 
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
+ connString := os.Getenv("DATABASE_URL")
+ if connString == "" {
+  fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+  os.Exit(1)
+ }
 
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
-	fmt.Println("Connection established")
+ ctx := context.Background()
+ conn, err := pgx.Connect(ctx, connString)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+  os.Exit(1)
+ }
+ defer conn.Close(ctx)
+ fmt.Println("Connection established")
 
-	// Delete a data row from the table
-	_, err = conn.Exec(ctx, "DELETE FROM books WHERE title = $1;", "1984")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Delete failed: %v\n", err)
-		os.Exit(1)
-	}
-	fmt.Println("Deleted the book '1984' from the table.")
+ // Delete a data row from the table
+ _, err = conn.Exec(ctx, "DELETE FROM books WHERE title = $1;", "1984")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Delete failed: %v\n", err)
+  os.Exit(1)
+ }
+ fmt.Println("Deleted the book '1984' from the table.")
 }
 ```
 
@@ -469,65 +471,65 @@ The examples above execute each operation independently. For production code whe
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
+ "context"
+ "fmt"
+ "os"
 
-	"github.com/jackc/pgx/v5"
-	"github.com/joho/godotenv"
+ "github.com/jackc/pgx/v5"
+ "github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
-		os.Exit(1)
-	}
+ err := godotenv.Load()
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Error loading .env file: %v\n", err)
+  os.Exit(1)
+ }
 
-	connString := os.Getenv("DATABASE_URL")
-	if connString == "" {
-		fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
-		os.Exit(1)
-	}
+ connString := os.Getenv("DATABASE_URL")
+ if connString == "" {
+  fmt.Fprintf(os.Stderr, "DATABASE_URL not set\n")
+  os.Exit(1)
+ }
 
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, connString)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
-	defer conn.Close(ctx)
+ ctx := context.Background()
+ conn, err := pgx.Connect(ctx, connString)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+  os.Exit(1)
+ }
+ defer conn.Close(ctx)
 
-	// Begin a transaction
-	tx, err := conn.Begin(ctx)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to begin transaction: %v\n", err)
-		os.Exit(1)
-	}
-	// Defer a rollback in case anything fails. If the transaction
-	// is committed successfully, the rollback is a no-op.
-	defer tx.Rollback(ctx)
+ // Begin a transaction
+ tx, err := conn.Begin(ctx)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Failed to begin transaction: %v\n", err)
+  os.Exit(1)
+ }
+ // Defer a rollback in case anything fails. If the transaction
+ // is committed successfully, the rollback is a no-op.
+ defer tx.Rollback(ctx)
 
-	// All operations use the tx object, not conn
-	_, err = tx.Exec(ctx, "INSERT INTO books (title, author, publication_year) VALUES ($1, $2, $3)", "Brave New World", "Aldous Huxley", 1932)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Insert failed: %v\n", err)
-		os.Exit(1)
-	}
+ // All operations use the tx object, not conn
+ _, err = tx.Exec(ctx, "INSERT INTO books (title, author, publication_year) VALUES ($1, $2, $3)", "Brave New World", "Aldous Huxley", 1932)
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Insert failed: %v\n", err)
+  os.Exit(1)
+ }
 
-	_, err = tx.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2", false, "Brave New World")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
-		os.Exit(1)
-	}
+ _, err = tx.Exec(ctx, "UPDATE books SET in_stock = $1 WHERE title = $2", false, "Brave New World")
+ if err != nil {
+  fmt.Fprintf(os.Stderr, "Update failed: %v\n", err)
+  os.Exit(1)
+ }
 
-	// Commit the transaction
-	if err := tx.Commit(ctx); err != nil {
-		fmt.Fprintf(os.Stderr, "Commit failed: %v\n", err)
-		os.Exit(1)
-	}
+ // Commit the transaction
+ if err := tx.Commit(ctx); err != nil {
+  fmt.Fprintf(os.Stderr, "Commit failed: %v\n", err)
+  os.Exit(1)
+ }
 
-	fmt.Println("Transaction committed successfully.")
+ fmt.Println("Transaction committed successfully.")
 }
 ```
 

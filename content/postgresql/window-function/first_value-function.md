@@ -101,11 +101,11 @@ This statement uses the `FIRST_VALUE()` function to return all products grouped 
 SELECT
     product_id,
     product_name,
-	group_id,
+ group_id,
     price,
     FIRST_VALUE(product_name)
     OVER(
-	PARTITION BY group_id
+ PARTITION BY group_id
         ORDER BY price
         RANGE BETWEEN
             UNBOUNDED PRECEDING AND

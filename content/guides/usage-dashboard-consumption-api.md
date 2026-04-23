@@ -39,7 +39,7 @@ The Consumption API provides a variety of metrics that will help you understand 
 
 To get a quick look at your consumption data, you can use the following `curl` command. This will fetch your usage metrics for the last month, aggregated daily.
 
-1.  **Set environment variables:**
+1. **Set environment variables:**
 
     ```bash
     export NEON_API_KEY=your_api_key_here
@@ -48,7 +48,7 @@ To get a quick look at your consumption data, you can use the following `curl` c
 
     > Replace `your_api_key_here` and `your_org_id_here` with your actual Neon API Key and Organization ID.
 
-2.  **Run the request:**
+2. **Run the request:**
 
     Run the following command to fetch your consumption data for the last month. This will give you a comprehensive view of all the metrics available.
 
@@ -146,14 +146,14 @@ In this guide, you will build a dashboard using daily granularity to visualize t
 
 Create a new Next.js project and install the necessary dependencies:
 
-1.  **Initialize the app:**
+1. **Initialize the app:**
 
     ```bash
     npx create-next-app@latest neon-dashboard --yes
     cd neon-dashboard
     ```
 
-2.  **Initialize shadcn/ui:**
+2. **Initialize shadcn/ui:**
 
     ```bash
     npx shadcn@latest init
@@ -161,14 +161,14 @@ Create a new Next.js project and install the necessary dependencies:
 
     Follow the prompts to set up your shadcn/ui configuration.
 
-3.  **Install components:**
+3. **Install components:**
     You will need `Card` for the summary metrics and `Chart` for visualizing trends.
 
     ```bash
     npx shadcn@latest add card chart
     ```
 
-4.  **Install dependencies:**
+4. **Install dependencies:**
     Install `date-fns` for date manipulation and `lucide-react` for icons.
 
     ```bash
@@ -381,9 +381,9 @@ This server action calls `getNeonUsage` with the selected project IDs. When the 
 
 Now that you have the data fetching logic and server action in place, you can create a dashboard component to visualize this data. The dashboard will consist of:
 
-1.  **Project Filter:** A multi-select dropdown to scope usage data to specific projects.
-2.  **Summary Cards:** To show total usage for the period.
-3.  **Chart:** To visualize the daily compute trend.
+1. **Project Filter:** A multi-select dropdown to scope usage data to specific projects.
+2. **Summary Cards:** To show total usage for the period.
+3. **Chart:** To visualize the daily compute trend.
 
 Create `components/usage-dashboard.tsx`:
 
@@ -683,13 +683,13 @@ export default async function DashboardPage() {
 
 ## Run the application
 
-1.  Start the Next.js development server:
+1. Start the Next.js development server:
 
     ```bash
     npm run dev
     ```
 
-2.  Open `http://localhost:3000` in your browser to see your Neon usage dashboard in action.
+2. Open `http://localhost:3000` in your browser to see your Neon usage dashboard in action.
     ![Example Neon Usage Dashboard Consumption API](/docs/guides/neon-usage-dashboard-consumption-api.png)
 
 You should see a summary of your total compute time, average storage usage, data transfer, and peak extra branches, along with a bar chart showing your daily compute usage over the last month. Use the project filter dropdown to scope the dashboard to specific projects.

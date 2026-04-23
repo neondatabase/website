@@ -74,7 +74,7 @@ To connect your Vercel project to your Neon database:
    Now, with each commit to a branch in your application's GitHub repository, preview deployments will be created with their own isolated database branch. You can follow the steps in the next section to test the setup.
 
    <Admonition type="tip">
-   To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches). 
+   To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches).
    </Admonition>
 
 ## Testing the database branching setup

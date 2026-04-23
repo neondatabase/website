@@ -24,16 +24,16 @@ First, [create two tables](postgresql-tutorial/postgresql-create-table) named `p
 
 ```sql
 CREATE TABLE product_groups (
-	group_id serial PRIMARY KEY,
-	group_name VARCHAR (255) NOT NULL
+ group_id serial PRIMARY KEY,
+ group_name VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE products (
-	product_id serial PRIMARY KEY,
-	product_name VARCHAR (255) NOT NULL,
-	price DECIMAL (11, 2),
-	group_id INT NOT NULL,
-	FOREIGN KEY (group_id) REFERENCES product_groups (group_id)
+ product_id serial PRIMARY KEY,
+ product_name VARCHAR (255) NOT NULL,
+ price DECIMAL (11, 2),
+ group_id INT NOT NULL,
+ FOREIGN KEY (group_id) REFERENCES product_groups (group_id)
 );
 ```
 
@@ -42,23 +42,23 @@ Second, [insert](postgresql-tutorial/postgresql-insert) some rows into these tab
 ```sql
 INSERT INTO product_groups (group_name)
 VALUES
-	('Smartphone'),
-	('Laptop'),
-	('Tablet');
+ ('Smartphone'),
+ ('Laptop'),
+ ('Tablet');
 
 INSERT INTO products (product_name, group_id,price)
 VALUES
-	('Microsoft Lumia', 1, 200),
-	('HTC One', 1, 400),
-	('Nexus', 1, 500),
-	('iPhone', 1, 900),
-	('HP Elite', 2, 1200),
-	('Lenovo Thinkpad', 2, 700),
-	('Sony VAIO', 2, 700),
-	('Dell Vostro', 2, 800),
-	('iPad', 3, 700),
-	('Kindle Fire', 3, 150),
-	('Samsung Galaxy Tab', 3, 200);
+ ('Microsoft Lumia', 1, 200),
+ ('HTC One', 1, 400),
+ ('Nexus', 1, 500),
+ ('iPhone', 1, 900),
+ ('HP Elite', 2, 1200),
+ ('Lenovo Thinkpad', 2, 700),
+ ('Sony VAIO', 2, 700),
+ ('Dell Vostro', 2, 800),
+ ('iPad', 3, 700),
+ ('Kindle Fire', 3, 150),
+ ('Samsung Galaxy Tab', 3, 200);
 ```
 
 ![](/postgresqltutorial/products-table-sample-data.png)
@@ -73,9 +73,9 @@ The following example uses the [`AVG()`](postgresql-aggregate-functions/postgres
 
 ```sql
 SELECT
-	AVG (price)
+ AVG (price)
 FROM
-	products;
+ products;
 
 ```
 
@@ -84,13 +84,13 @@ To apply the aggregate function to subsets of rows, you use the [`GROUP BY`](pos
 
 ```sql
 SELECT
-	group_name,
-	AVG (price)
+ group_name,
+ AVG (price)
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id)
 GROUP BY
-	group_name;
+ group_name;
 ```
 
 ![PostgreSQL Window Function - AVG function with GROUP BY](/postgresqltutorial/PostgreSQL-Window-Function-AVG-function-with-GROUP-BY.png)
@@ -104,16 +104,16 @@ For instance, the following query returns the product name, the price, product g
 
 ```sql
 SELECT
-	product_name,
-	price,
-	group_name,
-	AVG (price) OVER (
-	   PARTITION BY group_name
-	)
+ product_name,
+ price,
+ group_name,
+ AVG (price) OVER (
+    PARTITION BY group_name
+ )
 FROM
-	products
-	INNER JOIN
-		product_groups USING (group_id);
+ products
+ INNER JOIN
+  product_groups USING (group_id);
 ```
 
 ![](/postgresqltutorial/PostgreSQL-Window-Function-AVG-window-function.png)
@@ -216,16 +216,16 @@ The `ROW_NUMBER()` function assigns a sequential number to each row in each part
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	ROW_NUMBER () OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	)
+ product_name,
+ group_name,
+ price,
+ ROW_NUMBER () OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ )
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -236,16 +236,16 @@ See the following query:
 
 ```sql
 SELECT
-	product_name,
-	group_name,
+ product_name,
+ group_name,
   price,
-	RANK () OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	)
+ RANK () OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ )
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -256,16 +256,16 @@ Similar to the `RANK()` function, the [`DENSE_RANK()`](postgresql-window-functio
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	DENSE_RANK () OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	)
+ product_name,
+ group_name,
+ price,
+ DENSE_RANK () OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ )
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -280,16 +280,16 @@ The following statement uses the `FIRST_VALUE()` to return the lowest price for 
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	FIRST_VALUE (price) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	) AS lowest_price_per_group
+ product_name,
+ group_name,
+ price,
+ FIRST_VALUE (price) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ ) AS lowest_price_per_group
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -298,17 +298,17 @@ The following statement uses the `LAST_VALUE()` function to return the highest p
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	LAST_VALUE (price) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price RANGE BETWEEN UNBOUNDED PRECEDING
-		AND UNBOUNDED FOLLOWING
-	) AS highest_price_per_group
+ product_name,
+ group_name,
+ price,
+ LAST_VALUE (price) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price RANGE BETWEEN UNBOUNDED PRECEDING
+  AND UNBOUNDED FOLLOWING
+ ) AS highest_price_per_group
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -336,21 +336,21 @@ The following statement uses the `LAG()` function to return the prices from the 
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	LAG (price, 1) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	) AS prev_price,
-	price - LAG (price, 1) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	) AS cur_prev_diff
+ product_name,
+ group_name,
+ price,
+ LAG (price, 1) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ ) AS prev_price,
+ price - LAG (price, 1) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ ) AS cur_prev_diff
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 
@@ -359,21 +359,21 @@ The following statement uses the `LEAD()` function to return the prices from the
 
 ```sql
 SELECT
-	product_name,
-	group_name,
-	price,
-	LEAD (price, 1) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	) AS next_price,
-	price - LEAD (price, 1) OVER (
-		PARTITION BY group_name
-		ORDER BY
-			price
-	) AS cur_next_diff
+ product_name,
+ group_name,
+ price,
+ LEAD (price, 1) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ ) AS next_price,
+ price - LEAD (price, 1) OVER (
+  PARTITION BY group_name
+  ORDER BY
+   price
+ ) AS cur_next_diff
 FROM
-	products
+ products
 INNER JOIN product_groups USING (group_id);
 ```
 

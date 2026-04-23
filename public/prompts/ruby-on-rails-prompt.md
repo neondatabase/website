@@ -5,6 +5,7 @@
 **Purpose:** To install and configure the necessary gems, create a `.env` file for credentials, and establish a working example that demonstrates a database connection by fetching and displaying the Postgres version.
 
 **Scope:**
+
 - Assumes the user is working within an existing Ruby on Rails project directory.
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -16,6 +17,7 @@
 
 - This prompt must be run inside an existing Ruby on Rails project directory.
 - The project must be configured to use PostgreSQL. If the user is creating a new project run the following command:
+
   ```bash
   rails new your_app_name --database=postgresql
   ```
@@ -28,31 +30,37 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
 
 ### 1. Verify Project Dependencies
 
-1.  Open the `Gemfile` in the project root.
-2.  Ensure the `pg` gem is present and uncommented. If it is missing, add it:
+1. Open the `Gemfile` in the project root.
+2. Ensure the `pg` gem is present and uncommented. If it is missing, add it:
+
     ```ruby
     gem "pg"
     ```
-3.  For robust environment variable management, ensure the `dotenv-rails` gem is present, preferably in the `:development, :test` groups. If it is missing, add it:
+
+3. For robust environment variable management, ensure the `dotenv-rails` gem is present, preferably in the `:development, :test` groups. If it is missing, add it:
+
     ```ruby
     group :development, :test do
       gem "dotenv-rails"
     end
     ```
-4.  Run `bundle install` in the terminal to install any added gems.
+
+4. Run `bundle install` in the terminal to install any added gems.
 
 ---
 
 ### 2. Configure the Environment for Neon
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following line to the `.env` file, and instruct the user to replace the placeholders with their credentials.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the following line to the `.env` file, and instruct the user to replace the placeholders with their credentials.
     - **Crucially, the connection string must end with a `/` and should not include a specific database name.** Rails will manage the database name (`_development`, `_test`) automatically based on the environment. Inform this clearly to the user when you prompt them.
+
     ```
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/"
     ```
-3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
-4.  Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
+
+3. Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
+4. Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
 
 ---
 
@@ -60,7 +68,8 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
 
 To avoid potential naming collisions with generators, directly create or overwrite the necessary files.
 
-1.  **Ensure the controller exists with the correct content.** Create or replace the file at `app/controllers/home_controller.rb`:
+1. **Ensure the controller exists with the correct content.** Create or replace the file at `app/controllers/home_controller.rb`:
+
     ```ruby title="app/controllers/home_controller.rb"
     class HomeController < ApplicationController
       def index
@@ -68,7 +77,9 @@ To avoid potential naming collisions with generators, directly create or overwri
       end
     end
     ```
-2.  **Ensure the view exists with the correct content.** Create or replace the file at `app/views/home/index.html.erb`:
+
+2. **Ensure the view exists with the correct content.** Create or replace the file at `app/views/home/index.html.erb`:
+
     ```erb title="app/views/home/index.html.erb"
     <h1>Neon Postgres Connection Successful!</h1>
     <% if @version %>
@@ -77,7 +88,9 @@ To avoid potential naming collisions with generators, directly create or overwri
       <p>Could not retrieve PostgreSQL version.</p>
     <% end %>
     ```
-3.  **Ensure the root route is configured.** Overwrite the contents of `config/routes.rb` to set the new controller as the application's root page:
+
+3. **Ensure the root route is configured.** Overwrite the contents of `config/routes.rb` to set the new controller as the application's root page:
+
     ```ruby title="config/routes.rb"
     Rails.application.routes.draw do
       # Defines the root path route ("/")
@@ -94,26 +107,33 @@ To avoid potential naming collisions with generators, directly create or overwri
 
 Once the setup is complete:
 
-1.  Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string is modified to remove the database name and ends with a trailing slash (`/`).
-2.  Install any new gems by running:
+1. Remind the user to set their `DATABASE_URL` in the .env file, ensuring the connection string is modified to remove the database name and ends with a trailing slash (`/`).
+2. Install any new gems by running:
+
     ```bash
     bundle install
     ```
-3.  Create the development database:
+
+3. Create the development database:
+
     ```bash
     bin/rails db:create
     ```
-4.  Start the Rails server:
+
+4. Start the Rails server:
+
     ```bash
     bin/rails server
     ```
-5.  To test the connection, visit `http://localhost:3000` in a browser. The page should display the PostgreSQL version reported by your Neon database.
+
+5. To test the connection, visit `http://localhost:3000` in a browser. The page should display the PostgreSQL version reported by your Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The `Gemfile` contains both the `pg` and `dotenv-rails` gems.
 - A `.env` file is present or has been created.
 - The `DATABASE_URL` format in the `.env` template ends with a `/` and contains no database name.

@@ -136,8 +136,8 @@ Choose one of the following methods to set up the Remote Neon MCP server in Clau
 
 This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
 
-1.  Open your terminal.
-2.  Run the following command to install the Local Neon MCP server for use with Claude Desktop:
+1. Open your terminal.
+2. Run the following command to install the Local Neon MCP server for use with Claude Desktop:
 
     ```bash
     npx @neondatabase/mcp-server-neon init $NEON_API_KEY
@@ -157,7 +157,7 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
     The Neon MCP server will start automatically the next time you open Claude.
     ```
 
-3.  Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
+3. Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
 
 ### Verifying the connection
 

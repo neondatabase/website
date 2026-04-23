@@ -89,7 +89,7 @@ This section describes how to work with operations using the [Neon API](https://
 - [Poll operation status](#poll-operation-status): Describes how to poll an operation for its status, which may be necessary to avoid failed requests due to in-progress operations when using the Neon API programmatically.
 
 <Admonition type="note">
-Operation names have underscores when view using the API; for example: 
+Operation names have underscores when view using the API; for example:
 </Admonition>
 
 ### List operations

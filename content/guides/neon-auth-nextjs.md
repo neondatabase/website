@@ -26,12 +26,12 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
-2.  **Enable Neon Auth:**
+1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
+2. **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
-3.  **Copy your credentials:**
+3. **Copy your credentials:**
     - **Auth URL:** Found on the **Auth** page under Configuration (e.g., `https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth`).
       ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
@@ -41,14 +41,14 @@ You'll need to create a Neon project and enable Neon Auth.
 
 Create a new Next.js project and install dependencies.
 
-1.  **Initialize the app:**
+1. **Initialize the app:**
 
     ```bash
     npx create-next-app@latest next-neon-todo --yes
     cd next-neon-todo
     ```
 
-2.  **Install dependencies:**
+2. **Install dependencies:**
 
     ```bash
     npm install @neondatabase/auth@latest @neondatabase/serverless drizzle-orm
@@ -104,7 +104,7 @@ To integrate Neon Auth tables into your Drizzle ORM setup, you need to introspec
 
 This step is crucial because it makes Drizzle aware of the Neon Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Neon Auth.
 
-1.  **Introspect the database:**
+1. **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
 
     ```bash
@@ -113,7 +113,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Neon Auth tables.
 
-2.  **Organize schema files:**
+2. **Organize schema files:**
     Create a new directory `app/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `app/db/schema.ts` and `app/db/relations.ts` respectively.
 
     ```
@@ -130,7 +130,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
      └ …
     ```
 
-3.  **Add the Todos table to your schema**
+3. **Add the Todos table to your schema**
 
     Open `app/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition as shown below:
 
@@ -309,7 +309,7 @@ This ensures that the required Tailwind styles for Neon Auth UI components are i
 
 Create the specific pages for signing in and managing accounts using Neon's pre-built UI components.
 
-1.  **Auth page:**
+1. **Auth page:**
 
     Create `app/auth/[path]/page.tsx`. This page will render the Neon Auth sign-in/sign-up UI.
 
@@ -329,7 +329,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     }
     ```
 
-2.  **Account page:**
+2. **Account page:**
 
     Create `app/account/[path]/page.tsx`. This page renders the Neon Auth account management UI, including features such as profile settings, password updates, and more.
 
@@ -470,7 +470,7 @@ The middleware uses `auth.middleware()` to check if a user is authenticated when
 
 Create the main page and components to display and manage todos.
 
-1.  **Todo Item component:**
+1. **Todo Item component:**
 
     Create `app/components/TodoItem.tsx` with the following content:
 
@@ -499,7 +499,7 @@ Create the main page and components to display and manage todos.
 
     The TodoItem component displays an individual todo item with a checkbox to toggle its completion status and a delete button. It uses the `toggleTodo` and `deleteTodo` server actions to perform these operations.
 
-2.  **Main page:**
+2. **Main page:**
 
     Update `app/page.tsx` with the following content:
 
@@ -546,15 +546,15 @@ Create the main page and components to display and manage todos.
 
 ## Run the application
 
-1.  Start the development server:
+1. Start the development server:
 
     ```bash
     npm run dev
     ```
 
-2.  Open `http://localhost:3000`.
-3.  You will be redirected to the Sign In page.
-4.  Once logged in, you can manage your todos.
+2. Open `http://localhost:3000`.
+3. You will be redirected to the Sign In page.
+4. Once logged in, you can manage your todos.
 
     ![Todo App Screenshot](/docs/guides/neon-auth-nextjs-todo-demo.png)
 

@@ -44,7 +44,7 @@ First, [create a new table](../postgresql-tutorial/postgresql-create-table) name
 
 ```sql
 CREATE TABLE ranks (
-	c VARCHAR(10)
+ c VARCHAR(10)
 );
 ```
 
@@ -59,9 +59,9 @@ Third, query data from the `ranks` table:
 
 ```sql
 SELECT
-	c
+ c
 FROM
-	ranks;
+ ranks;
 ```
 
 ![PostgreSQL RANK function - sample table](/postgresqltutorial/PostgreSQL-RANK-function-sample-table.png)
@@ -69,12 +69,12 @@ Fourth, use the `RANK()` function to assign ranks to the rows in the result set 
 
 ```sql
 SELECT
-	c,
-	RANK () OVER (
-		ORDER BY c
-	) rank_number
+ c,
+ RANK () OVER (
+  ORDER BY c
+ ) rank_number
 FROM
-	ranks;
+ ranks;
 ```
 
 The following picture shows the output:
@@ -99,14 +99,14 @@ This example uses the `RANK()` function to assign a rank to each product by its 
 
 ```sql
 SELECT
-	product_id,
-	product_name,
-	price,
-	RANK () OVER (
-		ORDER BY price DESC
-	) price_rank
+ product_id,
+ product_name,
+ price,
+ RANK () OVER (
+  ORDER BY price DESC
+ ) price_rank
 FROM
-	products;
+ products;
 ```
 
 ![PostgreSQL RANK function over the result set](/postgresqltutorial/PostgreSQL-RANK-function-over-the-result-set.png)
@@ -120,18 +120,18 @@ The following example uses the `RANK()` function to assign a rank to every produ
 
 ```sql
 SELECT
-	product_id,
-	product_name,
-	group_name,
-	price,
-	RANK () OVER (
-		PARTITION BY p.group_id
-		ORDER BY price DESC
-	) price_rank
+ product_id,
+ product_name,
+ group_name,
+ price,
+ RANK () OVER (
+  PARTITION BY p.group_id
+  ORDER BY price DESC
+ ) price_rank
 FROM
-	products p
-	INNER JOIN product_groups g
-		ON g.group_id = p.group_id;
+ products p
+ INNER JOIN product_groups g
+  ON g.group_id = p.group_id;
 ```
 
 ![PostgreSQL RANK function over partition](/postgresqltutorial/PostgreSQL-RANK-function-over-partition.png)

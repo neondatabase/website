@@ -5,6 +5,7 @@
 **Purpose:** To install the necessary packages, configure Prisma for both application and CLI workflows, define a sample schema, and provide a working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle.
 
 **Scope:**
+
 - Assumes the user is working within an existing Node.js project directory.
 - Assumes the user has a Neon project and access to its database connection strings.
 - Uses Prisma 7+ with the `@prisma/adapter-neon` driver adapter (GA since v6.16.0).
@@ -21,11 +22,14 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 
 ### 1. Initialize Project and Install Dependencies
 
-1.  Check if a `package.json` file exists. If not, create one by running:
+1. Check if a `package.json` file exists. If not, create one by running:
+
     ```bash
     npm init -y
     ```
-2.  Install dependencies:
+
+2. Install dependencies:
+
     ```bash
     # Production dependencies
     npm install @prisma/client @prisma/adapter-neon dotenv
@@ -162,26 +166,33 @@ main()
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set both `DATABASE_URL` and `DIRECT_URL` in `.env`.
-2.  Generate the Prisma Client:
+1. Verify the user has correctly set both `DATABASE_URL` and `DIRECT_URL` in `.env`.
+2. Generate the Prisma Client:
+
     ```bash
     npx prisma generate
     ```
-3.  Push the schema to the Neon database:
+
+3. Push the schema to the Neon database:
+
     ```bash
     npx prisma db push
     ```
-4.  Run the example CRUD script:
+
+4. Run the example CRUD script:
+
     ```bash
     npx tsx src/main.ts
     ```
-5.  If successful, the output should show log messages for each C-R-U-D step.
+
+5. If successful, the output should show log messages for each C-R-U-D step.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The `package.json` contains `prisma` (dev), `@prisma/client` (prod), `@prisma/adapter-neon` (prod), and `tsx` (dev).
 - The `.env` file has both `DATABASE_URL` (pooled) and `DIRECT_URL` (direct).
 - The `prisma.config.ts` file exists and points to `DIRECT_URL`.

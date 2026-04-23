@@ -84,10 +84,10 @@ We have the components: a Git worktree for code and a Neon branch for data but c
 
 To make this seamless, we can use a Git `post-checkout` hook. This script triggers automatically whenever a new worktree is created. Its job is simple:
 
-1.  **Detect** that a new worktree is being created.
-2.  **Bootstrap** the environment by copying your main `.env` file.
-3.  **Provison** a new Neon database branch matching the Git branch name.
-4.  **Configure** the new worktree's `DATABASE_URL` to point to this isolated database.
+1. **Detect** that a new worktree is being created.
+2. **Bootstrap** the environment by copying your main `.env` file.
+3. **Provison** a new Neon database branch matching the Git branch name.
+4. **Configure** the new worktree's `DATABASE_URL` to point to this isolated database.
 
 ### Prerequisites
 
@@ -268,12 +268,12 @@ claude --worktree feature-auth
 
 This command does the following:
 
-1.  Claude Code provisions a new Git worktree folder named `feature-auth` inside `.claude/worktrees/`.
-2.  The `post-checkout` hook intercepts the event.
-3.  The hook duplicates your `.env` into the new `feature-auth` directory.
-4.  Neon instantly creates an isolated database branch named `worktree-feature-auth`.
-5.  The hook updates `DATABASE_URL` in your new worktree.
-6.  Claude Code spins up in the new directory, fully isolated.
+1. Claude Code provisions a new Git worktree folder named `feature-auth` inside `.claude/worktrees/`.
+2. The `post-checkout` hook intercepts the event.
+3. The hook duplicates your `.env` into the new `feature-auth` directory.
+4. Neon instantly creates an isolated database branch named `worktree-feature-auth`.
+5. The hook updates `DATABASE_URL` in your new worktree.
+6. Claude Code spins up in the new directory, fully isolated.
 
 Because the `DATABASE_URL` is pre-configured, the agent can immediately begin writing code, running migrations, and executing tests against its own private database.
 
@@ -301,10 +301,10 @@ git worktree add -b feature-search ../feature-search
 
 This command creates a new directory `../feature-search` (sibling to your current folder) and checks out a new branch named `feature-search`. The `post-checkout` hook will immediately trigger:
 
-1.  It detects the new worktree.
-2.  It copies your `.env` file to `../feature-search/.env`.
-3.  It creates a Neon branch `worktree-feature-search`.
-4.  It updates the `DATABASE_URL` in the new `.env` file.
+1. It detects the new worktree.
+2. It copies your `.env` file to `../feature-search/.env`.
+3. It creates a Neon branch `worktree-feature-search`.
+4. It updates the `DATABASE_URL` in the new `.env` file.
 
 You can now navigate to that directory and start your agent or run your code:
 

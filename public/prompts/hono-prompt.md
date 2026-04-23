@@ -5,6 +5,7 @@
 **Purpose:** To connect the current Hono project to Neon Postgres by installing a database driver, configuring environment variables, and creating a test route to validate the connection.
 
 **Scope:**
+
 - Must be run inside an existing Hono project directory.
 - Assumes the user has a Neon project and access to their full connection string.
 
@@ -31,15 +32,15 @@ When this prompt is triggered, automatically configure the open Hono project as 
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1. **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   ** `@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. Best choice for Cloudflare Workers, Vercel, etc.
-    *   ** `postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
-    *   ** `pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    - **`@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. Best choice for Cloudflare Workers, Vercel, etc.
+    - **`postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
+    - **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
    Make sure to ask the user to choose one of the above options and don't proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
-2.  Based on the user's selection, run the corresponding installation command:
+2. Based on the user's selection, run the corresponding installation command:
 
     ```bash
     # For `@neondatabase/serverless`
@@ -59,14 +60,14 @@ When this prompt is triggered, automatically configure the open Hono project as 
 
 ### 2. Configure Environment Variables
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env"
     DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+3. Direct the user to find this value in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -74,9 +75,9 @@ When this prompt is triggered, automatically configure the open Hono project as 
 
 To provide a clear way to verify the setup, modify the main application file to query the database and return the PostgreSQL version.
 
-1.  **Locate the main entry point file** (usually `src/index.ts`).
-2.  **Replace the default "Hello Hono!" route** with a new root route that connects to the database.
-3.  **Use the code block that corresponds to the driver selected in Step 1.**
+1. **Locate the main entry point file** (usually `src/index.ts`).
+2. **Replace the default "Hello Hono!" route** with a new root route that connects to the database.
+3. **Use the code block that corresponds to the driver selected in Step 1.**
 
     #### Option A: Using `@neondatabase/serverless`
 
@@ -172,18 +173,21 @@ To provide a clear way to verify the setup, modify the main application file to 
 
 Once the file modifications are complete:
 
-1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
-2.  Start the Hono development server:
+1. Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
+2. Start the Hono development server:
+
     ```bash
     npm run dev
     ```
-3.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:3000` in their browser. They should see a JSON response containing the PostgreSQL version from their Neon database.
+
+3. Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:3000` in their browser. They should see a JSON response containing the PostgreSQL version from their Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A supported PostgreSQL driver (`@neondatabase/serverless`, `postgres`, or `pg`) is installed as a dependency in `package.json`.
 - A `.env` file is present or has been created with a `DATABASE_URL` placeholder.
 - The test route correctly imports and uses the chosen driver.

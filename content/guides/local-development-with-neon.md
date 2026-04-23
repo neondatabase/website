@@ -111,10 +111,13 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 - **Stay organized**: Use prefixes like `dev/feature-auth` or `dev/alice`
 - **Reset data**: Start fresh when needed:
+
   ```bash
   neon branches reset dev/your-name
   ```
+
 - **Feature work**: Create dedicated branches:
+
   ```bash
   neon branches create --name dev/auth-system --parent main
   ```

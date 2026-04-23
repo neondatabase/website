@@ -123,7 +123,7 @@ PostgreSQL automatically generates a sequential number for the [serial column](p
 The following [`SELECT`](postgresql-select) statement shows the contents of the `links` table:
 
 ```sql
-SELECT	* FROM links;
+SELECT * FROM links;
 ```
 
 Output:

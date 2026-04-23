@@ -45,13 +45,13 @@ This provider is not maintained or officially supported by Neon. Use at your own
 
 Before you begin, ensure you have the following:
 
-1.  **Terraform CLI installed:** If you don't have Terraform installed, download and install it from the [official Terraform website](https://developer.hashicorp.com/terraform/install). The Neon provider requires Terraform version `1.14.x` or later.
-2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
-3.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
+1. **Terraform CLI installed:** If you don't have Terraform installed, download and install it from the [official Terraform website](https://developer.hashicorp.com/terraform/install). The Neon provider requires Terraform version `1.14.x` or later.
+2. **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
+3. **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
 ## Set up the Terraform Neon provider
 
-1.  **Create a project directory:**
+1. **Create a project directory:**
     Create a new directory for your Terraform project and navigate into it.
 
     ```shell
@@ -59,7 +59,7 @@ Before you begin, ensure you have the following:
     cd neon-terraform-project
     ```
 
-2.  **Create a `main.tf` file:**
+2. **Create a `main.tf` file:**
     This file will contain your Terraform configuration. Start by declaring the required Neon provider.
 
     ```terraform
@@ -74,8 +74,9 @@ Before you begin, ensure you have the following:
     provider "neon" {}
     ```
 
-3.  **Initialize terraform:**
+3. **Initialize terraform:**
     Run the `terraform init` command in your project directory. This command downloads and installs the Neon provider.
+
     ```shell
     terraform init
     ```
@@ -84,7 +85,7 @@ Before you begin, ensure you have the following:
 
 The Neon provider needs your Neon API key to manage resources. You can configure it in two ways:
 
-1.  **Directly in the provider block (Less secure):**
+1. **Directly in the provider block (Less secure):**
     For quick testing, you can **hardcode your API key** directly within `provider "neon"` block. However, this method isn't recommended for production environments or shared configurations. A more secure alternative is to retrieve the API key from a secrets management service like [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) or [HashiCorp Vault](https://developer.hashicorp.com/vault), and then update your provider block to reflect this.
 
     ```terraform
@@ -93,7 +94,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
     }
     ```
 
-2.  **Using environment variables:**
+2. **Using environment variables:**
     The provider will automatically use the `NEON_API_KEY` environment variable if set.
 
     ```shell
@@ -373,25 +374,27 @@ For more attributes and options on managing VPC endpoint restrictions, refer to 
 
 Once you have defined your resources:
 
-1.  **Format and validate:**
+1. **Format and validate:**
 
     ```shell
     terraform fmt
     terraform validate
     ```
 
-2.  **Plan:**
+2. **Plan:**
     Run `terraform plan` to see what actions Terraform will take. This command shows you the resources that will be created, modified, or destroyed without making any changes. Review the output carefully to ensure it matches your expectations.
 
     ```shell
     terraform plan -out=tfplan
     ```
 
-3.  **Apply:**
+3. **Apply:**
     Run `terraform apply` to create the resources in Neon.
+
     ```shell
     terraform apply tfplan
     ```
+
     Terraform will ask for confirmation before proceeding with the changes. Type `yes` to confirm.
 
 You have now successfully created and managed Neon resources using Terraform! You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, always run `terraform plan` to review the changes before applying them.
@@ -408,7 +411,7 @@ Both methods involve telling Terraform about an existing resource and associatin
 
 Before you can import any resources, ensure your Terraform environment is configured for the Neon provider:
 
-1.  **Define the provider:** Make sure you have the `neon` provider declared in your `main.tf` or a dedicated `providers.tf` file.
+1. **Define the provider:** Make sure you have the `neon` provider declared in your `main.tf` or a dedicated `providers.tf` file.
 
     ```terraform
     terraform {
@@ -422,7 +425,7 @@ Before you can import any resources, ensure your Terraform environment is config
     provider "neon" {}
     ```
 
-2.  **Initialize terraform:** If you haven't already, or if you've just added the provider configuration, run:
+2. **Initialize terraform:** If you haven't already, or if you've just added the provider configuration, run:
 
     ```shell
     terraform init
@@ -434,7 +437,7 @@ Before you can import any resources, ensure your Terraform environment is config
     Avoid using `terraform init -upgrade` in CI pipelines and auto-approved pull requests, as this can lead to unintended resource replacements and data loss if there are breaking changes or major version jumps. Instead, use `terraform init` in your automated workflows. Running `terraform init -upgrade` should always be done manually, followed by plan reviews. For additional guidance, see [Important usage notes](#provider-usage-notes).
     </Admonition>
 
-3.  **Configure authentication:** Follow the authentication steps mentioned in [Configure Authentication](#configure-authentication) to ensure Terraform can communicate with your Neon account.
+3. **Configure authentication:** Follow the authentication steps mentioned in [Configure Authentication](#configure-authentication) to ensure Terraform can communicate with your Neon account.
 
 ### Neon resource IDs for import
 
@@ -465,9 +468,10 @@ Depending on your preference and the version of Terraform you are using, you can
 
 For each Neon resource you want to import, you'll generally follow these two steps:
 
-1.  **Write a resource block:** Add a corresponding `resource` block to your Terraform configuration files (for example, `main.tf`). This block tells Terraform how you _want_ the resource to be configured. You might not know all the attributes perfectly upfront; Terraform will populate many of them from the actual state of the resource during the import.
+1. **Write a resource block:** Add a corresponding `resource` block to your Terraform configuration files (for example, `main.tf`). This block tells Terraform how you _want_ the resource to be configured. You might not know all the attributes perfectly upfront; Terraform will populate many of them from the actual state of the resource during the import.
 
-2.  **Run `terraform import`:** Execute the import command, which takes the Terraform resource address and the Neon-specific ID of the existing resource.
+2. **Run `terraform import`:** Execute the import command, which takes the Terraform resource address and the Neon-specific ID of the existing resource.
+
     ```shell
     terraform import <terraform_resource_address> <neon_resource_id>
     ```
@@ -562,7 +566,7 @@ All other configurable attributes will be populated into Terraform's state file 
 
 #### Run the import commands in order
 
-1.  **Import the project:**
+1. **Import the project:**
 
     ```shell
     terraform import neon_project.my_app_project "actual_project_id_from_neon"
@@ -588,7 +592,7 @@ All other configurable attributes will be populated into Terraform's state file 
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-2.  **Import the development branch:**
+2. **Import the development branch:**
 
     ```shell
     terraform import neon_branch.dev_branch "actual_dev_branch_id_from_neon"
@@ -617,7 +621,7 @@ All other configurable attributes will be populated into Terraform's state file 
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-3.  **Import the development compute endpoint:**
+3. **Import the development compute endpoint:**
 
     ```shell
     terraform import neon_endpoint.dev_endpoint "actual_dev_endpoint_id_from_neon"
@@ -645,7 +649,7 @@ All other configurable attributes will be populated into Terraform's state file 
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-4.  **Import the application user role:**
+4. **Import the application user role:**
 
     ```shell
     terraform import neon_role.app_user "actual_project_id_from_neon/actual_dev_branch_id_from_neon/application_user"
@@ -671,7 +675,7 @@ All other configurable attributes will be populated into Terraform's state file 
     your Terraform state and will henceforth be managed by Terraform.
     ```
 
-5.  **Import the service database:**
+5. **Import the service database:**
 
     ```shell
     terraform import neon_database.service_db "actual_project_id_from_neon/actual_dev_branch_id_from_neon/service_specific_database"
@@ -806,21 +810,21 @@ You need to replace the IDs in the `import` blocks with the actual IDs of your e
 
 After importing your resources using either method, you need to ensure that your HCL configuration accurately reflects the current state of the imported resources. This is an iterative process where you will:
 
-1.  **Run `terraform plan`:**
+1. **Run `terraform plan`:**
 
     ```shell
     terraform plan
     ```
 
-2.  **Understanding the plan output:**
+2. **Understanding the plan output:**
     The plan might show:
     - **Attributes to be added to your HCL:** Terraform will identify attributes present in the imported state (for example, `pg_version`, `region_id`, `default_endpoint_settings` for a project) that are not yet explicitly in your HCL `resource` blocks.
     - **"Update in-place" actions:** You might see actions like `~ update in-place` for some resources, even if no actual value in Neon is changing. For example, for `neon_endpoint`, you might see `+ branch_id = "your-branch-id"`. This is often because Terraform is now resolving a reference (like `neon_branch.dev_branch.id`) to its concrete value and wants to explicitly set this in its managed configuration. It's a reconciliation step and usually safe to apply.
 
-3.  **Update your HCL (`main.tf`):**
+3. **Update your HCL (`main.tf`):**
     Carefully review the output of `terraform plan`. Your primary goal is to update your HCL `resource` blocks to accurately match the actual, imported state of your resources, or to define your desired state if you intend to make changes. Copy the relevant attributes and their values from the plan output into your HCL.
 
-4.  **Repeat `terraform plan`:** After updating your HCL, run `terraform plan` again. Continue this iterative process-reviewing the plan and updating your HCL-until `terraform plan` shows "No changes. Your infrastructure matches the configuration." or only shows changes you intentionally want to make.
+4. **Repeat `terraform plan`:** After updating your HCL, run `terraform plan` again. Continue this iterative process-reviewing the plan and updating your HCL-until `terraform plan` shows "No changes. Your infrastructure matches the configuration." or only shows changes you intentionally want to make.
 
 This iterative approach ensures your Terraform configuration accurately reflects either the current state or your intended desired state for the imported resources.
 

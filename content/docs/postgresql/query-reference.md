@@ -129,9 +129,9 @@ country VARCHAR(50) NOT NULL
 );
 
 INSERT INTO customers (name, email, country) VALUES
-('Customer One', 'one@domain.com', 'Spain'),
-('Customer Two', 'two@otherdomain.com', 'France'),
-('Customer Three', 'three@domain.com', 'Spain');
+('Customer One', '<one@domain.com>', 'Spain'),
+('Customer Two', '<two@otherdomain.com>', 'France'),
+('Customer Three', '<three@domain.com>', 'Spain');
 
 CREATE TABLE sales (
 sale_id SERIAL PRIMARY KEY,
@@ -449,8 +449,8 @@ preferences JSONB
 
 -- Sample inserts
 INSERT INTO users (email, username, active, preferences) VALUES
-('john.doe@example.com', 'johndoe', TRUE, '{"theme": "dark", "notifications": "enabled"}'),
-('jane.doe@example.com', 'janedoe', FALSE, '{"theme": "light", "notifications": "disabled"}');
+('<john.doe@example.com>', 'johndoe', TRUE, '{"theme": "dark", "notifications": "enabled"}'),
+('<jane.doe@example.com>', 'janedoe', FALSE, '{"theme": "light", "notifications": "disabled"}');
 
 CREATE TABLE events (
 event_id SERIAL PRIMARY KEY,
@@ -956,7 +956,6 @@ ORDER BY duration DESC;
 ```
 
 </Admonition>
-
 
 ## Postgres version
 

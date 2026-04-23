@@ -36,17 +36,18 @@ While both Tembo and Neon provide managed Postgres, Neon's architecture offers s
 
 There are several ways to migrate your Tembo Postgres database to Neon. The best option depends on your database size, acceptable downtime, and technical comfort.
 
-1.  Neon Import Data Assistant (easiest, for smaller databases \<10GB)
-2.  `pg_dump` and `pg_restore`
-3.  Logical replication (Near-zero downtime, for live production databases)
+1. Neon Import Data Assistant (easiest, for smaller databases \<10GB)
+2. `pg_dump` and `pg_restore`
+3. Logical replication (Near-zero downtime, for live production databases)
 
 ## Pre-migration preparation (common steps)
 
 Before you begin any migration method, complete these essential preparation steps:
 
-1.  **Assess your Tembo database:**
+1. **Assess your Tembo database:**
     - **Database size:** Determine the total size of your database. This will help you choose the right migration method.
     - **Postgres extensions:** Identify all custom Postgres extensions used in your Tembo instance. Run the following query on your Tembo database:
+
       ```sql
       SELECT e.extname AS "Name", e.extversion AS "Version", n.nspname AS "Schema", c.description AS "Description"
       FROM pg_catalog.pg_extension e
@@ -54,9 +55,10 @@ Before you begin any migration method, complete these essential preparation step
       LEFT JOIN pg_catalog.pg_description c ON c.objoid = e.oid AND c.classoid = 'pg_catalog.pg_extension'::pg_catalog.regclass
       ORDER BY "Name";
       ```
+
       This provides a list of your installed extensions, their versions, and descriptions. Compare this list to Neon's supported extensions. Neon supports many common extensions, and the full list is available here: [Neon supported extensions list](/docs/extensions/pg-extensions). For any unsupported extensions, consider finding alternatives or modifying your application.
 
-2.  **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started/signing-up#sign-up).
+2. **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started/signing-up#sign-up).
 
 ## Option 1: Using Neon's Import Data Assistant
 
@@ -72,17 +74,17 @@ Before you start with the assistant, You'll need:
 
 ### Steps to import using the assistant:
 
-1.  **Launch the assistant:**
+1. **Launch the assistant:**
     - **From the Projects page:** Click "Import database" to create a new project and import data.
       ![Import Data Assistant from Projects page](/docs/import/import_data_assistant_project.png)
     - **From within an existing project:** Use the Getting Started widget on a project dashboard.
       ![Import Data Assistant from Quick Start widget](/docs/import/import_data_assistant_quickstart_widget.png)
-2.  **Check compatibility:** Enter your Tembo database connection string. Neon will verify:
+2. **Check compatibility:** Enter your Tembo database connection string. Neon will verify:
     - Database size (within 10GB limit).
     - Postgres version compatibility (Neon supports Postgres 14-17).
     - Extension compatibility.
     - Region availability.
-3.  **Import your data:** Once checks pass, Neon will:
+3. **Import your data:** Once checks pass, Neon will:
     - Create a new branch for your imported data.
     - Copy your data automatically using `pg_dump` and `pg_restore`.
     - Verify the import.
@@ -91,7 +93,7 @@ Before you start with the assistant, You'll need:
     During import, your source Tembo database remains untouched; Neon only reads from it.
     </Admonition>
 
-4.  **Access your imported data:**
+4. **Access your imported data:**
     - Navigate to the **Branches** page of your Neon project. Your newly imported database branch will be listed there, typically named with a timestamp (e.g., `import-2025-xx-xx`).
       ![Branches page showing imported branch](/docs/import/import_data_assistant_branch.png)
     - Click on the three dots next to the branch name and select **Set as default** to make it your default branch.
@@ -108,6 +110,7 @@ This is the traditional method for Postgres migrations and offers full control. 
 - `psql`, `pg_dump`, and `pg_restore` client utilities installed locally. Use versions compatible with your Tembo Postgres version and Neon (Postgres 14-17). It's generally recommended to use the latest client versions.
 - Connection string or parameters for your source Tembo database.
 - Connection string for your target Neon database: You can find the connection string by clicking the **Connect** button on your Project Dashboard. It will look something like this:
+
   ```bash
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
@@ -169,10 +172,10 @@ Logical replication allows for near-zero downtime migration by continuously stre
 - Allow Connections from Neon to Tembo (IP Allow List):
 
   If you are having IP allow list restrictions on your Tembo database, you need to allow connections from Neon to Tembo. This is necessary for the logical replication process to work correctly.
-  1.  **Obtain Neon NAT Gateway IP Addresses:**
+  1. **Obtain Neon NAT Gateway IP Addresses:**
       Refer to Neon's [NAT Gateway IP addresses](/docs/introduction/regions#nat-gateway-ip-addresses) to find the list of IP addresses for your Neon project's region. You will need to add these specific IP addresses to your Tembo project's allow list.
 
-  2.  **Configure IP Allow List in Tembo.io:**
+  2. **Configure IP Allow List in Tembo.io:**
       - Log in to your Tembo.io dashboard.
       - Navigate to **Settings > Network Settings**.
       - Locate the **IP Allow List** section.
@@ -186,12 +189,14 @@ Logical replication allows for near-zero downtime migration by continuously stre
 **Create schema:** Copy the schema from Tembo to Neon. You can use `pg_dump` to export the schema and `psql` to import it into Neon.
 
 - Dumping schema from Tembo:
+
   ```bash
   pg_dump --schema-only \
       --no-privileges \
       "postgresql://user:pass@tembo_host:port/source_db" \
       > schema.sql
   ```
+
 - Restoring schema to Neon:
 
   ```bash
@@ -251,14 +256,15 @@ Once Neon is fully synchronized and replication lag is minimal:
 
 ## Post-migration (common steps)
 
-1.  **Verify data:**
+1. **Verify data:**
     - Run checksums or row counts on key tables in both Tembo and Neon to ensure data integrity.
     - Perform functional testing of your application against Neon.
 
-2.  **Update application connection strings:** Ensure all parts of your application and any related services are now using the Neon database connection string.
+2. **Update application connection strings:** Ensure all parts of your application and any related services are now using the Neon database connection string.
 
-3.  **Cleanup for logical replication:**
+3. **Cleanup for logical replication:**
     If you used logical replication, you can drop the subscription from Neon once you're satisfied with the migration.
+
     ```sql
     DROP SUBSCRIPTION tembo_to_neon_sub;
     ```

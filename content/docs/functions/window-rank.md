@@ -119,21 +119,21 @@ You can calculate percentiles using the `rank()` function with some arithmetic.
 
 ```sql
 WITH scores AS (
-	SELECT *
-	FROM (
+ SELECT *
+ FROM (
         VALUES
             ('Student 1', 85),
             ('Student 2', 92),
             ('Student 3', 78),
             ('Student 4', 90),
             ('Student 5', 88)
-	) AS t(student, score)
+ ) AS t(student, score)
 )
 SELECT
-	student,
-	score,
-	rank() OVER (ORDER BY score) AS rank,
-	round(100.0 * rank() OVER (ORDER BY score) / (SELECT count(*) FROM scores), 2) AS percentile
+ student,
+ score,
+ rank() OVER (ORDER BY score) AS rank,
+ round(100.0 * rank() OVER (ORDER BY score) / (SELECT count(*) FROM scores), 2) AS percentile
 FROM scores;
 ```
 

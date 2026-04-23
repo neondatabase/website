@@ -205,12 +205,12 @@ The following statement uses the [`AGE()`](../postgresql-date-functions/postgres
 
 ```sql
 SELECT
-	employee_id,
-	first_name,
-	last_name,
-	AGE(birth_date)
+ employee_id,
+ first_name,
+ last_name,
+ AGE(birth_date)
 FROM
-	employees;
+ employees;
 ```
 
 Output:
@@ -259,14 +259,14 @@ The following statement extracts the year, month, and day from the birth dates o
 
 ```sql
 SELECT
-	employee_id,
-	first_name,
-	last_name,
-	EXTRACT (YEAR FROM birth_date) AS YEAR,
-	EXTRACT (MONTH FROM birth_date) AS MONTH,
-	EXTRACT (DAY FROM birth_date) AS DAY
+ employee_id,
+ first_name,
+ last_name,
+ EXTRACT (YEAR FROM birth_date) AS YEAR,
+ EXTRACT (MONTH FROM birth_date) AS MONTH,
+ EXTRACT (DAY FROM birth_date) AS DAY
 FROM
-	employees;
+ employees;
 ```
 
 Output:

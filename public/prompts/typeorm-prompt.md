@@ -5,6 +5,7 @@
 **Purpose:** To correctly initialize a TypeORM project if one does not exist, install dependencies, manage environment variables, and update the TypeORM `DataSource` configuration to securely connect to a Neon serverless Postgres database.
 
 **Scope:**
+
 - Assumes the user is working within a Node.js or TypeScript project directory.
 - Assumes the user has a Neon database and its connection string.
 - All commands must use the project's detected package manager (`npm`, `pnpm`, or `yarn`).
@@ -21,17 +22,21 @@ When this prompt is triggered, automatically configure the open project as follo
 
 - **Detect:** First, check if a TypeORM project structure already exists. Look for the `typeorm` package in `package.json` and a configuration file like `src/data-source.ts`.
 - **Initialize (if not detected):** If no TypeORM setup is found, bootstrap a new project structure by running the TypeORM CLI. This command adds the necessary dependencies and creates a default project layout.
+
   ```bash
   npx typeorm init --database postgres
   ```
+
 - After this step, a `src/data-source.ts` file and other required files will be present.
 
 ### 2. Ensure Required Packages are Installed
 
 - Verify that all necessary packages are installed. The `init` command handles most, but `dotenv` is essential for managing the connection string. Run the installation command to ensure all dependencies are present.
+
   ```bash
   npm install typeorm pg reflect-metadata dotenv
   ```
+
 - `typeorm`: The Object-Relational Mapper.
 - `pg`: The PostgreSQL database driver that TypeORM uses.
 - `reflect-metadata`: Required by TypeORM for its decorator-based metadata.
@@ -42,6 +47,7 @@ When this prompt is triggered, automatically configure the open project as follo
 - This is a mandatory prerequisite for TypeORM.
 - Locate the `tsconfig.json` file in the project root. The `typeorm init` command creates this file if it doesn't exist.
 - Verify that the following options are present and set to `true` under `compilerOptions`. If they are missing or `false`, add or update them.
+
   ```json
   {
     "compilerOptions": {
@@ -72,6 +78,7 @@ When this prompt is triggered, automatically configure the open project as follo
 **Example Transformation:**
 
 *The default `init` command generates a configuration like this:*
+
 ```typescript
 // src/data-source.ts (Before)
 import "reflect-metadata"
@@ -94,6 +101,7 @@ export const AppDataSource = new DataSource({
 ```
 
 *Update it to securely connect to Neon:*
+
 ```typescript
 // src/data-source.ts (After)
 import "reflect-metadata";
@@ -128,7 +136,8 @@ export const AppDataSource = new DataSource({
 
 Once setup is complete, verify the connection:
 
-1.  **Create a verification script:** Create a file named `verify-connection.ts` with the following content to test the database connection.
+1. **Create a verification script:** Create a file named `verify-connection.ts` with the following content to test the database connection.
+
     ```typescript title="verify-connection.ts"
     import "reflect-metadata";
     import { AppDataSource } from "./src/data-source"; // Adjust path if necessary
@@ -152,17 +161,20 @@ Once setup is complete, verify the connection:
     verify();
     ```
 
-2.  **Run the script:**
+2. **Run the script:**
+
     ```bash
     npx ts-node verify-connection.ts
     ```
-3.  A successful run will print the PostgreSQL version from their Neon database.
+
+3. A successful run will print the PostgreSQL version from their Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A TypeORM project is either detected or initialized with `npx typeorm init`.
 - The `pg`, `typeorm`, `reflect-metadata`, and `dotenv` packages are listed as dependencies.
 - `tsconfig.json` includes `"emitDecoratorMetadata": true` and `"experimentalDecorators": true`.

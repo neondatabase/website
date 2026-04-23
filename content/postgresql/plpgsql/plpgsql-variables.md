@@ -68,9 +68,9 @@ declare
 begin
    raise notice '% % % has been paid % USD',
        counter,
-	   first_name,
-	   last_name,
-	   payment;
+    first_name,
+    last_name,
+    payment;
 end $$;
 ```
 
@@ -97,10 +97,10 @@ The following example shows how to assign a value to a variable:
 ```plsql
 do $$
 declare
-	first_name VARCHAR(50);
+ first_name VARCHAR(50);
 begin
-	first_name = split_part('John Doe',' ', 1);
-	raise notice 'The first name is %', first_name;
+ first_name = split_part('John Doe',' ', 1);
+ raise notice 'The first name is %', first_name;
 end;
 $$;
 ```

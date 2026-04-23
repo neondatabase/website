@@ -36,7 +36,7 @@ Before you begin, ensure you have the following:
 
 First, create a new Nuxt.js application and push it to a GitHub repository, which Vercel will use for deployments.
 
-1.  **Create a Nuxt.js app:**
+1. **Create a Nuxt.js app:**
     Open your terminal and run the following command:
 
     ```bash
@@ -97,13 +97,13 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     No
     ```
 
-2.  Navigate into the project directory
+2. Navigate into the project directory
 
     ```bash
     cd nuxt-neon-vercel-todo
     ```
 
-3.  Push the initial project to a GitHub repository:
+3. Push the initial project to a GitHub repository:
 
     [Create a new repository on GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories) (e.g., `nuxt-neon-vercel-todo`). Then, run the following commands in your terminal, replacing `<your-github-repo-url>` with your repository's URL.
 
@@ -118,11 +118,11 @@ To begin, you will set up the Vercel-managed Neon Integration. This is a crucial
 
 ## Create a Vercel project
 
-1.  Login to [Vercel dashboard](https://vercel.com/dashboard).
-2.  Click on **Add New** and select **Project**.
-3.  Select the GitHub repository you created earlier (`nuxt-neon-vercel-todo`).
-4.  Vercel will automatically detect that this is a Nuxt.js application and configure the build settings accordingly.
-5.  Click **Deploy** to create your Vercel project.
+1. Login to [Vercel dashboard](https://vercel.com/dashboard).
+2. Click on **Add New** and select **Project**.
+3. Select the GitHub repository you created earlier (`nuxt-neon-vercel-todo`).
+4. Vercel will automatically detect that this is a Nuxt.js application and configure the build settings accordingly.
+5. Click **Deploy** to create your Vercel project.
 
     ![Create Nuxt.js project in Vercel](/docs/guides/nuxt-vercel-create-project.png)
 
@@ -130,18 +130,18 @@ To begin, you will set up the Vercel-managed Neon Integration. This is a crucial
 
 Install the Neon integration from the Vercel Marketplace. This process will create a Neon project and link it to your Vercel account.
 
-1.  Navigate to the [Neon integration page on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
-2.  Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a Project in Neon.)
+1. Navigate to the [Neon integration page on the Vercel Marketplace](https://vercel.com/marketplace/neon) and click **Install**.
+2. Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a Project in Neon.)
 
 ## Connect the database to your Vercel project
 
 With the integration installed, you need to connect your `nuxt-neon-vercel-todo` Vercel project to your new Neon database. This is where you enable the automated branching feature.
 
-1.  From the **Storage** tab in your Vercel dashboard, select your Neon database.
-2.  Click the **Connect Project** tab and select your `nuxt-neon-vercel-todo` project from the dropdown.
-3.  **Enable Preview Branches:** In the **Deployments Configuration** section, ensure the **Preview** toggle is enabled. This is the key step that instructs Vercel to create a new Neon database branch for every Preview Deployment.
+1. From the **Storage** tab in your Vercel dashboard, select your Neon database.
+2. Click the **Connect Project** tab and select your `nuxt-neon-vercel-todo` project from the dropdown.
+3. **Enable Preview Branches:** In the **Deployments Configuration** section, ensure the **Preview** toggle is enabled. This is the key step that instructs Vercel to create a new Neon database branch for every Preview Deployment.
     ![Connect Vercel Project and enable Preview deployments](/docs/guides/nuxt-vercel-neon-connect-project.png)
-4.  Click **Connect**.
+4. Click **Connect**.
 
 Vercel will now automatically add the `DATABASE_URL` environment variable to your project, making it available in Production, Preview, and Development environments.
 
@@ -151,14 +151,14 @@ Now that your Vercel project is connected to Neon, you can start defining your d
 
 To manage your database schema and migrations, you will use [Drizzle ORM](https://orm.drizzle.team) with the Neon serverless driver. Drizzle ORM provides a type-safe way to define your database schema and run migrations.
 
-1.  Install Drizzle dependencies
+1. Install Drizzle dependencies
 
     ```bash
     npm install drizzle-orm @neondatabase/serverless
     npm install -D drizzle-kit
     ```
 
-2.  **Define the schema:**
+2. **Define the schema:**
 
     Create a new file at `server/db/schema.ts` to define the `todos` table.
 
@@ -179,7 +179,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
     - `completed`: A boolean indicating whether the todo is completed.
     - `createdAt`: A timestamp for when the todo was created.
 
-3.  **Configure Drizzle Kit:**
+3. **Configure Drizzle Kit:**
 
     Create `drizzle.config.ts` in your project root. Drizzle Kit will use this to connect to your database to generate and run migrations.
 
@@ -196,7 +196,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
     });
     ```
 
-4.  **Add migration scripts to `package.json`:**
+4. **Add migration scripts to `package.json`:**
 
     ```json
     {
@@ -211,7 +211,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
 
     > The build script is modified to run `db:migrate` after building the Nuxt application. This ensures that any pending migrations are applied to the database before the application starts.
 
-5.  **Generate the initial migration:**
+5. **Generate the initial migration:**
 
     To run migrations locally or in the Vercel build step, you need the `DATABASE_URL` available. Create a `.env` file in your root directory.
 
@@ -229,7 +229,7 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
 
     This creates a new SQL file in the `server/db/migrations` directory.
 
-6.  **Commit the changes:**
+6. **Commit the changes:**
     Add all the new files to git and commit them.
 
     ```bash
@@ -248,7 +248,7 @@ With the database configured, let's build the Todo application. This will includ
     The following code is a basic example and does not include authentication or input validation. In a production application, you should implement proper security measures to protect your API endpoints and database.
     </Admonition>
 
-1.  **Create a Drizzle client utility:**
+1. **Create a Drizzle client utility:**
 
     Create `server/utils/db.ts` to instantiate and export the Drizzle client.
 
@@ -261,7 +261,7 @@ With the database configured, let's build the Todo application. This will includ
     export const db = drizzle(sql, { schema });
     ```
 
-2.  **Create API endpoints:**
+2. **Create API endpoints:**
 
     Nuxt automatically scans the `server/api` directory to create your API.
     - **GET `/api/todos`:** Create `server/api/todos.get.ts`
@@ -330,7 +330,7 @@ With the database configured, let's build the Todo application. This will includ
 
       The `DELETE` endpoint deletes a todo item by its ID.
 
-3.  **Build the user interface:**
+3. **Build the user interface:**
 
     Replace the content of `app.vue` with the following code to create frontend for the todo app.
 
@@ -459,7 +459,7 @@ With the database configured, let's build the Todo application. This will includ
 
     The above code creates a simple Todo application. It includes a form to add new todos, a list to display existing todos, and buttons to toggle completion status and remove todos. It uses the API endpoints you created earlier to interact with the database.
 
-4.  **Run the application locally:**
+4. **Run the application locally:**
 
     Start your Nuxt.js application locally to test the functionality.
 
@@ -471,7 +471,7 @@ With the database configured, let's build the Todo application. This will includ
 
     ![Nuxt Todo Application](/docs/guides/nuxt-todo-app.png)
 
-5.  **Commit and push the application code:**
+5. **Commit and push the application code:**
 
     ```bash
     git add .
@@ -483,7 +483,7 @@ With the database configured, let's build the Todo application. This will includ
 
 To demonstrate the automated branching workflow, you will add a new feature to your Todo application that requires a database schema change. This will show how Vercel and Neon work together to create a safe, isolated environment for testing new features. For this example, you will add a `priority` field to the todos.
 
-1.  **Create a new feature branch in git:**
+1. **Create a new feature branch in git:**
 
     Run the following command to create a new branch. This will allow you to work on the new feature without affecting the main branch.
 
@@ -491,7 +491,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     git checkout -b feature/add-priority
     ```
 
-2.  **Modify the database schema:**
+2. **Modify the database schema:**
 
     Update `server/db/schema.ts` to include a `priority` field.
 
@@ -510,7 +510,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     });
     ```
 
-3.  **Generate a new migration:**
+3. **Generate a new migration:**
 
     Run the `db:generate` command again. It will compare your updated schema to the database state and create a new migration file.
 
@@ -518,7 +518,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     npm run db:generate
     ```
 
-4.  Update `app.vue` with the new priority field in the UI. Copy the following code to replace the existing content in `app.vue`.
+4. Update `app.vue` with the new priority field in the UI. Copy the following code to replace the existing content in `app.vue`.
 
     ```vue
     <template>
@@ -706,7 +706,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     </style>
     ```
 
-5.  Update the `server/api/todos.post.ts` endpoint to handle the new `priority` field:
+5. Update the `server/api/todos.post.ts` endpoint to handle the new `priority` field:
 
     ```typescript
     import { db } from '~/server/utils/db';
@@ -725,7 +725,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     });
     ```
 
-6.  **Push the feature branch to GitHub:**
+6. **Push the feature branch to GitHub:**
 
     Commit the schema and migration changes and push the new branch.
 
@@ -735,7 +735,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     git push -u origin feature/add-priority
     ```
 
-7.  **Check the Preview deployment:**
+7. **Check the Preview deployment:**
     - **Vercel:** Go to your project in Vercel. You will see a new **Preview deployment** being built for the `feature/add-priority` branch.
     - **Neon:** Go to your project in the Neon Console and click on the **Branches** tab. You will see a new branch has been automatically created, named something like `preview/feature/add-priority`. This branch is an instant, copy-on-write clone of your main branch.
 
@@ -743,7 +743,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
 
     ![Preview deployment](/docs/guides/nuxt-vercel-neon-preview-deployment.png)
 
-8.  **Merge the pull request:**
+8. **Merge the pull request:**
 
     On GitHub, create and merge the pull request for your feature branch.
     Merging to `main` will trigger a new **Production Deployment** in Vercel. The build process will run again, but this time `db:migrate` will run against your main production database, safely applying the new schema change.

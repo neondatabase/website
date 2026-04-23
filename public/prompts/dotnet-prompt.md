@@ -5,6 +5,7 @@
 **Purpose:** To install the required NuGet packages and provide a working C# code example that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon using the Npgsql driver.
 
 **Scope:**
+
 - Assumes the user has an open .NET project (e.g., a Console App created via `dotnet new console`).
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -32,6 +33,7 @@ dotnet add package Microsoft.Extensions.Configuration.Binder
 
 - Check for the presence of an `appsettings.json` file at the root of the project.
 - If it doesn't exist, create one and add the following JSON structure. Advise the user to replace the placeholder with the one copied from their Neon project.
+
   ```json
   {
     "ConnectionStrings": {
@@ -39,6 +41,7 @@ dotnet add package Microsoft.Extensions.Configuration.Binder
     }
   }
   ```
+
 - **Do not hardcode** credentials directly in the code.
 - Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**, making sure to select **.NET** from the dropdown.
 
@@ -151,9 +154,11 @@ Once the setup is complete:
 
 1. Advise the user to ensure their connection string is correctly set in the `appsettings.json` file.
 2. Instruct them to run the application from their terminal:
+
    ```bash
    dotnet run
    ```
+
 3. If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
 
 ---

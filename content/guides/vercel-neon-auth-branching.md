@@ -17,10 +17,10 @@ This guide demonstrates that workflow using **Neon Branching** and **Vercel**. W
 
 You will build a simple Message Board to demonstrate this workflow:
 
-1.  **Start with an open board** where anyone can post (Production).
-2.  **Develop a "Moderation" feature** where only Admins can approve posts (Preview Deployment).
-3.  **Test the Admin flow** using real user accounts in the isolated Preview environment.
-4.  **Verify** that production remains unaffected throughout the process.
+1. **Start with an open board** where anyone can post (Production).
+2. **Develop a "Moderation" feature** where only Admins can approve posts (Preview Deployment).
+3. **Test the Admin flow** using real user accounts in the isolated Preview environment.
+4. **Verify** that production remains unaffected throughout the process.
 
 ## Prerequisites
 
@@ -404,9 +404,9 @@ Navigate to your forked repository on GitHub and open a Pull Request (PR) from t
 
 When you open the Pull Request, the Neon-Vercel integration kicks in:
 
-1.  **Neon** creates a database branch (e.g., `preview/feat-moderation...`). This branch contains a snapshot of production, **including your real users**.
-2.  **Vercel** deploys the preview, injecting the connection string and `NEON_AUTH_BASE_URL` specific to that branch.
-3.  **Build Step:** Vercel runs `drizzle-kit migrate` as part of the build step, adding the `is_approved` column to the **preview database only**.
+1. **Neon** creates a database branch (e.g., `preview/feat-moderation...`). This branch contains a snapshot of production, **including your real users**.
+2. **Vercel** deploys the preview, injecting the connection string and `NEON_AUTH_BASE_URL` specific to that branch.
+3. **Build Step:** Vercel runs `drizzle-kit migrate` as part of the build step, adding the `is_approved` column to the **preview database only**.
 
 ### Verify in the Preview Environment
 
@@ -414,38 +414,38 @@ Open the Vercel Preview URL provided in the PR comment ([see example](https://gi
 
 **Verify data integrity**
 
-1.  Log in as an existing user from production.
-2.  **Verify:** All previous messages from production are visible in the Live feed. The data integrity is intact.
+1. Log in as an existing user from production.
+2. **Verify:** All previous messages from production are visible in the Live feed. The data integrity is intact.
 
 **Test the regular user**
 
-1.  Log in as regular user.
-2.  Post a message: "Can anyone see this?"
-3.  **Verify:** The message should **not** appear in the "Messages" list. It is successfully caught in the pending state for moderation.
+1. Log in as regular user.
+2. Post a message: "Can anyone see this?"
+3. **Verify:** The message should **not** appear in the "Messages" list. It is successfully caught in the pending state for moderation.
 
 **Test the admin flow**
 To test the admin functionality, you need to promote a user to `admin` role in the Neon Console for the preview branch.
 
-1.  Go to the **Neon Console**.
-2.  Under **Branch** select the preview branch created for your PR (e.g., `preview/feat-moderation...`).
-3.  Navigate to **Auth → Users**.
-4.  Find a user and change their role to `admin` by clicking the three-dot menu and selecting **Make Admin**.
+1. Go to the **Neon Console**.
+2. Under **Branch** select the preview branch created for your PR (e.g., `preview/feat-moderation...`).
+3. Navigate to **Auth → Users**.
+4. Find a user and change their role to `admin` by clicking the three-dot menu and selecting **Make Admin**.
     ![Assign admin role in Neon Console](/docs/guides/neon_auth_make_admin_for_preview_branch.png)
     Now you have an admin user in your preview environment.
-5.  Go back to the Vercel Preview URL and log in as the admin user.
-6.  **Verify:** You should see the **Moderation Queue**. Click **Approve** on the message. It should move to the main feed.
+5. Go back to the Vercel Preview URL and log in as the admin user.
+6. **Verify:** You should see the **Moderation Queue**. Click **Approve** on the message. It should move to the main feed.
     ![Approve message in Moderation Queue](/docs/guides/message_board_admin_view.png)
-7.  Log out and log back in as the regular user.
-8.  **Verify:** The message "Can anyone see this?" now appears to everyone.
+7. Log out and log back in as the regular user.
+8. **Verify:** The message "Can anyone see this?" now appears to everyone.
 
 ### Verify Production Isolation
 
 Go to your live Production URL.
 
-1.  Log in as the admin user you modified in the preview branch.
-2.  **Verify:** They are **still a regular user**. The role change you made in the Neon Console only affected the branch.
-3.  **Verify:** The "Can anyone see this?" message **does not exist**.
-4.  Production is completely unaffected.
+1. Log in as the admin user you modified in the preview branch.
+2. **Verify:** They are **still a regular user**. The role change you made in the Neon Console only affected the branch.
+3. **Verify:** The "Can anyone see this?" message **does not exist**.
+4. Production is completely unaffected.
 
 ## Merge and cleanup
 

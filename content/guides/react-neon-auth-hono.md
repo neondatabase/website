@@ -11,9 +11,9 @@ This guide demonstrates how to integrate a **standalone React frontend** with a 
 
 Unlike frameworks that blend frontend and backend logic (like Next.js), this guide follows a decoupled architecture pattern. You will build a React Single Page Application (SPA) that communicates with a separate Hono server via a REST API.
 
-1.  **Identity (Neon Auth):** Handles sign-ups, logins, and issues **JSON Web Tokens (JWTs)**.
-2.  **Frontend (React):** Manages the user interface and attaches the JWT to API requests as a Bearer token.
-3.  **Backend (Hono):** A lightweight Node.js server that verifies the token signature using Neon's **JWKS endpoint** before allowing access to the database.
+1. **Identity (Neon Auth):** Handles sign-ups, logins, and issues **JSON Web Tokens (JWTs)**.
+2. **Frontend (React):** Manages the user interface and attaches the JWT to API requests as a Bearer token.
+3. **Backend (Hono):** A lightweight Node.js server that verifies the token signature using Neon's **JWKS endpoint** before allowing access to the database.
 
 This approach is ideal when you need a dedicated backend for complex business rules, third-party integrations (like Stripe or OpenAI), or microservices, while still offloading user management complexities to Neon.
 
@@ -32,12 +32,12 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `journal-app`.
-2.  **Enable Neon Auth:**
+1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `journal-app`.
+2. **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
-3.  **Copy your credentials:**
+3. **Copy your credentials:**
     - **Neon Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
@@ -133,7 +133,7 @@ To integrate Neon Auth tables into your Drizzle ORM setup, you need to introspec
 
 This step is crucial because it makes Drizzle aware of the Neon Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Neon Auth.
 
-1.  **Introspect the database:**
+1. **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
 
     ```bash
@@ -142,7 +142,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Neon Auth tables.
 
-2.  **Organize schema files:**
+2. **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
 
     ```
@@ -159,7 +159,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
      └ …
     ```
 
-3.  **Add the Journals table to the schema:**
+3. **Add the Journals table to the schema:**
 
     Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g, `bigint`).
 
@@ -689,10 +689,10 @@ npm run dev
 
 ## Test the application
 
-1.  Navigate to `http://localhost:5173`.
-2.  **Sign In:** You will be presented with the Neon Auth sign-in page. Create an account or log in using your preferred method (email or Google).
-3.  **Write a Journal Entry:** Write a new journal entry in the textarea and click "Save".
-4.  **Verify flow:**
+1. Navigate to `http://localhost:5173`.
+2. **Sign In:** You will be presented with the Neon Auth sign-in page. Create an account or log in using your preferred method (email or Google).
+3. **Write a Journal Entry:** Write a new journal entry in the textarea and click "Save".
+4. **Verify flow:**
     - The Frontend calls `authClient.getSession()` to grab the session data (which includes the JWT).
     - It sends a `POST` request to `http://localhost:3000/api/entries` with `Authorization: Bearer <jwt>`.
     - The backend validates the signature using the JWKS from Neon.

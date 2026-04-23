@@ -5,6 +5,7 @@
 **Purpose:** To connect the current Django project to Neon Postgres by installing the required packages, configuring `settings.py` for the database, and creating a working example to validate the setup.
 
 **Scope:**
+
 - Must be run inside an existing Django project directory.
 - Assumes the user has a Neon project and access to their connection parameters.
 - All package installations must occur within an active Python virtual environment.
@@ -20,11 +21,14 @@ When this prompt is triggered, automatically configure the open Django project a
 ### 1. Ensure a Virtual Environment is Active
 
 This is a mandatory first step.
+
 - Check for a virtual environment directory (e.g., `venv`, `.venv`) in the project root.
 - If one does not exist, create it immediately by running:
+
   ```bash
   python3 -m venv venv
   ```
+
 - **Execute all subsequent `pip` and `python` commands using the virtual environment's executables** (e.g., `venv/bin/python`, `venv/bin/pip`).
 
 ---
@@ -44,8 +48,8 @@ venv/bin/pip install "psycopg[binary]" python-dotenv
 
 ### 3. Configure Environment Variables
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following connection parameters to the `.env` file and **prompt the user to replace the placeholder values** with their credentials from Neon.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the following connection parameters to the `.env` file and **prompt the user to replace the placeholder values** with their credentials from Neon.
 
     ```dotenv title=".env"
     PGHOST='aws-xxx-pooler.neon.tech'
@@ -55,7 +59,7 @@ venv/bin/pip install "psycopg[binary]" python-dotenv
     PGPORT=5432
     ```
 
-3.  Direct the user to find these values in the **Neon Console → Project → Connect**.
+3. Direct the user to find these values in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -63,8 +67,9 @@ venv/bin/pip install "psycopg[binary]" python-dotenv
 
 Modify the project's main `settings.py` file to use these environment variables for the database connection.
 
-1.  **Locate the `settings.py` file** (usually inside a directory named after your project).
-2.  **Add imports** at the top of the file:
+1. **Locate the `settings.py` file** (usually inside a directory named after your project).
+2. **Add imports** at the top of the file:
+
     ```python
     import os
     from dotenv import load_dotenv
@@ -72,7 +77,8 @@ Modify the project's main `settings.py` file to use these environment variables 
     # Load environment variables
     load_dotenv()
     ```
-3.  **Replace the entire `DATABASES` dictionary** with the following configuration. This setup reads credentials from the `.env` file and includes best practices for connecting to Neon.
+
+3. **Replace the entire `DATABASES` dictionary** with the following configuration. This setup reads credentials from the `.env` file and includes best practices for connecting to Neon.
 
     ```python
     DATABASES = {
@@ -99,7 +105,7 @@ Modify the project's main `settings.py` file to use these environment variables 
 
 To provide a clear way to verify the setup, create a simple view, template, and URL route that displays the PostgreSQL version from the connected Neon database.
 
-1.  **Create a view:** In your project's main `urls.py` file's directory, create a new file named `views.py` (if it doesn't already exist) with the following content:
+1. **Create a view:** In your project's main `urls.py` file's directory, create a new file named `views.py` (if it doesn't already exist) with the following content:
 
     ```python title="<project_name>/views.py"
     from django.shortcuts import render
@@ -116,7 +122,7 @@ To provide a clear way to verify the setup, create a simple view, template, and 
         return render(request, 'index.html', context)
     ```
 
-2.  **Create a template:**
+2. **Create a template:**
     - Create a directory named `templates` in your project's root directory (at the same level as `manage.py`).
     - Inside `templates`, create a file named `index.html`:
 
@@ -141,8 +147,9 @@ To provide a clear way to verify the setup, create a simple view, template, and 
     </html>
     ```
 
-3.  **Configure Templates and URLs:**
+3. **Configure Templates and URLs:**
     - In `settings.py`, find the `TEMPLATES` setting and add the new `templates` directory:
+
       ```python
       TEMPLATES = [
           {
@@ -155,7 +162,9 @@ To provide a clear way to verify the setup, create a simple view, template, and 
           },
       ]
       ```
+
     - In your project's main `urls.py`, add a route to the new view:
+
       ```python title="<project_name>/urls.py"
       from django.contrib import admin
       from django.urls import path
@@ -173,22 +182,27 @@ To provide a clear way to verify the setup, create a simple view, template, and 
 
 Once the file modifications are complete:
 
-1.  Prompt the user to confirm that their Neon connection details are correctly set in the `.env` file.
-2.  Run the initial database migrations:
+1. Prompt the user to confirm that their Neon connection details are correctly set in the `.env` file.
+2. Run the initial database migrations:
+
     ```bash
     venv/bin/python manage.py migrate
     ```
-3.  Start the Django development server:
+
+3. Start the Django development server:
+
     ```bash
     venv/bin/python manage.py runserver
     ```
-4.  Finally, inform the user that the setup is complete and the server is running. To test the connection, they can visit `http://localhost:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
+
+4. Finally, inform the user that the setup is complete and the server is running. To test the connection, they can visit `http://localhost:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A Python virtual environment exists and is intended for use.
 - The `psycopg[binary]` and `python-dotenv` packages are installed.
 - A `.env` file is present or has been created.

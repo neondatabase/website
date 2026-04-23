@@ -58,30 +58,30 @@ The following example shows how to use a simple `case` statement:
 ```plsql
 do $$
 declare
-	rate film.rental_rate%type;
-	price_segment varchar(50);
+ rate film.rental_rate%type;
+ price_segment varchar(50);
 begin
     -- get the rental rate
     select rental_rate into rate
     from film
     where film_id = 100;
 
-	-- assign the price segment
-	if found then
-		case rate
-		   when 0.99 then
+ -- assign the price segment
+ if found then
+  case rate
+     when 0.99 then
               price_segment =  'Mass';
-		   when 2.99 then
+     when 2.99 then
               price_segment = 'Mainstream';
-		   when 4.99 then
+     when 4.99 then
               price_segment = 'High End';
-		   else
-	    	  price_segment = 'Unspecified';
-		   end case;
+     else
+        price_segment = 'Unspecified';
+     end case;
 
-		raise notice '%', price_segment;
-	else
-		raise notice 'film not found';
+  raise notice '%', price_segment;
+ else
+  raise notice 'film not found';
     end if;
 end; $$
 ```
@@ -140,19 +140,19 @@ begin
      from Payment
      where customer_id = 100;
 
-	 if found then
-	    case
-		   when total_payment > 200 then
+  if found then
+     case
+     when total_payment > 200 then
                service_level = 'Platinum' ;
            when total_payment > 100 then
-	           service_level = 'Gold' ;
+            service_level = 'Gold' ;
            else
                service_level = 'Silver' ;
         end case;
-		raise notice 'Service Level: %', service_level;
+  raise notice 'Service Level: %', service_level;
      else
-	    raise notice 'Customer not found';
-	 end if;
+     raise notice 'Customer not found';
+  end if;
 end; $$
 
 ```

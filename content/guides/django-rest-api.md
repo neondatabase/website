@@ -447,6 +447,7 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
    ```
 
 5. Add a benchmark for an AI model:
+
    ```bash shouldWrap
    curl -X POST http://localhost:8000/api/benchmarks/ -H "Content-Type: application/json" -d '{"ai_model":1, "metric_name":"Accuracy", "value":0.95, "hardware_used":"NVIDIA A100 GPU"}'
    ```

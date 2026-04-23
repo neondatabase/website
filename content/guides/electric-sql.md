@@ -30,8 +30,8 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 ElectricSQL requires a Postgres database with logical replication enabled. You'll configure your Neon project accordingly.
 
-1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech).
-2.  **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
+1. **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech).
+2. **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project in the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
     - Click on **Logical Replication**.
@@ -39,7 +39,7 @@ ElectricSQL requires a Postgres database with logical replication enabled. You'l
 
       ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
-3.  **Retrieve connection string:**
+3. **Retrieve connection string:**
     - Navigate to the **Dashboard** of your Neon project.
     - Click on the **Connect** button which opens a modal.
     - Select your database and branch, and copy the connection string with connection pooling disabled.
@@ -125,7 +125,7 @@ INSERT INTO scores (name, value) VALUES
 
 ### Set up the React application
 
-1.  Create a new React application using Vite. Open your terminal and run the following commands:
+1. Create a new React application using Vite. Open your terminal and run the following commands:
 
     ```bash
     npm create vite@latest react-app -- --template react-ts
@@ -133,13 +133,13 @@ INSERT INTO scores (name, value) VALUES
     npm install
     ```
 
-2.  Install ElectricSQL React client:
+2. Install ElectricSQL React client:
 
     ```bash
     npm install @electric-sql/react
     ```
 
-3.  Replace the content of `src/App.tsx` with the following code.
+3. Replace the content of `src/App.tsx` with the following code.
 
     ```tsx
     import { useShape } from '@electric-sql/react';
@@ -160,7 +160,7 @@ INSERT INTO scores (name, value) VALUES
 
     ElectricSQL uses Shapes to define subsets of your Postgres data for real-time synchronization. Here, `useShape` subscribes to a shape representing the `scores` table, ensuring your React app always has the latest score data.
 
-4.  Start the React development server by running the following command in your terminal:
+4. Start the React development server by running the following command in your terminal:
 
     ```bash
     npm run dev
@@ -172,7 +172,7 @@ INSERT INTO scores (name, value) VALUES
 
 Your React application should now be running in your browser. It's actively connected to the Electric, which maintains a real-time link to your Neon Postgres database via Logical Replication.
 
-1.  **Access the application:** Open [`localhost:5173`](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
+1. **Access the application:** Open [`localhost:5173`](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
 
     ```json
     [
@@ -189,7 +189,7 @@ Your React application should now be running in your browser. It's actively conn
     ]
     ```
 
-2.  **Test real-time updates:**
+2. **Test real-time updates:**
     - Open the Neon SQL Editor or use `psql` to connect to your Neon database.
     - Insert a new row into the `scores` table:
 
@@ -208,7 +208,7 @@ Your React application should now be running in your browser. It's actively conn
 
       ![React app displaying real-time data from Neon Postgres](/docs/guides/electric-sql-react-app.gif)
 
-3.  **Understanding writes:**
+3. **Understanding writes:**
     ElectricSQL handles the read-path synchronization (data from Postgres to client). To write data back to your Neon database (e.g., from user input in the React app), you would typically:
     - Implement an API endpoint in your backend application.
     - This API endpoint would receive write requests from your React app.
@@ -227,11 +227,11 @@ The core principle for a secure and scalable ElectricSQL deployment is to place 
 
 A typical production architecture with ElectricSQL and Neon Postgres involves the following components:
 
-1.  **Client application:** Your web or mobile application using an ElectricSQL client (e.g., `@electric-sql/react`).
-2.  **Caching proxy (recommended for performance):** While optional, deploying Electric behind a caching proxy like Nginx, Caddy, Varnish, or a CDN (e.g., Cloudflare, Fastly) is recommended. This setup can significantly improve performance and reduce load by caching responses from Electric.
-3.  **Authorization proxy:** A service (which could be part of your existing backend or a dedicated middleware) that intercepts requests destined for Electric. Its primary roles are authentication and authorization.
-4.  **Electric:** Electric handles the real-time data synchronization between your client application requests and the Neon Postgres database.
-5.  **Neon Postgres Database:** Your source of truth.
+1. **Client application:** Your web or mobile application using an ElectricSQL client (e.g., `@electric-sql/react`).
+2. **Caching proxy (recommended for performance):** While optional, deploying Electric behind a caching proxy like Nginx, Caddy, Varnish, or a CDN (e.g., Cloudflare, Fastly) is recommended. This setup can significantly improve performance and reduce load by caching responses from Electric.
+3. **Authorization proxy:** A service (which could be part of your existing backend or a dedicated middleware) that intercepts requests destined for Electric. Its primary roles are authentication and authorization.
+4. **Electric:** Electric handles the real-time data synchronization between your client application requests and the Neon Postgres database.
+5. **Neon Postgres Database:** Your source of truth.
 
 ### Securing read access
 
@@ -241,7 +241,7 @@ The read path (data syncing from Neon to your client via ElectricSQL) needs to b
 
 `User Client -> Caching Proxy (optional) -> Authorization Proxy -> ElectricSQL -> Neon Postgres`
 
-1.  **Client request:** The ElectricSQL client in the user's application initiates a shape subscription request. This request should include authentication credentials (e.g., a JWT in an `Authorization` header) and the desired shape definition (e.g., `table=items`).
+1. **Client request:** The ElectricSQL client in the user's application initiates a shape subscription request. This request should include authentication credentials (e.g., a JWT in an `Authorization` header) and the desired shape definition (e.g., `table=items`).
 
     ```typescript
     // Example: Client-side useShape hook with an auth header
@@ -264,7 +264,7 @@ The read path (data syncing from Neon to your client via ElectricSQL) needs to b
     };
     ```
 
-2.  **Authorization proxy:**
+2. **Authorization proxy:**
     - **Authentication:** The proxy validates the `Authorization` header (or other credentials) sent by the client. If authentication fails, it returns a `401 Unauthorized` or `403 Forbidden` error.
     - **Authorization & Dynamic Shape modification:** Upon successful authentication, the proxy determines the user's identity and permissions. It then _modifies_ the incoming shape request before forwarding it to Electric. This can be done by adding or augmenting `WHERE` clauses to the shape's `params`.
       For example, a user should only see projects belonging to their organization, the proxy would:

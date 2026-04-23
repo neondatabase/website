@@ -40,9 +40,11 @@ Here's how to use it:
 
 3. **Rolling back to a specific point in time:**
    For more granular control over the rollback process, use the `--date` option with a date string.
+
    ```bash
    php artisan migrate:rollback --date="2024-05-01 12:00:00"
    ```
+
    This command will roll back all migrations that were executed after the specified date.
 
 ### Troubleshooting rollback issues

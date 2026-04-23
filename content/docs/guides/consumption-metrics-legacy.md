@@ -257,4 +257,4 @@ The legacy endpoints on this page were designed for Neon's legacy billing plans 
 
 **Legacy API:** Uses `synthetic_storage_size_bytes` (logical data + WAL for all branches in one metric).
 
-**Usage-based API:** Returns separate metrics that match your invoice: `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, and `compute_unit_seconds`. The legacy APIs do not provide these. Use the [project metrics endpoint](/docs/guides/consumption-metrics#request-overview) in Query consumption metrics to retrieve them.
+**Usage-based API:** Returns separate metrics that match your invoice: `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, and `compute_unit_seconds`. The legacy APIs do not provide these. Use the [project metrics endpoint](/docs/guides/consumption-metrics#request-overview) in Query consumption metrics to retrieve them.

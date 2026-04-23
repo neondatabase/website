@@ -8,7 +8,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.150Z'
 ---
 
-<CopyPrompt src="/prompts/elixir-prompt.md" 
+<CopyPrompt src="/prompts/elixir-prompt.md"
 description="Pre-built prompt for connecting Elixir applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a high-performance, concurrent, and robust PostgreSQL driver for Elixir.
@@ -26,9 +26,9 @@ You'll learn how to connect to your Neon database from an Elixir application, an
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Elixir application.
 
@@ -36,7 +36,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your Elixir project, create a project directory using `mix` and add the required library.
 
-1.  Create a new supervised Elixir project and change into the directory.
+1. Create a new supervised Elixir project and change into the directory.
 
     ```bash
     mix new neon_elixir_quickstart --sup
@@ -45,7 +45,7 @@ For your Elixir project, create a project directory using `mix` and add the requ
 
     > Open this directory in your preferred code editor (for example, VS Code).
 
-2.  Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.18.0"}`:
+2. Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.18.0"}`:
 
     ```elixir title="mix.exs"
     defp deps do
@@ -55,7 +55,7 @@ For your Elixir project, create a project directory using `mix` and add the requ
     end
     ```
 
-3.  Install the dependency from your terminal:
+3. Install the dependency from your terminal:
 
     ```bash
     mix deps.get
@@ -65,12 +65,12 @@ For your Elixir project, create a project directory using `mix` and add the requ
 
 You'll configure your application to connect to Neon using the `config/config.exs` file. This method securely separates your credentials from your source code.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-3.  Select the **Parameters only** tab to view the connection string parameters.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+3. Select the **Parameters only** tab to view the connection string parameters.
     ![Connection modal](/docs/connect/connection_details_parameters_only.png)
-4.  Copy the connection string parameters (user, password, host, and database name).
-5.  Create / Open the `config/config.exs` file and add a configuration block for your project, replacing the placeholder values with your actual database credentials.
+4. Copy the connection string parameters (user, password, host, and database name).
+5. Create / Open the `config/config.exs` file and add a configuration block for your project, replacing the placeholder values with your actual database credentials.
 
     ```elixir title="config/config.exs"
     import Config

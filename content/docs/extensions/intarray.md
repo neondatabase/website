@@ -32,48 +32,65 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 The `intarray` extension provides several useful functions for array manipulation:
 
 - `icount(integer[]) → integer`: Returns the number of elements in the array.
+
   ```sql
   SELECT icount('{1,2,3,2}'::integer[]);
   -- Result: 4
   ```
+
 - `sort(integer[], dir text) → integer[]`: Sorts the array. `dir` can be 'asc' (ascending) or 'desc' (descending).
+
   ```sql
   SELECT sort('{1,3,2}'::integer[], 'desc');
   -- Result: {3,2,1}
   ```
+
 - `sort_asc(integer[]) → integer[]`: Sorts the array in ascending order. (Equivalent to `sort(arr, 'asc')`).
+
   ```sql
   SELECT sort_asc('{11,77,44}'::integer[]);
   -- Result: {11,44,77}
   ```
+
 - `sort_desc(integer[]) → integer[]`: Sorts the array in descending order. (Equivalent to `sort(arr, 'desc')`).
+
   ```sql
   SELECT sort_desc('{11,77,44}'::integer[]);
   -- Result: {77,44,11}
   ```
+
 - `uniq(integer[]) → integer[]`: Removes _adjacent_ duplicate values from the array. To remove all duplicates, sort the array first.
+
   ```sql
   SELECT uniq('{1,2,2,3,1,1}'::integer[]);
   -- Result: {1,2,3,1}
   SELECT uniq(sort('{1,2,2,3,1,1}'::integer[]));
   -- Result: {1,2,3}
   ```
+
 - `idx(integer[], item integer) → integer`: Returns the 1-based index of the first occurrence of `item` in the array, or 0 if not found.
+
   ```sql
   SELECT idx(array[11,22,33,22,11], 22);
   -- Result: 2
   ```
+
 - `subarray(integer[], start_idx integer, len integer) → integer[]`: Extracts a subarray of `len` elements starting from `start_idx` (1-based).
+
   ```sql
   SELECT subarray('{1,2,3,4,5}'::integer[], 2, 3);
   -- Result: {2,3,4}
   ```
+
 - `subarray(integer[], start_idx integer) → integer[]`: Extracts a subarray from `start_idx` to the end of the array.
+
   ```sql
   SELECT subarray('{1,2,3,4,5}'::integer[], 3);
   -- Result: {3,4,5}
   ```
+
 - `intset(integer) → integer[]`: Creates a single-element integer array.
+
   ```sql
   SELECT intset(42);
   -- Result: {42}

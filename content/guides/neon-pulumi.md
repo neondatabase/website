@@ -26,14 +26,14 @@ This provider is based on a community-maintained Terraform provider and is not o
 
 Before you begin, ensure you have the following:
 
-1.  **Pulumi CLI installed:** If you don't have Pulumi installed, download and install it from the [official Pulumi website](https://www.pulumi.com/docs/install/).
-2.  **Node.js:** This guide uses TypeScript examples. You'll need Node.js installed to run them.
-3.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-4.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
+1. **Pulumi CLI installed:** If you don't have Pulumi installed, download and install it from the [official Pulumi website](https://www.pulumi.com/docs/install/).
+2. **Node.js:** This guide uses TypeScript examples. You'll need Node.js installed to run them.
+3. **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
+4. **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
 ## Set up the Pulumi Neon provider
 
-1.  **Create a project directory:**
+1. **Create a project directory:**
     Create a new directory for your Pulumi project and navigate into it.
 
     ```shell
@@ -41,7 +41,7 @@ Before you begin, ensure you have the following:
     cd neon-pulumi-project
     ```
 
-2.  **Create a new Pulumi project:**
+2. **Create a new Pulumi project:**
     Run the `pulumi new` command to create a new TypeScript project.
 
     ```shell
@@ -81,8 +81,9 @@ Before you begin, ensure you have the following:
     To perform an initial deployment, run `pulumi up`
     ```
 
-3.  **Install the Neon provider package:**
+3. **Install the Neon provider package:**
     Once the project is created, install the Neon provider package from the Terraform registry.
+
     ```shell
     pulumi package add terraform-provider kislerdm/neon
     ```
@@ -280,7 +281,7 @@ const projectToVpc = new neon.VpcEndpointRestriction('projectToVpc', {
 
 Once you have defined your resources in `index.ts`:
 
-1.  **Preview the changes:**
+1. **Preview the changes:**
     Run `pulumi preview` to see what actions Pulumi will take. This command shows you the resources that will be created, modified, or destroyed without making any changes.
 
     ```shell
@@ -317,7 +318,7 @@ Once you have defined your resources in `index.ts`:
         + 8 to create
     ```
 
-2.  **Deploy the resources:**
+2. **Deploy the resources:**
     Run `pulumi up` to create the resources in Neon.
 
     ```shell
@@ -408,13 +409,13 @@ export const appUserPassword = pulumi.secret(appUser.password);
 
 For local development or debugging, you can view the decrypted value of any secret output using the Pulumi CLI.
 
-1.  **View all stack outputs (secrets remain masked):**
+1. **View all stack outputs (secrets remain masked):**
 
     ```shell
     pulumi stack output
     ```
 
-2.  **View a specific secret (decrypted):**
+2. **View a specific secret (decrypted):**
     To view the actual, unencrypted value of a specific secret, use the `--show-secrets` flag.
 
     **To get the connection string:**
@@ -443,10 +444,10 @@ If you have existing Neon resources created outside of Pulumi, you can bring the
 
 ### The import process
 
-1.  **Identify the resource type, a name for Pulumi, and the resource ID.**
-2.  **Run the `pulumi import` command.**
-3.  **Copy the generated code into your `index.ts` file.**
-4.  **Run `pulumi up` to reconcile the state and configuration.**
+1. **Identify the resource type, a name for Pulumi, and the resource ID.**
+2. **Run the `pulumi import` command.**
+3. **Copy the generated code into your `index.ts` file.**
+4. **Run `pulumi up` to reconcile the state and configuration.**
 
 The command format is: `pulumi import <type> <name> <id>`
 
@@ -469,7 +470,7 @@ The command format is: `pulumi import <type> <name> <id>`
 
 Let's assume you have an existing project and a branch you want to manage with Pulumi.
 
-1.  **Import the project:**
+1. **Import the project:**
     Find your Project ID in the Neon Console.
 
     ```shell
@@ -546,7 +547,7 @@ Let's assume you have an existing project and a branch you want to manage with P
 
     > Copy the generated code into your `index.ts` file.
 
-2.  **Import the branch:**
+2. **Import the branch:**
     Find your Branch ID from the Neon Console.
 
     ```shell
@@ -608,7 +609,7 @@ Let's assume you have an existing project and a branch you want to manage with P
 
     Similarly, you can import other resources like `Endpoint`, `Role`, and `Database` using their respective IDs.
 
-3.  **Reconcile and finalize:**
+3. **Reconcile and finalize:**
     After adding the code to your `index.ts`, run `pulumi preview` and `pulumi up`. Pulumi will compare the imported state with your new code and ensure they match. After this, your resources are fully managed by Pulumi.
 
 ## Destroying resources

@@ -75,12 +75,12 @@ declare
 begin
 
   loop
-  	counter = counter + 1;
-	raise notice '%', counter;
+   counter = counter + 1;
+ raise notice '%', counter;
 
-	if counter = 5 then
-		exit;
-	end if;
+ if counter = 5 then
+  exit;
+ end if;
 
   end loop;
 
@@ -145,9 +145,9 @@ declare
 begin
 
   loop
-  	counter = counter + 1;
-	raise notice '%', counter;
-	exit when counter = 5;
+   counter = counter + 1;
+ raise notice '%', counter;
+ exit when counter = 5;
   end loop;
 
 end;
@@ -170,9 +170,9 @@ begin
 
  <<my_loop>>
   loop
-  	counter = counter + 1;
-	raise notice '%', counter;
-	exit my_loop when counter = 5;
+   counter = counter + 1;
+ raise notice '%', counter;
+ exit my_loop when counter = 5;
   end loop;
 
 end;
@@ -206,26 +206,26 @@ The following example illustrates how to use a nested loop with labels:
 do $$
 
 declare
-	row_var int := 0;
-	col_var int := 0;
+ row_var int := 0;
+ col_var int := 0;
 begin
-	<<outer_loop>>
-	loop
-		row_var = row_var + 1;
-		<<inner_loop>>
-		loop
-			col_var = col_var + 1;
-			raise notice '(%, %)', row_var, col_var;
+ <<outer_loop>>
+ loop
+  row_var = row_var + 1;
+  <<inner_loop>>
+  loop
+   col_var = col_var + 1;
+   raise notice '(%, %)', row_var, col_var;
 
-			-- terminate the inner loop
-			exit inner_loop when col_var = 3;
-		end loop;
-		-- reset the column
-		col_var = 0;
+   -- terminate the inner loop
+   exit inner_loop when col_var = 3;
+  end loop;
+  -- reset the column
+  col_var = 0;
 
-		-- terminate the outer loop
-		exit outer_loop when row_var = 3;
-	end loop;
+  -- terminate the outer loop
+  exit outer_loop when row_var = 3;
+ end loop;
 end;
 
 $$;

@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
-<CopyPrompt src="/prompts/dotnet-prompt.md" 
+<CopyPrompt src="/prompts/dotnet-prompt.md"
 description="Pre-built prompt for connecting .NET applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a .NET (C#) application using [Npgsql](https://www.npgsql.org/), a .NET data provider for PostgreSQL.
@@ -32,9 +32,9 @@ The same configuration steps can be used for any .NET application type, includin
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your .NET application.
 
@@ -42,7 +42,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your .NET project, you will create a project directory and add the required packages using the `dotnet` CLI.
 
-1.  Create a new console application and change into the newly created directory.
+1. Create a new console application and change into the newly created directory.
 
     ```bash
     dotnet new console -o NeonLibraryExample
@@ -51,7 +51,7 @@ For your .NET project, you will create a project directory and add the required 
 
     > Open this directory in your preferred code editor (for example, VS Code, Visual Studio).
 
-2.  Add the required NuGet packages using `dotnet add package`.
+2. Add the required NuGet packages using `dotnet add package`.
     - `Npgsql`: The .NET data provider for PostgreSQL.
     - `Microsoft.Extensions.Configuration.Json`: To read configuration from `appsettings.json`.
     - `Microsoft.Extensions.Configuration.Binder`: To bind configuration values to objects.
@@ -66,12 +66,12 @@ For your .NET project, you will create a project directory and add the required 
 
 Create a file named `appsettings.json` in your project's root directory. This is the standard .NET approach for storing configuration data like connection strings.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-3.  Select **.NET** as your connection method.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+3. Select **.NET** as your connection method.
     ![Connection modal](/docs/connect/dotnet_connection_details.png)
-4.  Copy the **pooled** connection string, which includes your password.
-5.  Create an `appsettings.json` file in your project's root directory and add the connection string to it as shown below.
+4. Copy the **pooled** connection string, which includes your password.
+5. Create an `appsettings.json` file in your project's root directory and add the connection string to it as shown below.
 
     ```json title="appsettings.json"
     {

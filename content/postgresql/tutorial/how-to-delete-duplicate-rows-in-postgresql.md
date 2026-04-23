@@ -115,10 +115,10 @@ The following query retrieves data from the `basket` table to verify the duplica
 
 ```sql
 SELECT
-	id,
-	fruit
+ id,
+ fruit
 FROM
-	basket;
+ basket;
 ```
 
 Output:

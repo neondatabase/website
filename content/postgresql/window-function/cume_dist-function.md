@@ -120,10 +120,10 @@ The following example uses the `CUME_DIST()` function to calculate the sales per
 ```sql
 SELECT
     name,
-	year,
-	amount,
+ year,
+ amount,
     CUME_DIST() OVER (
-		PARTITION BY year
+  PARTITION BY year
         ORDER BY amount
     )
 FROM

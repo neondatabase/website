@@ -143,7 +143,7 @@ Altering default text search configurations (like `english`) requires superuser 
 
 Here's the recommended approach:
 
-1.  Create your custom integer dictionary (if you haven't already):
+1. Create your custom integer dictionary (if you haven't already):
 
     ```sql
     CREATE TEXT SEARCH DICTIONARY my_custom_intdict (
@@ -154,7 +154,7 @@ Here's the recommended approach:
     );
     ```
 
-2.  Create a copy of an existing text search configuration (for example, `english`):
+2. Create a copy of an existing text search configuration (for example, `english`):
 
     ```sql
     CREATE TEXT SEARCH CONFIGURATION public.my_app_search_config (COPY = pg_catalog.english);
@@ -162,7 +162,8 @@ Here's the recommended approach:
 
     The above sql creates a new configuration named `my_app_search_config` that inherits the settings of the `english` configuration.
 
-3.  Alter the copied configuration to use custom dictionary for integer token types (`int` and `uint`):
+3. Alter the copied configuration to use custom dictionary for integer token types (`int` and `uint`):
+
     ```sql
     ALTER TEXT SEARCH CONFIGURATION public.my_app_search_config
         ALTER MAPPING FOR int, uint WITH my_custom_intdict;
@@ -194,7 +195,7 @@ INSERT INTO documents (title, content, version_code) VALUES
 
 ### Create custom dictionary and text search configuration
 
-1.  Create a custom integer dictionary, `doc_version_intdict`, with `maxlen` set to 4, `rejectlong` to `true`, and `absval` to `true`.
+1. Create a custom integer dictionary, `doc_version_intdict`, with `maxlen` set to 4, `rejectlong` to `true`, and `absval` to `true`.
 
     ```sql
     CREATE TEXT SEARCH DICTIONARY doc_version_intdict (
@@ -205,13 +206,14 @@ INSERT INTO documents (title, content, version_code) VALUES
     );
     ```
 
-2.  Create a copy of the `english` text search configuration, naming it `doc_search_config`.
+2. Create a copy of the `english` text search configuration, naming it `doc_search_config`.
 
     ```sql
     CREATE TEXT SEARCH CONFIGURATION public.doc_search_config (COPY = pg_catalog.english);
     ```
 
-3.  Alter `doc_search_config` to use `doc_version_intdict` for integers.
+3. Alter `doc_search_config` to use `doc_version_intdict` for integers.
+
     ```sql
     ALTER TEXT SEARCH CONFIGURATION public.doc_search_config
         ALTER MAPPING FOR int, uint WITH doc_version_intdict;

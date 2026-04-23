@@ -23,10 +23,10 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 
 ## Create an Uploadcare account and project
 
-1.  Sign up for an account at [Uploadcare.com](https://uploadcare.com/).
-2.  Create a new project within your Uploadcare dashboard.
-3.  Navigate to your project's **API Keys** section.
-4.  Note your **Public Key** and **Secret Key**. They are needed to interact with the Uploadcare API and widgets.
+1. Sign up for an account at [Uploadcare.com](https://uploadcare.com/).
+2. Create a new project within your Uploadcare dashboard.
+3. Navigate to your project's **API Keys** section.
+4. Note your **Public Key** and **Secret Key**. They are needed to interact with the Uploadcare API and widgets.
     ![Uploadcare API Keys](/docs/guides/uploadcare-api-keys.png)
 
 ## Create a table in Neon for file metadata
@@ -134,9 +134,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** It initializes the Neon database client and the Hono web framework. It relies on environment variables (`DATABASE_URL`, `UPLOADCARE_PUBLIC_KEY`) being set, via a `.env` file.
-2.  **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
-3.  **Upload Endpoint (`/upload`):**
+1. **Setup:** It initializes the Neon database client and the Hono web framework. It relies on environment variables (`DATABASE_URL`, `UPLOADCARE_PUBLIC_KEY`) being set, via a `.env` file.
+2. **Authentication:** A placeholder `authMiddleware` is included. **Crucially**, this needs to be replaced with real authentication logic. It currently just sets a static `userId` for demonstration.
+3. **Upload Endpoint (`/upload`):**
     - It expects a `POST` request with `multipart/form-data`.
     - It retrieves the user ID set by the middleware.
     - It extracts the `file` data and `fileName` from the form data.
@@ -234,9 +234,9 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework, Uploadcare client, and the PostgreSQL client (`psycopg2`) using environment variables.
-2.  **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
-3.  **Upload Endpoint (`/upload`):**
+1. **Setup:** Initializes the Flask web framework, Uploadcare client, and the PostgreSQL client (`psycopg2`) using environment variables.
+2. **Authentication:** A placeholder `get_authenticated_user_id` function is included. **Replace this with real authentication logic.**
+3. **Upload Endpoint (`/upload`):**
     - It expects a `POST` request with `multipart/form-data`.
     - It retrieves the user ID set by the authentication function.
     - It extracts the `file` data from the form data.
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     - Upon successful upload, Uploadcare returns details including a unique `uuid` and a `cdnUrl`.
     - It executes an `INSERT` statement using `psycopg2` to save the `uuid`, `cdnUrl`, and the `userId` into a `uploadcare_files` table in your database.
     - It sends a JSON response back to the client containing the `fileUrl` from Uploadcare.
-4.  In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
+4. In production, you should use a global PostgreSQL connection instead of creating a new one for each request. This is important for performance and resource management.
 
 </TabItem>
 
@@ -272,6 +272,7 @@ curl -X POST http://localhost:3000/upload \
 **Expected outcome:**
 
 - You should receive a JSON response similar to:
+
   ```json
   {
     "success": true,

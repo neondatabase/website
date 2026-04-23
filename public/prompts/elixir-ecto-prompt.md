@@ -5,6 +5,7 @@
 **Purpose:** To install `ecto_sql` and `postgrex` dependencies, configure an Ecto Repo and provide a working Elixir script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle using Ecto transactions.
 
 **Scope:**
+
 - Assumes the user is working within an Elixir project created with `mix new --sup`. The supervision tree is required for Ecto.
 - Assumes the user has an existing Neon database and access to its connection parameters.
 
@@ -18,33 +19,39 @@ When this prompt is triggered, automatically configure the open Elixir project a
 
 ### 1. Identify Application Name
 
-1.  Open the `mix.exs` file.
-2.  Locate the `project/0` function and identify the value of the `:app` key (e.g., `:my_app`).
-3.  Locate the `application/0` function and identify the value of the `:mod` key (e.g., `MyApp.Application`).
-4.  Use these values consistently wherever `my_app` or `MyApp` are mentioned in the following instructions.
+1. Open the `mix.exs` file.
+2. Locate the `project/0` function and identify the value of the `:app` key (e.g., `:my_app`).
+3. Locate the `application/0` function and identify the value of the `:mod` key (e.g., `MyApp.Application`).
+4. Use these values consistently wherever `my_app` or `MyApp` are mentioned in the following instructions.
 
 ### 2. Add Ecto Dependencies
 
-1.  Open the `mix.exs` file.
-2.  Locate the `deps/0` private function.
-3.  Add the following dependencies to the list:
+1. Open the `mix.exs` file.
+2. Locate the `deps/0` private function.
+3. Add the following dependencies to the list:
+
     ```elixir
     {:ecto_sql, "~> 3.11"},
     {:postgrex, "~> 0.18.0"}
     ```
-4.  After saving the file, run the following command in the terminal to install the dependencies:
+
+4. After saving the file, run the following command in the terminal to install the dependencies:
+
     ```bash
     mix deps.get
     ```
 
 ### 3. Generate and Configure the Ecto Repo
 
-1.  Run the following `mix` command in the terminal to generate the Repo boilerplate. **Replace `MyApp` with the application module name identified earlier.**
+1. Run the following `mix` command in the terminal to generate the Repo boilerplate. **Replace `MyApp` with the application module name identified earlier.**
+
     ```bash
     mix ecto.gen.repo -r MyApp.Repo
     ```
-2.  This command creates `lib/my_app/repo.ex`, `lib/my_app/application.ex` and adds a configuration block to `config/config.exs`.
-3.  Open `config/config.exs` and update the generated configuration block that exists with the following content (Instruct the user to replace the placeholder values with their actual database credentials.)
+
+2. This command creates `lib/my_app/repo.ex`, `lib/my_app/application.ex` and adds a configuration block to `config/config.exs`.
+3. Open `config/config.exs` and update the generated configuration block that exists with the following content (Instruct the user to replace the placeholder values with their actual database credentials.)
+
     ```elixir
     import Config
 
@@ -60,8 +67,10 @@ When this prompt is triggered, automatically configure the open Elixir project a
     # Configure Ecto migrations and seeds
     config :my_app, ecto_repos: [MyApp.Repo]
     ```
-4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
-5.  Open `lib/my_app/application.ex` and ensure `MyApp.Repo` is added to the list of children in the `start/2` function.
+
+4. Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
+5. Open `lib/my_app/application.ex` and ensure `MyApp.Repo` is added to the list of children in the `start/2` function.
+
     ```elixir
     # In lib/my_app/application.ex, replace MyApp with the correct module name
     def start(_type, _args) do
@@ -75,12 +84,15 @@ When this prompt is triggered, automatically configure the open Elixir project a
 
 ### 4. Create the Database Migration and Schema
 
-1.  Generate a new migration file by running this command in the terminal:
+1. Generate a new migration file by running this command in the terminal:
+
     ```bash
     mix ecto.gen.migration create_todos_table
     ```
-2.  Open the newly created migration file in `priv/repo/migrations/`.
-3.  Populate the `change/0` function to define the `todos` table schema:
+
+2. Open the newly created migration file in `priv/repo/migrations/`.
+3. Populate the `change/0` function to define the `todos` table schema:
+
     ```elixir
     defmodule MyApp.Repo.Migrations.CreateTodosTable do
       use Ecto.Migration
@@ -95,7 +107,9 @@ When this prompt is triggered, automatically configure the open Elixir project a
       end
     end
     ```
-4.  Create a new file `lib/my_app/todo.ex` for the Ecto schema. This module will map Elixir structs to the `todos` database table.
+
+4. Create a new file `lib/my_app/todo.ex` for the Ecto schema. This module will map Elixir structs to the `todos` database table.
+
     ```elixir
     # In lib/my_app/todo.ex, replace MyApp with the correct module name
     defmodule MyApp.Todo do
@@ -179,37 +193,42 @@ NeonEctoExample.run()
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their connection parameters in `config/config.exs`. Do not proceed if placeholder values (e.g., `[user]`) are still present.
-2.  Run the migration to create the `todos` table in their Neon database:
+1. Verify the user has correctly set their connection parameters in `config/config.exs`. Do not proceed if placeholder values (e.g., `[user]`) are still present.
+2. Run the migration to create the `todos` table in their Neon database:
+
     ```bash
     mix ecto.migrate
     ```
-3.  Finally, run the example script from their terminal:
+
+3. Finally, run the example script from their terminal:
+
     ```bash
     mix run main.exs
     ```
-4.  If successful, the output should show messages indicating the success of each CRUD step inside the transaction.
+
+4. If successful, the output should show messages indicating the success of each CRUD step inside the transaction.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
--   The `mix.exs` file contains both `ecto_sql` and `postgrex` dependencies.
--   The `MyApp.Repo` module exists at `lib/my_app/repo.ex`.
--   The `config/config.exs` file contains a configuration block for `MyApp.Repo` that matches the application's name.
--   **The `ssl: [cacerts: :public_key.cacerts_get()]` option is present and correctly formatted in the configuration.** This is required for a secure connection to Neon.
--   `MyApp.Repo` has been added as a child to the supervision tree in `lib/my_app/application.ex`.
--   A migration file exists in `priv/repo/migrations/` that defines the `todos` table.
--   The `MyApp.Todo` schema module exists at `lib/my_app/todo.ex`.
--   The `main.exs` script uses Ecto functions (`Repo.insert`, `Repo.get`, etc.) and wraps the logic in `Repo.transaction/1`.
+
+- The `mix.exs` file contains both `ecto_sql` and `postgrex` dependencies.
+- The `MyApp.Repo` module exists at `lib/my_app/repo.ex`.
+- The `config/config.exs` file contains a configuration block for `MyApp.Repo` that matches the application's name.
+- **The `ssl: [cacerts: :public_key.cacerts_get()]` option is present and correctly formatted in the configuration.** This is required for a secure connection to Neon.
+- `MyApp.Repo` has been added as a child to the supervision tree in `lib/my_app/application.ex`.
+- A migration file exists in `priv/repo/migrations/` that defines the `todos` table.
+- The `MyApp.Todo` schema module exists at `lib/my_app/todo.ex`.
+- The `main.exs` script uses Ecto functions (`Repo.insert`, `Repo.get`, etc.) and wraps the logic in `Repo.transaction/1`.
 
 ---
 
 ## ❌ Do Not
 
--   **Do not add :ecto_sql or :postgrex to the :extra_applications list in mix.exs. These dependencies are started automatically by the runtime as needed.**
--   Do not hardcode credentials in any `.ex` or `.exs` file. Use the `config/config.exs` file for this purpose.
--   Do not output the contents of the `config/config.exs` file or the user's connection parameters in any response.
--   Do not forget the mandatory `ssl` option in the Ecto Repo configuration.
--   Do not perform database operations outside of a transaction in the example script.
+- **Do not add :ecto_sql or :postgrex to the :extra_applications list in mix.exs. These dependencies are started automatically by the runtime as needed.**
+- Do not hardcode credentials in any `.ex` or `.exs` file. Use the `config/config.exs` file for this purpose.
+- Do not output the contents of the `config/config.exs` file or the user's connection parameters in any response.
+- Do not forget the mandatory `ssl` option in the Ecto Repo configuration.
+- Do not perform database operations outside of a transaction in the example script.

@@ -6,6 +6,7 @@ You are an expert software agent responsible for migrating this project to use N
 **Follow these precise, step-by-step instructions.**
 
 **Constraints:**
+
 - Do not output the contents of the `.env` file or the database connection string in any response.
 - Do not invent, infer, or guess sensitive values; use only the provided connection string.
 - Preserve all unrelated configuration and file contents.
@@ -20,10 +21,12 @@ You are an expert software agent responsible for migrating this project to use N
 - If that fails, prompt the user to run `npx neondb --yes` instead
 - If the database is claimable (i.e., a claim URL is provided):
   - Add a comment with the claim URL directly above the `DATABASE_URL` line in the environment file (e.g., `.env`):  
+
     ```
     # To keep your Neon database permanently, claim it here: https://neon.tech/claim/abc123
     DATABASE_URL=postgres://...
     ```
+
 - Store the Neon connection string in the environment variable `DATABASE_URL` in the project's environment file (e.g., `.env`).
 - If `DATABASE_URL` exists, replace its value. If it does not exist, add it to the end of the file. Preserve all other `.env` entries.
 
@@ -37,6 +40,7 @@ You are an expert software agent responsible for migrating this project to use N
   - `drizzle-kit@0.31.4`
 - Use the project's package manager (`pnpm`, `yarn`, or `npm`) in the correct workspace/package directory.
 - Example (for pnpm):
+
   ```bash
   pnpm add drizzle-orm@0.44.2 @neondatabase/serverless@1.0.1 drizzle-kit@0.31.4
   ```
@@ -61,6 +65,7 @@ You are an expert software agent responsible for migrating this project to use N
 
 - Search the project for the file(s) where Drizzle ORM is initialized (look for imports from `drizzle-orm`, `@neondatabase/serverless`, or database connection setup).
 - Update the code in those file(s) to use the Neon serverless driver as follows:
+
   ```typescript
   import { neon } from '@neondatabase/serverless';
   import { drizzle } from 'drizzle-orm/neon-http';
@@ -69,6 +74,7 @@ You are an expert software agent responsible for migrating this project to use N
   const sql = neon(process.env.DATABASE_URL!);
   export const db = drizzle(sql, { schema });
   ```
+
 - If no such file exists, create a new file (e.g., `db.ts`) with the above code and update imports throughout the project to use this new setup.
 - Ensure all references to the database connection use this updated integration.
 
@@ -88,9 +94,11 @@ You are an expert software agent responsible for migrating this project to use N
 
 - Search for all SQL query usage in the codebase.
 - Ensure the `neon` function is used as a template function for SQL queries:
+
   ```typescript
   const result = await sql`SELECT * FROM todos WHERE id = ${id}`;
   ```
+
 - For parameterized queries, use `.query()`. Use `.unsafe()` only for trusted, non-user input values.
 - Remove any deprecated or pre-1.0.0 usage patterns (e.g., calling `sql` as a conventional function).
 

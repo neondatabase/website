@@ -57,11 +57,11 @@ The template must resolve to one of the predefined connection identifiers:
 
 Here's a high-level overview of how to set up dynamic routing with Neon and Hasura:
 
-1.  **Create Neon branches:** For each environment you need (e.g., `dev`, `staging`, `feature-x`), create a corresponding branch in your Neon project. Obtain the connection string for each branch.
-2.  **Configure Hasura data source:** Add your _primary_ Neon database as a data source in Hasura.
-3.  **Define connection set:** In the Hasura data source configuration, add the connection strings of your Neon branches to the Connection set, giving each a unique, descriptive name (e.g., `dev_branch`, `staging_branch`, `feature_x_branch`).
-4.  **Implement connection template:** Write a Kriti template that inspects the incoming GraphQL request (e.g., checks for a specific header like `x-hasura-branch-name`) and resolves to the appropriate member name in the Connection set (e.g., `$.connection_set.dev_branch`).
-5.  **Route Requests:** Send GraphQL requests to Hasura with the necessary context (e.g., the `x-hasura-branch-name` header) to route them to the desired Neon branch.
+1. **Create Neon branches:** For each environment you need (e.g., `dev`, `staging`, `feature-x`), create a corresponding branch in your Neon project. Obtain the connection string for each branch.
+2. **Configure Hasura data source:** Add your _primary_ Neon database as a data source in Hasura.
+3. **Define connection set:** In the Hasura data source configuration, add the connection strings of your Neon branches to the Connection set, giving each a unique, descriptive name (e.g., `dev_branch`, `staging_branch`, `feature_x_branch`).
+4. **Implement connection template:** Write a Kriti template that inspects the incoming GraphQL request (e.g., checks for a specific header like `x-hasura-branch-name`) and resolves to the appropriate member name in the Connection set (e.g., `$.connection_set.dev_branch`).
+5. **Route Requests:** Send GraphQL requests to Hasura with the necessary context (e.g., the `x-hasura-branch-name` header) to route them to the desired Neon branch.
 
 We shall discuss the implementation in detail in the next section.
 
@@ -81,15 +81,15 @@ If you haven't already, add your Neon database as a data source in Hasura. Follo
 
 Now, add your Neon branches to the connection set for the data source you just configured:
 
-1.  Go to the `Hasura Console -> Data -> Manage`.
-2.  Click "Edit" next to your data source.
+1. Go to the `Hasura Console -> Data -> Manage`.
+2. Click "Edit" next to your data source.
 
         ![Edit Data Source](/docs/guides/hasura/edit-data-source.png)
 
-3.  Navigate to the `Dynamic Routing` tab.
-4.  Under "Available Connections for Templating", click `+ Add Connection`.
+3. Navigate to the `Dynamic Routing` tab.
+4. Under "Available Connections for Templating", click `+ Add Connection`.
     ![Add Connections for Templating](/docs/guides/hasura/add-connection-for-templating.png)
-5.  In the modal:
+5. In the modal:
     - **Connection name:** Enter a unique, lowercase name (e.g., `dev_branch`). This name will be used in the Kriti template.
     - **Connect Database via:** Select `Database URL`.
     - **Database URL:** Paste the connection string for your `dev` Neon branch which you copied earlier in the [Create Neon Branches](#create-neon-branches) section.
@@ -98,13 +98,13 @@ Now, add your Neon branches to the connection set for the data source you just c
 
       <Admonition type="tip">
       To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL_DEV_BRANCH`) with your connection string as its value.
-          
+
           ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
 
       Then, in the connection modal, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
       </Admonition>
 
-6.  Repeat step 5 for other branches, e.g., `staging_branch`, `feature_x_branch`, etc., using their respective connection strings.
+6. Repeat step 5 for other branches, e.g., `staging_branch`, `feature_x_branch`, etc., using their respective connection strings.
 
 You should now see `dev_branch`, `feature_x_branch` and `staging_branch` listed under "Available Connections for Templating".
 
@@ -114,10 +114,10 @@ You should now see `dev_branch`, `feature_x_branch` and `staging_branch` listed 
 
 This template defines the routing logic. We'll create a template that routes requests based on an `x-hasura-branch-name` HTTP header.
 
-1.  In the `Dynamic Routing` tab for your data source, find the "Connection Template" section.
-2.  Select `Custom Template`.
+1. In the `Dynamic Routing` tab for your data source, find the "Connection Template" section.
+2. Select `Custom Template`.
     ![Custom Template Kriti](/docs/guides/hasura/custom-template-kriti.png)
-3.  Enter the following Kriti template in the editor:
+3. Enter the following Kriti template in the editor:
 
     ```json
     {{ if ($.request.headers?["x-hasura-branch-name"] == "dev")}}
@@ -131,7 +131,7 @@ This template defines the routing logic. We'll create a template that routes req
     {{ end }}
     ```
 
-4.  Click `Update Connection Template` to save it.
+4. Click `Update Connection Template` to save it.
 
 #### Explanation of the template
 
@@ -167,10 +167,10 @@ For more advanced routing logic, or for information on dynamically creating and 
 
 Hasura provides a convenient way to test your connection template directly within the Console. This simulates a GraphQL request based on the context you provide (headers, session variables, etc.).
 
-1.  You can find the **Validate** button in the **Dynamic Routing** tab of your data source configuration.
+1. You can find the **Validate** button in the **Dynamic Routing** tab of your data source configuration.
     ![Validate Dynamic Routing](/docs/guides/hasura/validate-dynamic-routing.png)
 
-2.  **Simulate Request Context:**
+2. **Simulate Request Context:**
     This modal allows you to define the context (`$.request`) that your Kriti template will evaluate against.
     - **Test Routing to `dev_branch`:**
       - In the **Headers** section, click `+ Add`.
@@ -205,14 +205,14 @@ Note that replicas can be added to any branch, including the primary. Once a rep
 
 To configure read replicas for your primary Neon data source within Hasura, follow these steps:
 
-1.  Go to the `Hasura Console -> Data -> Manage`.
-2.  Locate your primary data source and click the "Edit" button next to it.
-3.  Navigate to the `Connection Details` tab.
-4.  Scroll down to the "Read Replicas" section and click `+ Add New Read Replica`.
+1. Go to the `Hasura Console -> Data -> Manage`.
+2. Locate your primary data source and click the "Edit" button next to it.
+3. Navigate to the `Connection Details` tab.
+4. Scroll down to the "Read Replicas" section and click `+ Add New Read Replica`.
     ![Add Read Replica](/docs/guides/hasura/add-read-replica.png)
-5.  In the modal, paste the connection string **you copied earlier for your Neon read replica** into the `Database URL` field, then click `Add Read Replica` (within the modal).
-6.  (Optional) Repeat step 5 if you have multiple read replicas to add for this primary source.
-7.  **Finally, ensure you click** the main `Update Connection` button at the bottom of the page to save these changes to the data source configuration.
+5. In the modal, paste the connection string **you copied earlier for your Neon read replica** into the `Database URL` field, then click `Add Read Replica` (within the modal).
+6. (Optional) Repeat step 5 if you have multiple read replicas to add for this primary source.
+7. **Finally, ensure you click** the main `Update Connection` button at the bottom of the page to save these changes to the data source configuration.
     ![Hasura Update Connection](/docs/guides/hasura/update-connection-read-replica.png)
 
 ### Kriti variables for replica routing
@@ -250,10 +250,10 @@ Here's an example of how you might implement this in your Kriti template:
 
 #### Explanation of the fallback logic:
 
-1.  **Mutations:** Always directed to `{{$.primary}}` for write capability.
-2.  **Fresh reads:** If the `no-stale-read: true` header is present (for queries/subscriptions), route to `{{$.primary}}` to bypass potential replication lag on replicas.
-3.  **Standard reads:** For all other queries/subscriptions in the fallback scenario, route to `{{$.default}}`. This directs Hasura to use one of the read replicas configured in the main connection settings. If no replicas are configured there, Hasura falls back gracefully to the primary connection.
-4.  **Branch-specific reads:** If a specific branch is targeted via the `x-hasura-branch-name` header, route to that branch connection.
+1. **Mutations:** Always directed to `{{$.primary}}` for write capability.
+2. **Fresh reads:** If the `no-stale-read: true` header is present (for queries/subscriptions), route to `{{$.primary}}` to bypass potential replication lag on replicas.
+3. **Standard reads:** For all other queries/subscriptions in the fallback scenario, route to `{{$.default}}`. This directs Hasura to use one of the read replicas configured in the main connection settings. If no replicas are configured there, Hasura falls back gracefully to the primary connection.
+4. **Branch-specific reads:** If a specific branch is targeted via the `x-hasura-branch-name` header, route to that branch connection.
 
 ## Considerations and limitations
 

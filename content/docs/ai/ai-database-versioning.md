@@ -38,7 +38,7 @@ By restoring a Neon snapshot to your active branch with `finalize_restore: true`
 The best way to understand this pattern is to see it in action:
 
 1. **Clone the snapshots demo app**:
-   - https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo
+   - <https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo>
 2. **Key files to examine**:
    - [lib/neon/create-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/create-snapshot.ts) - Snapshot creation implementation
    - [lib/neon/apply-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/apply-snapshot.ts) - Complete restore workflow with operations polling

@@ -31,7 +31,7 @@ Before using the `wal2json` plugin, you need to enable logical replication for y
 <Admonition type="note">
 Once enabled for a project, logical replication cannot be reverted. This action triggers a restart of all active compute endpoints in your Neon project. Any active connections will be dropped and have to reconnect.
 </Admonition>
- 
+
 To verify that logical replication is enabled, navigate to the `SQL Editor` and verify the output of the following query:
 
 ```sql

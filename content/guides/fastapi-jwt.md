@@ -152,10 +152,13 @@ With the theory out of the way, let's start by creating a new project directory 
 
 3. Activate the virtual environment:
    - On Windows:
+
      ```bash
      venv\Scripts\activate
      ```
+
    - On macOS and Linux:
+
      ```bash
      source venv/bin/activate
      ```

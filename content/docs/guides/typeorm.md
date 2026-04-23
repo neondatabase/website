@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:33.062Z'
 ---
 
-<CopyPrompt src="/prompts/typeorm-prompt.md" 
+<CopyPrompt src="/prompts/typeorm-prompt.md"
 description="Pre-built prompt for connecting Node.js applications to Neon using TypeORM."/>
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:

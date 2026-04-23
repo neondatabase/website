@@ -15,16 +15,18 @@ By combining FastAPI with TimescaleDB's advanced time-series features, you'll be
 Before starting, ensure you have the following tools and services ready:
 
 - `pip`: Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+
   ```bash
   pip --version
   ```
+
 - Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 
 ## Setting up the Project
 
 Follow these steps to set up your project and virtual environment:
 
-1.  Create a `uv` project
+1. Create a `uv` project
 
     If you don't already have uv installed, you can install it with:
 
@@ -40,7 +42,7 @@ Follow these steps to set up your project and virtual environment:
 
     This will create a new project directory called `timescale_fastapi`. Open this directory in your code editor of your choice.
 
-2.  Set up the virtual environment.
+2. Set up the virtual environment.
 
         You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
 
@@ -60,7 +62,7 @@ Follow these steps to set up your project and virtual environment:
 
         You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
 
-3.  Install dependencies.
+3. Install dependencies.
 
     Next, add all the necessary dependencies for your project:
 
@@ -75,7 +77,7 @@ Follow these steps to set up your project and virtual environment:
     - `Loguru`: A logging library
     - `Python-dotenv`: To load environment variables from a .env file
 
-4.  Create the project structure.
+4. Create the project structure.
 
     Create the following directory structure to organize your project files:
 

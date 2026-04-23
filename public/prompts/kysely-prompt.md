@@ -5,6 +5,7 @@
 **Purpose:** To install the necessary packages, configure the TypeScript environment, define the database types, and provide a working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle.
 
 **Scope:**
+
 - Assumes the user is working within a Node.js project directory.
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -20,16 +21,21 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`). 
 
 ### 1. Initialize Project & TypeScript Configuration
 
-1.  Check if a `package.json` file exists. If not, create one:
+1. Check if a `package.json` file exists. If not, create one:
+
     ```bash
     npm init -y
     ```
-2.  Ensure the `package.json` contains `"type": "module"`.
-3.  Install necessary development dependencies. **Note:** Kysely relies heavily on TypeScript features.
+
+2. Ensure the `package.json` contains `"type": "module"`.
+3. Install necessary development dependencies. **Note:** Kysely relies heavily on TypeScript features.
+
     ```bash
     npm install -D typescript tsx @types/node
     ```
-4.  Initialize or update `tsconfig.json`. Kysely requires `strict` mode for type inference to work correctly. Ensure the following compiler options are set:
+
+4. Initialize or update `tsconfig.json`. Kysely requires `strict` mode for type inference to work correctly. Ensure the following compiler options are set:
+
     ```json
     {
       "compilerOptions": {
@@ -48,9 +54,9 @@ Detect the package manager used in this project (`npm`, `yarn`, `pnpm`, `bun`). 
 
 Ask the user to choose their preferred driver. Explain the trade-offs:
 
-1.  **Neon Serverless (HTTP):** Best for stateless/edge environments (Vercel Edge, Cloudflare Workers). Uses `kysely-neon`.
-2.  **Neon WebSocket:** Best for serverless environments needing transactions or persistent connections. Uses `@neondatabase/serverless` with `ws`.
-3.  **`node-postgres` (`pg`):** The standard choice for long-running Node.js servers.
+1. **Neon Serverless (HTTP):** Best for stateless/edge environments (Vercel Edge, Cloudflare Workers). Uses `kysely-neon`.
+2. **Neon WebSocket:** Best for serverless environments needing transactions or persistent connections. Uses `@neondatabase/serverless` with `ws`.
+3. **`node-postgres` (`pg`):** The standard choice for long-running Node.js servers.
 
 ---
 
@@ -58,16 +64,19 @@ Ask the user to choose their preferred driver. Explain the trade-offs:
 
 Based on the user's choice, run the appropriate installation command:
 
-*   **If 'Neon Serverless (HTTP)' is chosen:**
+- **If 'Neon Serverless (HTTP)' is chosen:**
+
     ```bash
     npm install kysely kysely-neon @neondatabase/serverless dotenv
     ```
-*   **If 'Neon WebSocket' is chosen:**
+- **If 'Neon WebSocket' is chosen:**
+
     ```bash
     npm install kysely @neondatabase/serverless ws dotenv
     npm install -D @types/ws
     ```
-*   **If '`node-postgres`' is chosen:**
+- **If '`node-postgres`' is chosen:**
+
     ```bash
     npm install kysely pg dotenv
     npm install -D @types/pg
@@ -75,8 +84,9 @@ Based on the user's choice, run the appropriate installation command:
 
 ### 4. Configure Environment
 
-1.  Check for a `.env` file. If missing, create it.
-2.  Instruct the user to add their connection string.
+1. Check for a `.env` file. If missing, create it.
+2. Instruct the user to add their connection string.
+
     ```env
     # Get your connection string from the Neon Console:
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
@@ -110,6 +120,7 @@ export type UserUpdate = Updateable<UsersTable>;
 Create `src/db.ts` based on the driver selection.
 
 #### Option 1: Neon Serverless (HTTP)
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely } from 'kysely';
@@ -127,6 +138,7 @@ export const db = new Kysely<Database>({
 ```
 
 #### Option 2: Neon WebSocket
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely, PostgresDialect } from 'kysely';
@@ -146,6 +158,7 @@ export const db = new Kysely<Database>({
 ```
 
 #### Option 3: `node-postgres`
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely, PostgresDialect } from 'kysely';
@@ -268,23 +281,27 @@ main();
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
-2.  Apply the migrations:
+1. Verify the user has correctly set their connection string in `.env`. Do not proceed if placeholder value are still present.
+2. Apply the migrations:
+
     ```bash
     npx tsx src/migrate.ts
     ```
-4.  Finally, run the example CRUD script:
+
+4. Finally, run the example CRUD script:
+
     ```bash
     npx tsx src/index.ts
     ```
-5.  If successful, the output should show log messages for each C-R-U-D step.
 
+5. If successful, the output should show log messages for each C-R-U-D step.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code:
+
 - Ensure `src/types.ts` is defined and imported in `src/db.ts`. Kysely requires generic type arguments (`Kysely<Database>`).
 - If using **Neon Serverless (HTTP)**, ensure `NeonDialect` is used.
 - If using **Neon WebSocket**, ensure `neonConfig.webSocketConstructor` is set.

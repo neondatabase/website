@@ -198,10 +198,13 @@ Note that if you've just created the pipeline, Azure DevOps might limit the numb
 When working in a team, conflicts may arise due to multiple migration files being generated. You can check out the Entity [Framework Core documentation for some best practices](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/teams) but here are some general tips:
 
 1. Before adding a new migration, apply any existing ones using:
+
    ```bash
    dotnet ef database update
    ```
+
 1. If conflicting migration files exist, delete and regenerate them:
+
    ```bash
    dotnet ef migrations remove
    dotnet ef migrations add NewMigration

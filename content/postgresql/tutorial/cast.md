@@ -113,7 +113,7 @@ The following example uses the CAST() function to convert a string `'10.2'` into
 
 ```sql
 SELECT
-	CAST ('10.2' AS DOUBLE);
+ CAST ('10.2' AS DOUBLE);
 ```
 
 Whoops, we got the following error message:

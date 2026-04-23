@@ -49,12 +49,12 @@ The following example uses the `while` loop statement to display the value of a 
 do $$
 
 declare
-	counter integer := 0;
+ counter integer := 0;
 begin
-	while counter < 5 loop
-		raise notice 'Counter %', counter;
-		counter := counter + 1;
-	end loop;
+ while counter < 5 loop
+  raise notice 'Counter %', counter;
+  counter := counter + 1;
+ end loop;
 end;
 
 $$;

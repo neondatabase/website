@@ -72,6 +72,7 @@ For a cost-effective, open-source monitoring stack, you can set up the complete 
 **Quick setup with Docker:**
 
 1. **Clone and start the stack**:
+
    ```bash
    git clone https://github.com/grafana/docker-otel-lgtm.git
    cd docker-otel-lgtm
@@ -80,8 +81,8 @@ For a cost-effective, open-source monitoring stack, you can set up the complete 
 
 This provides:
 
-- **Grafana** at http://localhost:3000 (admin/admin)
-- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Grafana** at <http://localhost:3000> (admin/admin)
+- **OpenTelemetry Collector** at <http://localhost:4318> (HTTP) and localhost:4317 (gRPC)
 - **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
 
 For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).

@@ -284,16 +284,16 @@ If the Neon hostname resolves correctly, you'll see output similar to this:
 
 ```bash
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
-Server:		192.168.2.1
-Address:	192.168.2.1#53
+Server:  192.168.2.1
+Address: 192.168.2.1#53
 
 Non-authoritative answer:
-p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
-Name:	ap-southeast-1.aws.neon.tech
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech canonical name = ap-southeast-1.aws.neon.tech.
+Name: ap-southeast-1.aws.neon.tech
 Address: 203.0.113.10
-Name:	ap-southeast-1.aws.neon.tech
+Name: ap-southeast-1.aws.neon.tech
 Address: 203.0.113.20
-Name:	ap-southeast-1.aws.neon.tech
+Name: ap-southeast-1.aws.neon.tech
 Address: 203.0.113.30
 ```
 

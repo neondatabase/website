@@ -31,19 +31,19 @@ Before you begin, ensure you have the following:
 
 First, you need to create a data source in Better Stack that will receive logs and metrics from Neon.
 
-1.  Log in to your [Better Stack account](https://telemetry.betterstack.com/).
-2.  In the left-hand navigation, go to **Telemetry** > **Sources**. Click the **Connect source** button.
+1. Log in to your [Better Stack account](https://telemetry.betterstack.com/).
+2. In the left-hand navigation, go to **Telemetry** > **Sources**. Click the **Connect source** button.
 
     ![Better Stack sources page](/docs/guides/betterstack-sources-page.png)
 
-3.  On the **Connect source** page:
+3. On the **Connect source** page:
     - Under **Basic information**, provide a **Name** for your source (e.g., `neon`) and select your preferred **Data region**.
     - Under **Platform**, scroll down to the **Logs + Metrics** section and select **OpenTelemetry**.
     - Click **Create source** at the bottom of the page.
 
     ![Configuring the OpenTelemetry source in Better Stack](/docs/guides/betterstack-otel-config.png)
 
-4.  After the source is created, you will be redirected to the source's overview page. This page contains the credentials Neon needs to send data.
+4. After the source is created, you will be redirected to the source's overview page. This page contains the credentials Neon needs to send data.
 
     ![Better Stack source created page with Source token and Ingesting host](/docs/guides/betterstack-otel-source-created.png)
 
@@ -53,13 +53,13 @@ First, you need to create a data source in Better Stack that will receive logs a
 
 Now, you will use the credentials from Better Stack to configure the integration in your Neon project.
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) and select your project.
-2.  From the sidebar, go to the **Integrations** page.
-3.  Find the **OpenTelemetry** card and click **Add**.
+1. Navigate to the [Neon Console](https://console.neon.tech) and select your project.
+2. From the sidebar, go to the **Integrations** page.
+3. Find the **OpenTelemetry** card and click **Add**.
 
     ![Neon Integrations page with OpenTelemetry card](/docs/guides/neon-add-otel.png)
 
-4.  A sidebar form will open. Fill in the configuration details using the information you copied from Better Stack:
+4. A sidebar form will open. Fill in the configuration details using the information you copied from Better Stack:
     - **Telemetry to export:** Check both **Metrics** and **Postgres logs** to send all available data.
     - **Connection:** Select **HTTP**.
     - **Endpoint:** Paste the **Ingesting host** URL from Better Stack. It should look like `https://xxxx.betterstackdata.com`.
@@ -121,23 +121,23 @@ To avoid confusion, it is strongly recommended to delete these two default dashb
 
 Create a new dashboard from scratch to visualize your Neon metrics.
 
-1.  From the **Dashboards** page, click the **Create dashboard** button.
-2.  Select **Blank dashboard** and click **Add dashboard**.
-3.  Give your new dashboard a descriptive name, such as `Neon Project Metrics`, and click **Save**.
+1. From the **Dashboards** page, click the **Create dashboard** button.
+2. Select **Blank dashboard** and click **Add dashboard**.
+3. Give your new dashboard a descriptive name, such as `Neon Project Metrics`, and click **Save**.
 
 ### Create your first chart
 
 Add a chart to visualize a specific metric.
 
-1.  On your blank dashboard, click the **+ Create chart** button.
-2.  The first step is to connect the chart to your data. At the top, click the **source** button and choose your `neon` source.
-3.  The chart builder will appear. Use the **Drag & drop** query builder:
+1. On your blank dashboard, click the **+ Create chart** button.
+2. The first step is to connect the chart to your data. At the top, click the **source** button and choose your `neon` source.
+3. The chart builder will appear. Use the **Drag & drop** query builder:
     - The **X-axis** is already set to `time`, which is what you'll want for time-series data.
     - Delete the default Y-axis metric.
     - In the **Y-axis**, select the metric you want to visualize. From the list of available metrics, drag a metric like `neon_connection_counts` into the Y-axis box.
       ![Neon connection counts chart creation](/docs/guides/betterstack-neon-connection-counts-creation.png)
     - Click **Run query** to see the chart populated with data.
-4.  You can customize the chart's appearance using the panel on the right. Once you're happy, click **Save** in the top-right corner to add the chart to your dashboard.
+4. You can customize the chart's appearance using the panel on the right. Once you're happy, click **Save** in the top-right corner to add the chart to your dashboard.
 
 To view the metric on your dashboard, simply locate the chart you created and observe the visualized data in real time.
 

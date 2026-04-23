@@ -5,6 +5,7 @@
 **Purpose:** To guide the user through getting an API key and making their first successful API call.
 
 **When to use this prompt:** Copy and paste this into your AI assistant when you want to:
+
 - Get set up with a Neon API key for the first time
 - Make your first API call to verify everything works
 - Understand the basics of Neon API authentication
@@ -15,7 +16,7 @@
 
 Before you can use the Neon API, you need an API key. Here's how to create one:
 
-1. Go to the **Neon Console**: https://console.neon.tech
+1. Go to the **Neon Console**: <https://console.neon.tech>
 2. Click your **profile icon** (bottom of the left sidebar) → **Account settings**
 3. Select **API keys** from the sidebar
 4. Click **Create new API key**
@@ -121,6 +122,7 @@ Once your first API call works, here are common operations:
 Use the `project_id` from the list projects response:
 
 **curl:**
+
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
   -H "Authorization: Bearer $NEON_API_KEY" \
@@ -129,6 +131,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
 ```
 
 **TypeScript SDK:**
+
 ```typescript
 const response = await apiClient.createProjectBranch('project-id-here', {
   branch: { name: 'dev-branch' },
@@ -137,6 +140,7 @@ console.log(response.data.branch);
 ```
 
 **Python SDK:**
+
 ```python
 branch = neon.branch_create(
     project_id="project-id-here",
@@ -149,10 +153,10 @@ print(branch)
 
 ## Key Resources
 
-- **Interactive API Reference:** https://api-docs.neon.tech/reference/getting-started-with-neon-api (try endpoints directly)
-- **Full API Documentation:** https://neon.tech/docs/reference/api-reference
-- **SDKs:** https://neon.tech/docs/reference/sdk
-- **Comprehensive AI Rules:** https://neon.tech/docs/ai/ai-rules-neon-api (for deeper AI integration)
+- **Interactive API Reference:** <https://api-docs.neon.tech/reference/getting-started-with-neon-api> (try endpoints directly)
+- **Full API Documentation:** <https://neon.tech/docs/reference/api-reference>
+- **SDKs:** <https://neon.tech/docs/reference/sdk>
+- **Comprehensive AI Rules:** <https://neon.tech/docs/ai/ai-rules-neon-api> (for deeper AI integration)
 
 ---
 

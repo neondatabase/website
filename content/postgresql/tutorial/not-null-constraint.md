@@ -91,12 +91,12 @@ First, [create a new table](postgresql-create-table) called production orders ( 
 
 ```sql
 CREATE TABLE production_orders (
-	id SERIAL PRIMARY KEY,
-	description VARCHAR (40) NOT NULL,
-	material_id VARCHAR (16),
-	qty NUMERIC,
-	start_date DATE,
-	finish_date DATE
+ id SERIAL PRIMARY KEY,
+ description VARCHAR (40) NOT NULL,
+ material_id VARCHAR (16),
+ qty NUMERIC,
+ start_date DATE,
+ finish_date DATE
 );
 ```
 
@@ -194,10 +194,10 @@ The following statement works.
 ```sql
 INSERT INTO users (username, email)
 VALUES
-	('user1', NULL),
-	(NULL, 'user2@example.com'),
-	('user2', 'user2@example.com'),
-	('user3', '');
+ ('user1', NULL),
+ (NULL, 'user2@example.com'),
+ ('user2', 'user2@example.com'),
+ ('user3', '');
 ```
 
 However, the following statement will not work because it violates the `CHECK` constraint:
@@ -205,10 +205,10 @@ However, the following statement will not work because it violates the `CHECK` c
 ```sql
 INSERT INTO users (username, email)
 VALUES
-	(NULL, NULL),
-	(NULL, ''),
-	('', NULL),
-	('', '');
+ (NULL, NULL),
+ (NULL, ''),
+ ('', NULL),
+ ('', '');
 ```
 
 ```

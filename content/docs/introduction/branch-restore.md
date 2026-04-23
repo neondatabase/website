@@ -128,14 +128,14 @@ First, select the **Branch to restore**. This is the target branch for the resto
 
 #### To restore from another branch:
 
-1.  Switch to the **From another branch** tab.
-1.  Select the root branch that you want to restore data from (only root branches support point-in-time restore).
-1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
+1. Switch to the **From another branch** tab.
+1. Select the root branch that you want to restore data from (only root branches support point-in-time restore).
+1. By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
 
     The timestamp selector will appear.
 
-1.  Choose your timestamp or switch to the LSN input.
-1.  Click **Next**, confirm the details of the operation, then click **Restore** to complete.
+1. Choose your timestamp or switch to the LSN input.
+1. Click **Next**, confirm the details of the operation, then click **Restore** to complete.
 
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 

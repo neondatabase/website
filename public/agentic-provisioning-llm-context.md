@@ -66,9 +66,9 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
 
 Neon is a serverless Postgres platform (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
 
-**Fetching docs as Markdown:** Append `.md` to the URL (e.g. https://neon.com/docs/introduction/branching.md) or send `Accept: text/markdown` on the standard URL.
+**Fetching docs as Markdown:** Append `.md` to the URL (e.g. <https://neon.com/docs/introduction/branching.md>) or send `Accept: text/markdown` on the standard URL.
 
-**Docs index (all pages):** https://neon.com/docs/llms.txt — search here for a topic if not listed below.
+**Docs index (all pages):** <https://neon.com/docs/llms.txt> — search here for a topic if not listed below.
 
 ### Doc links by topic
 

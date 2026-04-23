@@ -6,7 +6,7 @@ Neon branching gives you instant, copy-on-write database environments. Use this 
 
 Start here for branching mechanics, parent-child model, and practical usage patterns.
 
-Link: https://neon.com/docs/introduction/branching.md
+Link: <https://neon.com/docs/introduction/branching.md>
 
 ## Branch Operations via REST API
 
@@ -24,4 +24,4 @@ Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md`
 
 Use this when an AI assistant should create, inspect, or compare branches directly from tool calls.
 
-Link: https://neon.com/docs/ai/neon-mcp-server.md
+Link: <https://neon.com/docs/ai/neon-mcp-server.md>

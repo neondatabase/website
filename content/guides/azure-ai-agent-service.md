@@ -106,9 +106,9 @@ We will use a mock dataset for tenant usage, including computed percent change i
 ```
 tenant_id   date        api_calls  storage_gb
 
-tenant_456	2025-04-01	1000	     25.0
-tenant_456	2025-03-31	950	         24.8
-tenant_456	2025-03-30	2200	     26.0
+tenant_456 2025-04-01 1000      25.0
+tenant_456 2025-03-31 950          24.8
+tenant_456 2025-03-30 2200      26.0
 ```
 
 Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon Serverless Postgres instance:

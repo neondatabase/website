@@ -563,7 +563,7 @@ If any of the computes in your project are active, you should start seeing data 
       },
       {
         "name": "DS_LOKI",
-        "label": "Loki Datasource", 
+        "label": "Loki Datasource",
         "type": "datasource",
         "query": "loki",
         "hide": 0,
@@ -657,7 +657,7 @@ If any of the computes in your project are active, you should start seeing data 
       {
         "name": "Low Cache Hit Rate",
         "datasource": {
-          "type": "prometheus", 
+          "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
         "expr": "neon_lfc_hits / (neon_lfc_hits + neon_lfc_misses) * 100 < 90",
@@ -733,6 +733,7 @@ Create alerts for key metrics to monitor your database health:
    ```
 
 3. **High Connection Count**: Alert when connections exceed your threshold
+
    ```promql
    sum(neon_connection_counts) > 100
    ```

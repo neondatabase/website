@@ -350,7 +350,7 @@ IVFFlat indexes are supported with the following vector types:
 The following examples show how to add an index for each distance function:
 
 <Admonition type="note">
-Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_cosine_ops` for cosine distance, and so on. 
+Notice how indexes are defined differently depending on the distance function being used. For example `vector_l2_ops` is specified for L2 distance, `vector_cosine_ops` for cosine distance, and so on.
 </Admonition>
 
 The following examples show how to add an index for each distance function:

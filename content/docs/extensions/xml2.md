@@ -26,7 +26,7 @@ CREATE EXTENSION IF NOT EXISTS xml2;
 Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date extension version information.
 
 <Admonition type="note">
-The `xml2` extension was developed to provide robust XML processing capabilities within Postgres before the SQL/XML standard features were fully integrated. While it offers useful functions for XPath querying and XSLT, the SQL/XML standard now provides a more comprehensive and standardized approach to XML manipulation. 
+The `xml2` extension was developed to provide robust XML processing capabilities within Postgres before the SQL/XML standard features were fully integrated. While it offers useful functions for XPath querying and XSLT, the SQL/XML standard now provides a more comprehensive and standardized approach to XML manipulation.
 </Admonition>
 
 ## `xml2` functions

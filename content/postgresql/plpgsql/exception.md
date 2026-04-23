@@ -70,14 +70,14 @@ The following example issues an error because the film id 2000 does not exist.
 do
 $$
 declare
-	rec record;
-	v_film_id int = 2000;
+ rec record;
+ v_film_id int = 2000;
 begin
-	-- select a film
-	select film_id, title
-	into strict rec
-	from film
-	where film_id = v_film_id;
+ -- select a film
+ select film_id, title
+ into strict rec
+ from film
+ where film_id = v_film_id;
 end;
 $$
 language plpgsql;
@@ -98,18 +98,18 @@ The following example uses the `exception` clause to catch the `no_data_found` e
 do
 $$
 declare
-	rec record;
-	v_film_id int = 2000;
+ rec record;
+ v_film_id int = 2000;
 begin
-	-- select a film
-	select film_id, title
-	into strict rec
-	from film
-	where film_id = v_film_id;
+ -- select a film
+ select film_id, title
+ into strict rec
+ from film
+ where film_id = v_film_id;
         -- catch exception
-	exception
-	   when no_data_found then
-	      raise exception 'film % not found', v_film_id;
+ exception
+    when no_data_found then
+       raise exception 'film % not found', v_film_id;
 end;
 $$;
 ```
@@ -130,17 +130,17 @@ The following example illustrates how to handle the `too_many_rows` exception:
 do
 $$
 declare
-	rec record;
+ rec record;
 begin
-	-- select film
-	select film_id, title
-	into strict rec
-	from film
-	where title LIKE 'A%';
+ -- select film
+ select film_id, title
+ into strict rec
+ from film
+ where title LIKE 'A%';
 
-	exception
-	   when too_many_rows then
-	      raise exception 'Search query returns too many rows';
+ exception
+    when too_many_rows then
+       raise exception 'Search query returns too many rows';
 end;
 $$;
 ```
@@ -163,21 +163,21 @@ The following example illustrates how to catch multiple exceptions:
 do
 $$
 declare
-	rec record;
-	v_length int = 90;
+ rec record;
+ v_length int = 90;
 begin
-	-- select a film
-	select film_id, title
-	into strict rec
-	from film
-	where length = v_length;
+ -- select a film
+ select film_id, title
+ into strict rec
+ from film
+ where length = v_length;
 
         -- catch exception
-	exception
-	   when sqlstate 'P0002' then
-	      raise exception 'film with length % not found', v_length;
-	   when sqlstate 'P0003' then
-	      raise exception 'The with length % is not unique', v_length;
+ exception
+    when sqlstate 'P0002' then
+       raise exception 'film with length % not found', v_length;
+    when sqlstate 'P0003' then
+       raise exception 'The with length % is not unique', v_length;
 end;
 $$;
 ```
@@ -198,21 +198,21 @@ The following example is the same as the one above except that it uses the `SQLS
 do
 $$
 declare
-	rec record;
-	v_length int = 30;
+ rec record;
+ v_length int = 30;
 begin
-	-- select a film
-	select film_id, title
-	into strict rec
-	from film
-	where length = v_length;
+ -- select a film
+ select film_id, title
+ into strict rec
+ from film
+ where length = v_length;
 
         -- catch exception
-	exception
-	   when sqlstate 'P0002' then
-	      raise exception 'film with length % not found', v_length;
-	   when sqlstate 'P0003' then
-	      raise exception 'The with length % is not unique', v_length;
+ exception
+    when sqlstate 'P0002' then
+       raise exception 'film with length % not found', v_length;
+    when sqlstate 'P0003' then
+       raise exception 'The with length % is not unique', v_length;
 end;
 $$;
 ```

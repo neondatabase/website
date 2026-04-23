@@ -5,6 +5,7 @@
 **Purpose:** To connect the current Micronaut Kotlin project to Neon Postgres by validating dependencies, configuring the application, and scaffolding the necessary components (Entity, Repository, Controller, DB Migration) for a functional REST API.
 
 **Scope:**
+
 - Must be run inside an existing Micronaut project directory.
 - Assumes the user has Micronaut Kotlin CLI and JDK 21 installed as they are required for project setup.
 - Assumes the user has a Neon project and access to their full connection details (host, database, user, password).
@@ -31,9 +32,9 @@ When this prompt is triggered, automatically configure the open Micronaut projec
 
 ### 1. Verify Project Setup and Dependencies
 
-1.  **Check `build.gradle.kts`:** Ensure the project includes the necessary dependencies for this task. Look for implementations related to `micronaut-data-jdbc`, `micronaut-flyway`, and `postgresql`. If they are missing, add the necessary packages.
+1. **Check `build.gradle.kts`:** Ensure the project includes the necessary dependencies for this task. Look for implementations related to `micronaut-data-jdbc`, `micronaut-flyway`, and `postgresql`. If they are missing, add the necessary packages.
 
-2.  **Ensure JDK Compatibility:** Check the `build.gradle.kts` file for the following block. If it is not present, add it inside the `kotlin { ... }` block to ensure compatibility with modern JDKs.
+2. **Ensure JDK Compatibility:** Check the `build.gradle.kts` file for the following block. If it is not present, add it inside the `kotlin { ... }` block to ensure compatibility with modern JDKs.
 
     ```kotlin
     // build.gradle.kts
@@ -46,8 +47,8 @@ When this prompt is triggered, automatically configure the open Micronaut projec
 
 ### 2. Configure the Database Connection
 
-1.  **Locate the configuration file:** Find the main configuration file at `src/main/resources/application.yml`.
-2.  **Update the `datasources` block:** Modify this file to include connection details for Neon. **Prompt the user to replace the placeholder values** with their credentials.
+1. **Locate the configuration file:** Find the main configuration file at `src/main/resources/application.yml`.
+2. **Update the `datasources` block:** Modify this file to include connection details for Neon. **Prompt the user to replace the placeholder values** with their credentials.
 
     ```yaml title="src/main/resources/application.yml"
     micronaut:
@@ -66,7 +67,8 @@ When this prompt is triggered, automatically configure the open Micronaut projec
         default:
           enabled: true
     ```
-3.  Direct the user to find their connection details in the **Neon Console → Project → Connect**. Explain that they need the host, database name, user, and password.
+
+3. Direct the user to find their connection details in the **Neon Console → Project → Connect**. Explain that they need the host, database name, user, and password.
 
 ---
 
@@ -164,12 +166,14 @@ class BookController(private val bookRepository: BookRepository) {
 
 Once the file modifications are complete:
 
-1.  Verify the user has correctly set their connection details in `application.yml`. Do not proceed if placeholder values are still present.
-2.  Start the Micronaut application using the Gradle wrapper:
+1. Verify the user has correctly set their connection details in `application.yml`. Do not proceed if placeholder values are still present.
+2. Start the Micronaut application using the Gradle wrapper:
+
     ```bash
     ./gradlew run
     ```
-3.  Inform the user that the setup is complete. On startup, they will see logs from Hikari (connection pool) and Flyway (database migration). To test the API, they can use `curl`:
+
+3. Inform the user that the setup is complete. On startup, they will see logs from Hikari (connection pool) and Flyway (database migration). To test the API, they can use `curl`:
 
     ```bash
     # Get all books
@@ -184,6 +188,7 @@ Once the file modifications are complete:
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The `build.gradle.kts` file contains the required Micronaut features (`data-jdbc`, `flyway`, `postgres`).
 - The `application.yml` file contains the `datasources.default` block with placeholder credentials.
 - The Flyway migration file `V1__create_book_table.sql` exists at the correct path.

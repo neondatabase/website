@@ -130,7 +130,7 @@ docker run --rm \
 
 </Tabs>
 
-Once running, visit http://localhost:3000/students to confirm the API is working. You should see the following records in your browser:
+Once running, visit <http://localhost:3000/students> to confirm the API is working. You should see the following records in your browser:
 
 ![local host students](/docs/guides/postgrest_local_host_students.png)
 

@@ -65,9 +65,9 @@ CREATE TABLE inventory(
 
 INSERT INTO inventory(id, name, price, quantity)
 VALUES
-	(1, 'A', 15.99, 100),
-	(2, 'B', 25.49, 50),
-	(3, 'C', 19.95, 75)
+ (1, 'A', 15.99, 100),
+ (2, 'B', 25.49, 50),
+ (3, 'C', 19.95, 75)
 RETURNING *;
 ```
 

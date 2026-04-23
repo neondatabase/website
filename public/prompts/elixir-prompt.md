@@ -5,6 +5,7 @@
 **Purpose:** To install the `postgrex` dependency and provide a working Elixir script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle and transaction management with Neon.
 
 **Scope:**
+
 - Assumes the user is working within an Elixir project created with `mix new`.
 - Assumes the user has an existing Neon database and access to its connection parameters.
 
@@ -18,19 +19,21 @@ When this prompt is triggered, automatically configure the open Elixir project a
 
 ### 1. Add `postgrex` Dependency
 
-1.  Open the `mix.exs` file.
-2.  Locate the `deps/0` private function.
-3.  Add `{:postgrex, "~> 0.18.0"}` to the list of dependencies.
-4.  After saving the file, run the following command in the terminal to install the dependency:
+1. Open the `mix.exs` file.
+2. Locate the `deps/0` private function.
+3. Add `{:postgrex, "~> 0.18.0"}` to the list of dependencies.
+4. After saving the file, run the following command in the terminal to install the dependency:
+
     ```bash
     mix deps.get
     ```
 
 ### 2. Configure Neon Connection Details
 
-1.  Identify the application name. This is the value of the `:app` key in the `project/0` function of `mix.exs`.
-2.  Check for the `config/config.exs` file. If it does not exist, create it.
-3.  Add the following configuration block to `config/config.exs`. Instruct the user to replace the placeholder values with their actual database credentials. **Crucially, use the application name identified in the previous step.**
+1. Identify the application name. This is the value of the `:app` key in the `project/0` function of `mix.exs`.
+2. Check for the `config/config.exs` file. If it does not exist, create it.
+3. Add the following configuration block to `config/config.exs`. Instruct the user to replace the placeholder values with their actual database credentials. **Crucially, use the application name identified in the previous step.**
+
     ```elixir
     import Config
 
@@ -42,7 +45,8 @@ When this prompt is triggered, automatically configure the open Elixir project a
       database: "[dbname]",
       ssl: [cacerts: :public_key.cacerts_get()]
     ```
-4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
+
+4. Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
 
 ---
 
@@ -111,9 +115,11 @@ Once the setup is complete:
 
 1. Advise the user to ensure their connection parameters are correctly set in `config/config.exs`.
 2. Instruct them to run the example script from their terminal:
+
    ```bash
    mix run main.exs
    ```
+
 3. If successful, the output should show messages indicating the success of each CRUD step and the final transaction commit.
 
 ---

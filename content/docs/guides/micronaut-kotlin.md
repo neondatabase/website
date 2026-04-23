@@ -192,7 +192,7 @@ class BookController(private val bookRepository: BookRepository) {
 
 You are now ready to run your application.
 
-1.  Start the application using the Gradle wrapper:
+1. Start the application using the Gradle wrapper:
 
     ```bash
     ./gradlew run
@@ -237,7 +237,7 @@ You are now ready to run your application.
 
     Now with the application running, you can test the API endpoints.
 
-2.  Test the API endpoints using `curl` or any API client:
+2. Test the API endpoints using `curl` or any API client:
 
     ```bash
     # Get all books

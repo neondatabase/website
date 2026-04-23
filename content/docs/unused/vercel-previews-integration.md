@@ -57,30 +57,30 @@ The integration initially sets the `DATABASE_URL` and `DATABASE_URL_UNPOOLED`env
 This section describes how to add the Neon Postgres Previews Integration to your Vercel project. The integration is supported with GitHub, GitLab, and Bitbucket source code repositories.
 
 <Admonition type="important">
-- The Neon Postgres Previews Integration can be used with more than one Vercel project, but it can only connect one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project. 
+- The Neon Postgres Previews Integration can be used with more than one Vercel project, but it can only connect one Vercel project to one Neon project. It does not support connecting multiple Vercel projects to one Neon project or connecting multiple Neon projects to one Vercel project.
 - If you connect another Vercel project to the same Neon project, the integration will overwrite the settings configured in Neon for the current Vercel project.
 - The integration cannot be used together with the with the [Neon Postgres Native Integration](/docs/guides/vercel-native-integration) in the same Vercel project.
 </Admonition>
 
 To add the integration:
 
-1.  In the Neon Console, select **Integrations** from the sidebar.
-1.  Find the Vercel integration and click **Add**.
-1.  From the Vercel integration drawer, click **Add from Vercel**.
+1. In the Neon Console, select **Integrations** from the sidebar.
+1. Find the Vercel integration and click **Add**.
+1. From the Vercel integration drawer, click **Add from Vercel**.
     <Admonition type="note">
     You can also access the integration directly from the [Vercel Marketplace](https://vercel.com/marketplace) or the [Integrations Console](https://vercel.com/neondatabase/~/integrations/console) on your Vercel Dashboard.
     </Admonition>
-1.  Click **Install**.
-1.  On the **Install Neon Postgres** modal, you are presented with two options. Select **Link Existing Neon Account**, and click **Continue**.
+1. Click **Install**.
+1. On the **Install Neon Postgres** modal, you are presented with two options. Select **Link Existing Neon Account**, and click **Continue**.
     ![Select the linked account integration option](/docs/guides/vercel_select_linked.png)
 
-1.  Select a **Vercel Account** to add the integration to.
-1.  Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
-1.  Review the permissions required by the integration, and click **Install**.
-1.  In the **Integrate Neon** dialog:
-    1.  Select a Vercel project.
+1. Select a **Vercel Account** to add the integration to.
+1. Select the Vercel projects to add the integration to. You can select **All Projects** or **Specific Projects** but be aware that you can only connect one Vercel project to one Neon project and vice versa. By selecting **All projects**, you are simply [making the integration available to other Vercel projects](#make-the-integration-available-to-other-vercel-projects).
+1. Review the permissions required by the integration, and click **Install**.
+1. In the **Integrate Neon** dialog:
+    1. Select a Vercel project.
         ![Select a Vercel project](/docs/guides/vercel_select_project.png)
-    1.  Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
+    1. Select the Neon project that you want to connect to your Vercel project by selecting the Neon project, database, and role that Vercel will use to connect.
 
       <Admonition type="note">
       The integration is dependent on the selected Postgres role. Removing it would cause the integration to stop functioning. If you need to change the role used by the integration in the future, see [Change the database and role for preview branches](/docs/guides/vercel#change-the-database-and-role-for-preview-branches).
@@ -97,25 +97,25 @@ To add the integration:
 
             When you finish making selections, click **Continue**.
 
-    1.  Confirm the integration settings. This allows the integration to:
+    1. Confirm the integration settings. This allows the integration to:
         - Set environment variables for your Vercel project's production, development, and preview environments.
         - Create database branches for preview deployments.
         - Create a development branch for your Vercel development environment.
           ![Confirm integration settings](/docs/guides/vercel_confirm_settings.png)
-    1.  Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
+    1. Click **Connect** to confirm and proceed with the integration. If you encounter a connection error, see [Troubleshoot connection issues](#troubleshoot-connection-issues).
 
         After the settings are configured, you are presented with a **Success** dialog.
         ![Vercel integration success](/docs/guides/vercel_success.png)
 
-    1.  Click **Done** to complete the installation.
+    1. Click **Done** to complete the installation.
 
-1.  To view the results of the integration in Neon:
+1. To view the results of the integration in Neon:
     1. Navigate to the [Neon Console](https://console.neon.tech/).
     1. Select the project you are connected to.
     1. Select **Branches**.
        You will see the default branch of your project (`main`). If you created a development branch, you will also see a `vercel-dev` branch.
        ![Neon branches](/docs/guides/vercel_neon_branches.png)
-1.  To view the results of the integration in Vercel:
+1. To view the results of the integration in Vercel:
     1. Navigate to [Vercel](https://vercel.com/).
     1. Select the Vercel project you added the integration to.
     1. Select **Settings** > **Environment Variables**.

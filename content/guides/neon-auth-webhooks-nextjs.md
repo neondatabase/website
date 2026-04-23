@@ -88,7 +88,7 @@ EMAIL_FROM="onboarding@yourdomain.com"
 
 Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend UI.
 
-1.  **Create the server client:** Create `lib/auth/server.ts`:
+1. **Create the server client:** Create `lib/auth/server.ts`:
 
     ```typescript shouldWrap
     import { createNeonAuth } from '@neondatabase/auth/next/server';
@@ -99,7 +99,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     });
     ```
 
-2.  **Create the browser client:** Create `lib/auth/client.ts`:
+2. **Create the browser client:** Create `lib/auth/client.ts`:
 
     ```typescript shouldWrap
     'use client';
@@ -108,14 +108,14 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     export const authClient = createAuthClient();
     ```
 
-3.  **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to your Neon database:
+3. **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to your Neon database:
 
     ```typescript shouldWrap
     import { auth } from '@/lib/auth/server';
     export const { GET, POST } = auth.handler();
     ```
 
-4.  **Add Neon Auth styles:** Update `app/globals.css` to include the Neon Auth UI styles:
+4. **Add Neon Auth styles:** Update `app/globals.css` to include the Neon Auth UI styles:
 
     ```css
     @import 'tailwindcss';
@@ -124,7 +124,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     /* other styles.. */
     ```
 
-5.  **Add Neon Auth UI provider:** Update `app/layout.tsx` to wrap your application with the `NeonAuthUIProvider`, which supplies authentication context and UI components.
+5. **Add Neon Auth UI provider:** Update `app/layout.tsx` to wrap your application with the `NeonAuthUIProvider`, which supplies authentication context and UI components.
 
     ```tsx shouldWrap
     import { authClient } from '@/lib/auth/client';
@@ -148,7 +148,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     }
     ```
 
-6.  **Create Auth page:** Create `app/auth/[path]/page.tsx` for the authentication UI using Neon's pre-built components.
+6. **Create Auth page:** Create `app/auth/[path]/page.tsx` for the authentication UI using Neon's pre-built components.
 
     ```tsx shouldWrap
     import { AuthView } from '@neondatabase/auth/react';
@@ -166,7 +166,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     }
     ```
 
-7.  **Create the Main page:** Overwrite `app/page.tsx` with a simple app that shows a "Logged In" state or a link to sign up.
+7. **Create the Main page:** Overwrite `app/page.tsx` with a simple app that shows a "Logged In" state or a link to sign up.
 
     ```tsx shouldWrap
     'use client';
@@ -385,13 +385,17 @@ The above code does the following:
 Neon Auth requires a public HTTPS URL to deliver webhooks. Use **ngrok** to expose your local Next.js server.
 
 1. Start your Next.js development server:
+
    ```bash
    npm run dev
    ```
+
 2. In a new terminal, start ngrok on port 3000:
+
    ```bash
    ngrok http 3000
    ```
+
    _Note the forwarding URL provided by ngrok (e.g., `https://a1b2c3d4.ngrok.app`)._
 
 Now, register this webhook URL with Neon Auth using the Neon API. Run the following `curl` command, replacing the placeholders with your API Key, Project ID, Branch ID, and your ngrok URL:

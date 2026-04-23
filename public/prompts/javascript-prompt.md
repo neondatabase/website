@@ -5,6 +5,7 @@
 **Purpose:** To install the necessary npm packages and provide a complete, working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle within a robust, multi-table database transaction.
 
 **Scope:**
+
 - Assumes the user is working within a Node.js project directory.
 - Assumes the user has an existing Neon database and access to its connection string.
 
@@ -21,29 +22,37 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 ### 1. Select a Database Driver
 
 First, ask the user to choose their preferred Node.js Postgres driver and proceed based on their selection:
-1.  **`pg` (node-postgres)**: The classic, most widely-used driver.
-2.  **`postgres.js`**: A modern, high-performance driver with a great developer experience.
-3.  **`@neondatabase/serverless`**: The Neon serverless driver, optimized for serverless functions (HTTP).
+
+1. **`pg` (node-postgres)**: The classic, most widely-used driver.
+2. **`postgres.js`**: A modern, high-performance driver with a great developer experience.
+3. **`@neondatabase/serverless`**: The Neon serverless driver, optimized for serverless functions (HTTP).
 
 ---
 
 ### 2. Configure Project and Install Dependencies
 
-1.  Check if a `package.json` file exists. If not, create one by running:
+1. Check if a `package.json` file exists. If not, create one by running:
+
     ```bash
     npm init -y
     ```
-2.  Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
-3.  Based on the user's driver selection, run the appropriate `npm install` command:
-    *   **If `pg` is chosen:**
+
+2. Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
+3. Based on the user's driver selection, run the appropriate `npm install` command:
+    - **If `pg` is chosen:**
+
         ```bash
         npm install pg dotenv
         ```
-    *   **If `postgres.js` is chosen:**
+
+    - **If `postgres.js` is chosen:**
+
         ```bash
         npm install postgres dotenv
         ```
-    *   **If `@neondatabase/serverless` is chosen:**
+
+    - **If `@neondatabase/serverless` is chosen:**
+
         ```bash
         npm install @neondatabase/serverless dotenv
         ```
@@ -72,6 +81,7 @@ Modify the project's main file (e.g., `index.js`). Apply the following logic:
 - **If the file contains custom user code, preserve it.** Comment out the existing code and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new code block after the commented section.
 
 #### Option 1: `pg` (node-postgres)
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import { Pool } from 'pg';
@@ -150,6 +160,7 @@ main();
 ```
 
 #### Option 2: `postgres.js`
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import postgres from 'postgres';
@@ -216,6 +227,7 @@ main();
 ```
 
 #### Option 3: `@neondatabase/serverless` (HTTP)
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';
@@ -270,18 +282,21 @@ main();
 
 Once the setup is complete:
 
-1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
-2.  Run the application:
+1. Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
+2. Run the application:
+
     ```bash
     node index.js
     ```
-3.  If successful, the output should show messages indicating the success of each step and the final transaction commit.
+
+3. If successful, the output should show messages indicating the success of each step and the final transaction commit.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - The `package.json` file contains `"type": "module"`.
 - A `.env` file is present or has been created.
 - The connection string is loaded from the environment, not hardcoded.

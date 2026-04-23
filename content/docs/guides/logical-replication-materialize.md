@@ -223,7 +223,7 @@ Before Materialize starts consuming a replication stream, it takes a snapshot of
 
 In this step, you’ll verify that the source is running and then check the status of the snapshotting process.
 
-1.  From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [mz_source_statuses](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statuses) table to check the overall status of your source:
+1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [mz_source_statuses](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statuses) table to check the overall status of your source:
 
         ```sql
         WITH
@@ -246,7 +246,7 @@ In this step, you’ll verify that the source is running and then check the stat
 
         For each subsource, make sure the status is running. If you see stalled or failed, there’s likely a configuration issue for you to fix. Check the error field for details and fix the issue before moving on. If the status of any subsource is starting for more than a few minutes, contact [Materialize support](https://materialize.com/docs/support/).
 
-2.  Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
+2. Once the source is running, use the [mz_source_statistics](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_source_statistics) table to check the status of the initial snapshot:
 
         ```sql
         WITH
@@ -278,7 +278,7 @@ In this step, you’ll verify that the source is running and then check the stat
 
 After the snapshotting phase, Materialize starts ingesting change events from the Postgres replication stream. For this work, Materialize generally performs well with an `xsmall` replica, so you can resize the cluster accordingly.
 
-1.  From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [ALTER CLUSTER](https://materialize.com/docs/sql/alter-cluster/) command to downsize the cluster to `xsmall`:
+1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [ALTER CLUSTER](https://materialize.com/docs/sql/alter-cluster/) command to downsize the cluster to `xsmall`:
 
     ```sql
     ALTER CLUSTER ingest_postgres SET (SIZE 'xsmall');
@@ -286,7 +286,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
 
     Behind the scenes, this command adds a new `xsmall` replica and removes the `medium` replica.
 
-2.  Use the [SHOW CLUSTER REPLICAS](https://materialize.com/docs/sql/show-cluster-replicas/) command to check the status of the new replica:
+2. Use the [SHOW CLUSTER REPLICAS](https://materialize.com/docs/sql/show-cluster-replicas/) command to check the status of the new replica:
 
     ```sql
     SHOW CLUSTER REPLICAS WHERE cluster = 'ingest_postgres';
@@ -296,7 +296,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
     (1 row)
     ```
 
-3.  Going forward, you can verify that your new replica size is sufficient as follows:
+3. Going forward, you can verify that your new replica size is sufficient as follows:
 
     a. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, get the replication slot name associated with your Postgres source from the [mz_internal.mz_postgres_sources](https://materialize.com/docs/sql/system-catalog/mz_internal/#mz_postgres_sources) table:
 

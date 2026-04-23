@@ -21,7 +21,7 @@ PostGIS adds support for geospatial data in PostgreSQL, providing both data type
 These extensions offer specialized functionality for routing, hierarchical geospatial indexing, advanced geometric operations, and geocoding. We'll explore how to enable these extensions and provide examples of common use cases.
 
 <Admonition type="note">
-    These extensions are open-source and can be installed on any Neon Project using the instructions below. For detailed installation instructions, please refer to the documentation for each extension. 
+    These extensions are open-source and can be installed on any Neon Project using the instructions below. For detailed installation instructions, please refer to the documentation for each extension.
 </Admonition>
 
 **Version availability:**

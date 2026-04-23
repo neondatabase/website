@@ -190,12 +190,12 @@ The following example uses the `GROUP BY` clause with the [`COUNT()`](../postgre
 
 ```sql
 SELECT
-	staff_id,
-	COUNT (payment_id)
+ staff_id,
+ COUNT (payment_id)
 FROM
-	payment
+ payment
 GROUP BY
-	staff_id;
+ staff_id;
 ```
 
 Output:

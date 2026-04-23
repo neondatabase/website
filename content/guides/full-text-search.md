@@ -30,7 +30,7 @@ CREATE TABLE documents (
 );
 ```
 
-Next, insert two new rows into the `documents` table. The [to_tsvector()] (https://www.postgresql.org/docs/current/textsearch-controls.html) function takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
+Next, insert two new rows into the `documents` table. The [to_tsvector()] (<https://www.postgresql.org/docs/current/textsearch-controls.html>) function takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
 
 ```sql
 INSERT INTO documents (title, body, searchable)
@@ -145,8 +145,8 @@ INSERT INTO documents (title, body, searchable)
 Running the `ts_rank()` `SELECT` statement with these two new rows outputs rows in the following order. "PostgreSQL Text Search" appears first because it has the most occurrences of tokens that match "search" and "text".
 
 ```sql
-2	PostgreSQL Text Search	0.34941113
-1	PostgreSQL Full-Text Search	0.3054688
+2 PostgreSQL Text Search 0.34941113
+1 PostgreSQL Full-Text Search 0.3054688
 ```
 
 Postgres also has a `ts_rank_cd()` function which uses an alternative ranking algorithm based on _cover density_. `ts_rank_cd()` also takes proximity of matching tokens into consideration, so the "PostgreSQL Text Search" row will rank slightly lower with `ts_rank_cd()` because there's more words between the matching tokens.
@@ -162,8 +162,8 @@ SELECT
 ```
 
 ```
-1	PostgreSQL Full-Text Search	0.21666667
-2	PostgreSQL Text Search	0.21428572
+1 PostgreSQL Full-Text Search 0.21666667
+2 PostgreSQL Text Search 0.21428572
 ```
 
 ## Create a GIN index

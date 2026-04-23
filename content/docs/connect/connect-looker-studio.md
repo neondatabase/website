@@ -48,7 +48,7 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
 
 ## Upload the server certificate
 
-1. Download the `isrgrootx1.pem` file from https://letsencrypt.org/certs/isrgrootx1.pem. For more information about SSL certificates, see [Connect to Neon securely](/docs/connect/connect-securely).
+1. Download the `isrgrootx1.pem` file from <https://letsencrypt.org/certs/isrgrootx1.pem>. For more information about SSL certificates, see [Connect to Neon securely](/docs/connect/connect-securely).
 2. In Looker Studio, upload the `isrgrootx1.pem` file using the **Upload** button next to the **Server Certificate** box.
 
    ![Looker studio upload pem file](/docs/connect/ls_pem_file.png)

@@ -196,7 +196,7 @@ Output:
 The statement is equivalent to the following statement that uses the `INNER JOIN` clause:
 
 ```sql
-SELECT	*
+SELECT *
 FROM products
 INNER JOIN categories USING (category_id);
 ```

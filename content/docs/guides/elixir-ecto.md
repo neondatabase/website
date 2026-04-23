@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.958Z'
 ---
 
-<CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
+<CopyPrompt src="/prompts/elixir-ecto-prompt.md"
 description="Pre-built prompt for connecting Elixir applications to Neon with Ecto"/>
 
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.

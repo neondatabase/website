@@ -3,6 +3,7 @@
 **Purpose:** Connect the currently open Astro project to a Neon Postgres database using the `@neondatabase/serverless` driver.
 
 **Scope:**
+
 - Assumes the Astro projects was created via `npm create astro@latest`
 - Assumes the user has an existing Neon database and access to its connection string
 - Must be run inside an open Astro project directory

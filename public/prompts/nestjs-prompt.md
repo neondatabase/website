@@ -5,6 +5,7 @@
 **Purpose:** To connect the current NestJS project to Neon Postgres by installing a database driver, configuring environment variables, creating a dedicated `DatabaseModule`, and implementing a test route to validate the connection.
 
 **Scope:**
+
 - Must be run inside an existing NestJS project directory.
 - Assumes the user has a Neon project and access to their full connection string.
 - All file modifications should follow NestJS conventions for modules, providers, and dependency injection.
@@ -33,15 +34,15 @@ When this prompt is triggered, automatically configure the open NestJS project a
 
 ### 1. Install Dependencies
 
-1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
+1. **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. A great choice for NestJS applications deployed on Vercel or AWS Lambda.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
-    *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    - **`@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. A great choice for NestJS applications deployed on Vercel or AWS Lambda.
+    - **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    - **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
-2.  Based on the user's selection, run the corresponding installation command. Also install `dotenv` for managing environment variables.
+2. Based on the user's selection, run the corresponding installation command. Also install `dotenv` for managing environment variables.
 
     ```bash
     # For @neondatabase/serverless
@@ -61,14 +62,14 @@ When this prompt is triggered, automatically configure the open NestJS project a
 
 ### 2. Configure Environment Variables
 
-1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+1. Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
+2. Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
 
     ```dotenv title=".env"
     DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+3. Direct the user to find this value in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -76,9 +77,9 @@ When this prompt is triggered, automatically configure the open NestJS project a
 
 To manage the database connection according to NestJS best practices, create a new module.
 
-1.  Create a new directory `src/database`.
-2.  Inside `src/database`, create a file named `database.module.ts`.
-3.  **Use the code block that corresponds to the driver selected in Step 1** to populate `src/database/database.module.ts`. This module will create and provide an injectable database connection client.
+1. Create a new directory `src/database`.
+2. Inside `src/database`, create a file named `database.module.ts`.
+3. **Use the code block that corresponds to the driver selected in Step 1** to populate `src/database/database.module.ts`. This module will create and provide an injectable database connection client.
 
     #### Option A: Using `@neondatabase/serverless`
 
@@ -143,7 +144,7 @@ To manage the database connection according to NestJS best practices, create a n
 
 Modify the main application files to use the new `DatabaseModule` and create a test endpoint.
 
-1.  **Import the module:** Open `src/app.module.ts` and add `DatabaseModule` to the `imports` array.
+1. **Import the module:** Open `src/app.module.ts` and add `DatabaseModule` to the `imports` array.
 
     ```typescript title="src/app.module.ts"
     import { Module } from '@nestjs/common';
@@ -159,7 +160,7 @@ Modify the main application files to use the new `DatabaseModule` and create a t
     export class AppModule {}
     ```
 
-2.  **Update the service:** Open `src/app.service.ts` and replace its contents to inject the database connection and query the PostgreSQL version. **Use the code block that corresponds to the driver selected in Step 1.**
+2. **Update the service:** Open `src/app.service.ts` and replace its contents to inject the database connection and query the PostgreSQL version. **Use the code block that corresponds to the driver selected in Step 1.**
 
     #### Option A & B: For `@neondatabase/serverless` or `postgres`
 
@@ -216,7 +217,7 @@ Modify the main application files to use the new `DatabaseModule` and create a t
     }
     ```
 
-3.  **Update the controller:** Open `src/app.controller.ts` and modify the root `GET` endpoint to call the new service method.
+3. **Update the controller:** Open `src/app.controller.ts` and modify the root `GET` endpoint to call the new service method.
 
     ```typescript title="src/app.controller.ts"
     import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
@@ -243,18 +244,21 @@ Modify the main application files to use the new `DatabaseModule` and create a t
 
 Once the file modifications are complete:
 
-1.  Verify the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
-2.  Start the NestJS development server:
+1. Verify the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
+2. Start the NestJS development server:
+
     ```bash
     npm run start:dev
     ```
-3.  Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:3000` in their browser or use a tool like `curl`. They should see a JSON response containing the PostgreSQL version from their Neon database.
+
+3. Inform the user that the setup is complete. To test the connection, they can visit `http://localhost:3000` in their browser or use a tool like `curl`. They should see a JSON response containing the PostgreSQL version from their Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A supported PostgreSQL driver (`@neondatabase/serverless`, `postgres`, or `pg`) and `dotenv` are installed.
 - A `.env` file is present or has been created with a `DATABASE_URL` key.
 - A `src/database/database.module.ts` file exists and correctly provides the chosen database client under the `NEON_CONNECTION` token.

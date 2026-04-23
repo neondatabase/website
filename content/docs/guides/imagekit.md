@@ -18,21 +18,21 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 
 ## Create a Neon project
 
-1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an ImageKit.io account and get credentials
 
-1.  Sign up for a free or paid account at [ImageKit.io](https://imagekit.io/registration).
-2.  Once logged in, navigate to the **Developer options** section in the dashboard sidebar.
-3.  Under **API Keys**, note your **Public Key**, **Private Key**, and **URL Endpoint**. These are essential for interacting with the ImageKit API and SDKs.
+1. Sign up for a free or paid account at [ImageKit.io](https://imagekit.io/registration).
+2. Once logged in, navigate to the **Developer options** section in the dashboard sidebar.
+3. Under **API Keys**, note your **Public Key**, **Private Key**, and **URL Endpoint**. These are essential for interacting with the ImageKit API and SDKs.
     ![ImageKit API Keys](/docs/guides/imagekit-api-keys.png)
 
 ## Create a table in Neon for file metadata
 
 We need a table in Neon to store metadata about the files uploaded to ImageKit.io. This allows your application to reference the media stored in ImageKit.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS imagekit_files (
@@ -44,7 +44,7 @@ We need a table in Neon to store metadata about the files uploaded to ImageKit.i
     );
     ```
 
-2.  Run the SQL statement. You can customize this table by adding or removing columns (like `width`, `height`, `tags`, etc.) based on the information you need from ImageKit and your application's requirements.
+2. Run the SQL statement. You can customize this table by adding or removing columns (like `width`, `height`, `tags`, etc.) based on the information you need from ImageKit and your application's requirements.
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `imagekit_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -58,8 +58,8 @@ The recommended approach for client-side uploads is to generate secure **authent
 
 This requires two backend endpoints:
 
-1.  `/generate-auth-params`: Generates temporary authentication parameters (`token`, `expire`, `signature`).
-2.  `/save-metadata`: Receives file metadata from the client after a successful upload to ImageKit and saves it to the Neon database.
+1. `/generate-auth-params`: Generates temporary authentication parameters (`token`, `expire`, `signature`).
+2. `/save-metadata`: Receives file metadata from the client after a successful upload to ImageKit and saves it to the Neon database.
 
 <Tabs labels={["JavaScript", "Python"]}>
 
@@ -157,9 +157,9 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the ImageKit Node.js SDK (`imagekit`) using credentials from environment variables.
-2.  **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic** to ensure only authenticated users can generate upload parameters and save metadata.
-3.  **API endpoints:**
+1. **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the ImageKit Node.js SDK (`imagekit`) using credentials from environment variables.
+2. **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic** to ensure only authenticated users can generate upload parameters and save metadata.
+3. **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `getAuthenticationParameters()` method to create a short-lived `token`, `expire` timestamp, and `signature`. These are returned to the client.
     - **`/save-metadata` (POST):** This endpoint is called by the client _after_ it has successfully uploaded a file directly to ImageKit's Upload API. The client sends the relevant metadata returned by ImageKit (like `fileId`, `url`, `thumbnailUrl`, etc.). The endpoint then inserts this metadata, along with the authenticated `userId`, into the `imagekit_files` table in Neon.
 
@@ -299,12 +299,12 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`), and the ImageKit Python SDK (`imagekit`) using environment variables.
-2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
-3.  **API endpoints:**
+1. **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`), and the ImageKit Python SDK (`imagekit`) using environment variables.
+2. **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
+3. **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
     - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Neon using `psycopg2`.
-4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
+4. **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
 </TabItem>
 
@@ -314,7 +314,7 @@ if __name__ == "__main__":
 
 This workflow involves getting authentication parameters from your backend, using those parameters to upload the file directly to ImageKit via `curl`, and then notifying your backend to save the metadata.
 
-1.  **Get authentication parameters:** Send a `GET` request to your backend's `/generate-auth-params` endpoint.
+1. **Get authentication parameters:** Send a `GET` request to your backend's `/generate-auth-params` endpoint.
 
     ```bash
     curl -X GET http://localhost:3000/generate-auth-params
@@ -331,7 +331,7 @@ This workflow involves getting authentication parameters from your backend, usin
     }
     ```
 
-2.  **Upload file directly to ImageKit:** Use the parameters obtained in Step 1, your **ImageKit Public Key**, and the file path to send a `POST` request with `multipart/form-data` directly to the ImageKit Upload API.
+2. **Upload file directly to ImageKit:** Use the parameters obtained in Step 1, your **ImageKit Public Key**, and the file path to send a `POST` request with `multipart/form-data` directly to the ImageKit Upload API.
 
     ```bash
     curl -X POST https://upload.imagekit.io/api/v1/files/upload \
@@ -365,7 +365,7 @@ This workflow involves getting authentication parameters from your backend, usin
     }
     ```
 
-3.  **Save metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint, providing the key details (like `fileId`, `url`) received from ImageKit in Step 2.
+3. **Save metadata:** Send a `POST` request to your backend's `/save-metadata` endpoint, providing the key details (like `fileId`, `url`) received from ImageKit in Step 2.
 
     ```bash
     curl -X POST http://localhost:3000/save-metadata \

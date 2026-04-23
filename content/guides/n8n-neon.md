@@ -26,8 +26,8 @@ Before you begin, ensure you have the following:
 
 The solution consists of two main n8n workflows:
 
-1.  **Indexing workflow:** This workflow is triggered when a new file is added to a specified Google Drive folder. It downloads the file, splits it into manageable chunks, generates vector embeddings for each chunk using Google Gemini, and then stores these chunks and their embeddings in a Neon Postgres database (acting as a PGVector store).
-2.  **Chat workflow:** This workflow provides a chat interface. When a user sends a message (a question), the AI Agent retrieves relevant document chunks from the Neon Postgres vector store based on the query's semantic similarity. These retrieved chunks are then passed as context to a Google Gemini chat model, which generates a response.
+1. **Indexing workflow:** This workflow is triggered when a new file is added to a specified Google Drive folder. It downloads the file, splits it into manageable chunks, generates vector embeddings for each chunk using Google Gemini, and then stores these chunks and their embeddings in a Neon Postgres database (acting as a PGVector store).
+2. **Chat workflow:** This workflow provides a chat interface. When a user sends a message (a question), the AI Agent retrieves relevant document chunks from the Neon Postgres vector store based on the query's semantic similarity. These retrieved chunks are then passed as context to a Google Gemini chat model, which generates a response.
 
 ## Workflow 1: Indexing Google Drive documents into Neon Postgres
 
@@ -37,16 +37,16 @@ This workflow automates the process of ingesting and preparing your Google Drive
 
 ### Step 1: Setting up the Google Drive trigger
 
-1.  **Create a new workflow:** In your n8n dashboard, create a new workflow.
-2.  **Add Google Drive trigger:** Click the `+` button to add the first step. Search for and select "Google Drive".
-3.  **Configure trigger:** In the Google Drive node parameters, select "On changes involving a specific folder" under "Triggers".
-4.  **Connect Google Drive account (OAuth2):**
+1. **Create a new workflow:** In your n8n dashboard, create a new workflow.
+2. **Add Google Drive trigger:** Click the `+` button to add the first step. Search for and select "Google Drive".
+3. **Configure trigger:** In the Google Drive node parameters, select "On changes involving a specific folder" under "Triggers".
+4. **Connect Google Drive account (OAuth2):**
     - Under "Credential to connect with", click "Select Credential" and then "Create new credential".
     - This will open a dialog for "Google Drive account (Google Drive OAuth2 API)". Note the "OAuth Redirect URL" provided by n8n (you will need this in the next steps).
 
     ![Configuring Google Drive Trigger node](/docs/guides/n8n/n8n-add-google-drive-folder-node.gif)
 
-5.  **Create Google Drive OAuth credentials:**
+5. **Create Google Drive OAuth credentials:**
     - Open the [Google Cloud console](https://console.cloud.google.com/) and navigate to "APIs & Services" -> "OAuth consent screen".
     - If not configured, click "Get started".
     - **App Information:** Provide an "App name" (e.g., `personal-n8n`), select "User support email", and enter your email address.
@@ -61,13 +61,13 @@ This workflow automates the process of ingesting and preparing your Google Drive
 
     ![Configuring Google Drive OAuth credentials in GCP](/docs/guides/n8n/n8n-configure-gdrive-oauth.gif)
 
-6.  **Enable Google Drive API in GCP:**
+6. **Enable Google Drive API in GCP:**
     - In the GCP console, search for "Google Drive API".
     - Select "Google Drive API" and click "Enable" if it's not already enabled.
 
     ![Enabling Google Drive API in GCP](/docs/guides/n8n/n8n-enable-gdrive-api.gif)
 
-7.  **Finalize n8n Credential:**
+7. **Finalize n8n Credential:**
     - Back in n8n, paste the "Client ID" and "Client secret" you copied from GCP into the respective fields in the "Google Drive account (OAuth2)" credential dialog.
     - After entering the Client ID and Secret, click "Sign in with Google".
     - Authenticate with the Google account you added as a test user. Grant the necessary permissions.
@@ -75,10 +75,10 @@ This workflow automates the process of ingesting and preparing your Google Drive
 
     ![Finalizing Google Drive OAuth credential in n8n](/docs/guides/n8n/n8n-finalize-gdrive-oauth.gif)
 
-8.  **Configure folder and watch settings:**
+8. **Configure folder and watch settings:**
     - Back in the Google Drive Trigger node, set the "Folder" to the specific folder you want to monitor for new files. You can enter the folder name or select from the list.
     - Select "File Created" under "Watch For". This will trigger the workflow when a new file is added to the specified folder.
-9.  **Test the Trigger:**
+9. **Test the Trigger:**
     - Upload a sample PDF document to your specified Google Drive folder.
     - In n8n, click "Fetch Test Event" on the Google Drive Trigger node. It should detect the new file and show its details in the output on the right side of the editor. This confirms that the trigger is working correctly.
 
@@ -86,35 +86,35 @@ This workflow automates the process of ingesting and preparing your Google Drive
 
 ### Step 2: Downloading the File content
 
-1.  **Add Google Drive Node (Action):** Click the `+` after the trigger node. Search for and select "Google Drive".
-2.  Select "Download File" as the operation.
-3.  Under **Credential to connect with** select your previously created Google Drive account.
-4.  Under **Resource:** select "File".
-5.  Under **Operation:** select "Download".
-6.  Select **File > By ID**. Drag the "File ID" from the Google Drive Trigger node to this field. This ensures the node downloads the file that triggered the workflow. Check the image below for reference.
-7.  Select **Options > Add option > File Name.** Similarly, drag the "File Name" from the Google Drive Trigger node to this field. This will help in identifying the file later.
+1. **Add Google Drive Node (Action):** Click the `+` after the trigger node. Search for and select "Google Drive".
+2. Select "Download File" as the operation.
+3. Under **Credential to connect with** select your previously created Google Drive account.
+4. Under **Resource:** select "File".
+5. Under **Operation:** select "Download".
+6. Select **File > By ID**. Drag the "File ID" from the Google Drive Trigger node to this field. This ensures the node downloads the file that triggered the workflow. Check the image below for reference.
+7. Select **Options > Add option > File Name.** Similarly, drag the "File Name" from the Google Drive Trigger node to this field. This will help in identifying the file later.
     ![Configuring Google Drive Download node](/docs/guides/n8n/n8n-google-drive-download-node.gif)
 
 ### Step 3: Setting up the Neon Postgres PGVector store Node
 
 This node will store the document chunks and their embeddings in Neon Postgres using the [`pgvector` extension](/docs/extensions/pgvector).
 
-1.  **Add Postgres PGVector Store Node:** Click the `+` after the Google Drive download node. Search for "Postgres PGVector Store" and add it.
-2.  Under **Actions** select "Add documents to vector store".
-3.  A dialog will appear prompting you to either select an existing credential or create a new one. Click "Create new credential".
+1. **Add Postgres PGVector Store Node:** Click the `+` after the Google Drive download node. Search for "Postgres PGVector Store" and add it.
+2. Under **Actions** select "Add documents to vector store".
+3. A dialog will appear prompting you to either select an existing credential or create a new one. Click "Create new credential".
 
     <Admonition type="tip">
     You can get your Neon database connection details from the Neon console. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
     </Admonition>
 
-4.  Fill in your Neon database details:
+4. Fill in your Neon database details:
     - **Host:** Your Neon host
     - **Database:** Your Neon database name
     - **User:** Your Neon database user
     - **Password:** Your Neon database password
     - **SSL:** Set to "Require".
-5.  Click "Save".
-6.  Configure the Postgres PGVector Store node parameters:
+5. Click "Save".
+6. Configure the Postgres PGVector Store node parameters:
     - **Operation Mode:** Select "Insert Documents".
     - **Table Name:** Enter a name for your table (e.g., `n8n_vectors`). The table will be created automatically by n8n.
     - **Embedding Batch Size:** (e.g., 200, default)
@@ -231,12 +231,12 @@ After all these configurations, your Workflow should look like this:
 
 ### Step 5: Testing the Chatbot
 
-1.  You can click "Open chat" next to the "Test workflow" button at the bottom of the n8n editor. This will open a chat interface where you can interact with your AI knowledge base chatbot.
-2.  **Ask a Question:** Type a question related to the content of the documents you indexed into Google Drive. For example, here we indexed a PDF document about "Neon RLS" and we ask it "What is Neon RLS, explain to me as if I am a 5".
+1. You can click "Open chat" next to the "Test workflow" button at the bottom of the n8n editor. This will open a chat interface where you can interact with your AI knowledge base chatbot.
+2. **Ask a Question:** Type a question related to the content of the documents you indexed into Google Drive. For example, here we indexed a PDF document about "Neon RLS" and we ask it "What is Neon RLS, explain to me as if I am a 5".
 
     ![Asking a question in the chat interface](/docs/guides/n8n/n8n-ask-chatbot-question.png)
 
-3.  **Verify Response and Logs:**
+3. **Verify Response and Logs:**
     - The chatbot should provide an answer based on the retrieved documents. The answer will be generated by the Google Gemini chat model, using the context provided by the retrieved document chunks.
     - You can inspect the "Latest Logs from AI Agent node" in n8n to see the input, the tool being called (Postgres PGVector Store), and the output from the Gemini Chat Model for debugging or verification purposes.
 
@@ -266,8 +266,8 @@ After all these configurations, your Workflow should look like this:
 
 ## How it works: A Brief recap
 
-1.  **Indexing:** New files in a designated Google Drive folder trigger an n8n workflow. The files are downloaded, broken into smaller text chunks, and each chunk is converted into a numerical representation (embedding) by Google Gemini. These embeddings, along with the text chunks and metadata (like the filename), are stored in your Neon Postgres database, which uses the pgvector extension to handle these vector embeddings.
-2.  **Retrieval & Generation (RAG):** When you ask a question in the chat interface, your query is also converted into an embedding. The n8n AI Agent uses this query embedding to search the Neon Postgres vector store for the text chunks whose embeddings are most similar to your query's embedding. These relevant chunks are retrieved and provided as context to the Google Gemini chat model. The chat model then generates a human-like answer based on your question and the provided context from your documents.
+1. **Indexing:** New files in a designated Google Drive folder trigger an n8n workflow. The files are downloaded, broken into smaller text chunks, and each chunk is converted into a numerical representation (embedding) by Google Gemini. These embeddings, along with the text chunks and metadata (like the filename), are stored in your Neon Postgres database, which uses the pgvector extension to handle these vector embeddings.
+2. **Retrieval & Generation (RAG):** When you ask a question in the chat interface, your query is also converted into an embedding. The n8n AI Agent uses this query embedding to search the Neon Postgres vector store for the text chunks whose embeddings are most similar to your query's embedding. These relevant chunks are retrieved and provided as context to the Google Gemini chat model. The chat model then generates a human-like answer based on your question and the provided context from your documents.
 
 This entire process ensures that the chatbot's answers are grounded in the information contained within your Google Drive documents.
 

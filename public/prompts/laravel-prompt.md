@@ -5,6 +5,7 @@
 **Purpose:** To connect the current Laravel project to Neon Postgres and creating a working example to validate the connection.
 
 **Scope:**
+
 - Assumes the user has a Neon project and access to their connection parameters.
 - Assumes `composer` is installed and has been used to set up the project.
 
@@ -16,9 +17,11 @@
 
 - This prompt must be run inside an existing Laravel project directory.
 - If the user is creating a new project run the following command:
+
   ```bash
   composer create-project laravel/laravel project_name
   ```
+
 - **PHP PostgreSQL Extension**: Before you begin, ensure your PHP environment has the PostgreSQL driver installed and enabled. This is typically the `pdo_pgsql` extension. If it is missing, `php artisan migrate` and `php artisan serve` will fail with a could not find driver error.
 
 ---
@@ -29,8 +32,8 @@ When this prompt is triggered, automatically configure the open Laravel project 
 
 ### 1. Configure Environment Variables
 
-1.  Locate the `.env` file at the root of the project. If it does not exist, create one.
-2.  Update the file with the following database connection variables. **Prompt the user to replace the placeholder values** with their actual credentials from Neon.
+1. Locate the `.env` file at the root of the project. If it does not exist, create one.
+2. Update the file with the following database connection variables. **Prompt the user to replace the placeholder values** with their actual credentials from Neon.
 
     ```dotenv title=".env"
     DB_CONNECTION=pgsql
@@ -41,7 +44,7 @@ When this prompt is triggered, automatically configure the open Laravel project 
     DB_PASSWORD="your_neon_password"
     ```
 
-3.  Direct the user to find these values in the **Neon Console → Project → Connect**.
+3. Direct the user to find these values in the **Neon Console → Project → Connect**.
 
 ---
 
@@ -49,7 +52,7 @@ When this prompt is triggered, automatically configure the open Laravel project 
 
 To provide a clear way to verify the setup, create a simple route and view that displays the PostgreSQL version from the connected Neon database.
 
-1.  **Create a view:**
+1. **Create a view:**
     - Create a new file named `neon.blade.php` inside the `resources/views` directory.
     - Add the following content to the file:
 
@@ -67,7 +70,7 @@ To provide a clear way to verify the setup, create a simple route and view that 
     </html>
     ```
 
-2.  **Create a route:**
+2. **Create a route:**
     - Open the `routes/web.php` file.
     - Add the following route to fetch the database version and render the view. Ensure the `DB` facade is imported.
 
@@ -104,26 +107,33 @@ To provide a clear way to verify the setup, create a simple route and view that 
 
 Once the file modifications are complete:
 
-1.  Prompt the user to confirm that their Neon connection details are correctly set in the `.env` file.
-2.  Clear any cached configuration to ensure the new database settings are loaded:
+1. Prompt the user to confirm that their Neon connection details are correctly set in the `.env` file.
+2. Clear any cached configuration to ensure the new database settings are loaded:
+
     ```bash
     php artisan config:clear
     ```
-3.  Run the initial database migrations to test write access to the database:
+
+3. Run the initial database migrations to test write access to the database:
+
     ```bash
     php artisan migrate
     ```
-4.  Start the Laravel development server:
+
+4. Start the Laravel development server:
+
     ```bash
     php artisan serve
     ```
-5.  Finally, inform the user that the setup is complete. To test the connection, they can visit `http://127.0.0.1:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
+
+5. Finally, inform the user that the setup is complete. To test the connection, they can visit `http://127.0.0.1:8000` in their browser, where they should see the PostgreSQL version from their Neon database.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A `.env` file is present or has been created.
 - The `.env` file contains the `DB_CONNECTION=pgsql` variable and the host, database, user, and password variables.
 

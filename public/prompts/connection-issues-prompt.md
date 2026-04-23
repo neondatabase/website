@@ -5,6 +5,7 @@
 **Purpose:** To refactor the database connection and query execution layer of the current application to handle transient failures (such as compute restarts, scaling to zero, and maintenance updates) gracefully.
 
 **Scope:**
+
 - Analyze the current project to detect the programming language and database driver.
 - Implement robust connection pooling.
 - Configure connection timeouts to account for "cold starts."
@@ -35,19 +36,23 @@ Analyze the project files (`package.json`, `requirements.txt`, `.csproj`, `pom.x
 
 Based on the detected language, install the recommended library for handling retries. **Ask the user for permission before running install commands.**
 
-*   **Node.js:** Install `async-retry`.
+- **Node.js:** Install `async-retry`.
+
     ```bash
     npm install async-retry
     ```
-*   **Python:** Install `tenacity`.
+- **Python:** Install `tenacity`.
+
     ```bash
     pip install tenacity
     ```
-*   **C#/.NET:** Install `Polly`.
+- **C#/.NET:** Install `Polly`.
+
     ```bash
     dotnet add package Polly
     ```
-*   **Java:** Install `failsafe`.
+- **Java:** Install `failsafe`.
+
     ```xml
     <!-- Maven dependency for dev.failsafe:failsafe -->
     <dependency>
@@ -60,24 +65,24 @@ Based on the detected language, install the recommended library for handling ret
 ### 3. Refactor Connection Configuration (Timeouts)
 
 Locate where the database connection pool is initialized. Modify the configuration to ensure the **Connection Timeout** is set to at least **15 seconds**.
-*   *Reasoning:* Neon endpoints may scale to zero. A cold start can take a few seconds. Aggressive timeouts (<5s) will cause application failures during these valid operational events.
+- *Reasoning:* Neon endpoints may scale to zero. A cold start can take a few seconds. Aggressive timeouts (<5s) will cause application failures during these valid operational events.
 
 ### 4. Implement the `isTransientError` Logic
 
 Create a helper function to identify retriable errors. You must check for the following specific Postgres `SQLSTATE` codes and error messages:
 
-*   **Codes:** `57P01` (admin_shutdown), `08006` (connection_failure), `08003` (connection_does_not_exist).
-*   **Messages:** "Connection terminated unexpectedly", "network issue", "Couldn't connect to compute node", "starting up".
+- **Codes:** `57P01` (admin_shutdown), `08006` (connection_failure), `08003` (connection_does_not_exist).
+- **Messages:** "Connection terminated unexpectedly", "network issue", "Couldn't connect to compute node", "starting up".
 
 ### 5. Implement Retry Wrapper with Backoff & Jitter
 
 Wrap the database query execution logic using the installed retry library. Apply the following **strictly required** settings:
 
-1.  **Exponential Backoff:** Delays should double (e.g., 1s, 2s, 4s).
-2.  **Min Timeout:** Start at **1 second**.
-3.  **Max Timeout:** Cap at **16 seconds**.
-4.  **Max Retries:** **5 attempts**.
-5.  **Jitter:** Add randomization to the delay to prevent "thundering herd" issues.
+1. **Exponential Backoff:** Delays should double (e.g., 1s, 2s, 4s).
+2. **Min Timeout:** Start at **1 second**.
+3. **Max Timeout:** Cap at **16 seconds**.
+4. **Max Retries:** **5 attempts**.
+5. **Jitter:** Add randomization to the delay to prevent "thundering herd" issues.
 
 ---
 
@@ -219,14 +224,15 @@ public void executeResiliently(Runnable dbOperation) {
 
 After applying the code changes:
 
-1.  Instruct the user to test the resilience by simulating a "Compute Restart" in the Neon Console while the app is running.
-2.  The app should automatically recover and complete the database operations without crashing.
+1. Instruct the user to test the resilience by simulating a "Compute Restart" in the Neon Console while the app is running.
+2. The app should automatically recover and complete the database operations without crashing.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before outputting code, ensure:
+
 - **Connection Timeout** is explicitly set to >= 10 seconds in the pool configuration.
 - **Jitter** (randomization) is enabled in the retry logic.
 - The retry mechanism **only** catches specific transient errors (connection drops, shutdowns), NOT logical errors (like syntax errors or constraint violations).

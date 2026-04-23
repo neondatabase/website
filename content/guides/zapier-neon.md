@@ -11,8 +11,8 @@ Zapier is a powerful no-code automation platform that allows you to connect Neon
 
 This guide will walk you through setting up two common automation scenarios:
 
-1.  Triggering an action when a new row is added to a table.
-2.  Adding data to a table based on an event in an external service.
+1. Triggering an action when a new row is added to a table.
+2. Adding data to a table based on an event in an external service.
 
 These examples will illustrate the core concepts, which you can then adapt to a wide variety of other use cases.
 
@@ -22,8 +22,8 @@ Before you begin, ensure you have the following:
 
 - **Zapier Account:** A Zapier account is required to create and manage Zaps. Please note that the PostgreSQL integration is a Pro feature on Zapier and requires a [paid plan](https://zapier.com/pricing).
 
-* **Neon Account and Project:** A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
-* **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
+- **Neon Account and Project:** A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
+- **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.
 
@@ -59,12 +59,12 @@ For Zapier's "New Row" trigger to reliably detect new entries in Neon, your tabl
 
 Before creating Zaps, you need to connect your Neon database to Zapier. Zapier uses a generic "PostgreSQL" app integration. Due to how [Neon uses Server Name Indication (SNI) for routing connections](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) and how some clients handle SNI, a specific format is required for the password field in Zapier to ensure a successful connection.
 
-1.  **Log in to Zapier.**
-2.  Navigate to "**App Connections**" from the left sidebar.
+1. **Log in to Zapier.**
+2. Navigate to "**App Connections**" from the left sidebar.
     ![App Connections in Zapier](/docs/guides/zapier-app-connections.png)
-3.  Click "**Add connection**" and search for "**PostgreSQL**".
+3. Click "**Add connection**" and search for "**PostgreSQL**".
     ![Add connection page in Zapier](/docs/guides/zapier-add-connection.png)
-4.  A pop-up window will appear asking for connection details. You can find most of these in your Neon Console on the **Dashboard** page, by clicking on the **Connect** button for your database. Fill in the following fields:
+4. A pop-up window will appear asking for connection details. You can find most of these in your Neon Console on the **Dashboard** page, by clicking on the **Connect** button for your database. Fill in the following fields:
     - **Host:** Your Neon host (e.g., `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`)
     - **Port:** `5432`
     - **Database:** Your Neon database name (e.g., `neondb`)
@@ -89,8 +89,8 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
     It is strongly recommend to create a dedicated database user/role in Neon specifically for Zapier. Grant this user only the minimum necessary permissions on the specific tables Zapier will interact with.
     </Admonition>
 
-5.  After filling in all fields, including the specially formatted password, click "**Yes, Continue to PostgreSQL**". Zapier will test the connection.
-6.  If the connection is successful, you should see **PostgreSQL** listed under your connected apps in Zapier. You can now use this connection in your Zaps.
+5. After filling in all fields, including the specially formatted password, click "**Yes, Continue to PostgreSQL**". Zapier will test the connection.
+6. If the connection is successful, you should see **PostgreSQL** listed under your connected apps in Zapier. You can now use this connection in your Zaps.
     ![PostgreSQL connection in Zapier](/docs/guides/zapier-postgresql-connection.png)
 
 ## Use case 1: Notify on new Database entries
@@ -125,7 +125,7 @@ Let's create a Zap that sends a Slack message whenever a new user is added to `u
 
 ### Step 2: Setting up the Action (Send Slack message)
 
-1.  **Action Setup:**
+1. **Action Setup:**
     - Search for and select "**Slack**" as the action app.
     - For "Event", choose "**Send Channel Message**".
     - **Connect Slack Account:** If you haven't already, connect your Slack account and grant Zapier permissions.
@@ -144,10 +144,10 @@ Let's create a Zap that sends a Slack message whenever a new user is added to `u
 
     - Configure other options like "Bot Name", "Bot Icon", etc., as desired.
 
-2.  Click "**Continue**".
-3.  **Test action:** Click "**Test step**". Zapier will send a sample message to your selected Slack channel using the data from the trigger test.
+2. Click "**Continue**".
+3. **Test action:** Click "**Test step**". Zapier will send a sample message to your selected Slack channel using the data from the trigger test.
     ![Zapier message test in Slack](/docs/guides/zapier-slack-test-message.png)
-4.  If the test is successful, click "**Publish Zap**".
+4. If the test is successful, click "**Publish Zap**".
 
 Now, whenever a new row is added to your `users` table in Neon Postgres, a message will automatically be posted to your specified Slack channel.
 
@@ -161,18 +161,18 @@ Let's create a Zap that adds a new row to our `form_submissions` table in Neon w
 
 ### Step 1: Setting up the Trigger (New Google Form response)
 
-1.  In Zapier, click "**Create Zap**".
-2.  Search for and select "**Google Forms**" as the trigger app.
-3.  For "Trigger Event", choose "**New Form Response**". Click "Continue".
-4.  **Connect Google Forms Account:** If you haven't already, connect your Google account and grant Zapier permissions.
-5.  Select the Google Form you want to use.
-6.  Click "**Continue**".
-7.  Make a test submission in your Google Form to ensure there is data for Zapier to work with. You can do this by filling out the form and submitting it.
-8.  **Test trigger:** Click "**Test trigger**". Zapier will attempt to find a recent form submission. Click "**Continue with selected record**".
+1. In Zapier, click "**Create Zap**".
+2. Search for and select "**Google Forms**" as the trigger app.
+3. For "Trigger Event", choose "**New Form Response**". Click "Continue".
+4. **Connect Google Forms Account:** If you haven't already, connect your Google account and grant Zapier permissions.
+5. Select the Google Form you want to use.
+6. Click "**Continue**".
+7. Make a test submission in your Google Form to ensure there is data for Zapier to work with. You can do this by filling out the form and submitting it.
+8. **Test trigger:** Click "**Test trigger**". Zapier will attempt to find a recent form submission. Click "**Continue with selected record**".
 
 ### Step 2: Setting up the Action (Create row in Neon)
 
-1.  **Action Setup:**
+1. **Action Setup:**
     - Search for and select "**PostgreSQL**" as the action app.
     - For "Event", choose "**New Row**". Click "Continue".
     - For "Account", select the Neon PostgreSQL connection you configured earlier. Click "Continue".
@@ -183,10 +183,10 @@ Let's create a Zap that adds a new row to our `form_submissions` table in Neon w
       - For `feedback_text`, select the Google Forms field for feedback (e.g., `{{Feedback}}`).
       - The `id` and `submitted_at` columns in our example `form_submissions` table have default values (SERIAL and CURRENT_TIMESTAMP respectively), so you can often leave them unmapped in Zapier, and Postgres will handle them. If your table structure requires them, map them accordingly.
         ![Google Forms to Neon mapping in Zapier](/docs/guides/zapier-google-forms-to-neon-mapping.png)
-2.  Click "**Continue**".
-3.  **Test action:** Click "**Test step**". Zapier will attempt to create a new row in your `form_submissions` table in Neon using the data from the Google Forms test.
-4.  **Verify in Neon:** Check your `form_submissions` table in Neon to confirm the new row was added.
-5.  If the test is successful and the data appears in Neon, click "**Publish Zap**".
+2. Click "**Continue**".
+3. **Test action:** Click "**Test step**". Zapier will attempt to create a new row in your `form_submissions` table in Neon using the data from the Google Forms test.
+4. **Verify in Neon:** Check your `form_submissions` table in Neon to confirm the new row was added.
+5. If the test is successful and the data appears in Neon, click "**Publish Zap**".
 
 Now, every time your Google Form is submitted, the data will be automatically logged into your Neon Postgres database.
 
@@ -194,8 +194,8 @@ Now, every time your Google Form is submitted, the data will be automatically lo
 
 The two examples above demonstrate the fundamental patterns for integrating Neon with other services via Zapier:
 
-1.  **Neon as a Trigger:** An event in your Neon database (like a new row or an updated row) initiates actions in other apps.
-2.  **Neon as an Action:** An event in an external app (like a new email, a new Stripe payment, an Airtable update) results in data being created or updated in your Neon database.
+1. **Neon as a Trigger:** An event in your Neon database (like a new row or an updated row) initiates actions in other apps.
+2. **Neon as an Action:** An event in an external app (like a new email, a new Stripe payment, an Airtable update) results in data being created or updated in your Neon database.
 
 You can adapt these patterns to automate a vast array of tasks. Here are some additional use cases you might consider:
 
@@ -213,11 +213,11 @@ You can adapt these patterns to automate a vast array of tasks. Here are some ad
 
 The process for building these Zaps will be very similar:
 
-1.  Choose your **Trigger** app and event.
-2.  Choose your **Action** app and event.
-3.  Connect your app accounts.
-4.  Configure the trigger and action, mapping data fields between the services.
-5.  Test and publish your Zap.
+1. Choose your **Trigger** app and event.
+2. Choose your **Action** app and event.
+3. Connect your app accounts.
+4. Configure the trigger and action, mapping data fields between the services.
+5. Test and publish your Zap.
 
 ## Troubleshooting
 

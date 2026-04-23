@@ -62,7 +62,7 @@ SELECT * FROM neon_auth.users_sync;
 
 | id          | name      | email           | created_at          | updated_at          | deleted_at | raw_json                     |
 | ----------- | --------- | --------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
-| 51e491df... | Sam Patel | sam@startup.dev | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | `{"id": "51e491df...", ...}` |
+| 51e491df... | Sam Patel | <sam@startup.dev> | 2025-02-12 19:43... | 2025-02-12 19:46... | null       | `{"id": "51e491df...", ...}` |
 
 </Steps>
 

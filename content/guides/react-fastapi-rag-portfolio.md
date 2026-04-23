@@ -16,9 +16,11 @@ This project is perfect for showcasing technical skills through a portfolio that
 Before you start, ensure that you have the following tools and services ready:
 
 - `pip`: This is required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
+
   ```bash
   pip --version
   ```
+
 - Neon serverless Postgres : You will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 - Node.js: Needed for developing the frontend using React, you can download it following the [official installation guide](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
 - OpenAI API key: You need access to the OpenAI API for generating embeddings, you can [sign up here](https://platform.openai.com/signup).
@@ -27,7 +29,7 @@ Before you start, ensure that you have the following tools and services ready:
 
 Follow these steps to set up your backend for the full-stack portfolio website:
 
-1.  Create the project structure.
+1. Create the project structure.
 
     Since this is a full-stack project, your backend and frontend will be in separate directories within a single parent folder. Begin by creating the parent folder and moving into it
 
@@ -36,7 +38,7 @@ Follow these steps to set up your backend for the full-stack portfolio website:
     cd portfolio_project
     ```
 
-2.  Create a `uv` Python virtual environment.
+2. Create a `uv` Python virtual environment.
 
     If you don't already have uv installed, you can install it with:
 
@@ -52,7 +54,7 @@ Follow these steps to set up your backend for the full-stack portfolio website:
 
     This will create a new project directory called `portfolio_backend`. Open this directory in your code editor of your choice.
 
-3.  Set up the virtual environment.
+3. Set up the virtual environment.
 
         You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
@@ -72,7 +74,7 @@ Follow these steps to set up your backend for the full-stack portfolio website:
 
         You should see `(portfolio_backend)` in your terminal now, this means that your virtual environment is activated.
 
-4.  Install dependencies.
+4. Install dependencies.
 
     Next, add all the necessary dependencies for your project:
 
@@ -89,7 +91,7 @@ Follow these steps to set up your backend for the full-stack portfolio website:
     - `openai` : The OpenAI API client for generating embeddings and chatbot responses
     - `pgvector` : A Python client for working with pgvector in PostgreSQL
 
-5.  Create the project structure.
+5. Create the project structure.
 
     Create the following directory structure to organize your project files:
 
@@ -504,7 +506,7 @@ To start the development server, run the following command:
 npm run dev
 ```
 
-This will start the React development server at http://localhost:3000. Open your browser and navigate to that address to view your portfolio website.
+This will start the React development server at <http://localhost:3000>. Open your browser and navigate to that address to view your portfolio website.
 
 Now, with the React app running, take a look at how the website appears. Ensure that the design, content, and overall presentation are what you expect. You can interact with the chatbot (which will not yet be functional until the backend is also running) to check the layout and form submission.
 

@@ -51,24 +51,24 @@ The following statement uses the [`create function`](postgresql-create-function)
 
 ```plsql
 create or replace function get_film_actors()
-	returns setof record
+ returns setof record
 as $$
 declare
    rec record;
 begin
    for rec in select
-			film_id,
-			title,
+   film_id,
+   title,
             (first_name || ' ' || last_name)::varchar
-		from film
-		inner join film_actor using(film_id)
-		inner join actor using (actor_id)
-		order by title
-	loop
+  from film
+  inner join film_actor using(film_id)
+  inner join actor using (actor_id)
+  order by title
+ loop
         return next rec;
-	end loop;
+ end loop;
 
-	return;
+ return;
 end;
 $$
 language plpgsql;
@@ -78,25 +78,25 @@ The following statement defines a function with the same name `get_film_actors`.
 
 ```plsql
 create or replace function get_film_actors(p_fiml_id int)
-	returns setof record
+ returns setof record
 as $$
 declare
    rec record;
 begin
    for rec in select
-			film_id,
-			title,
+   film_id,
+   title,
             (first_name || ' ' || last_name)::varchar
-		from film
-		inner join film_actor using(film_id)
-		inner join actor using (actor_id)
-		where film_id = p_fiml_id
-		order by title
-	loop
+  from film
+  inner join film_actor using(film_id)
+  inner join actor using (actor_id)
+  where film_id = p_fiml_id
+  order by title
+ loop
         return next rec;
-	end loop;
+ end loop;
 
-	return;
+ return;
 end;
 $$
 language plpgsql;

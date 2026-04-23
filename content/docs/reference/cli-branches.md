@@ -183,7 +183,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
 
     <details>
     <summary>Example output</summary>
-    ```json 
+    ```json
     {
     "branch": {
         "id": "br-frosty-art-30264288",
@@ -538,8 +538,8 @@ neon branches schema-diff production development
 The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `development` branch that is not present in the `production` branch.
 
 ```diff
---- Database: neondb	(Branch: br-wandering-firefly-a50un462) // [!code --]
-+++ Database: neondb	(Branch: br-fancy-sky-a5cydw8p) // [!code ++]
+--- Database: neondb (Branch: br-wandering-firefly-a50un462) // [!code --]
++++ Database: neondb (Branch: br-fancy-sky-a5cydw8p) // [!code ++]
 @@ -26,9 +26,10 @@
 
  CREATE TABLE public.playing_with_neon (

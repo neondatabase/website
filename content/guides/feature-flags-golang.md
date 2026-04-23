@@ -178,31 +178,31 @@ First, let's create the database connection layer. Create a file at `internal/db
 package db
 
 import (
-	"log"
+ "log"
 
-	"github.com/jmoiron/sqlx"
-	_ "github.com/jackc/pgx/v5/stdlib"
+ "github.com/jmoiron/sqlx"
+ _ "github.com/jackc/pgx/v5/stdlib"
 )
 
 // DB is our database wrapper
 type DB struct {
-	*sqlx.DB
+ *sqlx.DB
 }
 
 // NewDB creates a new database connection
 func NewDB(connectionString string) (*DB, error) {
-	db, err := sqlx.Connect("postgres", connectionString)
-	if err != nil {
-		return nil, err
-	}
+ db, err := sqlx.Connect("postgres", connectionString)
+ if err != nil {
+  return nil, err
+ }
 
-	// Test the connection
-	if err := db.Ping(); err != nil {
-		return nil, err
-	}
+ // Test the connection
+ if err := db.Ping(); err != nil {
+  return nil, err
+ }
 
-	log.Println("Connected to the database successfully")
-	return &DB{db}, nil
+ log.Println("Connected to the database successfully")
+ return &DB{db}, nil
 }
 ```
 
@@ -213,40 +213,40 @@ package featureflags
 
 // FeatureFlag represents a feature flag in the system
 type FeatureFlag struct {
-	ID          int    `db:"id" json:"id"`
-	Name        string `db:"name" json:"name"`
-	Description string `db:"description" json:"description"`
-	Enabled     bool   `db:"enabled" json:"enabled"`
+ ID          int    `db:"id" json:"id"`
+ Name        string `db:"name" json:"name"`
+ Description string `db:"description" json:"description"`
+ Enabled     bool   `db:"enabled" json:"enabled"`
 }
 
 // Segment represents a user segment
 type Segment struct {
-	ID          int    `db:"id" json:"id"`
-	Name        string `db:"name" json:"name"`
-	Description string `db:"description" json:"description"`
+ ID          int    `db:"id" json:"id"`
+ Name        string `db:"name" json:"name"`
+ Description string `db:"description" json:"description"`
 }
 
 // Rule associates feature flags with segments
 type Rule struct {
-	ID         int `db:"id" json:"id"`
-	FlagID     int `db:"flag_id" json:"flag_id"`
-	SegmentID  int `db:"segment_id" json:"segment_id"`
-	Percentage int `db:"percentage" json:"percentage"`
+ ID         int `db:"id" json:"id"`
+ FlagID     int `db:"flag_id" json:"flag_id"`
+ SegmentID  int `db:"segment_id" json:"segment_id"`
+ Percentage int `db:"percentage" json:"percentage"`
 }
 
 // Condition represents a condition for a segment
 type Condition struct {
-	ID        int    `db:"id" json:"id"`
-	SegmentID int    `db:"segment_id" json:"segment_id"`
-	Attribute string `db:"attribute" json:"attribute"`
-	Operator  string `db:"operator" json:"operator"`
-	Value     string `db:"value" json:"value"`
+ ID        int    `db:"id" json:"id"`
+ SegmentID int    `db:"segment_id" json:"segment_id"`
+ Attribute string `db:"attribute" json:"attribute"`
+ Operator  string `db:"operator" json:"operator"`
+ Value     string `db:"value" json:"value"`
 }
 
 // User represents a user in the system for feature flag evaluation
 type User struct {
-	ID         string
-	Attributes map[string]string
+ ID         string
+ Attributes map[string]string
 }
 ```
 
@@ -258,155 +258,155 @@ Now create the feature flag service at `internal/featureflags/service.go`:
 package featureflags
 
 import (
-	"fmt"
-	"hash/fnv"
-	"log"
-	"strings"
+ "fmt"
+ "hash/fnv"
+ "log"
+ "strings"
 
-	"github.com/yourusername/feature-flag-system/internal/db"
+ "github.com/yourusername/feature-flag-system/internal/db"
 )
 
 // Service provides methods for interacting with feature flags
 type Service struct {
-	db *db.DB
+ db *db.DB
 }
 
 // NewService creates a new feature flag service
 func NewService(db *db.DB) *Service {
-	return &Service{db: db}
+ return &Service{db: db}
 }
 
 // IsEnabled checks if a feature flag is enabled for a specific user
 func (s *Service) IsEnabled(flagName string, user *User) (bool, error) {
-	// First, check if the flag exists and is globally enabled
-	var flag FeatureFlag
-	err := s.db.Get(&flag, "SELECT * FROM feature_flags WHERE name = $1", flagName)
-	if err != nil {
-		return false, fmt.Errorf("flag not found: %w", err)
-	}
+ // First, check if the flag exists and is globally enabled
+ var flag FeatureFlag
+ err := s.db.Get(&flag, "SELECT * FROM feature_flags WHERE name = $1", flagName)
+ if err != nil {
+  return false, fmt.Errorf("flag not found: %w", err)
+ }
 
-	// If the flag is disabled globally, return false immediately
-	if !flag.Enabled {
-		return false, nil
-	}
+ // If the flag is disabled globally, return false immediately
+ if !flag.Enabled {
+  return false, nil
+ }
 
-	// Get all rules for this flag
-	var rules []struct {
-		Rule
-		SegmentName string `db:"segment_name"`
-	}
-	err = s.db.Select(&rules, `
-		SELECT r.*, s.name as segment_name
-		FROM rules r
-		JOIN segments s ON r.segment_id = s.id
-		WHERE r.flag_id = $1
-	`, flag.ID)
-	if err != nil {
-		return false, fmt.Errorf("error getting rules: %w", err)
-	}
+ // Get all rules for this flag
+ var rules []struct {
+  Rule
+  SegmentName string `db:"segment_name"`
+ }
+ err = s.db.Select(&rules, `
+  SELECT r.*, s.name as segment_name
+  FROM rules r
+  JOIN segments s ON r.segment_id = s.id
+  WHERE r.flag_id = $1
+ `, flag.ID)
+ if err != nil {
+  return false, fmt.Errorf("error getting rules: %w", err)
+ }
 
-	// If no rules exist, the flag is enabled for everyone
-	if len(rules) == 0 {
-		return true, nil
-	}
+ // If no rules exist, the flag is enabled for everyone
+ if len(rules) == 0 {
+  return true, nil
+ }
 
-	// Check each rule to see if the user matches
-	for _, rule := range rules {
-		isInSegment, err := s.isUserInSegment(user, rule.SegmentID)
-		if err != nil {
-			log.Printf("Error checking segment: %v", err)
-			continue
-		}
+ // Check each rule to see if the user matches
+ for _, rule := range rules {
+  isInSegment, err := s.isUserInSegment(user, rule.SegmentID)
+  if err != nil {
+   log.Printf("Error checking segment: %v", err)
+   continue
+  }
 
-		if isInSegment {
-			// Check percentage rollout
-			if rule.Percentage < 100 {
-				hash := hashUserID(user.ID, flagName)
-				percentage := hash % 100
-				if percentage >= rule.Percentage {
-					continue // Not included in the percentage rollout
-				}
-			}
-			return true, nil
-		}
-	}
+  if isInSegment {
+   // Check percentage rollout
+   if rule.Percentage < 100 {
+    hash := hashUserID(user.ID, flagName)
+    percentage := hash % 100
+    if percentage >= rule.Percentage {
+     continue // Not included in the percentage rollout
+    }
+   }
+   return true, nil
+  }
+ }
 
-	// If no rules matched, the feature is disabled for this user
-	return false, nil
+ // If no rules matched, the feature is disabled for this user
+ return false, nil
 }
 
 // isUserInSegment checks if a user is in a specific segment
 func (s *Service) isUserInSegment(user *User, segmentID int) (bool, error) {
-	// Get the conditions for this segment
-	var conditions []Condition
-	err := s.db.Select(&conditions, "SELECT * FROM segment_conditions WHERE segment_id = $1", segmentID)
-	if err != nil {
-		return false, fmt.Errorf("error getting segment conditions: %w", err)
-	}
+ // Get the conditions for this segment
+ var conditions []Condition
+ err := s.db.Select(&conditions, "SELECT * FROM segment_conditions WHERE segment_id = $1", segmentID)
+ if err != nil {
+  return false, fmt.Errorf("error getting segment conditions: %w", err)
+ }
 
-	// If no conditions, segment is empty
-	if len(conditions) == 0 {
-		return false, nil
-	}
+ // If no conditions, segment is empty
+ if len(conditions) == 0 {
+  return false, nil
+ }
 
-	// Check all conditions
-	for _, condition := range conditions {
-		attributeValue, exists := user.Attributes[condition.Attribute]
-		if !exists {
-			return false, nil // User doesn't have this attribute
-		}
+ // Check all conditions
+ for _, condition := range conditions {
+  attributeValue, exists := user.Attributes[condition.Attribute]
+  if !exists {
+   return false, nil // User doesn't have this attribute
+  }
 
-		// Evaluate the condition
-		match := false
-		switch condition.Operator {
-		case "equals":
-			match = attributeValue == condition.Value
-		case "contains":
-			match = strings.Contains(attributeValue, condition.Value)
-		case "startsWith":
-			match = strings.HasPrefix(attributeValue, condition.Value)
-		case "endsWith":
-			match = strings.HasSuffix(attributeValue, condition.Value)
-		default:
-			return false, fmt.Errorf("unknown operator: %s", condition.Operator)
-		}
+  // Evaluate the condition
+  match := false
+  switch condition.Operator {
+  case "equals":
+   match = attributeValue == condition.Value
+  case "contains":
+   match = strings.Contains(attributeValue, condition.Value)
+  case "startsWith":
+   match = strings.HasPrefix(attributeValue, condition.Value)
+  case "endsWith":
+   match = strings.HasSuffix(attributeValue, condition.Value)
+  default:
+   return false, fmt.Errorf("unknown operator: %s", condition.Operator)
+  }
 
-		if !match {
-			return false, nil
-		}
-	}
+  if !match {
+   return false, nil
+  }
+ }
 
-	return true, nil
+ return true, nil
 }
 
 // GetAllFlags returns all feature flags in the system
 func (s *Service) GetAllFlags() ([]FeatureFlag, error) {
-	var flags []FeatureFlag
-	err := s.db.Select(&flags, "SELECT * FROM feature_flags ORDER BY name")
-	if err != nil {
-		return nil, fmt.Errorf("error getting flags: %w", err)
-	}
-	return flags, nil
+ var flags []FeatureFlag
+ err := s.db.Select(&flags, "SELECT * FROM feature_flags ORDER BY name")
+ if err != nil {
+  return nil, fmt.Errorf("error getting flags: %w", err)
+ }
+ return flags, nil
 }
 
 // UpdateFlag updates a feature flag's enabled status
 func (s *Service) UpdateFlag(id int, enabled bool) error {
-	_, err := s.db.Exec(
-		"UPDATE feature_flags SET enabled = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2",
-		enabled, id,
-	)
-	if err != nil {
-		return fmt.Errorf("error updating flag: %w", err)
-	}
-	return nil
+ _, err := s.db.Exec(
+  "UPDATE feature_flags SET enabled = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2",
+  enabled, id,
+ )
+ if err != nil {
+  return fmt.Errorf("error updating flag: %w", err)
+ }
+ return nil
 }
 
 // hashUserID creates a consistent hash of a user ID and flag name
 // This ensures the same user gets the same behavior for a specific flag
 func hashUserID(userID, flagName string) int {
-	h := fnv.New32a()
-	h.Write([]byte(userID + flagName))
-	return int(h.Sum32() % 100)
+ h := fnv.New32a()
+ h.Write([]byte(userID + flagName))
+ return int(h.Sum32() % 100)
 }
 ```
 
@@ -432,65 +432,65 @@ Now let's create the web server that will serve our application with server-side
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
-	"os"
+ "fmt"
+ "log"
+ "net/http"
+ "os"
 
-	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
-	"github.com/yourusername/feature-flag-system/internal/db"
-	"github.com/yourusername/feature-flag-system/internal/featureflags"
-	"github.com/yourusername/feature-flag-system/internal/handlers"
+ "github.com/gorilla/mux"
+ "github.com/joho/godotenv"
+ "github.com/yourusername/feature-flag-system/internal/db"
+ "github.com/yourusername/feature-flag-system/internal/featureflags"
+ "github.com/yourusername/feature-flag-system/internal/handlers"
 )
 
 func main() {
-	// Load environment variables
-	if err := godotenv.Load(); err != nil {
-		log.Printf("Warning: .env file not found: %v", err)
-	}
+ // Load environment variables
+ if err := godotenv.Load(); err != nil {
+  log.Printf("Warning: .env file not found: %v", err)
+ }
 
-	// Get database connection string
-	dbURL := os.Getenv("DATABASE_URL")
-	if dbURL == "" {
-		log.Fatal("DATABASE_URL environment variable is required")
-	}
+ // Get database connection string
+ dbURL := os.Getenv("DATABASE_URL")
+ if dbURL == "" {
+  log.Fatal("DATABASE_URL environment variable is required")
+ }
 
-	// Set up database
-	database, err := db.NewDB(dbURL)
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
-	defer database.Close()
+ // Set up database
+ database, err := db.NewDB(dbURL)
+ if err != nil {
+  log.Fatalf("Failed to connect to database: %v", err)
+ }
+ defer database.Close()
 
-	// Create feature flag service
-	flagService := featureflags.NewService(database)
+ // Create feature flag service
+ flagService := featureflags.NewService(database)
 
-	// Create router
-	r := mux.NewRouter()
+ // Create router
+ r := mux.NewRouter()
 
-	// Create handlers
-	h := handlers.NewHandlers(flagService)
+ // Create handlers
+ h := handlers.NewHandlers(flagService)
 
-	// Register routes
-	r.HandleFunc("/", h.HomePage).Methods("GET")
-	r.HandleFunc("/admin", h.AdminPage).Methods("GET")
-	r.HandleFunc("/api/flags", h.GetAllFlags).Methods("GET")
-	r.HandleFunc("/api/flags/{id}", h.UpdateFlag).Methods("PUT")
+ // Register routes
+ r.HandleFunc("/", h.HomePage).Methods("GET")
+ r.HandleFunc("/admin", h.AdminPage).Methods("GET")
+ r.HandleFunc("/api/flags", h.GetAllFlags).Methods("GET")
+ r.HandleFunc("/api/flags/{id}", h.UpdateFlag).Methods("PUT")
 
-	// Serve static files
-	r.PathPrefix("/static/").Handler(
-		http.StripPrefix("/static/", http.FileServer(http.Dir("./web/static"))),
-	)
+ // Serve static files
+ r.PathPrefix("/static/").Handler(
+  http.StripPrefix("/static/", http.FileServer(http.Dir("./web/static"))),
+ )
 
-	// Start server
-	port := os.Getenv("SERVER_PORT")
-	if port == "" {
-		port = "8080"
-	}
+ // Start server
+ port := os.Getenv("SERVER_PORT")
+ if port == "" {
+  port = "8080"
+ }
 
-	log.Printf("Starting server on port %s", port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), r))
+ log.Printf("Starting server on port %s", port)
+ log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), r))
 }
 ```
 
@@ -512,178 +512,178 @@ Now let's create the handlers that will render our templates based on the featur
 package handlers
 
 import (
-	"encoding/json"
-	"html/template"
-	"log"
-	"net/http"
-	"strconv"
+ "encoding/json"
+ "html/template"
+ "log"
+ "net/http"
+ "strconv"
 
-	"github.com/gorilla/mux"
-	"github.com/yourusername/feature-flag-system/internal/featureflags"
+ "github.com/gorilla/mux"
+ "github.com/yourusername/feature-flag-system/internal/featureflags"
 )
 
 // Handlers contains the HTTP handlers for the application
 type Handlers struct {
-	flagService *featureflags.Service
-	templates   map[string]*template.Template
+ flagService *featureflags.Service
+ templates   map[string]*template.Template
 }
 
 // NewHandlers creates a new Handlers instance
 func NewHandlers(flagService *featureflags.Service) *Handlers {
-	// Parse templates
-	templates := make(map[string]*template.Template)
-	templates["home"] = template.Must(template.ParseFiles(
-		"web/templates/base.html",
-		"web/templates/home.html",
-	))
-	templates["admin"] = template.Must(template.ParseFiles(
-		"web/templates/base.html",
-		"web/templates/admin.html",
-	))
+ // Parse templates
+ templates := make(map[string]*template.Template)
+ templates["home"] = template.Must(template.ParseFiles(
+  "web/templates/base.html",
+  "web/templates/home.html",
+ ))
+ templates["admin"] = template.Must(template.ParseFiles(
+  "web/templates/base.html",
+  "web/templates/admin.html",
+ ))
 
-	return &Handlers{
-		flagService: flagService,
-		templates:   templates,
-	}
+ return &Handlers{
+  flagService: flagService,
+  templates:   templates,
+ }
 }
 
 // HomePage renders the home page with feature flags
 func (h *Handlers) HomePage(w http.ResponseWriter, r *http.Request) {
-	// Create a user from request information
-	user := createUserFromRequest(r)
+ // Create a user from request information
+ user := createUserFromRequest(r)
 
-	// Check feature flags
-	newDashboard, err := h.flagService.IsEnabled("new_dashboard", user)
-	if err != nil {
-		log.Printf("Error checking new_dashboard flag: %v", err)
-		newDashboard = false
-	}
+ // Check feature flags
+ newDashboard, err := h.flagService.IsEnabled("new_dashboard", user)
+ if err != nil {
+  log.Printf("Error checking new_dashboard flag: %v", err)
+  newDashboard = false
+ }
 
-	darkMode, err := h.flagService.IsEnabled("dark_mode", user)
-	if err != nil {
-		log.Printf("Error checking dark_mode flag: %v", err)
-		darkMode = false
-	}
+ darkMode, err := h.flagService.IsEnabled("dark_mode", user)
+ if err != nil {
+  log.Printf("Error checking dark_mode flag: %v", err)
+  darkMode = false
+ }
 
-	betaApi, err := h.flagService.IsEnabled("beta_api", user)
-	if err != nil {
-		log.Printf("Error checking beta_api flag: %v", err)
-		betaApi = false
-	}
+ betaApi, err := h.flagService.IsEnabled("beta_api", user)
+ if err != nil {
+  log.Printf("Error checking beta_api flag: %v", err)
+  betaApi = false
+ }
 
-	// Prepare template data
-	data := map[string]interface{}{
-		"Title":        "Feature Flag Demo",
-		"User":         user,
-		"NewDashboard": newDashboard,
-		"DarkMode":     darkMode,
-		"BetaApi":      betaApi,
-	}
+ // Prepare template data
+ data := map[string]interface{}{
+  "Title":        "Feature Flag Demo",
+  "User":         user,
+  "NewDashboard": newDashboard,
+  "DarkMode":     darkMode,
+  "BetaApi":      betaApi,
+ }
 
-	// Render template
-	h.templates["home"].ExecuteTemplate(w, "base", data)
+ // Render template
+ h.templates["home"].ExecuteTemplate(w, "base", data)
 }
 
 // AdminPage renders the admin page for managing feature flags
 func (h *Handlers) AdminPage(w http.ResponseWriter, r *http.Request) {
-	flags, err := h.flagService.GetAllFlags()
-	if err != nil {
-		http.Error(w, "Error loading flags", http.StatusInternalServerError)
-		log.Printf("Error loading flags: %v", err)
-		return
-	}
+ flags, err := h.flagService.GetAllFlags()
+ if err != nil {
+  http.Error(w, "Error loading flags", http.StatusInternalServerError)
+  log.Printf("Error loading flags: %v", err)
+  return
+ }
 
-	data := map[string]interface{}{
-		"Title": "Feature Flag Admin",
-		"Flags": flags,
-	}
+ data := map[string]interface{}{
+  "Title": "Feature Flag Admin",
+  "Flags": flags,
+ }
 
-	h.templates["admin"].ExecuteTemplate(w, "base", data)
+ h.templates["admin"].ExecuteTemplate(w, "base", data)
 }
 
 // GetAllFlags returns all feature flags as JSON
 func (h *Handlers) GetAllFlags(w http.ResponseWriter, r *http.Request) {
-	flags, err := h.flagService.GetAllFlags()
-	if err != nil {
-		http.Error(w, "Error loading flags", http.StatusInternalServerError)
-		log.Printf("Error loading flags: %v", err)
-		return
-	}
+ flags, err := h.flagService.GetAllFlags()
+ if err != nil {
+  http.Error(w, "Error loading flags", http.StatusInternalServerError)
+  log.Printf("Error loading flags: %v", err)
+  return
+ }
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(flags)
+ w.Header().Set("Content-Type", "application/json")
+ json.NewEncoder(w).Encode(flags)
 }
 
 // UpdateFlag updates a feature flag's enabled status
 func (h *Handlers) UpdateFlag(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	idStr := vars["id"]
+ vars := mux.Vars(r)
+ idStr := vars["id"]
 
-	id, err := strconv.Atoi(idStr)
-	if err != nil {
-		http.Error(w, "Invalid flag ID", http.StatusBadRequest)
-		return
-	}
+ id, err := strconv.Atoi(idStr)
+ if err != nil {
+  http.Error(w, "Invalid flag ID", http.StatusBadRequest)
+  return
+ }
 
-	var updateData struct {
-		Enabled bool `json:"enabled"`
-	}
+ var updateData struct {
+  Enabled bool `json:"enabled"`
+ }
 
-	if err := json.NewDecoder(r.Body).Decode(&updateData); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
-		return
-	}
+ if err := json.NewDecoder(r.Body).Decode(&updateData); err != nil {
+  http.Error(w, "Invalid request body", http.StatusBadRequest)
+  return
+ }
 
-	if err := h.flagService.UpdateFlag(id, updateData.Enabled); err != nil {
-		http.Error(w, "Error updating flag", http.StatusInternalServerError)
-		log.Printf("Error updating flag %d: %v", id, err)
-		return
-	}
+ if err := h.flagService.UpdateFlag(id, updateData.Enabled); err != nil {
+  http.Error(w, "Error updating flag", http.StatusInternalServerError)
+  log.Printf("Error updating flag %d: %v", id, err)
+  return
+ }
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"status": "success"})
+ w.WriteHeader(http.StatusOK)
+ json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
 
 // createUserFromRequest extracts user information from the request
 func createUserFromRequest(r *http.Request) *featureflags.User {
-	// In a real application, you'd get this from your authentication system
-	// For demo purposes, we'll use query parameters or default values
-	userID := r.URL.Query().Get("user_id")
-	if userID == "" {
-		userID = "anonymous"
-	}
+ // In a real application, you'd get this from your authentication system
+ // For demo purposes, we'll use query parameters or default values
+ userID := r.URL.Query().Get("user_id")
+ if userID == "" {
+  userID = "anonymous"
+ }
 
-	// Create a user with attributes
-	user := &featureflags.User{
-		ID: userID,
-		Attributes: map[string]string{
-			"email":        r.URL.Query().Get("email"),
-			"country":      r.URL.Query().Get("country"),
-			"subscription": r.URL.Query().Get("subscription"),
-		},
-	}
+ // Create a user with attributes
+ user := &featureflags.User{
+  ID: userID,
+  Attributes: map[string]string{
+   "email":        r.URL.Query().Get("email"),
+   "country":      r.URL.Query().Get("country"),
+   "subscription": r.URL.Query().Get("subscription"),
+  },
+ }
 
-	// Set defaults if not provided
-	if user.Attributes["email"] == "" {
-		// For testing segment conditions
-		if userID == "premium" {
-			user.Attributes["email"] = "premium@example.com"
-			user.Attributes["subscription"] = "premium"
-		} else if userID == "beta" {
-			user.Attributes["email"] = "beta@example.com"
-		} else if userID == "internal" {
-			user.Attributes["email"] = "employee@ourcompany.com"
-		} else {
-			user.Attributes["email"] = "user@regular.com"
-			user.Attributes["subscription"] = "free"
-		}
-	}
+ // Set defaults if not provided
+ if user.Attributes["email"] == "" {
+  // For testing segment conditions
+  if userID == "premium" {
+   user.Attributes["email"] = "premium@example.com"
+   user.Attributes["subscription"] = "premium"
+  } else if userID == "beta" {
+   user.Attributes["email"] = "beta@example.com"
+  } else if userID == "internal" {
+   user.Attributes["email"] = "employee@ourcompany.com"
+  } else {
+   user.Attributes["email"] = "user@regular.com"
+   user.Attributes["subscription"] = "free"
+  }
+ }
 
-	if user.Attributes["country"] == "" {
-		user.Attributes["country"] = "US"
-	}
+ if user.Attributes["country"] == "" {
+  user.Attributes["country"] = "US"
+ }
 
-	return user
+ return user
 }
 ```
 

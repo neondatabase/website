@@ -30,8 +30,8 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable both Neon Auth and the Data API.
 
-1.  **Create a Neon project:** Navigate to [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `react-neon-todo`.
-2.  **Enable Neon Data API with Neon Auth:**
+1. **Create a Neon project:** Navigate to [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `react-neon-todo`.
+2. **Enable Neon Data API with Neon Auth:**
     - In your project's dashboard, go to the **Data API** page from the sidebar.
     - Ensure **Use Neon Auth** is selected.
     - Ensure **Grant public schema access** is enabled.
@@ -39,7 +39,7 @@ You'll need to create a Neon project and enable both Neon Auth and the Data API.
 
     ![Data API page with enable button](/docs/data-api/data_api_sidebar_with_public_schema.png)
 
-3.  **Copy your credentials:**
+3. **Copy your credentials:**
     - **Data API URL:** Found on the Data API page (e.g., `https://ep-xxx.neon.tech/neondb/rest/v1`).
       ![Data API enabled view](/docs/data-api/data-api-enabled.png)
     - **Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
@@ -174,7 +174,7 @@ To integrate Neon Auth tables into your Drizzle ORM setup, you need to introspec
 
 This step is crucial because it makes Drizzle aware of the Neon Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Neon Auth.
 
-1.  **Introspect the database:**
+1. **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
 
     ```bash
@@ -183,7 +183,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Neon Auth tables.
 
-2.  **Organize schema files:**
+2. **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
 
     ```
@@ -200,7 +200,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
      └ …
     ```
 
-3.  **Add the Todos table to your schema**
+3. **Add the Todos table to your schema**
 
     Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.
 
@@ -645,16 +645,16 @@ This setup ensures that only authenticated users can access the Todo application
 
 ## Run the application
 
-1.  Start the development server:
+1. Start the development server:
 
     ```bash
     npm run dev
     ```
 
-2.  Open `http://localhost:5173`.
-3.  You will be redirected to the Sign In page.
-4.  Sign up with an email or use Google OAuth to create an account.
-5.  Once logged in, you will see the Todo application interface where you can add, toggle, and delete tasks.
+2. Open `http://localhost:5173`.
+3. You will be redirected to the Sign In page.
+4. Sign up with an email or use Google OAuth to create an account.
+5. Once logged in, you will see the Todo application interface where you can add, toggle, and delete tasks.
 
 ![Todo App Screenshot](/docs/guides/react-neon-auth-data-api-todos-demo.png)
 
@@ -664,7 +664,7 @@ This setup ensures that only authenticated users can access the Todo application
 
 Neon JS SDK supports end-to-end type safety when interacting with the Data API. You can pull the database schema and generate TypeScript types for your tables. This allows you to have type-safe queries in your React application. This step is optional but recommended for better developer experience.
 
-1.  **Generate types:**
+1. **Generate types:**
 
     Run the following command to introspect your database and generate a `types.ts` file.
 
@@ -677,7 +677,7 @@ Neon JS SDK supports end-to-end type safety when interacting with the Data API. 
 
     > Replace `your_connection_string` with your actual Neon database connection string.
 
-2.  **Update the Neon client:**
+2. **Update the Neon client:**
 
     Modify `src/neon.ts` to use the generated types. This tells the Neon SDK about your database structure.
 

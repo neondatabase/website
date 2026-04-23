@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
-<CopyPrompt src="/prompts/drizzle-prompt.md" 
+<CopyPrompt src="/prompts/drizzle-prompt.md"
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
 
 <InfoBlock>
@@ -54,9 +54,9 @@ npm init -y
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 ## Get your connection string
 

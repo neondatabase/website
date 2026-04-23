@@ -246,7 +246,7 @@ Since `Tool 1` had already completed successfully, its result was cached durably
 Automatic retries are great for transient network errors, but what if the actual server or container running your agent runs out of memory, is preempted, or crashes completely?
 
 <Admonition type="important" title="Change the Workflow ID">
-Before testing a hard crash, change the workflow ID in the code to simulate a new run. 
+Before testing a hard crash, change the workflow ID in the code to simulate a new run.
 For example, update `SetWorkflowID("quantum-research-run-001")` to `SetWorkflowID("quantum-research-run-002")`. Using the same ID would simulate a replay of the same workflow and return the cached result.
 </Admonition>
 

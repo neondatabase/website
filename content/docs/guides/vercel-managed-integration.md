@@ -104,10 +104,10 @@ To enable:
 
 Once enabled, the flow looks like this:
 
-1.  Developer pushes to feature branch → Vercel kicks off Preview Deployment.
-2.  Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
-3.  Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
-4.  (Optional) Run migrations in build step so schema matches code.
+1. Developer pushes to feature branch → Vercel kicks off Preview Deployment.
+2. Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
+3. Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
+4. (Optional) Run migrations in build step so schema matches code.
 
     ![Vercel build commands](/docs/guides/vercel_build_command.png)
 

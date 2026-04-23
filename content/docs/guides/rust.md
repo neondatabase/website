@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2026-02-15T20:51:54.194Z'
 ---
 
-<CopyPrompt src="/prompts/rust-prompt.md" 
+<CopyPrompt src="/prompts/rust-prompt.md"
 description="Pre-built prompt for connecting Rust applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
@@ -29,9 +29,9 @@ This guide describes how to create a Neon project and connect to it from a Rust 
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Rust application.
 
@@ -39,7 +39,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 For your Rust project, use `cargo` to create a new project and add the required library dependencies (called "crates").
 
-1.  Create a project directory and change into it.
+1. Create a project directory and change into it.
 
     ```bash
     cargo new neon-rust-quickstart
@@ -50,7 +50,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     > Open the directory in your preferred code editor (for example, VS Code, RustRover, etc.) to edit the files.
 
-2.  Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
+2. Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
 
     <CodeTabs labels={["postgres (sync)", "tokio-postgres (async)"]}>
 
@@ -72,7 +72,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     > Neon requires a secure SSL/TLS connection. In the commands above, the `postgres-openssl` crate provides the necessary OpenSSL bindings that both the synchronous `postgres` and asynchronous `tokio-postgres` drivers use to enable TLS.
 
-3.  Configure multiple executables.
+3. Configure multiple executables.
 
     You will create separate Rust scripts for each of the CRUD operations (Create, Read, Update, Delete). Each script will be a separate binary target in your project (`create_table.rs`, `read_data.rs`, `update_data.rs`, and `delete_data.rs`).
 
@@ -108,14 +108,16 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
     ![Connection modal](/docs/connect/connection_details.png)
-3.  Copy the connection string, which includes your password.
-4.  Add the connection string to your `.env` file as shown below.
+3. Copy the connection string, which includes your password.
+4. Add the connection string to your `.env` file as shown below.
+
     ```text
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
+
     > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.
 
 ## Choosing the right method to execute SQL commands

@@ -69,10 +69,10 @@ First, [create a new table](../postgresql-tutorial/postgresql-create-table) name
 
 ```sql
 CREATE TABLE sales(
-	year SMALLINT CHECK(year > 0),
-	group_id INT NOT NULL,
-	amount DECIMAL(10,2) NOT NULL,
-	PRIMARY KEY(year,group_id)
+ year SMALLINT CHECK(year > 0),
+ group_id INT NOT NULL,
+ amount DECIMAL(10,2) NOT NULL,
+ PRIMARY KEY(year,group_id)
 );
 
 ```
@@ -81,17 +81,17 @@ Second, [insert](../postgresql-tutorial/postgresql-insert) some rows into the `s
 
 ```sql
 INSERT INTO
-	sales(year, group_id, amount)
+ sales(year, group_id, amount)
 VALUES
-	(2018,1,1474),
-	(2018,2,1787),
-	(2018,3,1760),
-	(2019,1,1915),
-	(2019,2,1911),
-	(2019,3,1118),
-	(2020,1,1646),
-	(2020,2,1975),
-	(2020,3,1516);
+ (2018,1,1474),
+ (2018,2,1787),
+ (2018,3,1760),
+ (2019,1,1915),
+ (2019,2,1911),
+ (2019,3,1118),
+ (2020,1,1646),
+ (2020,2,1975),
+ (2020,3,1516);
 
 ```
 
@@ -109,8 +109,8 @@ The following query returns the total sales amount by year:
 
 ```sql
 SELECT
-	year,
-	SUM(amount)
+ year,
+ SUM(amount)
 FROM sales
 GROUP BY year
 ORDER BY year;
@@ -122,21 +122,21 @@ This example uses the `LEAD()` function to return the sales amount of the curren
 
 ```sql
 WITH cte AS (
-	SELECT
-		year,
-		SUM(amount) amount
-	FROM sales
-	GROUP BY year
-	ORDER BY year
+ SELECT
+  year,
+  SUM(amount) amount
+ FROM sales
+ GROUP BY year
+ ORDER BY year
 )
 SELECT
-	year,
-	amount,
-	LEAD(amount,1) OVER (
-		ORDER BY year
-	) next_year_sales
+ year,
+ amount,
+ LEAD(amount,1) OVER (
+  ORDER BY year
+ ) next_year_sales
 FROM
-	cte;
+ cte;
 
 ```
 
@@ -152,29 +152,29 @@ The following example uses two common table expressions to return the sales vari
 
 ```sql
 WITH cte AS (
-	SELECT
-		year,
-		SUM(amount) amount
-	FROM sales
-	GROUP BY year
-	ORDER BY year
+ SELECT
+  year,
+  SUM(amount) amount
+ FROM sales
+ GROUP BY year
+ ORDER BY year
 ), cte2 AS (
-	SELECT
-		year,
-		amount,
-		LEAD(amount,1) OVER (
-			ORDER BY year
-		) next_year_sales
-	FROM
-		cte
+ SELECT
+  year,
+  amount,
+  LEAD(amount,1) OVER (
+   ORDER BY year
+  ) next_year_sales
+ FROM
+  cte
 )
 SELECT
-	year,
-	amount,
-	next_year_sales,
-	(next_year_sales - amount) variance
+ year,
+ amount,
+ next_year_sales,
+ (next_year_sales - amount) variance
 FROM
-	cte2;
+ cte2;
 
 ```
 
@@ -186,15 +186,15 @@ The following statement uses the `LEAD()` function to compare the sales of the c
 
 ```sql
 SELECT
-	year,
-	amount,
-	group_id,
-	LEAD(amount,1) OVER (
-		PARTITION BY group_id
-		ORDER BY year
-	) next_year_sales
+ year,
+ amount,
+ group_id,
+ LEAD(amount,1) OVER (
+  PARTITION BY group_id
+  ORDER BY year
+ ) next_year_sales
 FROM
-	sales;
+ sales;
 
 ```
 

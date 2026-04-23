@@ -41,7 +41,7 @@ Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/p
 Installation of `neon_api` is easy, with `pip`:
 
 ```shell
-$ pip install neon-api
+pip install neon-api
 ```
 
 ## Usage

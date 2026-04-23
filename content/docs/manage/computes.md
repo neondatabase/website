@@ -78,8 +78,8 @@ Some key points to understand about how your endpoint responds when you make cha
   When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales.
   </Admonition>
 
-* Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-* If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
+- Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
+- If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection. See [Handling connection disruptions](/docs/manage/updates#handling-connection-disruptions).
 
@@ -251,7 +251,7 @@ You can restart a compute using these methods:
   ```
 
   <Admonition type="note">
-  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. 
+  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API.
   </Admonition>
 
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.

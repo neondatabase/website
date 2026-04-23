@@ -35,10 +35,10 @@ This method prioritizes operational simplicity at the cost of service availabili
 
 **Process:**
 
-1.  **Halt service:** Stop application servers to prevent all database writes.
-2.  **Apply migration:** Execute the migration script, which often acquires `ACCESS EXCLUSIVE` locks.
-3.  **Deploy new code:** Deploy the application version compatible with the new schema.
-4.  **Restore service:** Restart application servers.
+1. **Halt service:** Stop application servers to prevent all database writes.
+2. **Apply migration:** Execute the migration script, which often acquires `ACCESS EXCLUSIVE` locks.
+3. **Deploy new code:** Deploy the application version compatible with the new schema.
+4. **Restore service:** Restart application servers.
 
 **Challenges:**
 
@@ -52,10 +52,10 @@ This advanced strategy avoids downtime but transfers complexity to the applicati
 
 **Process:**
 
-1.  **Expand phase:** Apply only backward-compatible changes (e.g., add a new column as `NULL`). Deploy new application code that handles both schema versions, often requiring complex dual-write logic.
-2.  **Transition phase:** Run a custom script to backfill data into the new column, usually in small batches to avoid table locks.
-3.  **Contract phase:** Once data is migrated and consistent, apply the breaking change (e.g., add a `NOT NULL` constraint).
-4.  **Cleanup:** Deploy a final application version that removes the dual-write logic and run another migration to drop the old column.
+1. **Expand phase:** Apply only backward-compatible changes (e.g., add a new column as `NULL`). Deploy new application code that handles both schema versions, often requiring complex dual-write logic.
+2. **Transition phase:** Run a custom script to backfill data into the new column, usually in small batches to avoid table locks.
+3. **Contract phase:** Once data is migrated and consistent, apply the breaking change (e.g., add a `NOT NULL` constraint).
+4. **Cleanup:** Deploy a final application version that removes the dual-write logic and run another migration to drop the old column.
 
 **Challenges:**
 
@@ -204,8 +204,8 @@ pgroll start migrations/01_create_users.yaml --postgres-url "postgresql://<user>
 
 Now, let's make the `description` column non-nullable. This is a classic breaking change, as it introduces two immediate challenges that would cause downtime with a traditional migration tool:
 
-1.  **Existing data:** The `users` table may already contain rows where `description` is `NULL`, which would violate the new constraint.
-2.  **Live application:** Your running application code is still operating under the assumption that the column is nullable and may attempt to insert `NULL` values, which would result in runtime errors.
+1. **Existing data:** The `users` table may already contain rows where `description` is `NULL`, which would violate the new constraint.
+2. **Live application:** Your running application code is still operating under the assumption that the column is nullable and may attempt to insert `NULL` values, which would result in runtime errors.
 
 This is precisely the type of scenario `pgroll` is designed to handle without disrupting your service. To perform this migration, we will use `pgroll`'s ability to create a new schema version that temporarily allows `NULL` values while we backfill existing data. In this case, we must provide an `up` SQL expression to tell `pgroll` how to backfill any existing `NULL` values and a `down` expression to revert the changes in case of a rollback.
 
@@ -229,10 +229,10 @@ pgroll start migrations/02_make_description_not_null.yaml --postgres-url "postgr
 
 At this point, `pgroll` has performed the "expand" phase:
 
-1.  It created a temporary column `_pgroll_new_description` on the `users` table.
-2.  It backfilled this new column using your `up` SQL, converting `NULL`s to a valid string.
-3.  It created triggers to transparently sync writes between `description` and `_pgroll_new_description`.
-4.  It created a new schema version, `public_02_make_description_not_null`, whose view exposes `_pgroll_new_description` as `description`.
+1. It created a temporary column `_pgroll_new_description` on the `users` table.
+2. It backfilled this new column using your `up` SQL, converting `NULL`s to a valid string.
+3. It created triggers to transparently sync writes between `description` and `_pgroll_new_description`.
+4. It created a new schema version, `public_02_make_description_not_null`, whose view exposes `_pgroll_new_description` as `description`.
 
 Your old applications can continue using the previous schema version, while you deploy new applications configured to use the new version.
 
@@ -406,9 +406,9 @@ The key command is `pgroll convert`, which reads SQL statements and translates t
 
 A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
 
-1.  **Modify your drizzle schema:** Start by making the desired changes to your schema definitions in your project's `db/schema.ts` file.
+1. **Modify your drizzle schema:** Start by making the desired changes to your schema definitions in your project's `db/schema.ts` file.
 
-2.  **Generate the SQL migration:** Use the Drizzle Kit CLI to generate a standard SQL migration file from your schema changes.
+2. **Generate the SQL migration:** Use the Drizzle Kit CLI to generate a standard SQL migration file from your schema changes.
 
     ```shell
     npx drizzle-kit generate
@@ -416,7 +416,7 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
 
     This creates a new `.sql` file in your migrations folder.
 
-3.  **Convert to a `pgroll` migration:** Use the `pgroll` CLI to convert the generated SQL file into `pgroll`'s declarative YAML format.
+3. **Convert to a `pgroll` migration:** Use the `pgroll` CLI to convert the generated SQL file into `pgroll`'s declarative YAML format.
 
     ```shell
     pgroll convert <path-to-your-drizzle-generated.sql> > <path-to-your-new.yaml>
@@ -428,25 +428,27 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
     The `convert` command is a powerful starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file.
     </Admonition>
 
-4.  **Start the migration:** Apply the migration to your database using the `start` command. This creates the new schema version alongside the old one without causing downtime.
+4. **Start the migration:** Apply the migration to your database using the `start` command. This creates the new schema version alongside the old one without causing downtime.
 
     ```shell
     pgroll start <path-to-your-new.yaml>
     ```
 
-5.  **Test and deploy your new application:**
+5. **Test and deploy your new application:**
     - Fetch the new schema name using `pgroll latest schema`.
     - In your CI/CD pipeline, deploy the new version of your application, configuring it to use the new schema via an environment variable (e.g., `PGROLL_SCHEMA_VERSION`).
     - This is the ideal stage for phased rollouts (canary, blue-green), as the old application version continues to run unaffected on the previous schema.
 
-6.  **Validate and finalize:**
+6. **Validate and finalize:**
     - **If an issue is found,** you can instantly and safely revert the database changes with `pgroll rollback`. This will not affect the running (old) application.
     - **If the new application is stable,** proceed with a full rollout.
 
-7.  **Complete the migration:** Once you are confident that no services are using the old schema, finalize the process by running:
+7. **Complete the migration:** Once you are confident that no services are using the old schema, finalize the process by running:
+
     ```shell
     pgroll complete
     ```
+
     This removes the old schema version and cleans up all temporary columns and triggers, leaving your database in its new, permanent state.
 
 This workflow of generating and converting SQL can be adapted for other ORMs like Sequelize, TypeORM, or Prisma that can output schema changes as SQL files.

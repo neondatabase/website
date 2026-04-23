@@ -222,35 +222,35 @@ Create a `migrations.go` file in your project:
 package migrations
 
 import (
-	"errors"
-	"log"
+ "errors"
+ "log"
 
-	"github.com/golang-migrate/migrate/v4"
-	_ "github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/golang-migrate/migrate/v4/source/file"
+ "github.com/golang-migrate/migrate/v4"
+ _ "github.com/golang-migrate/migrate/v4/database/postgres"
+ _ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 // RunMigrations applies database migrations to the specified database
 func RunMigrations(dbURL, migrationsPath string) error {
-	m, err := migrate.New("file://"+migrationsPath, dbURL)
-	if err != nil {
-		return err
-	}
+ m, err := migrate.New("file://"+migrationsPath, dbURL)
+ if err != nil {
+  return err
+ }
 
-	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
-		return err
-	}
+ if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
+  return err
+ }
 
-	srcErr, dbErr := m.Close()
-	if srcErr != nil {
-		return srcErr
-	}
-	if dbErr != nil {
-		return dbErr
-	}
+ srcErr, dbErr := m.Close()
+ if srcErr != nil {
+  return srcErr
+ }
+ if dbErr != nil {
+  return dbErr
+ }
 
-	log.Println("Migrations applied successfully")
-	return nil
+ log.Println("Migrations applied successfully")
+ return nil
 }
 ```
 
@@ -260,24 +260,24 @@ Then call this function during your application startup:
 package main
 
 import (
-	"log"
-	"os"
+ "log"
+ "os"
 
-	"your-module/migrations"
+ "your-module/migrations"
 )
 
 func main() {
-	dbURL := os.Getenv("NEON_DB_URL")
-	if dbURL == "" {
-		log.Fatal("NEON_DB_URL environment variable is not set")
-	}
+ dbURL := os.Getenv("NEON_DB_URL")
+ if dbURL == "" {
+  log.Fatal("NEON_DB_URL environment variable is not set")
+ }
 
-	err := migrations.RunMigrations(dbURL, "./migrations")
-	if err != nil {
-		log.Fatalf("Failed to run migrations: %v", err)
-	}
+ err := migrations.RunMigrations(dbURL, "./migrations")
+ if err != nil {
+  log.Fatalf("Failed to run migrations: %v", err)
+ }
 
-	// Continue with application startup...
+ // Continue with application startup...
 }
 ```
 
@@ -589,27 +589,27 @@ Manage environment-specific database URLs using environment variables or configu
 package config
 
 import (
-	"os"
-	"fmt"
+ "os"
+ "fmt"
 )
 
 // GetDatabaseURL returns the appropriate database URL for the current environment
 func GetDatabaseURL() string {
-	env := os.Getenv("APP_ENV")
-	if env == "" {
-		env = "development" // Default
-	}
+ env := os.Getenv("APP_ENV")
+ if env == "" {
+  env = "development" // Default
+ }
 
-	switch env {
-	case "production":
-		return os.Getenv("NEON_PROD_DB_URL")
-	case "staging":
-		return os.Getenv("NEON_STAGING_DB_URL")
-	case "test":
-		return os.Getenv("NEON_TEST_DB_URL")
-	default:
-		return os.Getenv("NEON_DEV_DB_URL")
-	}
+ switch env {
+ case "production":
+  return os.Getenv("NEON_PROD_DB_URL")
+ case "staging":
+  return os.Getenv("NEON_STAGING_DB_URL")
+ case "test":
+  return os.Getenv("NEON_TEST_DB_URL")
+ default:
+  return os.Getenv("NEON_DEV_DB_URL")
+ }
 }
 ```
 

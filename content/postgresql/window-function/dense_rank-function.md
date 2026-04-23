@@ -41,7 +41,7 @@ First, [create a table](../postgresql-tutorial/postgresql-create-table) named `d
 
 ```sql
 CREATE TABLE dense_ranks (
-	c VARCHAR(10)
+ c VARCHAR(10)
 );
 ```
 
@@ -63,12 +63,12 @@ Fourth, use the `DENSE_RANK()` function to assign a rank to each row in the resu
 
 ```sql
 SELECT
-	c,
-	DENSE_RANK() OVER (
-		ORDER BY c
-	) dense_rank_number
+ c,
+ DENSE_RANK() OVER (
+  ORDER BY c
+ ) dense_rank_number
 FROM
-	dense_ranks;
+ dense_ranks;
 ```
 
 Here is the output:
@@ -89,14 +89,14 @@ This statement uses the `DENSE_RANK()` function to rank products by list prices:
 
 ```sql
 SELECT
-	product_id,
-	product_name,
-	price,
-	DENSE_RANK () OVER (
-		ORDER BY price DESC
-	) price_rank
+ product_id,
+ product_name,
+ price,
+ DENSE_RANK () OVER (
+  ORDER BY price DESC
+ ) price_rank
 FROM
-	products;
+ products;
 ```
 
 Here is the output:
@@ -112,16 +112,16 @@ The following example assigns a rank to every product in each product group:
 
 ```sql
 SELECT
-	product_id,
-	product_name,
-	group_id,
-	price,
-	DENSE_RANK () OVER (
-		PARTITION BY group_id
-		ORDER BY price DESC
-	) price_rank
+ product_id,
+ product_name,
+ group_id,
+ price,
+ DENSE_RANK () OVER (
+  PARTITION BY group_id
+  ORDER BY price DESC
+ ) price_rank
 FROM
-	products;
+ products;
 ```
 
 This picture shows the output:
@@ -135,26 +135,26 @@ The following statement uses the `DENSE_RANK()` function with a CTE to return th
 
 ```sql
 WITH cte AS(
-	SELECT
-		product_id,
-		product_name,
-		group_id,
-		price,
-		DENSE_RANK () OVER (
-			PARTITION BY group_id
-			ORDER BY price DESC
-		) price_rank
-	FROM
-		products
+ SELECT
+  product_id,
+  product_name,
+  group_id,
+  price,
+  DENSE_RANK () OVER (
+   PARTITION BY group_id
+   ORDER BY price DESC
+  ) price_rank
+ FROM
+  products
 )
 SELECT
-	product_id,
-	product_name,
-	price
+ product_id,
+ product_name,
+ price
 FROM
-	cte
+ cte
 WHERE
-	price_rank = 1;
+ price_rank = 1;
 ```
 
 ![PostgreSQL DENSE_RANK Function top rows example](/postgresqltutorial/PostgreSQL-DENSE_RANK-Function-top-rows-example.png)

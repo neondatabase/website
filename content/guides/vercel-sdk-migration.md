@@ -119,11 +119,11 @@ async function transferFunds(fromId: number, toId: number, amount: number) { // 
 
 ## Best practices
 
-1.  **Choose the right connection method**:
+1. **Choose the right connection method**:
     - Use HTTP (`neon()`) for single queries and simple transactions.
     - Use WebSockets (`Pool`) for complex transactions and session-based operations.
 
-2.  **Connection management**:
+2. **Connection management**:
     - For HTTP queries, reuse the `sql` query function.
     - For WebSocket connections in serverless environments, always close connections:
 
@@ -136,7 +136,8 @@ async function transferFunds(fromId: number, toId: number, amount: number) { // 
     }
     ```
 
-3.  **Error Handling**:
+3. **Error Handling**:
+
     ```typescript
     try {
       const result = await sql`SELECT * FROM users`;

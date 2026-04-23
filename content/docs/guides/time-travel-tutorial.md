@@ -75,7 +75,7 @@ For this tutorial, locate the timestamp of the `UPDATE` operation in the **Histo
 ![select timestamp](/docs/guides/time_travel_tutorial_activation.png)
 
 <Admonition type="note">
-Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot 
+Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot
 converts from `2025-08-06 at 10:52:00:00 PM IST` to `2025-08-06 at 5:22:00 PM UTC`.
 </Admonition>
 

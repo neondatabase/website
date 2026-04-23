@@ -5,6 +5,7 @@
 **Purpose:** To configure the Symfony project to securely connect to a Neon Postgres database, and to create a working example that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle to validate the connection.
 
 **Scope:**
+
 - Assumes the user is working within an existing Symfony project directory.
 - Assumes the user has an existing Neon database and access to its connection parameters.
 - Assumes the user has Composer and the Symfony CLI installed.
@@ -32,8 +33,10 @@
     ```bash
     symfony new project_name --version="7.3.x"
     ```
+
 - **Required PHP Extensions**: Before proceeding, ensure the user's PHP environment has the necessary PostgreSQL drivers enabled. These are the **`pdo_pgsql`** and **`pgsql`** extensions. Without them, the application will fail with a "driver not found" error. To verify, run `php -m | grep pgsql`. If the extensions are missing, inform the user they must install them for their specific platform (e.g., `sudo apt install php-pgsql` for Debian/Ubuntu) before continuing.
 - **Required Composer Packages**: For an existing project, ensure that Doctrine is installed. If it's missing run:
+
     ```bash
     composer require symfony/orm-pack
     composer require --dev symfony/maker-bundle
@@ -47,49 +50,53 @@ When this prompt is triggered, automatically configure the open Symfony project 
 
 ### 1. Configure Environment Variables for Neon
 
-1.  Locate the `.env` file at the root of the project.
-2.  Update the `DATABASE_URL` variable in the `.env` file. **Prompt the user to replace the placeholder values** with their actual credentials from their Neon project.
+1. Locate the `.env` file at the root of the project.
+2. Update the `DATABASE_URL` variable in the `.env` file. **Prompt the user to replace the placeholder values** with their actual credentials from their Neon project.
 
     ```dotenv title=".env"
     # Replace with your Neon connection string
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
     ```
 
-4.  Direct the user to find their connection string in the **Neon Console → Project → Dashboard → Connect**.
+4. Direct the user to find their connection string in the **Neon Console → Project → Dashboard → Connect**.
 
 ### 2. Create a "Todo" Entity and Migration
 
 To provide a concrete example, you will generate a `Todo` entity and its corresponding database migration.
 
-1.  **Generate the Entity:** Run the following Symfony console command to start the interactive entity creation process:
+1. **Generate the Entity:** Run the following Symfony console command to start the interactive entity creation process:
     **CRITICAL REMINDER: FOLLOW THE MANDATORY EXECUTION PROTOCOL. ASK FOR USER ASSISTANCE WHEN NEEDED.**
+
     ```bash
     php bin/console make:entity
     ```
+
     - Class name of the entity: `Todo`
     - New property name: `task` (Type: `string`, Length: `255`, Nullable: `no`)
     - New property name: `completed` (Type: `boolean`, Nullable: `no`)
     - Press `<Enter>` to finish adding properties.
 
-2.  **Generate the Database Migration:**
+2. **Generate the Database Migration:**
     - After the entity is created, generate the migration file that defines the SQL for creating the `todos` table.
+
         ```bash
         php bin/console make:migration
         ```
+
     - A new migration file will be created in the `migrations/` directory.
 
 ### 3. Create an Example Command with CRUD Operations
 
 To validate the entire setup, create a custom Symfony console command that demonstrates a full C-R-U-D lifecycle within a database transaction.
 
-1.  **Generate the Command:**
+1. **Generate the Command:**
     - Run the following command to generate a boilerplate command class:
-    
+
         ```bash
         php bin/console make:command app:test-neon-connection
         ```
 
-2.  **Implement the Command Logic:**
+2. **Implement the Command Logic:**
     - Open the newly created file at `src/Command/TestNeonConnectionCommand.php`.
     - Replace its contents with the following code. This script uses Doctrine's EntityManager to perform create, read, update, and delete operations on the `Todo` entity.
 
@@ -194,23 +201,28 @@ To validate the entire setup, create a custom Symfony console command that demon
 
 Once the setup is complete:
 
-1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
-2.  Run the migration to create the `todos` table in their Neon database.
+1. Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
+2. Run the migration to create the `todos` table in their Neon database.
+
     ```bash
     php bin/console doctrine:migrations:migrate
     ```
+
     *(The user should confirm the migration by typing `yes`)*.
-3.  Finally, run the example command to test the full lifecycle:
+3. Finally, run the example command to test the full lifecycle:
+
     ```bash
     php bin/console app:test-neon-connection
     ```
-4.  If successful, the output should show success messages for each C-R-U-D step, indicating a successful connection and operation.
+
+4. If successful, the output should show success messages for each C-R-U-D step, indicating a successful connection and operation.
 
 ---
 
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
+
 - A `.env` file is present and contains the `DATABASE_URL` variable.
 - The `DATABASE_URL` starts with `postgresql://`.
 - The `doctrine/orm` and `symfony/maker-bundle` packages are listed in `composer.json`.

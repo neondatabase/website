@@ -44,9 +44,9 @@ The easiest way to get started is with the Neon Local Connect VS Code extension.
 
 First, install the extension from the Visual Studio Marketplace or OpenVSX.
 
-1.  Open your editor and navigate to the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
-2.  Search for "Neon Local Connect".
-3.  Click **Install**.
+1. Open your editor and navigate to the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
+2. Search for "Neon Local Connect".
+3. Click **Install**.
     ![Neon Local Connect Extension](/docs/local/extension-in-vs-code.png)
 
 You can also install it directly from the marketplace:
@@ -63,22 +63,22 @@ You can also install it directly from the marketplace:
 
 Once installed, a new Neon icon will appear in your Activity Bar.
 
-1.  Click the Neon icon to open the Neon Local Connect panel.
-2.  Click **Sign in with Neon**. This will open a browser window to authenticate your Neon account using OAuth.
+1. Click the Neon icon to open the Neon Local Connect panel.
+2. Click **Sign in with Neon**. This will open a browser window to authenticate your Neon account using OAuth.
     ![Sign in with your Neon account](/docs/local/sign-in.png)
-3.  Authorize the application to connect to your Neon account.
+3. Authorize the application to connect to your Neon account.
     ![Neon OAuth authorization in browser](/docs/local/authorize.png)
 
 ### Connect to a Database branch
 
 After authenticating, the extension fetches your Neon projects and branches.
 
-1.  Select your **Organization** and **Project**.
-2.  Choose the **Branch** you want to work on (e.g., `development`). You can connect to an **existing branch** or an **ephemeral branch** that is created on connection and destroyed on disconnection.
+1. Select your **Organization** and **Project**.
+2. Choose the **Branch** you want to work on (e.g., `development`). You can connect to an **existing branch** or an **ephemeral branch** that is created on connection and destroyed on disconnection.
     <Admonition type="note" title="Using ephemeral branches">
     For using ephemeral branches, you need to authenticate using a Neon API key. This is recommended to ensure that temporary branches are automatically cleaned up when your session ends. To get started, see [Creating API keys](/docs/manage/api-keys). In the Neon Local Connect panel, click **Import API Key** to add your key.
     </Admonition>
-3.  Click **Connect**.
+3. Click **Connect**.
 
 The extension will now start a Neon Local Docker container in the background and establish a proxy connection to your selected branch. Once connected, the panel will display a static, local connection string.
 
@@ -244,22 +244,22 @@ Now that your code is isolated, you need to isolate your database. You have two 
 
 With the VS Code extension, creating a persistent branch is trivial:
 
-1.  In the Neon Local Connect panel, click the **Branch** dropdown menu.
-2.  Select **Create new branch...**.
-3.  Enter a name for your branch. It's good practice to match your Git branch name, like `feature/new-user-profile`.
-4.  Choose a parent branch to copy data and schema from (e.g., `production` or `development`).
-5.  The extension will instantly create the branch and connect you to it. Your `localhost` connection now points to this new, isolated environment.
+1. In the Neon Local Connect panel, click the **Branch** dropdown menu.
+2. Select **Create new branch...**.
+3. Enter a name for your branch. It's good practice to match your Git branch name, like `feature/new-user-profile`.
+4. Choose a parent branch to copy data and schema from (e.g., `production` or `development`).
+5. The extension will instantly create the branch and connect you to it. Your `localhost` connection now points to this new, isolated environment.
 
 </TabItem>
 <TabItem>
 
 When using the CLI, you create the branch in the Neon Console and then configure Neon Local to connect to it.
 
-1.  Navigate to your project in the **[Neon Console](https://console.neon.tech/)**.
-2.  Go to the **Branches** tab and click **New Branch**.
-3.  Name the branch (`feature/new-user-profile`) and select a parent.
-4.  Once created, copy the **Branch ID** from the branch details.
-5.  In your `docker-compose.yml`, ensure the `db` service is configured to use this specific `BRANCH_ID`.
+1. Navigate to your project in the **[Neon Console](https://console.neon.tech/)**.
+2. Go to the **Branches** tab and click **New Branch**.
+3. Name the branch (`feature/new-user-profile`) and select a parent.
+4. Once created, copy the **Branch ID** from the branch details.
+5. In your `docker-compose.yml`, ensure the `db` service is configured to use this specific `BRANCH_ID`.
 
     ```yaml
     services:
@@ -271,7 +271,7 @@ When using the CLI, you create the branch in the Neon Console and then configure
           - BRANCH_ID=<your_copied_branch_id> # Connect to the specific branch
     ```
 
-6.  Run `docker compose up` to start the proxy connected to your new feature branch.
+6. Run `docker compose up` to start the proxy connected to your new feature branch.
 
 </TabItem>
 </Tabs>
@@ -283,10 +283,10 @@ When using the CLI, you create the branch in the Neon Console and then configure
 <Tabs labels={["Using Neon Local Connect", "Using Neon Local (CLI)"]}>
 <TabItem>
 
-1.  In the Neon Local Connect panel, click the **Connection Type** dropdown menu.
-2.  Instead of selecting "Connect to Neon Branch", choose **Connect to ephemeral Neon branch** option.
-3.  Under **Branch**, select a parent branch (e.g., `production`) to base the ephemeral branch on.
-4.  Click **Connect**.
+1. In the Neon Local Connect panel, click the **Connection Type** dropdown menu.
+2. Instead of selecting "Connect to Neon Branch", choose **Connect to ephemeral Neon branch** option.
+3. Under **Branch**, select a parent branch (e.g., `production`) to base the ephemeral branch on.
+4. Click **Connect**.
 
 The extension creates a temporary branch for your session. When you click **Disconnect**, the branch and all its changes are automatically deleted from your Neon project, leaving no trace.
 
@@ -299,8 +299,8 @@ For using ephemeral branches, you need to authenticate using a Neon API key. To 
 
 With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` instead of a `BRANCH_ID`.
 
-1.  In the **[Neon Console](https://console.neon.tech/)**, find the **Branch ID** of the branch you want to use as a parent (e.g., your `production` or `development` branch).
-2.  In your `docker-compose.yml`, configure the `db` service to use this parent ID.
+1. In the **[Neon Console](https://console.neon.tech/)**, find the **Branch ID** of the branch you want to use as a parent (e.g., your `production` or `development` branch).
+2. In your `docker-compose.yml`, configure the `db` service to use this parent ID.
 
     ```yaml
     services:
@@ -312,8 +312,8 @@ With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` 
           - PARENT_BRANCH_ID=<your_parent_branch_id> # Create ephemeral branch from this parent
     ```
 
-3.  Run `docker compose up`. Neon Local will create a new, temporary branch from this parent.
-4.  When you're finished, run `docker compose down`. The ephemeral branch will be automatically deleted from your Neon project.
+3. Run `docker compose up`. Neon Local will create a new, temporary branch from this parent.
+4. When you're finished, run `docker compose down`. The ephemeral branch will be automatically deleted from your Neon project.
 
 </TabItem>
 </Tabs>
@@ -602,10 +602,10 @@ The `neonConfig` setup is **exclusive to the `@neondatabase/serverless` driver**
 
 For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard PostgreSQL drivers, you can follow the same pattern as the `node-postgres (pg)` example:
 
-1.  Read the database connection string from an environment variable.
-2.  In your local development environment, set this variable to `postgres://neon:npg@localhost:5432/<database_name>`.
-3.  In production, set it to your real Neon connection string.
-4.  You may need to conditionally disable SSL for the local connection.
+1. Read the database connection string from an environment variable.
+2. In your local development environment, set this variable to `postgres://neon:npg@localhost:5432/<database_name>`.
+3. In production, set it to your real Neon connection string.
+4. You may need to conditionally disable SSL for the local connection.
 
 No other code modifications are necessary.
 </Admonition>

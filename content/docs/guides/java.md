@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2026-02-15T20:51:54.165Z'
 ---
 
-<CopyPrompt src="/prompts/java-prompt.md" 
+<CopyPrompt src="/prompts/java-prompt.md"
 description="Pre-built prompt for connecting Java applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Java.
@@ -32,9 +32,9 @@ You will learn how to set up a project, connect to your database, and perform ba
 
 If you do not have one already, create a Neon project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
-2.  Click **New Project**.
-3.  Specify your project settings and click **Create Project**.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the [Neon Console](https://console.neon.tech).
+2. Click **New Project**.
+3. Specify your project settings and click **Create Project**.
 
 Your project is created with a ready-to-use database named `neondb`. In the following steps, you will connect to this database from your Java application.
 
@@ -42,7 +42,7 @@ Your project is created with a ready-to-use database named `neondb`. In the foll
 
 Create a project using the Maven `archetype:generate` command. This sets up a standard Java project structure.
 
-1.  Run the following command in your terminal to generate a new Maven project. This command creates a simple Java project with the `maven-archetype-quickstart` archetype.
+1. Run the following command in your terminal to generate a new Maven project. This command creates a simple Java project with the `maven-archetype-quickstart` archetype.
 
     ```bash
     mvn archetype:generate \
@@ -54,7 +54,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
         -DinteractiveMode=false
     ```
 
-2.  Change into the newly created project directory.
+2. Change into the newly created project directory.
 
     ```bash
     cd neon-java-jdbc
@@ -62,7 +62,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 
     > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
 
-3.  Add the `postgresql` driver and `dotenv-java` libraries as dependencies in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add these within the `<dependencies>` section.
+3. Add the `postgresql` driver and `dotenv-java` libraries as dependencies in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add these within the `<dependencies>` section.
 
     ```xml title="pom.xml"
     <dependencies>
@@ -85,7 +85,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 
     Save the file.
 
-4.  Compile the project to download the dependencies.
+4. Compile the project to download the dependencies.
 
     ```bash
     mvn clean compile
@@ -97,12 +97,12 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
-3.  Select **Java** as your programming language.
+1. In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+2. Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+3. Select **Java** as your programming language.
     ![Connection modal](/docs/connect/java_connection_details.png)
-4.  Copy the connection string, which includes your password.
-5.  Create a file named `.env` in your project's root directory and add the connection string to it as shown below:
+4. Copy the connection string, which includes your password.
+5. Create a file named `.env` in your project's root directory and add the connection string to it as shown below:
 
     ```text title=".env"
     DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"

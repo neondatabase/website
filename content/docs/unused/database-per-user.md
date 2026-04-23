@@ -516,7 +516,7 @@ First, GitHub must be added as an identity provider to allow the Action to use y
 
 On the next screen select OpenID Connect and add the following to the Provider URL and Audience fields.
 
-1. Provider URL: https://token.actions.githubusercontent.com
+1. Provider URL: <https://token.actions.githubusercontent.com>
 2. Audience: `sts.amazonaws.com`
 
 When you’re done, click **Add Provider**. You should now see this provider is visible in the list under **IAM > Access Management > Identity Providers**.
@@ -774,5 +774,5 @@ This step creates a new folder (if one doesn’t already exist) inside the S3 bu
 You can create as many of these Actions as you need. Just be careful to double check the `DATABASE_URL` to avoid backing up a database to the wrong folder.
 
 <Admonition type="important">
-GitHub Actions will timeout after ~6 hours. The size of your database and how you’ve configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners). 
+GitHub Actions will timeout after ~6 hours. The size of your database and how you’ve configured it will determine how long the `pg_dump` step takes. If you do experience timeout issues, you can self host [GitHub Action runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners).
 </Admonition>

@@ -303,7 +303,7 @@ The following example shows how a simple SQL command (`CREATE SCHEMA IF NOT EXIS
 **Audit log record:**
 
 ```ini shouldWrap
-2025-05-05 20:23:01.277	 <134>May 6 00:23:01 vm-compute-shy-waterfall-w2cn1o3t-b6vmn young-recipe-29421150/ep-calm-da 2025-05-06 00:23:01.277 GMT,neondb_owner,neondb,1405,10.6.42.155:13702,68195665.57d,1,CREATE SCHEMA, 2025-05-06 00:23:01 GMT,16/2,767,00000,SESSION,1,1,DDL,CREATE SCHEMA,,,CREATE SCHEMA IF NOT EXISTS healthcare,<not logged>,,,,,,,,,neon-internal-sql-editor
+2025-05-05 20:23:01.277  <134>May 6 00:23:01 vm-compute-shy-waterfall-w2cn1o3t-b6vmn young-recipe-29421150/ep-calm-da 2025-05-06 00:23:01.277 GMT,neondb_owner,neondb,1405,10.6.42.155:13702,68195665.57d,1,CREATE SCHEMA, 2025-05-06 00:23:01 GMT,16/2,767,00000,SESSION,1,1,DDL,CREATE SCHEMA,,,CREATE SCHEMA IF NOT EXISTS healthcare,<not logged>,,,,,,,,,neon-internal-sql-editor
 ```
 
 **Field descriptions:**
@@ -374,7 +374,7 @@ A: Yes, upon termination of services, we will securely delete or return your PHI
 A: We conduct regular internal audits and provide training to our employees to ensure adherence to HIPAA requirements.
 
 **Q: What should I do if I suspect a data breach?**  
-A: Contact our security team immediately at security@neon.tech.
+A: Contact our security team immediately at <security@neon.tech>.
 
 ## Contact information
 

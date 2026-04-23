@@ -104,10 +104,10 @@ The following query uses the `AVG()` function with the `SUM()` function to calcu
 
 ```sql
 SELECT
-	AVG(amount)::numeric(10,2),
-	SUM(amount)::numeric(10,2)
+ AVG(amount)::numeric(10,2),
+ SUM(amount)::numeric(10,2)
 FROM
-	payment;
+ payment;
 ```
 
 ```text

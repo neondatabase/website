@@ -345,6 +345,7 @@ This automatic routing happens transparently, allowing you to scale your applica
   ...
   
   $url = DB::connection('pgsql::write')->table('urls')->where('short_code', $shortCode)->first();
+
   ```
 </Admonition>
 

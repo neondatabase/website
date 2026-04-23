@@ -56,7 +56,7 @@ sudo apt install postgresql-client
 <TabItem>
 Download and install PostgreSQL from:
 
-https://www.postgresql.org/download/windows/
+<https://www.postgresql.org/download/windows/>
 
 Ensure psql is included in the installation.
 </TabItem>

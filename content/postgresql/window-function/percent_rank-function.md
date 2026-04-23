@@ -59,13 +59,13 @@ We will use the `sales_stats` table created in the `CUME_DIST()` function tutori
 
 ```sql
 SELECT
-	year,
-	name,
-	amount
+ year,
+ name,
+ amount
 FROM
-	actual_sales
+ actual_sales
 ORDER BY
-	year, name;
+ year, name;
 ```
 
 ![sales_stats table](/postgresqltutorial/sales_stats-table.png)
@@ -77,7 +77,7 @@ The following example uses the `PERCENT_RANK()` function to calculate the sales 
 ```sql
 SELECT
     name,
-	amount,
+ amount,
     PERCENT_RANK() OVER (
         ORDER BY amount
     )
@@ -99,9 +99,9 @@ This statement uses the `PERCENT_RANK()` function to calculate the sales amount 
 ```sql
 SELECT
     name,
-	amount,
+ amount,
     PERCENT_RANK() OVER (
-		PARTITION BY year
+  PARTITION BY year
         ORDER BY amount
     )
 FROM

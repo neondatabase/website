@@ -26,7 +26,7 @@ PL/pgSQL is a block\-structured language. Here’s the syntax of a block in PL/p
     declarations ]
 begin
     statements;
-	...
+ ...
 end [ label ];
 ```
 
@@ -167,8 +167,8 @@ begin
    declare
        y int = 2;
    begin
-   	   y = y + x;
-	   raise notice 'x=% y=%', x, y;
+       y = y + x;
+    raise notice 'x=% y=%', x, y;
    end inner;
 end outer;
 $$
