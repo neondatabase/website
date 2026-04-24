@@ -1,4 +1,5 @@
-/* eslint-disable import/no-unresolved, max-classes-per-file */
+/* global fetch, process, setTimeout */
+/* eslint-disable import/no-unresolved */
 import fs from 'fs/promises';
 import os from 'os';
 import path from 'path';
@@ -60,7 +61,9 @@ const readJsonWithRaw = async (filePath, fallback) => {
       data: JSON.parse(raw),
       raw,
     };
-  } catch {
+  } catch (error) {
+    void error;
+
     return {
       data: fallback,
       raw: JSON.stringify(fallback, null, 2),
@@ -94,29 +97,30 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const formatFetchErrorDetails = (error) => {
   const parts = [];
+  const cause = error && error.cause;
 
-  if (error?.name) {
+  if (error && error.name) {
     parts.push(error.name);
   }
 
-  if (error?.code) {
+  if (error && error.code) {
     parts.push(`code=${error.code}`);
   }
 
-  if (error?.message) {
+  if (error && error.message) {
     parts.push(error.message);
   }
 
-  if (error?.cause?.name) {
-    parts.push(`cause=${error.cause.name}`);
+  if (cause && cause.name) {
+    parts.push(`cause=${cause.name}`);
   }
 
-  if (error?.cause?.code) {
-    parts.push(`causeCode=${error.cause.code}`);
+  if (cause && cause.code) {
+    parts.push(`causeCode=${cause.code}`);
   }
 
-  if (error?.cause?.message) {
-    parts.push(`causeMessage=${error.cause.message}`);
+  if (cause && cause.message) {
+    parts.push(`causeMessage=${cause.message}`);
   }
 
   return parts.join('; ');
@@ -137,8 +141,9 @@ const shouldRetryFetch = ({ status = null, error = null }) => {
     'UND_ERR_HEADERS_TIMEOUT',
     'UND_ERR_SOCKET',
   ]);
+  const cause = error && error.cause;
 
-  return retryableCodes.has(error?.code) || retryableCodes.has(error?.cause?.code);
+  return retryableCodes.has(error && error.code) || retryableCodes.has(cause && cause.code);
 };
 
 const getRetryDelayMs = (attempt) => 250 * 2 ** (attempt - 1);
@@ -185,7 +190,9 @@ const readPostsFromDirectory = async (postsDir) => {
         };
       })
     );
-  } catch {
+  } catch (error) {
+    void error;
+
     return [];
   }
 };
@@ -292,7 +299,7 @@ const readBlogSnapshotFromCdn = async (baseUrl) => {
     },
     { attempts: BLOG_CDN_FETCH_RETRIES + 1 }
   );
-  const slugs = manifest.data?.posts || [];
+  const slugs = (manifest.data && manifest.data.posts) || [];
 
   const [authorsResult, categoriesResult, posts] = await Promise.all([
     fetchJson(joinUrl(baseUrl, 'authors/data.json'), { next: { revalidate: 60 } }),
@@ -433,7 +440,9 @@ const hasLocalBlogContent = async (rootDir = process.cwd()) => {
   try {
     const stat = await fs.stat(blogDir);
     return stat.isDirectory();
-  } catch {
+  } catch (error) {
+    void error;
+
     return false;
   }
 };

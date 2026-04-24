@@ -12,7 +12,6 @@ const BlogGridItem = ({
   isFeatured,
   routeConfig = DEFAULT_BLOG_ROUTE_CONFIG,
 }) => {
-  // eslint-disable-next-line no-unused-vars
   const { isFeatured: _, ...postProps } = post;
 
   return (
