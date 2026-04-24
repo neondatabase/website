@@ -50,7 +50,7 @@ const BulletList = ({ label, items }) => (
       {items.map((item, index) => (
         <li className="flex items-start gap-3" key={index}>
           <span className="mt-[8px] ml-[2px] size-2 shrink-0 bg-green-52" aria-hidden />
-          <span className="text-lg leading-snug tracking-extra-tight">{item}</span>
+          <span className="text-lg leading-snug tracking-extra-tight md:text-base">{item}</span>
         </li>
       ))}
     </ul>
@@ -65,7 +65,7 @@ BulletList.propTypes = {
 const Info = () => (
   <section className="info mt-53 xl:mt-[184px] lg:mt-36 md:mt-24">
     <Container className="flex flex-col gap-12 lg:gap-10 md:gap-8" size="1280">
-      <h2 className="text-5xl leading-dense text-white xl:text-[44px] lg:text-[40px] md:text-[32px]">
+      <h2 className="text-5xl leading-dense tracking-tighter text-white xl:text-[44px] lg:text-[40px] md:text-[32px]">
         Who’s the Neon
         <br />
         Startups Program for?
@@ -80,12 +80,12 @@ const Info = () => (
             key={index}
           >
             <div className="flex flex-col gap-7 bg-gray-new-8 px-9 pt-8 pb-9 lg:px-7 lg:pt-7 lg:pb-8 md:px-6 md:pt-6 md:pb-7">
-              <Icon className="size-14 shrink-0 text-white" aria-hidden />
+              <Icon className="size-14 shrink-0 text-white md:size-12" aria-hidden />
               <div className="flex flex-col gap-4">
-                <h3 className="text-[32px] leading-tight tracking-tighter xl:text-[28px] md:text-2xl">
+                <h3 className="text-[32px] leading-tight tracking-tighter xl:text-[28px] md:text-xl">
                   {title}
                 </h3>
-                <p className="text-lg leading-snug tracking-extra-tight text-gray-new-70">
+                <p className="text-lg leading-snug tracking-extra-tight text-gray-new-70 md:text-base">
                   {description}
                 </p>
               </div>

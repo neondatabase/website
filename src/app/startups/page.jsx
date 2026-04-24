@@ -119,13 +119,13 @@ const ContactSales = () => (
     <Info />
     <CTANew
       className="mt-[157px] text-center"
-      copyWrapperClassName="mx-auto text-center mt-0 max-w-[820px] [&_h2]:inline [&_p]:inline"
+      copyWrapperClassName="mx-auto text-center md:text-balance mt-0 max-w-[820px] [&_h2]:inline [&_p]:inline"
       title="Building something ambitious?"
       description="Fill out a short form and we’ll get back to you within a few business days."
       buttonText="Apply Now"
       buttonUrl="#startups-form"
     />
-    <Faq className="mb-40 lg:mb-16 md:mb-12" items={faqItems} />
+    <Faq className="mt-38 mb-36 lg:mb-16 md:mb-12 [&>div]:max-w-[1280px]" items={faqItems} />
   </Layout>
 );
 

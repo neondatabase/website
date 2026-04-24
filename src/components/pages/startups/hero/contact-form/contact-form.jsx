@@ -150,7 +150,7 @@ const ContactForm = () => {
           errorTheme="tooltip"
           name="firstname"
           label="First Name*"
-          autoComplete="name"
+          autoComplete="given-name"
           placeholder="Jane"
           theme="transparent"
           labelClassName={labelClassName}
@@ -164,7 +164,7 @@ const ContactForm = () => {
           errorTheme="tooltip"
           name="lastname"
           label="Last Name*"
-          autoComplete="name"
+          autoComplete="family-name"
           placeholder="Doe"
           theme="transparent"
           labelClassName={labelClassName}
@@ -222,7 +222,7 @@ const ContactForm = () => {
       <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
         <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
           By submitting you agree to the{' '}
-          <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
+          <Link className="decoration-dashed" to={LINKS.websiteTerms} theme="grey-85-underlined">
             Terms of Use
           </Link>{' '}
           and acknowledge the{' '}
