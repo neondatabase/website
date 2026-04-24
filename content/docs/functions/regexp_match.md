@@ -108,7 +108,7 @@ FROM emails
 WHERE regexp_match(email, '^[^@]+@[^@]+\.(com|org|io)$') IS NOT NULL;
 ```
 
-This query selects all rows from the `emails` table where the email address ends with `.com`, ``.org`, or `.io`.
+This query selects all rows from the `emails` table where the email address ends with `.com`, `.org`, or `.io`.
 
 ```text
         email

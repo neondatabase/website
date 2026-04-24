@@ -54,7 +54,7 @@ Run `/list-doc-tools` in Claude to see the full list with descriptions, or brows
 | ------------------------ | ---------------------------------------------------------------------------- |
 | `/navigation-principles` | Reference for `navigation.yaml` structure and how to add pages and sections. |
 | `/docs-prime`            | Load project structure and key paths into context.                           |
-| `/list-doc-tools`     | Print the full list of available commands with descriptions.                 |
+| `/list-doc-tools`        | Print the full list of available commands with descriptions.                 |
 
 ## Agents
 

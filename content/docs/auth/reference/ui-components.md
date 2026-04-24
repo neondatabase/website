@@ -141,8 +141,8 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 ### Authentication Components
 
-| Component    | Purpose                                           | Key Props  | Docs                                                         |
-| ------------ | ------------------------------------------------- | ---------- | ------------------------------------------------------------ |
+| Component    | Purpose                                           | Key Props  | Docs                                                                |
+| ------------ | ------------------------------------------------- | ---------- | ------------------------------------------------------------------- |
 | `<AuthView>` | All-in-one auth UI with sign-in and sign-up forms | `pathname` | [auth-view](https://legacy.better-auth-ui.com/components/auth-view) |
 
 **Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
@@ -151,8 +151,8 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 ### User Management Components
 
-| Component            | Purpose                               | Key Props              | Docs                                                                             |
-| -------------------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
+| Component            | Purpose                               | Key Props              | Docs                                                                                    |
+| -------------------- | ------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
 | `<UserButton>`       | User menu dropdown with avatar        | -                      | [user-button](https://legacy.better-auth-ui.com/components/user-button)                 |
 | `<UserAvatar>`       | Profile picture with Gravatar support | `user`, `size`         | [user-avatar](https://legacy.better-auth-ui.com/components/user-avatar)                 |
 | `<SignedIn>`         | Conditional rendering when signed in  | `children`, `fallback` | [signed-in](https://legacy.better-auth-ui.com/components/signed-in)                     |

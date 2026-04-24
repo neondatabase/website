@@ -85,10 +85,7 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
-      'jsx-a11y/label-has-associated-control': [
-        'error',
-        { required: { some: ['nesting', 'id'] } },
-      ],
+      'jsx-a11y/label-has-associated-control': ['error', { required: { some: ['nesting', 'id'] } }],
       // Suppress rules that produce false positives on marketing/docs site patterns
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/no-static-element-interactions': 'off',

@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import Link from 'components/shared/link';
+import ChevronDownIcon from 'icons/chevron-down.inline.svg';
 import CopyIcon from 'icons/copy-docs.inline.svg';
 import ChatGptIcon from 'icons/docs/chat-gpt.inline.svg';
 import ClaudeIcon from 'icons/docs/claude.inline.svg';
 import ExternalIcon from 'icons/external.inline.svg';
-
-import ChevronDownIcon from 'icons/chevron-down.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -196,7 +195,7 @@ const DropdownMenu = ({ gitHubPath, className }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-8.25 sm:left-0 right-0 z-10 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new">
+        <div className="absolute top-8.25 right-0 z-10 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
           <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
           {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
             <DropdownItem

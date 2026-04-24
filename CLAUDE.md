@@ -567,7 +567,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 | ------------------------ | --------------------------------------------------------------------------- |
 | `/navigation-principles` | Reference for `navigation.yaml` structure and how to add pages and sections |
 | `/docs-prime`            | Load project structure and key paths into context                           |
-| `/list-doc-tools`     | Print the full list of available commands with descriptions                 |
+| `/list-doc-tools`        | Print the full list of available commands with descriptions                 |
 
 ## Build Process
 

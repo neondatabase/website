@@ -129,12 +129,9 @@ function validateCaseStudies(caseStudies, categorySlugs) {
     }
 
     const isInternalOk = expectBoolean(errors, `${base}.isInternal`, item.isInternal);
-    const internalSlugOk = expectString(
-      errors,
-      `${base}.internalPostSlug`,
-      item.internalPostSlug,
-      { allowEmpty: true }
-    );
+    const internalSlugOk = expectString(errors, `${base}.internalPostSlug`, item.internalPostSlug, {
+      allowEmpty: true,
+    });
     const externalUrlOk = expectString(errors, `${base}.externalUrl`, item.externalUrl, {
       allowEmpty: true,
     });
@@ -219,11 +216,7 @@ function validateContentData() {
   const caseStudiesResult = validateCaseStudies(caseStudies, categoriesResult.categorySlugs);
   const useCasesErrors = validateUseCases(useCases, caseStudiesResult.caseStudyIds);
 
-  return [
-    ...categoriesResult.errors,
-    ...caseStudiesResult.errors,
-    ...useCasesErrors,
-  ];
+  return [...categoriesResult.errors, ...caseStudiesResult.errors, ...useCasesErrors];
 }
 
 function run() {
