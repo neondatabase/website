@@ -1,18 +1,24 @@
 ---
-title: 'How to Change the Owner of a PostgreSQL Database'
-page_title: 'How to Change Owners of PostgreSQL Databases'
-page_description: 'You will learn how to change the owner of a database to another in PostgreSQL using the ALTER DATABASE...OWNER TO statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgres-change-database-owner/'
+title: How to Change the Owner of a PostgreSQL Database
+page_title: How to Change Owners of PostgreSQL Databases
+page_description: >-
+  You will learn how to change the owner of a database to another in PostgreSQL
+  using the ALTER DATABASE...OWNER TO statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgres-change-database-owner/
 ogImage: ''
 updatedOn: '2024-02-22T10:02:54+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Get Sizes of Database Objects in PostgreSQL'
-  slug: 'postgresql-administration/postgresql-database-indexes-table-size'
+  title: How to Get Sizes of Database Objects in PostgreSQL
+  slug: postgresql-administration/postgresql-database-indexes-table-size
 nextLink:
-  title: 'PostgreSQL Schema'
-  slug: 'postgresql-administration/postgresql-schema'
+  title: PostgreSQL Schema
+  slug: postgresql-administration/postgresql-schema
 ---
+<Admonition type="info" id="CTA">
+Changing a database owner with ALTER DATABASE works the same way on any PostgreSQL deployment, so you can apply these steps wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to change the owner of a database to another in PostgreSQL.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_each() Function'
-page_title: 'PostgreSQL jsonb_each() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_each() function to expand a JSON object into a set of key/value pairs.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/'
+title: PostgreSQL jsonb_each() Function
+page_title: PostgreSQL jsonb_each() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_each()
+  function to expand a JSON object into a set of key/value pairs.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each/
 ogImage: ''
 updatedOn: '2024-02-24T08:46:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_array_elements_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_array_elements_text'
+  title: PostgreSQL jsonb_array_elements_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_array_elements_text
 nextLink:
-  title: 'PostgreSQL jsonb_each_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_each_text'
+  title: PostgreSQL jsonb_each_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_each_text
 ---
+<Admonition type="info" id="CTA">
+The `jsonb_each()` function is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise working with JSONB at scale and want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_each()` function to expand a JSON object into a set of key/value pairs.
 

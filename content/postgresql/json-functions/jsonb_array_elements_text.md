@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_array_elements_text() Function'
-page_title: 'PostgreSQL jsonb_array_elements_text() Function'
-page_description: 'How to use the PostgreSQL jsonb_array_elements_text() function to expand the elements of a top-level JSON array into a set of text values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/'
+title: PostgreSQL jsonb_array_elements_text() Function
+page_title: PostgreSQL jsonb_array_elements_text() Function
+page_description: >-
+  How to use the PostgreSQL jsonb_array_elements_text() function to expand the
+  elements of a top-level JSON array into a set of text values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/
 ogImage: ''
 updatedOn: '2024-02-24T08:07:50+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_array_elements() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_array_elements'
+  title: PostgreSQL jsonb_array_elements() Function
+  slug: postgresql-json-functions/postgresql-jsonb_array_elements
 nextLink:
-  title: 'PostgreSQL jsonb_each() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_each'
+  title: PostgreSQL jsonb_each() Function
+  slug: postgresql-json-functions/postgresql-jsonb_each
 ---
+<Admonition type="info" id="CTA">
+The `jsonb_array_elements_text()` function works the same across every PostgreSQL deployment, so you can apply what you learn here whether you run Postgres yourself or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fast, secure, fully managed database that sits natively inside the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_array_elements_text()` function to expand the elements of a top\-level JSON array into a set of text values.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE TABLE AS'
-page_title: 'PostgreSQL CREATE TABLE AS Statement By Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE TABLE AS statement to create a new table from the result set of a query.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table-as/'
-ogImage: '/postgresqltutorial/film_and_film_category_tables.png'
+title: PostgreSQL CREATE TABLE AS
+page_title: PostgreSQL CREATE TABLE AS Statement By Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CREATE TABLE AS
+  statement to create a new table from the result set of a query.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table-as/
+ogImage: /postgresqltutorial/film_and_film_category_tables.png
 updatedOn: '2024-02-13T13:42:10+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SELECT INTO'
-  slug: 'postgresql-tutorial/postgresql-select-into'
+  title: PostgreSQL SELECT INTO
+  slug: postgresql-tutorial/postgresql-select-into
 nextLink:
-  title: 'Using PostgreSQL SERIAL to Create Auto-increment Column'
-  slug: 'postgresql-tutorial/postgresql-serial'
+  title: Using PostgreSQL SERIAL to Create Auto-increment Column
+  slug: postgresql-tutorial/postgresql-serial
 ---
+<Admonition type="info" id="CTA">
+The `CREATE TABLE AS` statement works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed platform. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who wants to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE TABLE AS` statement to create a new table from the result set of a query.
 

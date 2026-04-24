@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SUM Function'
-page_title: 'PostgreSQL SUM() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL SUM() function to calculate the sum of values in a set of values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/'
-ogImage: '/postgresqltutorial/payment-table.png'
+title: PostgreSQL SUM Function
+page_title: PostgreSQL SUM() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL SUM() function to calculate
+  the sum of values in a set of values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/
+ogImage: /postgresqltutorial/payment-table.png
 updatedOn: '2024-01-26T03:46:26+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MIN() Function'
-  slug: 'postgresql-aggregate-functions/postgresql-min-function'
+  title: PostgreSQL MIN() Function
+  slug: postgresql-aggregate-functions/postgresql-min-function
 nextLink:
-  title: 'PostgreSQL ARRAY_AGG Function'
-  slug: 'postgresql-aggregate-functions/postgresql-array_agg'
+  title: PostgreSQL ARRAY_AGG Function
+  slug: postgresql-aggregate-functions/postgresql-array_agg
 ---
+<Admonition type="info" id="CTA">
+The SUM() aggregate function works the same across any PostgreSQL deployment, so everything you learn here transfers directly to your own databases. For enterprises running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that modern data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
+</Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to use PostgreSQL `SUM()` function to calculate the sum of a set of values.
 

@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CTE'
-page_title: 'PostgreSQL Common Table Expression (CTE)'
-page_description: 'This tutorial shows you how to use the PostgreSQL common table expression (CTE) to simplify complex queries.'
+title: PostgreSQL CTE
+page_title: PostgreSQL Common Table Expression (CTE)
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL common table expression
+  (CTE) to simplify complex queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cte/'
 ogImage: ''
 updatedOn: '2024-01-22T06:27:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXISTS Operator'
-  slug: 'postgresql-tutorial/postgresql-exists'
+  title: PostgreSQL EXISTS Operator
+  slug: postgresql-tutorial/postgresql-exists
 nextLink:
-  title: 'PostgreSQL Recursive Query'
-  slug: 'postgresql-tutorial/postgresql-recursive-query'
+  title: PostgreSQL Recursive Query
+  slug: postgresql-tutorial/postgresql-recursive-query
 ---
+<Admonition type="info" id="CTA">
+Common table expressions are a standard PostgreSQL feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL common table expression (CTE) to simplify complex queries.
 

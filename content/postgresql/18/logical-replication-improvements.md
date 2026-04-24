@@ -1,17 +1,23 @@
 ---
-title: 'PostgreSQL 18 Logical Replication of Generated Columns'
-page_title: 'PostgreSQL 18 Logical Replication of Generated Columns'
-page_description: 'Learn about PostgreSQL 18 logical replication improvements including support for replicating stored generated columns, improved conflict logging with pg_stat_subscription_stats, and improved streaming configuration options.'
+title: PostgreSQL 18 Logical Replication of Generated Columns
+page_title: PostgreSQL 18 Logical Replication of Generated Columns
+page_description: >-
+  Learn about PostgreSQL 18 logical replication improvements including support
+  for replicating stored generated columns, improved conflict logging with
+  pg_stat_subscription_stats, and improved streaming configuration options.
 ogImage: ''
 updatedOn: '2025-08-09T08:00:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 Array and Bytea Function Improvements'
-  slug: 'postgresql-18/array-bytea-improvements'
+  title: PostgreSQL 18 Array and Bytea Function Improvements
+  slug: postgresql-18/array-bytea-improvements
 nextLink:
-  title: 'PostgreSQL 18 OAuth Support'
-  slug: 'postgresql-18/oauth-authentication'
+  title: PostgreSQL 18 OAuth Support
+  slug: postgresql-18/oauth-authentication
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL 18's logical replication improvements, including replication of stored generated columns, better conflict monitoring, and parallel streaming defaults, work the same way on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's logical replication improvements, including the ability to replicate stored generated columns, better conflict monitoring, and improved streaming defaults that make replication more reliable for production use.
 

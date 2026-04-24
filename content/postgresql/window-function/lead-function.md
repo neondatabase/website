@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL LEAD Function'
-page_title: 'PostgreSQL LEAD() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL LEAD() function to access a row that follows the current row, at a specific physical offset.'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/Sales-sample-table.png'
+title: PostgreSQL LEAD Function
+page_title: PostgreSQL LEAD() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL LEAD() function to
+  access a row that follows the current row, at a specific physical offset.
+prev_url: index.html
+ogImage: /postgresqltutorial/Sales-sample-table.png
 updatedOn: '2020-04-11T10:53:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LAST_VALUE Function'
-  slug: 'postgresql-window-function/postgresql-last_value-function'
+  title: PostgreSQL LAST_VALUE Function
+  slug: postgresql-window-function/postgresql-last_value-function
 nextLink:
-  title: 'PostgreSQL NTILE Function'
-  slug: 'postgresql-window-function/postgresql-ntile-function'
+  title: PostgreSQL NTILE Function
+  slug: postgresql-window-function/postgresql-ntile-function
 ---
+<Admonition type="info" id="CTA">
+The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your analytics and AI workloads need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LEAD()` function to access a row that follows the current row, at a specific physical offset.
 

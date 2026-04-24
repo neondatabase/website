@@ -1,18 +1,24 @@
 ---
-title: 'Dollar-Quoted String Constants'
-page_title: 'PostgreSQL Dollar-quoted String Constants'
-page_description: 'In this tutorial, you will learn about PostgreSQL Dollar-quoted String Constants ($$) and how to use them in anonymous blocks.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/'
+title: Dollar-Quoted String Constants
+page_title: PostgreSQL Dollar-quoted String Constants
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL Dollar-quoted String
+  Constants ($$) and how to use them in anonymous blocks.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/
 ogImage: ''
 updatedOn: '2024-03-18T14:51:14+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Introduction to PostgreSQL PL/pgSQL'
-  slug: 'postgresql-plpgsql/introduction-to-postgresql-stored-procedures'
+  title: Introduction to PostgreSQL PL/pgSQL
+  slug: postgresql-plpgsql/introduction-to-postgresql-stored-procedures
 nextLink:
-  title: 'PL/pgSQL Block Structure'
-  slug: 'postgresql-plpgsql/plpgsql-block-structure'
+  title: PL/pgSQL Block Structure
+  slug: postgresql-plpgsql/plpgsql-block-structure
 ---
+<Admonition type="info" id="CTA">
+Dollar-quoted string constants are a standard PostgreSQL feature, and everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform to do it.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the dollar\-quoted string constants (`$$`) in user\-defined functions and stored procedures.
 

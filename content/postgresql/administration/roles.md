@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CREATE ROLE Statement'
-page_title: 'PostgreSQL CREATE ROLE Statement'
-page_description: 'In this tutorial, you will learn about the PostgreSQL roles concept and how to use PostgreSQL create role statement to create roles.'
+title: PostgreSQL CREATE ROLE Statement
+page_title: PostgreSQL CREATE ROLE Statement
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL roles concept and how to
+  use PostgreSQL create role statement to create roles.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/'
-ogImage: '/postgresqltutorial/PostgreSQL-Roles.png'
+ogImage: /postgresqltutorial/PostgreSQL-Roles.png
 updatedOn: '2024-02-22T07:00:29+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP SCHEMA Statement'
-  slug: 'postgresql-administration/postgresql-drop-schema'
+  title: PostgreSQL DROP SCHEMA Statement
+  slug: postgresql-administration/postgresql-drop-schema
 nextLink:
-  title: 'PostgreSQL GRANT'
-  slug: 'postgresql-administration/postgresql-grant'
+  title: PostgreSQL GRANT
+  slug: postgresql-administration/postgresql-grant
 ---
+<Admonition type="info" id="CTA">
+CREATE ROLE works the same on any PostgreSQL server, so everything you learn here about roles, attributes, and login privileges carries over to Postgres wherever you run it. If you're an enterprise standardizing on governed, AI-ready data infrastructure, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who wants to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) gives you the most productive Postgres platform, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL roles and how to use the PostgreSQL `CREATE ROLE` statement to create new roles.
 

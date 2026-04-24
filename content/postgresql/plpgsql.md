@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL PL/pgSQL'
-page_title: 'PostgreSQL PL/pgSQL'
-page_description: 'In this section, you will learn how to develop user-defined functions and stored procedures in PostgreSQL using PL/pgSQL programming language.'
+title: PostgreSQL PL/pgSQL
+page_title: PostgreSQL PL/pgSQL
+page_description: >-
+  In this section, you will learn how to develop user-defined functions and
+  stored procedures in PostgreSQL using PL/pgSQL programming language.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/'
 ogImage: ''
 updatedOn: '2024-03-22T09:00:29+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL generate_series() Function'
-  slug: 'postgresql-tutorial/postgresql-generate_series'
+  title: PostgreSQL generate_series() Function
+  slug: postgresql-tutorial/postgresql-generate_series
 nextLink:
-  title: 'Introduction to PostgreSQL PL/pgSQL'
-  slug: 'postgresql-plpgsql/introduction-to-postgresql-stored-procedures'
+  title: Introduction to PostgreSQL PL/pgSQL
+  slug: postgresql-plpgsql/introduction-to-postgresql-stored-procedures
 ---
+<Admonition type="info" id="CTA">
+PL/pgSQL is a core part of PostgreSQL, so everything you learn here about functions, procedures, control structures, and triggers works on any Postgres deployment. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Stored-Procedure.png?alignright)
 This section shows you step by step how to use the PL/pgSQL to develop PostgreSQL user\-defined functions and stored procedures.

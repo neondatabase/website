@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL C#: Updating Data'
 page_title: 'PostgreSQL C#: Updating Data'
-page_description: 'In this tutorial, you will learn how to update data in a table of a PostgreSQL database from a C# program.'
+page_description: >-
+  In this tutorial, you will learn how to update data in a table of a PostgreSQL
+  database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-update/'
 ogImage: ''
 updatedOn: '2024-05-21T03:27:42+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
-  slug: 'postgresql-csharp/postgresql-csharp-import-csv-file'
+  slug: postgresql-csharp/postgresql-csharp-import-csv-file
 nextLink:
   title: 'PostgreSQL C#: Deleting Data'
-  slug: 'postgresql-csharp/postgresql-csharp-delete'
+  slug: postgresql-csharp/postgresql-csharp-delete
 ---
+<Admonition type="info" id="CTA">
+Updating data with Npgsql and parameterized UPDATE statements works against any PostgreSQL database, so the C# patterns here carry over wherever your Postgres runs. For enterprises modernizing data platforms for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and tight Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to update data in the PostgreSQL database using C\#.
 

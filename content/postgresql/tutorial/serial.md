@@ -1,18 +1,23 @@
 ---
-title: 'Using PostgreSQL SERIAL to Create Auto-increment Column'
-page_title: 'Using PostgreSQL SERIAL to Create Auto-increment Columns'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL SERIAL to create an auto-increment column in a database table.'
+title: Using PostgreSQL SERIAL to Create Auto-increment Column
+page_title: Using PostgreSQL SERIAL to Create Auto-increment Columns
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL SERIAL to create an
+  auto-increment column in a database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/'
-ogImage: '/postgresqltutorial/PostgreSQL-Serial-268x300.png'
+ogImage: /postgresqltutorial/PostgreSQL-Serial-268x300.png
 updatedOn: '2024-02-01T08:57:58+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE TABLE AS'
-  slug: 'postgresql-tutorial/postgresql-create-table-as'
+  title: PostgreSQL CREATE TABLE AS
+  slug: postgresql-tutorial/postgresql-create-table-as
 nextLink:
-  title: 'PostgreSQL Sequences'
-  slug: 'postgresql-tutorial/postgresql-sequences'
+  title: PostgreSQL Sequences
+  slug: postgresql-tutorial/postgresql-sequences
 ---
+<Admonition type="info" id="CTA">
+The PostgreSQL SERIAL pseudo-type works the same way across any Postgres deployment, so what you learn here applies whether you're running Postgres on your laptop, on premises, or in a managed cloud. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and tight integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 ![PostgreSQL Serial](/postgresqltutorial/PostgreSQL-Serial-268x300.png?alignright)**Summary**: in this tutorial,  you will learn about the PostgreSQL `SERIAL` pseudo\-type and how to use the `SERIAL` pseudo\-type to define auto\-increment columns in tables.
 

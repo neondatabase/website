@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL JDBC: Managing Transactions'
 page_title: 'PostgreSQL JDBC: Transactions'
-page_description: 'In this tutorial, you will learn how to manage transactions in PostgreSQL using JDBC API utilizing the commit() and rollback() methods.'
+page_description: >-
+  In this tutorial, you will learn how to manage transactions in PostgreSQL
+  using JDBC API utilizing the commit() and rollback() methods.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/transaction/'
 ogImage: ''
 updatedOn: '2024-02-02T05:00:10+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Call Stored Functions'
-  slug: 'postgresql-jdbc/call-postgresql-stored-function'
+  slug: postgresql-jdbc/call-postgresql-stored-function
 nextLink:
-  title: 'PostgreSQL C#'
-  slug: 'postgresql-jdbc/../postgresql-csharp'
+  title: PostgreSQL C#
+  slug: postgresql-jdbc/../postgresql-csharp
 ---
+<Admonition type="info" id="CTA">
+Managing transactions with JDBC works the same against any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run mission-critical Java workloads at scale. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to manage PostgreSQL transactions in Java programs using JDBC.
 

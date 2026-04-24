@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL ORDER BY'
-page_title: 'PostgreSQL ORDER BY'
-page_description: 'This tutorial shows you how to use the PostgreSQL ORDER BY clause to sort result set returned by a query in ascending or descending order.'
+title: PostgreSQL ORDER BY
+page_title: PostgreSQL ORDER BY
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL ORDER BY clause to sort
+  result set returned by a query in ascending or descending order.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by/'
-ogImage: '/postgresqltutorial/PostgreSQL-ORDER-BY.png'
+ogImage: /postgresqltutorial/PostgreSQL-ORDER-BY.png
 updatedOn: '2024-01-16T09:02:03+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Column Alias'
-  slug: 'postgresql-tutorial/postgresql-column-alias'
+  title: PostgreSQL Column Alias
+  slug: postgresql-tutorial/postgresql-column-alias
 nextLink:
-  title: 'PostgreSQL SELECT DISTINCT'
-  slug: 'postgresql-tutorial/postgresql-select-distinct'
+  title: PostgreSQL SELECT DISTINCT
+  slug: postgresql-tutorial/postgresql-select-distinct
 ---
+<Admonition type="info" id="CTA">
+Sorting query results with ORDER BY works the same on any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, in your own cluster, or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams expect. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ORDER BY` clause to sort the rows of a query by one or more criteria.
 

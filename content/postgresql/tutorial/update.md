@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL UPDATE'
-page_title: 'PostgreSQL UPDATE Statement'
-page_description: 'This tutorial shows you how to use the PostgreSQL UPDATE statement to update data of one or more columns of a table.'
+title: PostgreSQL UPDATE
+page_title: PostgreSQL UPDATE Statement
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL UPDATE statement to update
+  data of one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
 ogImage: ''
 updatedOn: '2024-01-22T13:47:38+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INSERT Multiple Rows'
-  slug: 'postgresql-tutorial/postgresql-insert-multiple-rows'
+  title: PostgreSQL INSERT Multiple Rows
+  slug: postgresql-tutorial/postgresql-insert-multiple-rows
 nextLink:
-  title: 'PostgreSQL UPDATE Join'
-  slug: 'postgresql-tutorial/postgresql-update-join'
+  title: PostgreSQL UPDATE Join
+  slug: postgresql-tutorial/postgresql-update-join
 ---
+<Admonition type="info" id="CTA">
+The UPDATE statement works the same way on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise building for the AI era, Lakebase gives you a fully managed Postgres that's fast, secure, and tightly integrated with the Lakehouse, so your transactional data sits next to your analytics and AI workloads. If you're a developer or startup that needs to ship and scale quickly, Neon is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` statement to update existing data in a table.
 

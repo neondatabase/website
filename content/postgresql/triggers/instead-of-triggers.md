@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL INSTEAD OF Triggers'
-page_title: 'PostgreSQL INSTEAD OF Triggers'
-page_description: 'In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to insert, update, or delete data of base tables through a view.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/'
+title: PostgreSQL INSTEAD OF Triggers
+page_title: PostgreSQL INSTEAD OF Triggers
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to
+  insert, update, or delete data of base tables through a view.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/
 ogImage: ''
 updatedOn: '2024-03-28T13:58:28+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL AFTER DELETE Trigger'
-  slug: 'postgresql-triggers/postgresql-after-delete-trigger'
+  title: PostgreSQL AFTER DELETE Trigger
+  slug: postgresql-triggers/postgresql-after-delete-trigger
 nextLink:
-  title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-  slug: 'postgresql-triggers/postgresql-before-truncate-trigger'
+  title: PostgreSQL BEFORE TRUNCATE Trigger
+  slug: postgresql-triggers/postgresql-before-truncate-trigger
 ---
+<Admonition type="info" id="CTA">
+INSTEAD OF triggers work the same way on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers fast, secure Postgres fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL `INSTEAD OF` a trigger to insert, update, or delete data of base tables through a view.
 

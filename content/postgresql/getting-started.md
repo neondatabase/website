@@ -1,7 +1,9 @@
 ---
-title: 'Getting Started with PostgreSQL'
-page_title: 'Getting Started with PostgreSQL'
-page_description: 'This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS.'
+title: Getting Started with PostgreSQL
+page_title: Getting Started with PostgreSQL
+page_description: >-
+  This section helps you get started with PostgreSQL by showing you how to
+  install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
 updatedOn: '2021-04-27T02:23:23+00:00'
@@ -10,9 +12,12 @@ previousLink:
   title: ''
   slug: ''
 nextLink:
-  title: 'PostgreSQL Cheat Sheet'
-  slug: 'postgresql-cheat-sheet'
+  title: PostgreSQL Cheat Sheet
+  slug: postgresql-cheat-sheet
 ---
+<Admonition type="info" id="CTA">
+Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+</Admonition>
 
 This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.
 

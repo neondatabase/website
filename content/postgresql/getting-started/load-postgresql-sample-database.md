@@ -1,18 +1,24 @@
 ---
-title: 'Load PostgreSQL Sample Database'
-page_title: 'Load PostgreSQL Sample Database'
-page_description: 'In this tutorial, we will show you how to load a PostgreSQL sample database into the PostgreSQL database server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/'
-ogImage: '/postgresqltutorial/PostgreSQL-create-database-pgadmin4.png'
+title: Load PostgreSQL Sample Database
+page_title: Load PostgreSQL Sample Database
+page_description: >-
+  In this tutorial, we will show you how to load a PostgreSQL sample database
+  into the PostgreSQL database server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/
+ogImage: /postgresqltutorial/PostgreSQL-create-database-pgadmin4.png
 updatedOn: '2024-01-20T09:40:21+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Connect to a PostgreSQL Database Server'
-  slug: 'postgresql-getting-started/connect-to-postgresql-database'
+  title: Connect to a PostgreSQL Database Server
+  slug: postgresql-getting-started/connect-to-postgresql-database
 nextLink:
-  title: 'Install PostgreSQL macOS'
-  slug: 'postgresql-getting-started/install-postgresql-macos'
+  title: Install PostgreSQL macOS
+  slug: postgresql-getting-started/install-postgresql-macos
 ---
+<Admonition type="info" id="CTA">
+Loading the dvdrental sample database with psql and pg_restore works the same way on any PostgreSQL server, so you can follow along wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytics and operational data in sync. If you're a developer or startup who wants to spin up a database in seconds and scale without babysitting infrastructure, [Neon](https://neon.com) is the fastest way to ship on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to load the **PostgreSQL sample database** into the PostgreSQL database server.
 

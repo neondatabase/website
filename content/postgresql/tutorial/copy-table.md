@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
 page_title: 'PostgreSQL Copy Table: A Step-by-Step Guide'
-page_description: 'In this tutorial, you will learn how to copy an existing table to a new one using various PostgreSQL copy table statements.'
+page_description: >-
+  In this tutorial, you will learn how to copy an existing table to a new one
+  using various PostgreSQL copy table statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-copy-table/'
-ogImage: '/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png'
+ogImage: /postgresqltutorial/PostgreSQL-Copy-Table-300x260.png
 updatedOn: '2024-02-18T08:28:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRUNCATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-truncate-table'
+  title: PostgreSQL TRUNCATE TABLE
+  slug: postgresql-tutorial/postgresql-truncate-table
 nextLink:
-  title: 'PostgreSQL Primary Key'
-  slug: 'postgresql-tutorial/postgresql-primary-key'
+  title: PostgreSQL Primary Key
+  slug: postgresql-tutorial/postgresql-primary-key
 ---
+<Admonition type="info" id="CTA">
+Copying tables with CREATE TABLE AS works on any PostgreSQL database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytical and transactional workloads in sync. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you instant branching, autoscaling, and a serverless Postgres platform that gets out of your way.
+</Admonition>
 
 ![PostgreSQL Copy Table](/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png?alignright)**Summary**: in this tutorial, we will show you step by step how to copy an existing table including table structure and data by using the various forms of PostgreSQL copy table statement.
 

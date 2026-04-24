@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Primary Key'
-page_title: 'PostgreSQL Primary Key'
-page_description: 'In this tutorial, we will show you what a primary key is and how to manage PostgreSQL primary key constraints through SQL statements.'
+title: PostgreSQL Primary Key
+page_title: PostgreSQL Primary Key
+page_description: >-
+  In this tutorial, we will show you what a primary key is and how to manage
+  PostgreSQL primary key constraints through SQL statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/'
 ogImage: ''
 updatedOn: '2024-01-25T07:25:38+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-copy-table'
+  slug: postgresql-tutorial/postgresql-copy-table
 nextLink:
-  title: 'PostgreSQL Foreign Key'
-  slug: 'postgresql-tutorial/postgresql-foreign-key'
+  title: PostgreSQL Foreign Key
+  slug: postgresql-tutorial/postgresql-foreign-key
 ---
+<Admonition type="info" id="CTA">
+Primary keys work the same across every PostgreSQL deployment, so the syntax and behavior covered here apply whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL primary key and how to manage primary key constraints effectively.
 

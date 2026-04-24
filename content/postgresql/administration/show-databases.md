@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Show Databases'
-page_title: 'PostgreSQL Show Databases'
-page_description: 'In this tutorial, you will learn how to show databases in a PostgreSQL server using psql and pg_database catalog.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/'
+title: PostgreSQL Show Databases
+page_title: PostgreSQL Show Databases
+page_description: >-
+  In this tutorial, you will learn how to show databases in a PostgreSQL server
+  using psql and pg_database catalog.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/
 ogImage: ''
 updatedOn: '2024-02-07T13:11:13+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Restore Database'
-  slug: 'postgresql-administration/postgresql-restore-database'
+  title: PostgreSQL Restore Database
+  slug: postgresql-administration/postgresql-restore-database
 nextLink:
-  title: 'PostgreSQL Show Tables'
-  slug: 'postgresql-administration/postgresql-show-tables'
+  title: PostgreSQL Show Tables
+  slug: postgresql-administration/postgresql-show-tables
 ---
+<Admonition type="info" id="CTA">
+Listing databases with `\l`, `\l+`, or a query against `pg_database` works the same on any PostgreSQL server, so the techniques here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to show databases in a PostgreSQL database server.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TRUNCATE TABLE'
-page_title: 'PostgreSQL TRUNCATE TABLE'
-page_description: 'This tutorial shows you how to use the PostgreSQL TRUNCATE TABLE statement to delete data from large tables quickly and more efficiently.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/'
+title: PostgreSQL TRUNCATE TABLE
+page_title: PostgreSQL TRUNCATE TABLE
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TRUNCATE TABLE statement to
+  delete data from large tables quickly and more efficiently.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/
 ogImage: ''
 updatedOn: '2024-01-25T02:04:03+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP TABLE'
-  slug: 'postgresql-tutorial/postgresql-drop-table'
+  title: PostgreSQL DROP TABLE
+  slug: postgresql-tutorial/postgresql-drop-table
 nextLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-copy-table'
+  slug: postgresql-tutorial/postgresql-copy-table
 ---
+<Admonition type="info" id="CTA">
+TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for you: fast, secure, and fully integrated into the Lakehouse so your operational data and analytics live together. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the best Postgres platform for that, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `TRUNCATE TABLE` statement to quickly delete all data from large tables.
 

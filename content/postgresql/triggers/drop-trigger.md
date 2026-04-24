@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP TRIGGER Statement'
-page_title: 'PostgreSQL DROP TRIGGER Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DROP TRIGGER statement to drop a trigger from a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-drop-trigger/'
-ogImage: '/postgresqltutorial/PostgreSQL-DROP-Trigger-Example.png'
+title: PostgreSQL DROP TRIGGER Statement
+page_title: PostgreSQL DROP TRIGGER Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DROP TRIGGER
+  statement to drop a trigger from a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-drop-trigger/
+ogImage: /postgresqltutorial/PostgreSQL-DROP-Trigger-Example.png
 updatedOn: '2024-03-30T03:14:07+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE TRIGGER Statement'
-  slug: 'postgresql-triggers/creating-first-trigger-postgresql'
+  title: PostgreSQL CREATE TRIGGER Statement
+  slug: postgresql-triggers/creating-first-trigger-postgresql
 nextLink:
-  title: 'PostgreSQL ALTER TRIGGER Statement'
-  slug: 'postgresql-triggers/postgresql-alter-trigger'
+  title: PostgreSQL ALTER TRIGGER Statement
+  slug: postgresql-triggers/postgresql-alter-trigger
 ---
+<Admonition type="info" id="CTA">
+The DROP TRIGGER syntax covered here works on any PostgreSQL database, since triggers are a core part of Postgres and not specific to [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration to run trigger-driven workloads at scale. If you're a developer or startup who needs to ship fast and scale without friction, Neon gives you instant branching, autoscaling, and the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP TRIGGER` statement to drop a trigger from a table.
 

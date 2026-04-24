@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
 page_title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
-page_description: 'In this tutorial, you will learn how to set up a simple project structure and connect to the PostgreSQL database using PHP PDO API.'
+page_description: >-
+  In this tutorial, you will learn how to set up a simple project structure and
+  connect to the PostgreSQL database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/connect/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Connect.png'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Connect.png
 updatedOn: '2024-01-30T00:49:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PHP'
-  slug: 'postgresql-php/'
+  title: PostgreSQL PHP
+  slug: postgresql-php/
 nextLink:
   title: 'PostgreSQL PHP: Create New Tables'
-  slug: 'postgresql-php/create-tables'
+  slug: postgresql-php/create-tables
 ---
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL with PHP PDO works the same way on any standard Postgres deployment, so the patterns shown here apply wherever you run your database. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to set up a simple project structure and connect to the PostgreSQL database using PHP PDO API.
 

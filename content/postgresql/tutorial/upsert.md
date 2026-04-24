@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
-page_title: 'PostgreSQL UPSERT Statement'
-page_description: 'This tutorial shows you how to use the PostgreSQL UPSERT to either update an existing row or insert a new row if it does not exist.'
+title: PostgreSQL UPSERT using INSERT ON CONFLICT Statement
+page_title: PostgreSQL UPSERT Statement
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL UPSERT to either update an
+  existing row or insert a new row if it does not exist.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/'
 ogImage: ''
 updatedOn: '2024-03-27T06:05:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How To Delete Duplicate Rows in PostgreSQL'
-  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
+  title: How To Delete Duplicate Rows in PostgreSQL
+  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
 nextLink:
-  title: 'PostgreSQL MERGE Statement'
-  slug: 'postgresql-tutorial/postgresql-merge'
+  title: PostgreSQL MERGE Statement
+  slug: postgresql-tutorial/postgresql-merge
 ---
+<Admonition type="info" id="CTA">
+UPSERT with INSERT ON CONFLICT works the same way on any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for that, with instant provisioning, branching, and autoscaling.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL upsert feature to insert a new row into a table if the row does not exist, or update an existing row if it already exists.
 

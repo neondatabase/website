@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Functions'
-page_title: 'PostgreSQL Functions'
-page_description: 'Learn PostgreSQL functions including aggregate functions, string functions, date functions, math functions, window functions, and JSON functions for powerful data manipulation and analysis.'
+title: PostgreSQL Functions
+page_title: PostgreSQL Functions
+page_description: >-
+  Learn PostgreSQL functions including aggregate functions, string functions,
+  date functions, math functions, window functions, and JSON functions for
+  powerful data manipulation and analysis.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png'
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png
 updatedOn: '2025-09-06T10:00:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Advanced'
-  slug: 'postgresql-advanced'
+  title: PostgreSQL Advanced
+  slug: postgresql-advanced
 nextLink:
-  title: 'PostgreSQL Aggregate Functions'
-  slug: 'postgresql-aggregate-functions'
+  title: PostgreSQL Aggregate Functions
+  slug: postgresql-aggregate-functions
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service, so everything you learn here carries over. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 The **PostgreSQL Functions** section provides comprehensive coverage of PostgreSQL's powerful built-in functions for data manipulation, analysis, and transformation. These functions are essential tools for working with data in PostgreSQL, enabling you to perform complex calculations, format data, and extract meaningful insights from your databases.
 

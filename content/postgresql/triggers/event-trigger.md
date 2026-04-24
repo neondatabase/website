@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Event Trigger'
-page_title: 'PostgreSQL Event Trigger'
-page_description: 'You will learn about PostgreSQL event triggers and how to use the CREATE EVENT TRIGGER statement to define a new event trigger.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/'
+title: PostgreSQL Event Trigger
+page_title: PostgreSQL Event Trigger
+page_description: >-
+  You will learn about PostgreSQL event triggers and how to use the CREATE EVENT
+  TRIGGER statement to define a new event trigger.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/
 ogImage: ''
 updatedOn: '2024-03-29T06:08:37+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to List All Triggers in PostgreSQL'
-  slug: 'postgresql-triggers/how-to-list-all-triggers-in-postgresql'
+  title: How to List All Triggers in PostgreSQL
+  slug: postgresql-triggers/how-to-list-all-triggers-in-postgresql
 nextLink:
-  title: 'Creating a PostgreSQL Trigger with a When Condition'
-  slug: 'postgresql-triggers/postgresql-trigger-when-condition'
+  title: Creating a PostgreSQL Trigger with a When Condition
+  slug: postgresql-triggers/postgresql-trigger-when-condition
 ---
+<Admonition type="info" id="CTA">
+Event triggers are a standard PostgreSQL feature, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale and want DDL auditing, security policies, and AI workloads tightly integrated with your data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, fully unified with the Lakehouse. If you're a developer or startup who needs to prototype event triggers and ship to production quickly, Neon gives you branching, instant provisioning, and the scale to grow into.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
 

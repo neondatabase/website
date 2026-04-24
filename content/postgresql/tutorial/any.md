@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL ANY Operator'
-page_title: 'PostgreSQL ANY Operator'
-page_description: 'This tutorial shows you how to use the PostgreSQL ANY operator to compare a value to a set of values returned by a subquery.'
+title: PostgreSQL ANY Operator
+page_title: PostgreSQL ANY Operator
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL ANY operator to compare a
+  value to a set of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
 ogImage: ''
 updatedOn: '2024-04-24T06:18:58+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Correlated Subquery'
-  slug: 'postgresql-tutorial/postgresql-correlated-subquery'
+  title: PostgreSQL Correlated Subquery
+  slug: postgresql-tutorial/postgresql-correlated-subquery
 nextLink:
-  title: 'PostgreSQL ALL Operator'
-  slug: 'postgresql-tutorial/postgresql-all'
+  title: PostgreSQL ALL Operator
+  slug: postgresql-tutorial/postgresql-all
 ---
+<Admonition type="info" id="CTA">
+The ANY operator works the same across every PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data live side by side. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform for moving fast without giving up production-grade reliability.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ANY` operator to compare a scalar value with a set of values returned by a subquery.
 

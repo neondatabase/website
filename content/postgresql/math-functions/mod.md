@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL MOD() Function'
-page_title: 'PostgreSQL MOD() Function'
-page_description: 'The PostgreSQL MOD() function performs the modulo operation, returning the remainder after dividing the first argument by the second one.'
+title: PostgreSQL MOD() Function
+page_title: PostgreSQL MOD() Function
+page_description: >-
+  The PostgreSQL MOD() function performs the modulo operation, returning the
+  remainder after dividing the first argument by the second one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/'
 ogImage: ''
 updatedOn: '2024-02-18T07:38:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LOG() Function'
-  slug: 'postgresql-math-functions/postgresql-log'
+  title: PostgreSQL LOG() Function
+  slug: postgresql-math-functions/postgresql-log
 nextLink:
-  title: 'PostgreSQL MIN_SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-min_scale'
+  title: PostgreSQL MIN_SCALE() Function
+  slug: postgresql-math-functions/postgresql-min_scale
 ---
+<Admonition type="info" id="CTA">
+The MOD() function works the same way across every PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and tight integration into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your pace.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function performs the modulo operation, returning the remainder after dividing the first argument by the second one.
 

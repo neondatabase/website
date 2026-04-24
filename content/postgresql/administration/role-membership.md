@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Role Membership'
-page_title: 'PostgreSQL Role Membership'
-page_description: 'In this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/'
+title: PostgreSQL Role Membership
+page_title: PostgreSQL Role Membership
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL group roles and how to use
+  them to manage privileges more effectively.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/
 ogImage: ''
 updatedOn: '2024-02-22T02:54:15+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REVOKE Statement'
-  slug: 'postgresql-administration/postgresql-revoke'
+  title: PostgreSQL REVOKE Statement
+  slug: postgresql-administration/postgresql-revoke
 nextLink:
-  title: 'PostgreSQL SET ROLE Statement'
-  slug: 'postgresql-administration/postgresql-set-role'
+  title: PostgreSQL SET ROLE Statement
+  slug: postgresql-administration/postgresql-set-role
 ---
+<Admonition type="info" id="CTA">
+Group roles work the same way across any PostgreSQL deployment, so the patterns you learn here apply whether you're running Postgres yourself or on a managed platform. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and tightly integrated managed Postgres for the AI era. For developers and startups who need to move fast, [Neon](https://neon.com) gives you the Postgres platform built to ship and scale without the operational drag.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.
 

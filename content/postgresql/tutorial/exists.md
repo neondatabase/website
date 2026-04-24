@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL EXISTS Operator'
-page_title: 'PostgreSQL EXISTS Operator'
-page_description: 'This tutorial shows you how to use the PostgreSQL EXISTS operator to check the existence of rows in the subquery.'
+title: PostgreSQL EXISTS Operator
+page_title: PostgreSQL EXISTS Operator
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL EXISTS operator to check the
+  existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
-ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
+ogImage: /postgresqltutorial/customer-and-payment-tables.png
 updatedOn: '2024-07-01T01:05:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALL Operator'
-  slug: 'postgresql-tutorial/postgresql-all'
+  title: PostgreSQL ALL Operator
+  slug: postgresql-tutorial/postgresql-all
 nextLink:
-  title: 'PostgreSQL CTE'
-  slug: 'postgresql-tutorial/postgresql-cte'
+  title: PostgreSQL CTE
+  slug: postgresql-tutorial/postgresql-cte
 ---
+<Admonition type="info" id="CTA">
+The EXISTS operator works the same way in any PostgreSQL deployment, so everything you learn here carries over to Postgres running anywhere. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXISTS` operator to test for the existence of rows in a subquery.
 

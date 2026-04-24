@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Timestamp Data Types'
-page_title: 'PostgreSQL Timestamp Data Types'
-page_description: 'This tutorial explains the PostgreSQL TIMESTAMP data types including TIMESTAMP and TIMESTAMPTZ for storing timestamp data.'
+title: PostgreSQL Timestamp Data Types
+page_title: PostgreSQL Timestamp Data Types
+page_description: >-
+  This tutorial explains the PostgreSQL TIMESTAMP data types including TIMESTAMP
+  and TIMESTAMPTZ for storing timestamp data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/'
-ogImage: '/postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg'
+ogImage: /postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg
 updatedOn: '2024-02-01T02:32:23+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DATE Data Type'
-  slug: 'postgresql-tutorial/postgresql-date'
+  title: PostgreSQL DATE Data Type
+  slug: postgresql-tutorial/postgresql-date
 nextLink:
-  title: 'PostgreSQL Interval Data Type'
-  slug: 'postgresql-tutorial/postgresql-interval'
+  title: PostgreSQL Interval Data Type
+  slug: postgresql-tutorial/postgresql-interval
 ---
+<Admonition type="info" id="CTA">
+Working with timestamp and timestamptz is core PostgreSQL behavior, so everything here applies whether you run Postgres on your laptop, in your own data center, or on any managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated into the Lakehouse. If you're a developer or startup who needs to ship features and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL timestamp data types including `timestamp` and `timestamptz`. You will also learn how to use some handy functions to handle timestamp data effectively.
 

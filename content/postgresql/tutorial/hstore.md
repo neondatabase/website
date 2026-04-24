@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL hstore'
-page_title: 'PostgreSQL hstore Tutorial'
-page_description: 'We introduce you to PostgreSQL hstore data type. You will learn know how to perform practical and useful operations on PostgreSQL hstore columns.'
+title: PostgreSQL hstore
+page_title: PostgreSQL hstore Tutorial
+page_description: >-
+  We introduce you to PostgreSQL hstore data type. You will learn know how to
+  perform practical and useful operations on PostgreSQL hstore columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore/'
-ogImage: '/postgresqltutorial/postgresql-hstore-query.jpg'
+ogImage: /postgresqltutorial/postgresql-hstore-query.jpg
 updatedOn: '2024-02-01T12:53:20+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON'
-  slug: 'postgresql-tutorial/postgresql-json'
+  title: PostgreSQL JSON
+  slug: postgresql-tutorial/postgresql-json
 nextLink:
-  title: 'PostgreSQL Array'
-  slug: 'postgresql-tutorial/postgresql-array'
+  title: PostgreSQL Array
+  slug: postgresql-tutorial/postgresql-array
 ---
+<Admonition type="info" id="CTA">
+Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to work with **PostgreSQL hstore** data type.
 

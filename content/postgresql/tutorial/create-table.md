@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE TABLE'
-page_title: 'PostgreSQL CREATE TABLE Statement'
-page_description: 'This tutorial shows you how to use the PostgreSQL CREATE TABLE statement to create a new table in the database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/'
+title: PostgreSQL CREATE TABLE
+page_title: PostgreSQL CREATE TABLE Statement
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CREATE TABLE statement to
+  create a new table in the database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table/
 ogImage: ''
 updatedOn: '2024-02-16T13:40:04+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Data Types'
-  slug: 'postgresql-tutorial/postgresql-data-types'
+  title: PostgreSQL Data Types
+  slug: postgresql-tutorial/postgresql-data-types
 nextLink:
-  title: 'PostgreSQL SELECT INTO'
-  slug: 'postgresql-tutorial/postgresql-select-into'
+  title: PostgreSQL SELECT INTO
+  slug: postgresql-tutorial/postgresql-select-into
 ---
+<Admonition type="info" id="CTA">
+The CREATE TABLE syntax covered here works on any PostgreSQL deployment, so you can apply these patterns whether you're running Postgres locally, on a self-hosted server, or in the cloud. If you're building enterprise workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for your pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CREATE TABLE** statement to create a new table.
 

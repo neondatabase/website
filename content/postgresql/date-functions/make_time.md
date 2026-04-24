@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL MAKE_TIME() Function'
-page_title: 'PostgreSQL MAKE_TIME() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL MAKE_TIME() function to create a time value from hour, minute, and second values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/'
+title: PostgreSQL MAKE_TIME() Function
+page_title: PostgreSQL MAKE_TIME() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL MAKE_TIME()
+  function to create a time value from hour, minute, and second values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/
 ogImage: ''
 updatedOn: '2024-03-25T02:56:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MAKE_DATE() Function'
-  slug: 'postgresql-date-functions/postgresql-make_date'
+  title: PostgreSQL MAKE_DATE() Function
+  slug: postgresql-date-functions/postgresql-make_date
 nextLink:
-  title: 'PostgreSQL AGE() Function'
-  slug: 'postgresql-date-functions/postgresql-age'
+  title: PostgreSQL AGE() Function
+  slug: postgresql-date-functions/postgresql-age
 ---
+<Admonition type="info" id="CTA">
+The MAKE_TIME() function works the same way across any PostgreSQL deployment, so you can apply what you learn here wherever your database runs. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres in the cloud, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `MAKE_TIME()` function to create a time value from hour, minute, and second values.
 

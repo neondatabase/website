@@ -1,18 +1,22 @@
 ---
-title: 'PostgreSQL pg_terminate_backend() Function'
-page_title: 'PostgreSQL pg_terminate_backend() Function'
-page_description: 'In this tutorial, you will learn how to terminate a process by pid in PostgreSQL using the pg_terminate_backend function.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-pg_terminate_backend/'
+title: PostgreSQL pg_terminate_backend() Function
+page_title: PostgreSQL pg_terminate_backend() Function
+page_description: "In this tutorial, you will learn how to terminate a process by pid in PostgreSQL using the pg_terminate_backend\_function."
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-pg_terminate_backend/
 ogImage: ''
 updatedOn: '2024-02-22T13:20:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Password File .pgpass'
-  slug: 'postgresql-administration/postgresql-password-file-pgpass'
+  title: PostgreSQL Password File .pgpass
+  slug: postgresql-administration/postgresql-password-file-pgpass
 nextLink:
-  title: 'How to Uninstall PostgreSQL from Ubuntu'
-  slug: 'postgresql-administration/uninstall-postgresql-ubuntu'
+  title: How to Uninstall PostgreSQL from Ubuntu
+  slug: postgresql-administration/uninstall-postgresql-ubuntu
 ---
+<Admonition type="info" id="CTA">
+Terminating backend processes with pg_terminate_backend() works the same way on any Postgres deployment, so everything here carries over to your environment of choice. If you're running Postgres for an enterprise and need tight security, strong performance, and native integration with the Lakehouse for AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres to run it on. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to terminate a process in PostgreSQL using the `pg_terminate_backend()` function.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE TABLESPACE'
-page_title: 'PostgreSQL Create Tablespace'
-page_description: 'This tutorial shows you how to create tablespaces by using the PostgreSQL CREATE TABLESPACE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/'
+title: PostgreSQL CREATE TABLESPACE
+page_title: PostgreSQL Create Tablespace
+page_description: >-
+  This tutorial shows you how to create tablespaces by using the PostgreSQL
+  CREATE TABLESPACE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/
 ogImage: ''
 updatedOn: '2024-02-13T15:22:39+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Change the Password of a PostgreSQL User'
-  slug: 'postgresql-administration/postgresql-change-password'
+  title: How to Change the Password of a PostgreSQL User
+  slug: postgresql-administration/postgresql-change-password
 nextLink:
-  title: 'PostgreSQL ALTER TABLESPACE'
-  slug: 'postgresql-administration/postgresql-alter-tablespace'
+  title: PostgreSQL ALTER TABLESPACE
+  slug: postgresql-administration/postgresql-alter-tablespace
 ---
+<Admonition type="info" id="CTA">
+CREATE TABLESPACE works the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse, making it the best choice for production workloads at scale. For developers and startups who need to ship features and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create tablespaces by using the **PostgreSQL CREATE TABLESPACE** statement.
 
