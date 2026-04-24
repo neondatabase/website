@@ -3,8 +3,12 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link/link';
-import { BLOG_CATEGORY_BASE_PATH, EXTRA_CATEGORIES } from 'constants/blog';
-import LINKS from 'constants/links';
+import {
+  EXTRA_CATEGORIES,
+  buildBlogCategoryPath,
+  buildBlogPostPath,
+  DEFAULT_BLOG_ROUTE_CONFIG,
+} from 'constants/blog';
 import { cn } from 'utils/cn';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
@@ -26,6 +30,7 @@ const BlogPostCard = ({
   imageWidth = null,
   imageHeight = null,
   isPriority = false,
+  routeConfig = DEFAULT_BLOG_ROUTE_CONFIG,
 }) => {
   const { largeCover } = pageBlogPost || {};
 
@@ -37,13 +42,13 @@ const BlogPostCard = ({
 
   const link = (() => {
     if (extraCategory) return `${extraCategory.basePath}${slug}`;
-    return `${LINKS.blog}/${slug}`;
+    return buildBlogPostPath(routeConfig, slug);
   })();
 
   const cat = (() => {
     if (extraCategory) {
       return {
-        slug: `${BLOG_CATEGORY_BASE_PATH}${extraCategory.slug}`,
+        slug: buildBlogCategoryPath(routeConfig, extraCategory.slug),
         name: extraCategory.name,
       };
     }
@@ -51,7 +56,7 @@ const BlogPostCard = ({
     const wpCategory = category || categories?.nodes[0];
 
     return {
-      slug: `${BLOG_CATEGORY_BASE_PATH}${wpCategory?.slug}`,
+      slug: buildBlogCategoryPath(routeConfig, wpCategory?.slug),
       name: wpCategory?.name,
     };
   })();
@@ -200,6 +205,12 @@ BlogPostCard.propTypes = {
   imageWidth: PropTypes.number.isRequired,
   imageHeight: PropTypes.number.isRequired,
   isPriority: PropTypes.bool,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default BlogPostCard;

@@ -2,10 +2,11 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import triangleIcon from 'icons/triangle.svg';
 import { cn } from 'utils/cn';
 
-const MoreArticles = ({ className = null, posts }) => (
+const MoreArticles = ({ className = null, posts, routeConfig = DEFAULT_BLOG_ROUTE_CONFIG }) => (
   <section className={cn('more-articles flex flex-col', className)}>
     <h2 className="flex items-center gap-x-2 font-mono text-xs leading-none -tracking-extra-tight text-gray-new-80 uppercase">
       <Image className="" src={triangleIcon} alt="" width={12} height={14} aria-hidden="true" />
@@ -15,7 +16,14 @@ const MoreArticles = ({ className = null, posts }) => (
 
     <div className="mt-8 flex flex-col md:mt-6">
       {posts.map((post, index) => (
-        <BlogPostCard key={index} {...post} imageWidth={260} imageHeight={146} isSmart />
+        <BlogPostCard
+          key={index}
+          {...post}
+          imageWidth={260}
+          imageHeight={146}
+          routeConfig={routeConfig}
+          isSmart
+        />
       ))}
     </div>
   </section>
@@ -51,6 +59,12 @@ MoreArticles.propTypes = {
       }),
     })
   ),
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default MoreArticles;

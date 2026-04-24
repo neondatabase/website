@@ -5,7 +5,7 @@ import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
 import BlogSearch from 'components/shared/blog-search';
 import ScrollLoader from 'components/shared/scroll-loader';
-import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH, DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
 import { getAllCategories, getCategoryBySlug, getPostsByCategorySlug } from 'utils/api-blog';
 import getMetadata from 'utils/get-metadata';
@@ -40,6 +40,7 @@ const BlogCategoryPage = async ({ params }) => {
         <BlogSearch
           searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:static! md:right-auto! md:top-auto! md:mt-4"
           posts={validPosts}
+          routeConfig={DEFAULT_BLOG_ROUTE_CONFIG}
         >
           <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
             {validPosts.slice(0, 10).map((post, index) => (
@@ -50,12 +51,18 @@ const BlogCategoryPage = async ({ params }) => {
                 category={category}
                 isFeatured={post.isFeatured}
                 isPriority={index < 5}
+                routeConfig={DEFAULT_BLOG_ROUTE_CONFIG}
               />
             ))}
             {validPosts.length > 10 && (
               <ScrollLoader itemsCount={10}>
                 {validPosts.slice(10).map((post) => (
-                  <BlogGridItem key={post.slug} post={post} category={category} />
+                  <BlogGridItem
+                    key={post.slug}
+                    post={post}
+                    category={category}
+                    routeConfig={DEFAULT_BLOG_ROUTE_CONFIG}
+                  />
                 ))}
               </ScrollLoader>
             )}

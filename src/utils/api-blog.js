@@ -1,36 +1,131 @@
-import fs from 'fs';
-import path from 'path';
-
-import matter from 'gray-matter';
-import { cache } from 'react';
-
+import { execFileSync } from 'child_process';
 
 import { BLOG_POSTS_FOR_PREVIEW, EXTRA_CATEGORIES } from 'constants/blog';
 import { getAllChangelogs } from 'utils/api-docs';
 import { getAllGuides } from 'utils/api-guides';
+import {
+  BlogContentBranchNotFoundError,
+  BlogContentConfigError,
+  hasLocalBlogContent,
+  readBlogSnapshotFromCdn,
+  readBlogSnapshotFromGitHubBranch,
+  readLocalBlogSnapshot,
+} from 'utils/blog-content-source.mjs';
 
-const BLOG_DIR = path.join(process.cwd(), 'content/blog');
-const POSTS_DIR = path.join(BLOG_DIR, 'posts');
+const DEFAULT_CDN_BASE = 'https://blog.neonapi.io/blog';
+const REMOTE_BRANCH_CACHE_TTL_MS = 30 * 1000;
+const REMOTE_CDN_CACHE_TTL_MS = 60 * 1000;
+const remoteSnapshotCache = new Map();
 
-const getAuthorsData = () => {
+const getCurrentWebsiteBranch = async () => {
+  const branchFromEnv =
+    process.env.VERCEL_GIT_COMMIT_REF || process.env.GIT_BRANCH || process.env.GITHUB_HEAD_REF;
+
+  if (branchFromEnv) {
+    return branchFromEnv;
+  }
+
   try {
-    return JSON.parse(fs.readFileSync(path.join(BLOG_DIR, 'authors/data.json'), 'utf-8'));
+    return execFileSync('git', ['branch', '--show-current'], {
+      cwd: process.cwd(),
+      encoding: 'utf8',
+    }).trim();
   } catch {
-    return {};
+    return 'main';
   }
 };
 
-const getCategoriesData = () => {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(BLOG_DIR, 'categories/data.json'), 'utf-8'));
-  } catch {
-    return [];
+const getCdnBaseUrl = () => process.env.BLOG_CDN_URL || DEFAULT_CDN_BASE;
+
+const isLocalDevelopment = () => process.env.NODE_ENV === 'development';
+
+const isProductionWebsite = () => process.env.VERCEL_ENV === 'production';
+
+const isPreviewProductionFilterEnabled = () => process.env.VERCEL_ENV === 'production';
+
+const getRemoteSnapshot = async (cacheKey, ttlMs, loader) => {
+  const now = Date.now();
+  const cachedValue = remoteSnapshotCache.get(cacheKey);
+
+  if (cachedValue && cachedValue.expiresAt > now) {
+    return cachedValue.promise;
   }
+
+  const promise = loader().catch((error) => {
+    remoteSnapshotCache.delete(cacheKey);
+    throw error;
+  });
+
+  remoteSnapshotCache.set(cacheKey, {
+    expiresAt: now + ttlMs,
+    promise,
+  });
+
+  return promise;
+};
+
+const getCdnSnapshot = async () =>
+  getRemoteSnapshot(`cdn:${getCdnBaseUrl()}`, REMOTE_CDN_CACHE_TTL_MS, () =>
+    readBlogSnapshotFromCdn(getCdnBaseUrl())
+  );
+
+const getBranchSnapshot = async (branch) => {
+  const owner = process.env.BLOG_REPO_OWNER;
+  const repo = process.env.BLOG_REPO_NAME;
+  const token = process.env.BLOG_REPO_TOKEN;
+
+  return getRemoteSnapshot(`branch:${owner}:${repo}:${branch}`, REMOTE_BRANCH_CACHE_TTL_MS, () =>
+    readBlogSnapshotFromGitHubBranch({
+      owner,
+      repo,
+      branch,
+      token,
+    })
+  );
+};
+
+const getResolvedBlogSnapshot = async ({ previewBranch = null, strictBranch = false } = {}) => {
+  if (previewBranch) {
+    return getBranchSnapshot(previewBranch);
+  }
+
+  if (isLocalDevelopment() && (await hasLocalBlogContent())) {
+    return readLocalBlogSnapshot();
+  }
+
+  const websiteBranch = await getCurrentWebsiteBranch();
+
+  if (isProductionWebsite() || websiteBranch === 'main') {
+    return getCdnSnapshot();
+  }
+
+  if (websiteBranch) {
+    try {
+      return await getBranchSnapshot(websiteBranch);
+    } catch (error) {
+      if (
+        error instanceof BlogContentBranchNotFoundError ||
+        error instanceof BlogContentConfigError
+      ) {
+        if (strictBranch) {
+          throw error;
+        }
+
+        return getCdnSnapshot();
+      }
+
+      throw error;
+    }
+  }
+
+  return getCdnSnapshot();
 };
 
 const mapAuthor = (slug, authorsData) => {
   const author = authorsData[slug];
+
   if (!author) return null;
+
   return {
     author: {
       title: author.name,
@@ -46,109 +141,127 @@ const mapAuthor = (slug, authorsData) => {
   };
 };
 
-const mapPostToListShape = (slug, fm, authorsData, categoriesData) => {
-  const categorySlugs = fm.categories || (fm.category ? [fm.category] : []);
-  const categoryNodes = categorySlugs.map((catSlug) => {
-    const cat = categoriesData.find((c) => c.slug === catSlug);
-    return { slug: catSlug, name: cat?.name || catSlug };
+const mapPostToListShape = (postEntry, authorsData, categoriesData) => {
+  const { slug, data: frontmatter } = postEntry;
+  const categorySlugs =
+    frontmatter.categories || (frontmatter.category ? [frontmatter.category] : []);
+  const categoryNodes = categorySlugs.map((categorySlug) => {
+    const category = categoriesData.find((item) => item.slug === categorySlug);
+
+    return { slug: categorySlug, name: category?.name || categorySlug };
   });
 
-  const authors = (fm.authors || [])
+  const authors = (frontmatter.authors || [])
     .map((authorSlug) => mapAuthor(authorSlug, authorsData))
     .filter(Boolean);
 
   return {
     slug,
-    date: fm.date,
-    modifiedGmt: fm.updatedOn || fm.date,
-    title: fm.title,
-    excerpt: fm.excerpt || fm.description || '',
-    isFeatured: fm.isFeatured || false,
+    date: frontmatter.date,
+    modifiedGmt: frontmatter.updatedOn || frontmatter.date,
+    title: frontmatter.title,
+    excerpt: frontmatter.excerpt || frontmatter.description || '',
+    isFeatured: frontmatter.isFeatured || false,
     categories: { nodes: categoryNodes },
     pageBlogPost: {
-      isFeatured: fm.isFeatured || false,
-      description: fm.description || '',
-      largeCover: fm.cover?.image
-        ? { mediaItemUrl: fm.cover.image, altText: fm.cover.alt || '' }
+      isFeatured: frontmatter.isFeatured || false,
+      description: frontmatter.description || '',
+      largeCover: frontmatter.cover?.image
+        ? { mediaItemUrl: frontmatter.cover.image, altText: frontmatter.cover.alt || '' }
         : null,
       authors,
     },
   };
 };
 
-const getAllPostSlugs = () => {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith('.md'))
-    .map((f) => f.replace(/\.md$/, ''));
-};
+const getMappedBlogPosts = async ({
+  previewBranch = null,
+  strictBranch = false,
+  fullList = false,
+} = {}) => {
+  const snapshot = await getResolvedBlogSnapshot({ previewBranch, strictBranch });
+  const isProduction = isPreviewProductionFilterEnabled();
 
-export const getAllBlogPosts = cache(() => {
-  const authorsData = getAuthorsData();
-  const categoriesData = getCategoriesData();
-  const isProduction = process.env.VERCEL_ENV === 'production';
-
-  const posts = getAllPostSlugs()
-    .map((slug) => {
-      try {
-        const src = fs.readFileSync(path.join(POSTS_DIR, `${slug}.md`), 'utf-8');
-        const { data: fm } = matter(src);
-        if (fm.draft && isProduction) return null;
-        return mapPostToListShape(slug, fm, authorsData, categoriesData);
-      } catch {
+  const posts = snapshot.posts
+    .map((postEntry) => {
+      if (postEntry.data?.draft && isProduction) {
         return null;
       }
+
+      return mapPostToListShape(postEntry, snapshot.authorsData, snapshot.categoriesData);
     })
     .filter(Boolean);
 
-  posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  posts.sort((left, right) => new Date(right.date) - new Date(left.date));
 
-  return isProduction ? posts : posts.slice(0, BLOG_POSTS_FOR_PREVIEW);
-});
+  return fullList || isProduction ? posts : posts.slice(0, BLOG_POSTS_FOR_PREVIEW);
+};
 
-export const getAllBlogCategories = cache(() => {
-  const posts = getAllBlogPosts();
-  const categoriesData = getCategoriesData();
+const getMappedPreviewBlogPosts = async (options = {}) => {
+  const posts = await getMappedBlogPosts({
+    ...options,
+    fullList: true,
+  });
 
+  return posts;
+};
+
+export const getBlogSnapshot = async (options = {}) => getResolvedBlogSnapshot(options);
+
+export const getAllBlogPosts = async (options = {}) => getMappedBlogPosts(options);
+
+export const getAllBlogCategories = async (options = {}) => {
+  const snapshot = await getResolvedBlogSnapshot(options);
+  const posts = await getMappedPreviewBlogPosts(options);
   const counts = {};
+
   posts.forEach((post) => {
     post.categories.nodes.forEach(({ slug }) => {
       counts[slug] = (counts[slug] || 0) + 1;
     });
   });
 
-  return categoriesData
-    .filter((cat) => counts[cat.slug] > 0)
-    .map((cat) => ({
-      name: cat.name,
-      slug: cat.slug,
-      posts: { nodes: new Array(counts[cat.slug]).fill({}) },
+  return snapshot.categoriesData
+    .filter((category) => category.slug !== 'uncategorized' && counts[category.slug] > 0)
+    .map((category) => ({
+      name: category.name,
+      slug: category.slug,
+      posts: { nodes: new Array(counts[category.slug]).fill({}) },
     }));
-});
+};
 
-export const getAllCategories = async () => {
-  const blogCategories = getAllBlogCategories();
+export const getAllCategories = async (options = {}) => {
+  const blogCategories = await getAllBlogCategories(options);
+
   return [...blogCategories, ...EXTRA_CATEGORIES];
 };
 
-export const getCategoryBySlug = async (slug) => {
-  const extraCategory = EXTRA_CATEGORIES.find((cat) => cat.slug === slug);
+export const getCategoryBySlug = async (slug, options = {}) => {
+  const extraCategory = EXTRA_CATEGORIES.find((category) => category.slug === slug);
+
   if (extraCategory) return extraCategory;
-  return getAllBlogCategories().find((cat) => cat.slug === slug);
+
+  const categories = await getAllBlogCategories(options);
+
+  return categories.find((category) => category.slug === slug);
 };
 
-export const getPostsByCategorySlug = async (slug) => {
-  if (slug === 'guides') return getAllGuides();
-  if (slug === 'changelog') return getAllChangelogs();
-  return getAllBlogPosts().filter((post) => post.categories.nodes.some((cat) => cat.slug === slug));
+export const getPostsByCategorySlug = async (slug, options = {}) => {
+  if (!options.previewBranch) {
+    if (slug === 'guides') return getAllGuides();
+    if (slug === 'changelog') return getAllChangelogs();
+  }
+
+  const posts = await getMappedPreviewBlogPosts(options);
+
+  return posts.filter((post) => post.categories.nodes.some((category) => category.slug === slug));
 };
 
-export const getAllPosts = async () => {
+export const getAllPosts = async (options = {}) => {
   const [blogPosts, guides, changelogs] = await Promise.all([
-    Promise.resolve(getAllBlogPosts()),
-    getAllGuides(),
-    getAllChangelogs(),
+    getAllBlogPosts(options),
+    options.previewBranch ? Promise.resolve([]) : getAllGuides(),
+    options.previewBranch ? Promise.resolve([]) : getAllChangelogs(),
   ]);
 
   const [featuredPosts, restBlogPosts] = blogPosts.reduce(
@@ -158,45 +271,50 @@ export const getAllPosts = async () => {
       } else {
         rest.push(post);
       }
+
       return [featured, rest];
     },
     [[], []]
   );
 
   const restPosts = [...restBlogPosts, ...guides, ...changelogs];
-  restPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  restPosts.sort((left, right) => new Date(right.date) - new Date(left.date));
 
   return [...featuredPosts, ...restPosts];
 };
 
-export const getBlogPostBySlug = cache((slug) => {
-  try {
-    const src = fs.readFileSync(path.join(POSTS_DIR, `${slug}.md`), 'utf-8');
-    const { data: fm, content } = matter(src);
-    const authorsData = getAuthorsData();
-    const categoriesData = getCategoriesData();
+export const getBlogPostBySlug = async (slug, options = {}) => {
+  const snapshot = await getResolvedBlogSnapshot(options);
+  const postEntry = snapshot.posts.find((entry) => entry.slug === slug);
 
-    const post = {
-      ...mapPostToListShape(slug, fm, authorsData, categoriesData),
-      content,
-      dateGmt: fm.date,
-      seo: {
-        title: fm.seo?.title || fm.title,
-        metaDesc: fm.seo?.description || fm.description,
-        metaKeywords: (fm.seo?.keywords || []).join(', '),
-        metaRobotsNoindex: fm.seo?.noindex || false,
-        opengraphTitle: fm.seo?.ogTitle || fm.seo?.title || fm.title,
-        opengraphDescription: fm.seo?.ogDescription || fm.seo?.description || fm.description,
-        twitterImage: fm.cover?.image ? { mediaItemUrl: fm.cover.image } : null,
-      },
-    };
-
-    const relatedPosts = getAllBlogPosts()
-      .filter((p) => p.slug !== slug)
-      .slice(0, 3);
-
-    return { post, relatedPosts };
-  } catch {
+  if (!postEntry || (postEntry.data?.draft && isPreviewProductionFilterEnabled())) {
     return { post: null, relatedPosts: [] };
   }
-});
+
+  const post = {
+    ...mapPostToListShape(postEntry, snapshot.authorsData, snapshot.categoriesData),
+    content: postEntry.content,
+    dateGmt: postEntry.data.date,
+    seo: {
+      title: postEntry.data.seo?.title || postEntry.data.title,
+      metaDesc: postEntry.data.seo?.description || postEntry.data.description,
+      metaKeywords: (postEntry.data.seo?.keywords || []).join(', '),
+      metaRobotsNoindex: postEntry.data.seo?.noindex || false,
+      opengraphTitle:
+        postEntry.data.seo?.ogTitle || postEntry.data.seo?.title || postEntry.data.title,
+      opengraphDescription:
+        postEntry.data.seo?.ogDescription ||
+        postEntry.data.seo?.description ||
+        postEntry.data.description,
+      twitterImage: postEntry.data.cover?.image
+        ? { mediaItemUrl: postEntry.data.cover.image }
+        : null,
+    },
+  };
+
+  const relatedPosts = (await getMappedPreviewBlogPosts(options))
+    .filter((relatedPost) => relatedPost.slug !== slug)
+    .slice(0, 3);
+
+  return { post, relatedPosts };
+};

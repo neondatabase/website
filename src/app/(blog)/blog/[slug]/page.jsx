@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import PropTypes from 'prop-types';
 import remarkGfm from 'remark-gfm';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -9,19 +10,21 @@ import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import Admonition from 'components/shared/admonition';
+import AnchorHeading from 'components/shared/anchor-heading';
 import BlogQuote from 'components/shared/blog-quote';
 import Button from 'components/shared/button';
 import ChangelogForm from 'components/shared/changelog-form';
 import EmbedTweet from 'components/shared/embed-tweet';
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import LINKS from 'constants/links';
 import { getAllBlogPosts, getBlogPostBySlug } from 'utils/api-blog';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
 import getMetadata from 'utils/get-metadata';
 
-const BlogPage = async (props0) => {
-  const params = await props0.params;
-  const { post, relatedPosts } = getBlogPostBySlug(params?.slug);
+const BlogPage = async ({ params: paramsPromise }) => {
+  const params = await paramsPromise;
+  const { post, relatedPosts } = await getBlogPostBySlug(params?.slug);
 
   if (!post) {
     return notFound();
@@ -61,6 +64,7 @@ const BlogPage = async (props0) => {
             date={formattedDate}
             category={categories.nodes[0]}
             authors={pageBlogPost.authors}
+            routeConfig={DEFAULT_BLOG_ROUTE_CONFIG}
             {...pageBlogPost}
           />
           <ChangelogForm
@@ -72,7 +76,15 @@ const BlogPage = async (props0) => {
             html={
               <MDXRemote
                 source={content}
-                components={{ Admonition, BlogQuote, Button, EmbedTweet, YoutubeIframe }}
+                components={{
+                  h2: AnchorHeading('h2'),
+                  h3: AnchorHeading('h3'),
+                  Admonition,
+                  BlogQuote,
+                  Button,
+                  EmbedTweet,
+                  YoutubeIframe,
+                }}
                 options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               />
             }
@@ -87,6 +99,7 @@ const BlogPage = async (props0) => {
             <MoreArticles
               className="col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mx-0 lg:mt-12 md:mt-10"
               posts={relatedPosts}
+              routeConfig={DEFAULT_BLOG_ROUTE_CONFIG}
             />
           )}
         </article>
@@ -95,10 +108,14 @@ const BlogPage = async (props0) => {
   );
 };
 
+BlogPage.propTypes = {
+  params: PropTypes.object.isRequired,
+};
+
 export async function generateMetadata(props) {
   const params = await props.params;
   const { slug } = params;
-  const { post } = getBlogPostBySlug(slug);
+  const { post } = await getBlogPostBySlug(slug);
 
   if (!post) return notFound();
 
@@ -134,7 +151,8 @@ export async function generateMetadata(props) {
 }
 
 export async function generateStaticParams() {
-  return getAllBlogPosts().map((post) => ({
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }

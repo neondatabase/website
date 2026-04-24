@@ -6,7 +6,7 @@ import { getAllBlogPosts } from 'utils/api-blog';
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
 
 export async function GET() {
-  const allBlogPosts = getAllBlogPosts();
+  const allBlogPosts = await getAllBlogPosts({ fullList: true });
 
   const feed = new Rss({
     id: BLOG_BASE_PATH,

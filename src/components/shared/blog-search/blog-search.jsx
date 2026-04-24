@@ -4,12 +4,18 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useState, useMemo, useRef } from 'react';
 
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import debounce from 'utils/debounce';
 
 import SearchInput from './search-input';
 import SearchResults from './search-results';
 
-const BlogSearch = ({ children, posts, searchInputClassName }) => {
+const BlogSearch = ({
+  children,
+  posts,
+  searchInputClassName,
+  routeConfig = DEFAULT_BLOG_ROUTE_CONFIG,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -90,7 +96,9 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   return (
     <>
       <SearchInput className={searchInputClassName} value={query} onChange={handleSearchChange} />
-      <SearchResults posts={filteredPosts}>{children}</SearchResults>
+      <SearchResults posts={filteredPosts} routeConfig={routeConfig}>
+        {children}
+      </SearchResults>
     </>
   );
 };
@@ -106,6 +114,12 @@ BlogSearch.propTypes = {
     })
   ).isRequired,
   searchInputClassName: PropTypes.string,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default BlogSearch;
