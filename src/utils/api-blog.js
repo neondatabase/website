@@ -257,10 +257,12 @@ export const getAllPosts = async (options = {}) => {
 
   const [featuredPosts, restBlogPosts] = blogPosts.reduce(
     ([featured, rest], post) => {
-      if (post.isFeatured && featured.length < 2) {
+      const isFeaturedPost = post.pageBlogPost?.isFeatured || post.isFeatured;
+
+      if (isFeaturedPost && featured.length < 2) {
         featured.push({ ...post, isFeatured: true });
       } else {
-        rest.push(post);
+        rest.push({ ...post, isFeatured: false });
       }
 
       return [featured, rest];

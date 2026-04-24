@@ -9,7 +9,7 @@ import BlogPreviewBanner from 'components/pages/blog/blog-preview-banner';
 import BlogSearch from 'components/shared/blog-search';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_PREVIEW_BASE_PATH } from 'constants/blog';
-import { getAllBlogCategories, getAllBlogPosts, getBlogSnapshot } from 'utils/api-blog';
+import { getAllBlogCategories, getAllPosts, getBlogSnapshot } from 'utils/api-blog';
 import getMetadata from 'utils/get-metadata';
 
 const BlogPreviewIndexPage = async ({ searchParams }) => {
@@ -19,7 +19,7 @@ const BlogPreviewIndexPage = async ({ searchParams }) => {
   );
   const [categories, posts] = await Promise.all([
     getAllBlogCategories({ previewBranch: branch, strictBranch: true }),
-    getAllBlogPosts({ previewBranch: branch, strictBranch: true, fullList: true }),
+    getAllPosts({ previewBranch: branch, strictBranch: true }),
   ]);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 
