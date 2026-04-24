@@ -15,7 +15,7 @@
     "postbuild": "node src/scripts/copy-md-content.js && node src/scripts/generate-llms-index.js && node src/scripts/generate-llms-full.js && next-sitemap --config next-sitemap.config.js && next-sitemap --config next-sitemap-postgres.config.js",
     "start": "next start",
     "format": "prettier --write .",
-    "fix": "eslint --fix . && markdownlint --fix --ignore-path .gitignore .; prettier --write .",
+    "fix": "eslint --fix --quiet . && markdownlint --fix --ignore-path .gitignore .; prettier --write --log-level warn .",
     "lint": "npm run lint:js && npm run lint:md",
     "lint:js": "eslint .",
     "lint:md": "markdownlint --ignore-path .gitignore .",
