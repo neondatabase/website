@@ -13,8 +13,8 @@ import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
 
-import Tag from '../tag';
 import DropdownMenu from '../dropdown-menu';
+import Tag from '../tag';
 
 const Changelog = ({ posts }) => (
   <>

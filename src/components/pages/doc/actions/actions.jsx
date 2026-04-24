@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowBackToTopIcon from 'icons/arrow-back-to-top.inline.svg';
-import GitHubIcon from 'icons/github.inline.svg';
 import StarIcon from 'icons/docs/star.inline.svg';
+import GitHubIcon from 'icons/github.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -76,7 +76,7 @@ ActionItem.propTypes = {
 };
 
 const SetUpNeonButton = ({ onClick, tooltip }) => (
-  <ActionItem icon={StarIcon} text="Set up Neon with AI" onClick={onClick} tooltip={tooltip} />
+  <ActionItem icon={StarIcon} text="Set up Neon with AI" tooltip={tooltip} onClick={onClick} />
 );
 
 SetUpNeonButton.propTypes = {
@@ -134,7 +134,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   };
 
   const docsActions = (
-    <SetUpNeonButton onClick={handleOpenModal} tooltip="Copy neon init command" />
+    <SetUpNeonButton tooltip="Copy neon init command" onClick={handleOpenModal} />
   );
 
   const templateActions = (

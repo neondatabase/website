@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
-
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import Benefits from 'components/pages/landing/benefits';
@@ -42,7 +41,9 @@ const LandingHero = async ({ hubspotFormId, ...restProps }) => {
 
 const LandingFormCopy = async ({ hubspotFormId, ...restProps }) => {
   const formData = hubspotFormId ? await getHubspotFormData(hubspotFormId) : null;
-  return <Hero theme="form-copy" formData={formData} hubspotFormId={hubspotFormId} {...restProps} />;
+  return (
+    <Hero theme="form-copy" formData={formData} hubspotFormId={hubspotFormId} {...restProps} />
+  );
 };
 
 const LandingFeatures = ({ features = [], ...restProps }) => {
