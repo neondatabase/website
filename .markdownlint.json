@@ -12,5 +12,6 @@
   "heading-increment": false,
   "no-trailing-spaces": false,
   "table-column-style": false,
-  "commands-show-output": false
+  "commands-show-output": false,
+  "list-marker-space": false
 }

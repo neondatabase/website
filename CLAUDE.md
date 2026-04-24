@@ -61,9 +61,9 @@ npm run start            # Run production build
 ### Code Quality
 
 ```bash
-npm run lint             # Lint JS and Markdown
-npm run lint:fix         # Auto-fix linting issues
-npm run format           # Format with Prettier
+npm run fix              # Fix JS, markdown, and formatting (run before committing)
+npm run lint             # Check JS and Markdown without modifying files
+npm run format           # Run Prettier only (subset of fix)
 ```
 
 ### Testing
@@ -75,11 +75,13 @@ npm run check:broken-links -- https://neon.com  # Check for broken links
 
 ## Git Workflow
 
-Standard GitHub flow. Before every commit, run the formatter:
+Standard GitHub flow. Before every commit, run:
 
 ```bash
-npm run lint:fix && npm run format
+npm run fix
 ```
+
+This lints JS and markdown and formats all files in one pass. To check without modifying files, use `npm run lint`.
 
 Then commit and open a PR targeting `main`. No special push commands needed (`git push` is fine).
 
@@ -578,7 +580,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Documentation-heavy site with 1000+ markdown files — search before creating
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
-- Run `npm run lint:fix && npm run format` before every commit
+- Run `npm run fix` before every commit
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines
