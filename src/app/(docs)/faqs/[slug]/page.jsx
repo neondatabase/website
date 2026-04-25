@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import ProgrammaticCTA from 'components/pages/faqs/programmatic-cta';
 import VERCEL_URL from 'constants/base';
 import { FAQS_DIR_PATH } from 'constants/content';
 import { FAQS_BASE_PATH } from 'constants/faqs';
@@ -87,6 +88,7 @@ const FaqPost = async (props) => {
         currentSlug={slug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
+        aboveContent={<ProgrammaticCTA />}
       />
     </>
   );
