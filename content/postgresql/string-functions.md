@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL String Functions'
-page_title: 'PostgreSQL String Functions'
-page_description: 'This page provides you with the most commonly used PostgreSQL string functions that help you manipulate strings effectively.'
+title: PostgreSQL String Functions
+page_title: PostgreSQL String Functions
+page_description: >-
+  This page provides you with the most commonly used PostgreSQL string functions
+  that help you manipulate strings effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/string-functions.png'
 updatedOn: '2024-03-20T02:04:54+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PG_SLEEP() Function'
-  slug: 'postgresql-date-functions/postgresql-pg_sleep'
+  title: PostgreSQL PG_SLEEP() Function
+  slug: postgresql-date-functions/postgresql-pg_sleep
 nextLink:
-  title: 'PostgreSQL ASCII() Function'
-  slug: 'postgresql-string-functions/postgresql-ascii'
+  title: PostgreSQL ASCII() Function
+  slug: postgresql-string-functions/postgresql-ascii
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL string functions work the same across any Postgres deployment, so you can use these techniques anywhere you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 This page provides the most commonly used PostgreSQL string functions that allow you to manipulate string data effectively.
 

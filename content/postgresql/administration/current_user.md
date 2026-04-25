@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CURRENT_USER'
-page_title: 'PostgreSQL CURRENT_USER Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CURRENT_USER function to return the name of the currently logged-in database user.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/'
+title: PostgreSQL CURRENT_USER
+page_title: PostgreSQL CURRENT_USER Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CURRENT_USER
+  function to return the name of the currently logged-in database user.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/
 ogImage: ''
 updatedOn: '2024-02-22T06:48:14+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SET ROLE Statement'
-  slug: 'postgresql-administration/postgresql-set-role'
+  title: PostgreSQL SET ROLE Statement
+  slug: postgresql-administration/postgresql-set-role
 nextLink:
-  title: 'PostgreSQL ALTER ROLE Statement'
-  slug: 'postgresql-administration/postgresql-alter-role'
+  title: PostgreSQL ALTER ROLE Statement
+  slug: postgresql-administration/postgresql-alter-role
 ---
+<Admonition type="info" id="CTA">
+The `CURRENT_USER` function works the same way on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CURRENT_USER` function to return the name of the currently logged\-in database user.
 

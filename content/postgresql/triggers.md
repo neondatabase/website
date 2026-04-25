@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Triggers'
-page_title: 'PostgreSQL Triggers'
-page_description: 'Show how to work with PostgreSQL triggers, which are the functions invoked automatically when an event occurs in the associated tables.'
+title: PostgreSQL Triggers
+page_title: PostgreSQL Triggers
+page_description: >-
+  Show how to work with PostgreSQL triggers, which are the functions invoked
+  automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
 updatedOn: '2024-04-10T15:08:37+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Cursor'
-  slug: 'postgresql-plpgsql/plpgsql-cursor'
+  title: PL/pgSQL Cursor
+  slug: postgresql-plpgsql/plpgsql-cursor
 nextLink:
-  title: 'Introduction to PostgreSQL Trigger'
-  slug: 'postgresql-triggers/introduction-postgresql-trigger'
+  title: Introduction to PostgreSQL Trigger
+  slug: postgresql-triggers/introduction-postgresql-trigger
 ---
+<Admonition type="info" id="CTA">
+Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to running Postgres in production.
+</Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Trigger.png?alignright)
 A PostgreSQL trigger is a database object that automatically executes a [function](postgresql-plpgsql/postgresql-create-function) in response to an event such as [insert](postgresql-tutorial/postgresql-insert), [update](postgresql-tutorial/postgresql-update), [delete](postgresql-tutorial/postgresql-delete), or [truncate](postgresql-tutorial/postgresql-truncate-table). In this section, you will learn about triggers and how to use them effectively.

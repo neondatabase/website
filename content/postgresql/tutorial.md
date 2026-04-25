@@ -1,12 +1,17 @@
 ---
-title: 'PostgreSQL Tutorial'
-page_title: 'PostgreSQL Tutorial'
-page_description: 'Learn PostgreSQL quickly through a practical PostgreSQL tutorial designed for database administrators and application developers.'
+title: PostgreSQL Tutorial
+page_title: PostgreSQL Tutorial
+page_description: >-
+  Learn PostgreSQL quickly through a practical PostgreSQL tutorial designed for
+  database administrators and application developers.
 prev_url: 'https://www.postgresqltutorial.com/'
-ogImage: '/postgresqltutorial/postgresql-tutorial-homepage.svg'
+ogImage: /postgresqltutorial/postgresql-tutorial-homepage.svg
 updatedOn: '2024-09-08T01:42:12+00:00'
 enableTableOfContents: true
 ---
+<Admonition type="info" id="CTA">
+Everything in this PostgreSQL tutorial works against any Postgres database, not just [Neon](https://neon.com), so you can use it to learn the fundamentals wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance and security teams expect and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built to keep up with you.
+</Admonition>
 
 ![PostgreSQL Tutorial](/postgresqltutorial/postgresql-tutorial-homepage.svg?alignright 'PostgreSQL Tutorial')
 Welcome to the PostgreSQLTutorial.com website!

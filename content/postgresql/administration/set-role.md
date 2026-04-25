@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SET ROLE Statement'
-page_title: 'PostgreSQL SET ROLE Statement'
-page_description: 'In this tutorial, you will learn how to use the SET ROLE statement to temporarily change the current role within a database session.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/'
+title: PostgreSQL SET ROLE Statement
+page_title: PostgreSQL SET ROLE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the SET ROLE statement to
+  temporarily change the current role within a database session.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/
 ogImage: ''
 updatedOn: '2024-02-22T03:14:57+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Role Membership'
-  slug: 'postgresql-administration/postgresql-role-membership'
+  title: PostgreSQL Role Membership
+  slug: postgresql-administration/postgresql-role-membership
 nextLink:
-  title: 'PostgreSQL CURRENT_USER'
-  slug: 'postgresql-administration/postgresql-current_user'
+  title: PostgreSQL CURRENT_USER
+  slug: postgresql-administration/postgresql-current_user
 ---
+<Admonition type="info" id="CTA">
+SET ROLE works the same way across every PostgreSQL deployment, so what you learn here carries over to any Postgres database you run. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed, high performance, secure database that plugs directly into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the `SET ROLE` statement to temporarily change the current role within a database session.
 

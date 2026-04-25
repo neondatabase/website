@@ -1,18 +1,23 @@
 ---
-title: 'Enable Triggers'
-page_title: 'How to Enable Triggers in PostgreSQL'
-page_description: 'In this tutorial, you will learn how to enable a trigger or all triggers associated with a table.'
+title: Enable Triggers
+page_title: How to Enable Triggers in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn how to enable a trigger or all triggers
+  associated with a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/'
 ogImage: ''
 updatedOn: '2024-03-26T02:02:29+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Disable Triggers'
-  slug: 'postgresql-triggers/managing-postgresql-trigger'
+  title: Disable Triggers
+  slug: postgresql-triggers/managing-postgresql-trigger
 nextLink:
-  title: 'How to List All Triggers in PostgreSQL'
-  slug: 'postgresql-triggers/how-to-list-all-triggers-in-postgresql'
+  title: How to List All Triggers in PostgreSQL
+  slug: postgresql-triggers/how-to-list-all-triggers-in-postgresql
 ---
+<Admonition type="info" id="CTA">
+Enabling triggers with ALTER TABLE works the same on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship features and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to enable a trigger or all triggers associated with a table.
 

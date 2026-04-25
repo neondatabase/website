@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL INSERT Multiple Rows'
-page_title: 'PostgreSQL INSERT - Inserting Multiple Rows into a Table'
-page_description: 'In this tutorial, you will learn how to use a single PostgreSQL INSERT statement to insert multiple rows into a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/'
+title: PostgreSQL INSERT Multiple Rows
+page_title: PostgreSQL INSERT - Inserting Multiple Rows into a Table
+page_description: >-
+  In this tutorial, you will learn how to use a single PostgreSQL INSERT
+  statement to insert multiple rows into a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/
 ogImage: ''
 updatedOn: '2024-01-22T13:22:27+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INSERT'
-  slug: 'postgresql-tutorial/postgresql-insert'
+  title: PostgreSQL INSERT
+  slug: postgresql-tutorial/postgresql-insert
 nextLink:
-  title: 'PostgreSQL UPDATE'
-  slug: 'postgresql-tutorial/postgresql-update'
+  title: PostgreSQL UPDATE
+  slug: postgresql-tutorial/postgresql-update
 ---
+<Admonition type="info" id="CTA">
+Bulk inserting rows with a single INSERT statement works the same on any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your data workloads demand. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INSERT` statement to insert multiple rows into a table.
 

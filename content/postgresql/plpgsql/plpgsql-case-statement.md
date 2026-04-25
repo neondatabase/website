@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL CASE Statement'
-page_title: 'PL/pgSQL CASE Statements'
-page_description: 'In this tutorial, you will learn about the PL/pgSQL CASE statement that executes a command based on a certain condition.'
+title: PL/pgSQL CASE Statement
+page_title: PL/pgSQL CASE Statements
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL CASE statement that
+  executes a command based on a certain condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
-ogImage: '/postgresqltutorial/plpgsql-simple-case-statement.png'
+ogImage: /postgresqltutorial/plpgsql-simple-case-statement.png
 updatedOn: '2024-02-07T04:18:40+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL IF Statement'
-  slug: 'postgresql-plpgsql/plpgsql-if-else-statements'
+  title: PL/pgSQL IF Statement
+  slug: postgresql-plpgsql/plpgsql-if-else-statements
 nextLink:
-  title: 'PL/pgSQL Loop Statements'
-  slug: 'postgresql-plpgsql/plpgsql-loop-statements'
+  title: PL/pgSQL Loop Statements
+  slug: postgresql-plpgsql/plpgsql-loop-statements
 ---
+<Admonition type="info" id="CTA">
+The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so what you learn here applies whether you're running Postgres yourself, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production workloads demand. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built around branching, instant provisioning, and serverless economics.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `case` that executes statements based on a certain condition.
 

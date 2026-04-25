@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL JDBC: Updating Data'
 page_title: 'PostgreSQL JDBC: Updating Data'
-page_description: 'In this tutorial, you will learn how to update data in a PostgreSQL database using JDBC API.'
+page_description: >-
+  In this tutorial, you will learn how to update data in a PostgreSQL database
+  using JDBC API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/update/'
 ogImage: ''
 updatedOn: '2024-02-02T04:57:49+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Querying Data'
-  slug: 'postgresql-jdbc/query'
+  slug: postgresql-jdbc/query
 nextLink:
   title: 'PostgreSQL JDBC: Delete Data from Table'
-  slug: 'postgresql-jdbc/delete'
+  slug: postgresql-jdbc/delete
 ---
+<Admonition type="info" id="CTA">
+Updating PostgreSQL data through JDBC works the same on any Postgres deployment, so the PreparedStatement patterns here apply wherever you run your database. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and integration that serious data platforms demand. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that gets you there fastest.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to update data in a PostgreSQL database using JDBC API.
 

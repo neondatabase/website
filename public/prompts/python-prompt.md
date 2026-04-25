@@ -43,10 +43,10 @@ Once the virtual environment is active, ask the user to choose their preferred P
 
 Based on the user's selection, run the appropriate installation command using `pip`. Also, install `python-dotenv`.
 
-*   **If 'psycopg (v3/v2)' is chosen:**
-    *   For v3 (recommended): `pip install "psycopg[binary]" python-dotenv`
-    *   For v2: `pip install psycopg2-binary python-dotenv`
-*   **If 'asyncpg' is chosen:**
+-   **If 'psycopg (v3/v2)' is chosen:**
+    -   For v3 (recommended): `pip install "psycopg[binary]" python-dotenv`
+    -   For v2: `pip install psycopg2-binary python-dotenv`
+-   **If 'asyncpg' is chosen:**
     ```bash
     pip install asyncpg python-dotenv
     ```
@@ -70,6 +70,7 @@ Based on the user's selection, run the appropriate installation command using `p
 Create a new file named `main.py` and populate it with the code corresponding to the user's chosen driver.
 
 #### Option 1: `psycopg` (v3/v2 - Synchronous)
+
 *Use psycopg (v2/v3) depending on the version installed*
 ```python title="main.py"
 import os
@@ -107,6 +108,7 @@ except Exception as e:
 ```
 
 #### Option 2: `asyncpg` (Asynchronous)
+
 ```python title="main.py"
 import os
 import asyncio

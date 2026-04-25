@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DATE_TRUNC() Function'
-page_title: 'PostgreSQL DATE_TRUNC Function By Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL DATE_TRUNC function to truncate a timestamp or interval to a specified precision.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/'
-ogImage: '/postgresqltutorial/rental-table.png'
+title: PostgreSQL DATE_TRUNC() Function
+page_title: PostgreSQL DATE_TRUNC Function By Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL DATE_TRUNC function to
+  truncate a timestamp or interval to a specified precision.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/
+ogImage: /postgresqltutorial/rental-table.png
 updatedOn: '2024-03-22T01:11:13+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL AT TIME ZONE Operator'
-  slug: 'postgresql-date-functions/postgresql-at-time-zone'
+  title: PostgreSQL AT TIME ZONE Operator
+  slug: postgresql-date-functions/postgresql-at-time-zone
 nextLink:
-  title: 'PostgreSQL DATE_BIN() Function'
-  slug: 'postgresql-date-functions/postgresql-date_bin'
+  title: PostgreSQL DATE_BIN() Function
+  slug: postgresql-date-functions/postgresql-date_bin
 ---
+<Admonition type="info" id="CTA">
+The DATE_TRUNC() function works the same way on any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: This tutorial shows you how to use the PostgreSQL `DATE_TRUNC()` function to truncate a timestamp or interval to a specified precision.
 

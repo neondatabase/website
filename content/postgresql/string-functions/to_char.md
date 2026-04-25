@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TO_CHAR() Function'
-page_title: 'PostgreSQL TO_CHAR Function By Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL TO_CHAR() function to convert a timestamp or a numeric value to a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/'
-ogImage: '/postgresqltutorial/payment-table.png'
+title: PostgreSQL TO_CHAR() Function
+page_title: PostgreSQL TO_CHAR Function By Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TO_CHAR() function to
+  convert a timestamp or a numeric value to a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/
+ogImage: /postgresqltutorial/payment-table.png
 updatedOn: '2024-01-29T02:05:27+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRANSLATE() Function'
-  slug: 'postgresql-string-functions/postgresql-translate'
+  title: PostgreSQL TRANSLATE() Function
+  slug: postgresql-string-functions/postgresql-translate
 nextLink:
-  title: 'PostgreSQL TO_NUMBER() Function'
-  slug: 'postgresql-string-functions/postgresql-to_number'
+  title: PostgreSQL TO_NUMBER() Function
+  slug: postgresql-string-functions/postgresql-to_number
 ---
+<Admonition type="info" id="CTA">
+The TO_CHAR() function works the same way on any PostgreSQL database, so the formatting patterns and examples here apply wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup focused on shipping and scaling quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 The PostgreSQL `TO_CHAR()` function converts a [timestamp](../postgresql-tutorial/postgresql-timestamp), an [interval](../postgresql-tutorial/postgresql-interval), an [integer](../postgresql-tutorial/postgresql-integer), a double\-precision, or a [numeric](../postgresql-tutorial/postgresql-numeric) value to a [string](../postgresql-tutorial/postgresql-char-varchar-text).
 

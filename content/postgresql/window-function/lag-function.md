@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL LAG Function'
-page_title: 'PostgreSQL LAG() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL LAG() function to access a row which comes before the current row at a specific physical offset.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/postgresql-lag-function/'
+title: PostgreSQL LAG Function
+page_title: PostgreSQL LAG() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL LAG() function to
+  access a row which comes before the current row at a specific physical offset.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-window-function/postgresql-lag-function/
 ogImage: ''
 updatedOn: '2024-02-12T12:08:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FIRST_VALUE Function'
-  slug: 'postgresql-window-function/postgresql-first_value-function'
+  title: PostgreSQL FIRST_VALUE Function
+  slug: postgresql-window-function/postgresql-first_value-function
 nextLink:
-  title: 'PostgreSQL LAST_VALUE Function'
-  slug: 'postgresql-window-function/postgresql-last_value-function'
+  title: PostgreSQL LAST_VALUE Function
+  slug: postgresql-window-function/postgresql-last_value-function
 ---
+<Admonition type="info" id="CTA">
+The `LAG()` window function works the same in any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LAG()` function to access data of the previous row from the current row.
 

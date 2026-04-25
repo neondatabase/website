@@ -24,7 +24,7 @@ const errorThemes = {
   default:
     '!absolute bottom-full right-0 z-10 m-0 max-w-[350px] translate-y-4 text-end text-sm leading-none text-secondary-1 sm:!static sm:ml-auto sm:mt-2 sm:translate-y-0 [&_a:hover]:no-underline [&_a]:underline [&_a]:underline-offset-2',
   tooltip:
-    'absolute z-20 top-full translate-y-2.5 tracking-tight left-0 flex py-2 pr-3 pl-2 gap-x-1 leading-tight text-[#FF3621]/80 text-sm border border-[#FF3621]/50 shadow-[0_1px_6px_rgba(210,45,84,.2)] bg-[#000] before:absolute before:inset-0 before:bg-[#ff3621]/[0.06]',
+    'absolute z-20 top-full translate-y-2.5 tracking-tight left-0 flex py-1.5 pr-3 pl-2 gap-x-1 leading-tight text-[#FF3621]/80 text-sm border border-[#FF3621]/50 shadow-[0_1px_6px_rgba(210,45,84,.2)] bg-(--error-tooltip-bg) before:absolute before:inset-0 before:bg-[#ff3621]/[0.06]',
 };
 
 const baseStyles =
@@ -101,8 +101,14 @@ const Field = forwardRef(
         <div className={cn(errorThemes[errorTheme], errorClassName)}>
           {errorTheme === 'tooltip' && (
             <>
-              <span className="absolute top-0 left-2.5 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-t border-l border-[#FF3621]/50 bg-[linear-gradient(135deg,#000_0%,#000_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />
-              <Image className="size-4 shrink-0" src={warningIcon} alt="" width={16} height={16} />
+              <span className="absolute top-0 left-2.5 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-t border-l border-[#FF3621]/50 bg-[linear-gradient(135deg,var(--error-tooltip-bg)_0%,var(--error-tooltip-bg)_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />
+              <Image
+                className="relative top-px size-4 shrink-0"
+                src={warningIcon}
+                alt=""
+                width={16}
+                height={16}
+              />
             </>
           )}
           <p

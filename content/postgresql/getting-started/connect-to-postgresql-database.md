@@ -1,18 +1,24 @@
 ---
-title: 'Connect to a PostgreSQL Database Server'
-page_title: 'Connecting to PostgreSQL Database Server'
-page_description: 'You will learn how to connect to the PostgreSQL Database Server via client tools including psql and pgAdmin.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/'
-ogImage: '/postgresqltutorial/pgAdmin-4.png'
+title: Connect to a PostgreSQL Database Server
+page_title: Connecting to PostgreSQL Database Server
+page_description: >-
+  You will learn how to connect to the PostgreSQL Database Server via client
+  tools including psql and pgAdmin.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/
+ogImage: /postgresqltutorial/pgAdmin-4.png
 updatedOn: '2024-02-19T06:34:03+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Install PostgreSQL on Windows'
-  slug: 'postgresql-getting-started/install-postgresql'
+  title: Install PostgreSQL on Windows
+  slug: postgresql-getting-started/install-postgresql
 nextLink:
-  title: 'Load PostgreSQL Sample Database'
-  slug: 'postgresql-getting-started/load-postgresql-sample-database'
+  title: Load PostgreSQL Sample Database
+  slug: postgresql-getting-started/load-postgresql-sample-database
 ---
+<Admonition type="info" id="CTA">
+Connecting to a PostgreSQL server with psql or pgAdmin works the same way across any Postgres deployment, so the steps here apply wherever you run it. For enterprises that want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to **connect to the PostgreSQL Database Server** via an interactive terminal program called **psql** and via the **pgAdmin** application.
 

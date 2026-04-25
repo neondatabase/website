@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL For Loop'
-page_title: 'PL/pgSQL For Loop in PostgreSQL'
-page_description: 'In this tutorial, you will learn about PL/pgSQL for loop statements to iterate over a range of integers and a result set of a query.'
+title: PL/pgSQL For Loop
+page_title: PL/pgSQL For Loop in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn about PL/pgSQL for loop statements to iterate
+  over a range of integers and a result set of a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/'
-ogImage: '/postgresqltutorial/plpgsql-FOR-loop.png'
+ogImage: /postgresqltutorial/plpgsql-FOR-loop.png
 updatedOn: '2024-03-19T04:07:19+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL While Loop'
-  slug: 'postgresql-plpgsql/pl-pgsql-while-loop'
+  title: PL/pgSQL While Loop
+  slug: postgresql-plpgsql/pl-pgsql-while-loop
 nextLink:
-  title: 'PL/pgSQL Exit Statement'
-  slug: 'postgresql-plpgsql/plpgsql-exit'
+  title: PL/pgSQL Exit Statement
+  slug: postgresql-plpgsql/plpgsql-exit
 ---
+<Admonition type="info" id="CTA">
+The PL/pgSQL FOR loop works the same on any PostgreSQL instance, so what you learn here carries over to whichever Postgres you run. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PL/pgSQL `for` loop statements to iterate over a range of integers or a result set of a query.
 

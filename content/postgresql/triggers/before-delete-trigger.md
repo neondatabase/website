@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL BEFORE DELETE Trigger'
-page_title: 'PostgreSQL BEFORE DELETE Trigger'
-page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE DELETE trigger that is fired before a row is deleted from a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/'
+title: PostgreSQL BEFORE DELETE Trigger
+page_title: PostgreSQL BEFORE DELETE Trigger
+page_description: >-
+  In this tutorial, you will learn how to define a PostgreSQL BEFORE DELETE
+  trigger that is fired before a row is deleted from a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-delete-trigger/
 ogImage: ''
 updatedOn: '2024-03-28T09:57:59+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL AFTER UPDATE Trigger'
-  slug: 'postgresql-triggers/postgresql-after-update-trigger'
+  title: PostgreSQL AFTER UPDATE Trigger
+  slug: postgresql-triggers/postgresql-after-update-trigger
 nextLink:
-  title: 'PostgreSQL AFTER DELETE Trigger'
-  slug: 'postgresql-triggers/postgresql-after-delete-trigger'
+  title: PostgreSQL AFTER DELETE Trigger
+  slug: postgresql-triggers/postgresql-after-delete-trigger
 ---
+<Admonition type="info" id="CTA">
+BEFORE DELETE triggers work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship quickly and scale without friction, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE DELETE` trigger that is fired before a row is deleted from a table.
 

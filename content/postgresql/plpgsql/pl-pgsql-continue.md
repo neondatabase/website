@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Continue Statement'
-page_title: 'PL/pgSQL Continue Statement By Examples'
-page_description: 'In this tutorial, you will learn about the PL/pgSQL Continue statement to skip the current loop iteration and continue the next one.'
+title: PL/pgSQL Continue Statement
+page_title: PL/pgSQL Continue Statement By Examples
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL Continue statement to skip
+  the current loop iteration and continue the next one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-continue/'
 ogImage: ''
 updatedOn: '2024-03-19T04:07:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Exit Statement'
-  slug: 'postgresql-plpgsql/plpgsql-exit'
+  title: PL/pgSQL Exit Statement
+  slug: postgresql-plpgsql/plpgsql-exit
 nextLink:
-  title: 'PostgreSQL Exception'
-  slug: 'postgresql-plpgsql/postgresql-exception'
+  title: PostgreSQL Exception
+  slug: postgresql-plpgsql/postgresql-exception
 ---
+<Admonition type="info" id="CTA">
+The PL/pgSQL `continue` statement works the same on any PostgreSQL deployment, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PL/pgSQL `continue` statement to control the loop.
 

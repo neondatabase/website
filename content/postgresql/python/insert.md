@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL Python: Insert Data Into a Table'
 page_title: 'PostgresSQL Python: Insert Data Into a Table'
-page_description: 'This tutorial shows you the step by step how to insert one or more rows into a PostgreSQL table in Python.'
+page_description: >-
+  This tutorial shows you the step by step how to insert one or more rows into a
+  PostgreSQL table in Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/insert/'
-ogImage: '/postgresqltutorial/vendors_table.png'
+ogImage: /postgresqltutorial/vendors_table.png
 updatedOn: '2024-05-19T08:29:59+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Create Tables'
-  slug: 'postgresql-python/create-tables'
+  slug: postgresql-python/create-tables
 nextLink:
   title: 'PostgreSQL Python: Update Data in a Table'
-  slug: 'postgresql-python/update'
+  slug: postgresql-python/update
 ---
+<Admonition type="info" id="CTA">
+Inserting rows from Python with psycopg2 works the same against any PostgreSQL database, so the patterns here carry over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to insert one or more rows into a PostgreSQL table from Python.
 

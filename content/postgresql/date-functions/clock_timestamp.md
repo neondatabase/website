@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
-page_title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CLOCK_TIMESTAMP() function to return the current date and time.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-clock_timestamp/'
+title: PostgreSQL CLOCK_TIMESTAMP() Function
+page_title: PostgreSQL CLOCK_TIMESTAMP() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CLOCK_TIMESTAMP()
+  function to return the current date and time.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-clock_timestamp/
 ogImage: ''
 updatedOn: '2024-03-20T09:24:37+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CURRENT_TIMESTAMP Function'
-  slug: 'postgresql-date-functions/postgresql-current_timestamp'
+  title: PostgreSQL CURRENT_TIMESTAMP Function
+  slug: postgresql-date-functions/postgresql-current_timestamp
 nextLink:
-  title: 'PostgreSQL STATEMENT_TIMESTAMP() Function'
-  slug: 'postgresql-date-functions/postgresql-statement_timestamp'
+  title: PostgreSQL STATEMENT_TIMESTAMP() Function
+  slug: postgresql-date-functions/postgresql-statement_timestamp
 ---
+<Admonition type="info" id="CTA">
+The CLOCK_TIMESTAMP() function works the same across any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed Postgres that's fast, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CLOCK_TIMESTAMP()` function to return the current date and time.
 

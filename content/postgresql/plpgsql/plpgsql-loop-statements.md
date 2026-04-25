@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Loop Statements'
-page_title: 'PL/pgSQL Loop Statements'
-page_description: 'in this tutorial, we will introduce you to various kinds of PL/pgSQL loop statements that execute a block of statements repeatedly.'
+title: PL/pgSQL Loop Statements
+page_title: PL/pgSQL Loop Statements
+page_description: >-
+  in this tutorial, we will introduce you to various kinds of PL/pgSQL loop
+  statements that execute a block of statements repeatedly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/'
 ogImage: ''
 updatedOn: '2024-03-19T03:57:07+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL CASE Statement'
-  slug: 'postgresql-plpgsql/plpgsql-case-statement'
+  title: PL/pgSQL CASE Statement
+  slug: postgresql-plpgsql/plpgsql-case-statement
 nextLink:
-  title: 'PL/pgSQL While Loop'
-  slug: 'postgresql-plpgsql/pl-pgsql-while-loop'
+  title: PL/pgSQL While Loop
+  slug: postgresql-plpgsql/pl-pgsql-while-loop
 ---
+<Admonition type="info" id="CTA">
+PL/pgSQL loop statements work the same way on any standard PostgreSQL database, so the patterns covered here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL loop statement that executes a block of code repeatedly.
 

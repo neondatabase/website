@@ -58,16 +58,16 @@ Ask the user to choose their preferred driver. Explain the trade-offs:
 
 Based on the user's choice, run the appropriate installation command:
 
-*   **If 'Neon Serverless (HTTP)' is chosen:**
+-   **If 'Neon Serverless (HTTP)' is chosen:**
     ```bash
     npm install kysely kysely-neon @neondatabase/serverless dotenv
     ```
-*   **If 'Neon WebSocket' is chosen:**
+-   **If 'Neon WebSocket' is chosen:**
     ```bash
     npm install kysely @neondatabase/serverless ws dotenv
     npm install -D @types/ws
     ```
-*   **If '`node-postgres`' is chosen:**
+-   **If '`node-postgres`' is chosen:**
     ```bash
     npm install kysely pg dotenv
     npm install -D @types/pg
@@ -110,6 +110,7 @@ export type UserUpdate = Updateable<UsersTable>;
 Create `src/db.ts` based on the driver selection.
 
 #### Option 1: Neon Serverless (HTTP)
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely } from 'kysely';
@@ -127,6 +128,7 @@ export const db = new Kysely<Database>({
 ```
 
 #### Option 2: Neon WebSocket
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely, PostgresDialect } from 'kysely';
@@ -146,6 +148,7 @@ export const db = new Kysely<Database>({
 ```
 
 #### Option 3: `node-postgres`
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { Kysely, PostgresDialect } from 'kysely';
@@ -278,7 +281,6 @@ Once the setup is complete:
     npx tsx src/index.ts
     ```
 5.  If successful, the output should show log messages for each C-R-U-D step.
-
 
 ---
 

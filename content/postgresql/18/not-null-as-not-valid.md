@@ -1,17 +1,23 @@
 ---
-title: 'PostgreSQL 18 NOT NULL Constraints as NOT VALID'
+title: PostgreSQL 18 NOT NULL Constraints as NOT VALID
 page_title: 'PostgreSQL 18 NOT NULL Constraints as NOT VALID: Zero-Downtime Schema Changes'
-page_description: "In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL constraints with NOT VALID to add constraints to large tables without downtime or table scans."
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL
+  constraints with NOT VALID to add constraints to large tables without downtime
+  or table scans.
 ogImage: ''
 updatedOn: '2025-06-22T09:50:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 OAuth Support'
-  slug: 'postgresql-18/oauth-authentication'
+  title: PostgreSQL 18 OAuth Support
+  slug: postgresql-18/oauth-authentication
 nextLink:
-  title: 'PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements'
-  slug: 'postgresql-18/security-improvements'
+  title: PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements
+  slug: postgresql-18/security-improvements
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL 18's NOT NULL constraints with NOT VALID work on any Postgres deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run mission-critical workloads. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for moving quickly without sacrificing reliability.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL constraints with NOT VALID to add constraints to large tables without lengthy table scans or extended downtime.
 

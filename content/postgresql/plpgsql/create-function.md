@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Create Function Statement'
-page_title: 'PostgreSQL CREATE FUNCTION Statement'
-page_description: 'In this tutorial, you will learn how to develop user-defined functions using the PostgreSQL CREATE FUNCTION statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL Create Function Statement
+page_title: PostgreSQL CREATE FUNCTION Statement
+page_description: >-
+  In this tutorial, you will learn how to develop user-defined functions using
+  the PostgreSQL CREATE FUNCTION statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-03-22T06:51:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Exception'
-  slug: 'postgresql-plpgsql/postgresql-exception'
+  title: PostgreSQL Exception
+  slug: postgresql-plpgsql/postgresql-exception
 nextLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
-  slug: 'postgresql-plpgsql/plpgsql-function-parameters'
+  slug: postgresql-plpgsql/plpgsql-function-parameters
 ---
+<Admonition type="info" id="CTA">
+The CREATE FUNCTION statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on-premises, or in the cloud. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration your data and AI workloads demand. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE FUNCTION` statement to develop user\-defined functions.
 

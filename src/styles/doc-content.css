@@ -117,6 +117,12 @@
       @apply mt-5;
     }
 
+    .changelog-list & {
+      > *:first-child {
+        @apply mt-0 pt-0 sm:mt-0 sm:pt-0;
+      }
+    }
+
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] leading-none uppercase;
     }
@@ -243,7 +249,7 @@
     }
 
     .sticky-table {
-      @apply lg:[--docs-header-height:0px];
+      @apply relative lg:[--docs-header-height:0px];
     }
 
     .sticky-table-header {
@@ -290,7 +296,7 @@
     }
 
     :not(pre) > code {
-      @apply inline-flex items-center justify-center rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight break-words text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
+      @apply my-px inline-flex items-center justify-center rounded border border-gray-new-70 bg-gray-new-98 px-1! py-px! font-mono! text-sm leading-[1.2] font-normal! tracking-extra-tight break-words text-black-pure! dark:border-gray-new-30 dark:bg-black-new dark:text-white!;
       overflow-wrap: anywhere;
       word-break: break-word;
       white-space: normal;

@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CEIL() Function'
-page_title: 'PostgreSQL CEIL() Function'
-page_description: 'Show you how to use the PostgreSQL CEIL() function to round a number up to the nearest integer, which is greater than or equal to the number.'
+title: PostgreSQL CEIL() Function
+page_title: PostgreSQL CEIL() Function
+page_description: >-
+  Show you how to use the PostgreSQL CEIL() function to round a number up to the
+  nearest integer, which is greater than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-ceil/'
-ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
+ogImage: /postgresqltutorial/customer-and-payment-tables.png
 updatedOn: '2024-02-16T14:25:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ABS() Function'
-  slug: 'postgresql-math-functions/postgresql-abs'
+  title: PostgreSQL ABS() Function
+  slug: postgresql-math-functions/postgresql-abs
 nextLink:
-  title: 'PostgreSQL CBRT() Function'
-  slug: 'postgresql-math-functions/postgresql-cbrt'
+  title: PostgreSQL CBRT() Function
+  slug: postgresql-math-functions/postgresql-cbrt
 ---
+<Admonition type="info" id="CTA">
+The CEIL() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can use it wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship features and scale on demand, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+</Admonition>
 
 The PostgreSQL `CEIL()` function returns a number rounded up to the next whole number.
 

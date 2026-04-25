@@ -72,7 +72,7 @@ const MigrationPage = () => (
       title="Why teams migrate to Neon"
       titleClassName="md:text-balance"
       headerClassName="max-w-[640px] lg:max-w-[560px] md:max-w-[500px]"
-      ulClassName="xl:max-w-[832px] xl:grid-cols-3 lg:mx-16"
+      ulClassName="xl:max-w-208 xl:grid-cols-3 lg:mx-16"
       containerSize="960"
       description="Neon provides a serverless, fully managed Postgres built for modern development — fast, reliable, and cost-effective."
       items={FEATURES}

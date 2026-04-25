@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CREATE INDEX Statement'
-page_title: 'PostgreSQL CREATE INDEX Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE INDEX statement to create a new index for a table.'
+title: PostgreSQL CREATE INDEX Statement
+page_title: PostgreSQL CREATE INDEX Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CREATE INDEX
+  statement to create a new index for a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/'
-ogImage: '/postgresqltutorial/address.png'
+ogImage: /postgresqltutorial/address.png
 updatedOn: '2024-02-28T13:06:03+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Indexes'
-  slug: 'postgresql-indexes/'
+  title: PostgreSQL Indexes
+  slug: postgresql-indexes/
 nextLink:
-  title: 'PostgreSQL UNIQUE Index'
-  slug: 'postgresql-indexes/postgresql-unique-index'
+  title: PostgreSQL UNIQUE Index
+  slug: postgresql-indexes/postgresql-unique-index
 ---
+<Admonition type="info" id="CTA">
+CREATE INDEX works the same across any PostgreSQL deployment, so everything here carries over whether you're running Postgres on your laptop, in your own data center, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres available, natively integrated into the Lakehouse so your operational and analytical data live together. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform for the job, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE INDEX` statement to define a new index for a table.
 

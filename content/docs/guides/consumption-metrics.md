@@ -15,12 +15,16 @@ updatedOn: '2026-02-16T13:09:07.969Z'
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
-| API                               | Endpoint                           | Description                                                                                                                            | Plan availability                |
-| --------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
+| API                               | Endpoint                           | Description                                                                                                                                      | Plan availability                |
+| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore, snapshot), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?** If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use the [project metrics API](#request-overview) below; it is the only endpoint that returns metrics matching your invoice. You can also call the [legacy APIs](/docs/guides/consumption-metrics-legacy) (account and project) on usage-based or legacy plans, but they only return legacy metrics and will not match your invoice on a usage-based plan.
+</Admonition>
+
+<Admonition type="note" title="API reference: legacy vs v2">
+On [api-docs.neon.tech](https://api-docs.neon.tech), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including **`snapshot_storage_bytes_month`**, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)**.
 </Admonition>
 
 ## Request overview
@@ -37,15 +41,16 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/projects
 
 The response includes metrics that map directly to usage-based billing line items:
 
-| Metric                           | Raw unit     | Billing unit   | Description                                                        |
-| -------------------------------- | ------------ | -------------- | ------------------------------------------------------------------ |
-| `compute_unit_seconds`           | CU-seconds   | CU-hours       | CPU time weighted by compute size                                  |
-| `root_branch_bytes_month`        | byte-hours   | GB-months      | Storage consumed by root branches                                  |
-| `child_branch_bytes_month`       | byte-hours   | GB-months      | Storage consumed by child branches (delta from parent)             |
-| `instant_restore_bytes_month`    | byte-hours   | GB-months      | Instant restore (PITR) history storage                             |
-| `public_network_transfer_bytes`  | bytes        | GB             | Data transfer over the public internet                             |
-| `private_network_transfer_bytes` | bytes        | GB             | Data transfer over private networks (for example, AWS PrivateLink) |
-| `extra_branches_month`           | branch-hours | branch-months  | All child branches per hour (subtract plan allowance before billing) |
+| Metric                           | Raw unit     | Billing unit  | Description                                                                        |
+| -------------------------------- | ------------ | ------------- | ---------------------------------------------------------------------------------- |
+| `compute_unit_seconds`           | CU-seconds   | CU-hours      | CPU time weighted by compute size                                                  |
+| `root_branch_bytes_month`        | byte-hours   | GB-months     | Storage consumed by root branches                                                  |
+| `child_branch_bytes_month`       | byte-hours   | GB-months     | Storage consumed by child branches (delta from parent)                             |
+| `instant_restore_bytes_month`    | byte-hours   | GB-months     | Instant restore (PITR) history storage                                             |
+| `snapshot_storage_bytes_month`   | byte-hours   | GB-months     | Storage for [branch snapshots](/docs/guides/backup-restore) (manual and scheduled) |
+| `public_network_transfer_bytes`  | bytes        | GB            | Data transfer over the public internet                                             |
+| `private_network_transfer_bytes` | bytes        | GB            | Data transfer over private networks (for example, AWS PrivateLink)                 |
+| `extra_branches_month`           | branch-hours | branch-months | All child branches per hour (subtract plan allowance before billing)               |
 
 To convert these raw values into human-readable billing units and calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
@@ -55,7 +60,7 @@ To convert these raw values into human-readable billing units and calculate cost
 - **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days, and 1 year, respectively.
 - **`org_id`** (string, required): Organization for which the project consumption metrics should be returned.
-- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
+- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 
 ### Date format, range, and granularity
 
@@ -83,7 +88,7 @@ Replace `$ORG_ID` and `$NEON_API_KEY` with your organization ID and API key, the
 
 ```bash shouldWrap
 curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-02-01T00:00:00Z&to=2026-02-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
+  --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-02-01T00:00:00Z&to=2026-02-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
   --header 'Accept: application/json' \
   --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
@@ -119,6 +124,10 @@ curl --request GET \
                   "value": 98344
                 },
                 {
+                  "metric_name": "snapshot_storage_bytes_month",
+                  "value": 0
+                },
+                {
                   "metric_name": "public_network_transfer_bytes",
                   "value": 1414
                 }
@@ -139,6 +148,10 @@ curl --request GET \
                 {
                   "metric_name": "instant_restore_bytes_month",
                   "value": 983488
+                },
+                {
+                  "metric_name": "snapshot_storage_bytes_month",
+                  "value": 0
                 },
                 {
                   "metric_name": "public_network_transfer_bytes",
@@ -177,7 +190,7 @@ Example request for the next page (using the `cursor` from the previous response
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
+     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```

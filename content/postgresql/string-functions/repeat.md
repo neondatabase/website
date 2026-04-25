@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL REPEAT() Function'
-page_title: 'PostgreSQL REPEAT() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL REPEAT() function to repeat a string a specified number of times.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/'
+title: PostgreSQL REPEAT() Function
+page_title: PostgreSQL REPEAT() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL REPEAT() function
+  to repeat a string a specified number of times.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
 ogImage: 'https://www.mysqltutorial.org//postgresqltutorial/products.svg'
 updatedOn: '2024-01-28T13:56:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REGEXP_REPLACE() Function'
-  slug: 'postgresql-string-functions/regexp_replace'
+  title: PostgreSQL REGEXP_REPLACE() Function
+  slug: postgresql-string-functions/regexp_replace
 nextLink:
-  title: 'PostgreSQL REVERSE() Function'
-  slug: 'postgresql-string-functions/postgresql-reverse'
+  title: PostgreSQL REVERSE() Function
+  slug: postgresql-string-functions/postgresql-reverse
 ---
+<Admonition type="info" id="CTA">
+The REPEAT() function works the same way across any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REPEAT()` function to repeat a string a specified number of times.
 

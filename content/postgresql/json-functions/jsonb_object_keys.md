@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_object_keys() Function'
-page_title: 'PostgreSQL jsonb_object_keys() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_object_keys() function to extract the keys from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/'
+title: PostgreSQL jsonb_object_keys() Function
+page_title: PostgreSQL jsonb_object_keys() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_object_keys()
+  function to extract the keys from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/
 ogImage: ''
 updatedOn: '2024-02-24T09:28:45+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_each_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_each_text'
+  title: PostgreSQL jsonb_each_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_each_text
 nextLink:
-  title: 'PostgreSQL JSON Path'
-  slug: 'postgresql-json-functions/postgresql-json-path'
+  title: PostgreSQL JSON Path
+  slug: postgresql-json-functions/postgresql-json-path
 ---
+<Admonition type="info" id="CTA">
+The `jsonb_object_keys()` function is part of standard PostgreSQL and works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to run JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration that large teams need. If you're a developer or startup who wants to ship fast on Postgres and scale without friction, Neon is the platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_keys()` function to extract the keys from a JSON object.
 

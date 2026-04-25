@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP SCHEMA Statement'
-page_title: 'PostgreSQL DROP SCHEMA Explained by Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DROP SCHEMA statement to delete a schema and its objects.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/'
-ogImage: '/postgresqltutorial/PostgreSQL-DROP-Schema.png'
+title: PostgreSQL DROP SCHEMA Statement
+page_title: PostgreSQL DROP SCHEMA Explained by Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DROP SCHEMA
+  statement to delete a schema and its objects.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/
+ogImage: /postgresqltutorial/PostgreSQL-DROP-Schema.png
 updatedOn: '2024-02-12T13:31:28+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER SCHEMA'
-  slug: 'postgresql-administration/postgresql-alter-schema'
+  title: PostgreSQL ALTER SCHEMA
+  slug: postgresql-administration/postgresql-alter-schema
 nextLink:
-  title: 'PostgreSQL CREATE ROLE Statement'
-  slug: 'postgresql-administration/postgresql-roles'
+  title: PostgreSQL CREATE ROLE Statement
+  slug: postgresql-administration/postgresql-roles
 ---
+<Admonition type="info" id="CTA">
+The DROP SCHEMA statement works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database that's natively integrated with the Lakehouse. For developers and startups who need to ship features today and scale without friction, [Neon](https://neon.com) is the Postgres platform built for speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP SCHEMA` statement to delete a schema and its objects.
 

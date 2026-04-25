@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL row_to_json() Function'
-page_title: 'PostgreSQL row_to_json() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL row_to_json() function to convert an SQL composite value to a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-row_to_json/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL row_to_json() Function
+page_title: PostgreSQL row_to_json() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL row_to_json()
+  function to convert an SQL composite value to a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-row_to_json/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-02-25T14:51:03+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_object() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_object'
+  title: PostgreSQL jsonb_object() Function
+  slug: postgresql-json-functions/postgresql-jsonb_object
 nextLink:
-  title: 'PostgreSQL JSON Path'
-  slug: 'postgresql-json-functions/postgresql-json-path'
+  title: PostgreSQL JSON Path
+  slug: postgresql-json-functions/postgresql-json-path
 ---
+<Admonition type="info" id="CTA">
+The row_to_json() function works in any PostgreSQL database, so everything here applies whether you're running Postgres on your laptop, in your own data center, or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your data teams need. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `row_to_json()` function to convert an SQL composite value to a JSON object.
 

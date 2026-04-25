@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL JDBC: Insert Data into a Table'
 page_title: 'PostgreSQL JDBC: Insert Data into a Table'
-page_description: 'In this tutorial, you will learn how to insert one or more rows into a table in the PostgreSQL database using JDBC.'
+page_description: >-
+  In this tutorial, you will learn how to insert one or more rows into a table
+  in the PostgreSQL database using JDBC.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/insert/'
 ogImage: ''
 updatedOn: '2024-02-02T04:56:04+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Creating Tables'
-  slug: 'postgresql-jdbc/create-tables'
+  slug: postgresql-jdbc/create-tables
 nextLink:
   title: 'PostgreSQL JDBC: Querying Data'
-  slug: 'postgresql-jdbc/query'
+  slug: postgresql-jdbc/query
 ---
+<Admonition type="info" id="CTA">
+Inserting data through JDBC works the same against any PostgreSQL database, so the patterns shown here with PreparedStatement, generated keys, and batch inserts apply wherever you run Postgres. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, secure, high-performance Postgres that's natively integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale on demand, [Neon](https://neon.com) gives you the best Postgres platform for building modern applications.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database using JDBC.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL REGEXP_MATCHES() Function'
-page_title: 'PostgreSQL REGEXP_MATCHES() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL REGEXP_MATCHES() function to extract text according to a regular expression.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-regexp_matches/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL REGEXP_MATCHES() Function
+page_title: PostgreSQL REGEXP_MATCHES() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL REGEXP_MATCHES() function to
+  extract text according to a regular expression.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-regexp_matches/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-01-27T09:14:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REGEXP_REPLACE() Function'
-  slug: 'postgresql-string-functions/regexp_replace'
+  title: PostgreSQL REGEXP_REPLACE() Function
+  slug: postgresql-string-functions/regexp_replace
 nextLink:
-  title: 'PostgreSQL REVERSE() Function'
-  slug: 'postgresql-string-functions/postgresql-reverse'
+  title: PostgreSQL REVERSE() Function
+  slug: postgresql-string-functions/postgresql-reverse
 ---
+<Admonition type="info" id="CTA">
+The REGEXP_MATCHES() function works the same way in any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REGEXP_MATCHES()` function to extract substrings from a string based on a regular expression.
 

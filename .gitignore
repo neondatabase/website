@@ -44,6 +44,7 @@ jspm_packages/
 
 # Optional eslint cache
 .stylelintcache
+.prettiercache
 
 # Optional REPL history
 .node_repl_history
@@ -93,3 +94,4 @@ package-lock.json
 
 # Evals directory (test validation for documentation)
 .evals/
+content/blog

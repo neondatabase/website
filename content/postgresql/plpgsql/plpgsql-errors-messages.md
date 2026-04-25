@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Errors and Messages'
-page_title: 'PL/pgSQL Errors and Messages'
-page_description: 'In this tutorial, you will learn how to report messages and raise errors using the RAISE statement.'
+title: PL/pgSQL Errors and Messages
+page_title: PL/pgSQL Errors and Messages
+page_description: >-
+  In this tutorial, you will learn how to report messages and raise errors using
+  the RAISE statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-errors-messages/'
 ogImage: ''
 updatedOn: '2024-03-19T02:58:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Constants'
-  slug: 'postgresql-plpgsql/plpgsql-constants'
+  title: PL/pgSQL Constants
+  slug: postgresql-plpgsql/plpgsql-constants
 nextLink:
-  title: 'PL/pgSQL Assert Statement'
-  slug: 'postgresql-plpgsql/pl-pgsql-assert'
+  title: PL/pgSQL Assert Statement
+  slug: postgresql-plpgsql/pl-pgsql-assert
 ---
+<Admonition type="info" id="CTA">
+Reporting messages and raising errors with PL/pgSQL's `raise` statement works the same on any standard PostgreSQL deployment, so everything here applies beyond [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep Lakehouse integration in one platform. If you're a developer or startup that needs to ship and scale quickly, Neon gives you the fastest path to production Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to report messages and raise errors using the `raise` statement.
 

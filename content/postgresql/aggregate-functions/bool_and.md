@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL BOOL_AND() Function'
-page_title: 'PostgreSQL BOOL_AND() Function'
-page_description: 'In this tutorial, you will learn about the PostgreSQL BOOL_AND() function to aggregate boolean values across rows within a group.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/'
+title: PostgreSQL BOOL_AND() Function
+page_title: PostgreSQL BOOL_AND() Function
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL BOOL_AND() function to
+  aggregate boolean values across rows within a group.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/
 ogImage: ''
 updatedOn: '2024-03-22T02:49:19+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ARRAY_AGG Function'
-  slug: 'postgresql-aggregate-functions/postgresql-array_agg'
+  title: PostgreSQL ARRAY_AGG Function
+  slug: postgresql-aggregate-functions/postgresql-array_agg
 nextLink:
-  title: 'PostgreSQL STRING_AGG Function'
-  slug: 'postgresql-aggregate-functions/postgresql-string_agg-function'
+  title: PostgreSQL STRING_AGG Function
+  slug: postgresql-aggregate-functions/postgresql-string_agg-function
 ---
+<Admonition type="info" id="CTA">
+The BOOL_AND() function is standard PostgreSQL and works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `BOOL_AND()` function to aggregate boolean values across rows within a group.
 

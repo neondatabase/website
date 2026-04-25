@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL TRUNC() Function'
+title: PostgreSQL TRUNC() Function
 page_title: 'PostgreSQL TRUNC() Function: Truncating Numbers'
-page_description: 'This tutorial shows you how to use the PostgreSQL TRUNC() function to truncate numbers to the specified decimal places.'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TRUNC() function to truncate
+  numbers to the specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trunc/'
-ogImage: '/postgresqltutorial/film-film_category-category-tables.png'
+ogImage: /postgresqltutorial/film-film_category-category-tables.png
 updatedOn: '2024-02-16T14:26:33+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SIGN() Function'
-  slug: 'postgresql-math-functions/postgresql-sign'
+  title: PostgreSQL SIGN() Function
+  slug: postgresql-math-functions/postgresql-sign
 nextLink:
-  title: 'PostgreSQL TRIM_SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-trim_scale'
+  title: PostgreSQL TRIM_SCALE() Function
+  slug: postgresql-math-functions/postgresql-trim_scale
 ---
+<Admonition type="info" id="CTA">
+The TRUNC() function works the same in any PostgreSQL environment, so you can apply what you learn here to Postgres running anywhere. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 The PostgreSQL `TRUNC()` function returns a number truncated to a whole number or truncated to the specified decimal places.
 

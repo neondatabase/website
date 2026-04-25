@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL REINDEX'
-page_title: 'PostgreSQL REINDEX Explained'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL REINDEX statement to rebuild one or more indices.'
+title: PostgreSQL REINDEX
+page_title: PostgreSQL REINDEX Explained
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL REINDEX statement
+  to rebuild one or more indices.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-reindex/'
 ogImage: ''
 updatedOn: '2024-02-28T10:26:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Multicolumn Indexes'
-  slug: 'postgresql-indexes/postgresql-multicolumn-indexes'
+  title: PostgreSQL Multicolumn Indexes
+  slug: postgresql-indexes/postgresql-multicolumn-indexes
 nextLink:
-  title: 'PostgreSQL DROP INDEX'
-  slug: 'postgresql-indexes/postgresql-drop-index'
+  title: PostgreSQL DROP INDEX
+  slug: postgresql-indexes/postgresql-drop-index
 ---
+<Admonition type="info" id="CTA">
+The REINDEX statement works the same on any PostgreSQL deployment, so you can use what you learn here on Postgres anywhere you run it. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your data teams need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REINDEX` statement to rebuild one or more indexes.
 

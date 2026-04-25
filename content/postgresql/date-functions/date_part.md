@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DATE_PART() Function'
-page_title: 'PostgreSQL DATE_PART() Function'
-page_description: 'Learn how to the PostgreSQL DATE_PART function to extract subfields such as year, month, week, and so on from a timestamp.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/'
+title: PostgreSQL DATE_PART() Function
+page_title: PostgreSQL DATE_PART() Function
+page_description: >-
+  Learn how to the PostgreSQL DATE_PART function to extract subfields such as
+  year, month, week, and so on from a timestamp.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
 ogImage: ''
 updatedOn: '2024-03-22T01:10:49+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LOCALTIMESTAMP Function'
-  slug: 'postgresql-date-functions/postgresql-localtimestamp'
+  title: PostgreSQL LOCALTIMESTAMP Function
+  slug: postgresql-date-functions/postgresql-localtimestamp
 nextLink:
-  title: 'PostgreSQL EXTRACT() Function'
-  slug: 'postgresql-date-functions/postgresql-extract'
+  title: PostgreSQL EXTRACT() Function
+  slug: postgresql-date-functions/postgresql-extract
 ---
+<Admonition type="info" id="CTA">
+The `DATE_PART()` function works the same across any PostgreSQL deployment, so the examples here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DATE_PART()` function to retrieve the subfields such as year, month, and week from a [date](../postgresql-tutorial/postgresql-date) or [time](../postgresql-tutorial/postgresql-time) value.
 

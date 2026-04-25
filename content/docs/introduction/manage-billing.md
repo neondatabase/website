@@ -60,7 +60,7 @@ If you are unable to update your payment method, please [contact support](/docs/
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in the  [Neon Platform Terms](/platform-terms).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in the [Neon Platform Terms](/platform-terms).
 
 ### Failing payments for Indian customers
 

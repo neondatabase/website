@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Row Types'
-page_title: 'PL/pgSQL Row Types'
-page_description: 'In this tutorial, you will learn how to use the PL/pgSQL row types to declare row variables that hold a complete row of a result set.'
+title: PL/pgSQL Row Types
+page_title: PL/pgSQL Row Types
+page_description: >-
+  In this tutorial, you will learn how to use the PL/pgSQL row types to declare
+  row variables that hold a complete row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-row-types/'
-ogImage: '/postgresqltutorial/actor.png'
+ogImage: /postgresqltutorial/actor.png
 updatedOn: '2024-03-19T01:58:41+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Select Into'
-  slug: 'postgresql-plpgsql/pl-pgsql-select-into'
+  title: PL/pgSQL Select Into
+  slug: postgresql-plpgsql/pl-pgsql-select-into
 nextLink:
-  title: 'PL/pgSQL Record Types'
-  slug: 'postgresql-plpgsql/plpgsql-record-types'
+  title: PL/pgSQL Record Types
+  slug: postgresql-plpgsql/plpgsql-record-types
 ---
+<Admonition type="info" id="CTA">
+Row types in PL/pgSQL work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for speed, with instant provisioning, branching, and autoscaling out of the box.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PL/pgSQL row types to declare row variables that hold a complete row of a result set.
 

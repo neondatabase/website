@@ -199,19 +199,19 @@ Values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc333
 ## QuoteBlock
 
 <QuoteBlock
-  quote="Neon's branching feature transformed our development workflow."
-  author={{
+quote="Neon's branching feature transformed our development workflow."
+author={{
     name: 'Jane Smith',
     company: 'Acme Corp',
   }}
-  link="/blog/acme-case-study"
+link="/blog/acme-case-study"
 />
 
 ## Testimonial
 
 <Testimonial
-  text="The serverless scaling is exactly what we needed."
-  author={{
+text="The serverless scaling is exactly what we needed."
+author={{
     name: 'John Doe',
     company: 'StartupCo',
   }}
@@ -349,8 +349,8 @@ Inline link with description: <a href="https://example.com" description="An exam
 
 Line break in a table:
 
-| Feature | Status |
-|---------|--------|
+| Feature   | Status               |
+| --------- | -------------------- |
 | Branching | GA<br/>Available now |
 
 ## Nested components (known edge case)
@@ -373,7 +373,7 @@ conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
 ## Markdown fundamentals
 
-Regular paragraph with **bold**, *italic*, `inline code`, and a [link](/docs/introduction).
+Regular paragraph with **bold**, _italic_, `inline code`, and a [link](/docs/introduction).
 
 > A standard blockquote.
 
@@ -387,7 +387,7 @@ Regular paragraph with **bold**, *italic*, `inline code`, and a [link](/docs/int
 SELECT * FROM users WHERE active = true;
 ```
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | serial | Primary key |
-| name | text | User's name |
+| Column | Type   | Description |
+| ------ | ------ | ----------- |
+| id     | serial | Primary key |
+| name   | text   | User's name |
