@@ -1,18 +1,55 @@
 import slugify from 'slugify';
 
+const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
+
+const extractCustomId = (text) => {
+  const match = text.match(CUSTOM_ID_PATTERN);
+  return match?.[1] || match?.[2] || null;
+};
+
+const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
+
 const getMarkdownTableOfContents = (markdown) => {
-  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const headings = [];
-  let match;
+  let fenceMarker = null;
+  let fenceLength = 0;
 
-  while ((match = headingRegex.exec(markdown)) !== null) {
-    const level = match[1].length - 1; // ## → 1, ### → 2
-    const rawText = match[2].trim();
+  for (const line of markdown.split(/\r?\n/)) {
+    const fenceMatch = line.match(/^\s*([`~]{3,})/);
 
-    // Support explicit custom IDs: ## Heading {#custom-id}
-    const customIdMatch = rawText.match(/\{#([^}]+)\}$/);
-    const customId = customIdMatch?.[1] || null;
-    const cleanText = rawText.replace(/\s*\{#[^}]+\}$/, '').trim();
+    if (fenceMatch) {
+      const marker = fenceMatch[1];
+
+      if (!fenceMarker) {
+        fenceMarker = marker[0];
+        fenceLength = marker.length;
+        continue;
+      }
+
+      if (marker[0] === fenceMarker && marker.length >= fenceLength) {
+        fenceMarker = null;
+        fenceLength = 0;
+      }
+
+      continue;
+    }
+
+    if (fenceMarker) {
+      continue;
+    }
+
+    const headingMatch = line.match(/^(#{2,3})\s+(.+)$/);
+
+    if (!headingMatch) {
+      continue;
+    }
+
+    const level = headingMatch[1].length - 1; // ## → 1, ### → 2
+    const rawText = headingMatch[2].trim();
+
+    // Support explicit custom IDs in both `(#custom-id)` and `{#custom-id}` forms.
+    const customId = extractCustomId(rawText);
+    const cleanText = stripCustomId(rawText);
 
     // Preserve inline code for display, strip for slug
     const title = cleanText.replace(/`([^`]+)`/g, '<code>$1</code>');

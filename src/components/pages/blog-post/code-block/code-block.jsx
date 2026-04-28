@@ -10,6 +10,10 @@ const CodeBlock = async (props) => {
   if (typeof codeContent === 'object') {
     // Stringify the object with indentation and preserving new lines
     codeContent = JSON.stringify(codeContent, null, 2);
+  } else if (typeof codeContent === 'string') {
+    // Blog markdown fences typically include a trailing newline before the closing fence.
+    // Trim only the end so code layout stays intact while removing the rendered blank line.
+    codeContent = codeContent.replace(/\n+$/u, '');
   }
 
   const highlightCode = await highlight(codeContent, props.language);

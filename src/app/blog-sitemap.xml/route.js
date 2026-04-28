@@ -4,8 +4,8 @@ export async function GET() {
   const headers = new Headers();
   headers.set('Content-Type', 'application/xml');
 
-  const posts = getAllBlogPosts();
-  const categories = getAllBlogCategories();
+  const posts = await getAllBlogPosts({ fullList: true });
+  const categories = await getAllBlogCategories();
 
   return new Response(
     `<?xml version="1.0" encoding="UTF-8" ?>

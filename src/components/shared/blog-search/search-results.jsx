@@ -3,9 +3,10 @@
 import PropTypes from 'prop-types';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import { cn } from 'utils/cn';
 
-const SearchResults = ({ posts, className, children }) => {
+const SearchResults = ({ posts, className, children, routeConfig = DEFAULT_BLOG_ROUTE_CONFIG }) => {
   // Show children when no search query is active
   if (posts === null) {
     return children;
@@ -23,7 +24,12 @@ const SearchResults = ({ posts, className, children }) => {
         {posts.length} results found
       </div>
       {posts.map((post, index) => (
-        <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />
+        <BlogGridItem
+          key={post.slug}
+          post={post}
+          isPriority={index < 5}
+          routeConfig={routeConfig}
+        />
       ))}
     </div>
   );
@@ -35,14 +41,20 @@ SearchResults.propTypes = {
       PropTypes.shape({
         slug: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        subtitle: PropTypes.string.isRequired,
-        excerpt: PropTypes.string.isRequired,
+        subtitle: PropTypes.string,
+        excerpt: PropTypes.string,
       })
     ),
     PropTypes.oneOf([null]),
   ]),
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default SearchResults;
