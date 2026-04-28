@@ -2,25 +2,26 @@ import PropTypes from 'prop-types';
 
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
+import SubscribeForm from 'components/pages/changelog/subscribe-form';
 import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
-import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
 
-import Tag from '../tag';
 import DropdownMenu from '../dropdown-menu';
+import Tag from '../tag';
 
 const Changelog = ({ posts }) => (
   <>
     <Hero />
-    <ChangelogForm className="mb-5 hidden xl:flex" />
-    <ChangelogList className="mt-16" posts={posts} />
+    {/* <SubscribeForm className="mt-3.5" /> */}
+    <SubscribeForm />
+    <ChangelogList className="mt-14" posts={posts} />
   </>
 );
 
@@ -50,7 +51,8 @@ const Post = ({
   gitHubPath,
   tableOfContents,
   author,
-  className = 'max-w-[704px] lg:max-w-none',
+  aboveContent = null,
+  className = 'max-w-208 lg:max-w-none',
 }) => {
   const modal = MODALS.find(
     (modal) =>
@@ -86,7 +88,7 @@ const Post = ({
         ) : (
           <article>
             <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
-              <div className={cn(!isChangelog && 'max-w-[520px]')}>
+              <div className={cn(!isChangelog && 'max-w-xl 2xl:max-w-[520px]')}>
                 <h1
                   className={cn(
                     'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
@@ -104,6 +106,7 @@ const Post = ({
               </div>
               {!isChangelog && <DropdownMenu gitHubPath={gitHubPath} />}
             </div>
+            {aboveContent}
             <Content
               className={cn('mt-10 lg:mt-7 md:mt-5', isSplitLayout && 'split-layout')}
               content={content}
@@ -181,6 +184,7 @@ Post.propTypes = {
     }),
     photo: PropTypes.string,
   }),
+  aboveContent: PropTypes.node,
   className: PropTypes.string,
 };
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL UPPER() Function'
-page_title: 'PostgreSQL UPPER() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL UPPER() function to convert the string to all uppercase.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-upper/'
-ogImage: '/postgresqltutorial/customer.png'
+title: PostgreSQL UPPER() Function
+page_title: PostgreSQL UPPER() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL UPPER() function to
+  convert the string to all uppercase.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-upper/
+ogImage: /postgresqltutorial/customer.png
 updatedOn: '2024-01-28T11:13:28+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LOWER() Function'
-  slug: 'postgresql-string-functions/postgresql-lower'
+  title: PostgreSQL LOWER() Function
+  slug: postgresql-string-functions/postgresql-lower
 nextLink:
-  title: 'PostgreSQL RTRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-rtrim'
+  title: PostgreSQL RTRIM() Function
+  slug: postgresql-string-functions/postgresql-rtrim
 ---
+<Admonition type="info" id="CTA">
+The UPPER() function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise standardizing on managed Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. If you're a developer or startup that needs to ship features and scale on demand, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPPER()` function to convert a string to uppercase.
 

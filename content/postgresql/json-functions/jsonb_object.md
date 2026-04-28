@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_object() Function'
-page_title: 'PostgreSQL jsonb_object() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_object() function to create a JSON object from a text array.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL jsonb_object() Function
+page_title: PostgreSQL jsonb_object() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_object()
+  function to create a JSON object from a text array.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-02-25T13:23:04+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_build_object() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_build_object'
+  title: PostgreSQL jsonb_build_object() Function
+  slug: postgresql-json-functions/postgresql-jsonb_build_object
 nextLink:
-  title: 'PostgreSQL row_to_json() Function'
-  slug: 'postgresql-json-functions/postgresql-row_to_json'
+  title: PostgreSQL row_to_json() Function
+  slug: postgresql-json-functions/postgresql-row_to_json
 ---
+<Admonition type="info" id="CTA">
+The jsonb_object() function works the same across every PostgreSQL deployment, so what you learn here carries over no matter where you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams expect. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object()` function to create a JSON object from a text array.
 

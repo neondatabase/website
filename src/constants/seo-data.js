@@ -40,6 +40,11 @@ export default {
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
   },
+  faqs: {
+    title: 'FAQs — Neon',
+    description: 'Frequently asked questions about Neon.',
+    pathname: LINKS.faqs,
+  },
   caseStudies: {
     title: 'Case Studies — Neon',
     description: 'Discover how other companies are using Neon.',

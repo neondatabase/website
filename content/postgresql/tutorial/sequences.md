@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Sequences'
-page_title: 'PostgreSQL Sequences'
-page_description: 'In this tutorial, you will learn about the PostgreSQL sequences and how to use a sequence object to generate a sequence of numbers.'
+title: PostgreSQL Sequences
+page_title: PostgreSQL Sequences
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL sequences and how to use
+  a sequence object to generate a sequence of numbers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/'
-ogImage: '/postgresqltutorial/PostgreSQL-Sequence-simple-example.png'
+ogImage: /postgresqltutorial/PostgreSQL-Sequence-simple-example.png
 updatedOn: '2024-02-08T06:01:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Using PostgreSQL SERIAL to Create Auto-increment Column'
-  slug: 'postgresql-tutorial/postgresql-serial'
+  title: Using PostgreSQL SERIAL to Create Auto-increment Column
+  slug: postgresql-tutorial/postgresql-serial
 nextLink:
-  title: 'PostgreSQL Identity Column'
-  slug: 'postgresql-tutorial/postgresql-identity-column'
+  title: PostgreSQL Identity Column
+  slug: postgresql-tutorial/postgresql-identity-column
 ---
+<Admonition type="info" id="CTA">
+Sequences work the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL sequences and how to use a sequence object to generate a sequence of numbers.
 

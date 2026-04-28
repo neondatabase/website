@@ -268,6 +268,11 @@ module.exports = {
       url: 'https://neon.com/guides',
       description: 'Step-by-step tutorials for frameworks and tools',
     },
+    faqs: {
+      title: 'FAQs',
+      url: 'https://neon.com/faqs',
+      description: 'Frequently asked questions about Neon',
+    },
     'use-cases': null,
     programs: null,
   },
@@ -287,7 +292,15 @@ module.exports = {
   // Section `collapse` settings are index-only and do not apply here.
   fullText: {
     // Routes from CONTENT_ROUTES to skip entirely.
-    excludeRoutes: ['docs/changelog', 'postgresql', 'guides', 'branching', 'use-cases', 'programs'],
+    excludeRoutes: [
+      'docs/changelog',
+      'postgresql',
+      'guides',
+      'faqs',
+      'branching',
+      'use-cases',
+      'programs',
+    ],
     // When true, do not exclude additionalResources[].sourcePath files
     // (e.g., glossary.md stays in its natural section instead of being excluded).
     includeAdditionalResourcePaths: true,

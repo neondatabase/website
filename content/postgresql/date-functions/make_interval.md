@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL MAKE_INTERVAL() Function'
-page_title: 'PostgreSQL MAKE_INTERVAL() Function'
-page_description: "In this tutorial, you will learn how to use the PostgreSQL MAKE_INTERVAL() function to create an interval from the interval's components"
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/'
+title: PostgreSQL MAKE_INTERVAL() Function
+page_title: PostgreSQL MAKE_INTERVAL() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL MAKE_INTERVAL()
+  function to create an interval from the interval's components
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/
 ogImage: ''
 updatedOn: '2024-03-25T05:04:35+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
-  slug: 'postgresql-date-functions/postgresql-justify_interval'
+  title: PostgreSQL JUSTIFY_INTERVAL() Function
+  slug: postgresql-date-functions/postgresql-justify_interval
 nextLink:
-  title: 'PostgreSQL AT TIME ZONE Operator'
-  slug: 'postgresql-date-functions/postgresql-at-time-zone'
+  title: PostgreSQL AT TIME ZONE Operator
+  slug: postgresql-date-functions/postgresql-at-time-zone
 ---
+<Admonition type="info" id="CTA">
+The MAKE_INTERVAL() function works the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for your pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `MAKE_INTERVAL()` function to create an interval from the interval’s components
 

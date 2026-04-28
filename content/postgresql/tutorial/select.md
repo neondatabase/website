@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL SELECT'
-page_title: 'PostgreSQL SELECT'
-page_description: 'This tutorial shows you how to use the basic PostgreSQL SELECT statement to retrieve data from a single table.'
+title: PostgreSQL SELECT
+page_title: PostgreSQL SELECT
+page_description: >-
+  This tutorial shows you how to use the basic PostgreSQL SELECT statement to
+  retrieve data from a single table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/'
-ogImage: '/postgresqltutorial/PostgreSQL-Select.png'
+ogImage: /postgresqltutorial/PostgreSQL-Select.png
 updatedOn: '2024-09-21T09:35:09+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Server and Database Objects'
-  slug: 'postgresql-tutorial/postgresql-server-and-database-objects'
+  title: PostgreSQL Server and Database Objects
+  slug: postgresql-tutorial/postgresql-server-and-database-objects
 nextLink:
-  title: 'PostgreSQL Column Alias'
-  slug: 'postgresql-tutorial/postgresql-column-alias'
+  title: PostgreSQL Column Alias
+  slug: postgresql-tutorial/postgresql-column-alias
 ---
+<Admonition type="info" id="CTA">
+The SELECT statement works the same way across every PostgreSQL deployment, so anything you learn here carries over to Postgres running anywhere. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with the performance, security, and native Lakehouse integration your data platform needs. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for that, with instant provisioning, branching, and serverless scale built in.
+</Admonition>
 
 **Summary**: in this tutorial, you are going to learn how to use the basic **PostgreSQL SELECT** statement to query data from a table.
 

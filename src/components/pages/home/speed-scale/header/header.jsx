@@ -5,7 +5,7 @@ import { cn } from 'utils/cn';
 
 const Header = () => (
   <div className="pt-60 xl:pt-40 lg:pt-[116px] md:pt-[102px]">
-    <div className="max-w-[832px] xl:max-w-[704px] lg:max-w-[480px]">
+    <div className="max-w-208 xl:max-w-[704px] lg:max-w-[480px]">
       <SectionLabel className="mb-5 lg:mb-[18px] md:mb-4" theme="white">
         Agent platform
       </SectionLabel>

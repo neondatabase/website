@@ -957,7 +957,6 @@ ORDER BY duration DESC;
 
 </Admonition>
 
-
 ## Postgres version
 
 Run this query to view your Postgres version.

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL RTRIM() Function'
-page_title: 'PostgreSQL RTRIM() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL RTRIM() function to remove specified characters from the end of a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/'
+title: PostgreSQL RTRIM() Function
+page_title: PostgreSQL RTRIM() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL RTRIM() function to
+  remove specified characters from the end of a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/
 ogImage: ''
 updatedOn: '2024-01-27T13:44:30+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UPPER() Function'
-  slug: 'postgresql-string-functions/postgresql-upper'
+  title: PostgreSQL UPPER() Function
+  slug: postgresql-string-functions/postgresql-upper
 nextLink:
-  title: 'PostgreSQL FORMAT() Function'
-  slug: 'postgresql-string-functions/postgresql-format'
+  title: PostgreSQL FORMAT() Function
+  slug: postgresql-string-functions/postgresql-format
 ---
+<Admonition type="info" id="CTA">
+The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can apply these examples wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high performance, secure database that plugs directly into the Lakehouse. For developers and startups who need to ship features quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `RTRIM()` function to remove specified characters from the end of a string.
 

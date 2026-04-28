@@ -1,18 +1,24 @@
 ---
-title: 'How to Create Superuser in PostgreSQL'
-page_title: 'How to Create Superuser in PostgreSQL'
-page_description: 'In this tutorial, you will learn about PostgreSQL superusers and how to create them using the CREATE ROLE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/'
+title: How to Create Superuser in PostgreSQL
+page_title: How to Create Superuser in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL superusers and how to create
+  them using the CREATE ROLE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/
 ogImage: ''
 updatedOn: '2024-02-22T08:40:18+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Change the Password of a PostgreSQL User'
-  slug: 'postgresql-administration/postgresql-change-password'
+  title: How to Change the Password of a PostgreSQL User
+  slug: postgresql-administration/postgresql-change-password
 nextLink:
-  title: 'PostgreSQL Row-Level Security'
-  slug: 'postgresql-administration/postgresql-row-level-security'
+  title: PostgreSQL Row-Level Security
+  slug: postgresql-administration/postgresql-row-level-security
 ---
+<Admonition type="info" id="CTA">
+Creating superusers with CREATE ROLE and ALTER ROLE works the same on any PostgreSQL deployment, so the techniques here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL superusers and how to create them using the `CREATE` `ROLE` statement.
 

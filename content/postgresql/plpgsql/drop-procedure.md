@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP PROCEDURE Statement'
-page_title: 'PostgreSQL DROP PROCEDURE Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DROP PROCEDURE statement to remove a procedure.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-procedure/'
-ogImage: '/postgresqltutorial/actor.png'
+title: PostgreSQL DROP PROCEDURE Statement
+page_title: PostgreSQL DROP PROCEDURE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DROP PROCEDURE
+  statement to remove a procedure.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-procedure/
+ogImage: /postgresqltutorial/actor.png
 updatedOn: '2024-02-07T14:17:58+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE PROCEDURE'
-  slug: 'postgresql-plpgsql/postgresql-create-procedure'
+  title: PostgreSQL CREATE PROCEDURE
+  slug: postgresql-plpgsql/postgresql-create-procedure
 nextLink:
-  title: 'PostgreSQL Stored Procedure with INOUT Parameters'
-  slug: 'postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters'
+  title: PostgreSQL Stored Procedure with INOUT Parameters
+  slug: postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters
 ---
+<Admonition type="info" id="CTA">
+The DROP PROCEDURE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on a managed service, or in the cloud. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP PROCEDURE` statement to remove a procedure.
 

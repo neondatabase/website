@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Views'
-page_title: 'PostgreSQL Views'
-page_description: 'This section introduces you to PostgreSQL views and shows you how to manage views in the PostgreSQL database server.'
+title: PostgreSQL Views
+page_title: PostgreSQL Views
+page_description: >-
+  This section introduces you to PostgreSQL views and shows you how to manage
+  views in the PostgreSQL database server.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/'
 ogImage: ''
 updatedOn: '2024-03-16T08:31:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Creating a PostgreSQL Trigger with a When Condition'
-  slug: 'postgresql-triggers/postgresql-trigger-when-condition'
+  title: Creating a PostgreSQL Trigger with a When Condition
+  slug: postgresql-triggers/postgresql-trigger-when-condition
 nextLink:
-  title: 'PostgreSQL CREATE VIEW'
-  slug: 'postgresql-views/managing-postgresql-views'
+  title: PostgreSQL CREATE VIEW
+  slug: postgresql-views/managing-postgresql-views
 ---
+<Admonition type="info" id="CTA">
+Views work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 ![PostgreSQL Views](/postgresqltutorial/PostgreSQL-View.png?alignright)
 A view is a named query stored in the PostgreSQL database server. A view is defined based on one or more tables which are known as base tables, and the query that defines the view is referred to as a defining query.

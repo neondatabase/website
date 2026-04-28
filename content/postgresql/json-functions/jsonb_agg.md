@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_agg() Function'
-page_title: 'PostgreSQL jsonb_agg() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_agg() function to aggregate values into a JSON array.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_agg/'
+title: PostgreSQL jsonb_agg() Function
+page_title: PostgreSQL jsonb_agg() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_agg()
+  function to aggregate values into a JSON array.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_agg/
 ogImage: ''
 updatedOn: '2024-02-25T08:14:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_to_record() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_to_record'
+  title: PostgreSQL jsonb_to_record() Function
+  slug: postgresql-json-functions/postgresql-jsonb_to_record
 nextLink:
-  title: 'PostgreSQL jsonb_object_agg() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_object_agg'
+  title: PostgreSQL jsonb_object_agg() Function
+  slug: postgresql-json-functions/postgresql-jsonb_object_agg
 ---
+<Admonition type="info" id="CTA">
+The `jsonb_agg()` function works the same on any standard PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise standardizing on a Lakehouse and want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native integration you need. If you're a developer or startup who wants to ship fast and scale without managing infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_agg()` function to aggregate values into a JSON array.
 

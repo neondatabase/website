@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL UPDATE Join'
-page_title: 'PostgreSQL UPDATE Join with Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL UPDATE join syntax to update data in a table based on values in another table.'
+title: PostgreSQL UPDATE Join
+page_title: PostgreSQL UPDATE Join with Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL UPDATE join syntax to update
+  data in a table based on values in another table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update-join/'
-ogImage: '/postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png'
+ogImage: /postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png
 updatedOn: '2024-02-01T08:42:46+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UPDATE'
-  slug: 'postgresql-tutorial/postgresql-update'
+  title: PostgreSQL UPDATE
+  slug: postgresql-tutorial/postgresql-update
 nextLink:
-  title: 'PostgreSQL DELETE'
-  slug: 'postgresql-tutorial/postgresql-delete'
+  title: PostgreSQL DELETE
+  slug: postgresql-tutorial/postgresql-delete
 ---
+<Admonition type="info" id="CTA">
+The UPDATE join syntax covered here works with any standard PostgreSQL deployment, so you can apply these patterns wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` join syntax to update data in a table based on values in another table.
 

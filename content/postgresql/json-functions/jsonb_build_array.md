@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_build_array() Function'
-page_title: 'PostgreSQL jsonb_build_array() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_build_array() function to create a JSON array.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_build_array/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL jsonb_build_array() Function
+page_title: PostgreSQL jsonb_build_array() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_build_array()
+  function to create a JSON array.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_build_array/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-02-23T07:45:10+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL to_jsonb() Function'
-  slug: 'postgresql-json-functions/postgresql-to_jsonb'
+  title: PostgreSQL to_jsonb() Function
+  slug: postgresql-json-functions/postgresql-to_jsonb
 nextLink:
-  title: 'PostgreSQL jsonb_build_object() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_build_object'
+  title: PostgreSQL jsonb_build_object() Function
+  slug: postgresql-json-functions/postgresql-jsonb_build_object
 ---
+<Admonition type="info" id="CTA">
+The jsonb_build_array() function works the same way across every PostgreSQL deployment, so what you learn here applies to any Postgres environment, not just [Neon](https://neon.com). For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres for the AI era, with the performance, security, and integration large teams need. For developers and startups who need to ship fast and scale without friction, Neon is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_build_array()` function to create a JSON array.
 

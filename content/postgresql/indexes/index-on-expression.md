@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Index on Expression'
-page_title: 'PostgreSQL Index On Expression Explained By Practical Examples'
-page_description: 'This tutorial explains the PostgreSQL index on expression and shows you how to leverage it to improve the performance of queries that contain expressions.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/'
-ogImage: '/postgresqltutorial/customer-table.png'
+title: PostgreSQL Index on Expression
+page_title: PostgreSQL Index On Expression Explained By Practical Examples
+page_description: >-
+  This tutorial explains the PostgreSQL index on expression and shows you how to
+  leverage it to improve the performance of queries that contain expressions.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-on-expression/
+ogImage: /postgresqltutorial/customer-table.png
 updatedOn: '2024-02-28T13:11:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UNIQUE Index'
-  slug: 'postgresql-indexes/postgresql-unique-index'
+  title: PostgreSQL UNIQUE Index
+  slug: postgresql-indexes/postgresql-unique-index
 nextLink:
-  title: 'PostgreSQL Partial Index'
-  slug: 'postgresql-indexes/postgresql-partial-index'
+  title: PostgreSQL Partial Index
+  slug: postgresql-indexes/postgresql-partial-index
 ---
+<Admonition type="info" id="CTA">
+Indexes on expressions work the same across any PostgreSQL deployment, so the techniques here apply wherever you run Postgres. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to leverage the PostgreSQL index on expression to improve the performance of queries that involve expressions.
 

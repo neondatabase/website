@@ -134,10 +134,10 @@ Then ask:
 - **Review**: walk through each finding one at a time, waiting for approval before applying
 - **Cancel**: do nothing
 
-### 5. Run the formatter
+### 5. Run the auto-fixer
 
 ```bash
-npm run lint:fix && npm run format
+npm run fix
 ```
 
 ### 6. Report

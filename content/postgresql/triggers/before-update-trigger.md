@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL BEFORE UPDATE Trigger'
-page_title: 'PostgreSQL BEFORE UPDATE Trigger'
-page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE UPDATE trigger that executes a function before an update operation occurs.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-update-trigger/'
+title: PostgreSQL BEFORE UPDATE Trigger
+page_title: PostgreSQL BEFORE UPDATE Trigger
+page_description: >-
+  In this tutorial, you will learn how to define a PostgreSQL BEFORE UPDATE
+  trigger that executes a function before an update operation occurs.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-update-trigger/
 ogImage: ''
 updatedOn: '2024-03-28T10:18:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL AFTER INSERT Trigger'
-  slug: 'postgresql-triggers/postgresql-after-insert-trigger'
+  title: PostgreSQL AFTER INSERT Trigger
+  slug: postgresql-triggers/postgresql-after-insert-trigger
 nextLink:
-  title: 'PostgreSQL AFTER UPDATE Trigger'
-  slug: 'postgresql-triggers/postgresql-after-update-trigger'
+  title: PostgreSQL AFTER UPDATE Trigger
+  slug: postgresql-triggers/postgresql-after-update-trigger
 ---
+<Admonition type="info" id="CTA">
+BEFORE UPDATE triggers work the same way on any PostgreSQL database, so you can apply this tutorial wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE UPDATE` trigger that executes a function before an update event occurs.
 

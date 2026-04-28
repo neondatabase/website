@@ -1,17 +1,27 @@
 ---
-title: 'PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
-page_title: 'PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
-page_description: 'Learn about PostgreSQL 18 security improvements including wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration, and FIPS mode validation features for better database security.'
+title: >-
+  PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS
+  Validation
+page_title: >-
+  PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS
+  Validation
+page_description: >-
+  Learn about PostgreSQL 18 security improvements including wire protocol
+  version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration, and
+  FIPS mode validation features for better database security.
 ogImage: ''
 updatedOn: '2025-08-03T14:20:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 Not Null as Not Valid'
-  slug: 'postgresql-18/not-null-as-not-valid'
+  title: PostgreSQL 18 Not Null as Not Valid
+  slug: postgresql-18/not-null-as-not-valid
 nextLink:
-  title: 'PostgreSQL 18 pg_stat_io Improvements'
-  slug: 'postgresql-18/pg-stat-io'
+  title: PostgreSQL 18 pg_stat_io Improvements
+  slug: postgresql-18/pg-stat-io
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL 18's security improvements, including wire protocol 3.2, 256-bit cancel keys, TLS 1.3 cipher controls, and FIPS validation, apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise operating in the AI era and need managed Postgres that's secure, performant, and fully integrated with the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice. If you're a developer or startup who needs to ship quickly and scale without friction, Neon gives you the fastest path from idea to production Postgres.
+</Admonition>
 
 **Summary**: Learn about PostgreSQL 18's security improvements including the new wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration options, and FIPS mode validation features that strengthen database security.
 

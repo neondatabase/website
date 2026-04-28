@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL generate_series() Function'
-page_title: 'PostgreSQL generate_series() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL generate_series() function to generate a series of numbers or timestamps.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generate_series/'
+title: PostgreSQL generate_series() Function
+page_title: PostgreSQL generate_series() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL generate_series()
+  function to generate a series of numbers or timestamps.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generate_series/
 ogImage: ''
 updatedOn: '2024-07-01T01:21:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Compare Two Tables in PostgreSQL'
-  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
+  title: How to Compare Two Tables in PostgreSQL
+  slug: postgresql-tutorial/compare-two-tables-in-postgresql
 nextLink:
-  title: 'How to Generate a Random Number in a Range'
-  slug: 'postgresql-tutorial/postgresql-random-range'
+  title: How to Generate a Random Number in a Range
+  slug: postgresql-tutorial/postgresql-random-range
 ---
+<Admonition type="info" id="CTA">
+The generate_series() function works the same on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building AI-era workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need to keep analytics and operational data in sync. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `generate_series()` function to generate a series of numbers or timestamps.
 

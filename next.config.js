@@ -118,7 +118,7 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases)/:path*.md',
+        source: '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*.md',
         headers: [
           {
             key: 'Content-Disposition',

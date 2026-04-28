@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE SCHEMA'
-page_title: 'PostgreSQL CREATE SCHEMA Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE SCHEMA statement to create a new schema in a database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/'
-ogImage: '/postgresqltutorial/postgresql-create-schema-example.png'
+title: PostgreSQL CREATE SCHEMA
+page_title: PostgreSQL CREATE SCHEMA Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CREATE SCHEMA
+  statement to create a new schema in a database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/
+ogImage: /postgresqltutorial/postgresql-create-schema-example.png
 updatedOn: '2024-02-12T12:34:40+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Schema'
-  slug: 'postgresql-administration/postgresql-schema'
+  title: PostgreSQL Schema
+  slug: postgresql-administration/postgresql-schema
 nextLink:
-  title: 'PostgreSQL ALTER SCHEMA'
-  slug: 'postgresql-administration/postgresql-alter-schema'
+  title: PostgreSQL ALTER SCHEMA
+  slug: postgresql-administration/postgresql-alter-schema
 ---
+<Admonition type="info" id="CTA">
+The CREATE SCHEMA statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop or in production. If you're an enterprise organizing schemas across analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed, with instant provisioning, branching, and serverless economics.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE SCHEMA` statement to create a new schema in a database.
 

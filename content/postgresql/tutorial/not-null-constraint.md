@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Not-Null Constraint'
-page_title: 'PostgreSQL NOT NULL Constraints'
-page_description: 'You will learn about the NULL concept and how to use PostgreSQL NOT NULL constraint to ensure values in a column are not NULL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/'
+title: PostgreSQL Not-Null Constraint
+page_title: PostgreSQL NOT NULL Constraints
+page_description: >-
+  You will learn about the NULL concept and how to use PostgreSQL NOT NULL
+  constraint to ensure values in a column are not NULL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/
 ogImage: ''
 updatedOn: '2024-01-25T10:09:49+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UNIQUE Constraint'
-  slug: 'postgresql-tutorial/postgresql-unique-constraint'
+  title: PostgreSQL UNIQUE Constraint
+  slug: postgresql-tutorial/postgresql-unique-constraint
 nextLink:
-  title: 'PostgreSQL DEFAULT Value'
-  slug: 'postgresql-tutorial/postgresql-default-value'
+  title: PostgreSQL DEFAULT Value
+  slug: postgresql-tutorial/postgresql-default-value
 ---
+<Admonition type="info" id="CTA">
+NOT NULL constraints work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL not\-null constraints to ensure the values of a column are not null.
 

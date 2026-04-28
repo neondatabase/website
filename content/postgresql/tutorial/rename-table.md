@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
-page_title: 'PostgreSQL Rename Table'
-page_description: 'In this tutorial, you will learn how to rename a table to a new one using the ALTER TABLE ... RENAME TO statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-table/'
+page_title: PostgreSQL Rename Table
+page_description: >-
+  In this tutorial, you will learn how to rename a table to a new one using the
+  ALTER TABLE ... RENAME TO statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-table/
 ogImage: ''
 updatedOn: '2024-02-19T04:29:25+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER TABLE'
-  slug: 'postgresql-tutorial/postgresql-alter-table'
+  title: PostgreSQL ALTER TABLE
+  slug: postgresql-tutorial/postgresql-alter-table
 nextLink:
   title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
-  slug: 'postgresql-tutorial/postgresql-add-column'
+  slug: postgresql-tutorial/postgresql-add-column
 ---
+<Admonition type="info" id="CTA">
+Renaming tables with `ALTER TABLE ... RENAME TO` works the same on any PostgreSQL deployment, so the syntax and behavior here apply wherever you run Postgres. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database that's natively integrated into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless growth.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to rename a table using the PostgreSQL `ALTER TABLE RENAME TO` statement.
 

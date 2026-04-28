@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL JSON Extract'
+title: PostgreSQL JSON Extract
 page_title: 'PostgreSQL JSON Extract Operators: -> And ->>'
-page_description: 'You will learn how to use the operators -> and ->> to extract an element from a JSON array or a value of a key from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/'
+page_description: >-
+  You will learn how to use the operators -> and ->> to extract an element from
+  a JSON array or a value of a key from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
 updatedOn: '2024-02-23T10:18:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_extract_path_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_extract_path_text'
+  title: PostgreSQL jsonb_extract_path_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_extract_path_text
 nextLink:
-  title: 'PostgreSQL jsonb_insert() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_insert'
+  title: PostgreSQL jsonb_insert() Function
+  slug: postgresql-json-functions/postgresql-jsonb_insert
 ---
+<Admonition type="info" id="CTA">
+The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the operator `->` and `->>` to extract an element from a JSON array or a value of a key from a JSON object.
 

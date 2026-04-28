@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TRIM() Function'
-page_title: 'PostgreSQL TRIM() Function'
-page_description: 'Use the PostgreSQL TRIM() function to remove the specified characters from the leading, trailing, or both leading and trailing of a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/'
+title: PostgreSQL TRIM() Function
+page_title: PostgreSQL TRIM() Function
+page_description: >-
+  Use the PostgreSQL TRIM() function to remove the specified characters from the
+  leading, trailing, or both leading and trailing of a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/
 ogImage: ''
 updatedOn: '2024-01-27T14:01:40+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LENGTH() Function'
-  slug: 'postgresql-string-functions/postgresql-length-function'
+  title: PostgreSQL LENGTH() Function
+  slug: postgresql-string-functions/postgresql-length-function
 nextLink:
-  title: 'PostgreSQL LTRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-ltrim'
+  title: PostgreSQL LTRIM() Function
+  slug: postgresql-string-functions/postgresql-ltrim
 ---
+<Admonition type="info" id="CTA">
+The PostgreSQL TRIM() function behavior covered here applies to any Postgres deployment, so you can use these patterns wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around your workflow.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TRIM()` function to remove specified prefixes or suffixes (or both) from a string.
 

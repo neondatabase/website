@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Boolean Data Type with Practical Examples'
-page_title: 'PostgreSQL BOOLEAN Data Type with Practical Examples'
-page_description: 'In this tutorial, you will learn about the PostgreSQL Boolean data type and how to use it in designing the database tables.'
+title: PostgreSQL Boolean Data Type with Practical Examples
+page_title: PostgreSQL BOOLEAN Data Type with Practical Examples
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL Boolean data type and
+  how to use it in designing the database tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-boolean/'
-ogImage: '/postgresqltutorial/PostgreSQL-Boolean-300x146.png'
+ogImage: /postgresqltutorial/PostgreSQL-Boolean-300x146.png
 updatedOn: '2024-02-01T01:09:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DEFAULT Value'
-  slug: 'postgresql-tutorial/postgresql-default-value'
+  title: PostgreSQL DEFAULT Value
+  slug: postgresql-tutorial/postgresql-default-value
 nextLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
-  slug: 'postgresql-tutorial/postgresql-char-varchar-text'
+  slug: postgresql-tutorial/postgresql-char-varchar-text
 ---
+<Admonition type="info" id="CTA">
+The BOOLEAN type works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL Boolean data type and how to use it in designing database tables.
 

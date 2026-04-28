@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL EXCEPT'
-page_title: 'PostgreSQL EXCEPT'
-page_description: 'Show you how to the PostgreSQL EXCEPT operator to combine the result sets of two queries.'
+title: PostgreSQL EXCEPT
+page_title: PostgreSQL EXCEPT
+page_description: >-
+  Show you how to the PostgreSQL EXCEPT operator to combine the result sets of
+  two queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/'
-ogImage: '/postgresqltutorial/PostgreSQL-EXCEPT-300x202.png'
+ogImage: /postgresqltutorial/PostgreSQL-EXCEPT-300x202.png
 updatedOn: '2024-07-01T00:51:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INTERSECT Operator'
-  slug: 'postgresql-tutorial/postgresql-intersect'
+  title: PostgreSQL INTERSECT Operator
+  slug: postgresql-tutorial/postgresql-intersect
 nextLink:
-  title: 'PostgreSQL CTE'
-  slug: 'postgresql-tutorial/postgresql-cte'
+  title: PostgreSQL CTE
+  slug: postgresql-tutorial/postgresql-cte
 ---
+<Admonition type="info" id="CTA">
+The EXCEPT operator works the same way in any PostgreSQL database, so what you learn here applies whether you're running Postgres on your laptop, in your data center, or in the cloud. For enterprises ready to put Postgres at the center of their AI and analytics stack, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering high performance, strong security, and deep integration with the Lakehouse. For developers and startups who need to ship products fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXCEPT` operator to return a result set containing the rows in the first query that do not appear in the output of the second query.
 

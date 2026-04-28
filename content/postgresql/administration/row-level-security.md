@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Row-Level Security'
-page_title: 'PostgreSQL Row-Level Security'
-page_description: 'in this tutorial, you will learn how to use PostgreSQL row-level security to control access to individual rows in a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-row-level-security/'
+title: PostgreSQL Row-Level Security
+page_title: PostgreSQL Row-Level Security
+page_description: >-
+  in this tutorial, you will learn how to use PostgreSQL row-level security to
+  control access to individual rows in a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-row-level-security/
 ogImage: ''
 updatedOn: '2024-02-22T04:16:15+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Create Superuser in PostgreSQL'
-  slug: 'postgresql-administration/create-superuser-postgresql'
+  title: How to Create Superuser in PostgreSQL
+  slug: postgresql-administration/create-superuser-postgresql
 nextLink:
-  title: 'Reset Forgotten Password For postgres User'
-  slug: 'postgresql-administration/postgresql-reset-password'
+  title: Reset Forgotten Password For postgres User
+  slug: postgresql-administration/postgresql-reset-password
 ---
+<Admonition type="info" id="CTA">
+Row-level security works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for the best managed Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL row\-level security to control access to individual rows in a table.
 

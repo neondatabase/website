@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-page_title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE TRUNCATE trigger that fires before a TRUNCATE event occurs on a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/'
+title: PostgreSQL BEFORE TRUNCATE Trigger
+page_title: PostgreSQL BEFORE TRUNCATE Trigger
+page_description: >-
+  In this tutorial, you will learn how to define a PostgreSQL BEFORE TRUNCATE
+  trigger that fires before a TRUNCATE event occurs on a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ''
 updatedOn: '2024-03-29T02:17:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INSTEAD OF Triggers'
-  slug: 'postgresql-triggers/postgresql-instead-of-triggers'
+  title: PostgreSQL INSTEAD OF Triggers
+  slug: postgresql-triggers/postgresql-instead-of-triggers
 nextLink:
-  title: 'Disable Triggers'
-  slug: 'postgresql-triggers/managing-postgresql-trigger'
+  title: Disable Triggers
+  slug: postgresql-triggers/managing-postgresql-trigger
 ---
+<Admonition type="info" id="CTA">
+The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature, so everything here works the same on any Postgres deployment. If you're an enterprise looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE TRUNCATE` trigger that fires before a `TRUNCATE` event occurs on a table.
 

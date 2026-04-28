@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_populate_record() Function'
-page_title: 'PostgreSQL jsonb_populate_record() Function'
-page_description: 'You will learn how to use the PostgreSQL jsonb_populate_record() function to populate the fields of a record type from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_record/'
+title: PostgreSQL jsonb_populate_record() Function
+page_title: PostgreSQL jsonb_populate_record() Function
+page_description: >-
+  You will learn how to use the PostgreSQL jsonb_populate_record() function to
+  populate the fields of a record type from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_record/
 ogImage: ''
 updatedOn: '2024-02-26T03:13:15+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_to_record() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_to_record'
+  title: PostgreSQL jsonb_to_record() Function
+  slug: postgresql-json-functions/postgresql-jsonb_to_record
 nextLink:
-  title: 'PostgreSQL jsonb_populate_recordset() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_populate_recordset'
+  title: PostgreSQL jsonb_populate_recordset() Function
+  slug: postgresql-json-functions/postgresql-jsonb_populate_recordset
 ---
+<Admonition type="info" id="CTA">
+The `jsonb_populate_record()` function works the same in any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, a managed service, or in production. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data stay in sync. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform that gives you instant branching, autoscaling, and a generous free tier.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_record()` function to populate the fields of a record type from a JSON object.
 

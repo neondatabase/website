@@ -132,6 +132,8 @@ Tampering with Neon's infrastructure, configurations, or any restricted settings
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](/security.txt) file.
 
+Neon also has a [public bug bounty program with HackerOne](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
+
 ## Questions about our security measures?
 
 If you have any questions about our security protocols or would like a deeper dive into any aspect, our team is here to help. You can reach us at [security@neon.tech](mailto:security@neon.tech).

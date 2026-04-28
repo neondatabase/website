@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL LPAD() Function'
-page_title: 'PostgreSQL LPAD() Function'
-page_description: 'The PostgreSQL LPAD() function pads a string on the left to a specified length with a sequence of characters.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/'
-ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
+title: PostgreSQL LPAD() Function
+page_title: PostgreSQL LPAD() Function
+page_description: >-
+  The PostgreSQL LPAD() function pads a string on the left to a specified length
+  with a sequence of characters.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/
+ogImage: /postgresqltutorial/customer-and-payment-tables.png
 updatedOn: '2024-01-28T02:20:39+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RIGHT() Function'
-  slug: 'postgresql-string-functions/postgresql-right'
+  title: PostgreSQL RIGHT() Function
+  slug: postgresql-string-functions/postgresql-right
 nextLink:
-  title: 'PostgreSQL RPAD() Function'
-  slug: 'postgresql-string-functions/postgresql-rpad'
+  title: PostgreSQL RPAD() Function
+  slug: postgresql-string-functions/postgresql-rpad
 ---
+<Admonition type="info" id="CTA">
+The LPAD() function is standard PostgreSQL and works the same way on any Postgres deployment, so the techniques here carry over wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LPAD()` function to pad a string on the left to a specified length with a sequence of characters.
 

@@ -48,10 +48,12 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 - `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an idle state due to [scale to zero](/docs/reference/glossary#scale-to-zero).
 - `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's computes. This includes any computes deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 CU costs .25 compute seconds, while 1 second at 4 CU costs 4 compute seconds.
-  | CU | active_time_seconds | compute_time_seconds |
-  |:-----|:----------------------|:-----------------------|
-  | 0.25 | 1 | 0.25 |
-  | 4 | 1 | 4 |
+
+  | CU   | active_time_seconds | compute_time_seconds |
+  | :--- | :------------------ | :------------------- |
+  | 0.25 | 1                   | 0.25                 |
+  | 4    | 1                   | 4                    |
+
 - `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 - `data_transfer_bytes` &#8212; Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 

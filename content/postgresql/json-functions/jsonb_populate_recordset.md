@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_populate_recordset() Function'
-page_title: 'PostgreSQL jsonb_populate_recordset() Function'
-page_description: 'How to se the PostgreSQL jsonb_popuplate_recordset() function to populate the fields of a record type from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_recordset/'
+title: PostgreSQL jsonb_populate_recordset() Function
+page_title: PostgreSQL jsonb_populate_recordset() Function
+page_description: >-
+  How to se the PostgreSQL jsonb_popuplate_recordset() function to populate the
+  fields of a record type from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_recordset/
 ogImage: ''
 updatedOn: '2024-02-26T04:22:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_populate_record() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_populate_record'
+  title: PostgreSQL jsonb_populate_record() Function
+  slug: postgresql-json-functions/postgresql-jsonb_populate_record
 nextLink:
-  title: 'PostgreSQL jsonb_typeof() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_typeof'
+  title: PostgreSQL jsonb_typeof() Function
+  slug: postgresql-json-functions/postgresql-jsonb_typeof
 ---
+<Admonition type="info" id="CTA">
+The jsonb_populate_recordset() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_recordset()` function to populate the fields of a record type from a JSON array of objects.
 

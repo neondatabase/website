@@ -35,19 +35,19 @@ Analyze the project files (`package.json`, `requirements.txt`, `.csproj`, `pom.x
 
 Based on the detected language, install the recommended library for handling retries. **Ask the user for permission before running install commands.**
 
-*   **Node.js:** Install `async-retry`.
+-   **Node.js:** Install `async-retry`.
     ```bash
     npm install async-retry
     ```
-*   **Python:** Install `tenacity`.
+-   **Python:** Install `tenacity`.
     ```bash
     pip install tenacity
     ```
-*   **C#/.NET:** Install `Polly`.
+-   **C#/.NET:** Install `Polly`.
     ```bash
     dotnet add package Polly
     ```
-*   **Java:** Install `failsafe`.
+-   **Java:** Install `failsafe`.
     ```xml
     <!-- Maven dependency for dev.failsafe:failsafe -->
     <dependency>
@@ -60,14 +60,14 @@ Based on the detected language, install the recommended library for handling ret
 ### 3. Refactor Connection Configuration (Timeouts)
 
 Locate where the database connection pool is initialized. Modify the configuration to ensure the **Connection Timeout** is set to at least **15 seconds**.
-*   *Reasoning:* Neon endpoints may scale to zero. A cold start can take a few seconds. Aggressive timeouts (<5s) will cause application failures during these valid operational events.
+-   *Reasoning:* Neon endpoints may scale to zero. A cold start can take a few seconds. Aggressive timeouts (<5s) will cause application failures during these valid operational events.
 
 ### 4. Implement the `isTransientError` Logic
 
 Create a helper function to identify retriable errors. You must check for the following specific Postgres `SQLSTATE` codes and error messages:
 
-*   **Codes:** `57P01` (admin_shutdown), `08006` (connection_failure), `08003` (connection_does_not_exist).
-*   **Messages:** "Connection terminated unexpectedly", "network issue", "Couldn't connect to compute node", "starting up".
+-   **Codes:** `57P01` (admin_shutdown), `08006` (connection_failure), `08003` (connection_does_not_exist).
+-   **Messages:** "Connection terminated unexpectedly", "network issue", "Couldn't connect to compute node", "starting up".
 
 ### 5. Implement Retry Wrapper with Backoff & Jitter
 

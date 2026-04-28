@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL WITH CHECK OPTION'
-page_title: 'Creating PostgreSQL Views WITH CHECK OPTION'
-page_description: 'Show you create views using the PostgreSQL WITH CHECK OPTION to ensure that the changes to the base table satisfy the view-defining condition.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/'
+title: PostgreSQL WITH CHECK OPTION
+page_title: Creating PostgreSQL Views WITH CHECK OPTION
+page_description: >-
+  Show you create views using the PostgreSQL WITH CHECK OPTION to ensure that
+  the changes to the base table satisfy the view-defining condition.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/
 ogImage: ''
 updatedOn: '2024-03-16T04:31:23+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Creating PostgreSQL Updatable Views'
-  slug: 'postgresql-views/postgresql-updatable-views'
+  title: Creating PostgreSQL Updatable Views
+  slug: postgresql-views/postgresql-updatable-views
 nextLink:
-  title: 'PostgreSQL ALTER VIEW Statement'
-  slug: 'postgresql-views/postgresql-alter-view'
+  title: PostgreSQL ALTER VIEW Statement
+  slug: postgresql-views/postgresql-alter-view
 ---
+<Admonition type="info" id="CTA">
+The WITH CHECK OPTION clause works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create an updatable view using the `WITH CHECK OPTION` clause to ensure that the changes to the base tables through the view satisfy the view\-defining condition.
 

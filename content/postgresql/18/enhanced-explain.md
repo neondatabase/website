@@ -1,17 +1,23 @@
 ---
-title: 'PostgreSQL 18 Enhanced EXPLAIN with Automatic Buffers'
-page_title: 'PostgreSQL 18 Enhanced EXPLAIN with Automatic Buffers'
-page_description: 'Learn about PostgreSQL 18s enhanced EXPLAIN command that automatically includes buffer information, index lookup counts, and comprehensive CPU and WAL statistics for better query optimization.'
+title: PostgreSQL 18 Enhanced EXPLAIN with Automatic Buffers
+page_title: PostgreSQL 18 Enhanced EXPLAIN with Automatic Buffers
+page_description: >-
+  Learn about PostgreSQL 18s enhanced EXPLAIN command that automatically
+  includes buffer information, index lookup counts, and comprehensive CPU and
+  WAL statistics for better query optimization.
 ogImage: ''
 updatedOn: '2025-06-21T04:40:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 B-tree Skip Scan for Better Queries'
-  slug: 'postgresql-18/btree-skip-scan'
+  title: PostgreSQL 18 B-tree Skip Scan for Better Queries
+  slug: postgresql-18/btree-skip-scan
 nextLink:
-  title: 'PostgreSQL 18 Virtual Generated Columns'
-  slug: 'postgresql-18/virtual-generated-columns'
+  title: PostgreSQL 18 Virtual Generated Columns
+  slug: postgresql-18/virtual-generated-columns
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL 18's enhanced EXPLAIN with automatic buffers works the same way across any Postgres deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for speed, with instant branching, autoscaling, and a generous free tier.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's enhanced EXPLAIN command that automatically includes buffer information, shows index lookup counts, and provides comprehensive CPU and WAL statistics, making query optimization more accessible and detailed than ever before.
 

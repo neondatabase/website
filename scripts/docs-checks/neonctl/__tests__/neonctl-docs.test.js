@@ -29,7 +29,7 @@ describe('neonctl docs validation', () => {
         ...errors.map((e) => `  ${relPath(e.file)}:${e.line}  ${e.message}`),
         '',
       ];
-       
+
       console.error(lines.join('\n'));
     }
 

@@ -551,6 +551,7 @@ Use `StickyTable` for large markdown tables where readers need the header to rem
 - Use `StickyTable` only around a single markdown table.
 - Keep the table in markdown so it remains easy to edit in one place.
 - The component preserves the normal horizontal table scroll and adds a floating header for long tables.
+- Pass `className` to `StickyTable` to apply classes to the underlying table, for example `<StickyTable className="min-w-[900px]">`.
 
 ## Two Column Layout
 

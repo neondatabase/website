@@ -1,18 +1,21 @@
 ---
-title: 'PL/pgSQL Returns SetOf'
-page_title: 'PL/pgSQL Returns SetOf'
+title: PL/pgSQL Returns SetOf
+page_title: PL/pgSQL Returns SetOf
 page_description: ''
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns-setof/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/film_table.png'
 updatedOn: '2024-03-22T08:26:57+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Develop a PL/pgSQL Function That Returns a Table'
-  slug: 'postgresql-plpgsql/plpgsql-function-returns-a-table'
+  title: How to Develop a PL/pgSQL Function That Returns a Table
+  slug: postgresql-plpgsql/plpgsql-function-returns-a-table
 nextLink:
-  title: 'PostgreSQL Drop Function'
-  slug: 'postgresql-plpgsql/postgresql-drop-function'
+  title: PostgreSQL Drop Function
+  slug: postgresql-plpgsql/postgresql-drop-function
 ---
+<Admonition type="info" id="CTA">
+Returning sets of rows with `returns setof` works the same on any PostgreSQL deployment, so you can apply these PL/pgSQL patterns wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the `returns setof` option to define a function that returns one or more rows.
 

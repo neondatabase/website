@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL FULL OUTER JOIN'
-page_title: 'PostgreSQL FULL OUTER JOIN'
-page_description: 'This tutorial shows you how to use the PostgreSQL FULL OUTER JOIN to join two tables.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/'
-ogImage: '/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png'
+title: PostgreSQL FULL OUTER JOIN
+page_title: PostgreSQL FULL OUTER JOIN
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL FULL OUTER JOIN to join two
+  tables.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
+ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
 updatedOn: '2024-01-18T05:31:07+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Self-Join'
-  slug: 'postgresql-tutorial/postgresql-self-join'
+  title: PostgreSQL Self-Join
+  slug: postgresql-tutorial/postgresql-self-join
 nextLink:
-  title: 'PostgreSQL Cross Join'
-  slug: 'postgresql-tutorial/postgresql-cross-join'
+  title: PostgreSQL Cross Join
+  slug: postgresql-tutorial/postgresql-cross-join
 ---
+<Admonition type="info" id="CTA">
+FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deployment, so you can apply these patterns wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FULL OUTER JOIN` to query data from two tables.
 

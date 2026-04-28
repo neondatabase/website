@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL DELETE JOIN'
-page_title: 'PostgreSQL DELETE JOIN - How to Emulate it Correctly'
-page_description: 'This tutorial shows you how to emulate the PostgreSQL DELETE JOIN by utilizing the DELETE USING statement or a subquery.'
+title: PostgreSQL DELETE JOIN
+page_title: PostgreSQL DELETE JOIN - How to Emulate it Correctly
+page_description: >-
+  This tutorial shows you how to emulate the PostgreSQL DELETE JOIN by utilizing
+  the DELETE USING statement or a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete-join/'
 ogImage: ''
 updatedOn: '2024-01-23T06:55:56+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DELETE'
-  slug: 'postgresql-tutorial/postgresql-delete'
+  title: PostgreSQL DELETE
+  slug: postgresql-tutorial/postgresql-delete
 nextLink:
-  title: 'PostgreSQL DELETE CASCADE'
-  slug: 'postgresql-tutorial/postgresql-delete-cascade'
+  title: PostgreSQL DELETE CASCADE
+  slug: postgresql-tutorial/postgresql-delete-cascade
 ---
+<Admonition type="info" id="CTA">
+Emulating DELETE JOIN with the USING clause or a subquery works the same on any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DELETE` statement to emulate delete join operations.
 

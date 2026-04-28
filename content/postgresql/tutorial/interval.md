@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Interval Data Type'
-page_title: 'PostgreSQL Interval Data Type'
-page_description: 'This tutorial introduces PostgreSQL interval type and shows you how to manipulate interval values using arithmetic operators and functions.'
+title: PostgreSQL Interval Data Type
+page_title: PostgreSQL Interval Data Type
+page_description: >-
+  This tutorial introduces PostgreSQL interval type and shows you how to
+  manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
 updatedOn: '2024-02-01T02:58:18+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Timestamp Data Types'
-  slug: 'postgresql-tutorial/postgresql-timestamp'
+  title: PostgreSQL Timestamp Data Types
+  slug: postgresql-tutorial/postgresql-timestamp
 nextLink:
-  title: 'PostgreSQL TIME Data Type'
-  slug: 'postgresql-tutorial/postgresql-time'
+  title: PostgreSQL TIME Data Type
+  slug: postgresql-tutorial/postgresql-time
 ---
+<Admonition type="info" id="CTA">
+The interval data type works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run analytical and operational workloads side by side. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around your workflow, with instant branching, autoscaling, and a generous free tier.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL interval data type and how to manipulate interval values.
 

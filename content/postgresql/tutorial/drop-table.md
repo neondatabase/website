@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL DROP TABLE'
-page_title: 'PostgreSQL DROP TABLE'
-page_description: 'in this tutorial, you will learn how to use the PostgreSQL DROP TABLE statement to remove one or more tables from the database.'
+title: PostgreSQL DROP TABLE
+page_title: PostgreSQL DROP TABLE
+page_description: >-
+  in this tutorial, you will learn how to use the PostgreSQL DROP TABLE
+  statement to remove one or more tables from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-table/'
 ogImage: ''
 updatedOn: '2024-01-24T10:32:29+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL RENAME COLUMN: Renaming a column'
-  slug: 'postgresql-tutorial/postgresql-rename-column'
+  slug: postgresql-tutorial/postgresql-rename-column
 nextLink:
-  title: 'PostgreSQL TRUNCATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-truncate-table'
+  title: PostgreSQL TRUNCATE TABLE
+  slug: postgresql-tutorial/postgresql-truncate-table
 ---
+<Admonition type="info" id="CTA">
+The DROP TABLE statement works the same on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises building in the AI era, Lakebase is the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse. For developers and startups who need to ship and scale quickly, Neon is the Postgres platform built to get you from prototype to production without friction.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP TABLE` statement to remove one or more tables from the database.
 

@@ -1,18 +1,24 @@
 ---
-title: 'How to Compare Two Tables in PostgreSQL'
-page_title: 'How to Compare two Tables in PostgreSQL'
-page_description: 'In this tutorial, you will learn how to compare two tables in PostgreSQL using the EXCEPT and UNION operators or an outer join.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/compare-two-tables-in-postgresql/'
-ogImage: '/postgresqltutorial/compare-two-tables-postgresql.jpg'
+title: How to Compare Two Tables in PostgreSQL
+page_title: How to Compare two Tables in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn how to compare two tables in PostgreSQL using
+  the EXCEPT and UNION operators or an outer join.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/compare-two-tables-in-postgresql/
+ogImage: /postgresqltutorial/compare-two-tables-postgresql.jpg
 updatedOn: '2024-02-01T14:06:45+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Server and Database Objects'
-  slug: 'postgresql-tutorial/postgresql-server-and-database-objects'
+  title: PostgreSQL Server and Database Objects
+  slug: postgresql-tutorial/postgresql-server-and-database-objects
 nextLink:
-  title: 'PostgreSQL generate_series() Function'
-  slug: 'postgresql-tutorial/postgresql-generate_series'
+  title: PostgreSQL generate_series() Function
+  slug: postgresql-tutorial/postgresql-generate_series
 ---
+<Admonition type="info" id="CTA">
+Comparing two tables with EXCEPT, UNION, or outer joins works the same way on any PostgreSQL database, so you can apply these techniques wherever your Postgres runs. For enterprises modernizing data platforms for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn various ways to compare two tables in PostgreSQL.
 

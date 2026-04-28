@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Stored Procedure with INOUT Parameters'
-page_title: 'PostgreSQL Stored Procedure with INOUT Parameters'
-page_description: 'In this tutorial, you will learn how to create PostgreSQL stored procedures with INOUT parameters.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL Stored Procedure with INOUT Parameters
+page_title: PostgreSQL Stored Procedure with INOUT Parameters
+page_description: >-
+  In this tutorial, you will learn how to create PostgreSQL stored procedures
+  with INOUT parameters.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-04-19T08:15:13+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP PROCEDURE Statement'
-  slug: 'postgresql-plpgsql/postgresql-drop-procedure'
+  title: PostgreSQL DROP PROCEDURE Statement
+  slug: postgresql-plpgsql/postgresql-drop-procedure
 nextLink:
-  title: 'PL/pgSQL Cursor'
-  slug: 'postgresql-plpgsql/plpgsql-cursor'
+  title: PL/pgSQL Cursor
+  slug: postgresql-plpgsql/plpgsql-cursor
 ---
+<Admonition type="info" id="CTA">
+INOUT parameters work the same way in any PostgreSQL database, so you can apply this tutorial to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL stored procedures with `INOUT` parameters.
 
