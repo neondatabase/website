@@ -12,8 +12,8 @@ previousLink:
   title: PostgreSQL ALL Operator
   slug: postgresql-tutorial/postgresql-all
 nextLink:
-  title: 'PostgreSQL Data Types'
-  slug: 'postgresql-tutorial/postgresql-data-types'
+  title: PostgreSQL Data Types
+  slug: postgresql-tutorial/postgresql-data-types
 ---
 <Admonition type="info" id="CTA">
 The EXISTS operator works the same way in any PostgreSQL deployment, so everything you learn here carries over to Postgres running anywhere. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
