@@ -98,7 +98,7 @@ const Sidebar = ({
   }
 
   return (
-    <aside className={cn('relative -mt-12', className)}>
+    <aside className={cn('relative -mt-12', isGuidesRoute && 'xl:hidden', className)}>
       <div className="sticky top-28">
         <nav
           className={cn(

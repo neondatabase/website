@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
 page_title: 'PostgreSQL ADD COLUMN: Add One or More Columns to a Table'
-page_description: 'This tutorial shows you how to use the PostgreSQL ADD COLUMN statement to add one or more columns to an existing database table.'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL ADD COLUMN statement to add
+  one or more columns to an existing database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-add-column/'
-ogImage: '/postgresqltutorial/PostgreSQL-Add-Column-300x128.png'
+ogImage: /postgresqltutorial/PostgreSQL-Add-Column-300x128.png
 updatedOn: '2024-01-25T04:01:41+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
-  slug: 'postgresql-tutorial/postgresql-rename-table'
+  slug: postgresql-tutorial/postgresql-rename-table
 nextLink:
   title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
-  slug: 'postgresql-tutorial/postgresql-drop-column'
+  slug: postgresql-tutorial/postgresql-drop-column
 ---
+<Admonition type="info" id="CTA">
+Adding columns with ALTER TABLE ADD COLUMN works the same on any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+</Admonition>
 
 ![PostgreSQL Add Column](/postgresqltutorial/PostgreSQL-Add-Column-300x128.png?alignright)
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ADD COLUMN` statement to add one or more columns to an existing table.
@@ -141,9 +146,9 @@ Output:
 ```text
  id | customer_name | phone | fax  | email
 ----+---------------+-------+------+-------
-  4 | Apple         | null  | null | null
-  5 | Samsung       | null  | null | null
-  6 | Sony          | null  | null | null
+  1 | Apple         | null  | null | null
+  2 | Samsung       | null  | null | null
+  3 | Sony          | null  | null | null
 (3 rows)
 
 

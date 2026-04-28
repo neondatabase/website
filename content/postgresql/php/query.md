@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL PHP: Querying Data'
 page_title: 'PostgreSQL PHP: Queying Data From PostgreSQL Tables'
-page_description: 'In this tutorial, you will step by step learn how to query data from the tables in the PostgreSQL database using PHP PDO.'
+page_description: >-
+  In this tutorial, you will step by step learn how to query data from the
+  tables in the PostgreSQL database using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/query/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Query-Example.png'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Query-Example.png
 updatedOn: '2022-02-09T14:55:54+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'
-  slug: 'postgresql-php/update'
+  slug: postgresql-php/update
 nextLink:
   title: 'PostgreSQL PHP: Transaction'
-  slug: 'postgresql-php/transaction'
+  slug: postgresql-php/transaction
 ---
+<Admonition type="info" id="CTA">
+Querying PostgreSQL from PHP with PDO works the same wherever your database runs, so the patterns here apply to any Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to query data from the PostgreSQL database in PHP using PDO.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TRANSLATE() Function'
-page_title: 'PostgreSQL TRANSLATE() Function'
-page_description: 'How to use the PostgreSQL TRANSLATE() function to perform several single-character, one-to-one translation in one operation.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-translate/'
+title: PostgreSQL TRANSLATE() Function
+page_title: PostgreSQL TRANSLATE() Function
+page_description: >-
+  How to use the PostgreSQL TRANSLATE() function to perform several
+  single-character, one-to-one translation in one operation.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-translate/
 ogImage: ''
 updatedOn: '2024-01-29T01:41:25+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CONCAT_WS() Function'
-  slug: 'postgresql-string-functions/postgresql-concat_ws'
+  title: PostgreSQL CONCAT_WS() Function
+  slug: postgresql-string-functions/postgresql-concat_ws
 nextLink:
-  title: 'PostgreSQL TO_CHAR() Function'
-  slug: 'postgresql-string-functions/postgresql-to_char'
+  title: PostgreSQL TO_CHAR() Function
+  slug: postgresql-string-functions/postgresql-to_char
 ---
+<Admonition type="info" id="CTA">
+The `TRANSLATE()` function is standard PostgreSQL, so everything here works the same way on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 The PostgreSQL `TRANSLATE()` function performs several single\-character, one\-to\-one translations in one operation.
 

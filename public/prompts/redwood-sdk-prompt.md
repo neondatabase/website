@@ -32,8 +32,8 @@ When this prompt is triggered, automatically configure the open RedwoodSDK proje
 
 1.  **Prompt the user to select a PostgreSQL driver.** Present the following options, explaining the benefits of each:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. This is the ideal choice for RedwoodSDK as it runs on Cloudflare Workers.
-    *   **`postgres` (postgres.js):** A fast, full-featured client that also works well in the Cloudflare Workers environment.
+    -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. This is the ideal choice for RedwoodSDK as it runs on Cloudflare Workers.
+    -   **`postgres` (postgres.js):** A fast, full-featured client that also works well in the Cloudflare Workers environment.
 
    Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 

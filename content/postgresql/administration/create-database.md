@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE DATABASE'
-page_title: 'PostgreSQL CREATE DATABASE Statement'
-page_description: 'This tutorial shows you how to use the PostgreSQL CREATE DATABASE statement to create new databases with various options.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/'
-ogImage: '/postgresqltutorial/PostgreSQL-Create-Database-pgAdmin-Step-1.png'
+title: PostgreSQL CREATE DATABASE
+page_title: PostgreSQL CREATE DATABASE Statement
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CREATE DATABASE statement to
+  create new databases with various options.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/
+ogImage: /postgresqltutorial/PostgreSQL-Create-Database-pgAdmin-Step-1.png
 updatedOn: '2024-02-16T13:35:08+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Administration'
-  slug: 'postgresql-administration/'
+  title: PostgreSQL Administration
+  slug: postgresql-administration/
 nextLink:
-  title: 'PostgreSQL ALTER DATABASE'
-  slug: 'postgresql-administration/postgresql-alter-database'
+  title: PostgreSQL ALTER DATABASE
+  slug: postgresql-administration/postgresql-alter-database
 ---
+<Admonition type="info" id="CTA">
+The CREATE DATABASE statement works the same across any PostgreSQL server, so you can apply what you learn here whether you run Postgres locally, on your own infrastructure, or in a managed service. For enterprises standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed cloud database that's fully integrated into the Lakehouse. For developers and startups who need to ship features and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CREATE DATABASE** statement to create new databases in the PostgreSQL server.
 

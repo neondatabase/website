@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Restore Database'
-page_title: 'PostgreSQL Restore Database'
-page_description: 'In this tutorial, you will learn how to restore a PostgreSQL database by using the pg_restore utility.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/'
+title: PostgreSQL Restore Database
+page_title: PostgreSQL Restore Database
+page_description: >-
+  In this tutorial, you will learn how to restore a PostgreSQL database by using
+  the pg_restore utility.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/
 ogImage: ''
 updatedOn: '2024-02-18T14:24:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Backup'
-  slug: 'postgresql-administration/postgresql-backup-database'
+  title: PostgreSQL Backup
+  slug: postgresql-administration/postgresql-backup-database
 nextLink:
-  title: 'PostgreSQL Show Databases'
-  slug: 'postgresql-administration/postgresql-show-databases'
+  title: PostgreSQL Show Databases
+  slug: postgresql-administration/postgresql-show-databases
 ---
+<Admonition type="info" id="CTA">
+Restoring databases with pg_restore works the same on any PostgreSQL deployment, so you can apply these steps wherever your Postgres runs. If you're an enterprise team looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform designed for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to restore a database by using a **PostgreSQL restore** tool called `pg_restore`.
 

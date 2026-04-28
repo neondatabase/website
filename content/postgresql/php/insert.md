@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 page_title: 'PostgreSQL PHP: Insert Data Into Tables'
-page_description: 'In this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.'
+page_description: >-
+  In this tutorial, you will learn how to use PHP PDO API to insert data into a
+  PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/insert/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Insert-Example.png
 updatedOn: '2022-02-09T15:05:02+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Create New Tables'
-  slug: 'postgresql-php/create-tables'
+  slug: postgresql-php/create-tables
 nextLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'
-  slug: 'postgresql-php/update'
+  slug: postgresql-php/update
 ---
+<Admonition type="info" id="CTA">
+Inserting data into PostgreSQL with PHP PDO works the same way on any Postgres deployment, so the techniques here carry over wherever your database lives. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.
 

@@ -33,9 +33,9 @@ When this prompt is triggered, automatically configure the open Nuxt.js project 
 
 1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for Nuxt applications deployed on Vercel or Netlify.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
-    *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for Nuxt applications deployed on Vercel or Netlify.
+    -   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    -   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
@@ -189,8 +189,8 @@ Once the file modifications are complete:
     npm run dev
     ```
 3.  Inform the user that the setup is complete. To test the connection, they can:
-    *   Visit `http://localhost:3000` to see the server-rendered page displaying the PostgreSQL version.
-    *   Visit `http://localhost:3000/api/version` to see a JSON response from the API route.
+    -   Visit `http://localhost:3000` to see the server-rendered page displaying the PostgreSQL version.
+    -   Visit `http://localhost:3000/api/version` to see a JSON response from the API route.
 
 ---
 

@@ -71,6 +71,14 @@ This adds the MCP config to your editor's configuration files. Add `-g` for glob
 
 For Local setup, you'll need a [Neon API key](/docs/manage/api-keys#creating-api-keys).
 
+## Kiro
+
+For manual configuration, Kiro reads **`~/.kiro/settings/mcp.json`** (global) or **`.kiro/settings/mcp.json`** (project). See [Kiro MCP documentation](https://kiro.dev/docs/mcp/).
+
+<Admonition type="tip" title="One-click install for Kiro">
+<a href="https://kiro.dev/launch/mcp/add?name=Neon&config=%7B%22url%22%3A%20%22https%3A//mcp.neon.tech/mcp%22%7D"><img src="https://kiro.dev/images/add-to-kiro.svg" alt="Add Neon MCP server to Kiro" height="32" /></a>
+</Admonition>
+
 ## Cursor
 
 <Tabs labels={["Quick Setup", "OAuth", "Local"]}>
@@ -115,6 +123,10 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
 
 </TabItem>
 </Tabs>
+
+<Admonition type="tip" title="One-click install for Cursor">
+<a href="https://cursor.com/en-US/install-mcp?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+</Admonition>
 
 For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
 

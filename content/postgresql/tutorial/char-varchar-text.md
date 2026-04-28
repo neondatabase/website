@@ -1,18 +1,25 @@
 ---
 title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
 page_title: 'PostgreSQL Character Types: CHAR, VARCHAR, And TEXT'
-page_description: 'This tutorial introduces you to PostgreSQL character data types including char, varchar, and text, and give you tips to choose the suitable one for tables.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/'
+page_description: >-
+  This tutorial introduces you to PostgreSQL character data types including
+  char, varchar, and text, and give you tips to choose the suitable one for
+  tables.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/
 ogImage: ''
 updatedOn: '2024-02-02T07:00:36+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Boolean Data Type with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-boolean'
+  title: PostgreSQL Boolean Data Type with Practical Examples
+  slug: postgresql-tutorial/postgresql-boolean
 nextLink:
-  title: 'PostgreSQL NUMERIC Type'
-  slug: 'postgresql-tutorial/postgresql-numeric'
+  title: PostgreSQL NUMERIC Type
+  slug: postgresql-tutorial/postgresql-numeric
 ---
+<Admonition type="info" id="CTA">
+The CHAR, VARCHAR, and TEXT types work the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop or in production. If you're an enterprise picking character types for data that lands in your lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant, secure, and fully integrated managed Postgres for the AI era. If you're a developer or startup who just wants to model your strings and ship, [Neon](https://neon.com) is the fastest way to spin up Postgres and scale as you grow.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL character data types including `CHAR`, `VARCHAR`, and `TEXT`, and how to select the appropriate character types for your tables.
 

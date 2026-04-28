@@ -36,15 +36,15 @@ Older endpoints (`/consumption_history/account` and `/consumption_history/projec
 
 ## The seven billable metrics
 
-| API metric name | What it measures | Raw unit | Billing unit |
-|---|---|---|---|
-| `compute_unit_seconds` | CPU time weighted by compute size | CU-seconds | CU-hours |
-| `root_branch_bytes_month` | Storage on root branches | byte-hours | GB-months |
-| `child_branch_bytes_month` | Storage on child branches (delta from parent) | byte-hours | GB-months |
-| `instant_restore_bytes_month` | Instant restore (point-in-time recovery / PITR) history | byte-hours | GB-months |
-| `public_network_transfer_bytes` | Outbound (egress) data over the public network | bytes | GB |
-| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+) | bytes | GB |
-| `extra_branches_month` | All child branches per hour (subtract plan allowance before billing) | branch-hours | branch-months |
+| API metric name                  | What it measures                                                                 | Raw unit     | Billing unit  |
+| -------------------------------- | -------------------------------------------------------------------------------- | ------------ | ------------- |
+| `compute_unit_seconds`           | CPU time weighted by compute size                                                | CU-seconds   | CU-hours      |
+| `root_branch_bytes_month`        | Storage on root branches                                                         | byte-hours   | GB-months     |
+| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                    | byte-hours   | GB-months     |
+| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                          | byte-hours   | GB-months     |
+| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                   | bytes        | GB            |
+| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+) | bytes        | GB            |
+| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)             | branch-hours | branch-months |
 
 A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumulates 2 CU-seconds for every wall-clock second it runs.
 
@@ -52,13 +52,13 @@ A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumula
 
 Neon uses decimal gigabytes (1 GB = 10^9 bytes), not gibibytes, and a fixed billing period of **744 hours** (31 x 24), regardless of actual month length.
 
-| From | To | Formula |
-|---|---|---|
-| CU-seconds | CU-hours | `value / 3600` |
-| byte-hours | GB-months (billing unit) | `value / 744 / 1000000000` |
-| byte-hours | average GB (what Console shows) | `value / hours_in_period / 1000000000` |
-| bytes | GB | `value / 1000000000` |
-| branch-hours | branch-months | `value / 744` |
+| From         | To                              | Formula                                |
+| ------------ | ------------------------------- | -------------------------------------- |
+| CU-seconds   | CU-hours                        | `value / 3600`                         |
+| byte-hours   | GB-months (billing unit)        | `value / 744 / 1000000000`             |
+| byte-hours   | average GB (what Console shows) | `value / hours_in_period / 1000000000` |
+| bytes        | GB                              | `value / 1000000000`                   |
+| branch-hours | branch-months                   | `value / 744`                          |
 
 For "average GB," `hours_in_period` is the number of hours between your `from` and `to` timestamps.
 
@@ -66,15 +66,15 @@ For "average GB," `hours_in_period` is the number of hours between your `from` a
 
 Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs/introduction/plans) for current pricing):
 
-| Metric | Formula | Launch | Scale |
-|---|---|---|---|
-| Compute | CU-hours x rate | $0.106/CU-hr | $0.222/CU-hr |
-| Root storage | GB-months x rate | $0.35/GB-mo | $0.35/GB-mo |
-| Child storage | GB-months x rate | $0.35/GB-mo | $0.35/GB-mo |
-| Instant restore | GB-months x rate | $0.20/GB-mo | $0.20/GB-mo |
-| Public transfer | max(0, org_total_GB - 100) x rate | $0.10/GB | $0.10/GB |
-| Private transfer | GB x rate | n/a | $0.01/GB |
-| Extra branches | branch-months x rate | $1.50/mo | $1.50/mo |
+| Metric           | Formula                           | Launch       | Scale        |
+| ---------------- | --------------------------------- | ------------ | ------------ |
+| Compute          | CU-hours x rate                   | $0.106/CU-hr | $0.222/CU-hr |
+| Root storage     | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
+| Child storage    | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
+| Instant restore  | GB-months x rate                  | $0.20/GB-mo  | $0.20/GB-mo  |
+| Public transfer  | max(0, org_total_GB - 100) x rate | $0.10/GB     | $0.10/GB     |
+| Private transfer | GB x rate                         | n/a          | $0.01/GB     |
+| Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
 
 Agent and Enterprise rates match Scale. Enterprise plans may include custom negotiated pricing.
 
@@ -137,11 +137,11 @@ cost = billable_GB x $0.10
 
 Each granularity has a lookback limit. If your `from` timestamp falls outside it, the API returns `406 Not Acceptable`.
 
-| Granularity | Lookback limit | Best for |
-|---|---|---|
-| `hourly` | Last 168 hours (~7 days) | Exact billing match, branch allowance accuracy |
-| `daily` | Last 60 days | Full-month reports, cost reconciliation |
-| `monthly` | Last 12 months | Trend analysis across billing periods |
+| Granularity | Lookback limit           | Best for                                       |
+| ----------- | ------------------------ | ---------------------------------------------- |
+| `hourly`    | Last 168 hours (~7 days) | Exact billing match, branch allowance accuracy |
+| `daily`     | Last 60 days             | Full-month reports, cost reconciliation        |
+| `monthly`   | Last 12 months           | Trend analysis across billing periods          |
 
 These limits are measured from the current server time, not from billing period boundaries. Using `granularity=hourly` gives the most precise match to Neon's internal billing calculations because branch allowances are evaluated per hour. Coarser granularity averages out within-bucket fluctuations, so daily or monthly queries may slightly underestimate billable branch-hours compared to the actual invoice.
 
@@ -184,13 +184,13 @@ curl "https://console.neon.tech/api/v2/projects/${PROJECT_ID}" \
 
 The response includes:
 
-| Field | What it tells you |
-|---|---|
-| `compute_time_seconds` | Total CU-seconds this billing period (weighted by compute size). Divide by 3600 for CU-hours. |
-| `active_time_seconds` | Wall-clock seconds endpoints were running. Divide `compute_time_seconds` by this value to get your average compute size in CUs. |
-| `data_storage_bytes_hour` | Byte-hours of storage (combines root, child, and instant restore). Divide by hours elapsed for average size, or by 744 x 1000000000 for GB-months. |
-| `data_transfer_bytes` | Data transfer in bytes (combines public and private). Divide by 1000000000 for GB. |
-| `consumption_period_start` | Start of the billing cycle. All consumption fields reset here. |
+| Field                      | What it tells you                                                                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compute_time_seconds`     | Total CU-seconds this billing period (weighted by compute size). Divide by 3600 for CU-hours.                                                      |
+| `active_time_seconds`      | Wall-clock seconds endpoints were running. Divide `compute_time_seconds` by this value to get your average compute size in CUs.                    |
+| `data_storage_bytes_hour`  | Byte-hours of storage (combines root, child, and instant restore). Divide by hours elapsed for average size, or by 744 x 1000000000 for GB-months. |
+| `data_transfer_bytes`      | Data transfer in bytes (combines public and private). Divide by 1000000000 for GB.                                                                 |
+| `consumption_period_start` | Start of the billing cycle. All consumption fields reset here.                                                                                     |
 
 On paid plans, the [consumption history API](#fetch-your-usage) provides these as separate metrics: `compute_time_seconds` corresponds to `compute_unit_seconds`, `data_storage_bytes_hour` splits into `root_branch_bytes_month`, `child_branch_bytes_month`, and `instant_restore_bytes_month`, and `data_transfer_bytes` splits into `public_network_transfer_bytes` and `private_network_transfer_bytes`.
 
@@ -208,4 +208,3 @@ Each branch in the response includes a `logical_size` field (bytes). Sum across 
 ### Free plan limits
 
 See the [Neon Free plan docs](/docs/introduction/plans#free-plan) for current limits. Exceeding them suspends compute or blocks creation. There are no costs on the Free plan.
-

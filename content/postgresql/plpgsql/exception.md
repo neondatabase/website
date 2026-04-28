@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Exception'
-page_title: 'PostgreSQL Exception'
-page_description: 'In this tutorial, you will learn how to catch and handle exceptions in PL/pgSQL.'
+title: PostgreSQL Exception
+page_title: PostgreSQL Exception
+page_description: >-
+  In this tutorial, you will learn how to catch and handle exceptions in
+  PL/pgSQL.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/film_table.png'
 updatedOn: '2024-03-19T08:01:05+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Continue Statement'
-  slug: 'postgresql-plpgsql/pl-pgsql-continue'
+  title: PL/pgSQL Continue Statement
+  slug: postgresql-plpgsql/pl-pgsql-continue
 nextLink:
-  title: 'PostgreSQL Create Function Statement'
-  slug: 'postgresql-plpgsql/postgresql-create-function'
+  title: PostgreSQL Create Function Statement
+  slug: postgresql-plpgsql/postgresql-create-function
 ---
+<Admonition type="info" id="CTA">
+Catching exceptions with PL/pgSQL works the same on any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to catch and handle exceptions in PL/pgSQL.
 

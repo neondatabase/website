@@ -1,18 +1,21 @@
 ---
-title: 'PostgreSQL MD5() Function'
-page_title: 'PostgreSQL MD5() Function'
-page_description: 'The PostgreSQL MD5() function calculates the MD5 hash of a string and returns the result in hexadecimal.'
+title: PostgreSQL MD5() Function
+page_title: PostgreSQL MD5() Function
+page_description: "The PostgreSQL MD5() function calculates the MD5\_hash of a string and returns the result in hexadecimal."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-md5/'
 ogImage: ''
 updatedOn: '2024-01-29T01:39:25+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FORMAT() Function'
-  slug: 'postgresql-string-functions/postgresql-format'
+  title: PostgreSQL FORMAT() Function
+  slug: postgresql-string-functions/postgresql-format
 nextLink:
-  title: 'PostgreSQL LEFT() Function'
-  slug: 'postgresql-string-functions/postgresql-left'
+  title: PostgreSQL LEFT() Function
+  slug: postgresql-string-functions/postgresql-left
 ---
+<Admonition type="info" id="CTA">
+The MD5() function works the same across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, a managed service, or a cloud platform. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for moving quickly.
+</Admonition>
 
 The PostgreSQL `MD5()` function calculates the [MD5](https://en.wikipedia.org/wiki/MD5) hash of a string and returns the result in hexadecimal.
 

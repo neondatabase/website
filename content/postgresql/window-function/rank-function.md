@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL RANK Function'
-page_title: 'PostgreSQL RANK() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use PostgreSQL RANK() function to assign a rank for every row of a result set.'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/PostgreSQL-RANK-function-sample-table.png'
+title: PostgreSQL RANK Function
+page_title: PostgreSQL RANK() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL RANK() function to
+  assign a rank for every row of a result set.
+prev_url: index.html
+ogImage: /postgresqltutorial/PostgreSQL-RANK-function-sample-table.png
 updatedOn: '2020-07-10T04:57:36+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PERCENT_RANK Function'
-  slug: 'postgresql-window-function/postgresql-percent_rank-function'
+  title: PostgreSQL PERCENT_RANK Function
+  slug: postgresql-window-function/postgresql-percent_rank-function
 nextLink:
-  title: 'PostgreSQL ROW_NUMBER Function'
-  slug: 'postgresql-window-function/postgresql-row_number'
+  title: PostgreSQL ROW_NUMBER Function
+  slug: postgresql-window-function/postgresql-row_number
 ---
+<Admonition type="info" id="CTA">
+The RANK() function is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run analytical and transactional workloads side by side. If you're a developer or startup who needs to ship features and scale without friction, Neon gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `RANK()` function to assign a rank for every row of a result set.
 

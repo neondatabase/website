@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CUBE'
-page_title: 'PostgreSQL CUBE'
-page_description: 'This tutorial shows you how to use the PostgreSQL CUBE to generate multiple grouping sets.'
+title: PostgreSQL CUBE
+page_title: PostgreSQL CUBE
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CUBE to generate multiple
+  grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cube/'
-ogImage: '/postgresqltutorial/sales-table.png'
+ogImage: /postgresqltutorial/sales-table.png
 updatedOn: '2024-07-01T01:06:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL GROUPING SETS'
-  slug: 'postgresql-tutorial/postgresql-grouping-sets'
+  title: PostgreSQL GROUPING SETS
+  slug: postgresql-tutorial/postgresql-grouping-sets
 nextLink:
-  title: 'PostgreSQL ROLLUP'
-  slug: 'postgresql-tutorial/postgresql-rollup'
+  title: PostgreSQL ROLLUP
+  slug: postgresql-tutorial/postgresql-rollup
 ---
+<Admonition type="info" id="CTA">
+The CUBE subclause is standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse so multidimensional aggregates sit right next to the rest of your data. If you're a developer or startup who needs to ship and scale fast, Neon gives you the most productive Postgres platform, with instant provisioning, branching, and serverless scale.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUBE` to generate multiple grouping sets.
 

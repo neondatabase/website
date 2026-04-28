@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL ALTER TABLE'
-page_title: 'PostgreSQL ALTER TABLE'
-page_description: 'This tutorial shows you how to modify the structure of a table by using the PostgreSQL ALTER TABLE statement.'
+title: PostgreSQL ALTER TABLE
+page_title: PostgreSQL ALTER TABLE
+page_description: >-
+  This tutorial shows you how to modify the structure of a table by using the
+  PostgreSQL ALTER TABLE statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table/'
-ogImage: '/postgresqltutorial/PostgreSQL-ALTER-TABLE-SET-DEFAULT.png'
+ogImage: /postgresqltutorial/PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
 updatedOn: '2024-03-26T15:18:38+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Generated Columns'
-  slug: 'postgresql-tutorial/postgresql-generated-columns'
+  title: PostgreSQL Generated Columns
+  slug: postgresql-tutorial/postgresql-generated-columns
 nextLink:
   title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
-  slug: 'postgresql-tutorial/postgresql-rename-table'
+  slug: postgresql-tutorial/postgresql-rename-table
 ---
+<Admonition type="info" id="CTA">
+The ALTER TABLE syntax and behavior covered here applies to any PostgreSQL database, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to do it on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER TABLE` statement to modify the structure of a table.
 
@@ -175,7 +180,7 @@ VALUES('PostgreSQL','http://www.postgresql.org/','whatever');
 
 ```
 ERROR:  new row for relation "links" violates check constraint "links_target_check"
-DETAIL:  Failing row contains (2, PostgreSQL, http://www.postgresql.org/, whatever).DETAIL:  Failing row contains (2, PostgreSQL, http://www.postgresql.org/, whatever).
+DETAIL:  Failing row contains (2, PostgreSQL, http://www.postgresql.org/, whatever).
 ```
 
 The following statement adds a `UNIQUE` constraint to the `url` column of the `links` table:

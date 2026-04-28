@@ -17,8 +17,7 @@ To support the delivery of our Services, Neon, LLC. may engage and use data proc
 
 This Sub-Processor page is incorporated into the [DPA](https://neon.tech/dpa) and [Terms of Service](https://neon.tech/terms-of-service) or MSA entered into between Customer and Neon (whichever shall be applicable).
 
-Updates to this page 
----------------------
+## Updates to this page 
 
 Due to the nature of our global business and our ongoing efforts to delight our customers, our business needs and services providers may change from time to time. For example, we may deprecate a service provider to consolidate and minimize our use of service providers. Similarly, we may add a service provider if we believe that doing so will enhance our ability to deliver our Services.
 
@@ -30,8 +29,9 @@ We will only use the information you provide on this form to process your reques
 
 Neon may use the following Sub-processors to deliver the Services to you:
 
-| Vendor Name | Location | Purpose |
-| Salesforce | United States | Customer service software |
-| Grafana | United States | Infrastructure service provider |
+| Vendor Name         | Location      | Purpose                         |
+| ------------------- | ------------- | ------------------------------- |
+| Salesforce          | United States | Customer service software       |
+| Grafana             | United States | Infrastructure service provider |
 | Amazon Web Services | United States | Infrastructure service provider |
-| Microsoft Azure | United States | Infrastructure service provider |
+| Microsoft Azure     | United States | Infrastructure service provider |

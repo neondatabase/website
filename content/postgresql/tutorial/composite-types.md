@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Composite Types'
-page_title: 'PostgreSQL Composite Types'
-page_description: 'In this tutorial, you will learn how to define PostgreSQL composite types to represent the structure of a row or record.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-composite-types/'
+title: PostgreSQL Composite Types
+page_title: PostgreSQL Composite Types
+page_description: >-
+  In this tutorial, you will learn how to define PostgreSQL composite types to
+  represent the structure of a row or record.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-composite-types/
 ogImage: ''
 updatedOn: '2024-04-21T14:05:08+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL BYTEA Data Type'
-  slug: 'postgresql-tutorial/postgresql-bytea-data-type'
+  title: PostgreSQL BYTEA Data Type
+  slug: postgresql-tutorial/postgresql-bytea-data-type
 nextLink:
-  title: 'How to Compare Two Tables in PostgreSQL'
-  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
+  title: How to Compare Two Tables in PostgreSQL
+  slug: postgresql-tutorial/compare-two-tables-in-postgresql
 ---
+<Admonition type="info" id="CTA">
+Composite types work the same way across every PostgreSQL deployment, so the patterns on this page apply whether you run Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres in the cloud, with strong performance, enterprise-grade security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define PostgreSQL composite types to represent the structure of a row or record.
 

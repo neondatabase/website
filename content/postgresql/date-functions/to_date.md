@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TO_DATE() Function'
+title: PostgreSQL TO_DATE() Function
 page_title: 'PostgreSQL TO_DATE() Function: Convert String to Date'
-page_description: 'This tutorial shows you how to use the PostgreSQL to_date function to convert a string literal to a date value based on a specified pattern.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_date/'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL to_date function to convert
+  a string literal to a date value based on a specified pattern.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_date/
 ogImage: ''
 updatedOn: '2024-03-22T01:30:01+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXTRACT() Function'
-  slug: 'postgresql-date-functions/postgresql-extract'
+  title: PostgreSQL EXTRACT() Function
+  slug: postgresql-date-functions/postgresql-extract
 nextLink:
-  title: 'PostgreSQL TO_TIMESTAMP Function'
-  slug: 'postgresql-date-functions/postgresql-to_timestamp'
+  title: PostgreSQL TO_TIMESTAMP Function
+  slug: postgresql-date-functions/postgresql-to_timestamp
 ---
+<Admonition type="info" id="CTA">
+The TO_DATE() function works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or through a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform around.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_DATE()` function to convert a string to a date.
 

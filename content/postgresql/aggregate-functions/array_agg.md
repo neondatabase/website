@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ARRAY_AGG Function'
-page_title: 'PostgreSQL ARRAY_AGG Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ARRAY_AGG() aggregate function to return an array from a set of input values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-array_agg/'
-ogImage: '/postgresqltutorial/PostgreSQL-ARRAY_AGG-example.png'
+title: PostgreSQL ARRAY_AGG Function
+page_title: PostgreSQL ARRAY_AGG Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ARRAY_AGG()
+  aggregate function to return an array from a set of input values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-array_agg/
+ogImage: /postgresqltutorial/PostgreSQL-ARRAY_AGG-example.png
 updatedOn: '2024-01-26T04:00:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SUM Function'
-  slug: 'postgresql-aggregate-functions/postgresql-sum-function'
+  title: PostgreSQL SUM Function
+  slug: postgresql-aggregate-functions/postgresql-sum-function
 nextLink:
-  title: 'PostgreSQL BOOL_AND() Function'
-  slug: 'postgresql-aggregate-functions/postgresql-bool_and'
+  title: PostgreSQL BOOL_AND() Function
+  slug: postgresql-aggregate-functions/postgresql-bool_and
 ---
+<Admonition type="info" id="CTA">
+The `ARRAY_AGG()` function works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ARRAY_AGG()` aggregate function to return an array from a set of input values.
 

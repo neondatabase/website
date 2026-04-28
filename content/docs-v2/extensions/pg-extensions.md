@@ -16,6 +16,8 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 
 <a id="default-extensions/"></a>
 
+<StickyTable className="min-w-208!">
+
 | Extension                                                                                        |    PG14 |    PG15 |    PG16 |    PG17 |   PG18 | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | :----------------------------------------------------------------------------------------------- | ------: | ------: | ------: | ------: | -----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer)                |   3.3.3 |   3.3.3 |   3.3.3 |   3.5.0 |  3.6.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -101,6 +103,8 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [wal2json](/docs/extensions/wal2json)                                                            |     2.6 |     2.6 |     2.6 |     2.6 |    2.6 | `CREATE EXTENSION` not required. This decoder plugin is available by default but requires enabling [logical replication](/docs/guides/logical-replication-guide) in Neon.                                                                                                                                                                                                                                                                                     |
 | [xml2](/docs/extensions/xml2)                                                                    |     1.1 |     1.1 |     1.1 |     1.1 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
+</StickyTable>
+
 ## Install an extension
 
 Unless otherwise noted, supported extensions can be installed using [CREATE EXTENSION](https://www.postgresql.org/docs/16/sql-createextension.html) syntax.
@@ -136,20 +140,6 @@ Extensions installations and updates are automatically applied to any read repli
 <RequestForm type="extension" />
 
 _We appreciate all extension requests. While we can’t guarantee support, we regularly review requests and prioritize them based on factors like user demand, popularity in the Postgres ecosystem, and Neon’s product direction. Some extensions are simple to add, while others require significant integration work._
-
-## Custom-built extensions
-
-For [Scale](/docs/introduction/plans) plan customers, Neon supports custom-built Postgres extensions for exclusive use with your Neon account. If you developed your own Postgres extension and want to use it with Neon, please reach out to us as described above. Please include the following information in your request:
-
-- A repository link or archive file containing the source code for your extension
-- A description of what the extension does, instructions for compiling it, and any prerequisites
-- Whether an NDA or licensing agreement is necessary for Neon to provide support for your extension
-
-Please keep in mind that certain restrictions may apply with respect to Postgres privileges and local file system access. Additionally, Neon features such as _Autoscaling_ and _Scale to Zero_ may limit the types of extensions we can support.
-
-Depending on the nature of your extension, Neon may also request a liability waiver.
-
-Custom-built extensions are not yet supported for Neon projects provisioned on Azure.
 
 ## Extension support
 

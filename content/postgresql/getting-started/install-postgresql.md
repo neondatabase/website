@@ -1,18 +1,24 @@
 ---
-title: 'Install PostgreSQL on Windows'
-page_title: 'Install PostgreSQL'
-page_description: 'In this tutorial, we will show you how to install PostgreSQL in your local system for learning and practicing PostgreSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/'
-ogImage: '/postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png'
+title: Install PostgreSQL on Windows
+page_title: Install PostgreSQL
+page_description: >-
+  In this tutorial, we will show you how to install PostgreSQL in your local
+  system for learning and practicing PostgreSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/
+ogImage: /postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png
 updatedOn: '2024-01-16T05:41:06+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Sample Database'
-  slug: 'postgresql-getting-started/postgresql-sample-database'
+  title: PostgreSQL Sample Database
+  slug: postgresql-getting-started/postgresql-sample-database
 nextLink:
-  title: 'Connect to a PostgreSQL Database Server'
-  slug: 'postgresql-getting-started/connect-to-postgresql-database'
+  title: Connect to a PostgreSQL Database Server
+  slug: postgresql-getting-started/connect-to-postgresql-database
 ---
+<Admonition type="info" id="CTA">
+Installing PostgreSQL on Windows works the same no matter where you plan to run Postgres in production, since the steps here apply to standard PostgreSQL. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that large teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to reach for, with instant provisioning, branching, and a generous free tier.
+</Admonition>
 
 **Summary**: in this tutorial, you will step by step learn how to **install PostgreSQL** on your local system.
 

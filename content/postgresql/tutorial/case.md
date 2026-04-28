@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL CASE'
-page_title: 'PostgreSQL CASE'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CASE expression to form conditional queries.'
+title: PostgreSQL CASE
+page_title: PostgreSQL CASE
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CASE expression to
+  form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
-ogImage: '/postgresqltutorial/film.png'
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-02-01T03:34:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How To Delete Duplicate Rows in PostgreSQL'
-  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
+  title: How To Delete Duplicate Rows in PostgreSQL
+  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
 nextLink:
-  title: 'PostgreSQL COALESCE'
-  slug: 'postgresql-tutorial/postgresql-coalesce'
+  title: PostgreSQL COALESCE
+  slug: postgresql-tutorial/postgresql-coalesce
 ---
+<Admonition type="info" id="CTA">
+The CASE expression works the same way on any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres choice, delivering strong performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for the job.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CASE** conditional expression to form conditional queries.
 

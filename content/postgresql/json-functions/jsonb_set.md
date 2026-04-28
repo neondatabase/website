@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_set() Function'
-page_title: 'PostgreSQL jsonb_set() Function'
-page_description: 'How to use the PostgreSQL jsonb_set() function to replace an existing value specified by a path with a new value in a JSON document.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_set/'
+title: PostgreSQL jsonb_set() Function
+page_title: PostgreSQL jsonb_set() Function
+page_description: >-
+  How to use the PostgreSQL jsonb_set() function to replace an existing value
+  specified by a path with a new value in a JSON document.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_set/
 ogImage: ''
 updatedOn: '2024-02-25T02:21:21+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_insert() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_insert'
+  title: PostgreSQL jsonb_insert() Function
+  slug: postgresql-json-functions/postgresql-jsonb_insert
 nextLink:
-  title: 'PostgreSQL jsonb_strip_nulls() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_strip_nulls'
+  title: PostgreSQL jsonb_strip_nulls() Function
+  slug: postgresql-json-functions/postgresql-jsonb_strip_nulls
 ---
+<Admonition type="info" id="CTA">
+The jsonb_set() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres wherever it runs. If you're an enterprise looking to manage JSONB data at scale, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_set()` function to replace an existing value specified by a path with a new value in a JSON document.
 

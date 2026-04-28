@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Correlated Subquery'
-page_title: 'PostgreSQL Correlated Subquery'
-page_description: 'How to use the PostgreSQL correlated subquery to perform a query that depends on the values of the current row being processed.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-correlated-subquery/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL Correlated Subquery
+page_title: PostgreSQL Correlated Subquery
+page_description: >-
+  How to use the PostgreSQL correlated subquery to perform a query that depends
+  on the values of the current row being processed.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-correlated-subquery/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-01-22T03:48:45+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Subquery'
-  slug: 'postgresql-tutorial/postgresql-subquery'
+  title: PostgreSQL Subquery
+  slug: postgresql-tutorial/postgresql-subquery
 nextLink:
-  title: 'PostgreSQL ANY Operator'
-  slug: 'postgresql-tutorial/postgresql-any'
+  title: PostgreSQL ANY Operator
+  slug: postgresql-tutorial/postgresql-any
 ---
+<Admonition type="info" id="CTA">
+Correlated subqueries work the same way across any PostgreSQL deployment, so the patterns shown here apply whether you're running Postgres locally, on-prem, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL correlated subquery to perform a query that depends on the values of the current row being processed.
 

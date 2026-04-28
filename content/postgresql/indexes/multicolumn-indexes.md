@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Multicolumn Indexes'
-page_title: 'PostgreSQL Multicolumn Indexes'
-page_description: 'In this tutorial, you will learn how to create multicolumn indexes which are indexes defined on more than one column of a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/'
+title: PostgreSQL Multicolumn Indexes
+page_title: PostgreSQL Multicolumn Indexes
+page_description: >-
+  In this tutorial, you will learn how to create multicolumn indexes which are
+  indexes defined on more than one column of a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/
 ogImage: ''
 updatedOn: '2024-02-28T09:28:50+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Partial Index'
-  slug: 'postgresql-indexes/postgresql-partial-index'
+  title: PostgreSQL Partial Index
+  slug: postgresql-indexes/postgresql-partial-index
 nextLink:
-  title: 'PostgreSQL REINDEX'
-  slug: 'postgresql-indexes/postgresql-reindex'
+  title: PostgreSQL REINDEX
+  slug: postgresql-indexes/postgresql-reindex
 ---
+<Admonition type="info" id="CTA">
+Multicolumn indexes work the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL multicolumn indexes, which are indexes defined on two or more columns of a table.
 

@@ -29,9 +29,9 @@ We will only use the information you provide on this form to process your reques
 
 Neon may use the following subcontractors to process PHI deliver the Services to you:
 
-| Subcontractor Name | Location | Purpose |
-| --- | --- | --- |
+| Subcontractor Name  | Location      | Purpose                         |
+| ------------------- | ------------- | ------------------------------- |
 | Amazon Web Services | United States | Infrastructure service provider |
-| Microsoft Azure | United States | Infrastructure service provider |
-| Grafana | United States | Infrastructure service provider |
-|  |  |  |
+| Microsoft Azure     | United States | Infrastructure service provider |
+| Grafana             | United States | Infrastructure service provider |
+|                     |               |                                 |

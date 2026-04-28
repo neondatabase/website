@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL SIGN() Function'
-page_title: 'PostgreSQL SIGN() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL SIGN() function to determine the sign of a number.'
+title: PostgreSQL SIGN() Function
+page_title: PostgreSQL SIGN() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL SIGN() function to
+  determine the sign of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sign/'
 ogImage: ''
 updatedOn: '2024-02-17T14:02:19+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-scale'
+  title: PostgreSQL SCALE() Function
+  slug: postgresql-math-functions/postgresql-scale
 nextLink:
-  title: 'PostgreSQL TRUNC() Function'
-  slug: 'postgresql-math-functions/postgresql-trunc'
+  title: PostgreSQL TRUNC() Function
+  slug: postgresql-math-functions/postgresql-trunc
 ---
+<Admonition type="info" id="CTA">
+The SIGN() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SIGN()` function to determine the sign of a number.
 

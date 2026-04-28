@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL RIGHT JOIN'
-page_title: 'PostgreSQL RIGHT JOIN'
-page_description: 'You will learn how to use PostgreSQL RIGHT JOIN to join two tables and return rows from the right table that may or may not have matching rows in the left table.'
+title: PostgreSQL RIGHT JOIN
+page_title: PostgreSQL RIGHT JOIN
+page_description: >-
+  You will learn how to use PostgreSQL RIGHT JOIN to join two tables and return
+  rows from the right table that may or may not have matching rows in the left
+  table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join/'
-ogImage: '/postgresqltutorial/PostgreSQL-Join-Right-Join.png'
+ogImage: /postgresqltutorial/PostgreSQL-Join-Right-Join.png
 updatedOn: '2024-01-18T03:45:01+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LEFT JOIN'
-  slug: 'postgresql-tutorial/postgresql-left-join'
+  title: PostgreSQL LEFT JOIN
+  slug: postgresql-tutorial/postgresql-left-join
 nextLink:
-  title: 'PostgreSQL Self-Join'
-  slug: 'postgresql-tutorial/postgresql-self-join'
+  title: PostgreSQL Self-Join
+  slug: postgresql-tutorial/postgresql-self-join
 ---
+<Admonition type="info" id="CTA">
+RIGHT JOIN works the same across every PostgreSQL deployment, and everything you learn here carries over to any Postgres you run. For enterprises, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, pairing high performance and strong security with native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `RIGHT JOIN` to join two tables and return rows from the right table that may or may not have matching rows in the left table.
 

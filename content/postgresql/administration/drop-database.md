@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP DATABASE'
-page_title: 'PostgreSQL DROP DATABASE Statement'
-page_description: 'In this tutorial, you will learn how to use the DROP DATABASE statement to drop a database from a PostgreSQL server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/'
+title: PostgreSQL DROP DATABASE
+page_title: PostgreSQL DROP DATABASE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the DROP DATABASE statement to
+  drop a database from a PostgreSQL server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/
 ogImage: ''
 updatedOn: '2024-02-19T00:53:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER DATABASE'
-  slug: 'postgresql-administration/postgresql-alter-database'
+  title: PostgreSQL ALTER DATABASE
+  slug: postgresql-administration/postgresql-alter-database
 nextLink:
-  title: 'PostgreSQL Rename Database'
-  slug: 'postgresql-administration/postgresql-rename-database'
+  title: PostgreSQL Rename Database
+  slug: postgresql-administration/postgresql-rename-database
 ---
+<Admonition type="info" id="CTA">
+The DROP DATABASE statement works the same way on any PostgreSQL server, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises running mission critical workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise grade security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform, with instant provisioning, branching, and autoscaling out of the box.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP DATABASE` statement to drop a database.
 

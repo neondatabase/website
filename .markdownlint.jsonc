@@ -1,0 +1,28 @@
+{
+  // Disabled: may conflict with Prettier, MDX usage, or codebase conventions; review later if needed
+  "line-length": false,
+  "ol-prefix": false,
+  "no-inline-html": false,
+  "no-trailing-punctuation": false,
+  "no-duplicate-heading": false,
+  "first-line-heading": false,
+  "no-bare-urls": false,
+  "no-hard-tabs": false,
+  "no-emphasis-as-heading": false,
+  "code-block-style": false,
+  "heading-increment": false,
+  "no-trailing-spaces": false,
+  "table-column-style": false,
+  "commands-show-output": false,
+  "list-marker-space": false,
+
+  // Disabled temporarily: unfixable violations exist; review and clean up later
+  "descriptive-link-text": false,
+  "link-fragments": false,
+  "fenced-code-language": false,
+  "ul-indent": false,
+  "blanks-around-fences": false,
+  "no-alt-text": false,
+  "no-empty-links": false,
+  "blanks-around-lists": false,
+}

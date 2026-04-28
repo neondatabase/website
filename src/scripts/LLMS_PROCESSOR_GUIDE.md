@@ -114,27 +114,27 @@ See existing handlers in the code for examples of each pattern.
 
 **Transform components** (MDX -> markdown):
 
-| Component                                                          | Output                                                                                           |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| Admonition                                                         | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
-| CodeTabs                                                           | `Tab: label` + code blocks                                                                       |
-| Tabs/TabItem                                                       | `Tab: label` + content (labels from parent Tabs)                                                 |
+| Component                                                                              | Output                                                                                           |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Admonition                                                                             | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
+| CodeTabs                                                                               | `Tab: label` + code blocks                                                                       |
+| Tabs/TabItem                                                                           | `Tab: label` + content (labels from parent Tabs)                                                 |
 | Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |
-| DetailIconCards                                                    | Bullet list with links and descriptions                                                          |
-| TechCards                                                          | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
-| DocsList                                                           | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
-| CheckList/CheckItem                                                | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
-| ExternalCode                                                       | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
-| TwoColumnLayout.\*                                                 | Section headings with method signatures                                                          |
-| LinkPreview                                                        | Link with optional preview text                                                                  |
-| MegaLink                                                           | `**tag** title [Learn more](url)`                                                                |
-| QuoteBlock                                                         | Blockquote with attribution (object or slug author), optional case-study link                    |
-| Testimonial                                                        | Blockquote with author name/company                                                              |
-| YoutubeIframe                                                      | `Watch on YouTube: url`                                                                          |
-| CommunityBanner                                                    | Text + link                                                                                      |
-| PromptCards                                                        | List of AI coding prompt links                                                                   |
-| CTA                                                                | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
-| ProgramForm                                                        | Hardcoded text for form types                                                                    |
+| DetailIconCards                                                                        | Bullet list with links and descriptions                                                          |
+| TechCards                                                                              | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
+| DocsList                                                                               | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
+| CheckList/CheckItem                                                                    | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
+| ExternalCode                                                                           | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
+| TwoColumnLayout.\*                                                                     | Section headings with method signatures                                                          |
+| LinkPreview                                                                            | Link with optional preview text                                                                  |
+| MegaLink                                                                               | `**tag** title [Learn more](url)`                                                                |
+| QuoteBlock                                                                             | Blockquote with attribution (object or slug author), optional case-study link                    |
+| Testimonial                                                                            | Blockquote with author name/company                                                              |
+| YoutubeIframe                                                                          | `Watch on YouTube: url`                                                                          |
+| CommunityBanner                                                                        | Text + link                                                                                      |
+| PromptCards                                                                            | List of AI coding prompt links                                                                   |
+| CTA                                                                                    | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
+| ProgramForm                                                                            | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
 FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation

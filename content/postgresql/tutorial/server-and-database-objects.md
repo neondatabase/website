@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Server and Database Objects'
-page_title: 'PostgreSQL Server and Database Objects'
-page_description: 'In this tutorial, you are going to get familiar with the most common server and database objects provided by PostgreSQL'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/postgresql-databases.png'
+title: PostgreSQL Server and Database Objects
+page_title: PostgreSQL Server and Database Objects
+page_description: >-
+  In this tutorial, you are going to get familiar with the most common server
+  and database objects provided by PostgreSQL
+prev_url: index.html
+ogImage: /postgresqltutorial/postgresql-databases.png
 updatedOn: '2020-07-17T02:50:14+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXPLAIN'
-  slug: 'postgresql-tutorial/postgresql-explain'
+  title: PostgreSQL EXPLAIN
+  slug: postgresql-tutorial/postgresql-explain
 nextLink:
-  title: 'How to Compare Two Tables in PostgreSQL'
-  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
+  title: How to Compare Two Tables in PostgreSQL
+  slug: postgresql-tutorial/compare-two-tables-in-postgresql
 ---
+<Admonition type="info" id="CTA">
+The server and database objects covered here are standard PostgreSQL concepts that apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run critical workloads. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.
 

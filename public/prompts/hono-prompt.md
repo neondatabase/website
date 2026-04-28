@@ -33,9 +33,9 @@ When this prompt is triggered, automatically configure the open Hono project as 
 
 1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   ** `@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. Best choice for Cloudflare Workers, Vercel, etc.
-    *   ** `postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
-    *   ** `pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless functions with HTTP connections. Best choice for Cloudflare Workers, Vercel, etc.
+    -   **`postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
+    -   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
    Make sure to ask the user to choose one of the above options and don't proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 

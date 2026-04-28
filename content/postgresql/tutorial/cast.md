@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL CAST: Convert a value of One Type to Another'
 page_title: 'PostgreSQL CAST: Convert a Value of One Data Type to Another'
-page_description: 'You will learn how to use the PostgreSQL CAST() function and cast operator (::) to cast a value of one type to another.'
+page_description: >-
+  You will learn how to use the PostgreSQL CAST() function and cast operator
+  (::) to cast a value of one type to another.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast/'
 ogImage: ''
 updatedOn: '2024-02-01T06:59:27+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NULLIF'
-  slug: 'postgresql-tutorial/postgresql-nullif'
+  title: PostgreSQL NULLIF
+  slug: postgresql-tutorial/postgresql-nullif
 nextLink:
-  title: 'PostgreSQL EXPLAIN'
-  slug: 'postgresql-tutorial/postgresql-explain'
+  title: PostgreSQL EXPLAIN
+  slug: postgresql-tutorial/postgresql-explain
 ---
+<Admonition type="info" id="CTA">
+The CAST function and the :: operator behave the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `CAST()` function and operator to convert a value of one type to another.
 

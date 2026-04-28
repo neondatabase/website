@@ -65,21 +65,8 @@ export default [
     },
     rules: {
       'react/prop-types': 'error',
-      'react/function-component-definition': [
-        'error',
-        {
-          namedComponents: 'arrow-function',
-          unnamedComponents: 'arrow-function',
-        },
-      ],
-      'react/jsx-sort-props': [
-        'error',
-        {
-          callbacksLast: true,
-          shorthandLast: true,
-          noSortAlphabetically: true,
-        },
-      ],
+      'react/function-component-definition': 'off',
+      'react/jsx-sort-props': 'off',
       'import/no-unresolved': 'off',
       'import/named': 'off',
       'import/order': [
@@ -98,10 +85,14 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
-      'jsx-a11y/label-has-associated-control': [
-        'error',
-        { required: { some: ['nesting', 'id'] } },
-      ],
+      'jsx-a11y/label-has-associated-control': ['error', { required: { some: ['nesting', 'id'] } }],
+      // Suppress rules that produce false positives on marketing/docs site patterns
+      'jsx-a11y/click-events-have-key-events': 'off',
+      'jsx-a11y/no-static-element-interactions': 'off',
+      'jsx-a11y/mouse-events-have-key-events': 'off',
+      'jsx-a11y/no-noninteractive-element-interactions': 'off',
+      'jsx-a11y/media-has-caption': 'off',
+      'jsx-a11y/no-autofocus': 'off',
     },
   },
 

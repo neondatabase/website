@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Select Into'
-page_title: 'PL/pgSQL SELECT INTO Statement'
-page_description: 'In this tutorial, you will learn how to use the PL/pgSQL SELECT INTO statement to select data from the database and assign it to a variable.'
+title: PL/pgSQL Select Into
+page_title: PL/pgSQL SELECT INTO Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PL/pgSQL SELECT INTO statement
+  to select data from the database and assign it to a variable.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select-into/'
 ogImage: ''
 updatedOn: '2024-03-19T01:05:56+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Variables'
-  slug: 'postgresql-plpgsql/plpgsql-variables'
+  title: PL/pgSQL Variables
+  slug: postgresql-plpgsql/plpgsql-variables
 nextLink:
-  title: 'PL/pgSQL Row Types'
-  slug: 'postgresql-plpgsql/pl-pgsql-row-types'
+  title: PL/pgSQL Row Types
+  slug: postgresql-plpgsql/pl-pgsql-row-types
 ---
+<Admonition type="info" id="CTA">
+The PL/pgSQL `select into` statement works the same on any PostgreSQL deployment, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PL/pgSQL `select into` statement to select data from the database and assign it to a variable.
 

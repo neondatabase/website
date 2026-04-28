@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL RENAME COLUMN: Renaming a column'
-page_title: 'PostgreSQL RENAME COLUMN'
-page_description: 'You will learn how to use the PostgreSQL RENAME COLUMN clause in the ALTER TABLE statement to rename a column of a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-column/'
-ogImage: '/postgresqltutorial/postgresql-rename-column-300x254.png'
+page_title: PostgreSQL RENAME COLUMN
+page_description: >-
+  You will learn how to use the PostgreSQL RENAME COLUMN clause in the ALTER
+  TABLE statement to rename a column of a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-column/
+ogImage: /postgresqltutorial/postgresql-rename-column-300x254.png
 updatedOn: '2024-01-25T06:33:58+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Change Column Type'
-  slug: 'postgresql-tutorial/postgresql-change-column-type'
+  title: PostgreSQL Change Column Type
+  slug: postgresql-tutorial/postgresql-change-column-type
 nextLink:
-  title: 'PostgreSQL DROP TABLE'
-  slug: 'postgresql-tutorial/postgresql-drop-table'
+  title: PostgreSQL DROP TABLE
+  slug: postgresql-tutorial/postgresql-drop-table
 ---
+<Admonition type="info" id="CTA">
+Renaming columns with ALTER TABLE RENAME COLUMN works the same on any PostgreSQL database, so everything here carries over to your environment of choice. If you're an enterprise standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 ![PostgreSQL RENAME COLUMN](/postgresqltutorial/postgresql-rename-column-300x254.png?alignright)**Summary**: in this tutorial, you will learn how to use the PostgreSQL `RENAME COLUMN` clause in the `ALTER TABLE` statement to rename one or more columns of a table.
 

@@ -40,17 +40,17 @@ First, ask the user to choose their preferred driver and Drizzle adapter. Explai
 
 Based on the user's choice, run the appropriate installation command:
 
-*   **If 'Neon Serverless (HTTP)' is chosen:**
+-   **If 'Neon Serverless (HTTP)' is chosen:**
     ```bash
     npm install drizzle-orm @neondatabase/serverless dotenv
     npm install -D drizzle-kit typescript tsx
     ```
-*   **If 'Neon WebSocket' is chosen:**
+-   **If 'Neon WebSocket' is chosen:**
     ```bash
     npm install drizzle-orm @neondatabase/serverless dotenv ws
     npm install -D drizzle-kit typescript tsx @types/ws
     ```
-*   **If '`node-postgres`' is chosen:**
+-   **If '`node-postgres`' is chosen:**
     ```bash
     npm install drizzle-orm pg dotenv
     npm install -D drizzle-kit typescript tsx @types/pg
@@ -113,6 +113,7 @@ export type NewUser = typeof demoUsers.$inferInsert;
 Create a `src/db.ts` file with the content corresponding to the user's chosen driver.
 
 #### Option 1: Neon Serverless (HTTP) Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
@@ -127,6 +128,7 @@ export const db = drizzle(sql);
 ```
 
 #### Option 2: Neon WebSocket Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-serverless';
@@ -145,6 +147,7 @@ export const db = drizzle(pool);
 ```
 
 #### Option 3: `node-postgres` Driver
+
 ```typescript title="src/db.ts"
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';

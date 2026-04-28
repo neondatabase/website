@@ -137,6 +137,6 @@ After the report, ask:
 
 > "Apply all fixes, review individually, or skip? (all / review / skip)"
 
-- **All**: apply every suggested fix and save the file, then run `npm run lint:fix && npm run format`
+- **All**: apply every suggested fix and save the file, then run `npm run fix`
 - **Review**: walk through each finding one at a time, apply on approval, skip on rejection
 - **Skip**: do nothing — the report is for reference only

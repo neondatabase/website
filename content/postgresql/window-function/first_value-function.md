@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL FIRST_VALUE Function'
-page_title: 'PostgreSQL FIRST_VALUE() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL FIRST_VALUE() function to return the first value in a sorted partition of a result set.'
-prev_url: 'index.html'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png'
+title: PostgreSQL FIRST_VALUE Function
+page_title: PostgreSQL FIRST_VALUE() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL FIRST_VALUE()
+  function to return the first value in a sorted partition of a result set.
+prev_url: index.html
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
 updatedOn: '2020-07-10T04:55:53+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DENSE_RANK Function'
-  slug: 'postgresql-window-function/postgresql-dense_rank-function'
+  title: PostgreSQL DENSE_RANK Function
+  slug: postgresql-window-function/postgresql-dense_rank-function
 nextLink:
-  title: 'PostgreSQL LAG Function'
-  slug: 'postgresql-window-function/postgresql-lag-function'
+  title: PostgreSQL LAG Function
+  slug: postgresql-window-function/postgresql-lag-function
 ---
+<Admonition type="info" id="CTA">
+The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FIRST_VALUE()` function to return the first value in a sorted partition of a result set.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL LENGTH() Function'
-page_title: 'PostgreSQL LENGTH() function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL LENGTH() function to get the number of characters of a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-length-function/'
-ogImage: '/postgresqltutorial/customer.png'
+title: PostgreSQL LENGTH() Function
+page_title: PostgreSQL LENGTH() function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL LENGTH() function
+  to get the number of characters of a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-length-function/
+ogImage: /postgresqltutorial/customer.png
 updatedOn: '2024-01-27T09:29:04+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REPEAT() Function'
-  slug: 'postgresql-string-functions/postgresql-repeat'
+  title: PostgreSQL REPEAT() Function
+  slug: postgresql-string-functions/postgresql-repeat
 nextLink:
-  title: 'PostgreSQL TRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-trim-function'
+  title: PostgreSQL TRIM() Function
+  slug: postgresql-string-functions/postgresql-trim-function
 ---
+<Admonition type="info" id="CTA">
+The LENGTH() function works the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built around your workflow.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LENGTH()` functions to get the number of characters of a string.
 

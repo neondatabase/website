@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL RIGHT() Function'
-page_title: 'PostgreSQL RIGHT() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL RIGHT() function to get the n right-most characters in a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-right/'
-ogImage: '/postgresqltutorial/customer.png'
+title: PostgreSQL RIGHT() Function
+page_title: PostgreSQL RIGHT() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL RIGHT() function to
+  get the n right-most characters in a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-right/
+ogImage: /postgresqltutorial/customer.png
 updatedOn: '2024-01-29T01:48:10+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LEFT() Function'
-  slug: 'postgresql-string-functions/postgresql-left'
+  title: PostgreSQL LEFT() Function
+  slug: postgresql-string-functions/postgresql-left
 nextLink:
-  title: 'PostgreSQL LPAD() Function'
-  slug: 'postgresql-string-functions/postgresql-lpad'
+  title: PostgreSQL LPAD() Function
+  slug: postgresql-string-functions/postgresql-lpad
 ---
+<Admonition type="info" id="CTA">
+The RIGHT() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, fully integrated into the Lakehouse with the performance and security large teams demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `RIGHT()` function to return the last `n` characters in a string.
 

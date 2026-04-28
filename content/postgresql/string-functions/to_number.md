@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TO_NUMBER() Function'
-page_title: 'PostgreSQL TO_NUMBER() Function By Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL TO_NUMBER() function to convert a string to a numeric value based on the specified format.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_number/'
+title: PostgreSQL TO_NUMBER() Function
+page_title: PostgreSQL TO_NUMBER() Function By Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TO_NUMBER() function to
+  convert a string to a numeric value based on the specified format.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_number/
 ogImage: ''
 updatedOn: '2024-01-29T02:05:33+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TO_CHAR() Function'
-  slug: 'postgresql-string-functions/postgresql-to_char'
+  title: PostgreSQL TO_CHAR() Function
+  slug: postgresql-string-functions/postgresql-to_char
 nextLink:
-  title: 'PostgreSQL Math Functions'
-  slug: 'postgresql-string-functions/../postgresql-math-functions'
+  title: PostgreSQL Math Functions
+  slug: postgresql-string-functions/../postgresql-math-functions
 ---
+<Admonition type="info" id="CTA">
+The TO_NUMBER() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_NUMBER()` function to convert a [character string](../postgresql-tutorial/postgresql-char-varchar-text) to a [numeric](../postgresql-tutorial/postgresql-numeric) value according to a specified format.
 

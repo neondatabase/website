@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Backup'
-page_title: 'PostgreSQL Backup - pg_dump & pg_dumpall'
-page_description: 'This tutorial shows you how to use PostgreSQL backup tools including pg_dump and pg_dumpall to backup databases in PostgreSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/'
+title: PostgreSQL Backup
+page_title: PostgreSQL Backup - pg_dump & pg_dumpall
+page_description: >-
+  This tutorial shows you how to use PostgreSQL backup tools including pg_dump
+  and pg_dumpall to backup databases in PostgreSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/
 ogImage: ''
 updatedOn: '2024-02-20T02:00:57+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP TABLESPACE Statement'
-  slug: 'postgresql-administration/postgresql-drop-tablespace'
+  title: PostgreSQL DROP TABLESPACE Statement
+  slug: postgresql-administration/postgresql-drop-tablespace
 nextLink:
-  title: 'PostgreSQL Restore Database'
-  slug: 'postgresql-administration/postgresql-restore-database'
+  title: PostgreSQL Restore Database
+  slug: postgresql-administration/postgresql-restore-database
 ---
+<Admonition type="info" id="CTA">
+Backing up PostgreSQL with pg_dump and pg_dumpall works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you instant branching, autoscaling, and a Postgres workflow built around how modern teams actually build.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to backup the PostgreSQL databases using the `pg_dump` and `pg_dumpall` tools.
 

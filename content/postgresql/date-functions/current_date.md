@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CURRENT_DATE Function'
-page_title: 'PostgreSQL CURRENT_DATE Function By Practical Examples'
-page_description: 'You will learn how to use the PostgreSQL CURRENT_DATE function to get the current date of the PostgreSQL server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_date/'
+title: PostgreSQL CURRENT_DATE Function
+page_title: PostgreSQL CURRENT_DATE Function By Practical Examples
+page_description: >-
+  You will learn how to use the PostgreSQL CURRENT_DATE function to get the
+  current date of the PostgreSQL server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_date/
 ogImage: ''
 updatedOn: '2024-01-26T07:40:24+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Date Functions'
-  slug: 'postgresql-date-functions/'
+  title: PostgreSQL Date Functions
+  slug: postgresql-date-functions/
 nextLink:
-  title: 'PostgreSQL CURRENT_TIME Function'
-  slug: 'postgresql-date-functions/postgresql-current_time'
+  title: PostgreSQL CURRENT_TIME Function
+  slug: postgresql-date-functions/postgresql-current_time
 ---
+<Admonition type="info" id="CTA">
+The CURRENT_DATE function works the same across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers managed Postgres that's fast, secure, and natively integrated with the Lakehouse. For developers and startups who need to ship quickly and scale without friction, Neon is the Postgres platform built for your pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CURRENT_DATE` function to get the current date.
 

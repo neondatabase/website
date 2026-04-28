@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SUBSTRING() Function'
-page_title: 'PostgreSQL SUBSTRING() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL SUBSTRING() function to extract A substring from a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/'
-ogImage: '/postgresqltutorial/PostgreSQL-substring-function-example.jpg'
+title: PostgreSQL SUBSTRING() Function
+page_title: PostgreSQL SUBSTRING() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL SUBSTRING() function to
+  extract A substring from a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/
+ogImage: /postgresqltutorial/PostgreSQL-substring-function-example.jpg
 updatedOn: '2024-01-29T01:37:47+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL POSITION() Function'
-  slug: 'postgresql-string-functions/postgresql-position'
+  title: PostgreSQL POSITION() Function
+  slug: postgresql-string-functions/postgresql-position
 nextLink:
-  title: 'PostgreSQL SPLIT_PART() Function'
-  slug: 'postgresql-string-functions/postgresql-split_part'
+  title: PostgreSQL SPLIT_PART() Function
+  slug: postgresql-string-functions/postgresql-split_part
 ---
+<Admonition type="info" id="CTA">
+The SUBSTRING() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a VM, or in a managed service. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SUBSTRING()` function to extract a substring from a string.
 

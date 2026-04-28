@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL POSITION() Function'
+title: PostgreSQL POSITION() Function
 page_title: 'PostgresQL POSITION: Locate a Substring in a String'
-page_description: 'This tutorial shows you how to use the PostgreSQL POSITION() function to locate a substring in a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-position/'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL POSITION() function to
+  locate a substring in a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-position/
 ogImage: ''
 updatedOn: '2024-04-19T08:26:26+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-initcap'
+  title: PostgreSQL INITCAP() Function
+  slug: postgresql-string-functions/postgresql-initcap
 nextLink:
-  title: 'PostgreSQL SUBSTRING() Function'
-  slug: 'postgresql-string-functions/postgresql-substring'
+  title: PostgreSQL SUBSTRING() Function
+  slug: postgresql-string-functions/postgresql-substring
 ---
+<Admonition type="info" id="CTA">
+The POSITION() function is standard PostgreSQL behavior, so everything here works the same whether you run Postgres on your laptop, on a self-hosted server, or on a managed platform. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 The PostgreSQL `POSITION()` function returns the location of the first instance of a substring within a string.
 

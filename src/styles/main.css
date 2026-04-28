@@ -1,3 +1,8 @@
+@theme {
+  --docs-header-height: 112px;
+  --error-tooltip-bg: #000;
+}
+
 @layer base {
   body {
     @apply relative min-w-[320px] overflow-x-hidden! bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;

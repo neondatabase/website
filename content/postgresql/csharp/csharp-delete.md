@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL C#: Deleting Data'
 page_title: 'PostgreSQL C#: Delete'
-page_description: 'In this tutorial, you will learn how to delete data from a table in a PostgreSQL database from a C# program.'
+page_description: >-
+  In this tutorial, you will learn how to delete data from a table in a
+  PostgreSQL database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/'
 ogImage: ''
 updatedOn: '2024-05-21T03:47:58+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Updating Data'
-  slug: 'postgresql-csharp/postgresql-csharp-update'
+  slug: postgresql-csharp/postgresql-csharp-update
 nextLink:
   title: 'PostgreSQL C#: Selecting Data'
-  slug: 'postgresql-csharp/postgresql-csharp-select'
+  slug: postgresql-csharp/postgresql-csharp-select
 ---
+<Admonition type="info" id="CTA">
+Deleting rows with C# and Npgsql works the same against any PostgreSQL database, so the patterns here carry over wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that large teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to delete data from a table in a PostgreSQL database from a C\# program.
 

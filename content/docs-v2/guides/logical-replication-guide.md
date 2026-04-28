@@ -46,6 +46,10 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
+<Admonition type="note">
+To replicate data from Neon, you must first enable logical replication on your project. This setting cannot be reverted once enabled. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for Console and API instructions.
+</Admonition>
+
 <TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>

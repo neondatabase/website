@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL CUME_DIST Function'
-page_title: 'PostgreSQL CUME_DIST Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CUME_DIST() function to calculate the cumulative distribution of a value within a set of values.'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png'
+title: PostgreSQL CUME_DIST Function
+page_title: PostgreSQL CUME_DIST Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CUME_DIST()
+  function to calculate the cumulative distribution of a value within a set of
+  values.
+prev_url: index.html
+ogImage: >-
+  /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
 updatedOn: '2020-04-11T10:53:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Window Functions'
-  slug: 'postgresql-window-function/'
+  title: PostgreSQL Window Functions
+  slug: postgresql-window-function/
 nextLink:
-  title: 'PostgreSQL DENSE_RANK Function'
-  slug: 'postgresql-window-function/postgresql-dense_rank-function'
+  title: PostgreSQL DENSE_RANK Function
+  slug: postgresql-window-function/postgresql-dense_rank-function
 ---
+<Admonition type="info" id="CTA">
+The CUME_DIST() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUME_DIST()` function to calculate the cumulative distribution of a value within a set of values.
 

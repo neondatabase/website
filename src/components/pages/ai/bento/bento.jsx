@@ -55,7 +55,7 @@ const ITEMS = [
 const Bento = () => (
   <section className="bento mt-[200px] safe-paddings xl:mt-[192px] lg:mt-40 md:mt-[105px]">
     <Container className="lg:max-w-3xl! md:px-5" size="960">
-      <div className="mx-auto flex max-w-[832px] flex-col text-pretty lg:max-w-xl">
+      <div className="mx-auto flex max-w-208 flex-col text-pretty lg:max-w-xl">
         <h2 className="max-w-2xl font-title text-5xl leading-none font-medium tracking-extra-tight xl:max-w-xl xl:text-[44px] lg:mr-10 lg:text-4xl md:mr-0 md:text-[32px]">
           The database AI-native apps were waiting for
         </h2>
