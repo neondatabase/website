@@ -12,8 +12,8 @@ previousLink:
   title: PostgreSQL Primary Key
   slug: postgresql-tutorial/postgresql-primary-key
 nextLink:
-  title: PostgreSQL DELETE CASCADE
-  slug: postgresql-tutorial/postgresql-delete-cascade
+  title: PostgreSQL CHECK Constraints
+  slug: postgresql-tutorial/postgresql-check-constraint
 ---
 <Admonition type="info" id="CTA">
 Foreign keys work the same way across any standard PostgreSQL database, so the syntax and behaviors covered here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers strong performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
