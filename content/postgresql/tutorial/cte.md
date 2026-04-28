@@ -9,8 +9,8 @@ ogImage: ''
 updatedOn: '2024-01-22T06:27:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: PostgreSQL EXISTS Operator
-  slug: postgresql-tutorial/postgresql-exists
+  title: PostgreSQL EXCEPT
+  slug: postgresql-tutorial/postgresql-except
 nextLink:
   title: PostgreSQL Recursive Query
   slug: postgresql-tutorial/postgresql-recursive-query
