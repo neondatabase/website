@@ -223,6 +223,16 @@ export default {
       scale: 'Included',
     },
     {
+      rows: '2',
+      feature: {
+        title: 'Spending limits',
+        subtitle: 'Control your monthly spend',
+      },
+      free: false,
+      launch: true,
+      scale: true,
+    },
+    {
       rows: '1',
       feature: {
         title: 'HIPAA Compliance',

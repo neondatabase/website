@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ALTER ROLE Statement'
-page_title: 'PostgreSQL ALTER ROLE Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ALTER ROLE statement to modify a role.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/'
+title: PostgreSQL ALTER ROLE Statement
+page_title: PostgreSQL ALTER ROLE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ALTER ROLE
+  statement to modify a role.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/
 ogImage: ''
 updatedOn: '2024-02-21T14:36:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CURRENT_USER'
-  slug: 'postgresql-administration/postgresql-current_user'
+  title: PostgreSQL CURRENT_USER
+  slug: postgresql-administration/postgresql-current_user
 nextLink:
-  title: 'PostgreSQL DROP ROLE Statement'
-  slug: 'postgresql-administration/postgresql-drop-role'
+  title: PostgreSQL DROP ROLE Statement
+  slug: postgresql-administration/postgresql-drop-role
 ---
+<Admonition type="info" id="CTA">
+The ALTER ROLE statement works the same way across every PostgreSQL deployment, so everything you learn here about modifying attributes, renaming roles, and setting session defaults applies to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER ROLE` statement to modify the attributes of a role, rename a role, and change a role’s session default for a configuration variable.
 

@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Subquery'
-page_title: 'PostgreSQL Subquery'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL subquery that allows you to construct complex queries.'
+title: PostgreSQL Subquery
+page_title: PostgreSQL Subquery
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL subquery that
+  allows you to construct complex queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-subquery/'
 ogImage: ''
 updatedOn: '2024-07-01T01:04:57+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ROLLUP'
-  slug: 'postgresql-tutorial/postgresql-rollup'
+  title: PostgreSQL ROLLUP
+  slug: postgresql-tutorial/postgresql-rollup
 nextLink:
-  title: 'PostgreSQL Correlated Subquery'
-  slug: 'postgresql-tutorial/postgresql-correlated-subquery'
+  title: PostgreSQL Correlated Subquery
+  slug: postgresql-tutorial/postgresql-correlated-subquery
 ---
+<Admonition type="info" id="CTA">
+Subqueries are a standard PostgreSQL feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads alongside transactional data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration large teams expect. If you're a developer or startup that needs to ship features and scale fast, Neon gives you the most productive Postgres platform around, with instant branching, autoscaling, and a generous free tier.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL subquery** that allows you to construct complex queries.
 

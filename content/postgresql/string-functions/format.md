@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL FORMAT() Function'
+title: PostgreSQL FORMAT() Function
 page_title: 'PostgreSQL FORMAT: Formats Arguments based on a Format String'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL FORMAT() function to format arguments according to a format string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-format/'
-ogImage: '/postgresqltutorial/customer-table.png'
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL FORMAT() function
+  to format arguments according to a format string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-format/
+ogImage: /postgresqltutorial/customer-table.png
 updatedOn: '2024-01-27T14:36:05+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CONCAT_WS() Function'
-  slug: 'postgresql-string-functions/postgresql-concat_ws'
+  title: PostgreSQL CONCAT_WS() Function
+  slug: postgresql-string-functions/postgresql-concat_ws
 nextLink:
-  title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-initcap'
+  title: PostgreSQL INITCAP() Function
+  slug: postgresql-string-functions/postgresql-initcap
 ---
+<Admonition type="info" id="CTA">
+The FORMAT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FORMAT()` function to format a string based on a template.
 

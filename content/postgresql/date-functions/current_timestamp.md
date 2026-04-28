@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CURRENT_TIMESTAMP Function'
-page_title: 'PostgreSQL CURRENT_TIMESTAMP Function'
-page_description: 'This tutorial shows you how to use PostgreSQL CURRENT_TIMESTAMP() function to get the current date and time at which the transaction starts.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/'
+title: PostgreSQL CURRENT_TIMESTAMP Function
+page_title: PostgreSQL CURRENT_TIMESTAMP Function
+page_description: >-
+  This tutorial shows you how to use PostgreSQL CURRENT_TIMESTAMP() function to
+  get the current date and time at which the transaction starts.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_timestamp/
 ogImage: ''
 updatedOn: '2024-01-26T08:56:17+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CURRENT_TIME Function'
-  slug: 'postgresql-date-functions/postgresql-current_time'
+  title: PostgreSQL CURRENT_TIME Function
+  slug: postgresql-date-functions/postgresql-current_time
 nextLink:
-  title: 'PostgreSQL CLOCK_TIMESTAMP() Function'
-  slug: 'postgresql-date-functions/postgresql-clock_timestamp'
+  title: PostgreSQL CLOCK_TIMESTAMP() Function
+  slug: postgresql-date-functions/postgresql-clock_timestamp
 ---
+<Admonition type="info" id="CTA">
+CURRENT_TIMESTAMP is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed, secure, high-performance database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CURRENT_TIMESTAMP()` function to get the current date and time with the timezone.
 

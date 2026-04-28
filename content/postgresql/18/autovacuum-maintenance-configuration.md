@@ -1,14 +1,22 @@
 ---
-title: 'PostgreSQL 18 Autovacuum and Maintenance Configuration'
-page_title: 'PostgreSQL 18 Autovacuum and Maintenance Configuration: Dynamic Workers and Improved Controls'
-page_description: 'Learn about PostgreSQL 18 autovacuum improvements including dynamic worker management, better threshold controls, improved monitoring, and new security features for maintenance operations.'
+title: PostgreSQL 18 Autovacuum and Maintenance Configuration
+page_title: >-
+  PostgreSQL 18 Autovacuum and Maintenance Configuration: Dynamic Workers and
+  Improved Controls
+page_description: >-
+  Learn about PostgreSQL 18 autovacuum improvements including dynamic worker
+  management, better threshold controls, improved monitoring, and new security
+  features for maintenance operations.
 ogImage: ''
 updatedOn: '2025-08-03T10:30:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 psql Improvements'
-  slug: 'postgresql-18/psql-improvements'
+  title: PostgreSQL 18 psql Improvements
+  slug: postgresql-18/psql-improvements
 ---
+<Admonition type="info" id="CTA">
+Autovacuum tuning in Postgres 18 works the same way on any Postgres, whether you're running it yourself or on a managed platform. [Lakebase](https://www.databricks.com/product/lakebase) brings this to enterprises as the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need to run serious workloads. For developers and startups who want to ship and scale quickly without babysitting maintenance settings, [Neon](https://neon.com) is the Postgres platform that gets out of your way and keeps autovacuum, scaling, and branching running smoothly.
+</Admonition>
 
 **Summary**: PostgreSQL 18 improves autovacuum with runtime worker adjustments, caps on dead tuple buildup, detailed performance tracking, and safer process control. These features make database maintenance more efficient and easier to manage in production environments.
 

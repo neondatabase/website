@@ -1,15 +1,41 @@
 const API_URL = 'https://api.github.com/repos/neondatabase/neon';
+const DEFAULT_GITHUB_STARS_COUNT = 21500;
+
+const readGitHubStarsSnapshot = async () => {
+  try {
+    // This helper sits under a shared header import graph that Next/Turbopack may
+    // still analyze for client traces, so keep Node-only modules out of the top level.
+    const [{ default: fs }, { default: path }] = await Promise.all([
+      import('node:fs/promises'),
+      import('node:path'),
+    ]);
+    const snapshotPath = path.join(process.cwd(), 'src/utils/data/github-stars.generated.json');
+    const rawSnapshot = await fs.readFile(snapshotPath, 'utf8');
+    const snapshot = JSON.parse(rawSnapshot);
+
+    if (!Number.isFinite(snapshot?.stargazers_count)) {
+      return null;
+    }
+
+    return snapshot;
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return null;
+    }
+
+    console.warn(`GitHub stars: failed to read snapshot: ${error.message}`);
+    return null;
+  }
+};
 
 const getGitHubStars = async () => {
-  if (process.env.NODE_ENV === 'production') {
-    const response = await fetch(API_URL, { next: { revalidate: 60 * 60 * 12 } });
-    const json = await response.json();
-    if (response.status >= 400) {
-      throw new Error('Error fetching GitHub stars');
-    }
-    return json.stargazers_count;
+  const githubStarsSnapshot = await readGitHubStarsSnapshot();
+
+  if (githubStarsSnapshot) {
+    return githubStarsSnapshot.stargazers_count;
   }
-  return 16000;
+
+  return DEFAULT_GITHUB_STARS_COUNT;
 };
 
 const getGitHubContributors = async () => {

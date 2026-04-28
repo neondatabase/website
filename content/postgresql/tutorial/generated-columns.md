@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Generated Columns'
-page_title: 'PostgreSQL Generated Columns'
-page_description: 'In this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generated-columns/'
+title: PostgreSQL Generated Columns
+page_title: PostgreSQL Generated Columns
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL generated columns whose
+  values are automatically calculated from other columns.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generated-columns/
 ogImage: ''
 updatedOn: '2024-03-25T08:00:13+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Identity Column'
-  slug: 'postgresql-tutorial/postgresql-identity-column'
+  title: PostgreSQL Identity Column
+  slug: postgresql-tutorial/postgresql-identity-column
 nextLink:
-  title: 'PostgreSQL ALTER TABLE'
-  slug: 'postgresql-tutorial/postgresql-alter-table'
+  title: PostgreSQL ALTER TABLE
+  slug: postgresql-tutorial/postgresql-alter-table
 ---
+<Admonition type="info" id="CTA">
+Generated columns work the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. For developers and startups who need to ship features fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns.
 

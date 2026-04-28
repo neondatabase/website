@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Show Tables'
-page_title: 'PostgreSQL Show Tables'
-page_description: 'This tutorial shows you various ways to show tables in a specific database using psql and querying pg_catalog schema in PostgreSQL'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/'
+title: PostgreSQL Show Tables
+page_title: PostgreSQL Show Tables
+page_description: >-
+  This tutorial shows you various ways to show tables in a specific database
+  using psql and querying pg_catalog schema in PostgreSQL
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-tables/
 ogImage: ''
 updatedOn: '2024-02-01T08:32:56+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Show Databases'
-  slug: 'postgresql-administration/postgresql-show-databases'
+  title: PostgreSQL Show Databases
+  slug: postgresql-administration/postgresql-show-databases
 nextLink:
-  title: 'PostgreSQL Describe Table'
-  slug: 'postgresql-administration/postgresql-describe-table'
+  title: PostgreSQL Describe Table
+  slug: postgresql-administration/postgresql-describe-table
 ---
+<Admonition type="info" id="CTA">
+Listing tables with psql shortcuts like \dt or queries against pg_catalog.pg_tables works on any PostgreSQL database, so what you learn here carries over to any environment you run Postgres in. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, performant, and secure database tightly integrated into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to show tables in PostgreSQL using `psql` tool and `pg_catalog` schema.
 

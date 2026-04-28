@@ -26,14 +26,13 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 
 ## Enabling logical replication
 
-In Neon, you can enable logical replication from the Neon Console. This only necessary if your Neon Postgres instance is acting as a publisher, replicating data to another Postgres instance, data service, or platform.
+When replicating data from Neon, enable logical replication on your Neon project. When replicating data to Neon, enable it on the source database instead.
 
-To enable logical replication:
+<Admonition type="important">
+Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
+</Admonition>
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+You can enable logical replication from the Neon Console or via the API. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for instructions.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -43,8 +42,6 @@ SHOW wal_level;
 -----------
  logical
 ```
-
-Enabling logical replication turns on detailed logging, which is required to support the replication process.
 
 ## Publications
 

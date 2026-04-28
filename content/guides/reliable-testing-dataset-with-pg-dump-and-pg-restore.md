@@ -215,7 +215,7 @@ The flags used in this step are explained below:
 | --------------- | -------------------------------------------------------------------------------- |
 | `-Fc`           | Dumps the database in a custom format.                                           |
 | `--schema-only` | Dumps only the schema (table structures, indexes, constraints) without any data. |
-| `-f `           | Specifies the output file where the schema dump will be stored.                  |
+| `-f`            | Specifies the output file where the schema dump will be stored.                  |
 
 ### Dump data
 

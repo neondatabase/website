@@ -1,17 +1,23 @@
 ---
-title: 'PostgreSQL 18 Enhanced Returning'
-page_title: 'PostgreSQL 18 Enhanced Returning Clause'
-page_description: 'In this tutorial, you will learn about PostgreSQL 18 Enhanced Returning Clause, which allows you to access both old and new values in DML operations, making it easier to track changes and improve data integrity.'
+title: PostgreSQL 18 Enhanced Returning
+page_title: PostgreSQL 18 Enhanced Returning Clause
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL 18 Enhanced Returning
+  Clause, which allows you to access both old and new values in DML operations,
+  making it easier to track changes and improve data integrity.
 ogImage: ''
 updatedOn: '2025-06-22T09:30:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 UUIDv7 Support'
-  slug: 'postgresql-18/uuidv7-support'
+  title: PostgreSQL 18 UUIDv7 Support
+  slug: postgresql-18/uuidv7-support
 nextLink:
-  title: 'PostgreSQL 18 Temporal Constraints'
-  slug: 'postgresql-18/temporal-constraints'
+  title: PostgreSQL 18 Temporal Constraints
+  slug: postgresql-18/temporal-constraints
 ---
+<Admonition type="info" id="CTA">
+The enhanced RETURNING clause in PostgreSQL 18 works the same way on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data workloads demand. For developers and startups who need to ship features today and scale tomorrow, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+</Admonition>
 
 **Summary**: Learn how PostgreSQL 18 enhances the RETURNING clause to access both old and new values in DML operations, providing capabilities for audit trails, change tracking, and application logic.
 

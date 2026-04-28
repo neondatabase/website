@@ -18,6 +18,7 @@ import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
+import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechCards from 'components/pages/doc/tech-cards';
@@ -194,6 +195,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   TwoColumnLayout,
   LogosSection,
   ChatOptions,
+  StickyTable,
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,

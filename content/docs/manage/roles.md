@@ -383,7 +383,7 @@ Neon supports creating Postgres roles with the `NOLOGIN` attribute. This allows 
 CREATE ROLE my_role NOLOGIN;
 ```
 
-Roles with `NOLOGIN` are commonly used for permission management.
+Roles with `NOLOGIN` are commonly used for permission management. For an example, see [Transfer database table ownership between roles](/docs/manage/databases#transfer-database-table-ownership-between-roles).
 
 The Neon API and CLI also support creating `NOLOGIN` roles:
 

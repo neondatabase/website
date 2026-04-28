@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL XML Data Type'
-page_title: 'PostgreSQL XML Data Type'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL XML data type to store XML documents in the database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml-data-type/'
+title: PostgreSQL XML Data Type
+page_title: PostgreSQL XML Data Type
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL XML data type to
+  store XML documents in the database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml-data-type/
 ogImage: ''
 updatedOn: '2024-04-20T03:57:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL enum'
-  slug: 'postgresql-tutorial/postgresql-enum'
+  title: PostgreSQL enum
+  slug: postgresql-tutorial/postgresql-enum
 nextLink:
-  title: 'PostgreSQL BYTEA Data Type'
-  slug: 'postgresql-tutorial/postgresql-bytea-data-type'
+  title: PostgreSQL BYTEA Data Type
+  slug: postgresql-tutorial/postgresql-bytea-data-type
 ---
+<Admonition type="info" id="CTA">
+Working with the XML data type applies to any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL XML data type to store XML documents in the database.
 

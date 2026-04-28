@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CURRENT_TIME Function'
-page_title: 'PostgreSQL CURRENT_TIME Function By Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL CURRENT_TIME function to get the current time of the database server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_time/'
+title: PostgreSQL CURRENT_TIME Function
+page_title: PostgreSQL CURRENT_TIME Function By Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CURRENT_TIME function to get
+  the current time of the database server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-current_time/
 ogImage: ''
 updatedOn: '2024-01-26T09:41:35+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CURRENT_DATE Function'
-  slug: 'postgresql-date-functions/postgresql-current_date'
+  title: PostgreSQL CURRENT_DATE Function
+  slug: postgresql-date-functions/postgresql-current_date
 nextLink:
-  title: 'PostgreSQL CURRENT_TIMESTAMP Function'
-  slug: 'postgresql-date-functions/postgresql-current_timestamp'
+  title: PostgreSQL CURRENT_TIMESTAMP Function
+  slug: postgresql-date-functions/postgresql-current_timestamp
 ---
+<Admonition type="info" id="CTA">
+The CURRENT_TIME function behaves the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres on your laptop, on a cloud VM, or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CURRENT_TIME` function to get the current time with the timezone.
 

@@ -1,18 +1,24 @@
 ---
-title: 'Import CSV File Into PostgreSQL Table'
-page_title: 'Import CSV File Into PostgreSQL Table'
-page_description: 'In this tutorial, you will learn how to import a CSV file into a PostgreSQL table using the COPY command or pgAdmin client tool.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/import-csv-file-into-posgresql-table/'
-ogImage: '/postgresqltutorial/posgresql-import-csv.jpg'
+title: Import CSV File Into PostgreSQL Table
+page_title: Import CSV File Into PostgreSQL Table
+page_description: >-
+  In this tutorial, you will learn how to import a CSV file into a PostgreSQL
+  table using the COPY command or pgAdmin client tool.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/import-csv-file-into-posgresql-table/
+ogImage: /postgresqltutorial/posgresql-import-csv.jpg
 updatedOn: '2024-02-01T14:45:15+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Transaction'
-  slug: 'postgresql-tutorial/postgresql-transaction'
+  title: PostgreSQL Transaction
+  slug: postgresql-tutorial/postgresql-transaction
 nextLink:
-  title: 'Export PostgreSQL Table to CSV File'
-  slug: 'postgresql-tutorial/export-postgresql-table-to-csv-file'
+  title: Export PostgreSQL Table to CSV File
+  slug: postgresql-tutorial/export-postgresql-table-to-csv-file
 ---
+<Admonition type="info" id="CTA">
+Importing CSV data into PostgreSQL works the same way on any Postgres deployment, so the COPY and pgAdmin techniques covered here apply whether you're loading data locally or into a managed service. If you're an enterprise moving large datasets and want bulk ingestion that plugs straight into your analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and Lakehouse integration teams need at scale. If you're a developer or startup who just wants to spin up a database and load your CSV in minutes, [Neon](https://neon.com) is the fastest Postgres platform to ship on and grow with.
+</Admonition>
 
 **Summary**: in this tutorial, we will show you various ways to import a CSV file into a PostgreSQL table.
 

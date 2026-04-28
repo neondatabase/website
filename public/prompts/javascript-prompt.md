@@ -35,15 +35,15 @@ First, ask the user to choose their preferred Node.js Postgres driver and procee
     ```
 2.  Ensure the `package.json` file is configured for ES Modules by adding `"type": "module"`.
 3.  Based on the user's driver selection, run the appropriate `npm install` command:
-    *   **If `pg` is chosen:**
+    -   **If `pg` is chosen:**
         ```bash
         npm install pg dotenv
         ```
-    *   **If `postgres.js` is chosen:**
+    -   **If `postgres.js` is chosen:**
         ```bash
         npm install postgres dotenv
         ```
-    *   **If `@neondatabase/serverless` is chosen:**
+    -   **If `@neondatabase/serverless` is chosen:**
         ```bash
         npm install @neondatabase/serverless dotenv
         ```
@@ -72,6 +72,7 @@ Modify the project's main file (e.g., `index.js`). Apply the following logic:
 - **If the file contains custom user code, preserve it.** Comment out the existing code and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new code block after the commented section.
 
 #### Option 1: `pg` (node-postgres)
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import { Pool } from 'pg';
@@ -150,6 +151,7 @@ main();
 ```
 
 #### Option 2: `postgres.js`
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import postgres from 'postgres';
@@ -216,6 +218,7 @@ main();
 ```
 
 #### Option 3: `@neondatabase/serverless` (HTTP)
+
 ```javascript title="index.js"
 import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';

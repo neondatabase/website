@@ -1,10 +1,10 @@
 ---
-description: 'Run pre-commit validation on changed documentation files. Checks frontmatter, headings, navigation, image paths, and style rules, then runs the formatter.'
+description: 'Run pre-commit validation on changed documentation files. Checks frontmatter, headings, navigation, image paths, and style rules, then runs the auto-fixer.'
 ---
 
 # Validate
 
-Run before committing documentation changes. Checks the most common errors that break the build or violate style rules, then runs the formatter.
+Run before committing documentation changes. Checks the most common errors that break the build or violate style rules, then runs the auto-fixer.
 
 ## Step 1: Find changed files
 
@@ -56,13 +56,13 @@ Scan the file body for em dash characters (—). If found, flag the line numbers
 
 > **Warning:** `[file]` lines [N, N] — em dash found. Rewrite using a comma, parentheses, or a new sentence.
 
-## Step 3: Run the formatter
+## Step 3: Run the auto-fixer
 
 ```bash
-npm run lint:fix && npm run format
+npm run fix
 ```
 
-Report any errors or files changed by the formatter.
+Report any errors or files changed by the auto-fixer.
 
 ## Step 4: Report
 
@@ -71,6 +71,6 @@ Summarize findings:
 - List all errors (must fix before committing)
 - List all warnings (should fix; won't break the build)
 - Confirm which checks passed cleanly
-- If the formatter changed files, list them
+- If the auto-fixer changed files, list them
 
 If there are no errors or warnings, say so clearly: "All checks passed. Ready to commit."

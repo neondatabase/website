@@ -222,6 +222,10 @@ export default {
           to: LINKS.guides,
         },
         {
+          text: 'FAQs',
+          to: LINKS.faqs,
+        },
+        {
           text: 'PostgreSQL Tutorial',
           to: LINKS.postgresqltutorial,
         },

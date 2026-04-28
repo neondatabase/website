@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL C#: Inserting data'
 page_title: 'PostgreSQL C#: Insert'
-page_description: 'In this tutorial, you will learn how to insert data into a table in PostgreSQL Database from a C# program.'
+page_description: >-
+  In this tutorial, you will learn how to insert data into a table in PostgreSQL
+  Database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-insert/'
 ogImage: ''
 updatedOn: '2024-05-21T03:13:47+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Creating Tables'
-  slug: 'postgresql-csharp/postgresql-csharp-create-table'
+  slug: postgresql-csharp/postgresql-csharp-create-table
 nextLink:
   title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
-  slug: 'postgresql-csharp/postgresql-csharp-import-csv-file'
+  slug: postgresql-csharp/postgresql-csharp-import-csv-file
 ---
+<Admonition type="info" id="CTA">
+Inserting data with Npgsql works the same against any PostgreSQL database, so the C# patterns here carry over to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database from a C\# program.
 

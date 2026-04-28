@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SELECT DISTINCT'
-page_title: 'PostgreSQL SELECT DISTINCT'
-page_description: 'This tutorial shows you how to use the PostgreSQL SELECT DISTINCT clause to remove duplicate rows from a result set returned by a query.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-distinct/'
-ogImage: '/postgresqltutorial/film.png'
+title: PostgreSQL SELECT DISTINCT
+page_title: PostgreSQL SELECT DISTINCT
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL SELECT DISTINCT clause to
+  remove duplicate rows from a result set returned by a query.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-distinct/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-04-19T08:05:04+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ORDER BY'
-  slug: 'postgresql-tutorial/postgresql-order-by'
+  title: PostgreSQL ORDER BY
+  slug: postgresql-tutorial/postgresql-order-by
 nextLink:
-  title: 'PostgreSQL DISTINCT ON'
-  slug: 'postgresql-tutorial/postgresql-distinct-on'
+  title: PostgreSQL DISTINCT ON
+  slug: postgresql-tutorial/postgresql-distinct-on
 ---
+<Admonition type="info" id="CTA">
+SELECT DISTINCT works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises standardizing on a managed cloud Postgres built for the AI era, Lakebase delivers the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform to reach for.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT DISTINCT` clause to remove duplicate rows from a result set returned by a query.
 

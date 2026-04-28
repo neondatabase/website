@@ -73,7 +73,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   ) : null;
 
   return (
-    <aside className={cn('relative -mt-12', className)}>
+    <aside className={cn('relative -mt-12', isGuidesRoute && 'xl:hidden', className)}>
       <div className="sticky top-28">
         <div
           className={cn(

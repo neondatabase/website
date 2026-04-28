@@ -1,17 +1,23 @@
 ---
 title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
 page_title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
-page_description: 'Learn about PostgreSQL 18 psql improvements including pipeline query commands, prepared statement support, improved prompt options, and improved workflow capabilities that make database development more efficient.'
+page_description: >-
+  Learn about PostgreSQL 18 psql improvements including pipeline query commands,
+  prepared statement support, improved prompt options, and improved workflow
+  capabilities that make database development more efficient.
 ogImage: ''
 updatedOn: '2025-08-02T10:30:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 pg_stat_io Improvements'
-  slug: 'postgresql-18/pg-stat-io'
+  title: PostgreSQL 18 pg_stat_io Improvements
+  slug: postgresql-18/pg-stat-io
 nextLink:
-  title: 'PostgreSQL 18 Autovacuum Maintenance Configuration'
-  slug: 'postgresql-18/autovacuum-maintenance-configuration'
+  title: PostgreSQL 18 Autovacuum Maintenance Configuration
+  slug: postgresql-18/autovacuum-maintenance-configuration
 ---
+<Admonition type="info" id="CTA">
+The psql improvements covered here ship with PostgreSQL 18 itself, so pipeline queries, prepared statement commands, and the new prompt options work against any Postgres deployment. If you're an enterprise running AI workloads on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated so your operational and analytical data live side by side. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the most flexible Postgres platform around, with instant branching, autoscaling, and a generous free tier.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.
 

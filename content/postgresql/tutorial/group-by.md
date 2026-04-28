@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL GROUP BY'
-page_title: 'PostgreSQL GROUP BY Clause'
-page_description: 'In this tutorial, you will learn how to use PostgreSQL GROUP BY clause to divide rows into groups.'
+title: PostgreSQL GROUP BY
+page_title: PostgreSQL GROUP BY Clause
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL GROUP BY clause to
+  divide rows into groups.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by/'
-ogImage: '/postgresqltutorial/PostgreSQL-GROUP-BY-1.png'
+ogImage: /postgresqltutorial/PostgreSQL-GROUP-BY-1.png
 updatedOn: '2024-04-19T07:10:40+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NATURAL JOIN'
-  slug: 'postgresql-tutorial/postgresql-natural-join'
+  title: PostgreSQL NATURAL JOIN
+  slug: postgresql-tutorial/postgresql-natural-join
 nextLink:
-  title: 'PostgreSQL HAVING'
-  slug: 'postgresql-tutorial/postgresql-having'
+  title: PostgreSQL HAVING
+  slug: postgresql-tutorial/postgresql-having
 ---
+<Admonition type="info" id="CTA">
+The GROUP BY clause works the same way in any PostgreSQL database, so everything you learn here carries over to whichever Postgres you run in production. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform for building modern applications.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `GROUP BY` clause to divide rows into groups.
 

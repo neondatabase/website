@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CONCAT() Function'
-page_title: 'PostgreSQL CONCAT() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL CONCAT() functions to concatenate two or more strings into one.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-concat-function/'
-ogImage: '/postgresqltutorial/customer.png'
+title: PostgreSQL CONCAT() Function
+page_title: PostgreSQL CONCAT() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CONCAT() functions to
+  concatenate two or more strings into one.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-concat-function/
+ogImage: /postgresqltutorial/customer.png
 updatedOn: '2024-01-28T13:55:27+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RPAD() Function'
-  slug: 'postgresql-string-functions/postgresql-rpad'
+  title: PostgreSQL RPAD() Function
+  slug: postgresql-string-functions/postgresql-rpad
 nextLink:
-  title: 'PostgreSQL CONCAT_WS() Function'
-  slug: 'postgresql-string-functions/postgresql-concat_ws'
+  title: PostgreSQL CONCAT_WS() Function
+  slug: postgresql-string-functions/postgresql-concat_ws
 ---
+<Admonition type="info" id="CTA">
+The CONCAT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CONCAT()` function to concatenate two or more strings into one.
 

@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL List Views'
-page_title: 'PostgreSQL List Views'
-page_description: 'In this tutorial, you will learn how to list all the views in the current database in PostgreSQL using psql or SQL.'
+title: PostgreSQL List Views
+page_title: PostgreSQL List Views
+page_description: >-
+  In this tutorial, you will learn how to list all the views in the current
+  database in PostgreSQL using psql or SQL.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-list-views/'
 ogImage: ''
 updatedOn: '2024-03-16T08:19:05+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Recursive View'
-  slug: 'postgresql-views/postgresql-recursive-view'
+  title: PostgreSQL Recursive View
+  slug: postgresql-views/postgresql-recursive-view
 nextLink:
-  title: 'PostgreSQL Indexes'
-  slug: 'postgresql-views/../postgresql-indexes'
+  title: PostgreSQL Indexes
+  slug: postgresql-views/../postgresql-indexes
 ---
+<Admonition type="info" id="CTA">
+Listing views with psql's dv command, information_schema.views, and pg_matviews works the same way on any PostgreSQL deployment, so you can apply these techniques wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to list views in the PostgreSQL database server using the `psql` command and SQL statements.
 

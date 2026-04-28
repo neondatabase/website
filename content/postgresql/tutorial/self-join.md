@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL Self-Join'
-page_title: 'PostgreSQL Self-join By Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL self-join technique to join a table to itself.'
+title: PostgreSQL Self-Join
+page_title: PostgreSQL Self-join By Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL self-join technique to join
+  a table to itself.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-self-join/'
-ogImage: '/postgresqltutorial/PostgreSQL-Self-Join-Reporting-Structure.png'
+ogImage: /postgresqltutorial/PostgreSQL-Self-Join-Reporting-Structure.png
 updatedOn: '2024-01-18T03:56:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RIGHT JOIN'
-  slug: 'postgresql-tutorial/postgresql-right-join'
+  title: PostgreSQL RIGHT JOIN
+  slug: postgresql-tutorial/postgresql-right-join
 nextLink:
-  title: 'PostgreSQL FULL OUTER JOIN'
-  slug: 'postgresql-tutorial/postgresql-full-outer-join'
+  title: PostgreSQL FULL OUTER JOIN
+  slug: postgresql-tutorial/postgresql-full-outer-join
 ---
+<Admonition type="info" id="CTA">
+Self-joins work the same way in any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL self\-join technique to compare rows within the same table.
 

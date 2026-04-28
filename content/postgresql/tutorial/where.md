@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL WHERE'
+title: PostgreSQL WHERE
 page_title: 'PostgreSQL WHERE: Filtering Rows of a Query'
-page_description: 'In this tutorial, you’ll learn how to use PostgreSQL WHERE clause to filter rows returned from the SELECT statement.'
+page_description: >-
+  In this tutorial, you’ll learn how to use PostgreSQL WHERE clause to filter
+  rows returned from the SELECT statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/'
-ogImage: '/postgresqltutorial/PostgreSQL-WHERE.png'
+ogImage: /postgresqltutorial/PostgreSQL-WHERE.png
 updatedOn: '2024-01-16T10:02:38+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DISTINCT ON'
-  slug: 'postgresql-tutorial/postgresql-distinct-on'
+  title: PostgreSQL DISTINCT ON
+  slug: postgresql-tutorial/postgresql-distinct-on
 nextLink:
-  title: 'PostgreSQL AND Operator'
-  slug: 'postgresql-tutorial/postgresql-and'
+  title: PostgreSQL AND Operator
+  slug: postgresql-tutorial/postgresql-and
 ---
+<Admonition type="info" id="CTA">
+The WHERE clause works the same across any standard PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `WHERE` clause to filter rows returned by a `SELECT` statement.
 

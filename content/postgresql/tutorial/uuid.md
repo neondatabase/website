@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL UUID Data Type'
-page_title: 'PostgreSQL UUID Data Type'
-page_description: 'In this tutorial, you will learn how to use PostgreSQL UUID data type and how to generate UUID values using the gen_random_uuid() function.'
+title: PostgreSQL UUID Data Type
+page_title: PostgreSQL UUID Data Type
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL UUID data type and how
+  to generate UUID values using the gen_random_uuid() function.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uuid/'
 ogImage: ''
 updatedOn: '2024-02-01T09:53:47+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TIME Data Type'
-  slug: 'postgresql-tutorial/postgresql-time'
+  title: PostgreSQL TIME Data Type
+  slug: postgresql-tutorial/postgresql-time
 nextLink:
-  title: 'PostgreSQL JSON'
-  slug: 'postgresql-tutorial/postgresql-json'
+  title: PostgreSQL JSON
+  slug: postgresql-tutorial/postgresql-json
 ---
+<Admonition type="info" id="CTA">
+UUIDs work the same across any PostgreSQL deployment, so everything here about the UUID type, gen_random_uuid(), and the uuid-ossp module applies wherever you run Postgres. For enterprises that want UUID-based identifiers in a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers strong performance and security with native Lakehouse integration. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL UUID data type and how to generate UUID values using a supplied module.
 

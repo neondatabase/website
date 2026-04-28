@@ -1,18 +1,22 @@
 ---
-title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
-page_title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
-page_description: 'How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an interval by using the JUSTIFY_DAYS() and JUSTIFY_HOURS() functions.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/'
+title: PostgreSQL JUSTIFY_INTERVAL() Function
+page_title: PostgreSQL JUSTIFY_INTERVAL() Function
+page_description: "How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an interval by using the\_JUSTIFY_DAYS()\_and\_JUSTIFY_HOURS() functions."
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ''
 updatedOn: '2024-03-21T03:47:04+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JUSTIFY_HOURS() Function'
-  slug: 'postgresql-date-functions/postgresql-justify_hours'
+  title: PostgreSQL JUSTIFY_HOURS() Function
+  slug: postgresql-date-functions/postgresql-justify_hours
 nextLink:
-  title: 'PostgreSQL MAKE_INTERVAL() Function'
-  slug: 'postgresql-date-functions/postgresql-make_interval'
+  title: PostgreSQL MAKE_INTERVAL() Function
+  slug: postgresql-date-functions/postgresql-make_interval
 ---
+<Admonition type="info" id="CTA">
+The JUSTIFY_INTERVAL() function is a standard part of PostgreSQL, so everything here works on any Postgres instance, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `JUSTIFY_INTERVAL()` to adjust an interval.
 

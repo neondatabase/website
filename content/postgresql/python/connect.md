@@ -1,18 +1,23 @@
 ---
 title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
 page_title: 'PostgreSQL Python: Connecting to PostgreSQL Server'
-page_description: 'In this tutorial, you will learn how to connect to the PostgreSQL database server from Python using the psycopg2 package.'
+page_description: >-
+  In this tutorial, you will learn how to connect to the PostgreSQL database
+  server from Python using the psycopg2 package.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/connect/'
 ogImage: ''
 updatedOn: '2024-05-19T08:11:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Python'
-  slug: 'postgresql-python/'
+  title: PostgreSQL Python
+  slug: postgresql-python/
 nextLink:
   title: 'PostgreSQL Python: Create Tables'
-  slug: 'postgresql-python/create-tables'
+  slug: postgresql-python/create-tables
 ---
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL from Python with psycopg2 works the same against any Postgres instance, so everything here applies whether you run Postgres locally, in your own infrastructure, or on a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) offers the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse so your operational and analytical data live together. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to connect to the PostgreSQL server in Python using the `psycopg2` package.
 

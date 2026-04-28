@@ -329,6 +329,87 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
 
+## Transfer database table ownership between roles
+
+In Neon, roles created via the Console, CLI, or API are members of `neon_superuser` but are not full Postgres superusers. This means you can't directly transfer ownership of a database table from one role to another using `ALTER TABLE ... OWNER TO`.
+
+The workaround is to introduce a shared group role that both roles belong to. You transfer ownership to the group, then the destination role can claim ownership for itself.
+
+<Admonition type="note">
+In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
+</Admonition>
+
+1. Connect as the database owner role and run:
+
+   ```sql
+   -- Create a group role with no login
+   CREATE ROLE table_owners NOLOGIN;
+
+   -- Grant schema access to the group
+   GRANT USAGE, CREATE ON SCHEMA public TO table_owners;
+
+   -- Add both roles to the group
+   GRANT table_owners TO current_owner;
+   GRANT table_owners TO new_owner;
+   ```
+
+   Replace `current_owner` and `new_owner` with the actual role names.
+
+2. Still connected as `current_owner`, transfer the table to the group:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO table_owners;
+   ```
+
+3. Connect as `new_owner`. Transfer ownership from the group to yourself:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO new_owner;
+   ```
+
+4. Verify ownership:
+
+   ```sql
+   \dt your_table
+   ```
+
+   The **Owner** column should now show `new_owner`.
+
+5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done:
+
+   ```sql
+   DROP ROLE table_owners;
+   ```
+
+   `DROP ROLE table_owners` works only after that role no longer owns any objects and has no blocking dependencies.
+
+### Transfer ownership for multiple objects
+
+The numbered steps above show how to transfer one table with `ALTER TABLE ... OWNER TO`.
+
+If you need to transfer ownership for everything a role owns in a database, use `REASSIGN OWNED` instead of running `ALTER ... OWNER TO` for each table.
+
+`REASSIGN OWNED` includes tables and other object types owned by the role, such as views, materialized views, sequences, functions, schemas, and types.
+
+Connect as `current_owner` and move all owned objects to the shared group:
+
+```sql
+REASSIGN OWNED BY current_owner TO table_owners;
+```
+
+Then connect as `new_owner` and move those objects from the group to the destination role:
+
+```sql
+REASSIGN OWNED BY table_owners TO new_owner;
+```
+
+`REASSIGN OWNED` applies within the current database context. Run it in each database where you need to transfer ownership.
+
+<Admonition type="note">
+- `REASSIGN OWNED` runs in the current database context, so run it in each database where you need to transfer ownership.
+- `REASSIGN OWNED` reassigns ownership only. It does not change existing `GRANT` permissions or default privileges.
+</Admonition>
+
 ## Reserved database names
 
 The following names are reserved and cannot be given to a database:

@@ -32,9 +32,9 @@ When this prompt is triggered, automatically configure the open React Router pro
 
 1.  **Prompt the user to select a PostgreSQL driver.** Present the following options:
 
-    *   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for applications deployed on Vercel or Netlify.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
-    *   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
+    -   **`@neondatabase/serverless` (Recommended):** Optimized for serverless and edge functions with HTTP connections. The ideal choice for applications deployed on Vercel or Netlify.
+    -   **`postgres` (postgres.js):** A fast, full-featured client, excellent for long-running Node.js server environments.
+    -   **`pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 

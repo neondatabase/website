@@ -472,10 +472,10 @@ Make sure you have Node.js 18+ installed.
 </Callout>
 ```
 
-| Prop       | Type   | Default         | Description                          |
-| ---------- | ------ | --------------- | ------------------------------------ |
-| `children` | node   | (required)      | Content rendered inside the callout  |
-| `title`    | string | `Good to know`  | Label displayed in the header        |
+| Prop       | Type   | Default        | Description                         |
+| ---------- | ------ | -------------- | ----------------------------------- |
+| `children` | node   | (required)     | Content rendered inside the callout |
+| `title`    | string | `Good to know` | Label displayed in the header       |
 
 ### When to use Callout vs Admonition
 
@@ -530,6 +530,28 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 ![Steps example](images/steps-example.jpg)
 
 </details>
+
+## Sticky Table
+
+Use `StickyTable` for large markdown tables where readers need the header to remain visible while scrolling through the table. Regular markdown tables already get the default docs table styling; only wrap tables that need this sticky header behavior.
+
+```md
+<StickyTable>
+
+| Extension | PG14 | PG15 | Notes |
+| --------- | ---: | ---: | ----- |
+| pgvector  |  0.8 |  0.8 | Vector search support |
+| postgis   |  3.3 |  3.5 | Geospatial support |
+
+</StickyTable>
+```
+
+### Notes
+
+- Use `StickyTable` only around a single markdown table.
+- Keep the table in markdown so it remains easy to edit in one place.
+- The component preserves the normal horizontal table scroll and adds a floating header for long tables.
+- Pass `className` to `StickyTable` to apply classes to the underlying table, for example `<StickyTable className="min-w-[900px]">`.
 
 ## Two Column Layout
 

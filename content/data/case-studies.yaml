@@ -1,985 +1,985 @@
-- id: "magic-circle"
-  title: "Magic Circle"
+- id: 'magic-circle'
+  title: 'Magic Circle'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/magic-circle.svg"
+    mediaItemUrl: '/images/case-studies/magic-circle.svg'
     mediaDetails:
       width: 86
       height: 32
-  quote: "We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day— to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
+  quote: 'We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day— to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this.'
   author:
-    name: "Avi Romanoff, Founder at Magic Circle"
-    post: ""
+    name: 'Avi Romanoff, Founder at Magic Circle'
+    post: ''
   isInternal: true
-  internalPostSlug: "how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon"
-  externalUrl: ""
+  internalPostSlug: 'how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "create-xyz"
-  title: "Anything"
+- id: 'create-xyz'
+  title: 'Anything'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/create-xyz.svg"
+    mediaItemUrl: '/images/case-studies/create-xyz.svg'
     mediaDetails:
       width: 117
       height: 32
-  quote: "Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
+  quote: 'Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup.'
   author:
-    name: "Dhruv Amin"
-    post: "Co-founder at Anything"
+    name: 'Dhruv Amin'
+    post: 'Co-founder at Anything'
   isInternal: true
-  internalPostSlug: "from-idea-to-full-stack-app-in-one-conversation-with-create"
-  externalUrl: ""
+  internalPostSlug: 'from-idea-to-full-stack-app-in-one-conversation-with-create'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "vapi"
-  title: "Vapi"
+- id: 'vapi'
+  title: 'Vapi'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/vapi.svg"
+    mediaItemUrl: '/images/case-studies/vapi.svg'
     mediaDetails:
       width: 99
       height: 32
-  quote: "Neon’s serverless model is a perfect fit for us. Some of our AI voice agents handle thousands of calls in an instant, and then traffic drops off just as fast. With Neon, we don’t have to think about scaling—it just happens"
+  quote: 'Neon’s serverless model is a perfect fit for us. Some of our AI voice agents handle thousands of calls in an instant, and then traffic drops off just as fast. With Neon, we don’t have to think about scaling—it just happens'
   author:
-    name: "Tejas Siripurapu"
-    post: "Founding Engineer at Vapi.ai"
+    name: 'Tejas Siripurapu'
+    post: 'Founding Engineer at Vapi.ai'
   isInternal: true
-  internalPostSlug: "vapi-voice-agents-neon"
-  externalUrl: ""
+  internalPostSlug: 'vapi-voice-agents-neon'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "nodecraft"
-  title: "Nodecraft"
+- id: 'nodecraft'
+  title: 'Nodecraft'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/nodecraft.svg"
+    mediaItemUrl: '/images/case-studies/nodecraft.svg'
     mediaDetails:
       width: 144
       height: 32
-  quote: "Moving from legacy infrastructure to a fully serverless stack has been a huge upgrade. <mark>We wanted our backend to be as hands-off as possible</mark>. Now we get all the power of Postgres, without having to think about it"
+  quote: 'Moving from legacy infrastructure to a fully serverless stack has been a huge upgrade. <mark>We wanted our backend to be as hands-off as possible</mark>. Now we get all the power of Postgres, without having to think about it'
   author:
-    name: "James Ross"
-    post: "Co-founder and CTO at Nodecraft"
+    name: 'James Ross'
+    post: 'Co-founder and CTO at Nodecraft'
   isInternal: true
-  internalPostSlug: "nodecraft-cloudflare-neon"
-  externalUrl: ""
+  internalPostSlug: 'nodecraft-cloudflare-neon'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "velocity"
-  title: "Velocity"
+- id: 'velocity'
+  title: 'Velocity'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/velocity.svg"
+    mediaItemUrl: '/images/case-studies/velocity.svg'
     mediaDetails:
       width: 164
       height: 32
-  quote: "“We used RDS before, but the cost and manual effort of scaling it up and down was a pain. I also wanted one database solution across clouds—and Neon gave us that”"
+  quote: '“We used RDS before, but the cost and manual effort of scaling it up and down was a pain. I also wanted one database solution across clouds—and Neon gave us that”'
   author:
-    name: "Tal Kain"
-    post: "Founder and CEO"
+    name: 'Tal Kain'
+    post: 'Founder and CEO'
   isInternal: true
-  internalPostSlug: "velocity-future-on-call"
-  externalUrl: ""
+  internalPostSlug: 'velocity-future-on-call'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "endform"
-  title: "Endform"
+- id: 'endform'
+  title: 'Endform'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/endform.svg"
+    mediaItemUrl: '/images/case-studies/endform.svg'
     mediaDetails:
       width: 150
       height: 32
-  quote: "Every tech choice we make is about staying lightweight and scalable. Neon fits that perfectly: we can spin up real Postgres databases in CI, in seconds, with zero hassle."
+  quote: 'Every tech choice we make is about staying lightweight and scalable. Neon fits that perfectly: we can spin up real Postgres databases in CI, in seconds, with zero hassle.'
   author:
-    name: "Oliver Stenbom"
-    post: "Co-founder of Endform"
+    name: 'Oliver Stenbom'
+    post: 'Co-founder of Endform'
   isInternal: true
-  internalPostSlug: "endform-wants-to-scale-your-playwright-end-to-end-tests"
-  externalUrl: ""
+  internalPostSlug: 'endform-wants-to-scale-your-playwright-end-to-end-tests'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "smashsend"
-  title: "SMASHSEND"
+- id: 'smashsend'
+  title: 'SMASHSEND'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/smashsend.svg"
+    mediaItemUrl: '/images/case-studies/smashsend.svg'
     mediaDetails:
       width: 135
       height: 32
-  quote: "We moved from AWS RDS to Neon and the benefits have already been massive. We cut our database bill from $1,500 to $70 a month"
+  quote: 'We moved from AWS RDS to Neon and the benefits have already been massive. We cut our database bill from $1,500 to $70 a month'
   author:
-    name: "Jorge Ferreiro"
-    post: "Founder of SMASHSEND"
+    name: 'Jorge Ferreiro'
+    post: 'Founder of SMASHSEND'
   isInternal: true
-  internalPostSlug: "smashsend-from-rds-to-neon"
-  externalUrl: ""
+  internalPostSlug: 'smashsend-from-rds-to-neon'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "dev"
-  title: "DEV"
+- id: 'dev'
+  title: 'DEV'
   isFeatured: true
   logo:
-    mediaItemUrl: "/images/case-studies/dev.svg"
+    mediaItemUrl: '/images/case-studies/dev.svg'
     mediaDetails:
       width: 150
       height: 32
-  quote: "What first attracted us to Neon was the efficient scaling. What kept us interested were all the thoughtful developer-experience wins"
+  quote: 'What first attracted us to Neon was the efficient scaling. What kept us interested were all the thoughtful developer-experience wins'
   author:
-    name: "Ben Halpern"
-    post: "DEV Co-Founder"
+    name: 'Ben Halpern'
+    post: 'DEV Co-Founder'
   isInternal: true
-  internalPostSlug: "dev-from-heroku-to-neon"
-  externalUrl: ""
+  internalPostSlug: 'dev-from-heroku-to-neon'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "databutton"
-  title: "Databutton"
+- id: 'databutton'
+  title: 'Databutton'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/databutton.svg"
+    mediaItemUrl: '/images/case-studies/databutton.svg'
     mediaDetails:
       width: 157
       height: 32
-  quote: "Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead"
+  quote: 'Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead'
   author:
-    name: "Martin Skow Røed"
-    post: "CTO and co-founder of Databutton"
+    name: 'Martin Skow Røed'
+    post: 'CTO and co-founder of Databutton'
   isInternal: true
-  internalPostSlug: "databutton-neon-integration"
-  externalUrl: ""
+  internalPostSlug: 'databutton-neon-integration'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "traconiq"
-  title: "traconiq"
+- id: 'traconiq'
+  title: 'traconiq'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/traconiq.svg"
+    mediaItemUrl: '/images/case-studies/traconiq.svg'
     mediaDetails:
       width: 112
       height: 32
-  quote: "Our workload ingests hundreds of data points per second and our RDS costs were increasing. With Neon, we found a way to scale our setup more efficiently"
+  quote: 'Our workload ingests hundreds of data points per second and our RDS costs were increasing. With Neon, we found a way to scale our setup more efficiently'
   author:
-    name: "Thorsten Rieß"
-    post: "Software Architect at traconiq"
+    name: 'Thorsten Rieß'
+    post: 'Software Architect at traconiq'
   isInternal: true
-  internalPostSlug: "why-traconiq-migrated-from-aws-rds-to-neon"
-  externalUrl: ""
+  internalPostSlug: 'why-traconiq-migrated-from-aws-rds-to-neon'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "vecstore"
-  title: "Vecstore"
+- id: 'vecstore'
+  title: 'Vecstore'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/vecstore.svg"
+    mediaItemUrl: '/images/case-studies/vecstore.svg'
     mediaDetails:
       width: 124
       height: 32
-  quote: "We replaced both Pinecone and RDS with Neon, and latency dropped from 200ms to 80ms with a much simpler setup"
+  quote: 'We replaced both Pinecone and RDS with Neon, and latency dropped from 200ms to 80ms with a much simpler setup'
   author:
-    name: "Giorgi Kenchadze"
-    post: "Founder & CEO at Vecstore"
+    name: 'Giorgi Kenchadze'
+    post: 'Founder & CEO at Vecstore'
   isInternal: true
-  internalPostSlug: "vecstore-replacing-pinecone-and-rds-with-neon"
-  externalUrl: ""
+  internalPostSlug: 'vecstore-replacing-pinecone-and-rds-with-neon'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "dyad"
-  title: "Dyad"
+- id: 'dyad'
+  title: 'Dyad'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/dyad.svg"
+    mediaItemUrl: '/images/case-studies/dyad.svg'
     mediaDetails:
       width: 104
       height: 33
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "dyad-brings-postgres-to-local-ai-app-building-powered-by-neon"
-  externalUrl: ""
+  internalPostSlug: 'dyad-brings-postgres-to-local-ai-app-building-powered-by-neon'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "xpander-ai"
-  title: "xpander.ai"
+- id: 'xpander-ai'
+  title: 'xpander.ai'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/xpander-ai.svg"
+    mediaItemUrl: '/images/case-studies/xpander-ai.svg'
     mediaDetails:
       width: 163
       height: 32
-  quote: "For every tenant in our system, we create a dedicated project in Neon. That lets us isolate memory and scale cleanly as agent usage grows."
+  quote: 'For every tenant in our system, we create a dedicated project in Neon. That lets us isolate memory and scale cleanly as agent usage grows.'
   author:
-    name: "Ran Sheinberg"
-    post: "Co-founder and CPO"
+    name: 'Ran Sheinberg'
+    post: 'Co-founder and CPO'
   isInternal: true
-  internalPostSlug: "xpander-ai-agents-slack-neon-backend"
-  externalUrl: ""
+  internalPostSlug: 'xpander-ai-agents-slack-neon-backend'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "neptune"
-  title: "Neptune"
+- id: 'neptune'
+  title: 'Neptune'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/neptune.svg"
+    mediaItemUrl: '/images/case-studies/neptune.svg'
     mediaDetails:
       width: 154
       height: 32
-  quote: "We wanted to move as fast and as safely as possible—and Neon’s branching model for Postgres lets us do that. It’s just like working with Git: each developer gets their own branch, tests it, and we never have to worry about coordinating test data or stepping on each other’s toes."
+  quote: 'We wanted to move as fast and as safely as possible—and Neon’s branching model for Postgres lets us do that. It’s just like working with Git: each developer gets their own branch, tests it, and we never have to worry about coordinating test data or stepping on each other’s toes.'
   author:
-    name: "Andy Bonventre"
-    post: "CTO at Neptune"
+    name: 'Andy Bonventre'
+    post: 'CTO at Neptune'
   isInternal: true
-  internalPostSlug: "neptune-built-a-fast-serverless-backend-with-neon-and-vercel"
-  externalUrl: ""
+  internalPostSlug: 'neptune-built-a-fast-serverless-backend-with-neon-and-vercel'
+  externalUrl: ''
   categories: []
 
-- id: "marble"
-  title: "Marble"
+- id: 'marble'
+  title: 'Marble'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/marble.svg"
+    mediaItemUrl: '/images/case-studies/marble.svg'
     mediaDetails:
       width: 169
       height: 32
-  quote: "Neon branching makes us a lot faster and more confident when shipping, even as a small team"
+  quote: 'Neon branching makes us a lot faster and more confident when shipping, even as a small team'
   author:
-    name: "Dominik Koch"
-    post: "CEO and Co-Founder of Marble"
+    name: 'Dominik Koch'
+    post: 'CEO and Co-Founder of Marble'
   isInternal: true
-  internalPostSlug: "marble-is-shipping-faster-with-neon-branching"
-  externalUrl: ""
+  internalPostSlug: 'marble-is-shipping-faster-with-neon-branching'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "sharing-excess"
-  title: "Sharing Excess"
+- id: 'sharing-excess'
+  title: 'Sharing Excess'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/sharing-excess.svg"
+    mediaItemUrl: '/images/case-studies/sharing-excess.svg'
     mediaDetails:
       width: 149
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "branching-as-the-environment-how-sharing-excess-ships-faster-on-neon"
-  externalUrl: ""
+  internalPostSlug: 'branching-as-the-environment-how-sharing-excess-ships-faster-on-neon'
+  externalUrl: ''
   categories: []
 
-- id: "axess-intelligence"
-  title: "Axess Intelligence"
+- id: 'axess-intelligence'
+  title: 'Axess Intelligence'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/axess-intelligence.svg"
+    mediaItemUrl: '/images/case-studies/axess-intelligence.svg'
     mediaDetails:
       width: 110
       height: 32
-  quote: "We didn’t want to spend unnecessary time writing CRUD logic or maintaining a backend. We just connected Better Auth and the Data API and started building. The best part: every Neon branch gets its own Data API URL"
+  quote: 'We didn’t want to spend unnecessary time writing CRUD logic or maintaining a backend. We just connected Better Auth and the Data API and started building. The best part: every Neon branch gets its own Data API URL'
   author:
-    name: "Mouaz Anan"
-    post: "Engineer at Axess Intelligence"
+    name: 'Mouaz Anan'
+    post: 'Engineer at Axess Intelligence'
   isInternal: true
-  internalPostSlug: "how-axess-intelligence-simplified-their-backend-with-neons-data-api"
-  externalUrl: ""
+  internalPostSlug: 'how-axess-intelligence-simplified-their-backend-with-neons-data-api'
+  externalUrl: ''
   categories:
-    - slug: "backend"
-      name: "Backend"
+    - slug: 'backend'
+      name: 'Backend'
 
-- id: "daisy"
-  title: "Daisy"
+- id: 'daisy'
+  title: 'Daisy'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/daisy.svg"
+    mediaItemUrl: '/images/case-studies/daisy.svg'
     mediaDetails:
       width: 100
       height: 32
-  quote: "Using Neon with Neon Auth just made everything simpler. Our database and auth live in the same place, and it’s the kind of backend you forget it exists. That’s exactly how it should be"
+  quote: 'Using Neon with Neon Auth just made everything simpler. Our database and auth live in the same place, and it’s the kind of backend you forget it exists. That’s exactly how it should be'
   author:
-    name: "Gabriel Tumlos"
-    post: "Founder of Daisy"
+    name: 'Gabriel Tumlos'
+    post: 'Founder of Daisy'
   isInternal: true
-  internalPostSlug: "integrating-postgres-and-auth-the-easy-way-daisys-neon-setup"
-  externalUrl: ""
+  internalPostSlug: 'integrating-postgres-and-auth-the-easy-way-daisys-neon-setup'
+  externalUrl: ''
   categories:
-    - slug: "backend"
-      name: "Backend"
+    - slug: 'backend'
+      name: 'Backend'
 
-- id: "bitso"
-  title: "Bitso"
+- id: 'bitso'
+  title: 'Bitso'
   isFeatured: true
   logo:
-    mediaItemUrl: "/images/case-studies/bitso.svg"
+    mediaItemUrl: '/images/case-studies/bitso.svg'
     mediaDetails:
       width: 105
       height: 32
-  quote: "Neon’s branching gave us true database isolation. Now every sandbox gets its own isolated Postgres DB whenever required"
+  quote: 'Neon’s branching gave us true database isolation. Now every sandbox gets its own isolated Postgres DB whenever required'
   author:
-    name: "Joe Horsnell"
-    post: "Principal Platform Engineer at Bitso"
+    name: 'Joe Horsnell'
+    post: 'Principal Platform Engineer at Bitso'
   isInternal: true
-  internalPostSlug: "bitso-branching-workflow"
-  externalUrl: ""
+  internalPostSlug: 'bitso-branching-workflow'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "atoms"
-  title: "Atoms"
+- id: 'atoms'
+  title: 'Atoms'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/atoms.svg"
+    mediaItemUrl: '/images/case-studies/atoms.svg'
     mediaDetails:
       width: 116
       height: 32
-  quote: "We chose Neon as our backend because of scale, cost-efficiency, and superior developer and user experience, all critical for Atoms’ multi-tenant architecture"
+  quote: 'We chose Neon as our backend because of scale, cost-efficiency, and superior developer and user experience, all critical for Atoms’ multi-tenant architecture'
   author:
-    name: "Engineering Team"
-    post: "at Atoms"
+    name: 'Engineering Team'
+    post: 'at Atoms'
   isInternal: true
-  internalPostSlug: "atoms-is-out-a-multi-agent-ai-team-that-builds-full-stack-apps-for-you"
-  externalUrl: ""
+  internalPostSlug: 'atoms-is-out-a-multi-agent-ai-team-that-builds-full-stack-apps-for-you'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "strapi"
-  title: "Strapi"
+- id: 'strapi'
+  title: 'Strapi'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/strapi.svg"
+    mediaItemUrl: '/images/case-studies/strapi.svg'
     mediaDetails:
       width: 124
       height: 32
-  quote: "Our agent Fimo lets teams experiment without fear because you can always roll back. Neon’s branches and snapshots are what make that possible"
+  quote: 'Our agent Fimo lets teams experiment without fear because you can always roll back. Neon’s branches and snapshots are what make that possible'
   author:
-    name: "Pierre Burgy"
-    post: "CEO of Strapi"
+    name: 'Pierre Burgy'
+    post: 'CEO of Strapi'
   isInternal: true
-  internalPostSlug: "meet-fimo-ai-the-ai-native-cms-from-strapi"
-  externalUrl: ""
+  internalPostSlug: 'meet-fimo-ai-the-ai-native-cms-from-strapi'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "qwikbuild"
-  title: "QwikBuild"
+- id: 'qwikbuild'
+  title: 'QwikBuild'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/qwikbuild.svg"
+    mediaItemUrl: '/images/case-studies/qwikbuild.svg'
     mediaDetails:
       width: 156
       height: 42
-  quote: "“Soon, AI agents will do most of the coding, and perhaps 1000x more database instances will be needed. Neon’s platform and pricing strategy feel aligned with that future”"
+  quote: '“Soon, AI agents will do most of the coding, and perhaps 1000x more database instances will be needed. Neon’s platform and pricing strategy feel aligned with that future”'
   author:
-    name: "Nilesh Trivedi"
-    post: "co-founder and CTO at QwikBuild"
+    name: 'Nilesh Trivedi'
+    post: 'co-founder and CTO at QwikBuild'
   isInternal: true
-  internalPostSlug: "inside-qwikbuild-neon-powered-architecture"
-  externalUrl: ""
+  internalPostSlug: 'inside-qwikbuild-neon-powered-architecture'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "specific-dev"
-  title: "Specific.dev"
+- id: 'specific-dev'
+  title: 'Specific.dev'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/specific-dev.svg"
+    mediaItemUrl: '/images/case-studies/specific-dev.svg'
     mediaDetails:
       width: 157
       height: 32
-  quote: "“I’m genuinely surprised by how well it handles that scale. You can create tons of databases and they’re available immediately. You can branch out immediately. All of those things make it really nice for agent-managed infra.”"
+  quote: '“I’m genuinely surprised by how well it handles that scale. You can create tons of databases and they’re available immediately. You can branch out immediately. All of those things make it really nice for agent-managed infra.”'
   author:
-    name: "Iman Radjavi"
-    post: "co-founder at Specific.dev"
+    name: 'Iman Radjavi'
+    post: 'co-founder at Specific.dev'
   isInternal: true
-  internalPostSlug: "how-specific-provisions-thousands-of-databases-for-coding-agents-using-neon"
-  externalUrl: ""
+  internalPostSlug: 'how-specific-provisions-thousands-of-databases-for-coding-agents-using-neon'
+  externalUrl: ''
   categories: []
 
-- id: "basehub"
-  title: "BaseHub"
+- id: 'basehub'
+  title: 'BaseHub'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/basehub.svg"
+    mediaItemUrl: '/images/case-studies/basehub.svg'
     mediaDetails:
       width: 111
       height: 32
-  quote: "Databases have always been such a pain in terms of the migration flow, backups, scaling, risk of breaking production… In Neon, everything feels easier and much safer to do"
+  quote: 'Databases have always been such a pain in terms of the migration flow, backups, scaling, risk of breaking production… In Neon, everything feels easier and much safer to do'
   author:
-    name: "Julian Benegas"
-    post: "CEO"
+    name: 'Julian Benegas'
+    post: 'CEO'
   isInternal: true
-  internalPostSlug: "meet-basehub-developer-velocity-and-efficiency-right-down-to-the-database"
-  externalUrl: ""
+  internalPostSlug: 'meet-basehub-developer-velocity-and-efficiency-right-down-to-the-database'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'startups'
+      name: 'Startups'
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "retool"
-  title: "Retool"
+- id: 'retool'
+  title: 'Retool'
   isFeatured: true
   logo:
-    mediaItemUrl: "/images/case-studies/retool.svg"
+    mediaItemUrl: '/images/case-studies/retool.svg'
     mediaDetails:
       width: 111
       height: 32
-  quote: "We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort"
+  quote: 'We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort'
   author:
-    name: "Himanshu Bhandoh"
-    post: "Software Engineer at Retool"
+    name: 'Himanshu Bhandoh'
+    post: 'Software Engineer at Retool'
   isInternal: true
-  internalPostSlug: "how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases"
-  externalUrl: ""
+  internalPostSlug: 'how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'
+  externalUrl: ''
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "koyeb"
-  title: "Koyeb"
+- id: 'koyeb'
+  title: 'Koyeb'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/koyeb.svg"
+    mediaItemUrl: '/images/case-studies/koyeb.svg'
     mediaDetails:
       width: 111
       height: 32
-  quote: "Neon has no infrastructure to manage, no servers to provision, no database cluster to maintain — making them the obvious partner to power our serverless Postgres offering"
+  quote: 'Neon has no infrastructure to manage, no servers to provision, no database cluster to maintain — making them the obvious partner to power our serverless Postgres offering'
   author:
-    name: "Édouard Bonlieu"
-    post: "Co-founder and CPO"
+    name: 'Édouard Bonlieu'
+    post: 'Co-founder and CPO'
   isInternal: false
-  internalPostSlug: ""
-  externalUrl: "https://www.koyeb.com/blog/serverless-postgres-public-preview"
+  internalPostSlug: ''
+  externalUrl: 'https://www.koyeb.com/blog/serverless-postgres-public-preview'
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "neo-tax"
-  title: "Neo.Tax"
+- id: 'neo-tax'
+  title: 'Neo.Tax'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/neo-tax.svg"
+    mediaItemUrl: '/images/case-studies/neo-tax.svg'
     mediaDetails:
       width: 105
       height: 32
-  quote: "Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot"
+  quote: 'Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot'
   author:
-    name: "Miguel Hernandez"
-    post: "CEO"
+    name: 'Miguel Hernandez'
+    post: 'CEO'
   isInternal: true
-  internalPostSlug: "from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle"
-  externalUrl: ""
+  internalPostSlug: 'from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "vercel"
-  title: "Vercel"
+- id: 'vercel'
+  title: 'Vercel'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/vercel.svg"
+    mediaItemUrl: '/images/case-studies/vercel.svg'
     mediaDetails:
       width: 120
       height: 32
-  quote: "By partnering with Neon, Vercel&#8217;s frontend platform is now the end-to-end serverless solution for building on the Web, from Next.js all the way to SQL."
+  quote: 'By partnering with Neon, Vercel&#8217;s frontend platform is now the end-to-end serverless solution for building on the Web, from Next.js all the way to SQL.'
   author:
-    name: "Guillermo Rauch"
-    post: "CEO"
+    name: 'Guillermo Rauch'
+    post: 'CEO'
   isInternal: true
-  internalPostSlug: "neon-postgres-on-vercel"
-  externalUrl: ""
+  internalPostSlug: 'neon-postgres-on-vercel'
+  externalUrl: ''
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "wordware"
-  title: "Wordware"
+- id: 'wordware'
+  title: 'Wordware'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/wordware.svg"
+    mediaItemUrl: '/images/case-studies/wordware.svg'
     mediaDetails:
       width: 138
       height: 32
-  quote: "With Neon’s preview branches, we can catch issues early and fix them before they hit production"
+  quote: 'With Neon’s preview branches, we can catch issues early and fix them before they hit production'
   author:
-    name: "Robert Chandler"
-    post: "Co-founder and CTO"
+    name: 'Robert Chandler'
+    post: 'Co-founder and CTO'
   isInternal: true
-  internalPostSlug: "building-ai-agents-just-got-faster-with-wordware-and-neon"
-  externalUrl: ""
+  internalPostSlug: 'building-ai-agents-just-got-faster-with-wordware-and-neon'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "invenco"
-  title: "Invenco"
+- id: 'invenco'
+  title: 'Invenco'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/invenco.svg"
+    mediaItemUrl: '/images/case-studies/invenco.svg'
     mediaDetails:
       width: 130
       height: 33
-  quote: "Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS"
+  quote: 'Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS'
   author:
-    name: "Cody Jenkins"
-    post: "Head of Engineering"
+    name: 'Cody Jenkins'
+    post: 'Head of Engineering'
   isInternal: true
-  internalPostSlug: "why-invenco-migrated-from-aurora-serverless-v2-to-neon"
-  externalUrl: ""
+  internalPostSlug: 'why-invenco-migrated-from-aurora-serverless-v2-to-neon'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "mindvalley"
-  title: "Mindvalley"
+- id: 'mindvalley'
+  title: 'Mindvalley'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/mindvalley.svg"
+    mediaItemUrl: '/images/case-studies/mindvalley.svg'
     mediaDetails:
       width: 150
       height: 32
-  quote: "Developers already face significant delays when working on a PR. Time to launch is crucial for us: when we tried Neon and saw that spinning up a branch takes seconds, we were blown away."
+  quote: 'Developers already face significant delays when working on a PR. Time to launch is crucial for us: when we tried Neon and saw that spinning up a branch takes seconds, we were blown away.'
   author:
-    name: "Alex Co"
-    post: "Head of Platform Engineering"
+    name: 'Alex Co'
+    post: 'Head of Platform Engineering'
   isInternal: true
-  internalPostSlug: "how-mindvalley-minimizes-time-to-launch-with-neon-branches"
-  externalUrl: ""
+  internalPostSlug: 'how-mindvalley-minimizes-time-to-launch-with-neon-branches'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "opusflow"
-  title: "OpusFlow"
+- id: 'opusflow'
+  title: 'OpusFlow'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/opusflow.svg"
+    mediaItemUrl: '/images/case-studies/opusflow.svg'
     mediaDetails:
       width: 115
       height: 32
-  quote: "Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive. We switched over to Neon to reduce costs and operational overhead"
+  quote: 'Our customers require their data to live in an isolated database, but implementing this in RDS was cumbersome and expensive. We switched over to Neon to reduce costs and operational overhead'
   author:
-    name: "Joey Teunissen"
-    post: "CTO"
+    name: 'Joey Teunissen'
+    post: 'CTO'
   isInternal: true
-  internalPostSlug: "how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers"
-  externalUrl: ""
+  internalPostSlug: 'how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "encore"
-  title: "Encore"
+- id: 'encore'
+  title: 'Encore'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/encore.svg"
+    mediaItemUrl: '/images/case-studies/encore.svg'
     mediaDetails:
       width: 112
       height: 32
-  quote: "“Our users were asking for preview environments that already had their data in place. Neon’s branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately”"
+  quote: '“Our users were asking for preview environments that already had their data in place. Neon’s branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately”'
   author:
-    name: "Marcus Kohlberg"
-    post: "Founder at Encore"
+    name: 'Marcus Kohlberg'
+    post: 'Founder at Encore'
   isInternal: true
-  internalPostSlug: "where-agents-meet-infrastructure-encore-leap-and-neon"
-  externalUrl: ""
+  internalPostSlug: 'where-agents-meet-infrastructure-encore-leap-and-neon'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'ai'
+      name: 'AI & Agents'
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "301-pro"
-  title: "301.Pro"
+- id: '301-pro'
+  title: '301.Pro'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/301-pro.svg"
+    mediaItemUrl: '/images/case-studies/301-pro.svg'
     mediaDetails:
       width: 36
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "building-301-pro-multi-cloud-with-neon-postgres"
-  externalUrl: ""
+  internalPostSlug: 'building-301-pro-multi-cloud-with-neon-postgres'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "222"
-  title: "222"
+- id: '222'
+  title: '222'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/222.svg"
+    mediaItemUrl: '/images/case-studies/222.svg'
     mediaDetails:
       width: 80
       height: 32
-  quote: "Our database traffic peaks at nights and on weekends when thousands of our members are attending experiences. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes."
+  quote: 'Our database traffic peaks at nights and on weekends when thousands of our members are attending experiences. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes.'
   author:
-    name: "Lex Nasser"
-    post: "Founding Engineer"
+    name: 'Lex Nasser'
+    post: 'Founding Engineer'
   isInternal: true
-  internalPostSlug: "how-222-uses-neon-to-handle-their-frequent-spikes-in-demand"
-  externalUrl: ""
+  internalPostSlug: 'how-222-uses-neon-to-handle-their-frequent-spikes-in-demand'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "hasura"
-  title: "Hasura"
+- id: 'hasura'
+  title: 'Hasura'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/hasura.svg"
+    mediaItemUrl: '/images/case-studies/hasura.svg'
     mediaDetails:
       width: 108
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "neon-hasura-integration"
-  externalUrl: ""
+  internalPostSlug: 'neon-hasura-integration'
+  externalUrl: ''
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "replit"
-  title: "Replit"
+- id: 'replit'
+  title: 'Replit'
   isFeatured: true
   logo:
-    mediaItemUrl: "/images/case-studies/replit.svg"
+    mediaItemUrl: '/images/case-studies/replit.svg'
     mediaDetails:
       width: 120
       height: 32
-  quote: "The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer"
+  quote: 'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer'
   author:
-    name: "Lincoln Bergeson"
-    post: "Infrastructure Engineer"
+    name: 'Lincoln Bergeson'
+    post: 'Infrastructure Engineer'
   isInternal: true
-  internalPostSlug: "neon-replit-integration"
-  externalUrl: ""
+  internalPostSlug: 'neon-replit-integration'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "recrowd"
-  title: "Recrowd"
+- id: 'recrowd'
+  title: 'Recrowd'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/recrowd.svg"
+    mediaItemUrl: '/images/case-studies/recrowd.svg'
     mediaDetails:
       width: 123
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand"
-  externalUrl: ""
+  internalPostSlug: 'how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "bunnyshell"
-  title: "Bunnyshell"
+- id: 'bunnyshell'
+  title: 'Bunnyshell'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/bunnyshell.svg"
+    mediaItemUrl: '/images/case-studies/bunnyshell.svg'
     mediaDetails:
       width: 163
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "neon-bunnyshell-integration"
-  externalUrl: ""
+  internalPostSlug: 'neon-bunnyshell-integration'
+  externalUrl: ''
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "beatgig"
-  title: "BeatGig"
+- id: 'beatgig'
+  title: 'BeatGig'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/beatgig.svg"
+    mediaItemUrl: '/images/case-studies/beatgig.svg'
     mediaDetails:
       width: 173
       height: 40
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "neon-read-replicas-in-the-wild-how-beatgig-uses-them"
-  externalUrl: ""
+  internalPostSlug: 'neon-read-replicas-in-the-wild-how-beatgig-uses-them'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "wundergraph"
-  title: "WunderGraph"
+- id: 'wundergraph'
+  title: 'WunderGraph'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/wundergraph.svg"
+    mediaItemUrl: '/images/case-studies/wundergraph.svg'
     mediaDetails:
       width: 143
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "neon-wundergraph-integration"
-  externalUrl: ""
+  internalPostSlug: 'neon-wundergraph-integration'
+  externalUrl: ''
   categories:
-    - slug: "platforms"
-      name: "Platforms"
+    - slug: 'platforms'
+      name: 'Platforms'
 
-- id: "dispatch"
-  title: "Dispatch"
+- id: 'dispatch'
+  title: 'Dispatch'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/dispatch.svg"
+    mediaItemUrl: '/images/case-studies/dispatch.svg'
     mediaDetails:
       width: 165
       height: 40
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
-  externalUrl: ""
+  internalPostSlug: 'how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "proposales"
-  title: "Proposales"
+- id: 'proposales'
+  title: 'Proposales'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/proposales.svg"
+    mediaItemUrl: '/images/case-studies/proposales.svg'
     mediaDetails:
       width: 149
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "frictionless-development-experience-with-neon-branching"
-  externalUrl: ""
+  internalPostSlug: 'frictionless-development-experience-with-neon-branching'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "rubric-labs"
-  title: "Rubric Labs"
+- id: 'rubric-labs'
+  title: 'Rubric Labs'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/rubric-labs.svg"
+    mediaItemUrl: '/images/case-studies/rubric-labs.svg'
     mediaDetails:
       width: 130
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "rubric-labs-can-make-your-ai-dreams-come-true"
-  externalUrl: ""
+  internalPostSlug: 'rubric-labs-can-make-your-ai-dreams-come-true'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'
 
-- id: "branch"
-  title: "Branch"
+- id: 'branch'
+  title: 'Branch'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/branch.svg"
+    mediaItemUrl: '/images/case-studies/branch.svg'
     mediaDetails:
       width: 91
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "branch-chose-neon-for-its-true-postgres-and-serverless-nature"
-  externalUrl: ""
+  internalPostSlug: 'branch-chose-neon-for-its-true-postgres-and-serverless-nature'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "ketteq"
-  title: "ketteQ"
+- id: 'ketteq'
+  title: 'ketteQ'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/ketteq.svg"
+    mediaItemUrl: '/images/case-studies/ketteq.svg'
     mediaDetails:
       width: 114
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "database-branching-for-postgres-with-neon"
-  externalUrl: ""
+  internalPostSlug: 'database-branching-for-postgres-with-neon'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "topo"
-  title: "Topo"
+- id: 'topo'
+  title: 'Topo'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/topo.svg"
+    mediaItemUrl: '/images/case-studies/topo.svg'
     mediaDetails:
       width: 105
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "why-topo-io-switched-from-amazon-rds-to-neon"
-  externalUrl: ""
+  internalPostSlug: 'why-topo-io-switched-from-amazon-rds-to-neon'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "supergood"
-  title: "Supergood"
+- id: 'supergood'
+  title: 'Supergood'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/supergood.svg"
+    mediaItemUrl: '/images/case-studies/supergood.svg'
     mediaDetails:
       width: 141
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "how-supergood-unlocked-their-postgres-developer-productivity"
-  externalUrl: ""
+  internalPostSlug: 'how-supergood-unlocked-their-postgres-developer-productivity'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "white-widget"
-  title: "White Widget"
+- id: 'white-widget'
+  title: 'White Widget'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/white-widget.svg"
+    mediaItemUrl: '/images/case-studies/white-widget.svg'
     mediaDetails:
       width: 144
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "white-widgets-secret-to-scalable-postgres-neon"
-  externalUrl: ""
+  internalPostSlug: 'white-widgets-secret-to-scalable-postgres-neon'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "sheperd"
-  title: "Shepherd"
+- id: 'sheperd'
+  title: 'Shepherd'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/sheperd.svg"
+    mediaItemUrl: '/images/case-studies/sheperd.svg'
     mediaDetails:
       width: 128
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd"
-  externalUrl: ""
+  internalPostSlug: 'adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd'
+  externalUrl: ''
   categories:
-    - slug: "fast-moving-teams"
-      name: "Fast-moving teams"
+    - slug: 'fast-moving-teams'
+      name: 'Fast-moving teams'
 
-- id: "cedalio"
-  title: "Cedalio"
+- id: 'cedalio'
+  title: 'Cedalio'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/cedalio.svg"
+    mediaItemUrl: '/images/case-studies/cedalio.svg'
     mediaDetails:
       width: 123
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "how-cedalio-uses-neon-for-an-efficient-development-workflow"
-  externalUrl: ""
+  internalPostSlug: 'how-cedalio-uses-neon-for-an-efficient-development-workflow'
+  externalUrl: ''
   categories:
-    - slug: "startups"
-      name: "Startups"
+    - slug: 'startups'
+      name: 'Startups'
 
-- id: "comigo-ai"
-  title: "Comigo.ai"
+- id: 'comigo-ai'
+  title: 'Comigo.ai'
   isFeatured: false
   logo:
-    mediaItemUrl: "/images/case-studies/comigo-ai.svg"
+    mediaItemUrl: '/images/case-studies/comigo-ai.svg'
     mediaDetails:
       width: 103
       height: 32
-  quote: ""
+  quote: ''
   author:
-    name: ""
-    post: ""
+    name: ''
+    post: ''
   isInternal: true
-  internalPostSlug: "comigo-ai-is-using-neon-to-transform-adhd-support-with-ai"
-  externalUrl: ""
+  internalPostSlug: 'comigo-ai-is-using-neon-to-transform-adhd-support-with-ai'
+  externalUrl: ''
   categories:
-    - slug: "ai"
-      name: "AI & Agents"
+    - slug: 'ai'
+      name: 'AI & Agents'

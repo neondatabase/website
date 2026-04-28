@@ -1,18 +1,24 @@
 ---
-title: 'Creating a PostgreSQL Trigger with a When Condition'
-page_title: 'PostgreSQL Trigger When Condition'
-page_description: 'In this tutorial, you will learn how to create a conditional trigger that fires only when a condition is true.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-trigger-when-condition/'
+title: Creating a PostgreSQL Trigger with a When Condition
+page_title: PostgreSQL Trigger When Condition
+page_description: >-
+  In this tutorial, you will learn how to create a conditional trigger that
+  fires only when a condition is true.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-trigger-when-condition/
 ogImage: ''
 updatedOn: '2024-03-30T03:13:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Event Trigger'
-  slug: 'postgresql-triggers/postgresql-event-trigger'
+  title: PostgreSQL Event Trigger
+  slug: postgresql-triggers/postgresql-event-trigger
 nextLink:
-  title: 'PostgreSQL Views'
-  slug: 'postgresql-triggers/../postgresql-views'
+  title: PostgreSQL Views
+  slug: postgresql-triggers/../postgresql-views
 ---
+<Admonition type="info" id="CTA">
+Conditional triggers with a WHEN clause work the same way on any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a conditional trigger that fires only when a condition is true.
 

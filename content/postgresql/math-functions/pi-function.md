@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL PI() Function'
-page_title: 'PostgreSQL PI() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL PI() function to return the pi value.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-pi-function/'
+title: PostgreSQL PI() Function
+page_title: PostgreSQL PI() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL PI() function to
+  return the pi value.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-pi-function/
 ogImage: ''
 updatedOn: '2024-04-18T03:47:36+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MIN_SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-min_scale'
+  title: PostgreSQL MIN_SCALE() Function
+  slug: postgresql-math-functions/postgresql-min_scale
 nextLink:
-  title: 'PostgreSQL RADIANS() Function'
-  slug: 'postgresql-math-functions/postgresql-radians'
+  title: PostgreSQL RADIANS() Function
+  slug: postgresql-math-functions/postgresql-radians
 ---
+<Admonition type="info" id="CTA">
+The PostgreSQL PI() function works the same way on any Postgres deployment, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), or anywhere else. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `PI()` function to return the pi value.
 

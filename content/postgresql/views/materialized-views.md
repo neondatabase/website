@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Materialized Views'
-page_title: 'PostgreSQL Materialized Views'
-page_description: 'Learn about PostgreSQL materialized views that allow you to store the result set of a query physically and update the data periodically.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/'
+title: PostgreSQL Materialized Views
+page_title: PostgreSQL Materialized Views
+page_description: >-
+  Learn about PostgreSQL materialized views that allow you to store the result
+  set of a query physically and update the data periodically.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/
 ogImage: ''
 updatedOn: '2024-03-16T04:34:33+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER VIEW Statement'
-  slug: 'postgresql-views/postgresql-alter-view'
+  title: PostgreSQL ALTER VIEW Statement
+  slug: postgresql-views/postgresql-alter-view
 nextLink:
-  title: 'PostgreSQL Recursive View'
-  slug: 'postgresql-views/postgresql-recursive-view'
+  title: PostgreSQL Recursive View
+  slug: postgresql-views/postgresql-recursive-view
 ---
+<Admonition type="info" id="CTA">
+Materialized views work the same across any PostgreSQL deployment, so everything you learn here about CREATE MATERIALIZED VIEW, REFRESH, and CONCURRENTLY applies wherever you run Postgres. If you're an enterprise that needs fast, secure, managed Postgres built for the AI era and fully integrated into the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice for caching expensive analytical queries next to your data. If you're a developer or startup who wants to ship quickly and scale without managing infrastructure, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL materialized views that store the result of a query physically and refresh the data from base tables periodically.
 

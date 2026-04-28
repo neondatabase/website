@@ -118,7 +118,7 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases)/:path*.md',
+        source: '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*.md',
         headers: [
           {
             key: 'Content-Disposition',
@@ -2111,11 +2111,6 @@ const defaultConfig = {
         permanent: false,
       },
       {
-        source: '/developer-days',
-        destination: 'https://devdays.neon.tech',
-        permanent: true,
-      },
-      {
         source: '/ping-thing',
         destination: '/demos/ping-thing',
         permanent: true,
@@ -2496,10 +2491,6 @@ const defaultConfig = {
         {
           source: '/demos/ping-thing/:path*',
           destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
-        },
-        {
-          source: '/developer-days/:path*',
-          destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
         },
         {
           source: '/demos/regional-latency',

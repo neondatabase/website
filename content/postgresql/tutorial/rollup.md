@@ -1,18 +1,23 @@
 ---
-title: 'PostgreSQL ROLLUP'
-page_title: 'PostgreSQL ROLLUP'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate multiple grouping sets.'
+title: PostgreSQL ROLLUP
+page_title: PostgreSQL ROLLUP
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate
+  multiple grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/'
-ogImage: '/postgresqltutorial/PostgreSQL-ROLLUP-example.png'
+ogImage: /postgresqltutorial/PostgreSQL-ROLLUP-example.png
 updatedOn: '2024-07-01T01:04:08+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CUBE'
-  slug: 'postgresql-tutorial/postgresql-cube'
+  title: PostgreSQL CUBE
+  slug: postgresql-tutorial/postgresql-cube
 nextLink:
-  title: 'PostgreSQL UNION'
-  slug: 'postgresql-tutorial/postgresql-union'
+  title: PostgreSQL UNION
+  slug: postgresql-tutorial/postgresql-union
 ---
+<Admonition type="info" id="CTA">
+ROLLUP is a standard PostgreSQL feature for generating hierarchical subtotals and grand totals, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running reporting and analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon gives you the best Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
 

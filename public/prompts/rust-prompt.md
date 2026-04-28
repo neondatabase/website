@@ -28,11 +28,11 @@ First, ask the user to choose their preferred Rust Postgres driver and proceed b
 
 Based on the user's selection, run the appropriate `cargo add` command. **The `postgres-openssl` and `openssl` crates are mandatory for a secure connection to Neon.**
 
-*   **If `postgres` (sync) is chosen:**
+-   **If `postgres` (sync) is chosen:**
     ```bash
     cargo add postgres postgres-openssl openssl dotenvy
     ```
-*   **If `tokio-postgres` (async) is chosen:**
+-   **If `tokio-postgres` (async) is chosen:**
     ```bash
     cargo add tokio --features full
     cargo add tokio-postgres postgres-openssl openssl dotenvy
@@ -60,6 +60,7 @@ Modify the `src/main.rs` file to include code that connects to the database and 
 - **If `src/main.rs` contains any custom user code, preserve it.** Comment out the existing code by wrapping it in a block comment (`/* ... */`) and add a note like `// Existing code commented out to add Neon connection example.` Then, append the new Rust code block (Synchronous or Asynchronous) after the commented section.
 
 #### Option 1: `postgres` (Synchronous)
+
 ```rust title="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};
@@ -114,6 +115,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 #### Option 2: `tokio-postgres` (Asynchronous)
+
 ```rust title="src/main.rs"
 use dotenvy::dotenv;
 use openssl::ssl::{SslConnector, SslMethod};

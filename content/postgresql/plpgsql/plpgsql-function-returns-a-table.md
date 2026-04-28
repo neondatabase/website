@@ -1,18 +1,24 @@
 ---
-title: 'How to Develop a PL/pgSQL Function That Returns a Table'
-page_title: 'PL/pgSQL Function Returns a Table'
-page_description: 'In this tutorial, you will learn how to develop PostgreSQL functions that return a table using PL/pgSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-returns-a-table/'
-ogImage: '/postgresqltutorial/film.png'
+title: How to Develop a PL/pgSQL Function That Returns a Table
+page_title: PL/pgSQL Function Returns a Table
+page_description: >-
+  In this tutorial, you will learn how to develop PostgreSQL functions that
+  return a table using PL/pgSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-returns-a-table/
+ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-03-22T06:58:32+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Function Overloading'
-  slug: 'postgresql-plpgsql/plpgsql-function-overloading'
+  title: PL/pgSQL Function Overloading
+  slug: postgresql-plpgsql/plpgsql-function-overloading
 nextLink:
-  title: 'PL/pgSQL Returns SetOf'
-  slug: 'postgresql-plpgsql/plpgsql-returns-setof'
+  title: PL/pgSQL Returns SetOf
+  slug: postgresql-plpgsql/plpgsql-returns-setof
 ---
+<Admonition type="info" id="CTA">
+PL/pgSQL functions that return tables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for the best managed Postgres in the cloud, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse for AI-era workloads. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform around.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to develop PostgreSQL functions that return a table using PL/pgSQL.
 

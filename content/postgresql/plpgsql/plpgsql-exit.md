@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Exit Statement'
-page_title: 'PL/pgSQL EXIT Statement'
-page_description: 'In this tutorial, you will learn about the PL/pgSQL exit statement and how to use it to terminate a loop or a block.'
+title: PL/pgSQL Exit Statement
+page_title: PL/pgSQL EXIT Statement
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL exit statement and how to
+  use it to terminate a loop or a block.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/'
 ogImage: ''
 updatedOn: '2024-03-19T04:05:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL For Loop'
-  slug: 'postgresql-plpgsql/plpgsql-for-loop'
+  title: PL/pgSQL For Loop
+  slug: postgresql-plpgsql/plpgsql-for-loop
 nextLink:
-  title: 'PL/pgSQL Continue Statement'
-  slug: 'postgresql-plpgsql/pl-pgsql-continue'
+  title: PL/pgSQL Continue Statement
+  slug: postgresql-plpgsql/pl-pgsql-continue
 ---
+<Admonition type="info" id="CTA">
+The PL/pgSQL exit statement works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `exit` statement and how to use it to terminate a loop or exit a block.
 

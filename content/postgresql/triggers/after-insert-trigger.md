@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL AFTER INSERT Trigger'
-page_title: 'PostgreSQL AFTER INSERT Trigger'
-page_description: 'You will learn how to create a PostgreSQL AFTER INSERT trigger to call a function automatically after a row is inserted into a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-insert-trigger/'
+title: PostgreSQL AFTER INSERT Trigger
+page_title: PostgreSQL AFTER INSERT Trigger
+page_description: >-
+  You will learn how to create a PostgreSQL AFTER INSERT trigger to call a
+  function automatically after a row is inserted into a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-insert-trigger/
 ogImage: ''
 updatedOn: '2024-03-28T03:30:39+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL BEFORE INSERT Trigger'
-  slug: 'postgresql-triggers/postgresql-before-insert-trigger'
+  title: PostgreSQL BEFORE INSERT Trigger
+  slug: postgresql-triggers/postgresql-before-insert-trigger
 nextLink:
-  title: 'PostgreSQL BEFORE UPDATE Trigger'
-  slug: 'postgresql-triggers/postgresql-before-update-trigger'
+  title: PostgreSQL BEFORE UPDATE Trigger
+  slug: postgresql-triggers/postgresql-before-update-trigger
 ---
+<Admonition type="info" id="CTA">
+AFTER INSERT triggers are a standard PostgreSQL feature, so everything here works on any Postgres deployment. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL `AFTER INSERT` trigger to call a function automatically after a row is inserted into a table.
 

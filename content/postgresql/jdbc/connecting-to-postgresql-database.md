@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
 page_title: 'PostgreSQL JDBC: Connecting To The PostgreSQL Database'
-page_description: 'How to setup Java environment, download PostgreSQL JDBC driver, and connect to the PostgreSQL database server from a Java program.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/'
+page_description: >-
+  How to setup Java environment, download PostgreSQL JDBC driver, and connect to
+  the PostgreSQL database server from a Java program.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 ogImage: ''
 updatedOn: '2024-05-14T14:32:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JDBC'
-  slug: 'postgresql-jdbc/'
+  title: PostgreSQL JDBC
+  slug: postgresql-jdbc/
 nextLink:
   title: 'PostgreSQL JDBC: Creating Tables'
-  slug: 'postgresql-jdbc/create-tables'
+  slug: postgresql-jdbc/create-tables
 ---
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL from Java with JDBC works the same across any Postgres deployment, so everything here applies whether you're running Postgres locally, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with the performance, security, and deep Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, Neon is the Postgres platform built for that pace.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to connect to the PostgreSQL database server from a Java program.
 

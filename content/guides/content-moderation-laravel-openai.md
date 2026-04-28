@@ -1430,13 +1430,13 @@ You can test the moderation system with this command:
   Confidence: 0.00012831370986532
   ```
 
-* Test with potentially problematic content:
+- Test with potentially problematic content:
 
   ```bash
   php artisan test:moderation "I hate this product. It's the worst thing I've ever used."
   ```
 
-* Test with obviously harmful content:
+- Test with obviously harmful content:
 
   ```
   php artisan test:moderation "I'm going to harm you."

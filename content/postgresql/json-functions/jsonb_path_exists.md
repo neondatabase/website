@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL jsonb_path_exists() Function'
-page_title: 'PostgreSQL jsonb_path_exists() Function'
-page_description: 'You will learn how to use the PostgreSQL jsonb_path_exists() function to check if a JSON path returns any item for a specified JSON document.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_exists/'
+title: PostgreSQL jsonb_path_exists() Function
+page_title: PostgreSQL jsonb_path_exists() Function
+page_description: >-
+  You will learn how to use the PostgreSQL jsonb_path_exists() function to check
+  if a JSON path returns any item for a specified JSON document.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_exists/
 ogImage: ''
 updatedOn: '2024-02-23T14:26:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON Path'
-  slug: 'postgresql-json-functions/postgresql-json-path'
+  title: PostgreSQL JSON Path
+  slug: postgresql-json-functions/postgresql-json-path
 nextLink:
-  title: 'PostgreSQL JSONB Operators'
-  slug: 'postgresql-json-functions/postgresql-jsonb-operators'
+  title: PostgreSQL JSONB Operators
+  slug: postgresql-json-functions/postgresql-jsonb-operators
 ---
+<Admonition type="info" id="CTA">
+The jsonb_path_exists() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise team standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_path_exists()` function to check if a JSON path returns any item for a specified JSON document.
 

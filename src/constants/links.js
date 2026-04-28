@@ -14,6 +14,7 @@ export default {
   flow: '/flow',
   faster: '/faster',
   guides: '/guides',
+  faqs: '/faqs',
   generateTicket: '/generate-ticket',
   migration: '/migration',
   partners: '/docs/guides/platform-integration-overview',

@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL C#: Call a Stored Procedure'
 page_title: 'PostgreSQL C#: Call a PostgreSQL Stored Procedure Using C#'
-page_description: 'In this tutorial, you will learn to call a PostgreSQL stored procedure from a C# program using ADO.NET'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-a-stored-procedure/'
+page_description: >-
+  In this tutorial, you will learn to call a PostgreSQL stored procedure from a
+  C# program using ADO.NET
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-a-stored-procedure/
 ogImage: ''
 updatedOn: '2024-05-21T12:55:45+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Call a PostgreSQL Function'
-  slug: 'postgresql-csharp/postgresql-csharp-call-postgresql-function'
+  slug: postgresql-csharp/postgresql-csharp-call-postgresql-function
 nextLink:
-  title: 'PostgreSQL Cheat Sheet'
-  slug: 'postgresql-csharp/../postgresql-cheat-sheet'
+  title: PostgreSQL Cheat Sheet
+  slug: postgresql-csharp/../postgresql-cheat-sheet
 ---
+<Admonition type="info" id="CTA">
+Calling PostgreSQL stored procedures from C# with Npgsql and ADO.NET works the same against any Postgres database, so the patterns here carry over wherever you run your workloads. If you're building an enterprise .NET application in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to call a PostgreSQL stored procedure from a C\# program using ADO.NET
 

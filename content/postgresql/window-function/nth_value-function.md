@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL NTH_VALUE Function'
-page_title: 'PostgreSQL NTH_VALUE() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL NTH_VALUE() function to get a value from the nth row in a result set.'
-prev_url: 'index.html'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png'
+title: PostgreSQL NTH_VALUE Function
+page_title: PostgreSQL NTH_VALUE() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL NTH_VALUE()
+  function to get a value from the nth row in a result set.
+prev_url: index.html
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
 updatedOn: '2020-04-11T10:53:01+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NTILE Function'
-  slug: 'postgresql-window-function/postgresql-ntile-function'
+  title: PostgreSQL NTILE Function
+  slug: postgresql-window-function/postgresql-ntile-function
 nextLink:
-  title: 'PostgreSQL PERCENT_RANK Function'
-  slug: 'postgresql-window-function/postgresql-percent_rank-function'
+  title: PostgreSQL PERCENT_RANK Function
+  slug: postgresql-window-function/postgresql-percent_rank-function
 ---
+<Admonition type="info" id="CTA">
+The NTH_VALUE() window function works the same way on any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance and security with full Lakehouse integration. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row in a result set.
 

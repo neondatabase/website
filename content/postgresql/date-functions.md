@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Date Functions'
-page_title: 'PostgreSQL Date Functions'
-page_description: 'This page provides you with the PostgreSQL date functions that allow you to handle date and time data effectively.'
+title: PostgreSQL Date Functions
+page_title: PostgreSQL Date Functions
+page_description: >-
+  This page provides you with the PostgreSQL date functions that allow you to
+  handle date and time data effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png'
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png
 updatedOn: '2024-03-25T05:06:59+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL BOOL_OR() Function'
-  slug: 'postgresql-aggregate-functions/postgresql-bool_or'
+  title: PostgreSQL BOOL_OR() Function
+  slug: postgresql-aggregate-functions/postgresql-bool_or
 nextLink:
-  title: 'PostgreSQL CURRENT_DATE Function'
-  slug: 'postgresql-date-functions/postgresql-current_date'
+  title: PostgreSQL CURRENT_DATE Function
+  slug: postgresql-date-functions/postgresql-current_date
 ---
+<Admonition type="info" id="CTA">
+PostgreSQL's date and time functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around your workflow, from instant branching to effortless autoscaling.
+</Admonition>
 
 The following page shows the most commonly used PostgreSQL date functions that allow you to effectively manipulate date and time values.
 

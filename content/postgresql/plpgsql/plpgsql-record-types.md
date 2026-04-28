@@ -1,18 +1,23 @@
 ---
-title: 'PL/pgSQL Record Types'
-page_title: 'PL/pgSQL Record Types Explained Clearly By Examples'
-page_description: 'You will learn about the PL/pgSQL record types that allow you to define variables that can hold a sinle row of a result set.'
+title: PL/pgSQL Record Types
+page_title: PL/pgSQL Record Types Explained Clearly By Examples
+page_description: >-
+  You will learn about the PL/pgSQL record types that allow you to define
+  variables that can hold a sinle row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/'
 ogImage: ''
 updatedOn: '2024-03-19T02:14:47+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Row Types'
-  slug: 'postgresql-plpgsql/pl-pgsql-row-types'
+  title: PL/pgSQL Row Types
+  slug: postgresql-plpgsql/pl-pgsql-row-types
 nextLink:
-  title: 'PL/pgSQL Constants'
-  slug: 'postgresql-plpgsql/plpgsql-constants'
+  title: PL/pgSQL Constants
+  slug: postgresql-plpgsql/plpgsql-constants
 ---
+<Admonition type="info" id="CTA">
+PL/pgSQL record types work the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to a production-ready Postgres platform.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL record types, which enables you to define variables that can hold a single row from a result set.
 
