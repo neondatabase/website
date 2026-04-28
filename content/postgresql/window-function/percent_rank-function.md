@@ -68,7 +68,7 @@ SELECT
 	name,
 	amount
 FROM
-	actual_sales
+	sales_stats
 ORDER BY
 	year, name;
 ```
