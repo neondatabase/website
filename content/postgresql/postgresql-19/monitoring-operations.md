@@ -244,9 +244,22 @@ The `%S` prompt escape requires a PostgreSQL 18+ server (it uses GUC_REPORT to s
 
 ## WAIT FOR LSN: Read-Your-Writes on Async Replicas
 
-PostgreSQL 19 adds the `WAIT FOR` command (commit `447aae13b`), which lets a session block until the standby has replayed up to a specific WAL location. This is what removes the classic "I just wrote to the primary, why does my next read on the replica not see it" problem when an application reads from async replicas to scale out load.
+PostgreSQL 19 adds the `WAIT FOR` command (commit `447aae13b`), which lets a session block until the server has reached a target WAL location. The most common use is read-your-writes on async replicas: an application that scales reads onto replicas can still guarantee a specific read sees a specific earlier write, by having the replica wait until it has replayed past that write's LSN before answering.
 
-The flow is: write on the primary, capture the LSN that came back from the commit, send the read to a replica, and have the replica wait until it has caught up to that LSN before answering. The session blocks for at most the time it takes the replica to apply the missing WAL, then runs the query against state that is guaranteed to include the write.
+The syntax is:
+
+```sql
+WAIT FOR LSN 'lsn' [ WITH ( option [, ...] ) ]
+-- options: MODE 'standby_replay' | 'standby_write' | 'standby_flush' | 'primary_flush'
+--          TIMEOUT 'milliseconds'
+--          NO_THROW
+```
+
+The command returns a single `status` column with `success` if the LSN was reached or `timeout` if it gave up first.
+
+### Read-your-writes on a standby
+
+The flow is: write on the primary, capture the commit LSN, send the read to a replica with `WAIT FOR LSN` first.
 
 ```sql
 -- 1. On the primary: do the write and grab the commit LSN
@@ -258,21 +271,30 @@ SELECT pg_current_wal_lsn();
 ```
 
 ```sql
--- 2. On the replica: block until replay has caught up, then read
-WAIT FOR LSN '0/1A3C8F0';
+-- 2. On the replica: block until replay has caught up, then read.
+--    Default mode is standby_replay, so no WITH clause needed.
+WAIT FOR LSN '0/1A3C8F0' WITH (TIMEOUT '5000');
 SELECT * FROM orders WHERE customer_id = 42;
 ```
 
-`WAIT FOR LSN` accepts an optional `TIMEOUT` clause so a stuck or lagging replica does not hang the session indefinitely. If the timeout fires before the LSN is reached, the command returns false and the session can decide whether to retry, fail over to the primary, or surface an error to the caller.
+If the timeout fires before the LSN is reached, the command returns `status = 'timeout'` and the session can decide whether to retry, fail over to the primary, or surface an error to the caller. Add `NO_THROW` if you want the timeout to be returned silently rather than as a query error.
 
-```sql
--- Wait up to 5 seconds; succeed = true, timeout = false
-WAIT FOR LSN '0/1A3C8F0' TIMEOUT 5000;
-```
+### Mode option
+
+`MODE` controls what "reached the LSN" means and where the wait runs:
+
+| Mode | Where it runs | What it waits for |
+|---|---|---|
+| `standby_replay` | Standby (default) | WAL has been replayed up to the LSN — readable from this standby |
+| `standby_write` | Standby | WAL has been written to disk on this standby |
+| `standby_flush` | Standby | WAL has been flushed to durable storage on this standby |
+| `primary_flush` | Primary | WAL has been flushed locally on the primary |
+
+`primary_flush` is useful for write paths that want to confirm a commit is durable before responding to the caller without changing `synchronous_commit`. On the primary, the other three modes error with "recovery is not in progress" because they describe a standby state.
 
 ### When to use it
 
-The pattern fits applications that already split reads onto async replicas for capacity reasons but have a small number of read paths that genuinely need to see their own writes. Typical examples:
+The standby-side pattern fits applications that already split reads onto async replicas for capacity reasons but have a small number of read paths that genuinely need to see their own writes. Typical examples:
 
 - A user updates a setting on the primary and the next page load reads from a replica.
 - A background job inserts a row and then a status checker on a replica needs to see it.
@@ -281,7 +303,7 @@ The pattern fits applications that already split reads onto async replicas for c
 For workloads where every read needs the latest data, a synchronous replica or reading from the primary is still the right answer. `WAIT FOR LSN` is for the cases where most reads can tolerate a few hundred milliseconds of replica lag but a small subset cannot.
 
 <Admonition type="note">
-The LSN you wait for is the value returned from `pg_current_wal_lsn()` (or the LSN the driver surfaces alongside the commit). On a replica that is already caught up, `WAIT FOR LSN` returns immediately, so the cost on a healthy system is one extra round trip rather than a stall.
+The LSN you wait for is the value returned from `pg_current_wal_lsn()` or the LSN the driver surfaces alongside the commit. On a replica that is already caught up, `WAIT FOR LSN` returns `success` immediately, so the cost on a healthy system is one extra round trip rather than a stall.
 </Admonition>
 
 ## Dynamic WAL Level
