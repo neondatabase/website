@@ -9,8 +9,8 @@ ogImage: /postgresqltutorial/film.png
 updatedOn: '2024-02-01T03:34:12+00:00'
 enableTableOfContents: true
 previousLink:
-  title: How To Delete Duplicate Rows in PostgreSQL
-  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
+  title: PostgreSQL Composite Types
+  slug: postgresql-tutorial/postgresql-composite-types
 nextLink:
   title: PostgreSQL COALESCE
   slug: postgresql-tutorial/postgresql-coalesce
