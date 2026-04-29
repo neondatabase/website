@@ -17,7 +17,7 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
       className
     )}
   >
-    <Link className={linkClassName} to={baseUrl}>
+    <Link className={linkClassName} to={DOCS_BASE_PATH}>
       <HomeIcon />
     </Link>
 

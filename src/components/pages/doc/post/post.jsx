@@ -15,6 +15,7 @@ import { cn } from 'utils/cn';
 
 import DropdownMenu from '../dropdown-menu';
 import Tag from '../tag';
+import VersionFallbackNotice from '../version-fallback-notice';
 
 const Changelog = ({ posts }) => (
   <>
@@ -52,6 +53,7 @@ const Post = ({
   tableOfContents,
   author,
   aboveContent = null,
+  effectiveDocsVersion = null,
   className = 'max-w-208 lg:max-w-none',
 }) => {
   const modal = MODALS.find(
@@ -75,6 +77,9 @@ const Post = ({
           isWideLayout && 'max-w-none'
         )}
       >
+        {!isPostgres && !isChangelog && (
+          <VersionFallbackNotice effectiveVersion={effectiveDocsVersion} />
+        )}
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs
             className={cn(isChangelog && 'pt-1', 'mb-7!')}
@@ -184,7 +189,10 @@ Post.propTypes = {
     }),
     photo: PropTypes.string,
   }),
-  aboveContent: PropTypes.node,
+  effectiveDocsVersion: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
   className: PropTypes.string,
 };
 

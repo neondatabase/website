@@ -2,6 +2,7 @@
 // Detects if a request is coming from an AI agent based on User-Agent header
 
 import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
+import { parseDocsVersionedSlug } from 'utils/docs-versioning';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
@@ -55,10 +56,23 @@ const STATIC_DOC_PREFIXES = ['docs/ai/'];
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
+  let normalizedPath = path;
+
+  // Normalize versioned docs routes:
+  // /docs/v2/foo -> /docs/foo
+  // /docs/latest/foo -> /docs/foo
+  if (path.startsWith('docs/')) {
+    const { contentSlug } = parseDocsVersionedSlug(path.replace(/^docs\/?/, '').split('/'));
+    if (contentSlug) {
+      normalizedPath = `docs/${contentSlug}`;
+    } else {
+      normalizedPath = 'docs';
+    }
+  }
 
   // Early return for excluded routes and files
   const isExcluded =
-    EXCLUDED_ROUTES.some((route) => path === route) ||
+    EXCLUDED_ROUTES.some((route) => normalizedPath === route) ||
     EXCLUDED_FILES.some((file) => pathname.endsWith(file));
 
   if (isExcluded) return null;

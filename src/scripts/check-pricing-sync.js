@@ -4,7 +4,7 @@
  *
  * Compares pricing data between two sources within neon-website:
  *   1. Pricing page components (JS data files rendered on neon.com/pricing)
- *   2. Docs plans page (content/docs/introduction/plans.md)
+ *   2. Docs plans page (content/docs-v2/introduction/plans.md)
  *
  * Flags mismatches so pricing stays consistent across the site.
  * Can also generate a streamlined agent-friendly pricing markdown file.
@@ -168,7 +168,7 @@ function loadComponentData() {
 
 function loadDocsTable() {
   const content = fs.readFileSync(
-    path.join(PROJECT_ROOT, 'content/docs/introduction/plans.md'),
+    path.join(PROJECT_ROOT, 'content/docs-v2/introduction/plans.md'),
     'utf-8'
   );
 
@@ -964,7 +964,7 @@ Source 1: Pricing page components
   - Comparison table: src/components/pages/pricing/plans/data/plans.js
 
 Source 2: Docs plans page
-  - content/docs/introduction/plans.md
+  - content/docs-v2/introduction/plans.md
 `);
 
   const cross = results.filter((r) => !r.isInternal);

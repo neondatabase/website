@@ -70,7 +70,7 @@ function shouldExcludeFile(relativePath, filename) {
 async function processToLlmsDir(rootDir) {
   clearState();
 
-  const docsDir = path.join(rootDir, 'content', 'docs');
+  const docsDir = path.join(rootDir, 'content', 'docs-v2');
   const outputDir = path.join(rootDir, 'public/llms');
 
   // Ensure output directory exists

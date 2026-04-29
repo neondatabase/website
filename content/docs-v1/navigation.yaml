@@ -1,0 +1,10 @@
+- title: Neon Auth
+  icon: auth
+  slug: auth/overview
+  items:
+    - section: Introduction
+      items:
+        - title: Overview
+          slug: auth/overview
+        - title: Database integration
+          slug: auth/database-integration

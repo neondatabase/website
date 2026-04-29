@@ -2467,6 +2467,11 @@ const defaultConfig = {
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Keep versioned llms-full fallback until per-version full artifacts are generated.
+        {
+          source: '/docs/:version(v[0-9]+|latest)/llms-full.txt',
+          destination: '/docs/llms-full.txt',
+        },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -2474,6 +2479,8 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Versioned docs currently use the same markdown artifacts as the default docs version.
+        { source: '/docs/:version(v[0-9]+|latest)/:path*.md', destination: '/md/docs/:path*.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...indexRewrites,
         ...contentRewrites,

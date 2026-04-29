@@ -6,8 +6,15 @@ import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
 import { cn } from 'utils/cn';
+import {
+  getDocsVersionFromPathname,
+  getVersionedDocsBasePath,
+  resolveLatestDocsVersionId,
+  stripDocsVersionFromPathname,
+} from 'utils/docs-versioning';
 
 import Menu from '../menu';
+import VersionSwitcher from '../version-switcher';
 
 const containsActiveSlug = (menu, slug) => {
   if (menu.slug === slug) return true;
@@ -38,10 +45,25 @@ const getActiveMenu = (navigation, slug) => {
   return flatMenus?.find((item) => containsActiveSlug(item, slug));
 };
 
-const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
+const Sidebar = ({
+  className = null,
+  navigation,
+  navigationByVersion = null,
+  basePath,
+  customType,
+  sdkNavigation,
+  dualVersionSlugs = [],
+  showVersionSwitcher = false,
+}) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
-  const menu = getActiveMenu(navigation, currentSlug);
+  const normalizedPathname = stripDocsVersionFromPathname(pathname);
+  const currentSlug = normalizedPathname.replace(basePath, '');
+  const pathnameVersion = getDocsVersionFromPathname(pathname);
+  const supportsVersioningForSlug = dualVersionSlugs.includes(currentSlug);
+  const effectiveVersionId = pathnameVersion || resolveLatestDocsVersionId();
+  const activeNavigation = navigationByVersion?.[effectiveVersionId] || navigation;
+  const docsBasePath = pathnameVersion ? getVersionedDocsBasePath(pathnameVersion) : basePath;
+  const menu = getActiveMenu(activeNavigation, currentSlug);
   const navRef = useRef(null);
 
   // Get SDK TOC for current page from pre-loaded data
@@ -62,36 +84,37 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
     return null;
   }
 
-  const renderContent = sdkTOC ? (
-    <SDKTableOfContents
-      title={sdkTOC.title}
-      url={`${basePath}${currentSlug}`}
-      sections={sdkTOC.sections}
-    />
-  ) : menu ? (
-    <Menu basePath={basePath} {...menu} customType={customType} />
-  ) : null;
+  let renderContent = null;
+  if (sdkTOC) {
+    renderContent = (
+      <SDKTableOfContents
+        title={sdkTOC.title}
+        url={`${docsBasePath}${currentSlug}`}
+        sections={sdkTOC.sections}
+      />
+    );
+  } else if (menu) {
+    renderContent = <Menu basePath={docsBasePath} {...menu} customType={customType} />;
+  }
 
   return (
     <aside className={cn('relative -mt-12', isGuidesRoute && 'xl:hidden', className)}>
       <div className="sticky top-28">
-        <div
+        <nav
           className={cn(
-            'relative',
-            'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
-            'after:bg-linear-to-b after:from-white after:to-transparent dark:after:from-black-pure dark:after:to-transparent'
+            'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-2.5',
+            hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
           )}
+          ref={navRef}
         >
-          <nav
-            className={cn(
-              'z-10 -mx-1 no-scrollbars h-[calc(100vh-7rem)] overflow-y-scroll pt-11 pr-8 pb-16 pl-1',
-              hasBorder && 'border-r border-gray-new-90 dark:border-gray-new-20'
-            )}
-            ref={navRef}
-          >
-            {renderContent}
-          </nav>
-        </div>
+          {showVersionSwitcher && (
+            <>
+              <VersionSwitcher className="mb-3.5" supportsVersioning={supportsVersioningForSlug} />
+              <div className="mb-6 h-px w-full bg-gray-new-90 dark:bg-gray-new-20" />
+            </>
+          )}
+          {renderContent}
+        </nav>
       </div>
     </aside>
   );
@@ -100,6 +123,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
 Sidebar.propTypes = {
   className: PropTypes.string,
   navigation: PropTypes.array.isRequired,
+  navigationByVersion: PropTypes.objectOf(PropTypes.array),
   basePath: PropTypes.string.isRequired,
   customType: PropTypes.shape({
     title: PropTypes.string,
@@ -111,6 +135,8 @@ Sidebar.propTypes = {
       sections: PropTypes.array,
     })
   ),
+  dualVersionSlugs: PropTypes.arrayOf(PropTypes.string),
+  showVersionSwitcher: PropTypes.bool,
 };
 
 export default Sidebar;

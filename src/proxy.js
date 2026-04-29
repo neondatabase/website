@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { checkCookie, getReferer } from 'app/actions';
 import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
+import { getDocsVersionFromPathname, resolveLatestDocsVersionId } from 'utils/docs-versioning';
 
 import {
   isAIAgentRequest,
@@ -24,11 +25,17 @@ function isContentRoute(pathname) {
   );
 }
 
-function applyDocHeaders(response) {
-  response.headers.append('Vary', 'Accept');
-  response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
-  response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
-  response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
+function applyDocHeaders(response, pathname, { includeVary = true } = {}) {
+  const docsVersion = getDocsVersionFromPathname(pathname);
+  const llmsPath = docsVersion ? `/docs/${docsVersion}/llms.txt` : '/docs/llms.txt';
+  const llmsFullPath = docsVersion ? `/docs/${docsVersion}/llms-full.txt` : '/docs/llms-full.txt';
+
+  if (includeVary) {
+    response.headers.append('Vary', 'Accept');
+  }
+  response.headers.set('X-LLMs-Txt', llmsPath);
+  response.headers.append('Link', `<${llmsPath}>; rel="llms-txt"`);
+  response.headers.append('Link', `<${llmsFullPath}>; rel="llms-full-txt"`);
   return response;
 }
 
@@ -65,6 +72,20 @@ function trackLLMPageview(req, { is404 = false } = {}) {
 export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
+    const latestVersionId = resolveLatestDocsVersionId();
+    const docsVersion = getDocsVersionFromPathname(pathname);
+
+    // Keep the latest docs version canonical at /docs/... (without /vX/ prefix)
+    if (docsVersion === latestVersionId) {
+      const canonicalPath = pathname
+        .replace(`/docs/${latestVersionId}/`, '/docs/')
+        .replace(`/docs/${latestVersionId}`, '/docs')
+        .replace('/docs/latest/', '/docs/')
+        .replace('/docs/latest', '/docs');
+      if (canonicalPath !== pathname) {
+        return NextResponse.redirect(new URL(canonicalPath, req.url), { status: 301 });
+      }
+    }
 
     // Legacy /llms/*.txt redirect (deprecated URLs -> canonical .md URLs)
     if (pathname.startsWith('/llms/')) {
@@ -97,7 +118,8 @@ export async function proxy(req) {
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
                 },
-              })
+              }),
+              pathname
             );
           }
           agentHit404 = response.status === 404;
@@ -125,7 +147,8 @@ export async function proxy(req) {
               'X-Content-Source': 'agent-404',
               'X-Robots-Tag': 'noindex',
             },
-          })
+          }),
+          pathname
         );
       }
     }
@@ -176,9 +199,7 @@ export async function proxy(req) {
       }
 
       const response = NextResponse.next();
-      response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
-      response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
-      response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
+      applyDocHeaders(response, pathname, { includeVary: false });
       if (pathname.endsWith('.md')) {
         response.headers.set('X-Robots-Tag', 'noindex');
       }

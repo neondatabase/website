@@ -16,7 +16,11 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { CONTENT_ROUTES } = require('../constants/content');
+const { DOCS_VERSIONS } = require('../constants/docs-versions');
+const {
+  resolveLatestDocsVersionId,
+  resolveLegacyDocsVersionId,
+} = require('../utils/docs-versioning');
 
 const config = require('./llms-index-config');
 
@@ -26,13 +30,11 @@ const OUTPUT_PATH = 'public/docs/llms.txt';
 const EXCLUDED_DIRS = ['shared-content', 'unused'];
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md'];
 
-const COLLAPSED_ROUTES = config.collapsedRoutes || {};
-
 // Combine explicit excludePaths with sourcePaths from additionalResources
 const ALL_EXCLUDE_PATHS = [
   ...config.excludePaths,
   ...(config.additionalResources || []).filter((r) => r.sourcePath).map((r) => r.sourcePath),
-];
+].filter((prefix) => prefix !== 'introduction.md');
 
 /** Display names for path segments and route keys */
 const SECTION_DISPLAY_NAMES = {
@@ -61,10 +63,13 @@ function toTitleCase(str) {
  * Scan a directory recursively and collect document metadata.
  * @param {string} dirPath - absolute path to content directory
  * @param {string} baseContentPath - absolute path to content/ root (for URL generation)
- * @param {string} routeKey - the route key from CONTENT_ROUTES (used as fallback section name)
+ * @param {string} routeKey - route key used as fallback section name
+ * @param {object} options
+ * @param {string} options.urlBasePath - URL base path for generated links (e.g. /docs, /docs/v1)
  */
-async function scanDirectory(dirPath, baseContentPath, routeKey) {
+async function scanDirectory(dirPath, baseContentPath, routeKey, options = {}) {
   const docs = [];
+  const { urlBasePath = `/${routeKey}` } = options;
   const excludeMatchCounts = new Map();
   for (const prefix of ALL_EXCLUDE_PATHS) {
     excludeMatchCounts.set(prefix, 0);
@@ -104,14 +109,18 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
 
           const pathParts = relPath.split('/');
           // Use route key as section name for flat routes (files at root of scanned dir)
-          const section = pathParts.length > 1 ? toTitleCase(pathParts[0]) : toTitleCase(routeKey);
+          let section = toTitleCase(routeKey);
+          if (pathParts.length > 1) {
+            section = toTitleCase(pathParts[0]);
+          } else if (relPath === 'introduction.md') {
+            section = 'Introduction';
+          }
           const subSection = pathParts.length > 2 ? toTitleCase(pathParts[1]) : null;
 
           const title = frontmatter.title || toTitleCase(path.basename(entry.name, '.md'));
           const subtitle = frontmatter.subtitle || '';
 
-          const mdPath = path.relative(baseContentPath, fullPath);
-          const url = `${BASE_URL}/${mdPath}`;
+          const url = `${BASE_URL}${urlBasePath}/${relPath}`;
 
           docs.push({
             section,
@@ -207,7 +216,12 @@ function organizeDocs(docs) {
 /**
  * Build section order: configured sections first, then remaining alphabetically
  */
-function getSectionOrder(organized) {
+function getSectionOrder(organized, options = {}) {
+  const { includeConfiguredSections = true } = options;
+  if (!includeConfiguredSections) {
+    return Object.keys(organized).sort();
+  }
+
   const configuredNames = config.sections.map((s) => s.name);
   const allSections = Object.keys(organized);
   const ordered = [];
@@ -243,21 +257,103 @@ function orderSubsections(sectionName, subsectionNames) {
   return [...explicit.filter((n) => named.has(n)), ...rest];
 }
 
-/**
- * Flatten all docs from a section (direct files + subsection files), sorted by title
- */
-function getAllDocsForSection(sectionData) {
-  const all = [...sectionData._files];
-  for (const subDocs of Object.values(sectionData._subsections)) {
-    all.push(...subDocs);
-  }
-  return all.sort((a, b) => a.title.localeCompare(b.title));
+function findDocsByPaths(paths, sectionData) {
+  const allDocs = [...sectionData._files, ...Object.values(sectionData._subsections).flat()];
+  const byPath = new Map(allDocs.map((doc) => [doc.path, doc]));
+
+  return paths.map((p) => byPath.get(p)).filter(Boolean);
 }
 
 /**
  * Generate the index text
  */
-function generateIndexText(organized, collapsedEntries = []) {
+function sortDocsVersionsByPriority(versions, latestVersionId) {
+  return [...versions].sort((a, b) => {
+    if (a.id === latestVersionId) return -1;
+    if (b.id === latestVersionId) return 1;
+
+    const aReleaseParts = `${a.release || ''}`
+      .split('.')
+      .map((part) => Number.parseInt(part, 10))
+      .map((part) => (Number.isNaN(part) ? 0 : part));
+    const bReleaseParts = `${b.release || ''}`
+      .split('.')
+      .map((part) => Number.parseInt(part, 10))
+      .map((part) => (Number.isNaN(part) ? 0 : part));
+
+    const maxLen = Math.max(aReleaseParts.length, bReleaseParts.length);
+    for (let i = 0; i < maxLen; i += 1) {
+      const diff = (bReleaseParts[i] || 0) - (aReleaseParts[i] || 0);
+      if (diff !== 0) return diff;
+    }
+    return b.id.localeCompare(a.id);
+  });
+}
+
+function renderVersionPages(lines, organized, options = {}) {
+  const { includeConfiguredSections = true, includeCollapsedSections = true } = options;
+  const sections = getSectionOrder(organized, { includeConfiguredSections });
+  for (const section of sections) {
+    const sectionConfig = getSectionConfig(section);
+    const sectionData = organized[section];
+    if (!sectionData && (!includeCollapsedSections || !sectionConfig?.collapse)) continue;
+
+    lines.push(`#### ${section}`);
+    lines.push('');
+
+    if (sectionConfig?.description) {
+      lines.push(sectionConfig.description);
+      lines.push('');
+    }
+
+    if (includeCollapsedSections && sectionConfig?.collapse) {
+      const collapsed = sectionConfig.collapse;
+      const description = collapsed.description ? `: ${collapsed.description}` : '';
+      lines.push(`- [${collapsed.title}](${collapsed.url})${description}`);
+      lines.push('');
+      continue;
+    }
+
+    if (sectionConfig?.subIndex?.highlights?.length) {
+      const highlightedDocs = findDocsByPaths(sectionConfig.subIndex.highlights, sectionData).sort(
+        (a, b) => a.title.localeCompare(b.title)
+      );
+      for (const doc of highlightedDocs) {
+        const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+        lines.push(`- [${doc.title}](${doc.url})${description}`);
+      }
+
+      if (sectionConfig.subIndex.url) {
+        lines.push(`- [View all ${section.toLowerCase()} pages](${sectionConfig.subIndex.url})`);
+      }
+      lines.push('');
+      continue;
+    }
+
+    const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
+    for (const doc of directFiles) {
+      const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+      lines.push(`- [${doc.title}](${doc.url})${description}`);
+    }
+
+    const subsections = orderSubsections(section, Object.keys(sectionData._subsections));
+    for (const subsection of subsections) {
+      lines.push('');
+      lines.push(`##### ${subsection}`);
+      lines.push('');
+      const subDocs = sectionData._subsections[subsection].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      for (const doc of subDocs) {
+        const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+        lines.push(`- [${doc.title}](${doc.url})${description}`);
+      }
+    }
+    lines.push('');
+  }
+}
+
+function generateIndexText(versionedOrganizedDocs, canonicalOrganized = null) {
   const lines = [];
 
   lines.push('# Neon Postgres');
@@ -271,194 +367,85 @@ function generateIndexText(organized, collapsedEntries = []) {
     lines.push('');
   }
 
-  if (config.commonQueries && config.commonQueries.length > 0) {
-    lines.push('## Common Queries');
+  if (versionedOrganizedDocs.length > 0) {
+    lines.push('## Documentation');
     lines.push('');
-    for (const q of config.commonQueries) {
-      lines.push(`- [${q.label}](${q.url})`);
-    }
-    lines.push('');
-  }
-
-  const sections = getSectionOrder(organized);
-
-  for (const section of sections) {
-    const sectionConf = getSectionConfig(section);
-
-    // Handle collapsed sections
-    if (sectionConf && sectionConf.collapse) {
-      const { title, url, description } = sectionConf.collapse;
-      lines.push(`## ${section}`);
-      lines.push('');
-      if (sectionConf.description) {
-        lines.push(sectionConf.description);
-        lines.push('');
-      }
-      const desc = description ? `: ${description}` : '';
-      lines.push(`- [${title}](${url})${desc}`);
-      lines.push('');
-      continue;
-    }
-
-    const sectionData = organized[section];
-
-    lines.push(`## ${section}`);
-    lines.push('');
-
-    if (sectionConf && sectionConf.description) {
-      lines.push(sectionConf.description);
-      lines.push('');
-    }
-
-    // Sub-indexed sections: show only highlights + link to full sub-index
-    if (sectionConf && sectionConf.subIndex) {
-      const allDocs = getAllDocsForSection(sectionData);
-      lines.push(
-        `- [All ${allDocs.length} ${section} pages](${sectionConf.subIndex.url}) — key pages below`
-      );
-      lines.push('');
-      const highlightSet = new Set(sectionConf.subIndex.highlights || []);
-      const highlighted = allDocs.filter((d) => highlightSet.has(d.path));
-      for (const doc of highlighted) {
-        const description = doc.subtitle ? `: ${doc.subtitle}` : '';
-        lines.push(`- [${doc.title}](${doc.url})${description}`);
-      }
-      lines.push('');
-      continue;
-    }
-
-    const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
-    for (const doc of directFiles) {
-      const description = doc.subtitle ? `: ${doc.subtitle}` : '';
-      lines.push(`- [${doc.title}](${doc.url})${description}`);
-    }
-
-    const extras = sectionConf?.extraEntries || [];
-    for (const entry of extras) {
-      const desc = entry.description ? `: ${entry.description}` : '';
-      lines.push(`- [${entry.title}](${entry.url})${desc}`);
-    }
-
-    const subsections = orderSubsections(section, Object.keys(sectionData._subsections));
-    const subDescs = sectionConf?.subsectionDescriptions || {};
-    for (const subsection of subsections) {
-      if (directFiles.length > 0 || extras.length > 0 || subsections.indexOf(subsection) > 0) {
-        lines.push('');
-      }
-      lines.push(`### ${subsection}`);
-      lines.push('');
-      if (subDescs[subsection]) {
-        lines.push(subDescs[subsection]);
-        lines.push('');
-      }
-
-      const subDocs = sectionData._subsections[subsection].sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
-      for (const doc of subDocs) {
-        const description = doc.subtitle ? `: ${doc.subtitle}` : '';
-        lines.push(`- [${doc.title}](${doc.url})${description}`);
-      }
-    }
-
-    lines.push('');
-  }
-
-  const extras = config.additionalResources || [];
-  if (collapsedEntries.length > 0 || extras.length > 0) {
-    lines.push('## Additional Resources');
-    lines.push('');
-    for (const entry of [...collapsedEntries, ...extras]) {
-      const desc = entry.description ? `: ${entry.description}` : '';
-      lines.push(`- [${entry.title}](${entry.url})${desc}`);
-    }
-    lines.push('');
-  }
-
-  return `${lines.join('\n').trim()}\n`;
-}
-
-/**
- * Generate content for a sub-index file
- */
-function generateSubIndexText(sectionName, sectionConf, sectionData) {
-  const lines = [];
-
-  lines.push(`# Neon ${sectionName}`);
-  lines.push('');
-
-  if (sectionConf.description) {
-    lines.push(sectionConf.description);
-    lines.push('');
-  }
-
-  lines.push(`[Parent index](${BASE_URL}/docs/llms.txt)`);
-  lines.push('');
-
-  const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
-  for (const doc of directFiles) {
-    const description = doc.subtitle ? `: ${doc.subtitle}` : '';
-    lines.push(`- [${doc.title}](${doc.url})${description}`);
-  }
-
-  const subsections = orderSubsections(sectionName, Object.keys(sectionData._subsections));
-  const subDescs = getSectionConfig(sectionName)?.subsectionDescriptions || {};
-  for (const subsection of subsections) {
-    if (directFiles.length > 0 || subsections.indexOf(subsection) > 0) {
-      lines.push('');
-    }
-    lines.push(`## ${subsection}`);
-    lines.push('');
-    if (subDescs[subsection]) {
-      lines.push(subDescs[subsection]);
-      lines.push('');
-    }
-
-    const subDocs = sectionData._subsections[subsection].sort((a, b) =>
-      a.title.localeCompare(b.title)
+    lines.push(
+      `- [Documentation Index](${BASE_URL}/docs/llms.txt): Primary Neon documentation index`
     );
-    for (const doc of subDocs) {
-      const description = doc.subtitle ? `: ${doc.subtitle}` : '';
-      lines.push(`- [${doc.title}](${doc.url})${description}`);
+    lines.push(
+      `- [Full Documentation](${BASE_URL}/docs/llms-full.txt): Complete Neon documentation text`
+    );
+    lines.push('');
+
+    lines.push('### Versioned Documentation');
+    lines.push('');
+    lines.push('Documentation for previous Neon docs versions is available at `/docs/{version}/`.');
+    lines.push('For example:');
+    lines.push('');
+    for (const { version, isLatest } of versionedOrganizedDocs) {
+      if (isLatest) continue;
+      lines.push(
+        `- \`/docs/${version.id}/introduction\` - ${version.label} documentation (${version.release})`
+      );
+    }
+    lines.push('');
+    lines.push('LLM-optimized documentation for specific versions:');
+    lines.push('');
+    lines.push('| Version | Index | Full Content |');
+    lines.push('| --- | --- | --- |');
+    for (const { version, isLatest } of versionedOrganizedDocs) {
+      const cleanVersionId = version.id.replace(/^v/i, '');
+      const versionLabel = isLatest ? `Current (${cleanVersionId}.x)` : `${cleanVersionId}.x`;
+      const indexLink = isLatest
+        ? `[${BASE_URL}/docs/llms.txt](${BASE_URL}/docs/llms.txt)`
+        : `[${BASE_URL}/docs/${version.id}/llms.txt](${BASE_URL}/docs/${version.id}/llms.txt)`;
+      const fullContentLink = isLatest
+        ? `[${BASE_URL}/docs/llms-full.txt](${BASE_URL}/docs/llms-full.txt)`
+        : '-';
+      lines.push(`| ${versionLabel} | ${indexLink} | ${fullContentLink} |`);
+    }
+    lines.push('');
+
+    if (canonicalOrganized) {
+      lines.push('## Documentation pages');
+      lines.push('');
+      renderVersionPages(lines, canonicalOrganized);
     }
   }
 
-  lines.push('');
   return `${lines.join('\n').trim()}\n`;
 }
 
-/**
- * Validate config against scanned results and emit warnings
- */
-function validateConfig(organized, allExcludeMatchCounts) {
-  // Warn about excludePaths that matched nothing across all routes
-  for (const [prefix, count] of allExcludeMatchCounts) {
-    if (count === 0) {
-      console.warn(`Warning: excludePath "${prefix}" matched no files`);
-    }
+function generateVersionIndexText({ version, organized }) {
+  const lines = [];
+  const versionTitle = version.label;
+
+  lines.push('# Neon Postgres');
+  lines.push('');
+  lines.push(`Version-specific documentation index for ${versionTitle}.`);
+  lines.push('');
+  lines.push(`- Canonical docs index: ${BASE_URL}/docs/llms.txt`);
+  lines.push(`- Versioned docs base path: ${BASE_URL}/docs/${version.id}/`);
+  lines.push('');
+  lines.push(`## ${version.id} versioned documentation pages`);
+  lines.push('');
+
+  if (!organized || Object.keys(organized).length === 0) {
+    lines.push('No versioned pages are currently available for this docs version.');
+    lines.push('');
+  } else {
+    renderVersionPages(lines, organized, {
+      includeConfiguredSections: false,
+      includeCollapsedSections: false,
+    });
   }
 
-  // Warn about configured sections with zero entries (excluding collapsed ones)
-  for (const sectionConf of config.sections) {
-    if (sectionConf.collapse) continue;
-    if (!organized[sectionConf.name]) {
-      console.warn(`Warning: configured section "${sectionConf.name}" has no entries`);
-    }
-  }
+  return `${lines.join('\n').trim()}\n`;
+}
 
-  // Warn about subIndex highlights that don't match any scanned doc
-  for (const sectionConf of config.sections) {
-    if (!sectionConf.subIndex || !organized[sectionConf.name]) continue;
-    const allDocs = getAllDocsForSection(organized[sectionConf.name]);
-    const docPaths = new Set(allDocs.map((d) => d.path));
-    for (const highlight of sectionConf.subIndex.highlights || []) {
-      if (!docPaths.has(highlight)) {
-        console.warn(
-          `Warning: subIndex highlight "${highlight}" in "${sectionConf.name}" not found in scanned docs`
-        );
-      }
-    }
-  }
+function selectCanonicalDoc({ latestDoc, legacyDoc }) {
+  return latestDoc || legacyDoc || null;
 }
 
 async function main() {
@@ -467,88 +454,115 @@ async function main() {
 
   const projectRoot = path.resolve(__dirname, '../..');
   const contentPath = path.join(projectRoot, 'content');
-
-  console.log('Scanning content directories...\n');
-
-  const allDocs = [];
-  const collapsedEntries = [];
-  const allExcludeMatchCounts = new Map();
-  for (const prefix of ALL_EXCLUDE_PATHS) {
-    allExcludeMatchCounts.set(prefix, 0);
-  }
-
-  for (const [route, srcPath] of Object.entries(CONTENT_ROUTES)) {
-    if (route in COLLAPSED_ROUTES) {
-      const collapsed = COLLAPSED_ROUTES[route];
-      if (collapsed) {
-        collapsedEntries.push({
-          title: collapsed.title,
-          description: collapsed.description,
-          url: collapsed.url,
-        });
-        console.log(`  ${route}: (collapsed to single entry)`);
-      } else {
-        console.log(`  ${route}: (excluded)`);
-      }
-      continue;
-    }
-
-    const fullPath = path.join(projectRoot, srcPath);
-    const { docs, excludeMatchCounts } = await scanDirectory(fullPath, contentPath, route);
-
-    // Merge exclude match counts
-    for (const [prefix, count] of excludeMatchCounts) {
-      allExcludeMatchCounts.set(prefix, (allExcludeMatchCounts.get(prefix) || 0) + count);
-    }
-
-    allDocs.push(...docs);
-    console.log(`  ${route}: ${docs.length} files`);
-  }
-
-  console.log(
-    `\nTotal: ${allDocs.length} documents + ${collapsedEntries.length} collapsed entries\n`
+  const latestVersionId = resolveLatestDocsVersionId();
+  const legacyVersionId = resolveLegacyDocsVersionId();
+  const docsVersions = sortDocsVersionsByPriority(
+    DOCS_VERSIONS.filter((version) => version.isContentReady),
+    latestVersionId
   );
 
-  applyReclassifications(allDocs);
+  console.log('Scanning docs by version...\n');
 
-  const organized = organizeDocs(allDocs);
-  const indexContent = generateIndexText(organized, collapsedEntries);
+  const versionedOrganizedDocs = [];
 
-  validateConfig(organized, allExcludeMatchCounts);
+  for (const version of docsVersions) {
+    const isLatest = version.id === latestVersionId;
+    const versionBasePath = isLatest ? '/docs' : `/docs/${version.id}`;
+    const sourceDir = path.join(projectRoot, version.docsContentPath);
+    const { docs } = await scanDirectory(sourceDir, contentPath, 'docs', {
+      urlBasePath: versionBasePath,
+    });
+    applyReclassifications(docs);
+    const organized = organizeDocs(docs);
+    versionedOrganizedDocs.push({
+      version,
+      isLatest,
+      docs,
+      organized,
+      docsCount: docs.length,
+    });
+    console.log(`  ${version.label} (${version.docsContentPath}): ${docs.length} files`);
+  }
 
-  // Collect sub-index files to write
-  const subIndexFiles = [];
-  for (const sectionConf of config.sections) {
-    if (!sectionConf.subIndex || !organized[sectionConf.name]) continue;
-    const content = generateSubIndexText(
-      sectionConf.name,
-      sectionConf,
-      organized[sectionConf.name]
-    );
-    subIndexFiles.push({
-      name: sectionConf.name,
-      outputPath: sectionConf.subIndex.outputPath,
-      content,
+  const latestEntry = versionedOrganizedDocs.find((entry) => entry.version.id === latestVersionId);
+  const legacyEntry = versionedOrganizedDocs.find((entry) => entry.version.id === legacyVersionId);
+
+  const latestDocsByPath = new Map((latestEntry?.docs || []).map((doc) => [doc.path, doc]));
+  const legacyDocsByPath = new Map((legacyEntry?.docs || []).map((doc) => [doc.path, doc]));
+  const allPaths = new Set([...legacyDocsByPath.keys(), ...latestDocsByPath.keys()]);
+
+  const canonicalDocs = [];
+  for (const docPath of allPaths) {
+    const latestDoc = latestDocsByPath.get(docPath);
+    const legacyDoc = legacyDocsByPath.get(docPath);
+    const chosenDoc = selectCanonicalDoc({ latestDoc, legacyDoc });
+    if (!chosenDoc) continue;
+    canonicalDocs.push({
+      ...chosenDoc,
+      url: `${BASE_URL}/docs/${chosenDoc.path}`,
     });
   }
+
+  applyReclassifications(canonicalDocs);
+  const canonicalOrganized = organizeDocs(canonicalDocs);
+  console.log(`  Canonical (/docs): ${canonicalDocs.length} files`);
+
+  // Versioned routes are pages that exist in both latest and legacy content.
+  const versionedRoutePaths = new Set(
+    (latestEntry?.docs || [])
+      .filter((doc) => legacyDocsByPath.has(doc.path) && latestDocsByPath.has(doc.path))
+      .map((doc) => doc.path)
+  );
+  console.log(`  Versioned routes (/docs/{version}/): ${versionedRoutePaths.size} files`);
+
+  const totalVersionedDocs = versionedOrganizedDocs.reduce((acc, item) => acc + item.docsCount, 0);
+  console.log(
+    `\nTotal: ${totalVersionedDocs} documents across ${versionedOrganizedDocs.length} versions`
+  );
+  console.log(`Canonical docs count: ${canonicalDocs.length}\n`);
+
+  const indexContent = generateIndexText(versionedOrganizedDocs, canonicalOrganized);
+  const versionedIndexes = versionedOrganizedDocs.map((entry) => ({
+    versionId: entry.version.id,
+    isLatest: entry.isLatest,
+    content: generateVersionIndexText(
+      (() => {
+        // Latest version: only dual-version pages (accessible at /docs/v2/slug)
+        // Legacy versions: all pages (dual-version + legacy-only)
+        const docsToInclude = entry.isLatest
+          ? (entry.docs || []).filter((doc) => versionedRoutePaths.has(doc.path))
+          : entry.docs || [];
+        const versionedDocsForEntry = docsToInclude.map((doc) => ({
+          ...doc,
+          url: `${BASE_URL}/docs/${entry.version.id}/${doc.path}`,
+        }));
+        applyReclassifications(versionedDocsForEntry);
+        return {
+          ...entry,
+          organized: organizeDocs(versionedDocsForEntry),
+        };
+      })()
+    ),
+  }));
 
   if (dryRun) {
     console.log('--- Generated llms.txt ---\n');
     console.log(indexContent);
-    for (const sub of subIndexFiles) {
-      console.log(`--- Generated ${sub.outputPath} ---\n`);
-      console.log(sub.content);
+    console.log('--- Versioned llms.txt files to generate ---\n');
+    for (const entry of versionedIndexes) {
+      console.log(`  /docs/${entry.versionId}/llms.txt`);
     }
   } else {
     const outputPath = path.join(projectRoot, OUTPUT_PATH);
     await fs.writeFile(outputPath, indexContent);
     console.log(`Written to ${outputPath}`);
 
-    for (const sub of subIndexFiles) {
-      const subPath = path.join(projectRoot, sub.outputPath);
-      await fs.mkdir(path.dirname(subPath), { recursive: true });
-      await fs.writeFile(subPath, sub.content);
-      console.log(`Written to ${subPath}`);
+    for (const entry of versionedIndexes) {
+      const versionDir = path.join(projectRoot, 'public', 'docs', entry.versionId);
+      const versionOutputPath = path.join(versionDir, 'llms.txt');
+      await fs.mkdir(versionDir, { recursive: true });
+      await fs.writeFile(versionOutputPath, entry.content);
+      console.log(`Written to ${versionOutputPath}`);
     }
   }
 }

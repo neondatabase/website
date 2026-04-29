@@ -14,7 +14,7 @@ describe('MDX to Markdown Conversion', () => {
   // Test a real file from the repo
   describe('Real file conversion', () => {
     it('should convert prisma.md without errors', async () => {
-      const inputPath = 'content/docs/guides/prisma.md';
+      const inputPath = 'content/docs-v2/guides/prisma.md';
       const pageUrl = 'https://neon.com/docs/guides/prisma';
 
       const result = await processFile(inputPath, pageUrl);
@@ -41,7 +41,7 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should convert nextjs.md with CodeTabs', async () => {
-      const inputPath = 'content/docs/guides/nextjs.md';
+      const inputPath = 'content/docs-v2/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
       const result = await processFile(inputPath, pageUrl);
@@ -57,7 +57,7 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should load FeatureBeta shared content', async () => {
-      const inputPath = 'content/docs/workflows/data-anonymization.md';
+      const inputPath = 'content/docs-v2/workflows/data-anonymization.md';
       const pageUrl = 'https://neon.com/docs/workflows/data-anonymization';
       const projectRoot = process.cwd();
 
@@ -108,7 +108,7 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should convert TwoColumnLayout in reference docs', async () => {
-      const inputPath = 'content/docs/auth/reference/nextjs-server.md';
+      const inputPath = 'content/docs-v2/auth/reference/nextjs-server.md';
       const pageUrl = 'https://neon.com/docs/auth/reference/nextjs-server';
       const projectRoot = process.cwd();
 

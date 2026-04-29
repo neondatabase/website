@@ -33,6 +33,8 @@ const path = require('path');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
+const { DOCS_DIR_PATH } = require('../constants/content');
+
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
 
@@ -354,7 +356,11 @@ function loadSharedContent(templateName, props = {}) {
     return [];
   }
 
-  const templatePath = path.join(projectRoot, 'content/docs/shared-content', `${templateName}.md`);
+  const templatePath = path.join(
+    projectRoot,
+    'content/docs-v2/shared-content',
+    `${templateName}.md`
+  );
 
   // Check cache first
   let rawContent = sharedContentCache.get(templatePath);
@@ -1727,7 +1733,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
   const relativeInputPath = rootDir
     ? path.relative(rootDir, inputPath).split(path.sep).join('/')
     : inputPath.split(path.sep).join('/');
-  if (relativeInputPath === 'content/docs/changelog.md') {
+  if (relativeInputPath === `${DOCS_DIR_PATH}/changelog.md`) {
     output += `\n${await buildAggregatedChangelogMarkdown(rootDir)}`;
   }
 
@@ -1814,7 +1820,7 @@ function buildNavigationMap(rootDir) {
   const navMap = new Map();
 
   const navFiles = [
-    { file: path.join(rootDir, 'content/docs/navigation.yaml'), urlPrefix: 'docs' },
+    { file: path.join(rootDir, 'content/docs-v2/navigation.yaml'), urlPrefix: 'docs' },
     { file: path.join(rootDir, 'content/postgresql/navigation.yaml'), urlPrefix: 'postgresql' },
   ];
 
