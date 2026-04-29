@@ -13,7 +13,7 @@ nextLink:
   slug: 'postgresql-19/parallel-autovacuum'
 ---
 
-**Summary**: PostgreSQL 19 adds online data checksum management, WAL full-page image tracking, vacuum progress details, per-process-type log levels, psql prompt improvements, dynamic WAL level, and eliminates the MultiXact wraparound risk with a 64-bit offset. These changes give DBAs better visibility into database operations and remove long-standing operational hazards.
+**Summary**: PostgreSQL 19 adds online data checksum management, WAL full-page image tracking, vacuum progress details, per-process-type log levels, psql prompt improvements, the new `WAIT FOR LSN` command for read-your-writes on async replicas, dynamic WAL level, and eliminates the MultiXact wraparound risk with a 64-bit offset. These changes give DBAs better visibility into database operations and remove long-standing operational hazards.
 
 ## Online Data Checksum Enable/Disable
 
@@ -242,6 +242,48 @@ mydb ["$user", public] =#
 The `%S` prompt escape requires a PostgreSQL 18+ server (it uses GUC_REPORT to send the search_path value to the client). Connecting to an older server will show an empty string.
 </Admonition>
 
+## WAIT FOR LSN: Read-Your-Writes on Async Replicas
+
+PostgreSQL 19 adds the `WAIT FOR` command (commit `447aae13b`), which lets a session block until the standby has replayed up to a specific WAL location. This is what removes the classic "I just wrote to the primary, why does my next read on the replica not see it" problem when an application reads from async replicas to scale out load.
+
+The flow is: write on the primary, capture the LSN that came back from the commit, send the read to a replica, and have the replica wait until it has caught up to that LSN before answering. The session blocks for at most the time it takes the replica to apply the missing WAL, then runs the query against state that is guaranteed to include the write.
+
+```sql
+-- 1. On the primary: do the write and grab the commit LSN
+INSERT INTO orders (customer_id, total) VALUES (42, 99.00);
+SELECT pg_current_wal_lsn();
+--   pg_current_wal_lsn
+-- ----------------------
+--   0/1A3C8F0
+```
+
+```sql
+-- 2. On the replica: block until replay has caught up, then read
+WAIT FOR LSN '0/1A3C8F0';
+SELECT * FROM orders WHERE customer_id = 42;
+```
+
+`WAIT FOR LSN` accepts an optional `TIMEOUT` clause so a stuck or lagging replica does not hang the session indefinitely. If the timeout fires before the LSN is reached, the command returns false and the session can decide whether to retry, fail over to the primary, or surface an error to the caller.
+
+```sql
+-- Wait up to 5 seconds; succeed = true, timeout = false
+WAIT FOR LSN '0/1A3C8F0' TIMEOUT 5000;
+```
+
+### When to use it
+
+The pattern fits applications that already split reads onto async replicas for capacity reasons but have a small number of read paths that genuinely need to see their own writes. Typical examples:
+
+- A user updates a setting on the primary and the next page load reads from a replica.
+- A background job inserts a row and then a status checker on a replica needs to see it.
+- A request that writes once and reads many times can do the write, capture the LSN, and then read from a replica without sticking the rest of the request to the primary.
+
+For workloads where every read needs the latest data, a synchronous replica or reading from the primary is still the right answer. `WAIT FOR LSN` is for the cases where most reads can tolerate a few hundred milliseconds of replica lag but a small subset cannot.
+
+<Admonition type="note">
+The LSN you wait for is the value returned from `pg_current_wal_lsn()` (or the LSN the driver surfaces alongside the commit). On a replica that is already caught up, `WAIT FOR LSN` returns immediately, so the cost on a healthy system is one extra round trip rather than a stall.
+</Admonition>
+
 ## Dynamic WAL Level
 
 PostgreSQL 19 introduces automatic WAL level adjustment based on whether logical replication slots exist. The new read-only parameter `effective_wal_level` shows the actual operational WAL level:
@@ -297,4 +339,5 @@ PostgreSQL 19's monitoring and operational improvements give DBAs better tools f
 - [Commit `f19c0ecc`: Online enabling and disabling of data checksums](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f19c0ecc)
 - [Commit `f9a09aa2`: Add wal_fpi_bytes to pg_stat_wal](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=f9a09aa2)
 - [Commit `0d789520`: Add mode and started_by columns to pg_stat_progress_vacuum](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=0d789520)
+- [Commit `447aae13b`: Add WAIT FOR command for read-your-writes on async replicas](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commitdiff;h=447aae13b)
 - [PostgreSQL devel docs: Monitoring stats](https://www.postgresql.org/docs/devel/monitoring-stats.html)

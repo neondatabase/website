@@ -194,6 +194,14 @@ COPY (
 
 The `FORCE_ARRAY` output can be directly consumed by application code expecting a JSON array.
 
+<Admonition type="note">
+Server-side `COPY ... TO 'filename'` requires the `pg_write_server_files` role or superuser, and writes to the path on the database server, not the client. For local development or any non-superuser, run the command from `psql` with the meta-command `\copy` instead. The syntax is the same after the initial `\`, but the file is written on the client machine and no special privileges are needed.
+
+```text
+mydb=# \copy (SELECT id, name, email, role FROM users WHERE role = 'admin') TO 'admin_users.json' WITH (FORMAT JSON, FORCE_ARRAY)
+```
+</Admonition>
+
 ### Data Warehouse Loading
 
 Export data for loading into JSON-native systems like Elasticsearch, MongoDB, or BigQuery:

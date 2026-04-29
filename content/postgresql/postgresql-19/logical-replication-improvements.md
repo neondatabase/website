@@ -25,6 +25,8 @@ One of the most requested features for logical replication has been sequence syn
 
 PostgreSQL 19 adds sequence synchronization to logical replication subscriptions. Subscribers can now periodically sync sequence values from the publisher.
 
+This is the change that finally makes logical replication a sane way to do online major version upgrades. The standard pattern is to set up a logical replication stream from the old major version to a fresh PostgreSQL 19 cluster, let it catch up, then cut traffic over. Until 19, the missing piece was sequences: after the cutover the new primary would hand out sequence values that collided with rows already inserted on the old primary. With sequence synchronization, the new cluster comes up already aware of where the publisher's sequences had advanced to, and the cutover does not produce duplicate-key errors on the next insert.
+
 ```sql
 -- On the publisher: create a publication that includes sequences
 CREATE PUBLICATION my_pub FOR ALL TABLES, ALL SEQUENCES;
@@ -106,32 +108,6 @@ COPY partitioned_sales TO '/tmp/sales.csv' WITH (FORMAT csv);
 ```
 
 This is about 7-8% faster than the subquery approach because it avoids the overhead of query processing.
-
-## WAL Monitoring Improvements
-
-PostgreSQL 19 adds monitoring capabilities that help with logical replication management:
-
-### Full-Page Image Tracking
-
-The `pg_stat_wal` view gains a `wal_fpi_bytes` column that tracks bytes used by full-page images:
-
-```sql
-SELECT wal_records, wal_fpi, wal_fpi_bytes, wal_bytes
-FROM pg_stat_wal;
-```
-
-Full-page images can significantly increase WAL volume. Tracking their size separately helps diagnose WAL bloat.
-
-### Vacuum Progress Details
-
-The `pg_stat_progress_vacuum` view now includes `mode` (normal, aggressive, or failsafe) and `started_by` (auto, manual, or wraparound) columns:
-
-```sql
-SELECT pid, relid::regclass, phase, mode, started_by
-FROM pg_stat_progress_vacuum;
-```
-
-This is useful for understanding why vacuums are running and whether they are keeping up with dead tuple generation on replicated tables.
 
 ## Practical Setup Example
 

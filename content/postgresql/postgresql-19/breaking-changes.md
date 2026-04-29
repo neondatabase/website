@@ -60,13 +60,53 @@ Existing data is not affected. Rows already stored with pglz remain readable reg
 ALTER TABLE my_table ALTER COLUMN big_text SET COMPRESSION pglz;
 ```
 
+Changing the per-column setting only takes effect for rows written or updated after the change. Existing rows keep their original compression. To rewrite the storage for an existing table, use `VACUUM FULL` or `CLUSTER`. Both rewrite the table with a brief lock that blocks reads. The new `REPACK CONCURRENTLY` command in PostgreSQL 19 does the same rewrite without taking that lock and is the better choice for production tables that you cannot afford to block. See the [REPACK CONCURRENTLY guide](/postgresql/postgresql-19/repack-command) for the full flow.
+
 <Admonition type="note">
 LZ4 support requires PostgreSQL to be built with `--with-lz4`. Most packaged builds include this, but verify if you build from source.
 </Admonition>
 
+## MD5 Password Deprecation Warnings
+
+PostgreSQL 19 emits a warning whenever a role authenticates using MD5 password hashing. This includes both the `md5` method in `pg_hba.conf` and passwords stored as MD5 hashes in `pg_authid`. MD5 is still accepted in 19, but the warning is the loud first step toward removing it in a later release. Most clusters that have been running for years still have MD5-hashed passwords lingering, so this is the breaking change that affects the largest number of installs even though nothing actually breaks yet.
+
+### Migration to SCRAM-SHA-256
+
+The migration is a three-step sequence: switch the default password hash, get every user to set a new password so it gets re-hashed under SCRAM, then flip the `pg_hba.conf` entries from `md5` to `scram-sha-256`. The order matters: if you flip `pg_hba.conf` to `scram-sha-256` before the passwords are re-hashed, every login that still has an MD5-stored password fails.
+
+```sql
+-- 1. Change the default password encryption
+ALTER SYSTEM SET password_encryption = 'scram-sha-256';
+SELECT pg_reload_conf();
+```
+
+For step 2, prefer `\password` in `psql` over `ALTER USER ... PASSWORD '...'`. The `ALTER USER` form takes the password as plain text in the SQL statement, which means it can show up in `log_statement = 'all'` logs, in `pg_stat_statements`, and in shell history. The `\password` meta-command prompts for the password locally and sends only the SCRAM-hashed result to the server:
+
+```text
+mydb=# \password myuser
+Enter new password for user "myuser":
+Enter it again:
+```
+
+If users cannot run `\password` themselves, use the application's password reset flow so the new password gets hashed by the server with SCRAM. Then update `pg_hba.conf`:
+
+```
+# Before
+host all all 0.0.0.0/0 md5
+
+# After
+host all all 0.0.0.0/0 scram-sha-256
+```
+
+You can leave the `md5` entry in `pg_hba.conf` while the rehash is in progress. PostgreSQL automatically uses SCRAM authentication for any user whose stored password is already a SCRAM hash, regardless of what the HBA entry says. Only flip the entry to `scram-sha-256` once you are sure every active user has been re-hashed, otherwise the stragglers will be locked out.
+
+<Admonition type="important">
+After changing password encryption to SCRAM-SHA-256, all users must reset their passwords. Existing MD5-hashed passwords cannot be converted; they have to be re-entered so they get hashed with the new algorithm.
+</Admonition>
+
 ## RADIUS Authentication Removed
 
-The `radius` authentication method in `pg_hba.conf` has been removed entirely. PostgreSQL will refuse to start if your `pg_hba.conf` contains any `radius` lines.
+The `radius` authentication method in `pg_hba.conf` has been removed entirely. PostgreSQL will refuse to start if your `pg_hba.conf` contains any `radius` lines. RADIUS in PostgreSQL had a small user base, so this removal affects far fewer clusters than the MD5 deprecation above.
 
 ### Why It Was Removed
 
@@ -128,31 +168,6 @@ Most modern ORMs and database drivers already use `standard_conforming_strings =
 ### escape_string_warning Removed
 
 The `escape_string_warning` GUC has been removed entirely. Since `standard_conforming_strings` is always on, the warning is no longer needed. Remove this parameter from your `postgresql.conf` to avoid unknown-parameter errors on startup.
-
-## MD5 Password Deprecation Warnings
-
-PostgreSQL 19 emits a warning whenever a role authenticates using MD5 password hashing. This includes both the `md5` method in `pg_hba.conf` and passwords stored as MD5 hashes in `pg_authid`.
-
-### Migration to SCRAM-SHA-256
-
-The migration is a three-step sequence: switch the default password hash, force users to set new passwords so they re-hash under SCRAM, then flip the `pg_hba.conf` entries.
-
-```sql
--- 1. Change the default password encryption
-ALTER SYSTEM SET password_encryption = 'scram-sha-256';
-SELECT pg_reload_conf();
-
--- 2. Have users reset their passwords (re-hashes as SCRAM)
-ALTER USER myuser PASSWORD 'new_password';
-
--- 3. Update pg_hba.conf entries from md5 to scram-sha-256
--- Change: host all all 0.0.0.0/0 md5
--- To:     host all all 0.0.0.0/0 scram-sha-256
-```
-
-<Admonition type="important">
-After changing password encryption to SCRAM-SHA-256, all users must reset their passwords. Existing MD5-hashed passwords cannot be converted - they must be re-entered so they get hashed with the new algorithm.
-</Admonition>
 
 ## max_locks_per_transaction Default Doubled
 
