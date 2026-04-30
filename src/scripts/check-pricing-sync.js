@@ -1,18 +1,25 @@
 #!/usr/bin/env node
 /**
- * Pricing Data Sync Check & Generator
+ * Pricing Data Sync Check
  *
- * Compares pricing data between two sources within neon-website:
- *   1. Pricing page components (JS data files rendered on neon.com/pricing)
- *   2. Docs plans page (content/docs/introduction/plans.md)
+ * Compares pricing facts across three sources within neon-website:
+ *   1. Pricing page components — src/components/pages/pricing/{hero/plans,plans}/data/plans.js
+ *      (rendered on neon.com/pricing)
+ *   2. Docs plans page — content/docs/introduction/plans.md
+ *   3. Hand-edited agent markdown — public/pricing.md
  *
- * Flags mismatches so pricing stays consistent across the site.
- * Can also generate a streamlined agent-friendly pricing markdown file.
+ * Source 1 vs Source 2: cell-by-cell comparison driven by CROSS_SOURCE_CHECKS.
+ * Source 3 vs Sources 1+2: rate sniff — every rate-shaped string in plans.md
+ * (e.g. $0.35/GB-month) must also appear in pricing.md.
+ *
+ * Exits non-zero on any mismatch or pricing.md issue. Wired into prebuild and
+ * predev so Vercel and local builds fail when sources drift.
  *
  * Usage:
- *   node src/scripts/check-pricing-sync.js              # Print report
- *   node src/scripts/check-pricing-sync.js --json        # Machine-readable output
- *   node src/scripts/check-pricing-sync.js --generate    # Generate public/pricing.md
+ *   node src/scripts/check-pricing-sync.js              # Verbose locally, terse in CI
+ *   node src/scripts/check-pricing-sync.js --verbose    # Force verbose
+ *   node src/scripts/check-pricing-sync.js --ci         # Force terse
+ *   node src/scripts/check-pricing-sync.js --json       # Machine-readable output
  */
 
 const fs = require('fs');
@@ -102,16 +109,6 @@ function extractCore(pattern, replacement) {
   };
 }
 
-// const boolNorm = (v) =>
-//   v && v !== '--'
-//     ? String(v).toLowerCase().includes('yes') ||
-//       String(v).toLowerCase().includes('included') ||
-//       String(v).toLowerCase().includes('available') ||
-//       v === 'Yes'
-//       ? 'yes'
-//       : 'no'
-//     : 'no';
-
 // ---------------------------------------------------------------------------
 // Source 1: Load pricing page component data
 // ---------------------------------------------------------------------------
@@ -166,12 +163,11 @@ function loadComponentData() {
 // Source 2: Load docs plans page markdown table
 // ---------------------------------------------------------------------------
 
-function loadDocsTable() {
-  const content = fs.readFileSync(
-    path.join(PROJECT_ROOT, 'content/docs/introduction/plans.md'),
-    'utf-8'
-  );
+function loadDocsContent() {
+  return fs.readFileSync(path.join(PROJECT_ROOT, 'content/docs/introduction/plans.md'), 'utf-8');
+}
 
+function loadDocsTable(content) {
   const lines = content.split('\n');
   const tableLines = [];
   let inTable = false;
@@ -211,34 +207,26 @@ function loadDocsTable() {
 // Comparison definitions (data-driven)
 // ---------------------------------------------------------------------------
 //
-// Each entry is an object:
+// Active fields used by the cross-source sync check:
 //   id         – unique check identifier
 //   label      – display name in sync report
-//   comp       – component table row key (null = docs-only, skip sync check)
+//   comp       – component table row key
 //   docs       – docs table row key
 //   plan       – 'free' | 'launch' | 'scale'
-//   norm       – normalization function for comparison (optional for docs-only)
-//   agentLabel – feature name for generated agent table (omit to exclude from generation)
-//   prefer     – 'docs' | 'component'; which raw value to use in generation (default: 'docs')
+//   norm       – normalization function for comparison
 //
-// Order determines both sync report order and generated table row order
-// (first occurrence of each agentLabel).
+// Rows that intentionally have no component-side comparison are not listed
+// here at all; their docs row keys are tracked in INTENTIONALLY_DOCS_ONLY
+// (defined near runChecks) so the coverage-gaps report stays clean.
+//
+// Reserved-but-currently-unused fields (kept as documentation for a possible
+// PHASE2-Mid/Full future, where this config also drives a cell-by-cell check
+// against the pricing.md table). Safe to ignore today; they have no effect.
+//   agentLabel – feature name as it would appear in pricing.md
+//   agentValue – function returning the canonical pricing.md cell value
+//   prefer     – 'docs' | 'component', which raw value wins in generation
 
 const CROSS_SOURCE_CHECKS = [
-  // --- Plan info (docs-only, no sync check) ---
-  { id: 'price-free', comp: null, docs: 'Price', plan: 'free', agentLabel: 'Price' },
-  { id: 'price-launch', comp: null, docs: 'Price', plan: 'launch', agentLabel: 'Price' },
-  { id: 'price-scale', comp: null, docs: 'Price', plan: 'scale', agentLabel: 'Price' },
-  { id: 'who-free', comp: null, docs: "Who it's for", plan: 'free', agentLabel: "Who it's for" },
-  {
-    id: 'who-launch',
-    comp: null,
-    docs: "Who it's for",
-    plan: 'launch',
-    agentLabel: "Who it's for",
-  },
-  { id: 'who-scale', comp: null, docs: "Who it's for", plan: 'scale', agentLabel: "Who it's for" },
-
   // --- Organization & Projects ---
   {
     id: 'team-members-free',
@@ -386,16 +374,8 @@ const CROSS_SOURCE_CHECKS = [
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
     agentLabel: 'Autoscaling',
   },
-  {
-    id: 'autoscaling-scale',
-    label: 'Autoscaling / Sizes (Scale)',
-    comp: 'Sizes',
-    docs: 'Autoscaling',
-    plan: 'scale',
-    norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
-    agentLabel: 'Autoscaling',
-    agentValue: () => 'Autoscaling up to 16 CU; fixed up to 56 CU (224 GB RAM)',
-  },
+  // Autoscaling Scale-plan: intentionally no comp comparison; see
+  // INTENTIONALLY_DOCS_ONLY for rationale.
   {
     id: 'scale-to-zero-free',
     label: 'Scale to zero (Free)',
@@ -501,16 +481,6 @@ const CROSS_SOURCE_CHECKS = [
     norm: extractCore(/(\d+)\s*days?/i, '$1 days'),
     agentLabel: 'Restore window',
   },
-  { id: 'snapshots-free', comp: null, docs: 'Snapshots', plan: 'free', agentLabel: 'Snapshots' },
-  {
-    id: 'snapshots-launch',
-    comp: null,
-    docs: 'Snapshots',
-    plan: 'launch',
-    agentLabel: 'Snapshots',
-  },
-  { id: 'snapshots-scale', comp: null, docs: 'Snapshots', plan: 'scale', agentLabel: 'Snapshots' },
-
   // --- Network ---
   {
     id: 'network-free',
@@ -623,30 +593,6 @@ const CROSS_SOURCE_CHECKS = [
 
   // --- Compliance & Security (component preferred — separate rows beat combined cell) ---
   {
-    id: 'protected-branches-free',
-    comp: null,
-    docs: 'Compliance and security',
-    plan: 'free',
-    agentLabel: 'Protected branches',
-    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
-  },
-  {
-    id: 'protected-branches-launch',
-    comp: null,
-    docs: 'Compliance and security',
-    plan: 'launch',
-    agentLabel: 'Protected branches',
-    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
-  },
-  {
-    id: 'protected-branches-scale',
-    comp: null,
-    docs: 'Compliance and security',
-    plan: 'scale',
-    agentLabel: 'Protected branches',
-    agentValue: (v) => (v && String(v).toLowerCase().includes('protected') ? 'Yes' : '--'),
-  },
-  {
     id: 'ip-allow-scale',
     label: 'IP Allow (Scale)',
     comp: 'IP Allow Rules',
@@ -747,15 +693,8 @@ const CROSS_SOURCE_CHECKS = [
         .replace(/\s*only/, ''),
     agentLabel: 'Support',
   },
-  {
-    id: 'support-scale',
-    label: 'Support (Scale)',
-    comp: 'Support Plans',
-    docs: 'Support',
-    plan: 'scale',
-    norm: (v) => normalizeValue(v)?.toLowerCase(),
-    agentLabel: 'Support',
-  },
+  // Support Scale-plan: intentionally no comp comparison; see
+  // INTENTIONALLY_DOCS_ONLY for rationale.
 ];
 
 // Hero numeric rates vs component table string rates
@@ -784,6 +723,22 @@ const COMPONENT_CATEGORY_ROWS = new Set([
   'Auth',
   'Network',
   'Account & Management',
+]);
+
+// Docs table rows that intentionally don't have a component-side comparison.
+// Listed here (instead of as comp:null rows in CROSS_SOURCE_CHECKS) so the
+// coverage-gaps report doesn't flag them. Two reasons a row can land here:
+//   1. The docs row is plan info (Price, Who it's for) with no operational value.
+//   2. Some plan cells diverge from component by deliberate UX choice — see
+//      Autoscaling/Sizes Scale and Support Scale, where docs enumerates
+//      details that the live pricing page intentionally flattens.
+const INTENTIONALLY_DOCS_ONLY = new Set([
+  'Price',
+  "Who it's for",
+  'Autoscaling',
+  'Snapshots',
+  'Compliance and security',
+  'Support',
 ]);
 
 function runChecks(componentData, docsTable) {
@@ -847,114 +802,82 @@ function runChecks(componentData, docsTable) {
   const uncoveredComponent = Object.keys(componentData.tableRows).filter(
     (k) => !coveredComponentKeys.has(k) && !COMPONENT_CATEGORY_ROWS.has(k)
   );
-  const uncoveredDocs = Object.keys(docsTable).filter((k) => !coveredDocsKeys.has(k));
+  const uncoveredDocs = Object.keys(docsTable).filter(
+    (k) => !coveredDocsKeys.has(k) && !INTENTIONALLY_DOCS_ONLY.has(k)
+  );
 
   return { results, uncoveredComponent, uncoveredDocs };
 }
 
 // ---------------------------------------------------------------------------
-// Generate agent-friendly pricing markdown
+// pricing.md checks (rate sniff)
 // ---------------------------------------------------------------------------
 
-function generatePricingMarkdown(componentData, docsTable) {
-  const rows = new Map();
+const PRICING_MD_PATH = path.join(PROJECT_ROOT, 'public/pricing.md');
 
-  for (const check of CROSS_SOURCE_CHECKS) {
-    if (!check.agentLabel) continue;
-    if (!rows.has(check.agentLabel)) {
-      rows.set(check.agentLabel, { free: '-', launch: '-', scale: '-' });
+// Escape hatch for rates that pricing.md should mention but don't appear
+// anywhere in plans.md (table or prose). Empty today; add an entry only when
+// you've verified the rate is genuinely absent from plans.md.
+const EXTRA_RATES = [];
+
+const RATE_PATTERN = /\$\d+(?:\.\d+)?\/[A-Za-z][A-Za-z]*(?:-[A-Za-z]+)?/g;
+
+// Scan the full plans.md content (table + prose) for every rate-shaped
+// string, e.g. $0.35/GB-month, $0.10/GB, $1.50/branch-month. We use the
+// docs side (not component) because docs uses canonical monthly forms that
+// match what pricing.md should contain (e.g. $1.50/branch-month, not the
+// equivalent $0.002/branch-hour in component data).
+//
+// Filters out $0/... values (free-plan price lines like `$0/month`); those
+// aren't real rates and don't need to be cross-checked.
+function buildKnownRates(docsContent) {
+  const rates = new Set(EXTRA_RATES);
+  const matches = docsContent.match(RATE_PATTERN);
+  if (matches) {
+    for (const r of matches) {
+      if (/^\$0\//.test(r)) continue;
+      rates.add(r);
     }
+  }
+  return [...rates].sort();
+}
 
-    const prefer = check.prefer || 'docs';
-    let value;
-    if (prefer === 'component' && check.comp) {
-      if (check.comp.startsWith('__hero:')) {
-        const keyword = check.comp.replace('__hero:', '');
-        const hasIt = componentData.heroPlans[check.plan]?.featureTitles?.some((t) =>
-          t.toLowerCase().includes(keyword)
-        );
-        value = hasIt ? 'Yes' : '--';
-      } else {
-        value = componentData.tableRows[check.comp]?.[check.plan];
-      }
-    } else {
-      value = docsTable[check.docs]?.[check.plan];
-    }
+function checkRates(content, knownRates) {
+  return knownRates.filter((rate) => !content.includes(rate));
+}
 
-    if (check.agentValue) value = check.agentValue(value);
-    const clean = value && value !== '--' ? String(value).replace(/\s+/g, ' ').trim() : '-';
-    rows.get(check.agentLabel)[check.plan] = clean;
+function runPricingMdChecks(docsContent) {
+  let content;
+  try {
+    content = fs.readFileSync(PRICING_MD_PATH, 'utf-8');
+  } catch (err) {
+    return {
+      readError: `Failed to read ${path.relative(PROJECT_ROOT, PRICING_MD_PATH)}: ${err.message}`,
+      missingRates: [],
+      knownRates: [],
+    };
   }
 
-  const lines = [
-    '# Neon Pricing Plans',
-    '',
-    'Neon is a serverless Postgres platform with three plans: Free, Launch, and Scale.',
-    'Launch and Scale are usage-based: you pay only for what you use, with no monthly minimum.',
-    'A CU (Compute Unit) represents compute size: 1 CU ≈ 1 CPU and 4 GB RAM.',
-    '',
-    '| Feature | Free | Launch | Scale |',
-    '| --- | --- | --- | --- |',
-  ];
+  const knownRates = buildKnownRates(docsContent);
+  const missingRates = checkRates(content, knownRates);
 
-  for (const [feature, plans] of rows) {
-    lines.push(`| ${feature} | ${plans.free} | ${plans.launch} | ${plans.scale} |`);
-  }
-
-  lines.push('');
-  lines.push(
-    'All plans include: multi-AZ storage, autoscaling, database branching, read replicas, connection pooling via PgBouncer, Postgres extensions (pgvector, PostGIS, TimescaleDB, etc.), full management API and CLI, and a Data API for querying over HTTP.'
-  );
-  lines.push('');
-  lines.push('Notes:');
-  lines.push('- "-" means the feature is not available on that plan.');
-  lines.push('- No monthly minimum on paid plans. Invoices under $0.50 are not collected.');
-  lines.push(
-    '- Free plan quotas (100 CU-hours, 0.5 GB) are per project; compute suspends when monthly limits are reached.'
-  );
-  lines.push('- Read replicas are separate computes and count toward CU-hours.');
-  lines.push(
-    '- To control costs, set autoscaling limits and keep scale-to-zero enabled. Suspended computes do not accrue CU-hours.'
-  );
-  lines.push(
-    "- Scale's higher CU-hour rate covers its additional production features. No separate fees for features listed in the table."
-  );
-  lines.push(
-    '- Child branch storage is billed on the minimum of accumulated changes or logical data size. Paid plans: up to 16 TB per branch.'
-  );
-  lines.push('- Instant restore storage is charged only on root branches, not child branches.');
-  lines.push('- Snapshots are free during Beta; $0.09/GB-month starting May 1, 2026.');
-  lines.push(
-    '- Max branches per project is 5,000 on paid plans (10/25 included). Free is capped at 10.'
-  );
-  lines.push('- Public network transfer includes data sent via logical replication.');
-  lines.push('- Early-stage startups can apply for credits: https://neon.com/startups');
-  lines.push(
-    '- Open source program: credits, referrals, and promotion for Postgres OSS projects: https://neon.com/programs/open-source.md'
-  );
-  lines.push(
-    '- Agent Plan for AI agent platforms: https://neon.com/docs/introduction/agent-plan.md'
-  );
-
-  lines.push('');
-  lines.push('Get started: https://neon.com/signup');
-  lines.push('Full plan details: https://neon.com/docs/introduction/plans.md');
-  lines.push('');
-
-  return lines.join('\n');
+  return { missingRates, knownRates };
 }
 
 // ---------------------------------------------------------------------------
 // Output
 // ---------------------------------------------------------------------------
 
-function summarize(results) {
+function summarize(results, pricingMd) {
   const counts = { ok: 0, mismatch: 0, missing: 0, skip: 0 };
   for (const r of results) counts[r.status]++;
-  return { ...counts, critical: counts.mismatch };
+  const pricingIssues = pricingMd
+    ? (pricingMd.readError ? 1 : 0) + pricingMd.missingRates.length
+    : 0;
+  return { ...counts, pricingIssues, critical: counts.mismatch + pricingIssues };
 }
 
-function printReport(results, uncoveredComponent, uncoveredDocs) {
+function printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd) {
   console.log(`
 Pricing Data Sync Check
 =======================
@@ -965,6 +888,9 @@ Source 1: Pricing page components
 
 Source 2: Docs plans page
   - content/docs/introduction/plans.md
+
+Source 3: Hand-edited agent markdown
+  - public/pricing.md
 `);
 
   const cross = results.filter((r) => !r.isInternal);
@@ -990,11 +916,69 @@ Source 2: Docs plans page
     }
   }
 
-  const { ok, mismatch, missing, skip } = summarize(results);
-  console.log(`\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped`);
-  if (mismatch > 0) console.log('\nResult: FAIL — mismatches detected\n');
-  else if (missing > 0) console.log('\nResult: WARN — some data points could not be compared\n');
-  else console.log('\nResult: PASS\n');
+  if (pricingMd) {
+    console.log('\npricing.md checks\n');
+    if (pricingMd.readError) {
+      console.log(`  ERROR  ${pricingMd.readError}`);
+    } else {
+      console.log(
+        `  OK    ${pricingMd.knownRates.length - pricingMd.missingRates.length}/${pricingMd.knownRates.length} canonical rates present`
+      );
+      if (pricingMd.missingRates.length) {
+        console.log(`  Missing rates (${pricingMd.missingRates.length}):`);
+        pricingMd.missingRates.forEach((r) => console.log(`    - ${r}`));
+      }
+    }
+  }
+
+  const { ok, mismatch, missing, skip, pricingIssues } = summarize(results, pricingMd);
+  console.log(
+    `\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped, ${pricingIssues} pricing.md issue(s)`
+  );
+  if (mismatch > 0 || pricingIssues > 0) {
+    console.log('\nResult: FAIL — drift detected\n');
+  } else if (missing > 0) {
+    console.log('\nResult: WARN — some data points could not be compared\n');
+  } else {
+    console.log('\nResult: PASS\n');
+  }
+}
+
+// Terse output for CI logs: one-line PASS, or summary + only the offending
+// items on FAIL. Coverage gaps are suppressed (informational, not failures).
+function printTerseReport(results, pricingMd) {
+  const { ok, mismatch, missing, pricingIssues } = summarize(results, pricingMd);
+  const totalRates = pricingMd?.knownRates.length ?? 0;
+  const okRates = totalRates - (pricingMd?.missingRates.length ?? 0);
+
+  if (mismatch === 0 && pricingIssues === 0) {
+    console.log(`[OK] Pricing sync: PASS - ${ok} match, ${okRates}/${totalRates} rates`);
+    return;
+  }
+
+  console.log('[FAIL] Pricing sync: drift detected\n');
+
+  const mismatches = results.filter((r) => r.status === 'mismatch');
+  if (mismatches.length) {
+    console.log(`Component vs Docs (${mismatches.length} mismatch):`);
+    mismatches.forEach(printResult);
+    console.log('');
+  }
+
+  if (pricingMd?.readError) {
+    console.log(`pricing.md: ${pricingMd.readError}\n`);
+  } else if (pricingIssues > 0) {
+    console.log(`pricing.md (${pricingIssues} issue${pricingIssues === 1 ? '' : 's'}):`);
+    if (pricingMd.missingRates.length) {
+      console.log(`  Missing rates: ${pricingMd.missingRates.join(', ')}`);
+    }
+    console.log('');
+  }
+
+  console.log(
+    `Summary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${pricingIssues} pricing.md issue(s).`
+  );
+  console.log('Run with --verbose to see all checks.');
 }
 
 function printResult(r) {
@@ -1020,10 +1004,17 @@ function printResult(r) {
 // ---------------------------------------------------------------------------
 
 function main() {
-  const jsonMode = process.argv.includes('--json');
-  const generateMode = process.argv.includes('--generate');
+  const args = process.argv.slice(2);
+  const jsonMode = args.includes('--json');
+  // Default: terse in CI (Vercel sets CI=1 automatically), verbose locally.
+  // Explicit flags always win.
+  const verbose = args.includes('--verbose')
+    ? true
+    : args.includes('--ci')
+      ? false
+      : !process.env.CI;
 
-  let componentData, docsTable;
+  let componentData, docsContent, docsTable;
   try {
     componentData = loadComponentData();
   } catch (err) {
@@ -1032,34 +1023,37 @@ function main() {
   }
 
   try {
-    docsTable = loadDocsTable();
+    docsContent = loadDocsContent();
+    docsTable = loadDocsTable(docsContent);
   } catch (err) {
     console.error('Failed to load docs table:', err.message);
     process.exit(2);
   }
 
-  if (generateMode) {
-    const markdown = generatePricingMarkdown(componentData, docsTable);
-    const outPath = path.join(PROJECT_ROOT, 'public/pricing.md');
-    fs.mkdirSync(path.dirname(outPath), { recursive: true });
-    fs.writeFileSync(outPath, markdown);
-    console.log(`Generated ${path.relative(PROJECT_ROOT, outPath)}`);
-    process.exit(0);
-  }
-
   const { results, uncoveredComponent, uncoveredDocs } = runChecks(componentData, docsTable);
+  const pricingMd = runPricingMdChecks(docsContent);
 
-  if (jsonMode)
+  if (jsonMode) {
     console.log(
       JSON.stringify(
-        { results, uncoveredComponent, uncoveredDocs, summary: summarize(results) },
+        {
+          results,
+          uncoveredComponent,
+          uncoveredDocs,
+          pricingMd,
+          summary: summarize(results, pricingMd),
+        },
         null,
         2
       )
     );
-  else printReport(results, uncoveredComponent, uncoveredDocs);
+  } else if (verbose) {
+    printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd);
+  } else {
+    printTerseReport(results, pricingMd);
+  }
 
-  process.exit(summarize(results).critical > 0 ? 1 : 0);
+  process.exit(summarize(results, pricingMd).critical > 0 ? 1 : 0);
 }
 
 main();

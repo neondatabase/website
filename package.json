@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
-    "predev": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run generate:pricing",
+    "prebuild": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
+    "predev": "node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
@@ -22,7 +22,6 @@
     "check:broken-links": "linkinator --config linkinator.config.json",
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
     "check:content-data": "node scripts/validate-content-data.js",
-    "generate:pricing": "node src/scripts/check-pricing-sync.js --generate",
     "prepare": "husky install",
     "test": "npx cypress open",
     "test:unit": "vitest",

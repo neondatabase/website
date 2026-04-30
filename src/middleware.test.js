@@ -76,6 +76,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Branching', path: '/branching/introduction' },
       { name: 'Programs', path: '/programs/agents' },
       { name: 'Use Cases', path: '/use-cases/ai-agents' },
+      { name: 'Pricing', path: '/pricing' },
     ];
 
     testCases.forEach(({ name, path }) => {

@@ -70,7 +70,6 @@ public/robots.txt
 public/md
 public/docs/**/llms.txt
 public/docs/llms-full.txt
-public/pricing.md
 src/utils/data/github-stars.generated.json
 
 # Mac files

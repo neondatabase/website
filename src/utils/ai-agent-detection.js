@@ -43,7 +43,7 @@ export function isAIAgentRequest(request) {
 // Paths where the generic CONTENT_ROUTES resolver produces the wrong markdown
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
-  pricing: '/pricing.md',
+  pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
   'docs/changelog': '/md/docs/changelog.md',
 };
 
