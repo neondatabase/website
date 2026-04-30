@@ -221,7 +221,6 @@ module.exports = {
   // Path prefixes excluded from the index (relative to content dir for the route).
   // For the "docs" route, paths are relative to content/docs/.
   excludePaths: [
-    'azure/',
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
     'changelog.md',

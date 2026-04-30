@@ -2137,11 +2137,6 @@ async function main() {
       '  node process-md-for-llms.js --dir <dir>     Process directory (e.g., docs/guides)'
     );
     console.log('  node process-md-for-llms.js --all           Process all content routes');
-    console.log('');
-    console.log('For comparison with Python output:');
-    console.log(
-      '  node generate-legacy-llms-output.js          Process to public/llms/ for git diff'
-    );
   }
 }
 
