@@ -13,7 +13,7 @@ nextLink:
   slug: 'postgresql-19-new-features'
 ---
 
-**Summary**: PostgreSQL 19 includes several breaking changes that may affect your applications and configuration. JIT compilation is now off by default, TOAST compression defaults to LZ4, RADIUS authentication is removed, and string handling is stricter. Review these changes before upgrading.
+**Summary**: PostgreSQL 19 includes several breaking changes that may affect your applications and configuration. JIT compilation is now off by default, TOAST compression defaults to LZ4, MD5-hashed passwords are being deprecated and string handling is stricter. Review these changes before upgrading.
 
 ## JIT Compilation Disabled by Default
 
