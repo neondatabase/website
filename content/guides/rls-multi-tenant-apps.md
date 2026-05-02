@@ -3,8 +3,8 @@ title: Adopt Postgres RLS for Multi-Tenant Apps Without Slowing Your Team Down
 subtitle: How to use row-level security for multi-tenant apps, understand its challenges and benefits, and see how branching and authentication with Neon let you safely iterate on RLS policies.
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2026-05-01T00:00:00.000Z'
-updatedOn: '2026-05-01T00:00:00.000Z'
+createdAt: '2026-05-02T00:00:00.000Z'
+updatedOn: '2026-05-02T00:00:00.000Z'
 ---
 
 If you are building a multi-tenant app on Postgres, [row level security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) sounds like a clean promise, i.e. define access rules once in the database, and every query becomes safe by default. It is a compelling idea, especially when you have many tables, many endpoints, and many ways the same data can be accessed. But RLS is not "turn it on and forget it". It changes how your application authenticates, how your queries are shaped, how you debug production issues, and how confident you can be that a new feature did not pass through your data boundary.
