@@ -120,6 +120,42 @@ const CHECKS = [
       return desc ? desc.slice(0, 80).trim() : '';
     },
   },
+  {
+    name: '/docs/skill.md — skill at /docs/ path (Mintlify-style checkers)',
+    path: '/docs/skill.md',
+    validate(status, body) {
+      if (status !== 200) return `expected 200, got ${status}`;
+      if (!body.includes('name: neon-postgres')) return 'skill name mismatch';
+      return null;
+    },
+    summarize(body) {
+      const nameLine = body.split('\n').find((l) => l.startsWith('name:'));
+      return nameLine ? nameLine.trim() : '';
+    },
+  },
+  {
+    name: '/docs/.well-known/agent-skills/index.json — skills discovery at /docs/ path',
+    path: '/docs/.well-known/agent-skills/index.json',
+    validate(status, body) {
+      if (status !== 200) return `expected 200, got ${status}`;
+      let json;
+      try {
+        json = JSON.parse(body);
+      } catch {
+        return 'response is not valid JSON';
+      }
+      if (!json.skills?.[0]?.name) return 'skills[0].name missing';
+      return null;
+    },
+    summarize(body) {
+      try {
+        const j = JSON.parse(body);
+        return `${j.skills.length} skill(s): ${j.skills.map((s) => s.name).join(', ')}`;
+      } catch {
+        return '';
+      }
+    },
+  },
 ];
 
 async function fetchCheck(url) {
