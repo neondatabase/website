@@ -44,6 +44,7 @@ function buildConfig(spec: string, darkMode: boolean) {
     showDeveloperTools: 'never',
     hideModels: true,
     hideClientButton: true,
+    hideTestRequestButton: true,
     defaultOpenAllTags: true,
     defaultHttpClient: { targetKey: 'js', clientKey: 'fetch' },
   };
