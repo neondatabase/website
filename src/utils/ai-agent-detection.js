@@ -49,7 +49,7 @@ const CUSTOM_MARKDOWN_PATHS = {
 
 // Paths under content routes that are static files in public/ (not generated into public/md/).
 // The middleware should pass these through so Next.js serves them directly.
-const STATIC_DOC_PREFIXES = ['docs/ai/'];
+const STATIC_DOC_PREFIXES = ['docs/ai/skills/'];
 
 // Convert URL path to markdown file path
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)

@@ -21,7 +21,9 @@
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
- * - CopyPrompt, NeedHelp, Comment -> removed (UI-only)
+ * - CopyPrompt -> description text (buttons/icons omitted)
+ * - RequestForm -> title + description (form controls omitted)
+ * - NeedHelp, Comment -> removed (UI-only)
  *
  * Dependencies: unified, remark-parse, remark-gfm, unist-util-visit, gray-matter, js-yaml (direct); remark-mdx and mdast-util-* (transitive). We pin the direct ones so version conflicts (e.g. remark-gfm v4 needing unified v11 while another dep had v10) don’t break the build.
  */
@@ -76,12 +78,10 @@ const SHARED_CONTENT_COMPONENTS = {
  * To add a new one, just add an entry here.
  */
 const IGNORED_COMPONENTS = [
-  'CopyPrompt', // UI copy button
   'NeedHelp', // UI help widget
   'Comment', // MDX comments
   'Video', // HTML5 video (no text content)
   'UserButton', // Auth UI element
-  'RequestForm', // Interactive form
   'Suspense', // React utility
   'SqlToRestConverter', // Interactive app
   'LogosSection', // Decorative logos
@@ -1074,7 +1074,7 @@ const componentHandlers = {
     };
   },
 
-  // CopyPrompt, NeedHelp -> registered via IGNORED_COMPONENTS below
+  // NeedHelp -> registered via IGNORED_COMPONENTS below
   /**
    * YoutubeIframe -> YouTube link
    */
@@ -1331,9 +1331,114 @@ const componentHandlers = {
       });
     }
 
-    if (paragraphs.length === 0) return null;
+    // Bare <CTA /> with no props falls back to the same defaults the React
+    // component renders (src/components/shared/doc-cta/doc-cta.jsx DEFAULT_DATA),
+    // so markdown and HTML stay in parity.
+    if (paragraphs.length === 0) {
+      const defaultTitle = 'Try it on Neon!';
+      const defaultDescription =
+        'Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started.';
+      const defaultButtonText = 'Sign Up';
+      const defaultButtonUrl = 'https://console.neon.tech/signup';
+      return {
+        type: 'blockquote',
+        children: [
+          {
+            type: 'paragraph',
+            children: [{ type: 'strong', children: [{ type: 'text', value: defaultTitle }] }],
+          },
+          {
+            type: 'paragraph',
+            children: [{ type: 'text', value: defaultDescription }],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'link',
+                url: defaultButtonUrl,
+                children: [{ type: 'text', value: defaultButtonText }],
+              },
+            ],
+          },
+        ],
+      };
+    }
 
     return { type: 'blockquote', children: paragraphs };
+  },
+
+  /**
+   * CopyPrompt -> emit the description text and a link to the prompt source.
+   * The copy button and icon are UI-only and are intentionally omitted.
+   */
+  CopyPrompt(node) {
+    const description = getAttr(node, 'description');
+    const src = getAttr(node, 'src');
+    const children = [];
+    if (description) {
+      children.push({ type: 'text', value: description });
+    }
+    if (src) {
+      if (description) children.push({ type: 'text', value: ' ' });
+      const absoluteSrc = src.startsWith('http') ? src : `${BASE_URL}${src}`;
+      children.push({
+        type: 'link',
+        url: absoluteSrc,
+        children: [{ type: 'text', value: 'View prompt' }],
+      });
+    }
+    if (children.length === 0) return null;
+    return { type: 'paragraph', children };
+  },
+
+  /**
+   * RequestForm -> emit actionable text so markdown stays in parity with HTML.
+   * Descriptions are rewritten to remove "select below" phrasing (no form exists
+   * in markdown) and replaced with links to support and Discord.
+   * The combobox / submit button are UI-only and are omitted.
+   */
+  RequestForm(node) {
+    const type = getAttr(node, 'type');
+    const FORM_INTROS = {
+      region: 'Looking for Neon in a different cloud provider or region?',
+      extension: 'Looking for a specific Postgres extension in Neon?',
+    };
+    const intro = type && FORM_INTROS[type];
+    if (!intro) return null;
+
+    const FORM_TITLES = {
+      region: 'Request a new Provider / Region',
+      extension: 'Request a new extension',
+    };
+
+    return {
+      type: 'blockquote',
+      children: [
+        {
+          type: 'paragraph',
+          children: [{ type: 'strong', children: [{ type: 'text', value: FORM_TITLES[type] }] }],
+        },
+        {
+          type: 'paragraph',
+          children: [
+            { type: 'text', value: `${intro} Submit a request through ` },
+            {
+              type: 'link',
+              url: `${BASE_URL}/docs/introduction/support`,
+              children: [{ type: 'text', value: 'Neon support' }],
+            },
+            { type: 'text', value: ' or let us know in the ' },
+            {
+              type: 'link',
+              url: 'https://discord.gg/92vNTzKDGp',
+              children: [{ type: 'text', value: 'Neon Discord' }],
+            },
+            { type: 'text', value: '.' },
+          ],
+        },
+      ],
+    };
   },
 };
 

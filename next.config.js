@@ -2474,6 +2474,13 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Agent skill discovery (agentskills.io 0.2.0)
+        {
+          source: '/.well-known/agent-skills/neon-postgres/SKILL.md',
+          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        },
+        // /skill.md at site root for checkers that probe this path
+        { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...indexRewrites,
         ...contentRewrites,
