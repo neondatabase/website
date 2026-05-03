@@ -199,48 +199,6 @@ HighlightedCode.propTypes = {
   language: PropTypes.string.isRequired,
 };
 
-const UrlPreview = ({ url, queryString }) => {
-  // Split URL for styling: base + query string with highlighted keys/values.
-  const parts = queryString
-    ? queryString.split('&').map((pair) => {
-        const [key, value = ''] = pair.split('=');
-        return { key, value: decodeURIComponent(value) };
-      })
-    : [];
-
-  return (
-    <div className="group relative overflow-hidden rounded-xl border border-gray-new-90 bg-gradient-to-br from-gray-new-98 to-white dark:border-gray-new-20 dark:from-gray-new-10 dark:to-gray-new-8">
-      <div className="flex items-center gap-2 border-b border-gray-new-90 bg-white/60 px-4 py-2 dark:border-gray-new-20 dark:bg-gray-new-10/60">
-        <span className="bg-green-500 h-1.5 w-1.5 rounded-full" />
-        <span className="text-[11px] font-semibold tracking-[0.08em] text-gray-new-40 uppercase dark:text-gray-new-60">
-          Server URL
-        </span>
-      </div>
-      <div className="px-4 py-3 font-mono text-[13px] leading-relaxed break-all text-gray-new-20 dark:text-gray-new-90">
-        <span>{url}</span>
-        {parts.length > 0 && (
-          <>
-            <span className="text-gray-new-40 dark:text-gray-new-60">?</span>
-            {parts.map((pair, idx) => (
-              <span key={`${pair.key}-${idx}`}>
-                {idx > 0 && <span className="text-gray-new-40 dark:text-gray-new-60">&</span>}
-                <span className="text-secondary-8 dark:text-primary-1">{pair.key}</span>
-                <span className="text-gray-new-40 dark:text-gray-new-60">=</span>
-                <span>{pair.value}</span>
-              </span>
-            ))}
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-UrlPreview.propTypes = {
-  url: PropTypes.string.isRequired,
-  queryString: PropTypes.string.isRequired,
-};
-
 const McpSetupConfigurator = () => {
   const [authMode, setAuthMode] = useState('oauth');
   const [apiKey, setApiKey] = useState('');
@@ -377,30 +335,17 @@ const McpSetupConfigurator = () => {
   return (
     <div className="my-6 overflow-hidden rounded-2xl border border-gray-new-90 bg-white shadow-sm dark:border-gray-new-20 dark:bg-gray-new-8">
       <div className="border-b border-gray-new-90 bg-gradient-to-br from-gray-new-98 via-white to-gray-new-98 px-6 py-5 dark:border-gray-new-20 dark:from-gray-new-10 dark:via-gray-new-8 dark:to-gray-new-10">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <h3 className="mt-0 mb-1 text-lg font-semibold text-gray-new-10 dark:text-white">
-              MCP Server Config Generator
-            </h3>
-            <p className="mt-0 mb-0 text-sm text-gray-new-40 dark:text-gray-new-60">
-              Generate a ready-to-use config for Neon&apos;s hosted MCP server.
-            </p>
-          </div>
-          <span className="border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-400 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium tracking-wide uppercase">
-            <span className="bg-green-500 h-1.5 w-1.5 rounded-full" />
-            Hosted · streamable HTTP
-          </span>
-        </div>
+        <h3 className="mt-0 mb-1 text-lg font-semibold text-gray-new-10 dark:text-white">
+          MCP Server Config Generator
+        </h3>
+        <p className="mt-0 mb-0 text-sm text-gray-new-40 dark:text-gray-new-60">
+          Generate a ready-to-use config for Neon&apos;s hosted MCP server.
+        </p>
       </div>
 
       <div className="grid grid-cols-1">
         <div className="space-y-5 bg-gray-new-98/60 p-6 dark:bg-gray-new-10/30">
-          <div>
-            <p className={SECTION_LABEL_CLASS}>
-              <span className="inline-block h-1 w-4 rounded-full bg-secondary-8 dark:bg-primary-1" />
-              Configuration
-            </p>
-          </div>
+          <h4 className="sr-only">Configuration</h4>
 
           <div className={CARD_CLASS}>
             <span className={FIELD_LABEL_CLASS}>Authentication</span>
@@ -532,20 +477,6 @@ const McpSetupConfigurator = () => {
               Result
             </p>
           </div>
-
-          <UrlPreview url={baseServerUrl} queryString={queryString} />
-
-          {authMode === 'oauth' && (
-            <div className="flex gap-3 rounded-xl border border-secondary-9/40 bg-secondary-9/10 px-4 py-3 text-[13px] leading-relaxed text-gray-new-20 dark:border-secondary-7/30 dark:bg-secondary-7/10 dark:text-gray-new-80">
-              <span className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full bg-secondary-8 text-[10px] font-bold text-white dark:bg-primary-1 dark:text-gray-new-10">
-                i
-              </span>
-              <span>
-                In OAuth mode, access controls are locked in at authorize time. If you change these
-                settings after connecting, sign out and reauthorize for them to take effect.
-              </span>
-            </div>
-          )}
 
           <div className="rounded-xl border border-gray-new-90 bg-white p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
             <div className="mb-3 flex items-baseline justify-between gap-3">
