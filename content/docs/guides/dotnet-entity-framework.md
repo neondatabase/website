@@ -198,14 +198,6 @@ If you do not have one already, create a Neon project.
 
 2. Test the connection by navigating to [`http://localhost:5001/swagger`](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-dotnet-entity-framework" description="Get started with Entity Framework and Neon" icon="github">Get started with Entity Framework and Neon</a>
-</DetailIconCards>
-
 ## Resources
 
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)

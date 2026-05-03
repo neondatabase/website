@@ -719,20 +719,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 - [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
 - [Connect a Django application to Neon](/docs/guides/django)
 
-## Source code
-
-You can find the source code for the applications described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg" description="Get started with Python and Neon using psycopg (v3)" icon="github">Get started with Python and Neon using psycopg (v3)</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
-
-</DetailIconCards>
-
 ## Resources
 
 - [Psycopg 3 documentation](https://www.psycopg.org/psycopg3/docs/)

@@ -498,16 +498,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-java-jdbc" description="Get started with Java and Neon using standard JDBC." icon="github">Get started with Java and Neon using JDBC</a>
-
-</DetailIconCards>
-
 ## Resources
 
 - [PostgreSQL JDBC Driver Documentation](https://jdbc.postgresql.org/documentation/use/)
