@@ -62,7 +62,7 @@ DROP COLUMN column_name2,
 
 Notice that you need to add a comma (`,`) after each `DROP COLUMN` clause.
 
-If a table has one column, you can use drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
+If a table has one column, you can drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
 
 It’s worth noting that while PostgreSQL allows a table that has no column, it may be not allowed according to the standard SQL.
 
