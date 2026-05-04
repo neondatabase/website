@@ -52,7 +52,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 10 manual snapshots                  | 10 manual snapshots                                                                               |
+| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
 | [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
@@ -293,10 +293,10 @@ The per-plan snapshot limit applies to **manual snapshots only**. On paid plans,
 Manual snapshot limits per plan:
 
 - **Free**: 1 manual snapshot
-- **Launch**: 10 manual snapshots
-- **Scale**: 10 manual snapshots
+- **Launch**: 100 manual snapshots
+- **Scale**: 100 manual snapshots
 
-**Pricing**: Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing**: Snapshots are billed at $0.09/GB-month, starting May 1, 2026.
 
 Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
 
@@ -540,7 +540,7 @@ Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
 
 How is storage charged for snapshots?
-: Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+: Snapshots are billed at $0.09/GB-month, starting May 1, 2026.
 
 Is storage cost different for archived branches?
 : No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.

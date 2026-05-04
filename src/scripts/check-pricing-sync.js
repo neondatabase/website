@@ -481,6 +481,33 @@ const CROSS_SOURCE_CHECKS = [
     norm: extractCore(/(\d+)\s*days?/i, '$1 days'),
     agentLabel: 'Restore window',
   },
+  {
+    id: 'snapshots-free',
+    label: 'Snapshots (Free)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'free',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
+  {
+    id: 'snapshots-launch',
+    label: 'Snapshots (Launch)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'launch',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
+  {
+    id: 'snapshots-scale',
+    label: 'Snapshots (Scale)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'scale',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
   // --- Network ---
   {
     id: 'network-free',
@@ -736,7 +763,6 @@ const INTENTIONALLY_DOCS_ONLY = new Set([
   'Price',
   "Who it's for",
   'Autoscaling',
-  'Snapshots',
   'Compliance and security',
   'Support',
 ]);

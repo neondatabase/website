@@ -130,6 +130,24 @@ export default {
       scale: 'Up to 30 days',
     },
     {
+      rows: '2',
+      feature: {
+        title: 'Snapshots',
+      },
+      free: '1 snapshot',
+      launch: '100 snapshots  <span>$0.09/GB-month</span>',
+      scale: '100 snapshots  <span>$0.09/GB-month</span>',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Scheduled Backups',
+      },
+      free: false,
+      launch: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
+      scale: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
+    },
+    {
       rows: '1',
       feature: 'Auth',
     },

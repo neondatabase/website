@@ -356,12 +356,12 @@ Use snapshots (branches) for versions you want to keep beyond the [restore windo
 - **Persistent versions**: Keep snapshots as long as needed
 - **Named versions**: Give meaningful names to important database states
 - **Storage cost**: Snapshots count toward storage usage
-- **Manual snapshot limits**: Free projects: 1 manual snapshot max; Paid projects: 10 manual snapshots max (on paid plans, scheduled backup snapshots do not count)
+- **Manual snapshot limits**: Free projects: 1 manual snapshot max; Paid projects: 100 manual snapshots max (on paid plans, scheduled backup snapshots do not count)
 
 <Admonition type="important">
-**Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
+**Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **100 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
 
-**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing:** Snapshots are billed at $0.09/GB-month, starting May 1, 2026.
 </Admonition>
 
 Example creating a snapshot:
@@ -400,7 +400,7 @@ Combine both methods for the best user experience:
 
 1. **Use PITR for recent history**: Fast, automatic undo/redo (1 day for Free tier, up to 7 days for Paid tier)
 2. **Create snapshots for milestones**: Preserve important versions (releases, working states) as branches
-3. **Manage manual snapshot limits**: Free tier users can only keep 1 manual snapshot; implement a "replace snapshot" workflow. Paid tier users get 10 manual snapshots (on paid plans, scheduled backup snapshots do not count toward this limit).
+3. **Manage manual snapshot limits**: Free tier users can only keep 1 manual snapshot; implement a "replace snapshot" workflow. Paid tier users get 100 manual snapshots (on paid plans, scheduled backup snapshots do not count toward this limit).
 4. **Set user expectations**: Explain that recent history restores instantly, older versions may take longer
 5. **Automate cleanup**: Delete old snapshots that are no longer needed to control storage costs and stay within limits
 
