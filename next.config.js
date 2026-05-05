@@ -2467,6 +2467,12 @@ const defaultConfig = {
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Skill discovery under /docs/ — must be beforeFiles to avoid the docs/[...slug] catch-all
+        { source: '/docs/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
+        {
+          source: '/docs/.well-known/agent-skills/neon-postgres/SKILL.md',
+          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -2474,6 +2480,13 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Agent skill discovery (agentskills.io 0.2.0) — site root
+        {
+          source: '/.well-known/agent-skills/neon-postgres/SKILL.md',
+          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        },
+        // /skill.md at site root for checkers that probe this path
+        { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...indexRewrites,
         ...contentRewrites,
