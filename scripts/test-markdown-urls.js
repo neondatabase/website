@@ -53,7 +53,6 @@
 //   every UA pattern (got, perplexity, etc.) or application/xml Accept alone.
 // - Root / and /home: only spot-check that markdown is not served for negotiated requests;
 //   login redirects are not exercised.
-// - Legacy /llms/*.txt: one known redirect only; unmapped paths fall through to 404 (not tested).
 // - Changelog entry date is pinned; update if that file is removed from content/changelog/.
 // - Top-level hub .md URLs (/guides.md, /branching.md): dot-md tests require markdown 404
 //   (md-404). Fails on hosts without middleware + rewrite fixes for those paths.
@@ -558,20 +557,7 @@ function buildTests() {
     (r) => expectHeader(r.headers, 'x-content-source', 'md-404'),
   ]);
 
-  // ── 6. Legacy /llms/ redirects ────────────────────────────────────────
-
-  add(
-    'Legacy redirect',
-    '/llms/introduction.txt',
-    'browser',
-    [
-      (r) => expectStatus(r.status, 301),
-      (r) => expectHeader(r.headers, 'location', '/docs/introduction.md'),
-    ],
-    { note: 'redirect to .md URL' }
-  );
-
-  // ── 7. llms.txt files ─────────────────────────────────────────────────
+  // ── 6. llms.txt files ─────────────────────────────────────────────────
 
   add(
     'LLMs txt',
@@ -589,7 +575,7 @@ function buildTests() {
     { spotCheck: (r) => expectBodyContains(r.body, 'neon', true) }
   );
 
-  // ── 8. RSS exclusion ──────────────────────────────────────────────────
+  // ── 7. RSS exclusion ──────────────────────────────────────────────────
 
   add(
     'RSS exclusion',
@@ -605,7 +591,7 @@ function buildTests() {
     { note: 'should NOT serve markdown' }
   );
 
-  // ── 9. Non-content routes ─────────────────────────────────────────────
+  // ── 8. Non-content routes ─────────────────────────────────────────────
 
   add(
     'Non-docs route',
@@ -713,7 +699,7 @@ function buildTests() {
     }
   );
 
-  // ── 10. Individual changelog entry (file must exist under public/md/changelog/ — run --generate)
+  // ── 9. Individual changelog entry (file must exist under public/md/changelog/ — run --generate)
   // ---------------------------------------------------------------------------
 
   add('Changelog entry', '/docs/changelog/2026-04-03', 'accept-md', [
@@ -729,7 +715,7 @@ function buildTests() {
     (r) => expectMarkdownBody(r.body),
   ]);
 
-  // ── 11. Content route doc headers on HTML responses ───────────────────
+  // ── 10. Content route doc headers on HTML responses ───────────────────
 
   add(
     'Doc headers on HTML',

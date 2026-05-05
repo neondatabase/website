@@ -21,7 +21,6 @@ Here's a snapshot of what we're working on now:
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
 
-- **Postgres 18 general availability**: Postgres 18 is currently in preview and moving toward general availability.
 - **Large object storage**: We're working on adding support for large object storage.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
@@ -77,6 +76,7 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Postgres 18 general availability**: Postgres 18 is now generally available on Neon. [Read the announcement](/blog/postgres-18).
 - **Organization spend limits**: Set a monthly spending limit for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that limit. [Learn more](/docs/introduction/spending-limit).
 - **Neon plugin for OpenAI Codex**: The Neon Postgres plugin is now available in the OpenAI Codex plugin directory, adding the Neon MCP Server and Agent Skills to Codex so you can manage projects, branches, and databases from chat. [Learn more](/docs/ai/ai-codex-plugin)
 - **Neon Postgres in Stripe Projects**: Neon is now part of Stripe Projects, so you can provision a Neon database as part of a Stripe CLI app setup alongside other services. [Read the announcement](/blog/neon-works-with-stripe-projects-for-agentic-provisioning)

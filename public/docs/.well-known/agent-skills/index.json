@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "neon-postgres",
+      "type": "skill-md",
+      "description": "Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/auth), PostgREST-style data API (@neondatabase/neon-js), Neon CLI, and Neon's Platform API/SDKs. Use for any Neon-related questions.",
+      "url": "/docs/.well-known/agent-skills/neon-postgres/SKILL.md",
+      "digest": "sha256:cab13155940ef1cf73d1a313fb0aaa11b94470e0e47ea9846cbf08b2dcb70a68"
+    }
+  ]
+}

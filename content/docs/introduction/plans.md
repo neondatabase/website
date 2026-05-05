@@ -44,7 +44,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Branches](#branches)                                 | 10/project                                 | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                                          | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
 | [Compute](#compute)                                   | 100 CU-hours/project                       | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
-| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU (fixed computes up to 56 CU / 224 GB RAM)                                             |
+| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
 | [Public network transfer](#public-network-transfer)   | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
@@ -227,7 +227,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 **Storage per branch:**
 
-Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 ### Public network transfer
 

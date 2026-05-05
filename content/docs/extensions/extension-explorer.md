@@ -205,7 +205,7 @@ Browse supported Postgres extensions by category.
 
 <a href="https://livescript.net/" description="Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript" icon="binary-code">plls</a>
 
-<a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="binary-code">plv8</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a Postgres procedural language powered by V8 for JavaScript callable from SQL; use plpgsql or app-side logic instead" icon="binary-code">plv8</a>
 
 <a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers" icon="binary-code">plpgsql</a>
 

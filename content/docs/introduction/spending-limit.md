@@ -9,7 +9,8 @@ tag: new
 <DocsList title="What you will learn:">
 <p>What a spending limit does</p>
 <p>Who can set one</p>
-<p>How to enable, edit, and disable a limit</p>
+<p>How to enable, edit, and disable a limit in the Console</p>
+<p>How to manage limits with the Neon Management API</p>
 <p>What happens when the limit is reached</p>
 </DocsList>
 
@@ -17,6 +18,7 @@ tag: new
 <a href="/docs/introduction/manage-billing">Manage billing</a>
 <a href="/docs/introduction/monitor-usage">Monitor billing and usage</a>
 <a href="/docs/introduction/cost-optimization">Cost optimization</a>
+<a href="/docs/manage/api-keys#create-an-api-key">Neon API keys</a>
 </DocsList>
 </InfoBlock>
 
@@ -24,7 +26,7 @@ tag: new
 
 A spending limit helps you control your organization's Neon spending. When charges approach the limit, organization admins receive email alerts so they can take action before the bill grows further.
 
-Spending limits are available on the Launch and Scale plans. You manage them from the **Billing** page in the Neon Console.
+Spending limits are available on the Launch and Scale plans. You can manage them from the **Billing** page in the Neon Console or with the [Neon Management API](#manage-spending-limits-with-the-neon-api).
 
 <Admonition type="comingSoon" title="Automatic project suspension">
 Currently, email alerts are the only available action. Automatic project suspension is coming soon: When the limit is reached, projects' computes will pause until you raise the limit or the next monthly billing period begins.
@@ -33,6 +35,26 @@ Currently, email alerts are the only available action. Automatic project suspens
 ## Who can set a spending limit
 
 Only organization admins can enable, edit, or disable a spending limit. Other members see the limit in read-only form on the **Billing** page.
+
+## Manage spending limits with the Neon API
+
+The Management API exposes spending limits at:
+
+`https://console.neon.tech/api/v2/organizations/{org_id}/billing/spending_limit`
+
+Replace `{org_id}` with your organization ID (see [Finding your org_id](/docs/manage/orgs-api#finding-your-org_id)). Authenticate with a [personal API key](/docs/manage/api-keys#create-an-api-key) or another allowed credential for the Management API.
+
+| Action | Method | Who can use it |
+| ------ | ------ | -------------- |
+| Read the current limit | [Retrieve the organization's monthly spending limit](https://api-docs.neon.tech/reference/getorganizationspendinglimit) | Organization members with **read** access (Launch and Scale) |
+| Set or change the limit | [Set the organization's monthly spending limit](https://api-docs.neon.tech/reference/setorganizationspendinglimit) | **Organization admins** only (Launch and Scale) |
+| Remove the limit | [Clear the organization's monthly spending limit](https://api-docs.neon.tech/reference/deleteorganizationspendinglimit) | **Organization admins** only (Launch and Scale) |
+
+**Request body (`PUT`):** send `spending_limit_cents` as a positive integer (monthly cap in **cents**; minimum **1**). For example, `$100.00` per month is `10000`. Values **`0`** and **`null`** are rejected; to clear a limit, call **`DELETE`** on the same path (idempotent when no limit is configured).
+
+**Response (`GET` / `PUT` 200):** the API returns `spending_limit_cents`, or `null` when no limit is set. Alerts at 80% and 100% of the cap behave the same as for Console-managed limits; computes are not suspended by this feature.
+
+See the linked API reference pages for response codes, schemas, and **Try it** examples.
 
 ## Alert thresholds
 

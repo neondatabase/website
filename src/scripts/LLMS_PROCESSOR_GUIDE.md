@@ -22,8 +22,6 @@ This is an **isolated post-build script** -- no changes to React components. A m
 - `generate-llms-index.js` - Generates `llms.txt` Table of Contents (output: `public/docs/llms.txt`)
 - `copy-md-content.js` - Postbuild entry point that calls the processor
 - `compare-md-conversion.js` - Dev tool for comparing single file conversions
-- `generate-legacy-llms-output.js` - Dev tool: generates `public/llms/` in old flat `.txt` format for comparison
-- `../utils/llms-redirect-map.json` - Static redirect map (committed, maps 493 old `.txt` filenames to canonical `.md` URLs). Generated once by a now-deleted one-time script
 
 To add or change LLM docs, edit source in `content/docs/`; see `docs/internal/llms-directory-guide.md` for the current approach.
 
@@ -63,7 +61,6 @@ All paths serve from the same source: `public/md/`.
 
 - **Explicit `.md` URL**: `GET /docs/guides/prisma.md` -> `next.config.js` rewrite (`afterFiles`) -> `public/md/docs/guides/prisma.md`
 - **User-Agent detection**: `GET /docs/guides/prisma` with AI User-Agent -> `middleware.js` -> `isAIAgentRequest()` -> fetch from `/md/docs/guides/prisma.md`
-- **Legacy redirect**: `GET /llms/guides-prisma.txt` -> middleware -> `llms-redirect-map.json` lookup -> 301 to `/docs/guides/prisma.md`
 - **Discoverability**: HTML pages include `<link rel="alternate" type="text/markdown" href="...">` via `markdownPath` in `getMetadata()` (`src/utils/get-metadata.js`)
 - **llms.txt**: The docs index is generated at build time and written to `public/docs/llms.txt`. We serve it at both `https://neon.com/docs/llms.txt` (canonical) and `https://neon.com/llms.txt` for backwards compatibility; they may diverge in the future, and we may add other indexes (e.g. `llms-full.txt`) later.
 
@@ -161,10 +158,6 @@ Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown
 
 Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not. `docs/changelog` is handled via `CUSTOM_MARKDOWN_PATHS` and serves the full generated changelog markdown.
 
-## Legacy /llms/\*.txt Redirects
-
-The old system used `public/llms/` for hand-maintained `.txt` files; that's deprecated and the dir is no longer used. `src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. Do not add new entries to the map; it is static and will be removed in the future. New docs get their `.md` URLs from the build. The map was generated once by a now-deleted one-time script.
-
 ## Build & Verification
 
 Postbuild (`package.json`): `copy-md-content.js && generate-llms-index.js && next-sitemap...`
@@ -208,9 +201,6 @@ node src/scripts/process-md-for-llms.js --all
 
 # Compare single file conversion
 node src/scripts/compare-md-conversion.js prisma
-
-# Generate legacy format for bulk diff
-node src/scripts/generate-legacy-llms-output.js && git diff public/llms/
 
 # Verify after build (dev server on port 3001)
 curl -I -s http://localhost:3001/docs/get-started/connect-neon.md | grep "200 OK"

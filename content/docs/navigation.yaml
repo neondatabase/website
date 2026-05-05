@@ -1175,6 +1175,8 @@
           slug: extensions/pgrowlocks
         - title: pgstattuple
           slug: extensions/pgstattuple
+        - title: plv8
+          slug: extensions/plv8
         - title: postgis
           slug: extensions/postgis
         - title: postgis-related

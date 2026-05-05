@@ -12,17 +12,17 @@ updatedOn: '2026-04-03T12:00:00.000Z'
 
 <ConsumptionAccountApiDeprecation/>
 
-Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. You can call these endpoints on **legacy plans** (Scale, Business, Enterprise) or **usage-based plans** (Launch, Scale, Agent, Enterprise). The difference is that they only return **legacy metrics** (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics instead.
+Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. The Management API only allows these paths for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). They are **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, these endpoints return **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
 
-| API                 | Endpoint                        | Description                               | Available on                 |
-| ------------------- | ------------------------------- | ----------------------------------------- | ---------------------------- |
-| **Account metrics** | `/consumption_history/account`  | Aggregated metrics across all projects    | Legacy and usage-based plans |
-| **Project metrics** | `/consumption_history/projects` | Per-project metrics at chosen granularity | Legacy and usage-based plans |
+| API                 | Endpoint                        | Description                               | Available on                                      |
+| ------------------- | ------------------------------- | ----------------------------------------- | ------------------------------------------------- |
+| **Account metrics** | `/consumption_history/account`  | Aggregated metrics across all projects    | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
+| **Project metrics** | `/consumption_history/projects` | Per-project metrics at chosen granularity | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
 
 Issuing calls to these APIs does not wake a project's compute endpoints.
 
 <Admonition type="tip">
-**Which API should I use?** For metrics that match your **invoice** on a usage-based plan, use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. For a guide to converting those metrics into billing units and calculating costs, see [Usage and cost calculations](/docs/introduction/usage-calculations). Use the endpoints on this page when you need **legacy metrics** (for example, on a legacy plan or for compatibility). Legacy endpoints can be called on any paid plan but always return legacy metrics only.
+**Which API should I use?** For metrics that match your **invoice** on a usage-based plan (including **Launch**), use the project metrics API in [Query consumption metrics](/docs/guides/consumption-metrics); it is the only endpoint that returns usage-based billing metrics. For a guide to converting those metrics into billing units and calculating costs, see [Usage and cost calculations](/docs/introduction/usage-calculations). Use the endpoints on this page when you need **legacy metrics** and your organization is on **Scale plans and above** (see table above). These paths always return legacy metrics only, even on usage-based Scale+.
 </Admonition>
 
 ## Request overview
@@ -74,7 +74,7 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
-Retrieves consumption metrics per project at the chosen granularity. Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
+Retrieves consumption metrics per project at the chosen granularity. The same **Scale plans and above** access rule applies as for the account endpoint (not available on **Launch**—use [v2 project metrics](/docs/guides/consumption-metrics) instead). Results are ordered by time in ascending order (oldest to newest). History begins at the time of upgrade. Issuing a call to this API does not wake a project's compute endpoint.
 
 #### Required parameters
 
@@ -240,13 +240,13 @@ The legacy and usage-based consumption API endpoints share a single rate limiter
 
 Calling the consumption APIs does not wake computes that have been suspended due to inactivity, so polling will not increase your consumption.
 
-The endpoints on this page return **legacy metrics** only; they can be called on legacy or usage-based plans but will not match your invoice on a usage-based plan. For metrics that match your invoice, see [Query consumption metrics](/docs/guides/consumption-metrics).
+The endpoints on this page return **legacy metrics** only; when your organization is eligible (Scale+), you can call them on legacy or usage-based plans, but responses will not match your invoice on a usage-based plan. For metrics that match your invoice—or for **Launch** plans—see [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ## Error responses
 
 Common error responses you may encounter:
 
-- **403 Forbidden**: These endpoints are not available for your plan. They are only supported with Scale, Business, and Enterprise plan accounts.
+- **403 Forbidden**: These endpoints are not available for your plan. The API response states that access is included with **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher—not **Launch**).
 - **404 Not Found**: Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different `granularity`.
 - **429 Too Many Requests**: Too many requests. Wait before retrying.

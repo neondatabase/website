@@ -77,7 +77,7 @@ const DocPost = async (props) => {
   const flatSidebar = await getFlatSidebar(sidebar);
 
   const isDocsIndex = currentSlug === 'introduction';
-  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+  const isChangelogIndex = currentSlug === 'changelog' || currentSlug.startsWith('changelog/');
   const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);

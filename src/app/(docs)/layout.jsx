@@ -20,6 +20,10 @@ const NeonDocsLayout = async ({ children }) => {
       hasThemesSupport
     >
       <div className="flex flex-1 safe-paddings dark:bg-black-pure dark:text-white lg:flex-col">
+        <aside aria-label="Agent directive" className="sr-only">
+          Full Neon documentation index:{' '}
+          <a href="https://neon.com/docs/llms.txt">https://neon.com/docs/llms.txt</a>
+        </aside>
         <Container
           className="flex w-full flex-1 gap-x-24 pt-12 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
           size="1920"

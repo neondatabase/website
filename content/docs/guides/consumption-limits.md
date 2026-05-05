@@ -59,6 +59,8 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Once this threshold is met, the compute for that particular branch (and _only_ that particular branch) is suspended. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
 
+Unlike the platform 16 TB storage limit on paid plans, which slows writes when reached, customer-set `logical_size_bytes` quotas remain hard limits.
+
 ### Sample quotas
 
 Let's say you want to set limits for an application with two tiers, Trial and Pro, you might set limits like the following:
