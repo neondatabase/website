@@ -350,9 +350,9 @@ docker run -d --name pg19 -p 5433:5432 pg19-dev
 psql -h localhost -p 5433 -U postgres
 ```
 
-## [Breaking Changes and Upgrade Notes](/postgresql/postgresql-19/breaking-changes)
+## Breaking changes and upgrade notes
 
-PostgreSQL 19 includes several changes that may affect existing applications. Review these before upgrading:
+PostgreSQL 19 includes several changes that may affect existing applications. Review these before upgrading. For full details, see the [breaking changes and upgrade notes](/postgresql/postgresql-19/breaking-changes) page.
 
 - **JIT disabled by default**: The `jit` parameter now defaults to `off`. Analytics workloads that rely on JIT should explicitly re-enable it.
 - **LZ4 TOAST compression default**: New TOAST data uses LZ4 instead of pglz. Faster compression and decompression with slightly lower ratios. Existing data is unaffected.
