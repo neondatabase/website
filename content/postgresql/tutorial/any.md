@@ -248,10 +248,12 @@ Output:
   8 | Ivy        | Moore     | 47000.00
   9 | Jack       | Anderson  | 56000.00
  10 | Kate       | Hill      | 44000.00
+ 11 | Liam       | Clark     | 59000.00
  12 | Mia        | Parker    | 42000.00
-(11 rows)
+(12 rows)
 
 ```
+[//]: # (The pervious above output was incorrect. It did not include the entry of employees with id 11, whose salary in 59000.00, which is less than 60000.00 salary of a manager. Look into it and accept the necessary change. Delete this line after accepting the edit. Thank in advance. :\))
 
 It returns rows from the `employees` table whose `salary` is less than at least one value in the set (55K, 58K, and 60K). In this example, that means salaries less than 60K, which matches the 11 rows shown in the output.
 
