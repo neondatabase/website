@@ -96,6 +96,8 @@
           items:
             - title: Overview
               slug: import/region-migration
+            - title: Azure regions deprecation
+              slug: import/azure-regions-deprecation
             - title: Neon to another region
               slug: import/migrate-neon-to-another-region
             - title: Neon to Lakebase
