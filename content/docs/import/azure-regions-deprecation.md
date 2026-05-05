@@ -37,9 +37,11 @@ Only if your project is in an Azure region (`azure-eastus2`, `azure-westus3`, or
 
 You can check from the Console, the CLI, or the API:
 
-- **Console.** Open your project, then check the **Settings** widget on the project dashboard. The region is shown in the project details.
+- **Console.** Open your project, then check the **Project settings** widget on the project dashboard. The region is shown in the **Region** row.
 - **CLI.** Run `neon projects list`. The `Region Id` column shows each project's region.
 - **API.** Call `GET /projects` and check the `region_id` field on each project.
+
+![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)
 
 ### Will my Azure project keep running until August 27, 2026?
 
