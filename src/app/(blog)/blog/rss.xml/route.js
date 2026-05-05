@@ -1,0 +1,50 @@
+import Rss from 'rss';
+
+import { BLOG_BASE_PATH } from 'constants/blog';
+import { getAllBlogPosts } from 'utils/api-blog';
+
+const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+export async function GET() {
+  const allBlogPosts = await getAllBlogPosts({ fullList: true });
+
+  const feed = new Rss({
+    id: BLOG_BASE_PATH,
+    language: 'en',
+    title: `Blog — Neon Docs`,
+    description: 'The latest product updates from Neon',
+    feed_url: `${SITE_URL}${BLOG_BASE_PATH}rss.xml`,
+    site_url: SITE_URL,
+  });
+
+  allBlogPosts.forEach((post) => {
+    const {
+      categories,
+      slug,
+      excerpt,
+      date,
+      title,
+      pageBlogPost: { authors },
+    } = post;
+    const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${BLOG_BASE_PATH}${slug}`;
+
+    const postCategories = categories.nodes.map((category) => category.name);
+
+    feed.item({
+      id: url,
+      title,
+      description: excerpt,
+      url,
+      date: new Date(date),
+      author: authors[0].author.title,
+      categories: postCategories,
+      custom_elements: [{ 'content:encoded': excerpt }],
+    });
+  });
+
+  return new Response(feed.xml(), {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  });
+}

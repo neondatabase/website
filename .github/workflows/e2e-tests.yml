@@ -35,5 +35,4 @@ jobs:
           wait-on: 'http://localhost:3000'
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
-          WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
           NEXT_PUBLIC_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_PATH }}

@@ -2,16 +2,28 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
+import {
+  buildBlogCategoryPath,
+  buildBlogIndexPath,
+  DEFAULT_BLOG_ROUTE_CONFIG,
+} from 'constants/blog';
 import ArrowLeft from 'icons/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 
-const Hero = ({ title, description, date, category, authors, className = null }) => (
+const Hero = ({
+  title,
+  description,
+  date,
+  category,
+  authors,
+  className = null,
+  routeConfig = DEFAULT_BLOG_ROUTE_CONFIG,
+}) => (
   <div className={className}>
     <div className="flex items-center gap-x-1.5">
       <Link
         className="flex items-center gap-x-1.5 py-2 font-mono text-[13px] leading-none font-medium -tracking-extra-tight text-gray-new-50 uppercase"
-        to={BLOG_BASE_PATH}
+        to={buildBlogIndexPath(routeConfig)}
       >
         <ArrowLeft className="" />
         <span className="sr-only">Back to </span>
@@ -20,7 +32,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
       <span className="text-sm leading-none text-gray-new-50">/</span>
       <Link
         className="py-2 font-mono text-[13px] leading-none font-medium -tracking-extra-tight text-blue-70 uppercase"
-        to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
+        to={buildBlogCategoryPath(routeConfig, category.slug)}
       >
         {category.name}
       </Link>
@@ -116,6 +128,12 @@ Hero.propTypes = {
     })
   ).isRequired,
   className: PropTypes.string,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default Hero;
