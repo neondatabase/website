@@ -226,7 +226,7 @@ FROM
 ```
 
 ![postgresql hstore akeys function](/postgresqltutorial/postgresql-hstore-akeys-function.jpg)
-Or you can use the `skey()` function if you want PostgreSQL to return the result as a set.
+Or you can use the `skeys()` function if you want PostgreSQL to return the result as a set.
 
 ```sql
 SELECT
