@@ -419,7 +419,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Delete a project
 
-Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+Deleting a project removes all its computes, branches, databases, and roles. Deleted projects can be [recovered within 7 days](#recover-a-deleted-project).
 
 To delete a project:
 
@@ -926,7 +926,7 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
-The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project. To recover a deleted branch, see [Recover a deleted branch](/docs/manage/branches#recover-a-deleted-branch).
 </Admonition>
 
 ### What's recovered

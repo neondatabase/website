@@ -236,6 +236,8 @@ neonctl projects delete muddy-wood-859533
 
 Verify the deletion with `neonctl projects list`.
 
+Projects are soft-deleted by default, and enter a 7-day [deletion recovery period](/docs/manage/projects#recover-a-deleted-project) before being permanently removed.
+
 ## neonctl projects recover (#recover)
 
 Recovers a deleted project within the deletion recovery period. The `<id>` is the project ID, which you can obtain by listing recoverable projects with `neonctl projects list --recoverable-only`.
