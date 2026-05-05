@@ -51,7 +51,7 @@ Create a new Next.js project and install dependencies.
 2.  **Install dependencies:**
 
     ```bash
-    npm install @neondatabase/auth@latest @neondatabase/serverless drizzle-orm
+    npm install @neondatabase/auth@latest @neondatabase/auth-ui @neondatabase/serverless drizzle-orm
     npm install -D drizzle-kit dotenv @types/node
     ```
 
@@ -272,7 +272,7 @@ This setup also adds a global header containing a `UserButton` from [Neon Auth U
 
 ```tsx shouldWrap
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth-ui';
 import './globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -300,7 +300,7 @@ This ensures that the required Tailwind styles for Neon Auth UI components are i
 
 ```css {2}
 @import 'tailwindcss';
-@import '@neondatabase/auth/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 
 /* ... your existing styles ... */
 ```
@@ -314,7 +314,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     Create `app/auth/[path]/page.tsx`. This page will render the Neon Auth sign-in/sign-up UI.
 
     ```tsx shouldWrap
-    import { AuthView } from '@neondatabase/auth/react';
+    import { AuthView } from '@neondatabase/auth-ui';
 
     export const dynamicParams = false;
 
@@ -334,8 +334,8 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     Create `app/account/[path]/page.tsx`. This page renders the Neon Auth account management UI, including features such as profile settings, password updates, and more.
 
     ```tsx shouldWrap
-    import { AccountView } from '@neondatabase/auth/react';
-    import { accountViewPaths } from '@neondatabase/auth/react/ui/server';
+    import { AccountView } from '@neondatabase/auth-ui';
+    import { accountViewPaths } from '@neondatabase/auth-ui/server';
 
     export const dynamicParams = false;
 
@@ -442,6 +442,8 @@ The file defines five Server Actions that handle authentication and database ope
 To protect certain routes and ensure only authenticated users can access them, create a middleware file. In this case, you'll protect the main page (`/`).
 
 Create `proxy.ts` in the root of your project with the following content:
+
+<NextjsProxyNote/>
 
 ```typescript
 import { auth } from '@/lib/auth/server';

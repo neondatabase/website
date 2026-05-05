@@ -37,7 +37,7 @@ If you're using Neon Auth UI components, enable Email OTP by passing the `emailO
 
 ```tsx shouldWrap filename="app/layout.tsx"
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import './globals.css';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -113,6 +113,8 @@ export const { GET, POST } = auth.handler();
 
 ### 5. Update middleware
 
+<NextjsProxyNote/>
+
 **Before (v0.1):**
 
 ```typescript

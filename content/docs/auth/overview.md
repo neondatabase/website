@@ -118,7 +118,7 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 export default function App() {

@@ -95,7 +95,7 @@ You will need the following packages for this project:
 - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
 
 ```bash
-npm install @neondatabase/neon-js@latest react-router
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router
 ```
 
 ### Setup Tailwind CSS
@@ -154,7 +154,7 @@ Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserR
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import App from './App.tsx';
 import { authClient } from './auth.ts';
 import './index.css';
@@ -181,7 +181,7 @@ As outlined in the [UI components reference](/docs/auth/reference/ui-components)
 Create `src/pages/Auth.tsx`:
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { AuthView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AuthPage() {
@@ -197,7 +197,7 @@ export default function AuthPage() {
 Create `src/pages/Account.tsx`:
 
 ```tsx
-import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+import { AccountView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AccountPage() {
@@ -216,7 +216,7 @@ Update `src/index.css` to include the Neon Auth Tailwind styles and set the mini
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 
 :root {
   font-family: system-ui, sans-serif;
@@ -421,7 +421,7 @@ Create a file `src/components/AdminDashboard.tsx`. This component will fetch and
 import { useEffect, useState } from 'react';
 import { authClient } from '../auth';
 import { UserRow } from './UserRow';
-import { RedirectToSignIn, SignedIn } from '@neondatabase/neon-js/auth/react/ui';
+import { RedirectToSignIn, SignedIn } from '@neondatabase/auth-ui';
 import type { User } from '@neondatabase/neon-js/auth/types';
 
 export type UserType = User & { banned: boolean | null } & { role?: string | null };
@@ -596,7 +596,7 @@ This component ensures admins have clear visibility when impersonating a user an
 Finally, update `src/App.tsx` to include routing and the main dashboard layout.
 
 ```tsx shouldWrap
-import { RedirectToSignIn, SignedIn, UserButton } from '@neondatabase/neon-js/auth/react';
+import { RedirectToSignIn, SignedIn, UserButton } from '@neondatabase/auth-ui';
 import AdminDashboard from './components/AdminDashboard';
 import { Link, Route, Routes } from 'react-router';
 import Auth from './pages/Auth';
