@@ -139,7 +139,7 @@
     mediaDetails:
       width: 150
       height: 32
-  quote: 'What first attracted us to Neon was the <mark>efficient scaling.</mark> What kept us interested were all the thoughtful developer-experience wins.'
+  quote: 'What first attracted us to Neon was the efficient scaling. What kept us interested were all the <mark>thoughtful developer-experience wins.</mark>'
   author:
     name: 'Ben Halpern'
     post: 'DEV Co-Founder'
@@ -351,7 +351,7 @@
     mediaDetails:
       width: 105
       height: 32
-  quote: 'Neon’s branching gave us true <mark>database isolation.</mark> Now every sandbox gets its own isolated Postgres DB whenever required.'
+  quote: ‘Neon’s branching gave us true database isolation. Now every sandbox gets its own <mark>isolated Postgres DB</mark> whenever required.’
   author:
     name: 'Joe Horsnell'
     post: 'Principal Platform Engineer at Bitso'
@@ -472,7 +472,7 @@
     mediaDetails:
       width: 111
       height: 32
-  quote: 'We’ve been able to manage 300K+ Postgres databases <mark>via the Neon API.</mark> It saved us a tremendous amount of time and engineering effort.'
+  quote: 'We’ve been able to manage <mark>300K+ Postgres databases</mark> via the Neon API. It saved us a tremendous amount of time and engineering effort.'
   author:
     name: 'Himanshu Bhandoh'
     post: 'Software Engineer at Retool'
