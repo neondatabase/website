@@ -29,7 +29,7 @@ const EXCLUDED_ROUTES = [
   'use-cases/serverless-apps',
 ];
 
-const EXCLUDED_FILES = ['rss.xml'];
+const EXCLUDED_FILES = ['rss.xml', 'context7.json'];
 
 module.exports = {
   CONTENT_ROUTES,
