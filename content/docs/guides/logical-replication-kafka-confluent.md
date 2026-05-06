@@ -107,10 +107,10 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -120,6 +120,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
+
+> Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
 
 </TabItem>
 
