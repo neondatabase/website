@@ -72,8 +72,8 @@ const client = createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 
 Choose one CSS import method. Never use both, as this causes duplicate styles:
 
-- **Without Tailwind:** `import '@neondatabase/auth/ui/css'` (Next.js) or `import '@neondatabase/neon-js/ui/css'` (React SPA)
-- **With Tailwind v4:** `@import '@neondatabase/auth/ui/tailwind'` (Next.js) or `@import '@neondatabase/neon-js/ui/tailwind'` (React SPA)
+- **Without Tailwind:** `import '@neondatabase/auth-ui/css'`
+- **With Tailwind v4:** `@import '@neondatabase/auth-ui/tailwind'`
 
 See the [UI Components reference](/docs/auth/reference/ui-components) for complete setup instructions.
 

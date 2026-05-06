@@ -95,7 +95,7 @@ You will need the following packages for this project:
 - **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
 ```bash
-npm install @neondatabase/neon-js@latest react-router drizzle-orm
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router drizzle-orm
 npm install -D drizzle-kit dotenv
 ```
 
@@ -342,7 +342,7 @@ Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserR
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import App from './App.tsx';
 import { neon } from './neon.ts';
 import './index.css';
@@ -373,7 +373,7 @@ As outlined in the [UI components reference](/docs/auth/reference/ui-components)
 Create `src/pages/Auth.tsx`:
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { AuthView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AuthPage() {
@@ -389,7 +389,7 @@ export default function AuthPage() {
 Create `src/pages/Account.tsx`:
 
 ```tsx
-import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+import { AccountView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AccountPage() {
@@ -408,7 +408,7 @@ Update `src/index.css` to include the Neon Auth Tailwind styles and set the mini
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 
 :root {
   font-family: system-ui, sans-serif;
@@ -440,7 +440,7 @@ Create the main components and pages for the Todo application:
 Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Neon Auth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
 
 ```tsx
-import { UserButton } from '@neondatabase/neon-js/auth/react';
+import { UserButton } from '@neondatabase/auth-ui';
 
 export default function Header() {
   return (
@@ -605,7 +605,7 @@ import { Routes, Route } from 'react-router';
 import Header from './components/Header';
 import Account from './pages/Account';
 import Auth from './pages/Auth';
-import { RedirectToSignIn, SignedIn } from '@neondatabase/neon-js/auth/react/ui';
+import { RedirectToSignIn, SignedIn } from '@neondatabase/auth-ui';
 import TodoApp from './pages/TodoApp';
 
 const Layout = () => {

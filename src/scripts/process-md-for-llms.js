@@ -70,6 +70,7 @@ const SHARED_CONTENT_COMPONENTS = {
   EarlyAccess: 'early-access',
   AzureRegionsDeprecation: 'azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'consumption-account-api-deprecation',
+  NextjsProxyNote: 'nextjs-proxy-note',
 };
 
 /**

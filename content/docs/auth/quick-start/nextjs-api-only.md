@@ -136,6 +136,8 @@ export const { GET, POST } = auth.handler();
 
 The middleware ensures users are authenticated before accessing protected routes. Create `proxy.ts` file in your project root:
 
+<NextjsProxyNote/>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
