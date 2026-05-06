@@ -40,7 +40,7 @@ If you remove a table that does not exist, PostgreSQL issues an error. To avoid 
 If the table is used in other database objects such as [views](../postgresql-views), [triggers](../postgresql-triggers/enable-triggers), functions, and stored procedures, you cannot remove it. In this case, you have two options:
 
 - Use the `CASCADE` option to remove the table and its dependent objects.
-- Use the `RESTRICT` option rejects the removal if there is any object depending on the table. The `RESTRICT` option is the default if you don’t explicitly specify it in the `DROP TABLE` statement.
+- Use the `RESTRICT` option to reject the removal if there is any object depending on the table. The `RESTRICT` option is the default if you don’t explicitly specify it in the `DROP TABLE` statement.
 
 To remove multiple tables simultaneously, you can place the tables separated by commas after the `DROP TABLE` keywords:
 
@@ -126,7 +126,7 @@ DROP TABLE authors CASCADE;
 
 This statement deletes the `authors` table as well as the constraint in the `pages` table.
 
-If the `DROP TABLE` statement removes the dependent objects of the table that are being dropped, it will issue a notice like this:
+If the `DROP TABLE` statement removes the dependent objects of the table that is being dropped, it will issue a notice like this:
 
 ```
 NOTICE:  drop cascades to constraint pages_author_id_fkey on table pages
