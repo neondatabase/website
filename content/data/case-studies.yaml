@@ -139,10 +139,17 @@
     mediaDetails:
       width: 150
       height: 32
-  quote: 'What first attracted us to Neon was the efficient scaling. What kept us interested were all the thoughtful developer-experience wins'
+  quote: 'What first attracted us to Neon was the <mark>efficient scaling.</mark> What kept us interested were all the thoughtful developer-experience wins.'
   author:
     name: 'Ben Halpern'
     post: 'DEV Co-Founder'
+  caseStudiesPage:
+    testimonialOrder: 1
+    testimonialLogo:
+      mediaItemUrl: '/images/case-studies/dev-dark.svg'
+      mediaDetails:
+        width: 41
+        height: 32
   isInternal: true
   internalPostSlug: 'dev-from-heroku-to-neon'
   externalUrl: ''
@@ -344,10 +351,17 @@
     mediaDetails:
       width: 105
       height: 32
-  quote: 'Neon’s branching gave us true database isolation. Now every sandbox gets its own isolated Postgres DB whenever required'
+  quote: 'Neon’s branching gave us true <mark>database isolation.</mark> Now every sandbox gets its own isolated Postgres DB whenever required.'
   author:
     name: 'Joe Horsnell'
     post: 'Principal Platform Engineer at Bitso'
+  caseStudiesPage:
+    testimonialOrder: 2
+    testimonialLogo:
+      mediaItemUrl: '/images/case-studies/bitso-dark.svg'
+      mediaDetails:
+        width: 105
+        height: 32
   isInternal: true
   internalPostSlug: 'bitso-branching-workflow'
   externalUrl: ''
@@ -458,10 +472,17 @@
     mediaDetails:
       width: 111
       height: 32
-  quote: 'We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort'
+  quote: 'We’ve been able to manage 300K+ Postgres databases <mark>via the Neon API.</mark> It saved us a tremendous amount of time and engineering effort.'
   author:
     name: 'Himanshu Bhandoh'
     post: 'Software Engineer at Retool'
+  caseStudiesPage:
+    testimonialOrder: 3
+    testimonialLogo:
+      mediaItemUrl: '/images/case-studies/retool-dark.svg'
+      mediaDetails:
+        width: 111
+        height: 32
   isInternal: true
   internalPostSlug: 'how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'
   externalUrl: ''
@@ -477,10 +498,10 @@
     mediaDetails:
       width: 111
       height: 32
-  quote: 'Neon has no infrastructure to manage, no servers to provision, no database cluster to maintain — making them the obvious partner to power our serverless Postgres offering'
+  quote: 'Neon’s serverless philosophy is <mark>aligned with our vision</mark>: no infrastructure to manage, no servers to provision, no database cluster to maintain.'
   author:
-    name: 'Édouard Bonlieu'
-    post: 'Co-founder and CPO'
+    name: 'Edouard Bonlieu'
+    post: 'Co-founder at Koyeb'
   isInternal: false
   internalPostSlug: ''
   externalUrl: 'https://www.koyeb.com/blog/serverless-postgres-public-preview'
@@ -878,10 +899,10 @@
     mediaDetails:
       width: 105
       height: 32
-  quote: ''
+  quote: '<mark>The killer feature</mark> that convinced us to use Neon was branching: it keeps our engineering velocity high.'
   author:
-    name: ''
-    post: ''
+    name: 'Léonard Henriquez'
+    post: 'Co-founder and CTO at Topo.io'
   isInternal: true
   internalPostSlug: 'why-topo-io-switched-from-amazon-rds-to-neon'
   externalUrl: ''
