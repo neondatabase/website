@@ -481,6 +481,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/tanstack.svg',
     darkIconPath: '/images/technology-logos/tanstack-dark.svg',
   },
+  'tortoise-orm': {
+    name: 'tortoise-orm',
+    lightIconPath: '/images/technology-logos/tortoise-orm.svg',
+    darkIconPath: '/images/technology-logos/tortoise-orm-dark.svg',
+  },
   typeorm: {
     name: 'typeorm',
     lightIconPath: '/images/technology-logos/typeorm.svg',

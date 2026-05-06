@@ -212,6 +212,7 @@ To test if an icon works:
 <a href="#" title="SQLAlchemy" description="Python ORM (icon: sqlalchemy)" icon="sqlalchemy">SQLAlchemy</a>
 <a href="#" title="StepZen" description="GraphQL platform (icon: stepzen)" icon="stepzen">StepZen</a>
 <a href="#" title="Supabase" description="Backend platform (icon: supabase)" icon="supabase">Supabase</a>
+<a href="#" title="Tortoise ORM" description="Python ORM (icon: tortoise-orm)" icon="tortoise-orm">Tortoise ORM</a>
 <a href="#" title="TypeORM" description="TypeScript ORM (icon: typeorm)" icon="typeorm">TypeORM</a>
 <a href="#" title="Drizzle" description="TypeScript ORM (icon: drizzle)" icon="drizzle">Drizzle</a>
 </TechCards>

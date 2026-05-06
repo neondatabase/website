@@ -383,6 +383,8 @@
               slug: guides/ruby-on-rails
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: Tortoise ORM
+              slug: guides/tortoise-orm
             - title: TypeORM
               slug: guides/typeorm
     - section: Backend

@@ -83,6 +83,8 @@ Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [l
 
 <a title="Kysely" icon="kysely" promptSrc="/prompts/kysely-prompt.md"></a>
 
+<a title="Tortoise ORM" icon="tortoise-orm" promptSrc="/prompts/tortoise-orm-prompt.md"></a>
+
 <a title="TypeORM" icon="typeorm" promptSrc="/prompts/typeorm-prompt.md"></a>
 
 <a title="SQLAlchemy" icon="sqlalchemy" promptSrc="/prompts/sqlalchemy-prompt.md"></a>
