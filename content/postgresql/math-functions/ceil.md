@@ -6,7 +6,7 @@ page_description: >-
   nearest integer, which is greater than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-ceil/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2024-02-16T14:25:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ABS() Function

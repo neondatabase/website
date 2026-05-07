@@ -6,7 +6,7 @@ page_description: >-
   multiple grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/'
 ogImage: /postgresqltutorial/PostgreSQL-ROLLUP-example.png
-updatedOn: '2024-07-01T01:04:08+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUBE

@@ -4,7 +4,7 @@ subtitle: Learn how to setup Neon Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2026-03-17T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This guide walks you through building a demo todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.

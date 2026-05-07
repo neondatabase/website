@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-procedure/
 ogImage: /postgresqltutorial/actor.png
-updatedOn: '2024-02-07T14:17:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE PROCEDURE

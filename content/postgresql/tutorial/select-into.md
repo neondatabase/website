@@ -6,7 +6,7 @@ page_description: >-
   create a new table and fill it with the data returned by a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-into/'
 ogImage: /postgresqltutorial/film_table.png
-updatedOn: '2024-01-24T04:16:44+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE TABLE

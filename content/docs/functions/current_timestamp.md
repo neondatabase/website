@@ -6,7 +6,7 @@ summary: >-
   the current date and time with timezone, including its syntax, examples, and
   applications for timestamping database entries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.856Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `current_timestamp()` function returns the current date and time with timezone. The `now()` function is an alias.

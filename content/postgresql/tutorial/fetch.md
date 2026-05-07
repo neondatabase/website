@@ -6,7 +6,7 @@ page_description: >-
   a specific number of rows from a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-fetch/'
 ogImage: /postgresqltutorial/film_table.png
-updatedOn: '2024-01-17T04:54:54+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LIMIT

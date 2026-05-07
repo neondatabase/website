@@ -5,7 +5,7 @@ summary: >-
   guidelines for lawful and ethical use, security responsibilities, and
   prohibited activities to ensure a secure computing environment.
 enableTableOfContents: false
-updatedOn: '2026-04-09T19:00:00.000Z'
+updatedOn: '2026-04-09T18:03:40.000Z'
 ---
 
 Neon is a Databricks Company. Please refer to the [Databricks Acceptable Use Policy](https://www.databricks.com/legal/acceptable-use-policy).

@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
-updatedOn: '2025-01-07T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 title: Building Real-Time Comments with a Serverless Postgres
 subtitle: A guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---

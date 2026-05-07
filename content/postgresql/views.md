@@ -6,7 +6,7 @@ page_description: >-
   views in the PostgreSQL database server.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/'
 ogImage: ''
-updatedOn: '2024-03-16T08:31:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Creating a PostgreSQL Trigger with a When Condition

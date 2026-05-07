@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/
 ogImage: /postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png
-updatedOn: '2024-01-16T05:41:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Sample Database

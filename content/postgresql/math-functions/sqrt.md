@@ -6,7 +6,7 @@ page_description: >-
   calculate the square root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sqrt/'
 ogImage: ''
-updatedOn: '2024-02-17T07:21:55+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ROUND() Function

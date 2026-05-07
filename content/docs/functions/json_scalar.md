@@ -7,7 +7,7 @@ summary: >-
   booleans, into their JSON equivalents, ensuring proper formatting and null
   handling.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.868Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The `json_scalar()` function introduced in PostgreSQL 17 provides a straightforward way to convert `SQL` scalar values into their `JSON` equivalents. Use it when you need to ensure proper type conversion and formatting of individual values for `JSON` output.

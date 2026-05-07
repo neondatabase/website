@@ -9,7 +9,7 @@ summary: >-
   edit data directly within their IDE.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-02-15T20:51:54.221Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.

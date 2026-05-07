@@ -6,7 +6,7 @@ summary: >-
   work, including writing, reviewing, quality checks, changelog management,
   and issue tracking.
 enableTableOfContents: true
-updatedOn: '2026-04-18T00:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.

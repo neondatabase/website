@@ -6,7 +6,7 @@ page_description: >-
   divide rows into groups.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-group-by/'
 ogImage: /postgresqltutorial/PostgreSQL-GROUP-BY-1.png
-updatedOn: '2024-04-19T07:10:40+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NATURAL JOIN

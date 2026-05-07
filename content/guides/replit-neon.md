@@ -4,7 +4,7 @@ subtitle: A guide to building AI applications with Replit Agent
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-15T00:00:00.000Z'
-updatedOn: '2025-03-15T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 [Replit Agent](https://docs.replit.com/replitai/agent) is a newly integrated, AI-powered tool within [Replit](https://replit.com) that simplifies the process of building applications. It allows you to describe the application you want to create using natural language and translates your ideas into a working project. This approach is designed to make application development more accessible and efficient, particularly for those new to coding or looking to quickly test out app concepts.

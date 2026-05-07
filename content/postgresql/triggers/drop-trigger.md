@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-drop-trigger/
 ogImage: /postgresqltutorial/PostgreSQL-DROP-Trigger-Example.png
-updatedOn: '2024-03-30T03:14:07+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE TRIGGER Statement

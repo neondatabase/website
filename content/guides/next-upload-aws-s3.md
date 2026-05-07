@@ -4,7 +4,7 @@ subtitle: Let users upload files directly to S3 by creating presigned URLs in Ne
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-16T00:00:00.000Z'
-updatedOn: '2024-05-16T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 In this guide, you will learn how to add a feature to a Next.js app that allows users to upload files to Amazon S3, and insert the references to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.

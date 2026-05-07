@@ -7,7 +7,7 @@ page_description: >-
   effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-cheat-sheet/'
 ogImage: /postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png
-updatedOn: '2024-01-16T00:36:34+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Getting Started with PostgreSQL

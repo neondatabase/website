@@ -6,7 +6,7 @@ page_description: >-
   applications using ADO.NET.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/'
 ogImage: ''
-updatedOn: '2024-05-21T12:42:32+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Managing Transactions'

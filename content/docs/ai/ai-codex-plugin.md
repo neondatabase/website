@@ -7,7 +7,7 @@ summary: >-
 description: >-
   Install the Neon Postgres plugin in OpenAI Codex for MCP-backed database
   management plus skills for Neon workflows and egress cost optimization.
-updatedOn: '2026-04-17T22:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 The **Neon Postgres** Codex plugin helps you manage **Neon Serverless Postgres** projects and databases. It adds Neon-specific [Agent Skills](https://developers.openai.com/codex/skills/) and Neon API access to [OpenAI Codex](https://developers.openai.com/codex/), including the **Neon MCP Server** for project and database management and skills that cover connection methods, branching, autoscaling, [Neon Auth](/docs/auth/overview), and more.

@@ -6,7 +6,7 @@ page_description: >-
   statement to remove an existing index.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/'
 ogImage: /postgresqltutorial/actor.png
-updatedOn: '2024-02-28T10:30:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REINDEX

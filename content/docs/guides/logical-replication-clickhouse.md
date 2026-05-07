@@ -6,7 +6,7 @@ summary: >-
   ClickHouse Cloud using ClickPipes, ClickHouse's native CDC connector.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T00:00:00.000Z'
+updatedOn: '2026-05-03T13:21:51.000Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

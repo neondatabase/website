@@ -6,7 +6,7 @@ page_description: >-
   sets and return the rows that appear in both result sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-intersect/'
 ogImage: /postgresqltutorial/PostgreSQL-INTERSECT-Operator-300x206.png
-updatedOn: '2024-07-01T01:03:14+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UNION

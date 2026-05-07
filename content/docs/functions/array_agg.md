@@ -6,7 +6,7 @@ summary: >-
   row values into a single array, including syntax, ordering options, and
   practical examples for data denormalization.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.853Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postges `array_agg()` function collects values from multiple rows into a single array.

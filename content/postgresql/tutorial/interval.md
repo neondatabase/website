@@ -6,7 +6,7 @@ page_description: >-
   manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
-updatedOn: '2024-02-01T02:58:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Timestamp Data Types

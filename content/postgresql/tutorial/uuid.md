@@ -6,7 +6,7 @@ page_description: >-
   to generate UUID values using the gen_random_uuid() function.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uuid/'
 ogImage: ''
-updatedOn: '2024-02-01T09:53:47+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TIME Data Type

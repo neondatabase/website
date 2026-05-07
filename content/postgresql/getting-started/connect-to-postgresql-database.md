@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/connect-to-postgresql-database/
 ogImage: /postgresqltutorial/pgAdmin-4.png
-updatedOn: '2024-02-19T06:34:03+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Install PostgreSQL on Windows

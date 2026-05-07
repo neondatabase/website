@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2024-01-26T03:16:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAX Function

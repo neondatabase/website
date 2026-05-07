@@ -6,7 +6,7 @@ page_description: >-
   existing row or insert a new row if it does not exist.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/'
 ogImage: ''
-updatedOn: '2024-03-27T06:05:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How To Delete Duplicate Rows in PostgreSQL

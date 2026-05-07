@@ -4,7 +4,7 @@ subtitle: Set up a Neon project in seconds and connect from a Python async appli
 summary: >-
   How to connect an asynchronous Python application to a Neon project using Tortoise ORM, the asycnpg driver.
 enableTableOfContents: true
-updatedOn: '2026-05-04T22:07:33.000Z'
+updatedOn: '2026-05-04T10:03:41.000Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 

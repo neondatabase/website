@@ -7,7 +7,7 @@ summary: >-
   optional Neon teardown, with Databricks docs for Lakebase console and networking.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-03T15:00:00.000Z'
+updatedOn: '2026-04-01T22:55:35.000Z'
 ---
 
 This guide describes how to migrate a **Neon** database to **Databricks Lakebase Postgres** using **`pg_dump`** and **`pg_restore`**.

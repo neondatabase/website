@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL primary key constraints through SQL statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/'
 ogImage: ''
-updatedOn: '2024-01-25T07:25:38+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'

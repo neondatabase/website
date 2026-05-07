@@ -6,7 +6,7 @@ page_description: >-
   PHP application using PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/delete/'
 ogImage: ''
-updatedOn: '2024-01-30T00:55:55+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Working with Binary Data'

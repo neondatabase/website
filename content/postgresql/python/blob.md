@@ -6,7 +6,7 @@ page_description: >-
   database using Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/blob/'
 ogImage: /postgresqltutorial/parts_part_drawings_tables.png
-updatedOn: '2024-04-20T13:39:35+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Call Stored Procedures'

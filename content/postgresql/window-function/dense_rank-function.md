@@ -7,7 +7,7 @@ page_description: >-
   set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png
-updatedOn: '2020-07-10T04:55:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUME_DIST Function

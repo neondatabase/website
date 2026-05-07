@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-03-01T00:00:00.000Z'
-updatedOn: '2025-03-01T00:00:00.000Z'
+updatedOn: '2026-03-14T03:18:26.000Z'
 title: How to use self-hosted runners with GitHub Actions
 subtitle: Take full control of your GitHub Action's runner environment with DigitalOcean
 ---

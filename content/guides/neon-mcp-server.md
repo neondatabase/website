@@ -4,7 +4,7 @@ subtitle: 'Enable natural language interaction with your Neon Postgres databases
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-06T00:00:00.000Z'
-updatedOn: '2025-02-06T00:00:00.000Z'
+updatedOn: '2026-01-31T14:05:11.000Z'
 ---
 
 Imagine managing your database with natural language. Instead of complex SQL, you can simply ask your AI assistant to "create a new table for customer orders" or "show me last quarter's sales figures." This is the power of the [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol), an open standard for AI interaction with external systems.

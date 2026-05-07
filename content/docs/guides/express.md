@@ -6,7 +6,7 @@ summary: >-
   application using various PostgreSQL clients, including the Neon serverless
   driver, node-postgres, and Postgres.js.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.963Z'
+updatedOn: '2026-03-26T12:44:08.000Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"

@@ -4,7 +4,7 @@ subtitle: Learn how to build a scalable Flask application with Neon Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-14T00:00:00.000Z'
-updatedOn: '2024-09-14T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 Building scalable web applications requires careful planning and the right tools. Flask is a Python web framework well-suited for building small to large web applications. It provides flexibility and extensibility, making it a popular choice for developers.

@@ -4,7 +4,7 @@ subtitle: Learn how to implement secure user authentication and authorization in
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2024-11-03T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Neon Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.

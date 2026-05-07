@@ -6,7 +6,7 @@ page_description: >-
   query data based on patterns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/'
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2024-01-21T02:25:04+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BETWEEN

@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL INNER JOIN clause.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Inner-Join.png
-updatedOn: '2024-01-17T15:32:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Table Aliases

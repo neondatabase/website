@@ -4,7 +4,7 @@ page_title: PostgreSQL List Indexes
 page_description: "In this tutorial, you will learn how to list indexes from a PostgreSQL database using either pg_indexes view\_or psql command."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/'
 ogImage: ''
-updatedOn: '2024-06-07T14:04:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP INDEX

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Convex with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2025-02-14T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide explores Convex's self-hosting capability and demonstrates how to use it with Neon Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) significantly enhances the self-hosted experience, overcoming limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a robust and scalable database option.

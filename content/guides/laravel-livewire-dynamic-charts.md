@@ -4,7 +4,7 @@ subtitle: Learn how to build dynamic charts with Laravel, Livewire, and Neon Pos
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2024-10-20T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Laravel is an amazing PHP framework for building web applications, while Livewire provides a simple way to build dynamic interfaces using PHP.

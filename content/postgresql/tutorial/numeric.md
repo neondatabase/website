@@ -6,7 +6,7 @@ page_description: >-
   NUMERIC column for storing values that precision is required.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/'
 ogImage: ''
-updatedOn: '2024-04-18T12:27:09+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'

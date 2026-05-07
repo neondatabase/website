@@ -6,7 +6,7 @@ page_description: >-
   one or more rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/'
 ogImage: ''
-updatedOn: '2024-01-23T01:09:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPDATE Join

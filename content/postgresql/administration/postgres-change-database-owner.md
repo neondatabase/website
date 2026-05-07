@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgres-change-database-owner/
 ogImage: ''
-updatedOn: '2024-02-22T10:02:54+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How to Get Sizes of Database Objects in PostgreSQL

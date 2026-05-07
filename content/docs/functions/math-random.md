@@ -7,7 +7,7 @@ summary: >-
   Postgres 17 for generating random integers and decimals within specified
   ranges.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.878Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `random()` function generates random floating point values between 0.0 and 1.0. Starting with Postgres 17, it also supports generating random integers or decimals within a specified range using `random(min, max)` syntax.

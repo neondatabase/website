@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-reverse/
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2024-01-28T10:36:42+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REPEAT() Function

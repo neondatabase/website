@@ -6,7 +6,7 @@ page_description: >-
   inner join, left join, right join, and outer join.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-joins/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Inner-Join.png
-updatedOn: '2024-01-17T05:01:10+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL IS NULL

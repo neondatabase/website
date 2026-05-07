@@ -6,7 +6,7 @@ summary: >-
   for optimizing full-text search, including syntax, normalization, and examples
   of its application in querying text data.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.822Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 `tsvector` is a specialized Postgres data type designed for full-text search operations. It represents a document in a form optimized for text search, where each word is reduced to its root form (lexeme) and stored with information about its position and importance.

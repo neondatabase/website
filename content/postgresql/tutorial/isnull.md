@@ -6,7 +6,7 @@ page_description: >-
   COALESCE() function or CASE expression to achieve the same functionality.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-isnull/'
 ogImage: ''
-updatedOn: '2024-02-01T04:01:35+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL COALESCE

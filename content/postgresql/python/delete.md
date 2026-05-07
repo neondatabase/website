@@ -6,7 +6,7 @@ page_description: >-
   program using psycopg database adapter.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/delete/'
 ogImage: ''
-updatedOn: '2024-05-19T08:40:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Handling Binary Data'

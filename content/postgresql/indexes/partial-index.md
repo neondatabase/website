@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/
 ogImage: /postgresqltutorial/customer-table.png
-updatedOn: '2024-02-28T08:55:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Index on Expression

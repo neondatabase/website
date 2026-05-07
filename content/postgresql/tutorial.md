@@ -6,7 +6,7 @@ page_description: >-
   database administrators and application developers.
 prev_url: 'https://www.postgresqltutorial.com/'
 ogImage: /postgresqltutorial/postgresql-tutorial-homepage.svg
-updatedOn: '2024-09-08T01:42:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 ---
 

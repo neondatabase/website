@@ -7,7 +7,7 @@ page_description: >-
   on-demand during query execution, saving storage space and providing automatic
   calculations without the overhead of stored values.
 ogImage: ''
-updatedOn: '2025-06-29T05:50:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Enhanced EXPLAIN

@@ -6,7 +6,7 @@ summary: >-
   detailing available icons, usage guidelines, and best practices for effective
   integration in components.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.063Z'
+updatedOn: '2026-05-04T10:00:54.000Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.

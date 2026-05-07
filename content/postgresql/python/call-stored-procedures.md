@@ -6,7 +6,7 @@ page_description: >-
   a Python program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/'
 ogImage: ''
-updatedOn: '2024-01-29T13:48:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Call PostgreSQL Functions'

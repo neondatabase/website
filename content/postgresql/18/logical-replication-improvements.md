@@ -6,7 +6,7 @@ page_description: >-
   for replicating stored generated columns, improved conflict logging with
   pg_stat_subscription_stats, and improved streaming configuration options.
 ogImage: ''
-updatedOn: '2025-08-09T08:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Array and Bytea Function Improvements

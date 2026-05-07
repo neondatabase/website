@@ -4,7 +4,7 @@ subtitle: A comprehensive guide on optimizing data transfer from Snowflake to Po
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-11-26T00:00:00.000Z'
-updatedOn: '2024-11-26T00:00:00.000Z'
+updatedOn: '2024-12-02T08:26:51.000Z'
 ---
 
 Transferring large datasets can be challenging, especially when dealing with memory constraints and the need for atomic operations. This guide will provide a structured approach to efficiently sync data from Snowflake to Postgres, ensuring minimal memory usage and the ability to rollback in case of errors. In this guide, we will explore an efficient method to sync a large dataset (60 million rows) from Snowflake to Postgres on a nightly basis. We will discuss the challenges faced with the traditional `COPY INTO` method and provide a robust solution using chunking and upsert strategies.

@@ -3,7 +3,7 @@ title: 'Which managed Postgres services let you pay only for active compute inst
 subtitle: 'Compare serverless and fixed-capacity Postgres pricing models.'
 enableTableOfContents: true
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-04-25T03:03:29.000Z'
 isDraft: false
 redirectFrom: []
 ---

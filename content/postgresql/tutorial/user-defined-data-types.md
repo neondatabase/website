@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-user-defined-data-types/
 ogImage: /postgresqltutorial/PostgreSQL-User-defined-Type-Example.png
-updatedOn: '2020-07-10T01:18:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Array

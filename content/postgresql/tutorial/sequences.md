@@ -6,7 +6,7 @@ page_description: >-
   a sequence object to generate a sequence of numbers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/'
 ogImage: /postgresqltutorial/PostgreSQL-Sequence-simple-example.png
-updatedOn: '2024-02-08T06:01:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Using PostgreSQL SERIAL to Create Auto-increment Column

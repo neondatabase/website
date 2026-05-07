@@ -4,7 +4,7 @@ subtitle: Learn how to create a robust RESTful API for an AI Model Marketplace u
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2024-09-15T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django to provide powerful tools for building RESTful APIs quickly and efficiently based on your Django models with minimal code.

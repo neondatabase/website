@@ -6,7 +6,7 @@ summary: >-
   an array along a specified dimension, including examples for data analysis and
   application development.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.853Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `array_length()` function is used to determine the length of an array along a specified dimension.

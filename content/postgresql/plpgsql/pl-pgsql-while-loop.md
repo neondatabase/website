@@ -6,7 +6,7 @@ page_description: >-
   to execute a block of code as long as a condition is true.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-while-loop/'
 ogImage: /postgresqltutorial/plpgsql-WHILE-loop.png
-updatedOn: '2024-03-19T04:00:13+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Loop Statements

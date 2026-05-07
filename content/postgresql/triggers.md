@@ -6,7 +6,7 @@ page_description: >-
   automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2024-04-10T15:08:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Cursor

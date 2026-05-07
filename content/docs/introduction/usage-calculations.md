@@ -6,7 +6,7 @@ summary: >-
   byte-hours and CU-seconds into human-readable billing units, and calculate
   costs using plan rates and allowances.
 enableTableOfContents: true
-updatedOn: '2026-03-27T00:00:00.000Z'
+updatedOn: '2026-05-07T18:15:13.000Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).

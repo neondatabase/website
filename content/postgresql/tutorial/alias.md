@@ -6,7 +6,7 @@ page_description: >-
   a table during the query execution.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alias/'
 ogImage: ''
-updatedOn: '2024-01-17T06:08:13+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Joins

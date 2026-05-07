@@ -6,7 +6,7 @@ page_description: >-
   row variables that hold a complete row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-row-types/'
 ogImage: /postgresqltutorial/actor.png
-updatedOn: '2024-03-19T01:58:41+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Select Into

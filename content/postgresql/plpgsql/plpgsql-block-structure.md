@@ -6,7 +6,7 @@ page_description: >-
   by step how to develop anonymous blocks.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/'
 ogImage: /postgresqltutorial/plpgSQL-block-Structure.png
-updatedOn: '2024-04-19T08:08:48+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Dollar-Quoted String Constants

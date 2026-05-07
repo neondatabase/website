@@ -6,7 +6,7 @@ page_description: >-
   raise a number to a specific power.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-power/'
 ogImage: ''
-updatedOn: '2024-02-17T15:07:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PI() Function

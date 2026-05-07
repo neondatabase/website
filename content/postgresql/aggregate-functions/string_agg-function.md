@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-string_agg-function/
 ogImage: /postgresqltutorial/PostgreSQL-STRING_AGG-function-email-list-example.png
-updatedOn: '2024-01-26T04:07:35+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BOOL_AND() Function

@@ -6,7 +6,7 @@ page_description: >-
   using JDBC API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/update/'
 ogImage: ''
-updatedOn: '2024-02-02T04:57:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Querying Data'

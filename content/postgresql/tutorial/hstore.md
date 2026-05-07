@@ -6,7 +6,7 @@ page_description: >-
   perform practical and useful operations on PostgreSQL hstore columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore/'
 ogImage: /postgresqltutorial/postgresql-hstore-query.jpg
-updatedOn: '2024-02-01T12:53:20+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON

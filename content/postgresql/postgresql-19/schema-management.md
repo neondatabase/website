@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Schema Management and Backup'
 page_title: 'PostgreSQL 19 pg_get_*_ddl() Functions and pg_dumpall Improvements'
 page_description: 'Learn how to use PostgreSQL 19 pg_get_database_ddl, pg_get_role_ddl, pg_get_tablespace_ddl functions and pg_dumpall non-text output formats for better schema management and backup workflows.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Query Improvements'

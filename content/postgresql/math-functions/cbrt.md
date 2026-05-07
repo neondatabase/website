@@ -6,7 +6,7 @@ page_description: >-
   calculate the cube root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-cbrt/'
 ogImage: ''
-updatedOn: '2024-04-18T02:16:40+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CEIL() Function

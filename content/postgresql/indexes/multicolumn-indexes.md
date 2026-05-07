@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/
 ogImage: ''
-updatedOn: '2024-02-28T09:28:50+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Partial Index

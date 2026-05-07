@@ -6,7 +6,7 @@ summary: >-
   applications, including creating read replicas and configuring compute size
   settings for optimized read operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.038Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.

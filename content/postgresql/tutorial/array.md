@@ -6,7 +6,7 @@ page_description: >-
   you to some handy functions for array manipulation.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array/'
 ogImage: ''
-updatedOn: '2024-02-01T12:38:39+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL hstore

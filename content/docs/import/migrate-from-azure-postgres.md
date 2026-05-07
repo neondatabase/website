@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-04-01T22:00:00.000Z'
+updatedOn: '2026-04-01T20:14:28.000Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.

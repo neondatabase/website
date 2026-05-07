@@ -7,7 +7,7 @@ summary: >-
   validate import steps against your destination Postgres provider.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-04-01T20:17:14.000Z'
 ---
 
 This topic describes how to export your **Neon** database to a **Postgres-compatible** archive using the Postgres **`pg_dump`** utility. You get a normal custom-format dump (for example `-Fc`) that any Postgres toolchain can consume.

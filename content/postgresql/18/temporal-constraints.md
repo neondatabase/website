@@ -7,7 +7,7 @@ page_description: >-
   OVERLAPS clause for primary keys and unique constraints, plus the PERIOD
   clause for foreign keys.
 ogImage: ''
-updatedOn: '2025-06-29T04:10:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Enhanced Returning

@@ -6,7 +6,7 @@ summary: >-
   and management through the Neon SDK without direct installation or
   configuration by users.
 enableTableOfContents: true
-updatedOn: '2026-04-09T23:59:58.000Z'
+updatedOn: '2026-04-09T23:15:21.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

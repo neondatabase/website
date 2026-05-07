@@ -5,7 +5,7 @@ summary: >-
   plv8 is deprecated on Neon due to security concerns. New installations are
   blocked; use plpgsql or application-side logic instead.
 enableTableOfContents: false
-updatedOn: '2026-05-01T12:00:00.000Z'
+updatedOn: '2026-05-01T11:17:30.000Z'
 ---
 
 <Admonition type="warning" title="The plv8 extension is deprecated on Neon.">

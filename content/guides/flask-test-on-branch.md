@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Flask and
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2024-09-15T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 [Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes powerful tools for automated testing, with [pytest](https://docs.pytest.org/) being a preferred option due to its simplicity and effectiveness.

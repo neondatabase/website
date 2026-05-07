@@ -6,7 +6,7 @@ page_description: >-
   determine the sign of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sign/'
 ogImage: ''
-updatedOn: '2024-02-17T14:02:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SCALE() Function

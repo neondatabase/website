@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ascii/
 ogImage: /postgresqltutorial/PostgreSQL-ASCII-function-example.png
-updatedOn: '2024-01-29T01:37:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL String Functions

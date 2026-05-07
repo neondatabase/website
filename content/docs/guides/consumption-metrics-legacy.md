@@ -7,7 +7,7 @@ summary: >-
   (active time, compute time, written data, synthetic storage). For usage-based
   plans, use Query consumption metrics instead.
 enableTableOfContents: true
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-05-07T18:15:13.000Z'
 ---
 
 <ConsumptionAccountApiDeprecation/>

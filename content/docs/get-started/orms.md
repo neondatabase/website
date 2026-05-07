@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/orms
-updatedOn: '2026-02-06T22:07:32.890Z'
+updatedOn: '2026-05-04T10:00:54.000Z'
 ---
 
 <TechCards>

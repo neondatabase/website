@@ -6,7 +6,7 @@ page_description: >-
   data in a table based on values in another table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update-join/'
 ogImage: /postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png
-updatedOn: '2024-02-01T08:42:46+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPDATE

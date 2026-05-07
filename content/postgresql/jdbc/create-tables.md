@@ -6,7 +6,7 @@ page_description: >-
   from a Java program using JDBC.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/create-tables/'
 ogImage: ''
-updatedOn: '2024-02-02T04:56:46+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'

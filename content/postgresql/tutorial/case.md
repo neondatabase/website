@@ -6,7 +6,7 @@ page_description: >-
   form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-01T03:34:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How To Delete Duplicate Rows in PostgreSQL

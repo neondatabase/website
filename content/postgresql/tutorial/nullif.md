@@ -6,7 +6,7 @@ page_description: >-
   values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2024-02-01T04:37:20+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISNULL

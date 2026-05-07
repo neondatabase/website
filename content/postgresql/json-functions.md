@@ -6,7 +6,7 @@ page_description: >-
   that allow you to manage JSON data effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/'
 ogImage: ''
-updatedOn: '2024-02-27T06:36:15+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ROW_NUMBER Function

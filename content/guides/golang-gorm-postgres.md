@@ -4,7 +4,7 @@ subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless P
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2025-02-15T00:00:00.000Z'
+updatedOn: '2026-02-15T11:43:50.000Z'
 ---
 
 [GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.

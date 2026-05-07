@@ -6,7 +6,7 @@ page_description: >-
   calculate ages based on two timestamps.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/'
 ogImage: /postgresqltutorial/rental-table.png
-updatedOn: '2024-03-21T04:14:17+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_TIME() Function

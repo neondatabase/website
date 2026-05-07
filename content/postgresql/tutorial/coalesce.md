@@ -6,7 +6,7 @@ page_description: >-
   returns the first non-null argument.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce/'
 ogImage: ''
-updatedOn: '2024-02-01T03:59:29+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CASE

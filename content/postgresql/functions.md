@@ -8,7 +8,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png
-updatedOn: '2025-09-06T10:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Advanced

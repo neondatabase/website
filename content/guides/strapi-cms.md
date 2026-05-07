@@ -4,7 +4,7 @@ subtitle: A step-by-step guide for building your own blog in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2024-06-06T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.

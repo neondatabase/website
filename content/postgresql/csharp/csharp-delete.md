@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/'
 ogImage: ''
-updatedOn: '2024-05-21T03:47:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Updating Data'

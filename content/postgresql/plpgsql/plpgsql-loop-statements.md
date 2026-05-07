@@ -6,7 +6,7 @@ page_description: >-
   statements that execute a block of statements repeatedly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/'
 ogImage: ''
-updatedOn: '2024-03-19T03:57:07+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL CASE Statement

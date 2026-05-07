@@ -6,7 +6,7 @@ page_description: >-
   PL/pgSQL.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-exception/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/film_table.png'
-updatedOn: '2024-03-19T08:01:05+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Continue Statement

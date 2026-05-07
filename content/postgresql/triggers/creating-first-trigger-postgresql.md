@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/
 ogImage: /postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png
-updatedOn: '2024-03-30T03:13:57+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL Trigger

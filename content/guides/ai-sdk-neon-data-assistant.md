@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Slack bot that can safely query your production 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-31T00:00:00.000Z'
-updatedOn: '2026-03-31T00:00:00.000Z'
+updatedOn: '2026-04-02T06:05:49.000Z'
 ---
 
 In many organizations, critical business data lives in a production Postgres database. Product, sales, and marketing teams rely on this information, but direct access is usually restricted to developers and data engineers with SQL expertise. As a result, non-technical teams often face delays: they must request queries, while engineers spend valuable time answering routine data questions.

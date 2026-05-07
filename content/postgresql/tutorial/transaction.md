@@ -6,7 +6,7 @@ page_description: >-
   COMMIT, and ROLLBACK statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction/'
 ogImage: /postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png
-updatedOn: '2024-02-13T15:07:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MERGE Statement

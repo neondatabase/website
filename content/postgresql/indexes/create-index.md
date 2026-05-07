@@ -6,7 +6,7 @@ page_description: >-
   statement to create a new index for a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/'
 ogImage: /postgresqltutorial/address.png
-updatedOn: '2024-02-28T13:06:03+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Indexes

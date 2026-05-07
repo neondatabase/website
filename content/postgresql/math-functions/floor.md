@@ -6,7 +6,7 @@ page_description: >-
   the nearest integer, which is less than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-floor/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-02-25T04:31:17+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FACTORIAL() Function

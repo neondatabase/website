@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Query Writing Improvements'
 page_title: 'PostgreSQL 19 Query Improvements - GROUP BY ALL, IGNORE NULLS, and Memoize Estimates'
 page_description: 'Learn about PostgreSQL 19 query writing improvements including GROUP BY ALL for automatic grouping, IGNORE NULLS for window functions, and Memoize plan estimates in EXPLAIN.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 JSON COPY TO'

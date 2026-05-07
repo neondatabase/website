@@ -6,7 +6,7 @@ page_description: >-
   using the CREATE RECURSIVE VIEW statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/'
 ogImage: ''
-updatedOn: '2024-03-16T04:42:50+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Materialized Views

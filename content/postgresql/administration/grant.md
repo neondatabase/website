@@ -6,7 +6,7 @@ page_description: >-
   grant privileges on database objects to a role.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/'
 ogImage: ''
-updatedOn: '2024-02-22T00:47:34+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE ROLE Statement

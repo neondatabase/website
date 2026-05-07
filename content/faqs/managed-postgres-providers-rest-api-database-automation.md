@@ -3,7 +3,7 @@ title: 'Which managed Postgres providers offer a REST API for creating and delet
 subtitle: 'Programmatic database lifecycle management for automated infrastructure.'
 enableTableOfContents: true
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-04-25T03:03:29.000Z'
 isDraft: false
 redirectFrom: []
 ---

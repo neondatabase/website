@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Codeium Windsurf and 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2025-02-22T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Codeium Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).

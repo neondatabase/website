@@ -6,7 +6,7 @@ summary: >-
   from multiple rows into a single JSON array, including syntax, ordering
   options, and practical examples for data denormalization.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.860Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `json_agg()` function is an aggregate function that collects values from multiple rows and returns them as a single JSON array.

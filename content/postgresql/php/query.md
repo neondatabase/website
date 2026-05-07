@@ -6,7 +6,7 @@ page_description: >-
   tables in the PostgreSQL database using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/query/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Query-Example.png
-updatedOn: '2022-02-09T14:55:54+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'

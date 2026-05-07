@@ -4,7 +4,7 @@ subtitle: Learn how to use Neon Auth Webhooks to build custom authentication flo
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-03-24T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 Neon Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Neon database. By default, Neon Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.

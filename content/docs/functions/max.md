@@ -6,7 +6,7 @@ summary: >-
   value in a dataset, including examples for finding the largest order amount
   and the most recent order date in an orders table.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.880Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 You can use the Postgres `max()` function to find the maximum value in a set of values.

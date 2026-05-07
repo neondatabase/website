@@ -6,7 +6,7 @@ page_description: >-
   JSONB column to improve query performance.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/'
 ogImage: ''
-updatedOn: '2024-03-06T08:18:53+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Full Text Search

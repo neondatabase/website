@@ -6,7 +6,7 @@ summary: >-
   utility and restore it with `pg_restore`, including installation instructions
   and connection string recommendations.
 enableTableOfContents: true
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-04-01T20:17:14.000Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.

@@ -6,7 +6,7 @@ summary: >-
   and handling brief connection drops during the update process.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-16T19:00:00.000Z'
+updatedOn: '2026-04-17T11:58:10.000Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).

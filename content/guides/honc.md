@@ -4,7 +4,7 @@ subtitle: Building a serverless Task API with Hono, Drizzle, Neon, and Cloudflar
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-14T00:00:00.000Z'
-updatedOn: '2025-05-14T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 The [HONC stack](https://honc.dev/) - an acronym for **H**ono, **O**RM (Drizzle), **N**eon, and **C**loudflare - is a modern toolkit for building lightweight, type-safe, and edge-enabled data APIs. It's designed for developers seeking to build fast, serverless applications with a strong emphasis on scalability and a great developer experience.

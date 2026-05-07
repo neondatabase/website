@@ -6,7 +6,7 @@ page_description: >-
   to retrieve distinct rows based on a specific column.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-distinct-on/'
 ogImage: ''
-updatedOn: '2024-01-16T09:44:44+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SELECT DISTINCT

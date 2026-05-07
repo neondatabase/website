@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ''
-updatedOn: '2024-02-07T13:59:52+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'

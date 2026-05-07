@@ -7,7 +7,7 @@ summary: >-
   profiling queries, indexing strategies, and parameter tuning to enhance
   performance and accuracy in AI applications.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.728Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 This guide covers how to use `pgvector` for vector similarity searches. We'll address the following key questions:

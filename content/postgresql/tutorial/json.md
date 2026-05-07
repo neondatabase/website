@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL using the PostgreSQL JSON and JSONB data types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/'
 ogImage: ''
-updatedOn: '2024-02-23T10:29:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: UUID

@@ -4,7 +4,7 @@ subtitle: Learn how to set up Amazon Q Business to query your Neon Postgres data
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-23T00:00:00.000Z'
-updatedOn: '2024-11-23T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 Amazon Q Business enables you to build an interactive chat application that combines your Neon Postgres data with large language model capabilities.

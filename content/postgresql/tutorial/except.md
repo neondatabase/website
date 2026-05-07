@@ -6,7 +6,7 @@ page_description: >-
   two queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/'
 ogImage: /postgresqltutorial/PostgreSQL-EXCEPT-300x202.png
-updatedOn: '2024-07-01T00:51:42+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INTERSECT Operator

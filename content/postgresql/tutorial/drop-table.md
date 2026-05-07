@@ -6,7 +6,7 @@ page_description: >-
   statement to remove one or more tables from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-table/'
 ogImage: ''
-updatedOn: '2024-01-24T10:32:29+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL RENAME COLUMN: Renaming a column'

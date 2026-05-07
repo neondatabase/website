@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2024-11-05T00:00:00.000Z'
+updatedOn: '2026-01-31T14:09:49.000Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.

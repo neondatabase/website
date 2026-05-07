@@ -6,7 +6,7 @@ summary: >-
   to enable it and use its cryptographic functions for encryption,
   decryption, and hashing within Postgres.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.093Z'
+updatedOn: '2026-04-18T12:36:02.000Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.

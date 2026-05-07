@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents using CrewAI, Composio, and
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-01-31T00:00:00.000Z'
-updatedOn: '2025-01-31T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 In today's AI-driven world, the ability to connect intelligent agents with powerful tools is key to building sophisticated applications. Imagine AI agents that can not only think and plan but also seamlessly interact with your database to retrieve information, manage resources, and perform complex tasks. This guide explores exactly that, demonstrating how to harness the power of **CrewAI** for agent orchestration, **Composio** for tool integration, and **Neon API** for database management.

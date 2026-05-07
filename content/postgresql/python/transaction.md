@@ -6,7 +6,7 @@ page_description: >-
   commit() and rollback() methods of the connection object.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/transaction/'
 ogImage: /postgresqltutorial/parts_vendors_tables.png
-updatedOn: '2024-01-29T13:40:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Querying Data'

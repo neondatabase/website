@@ -4,7 +4,7 @@ subtitle: Learn how to set up and use Neon Local and Neon Local Connect for seam
 author: 'dhanush-reddy'
 enableTableOfContents: true
 createdAt: '2025-08-17T00:00:00.000Z'
-updatedOn: '2025-08-17T00:00:00.000Z'
+updatedOn: '2025-08-20T16:09:13.000Z'
 ---
 
 One of Neon's most powerful features is database branching, the ability to instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. This eliminates environment drift, prevents developers from overwriting each other's work on shared staging databases, and ensures every development environment is a perfect, isolated replica of production.

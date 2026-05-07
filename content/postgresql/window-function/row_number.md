@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-window-function/postgresql-row_number/
 ogImage: /postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2024-02-01T15:58:59+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RANK Function

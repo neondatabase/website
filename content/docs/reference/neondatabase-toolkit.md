@@ -7,7 +7,7 @@ summary: >-
   creation of Postgres databases and execution of SQL queries, tailored for AI
   agents and testing environments.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.146Z'
+updatedOn: '2026-03-04T23:56:12.000Z'
 ---
 
 <InfoBlock>

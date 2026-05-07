@@ -6,7 +6,7 @@ page_description: >-
   perform the calculation across the set of rows related to the current row.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png'
-updatedOn: '2021-04-27T01:56:11+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WIDTH_BUCKET() Function

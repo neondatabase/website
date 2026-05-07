@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-list-users/
 ogImage: /postgresqltutorial/PostgreSQL-List-User-Example-1.png
-updatedOn: '2024-02-15T02:21:52+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP ROLE Statement

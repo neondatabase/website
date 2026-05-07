@@ -6,7 +6,7 @@ page_description: >-
   data in a PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/update/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Update.png
-updatedOn: '2022-02-09T15:06:27+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Insert Data Into Tables'

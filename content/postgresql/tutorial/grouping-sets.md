@@ -5,7 +5,7 @@ page_description: "Show you how to use PostgreSQL GROUPING SETS to generate a re
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-grouping-sets/
 ogImage: /postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-1.png
-updatedOn: '2024-07-01T01:00:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL HAVING
