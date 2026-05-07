@@ -83,7 +83,7 @@ Output:
 (5 rows)
 ```
 
-Since the next number of the series is 11 which is higher than the stop value (1\), the function returns a number that stops at 9\.
+Since the next number of the series is 11 which is higher than the stop value (10), the function returns a number that stops at 9\.
 
 ### Generating a series of timestamps
 
@@ -313,4 +313,4 @@ Output:
 
 ## Summary
 
-- Use the `generate_series()` function to create a series of numbers of timestamps.
+- Use the `generate_series()` function to create a series of numbers or timestamps.
