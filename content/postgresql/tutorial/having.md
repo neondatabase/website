@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL GROUPING SETS
   slug: postgresql-tutorial/postgresql-grouping-sets
 ---
+
 <Admonition type="info" id="CTA">
 The HAVING clause works the same across every PostgreSQL deployment, so everything you learn here carries over no matter where you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>

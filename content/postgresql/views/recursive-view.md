@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL List Views
   slug: postgresql-views/postgresql-list-views
 ---
+
 <Admonition type="info" id="CTA">
 Recursive views work the same on any PostgreSQL deployment, so everything you learn here about CREATE RECURSIVE VIEW applies whether you run Postgres yourself or on a managed service. If you need enterprise-grade managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

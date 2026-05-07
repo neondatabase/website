@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Cheat Sheet
   slug: postgresql-cheat-sheet
 ---
+
 <Admonition type="info" id="CTA">
 Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
 </Admonition>

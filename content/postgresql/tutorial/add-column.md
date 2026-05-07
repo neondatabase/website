@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
   slug: postgresql-tutorial/postgresql-drop-column
 ---
+
 <Admonition type="info" id="CTA">
 Adding columns with ALTER TABLE ADD COLUMN works the same on any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: Introduction to PostgreSQL PL/pgSQL
   slug: postgresql-plpgsql/introduction-to-postgresql-stored-procedures
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL is a core part of PostgreSQL, so everything you learn here about functions, procedures, control structures, and triggers works on any Postgres deployment. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

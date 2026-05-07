@@ -16,6 +16,7 @@ nextLink:
   title: Load PostgreSQL Sample Database
   slug: postgresql-getting-started/load-postgresql-sample-database
 ---
+
 <Admonition type="info" id="CTA">
 Connecting to a PostgreSQL server with psql or pgAdmin works the same way across any Postgres deployment, so the steps here apply wherever you run it. For enterprises that want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way.
 </Admonition>

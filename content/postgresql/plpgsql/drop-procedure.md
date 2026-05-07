@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Stored Procedure with INOUT Parameters
   slug: postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters
 ---
+
 <Admonition type="info" id="CTA">
 The DROP PROCEDURE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on a managed service, or in the cloud. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

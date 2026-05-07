@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL ALL Operator
   slug: postgresql-tutorial/postgresql-all
 ---
+
 <Admonition type="info" id="CTA">
 The ANY operator works the same across every PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data live side by side. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform for moving fast without giving up production-grade reliability.
 </Admonition>

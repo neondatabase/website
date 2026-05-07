@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BEFORE UPDATE Trigger
   slug: postgresql-triggers/postgresql-before-update-trigger
 ---
+
 <Admonition type="info" id="CTA">
 AFTER INSERT triggers are a standard PostgreSQL feature, so everything here works on any Postgres deployment. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

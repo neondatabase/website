@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL PI() Function
   slug: postgresql-math-functions/postgresql-pi-function
 ---
+
 <Admonition type="info" id="CTA">
 The min_scale() function works the same across any PostgreSQL 13 or newer deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

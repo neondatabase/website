@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LOCALTIME Function
   slug: postgresql-date-functions/postgresql-localtime
 ---
+
 <Admonition type="info" id="CTA">
 The NOW() function works the same across every PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup looking to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed.
 </Admonition>

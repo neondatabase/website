@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ALTER SCHEMA
   slug: postgresql-administration/postgresql-alter-schema
 ---
+
 <Admonition type="info" id="CTA">
 The CREATE SCHEMA statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop or in production. If you're an enterprise organizing schemas across analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed, with instant provisioning, branching, and serverless economics.
 </Admonition>

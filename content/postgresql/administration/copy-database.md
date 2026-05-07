@@ -16,6 +16,7 @@ nextLink:
   title: How to Get Sizes of Database Objects in PostgreSQL
   slug: postgresql-administration/postgresql-database-indexes-table-size
 ---
+
 <Admonition type="info" id="CTA">
 Copying a PostgreSQL database with CREATE DATABASE WITH TEMPLATE or pg_dump works the same on any Postgres deployment, so the techniques here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

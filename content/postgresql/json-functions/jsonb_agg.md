@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_object_agg() Function
   slug: postgresql-json-functions/postgresql-jsonb_object_agg
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_agg()` function works the same on any standard PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise standardizing on a Lakehouse and want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native integration you need. If you're a developer or startup who wants to ship fast and scale without managing infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

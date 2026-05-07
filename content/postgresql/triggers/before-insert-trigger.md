@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL AFTER INSERT Trigger
   slug: postgresql-triggers/postgresql-after-insert-trigger
 ---
+
 <Admonition type="info" id="CTA">
 BEFORE INSERT triggers work the same in any PostgreSQL database, so what you learn here applies wherever you run Postgres. If you're an enterprise looking for a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

@@ -19,6 +19,7 @@ nextLink:
   title: PostgreSQL 18 pg_stat_io Improvements
   slug: postgresql-18/pg-stat-io
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's security improvements, including wire protocol 3.2, 256-bit cancel keys, TLS 1.3 cipher controls, and FIPS validation, apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise operating in the AI era and need managed Postgres that's secure, performant, and fully integrated with the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice. If you're a developer or startup who needs to ship quickly and scale without friction, Neon gives you the fastest path from idea to production Postgres.
 </Admonition>

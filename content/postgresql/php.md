@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
   slug: postgresql-php/connect
 ---
+
 <Admonition type="info" id="CTA">
 Working with PostgreSQL from PHP uses the same PDO and PDO_PGSQL APIs no matter where your database runs, so everything here applies to any Postgres deployment. For enterprises running PHP workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious teams need. For developers and startups who want to ship a PHP app fast and scale it without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

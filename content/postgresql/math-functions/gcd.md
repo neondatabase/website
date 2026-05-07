@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LCM() Function
   slug: postgresql-math-functions/postgresql-lcm
 ---
+
 <Admonition type="info" id="CTA">
 The `gcd()` function works on any PostgreSQL 13 or later deployment, so everything you learn here carries over to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to match your pace.
 </Admonition>

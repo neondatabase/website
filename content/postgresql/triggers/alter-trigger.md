@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BEFORE INSERT Trigger
   slug: postgresql-triggers/postgresql-before-insert-trigger
 ---
+
 <Admonition type="info" id="CTA">
 The `ALTER TRIGGER` statement works the same in any PostgreSQL database, so you can apply what you learn here on any Postgres instance. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL INSTEAD OF Triggers
   slug: postgresql-triggers/postgresql-instead-of-triggers
 ---
+
 <Admonition type="info" id="CTA">
 AFTER DELETE triggers work the same on any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse so your triggers, audit logs, and downstream analytics live in one place. If you're a developer or startup who needs to ship fast and scale without ops overhead, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

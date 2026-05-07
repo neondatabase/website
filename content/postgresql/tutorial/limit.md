@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL FETCH
   slug: postgresql-tutorial/postgresql-fetch
 ---
+
 <Admonition type="info" id="CTA">
 The LIMIT clause works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on a managed service, or in the cloud. If you're an enterprise looking for the best managed Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
 </Admonition>

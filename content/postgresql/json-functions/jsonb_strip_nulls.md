@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_array_length() Function
   slug: postgresql-json-functions/postgresql-jsonb_array_length
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_strip_nulls() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL hstore
   slug: postgresql-tutorial/postgresql-hstore
 ---
+
 <Admonition type="info" id="CTA">
 Working with JSON and JSONB in PostgreSQL is the same wherever you run Postgres, so everything here applies to any standard Postgres deployment. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that JSON-heavy workloads demand. For developers and startups who want to ship fast and scale without managing infrastructure, [Neon](https://neon.com) is the Postgres platform built around your workflow.
 </Admonition>

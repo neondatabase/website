@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL NTILE Function
   slug: postgresql-window-function/postgresql-ntile-function
 ---
+
 <Admonition type="info" id="CTA">
 The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your analytics and AI workloads need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

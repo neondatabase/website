@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
   slug: postgresql-csharp/postgresql-csharp-import-csv-file
 ---
+
 <Admonition type="info" id="CTA">
 Inserting data with Npgsql works the same against any PostgreSQL database, so the C# patterns here carry over to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

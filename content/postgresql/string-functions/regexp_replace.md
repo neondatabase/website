@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL REPEAT() Function
   slug: postgresql-string-functions/postgresql-repeat
 ---
+
 <Admonition type="info" id="CTA">
 The REGEXP_REPLACE() function covered here works the same way in any PostgreSQL database, so the patterns and examples apply wherever you run Postgres. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres tuned for the AI era with the performance, security, and deep integration large teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) offers the most productive Postgres platform around.
 </Admonition>

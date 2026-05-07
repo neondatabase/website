@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_object() Function
   slug: postgresql-json-functions/postgresql-jsonb_object
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_build_object()` function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship features and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

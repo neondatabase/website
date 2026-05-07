@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Create Tables'
   slug: postgresql-python/create-tables
 ---
+
 <Admonition type="info" id="CTA">
 Connecting to PostgreSQL from Python with psycopg2 works the same against any Postgres instance, so everything here applies whether you run Postgres locally, in your own infrastructure, or on a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) offers the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse so your operational and analytical data live together. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

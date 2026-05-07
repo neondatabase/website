@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BOOL_AND() Function
   slug: postgresql-aggregate-functions/postgresql-bool_and
 ---
+
 <Admonition type="info" id="CTA">
 The `ARRAY_AGG()` function works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way.
 </Admonition>

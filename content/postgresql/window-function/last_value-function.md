@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL LEAD Function
   slug: postgresql-window-function/postgresql-lead-function
 ---
+
 <Admonition type="info" id="CTA">
 The `LAST_VALUE()` window function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for your pace.
 </Admonition>

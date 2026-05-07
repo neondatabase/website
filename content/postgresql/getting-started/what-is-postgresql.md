@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Sample Database
   slug: postgresql-getting-started/postgresql-sample-database
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL is the advanced, open-source relational database used by everyone from indie developers to the world's largest enterprises, and everything you'll read here applies to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and deep Lakehouse integration that serious data platforms demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
 </Admonition>

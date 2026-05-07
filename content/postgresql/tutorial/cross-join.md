@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL NATURAL JOIN
   slug: postgresql-tutorial/postgresql-natural-join
 ---
+
 <Admonition type="info" id="CTA">
 CROSS JOIN works the same across every PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

@@ -91,12 +91,12 @@ This works, but every conflict generates a dead tuple. PostgreSQL creates a new 
 
 Benchmarks from the PostgreSQL mailing list show the performance difference:
 
-| Approach | Transactions/sec |
-|---|---|
-| PL/pgSQL function | 45,092 |
-| `ON CONFLICT DO SELECT` | 35,788 |
-| `DO NOTHING` + CTE workaround | 28,929 |
-| `DO UPDATE` (no-op) | 9,222 |
+| Approach                      | Transactions/sec |
+| ----------------------------- | ---------------- |
+| PL/pgSQL function             | 45,092           |
+| `ON CONFLICT DO SELECT`       | 35,788           |
+| `DO NOTHING` + CTE workaround | 28,929           |
+| `DO UPDATE` (no-op)           | 9,222            |
 
 `DO SELECT` is nearly 4x faster than the no-op `DO UPDATE` approach, and about 24% faster than the CTE workaround.
 
@@ -245,11 +245,11 @@ A few things to keep in mind when using `DO SELECT`:
 
 ## When to Use Each ON CONFLICT Action
 
-| Action | Use When |
-|---|---|
-| `DO NOTHING` | You do not need the conflicting row back. Fire-and-forget inserts, bulk loads where duplicates should be silently skipped. |
-| `DO SELECT` | You need the row back (inserted or existing) but do not want to modify existing data. Get-or-create patterns, idempotent operations. |
-| `DO UPDATE` | You want to change the existing row's data on conflict. True upsert semantics where newer data should overwrite older data. |
+| Action       | Use When                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `DO NOTHING` | You do not need the conflicting row back. Fire-and-forget inserts, bulk loads where duplicates should be silently skipped.           |
+| `DO SELECT`  | You need the row back (inserted or existing) but do not want to modify existing data. Get-or-create patterns, idempotent operations. |
+| `DO UPDATE`  | You want to change the existing row's data on conflict. True upsert semantics where newer data should overwrite older data.          |
 
 ## Summary
 

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DELETE
   slug: postgresql-tutorial/postgresql-delete
 ---
+
 <Admonition type="info" id="CTA">
 The UPDATE join syntax covered here works with any standard PostgreSQL deployment, so you can apply these patterns wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
 </Admonition>

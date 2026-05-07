@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Generated Columns
   slug: postgresql-tutorial/postgresql-generated-columns
 ---
+
 <Admonition type="info" id="CTA">
 The GENERATED AS IDENTITY constraint works the same across every PostgreSQL deployment, so everything you learn here about identity columns applies to Postgres wherever you run it. If you're an enterprise standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed cloud Postgres that's fast, secure, and natively integrated with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

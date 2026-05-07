@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CLOCK_TIMESTAMP() Function
   slug: postgresql-date-functions/postgresql-clock_timestamp
 ---
+
 <Admonition type="info" id="CTA">
 CURRENT_TIMESTAMP is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed, secure, high-performance database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production Postgres.
 </Admonition>

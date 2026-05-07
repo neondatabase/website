@@ -340,16 +340,16 @@ For fixed-depth relationship queries (friend-of-friend, 2-3 hop patterns, direct
 
 ## SQL/PGQ vs. Other Graph Solutions
 
-| | SQL/PGQ (PG 19) | Apache AGE | Neo4j |
-|---|---|---|---|
-| Language | SQL standard (ISO 2023) | Cypher via extension | Cypher |
-| Storage | Existing tables | Extension storage | Native graph DB |
-| Variable-length paths | Not yet | Yes | Yes |
-| Shortest path | Not yet | Limited | Yes |
-| Installation | Built-in | Extension required | Separate database |
-| Standards-based | Yes (SQL:2023) | No | No |
-| Indexes | Uses existing PG indexes | Own indexes | Own indexes |
-| Full SQL support | Yes (joins, CTEs, window functions) | Limited SQL interop | No SQL |
+|                       | SQL/PGQ (PG 19)                     | Apache AGE           | Neo4j             |
+| --------------------- | ----------------------------------- | -------------------- | ----------------- |
+| Language              | SQL standard (ISO 2023)             | Cypher via extension | Cypher            |
+| Storage               | Existing tables                     | Extension storage    | Native graph DB   |
+| Variable-length paths | Not yet                             | Yes                  | Yes               |
+| Shortest path         | Not yet                             | Limited              | Yes               |
+| Installation          | Built-in                            | Extension required   | Separate database |
+| Standards-based       | Yes (SQL:2023)                      | No                   | No                |
+| Indexes               | Uses existing PG indexes            | Own indexes          | Own indexes       |
+| Full SQL support      | Yes (joins, CTEs, window functions) | Limited SQL interop  | No SQL            |
 
 The biggest advantage of SQL/PGQ: it works on your existing tables with your existing indexes. No data migration, no extension installation, no separate system to maintain.
 

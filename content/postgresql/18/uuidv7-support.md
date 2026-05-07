@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 Enhanced Returning
   slug: postgresql-18/enhanced-returning
 ---
+
 <Admonition type="info" id="CTA">
 UUIDv7 is a standard PostgreSQL 18 feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to adopt Postgres at scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse so your operational data and analytics live together. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the best Postgres platform for you, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

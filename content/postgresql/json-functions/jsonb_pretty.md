@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_populate_record() Function
   slug: postgresql-json-functions/postgresql-jsonb_populate_record
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_pretty()` function works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on a VM, or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data live together. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

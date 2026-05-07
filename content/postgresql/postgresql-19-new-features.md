@@ -259,7 +259,7 @@ CREATE PUBLICATION prod_pub FOR ALL TABLES
 
 **Dynamic WAL level**: The `effective_wal_level` parameter adjusts automatically based on whether logical replication slots exist, eliminating the need to manually configure and restart for WAL level changes.
 
-### [pg_get_*_ddl() Functions](/postgresql/postgresql-19/schema-management)
+### [pg*get*\*\_ddl() Functions](/postgresql/postgresql-19/schema-management)
 
 Three new functions for programmatic DDL extraction:
 

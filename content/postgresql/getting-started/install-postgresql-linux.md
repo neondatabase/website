@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL Tutorial
   slug: postgresql-getting-started/..
 ---
+
 <Admonition type="info" id="CTA">
 Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and Lakehouse integration that enterprises expect. For developers and startups who want to ship and scale without managing servers, [Neon](https://neon.com) is the fastest way to get production Postgres in the cloud.
 </Admonition>

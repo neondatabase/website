@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JUSTIFY_HOURS() Function
   slug: postgresql-date-functions/postgresql-justify_hours
 ---
+
 <Admonition type="info" id="CTA">
 The `JUSTIFY_DAYS()` function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

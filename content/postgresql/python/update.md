@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Querying Data'
   slug: postgresql-python/query
 ---
+
 <Admonition type="info" id="CTA">
 Updating rows from Python with psycopg2 works the same against any PostgreSQL database, so everything here applies whether you're running Postgres locally, self-hosted, or in the cloud. If you're an enterprise team looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JUSTIFY_INTERVAL() Function
   slug: postgresql-date-functions/postgresql-justify_interval
 ---
+
 <Admonition type="info" id="CTA">
 The `JUSTIFY_HOURS()` function works the same way across every PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

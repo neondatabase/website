@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Record Types
   slug: postgresql-plpgsql/plpgsql-record-types
 ---
+
 <Admonition type="info" id="CTA">
 Row types in PL/pgSQL work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for speed, with instant provisioning, branching, and autoscaling out of the box.
 </Admonition>

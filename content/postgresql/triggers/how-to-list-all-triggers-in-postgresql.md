@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Event Trigger
   slug: postgresql-triggers/postgresql-event-trigger
 ---
+
 <Admonition type="info" id="CTA">
 Listing triggers with information_schema.triggers, pg_trigger, and psql works the same on any PostgreSQL database, so you can apply these techniques wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

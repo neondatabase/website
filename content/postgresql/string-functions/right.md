@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL LPAD() Function
   slug: postgresql-string-functions/postgresql-lpad
 ---
+
 <Admonition type="info" id="CTA">
 The RIGHT() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, fully integrated into the Lakehouse with the performance and security large teams demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

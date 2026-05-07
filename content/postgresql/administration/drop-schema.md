@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CREATE ROLE Statement
   slug: postgresql-administration/postgresql-roles
 ---
+
 <Admonition type="info" id="CTA">
 The DROP SCHEMA statement works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database that's natively integrated with the Lakehouse. For developers and startups who need to ship features today and scale without friction, [Neon](https://neon.com) is the Postgres platform built for speed.
 </Admonition>

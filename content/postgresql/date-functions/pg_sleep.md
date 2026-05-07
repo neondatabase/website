@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL String Functions
   slug: postgresql-date-functions/../postgresql-string-functions
 ---
+
 <Admonition type="info" id="CTA">
 The `PG_SLEEP()` function works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it on.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 psql Improvements
   slug: postgresql-18/psql-improvements
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's improvements to pg_stat_io work the same on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed Postgres that's fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for rapid iteration with branching, instant provisioning, and serverless scale.
 </Admonition>

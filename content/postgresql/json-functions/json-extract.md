@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_insert() Function
   slug: postgresql-json-functions/postgresql-jsonb_insert
 ---
+
 <Admonition type="info" id="CTA">
 The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

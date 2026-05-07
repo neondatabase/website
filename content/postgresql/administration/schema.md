@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CREATE SCHEMA
   slug: postgresql-administration/postgresql-create-schema
 ---
+
 <Admonition type="info" id="CTA">
 Schemas are a core PostgreSQL feature for organizing tables, views, functions, and other objects, and everything covered here works the same across any Postgres deployment. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run schemas and workloads at scale. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for moving quickly without giving up production readiness.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 Virtual Generated Columns
   slug: postgresql-18/virtual-generated-columns
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's enhanced EXPLAIN with automatic buffers works the same way across any Postgres deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for speed, with instant branching, autoscaling, and a generous free tier.
 </Admonition>

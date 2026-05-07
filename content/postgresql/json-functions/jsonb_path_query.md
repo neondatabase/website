@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_path_query_array() Function
   slug: postgresql-json-functions/postgresql-jsonb_path_query_array
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_path_query()` function works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

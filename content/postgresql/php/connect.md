@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL PHP: Create New Tables'
   slug: postgresql-php/create-tables
 ---
+
 <Admonition type="info" id="CTA">
 Connecting to PostgreSQL with PHP PDO works the same way on any standard Postgres deployment, so the patterns shown here apply wherever you run your database. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

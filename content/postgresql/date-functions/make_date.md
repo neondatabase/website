@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL MAKE_TIME() Function
   slug: postgresql-date-functions/postgresql-make_time
 ---
+
 <Admonition type="info" id="CTA">
 The MAKE_DATE() function works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres on your laptop, in your data center, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for your velocity.
 </Admonition>

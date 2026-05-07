@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Interval Data Type
   slug: postgresql-tutorial/postgresql-interval
 ---
+
 <Admonition type="info" id="CTA">
 Working with timestamp and timestamptz is core PostgreSQL behavior, so everything here applies whether you run Postgres on your laptop, in your own data center, or on any managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated into the Lakehouse. If you're a developer or startup who needs to ship features and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for your speed.
 </Admonition>

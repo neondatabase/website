@@ -15,6 +15,7 @@ nextLink:
   title: Creating PostgreSQL Updatable Views
   slug: postgresql-views/postgresql-updatable-views
 ---
+
 <Admonition type="info" id="CTA">
 The DROP VIEW syntax covered here works on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JSONB Operators
   slug: postgresql-json-functions/postgresql-jsonb-operators
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_path_exists() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise team standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
 </Admonition>

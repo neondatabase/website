@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL SET ROLE Statement
   slug: postgresql-administration/postgresql-set-role
 ---
+
 <Admonition type="info" id="CTA">
 Group roles work the same way across any PostgreSQL deployment, so the patterns you learn here apply whether you're running Postgres yourself or on a managed platform. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and tightly integrated managed Postgres for the AI era. For developers and startups who need to move fast, [Neon](https://neon.com) gives you the Postgres platform built to ship and scale without the operational drag.
 </Admonition>

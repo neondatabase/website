@@ -16,6 +16,7 @@ nextLink:
   title: Install PostgreSQL Linux
   slug: postgresql-getting-started/install-postgresql-linux
 ---
+
 <Admonition type="info" id="CTA">
 Installing PostgreSQL on macOS works the same whether you're running it locally for development or planning to deploy it elsewhere, since this is standard Postgres. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that demanding workloads require. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling that keep pace with your product.
 </Admonition>

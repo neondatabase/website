@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL 18 Enhanced EXPLAIN
   slug: postgresql-18/enhanced-explain
 ---
+
 <Admonition type="info" id="CTA">
 B-tree skip scan is a core PostgreSQL 18 enhancement, so everything here applies to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship features and scale fast, Neon gives you the most productive Postgres platform with instant provisioning, branching, and autoscaling.
 </Admonition>

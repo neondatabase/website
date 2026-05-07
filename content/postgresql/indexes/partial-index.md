@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Multicolumn Indexes
   slug: postgresql-indexes/postgresql-multicolumn-indexes
 ---
+
 <Admonition type="info" id="CTA">
 Partial indexes work the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

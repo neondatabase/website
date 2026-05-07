@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL RIGHT JOIN
   slug: postgresql-tutorial/postgresql-right-join
 ---
+
 <Admonition type="info" id="CTA">
 LEFT JOIN is a standard part of PostgreSQL, so everything here works on any Postgres database, wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

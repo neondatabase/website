@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CURRENT_TIMESTAMP Function
   slug: postgresql-date-functions/postgresql-current_timestamp
 ---
+
 <Admonition type="info" id="CTA">
 The CURRENT_TIME function behaves the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres on your laptop, on a cloud VM, or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

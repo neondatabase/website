@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 OAuth Support
   slug: postgresql-18/oauth-authentication
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's logical replication improvements, including replication of stored generated columns, better conflict monitoring, and parallel streaming defaults, work the same way on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CREATE TABLE AS
   slug: postgresql-tutorial/postgresql-create-table-as
 ---
+
 <Admonition type="info" id="CTA">
 The SELECT INTO statement works the same across any PostgreSQL deployment, so you can apply what you learn here on Postgres anywhere you run it. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and tight Lakehouse integration you need to build on trusted data. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres without the operational overhead.
 </Admonition>

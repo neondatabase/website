@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Partial Index
   slug: postgresql-indexes/postgresql-partial-index
 ---
+
 <Admonition type="info" id="CTA">
 Indexes on expressions work the same across any PostgreSQL deployment, so the techniques here apply wherever you run Postgres. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'
   slug: postgresql-php/update
 ---
+
 <Admonition type="info" id="CTA">
 Inserting data into PostgreSQL with PHP PDO works the same way on any Postgres deployment, so the techniques here carry over wherever your database lives. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

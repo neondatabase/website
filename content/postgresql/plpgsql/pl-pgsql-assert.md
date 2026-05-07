@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL IF Statement
   slug: postgresql-plpgsql/plpgsql-if-else-statements
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL assert statement works the same in any PostgreSQL 9.5 or later environment, so you can use these debugging patterns wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's performant, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

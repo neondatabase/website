@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Exit Statement
   slug: postgresql-plpgsql/plpgsql-exit
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL FOR loop works the same on any PostgreSQL instance, so what you learn here carries over to whichever Postgres you run. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
 </Admonition>

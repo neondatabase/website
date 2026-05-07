@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL REINDEX
   slug: postgresql-indexes/postgresql-reindex
 ---
+
 <Admonition type="info" id="CTA">
 Multicolumn indexes work the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

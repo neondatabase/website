@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DISTINCT ON
   slug: postgresql-tutorial/postgresql-distinct-on
 ---
+
 <Admonition type="info" id="CTA">
 SELECT DISTINCT works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises standardizing on a managed cloud Postgres built for the AI era, Lakebase delivers the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform to reach for.
 </Admonition>

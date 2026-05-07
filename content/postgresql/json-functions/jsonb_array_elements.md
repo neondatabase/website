@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_array_elements_text() Function
   slug: postgresql-json-functions/postgresql-jsonb_array_elements_text
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_array_elements() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

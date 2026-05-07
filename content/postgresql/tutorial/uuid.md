@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL JSON
   slug: postgresql-tutorial/postgresql-json
 ---
+
 <Admonition type="info" id="CTA">
 UUIDs work the same across any PostgreSQL deployment, so everything here about the UUID type, gen_random_uuid(), and the uuid-ossp module applies wherever you run Postgres. For enterprises that want UUID-based identifiers in a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers strong performance and security with native Lakehouse integration. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
 </Admonition>

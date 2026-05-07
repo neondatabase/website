@@ -94,13 +94,13 @@ PostgreSQL 19 adds the SQL-standard `IGNORE NULLS` and `RESPECT NULLS` options t
 
 ### Supported Functions
 
-| Function | What IGNORE NULLS does |
-|---|---|
+| Function        | What IGNORE NULLS does                               |
+| --------------- | ---------------------------------------------------- |
 | `first_value()` | Returns the first non-null value in the window frame |
-| `last_value()` | Returns the last non-null value in the window frame |
-| `nth_value()` | Returns the Nth non-null value in the window frame |
-| `lag()` | Looks back, skipping null rows |
-| `lead()` | Looks forward, skipping null rows |
+| `last_value()`  | Returns the last non-null value in the window frame  |
+| `nth_value()`   | Returns the Nth non-null value in the window frame   |
+| `lag()`         | Looks back, skipping null rows                       |
+| `lead()`        | Looks forward, skipping null rows                    |
 
 `RESPECT NULLS` is the default and preserves existing behavior (nulls are included as normal values).
 
@@ -236,12 +236,12 @@ The Memoize node now includes an `Estimates` line:
 
 ### Understanding the Estimates
 
-| Metric | Meaning |
-|---|---|
-| **capacity** | How many entries the cache can hold (based on `work_mem`) |
-| **distinct keys** | Estimated number of unique lookup keys |
-| **lookups** | Expected total number of cache lookups |
-| **hit percent** | Projected cache hit ratio |
+| Metric            | Meaning                                                   |
+| ----------------- | --------------------------------------------------------- |
+| **capacity**      | How many entries the cache can hold (based on `work_mem`) |
+| **distinct keys** | Estimated number of unique lookup keys                    |
+| **lookups**       | Expected total number of cache lookups                    |
+| **hit percent**   | Projected cache hit ratio                                 |
 
 In the example above, the planner estimates 5 distinct user IDs across 10,000 orders, with a cache capacity of 6. Since all 5 keys fit in the cache, the estimated hit rate is 99.95%.
 

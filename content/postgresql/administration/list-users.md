@@ -16,6 +16,7 @@ nextLink:
   title: How to Change the Password of a PostgreSQL User
   slug: postgresql-administration/postgresql-change-password
 ---
+
 <Admonition type="info" id="CTA">
 Listing users with `\du` or by querying `pg_catalog.pg_user` works the same on any PostgreSQL deployment, so you can apply these techniques wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need to govern roles and data at scale. If you're a developer or startup who needs to ship fast and scale on demand, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>

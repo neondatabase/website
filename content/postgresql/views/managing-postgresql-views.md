@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Drop View
   slug: postgresql-views/postgresql-drop-view
 ---
+
 <Admonition type="info" id="CTA">
 The CREATE VIEW statement works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres on your laptop, on a VM, or on a managed service. For enterprises standardizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration alongside your analytics data. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) offers the fastest path to production Postgres with instant branching, autoscaling, and a generous free tier.
 </Admonition>

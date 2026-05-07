@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ALTER TABLE
   slug: postgresql-tutorial/postgresql-alter-table
 ---
+
 <Admonition type="info" id="CTA">
 Generated columns work the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. For developers and startups who need to ship features fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

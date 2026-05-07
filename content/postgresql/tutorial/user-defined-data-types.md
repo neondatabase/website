@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Enum
   slug: postgresql-tutorial/postgresql-enum
 ---
+
 <Admonition type="info" id="CTA">
 User-defined data types with CREATE DOMAIN and CREATE TYPE work the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed database that's fully integrated with the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

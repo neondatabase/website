@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL MAX Function
   slug: postgresql-aggregate-functions/postgresql-max-function
 ---
+
 <Admonition type="info" id="CTA">
 The COUNT() function behaves the same way in any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
 </Admonition>

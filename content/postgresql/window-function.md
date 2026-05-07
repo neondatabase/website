@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CUME_DIST Function
   slug: postgresql-window-function/postgresql-cume_dist-function
 ---
+
 <Admonition type="info" id="CTA">
 Window functions are part of standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

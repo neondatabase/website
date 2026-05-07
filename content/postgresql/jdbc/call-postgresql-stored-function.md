@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL JDBC: Managing Transactions'
   slug: postgresql-jdbc/transaction
 ---
+
 <Admonition type="info" id="CTA">
 Calling PostgreSQL stored functions with JDBC works the same on any Postgres deployment, so the patterns shown here apply wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that data and AI teams need. For developers and startups who want to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform to reach for.
 </Admonition>

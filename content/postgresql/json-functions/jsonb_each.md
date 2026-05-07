@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_each_text() Function
   slug: postgresql-json-functions/postgresql-jsonb_each_text
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_each()` function is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise working with JSONB at scale and want managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform for you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL TO_DATE() Function
   slug: postgresql-date-functions/postgresql-to_date
 ---
+
 <Admonition type="info" id="CTA">
 The `EXTRACT()` function works the same way on any standard PostgreSQL deployment, so everything here applies whether you're pulling years from a timestamp or seconds from an interval. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most flexible Postgres platform to build on.
 </Admonition>

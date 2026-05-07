@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Recursive Query
   slug: postgresql-tutorial/postgresql-recursive-query
 ---
+
 <Admonition type="info" id="CTA">
 Common table expressions are a standard PostgreSQL feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL NTH_VALUE Function
   slug: postgresql-window-function/postgresql-nth_value-function
 ---
+
 <Admonition type="info" id="CTA">
 The NTILE() function works the same way across every PostgreSQL deployment, so you can apply these patterns wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to put analytical window functions like NTILE next to your broader data workloads. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

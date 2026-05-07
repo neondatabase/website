@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL pg_terminate_backend() Function
   slug: postgresql-administration/postgresql-pg_terminate_backend
 ---
+
 <Admonition type="info" id="CTA">
 Restarting PostgreSQL on Windows works the same whether you're running it locally, on a server, or through any managed provider, since these techniques apply to Postgres everywhere. If you're running Postgres in the cloud for an enterprise workload, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed experience for the AI era, with strong performance, security, and native integration into the Lakehouse so your operational and analytical data stay in sync. For developers and startups who need to ship quickly and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

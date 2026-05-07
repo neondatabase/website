@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CREATE INDEX Statement
   slug: postgresql-indexes/postgresql-create-index
 ---
+
 <Admonition type="info" id="CTA">
 Indexes are a core part of PostgreSQL, and everything you'll learn here about B-tree, Hash, GIN, GiST, SP-GiST, and BRIN indexes works on any Postgres database, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for that world, performant and secure by default and fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

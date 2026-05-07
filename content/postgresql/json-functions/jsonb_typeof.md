@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL jsonb_pretty() Function
   slug: postgresql-json-functions/postgresql-jsonb_pretty
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_typeof()` function works the same way on any PostgreSQL deployment, so what you learn here applies wherever you run Postgres. If you're an enterprise building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres for the AI era with the performance, security, and integration your data platform demands. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

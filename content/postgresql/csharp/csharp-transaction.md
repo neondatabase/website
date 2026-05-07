@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL C#: Call a PostgreSQL Function'
   slug: postgresql-csharp/postgresql-csharp-call-postgresql-function
 ---
+
 <Admonition type="info" id="CTA">
 Running transactions from C# with Npgsql works the same against any PostgreSQL database, so everything here applies whether you're on a local instance, a self-managed cluster, or a cloud service. For enterprises standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, secure, and high-performance database that plugs directly into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to get you from prototype to production fast.
 </Admonition>

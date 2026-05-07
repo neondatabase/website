@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL PHP: Transaction'
   slug: postgresql-php/transaction
 ---
+
 <Admonition type="info" id="CTA">
 Querying PostgreSQL from PHP with PDO works the same wherever your database runs, so the patterns here apply to any Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
 </Admonition>

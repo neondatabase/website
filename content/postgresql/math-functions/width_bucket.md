@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Window Functions
   slug: postgresql-math-functions/../postgresql-window-function
 ---
+
 <Admonition type="info" id="CTA">
 The WIDTH_BUCKET() function works the same across any PostgreSQL deployment, so the techniques here for binning numeric data and building histograms apply whether you're running Postgres on your laptop, in your own cluster, or on a managed service. For enterprises standardizing on AI and analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance and security built directly into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that keeps up with you.
 </Admonition>

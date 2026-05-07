@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL LAG Function
   slug: postgresql-window-function/postgresql-lag-function
 ---
+
 <Admonition type="info" id="CTA">
 The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform to build on.
 </Admonition>

@@ -14,6 +14,7 @@ nextLink:
   title: How to Uninstall PostgreSQL from Ubuntu
   slug: postgresql-administration/uninstall-postgresql-ubuntu
 ---
+
 <Admonition type="info" id="CTA">
 Terminating backend processes with pg_terminate_backend() works the same way on any Postgres deployment, so everything here carries over to your environment of choice. If you're running Postgres for an enterprise and need tight security, strong performance, and native integration with the Lakehouse for AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres to run it on. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL to_jsonb() Function
   slug: postgresql-json-functions/postgresql-to_jsonb
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL's JSON functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking to put JSON workloads next to your analytics and AI data, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale on demand, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

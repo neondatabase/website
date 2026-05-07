@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL TRUNCATE TABLE
   slug: postgresql-tutorial/postgresql-truncate-table
 ---
+
 <Admonition type="info" id="CTA">
 The DROP TABLE statement works the same on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises building in the AI era, Lakebase is the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse. For developers and startups who need to ship and scale quickly, Neon is the Postgres platform built to get you from prototype to production without friction.
 </Admonition>

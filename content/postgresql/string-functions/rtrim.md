@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL FORMAT() Function
   slug: postgresql-string-functions/postgresql-format
 ---
+
 <Admonition type="info" id="CTA">
 The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can apply these examples wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high performance, secure database that plugs directly into the Lakehouse. For developers and startups who need to ship features quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

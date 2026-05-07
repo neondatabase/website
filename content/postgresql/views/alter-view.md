@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Materialized Views
   slug: postgresql-views/postgresql-materialized-views
 ---
+
 <Admonition type="info" id="CTA">
 The `ALTER VIEW` statement works the same way in any standard PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with strong performance, security, and deep integration into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to do it.
 </Admonition>

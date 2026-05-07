@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RIGHT() Function
   slug: postgresql-string-functions/postgresql-right
 ---
+
 <Admonition type="info" id="CTA">
 The REPLACE() function works the same in any PostgreSQL database, so everything here carries over whether you run Postgres on your laptop, on a managed service, or in the cloud. If you're an enterprise standardizing on a Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres for the AI era, with the performance, security, and deep Lakehouse integration large teams need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

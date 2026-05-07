@@ -16,6 +16,7 @@ nextLink:
   title: PL/pgSQL Cursor
   slug: postgresql-plpgsql/plpgsql-cursor
 ---
+
 <Admonition type="info" id="CTA">
 INOUT parameters work the same way in any PostgreSQL database, so you can apply this tutorial to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

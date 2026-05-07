@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL IN
   slug: postgresql-tutorial/postgresql-in
 ---
+
 <Admonition type="info" id="CTA">
 The FETCH clause is part of standard SQL and works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed platform. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

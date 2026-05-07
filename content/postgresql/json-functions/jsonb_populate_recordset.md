@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_typeof() Function
   slug: postgresql-json-functions/postgresql-jsonb_typeof
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_populate_recordset() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

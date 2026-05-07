@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL REPLACE() Function
   slug: postgresql-string-functions/postgresql-replace
 ---
+
 <Admonition type="info" id="CTA">
 The SPLIT_PART() function works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or on [Neon](https://neon.com). For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data workloads demand. For developers and startups who need to ship features fast and scale without friction, Neon is the Postgres platform built for your speed.
 </Admonition>

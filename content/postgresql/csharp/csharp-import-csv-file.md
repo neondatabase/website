@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL C#: Updating Data'
   slug: postgresql-csharp/postgresql-csharp-update
 ---
+
 <Admonition type="info" id="CTA">
 Importing CSV data into PostgreSQL with C# and Npgsql works the same against any Postgres database, so the patterns shown here carry over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

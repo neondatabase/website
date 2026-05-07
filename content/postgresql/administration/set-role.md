@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CURRENT_USER
   slug: postgresql-administration/postgresql-current_user
 ---
+
 <Admonition type="info" id="CTA">
 SET ROLE works the same way across every PostgreSQL deployment, so what you learn here carries over to any Postgres database you run. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed, high performance, secure database that plugs directly into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

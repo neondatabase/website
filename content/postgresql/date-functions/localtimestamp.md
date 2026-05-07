@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DATE_PART() Function
   slug: postgresql-date-functions/postgresql-date_part
 ---
+
 <Admonition type="info" id="CTA">
 The LOCALTIMESTAMP function works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -13,6 +13,7 @@ nextLink:
   title: 'PostgreSQL JDBC: Updating Data'
   slug: postgresql-jdbc/update
 ---
+
 <Admonition type="info" id="CTA">
 Querying PostgreSQL data with JDBC works the same way against any Postgres database, so the patterns shown here using Statement, PreparedStatement, and ResultSet apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data sit side by side. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform with instant provisioning, branching, and serverless scale.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
   slug: postgresql-tutorial/postgresql-char-varchar-text
 ---
+
 <Admonition type="info" id="CTA">
 The BOOLEAN type works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
 </Admonition>

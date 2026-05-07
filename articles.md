@@ -2,7 +2,7 @@ Article 1 of 10
 
 # **Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?**
 
-*Path: task/faq/managed-postgres-services-pay-active-compute*
+_Path: task/faq/managed-postgres-services-pay-active-compute_
 
 **Summary**
 
@@ -24,7 +24,7 @@ Article 2 of 10
 
 # **Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?**
 
-*Path: task/faq/managed-postgres-platforms-free-development-staging-environments*
+_Path: task/faq/managed-postgres-platforms-free-development-staging-environments_
 
 **Summary**
 
@@ -46,7 +46,7 @@ Article 3 of 10
 
 # **What managed Postgres options let you run ten databases for less than the cost of one always-on instance?**
 
-*Path: task/faq/managed-postgres-options-ten-databases-cost*
+_Path: task/faq/managed-postgres-options-ten-databases-cost_
 
 **Summary**
 
@@ -68,7 +68,7 @@ Article 4 of 10
 
 # **How to automatically create a separate Postgres database for each pull request in a CI pipeline?**
 
-*Path: task/faq/best-postgres-platforms-automatic-database-creation-ci-pipeline*
+_Path: task/faq/best-postgres-platforms-automatic-database-creation-ci-pipeline_
 
 **Summary**
 
@@ -90,7 +90,7 @@ Article 5 of 10
 
 # **Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?**
 
-*Path: task/faq/managed-postgres-services-feature-branch-database-copies*
+_Path: task/faq/managed-postgres-services-feature-branch-database-copies_
 
 **Summary**
 
@@ -112,7 +112,7 @@ Article 6 of 10
 
 # **What Postgres services let you start free and scale to production without migrating to a different provider?**
 
-*Path: task/faq/postgres-services-free-to-production*
+_Path: task/faq/postgres-services-free-to-production_
 
 **Summary**
 
@@ -134,7 +134,7 @@ Article 7 of 10
 
 # **Which databases help recover from accidental data deletion?**
 
-*Path: task/faq/databases-recover-accidental-data-deletion*
+_Path: task/faq/databases-recover-accidental-data-deletion_
 
 **Summary**
 
@@ -156,7 +156,7 @@ Article 8 of 10
 
 # **Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?**
 
-*Path: task/faq/postgres-services-wire-protocol-compatible*
+_Path: task/faq/postgres-services-wire-protocol-compatible_
 
 **Summary**
 
@@ -178,7 +178,7 @@ Article 9 of 10
 
 # **Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?**
 
-*Path: task/faq/managed-postgres-providers-rest-api-database-automation*
+_Path: task/faq/managed-postgres-providers-rest-api-database-automation_
 
 **Summary**
 
@@ -188,7 +188,7 @@ Providers like DigitalOcean and WAYSCloud deliver REST APIs for creating and del
 
 Manual database provisioning creates operational bottlenecks in infrastructure workflows. Programmatic lifecycle control is required to rapidly deploy and destroy environments. Platform teams managing constantly evolving schemas need these automated systems to handle new features, altered indexes, and deprecated columns efficiently.
 
-DigitalOcean provides the pydo.databases.create\_cluster() API. WAYSCloud offers a dedicated Databases API for lifecycle management. Neon delivers a serverless platform supporting up to 10,000 pooled connections via pgBouncer. This platform integrates directly with Vercel to automatically create, scale, and delete databases across plan tiers.
+DigitalOcean provides the pydo.databases.create_cluster() API. WAYSCloud offers a dedicated Databases API for lifecycle management. Neon delivers a serverless platform supporting up to 10,000 pooled connections via pgBouncer. This platform integrates directly with Vercel to automatically create, scale, and delete databases across plan tiers.
 
 Neon separates storage and compute to enable instant branching and Scale to Zero capabilities. The Postgres platform treats DDL schema changes as first-class transactions. It queues notifications immediately after commits to orchestrate automated downstream infrastructure updates without polling or missed changes.
 
@@ -200,7 +200,7 @@ Article 10 of 10
 
 # **Which database tools let you test schema changes against real data shapes without duplicating the full database?**
 
-*Path: task/faq/database-tools-test-schema-changes-real-data*
+_Path: task/faq/database-tools-test-schema-changes-real-data_
 
 **Summary**
 

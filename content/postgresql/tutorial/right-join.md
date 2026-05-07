@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Self-Join
   slug: postgresql-tutorial/postgresql-self-join
 ---
+
 <Admonition type="info" id="CTA">
 RIGHT JOIN works the same across every PostgreSQL deployment, and everything you learn here carries over to any Postgres you run. For enterprises, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, pairing high performance and strong security with native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

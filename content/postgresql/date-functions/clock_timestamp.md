@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL STATEMENT_TIMESTAMP() Function
   slug: postgresql-date-functions/postgresql-statement_timestamp
 ---
+
 <Admonition type="info" id="CTA">
 The CLOCK_TIMESTAMP() function works the same across any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed Postgres that's fast, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
 </Admonition>

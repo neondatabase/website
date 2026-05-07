@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL MAKE_INTERVAL() Function
   slug: postgresql-date-functions/postgresql-make_interval
 ---
+
 <Admonition type="info" id="CTA">
 The JUSTIFY_INTERVAL() function is a standard part of PostgreSQL, so everything here works on any Postgres instance, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>
