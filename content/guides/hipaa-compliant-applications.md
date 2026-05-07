@@ -7,7 +7,7 @@ createdAt: '2026-05-04T00:00:00.000Z'
 updatedOn: '2026-05-04T00:00:00.000Z'
 ---
 
-When building a healthcare application, understanding how your database manages Protected Health Information (PHI) is essential. HIPAA compliance isn’t just a checklist - it demands strict safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.
+When building a healthcare application, understanding how your database manages Protected Health Information (PHI) is essential. HIPAA compliance isn’t just a checklist. It demands strict safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.
 
 This guide walks through how Neon supports HIPAA compliance. You’ll see how its architecture is designed, how audit logging ensures accountability, and how to structure your schema to prevent accidental PHI exposure. Together, these practices help you build secure, compliant trustworthy healthcare applications.
 
@@ -16,12 +16,12 @@ This guide walks through how Neon supports HIPAA compliance. You’ll see how it
 When evaluating Neon for healthcare workloads, you likely have a few specific requirements. Here is how Neon addresses them:
 
 - **BAA & Certifications:** Neon signs a BAA, available [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf). Neon is audited for HIPAA, SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA.
-- **Availability & Cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). A 15% surcharge will be applied in the future when billing begins. You will be notified well in advance of any billing changes. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
+- **Availability & Cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). A 15% surcharge will be applied to your monthly invoice in the future when billing begins. You will be notified well in advance of any billing changes. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
 - **Architecture & Isolation:** HIPAA-enabled projects run on specially configured infrastructure. Neon enforces strict tenant isolation at the project level, network controls, and storage-level encryption (AES-256).
 - **Compliant Features:** Core Postgres operations, database branching, read replicas, backups, and Point-in-Time Recovery (PITR) are fully covered under the BAA. [Data anonymization](/docs/workflows/data-anonymization) is also recommended in non-production branches.
 - **Feature Exclusions:** Neon Auth and the Data API reside outside the HIPAA boundary and must not be used for PHI.
 - **Shared Responsibility:** If you use logical replication or Change Data Capture (CDC) to stream data out of Neon, you are responsible for the destination's compliance.
-- **Audit Logging:** Audit logs are securely retained for the duration specified in your Business Associate Agreement (BAA). For exporting logs for audits or investigations, [raise a support request](https://console.neon.tech/app/projects?modal=support).
+- **Audit Logging:** Audit logs are securely retained for the duration specified in your Business Associate Agreement (BAA). If you need to export logs for audits or investigations, you can [raise a support request](https://console.neon.tech/app/projects?modal=support).
 - **Subprocessors:** Neon uses compliant subprocessors that also sign data processing agreements. See the full list at [neon.com/subprocessors](https://neon.com/subprocessors).
 
 ## Architecture and data security
@@ -30,7 +30,7 @@ When you enable HIPAA on a Neon project, it runs on infrastructure configured to
 
 ### Data storage and isolation
 
-Neon separates compute and storage. You can provision a dedicated project for each of your tenants. This gives each customer their own isolated Postgres instance, reducing the risk of cross-tenant data exposure.
+You can provision a dedicated project for each of your tenants. This gives each customer their own isolated Postgres instance, reducing the risk of cross-tenant data exposure.
 
 - **Cloud providers:** HIPAA compliance is supported across Neon's infrastructure.
 - **Network isolation:** You can restrict access to your database using [IP Allowlisting](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) to ensure only your application backend can connect.
@@ -40,11 +40,11 @@ Neon separates compute and storage. You can provision a dedicated project for ea
 Neon protects PHI both in transit and at rest.
 
 - **At rest:** All data is encrypted using AES-256 at the storage layer. Neon manages these storage keys through secure key management services.
-- **In transit:** All network communications to the database require TLS 1.2 or higher. When connecting your application to Neon, you must enforce SSL.
+- **In transit:** All network communications to the database require TLS 1.2 or higher. When connecting your application, Neon requires SSL.
 
 ## Audit logging
 
-Compliance requires tracking who accessed what data and when they accessed it. Neon provides comprehensive audit logging at two layers.
+Compliance requires tracking who accessed what data and when they accessed it. Neon provides audit logging at two layers.
 
 ### Postgres audit logs (pgaudit)
 
@@ -76,7 +76,7 @@ Neon logs operations performed through the Neon Console and the Neon API.
 
 ### Accessing your logs
 
-Logs stream to a dedicated Neon audit collector. Self-serve export of HIPAA audit logs is not currently available in the console. To request logs for an audit or incident investigation, [raise a Support request](https://console.neon.tech/app/projects?modal=support) from the Neon Console.
+Logs stream to a dedicated Neon audit collector. Self-serve export of HIPAA audit logs is not currently available in the console. To request logs for an audit or incident investigation, you can [raise a Support request](https://console.neon.tech/app/projects?modal=support) from the Neon Console.
 
 ## Shared responsibility model
 
