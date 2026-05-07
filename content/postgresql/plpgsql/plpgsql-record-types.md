@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Constants
   slug: postgresql-plpgsql/plpgsql-constants
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL record types work the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to a production-ready Postgres platform.
 </Admonition>

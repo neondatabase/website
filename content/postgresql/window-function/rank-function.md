@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL ROW_NUMBER Function
   slug: postgresql-window-function/postgresql-row_number
 ---
+
 <Admonition type="info" id="CTA">
 The RANK() function is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run analytical and transactional workloads side by side. If you're a developer or startup who needs to ship features and scale without friction, Neon gives you the fastest path from idea to production on Postgres.
 </Admonition>

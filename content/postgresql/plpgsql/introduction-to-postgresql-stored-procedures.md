@@ -16,6 +16,7 @@ nextLink:
   title: Dollar-Quoted String Constants
   slug: postgresql-plpgsql/dollar-quoted-string-constants
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL is a core part of PostgreSQL, so everything here applies to any Postgres database you run. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to do it on.
 </Admonition>

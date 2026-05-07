@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL SUBSTRING() Function
   slug: postgresql-string-functions/postgresql-substring
 ---
+
 <Admonition type="info" id="CTA">
 The POSITION() function is standard PostgreSQL behavior, so everything here works the same whether you run Postgres on your laptop, on a self-hosted server, or on a managed platform. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

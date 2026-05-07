@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_set() Function
   slug: postgresql-json-functions/postgresql-jsonb_set
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_insert()` function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres on your laptop, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship fast and scale effortlessly, [Neon](https://neon.com) is the Postgres platform built for your velocity.
 </Admonition>

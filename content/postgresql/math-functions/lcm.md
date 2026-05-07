@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LN() Function
   slug: postgresql-math-functions/postgresql-ln
 ---
+
 <Admonition type="info" id="CTA">
 The `lcm()` function is a standard part of PostgreSQL 13 and later, so everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
 </Admonition>

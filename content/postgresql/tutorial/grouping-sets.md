@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL CUBE
   slug: postgresql-tutorial/postgresql-cube
 ---
+
 <Admonition type="info" id="CTA">
 GROUPING SETS is a standard PostgreSQL feature, and everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise rolling out analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, combining high performance and strong security with native integration into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

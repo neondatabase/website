@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Describe Table
   slug: postgresql-administration/postgresql-describe-table
 ---
+
 <Admonition type="info" id="CTA">
 Listing tables with psql shortcuts like \dt or queries against pg_catalog.pg_tables works on any PostgreSQL database, so what you learn here carries over to any environment you run Postgres in. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, performant, and secure database tightly integrated into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

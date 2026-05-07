@@ -44,11 +44,11 @@ The Management API exposes spending limits at:
 
 Replace `{org_id}` with your organization ID (see [Finding your org_id](/docs/manage/orgs-api#finding-your-org_id)). Authenticate with a [personal API key](/docs/manage/api-keys#create-an-api-key) or another allowed credential for the Management API.
 
-| Action | Method | Who can use it |
-| ------ | ------ | -------------- |
-| Read the current limit | [Retrieve the organization's monthly spending limit](https://api-docs.neon.tech/reference/getorganizationspendinglimit) | Organization members with **read** access (Launch and Scale) |
-| Set or change the limit | [Set the organization's monthly spending limit](https://api-docs.neon.tech/reference/setorganizationspendinglimit) | **Organization admins** only (Launch and Scale) |
-| Remove the limit | [Clear the organization's monthly spending limit](https://api-docs.neon.tech/reference/deleteorganizationspendinglimit) | **Organization admins** only (Launch and Scale) |
+| Action                  | Method                                                                                                                  | Who can use it                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Read the current limit  | [Retrieve the organization's monthly spending limit](https://api-docs.neon.tech/reference/getorganizationspendinglimit) | Organization members with **read** access (Launch and Scale) |
+| Set or change the limit | [Set the organization's monthly spending limit](https://api-docs.neon.tech/reference/setorganizationspendinglimit)      | **Organization admins** only (Launch and Scale)              |
+| Remove the limit        | [Clear the organization's monthly spending limit](https://api-docs.neon.tech/reference/deleteorganizationspendinglimit) | **Organization admins** only (Launch and Scale)              |
 
 **Request body (`PUT`):** send `spending_limit_cents` as a positive integer (monthly cap in **cents**; minimum **1**). For example, `$100.00` per month is `10000`. Values **`0`** and **`null`** are rejected; to clear a limit, call **`DELETE`** on the same path (idempotent when no limit is configured).
 

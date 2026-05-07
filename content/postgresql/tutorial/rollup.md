@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL UNION
   slug: postgresql-tutorial/postgresql-union
 ---
+
 <Admonition type="info" id="CTA">
 ROLLUP is a standard PostgreSQL feature for generating hierarchical subtotals and grand totals, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running reporting and analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon gives you the best Postgres platform to build on.
 </Admonition>

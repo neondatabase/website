@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Schema
   slug: postgresql-administration/postgresql-schema
 ---
+
 <Admonition type="info" id="CTA">
 Changing a database owner with ALTER DATABASE works the same way on any PostgreSQL deployment, so you can apply these steps wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>

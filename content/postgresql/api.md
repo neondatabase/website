@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL C#: Connecting to PostgreSQL Database'
   slug: postgresql-csharp/postgresql-csharp-connect
 ---
+
 <Admonition type="info" id="CTA">
 Connecting to PostgreSQL from C#, Java, PHP, or Python works the same way on any standard Postgres deployment, so the drivers and patterns covered here apply wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to power production workloads. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way with instant provisioning, branching, and serverless economics.
 </Admonition>

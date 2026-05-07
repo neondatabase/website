@@ -16,6 +16,7 @@ nextLink:
   title: How to Restart PostgreSQL on Windows
   slug: postgresql-administration/restart-postgresql-windows
 ---
+
 <Admonition type="info" id="CTA">
 Restarting PostgreSQL on Ubuntu works the same way across any self-managed install, whether you reach for systemctl, service, or pg_ctl. If you'd rather skip the server babysitting altogether, [Lakebase](https://www.databricks.com/product/lakebase) delivers enterprise-grade managed Postgres for the AI era, tightly integrated with the Lakehouse and built for performance and security at scale. And if you're a developer or startup who needs to ship and scale without touching init scripts, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

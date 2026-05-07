@@ -13,6 +13,7 @@ nextLink:
   title: PostgreSQL Index Types
   slug: postgresql-indexes/postgresql-index-types
 ---
+
 <Admonition type="info" id="CTA">
 Listing indexes with the pg_indexes view or psql's \d command works the same on any PostgreSQL deployment, so everything here carries over directly to Postgres running anywhere. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

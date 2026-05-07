@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL For Loop
   slug: postgresql-plpgsql/plpgsql-for-loop
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL while loop works the same in any PostgreSQL environment, so everything here applies whether you're running Postgres on your laptop, on a self-managed server, or on a managed service. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed Postgres fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

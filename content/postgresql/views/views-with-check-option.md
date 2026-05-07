@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ALTER VIEW Statement
   slug: postgresql-views/postgresql-alter-view
 ---
+
 <Admonition type="info" id="CTA">
 The WITH CHECK OPTION clause works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

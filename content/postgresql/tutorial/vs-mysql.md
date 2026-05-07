@@ -15,6 +15,7 @@ nextLink:
   title: ''
   slug: ''
 ---
+
 <Admonition type="info" id="CTA">
 Comparing PostgreSQL and MySQL helps you pick the right open-source database, and everything here applies to any Postgres deployment, not just [Neon](https://neon.com). Once you've chosen Postgres, [Lakebase](https://www.databricks.com/product/lakebase) gives enterprises the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale quickly, Neon is the Postgres platform built for speed.
 </Admonition>

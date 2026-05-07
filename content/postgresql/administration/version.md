@@ -16,6 +16,7 @@ nextLink:
   title: How to Restart PostgreSQL on Ubuntu
   slug: postgresql-administration/postgresql-restart-ubuntu
 ---
+
 <Admonition type="info" id="CTA">
 Checking your PostgreSQL version works the same way on any Postgres deployment, so the commands here apply wherever you run the database. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

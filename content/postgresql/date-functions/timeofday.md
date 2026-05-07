@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL PG_SLEEP() Function
   slug: postgresql-date-functions/postgresql-pg_sleep
 ---
+
 <Admonition type="info" id="CTA">
 The TIMEOFDAY() function works the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

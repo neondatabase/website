@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL INSERT Multiple Rows
   slug: postgresql-tutorial/postgresql-insert-multiple-rows
 ---
+
 <Admonition type="info" id="CTA">
 The INSERT statement works the same across any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your team needs. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

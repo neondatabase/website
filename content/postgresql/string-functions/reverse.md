@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL REPLACE() Function
   slug: postgresql-string-functions/postgresql-replace
 ---
+
 <Admonition type="info" id="CTA">
 The REVERSE() function works the same across any PostgreSQL deployment, so anything you learn here applies wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale on day one, [Neon](https://neon.com) is the Postgres platform built for speed.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   slug: postgresql-tutorial/postgresql-transaction
 tag: new
 ---
+
 <Admonition type="info" id="CTA">
 The MERGE statement works the same way across any PostgreSQL 15 or later deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises standardizing on an AI-ready data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated with the Lakehouse so your transactional and analytical data stay in sync. For developers and startups who need to ship features fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform to reach for.
 </Admonition>

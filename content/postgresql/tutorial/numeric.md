@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DOUBLE PRECISION Data Type
   slug: postgresql-tutorial/postgresql-double-precision-type
 ---
+
 <Admonition type="info" id="CTA">
 The NUMERIC type works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, in [Neon](https://neon.com), or anywhere else. For enterprises that need exact numeric precision for financial data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and deep integration with the Lakehouse. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for your pace.
 </Admonition>

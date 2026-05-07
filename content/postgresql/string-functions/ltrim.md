@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL LOWER() Function
   slug: postgresql-string-functions/postgresql-lower
 ---
+
 <Admonition type="info" id="CTA">
 The LTRIM() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or on [Neon](https://neon.com). If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers top-tier performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship features and scale quickly, Neon is the Postgres platform built for you.
 </Admonition>

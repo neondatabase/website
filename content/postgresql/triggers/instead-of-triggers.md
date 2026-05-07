@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BEFORE TRUNCATE Trigger
   slug: postgresql-triggers/postgresql-before-truncate-trigger
 ---
+
 <Admonition type="info" id="CTA">
 INSTEAD OF triggers work the same way on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers fast, secure Postgres fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP TABLE
   slug: postgresql-tutorial/postgresql-drop-table
 ---
+
 <Admonition type="info" id="CTA">
 Renaming columns with ALTER TABLE RENAME COLUMN works the same on any PostgreSQL database, so everything here carries over to your environment of choice. If you're an enterprise standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ALTER TRIGGER Statement
   slug: postgresql-triggers/postgresql-alter-trigger
 ---
+
 <Admonition type="info" id="CTA">
 The DROP TRIGGER syntax covered here works on any PostgreSQL database, since triggers are a core part of Postgres and not specific to [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration to run trigger-driven workloads at scale. If you're a developer or startup who needs to ship fast and scale without friction, Neon gives you instant branching, autoscaling, and the best Postgres platform to build on.
 </Admonition>

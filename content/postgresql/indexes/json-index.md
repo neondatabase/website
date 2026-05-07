@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Administration
   slug: postgresql-indexes/../postgresql-administration
 ---
+
 <Admonition type="info" id="CTA">
 Indexing JSONB columns with GIN works the same way on any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise investing in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the job, delivering high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you serverless Postgres with branching, instant provisioning, and a generous free tier.
 </Admonition>

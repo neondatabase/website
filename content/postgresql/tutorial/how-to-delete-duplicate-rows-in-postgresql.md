@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL UPSERT using INSERT ON CONFLICT Statement
   slug: postgresql-tutorial/postgresql-upsert
 ---
+
 <Admonition type="info" id="CTA">
 Removing duplicate rows is a common cleanup task in any PostgreSQL database, and the techniques shown here using DELETE USING, subqueries with ROW_NUMBER, and intermediate tables work on Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

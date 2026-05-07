@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RADIANS() Function
   slug: postgresql-math-functions/postgresql-radians
 ---
+
 <Admonition type="info" id="CTA">
 The PostgreSQL PI() function works the same way on any Postgres deployment, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), or anywhere else. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built for that pace.
 </Admonition>

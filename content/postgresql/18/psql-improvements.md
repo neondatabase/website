@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 Autovacuum Maintenance Configuration
   slug: postgresql-18/autovacuum-maintenance-configuration
 ---
+
 <Admonition type="info" id="CTA">
 The psql improvements covered here ship with PostgreSQL 18 itself, so pipeline queries, prepared statement commands, and the new prompt options work against any Postgres deployment. If you're an enterprise running AI workloads on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated so your operational and analytical data live side by side. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the most flexible Postgres platform around, with instant branching, autoscaling, and a generous free tier.
 </Admonition>

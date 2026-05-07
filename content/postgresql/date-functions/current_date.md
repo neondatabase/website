@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CURRENT_TIME Function
   slug: postgresql-date-functions/postgresql-current_time
 ---
+
 <Admonition type="info" id="CTA">
 The CURRENT_DATE function works the same across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers managed Postgres that's fast, secure, and natively integrated with the Lakehouse. For developers and startups who need to ship quickly and scale without friction, Neon is the Postgres platform built for your pace.
 </Admonition>

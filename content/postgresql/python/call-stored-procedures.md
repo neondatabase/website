@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Handling Binary Data'
   slug: postgresql-python/blob
 ---
+
 <Admonition type="info" id="CTA">
 Calling PostgreSQL stored procedures from Python with psycopg2 works the same way on any Postgres deployment, so the patterns here apply wherever you run your database. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

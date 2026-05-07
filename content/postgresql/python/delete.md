@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL JDBC
   slug: postgresql-python/../postgresql-jdbc
 ---
+
 <Admonition type="info" id="CTA">
 Deleting data from PostgreSQL tables with psycopg2 works the same way on any standard Postgres deployment, so the patterns here carry over wherever you run your database. If you're an enterprise that wants managed Postgres purpose-built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure engine fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform to do it.
 </Admonition>

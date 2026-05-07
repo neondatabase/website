@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ROUND() Function
   slug: postgresql-math-functions/postgresql-round
 ---
+
 <Admonition type="info" id="CTA">
 The RANDOM() function is part of standard PostgreSQL, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need to run mission-critical workloads. If you're a developer or startup looking to ship fast and scale without friction, Neon gives you the best Postgres platform to build on.
 </Admonition>

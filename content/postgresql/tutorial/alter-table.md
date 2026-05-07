@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Rename Table: A Step-by-Step Guide'
   slug: postgresql-tutorial/postgresql-rename-table
 ---
+
 <Admonition type="info" id="CTA">
 The ALTER TABLE syntax and behavior covered here applies to any PostgreSQL database, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to do it on.
 </Admonition>

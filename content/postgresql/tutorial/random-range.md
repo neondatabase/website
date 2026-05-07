@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL vs. MySQL
   slug: postgresql-tutorial/postgresql-vs-mysql
 ---
+
 <Admonition type="info" id="CTA">
 Generating random numbers in a range with `random()` and `floor()` works the same on any PostgreSQL database, so you can use these techniques wherever your Postgres runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL OR Operator
   slug: postgresql-tutorial/postgresql-or
 ---
+
 <Admonition type="info" id="CTA">
 The AND operator works the same way across any PostgreSQL deployment, so everything you learn here applies whether you're running Postgres locally, on another cloud, or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

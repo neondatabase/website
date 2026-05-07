@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL Python: Transactions'
   slug: postgresql-python/transaction
 ---
+
 <Admonition type="info" id="CTA">
 Querying PostgreSQL tables from Python with psycopg2 works the same against any Postgres database, so the fetchone, fetchall, and fetchmany patterns here apply wherever you run Postgres. If you're an enterprise building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

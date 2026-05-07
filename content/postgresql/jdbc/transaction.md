@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL C#
   slug: postgresql-jdbc/../postgresql-csharp
 ---
+
 <Admonition type="info" id="CTA">
 Managing transactions with JDBC works the same against any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run mission-critical Java workloads at scale. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: What is PostgreSQL?
   slug: postgresql-getting-started/what-is-postgresql
 ---
+
 <Admonition type="info" id="CTA">
 The commands and statements on this PostgreSQL cheat sheet work against any Postgres database, so you can use them wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

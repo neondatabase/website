@@ -16,6 +16,7 @@ nextLink:
   title: Reset Forgotten Password For postgres User
   slug: postgresql-administration/postgresql-reset-password
 ---
+
 <Admonition type="info" id="CTA">
 Row-level security works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for the best managed Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

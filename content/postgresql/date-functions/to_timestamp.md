@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL MAKE_DATE() Function
   slug: postgresql-date-functions/postgresql-make_date
 ---
+
 <Admonition type="info" id="CTA">
 The TO_TIMESTAMP() function works the same on any PostgreSQL deployment, so the patterns and examples here apply whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

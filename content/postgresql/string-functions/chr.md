@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL INITCAP() Function
   slug: postgresql-string-functions/postgresql-initcap
 ---
+
 <Admonition type="info" id="CTA">
 The `CHR()` function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: high performance, secure by default, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to match your pace.
 </Admonition>

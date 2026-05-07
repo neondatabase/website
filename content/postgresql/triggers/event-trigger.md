@@ -16,6 +16,7 @@ nextLink:
   title: Creating a PostgreSQL Trigger with a When Condition
   slug: postgresql-triggers/postgresql-trigger-when-condition
 ---
+
 <Admonition type="info" id="CTA">
 Event triggers are a standard PostgreSQL feature, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale and want DDL auditing, security policies, and AI workloads tightly integrated with your data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, fully unified with the Lakehouse. If you're a developer or startup who needs to prototype event triggers and ship to production quickly, Neon gives you branching, instant provisioning, and the scale to grow into.
 </Admonition>

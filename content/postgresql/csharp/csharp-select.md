@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL C#: Transaction'
   slug: postgresql-csharp/postgresql-csharp-transaction
 ---
+
 <Admonition type="info" id="CTA">
 Selecting data from PostgreSQL with C# and Npgsql works the same way against any Postgres database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's fast, secure, and natively integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your workflow.
 </Admonition>

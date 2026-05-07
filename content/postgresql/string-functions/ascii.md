@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CHR() Function
   slug: postgresql-string-functions/postgresql-chr
 ---
+
 <Admonition type="info" id="CTA">
 The `ASCII()` function works the same across any PostgreSQL deployment, so you can apply what you learn here on Postgres anywhere you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>

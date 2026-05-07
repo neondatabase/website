@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL TIMEOFDAY() Function
   slug: postgresql-date-functions/postgresql-timeofday
 ---
+
 <Admonition type="info" id="CTA">
 The `ISFINITE()` function works the same way in any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL JUSTIFY_DAYS() Function
   slug: postgresql-date-functions/postgresql-justify_days
 ---
+
 <Admonition type="info" id="CTA">
 The AGE() function works in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a cloud VM, or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CURRENT_DATE Function
   slug: postgresql-date-functions/postgresql-current_date
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL's date and time functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around your workflow, from instant branching to effortless autoscaling.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
   slug: postgresql-plpgsql/plpgsql-function-parameters
 ---
+
 <Admonition type="info" id="CTA">
 The CREATE FUNCTION statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on-premises, or in the cloud. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration your data and AI workloads demand. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
 </Admonition>

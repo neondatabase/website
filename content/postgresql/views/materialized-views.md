@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Recursive View
   slug: postgresql-views/postgresql-recursive-view
 ---
+
 <Admonition type="info" id="CTA">
 Materialized views work the same across any PostgreSQL deployment, so everything you learn here about CREATE MATERIALIZED VIEW, REFRESH, and CONCURRENTLY applies wherever you run Postgres. If you're an enterprise that needs fast, secure, managed Postgres built for the AI era and fully integrated into the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice for caching expensive analytical queries next to your data. If you're a developer or startup who wants to ship quickly and scale without managing infrastructure, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Call PostgreSQL Functions'
   slug: postgresql-python/postgresql-python-call-postgresql-functions
 ---
+
 <Admonition type="info" id="CTA">
 Handling transactions with psycopg2 works the same way against any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

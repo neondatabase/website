@@ -37,16 +37,16 @@ Older endpoints (`/consumption_history/account` and `/consumption_history/projec
 
 ## Billable metrics
 
-| API metric name                  | What it measures                                                                   | Raw unit     | Billing unit  |
-| -------------------------------- | ---------------------------------------------------------------------------------- | ------------ | ------------- |
-| `compute_unit_seconds`           | CPU time weighted by compute size                                                  | CU-seconds   | CU-hours      |
-| `root_branch_bytes_month`        | Storage on root branches                                                           | byte-hours   | GB-months     |
-| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                      | byte-hours   | GB-months     |
-| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                            | byte-hours   | GB-months     |
-| `snapshot_storage_bytes_month`   | Storage for branch snapshots (manual and scheduled)                                | byte-hours   | GB-months     |
-| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                     | bytes        | GB            |
-| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)   | bytes        | GB            |
-| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)               | branch-hours | branch-months |
+| API metric name                  | What it measures                                                                 | Raw unit     | Billing unit  |
+| -------------------------------- | -------------------------------------------------------------------------------- | ------------ | ------------- |
+| `compute_unit_seconds`           | CPU time weighted by compute size                                                | CU-seconds   | CU-hours      |
+| `root_branch_bytes_month`        | Storage on root branches                                                         | byte-hours   | GB-months     |
+| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                    | byte-hours   | GB-months     |
+| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                          | byte-hours   | GB-months     |
+| `snapshot_storage_bytes_month`   | Storage for branch snapshots (manual and scheduled)                              | byte-hours   | GB-months     |
+| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                   | bytes        | GB            |
+| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+) | bytes        | GB            |
+| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)             | branch-hours | branch-months |
 
 A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumulates 2 CU-seconds for every wall-clock second it runs.
 

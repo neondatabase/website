@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ARRAY_AGG Function
   slug: postgresql-aggregate-functions/postgresql-array_agg
 ---
+
 <Admonition type="info" id="CTA">
 The SUM() aggregate function works the same across any PostgreSQL deployment, so everything you learn here transfers directly to your own databases. For enterprises running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that modern data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
 </Admonition>

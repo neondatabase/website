@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL UNIQUE Index
   slug: postgresql-indexes/postgresql-unique-index
 ---
+
 <Admonition type="info" id="CTA">
 CREATE INDEX works the same across any PostgreSQL deployment, so everything here carries over whether you're running Postgres on your laptop, in your own data center, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres available, natively integrated into the Lakehouse so your operational and analytical data live together. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform for the job, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

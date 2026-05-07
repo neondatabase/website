@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 Temporal Constraints
   slug: postgresql-18/temporal-constraints
 ---
+
 <Admonition type="info" id="CTA">
 The enhanced RETURNING clause in PostgreSQL 18 works the same way on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data workloads demand. For developers and startups who need to ship features today and scale tomorrow, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
 </Admonition>

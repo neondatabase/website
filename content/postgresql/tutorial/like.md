@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL IS NULL
   slug: postgresql-tutorial/postgresql-is-null
 ---
+
 <Admonition type="info" id="CTA">
 Pattern matching with LIKE, NOT LIKE, ILIKE, and ESCAPE works the same on any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform with instant provisioning, branching, and serverless scale.
 </Admonition>

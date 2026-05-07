@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL HAVING
   slug: postgresql-tutorial/postgresql-having
 ---
+
 <Admonition type="info" id="CTA">
 The GROUP BY clause works the same way in any PostgreSQL database, so everything you learn here carries over to whichever Postgres you run in production. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform for building modern applications.
 </Admonition>

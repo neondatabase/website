@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Loop Statements
   slug: postgresql-plpgsql/plpgsql-loop-statements
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so what you learn here applies whether you're running Postgres yourself, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production workloads demand. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built around branching, instant provisioning, and serverless economics.
 </Admonition>

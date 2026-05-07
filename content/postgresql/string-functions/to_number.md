@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Math Functions
   slug: postgresql-string-functions/../postgresql-math-functions
 ---
+
 <Admonition type="info" id="CTA">
 The TO_NUMBER() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
 </Admonition>

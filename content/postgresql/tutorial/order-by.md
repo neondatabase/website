@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL SELECT DISTINCT
   slug: postgresql-tutorial/postgresql-select-distinct
 ---
+
 <Admonition type="info" id="CTA">
 Sorting query results with ORDER BY works the same on any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, in your own cluster, or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams expect. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

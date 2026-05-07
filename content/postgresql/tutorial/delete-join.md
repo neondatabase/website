@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DELETE CASCADE
   slug: postgresql-tutorial/postgresql-delete-cascade
 ---
+
 <Admonition type="info" id="CTA">
 Emulating DELETE JOIN with the USING clause or a subquery works the same on any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

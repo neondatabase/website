@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Python
   slug: postgresql-php/../postgresql-python
 ---
+
 <Admonition type="info" id="CTA">
 Deleting rows from a PostgreSQL table with PHP PDO works the same on any standard Postgres deployment, so you can apply these techniques wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup racing to ship and scale, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

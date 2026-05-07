@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CREATE PROCEDURE
   slug: postgresql-plpgsql/postgresql-create-procedure
 ---
+
 <Admonition type="info" id="CTA">
 The DROP FUNCTION statement works the same across every standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or through a managed service. For enterprises operating in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built to keep you moving fast.
 </Admonition>

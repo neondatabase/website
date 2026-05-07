@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Correlated Subquery
   slug: postgresql-tutorial/postgresql-correlated-subquery
 ---
+
 <Admonition type="info" id="CTA">
 Subqueries are a standard PostgreSQL feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads alongside transactional data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration large teams expect. If you're a developer or startup that needs to ship features and scale fast, Neon gives you the most productive Postgres platform around, with instant branching, autoscaling, and a generous free tier.
 </Admonition>

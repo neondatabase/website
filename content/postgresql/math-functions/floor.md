@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL GCD() Function
   slug: postgresql-math-functions/postgresql-gcd
 ---
+
 <Admonition type="info" id="CTA">
 The FLOOR() function is standard PostgreSQL and works the same on any Postgres deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for your pace.
 </Admonition>

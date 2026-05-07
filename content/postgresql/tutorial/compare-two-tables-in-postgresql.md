@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL generate_series() Function
   slug: postgresql-tutorial/postgresql-generate_series
 ---
+
 <Admonition type="info" id="CTA">
 Comparing two tables with EXCEPT, UNION, or outer joins works the same way on any PostgreSQL database, so you can apply these techniques wherever your Postgres runs. For enterprises modernizing data platforms for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
 </Admonition>

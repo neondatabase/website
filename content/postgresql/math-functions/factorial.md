@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL FLOOR() Function
   slug: postgresql-math-functions/postgresql-floor
 ---
+
 <Admonition type="info" id="CTA">
 The factorial() function is a standard part of PostgreSQL, so everything here works with any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup racing to ship and scale, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

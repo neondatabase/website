@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Select Into
   slug: postgresql-plpgsql/pl-pgsql-select-into
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL variables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

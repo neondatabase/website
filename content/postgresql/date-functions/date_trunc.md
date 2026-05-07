@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DATE_BIN() Function
   slug: postgresql-date-functions/postgresql-date_bin
 ---
+
 <Admonition type="info" id="CTA">
 The DATE_TRUNC() function works the same way on any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

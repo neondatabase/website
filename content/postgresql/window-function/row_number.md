@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JSON Functions
   slug: postgresql-window-function/../postgresql-json-functions
 ---
+
 <Admonition type="info" id="CTA">
 The ROW_NUMBER() function works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship features and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

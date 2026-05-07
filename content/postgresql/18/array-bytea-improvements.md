@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 Logical Replication Improvements
   slug: postgresql-18/logical-replication-improvements
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's array and bytea improvements work the same way across any Postgres deployment, so you can use these techniques wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, performant and secure with full integration into the Lakehouse. For developers and startups who need to ship features and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up.
 </Admonition>

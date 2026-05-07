@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_build_object() Function
   slug: postgresql-json-functions/postgresql-jsonb_build_object
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_build_array() function works the same way across every PostgreSQL deployment, so what you learn here applies to any Postgres environment, not just [Neon](https://neon.com). For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres for the AI era, with the performance, security, and integration large teams need. For developers and startups who need to ship fast and scale without friction, Neon is the Postgres platform built to move at your speed.
 </Admonition>

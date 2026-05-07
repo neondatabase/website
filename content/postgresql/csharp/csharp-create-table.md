@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL C#: Inserting data'
   slug: postgresql-csharp/postgresql-csharp-insert
 ---
+
 <Admonition type="info" id="CTA">
 Creating tables with Npgsql and C# works the same against any PostgreSQL database, so the patterns here carry over wherever you run Postgres. If you're an enterprise building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres with the performance, security, and native Lakehouse integration your data teams need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

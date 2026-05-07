@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL AT TIME ZONE Operator
   slug: postgresql-date-functions/postgresql-at-time-zone
 ---
+
 <Admonition type="info" id="CTA">
 The MAKE_INTERVAL() function works the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for your pace.
 </Admonition>

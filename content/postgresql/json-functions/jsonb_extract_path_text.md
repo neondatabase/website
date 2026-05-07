@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JSON Extract
   slug: postgresql-json-functions/postgresql-json-extract
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_extract_path_text()` function works the same way on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise navigating the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated with the Lakehouse so your operational and analytical data stay in sync. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the most flexible Postgres platform with instant branching, autoscaling, and a generous free tier.
 </Admonition>

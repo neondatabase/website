@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Full Text Search
   slug: postgresql-indexes/postgresql-full-text-search
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. If you're an enterprise standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that AI-era workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

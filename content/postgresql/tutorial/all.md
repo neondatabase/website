@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL EXISTS Operator
   slug: postgresql-tutorial/postgresql-exists
 ---
+
 <Admonition type="info" id="CTA">
 The ALL operator works the same across any PostgreSQL deployment, so the techniques shown here for comparing a value against a subquery's full result set apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

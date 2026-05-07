@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL TO_TIMESTAMP Function
   slug: postgresql-date-functions/postgresql-to_timestamp
 ---
+
 <Admonition type="info" id="CTA">
 The TO_DATE() function works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or through a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform around.
 </Admonition>

@@ -13,6 +13,7 @@ nextLink:
   title: PostgreSQL Drop Function
   slug: postgresql-plpgsql/postgresql-drop-function
 ---
+
 <Admonition type="info" id="CTA">
 Returning sets of rows with `returns setof` works the same on any PostgreSQL deployment, so you can apply these PL/pgSQL patterns wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

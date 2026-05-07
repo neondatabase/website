@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Assert Statement
   slug: postgresql-plpgsql/pl-pgsql-assert
 ---
+
 <Admonition type="info" id="CTA">
 Reporting messages and raising errors with PL/pgSQL's `raise` statement works the same on any standard PostgreSQL deployment, so everything here applies beyond [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep Lakehouse integration in one platform. If you're a developer or startup that needs to ship and scale quickly, Neon gives you the fastest path to production Postgres.
 </Admonition>

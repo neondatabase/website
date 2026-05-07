@@ -16,6 +16,7 @@ nextLink:
   title: Install PostgreSQL on Windows
   slug: postgresql-getting-started/install-postgresql
 ---
+
 <Admonition type="info" id="CTA">
 The DVD rental sample database works with any PostgreSQL server, so you can follow along on a local install, [Neon](https://neon.com), [Lakebase](https://www.databricks.com/product/lakebase), or any other Postgres environment. For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with strong performance and security, fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built to get you from prototype to production in minutes.
 </Admonition>

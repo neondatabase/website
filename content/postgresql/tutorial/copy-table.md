@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Primary Key
   slug: postgresql-tutorial/postgresql-primary-key
 ---
+
 <Admonition type="info" id="CTA">
 Copying tables with CREATE TABLE AS works on any PostgreSQL database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytical and transactional workloads in sync. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you instant branching, autoscaling, and a serverless Postgres platform that gets out of your way.
 </Admonition>

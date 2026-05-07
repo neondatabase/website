@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Show Tables
   slug: postgresql-administration/postgresql-show-tables
 ---
+
 <Admonition type="info" id="CTA">
 Listing databases with `\l`, `\l+`, or a query against `pg_database` works the same on any PostgreSQL server, so the techniques here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

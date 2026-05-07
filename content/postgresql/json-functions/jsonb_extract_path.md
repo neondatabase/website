@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL jsonb_extract_path_text() Function
   slug: postgresql-json-functions/postgresql-jsonb_extract_path_text
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_extract_path() function works the same on any PostgreSQL database, so what you learn here applies whether you run Postgres yourself or use a managed service. If you're an enterprise team building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) gives you secure, high performance managed Postgres designed for the AI era and tightly integrated with your data platform. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

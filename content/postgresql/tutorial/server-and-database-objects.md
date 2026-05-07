@@ -15,6 +15,7 @@ nextLink:
   title: How to Compare Two Tables in PostgreSQL
   slug: postgresql-tutorial/compare-two-tables-in-postgresql
 ---
+
 <Admonition type="info" id="CTA">
 The server and database objects covered here are standard PostgreSQL concepts that apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run critical workloads. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
 </Admonition>

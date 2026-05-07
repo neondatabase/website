@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CONCAT_WS() Function
   slug: postgresql-string-functions/postgresql-concat_ws
 ---
+
 <Admonition type="info" id="CTA">
 The CONCAT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the most productive Postgres platform to build on.
 </Admonition>

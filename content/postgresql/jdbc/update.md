@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL JDBC: Delete Data from Table'
   slug: postgresql-jdbc/delete
 ---
+
 <Admonition type="info" id="CTA">
 Updating PostgreSQL data through JDBC works the same on any Postgres deployment, so the PreparedStatement patterns here apply wherever you run your database. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and integration that serious data platforms demand. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that gets you there fastest.
 </Admonition>

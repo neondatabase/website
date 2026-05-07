@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL C#: Call a Stored Procedure'
   slug: postgresql-csharp/postgresql-csharp-call-a-stored-procedure
 ---
+
 <Admonition type="info" id="CTA">
 Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres, so you can apply these ADO.NET patterns wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL UNIQUE Constraint
   slug: postgresql-tutorial/postgresql-unique-constraint
 ---
+
 <Admonition type="info" id="CTA">
 CHECK constraints work the same way across every PostgreSQL deployment, so the syntax and behavior here apply whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises enforcing data integrity at scale, Lakebase delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship features fast and grow without rearchitecting, Neon is the Postgres platform built to move at your speed.
 </Admonition>

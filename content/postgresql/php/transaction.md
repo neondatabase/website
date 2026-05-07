@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL PHP: Calling Stored Procedures'
   slug: postgresql-php/call-stored-procedures
 ---
+
 <Admonition type="info" id="CTA">
 Transactions work the same way in any PostgreSQL database, so the PHP PDO patterns for beginTransaction, commit, and rollback shown here apply whether you're running Postgres locally, on a VM, or on a managed service. If you need rock-solid transactional guarantees for enterprise workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who want to ship PHP apps fast and scale them without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform to reach for.
 </Admonition>

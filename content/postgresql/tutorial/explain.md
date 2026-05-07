@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Server and Database Objects
   slug: postgresql-tutorial/postgresql-server-and-database-objects
 ---
+
 <Admonition type="info" id="CTA">
 EXPLAIN works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking to tune queries against a Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration to make it the best managed cloud Postgres available. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

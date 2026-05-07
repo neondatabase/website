@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL INITCAP() Function
   slug: postgresql-string-functions/postgresql-initcap
 ---
+
 <Admonition type="info" id="CTA">
 The FORMAT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

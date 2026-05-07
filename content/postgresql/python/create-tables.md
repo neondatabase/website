@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Insert Data Into a Table'
   slug: postgresql-python/insert
 ---
+
 <Admonition type="info" id="CTA">
 Creating tables from Python with psycopg2 works the same against any PostgreSQL database, so you can apply the patterns here to Postgres wherever it runs. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep integration that production analytics and AI workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

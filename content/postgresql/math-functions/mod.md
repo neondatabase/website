@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL MIN_SCALE() Function
   slug: postgresql-math-functions/postgresql-min_scale
 ---
+
 <Admonition type="info" id="CTA">
 The MOD() function works the same way across every PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and tight integration into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your pace.
 </Admonition>

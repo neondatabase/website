@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL REVERSE() Function
   slug: postgresql-string-functions/postgresql-reverse
 ---
+
 <Admonition type="info" id="CTA">
 The REGEXP_MATCHES() function works the same way in any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

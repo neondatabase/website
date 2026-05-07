@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Change Column Type
   slug: postgresql-tutorial/postgresql-change-column-type
 ---
+
 <Admonition type="info" id="CTA">
 Dropping columns with ALTER TABLE works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that regulated teams need. For developers and startups who want to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

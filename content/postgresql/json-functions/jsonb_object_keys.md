@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JSON Path
   slug: postgresql-json-functions/postgresql-json-path
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_object_keys()` function is part of standard PostgreSQL and works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to run JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration that large teams need. If you're a developer or startup who wants to ship fast on Postgres and scale without friction, Neon is the platform to build on.
 </Admonition>

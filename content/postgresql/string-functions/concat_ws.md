@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL FORMAT() Function
   slug: postgresql-string-functions/postgresql-format
 ---
+
 <Admonition type="info" id="CTA">
 The CONCAT_WS() function works the same on any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform built for that pace.
 </Admonition>

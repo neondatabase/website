@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL WITH CHECK OPTION
   slug: postgresql-views/postgresql-views-with-check-option
 ---
+
 <Admonition type="info" id="CTA">
 Updatable views work the same way across every PostgreSQL deployment, so the techniques here apply whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that data and AI teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) offers the best Postgres platform, with instant provisioning, branching, and serverless scale.
 </Admonition>

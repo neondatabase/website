@@ -88,17 +88,17 @@ One key schema choice is deciding which branch you fork snapshots from. The most
 
 ## Schema on the production branch
 
-The catalog table is intentionally small. It answers: *which versions exist, when were they saved, who saved them, and which Neon branch represents that snapshot?*
+The catalog table is intentionally small. It answers: _which versions exist, when were they saved, who saved them, and which Neon branch represents that snapshot?_
 
-| Column | Role |
-| --- | --- |
-| `id` | Stable UUID for APIs (`GET /versions/:id`). |
-| `created_at` | Sort order for the version history sidebar. |
-| `title` | Optional display string for the document at save time. |
-| `document_json` | Structured payload for the editor (for example `{ "text": "..." }`). Often the **source of truth** for plain document bodies. |
-| `neon_branch_id` | Neon branch identifier returned by the Console API when the snapshot branch was created. |
+| Column                      | Role                                                                                                                                                                        |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                        | Stable UUID for APIs (`GET /versions/:id`).                                                                                                                                 |
+| `created_at`                | Sort order for the version history sidebar.                                                                                                                                 |
+| `title`                     | Optional display string for the document at save time.                                                                                                                      |
+| `document_json`             | Structured payload for the editor (for example `{ "text": "..." }`). Often the **source of truth** for plain document bodies.                                               |
+| `neon_branch_id`            | Neon branch identifier returned by the Console API when the snapshot branch was created.                                                                                    |
 | `encoded_connection_string` | Lets your server open a SQL connection to that branch later (for preview queries or admin tools). Encrypt at rest in production (for example AES-GCM with a server secret). |
-| `author_label` | Shown in the UI ("You", display name, or service account). |
+| `author_label`              | Shown in the UI ("You", display name, or service account).                                                                                                                  |
 
 The [reference demo](#demo) uses exactly this shape and you can create it [with ordinary SQL](https://github.com/rishi-raj-jain/google-docs-version-history/blob/main/scripts/create-versions-table.sql):
 

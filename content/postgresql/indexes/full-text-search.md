@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JSON Index
   slug: postgresql-indexes/postgresql-json-index
 ---
+
 <Admonition type="info" id="CTA">
 Full text search is a core PostgreSQL feature, and everything covered here works on any standard Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the fastest path from idea to production on Postgres.
 </Admonition>
