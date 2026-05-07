@@ -139,7 +139,7 @@ Wait for user response before proceeding.
 
 - Identify affected docs under `content/docs/` (ai/, auth/, guides/, manage/, introduction/, reference/).
 - Present a Documentation Update Plan (files to modify/create, navigation updates). Wait for approval.
-- Create branch `docs/pr-{PR_NUMBER}-{short-slug}`, make changes, run `npm run lint:md`, then `gh pr create --repo neondatabase/website` with title and body linking to the original PR.
+- Create branch `docs/pr-{PR_NUMBER}-{short-slug}`, make changes, then `gh pr create --repo neondatabase/website` with title and body linking to the original PR. Markdown formatting is handled automatically by the pre-commit hook at commit time. No manual format step needed.
 
 ## Changelog Entry Workflow (when user picks 2 or 3)
 

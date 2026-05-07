@@ -137,7 +137,7 @@ Then ask:
 ### 5. Run the auto-fixer
 
 ```bash
-npm run fix
+npm run fix:md
 ```
 
 ### 6. Report

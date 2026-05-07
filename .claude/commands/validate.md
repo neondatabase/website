@@ -59,10 +59,10 @@ Scan the file body for em dash characters (—). If found, flag the line numbers
 ## Step 3: Run the auto-fixer
 
 ```bash
-npm run fix
+npm run fix:md
 ```
 
-Report any errors or files changed by the auto-fixer.
+Report any errors or files changed by the auto-fixer. Note: markdown formatting in `content/` is also handled automatically by the pre-commit hook at commit time.
 
 ## Step 4: Report
 
