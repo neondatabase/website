@@ -41,7 +41,7 @@ const CHECKS = [
     },
   },
   {
-    name: '/docs/mcp — docs-scoped MCP descriptor',
+    name: '/docs/mcp — docs-scoped MCP descriptor (GET)',
     path: '/docs/mcp',
     validate(status, body) {
       if (status !== 200) return `expected 200, got ${status}`;
@@ -53,12 +53,59 @@ const CHECKS = [
       }
       if (!json.$schema) return 'missing $schema field';
       if (!json.remotes?.[0]?.url) return 'missing remotes[0].url';
+      if (!json.remotes[0].url.includes('?category=docs'))
+        return `remotes[0].url should include ?category=docs (got ${json.remotes[0].url})`;
+      if (json.remotes[0].headers)
+        return 'remotes[0].headers should be absent — this endpoint is unauthenticated';
       return null;
     },
     summarize(body) {
       try {
         const j = JSON.parse(body);
         return `name=${j.name}  url=${j.remotes?.[0]?.url}`;
+      } catch {
+        return '';
+      }
+    },
+  },
+  {
+    name: '/docs/mcp — MCP initialize POST (proxy to unauthenticated docs endpoint)',
+    path: '/docs/mcp',
+    method: 'POST',
+    requestBody: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'initialize',
+      params: {
+        protocolVersion: '2025-03-26',
+        capabilities: {},
+        clientInfo: { name: 'check-agent-endpoints', version: '1.0' },
+      },
+    }),
+    requestHeaders: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json, text/event-stream',
+    },
+    validate(status, body) {
+      if (status !== 200)
+        return `expected 200, got ${status} — MCP server PR may not be merged yet`;
+      const dataLine = body.split('\n').find((l) => l.startsWith('data: '));
+      if (!dataLine) return 'no SSE data line in response';
+      let parsed;
+      try {
+        parsed = JSON.parse(dataLine.slice(6));
+      } catch {
+        return 'SSE data line is not valid JSON';
+      }
+      if (!parsed.result?.serverInfo) return 'missing result.serverInfo in initialize response';
+      return null;
+    },
+    summarize(body) {
+      const dataLine = body.split('\n').find((l) => l.startsWith('data: '));
+      if (!dataLine) return '';
+      try {
+        const d = JSON.parse(dataLine.slice(6));
+        return `serverInfo=${JSON.stringify(d.result?.serverInfo)}`;
       } catch {
         return '';
       }
@@ -158,10 +205,10 @@ const CHECKS = [
   },
 ];
 
-async function fetchCheck(url) {
-  const res = await fetch(url);
-  const body = await res.text();
-  return { status: res.status, body };
+async function fetchCheck(url, { method = 'GET', body = undefined, headers = {} } = {}) {
+  const res = await fetch(url, { method, body, headers });
+  const responseBody = await res.text();
+  return { status: res.status, body: responseBody };
 }
 
 async function run() {
@@ -175,7 +222,11 @@ async function run() {
     const url = `${BASE_URL}${check.path}`;
     let status, body;
     try {
-      ({ status, body } = await fetchCheck(url));
+      ({ status, body } = await fetchCheck(url, {
+        method: check.method ?? 'GET',
+        body: check.requestBody,
+        headers: check.requestHeaders ?? {},
+      }));
     } catch (err) {
       console.log(`  FAIL  ${check.name}`);
       console.log(`        fetch error: ${err.message}\n`);
