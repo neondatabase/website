@@ -110,14 +110,6 @@ $ bun run index.ts
 
 </Steps>
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-bun" description="Get started with Bun and Neon" icon="github">Get started with Bun and Neon</a>
-</DetailIconCards>
-
 ## References
 
 - [Bun SQL client](https://bun.sh/docs/api/sql)

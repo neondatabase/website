@@ -363,14 +363,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an Elixir Ecto application to Neon](/docs/guides/elixir-ecto)
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with_elixir_postgrex" description="Get started with Elixir and Neon using Postgrex" icon="github">Get started with Elixir and Neon using Postgrex</a>
-</DetailIconCards>
-
 ## Resources
 
 - [Postgrex Documentation](https://hexdocs.pm/postgrex/Postgrex.html)

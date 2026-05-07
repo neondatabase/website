@@ -234,14 +234,4 @@ When you run `npm run start` you can expect to see output similar to the followi
 
 </Steps>
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nestjs" description="Get started with NestJS and Neon" icon="github">Get started with NestJS and Neon</a>
-
-</DetailIconCards>
-
 <NeedHelp/>

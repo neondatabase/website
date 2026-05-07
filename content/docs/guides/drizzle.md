@@ -23,10 +23,6 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
   <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
 </DocsList>
 
-<DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
-</DocsList>
-
 </InfoBlock>
 
 Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Neon Postgres database using Drizzle ORM.

@@ -423,14 +423,6 @@ npx wrangler hyperdrive delete my-neon-hyperdrive
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-workers" description="Connect a Neon Postgres database to your Cloudflare Workers application" icon="github">Use Neon with Cloudflare Workers</a>
-</DetailIconCards>
-
 ## Resources
 
 - [Cloudflare Workers](https://workers.cloudflare.com/)

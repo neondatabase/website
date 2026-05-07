@@ -169,14 +169,4 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 </Steps>
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
-
-</DetailIconCards>
-
 <NeedHelp/>

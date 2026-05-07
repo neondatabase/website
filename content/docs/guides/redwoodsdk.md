@@ -127,16 +127,6 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 </Steps>
 
-## Source code
-
-You can find a sample RedwoodSDK application configured for Neon on GitHub:
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-redwoodsdk" description="Get started with RedwoodSDK and Neon" icon="github">Get started with RedwoodSDK and Neon</a>
-
-</DetailIconCards>
-
 ## Resources
 
 - [RedwoodSDK Documentation](https://docs.rwsdk.com/)

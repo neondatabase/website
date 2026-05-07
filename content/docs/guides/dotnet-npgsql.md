@@ -440,14 +440,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-dotnet-npgsql/NeonLibraryExample" description="Get started with .NET (C#) and Neon" icon="github">Get started with .NET (C#) and Neon</a>
-</DetailIconCards>
-
 ## Resources
 
 - [Npgsql Documentation](https://www.npgsql.org/doc/index.html)

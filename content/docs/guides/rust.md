@@ -666,18 +666,6 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 </Steps>
 
-## Source code
-
-You can find the source code for the applications described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-rust-postgres" description="Get started with Rust and Neon using the synchronous postgres crate" icon="github">Get started with Rust and Neon using postgres</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-rust-tokio-postgres" description="Get started with Rust and Neon using the asynchronous tokio-postgres crate" icon="github">Get started with Rust and Neon using tokio-postgres</a>
-
-</DetailIconCards>
-
 ## Resources
 
 - [The Rust Programming Language Book](https://doc.rust-lang.org/book/)
