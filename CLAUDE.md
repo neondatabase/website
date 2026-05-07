@@ -61,9 +61,11 @@ npm run start            # Run production build
 ### Code Quality
 
 ```bash
-npm run fix              # Fix JS, markdown, and formatting (run before committing)
-npm run lint             # Check JS and Markdown without modifying files
-npm run format           # Run Prettier only (subset of fix)
+npm run fix:js      # Fix JS/CSS: eslint + prettier on code files
+npm run fix:md      # Fix all content markdown: prettier (currently)
+npm run fix:all     # Fix everything: eslint + prettier, no markdownlint (use sparingly)
+npm run lint:js     # Check JS without modifying files
+npm run lint:md     # Markdown lint audit: intentional use only, never automatic
 ```
 
 ### Testing
@@ -75,15 +77,15 @@ npm run check:broken-links -- https://neon.com  # Check for broken links
 
 ## Git Workflow
 
-Standard GitHub flow. Before every commit, run:
+Standard GitHub flow. Commit and open a PR targeting `main`. No special push commands needed (`git push` is fine).
+
+For JS/code changes, run before committing:
 
 ```bash
-npm run fix
+npm run fix:js
 ```
 
-This lints JS and markdown and formats all files in one pass. To check without modifying files, use `npm run lint`.
-
-Then commit and open a PR targeting `main`. No special push commands needed (`git push` is fine).
+For markdown changes in `content/`, no manual step is needed. Prettier runs automatically via the pre-commit hook. To manually reformat all content markdown, run `npm run fix:md`.
 
 ## Environment Setup
 
@@ -580,7 +582,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Documentation-heavy site with 1000+ markdown files — search before creating
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
-- Run `npm run fix` before every commit
+- Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted by the pre-commit hook. No manual step needed at commit time. To manually reformat all content markdown, run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines
