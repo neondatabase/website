@@ -145,7 +145,7 @@
     "happy-dom": "^20.8.9",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "postcss": "^8.4.38",
+    "postcss": "^8.5.10",
     "postcss-nesting": "^14.0.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
