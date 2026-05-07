@@ -4,7 +4,7 @@ subtitle: Learn how to create an internal admin dashboard for user management us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-31T00:00:00.000Z'
-updatedOn: '2025-12-31T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 In a production application, internal tooling is often critical for operations and support teams. The Neon Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.

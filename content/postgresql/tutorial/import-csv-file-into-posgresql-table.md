@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/import-csv-file-into-posgresql-table/
 ogImage: /postgresqltutorial/posgresql-import-csv.jpg
-updatedOn: '2024-02-01T14:45:15+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Transaction

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/
 ogImage: ''
-updatedOn: '2024-01-29T13:45:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Transactions'

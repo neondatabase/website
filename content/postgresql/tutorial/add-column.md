@@ -6,7 +6,7 @@ page_description: >-
   one or more columns to an existing database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-add-column/'
 ogImage: /postgresqltutorial/PostgreSQL-Add-Column-300x128.png
-updatedOn: '2024-01-25T04:01:41+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Rename Table: A Step-by-Step Guide'

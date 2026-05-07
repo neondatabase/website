@@ -6,7 +6,7 @@ page_description: >-
   views, indexing strategies, window functions, and JSON data manipulation
 prev_url: 'https://www.postgresqltutorial.com/postgresql-advanced/'
 ogImage: ''
-updatedOn: '2025-09-06T10:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL API

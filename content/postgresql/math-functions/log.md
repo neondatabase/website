@@ -6,7 +6,7 @@ page_description: >-
   calculate the logarithm of a number
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-log/'
 ogImage: ''
-updatedOn: '2024-04-19T01:55:53+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LN() Function

@@ -6,7 +6,7 @@ page_description: >-
   value to a set of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
 ogImage: ''
-updatedOn: '2024-04-24T06:18:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Correlated Subquery

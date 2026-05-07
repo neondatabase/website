@@ -6,7 +6,7 @@ summary: >-
   of the autoscaler-agent and Kubernetes scheduler in dynamically allocating
   compute resources for Postgres instances.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.083Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <InfoBlock>

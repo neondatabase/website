@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 SQL/PGQ Property Graph Queries'
 page_title: 'PostgreSQL 19 SQL/PGQ - Graph Queries on Existing Tables'
 page_description: 'Learn how to use PostgreSQL 19 SQL/PGQ to define property graphs over existing tables and query relationships with graph pattern matching, no migration or extensions required.'
 ogImage: ''
-updatedOn: '2026-04-15T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 New Features'

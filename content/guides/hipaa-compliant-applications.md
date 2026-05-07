@@ -4,7 +4,7 @@ subtitle: Learn how Neon's HIPAA architecture, BAA, audit logging, and shared re
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-05-04T00:00:00.000Z'
+updatedOn: '2026-05-07T07:30:01.000Z'
 ---
 
 When building a healthcare application, understanding how your database manages Protected Health Information (PHI) is essential. HIPAA compliance isn’t just a checklist. It demands strict safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.

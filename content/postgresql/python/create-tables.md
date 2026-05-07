@@ -6,7 +6,7 @@ page_description: >-
   database using Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/create-tables/'
 ogImage: /postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png
-updatedOn: '2024-05-19T08:12:15+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'

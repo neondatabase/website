@@ -4,7 +4,7 @@ subtitle: 'Learn how to use Vercel Preview Deployments and Neon Database Branchi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-15T00:00:00.000Z'
-updatedOn: '2026-01-15T00:00:00.000Z'
+updatedOn: '2026-01-15T17:22:44.000Z'
 ---
 
 Authentication and user management are critical to any application, yet often the hardest to test. For example, how do you validate a moderation feature without risking real user data? Or ensure that role-based access control changes work correctly across your entire user base?

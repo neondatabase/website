@@ -4,7 +4,7 @@ subtitle: Learn how to create an API for managing a tech conference system using
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2024-08-17T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 FastAPI is a high-performance Python web framework for building APIs quickly and efficiently.

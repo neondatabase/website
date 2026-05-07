@@ -4,7 +4,7 @@ subtitle: Build a powerful hybrid search system for developer resources with Neo
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-05T00:00:00.000Z'
-updatedOn: '2025-01-05T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 In this guide you will learn how to implement a hybrid search functionality using Neon and Azure AI Search.

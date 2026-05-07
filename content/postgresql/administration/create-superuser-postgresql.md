@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/
 ogImage: ''
-updatedOn: '2024-02-22T08:40:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Password of a PostgreSQL User

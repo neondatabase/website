@@ -6,7 +6,7 @@ page_description: >-
   and TIMESTAMPTZ for storing timestamp data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/'
 ogImage: /postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg
-updatedOn: '2024-02-01T02:32:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE Data Type

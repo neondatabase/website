@@ -6,7 +6,7 @@ page_description: >-
   statement to change the properties of a view.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-alter-view/'
 ogImage: ''
-updatedOn: '2024-03-16T04:33:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WITH CHECK OPTION

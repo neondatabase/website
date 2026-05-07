@@ -10,7 +10,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-05-03T13:21:51.000Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:

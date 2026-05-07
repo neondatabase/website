@@ -4,7 +4,7 @@ subtitle: Learn how to build a secure authentication system using Go, JWT tokens
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2025-03-29T00:00:00.000Z'
+updatedOn: '2026-02-03T11:18:45.000Z'
 ---
 
 Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Neon Postgres.

@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/insert/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Insert-Example.png
-updatedOn: '2022-02-09T15:05:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Create New Tables'

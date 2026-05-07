@@ -6,7 +6,7 @@ page_description: >-
   calculate the exponential of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-exp/'
 ogImage: ''
-updatedOn: '2024-04-18T03:00:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DEGREES() Function

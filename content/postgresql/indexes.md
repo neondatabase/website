@@ -6,7 +6,7 @@ page_description: >-
   data retrieval speed and various index types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/'
 ogImage: ''
-updatedOn: '2024-03-06T08:34:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Views

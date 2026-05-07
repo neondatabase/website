@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 JSON Format for COPY TO'
 page_title: 'PostgreSQL 19 JSON COPY TO - Native JSON Data Export'
 page_description: 'Learn how to use PostgreSQL 19 COPY TO with FORMAT JSON to export data as NDJSON or JSON arrays, replacing workarounds with native streaming JSON output.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Logical Replication Improvements'

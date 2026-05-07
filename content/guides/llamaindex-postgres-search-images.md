@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to build your own Reverse Image Search engine in 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2024-06-11T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 Have you ever searched for an image using an... image? [Google Images](https://images.google.com/) is a widely used example of such reverse image search engine. Do you wonder how it's able to show highly similar images in the search results? Well, in this guide you will learn how to create such an image engine on your own. You will learn how to create a system that's able to index images into a collection, and return images that are highly similar to the uploaded one.

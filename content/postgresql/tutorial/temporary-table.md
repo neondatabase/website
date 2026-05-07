@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table/
 ogImage: /postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png
-updatedOn: '2024-02-18T10:49:32+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNCATE TABLE

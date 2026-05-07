@@ -6,7 +6,7 @@ page_description: >-
   the DELETE USING statement or a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete-join/'
 ogImage: ''
-updatedOn: '2024-01-23T06:55:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DELETE

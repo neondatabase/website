@@ -6,7 +6,7 @@ page_description: >-
   variables that can hold a sinle row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/'
 ogImage: ''
-updatedOn: '2024-03-19T02:14:47+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Row Types

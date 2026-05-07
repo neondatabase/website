@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL\_SPLIT_PART() function to split a s
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-split_part/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-02-13T13:52:15+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SUBSTRING() Function

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-uptime/
 ogImage: ''
-updatedOn: '2024-02-20T06:03:34+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How to Check PostgreSQL Version

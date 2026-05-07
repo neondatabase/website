@@ -4,7 +4,7 @@ subtitle: A comprehensive guide to migrating your Postgres database, user accoun
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-03T00:00:00.000Z'
-updatedOn: '2025-09-03T00:00:00.000Z'
+updatedOn: '2026-03-05T04:10:30.000Z'
 ---
 
 This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id` values during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.

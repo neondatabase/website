@@ -6,7 +6,7 @@ page_description: >-
   server from Python using the psycopg2 package.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/connect/'
 ogImage: ''
-updatedOn: '2024-05-19T08:11:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Python

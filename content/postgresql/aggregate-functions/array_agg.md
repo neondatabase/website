@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-array_agg/
 ogImage: /postgresqltutorial/PostgreSQL-ARRAY_AGG-example.png
-updatedOn: '2024-01-26T04:00:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SUM Function

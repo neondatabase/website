@@ -6,7 +6,7 @@ page_description: >-
   handy date functions to handle date values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-date/'
 ogImage: ''
-updatedOn: '2024-04-19T09:05:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Integer Data Types

@@ -4,7 +4,7 @@ subtitle: Learn how to create separate development environments for each pull re
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-18T00:00:00.000Z'
-updatedOn: '2024-08-18T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 When working on a team project, it's useful to have separate environments for each new feature or bug fix. This helps prevent conflicts and makes it easier to test changes. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Neon's Postgres branching for the database.

@@ -6,7 +6,7 @@ page_description: >-
   database in PostgreSQL using psql or SQL.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-list-views/'
 ogImage: ''
-updatedOn: '2024-03-16T08:19:05+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Recursive View

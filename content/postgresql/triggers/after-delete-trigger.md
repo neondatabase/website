@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/
 ogImage: ''
-updatedOn: '2024-03-28T09:39:21+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE DELETE Trigger

@@ -4,7 +4,7 @@ subtitle: Automating schema changes with EF Core and Azure Pipelines in Neon Pos
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-18T00:00:00.000Z'
-updatedOn: '2025-01-18T00:00:00.000Z'
+updatedOn: '2025-05-30T16:53:05.000Z'
 ---
 
 [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a great migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can automate database migrations as part of a CI/CD pipeline, ensuring that schema changes are safely applied to your Neon Postgres database.

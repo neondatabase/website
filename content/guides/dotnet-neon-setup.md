@@ -4,7 +4,7 @@ subtitle: Learn how to connect your .NET applications to Neon's serverless Postg
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2024-11-02T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 In this guide, we'll walk through the process of connecting a .NET application to Neon Postgres, exploring best practices for connection management and basic performance optimization.

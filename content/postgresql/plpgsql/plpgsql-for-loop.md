@@ -6,7 +6,7 @@ page_description: >-
   over a range of integers and a result set of a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/'
 ogImage: /postgresqltutorial/plpgsql-FOR-loop.png
-updatedOn: '2024-03-19T04:07:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL While Loop

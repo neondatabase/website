@@ -6,7 +6,7 @@ summary: >-
   operations like the Neon Console, CLI, API, and SQL.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.116Z'
+updatedOn: '2026-04-23T09:17:35.000Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/
 ogImage: /postgresqltutorial/postgresql-create-schema-example.png
-updatedOn: '2024-02-12T12:34:40+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Schema

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/
 ogImage: ''
-updatedOn: '2024-02-13T15:22:39+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Password of a PostgreSQL User

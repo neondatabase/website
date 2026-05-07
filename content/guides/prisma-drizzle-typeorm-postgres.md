@@ -4,7 +4,7 @@ subtitle: Learn real-world differences in schema modeling, migrations, and devel
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T00:00:00.000Z'
-updatedOn: '2026-04-21T00:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 If you are choosing a data layer for a TypeScript or JavaScript service on Postgres, you will almost certainly run into these three names. They are not interchangeable implementations of the same idea. They reflect different opinions about where your schema should live, how close to SQL you want to stay day to day, and how much tooling you want wrapped around migrations and collaboration.

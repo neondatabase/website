@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Temporal Data Operations'
 page_title: 'PostgreSQL 19 UPDATE/DELETE FOR PORTION OF - Temporal Data Operations'
 page_description: 'Learn how to use PostgreSQL 19 UPDATE and DELETE FOR PORTION OF to modify temporal data, automatically splitting rows to preserve history outside the targeted time range.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-01T20:19:36.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 ON CONFLICT DO SELECT'

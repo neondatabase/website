@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-create-table/
 ogImage: ''
-updatedOn: '2024-05-21T00:46:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Connecting the PostgreSQL Database'

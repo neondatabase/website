@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/
 ogImage: ''
-updatedOn: '2024-02-07T14:14:09+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Returns SetOf

@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/workflow-primer
-updatedOn: '2026-03-12T17:34:43.557Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.

@@ -4,7 +4,7 @@ subtitle: Explore Laravel's core features to build efficient and secure web appl
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2024-07-14T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Laravel, a popular PHP framework, provides a wide range of tools for building web applications. Among its core features are routing, middleware, and validation, which work together to create secure, efficient, and well-structured applications. In this guide, we'll explore these concepts, with a particular focus on how they interact with and optimize database operations.

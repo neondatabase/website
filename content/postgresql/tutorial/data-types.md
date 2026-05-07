@@ -6,7 +6,7 @@ page_description: >-
   Boolean, character, number, temporal, special types, and array.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/'
 ogImage: /postgresqltutorial/PostgreSQL-Data-Types-300x254.png
-updatedOn: '2024-05-08T22:50:24+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Export PostgreSQL Table to CSV File

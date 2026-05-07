@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Zero with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-01T00:00:00.000Z'
-updatedOn: '2025-05-01T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide demonstrates how to integrate [Zero](https://zero.rocicorp.dev/) by [Rocicorp](https://rocicorp.dev/) with Neon Postgres. Zero allows you to build reactive, real-time applications by writing queries directly in your client code against your backend database schema. It synchronizes query results efficiently to a client-side cache, enabling instant UI updates and a local-first feel.

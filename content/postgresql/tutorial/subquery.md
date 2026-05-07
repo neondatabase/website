@@ -6,7 +6,7 @@ page_description: >-
   allows you to construct complex queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-subquery/'
 ogImage: ''
-updatedOn: '2024-07-01T01:04:57+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ROLLUP

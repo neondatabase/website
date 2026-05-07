@@ -6,7 +6,7 @@ summary: >-
   roles, permissions, and the process for creating and overseeing organizations
   and their associated projects.
 enableTableOfContents: true
-updatedOn: '2026-04-16T19:00:00.000Z'
+updatedOn: '2026-04-17T11:58:10.000Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.

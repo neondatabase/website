@@ -4,7 +4,7 @@ subtitle: Build a Web scraper AI Agent in minutes with AgentStack, Neon, and Fir
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-04T00:00:00.000Z'
-updatedOn: '2025-02-04T00:00:00.000Z'
+updatedOn: '2025-05-30T16:53:05.000Z'
 ---
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.

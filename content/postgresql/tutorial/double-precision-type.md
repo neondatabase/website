@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type/
 ogImage: ''
-updatedOn: '2024-04-19T03:25:47+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NUMERIC Type

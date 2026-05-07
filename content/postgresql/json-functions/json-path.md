@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/
 ogImage: ''
-updatedOn: '2024-03-16T02:17:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_object_keys() Function

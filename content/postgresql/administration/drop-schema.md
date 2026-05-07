@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/
 ogImage: /postgresqltutorial/PostgreSQL-DROP-Schema.png
-updatedOn: '2024-02-12T13:31:28+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER SCHEMA

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-format/
 ogImage: /postgresqltutorial/customer-table.png
-updatedOn: '2024-01-27T14:36:05+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CONCAT_WS() Function

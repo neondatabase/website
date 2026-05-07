@@ -7,7 +7,7 @@ summary: >-
   enabling logical replication in Neon for real-time data updates.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.006Z'
+updatedOn: '2026-04-27T17:26:37.000Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.

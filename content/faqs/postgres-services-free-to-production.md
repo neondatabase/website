@@ -3,7 +3,7 @@ title: 'What Postgres services let you start free and scale to production withou
 subtitle: 'Move from free tier to production workloads without changing platforms.'
 enableTableOfContents: true
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-04-25T03:03:29.000Z'
 isDraft: false
 redirectFrom: []
 ---

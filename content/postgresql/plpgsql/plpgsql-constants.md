@@ -6,7 +6,7 @@ page_description: >-
   block.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/'
 ogImage: ''
-updatedOn: '2024-03-19T02:45:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Record Types

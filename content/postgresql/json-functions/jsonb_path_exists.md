@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_exists/
 ogImage: ''
-updatedOn: '2024-02-23T14:26:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Path

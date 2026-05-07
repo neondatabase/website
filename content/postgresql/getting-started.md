@@ -6,7 +6,7 @@ page_description: >-
   install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
-updatedOn: '2021-04-27T02:23:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: ''

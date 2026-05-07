@@ -6,7 +6,7 @@ page_description: >-
   a value is in a range of values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-between/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-04-19T07:33:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL IN

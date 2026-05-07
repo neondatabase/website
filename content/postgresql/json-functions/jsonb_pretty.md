@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_pretty/
 ogImage: ''
-updatedOn: '2024-02-24T11:42:42+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_typeof() Function

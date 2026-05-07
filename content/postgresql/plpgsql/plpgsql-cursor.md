@@ -6,7 +6,7 @@ page_description: >-
   some practical examples of using PL/pgSQL cursor.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-cursor/'
 ogImage: /postgresqltutorial/plpgsql-cursor.png
-updatedOn: '2024-03-22T14:04:21+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Stored Procedure with INOUT Parameters

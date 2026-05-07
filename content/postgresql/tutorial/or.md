@@ -6,7 +6,7 @@ page_description: >-
   how to use it to combine multiple boolean expressions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-or/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-12T11:31:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AND Operator

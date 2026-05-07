@@ -6,7 +6,7 @@ page_description: >-
   constraints with NOT VALID to add constraints to large tables without downtime
   or table scans.
 ogImage: ''
-updatedOn: '2025-06-22T09:50:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 OAuth Support

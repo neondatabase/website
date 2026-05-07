@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-17T14:08:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRIM_SCALE() Function

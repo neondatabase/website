@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join/
 ogImage: /postgresqltutorial/city.png
-updatedOn: '2024-02-02T02:29:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Cross Join

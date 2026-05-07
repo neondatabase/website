@@ -6,7 +6,7 @@ summary: >-
   changes such as a unified API, session caching, and explicit configuration
   requirements.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.908Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This guide helps you migrate from Neon Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.

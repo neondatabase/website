@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-recursive-query/
 ogImage: ''
-updatedOn: '2024-01-22T07:25:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CTE

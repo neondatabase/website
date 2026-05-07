@@ -6,7 +6,7 @@ summary: >-
   Covers the setup of the Neon serverless driver for JavaScript and TypeScript,
   enabling low-latency Postgres queries over HTTP or WebSockets in serverless
   environments.
-updatedOn: '2026-02-15T20:51:54.272Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 

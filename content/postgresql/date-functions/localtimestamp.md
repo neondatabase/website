@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtimestamp/
 ogImage: ''
-updatedOn: '2024-01-26T10:03:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOCALTIME Function

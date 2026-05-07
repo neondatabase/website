@@ -8,7 +8,7 @@ summary: >-
   branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-03-04T15:52:43.562Z'
+updatedOn: '2026-04-28T20:12:16.000Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.

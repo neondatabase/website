@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-05-05T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 <Admonition type="note" title="Next.js version compatibility">

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-regexp_matches/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-01-27T09:14:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_REPLACE() Function

@@ -6,7 +6,7 @@ page_description: >-
   associated with a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/enable-triggers/'
 ogImage: ''
-updatedOn: '2024-03-26T02:02:29+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Disable Triggers

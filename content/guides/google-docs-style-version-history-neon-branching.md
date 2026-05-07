@@ -4,7 +4,7 @@ subtitle: Recreate a similar Google Docs style version history flow on Postgres 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-05-04T00:00:00.000Z'
+updatedOn: '2026-05-07T18:15:13.000Z'
 ---
 
 If you have ever used Google Docs version history, you know how easily you can jump to an older version, compare it to what you have now, and roll back without losing the thread of what changed. Relational databases usually give you one live schema and one head revision, unless you add your own audit tables or event sourcing.

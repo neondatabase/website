@@ -6,7 +6,7 @@ summary: >-
   key-value pairs, including enabling the extension, storing, querying, and
   performing operations on hstore data.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.077Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It works well for semi-structured data or data without a rigid schema.

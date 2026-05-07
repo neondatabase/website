@@ -6,7 +6,7 @@ page_description: >-
   check if a value is NULL or not.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-is-null/'
 ogImage: /postgresqltutorial/address.png
-updatedOn: '2024-05-14T13:59:22+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LIKE

@@ -6,7 +6,7 @@ page_description: >-
   array_sort(), array_reverse(), reverse() for bytea, integer-to-bytea casting,
   and MIN/MAX aggregates for arrays and composite types.
 ogImage: ''
-updatedOn: '2025-08-10T12:30:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Temporal Constraints

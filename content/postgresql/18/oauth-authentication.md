@@ -6,7 +6,7 @@ page_description: >-
   token-based database connections with your existing identity providers like
   Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2025-06-28T01:40:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Logical Replication Improvements

@@ -4,7 +4,7 @@ subtitle: Understand how NextAuth.js, Neon Auth, and Better Auth differ in sessi
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T02:00:00.000Z'
-updatedOn: '2026-04-21T02:00:00.000Z'
+updatedOn: '2026-04-21T12:11:06.000Z'
 ---
 
 If you are adding authentication to a Next.js application that already uses Postgres, you will run into three options that sound similar but behave very differently in practice: [Auth.js (NextAuth.js)](https://authjs.dev/), [Neon Auth](https://neon.com/docs/auth/overview), and [Better Auth](https://www.better-auth.com/).

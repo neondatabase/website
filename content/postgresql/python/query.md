@@ -7,7 +7,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/query/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png
-updatedOn: '2024-05-19T08:32:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Update Data in a Table'

@@ -10,7 +10,7 @@ page_description: >-
   version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration, and
   FIPS mode validation features for better database security.
 ogImage: ''
-updatedOn: '2025-08-03T14:20:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Not Null as Not Valid

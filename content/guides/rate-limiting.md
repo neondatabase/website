@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to implement rate limiting in Post
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-05-09T13:24:36.612Z'
-updatedOn: '2025-05-09T13:24:36.612Z'
+updatedOn: '2025-06-03T09:24:33.000Z'
 ---
 
 Rate limiting means limiting the number of requests that can happen in a given time window, like 5 requests per minute or 100 requests per hour.

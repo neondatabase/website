@@ -6,7 +6,7 @@ summary: >-
   including best practices, syntax, and prop usage for effective content
   organization and presentation.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.778Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.

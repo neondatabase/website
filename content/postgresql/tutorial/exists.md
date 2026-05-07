@@ -6,7 +6,7 @@ page_description: >-
   existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2024-07-01T01:05:42+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALL Operator

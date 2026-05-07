@@ -4,7 +4,7 @@ subtitle: Build a Todo app using React, Neon Auth, and the Neon Data API
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-24T00:00:00.000Z'
-updatedOn: '2025-12-24T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This guide will walk you through building a secure Todo application using **React**, [Neon Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).

@@ -6,7 +6,7 @@ page_description: >-
   data of one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
 ogImage: ''
-updatedOn: '2024-01-22T13:47:38+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSERT Multiple Rows

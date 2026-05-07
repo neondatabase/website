@@ -4,7 +4,7 @@ subtitle: Use Pulumi to provision and manage your Neon projects, branches, endpo
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-10-08T00:00:00.000Z'
-updatedOn: '2025-10-08T00:00:00.000Z'
+updatedOn: '2025-10-10T03:31:08.000Z'
 ---
 
 [Pulumi](https://www.pulumi.com) is an open-source infrastructure-as-code (IaC) tool that lets you define and provision cloud resources using familiar programming languages such as TypeScript, Python, Go, and C#. By expressing infrastructure as code, Pulumi enables you to use loops, functions, classes, and package management to create configurations that are more dynamic, reusable, and maintainable.

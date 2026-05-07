@@ -6,7 +6,7 @@ page_description: >-
   rows returned from the SELECT statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/'
 ogImage: /postgresqltutorial/PostgreSQL-WHERE.png
-updatedOn: '2024-01-16T10:02:38+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DISTINCT ON

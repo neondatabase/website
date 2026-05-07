@@ -4,7 +4,7 @@ subtitle: Learn how to create a command-line interface (CLI) application using L
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2024-07-01T00:00:00.000Z'
+updatedOn: '2024-07-02T10:58:45.000Z'
 ---
 
 [Laravel Zero](https://laravel-zero.com/) is a micro-framework that provides a starting point for your console application.

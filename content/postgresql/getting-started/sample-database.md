@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/
 ogImage: /postgresqltutorial/dvd-rental-sample-database-diagram.png
-updatedOn: '2024-01-16T02:36:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: What is PostgreSQL?

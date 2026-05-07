@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use LISTEN and NOTIFY for pub/s
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-03-28T13:24:36.612Z'
-updatedOn: '2025-03-28T13:24:36.612Z'
+updatedOn: '2026-02-01T17:40:30.000Z'
 ---
 
 PostgreSQL has a built-in mechanism for publish/subscribe (Pub/Sub) communication using the `LISTEN` and `NOTIFY` commands.

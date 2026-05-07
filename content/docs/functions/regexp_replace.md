@@ -6,7 +6,7 @@ summary: >-
   substrings that match a regular expression pattern, including syntax,
   parameters, and practical examples for data manipulation and formatting.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.882Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `regexp_replace()` function replaces substrings that match a regular expression pattern with the specified replacement string.

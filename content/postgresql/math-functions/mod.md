@@ -6,7 +6,7 @@ page_description: >-
   remainder after dividing the first argument by the second one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/'
 ogImage: ''
-updatedOn: '2024-02-18T07:38:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOG() Function

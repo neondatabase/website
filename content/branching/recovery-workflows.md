@@ -1,7 +1,7 @@
 ---
 title: 'Use branches to restore instantly'
 subtitle: 'Learn how to use branching for recovery: use database branches to go back in time, recover lost data, debug migrations, and audit historical states safely'
-updatedOn: '2026-01-22T00:00:00.000Z'
+updatedOn: '2026-02-19T16:30:53.000Z'
 ---
 
 Because Neon preserves database history, branches can also be used as a practical tool for recovery, investigation, and inspection.

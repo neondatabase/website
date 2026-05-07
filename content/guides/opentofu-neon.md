@@ -4,7 +4,7 @@ subtitle: Use OpenTofu to provision and manage your Neon projects, branches, end
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-26T00:00:00.000Z'
-updatedOn: '2025-05-26T00:00:00.000Z'
+updatedOn: '2026-03-05T04:10:30.000Z'
 ---
 
 [OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use pgvector for vector search 
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-04T13:24:36.612Z'
-updatedOn: '2025-02-04T13:24:36.612Z'
+updatedOn: '2026-02-02T02:58:35.000Z'
 ---
 
 Vector search enables you to perform similarity searches on vectors stored in Postgres.

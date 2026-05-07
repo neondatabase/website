@@ -6,7 +6,7 @@ page_description: >-
   in the PostgreSQL database using JDBC.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/insert/'
 ogImage: ''
-updatedOn: '2024-02-02T04:56:04+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Creating Tables'

@@ -6,7 +6,7 @@ page_description: >-
   result set returned by a query in ascending or descending order.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-order-by/'
 ogImage: /postgresqltutorial/PostgreSQL-ORDER-BY.png
-updatedOn: '2024-01-16T09:02:03+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Column Alias

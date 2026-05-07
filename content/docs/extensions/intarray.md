@@ -6,7 +6,7 @@ summary: >-
   enabling efficient manipulation and querying of integer arrays, including
   operations like sorting and counting elements.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.830Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `intarray` extension for Postgres provides functions and operators for handling arrays of integers. It's particularly optimized for arrays that do not contain any `NULL` values, offering significant performance advantages for certain operations compared to Postgres's built-in array functions.

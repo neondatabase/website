@@ -6,7 +6,7 @@ summary: >-
   environment configuration, adapter setup, CSS imports, and framework-specific
   requirements.
 enableTableOfContents: true
-updatedOn: '2026-03-23T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).

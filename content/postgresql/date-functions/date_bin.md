@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-BIN
 ogImage: ''
-updatedOn: '2026-02-27T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE_TRUNC() Function

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
 ogImage: /postgresqltutorial/PostgreSQL-LEFT-example.png
-updatedOn: '2024-01-29T02:05:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function

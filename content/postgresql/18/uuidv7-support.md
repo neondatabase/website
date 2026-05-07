@@ -6,7 +6,7 @@ page_description: >-
   allows you to generate timestamp-ordered UUIDs that improve B-tree index
   performance while maintaining global uniqueness.
 ogImage: ''
-updatedOn: '2025-06-29T03:30:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Asynchronous I/O

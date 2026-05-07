@@ -6,7 +6,7 @@ summary: >-
   Mermaid, a markdown-like syntax that generates styled diagrams and flowcharts,
   supporting both light and dark modes.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.783Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 This guide shows Neon documentation writers and contributors how to create visual diagrams using Mermaid, a markdown-like syntax for generating diagrams and flowcharts. Mermaid diagrams are automatically styled with Neon's brand colors and support both light and dark modes.

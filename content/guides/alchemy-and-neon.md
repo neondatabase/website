@@ -4,7 +4,7 @@ subtitle: Learn how to use Alchemy Infrastructure-as-Code to programmatically cr
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-10T00:00:00.000Z'
-updatedOn: '2025-05-10T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 Database branching is one of Neon's most powerful features, letting you create isolated database copies in seconds.

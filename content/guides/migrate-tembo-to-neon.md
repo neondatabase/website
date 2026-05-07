@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from Tembo.io to Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2025-05-08T00:00:00.000Z'
+updatedOn: '2025-08-01T20:49:23.000Z'
 ---
 
 [Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide.

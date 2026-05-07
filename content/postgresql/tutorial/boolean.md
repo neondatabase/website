@@ -6,7 +6,7 @@ page_description: >-
   how to use it in designing the database tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-boolean/'
 ogImage: /postgresqltutorial/PostgreSQL-Boolean-300x146.png
-updatedOn: '2024-02-01T01:09:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DEFAULT Value

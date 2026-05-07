@@ -6,7 +6,7 @@ summary: >-
   including project setup, dependency installation, and configuration of
   database credentials for secure access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.026Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"

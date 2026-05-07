@@ -6,7 +6,7 @@ page_description: >-
   assign a rank for every row of a result set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-RANK-function-sample-table.png
-updatedOn: '2020-07-10T04:57:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PERCENT_RANK Function

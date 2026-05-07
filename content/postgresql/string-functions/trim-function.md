@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-trim-function/
 ogImage: ''
-updatedOn: '2024-01-27T14:01:40+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LENGTH() Function

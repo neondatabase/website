@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.073Z'
+updatedOn: '2026-04-01T20:14:28.000Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.

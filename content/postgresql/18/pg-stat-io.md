@@ -6,7 +6,7 @@ page_description: >-
   WAL I/O tracking, per-backend functions, and comprehensive I/O monitoring
   capabilities.
 ogImage: ''
-updatedOn: '2025-08-16T14:20:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements

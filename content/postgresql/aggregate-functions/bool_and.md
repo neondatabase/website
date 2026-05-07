@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/
 ogImage: ''
-updatedOn: '2024-03-22T02:49:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ARRAY_AGG Function

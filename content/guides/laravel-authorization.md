@@ -4,7 +4,7 @@ subtitle: Learn how to set up and utilize Laravel's powerful authorization featu
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2024-07-14T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Laravel provides an authorization system that allows developers to implement fine-grained access control in their applications. While Laravel's built-in features are powerful, some projects require even more advanced role-based access control (RBAC). This is where third-party packages like Spatie's Laravel Permission come into play.

@@ -4,7 +4,7 @@ subtitle: Learn how to implement a job queue system to handle background tasks e
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-16T00:00:00.000Z'
-updatedOn: '2025-03-16T00:00:00.000Z'
+updatedOn: '2026-02-18T14:29:21.000Z'
 ---
 
 Job queues are essential components in modern applications. Queues enable you to handle resource-intensive or time-consuming tasks asynchronously. This approach improves application responsiveness by moving heavy processing out of the request-response cycle.

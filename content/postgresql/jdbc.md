@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL databases in Java using the PostgreSQL JDBC driver.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-JDBC.png'
-updatedOn: '2024-01-31T08:53:11+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Delete Data from Tables'

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 ogImage: ''
-updatedOn: '2024-05-14T14:32:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JDBC

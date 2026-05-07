@@ -6,7 +6,7 @@ page_description: >-
   conditionally insert, update, and delete rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-merge/'
 ogImage: ''
-updatedOn: '2024-03-27T06:10:50+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPSERT using INSERT ON CONFLICT Statement

@@ -4,7 +4,7 @@ subtitle: Send Neon metrics and Postgres logs to New Relic using the OpenTelemet
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-11T00:00:00.000Z'
-updatedOn: '2025-09-11T00:00:00.000Z'
+updatedOn: '2025-09-11T17:37:55.000Z'
 ---
 
 [New Relic](https://newrelic.com/) is an observability platform that helps you visualize, analyze, and troubleshoot your entire software stack. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) allows you to send your project's metrics and Postgres logs directly to New Relic, giving you a centralized view of your database's performance and activity.

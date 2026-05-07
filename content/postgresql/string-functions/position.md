@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-position/
 ogImage: ''
-updatedOn: '2024-04-19T08:26:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function

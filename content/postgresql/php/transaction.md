@@ -6,7 +6,7 @@ page_description: >-
   using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/transaction/'
 ogImage: ''
-updatedOn: '2024-01-30T01:08:33+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Querying Data'

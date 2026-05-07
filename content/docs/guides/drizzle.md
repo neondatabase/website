@@ -6,7 +6,7 @@ summary: >-
   using Drizzle ORM, including configuration for migrations and driver
   connections.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.148Z'
+updatedOn: '2026-04-19T23:49:49.000Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 

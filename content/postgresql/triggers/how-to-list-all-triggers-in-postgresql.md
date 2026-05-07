@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
 ogImage: ''
-updatedOn: '2024-03-28T13:52:14+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Enable Triggers

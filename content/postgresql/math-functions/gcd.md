@@ -6,7 +6,7 @@ page_description: >-
   find the greatest common divisor of two numbers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-gcd/'
 ogImage: ''
-updatedOn: '2024-05-19T03:19:27+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FLOOR() Function

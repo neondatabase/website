@@ -4,7 +4,7 @@ subtitle: Learn how to revert a failed deployment and schema migration in Larave
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2024-05-26T00:00:00.000Z'
+updatedOn: '2026-02-01T13:23:47.000Z'
 ---
 
 Deploying new features and updates is an essential part of maintaining a modern web application. However, not every deployment goes as planned.

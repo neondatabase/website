@@ -4,7 +4,7 @@ subtitle: Learn how to scale .NET applications with Entity Framework's DbContext
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2024-10-13T00:00:00.000Z'
+updatedOn: '2025-12-03T12:37:52.000Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.

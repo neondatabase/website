@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/export-postgresql-table-to-csv-file/
 ogImage: /postgresqltutorial/posgresql-import-csv.jpg
-updatedOn: '2024-02-01T14:54:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Import CSV File Into PostgreSQL Table

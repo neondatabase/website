@@ -6,7 +6,7 @@ page_description: >-
   time-related functions to handle time values effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/'
 ogImage: /postgresqltutorial/PostgreSQL-TIME-example.png
-updatedOn: '2024-02-02T06:49:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Interval Data Type

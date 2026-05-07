@@ -6,7 +6,7 @@ page_description: >-
   to select data from the database and assign it to a variable.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-select-into/'
 ogImage: ''
-updatedOn: '2024-03-19T01:05:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Variables
