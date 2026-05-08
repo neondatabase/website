@@ -361,7 +361,7 @@ Use snapshots (branches) for versions you want to keep beyond the [restore windo
 <Admonition type="important">
 **Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
 
-**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month.
 </Admonition>
 
 Example creating a snapshot:

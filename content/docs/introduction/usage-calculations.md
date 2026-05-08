@@ -43,7 +43,7 @@ Older endpoints (`/consumption_history/account` and `/consumption_history/projec
 | `root_branch_bytes_month`        | Storage on root branches                                                           | byte-hours   | GB-months     |
 | `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                      | byte-hours   | GB-months     |
 | `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                            | byte-hours   | GB-months     |
-| `snapshot_storage_bytes_month`   | Storage for branch snapshots (manual and scheduled)                                | byte-hours   | GB-months     |
+| `snapshot_storage_bytes_month`   | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-hours   | GB-months     |
 | `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                     | bytes        | GB            |
 | `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)   | bytes        | GB            |
 | `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)               | branch-hours | branch-months |

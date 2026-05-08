@@ -41,6 +41,8 @@ If invite emails aren't received, they may be in spam or quarantined. Recipients
 
 To list members, update roles, or manage invitations programmatically, see [Manage organizations using the Neon API](/docs/manage/orgs-api) (including [List members](/docs/manage/orgs-api#list-members)).
 
+The **People** page also shows deactivated organization members with a **Deactivated** badge, so admins can review access without opening each member profile.
+
 ## Set permissions
 
 Permissions within the organization are exclusively managed by Admins. As an Admin:
@@ -51,11 +53,20 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ![organization members](/docs/manage/orgs_members_kebab.png 'no-border')
 
+## Require 2FA for organization members
+
+Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**.
+
+- You can only enable this if your own account already has 2FA enabled.
+- When required 2FA is on, members who are not enrolled are prompted to set up 2FA when they access the organization.
+
+See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps.
+
 ## Invite Collaborators
 
 Any member can invite external users to [collaborate](/docs/guides/project-collaboration-guide) on specific projects. For example, if you want to give limited access to a contractor.
 
-Members can invite collaborators from a project's **Settings** page. If any project in your organization has collaborators, you'll also see the option to invite and manage collaborators from the organization'e **People** page.
+Members can invite collaborators from a project's **Settings** page. If any project in your organization has collaborators, you'll also see the option to invite and manage collaborators from the organization's **People** page.
 
 Collaborators _do not_ have access to the organization. They access their shared projects by selecting the **Projects shared with me** option in the org switcher.
 

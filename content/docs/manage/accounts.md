@@ -55,6 +55,8 @@ No surprises here: just enter your current password, then your new one (twice). 
 
 Protect your account with two-factor authentication (2FA). Once enabled, you'll enter a 6-digit code from your authenticator app each time you log in.
 
+If your organization admin requires 2FA for the organization, you must enroll in 2FA to continue accessing that organization.
+
 ### Enable 2FA
 
 1. Go to **Account settings** and click **Set up two-factor authentication**.

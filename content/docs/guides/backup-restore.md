@@ -13,7 +13,9 @@ updatedOn: '2026-04-17T18:00:00.000Z'
 <Admonition type="note" title="Snapshots in Beta">
 The **Snapshots** feature is in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
-**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month.
+
+Billing behavior: manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first scheduled snapshot, then as incremental (delta) storage for subsequent scheduled snapshots.
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -493,6 +495,7 @@ Use this option if you need to inspect the restored data before you switch over 
     - Moves your original branch's computes to the new branch and restarts the computes.
     - Renames the new branch to original branch's name.
     - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.
+    - Moves any backup schedule from the original branch to the branch that now has the restored data, so scheduled snapshots continue on the active branch after finalize.
     - If the original branch was **protected**, that protection is **moved** to the branch that ends up with your restored data (the renamed branch that keeps your connection string). The previous branch is no longer protected, so your [protected branch](/docs/guides/protected-branches) count stays correct.
 
     ```bash
