@@ -8,14 +8,24 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-05-08T03:56:34.165Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17, and 18 (preview), as per the [Neon version support policy](/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, and 18, as per the [Neon version support policy](/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+
+The table below lists the latest minor version available on Neon for each supported major version, along with the upstream Postgres release date.
+
+| Major version | Latest minor version on Neon | Upstream release date |
+| ------------- | ---------------------------- | --------------------- |
+| 14            | PostgreSQL 14.21             | 2026-02-12            |
+| 15            | PostgreSQL 15.16             | 2026-02-12            |
+| 16            | PostgreSQL 16.12             | 2026-02-12            |
+| 17            | PostgreSQL 17.8              | 2026-02-12            |
+| 18            | PostgreSQL 18.2              | 2026-02-12            |
 
 ## Postgres extensions
 
