@@ -6,7 +6,7 @@ summary: >-
   ClickHouse Cloud using ClickPipes, ClickHouse's native CDC connector.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-05-08T10:09:13.470Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -20,6 +20,8 @@ In this guide, you will learn how to prepare your Neon Postgres database and con
 - A [ClickHouse Cloud account](https://clickhouse.cloud/)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+- [Neon API key](/docs/manage/api-keys#create-project-scoped-organization-api-keys) (for API or Terraform) with permissions to modify project settings.
+- **ClickHouse Cloud credentials** - Key ID, Key Secret, and Organization ID obtained from the [ClickHouse Cloud console](https://clickhouse.com/docs/cloud/manage/openapi) and organization settings (for API or Terraform)
 
 <Admonition type="important" title="Compute and billing">
 Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
@@ -37,12 +39,42 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 
 To enable logical replication in Neon:
 
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
 1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
    ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+
+```bash
+curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "project": {
+    "settings": {
+      "enable_logical_replication": true
+    }
+  }
+}'
+```
+
+> Replace `$NEON_API_KEY` and `$PROJECT_ID` with your actual Neon API key and project ID.
+
+</TabItem>
+
+</Tabs>
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
@@ -57,17 +89,7 @@ SHOW wal_level;
 
 It's recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
-<Tabs labels={["CLI", "Console", "API"]}>
-
-<TabItem>
-
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands - roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
-```bash
-neon roles create --name replication_user
-```
-
-</TabItem>
+<Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
@@ -101,6 +123,44 @@ curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id
 ```
 
 > Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
+
+Capture the `password` value from the API response. For example, your response will look similar to the following:
+
+<details>
+
+<summary>Example API response for role creation</summary>
+
+```json
+{
+    "role": {
+        "branch_id": "br-spring-base-aqftsqpm",
+        "name": "replication_user",
+        "password": "your_password",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2026-05-08T06:20:28Z",
+        "updated_at": "2026-05-08T06:20:28Z"
+    },
+    "operations": [
+        {
+            "id": "0390cd9d-7e69-4bb5-b06c-2b88371d1d55",
+            "project_id": "holy-heart-14531142",
+            "branch_id": "br-spring-base-aqftsqpm",
+            "endpoint_id": "ep-autumn-glitter-aqi3gmt4",
+            "action": "apply_config",
+            "status": "running",
+            "failures_count": 0,
+            "created_at": "2026-05-08T06:20:28Z",
+            "updated_at": "2026-05-08T06:20:28Z",
+            "total_duration_ms": 0
+        }
+    ]
+}
+```
+
+</details>
+
+The `password` field is present inside the `role` object in the API response. Make sure to securely store this password, as it will be required when configuring your ClickPipe connection to authenticate with your Neon database.
 
 </TabItem>
 
@@ -156,6 +216,10 @@ For instructions, see [Configure IP Allow](/docs/manage/projects#configure-ip-al
 
 Now that your Neon source database is prepared, you can create the CDC integration in ClickHouse.
 
+<Tabs labels={["Console", "API", "Terraform"]}>
+
+<TabItem>
+
 1.  Log in to your [ClickHouse Cloud account](https://clickhouse.cloud/) and navigate to your service.
 2.  Select **Data Sources** on the left-side menu and click **Create ClickPipe**.
     ![ClickHouse Cloud create ClickPipe button](/docs/guides/clickhouse_create_clickpipe.png)
@@ -187,10 +251,305 @@ ClickPipes will immediately begin provisioning. It will first take a snapshot of
 
 ![ClickHouse Cloud ClickPipe running status](/docs/guides/clickhouse_clickpipe_running.png)
 
+</TabItem>
+
+<TabItem>
+
+You can provision and manage your ClickHouse Cloud service and ClickPipes programmatically using the ClickHouse Cloud API. Refer to the [ClickHouse Cloud API documentation](https://clickhouse.com/docs/cloud/manage/api/swagger) for more details.
+
+First, submit a `POST` request to the `/services` endpoint to create a ClickHouse Cloud service:
+
+```bash
+curl -X POST "https://api.clickhouse.cloud/v1/organizations/$ORG_ID/services" \
+  -u "$KEY_ID:$KEY_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "name": "neon-clickhouse-service",
+  "provider": "aws",
+  "region": "us-east-1",
+  "ipAccessList": [
+        {
+            "source": "0.0.0.0/0",
+            "description": "Allow all"
+        }
+    ]
+}'
+```
+
+> Modify the `provider`, `region`, and `ipAccessList` values as needed for your use case. The above example allows all IPs to connect, which is never recommended for production environments. For secure access, specify only the IP addresses or ranges that require access.
+
+The response will include a `service` object containing an `id`. Use this ID as your `$SERVICE_ID` for the next step.
+
+<details>
+<summary>Example API response for service creation</summary>
+
+```json
+{
+    "result": {
+        "service": {
+            "id": "abcd1234-5678-90ab-cdef-1234567890ab",
+            "name": "neon-clickhouse-service",
+            "provider": "aws",
+            "region": "us-east-1",
+            "state": "provisioning",
+            "endpoints": [
+                {
+                    "protocol": "nativesecure",
+                    "host": "b22y67wt8m.us-east-1.aws.clickhouse.cloud",
+                    "port": 9440
+                },
+                {
+                    "protocol": "https",
+                    "host": "b22y67wt8m.us-east-1.aws.clickhouse.cloud",
+                    "port": 8443
+                }
+            ],
+            "idleScaling": true,
+            "idleTimeoutMinutes": 15,
+            "minReplicaMemoryGb": 16,
+            "maxReplicaMemoryGb": 120,
+            "minTotalMemoryGb": 48,
+            "maxTotalMemoryGb": 360,
+            "numReplicas": 3,
+            "ipAccessList": [
+                {
+                    "source": "0.0.0.0/0",
+                    "description": "Allow all"
+                }
+            ],
+            "createdAt": "2026-05-08T08:28:19Z",
+            "clickhouseVersion": "25.12",
+            "iamRole": "arn:aws:iam::551171829645:role/CH-S3-navyaws-at-27-ue1-42-Role",
+            "privateEndpointIds": [],
+            "availablePrivateEndpointIds": [],
+            "dataWarehouseId": "ded125b0-6283-41b7-9802-ac022e5d6115",
+            "isPrimary": true,
+            "isReadonly": false,
+            "profile": "v1-default",
+            "releaseChannel": "default",
+            "hasTransparentDataEncryption": false,
+            "tags": [],
+            "enableCoreDumps": true,
+            "mcpEnabled": false
+        },
+        "password": "secure_password_123"
+    },
+    "requestId": "85ef7cfa-fbbb-4c61-b51d-428b3bc66ccb",
+    "status": 200
+}
+```
+
+</details>
+
+Next, submit a `POST` request to the `/clickpipes` endpoint with your connection details to set up the ClickPipe:
+
+```bash
+curl -X POST "https://api.clickhouse.cloud/v1/organizations/$ORG_ID/services/$SERVICE_ID/clickpipes" \
+  -u "$KEY_ID:$KEY_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{
+  "name": "neon_to_clickhouse",
+  "source": {
+    "postgres": {
+      "type": "neon",
+      "host": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
+      "port": 5432,
+      "database": "neondb",
+      "credentials": {
+        "username": "replication_user",
+        "password": "your_password"
+      },
+      "settings": {
+          "syncIntervalSeconds": 60,
+          "publicationName": "clickpipes_pub",
+          "replicationMode": "cdc"
+      },
+      "tableMappings": [
+        {
+          "sourceSchemaName": "public",
+          "sourceTable": "your_table",
+          "targetTable": "your_table"
+        }
+      ]
+    }
+  },
+  "destination": {
+    "database": "default"
+  }
+}'
+```
+
+> Replace the connection details with your actual configuration. Make sure to use a **direct connection** to your Neon compute endpoint, not a pooled connection. When copying your connection string from Neon, ensure that the hostname does not include `-pooler`.
+
+<details>
+<summary>Example API response for ClickPipe creation</summary>
+
+```json
+{
+    "result": {
+        "id": "b7eefe5c-7e7c-4a0c-84bc-2a78f53a6253",
+        "serviceId": "59851646-bdc4-477b-9c00-613b48487fbe",
+        "name": "neon_to_clickhouse",
+        "state": "Provisioning",
+        "source": {
+            "postgres": {
+                "type": "neon",
+                "host": "ep-autumn-glitter-aqi3gmt4.c-8.us-east-1.aws.neon.tech",
+                "port": 5432,
+                "database": "neondb",
+                "authentication": "basic",
+                "settings": {
+                    "syncIntervalSeconds": 60,
+                    "pullBatchSize": 100000,
+                    "snapshotNumRowsPerPartition": 100000,
+                    "initialLoadParallelism": 4,
+                    "snapshotNumberOfParallelTables": 1,
+                    "replicationSlotName": "",
+                    "publicationName": "clickpipes_pub",
+                    "replicationMode": "cdc",
+                    "allowNullableColumns": false,
+                    "enableFailoverSlots": false,
+                    "deleteOnMerge": false
+                },
+                "tableMappings": [
+                    {
+                        "sourceSchemaName": "public",
+                        "sourceTable": "playing_with_neon",
+                        "targetTable": "playing_with_neon",
+                        "excludedColumns": [],
+                        "useCustomSortingKey": false,
+                        "sortingKeys": [],
+                        "tableEngine": "ReplacingMergeTree"
+                    }
+                ]
+            }
+        },
+        "destination": {
+            "database": "default",
+            "table": "",
+            "managedTable": false,
+            "columns": []
+        },
+        "fieldMappings": [],
+        "settings": {},
+        "createdAt": "2026-05-08T08:41:14.83600211Z",
+        "updatedAt": "2026-05-08T08:41:14.83600211Z"
+    },
+    "requestId": "7bbc392d-001e-47a3-ad38-008254bec55c",
+    "status": 200
+}
+```
+
+</details>
+
+</TabItem>
+
+<TabItem>
+
+You can provision and manage your ClickHouse Cloud service and ClickPipes as infrastructure-as-code using the [ClickHouse Terraform provider](https://registry.terraform.io/providers/ClickHouse/clickhouse/latest/docs).
+
+Create a Terraform configuration file (e.g., `main.tf`) with the following content, replacing the placeholder values with your actual configuration:
+
+```terraform
+terraform {
+  required_providers {
+    clickhouse = {
+      source  = "ClickHouse/clickhouse"
+      version = ">= 3.14.0"
+    }
+  }
+}
+
+provider "clickhouse" {
+  organization_id = "your_organization_id"
+  token_key       = "your_key_id"
+  token_secret    = "your_key_secret"
+}
+
+# 1. Create the ClickHouse Cloud service
+resource "clickhouse_service" "my_service" {
+  name           = "neon-clickhouse-service"
+  cloud_provider = "aws"
+  region         = "us-east-1"
+  password       = "replace-with-a-secure-password-123"
+  ip_access = [
+    {
+      source      = "0.0.0.0/0"
+      description = "Allow all"
+    }
+  ]
+}
+
+# 2. Create the ClickPipe connecting Neon to the ClickHouse service
+resource "clickhouse_clickpipe" "pg_pipe" {
+  name       = "neon_to_clickhouse"
+  service_id = clickhouse_service.my_service.id
+  source = {
+    postgres = {
+      type     = "neon"
+      host     = "ep-cool-darkness-123456.us-east-2.aws.neon.tech"
+      port     = 5432
+      database = "neondb"
+      credentials = {
+        username = "replication_user"
+        password = "your_password"
+      }
+      settings = {
+        publication_name = "clickpipes_pub"
+        replication_mode = "cdc"
+      }
+      table_mappings = [
+        {
+          source_schema_name = "public"
+          source_table       = "your_table"
+          target_table       = "your_table"
+        }
+      ]
+    }
+  }
+  destination = {
+    database = "default"
+  }
+}
+```
+
+> **Note:** The `ip_access_list` block above allows all IPs (`0.0.0.0/0`) to connect to the ClickHouse service, which is never recommended for production environments. For secure access, restrict this to your specific IP addresses or ranges.
+
+<Admonition type="important">
+If you are hardcoding or passing your Neon connection string, ensure you use a **direct connection** to your Neon compute endpoint, not a pooled connection. Make sure the hostname does not include `-pooler`.
+</Admonition>
+
+Initialize Terraform to download the ClickHouse provider:
+
+```bash
+terraform init
+```
+
+Next, run `terraform plan` to verify the resources that will be created.
+
+```bash
+terraform plan --out=tfplan
+```
+
+You should see an output indicating that a ClickHouse service and a ClickPipe will be created. Verify that the configuration looks correct, and then apply the changes to provision the resources:
+
+```bash
+terraform apply "tfplan"
+```
+
+Terraform will create the ClickHouse Cloud service and set up the ClickPipe to replicate data from your Neon Postgres database to ClickHouse. You can monitor the status of your ClickPipe in the ClickHouse Cloud console or by using the ClickHouse Cloud API.
+
+</TabItem>
+
+</Tabs>
+
 ## References
 
 - [ClickHouse: Ingesting data from Postgres to ClickHouse (using CDC)](https://clickhouse.com/docs/integrations/clickpipes/postgres)
 - [ClickHouse: Neon Postgres source setup guide](https://clickhouse.com/docs/integrations/clickpipes/postgres/source/neon-postgres)
 - [ClickHouse: ClickPipes for Postgres FAQ](https://clickhouse.com/docs/integrations/clickpipes/postgres/faq)
+- [ClickHouse Cloud API documentation](https://clickhouse.com/docs/cloud/manage/api/swagger)
+- [ClickHouse Terraform provider documentation](https://registry.terraform.io/providers/ClickHouse/clickhouse/latest/docs)
 
 <NeedHelp/>
+```
