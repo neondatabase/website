@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/
 ogImage: ''
-updatedOn: '2024-03-21T03:42:38+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_DAYS() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL JUSTIFY_INTERVAL() Function
   slug: postgresql-date-functions/postgresql-justify_interval
 ---
+
 <Admonition type="info" id="CTA">
 The `JUSTIFY_HOURS()` function works the same way across every PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

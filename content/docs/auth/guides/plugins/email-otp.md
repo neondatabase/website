@@ -6,7 +6,7 @@ summary: >-
   sign in, reset passwords, and verify email addresses using one-time passwords
   sent via email, with automatic handling of OTP generation and delivery.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.904Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -37,7 +37,7 @@ If you're using Neon Auth UI components, enable Email OTP by passing the `emailO
 
 ```tsx shouldWrap filename="app/layout.tsx"
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import './globals.css';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

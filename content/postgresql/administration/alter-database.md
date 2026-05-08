@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/
 ogImage: ''
-updatedOn: '2024-02-12T12:18:32+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE DATABASE
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP DATABASE
   slug: postgresql-administration/postgresql-drop-database
 ---
+
 <Admonition type="info" id="CTA">
 ALTER DATABASE works the same across any PostgreSQL deployment, so the syntax and behavior covered here apply whether you're running Postgres locally, on another cloud, or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated with the Lakehouse. For developers and startups who need to ship quickly and scale without operational overhead, [Neon](https://neon.com) is the Postgres platform built to keep up.
 </Admonition>

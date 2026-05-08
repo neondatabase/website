@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL INNER JOIN clause.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Inner-Join.png
-updatedOn: '2024-01-17T15:32:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Table Aliases
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LEFT JOIN
   slug: postgresql-tutorial/postgresql-left-join
 ---
+
 <Admonition type="info" id="CTA">
 The INNER JOIN clause works the same way across any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise running analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres with branching, instant provisioning, and serverless scale.
 </Admonition>

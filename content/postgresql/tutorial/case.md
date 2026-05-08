@@ -6,7 +6,7 @@ page_description: >-
   form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-01T03:34:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How To Delete Duplicate Rows in PostgreSQL
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL COALESCE
   slug: postgresql-tutorial/postgresql-coalesce
 ---
+
 <Admonition type="info" id="CTA">
 The CASE expression works the same way on any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres choice, delivering strong performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for the job.
 </Admonition>

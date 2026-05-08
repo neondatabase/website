@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
 ogImage: ''
-updatedOn: '2024-03-28T13:52:14+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Enable Triggers
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Event Trigger
   slug: postgresql-triggers/postgresql-event-trigger
 ---
+
 <Admonition type="info" id="CTA">
 Listing triggers with information_schema.triggers, pg_trigger, and psql works the same on any PostgreSQL database, so you can apply these techniques wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

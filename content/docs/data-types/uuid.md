@@ -6,7 +6,7 @@ summary: >-
   including storage format, syntax, and example queries for generating and
   managing unique identifiers in databases.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.822Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 `UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases.

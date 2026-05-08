@@ -6,7 +6,7 @@ summary: >-
   authentication environments for testing changes to permissions and
   configurations without impacting production data.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.037Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

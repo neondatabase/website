@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-indexes/postgresql-multicolumn-indexes/
 ogImage: ''
-updatedOn: '2024-02-28T09:28:50+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Partial Index
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL REINDEX
   slug: postgresql-indexes/postgresql-reindex
 ---
+
 <Admonition type="info" id="CTA">
 Multicolumn indexes work the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

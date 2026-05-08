@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/
 ogImage: ''
-updatedOn: '2024-01-25T02:04:03+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TABLE
@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
   slug: postgresql-tutorial/postgresql-copy-table
 ---
+
 <Admonition type="info" id="CTA">
 TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for you: fast, secure, and fully integrated into the Lakehouse so your operational data and analytics live together. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the best Postgres platform for that, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

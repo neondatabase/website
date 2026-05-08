@@ -6,7 +6,7 @@ page_description: >-
   the current loop iteration and continue the next one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-continue/'
 ogImage: ''
-updatedOn: '2024-03-19T04:07:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Exit Statement
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Exception
   slug: postgresql-plpgsql/postgresql-exception
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL `continue` statement works the same on any PostgreSQL deployment, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform for you.
 </Admonition>

@@ -1,7 +1,7 @@
 ---
 title: 'The building blocks'
 subtitle: 'Learn how Neon projects, branches, and hierarchies work: fast copy-on-write branching, isolated compute per branch, and instant restore with snapshots'
-updatedOn: '2026-01-22T00:00:00.000Z'
+updatedOn: '2026-02-17T14:15:38.000Z'
 ---
 
 ## Projects

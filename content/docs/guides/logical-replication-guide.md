@@ -9,9 +9,8 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
-  - /docs/guides/logical-replication-clickhouse
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-05-03T13:21:51.000Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
@@ -56,7 +55,7 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
-<a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
+<a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse using ClickPipes" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
 

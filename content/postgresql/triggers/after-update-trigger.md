@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-update-trigger/
 ogImage: ''
-updatedOn: '2024-03-28T12:24:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE UPDATE Trigger
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BEFORE DELETE Trigger
   slug: postgresql-triggers/postgresql-before-delete-trigger
 ---
+
 <Admonition type="info" id="CTA">
 AFTER UPDATE triggers work the same across every PostgreSQL deployment, so the patterns here apply whether you're running Postgres locally, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, combining strong performance and security with native integration into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

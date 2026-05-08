@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating ElectricSQL with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2025-05-28T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Neon Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.

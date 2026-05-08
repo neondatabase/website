@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 JSON Format for COPY TO'
 page_title: 'PostgreSQL 19 JSON COPY TO - Native JSON Data Export'
 page_description: 'Learn how to use PostgreSQL 19 COPY TO with FORMAT JSON to export data as NDJSON or JSON arrays, replacing workarounds with native streaming JSON output.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Logical Replication Improvements'
@@ -154,11 +154,11 @@ COPY users TO STDOUT WITH (FORMAT JSON);
 
 Native JSON output is streaming (constant memory), produces clean JSON objects, and does not require wrapping each row in a function call.
 
-| Approach | Streaming | Clean Output | Memory Usage |
-|---|---|---|---|
-| `row_to_json()` in COPY | Yes | Extra escaping | Constant |
-| `json_agg()` | No | Clean | Proportional to result |
-| `FORMAT JSON` (new) | Yes | Clean | Constant |
+| Approach                | Streaming | Clean Output   | Memory Usage           |
+| ----------------------- | --------- | -------------- | ---------------------- |
+| `row_to_json()` in COPY | Yes       | Extra escaping | Constant               |
+| `json_agg()`            | No        | Clean          | Proportional to result |
+| `FORMAT JSON` (new)     | Yes       | Clean          | Constant               |
 
 ## Practical use cases
 
@@ -200,6 +200,7 @@ Server-side `COPY ... TO 'filename'` requires the `pg_write_server_files` role o
 ```text
 mydb=# \copy (SELECT id, name, email, role FROM users WHERE role = 'admin') TO 'admin_users.json' WITH (FORMAT JSON, FORCE_ARRAY)
 ```
+
 </Admonition>
 
 ### Data Warehouse Loading

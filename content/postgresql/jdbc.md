@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL databases in Java using the PostgreSQL JDBC driver.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-JDBC.png'
-updatedOn: '2024-01-31T08:53:11+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Delete Data from Tables'
@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
   slug: postgresql-jdbc/connecting-to-postgresql-database
 ---
+
 <Admonition type="info" id="CTA">
 Working with PostgreSQL through JDBC follows the same patterns on any Postgres deployment, so everything here applies whether you're running Postgres locally, on a VM, or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production AI workloads demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets you from prototype to production without slowing down.
 </Admonition>

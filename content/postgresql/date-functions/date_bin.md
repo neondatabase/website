@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-BIN
 ogImage: ''
-updatedOn: '2026-02-27T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE_TRUNC() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ISFINITE() Function
   slug: postgresql-date-functions/postgresql-isfinite
 ---
+
 <Admonition type="info" id="CTA">
 The DATE_BIN() function is part of standard PostgreSQL 14 and later, so everything here applies to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise bucketing time-series data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to do it.
 </Admonition>

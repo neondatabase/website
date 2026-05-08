@@ -7,7 +7,7 @@ page_description: >-
   set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png
-updatedOn: '2020-07-10T04:55:06+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUME_DIST Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL FIRST_VALUE Function
   slug: postgresql-window-function/postgresql-first_value-function
 ---
+
 <Admonition type="info" id="CTA">
 The `DENSE_RANK()` function works the same way across any PostgreSQL deployment, so the techniques shown here for ranking rows without gaps apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises building analytical and AI workloads on top of their operational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

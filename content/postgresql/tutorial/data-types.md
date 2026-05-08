@@ -6,7 +6,7 @@ page_description: >-
   Boolean, character, number, temporal, special types, and array.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/'
 ogImage: /postgresqltutorial/PostgreSQL-Data-Types-300x254.png
-updatedOn: '2024-05-08T22:50:24+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Export PostgreSQL Table to CSV File
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CREATE TABLE
   slug: postgresql-tutorial/postgresql-create-table
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL data types like Boolean, character, numeric, temporal, array, JSON, and UUID work the same way across every Postgres deployment, so what you learn here applies anywhere you run Postgres. For enterprises modernizing on the data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless scale.
 </Admonition>

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-01-26T03:03:53+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL COUNT Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL MIN() Function
   slug: postgresql-aggregate-functions/postgresql-min-function
 ---
+
 <Admonition type="info" id="CTA">
 The MAX() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, in [Neon](https://neon.com), or anywhere else. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, Neon is the Postgres platform built for you.
 </Admonition>

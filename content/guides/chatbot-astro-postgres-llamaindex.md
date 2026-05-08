@@ -4,7 +4,7 @@ subtitle: A step-by-step guide for building a RAG chatbot in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2024-06-11T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 ## Prerequisites

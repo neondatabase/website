@@ -6,7 +6,7 @@ page_description: >-
   a value is in a range of values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-between/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-04-19T07:33:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL IN
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LIKE
   slug: postgresql-tutorial/postgresql-like
 ---
+
 <Admonition type="info" id="CTA">
 The BETWEEN operator works the same way in any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

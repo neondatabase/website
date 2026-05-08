@@ -6,7 +6,7 @@ page_description: >-
   character based on its ASCII value or Unicode code point.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-chr/'
 ogImage: /postgresqltutorial/PostgreSQL-CHR-ASCII-example.png
-updatedOn: '2024-01-29T01:38:05+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ASCII() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL INITCAP() Function
   slug: postgresql-string-functions/postgresql-initcap
 ---
+
 <Admonition type="info" id="CTA">
 The `CHR()` function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: high performance, secure by default, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to match your pace.
 </Admonition>

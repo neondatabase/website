@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-real-data-type/
 ogImage: ''
-updatedOn: '2024-04-19T03:13:41+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DOUBLE PRECISION Data Type
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Integer Data Types
   slug: postgresql-tutorial/postgresql-integer
 ---
+
 <Admonition type="info" id="CTA">
 The REAL data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed platform. For enterprises, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration that serious data workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for your velocity.
 </Admonition>

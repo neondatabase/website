@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use Postgres as a document stor
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-12-17T13:24:36.612Z'
-updatedOn: '2024-12-17T13:24:36.612Z'
+updatedOn: '2025-05-30T16:53:05.000Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.

@@ -5,6 +5,7 @@ const jsYaml = require('js-yaml');
 const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
+const getExcerpt = require('./get-excerpt');
 
 const getAllPosts = async () => {
   const slugs = await getPostSlugs(DOCS_DIR_PATH);
@@ -61,8 +62,10 @@ const getAllChangelogs = async () => {
       return {
         title: title || content.match(/# (.*)/)?.[1],
         slug: slugWithoutFirstSlash,
+        subtitle: '',
         category: 'changelog',
         date,
+        excerpt: getExcerpt(content, 280),
         content,
         isDraft,
         redirectFrom,

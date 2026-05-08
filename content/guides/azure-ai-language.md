@@ -4,7 +4,7 @@ subtitle: Learn how to analyze customer feedback using Azure AI Language and sto
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2024-11-30T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 Analyzing customer sentiment can help you understand your customer satisfaction and identify areas for improvement. The Azure AI Language Services provide tools for sentiment analysis, key phrase extraction, and language detection which can be used to analyze customer feedback and extract valuable insights.

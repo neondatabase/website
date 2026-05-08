@@ -6,7 +6,7 @@ summary: >-
   detailing installation, connection procedures, and performance metrics
   tracking.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.091Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 pgAdmin is a database management tool for Postgres that supports various database tasks, including monitoring performance metrics.

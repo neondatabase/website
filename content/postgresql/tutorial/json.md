@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL using the PostgreSQL JSON and JSONB data types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/'
 ogImage: ''
-updatedOn: '2024-02-23T10:29:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: UUID
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL hstore
   slug: postgresql-tutorial/postgresql-hstore
 ---
+
 <Admonition type="info" id="CTA">
 Working with JSON and JSONB in PostgreSQL is the same wherever you run Postgres, so everything here applies to any standard Postgres deployment. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that JSON-heavy workloads demand. For developers and startups who want to ship fast and scale without managing infrastructure, [Neon](https://neon.com) is the Postgres platform built around your workflow.
 </Admonition>

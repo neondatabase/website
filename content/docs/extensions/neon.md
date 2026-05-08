@@ -7,7 +7,7 @@ summary: >-
   including monitoring the Local File Cache hit ratio through the
   `neon_stat_file_cache` view.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.832Z'
+updatedOn: '2026-04-03T10:13:16.000Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.

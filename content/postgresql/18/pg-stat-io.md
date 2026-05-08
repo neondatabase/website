@@ -6,7 +6,7 @@ page_description: >-
   WAL I/O tracking, per-backend functions, and comprehensive I/O monitoring
   capabilities.
 ogImage: ''
-updatedOn: '2025-08-16T14:20:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 psql Improvements
   slug: postgresql-18/psql-improvements
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's improvements to pg_stat_io work the same on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed Postgres that's fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for rapid iteration with branching, instant provisioning, and serverless scale.
 </Admonition>

@@ -6,7 +6,7 @@ summary: >-
   substrings from a string based on a specified regular expression pattern,
   including examples for parsing log entries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.881Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 The Postgres `regexp_match()` function is used to extract substrings that match a regular expression pattern from a given string. It returns an array of matching substrings, including capture groups if specified in the pattern.

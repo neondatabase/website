@@ -7,7 +7,7 @@ page_description: >-
   OVERLAPS clause for primary keys and unique constraints, plus the PERIOD
   clause for foreign keys.
 ogImage: ''
-updatedOn: '2025-06-29T04:10:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Enhanced Returning
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL 18 Array and Bytea Function Improvements
   slug: postgresql-18/array-bytea-improvements
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's temporal constraints work the same on any Postgres deployment, so everything here about WITHOUT OVERLAPS, the PERIOD clause, and range types applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: high performance, strong security, and native integration with the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database server effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/psql-commands/'
 ogImage: /postgresqltutorial/psql-commands.jpg
-updatedOn: '2024-01-16T06:44:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Describe Table
@@ -15,6 +15,7 @@ nextLink:
   title: How to Uninstall PostgreSQL from Ubuntu
   slug: postgresql-administration/uninstall-postgresql-ubuntu
 ---
+
 <Admonition type="info" id="CTA">
 These psql commands work with any PostgreSQL installation, so you can use them whether you're connecting to a local database, a self-managed cluster, or a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

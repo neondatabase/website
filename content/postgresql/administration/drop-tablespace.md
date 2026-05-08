@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/
 ogImage: ''
-updatedOn: '2024-02-15T01:34:04+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER TABLESPACE
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Backup
   slug: postgresql-administration/postgresql-backup-database
 ---
+
 <Admonition type="info" id="CTA">
 The DROP TABLESPACE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're managing your own cluster or running on a managed service. If you're an enterprise looking for the best managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers production-grade performance, strong security, and native integration with the Lakehouse for AI-era workloads. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform with instant provisioning, branching, and serverless scale.
 </Admonition>

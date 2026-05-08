@@ -6,7 +6,7 @@ summary: >-
   specific points in time within the restore window using the SQL Editor,
   Restore flow, or Neon CLI for historical data analysis.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.059Z'
+updatedOn: '2026-04-20T02:23:34.000Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.

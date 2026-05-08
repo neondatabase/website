@@ -6,7 +6,7 @@ page_description: >-
   the absolute value of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-abs/'
 ogImage: ''
-updatedOn: '2024-02-16T14:25:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Math Functions
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CEIL() Function
   slug: postgresql-math-functions/postgresql-ceil
 ---
+
 <Admonition type="info" id="CTA">
 The `ABS()` function works the same in any PostgreSQL database, so what you learn here carries over wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

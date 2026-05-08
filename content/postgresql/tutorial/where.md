@@ -6,7 +6,7 @@ page_description: >-
   rows returned from the SELECT statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/'
 ogImage: /postgresqltutorial/PostgreSQL-WHERE.png
-updatedOn: '2024-01-16T10:02:38+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DISTINCT ON
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL AND Operator
   slug: postgresql-tutorial/postgresql-and
 ---
+
 <Admonition type="info" id="CTA">
 The WHERE clause works the same across any standard PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

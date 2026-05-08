@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Neon Auth JWTs in a custom ba
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2025-12-30T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Neon Auth](/docs/auth/overview) to handle identity securely.
@@ -402,7 +402,7 @@ Navigate into the project directory and install the required dependencies:
 
 ```bash
 cd journal-frontend && npm install
-npm install @neondatabase/neon-js@latest react-router
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router
 ```
 
 ### Configure Tailwind CSS
@@ -455,7 +455,7 @@ Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserR
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import App from './App.tsx';
 import { authClient } from './neon.ts';
 import './index.css';
@@ -477,7 +477,7 @@ Replace the content of `src/index.css` with the following minimal Tailwind CSS s
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 
 :root {
   font-family: system-ui, sans-serif;
@@ -508,7 +508,7 @@ As outlined in the [UI components reference](/docs/auth/reference/ui-components)
 Create `src/pages/Auth.tsx`:
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { AuthView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AuthPage() {
@@ -524,7 +524,7 @@ export default function AuthPage() {
 Create `src/pages/Account.tsx`:
 
 ```tsx
-import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+import { AccountView } from '@neondatabase/auth-ui';
 import { useParams } from 'react-router';
 
 export default function AccountPage() {
@@ -588,7 +588,7 @@ Modify `src/App.tsx` to implement the journal UI and routes.
 
 ```tsx shouldWrap
 import { useState, useEffect } from 'react';
-import { RedirectToSignIn, SignedIn, UserButton } from '@neondatabase/neon-js/auth/react/ui';
+import { RedirectToSignIn, SignedIn, UserButton } from '@neondatabase/auth-ui';
 import { api } from './api';
 import { Route, Routes } from 'react-router';
 import Auth from './pages/Auth';

@@ -7,7 +7,7 @@ summary: >-
   for optimizing database interactions between Vercel's Fluid compute model and
   Neon, highlighting performance improvements over traditional methods.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.202Z'
+updatedOn: '2026-03-25T00:15:20.000Z'
 ---
 
 <InfoBlock>

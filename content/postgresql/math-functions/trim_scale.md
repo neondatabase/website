@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trim_scale/
 ogImage: ''
-updatedOn: '2024-02-18T03:02:25+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNC() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL WIDTH_BUCKET() Function
   slug: postgresql-math-functions/postgresql-width_bucket
 ---
+
 <Admonition type="info" id="CTA">
 The TRIM_SCALE() function works the same in any PostgreSQL environment, so everything here applies whether you run Postgres yourself or on a managed platform. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

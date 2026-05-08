@@ -6,7 +6,7 @@ page_description: >-
   perform the calculation across the set of rows related to the current row.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png'
-updatedOn: '2021-04-27T01:56:11+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WIDTH_BUCKET() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CUME_DIST Function
   slug: postgresql-window-function/postgresql-cume_dist-function
 ---
+
 <Admonition type="info" id="CTA">
 Window functions are part of standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

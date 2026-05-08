@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lower/
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2024-01-28T09:51:45+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LTRIM() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL UPPER() Function
   slug: postgresql-string-functions/postgresql-upper
 ---
+
 <Admonition type="info" id="CTA">
 The LOWER() function works the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises modernizing on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that production analytics and applications demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
 </Admonition>

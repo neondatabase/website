@@ -6,7 +6,7 @@ summary: >-
   non-gapped ranks to rows in a dataset, including examples with and without the
   `PARTITION BY` clause.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.858Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 You can use the `dense_rank` function to assign a rank to each distinct row within a result set. It provides a non-gapped ranking of values which is the right choice when ties need to be acknowledged without leaving gaps in the ranking sequence.

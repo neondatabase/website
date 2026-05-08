@@ -1,7 +1,7 @@
 ---
 title: 'Create one branch per PR and per developer'
 subtitle: 'Build branching workflows for development: create one branch per developer, shared dev branches, or per-PR databases for safe, isolated, production-like testing'
-updatedOn: '2026-01-22T00:00:00.000Z'
+updatedOn: '2026-02-17T14:15:38.000Z'
 ---
 
 Development environments are where branching tends to click for most teams. Instead of sharing a single mutable database, each workflow gives developers isolation by default while keeping environments closely aligned with production.

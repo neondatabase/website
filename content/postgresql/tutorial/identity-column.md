@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-identity-column/
 ogImage: /postgresqltutorial/PostgreSQL-identity-column-generated-as-always-example.png
-updatedOn: '2024-02-01T09:08:44+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Sequences
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Generated Columns
   slug: postgresql-tutorial/postgresql-generated-columns
 ---
+
 <Admonition type="info" id="CTA">
 The GENERATED AS IDENTITY constraint works the same across every PostgreSQL deployment, so everything you learn here about identity columns applies to Postgres wherever you run it. If you're an enterprise standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a managed cloud Postgres that's fast, secure, and natively integrated with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

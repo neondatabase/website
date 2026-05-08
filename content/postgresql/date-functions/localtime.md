@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/
 ogImage: ''
-updatedOn: '2024-01-26T09:40:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NOW() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL LOCALTIMESTAMP Function
   slug: postgresql-date-functions/postgresql-localtimestamp
 ---
+
 <Admonition type="info" id="CTA">
 The LOCALTIME function behavior covered here is standard PostgreSQL and works the same whether you're running Postgres yourself or on any managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

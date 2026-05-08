@@ -4,7 +4,7 @@ subtitle: Develop a modern React portfolio website featuring a chatbot powered b
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-17T00:00:00.000Z'
-updatedOn: '2024-10-17T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 In this guide, you will build a full-stack portfolio website using `React` for the frontend and `FastAPI` for the backend, featuring a Retrieval-Augmented Generation (RAG) chatbot that leverages `pgvector` on `Neon`'s serverless Postgres to store and retrieve embeddings created with `OpenAI`'s embedding model.

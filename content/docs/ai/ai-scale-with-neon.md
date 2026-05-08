@@ -6,7 +6,7 @@ summary: >-
   Replica features, detailing vertical and horizontal scaling options with
   specific compute sizes and associated memory configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.727Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.

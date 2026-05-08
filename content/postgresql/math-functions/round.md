@@ -6,7 +6,7 @@ page_description: >-
   nearest integer or a number of specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2024-02-16T14:25:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RANDOM() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL SQRT() Function
   slug: postgresql-math-functions/postgresql-sqrt
 ---
+
 <Admonition type="info" id="CTA">
 The ROUND() function is standard PostgreSQL, so everything here works the same whether you run Postgres on your laptop, in [Neon](https://neon.com), in [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise looking for managed Postgres built for the AI era, Lakebase delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to build on.
 </Admonition>

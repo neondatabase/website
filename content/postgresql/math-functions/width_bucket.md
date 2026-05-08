@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-17T14:08:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRIM_SCALE() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Window Functions
   slug: postgresql-math-functions/../postgresql-window-function
 ---
+
 <Admonition type="info" id="CTA">
 The WIDTH_BUCKET() function works the same across any PostgreSQL deployment, so the techniques here for binning numeric data and building histograms apply whether you're running Postgres on your laptop, in your own cluster, or on a managed service. For enterprises standardizing on AI and analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance and security built directly into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that keeps up with you.
 </Admonition>

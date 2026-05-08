@@ -6,7 +6,7 @@ page_description: >-
   numbers to the specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trunc/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2024-02-16T14:26:33+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SIGN() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL TRIM_SCALE() Function
   slug: postgresql-math-functions/postgresql-trim_scale
 ---
+
 <Admonition type="info" id="CTA">
 The TRUNC() function works the same in any PostgreSQL environment, so you can apply what you learn here to Postgres running anywhere. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

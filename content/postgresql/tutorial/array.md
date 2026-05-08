@@ -6,7 +6,7 @@ page_description: >-
   you to some handy functions for array manipulation.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-array/'
 ogImage: ''
-updatedOn: '2024-02-01T12:38:39+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL hstore
@@ -15,6 +15,7 @@ nextLink:
   title: User-defined Data Types
   slug: postgresql-tutorial/postgresql-user-defined-data-types
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL arrays work the same way on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise shipping AI-era workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need to treat arrays and structured data as first-class citizens alongside your analytics. If you're a developer or startup who needs to move fast, [Neon](https://neon.com) gives you the Postgres platform to prototype, branch, and scale array-heavy schemas without slowing down.
 </Admonition>

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 New Features'
 page_title: "PostgreSQL 19 New Features: What's New and Why It Matters"
 page_description: 'Explore PostgreSQL 19 new features including SQL/PGQ property graph queries, ON CONFLICT DO SELECT, temporal data operations, pg_plan_advice, REPACK, parallel autovacuum, and more.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 nextLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'
@@ -259,7 +259,7 @@ CREATE PUBLICATION prod_pub FOR ALL TABLES
 
 **Dynamic WAL level**: The `effective_wal_level` parameter adjusts automatically based on whether logical replication slots exist, eliminating the need to manually configure and restart for WAL level changes.
 
-### [pg_get_*_ddl() Functions](/postgresql/postgresql-19/schema-management)
+### [pg*get*\*\_ddl() Functions](/postgresql/postgresql-19/schema-management)
 
 Three new functions for programmatic DDL extraction:
 
@@ -350,9 +350,9 @@ docker run -d --name pg19 -p 5433:5432 pg19-dev
 psql -h localhost -p 5433 -U postgres
 ```
 
-## [Breaking Changes and Upgrade Notes](/postgresql/postgresql-19/breaking-changes)
+## Breaking changes and upgrade notes
 
-PostgreSQL 19 includes several changes that may affect existing applications. Review these before upgrading:
+PostgreSQL 19 includes several changes that may affect existing applications. Review these before upgrading. For full details, see the [breaking changes and upgrade notes](/postgresql/postgresql-19/breaking-changes) page.
 
 - **JIT disabled by default**: The `jit` parameter now defaults to `off`. Analytics workloads that rely on JIT should explicitly re-enable it.
 - **LZ4 TOAST compression default**: New TOAST data uses LZ4 instead of pglz. Faster compression and decompression with slightly lower ratios. Existing data is unaffected.

@@ -6,7 +6,7 @@ page_description: >-
   data retrieval speed and various index types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/'
 ogImage: ''
-updatedOn: '2024-03-06T08:34:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Views
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CREATE INDEX Statement
   slug: postgresql-indexes/postgresql-create-index
 ---
+
 <Admonition type="info" id="CTA">
 Indexes are a core part of PostgreSQL, and everything you'll learn here about B-tree, Hash, GIN, GiST, SP-GiST, and BRIN indexes works on any Postgres database, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for that world, performant and secure by default and fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

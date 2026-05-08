@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/
 ogImage: ''
-updatedOn: '2024-02-19T13:45:32+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Uptime
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL pg_terminate_backend() Function
   slug: postgresql-administration/postgresql-pg_terminate_backend
 ---
+
 <Admonition type="info" id="CTA">
 The `.pgpass` password file works the same way on any PostgreSQL installation, so everything here applies whether you're running Postgres locally, on a VM, or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

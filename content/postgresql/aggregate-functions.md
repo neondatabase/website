@@ -6,7 +6,7 @@ page_description: >-
   AVG(), COUNT(), MIN(), MAX(), and SUM() to summarize data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/aggregate-functions.png'
-updatedOn: '2024-03-20T01:48:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Functions
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL AVG Function
   slug: postgresql-aggregate-functions/postgresql-avg-function
 ---
+
 <Admonition type="info" id="CTA">
 Aggregate functions like AVG, COUNT, MIN, MAX, and SUM are core PostgreSQL features, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon gives you the most productive Postgres platform to build on.
 </Admonition>

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2024-01-28T02:20:39+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RIGHT() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RPAD() Function
   slug: postgresql-string-functions/postgresql-rpad
 ---
+
 <Admonition type="info" id="CTA">
 The LPAD() function is standard PostgreSQL and works the same way on any Postgres deployment, so the techniques here carry over wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

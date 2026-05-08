@@ -6,7 +6,7 @@ page_description: >-
   the result sets of multiple queries into a single result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-union/'
 ogImage: /postgresqltutorial/PostgresQL-UNION.png
-updatedOn: '2024-02-06T01:38:07+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL HAVING
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL INTERSECT Operator
   slug: postgresql-tutorial/postgresql-intersect
 ---
+
 <Admonition type="info" id="CTA">
 The UNION and UNION ALL operators work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. For enterprises standardizing on an AI-ready data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that large teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for your pace.
 </Admonition>

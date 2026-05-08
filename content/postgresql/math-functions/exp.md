@@ -6,7 +6,7 @@ page_description: >-
   calculate the exponential of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-exp/'
 ogImage: ''
-updatedOn: '2024-04-18T03:00:18+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DEGREES() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL FACTORIAL() Function
   slug: postgresql-math-functions/postgresql-factorial
 ---
+
 <Admonition type="info" id="CTA">
 The EXP() function works the same across any standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

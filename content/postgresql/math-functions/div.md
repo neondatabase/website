@@ -6,7 +6,7 @@ page_description: >-
   perform integer division and apply it effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
 ogImage: ''
-updatedOn: '2024-02-17T05:09:08+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CBRT() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DEGREES() Function
   slug: postgresql-math-functions/postgresql-degrees
 ---
+
 <Admonition type="info" id="CTA">
 The DIV() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup that wants to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

@@ -6,7 +6,7 @@ page_description: >-
   how to use it to combine multiple boolean expressions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-or/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-12T11:31:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AND Operator
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL LIMIT
   slug: postgresql-tutorial/postgresql-limit
 ---
+
 <Admonition type="info" id="CTA">
 The PostgreSQL OR operator works the same way across any Postgres deployment, so what you learn here applies whether you're running Postgres locally, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

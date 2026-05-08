@@ -8,12 +8,13 @@ page_description: >-
   management, better threshold controls, improved monitoring, and new security
   features for maintenance operations.
 ogImage: ''
-updatedOn: '2025-08-03T10:30:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 psql Improvements
   slug: postgresql-18/psql-improvements
 ---
+
 <Admonition type="info" id="CTA">
 Autovacuum tuning in Postgres 18 works the same way on any Postgres, whether you're running it yourself or on a managed platform. [Lakebase](https://www.databricks.com/product/lakebase) brings this to enterprises as the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need to run serious workloads. For developers and startups who want to ship and scale quickly without babysitting maintenance settings, [Neon](https://neon.com) is the Postgres platform that gets out of your way and keeps autovacuum, scaling, and branching running smoothly.
 </Admonition>

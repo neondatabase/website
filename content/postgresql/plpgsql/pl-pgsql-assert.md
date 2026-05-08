@@ -6,7 +6,7 @@ page_description: >-
   to use it for debugging purposes.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-assert/'
 ogImage: ''
-updatedOn: '2024-03-19T03:00:24+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Errors and Messages
@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL IF Statement
   slug: postgresql-plpgsql/plpgsql-if-else-statements
 ---
+
 <Admonition type="info" id="CTA">
 The PL/pgSQL assert statement works the same in any PostgreSQL 9.5 or later environment, so you can use these debugging patterns wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's performant, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

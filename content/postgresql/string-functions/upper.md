@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-upper/
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2024-01-28T11:13:28+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOWER() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RTRIM() Function
   slug: postgresql-string-functions/postgresql-rtrim
 ---
+
 <Admonition type="info" id="CTA">
 The UPPER() function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise standardizing on managed Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. If you're a developer or startup that needs to ship features and scale on demand, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

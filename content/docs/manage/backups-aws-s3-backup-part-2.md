@@ -5,7 +5,7 @@ summary: >-
   and AWS S3, ensuring automated database backups are securely stored in the
   cloud.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.114Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.

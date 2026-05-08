@@ -6,7 +6,7 @@ page_description: >-
   to remove one or more views from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2024-03-16T04:09:52+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE VIEW
@@ -15,6 +15,7 @@ nextLink:
   title: Creating PostgreSQL Updatable Views
   slug: postgresql-views/postgresql-updatable-views
 ---
+
 <Admonition type="info" id="CTA">
 The DROP VIEW syntax covered here works on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

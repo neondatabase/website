@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_first/
 ogImage: ''
-updatedOn: '2024-02-24T02:56:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_path_query_array() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_path_exists() Function
   slug: postgresql-json-functions/postgresql-jsonb_path_exists
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_path_query_first()` function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship JSON-heavy applications and scale them fast, Neon is the Postgres platform built for you.
 </Admonition>

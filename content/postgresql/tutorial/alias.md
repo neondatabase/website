@@ -6,7 +6,7 @@ page_description: >-
   a table during the query execution.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alias/'
 ogImage: ''
-updatedOn: '2024-01-17T06:08:13+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Joins
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL INNER JOIN
   slug: postgresql-tutorial/postgresql-inner-join
 ---
+
 <Admonition type="info" id="CTA">
 Table aliases work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

@@ -6,7 +6,7 @@ summary: >-
   application using various PostgreSQL clients, including the Neon serverless
   driver, node-postgres, and Postgres.js.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.963Z'
+updatedOn: '2026-03-26T12:44:08.000Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"
@@ -177,16 +177,6 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-express" description="Get started with Express and Neon" icon="github">Get started with Express and Neon</a>
-
-</DetailIconCards>
 
 <details>
 <summary>**Notes for AI-assisted setup**</summary>

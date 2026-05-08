@@ -6,7 +6,7 @@ summary: >-
   including project setup, dependency installation, and configuration of
   database credentials for secure access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.026Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
@@ -233,15 +233,5 @@ When you run `npm run start` you can expect to see output similar to the followi
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nestjs" description="Get started with NestJS and Neon" icon="github">Get started with NestJS and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

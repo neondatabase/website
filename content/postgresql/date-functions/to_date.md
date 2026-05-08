@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_date/
 ogImage: ''
-updatedOn: '2024-03-22T01:30:01+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXTRACT() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL TO_TIMESTAMP Function
   slug: postgresql-date-functions/postgresql-to_timestamp
 ---
+
 <Admonition type="info" id="CTA">
 The TO_DATE() function works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or through a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform around.
 </Admonition>

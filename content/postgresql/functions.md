@@ -8,7 +8,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png
-updatedOn: '2025-09-06T10:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Advanced
@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL Aggregate Functions
   slug: postgresql-aggregate-functions
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service, so everything you learn here carries over. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

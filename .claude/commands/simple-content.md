@@ -91,7 +91,7 @@ I'll create documentation content using an interactive workflow with user confir
 - Include required frontmatter (title, subtitle, enableTableOfContents)
 - Structure with clear headings (max H3, avoid H4+)
 - Add framework-specific sections if needed (CodeTabs for multi-language)
-- Update frontmatter date (`updatedOn`) if the change is substantial
+- Do not update `updatedOn`. The pre-commit hook stamps it automatically on staged files.
 
 **Create/update target files** using Write or Edit tools
 

@@ -6,7 +6,7 @@ summary: >-
   timestamps or intervals to specified precision, facilitating time-based
   calculations and data grouping for analysis.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.857Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `date_trunc()` function truncates a timestamp or interval to a specified precision.

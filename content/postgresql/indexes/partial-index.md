@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-indexes/postgresql-partial-index/
 ogImage: /postgresqltutorial/customer-table.png
-updatedOn: '2024-02-28T08:55:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Index on Expression
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Multicolumn Indexes
   slug: postgresql-indexes/postgresql-multicolumn-indexes
 ---
+
 <Admonition type="info" id="CTA">
 Partial indexes work the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

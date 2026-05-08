@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-digital-ocean
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.068Z'
+updatedOn: '2026-04-01T20:14:28.000Z'
 ---
 
 This guide describes how to migrate a Postgres database from Digital Ocean to Neon using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.

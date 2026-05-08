@@ -6,7 +6,7 @@ page_description: >-
   values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2024-02-01T04:37:20+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISNULL
@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'
   slug: postgresql-tutorial/postgresql-cast
 ---
+
 <Admonition type="info" id="CTA">
 The NULLIF function is a standard PostgreSQL conditional expression, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

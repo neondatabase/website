@@ -100,12 +100,16 @@
       @apply my-8 md:my-6;
     }
 
-    .wp-block-table {
-      @apply overflow-x-auto md:-mx-4 md:px-4;
+    .table-wrapper {
+      @apply my-10 2xl:-mx-4 2xl:px-4;
+
+      & table {
+        @apply my-0;
+      }
     }
 
     table {
-      @apply my-10 w-full border-hidden md:min-w-[500px];
+      @apply w-full border-hidden md:min-w-[500px];
 
       th {
         @apply border border-gray-new-20 p-3.5 md:px-2;
@@ -166,10 +170,6 @@
       }
     }
 
-    .wp-block-code {
-      @apply p-4;
-    }
-
     iframe,
     video {
       @apply mx-auto;
@@ -177,16 +177,6 @@
 
     .twitter-tweet iframe {
       @apply rounded-xl;
-    }
-
-    .wp-block-embed:not(.wp-block-embed-twitter) {
-      .wp-block-embed__wrapper {
-        @apply relative h-0 overflow-hidden pb-[56.25%];
-
-        iframe {
-          @apply absolute top-0 left-0 h-full w-full;
-        }
-      }
     }
 
     .twitter-tweet.twitter-tweet-rendered {
@@ -205,56 +195,39 @@
       }
     }
 
-    .wp-block-quote {
-      @apply my-8 border-l-2 border-green-44 pl-6 font-mono font-normal not-italic sm:pl-4;
-
-      strong,
-      b,
-      p {
-        @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
-
-        &::before,
-        &::after {
-          @apply hidden;
-        }
-      }
-
-      cite {
-        @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
-
-        em {
-          @apply not-italic;
-        }
-      }
-    }
-
-    .wp-block-pullquote {
-      @apply my-8;
-
-      blockquote {
-        @apply relative border-l-2 border-green-44 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat sm:pl-6;
-      }
-
-      p {
-        @apply my-0 pt-11 text-2xl leading-snug font-normal not-italic md:text-xl sm:text-lg;
-
-        &::before,
-        &::after {
-          @apply hidden;
-        }
-      }
-
-      cite {
-        @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
-
-        em {
-          @apply not-italic;
-        }
-      }
-    }
-
-    .wp-block-separator {
+    hr {
       @apply border-gray-new-20;
     }
   }
+}
+
+.prose-blog > blockquote {
+  @apply my-8 border-l-2 border-green-44 pl-6 font-mono font-normal not-italic sm:pl-4;
+}
+
+.prose-blog > blockquote strong,
+.prose-blog > blockquote b,
+.prose-blog > blockquote p {
+  @apply my-0 text-xl leading-snug font-normal tracking-tighter md:text-lg sm:text-base;
+
+  &::before,
+  &::after {
+    @apply hidden;
+  }
+}
+
+.prose-blog > blockquote cite {
+  @apply mt-3.5 inline-flex leading-none font-normal tracking-extra-tight text-gray-new-70 not-italic;
+}
+
+.prose-blog > blockquote cite em {
+  @apply not-italic;
+}
+
+.prose-blog .blog-svg-scroll {
+  @apply my-10 h-auto w-full overflow-x-auto md:my-8 sm:my-6;
+}
+
+.prose-blog .blog-svg-scroll > svg {
+  @apply block max-w-none;
 }

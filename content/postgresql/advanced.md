@@ -6,7 +6,7 @@ page_description: >-
   views, indexing strategies, window functions, and JSON data manipulation
 prev_url: 'https://www.postgresqltutorial.com/postgresql-advanced/'
 ogImage: ''
-updatedOn: '2025-09-06T10:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL API
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL PL/pgSQL Block Structure
   slug: postgresql-plpgsql/plpgsql-block-structure
 ---
+
 <Admonition type="info" id="CTA">
 Advanced PostgreSQL features like PL/pgSQL, triggers, views, indexing, JSON functions, and window functions work the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
 </Admonition>

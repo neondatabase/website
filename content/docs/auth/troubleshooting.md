@@ -6,7 +6,7 @@ summary: >-
   environment configuration, adapter setup, CSS imports, and framework-specific
   requirements.
 enableTableOfContents: true
-updatedOn: '2026-03-23T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
@@ -72,8 +72,8 @@ const client = createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 
 Choose one CSS import method. Never use both, as this causes duplicate styles:
 
-- **Without Tailwind:** `import '@neondatabase/auth/ui/css'` (Next.js) or `import '@neondatabase/neon-js/ui/css'` (React SPA)
-- **With Tailwind v4:** `@import '@neondatabase/auth/ui/tailwind'` (Next.js) or `@import '@neondatabase/neon-js/ui/tailwind'` (React SPA)
+- **Without Tailwind:** `import '@neondatabase/auth-ui/css'`
+- **With Tailwind v4:** `@import '@neondatabase/auth-ui/tailwind'`
 
 See the [UI Components reference](/docs/auth/reference/ui-components) for complete setup instructions.
 

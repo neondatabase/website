@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-bytea-data-type/
 ogImage: ''
-updatedOn: '2024-04-20T13:26:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL XML Data Type
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Composite Types
   slug: postgresql-tutorial/postgresql-composite-types
 ---
+
 <Admonition type="info" id="CTA">
 The BYTEA data type works the same across any PostgreSQL deployment, so what you learn here applies to Postgres wherever you run it. If you're an enterprise storing binary data alongside analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

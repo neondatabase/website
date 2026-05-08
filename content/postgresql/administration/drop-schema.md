@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-schema/
 ogImage: /postgresqltutorial/PostgreSQL-DROP-Schema.png
-updatedOn: '2024-02-12T13:31:28+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER SCHEMA
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CREATE ROLE Statement
   slug: postgresql-administration/postgresql-roles
 ---
+
 <Admonition type="info" id="CTA">
 The DROP SCHEMA statement works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database that's natively integrated with the Lakehouse. For developers and startups who need to ship features today and scale without friction, [Neon](https://neon.com) is the Postgres platform built for speed.
 </Admonition>

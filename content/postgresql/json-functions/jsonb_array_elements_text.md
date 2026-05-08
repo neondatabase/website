@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/
 ogImage: ''
-updatedOn: '2024-02-24T08:07:50+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_array_elements() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_each() Function
   slug: postgresql-json-functions/postgresql-jsonb_each
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_array_elements_text()` function works the same across every PostgreSQL deployment, so you can apply what you learn here whether you run Postgres yourself or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fast, secure, fully managed database that sits natively inside the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

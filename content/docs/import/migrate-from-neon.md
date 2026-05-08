@@ -7,7 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2026-04-01T20:00:00.000Z'
+updatedOn: '2026-04-01T22:55:35.000Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by **piping** output from **`pg_dump`** straight into **`pg_restore`** (`pg_dump ... | pg_restore ...`). That runs the dump and restore in one step without writing an intermediate dump file on disk.

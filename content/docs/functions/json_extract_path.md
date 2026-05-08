@@ -6,7 +6,7 @@ summary: >-
   efficiently extract values from nested JSON documents, including example
   queries for practical application.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.865Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. Use it when dealing with nested `JSON` structures.

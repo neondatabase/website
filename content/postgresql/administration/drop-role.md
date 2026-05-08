@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-role/
 ogImage: ''
-updatedOn: '2024-02-21T14:37:07+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER ROLE Statement
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL List Users
   slug: postgresql-administration/postgresql-list-users
 ---
+
 <Admonition type="info" id="CTA">
 The DROP ROLE statement works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another cloud, or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run mission-critical workloads. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for moving quickly without sacrificing power.
 </Admonition>

@@ -4,7 +4,7 @@ subtitle: Learn how to build a .NET application with Neon's serverless Postgres 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2024-11-02T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 When building .NET applications, choosing the right database solution is an important step to good performance and scalability. Neon's serverless Postgres is a great choice for .NET developers, thanks to features like automatic scaling, branching, and connection pooling that integrate well with .NET's ecosystem.

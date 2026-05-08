@@ -9,7 +9,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-03-14T03:21:15.122Z'
+updatedOn: '2026-05-04T10:00:54.000Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
@@ -82,6 +82,8 @@ Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [l
 <a title="Prisma" icon="prisma" promptSrc="/prompts/prisma-prompt.md"></a>
 
 <a title="Kysely" icon="kysely" promptSrc="/prompts/kysely-prompt.md"></a>
+
+<a title="Tortoise ORM" icon="tortoise-orm" promptSrc="/prompts/tortoise-orm-prompt.md"></a>
 
 <a title="TypeORM" icon="typeorm" promptSrc="/prompts/typeorm-prompt.md"></a>
 

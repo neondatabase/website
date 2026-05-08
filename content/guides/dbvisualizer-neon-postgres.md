@@ -4,7 +4,7 @@ subtitle: A comprehensive guide on how to manage your Postgres database using Db
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-26T00:00:00.000Z'
-updatedOn: '2025-09-26T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 DbVisualizer is a universal SQL client and database‑management tool that provides an intuitive interface for connecting to, querying, visualizing, and managing data across more than 50 databases including PostgreSQL, Oracle, SQL Server, MySQL, and others. This guide walks you through setting up and using DbVisualizer with Neon Postgres.

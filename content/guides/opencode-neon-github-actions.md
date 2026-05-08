@@ -4,7 +4,7 @@ subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Ne
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-03-10T00:00:00.000Z'
+updatedOn: '2026-03-10T13:29:08.000Z'
 ---
 
 Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.

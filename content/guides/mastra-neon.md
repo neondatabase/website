@@ -4,7 +4,7 @@ subtitle: 'Learn how to give your Mastra AI agents long-term memory by integrati
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-30T00:00:00.000Z'
-updatedOn: '2026-03-30T00:00:00.000Z'
+updatedOn: '2026-03-31T09:36:30.000Z'
 ---
 
 AI agents are increasingly used to create conversational assistants, customer support bots, and productivity tools. A common limitation, however, is their lack of memory. Most agents are stateless, meaning each interaction begins without awareness of past conversations or user preferences. Without the ability to recall prior exchanges, agents struggle to manage multi-turn dialogues or maintain continuity across sessions.

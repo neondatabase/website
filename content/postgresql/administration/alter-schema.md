@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/
 ogImage: /postgresqltutorial/PostgreSQL-ALTER-SCHEMA-change-owner-example.png
-updatedOn: '2024-02-12T13:22:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE SCHEMA
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP SCHEMA Statement
   slug: postgresql-administration/postgresql-drop-schema
 ---
+
 <Admonition type="info" id="CTA">
 Renaming a schema or reassigning its owner with ALTER SCHEMA works the same way on any PostgreSQL database, so what you learn here carries over to every Postgres deployment. If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need from a fully managed cloud database. If you're a developer or startup who needs to ship features and scale on demand, [Neon](https://neon.com) gives you the fastest path to production Postgres.
 </Admonition>

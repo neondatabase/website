@@ -6,7 +6,7 @@ page_description: >-
   programming language using the psycopg2 database driver.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png'
-updatedOn: '2024-05-19T08:36:25+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Delete Data From a Table'
@@ -15,6 +15,7 @@ nextLink:
   title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
   slug: postgresql-python/connect
 ---
+
 <Admonition type="info" id="CTA">
 Working with PostgreSQL from Python through psycopg2 looks the same on any standard Postgres deployment, so the techniques here carry over wherever you run your database. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration teams need to operationalize data and models at scale. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform, with instant provisioning, branching, and serverless economics that fit modern Python workflows.
 </Admonition>

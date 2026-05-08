@@ -8,7 +8,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
-updatedOn: '2020-04-11T10:53:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Window Functions
@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL DENSE_RANK Function
   slug: postgresql-window-function/postgresql-dense_rank-function
 ---
+
 <Admonition type="info" id="CTA">
 The CUME_DIST() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

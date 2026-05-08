@@ -6,7 +6,7 @@ page_description: >-
   time-related functions to handle time values effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/'
 ogImage: /postgresqltutorial/PostgreSQL-TIME-example.png
-updatedOn: '2024-02-02T06:49:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Interval Data Type
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL UUID Data Type
   slug: postgresql-tutorial/postgresql-uuid
 ---
+
 <Admonition type="info" id="CTA">
 The TIME data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

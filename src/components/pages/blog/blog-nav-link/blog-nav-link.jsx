@@ -4,14 +4,19 @@ import { useSelectedLayoutSegments } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { BLOG_CATEGORY_BASE_PATH, BLOG_BASE_PATH } from 'constants/blog';
+import {
+  buildBlogCategoryPath,
+  buildBlogIndexPath,
+  DEFAULT_BLOG_ROUTE_CONFIG,
+} from 'constants/blog';
 import { cn } from 'utils/cn';
 
-const BlogNavLink = ({ name, slug }) => {
+const BlogNavLink = ({ name, slug, routeConfig = DEFAULT_BLOG_ROUTE_CONFIG }) => {
   const segments = useSelectedLayoutSegments();
   const isActive = slug === segments[1] || (slug === 'all' && segments[1] === undefined);
 
-  const url = slug === 'all' ? BLOG_BASE_PATH : `${BLOG_CATEGORY_BASE_PATH}${slug}`;
+  const url =
+    slug === 'all' ? buildBlogIndexPath(routeConfig) : buildBlogCategoryPath(routeConfig, slug);
 
   return (
     <Link
@@ -31,6 +36,12 @@ const BlogNavLink = ({ name, slug }) => {
 BlogNavLink.propTypes = {
   name: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default BlogNavLink;

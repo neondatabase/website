@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-letter-case-functions/
 ogImage: ''
-updatedOn: '2024-01-29T01:36:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FORMAT() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL LEFT() Function
   slug: postgresql-string-functions/postgresql-left
 ---
+
 <Admonition type="info" id="CTA">
 The INITCAP() function works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

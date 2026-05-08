@@ -6,7 +6,7 @@ page_description: >-
   two queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/'
 ogImage: /postgresqltutorial/PostgreSQL-EXCEPT-300x202.png
-updatedOn: '2024-07-01T00:51:42+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INTERSECT Operator
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CTE
   slug: postgresql-tutorial/postgresql-cte
 ---
+
 <Admonition type="info" id="CTA">
 The EXCEPT operator works the same way in any PostgreSQL database, so what you learn here applies whether you're running Postgres on your laptop, in your data center, or in the cloud. For enterprises ready to put Postgres at the center of their AI and analytics stack, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering high performance, strong security, and deep integration with the Lakehouse. For developers and startups who need to ship products fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

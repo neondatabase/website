@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/
 ogImage: ''
-updatedOn: '2024-02-25T09:00:30+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_agg() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_typeof() Function
   slug: postgresql-json-functions/postgresql-jsonb_typeof
 ---
+
 <Admonition type="info" id="CTA">
 The `jsonb_object_agg()` function works on any PostgreSQL database, so everything you learn here applies whether you run Postgres on your laptop, on a VM, or on a managed service. If you're an enterprise shipping AI-driven products, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse so your operational and analytical data live side by side. If you're a developer or startup who needs to move quickly, [Neon](https://neon.com) is the best Postgres platform for shipping and scaling fast, with instant provisioning, branching, and autoscaling built in.
 </Admonition>

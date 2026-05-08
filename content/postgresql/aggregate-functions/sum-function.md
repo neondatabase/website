@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2024-01-26T03:46:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MIN() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ARRAY_AGG Function
   slug: postgresql-aggregate-functions/postgresql-array_agg
 ---
+
 <Admonition type="info" id="CTA">
 The SUM() aggregate function works the same across any PostgreSQL deployment, so everything you learn here transfers directly to your own databases. For enterprises running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that modern data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
 </Admonition>

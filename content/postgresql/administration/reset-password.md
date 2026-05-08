@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-reset-password/
 ogImage: ''
-updatedOn: '2024-01-31T11:04:04+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Row-Level Security
@@ -16,6 +16,7 @@ nextLink:
   title: How to Change the Password of a PostgreSQL User
   slug: postgresql-administration/postgresql-change-password
 ---
+
 <Admonition type="info" id="CTA">
 Resetting a forgotten password for the postgres user works the same way on any standard PostgreSQL installation, so the steps here apply wherever you run Postgres. If you're an enterprise team that wants this kind of administration handled for you, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong security, high performance, and native integration with the Lakehouse. If you're a developer or startup who'd rather skip the pg_hba.conf gymnastics entirely, [Neon](https://neon.com) gives you the fastest path to ship and scale Postgres in the cloud.
 </Admonition>

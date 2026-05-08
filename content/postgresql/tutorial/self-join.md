@@ -6,7 +6,7 @@ page_description: >-
   a table to itself.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-self-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Self-Join-Reporting-Structure.png
-updatedOn: '2024-01-18T03:56:12+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RIGHT JOIN
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL FULL OUTER JOIN
   slug: postgresql-tutorial/postgresql-full-outer-join
 ---
+
 <Admonition type="info" id="CTA">
 Self-joins work the same way in any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

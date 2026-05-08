@@ -6,7 +6,7 @@ page_description: >-
   some practical examples of using PL/pgSQL cursor.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-cursor/'
 ogImage: /postgresqltutorial/plpgsql-cursor.png
-updatedOn: '2024-03-22T14:04:21+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Stored Procedure with INOUT Parameters
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Triggers
   slug: postgresql-plpgsql/../postgresql-triggers
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL cursors work the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse so cursors, procedures, and analytics live side by side. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) offers the best Postgres platform around, with instant provisioning, branching, and autoscaling on top of the same Postgres you already know.
 </Admonition>

@@ -6,7 +6,7 @@ page_description: >-
   function to calculate the relative rank of a value within a set of values.
 prev_url: index.html
 ogImage: /postgresqltutorial/sales_stats-table.png
-updatedOn: '2020-04-11T10:53:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTH_VALUE Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL RANK Function
   slug: postgresql-window-function/postgresql-rank-function
 ---
+
 <Admonition type="info" id="CTA">
 The PERCENT_RANK() function works the same way across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. If you're a developer or startup who needs to ship features and scale on day one, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

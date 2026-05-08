@@ -6,7 +6,7 @@ page_description: >-
   ALTER TABLE statement to remove one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-column/'
 ogImage: /postgresqltutorial/PostgreSQL-Drop-Column-300x128.png
-updatedOn: '2024-01-25T04:15:44+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Change Column Type
   slug: postgresql-tutorial/postgresql-change-column-type
 ---
+
 <Admonition type="info" id="CTA">
 Dropping columns with ALTER TABLE works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that regulated teams need. For developers and startups who want to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>
@@ -62,7 +63,7 @@ DROP COLUMN column_name2,
 
 Notice that you need to add a comma (`,`) after each `DROP COLUMN` clause.
 
-If a table has one column, you can use drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
+If a table has one column, you can drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
 
 It’s worth noting that while PostgreSQL allows a table that has no column, it may be not allowed according to the standard SQL.
 

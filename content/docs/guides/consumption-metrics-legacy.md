@@ -7,15 +7,15 @@ summary: >-
   (active time, compute time, written data, synthetic storage). For usage-based
   plans, use Query consumption metrics instead.
 enableTableOfContents: true
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-05-07T18:15:13.000Z'
 ---
 
 <ConsumptionAccountApiDeprecation/>
 
 Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. The Management API only allows these paths for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). They are **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, these endpoints return **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
 
-| API                 | Endpoint                        | Description                               | Available on                                      |
-| ------------------- | ------------------------------- | ----------------------------------------- | ------------------------------------------------- |
+| API                 | Endpoint                        | Description                               | Available on                                                          |
+| ------------------- | ------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
 | **Account metrics** | `/consumption_history/account`  | Aggregated metrics across all projects    | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
 | **Project metrics** | `/consumption_history/projects` | Per-project metrics at chosen granularity | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
 

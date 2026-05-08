@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-17T00:00:00.000Z'
-updatedOn: '2024-12-17T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 title: Building a Real-Time AI Voice Assistant with ElevenLabs
 subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next.js application with ElevenLabs and Postgres
 ---

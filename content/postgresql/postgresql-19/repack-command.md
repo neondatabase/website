@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 REPACK Command'
 page_title: 'PostgreSQL 19 REPACK Command - Online Table Maintenance'
 page_description: 'Learn how to use PostgreSQL 19 REPACK command to reclaim space and reorder tables, replacing VACUUM FULL and CLUSTER with optional online (CONCURRENTLY) mode.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 pg_plan_advice'
@@ -134,14 +134,14 @@ This view shows which phase the operation is in (scanning heap, rebuilding index
 
 ## REPACK vs VACUUM FULL vs CLUSTER
 
-| Feature | VACUUM FULL | CLUSTER | REPACK |
-|---|---|---|---|
-| Reclaims space | Yes | Yes | Yes |
-| Reorders by index | No | Yes | Yes (with USING INDEX) |
-| Online mode | No | No | Yes (CONCURRENTLY) |
-| Lock type | ACCESS EXCLUSIVE | ACCESS EXCLUSIVE | ACCESS EXCLUSIVE (brief with CONCURRENTLY) |
-| Single command for both | No | No | Yes |
-| Progress monitoring | pg_stat_progress_cluster | pg_stat_progress_cluster | pg_stat_progress_repack |
+| Feature                 | VACUUM FULL              | CLUSTER                  | REPACK                                     |
+| ----------------------- | ------------------------ | ------------------------ | ------------------------------------------ |
+| Reclaims space          | Yes                      | Yes                      | Yes                                        |
+| Reorders by index       | No                       | Yes                      | Yes (with USING INDEX)                     |
+| Online mode             | No                       | No                       | Yes (CONCURRENTLY)                         |
+| Lock type               | ACCESS EXCLUSIVE         | ACCESS EXCLUSIVE         | ACCESS EXCLUSIVE (brief with CONCURRENTLY) |
+| Single command for both | No                       | No                       | Yes                                        |
+| Progress monitoring     | pg_stat_progress_cluster | pg_stat_progress_cluster | pg_stat_progress_repack                    |
 
 ## REPACK vs pg_repack Extension
 

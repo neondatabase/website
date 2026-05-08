@@ -6,7 +6,7 @@ page_description: >-
   to use it to get the plan for a given query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/'
 ogImage: /postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
-updatedOn: '2024-02-01T09:33:46+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Server and Database Objects
   slug: postgresql-tutorial/postgresql-server-and-database-objects
 ---
+
 <Admonition type="info" id="CTA">
 EXPLAIN works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking to tune queries against a Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration to make it the best managed cloud Postgres available. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -6,7 +6,7 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-04-09T23:59:59.000Z'
+updatedOn: '2026-04-09T23:15:21.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

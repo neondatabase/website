@@ -4,7 +4,7 @@ subtitle: Learn how to run multiple AI coding agents in parallel with isolated G
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-25T00:00:00.000Z'
-updatedOn: '2026-02-25T00:00:00.000Z'
+updatedOn: '2026-02-25T15:09:45.000Z'
 ---
 
 You’ve probably seen people on X (Twitter) experimenting with [swarms of AI coding agents](https://x.com/notnotstorm/status/1993411360387162235?s=20), sometimes mentioning concepts like [Git worktrees](https://x.com/bcherny/status/2025007393290272904?s=20). If you’ve already been running Claude or another agent in your terminal, you might be wondering: _what exactly are worktrees, and why do they matter?_

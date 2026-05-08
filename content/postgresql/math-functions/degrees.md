@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-degrees/
 ogImage: ''
-updatedOn: '2024-02-18T03:54:44+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DIV() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL EXP() Function
   slug: postgresql-math-functions/postgresql-exp
 ---
+
 <Admonition type="info" id="CTA">
 The DEGREES() function is a standard part of PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, Neon is the Postgres platform built for you.
 </Admonition>

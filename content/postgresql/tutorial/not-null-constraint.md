@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/
 ogImage: ''
-updatedOn: '2024-01-25T10:09:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UNIQUE Constraint
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DEFAULT Value
   slug: postgresql-tutorial/postgresql-default-value
 ---
+
 <Admonition type="info" id="CTA">
 NOT NULL constraints work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/
 ogImage: /postgresqltutorial/PostgreSQL-substring-function-example.jpg
-updatedOn: '2024-01-29T01:37:47+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL POSITION() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL SPLIT_PART() Function
   slug: postgresql-string-functions/postgresql-split_part
 ---
+
 <Admonition type="info" id="CTA">
 The SUBSTRING() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a VM, or in a managed service. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

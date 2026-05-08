@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rpad/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-01-29T01:09:47+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LPAD() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CONCAT() Function
   slug: postgresql-string-functions/postgresql-concat-function
 ---
+
 <Admonition type="info" id="CTA">
 The RPAD() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed.
 </Admonition>

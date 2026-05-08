@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
 ogImage: 'https://www.mysqltutorial.org//postgresqltutorial/products.svg'
-updatedOn: '2024-01-28T13:56:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_REPLACE() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL REVERSE() Function
   slug: postgresql-string-functions/postgresql-reverse
 ---
+
 <Admonition type="info" id="CTA">
 The REPEAT() function works the same way across any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

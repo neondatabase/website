@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-column/
 ogImage: /postgresqltutorial/postgresql-rename-column-300x254.png
-updatedOn: '2024-01-25T06:33:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Change Column Type
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP TABLE
   slug: postgresql-tutorial/postgresql-drop-table
 ---
+
 <Admonition type="info" id="CTA">
 Renaming columns with ALTER TABLE RENAME COLUMN works the same on any PostgreSQL database, so everything here carries over to your environment of choice. If you're an enterprise standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

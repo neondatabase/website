@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-02-15T20:51:54.095Z'
+updatedOn: '2026-04-18T12:36:02.000Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.

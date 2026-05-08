@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-revoke/
 ogImage: ''
-updatedOn: '2024-02-22T00:49:28+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GRANT
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Role Membership
   slug: postgresql-administration/postgresql-role-membership
 ---
+
 <Admonition type="info" id="CTA">
 The REVOKE statement works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform around.
 </Admonition>

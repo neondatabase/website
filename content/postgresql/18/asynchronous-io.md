@@ -5,7 +5,7 @@ page_description: >-
   In this tutorial, you will learn about PostgreSQL 18 asynchronous I/O and how
   to configure it to improve read performance for your database workloads.
 ogImage: ''
-updatedOn: '2025-06-21T08:40:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 New Features
@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL 18 B-tree Skip Scan
   slug: postgresql-18/skip-scan-btree
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's asynchronous I/O is a core engine feature, so everything covered here applies to any Postgres 18 deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

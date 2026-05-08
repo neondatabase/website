@@ -4,7 +4,7 @@ subtitle: Learn how to use Neon Auth Webhooks to build custom authentication flo
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-03-24T00:00:00.000Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 Neon Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Neon database. By default, Neon Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
@@ -62,7 +62,7 @@ cd neon-webhooks-demo
 Install the required packages:
 
 ```bash
-npm install @neondatabase/auth@latest @neondatabase/neon-js@latest resend
+npm install @neondatabase/auth@latest @neondatabase/auth-ui @neondatabase/neon-js@latest resend
 ```
 
 ## Configure environment variables
@@ -119,7 +119,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
 
     ```css
     @import 'tailwindcss';
-    @import '@neondatabase/neon-js/ui/tailwind'; /* [!code ++]
+    @import '@neondatabase/auth-ui/tailwind'; /* [!code ++]
 
     /* other styles.. */
     ```
@@ -128,7 +128,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
 
     ```tsx shouldWrap
     import { authClient } from '@/lib/auth/client';
-    import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
+    import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth-ui';
     import './globals.css';
 
     export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -151,7 +151,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
 6.  **Create Auth page:** Create `app/auth/[path]/page.tsx` for the authentication UI using Neon's pre-built components.
 
     ```tsx shouldWrap
-    import { AuthView } from '@neondatabase/auth/react';
+    import { AuthView } from '@neondatabase/auth-ui';
 
     export const dynamicParams = false;
 
@@ -171,7 +171,7 @@ Set up the Neon Auth SDK to handle user sessions, API routing, and the frontend 
     ```tsx shouldWrap
     'use client';
 
-    import { UserButton } from '@neondatabase/neon-js/auth/react/ui';
+    import { UserButton } from '@neondatabase/auth-ui';
     import { authClient } from '@/lib/auth/client';
     import Link from 'next/link';
 

@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an 
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ''
-updatedOn: '2024-03-21T03:47:04+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_HOURS() Function
@@ -14,6 +14,7 @@ nextLink:
   title: PostgreSQL MAKE_INTERVAL() Function
   slug: postgresql-date-functions/postgresql-make_interval
 ---
+
 <Admonition type="info" id="CTA">
 The JUSTIFY_INTERVAL() function is a standard part of PostgreSQL, so everything here works on any Postgres instance, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>

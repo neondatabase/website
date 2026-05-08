@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-radians/
 ogImage: ''
-updatedOn: '2024-02-18T04:15:55+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PI() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RANDOM() Function
   slug: postgresql-math-functions/postgresql-random
 ---
+
 <Admonition type="info" id="CTA">
 The RADIANS() function works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

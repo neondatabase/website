@@ -6,7 +6,7 @@ page_description: >-
   to use it to combine multiple boolean expressions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-and/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-02-12T11:29:29+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WHERE
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL OR Operator
   slug: postgresql-tutorial/postgresql-or
 ---
+
 <Admonition type="info" id="CTA">
 The AND operator works the same way across any PostgreSQL deployment, so everything you learn here applies whether you're running Postgres locally, on another cloud, or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

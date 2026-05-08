@@ -6,7 +6,7 @@ summary: >-
   necessary connection details and entering them into the application for
   successful database access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.790Z'
+updatedOn: '2026-04-23T13:49:55.000Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.

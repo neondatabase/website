@@ -4,7 +4,7 @@ subtitle: 'Automate parallel feature development by giving every Claude Code sub
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-03T00:00:00.000Z'
-updatedOn: '2026-03-03T00:00:00.000Z'
+updatedOn: '2026-03-04T06:14:02.000Z'
 ---
 
 While modern AI assistants generate code at remarkable speeds, the development process often remains sequential. You ask an agent to build a feature and wait. You request a query optimization and wait again. This workflow is bottlenecked by the linear nature of the standard AI interface, which can only run one agent at a time, completing one task before starting the next.

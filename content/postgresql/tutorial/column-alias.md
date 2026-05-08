@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-column-alias/
 ogImage: /postgresqltutorial/customer-table.png
-updatedOn: '2024-01-16T08:47:13+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SELECT
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL ORDER BY
   slug: postgresql-tutorial/postgresql-order-by
 ---
+
 <Admonition type="info" id="CTA">
 Column aliases work the same way on any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

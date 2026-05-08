@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-at-time-zone/
 ogImage: ''
-updatedOn: '2024-03-21T09:22:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_INTERVAL() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DATE_TRUNC() Function
   slug: postgresql-date-functions/postgresql-date_trunc
 ---
+
 <Admonition type="info" id="CTA">
 The AT TIME ZONE operator works the same across any PostgreSQL deployment, so the techniques here apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises handling time zone conversions across global analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres in the cloud, built for the AI era with strong performance, security, and tight Lakehouse integration. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
 </Admonition>

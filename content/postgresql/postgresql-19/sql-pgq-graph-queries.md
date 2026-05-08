@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 SQL/PGQ Property Graph Queries'
 page_title: 'PostgreSQL 19 SQL/PGQ - Graph Queries on Existing Tables'
 page_description: 'Learn how to use PostgreSQL 19 SQL/PGQ to define property graphs over existing tables and query relationships with graph pattern matching, no migration or extensions required.'
 ogImage: ''
-updatedOn: '2026-04-15T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 New Features'
@@ -340,16 +340,16 @@ For fixed-depth relationship queries (friend-of-friend, 2-3 hop patterns, direct
 
 ## SQL/PGQ vs. Other Graph Solutions
 
-| | SQL/PGQ (PG 19) | Apache AGE | Neo4j |
-|---|---|---|---|
-| Language | SQL standard (ISO 2023) | Cypher via extension | Cypher |
-| Storage | Existing tables | Extension storage | Native graph DB |
-| Variable-length paths | Not yet | Yes | Yes |
-| Shortest path | Not yet | Limited | Yes |
-| Installation | Built-in | Extension required | Separate database |
-| Standards-based | Yes (SQL:2023) | No | No |
-| Indexes | Uses existing PG indexes | Own indexes | Own indexes |
-| Full SQL support | Yes (joins, CTEs, window functions) | Limited SQL interop | No SQL |
+|                       | SQL/PGQ (PG 19)                     | Apache AGE           | Neo4j             |
+| --------------------- | ----------------------------------- | -------------------- | ----------------- |
+| Language              | SQL standard (ISO 2023)             | Cypher via extension | Cypher            |
+| Storage               | Existing tables                     | Extension storage    | Native graph DB   |
+| Variable-length paths | Not yet                             | Yes                  | Yes               |
+| Shortest path         | Not yet                             | Limited              | Yes               |
+| Installation          | Built-in                            | Extension required   | Separate database |
+| Standards-based       | Yes (SQL:2023)                      | No                   | No                |
+| Indexes               | Uses existing PG indexes            | Own indexes          | Own indexes       |
+| Full SQL support      | Yes (joins, CTEs, window functions) | Limited SQL interop  | No SQL            |
 
 The biggest advantage of SQL/PGQ: it works on your existing tables with your existing indexes. No data migration, no extension installation, no separate system to maintain.
 

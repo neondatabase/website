@@ -6,7 +6,7 @@ page_description: >-
   statement to remove an existing index.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/'
 ogImage: /postgresqltutorial/actor.png
-updatedOn: '2024-02-28T10:30:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REINDEX
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL List Indexes
   slug: postgresql-indexes/postgresql-list-indexes
 ---
+
 <Admonition type="info" id="CTA">
 The DROP INDEX syntax covered here works on any PostgreSQL deployment, so you can apply the same patterns whether you're cleaning up unused indexes locally or in production. For enterprises running Postgres at scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database integrated directly into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built to move fast.
 </Admonition>

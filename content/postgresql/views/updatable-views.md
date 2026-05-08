@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-views/postgresql-updatable-views/
 ogImage: ''
-updatedOn: '2024-03-16T04:21:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Drop View
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL WITH CHECK OPTION
   slug: postgresql-views/postgresql-views-with-check-option
 ---
+
 <Admonition type="info" id="CTA">
 Updatable views work the same way across every PostgreSQL deployment, so the techniques here apply whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that data and AI teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) offers the best Postgres platform, with instant provisioning, branching, and serverless scale.
 </Admonition>

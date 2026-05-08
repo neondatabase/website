@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-isfinite/
 ogImage: ''
-updatedOn: '2024-03-20T09:23:01+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE_BIN() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL TIMEOFDAY() Function
   slug: postgresql-date-functions/postgresql-timeofday
 ---
+
 <Admonition type="info" id="CTA">
 The `ISFINITE()` function works the same way in any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

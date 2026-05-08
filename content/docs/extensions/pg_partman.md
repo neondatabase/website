@@ -6,7 +6,7 @@ summary: >-
   partitioned tables in Postgres, including automated partition creation and
   maintenance tailored for Neon projects.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.836Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.

@@ -4,7 +4,7 @@ subtitle: Learn how to implement and optimize soft deletes in Laravel for improv
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-20T00:00:00.000Z'
-updatedOn: '2024-07-20T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Laravel is a PHP framework that offers a lot of features to simplify database operations. One such feature is soft deletes, which allows you to "delete" records without actually removing them from your database.

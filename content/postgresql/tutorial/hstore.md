@@ -6,7 +6,7 @@ page_description: >-
   perform practical and useful operations on PostgreSQL hstore columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore/'
 ogImage: /postgresqltutorial/postgresql-hstore-query.jpg
-updatedOn: '2024-02-01T12:53:20+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Array
   slug: postgresql-tutorial/postgresql-array
 ---
+
 <Admonition type="info" id="CTA">
 Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
 </Admonition>
@@ -226,7 +227,7 @@ FROM
 ```
 
 ![postgresql hstore akeys function](/postgresqltutorial/postgresql-hstore-akeys-function.jpg)
-Or you can use the `skey()` function if you want PostgreSQL to return the result as a set.
+Or you can use the `skeys()` function if you want PostgreSQL to return the result as a set.
 
 ```sql
 SELECT

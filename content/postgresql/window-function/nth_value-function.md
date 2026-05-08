@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
-updatedOn: '2020-04-11T10:53:01+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTILE Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL PERCENT_RANK Function
   slug: postgresql-window-function/postgresql-percent_rank-function
 ---
+
 <Admonition type="info" id="CTA">
 The NTH_VALUE() window function works the same way on any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance and security with full Lakehouse integration. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

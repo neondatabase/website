@@ -61,9 +61,11 @@ npm run start            # Run production build
 ### Code Quality
 
 ```bash
-npm run fix              # Fix JS, markdown, and formatting (run before committing)
-npm run lint             # Check JS and Markdown without modifying files
-npm run format           # Run Prettier only (subset of fix)
+npm run fix:js      # Fix JS/CSS: eslint + prettier on code files
+npm run fix:md      # Fix all content markdown: prettier only (updatedOn is handled by the pre-commit hook)
+npm run fix:all     # Fix everything: eslint + prettier, no markdownlint (use sparingly)
+npm run lint:js     # Check JS without modifying files
+npm run lint:md     # Markdown lint audit: intentional use only, never automatic
 ```
 
 ### Testing
@@ -75,15 +77,15 @@ npm run check:broken-links -- https://neon.com  # Check for broken links
 
 ## Git Workflow
 
-Standard GitHub flow. Before every commit, run:
+Standard GitHub flow. Commit and open a PR targeting `main`. No special push commands needed (`git push` is fine).
+
+For JS/code changes, run before committing:
 
 ```bash
-npm run fix
+npm run fix:js
 ```
 
-This lints JS and markdown and formats all files in one pass. To check without modifying files, use `npm run lint`.
-
-Then commit and open a PR targeting `main`. No special push commands needed (`git push` is fine).
+For markdown changes in `content/`, no manual step is needed. The pre-commit hook runs prettier and updates `updatedOn` automatically on staged files. To manually reformat all content markdown (prettier only), run `npm run fix:md`.
 
 ## Environment Setup
 
@@ -129,7 +131,7 @@ Every docs page requires `title`. All other fields are optional.
 | `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                 |
 | `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                 |
 | `ogImage`               | Social preview image path.                                                                                                         |
-| `updatedOn`             | ISO 8601 timestamp, auto-managed. Don't set manually.                                                                              |
+| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually. |
 | `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                        |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
@@ -580,7 +582,7 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 - Documentation-heavy site with 1000+ markdown files — search before creating
 - Do not modify `src/` components, CSS, or site structure without explicit instruction; a web team actively maintains the frontend
 - Do not modify `node_modules/` or generated files
-- Run `npm run fix` before every commit
+- Do not run `npm run fix`, `npm run fix:all`, or `npm run lint:md` during normal workflows. For JS changes, run `npm run fix:js`. Markdown in `content/` is auto-formatted and `updatedOn` is auto-stamped by the pre-commit hook on staged files. No manual step needed at commit time. To manually reformat markdown (prettier only), run `npm run fix:md`.
 - The codebase uses both `pages/` and `app/` directory (migration in progress)
 - Images are optimized via Next.js Image component
 - Accessibility matters — follow WCAG guidelines

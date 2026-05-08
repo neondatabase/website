@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/
 ogImage: ''
-updatedOn: '2024-02-19T04:10:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Copy Database Made Easy
@@ -16,6 +16,7 @@ nextLink:
   title: How to Change the Owner of a PostgreSQL Database
   slug: postgresql-administration/postgres-change-database-owner
 ---
+
 <Admonition type="info" id="CTA">
 The size functions covered here, from pg_relation_size to pg_column_size, work on any PostgreSQL deployment, so you can apply these techniques wherever your databases run. For enterprises who want visibility into storage growth across a governed, AI-ready data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and Lakehouse integration that large teams demand. For developers and startups who'd rather ship features than babysit disk usage, [Neon](https://neon.com) gives you a Postgres platform built to move fast and scale on demand.
 </Admonition>

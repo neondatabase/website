@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-string_agg-function/
 ogImage: /postgresqltutorial/PostgreSQL-STRING_AGG-function-email-list-example.png
-updatedOn: '2024-01-26T04:07:35+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BOOL_AND() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BOOL_OR() Function
   slug: postgresql-aggregate-functions/postgresql-bool_or
 ---
+
 <Admonition type="info" id="CTA">
 The STRING_AGG() function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and deep Lakehouse integration you need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

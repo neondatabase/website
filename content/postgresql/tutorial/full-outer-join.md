@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
 ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
-updatedOn: '2024-01-18T05:31:07+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Self-Join
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Cross Join
   slug: postgresql-tutorial/postgresql-cross-join
 ---
+
 <Admonition type="info" id="CTA">
 FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deployment, so you can apply these patterns wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
 </Admonition>

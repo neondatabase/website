@@ -6,7 +6,7 @@ summary: >-
   Neon databases, enabling access from browsers and serverless functions while
   ensuring scalability and security.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.811Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

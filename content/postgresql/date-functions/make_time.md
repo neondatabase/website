@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/
 ogImage: ''
-updatedOn: '2024-03-25T02:56:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_DATE() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL AGE() Function
   slug: postgresql-date-functions/postgresql-age
 ---
+
 <Admonition type="info" id="CTA">
 The MAKE_TIME() function works the same way across any PostgreSQL deployment, so you can apply what you learn here wherever your database runs. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres in the cloud, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
 </Admonition>

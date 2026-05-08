@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/
 ogImage: ''
-updatedOn: '2024-01-25T09:57:33+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CHECK Constraints
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Not-Null Constraint
   slug: postgresql-tutorial/postgresql-not-null-constraint
 ---
+
 <Admonition type="info" id="CTA">
 UNIQUE constraints work the same in any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

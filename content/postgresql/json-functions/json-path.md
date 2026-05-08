@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/
 ogImage: ''
-updatedOn: '2024-03-16T02:17:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_object_keys() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_path_exists() Function
   slug: postgresql-json-functions/postgresql-jsonb_path_exists
 ---
+
 <Admonition type="info" id="CTA">
 JSON path expressions and the jsonb_path_query function work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to a production Postgres with instant branching, autoscaling, and a generous free tier.
 </Admonition>

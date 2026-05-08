@@ -1,7 +1,7 @@
 ---
 title: 'Manage production and staging as branches'
 subtitle: 'Learn how to manage production and staging with database branching. Treat the production branch as the source, derive staging from it, and anonymize data for PII-safe workflows'
-updatedOn: '2026-01-22T00:00:00.000Z'
+updatedOn: '2026-02-17T14:15:38.000Z'
 ---
 
 ## Production branch (source of truth)

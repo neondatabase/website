@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
 ogImage: /postgresqltutorial/PostgreSQL-LEFT-example.png
-updatedOn: '2024-01-29T02:05:23+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL RIGHT() Function
   slug: postgresql-string-functions/postgresql-right
 ---
+
 <Admonition type="info" id="CTA">
 The LEFT() function works the same across any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your data teams expect. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

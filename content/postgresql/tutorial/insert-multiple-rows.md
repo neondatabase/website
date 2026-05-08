@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert-multiple-rows/
 ogImage: ''
-updatedOn: '2024-01-22T13:22:27+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSERT
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL UPDATE
   slug: postgresql-tutorial/postgresql-update
 ---
+
 <Admonition type="info" id="CTA">
 Bulk inserting rows with a single INSERT statement works the same on any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your data workloads demand. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

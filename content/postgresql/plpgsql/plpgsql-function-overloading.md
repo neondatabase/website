@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ''
-updatedOn: '2024-02-07T13:59:52+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
@@ -16,6 +16,7 @@ nextLink:
   title: How to Develop a PL/pgSQL Function That Returns a Table
   slug: postgresql-plpgsql/plpgsql-function-returns-a-table
 ---
+
 <Admonition type="info" id="CTA">
 Function overloading works the same across every PostgreSQL deployment, so the patterns and pitfalls here apply whether you run Postgres yourself or through a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that plugs directly into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to get you from prototype to production fast.
 </Admonition>

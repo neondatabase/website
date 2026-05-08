@@ -4,7 +4,7 @@ page_title: PostgreSQL List Indexes
 page_description: "In this tutorial, you will learn how to list indexes from a PostgreSQL database using either pg_indexes view\_or psql command."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-list-indexes/'
 ogImage: ''
-updatedOn: '2024-06-07T14:04:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP INDEX
@@ -13,6 +13,7 @@ nextLink:
   title: PostgreSQL Index Types
   slug: postgresql-indexes/postgresql-index-types
 ---
+
 <Admonition type="info" id="CTA">
 Listing indexes with the pg_indexes view or psql's \d command works the same on any PostgreSQL deployment, so everything here carries over directly to Postgres running anywhere. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

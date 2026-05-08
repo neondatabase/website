@@ -4,7 +4,7 @@ subtitle: Learn how to build a webhook system to receive and store event data us
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2025-03-23T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 Webhooks are a way for services to communicate with each other by sending HTTP requests when specific events occur. They allow your application to receive real-time data from other services without having to constantly poll for updates.

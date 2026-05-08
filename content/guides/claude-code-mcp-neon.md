@@ -4,7 +4,7 @@ subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2025-08-27T00:00:00.000Z'
+updatedOn: '2026-01-31T14:05:11.000Z'
 ---
 
 Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).

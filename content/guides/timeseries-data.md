@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use TimescaleDB for timeseries 
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-24T13:24:36.612Z'
-updatedOn: '2025-02-24T13:24:36.612Z'
+updatedOn: '2025-02-25T18:33:42.000Z'
 ---
 
 Timeseries queries allow you to efficiently query measurements over time stored in Postgres, like stock prices or temperature measurements.

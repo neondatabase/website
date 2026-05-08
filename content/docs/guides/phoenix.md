@@ -147,14 +147,4 @@ mix phx.server
 
 </Steps>
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with_phoenix" description="Get started with Phoenix and Neon" icon="github">Get started with Phoenix and Neon</a>
-
-</DetailIconCards>
-
 <NeedHelp/>

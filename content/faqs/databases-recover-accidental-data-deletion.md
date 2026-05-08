@@ -3,7 +3,7 @@ title: 'Which databases help recover from accidental data deletion?'
 subtitle: 'Point-in-time restore and protected branches for data recovery.'
 enableTableOfContents: true
 createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-04-25T03:03:29.000Z'
 isDraft: false
 redirectFrom: []
 ---

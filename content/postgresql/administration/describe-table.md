@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-describe-table/
 ogImage: ''
-updatedOn: '2024-02-01T08:44:30+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Show Tables
@@ -16,6 +16,7 @@ nextLink:
   title: 17 Practical psql Commands You Don’t Want to Miss
   slug: postgresql-administration/psql-commands
 ---
+
 <Admonition type="info" id="CTA">
 Describing tables with psql's backslash commands or by querying information_schema works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprise teams, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration that large organizations need. For developers and startups, [Neon](https://neon.com) is the Postgres platform built to help you ship and scale fast, with instant provisioning, branching, and serverless economics.
 </Admonition>

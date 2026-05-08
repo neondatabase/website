@@ -6,7 +6,7 @@ page_description: >-
   one or more rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/'
 ogImage: ''
-updatedOn: '2024-01-23T01:09:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPDATE Join
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DELETE JOIN
   slug: postgresql-tutorial/postgresql-delete-join
 ---
+
 <Admonition type="info" id="CTA">
 The DELETE statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, on a major cloud, or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production data teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) offers the most productive Postgres platform, with instant provisioning, branching, and serverless scale built in.
 </Admonition>

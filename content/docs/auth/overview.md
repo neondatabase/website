@@ -6,7 +6,7 @@ summary: >-
   integrates with your Neon database, allowing for branch-aware authentication
   and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.131Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -118,7 +118,7 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 export default function App() {

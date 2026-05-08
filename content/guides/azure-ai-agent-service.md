@@ -4,7 +4,7 @@ subtitle: 'Learn how to build an AI Agent for Postgres using Azure AI Agent Serv
 author: boburmirzo
 enableTableOfContents: true
 createdAt: '2025-04-07T00:00:00.000Z'
-updatedOn: '2025-04-07T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 AI agents are getting a lot of attention lately, but getting started can be confusing. You may have heard about tools like [LangChain/LangGraph](https://python.langchain.com/v0.1/docs/modules/agents/), [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/), [AutoGen](https://microsoft.github.io/autogen/), or [LlamaIndex](https://docs.llamaindex.ai/en/stable/use_cases/agents/). They are powerful, but sometimes all you need is something simple that works.

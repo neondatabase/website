@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 ogImage: ''
-updatedOn: '2024-05-14T14:32:43+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JDBC
@@ -16,6 +16,7 @@ nextLink:
   title: 'PostgreSQL JDBC: Creating Tables'
   slug: postgresql-jdbc/create-tables
 ---
+
 <Admonition type="info" id="CTA">
 Connecting to PostgreSQL from Java with JDBC works the same across any Postgres deployment, so everything here applies whether you're running Postgres locally, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with the performance, security, and deep Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, Neon is the Postgres platform built for that pace.
 </Admonition>

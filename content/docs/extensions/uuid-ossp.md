@@ -6,7 +6,7 @@ summary: >-
   how to enable it and use various functions for generating different types
   of UUIDs for unique data identification.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.851Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `uuid-ossp` extension provides a suite of functions for generating Universally Unique Identifiers (UUIDs) directly within your Postgres database. UUIDs are essential for ensuring data uniqueness across distributed systems and are widely used as primary keys and for various other applications requiring unique IDs. This extension offers a variety of UUID generation methods, including time-based, random, and name-based UUIDs, providing flexibility for different use cases.

@@ -6,7 +6,7 @@ page_description: >-
   automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2024-04-10T15:08:37+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Cursor
@@ -15,6 +15,7 @@ nextLink:
   title: Introduction to PostgreSQL Trigger
   slug: postgresql-triggers/introduction-postgresql-trigger
 ---
+
 <Admonition type="info" id="CTA">
 Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to running Postgres in production.
 </Admonition>

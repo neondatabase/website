@@ -469,12 +469,4 @@ You should see the Customer Data App interface, where you can add, view, and del
 
 </Steps>
 
-You can find the complete code for the Customer Data App mentioned in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/reflex/with_reflex" description="GitHub repository for the Reflex Customer Data App built with Neon Postgres" icon="github">Customer Data App</a>
-
-</DetailIconCards>
-
 <NeedHelp/>

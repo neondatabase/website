@@ -6,7 +6,7 @@ summary: >-
   `@neondatabase/neon-js`, including installation, provider setup, and
   configuration of common props for customization.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.917Z'
+updatedOn: '2026-05-06T12:48:49.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -26,8 +26,8 @@ Wrap your app with `NeonAuthUIProvider` to enable the UI components. The provide
 ### Basic Setup
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
-import '@neondatabase/neon-js/ui/css';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
+import '@neondatabase/auth-ui/css';
 import { authClient } from './auth';
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
 To enable Google sign-in (or other OAuth providers), add the `social` prop to the provider:
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 function App() {
@@ -79,7 +79,7 @@ function App() {
 If using React Router, pass the `navigate` function and a custom `Link` component:
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { authClient } from './auth';
 
@@ -170,7 +170,7 @@ If your project doesn't use Tailwind CSS, import the pre-built CSS bundle:
 
 ```typescript
 // In your root layout or app entry point
-import '@neondatabase/neon-js/ui/css';
+import '@neondatabase/auth-ui/css';
 ```
 
 This includes all necessary styles (~47KB minified) with no additional configuration required.
@@ -182,7 +182,7 @@ If your project already uses Tailwind CSS v4, import the Tailwind-ready CSS to a
 ```css
 /* In your main CSS file (for example, globals.css) */
 @import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 ```
 
 This imports only the theme variables. Your Tailwind build generates the utility classes.
@@ -198,8 +198,8 @@ For customization options, see **Styling** details within each Better Auth UI co
 ### Basic Auth Flow
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
-import '@neondatabase/neon-js/ui/css';
+import { AuthView } from '@neondatabase/auth-ui';
+import '@neondatabase/auth-ui/css';
 
 function App() {
   return <AuthView pathname="sign-in" />;
@@ -209,7 +209,7 @@ function App() {
 ### User Menu
 
 ```tsx
-import { UserButton } from '@neondatabase/neon-js/auth/react/ui';
+import { UserButton } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 function Header() {
@@ -224,7 +224,7 @@ function Header() {
 ### Protected Route
 
 ```tsx
-import { SignedIn, SignedOut, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@neondatabase/auth-ui';
 
 function Dashboard() {
   return (

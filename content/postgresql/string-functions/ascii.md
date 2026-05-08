@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ascii/
 ogImage: /postgresqltutorial/PostgreSQL-ASCII-function-example.png
-updatedOn: '2024-01-29T01:37:56+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL String Functions
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL CHR() Function
   slug: postgresql-string-functions/postgresql-chr
 ---
+
 <Admonition type="info" id="CTA">
 The `ASCII()` function works the same across any PostgreSQL deployment, so you can apply what you learn here on Postgres anywhere you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>

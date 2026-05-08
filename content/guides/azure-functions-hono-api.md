@@ -4,7 +4,7 @@ subtitle: Learn how to leverage TypeScript, Neon Postgres Databases, and Azure F
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
-updatedOn: '2025-02-01T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 Creating scalable and maintainable APIs is a cornerstone of modern web development. In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.

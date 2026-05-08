@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/
 ogImage: /postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png
-updatedOn: '2024-03-30T03:13:57+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL Trigger
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP TRIGGER Statement
   slug: postgresql-triggers/postgresql-drop-trigger
 ---
+
 <Admonition type="info" id="CTA">
 CREATE TRIGGER works the same on any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for the way you work.
 </Admonition>

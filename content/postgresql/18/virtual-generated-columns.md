@@ -7,7 +7,7 @@ page_description: >-
   on-demand during query execution, saving storage space and providing automatic
   calculations without the overhead of stored values.
 ogImage: ''
-updatedOn: '2025-06-29T05:50:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Enhanced EXPLAIN
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL 18 UUIDv7 Support
   slug: postgresql-18/uuidv7-support
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's virtual generated columns work the same way on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-02-15T20:51:54.165Z'
+updatedOn: '2026-03-27T16:28:19.000Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
@@ -497,16 +497,6 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-java-jdbc" description="Get started with Java and Neon using standard JDBC." icon="github">Get started with Java and Neon using JDBC</a>
-
-</DetailIconCards>
 
 ## Resources
 

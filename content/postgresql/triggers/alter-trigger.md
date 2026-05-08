@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-alter-trigger/
 ogImage: /postgresqltutorial/PostgreSQL-ALTER-TRIGGER-example.png
-updatedOn: '2024-03-30T03:14:14+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TRIGGER Statement
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL BEFORE INSERT Trigger
   slug: postgresql-triggers/postgresql-before-insert-trigger
 ---
+
 <Admonition type="info" id="CTA">
 The `ALTER TRIGGER` statement works the same in any PostgreSQL database, so you can apply what you learn here on any Postgres instance. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

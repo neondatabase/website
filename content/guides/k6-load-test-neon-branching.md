@@ -4,7 +4,7 @@ subtitle: 'Learn how to fork your production database into an isolated Neon bran
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-26T00:00:00.000Z'
-updatedOn: '2026-04-26T00:00:00.000Z'
+updatedOn: '2026-04-28T06:24:08.000Z'
 ---
 
 Performance testing is one of the hardest parts of shipping applications. Teams often turn to staging environments for testing, but these rarely reflect the realities of production. Staging databases are smaller, cleaner, and more predictable. Queries that seem instantaneous in staging can become serious bottlenecks when executed against millions of rows in production.

@@ -6,7 +6,7 @@ page_description: >-
   calculate the cube root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-cbrt/'
 ogImage: ''
-updatedOn: '2024-04-18T02:16:40+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CEIL() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DIV() Function
   slug: postgresql-math-functions/postgresql-div
 ---
+
 <Admonition type="info" id="CTA">
 The CBRT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
 </Admonition>

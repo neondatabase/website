@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2024-01-26T03:16:19+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAX Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL SUM Function
   slug: postgresql-aggregate-functions/postgresql-sum-function
 ---
+
 <Admonition type="info" id="CTA">
 The MIN() function works the same way in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, a VM, or a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed Postgres that's fully integrated into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres with instant branching, autoscaling, and a generous free tier.
 </Admonition>

@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-02-06T22:07:33.027Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -427,25 +427,5 @@ PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+
 ### Where to upload and serve files?
 
 Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend using dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
-
-## Source code
-
-You can find the source code for the applications described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-edge-functions" description="Get started with Next.js Edge Functions and Neon" icon="github">Get started with Next.js Edge Functions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-serverless-functions" description="Get started with Next.js Serverless Functions and Neon" icon="github">Get started with Next.js Serverless Functions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-server-side-props" description="Get started with Next.js getServerSideProps and Neon" icon="github">Get started with Next.js getServerSideProps and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-static-props" description="Get started with Next.js getStaticProps and Neon" icon="github">Get started with Next.js getStaticProps and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-actions" description="Get started with Next.js Server Actions and Neon" icon="github">Get started with Next.js Server Actions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-components" description="Get started with Next.js Server Components and Neon" icon="github">Get started with Next.js Server Components and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

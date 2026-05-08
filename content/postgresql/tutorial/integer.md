@@ -6,7 +6,7 @@ page_description: >-
   including SMALLINT, INTEGER, and BIGINT for designing tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
 ogImage: /postgresqltutorial/postgresql-integer-300x59.png
-updatedOn: '2024-02-02T07:01:29+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REAL Data Type
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL DATE Data Type
   slug: postgresql-tutorial/postgresql-date
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL's integer types behave the same way wherever you run Postgres, so everything covered here about SMALLINT, INTEGER, and BIGINT applies to any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

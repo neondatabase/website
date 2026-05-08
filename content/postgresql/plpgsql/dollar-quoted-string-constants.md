@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/
 ogImage: ''
-updatedOn: '2024-03-18T14:51:14+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL PL/pgSQL
@@ -16,6 +16,7 @@ nextLink:
   title: PL/pgSQL Block Structure
   slug: postgresql-plpgsql/plpgsql-block-structure
 ---
+
 <Admonition type="info" id="CTA">
 Dollar-quoted string constants are a standard PostgreSQL feature, and everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform to do it.
 </Admonition>

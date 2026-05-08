@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join/
 ogImage: /postgresqltutorial/city.png
-updatedOn: '2024-02-02T02:29:26+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Cross Join
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL GROUP BY
   slug: postgresql-tutorial/postgresql-group-by
 ---
+
 <Admonition type="info" id="CTA">
 NATURAL JOIN is part of standard PostgreSQL, and everything you learn here works on any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres on the market, fully integrated into the Lakehouse so your operational and analytical data live together. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
 </Admonition>

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Monitoring and Operations'
 page_title: 'PostgreSQL 19 Monitoring and Operations Improvements'
 page_description: 'Learn about PostgreSQL 19 monitoring and operational improvements including online data checksums, WAL statistics, vacuum progress tracking, per-process logging, psql enhancements, and 64-bit MultiXactOffset.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Schema Management'
@@ -139,18 +139,18 @@ FROM pg_stat_progress_vacuum;
 
 ### Mode Values
 
-| Mode | Meaning |
-|---|---|
-| `normal` | Standard vacuum, reclaims dead tuples |
-| `aggressive` | Scans all pages to advance relfrozenxid, not just those with dead tuples |
-| `failsafe` | Emergency mode triggered when the database is close to transaction ID wraparound |
+| Mode         | Meaning                                                                          |
+| ------------ | -------------------------------------------------------------------------------- |
+| `normal`     | Standard vacuum, reclaims dead tuples                                            |
+| `aggressive` | Scans all pages to advance relfrozenxid, not just those with dead tuples         |
+| `failsafe`   | Emergency mode triggered when the database is close to transaction ID wraparound |
 
 ### Started By Values
 
-| Value | Meaning |
-|---|---|
-| `auto` | Triggered by the autovacuum launcher |
-| `manual` | Explicitly run by a user (VACUUM command) |
+| Value        | Meaning                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| `auto`       | Triggered by the autovacuum launcher                                    |
+| `manual`     | Explicitly run by a user (VACUUM command)                               |
 | `wraparound` | Triggered by the autovacuum launcher specifically to prevent wraparound |
 
 This is useful for understanding why vacuum is consuming resources. A `wraparound` vacuum in `aggressive` mode will scan the entire table regardless of dead tuple count, which can cause I/O spikes.
@@ -170,16 +170,16 @@ This sets the default log level to `warning` but enables debug logging for autov
 
 The 14 supported process types include:
 
-| Process Type | Typical Use |
-|---|---|
-| `autovacuum` | Debug vacuum behavior without flooding logs with backend messages |
-| `archiver` | Troubleshoot WAL archiving issues |
-| `checkpointer` | Investigate checkpoint timing and I/O |
-| `walsender` | Debug replication issues |
-| `walreceiver` | Debug standby replication |
-| `backend` | Application query logging |
-| `startup` | Recovery and startup diagnostics |
-| `bgwriter` | Background writer behavior |
+| Process Type   | Typical Use                                                       |
+| -------------- | ----------------------------------------------------------------- |
+| `autovacuum`   | Debug vacuum behavior without flooding logs with backend messages |
+| `archiver`     | Troubleshoot WAL archiving issues                                 |
+| `checkpointer` | Investigate checkpoint timing and I/O                             |
+| `walsender`    | Debug replication issues                                          |
+| `walreceiver`  | Debug standby replication                                         |
+| `backend`      | Application query logging                                         |
+| `startup`      | Recovery and startup diagnostics                                  |
+| `bgwriter`     | Background writer behavior                                        |
 
 ### Practical Example
 
@@ -283,12 +283,12 @@ If the timeout fires before the LSN is reached, the command returns `status = 't
 
 `MODE` controls what "reached the LSN" means and where the wait runs:
 
-| Mode | Where it runs | What it waits for |
-|---|---|---|
+| Mode             | Where it runs     | What it waits for                                                |
+| ---------------- | ----------------- | ---------------------------------------------------------------- |
 | `standby_replay` | Standby (default) | WAL has been replayed up to the LSN — readable from this standby |
-| `standby_write` | Standby | WAL has been written to disk on this standby |
-| `standby_flush` | Standby | WAL has been flushed to durable storage on this standby |
-| `primary_flush` | Primary | WAL has been flushed locally on the primary |
+| `standby_write`  | Standby           | WAL has been written to disk on this standby                     |
+| `standby_flush`  | Standby           | WAL has been flushed to durable storage on this standby          |
+| `primary_flush`  | Primary           | WAL has been flushed locally on the primary                      |
 
 `primary_flush` is useful for write paths that want to confirm a commit is durable before responding to the caller without changing `synchronous_commit`. On the primary, the other three modes error with "recovery is not in progress" because they describe a standby state.
 

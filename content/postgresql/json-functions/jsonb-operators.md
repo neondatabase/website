@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb-operators/
 ogImage: ''
-updatedOn: '2024-02-26T11:49:22+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_path_exists() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_extract_path() Function
   slug: postgresql-json-functions/postgresql-jsonb_extract_path
 ---
+
 <Admonition type="info" id="CTA">
 JSONB operators work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration that large organizations need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to get you there.
 </Admonition>

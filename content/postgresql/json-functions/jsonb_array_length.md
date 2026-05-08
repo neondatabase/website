@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_length/
 ogImage: ''
-updatedOn: '2024-02-24T03:50:01+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_strip_nulls() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL jsonb_array_elements() Function
   slug: postgresql-json-functions/postgresql-jsonb_array_elements
 ---
+
 <Admonition type="info" id="CTA">
 The jsonb_array_length() function is part of standard PostgreSQL and works the same way on any Postgres deployment, so everything here applies beyond [Neon](https://neon.com). If you're an enterprise running JSON-heavy workloads alongside analytics and AI, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without babysitting infrastructure, Neon gives you the fastest path from idea to production Postgres.
 </Admonition>

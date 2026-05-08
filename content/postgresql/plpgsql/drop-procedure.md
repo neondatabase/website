@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-procedure/
 ogImage: /postgresqltutorial/actor.png
-updatedOn: '2024-02-07T14:17:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE PROCEDURE
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL Stored Procedure with INOUT Parameters
   slug: postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters
 ---
+
 <Admonition type="info" id="CTA">
 The DROP PROCEDURE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on a managed service, or in the cloud. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Schema Management and Backup'
 page_title: 'PostgreSQL 19 pg_get_*_ddl() Functions and pg_dumpall Improvements'
 page_description: 'Learn how to use PostgreSQL 19 pg_get_database_ddl, pg_get_role_ddl, pg_get_tablespace_ddl functions and pg_dumpall non-text output formats for better schema management and backup workflows.'
 ogImage: ''
-updatedOn: '2026-04-14T00:00:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Query Improvements'
@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: PostgreSQL 19 adds `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` functions for programmatic DDL extraction, and extends `pg_dumpall` to support custom, directory, and tar output formats. Together, these features give you better tools for schema management, auditing, and backup workflows.
 
-## pg_get_*_ddl() Functions
+## pg*get*\*\_ddl() Functions
 
 PostgreSQL has long provided `pg_get_tabledef()` and `pg_get_viewdef()` for extracting DDL of individual objects. But getting the DDL for databases, roles, and tablespaces required parsing `pg_dump` or `pg_dumpall` output, which is fragile and inconvenient.
 
@@ -242,7 +242,7 @@ The `pg_get_*_ddl()` functions and `pg_dumpall` improvements address a gap in Po
 
 ## References
 
-- [Commit `4881981f`: Add infrastructure for pg_get_*_ddl functions](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=4881981f)
+- [Commit `4881981f`: Add infrastructure for pg*get*\*\_ddl functions](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=4881981f)
 - [Commit `a4f774cf`: Add pg_get_database_ddl() function](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=a4f774cf)
 - [Commit `763aaa06`: Add non-text output formats to pg_dumpall](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=763aaa06)
 - [PostgreSQL devel docs: pg_dumpall](https://www.postgresql.org/docs/devel/app-pg-dumpall.html)

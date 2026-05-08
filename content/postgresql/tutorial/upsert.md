@@ -6,7 +6,7 @@ page_description: >-
   existing row or insert a new row if it does not exist.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/'
 ogImage: ''
-updatedOn: '2024-03-27T06:05:16+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How To Delete Duplicate Rows in PostgreSQL
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL MERGE Statement
   slug: postgresql-tutorial/postgresql-merge
 ---
+
 <Admonition type="info" id="CTA">
 UPSERT with INSERT ON CONFLICT works the same way on any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for that, with instant provisioning, branching, and autoscaling.
 </Admonition>

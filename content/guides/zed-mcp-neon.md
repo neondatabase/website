@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Zed and Neon MCP Serv
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2025-04-10T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 Imagine you could interact with your database using plain English, whether you're asking for specific data or changing its schema. That's what the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) allows you to do. It lets you manage your Neon Postgres databases using everyday language, simplifying tasks like running queries and performing database migrations.

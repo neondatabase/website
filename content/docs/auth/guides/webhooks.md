@@ -5,7 +5,7 @@ summary: >-
   Configure webhooks to receive notifications for authentication events like OTP
   delivery, magic link delivery, and user creation in Neon Auth.
 enableTableOfContents: true
-updatedOn: '2026-03-27T00:00:00.000Z'
+updatedOn: '2026-03-27T12:55:37.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

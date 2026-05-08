@@ -4,7 +4,7 @@ subtitle: 'Learn how to use Google Jules and the Neon MCP server to spin up isol
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-26T00:00:00.000Z'
-updatedOn: '2026-02-26T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 AI coding agents are increasingly capable of implementing multi-step changes across an application. However, full-stack features often require updates to stateful infrastructure such as databases.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-procedure/
 ogImage: ''
-updatedOn: '2024-02-01T13:52:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Drop Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL DROP PROCEDURE Statement
   slug: postgresql-plpgsql/postgresql-drop-procedure
 ---
+
 <Admonition type="info" id="CTA">
 CREATE PROCEDURE works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for a fully managed, AI-ready Postgres that's fast, secure, and natively integrated with the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice. If you're a developer or startup who needs to ship features and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to build on.
 </Admonition>

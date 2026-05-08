@@ -6,7 +6,7 @@ summary: >-
   frameworks, authentication methods, Better Auth plugins, platform features,
   SDK references, and migration guides.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.134Z'
+updatedOn: '2026-03-31T10:04:02.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

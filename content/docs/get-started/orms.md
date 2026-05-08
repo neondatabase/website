@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/orms
-updatedOn: '2026-02-06T22:07:32.890Z'
+updatedOn: '2026-05-04T10:00:54.000Z'
 ---
 
 <TechCards>
@@ -28,6 +28,8 @@ updatedOn: '2026-02-06T22:07:32.890Z'
 <a href="/docs/guides/ruby-on-rails" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
+
+<a href="/docs/guides/tortoise-orm" title="Tortoise ORM" description="Connect a Tortoise ORM application to Neon" icon="tortoise-orm"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect a TypeORM application to Neon" icon="typeorm"></a>
 

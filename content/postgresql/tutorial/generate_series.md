@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generate_series/
 ogImage: ''
-updatedOn: '2024-07-01T01:21:22+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: How to Compare Two Tables in PostgreSQL
@@ -16,6 +16,7 @@ nextLink:
   title: How to Generate a Random Number in a Range
   slug: postgresql-tutorial/postgresql-random-range
 ---
+
 <Admonition type="info" id="CTA">
 The generate_series() function works the same on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building AI-era workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need to keep analytics and operational data in sync. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>
@@ -82,7 +83,7 @@ Output:
 (5 rows)
 ```
 
-Since the next number of the series is 11 which is higher than the stop value (1\), the function returns a number that stops at 9\.
+Since the next number of the series is 11 which is higher than the stop value (10), the function returns a number that stops at 9\.
 
 ### Generating a series of timestamps
 
@@ -312,4 +313,4 @@ Output:
 
 ## Summary
 
-- Use the `generate_series()` function to create a series of numbers of timestamps.
+- Use the `generate_series()` function to create a series of numbers or timestamps.

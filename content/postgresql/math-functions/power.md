@@ -6,7 +6,7 @@ page_description: >-
   raise a number to a specific power.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-power/'
 ogImage: ''
-updatedOn: '2024-02-17T15:07:31+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PI() Function
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL RADIANS() Function
   slug: postgresql-math-functions/postgresql-radians
 ---
+
 <Admonition type="info" id="CTA">
 The POWER() function works the same on any standard PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
 </Admonition>

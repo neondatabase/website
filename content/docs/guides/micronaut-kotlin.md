@@ -258,13 +258,6 @@ You are now ready to run your application.
 
 You have successfully connected a Micronaut Kotlin application to your Neon Postgres database!
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-micronaut-kotlin" description="Get started with Micronaut Kotlin and Neon" icon="github">Get started with Micronaut Kotlin and Neon</a>
-</DetailIconCards>
 </Steps>
 
 ## Resources

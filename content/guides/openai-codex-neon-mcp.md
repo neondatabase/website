@@ -4,7 +4,7 @@ subtitle: 'Learn how to safely offload complex schema migrations to AI agents us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-04T00:00:00.000Z'
-updatedOn: '2026-03-04T00:00:00.000Z'
+updatedOn: '2026-04-20T02:23:34.000Z'
 ---
 
 Refactoring a database schema like splitting tables or dropping columns is inherently risky. When you introduce an AI coding assistant to handle these complex operations autonomously, the stakes get even higher. One wrong `DROP` statement or flawed migration in a shared environment can easily wipe out critical staging data and block your entire team's workflow.

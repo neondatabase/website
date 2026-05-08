@@ -45,11 +45,16 @@ export function isAIAgentRequest(request) {
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
   'docs/changelog': '/md/docs/changelog.md',
+  'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md',
 };
 
-// Paths under content routes that are static files in public/ (not generated into public/md/).
-// The middleware should pass these through so Next.js serves them directly.
-const STATIC_DOC_PREFIXES = ['docs/ai/'];
+// Paths that must bypass the middleware's markdown-serving logic entirely.
+// Includes:
+// - Static files in public/ not generated into public/md/ (docs/ai/skills/, docs/.well-known/)
+// - Route handlers that accept non-GET requests (docs/mcp), where the middleware
+//   would otherwise detect the non-HTML Accept header, try to serve /md/docs/mcp.md,
+//   fail with 404, and return a markdown error before the route handler fires.
+const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp'];
 
 // Convert URL path to markdown file path
 // Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)

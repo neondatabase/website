@@ -6,7 +6,7 @@ page_description: >-
   and how to use variables effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2024-03-19T03:19:49+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Block Structure
@@ -15,6 +15,7 @@ nextLink:
   title: PL/pgSQL Select Into
   slug: postgresql-plpgsql/pl-pgsql-select-into
 ---
+
 <Admonition type="info" id="CTA">
 PL/pgSQL variables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
 </Admonition>

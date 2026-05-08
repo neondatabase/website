@@ -182,14 +182,4 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 </Steps>
 
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-react-router" description="Get started with React Router and Neon" icon="github">Get started with React Router and Neon</a>
-
-</DetailIconCards>
-
 <NeedHelp/>

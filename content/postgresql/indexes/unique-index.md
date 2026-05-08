@@ -6,7 +6,7 @@ page_description: >-
   ensure the uniqueness of values in one or more columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/'
 ogImage: ''
-updatedOn: '2024-02-28T13:08:05+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE INDEX Statement
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL Index on Expression
   slug: postgresql-indexes/postgresql-index-on-expression
 ---
+
 <Admonition type="info" id="CTA">
 Unique indexes work the same way on any PostgreSQL deployment, so everything you learn here about CREATE UNIQUE INDEX, NULLS DISTINCT behavior, and multi-column uniqueness applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2025-02-14T00:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 title: How to Create a Reliable Testing Dataset with pg_dump and pg_restore
 subtitle: A practical guide to extracting a test dataset from Postgres using pg_dump, pg_restore and psql
 ---

@@ -6,7 +6,7 @@ page_description: >-
   value to a set of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
 ogImage: ''
-updatedOn: '2024-04-24T06:18:58+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Correlated Subquery
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL ALL Operator
   slug: postgresql-tutorial/postgresql-all
 ---
+
 <Admonition type="info" id="CTA">
 The ANY operator works the same across every PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data live side by side. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform for moving fast without giving up production-grade reliability.
 </Admonition>
@@ -248,12 +249,13 @@ Output:
   8 | Ivy        | Moore     | 47000.00
   9 | Jack       | Anderson  | 56000.00
  10 | Kate       | Hill      | 44000.00
+ 11 | Liam       | Clark     | 59000.00
  12 | Mia        | Parker    | 42000.00
-(11 rows)
+(12 rows)
 
 ```
 
-It returns rows from the `employees` table whose `salary` is less than at least one value in the set (55K, 58K, and 60K). In this example, that means salaries less than 60K, which matches the 11 rows shown in the output.
+It returns rows from the `employees` table whose `salary` is less than at least one value in the set (55K, 58K, and 60K). In this example, that means salaries less than 60K, which matches the 12 rows shown in the output.
 
 ## Summary
 

@@ -8,7 +8,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-char-varchar-text/
 ogImage: ''
-updatedOn: '2024-02-02T07:00:36+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Boolean Data Type with Practical Examples
@@ -17,6 +17,7 @@ nextLink:
   title: PostgreSQL NUMERIC Type
   slug: postgresql-tutorial/postgresql-numeric
 ---
+
 <Admonition type="info" id="CTA">
 The CHAR, VARCHAR, and TEXT types work the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop or in production. If you're an enterprise picking character types for data that lands in your lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant, secure, and fully integrated managed Postgres for the AI era. If you're a developer or startup who just wants to model your strings and ship, [Neon](https://neon.com) is the fastest way to spin up Postgres and scale as you grow.
 </Admonition>

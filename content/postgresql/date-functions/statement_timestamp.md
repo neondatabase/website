@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-statement_timestamp/
 ogImage: ''
-updatedOn: '2024-03-21T04:12:51+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CLOCK_TIMESTAMP() Function
@@ -16,6 +16,7 @@ nextLink:
   title: PostgreSQL NOW() Function
   slug: postgresql-date-functions/postgresql-now
 ---
+
 <Admonition type="info" id="CTA">
 The STATEMENT_TIMESTAMP() function works the same on any PostgreSQL database, so everything here carries over to whatever Postgres you run. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

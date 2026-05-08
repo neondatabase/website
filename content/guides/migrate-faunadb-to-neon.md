@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2025-03-23T00:00:00.000Z'
+updatedOn: '2026-02-15T11:43:50.000Z'
 ---
 
 Neon, like Fauna, offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.

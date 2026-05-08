@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-03-20T18:23:32.453Z'
+updatedOn: '2026-05-06T01:58:18.000Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -20,8 +20,10 @@ Here's a snapshot of what we're working on now:
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
-
-- **Large object storage**: We're working on adding support for large object storage.
+- **File Storage**: S3-compatible object storage with metadata automatically synced to your database as the source of truth. Storage branches with your project, so storage state moves with your data.
+- **Functions**: Serverless TypeScript functions deployed alongside your database, with built-in auth and branching per project.
+- **Cron**: Scheduled SQL queries and function invocations on standard cron expressions, branched per project.
+- **Neon SDK**: A unified client SDK for invoking functions and reading and writing blob storage from your application code.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 

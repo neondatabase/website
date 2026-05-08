@@ -6,7 +6,7 @@ page_description: >-
   views in the PostgreSQL database server.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/'
 ogImage: ''
-updatedOn: '2024-03-16T08:31:02+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: Creating a PostgreSQL Trigger with a When Condition
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL CREATE VIEW
   slug: postgresql-views/managing-postgresql-views
 ---
+
 <Admonition type="info" id="CTA">
 Views work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
 </Admonition>

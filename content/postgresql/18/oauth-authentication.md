@@ -6,7 +6,7 @@ page_description: >-
   token-based database connections with your existing identity providers like
   Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2025-06-28T01:40:00+00:00'
+updatedOn: '2026-05-07T18:15:13.000Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Logical Replication Improvements
@@ -15,6 +15,7 @@ nextLink:
   title: PostgreSQL 18 NOT NULL as NOT VALID
   slug: postgresql-18/not-null-as-not-valid
 ---
+
 <Admonition type="info" id="CTA">
 PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
 </Admonition>
