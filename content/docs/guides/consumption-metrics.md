@@ -47,10 +47,12 @@ The response includes metrics that map directly to usage-based billing line item
 | `root_branch_bytes_month`        | byte-hours   | GB-months     | Storage consumed by root branches                                                  |
 | `child_branch_bytes_month`       | byte-hours   | GB-months     | Storage consumed by child branches (delta from parent)                             |
 | `instant_restore_bytes_month`    | byte-hours   | GB-months     | Instant restore (PITR) history storage                                             |
-| `snapshot_storage_bytes_month`   | byte-hours   | GB-months     | Storage for [branch snapshots](/docs/guides/backup-restore) (manual and scheduled) |
+| `snapshot_storage_bytes_month`   | byte-hours   | GB-months     | Storage for [branch snapshots](/docs/guides/backup-restore): manual snapshots are full; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in the schedule |
 | `public_network_transfer_bytes`  | bytes        | GB            | Data transfer over the public internet                                             |
 | `private_network_transfer_bytes` | bytes        | GB            | Data transfer over private networks (for example, AWS PrivateLink)                 |
 | `extra_branches_month`           | branch-hours | branch-months | All child branches per hour (subtract plan allowance before billing)               |
+
+Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 
 To convert these raw values into human-readable billing units and calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
@@ -92,6 +94,10 @@ curl --request GET \
   --header 'Accept: application/json' \
   --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
+
+<Admonition type="note">
+`snapshot_storage_bytes_month` reflects snapshot storage for billing over the selected time window. Manual snapshots are billed as full snapshots. Scheduled snapshots are billed as full snapshots for the first scheduled snapshot, then as incremental (delta) storage for subsequent scheduled snapshots.
+</Admonition>
 
 <details>
 <summary>Response body</summary>

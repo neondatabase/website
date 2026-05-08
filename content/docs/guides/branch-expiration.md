@@ -121,7 +121,8 @@ To maintain system integrity, expiration timestamps cannot be added to:
 Branch expiration is not supported with these Neon features:
 
 - **Data API**
-- **[Legacy Neon Auth](/docs/auth/legacy/overview)** (the new [Neon Auth](/docs/auth/overview) is supported)
+
+Branch expiration is supported with [Neon Auth](/docs/auth/overview).
 
 <Admonition type="note">
 When a branch expires and is deleted, all associated compute endpoints are also deleted. Ensure any critical workloads are migrated before expiration.
