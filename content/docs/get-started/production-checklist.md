@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-02-15T20:51:54.105Z'
+updatedOn: '2026-05-08T13:50:12.658Z'
 ---
 
 <CheckList title="Production checklist">
@@ -126,8 +126,6 @@ Consider disabling scale-to-zero if:
 - Your application requires consistently low latency
 - Cold-start delays are unacceptable for user-facing requests
 - You rely on long-lived sessions or in-memory state
-
-**Cache considerations**: When a compute suspends, the cache is cleared. After the compute restarts, rebuilding the cache can take some time and may temporarily degrade query performance. If your workload requires suspension but you want to minimize this impact, consider using the [pg_prewarm](/docs/extensions/pg_prewarm) extension to reload critical data into the cache on startup.
 
 Keep reading: [Scale to zero configuration](/docs/guides/scale-to-zero-guide)
 
