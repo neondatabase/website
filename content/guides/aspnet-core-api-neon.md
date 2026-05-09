@@ -4,7 +4,7 @@ subtitle: Learn how to connect your .NET applications to Neon's serverless Postg
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Neon Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
@@ -341,7 +341,7 @@ Now that Swagger is set up, start your application using:
 dotnet run
 ```
 
-Once the application is running, you will see the port where your API is hosted (usually `https://localhost:5229`), eg.:
+Once the application is running, you will see the port where your API is hosted (usually `https://localhost:5229`), for example:
 
 ```
 Building...

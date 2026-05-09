@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to implement real-time notificatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-07-02T13:24:36.612Z'
-updatedOn: '2026-02-02T07:31:25.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 This step-by-step guide shows how you can implement real-time notifications in Postgres (powered by Neon). Real-time notifications provide a way to instantly notify users in an application. With [pg_notify](https://www.postgresql.org/docs/current/sql-notify.html) and [Postgres triggers](https://www.postgresql.org/docs/current/triggers.html), you can create a webhook-like system to invoke external services on specific database operations.
@@ -168,7 +168,7 @@ async function listenToNotifications() {
 listenToNotifications().catch(console.log);
 ```
 
-The code above begins with importing `pg` and loading all the enviroment variables into scope. Further, it initializes a client connection to your Postgres. In the `listenToNotifications` function, it sets up a listener to notifications using `client.on('notification', ...)` callback. To invoke the callback, it starts listening for notifications to channel named `my_channel`, using `LISTEN my_channel` command.
+The code above begins with importing `pg` and loading all the environment variables into scope. Further, it initializes a client connection to your Postgres. In the `listenToNotifications` function, it sets up a listener to notifications using `client.on('notification', ...)` callback. To invoke the callback, it starts listening for notifications to channel named `my_channel`, using `LISTEN my_channel` command.
 
 To keep listening to the notifications, you would want to keep running the following command:
 
@@ -180,7 +180,7 @@ Now, let's insert a row to invoke the triggers that will notify the listeners.
 
 ## Notify using triggers
 
-To notify the listeners, you will use Postgres triggers. To programtically trigger an event that will be created upon insertion into the table named `my_table`, create a file `send.js` with the following code:
+To notify the listeners, you will use Postgres triggers. To programmatically trigger an event that will be created upon insertion into the table named `my_table`, create a file `send.js` with the following code:
 
 ```js
 // File: send.js
@@ -210,7 +210,7 @@ async function insertRow(message) {
 insertRow('Hello, world!').catch(console.log);
 ```
 
-The code above begins with importing `pg` and loading all the enviroment variables into scope. Further, it initializes a client connection to your Postgres. In the `insertRow` function, it simply inserts a row into the table named `my_table`.
+The code above begins with importing `pg` and loading all the environment variables into scope. Further, it initializes a client connection to your Postgres. In the `insertRow` function, it simply inserts a row into the table named `my_table`.
 
 To execute the script as above, run the following command:
 

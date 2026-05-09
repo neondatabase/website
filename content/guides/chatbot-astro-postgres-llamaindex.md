@@ -4,7 +4,7 @@ subtitle: A step-by-step guide for building a RAG chatbot in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 ## Prerequisites
@@ -436,7 +436,7 @@ export async function POST({ request }: APIContext) {
 The code above does the following:
 
 - Imports the vector store instance that is using Postgres.
-- Imports the VectorStoreIndex helper by llamaindex.
+- Imports the VectorStoreIndex helper by LlamaIndex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/chat`.
 - Destructs messages array from the request body.
 - Creates the LlamaIndex's query engine using Postgres as the vector store.
@@ -476,7 +476,7 @@ export async function POST({ request }: APIContext) {
 The code above does the following:
 
 - Imports the vector store instance that is using Postgres.
-- Imports the VectorStoreIndex and storageContextFromDefaults helpers by llamaindex.
+- Imports the VectorStoreIndex and storageContextFromDefaults helpers by LlamaIndex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/learn`.
 - Destructs the text message from the request body.
 - Creates a LlamaIndex document with text as its sole data.
@@ -560,7 +560,7 @@ The Dockerfile above defines the following set of actions:
 
 - Sets up Node.js 20.11.0.
 - Sets the environment to `production` with `NODE_ENV` environment variable.
-- Instasll the dependencies of your Astro project.
+- Install the dependencies of your Astro project.
 - Builds the application with `astro build`.
 - Sets the `PORT` environment variable to `80` (default port on Amazon ECS).
 - Sets the `HOST` environment variable to `0.0.0.0` to listen to all incoming requests on the host.
@@ -623,7 +623,7 @@ writeFileSync(
 The code above does the following:
 
 - Imports `dotenv/config` to load all the environment variables into the scope and make them accessible via the `process.env` object.
-- Validates the presense of `AWS_ACCOUNT_ID`, `POSTGRES_URL`, and `OPENAI_API_KEY` environment variables.
+- Validates the presence of `AWS_ACCOUNT_ID`, `POSTGRES_URL`, and `OPENAI_API_KEY` environment variables.
 - Writes a `task-definition.json` file at the root of your Astro application following the format used earlier, and adds the `OPENAI_API_KEY` and `POSTGRES_URL` environment variables.
 
 ## Deploy your Astro application to Amazon ECS
