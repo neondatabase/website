@@ -157,7 +157,7 @@ TRUNCATE TABLE customers, vendors;
 
 ### 3\) Using PostgreSQL TRUNCATE TABLE statement to delete data from a table referenced by a foreign key
 
-First, create tables `orders` and `order_details`:
+First, create tables `orders` and `order_items`:
 
 ```sql
 CREATE TABLE orders(
