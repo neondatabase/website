@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-02T11:15:22.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -73,7 +73,7 @@ Each organization has different limits that apply to all projects created within
 | **Max manual snapshots** | 1 per project     | 10 per project    | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
 | **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
 | **Restore window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min autosuspend**      | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 

@@ -6,7 +6,7 @@ summary: >-
   components, including enabling authentication, installing the SDK, configuring
   environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.920Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 layout: wide
 ---
 
@@ -195,7 +195,7 @@ Copy and paste the following code into your `app/layout.tsx` file.
 
 The `NeonAuthUIProvider` can be fully customized with settings you have configured in Neon Console. For example:
 
-- Add social providers like Google, Github, and Vercel on sign-in page
+- Add social providers like Google, GitHub, and Vercel on sign-in page
 - Allow your users to create and manage organizations in `/account/organizations`
 - Localization support
 

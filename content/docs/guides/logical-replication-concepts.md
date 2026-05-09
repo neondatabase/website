@@ -7,7 +7,7 @@ summary: >-
   enabling logical replication in Neon for real-time data updates.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-27T17:26:37.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
@@ -63,7 +63,7 @@ A subscription represents the downstream side of logical replication. Data is re
 
 A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
-You can create a subscription on a "susbcriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
+You can create a subscription on a "subscriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION users_subscription

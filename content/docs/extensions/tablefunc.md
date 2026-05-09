@@ -7,7 +7,7 @@ summary: >-
   creating pivot tables, generating random numbers, and navigating hierarchical
   data structures within a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `tablefunc` extension for Postgres provides a powerful set of functions for transforming data directly within your database. Its primary capabilities include creating pivot tables (also known as cross-tabulations) to reshape data, generating sets of normally distributed random numbers, and querying hierarchical or tree-like data structures.
@@ -73,7 +73,7 @@ SELECT * FROM normal_rand(5, 10.0, 2.0);
 (5 rows)
 ```
 
-> Ouput will vary each time you run the function due to the random nature of the data.
+> Output will vary each time you run the function due to the random nature of the data.
 
 **Use case:** Populating tables with realistic-looking sample data for testing or analysis.
 

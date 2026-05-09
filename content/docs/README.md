@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-04-23T11:41:56.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 # Docs
@@ -508,7 +508,7 @@ To change text in CTA block, you can pass to the component props `title`, `descr
 ## Steps
 
 To display numbered steps, wrap the content with `Steps` component.  
-Steps will be splitted by `h2` headings.
+Steps will be split by `h2` headings.
 
 ```md
 <Steps>
@@ -627,7 +627,7 @@ Example with steps:
 ## Feature List
 
 To display a list of features, use the `FeatureList` component.
-Features will be splitted by `h2` and `h3` headings.
+Features will be split by `h2` and `h3` headings.
 
 ```md
 <FeatureList>

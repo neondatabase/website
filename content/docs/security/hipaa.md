@@ -5,7 +5,7 @@ summary: >-
   the self-serve process to enable features and accept the Business Associate
   Agreement (BAA) for handling Protected Health Information (PHI).
 enableTableOfContents: true
-updatedOn: '2026-04-29T21:38:32.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -210,7 +210,7 @@ Neon logs operations performed via the Neon Console interface and the Neon API. 
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
-- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs whereever possible.
+- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs wherever possible.
 - `GET` requests: Only query parameters are logged; response payloads are not recorded.
 - Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
 

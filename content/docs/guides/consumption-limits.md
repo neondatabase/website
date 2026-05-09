@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-04-28T20:12:16.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -187,7 +187,7 @@ If you want to suspend a user for any reason &#8212; for example, suspicious act
 
 In addition to setting quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
 
-- `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The default minimum is .25 CU but can be increased if your user's project could benefit from a larger compute start size.
+- `autoscaling_limit_min_cu` &#8212; Sets the minimum compute size for the endpoint. The default minimum is .25 CU but can be increased if your user's project could benefit from a larger compute start size.
 - `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
 - `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Scale to Zero](/docs/guides/scale-to-zero-guide).
 
@@ -198,7 +198,7 @@ See these sample CURL requests for each method.
 <Tabs labels={["Project", "Branch","Endpoint"]}>
 
 <TabItem>
-In this sample, we are setting defaults for all new endpoints created in the project as a whole. The minimum compute size is at **1 CU**, the max size at **3 CU**, and a 10 minute (**600 seconds**) inactivty period before the endpoint is suspended.
+In this sample, we are setting defaults for all new endpoints created in the project as a whole. The minimum compute size is at **1 CU**, the max size at **3 CU**, and a 10 minute (**600 seconds**) inactivity period before the endpoint is suspended.
 
 These default values are set in the
 `default_endpoint_settings` object.

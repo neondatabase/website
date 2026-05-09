@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 ## access token
@@ -552,7 +552,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 ## Schema Diff
 
-A Neon feature that lets you compare database schemas between different branches for better debugging, code review, and team collobration. See [Schema Diff](/docs/guides/schema-diff).
+A Neon feature that lets you compare database schemas between different branches for better debugging, code review, and team collaboration. See [Schema Diff](/docs/guides/schema-diff).
 
 ## Concurrently active compute limit
 

@@ -6,7 +6,7 @@ summary: >-
   partitioned tables in Postgres, including automated partition creation and
   maintenance tailored for Neon projects.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
@@ -26,7 +26,7 @@ This guide covers how to set up `pg_partman` with Neon: why partitioning helps, 
 
 ## Enable the `pg_partman` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon. Creatig a `partman` schema is optional (but recommended) and you can name the schema whatever you like, but it cannot be changed after installation.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon. Creating a `partman` schema is optional (but recommended) and you can name the schema whatever you like, but it cannot be changed after installation.
 
 ```sql
 CREATE SCHEMA partman;

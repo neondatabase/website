@@ -7,7 +7,7 @@ summary: >-
   replication in Neon.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
@@ -215,7 +215,7 @@ To set up the Snowflake destination connector, you first need to create Airbyte 
 You can use the following script in a new [Snowflake worksheet](https://docs.snowflake.com/en/user-guide/ui-worksheet) to create the entities. This script is provided as part of [Airbyte's Snowflake connector setup guide](https://docs.airbyte.com/integrations/destinations/snowflake#setup-guide).
 
 <Admonition type="note">
-If you want, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Sbowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
+If you want, you can edit the script to change the password to a more secure password and to change the names of other resources. If you do rename entities, make sure to follow [Snowflake identifier requirements](https://docs.snowflake.com/en/sql-reference/identifiers-syntax).
 </Admonition>
 
 ```sql

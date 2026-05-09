@@ -6,7 +6,7 @@ summary: >-
   key-value pairs, including enabling the extension, storing, querying, and
   performing operations on hstore data.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It works well for semi-structured data or data without a rigid schema.
@@ -233,7 +233,7 @@ This query returns the following:
 
 The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model; both keys and values must be strings. This makes it more efficient for simple key-value data.
 
-In constrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
+In contrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
 
 ## Indexing and performance
 

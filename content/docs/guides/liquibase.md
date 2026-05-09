@@ -6,7 +6,7 @@ summary: >-
   schema changes in a Neon environment, including deployment and rollback
   procedures.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.002Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -195,7 +195,7 @@ Now, you can start making database schema changes by creating [changesets](https
    touch dbchangelog.xml
    ```
 
-2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from your changelog file, described in the previous step.
+2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your author name and id, which you can retrieve from your changelog file, described in the previous step.
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>

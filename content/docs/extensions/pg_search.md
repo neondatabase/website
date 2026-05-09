@@ -6,7 +6,7 @@ summary: >-
   and analytics in Postgres, utilizing BM25 indexing for high-relevance results
   and advanced text search capabilities.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -245,7 +245,7 @@ WHERE id @@@ '{"match": {"field": "description", "value": "running shoes"}}'::js
 
 To retrieve results even with minor errors in the search term, you can use `paradedb.match` with the `distance` option.
 
-Suppose you mistyped **'running'** as **'runing'**. You can still find relevant results using fuzzy matching:
+Suppose you mistyped **`running`** as **`runing`**. You can still find relevant results using fuzzy matching:
 
 ```sql
 SELECT description, category
@@ -253,7 +253,7 @@ FROM mock_items
 WHERE id @@@ paradedb.match('description', 'runing', distance => 1);
 ```
 
-This will find items where the `description` is similar to **'runing'** within a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of 1.
+This will find items where the `description` is similar to **`runing`** within a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of 1.
 
 ```text
   description              | category

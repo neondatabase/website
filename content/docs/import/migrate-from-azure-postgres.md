@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -32,7 +32,7 @@ Logical replication for Postgres transfers data from a source Postgres database 
 
 This section describes how to prepare your Azure PostgreSQL database (the publisher) for replicating data to your destination Neon database (the subscriber).
 
-To illustrate the migration workflow, we set up the [AdventureWorks sample database](https://wiki.postgresql.org/wiki/Sample_Databases) on an Azure Database for PostgreSQL deployment. This database contains data corresponding to a fictionaly bicycle parts company, organized across 5 schemas and almost 70 tables.
+To illustrate the migration workflow, we set up the [AdventureWorks sample database](https://wiki.postgresql.org/wiki/Sample_Databases) on an Azure Database for PostgreSQL deployment. This database contains data corresponding to a fictional bicycle parts company, organized across 5 schemas and almost 70 tables.
 
 ### Enable logical replication in Azure PostgreSQL
 

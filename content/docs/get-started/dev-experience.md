@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-04-06T14:16:24.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -62,7 +62,7 @@ Scale to zero is a foundational capability for the Neon experience, allowing us 
 
 In traditional Postgres setups, storage is something you plan upfront: you estimate how much data you’ll need, provision disk accordingly, and revisit that decision as your application grows. Getting this wrong leads to wasted capacity and full-disk errors. Neon removes this friction by making storage fully on demand.
 
-Neon’s storage is [built on object storage](https://neon.com/docs/introduction/architecture-overview), deacoupled from compute. It is reliable by design and it expands automatically as data is written, as scaling storage does not require resizing compute resources or causing downtime. You can start with a small database and grow it continuously, without ever revisiting storage sizing decisions.
+Neon’s storage is [built on object storage](https://neon.com/docs/introduction/architecture-overview), decoupled from compute. It is reliable by design and it expands automatically as data is written, as scaling storage does not require resizing compute resources or causing downtime. You can start with a small database and grow it continuously, without ever revisiting storage sizing decisions.
 
 **What this means for DX**
 

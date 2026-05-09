@@ -7,7 +7,7 @@ summary: >-
   application using a Neon Postgres database, including setup, schema
   definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.913Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 <Admonition type="note">
@@ -230,7 +230,7 @@ export default handleAuth({
 });
 ```
 
-This sets up the necesssary Auth0 authentication routes for the application at the `/api/auth/auth0/*` endpoints - `login`, `logout`, `callback` (to redirect to after a successful login), and `me` (to fetch the user profile).
+This sets up the necessary Auth0 authentication routes for the application at the `/api/auth/auth0/*` endpoints - `login`, `logout`, `callback` (to redirect to after a successful login), and `me` (to fetch the user profile).
 
 Next, we will wrap the application with the `UserProvider` component from `@auth0/nextjs-auth0`, so all pages have access to the current user context. Replace the contents of the `app/layout.tsx` file with the following:
 

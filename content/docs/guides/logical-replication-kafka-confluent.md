@@ -7,7 +7,7 @@ summary: >-
   Capture (CDC) events.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -261,7 +261,7 @@ To set up a Postgres CDC source connector for Confluent Cloud:
    }
    ```
 
-   Click **Continue** to provision the connector, which may take a few monents to complete.
+   Click **Continue** to provision the connector, which may take a few moments to complete.
 
 ## Verify your Kafka stream
 

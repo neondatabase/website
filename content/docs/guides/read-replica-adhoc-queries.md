@@ -6,7 +6,7 @@ summary: >-
   quick data retrieval without affecting the performance of the primary
   database.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries work well for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
@@ -48,7 +48,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
-4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
+4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings**. You can configure a fixed-size compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. On paid plans, you can adjust the **Scale to zero time** setting, which controls whether a compute suspends due to inactivity after 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.

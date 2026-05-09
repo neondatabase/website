@@ -6,7 +6,7 @@ summary: >-
   using Neon, demonstrating how to secure user data by enforcing access control
   at the database level with JWT authentication.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.812Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -54,9 +54,9 @@ npm run dev
 
 Open the app in your browser using [`localhost:5173`](http://localhost:5173).
 
-Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and Github logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
+Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and GitHub logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
 
-Create your `Alice` user using Google. Then, using a private browser session, create your `Bob` user account using Github or other Google account.
+Create your `Alice` user using Google. Then, using a private browser session, create your `Bob` user account using GitHub or other Google account.
 
 Side by side, here's the empty state for both users:
 
