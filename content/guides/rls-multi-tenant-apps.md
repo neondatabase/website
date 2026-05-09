@@ -9,7 +9,7 @@ updatedOn: '2026-05-02T00:00:00.000Z'
 
 If you are building a multi-tenant app on Postgres, [row level security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) sounds like a clean promise, i.e. define access rules once in the database, and every query becomes safe by default. It is a compelling idea, especially when you have many tables, many endpoints, and many ways the same data can be accessed. But RLS is not "turn it on and forget it". It changes how your application authenticates, how your queries are shaped, how you debug production issues, and how confident you can be that a new feature did not pass through your data boundary.
 
-So the real question is not "is RLS secure?" but the question is whether it is the right tool for your system, given your team’s workflow, the kinds of queries you run, and how you ship iterations of your application. Neon does not change what RLS is, but it makes it easier to test policy changes against real application behavior before they reach to production.
+So the real question is not "is RLS secure?" but the question is whether it is the right tool for your system, given your team’s workflow, the kinds of queries you run, and how you ship iterations of your application. Neon does not change what RLS is, but it makes it easier to test policy changes against real application behavior before they reach production.
 
 ## What You Get with RLS
 
