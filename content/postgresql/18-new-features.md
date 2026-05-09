@@ -7,7 +7,7 @@ page_description: >-
   Discover how these changes will impact performance, development, and
   operations.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 nextLink:
   title: PostgreSQL 18 Asynchronous I/O
@@ -171,7 +171,7 @@ You configure it in `pg_hba.conf` like other auth methods, and load token valida
 
 ### MD5 Deprecation Warning
 
-MD5 password authentication is now deprecated in favor of the more secure SCRAM-SHA-256 method. The MD5 method will still work, but you will be removed in the next major release.
+MD5 password authentication is now deprecated in favor of the more secure SCRAM-SHA-256 method. The MD5 method will still work, but it will be removed in the next major release.
 
 ### Enhanced TLS Support
 

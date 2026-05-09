@@ -6,7 +6,7 @@ page_description: >-
   perform integer division and apply it effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CBRT() Function
@@ -66,7 +66,7 @@ Unlike regular division, the `DIV()` function truncates any fractional part of t
 
 ### 2\) Grouping data into bins
 
-You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
+You can group numerical data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
 
 ```sql
 SELECT

@@ -6,7 +6,7 @@ page_description: >-
   install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: ''
@@ -25,7 +25,7 @@ This section helps you get started with PostgreSQL by showing you how to install
 ## Getting Started
 
 - [What is PostgreSQL](postgresql-getting-started/what-is-postgresql) – introduce you to PostgreSQL and its applications in today’s software stack.
-- [Introduction to PostgreSQL sample database](postgresql-getting-started/postgresql-sample-database) – to learn the PostgreSQL fast, you need to have a good sample database to practice with. This tutorial introduces you to a PostgreSQL sample database called `dvdrental`.
+- [Introduction to PostgreSQL sample database](postgresql-getting-started/postgresql-sample-database) – to learn PostgreSQL quickly, you need to have a good sample database to practice with. This tutorial introduces you to a PostgreSQL sample database called `dvdrental`.
 
 ## PostgreSQL on Windows
 
