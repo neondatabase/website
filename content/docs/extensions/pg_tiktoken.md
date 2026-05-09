@@ -7,7 +7,7 @@ summary: >-
   tokenization of data in Postgres databases using OpenAI's `tiktoken` library,
   including functions for encoding and counting tokens.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
@@ -20,7 +20,7 @@ This topic provides guidance on installing the extension, utilizing its features
 
 Language models process text in units called tokens. A token can be as short as a single character or as long as a complete word, such as "a" or "apple." In some languages, tokens may comprise less than a single character or even extend beyond a single word.
 
-For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "server", "less", "Post", "gres"].
+For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: `["Ne", "on", "is", "server", "less", "Post", "gres"]`.
 
 ## `pg_tiktoken` functions
 

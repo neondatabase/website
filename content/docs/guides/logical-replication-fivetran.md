@@ -6,7 +6,7 @@ summary: >-
   Fivetran to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -158,7 +158,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
    - **Password**: AbC123dEf
    - **Database Name**: dbname
 
-1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You deifned these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
+1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You defined these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
 
    ![Fivetran connector setup](/docs/guides/fivetran_connector_setup.png)
 
@@ -170,7 +170,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
 1. Click **Save & Test**. Fivetran tests and validates the connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
-   During the test, Fivetran asks you to confirm the certificate chain by selecting the certificate to use as the trust anchor. Select the `CN=ISRG Root X1, 0=Internet Security Research Group, C=US` option. This certificate is valid unitl until 2035-06-04.
+   During the test, Fivetran asks you to confirm the certificate chain by selecting the certificate to use as the trust anchor. Select the `CN=ISRG Root X1, 0=Internet Security Research Group, C=US` option. This certificate is valid until 2035-06-04.
 
    When the connection test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 

@@ -7,7 +7,7 @@ summary: >-
   deleting branches, as well as setting defaults and performing schema
   comparisons.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.958Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 ## Before you begin
@@ -17,7 +17,7 @@ updatedOn: '2026-02-26T16:28:03.958Z'
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or perforning a [schema diff](/docs/guides/schema-diff) between different branches.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or performing a [schema diff](/docs/guides/schema-diff) between different branches.
 
 ## Usage
 

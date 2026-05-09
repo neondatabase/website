@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-05-08T03:56:34.165Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -50,7 +50,7 @@ The following table shows parameter settings that are set explicitly for your Ne
 <Admonition type="note">
 Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
 
-If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints.
+If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and constraints.
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                                                                                                                           |

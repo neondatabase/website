@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-02-15T20:51:54.110Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -196,7 +196,7 @@ The Neon SQL Editor offers three AI-driven features:
 - **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
   ![SQL generation](/docs/get-started/sql_editor_ai.png)
 - **Fix with AI**: If your query returns an error, simply click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor so you can run the query again.
-  ![Fix withn AI](/docs/get-started/fix_with_ai.png)
+  ![Fix with AI](/docs/get-started/fix_with_ai.png)
 - **AI-generated query names**: Descriptive names are automatically assigned to your queries in the Neon SQL Editor's **History**. This feature helps you quickly identify and reuse previously executed queries.
   ![AI-generated query names](/docs/get-started/query_names.png)
 

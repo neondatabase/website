@@ -7,7 +7,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-04-22T19:33:10.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -359,7 +359,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
       - Numbers (0-9)
       - Special symbols (for example, !@#$%^&*)
     - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
-      - Sequential patterns (such as '1234', 'abcd', 'qwerty')
+      - Sequential patterns (such as `1234`, `abcd`, `qwerty`)
       - Common words or phrases
       - Any words found in a dictionary
       - **Avoid character repetition**: To maximize randomness, do not use the same character more than twice consecutively.

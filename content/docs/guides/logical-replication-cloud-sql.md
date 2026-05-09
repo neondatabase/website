@@ -7,7 +7,7 @@ summary: >-
   database and enabling necessary settings.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.005Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
@@ -89,7 +89,7 @@ Record the public IP address of your Cloud SQL Postgres instance. You'll need th
 If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/mysql/private-ip).
 </Admonition>
 
-![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
+![Cloud SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
 ### Create a Postgres role for replication
 

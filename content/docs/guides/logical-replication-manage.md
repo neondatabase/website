@@ -7,7 +7,7 @@ summary: >-
   removing publications and subscriptions.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.012Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -109,7 +109,7 @@ A single subscriber can maintain multiple subscriptions, including multiple subs
 
 ### Create a subscription to be enabled later
 
-This command creates a subscription with `enabled = false` so that you can enable the scription at a later time:
+This command creates a subscription with `enabled = false` so that you can enable the subscription at a later time:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription

@@ -6,7 +6,7 @@ summary: >-
   using `pg_dump` and `pg_restore` within a GitHub Actions workflow.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.
@@ -117,13 +117,13 @@ Before running the Action, ensure that both `PROD_DATABASE_URL` and `DEV_DATABAS
 
 In your repository, go to **Settings** > **Secrets and variables** > **Actions** to add them.
 
-![github repository secrects](/docs/guides/twin_diagram_github_secrets.png)
+![GitHub repository secrets](/docs/guides/twin_diagram_github_secrets.png)
 
 ## Testing the workflow
 
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
-![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
+![GitHub Actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
 
 ## Syncing with migration changes
 

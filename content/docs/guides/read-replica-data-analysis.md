@@ -6,7 +6,7 @@ summary: >-
   analytics queries without affecting the performance of your production
   database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.037Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -61,7 +61,7 @@ You can add a read replica compute- to any branch in your Neon project by follow
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
-4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
+4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings**. You can configure a fixed size compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure a **Scale to zero** setting, which determines whether a compute suspends due to inactivity after 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.

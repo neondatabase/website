@@ -7,7 +7,7 @@ summary: >-
   Neon projects.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-04-01T22:55:35.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -17,7 +17,7 @@ The **Import Data Assistant** can help you automatically import your existing da
 <FeatureBetaProps feature_name="Import Data Assistant"/>
 
 <Admonition type="tip" title="Migrate between Neon projects">
-In additiion to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
+In addition to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
 </Admonition>
 
 ## Before you start

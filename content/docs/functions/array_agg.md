@@ -6,10 +6,10 @@ summary: >-
   row values into a single array, including syntax, ordering options, and
   practical examples for data denormalization.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
-The Postges `array_agg()` function collects values from multiple rows into a single array.
+The Postgres `array_agg()` function collects values from multiple rows into a single array.
 
 Use it for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, you can use it to list all products in a category from a products catalog table or all orders for a customer from an orders table.
 
