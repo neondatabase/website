@@ -1,0 +1,77 @@
+# Neon product and feature terms
+# Seeded from .claude/neon-terminology.md
+
+# Neon brand and product names
+Neon
+neondb
+neonctl
+neondatabase
+
+# Feature names (capitalized forms used as proper nouns)
+Autoscaling
+Branching
+
+# Postgres ecosystem — lowercase forms not caught by camelCase/dotted ignore filters
+Postgres
+PostgreSQL
+postgres
+psql
+pgvector
+postgis
+PostGIS
+autovacuum
+autoscale
+autoscaling
+serverless
+pooler
+replication
+
+# Connection pooling
+PgBouncer
+pgbouncer
+
+# Neon-specific architecture terms
+endpoint
+endpoints
+compute
+computes
+
+# Common Postgres data types and terms that Hunspell may not know
+varchar
+bigint
+smallint
+boolean
+upsert
+nullable
+nonnull
+tablespace
+tablespaces
+deadlock
+rollback
+savepoint
+savepoints
+prepend
+initdb
+superuser
+pg
+
+# pg_xxx utilities — also caught by the dotted-identifier ignore pattern,
+# but listed here as a safety net
+pg_dump
+pg_restore
+pg_stat_statements
+pg_hba
+pg_ctl
+pg_basebackup
+pg_rewind
+pg_upgrade
+
+# Neon internal architecture components
+Pageserver
+pageserver
+Pageservers
+Safekeeper
+safekeeper
+Safekeepers
+safekeepers
+walproposer
