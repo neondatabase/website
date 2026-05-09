@@ -4,7 +4,7 @@ subtitle: Learn how to use Neon Auth Webhooks to build custom authentication flo
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Neon Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Neon database. By default, Neon Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
@@ -430,7 +430,7 @@ With the webhook active and your Next.js app running, you can now test the entir
 
 2. **Test the Custom OTP and Magic Link Delivery:**
    - Signup using a valid email.
-   - Signout and either click on "Sign In with Email Code" or click "Forgot your password?".
+   - Sign out and either click on "Sign In with Email Code" or click "Forgot your password?".
    - **Result:** Instead of receiving a default email from Neon, you receive your custom Resend email. OTP flows trigger `send.otp`, and if you choose "Send reset link" in password reset, Neon triggers `send.magic_link` and your webhook delivers the custom link email.
 
 </Steps>

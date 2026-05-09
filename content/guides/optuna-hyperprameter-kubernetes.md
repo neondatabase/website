@@ -4,7 +4,7 @@ subtitle: Use Neon Postgres to orchestrate multi-node hyperparameter tuning for 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedOn: '2026-02-15T11:43:50.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a bayesian optimization library, to fine-tune models built with popular libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
 ### PyTorch
 
-PyTorch is now the defacto library for deep learning research, and its flexibility makes it a popular choice for many machine learning tasks. In this example, you will optimize the number of layers, hidden units, and dropout ratios in a feedforward neural network for the FashionMNIST dataset, a popular benchmark for image classification.
+PyTorch is now the de facto library for deep learning research, and its flexibility makes it a popular choice for many machine learning tasks. In this example, you will optimize the number of layers, hidden units, and dropout ratios in a feedforward neural network for the FashionMNIST dataset, a popular benchmark for image classification.
 
 ```python
 import os
@@ -281,7 +281,7 @@ if __name__ == "__main__":
     study.optimize(objective, n_trials=100, timeout=600)
 ```
 
-### tfkeras
+### tf.keras
 
 While PyTorch is the go-to library for research, Keras with the TensorFlow backend is popular for its simplicity and ease of use. In this example, you will optimize the number of filters, kernel size, strides, activation functions, and learning rate in a convolutional neural network for the MNIST dataset.
 

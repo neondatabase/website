@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Neon Auth JWTs in a custom ba
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Neon Auth](/docs/auth/overview) to handle identity securely.
@@ -723,7 +723,7 @@ You can apply these exact same steps to build secure backends in:
 - **Go:** Using standard `net/http` or Gin with `golang-jwt`.
 - **Rust:** Using Axum or Actix with the `jsonwebtoken` crate.
 
-The core principle remains constant: authenticate the user on the client, pass the token in the header, and cryptographicially verify it on the server before executing your business logic.
+The core principle remains constant: authenticate the user on the client, pass the token in the header, and cryptographically verify it on the server before executing your business logic.
 
 ## Source code
 

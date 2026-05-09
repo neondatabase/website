@@ -4,7 +4,7 @@ subtitle: Learn how to run multiple AI coding agents in parallel with isolated G
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-25T00:00:00.000Z'
-updatedOn: '2026-02-25T15:09:45.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 You’ve probably seen people on X (Twitter) experimenting with [swarms of AI coding agents](https://x.com/notnotstorm/status/1993411360387162235?s=20), sometimes mentioning concepts like [Git worktrees](https://x.com/bcherny/status/2025007393290272904?s=20). If you’ve already been running Claude or another agent in your terminal, you might be wondering: _what exactly are worktrees, and why do they matter?_
@@ -86,7 +86,7 @@ To make this seamless, we can use a Git `post-checkout` hook. This script trigge
 
 1.  **Detect** that a new worktree is being created.
 2.  **Bootstrap** the environment by copying your main `.env` file.
-3.  **Provison** a new Neon database branch matching the Git branch name.
+3.  **Provision** a new Neon database branch matching the Git branch name.
 4.  **Configure** the new worktree's `DATABASE_URL` to point to this isolated database.
 
 ### Prerequisites
@@ -317,7 +317,7 @@ cd ../feature-search
 
 Once an agent finishes its task, you’ll have a feature branch (e.g., `feature-auth`) with new commits and a corresponding Neon database branch. The next step is to merge that work back into `main`.
 
-### Merging manualy
+### Merging manually
 
 You can merge the worktree's branch just like any standard Git branch. From your main terminal:
 

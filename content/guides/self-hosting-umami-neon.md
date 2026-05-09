@@ -4,7 +4,7 @@ subtitle: Self host your Umami analytics on Fly.io and powered by Neon Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-05T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 In this guide, you will learn how to self host your Umami analytics instance on Fly.io and powered by Neon Postgres as the serverless database.
@@ -184,7 +184,7 @@ In the modal, set the name of the secret as `DATABASE_URL`, and set the `Secret`
 
 ![](/guides/images/self-hosting-umami-neon/307263972-75bef039-f4d1-4b7d-a66d-dd312290a6d1.png)
 
-Great! With that done, you have succesfully ensured that each deployment of your app on Fly.io will have the database URL pointing to the Neon Postgres instance. Let's trigger a deploy to see it all in action.
+Great! With that done, you have successfully ensured that each deployment of your app on Fly.io will have the database URL pointing to the Neon Postgres instance. Let's trigger a deploy to see it all in action.
 
 ## Deploy To Fly.io
 

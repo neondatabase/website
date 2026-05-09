@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-03-01T00:00:00.000Z'
-updatedOn: '2026-03-14T03:18:26.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 title: How to use self-hosted runners with GitHub Actions
 subtitle: Take full control of your GitHub Action's runner environment with DigitalOcean
 ---
@@ -27,13 +27,13 @@ If you don't have a Digital Ocean account already, create one [here](https://clo
 
 From the navigation list on the left hand side select **Droplets**, then click **Create Droplet**.
 
-![Screenshot of Digital Ocean Create Droploet](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-create-droplet.jpg)
+![Screenshot of Digital Ocean Create Droplet](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-create-droplet.jpg)
 
 On the next screen you'll have a number of options to choose from. In this example I'll be deploying the Droplet to Digital Ocean's New York **Datacenter** and using **Ubuntu** for the Droplet **image**.
 
 ![Screenshot of Digital Ocean Droplet Config - Datacenter](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-droplet-config-1.jpg)
 
-Scroll down to the next section and choose the **Droplet Size** and **CPU Options**. In ths example, I've chosen to use a **Shared CPU** and The smallest **Disk size**.
+Scroll down to the next section and choose the **Droplet Size** and **CPU Options**. In this example, I've chosen to use a **Shared CPU** and The smallest **Disk size**.
 
 ![Screenshot of Digital Ocean Droplet Config - CPU Size](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-droplet-config-2.jpg)
 
@@ -105,7 +105,7 @@ runneruser ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/share/postgresql-common/pgdg/a
 
 To exit `visudo`, press `^X` and confirm the changes. Once you're done, log out as the `root` user by typing `exit` in your terminal.
 
-## Log in as runneruser
+## Log in as `runneruser`
 
 Now that the `runneruser` has been created, you can log in to configure the system for the self-hosted runner. Run the following command in your terminal to log in as `runneruser`.
 
