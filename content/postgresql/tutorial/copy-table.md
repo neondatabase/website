@@ -90,7 +90,7 @@ Output:
 (2 rows)
 ```
 
-Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
+Third, create a copy of `contacts` to a new table such as `contacts_backup` table using the following statement:
 
 ```sql
 CREATE TABLE contact_backup
