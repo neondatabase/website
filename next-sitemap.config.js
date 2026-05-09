@@ -25,6 +25,7 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
+        allow: '/',
         disallow: [
           // Home page for logged-in users
           '/home$',
@@ -38,5 +39,11 @@ module.exports = {
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`,
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/sitemap-postgres.xml`,
     ],
+    transformRobotsTxt: async (_config, robotsTxt) => {
+      return robotsTxt.replace(
+        '# Host',
+        'Content-Signal: ai-train=yes, search=yes, ai-input=yes\n\n# Host'
+      );
+    },
   },
 };

@@ -38,6 +38,15 @@ const defaultConfig = {
             key: 'Cache-Control',
             value: 'max-age=0, s-maxage=31536000',
           },
+          {
+            key: 'Link',
+            value: [
+              '</.well-known/api-catalog>; rel="api-catalog"',
+              '</docs/llms.txt>; rel="llms-txt"',
+              '</.well-known/agent-skills/index.json>; rel="profile"',
+              '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+            ].join(', '),
+          },
         ],
       },
       {
@@ -46,6 +55,15 @@ const defaultConfig = {
           {
             key: 'Cache-Control',
             value: 'max-age=0, s-maxage=31536000',
+          },
+          {
+            key: 'Link',
+            value: [
+              '</.well-known/api-catalog>; rel="api-catalog"',
+              '</docs/llms.txt>; rel="llms-txt"',
+              '</.well-known/agent-skills/index.json>; rel="profile"',
+              '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+            ].join(', '),
           },
         ],
       },
