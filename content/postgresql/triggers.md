@@ -6,7 +6,7 @@ page_description: >-
   automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Cursor
@@ -51,7 +51,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 
 ## Section 6\. TRUNCATE triggers
 
-- [BEFORE TRUNDCATE Trigger](postgresql-triggers/postgresql-before-truncate-trigger) –  Create a trigger to response before a TRUNCATE event occurs.
+- [BEFORE TRUNCATE Trigger](postgresql-triggers/postgresql-before-truncate-trigger) –  Create a trigger to respond before a TRUNCATE event occurs.
 
 ## Section 7\. Enabling \& Disabling triggers
 

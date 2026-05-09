@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER VIEW Statement
@@ -71,7 +71,7 @@ With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version o
 
 PostgreSQL allows you to retrieve data from a materialized view while it is being updated. One requirement for using `CONCURRENTLY` option is that the materialized view must have a [`UNIQUE`](../postgresql-indexes/postgresql-unique-index) index.
 
-Notice that `CONCURRENTLY` option is only available in PostgreSQL 9\.4 or later.
+Note that the `CONCURRENTLY` option is only available in PostgreSQL 9\.4 or later.
 
 ### Removing materialized views
 

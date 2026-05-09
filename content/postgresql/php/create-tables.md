@@ -6,7 +6,7 @@ page_description: >-
   database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/create-tables/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Create-Tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
@@ -178,4 +178,4 @@ The output shows that the script has created two tables successfully.
 ## Summary
 
 - Use the `CREATE TABLE` statement to create a new table.
-- Use the PDO `exec()` method to to execute a `CREATE TABLE` statement to create a new table in the datatabase.
+- Use the PDO `exec()` method to execute a `CREATE TABLE` statement to create a new table in the database.

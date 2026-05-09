@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/
 ogImage: /postgresqltutorial/plpgsql-if-statement.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Assert Statement
@@ -47,7 +47,7 @@ The `condition` is a boolean expression that evaluates to `true` or `false`.
 
 The `statements` can be one or more statements that you want to execute when the `condition` is true. It may contain other `if` statements.
 
-When you place an `if` statement is within another `if` statement, you’ll have a nested\-if statement.
+When you place an `if` statement within another `if` statement, you’ll have a nested\-if statement.
 
 The following flowchart illustrates the simple `if` statement.
 

@@ -6,7 +6,7 @@ page_description: >-
   prepared statement support, improved prompt options, and improved workflow
   capabilities that make database development more efficient.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 pg_stat_io Improvements
@@ -56,7 +56,7 @@ PostgreSQL 18 introduces seven new pipeline-related commands:
 
 - `\getresults` - Retrieves and displays results from previously sent pipeline queries.
 
-All these commands work together to allow you to manage complex query sequences efficiently. For this you need to make sure that you have `psql` 18 beta or later installed, as these commands are not available in earlier versions.
+All these commands work together to allow you to manage complex query sequences efficiently. For this, you need to make sure that you have `psql` 18 beta or later installed, as these commands are not available in earlier versions.
 
 ### Basic Pipeline Example
 

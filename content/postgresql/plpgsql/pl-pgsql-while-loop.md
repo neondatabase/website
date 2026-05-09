@@ -6,7 +6,7 @@ page_description: >-
   to execute a block of code as long as a condition is true.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-while-loop/'
 ogImage: /postgresqltutorial/plpgsql-WHILE-loop.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Loop Statements
@@ -37,7 +37,7 @@ end loop;
 
 In this syntax, PostgreSQL evaluates the `condition` before executing the `statements`.
 
-If the condition is true, it executes the `statements`. After each iteration, the `while` loop evaluates the `codition` again.
+If the condition is true, it executes the `statements`. After each iteration, the `while` loop evaluates the `condition` again.
 
 Inside the body of the `while` loop, you need to change the some [variables](plpgsql-variables) to make the `condition` `false` or `null` at some points. Otherwise, you will have an indefinite loop.
 

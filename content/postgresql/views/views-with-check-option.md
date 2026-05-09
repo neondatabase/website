@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: Creating PostgreSQL Updatable Views
@@ -166,7 +166,7 @@ WHERE
 WITH CHECK OPTION;
 ```
 
-After adding the `WITH CHECK OPTION`, you perform insert, [update](../postgresql-tutorial/postgresql-update), and [delete](../postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
+After adding the `WITH CHECK OPTION`, you can perform insert, [update](../postgresql-tutorial/postgresql-update), and [delete](../postgresql-tutorial/postgresql-delete) on the `employees` table that satisfies the `WHERE` clause in the defining query of the view.
 
 For example, the following `INSERT` statement will fail with an error:
 

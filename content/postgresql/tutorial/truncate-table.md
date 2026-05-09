@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TABLE
@@ -25,7 +25,7 @@ TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres 
 
 ## Introduction to PostgreSQL TRUNCATE TABLE statement
 
-To remove all data from a table, you use the [`DELETE`](postgresql-delete) statement without a [WHERE](postgresql-where) clause. However, when the table has large amount of data, the `DELETE` statement is not efficient. In this case, you can use the `TRUNCATE TABLE` statement.
+To remove all data from a table, you use the [`DELETE`](postgresql-delete) statement without a [WHERE](postgresql-where) clause. However, when the table has a large amount of data, the `DELETE` statement is not efficient. In this case, you can use the `TRUNCATE TABLE` statement.
 
 The `TRUNCATE TABLE` statement deletes all data from a table very fast. Here’s the basic syntax of the `TRUNCATE TABLE` statement:
 
@@ -54,7 +54,7 @@ In practice, the table you want to delete all data often has [foreign key](postg
 
 By default, the `TRUNCATE TABLE` statement does not remove any data from the table that has foreign key references.
 
-To remove data from a table and other tables that have foreign key references to the table, you use `CASCADE` option in the `TRUNCATE TABLE` statement as follows :
+To remove data from a table and other tables that have foreign key references to the table, you use `CASCADE` option in the `TRUNCATE TABLE` statement as follows:
 
 ```sql
 TRUNCATE TABLE table_name

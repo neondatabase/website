@@ -6,7 +6,7 @@ page_description: >-
   values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-09T12:27:33.909Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISNULL
@@ -181,7 +181,7 @@ Output:
 In this statement:
 
 - First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
-- Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
+- Second, the `COALESCE` function checks whether the first argument, which is provided by the `NULLIF` function, is null. If it is, it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
 
 ## Using NULLIF() function to prevent division\-by\-zero
 
