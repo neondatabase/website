@@ -232,7 +232,7 @@ In your application code, **the important part is unchanged** i.e. resolve the u
 Making changes to RLS can sometimes cause bugs or break things you didn’t expect. Using a dedicated branch makes it easy to run full end-to-end tests (like with [Playwright](https://playwright.dev/)) or do manual QA on real user scenarios (logins, API calls, background jobs) without putting production data at risk. Just point your preview environment at the new branch with the right environment variables. Once you’re happy with your changes, clean up by [deleting the branch](/docs/manage/branches#delete-a-branch) to save costs and keep things organized. You can do this either in the Neon Console or right from your terminal using the Neon CLI:
 
 ```bash filename="Terminal"
-neon branches delete --branch preview-rls
+neon branches delete preview-rls
 ```
 
 ## A practical way to decide
