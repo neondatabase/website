@@ -102,7 +102,7 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 <TwoColumnLayout.Block label="Add to src/styles.css">
 
 ```css
-@import '@neondatabase/auth-ui/tailwind';
+@import '@neondatabase/neno-js/ui/tailwind';
 ```
 
 </TwoColumnLayout.Block>
@@ -192,7 +192,7 @@ Create a route to handle authentication views (sign in, sign up, etc.). Create `
 
 ```tsx filename="src/routes/auth.$pathname.tsx"
 import { createFileRoute } from '@tanstack/react-router';
-import { AuthView } from '@neondatabase/auth-ui';
+import { AuthView } from '@neondatabase/neno-js/auth/react/ui';
 
 export const Route = createFileRoute('/auth/$pathname')({
   component: Auth,
