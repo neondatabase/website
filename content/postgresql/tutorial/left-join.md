@@ -141,7 +141,7 @@ FROM
   film f
   LEFT JOIN inventory i USING (film_id)
 WHERE
-  i.film_id IS NULL
+  i.inventory_id IS NULL
 ORDER BY
   f.title;
 ```
