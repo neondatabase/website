@@ -1,9 +1,20 @@
 ---
 name: neon-postgres
-description: Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/auth), PostgREST-style data API (@neondatabase/neon-js), Neon CLI, and Neon's Platform API/SDKs. Use for any Neon-related questions.
+description: >-
+  Guides and best practices for working with Neon Serverless Postgres.
+  Covers setup, connection methods, branching, autoscaling, scale-to-zero,
+  read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server,
+  REST API, TypeScript SDK, and Python SDK.
+  Use when users ask about "Neon setup", "connect to Neon", "Neon project",
+  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neonctl", "Neon MCP",
+  "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
+  "scale to zero", "Neon autoscaling", "Neon read replica", or
+  "Neon connection pooling".
 ---
 
 # Neon Serverless Postgres
+
+Guide the user through any Neon-related task: setup, connections, branching, and advanced features. Deliver a working Neon connection, a completed feature configuration, or a specific answer from the official Neon docs.
 
 Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
 
