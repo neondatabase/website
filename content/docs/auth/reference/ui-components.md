@@ -11,12 +11,21 @@ updatedOn: '2026-05-06T12:48:49.000Z'
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Neon Auth.
+Quick reference for Neon Auth UI components from `@neondatabase/auth-ui`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Neon Auth.
+
+<Admonition type="note" title="Migrating from older imports">
+Older releases re-exported the UI from `@neondatabase/auth/react/ui` and `@neondatabase/neon-js/auth/react/ui`. Those entrypoints are deprecated and will be removed in the next major version. Install `@neondatabase/auth-ui` directly and run the codemod to update existing imports:
+
+```bash
+npx -p @neondatabase/auth neon-auth-codemod --write <path>
+```
+
+</Admonition>
 
 ## Installation
 
 ```bash
-npm install @neondatabase/neon-js@latest
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui
 ```
 
 ## Provider Setup
