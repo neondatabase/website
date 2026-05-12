@@ -55,6 +55,7 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported                                    |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial (JWT token claims under development) |
 | [JWT](/docs/auth/guides/plugins/jwt)                                               | ✅ Supported                                    |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)                                 | ✅ Supported                                    |
 | [Open API](/docs/auth/guides/plugins/openapi)                                      | ✅ Supported                                    |
 
 See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth configuration (including Vercel). Email flows such as verification and password reset are covered in [Email verification](/docs/auth/guides/email-verification), [Password reset](/docs/auth/guides/password-reset), and [User management](/docs/auth/guides/user-management).
@@ -75,7 +76,6 @@ Branch-aware auth (separate auth state per Neon branch) is supported; see [Branc
 
 | Plugin                                                            | Status          |
 | ----------------------------------------------------------------- | --------------- |
-| [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon  |
 | Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
 | MFA support                                                       | 🔜 Coming soon  |
 | [Admin](/docs/auth/guides/plugins/admin) plugin customization     | 🔜 Coming soon  |
