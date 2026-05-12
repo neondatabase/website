@@ -5,12 +5,12 @@ summary: >-
   Covers the setup of Magic Link functionality in Neon Auth, enabling users to
   sign in by clicking a link sent to their email, with no password required.
 enableTableOfContents: true
-updatedOn: '2026-04-14T00:00:00.000Z'
+updatedOn: '2026-05-12T20:18:01.470Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and supports the [Magic Link](https://www.better-auth.com/docs/plugins/magic-link) plugin through the Neon SDK. You don't need to install or configure the Better Auth Magic Link plugin directly.
+Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for the [Magic Link](https://www.better-auth.com/docs/plugins/magic-link) plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Magic Link plugin.
 
 Magic Link lets users sign in by clicking a link sent to their email. No password is required. The flow works like this:
 
@@ -34,7 +34,7 @@ Magic Link lets users sign in by clicking a link sent to their email. No passwor
 3. Toggle **Magic Link** on.
 4. Configure the options:
    - **Link Expiration** (5-1440 minutes, default: 5) controls how long a magic link stays valid.
-   - **Allow New User Registration**, when disabled, restricts magic links to existing users only (sign-in only, no sign-up).
+   - **Allow New User Registration** controls whether magic links can be used to create new accounts. When off, magic links only work for existing users.
 
 ![Neon Console Auth Plugins tab with Magic Link settings](/docs/auth/neon_auth_plugins_magic_link.png)
 
@@ -56,11 +56,11 @@ curl -X PATCH \
   }'
 ```
 
-| Field             | Type    | Default | Description                                             |
-| ----------------- | ------- | ------- | ------------------------------------------------------- |
-| `enabled`         | boolean | `false` | Whether the Magic Link plugin is active                 |
-| `expires_in`      | integer | `5`     | Minutes before the magic link expires (5-1440)          |
-| `disable_sign_up` | boolean | `false` | When `true`, magic links only work for existing users   |
+| Field             | Type    | Default | Description                                           |
+| ----------------- | ------- | ------- | ----------------------------------------------------- |
+| `enabled`         | boolean | `false` | Whether the Magic Link plugin is active               |
+| `expires_in`      | integer | `5`     | Minutes before the magic link expires (5-1440)        |
+| `disable_sign_up` | boolean | `false` | When `true`, magic links only work for existing users |
 
 </TabItem>
 
@@ -93,8 +93,8 @@ If you're already using Neon Auth UI components, you can enable Magic Link with 
 'use client';
 
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
-import '@neondatabase/neon-js/ui/css';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
+import '@neondatabase/auth-ui/css';
 import './globals.css';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -119,7 +119,7 @@ Users can now sign in with a magic link by selecting the option on the sign-in s
 
 ## Webhooks
 
-When a magic link needs to be delivered, Neon Auth fires the `send.magic_link` webhook event with `link_type: "sign-in"`. If you subscribe to this event, Neon Auth skips its built-in email and your webhook handler is responsible for delivering the link (for example, via a custom email template or SMS).
+If you subscribe to the `send.magic_link` event, Neon Auth skips its built-in email and calls your webhook instead, passing `link_type: "sign-in"` in the payload. Your handler is responsible for delivering the link (for example, via a custom email template or SMS).
 
 See the [Webhooks guide](/docs/auth/guides/webhooks) for configuration details and payload format.
 

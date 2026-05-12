@@ -6,7 +6,7 @@ summary: >-
   `@neondatabase/neon-js`, including installation, provider setup, and
   configuration of common props for customization.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-12T20:18:01.470Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -155,6 +155,8 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 | ------------ | ------------------------------------------------- | ---------- | ------------------------------------------------------------------- |
 | `<AuthView>` | All-in-one auth UI with sign-in and sign-up forms | `pathname` | [auth-view](https://legacy.better-auth-ui.com/components/auth-view) |
 
+`<AuthView>` accepts both `path` and `pathname`. Use `path` for a bare view name (for example, `"sign-in"`). Use `pathname` for a full URL path (for example, `"/auth/sign-in"`); the component extracts the last segment automatically.
+
 **Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
 
 **OAuth Provider Buttons:** OAuth provider buttons (Google, GitHub, Vercel, etc.) appear automatically in `<AuthView>` when configured via the `social.providers` prop. OAuth buttons do not appear in standalone `<SignInForm>` or `<SignUpForm>` components.
@@ -218,11 +220,11 @@ function App() {
 
 ### Next.js App Router
 
-Create a route file at `app/auth/[path]/page.tsx` to render `AuthView` for sign-in, sign-up, and other auth views:
+For Next.js App Router, use a catch-all route to handle all auth views. Create `app/auth/[path]/page.tsx`:
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
-import { authViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
+import { AuthView } from '@neondatabase/auth-ui';
+import { authViewPaths } from '@neondatabase/auth-ui/server';
 
 export const dynamicParams = false;
 
