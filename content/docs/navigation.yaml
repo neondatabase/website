@@ -65,6 +65,8 @@
               slug: import/migrate-from-render
             - title: Supabase
               slug: import/migrate-from-supabase
+            - title: Turso
+              slug: import/migrate-from-turso
             - title: Neon to Neon
               slug: import/migrate-from-neon
             - title: Schema-only
