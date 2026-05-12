@@ -2,11 +2,10 @@
 title: Migrate from Turso to Neon Postgres
 summary: >-
   Covers the migration of a Turso database to Neon Postgres using pgloader,
-  including exporting data from Turso, schema and data type translation,
-  and adapting your application from the libSQL client to Postgres.
+  including exporting data from Turso, schema and data type considerations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T09:05:54.263Z'
+updatedOn: '2026-05-12T18:01:29.848Z'
 ---
 
 This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
