@@ -61,6 +61,8 @@
               slug: import/migrate-sqlite
             - title: MySQL
               slug: import/migrate-mysql
+            - title: PlanetScale
+              slug: import/migrate-from-planetscale
             - title: Railway
               slug: import/migrate-from-railway
             - title: Render
