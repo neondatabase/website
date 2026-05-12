@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-05-12T09:05:54.263Z'
+updatedOn: '2026-05-12T11:27:52.409Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
@@ -35,7 +35,7 @@ If you need your Neon **database** in a different **region**, or a **Postgres-co
 
 ## Provider-specific guides
 
-For step-by-step instructions tailored to specific databases or providers, see [MySQL](/docs/import/migrate-mysql), [MSSQL](/docs/import/migrate-mssql), [SQLite](/docs/import/migrate-sqlite), [Heroku](/docs/import/migrate-from-heroku), [Supabase](/docs/import/migrate-from-supabase), [Turso](/docs/import/migrate-from-turso), [Render](/docs/import/migrate-from-render), [Azure](/docs/import/migrate-from-azure-postgres), [Digital Ocean](/docs/import/migrate-from-digital-ocean), [Firebase](/docs/import/migrate-from-firebase), or [another Neon project](/docs/import/migrate-from-neon).
+For step-by-step instructions tailored to specific databases or providers, see [MySQL](/docs/import/migrate-mysql), [MSSQL](/docs/import/migrate-mssql), [SQLite](/docs/import/migrate-sqlite), [Heroku](/docs/import/migrate-from-heroku), [Supabase](/docs/import/migrate-from-supabase), [Turso](/docs/import/migrate-from-turso), [Render](/docs/import/migrate-from-render), [Azure](/docs/import/migrate-from-azure-postgres), [Digital Ocean](/docs/import/migrate-from-digital-ocean), [Railway](/docs/import/migrate-from-railway), [Firebase](/docs/import/migrate-from-firebase), or [another Neon project](/docs/import/migrate-from-neon).
 
 ## Logical replication guides
 
