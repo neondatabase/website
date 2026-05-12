@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-03-20T21:22:58.806Z'
+updatedOn: '2026-05-12T23:02:23.681Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -125,18 +125,19 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
 
-| Endpoint              | Methods                  | Description                                                  |
-| --------------------- | ------------------------ | ------------------------------------------------------------ |
-| `/domains`            | GET, POST, DELETE        | Manage trusted redirect domains                              |
-| `/oauth_providers`    | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)             |
-| `/email_provider`     | GET, PATCH               | Configure the email provider                                 |
-| `/email_and_password` | GET, PATCH               | Configure email/password authentication                      |
-| `/users`              | POST, DELETE, PUT        | Create, delete, and manage user roles                        |
-| `/plugins`            | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins) |
-| `/plugins/magic-link` | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link) |
-| `/webhooks`           | GET, PUT                 | Configure webhook notifications                              |
-| `/allow_localhost`    | GET, PATCH               | Toggle localhost access for development                      |
-| `/send_test_email`    | POST                     | Send a test email to verify email configuration              |
+| Endpoint                | Methods                  | Description                                                                 |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------- |
+| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
+| `/domains`              | GET, POST, DELETE        | Manage trusted redirect domains                                             |
+| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
+| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
+| `/oauth_providers`      | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                            |
+| `/plugins`              | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                |
+| `/plugins/magic-link`   | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)     |
+| `/plugins/phone-number` | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number) |
+| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
+| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
+| `/webhooks`             | GET, PUT                 | Configure webhook notifications                                             |
 
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 
