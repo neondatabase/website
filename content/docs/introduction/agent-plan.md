@@ -7,7 +7,7 @@ summary: >-
   requirements and features like instant provisioning and autoscaling for
   agentic platforms.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.211Z'
+updatedOn: '2026-05-12T16:48:25.566Z'
 ---
 
 <InfoBlock>
@@ -43,11 +43,11 @@ This combination enables agent builders to create thousands of databases without
 
 To join the agent plan:
 
-- You must have an active Neon paid plan with a credit card on file
-- Your application requires approval from the Neon team
-- The Neon team handles initial organization setup and configuration
+- You must have an active Neon Scale plan with a credit card on file
 
-Once your application is approved, the Neon team configures your agent plan's free and paid organizations and grants you admin access. After setup, you manage all projects and configurations independently via the [Neon API](/docs/reference/api-reference).
+- Your application requires approval from the Neon team
+
+Once your application is approved, the Neon team switches your Scale account to the Agent Plan and helps you set up a second Free Account for your Free Tier if needed. After setup, you manage all projects and configurations independently via the [Neon API](/docs/reference/api-reference).
 
 <CTA
   title="Neon agent plan"

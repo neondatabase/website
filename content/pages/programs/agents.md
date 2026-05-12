@@ -89,3 +89,5 @@ For documentation on using the Neon API to provision and manage backends on beha
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
 To get started with the Agent Plan [fill out the application form at the top of this page](#agent-form).
+
+**Prerequisite:** your account must be on the [Scale plan](/docs/introduction/plans) with a credit card on file before applying. Once you're accepted into the program, a Neon admin will move your account to the Agent Plan.
