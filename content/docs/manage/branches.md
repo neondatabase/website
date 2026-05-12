@@ -8,7 +8,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-04-28T20:12:16.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -19,7 +19,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/restore-window).
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history window](/docs/introduction/history-window).
 </Admonition>
 
 ## Branch naming requirements
@@ -47,7 +47,7 @@ To create a branch:
    - **Current data**: Creates a copy of the parent branch’s latest data and schema, resulting in an isolated database that reflects the parent at the time of creation.
    - **Past data**: Creates a copy using data from a specific past date and time of the parent branch. The parent branch must have the relevant history.
      <Admonition type="note">
-     You can only specify a date and time that falls within your [restore window](/docs/introduction/restore-window).
+     You can only specify a date and time that falls within your [history window](/docs/introduction/history-window).
      </Admonition>
    - **Schema only**: Replicates only the database schema (tables, views, roles, etc.) from the parent branch, without copying any of the actual data. This is useful for testing migrations or building new test data without exposing sensitive real-world data. See [Schema-only branches](/docs/guides/branching-schema-only).
    - **Anonymized data**: Creates a branch with masked sensitive data. You can configure data anonymization rules to protect personally identifiable information while preserving realistic data sets for development. See [Data anonymization](/docs/workflows/data-anonymization).

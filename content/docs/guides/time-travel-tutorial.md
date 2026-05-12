@@ -6,7 +6,7 @@ summary: >-
   activations after CI/CD deployments, including database setup and simulation
   of feature flag changes.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.060Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -18,7 +18,7 @@ In this scenario, your team has recently introduced a streamlined checkout proce
 To follow this tutorial, you'll need:
 
 - A Neon account. [Sign up here](/docs/get-started/signing-up).
-- A [restore window](/docs/introduction/restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
+- A [history window](/docs/introduction/history-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 <Steps>
 

@@ -130,7 +130,7 @@ const faqItems = [
         <li>How much your database autoscales based on actual query load</li>
         <li>How long your computes run before scaling to zero</li>
         <li>Your actual data size and number of branches</li>
-        <li>Your configured restore window (affects history storage costs)</li>
+        <li>Your configured history window for instant restore (affects History storage costs)</li>
       </ul>
       <p>Remember that Neon bills based on actual usage, not estimates. Use these workload examples as reference points, then monitor your usage in the <a href="${LINKS.console}">Neon Console</a> to understand your real costs. <a href="${LINKS.docs}/introduction/about-billing">Learn more about how Neon billing works.</a></p>
     `,
@@ -162,21 +162,21 @@ const faqItems = [
       <p>In Neon, you don't provision or manage storage in advance. Storage scales automatically and invisibly as your data grows. At the end of each month, you're billed for the storage actually consumed per project, measured in GB-months.</p>
       <p>Neon bills storage usage using two separate metrics:</p>
       <p><strong>History storage (or instant restore storage)</strong></p>
-      <p>Neon retains a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run time travel queries, and more. This history is controlled by your <a href="${LINKS.docs}/introduction/restore-window">restore window</a>, which is configurable per project (1 day by default in paid plans).</p>
-      <p>History storage is billed based on the amount of Write-Ahead Log (WAL) history retained within your restore window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
-      <p>If you don't need deep recovery or long time travel capabilities, you can shorten the restore window to reduce costs.</p>
+      <p><strong>Instant restore</strong> relies on Neon retaining a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run Time Travel queries, and more. How long that history is kept is controlled by the <strong>history window</strong> on <strong>Settings → Instant restore</strong>—see <a href="${LINKS.docs}/introduction/history-window">History window</a> (1 day by default on paid plans).</p>
+      <p><strong>History</strong> storage is billed based on the amount of Write-Ahead Log (WAL) retained within that history window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
+      <p>If you don't need deep recovery or long Time Travel, shorten the history window to reduce costs.</p>
       <p><strong>Database storage (root and child branches)</strong></p>
       <p>This is the storage used by your database data itself. Since Neon databases can branch, this is how branches contribute to database storage:</p>
       <ul>
         <li>Root branches are billed based on their actual data size (for example, 5 GB)</li>
-        <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the restore window (in this case, the child branch effectively shares storage with its parent).</li>
+        <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the history window used for instant restore (in this case, the child branch effectively shares storage with its parent).</li>
       </ul>
       <p>The SUM of both components will be billed as your database storage at $0.35 per GB-month.</p>
       <p>What this implies:</p>
       <ul>
-        <li>A child branch that has no data changes compared to its parent and is still within the <a href="${LINKS.docs}/introduction/restore-window">restore window</a> does not incur additional database storage costs.</li>
+        <li>A child branch that has no data changes compared to its parent and is still within the <a href="${LINKS.docs}/introduction/history-window">history window</a> does not incur additional database storage costs.</li>
         <li>As a child branch accumulates changes over time, its storage usage increases.</li>
-        <li>If a child branch falls out of the restore window, it becomes as expensive as a root branch, since it no longer shares storage with its parent.</li>
+        <li>If a child branch falls out of the history window, it becomes as expensive as a root branch, since it no longer shares storage with its parent.</li>
       </ul>
       <p>To keep database storage costs low, child branches are best kept short-lived - for example, by setting <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">resetting them</a> frequently, or deleting branches when they're no longer needed.</p>
     `,
@@ -212,7 +212,7 @@ const faqItems = [
       <p>Compute is often the most variable part of a monthly bill. The most effective way to control compute costs in Neon is to configure maximum autoscaling limits and scale-to-zero.</p>
       <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
       <p>Another effective way to control compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
-      <p>To manage storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining large restore windows if not required by your use case. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
+      <p>To manage storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining a large history window for instant restore if your use case does not require it. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
     `,
   },
   {

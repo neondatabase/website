@@ -207,8 +207,8 @@
       items:
         - title: Backup & restore
           slug: guides/backup-restore
-        - title: Restore window
-          slug: introduction/restore-window
+        - title: History window
+          slug: introduction/history-window
         - title: Instant restore
           slug: introduction/branch-restore
         - title: Time Travel
@@ -1035,8 +1035,8 @@
               items:
                 - title: Backup & restore
                   slug: guides/backup-restore
-                - title: Restore window
-                  slug: introduction/restore-window
+                - title: History window
+                  slug: introduction/history-window
                 - title: Instant restore
                   slug: introduction/branch-restore
                 - title: Overview

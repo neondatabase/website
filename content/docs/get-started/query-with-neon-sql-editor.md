@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -75,7 +75,7 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 ## Time Travel
 
-You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [restore window](/docs/introduction/restore-window).
+You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [history window](/docs/introduction/history-window).
 
 ![time travel in SQL Editor](/docs/get-started/time_travel_sql_editor.png)
 

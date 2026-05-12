@@ -6,7 +6,7 @@ summary: >-
   usage, including right-sizing, effective autoscaling, enabling scale to zero,
   and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2026-04-28T20:12:16.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -37,7 +37,7 @@ Storage costs are based on actual data size for root branches and the minimum of
 
 **Optimization strategies:**
 
-- **Clean up unused data.** Delete old rows, drop unused tables, and remove test data to reduce your root branch data size. Be aware that delete operations generate WAL records that temporarily add to your [instant restore storage](#instant-restore-storage) until they age out of your restore window. For bulk deletions, use `TRUNCATE TABLE` instead of `DELETE` when possible (it generates far less WAL).
+- **Clean up unused data.** Delete old rows, drop unused tables, and remove test data to reduce your root branch data size. Be aware that delete operations generate WAL records that temporarily add to your [instant restore storage](#instant-restore-storage) until they age out of your history window. For bulk deletions, use `TRUNCATE TABLE` instead of `DELETE` when possible (it generates far less WAL).
 
 - **Reclaim space from bloated tables.** Frequent updates and deletes leave dead tuples that inflate your data size. You can run `VACUUM FULL` on heavily modified tables to reclaim space. However, see the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) first to understand the trade-offs before taking action.
 
@@ -60,7 +60,7 @@ When branches are created, they initially do not add to storage since they share
 <details>
 <summary>**Do delete operations add to storage?**</summary>
 
-Yes. Any data-modifying operation, including deletes, generates [WAL records](/docs/reference/glossary#write-ahead-logging-wal) that temporarily increase your storage size until they age out of your restore window. For mass deletions, `TRUNCATE TABLE` is more storage-efficient since it logs a single operation rather than a record for each deleted row.
+Yes. Any data-modifying operation, including deletes, generates [WAL records](/docs/reference/glossary#write-ahead-logging-wal) that temporarily increase your storage size until they age out of your history window. For mass deletions, `TRUNCATE TABLE` is more storage-efficient since it logs a single operation rather than a record for each deleted row.
 
 </details>
 
@@ -79,7 +79,7 @@ Storage limits depend on your Neon plan:
 
 If your database is small but your bill seems high, check these factors:
 
-- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day restore window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
+- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day history window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
 - **Unused branches:** If you created branches, performed write operations, and forgot about the branches, they could be contributing to your storage costs. Review and [delete](/docs/manage/branches#delete-a-branch) branches you no longer need.
 - **Table bloat:** Frequent updates and deletes can cause table bloat (dead tuples), which can make your data size larger than expected. See the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) for details.
 
@@ -145,11 +145,11 @@ Instant restore storage (PITR storage) is the change history retained for point-
 
 **Optimization strategies:**
 
-- **Adjust your restore window.** By default, Neon retains instant restore history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, reduce your restore window to lower costs. See [Restore window](/docs/introduction/restore-window).
+- **Adjust your history window.** By default, Neon retains instant restore history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, reduce your history window to lower costs. See [History window](/docs/introduction/history-window).
 
-- **Understand the trade-offs.** A longer restore window means more recovery options but higher instant restore storage costs. A shorter window reduces costs but limits how far back you can restore. Consider your actual recovery requirements when setting the window.
+- **Understand the trade-offs.** A longer history window means more recovery options for **instant restore** but higher instant restore storage costs. A shorter window reduces costs but limits how far back **instant restore** can go. Consider your actual recovery requirements when setting the window.
 
-- **High-write workloads on root branches generate more history.** The more writes on your root branch(es), the more instant restore history accumulates. For write-heavy root branches, a shorter restore window can significantly reduce costs.
+- **High-write workloads on root branches generate more history.** The more writes on your root branch(es), the more instant restore history accumulates. For write-heavy root branches, a shorter history window can significantly reduce costs.
 
 ## Extra branches
 

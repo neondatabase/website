@@ -6,7 +6,7 @@ summary: >-
   workflows, including automation with APIs, CLI, and CI/CD tools for efficient
   branch management and preview deployments.
 enableTableOfContents: true
-updatedOn: '2026-04-20T17:20:38.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -73,7 +73,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your [restore window](/docs/introduction/restore-window)" icon="invert">Instant restore with Time Travel Assist</a>
+<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your [history window](/docs/introduction/history-window)" icon="invert">Instant restore with Time Travel Assist</a>
 
 <a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 

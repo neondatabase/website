@@ -6,7 +6,7 @@ summary: >-
   Postgres connection string for databases in Neon projects, including options
   for specifying branches and historical states.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.961Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 ## Before you begin
@@ -67,7 +67,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require&connect_timeout=30
   ```
 
-- Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [restore window](/docs/introduction/restore-window).
+- Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [history window](/docs/introduction/history-window).
 
   ```bash
   neon connection-string @2024-04-21T00:00:00Z

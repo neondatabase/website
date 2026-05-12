@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 ## access token
@@ -261,11 +261,11 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 ## History
 
-The history of data changes for all branches in your Neon project. This history is retained to support [instant restore](/docs/introduction/branch-restore), [Time Travel](/docs/guides/time-travel-assist), and other data recovery features. See [Restore window](/docs/introduction/restore-window) to learn how Neon retains and manages this history.
+The history of data changes for all branches in your Neon project. This history is retained to support [instant restore](/docs/introduction/branch-restore), [Time Travel](/docs/guides/time-travel-assist), and other data recovery features. See [History window](/docs/introduction/history-window) for how long Neon retains that history for **instant restore** and related features.
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records within your configured [restore window](/docs/introduction/restore-window), which allows you to restore data to any point in time within that window. For more information, see [Instant restore](/docs/introduction/branch-restore).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records; your project's **[history window](/docs/introduction/history-window)** setting controls how long that history is kept, which defines how far back **instant restore** can go. For more information, see [Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -385,7 +385,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined [restore window](/docs/introduction/restore-window). Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the limit set by your project's [history window](/docs/introduction/history-window). Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -515,9 +515,9 @@ On the publisher database in a logical replication setup, replication slots trac
 
 Selling the Neon service as part of another service offering.
 
-## restore window
+## History window
 
-The period of time for which Neon retains a history of changes for your branches. The restore window determines how far back you can restore data, create branches from past states, and run Time Travel queries. The restore window is configurable per project and affects instant restore storage costs. For detailed information, see [Restore window](/docs/introduction/restore-window).
+The Neon Console setting (under **Settings → Instant restore**) that controls how long Neon retains change history for your branches. It defines how far back **[instant restore](#instant-restore)** can reach and how far back you can run [Time Travel](#time-travel) queries or branch from past states. It is configurable per project and affects **History** usage (instant restore storage) on your bill. See [History window](/docs/introduction/history-window).
 
 ## root branch
 
@@ -634,7 +634,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your [restore window](/docs/introduction/restore-window) and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time still covered by your [history window](/docs/introduction/history-window) for **instant restore**, and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 

@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-05-08T13:50:12.658Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 <CheckList title="Production checklist">
@@ -35,11 +35,11 @@ updatedOn: '2026-05-08T13:50:12.658Z'
 <CheckItem title="7. Test connection retries using the Neon API" href="#test-connection-retries-using-the-neon-api">
   Brief disconnects can happen during scaling or maintenance. Verify your application reconnects automatically.
 </CheckItem>
-<CheckItem title="8. Set an appropriate restore window" href="#set-an-appropriate-restore-window">
-  Neon keeps 1 day of restore history by default on paid plans. Increasing this gives you more protection, with storage cost tradeoffs.
+<CheckItem title="8. Size the history window for instant restore" href="#size-the-history-window-for-instant-restore">
+  On paid plans, Neon keeps 1 day of change history by default for **instant restore**. Increasing the history window gives more recovery depth, with storage tradeoffs.
 </CheckItem>
 <CheckItem title="9. Consider snapshot schedules" href="#consider-snapshot-schedules">
-  Snapshot schedules provide consistent backups for point-in-time restore, independently of your restore window.
+  Snapshot schedules provide consistent backups for point-in-time restore, independently of your history window.
 </CheckItem>
 <CheckItem title="10. Test your restore workflow" href="#test-your-restore-workflow">
   Plan whether you'll restore in place or from a snapshot, and how your application will switch if needed.
@@ -152,17 +152,17 @@ Keep reading:
 - [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
 - [Maintenance and updates overview](/docs/manage/maintenance-updates-overview)
 
-## Set an appropriate restore window
+## Size the history window for instant restore
 
-Neon retains a history of changes for each project to support branching and instant restores. On paid plans, the default restore window is 1 day, which you can increase up to 30 days.
+**[Instant restore](/docs/introduction/branch-restore)** lets you roll a branch back in time. How far back you can go depends on the **history window** you configure (under **Settings → Instant restore**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
 
-Increasing the restore window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer restore windows retain more historical data, which contributes to storage usage. Choose a window that balances recovery needs with predictable storage costs.
+A longer history window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer windows retain more change history, which increases **History** usage on your bill. Choose a window that balances recovery needs with predictable storage costs.
 
-Keep reading: [Storage and billing for restores](/docs/introduction/restore-window#storage-and-billing)
+Keep reading: [Storage and billing for instant restore](/docs/introduction/history-window#storage-and-billing)
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen restore window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While **[instant restore](/docs/introduction/branch-restore)** lets you roll back to any moment still inside your **history window**, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen history window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 
