@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-13T10:10:41.508Z'
+updatedOn: '2026-05-13T10:14:09.555Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -47,8 +47,8 @@ This integration uses a **project-per-tenant model**, where each tenant (user, a
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
 </Admonition>
 
-<Admonition type="tip" title="Runnable samples available">
-The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples for the patterns in this guide. Install the companion agent skill with:
+<Admonition type="tip" title="Code samples and agent skill">
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides runnable TypeScript samples for the patterns in this guide. Install the companion agent skill with:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms

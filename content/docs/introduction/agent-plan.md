@@ -7,7 +7,7 @@ summary: >-
   requirements and features like instant provisioning and autoscaling for
   agentic platforms.
 enableTableOfContents: true
-updatedOn: '2026-05-13T10:05:41.549Z'
+updatedOn: '2026-05-13T10:14:09.555Z'
 ---
 
 <InfoBlock>
@@ -142,8 +142,8 @@ Once enrolled in the agent plan:
 
 For step-by-step implementation instructions, see the [AI Agent integration guide](/docs/guides/ai-agent-integration).
 
-<Admonition type="tip" title="Agent skill available">
-The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill covering dual-org provisioning, project transfers, compound checkpoints, and consumption metrics. Install the companion skill with:
+<Admonition type="tip" title="Code samples and agent skill">
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill for building on the agent plan. Install the companion skill with:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms
