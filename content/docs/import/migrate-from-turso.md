@@ -1,17 +1,16 @@
 ---
-title: Migrate from SQLite to Neon Postgres
+title: Migrate from Turso to Neon Postgres
 summary: >-
-  Covers the migration of an SQLite database to Neon Postgres using pgloader,
-  detailing prerequisites, data type differences, and the process for efficient
-  data transfer and transformation.
+  Covers the migration of a Turso database to Neon Postgres using pgloader,
+  including exporting data from Turso, schema and data type considerations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T09:05:54.263Z'
+updatedOn: '2026-05-13T07:11:52.174Z'
 ---
 
-This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
+This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
-`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. We'll use it to migrate a sample SQLite database to Neon Postgres
+`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. Since Turso databases are SQLite-compatible, you can dump them to a local SQLite file and then use `pgloader` to migrate that file to Neon Postgres.
 
 ## Prerequisites
 
@@ -19,17 +18,15 @@ Before you begin, ensure you have the following:
 
 - A Neon account and a project. If you don't have one, see [Sign up](/docs/get-started/signing-up).
 - A database created in your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-- The file path to your source SQLite database file. If you don't have one, you can create a sample database in the next step.
+- The [Turso CLI](https://docs.turso.tech/cli/introduction) installed. You'll use it to export your database.
+- The `sqlite3` command-line tool, typically pre-installed on macOS and Linux.
 - Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
-A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities.
+A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities and type mappings, which will be helpful for understanding the migration process.
 
 ## Understanding SQLite and Postgres data types
 
-Before migrating from SQLite to Postgres, it's helpful to understand a key difference in how they handle data types:
-
-- **SQLite** uses a flexible typing system called "type affinity". You can store any type of data in any column, regardless of its declared type. For example, you can store the text "hello" in a column declared as `INTEGER`. The declared type is only a suggestion.
-- **Postgres** uses a strict, static typing system. Data inserted into a column must precisely match the column's declared data type. An attempt to store "hello" in an `INTEGER` column will result in an error.
+Before migrating from Turso to Postgres, it's helpful to understand a key difference in how they handle data types. Turso, built on SQLite, uses a flexible typing system called "type affinity". You can store any type of data in any column, regardless of its declared type. Postgres uses a strict, static typing system. Data inserted into a column must precisely match the column's declared data type.
 
 When converting a database, SQLite's type affinities are mapped to appropriate Postgres types. Here is a summary of the common mappings:
 
@@ -47,68 +44,35 @@ When converting a database, SQLite's type affinities are mapped to appropriate P
 | **Unique Identifier**           | -                                       | `UUID`                                                                                  | PostgreSQL has a dedicated `UUID` data type for storing Universally Unique Identifiers, which is not present in SQLite.                                                                                                                                                                                                   |
 | **Array**                       | -                                       | `data_type[]`                                                                           | PostgreSQL supports arrays of any built-in or user-defined data type, a powerful feature for storing lists of values in a single column. SQLite does not have a native array type.                                                                                                                                        |
 
-## Create a sample SQLite database (Optional)
+<Steps>
 
-If you don't have a database to migrate, you can create a sample database for this tutorial. This requires the `sqlite3` command-line tool, typically pre-installed on macOS and Linux.
+## Authenticate Turso CLI
 
-1.  Create a file named `seed.sql`. This schema defines `authors` and `books` tables, including a `published_date` column stored as `TEXT` to demonstrate type casting.
-
-    ```sql title="seed.sql"
-    -- Create the authors table
-    CREATE TABLE authors (
-        id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        bio TEXT
-    );
-
-    -- Create the books table
-    CREATE TABLE books (
-        id INTEGER PRIMARY KEY,
-        author_id INTEGER NOT NULL,
-        title TEXT NOT NULL,
-        published_date TEXT,
-        rating REAL,
-        FOREIGN KEY (author_id) REFERENCES authors (id)
-    );
-
-    -- Insert sample data
-    INSERT INTO authors (id, name, bio) VALUES
-    (1, 'George Orwell', 'Author of dystopian classics.'),
-    (2, 'J.R.R. Tolkien', 'Author of high-fantasy epics.'),
-    (3, 'Jane Austen', 'Renowned for her romantic fiction.');
-
-    INSERT INTO books (author_id, title, published_date, rating) VALUES
-    (1, '1984', '1949-06-08', 4.8),
-    (1, 'Animal Farm', '1945-08-17', 4.5),
-    (2, 'The Hobbit', '1937-09-21', 4.9),
-    (2, 'The Lord of the Rings', '1954-07-29', 5.0),
-    (3, 'Pride and Prejudice', '1813-01-28', 4.7);
-    ```
-
-2.  Create the SQLite database `sample_library.db` from the schema file:
-
-    ```shell
-    sqlite3 sample_library.db < seed.sql
-    ```
-
-You now have a `sample_library.db` file ready for migration.
-
-<Admonition type="note" title="Using Turso?">
-If you're using Turso, you can dump your database to a SQL file using the [Turso CLI](https://docs.turso.tech/cli/introduction) and then follow the rest of this guide:
+If you haven't authenticated the Turso CLI yet, run:
 
 ```shell
-turso db shell <database-name> .dump > seed.sql
-
-# Generate a SQLite database file from the SQL dump
-sqlite3 sample_library.db < seed.sql
+turso auth login
 ```
 
-For more details on database dumps, see the [Turso CLI documentation](https://docs.turso.tech/cli/db/shell#database-dump).
-</Admonition>
+Follow the prompts to log in with your Turso account credentials. This will allow you to access your Turso databases and export them for migration.
 
-Now that you have your Neon database and SQLite database ready, you can use `pgloader` to migrate the data. Follow these steps:
+## Export your Turso database
 
-<Steps>
+Dump your Turso database to a local sql file using the `turso db shell` command with the `.dump` option:
+
+```bash
+turso db shell <database-name> .dump > dump.sql
+```
+
+Replace `<database-name>` with the name of your Turso database. This command connects to your Turso database and runs the `.dump` command, which outputs the full schema and data as SQL statements.
+
+Next, generate a local SQLite database file from the dump:
+
+```bash
+sqlite3 turso_export.db < dump.sql
+```
+
+You now have a `turso_export.db` file containing your data, ready for migration.
 
 ## Retrieve your Neon database connection string
 
@@ -148,12 +112,12 @@ Install the `pgloader` utility using your preferred method:
 
 For other systems, see [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html).
 
-## Run a simple migration
+## Run a basic migration
 
-For a basic migration, you can run `pgloader` directly from the command line. This command uses `pgloader`'s default settings to migrate the `sample_library.db` schema and data.
+For a straightforward migration, run `pgloader` directly from the command line:
 
 ```shell shouldWrap
-pgloader sqlite://sample_library.db "postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+pgloader sqlite://turso_export.db "postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
 > Make sure to enclose the Postgres connection string in quotes to prevent shell interpretation issues.
@@ -186,22 +150,21 @@ COPY Threads Completion          0          4                     1.080s
       Total import time          ✓          8     0.3 kB          6.581s
 ```
 
-This is quick, but it will create primary key columns as `bigint` rather than `serial`, and the `published_date` column will remain `text`. This is expected behavior, as `pgloader` uses SQLite's type affinities directly.
+pgloader will automatically create the necessary tables and indexes in your Neon Postgres database, and transfer all data from the `turso_export.db` file. The summary report at the end confirms that the migration completed successfully without errors.
 
 </Steps>
 
 ## Advanced migration with custom casting
 
-For fine-grained control, a `pgloader` load file is the best approach. Here, we'll create a load file that uses the `CAST` clause to:
+For better control over the destination schema, create a `pgloader` load file. This lets you cast columns to specific Postgres types.
 
-1.  Convert `INTEGER PRIMARY KEY` columns to `SERIAL`. This makes the Postgres schema cleaner and more idiomatic.
-2.  Cast the `TEXT` `published_date` column to the native `DATE` type in Postgres.
+For example, if you have an `authors` table with an `id` column that is an `INTEGER PRIMARY KEY` in Turso (SQLite), you can cast it to `SERIAL` in Postgres. Similarly, if you have a `published_date` column stored as `TEXT`, you can cast it to `DATE`
 
-Create a file named `sqlite_advanced.load` with the following content. Replace the Neon connection string and file path if necessary.
+Create a file named `turso.load` with the following content, replacing the connection strings as needed:
 
-```sql title="sqlite_advanced.load"
+```sql
 LOAD DATABASE
-    FROM sqlite://sample_library.db
+    FROM sqlite://turso_export.db
     INTO postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 
 WITH
@@ -212,37 +175,35 @@ WITH
     downcase identifiers
 
 CAST
-    -- Cast specific primary key columns to SERIAL for auto-incrementing
+    -- Cast integer primary keys to SERIAL
     column authors.id to serial,
     column books.id to serial,
 
-    -- Cast text column to date; pgloader handles ISO 8601 format ('YYYY-MM-DD') automatically
+    -- Cast text date columns to Postgres DATE
     column books.published_date to date;
 ```
 
-Now, run the migration using this advanced load file:
+Run the migration using the load file:
 
 ```shell
-pgloader sqlite_advanced.load
+pgloader turso.load
 ```
 
-The migration will now produce a more refined Postgres schema, with `SERIAL` primary keys and a proper `DATE` column.
+The migration will produce a cleaner Postgres schema with `SERIAL` primary keys and proper Postgres date types.
 
 ## Post-migration verification
 
-After migrating, always verify your data. One critical area is auto-incrementing primary keys.
+After migrating, always verify your data.
 
 ### Verify sequences
 
-The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. You can verify this manually.
-
-Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-editor) or [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and check the next value for the `books` table's sequence:
+The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and check the next value for a table's sequence:
 
 ```sql
 SELECT nextval(pg_get_serial_sequence('books', 'id'));
 ```
 
-This should return a value one higher than the max `id` in the `books` table (for example, `6` for our sample data). If it doesn't, you can reset it manually with this command:
+This should return a value one higher than the max `id` in the `books` table. If it doesn't, you can reset it manually:
 
 ```sql
 SELECT setval(
@@ -250,6 +211,217 @@ SELECT setval(
     (SELECT MAX(id) FROM books) + 1
 );
 ```
+
+### Verify row counts
+
+Compare row counts between your Turso source and Neon destination:
+
+```sql
+SELECT count(*) FROM books;
+SELECT count(*) FROM authors;
+```
+
+## Update your application
+
+After migrating your database schema and data to Neon, you must update your application code to connect to Neon and execute queries using a Postgres driver instead of the Turso SQLite client.
+
+### Connection changes
+
+First, replace your Turso database client (such as `@tursodatabase/serverless` or `@libsql/client`) with a Postgres-compatible driver. For serverless or edge environments, Neon's [serverless driver](/docs/serverless/serverless-driver) is a great choice.
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```bash
+npm uninstall @tursodatabase/serverless
+npm install @neondatabase/serverless # or npm install pg
+```
+
+```bash
+npm uninstall @libsql/client
+npm install @neondatabase/serverless # or npm install pg
+```
+
+</CodeTabs>
+
+Next, update your environment variables with your Neon connection string retrieved from the Neon Console:
+
+```text
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+```
+
+Then, update your database connection initialization.
+
+**Before (Turso):**
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```javascript
+import { connect } from "@tursodatabase/serverless";
+
+const db = connect({
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+```
+
+```javascript
+import { createClient } from "@libsql/client";
+
+const db = createClient({...config});
+```
+
+</CodeTabs>
+
+**After (Neon):**
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+```
+
+```javascript
+import { Pool } from 'pg';
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+```
+
+</CodeTabs>
+
+### Query translation
+
+When converting your Turso queries to run against Postgres, you must adapt how statements are prepared and executed.
+
+You need to transition from SQLite's parameter binding (often using `?` placeholders) and driver-specific methods (`.run()`, `.all()`, `.get()`) to standard Postgres driver syntax. For example, with the Neon serverless driver, you can use tagged template literals for queries, while with `node-postgres`, you use parameterized queries with `$1`, `$2`, etc.
+
+**Before (Turso):**
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```javascript
+// Inserting data
+const insertUser = db.prepare("INSERT INTO users (username) VALUES (?)");
+await insertUser.run("alice");
+
+// Querying data
+const stmt = db.prepare("SELECT * FROM users");
+const users = await stmt.all();
+```
+
+```javascript
+// Inserting data
+await db.execute({
+    sql: "INSERT INTO users (username) VALUES (?)",
+    args: ["alice"],
+});
+
+// Querying data
+const rs = await db.execute("SELECT * FROM users");
+const users = rs.rows;
+```
+
+</CodeTabs>
+
+**After (Neon):**
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```javascript
+// Inserting data
+await sql`INSERT INTO users (username) VALUES (${'alice'})`;
+
+// Querying data
+const users = await sql`SELECT * FROM users`;
+```
+
+```javascript
+// Inserting data
+await pool.query('INSERT INTO users (username) VALUES ($1)', ['alice']);
+
+// Querying data
+const { rows: users } = await pool.query('SELECT * FROM users');
+```
+
+</CodeTabs>
+
+### SQL dialect differences
+
+Turso (SQLite) and Postgres use different SQL dialects. Here are the key differences you'll need to address when converting your application queries.
+
+#### Boolean handling
+
+SQLite has no native boolean type -- it stores `true`/`false` as integers `1`/`0`. Postgres has a dedicated `BOOLEAN` type with `true`/`false` values.
+
+**Before (Turso/SQLite):**
+
+```sql
+SELECT * FROM users WHERE active = 1;
+INSERT INTO users (username, active) VALUES ('alice', 1);
+```
+
+**After (Neon/Postgres):**
+
+```sql
+SELECT * FROM users WHERE active = true;
+INSERT INTO users (username, active) VALUES ('alice', true);
+```
+
+#### Case-insensitive string matching
+
+SQLite's `LIKE` operator is case-insensitive for ASCII characters by default. Postgres's `LIKE` is case-sensitive; use `ILIKE` for case-insensitive matching, or `LOWER()` for comparisons.
+
+**Before (Turso/SQLite):**
+
+```sql
+SELECT * FROM users WHERE username LIKE '%alice%';
+```
+
+**After (Neon/Postgres):**
+
+```sql
+SELECT * FROM users WHERE username ILIKE '%alice%';
+```
+
+Alternatively, normalize both sides:
+
+```sql
+SELECT * FROM users WHERE LOWER(username) LIKE LOWER('%alice%');
+```
+
+#### Date and time functions
+
+SQLite and Postgres use different built-in functions for date and time operations.
+
+**Before (Turso/SQLite):**
+
+```sql
+-- Current timestamp
+INSERT INTO logs (message, created_at) VALUES ('startup', datetime('now'));
+
+-- Formatting a timestamp
+SELECT strftime('%Y-%m-%d', created_at) FROM logs;
+```
+
+**After (Neon/Postgres):**
+
+```sql
+-- Current timestamp
+INSERT INTO logs (message, created_at) VALUES ('startup', NOW());
+
+-- Formatting a timestamp
+SELECT to_char(created_at, 'YYYY-MM-DD') FROM logs;
+```
+
+| Operation                     | SQLite                    | Postgres                       |
+| :---------------------------- | :------------------------ | :----------------------------- |
+| Current timestamp             | `datetime('now')`         | `NOW()` or `CURRENT_TIMESTAMP` |
+| Current date                  | `date('now')`             | `CURRENT_DATE`                 |
+| Format timestamp              | `strftime(format, ts)`    | `to_char(ts, format)`          |
+| Date arithmetic (add 7 days)  | `datetime(ts, '+7 days')` | `ts + INTERVAL '7 days'`       |
+| Extract part of a date (year) | `strftime('%Y', ts)`      | `EXTRACT(YEAR FROM ts)`        |
 
 ## Troubleshooting
 
@@ -259,9 +431,9 @@ If you run `pgloader` from a Docker container and encounter an `SSL verify error
 
 Modify your load file to set `sslmode=allow` in the Postgres connection string.
 
-```sql title="sqlite_advanced.load"
+```sql
 LOAD DATABASE
-    FROM sqlite:////data/sample_library.db
+    FROM sqlite:///data/turso_export.db
     INTO postgresql://.../dbname?sslmode=allow;
 ...
 ```
@@ -269,13 +441,13 @@ LOAD DATABASE
 Then, run the Docker command with the `--no-ssl-cert-verification` flag. Mount your database and load files into the container's `/data` directory.
 
 ```shell
-docker run --rm -v /path/to/your/files:/data
-  dimitri/pgloader:latest
-  pgloader --no-ssl-cert-verification /data/sqlite_advanced.load
+docker run --rm -v /path/to/your/files:/data \
+  dimitri/pgloader:latest \
+  pgloader --no-ssl-cert-verification /data/turso.load
 ```
 
 ## References
 
 - [pgloader Documentation](https://pgloader.readthedocs.io/en/latest/)
 - [pgloader Reference: SQLite to Postgres](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html)
-- [pgloader CLI Reference](https://pgloader.readthedocs.io/en/latest/pgloader.html)
+- [Migrating data to Neon](/docs/import/migrate-intro)
