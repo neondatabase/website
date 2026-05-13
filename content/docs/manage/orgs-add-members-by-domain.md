@@ -26,15 +26,15 @@ An organization can have multiple verified domains. The same domain can also be 
 
 ## Open the People page
 
-In the Neon Console, switch to the organization you want to manage, then open the **People** page. Scroll to the **Auto-join by domain** section (below **Pending invites**). The section shows a **Domain** field and **Add domain** button; if no domains exist yet, a message prompts you to add a domain to get started.
+In the Neon Console, switch to the organization you want to manage, then open the **People** page. Scroll to the **Auto-join by domain** section (below **Pending invites**). The section shows a short description and a **Domain** field with an **Add domain** button.
 
-![Auto-join by domain section before adding a domain: Domain input field and Add domain button](/docs/manage/orgs_domains_empty.png)
+![Auto-join by domain section before adding a domain: Domain input field and Add domain button](/docs/manage/Auto_join_by_domain.png)
 
 ## Add the domain
 
-In the **Domain** field, enter your domain (for example, `example.com`) and click **Add domain**. The domain appears in the list above the input with status **Pending verification**, and the input clears so you can add another. When at least one domain is in the list, the button label changes to **Add another domain**. The Console shows a **Verification TXT record** value (a string starting with `neon-domain-verification=`) and instructs you to add a TXT record at your domain with that exact value, then click **Verify** after DNS propagates.
+In the **Domain** field, enter your domain (for example, `example.com`) and click **Add domain**. The domain appears in a card above the input with status **Pending verification**. The card shows a **Verification TXT record** value (a string starting with `neon-domain-verification=`) and instructs you to add a TXT record at your domain with that exact value, then click **Verify** after DNS propagates. Below the card, an **Add another domain** field lets you add additional domains.
 
-![Domain added with Pending verification status, Verification TXT record value, and Verify button](/docs/manage/orgs_domains_pending.png)
+![Domain added with Pending verification status, Verification TXT record value, and Verify button](/docs/manage/auto_join_by_domain_verify.png)
 
 ## Add the TXT record at your DNS provider
 
