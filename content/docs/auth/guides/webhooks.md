@@ -5,7 +5,7 @@ summary: >-
   Configure webhooks to receive notifications for authentication events like OTP
   delivery, magic link delivery, and user creation in Neon Auth.
 enableTableOfContents: true
-updatedOn: '2026-03-27T12:55:37.000Z'
+updatedOn: '2026-05-12T23:02:23.681Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -18,12 +18,13 @@ For a step-by-step Next.js walkthrough that implements signature verification, c
 
 ## Supported events
 
-| Event                | Type         | Trigger                                          | Use case                                            |
-| -------------------- | ------------ | ------------------------------------------------ | --------------------------------------------------- |
-| `send.otp`           | Blocking     | OTP code needs delivery                          | Custom OTP delivery via SMS or email service        |
-| `send.magic_link`    | Blocking     | Magic link needs delivery                        | Custom link delivery via any channel                |
-| `user.before_create` | Blocking     | User attempts to sign up (before database write) | Signup validation, allowlists, user data enrichment |
-| `user.created`       | Non-blocking | User created in the database                     | Sync to CRM, analytics, post-signup workflows       |
+| Event                   | Type         | Trigger                                          | Use case                                                                  |
+| ----------------------- | ------------ | ------------------------------------------------ | ------------------------------------------------------------------------- |
+| `send.otp`              | Blocking     | OTP code needs delivery                          | Custom OTP delivery via SMS or email service                              |
+| `send.magic_link`       | Blocking     | Magic link needs delivery                        | Custom link delivery via any channel                                      |
+| `user.before_create`    | Blocking     | User attempts to sign up (before database write) | Signup validation, allowlists, user data enrichment                       |
+| `user.created`          | Non-blocking | User created in the database                     | Sync to CRM, analytics, post-signup workflows                             |
+| `phone_number.verified` | Non-blocking | User successfully verified a phone number        | Post-verification workflows for phone OTP sign-in or phone number linking |
 
 **Blocking** events pause the auth flow until your server responds (or the timeout expires). **Non-blocking** events are fire-and-forget; failures do not affect the user.
 
@@ -44,7 +45,7 @@ Both endpoints use the following fields:
 | ----------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `enabled`         | boolean (required) | Enable or disable webhook delivery                                                                                                                  |
 | `webhook_url`     | string             | HTTPS endpoint to receive webhook POST requests                                                                                                     |
-| `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`                                                    |
+| `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`, `phone_number.verified`                           |
 | `timeout_seconds` | integer (1-10)     | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior). |
 
 ### Set or update configuration
@@ -56,7 +57,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{br
   -d '{
     "enabled": true,
     "webhook_url": "https://your-app.com/webhooks/neon-auth",
-    "enabled_events": ["send.otp", "send.magic_link", "user.before_create", "user.created"],
+    "enabled_events": ["send.otp", "send.magic_link", "user.before_create", "user.created", "phone_number.verified"],
     "timeout_seconds": 5
   }'
 ```
@@ -78,7 +79,8 @@ Both endpoints return the configuration in the same format:
     "send.otp",
     "send.magic_link",
     "user.before_create",
-    "user.created"
+    "user.created",
+    "phone_number.verified"
   ],
   "timeout_seconds": 5
 }
@@ -140,16 +142,18 @@ The `user` object fields are all optional and vary by event. Available fields: `
 | `ip_address`          | string            | Requester's IP address                                      |
 | `user_agent`          | string            | Requester's user agent                                      |
 
+When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Neon Auth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
+
 ### `send.magic_link` event data
 
-| Field        | Type         | Description                                   |
-| ------------ | ------------ | --------------------------------------------- |
+| Field        | Type         | Description                                                 |
+| ------------ | ------------ | ----------------------------------------------------------- |
 | `link_type`  | string       | `"sign-in"`, `"email-verification"`, or `"forget-password"` |
-| `link_url`   | string       | Full verification URL with embedded token     |
-| `token`      | string       | Raw token for building custom redirect URLs   |
-| `expires_at` | ISO datetime | Expiry time                                   |
-| `ip_address` | string       | Requester's IP address                        |
-| `user_agent` | string       | Requester's user agent                        |
+| `link_url`   | string       | Full verification URL with embedded token                   |
+| `token`      | string       | Raw token for building custom redirect URLs                 |
+| `expires_at` | ISO datetime | Expiry time                                                 |
+| `ip_address` | string       | Requester's IP address                                      |
+| `user_agent` | string       | Requester's user agent                                      |
 
 The `"sign-in"` link type is sent when a user signs in via the [Magic Link plugin](/docs/auth/guides/plugins/magic-link). Magic links do not include a `delivery_preference` field. Your webhook handler determines the delivery channel.
 
@@ -162,6 +166,17 @@ These events fire only when a new user record is created in the database. They d
 | `auth_provider` | string | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
 | `ip_address`    | string | Requester's IP address                                |
 | `user_agent`    | string | Requester's user agent                                |
+
+### `phone_number.verified` event data
+
+Fires non-blocking after a user successfully verifies a phone number via the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). The `user` object includes the full user context, including `phone_number` and `phone_number_verified`.
+
+| Field             | Type    | Description                                                                       |
+| ----------------- | ------- | --------------------------------------------------------------------------------- |
+| `phone_number`    | string  | The phone number that was verified, in E.164 format (for example, `+15551234567`) |
+| `is_phone_update` | boolean | Reserved for future use; currently always `false`                                 |
+| `ip_address`      | string  | Requester's IP address                                                            |
+| `user_agent`      | string  | Requester's user agent                                                            |
 
 ## Signature verification
 

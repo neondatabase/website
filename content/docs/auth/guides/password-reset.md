@@ -6,7 +6,7 @@ summary: >-
   enabling email authentication and using pre-built UI components for user
   password recovery.
 enableTableOfContents: true
-updatedOn: '2026-05-13T00:30:59.624Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

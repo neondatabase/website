@@ -492,6 +492,8 @@
                       slug: auth/guides/plugins/openapi
                     - title: Organization
                       slug: auth/guides/plugins/organization
+                    - title: Phone Number
+                      slug: auth/guides/plugins/phone-number
 
             - section: Reference
               items:

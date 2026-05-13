@@ -6,7 +6,7 @@ summary: >-
   verifying user email addresses during sign-up, including verification codes
   and links, along with configuration steps for each method.
 enableTableOfContents: true
-updatedOn: '2026-05-13T00:30:59.624Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
