@@ -45,7 +45,7 @@ export function isAIAgentRequest(request) {
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
   'docs/changelog': '/md/docs/changelog.md',
-  'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md',
+  'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
 
 // Paths that must bypass the middleware's markdown-serving logic entirely.

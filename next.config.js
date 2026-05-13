@@ -2485,11 +2485,18 @@ const defaultConfig = {
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
-        // Skill discovery under /docs/ — must be beforeFiles to avoid the docs/[...slug] catch-all
+        // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
+        // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
+        // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
         { source: '/docs/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         {
-          source: '/docs/.well-known/agent-skills/neon-postgres/SKILL.md',
-          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+          source: '/docs/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        {
+          source: '/docs/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
         },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
@@ -2498,12 +2505,17 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
-        // Agent skill discovery (agentskills.io 0.2.0) — site root
+        // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
+        // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
         {
-          source: '/.well-known/agent-skills/neon-postgres/SKILL.md',
-          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+          source: '/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
         },
-        // /skill.md at site root for checkers that probe this path
+        {
+          source: '/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
         { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...indexRewrites,
