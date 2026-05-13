@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-02-12T19:25:43.000Z'
+updatedOn: '2026-05-13T12:08:01.154Z'
 ---
 
 ## Supported actions (tools)
@@ -46,7 +46,9 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Neon Auth:**
 
-- `provision_neon_auth`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
+- `provision_neon_auth`: Provisions [Neon Auth](/docs/auth/overview) for a project's branch so you can add authentication to your app without standing up a separate auth service. If Neon Auth is already provisioned, this returns the existing configuration instead of erroring.
+- `get_neon_auth_config`: Returns the Neon Auth configuration for a branch, including the auth `base_url`, `jwks_url`, trusted origins, allowed auth methods (for example email and password), configured OAuth providers, and email provider settings. Secrets such as OAuth client secrets and SMTP passwords are redacted.
+- `configure_neon_auth`: Updates the Neon Auth configuration for a branch. Use it to manage trusted origins, toggle localhost, enable or tune email and password sign-in, add or update OAuth providers (such as Google, GitHub, or Microsoft), configure the email provider, and send a test email.
 
 **Neon Data API:**
 
