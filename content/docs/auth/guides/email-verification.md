@@ -6,12 +6,14 @@ summary: >-
   verifying user email addresses during sign-up, including verification codes
   and links, along with configuration steps for each method.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.739Z'
+updatedOn: '2026-05-13T00:30:59.624Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Email verification ensures users own the email addresses they register with. Neon Auth supports two verification methods:
+Email verification ensures users own the email addresses they register with. The application name shown in these emails is configurable per branch. See [Application name](/docs/auth/production-checklist#application-name).
+
+Neon Auth supports two verification methods:
 
 - **Verification codes** (users enter a numeric code from their email) - works with shared or custom email providers
 - **Verification links** (users click a link in their email) - requires a custom email provider
