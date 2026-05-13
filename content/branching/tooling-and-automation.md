@@ -13,7 +13,7 @@ updatedOn: '2026-05-12T14:01:17.544Z'
 
 ## Branching & snapshot docs
 
-- [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and instant restore (history window).
+- [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and instant restore.
 - [Get started with branching](https://neon.com/docs/guides/branching-intro?utm_source=chatgpt.com) \- how to build branching workflows via the API, CLI, GitHub Actions, and Vercel integrations.
 - [Anonymized branches](https://api-docs.neon.tech/reference/createprojectbranchanonymized?utm_source=chatgpt.com) \- If you have PII, use this API endpoint for creating anonymized branches with masking rules.
 
