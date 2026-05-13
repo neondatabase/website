@@ -239,7 +239,7 @@ export const getCategoryBySlug = async (slug, options = {}) => {
 
 export const getPostsByCategorySlug = async (slug, options = {}) => {
   if (!options.previewBranch) {
-    if (slug === 'guides') return getAllGuides();
+    if (slug === 'guides') return (await getAllGuides()).filter((guide) => !guide.excludeFromBlog);
     if (slug === 'changelog') return getAllChangelogs();
   }
 
@@ -251,7 +251,9 @@ export const getPostsByCategorySlug = async (slug, options = {}) => {
 export const getAllPosts = async (options = {}) => {
   const [blogPosts, guides, changelogs] = await Promise.all([
     getAllBlogPosts(options),
-    options.previewBranch ? Promise.resolve([]) : getAllGuides(),
+    options.previewBranch
+      ? Promise.resolve([])
+      : getAllGuides().then((items) => items.filter((guide) => !guide.excludeFromBlog)),
     options.previewBranch ? Promise.resolve([]) : getAllChangelogs(),
   ]);
 

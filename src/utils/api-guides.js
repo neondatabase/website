@@ -39,7 +39,16 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, author },
+        data: {
+          title,
+          subtitle,
+          createdAt,
+          updatedOn,
+          isDraft,
+          redirectFrom,
+          author,
+          excludeFromBlog,
+        },
         excerpt,
       } = data;
       const authorData = getAuthor(author);
@@ -56,6 +65,7 @@ const getAllGuides = async () => {
         excerpt,
         isDraft,
         redirectFrom,
+        excludeFromBlog,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
