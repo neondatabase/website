@@ -5,7 +5,7 @@ summary: >-
   including exporting data from Turso, schema and data type considerations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T18:01:29.848Z'
+updatedOn: '2026-05-13T07:11:52.174Z'
 ---
 
 This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -220,6 +220,208 @@ Compare row counts between your Turso source and Neon destination:
 SELECT count(*) FROM books;
 SELECT count(*) FROM authors;
 ```
+
+## Update your application
+
+After migrating your database schema and data to Neon, you must update your application code to connect to Neon and execute queries using a Postgres driver instead of the Turso SQLite client.
+
+### Connection changes
+
+First, replace your Turso database client (such as `@tursodatabase/serverless` or `@libsql/client`) with a Postgres-compatible driver. For serverless or edge environments, Neon's [serverless driver](/docs/serverless/serverless-driver) is a great choice.
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```bash
+npm uninstall @tursodatabase/serverless
+npm install @neondatabase/serverless # or npm install pg
+```
+
+```bash
+npm uninstall @libsql/client
+npm install @neondatabase/serverless # or npm install pg
+```
+
+</CodeTabs>
+
+Next, update your environment variables with your Neon connection string retrieved from the Neon Console:
+
+```text
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+```
+
+Then, update your database connection initialization.
+
+**Before (Turso):**
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```javascript
+import { connect } from "@tursodatabase/serverless";
+
+const db = connect({
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+});
+```
+
+```javascript
+import { createClient } from "@libsql/client";
+
+const db = createClient({...config});
+```
+
+</CodeTabs>
+
+**After (Neon):**
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+```
+
+```javascript
+import { Pool } from 'pg';
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+```
+
+</CodeTabs>
+
+### Query translation
+
+When converting your Turso queries to run against Postgres, you must adapt how statements are prepared and executed.
+
+You need to transition from SQLite's parameter binding (often using `?` placeholders) and driver-specific methods (`.run()`, `.all()`, `.get()`) to standard Postgres driver syntax. For example, with the Neon serverless driver, you can use tagged template literals for queries, while with `node-postgres`, you use parameterized queries with `$1`, `$2`, etc.
+
+**Before (Turso):**
+
+<CodeTabs labels={["@tursodatabase/serverless", "@libsql/client"]}>
+
+```javascript
+// Inserting data
+const insertUser = db.prepare("INSERT INTO users (username) VALUES (?)");
+await insertUser.run("alice");
+
+// Querying data
+const stmt = db.prepare("SELECT * FROM users");
+const users = await stmt.all();
+```
+
+```javascript
+// Inserting data
+await db.execute({
+    sql: "INSERT INTO users (username) VALUES (?)",
+    args: ["alice"],
+});
+
+// Querying data
+const rs = await db.execute("SELECT * FROM users");
+const users = rs.rows;
+```
+
+</CodeTabs>
+
+**After (Neon):**
+
+<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+
+```javascript
+// Inserting data
+await sql`INSERT INTO users (username) VALUES (${'alice'})`;
+
+// Querying data
+const users = await sql`SELECT * FROM users`;
+```
+
+```javascript
+// Inserting data
+await pool.query('INSERT INTO users (username) VALUES ($1)', ['alice']);
+
+// Querying data
+const { rows: users } = await pool.query('SELECT * FROM users');
+```
+
+</CodeTabs>
+
+### SQL dialect differences
+
+Turso (SQLite) and Postgres use different SQL dialects. Here are the key differences you'll need to address when converting your application queries.
+
+#### Boolean handling
+
+SQLite has no native boolean type -- it stores `true`/`false` as integers `1`/`0`. Postgres has a dedicated `BOOLEAN` type with `true`/`false` values.
+
+**Before (Turso/SQLite):**
+
+```sql
+SELECT * FROM users WHERE active = 1;
+INSERT INTO users (username, active) VALUES ('alice', 1);
+```
+
+**After (Neon/Postgres):**
+
+```sql
+SELECT * FROM users WHERE active = true;
+INSERT INTO users (username, active) VALUES ('alice', true);
+```
+
+#### Case-insensitive string matching
+
+SQLite's `LIKE` operator is case-insensitive for ASCII characters by default. Postgres's `LIKE` is case-sensitive; use `ILIKE` for case-insensitive matching, or `LOWER()` for comparisons.
+
+**Before (Turso/SQLite):**
+
+```sql
+SELECT * FROM users WHERE username LIKE '%alice%';
+```
+
+**After (Neon/Postgres):**
+
+```sql
+SELECT * FROM users WHERE username ILIKE '%alice%';
+```
+
+Alternatively, normalize both sides:
+
+```sql
+SELECT * FROM users WHERE LOWER(username) LIKE LOWER('%alice%');
+```
+
+#### Date and time functions
+
+SQLite and Postgres use different built-in functions for date and time operations.
+
+**Before (Turso/SQLite):**
+
+```sql
+-- Current timestamp
+INSERT INTO logs (message, created_at) VALUES ('startup', datetime('now'));
+
+-- Formatting a timestamp
+SELECT strftime('%Y-%m-%d', created_at) FROM logs;
+```
+
+**After (Neon/Postgres):**
+
+```sql
+-- Current timestamp
+INSERT INTO logs (message, created_at) VALUES ('startup', NOW());
+
+-- Formatting a timestamp
+SELECT to_char(created_at, 'YYYY-MM-DD') FROM logs;
+```
+
+| Operation                     | SQLite                    | Postgres                       |
+| :---------------------------- | :------------------------ | :----------------------------- |
+| Current timestamp             | `datetime('now')`         | `NOW()` or `CURRENT_TIMESTAMP` |
+| Current date                  | `date('now')`             | `CURRENT_DATE`                 |
+| Format timestamp              | `strftime(format, ts)`    | `to_char(ts, format)`          |
+| Date arithmetic (add 7 days)  | `datetime(ts, '+7 days')` | `ts + INTERVAL '7 days'`       |
+| Extract part of a date (year) | `strftime('%Y', ts)`      | `EXTRACT(YEAR FROM ts)`        |
 
 ## Troubleshooting
 
