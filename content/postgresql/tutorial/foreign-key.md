@@ -6,7 +6,7 @@ page_description: >-
   foreign keys to tables using foreign key constraints.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Primary Key
@@ -221,7 +221,7 @@ The output indicates that the values of customer id 1 changed to `NULL`.
 
 The `ON DELETE CASCADE` automatically deletes all the referencing rows in the child table when the referenced rows in the parent table are deleted. In practice, the `ON DELETE CASCADE` is the most commonly used option.
 
-The following statements recreate the sample tables with the delete action of the `fk_customer` changes to `CASCADE`:
+The following statements recreate the sample tables with the delete action of the `fk_customer` changed to `CASCADE`:
 
 ```sql
 DROP TABLE IF EXISTS contacts;

@@ -6,14 +6,14 @@ page_description: >-
   existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALL Operator
   slug: postgresql-tutorial/postgresql-all
 nextLink:
-  title: PostgreSQL CTE
-  slug: postgresql-tutorial/postgresql-cte
+  title: PostgreSQL Data Types
+  slug: postgresql-tutorial/postgresql-data-types
 ---
 
 <Admonition type="info" id="CTA">
@@ -198,7 +198,7 @@ first_name  |  last_name
 
 ### 3\) EXISTS and NULL example
 
-The following example returns all rows from the `customers` table because the subquery in the `EXISTS` operator returns `NULL`:
+The following example returns all rows from the `customer` table because the subquery in the `EXISTS` operator returns `NULL`:
 
 ```sql
 SELECT

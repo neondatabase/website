@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -95,9 +95,35 @@ Response (200 OK):
   "created_at": "2026-02-26T04:29:05Z",
   "owned_by": "neon",
   "jwks_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/.well-known/jwks.json",
-  "base_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth"
+  "base_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth",
+  "name": "My App"
 }
 ```
+
+## Update auth configuration
+
+Update auth settings for a branch. Currently supports changing the application name shown in user-facing auth messages. Applies to Neon Auth (Better Auth) integrations only. Defaults to the Neon project name.
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/config' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"name": "My App"}'
+```
+
+Response (200 OK):
+
+```json
+{
+  "name": "My App"
+}
+```
+
+| Field  | Description                                                    |
+| ------ | -------------------------------------------------------------- |
+| `name` | The name shown in user-facing auth messages (1-256 characters) |
+
+Each branch manages its own application name independently. You can also update this from the **Auth** page > **Configuration** tab > **Project Info** panel in the Neon Console.
 
 ## Disable Neon Auth
 
@@ -127,17 +153,18 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 
 | Endpoint                | Methods                  | Description                                                                 |
 | ----------------------- | ------------------------ | --------------------------------------------------------------------------- |
-| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
 | `/domains`              | GET, POST, DELETE        | Manage trusted redirect domains                                             |
-| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
-| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
 | `/oauth_providers`      | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                            |
+| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
+| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
+| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
 | `/plugins`              | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                |
 | `/plugins/magic-link`   | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)     |
 | `/plugins/phone-number` | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number) |
-| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
-| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
 | `/webhooks`             | GET, PUT                 | Configure webhook notifications                                             |
+| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
+| `/config`               | PATCH                    | Update auth configuration (application name)                                |
+| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
 
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 

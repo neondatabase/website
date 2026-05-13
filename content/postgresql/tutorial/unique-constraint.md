@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CHECK Constraints
@@ -81,7 +81,7 @@ DETAIL:  Key (email)=(john.doe@example.com) already exists.
 
 ## Creating a UNIQUE constraint on multiple columns
 
-PostgreSQL allows you to create a `UNIQUE` constraint to a group of columns using the following syntax:
+PostgreSQL allows you to create a `UNIQUE` constraint on a group of columns using the following syntax:
 
 ```sql
 CREATE TABLE table (
@@ -139,4 +139,4 @@ You should look at the result to find the `state` column with the value `idle in
 
 ## Summary
 
-- Use the `UNIQUE` constraints to enforce values stored in a column or a group of columns unique across rows within the same table.
+- Use the `UNIQUE` constraints to enforce values stored in a column or a group of columns are unique across rows within the same table.

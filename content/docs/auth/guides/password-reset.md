@@ -6,7 +6,7 @@ summary: >-
   enabling email authentication and using pre-built UI components for user
   password recovery.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -100,4 +100,5 @@ Password reset links expire after **15 minutes**. If a link expires, users need 
 ## Next steps
 
 - [Add email verification](/docs/auth/guides/email-verification) to ensure users own their email addresses
+- [Customize the application name](/docs/auth/production-checklist#application-name) shown in password reset emails
 - [Learn how to branch your auth](/docs/auth/branching-authentication) to use database branches with isolated auth environments

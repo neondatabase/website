@@ -6,7 +6,7 @@ page_description: >-
   from one table that may or may not have corresponding rows in another table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Left-Join.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-13T12:43:58.316Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INNER JOIN
@@ -141,7 +141,7 @@ FROM
   film f
   LEFT JOIN inventory i USING (film_id)
 WHERE
-  i.film_id IS NULL
+  i.inventory_id IS NULL
 ORDER BY
   f.title;
 ```
