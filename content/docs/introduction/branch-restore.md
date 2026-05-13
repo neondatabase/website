@@ -27,7 +27,7 @@ updatedOn: '2026-05-12T14:01:17.544Z'
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting—see [History window](/docs/introduction/history-window)—where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/introduction/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
