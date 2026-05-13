@@ -32,7 +32,7 @@ Invoices under $0.50 are not collected.
 | Scale to zero                    | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                             |
 | Storage                          | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                   |
 | Instant restore                  | -                                          | $0.20/GB-month                       | $0.20/GB-month                                                   |
-| Restore window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
+| History window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
 | Snapshots (manual)               | 1                                          | 10                                   | 10                                                               |
 | Snapshots (scheduled)            | -                                          | Yes                                  | Yes                                                              |
 | Public network transfer (egress) | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                   |
@@ -91,7 +91,7 @@ Hitting any Free monthly limit (100 CU-hours, 0.5 GB storage, 5 GB egress) suspe
 | Cap autoscaling per compute                                                                      | Hard ceiling on compute spend           |
 | Keep scale-to-zero on for non-prod                                                               | Idle compute = $0                       |
 | Delete unused branches, or set TTL                                                               | Saves $1.50/branch-month each           |
-| Shorten the restore window                                                                       | Saves $0.20/GB-month on restore storage |
+| Shorten the history window                                                                         | Saves $0.20/GB-month on instant restore (History) storage |
 | Org-level [spending limits](https://neon.com/docs/introduction/spending-limit.md) (Launch/Scale) | Email alerts at 80% and 100%            |
 
 See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md) for the full guide and [Reduce network transfer costs](https://neon.com/docs/introduction/network-transfer.md) for egress.

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -88,7 +88,7 @@ Neon’s [Instant Restore](https://neon.com/docs/introduction/branch-restore#how
 
 **Snapshots as checkpoints**
 
-In addition to continuous history, Neon exposes [snapshots](https://neon.com/docs/guides/backup-restore), explicit checkpoints that capture your database state at a moment in time. Snapshots are useful when you want long-lived restore points independent of the [restore window](https://neon.com/docs/introduction/restore-window), a known rollback point before a risky change, or versioned checkpoints for environments or [agent workflows](https://neon.com/docs/ai/ai-database-versioning).
+In addition to continuous history, Neon exposes [snapshots](https://neon.com/docs/guides/backup-restore), explicit checkpoints that capture your database state at a moment in time. Snapshots are useful when you want long-lived restore points independent of the [history window](https://neon.com/docs/introduction/history-window), a known rollback point before a risky change, or versioned checkpoints for environments or [agent workflows](https://neon.com/docs/ai/ai-database-versioning).
 
 **What this means for DX**
 

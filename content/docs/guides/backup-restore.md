@@ -7,7 +7,7 @@ summary: >-
   automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-04-17T11:58:10.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -46,7 +46,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [restore window](/docs/introduction/restore-window).
+You can restore from any time that falls within your project's [history window](/docs/introduction/history-window).
 
 1. **Select a time**
 
@@ -153,7 +153,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \

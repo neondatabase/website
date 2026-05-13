@@ -1,7 +1,7 @@
 ---
 title: 'Blog posts, docs, guides, and more'
 subtitle: 'A collection of tools and resources to implement branching workflows, snapshot-based promotion, automation via APIs, and integrations with GitHub, Vercel, and agents'
-updatedOn: '2026-02-17T14:15:38.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 ## Conceptual blog posts
@@ -13,7 +13,7 @@ updatedOn: '2026-02-17T14:15:38.000Z'
 
 ## Branching & snapshot docs
 
-- [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and restore windows.
+- [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and instant restore.
 - [Get started with branching](https://neon.com/docs/guides/branching-intro?utm_source=chatgpt.com) \- how to build branching workflows via the API, CLI, GitHub Actions, and Vercel integrations.
 - [Anonymized branches](https://api-docs.neon.tech/reference/createprojectbranchanonymized?utm_source=chatgpt.com) \- If you have PII, use this API endpoint for creating anonymized branches with masking rules.
 

@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-01T12:59:49.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -51,7 +51,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Monitoring](#monitoring)                             | 1 day                                      | 3 days                               | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
-| [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
+| [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 10 manual snapshots                  | 10 manual snapshots                                                                               |
 | [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
@@ -266,23 +266,23 @@ Neon stores a change history to support point-in-time restore (instant restore).
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-You can change your [restore window](#restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
+You can change your [history window](#history-window) to control how much change history you retain for **instant restore**. See [Instant restore](/docs/introduction/branch-restore) for how to use the feature.
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
-### Restore window
+### History window
 
-How far back you can restore data.
+How far back **instant restore** can reach (and how much change history is retained) for your project.
 
-The maximum restore window per plan:
+The maximum history window per plan:
 
 - **Free**: No charge, 6-hour limit, capped at 1 GB-month of changes
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-> The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
+> The history window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
-The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
+Shortening the history window can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [History window](/docs/introduction/history-window) for configuration details and more information.
 
 ### Snapshots
 
@@ -497,7 +497,7 @@ How are instant restores billed?
  Change history is stored as Postgres WAL records.
 
 Is instant restore history accumulated at the project or branch level?
-: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single restore window (for example, 7 days or 30 days) for the entire project. You cannot enable, disable, or configure the restore window per branch.
+: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
 
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
@@ -535,7 +535,7 @@ How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  
  • Enable scale-to-zero for idle databases.  
  • Delete unused branches to reduce storage costs.  
- • Shorten your restore window to reduce instant restore storage.  
+ • Shorten your **history window** to reduce **History** usage (instant restore storage).  
  For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
 
 Do you offer credits for startups?

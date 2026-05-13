@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -91,17 +91,17 @@ Branches with expiration work well for:
 
 ## Restore and recover data
 
-If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
+If you lose data due to an unintended deletion or some other event, you can use **[instant restore](/docs/introduction/branch-restore)** to recover: roll the branch back to any point in time that still falls within your project's **history window** (the retention you configure under **Settings → Instant restore**). You can also create a new restore branch for historical analysis or any other reason.
 
 ![Recover from data loss using restore branching](/docs/introduction/branching_data_loss.png)
 
-### Restore window
+### History window
 
-Neon retains a history of changes for your branches, enabling data recovery features. The restore window determines how far back you can restore data, with defaults of 6 hours on Free plan and 1 day on paid plans.
+**Instant restore** (and Time Travel, branching from the past, and snapshots) need Neon to keep a log of data changes. The **history window** is the project-wide setting—on **Settings → Instant restore** in the Console—that controls how long that change history is retained, which sets how far back **instant restore** and the other features can reach.
 
-Increasing your restore window expands your data recovery options but also increases storage costs, as more history is retained. You can configure it up to 7 days on Launch or 30 days on Scale plans.
+Neon retains a history of changes for your branches, with defaults of 6 hours on Free plan and 1 day on paid plans. Increasing the history window expands recovery options but also increases storage costs, as more history is kept. You can configure it up to 7 days on Launch or 30 days on Scale plans.
 
-For complete information about the restore window, including how to configure it, plan limits, storage implications, and how it works, see [Restore window](/docs/introduction/restore-window).
+For limits, billing, and how to change the setting, see [History window](/docs/introduction/history-window).
 
 Learn how to use these data recovery features:
 

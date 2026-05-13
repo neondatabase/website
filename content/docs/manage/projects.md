@@ -8,7 +8,7 @@ summary: >-
   branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-04-28T20:12:16.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -54,7 +54,7 @@ The **Settings** page includes these sub-pages:
 
 - **General**: Change the name of your project or copy the project ID.
 - **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore**: Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
+- **Instant restore**: Under **Settings → Instant restore**, set the **history window** to control how far back **instant restore**, Time Travel queries, and branching from past states can reach.
 - **Updates**: Schedule a time for Postgres and Neon updates.
 - **Collaborators**: Invite external collaborators to join your Neon project.
 - **Network security**: Configure Neon's IP and Private Networking features for secure access.
@@ -88,26 +88,26 @@ Neon supports two compute configurations:
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
 - **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (for example, if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
-### Configure your restore window
+### Configure the history window for instant restore
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
 - [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
-For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](/docs/introduction/restore-window).
+For plan limits, billing, and how retention works, see [History window](/docs/introduction/history-window).
 
-If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
+If you extend the history window, you expand how far back **instant restore** and Time Travel can go, but you also increase **History** usage (change history billed for instant restore) on your project.
 
-Also note that adjusting the restore window affects _all_ branches in your project.
+Also note that adjusting the history window affects _all_ branches in your project.
 
-To configure the restore window for a project:
+To configure the history window:
 
 1. Select a project in the Neon Console.
 2. On your **Project Dashboard**, select **Settings**.
-3. Select **Restore window**.
-   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
-4. Use the slider to select the restore window.
+3. Select **Instant restore**.
+4. Under **History window**, use the slider to choose how long to keep change history.
+   ![History window configuration](/docs/manage/instant_restore_setting.png)
 5. Click **Save**.
 
 ### Schedule updates for your project
@@ -897,7 +897,7 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
-The deletion recovery period is different from the [restore window](/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
 </Admonition>
 
 ### What's recovered

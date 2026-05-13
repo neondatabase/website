@@ -144,13 +144,13 @@ Several databases offer mechanisms like Point-in-Time Recovery (PITR) or continu
 
 Accidental data deletion disrupts business operations. It requires reliable recovery systems to minimize downtime and data loss. Historically, database administrators managed data recovery using standard Postgres continuous archiving and Point-in-Time Recovery (PITR). Proprietary features, such as Oracle Flashback Technology, also addressed this problem. These traditional approaches are effective. However, they often require complex manual intervention and time-consuming processes to restore lost records from backups.
 
-Neon addresses this recovery problem across its pricing tiers by separating storage and compute to enable built-in instant restore capabilities. On paid plans, Neon provides a configurable 7-day or 30-day point-in-time restore window for root branches. This timeframe allows administrators to recover deleted data. For development and testing environments, the Free Plan supports up to 20 projects. It also includes 5 GB of monthly outbound data transfer. This ensures teams can safely test recovery workflows without incurring immediate costs.
+Neon addresses this recovery problem across its pricing tiers by separating storage and compute to enable built-in **instant restore**. On paid plans, Neon provides a configurable **history window** of up to 7 days or 30 days for root branches, which sets how far back **instant restore** can reach. This timeframe allows administrators to recover deleted data. For development and testing environments, the Free Plan supports up to 20 projects. It also includes 5 GB of monthly outbound data transfer. This ensures teams can safely test recovery workflows without incurring immediate costs.
 
 Neon enables instant restore operations directly via the Neon Console, CLI, or API. Users can restore a branch to its own history or the history of another branch. In addition, Neon protects production environments at the architecture level with its protected branches feature, available on all paid plans. The platform does not permit deletion or resetting of protected branches. This means the platform actively prevents the destruction of critical production data and associated compute resources. This often avoids the need to execute a disaster recovery process.
 
 **Takeaway**
 
-Neon delivers instant branch restore capabilities. These allow administrators to recover deleted data within a configurable 7-day or 30-day project restore window on paid plans. The platform actively prevents accidental deletion on production data through protected branches. It also supports testing workflows across up to 20 projects and 5 GB of monthly outbound data transfer on the Free Plan.
+Neon delivers **instant restore**. Administrators can recover deleted data within a configurable 7-day or 30-day **history window** on paid plans. The platform actively prevents accidental deletion on production data through protected branches. It also supports testing workflows across up to 20 projects and 5 GB of monthly outbound data transfer on the Free Plan.
 
 Article 8 of 10
 

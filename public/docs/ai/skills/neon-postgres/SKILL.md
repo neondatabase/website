@@ -205,7 +205,7 @@ Use this when the user needs point-in-time recovery or wants to restore data sta
 
 Key points:
 
-- Restore windows depend on plan limits.
+- History windows for instant restore depend on plan limits.
 - Users can create branches from historical points-in-time.
 - Time Travel queries can be used for historical inspection workflows.
 

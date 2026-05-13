@@ -3,18 +3,18 @@ title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 summary: >-
   Covers the setup of Time Travel in Neon, enabling users to query data at
-  specific points in time within the restore window using the SQL Editor,
-  Restore flow, or Neon CLI for historical data analysis.
+  specific points in time within the history window used for instant restore,
+  using the SQL Editor, Backup & Restore flow, or Neon CLI for historical data analysis.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
-To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
+To help review your data's history, Time Travel lets you connect to any selected point in time still covered by your project's **history window** (the retention configured for **instant restore**) and then run queries against that connection. Time Travel is part of Neon's **instant restore** feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
 
 You can use Time Travel from two places in the Neon Console, and from the Neon CLI:
 
 - **SQL Editor** &#8212; Time Travel is built into the SQL editor letting you switch between queries of your current data and previous iterations of your data in the same view.
-- **Restore** &#8212; Time Travel Assist is also built into the instant restore flow where it can help you make sure you've targeted the correct restore point before you restore a branch.
+- **Backup & Restore** &#8212; Time Travel Assist is built into **Restore from history** (part of **instant restore**) so you can verify the restore point before you restore a branch.
 - **Neon CLI** &#8212; Use the Neon CLI to quickly establish point-in-time connections for automated scripts or command-line-based data analysis.
 
 ## How Time Travel works
@@ -32,11 +32,11 @@ However, you can see the history of operations related to the creation and delet
 
 The ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
-### Restore window
+### History window
 
-Time Travel queries are limited to your project's restore window. You cannot select a time outside your current restore window.
+Time Travel queries are limited to the same span of time as **instant restore**: you cannot select a time outside your project's **history window**.
 
-To learn more about the restore window, including how to configure it and plan limits, see [Restore window](/docs/introduction/restore-window).
+To learn how to configure the history window and see plan limits, see [History window](/docs/introduction/history-window).
 
 ### Data integrity
 
@@ -46,7 +46,7 @@ Time Travel only allows non-destructive read-only queries. You cannot alter hist
 
 ### Time Travel with the SQL Editor
 
-Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your restore window.
+Time Travel in the SQL Editor offers a non-destructive way to explore your database's historical data through read-only queries. By toggling Time Travel in the editor, you switch from querying your current data to querying against a selected point within your **history window**.
 
 You can use this feature to help with scenarios like:
 
@@ -61,7 +61,7 @@ Here's an example of a completed Time Travel query.
 
 ### Time Travel Assist with instant restore
 
-Time Travel Assist is also available from the **Restore** page, as part of the [Instant restore](/docs/guides/branch-restore) feature. Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targeted the correct restore point.
+Time Travel Assist is also available from **Backup & Restore** under **Restore from history**, as part of [Instant restore](/docs/guides/branch-restore). Before completing a restore operation, it's a good idea to use Time Travel Assist to verify that you've targeted the correct restore point.
 
 An SQL editor is built into the **Restore** page for this purpose. When you make your branch and timestamp selection to restore a branch, this selection can also be used as the point-in-time connection to query against.
 
@@ -71,7 +71,7 @@ Here is an example of a completed query:
 
 ## How to use Time Travel
 
-Here is how to use Time Travel from both the **SQL Editor** and from the **Restore** page:
+Here is how to use Time Travel from the **SQL Editor**, from **Backup & Restore** (**Restore from history**), or from the **CLI**:
 
 <Tabs labels={["SQL Editor", "Instant restore", "CLI"]}>
 
@@ -82,14 +82,14 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 
    ![Time Travel toggle](/docs/get-started/time_travel_sql_editor.png)
 
-1. Use the Date & Time selector to choose a point within your restore window.
+1. Use the Date & Time selector to choose a point within your **history window**.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
 
 </TabItem>
 
 <TabItem>
 
-1. In the Neon Console, go to **Restore**.
+1. In the Neon Console, open the branch's **Backup & Restore** page and go to **Restore from history**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
    ![time travel selection](/docs/guides/time_travel_restore_select.png)
