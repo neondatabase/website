@@ -20,6 +20,8 @@ Before you begin, make sure that you have the following:
 - A Neon account and a project. See [Sign up](/docs/get-started/signing-up).
 - A properly named database. For example, if you are migrating a database named `my_app`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 - Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- **Schedule migration downtime:** `pgloader` performs a point-in-time migration, which means that any changes made to the PlanetScale database after the migration process has started will not be reflected in the Neon database. You will need to pause writes to your PlanetScale database (schedule downtime) during the migration to avoid data loss.
+- **Configure IP allowlisting:** Ensure that the machine running `pgloader` has its IP address permitted on both the PlanetScale and Neon sides. See [PlanetScale IP restrictions](https://planetscale.com/docs/postgres/connecting/ip-restrictions) and Neon [IP allow rules](/docs/manage/projects#configure-ip-allow).
 
 Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
@@ -45,13 +47,13 @@ Log in to the [Neon Console](https://console.neon.tech). Find the connection str
 
 Your connection string should look similar to this:
 
-```bash shouldWrap
+```plaintext shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Update the connection string to include your **endpoint ID** (ep-cool-darkness-123456 in this example) along with your password by using the `endpoint` keyword. Also remove the `channel_binding` parameter, as it is not supported by `pgloader`. The modified connection string should look like this:
 
-```bash shouldWrap
+```plaintext shouldWrap
 postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
@@ -77,10 +79,10 @@ You'll need to have `pgloader` installed on your local machine to perform the mi
 
    Example configuration in `planetscale_to_neon.load`:
 
-   ```plaintext
+   ```plaintext shouldWrap
    load database
     from mysql://username:password@host/source_db?sslmode=require
-    into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require;
+    into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
    ```
 
    > Replace `username`, `password`, `host`, and `source_db` with your PlanetScale database credentials (`DATABASE_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_HOST`, and `DATABASE_NAME`). Also update the destination connection string with your modified Neon connection string.
@@ -146,10 +148,23 @@ MySQL and Postgres have different data types, SQL syntax, and features. `pgloade
 
 For example, MySQL's `AUTO_INCREMENT` becomes Postgres `SERIAL`, `TINYINT` becomes `BOOLEAN`, and `DATETIME` becomes `TIMESTAMP`. Follow the [Pgloader MySQL Database Casting Rules](https://pgloader.readthedocs.io/en/latest/ref/mysql.html#mysql-database-casting-rules) if you need specific type casting or want to customize conversions according to your own requirements.
 
+Here's an example of how to specify type casting in your `pgloader` configuration file:
+
+```plaintext
+load database
+ from mysql://username:password@host/source_db?sslmode=require
+ into postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
+
+ CAST type datetime to timestamp drop default drop not null;
+```
+
+This example casts MySQL's `DATETIME` type to Postgres `TIMESTAMP` while dropping any default values and `NOT NULL` constraints. Adjust the casting rules as needed for your specific schema and data types.
+
 ## References
 
 - [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html)
 - [Pgloader Tutorial: Migrating from MySQL to PostgreSQL](https://pgloader.readthedocs.io/en/latest/tutorial/tutorial.html#migrating-from-mysql-to-postgresql)
 - [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html)
+- [Pgloader MySQL Database Casting Rules](https://pgloader.readthedocs.io/en/latest/ref/mysql.html#mysql-database-casting-rules)
 
 <NeedHelp/>
