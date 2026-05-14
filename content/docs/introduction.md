@@ -9,7 +9,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-14T16:50:53.531Z'
+updatedOn: '2026-05-14T17:18:10.231Z'
 ---
 
 Neon is serverless Postgres for teams and agents. Ship application backends faster with **managed authentication**, an **HTTP Data API**, **database branching**, and **autoscaling** all built in. Get started with our [Free plan](https://console.neon.tech)
@@ -20,6 +20,20 @@ Neon is serverless Postgres for teams and agents. Ship application backends fast
   command="npx neonctl@latest init"
   trackingLabel="Copy neonctl init - docs intro"
 />
+
+## The Neon platform
+
+<DetailIconCards compact>
+
+<a href="/docs/introduction/serverless" description="Serverless Postgres with database branching, autoscaling, and scale to zero" icon="database">Postgres</a>
+
+<a href="/docs/auth/overview" description="Managed authentication that branches with your data" icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/data-api/overview" description="Query Postgres over HTTPS, no backend code required" icon="globe">Data API</a>
+
+</DetailIconCards>
+
+More services coming to the platform: file storage, functions, cron. See the [roadmap](/docs/introduction/roadmap).
 
 ## Get started
 
