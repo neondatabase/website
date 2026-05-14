@@ -9,20 +9,20 @@ import IconReliable from './images/icon-reliable.inline.svg';
 const FEATURES_DATA = [
   {
     icon: IconPostgres,
-    title: 'Just be Postgres',
+    title: 'Familiar',
     description:
-      'Achieve this by leveraging the pluggable storage layer, preserving the core of Postgres.',
+      'Build with Postgres, the world’s most popular database, and a rich ecosystem of extensions and tools.',
   },
   {
     icon: IconEasy,
     title: 'Easy',
     description:
-      'Simplify the life of developers by bringing the serverless consumption model to Postgres.',
+      'Simplify the life of developers by bringing the serverless model to application backends.',
   },
   {
     icon: IconCost,
     title: 'Cost efficient',
-    description: 'Aim to deliver the best price-performance Postgres service in the world.',
+    description: 'Aim to deliver the best price-performance backend services in the world.',
   },
   {
     icon: IconReliable,

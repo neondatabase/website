@@ -12,8 +12,8 @@ import Quotes from './quotes';
 const ITEMS = [
   {
     icon: databaseIcon,
-    title: '150,000+',
-    description: 'New Postgres compute endpoints provisioned daily.',
+    title: '12,000,000',
+    description: 'Postgres databases turned on every day.',
     className: 'w-[216px] xl:w-48',
   },
   {
