@@ -16,6 +16,8 @@
     - section: Start with Neon
       icon: start
       items:
+        - title: Build a full backend
+          slug: get-started/full-backend-quickstart
         - title: 1 - Basics
           slug: get-started/signing-up
         - title: 2 - Connect
