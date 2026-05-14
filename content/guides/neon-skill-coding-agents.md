@@ -8,7 +8,7 @@ createdAt: '2026-05-12T00:00:00.000Z'
 updatedOn: '2026-05-14T00:00:00.000Z'
 ---
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/NN251KTjAo8" title="Get Better Code from Your AI Coding Agent with the Neon Skill" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<YoutubeIframe embedId="NN251KTjAo8" />
 
 If you're using an AI coding agent to build an app with Neon, the **Neon skill** is one of the most impactful things you can add to your project. It encodes Neon's best practices directly into your repository so your agent produces higher-quality Neon code from the very first prompt.
 
