@@ -111,6 +111,10 @@
     @apply prose-ol:my-3 prose-ul:my-6;
     @apply prose-li:text-lg prose-li:tracking-tight prose-li:text-gray-new-30 dark:prose-li:text-gray-new-85;
 
+    & li > p {
+      @apply my-2!;
+    }
+
     > h2:first-child,
     > h3:first-child,
     > h4:first-child {
