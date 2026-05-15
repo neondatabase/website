@@ -78,5 +78,6 @@ export async function generateMetadata({ params, searchParams }) {
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 export default BlogPreviewPostPage;
