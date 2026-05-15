@@ -481,6 +481,36 @@ const CROSS_SOURCE_CHECKS = [
     norm: extractCore(/(\d+)\s*days?/i, '$1 days'),
     agentLabel: 'History window',
   },
+
+  // --- Snapshots ---
+  {
+    id: 'snapshots-free',
+    label: 'Snapshots (Free)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'free',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
+  {
+    id: 'snapshots-launch',
+    label: 'Snapshots (Launch)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'launch',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
+  {
+    id: 'snapshots-scale',
+    label: 'Snapshots (Scale)',
+    comp: 'Snapshots',
+    docs: 'Snapshots',
+    plan: 'scale',
+    norm: extractNumber,
+    agentLabel: 'Snapshots (manual)',
+  },
+
   // --- Network ---
   {
     id: 'network-free',
@@ -736,10 +766,15 @@ const INTENTIONALLY_DOCS_ONLY = new Set([
   'Price',
   "Who it's for",
   'Autoscaling',
-  'Snapshots',
   'Compliance and security',
   'Support',
 ]);
+
+// Component table rows that intentionally don't have a docs-side comparison.
+// The docs Snapshots row references scheduled backups in prose rather than
+// a dedicated table row, so the component's standalone Scheduled Backups
+// row has no docs counterpart to compare against.
+const INTENTIONALLY_COMPONENT_ONLY = new Set(['Scheduled Backups']);
 
 function runChecks(componentData, docsTable) {
   const results = [];
@@ -800,7 +835,10 @@ function runChecks(componentData, docsTable) {
 
   // Coverage: find rows in each source not covered by any comparison
   const uncoveredComponent = Object.keys(componentData.tableRows).filter(
-    (k) => !coveredComponentKeys.has(k) && !COMPONENT_CATEGORY_ROWS.has(k)
+    (k) =>
+      !coveredComponentKeys.has(k) &&
+      !COMPONENT_CATEGORY_ROWS.has(k) &&
+      !INTENTIONALLY_COMPONENT_ONLY.has(k)
   );
   const uncoveredDocs = Object.keys(docsTable).filter(
     (k) => !coveredDocsKeys.has(k) && !INTENTIONALLY_DOCS_ONLY.has(k)
