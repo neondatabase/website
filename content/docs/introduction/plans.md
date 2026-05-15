@@ -296,7 +296,7 @@ Manual snapshot limits per plan:
 - **Launch**: 10 manual snapshots
 - **Scale**: 10 manual snapshots
 
-**Pricing**: Snapshot storage is billed at $0.09/GB-month as of May 1, 2026.
+**Pricing**: Snapshot storage is billed at $0.09/GB-month.
 
 For billing, manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first snapshot in a schedule, then as incremental (delta) storage for subsequent snapshots in that schedule.
 
