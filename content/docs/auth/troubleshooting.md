@@ -3,10 +3,10 @@ title: Auth troubleshooting
 subtitle: Common issues when implementing Neon Auth and how to fix them
 summary: >-
   Troubleshooting guide for common Neon Auth implementation issues, including
-  environment configuration, adapter setup, CSS imports, and framework-specific
-  requirements.
+  OAuth redirect URIs, trusted domains, environment configuration, adapter
+  setup, CSS imports, and framework-specific requirements.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-15T14:48:25.606Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
@@ -97,5 +97,28 @@ createAuthClient();
 ```
 
 See the [Next.js quick start](/docs/auth/quick-start/nextjs-api-only) and the [React quick start](/docs/auth/quick-start/react) for complete client setup examples.
+
+## OAuth errors (`redirect_uri_mismatch`, blocked consent, redirect loops)
+
+**`redirect_uri_mismatch` from Google (or another provider)**
+
+The authorized redirect URI in the provider's dashboard must match Neon Auth's callback route exactly: **`{NEON_AUTH_BASE_URL}/callback/{provider}`** (for example `.../callback/google`). See [Production setup](/docs/auth/guides/setup-oauth#production-setup).
+
+Common mistakes:
+
+- Registering only your marketing site or only the `callbackURL` from `signIn.social()`, instead of **`{NEON_AUTH_BASE_URL}/callback/{provider}`**.
+- Using a branch's **`NEON_AUTH_BASE_URL`** in your app while Google still lists redirect URIs for a different branch's Auth base URL.
+
+**OAuth succeeds but the user never reaches your app**
+
+Neon Auth only redirects to [trusted domains](/docs/auth/guides/configure-domains). Add every origin you use in **`callbackURL`** (including `https://www.example.com` separately if you use www).
+
+**Google consent screen shows an unexpected hostname**
+
+That hostname comes from the OAuth redirect URI (your app vs Neon Auth). See [Google OAuth branding](/docs/auth/guides/setup-oauth#google-oauth-branding).
+
+**Google says the app is in Testing / users outside test accounts cannot sign in**
+
+Add testers in Google Cloud Console or publish the OAuth consent screen for production use. See [Google OAuth branding](/docs/auth/guides/setup-oauth#google-oauth-branding).
 
 <NeedHelp/>
