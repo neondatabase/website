@@ -1,5 +1,5 @@
 ---
-title: 'AI-Native App Development with Projects.dev and Neon'
+title: 'AI-Native App Development with Stripe Projects.dev and Neon'
 subtitle: 'How AI agents can provision infrastructure and build real applications without manual setup'
 author: dhanush-reddy
 enableTableOfContents: true
