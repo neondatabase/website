@@ -14,7 +14,7 @@ If you're using an AI coding agent to build an app with Neon, the **Neon skill**
 
 ### What is the Neon skill?
 
-A "skill" (sometimes called a rules file or agent context) is a Markdown document that lives in your project and gives your AI coding agent domain-specific knowledge about Neon. When your agent reads the Neon skill, it understands how to use Neon correctly without you having to explain the nuances in every prompt.
+A "skill" is a Markdown document that lives in your project and gives your AI coding agent domain-specific knowledge about Neon. When your agent reads the Neon skill, it understands how to use Neon correctly without you having to explain the nuances in every prompt.
 
 The Neon skill distills Neon's most important best practices into a concise, structured format. It covers:
 
@@ -23,7 +23,7 @@ The Neon skill distills Neon's most important best practices into a concise, str
 - **Neon schema and migration patterns** — conventions that work well with Neon's architecture
 - **Neon environment variable setup** — the correct way to wire up your Neon connection string
 
-Without the Neon skill, your agent relies entirely on its training data, which may be months or years out of date. With the Neon skill, it has current, authoritative guidance from Neon.
+Without the Neon skill, your agent relies on its training data, which may be months or years out of date. With the Neon skill, it has current, authoritative guidance from Neon.
 
 ### How do I install the Neon skill?
 
@@ -33,8 +33,7 @@ There are three ways to add the Neon skill to your project, depending on which t
 
 [skills.sh](https://skills.sh) is a registry of agent skills for popular tools and platforms, including the Neon skill.
 
-1. Go to [skills.sh](https://skills.sh) and search for **neon**.
-2. Select the **neon-postgres** skill.
+1. Go to the [neon-postgres skill page](https://skills.sh/neon-postgres) on skills.sh.
 3. Copy the install command and run it in your project's terminal.
 4. Follow the prompts to complete Neon skill setup.
 
@@ -46,7 +45,7 @@ If you're using [Cursor](https://cursor.com), you can install the Neon plugin di
 2. Type `neon` in the chat input.
 3. Click the **Add neon plugin** button that appears.
 
-This installs both the Neon skill **and** the [Neon MCP server](/docs/ai/neon-mcp-server), which gives your agent the ability to interact with your Neon account directly — creating Neon branches, running queries, managing Neon projects — all from the chat.
+This installs both the Neon skill **and** the [Neon MCP server](/docs/ai/neon-mcp-server), which gives your agent the ability to interact with your Neon account directly: creating Neon branches, running queries, and managing Neon projects, all from the chat.
 
 **Claude Code plugin**
 
@@ -54,7 +53,7 @@ If you're using [Claude Code](https://claude.ai/code), search for **Neon** in th
 
 ### Does the Neon skill actually change the code my agent writes?
 
-Yes — concretely. Here's a real example using a Next.js app with Neon and Drizzle.
+Yes. Here's a real example using a Next.js app with Neon and Drizzle.
 
 Suppose you prompt your agent:
 
@@ -95,13 +94,13 @@ The Neon skill's **Connection Methods and Drivers** section explains this exact 
 
 ### Does the Neon skill only help with one edge case?
 
-No — the Neon connection method example is just one of many. Throughout the lifecycle of a full application — Neon connection handling, Neon migrations, Neon branch-per-PR workflows, Neon read replica routing — there are dozens of similar nuances where agent training data lags behind Neon's current best practices.
+No, the Neon connection method example is just one of many. Throughout the lifecycle of a full application (Neon connection handling, Neon migrations, Neon branch-per-PR workflows, Neon read replica routing), there are dozens of similar nuances where agent training data lags behind Neon's current best practices.
 
 An agent working without the Neon skill can introduce a subtle pattern of suboptimal choices: code that runs, but misses performance, reliability, or workflow improvements that Neon offers.
 
 ### How much does the Neon skill affect my final codebase?
 
-A single wrong Neon connection method is easy to spot and fix. But AI agents make many small decisions across an entire codebase, and not all of them are as visible as a wrong import. Over time this becomes a "death by a thousand cuts" situation — individually minor choices that collectively degrade the quality of your Neon integration.
+A single wrong Neon connection method is easy to spot and fix. But AI agents make many small decisions across an entire codebase, and not all of them are as visible as a wrong import. Over time this becomes a "death by a thousand cuts" situation, where individually minor choices collectively degrade the quality of your Neon integration.
 
 The Neon skill is a one-minute setup that pays off across the full lifetime of your project.
 
@@ -109,13 +108,5 @@ The Neon skill is a one-minute setup that pays off across the full lifetime of y
 
 The Neon skill is available on [skills.sh](https://skills.sh) (search for **neon-postgres**) and in the plugin marketplace for Cursor and Claude Code.
 
-## Quick reference
-
-| | Without Neon skill | With Neon skill |
-|---|---|---|
-| Neon connection method for Vercel | Neon serverless driver (HTTP) | Node Postgres + `attachDatabase` |
-| Neon branching workflow | Generic git branching | Neon branch-per-PR patterns |
-| Agent knowledge of Neon | Model training data (may be stale) | Current Neon best practices |
-| Setup time | — | ~1 minute |
 
 <CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Add the Neon skill to your project and start building with your AI coding agent today." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
