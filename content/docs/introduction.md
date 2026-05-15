@@ -1,18 +1,18 @@
 ---
 title: Neon documentation
 summary: >-
-  How to build on Neon, a serverless Postgres backend with managed
-  authentication, an HTTP Data API, database branching, and autoscaling built
-  in.
+  How to build application backends on Neon, the Postgres-native backend
+  platform with managed authentication, an HTTP Data API, database branching,
+  and autoscaling built in.
 redirectFrom:
   - /guides/neon-azure-integration
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-14T17:18:10.231Z'
+updatedOn: '2026-05-15T17:07:45.989Z'
 ---
 
-Neon is serverless Postgres for teams and agents. Ship application backends faster with **managed authentication**, an **HTTP Data API**, **database branching**, and **autoscaling** all built in. Get started with our [Free plan](https://console.neon.tech)
+Neon is the Postgres-native backend platform. Build and scale application backends with **managed authentication**, an **HTTP Data API**, **database branching**, and **autoscaling** all built in. Get started with our [Free plan](https://console.neon.tech)
 
 <CTA
   title="Set up Neon in one command"
@@ -23,27 +23,19 @@ Neon is serverless Postgres for teams and agents. Ship application backends fast
 
 ## The Neon platform
 
-<DetailIconCards compact>
+<DetailIconCards>
 
-<a href="/docs/introduction/serverless" description="Serverless Postgres with database branching, autoscaling, and scale to zero" icon="database">Postgres</a>
+<a href="/docs/introduction/serverless" description="Serverless Postgres with database branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Managed authentication that branches with your data" icon="lock-landscape">Neon Auth</a>
-
-<a href="/docs/data-api/overview" description="Query Postgres over HTTPS, no backend code required" icon="globe">Data API</a>
+<a href="/docs/auth/overview" description="Managed authentication with sign-up, sign-in, OAuth, and session management. Branches with your data." icon="lock-landscape">Neon Auth</a>
 
 </DetailIconCards>
 
-More services coming to the platform: file storage, functions, cron. See the [roadmap](/docs/introduction/roadmap).
+Plus [Data API](/docs/data-api/overview) for HTTPS queries with no backend code. Storage, functions, and cron coming soon — see the [roadmap](/docs/introduction/roadmap).
 
 ## Get started
 
-<DetailIconCards compact>
-
-<a href="/docs/reference/cli-init" description="Run neon init and let your AI assistant set up your project, env, and code" icon="sparkle">Build with AI tools</a>
-
-<a href="/docs/get-started/full-backend-quickstart" description="Next.js + Postgres + Auth + Data API in 15 minutes" icon="setup">Build a full backend</a>
-
-</DetailIconCards>
+[**Build a full backend**](/docs/get-started/full-backend-quickstart) — Next.js + Postgres + Auth + Drizzle. The full Neon stack in 15 minutes.
 
 ## Connect your framework
 

@@ -1,19 +1,19 @@
 ---
 title: Build a full backend with Next.js and Neon
-subtitle: Connect Postgres, add managed authentication, and query over HTTPS via the Data API
+subtitle: Connect Postgres with Drizzle, add managed authentication, and ship a typed server-side backend
 summary: >-
-  Step-by-step tutorial for building a Next.js application backend on Neon. Uses
-  Postgres with Row-Level Security, Neon Auth for sign-up and sign-in, and the
-  Neon Data API for HTTPS queries. One SDK, no server-side database code.
+  Step-by-step tutorial for building a Next.js application backend on Neon.
+  Uses Drizzle for type-safe Postgres queries and Neon Auth for sign-up and
+  sign-in. Server-side data access, ready to deploy on Vercel.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-14T16:50:53.531Z'
+updatedOn: '2026-05-15T17:07:45.989Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
 <Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to set up your editor with Neon's MCP server. Then ask your AI assistant "Get started with Neon" and it will handle steps 1 through 3 and step 7 of this tutorial for you.
+Run [`neonctl init`](/docs/reference/cli-init) to set up your editor with Neon's MCP server. Then ask your AI assistant "Get started with Neon" and it will handle the Neon project setup for you.
 
 ```bash
 npx neonctl@latest init
@@ -23,11 +23,13 @@ npx neonctl@latest init
 
 By the end of this tutorial you'll have a Next.js app that:
 
-- Stores and queries posts in **Postgres** with Row-Level Security
+- Stores and queries posts in **Postgres** using **Drizzle ORM** for type-safe access
 - Signs users in with **Neon Auth** (managed authentication API, called from your own sign-in and sign-up forms)
-- Reads data from a client component via the **Neon Data API**, with JWT tokens injected automatically
+- Reads data from a Server Component, ready to deploy on Vercel, Cloudflare, or Netlify
 
-You'll install one package, `@neondatabase/neon-js`, and write no server-side database code.
+## Before you start
+
+You'll need [Node.js 20+](https://nodejs.org/) and [psql](https://www.postgresql.org/download/) installed.
 
 <TwoColumnLayout>
 
@@ -36,12 +38,48 @@ You'll install one package, `@neondatabase/neon-js`, and write no server-side da
 
 If you don't have a Neon account, sign up at [console.neon.tech](https://console.neon.tech/signup).
 
-From the Projects page, click **New Project** and create a project. You'll come back to the Neon Console a few times to enable Auth and the Data API.
+Pick a path to create the project, then copy the **connection string**. You'll add it to your environment in step 4.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Console">
+<TwoColumnLayout.Block>
 
-![Create Neon project](/docs/get-started/create-project.png)
+<Tabs labels={["Console", "Neon CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, click **New Project**, name it `my-backend`, and create it. From the project dashboard, click **Connect** and copy the connection string.
+
+</TabItem>
+
+<TabItem>
+
+```bash filename="Terminal"
+npx neonctl@latest auth
+npx neonctl@latest projects create --name my-backend
+```
+
+The connection string appears in the output.
+
+</TabItem>
+
+<TabItem>
+
+Create an [API key](https://console.neon.tech/app/settings/api-keys), export it, then create the project:
+
+```bash filename="Terminal"
+export NEON_API_KEY=neon_...
+
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project": {"name": "my-backend"}}'
+```
+
+The connection string is in the response under `connection_uris[0].connection_uri`.
+
+</TabItem>
+
+</Tabs>
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -49,32 +87,45 @@ From the Projects page, click **New Project** and create a project. You'll come 
 <TwoColumnLayout.Step title="Enable Neon Auth">
 <TwoColumnLayout.Block>
 
-In the project sidebar, go to **Auth** and click **Enable Auth**.
-
-On the **Configuration** tab, copy your **Auth URL**. You'll use it as both a server and a client environment variable in step 7.
+Enable Auth on your project's default branch and copy the **Auth URL**. You'll add it to your environment in step 4.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Console">
+<TwoColumnLayout.Block>
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+In the project sidebar, go to **Auth** and click **Enable Auth**. On the **Configuration** tab, copy your **Auth URL**.
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
+</TabItem>
 
-<TwoColumnLayout.Step title="Enable the Data API">
-<TwoColumnLayout.Block>
+<TabItem>
 
-In the project sidebar, go to **Data API**. Check both options:
+You'll need your project ID and default branch ID. If you used the API in step 1, the response contains both. Otherwise list projects to find them:
 
-- **Use Neon Auth**: uses Neon Auth as the JWT provider
-- **Grant public schema access**: lets authenticated users query tables in the `public` schema
+```bash filename="Terminal"
+curl https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
 
-Click **Enable Data API**, then copy your **Data API URL** from the **API** tab.
+Enable Auth on the default branch:
 
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Console">
+```bash filename="Terminal"
+curl -X POST \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID/auth" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"auth_provider": "better_auth"}'
+```
 
-![Enable Data API with Neon Auth](/docs/data-api/data_api_sidebar.png)
+The Auth URL is in the response under `jwks_url` (strip the `/.well-known/jwks.json` suffix).
+
+</TabItem>
+
+</Tabs>
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -82,99 +133,104 @@ Click **Enable Data API**, then copy your **Data API URL** from the **API** tab.
 <TwoColumnLayout.Step title="Scaffold a Next.js app">
 <TwoColumnLayout.Block>
 
-Create a new Next.js project with TypeScript, Tailwind, and the App Router. The flags below skip the interactive Turbopack and import-alias prompts so the command runs unattended.
+Create a new Next.js project with TypeScript, Tailwind, and the App Router. The `--yes` flag accepts the remaining defaults (Turbopack, import alias) without prompting.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npx create-next-app@latest my-backend \
-  --typescript --tailwind --app --eslint \
-  --use-npm --no-turbopack --import-alias "@/*"
+npx create-next-app@latest my-backend --typescript --tailwind --app --eslint --yes
 cd my-backend
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Install the Neon SDK">
+<TwoColumnLayout.Step title="Install dependencies and add environment variables">
 <TwoColumnLayout.Block>
 
-`@neondatabase/neon-js` is the full Neon SDK. It bundles authentication and the Data API client. You won't need any other Neon packages for this tutorial.
+Install three packages: `@neondatabase/neon-js` for auth and the pre-built UI, `drizzle-orm` for typed queries, and `@neondatabase/serverless` for the HTTP driver (works in Node, edge, and serverless runtimes). Add `drizzle-kit` as a dev dependency for the schema migration.
 
-The install resolves a large transitive tree (Better Auth, React Email, the Neon Data API client). Expect several minutes on a fresh project.
-
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-
-```bash filename="Terminal"
-npm install @neondatabase/neon-js
-```
-
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
-
-<TwoColumnLayout.Step title="Create the posts table with RLS">
-<TwoColumnLayout.Block>
-
-Open the **SQL Editor** in the Neon Console and run the following. It creates a `posts` table where:
-
-- Authenticated users can read published posts
-- Users can fully manage their own posts (via the `auth.user_id()` helper)
-
-The two `INSERT` statements seed some sample published posts so you have something to read in step 10.
-
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="SQL Editor">
-
-```sql
-CREATE TABLE posts (
-  id bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  user_id text DEFAULT (auth.user_id()) NOT NULL,
-  content text NOT NULL,
-  is_published boolean DEFAULT false,
-  created_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY read_published_posts ON posts
-FOR SELECT TO authenticated
-USING (is_published = true);
-
-CREATE POLICY manage_own_posts ON posts
-FOR ALL TO authenticated
-USING (auth.user_id() = user_id)
-WITH CHECK (auth.user_id() = user_id);
-
-INSERT INTO posts (user_id, content, is_published) VALUES
-  ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
-  ('00000000-0000-0000-0000-000000000000', 'Posts become visible once published', true);
-```
-
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
-
-<TwoColumnLayout.Step title="Add environment variables">
-<TwoColumnLayout.Block>
-
-Create `.env.local` in your project root. Replace the placeholder URLs with the values you copied from the Neon Console.
+Then create `.env.local` with your connection string, Auth URL, and a generated cookie secret.
 
 Generate the cookie secret with `openssl rand -base64 32`. It must be at least 32 characters.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
+```bash filename="Terminal"
+npm install @neondatabase/neon-js drizzle-orm @neondatabase/serverless
+npm install -D drizzle-kit
+```
+
 ```bash filename=".env.local"
-# From the Auth page in the Neon Console
+DATABASE_URL=postgresql://...
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
-NEXT_PUBLIC_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
-
-# From the Data API page in the Neon Console
-NEXT_PUBLIC_NEON_DATA_API_URL=https://ep-xxx.apirest.us-east-1.aws.neon.tech/neondb/rest/v1
-
-# Generate with: openssl rand -base64 32
 NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Define the Drizzle schema">
+<TwoColumnLayout.Block>
+
+Create a TypeScript schema for a `posts` table. Drizzle uses this for both the migration and your type-safe queries.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript filename="lib/db/schema.ts"
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+
+export const posts = pgTable('posts', {
+  id: bigint('id', { mode: 'number' })
+    .primaryKey()
+    .generatedByDefaultAsIdentity(),
+  userId: text('user_id').notNull(),
+  content: text('content').notNull(),
+  isPublished: boolean('is_published').notNull().default(false),
+  createdAt: timestamp('created_at', { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+```
+
+```typescript filename="drizzle.config.ts"
+import { defineConfig } from 'drizzle-kit';
+
+export default defineConfig({
+  schema: './lib/db/schema.ts',
+  dialect: 'postgresql',
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Push the schema and seed sample data">
+<TwoColumnLayout.Block>
+
+`drizzle-kit push` creates the table directly from your schema. For production you'd switch to generated migrations, but push is faster for a tutorial.
+
+Then seed two sample posts so you have something to read in step 9.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+# Create the table
+npx drizzle-kit push
+
+# Seed sample data
+psql $DATABASE_URL <<EOF
+INSERT INTO posts (user_id, content, is_published) VALUES
+  ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
+  ('00000000-0000-0000-0000-000000000000', 'Posts become visible once published', true);
+EOF
 ```
 
 </TwoColumnLayout.Block>
@@ -183,14 +239,7 @@ NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
 <TwoColumnLayout.Step title="Wire up auth">
 <TwoColumnLayout.Block>
 
-Add four files:
-
-- `lib/auth/server.ts` creates the server-side auth instance
-- `lib/auth/client.ts` creates the client-side auth client
-- `app/api/auth/[...path]/route.ts` proxies sign-up, sign-in, and OAuth callbacks
-- `proxy.ts` is the Next.js middleware that gates protected routes
-
-<NextjsProxyNote/>
+Add four files. The server instance handles auth on the server side. The client exposes auth methods to the browser. The API route proxies sign-up, sign-in, and OAuth callbacks. The middleware redirects unauthenticated users to the sign-in page.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -232,6 +281,8 @@ export const config = {
 };
 ```
 
+<NextjsProxyNote/>
+
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
@@ -240,7 +291,7 @@ export const config = {
 
 Each page is a client form that posts to a server action. The action calls `auth.signUp.email()` or `auth.signIn.email()` on the server, then redirects to `/posts` on success or returns an error string for the form to display.
 
-No layout or provider component is needed. The scaffold's default `app/layout.tsx` already imports `globals.css` and is all the wrapper you need.
+No layout or provider component is needed. The scaffold's default `app/layout.tsx` is all the wrapper you need.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -357,61 +408,43 @@ export async function signInWithEmail(
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Query Postgres from a client component via the Data API">
+<TwoColumnLayout.Step title="Query Postgres from a Server Component">
 <TwoColumnLayout.Block>
 
-Create a protected `/posts` page. Because it's a client component, it talks to Postgres directly over HTTPS using the Data API. The Neon SDK injects the user's JWT automatically, and Row-Level Security enforces the policies you defined in step 6.
-
-No server-side database driver, no API route, no Express. The browser talks to Postgres, and the database decides what each user can see.
+Create the Drizzle client and a protected `/posts` page. The page is a Server Component, so the query runs on the server at request time. Drizzle returns typed results, and `dynamic = 'force-dynamic'` keeps the data fresh on every request.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
+```typescript filename="lib/db/client.ts"
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
+import * as schema from './schema';
+
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql, { schema });
+```
+
 ```tsx filename="app/posts/page.tsx"
-'use client';
+import { db } from '@/lib/db/client';
+import { posts } from '@/lib/db/schema';
+import { desc, eq } from 'drizzle-orm';
 
-import { useEffect, useState } from 'react';
-import { createClient } from '@neondatabase/neon-js';
+export const dynamic = 'force-dynamic';
 
-const client = createClient({
-  auth: {
-    url: process.env.NEXT_PUBLIC_NEON_AUTH_URL!,
-  },
-  dataApi: {
-    url: process.env.NEXT_PUBLIC_NEON_DATA_API_URL!,
-  },
-});
-
-type Post = {
-  id: number;
-  content: string;
-  is_published: boolean;
-  created_at: string;
-};
-
-export default function PostsPage() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    client
-      .from('posts')
-      .select('*')
-      .eq('is_published', true)
-      .order('created_at', { ascending: false })
-      .then(({ data }) => {
-        setPosts(data ?? []);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p className="p-8">Loading...</p>;
+export default async function PostsPage() {
+  const allPosts = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.isPublished, true))
+    .orderBy(desc(posts.createdAt))
+    .limit(10);
 
   return (
     <main className="p-8">
       <h1 className="mb-4 text-2xl font-bold">Published posts</h1>
       <ul className="space-y-2">
-        {posts.map((post) => (
+        {allPosts.map((post) => (
           <li key={post.id} className="rounded border p-3">
             {post.content}
           </li>
@@ -428,7 +461,7 @@ export default function PostsPage() {
 <TwoColumnLayout.Step title="Run the app">
 <TwoColumnLayout.Block>
 
-Start the dev server, then open [http://localhost:3000/auth/sign-up](http://localhost:3000/auth/sign-up). Create a test user, and you'll be redirected to `/posts`. You should see the two sample posts you inserted in step 6.
+Start the dev server, then open [http://localhost:3000/auth/sign-up](http://localhost:3000/auth/sign-up). Create a test user, and you'll be redirected to `/posts` where the two seeded posts appear.
 
 If you visit `/posts` without signing in, the middleware redirects you to `/auth/sign-in`.
 
@@ -450,16 +483,14 @@ You now have a Next.js app where:
 
 - Sign-up and sign-in are handled by Neon Auth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
 - The `/posts` route is protected by middleware
-- Published posts are read directly from Postgres over HTTPS via the Data API
-- Row-Level Security enforces access at the database level, not in application code
-
-You installed exactly one package, `@neondatabase/neon-js`, and wrote no server-side database code.
+- Published posts are queried server-side via Drizzle with full TypeScript types
+- The same code deploys on Vercel, Cloudflare Pages, Netlify, or any Node host
 
 ## Next steps
 
-- [Write data through the Data API](/docs/data-api/get-started#crud-operations): insert, update, and delete with the same client
-- [Branching authentication](/docs/auth/branching-authentication): give every preview environment its own user state
-- [Generate TypeScript types](/docs/data-api/generate-types): get autocomplete for your tables and columns
-- [Deploy to Vercel](/docs/guides/vercel): production preview deployments per pull request
+- **Write data with Server Actions** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id`
+- **Branch for previews**: [branching authentication](/docs/auth/branching-authentication) gives every preview environment its own user state
+- **Optimize for the edge**: on Vercel or Cloudflare, configure [connection pooling](/docs/connect/connection-pooling) for production
+- **Generated migrations**: switch from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations) for tracked schema changes
 
 <NeedHelp/>
