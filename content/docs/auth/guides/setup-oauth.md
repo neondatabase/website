@@ -6,7 +6,7 @@ summary: >-
   in your application using Neon Auth, including Google Cloud redirect URIs,
   trusted domains, and production configuration.
 enableTableOfContents: true
-updatedOn: '2026-05-15T14:48:25.606Z'
+updatedOn: '2026-05-15T15:00:29.570Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -168,7 +168,7 @@ Neon Auth will use your configured credentials for that branch.
 
 Each branch has its own **`NEON_AUTH_BASE_URL`**. Register **`{NEON_AUTH_BASE_URL}/callback/google`** (and other providers you use) for every branch you test against (for example preview databases).
 
-Trusted domains do **not** support wildcards (`*.vercel.app`). See [Branching authentication](/docs/auth/branching-authentication) for preview workflows and the API for [trusted domains](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
 
 ## Google OAuth branding
 
