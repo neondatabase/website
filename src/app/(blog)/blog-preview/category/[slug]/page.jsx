@@ -26,9 +26,9 @@ const BlogPreviewCategoryPage = async ({ params, searchParams }) => {
     getBlogSnapshot
   );
   const [categories, category, posts] = await Promise.all([
-    getAllBlogCategories({ previewBranch: branch, strictBranch: true }),
-    getCategoryBySlug(slug, { previewBranch: branch, strictBranch: true }),
-    getPostsByCategorySlug(slug, { previewBranch: branch, strictBranch: true }),
+    getAllBlogCategories({ previewBranch: branch }),
+    getCategoryBySlug(slug, { previewBranch: branch }),
+    getPostsByCategorySlug(slug, { previewBranch: branch }),
   ]);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 

@@ -5,18 +5,17 @@ import { notFound } from 'next/navigation';
 import resolveBlogPreviewRequest from 'app/blog-preview/blog-preview';
 import BlogPostPage from 'components/pages/blog-post/blog-post-page';
 import { BLOG_PREVIEW_BASE_PATH, buildBlogPostPath } from 'constants/blog';
-import { getBlogPostBySlug, getBlogSnapshot } from 'utils/api-blog';
+import { getBlogPostBySlug, getBlogPreviewBranchInfo } from 'utils/api-blog';
 import getMetadata from 'utils/get-metadata';
 
 const BlogPreviewPostPage = async ({ params, searchParams }) => {
   const { slug: routeSlug } = await params;
   const { branch, routeConfig, snapshot } = await resolveBlogPreviewRequest(
     searchParams,
-    getBlogSnapshot
+    getBlogPreviewBranchInfo
   );
   const { post, relatedPosts } = await getBlogPostBySlug(routeSlug, {
     previewBranch: branch,
-    strictBranch: true,
   });
 
   if (!post) {
@@ -40,10 +39,9 @@ const BlogPreviewPostPage = async ({ params, searchParams }) => {
 
 export async function generateMetadata({ params, searchParams }) {
   const { slug } = await params;
-  const { branch } = await resolveBlogPreviewRequest(searchParams, getBlogSnapshot);
+  const { branch } = await resolveBlogPreviewRequest(searchParams, getBlogPreviewBranchInfo);
   const { post } = await getBlogPostBySlug(slug, {
     previewBranch: branch,
-    strictBranch: true,
   });
 
   if (!post) return notFound();

@@ -44,25 +44,20 @@ const appendPreviewQueryToPath = (pathname, previewParams) => {
     searchParams.set('branch', previewParams.branch);
   }
 
-  if (previewParams.secret) {
-    searchParams.set('secret', previewParams.secret);
-  }
-
   const queryString = searchParams.toString();
 
   return queryString ? `${pathname}?${queryString}` : pathname;
 };
 
-const createBlogRouteConfig = ({ branch = null, secret = null } = {}) => {
+const createBlogRouteConfig = ({ branch = null } = {}) => {
   const isPreview = Boolean(branch);
-  const previewParams = isPreview ? { branch, secret } : null;
+  const previewParams = isPreview ? { branch } : null;
   const basePath = isPreview ? BLOG_PREVIEW_BASE_PATH : BLOG_BASE_PATH;
   const categoryBasePath = isPreview ? BLOG_PREVIEW_CATEGORY_BASE_PATH : BLOG_CATEGORY_BASE_PATH;
 
   return {
     isPreview,
     branch,
-    secret,
     basePath,
     categoryBasePath,
     previewParams,
