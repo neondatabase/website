@@ -10,7 +10,8 @@ const BLOG_CONTENT_DIRNAME = 'content/blog';
 const BLOG_AUTHORS_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/authors/data.json`;
 const BLOG_CATEGORIES_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/categories/data.json`;
 const BLOG_POSTS_DIRNAME = `${BLOG_CONTENT_DIRNAME}/posts`;
-const GITHUB_BLOB_FETCH_BATCH_SIZE = 150;
+const GITHUB_BLOB_FETCH_BATCH_SIZE = 120;
+const GITHUB_BLOB_FETCH_BATCH_CONCURRENCY = 4;
 
 class BlogContentBranchNotFoundError extends Error {
   constructor(branch) {
@@ -181,6 +182,17 @@ const getGitHubTreeEntries = async ({ owner, repo, branch, treeSha, token }) => 
   }
 };
 
+const mapWithConcurrency = async (items, limit, mapper) => {
+  const results = [];
+
+  for (let index = 0; index < items.length; index += limit) {
+    const batch = items.slice(index, index + limit);
+    results.push(...(await Promise.all(batch.map(mapper))));
+  }
+
+  return results;
+};
+
 const fetchGitHubTextFile = async ({ owner, repo, commitSha, token, filePath }) => {
   try {
     const octokit = getOctokit(token);
@@ -280,9 +292,13 @@ const isBlogSnapshotPath = (filePath) =>
 
 const fetchGitHubTextFiles = async ({ owner, repo, commitSha, token, filePaths }) => {
   const filesByPath = new Map();
+  const batches = [];
 
   for (let index = 0; index < filePaths.length; index += GITHUB_BLOB_FETCH_BATCH_SIZE) {
-    const batchFilePaths = filePaths.slice(index, index + GITHUB_BLOB_FETCH_BATCH_SIZE);
+    batches.push(filePaths.slice(index, index + GITHUB_BLOB_FETCH_BATCH_SIZE));
+  }
+
+  await mapWithConcurrency(batches, GITHUB_BLOB_FETCH_BATCH_CONCURRENCY, async (batchFilePaths) => {
     const octokit = getOctokit(token);
     const queryFields = batchFilePaths
       .map((filePath, index) => {
@@ -313,7 +329,7 @@ const fetchGitHubTextFiles = async ({ owner, repo, commitSha, token, filePaths }
 
       filesByPath.set(filePath, blob.text);
     });
-  }
+  });
 
   return filesByPath;
 };
