@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-05-15T13:20:22.795Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -361,7 +361,7 @@ Use snapshots (branches) for versions you want to keep beyond the [history windo
 <Admonition type="important">
 **Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
 
-**Pricing:** Snapshot storage is billed at $0.09/GB-month.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month as of May 1, 2026.
 </Admonition>
 
 Example creating a snapshot:
