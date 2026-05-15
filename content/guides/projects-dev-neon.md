@@ -4,7 +4,7 @@ subtitle: 'How AI agents can provision infrastructure and build real application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-05-14T18:43:03.950Z'
+updatedOn: '2026-05-15T06:36:44.402Z'
 ---
 
 AI has made writing code insanely easy, but all the tiny setup tasks around it still kill your momentum.
@@ -13,7 +13,7 @@ You've likely been there: you open your laptop on a Friday night, thinking you�
 
 First, you need a database. So you open a new tab, sign up for a provider, verify your email, click through an onboarding flow, provision a database, and copy the connection string. Then you realize you need an LLM, so you go to [OpenRouter](https://openrouter.ai) to create an account and generate an API key. Your app needs to scrape websites? Time to go to [Firecrawl](https://firecrawl.dev), sign up, and copy _another_ API key. And if you hit a rate limit and need paid access, you're pulling out your credit card and entering your details separately on every single site.
 
-None of these tasks are difficult on their own. But together, they pile up into a wall of friction. After 45 minutes of juggling dashboards, pasting API keys into `.env` files, and wrangling accounts, you start to wonder if this side project - which might not even survive tomorrow - is worth the grind. You’re stuck acting as human glue, shuffling secrets between half a dozen SaaS dashboards.
+None of these tasks are difficult on their own. But together, they pile up into a wall of friction. After 45 minutes of juggling dashboards, pasting API keys into `.env` files, and wrangling accounts, you start to wonder if this side project which might not even survive tomorrow is worth the grind. You’re stuck acting as human glue, shuffling secrets between half a dozen SaaS dashboards.
 
 Writing code got fast. Provisioning infrastructure didn’t. Until now.
 
@@ -21,13 +21,13 @@ This is where AI-assisted development is headed next. The future isn’t just ab
 
 ## What is Projects.dev?
 
-[Projects.dev](https://projects.dev) is Stripe’s new platform for AI-native development. It offers a unified CLI and a growing ecosystem of integrations that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
+[Projects.dev](https://projects.dev) is Stripe’s new platform for AI-native development. Think of it as an agent-friendly, simplified version of Terraform with unified billing built in. It offers a CLI and a growing ecosystem of [integrations](https://projects.dev/providers/) that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
 
 The core idea is simple but powerful: instead of asking you to go to a provider’s dashboard, create an account, and copy API keys, Projects.dev lets your AI agent run commands that automatically provision resources on your behalf. The credentials are securely retrieved and injected directly into your local environment, so you can start building immediately.
 
 ## How does it work?
 
-To understand how this works, you need to know about **Agent Skills**. Agent Skills are a standardized, open format that gives AI agents new capabilities. Instead of relying solely on an LLM’s pre-training to guess how to configure a system, you can give your agent a “skill” (essentially a set of instructions and CLI tools) that teaches it how to interact with external platforms securely.
+To understand how this works, you need to know about [**Agent Skills**](https://agentskills.io/home#what-are-agent-skills). Agent Skills are a standardized, open format that gives AI agents new capabilities. Instead of relying solely on an LLM’s pre-training to guess how to configure a system, you can give your agent a “skill” (essentially a set of instructions and CLI tools) that teaches it how to interact with external platforms securely.
 
 Stripe Projects provides a CLI and an Agent Skill that standardizes how third-party services are provisioned. The catalog includes providers like Neon (for Postgres), Vercel (for hosting), OpenRouter (for AI models), and Firecrawl (for web scraping) etc.
 
@@ -59,7 +59,7 @@ Let's look at how you can build this entire stack without opening a single provi
 
 First, you need to install the Stripe CLI and the Projects plugin.
 
-Install the Stripe CLI by following the instructions in the [official Stripe documentation](https://docs.stripe.com/stripe-cli/install).
+Install the Stripe CLI by following the instructions in the [official Stripe documentation](https://docs.stripe.com/stripe-cli/install#install).
 
 After installing the Stripe CLI, run the following command to install the Projects plugin:
 
@@ -73,9 +73,9 @@ Authenticate your Stripe CLI if you haven't already:
 stripe login
 ```
 
-## Initialize your workspace and give your AI the skill
+## Initialize your workspace
 
-Create a new directory for your app and initialize the project:
+Create a new directory for your app and navigate into it:
 
 ```bash
 mkdir travel-concierge && cd travel-concierge
@@ -93,7 +93,7 @@ The AI agent skills describe how to use the `stripe projects` CLI to provision r
 
 ## Prompt your AI agent
 
-Now, launch your AI coding agent in your terminal. For example, if you're using OpenCode, you would run:
+Now, launch your AI coding agent in your terminal. For example, if you're using OpenCode, simply run:
 
 ```bash
 opencode
@@ -112,11 +112,13 @@ Make the app look modern. Do not add extra features and keep it simple as asked.
 Use free tier for all the services used via stripe projects.
 ```
 
+The prompt is intentionally kept high‑level. The AI agent decides on the exact architecture, provisions the necessary services, and connects everything together. Your role is simply to guide the agent with the functionality you want, while it takes care of the implementation details and provisioning behind the scenes.
+
 ## Watch the AI agent build and provision
 
 Your AI agent begins by analyzing the prompt and determining which services are needed. From there, it leverages the Stripe Projects CLI to provision those services automatically on your behalf.
 
-You can inspect its logs to see the exact commands executed and the reasoning behind them. While the agent’s output won’t match this guide word‑for‑word - agents are inherently non‑deterministic - the overall workflow will follow a similar pattern.
+You can inspect its logs to see the exact commands executed and the reasoning behind them. While the agent’s output won’t match this guide word‑for‑word, agents are inherently non‑deterministic but the overall workflow will be similar.
 
 ### 1. Provisioning the infrastructure
 
@@ -128,7 +130,9 @@ stripe projects add firecrawl/api --no-interactive
 stripe projects add openrouter/api --no-interactive
 ```
 
-_Behind the scenes:_ Stripe Projects interacts directly with Neon, Firecrawl, and OpenRouter to provision these resources. It securely retrieves the resulting credentials (like your `DATABASE_URL` and API keys) and writes them to a local `.projects/vault/vault.json` file, automatically syncing them to your `.env` file.
+_Behind the scenes:_ Stripe Projects interacts directly with Neon, Firecrawl, and OpenRouter to provision these resources. Unlike traditional relational databases that can take minutes to spin up, Neon provisions in milliseconds, allowing the agent to iterate rapidly without waiting for infrastructure.
+
+The CLI then securely retrieves the resulting credentials (like your `DATABASE_URL` and API keys) and writes them to a local `.projects/vault/vault.json` file, automatically syncing them to your `.env` file.
 
 ### 2. Writing the application code
 
@@ -193,19 +197,31 @@ Eventually, your weekend project might gain traction. You hit the free-tier limi
 
 Normally, upgrading means logging into three different provider dashboards, entering your credit card details three separate times, and navigating three different billing UIs.
 
-With `projects.dev`, billing is centralized. Because Stripe already handles your KYC (Know Your Customer) and payment details globally, upgrading is incredibly frictionless. You just ask your agent to upgrade the resources:
+With `projects.dev`, billing is centralized. Because Stripe already handles your KYC (Know Your Customer) and payment details globally, upgrading is incredibly frictionless. First, configure your billing on Stripe by running:
+
+```bash
+stripe projects billing add
+```
+
+Once configured, you just ask your agent to upgrade the resources:
 
 ```text shouldWrap
 Upgrade my Neon database and OpenRouter services to their paid tiers.
 ```
 
-Stripe uses a Shared Payment Token to handle the transaction securely in the background. Your resources are upgraded instantly, and you never had to touch your wallet.
+Stripe uses a Shared Payment Token to handle the transaction securely in the background. Your resources are upgraded instantly, and you never have to enter your credit card details on multiple sites again.
 
 ### 2. Painless credential rotation
 
-If you accidentally commit your `.env` file to GitHub or need to cycle your credentials for security reasons, the manual process is miserable. You have to log into every platform, revoke the old keys, generate new ones, update your local machine, and update Vercel.
+If you accidentally commit your `.env` file to GitHub or need to cycle your credentials for security reasons, the manual process is miserable. You have to log into every platform, revoke the old keys and generate new ones, then update your local `.env` file and redeploy your app.
 
-With this setup, replacing credentials across dozens of services is trivial. You just run:
+With this setup, replacing credentials across dozens of services is trivial. You can simply ask your AI agent to handle it:
+
+```text shouldWrap
+Rotate all the secrets used via stripe projects.dev.
+```
+
+The agent will then run the necessary commands on your behalf:
 
 ```bash
 stripe projects rotate neon-postgres --no-interactive --yes
@@ -214,11 +230,34 @@ stripe projects rotate firecrawl-api --no-interactive --yes
 stripe projects env --pull --no-interactive
 ```
 
-The CLI rotates the key at the provider level and updates your `.env` safely. If you instruct your agent to do it, it can even push the updated variables to Vercel automatically.
+The CLI rotates the key at the provider level and updates your `.env` safely.
 
 ### 3. Zero-friction experimentation
 
-You no longer have to weigh the "cost of setup" against the value of an idea. You can spin up fully realized, full-stack applications with stateful databases, AI features, and hosting in minutes. If you abandon the project a week later, you haven't cluttered your password manager or your credit card statement with a dozen orphaned accounts.
+You no longer have to weigh the "cost of setup" against the value of an idea. You can spin up fully realized, full-stack applications with stateful databases, AI features, and hosting in minutes.
+
+Because Neon is serverless and scales to zero, you can provision databases for dozens of AI side projects and forget about them. When you aren't using them, they consume zero compute. If one of those projects suddenly goes viral, Neon's autoscaling seamlessly handles the traffic spikes without requiring you to manually provision larger instances. If you abandon a project a week later, you haven't cluttered your password manager or your credit card statement with orphaned accounts.
+
+### 4. Direct dashboard access
+
+While CLI-driven provisioning eliminates setup friction, you are never locked out of traditional UI workflows. If you prefer to visually inspect your data or tweak configurations manually, you can still access the provider's specific dashboard at any time.
+
+Just ask your AI agent to open the provider's dashboard, or run the command manually. For example, to seamlessly authenticate and open the Neon console, run:
+
+```bash
+stripe projects open neon
+```
+
+You will then be provided with a secure link to access the Neon dashboard without needing to enter credentials:
+
+```text
+
+✓ Signing into Neon dashboard...
+
+Press Enter to open the browser or visit https://console.neon.tech/app-deeplink?token=ffcffc1fxxx
+```
+
+This securely logs you into the auto-provisioned Neon account without needing a password, dropping you right into the console where you can visually browse your tables, run ad-hoc queries in the SQL Editor and manage your database.
 
 ## Conclusion
 
