@@ -1815,17 +1815,15 @@ async function processFile(inputPath, pageUrl, rootDir) {
 
   // Build output with frontmatter-based header
   let output = '';
+  if (frontmatter.summary) {
+    output += `> Summary: ${frontmatter.summary}\n\n`;
+  }
   if (frontmatter.title) {
     output += `# ${frontmatter.title}\n\n`;
   }
   if (frontmatter.subtitle) {
     output += `${frontmatter.subtitle}\n\n`;
   }
-  // TODO: Enable when summary frontmatter is added consistently across all content routes
-  // if (frontmatter.summary) {
-  //   output += `> ${frontmatter.summary}\n\n`;
-  // }
-
   output += `${markdown.trim()}\n`;
 
   // docs/changelog.md is a dynamic page in the app router. To provide useful
