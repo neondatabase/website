@@ -7,13 +7,13 @@ summary: >-
   automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-05-15T13:20:22.795Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
 The **Snapshots** feature is in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
-**Pricing:** Snapshot storage is billed at $0.09/GB-month as of May 1, 2026.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month.
 
 Billing behavior: manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first scheduled snapshot, then as incremental (delta) storage for subsequent scheduled snapshots.
 </Admonition>

@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-15T13:20:22.795Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -542,7 +542,7 @@ Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
 
 How is storage charged for snapshots?
-: Snapshot storage is billed at $0.09/GB-month as of May 1, 2026.
+: Snapshot storage is billed at $0.09/GB-month.
 
 Is storage cost different for archived branches?
 : No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.
