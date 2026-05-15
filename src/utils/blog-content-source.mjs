@@ -7,7 +7,10 @@ import { Octokit } from '@octokit/core';
 import matter from 'gray-matter';
 
 const BLOG_CONTENT_DIRNAME = 'content/blog';
-const GITHUB_CONTENT_FETCH_CONCURRENCY = 24;
+const BLOG_AUTHORS_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/authors/data.json`;
+const BLOG_CATEGORIES_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/categories/data.json`;
+const BLOG_POSTS_DIRNAME = `${BLOG_CONTENT_DIRNAME}/posts`;
+const GITHUB_CHANGED_FILE_FETCH_CONCURRENCY = 8;
 
 class BlogContentBranchNotFoundError extends Error {
   constructor(branch) {
@@ -150,22 +153,17 @@ const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
   }
 };
 
-const getGitHubDirectoryContents = async ({ owner, repo, branch, token, directoryPath }) => {
+const getGitHubBranchComparison = async ({ owner, repo, branch, token, baseBranch, headRef }) => {
   try {
     const octokit = getOctokit(token);
-    const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+    const { data } = await octokit.request('GET /repos/{owner}/{repo}/compare/{basehead}', {
       owner,
       repo,
-      path: directoryPath,
-      ref: branch,
+      basehead: `${baseBranch}...${headRef}`,
       headers: getGitHubRequestHeaders(),
     });
 
-    if (!Array.isArray(data)) {
-      throw new Error(`GitHub path "${directoryPath}" is not a directory`);
-    }
-
-    return data;
+    return data.files || [];
   } catch (error) {
     if (error.status === 404) {
       throw new BlogContentBranchNotFoundError(branch);
@@ -231,6 +229,22 @@ const readJsonFromGitHub = async ({ owner, repo, commitSha, token, filePath, fal
   };
 };
 
+const parseJsonWithRaw = (raw, fallback) => {
+  if (!raw) {
+    const fallbackRaw = JSON.stringify(fallback, null, 2);
+
+    return {
+      data: fallback,
+      raw: fallbackRaw,
+    };
+  }
+
+  return {
+    data: JSON.parse(raw),
+    raw,
+  };
+};
+
 const readPostFromGitHub = async ({ owner, repo, commitSha, token, filePath, fileName }) => {
   const raw = await fetchGitHubTextFile({
     owner,
@@ -255,42 +269,118 @@ const readPostFromGitHub = async ({ owner, repo, commitSha, token, filePath, fil
   };
 };
 
-const readPostsFromGitHub = async ({ owner, repo, branch, commitSha, token, postSlug = null }) => {
-  if (postSlug) {
-    const fileName = `${postSlug}.md`;
-    const post = await readPostFromGitHub({
-      owner,
-      repo,
-      commitSha,
-      token,
-      filePath: `${BLOG_CONTENT_DIRNAME}/posts/${fileName}`,
-      fileName,
-    });
-
-    return post ? [post] : [];
-  }
-
-  const posts = await getGitHubDirectoryContents({
+const readPostsFromGitHub = async ({ owner, repo, commitSha, token, postSlug }) => {
+  const fileName = `${postSlug}.md`;
+  const post = await readPostFromGitHub({
     owner,
     repo,
-    branch,
+    commitSha,
     token,
-    directoryPath: `${BLOG_CONTENT_DIRNAME}/posts`,
+    filePath: `${BLOG_POSTS_DIRNAME}/${fileName}`,
+    fileName,
   });
-  const markdownFiles = posts
-    .filter((entry) => entry.type === 'file' && entry.name.endsWith('.md'))
-    .sort((left, right) => left.name.localeCompare(right.name));
 
-  return mapWithConcurrency(markdownFiles, GITHUB_CONTENT_FETCH_CONCURRENCY, (entry) =>
-    readPostFromGitHub({
-      owner,
-      repo,
-      commitSha,
-      token,
-      filePath: entry.path,
-      fileName: entry.name,
-    })
-  ).then((items) => items.filter(Boolean));
+  return post ? [post] : [];
+};
+
+const isBlogPostPath = (filePath) =>
+  filePath.startsWith(`${BLOG_POSTS_DIRNAME}/`) && filePath.endsWith('.md');
+
+const getPostFileNameFromPath = (filePath) => path.basename(filePath);
+
+const isBlogOverlayFile = (file) =>
+  file.filename === BLOG_AUTHORS_DATA_PATH ||
+  file.filename === BLOG_CATEGORIES_DATA_PATH ||
+  isBlogPostPath(file.filename) ||
+  (file.previous_filename && isBlogPostPath(file.previous_filename));
+
+const applyGitHubBranchOverlay = async ({
+  baseSnapshot,
+  changedFiles,
+  owner,
+  repo,
+  branch,
+  commitSha,
+  token,
+}) => {
+  const postsByFileName = new Map(baseSnapshot.posts.map((post) => [post.fileName, post]));
+  let authorsRaw = baseSnapshot.authorsRaw;
+  let authorsData = baseSnapshot.authorsData;
+  let categoriesRaw = baseSnapshot.categoriesRaw;
+  let categoriesData = baseSnapshot.categoriesData;
+
+  await mapWithConcurrency(
+    changedFiles.filter(isBlogOverlayFile),
+    GITHUB_CHANGED_FILE_FETCH_CONCURRENCY,
+    async (file) => {
+      if (file.previous_filename && isBlogPostPath(file.previous_filename)) {
+        postsByFileName.delete(getPostFileNameFromPath(file.previous_filename));
+      }
+
+      if (file.status === 'removed') {
+        if (isBlogPostPath(file.filename)) {
+          postsByFileName.delete(getPostFileNameFromPath(file.filename));
+        } else if (file.filename === BLOG_AUTHORS_DATA_PATH) {
+          ({ data: authorsData, raw: authorsRaw } = parseJsonWithRaw(null, {}));
+        } else if (file.filename === BLOG_CATEGORIES_DATA_PATH) {
+          ({ data: categoriesData, raw: categoriesRaw } = parseJsonWithRaw(null, []));
+        }
+
+        return;
+      }
+
+      if (
+        file.filename !== BLOG_AUTHORS_DATA_PATH &&
+        file.filename !== BLOG_CATEGORIES_DATA_PATH &&
+        !isBlogPostPath(file.filename)
+      ) {
+        return;
+      }
+
+      const raw = await fetchGitHubTextFile({
+        owner,
+        repo,
+        commitSha,
+        token,
+        filePath: file.filename,
+      });
+
+      if (isBlogPostPath(file.filename)) {
+        if (!raw) return;
+
+        const fileName = getPostFileNameFromPath(file.filename);
+        const { data, content } = matter(raw);
+
+        postsByFileName.set(fileName, {
+          slug: fileName.replace(/\.md$/u, ''),
+          fileName,
+          raw,
+          data,
+          content,
+        });
+      } else if (file.filename === BLOG_AUTHORS_DATA_PATH) {
+        ({ data: authorsData, raw: authorsRaw } = parseJsonWithRaw(raw, {}));
+      } else if (file.filename === BLOG_CATEGORIES_DATA_PATH) {
+        ({ data: categoriesData, raw: categoriesRaw } = parseJsonWithRaw(raw, []));
+      }
+    }
+  );
+
+  const posts = [...postsByFileName.values()].sort((left, right) =>
+    left.fileName.localeCompare(right.fileName)
+  );
+
+  return createSnapshot({
+    source: 'branch',
+    branch,
+    commitSha,
+    rootDir: baseSnapshot.rootDir,
+    posts,
+    authorsData,
+    authorsRaw,
+    categoriesData,
+    categoriesRaw,
+  });
 };
 
 const readBlogBranchInfoFromGitHub = async ({ owner, repo, branch, token }) => {
@@ -303,15 +393,41 @@ const readBlogBranchInfoFromGitHub = async ({ owner, repo, branch, token }) => {
   };
 };
 
-const readBlogSnapshotFromGitHubBranch = async ({ owner, repo, branch, token, postSlug = null }) => {
+const readBlogSnapshotFromGitHubBranch = async ({
+  owner,
+  repo,
+  branch,
+  token,
+  postSlug = null,
+  rootDir = process.cwd(),
+  baseBranch = 'main',
+}) => {
   const { commitSha } = await getGitHubBranchInfo({ owner, repo, branch, token });
+
+  if (!postSlug) {
+    const [baseSnapshot, changedFiles] = await Promise.all([
+      readLocalBlogSnapshot(rootDir),
+      getGitHubBranchComparison({ owner, repo, branch, token, baseBranch, headRef: commitSha }),
+    ]);
+
+    return applyGitHubBranchOverlay({
+      baseSnapshot,
+      changedFiles,
+      owner,
+      repo,
+      branch,
+      commitSha,
+      token,
+    });
+  }
+
   const [authorsResult, categoriesResult, posts] = await Promise.all([
     readJsonFromGitHub({
       owner,
       repo,
       commitSha,
       token,
-      filePath: `${BLOG_CONTENT_DIRNAME}/authors/data.json`,
+      filePath: BLOG_AUTHORS_DATA_PATH,
       fallback: {},
     }),
     readJsonFromGitHub({
@@ -319,7 +435,7 @@ const readBlogSnapshotFromGitHubBranch = async ({ owner, repo, branch, token, po
       repo,
       commitSha,
       token,
-      filePath: `${BLOG_CONTENT_DIRNAME}/categories/data.json`,
+      filePath: BLOG_CATEGORIES_DATA_PATH,
       fallback: [],
     }),
     readPostsFromGitHub({ owner, repo, branch, commitSha, token, postSlug }),
