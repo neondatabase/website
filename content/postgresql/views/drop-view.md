@@ -91,7 +91,7 @@ WHERE
   category = 'Horror';
 ```
 
-The following statement creates a view called `comedy_film` based on the `film_master` view:
+The following statement creates a view called `comedy_film` based on the `film_info` view:
 
 ```sql
 CREATE VIEW comedy_film AS
