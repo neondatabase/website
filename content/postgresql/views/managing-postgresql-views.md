@@ -67,7 +67,7 @@ Output:
 CREATE VIEW
 ```
 
-The following query data from the `contact` view:
+The following query retrieves data from the `contact` view:
 
 ```sql
 SELECT * FROM contact;
