@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -31,6 +31,10 @@ A branch is isolated from its originating data, so you are free to play around w
 Creating a branch does not increase load on the parent branch or affect it in any way, which means you can create a branch without impacting the performance of your production database.
 
 Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from the root branch or from a previously created branch.
+
+<Admonition type="tip" title="Using Neon Auth?">
+Users, sessions, and auth configuration in the `neon_auth` schema branch with your data, so preview and test environments get isolated authentication state. See [Neon Auth](/docs/auth/overview) and [Branching authentication](/docs/auth/branching-authentication).
+</Admonition>
 
 ## Branching workflows
 

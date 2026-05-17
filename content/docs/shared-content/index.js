@@ -18,6 +18,8 @@ const sharedMdxComponents = {
   PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
   EarlyAccessProps: 'shared-content/early-access-props',
   AgentSkillsTip: 'shared-content/agent-skills-tip',
+  AuthAISetup: 'shared-content/auth-ai-setup',
+  AuthAISetupTip: 'shared-content/auth-ai-setup-tip',
   AzureRegionsDeprecation: 'shared-content/azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'shared-content/consumption-account-api-deprecation',
   NextjsProxyNote: 'shared-content/nextjs-proxy-note',

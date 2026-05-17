@@ -71,6 +71,8 @@ const SHARED_CONTENT_COMPONENTS = {
   AzureRegionsDeprecation: 'azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'consumption-account-api-deprecation',
   NextjsProxyNote: 'nextjs-proxy-note',
+  AuthAISetup: 'auth-ai-setup',
+  AuthAISetupTip: 'auth-ai-setup-tip',
 };
 
 /**

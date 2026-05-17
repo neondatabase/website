@@ -6,7 +6,7 @@ summary: >-
   workflows, including automation with APIs, CLI, and CI/CD tools for efficient
   branch management and preview deployments.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -24,6 +24,8 @@ Learn about branching and how you can apply it in your development workflows.
 <a href="/docs/guides/branch-archiving" description="Learn how Neon automatically archives inactive branches to cost-effective storage" icon="split-branch">Branch archiving</a>
 
 <a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
+
+<a href="/docs/auth/branching-authentication" description="Test sign-in, OAuth, and permissions in isolated branches without touching production" icon="lock-landscape">Branching authentication</a>
 
 </DetailIconCards>
 

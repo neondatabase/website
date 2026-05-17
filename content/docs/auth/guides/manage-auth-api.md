@@ -8,12 +8,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-05-13T12:43:58.316Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-You can manage Neon Auth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started).
+You can manage Neon Auth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started). You can also enable and configure Neon Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
 
 <Admonition type="note">
 Neon Auth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.

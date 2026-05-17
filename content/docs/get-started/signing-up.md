@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-04-06T14:16:24.000Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <InfoBlock>
@@ -378,5 +378,9 @@ Make sure that your development team is always working from the latest schema an
 - **Working with sensitive data?** Neon supports [schema-only branching](/docs/guides/branching-schema-only) to create branches with just the database structure, without copying production data.
 - **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period, perfect for temporary test branches or time-limited preview environments.
 </Admonition>
+
+## What's next
+
+Building an app with users? [Set up Neon Auth](/docs/auth/overview) for managed sign-up, sessions, and OAuth. Identity lives in Postgres and branches with your data, so you can test full login flows on preview branches without touching production.
 
 <NeedHelp/>

@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -489,6 +489,7 @@ For the complete list of methods and detailed examples, see the [Neon TypeScript
 
 ## Next steps
 
+- [Set up Neon Auth](/docs/auth/overview): Managed authentication with JWTs that work natively with the Data API and Row Level Security
 - [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
 - [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
