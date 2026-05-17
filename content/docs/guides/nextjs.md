@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -427,5 +427,9 @@ PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+
 ### Where to upload and serve files?
 
 Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend using dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
 
 <NeedHelp/>

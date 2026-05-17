@@ -7,15 +7,11 @@ summary: >-
   application using Auth.js with Neon Postgres as the database backend and
   Resend for sending magic link emails.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.119Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
-<Admonition type="note">
-Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
-</Admonition>
-
-<Admonition type="tip" title="Did you know?">
-We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
+<Admonition type="tip" title="Authentication on Neon">
+This guide uses the [Neon Adapter](https://authjs.dev/getting-started/adapters/neon) for Auth.js to store users and sessions in your database. If you prefer a managed option with no separate auth infrastructure, see [Neon Auth](/docs/auth/overview). Auth state branches with your database for preview and CI environments.
 </Admonition>
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (for example, Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.

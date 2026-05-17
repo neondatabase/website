@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -267,5 +267,9 @@ You can find the source code for the applications described in this guide on Git
 
 <a href="https://github.com/neondatabase/examples/tree/main/with-tanstack-start-static-server-functions" description="Get started with TanStack Start Static Server Functions and Neon" icon="github">Get started with TanStack Start Static Server Functions and Neon</a>
 </DetailIconCards>
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/quick-start/tanstack-router): Add managed authentication that branches with your database
 
 <NeedHelp/>

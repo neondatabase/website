@@ -6,20 +6,13 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
-
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetupTip />
 
 <TwoColumnLayout>
 

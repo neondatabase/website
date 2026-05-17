@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-05-13T12:49:16.911Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 ## Supported actions (tools)
@@ -45,6 +45,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `complete_query_tuning`: Finalizes query tuning by either applying optimizations to the main branch or discarding them. Cleans up the temporary tuning branch.
 
 **Neon Auth:**
+
+To set up Neon Auth in your application code, use [Agent Skills](/docs/ai/agent-skills) after running `npx neonctl@latest init`. See [Set up Neon Auth with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
 
 - `provision_neon_auth`: Provisions [Neon Auth](/docs/auth/overview) for a project's branch so you can add authentication to your app without standing up a separate auth service. If Neon Auth is already provisioned, this returns the existing configuration instead of erroring.
 - `get_neon_auth_config`: Returns the Neon Auth configuration for a branch, including the auth `base_url`, `jwks_url`, trusted origins, allowed auth methods (for example email and password), configured OAuth providers, and email provider settings. Secrets such as OAuth client secrets and SMTP passwords are redacted.

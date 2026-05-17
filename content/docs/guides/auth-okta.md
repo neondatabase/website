@@ -7,11 +7,11 @@ summary: >-
   application using Okta, including project setup, database connection, schema
   definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
-<Admonition type="note">
-Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+<Admonition type="tip" title="Building on Neon?">
+Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Identity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.

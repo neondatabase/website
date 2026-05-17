@@ -6,7 +6,7 @@ summary: >-
   integrates with your Neon database, allowing for branch-aware authentication
   and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -40,14 +40,9 @@ Choose your framework to get started:
 
 </TechCards>
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+## Set up with your AI editor
 
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetup />
 
 ## Why Neon Auth?
 
@@ -86,7 +81,7 @@ As Neon Auth evolves, more Better Auth integrations and features will be added. 
 
 ## Basic usage
 
-Enable Auth in your Neon project, then add authentication to your app.
+Enable Auth in the Neon Console or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
 
 **For Next.js (server-side):**
 

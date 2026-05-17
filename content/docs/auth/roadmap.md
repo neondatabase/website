@@ -6,7 +6,7 @@ summary: >-
   frameworks, authentication methods, Better Auth plugins, platform features,
   SDK references, and migration guides.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -65,11 +65,12 @@ See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth config
 
 These capabilities are documented in Neon Auth guides but are not Better Auth plugins you enable through the SDK.
 
-| Capability                           | Status    | Documentation                                                    |
-| ------------------------------------ | --------- | ---------------------------------------------------------------- |
-| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains) |
-| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                           |
-| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api) |
+| Capability                           | Status    | Documentation                                                                |
+| ------------------------------------ | --------- | ---------------------------------------------------------------------------- |
+| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains)             |
+| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                                       |
+| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api)             |
+| Manage Auth via Neon MCP (AI editor) | Supported | [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor) |
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
 
