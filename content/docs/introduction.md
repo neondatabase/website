@@ -9,7 +9,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-17T10:13:12.126Z'
+updatedOn: '2026-05-17T10:17:43.045Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
@@ -114,15 +114,17 @@ Step-by-step guides for frameworks, languages, and ORMs to connect your applicat
 
 <a href="/docs/connect/connect-intro" description="Connect from any application" icon="audio-jack">Connect</a>
 
-<a href="/docs/import/import-intro" description="Migrate your data to Neon" icon="import">Import data</a>
-
-<a href="/docs/ai/ai-intro" description="Build AI apps with pgvector" icon="openai">AI & embeddings</a>
-
-<a href="/docs/auth/overview" description="Managed authentication that branches with your database" icon="lock-landscape">Neon Auth</a>
+<a href="/docs/manage/platform" description="Manage projects, branches, and endpoints in the console" icon="gear">Manage</a>
 
 <a href="/docs/guides/branching-intro" description="Optimize development workflows" icon="split-branch">Branching</a>
 
+<a href="/docs/import/import-intro" description="Migrate your data to Neon" icon="import">Import data</a>
+
 <a href="/docs/extensions/pg-extensions" description="Extend Postgres capabilities" icon="app-store">Extensions</a>
+
+<a href="/docs/auth/overview" description="Managed authentication that branches with your database" icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/ai/ai-intro" description="Build AI apps with pgvector" icon="openai">AI & embeddings</a>
 
 <a href="/docs/reference/neon-cli" description="Manage from the terminal" icon="transactions">Neon CLI</a>
 
