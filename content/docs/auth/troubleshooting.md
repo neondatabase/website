@@ -6,7 +6,7 @@ summary: >-
   OAuth redirect URIs, trusted domains, environment configuration, adapter
   setup, CSS imports, and framework-specific requirements.
 enableTableOfContents: true
-updatedOn: '2026-05-17T19:42:11.654Z'
+updatedOn: '2026-05-17T20:19:55.872Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
@@ -38,7 +38,7 @@ This is required because `getSession()` reads cookies, which are only available 
 
 ## Neon Auth server logging in the terminal
 
-After upgrading `@neondatabase/auth`, you may see structured **`warn`** or **`error`** lines in the Next.js server console when the auth proxy cannot reach Neon Auth or when session cookies fail validation. This is expected: the SDK defaults to **`logLevel: 'warn'`** (opt-out).
+You may see structured **`warn`** or **`error`** lines in the Next.js server console when the auth proxy cannot reach Neon Auth or when session cookies fail validation. This is expected: the SDK defaults to **`logLevel: 'warn'`** (opt-out).
 
 To mute Neon Auth console output:
 
@@ -64,7 +64,7 @@ See [Upstream fetch errors](/docs/auth/reference/nextjs-server#upstream-fetch-er
 
 ## Cookies blocked in iframe or cross-site embeds
 
-Neon Auth cookies default to **`SameSite=Strict`**. If your app runs inside another site's **iframe**, or you relied on the previous Lax behavior, sessions may not persist.
+Neon Auth cookies default to **`SameSite=Strict`**. If your app runs inside another site's **iframe**, or needs cookies on top-level cross-site navigations, sessions may not persist.
 
 Set an explicit SameSite mode when creating the auth instance:
 

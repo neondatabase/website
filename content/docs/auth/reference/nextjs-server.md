@@ -8,7 +8,7 @@ summary: >-
   management and middleware creation.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-17T19:42:11.654Z'
+updatedOn: '2026-05-17T20:19:55.872Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -849,7 +849,7 @@ When the SDK cannot reach your Neon Auth server (wrong `baseUrl`, DNS, TLS, time
 
 Client-visible messages are generic (for example, “Could not resolve authentication server hostname”). Check server logs (set `logLevel: 'debug'`) for `detail` and the raw error.
 
-**Non-transport failures** (unexpected exceptions while handling a response) are **re-thrown** so Next.js error boundaries behave as before. HTTP **4xx** upstream responses are logged at **`info`**; **5xx** at **`warn`**.
+**Non-transport failures** (unexpected exceptions while handling a response) are **re-thrown** so Next.js error boundaries still receive the original error. HTTP **4xx** upstream responses are logged at **`info`**; **5xx** at **`warn`**.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -932,7 +932,7 @@ Complete configuration options for `createNeonAuth()`:
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
 - **cookies.sessionDataTtl**: Cache TTL in seconds for the signed `session_data` cookie
 - **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
-- **cookies.sameSite**: `strict` (default), `lax`, or `none`. Use `lax` or `none` if you embed the app in a third-party iframe or need the previous Lax behavior
+- **cookies.sameSite**: `strict` (default), `lax`, or `none`. Use `lax` or `none` if you embed the app in a third-party iframe or need cookies on cross-site navigations
 - **logLevel**: `silent`, `error`, `warn`, `info`, or `debug` — see [Server logging](#server-logging)
 - **logger**: Optional custom logger; see [Server logging](#server-logging)
 
