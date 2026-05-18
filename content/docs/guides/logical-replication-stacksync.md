@@ -166,7 +166,7 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 3. Under **Jump right in, create a resource**, click **Syncs**.
 4. Enter a **Sync Name**.
 5. Click **Postgres** and select the saved connection you created in the [Create a Postgres connection in Stacksync step](#create-a-postgres-connection-in-stacksync).
-6. Click one of the apps you have created a connection for in the [(optional) Create a destination step](#optional-create-a-destination).
+6. Click one of the apps you have created a connection for in the [(optional) Create a destination step](#optional-create-a-connection-to-your-destination-in-stacksync).
 7. Click **Link Tables**.
 8. Select a table you would like to sync under **Postgres**.
 9. Select a table you would like to sync the data to under your destination.
