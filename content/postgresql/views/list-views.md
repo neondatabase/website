@@ -170,5 +170,5 @@ Output:
 ## Summary
 
 - Utilize the `\dv` command to list all views of a database using the `psql` program.
-- Use the `information_schemas.views` view to retrieve information about views.
+- Use the `information_schema.views` view to retrieve information about views.
 - Use the `pg_matviews` view to obtain the materialized views.
