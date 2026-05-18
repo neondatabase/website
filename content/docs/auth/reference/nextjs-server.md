@@ -8,7 +8,7 @@ summary: >-
   management and middleware creation.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-17T20:19:55.872Z'
+updatedOn: '2026-05-18T21:06:51.697Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -104,9 +104,9 @@ export const auth = createNeonAuth({
 <TwoColumnLayout.Item title="Server logging" id="server-logging">
 <TwoColumnLayout.Block>
 
-Neon Auth server surfaces (API proxy, middleware, and Better Auth server `fetch`) emit structured logs for upstream failures and session issues.
+Neon Auth emits structured logs from the API proxy, middleware, and Better Auth server `fetch` for upstream failures and session issues.
 
-**Defaults (opt-out):** `logLevel: 'warn'` writes **`error`** and **`warn`** to **`console`**. Set **`logLevel: 'silent'`** to disable all Neon Auth `console` output (`'silent'` ignores any custom **`logger`**). Use **`info`** or **`debug`** for more detail during local troubleshooting.
+**Defaults:** `logLevel: 'warn'` writes **`error`** and **`warn`** to **`console`**. Set **`logLevel: 'silent'`** to disable all Neon Auth `console` output (`'silent'` ignores any custom **`logger`**). Use **`info`** or **`debug`** for more detail during local troubleshooting.
 
 **Custom sink:** Pass a partial **`logger`** object with `error`, `warn`, `info`, and/or `debug` methods. Omitted methods still use `console`. Metadata may include `err` and `detail` for observability tools.
 
@@ -130,13 +130,13 @@ export const auth = createNeonAuth({
 });
 ```
 
-| <tt>logLevel</tt> | Console output  |
-| ----------------- | --------------- |
-| `silent`          | None            |
-| `error`           | `error` only    |
-| `warn` (default)  | `error`, `warn` |
-| `info`            | through `info`  |
-| `debug`           | all levels      |
+| <tt>logLevel</tt> | Console output          |
+| ----------------- | ----------------------- |
+| `silent`          | None                    |
+| `error`           | `error` only            |
+| `warn` (default)  | `error`, `warn`         |
+| `info`            | `error`, `warn`, `info` |
+| `debug`           | all levels              |
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
@@ -194,11 +194,12 @@ The middleware automatically:
 
 </details>
 
+<NextjsProxyNote/>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-```typescript
-// middleware.ts
+```typescript filename="proxy.ts"
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
@@ -964,6 +965,8 @@ Recommended file structure for Next.js with Neon Auth:
 - `lib/auth/server.ts` - Server auth instance
 - `lib/auth/client.ts` - Client auth instance
 - `proxy.ts` (Next.js 16+) or `middleware.ts` (earlier versions) - Route protection
+
+<NextjsProxyNote/>
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
