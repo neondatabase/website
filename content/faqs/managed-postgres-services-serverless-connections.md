@@ -15,12 +15,12 @@ Neon runs PgBouncer in front of every database in transaction mode, with `max_cl
 
 Each Postgres connection is a process that consumes RAM, so `max_connections` scales with compute size:
 
-| Compute size | RAM    | `max_connections` |
-| ------------ | ------ | ----------------- |
-| 0.25 CU      | 1 GB   | 104               |
-| 1 CU         | 4 GB   | 419               |
-| 4 CU         | 16 GB  | 1,678             |
-| 9 CU+        | 36 GB+ | 4,000 (capped)    |
+| Compute size | RAM     | `max_connections` |
+| ------------ | ------- | ----------------- |
+| 0.25 CU      | ≈1 GB   | 104               |
+| 1 CU         | ≈4 GB   | 419               |
+| 4 CU         | ≈16 GB  | 1,678             |
+| 9 CU+        | ≈36 GB+ | 4,000 (capped)    |
 
 Seven connections are reserved for the Neon superuser. So a 0.25 CU compute leaves 97 connections for your app, which a moderately busy serverless workload can exhaust in seconds.
 

@@ -38,7 +38,7 @@ Append `-pooler` to the compute hostname in your connection string to route thro
 
 ## Why not other Postgres providers
 
-The two things a vibe coding platform needs are fast API-driven provisioning and idle cost that's actually zero. Most managed Postgres options miss one or both.
+The two things a vibe coding platform needs are fast API-driven provisioning and idle compute that actually drops to zero. Most managed Postgres options miss one or both.
 
 - **Supabase**: provisioning is API-driven via the [Management API](https://supabase.com/docs/reference/api/v1-create-a-project), but each paid project is a dedicated VM that runs continuously and bills compute hourly (starting around $10/month per project, ref [billing docs](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)). Free-tier projects pause but only paid orgs can have more than 2 projects.
 - **Aurora Serverless v2**: supports scale-to-zero via [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) since recent engine versions, but cluster creation through CloudFormation or the RDS API takes minutes, not seconds, and resume from a paused state takes longer than from a Neon suspend.

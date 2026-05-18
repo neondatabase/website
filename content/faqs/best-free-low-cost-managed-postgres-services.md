@@ -7,7 +7,7 @@ category: FAQ
 status: draft
 ---
 
-For side projects, the most cost-effective managed Postgres is one that's free while idle and scales up only when traffic arrives. Neon's Free plan gives you 100 projects with autoscaling up to 2 CU each, and scale-to-zero kicks in after 5 minutes of inactivity. When a request hits, the compute resumes in a few hundred milliseconds.
+For side projects, the most cost-effective managed Postgres is one that doesn't bill you for compute while idle and scales up only when traffic arrives. Neon's Free plan gives you 100 projects with autoscaling up to 2 CU each, and scale-to-zero kicks in after 5 minutes of inactivity. When a request hits, the compute resumes in a few hundred milliseconds.
 
 ## What the Free plan includes
 
@@ -17,7 +17,7 @@ The Neon [Free plan](/docs/introduction/plans) is designed for prototypes and sm
 - 10 branches per project
 - 100 CU-hours per project per month
 - 0.5 GB storage per project
-- Autoscaling up to 2 CU (8 GB RAM)
+- Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes of inactivity
 - 6-hour instant restore window, up to 1 GB of change history
 - 5 GB monthly egress
@@ -31,7 +31,7 @@ When you go from no traffic to a sudden burst, two things happen automatically:
 1. The compute resumes from a suspended state. The Neon docs describe reactivation as "within a few hundred milliseconds." Your first query may see a slightly higher cold-start latency.
 2. Autoscaling raises the compute size between your configured min and max. On the Free plan, max is 2 CU. On Launch, it's up to 16 CU. See [Autoscaling](/docs/introduction/autoscaling) for the mechanics.
 
-You aren't billed for the idle hours in between. CU-hours accumulate only when your compute is actually serving queries.
+You don't accumulate CU-hours during the idle stretches in between. Compute is billed only when it's actually serving queries; storage is metered separately at $0.35/GB-month on paid plans.
 
 ## When you outgrow Free
 

@@ -53,6 +53,6 @@ If you want a reusable baseline, take a [snapshot](/docs/manage/backups) of the 
 - **Aurora PostgreSQL** supports fast database cloning at the cluster level using a copy-on-write mechanism. Clones are available in minutes (faster than RDS restore) but still create a separate cluster with its own writer/reader instances to manage and pay for.
 - **Supabase** preview branches give you an isolated database environment, but the branch starts empty: you seed it from a `seed.sql` file rather than from production data. For migration testing against real schema and row counts, you'd need a separate process to populate the branch. See [Supabase branching](https://supabase.com/docs/guides/deployment/branching).
 
-For migration testing specifically, the Neon and Aurora clone workflows are closest in shape (both are copy-on-write off production state). Neon's storage-level branching is per-branch metadata rather than a full cluster, so creation is seconds rather than minutes, and the branch costs $0 when idle.
+For migration testing specifically, the Neon and Aurora clone workflows are closest in shape (both are copy-on-write off production state). Neon's storage-level branching is per-branch metadata rather than a full cluster, so creation is seconds rather than minutes, and a branch's compute drops to $0 while suspended (storage continues to bill).
 
 <CTA title="Test migrations without risking production" description="Spin up a real copy of your data in seconds with Neon branching." buttonText="Try it" buttonUrl="https://console.neon.tech/signup" />

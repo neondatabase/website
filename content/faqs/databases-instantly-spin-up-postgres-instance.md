@@ -33,7 +33,7 @@ If you don't want to sign up at all, [Claimable Postgres](https://neon.new) give
 ## What you get on the Free plan
 
 - A primary database on the `main` branch
-- Autoscaling up to 2 CU (8 GB RAM)
+- Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes of inactivity
 - 100 CU-hours/month and 0.5 GB of storage
 - Up to 10 branches per project, 100 projects per account

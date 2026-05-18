@@ -29,7 +29,7 @@ Per-plan defaults from the [plans page](/docs/introduction/plans#scale-to-zero):
 
 When the next query arrives, the compute resumes. Cold start time is typically under a second for most workloads. If that latency matters to your application, disable scale-to-zero on a Launch or Scale plan.
 
-A bigger issue on resume is connections. Postgres caps `max_connections` based on RAM, and a 0.25 CU compute (1 GB RAM) allows 104 connections, with 7 reserved for Neon's superuser. That leaves 97 for your app, which serverless functions can exhaust during a traffic spike.
+A bigger issue on resume is connections. Postgres caps `max_connections` based on RAM, and a 0.25 CU compute (≈1 GB RAM) allows 104 connections, with 7 reserved for Neon's superuser. That leaves 97 for your app, which serverless functions can exhaust during a traffic spike.
 
 Use Neon's [PgBouncer-based connection pooling](/docs/connect/connection-pooling) to accept up to 10,000 client connections per compute, routed through the smaller pool of Postgres backends. The pooled connection string ends with `-pooler` in the hostname:
 

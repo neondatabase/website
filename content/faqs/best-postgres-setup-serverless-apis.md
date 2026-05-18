@@ -36,7 +36,7 @@ A single HTTP query takes one round trip, no connection setup, no pool to manage
 
 ## Scale to zero when traffic drops
 
-Neon compute scales to zero after 5 minutes of inactivity and wakes on the next query in a few hundred milliseconds. You pay only for active CU-hours. On the Free plan, scale-to-zero is always on. On Launch and Scale, you can disable it or tune the inactivity window. See [Scale to Zero](/docs/introduction/scale-to-zero).
+Neon compute scales to zero after 5 minutes of inactivity and wakes on the next query in a few hundred milliseconds. You pay for active CU-hours plus storage, not provisioned compute. On the Free plan, scale-to-zero is always on. On Launch and Scale, you can disable it or tune the inactivity window. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 <Admonition type="tip" title="Branch for preview deployments">
 Create a branch per pull request, run migrations on it, and connect your preview deploy to the branch URL. The [Vercel-Managed integration](/docs/guides/vercel-managed-integration) automates this for Vercel projects.

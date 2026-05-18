@@ -9,16 +9,16 @@ status: draft
 
 # Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?
 
-Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down inside a range you set, with no restarts and no plan changes. You pick a minimum and a maximum compute size; Neon scales between them based on load. Idle computes scale all the way to zero and stop billing.
+Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down inside a range you set, with no restarts and no plan changes. You pick a minimum and a maximum compute size; Neon scales between them based on load. Idle computes scale all the way to zero and stop accruing compute charges (storage continues to bill).
 
 ## How the scaling range works
 
 Each compute has a min and a max, measured in Compute Units (CU). One CU is roughly 4 GB of RAM with a matching CPU allocation. You set the range when you create or edit a compute. Some practical limits:
 
 - The max difference between min and max is 8 CU
-- Free plan computes autoscale up to 2 CU (8 GB RAM)
-- Launch autoscales up to 16 CU (64 GB RAM)
-- Scale autoscales up to 16 CU, or runs fixed sizes up to 56 CU (224 GB RAM) for steady high-load workloads
+- Free plan computes autoscale up to 2 CU (≈8 GB RAM)
+- Launch autoscales up to 16 CU (≈64 GB RAM)
+- Scale autoscales up to 16 CU, or runs fixed sizes up to 56 CU (≈224 GB RAM) for steady high-load workloads
 
 Above 16 CU, computes stay always-on; scale-to-zero is only available below that size.
 

@@ -15,7 +15,7 @@ Sign up at [console.neon.tech](https://console.neon.tech/signup), create a proje
 
 - 100 projects per account (one project per app or customer is the recommended pattern)
 - 0.5 GB of storage per project
-- 100 CU-hours/month of compute per project, autoscaling up to 2 CU (8 GB RAM)
+- 100 CU-hours/month of compute per project, autoscaling up to 2 CU (≈8 GB RAM)
 - 10 branches per project for development and previews
 - Scale to zero after 5 minutes of inactivity, so idle prototypes don't burn through the allowance
 
@@ -56,7 +56,7 @@ For serverless platforms like Vercel or Cloudflare Workers, use the [pooled conn
 
 ## Why this works for early-stage teams
 
-You can start a project, push to production, and add a database branch for each PR review without thinking about infrastructure. When traffic grows, autoscaling adjusts compute between your set min and max. When traffic stops, the compute suspends and the bill goes with it.
+You can start a project, push to production, and add a database branch for each PR review without thinking about infrastructure. When traffic grows, autoscaling adjusts compute between your set min and max. When traffic stops, the compute suspends and CU-hours stop accruing; you continue to pay for storage.
 
 ## How it compares for startups
 

@@ -9,11 +9,11 @@ status: draft
 
 ## Short answer
 
-Neon bills Postgres compute in Compute Unit hours (CU-hours), metered continuously while a database is active. When there's no traffic, the compute suspends and you pay nothing for it. Storage is billed separately by the GB-month. There's no fixed monthly fee on the Launch or Scale plans.
+Neon bills Postgres compute in Compute Unit hours (CU-hours), metered continuously while a database is active. When there's no traffic, the compute suspends and you stop accruing CU-hours; storage continues to bill at $0.35/GB-month. There's no fixed monthly fee on the Launch or Scale plans.
 
 ## How CU-hour billing works
 
-One Compute Unit (CU) is about 4 GB of RAM plus proportional CPU and SSD. A CU-hour is the compute size multiplied by the time it ran:
+One Compute Unit (CU) is approximately 4 GB of RAM plus proportional CPU and SSD. A CU-hour is the compute size multiplied by the time it ran:
 
 ```text
 compute size (CU) × hours running = CU-hours

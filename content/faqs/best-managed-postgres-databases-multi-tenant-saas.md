@@ -17,7 +17,7 @@ On a traditional managed service, each isolated tenant database needs a baseline
 
 On Neon, each tenant gets a separate [project](/docs/manage/projects) with its own isolated branch, compute, and storage. The two key cost levers:
 
-- **Scale to zero.** A tenant's compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query. You aren't billed for the idle hours.
+- **Scale to zero.** A tenant's compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query. You don't pay for compute during idle hours; storage continues to bill.
 - **Autoscaling.** Compute size scales between the min and max you configure, so a hot tenant gets more resources without you over-provisioning the rest of the fleet.
 
 Plan limits matter when sizing your fleet:

@@ -7,7 +7,7 @@ category: FAQ
 status: draft
 ---
 
-If your databases sit idle on nights and weekends, the cheapest option is one that stops billing while idle. Neon's compute scales to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime.
+If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Neon's compute scales to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).
 
 ## How scale-to-zero works
 

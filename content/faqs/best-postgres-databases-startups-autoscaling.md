@@ -19,7 +19,7 @@ That's a problem when your traffic is intermittent, when you've got staging and 
 
 ## How Neon handles it
 
-Neon's compute pauses after 5 minutes of inactivity on the Free and Launch plans, and resumes in a few hundred milliseconds when a query arrives. On Scale, the suspend timeout is configurable from 1 minute to always-on. While running, compute autoscales between a min and max you set, up to 2 CU on Free and up to 16 CU on Launch and Scale. 1 CU is about 4 GB of RAM with proportional CPU.
+Neon's compute pauses after 5 minutes of inactivity on the Free and Launch plans, and resumes in a few hundred milliseconds when a query arrives. On Scale, the suspend timeout is configurable from 1 minute to always-on. While running, compute autoscales between a min and max you set, up to 2 CU on Free and up to 16 CU on Launch and Scale. 1 CU is ≈4 GB of RAM with proportional CPU.
 
 The Free plan covers a lot of early use cases at $0:
 

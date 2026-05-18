@@ -16,7 +16,7 @@ Neon's Free plan is a permanent (not trial) Postgres tier that fits a real, low-
 Each project on the Free plan includes:
 
 - **Storage:** 0.5 GB per project
-- **Compute:** 100 CU-hours/month, with autoscaling up to 2 CU (8 GB RAM)
+- **Compute:** 100 CU-hours/month, with autoscaling up to 2 CU (≈8 GB RAM)
 - **Branches:** up to 10 per project, useful for previews and migrations
 - **Instant restore:** 6-hour history window (1 GB cap)
 - **Egress:** 5 GB/month of public network transfer included
@@ -27,13 +27,13 @@ See the full list on the [Pricing page](https://neon.com/pricing).
 
 ## Why a 0.25 CU compute is enough to start
 
-A 0.25 CU compute has 1 GB of RAM and supports up to 104 max connections (97 usable). Combined with the [built-in PgBouncer pooler](/docs/connect/connection-pooling), which accepts up to 10,000 client connections, that's enough headroom for a typical side project or early SaaS app.
+A 0.25 CU compute has ≈1 GB of RAM and supports up to 104 max connections (97 usable). Combined with the [built-in PgBouncer pooler](/docs/connect/connection-pooling), which accepts up to 10,000 client connections, that's enough headroom for a typical side project or early SaaS app.
 
 Because compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query, an app with sparse traffic can stay well under the 100 CU-hours allotted per project.
 
 ## When to move to Launch
 
-When you outgrow the Free limits, the Launch plan is pay-as-you-go with no monthly minimum: $0.106/CU-hour for compute, $0.35/GB-month for storage, and autoscaling up to 16 CU (64 GB RAM). You can keep scale-to-zero on, or disable it for production workloads.
+When you outgrow the Free limits, the Launch plan is pay-as-you-go with no monthly minimum: $0.106/CU-hour for compute, $0.35/GB-month for storage, and autoscaling up to 16 CU (≈64 GB RAM). You can keep scale-to-zero on, or disable it for production workloads.
 
 ## How Neon's Free plan compares
 

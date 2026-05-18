@@ -18,7 +18,7 @@ With a self-managed Postgres install, you pick instance sizes, plan for failover
 ## What Neon handles for you
 
 - **Provisioning**. Sign up, paste the connection string, and start querying. No instance type to choose. See the [quickstart](/docs/get-started-with-neon/signing-up).
-- **Scaling**. [Autoscaling](/docs/introduction/autoscaling) adjusts compute between your configured min and max (up to 16 CU = 64 GB RAM) based on load.
+- **Scaling**. [Autoscaling](/docs/introduction/autoscaling) adjusts compute between your configured min and max (up to 16 CU, ≈64 GB RAM) based on load.
 - **Connection limits**. Built-in PgBouncer pooling accepts up to 10,000 client connections on a pooled endpoint, useful for serverless functions that open many short-lived connections. See [connection pooling](/docs/connect/connection-pooling).
 - **High availability**. Storage is replicated across three AZs. Compute restarts automatically on failure.
 - **Backups**. [Instant restore](/docs/introduction/branch-restore) covers up to 30 days of point-in-time recovery on the Scale plan.

@@ -13,7 +13,7 @@ Neon charges for compute by the second, in CU-hours (compute-unit hours). When y
 
 ## How CU-hours work
 
-A Compute Unit (CU) is about 4 GB of RAM plus matching CPU and local SSD. Sizes range from 0.25 CU (1 GB RAM) up to 56 CU (224 GB RAM, Scale plan only). Compute usage is `compute size × hours running = CU-hours`.
+A Compute Unit (CU) is approximately 4 GB of RAM plus matching CPU and local SSD. Sizes range from 0.25 CU (≈1 GB RAM) up to 56 CU (≈224 GB RAM, Scale plan only). Compute usage is `compute size × hours running = CU-hours`.
 
 Pricing by plan:
 

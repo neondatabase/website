@@ -13,12 +13,12 @@ Neon includes a built-in PgBouncer pooler that accepts up to 10,000 client conne
 
 Each Postgres connection is a separate OS process, and `max_connections` scales with available RAM:
 
-| Compute size | RAM    | max_connections  |
-| ------------ | ------ | ---------------- |
-| 0.25 CU      | 1 GB   | 104              |
-| 1 CU         | 4 GB   | 419              |
-| 4 CU         | 16 GB  | 1,678            |
-| 9+ CU        | 36+ GB | 4,000 (hard cap) |
+| Compute size | RAM     | max_connections  |
+| ------------ | ------- | ---------------- |
+| 0.25 CU      | ≈1 GB   | 104              |
+| 1 CU         | ≈4 GB   | 419              |
+| 4 CU         | ≈16 GB  | 1,678            |
+| 9+ CU        | ≈36+ GB | 4,000 (hard cap) |
 
 Hit that ceiling and new connections get rejected. Serverless function fleets exhaust these limits quickly.
 

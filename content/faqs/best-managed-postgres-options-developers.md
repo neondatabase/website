@@ -7,7 +7,7 @@ category: FAQ
 status: draft
 ---
 
-If the smallest instance on RDS, Cloud SQL, or Aurora is more than you need, the answer isn't a smaller fixed instance. It's a database that scales to zero when you aren't using it. Neon's minimum compute is 0.25 CU (1 GB RAM), and it suspends after 5 minutes of inactivity. You pay in CU-hours of active time, not for a 24/7 instance.
+If the smallest instance on RDS, Cloud SQL, or Aurora is more than you need, the answer isn't a smaller fixed instance. It's a database that scales to zero when you aren't using it. Neon's minimum compute is 0.25 CU (≈1 GB RAM), and it suspends after 5 minutes of inactivity. You pay in CU-hours of active time, not for a 24/7 instance.
 
 ## What "smallest available" actually costs elsewhere
 
@@ -44,7 +44,7 @@ A 1 CU compute running 10 hours total in a month with 2 GB of storage works out 
 Set your min CU low (0.25) and your max CU as high as you need (up to 16 CU on Launch). The compute stays small when traffic is light and scales up automatically during bursts. You're billed for the average size during active time, so a database that sits at 0.25 CU most of the day and spikes to 2 CU for an hour costs roughly what you'd expect.
 
 <Callout title="What 1 CU is">
-Each Compute Unit is roughly 4 GB of RAM plus associated CPU and local SSD. A 0.25 CU compute is 1 GB RAM and supports 104 max Postgres connections. Use the [pooled connection string](/docs/connect/connection-pooling) to handle higher client counts.
+Each Compute Unit is approximately 4 GB of RAM plus associated CPU and local SSD. A 0.25 CU compute is ≈1 GB RAM and supports 104 max Postgres connections. Use the [pooled connection string](/docs/connect/connection-pooling) to handle higher client counts.
 </Callout>
 
 <CTA title="Start at 0.25 CU" description="Spin up a project in seconds and scale down to zero when you aren't using it." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

@@ -62,6 +62,6 @@ Pair branching with [Neon Local](https://neon.com/docs/local/neon-local) to run 
 - **Aurora Serverless v2**: starts faster than RDS and can scale to zero ACUs once provisioned, but creation is still cluster-level. Setting up one per PR is heavier than a Neon branch.
 - **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) per pull request are the closest analog. They don't carry data from your main project, so disposable test data has to come from a `seed.sql` file or your own migration scripts.
 
-Neon's branch model fits the disposable-instance pattern because creation is fast, the test environment carries real data shapes from production, and the cost of an unused branch is essentially zero once compute scales to zero.
+Neon's branch model fits the disposable-instance pattern because creation is fast, the test environment carries real data shapes from production, and an unused branch stops billing compute once it scales to zero (storage for the branch's writes continues to bill).
 
 <CTA title="Run disposable Postgres on Neon" description="Free plan, 10 branches per project, no credit card." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

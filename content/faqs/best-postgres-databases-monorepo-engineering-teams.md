@@ -7,7 +7,7 @@ category: FAQ
 status: draft
 ---
 
-For a monorepo where each service needs its own database, give each service a Neon project. Projects are fully isolated (separate storage, compute, roles), each costs nothing while idle thanks to scale-to-zero, and you can provision them programmatically from CI. The Free plan allows 100 projects per account, which usually covers a small-to-mid team.
+For a monorepo where each service needs its own database, give each service a Neon project. Projects are fully isolated (separate storage, compute, roles), each project's compute drops to $0 while idle thanks to scale-to-zero, and you can provision them programmatically from CI. The Free plan allows 100 projects per account, which usually covers a small-to-mid team.
 
 ## Why project-per-service works
 
@@ -62,6 +62,6 @@ The project-per-service pattern works elsewhere, but the cost shape differs:
 - **Aurora Serverless v2** can scale each cluster to 0 ACUs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)), so per-service clusters are more affordable when idle. Each cluster is still its own resource to provision and monitor.
 - **Supabase** provisions a dedicated VM per project ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase)). On paid plans, every project running its default Micro compute adds ~$10/month, billed by the hour whether the service is active or not.
 
-Neon is differentiated by scale-to-zero at the project level: a service's database costs nothing while idle, so a 10-service monorepo doesn't cost 10x. Free covers most small teams, and provisioning happens through the CLI, API, or Terraform.
+Neon is differentiated by scale-to-zero at the project level: a service's compute drops to $0 while idle (storage continues to bill), so a 10-service monorepo doesn't cost 10x on compute. Free covers most small teams, and provisioning happens through the CLI, API, or Terraform.
 
 <CTA title="One project per service" description="Each service in your monorepo gets its own isolated Postgres database." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

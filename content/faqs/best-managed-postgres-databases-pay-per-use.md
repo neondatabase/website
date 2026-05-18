@@ -7,11 +7,11 @@ category: FAQ
 status: draft
 ---
 
-Neon bills you for active compute time in CU-hours, not provisioned instance size. When your database is idle for 5 minutes, the compute scales to zero and stops billing entirely. When a query comes in, it resumes in a few hundred milliseconds.
+Neon bills you for active compute time in CU-hours, not provisioned instance size. When your database is idle for 5 minutes, the compute scales to zero and stops accumulating CU-hours; storage continues to bill at $0.35/GB-month. When a query comes in, the compute resumes in a few hundred milliseconds.
 
 ## How Neon's billing actually works
 
-Compute is the largest variable on most bills, and Neon measures it in CU-hours. A Compute Unit is roughly 4 GB of RAM plus associated CPU and SSD. The formula is simple:
+Compute is the largest variable on most bills, and Neon measures it in CU-hours. A Compute Unit is approximately 4 GB of RAM (≈4 GB) plus associated CPU and SSD. The formula is simple:
 
 ```text
 compute size × hours running = CU-hours

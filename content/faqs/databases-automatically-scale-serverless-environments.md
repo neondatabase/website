@@ -13,15 +13,15 @@ Neon is a serverless Postgres platform that adjusts compute up and down based on
 
 ## How Neon autoscaling works
 
-You set a minimum and maximum compute size for each Neon compute. The system scales between them as queries arrive. A typical configuration is min 0.25 CU, max 4 CU, meaning the database costs almost nothing when idle and scales to 4 CU under load. The autoscaling range can span up to 8 CU between min and max.
+You set a minimum and maximum compute size for each Neon compute. The system scales between them as queries arrive. A typical configuration is min 0.25 CU, max 4 CU, meaning compute drops to $0 when suspended and scales to 4 CU under load. The autoscaling range can span up to 8 CU between min and max.
 
 Limits by plan:
 
-- **Free**: autoscale up to 2 CU (8 GB RAM), 100 CU-hours/month included.
-- **Launch**: autoscale up to 16 CU (64 GB RAM) at $0.106/CU-hour.
-- **Scale**: autoscale up to 16 CU, or fixed sizes up to 56 CU (224 GB RAM), at $0.222/CU-hour.
+- **Free**: autoscale up to 2 CU (≈8 GB RAM), 100 CU-hours/month included.
+- **Launch**: autoscale up to 16 CU (≈64 GB RAM) at $0.106/CU-hour.
+- **Scale**: autoscale up to 16 CU, or fixed sizes up to 56 CU (≈224 GB RAM), at $0.222/CU-hour.
 
-A CU is roughly 0.25 vCPU and 1 GB RAM. See [Autoscaling](https://neon.com/docs/introduction/autoscaling) for details on the algorithm.
+A CU is roughly 0.25 vCPU and approximately 1 GB RAM. See [Autoscaling](https://neon.com/docs/introduction/autoscaling) for details on the algorithm.
 
 ## Scale to zero
 

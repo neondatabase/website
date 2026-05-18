@@ -11,7 +11,7 @@ status: draft
 
 ## Short answer
 
-Neon gives each Git feature branch its own Postgres branch. Each branch is a writable copy of the parent at a point in time, with a separate compute and connection string. Storage is copy-on-write, so a new branch starts free and only bills for data you change.
+Neon gives each Git feature branch its own Postgres branch. Each branch is a writable copy of the parent at a point in time, with a separate compute and connection string. Storage is copy-on-write, so a new branch adds no storage at creation and only bills for the pages you change.
 
 ## Why per-branch databases
 
