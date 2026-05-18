@@ -9,14 +9,14 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-17T10:17:43.045Z'
+updatedOn: '2026-05-18T10:02:01.192Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
 <CTA
-  title="Set up Neon in one command"
-  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more<svg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg' style='display:inline-block;vertical-align:middle;margin-left:8px' aria-hidden='true'><path d='M11.1084 10.9211L14.9999 7.02965L11.1084 3.13816' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/><path d='M0.938093 7.03198L13.666 7.03198' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/></svg></a>"
+  title="Install Neon MCP and skills"
+  description="One command to set up MCP and skills to get started with Neon."
   command="npx neonctl@latest init"
   buttonText="Sign up"
   trackingLabel="Copy neonctl init - docs intro"
