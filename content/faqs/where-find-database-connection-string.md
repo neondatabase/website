@@ -3,7 +3,7 @@ title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
 subtitle: 'Project Dashboard → Connect. Pick branch, database, and role; copy the string for your framework.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -30,11 +30,11 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.
 
 The pieces:
 
-- `alex` — the role
-- `AbC123dEf` — the role's password
-- `ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech` — the compute hostname (the `-pooler` suffix appears on pooled strings)
-- `dbname` — the database name
-- `sslmode=require&channel_binding=require` — required SSL settings
+- `alex`: the role
+- `AbC123dEf`: the role's password
+- `ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech`: the compute hostname (the `-pooler` suffix appears on pooled strings)
+- `dbname`: the database name
+- `sslmode=require&channel_binding=require`: required SSL settings
 
 See [Connect from any application](/docs/connect/connect-from-any-app) for the full breakdown.
 
@@ -54,10 +54,10 @@ If you want the connection string from the terminal:
 neon connection-string
 ```
 
-Add `--branch <branch>`, `--database-name <db>`, or `--role-name <role>` to specify a different target than the default. See [`neon connection-string`](/docs/reference/cli-connection-string).
+Pass the branch name as a positional argument, and use `--database-name <db>`, `--role-name <role>`, or `--pooled` to control the output. See [`neon connection-string`](/docs/reference/cli-connection-string).
 
 <Admonition type="tip" title="Save it to a password manager">
 The Console's modal has a **Save in 1Password** button if you have the 1Password browser extension installed. It pushes the connection details straight into a new 1Password item so you don't have to copy-paste into the secret manager separately.
 </Admonition>
 
-<CTA title="Need a pooled vs unpooled connection?" description="Use the pooler for serverless and high-concurrency workloads. Use the direct string for migrations, replication, and Prisma Migrate." buttonText="Connection pooling guide" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="Need a pooled vs unpooled connection?" description="Use the pooler for serverless and high-concurrency workloads. Use the direct string for migrations, replication, and Prisma Migrate." buttonText="Connection pooling guide" buttonUrl="/docs/connect/connection-pooling" />

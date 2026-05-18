@@ -3,7 +3,7 @@ title: 'How do I rotate all my Neon database credentials and connection strings 
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -26,7 +26,7 @@ Work through this list once per affected project. For a team with multiple proje
 
 ## Script the password resets
 
-The fastest way to rotate many roles across many projects is to loop through them with the [Neon API](/docs/manage/api-keys). The reset password endpoint returns the new password in the response.
+The fastest way to rotate many roles across many projects is to loop through them with the [Neon API](/docs/manage/roles#manage-roles-with-the-neon-api). The reset password endpoint returns the new password in the response. You'll need a Neon API key to make these calls.
 
 ```bash shouldWrap
 # Reset a role password and capture the new value

@@ -3,7 +3,7 @@ title: 'Where can I find my database connection string in Neon?'
 subtitle: 'Copy it from the Connect widget on your Project Dashboard, with options for pooled or direct.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -23,7 +23,7 @@ A Neon connection string includes the role, password, hostname, and database nam
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-The pooled hostname has a `-pooler` suffix. Use pooled for serverless and high-concurrency clients, direct for migrations, `pg_dump`, and `LISTEN/NOTIFY`. See [Connection pooling](/docs/connect/connection-pooling) for the full breakdown.
+The pooled hostname has a `-pooler` suffix. Use pooled for serverless and high-concurrency clients (Neon's pooler supports up to 10,000 concurrent connections per compute). Use direct for migrations, `pg_dump`, and `LISTEN/NOTIFY`. See [Connection pooling](/docs/connect/connection-pooling) for the full breakdown.
 
 ## Reset or regenerate the credentials in the string
 
@@ -56,10 +56,10 @@ The response includes the new password. See [Reset a password with the API](/doc
 To set a password value of your choosing, connect via the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) or psql and run:
 
 ```sql
-ALTER ROLE alex WITH PASSWORD 'new_password_value';
+ALTER USER alex WITH PASSWORD 'new_password_value';
 ```
 
-Passwords need at least 60 bits of entropy. See [password guidelines](/docs/manage/roles#manage-roles-with-sql).
+Passwords need a minimum entropy of 60 bits. See [password guidelines](/docs/manage/roles#manage-roles-with-sql).
 
 </TabItem>
 

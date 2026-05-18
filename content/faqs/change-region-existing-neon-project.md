@@ -3,7 +3,7 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -24,7 +24,7 @@ From the CLI:
 neon projects create --name myproject-us-east-1 --region-id aws-us-east-1
 ```
 
-Supported AWS region IDs include `aws-us-east-1`, `aws-us-east-2`, `aws-us-west-2`, `aws-eu-central-1`, `aws-ap-southeast-1`, and `aws-ap-southeast-2`. See [`neon projects create`](/docs/reference/cli-projects#create).
+For the full list of supported region IDs (AWS and Azure), see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/reference/cli-projects#create).
 
 ### 2. Dump the source database
 
@@ -58,6 +58,6 @@ Writes to the source database during the dump and restore won't appear in the ne
 
 ## What about data transfer costs?
 
-Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB of monthly transfer, which is usually enough for a one-off migration.
+Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB per project per month, which is usually enough for a one-off migration.
 
 <CTA title="Compare migration paths" description="The region migration guide compares the Import Data Assistant, dump and restore, and logical replication." buttonText="Region migration guide" buttonUrl="https://neon.com/docs/import/migrate-neon-to-another-region" />

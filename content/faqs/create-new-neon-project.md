@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -50,7 +50,7 @@ Add `--org-id` to target a specific organization. The output includes the new pr
 Every new project comes with:
 
 - A root branch (named `production` in the Console, `main` via API and CLI)
-- A primary read-write compute, autoscaling between 0.25 CU and 0.25 CU by default (≈1 GB RAM)
+- A primary read-write compute, defaulting to 0.25 CU (≈1 GB RAM)
 - A database (`neondb` by default)
 - A role named after the database (for example, `neondb_owner`)
 
@@ -68,7 +68,7 @@ The most common reason a project creation fails is hitting your plan's project l
 
 If you're at the limit:
 
-- Delete unused projects from **Settings** > **Delete** in the Console. (On Scale, deleted projects can be recovered within 7 days via the [CLI](/docs/manage/projects#recover-a-deleted-project).)
+- Delete unused projects from **Settings** > **Delete** in the Console. Deleted projects can be recovered within 7 days via the [API or CLI](/docs/manage/projects#recover-a-deleted-project).
 - Or upgrade to Scale for the higher limit.
 
 Other reasons creation can fail:

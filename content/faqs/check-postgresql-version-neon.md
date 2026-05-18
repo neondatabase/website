@@ -3,12 +3,12 @@ title: 'How do I check which PostgreSQL version my Neon database is running?'
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
 
-Every Neon project is tied to a specific Postgres major version that you picked at project creation. To check which one you're on, run `SELECT version();` from any SQL client, or read it from the **Settings** widget on the **Project Dashboard** in the [Neon Console](https://console.neon.tech). The CLI command `neon projects get` shows the same value. Neon supports Postgres 14, 15, 16, and 17. See [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade) for details.
+Every Neon project is tied to a specific Postgres major version that you picked at project creation. To check which one you're on, run `SELECT version();` from any SQL client, or read it from the **Settings** widget on the **Project Dashboard** in the [Neon Console](https://console.neon.tech). The CLI command `neon projects get` shows the same value. Neon supports Postgres 14, 15, 16, 17, and 18. See [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade) for details.
 
 ## Three ways to check
 
@@ -45,7 +45,7 @@ The first number is the major version. The second is the minor version, which Ne
 With [neonctl](/docs/reference/neon-cli) installed and authenticated:
 
 ```bash
-neon projects get --project-id <project_id>
+neon projects get <project_id>
 ```
 
 The output includes a `pg_version` field with the major version your project is running.
@@ -58,7 +58,7 @@ The output includes a `pg_version` field with the major version your project is 
 
 Neon manages **minor** version upgrades for you under the [Postgres version support policy](/docs/postgresql/postgres-version-policy). Minor versions are deployed soon after release and typically don't require any action on your part.
 
-**Major** versions (14 to 15, 16 to 17, and so on) are not upgraded automatically because they can introduce incompatibilities. You upgrade by creating a new Neon project with the target major version and migrating your data with the [Import Data Assistant](/docs/import/import-data-assistant), `pg_dump` / `pg_restore`, or [logical replication](/docs/guides/logical-replication-neon-to-neon).
+**Major** versions (16 to 17, 17 to 18, and so on) are not upgraded automatically because they can introduce incompatibilities. You upgrade by creating a new Neon project with the target major version and migrating your data with the [Import Data Assistant](/docs/import/import-data-assistant), `pg_dump` / `pg_restore`, or [logical replication](/docs/guides/logical-replication-neon-to-neon).
 
 <Admonition type="warning" title="Major versions cannot be downgraded">
 Once a Neon project is created with a given major version, you cannot move it backward. You also can't change the major version on an existing project. To run a different major version, create a new project and migrate. Pick carefully if you have strict compatibility requirements.

@@ -3,7 +3,7 @@ title: 'How do I create a new database in my Neon project?'
 subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -69,7 +69,7 @@ Most standard [CREATE DATABASE parameters](https://www.postgresql.org/docs/curre
 - The new database lives on the branch you created it in. If you create a child branch later, this database is copied to the child too.
 - The role you picked owns the database and has `CREATE` on its `public` schema. Other roles need an explicit `GRANT CREATE ON SCHEMA public TO <role>;` to create objects there (Postgres 15 and up).
 - Reserved names (`postgres`, `template0`, `template1`) aren't permitted.
-- Connect to it by picking the new database in the **Connect** widget on the **Project Dashboard**. The connection string updates automatically.
+- Connect to it by clicking **Connect** on the **Project Dashboard** and picking the new database in the **Connection Details** modal. The connection string updates automatically.
 
 <Admonition type="tip" title="One database per app, or many?">
 A single Neon project can hold many databases, but in most apps you'll have one database per logical app and use schemas to organize data inside it. For multi-tenant patterns where each customer needs full isolation, consider one project (not just one database) per tenant. See [Multitenancy](/docs/guides/multitenancy).

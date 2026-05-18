@@ -3,7 +3,7 @@ title: 'How do I import data from a CSV file into my Neon database?'
 subtitle: 'Use psql with \copy from your local machine, or pgloader for large or messy CSVs.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -25,7 +25,7 @@ CREATE TABLE customer (
 
 You can run this from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from `psql`.
 
-Then connect with `psql` (copy the `psql` command from the **Connect** widget on your Project Dashboard) and load the file:
+Then connect with `psql` (copy the `psql` command from the **Connection Details** modal, opened from **Connect** on your Project Dashboard) and load the file:
 
 ```bash
 \copy customer FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER;

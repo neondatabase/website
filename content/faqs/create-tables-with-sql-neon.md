@@ -3,12 +3,12 @@ title: 'How do I create tables in my Neon database using SQL?'
 subtitle: 'Use standard Postgres CREATE TABLE syntax from the SQL Editor, psql, or any driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
 
-Neon is fully compatible with Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver. Pick column types and constraints exactly as you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control. See [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor) for the in-Console workflow.
+Neon runs standard Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver. Pick column types and constraints exactly as you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control. See [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor) for the in-Console workflow.
 
 ## Create a table
 
@@ -40,7 +40,7 @@ CREATE INDEX posts_user_id_idx ON posts (user_id);
 A few notes on the choices above:
 
 - `BIGSERIAL` gives you an auto-incrementing 64-bit primary key. For newer projects, `GENERATED ALWAYS AS IDENTITY` is the modern equivalent.
-- `TEXT` is preferred over `VARCHAR(n)` unless you have a specific length constraint. Both store the same way in Postgres.
+- Prefer `TEXT` over `VARCHAR(n)` unless you have a specific length constraint. Both store the same way in Postgres.
 - `TIMESTAMPTZ` (timestamp with time zone) is almost always the right time type.
 - `JSONB` lets you store and index JSON. Use it for flexible attributes; use regular columns for anything you query often.
 - `REFERENCES` adds a foreign key. Add a regular index on the column too; Postgres doesn't create one automatically for the referencing side.
@@ -62,7 +62,7 @@ The SQL Editor also supports meta-commands like `\dt` (list tables) and `\d user
 
 <TabItem>
 
-Copy the `psql` command from the **Connect** widget, then run your DDL interactively or from a file:
+Copy the `psql` command from the **Connection Details** modal (open it from **Connect** on the Project Dashboard), then run your DDL interactively or from a file:
 
 ```bash
 psql "$NEON_URL" -f schema.sql

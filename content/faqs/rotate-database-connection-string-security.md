@@ -3,7 +3,7 @@ title: 'How do I rotate my Neon database connection string for security purposes
 subtitle: 'The connection string is derived from the role password, so rotating one rotates the other.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -63,8 +63,8 @@ The new connection string needs to land in every place that holds the old one be
 - Secret managers: update the secret, then trigger a reload in any service that caches it.
 - Local `.env` files: notify your team to pull the new value.
 
-<Admonition type="warning" title="In-flight sessions get terminated">
-When you reset the password, Neon ends any open session that authenticated with the old credential. Roll out the new value to your deploy targets first if you need to minimize the window where clients fail to authenticate.
+<Admonition type="warning" title="New connections need the new password">
+Existing open sessions stay connected, but any new connection attempt with the old password fails. Roll out the new value to your deploy targets before (or right after) you reset, so reconnects don't fail to authenticate.
 </Admonition>
 
 ## When you need to keep the old connection string working

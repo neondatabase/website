@@ -3,7 +3,7 @@ title: "How do I rotate my Neon API keys after they've been exposed?"
 subtitle: 'Revoke the compromised key, create a new one, and update every system that uses it.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -57,15 +57,24 @@ See [Revoke API keys](/docs/manage/api-keys#revoke-api-keys).
 
 After revoking, create a new key with the same scope as the old one. Use a descriptive name so you can tell keys apart in the dashboard.
 
-In the Console, go to **Account settings → API keys** (personal) or **Organization settings → API keys** (organization or project-scoped) and click **Create new**.
+In the Console, go to **Account settings → API keys** (personal) or your organization's **Settings → API keys** (organization or project-scoped) and click **Create new**.
 
-From the API:
+From the API, the endpoint differs by key type. Personal key:
 
 ```bash shouldWrap
 curl https://console.neon.tech/api/v2/api_keys \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $PERSONAL_API_KEY" \
   -d '{"key_name": "ci-pipeline-rotated-2026-05"}'
+```
+
+Organization or project-scoped key (set `project_id` for project-scoped):
+
+```bash shouldWrap
+curl https://console.neon.tech/api/v2/organizations/$ORG_ID/api_keys \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $PERSONAL_API_KEY" \
+  -d '{"key_name": "ci-pipeline-rotated-2026-05", "project_id": "some-project-123"}'
 ```
 
 The new key value is shown once. Copy it immediately into a secret manager. See [Creating API keys](/docs/manage/api-keys#creating-api-keys).

@@ -3,7 +3,7 @@ title: 'How do I export or download my Neon database as a SQL file?'
 subtitle: 'Run pg_dump in plain-text format against a direct (non-pooled) connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -50,7 +50,7 @@ pg_restore -d "$TARGET_URL" dump.dump
 Choose plain SQL when you want to read, edit, or grep the output, or replay it with `psql -f dump.sql`. Choose `-Fc` when you want to restore selectively or in parallel.
 
 <Admonition type="warning" title="Don't dump over a pooled connection">
-`pg_dump` uses session-level `SET` statements that aren't supported by Neon's PgBouncer transaction-mode pooling. Always use the direct hostname (no `-pooler` segment) for dumps. See [PgBouncer issues 452 and 976](/docs/import/migrate-from-postgres) for background.
+`pg_dump` uses session-level `SET` statements that aren't supported by Neon's PgBouncer transaction-mode pooling. Always use the direct hostname (no `-pooler` segment) for dumps. See PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) and [976](https://github.com/pgbouncer/pgbouncer/issues/976) for background.
 </Admonition>
 
 <Admonition type="tip" title="Match client and server versions">

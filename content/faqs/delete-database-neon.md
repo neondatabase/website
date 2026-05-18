@@ -3,7 +3,7 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -20,7 +20,7 @@ Open your project in the [Neon Console](https://console.neon.tech), go to **Data
 2. Click **Databases** in the sidebar.
 3. Select the branch containing the database.
 4. For the database you want to delete, click the delete icon.
-5. Type the database name to confirm, then click **Delete**.
+5. In the confirmation dialog, click **Delete**.
 
 </TabItem>
 
@@ -69,9 +69,9 @@ WHERE datname = 'old_db_name'
 
 ## What gets removed
 
-Dropping a database removes all SQL objects inside it: schemas, tables, indexes, views, materialized views, functions, sequences, and any data. Roles are not deleted; they live at the branch level and may own objects in other databases. Once the database is dropped, the storage it consumed stops counting against your project's storage usage at the next hourly meter tick.
+Dropping a database removes all SQL objects inside it: schemas, tables, indexes, views, materialized views, functions, sequences, and any data. Roles aren't deleted; they live at the branch level and may own objects in other databases. The storage the database consumed stops counting against your project's storage usage once the drop completes.
 
-The branch, compute, and any other databases on the branch are not affected.
+The branch, compute, and any other databases on the branch aren't affected.
 
 <Admonition type="warning" title="Deletion is permanent">
 There's no undo on `DROP DATABASE`. If your project's [history window](/docs/introduction/history-window) still covers the moment before the drop, you can recover with [instant restore](/docs/introduction/branch-restore) on the root branch, which restores every database on that branch to the chosen point in time. Outside the history window (6 hours on Free, up to 7 or 30 days on paid plans), the only recovery path is your own backups.

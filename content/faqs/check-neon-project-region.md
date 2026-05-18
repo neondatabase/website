@@ -3,20 +3,20 @@ title: 'How can I check which region my Neon project is running in?'
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
 
 ## Quick answer
 
-There are three quick ways to see your project's region: open **Project Settings → General** in the Console, run `neon projects get <project_id>` in the CLI, or read the region segment of your connection string hostname.
+There are three quick ways to see your project's region: check the **Settings** widget on the **Project Dashboard** in the Console, run `neon projects get <project_id>` in the CLI, or read the region segment of your connection string hostname.
 
 ## Console
 
 1. Open the [Neon Console](https://console.neon.tech) and select the project.
-2. Click **Settings** in the left sidebar.
-3. On the **General** page, the region appears next to the cloud provider (for example, `AWS — us-east-2`).
+2. On the **Project Dashboard**, find the **Settings** widget.
+3. The region is listed there alongside the cloud provider.
 
 See [Project settings](/docs/manage/projects#project-settings).
 

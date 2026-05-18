@@ -3,7 +3,7 @@ title: 'Where can I find my DATABASE_URL in Neon?'
 subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -23,7 +23,7 @@ A Neon `DATABASE_URL` looks like:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Both `sslmode=require` and `channel_binding=require` are part of the URL because Neon requires SSL/TLS. Don't strip them. See [Connect from any app](/docs/connect/connect-from-any-app) for what each segment means.
+Both `sslmode=require` and `channel_binding=require` are part of the URL because Neon requires TLS. Don't strip them. See [Connect from any app](/docs/connect/connect-from-any-app) for what each segment means.
 
 ## Use it in your app
 
@@ -63,7 +63,7 @@ const rows = await sql`SELECT now()`;
 
 Common conventions in framework integrations:
 
-- **Vercel**: When you connect Neon through the Vercel integration, Neon writes `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) to your Vercel project's env vars. See [Vercel overview](/docs/guides/vercel-overview).
+- **Vercel**: When you connect Neon through the Vercel integration, Neon writes `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) to your Vercel project's env vars. See the [Vercel managed integration](/docs/guides/vercel-managed-integration).
 - **Prisma**: Set `url = env("DATABASE_URL")` (pooled) and `directUrl = env("DIRECT_URL")` (direct) in `schema.prisma`. See [Connect from Prisma](/docs/guides/prisma).
 - **Drizzle**: A single `DATABASE_URL` (pooled) is usually enough. See [Connect from Drizzle](/docs/guides/drizzle).
 

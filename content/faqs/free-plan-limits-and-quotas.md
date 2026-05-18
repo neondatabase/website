@@ -3,12 +3,12 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 0.5 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
 
-The Neon Free plan costs $0/month and includes generous allowances for prototyping and small projects: 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 0.5 GB of storage per project, and 5 GB of public network transfer per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU when active. See the [Plans page](/docs/introduction/plans) for the full table.
+The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 0.5 GB of storage per project, and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
 
 ## What's included
 
@@ -20,7 +20,7 @@ The Neon Free plan costs $0/month and includes generous allowances for prototypi
 | Autoscaling             | Up to 2 CU (≈8 GB RAM)                          |
 | Scale to zero           | After 5 min inactivity, cannot be disabled      |
 | Storage                 | 0.5 GB per project                              |
-| Public network transfer | 5 GB per month                                  |
+| Public network transfer | 5 GB per project per month                      |
 | Instant restore history | 6 hours, capped at 1 GB-month of change history |
 | Manual snapshots        | 1                                               |
 | Neon Auth               | Up to 60,000 MAU                                |

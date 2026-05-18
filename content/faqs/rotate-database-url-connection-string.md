@@ -3,7 +3,7 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -12,7 +12,7 @@ redirectFrom: []
 
 In Neon, your `DATABASE_URL` is built from the role, password, hostname, and database name. To rotate the URL, you change the credential that backs it. There are two reasonable approaches:
 
-1. **Reset the role password.** Fast, but disconnects existing sessions and requires updating every consumer in a short window.
+1. **Reset the role password.** Fast, but every consumer needs the new password before its next reconnect, or it will fail to authenticate.
 2. **Create a new role.** Slower setup, but lets you migrate consumers one by one and keep the old role active during the transition.
 
 Pick the approach that matches your deployment situation.
