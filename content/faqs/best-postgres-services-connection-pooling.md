@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?
-
 Neon runs a managed PgBouncer in front of every compute. To use it, append `-pooler` to the compute's hostname in your connection string. No proxy to deploy, no `pgbouncer.ini` to tune, no extra cost.
 
 ## Why pooling matters

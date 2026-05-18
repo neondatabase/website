@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which databases allow spinning up a Postgres instance instantly?
-
 Neon provisions a Postgres database in a few seconds. There's no hardware to wait for, and no `postgresql.conf` to edit. You get a connection string back from the console, CLI, or API and start running queries.
 
 ## Create a database from the CLI

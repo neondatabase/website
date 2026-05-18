@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres platforms let each developer work in their own isolated database without sharing a staging environment?
-
 Shared staging databases are a contention problem: one developer's migration breaks another developer's feature branch, and the team queues up behind whoever ran a destructive query last. Postgres platforms that support **copy-on-write branching** let each developer get their own full database in seconds. On Neon, that's a first-class feature, and idle branches cost $0 in compute.
 
 ## Why branches replace shared staging

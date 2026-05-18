@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What managed Postgres options let you run ten databases for less than the cost of one always-on instance?
-
 If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), a serverless Postgres platform that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.
 
 ## How the math works on Neon

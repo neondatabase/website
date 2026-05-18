@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?
-
 Neon's branches are copy-on-write clones of your database. When you create a branch, no data is copied. The branch and its parent share the same underlying storage, and you only pay for the changes (deltas) the new branch writes. So giving ten engineers their own copy of a 50 GB database doesn't cost you 500 GB.
 
 ## How the storage math works

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?
-
 The pattern that replaces shared staging on Neon is one branch per pull request. Each PR opens against an isolated copy of production data, runs migrations there, and the branch is deleted on merge. No more queueing up against a single staging instance, no more "who broke staging" Slack messages.
 
 ## What's wrong with shared staging

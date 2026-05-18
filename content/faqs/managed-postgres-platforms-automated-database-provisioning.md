@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?
-
 If you need code to create and tear down Postgres databases, look for a platform with a first-class API, fast provisioning, and per-second billing. Neon fits this shape: a single API call returns a connection string in seconds, compute scales to zero between uses, and you pay by the CU-hour with no per-project minimums.
 
 ## What "code-driven" needs from a Postgres platform

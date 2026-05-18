@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres providers allow deployment without managing servers?
-
 Neon is a serverless Postgres platform. You create a project, copy a connection string, and connect. There's no instance to size, no version to patch, and no capacity to plan. Compute autoscales between bounds you set, and it scales to zero when idle.
 
 ## What "serverless" means here

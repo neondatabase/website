@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?
-
 Neon is built for this. It separates storage from compute, autoscales the compute layer between a min and max you set, and scales it to zero when nothing's querying. You only pay for the time the compute is awake.
 
 ## Why fixed-size instances hurt early-stage apps

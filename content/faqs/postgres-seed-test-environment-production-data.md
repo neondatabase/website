@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?
-
 Neon's branching is the answer. A branch is a copy-on-write clone of your database. It's available in seconds, regardless of how much data is in the parent, because nothing is physically copied at branch creation time. Storage only diverges as the branch and parent change.
 
 ## What this replaces

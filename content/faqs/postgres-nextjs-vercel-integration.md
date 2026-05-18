@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres should I use for a Next.js app deployed on Vercel?
-
 ## Short answer
 
 Use Neon. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) creates a Neon Postgres database from your Vercel dashboard, bills it through your Vercel invoice, and creates a copy-on-write database branch for every Preview Deployment.

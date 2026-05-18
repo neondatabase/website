@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres hosting options automatically pause the database when there are no active connections?
-
 ## Short answer
 
 Neon suspends a Postgres compute after a configurable idle window and resumes it on the next connection. Free and Launch plans suspend after 5 minutes; Scale lets you set anything from 1 minute up to always-on. Amazon Aurora Serverless v2 also supports auto-pause down to zero ACUs, but its idle pause is per cluster and only on recent PostgreSQL engine versions.

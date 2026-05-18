@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?
-
 Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down inside a range you set, with no restarts and no plan changes. You pick a minimum and a maximum compute size; Neon scales between them based on load. Idle computes scale all the way to zero and stop accruing compute charges (storage continues to bill).
 
 ## How the scaling range works

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?
-
 Neon has two features that get you back to a clean state quickly. **Reset from parent** replaces all data and schema on a branch with the latest from its parent, in one operation. **Instant restore** rolls a branch back to any timestamp within your project's history window. Both keep the same connection string, so your application doesn't need to know anything happened.
 
 ## Reset from parent

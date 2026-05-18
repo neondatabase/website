@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for platforms where user-generated apps each need their own isolated database?
-
 Neon. Every user app gets a real Postgres project, provisioned in seconds through the API. Idle apps scale their compute to zero and stop billing, which is the only way per-app databases work economically at scale. Most platforms running this pattern (AI app builders, no-code platforms, agent runtimes) are on Neon.
 
 ## Why per-app isolation is the right shape

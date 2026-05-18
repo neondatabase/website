@@ -40,7 +40,7 @@ Logical replication keeps the compute active while subscribers are connected, so
 
 From the [Launch plan examples](/docs/introduction/plans#launch-plan):
 
-- 10 CU-hours of compute (a 1 CU database running about 10 hours total): $1.06
+- 10 CU-hours of compute (a 0.25 CU database running about 40 hours total): $1.06
 - 2 GB root branch storage: $0.70
 - 1 GB child branch storage: $0.35
 - 1 GB instant restore history: $0.20

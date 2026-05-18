@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres services let you start free and scale to production without migrating to a different provider?
-
 Neon's three plans share the same architecture. Upgrading from Free to Launch to Scale is a billing change, not a data migration. The connection string stays the same. The compute, storage layer, and Postgres version stay the same. What changes are the resource limits, the level of support, and access to compliance features.
 
 ## What you get on each plan

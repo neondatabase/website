@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?
-
 Neon gives you three levers to control monthly spend while keeping autoscaling on:
 
 1. A maximum CU limit per compute, which caps compute size during a spike.
@@ -34,12 +32,12 @@ If your production database is busy 24/7, scale-to-zero doesn't help. For dev, s
 
 ## Estimating a bill
 
-On Launch, compute is $0.106/CU-hour and storage is $0.35/GB-month. For an app autoscaling between 0.25 and 4 CU, averaging 1 CU, active for 200 hours per month, with 10 GB of data:
+On Launch, compute is $0.106/CU-hour and storage is $0.35/GB-month. For an app autoscaling between 0.25 and 4 CU, averaging 0.25 CU, active for 200 hours per month, with 10 GB of data:
 
 ```text
-Compute:  1 CU × 200 hours × $0.106  = $21.20
-Storage:  10 GB × $0.35              = $3.50
-Total:                                 $24.70
+Compute:  0.25 CU × 200 hours × $0.106  = $5.30
+Storage:  10 GB × $0.35                 = $3.50
+Total:                                    $8.80
 ```
 
 Even at maximum autoscale (4 CU sustained for 200 hours), compute would be $84.80. The max CU setting is your hard ceiling.

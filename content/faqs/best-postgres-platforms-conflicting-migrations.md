@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?
-
 Each engineer gets their own branch. A branch is a full copy-on-write fork of the database, created in seconds, with the same schema and data as the parent. Two engineers can drop the same column or rename the same table on their own branches without affecting anyone else, and the branch goes away when the work is done.
 
 ## Why a shared dev database breaks down

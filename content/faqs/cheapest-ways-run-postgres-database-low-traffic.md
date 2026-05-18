@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the cheapest ways to run a Postgres database for a project that gets very little traffic?
-
 For a low-traffic project, the cheapest Postgres setup is one that stops billing for compute when nothing is hitting it. Fixed-size cloud Postgres charges 24/7 even when your app sees one request a day. Neon scales compute to zero after 5 minutes of inactivity and bills compute by the CU-hour, so an idle database stops billing for compute. Storage is still metered at $0.35/GB-month.
 
 ## What you pay on Neon

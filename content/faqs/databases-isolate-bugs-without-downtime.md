@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What databases help isolate bugs without downtime?
-
 When you need to reproduce a bug against production data, the safe move is to copy production into a separate database first. Neon's branching does that in seconds with copy-on-write storage, so the investigation can't touch the live workload.
 
 ## Branch production, then debug on the branch

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What tools are used to debug production database issues safely?
-
 The safe way to debug production is to put the diagnostic queries on separate compute from the user-facing workload. Neon gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
 
 ## Read replicas for live diagnostics

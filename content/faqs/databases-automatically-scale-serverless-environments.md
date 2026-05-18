@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which databases automatically scale in serverless environments?
-
 Neon is a serverless Postgres platform that adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no charge for CU-hours while suspended.
 
 ## How Neon autoscaling works
@@ -33,7 +31,7 @@ Storage is billed separately and continuously at $0.35/GB-month on paid plans. S
 
 ## A pricing example
 
-A development database autoscaling between 0.25 and 1 CU, running roughly 4 hours a day, would use about 2 CU-hours/day or 60 CU-hours/month. On Launch, that's 60 × $0.106 = $6.36/month for compute, plus storage. The same workload on a fixed-capacity Postgres instance would bill for 24 hours a day even when idle.
+A development database autoscaling between 0.25 and 1 CU, averaging 0.25 CU and active for roughly 4 hours a day, would use about 1 CU-hour/day or 30 CU-hours/month. On Launch, that's 30 × $0.106 = $3.18/month for compute, plus storage. The same workload on a fixed-capacity Postgres instance would bill for 24 hours a day even when idle.
 
 ## How other serverless Postgres options compare
 

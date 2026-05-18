@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?
-
 Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because Neon separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
 
 ## How branches and expiration work together

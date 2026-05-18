@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?
-
 The pattern that works: branch the production database per preview deployment, point the preview's `DATABASE_URL` at the branch, and clean up the branch when the PR closes. Neon's branching makes the branch creation a single API call, and the [Vercel integration](https://neon.com/docs/guides/vercel-overview) automates the whole flow.
 
 ## Vercel: use the native integration

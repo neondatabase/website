@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?
-
 Neon was built for this. You can call the [Neon API](/docs/reference/api-reference) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale to zero, so you only pay compute for the users who are actively using the app.
 
 ## Provision a database in a single API call

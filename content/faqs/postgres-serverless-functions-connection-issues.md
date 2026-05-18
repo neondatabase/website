@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres works best for serverless functions without connection issues?
-
 Serverless functions are hostile to traditional Postgres connections. Each invocation may open a fresh TCP connection. Without pooling, you exhaust `max_connections` quickly, especially at burst traffic. Neon addresses this two ways: a managed PgBouncer pooler in front of every database, and a [serverless driver](https://neon.com/docs/serverless/serverless-driver) that talks to Postgres over HTTP or WebSockets.
 
 ## The connection limit problem

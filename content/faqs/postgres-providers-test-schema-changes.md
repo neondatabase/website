@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres providers allow testing schema changes without affecting production data?
-
 Neon's [database branching](https://neon.com/docs/introduction/branching) creates an isolated, copy-on-write clone of your database in seconds. Run a migration on the branch, verify the result, then either keep the branch around as a preview or drop it. Production never sees the change.
 
 ## How branching works

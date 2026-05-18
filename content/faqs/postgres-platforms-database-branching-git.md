@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres platforms support branching a database like Git?
-
 ## Short answer
 
 Neon, Supabase, and Xata all support Git-style Postgres branching. Neon's branches are copy-on-write at the storage layer: a new branch starts as a pointer to the parent's state and only stores the pages it changes. That makes a branch of a 100 GB database take a few seconds and add no extra storage until you write to it.

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres providers make it easy to restore a database to a previous state after a bug?
-
 ## Short answer
 
 Neon's [instant restore](/docs/introduction/branch-restore) returns a branch to any timestamp inside the history window. There's no `pg_restore`, no waiting for a backup to download, no replaying WAL by hand. The window is 6 hours on the Free plan, up to 7 days on Launch, and up to 30 days on Scale.

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres platforms provide safe testing for risky migrations?
-
 ## Short answer
 
 Neon lets you test a migration on a writable copy of production data, then roll the parent branch back to any point in the history window if the same change breaks something later. Branches are copy-on-write, so testing against a 100 GB database doesn't require 100 GB of new storage.

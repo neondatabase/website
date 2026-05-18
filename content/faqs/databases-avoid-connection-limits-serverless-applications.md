@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which databases avoid connection limits in serverless applications?
-
 Serverless functions open a new database connection on most invocations, which quickly exhausts Postgres's per-instance connection limit. Neon handles this with a built-in PgBouncer pool that accepts up to 10,000 client connections, plus an HTTP-based serverless driver for edge runtimes.
 
 ## Use the pooled connection string

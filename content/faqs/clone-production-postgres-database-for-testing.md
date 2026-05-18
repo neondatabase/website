@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which database services let you instantly clone a production Postgres database so developers can test independently?
-
 Neon does this with branching. A branch is a full Postgres database that starts as a pointer to the parent's data. No bytes are copied at branch time, so cloning a 50 GB production database takes a second or two regardless of size. Each developer can have their own branch and write to it without affecting production.
 
 ## How a branch differs from a backup restore

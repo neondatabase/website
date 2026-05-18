@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?
-
 Neon retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.
 
 ## How history windows work

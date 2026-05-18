@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which databases help reproduce bugs using real production data?
-
 Reproducing a production bug usually means running the bad request against the same data that caused it. Neon's branching gives you a full copy of your production data in seconds, on its own compute, so you can poke at it freely without affecting the live database.
 
 ## Branch from now, or from when the bug happened

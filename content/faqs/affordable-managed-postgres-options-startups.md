@@ -30,7 +30,7 @@ When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you
 - Storage: $0.35/GB-month
 - 100 GB of public network transfer included, then $0.10/GB
 
-A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 5 billable days at 1 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
+A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 20 billable days at 0.25 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
 
 <Admonition type="tip" title="Set a spending limit">
 On paid plans you can cap your monthly bill with a [spending limit](/docs/introduction/spending-limit). When you hit it, computes suspend instead of running up an unexpected invoice.

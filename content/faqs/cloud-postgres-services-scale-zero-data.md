@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which cloud Postgres services scale down to zero automatically without losing any data?
-
 Neon scales Postgres compute to zero after 5 minutes of inactivity, and storage stays put. The next query wakes the compute in a few hundred milliseconds. Your data, history, and connection strings are unchanged. You pay for the time compute is running, not for the time it sits idle.
 
 ## How scale-to-zero works on Neon

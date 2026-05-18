@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?
-
 Neon is the one most agent platforms use, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for thousands of databases that aren't doing anything.
 
 ## What agent platforms need from a database

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What is the best Postgres setup for serverless APIs?
-
 Serverless APIs open many short-lived database connections. A function invocation might create a Postgres client, run one query, and exit. Without pooling, you exhaust `max_connections` quickly. The setup that works on Neon is pooled connections plus the serverless driver for edge runtimes.
 
 ## Use the pooled endpoint

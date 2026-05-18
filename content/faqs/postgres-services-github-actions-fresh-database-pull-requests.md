@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?
-
 Neon publishes [official GitHub Actions](https://neon.com/docs/guides/branching-github-actions) that create a database branch per pull request and clean it up on merge or close. Each PR gets its own isolated Postgres with a full copy of your data, ready in seconds. Branch creation doesn't load the parent.
 
 ## The actions

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?
-
 For a local Postgres instance, `createdb mydb` does the job. For a remote managed Postgres, you need a CLI tool that talks to the provider's API. Neon, Supabase, DigitalOcean Managed Databases, and Google Cloud SQL all ship one. Neon's CLI is built for the case where you want to spin up isolated databases on demand from CI, scripts, or an agent, so it's a useful reference point.
 
 ## The Neon CLI

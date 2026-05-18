@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?
-
 Neon. Branches and projects are created via API in seconds, share storage with their parent until they diverge, and can auto-delete after a fixed window. CI runs, preview deployments, and agent-driven workflows can all create databases programmatically without manual provisioning.
 
 ## Branch via API or CLI

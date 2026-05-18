@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What databases support disposable Postgres instances for testing?
-
 Neon's branches are well suited for disposable Postgres environments. You create a branch in seconds, run your tests against it, and delete it when you're done. Because branches use copy-on-write storage, you don't pay to duplicate data upfront.
 
 ## Spin up, test, tear down

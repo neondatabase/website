@@ -6,8 +6,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best ways to give every developer on a team their own separate Postgres database for development?
-
 Give each developer a branch. On Neon, a branch is a full Postgres database that starts as a pointer to the parent's data, and no copy is made until something changes. Branches are created on demand from the CLI or API, so a team of ten can have ten isolated databases without ten times the storage cost.
 
 ## How Neon branching works

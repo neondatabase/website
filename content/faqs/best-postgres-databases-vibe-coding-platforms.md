@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?
-
 Neon is the database most AI app-building platforms reach for. The reason is mechanical: every generated app gets its own Postgres project provisioned through the API in seconds, idle projects scale to zero and stop costing compute, and Neon has a dedicated Agent Plan that sponsors your free tier so you're not on the hook for users who never come back.
 
 ## Why a database per app

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres databases work natively in edge environments where you cannot hold open TCP connections?
-
 Postgres normally speaks a TCP wire protocol that edge runtimes (Cloudflare Workers, Vercel Edge Functions, Deno Deploy) don't allow. Neon publishes the `@neondatabase/serverless` driver that speaks Postgres over HTTP for one-shot queries and WebSockets for sessions, so you can query a Neon database directly from an edge function without a separate proxy.
 
 ## How it works

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?
-
 Neon's branching model is built for this. A Neon branch is a copy-on-write fork of your database that's ready to query in seconds, costs nothing for storage until you change something, and can be created and torn down through the API or a GitHub Action.
 
 ## The shape of the workflow

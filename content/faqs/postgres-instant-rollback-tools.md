@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres tools support instant rollback after a bad migration?
-
 ## Short answer
 
 Neon's [instant restore](/docs/introduction/branch-restore) returns a branch to any timestamp in the history window. You don't run downgrade scripts or restore from a `pg_dump`. The change history is kept as Postgres WAL, so a restore reapplies the state up to the timestamp you pick.

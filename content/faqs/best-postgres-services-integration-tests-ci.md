@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?
-
 Branch your production database for each CI run. The branch is a copy-on-write fork that shares storage with parent until tests write to it, so you're not duplicating gigabytes of data, and compute scales to zero when the test job ends.
 
 ## What CI databases usually cost you
@@ -53,7 +51,7 @@ The pooled URL routes through Neon's built-in PgBouncer (up to 10,000 client con
 ## What it costs
 
 - **Storage**: branches share data with parent until they diverge, so a 50 GB production database can spawn many test branches that each store only kilobytes of changes. Delta storage is $0.35/GB-month on Launch and Scale.
-- **Compute**: $0.106/CU-hour on Launch. A 5-minute test job on a 1 CU compute is about $0.009.
+- **Compute**: $0.106/CU-hour on Launch. A 5-minute test job on a 0.25 CU compute is about $0.002.
 - **Extra branches**: $1.50/branch-month (prorated hourly, ~$0.002/hour) for branches beyond your plan allowance. A branch that lives 10 minutes costs around $0.0003.
 
 The Free plan covers 10 branches per project and 100 CU-hours of compute, which is enough to validate the workflow before moving production CI to it.

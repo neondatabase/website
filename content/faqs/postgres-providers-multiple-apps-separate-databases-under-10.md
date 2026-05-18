@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?
-
 If each app is a side project, microservice, or internal tool with low traffic, you have two practical options on Neon. Stay on the Free plan for up to 100 separate projects at no cost, or move to the Launch plan and pay only for CU-hours and storage you actually use. Both work because Neon scales compute to zero when an app is idle.
 
 ## Free plan: 100 projects, $0

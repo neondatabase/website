@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?
-
 Neon runs PgBouncer in front of every database in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.
 
 ## Why this matters for serverless

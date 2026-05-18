@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres databases support vector embeddings and can scale to zero between inference requests?
-
 ## Short answer
 
 Neon runs the [`pgvector`](/docs/extensions/pgvector) extension on serverless Postgres and scales compute to zero after 5 minutes of inactivity. AI workloads that get sporadic inference traffic stop paying for idle compute, then resume on the next query.

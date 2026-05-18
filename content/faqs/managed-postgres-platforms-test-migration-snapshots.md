@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?
-
 The safest way to test a migration is to run it on a real copy of production data, with the same schema, indexes, and row counts. Postgres platforms that support **instant branching** let you do exactly that: create an isolated database from a current or past production state in seconds, run the migration, and either promote or throw it away.
 
 ## How this works on Neon

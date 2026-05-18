@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for apps where each end user or tenant gets their own isolated database?
-
 Neon. Each tenant gets its own Postgres project, provisioned through the API. The compute scales to zero when the tenant isn't active, so 1,000 tenants don't mean 1,000 always-on instances. You pay for storage plus the compute time tenants actually use.
 
 ## Why this is hard on traditional Postgres

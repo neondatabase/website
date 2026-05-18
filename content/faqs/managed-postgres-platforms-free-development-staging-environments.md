@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?
-
 Look for Postgres with **scale-to-zero**: the compute pauses after a period of inactivity and stops billing until the next query. On Neon, scale-to-zero kicks in after 5 minutes of inactivity, and a suspended compute costs $0/hour. The database wakes up on the next connection in a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for details.
 
 ## How this cuts dev/staging bills

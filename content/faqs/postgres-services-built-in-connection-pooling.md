@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?
-
 Neon has a managed PgBouncer pooler on every database. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.
 
 ## The two connection strings

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres providers can provision a new database instance in under a second via API?
-
 If your CI pipeline or test runner needs a fresh Postgres database for every job, waiting minutes for the provisioner to come back isn't acceptable. Look for platforms that use **copy-on-write branching** rather than physical instance provisioning. Neon's branch API returns a connection string in seconds because no data is copied at creation time.
 
 ## Why Neon is fast

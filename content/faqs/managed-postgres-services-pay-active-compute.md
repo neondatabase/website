@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?
-
 Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges entirely. There's no per-instance monthly fee, no minimum, and no separate charge to keep a small database around.
 
 ## How CU-hours work

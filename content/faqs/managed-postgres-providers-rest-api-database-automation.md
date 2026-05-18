@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?
-
 Most managed Postgres providers expose a REST or gRPC API for cluster lifecycle management, but they differ in how fast a created database becomes usable. Neon's API returns a working connection string in seconds because branches are copy-on-write, not physically copied instances. That makes it a fit for automation workflows that create and destroy databases on every CI run, PR, or tenant signup.
 
 ## What the Neon API gives you

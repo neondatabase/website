@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?
-
 Neon's Free plan is a permanent (not trial) Postgres tier that fits a real, low-traffic app. You get up to 100 projects, 0.5 GB of storage per project, and 100 compute-hours per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero compute-hours.
 
 ## What you actually get on the Free plan

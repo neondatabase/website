@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?
-
 Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) and autoscales compute based on load. The same compute that idles at 0.25 CU between requests can scale up to 16 CU during a burst of similarity searches, then drop back. When traffic stops entirely, compute scales to zero after 5 minutes. AI workloads that go from quiet to busy and back fit this model well.
 
 ## Why AI workloads need autoscaling

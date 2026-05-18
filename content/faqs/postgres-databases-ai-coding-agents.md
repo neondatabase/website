@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?
-
 Neon's design assumes the database lifecycle is managed by code, not a human in a console. Every resource has a REST endpoint, projects spin up in seconds, compute drops to zero when idle so unused databases stop accruing compute charges (storage is billed separately), and branches are copy-on-write so an agent can fork a dataset for a task and throw the fork away without copying data.
 
 ## The pieces that matter for agents

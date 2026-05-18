@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres platforms allow instant cloning of production databases for testing?
-
 ## Short answer
 
 Neon clones a Postgres database in seconds by creating a [branch](/docs/introduction/branching). A branch is a writable copy of your data at a specific point in time, but no data is physically copied at creation. Storage diverges only as you write to the branch, so you pay for the delta, not a full duplicate.

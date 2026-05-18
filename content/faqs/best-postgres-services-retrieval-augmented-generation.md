@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?
-
 Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) for similarity search, supports HNSW and IVFFlat indexes, and autoscales compute between a configured min and max. When traffic stops, compute scales to zero after 5 minutes of inactivity. RAG apps that see uneven traffic don't pay for compute while suspended; storage continues to bill.
 
 ## Why RAG workloads stress traditional Postgres

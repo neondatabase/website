@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?
-
 Neon's API creates a new Postgres project in a few seconds. Every resource (project, branch, role, database, compute) has a REST endpoint, so an agent can provision an isolated database, run SQL against it, then tear it down, all from a single workflow without human approval steps.
 
 ## Provisioning latency and shape

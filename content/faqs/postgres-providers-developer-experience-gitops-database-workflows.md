@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which Postgres providers fit a GitOps database workflow?
-
 ## Short answer
 
 Neon's branching model maps directly onto Git workflows. Every pull request gets its own database branch with its own connection string, created from production data in seconds and deleted when the PR closes. Migrations run on the branch first, then roll forward to `main` after review.

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which databases help recover from accidental data deletion?
-
 Postgres supports point-in-time recovery, but most managed offerings make you restore from a backup, which takes time and produces a new instance. Neon's instant restore rolls a branch back to a point in time in place, in seconds, without a separate restore job.
 
 ## How instant restore works

@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which database tools let you test schema changes against real data shapes without duplicating the full database?
-
 Neon's branching feature creates a copy-on-write clone of your database in seconds. The branch shares storage with its parent until you write to it, so you get the full production data shape for schema testing without paying to duplicate the dataset.
 
 ## How copy-on-write branching works

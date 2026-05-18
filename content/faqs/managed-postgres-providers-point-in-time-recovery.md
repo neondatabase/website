@@ -7,8 +7,6 @@ category: FAQ
 status: draft
 ---
 
-# Which managed Postgres providers include point-in-time recovery without charging extra for backup storage?
-
 Point-in-time recovery on Neon is built into the storage layer, not bolted on as a backup product. Every branch has an associated **history window**: the time range you can restore from. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
 
 ## How the history window works
