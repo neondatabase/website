@@ -89,6 +89,7 @@ const FaqPost = async (props) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         aboveContent={<ProgrammaticCTA />}
+        isFaq
       />
     </>
   );
