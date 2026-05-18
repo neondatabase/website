@@ -45,9 +45,9 @@ Alternatively, you can use the `float8` or `float` data type which is the same a
 column_name float
 ```
 
-A column of `DOUBLE PRECISION` type can store values that have a range around `1E-307` to `1E+308` with a precision of at least 15 digits.
+A column of `DOUBLE PRECISION` type can store values that have a range between `1E-307` to `1E+308` with a precision of at least 15 digits.
 
-If you store a value that is out of the range, PostgreSQL will be unable to store it and raise an error.
+If you store a value that is out of range, PostgreSQL will be unable to store it and raise an error.
 
 If you store numbers with very high precision, PostgreSQL may round them to fit within the limitation of double precision. This may potentially lose some precision in the calculation.
 
