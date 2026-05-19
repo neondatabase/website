@@ -77,6 +77,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Programs', path: '/programs/agents' },
       { name: 'Use Cases', path: '/use-cases/ai-agents' },
       { name: 'Pricing', path: '/pricing' },
+      { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
     testCases.forEach(({ name, path }) => {
@@ -125,6 +126,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     const excludedCases = [
       { name: 'Index /guides', path: '/guides', reason: 'index page without markdown' },
       { name: 'Index /branching', path: '/branching', reason: 'index page without markdown' },
+      { name: 'Index /faqs', path: '/faqs', reason: 'index page without markdown' },
       {
         name: 'Use case multi-tb',
         path: '/use-cases/multi-tb',
