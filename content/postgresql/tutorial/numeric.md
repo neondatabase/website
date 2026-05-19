@@ -45,7 +45,7 @@ The scale of the `NUMERIC` type can be zero, positive, or negative.
 
 PostgreSQL 15 or later allows you to declare a numeric column with a negative scale.
 
-The following declares the price column with the numeric type that can store total numbers with 7 digits, 5 before the decimal point and 2 digits after the decimal point:
+The following declares the price column with the numeric type that can store numbers with 7 digits in total, 5 before the decimal point and 2 digits after the decimal point:
 
 ```sql
 price NUMERIC(7,2)
