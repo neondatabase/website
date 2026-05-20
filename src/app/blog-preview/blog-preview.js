@@ -14,8 +14,14 @@ const normalizeSearchParam = (value) => {
   return value || null;
 };
 
-const validateBlogPreviewAccess = ({ branch }) => {
+const validateBlogPreviewAccess = ({ branch, secret }) => {
+  const previewSecret = process.env.BLOG_PREVIEW_SECRET;
+
   if (process.env.BLOG_PREVIEW_ENABLED !== 'true') {
+    notFound();
+  }
+
+  if (!previewSecret || secret !== previewSecret) {
     notFound();
   }
 
@@ -27,15 +33,16 @@ const validateBlogPreviewAccess = ({ branch }) => {
 const resolveBlogPreviewRequest = async (searchParamsPromise, resolver) => {
   const searchParams = await searchParamsPromise;
   const branch = normalizeSearchParam(searchParams?.branch);
+  const secret = normalizeSearchParam(searchParams?.secret);
 
-  validateBlogPreviewAccess({ branch });
+  validateBlogPreviewAccess({ branch, secret });
 
   try {
     const snapshot = await resolver({ previewBranch: branch });
 
     return {
       branch,
-      routeConfig: createBlogRouteConfig({ branch }),
+      routeConfig: createBlogRouteConfig({ branch, secret }),
       snapshot,
     };
   } catch (error) {
