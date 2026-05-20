@@ -176,6 +176,8 @@
           slug: guides/branching-schema-only
         - title: Reset from parent
           slug: guides/reset-from-parent
+        - title: Move changes to production
+          slug: guides/move-branch-changes-to-production
 
     - section: Read replicas
       icon: replications
