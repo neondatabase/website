@@ -1,17 +1,17 @@
 // pagesToShow - array of page titles and sections where the modal should be shown
 // 'Neon Docs' - show modal on the introduction page
 const MODALS = [
-  // Example modal configuration:
-  // {
-  //   id: 'slack',
-  //   pagesToShow: ['Neon Docs'],
-  //   title: 'Manage Neon in Slack',
-  //   description: 'Get alerts, track usage, and manage your team right from Slack',
-  //   link: {
-  //     title: 'Get the Neon App for Slack',
-  //     url: '/docs/manage/slack-app',
-  //   },
-  // },
+  {
+    id: 'branching-video',
+    pagesToShow: ['Neon Docs'],
+    embedId: 'UuHnFlg66Io',
+    title: 'New: Branching in 90 seconds',
+    description: 'See how copy-on-write branches work in practice.',
+    link: {
+      title: 'Watch the video',
+      url: '/docs/introduction/branching',
+    },
+  },
 ];
 
 export default MODALS;
