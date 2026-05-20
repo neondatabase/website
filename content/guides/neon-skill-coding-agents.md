@@ -18,10 +18,10 @@ A "skill" is a Markdown document that lives in your project and gives your AI co
 
 The Neon skill distills Neon's most important best practices into a concise, structured format. It covers:
 
-- **Neon connection methods and drivers** — which driver to use depending on your deployment target
-- **Neon branching workflows** — how to use Neon branches for preview environments, testing, and migrations
-- **Neon schema and migration patterns** — conventions that work well with Neon's architecture
-- **Neon environment variable setup** — the correct way to wire up your Neon connection string
+- **Neon connection methods and drivers**: which driver to use depending on your deployment target
+- **Neon branching workflows**: how to use Neon branches for preview environments, testing, and migrations
+- **Neon schema and migration patterns**: conventions that work well with Neon's architecture
+- **Neon environment variable setup**: the correct way to wire up your Neon connection string
 
 Without the Neon skill, your agent relies on its training data, which may be months or years out of date. With the Neon skill, it has current, authoritative guidance from Neon.
 
@@ -108,5 +108,3 @@ The Neon skill is a one-minute setup that pays off across the full lifetime of y
 
 The Neon skill is available on [skills.sh](https://skills.sh) (search for **neon-postgres**) and in the plugin marketplace for Cursor and Claude Code.
 
-
-<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Add the Neon skill to your project and start building with your AI coding agent today." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
