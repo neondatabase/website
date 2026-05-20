@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 0.5 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-05-20T14:13:43.586Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -48,6 +48,6 @@ Compute drops to zero CU when suspended, so you don't pay for compute while idle
 
 ## When to consider Launch
 
-The Launch plan starts at pay-for-what-you-use pricing ($0.106 per CU-hour, $0.35 per GB-month) and lifts most of the Free caps: autoscaling up to 16 CU, history window up to 7 days, 10 manual snapshots, scale-to-zero can be disabled, and protected branches. For an example bill, see [Usage-based cost examples](/docs/introduction/plans#usage-based-cost-examples) on the Plans page.
+The Launch plan starts at pay-for-what-you-use pricing ($0.106 per CU-hour, $0.35 per GB-month) and lifts most of the Free caps: autoscaling up to 16 CU, history window up to 7 days, 100 manual snapshots, scale-to-zero can be disabled, and protected branches. For an example bill, see [Usage-based cost examples](/docs/introduction/plans#usage-based-cost-examples) on the Plans page.
 
 <CTA title="See the full plan comparison" description="Compare Free, Launch, and Scale across compute, storage, branching, history, and support." buttonText="View plans" buttonUrl="/docs/introduction/plans" />

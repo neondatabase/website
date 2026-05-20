@@ -43,7 +43,7 @@ Most migration tools rely on session-level features like `SET` and prepared stat
 
 ## Snapshots for repeatable tests
 
-If you want a reusable baseline, take a [snapshot](/docs/manage/backups) of the production branch and create new test branches from it as needed. Snapshots persist outside the history window and are billed at $0.09/GB-month. Free includes 1 manual snapshot; Launch and Scale include 10.
+If you want a reusable baseline, take a [snapshot](/docs/manage/backups) of the production branch and create new test branches from it as needed. Snapshots persist outside the history window and are billed at $0.09/GB-month. Free includes 1 manual snapshot; Launch and Scale include 100.
 
 ## How other providers handle migration testing
 
