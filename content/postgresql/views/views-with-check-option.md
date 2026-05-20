@@ -145,7 +145,7 @@ VALUES ('John', 'Smith', 1, 'Contractor');
 
 It succeeds.
 
-The issue is that we can insert an employee with the type of `Contractor` into the `employee` table via the view that exposes the employee to the type of `FTE`.
+The issue is that we can insert an employee with the type of `Contractor` into the `employees` table via the view that exposes the employee to the type of `FTE`.
 
 To ensure that we can insert only employees with the type `FTE` into the `employees` table via the `fte` view, you can use the `WITH CHECK OPTION`:
 
@@ -309,7 +309,7 @@ WHERE
 WITH CASCADED CHECK OPTION;
 ```
 
-Second, insert a new row into `employee` table via the `fte_1` view:
+Second, insert a new row into `employees` table via the `fte_1` view:
 
 ```sql
 INSERT INTO fte_1(first_name, last_name, department_id, employee_type)
