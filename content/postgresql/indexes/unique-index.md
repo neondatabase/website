@@ -38,7 +38,7 @@ In this syntax:
 
 - First, specify the index name in the `CREATE UNIQUE INDEX` statement.
 - Second, provide the name of the table along with a list of indexed columns in the ON clause.
-- Third, the `NULL NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
+- Third, the `NULLS NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
 
 PostgreSQL offers [multiple index types](postgresql-index-types), but only the B\-tree index type supports unique indexes.
 
