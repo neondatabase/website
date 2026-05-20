@@ -135,8 +135,8 @@ export default {
         title: 'Snapshots',
       },
       free: '1 snapshot',
-      launch: '10 snapshots  <span>$0.09/GB-month</span>',
-      scale: '10 snapshots  <span>$0.09/GB-month</span>',
+      launch: '100 snapshots  <span>$0.09/GB-month</span>',
+      scale: '100 snapshots  <span>$0.09/GB-month</span>',
     },
     {
       rows: '2',

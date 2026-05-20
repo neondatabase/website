@@ -43,7 +43,7 @@ Instant restore can only reach back as far as your configured history window. In
 
 ## Snapshots for known-good states
 
-For migrations you want to keep a fixed restore point for, take a [snapshot](/docs/guides/backup-restore) before running the migration. Snapshots persist beyond the history window and can be restored to a new branch on demand. Free plan includes 1 manual snapshot; paid plans include 10.
+For migrations you want to keep a fixed restore point for, take a [snapshot](/docs/guides/backup-restore) before running the migration. Snapshots persist beyond the history window and can be restored to a new branch on demand. Free plan includes 1 manual snapshot; paid plans include 100.
 
 ## How other providers approach safe migrations
 

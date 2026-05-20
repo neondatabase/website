@@ -55,7 +55,7 @@ A restore replaces the entire branch with its historical state. Everything writt
 
 ## Snapshots for known-good points
 
-If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](/docs/guides/snapshots). The Free plan includes 1 manual snapshot, Launch and Scale include 10. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
+If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](/docs/guides/snapshots). The Free plan includes 1 manual snapshot, Launch and Scale include 100. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
 
 ## How this compares to other Postgres services
 
