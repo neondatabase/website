@@ -25,7 +25,7 @@ PostgreSQL's integer types behave the same way wherever you run Postgres, so eve
 ## Introduction to PostgreSQL integer types
 
 ![postgresql integer](/postgresqltutorial/postgresql-integer-300x59.png?alignright)
-To store the whole numbers in PostgreSQL, you can use one of the following integer types:
+To store whole numbers in PostgreSQL, you can use one of the following integer types:
 
 - `SMALLINT`
 - `INTEGER`
@@ -81,7 +81,7 @@ Notice that `INT` is the synonym of `INTEGER`.
 
 ### BIGINT
 
-If you want to store the whole numbers that are out of the range of the `INTEGER` type, you can use the `BIGINT` type.
+If you want to store whole numbers that are out of range of the `INTEGER` type, you can use the `BIGINT` type.
 
 The `BIGINT` type requires 8 bytes storage size that can store any number in the range of (\-9,223,372,036,854,775,808,\+9,223,372,036,854,775,807\).
 
