@@ -96,7 +96,7 @@ And here's an overview of what we're looking at next:
 - **Data API Advisors**: A new Monitoring tab scans your database when you use the Data API and reports security and performance issues (such as missing RLS or unindexed foreign keys) with recommended fixes. [Learn more](/docs/data-api/database-advisor).
 - **Cursor plugin for Neon**: The Neon Postgres plugin adds Neon Skills and MCP to Cursor so your assistant can use workflow guidance and run database operations from natural language. [Learn more](/docs/ai/ai-cursor-plugin).
 - **Neon CircleCI Orb**: A community-contributed orb provisions a Neon database branch per job for isolated, production-like CI. [Learn more](/docs/guides/branching-circleci).
-- **Add organization members by domain**: Verify email domains in Organization Settings so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
+- **Add organization members by domain**: Verify email domains on the organization People page so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
 - **TimescaleDB on Postgres 18**: The timescaledb extension is now supported on Postgres 18. [Learn more](/docs/extensions/timescaledb).
 - **Claimable Postgres agent skill**: A new agent skill lets your AI assistant provision instant temporary databases via Claimable Postgres (neon.new) with no signup or credit card. [Learn more](/docs/reference/claimable-postgres).
 - **Neon MCP Server documentation tools**: The MCP Server now includes `list_docs_resources` and `get_doc_resource` so your agent can fetch Neon docs on demand. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
