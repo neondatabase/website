@@ -1,23 +1,17 @@
-/* global fetch, process, setTimeout */
+/* global Buffer, process */
 /* eslint-disable import/no-unresolved */
 import fs from 'fs/promises';
-import os from 'os';
 import path from 'path';
-import { Readable } from 'stream';
-import { pipeline } from 'stream/promises';
-import { createGunzip } from 'zlib';
 
 import { Octokit } from '@octokit/core';
 import matter from 'gray-matter';
-import * as tar from 'tar';
 
 const BLOG_CONTENT_DIRNAME = 'content/blog';
-const BLOG_CONTENT_USER_AGENT = 'neon-next-blog-loader/1.0';
-const BLOG_CDN_FETCH_CONCURRENCY = Number.parseInt(
-  process.env.BLOG_CDN_FETCH_CONCURRENCY || '6',
-  10
-);
-const BLOG_CDN_FETCH_RETRIES = Number.parseInt(process.env.BLOG_CDN_FETCH_RETRIES || '2', 10);
+const BLOG_AUTHORS_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/authors/data.json`;
+const BLOG_CATEGORIES_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/categories/data.json`;
+const BLOG_POSTS_DIRNAME = `${BLOG_CONTENT_DIRNAME}/posts`;
+const GITHUB_BLOB_FETCH_BATCH_SIZE = 120;
+const GITHUB_BLOB_FETCH_BATCH_CONCURRENCY = 4;
 
 class BlogContentBranchNotFoundError extends Error {
   constructor(branch) {
@@ -33,26 +27,6 @@ class BlogContentConfigError extends Error {
     this.name = 'BlogContentConfigError';
   }
 }
-
-class BlogContentFetchError extends Error {
-  constructor(message, details = {}) {
-    super(message, details.cause ? { cause: details.cause } : undefined);
-    this.name = 'BlogContentFetchError';
-    this.url = details.url || null;
-    this.slug = details.slug || null;
-    this.status = details.status || null;
-    this.attempt = details.attempt || null;
-  }
-}
-
-const normalizeBaseUrl = (baseUrl) => baseUrl.replace(/\/+$/u, '');
-
-const joinUrl = (baseUrl, relativePath) =>
-  `${normalizeBaseUrl(baseUrl)}/${relativePath.replace(/^\/+/u, '')}`;
-
-const ensureDirectory = async (targetDir) => {
-  await fs.mkdir(targetDir, { recursive: true });
-};
 
 const readJsonWithRaw = async (filePath, fallback) => {
   try {
@@ -93,88 +67,11 @@ const createSnapshot = ({
   categoriesRaw,
 });
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const formatFetchErrorDetails = (error) => {
-  const parts = [];
-  const cause = error && error.cause;
-
-  if (error && error.name) {
-    parts.push(error.name);
-  }
-
-  if (error && error.code) {
-    parts.push(`code=${error.code}`);
-  }
-
-  if (error && error.message) {
-    parts.push(error.message);
-  }
-
-  if (cause && cause.name) {
-    parts.push(`cause=${cause.name}`);
-  }
-
-  if (cause && cause.code) {
-    parts.push(`causeCode=${cause.code}`);
-  }
-
-  if (cause && cause.message) {
-    parts.push(`causeMessage=${cause.message}`);
-  }
-
-  return parts.join('; ');
-};
-
-const shouldRetryFetch = ({ status = null, error = null }) => {
-  if ([408, 429, 500, 502, 503, 504].includes(status)) {
-    return true;
-  }
-
-  const retryableCodes = new Set([
-    'ECONNRESET',
-    'ENETUNREACH',
-    'ETIMEDOUT',
-    'EAI_AGAIN',
-    'UND_ERR_BODY_TIMEOUT',
-    'UND_ERR_CONNECT_TIMEOUT',
-    'UND_ERR_HEADERS_TIMEOUT',
-    'UND_ERR_SOCKET',
-  ]);
-  const cause = error && error.cause;
-
-  return retryableCodes.has(error && error.code) || retryableCodes.has(cause && cause.code);
-};
-
-const getRetryDelayMs = (attempt) => 250 * 2 ** (attempt - 1);
-
-const mapWithConcurrency = async (items, limit, mapper) => {
-  const results = new Array(items.length);
-  let nextIndex = 0;
-
-  const workerCount = Math.max(1, Math.min(limit, items.length || 1));
-
-  await Promise.all(
-    Array.from({ length: workerCount }, async () => {
-      while (true) {
-        const currentIndex = nextIndex;
-
-        if (currentIndex >= items.length) {
-          return;
-        }
-
-        nextIndex += 1;
-        results[currentIndex] = await mapper(items[currentIndex], currentIndex);
-      }
-    })
-  );
-
-  return results;
-};
-
 const readPostsFromDirectory = async (postsDir) => {
   try {
-    const files = (await fs.readdir(postsDir)).filter((fileName) => fileName.endsWith('.md'));
+    const files = (await fs.readdir(postsDir))
+      .filter((fileName) => fileName.endsWith('.md'))
+      .sort();
 
     return Promise.all(
       files.map(async (fileName) => {
@@ -220,141 +117,19 @@ const readBlogSnapshotFromDirectory = async ({
   });
 };
 
-const fetchText = async (url, init = {}, context = {}) => {
-  const attempts = context.attempts || BLOG_CDN_FETCH_RETRIES + 1;
-
-  for (let attempt = 1; attempt <= attempts; attempt += 1) {
-    let response;
-
-    try {
-      response = await fetch(url, {
-        ...init,
-        headers: {
-          'user-agent': BLOG_CONTENT_USER_AGENT,
-          ...(init.headers || {}),
-        },
-      });
-    } catch (error) {
-      if (attempt < attempts && shouldRetryFetch({ error })) {
-        await sleep(getRetryDelayMs(attempt));
-        continue;
-      }
-
-      const target = context.slug ? `post "${context.slug}" (${url})` : url;
-
-      throw new BlogContentFetchError(
-        `Failed to fetch ${target} after ${attempt}/${attempts} attempts: ${formatFetchErrorDetails(
-          error
-        )}`,
-        {
-          attempt,
-          cause: error,
-          slug: context.slug,
-          url,
-        }
-      );
-    }
-
-    if (!response.ok) {
-      if (attempt < attempts && shouldRetryFetch({ status: response.status })) {
-        await sleep(getRetryDelayMs(attempt));
-        continue;
-      }
-
-      const target = context.slug ? `post "${context.slug}" (${url})` : url;
-
-      throw new BlogContentFetchError(
-        `Failed to fetch ${target} after ${attempt}/${attempts} attempts: HTTP ${response.status}`,
-        {
-          attempt,
-          slug: context.slug,
-          status: response.status,
-          url,
-        }
-      );
-    }
-
-    return response.text();
-  }
-
-  throw new BlogContentFetchError(`Failed to fetch ${url}: exhausted all retry attempts`, {
-    url,
-  });
-};
-
-const fetchJson = async (url, init = {}, context = {}) => {
-  const raw = await fetchText(url, init, context);
-
-  return {
-    data: JSON.parse(raw),
-    raw,
-  };
-};
-
-const readBlogSnapshotFromCdn = async (baseUrl) => {
-  const manifest = await fetchJson(
-    joinUrl(baseUrl, 'manifest.json'),
-    {
-      next: { revalidate: 60 },
-    },
-    { attempts: BLOG_CDN_FETCH_RETRIES + 1 }
-  );
-  const slugs = (manifest.data && manifest.data.posts) || [];
-
-  const [authorsResult, categoriesResult, posts] = await Promise.all([
-    fetchJson(joinUrl(baseUrl, 'authors/data.json'), { next: { revalidate: 60 } }),
-    fetchJson(joinUrl(baseUrl, 'categories/data.json'), { next: { revalidate: 60 } }),
-    mapWithConcurrency(slugs, BLOG_CDN_FETCH_CONCURRENCY, async (slug) => {
-      const url = joinUrl(baseUrl, `posts/${slug}.md`);
-
-      try {
-        const raw = await fetchText(
-          url,
-          {
-            next: { revalidate: 60 },
-          },
-          { attempts: BLOG_CDN_FETCH_RETRIES + 1, slug }
-        );
-        const { data, content } = matter(raw);
-
-        return {
-          slug,
-          fileName: `${slug}.md`,
-          raw,
-          data,
-          content,
-        };
-      } catch (error) {
-        if (error instanceof BlogContentFetchError) {
-          throw error;
-        }
-
-        throw new Error(
-          `Failed to parse frontmatter for post "${slug}" from ${url}: ${error.message}`
-        );
-      }
-    }),
-  ]);
-
-  return createSnapshot({
-    source: 'cdn',
-    posts,
-    authorsData: authorsResult.data,
-    authorsRaw: authorsResult.raw,
-    categoriesData: categoriesResult.data,
-    categoriesRaw: categoriesResult.raw,
-  });
-};
-
 const getOctokit = (token) =>
   new Octokit({
     auth: token,
   });
 
+const getGitHubRequestHeaders = () => ({
+  'X-GitHub-Api-Version': '2026-03-10',
+});
+
 const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
   if (!owner || !repo || !token) {
     throw new BlogContentConfigError(
-      'BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_GITHUB_TOKEN are required for branch content'
+      'BLOG_REPO_OWNER, BLOG_REPO_NAME, and BLOG_GITHUB_TOKEN are required for blog preview content'
     );
   }
 
@@ -364,13 +139,22 @@ const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
       owner,
       repo,
       branch,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
+      headers: getGitHubRequestHeaders(),
     });
 
+    const commitSha = data.commit && data.commit.sha;
+    const treeSha =
+      data.commit && data.commit.commit && data.commit.commit.tree && data.commit.commit.tree.sha;
+
+    if (!commitSha || !treeSha) {
+      throw new BlogContentConfigError(
+        `GitHub branch "${branch}" response does not include commit and tree SHAs`
+      );
+    }
+
     return {
-      commitSha: data.commit.sha,
+      commitSha,
+      treeSha,
     };
   } catch (error) {
     if (error.status === 404) {
@@ -381,70 +165,282 @@ const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
   }
 };
 
-const extractTarballToDirectory = async (response, destinationDir) => {
-  if (!response.body) {
-    throw new Error('GitHub archive response did not include a body');
-  }
+const getGitHubTreeEntries = async ({ owner, repo, branch, treeSha, token }) => {
+  try {
+    const octokit = getOctokit(token);
+    const { data } = await octokit.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+      owner,
+      repo,
+      tree_sha: treeSha,
+      recursive: '1',
+      headers: getGitHubRequestHeaders(),
+    });
 
-  await pipeline(
-    Readable.fromWeb(response.body),
-    createGunzip(),
-    tar.x({
-      cwd: destinationDir,
-      strip: 1,
-    })
-  );
-};
+    if (data.truncated) {
+      throw new BlogContentConfigError(
+        `GitHub tree for blog preview branch "${branch}" is too large to load safely`
+      );
+    }
 
-const readBlogSnapshotFromGitHubBranch = async ({ owner, repo, branch, token }) => {
-  const { commitSha } = await getGitHubBranchInfo({ owner, repo, branch, token });
-  const archiveUrl = `https://api.github.com/repos/${owner}/${repo}/tarball/${commitSha}`;
-
-  const response = await fetch(archiveUrl, {
-    headers: {
-      authorization: `Bearer ${token}`,
-      'user-agent': BLOG_CONTENT_USER_AGENT,
-    },
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    if (response.status === 404) {
+    return data.tree || [];
+  } catch (error) {
+    if (error.status === 404) {
       throw new BlogContentBranchNotFoundError(branch);
     }
 
-    throw new Error(
-      `Failed to fetch GitHub archive for ${owner}/${repo}@${branch}: ${response.status}`
-    );
-  }
-
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-blog-archive-'));
-
-  try {
-    await extractTarballToDirectory(response, tempDir);
-
-    return await readBlogSnapshotFromDirectory({
-      rootDir: tempDir,
-      source: 'branch',
-      branch,
-      commitSha,
-    });
-  } finally {
-    await fs.rm(tempDir, { recursive: true, force: true });
+    throw error;
   }
 };
 
-const hasLocalBlogContent = async (rootDir = process.cwd()) => {
-  const blogDir = path.join(rootDir, BLOG_CONTENT_DIRNAME);
+const mapWithConcurrency = async (items, limit, mapper) => {
+  const results = [];
 
-  try {
-    const stat = await fs.stat(blogDir);
-    return stat.isDirectory();
-  } catch (error) {
-    void error;
-
-    return false;
+  for (let index = 0; index < items.length; index += limit) {
+    const batch = items.slice(index, index + limit);
+    results.push(...(await Promise.all(batch.map(mapper))));
   }
+
+  return results;
+};
+
+const fetchGitHubTextFile = async ({ owner, repo, commitSha, token, filePath }) => {
+  try {
+    const octokit = getOctokit(token);
+    const { data } = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+      owner,
+      repo,
+      path: filePath,
+      ref: commitSha,
+      headers: getGitHubRequestHeaders(),
+    });
+
+    if (Array.isArray(data) || data.type !== 'file' || !data.content) {
+      throw new Error(`GitHub path "${filePath}" is not a file`);
+    }
+
+    return Buffer.from(data.content, data.encoding === 'base64' ? 'base64' : 'utf8').toString(
+      'utf8'
+    );
+  } catch (error) {
+    if (error.status === 404) {
+      return null;
+    }
+
+    throw error;
+  }
+};
+
+const parseJsonWithRaw = (raw, fallback) => {
+  if (!raw) {
+    const fallbackRaw = JSON.stringify(fallback, null, 2);
+
+    return {
+      data: fallback,
+      raw: fallbackRaw,
+    };
+  }
+
+  return {
+    data: JSON.parse(raw),
+    raw,
+  };
+};
+
+const readJsonFromGitHub = async ({ owner, repo, commitSha, token, filePath, fallback }) => {
+  const raw = await fetchGitHubTextFile({ owner, repo, commitSha, token, filePath });
+
+  return parseJsonWithRaw(raw, fallback);
+};
+
+const readPostFromGitHub = async ({ owner, repo, commitSha, token, filePath, fileName }) => {
+  const raw = await fetchGitHubTextFile({
+    owner,
+    repo,
+    commitSha,
+    token,
+    filePath,
+  });
+
+  if (!raw) {
+    return null;
+  }
+
+  const { data, content } = matter(raw);
+
+  return {
+    slug: fileName.replace(/\.md$/u, ''),
+    fileName,
+    raw,
+    data,
+    content,
+  };
+};
+
+const readPostsFromGitHub = async ({ owner, repo, commitSha, token, postSlug }) => {
+  const fileName = `${postSlug}.md`;
+  const post = await readPostFromGitHub({
+    owner,
+    repo,
+    commitSha,
+    token,
+    filePath: `${BLOG_POSTS_DIRNAME}/${fileName}`,
+    fileName,
+  });
+
+  return post ? [post] : [];
+};
+
+const isBlogPostPath = (filePath) =>
+  filePath.startsWith(`${BLOG_POSTS_DIRNAME}/`) && filePath.endsWith('.md');
+
+const getPostFileNameFromPath = (filePath) => path.basename(filePath);
+
+const isBlogSnapshotPath = (filePath) =>
+  filePath === BLOG_AUTHORS_DATA_PATH ||
+  filePath === BLOG_CATEGORIES_DATA_PATH ||
+  isBlogPostPath(filePath);
+
+const fetchGitHubTextFiles = async ({ owner, repo, commitSha, token, filePaths }) => {
+  const filesByPath = new Map();
+  const batches = [];
+
+  for (let index = 0; index < filePaths.length; index += GITHUB_BLOB_FETCH_BATCH_SIZE) {
+    batches.push(filePaths.slice(index, index + GITHUB_BLOB_FETCH_BATCH_SIZE));
+  }
+
+  await mapWithConcurrency(batches, GITHUB_BLOB_FETCH_BATCH_CONCURRENCY, async (batchFilePaths) => {
+    const octokit = getOctokit(token);
+    const queryFields = batchFilePaths
+      .map((filePath, index) => {
+        const expression = JSON.stringify(`${commitSha}:${filePath}`);
+
+        return `file${index}: object(expression: ${expression}) { ... on Blob { text isBinary } }`;
+      })
+      .join('\n');
+    const { data } = await octokit.request('POST /graphql', {
+      query: `
+        query BlogPreviewFiles($owner: String!, $repo: String!) {
+          repository(owner: $owner, name: $repo) {
+            ${queryFields}
+          }
+        }
+      `,
+      variables: { owner, repo },
+      headers: getGitHubRequestHeaders(),
+    });
+    const repository = (data.data && data.data.repository) || data.repository || {};
+
+    batchFilePaths.forEach((filePath, index) => {
+      const blob = repository[`file${index}`];
+
+      if (!blob || blob.isBinary || typeof blob.text !== 'string') {
+        throw new Error(`GitHub path "${filePath}" is not a readable text file`);
+      }
+
+      filesByPath.set(filePath, blob.text);
+    });
+  });
+
+  return filesByPath;
+};
+
+const readBlogSnapshotFromGitHubTree = async ({ owner, repo, branch, commitSha, treeSha, token }) => {
+  const treeEntries = await getGitHubTreeEntries({ owner, repo, branch, treeSha, token });
+  const filePaths = treeEntries
+    .filter((entry) => entry.type === 'blob' && isBlogSnapshotPath(entry.path))
+    .map((entry) => entry.path)
+    .sort((left, right) => left.localeCompare(right));
+  const filesByPath = await fetchGitHubTextFiles({ owner, repo, commitSha, token, filePaths });
+  const authorsResult = parseJsonWithRaw(filesByPath.get(BLOG_AUTHORS_DATA_PATH), {});
+  const categoriesResult = parseJsonWithRaw(filesByPath.get(BLOG_CATEGORIES_DATA_PATH), []);
+  const posts = filePaths
+    .filter(isBlogPostPath)
+    .map((filePath) => {
+      const raw = filesByPath.get(filePath);
+      const fileName = getPostFileNameFromPath(filePath);
+      const { data, content } = matter(raw);
+
+      return {
+        slug: fileName.replace(/\.md$/u, ''),
+        fileName,
+        raw,
+        data,
+        content,
+      };
+    });
+
+  return createSnapshot({
+    source: 'branch',
+    branch,
+    commitSha,
+    posts,
+    authorsData: authorsResult.data,
+    authorsRaw: authorsResult.raw,
+    categoriesData: categoriesResult.data,
+    categoriesRaw: categoriesResult.raw,
+  });
+};
+
+const readBlogBranchInfoFromGitHub = async ({ owner, repo, branch, token }) => {
+  const { commitSha } = await getGitHubBranchInfo({ owner, repo, branch, token });
+
+  return {
+    source: 'branch',
+    branch,
+    commitSha,
+  };
+};
+
+const readBlogSnapshotFromGitHubBranch = async ({
+  owner,
+  repo,
+  branch,
+  token,
+  postSlug = null,
+}) => {
+  const { commitSha, treeSha } = await getGitHubBranchInfo({ owner, repo, branch, token });
+
+  if (!postSlug) {
+    return readBlogSnapshotFromGitHubTree({
+      owner,
+      repo,
+      branch,
+      commitSha,
+      treeSha,
+      token,
+    });
+  }
+
+  const [authorsResult, categoriesResult, posts] = await Promise.all([
+    readJsonFromGitHub({
+      owner,
+      repo,
+      commitSha,
+      token,
+      filePath: BLOG_AUTHORS_DATA_PATH,
+      fallback: {},
+    }),
+    readJsonFromGitHub({
+      owner,
+      repo,
+      commitSha,
+      token,
+      filePath: BLOG_CATEGORIES_DATA_PATH,
+      fallback: [],
+    }),
+    readPostsFromGitHub({ owner, repo, branch, commitSha, token, postSlug }),
+  ]);
+
+  return createSnapshot({
+    source: 'branch',
+    branch,
+    commitSha,
+    posts,
+    authorsData: authorsResult.data,
+    authorsRaw: authorsResult.raw,
+    categoriesData: categoriesResult.data,
+    categoriesRaw: categoriesResult.raw,
+  });
 };
 
 const readLocalBlogSnapshot = async (rootDir = process.cwd()) =>
@@ -453,82 +449,12 @@ const readLocalBlogSnapshot = async (rootDir = process.cwd()) =>
     source: 'local',
   });
 
-const writeBlogSnapshotToDirectory = async ({ snapshot, destinationDir, force = false }) => {
-  if (force) {
-    await fs.rm(destinationDir, { recursive: true, force: true });
-  } else {
-    try {
-      await fs.access(destinationDir);
-      throw new Error(
-        `${destinationDir} already exists. Re-run with --force to overwrite the local working copy.`
-      );
-    } catch (error) {
-      if (error.code !== 'ENOENT') {
-        throw error;
-      }
-    }
-  }
-
-  await ensureDirectory(path.join(destinationDir, 'posts'));
-  await ensureDirectory(path.join(destinationDir, 'authors'));
-  await ensureDirectory(path.join(destinationDir, 'categories'));
-
-  await Promise.all([
-    fs.writeFile(path.join(destinationDir, 'authors/data.json'), snapshot.authorsRaw, 'utf8'),
-    fs.writeFile(path.join(destinationDir, 'categories/data.json'), snapshot.categoriesRaw, 'utf8'),
-    ...snapshot.posts.map((post) =>
-      fs.writeFile(path.join(destinationDir, 'posts', post.fileName), post.raw, 'utf8')
-    ),
-  ]);
-};
-
-const createSnapshotFileMap = (snapshot) => {
-  const fileMap = new Map();
-
-  fileMap.set('authors/data.json', snapshot.authorsRaw);
-  fileMap.set('categories/data.json', snapshot.categoriesRaw);
-
-  snapshot.posts.forEach((post) => {
-    fileMap.set(`posts/${post.fileName}`, post.raw);
-  });
-
-  return fileMap;
-};
-
-const compareSnapshots = (left, right) => {
-  const leftMap = createSnapshotFileMap(left);
-  const rightMap = createSnapshotFileMap(right);
-  const allPaths = new Set([...leftMap.keys(), ...rightMap.keys()]);
-  const changedPaths = [];
-
-  allPaths.forEach((filePath) => {
-    if (leftMap.get(filePath) !== rightMap.get(filePath)) {
-      changedPaths.push(filePath);
-    }
-  });
-
-  return {
-    isEqual: changedPaths.length === 0,
-    changedPaths: changedPaths.sort(),
-  };
-};
-
-const resolveChangedPostSlugs = (changedPaths) =>
-  changedPaths
-    .filter((filePath) => filePath.startsWith('posts/') && filePath.endsWith('.md'))
-    .map((filePath) => path.basename(filePath, '.md'));
-
 export {
   BLOG_CONTENT_DIRNAME,
   BlogContentBranchNotFoundError,
   BlogContentConfigError,
-  BlogContentFetchError,
-  compareSnapshots,
-  createSnapshotFileMap,
-  hasLocalBlogContent,
-  readBlogSnapshotFromCdn,
+  readBlogSnapshotFromDirectory,
+  readBlogBranchInfoFromGitHub,
   readBlogSnapshotFromGitHubBranch,
   readLocalBlogSnapshot,
-  resolveChangedPostSlugs,
-  writeBlogSnapshotToDirectory,
 };

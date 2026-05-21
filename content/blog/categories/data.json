@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "ai",
+    "name": "AI"
+  },
+  {
+    "slug": "app-platform",
+    "name": "App Platform"
+  },
+  {
+    "slug": "case-study",
+    "name": "Case Studies"
+  },
+  {
+    "slug": "community",
+    "name": "Community"
+  },
+  {
+    "slug": "company",
+    "name": "Company"
+  },
+  {
+    "slug": "engineering",
+    "name": "Engineering"
+  },
+  {
+    "slug": "postgres",
+    "name": "Postgres"
+  },
+  {
+    "slug": "product",
+    "name": "Product"
+  },
+  {
+    "slug": "uncategorized",
+    "name": "Uncategorized"
+  },
+  {
+    "slug": "workflows",
+    "name": "Workflows"
+  }
+]
