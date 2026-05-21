@@ -142,9 +142,19 @@ const getGitHubBranchInfo = async ({ owner, repo, branch, token }) => {
       headers: getGitHubRequestHeaders(),
     });
 
+    const commitSha = data.commit && data.commit.sha;
+    const treeSha =
+      data.commit && data.commit.commit && data.commit.commit.tree && data.commit.commit.tree.sha;
+
+    if (!commitSha || !treeSha) {
+      throw new BlogContentConfigError(
+        `GitHub branch "${branch}" response does not include commit and tree SHAs`
+      );
+    }
+
     return {
-      commitSha: data.commit.sha,
-      treeSha: data.commit.commit && data.commit.commit.tree ? data.commit.commit.tree.sha : branch,
+      commitSha,
+      treeSha,
     };
   } catch (error) {
     if (error.status === 404) {
