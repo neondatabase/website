@@ -3,7 +3,7 @@ title: 'How do I rotate all my Neon database credentials and connection strings 
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-05-22T12:41:06.646Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -65,5 +65,3 @@ A reset password changes the connection string. Find every place it's stored:
 - Local developer `.env` files (notify the team)
 
 After the rollout, monitor your application logs for `password authentication failed` errors. Those flag a place you missed.
-
-<CTA title="Engage Neon Support for incident response" description="If sensitive data may have been accessed, contact Support to coordinate audit log review and additional hardening." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />
