@@ -1,47 +1,65 @@
 ---
-title: Neon documentation
+eyebrow: Neon documentation
+title: Neon is the Postgres‑native backend platform
+subtitle: for apps and agents.
 summary: >-
   How to build application backends on Neon, the Postgres-native backend
   platform with managed authentication, an HTTP Data API, database branching,
   and autoscaling built in.
+layout: wide
 redirectFrom:
   - /guides/neon-azure-integration
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-15T17:07:45.989Z'
+updatedOn: '2026-05-22T02:15:31.867Z'
 ---
 
-Neon is the Postgres-native backend platform. Build and scale application backends with **managed authentication**, an **HTTP Data API**, **database branching**, and **autoscaling** all built in. Get started with our [Free plan](https://console.neon.tech)
+<TwinPaths>
+  <QuickPath
+    title="One-command setup"
+    command="npx neonctl@latest init"
+    description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step."
+  />
+  <GuidedPath
+    title="Build a full backend"
+    description="Next.js + Postgres + Neon Auth + Drizzle. The full Neon stack, end-to-end, from create-next-app to deployed."
+    href="/docs/get-started/full-backend-quickstart"
+  />
+</TwinPaths>
 
-<CTA
-  title="Set up Neon in one command"
-  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more<svg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg' style='display:inline-block;vertical-align:middle;margin-left:8px' aria-hidden='true'><path d='M11.1084 10.9211L14.9999 7.02965L11.1084 3.13816' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/><path d='M0.938093 7.03198L13.666 7.03198' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/></svg></a>"
-  command="npx neonctl@latest init"
-  trackingLabel="Copy neonctl init - docs intro"
-/>
+<div className="mt-12 mb-3.5 flex items-baseline justify-between gap-4">
+  <h2 className="m-0!">Your Neon backend</h2>
+  <a href="/docs/introduction/early-access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
+</div>
 
-## The Neon platform
+Branch your backend in seconds. Postgres, schema, and auth together for every preview, feature, or agent run.
 
-<DetailIconCards>
+<DetailIconCards cols={4}>
 
-<a href="/docs/introduction/serverless" description="Serverless Postgres with database branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
+<a href="/docs/introduction/serverless" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Managed authentication with sign-up, sign-in, OAuth, and session management. Branches with your data." icon="lock-landscape">Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="binary-code">Data API</a>
+
+<a href="/docs/introduction/early-access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
+
+<a href="/docs/introduction/early-access" description="Serverless TypeScript, deployed alongside your DB." icon="code" tag="coming soon">Functions</a>
+
+<a href="/docs/introduction/early-access" description="Scheduled SQL queries, branched per project." icon="calendar-day" tag="coming soon">Cron</a>
+
+<a href="/docs/introduction/early-access" description="Unified client SDK for functions and storage." icon="setup" tag="coming soon">Neon SDK</a>
+
+<a href="/docs/introduction/early-access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
 
 </DetailIconCards>
-
-Plus [Data API](/docs/data-api/overview) for HTTPS queries with no backend code. Storage, functions, and cron coming soon — see the [roadmap](/docs/introduction/roadmap).
-
-## Get started
-
-[**Build a full backend**](/docs/get-started/full-backend-quickstart) — Next.js + Postgres + Auth + Drizzle. The full Neon stack in 15 minutes.
 
 ## Connect your framework
 
 Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides for full connection details.
 
-<TechCards withToggler>
+<PromptCards withToggler>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect Next.js to Neon" icon="next-js"></a>
 
@@ -107,13 +125,13 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 
 <a href="/docs/guides/redwoodsdk" title="Redwood" description="Connect Redwood SDK to Neon" icon="redwoodsdk"></a>
 
-</TechCards>
+</PromptCards>
 
 ## AI tools and agents
 
-Neon integrates with AI coding tools through MCP. Pick your editor for setup and integration details.
+Neon integrates with AI coding tools and agents through MCP. Pick your editor for setup and integration details.
 
-<DetailIconCards compact>
+<DetailIconCards cols={4}>
 
 <a href="/docs/ai/ai-cursor-plugin" description="Connect Neon to Cursor with the MCP server" icon="cli-cursor">Cursor</a>
 
@@ -125,8 +143,4 @@ Neon integrates with AI coding tools through MCP. Pick your editor for setup and
 
 </DetailIconCards>
 
-## Join the community
-
-Questions about Neon or Postgres? Join our [Discord Server](https://discord.com/invite/92vNTzKDGp)
-
-<CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
+Questions about Neon or Postgres? [Join our Discord →](https://discord.com/invite/92vNTzKDGp)

@@ -7,29 +7,12 @@ summary: >-
   sign-in. Server-side data access, ready to deploy on Vercel.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-15T17:07:45.989Z'
+updatedOn: '2026-05-22T02:15:31.867Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
-
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to set up your editor with Neon's MCP server. Then ask your AI assistant "Get started with Neon" and it will handle the Neon project setup for you.
-
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
-
-By the end of this tutorial you'll have a Next.js app that:
-
-- Stores and queries posts in **Postgres** using **Drizzle ORM** for type-safe access
-- Signs users in with **Neon Auth** (managed authentication API, called from your own sign-in and sign-up forms)
-- Reads data from a Server Component, ready to deploy on Vercel, Cloudflare, or Netlify
 
 ## Before you start
 
-You'll need [Node.js 20+](https://nodejs.org/) and [psql](https://www.postgresql.org/download/) installed.
+You'll need [Node.js 20+](https://nodejs.org/) installed.
 
 <TwoColumnLayout>
 
@@ -86,6 +69,8 @@ The connection string is in the response under `connection_uris[0].connection_ur
 
 <TwoColumnLayout.Step title="Enable Neon Auth">
 <TwoColumnLayout.Block>
+
+<Tag label="beta" size="sm" /> Neon Auth with Better Auth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
 
 Enable Auth on your project's default branch and copy the **Auth URL**. You'll add it to your environment in step 4.
 
@@ -149,7 +134,7 @@ cd my-backend
 <TwoColumnLayout.Step title="Install dependencies and add environment variables">
 <TwoColumnLayout.Block>
 
-Install three packages: `@neondatabase/neon-js` for auth and the pre-built UI, `drizzle-orm` for typed queries, and `@neondatabase/serverless` for the HTTP driver (works in Node, edge, and serverless runtimes). Add `drizzle-kit` as a dev dependency for the schema migration.
+Install three packages: `@neondatabase/neon-js` for auth, `drizzle-orm` for typed queries, and `@neondatabase/serverless` for the HTTP driver (works in Node, edge, and serverless runtimes). Add `drizzle-kit` as a dev dependency for the schema migration.
 
 Then create `.env.local` with your connection string, Auth URL, and a generated cookie secret.
 
@@ -165,7 +150,7 @@ npm install -D drizzle-kit
 
 ```bash filename=".env.local"
 DATABASE_URL=postgresql://...
-NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.c-7.us-east-1.aws.neon.tech/neondb/auth
 NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
 ```
 
@@ -197,7 +182,12 @@ export const posts = pgTable('posts', {
 ```
 
 ```typescript filename="drizzle.config.ts"
+import { loadEnvConfig } from '@next/env';
 import { defineConfig } from 'drizzle-kit';
+
+// drizzle-kit is a standalone CLI, so it doesn't pick up .env.local automatically.
+// loadEnvConfig matches Next.js's env loading behavior.
+loadEnvConfig(process.cwd());
 
 export default defineConfig({
   schema: './lib/db/schema.ts',
@@ -208,6 +198,10 @@ export default defineConfig({
 });
 ```
 
+<Admonition type="note">
+`bigint('id', { mode: 'number' })` returns a JavaScript `number`. Postgres `bigint` can hold values above `Number.MAX_SAFE_INTEGER` (2^53 - 1), so for tables that may grow past about 9 quadrillion rows, switch to `{ mode: 'bigint' }` to keep precision.
+</Admonition>
+
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
@@ -216,21 +210,21 @@ export default defineConfig({
 
 `drizzle-kit push` creates the table directly from your schema. For production you'd switch to generated migrations, but push is faster for a tutorial.
 
-Then seed two sample posts so you have something to read in step 9.
+Then seed two sample posts in the [Neon Console SQL Editor](https://console.neon.tech) so you have something to read in step 9.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-# Create the table
 npx drizzle-kit push
+```
 
-# Seed sample data
-psql $DATABASE_URL <<EOF
+Open your project in the Neon Console, go to **SQL Editor**, and run:
+
+```sql
 INSERT INTO posts (user_id, content, is_published) VALUES
   ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
   ('00000000-0000-0000-0000-000000000000', 'Posts become visible once published', true);
-EOF
 ```
 
 </TwoColumnLayout.Block>
@@ -312,12 +306,21 @@ export default function SignUpForm() {
     >
       <h1 className="text-2xl font-bold text-white">Create new account</h1>
 
-      <input name="name" type="text" required placeholder="Name"
-        className="w-sm rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      <input name="email" type="email" required placeholder="Email"
-        className="w-sm rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      <input name="password" type="password" required placeholder="Password"
-        className="w-sm rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      <label className="flex w-sm flex-col gap-1.5">
+        <span className="text-sm font-medium text-gray-100">Name</span>
+        <input name="name" type="text" required
+          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      </label>
+      <label className="flex w-sm flex-col gap-1.5">
+        <span className="text-sm font-medium text-gray-100">Email</span>
+        <input name="email" type="email" required
+          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      </label>
+      <label className="flex w-sm flex-col gap-1.5">
+        <span className="text-sm font-medium text-gray-100">Password</span>
+        <input name="password" type="password" required
+          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      </label>
 
       {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
 
@@ -368,10 +371,16 @@ export default function SignInForm() {
     >
       <h1 className="text-2xl font-bold text-white">Sign in to your account</h1>
 
-      <input name="email" type="email" required placeholder="Email"
-        className="w-sm rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      <input name="password" type="password" required placeholder="Password"
-        className="w-sm rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      <label className="flex w-sm flex-col gap-1.5">
+        <span className="text-sm font-medium text-gray-100">Email</span>
+        <input name="email" type="email" required
+          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      </label>
+      <label className="flex w-sm flex-col gap-1.5">
+        <span className="text-sm font-medium text-gray-100">Password</span>
+        <input name="password" type="password" required
+          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
+      </label>
 
       {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
 
@@ -484,7 +493,7 @@ You now have a Next.js app where:
 - Sign-up and sign-in are handled by Neon Auth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
 - The `/posts` route is protected by middleware
 - Published posts are queried server-side via Drizzle with full TypeScript types
-- The same code deploys on Vercel, Cloudflare Pages, Netlify, or any Node host
+- Deploys to any Next.js App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node
 
 ## Next steps
 
