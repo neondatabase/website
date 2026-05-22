@@ -3,7 +3,7 @@ title: "Why am I getting 'Error connecting to database: Failed to fetch' in the 
 subtitle: 'Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk through these in order.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-05-22T12:41:06.646Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -56,5 +56,3 @@ If none of the above explain it, check the [Neon status page](https://neonstatus
 <Admonition type="tip" title="Grab the error ID before contacting Support">
 The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. Support uses that ID to look up the exact request in our logs, which is much faster than reproducing the issue.
 </Admonition>
-
-<CTA title="Still stuck?" description="Open a Support ticket with the error ID, your project ID, and the branch you were viewing." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />
