@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-05-22T09:58:13.239Z'
+updatedOn: '2026-05-22T09:58:49.135Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -337,6 +337,7 @@ from neon_helpers import restore_snapshot
 
 CHECKPOINT_FILE = Path("checkpoint.json")
 
+
 async def main():
     if not CHECKPOINT_FILE.exists():
         print("No checkpoint found.")
@@ -361,11 +362,11 @@ async def main():
     agent_state = await RunState.from_json(admin_agent, agent_state_json)
 
     # 4. Reject the destructive tool call and give the agent new instructions.
-    for interruption in agent_state.interruptions:
+    for interruption in agent_state.get_interruptions():
         print(f"\n❌ Rejecting previously planned tool: {interruption.name}")
         agent_state.reject(
             interruption,
-            rejection_message="Action denied by admin. Do not drop the table. List the users instead.",
+            rejection_message="Action denied by admin. Do not drop the table. List the users instead and reply that it is against TOS to drop the table.",
         )
 
     # 5. Resume the agent from the checkpoint.
@@ -374,6 +375,7 @@ async def main():
 
     print("\n🏁 New Final Output:")
     print(result.final_output)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
