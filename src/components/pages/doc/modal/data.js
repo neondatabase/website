@@ -5,8 +5,8 @@ const MODALS = [
     id: 'branching-video',
     pagesToShow: ['Neon Docs'],
     embedId: 'UuHnFlg66Io',
-    title: 'New: Branching in 90 seconds',
-    description: 'See how copy-on-write branches work in practice.',
+    title: 'Watch: Git for databases',
+    description: 'See how Neon branching works in practice.',
     link: {
       title: 'Watch the video',
       url: '/docs/introduction/branching',
