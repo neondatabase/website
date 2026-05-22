@@ -3,7 +3,7 @@ title: 'Where can I find or generate API keys for Neon?'
 subtitle: 'Generate keys in Account or Organization settings. Neon shows the token once at creation.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

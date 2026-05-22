@@ -3,7 +3,7 @@ title: 'Can I change the region of my existing Neon project after creation?'
 subtitle: 'No. Region is fixed at project creation. Migrate to a new project to change regions.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T14:42:53.313Z'
 isDraft: false
 redirectFrom: []
 ---

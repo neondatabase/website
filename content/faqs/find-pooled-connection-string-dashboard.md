@@ -3,7 +3,7 @@ title: 'Where can I find the pooled connection string in my Neon dashboard?'
 subtitle: 'Open the Connect widget on the Project Dashboard and toggle Connection pooling on.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T14:42:53.313Z'
 isDraft: false
 redirectFrom: []
 ---

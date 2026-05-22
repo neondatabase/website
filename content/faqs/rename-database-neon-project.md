@@ -3,7 +3,7 @@ title: 'How do I rename a database in my Neon project?'
 subtitle: 'Connect to a different database on the same branch, then run ALTER DATABASE ... RENAME TO.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

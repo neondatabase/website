@@ -6,7 +6,7 @@ summary: >-
   data transfer and transformation.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-12T09:05:54.263Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)

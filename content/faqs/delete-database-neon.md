@@ -3,7 +3,7 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

@@ -3,7 +3,7 @@ title: 'Where can I find my database connection string in Neon?'
 subtitle: 'Copy it from the Connect widget on your Project Dashboard, with options for pooled or direct.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

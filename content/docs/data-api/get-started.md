@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.

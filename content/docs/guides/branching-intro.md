@@ -6,7 +6,7 @@ summary: >-
   workflows, including automation with APIs, CLI, and CI/CD tools for efficient
   branch management and preview deployments.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.

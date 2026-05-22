@@ -8,7 +8,7 @@ summary: >-
   management and middleware creation.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T21:06:51.697Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.

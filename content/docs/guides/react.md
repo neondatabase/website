@@ -6,7 +6,7 @@ summary: >-
   database using various React meta-frameworks, ensuring proper server-side
   access.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.

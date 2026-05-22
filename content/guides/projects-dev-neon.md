@@ -4,7 +4,7 @@ subtitle: 'How AI agents can provision infrastructure and build real application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-15T06:36:44.402Z'
 ---
 
 AI has made writing code insanely easy, but all the tiny setup tasks around it still kill your momentum.

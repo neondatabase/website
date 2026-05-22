@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 The fastest way to connect your editor to Neon Auth is to run `npx neonctl@latest init` from your project root:

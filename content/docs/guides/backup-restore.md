@@ -7,7 +7,7 @@ summary: >-
   automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-20T14:13:43.586Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">

@@ -3,7 +3,7 @@ title: 'How do I create a new database in my Neon project?'
 subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

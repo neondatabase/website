@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 Several frameworks support [Neon Auth](/docs/auth/overview), managed authentication stored in your database that **branches with your data**. Quick starts are available for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router).

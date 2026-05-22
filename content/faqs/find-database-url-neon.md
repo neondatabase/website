@@ -3,7 +3,7 @@ title: 'Where can I find my DATABASE_URL in Neon?'
 subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

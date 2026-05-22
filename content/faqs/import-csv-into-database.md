@@ -3,7 +3,7 @@ title: 'How do I import data from a CSV file into my Neon database?'
 subtitle: 'Use psql with \copy from your local machine, or pgloader for large or messy CSVs.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

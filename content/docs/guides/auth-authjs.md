@@ -7,7 +7,7 @@ summary: >-
   application using Auth.js with Neon Postgres as the database backend and
   Resend for sending magic link emails.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <Admonition type="tip" title="Authentication on Neon">

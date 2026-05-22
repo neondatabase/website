@@ -3,7 +3,7 @@ title: 'How do I export or download my Neon database as a SQL file?'
 subtitle: 'Run pg_dump in plain-text format against a direct (non-pooled) connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

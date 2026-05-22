@@ -5,7 +5,7 @@ summary: >-
   including exporting data from Turso, schema and data type considerations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-13T07:11:52.174Z'
 ---
 
 This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

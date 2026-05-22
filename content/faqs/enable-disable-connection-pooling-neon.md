@@ -3,7 +3,7 @@ title: 'How do I enable or disable connection pooling for my Neon database?'
 subtitle: 'Toggle pooled connections from the Connect widget, or set pooler_enabled on the endpoint via the API.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T14:42:53.313Z'
 isDraft: false
 redirectFrom: []
 ---

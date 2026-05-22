@@ -6,7 +6,7 @@ summary: >-
   covering project setup, SDK installation, environment variable configuration,
   and client setup for authentication methods.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components

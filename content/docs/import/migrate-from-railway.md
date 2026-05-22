@@ -7,7 +7,7 @@ summary: >-
   `pg_dump` and `pg_restore`, detailing prerequisites and step-by-step
   instructions for preparing and exporting data.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-12T17:58:17.469Z'
 ---
 
 This guide describes how to migrate a database from Railway to Neon Postgres using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.

@@ -6,7 +6,7 @@ summary: >-
   in your application using Neon Auth, including Google Cloud redirect URIs,
   trusted domains, and production configuration.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-15T15:00:29.570Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

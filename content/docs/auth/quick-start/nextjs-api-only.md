@@ -6,7 +6,7 @@ summary: >-
   enabling authentication, installing the Neon SDK, and setting up environment
   variables.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T20:37:50.454Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs

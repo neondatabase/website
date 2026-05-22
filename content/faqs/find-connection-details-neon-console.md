@@ -3,7 +3,7 @@ title: 'Where can I find my database connection details in the Neon Console?'
 subtitle: 'Everything you need lives in the Connect widget on the Project Dashboard.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

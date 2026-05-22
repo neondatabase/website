@@ -3,7 +3,7 @@ title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
 subtitle: 'Project Dashboard → Connect. Pick branch, database, and role; copy the string for your framework.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T19:11:12.829Z'
 isDraft: false
 redirectFrom: []
 ---

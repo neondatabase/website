@@ -5,7 +5,7 @@ summary: >-
   Covers trusted domains for Neon Auth: exact origins, wildcard preview domains,
   and enabling secure OAuth and email verification redirects.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-15T15:00:29.570Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

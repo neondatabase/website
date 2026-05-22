@@ -3,7 +3,7 @@ title: 'How do I reset or change my database password in Neon?'
 subtitle: 'Reset a role password from the Console, the Neon API, or with ALTER ROLE in SQL.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-18T14:42:53.313Z'
 isDraft: false
 redirectFrom: []
 ---

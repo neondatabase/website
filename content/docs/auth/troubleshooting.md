@@ -6,7 +6,7 @@ summary: >-
   OAuth redirect URIs, trusted domains, environment configuration, adapter
   setup, CSS imports, and framework-specific requirements.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T20:19:55.872Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).

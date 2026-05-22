@@ -7,7 +7,7 @@ summary: >-
   application using a Neon Postgres database, covering project setup, database
   connection, schema definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
