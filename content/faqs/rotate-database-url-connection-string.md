@@ -3,7 +3,7 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-05-22T12:41:06.646Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -49,7 +49,7 @@ See [Reset a password](/docs/manage/roles#reset-a-password) for details.
 
 ## Option 2: Create a new role and migrate consumers
 
-If you have many consumers and want zero downtime, create a parallel role. Both connection strings keep working until you remove the old one.
+If you have many consumers and want zero downtime, create a parallel role. Both connection strings keep working while you migrate, then you invalidate the old credentials at the end.
 
 ```sql
 -- Create the new role (or use the Console UI under Roles & Databases)
@@ -70,16 +70,19 @@ Then:
 1. Build the new `DATABASE_URL` using `app_v2` and its password.
 2. Roll it out to your deploy targets one service at a time.
 3. Monitor connection counts to confirm nothing still uses the old role.
-4. Drop the old role once it's idle:
+4. **Reset the old role's password** to invalidate the leaked credentials:
 
    ```sql
-   DROP ROLE old_role_name;
+   ALTER USER old_role_name WITH PASSWORD 'a-strong-random-value-no-one-keeps';
    ```
 
-   The role can only be dropped if it doesn't own any database objects. See [Delete a role](/docs/manage/roles#delete-a-role).
+   This is the step that actually closes the breach. You can also reset it from the Console under **Roles & Databases**. Do not skip this step, even if no service uses the old role anymore.
 
-<Admonition type="tip" title="The hostname doesn't change">
-Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx-yyy` portion of your URL is the compute ID. If you need to change the hostname too, you'll need to recreate the project or compute.
+<Admonition type="important" title="Why you usually can't drop the old role">
+In most projects, the original role owns the database, schemas, and tables. `DROP ROLE` fails if the role owns any objects, and during an incident is the wrong time to reassign ownership across your schema. Resetting the password is the realistic 99% path: the role stays as the owner of its objects, but the leaked credentials no longer authenticate.
+
+If you do want to remove the role later (outside of incident pressure), you'll need to [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of every object it owns, then drop it. See [Delete a role](/docs/manage/roles#delete-a-role).
 </Admonition>
 
-<CTA title="Need help with a complex rotation?" description="Contact Neon Support if you're rotating across many projects or need help auditing access." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />
+**Note: The hostname doesn't change**
+Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx-yyy` portion of your URL is the compute ID. If you need to change the hostname too, you'll need to recreate the project or compute.

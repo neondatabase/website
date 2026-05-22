@@ -30,7 +30,7 @@ For any AI tool that supports the [Agent Skills](https://agentskills.io) format,
 npx skills add neondatabase/agent-skills -s neon-postgres
 ```
 
-This works with Cursor, Claude Code, and other compatible tools. The `-s` flag selects a specific skill from the repository. Available skills include `neon-postgres` (the main Neon development skill) and `claimable-postgres` (for [disposable databases](/docs/reference/claimable-postgres)).
+This works with Cursor, Claude Code, and other compatible tools. The `-s` flag selects a specific skill from the repository. Available skills include `neon-postgres` (the main Neon development skill), `neon-postgres-egress-optimizer` (for optimizing egress traffic), `neon-postgres-branches` (for working with branches), and `claimable-postgres` (for [disposable databases](/docs/reference/claimable-postgres)).
 
 Useful flags:
 
