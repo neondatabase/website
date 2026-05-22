@@ -22,7 +22,7 @@ neon branches create --name test-migration --parent main
 Get a connection string for that branch:
 
 ```bash
-neon connection-string --branch test-migration
+neon connection-string test-migration
 ```
 
 Run your migration against that connection string. If it breaks something, drop the branch:

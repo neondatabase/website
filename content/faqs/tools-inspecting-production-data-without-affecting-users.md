@@ -34,7 +34,7 @@ Branches are included on all plans: 10/project on Free and Launch, 25 on Scale. 
 If you want the live state of production rather than a point-in-time fork, add a read replica. The replica reads from the same storage as your primary, but runs on its own compute, so analytics queries and BI dashboards don't compete with application traffic.
 
 ```bash
-neon endpoints create --branch main --type read_only
+neon branches add-compute main --type read_only
 ```
 
 Use the read-only endpoint's connection string for read traffic. Replicas count toward CU-hour usage like any other compute.
