@@ -6,7 +6,7 @@ page_description: >-
   to remove one or more views from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE VIEW
@@ -91,7 +91,7 @@ WHERE
   category = 'Horror';
 ```
 
-The following statement creates a view called `comedy_film` based on the `film_master` view:
+The following statement creates a view called `comedy_film` based on the `film_info` view:
 
 ```sql
 CREATE VIEW comedy_film AS

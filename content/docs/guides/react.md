@@ -6,7 +6,7 @@ summary: >-
   database using various React meta-frameworks, ensuring proper server-side
   access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.036Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
@@ -28,5 +28,19 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
 </TechCards>
+
+## Neon Auth
+
+After you connect your database, add managed authentication with [Neon Auth](/docs/auth/overview). Quick starts are available for supported React meta-frameworks:
+
+<TechCards>
+
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Set up Neon Auth with Next.js" icon="next-js"></a>
+
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Set up Neon Auth with TanStack Router" icon="tanstack"></a>
+
+</TechCards>
+
+For React Router, follow the [React Auth quick start](/docs/auth/quick-start/react).
 
 <NeedHelp/>

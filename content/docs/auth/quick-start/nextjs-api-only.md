@@ -6,7 +6,7 @@ summary: >-
   enabling authentication, installing the Neon SDK, and setting up environment
   variables.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -15,14 +15,7 @@ redirectFrom:
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
-
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetupTip />
 
 This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. For pre-built UI components, see the [UI components reference](/docs/auth/reference/ui-components) and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples). Upgrading from v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1).
 
@@ -95,7 +88,11 @@ Create a unified auth instance in `lib/auth/server.ts`. This single instance pro
 - `.middleware()` for route protection
 - `.getSession()` and all Better Auth server methods
 
-See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation (logging, cookies, upstream errors).
+
+<Admonition type="note" title="Server logging">
+The SDK logs structured **`error`** and **`warn`** messages to **`console`** by default (`logLevel: 'warn'`). This helps when the auth proxy or upstream Auth URL is misconfigured. Set **`logLevel: 'silent'`** to disable Neon Auth logging, or **`logLevel: 'debug'`** for more detail. See [Server logging](/docs/auth/reference/nextjs-server#server-logging) in the reference.
+</Admonition>
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -107,7 +104,10 @@ export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+    // sessionDataTtl: 300, // optional session_data cache TTL in seconds (default: 300)
   },
+  // logLevel: 'silent', // disable Neon Auth logging
+  // logLevel: 'debug',  // verbose proxy/upstream logging
 });
 ```
 
@@ -480,6 +480,8 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 
 ## Next steps
 
+- [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) — logging, cookie options, and upstream error codes
+- [Auth troubleshooting](/docs/auth/troubleshooting#neon-auth-server-logging-in-the-terminal) — server logging, `NETWORK_*` errors, iframe cookies
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
 - [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory

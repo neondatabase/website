@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -78,6 +78,9 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Higher manual snapshot limits**: Paid plans (Launch and Scale) now include 100 manual snapshots per project, up from 10. [Learn more](/docs/guides/backup-restore).
+- **Neon Auth new plugins**: Magic Link sign-in, phone number (OTP) sign-in, wildcard trusted domains, and custom application name configuration are now available in Neon Auth. [Learn more](/docs/auth/guides/plugins/magic-link).
+- **Neon Auth MCP tools**: Two new Neon MCP Server tools (`configure_neon_auth` and `get_neon_auth_config`) let you set up and inspect your Neon Auth configuration from your AI editor using natural language. [Learn more](/docs/ai/neon-mcp-server).
 - **Faster writes**: Neon disabled full-page writes (FPW) across all projects, delivering up to 5x write throughput improvement with no changes required on your end. [Read the announcement](/blog/turning-off-fpw-for-faster-writes).
 - **Require 2FA for your organization**: Org admins can now enforce two-factor authentication for all members from Organization Settings. [Learn more](/docs/manage/orgs-manage#require-2fa-for-organization-members).
 - **One-click Neon MCP setup for Kiro**: The Neon MCP Server now supports an Add to Kiro badge for one-click MCP setup in the Kiro IDE. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
@@ -93,7 +96,7 @@ And here's an overview of what we're looking at next:
 - **Data API Advisors**: A new Monitoring tab scans your database when you use the Data API and reports security and performance issues (such as missing RLS or unindexed foreign keys) with recommended fixes. [Learn more](/docs/data-api/database-advisor).
 - **Cursor plugin for Neon**: The Neon Postgres plugin adds Neon Skills and MCP to Cursor so your assistant can use workflow guidance and run database operations from natural language. [Learn more](/docs/ai/ai-cursor-plugin).
 - **Neon CircleCI Orb**: A community-contributed orb provisions a Neon database branch per job for isolated, production-like CI. [Learn more](/docs/guides/branching-circleci).
-- **Add organization members by domain**: Verify email domains in Organization Settings so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
+- **Add organization members by domain**: Verify email domains on the organization People page so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
 - **TimescaleDB on Postgres 18**: The timescaledb extension is now supported on Postgres 18. [Learn more](/docs/extensions/timescaledb).
 - **Claimable Postgres agent skill**: A new agent skill lets your AI assistant provision instant temporary databases via Claimable Postgres (neon.new) with no signup or credit card. [Learn more](/docs/reference/claimable-postgres).
 - **Neon MCP Server documentation tools**: The MCP Server now includes `list_docs_resources` and `get_doc_resource` so your agent can fetch Neon docs on demand. [Learn more](/docs/ai/connect-mcp-clients-to-neon).

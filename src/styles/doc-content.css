@@ -9,7 +9,7 @@
     @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
     a {
-      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 hover:dark:decoration-white/100 sm:break-words;
+      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 dark:hover:decoration-white sm:break-words;
     }
     p:first-child {
       @apply mt-0;
@@ -71,7 +71,7 @@
   .prose-doc {
     @apply max-w-none text-lg leading-normal tracking-extra-tight text-gray-new-8 dark:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-black-pure dark:prose-headings:text-white prose-p:my-3 prose-p:leading-normal;
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-1 prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-1 prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out prose-a:hover:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:prose-a:hover:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -110,6 +110,10 @@
     @apply prose-hr:mt-8 prose-hr:mb-12 prose-hr:border-gray-new-90 dark:prose-hr:border-gray-new-20;
     @apply prose-ol:my-3 prose-ul:my-6;
     @apply prose-li:text-lg prose-li:tracking-tight prose-li:text-gray-new-30 dark:prose-li:text-gray-new-85;
+
+    & li > p {
+      @apply my-2!;
+    }
 
     > h2:first-child,
     > h3:first-child,

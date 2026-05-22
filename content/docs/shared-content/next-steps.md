@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-03-05T04:12:51.014Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 ## Next steps
@@ -7,4 +7,4 @@ updatedOn: '2026-03-05T04:12:51.014Z'
 - [Import data into your database](/docs/import/migrate-intro)
 - [Integrate database branching into your dev workflow](/docs/get-started/workflow-primer)
 - [Secure your app with the Neon Data API](/docs/data-api/get-started)
-- [Setup Neon Auth for your app](/docs/guides/neon-auth)
+- [Set up Neon Auth for your app](/docs/auth/overview)

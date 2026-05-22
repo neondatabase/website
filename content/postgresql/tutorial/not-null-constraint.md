@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UNIQUE Constraint
@@ -57,7 +57,7 @@ If a column has a `NOT NULL` constraint, any attempt to [insert](postgresql-inse
 
 ## Declaring NOT NULL columns
 
-The following `CREATE TABLE` statement creates a new table name `invoices` with the not\-null constraints.
+The following `CREATE TABLE` statement creates a new table named `invoices` with the not\-null constraints.
 
 ```sql
 CREATE TABLE invoices(
@@ -83,7 +83,7 @@ ALTER TABLE table_name
 ALTER COLUMN column_name SET NOT NULL;
 ```
 
-To add multiple `NOT NULL` constraints to multiple columns, you use the following syntax:
+To add `NOT NULL` constraints to multiple columns, you use the following syntax:
 
 ```sql
 ALTER TABLE table_name
@@ -123,7 +123,7 @@ UPDATE production_orders
 SET qty = 1;
 ```
 
-The values in the `qty` column is updated to one. Now, you can add the `NOT NULL` constraint to the `qty` column:
+The values in the `qty` column are updated to one. Now, you can add the `NOT NULL` constraint to the `qty` column:
 
 ```sql
 ALTER TABLE production_orders

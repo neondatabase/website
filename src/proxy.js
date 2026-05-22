@@ -214,7 +214,7 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
-    '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
+    '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
   ],
 };

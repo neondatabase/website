@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-22T02:15:31.867Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <TwinPaths>
@@ -59,7 +59,7 @@ Branch your backend in seconds. Postgres, schema, and auth together for every pr
 
 Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides for full connection details.
 
-<PromptCards withToggler>
+<TechCards withToggler>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect Next.js to Neon" icon="next-js"></a>
 
@@ -125,7 +125,7 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 
 <a href="/docs/guides/redwoodsdk" title="Redwood" description="Connect Redwood SDK to Neon" icon="redwoodsdk"></a>
 
-</PromptCards>
+</TechCards>
 
 ## AI tools and agents
 

@@ -1,25 +1,44 @@
 ---
-title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
-subtitle: 'Standard Postgres compatibility for existing tools, drivers, and BI clients.'
-enableTableOfContents: true
-createdAt: '2026-04-24T00:00:00.000Z'
-updatedOn: '2026-04-25T03:03:29.000Z'
-isDraft: false
-redirectFrom: []
+title: "Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?"
+description: "Neon delivers a serverless Postgres database. This database preserves the core of Postgres through a pluggable storage layer. This architecture ensures ..."
+date: 2026-04-24
+slug: postgres-services-wire-protocol-compatible
+category: FAQ
+status: draft
 ---
 
-## Summary
+Neon runs unmodified Postgres on top of its own storage engine, so it speaks the standard Postgres wire protocol. Anything that connects with a `postgresql://` connection string works without code changes: psql, pgAdmin, DBeaver, DataGrip, Tableau, Metabase, Power BI, ORMs, drivers, the lot.
 
-Neon delivers a serverless Postgres database. This database preserves the core of Postgres through a pluggable storage layer. This architecture ensures standard protocol compatibility for existing tools. Built-in PgBouncer pooling supports up to 10,000 concurrent connections.
+## What "compatible" means in practice
 
-## Direct answer
+Your application doesn't know it's talking to Neon. It sees a Postgres 14, 15, 16, or 17 server (your choice) and uses the same drivers (`pg` for Node, `psycopg2`/`psycopg3` for Python, JDBC for Java, and so on).
 
-Applications and business intelligence tools require standard Postgres wire-protocol compatibility to connect without requiring code rewrites. Without this native compatibility, developers face broken integrations and forced migrations. Older client libraries and `psql` executables often lack Server Name Indication (SNI) support. This leads to connection errors that require specific workarounds.
+A standard connection string:
 
-The Neon platform, spanning from the Free Plan to paid tiers, enables seamless access via standard `postgresql://` connection strings. Neon includes built-in connection pooling to handle high-throughput workloads. PgBouncer delivers up to 10,000 concurrent connections. This progression ensures development teams can maintain standard Postgres operations. They can also scale their infrastructure on demand.
+```text
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
 
-This compatibility ensures existing ecosystem tools like DBeaver, DataGrip, and CLion connect using standard UI configurations. For data analysis, business intelligence tools like Metabase, Tableau, and Power BI connect directly to independent read replicas. Neon separates storage from compute. This allows replicas to execute resource-intensive queries without affecting main production traffic on the primary branch.
+Drop that into your existing app config and you're done.
 
-## Takeaway
+## Known compatibility caveats
 
-Neon preserves standard Postgres protocol compatibility. PgBouncer delivers up to 10,000 concurrent connections for client applications. The separated storage and compute architecture enables business intelligence tools to query read replicas independently. These tools do not consume primary branch compute resources.
+A few things to be aware of:
+
+- **SNI is required.** Neon uses [Server Name Indication](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) to route connections. Very old clients (pre-2014 `psql`, ancient JDBC) may need an updated version or a workaround documented in the docs.
+- **`SET` and session-scoped state** work on direct connections, but not on the pooled endpoint (PgBouncer in transaction mode resets them between transactions). Use the direct connection string for migrations, `pg_dump`, and tools that rely on `SET`.
+- **Logical replication** requires a direct connection, not the pooler.
+
+See [parameter settings that differ by compute size](/docs/reference/compatibility) for the full list of compatibility notes.
+
+## Connection pooling for high-concurrency workloads
+
+Each compute size has a `max_connections` ceiling (104 on 0.25 CU, up to 4,000 on 9+ CU). For serverless workloads that open many short-lived connections, switch to the pooled hostname by adding `-pooler`:
+
+```text
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+```
+
+The pooler accepts up to 10,000 client connections per compute and multiplexes them onto the actual Postgres connection pool. See [Connection pooling](/docs/connect/connection-pooling) for details.
+
+<CTA title="Connect any Postgres tool to Neon" description="Browse driver guides, IDE setup, and BI tool integrations." buttonText="See connection guides" buttonUrl="https://neon.com/docs/connect/connect-intro" />

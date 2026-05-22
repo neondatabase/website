@@ -53,6 +53,7 @@ const Post = ({
   tableOfContents,
   author,
   aboveContent = null,
+  isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
   const modal = MODALS.find(
@@ -88,44 +89,68 @@ const Post = ({
           <Changelog currentSlug={currentSlug} posts={changelogPosts} />
         ) : (
           <article>
-            <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
-              <div
-                className={cn(
-                  !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
-                  !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
-                  eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
-                )}
-              >
-                {eyebrow && (
-                  <div className="mb-3.5 text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
-                    {eyebrow}
-                  </div>
-                )}
-                <h1
-                  className={cn(
-                    eyebrow
-                      ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
-                      : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                    tag && 'inline'
-                  )}
-                >
-                  {title}
-                </h1>
-                {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-                {subtitle && (
-                  <p
+            {isFaq ? (
+              <>
+                <div className="mb-5 flex justify-end sm:mb-3">
+                  <DropdownMenu gitHubPath={gitHubPath} />
+                </div>
+                <div>
+                  <h1
                     className={cn(
-                      eyebrow
-                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
-                        : 'mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg'
+                      'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                      tag && 'inline'
                     )}
                   >
-                    {subtitle}
-                  </p>
-                )}
+                    {title}
+                  </h1>
+                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {subtitle && (
+                    <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
+                      {subtitle}
+                    </p>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
+                <div
+                  className={cn(
+                    !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
+                    !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
+                  )}
+                >
+                  {eyebrow && (
+                    <div className="mb-3.5 text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
+                      {eyebrow}
+                    </div>
+                  )}
+                  <h1
+                    className={cn(
+                      eyebrow
+                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                      tag && 'inline'
+                    )}
+                  >
+                    {title}
+                  </h1>
+                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {subtitle && (
+                    <p
+                      className={cn(
+                        eyebrow
+                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
+                          : 'mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg'
+                      )}
+                    >
+                      {subtitle}
+                    </p>
+                  )}
+                </div>
+                {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
               </div>
-              {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
-            </div>
+            )}
             {aboveContent}
             <Content
               className={cn('mt-10 lg:mt-7 md:mt-5', isSplitLayout && 'split-layout')}
@@ -206,6 +231,7 @@ Post.propTypes = {
     photo: PropTypes.string,
   }),
   aboveContent: PropTypes.node,
+  isFaq: PropTypes.bool,
   className: PropTypes.string,
 };
 

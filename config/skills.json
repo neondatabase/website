@@ -1,0 +1,9 @@
+{
+  "primary": "neon-postgres",
+  "skills": [
+    { "name": "neon-postgres", "ref": "main" },
+    { "name": "claimable-postgres", "ref": "main" },
+    { "name": "neon-postgres-egress-optimizer", "ref": "main" },
+    { "name": "neon-postgres-branches", "ref": "main" }
+  ]
+}

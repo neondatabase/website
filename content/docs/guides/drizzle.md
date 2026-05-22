@@ -6,7 +6,7 @@ summary: >-
   using Drizzle ORM, including configuration for migrations and driver
   connections.
 enableTableOfContents: true
-updatedOn: '2026-04-19T23:49:49.000Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -21,6 +21,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 <DocsList title="Related resources" theme="docs">
   <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
   <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
+  <a href="/docs/guides/nextjs#video-walkthrough">Getting started with Neon (Next.js and Drizzle video)</a>
 </DocsList>
 
 </InfoBlock>

@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -52,7 +52,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 10 manual snapshots                  | 10 manual snapshots                                                                               |
+| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
 | [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
@@ -293,8 +293,8 @@ The per-plan snapshot limit applies to **manual snapshots only**. On paid plans,
 Manual snapshot limits per plan:
 
 - **Free**: 1 manual snapshot
-- **Launch**: 10 manual snapshots
-- **Scale**: 10 manual snapshots
+- **Launch**: 100 manual snapshots
+- **Scale**: 100 manual snapshots
 
 **Pricing**: Snapshot storage is billed at $0.09/GB-month.
 

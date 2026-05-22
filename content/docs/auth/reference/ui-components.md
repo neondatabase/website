@@ -6,7 +6,7 @@ summary: >-
   `@neondatabase/neon-js`, including installation, provider setup, and
   configuration of common props for customization.
 enableTableOfContents: true
-updatedOn: '2026-05-12T20:18:01.470Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -82,7 +82,7 @@ function App() {
 }
 ```
 
-**Note:** Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure your own OAuth credentials in the Neon Console (Settings → Auth). See the [OAuth setup guide](/docs/auth/guides/setup-oauth) for details.
+**Note:** Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure OAuth credentials in the Neon Console (**branch → Auth**) and register provider redirect URIs (see [OAuth setup](/docs/auth/guides/setup-oauth#production-setup)).
 
 ### React Router Integration
 

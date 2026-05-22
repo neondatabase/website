@@ -8,14 +8,16 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2026-02-06T22:07:32.888Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
+
+Several frameworks support [Neon Auth](/docs/auth/overview), managed authentication stored in your database that **branches with your data**. Quick starts are available for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router).
 
 <TechCards>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
-<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon. Neon Auth supported." icon="next-js"></a>
 
 <a href="/docs/guides/nestjs" title="NestJS" description="Connect a NestJS application to Neon" icon="nest-js"></a>
 
@@ -65,7 +67,7 @@ updatedOn: '2026-02-06T22:07:32.888Z'
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
-<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon" icon="tanstack"></a>
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon. Neon Auth supported." icon="tanstack"></a>
 
 <a href="/docs/guides/vue" title="Vue" description="Connect a Vue.js application to Neon" icon="vue"></a>
 

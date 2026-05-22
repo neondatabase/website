@@ -2,11 +2,10 @@
 title: Configure trusted domains
 subtitle: Add your application domains to enable secure authentication redirects
 summary: >-
-  Covers the setup of application domains in Neon Auth's allowlist to enable
-  secure OAuth and email verification redirects, preventing unauthorized access
-  and ensuring proper functionality in production environments.
+  Covers trusted domains for Neon Auth: exact origins, wildcard preview domains,
+  and enabling secure OAuth and email verification redirects.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.738Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -47,8 +46,14 @@ Add all domains where users access your application:
 - `https://www.myapp.com` (if you support www subdomain)
 - `https://app.myapp.com` (if using a subdomain)
 
-<Admonition type="important">
-Add each subdomain explicitly. Wildcards like `*.myapp.com` are not supported.
+## Wildcard domains for previews
+
+For preview environments with dynamic hostnames (for example Vercel preview deployments), you can add a **wildcard trusted domain** such as `https://*.my-app-preview.vercel.app`. One entry can match every preview under that pattern instead of adding hosts one by one.
+
+Use the same rules as fixed domains: include `https://` (or `http://` where appropriate) and omit trailing slashes after the pattern.
+
+<Admonition type="note">
+Wildcard patterns apply to the hostname segment you replace with `*`. Production apex domains (for example `https://myapp.com`) are usually still added as exact entries unless your wildcard covers them.
 </Admonition>
 
 ## Common issues

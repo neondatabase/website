@@ -9,13 +9,19 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
 description="Pre-built prompt for connecting Next.js applications to Neon"/>
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
+
+## Video walkthrough
+
+Watch **Getting started with Neon** for an end-to-end setup with Next.js and Drizzle.
+
+<YoutubeIframe embedId="XtMiMnX0hDg" />
 
 To create a Neon project and access it from a Next.js application:
 
@@ -427,5 +433,9 @@ PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+
 ### Where to upload and serve files?
 
 Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend using dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
 
 <NeedHelp/>
