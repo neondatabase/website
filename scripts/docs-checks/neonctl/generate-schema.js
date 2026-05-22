@@ -132,6 +132,24 @@ function parseOptionsObject(obj) {
     if (hidden && hidden.initializer.kind === ts.SyntaxKind.TrueKeyword) {
       spec.hidden = true;
     }
+    const describeProp = getProp(p.initializer, 'describe');
+    if (describeProp) {
+      const d = stringLiteralValue(describeProp.initializer);
+      if (d) spec.description = d;
+    }
+    const defaultProp = getProp(p.initializer, 'default');
+    if (defaultProp) {
+      const dv = stringLiteralValue(defaultProp.initializer);
+      if (dv !== undefined) {
+        spec.default = dv;
+      } else if (defaultProp.initializer.kind === ts.SyntaxKind.TrueKeyword) {
+        spec.default = true;
+      } else if (defaultProp.initializer.kind === ts.SyntaxKind.FalseKeyword) {
+        spec.default = false;
+      } else if (ts.isNumericLiteral(defaultProp.initializer)) {
+        spec.default = Number(defaultProp.initializer.text);
+      }
+    }
     out[optName] = spec;
   }
   return out;

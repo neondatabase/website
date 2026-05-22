@@ -3,7 +3,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from '@shikijs/transformers';
-import { getHighlighter, createCssVariablesTheme, bundledLanguages, codeToHtml } from 'shiki';
+import { getHighlighter, createCssVariablesTheme, bundledLanguages } from 'shiki';
 
 const customTheme = createCssVariablesTheme({
   name: 'css-variables',
@@ -13,6 +13,7 @@ const customTheme = createCssVariablesTheme({
 });
 
 let highlighter;
+let _initPromise = null;
 
 // parse meta string to get highlighted lines
 const parseHighlightLines = (meta) => {
@@ -47,18 +48,19 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
   let language = lang.toLocaleLowerCase();
 
   // check if language is supported
-  if (!Object.keys(bundledLanguages).includes(lang) && lang !== 'text') {
+  if (!Object.keys(bundledLanguages).includes(language) && language !== 'text') {
     language = 'bash';
   }
 
-  if (!highlighter) {
-    highlighter = await getHighlighter({
-      langs: [language],
-      themes: [theme],
-    });
+  // _initPromise is set synchronously, so concurrent callers all await the
+  // same promise instead of each creating a separate highlighter instance.
+  if (!_initPromise) {
+    _initPromise = getHighlighter({ langs: [language], themes: [theme] });
   }
+  highlighter = await _initPromise;
+  await highlighter.loadLanguage(language);
 
-  const html = codeToHtml(code, {
+  const html = highlighter.codeToHtml(code, {
     lang: language,
     theme,
     transformers: [
@@ -88,8 +90,6 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
       transformerNotationWordHighlight(),
     ],
   });
-
-  await highlighter.loadLanguage(language);
 
   return html;
 }

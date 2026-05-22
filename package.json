@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
-    "predev": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
+    "prebuild": "node scripts/generate-api-ref.mjs && node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
+    "predev": "node scripts/generate-api-ref.mjs && node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
@@ -28,6 +28,8 @@
     "sync:skills": "node src/scripts/sync-skills.js",
     "generate:skills": "node src/scripts/generate-skills-index.js",
     "update:skills": "npm run sync:skills && npm run generate:skills",
+    "generate:api-ref": "node scripts/generate-api-ref.mjs",
+    "audit:api-ref": "node scripts/audit-api-spec.mjs",
     "check:broken-links": "linkinator --config linkinator.config.json",
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
     "check:content-data": "node scripts/validate-content-data.js",
@@ -75,6 +77,7 @@
     "dotenv": "^16.4.5",
     "file-loader": "^6.2.0",
     "framer-motion": "^12.36.0",
+    "fuse.js": "^7.3.0",
     "geist": "^1.5.1",
     "glob": "^10.5.0",
     "gray-matter": "^4.0.3",
@@ -124,7 +127,8 @@
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0",
     "vaul": "^1.1.2",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -132,9 +136,14 @@
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.0.0",
     "@next/eslint-plugin-next": "^16.2.1",
+    "@scalar/openapi-parser": "^0.28.2",
     "@shikijs/transformers": "^1.3.0",
     "@svgr/webpack": "^8.1.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@vitest/ui": "^4.0.2",
+    "ajv": "^8.20.0",
     "cypress": "^15.15.0",
     "encoding": "^0.1.13",
     "eslint": "^9.0.0",
