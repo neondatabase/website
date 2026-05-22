@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-05-22T10:59:44.219Z'
+updatedOn: '2026-05-22T11:16:23.495Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -562,12 +562,11 @@ By combining serialized agent memory with copy-on-write database branches, you c
 
 The examples in this guide show the minimal components required for replayability: a Postgres database, a sample `users` table, and a local `checkpoint.json` file.
 
-In practice, AI systems are not just standalone scripts. They are typically managed within an **agent harness** - the surrounding infrastructure that provides orchestration, persistence, observability, and evaluation. This harness helps stabilize the inherently variable behavior of LLM calls.
-
-When moving this architecture toward production, the central idea remains the same: pair an agent state with a Neon snapshot ID. What changes is the robustness of the implementation around that primitive, making the system more reliable and maintainable.
+In practice, AI systems run inside a robust **agent harness** using an asynchronous, event-driven architecture. The core primitive - pairing an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
 
 - **Cloud state persistence:** Instead of a local `checkpoint.json`, agent memory and execution graphs are stored in an object store like AWS S3 or in a JSONB column in a separate metadata database. Every `step_id` is durably linked to a Neon `snapshot_id`.
-- **Durable orchestration:** The `while result.interruptions:` loop is replaced by a durable execution framework like Temporal, [DBOS](/guides/pydantic-ai-dbos-neon), or AWS Step Functions. If the server running the agent crashes halfway through a task, the orchestrator pulls the latest agent state and database snapshot, then resumes on a new server.
+- **Asynchronous approvals:** Instead of a local script, an interruption triggers a webhook that sends a Slack message (or email) to a human reviewer. The agent process gracefully shuts down while waiting. When the reviewer clicks "Approve", an API endpoint wakes up the orchestrator, reloads the checkpoint, and resumes the agent.
+- **Durable orchestration:** The `while result.interruptions:` loop is replaced by a durable execution framework like Temporal, [DBOS](/guides/pydantic-ai-dbos-neon), or AWS Step Functions. If a server crashes, the orchestrator seamlessly restores the latest agent state and database snapshot on a new node.
 - **Observability:** Every snapshot and agent state ID is injected as metadata into your LLM observability platform (e.g., LangSmith, Braintrust, Datadog). When looking at a trace of a failed tool call, you have a direct link to the exact database snapshot needed to debug it.
 
 ## Apply the pattern to other agent frameworks
