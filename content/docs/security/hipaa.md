@@ -5,7 +5,7 @@ summary: >-
   the self-serve process to enable features and accept the Business Associate
   Agreement (BAA) for handling Protected Health Information (PHI).
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-05-22T09:50:49.895Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -357,9 +357,19 @@ If a security breach occurs, Neon will:
 
 Once HIPAA compliance is enabled for a Neon project, it cannot be disabled.
 
-If you want to disable HIPAA for your Neon organization entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
+### Delete a HIPAA-compliant project
 
-To delete a HIPAA-compliant project, submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA project, make sure to export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+You can delete a HIPAA-compliant project using the same self-serve flow as any other Neon project—in the Console (**Settings** → **Delete**), via the [Neon API](/docs/manage/projects#delete-a-project-with-the-api), or with the [Neon CLI](/docs/reference/cli-projects#delete). Deleting a project is permanent and removes all computes, branches, databases, and roles in that project.
+
+<Admonition type="important">
+Before deleting a HIPAA project, export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+</Admonition>
+
+For step-by-step instructions, see [Delete a project](/docs/manage/projects#delete-a-project).
+
+### Disable HIPAA for your organization
+
+If you want to disable HIPAA for your Neon organization entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
 
 ## Frequently Asked Questions
 
