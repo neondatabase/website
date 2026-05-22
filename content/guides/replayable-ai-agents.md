@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-05-22T09:58:49.135Z'
+updatedOn: '2026-05-22T10:23:41.183Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -40,11 +40,31 @@ By tying the agent's memory and the database snapshot together, you create a **c
 To follow this guide, you will need:
 
 - **Python 3.10+** installed locally.
-- **Neon account:** Sign up at [console.neon.tech](https://console.neon.tech), create a project, and save your database connection string.
-- **Neon API key and project ID:** Generate an API key in your Neon account settings. Find your project ID in your project's settings page. It looks like `shiny-moon-123456`.
-- **OpenAI API key:** Required by the Agents SDK.
+- **Neon account:** Sign up at [console.neon.tech](https://console.neon.tech/signup) if you do not already have an account.
+- **OpenAI API key:** Required for use with the OpenAI Agents SDK. You can generate one in the [OpenAI dashboard](https://platform.openai.com/api-keys). Alternatively, you can use any LLM provider supported by the Agents SDK such as [OpenRouter](https://openrouter.ai/).
 
 <Steps>
+
+## Create a Neon project and get credentials
+
+You need a Neon Postgres database for the demo application, plus a Neon API key to programmatically create snapshots and restorations.
+
+1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
+2. Open your organization settings from the sidebar and go to the **API Keys** tab.
+3. Click **Create new API Key**, give it a name such as "Replayable agent demo", and copy the generated key. You will use this as `NEON_API_KEY` in your application.
+   ![Create Neon API Key](/docs/manage/org_api_keys.png)
+4. Go back to the Projects page and create a new project. You can choose any name and region.
+5. From the project dashboard, click **Connect** and copy the connection string. You will use this as the `DATABASE_URL` in your application.
+
+   ![Connection details in Neon Console](/docs/connect/connection_details.png)
+
+6. Go to **Settings** > **General**, to copy the **Project ID**. You will use this as `NEON_PROJECT_ID` in your application.
+
+   ![Neon project Settings page](/docs/manage/settings_page.png)
+
+7. Go to **Branches**, select your default branch, and copy the **Branch ID**. You will use this as `NEON_BRANCH_ID` in your application.
+
+   ![Neon Console Branch ID](/docs/guides/neon-console-branch-id.png)
 
 ## Set up the environment
 
@@ -166,6 +186,8 @@ The agent and tools in this guide are intentionally kept simple to highlight the
 
 Create a file named `agent.py`:
 
+<CodeTabs labels={["OpenAI API", "OpenRouter API"]}>
+
 ```python
 import os
 import psycopg
@@ -233,8 +255,95 @@ admin_agent = Agent(
         "Use your tools to answer user requests. Verify the database state after making changes."
     ),
     tools=[add_user, drop_users_table, list_users],
+    model="gpt-5-mini"
 )
 ```
+
+```python
+import os
+from openai import AsyncOpenAI
+import psycopg
+from agents import (
+    Agent,
+    OpenAIChatCompletionsModel,
+    function_tool,
+    set_tracing_disabled,
+)
+from dotenv import load_dotenv
+
+load_dotenv()
+DB_URL = os.getenv("DATABASE_URL", "")
+
+set_tracing_disabled(disabled=True)
+
+
+def setup_db():
+    """Create and seed the demo users table."""
+    with psycopg.connect(DB_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, name TEXT);"
+            )
+            cur.execute("TRUNCATE users;")
+            cur.execute("INSERT INTO users (name) VALUES ('Alice'), ('Bob');")
+        conn.commit()
+
+
+def get_current_users() -> str:
+    """Return the current users from the database."""
+    try:
+        with psycopg.connect(DB_URL) as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT name FROM users;")
+                users = [row[0] for row in cur.fetchall()]
+        return f"Current users: {', '.join(users)}"
+    except psycopg.errors.UndefinedTable:
+        return "Error: The users table does not exist."
+
+
+@function_tool
+def add_user(name: str) -> str:
+    """Add a new user to the database."""
+    with psycopg.connect(DB_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO users (name) VALUES (%s)", (name,))
+        conn.commit()
+    return f"User {name} added successfully."
+
+
+@function_tool(needs_approval=True)
+def drop_users_table() -> str:
+    """Drop the entire users table. REQUIRES APPROVAL."""
+    with psycopg.connect(DB_URL) as conn:
+        with conn.cursor() as cur:
+            cur.execute("DROP TABLE users;")
+        conn.commit()
+    return "Users table dropped."
+
+
+@function_tool
+def list_users() -> str:
+    """List all current users in the database."""
+    return get_current_users()
+
+
+client = AsyncOpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"), base_url=os.getenv("OPENAI_BASE_URL")
+)
+model = OpenAIChatCompletionsModel(model="openai/gpt-5-mini", openai_client=client)
+
+admin_agent = Agent(
+    name="DB Admin",
+    instructions=(
+        "You are a database administrator. You manage the 'users' table. "
+        "Use your tools to answer user requests. Verify the database state after making changes."
+    ),
+    tools=[add_user, drop_users_table, list_users],
+    model=model,
+)
+```
+
+</CodeTabs>
 
 ## Run with replay checkpoints
 
