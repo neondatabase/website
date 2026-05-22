@@ -42,7 +42,7 @@ The CLI handles bulk operations cleanly:
 neon projects list
 
 # Create a project for a new customer
-neon projects create --name acme-corp --region aws-us-east-1
+neon projects create --name acme-corp --region-id aws-us-east-1
 
 # Get the connection string for its main branch
 neon connection-string --project-id quiet-frost-12345
