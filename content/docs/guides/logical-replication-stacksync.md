@@ -153,7 +153,7 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 1. Click **Create**.
 1. On the schema screen of the newly created sync, click on the **Postgres** connection and select **Logical replication** under **Change Data Capture Method**.
 
-  ![Stacksync Logical Replication](/docs/guides/fivetran_connector_setup.png)
+  ![Stacksync Logical Replication](/docs/guides/stacksync-logical-replication.png)
 
    <Admonition type="tip">
    There are in-depth connection setup guides on [Stacksync's connector docs](https://docs.stacksync.com/two-way-sync/connectors).
