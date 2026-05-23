@@ -39,15 +39,7 @@ const fieldProps = {
 };
 
 const ProgramForm = ({ type }) => {
-  const {
-    title,
-    description,
-    placeholder,
-    buttonText,
-    showGithubUrl,
-    githubUrlLabel,
-    githubUrlPlaceholder,
-  } = DATA[type];
+  const { title, description, placeholder, buttonText, showGithubUrl } = DATA[type];
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   const {
@@ -119,9 +111,9 @@ const ProgramForm = ({ type }) => {
               <Field
                 {...fieldProps}
                 name="githubUrl"
-                label={githubUrlLabel}
+                label="GitHub Project Link *"
                 type="url"
-                placeholder={githubUrlPlaceholder}
+                placeholder="https://github.com/your-org/your-project"
                 error={errors.githubUrl?.message}
                 isDisabled={formState === FORM_STATES.LOADING}
                 {...register('githubUrl')}
