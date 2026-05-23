@@ -113,7 +113,7 @@ const ProgramForm = ({ type }) => {
                 name="githubUrl"
                 label="GitHub Project Link *"
                 type="url"
-                placeholder="https://github.com/your-org/your-project"
+                placeholder="Enter a link to your GitHub project"
                 error={errors.githubUrl?.message}
                 isDisabled={formState === FORM_STATES.LOADING}
                 {...register('githubUrl')}
