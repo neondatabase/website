@@ -391,11 +391,21 @@ const McpSetupConfigurator = () => {
                   className="w-full rounded-lg border border-gray-new-90 bg-white px-3 py-2 font-mono text-sm text-gray-new-20 transition-colors outline-none focus:border-secondary-8 focus:ring-2 focus:ring-secondary-8/20 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-90 dark:focus:border-primary-1 dark:focus:ring-primary-1/20"
                   onChange={(event) => setApiKey(event.target.value)}
                 />
-                <span className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
-                  Do not commit API keys to a shared repo.
-                </span>
               </label>
             )}
+            <span className={clsx('mt-3 block', HELPER_TEXT_CLASS)}>
+              {authMode === 'apiKey' ? (
+                <>
+                  Keep API keys out of your repo. Add{' '}
+                  <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
+                    -g
+                  </code>{' '}
+                  to store the key in your global config instead of a project file.
+                </>
+              ) : (
+                <>OAuth has no static secret, so a project-level config is safe to commit.</>
+              )}
+            </span>
           </div>
 
           <div className={CARD_CLASS}>
@@ -516,19 +526,6 @@ const McpSetupConfigurator = () => {
             >
               <HighlightedCode code={addMcpCommand} language="bash" />
             </CodeBlockWrapper>
-            <p className={clsx('mt-2', HELPER_TEXT_CLASS)}>
-              {authMode === 'apiKey' ? (
-                <>
-                  Add{' '}
-                  <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
-                    -g
-                  </code>{' '}
-                  to store the key in your global config, out of your repo.
-                </>
-              ) : (
-                <>OAuth has no static secret, so a project-level config is safe to commit.</>
-              )}
-            </p>
           </div>
 
           <div>
