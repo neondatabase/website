@@ -29,7 +29,7 @@ Making an agent replayable requires capturing two critical pieces of state at th
 
 ### What are Neon Snapshots?
 
-A [Snapshot](/docs/reference/glossary#snapshot) in Neon is an immutable, point-in-time backup of your database branch's schema and data. While standard database branching is great for development - creating an isolated environment with a new connection string, snapshots are built for versioning and time-travel recovery.
+A [Snapshot](/docs/reference/glossary#snapshot) in Neon is an immutable, point-in-time backup of your database branch's schema and data. While standard database branching is great for development and creating an isolated environment with a new connection string, snapshots are built for versioning and time-travel recovery.
 
 When you call Neon's Restore API, you can restore a snapshot directly to your active branch. This in-place restore replaces the corrupted data while preserving the original database connection string. For an AI application, this means you don't need to restart or reconfigure the app after rolling back: the agent can resume execution against the restored database.
 
