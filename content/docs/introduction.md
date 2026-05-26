@@ -1,7 +1,6 @@
 ---
-eyebrow: Neon documentation
-title: Neon is the Postgres‑native backend platform
-subtitle: for apps and agents.
+title: Neon documentation
+subtitle: The Postgres-native backend platform for apps and agents.
 summary: >-
   How to build application backends on Neon, the Postgres-native backend
   platform with managed authentication, an HTTP Data API, database branching,
@@ -12,7 +11,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-05-26T13:24:45.704Z'
 ---
 
 <TwinPaths>
@@ -33,7 +32,7 @@ updatedOn: '2026-05-22T02:29:34.734Z'
   <a href="/docs/introduction/early-access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
 </div>
 
-Branch your backend in seconds. Postgres, schema, and auth together for every preview, feature, or agent run.
+Branch your backend. Postgres, schema, and auth together for every preview, feature, or agent run.
 
 <DetailIconCards cols={4}>
 
