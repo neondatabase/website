@@ -562,7 +562,7 @@ By combining serialized agent memory with copy-on-write database branches, you c
 
 The examples in this guide show the minimal components required for replayability: a Postgres database, a sample `users` table, and a local `checkpoint.json` file.
 
-In practice, AI systems run inside a robust **agent harness** using an asynchronous, event-driven architecture. The core primitive - pairing an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
+In practice, AI systems run inside a robust **agent harness** using an asynchronous, event-driven architecture. The core primitive that pairs an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
 
 - **Cloud state persistence:** Instead of a local `checkpoint.json`, agent memory and execution graphs are stored in an object store like AWS S3 or in a JSONB column in a separate metadata database. Every `step_id` is durably linked to a Neon `snapshot_id`.
 - **Asynchronous approvals:** Instead of a local script, an interruption triggers a webhook that sends a Slack message (or email) to a human reviewer. The agent process gracefully shuts down while waiting. When the reviewer clicks "Approve", an API endpoint wakes up the orchestrator, reloads the checkpoint, and resumes the agent.
