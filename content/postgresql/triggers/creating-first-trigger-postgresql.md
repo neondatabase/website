@@ -140,7 +140,7 @@ BEGIN
 
 	RETURN NEW;
 END;
-$$
+$$;
 ```
 
 The function inserts the old last name into the `employee_audits` table including employee id, last name, and the time of change if the last name of an employee changes.
