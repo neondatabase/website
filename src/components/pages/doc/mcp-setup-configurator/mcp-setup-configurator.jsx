@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { Suspense, use, useDeferredValue, useEffect, useMemo, useState } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
-import InfoIcon from 'components/shared/info-icon';
 import highlight from 'lib/shiki';
 
 import {
@@ -97,7 +96,7 @@ SegmentedControl.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-const Toggle = ({ checked, onChange, label, description, tooltip, tooltipId }) => (
+const Toggle = ({ checked, onChange, label, description }) => (
   <button
     type="button"
     role="switch"
@@ -122,12 +121,7 @@ const Toggle = ({ checked, onChange, label, description, tooltip, tooltipId }) =
       />
     </span>
     <span className="min-w-0 flex-1">
-      <span className="flex items-center gap-1.5 text-sm font-medium text-gray-new-10 dark:text-white">
-        {label}
-        {tooltip && tooltipId && (
-          <InfoIcon tooltip={tooltip} tooltipId={tooltipId} tooltipPlace="top" />
-        )}
-      </span>
+      <span className="block text-sm font-medium text-gray-new-10 dark:text-white">{label}</span>
       {description && (
         <span className={clsx('mt-0.5 block', HELPER_TEXT_CLASS)}>{description}</span>
       )}
@@ -140,8 +134,6 @@ Toggle.propTypes = {
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   description: PropTypes.string,
-  tooltip: PropTypes.string,
-  tooltipId: PropTypes.string,
 };
 
 const HighlightedCode = ({ code, language }) => {
@@ -305,7 +297,6 @@ const McpSetupConfigurator = () => {
   const [apiKey, setApiKey] = useState('');
   const [readOnly, setReadOnly] = useState(false);
   const [projectId, setProjectId] = useState('');
-  const [gitignore, setGitignore] = useState(false);
   const [selectedScopes, setSelectedScopes] = useState(SCOPE_IDS);
   const [toolsReloadNonce, setToolsReloadNonce] = useState(0);
 
@@ -360,11 +351,8 @@ const McpSetupConfigurator = () => {
         `--header "Authorization: ${generatedHeaders.Authorization || 'Bearer <NEON_API_KEY>'}"`
       );
     }
-    if (gitignore) {
-      commandParts.push('--gitignore');
-    }
     return commandParts.join(' \\\n  ');
-  }, [authMode, generatedHeaders.Authorization, generatedServerUrl, gitignore, queryString]);
+  }, [authMode, generatedHeaders.Authorization, generatedServerUrl, queryString]);
 
   const filteredToolsUrl = useMemo(
     () => appendParams(getListToolsBaseUrl(), queryParams),
@@ -404,7 +392,7 @@ const McpSetupConfigurator = () => {
                   onChange={(event) => setApiKey(event.target.value)}
                 />
                 <span className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
-                  Do not commit API keys. Prefer OAuth for project-scoped MCP config files.
+                  Do not commit API keys to a shared repo.
                 </span>
               </label>
             )}
@@ -528,37 +516,19 @@ const McpSetupConfigurator = () => {
             >
               <HighlightedCode code={addMcpCommand} language="bash" />
             </CodeBlockWrapper>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={gitignore}
-              className="-mt-2 flex w-fit items-center gap-2 text-left"
-              onClick={() => setGitignore(!gitignore)}
-            >
-              <span
-                className={clsx(
-                  'inline-flex h-5 w-9 flex-shrink-0 items-center rounded-full border transition-colors',
-                  gitignore
-                    ? 'border-secondary-8 bg-secondary-8 dark:border-primary-1 dark:bg-primary-1'
-                    : 'border-gray-new-80 bg-gray-new-90 dark:border-gray-new-30 dark:bg-gray-new-20'
-                )}
-              >
-                <span
-                  className={clsx(
-                    'inline-block h-4 w-4 translate-x-0.5 transform rounded-full bg-white shadow-sm transition-transform',
-                    gitignore && 'translate-x-[18px]'
-                  )}
-                />
-              </span>
-              <span className="flex items-center gap-1.5 text-sm font-medium text-gray-new-10 dark:text-white">
-                Add config to .gitignore
-                <InfoIcon
-                  tooltip="Tells add-mcp to gitignore the generated config file so credentials aren't committed."
-                  tooltipId="mcp-gitignore"
-                  tooltipPlace="top"
-                />
-              </span>
-            </button>
+            <p className={clsx('mt-2', HELPER_TEXT_CLASS)}>
+              {authMode === 'apiKey' ? (
+                <>
+                  Add{' '}
+                  <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
+                    -g
+                  </code>{' '}
+                  to store the key in your global config, out of your repo.
+                </>
+              ) : (
+                <>OAuth has no static secret, so a project-level config is safe to commit.</>
+              )}
+            </p>
           </div>
 
           <div>
