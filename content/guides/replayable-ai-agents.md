@@ -546,7 +546,7 @@ You demonstrated an immediate rollback by restoring the database in place using 
 
 Imagine your agent processed a massive financial reconciliation workflow a week ago. Today, you realize the agent's prompt had a subtle hallucination, and it categorized a batch of transactions incorrectly. You want to replay that exact execution from 10 days ago and fix it.
 
-You cannot restore your production database in-place to 10 days ago - you would wipe out a week of real user activity!
+You cannot restore your production database in-place to 10 days ago. You would wipe out a week of real user activity!
 
 This is where Neon's branching capabilities make historical replay safe:
 
