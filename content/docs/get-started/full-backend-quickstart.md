@@ -7,7 +7,7 @@ summary: >-
   sign-in. Server-side data access, ready to deploy on Vercel.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-27T01:30:18.388Z'
+updatedOn: '2026-05-27T02:23:28.348Z'
 ---
 
 ## Before you start
@@ -206,7 +206,7 @@ export default defineConfig({
 
 `drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
-Then seed two sample posts in the [Neon Console SQL Editor](https://console.neon.tech) so you have something to read in step 9.
+Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech) — two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -220,7 +220,8 @@ Open your project in the Neon Console, go to **SQL Editor**, and run:
 ```sql
 INSERT INTO posts (user_id, content, is_published) VALUES
   ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
-  ('00000000-0000-0000-0000-000000000000', 'Posts become visible once published', true);
+  ('00000000-0000-0000-0000-000000000000', 'Welcome to your new backend', true),
+  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden — flip is_published to true in the SQL editor to see it appear', false);
 ```
 
 </TwoColumnLayout.Block>
@@ -474,7 +475,7 @@ export default async function PostsPage() {
 <TwoColumnLayout.Step title="Run the app">
 <TwoColumnLayout.Block>
 
-Start the dev server, then open [http://localhost:3000/auth/sign-up](http://localhost:3000/auth/sign-up). Create a test user, and you'll be redirected to `/posts` where the two seeded posts appear.
+Start the dev server, then open [http://localhost:3000/auth/sign-up](http://localhost:3000/auth/sign-up). Create a test user, and you'll be redirected to `/posts` where the two published posts appear above your signed-in name.
 
 If you visit `/posts` without signing in, the middleware redirects you to `/auth/sign-in`.
 
