@@ -7,7 +7,7 @@ summary: >-
   uses PostgreSQL's security model to enforce role privileges and Row-Level
   Security for database access control.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-05-27T23:29:49.973Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -17,6 +17,7 @@ updatedOn: '2026-04-18T12:27:58.000Z'
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
     <a href="/docs/data-api/custom-authentication-providers">Custom authentication providers</a>
     <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
+    <a href="/docs/auth/guides/plugins/organization">Neon Auth Organizations</a>
   </DocsList>
 </InfoBlock>
 
@@ -153,3 +154,76 @@ CREATE TABLE posts (
     ```
 
 Now, even though the `authenticated` role has `SELECT` permission on the table, the database will only return rows where the `user_id` column matches the ID in the user's token.
+
+## Multi-tenant access with organizations
+
+When using [Neon Auth Organizations](/docs/auth/guides/plugins/organization), the JWT includes an `o` claim containing the active org ID, slug, and member role. You can use this claim in RLS policies to scope rows to an organization.
+
+The active org is set client-side with [`authClient.organization.setActive()`](/docs/auth/guides/plugins/organization#set-active-organization). After `setActive()`, the next JWT carries the `o` claim. The Data API enforces org scope via RLS.
+
+### Table schema
+
+Add an `organization_id` column to tables that need org-scoped access:
+
+```sql
+CREATE TABLE public.items (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id text NOT NULL,
+  organization_id text,   -- NULL = personal row; org ID = team row
+  content text NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.items ENABLE ROW LEVEL SECURITY;
+```
+
+### Helper function
+
+Create a helper that extracts the `o` claim from the current JWT:
+
+```sql
+CREATE OR REPLACE FUNCTION public.jwt_organization()
+RETURNS jsonb
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public
+AS $$
+  SELECT auth.jwt() -> 'o';
+$$;
+```
+
+### RLS policies
+
+These policies allow two kinds of rows: org-scoped team data (matched by `o.id`) and personal rows (`organization_id IS NULL`, owned by the user):
+
+```sql
+-- jwt_organization() returns NULL when no org is active;
+-- the IS NOT NULL guard prevents false matches against real org IDs
+CREATE POLICY "Authenticated users can view items" ON public.items
+  FOR SELECT TO authenticated USING (
+    (organization_id IS NOT NULL AND organization_id = public.jwt_organization() ->> 'id')
+    OR (organization_id IS NULL AND user_id = auth.user_id())
+  );
+
+CREATE POLICY "Authenticated users can create items" ON public.items
+  FOR INSERT TO authenticated WITH CHECK (
+    user_id = auth.user_id()
+    AND (
+      (organization_id IS NOT NULL AND organization_id = public.jwt_organization() ->> 'id')
+      OR organization_id IS NULL
+    )
+  );
+
+CREATE POLICY "Authenticated users can update items" ON public.items
+  FOR UPDATE TO authenticated USING (
+    (organization_id IS NOT NULL AND organization_id = public.jwt_organization() ->> 'id')
+    OR (organization_id IS NULL AND user_id = auth.user_id())
+  );
+
+CREATE POLICY "Authenticated users can delete items" ON public.items
+  FOR DELETE TO authenticated USING (
+    (organization_id IS NOT NULL AND organization_id = public.jwt_organization() ->> 'id')
+    OR (organization_id IS NULL AND user_id = auth.user_id())
+  );
+```

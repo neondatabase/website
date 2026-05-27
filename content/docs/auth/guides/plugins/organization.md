@@ -6,7 +6,7 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-05-27T14:28:53.887Z'
+updatedOn: '2026-05-27T23:29:49.973Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -274,6 +274,32 @@ const { data } = await authClient.token();
 <Admonition type="warning" title="Role staleness">
 The `o.role` value is fixed at issuance. If the member's role changes, the JWT reflects the old role until expiry. For sensitive operations, verify the current role server-side with [`organization.getActiveMember()`](#get-active-member).
 </Admonition>
+
+### Using the org claim for RLS
+
+When you use the [Neon Data API](/docs/data-api/overview), the `o` claim is available inside `auth.jwt()`. Create a helper function to extract it for use in RLS policies:
+
+```sql
+CREATE OR REPLACE FUNCTION public.jwt_organization()
+RETURNS jsonb
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public
+AS $$
+  SELECT auth.jwt() -> 'o';
+$$;
+```
+
+Use the helper in policies to scope rows to the active org:
+
+```sql
+CREATE POLICY "Org members can view team data" ON public.items
+  FOR SELECT TO authenticated
+  USING (organization_id = public.jwt_organization() ->> 'id');
+```
+
+For the complete multi-tenant RLS pattern (including personal rows alongside org-scoped rows), see [Multi-tenant access with organizations](/docs/data-api/access-control#multi-tenant-access-with-organizations).
 
 ### Get active organization
 
