@@ -32,7 +32,7 @@
     - title: "Revoke project access"
       slug: reference/api/projects/revoke-permission-from-project
       method: DELETE
-    - title: "Return available shared preload libraries"
+    - title: "List available shared preload libraries"
       slug: reference/api/projects/get-available-preload-libraries
       method: GET
     - title: "Create a project transfer request"
@@ -86,7 +86,7 @@
     - title: "Delete branch"
       slug: reference/api/branches/delete-project-branch
       method: DELETE
-    - title: "Restore branch"
+    - title: "Restore branch to a historical state"
       slug: reference/api/branches/restore-project-branch
       method: POST
     - title: "Retrieve database schema"
@@ -95,13 +95,13 @@
     - title: "Compare database schema"
       slug: reference/api/branches/get-project-branch-schema-comparison
       method: GET
-    - title: "Get masking rules"
+    - title: "Retrieve masking rules"
       slug: reference/api/branches/get-masking-rules
       method: GET
     - title: "Update masking rules"
       slug: reference/api/branches/update-masking-rules
       method: PATCH
-    - title: "Get anonymized branch status"
+    - title: "Retrieve anonymized branch status"
       slug: reference/api/branches/get-anonymized-branch-status
       method: GET
     - title: "Start anonymization"
@@ -113,7 +113,7 @@
     - title: "Recover a deleted branch"
       slug: reference/api/branches/recover-project-branch
       method: POST
-    - title: "Finalize restore"
+    - title: "Finalize branch restore from snapshot"
       slug: reference/api/branches/finalize-restore-branch
       method: POST
     - title: "List branch endpoints"
@@ -182,13 +182,13 @@
 - title: "Authentication"
   slug: reference/api/auth
   items:
-    - title: "Get details of Neon Auth for the branch"
+    - title: "Retrieve Neon Auth details for the branch"
       slug: reference/api/auth/get-neon-auth
       method: GET
     - title: "Enable Neon Auth for the branch"
       slug: reference/api/auth/create-neon-auth
       method: POST
-    - title: "Disables Neon Auth for the branch"
+    - title: "Disable Neon Auth for the branch"
       slug: reference/api/auth/disable-neon-auth
       method: DELETE
     - title: "List domains in redirect_uri whitelist"
@@ -209,10 +209,10 @@
     - title: "Update auth user role"
       slug: reference/api/auth/update-neon-auth-user-role
       method: PUT
-    - title: "List OAuth providers for neon auth for a branch"
+    - title: "List OAuth providers for the branch"
       slug: reference/api/auth/list-branch-neon-auth-oauth-providers
       method: GET
-    - title: "Add a OAuth provider"
+    - title: "Add an OAuth provider"
       slug: reference/api/auth/add-branch-neon-auth-oauth-provider
       method: POST
     - title: "Update OAuth provider"
@@ -224,25 +224,25 @@
     - title: "Send test email"
       slug: reference/api/auth/send-neon-auth-test-email
       method: POST
-    - title: "Get email and password configuration"
+    - title: "Retrieve email and password configuration"
       slug: reference/api/auth/get-neon-auth-email-and-password-config
       method: GET
     - title: "Update email and password configuration"
       slug: reference/api/auth/update-neon-auth-email-and-password-config
       method: PATCH
-    - title: "Get email provider configuration"
+    - title: "Retrieve email provider configuration"
       slug: reference/api/auth/get-neon-auth-email-provider
       method: GET
     - title: "Update email provider configuration"
       slug: reference/api/auth/update-neon-auth-email-provider
       method: PATCH
-    - title: "Get allow localhost"
+    - title: "Retrieve localhost allow setting"
       slug: reference/api/auth/get-neon-auth-allow-localhost
       method: GET
-    - title: "Update allow localhost"
+    - title: "Update localhost allow setting"
       slug: reference/api/auth/update-neon-auth-allow-localhost
       method: PATCH
-    - title: "Get all plugin configurations"
+    - title: "Retrieve Neon Auth plugin configurations"
       slug: reference/api/auth/get-neon-auth-plugin-configs
       method: GET
     - title: "Update organization plugin configuration"
@@ -254,16 +254,16 @@
     - title: "Update magic link plugin configuration"
       slug: reference/api/auth/update-neon-auth-magic-link-plugin
       method: PATCH
-    - title: "Get phone number plugin configuration"
+    - title: "Retrieve phone number plugin configuration"
       slug: reference/api/auth/get-neon-auth-phone-number-plugin
       method: GET
     - title: "Update phone number plugin configuration"
       slug: reference/api/auth/update-neon-auth-phone-number-plugin
       method: PATCH
-    - title: "Get webhook configuration for Neon Auth"
+    - title: "Retrieve Neon Auth webhook configuration"
       slug: reference/api/auth/get-neon-auth-webhook-config
       method: GET
-    - title: "Update webhook configuration for Neon Auth"
+    - title: "Update Neon Auth webhook configuration"
       slug: reference/api/auth/update-neon-auth-webhook-config
       method: PUT
 - title: "Organizations"
@@ -281,16 +281,16 @@
     - title: "Revoke organization API key"
       slug: reference/api/organizations/revoke-org-api-key
       method: DELETE
-    - title: "Retrieve the organization's monthly spending limit"
+    - title: "Retrieve organization spending limit"
       slug: reference/api/organizations/get-organization-spending-limit
       method: GET
-    - title: "Set the organization's monthly spending limit"
+    - title: "Set organization spending limit"
       slug: reference/api/organizations/set-organization-spending-limit
       method: PUT
-    - title: "Clear the organization's monthly spending limit"
+    - title: "Remove organization spending limit"
       slug: reference/api/organizations/delete-organization-spending-limit
       method: DELETE
-    - title: "Retrieve organization members details"
+    - title: "List organization members"
       slug: reference/api/organizations/get-organization-members
       method: GET
     - title: "Retrieve organization member details"
@@ -299,10 +299,10 @@
     - title: "Update role for organization member"
       slug: reference/api/organizations/update-organization-member
       method: PATCH
-    - title: "Remove member from the organization"
+    - title: "Remove organization member"
       slug: reference/api/organizations/remove-organization-member
       method: DELETE
-    - title: "Retrieve organization invitation details"
+    - title: "List organization invitations"
       slug: reference/api/organizations/get-organization-invitations
       method: GET
     - title: "Create organization invitations"
@@ -344,10 +344,10 @@
     - title: "Retrieve current user details"
       slug: reference/api/users/get-current-user-info
       method: GET
-    - title: "Retrieve current user organizations list"
+    - title: "List organizations for the current user"
       slug: reference/api/users/get-current-user-organizations
       method: GET
-    - title: "Get request authentication details"
+    - title: "Retrieve request authentication details"
       slug: reference/api/users/get-auth-details
       method: GET
     - title: "Transfer projects from personal account to organization"
@@ -400,7 +400,7 @@
     - title: "Restore snapshot"
       slug: reference/api/snapshots/restore-snapshot
       method: POST
-    - title: "View backup schedule"
+    - title: "Retrieve backup schedule"
       slug: reference/api/snapshots/get-snapshot-schedule
       method: GET
     - title: "Update backup schedule"
@@ -412,7 +412,7 @@
     - title: "Get advisor issues"
       slug: reference/api/dataapi/get-project-advisor-security-issues
       method: GET
-    - title: "Get Neon Data API"
+    - title: "Retrieve Neon Data API configuration"
       slug: reference/api/dataapi/get-project-branch-data-api
       method: GET
     - title: "Create Neon Data API"
@@ -437,15 +437,15 @@
       slug: reference/api/auth-legacy/create-neon-auth-integration
       method: POST
       tag: deprecated
-    - title: "List domains in redirect_uri whitelist"
+    - title: "List trusted redirect URI domains"
       slug: reference/api/auth-legacy/list-neon-auth-redirect-uri-whitelist-domains
       method: GET
       tag: deprecated
-    - title: "Add domain to redirect_uri whitelist"
+    - title: "Add trusted redirect URI domain"
       slug: reference/api/auth-legacy/add-neon-auth-domain-to-redirect-uri-whitelist
       method: POST
       tag: deprecated
-    - title: "Delete domain from redirect_uri whitelist"
+    - title: "Delete trusted redirect URI domain"
       slug: reference/api/auth-legacy/delete-neon-auth-domain-from-redirect-uri-whitelist
       method: DELETE
       tag: deprecated
@@ -457,7 +457,7 @@
       slug: reference/api/auth-legacy/delete-neon-auth-user
       method: DELETE
       tag: deprecated
-    - title: "Lists active integrations with auth providers"
+    - title: "List active integrations with auth providers"
       slug: reference/api/auth-legacy/list-neon-auth-integrations
       method: GET
       tag: deprecated
@@ -465,7 +465,7 @@
       slug: reference/api/auth-legacy/list-neon-auth-oauth-providers
       method: GET
       tag: deprecated
-    - title: "Add a OAuth provider"
+    - title: "Add an OAuth provider"
       slug: reference/api/auth-legacy/add-neon-auth-oauth-provider
       method: POST
       tag: deprecated
@@ -477,7 +477,7 @@
       slug: reference/api/auth-legacy/delete-neon-auth-oauth-provider
       method: DELETE
       tag: deprecated
-    - title: "Get email server configuration"
+    - title: "Retrieve email server configuration"
       slug: reference/api/auth-legacy/get-neon-auth-email-server
       method: GET
       tag: deprecated
