@@ -139,7 +139,7 @@ const ApiOverviewPage = ({ counts, resources, breadcrumbs, navigationLinks, curr
       <h2 className="mt-12 mb-4 text-xl font-medium tracking-tight text-black-pure dark:text-white">
         Quick start
       </h2>
-      <div className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+      <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
         <div className="border-b border-gray-new-90 bg-gray-new-98 px-4 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-10">
           <span className="text-[12px] text-gray-new-50 dark:text-gray-new-60">
             List your projects

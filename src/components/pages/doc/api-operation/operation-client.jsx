@@ -200,7 +200,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
                   key={id}
                   type="button"
                   onClick={() => setActiveIface(id)}
-                  className="text-[13px] text-green-45 hover:underline"
+                  className="text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
                 >
                   Use {LABELS[id] ?? id} →
                 </button>
@@ -221,7 +221,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
 
       {/* ── Console ── */}
       {current === 'console' && operation.console?.breadcrumb && (
-        <div className="mt-8 rounded-xl border border-gray-new-90 bg-gray-new-98 p-5 dark:border-gray-new-20 dark:bg-gray-new-10">
+        <div className="mt-8 border border-gray-new-90 bg-gray-new-98 p-5 dark:border-gray-new-20 dark:bg-gray-new-10">
           <p className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
             In the Neon Console, go to{' '}
             <strong className="text-black-pure dark:text-white">
@@ -242,7 +242,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
 
       {/* ── MCP tool card ── */}
       {current === 'mcp' && operation.mcp?.tool && (
-        <div className="mt-8 overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+        <div className="mt-8 overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
           <div className="flex items-center justify-between border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-10">
             <span className="text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
               MCP Tool
