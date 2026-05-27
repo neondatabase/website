@@ -129,7 +129,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                       className={cn(
                         'px-4 py-2 text-[11px] font-medium capitalize transition-colors',
                         state.view === v
-                          ? 'border-b-2 border-b-green-45 bg-[rgba(0,229,153,0.04)] text-green-45 dark:bg-[rgba(0,229,153,0.05)]'
+                          ? 'border-b-2 border-b-[#00B87B] bg-[rgba(0,229,153,0.04)] text-[#00B87B] dark:bg-[rgba(0,229,153,0.05)] dark:text-green-45'
                           : 'border-b-2 border-b-transparent text-gray-new-50 hover:bg-gray-new-95 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:bg-gray-new-15'
                       )}
                     >
@@ -154,7 +154,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                     className={cn(
                       'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
                       copiedId === 'resp'
-                        ? 'border-green-45/40 text-green-45'
+                        ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                         : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-60'
                     )}
                   >
@@ -166,7 +166,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
 
             {/* Schema tab */}
             {state.view === 'schema' && (
-              <div className="bg-gray-new-98 py-1.5 dark:bg-gray-new-10">
+              <div className="py-1.5">
                 {respTree.length > 0 ? (
                   respTree.map((node) => (
                     <AnnotatedField

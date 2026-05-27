@@ -38,6 +38,27 @@ export function setPath(obj, path, value) {
   else cur[last] = value;
 }
 
+function coerceValue(value, type) {
+  if (type === 'array' && typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed;
+    } catch {
+      // Fall through to scalar coercion below so invalid in-progress edits
+      // still show up in the generated body instead of disappearing.
+    }
+  }
+  if (typeof value !== 'string') return value;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (value.trim() !== '' && !isNaN(value.trim())) return Number(value.trim());
+  return value;
+}
+
+function hasOwnEntries(obj) {
+  return Object.keys(obj).length > 0;
+}
+
 // Resolve a leaf's session-identity global mapping. Returns the
 // global name (e.g. 'org_id') when this leaf path is unified, else null.
 // - bodyGlobals: [{ path, global }] entries from the generator (already
@@ -71,9 +92,18 @@ export function buildSmartJson(
 ) {
   const result = {};
 
-  const walk = (nodes, parentPath = '') => {
+  const leafValue = (node, path, isEdited, isIncluded, hasGlobalVal, globalName) => {
+    if (hasGlobalVal) return paramValues[globalName];
+    if (isEdited) return editedValues[path];
+    if (node.value !== undefined) return node.value;
+    if (isIncluded) return null;
+    return undefined;
+  };
+
+  const walk = (nodes, parentPath = '', target = result, targetParentPath = '') => {
     for (const node of nodes) {
       const path = parentPath ? `${parentPath}.${node.key}` : node.key;
+      const targetPath = targetParentPath ? `${targetParentPath}.${node.key}` : node.key;
       const isIncluded = includedFields.has(path);
       const isEdited = editedValues[path] !== undefined;
 
@@ -83,16 +113,17 @@ export function buildSmartJson(
       const hasGlobalVal = globalName && paramValues[globalName] !== undefined;
 
       if (node.required || isIncluded || isEdited || hasGlobalVal) {
-        if (node.children?.length) {
-          walk(node.children, path);
-        } else if (hasGlobalVal) {
-          setPath(result, path, paramValues[globalName]);
-        } else if (isEdited) {
-          setPath(result, path, editedValues[path]);
-        } else if (node.value !== undefined) {
-          setPath(result, path, node.value);
-        } else if (isIncluded) {
-          setPath(result, path, null);
+        if (node.type === 'array' && node.children?.length) {
+          const item = {};
+          walk(node.children, path, item);
+          if (hasOwnEntries(item)) setPath(target, targetPath, [item]);
+        } else if (node.children?.length) {
+          walk(node.children, path, target, targetPath);
+        } else {
+          const value = leafValue(node, path, isEdited, isIncluded, hasGlobalVal, globalName);
+          if (value !== undefined) {
+            setPath(target, targetPath, coerceValue(value, node.type));
+          }
         }
       }
     }
@@ -357,7 +388,7 @@ export const BodySection = ({ operation, bodyTree, state, copy, copiedId }) => (
               className={cn(
                 'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
                 copiedId === 'body'
-                  ? 'border-green-45/40 text-green-45'
+                  ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                   : Object.keys(state.errors).length > 0
                     ? 'border-amber-400/40 text-amber-400'
                     : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-60'
@@ -393,7 +424,7 @@ export const BodySection = ({ operation, bodyTree, state, copy, copiedId }) => (
             )}
           </div>
         </div>
-        <div className="bg-gray-new-98 py-1.5 dark:bg-gray-new-10">
+        <div className="py-1.5">
           {bodyTree.map((node) => (
             <EditableField
               key={node.key}

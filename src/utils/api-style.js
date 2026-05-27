@@ -28,9 +28,9 @@ export const TYPE_STYLES = {
 // where the type isn't shown as a badge (e.g. body field value previews).
 export const getTypeColor = (type) => {
   if (!type) return 'text-gray-new-40 dark:text-gray-new-70';
-  if (type === 'string') return 'text-[#CE9178]';
-  if (type === 'integer' || type === 'number') return 'text-[#B5CEA8]';
-  if (type === 'boolean') return 'text-[#569CD6]';
+  if (type === 'string') return 'text-[#EC6F09]';
+  if (type === 'integer' || type === 'number') return 'text-[#2D8665]';
+  if (type === 'boolean') return 'text-[#8458D0]';
   return 'text-gray-new-40 dark:text-gray-new-70';
 };
 
@@ -38,10 +38,10 @@ export const getTypeColor = (type) => {
 // (see JsonHighlightValue in operation-shared.jsx). Used as inline `style`
 // values, NOT Tailwind class arbitrary values, so it's safe to interpolate.
 export const JSON_SYNTAX_COLORS = {
-  keyword: '#569CD6', // null, true, false
-  number: '#B5CEA8',
-  string: '#CE9178',
-  key: '#9CDCFE',
+  keyword: '#8458D0', // null, true, false
+  number: '#2D8665',
+  string: '#EC6F09',
+  key: '#426CE0',
 };
 
 // Status code colors are intentionally aliased to the corresponding HTTP
