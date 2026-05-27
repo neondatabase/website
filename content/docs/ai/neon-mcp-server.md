@@ -39,7 +39,7 @@ This command adds the required configuration to your editor's MCP config files; 
 - **API key authentication (remote agents):** For remote agents or when OAuth isn't available:
 
   ```bash
-  npx add-mcp https://mcp.neon.tech/mcp --header "Authorization: Bearer $NEON_API_KEY"
+  npx add-mcp https://mcp.neon.tech/mcp --header 'Authorization: Bearer ${NEON_API_KEY}'
   ```
 
 - **Manual configuration:** See [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon) for step-by-step instructions for any editor, including Windsurf, ChatGPT, Zed, and others.
