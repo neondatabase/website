@@ -7,7 +7,7 @@ summary: >-
   sign-in. Server-side data access, ready to deploy on Vercel.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-22T02:15:31.867Z'
+updatedOn: '2026-05-27T01:30:18.388Z'
 ---
 
 ## Before you start
@@ -118,7 +118,7 @@ The Auth URL is in the response under `jwks_url` (strip the `/.well-known/jwks.j
 <TwoColumnLayout.Step title="Scaffold a Next.js app">
 <TwoColumnLayout.Block>
 
-Create a new Next.js project with TypeScript, Tailwind, and the App Router. The `--yes` flag accepts the remaining defaults (Turbopack, import alias) without prompting.
+Create a new Next.js project with TypeScript, Tailwind CSS, and the App Router. The `--yes` flag accepts the remaining defaults without prompting.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -185,8 +185,6 @@ export const posts = pgTable('posts', {
 import { loadEnvConfig } from '@next/env';
 import { defineConfig } from 'drizzle-kit';
 
-// drizzle-kit is a standalone CLI, so it doesn't pick up .env.local automatically.
-// loadEnvConfig matches Next.js's env loading behavior.
 loadEnvConfig(process.cwd());
 
 export default defineConfig({
@@ -198,9 +196,7 @@ export default defineConfig({
 });
 ```
 
-<Admonition type="note">
-`bigint('id', { mode: 'number' })` returns a JavaScript `number`. Postgres `bigint` can hold values above `Number.MAX_SAFE_INTEGER` (2^53 - 1), so for tables that may grow past about 9 quadrillion rows, switch to `{ mode: 'bigint' }` to keep precision.
-</Admonition>
+`drizzle-kit` is a standalone CLI and doesn't read `.env.local` automatically. `loadEnvConfig` matches Next.js's env loading behavior so the migration step picks up the same `DATABASE_URL` as the app.
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -208,7 +204,7 @@ export default defineConfig({
 <TwoColumnLayout.Step title="Push the schema and seed sample data">
 <TwoColumnLayout.Block>
 
-`drizzle-kit push` creates the table directly from your schema. For production you'd switch to generated migrations, but push is faster for a tutorial.
+`drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
 Then seed two sample posts in the [Neon Console SQL Editor](https://console.neon.tech) so you have something to read in step 9.
 
@@ -420,7 +416,7 @@ export async function signInWithEmail(
 <TwoColumnLayout.Step title="Query Postgres from a Server Component">
 <TwoColumnLayout.Block>
 
-Create the Drizzle client and a protected `/posts` page. The page is a Server Component, so the query runs on the server at request time. Drizzle returns typed results, and `dynamic = 'force-dynamic'` keeps the data fresh on every request.
+Create the Drizzle client and a protected `/posts` page. The page is a Server Component, so both the session lookup and the Drizzle query run on the server at request time. `auth.getSession()` reads the signed-in user from cookies, Drizzle returns typed query results, and `dynamic = 'force-dynamic'` keeps the data fresh on every request.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -435,6 +431,7 @@ export const db = drizzle(sql, { schema });
 ```
 
 ```tsx filename="app/posts/page.tsx"
+import { auth } from '@/lib/auth/server';
 import { db } from '@/lib/db/client';
 import { posts } from '@/lib/db/schema';
 import { desc, eq } from 'drizzle-orm';
@@ -442,6 +439,8 @@ import { desc, eq } from 'drizzle-orm';
 export const dynamic = 'force-dynamic';
 
 export default async function PostsPage() {
+  const { data: session } = await auth.getSession();
+
   const allPosts = await db
     .select()
     .from(posts)
@@ -451,7 +450,12 @@ export default async function PostsPage() {
 
   return (
     <main className="p-8">
-      <h1 className="mb-4 text-2xl font-bold">Published posts</h1>
+      <h1 className="mb-1 text-2xl font-bold">Published posts</h1>
+      {session?.user && (
+        <p className="mb-4 text-sm text-gray-600">
+          Signed in as <span className="font-medium">{session.user.name}</span>
+        </p>
+      )}
       <ul className="space-y-2">
         {allPosts.map((post) => (
           <li key={post.id} className="rounded border p-3">
@@ -492,8 +496,9 @@ You now have a Next.js app where:
 
 - Sign-up and sign-in are handled by Neon Auth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
 - The `/posts` route is protected by middleware
+- The signed-in user's name is read from cookies via `auth.getSession()` on the same page
 - Published posts are queried server-side via Drizzle with full TypeScript types
-- Deploys to any Next.js App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node
+- The application can be deployed to any Next.js App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node
 
 ## Next steps
 
