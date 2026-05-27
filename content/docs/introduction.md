@@ -1,17 +1,16 @@
 ---
 title: Neon documentation
-subtitle: The Postgres-native backend platform for apps and agents.
+subtitle: Neon is the backend for apps and agents.
 summary: >-
-  How to build application backends on Neon, the Postgres-native backend
-  platform with managed authentication, an HTTP Data API, database branching,
-  and autoscaling built in.
+  How to build application backends on Neon. Postgres, Auth, Data API, Storage,
+  Compute, and AI Gateway, all instant, branchable, and serverless.
 layout: wide
 redirectFrom:
   - /guides/neon-azure-integration
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-26T13:24:45.704Z'
+updatedOn: '2026-05-27T18:14:14.230Z'
 ---
 
 <TwinPaths>
@@ -32,9 +31,9 @@ updatedOn: '2026-05-26T13:24:45.704Z'
   <a href="/docs/introduction/early-access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
 </div>
 
-Branch your backend. Postgres, schema, and auth together for every preview, feature, or agent run.
+Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
 
-<DetailIconCards cols={4}>
+<DetailIconCards cols={3}>
 
 <a href="/docs/introduction/serverless" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
@@ -44,11 +43,7 @@ Branch your backend. Postgres, schema, and auth together for every preview, feat
 
 <a href="/docs/introduction/early-access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
 
-<a href="/docs/introduction/early-access" description="Serverless TypeScript, deployed alongside your DB." icon="code" tag="coming soon">Functions</a>
-
-<a href="/docs/introduction/early-access" description="Scheduled SQL queries, branched per project." icon="calendar-day" tag="coming soon">Cron</a>
-
-<a href="/docs/introduction/early-access" description="Unified client SDK for functions and storage." icon="setup" tag="coming soon">Neon SDK</a>
+<a href="/docs/introduction/early-access" description="Serverless compute, deployed alongside your DB." icon="code" tag="coming soon">Compute</a>
 
 <a href="/docs/introduction/early-access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
 
