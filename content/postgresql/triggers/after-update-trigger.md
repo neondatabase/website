@@ -95,7 +95,7 @@ CREATE TABLE salary_changes (
 
 ```
 
-Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
+Third, define the function `log_salary_change()` that logs the changes of values in the `salary` column to the `salary_changes` table:
 
 ```plsql
 CREATE OR REPLACE FUNCTION log_salary_change()
