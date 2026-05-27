@@ -64,7 +64,7 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 
 ### Fleet management for platforms and agents
 
-- Instant, API-driven database provisioning allows to deploy a full serverless Postgres backend as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
+- Instant, API-driven database provisioning lets you deploy a full Neon backend as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
 - The fully embedded database experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations

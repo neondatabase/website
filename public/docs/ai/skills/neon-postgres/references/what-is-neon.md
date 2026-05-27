@@ -1,6 +1,6 @@
 # What is Neon
 
-Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero.
+Neon is the backend for apps and agents. The platform includes Neon Postgres, Auth, Data API, Storage*, Compute*, and AI Gateway* (*coming soon). Every service is agent-ready: instant, branchable, and serverless. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.
 
 See the [official introduction](https://neon.com/docs/introduction.md) for complete details.
 

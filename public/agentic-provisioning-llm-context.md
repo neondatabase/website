@@ -5,6 +5,8 @@ description: Context for agents using or developing the Agentic Provisioning Pro
 
 # Agentic provisioning with Neon
 
+Neon is the backend for apps and agents. The platform includes Neon Postgres, Auth, Data API, Storage*, Compute*, and AI Gateway* (*coming soon). Every service is agent-ready: instant, branchable, and serverless.
+
 Context for LLMs and agents: use the **API key** from the APP account request to interact with Neon (projects, branches, connection strings, provisioning). Full documentation index: [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt).
 
 ---
@@ -64,7 +66,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
 
 ## Part 2: Neon documentation and features
 
-Neon is a serverless Postgres platform (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
+Neon is the backend for apps and agents. Neon Postgres is serverless (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
 
 **Fetching docs as Markdown:** Append `.md` to the URL (e.g. https://neon.com/docs/introduction/branching.md) or send `Accept: text/markdown` on the standard URL.
 

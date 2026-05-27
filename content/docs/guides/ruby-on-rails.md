@@ -130,4 +130,8 @@ For schema migration with Ruby on Rails, see our guide:
 
 </DetailIconCards>
 
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
+
 <NeedHelp/>
