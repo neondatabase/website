@@ -407,7 +407,7 @@ export const BodySection = ({ operation, bodyTree, state, copy, copiedId }) => (
       }
     />
     {bodyTree.length > 0 ? (
-      <div className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+      <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
         <div className="border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2 dark:border-gray-new-20 dark:bg-gray-new-10">
           <div className="flex items-center justify-between">
             <span className="text-[11px] text-gray-new-60 italic dark:text-gray-new-50">

@@ -73,7 +73,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
     {current === 'cli' && (
       <>
         {operation.cli?.tableOutput ? (
-          <div className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+          <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
             <div className="border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2 dark:border-gray-new-20 dark:bg-gray-new-10">
               <span className="text-[12px] text-gray-new-50 dark:text-gray-new-60">
                 table (default)
@@ -116,7 +116,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
             No example available.
           </p>
         ) : (
-          <div className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+          <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
             {/* Header bar: tabs left, controls right */}
             <div className="flex items-stretch justify-between border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10">
               <div className="flex">

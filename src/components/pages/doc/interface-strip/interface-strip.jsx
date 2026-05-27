@@ -14,21 +14,22 @@ const LABELS = {
   console: 'Console',
 };
 
-const ALL_IDS = ['api', 'cli', 'sdk', 'mcp', 'console'];
+const STANDALONE_IDS = ['api', 'sdk', 'cli', 'mcp'];
 
 // interfaces = [{ id, code, available }, ...]
-// When used standalone (e.g. from MDX), omit interfaces to show all tabs with labels only.
+// When used standalone (e.g. from MDX), omit interfaces to show the tabs
+// supported by <InterfaceTabPanel /> with labels only.
 const InterfaceStrip = ({ interfaces }) => {
   const { activeIface, setActiveIface } = useContext(InterfaceTabsContext);
 
-  const tabs = interfaces ?? ALL_IDS.map((id) => ({ id, code: null, available: true }));
+  const tabs = interfaces ?? STANDALONE_IDS.map((id) => ({ id, code: null, available: true }));
   const current =
     activeIface && tabs.some((x) => x.id === activeIface)
       ? activeIface
       : (tabs.find((x) => x.available)?.id ?? 'api');
 
   return (
-    <div className="not-prose mt-6 flex overflow-hidden rounded-xl border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10">
+    <div className="not-prose mt-6 flex overflow-hidden border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10">
       {tabs.map(({ id, code, available }, i) => {
         const active = id === current;
         const displayCode = available ? code : '—';

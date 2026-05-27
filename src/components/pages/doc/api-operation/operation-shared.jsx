@@ -43,7 +43,7 @@ SectionHeader.propTypes = {
 export const LiveCodeBlock = ({ label, code, editCount, onCopy, copied }) => (
   <div
     className={cn(
-      'overflow-hidden rounded-xl border transition-colors duration-200',
+      'overflow-hidden border transition-colors duration-200',
       editCount > 0
         ? 'border-[#00B87B]/20 dark:border-green-45/20'
         : 'border-gray-new-90 dark:border-gray-new-20'
