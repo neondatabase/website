@@ -233,7 +233,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
             href="https://console.neon.tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2.5 inline-block text-[13px] text-green-45 hover:underline"
+            className="mt-2.5 inline-block text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
           >
             Open Neon Console →
           </a>
@@ -253,7 +253,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
               className={cn(
                 'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
                 copiedId === 'mcp-tool'
-                  ? 'border-green-45/40 text-green-45'
+                  ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                   : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60'
               )}
             >
@@ -330,7 +330,10 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
           </div>
           <p className="mt-3 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
             Works with Cursor, Claude Desktop, Windsurf, and any MCP client.{' '}
-            <Link href="/docs/ai/neon-mcp-server" className="text-green-45 hover:underline">
+            <Link
+              href="/docs/ai/neon-mcp-server"
+              className="text-[#00B87B] hover:underline dark:text-green-45"
+            >
               Setup guide →
             </Link>
           </p>

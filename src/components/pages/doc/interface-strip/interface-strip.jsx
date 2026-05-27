@@ -39,12 +39,12 @@ const InterfaceStrip = ({ interfaces }) => {
             onClick={() => setActiveIface(id)}
             style={{ opacity: available ? 1 : 0.55 }}
             className={cn(
-              'flex flex-1 flex-col gap-0.5 px-3.5 py-3 text-left transition-colors duration-150',
+              'flex flex-1 flex-col gap-0.5 px-3.5 py-3 text-left transition-[background-color,border-color] duration-150',
               i < tabs.length - 1 && 'border-r border-gray-new-90 dark:border-gray-new-20',
               active
                 ? cn(
                     available
-                      ? 'border-b-2 border-b-green-45 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.05)]'
+                      ? 'border-b-2 border-b-[#00B87B] bg-[#00B87B]/10 dark:border-b-green-45 dark:bg-green-45/10'
                       : 'bg-gray-new-96 border-b-2 border-b-gray-new-50 dark:border-b-gray-new-50 dark:bg-gray-new-15'
                   )
                 : 'border-b-2 border-b-transparent hover:bg-gray-new-95 dark:hover:bg-gray-new-15'
@@ -52,10 +52,10 @@ const InterfaceStrip = ({ interfaces }) => {
           >
             <span
               className={cn(
-                'text-[10px] font-semibold tracking-widest uppercase',
+                'text-[10px] font-semibold tracking-widest uppercase transition-colors duration-150',
                 active
                   ? available
-                    ? 'text-green-45'
+                    ? 'text-[#00B87B] dark:text-green-45'
                     : 'text-gray-new-50 dark:text-gray-new-60'
                   : 'text-gray-new-50 dark:text-gray-new-60'
               )}
@@ -65,7 +65,7 @@ const InterfaceStrip = ({ interfaces }) => {
             {displayCode && (
               <code
                 className={cn(
-                  'block overflow-hidden font-mono text-[11px] font-medium text-ellipsis whitespace-nowrap',
+                  'block overflow-hidden font-mono text-[11px] font-medium text-ellipsis whitespace-nowrap transition-colors duration-150',
                   active
                     ? available
                       ? 'text-black-pure dark:text-white'

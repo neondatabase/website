@@ -71,7 +71,7 @@ const DetailCard = ({ node, onClose }) => {
         ×
       </button>
       <div className="mb-2 flex flex-wrap items-baseline gap-2">
-        <code className="font-mono text-[13px] font-semibold text-[#9CDCFE]">{node.key}</code>
+        <code className="font-mono text-[13px] font-semibold text-[#426CE0]">{node.key}</code>
         <TypeBadge type={node.type} />
         {node.required && (
           <span className="text-red-600 text-[9px] font-semibold dark:text-[#FF5645]">
@@ -99,7 +99,7 @@ const DetailCard = ({ node, onClose }) => {
           <span className="mb-1 block text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
             Example
           </span>
-          <code className="block rounded border border-gray-new-90 bg-gray-new-95 px-2.5 py-1.5 font-mono text-[12px] text-[#CE9178] dark:border-gray-new-20 dark:bg-gray-new-15">
+          <code className="block rounded border border-gray-new-90 bg-gray-new-95 px-2.5 py-1.5 font-mono text-[12px] text-[#EC6F09] dark:border-gray-new-20 dark:bg-gray-new-15">
             {d.example}
           </code>
         </div>
@@ -208,7 +208,7 @@ const EnumDropdown = ({ options, selected, isEdited, onChange }) => {
         onClick={handleOpen}
         className={cn(
           'inline-flex items-center gap-1 rounded px-0.5 font-mono text-[12px] transition-colors',
-          isEdited ? 'text-[#CE9178]' : getTypeColor(typeGuess),
+          isEdited ? 'text-[#EC6F09]' : getTypeColor(typeGuess),
           'hover:opacity-80'
         )}
       >
@@ -221,7 +221,7 @@ const EnumDropdown = ({ options, selected, isEdited, onChange }) => {
       {open && (
         <div
           style={{ position: 'fixed', top: pos.top, left: pos.left }}
-          className="z-50 min-w-[140px] overflow-hidden rounded-lg border border-gray-new-80 bg-[#1e1e1e] py-1 shadow-2xl dark:border-gray-new-20 dark:bg-gray-new-10"
+          className="z-50 min-w-[140px] overflow-hidden rounded-lg border border-gray-new-80 bg-gray-new-94 py-1 shadow-2xl dark:border-gray-new-20 dark:bg-gray-new-10"
         >
           {options.map((opt) => {
             const isSelected = String(opt) === String(selected);
@@ -236,12 +236,12 @@ const EnumDropdown = ({ options, selected, isEdited, onChange }) => {
                 className={cn(
                   'flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-mono text-[13px] transition-colors',
                   isSelected
-                    ? 'bg-green-45/15 text-green-45'
-                    : 'text-gray-new-50 hover:bg-gray-new-20/60 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-80'
+                    ? 'bg-[#d8d8d8] text-[#00B87B] dark:bg-[#242427]'
+                    : 'text-gray-new-50 hover:bg-gray-new-20/40 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-80'
                 )}
               >
                 {String(opt)}
-                {isSelected && <span className="text-[11px] text-green-45">✓</span>}
+                {isSelected && <span className="text-[11px] text-[#00B87B]">✓</span>}
               </button>
             );
           })}
@@ -296,7 +296,7 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
               'font-mono text-[13px]',
               node.deprecated
                 ? 'text-gray-new-50 line-through dark:text-gray-new-60'
-                : 'text-[#9CDCFE]'
+                : 'text-[#426CE0]'
             )}
           >
             &quot;{node.key}&quot;
@@ -356,7 +356,7 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
             type="button"
             onClick={() => node.details && setPinned((p) => !p)}
             className={cn(
-              'max-w-[280px] shrink-0 overflow-hidden text-right text-[12px] text-ellipsis whitespace-nowrap transition-colors duration-100',
+              'flex max-w-[280px] shrink-0 items-baseline text-right text-[12px] transition-colors duration-100',
               node.details
                 ? 'cursor-pointer underline-offset-2 hover:text-gray-new-20 dark:hover:text-gray-new-80'
                 : 'cursor-default',
@@ -366,10 +366,15 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
               node.details && (hovered || pinned) && 'underline decoration-dashed'
             )}
           >
-            {node.annotation}
+            <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+              {node.annotation}
+            </span>
             {node.details && (
               <span
-                className={cn('ml-1 text-[10px]', pinned ? 'text-green-45' : 'text-gray-new-50')}
+                className={cn(
+                  'ml-1 shrink-0 text-[10px]',
+                  pinned ? 'text-green-45' : 'text-gray-new-50'
+                )}
               >
                 ⓘ
               </span>
@@ -483,7 +488,7 @@ export const EditableField = ({
           onClick={() => handleEdit(active ? 'false' : 'true')}
           className={cn(
             'font-mono text-[12px] transition-colors',
-            edited ? 'text-green-45' : 'text-[#569CD6]'
+            edited ? 'text-[#2D8665]' : 'text-[#426CE0]'
           )}
         >
           {active ? 'true' : 'false'}
@@ -554,10 +559,10 @@ export const EditableField = ({
         aria-label={`Edit ${node.key} value`}
         aria-disabled={node.deprecated || undefined}
         className={cn(
-          'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
+          'cursor-text rounded border-b border-dashed border-transparent px-0.5 font-mono text-[12px] transition-all outline-none',
           edited
-            ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#CE9178]'
-            : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60',
+            ? 'border-[#00B87B] bg-green-45/5 text-[#EC6F09]'
+            : 'text-gray-new-50 hover:border-gray-new-50 dark:text-gray-new-60',
           node.deprecated && 'cursor-default'
         )}
       >
@@ -578,9 +583,9 @@ export const EditableField = ({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={cn(
-          'flex items-baseline justify-between gap-4 border-l-2 px-5 py-[9px] transition-all duration-100',
+          'flex items-center justify-between gap-4 border-l-2 px-5 py-[9px] transition-all duration-100',
           hovered || isIncluded || edited
-            ? 'border-l-green-45/50 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
+            ? 'border-l-[#00B87B] bg-[#EFEFF1] dark:bg-[#242427]'
             : 'border-l-transparent'
         )}
         style={{ paddingLeft: `${20 + indent * 18}px` }}
@@ -595,7 +600,7 @@ export const EditableField = ({
                 className={cn(
                   'flex h-2.5 w-2.5 items-center justify-center rounded-sm border transition-all duration-100',
                   isIncluded
-                    ? 'border-green-45 bg-green-45'
+                    ? 'border-[#00B87B] bg-[#00B87B] dark:border-green-45 dark:bg-green-45'
                     : 'border-gray-new-50 bg-transparent dark:border-gray-new-60'
                 )}
               >
@@ -630,7 +635,7 @@ export const EditableField = ({
               'font-mono text-[13px]',
               node.deprecated
                 ? 'text-gray-new-50 line-through dark:text-gray-new-60'
-                : 'text-[#9CDCFE]'
+                : 'text-[#426CE0]'
             )}
           >
             &quot;{node.key}&quot;
@@ -662,6 +667,7 @@ export const EditableField = ({
               deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
             </span>
           )}
+
           {node.constraints && !node.enum && (
             <span className="ml-1.5 text-[10px] text-gray-new-50 dark:text-gray-new-60">
               {node.constraints}
@@ -680,7 +686,7 @@ export const EditableField = ({
               type="button"
               onClick={() => node.details && onPin(isPinned ? null : path)}
               className={cn(
-                'max-w-[260px] shrink-0 overflow-hidden text-right text-[12px] text-ellipsis whitespace-nowrap transition-colors duration-100',
+                'flex max-w-[260px] shrink-0 items-baseline text-right text-[12px] transition-colors duration-100',
                 node.details ? 'cursor-pointer' : 'cursor-default',
                 hovered || isPinned
                   ? 'text-gray-new-30 dark:text-gray-new-70'
@@ -690,12 +696,16 @@ export const EditableField = ({
                   'underline decoration-dashed underline-offset-2'
               )}
             >
-              {node.annotation}
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                {node.annotation}
+              </span>
               {node.details && (
                 <span
                   className={cn(
-                    'ml-1 text-[10px]',
-                    isPinned ? 'text-green-45' : 'text-gray-new-50'
+                    'ml-1 shrink-0 text-[10px]',
+                    isPinned
+                      ? 'text-gray-new-30 dark:text-gray-new-70'
+                      : 'text-gray-new-60 dark:text-gray-new-50'
                   )}
                 >
                   ⓘ
