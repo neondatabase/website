@@ -7,7 +7,7 @@ summary: >-
   domains, while emphasizing that it does not replace session management for
   standard web applications.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.038Z'
+updatedOn: '2026-05-27T14:28:53.887Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -76,7 +76,6 @@ A typical decoded JWT payload looks like this:
   "name": "User Name",
   "email": "user@email.com",
   "emailVerified": false,
-  "image": null,
   "createdAt": "2025-12-20T11:04:41.437Z",
   "updatedAt": "2025-12-20T11:04:41.437Z",
   "role": "authenticated",
@@ -90,6 +89,35 @@ A typical decoded JWT payload looks like this:
   "aud": "<YOUR_NEON_AUTH_URL_ORIGIN>"
 }
 ```
+
+If the session has an active org (via [`setActive()`](/docs/auth/guides/plugins/organization#set-active-organization)), the payload also includes an `o` claim:
+
+```json
+{
+  "iat": 1766320685,
+  "name": "User Name",
+  "email": "user@email.com",
+  "emailVerified": false,
+  "createdAt": "2025-12-20T11:04:41.437Z",
+  "updatedAt": "2025-12-20T11:04:41.437Z",
+  "role": "authenticated",
+  "banned": false,
+  "banReason": null,
+  "banExpires": null,
+  "id": "<USER_ID>",
+  "o": {
+    "id": "<ORG_ID>",
+    "slug": "acme-corp",
+    "role": "owner"
+  },
+  "sub": "<USER_ID>",
+  "exp": 1766321585,
+  "iss": "<YOUR_NEON_AUTH_URL_ORIGIN>",
+  "aud": "<YOUR_NEON_AUTH_URL_ORIGIN>"
+}
+```
+
+`o.role` is the member's role at token issuance time (`owner`, `admin`, or `member`). The claim is absent when no active organization is set. See [Organization context in JWTs](/docs/auth/guides/plugins/organization#organization-context-in-jwts) for the full flow.
 
 ## Verify a token
 
@@ -314,7 +342,7 @@ Because Neon Auth is a managed service, certain server-side configurations avail
 
 - **Signing algorithm:** Neon Auth uses **EdDSA (Ed25519)** by default for high security and performance. Ensure your verification libraries support this algorithm.
 - **Expiration:** Tokens expire in **15 minutes** (access tokens). You should implement logic to refresh the token using `authClient.token()` when it expires.
-- **Custom claims:** Currently, the JWT payload contains the default user information. Custom claims are not supported at this time.
+- **Custom claims:** Not supported. Neon Auth adds an `o` claim automatically when the session has an active org (see [Organization context in JWTs](/docs/auth/guides/plugins/organization#organization-context-in-jwts)).
 
 ## Troubleshooting
 

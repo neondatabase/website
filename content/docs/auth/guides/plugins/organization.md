@@ -6,7 +6,7 @@ summary: >-
   including creating organizations, inviting members, and managing permissions
   through the Organization plugin APIs.
 enableTableOfContents: true
-updatedOn: '2026-04-09T23:15:21.000Z'
+updatedOn: '2026-05-27T14:28:53.887Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -14,7 +14,7 @@ updatedOn: '2026-04-09T23:15:21.000Z'
 Neon Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for JWT token claims is under development.
+The Organization plugin is currently in **Beta**.
 </Admonition>
 
 ## Why use this plugin?
@@ -238,6 +238,42 @@ const { data, error } = await authClient.organization.setActive({
   organizationId: 'org_12345678',
 });
 ```
+
+### Organization context in JWTs
+
+With an active organization set, the JWT includes an `o` claim containing the org ID, slug, and the member's role. Downstream services can authorize requests without an extra API call.
+
+```ts
+// 1. Set the active organization for the session
+await authClient.organization.setActive({ organizationId: 'org_12345678' });
+
+// 2. Fetch a JWT — it will now include the o claim
+const { data } = await authClient.token();
+// data.token is a JWT containing:
+// { ...<user fields>, o: { id: "org_12345678", slug: "acme-corp", role: "owner" } }
+```
+
+**The `o` claim**
+
+| Field  | Type   | Description                                                    |
+| :----- | :----- | :------------------------------------------------------------- |
+| `id`   | string | Organization ID                                                |
+| `slug` | string | URL-friendly org identifier                                    |
+| `role` | string | Member's role at token issuance: `owner`, `admin`, or `member` |
+
+**Clearing org context**
+
+Pass `organizationId: null` to remove the active org from the session. The next `token()` call returns a JWT without the `o` claim.
+
+```ts
+await authClient.organization.setActive({ organizationId: null });
+const { data } = await authClient.token();
+// data.token JWT has no o claim
+```
+
+<Admonition type="warning" title="Role staleness">
+The `o.role` value is fixed at issuance. If the member's role changes, the JWT reflects the old role until expiry. For sensitive operations, verify the current role server-side with [`organization.getActiveMember()`](#get-active-member).
+</Admonition>
 
 ### Get active organization
 
