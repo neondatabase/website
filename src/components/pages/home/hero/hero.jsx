@@ -71,8 +71,9 @@ const Hero = () => (
       </Link>
 
       <h1 className="mt-5 max-w-236 text-[68px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Fast Postgres Databases <br />
-        for Teams and Agents
+        Ship faster with application
+        <br />
+        backends for teams and agents
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
@@ -91,7 +92,6 @@ const Hero = () => (
             const tooltipProps = comingSoon
               ? {
                   'data-tooltip-id': tooltipId,
-                  // 'data-tooltip-html': comingSoonTooltip,
                 }
               : {};
 
