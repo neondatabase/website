@@ -6,7 +6,7 @@ summary: >-
   magic links, and verification emails — by intercepting delivery events with
   webhooks and sending them through your own email provider.
 enableTableOfContents: true
-updatedOn: '2026-05-15T10:42:42.837Z'
+updatedOn: '2026-05-27T07:50:31.326Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -49,12 +49,32 @@ Your handler receives a 6-digit OTP code, the OTP type (`sign-in`, `email-verifi
 
 ```json
 {
+  "event_id": "xxx-yyy-zzz",
   "event_type": "send.otp",
-  "user": { "email": "user@example.com", "name": "Jane Smith" },
+  "timestamp": "20xx-xx-xxTxx:xx:xx.xxxZ",
+  "context": {
+    "endpoint_id": "ep-xxx",
+    "project_name": "Your App Name"
+  },
+  "user": {
+    "name": "User Name",
+    "email": "user@email.com",
+    "image": null,
+    "role": "user",
+    "banned": false,
+    "id": "user-id",
+    "email_verified": true,
+    "created_at": "20xx-xx-xxTxx:xx:xx.xxxZ",
+    "updated_at": "20xx-xx-xxTxx:xx:xx.xxxZ",
+    "ban_reason": null,
+    "ban_expires": null
+  },
   "event_data": {
     "otp_code": "123456",
-    "otp_type": "email-verification",
-    "expires_at": "2026-02-23T12:10:00.000Z"
+    "otp_type": "sign-in",
+    "expires_at": "20xx-xx-xxTxx:xx:xx.xxxZ",
+    "ip_address": "IP_ADDRESS_OF_USER",
+    "user_agent": "USER_AGENT_OF_USER"
   }
 }
 ```
@@ -65,13 +85,23 @@ Your handler receives a full verification URL and a raw token. The `link_type` i
 
 ```json
 {
+  "event_id": "xxx-yyy-zzz",
   "event_type": "send.magic_link",
-  "user": { "email": "user@example.com", "name": "Jane Smith" },
+  "timestamp": "20xx-xx-xxTxx:xx:xx.xxxZ",
+  "context": {
+    "endpoint_id": "ep-xxx",
+    "project_name": "Your App Name"
+  },
+  "user": {
+    "email": "user@email.com"
+  },
   "event_data": {
-    "link_type": "email-verification",
-    "link_url": "https://ep-xxx.neon.tech/neondb/auth/...",
-    "token": "eyJhbGciOi...",
-    "expires_at": "2026-02-23T12:10:00.000Z"
+    "link_type": "sign-in",
+    "link_url": "https://magic-link-url",
+    "token": "raw-token-value",
+    "expires_at": "20xx-xx-xxTxx:xx:xx.xxxZ",
+    "ip_address": "IP_ADDRESS_OF_USER",
+    "user_agent": "USER_AGENT_OF_USER"
   }
 }
 ```
@@ -80,27 +110,73 @@ Your handler receives a full verification URL and a raw token. The `link_type` i
 
 Before your handler can receive events, you must register its endpoint. Follow the [Webhooks guide](/docs/auth/guides/webhooks) to configure your webhook URL and subscribe to the `send.otp` and `send.magic_link` events.
 
-Here’s a simple example of a Next.js API route that handles the `send.otp` and `send.magic_link` events and sends emails through Resend. For production, make sure to verify the webhook signature before sending emails.
-
-For a complete walkthrough with signature verification, ngrok testing, and domain blocking, see the [full guide](/guides/neon-auth-webhooks-nextjs).
+Here’s an example Next.js API route that verifies the webhook signature, handles the `send.otp` and `send.magic_link` events, and sends emails through Resend.
 
 ```ts shouldWrap
+import crypto from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+async function verifyWebhook(rawBody: string, headers: Headers) {
+  const signature = headers.get('x-neon-signature');
+  const kid = headers.get('x-neon-signature-kid');
+  const timestamp = headers.get('x-neon-timestamp');
+
+  if (!signature || !kid || !timestamp) {
+    throw new Error('Missing required Neon webhook headers');
+  }
+
+  // 1. Fetch JWKS and find the matching key
+  const res = await fetch(`${process.env.NEON_AUTH_BASE_URL}/.well-known/jks.json`);
+  const jwks = await res.json();
+  const jwk = jwks.keys.find((k: { kid: string }) => k.kid === kid);
+  if (!jwk) throw new Error(`Key ${kid} not found in JWKS`);
+
+  // 2. Import the Ed25519 public key
+  const publicKey = crypto.createPublicKey({ key: jwk, format: 'jwk' });
+
+  // 3. Parse detached JWS (header..signature)
+  const [headerB64, emptyPayload, signatureB64] = signature.split('.');
+  if (emptyPayload !== '') throw new Error('Expected detached JWS format');
+
+  // 4. Reconstruct signing input (standard JWS, double base64url encoding)
+  const payloadB64 = Buffer.from(rawBody, 'utf8').toString('base64url');
+  const signaturePayload = `${timestamp}.${payloadB64}`;
+  const signaturePayloadB64 = Buffer.from(signaturePayload, 'utf8').toString('base64url');
+  const signingInput = `${headerB64}.${signaturePayloadB64}`;
+
+  // 5. Verify Ed25519 signature
+  const isValid = crypto.verify(
+    null,
+    Buffer.from(signingInput),
+    publicKey,
+    Buffer.from(signatureB64, 'base64url')
+  );
+
+  if (!isValid) throw new Error('Invalid webhook signature');
+
+  // 6. Check timestamp freshness (recommended)
+  const ageMs = Date.now() - parseInt(timestamp, 10);
+  if (ageMs > 5 * 60 * 1000) throw new Error('Webhook timestamp too old');
+
+  return JSON.parse(rawBody);
+}
+
 export async function POST(request: NextRequest) {
-  // Verify the webhook signature first in production — see the Webhooks reference
-  const payload = await request.json();
-  const { event_type, event_data, user } = payload;
+  const rawBody = await request.text();
+  const payload = await verifyWebhook(rawBody, request.headers);
+  const { event_type, event_data, user, context } = payload;
+
+  const appName = context.project_name || 'My App';
 
   if (event_type === 'send.otp') {
     await resend.emails.send({
       from: 'My App <auth@myapp.com>',
       to: user.email,
       subject: 'Your verification code',
-      html: `<h1>Welcome to My App</h1><p>Your code: <strong>${event_data.otp_code}</strong></p>`,
+      html: `<h1>Welcome to ${appName}</h1><p>Your code: <strong>${event_data.otp_code}</strong></p>`,
     });
   }
 
@@ -109,7 +185,7 @@ export async function POST(request: NextRequest) {
       from: 'My App <auth@myapp.com>',
       to: user.email,
       subject: 'Your sign-in link',
-      html: `<h1>Welcome to My App</h1><p><a href="${event_data.link_url}">Sign in</a></p>`,
+      html: `<h1>Welcome to ${appName}</h1><p><a href="${event_data.link_url}">Sign in</a></p>`,
     });
   }
 
