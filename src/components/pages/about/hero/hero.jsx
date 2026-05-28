@@ -20,8 +20,8 @@ const Hero = () => (
       </Heading>
       <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
         <p className="max-w-[704px] font-sans text-xl leading-snug font-normal tracking-extra-tight text-gray-new-80 xl:max-w-md lg:max-w-[640px] lg:text-lg md:max-w-80 md:text-[15px]">
-          Database, Authentication, Storage, Functions, designed from the ground up to be operated
-          by agents: familiar, instant, serverless, and branchable.
+          Database, Authentication, Storage, Compute and AI Gateway, designed from the ground up to
+          be operated by agents: familiar, instant, serverless, and branchable.
         </p>
         <div className="flex items-center justify-center gap-x-5 xl:gap-4 xl:pb-2 lg:pb-0 md:w-full md:flex-col">
           <Button
