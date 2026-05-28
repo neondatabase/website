@@ -121,12 +121,6 @@
   slug: introduction/architecture-overview
   icon: info
   items:
-    - section: Neon Postgres
-      icon: book
-      items:
-        - title: Overview
-          slug: postgres/overview
-
     - section: Architecture
       icon: architecture
       items:
@@ -136,6 +130,12 @@
           slug: introduction/compute-lifecycle
         - title: Serverless
           slug: introduction/serverless
+
+    - section: Neon Postgres
+      icon: book
+      items:
+        - title: Neon Postgres
+          slug: postgres/overview
 
     - section: Autoscaling
       icon: features
