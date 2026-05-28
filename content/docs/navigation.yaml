@@ -16,6 +16,8 @@
     - section: Start with Neon
       icon: start
       items:
+        - title: One-command setup
+          slug: get-started/with-an-agent
         - title: 1 - Basics
           slug: get-started/signing-up
         - title: 2 - Connect
