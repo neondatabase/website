@@ -121,9 +121,11 @@
   slug: introduction/architecture-overview
   icon: info
   items:
-    - title: Neon Postgres
-      slug: postgres/overview
+    - section: Neon Postgres
       icon: book
+      items:
+        - title: Overview
+          slug: postgres/overview
 
     - section: Architecture
       icon: architecture
