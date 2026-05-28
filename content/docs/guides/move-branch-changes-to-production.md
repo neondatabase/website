@@ -5,7 +5,7 @@ summary: >-
   Explains what to do when schema changes or data already exist on a
   development branch and need to be moved back to production.
 enableTableOfContents: true
-updatedOn: '2026-05-20T09:47:02.219Z'
+updatedOn: '2026-05-28T13:22:58.082Z'
 ---
 
 Neon branches are isolated copy-on-write clones of your data. They're intended for safe development, testing, preview environments, and experimentation without affecting production.
@@ -123,14 +123,16 @@ Typical workflow:
 
 1. Export selected tables from the development branch
 2. Review or modify the exported data
-3. Import the data into production with a conflict strategy, such as `INSERT ... ON CONFLICT`
+3. Import the data into production with a conflict strategy, such as `INSERT ... ON CONFLICT DO NOTHING`
 
-For example, you might export a single table using `pg_dump`:
+For example, you might export a single table using `pg_dump`. To maintain idempotency and ensure the import doesn't fail if rows already exist, use the `--on-conflict-do-nothing` option:
 
 ```bash
 pg_dump \
   --data-only \
   --table=feature_flags \
+  --inserts \
+  --on-conflict-do-nothing \
   $DEV_DATABASE_URL > feature_flags.sql
 ```
 
@@ -140,7 +142,7 @@ Then import it into production:
 psql $PROD_DATABASE_URL < feature_flags.sql
 ```
 
-When possible, design seed scripts and import operations to be idempotent using techniques such as `INSERT ... ON CONFLICT`.
+When writing custom seed scripts, design the import operations to be idempotent using techniques such as `INSERT ... ON CONFLICT DO UPDATE` or `INSERT ... ON CONFLICT DO NOTHING` to avoid errors if the same data already exists in production.
 
 For more information, see [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
