@@ -33,8 +33,7 @@ Say you ran a migration at `14:32:10` that dropped a column the app still needs.
 neon branches restore main ^self@2026-04-25T14:32:00Z
 
 # Or branch from that point in time first
-neon branches create --name pre-migration --parent main \
-  --parent-timestamp 2026-04-25T14:32:00Z
+neon branches create --name pre-migration --parent 2026-04-25T14:32:00Z
 ```
 
 <Admonition type="warning" title="Restore in place is destructive">

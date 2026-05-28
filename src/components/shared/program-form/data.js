@@ -21,6 +21,7 @@ const OPENSOURCE = {
   placeholder: 'Project URL',
   buttonText: 'Apply',
   eventName: 'Open Source Program Application Submitted',
+  showGithubUrl: true,
 };
 
 const CREATOR = {

@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-04-23T22:03:00.000Z'
+updatedOn: '2026-05-28T10:46:49.412Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -41,16 +41,16 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/projects
 
 The response includes metrics that map directly to usage-based billing line items:
 
-| Metric                           | Raw unit     | Billing unit  | Description                                                                        |
-| -------------------------------- | ------------ | ------------- | ---------------------------------------------------------------------------------- |
-| `compute_unit_seconds`           | CU-seconds   | CU-hours      | CPU time weighted by compute size                                                  |
-| `root_branch_bytes_month`        | byte-hours   | GB-months     | Storage consumed by root branches                                                  |
-| `child_branch_bytes_month`       | byte-hours   | GB-months     | Storage consumed by child branches (delta from parent)                             |
-| `instant_restore_bytes_month`    | byte-hours   | GB-months     | Instant restore (PITR) history storage                                             |
+| Metric                           | Raw unit     | Billing unit  | Description                                                                                                                                                                                                    |
+| -------------------------------- | ------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compute_unit_seconds`           | CU-seconds   | CU-hours      | CPU time weighted by compute size                                                                                                                                                                              |
+| `root_branch_bytes_month`        | byte-hours   | GB-months     | Storage consumed by root branches                                                                                                                                                                              |
+| `child_branch_bytes_month`       | byte-hours   | GB-months     | Storage consumed by child branches (delta from parent)                                                                                                                                                         |
+| `instant_restore_bytes_month`    | byte-hours   | GB-months     | Instant restore (PITR) history storage                                                                                                                                                                         |
 | `snapshot_storage_bytes_month`   | byte-hours   | GB-months     | Storage for [branch snapshots](/docs/guides/backup-restore): manual snapshots are full; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in the schedule |
-| `public_network_transfer_bytes`  | bytes        | GB            | Data transfer over the public internet                                             |
-| `private_network_transfer_bytes` | bytes        | GB            | Data transfer over private networks (for example, AWS PrivateLink)                 |
-| `extra_branches_month`           | branch-hours | branch-months | All child branches per hour (subtract plan allowance before billing)               |
+| `public_network_transfer_bytes`  | bytes        | GB            | Data transfer over the public internet                                                                                                                                                                         |
+| `private_network_transfer_bytes` | bytes        | GB            | Data transfer over private networks (for example, AWS PrivateLink)                                                                                                                                             |
+| `extra_branches_month`           | branch-hours | branch-months | All child branches per hour (subtract plan allowance before billing)                                                                                                                                           |
 
 Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 

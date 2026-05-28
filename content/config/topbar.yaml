@@ -1,4 +1,4 @@
-text: 'Team accounts with unlimited members now available to everyone! Invite your teammates and ship faster together, even on the Free Plan.'
+text: 'Engineering post: How Neon''s lakebase architecture stays resilient to cloud failures in the age of agentic workloads.'
 link:
-  url: 'https://neon.com/docs/changelog/2026-03-13'
+  url: 'https://neon.com/blog/resilience-to-failures-in-agentic-era'
   target: '_blank'

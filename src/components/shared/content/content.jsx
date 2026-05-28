@@ -24,6 +24,7 @@ import InterfaceStrip from 'components/pages/doc/interface-strip';
 import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
 import InterfaceTabPanel from 'components/pages/doc/interface-tabs/interface-tab-panel';
 import LinkPreview from 'components/pages/doc/link-preview';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
@@ -220,6 +221,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  McpSetupConfigurator,
   SqlToRestConverter,
   ...sharedComponents,
 });

@@ -4,52 +4,28 @@ import PropTypes from 'prop-types';
 import Container from 'components/shared/container';
 import triangleIcon from 'icons/triangle.svg';
 import backgroundSvg from 'images/pages/case-studies/testimonials/background.svg';
-import koyebLogo from 'images/pages/case-studies/testimonials/koyeb.svg';
-import retoolLogo from 'images/pages/case-studies/testimonials/retool.svg';
-import topoLogo from 'images/pages/case-studies/testimonials/topo.svg';
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "Neon's serverless philosophy is <span>aligned with our vision</span>: no infrastructure to manage, no servers to provision, no database cluster to maintain.",
-    author: 'Edouard Bonlieu',
-    role: 'Co-founder at Koyeb',
-    logo: koyebLogo,
-    logoWidth: 115,
-  },
-  {
-    quote:
-      '<span>The killer feature</span> that convinced us to use Neon was branching: it keeps our engineering velocity high.',
-    author: 'Léonard Henriquez',
-    role: 'Co-founder and CTO at Topo.io',
-    logo: topoLogo,
-    logoWidth: 105,
-  },
-  {
-    quote:
-      "We've been able to automate virtually all database tasks <span>via the Neon API,</span> saving us a tremendous amount of time and engineering.",
-    author: 'Himanshu Bhandoh',
-    role: 'Software Engineer at Retool',
-    logo: retoolLogo,
-    logoWidth: 111,
-  },
-];
-
-const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
+const TestimonialCard = ({ quote, author, logo, title }) => (
   <article className="flex h-[274px] flex-col justify-between lg:h-auto">
     <div className="flex flex-col gap-9 lg:gap-6 md:gap-5">
-      <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit sm:h-6" />
+      <Image
+        src={logo.mediaItemUrl}
+        alt={title}
+        width={logo.mediaDetails.width}
+        height={logo.mediaDetails.height}
+        className="h-8 w-fit sm:h-6"
+      />
       <blockquote
-        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
+        className="font-mono text-[20px] leading-snug font-normal -tracking-wide text-black xl:text-lg md:text-base [&_mark]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>
     <div className="mt-auto flex flex-col gap-1 lg:mt-5">
       <span className="font-mono text-[15px] leading-snug font-medium -tracking-wide text-[#242628]">
-        {author}
+        {author.name}
       </span>
       <span className="font-mono text-[15px] leading-snug font-normal -tracking-wide text-[#242628]">
-        {role}
+        {author.post}
       </span>
     </div>
   </article>
@@ -57,20 +33,21 @@ const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
 
 TestimonialCard.propTypes = {
   quote: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  logo: PropTypes.shape({
-    type: PropTypes.oneOf(['image', 'text']).isRequired,
-    src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    width: PropTypes.number,
-    height: PropTypes.number,
-    alt: PropTypes.string,
-    label: PropTypes.string,
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    post: PropTypes.string.isRequired,
   }).isRequired,
-  logoWidth: PropTypes.number.isRequired,
+  logo: PropTypes.shape({
+    mediaItemUrl: PropTypes.string.isRequired,
+    mediaDetails: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
 };
 
-const Testimonials = () => (
+const Testimonials = ({ items }) => (
   <section className="relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure xl:py-20 lg:py-16 md:py-14">
     <Image
       src={backgroundSvg}
@@ -80,8 +57,8 @@ const Testimonials = () => (
       className="pointer-events-none absolute top-0 right-0 h-full w-auto md:hidden"
       aria-hidden
     />
-    <Container size="1280" className="relative z-10">
-      <div className="flex flex-col border-l border-gray-new-50 pl-8 xl:pl-6 lg:pl-[18px] sm:border-l-0 sm:pl-0">
+    <Container size="small" className="relative z-10">
+      <div className="flex flex-col border-l border-gray-new-50 pr-8 pl-8 xl:pr-0 xl:pl-6 lg:pl-[18px] sm:border-l-0 sm:pl-0">
         <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
@@ -99,14 +76,35 @@ const Testimonials = () => (
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
-        <div className="mt-40 grid grid-cols-3 gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 md:mt-14 sm:grid-cols-1 sm:gap-y-14">
-          {TESTIMONIALS.map((item, index) => (
-            <TestimonialCard key={index} {...item} />
+        <div className="mt-40 grid grid-cols-3 gap-16 2xl:gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 md:mt-14 sm:grid-cols-1 sm:gap-y-14">
+          {items.map((item) => (
+            <TestimonialCard key={item.id} {...item} />
           ))}
         </div>
       </div>
     </Container>
   </section>
 );
+
+Testimonials.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      quote: PropTypes.string.isRequired,
+      author: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        post: PropTypes.string.isRequired,
+      }).isRequired,
+      logo: PropTypes.shape({
+        mediaItemUrl: PropTypes.string.isRequired,
+        mediaDetails: PropTypes.shape({
+          width: PropTypes.number.isRequired,
+          height: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
+};
 
 export default Testimonials;
