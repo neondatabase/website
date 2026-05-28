@@ -13,7 +13,7 @@ Neon Postgres is fully managed and compatible with any Postgres driver, ORM, or 
 - **Scale to zero** — idle databases suspend so you only pay for what you use
 - **Branching** — create isolated, instant copies of your database for development, testing, and CI
 - **Instant restore** — restore to any point in time within your history window
-- **Read replicas** — offload read traffic to replicas in any supported region
+- **Read replicas** — scale your app by offloading read traffic to read replicas
 
 ## Get started
 
