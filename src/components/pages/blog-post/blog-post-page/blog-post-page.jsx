@@ -18,6 +18,7 @@ import BlogQuote from 'components/shared/blog-quote';
 import ChangelogForm from 'components/shared/changelog-form';
 import EmbedTweet from 'components/shared/embed-tweet';
 import ImageZoom from 'components/shared/image-zoom';
+import RequestForm from 'components/shared/request-form';
 import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
@@ -61,6 +62,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
+  RequestForm,
   YoutubeIframe,
 };
 
