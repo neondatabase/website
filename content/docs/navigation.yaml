@@ -17,7 +17,7 @@
       icon: start
       items:
         - title: One-command setup
-          slug: reference/cli-init
+          slug: get-started/with-an-agent
         - title: Build a full backend
           slug: get-started/full-backend-quickstart
         - title: Tour the Neon Console
