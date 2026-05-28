@@ -123,6 +123,7 @@
   items:
     - title: Neon Postgres
       slug: postgres/overview
+      icon: book
 
     - section: Architecture
       icon: architecture
