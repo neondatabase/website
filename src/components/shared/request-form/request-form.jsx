@@ -59,7 +59,7 @@ const RequestForm = ({ type }) => {
     if (isValid) {
       if (window.zaraz) {
         const { eventName, eventProps } = DATA[type];
-        const eventData = {};
+        const eventData = { email };
         if (hasOptions && selected && eventProps?.name) {
           eventData[eventProps.name] = selected.name;
           if (eventProps.id && selected.id) {
