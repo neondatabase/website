@@ -6,7 +6,7 @@ summary: >-
   builders to create a Postgres database with Neon. Sign up, get a connection
   string, and connect your favorite tools. No SQL knowledge needed.
 enableTableOfContents: true
-updatedOn: '2026-05-28T12:09:29.625Z'
+updatedOn: '2026-05-28T16:28:48.254Z'
 ---
 
 <InfoBlock>
@@ -74,14 +74,15 @@ You will be redirected to your project dashboard, where you can see your connect
 The connection string is the address of your database. Using this string, any application, AI assistant, or no-code tool can connect to it and read/write data. It looks something like this:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 To get your connection string:
 
 1. On your project dashboard, click the **Connect** button.
 2. Select your branch (use `production`), database, and role.
-3. Copy the string starting with `postgresql://`.
+3. Copy the connection string shown.
+   ![Connection string](/docs/connect/connection_details.png)
 4. Use this string wherever you need to connect your database to your favorite tools.
 
 <Admonition type="warning" title="Keep your connection string safe">
