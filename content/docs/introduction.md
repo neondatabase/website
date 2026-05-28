@@ -10,7 +10,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-27T18:14:14.230Z'
+updatedOn: '2026-05-28T21:30:27.166Z'
 ---
 
 <TwinPaths>
@@ -28,7 +28,7 @@ updatedOn: '2026-05-27T18:14:14.230Z'
 
 <div className="mt-12 mb-3.5 flex items-baseline justify-between gap-4">
   <h2 className="m-0!">Your Neon backend</h2>
-  <a href="/docs/introduction/early-access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
+  <a href="https://neon.com/blog/were-building-backends#access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
 </div>
 
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
@@ -41,11 +41,11 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="binary-code">Data API</a>
 
-<a href="/docs/introduction/early-access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
+<a href="https://neon.com/blog/were-building-backends#access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
 
-<a href="/docs/introduction/early-access" description="Serverless compute, deployed alongside your DB." icon="code" tag="coming soon">Compute</a>
+<a href="https://neon.com/blog/were-building-backends#access" description="Serverless compute, deployed alongside your DB." icon="code" tag="coming soon">Compute</a>
 
-<a href="/docs/introduction/early-access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
+<a href="https://neon.com/blog/were-building-backends#access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
 
 </DetailIconCards>
 
@@ -53,7 +53,7 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides for full connection details.
 
-<TechCards withToggler>
+<PromptCards withToggler>
 
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect Next.js to Neon" icon="next-js"></a>
 
@@ -119,7 +119,7 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 
 <a href="/docs/guides/redwoodsdk" title="Redwood" description="Connect Redwood SDK to Neon" icon="redwoodsdk"></a>
 
-</TechCards>
+</PromptCards>
 
 ## AI tools and agents
 
