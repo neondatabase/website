@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-03-20T18:23:32.435Z'
 ---
 
-Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
+Neon is the backend for apps and agents. This page covers Neon's integrations with AI tools and agent frameworks, from natural language database control to autonomous agent platforms. Choose the tools that fit your workflow.
 
 ## Quick setup
 

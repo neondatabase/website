@@ -21,20 +21,12 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
 
-function getCookie(name) {
-  if (typeof document === 'undefined') return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
 const RequestForm = ({ type }) => {
   const { title, description, placeholder, buttonText, confirmation, options, extendedOptions } =
     DATA[type];
   const hasOptions = Array.isArray(options) && options.length > 0;
 
-  const isRecognized = !!getCookie('ajs_user_id');
+  const isRecognized = false;
   const [selected, setSelected] = useState('');
   const [email, setEmail] = useState('');
   const [query, setQuery] = useState('');
@@ -67,7 +59,7 @@ const RequestForm = ({ type }) => {
     if (isValid) {
       if (window.zaraz) {
         const { eventName, eventProps } = DATA[type];
-        const eventData = {};
+        const eventData = { email };
         if (hasOptions && selected && eventProps?.name) {
           eventData[eventProps.name] = selected.name;
           if (eventProps.id && selected.id) {

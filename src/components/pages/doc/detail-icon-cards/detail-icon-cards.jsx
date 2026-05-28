@@ -8,6 +8,8 @@ import Link from 'components/shared/link/link';
 import СhevronIcon from 'icons/arrow-label.inline.svg';
 import { cn } from 'utils/cn';
 
+import Tag from '../tag';
+
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
 import Atom from './images/atom.inline.svg';
@@ -168,54 +170,75 @@ const icons = {
 
 // const monochromeIcons = ['github'];
 
-const DetailIconCards = ({ children = null, withNumbers = false, compact = false }) => {
+const DetailIconCards = ({ children = null, withNumbers = false, compact = false, cols = 2 }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
   return (
     <ListComponent
       className={cn(
-        'detail-icon-cards not-prose grid p-0! sm:grid-cols-1',
-        compact ? 'my-7! grid-cols-2 gap-3' : 'my-10! grid-cols-2 gap-5'
+        'detail-icon-cards not-prose grid p-0!',
+        compact
+          ? 'my-7! grid-cols-2 gap-3 sm:grid-cols-1'
+          : cols === 4
+            ? 'my-10! grid-cols-4 gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'
+            : cols === 3
+              ? 'my-10! grid-cols-3 gap-5 md:grid-cols-2 sm:grid-cols-1'
+              : 'my-10! grid-cols-2 gap-5 sm:grid-cols-1'
       )}
     >
       {React.Children.map(children, (child, index) => {
-        const { children, href, description, icon, target } = child.props ?? {};
+        const { children, href, description, icon, target, tag } = child.props ?? {};
         const Icon = icons[icon];
+
+        const isGhost = !withNumbers && !!tag;
 
         return (
           <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
-                withNumbers
-                  ? 'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]'
-                  : 'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10'
+                withNumbers &&
+                  'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
+                !withNumbers &&
+                  !isGhost &&
+                  'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
+                isGhost &&
+                  'border border-gray-new-90 bg-[#FAFAF9] text-gray-new-30 hover:border-gray-new-80 hover:bg-white dark:border-gray-new-20 dark:bg-[#0F0F0F] dark:text-gray-new-70 dark:hover:border-gray-new-30 dark:hover:bg-[#141414]'
               )}
               to={href}
               tagName="DocsNavCard"
               tagText={children}
               {...(target && { target })}
             >
-              <Image
-                src={withNumbers ? patternNumbersSvg : patternSvg}
-                alt=""
-                width={342}
-                height={172}
-                className="absolute top-0 right-0 z-0"
-              />
+              {!isGhost && (
+                <Image
+                  src={withNumbers ? patternNumbersSvg : patternSvg}
+                  alt=""
+                  width={342}
+                  height={172}
+                  className="absolute top-0 right-0 z-0"
+                />
+              )}
+              {tag && <Tag label={tag} size="xs" className="absolute top-3.5 right-3.5 z-10" />}
               {withNumbers ? (
                 <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm leading-none font-medium uppercase">
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
               ) : (
-                <Icon className="mb-[29px] size-7 text-green-44" />
+                <Icon
+                  className={cn(
+                    'mb-[29px] size-7',
+                    isGhost ? 'text-gray-new-50 opacity-70' : 'text-green-44'
+                  )}
+                />
               )}
               <div className="mt-auto flex flex-col gap-1.5">
                 <h3
                   className={cn(
                     'text-lg leading-snug font-medium tracking-extra-tight',
-                    !withNumbers && 'dark:text-white'
+                    !withNumbers && !isGhost && 'dark:text-white',
+                    isGhost && 'text-gray-new-30 dark:text-gray-new-70'
                   )}
                 >
                   {children}
@@ -241,6 +264,7 @@ DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
   compact: PropTypes.bool,
+  cols: PropTypes.oneOf([2, 3, 4]),
   highlightIndex: PropTypes.number,
 };
 
