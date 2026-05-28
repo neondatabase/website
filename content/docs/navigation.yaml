@@ -131,6 +131,12 @@
         - title: Serverless
           slug: introduction/serverless
 
+    - section: Neon Postgres
+      icon: book
+      items:
+        - title: Neon Postgres
+          slug: postgres/overview
+
     - section: Autoscaling
       icon: features
       items:
