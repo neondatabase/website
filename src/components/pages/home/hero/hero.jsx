@@ -38,6 +38,7 @@ const Hero = () => (
         Fast Postgres Databases <br />
         for Teams and Agents
       </h1>
+
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
         <Button theme="white-filled" size="new" to={LINKS.signup}>
           Get started
