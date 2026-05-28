@@ -16,7 +16,7 @@ description: >-
 
 Guide the user through any Neon-related task: setup, connections, branching, and advanced features. Deliver a working Neon connection, a completed feature configuration, or a specific answer from the official Neon docs.
 
-Neon is the backend for apps and agents. Neon Postgres, Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.
+Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.
 
 ## Neon Documentation
 

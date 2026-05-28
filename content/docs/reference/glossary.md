@@ -333,7 +333,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Neon Postgres, Auth, and Data API today, with Storage, Compute, and AI Gateway coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Neon Postgres, Neon Auth, and Data API today, with Storage, Compute, and AI Gateway coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 

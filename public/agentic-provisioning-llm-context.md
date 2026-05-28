@@ -5,7 +5,7 @@ description: Context for agents using or developing the Agentic Provisioning Pro
 
 # Agentic provisioning with Neon
 
-Neon is the backend for apps and agents. Neon Postgres, Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless.
+Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless.
 
 Context for LLMs and agents: use the **API key** from the APP account request to interact with Neon (projects, branches, connection strings, provisioning). Full documentation index: [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt).
 
