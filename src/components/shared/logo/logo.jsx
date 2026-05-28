@@ -22,7 +22,7 @@ const copySvgToClipboard = async () => {
     const isDarkMode = document.documentElement.classList.contains('dark');
     const logoToUse = isDarkMode ? logoDarkSvg : logoLightSvg;
 
-    const response = await fetch(logoToUse);
+    const response = await fetch(logoToUse.src);
     const svgContent = await response.text();
     copyToClipboard(svgContent);
   } catch (error) {
