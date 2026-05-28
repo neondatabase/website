@@ -6,7 +6,7 @@ summary: >-
   and management through the Neon SDK without direct installation or
   configuration by users.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-05-27T14:28:53.887Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -23,15 +23,15 @@ The following Better Auth plugins are currently supported in Neon Auth:
 
 ## Supported plugins
 
-| Plugin                                                 | Status                                          |
-| ------------------------------------------------------ | ----------------------------------------------- |
-| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                    |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                    |
-| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
-| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported                                    |
-| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
-| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
-| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported                                    |
+| Plugin                                                 | Status       |
+| ------------------------------------------------------ | ------------ |
+| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported |
+| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported |
+| [Organization](/docs/auth/guides/plugins/organization) | ✅ Supported |
+| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported |
+| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported |
 
 For more runnable Neon Auth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
 

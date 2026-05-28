@@ -6,7 +6,7 @@ summary: >-
   authenticated sessions using JSON Web Tokens (JWTs), including JWK validation
   and PostgREST compatibility for secure user identity handling.
 enableTableOfContents: true
-updatedOn: '2026-05-15T10:22:57.192Z'
+updatedOn: '2026-05-27T23:29:49.973Z'
 ---
 
 <InfoBlock>
@@ -81,7 +81,17 @@ SELECT auth.session();
 
 ### auth.jwt()
 
-Alias for `auth.session()`.
+Alias for `auth.session()`. When using [Neon Auth Organizations](/docs/auth/guides/plugins/organization), the payload includes an `o` claim for the active org. Extract it directly in RLS:
+
+```sql
+-- Full org object (jsonb): {"id": "org_123", "slug": "acme", "role": "owner"} or NULL
+SELECT auth.jwt() -> 'o';
+
+-- Org ID as text, for policy comparisons
+SELECT auth.jwt() -> 'o' ->> 'id';
+```
+
+See [Multi-tenant access with organizations](/docs/data-api/access-control#multi-tenant-access-with-organizations) for the complete RLS pattern.
 
 ### auth.uid()
 
