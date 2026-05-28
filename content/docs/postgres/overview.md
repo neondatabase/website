@@ -1,13 +1,13 @@
 ---
 title: Neon Postgres
-subtitle: Serverless Postgres in the Neon backend, with branching, autoscaling, and instant restore
+subtitle: The serverless database in the Neon backend
 summary: >-
-  An overview of Neon Postgres, the serverless database service in the Neon
-  backend, with branching, autoscaling, scale to zero, and instant restore.
+  An overview of Neon Postgres, the serverless database in the Neon backend,
+  with branching, autoscaling, scale to zero, and instant restore.
 enableTableOfContents: true
 ---
 
-Neon Postgres is the serverless database in the Neon backend. It's fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
+Neon Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
 
 - **Autoscaling** — compute scales up and down automatically with your workload
 - **Scale to zero** — idle databases suspend so you only pay for what you use
