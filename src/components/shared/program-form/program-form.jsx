@@ -16,9 +16,15 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import DATA from './data';
 
 // Schema for validation
-const createSchema = () =>
+const createSchema = ({ showGithubUrl } = {}) =>
   yup.object({
     url: yup.string().required('This field is required'),
+    ...(showGithubUrl && {
+      githubUrl: yup
+        .string()
+        .url('Please enter a valid URL')
+        .required('This field is required'),
+    }),
     email: yup
       .string()
       .email('Please enter a valid email address')
@@ -33,7 +39,7 @@ const fieldProps = {
 };
 
 const ProgramForm = ({ type }) => {
-  const { title, description, placeholder, buttonText } = DATA[type];
+  const { title, description, placeholder, buttonText, showGithubUrl } = DATA[type];
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   const {
@@ -41,13 +47,13 @@ const ProgramForm = ({ type }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createSchema()),
+    resolver: yupResolver(createSchema({ showGithubUrl })),
     mode: 'onSubmit',
   });
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { url, email } = data;
+    const { url, email, githubUrl } = data;
     const loadingAnimationStartedTime = Date.now();
 
     setFormState(FORM_STATES.LOADING);
@@ -58,7 +64,11 @@ const ProgramForm = ({ type }) => {
 
         // Send identify event with user provided email
         await sendGtagEvent('identify', { email });
-        await sendGtagEvent(eventName, { email, url });
+        await sendGtagEvent(eventName, {
+          email,
+          url,
+          ...(showGithubUrl && { githubUrl }),
+        });
       }
 
       doNowOrAfterSomeTime(() => {
@@ -96,6 +106,19 @@ const ProgramForm = ({ type }) => {
               isDisabled={formState === FORM_STATES.LOADING}
               {...register('url')}
             />
+
+            {showGithubUrl && (
+              <Field
+                {...fieldProps}
+                name="githubUrl"
+                label="GitHub Project Link *"
+                type="url"
+                placeholder="Enter a link to your GitHub project"
+                error={errors.githubUrl?.message}
+                isDisabled={formState === FORM_STATES.LOADING}
+                {...register('githubUrl')}
+              />
+            )}
 
             <Field
               {...fieldProps}

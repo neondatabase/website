@@ -28,11 +28,10 @@ From the CLI:
 ```bash
 neon branches create \
   --name incident-2026-04-22 \
-  --parent main \
-  --parent-timestamp 2026-04-22T14:32:00Z
+  --parent 2026-04-22T14:32:00Z
 ```
 
-Or use `--parent-lsn` if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
+Or append the LSN to `--parent` (for example, `--parent 0/1E88838`) if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
 
 <Callout title="Why this beats restoring a backup">
 Creating the branch is metadata-only. There's no `pg_restore` to wait on, no extra storage for a duplicate, and no impact on the parent's performance. When you're done, delete the branch and the storage goes with it.

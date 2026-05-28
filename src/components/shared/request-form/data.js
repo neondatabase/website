@@ -165,9 +165,19 @@ const EXTENSIONS = {
   },
 };
 
+const BACKEND_PLATFORM = {
+  title: 'Get early access to the Neon backend platform',
+  description:
+    "We're expanding Neon into a complete backend platform. Drop your email and we'll reach out soon for early access.",
+  buttonText: 'Get access',
+  confirmation: "You're on the list. We'll be in touch soon.",
+  eventName: 'Backend Platform Access Requested',
+};
+
 const DATA = {
   region: REGIONS,
   extension: EXTENSIONS,
+  'backend-platform': BACKEND_PLATFORM,
 };
 
 export default DATA;

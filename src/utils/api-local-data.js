@@ -78,6 +78,31 @@ export const getCaseStudiesData = () => {
   }
 };
 
+export const getCaseStudiesTestimonials = () => {
+  try {
+    const items = readYaml(path.join(process.cwd(), 'content/data/case-studies.yaml'));
+
+    if (!Array.isArray(items)) return [];
+
+    return items
+      .filter((item) => Number.isFinite(item.caseStudiesPage?.testimonialOrder))
+      .sort(
+        (first, second) =>
+          first.caseStudiesPage.testimonialOrder - second.caseStudiesPage.testimonialOrder
+      )
+      .map((item) => ({
+        id: item.id,
+        title: item.title,
+        logo: item.caseStudiesPage?.testimonialLogo || item.logo,
+        quote: formatQuote(item.quote),
+        author: item.author,
+      }))
+      .filter((item) => item.logo && item.quote && item.author?.name);
+  } catch (_e) {
+    return [];
+  }
+};
+
 export const getCaseStudiesCategories = () => {
   try {
     const categories = readYaml(

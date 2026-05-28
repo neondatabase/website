@@ -3,7 +3,7 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, CLI, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-05-22T12:41:06.646Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -76,5 +76,3 @@ Existing open sessions stay connected, but every new connection (or reconnect) m
 </Admonition>
 
 If the leak might have exposed more than one role, see [How do I rotate all my Neon database credentials after a breach?](/faqs/rotate-database-credentials-after-breach).
-
-<CTA title="Need help responding to a security incident?" description="Contact Neon Support with details of the incident. Include the project ID and roles affected." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />

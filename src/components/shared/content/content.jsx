@@ -16,12 +16,15 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
+import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
+import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -171,6 +174,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DetailIconCards,
   TechCards,
   PromptCards,
+  Tag,
+  TwinPaths,
+  QuickPath,
+  GuidedPath,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -201,6 +208,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  McpSetupConfigurator,
   SqlToRestConverter,
   ...sharedComponents,
 });

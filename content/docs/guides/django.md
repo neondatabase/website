@@ -200,4 +200,8 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 
 </details>
 
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
+
 <NeedHelp/>
