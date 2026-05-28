@@ -66,7 +66,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
 
 ## Part 2: Neon documentation and features
 
-Neon is the backend for apps and agents. Neon Postgres is serverless (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
+Neon is the backend for apps and agents. Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
 
 **Fetching docs as Markdown:** Append `.md` to the URL (e.g. https://neon.com/docs/introduction/branching.md) or send `Accept: text/markdown` on the standard URL.
 

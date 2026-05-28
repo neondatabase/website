@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-04-18T11:47:20.000Z'
 ---
 
-Neon Postgres, the database service in the Neon backend, is serverless. This page covers what that means: instant provisioning, autoscaling, scale-to-zero, and usage-based pricing.
+Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Neon Postgres helps teams ship reliable and scalable applications faster.
 
 Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview), which natively decouples storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 
