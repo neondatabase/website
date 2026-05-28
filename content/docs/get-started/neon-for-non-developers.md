@@ -6,6 +6,7 @@ summary: >-
   builders to create a Postgres database with Neon. Sign up, get a connection
   string, and connect your favorite tools. No SQL knowledge needed.
 enableTableOfContents: true
+updatedOn: '2026-05-28T12:09:29.625Z'
 ---
 
 <InfoBlock>
