@@ -35,7 +35,7 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 <DetailIconCards cols={3}>
 
-<a href="/docs/introduction/serverless" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
+<a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
 <a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
 
