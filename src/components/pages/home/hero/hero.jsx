@@ -35,31 +35,9 @@ const Hero = () => (
       </Link>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Ship Faster with Application
-        <br />
-        Backends for Teams and Agents
+        Fast Postgres Databases <br />
+        for Teams and Agents
       </h1>
-
-      <ul className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-2 text-base leading-snug tracking-extra-tight lg:mt-5 lg:gap-x-6 lg:text-sm sm:gap-x-5 sm:text-[13px]">
-        {[
-          { label: 'Postgres Database', comingSoon: false },
-          { label: 'Authentication', comingSoon: false },
-          { label: 'Data API', comingSoon: false },
-          { label: 'Storage', comingSoon: true },
-          { label: 'Functions', comingSoon: true },
-        ].map(({ label, comingSoon }) => (
-          <li
-            key={label}
-            className={cn(
-              'flex items-center',
-              comingSoon ? 'text-gray-new-50' : 'text-gray-new-90'
-            )}
-          >
-            {label}
-          </li>
-        ))}
-      </ul>
-
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
         <Button theme="white-filled" size="new" to={LINKS.signup}>
           Get started
