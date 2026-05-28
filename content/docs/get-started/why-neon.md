@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-04-18T11:47:20.000Z'
+updatedOn: '2026-05-28T12:08:02.542Z'
 ---
 
 ## Our mission
@@ -103,6 +103,26 @@ Full-stack codegen platforms need to spin up thousands of independent applicatio
 
 <Admonition type="tip" title="Join the Agent Program">
   Building a full-stack agent that needs databases? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, and features.
+</Admonition>
+
+### Non-developers: From idea to product, no code required
+
+Building an app without writing code is more accessible than ever. AI assistants and no-code platforms can take you from idea to working product, but every app that persists data needs a database behind it. Neon gives you a managed Postgres database with no SQL, no servers, and no setup complexity.
+
+**Why they build on Neon**
+
+- Sign up in seconds with email, GitHub, or Google — no credit card required
+- Create a fully managed Postgres database with a few clicks — no terminal, no commands, no server configuration
+- Get a connection string you can paste directly into your AI assistant or no-code tool
+- Connect Neon to visual platforms like Zapier, n8n, Directus, and Metabase without writing code
+- The AI Assistant in Neon's SQL Editor lets you query your data in plain English, Ask questions like "show me all users who signed up this week" and get results instantly.
+- View and edit data through a spreadsheet-like Tables page, no SQL needed
+- Scale-to-zero means you pay nothing when your database is idle, which is ideal for early-stage projects and weekend experiments.
+- When your app grows, Neon scales resources automatically without any changes on your end, so you can keep building without worrying about infrastructure.
+- Usage-based pricing means you only pay for what you actually use, with no upfront commitments
+
+<Admonition type="tip" title="Get started">
+  Check out our [Neon for non-developers guide](/docs/get-started/neon-for-non-developers) for a full step-by-step walkthrough, and browse the [no-code tools overview](/docs/get-started/no-code-tools) for integration options.
 </Admonition>
 
 ## The architecture that makes it possible: how Neon works
