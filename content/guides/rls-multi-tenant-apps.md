@@ -187,7 +187,7 @@ From the [Neon Console](https://neon.com), open the new branch and copy its **co
 
 ### Step 2: Point your app preview environment at the branch
 
-Each Neon branch has its own Postgres endpoint. If you use Neon Auth, each branch also gets [its own Auth Base URL](/docs/auth/branching-authentication). Preview and CI environments must use that branch’s URL (not of production branch), because sessions and tokens are scoped to the [Auth endpoint](/docs/auth/guides/manage-auth-api) for that branch.
+Each Neon branch has its own Postgres endpoint. If you use Neon Auth, each branch also gets [its own Auth Base URL](/docs/auth/branching-authentication). Preview and CI environments must use that branch’s URL (not the production branch’s URL), because sessions and tokens are scoped to the [Auth endpoint](/docs/auth/guides/manage-auth-api) for that branch.
 
 Here's an example of environment variables for a preview deployment (or local run) against the branch:
 
