@@ -6,7 +6,7 @@ summary: >-
   byte-hours and CU-seconds into human-readable billing units, and calculate
   costs using plan rates and allowances.
 enableTableOfContents: true
-updatedOn: '2026-05-29T00:27:59.360Z'
+updatedOn: '2026-05-29T16:16:59.299Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -75,7 +75,7 @@ Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs
 | Child storage    | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
 | Instant restore  | GB-months x rate                  | $0.20/GB-mo  | $0.20/GB-mo  |
 | Snapshots        | GB-months x rate                  | $0.09/GB-mo  | $0.09/GB-mo  |
-| Public transfer  | max(0, org_total_GB - 100) x rate | $0.10/GB     | $0.10/GB     |
+| Public transfer  | max(0, org_total_GB - 500) x rate | $0.10/GB     | $0.10/GB     |
 | Private transfer | GB x rate                         | n/a          | $0.01/GB     |
 | Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
 
