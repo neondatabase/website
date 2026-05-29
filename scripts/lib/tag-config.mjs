@@ -28,15 +28,17 @@ function readRaw() {
   return _cache;
 }
 
-// Returns the parsed config, optionally validated against a spec schema.
-// When specSchema is provided, throws if any operation's effective tag
-// (after overrides) is not present in the config — catches new upstream
-// tags before they render as untagged.
+// Returns the parsed config, optionally extended against a live spec schema.
+// When specSchema is provided, any spec tags not in the config are auto-injected
+// as minimal entries (warn-only) so the build proceeds. Add proper entries to
+// scripts/data/tag-config.json to control order, description, and groups.
 export function loadTagConfig(specSchema = null) {
   const cfg = readRaw();
   validateStatic(cfg);
-  if (specSchema) validateAgainstSpec(cfg, specSchema);
-  return buildView(cfg);
+  if (!specSchema) return buildView(cfg);
+  const injected = synthesizeMissingTags(cfg, specSchema);
+  if (injected.length === 0) return buildView(cfg);
+  return buildView({ ...cfg, tags: [...cfg.tags, ...injected] });
 }
 
 // Validate cfg structure that doesn't depend on the spec.
@@ -92,11 +94,10 @@ function validateStatic(cfg) {
   }
 }
 
-// Validate every spec operation's effective tag (after applying overrides)
-// has a matching entry in the config — either by specName or slug. The
-// resolution must match buildOperationData's chain in generate-api-ref.mjs:
+// Detect spec tags not in cfg, warn, and return synthesized minimal entries
+// for each. Resolution chain matches buildOperationData in generate-api-ref.mjs:
 //   raw spec tag → toTagSlug → specName map → final url slug
-function validateAgainstSpec(cfg, specSchema) {
+function synthesizeMissingTags(cfg, specSchema) {
   const specToSlug = new Map();
   const slugSet = new Set();
   for (const t of cfg.tags) {
@@ -117,12 +118,20 @@ function validateAgainstSpec(cfg, specSchema) {
       if (!slugSet.has(finalSlug)) missing.add(specTag);
     }
   }
-  if (missing.size > 0) {
-    throw new Error(
-      `[tag-config] spec tags missing from config: ${[...missing].join(', ')}. ` +
-        `Add { slug, specName, display } entries to scripts/data/tag-config.json for each.`
-    );
-  }
+
+  if (missing.size === 0) return [];
+
+  process.stderr.write(
+    `[tag-config] warn: new spec tag(s) not in config: ${[...missing].join(', ')}.\n` +
+      `  Auto-generating minimal entries. Add to scripts/data/tag-config.json\n` +
+      `  to control display order, description, and operation groups.\n`
+  );
+
+  return [...missing].map((specTag) => ({
+    slug: toTagSlug(specTag),
+    specName: toTagSlug(specTag),
+    display: specTag,
+  }));
 }
 
 function toTagSlug(tag) {

@@ -462,7 +462,7 @@ function toFullMarkdownEntry(op) {
 // loaded once at module init. The legacy inline TAG_OVERRIDE / TAG_SLUG_URL /
 // TAG_CONFIG.display constants + tag-order.json + tag-groups.json all came
 // from there. main() re-loads with the spec for cross-validation.
-const TAG_CONFIG = loadTagConfig();
+let TAG_CONFIG = loadTagConfig();
 
 // ---------------------------------------------------------------------------
 // Agent index generators — one per interface
@@ -1182,10 +1182,10 @@ async function main() {
   process.stderr.write('Dereferencing...\n');
   const { schema } = await dereference(specRaw);
 
-  // Validate tag config against the live spec — catches new upstream tags
-  // before they render as untagged. Static validation already ran at module
-  // load; this adds the cross-spec check.
-  loadTagConfig(schema);
+  // Extend tag config against the live spec — auto-injects minimal entries for
+  // any new upstream tags and warns. Static validation already ran at module
+  // load; this adds the cross-spec check and updates TAG_CONFIG in place.
+  TAG_CONFIG = loadTagConfig(schema);
 
   // Compute session-identity globals from the spec before the
   // op-build loop so buildCliFlags + the bodyGlobals walker both see it.
