@@ -6,7 +6,13 @@ import Link from 'components/shared/link';
 import Logos from 'components/shared/logos';
 import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
+import AIGatewayIcon from 'icons/home/hero/ai-gateway.svg';
+import ComputeIcon from 'icons/home/hero/compute.svg';
+import DatabaseIcon from 'icons/home/hero/database.svg';
+import LockIcon from 'icons/home/hero/lock.svg';
+import StorageIcon from 'icons/home/hero/storage.svg';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 import { cn } from 'utils/cn';
 
@@ -22,10 +28,41 @@ const logos = [
   'framer',
 ];
 
+const productFeatures = [
+  {
+    title: 'Postgres Database',
+    description: 'Serverless Postgres that scales and branches with your app.',
+    icon: DatabaseIcon,
+  },
+  {
+    title: 'Authentication',
+    description: 'Managed auth with users and sessions stored in Postgres.',
+    icon: LockIcon,
+  },
+  {
+    title: 'Compute',
+    description: 'Reliable compute for short-lived functions or long-running tasks.',
+    icon: ComputeIcon,
+    comingSoon: true,
+  },
+  {
+    title: 'Storage',
+    description: 'S3-compatible object storage that branches with your projects.',
+    icon: StorageIcon,
+    comingSoon: true,
+  },
+  {
+    title: 'AI Gateway',
+    description: 'One API for all frontier & open-source models, powered by Databricks.',
+    icon: AIGatewayIcon,
+    comingSoon: true,
+  },
+];
+
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container
-      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
+      className="relative z-30 pt-88 pb-2 xl:px-16 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
       size="1600"
     >
       <Link href="#backed-by-giants">
@@ -34,9 +71,10 @@ const Hero = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Fast Postgres Databases <br />
-        for Teams and Agents
+      <h1 className="mt-5 max-w-236 text-[68px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
+        Ship faster with the backend
+        <br />
+        platform for apps and agents.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
@@ -48,7 +86,74 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 lg:pt-7 sm:mt-12">
+      <div className="relative mt-12 flex border-t border-gray-new-20 pt-12 lg:mt-11 lg:pt-11 sm:mt-10 sm:pt-10">
+        <ul className="flex flex-row gap-x-11 gap-y-10 xl:-mx-16 xl:no-scrollbars xl:flex xl:snap-x xl:snap-mandatory xl:scroll-px-16 xl:gap-x-8 xl:overflow-x-auto xl:px-16 lg:-mx-5 lg:scroll-px-5 lg:px-5">
+          {productFeatures.map(({ title, description, icon: Icon, comingSoon }) => {
+            const tooltipId = `home-hero-${title.toLowerCase().replace(/\s+/g, '-')}-tooltip`;
+            const tooltipProps = comingSoon
+              ? {
+                  'data-tooltip-id': tooltipId,
+                }
+              : {};
+
+            return (
+              <li
+                className="min-w-0 text-white xl:w-69 xl:shrink-0 xl:snap-start sm:w-60"
+                key={title}
+                {...tooltipProps}
+              >
+                <div className={cn('flex items-center gap-x-3', comingSoon ? 'mb-2.5' : 'mb-3.5')}>
+                  <Image
+                    className="size-4 shrink-0"
+                    src={Icon}
+                    width={16}
+                    height={16}
+                    loading="eager"
+                    alt=""
+                  />
+                  <span
+                    className={cn(
+                      'text-base leading-none font-medium tracking-extra-tight',
+                      comingSoon ? 'text-gray-new-60' : 'text-white'
+                    )}
+                  >
+                    {title}
+                  </span>
+                  {comingSoon && (
+                    <>
+                      <span className="inline-flex items-center rounded-full bg-green-44 px-2 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+                        early access
+                      </span>
+                      <Tooltip
+                        className="-mt-6 max-w-[310px]! border-gray-new-30! bg-gray-new-8! px-3.5! py-2.5! md:-mt-2 [&.react-tooltip\_\_place-right]:-ml-17!"
+                        id={tooltipId}
+                        place="right"
+                        clickable
+                      >
+                        <p className="mb-2 text-base leading-snug tracking-extra-tight text-white">
+                          Subscribe to get early access to the Neon backend platform.
+                        </p>
+                        <Link
+                          class="border-b border-dashed border-gray-new-50 pb-0 text-sm leading-tight tracking-extra-tight text-gray-new-80 transition-colors duration-200"
+                          to="docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform"
+                          theme="gray-80"
+                        >
+                          Register for access
+                        </Link>
+                      </Tooltip>
+                    </>
+                  )}
+                </div>
+                <p className="max-w-[290px] text-base tracking-extra-tight text-gray-new-50">
+                  {description}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div className="relative mt-40 select-none xl:mt-28 lg:mt-24 md:mt-20 sm:mt-16">
         <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
@@ -62,7 +167,7 @@ const Hero = () => (
       */}
       <PauseableVideo
         className={cn(
-          'relative left-1/2 w-[1920px] -translate-x-1/2',
+          'relative -top-16 left-1/2 w-[1920px] -translate-x-1/2',
           'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
         )}
         width={1920}
