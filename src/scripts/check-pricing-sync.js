@@ -167,18 +167,18 @@ function loadDocsContent() {
   return fs.readFileSync(path.join(PROJECT_ROOT, 'content/docs/introduction/plans.md'), 'utf-8');
 }
 
-function loadDocsTable(content) {
+function parseMarkdownTable(content, headerPrefix) {
   const lines = content.split('\n');
   const tableLines = [];
   let inTable = false;
   for (const line of lines) {
-    if (line.trim().startsWith('| Plan feature')) inTable = true;
+    if (line.trim().startsWith(headerPrefix)) inTable = true;
     if (inTable) {
       if (line.trim().startsWith('|')) tableLines.push(line);
-      else break;
+      else if (tableLines.length > 0) break;
     }
   }
-  if (tableLines.length < 3) throw new Error('Could not find plan overview table in docs');
+  if (tableLines.length < 3) return null;
 
   const headers = tableLines[0]
     .split('|')
@@ -203,6 +203,18 @@ function loadDocsTable(content) {
   return rows;
 }
 
+function loadDocsTable(content) {
+  const rows = parseMarkdownTable(content, '| Plan feature');
+  if (!rows) throw new Error('Could not find plan overview table in docs');
+  return rows;
+}
+
+function loadPricingMdTable(content) {
+  const rows = parseMarkdownTable(content, '| Feature');
+  if (!rows) throw new Error('Could not find plans table in public/pricing.md');
+  return rows;
+}
+
 // ---------------------------------------------------------------------------
 // Comparison definitions (data-driven)
 // ---------------------------------------------------------------------------
@@ -219,12 +231,11 @@ function loadDocsTable(content) {
 // here at all; their docs row keys are tracked in INTENTIONALLY_DOCS_ONLY
 // (defined near runChecks) so the coverage-gaps report stays clean.
 //
-// Reserved-but-currently-unused fields (kept as documentation for a possible
-// PHASE2-Mid/Full future, where this config also drives a cell-by-cell check
-// against the pricing.md table). Safe to ignore today; they have no effect.
-//   agentLabel – feature name as it would appear in pricing.md
-//   agentValue – function returning the canonical pricing.md cell value
-//   prefer     – 'docs' | 'component', which raw value wins in generation
+// Fields that drive the pricing.md cell-by-cell check (runAgentChecks):
+//   agentLabel – row label as it appears in the pricing.md "Plans at a glance" table
+//   agentValue – optional fn returning the expected cell value; if omitted, the
+//                normalized docs value is used as the canonical source of truth
+//   prefer     – 'docs' | 'component', which raw value wins in generation (unused)
 
 const CROSS_SOURCE_CHECKS = [
   // --- Organization & Projects ---
@@ -634,7 +645,7 @@ const CROSS_SOURCE_CHECKS = [
           ? 'yes'
           : 'no'
         : 'no',
-    agentLabel: 'IP Allow',
+    agentLabel: 'IP Allow rules',
     prefer: 'component',
   },
   {
@@ -884,38 +895,115 @@ function checkRates(content, knownRates) {
   return knownRates.filter((rate) => !content.includes(rate));
 }
 
-function runPricingMdChecks(docsContent) {
-  let content;
+function runPricingMdChecks(docsContent, pricingMdContent) {
+  const knownRates = buildKnownRates(docsContent);
+  const missingRates = checkRates(pricingMdContent, knownRates);
+  return { missingRates, knownRates };
+}
+
+function runAgentChecks(checks, pricingMdContent, docsTable) {
+  let pricingMdTable;
   try {
-    content = fs.readFileSync(PRICING_MD_PATH, 'utf-8');
+    pricingMdTable = loadPricingMdTable(pricingMdContent);
   } catch (err) {
-    return {
-      readError: `Failed to read ${path.relative(PROJECT_ROOT, PRICING_MD_PATH)}: ${err.message}`,
-      missingRates: [],
-      knownRates: [],
-    };
+    return { parseError: err.message, results: [] };
   }
 
-  const knownRates = buildKnownRates(docsContent);
-  const missingRates = checkRates(content, knownRates);
+  const results = [];
+  for (const check of checks) {
+    if (!check.agentLabel) continue;
 
-  return { missingRates, knownRates };
+    const pricingCell = pricingMdTable[check.agentLabel]?.[check.plan];
+
+    if (pricingCell === undefined) {
+      results.push({
+        id: check.id,
+        label: check.label,
+        status: 'missing',
+        pricingMd: { raw: undefined },
+      });
+      continue;
+    }
+
+    let expected, actual, rawDocs;
+    if (check.agentValue) {
+      rawDocs = check.agentValue();
+      expected = normalizeValue(rawDocs);
+      actual = normalizeValue(pricingCell);
+    } else {
+      rawDocs = docsTable[check.docs]?.[check.plan];
+      if (rawDocs === undefined) {
+        results.push({
+          id: check.id,
+          label: check.label,
+          status: 'skip',
+          pricingMd: { raw: pricingCell },
+        });
+        continue;
+      }
+      expected = check.norm(rawDocs);
+      actual = check.norm(pricingCell);
+    }
+
+    const status =
+      expected === undefined || actual === undefined
+        ? 'skip'
+        : expected === actual
+          ? 'ok'
+          : 'mismatch';
+
+    results.push({
+      id: check.id,
+      label: check.label,
+      status,
+      pricingMd: { raw: pricingCell, normalized: actual },
+      docs: { raw: rawDocs, normalized: expected },
+    });
+  }
+
+  return { results };
 }
 
 // ---------------------------------------------------------------------------
 // Output
 // ---------------------------------------------------------------------------
 
-function summarize(results, pricingMd) {
+function summarize(results, pricingMd, agentChecks) {
   const counts = { ok: 0, mismatch: 0, missing: 0, skip: 0 };
   for (const r of results) counts[r.status]++;
   const pricingIssues = pricingMd
     ? (pricingMd.readError ? 1 : 0) + pricingMd.missingRates.length
     : 0;
-  return { ...counts, pricingIssues, critical: counts.mismatch + pricingIssues };
+  const agentIssues = agentChecks
+    ? (agentChecks.parseError ? 1 : 0) +
+      agentChecks.results.filter((r) => r.status === 'mismatch' || r.status === 'missing').length
+    : 0;
+  return {
+    ...counts,
+    pricingIssues,
+    agentIssues,
+    critical: counts.mismatch + pricingIssues + agentIssues,
+  };
 }
 
-function printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd) {
+function printAgentResult(r) {
+  const icons = { ok: '  OK ', mismatch: ' DIFF', missing: ' MISS', skip: ' SKIP' };
+  console.log(
+    `${icons[r.status]}  ${r.label}${r.status === 'ok' ? `: ${r.pricingMd.normalized}` : ''}`
+  );
+  if (r.status === 'mismatch') {
+    console.log(`        public/pricing.md: ${r.pricingMd.raw}`);
+    console.log(`        content/docs/introduction/plans.md: ${r.docs.raw}`);
+    if (r.pricingMd.normalized !== r.pricingMd.raw || r.docs.normalized !== r.docs.raw) {
+      console.log(`        Normalized: "${r.pricingMd.normalized}" vs "${r.docs.normalized}"`);
+    }
+  }
+  if (r.status === 'missing') {
+    console.log(`        Row "${r.label.replace(/\s*\(\w+\)$/, '')}" not found in pricing.md`);
+  }
+}
+
+function printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd, agentChecks) {
   console.log(`
 Pricing Data Sync Check
 =======================
@@ -955,7 +1043,7 @@ Source 3: Hand-edited agent markdown
   }
 
   if (pricingMd) {
-    console.log('\npricing.md checks\n');
+    console.log('\npricing.md rate checks\n');
     if (pricingMd.readError) {
       console.log(`  ERROR  ${pricingMd.readError}`);
     } else {
@@ -969,11 +1057,24 @@ Source 3: Hand-edited agent markdown
     }
   }
 
-  const { ok, mismatch, missing, skip, pricingIssues } = summarize(results, pricingMd);
-  console.log(
-    `\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped, ${pricingIssues} pricing.md issue(s)`
+  if (agentChecks) {
+    console.log(`\npricing.md cell checks (${agentChecks.results.length} checks)...\n`);
+    if (agentChecks.parseError) {
+      console.log(`  ERROR  ${agentChecks.parseError}`);
+    } else {
+      agentChecks.results.forEach(printAgentResult);
+    }
+  }
+
+  const { ok, mismatch, missing, skip, pricingIssues, agentIssues } = summarize(
+    results,
+    pricingMd,
+    agentChecks
   );
-  if (mismatch > 0 || pricingIssues > 0) {
+  console.log(
+    `\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped, ${pricingIssues} rate issue(s), ${agentIssues} cell issue(s)`
+  );
+  if (mismatch > 0 || pricingIssues > 0 || agentIssues > 0) {
     console.log('\nResult: FAIL — drift detected\n');
   } else if (missing > 0) {
     console.log('\nResult: WARN — some data points could not be compared\n');
@@ -984,13 +1085,19 @@ Source 3: Hand-edited agent markdown
 
 // Terse output for CI logs: one-line PASS, or summary + only the offending
 // items on FAIL. Coverage gaps are suppressed (informational, not failures).
-function printTerseReport(results, pricingMd) {
-  const { ok, mismatch, missing, pricingIssues } = summarize(results, pricingMd);
+function printTerseReport(results, pricingMd, agentChecks) {
+  const { ok, mismatch, missing, pricingIssues, agentIssues } = summarize(
+    results,
+    pricingMd,
+    agentChecks
+  );
   const totalRates = pricingMd?.knownRates.length ?? 0;
   const okRates = totalRates - (pricingMd?.missingRates.length ?? 0);
 
-  if (mismatch === 0 && pricingIssues === 0) {
-    console.log(`[OK] Pricing sync: PASS - ${ok} match, ${okRates}/${totalRates} rates`);
+  if (mismatch === 0 && pricingIssues === 0 && agentIssues === 0) {
+    console.log(
+      `[OK] Pricing sync: PASS - ${ok} match, ${okRates}/${totalRates} rates, ${agentChecks.results.length} cells`
+    );
     return;
   }
 
@@ -1006,15 +1113,26 @@ function printTerseReport(results, pricingMd) {
   if (pricingMd?.readError) {
     console.log(`pricing.md: ${pricingMd.readError}\n`);
   } else if (pricingIssues > 0) {
-    console.log(`pricing.md (${pricingIssues} issue${pricingIssues === 1 ? '' : 's'}):`);
+    console.log(`pricing.md rates (${pricingIssues} issue${pricingIssues === 1 ? '' : 's'}):`);
     if (pricingMd.missingRates.length) {
       console.log(`  Missing rates: ${pricingMd.missingRates.join(', ')}`);
     }
     console.log('');
   }
 
+  if (agentChecks?.parseError) {
+    console.log(`pricing.md cells: ${agentChecks.parseError}\n`);
+  } else if (agentIssues > 0) {
+    const bad = agentChecks.results.filter(
+      (r) => r.status === 'mismatch' || r.status === 'missing'
+    );
+    console.log(`pricing.md cells (${agentIssues} issue${agentIssues === 1 ? '' : 's'}):`);
+    bad.forEach(printAgentResult);
+    console.log('');
+  }
+
   console.log(
-    `Summary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${pricingIssues} pricing.md issue(s).`
+    `Summary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${pricingIssues} rate issue(s), ${agentIssues} cell issue(s).`
   );
   console.log('Run with --verbose to see all checks.');
 }
@@ -1069,7 +1187,20 @@ function main() {
   }
 
   const { results, uncoveredComponent, uncoveredDocs } = runChecks(componentData, docsTable);
-  const pricingMd = runPricingMdChecks(docsContent);
+
+  let pricingMd, agentChecks;
+  let pricingMdContent;
+  try {
+    pricingMdContent = fs.readFileSync(PRICING_MD_PATH, 'utf-8');
+  } catch (err) {
+    const readError = `Failed to read ${path.relative(PROJECT_ROOT, PRICING_MD_PATH)}: ${err.message}`;
+    pricingMd = { readError, missingRates: [], knownRates: [] };
+    agentChecks = { results: [] };
+  }
+  if (pricingMdContent !== undefined) {
+    pricingMd = runPricingMdChecks(docsContent, pricingMdContent);
+    agentChecks = runAgentChecks(CROSS_SOURCE_CHECKS, pricingMdContent, docsTable);
+  }
 
   if (jsonMode) {
     console.log(
@@ -1079,19 +1210,20 @@ function main() {
           uncoveredComponent,
           uncoveredDocs,
           pricingMd,
-          summary: summarize(results, pricingMd),
+          agentChecks,
+          summary: summarize(results, pricingMd, agentChecks),
         },
         null,
         2
       )
     );
   } else if (verbose) {
-    printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd);
+    printVerboseReport(results, uncoveredComponent, uncoveredDocs, pricingMd, agentChecks);
   } else {
-    printTerseReport(results, pricingMd);
+    printTerseReport(results, pricingMd, agentChecks);
   }
 
-  process.exit(summarize(results, pricingMd).critical > 0 ? 1 : 0);
+  process.exit(summarize(results, pricingMd, agentChecks).critical > 0 ? 1 : 0);
 }
 
 main();
