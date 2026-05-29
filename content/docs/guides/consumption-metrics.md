@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-05-29T11:18:31.330Z'
+updatedOn: '2026-05-29T11:35:42.669Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -26,7 +26,8 @@ Using the Neon API, you can query consumption metrics to track your resource usa
 - For invoice-aligned usage totals per project, use the [project metrics API](#request-overview). It's the only endpoint that returns all eight usage-based metrics including `snapshot_storage_bytes_month` and `extra_branches_month`.
 - To attribute usage to individual branches within a project — for example, to see which CI or development branches are driving compute or storage — use the [branch metrics API](#branch-metrics).
 - For legacy metrics on older plans, see the [legacy APIs](/docs/guides/consumption-metrics-legacy).
-  </Admonition>
+
+</Admonition>
 
 <Admonition type="note" title="API reference: legacy vs v2">
 On [api-docs.neon.tech](https://api-docs.neon.tech), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including **`snapshot_storage_bytes_month`**, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)**.
