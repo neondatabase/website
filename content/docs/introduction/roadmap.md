@@ -9,12 +9,14 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-05-29T18:28:29.677Z'
+updatedOn: '2026-05-29T18:32:47.663Z'
 ---
 
-Neon is the backend for apps and agents. We're expanding the platform with a branchable stack of backend primitives: Neon Postgres, Neon Auth, Compute, Storage, and AI Gateway. This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
+This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## New Backend Primitives for Apps and Agents
+
+We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Neon Postgres, Neon Auth, Compute, Storage, and AI Gateway.
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
 - **Compute**: Flexible compute for short-lived functions or long-running tasks.
