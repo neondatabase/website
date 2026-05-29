@@ -138,7 +138,7 @@ const Hero = () => (
                           to="docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform"
                           theme="gray-80"
                         >
-                          Subscribe now
+                          Register for access
                         </Link>
                       </Tooltip>
                     </>

@@ -9,10 +9,10 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-05-21T10:42:15.476Z'
+updatedOn: '2026-05-29T18:03:35.495Z'
 ---
 
-Neon is the backend for apps and agents. We're expanding the platform with a branchable stack of backend primitives: Neon Postgres, Neon Auth, Data API, Storage, Compute, and AI Gateway. This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
+Neon is the backend for apps and agents. We're expanding the platform with a branchable stack of backend primitives: Neon Postgres, Neon Auth, Compute, Storage, and AI Gateway. This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## What we're working on now 🛠️
 
@@ -20,12 +20,13 @@ Here's a snapshot of what we're working on now:
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
-- **File Storage**: S3-compatible object storage with metadata automatically synced to your database as the source of truth. Storage branches with your project, so storage state moves with your data.
-- **Functions**: Serverless TypeScript functions deployed alongside your database, with built-in auth and branching per project.
-- **Cron**: Scheduled SQL queries and function invocations on standard cron expressions, branched per project.
-- **Neon SDK**: A unified client SDK for invoking functions and reading and writing blob storage from your application code.
+- **Compute**: Flexible compute for short-lived functions or long-running tasks.
+- **Storage**: S3-compatible object storage that branches with your projects.
+- **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
+
+<RequestForm type="backend-platform" />
 
 ## What's on the horizon 🌅
 
