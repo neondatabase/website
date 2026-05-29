@@ -7,7 +7,7 @@ summary: >-
   plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-05-29T10:41:30.007Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -481,6 +481,10 @@ Available metrics:
 - `compute_time_seconds`: CPU seconds consumed
 - `written_data_bytes`: Data written to all branches
 - `synthetic_storage_size_bytes`: Total storage used
+
+<Admonition type="tip">
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+</Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
