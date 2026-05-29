@@ -1,11 +1,10 @@
 ---
 title: Why Neon?
-subtitle: 'Serverless Postgres, by Databricks'
+subtitle: 'The backend for apps and agents, by Databricks'
 summary: >-
-  Covers the features and architecture of Neon, a fully managed, serverless
-  Postgres solution designed for scalable application development, emphasizing
-  its unique separation of storage and compute for enhanced performance and
-  reliability.
+  Covers the mission and features of Neon, the backend for apps and agents,
+  built on a fully managed serverless Postgres engine with managed authentication,
+  an HTTP Data API, and a foundational separation of storage and compute.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
@@ -16,7 +15,7 @@ updatedOn: '2026-04-18T11:47:20.000Z'
 
 ## Our mission
 
-**Neon is the Postgres layer for the internet: a fully managed, serverless, open-source Postgres designed to help developers build scalable, dependable applications faster than ever.**
+**Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Designed to help developers build scalable, dependable applications faster than ever.**
 
 We aim to deliver Postgres as a cloud service that feels effortless, from your first side project to millions of users in production. We believe Postgres should be as universal and accessible as object storage, something every developer can rely on without thinking about infrastructure.
 

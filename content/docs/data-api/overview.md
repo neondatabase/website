@@ -11,7 +11,7 @@ updatedOn: '2026-04-18T12:16:58.000Z'
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
-The Neon Data API provides a secure, stateless HTTP interface to your database. It lets you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
+The Neon Data API is the HTTP query service in the Neon backend for apps and agents. It provides a secure, stateless interface to your database, letting you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
 
 - **Browser & edge compatibility**
 

@@ -6,7 +6,7 @@ summary: >-
   frameworks, authentication methods, Better Auth plugins, platform features,
   SDK references, and migration guides.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-05-27T14:54:36.584Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -102,6 +102,6 @@ For launch readiness, see the [production checklist](/docs/auth/production-check
 
 ## Let us know
 
-We prioritize based on demand. If you need a specific framework or plugin, let us know through our [Discord](https://discord.com/invite/92vNTzKDGp) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
+We prioritize based on demand. If you need a specific framework or plugin, let us know on our [Discord](https://discord.com/invite/92vNTzKDGp).
 
 <NeedHelp/>

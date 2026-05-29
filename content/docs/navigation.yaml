@@ -16,14 +16,13 @@
     - section: Start with Neon
       icon: start
       items:
-        - title: 1 - Basics
+        - title: One-command setup
+          slug: get-started/with-an-agent
+        - title: Build a full backend
+          slug: get-started/full-backend-quickstart
+        - title: Tour the Neon Console
           slug: get-started/signing-up
-        - title: 2 - Connect
-          slug: get-started/connect-neon
-        - title: 3 - Branching
-          slug: get-started/workflow-primer
-        - title: 4 - Setup Neon Auth
-          slug: auth/overview
+
     - section: Migrate to Neon
       icon: import
       items:
@@ -132,6 +131,12 @@
         - title: Serverless
           slug: introduction/serverless
 
+    - section: Neon Postgres
+      icon: book
+      items:
+        - title: Neon Postgres
+          slug: postgres/overview
+
     - section: Autoscaling
       icon: features
       items:
@@ -159,6 +164,8 @@
           slug: guides/branching-intro
         - title: About branching
           slug: introduction/branching
+        - title: Branching workflow primer
+          slug: get-started/workflow-primer
         - title: Branching workflows
           slug: guides/branching-test-queries
         - title: Branch archiving
