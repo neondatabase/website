@@ -10,18 +10,23 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-05-22T09:50:49.895Z'
+updatedOn: '2026-05-29T10:41:30.007Z'
 ---
 
-Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
+Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
 | API                               | Endpoint                           | Description                                                                                                                                      | Plan availability                |
 | --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
 | **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore, snapshot), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
+| **Branch metrics** (beta)         | `/consumption_history/v2/branches` | Returns the same usage-based metrics broken down by branch, across one or more projects                                                          | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
-**Which API should I use?** If you're on a usage-based plan (Launch, Scale, Agent, or Enterprise), use the [project metrics API](#request-overview) below; it is the only endpoint that returns metrics matching your invoice. You can also call the [legacy APIs](/docs/guides/consumption-metrics-legacy) (account and project) on usage-based or legacy plans, but they only return legacy metrics and will not match your invoice on a usage-based plan.
-</Admonition>
+**Which API should I use?**
+
+- For invoice-aligned usage totals per project, use the [project metrics API](#request-overview). It's the only endpoint that returns all eight usage-based metrics including `snapshot_storage_bytes_month` and `extra_branches_month`.
+- To attribute usage to individual branches within a project — for example, to see which CI or development branches are driving compute or storage — use the [branch metrics API](#branch-metrics).
+- For legacy metrics on older plans, see the [legacy APIs](/docs/guides/consumption-metrics-legacy).
+  </Admonition>
 
 <Admonition type="note" title="API reference: legacy vs v2">
 On [api-docs.neon.tech](https://api-docs.neon.tech), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including **`snapshot_storage_bytes_month`**, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)**.
@@ -225,3 +230,93 @@ Common error responses you may encounter:
 ## Build a usage dashboard
 
 For a full example that uses this API to build a usage dashboard with Next.js (including charts, project filtering, and reporting), see [Building a Usage Dashboard with Neon's Consumption API](/guides/usage-dashboard-consumption-api). The guide includes a [sample application on GitHub](https://github.com/dhanushreddy291/neon-usage-dashboard) that you can clone and run to visualize your usage-based metrics.
+
+## Branch metrics
+
+The branch metrics endpoint returns per-branch consumption data across one or more projects. Use it when you need to see which branches within a project are driving usage — for example, attributing compute costs across CI branches, development environments, or feature branches.
+
+**Endpoint:**
+
+```bash
+GET https://console.neon.tech/api/v2/consumption_history/v2/branches
+```
+
+### Metrics
+
+Six of the eight project metrics are available on this endpoint:
+
+| Metric                           | Description                            |
+| -------------------------------- | -------------------------------------- |
+| `compute_unit_seconds`           | CPU time weighted by compute size      |
+| `root_branch_bytes_month`        | Storage consumed by root branches      |
+| `child_branch_bytes_month`       | Storage consumed by child branches     |
+| `instant_restore_bytes_month`    | Instant restore (PITR) history storage |
+| `public_network_transfer_bytes`  | Data transfer over the public internet |
+| `private_network_transfer_bytes` | Data transfer over private networks    |
+
+`extra_branches_month` and `snapshot_storage_bytes_month` are not available on this endpoint. Use the [project metrics endpoint](#request-overview) for those.
+
+### Required parameters
+
+- **`project_ids`** (array of strings, 1-100, required): Projects to include. Unlike the project endpoint, `project_ids` is always required here.
+- **`from`** (date-time, required): Start of the consumption period in RFC 3339 format.
+- **`to`** (date-time, required): End of the consumption period in RFC 3339 format.
+- **`granularity`** (string, required): `hourly`, `daily`, or `monthly`. Subject to the same window limits as the project endpoint.
+- **`org_id`** (string, required): Organization ID.
+- **`metrics`** (array of strings, required): One or more of the six supported metrics above.
+
+### Optional parameters
+
+- **`branch_ids`** (array of strings, up to 100): Filter to specific branches. If omitted, all branches in the specified projects are returned.
+- **`limit`** (integer, 1-1000): Branches per page. Default: 100.
+- **`cursor`** (string): Pagination cursor from the previous response.
+
+### Example request and response
+
+```bash shouldWrap
+curl --request GET \
+  --url 'https://console.neon.tech/api/v2/consumption_history/v2/branches?project_ids=$PROJECT_ID&org_id=$ORG_ID&from=2026-05-01T00:00:00Z&to=2026-05-29T00:00:00Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month' \
+  --header 'Authorization: Bearer $NEON_API_KEY' \
+  --header 'Accept: application/json' | jq
+```
+
+<details>
+<summary>Response body</summary>
+
+```json
+{
+  "branches": [
+    {
+      "branch_id": "br-young-sky-a1b2c3d4",
+      "project_id": "calm-night-03860858",
+      "periods": [
+        {
+          "period_id": "7f3a1c2d-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+          "period_plan": "launch",
+          "period_start": "2026-05-01T00:00:00Z",
+          "consumption": [
+            {
+              "timeframe_start": "2026-05-01T00:00:00Z",
+              "timeframe_end": "2026-05-02T00:00:00Z",
+              "metrics": [
+                { "metric_name": "compute_unit_seconds", "value": 1440 },
+                { "metric_name": "root_branch_bytes_month", "value": 875309056 },
+                { "metric_name": "child_branch_bytes_month", "value": 0 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "cursor": "br-young-sky-a1b2c3d4"
+  }
+}
+```
+
+</details>
+
+For full API details, see [Retrieve branch consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2).
+
+<NeedHelp/>

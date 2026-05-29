@@ -7,7 +7,7 @@ summary: >-
   isolation without requiring user sign-up or setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-14T03:21:15.121Z'
+updatedOn: '2026-05-29T10:41:30.007Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -174,20 +174,14 @@ For real-world examples, see how [Koyeb defines their database instance types an
 
 Query consumption metrics to track usage across your projects and implement billing:
 
-```bash
+```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=100&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily' \
+     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,public_network_transfer_bytes' \
      --header 'accept: application/json' \
      --header "authorization: Bearer $NEON_API_KEY"
 ```
 
-The API provides metrics for:
-
-- `active_time_seconds`: Time computes were active
-- `compute_time_seconds`: CPU seconds consumed
-- `written_data_bytes`: Data written to storage
-- `data_transfer_bytes`: Data transferred out (egress)
-- `synthetic_storage_size_bytes`: Total storage used
+The v2 project metrics endpoint returns billing-aligned metrics including compute, storage, and data transfer. To break usage down by branch within a project, use the [branch metrics endpoint](/docs/guides/consumption-metrics#branch-metrics) (`GET /consumption_history/v2/branches`).
 
 For details on querying metrics, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
