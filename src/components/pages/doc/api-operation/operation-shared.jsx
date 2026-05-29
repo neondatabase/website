@@ -21,7 +21,7 @@ export const CLI_FLAG_PRIORITY = ['project-id', 'org-id'];
 // ── Section header ──────────────────────────────────────────────────────────
 
 export const SectionHeader = ({ title, badge, right }) => (
-  <div className="mb-4 flex items-center gap-2.5">
+  <div className="mb-4 flex min-h-6 items-center gap-2.5">
     <h2 className="text-base leading-tight font-semibold tracking-tight">{title}</h2>
     {badge && (
       <span className="text-red-600 bg-red-600/10 rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold dark:bg-[#FF5645]/10 dark:text-[#FF5645]">
@@ -43,9 +43,9 @@ SectionHeader.propTypes = {
 export const LiveCodeBlock = ({ label, code, editCount, onCopy, copied }) => (
   <div
     className={cn(
-      'overflow-hidden rounded-xl border transition-colors duration-200',
+      'overflow-hidden border transition-colors duration-200',
       editCount > 0
-        ? 'border-green-45/30 dark:border-green-45/20'
+        ? 'border-[#00B87B]/20 dark:border-green-45/20'
         : 'border-gray-new-90 dark:border-gray-new-20'
     )}
   >
@@ -53,7 +53,9 @@ export const LiveCodeBlock = ({ label, code, editCount, onCopy, copied }) => (
       <div className="flex items-center gap-2">
         <span className="text-[12px] text-gray-new-50 dark:text-gray-new-60">{label}</span>
         {editCount > 0 && (
-          <span className="text-[10px] text-green-45 italic">Live from your edits</span>
+          <span className="text-[10px] text-[#00B87B] italic dark:text-green-45">
+            Live from your edits
+          </span>
         )}
       </div>
       <button
@@ -62,7 +64,7 @@ export const LiveCodeBlock = ({ label, code, editCount, onCopy, copied }) => (
         className={cn(
           'rounded border px-2 py-0.5 font-mono text-[11px] transition-all duration-150',
           copied
-            ? 'border-green-45/40 text-green-45'
+            ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
             : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60 dark:hover:border-gray-new-50 dark:hover:text-gray-new-80'
         )}
       >
@@ -110,7 +112,7 @@ export const CliPositionalRow = ({
       style={{ gridTemplateColumns: '14px 1fr 1fr' }}
     >
       <div className="flex items-center justify-center pt-0.5">
-        <span className="font-mono text-[10px] leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
+        <span className="font-mono text-[10px] leading-none font-bold text-[#EC6F09] dark:text-[#FF5645]">
           *
         </span>
       </div>
@@ -129,7 +131,7 @@ export const CliPositionalRow = ({
               if (e.key === 'Enter' || e.key === 'Escape') onSetEditing(null);
             }}
             aria-label={ariaLabel}
-            className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#CE9178] outline-none"
+            className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#EC6F09] outline-none"
             style={{ width: `${Math.max(80, currentVal.length * 7.5)}px`, maxWidth: '200px' }}
           />
         ) : (
@@ -147,7 +149,7 @@ export const CliPositionalRow = ({
             className={cn(
               'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
               currentVal
-                ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#CE9178]'
+                ? 'border-b border-dashed border-[#00B87B]/20 bg-green-45/5 text-[#EC6F09]'
                 : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60'
             )}
           >
@@ -230,7 +232,7 @@ export const CliFlagRow = ({
           className={cn(
             'flex h-2.5 w-2.5 items-center justify-center rounded-sm border transition-all duration-100',
             isIncluded
-              ? 'border-green-45 bg-green-45'
+              ? 'border-[#00B87B] bg-[#00B87B] dark:border-green-45 dark:bg-green-45'
               : 'border-gray-new-50 bg-transparent dark:border-gray-new-60'
           )}
         >
@@ -281,7 +283,7 @@ export const CliFlagRow = ({
               className={cn(
                 'rounded px-1.5 py-0 font-mono text-[11px] transition-all',
                 currentVal === String(opt)
-                  ? 'bg-green-45/20 font-semibold text-green-45'
+                  ? 'bg-green-45/20 font-semibold text-[#00B87B] dark:text-green-45'
                   : 'bg-gray-new-90/50 text-gray-new-50 dark:bg-gray-new-20/50 dark:text-gray-new-60'
               )}
             >
@@ -293,7 +295,7 @@ export const CliFlagRow = ({
         <button
           type="button"
           onClick={() => (isIncluded ? onToggleInclude() : onEdit('true'))}
-          className="font-mono text-[12px] text-[#569CD6]"
+          className="font-mono text-[12px] text-[#426CE0]"
         >
           {isIncluded ? 'true' : 'false'}
         </button>
@@ -307,7 +309,7 @@ export const CliFlagRow = ({
             if (e.key === 'Enter' || e.key === 'Escape') onSetEditing(null);
           }}
           aria-label={`Edit ${labelPrefix} ${flag.name}`}
-          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#CE9178] outline-none"
+          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#E2301D] outline-none"
           style={{ width: `${Math.max(80, currentVal.length * 7.5)}px`, maxWidth: '200px' }}
         />
       ) : (
@@ -325,7 +327,7 @@ export const CliFlagRow = ({
           className={cn(
             'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
             isIncluded && currentVal
-              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#CE9178]'
+              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#E2301D]'
               : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60'
           )}
         >

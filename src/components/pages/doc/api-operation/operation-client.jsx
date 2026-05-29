@@ -200,7 +200,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
                   key={id}
                   type="button"
                   onClick={() => setActiveIface(id)}
-                  className="text-[13px] text-green-45 hover:underline"
+                  className="text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
                 >
                   Use {LABELS[id] ?? id} →
                 </button>
@@ -221,7 +221,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
 
       {/* ── Console ── */}
       {current === 'console' && operation.console?.breadcrumb && (
-        <div className="mt-8 rounded-xl border border-gray-new-90 bg-gray-new-98 p-5 dark:border-gray-new-20 dark:bg-gray-new-10">
+        <div className="mt-8 border border-gray-new-90 bg-gray-new-98 p-5 dark:border-gray-new-20 dark:bg-gray-new-10">
           <p className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
             In the Neon Console, go to{' '}
             <strong className="text-black-pure dark:text-white">
@@ -233,7 +233,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
             href="https://console.neon.tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2.5 inline-block text-[13px] text-green-45 hover:underline"
+            className="mt-2.5 inline-block text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
           >
             Open Neon Console →
           </a>
@@ -242,7 +242,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
 
       {/* ── MCP tool card ── */}
       {current === 'mcp' && operation.mcp?.tool && (
-        <div className="mt-8 overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20">
+        <div className="mt-8 overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
           <div className="flex items-center justify-between border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-10">
             <span className="text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
               MCP Tool
@@ -253,7 +253,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
               className={cn(
                 'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
                 copiedId === 'mcp-tool'
-                  ? 'border-green-45/40 text-green-45'
+                  ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                   : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60'
               )}
             >
@@ -330,7 +330,10 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
           </div>
           <p className="mt-3 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
             Works with Cursor, Claude Desktop, Windsurf, and any MCP client.{' '}
-            <Link href="/docs/ai/neon-mcp-server" className="text-green-45 hover:underline">
+            <Link
+              href="/docs/ai/neon-mcp-server"
+              className="text-[#00B87B] hover:underline dark:text-green-45"
+            >
               Setup guide →
             </Link>
           </p>
