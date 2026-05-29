@@ -9,28 +9,23 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-05-29T18:03:35.495Z'
+updatedOn: '2026-05-29T18:28:29.677Z'
 ---
 
 Neon is the backend for apps and agents. We're expanding the platform with a branchable stack of backend primitives: Neon Postgres, Neon Auth, Compute, Storage, and AI Gateway. This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
-## What we're working on now 🛠️
-
-Here's a snapshot of what we're working on now:
+## New Backend Primitives for Apps and Agents
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
-- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
 - **Compute**: Flexible compute for short-lived functions or long-running tasks.
 - **Storage**: S3-compatible object storage that branches with your projects.
 - **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
 
-Other features you would like to see? [Let us know](#share-your-thoughts).
-
 <RequestForm type="backend-platform" />
 
-## What's on the horizon 🌅
+## Core Postgres Database Features and Improvements
 
-And here's an overview of what we're looking at next:
+We're accelerating work on improving and scaling the core database on Neon as well. Here is what is on the roadmap.
 
 ### Backups & restore
 
@@ -52,13 +47,14 @@ And here's an overview of what we're looking at next:
 - Private Networking on Azure
 - Google Cloud Platform (GCP) support (targeting late 2025)
 
-### Storage
+### Database Storage
 
 - Increased ingestion speeds
 - Storage limits up to 200 TB per project
 
-### Compute
+### Postgres Compute
 
+- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
 - Fixed compute sizes up to 128 CUs
 - Autoscaling up to 60 CUs
 
@@ -209,10 +205,6 @@ For more of the latest features and fixes, check our [Changelog](/docs/changelog
 Want to try upcoming Neon features before they go live? Join our Early Access Program to preview new features, connect with the Neon team, and help shape the platform's future.
 
 Learn more and sign up on the [Early Access Program page](/docs/introduction/early-access).
-
-## A note about timing
-
-We're building these features with you in mind. Delivery timelines may shift as we go; we'll keep the changelog and our blog updated so you can follow along.
 
 ## Share your thoughts
 
