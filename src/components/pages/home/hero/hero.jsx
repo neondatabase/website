@@ -41,7 +41,7 @@ const productFeatures = [
   },
   {
     title: 'Compute',
-    description: 'Flexible compute for short-lived functions or long-running tasks.',
+    description: 'Reliable compute for short-lived functions or long-running tasks.',
     icon: ComputeIcon,
     comingSoon: true,
   },
