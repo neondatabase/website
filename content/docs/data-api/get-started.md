@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-05-27T21:49:12.000Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -32,7 +32,7 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 ### 2. Configure authentication
 
-All requests to the Data API require a valid JWT token, so you need an authentication provider. You can configure one now or add it later from the Data API **Settings** tab. The Data API works with any provider that issues JWTs.
+The Data API uses JWTs for access control. Configure a provider now or later from the **Settings** tab. For public data that doesn't require login, use the [`anonymous` role](/docs/data-api/access-control#2-the-anonymous-role) instead.
 
 - **Neon Auth**: Check the **Use Neon Auth** checkbox to enable [Neon Auth](/docs/auth/overview) as your provider. Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 - **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.

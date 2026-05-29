@@ -1,4 +1,4 @@
-text: "Put an end to add-on fees. Neon includes SOC2, HIPAA, PrivateLink, Log Exports, PITR, SLAs on the Scale plan. 100% usage-based. No fixed fees."
+text: 'Engineering post: How Neon''s lakebase architecture stays resilient to cloud failures in the age of agentic workloads.'
 link:
-  url: 'https://neon.com/blog/why-we-no-longer-lock-premium-features'
+  url: 'https://neon.com/blog/resilience-to-failures-in-agentic-era'
   target: '_blank'

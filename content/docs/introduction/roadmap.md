@@ -12,7 +12,7 @@ redirectFrom:
 updatedOn: '2026-05-21T10:42:15.476Z'
 ---
 
-Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
+Neon is the backend for apps and agents. We're expanding the platform with a branchable stack of backend primitives: Neon Postgres, Neon Auth, Data API, Storage, Compute, and AI Gateway. This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## What we're working on now 🛠️
 
