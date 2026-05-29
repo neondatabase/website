@@ -51,8 +51,8 @@ const Timeline = () => (
       <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl leading-dense font-normal tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
         Our mission is to deliver cloud primitives:{' '}
         <span className="text-gray-new-50">
-          Postgres, Functions, Storage. Designed to help teams build scalable, dependable
-          applications faster than ever.
+          Database, Compute, Storage. Designed to help teams build scalable, dependable services
+          faster than ever.
         </span>
       </h2>
       <div className="no-scrollbars w-full sm:-mx-5 sm:-mt-2 sm:w-screen sm:overflow-x-auto sm:pb-2">

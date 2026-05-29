@@ -8,9 +8,9 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
 import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
-import DataApiIcon from 'icons/home/hero/data-api.svg';
+import AIGatewayIcon from 'icons/home/hero/ai-gateway.svg';
+import ComputeIcon from 'icons/home/hero/compute.svg';
 import DatabaseIcon from 'icons/home/hero/database.svg';
-import LightningIcon from 'icons/home/hero/lightning.svg';
 import LockIcon from 'icons/home/hero/lock.svg';
 import StorageIcon from 'icons/home/hero/storage.svg';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
@@ -40,20 +40,21 @@ const productFeatures = [
     icon: LockIcon,
   },
   {
-    title: 'Data API',
-    description: 'PostgREST-compatible API for querying Postgres over HTTP.',
-    icon: DataApiIcon,
+    title: 'Compute',
+    description: 'Flexible compute for short-lived functions or long-running tasks.',
+    icon: ComputeIcon,
+    comingSoon: true,
   },
   {
     title: 'Storage',
-    description: 'Store files with Postgres-backed metadata and access control.',
+    description: 'S3-compatible object storage that branches with your projects.',
     icon: StorageIcon,
     comingSoon: true,
   },
   {
-    title: 'Events',
-    description: 'Trigger workflows from Postgres database changes.',
-    icon: LightningIcon,
+    title: 'AI Gateway',
+    description: 'One API for all frontier & open-source models, powered by Databricks.',
+    icon: AIGatewayIcon,
     comingSoon: true,
   },
 ];
@@ -71,9 +72,9 @@ const Hero = () => (
       </Link>
 
       <h1 className="mt-5 max-w-236 text-[68px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Ship faster with application
+        Ship faster with the backend
         <br />
-        backends for teams and agents
+        platform for apps and agents.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
