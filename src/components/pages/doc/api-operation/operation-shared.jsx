@@ -112,7 +112,7 @@ export const CliPositionalRow = ({
       style={{ gridTemplateColumns: '14px 1fr 1fr' }}
     >
       <div className="flex items-center justify-center pt-0.5">
-        <span className="font-mono text-[10px] leading-none font-bold text-[#EC6F09] dark:text-[#FF5645]">
+        <span className="font-mono text-[10px] leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
           *
         </span>
       </div>
@@ -309,7 +309,7 @@ export const CliFlagRow = ({
             if (e.key === 'Enter' || e.key === 'Escape') onSetEditing(null);
           }}
           aria-label={`Edit ${labelPrefix} ${flag.name}`}
-          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#E2301D] outline-none"
+          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#EC6F09] outline-none"
           style={{ width: `${Math.max(80, currentVal.length * 7.5)}px`, maxWidth: '200px' }}
         />
       ) : (
@@ -327,7 +327,7 @@ export const CliFlagRow = ({
           className={cn(
             'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
             isIncluded && currentVal
-              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#E2301D]'
+              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#EC6F09]'
               : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60'
           )}
         >
