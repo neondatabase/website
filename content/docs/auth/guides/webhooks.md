@@ -5,7 +5,7 @@ summary: >-
   Configure webhooks to receive notifications for authentication events like OTP
   delivery, magic link delivery, and user creation in Neon Auth.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-05-29T09:07:33.053Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -47,6 +47,16 @@ Both endpoints use the following fields:
 | `webhook_url`     | string             | HTTPS endpoint to receive webhook POST requests                                                                                                     |
 | `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`, `phone_number.verified`                           |
 | `timeout_seconds` | integer (1-10)     | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior). |
+
+### Webhook URL requirements
+
+Neon Auth validates `webhook_url` when you configure webhooks to reduce SSRF risk. Your URL must meet these rules:
+
+- **HTTPS only** — HTTP URLs are rejected.
+- **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
+- **No internal targets** — Localhost, private IP addresses, link-local addresses (including cloud metadata endpoints), and encoded IP bypass formats (octal, decimal, hex) are blocked.
+
+Digit-prefixed domains such as `1password.com` are allowed. If configuration fails validation, the API returns an error with code `INVALID_WEBHOOK_URL_FORMAT`.
 
 ### Set or update configuration
 
@@ -364,6 +374,6 @@ The 15-second global timeout runs from the start of the first attempt. Each atte
 
 ## Testing and debugging
 
-Neon Auth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure it as your webhook URL. Neon Auth rejects webhook URLs that point to localhost or private IP addresses.
+Neon Auth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure the tunnel's **HTTPS hostname** as your webhook URL. Neon Auth rejects localhost, private IP addresses, and raw IP literals. See [Webhook URL requirements](#webhook-url-requirements).
 
 <NeedHelp/>
