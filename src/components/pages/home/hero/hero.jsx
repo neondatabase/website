@@ -41,7 +41,7 @@ const productFeatures = [
   },
   {
     title: 'Compute',
-    description: 'Reliable compute for short-lived functions or long-running tasks.',
+    description: 'Functions without timeouts running close to your database',
     icon: ComputeIcon,
     comingSoon: true,
   },
@@ -72,7 +72,7 @@ const Hero = () => (
       </Link>
 
       <h1 className="mt-5 max-w-236 text-[68px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Ship faster with the backend
+        Ship faster on the backend
         <br />
         platform for apps and agents.
       </h1>
