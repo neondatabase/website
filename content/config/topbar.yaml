@@ -1,4 +1,4 @@
-text: 'Engineering post: How Neon''s lakebase architecture stays resilient to cloud failures in the age of agentic workloads.'
+text: ' We''re launching Compute, Object Storage, and AI Gateway to run alongside Database and Auth. Learn more and register for early access here.'
 link:
-  url: 'https://neon.com/blog/resilience-to-failures-in-agentic-era'
+  url: 'https://neon.com/blog/were-building-backends'
   target: '_blank'

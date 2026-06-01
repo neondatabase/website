@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-04-18T11:47:20.000Z'
 ---
 
-Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
+Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Neon Postgres helps teams ship reliable and scalable applications faster.
 
 Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview), which natively decouples storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 

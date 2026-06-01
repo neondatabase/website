@@ -1,17 +1,17 @@
 ---
-title: Learn the basics
-subtitle: Sign up for free and learn the basics of database branching with Neon
+title: Tour the Neon Console
+subtitle: Sign up and explore Neon's core features — the SQL Editor, branching, the Tables view, and Neon Auth
 summary: >-
-  Step-by-step guide for signing up and learning the basics of database
-  branching with Neon, including how to view and modify data, create isolated
-  database copies, and reset branches to production.
+  Walk through the Neon Console and learn how to sign up, query data in the
+  SQL Editor, branch your database, view and modify rows in the Tables view,
+  and set up Neon Auth.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-05-22T02:29:34.734Z'
 ---
 
 <InfoBlock>
@@ -25,6 +25,7 @@ updatedOn: '2026-05-17T10:06:14.681Z'
 <a href="/docs/introduction/branching">About branching</a>
 <a href="/docs/get-started/workflow-primer">Branching workflows</a>
 <a href="/docs/get-started/connect-neon">Connect Neon to your stack</a>
+<a href="/docs/auth/overview">Neon Auth</a>
 </DocsList>
 </InfoBlock>
 
@@ -47,7 +48,7 @@ You can create additional branches for development, staging, and other environme
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
 
-    If you're already signed up, you can skip ahead to [Step 2](/docs/get-started/signing-up#step-2-onboarding-in-the-neon-console).
+    If you're already signed up, you can skip ahead to [Step 2](#step-2-onboarding-in-the-neon-console).
 
     If you haven't signed up yet, you can sign up for free here:
 
@@ -144,6 +145,19 @@ Now that you have some data to play with, let's take a look at it on the **Table
 ![Tables page Drizzle integration](/docs/get-started/tables_drizzle.png)
 
 For a detailed guide on how to interact with your data using the **Tables** page, visit [Managing your data with interactive tables](/docs/guides/tables).
+
+## Set up Neon Auth
+
+Neon includes **managed authentication**, so your app's users live in your Postgres database and branch with the rest of your data.
+
+From the Neon Console sidebar, open the **Auth** page and toggle Neon Auth on for your project. You'll get:
+
+- A sign-up / sign-in flow ready to wire up to any framework
+- Users and sessions stored in your own Postgres database — query the `neon_auth.users_sync` table directly alongside your application data
+- Branch-aware auth: every preview or development branch you create gets its own isolated copy of users and sessions
+- OAuth providers, email and password, magic links, and more, all configurable from the console
+
+For framework-specific setup, see the [Neon Auth quickstarts](/docs/auth/overview) (Next.js, React, TanStack Router) or open the **Auth** tab in the console and follow the prompts.
 
 ## Working with your development branch
 

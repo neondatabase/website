@@ -1,6 +1,6 @@
 import LINKS from './links';
 
-export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-01-15';
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-05-27';
 
 export default {
   index: {
