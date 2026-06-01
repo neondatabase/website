@@ -27,7 +27,7 @@ If one app starts getting steady traffic, move that project to the Launch plan. 
 
 - **$0.106 per CU-hour** of compute
 - **$0.35 per GB-month** of storage
-- $0 for the first 100 GB of egress, then $0.10/GB
+- $0 for the first 500 GB of egress, then $0.10/GB
 
 A back-of-envelope estimate for a small always-on app running at 0.25 CU for 30 hours per month with 1 GB of data:
 
