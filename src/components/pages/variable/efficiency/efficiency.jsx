@@ -13,7 +13,7 @@ import Section from '../section';
 const items = [
   {
     icon: autoscaleIcon.src,
-    text: 'Neon is serverless Postgres. Instead of provisioning a fixed CPU/memory, you specify an autoscaling range. ',
+    text: 'Neon runs on serverless Postgres. Instead of provisioning a fixed CPU/memory, you specify an autoscaling range. ',
   },
   {
     icon: performanceIcon.src,
