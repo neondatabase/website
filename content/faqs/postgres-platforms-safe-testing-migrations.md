@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-platforms-safe-testing-migrations
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres platforms support branching a database like Git?'
+  slug: postgres-platforms-database-branching-git
+nextLink:
+  title: 'Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?'
+  slug: postgres-providers-developer-experience-gitops-database-workflows
 ---
 
 ## Short answer

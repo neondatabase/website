@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: managed-postgres-options-ten-databases-cost
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'
+  slug: managed-postgres-databases-free-tier
+nextLink:
+  title: 'Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?'
+  slug: managed-postgres-platforms-automated-database-provisioning
 ---
 
 If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), a serverless Postgres platform that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.

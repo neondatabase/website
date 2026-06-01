@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-terraform-pulumi-infrastructure-as-code
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
+  slug: postgres-services-share-read-only-database-snapshot
+nextLink:
+  title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
+  slug: postgres-services-wire-protocol-compatible
 ---
 
 Neon has a [community-maintained Terraform provider](/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.

@@ -33,26 +33,6 @@ const getAllFaqSlugs = async () => {
     .filter(Boolean);
 };
 
-const getFaqNavigationItems = async () => {
-  const slugs = await getPostSlugs(FAQS_DIR_PATH);
-  return slugs
-    .map((slug) => {
-      const data = getFaqFrontmatter(slug);
-      if (!data) return;
-
-      const { title, createdAt, isDraft } = data;
-
-      return {
-        title,
-        slug: slug.slice(1),
-        createdAt,
-        isDraft,
-      };
-    })
-    .filter((item) => !isProduction || !item.isDraft)
-    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
-};
-
 const getAllFaqs = async () => {
   const slugs = await getPostSlugs(FAQS_DIR_PATH);
   return slugs
@@ -83,16 +63,4 @@ const getAllFaqs = async () => {
     .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };
 
-const getNavigationLinks = (slug, posts) => {
-  const currentItemIndex = posts.findIndex((item) => item.slug === slug);
-
-  const previousItem = posts[currentItemIndex - 1];
-  const nextItem = posts[currentItemIndex + 1];
-
-  return {
-    previousLink: { title: previousItem?.title, slug: previousItem?.slug },
-    nextLink: { title: nextItem?.title, slug: nextItem?.slug },
-  };
-};
-
-export { getAllFaqSlugs, getAllFaqs, getFaqNavigationItems, getNavigationLinks };
+export { getAllFaqSlugs, getAllFaqs };

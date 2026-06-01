@@ -3,9 +3,15 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate my database password in Neon after a security incident?'
+  slug: rotate-database-password-after-leak
+nextLink:
+  title: 'How do I rotate my Neon API keys after they''ve been exposed?'
+  slug: rotate-neon-api-keys
 ---
 
 ## Quick answer

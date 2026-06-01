@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-databases-free-tier
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
+  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
+nextLink:
+  title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
+  slug: managed-postgres-options-ten-databases-cost
 ---
 
 Neon's Free plan is a permanent (not trial) Postgres tier that fits a real, low-traffic app. You get up to 100 projects, 0.5 GB of storage per project, and 100 compute-hours per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero compute-hours.

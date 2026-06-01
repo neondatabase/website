@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-platforms-database-branching-git
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres should I use for a Next.js app deployed on Vercel?'
+  slug: postgres-nextjs-vercel-integration
+nextLink:
+  title: 'What Postgres platforms provide safe testing for risky migrations?'
+  slug: postgres-platforms-safe-testing-migrations
 ---
 
 ## Short answer

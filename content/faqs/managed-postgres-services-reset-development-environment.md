@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-reset-development-environment
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?'
+  slug: managed-postgres-services-pay-active-compute
+nextLink:
+  title: 'Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?'
+  slug: managed-postgres-services-serverless-connections
 ---
 
 Neon has two features that get you back to a clean state quickly. **Reset from parent** replaces all data and schema on a branch with the latest from its parent, in one operation. **Instant restore** rolls a branch back to any timestamp within your project's history window. Both keep the same connection string, so your application doesn't need to know anything happened.

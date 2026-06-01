@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-databases-multi-tenant-saas
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
+  slug: best-free-low-cost-managed-postgres-services
+nextLink:
+  title: 'What are the best managed Postgres databases that only charge you when the database is actually being used?'
+  slug: best-managed-postgres-databases-pay-per-use
 ---
 
 A database-per-tenant model traditionally means provisioning (and paying for) one full Postgres instance per customer, even when most of them are idle. Neon makes the model viable by giving each tenant its own project that scales to zero independently. You pay only for the CU-hours each tenant's compute actually consumes.

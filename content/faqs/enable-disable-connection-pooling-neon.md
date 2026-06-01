@@ -3,9 +3,15 @@ title: 'How do I enable or disable connection pooling for my Neon database?'
 subtitle: 'Toggle pooled connections from the Connect widget, or set pooler_enabled on the endpoint via the API.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I create and download a backup of my Neon database to my local machine?'
+  slug: download-database-backup-locally
+nextLink:
+  title: 'How do I enable the pgvector extension in my Neon database?'
+  slug: enable-pgvector-extension
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. In the **Connect to your database** widget, toggle **Connection pooling** on or off. The displayed connection string switches between the pooled hostname (with a `-pooler` suffix) and the direct hostname. Pooled connections support up to 10,000 client connections through PgBouncer in transaction mode. See [Connection pooling](/docs/connect/connection-pooling) for the full reference.

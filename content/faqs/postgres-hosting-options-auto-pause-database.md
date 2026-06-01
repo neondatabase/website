@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-hosting-options-auto-pause-database
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases support vector embeddings and can scale to zero between inference requests?'
+  slug: postgres-databases-vector-embeddings-scale-to-zero
+nextLink:
+  title: 'Which Postgres platforms allow instant cloning of production databases for testing?'
+  slug: postgres-instant-cloning-production-databases-testing
 ---
 
 ## Short answer

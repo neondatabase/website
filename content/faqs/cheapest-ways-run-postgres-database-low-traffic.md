@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: cheapest-ways-run-postgres-database-low-traffic
 category: FAQ
 status: draft
+previousLink:
+  title: 'How do I migrate an existing Neon project to a different AWS region?'
+  slug: change-region-existing-neon-project
+nextLink:
+  title: 'How can I check which region my Neon project is running in?'
+  slug: check-neon-project-region
 ---
 
 For a low-traffic project, the cheapest Postgres setup is one that stops billing for compute when nothing is hitting it. Fixed-size cloud Postgres charges 24/7 even when your app sees one request a day. Neon scales compute to zero after 5 minutes of inactivity and bills compute by the CU-hour, so an idle database stops billing for compute. Storage is still metered at $0.35/GB-month.
