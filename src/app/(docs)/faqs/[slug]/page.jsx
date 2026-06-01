@@ -8,15 +8,15 @@ import { FAQS_DIR_PATH } from 'constants/content';
 import { FAQS_BASE_PATH } from 'constants/faqs';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
-import { getAllFaqs, getNavigationLinks } from 'utils/api-faqs';
+import { getAllFaqSlugs, getFaqNavigationItems, getNavigationLinks } from 'utils/api-faqs';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
 export async function generateStaticParams() {
-  const posts = await getAllFaqs();
-  if (!posts) return notFound();
-  return posts.map((post) => ({
-    slug: post.slug,
+  const slugs = await getAllFaqSlugs();
+  if (!slugs) return notFound();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
@@ -47,7 +47,7 @@ export async function generateMetadata(props) {
 const FaqPost = async (props) => {
   const params = await props.params;
   const { slug } = params;
-  const posts = await getAllFaqs();
+  const posts = await getFaqNavigationItems();
   const navigationLinks = getNavigationLinks(slug, posts);
   const gitHubPath = `${FAQS_DIR_PATH}/${slug}.md`;
   const postBySlug = getPostBySlug(slug, FAQS_DIR_PATH);
