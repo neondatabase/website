@@ -33,7 +33,7 @@ Invoices under $0.50 are not collected.
 | Storage                          | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                   |
 | Instant restore                  | -                                          | $0.20/GB-month                       | $0.20/GB-month                                                   |
 | History window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
-| Snapshots (manual)               | 1                                          | 10                                   | 10                                                               |
+| Snapshots (manual)               | 1                                          | 100                                  | 100                                                              |
 | Snapshots (scheduled)            | -                                          | Yes                                  | Yes                                                              |
 | Public network transfer (egress) | 5 GB included                              | 500 GB included, then $0.10/GB       | 500 GB included, then $0.10/GB                                   |
 | Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
