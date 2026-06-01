@@ -45,6 +45,7 @@ export function isAIAgentRequest(request) {
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
+  docs: '/docs/llms.txt', // Docs index aliases to the curated llms.txt (not a generated page-listing). Covers both /docs and /docs.md for agents / Accept: markdown (like pricing).
   'docs/changelog': '/md/docs/changelog.md',
   'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
@@ -86,7 +87,7 @@ export function getMarkdownPath(pathname) {
   // Get the content directory path from CONTENT_ROUTES and convert to public path
   // Example: content/docs -> /md/docs
   const contentPath = CONTENT_ROUTES[matchedRoute];
-  const publicPath = contentPath.replace('content/', '/md/');
+  const publicPath = contentPath.replace(/^content(?:\/pages)?\//, '/md/');
 
   // Extract slug after the matched route
   const slug = normalized === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
