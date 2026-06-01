@@ -57,8 +57,8 @@ const getAllFaqs = async () => {
   const slugs = await getPostSlugs(FAQS_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, FAQS_DIR_PATH)) return;
       const data = getPostBySlug(slug, FAQS_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
