@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Serverless Postgres with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
+> Postgres Database, Authentication, and more backend primitives coming soon with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
 
 ## How billing works
 
@@ -99,7 +99,9 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 ## Links
 
 - Get started: https://neon.com/signup
-- Full plan details: https://neon.com/docs/introduction/plans.md
-- Open Source Program: https://neon.com/programs/open-source.md
-- Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
-- Startup credits: https://neon.com/startups
+- Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
+- Get up to $100k in credits for your startup: https://neon.com/startups
+- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
+- More plan details: https://neon.com/docs/introduction/plans.md
+
