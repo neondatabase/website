@@ -31,7 +31,7 @@ Sometimes, you want the trigger to be activated only when a specific condition i
 CREATE TRIGGER trigger_name
 ON table_name
 WHEN condition
-EXECUTE FUNCTION function_name();
+EXECUTE FUNCTION function_name('optional', 'arguments');
 ```
 
 In this syntax, the `condition` is a boolean expression. If the `condition` is true, the trigger is fired; otherwise, the trigger will not be activated.
