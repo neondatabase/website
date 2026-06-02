@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "neon-postgres",
+      "type": "skill-md",
+      "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neonctl\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
+      "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
+      "digest": "sha256:e4f845622b7bd7d7c348d738d98f1ad88dd5bd1e146e935865e5c12233d63b95"
+    },
+    {
+      "name": "claimable-postgres",
+      "type": "skill-md",
+      "description": "Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres environment, a throwaway DATABASE_URL for prototyping/tests, or \"just give me a DB now\". Triggers include: \"quick postgres\", \"temporary postgres\", \"no signup database\", \"no credit card database\", \"instant DATABASE_URL\", \"npx neon-new\", \"neon.new\", \"neon.new API\", \"claimable postgres API\".",
+      "url": "/.well-known/agent-skills/claimable-postgres/SKILL.md",
+      "digest": "sha256:d57e51f1cd51912ee6c592ea1a00c6825223fe35642d716653d316099e0e8b9f"
+    },
+    {
+      "name": "neon-postgres-egress-optimizer",
+      "type": "skill-md",
+      "description": "Diagnose and fix excessive Postgres egress (network data transfer) in a codebase. Use when a user mentions high database bills, unexpected data transfer costs, network transfer charges, egress spikes, \"why is my Neon bill so high\", \"database costs jumped\", SELECT * optimization, query overfetching, reduce Neon costs, optimize database usage, or wants to reduce data sent from their database to their application. Also use when reviewing query patterns for cost efficiency, even if the user doesn't explicitly mention egress or data transfer.",
+      "url": "/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md",
+      "digest": "sha256:33e2b2bcb19dc47ecdaf6bdca2e3e77be87341ba846ddf64ea090b9fa45c51c0"
+    },
+    {
+      "name": "neon-postgres-branches",
+      "type": "skill-md",
+      "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\" and \"sensitive data testing\".",
+      "url": "/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
+      "digest": "sha256:54e76a777a0bbaf2fa2b66e0516a5cc98e70930245505e31e5b14c33140aa117"
+    }
+  ]
+}

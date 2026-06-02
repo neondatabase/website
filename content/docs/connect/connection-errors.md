@@ -1,11 +1,15 @@
 ---
 title: Connection errors
 subtitle: Learn how to resolve connection errors
+summary: >-
+  Covers how to resolve various connection errors encountered when using Neon,
+  including issues related to endpoint IDs, authentication failures, and
+  database server accessibility.
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2025-07-03T12:36:49.555Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -186,7 +190,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable scale to zero. For instructions, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot disable scale to zero.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are on a paid plan, you can disable scale to zero. For instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Free plan](/docs/introduction/plans) users cannot disable scale to zero.
 
 ## Unsupported startup parameter
 
@@ -206,7 +210,7 @@ The error occurs when using a pooled Neon connection string with startup options
 
 This error can also appear as: `active endpoints limit exceeded`.
 
-Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage. The compute associated with the default branch is exempt from this limit, ensuring that it is always available. When you exceed the limit, any compute associated with a non-default branch will remain suspended and you will see this error when attempting to connect to it. You can suspend computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a limit increase.
+Neon limits [concurrently active computes](/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 
 ## Remaining connection slots are reserved for roles with the SUPERUSER attribute
 
@@ -226,7 +230,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature (auto-suspend) to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo
@@ -270,7 +274,7 @@ Some users encounter DNS resolution failures when connecting to their Neon datab
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
-To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (for example, `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
 
 ```bash shouldWrap
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
@@ -330,16 +334,16 @@ Failure to resolve the Neon hostname can happen for different reasons:
    To change your DNS configuration at the OS level:
    - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
    - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
-   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
+   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (for example, NetworkManager, Netplan)
 
    This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
 
 2. **Disable system-wide web proxies**
 
    If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
-   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (for example, "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
    - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
-   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
+   - **Linux**: Check your environment variables (for example, `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
 
 3. **Using a VPN**
 

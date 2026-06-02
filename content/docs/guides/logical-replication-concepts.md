@@ -1,9 +1,13 @@
 ---
 title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
+summary: >-
+  Covers the concepts of PostgreSQL logical replication, detailing how to
+  replicate data between databases using a publisher-subscriber model, and
+  enabling logical replication in Neon for real-time data updates.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-14T17:05:09.999Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
@@ -22,14 +26,13 @@ The Postgres logical replication architecture is very simple. It uses a _publish
 
 ## Enabling logical replication
 
-In Neon, you can enable logical replication from the Neon Console. This only necessary if your Neon Postgres instance is acting as a publisher, replicating data to another Postgres instance, data service, or platform.
+When replicating data from Neon, enable logical replication on your Neon project. When replicating data to Neon, enable it on the source database instead.
 
-To enable logical replication:
+<Admonition type="important">
+Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
+</Admonition>
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Replication**.
-4. Click **Enable**.
+You can enable logical replication from the Neon Console or via the API. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for instructions.
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -39,8 +42,6 @@ SHOW wal_level;
 -----------
  logical
 ```
-
-Enabling logical replication turns on detailed logging, which is required to support the replication process.
 
 ## Publications
 
@@ -62,7 +63,7 @@ A subscription represents the downstream side of logical replication. Data is re
 
 A single subscriber can maintain multiple subscriptions, including multiple subscriptions to the same publisher.
 
-You can create a subscription on a "susbcriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
+You can create a subscription on a "subscriber" database or platform using [CREATE SUBSCRIPTION](https://www.postgresql.org/docs/current/sql-createsubscription.html) syntax. Building on the `users_publication` example above, here’s how you would create a subscription:
 
 ```sql
 CREATE SUBSCRIPTION users_subscription
@@ -101,7 +102,7 @@ max_replication_slots = 10
 ```
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
 ### Decoder plugins

@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-05-13T13:24:36.612Z'
+updatedOn: '2026-05-13T19:04:49.209Z'
 ---
 
 # Guides
@@ -18,13 +18,14 @@ Welcome to Neon guides! This folder contains the source code of the [Neon guides
 
 Right now Markdown files accept the following fields:
 
-1. `title` — title of the page (required)
-2. `subtitle` — subtitle of the page.
-3. `author` — your author ID.
-4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/guides/old-path/`
-5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
-6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
+1. `title`: title of the page (required)
+2. `subtitle`: subtitle of the page.
+3. `author`: your author ID.
+4. `redirectFrom`: array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/guides/old-path/`
+5. `isDraft`: flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
+6. `enableTableOfContents`: flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
+8. `excludeFromBlog`: flag that hides the guide from the blog's guides listing and the "All posts" feed. The guide page itself is still published at its `/guides/...` URL — use this for guides that should remain accessible but not be surfaced alongside blog content.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
@@ -435,10 +436,10 @@ Your author's data should be sourced in `content/guides/authors/data.json` file.
 
 You should start with your name as the ID for the object in kebab-case. Then you can use these fields inside the object:
 
-1. `name` — your name (required).
-2. `position` — your position.
-3. `bio` — your bio.
-4. `link` — link to one of your social media accounts. Each link should have `title` and `url` fields.
+1. `name`: your name (required).
+2. `position`: your position.
+3. `bio`: your bio.
+4. `link`: link to one of your social media accounts. Each link should have `title` and `url` fields.
 
 Then you can add your photo to `public/guides/authors/` folder with the filename as your ID.
 

@@ -1,13 +1,17 @@
 ---
 title: Postgres avg() function
 subtitle: Calculate the average value of a set of numbers
+summary: >-
+  Covers the usage of the Postgres `avg()` function to calculate the arithmetic
+  mean of numeric values, including examples for analyzing datasets like
+  temperature readings across different cities.
 enableTableOfContents: true
-updatedOn: '2024-06-28T21:51:40.608Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `avg()` function calculates the arithmetic mean of a set of numeric values.
 
-This function is particularly useful when you need to understand typical values in a dataset, compare different groups, or identify trends over time. For example, you might use it to calculate the average order value for an e-commerce platform, the average response time for a web service, or the mean of sensor readings over time.
+Use it when you need to understand typical values in a dataset, compare different groups, or identify trends over time. For example, you might use it to calculate the average order value for an e-commerce platform, the average response time for a web service, or the mean of sensor readings over time.
 
 <CTA />
 

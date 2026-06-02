@@ -1,8 +1,12 @@
 ---
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
+summary: >-
+  Step-by-step guide for installing and configuring Liquibase to manage database
+  schema changes in a Neon environment, including deployment and rollback
+  procedures.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.562Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -11,8 +15,8 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
@@ -78,7 +82,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
    -- Creating the `authors` table
@@ -191,7 +195,7 @@ Now, you can start making database schema changes by creating [changesets](https
    touch dbchangelog.xml
    ```
 
-2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from your changelog file, described in the previous step.
+2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your author name and id, which you can retrieve from your changelog file, described in the previous step.
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>

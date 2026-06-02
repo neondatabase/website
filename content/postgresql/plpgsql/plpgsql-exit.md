@@ -1,0 +1,200 @@
+---
+title: PL/pgSQL Exit Statement
+page_title: PL/pgSQL EXIT Statement
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL exit statement and how to
+  use it to terminate a loop or a block.
+prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-exit/'
+ogImage: ''
+updatedOn: '2026-05-07T18:15:13.000Z'
+enableTableOfContents: true
+previousLink:
+  title: PL/pgSQL For Loop
+  slug: postgresql-plpgsql/plpgsql-for-loop
+nextLink:
+  title: PL/pgSQL Continue Statement
+  slug: postgresql-plpgsql/pl-pgsql-continue
+---
+
+<Admonition type="info" id="CTA">
+The PL/pgSQL exit statement works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+</Admonition>
+
+**Summary**: in this tutorial, you will learn about the PL/pgSQL `exit` statement and how to use it to terminate a loop or exit a block.
+
+## Introduction to the PL/pgSQL exit statement
+
+The `exit` statement allows you to prematurely terminate a loop including an unconditional [loop](plpgsql-loop-statements), a [while loop](/postgresql/postgresql-plpgsql/pl-pgsql-while-loop), and a [for loop](plpgsql-for-loop).
+
+The following shows the syntax of the `exit` statement:
+
+```plsql
+exit [label] [when boolean_expression]
+```
+
+In this syntax:
+
+- The `label` is the loop label of the current loop where the `exit` is in or the loop label of the outer loop. Depending on the label, the `exit` statement will terminate the corresponding loop. If you don’t use the label, the `exit` statement will terminate the enclosing loop.
+- Use the `when boolean_expression` clause to specify a condition that terminates a loop. The `exit` statement will terminate the loop if the `boolean_expression` evaluates to `true`.
+
+The following statements are equivalent:
+
+```plsql
+exit when counter > 10;
+```
+
+```plsql
+if counter > 10 then
+   exit;
+end if;
+```
+
+The `exit when` is cleaner and shorter.
+
+Besides terminating a loop, you can use the `exit` statement to exit a block specified by the `begin...end` keywords.
+
+In this case, the control is passed to the statement after the `end` keyword of the current block:
+
+```plsql
+<<block_label>>
+BEGIN
+    -- some code
+    EXIT [block_label] [WHEN condition];
+    -- some more code
+END block_label;
+```
+
+## PL/pgSQL Exit statement examples
+
+Let’s take some examples of using the PL/pgSQL `exit` statement.
+
+### 1\) Using PL/pgSQL Exit statement to terminate an unconditional loop
+
+The following example illustrates how to use the `exit` statement in unconditional loops:
+
+```plsql
+do
+$$
+declare
+   i int = 0;
+   j int = 0;
+begin
+  <<outer_loop>>
+  loop
+     i = i + 1;
+     exit when i > 3;
+	 -- inner loop
+	 j = 0;
+     <<inner_loop>>
+     loop
+		j = j + 1;
+		exit when j > 3;
+		raise notice '(i,j): (%,%)', i, j;
+	 end loop inner_loop;
+  end loop outer_loop;
+end;
+$$
+```
+
+Output:
+
+```
+NOTICE:  (i,j): (1,1)
+NOTICE:  (i,j): (1,2)
+NOTICE:  (i,j): (1,3)
+NOTICE:  (i,j): (2,1)
+NOTICE:  (i,j): (2,2)
+NOTICE:  (i,j): (2,3)
+NOTICE:  (i,j): (3,1)
+NOTICE:  (i,j): (3,2)
+NOTICE:  (i,j): (3,3)
+```
+
+How it works.
+
+This example contains two loops: outer and inner loops.
+
+Since both `exit` statements don’t use any loop labels, they will terminate the current loop.
+
+The first `exit` statement terminates the outer loop when `i` is greater than `3`. That’s why you see the value of `i` in the output is `1`, `2`, and `3`.
+
+The second `exit` statement terminates the inner loop when `j` is greater than `3`. It is the reason you see that `j` is `1`, `2`, and `3` for each iteration of the outer loop.
+
+The following example places the label of the outer loop in the second `exit` statement:
+
+```plsql
+do
+$$
+declare
+   i int = 0;
+   j int = 0;
+begin
+  <<outer_loop>>
+  loop
+     i = i + 1;
+     exit when i > 3;
+	 -- inner loop
+	 j = 0;
+     <<inner_loop>>
+     loop
+		j = j + 1;
+		exit outer_loop when j > 3;
+		raise notice '(i,j): (%,%)', i, j;
+	 end loop inner_loop;
+  end loop outer_loop;
+end;
+$$
+```
+
+Output:
+
+```
+NOTICE:  (i,j): (1,1)
+NOTICE:  (i,j): (1,2)
+NOTICE:  (i,j): (1,3)
+```
+
+In this example, the second `exit` statement terminates the outer loop when `j` is greater than 3\.
+
+### 2\) Using the PL/pgSQL Exit statement to exit a block
+
+The following example illustrates how to use the `exit` statement to terminate a block:
+
+```plsql
+do
+$$
+begin
+
+  <<simple_block>>
+   begin
+  	 exit simple_block;
+         -- for demo purposes
+	 raise notice '%', 'unreachable!';
+   end;
+   raise notice '%', 'End of block';
+end;
+$$
+```
+
+Output
+
+```
+NOTICE:  End of block
+```
+
+In this example, the exit statement terminates the `simple_block` immediately:
+
+```plsql
+exit simple_block;
+```
+
+This statement will never be reached:
+
+```plsql
+raise notice '%', 'unreachable!';
+```
+
+## Summary
+
+- Use the `exit` statement to terminate a loop including an unconditional `loop`, `while`, and `for` loop.
+- Use the `exit` statement to exit a block.

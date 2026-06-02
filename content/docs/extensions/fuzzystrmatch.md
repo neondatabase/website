@@ -2,8 +2,12 @@
 title: The fuzzystrmatch extension
 subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
   Postgres
+summary: >-
+  Covers the setup and usage of the `fuzzystrmatch` extension in Postgres,
+  providing functions for fuzzy string matching to handle typos, phonetic
+  variations, and approximate text comparisons.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.302Z'
+updatedOn: '2026-02-06T22:07:32.829Z'
 ---
 
 The `fuzzystrmatch` extension for Postgres provides a suite of functions to determine similarities and distances between strings. This is useful for applications that need to handle misspellings, phonetic variations, or simply find "close enough" matches in text data. Whether you're building a search engine, cleaning customer data, or trying to identify duplicate records, `fuzzystrmatch` offers powerful tools to compare strings beyond exact equality.
@@ -14,7 +18,7 @@ Imagine a user searching for "John Doe" but typing "Jon Dow", or needing to matc
 
 ## Enable the `fuzzystrmatch` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;

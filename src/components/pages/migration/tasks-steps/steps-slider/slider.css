@@ -1,3 +1,5 @@
+@reference "../../../../../styles/globals.css";
+
 .steps-swiper {
   @apply relative mx-16 flex flex-col lg:mx-0;
 }
@@ -11,32 +13,27 @@
 }
 
 .swiper-pagination {
-  @apply relative !bottom-0 mt-10 flex w-full gap-2 lg:mt-8 lg:gap-0 md:mt-7 md:justify-between;
+  @apply relative bottom-0! mt-10 flex w-full gap-2 lg:mt-8 lg:gap-0 md:mt-7 md:justify-between;
+}
 
-  &-bullet {
-    @apply relative z-10 !mx-0 flex flex-1 flex-col items-start gap-y-6 bg-transparent bg-none px-8 opacity-100 lg:px-8 md:flex-initial md:px-0;
-    @apply h-auto w-auto;
+.steps-swiper .swiper-pagination-bullet {
+  @apply relative z-10 mx-0! flex h-auto w-auto flex-1 flex-col items-start gap-y-6 bg-transparent bg-none px-8 opacity-100 lg:px-8 md:flex-initial md:px-0;
+}
 
-    .bullet-number {
-      @apply relative z-30 flex size-8 items-center justify-center rounded-full ring-1 ring-inset ring-gray-new-15;
-      @apply text-sm font-semibold leading-none tracking-extra-tight;
-      @apply bg-black-pure text-gray-new-40 transition-all;
-    }
+.steps-swiper .swiper-pagination-bullet .bullet-number {
+  @apply relative z-30 flex size-8 items-center justify-center rounded-full bg-black-pure text-sm leading-none font-semibold tracking-extra-tight text-gray-new-40 ring-1 ring-gray-new-15 transition-all ring-inset;
+}
 
-    &:not(&-active):hover {
-      .bullet-number {
-        @apply text-gray-new-60 ring-gray-new-30;
-      }
-    }
+.steps-swiper .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover .bullet-number {
+  @apply text-gray-new-60 ring-gray-new-30;
+}
 
-    &-active {
-      @apply !cursor-default bg-transparent;
+.steps-swiper .swiper-pagination-bullet-active {
+  @apply cursor-default! bg-transparent;
+}
 
-      .bullet-number {
-        @apply bg-gray-new-8 text-white ring-gray-new-30;
-      }
-    }
-  }
+.steps-swiper .swiper-pagination-bullet-active .bullet-number {
+  @apply bg-gray-new-8 text-white ring-gray-new-30;
 }
 
 .captions-swiper {
@@ -45,8 +42,8 @@
   .caption-content {
     code {
       @apply inline-flex items-center rounded-[4px] bg-gray-new-10 p-[5px] pt-0.5;
-      @apply ring-1 ring-inset ring-white ring-opacity-[8%];
-      @apply font-mono text-sm font-normal leading-none tracking-extra-tight text-white;
+      @apply ring-1 ring-white/8 ring-inset;
+      @apply font-mono text-sm leading-none font-normal tracking-extra-tight text-white;
     }
   }
 }

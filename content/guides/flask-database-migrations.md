@@ -4,7 +4,7 @@ subtitle: Learn how to handle database migrations and schema changes in a Flask 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-14T00:00:00.000Z'
-updatedOn: '2024-09-14T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Flask is a lightweight and flexible web framework for Python that makes it easy to build web applications. When working with databases in [Flask](https://flask.palletsprojects.com/), [SQLAlchemy](https://www.sqlalchemy.org/) is a popular choice for an ORM.
@@ -271,7 +271,7 @@ The `age` column should now be renamed to `years_old` in your database. Remember
 
 ## Working with Indexes
 
-Adding indexes can improve query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgres/indexes).
+Adding indexes can improve query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgresql/index-types).
 
 Let's add an index to the `email` column.
 

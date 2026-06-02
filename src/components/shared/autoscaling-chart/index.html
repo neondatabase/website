@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database Autoscaling Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #0b0c0e;
+        color: #d8d9da;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+
+      .stats {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        background: #1a1d23;
+        border: 1px solid #2d3139;
+        border-radius: 4px;
+        padding: 15px 20px;
+        min-width: 150px;
+        border-left-width: 3px;
+      }
+
+      .stat-card.autoscaling {
+        border-left-color: #73bf69;
+      }
+
+      .stat-card.fixed-resource {
+        border-left-color: #e8912d;
+      }
+
+      .stat-card.savings {
+        border-left-width: 0;
+        border-top-width: 3px;
+        border-top-color: #7289da;
+      }
+
+      .savings-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .savings-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .savings-metric .metric {
+        font-size: 18px;
+        color: #ffffff;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: #9fa0a3;
+        margin-bottom: 5px;
+      }
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+
+      .stat-unit {
+        font-size: 14px;
+        color: #9fa0a3;
+        margin-left: 5px;
+      }
+
+      .stat-input {
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #2d3139;
+        width: 80px;
+        padding: 0;
+        text-align: left;
+      }
+
+      .stat-input:focus {
+        outline: none;
+        border-bottom-color: #73bf69;
+      }
+
+      .inputs {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .input-group {
+        background: #1a1d23;
+        border: 1px solid #2d3139;
+        border-radius: 4px;
+        padding: 15px 20px;
+        min-width: 200px;
+      }
+
+      .input-label {
+        font-size: 12px;
+        color: #9fa0a3;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .input-field {
+        background: #0b0c0e;
+        border: 1px solid #2d3139;
+        color: #d8d9da;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .input-field:focus {
+        outline: none;
+        border-color: #73bf69;
+      }
+
+      .chart-container {
+        background: #1a1d23;
+        border: 1px solid #2d3139;
+        border-radius: 4px;
+        padding: 20px;
+        height: 500px;
+        position: relative;
+      }
+
+      .controls {
+        position: absolute;
+        right: 0px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      button,
+      select {
+        background: #1a1d23;
+        border: 1px solid #2d3139;
+        color: #d8d9da;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      button:hover,
+      select:hover {
+        background: #2d3139;
+        border-color: #4a4d55;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #73bf69;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        font-size: 18px;
+        color: #9fa0a3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="controls">
+        <select id="overprovisionSelect" onchange="updateOverprovision()">
+          <option value="0">Zero Over-Provisioning</option>
+          <option value="60" selected>60% Over-Provisioning (recommended)</option>
+          <option value="-50">Under-provision</option>
+        </select>
+        <button onclick="resetZoom()">Reset Zoom</button>
+      </div>
+      <div class="header">
+        <h1 id="title">Database Autoscaling</h1>
+      </div>
+
+      <div id="content">
+        <div class="chart-container">
+          <canvas id="chart"></canvas>
+        </div>
+        <div class="stats" id="stats">
+          <div class="stat-card autoscaling">
+            <div class="stat-label">Autoscaling CU-hours</div>
+            <div class="stat-value" id="autoscalingCUHours">
+              -<span class="stat-unit">CU-hr</span>
+            </div>
+          </div>
+          <div class="stat-card autoscaling">
+            <div class="stat-label">Autoscaling Rate</div>
+            <div class="stat-value">
+              $<input
+                type="number"
+                id="autoscalingCost"
+                class="stat-input"
+                value="0.106"
+                step="0.001"
+                min="0"
+                onchange="recalculateCosts()"
+              /><span class="stat-unit">per CU-hr</span>
+            </div>
+          </div>
+          <div class="stat-card autoscaling">
+            <div class="stat-label">Autoscaling Cost</div>
+            <div class="stat-value" id="autoscalingCostDisplay">
+              $<span id="autoscalingCostValue">-</span>
+            </div>
+          </div>
+          <input type="hidden" id="overprovision" value="60" />
+          <div class="stat-card fixed-resource">
+            <div class="stat-label">Fixed-Resource CU-hours</div>
+            <div class="stat-value" id="fixedCUHours">-<span class="stat-unit">CU-hr</span></div>
+          </div>
+          <div class="stat-card fixed-resource">
+            <div class="stat-label">Fixed-Resource Rate</div>
+            <div class="stat-value">
+              $<input
+                type="number"
+                id="fixedCost"
+                class="stat-input"
+                value="0.1"
+                step="0.001"
+                min="0"
+                onchange="recalculateCosts()"
+              /><span class="stat-unit">per CU-hr</span>
+            </div>
+          </div>
+          <div class="stat-card fixed-resource">
+            <div class="stat-label">Fixed-Resource Cost</div>
+            <div class="stat-value" id="fixedCostDisplay">$<span id="fixedCostValue">-</span></div>
+          </div>
+          <div class="stat-card savings">
+            <div class="stat-label" id="savingsLabel">Savings Summary</div>
+            <div class="savings-content">
+              <div class="savings-row">
+                <span class="savings-metric" id="cuSavings">-</span>
+              </div>
+              <div class="savings-row">
+                <span class="savings-metric" id="costSavings">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Paste your dataset JSON here (from predictable-fluctuation.json)
+      const DATASETS = {
+        anomalous_spikes: {
+          name: 'Anomalous Spikes',
+          startTime: '2025-11-10T02:25:00.000Z',
+          intervalMinutes: 1,
+          values: [
+            null,
+            0.75,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+          ],
+        },
+        predictable_fluctuation: {
+          name: 'Predictable Fluctuation',
+          startTime: '2025-11-10T01:01:00.000Z',
+          intervalMinutes: 1,
+          values: [
+            1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1,
+          ],
+        },
+      };
+
+      let chart;
+      let allData = [];
+      let currentDataset = null;
+      let autoscalingOnly = false;
+
+      function convertDatasetToChartData(dataset) {
+        const data = [];
+        const startTime = new Date(dataset.startTime);
+        const intervalMs = dataset.intervalMinutes * 60 * 1000;
+
+        for (let i = 0; i < dataset.values.length; i++) {
+          const value = dataset.values[i];
+          if (value !== null) {
+            data.push({
+              x: new Date(startTime.getTime() + i * intervalMs),
+              y: value,
+            });
+          }
+        }
+
+        return data;
+      }
+
+      function calculateStats(data) {
+        const values = data.map((d) => d.y).filter((v) => !isNaN(v));
+
+        if (values.length === 0) return;
+
+        const sum = values.reduce((a, b) => a + b, 0);
+        const avg = sum / values.length;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+
+        // Calculate autoscaling cost and CU-hours
+        const autoscalingCostPerHour = parseFloat(document.getElementById('autoscalingCost').value);
+        let totalAutoscalingCost = 0;
+        let autoscalingCUMinutes = 0;
+        for (let i = 0; i < values.length; i++) {
+          // Each data point is 1 minute, so cost = (CU * cost_per_hour) / 60
+          totalAutoscalingCost += (values[i] * autoscalingCostPerHour) / 60;
+          autoscalingCUMinutes += values[i];
+        }
+        const autoscalingCUHours = autoscalingCUMinutes / 60;
+
+        // Calculate fixed-resource cost and CU-hours
+        const overprovisionPercent = parseFloat(document.getElementById('overprovision').value);
+        const fixedCostPerHour = parseFloat(document.getElementById('fixedCost').value);
+
+        if (currentDataset) {
+          // Fixed CU = max CU * (1 + overprovision%)
+          const fixedCU = max * (1 + overprovisionPercent / 100);
+          // Duration in hours = (total data points * interval minutes) / 60
+          const durationHours =
+            (currentDataset.values.length * currentDataset.intervalMinutes) / 60;
+          // Total fixed cost = fixed CU * duration * cost per hour
+          const totalFixedCost = fixedCU * durationHours * fixedCostPerHour;
+          // Fixed CU-hours = fixed CU * duration
+          const fixedCUHours = fixedCU * durationHours;
+
+          document.getElementById('fixedCostValue').textContent = totalFixedCost.toFixed(2);
+          document.getElementById('fixedCUHours').innerHTML =
+            `${fixedCUHours.toFixed(0)}<span class="stat-unit">CU-hr</span>`;
+
+          // Calculate comprehensive savings
+          const cheaper = totalAutoscalingCost < totalFixedCost ? 'Autoscaling' : 'Fixed-Resource';
+
+          // CU-hours savings
+          const cuPercentSavings = (
+            (Math.abs(autoscalingCUHours - fixedCUHours) /
+              Math.max(autoscalingCUHours, fixedCUHours)) *
+            100
+          ).toFixed(1);
+
+          // Cost savings
+          const costPercentSavings = (
+            (Math.abs(totalAutoscalingCost - totalFixedCost) /
+              Math.max(totalAutoscalingCost, totalFixedCost)) *
+            100
+          ).toFixed(1);
+          const costDifference = Math.abs(totalAutoscalingCost - totalFixedCost);
+
+          // Monthly savings - extrapolate based on dataset duration
+          const datasetDurationHours = durationHours;
+          const monthlyHours = 30 * 24; // 720 hours in a 30-day month
+          const monthlySavings = (costDifference / datasetDurationHours) * monthlyHours;
+
+          // Update display
+          document.getElementById('cuSavings').innerHTML =
+            `${cheaper} uses <span class="metric">${cuPercentSavings}%</span> less compute`;
+          document.getElementById('costSavings').innerHTML =
+            `${cheaper} costs <span class="metric">${costPercentSavings}%</span> less. Monthly savings: <span class="metric">$${monthlySavings.toFixed(2)}</span>`;
+        }
+
+        document.getElementById('autoscalingCostValue').textContent =
+          totalAutoscalingCost.toFixed(2);
+        document.getElementById('autoscalingCUHours').innerHTML =
+          `${autoscalingCUHours.toFixed(0)}<span class="stat-unit">CU-hr</span>`;
+      }
+
+      function recalculateCosts() {
+        if (allData.length > 0) {
+          calculateStats(allData);
+          updateFixedResourceLine();
+        }
+      }
+
+      function updateOverprovision() {
+        const select = document.getElementById('overprovisionSelect');
+        const input = document.getElementById('overprovision');
+        input.value = select.value;
+        recalculateCosts();
+      }
+
+      function updateFixedResourceLine() {
+        if (!chart || allData.length === 0 || autoscalingOnly) return;
+
+        // Recalculate fixed-resource allocation level
+        const values = allData.map((d) => d.y).filter((v) => !isNaN(v));
+        const max = Math.max(...values);
+        const overprovisionPercent = parseFloat(document.getElementById('overprovision').value);
+        const fixedCU = max * (1 + overprovisionPercent / 100);
+
+        // Update fixed-resource line data (dataset index 0)
+        const firstDate = allData[0].x;
+        const lastDate = allData[allData.length - 1].x;
+        chart.data.datasets[0].data = [
+          { x: firstDate, y: fixedCU },
+          { x: lastDate, y: fixedCU },
+        ];
+
+        chart.update('none');
+      }
+
+      function createChart(data) {
+        const ctx = document.getElementById('chart').getContext('2d');
+
+        // Calculate default view (last 7 days)
+        const lastDate = data[data.length - 1].x;
+        const oneWeekAgo = new Date(lastDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+        // Calculate fixed-resource allocation level
+        const values = data.map((d) => d.y).filter((v) => !isNaN(v));
+        const max = Math.max(...values);
+        const overprovisionPercent = parseFloat(document.getElementById('overprovision').value);
+        const fixedCU = max * (1 + overprovisionPercent / 100);
+
+        // Create fixed-resource line data (horizontal line at fixedCU level)
+        const firstDate = data[0].x;
+        const fixedResourceData = [
+          { x: firstDate, y: fixedCU },
+          { x: lastDate, y: fixedCU },
+        ];
+
+        // Build datasets array based on autoscaling-only mode
+        const datasets = [];
+
+        if (!autoscalingOnly) {
+          datasets.push({
+            label: 'Fixed-Resource Allocation',
+            data: fixedResourceData,
+            borderColor: '#e8912d',
+            backgroundColor: 'rgba(232, 145, 45, 0.1)',
+            borderWidth: 1.5,
+            fill: true,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            tension: 0,
+            borderDash: [5, 5],
+          });
+        }
+
+        datasets.push({
+          label: 'Autoscaling',
+          data: data,
+          borderColor: '#73bf69',
+          backgroundColor: 'rgba(36, 45, 43, 0.9)',
+          borderWidth: 1.5,
+          fill: true,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          tension: 0,
+        });
+
+        chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            datasets: datasets,
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              intersect: false,
+              mode: 'index',
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                align: 'end',
+                labels: {
+                  color: '#d8d9da',
+                  usePointStyle: true,
+                  padding: 15,
+                  font: {
+                    size: 12,
+                  },
+                },
+              },
+              tooltip: {
+                enabled: false,
+              },
+              zoom: {
+                pan: {
+                  enabled: true,
+                  mode: 'x',
+                  modifierKey: 'shift',
+                },
+                zoom: {
+                  wheel: {
+                    enabled: true,
+                    speed: 0.1,
+                  },
+                  pinch: {
+                    enabled: true,
+                  },
+                  mode: 'x',
+                },
+              },
+            },
+            scales: {
+              x: {
+                type: 'time',
+                min: oneWeekAgo.getTime(),
+                max: lastDate.getTime(),
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    hour: 'MMM d HH:mm',
+                    day: 'MMM d',
+                    week: 'MMM d',
+                    month: 'MMM yyyy',
+                  },
+                },
+                grid: {
+                  color: '#2d3139',
+                  drawBorder: false,
+                },
+                ticks: {
+                  color: '#9fa0a3',
+                  maxRotation: 0,
+                  autoSkipPadding: 20,
+                },
+              },
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: '#2d3139',
+                  drawBorder: false,
+                },
+                ticks: {
+                  color: '#9fa0a3',
+                  callback: function (value) {
+                    return value + ' CU';
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function resetZoom() {
+        if (chart && allData.length > 0) {
+          const firstDate = allData[0].x;
+          const lastDate = allData[allData.length - 1].x;
+          chart.options.scales.x.min = firstDate.getTime();
+          chart.options.scales.x.max = lastDate.getTime();
+          chart.update('none');
+        }
+      }
+
+      function zoomToDay() {
+        if (chart && allData.length > 0) {
+          const lastDate = allData[allData.length - 1].x;
+          const oneDayAgo = new Date(lastDate.getTime() - 24 * 60 * 60 * 1000);
+          chart.options.scales.x.min = oneDayAgo.getTime();
+          chart.options.scales.x.max = lastDate.getTime();
+          chart.update('none');
+        }
+      }
+
+      function zoomToWeek() {
+        if (chart && allData.length > 0) {
+          const lastDate = allData[allData.length - 1].x;
+          const oneWeekAgo = new Date(lastDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+          chart.options.scales.x.min = oneWeekAgo.getTime();
+          chart.options.scales.x.max = lastDate.getTime();
+          chart.update('none');
+        }
+      }
+
+      // Initialize chart with DATASET
+      (function () {
+        // Read URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const datasetKey = urlParams.get('dataset') || 'predictable_fluctuation';
+        autoscalingOnly = urlParams.get('autoscaling-only') === '1';
+
+        // Override input values from URL parameters if provided
+        const autoscalingRate = urlParams.get('autoscaling-rate');
+        const overprovision = urlParams.get('overprovision');
+        const fixedRate = urlParams.get('fixed-rate');
+
+        if (autoscalingRate) {
+          document.getElementById('autoscalingCost').value = autoscalingRate;
+        }
+        if (overprovision) {
+          document.getElementById('overprovision').value = overprovision;
+          // Update dropdown to match, or leave as "60% (recommended)" if custom value
+          const select = document.getElementById('overprovisionSelect');
+          const matchingOption = Array.from(select.options).find(
+            (opt) => opt.value === overprovision
+          );
+          if (matchingOption) {
+            select.value = overprovision;
+          }
+        }
+        if (fixedRate) {
+          document.getElementById('fixedCost').value = fixedRate;
+        }
+
+        // Hide fixed-resource stats if autoscaling-only mode
+        if (autoscalingOnly) {
+          document
+            .querySelectorAll('.stat-card.fixed-resource')
+            .forEach((el) => (el.style.display = 'none'));
+          document
+            .querySelectorAll('.stat-card.savings')
+            .forEach((el) => (el.style.display = 'none'));
+          document.getElementById('overprovisionSelect').style.display = 'none';
+        }
+
+        // Load dataset
+        currentDataset = DATASETS[datasetKey];
+        if (!currentDataset) {
+          console.error(`Dataset '${datasetKey}' not found`);
+          currentDataset = DATASETS[Object.keys(DATASETS)[0]];
+        }
+
+        // Update title with dataset name
+        if (currentDataset.name) {
+          document.getElementById('title').textContent = currentDataset.name;
+        }
+
+        allData = convertDatasetToChartData(currentDataset);
+        if (allData.length > 0) {
+          calculateStats(allData);
+          createChart(allData);
+        }
+      })();
+    </script>
+  </body>
+</html>

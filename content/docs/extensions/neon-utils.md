@@ -1,11 +1,15 @@
 ---
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
+summary: >-
+  Covers the installation and usage of the `neon_utils` extension, specifically
+  the `num_cpus()` function for monitoring CPU resource allocation by Neon's
+  Autoscaling feature in response to workload changes.
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.613Z'
+updatedOn: '2026-02-15T20:51:54.079Z'
 ---
 
-The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates vCPU in response to workload. The function returns the current number of allocated vCPUs.
+The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates CPU resources in response to workload. The function returns the current number of allocated CPU cores.
 
 For information about Neon's _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
@@ -17,17 +21,17 @@ Install the `neon_utils` extension by running the following `CREATE EXTENSION` s
 CREATE EXTENSION neon_utils;
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. One CU is 1 vCPU and 4 GB of RAM, 2 CU is 2 vCPU and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPU. A Neon compute can have anywhere from .25 to 56 CU, but _Autoscaling_ is only supported up to 16 CU.
+In Neon, computing capacity is measured in _Compute Units (CU)_. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources; for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. A Neon compute can have anywhere from .25 to 56 CU, but _Autoscaling_ is only supported up to 16 CU.
 
 Defining a minimum and maximum compute size for your compute, as shown below, enables autoscaling.
 
 ![Edit compute dialog showing an autoscaling configuration](/docs/extensions/edit_compute_endpoint.png)
 
-As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your compute configuration. To retrieve the number of allocated vCPU at any point in time, you can run the following query:
+As your workload changes, computing capacity scales dynamically between the minimum and maximum settings defined in your compute configuration. To retrieve the number of allocated CPU cores at any point in time, you can run the following query:
 
 ```sql
 SELECT num_cpus();
@@ -39,7 +43,7 @@ For autoscaling configuration instructions, see [Compute size and autoscaling co
 
 The following limitations apply:
 
-- The `num_cpus()` function does not return fractional vCPU sizes. The _Autoscaling_ feature can scale by fractional vCPU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated vCPU is `.25` or `.5`, the `num_cpus()` function returns `1`.
+- The `num_cpus()` function does not return fractional CU sizes. The _Autoscaling_ feature can scale by fractional CU, but the `num_cpus()` function reports the next whole number. For example, if the current number of allocated CU is `.25` or `.5`, the `num_cpus()` function returns `1`.
 - The `num_cpus()` function only works on computes that have the _Autoscaling_ feature enabled. Running the function on a fixed-size compute does not return a correct value.
 
 ## Observe autoscaling with `neon_utils` and `pgbench`
@@ -119,7 +123,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
    ...
    ```
 
-5. Call the `num_cpus()` function to retrieve the current number of allocated vCPU.
+5. Call the `num_cpus()` function to retrieve the current number of allocated CPU cores.
 
    ```sql
    ​​neondb=> SELECT num_cpus();

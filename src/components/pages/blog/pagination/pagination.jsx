@@ -22,13 +22,13 @@ const Pagination = ({ currentPageIndex, pageCount }) => {
   };
 
   return (
-    <div className="safe-paddings mt-10 2xl:mt-8 xl:mt-7 md:mt-6">
+    <div className="mt-10 safe-paddings 2xl:mt-8 xl:mt-7 md:mt-6">
       <Container size="xs">
         <ReactPaginate
           containerClassName="flex justify-center items-center"
           pageLinkClassName={pageLinkAndBreakLinkClassName}
           breakLinkClassName={pageLinkAndBreakLinkClassName}
-          activeLinkClassName="bg-secondary-2 hover:!text-inherit"
+          activeLinkClassName="bg-secondary-2 hover:text-inherit!"
           previousClassName="mr-auto hover:text-primary-2"
           nextClassName="ml-auto hover:text-primary-2"
           previousLinkClassName={previousAndNextLinkClassName}

@@ -31,22 +31,19 @@ const getHubspotFormData = async (formId) => {
 };
 
 const sendHubspotFormData = async ({ formId, context, values }) => {
-  const response = await fetch(
-    `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_FORM_PORTAL_ID}/${formId}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        context,
-        fields: values,
-      }),
-    }
-  );
+  const response = await fetch('/api/hubspot', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      formId,
+      context,
+      values,
+    }),
+  });
 
   return response;
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { emailRegexp, doNowOrAfterSomeTime, getHubspotFormData, sendHubspotFormData };
+export { doNowOrAfterSomeTime, emailRegexp, getHubspotFormData, sendHubspotFormData };

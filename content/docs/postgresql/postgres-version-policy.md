@@ -1,7 +1,11 @@
 ---
 title: Neon Postgres Version Support Policy
+summary: >-
+  Covers the support policy for PostgreSQL versions used by Neon, detailing
+  major and minor release schedules, end-of-life timelines, and version
+  numbering conventions.
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.627Z'
+updatedOn: '2026-04-29T21:38:32.000Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -35,7 +39,7 @@ Neon is committed to providing stability and hassle-free maintenance. You select
 
 Minor release updates are announced in the [Neon Changelog](/docs/changelog).
 
-To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
@@ -59,9 +63,9 @@ As a managed service, Neon strives to manage all minor version updates automatic
 
 In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequently &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
-### Major versions
+### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, and 17. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
+Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
 
 ### Major version upgrades
 

@@ -17,6 +17,7 @@ export default function getMetadata({
   imagePath = DEFAULT_IMAGE_PATH,
   isPostgres = false,
   currentSlug = null,
+  markdownPath = null,
 }) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
@@ -42,23 +43,21 @@ export default function getMetadata({
         : canonicalUrl,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
+        'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
       },
     },
-    manifest: `${SITE_URL}/manifest.json`,
+    manifest: '/manifest.json',
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
     icons: {
-      icon: '/favicon/favicon.png',
+      icon: [
+        { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon/favicon.ico', sizes: '32x32' },
+      ],
       apple: [
-        { url: '/favicon/favicon.png' },
-        { url: '/favicon/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-        { url: '/favicon/favicon-72x72.png', sizes: '72x72', type: 'image/png' },
-        { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-        { url: '/favicon/favicon-144x144.png', sizes: '144x144', type: 'image/png' },
-        { url: '/favicon/favicon-180x180.png', sizes: '180x180', type: 'image/png' },
-        { url: '/favicon/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
-        { url: '/favicon/favicon-384x384.png', sizes: '384x384', type: 'image/png' },
-        { url: '/favicon/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+        { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+        { url: '/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+        { url: '/apple-touch-icon-120x120.png', sizes: '120x120', type: 'image/png' },
       ],
     },
     openGraph: {

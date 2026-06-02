@@ -1,9 +1,13 @@
 ---
 title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
+summary: >-
+  Step-by-step guide for replicating data from a Neon Postgres database to
+  Materialize using logical replication, enabling low-latency data processing
+  for operational workloads.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-30T11:30:21.907Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -16,8 +20,12 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 
 - A [Materialize account](https://materialize.com/register/).
 - A [Neon account](https://console.neon.tech/).
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication
 
@@ -98,10 +106,10 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -111,6 +119,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
+
+> Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
 
 </TabItem>
 
@@ -130,7 +140,7 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ## Allow inbound traffic
 
-If you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Materize IP addresses. If you are currently not limiting IP address access in Neon, you can skip this step.
+If you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Materialize IP addresses. If you are currently not limiting IP address access in Neon, you can skip this step.
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, run this command to find the static egress IP addresses for the Materialize region you are running in:
 
@@ -164,7 +174,7 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SECRET pgpass AS '<PASSWORD>';
    ```
 
-   You can access the password for your Neon Postgres role from the to open **Connect to your database** modal — click the **Connect** button on your **Project Dashboard** to open the modal.
+   You can access the password for your Neon Postgres role from the **Connect to your database** modal; click the **Connect** button on your **Project Dashboard** to open the modal.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
@@ -179,15 +189,21 @@ Now that you’ve configured your database network and created an ingestion clus
    );
    ```
 
-   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button. A Neon connection string looks like this:
+   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard**; click the **Connect** button.
+
+   <Admonition type="important">
+   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
+   </Admonition>
+
+   A Neon connection string looks like this:
 
    ```text shouldWrap
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
-   - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
-   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
+   - Replace `<host>` with your Neon hostname (for example, `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+   - Replace `<role_name>` with the name of your Postgres role (for example, `alex`)
+   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (for example, `dbname`)
 
 3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
 

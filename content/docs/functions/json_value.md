@@ -1,11 +1,15 @@
 ---
 title: Postgres JSON_VALUE() Function
 subtitle: Extract and Convert JSON Scalar Values
+summary: >-
+  Covers the usage of the `JSON_VALUE()` function in PostgreSQL 17 for
+  extracting and converting single scalar values from JSON data, ensuring type
+  safety and error handling.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.762Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
-The `JSON_VALUE()` function in PostgreSQL 17 provides a specialized way to extract single scalar values from `JSON` data with type conversion capabilities. This function is particularly useful when you need to extract and potentially convert individual values from `JSON` structures while ensuring type safety and proper error handling.
+The `JSON_VALUE()` function introduced in PostgreSQL 17 provides a specialized way to extract single scalar values from `JSON` data with type conversion capabilities. Use it when you need to extract and potentially convert individual values from `JSON` structures while ensuring type safety and proper error handling.
 
 Use `JSON_VALUE()` when you need to:
 

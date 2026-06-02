@@ -1,13 +1,17 @@
 ---
 title: Postgres Array data type
 subtitle: Manage collections of elements using arrays
+summary: >-
+  Covers the usage of the `ARRAY` data type in Postgres for storing and
+  manipulating collections of elements, including syntax, storage, and practical
+  examples for managing related data efficiently.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.365Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 In Postgres, the `ARRAY` data type is used to store and manipulate collections of elements in a single column. An array can have variable length and one or more dimensions, but must hold elements of the same data type. Postgres provides a variety of functions and operators for working with arrays.
 
-Arrays are particularly useful when dealing with multiple values that are logically related. For instance, they can store a list of phone numbers for a contact, product categories for an e-commerce item, or even multi-dimensional data for scientific or analytical computations.
+Arrays work well for storing multiple related values. For instance, they can store a list of phone numbers for a contact, product categories for an e-commerce item, or even multi-dimensional data for scientific or analytical computations.
 
 <CTA />
 
@@ -31,7 +35,7 @@ The `ARRAY` constructor syntax can also be used to create arrays. For example,
 
 ## Example usage
 
-Consider the case of maintaining a product catalog for an online store. The same product may belong to multiple categories. For example, an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
+Say you're maintaining a product catalog for an online store. The same product may belong to multiple categories. For example, an iPad could be tagged as 'Electronics', 'Computer', or 'Mobile'. In this case, we can use an array to store the categories for each product.
 
 First, let's create a `products` table with some sample data:
 

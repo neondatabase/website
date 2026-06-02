@@ -1,6 +1,6 @@
 import shuffle from 'lodash.shuffle';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const BlinkingText = ({
   text = '',
@@ -16,7 +16,6 @@ const BlinkingText = ({
       let currentTimeout = 0;
       shuffledLetters.forEach((letter) => {
         setTimeout(() => {
-          // eslint-disable-next-line no-param-reassign
           letter.style.cssText = 'animation-play-state: running';
         }, currentTimeout);
 

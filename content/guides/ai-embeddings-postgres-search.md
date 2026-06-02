@@ -4,7 +4,7 @@ subtitle: Learn how to create a semantic search system using AI embeddings, Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2025-05-17T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 Traditional text search relies on exact keyword matches, which often misses the semantic meaning behind queries.
@@ -268,7 +268,7 @@ class DocumentService {
 
       // Start building the SQL query
       let sql = `
-            SELECT 
+            SELECT
                 id,
                 title,
                 content,
@@ -310,7 +310,7 @@ class DocumentService {
       const result = await this.pool.query(
         `
         SELECT id, title, content, category, created_at
-        FROM documents 
+        FROM documents
         WHERE id = $1
       `,
         [id]

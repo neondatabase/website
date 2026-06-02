@@ -1,0 +1,147 @@
+---
+title: app.build
+subtitle: Open-source AI agent for full-stack application generation
+enableTableOfContents: true
+updatedOn: '2026-01-13T19:29:46.137Z'
+---
+
+[app.build](https://www.app.build/) is our exploration of what AI agents can do with a complete backend stack. We built it after working with partners like Replit and other agent-driven platforms, learning what it takes to automate not just code generation, but the entire development workflow. This open-source project creates and deploys full-stack applications from scratch. It handles everything: database provisioning, authentication, testing, CI/CD, and deployment. The agent breaks down app creation into discrete tasks, validates each piece, and assembles them into working applications. Think of it as a blueprint you can use, fork, or extend to build your own agent infrastructure.
+
+## Why app.build
+
+- **Transparency**: Open-source codebase lets you see exactly how the agent makes decisions and generates code
+- **Extensibility**: Add your own templates, models, or deployment targets
+- **Learning**: Understand agent architectures by examining a working implementation
+- **Best practices built-in**: Every app includes testing, CI/CD, and proper project structure
+- **Reference architecture**: Use as a starting point for your own agent infrastructure
+- **Community-driven**: Contribute improvements that benefit everyone using the platform
+
+## Getting started
+
+Simply go to https://www.app.build/ and authenticate, start chatting ti build!
+
+**Note:** the CLI is now deprecated. `npx @app.build/cli` will give you an error.
+
+## What it generates
+
+- Backend: Fastify server with Drizzle ORM
+- Frontend: React application built with Vite
+- Database: Postgres instance (Neon by default)
+- Authentication: An auth integration (Neon Auth by default)
+- Tests: Playwright end-to-end tests
+- CI/CD: GitHub Actions configuration
+
+## Infrastructure
+
+Generated applications use (by default):
+
+- Neon for Postgres database and authentication
+- Koyeb for hosting
+- GitHub for code repository and CI/CD
+
+All infrastructure choices can be modified when running locally.
+
+## Architecture
+
+The agent works by:
+
+- Writing and running end-to-end tests as part of the generation pipeline
+- Using a well-tested base template with technologies the agent deeply understands
+- Breaking work into small, independent tasks that can be solved reliably
+- Running quality checks on every piece of generated code
+
+These patterns emerged from working with production agent platforms where reliability and validation are critical. The modular design means you can trace exactly what the agent is doing at each step, making it straightforward to debug issues or add new capabilities.
+
+## Extending app.build
+
+As a blueprint for agent infrastructure, app.build is designed to be forked and modified:
+
+- **Custom templates**: Replace the default web app template with your own
+- **Alternative models**: Use local models via Ollama, LMStudio, or OpenRouter, or swap cloud providers (Anthropic, OpenAI, Gemini)
+- **Different providers**: Change database, hosting, or auth providers
+- **New validations**: Add your own code quality checks
+- **Modified workflows**: Adjust the generation pipeline to your needs
+
+## Local development
+
+Everything can run locally with your choice of LLM provider. app.build also supports local models through Ollama, LMStudio, and OpenRouter, in addition to cloud providers.
+
+### Local Model Configuration
+
+Configure local models using environment variables. Create a `.env.local` file in your project directory:
+
+```bash
+# For Ollama (requires Ollama running locally)
+OLLAMA_HOST=http://localhost:11434
+PREFER_OLLAMA=1
+LLM_BEST_CODING_MODEL=ollama:llama3.3:latest
+LLM_UNIVERSAL_MODEL=ollama:llama3.3:latest
+LLM_ULTRA_FAST_MODEL=ollama:phi4:latest
+
+# For LMStudio (requires LMStudio running locally)
+LLM_BEST_CODING_MODEL=lmstudio:http://localhost:1234
+LLM_UNIVERSAL_MODEL=lmstudio:http://localhost:1234
+
+# For OpenRouter (requires API key)
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+LLM_BEST_CODING_MODEL=openrouter:deepseek/deepseek-coder
+LLM_UNIVERSAL_MODEL=openrouter:anthropic/claude-3.5-sonnet
+
+# Cloud providers (original options)
+# ANTHROPIC_API_KEY=your_anthropic_key_here
+# GEMINI_API_KEY=your_gemini_key_here
+```
+
+### Model Categories
+
+app.build uses different model categories for different tasks:
+
+- **LLM_BEST_CODING_MODEL**: High-quality models for complex code generation (slower but better results)
+- **LLM_UNIVERSAL_MODEL**: Medium-speed models for general tasks and FSM operations
+- **LLM_ULTRA_FAST_MODEL**: Fast models for simple tasks like commit messages
+- **LLM_VISION_MODEL**: Models with vision capabilities for UI analysis
+
+### Provider Setup
+
+**Ollama**: Install and run Ollama locally, then pull your desired models:
+
+```bash
+ollama pull llama3.3:latest
+ollama pull phi4:latest
+```
+
+**LMStudio**: Download and run LMStudio with a local model server on port 1234.
+
+**OpenRouter**: Sign up at [OpenRouter](https://openrouter.ai/) and get an API key for access to various models.
+
+### Local Development Features
+
+- Use any LLM provider or self-hosted models
+- Skip deployment for local-only development
+- Modify templates without restrictions
+- Debug the agent's decision-making process
+
+Setup instructions are in the app.build source repositories, with guides for local CLI, custom models, and agent setup in development.
+
+## Current limitations
+
+As a reference implementation, we've made specific choices to keep the codebase clear and extensible:
+
+- Single template for web applications with a fixed tech stack
+- Limited customization options in managed mode
+- CLI is basic - create and iterate functionality only
+- Sparse documentation
+
+## Contributing
+
+- Repositories:
+  - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
+  - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
+- Issues: Bug reports, feature requests, and discussions
+- PRs: Code contributions, documentation, templates
+
+The project welcomes contributions at all levels, from fixing typos to exploring new generation strategies.
+
+## Latest information
+
+For the most up-to-date information and announcements, visit [app.build](https://app.build/). Our [blog](https://app.build/blog/) features technical deep-dives into the agent architecture, code generation strategies, and community contributions.

@@ -1,10 +1,16 @@
 ---
-title: Neon CLI
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: Neon CLI overview
+subtitle: 'Overview of the Neon CLI: installation, commands, and options'
+summary: >-
+  How to manage Neon using the command-line interface (CLI), including
+  installation instructions for macOS, Windows, and Linux, along with available
+  commands and options.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-create-app
-updatedOn: '2025-06-23T15:24:08.792Z'
+  - /docs/neonctl
+  - /docs/get-started/neonctl
+updatedOn: '2026-05-10T14:17:36.447Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -152,13 +158,14 @@ Commands:
   neon orgs                        Manage organizations                [aliases: org]
   neon projects                    Manage projects                 [aliases: project]
   neon ip-allow                    Manage IP Allow
-  neonctl vpc                      Manage VPC endpoints and project VPC restrictions
+  neon vpc                         Manage VPC endpoints and project VPC restrictions
   neon branches                    Manage branches                   [aliases: branch]
   neon databases                   Manage databases            [aliases: database, db]
   neon roles                       Manage roles                        [aliases: role]
   neon operations                  Manage operations               [aliases: operation]
   neon connection-string [branch]  Get connection string                  [aliases: cs]
   neon set-context                 Set the current context
+  neon init                        Initialize Neon for AI assistants (MCP, skills, wizard)
   neon completion                  generate completion script
 
 Global options:
@@ -177,21 +184,22 @@ Options:
 
 ## Commands
 
-| Command                                                    | Subcommands                                                                                                  | Description                                       |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                                      |
-| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user                                 |
-| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations                              |
-| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                                   |
-| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                                   |
-| [vpc](/docs/reference/cli-vpc)                             | `endpoint`, `project`                                                                                        | Manage VPC endpoints and project VPC restrictions |
-| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                                   |
-| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                                  |
-| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                      |
-| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                 |
-| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                             |
-| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                           |
-| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                      |
+| Command                                                    | Subcommands                                                                                                  | Description                                             |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                                            |
+| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user                                       |
+| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations                                    |
+| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                                         |
+| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                                         |
+| [vpc](/docs/reference/cli-vpc)                             | `endpoint`, `project`                                                                                        | Manage VPC endpoints and project VPC restrictions       |
+| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                                         |
+| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                                        |
+| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                            |
+| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                       |
+| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                                   |
+| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                                 |
+| [init](/docs/reference/cli-init)                           |                                                                                                              | Init Neon for AI assistants (MCP, agent skills, wizard) |
+| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                            |
 
 ## Global options
 

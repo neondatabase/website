@@ -4,17 +4,15 @@ subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2025-03-23T00:00:00.000Z'
+updatedOn: '2026-02-15T11:43:50.000Z'
 ---
 
-Neon, like Fauna, offers a **serverless architecture**—but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
+Neon, like Fauna, offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
 
 This guide is designed to help FaunaDB users understand how to transition to Neon Postgres.
 
 <Admonition type="note">
 Migrating from FaunaDB to Neon Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
-
-If you have questions or require help with migrating large production datasets from FaunaDB, please [contact Neon for migration assistance](/migration-assistance).
 </Admonition>
 
 ## FaunaDB vs. Neon (Postgres)
@@ -300,7 +298,7 @@ CREATE INDEX idx_products_price_asc ON products(price) INCLUDE (name, descriptio
 Here we are adding a foreign key constraint `fk_category` to ensure that the `category_id` in the `products` table references the `id` column in the `categories` table. This constraint enforces referential integrity between the two tables.
 
 <Admonition type="tip" title="Don't want to use Raw SQL?">
-If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started-with-neon/languages) and [ORM guides](/docs/get-started-with-neon/orms) section.
+If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started/languages) and [ORM guides](/docs/get-started/orms) section.
 </Admonition>
 
 ### Step 4: Data import to Neon Postgres
@@ -311,7 +309,7 @@ For this guide, we'll demonstrate importing data from the `product.json` file (e
 
 This example Node.js script reads the `Product.json` file, parses the JSON data, and then generates and executes `INSERT` statements to populate your `products` table in Neon Postgres.
 
-You can get `NEON_CONNECTION_STRING` from your Neon dashboard. Learn more about [Connecting Neon to your stack](/docs/get-started-with-neon/connect-neon)
+You can get `NEON_CONNECTION_STRING` from your Neon dashboard. Learn more about [Connecting Neon to your stack](/docs/get-started/connect-neon)
 
 ```javascript
 import pg from 'pg';

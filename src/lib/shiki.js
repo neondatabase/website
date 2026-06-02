@@ -16,11 +16,14 @@ let highlighter;
 
 // parse meta string to get highlighted lines
 const parseHighlightLines = (meta) => {
-  const metaArray = meta.split(' ');
+  const metaArray = meta.split(' ').filter(Boolean);
   let highlightLines = [];
 
-  if (metaArray[0].includes('{')) {
-    const highlightString = metaArray[0];
+  // Support "{1,3-5}" anywhere in the meta string (not only as the first token)
+  const highlightToken = metaArray.find((token) => token.includes('{') && token.includes('}'));
+
+  if (highlightToken) {
+    const highlightString = highlightToken;
     const highlightStringArray = highlightString.split('{')[1].split('}')[0].split(',');
     highlightLines = highlightStringArray.reduce((result, item) => {
       if (item.includes('-')) {

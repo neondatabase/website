@@ -1,16 +1,23 @@
 ---
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
+summary: >-
+  Step-by-step guide for connecting a Ruby on Rails application to a Neon
+  Postgres database, including project setup and configuration of the database
+  connection.
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.055Z'
+updatedOn: '2026-02-06T22:07:33.049Z'
 ---
+
+<CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
+description="Pre-built prompt for connecting Ruby on Rails to Neon Postgres"/>
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
 
 To connect to Neon from a Ruby on Rails application:
 
 <Admonition type="note">
-This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
+This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
 </Admonition>
 
 <Steps>
@@ -89,7 +96,7 @@ Replace the contents of the view file at `app/views/home/index.html.erb` with:
 Replace the contents of `config/routes.rb` with the following code to serve your home view as the root page of the application:
 
 ```ruby
-Rails.application.routes.draw do.
+Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
@@ -122,5 +129,9 @@ For schema migration with Ruby on Rails, see our guide:
 <a href="/docs/guides/rails-migrations" description="Schema migration with Neon Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
 
 </DetailIconCards>
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
 
 <NeedHelp/>

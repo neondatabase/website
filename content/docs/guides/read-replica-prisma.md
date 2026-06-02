@@ -1,8 +1,12 @@
 ---
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
+summary: >-
+  Step-by-step guide for leveraging Neon read replicas to scale Prisma
+  applications, including creating read replicas and configuring compute size
+  settings for optimized read operations.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.564Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -11,18 +15,18 @@ A key benefit of read replicas is that you can distribute read requests to one o
 
 For more information about Neon's read replica feature, see [Read replicas](/docs/introduction/read-replicas).
 
-In this guide, we'll show you how you can leverage Neon read replicas to efficiently scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
+This guide shows how to use Neon read replicas to scale Prisma applications using Prisma Client's read replica extension: [@prisma/extension-read-replicas](https://github.com/prisma/extension-read-replicas).
 
 ## Prerequisites
 
-- An application that uses Prisma with a Neon database.
+- An application that uses Prisma with a Neon database. If you haven't set up Prisma yet, see [Connect from Prisma to Neon](/docs/guides/prisma).
 
 ## Create a read replica
 
 You can create read replicas for any branch in your Neon project.
 
 <Admonition type="note">
-The Free Plan is limited to a maximum of 3 read replica computes per project.
+The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
 You can add a read replica by following these steps:
@@ -31,9 +35,9 @@ You can add a read replica by following these steps:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
+5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
    <Admonition type="note">
-   The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>
 6. When you finish making selections, click **Create**.
 
@@ -100,27 +104,59 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
    npm install @prisma/extension-read-replicas
    ```
 
-2. Extend your Prisma Client instance by importing the extension and adding the `DATABASE_REPLICA_URL` environment variable as shown:
+2. Extend your Prisma Client instance by importing the extension and creating separate adapters for your primary and replica connections:
 
    ```javascript
+   import 'dotenv/config';
    import { PrismaClient } from '@prisma/client';
+   import { PrismaNeon } from '@prisma/adapter-neon';
    import { readReplicas } from '@prisma/extension-read-replicas';
 
-   const prisma = new PrismaClient().$extends(
+   // Create adapter for primary connection
+   const mainAdapter = new PrismaNeon({
+     connectionString: process.env.DATABASE_URL
+   });
+
+   // Create adapter for replica connection
+   const replicaAdapter = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL
+   });
+
+   // Create replica client
+   const replicaClient = new PrismaClient({ adapter: replicaAdapter });
+
+   // Create primary client and extend with read replicas
+   const prisma = new PrismaClient({ adapter: mainAdapter }).$extends(
      readReplicas({
-       url: DATABASE_REPLICA_URL,
+       replicas: [replicaClient],
      })
    );
    ```
 
    <Admonition type="note">
-   You can also pass an array of read replica connection strings if you want to use multiple read replicas. Neon supports adding multiple read replicas to a database branch.
+   In Prisma 7, the read replicas extension requires you to pass an array of PrismaClient instances configured with adapters, not connection URLs. Each replica needs its own adapter and client instance.
+   </Admonition>
+
+   <Admonition type="note">
+   You can pass multiple replica clients if you want to use multiple read replicas. Neon supports adding multiple read replicas to a database branch. A replica is selected randomly for each read query.
 
    ```javascript
-   // lib/prisma.ts
-   const prisma = new PrismaClient().$extends(
+   // Create adapters for multiple replicas
+   const replicaAdapter1 = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL_1
+   });
+   const replicaAdapter2 = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL_2
+   });
+
+   // Create replica clients
+   const replicaClient1 = new PrismaClient({ adapter: replicaAdapter1 });
+   const replicaClient2 = new PrismaClient({ adapter: replicaAdapter2 });
+
+   // Extend primary client with multiple replicas
+   const prisma = new PrismaClient({ adapter: mainAdapter }).$extends(
      readReplicas({
-       url: [process.env.DATABASE_REPLICA_URL_1, process.env.DATABASE_REPLICA_URL_2],
+       replicas: [replicaClient1, replicaClient2],
      })
    );
    ```

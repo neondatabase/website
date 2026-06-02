@@ -1,8 +1,12 @@
 ---
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
+summary: >-
+  Covers backup strategies for Neon Postgres, including instant restore
+  capabilities and the use of `pg_dump` for traditional and automated backups,
+  ensuring data recovery and compliance.
 enableTableOfContents: true
-updatedOn: '2025-04-21T13:38:49.810Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 <InfoBlock>
@@ -24,22 +28,13 @@ Neon supports different backup strategies, which you can use separately or in co
 
 ## Instant restore
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes—ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes, ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-By default, Neon projects retain **1 day** of history. You can increase your restore window on Neon as follows:
+With this strategy, the only required action is setting your desired [history window](/docs/introduction/history-window). Please keep in mind that increasing your history window also increases storage, as changes to your data are retained for a longer period.
 
-| Plan                                          | Restore window limit |
-| :-------------------------------------------- | :------------------- |
-| [Free](/docs/introduction/plans#free-plan)    | 1 day                |
-| [Launch](/docs/introduction/plans#launch)     | 7 days               |
-| [Scale](/docs/introduction/plans#scale)       | 14 days              |
-| [Business](/docs/introduction/plans#business) | 30 days              |
+![History window](/docs/manage/history_retention.png)
 
-With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
-
-![Restore window](/docs/manage/history_retention.png)
-
-    To get started, see [Instant restore](/docs/introduction/branch-restore).
+To get started, see [Instant restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 
@@ -59,3 +54,5 @@ If you need to automate `pg_dump` backups to remote storage, we provide a two-pa
 <Admonition type="note" title="Backup & Restore Questions?">
 If you have questions about backups, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support).
 </Admonition>
+
+<NeedHelp/>

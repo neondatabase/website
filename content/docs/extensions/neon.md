@@ -2,8 +2,12 @@
 title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
+summary: >-
+  Covers the setup of the `neon` extension for gathering Neon-specific metrics,
+  including monitoring the Local File Cache hit ratio through the
+  `neon_stat_file_cache` view.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.888Z'
+updatedOn: '2026-04-03T10:13:16.000Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -23,7 +27,7 @@ When data is requested, Postgres checks shared buffers first, then the LFC. If t
 
 ## Monitoring Local File Cache usage
 
-You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](/docs/) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console.
+You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console.
 
 ## neon_stat_file_cache view
 
@@ -74,7 +78,7 @@ Remember that Postgres checks shared buffers first before it checks your compute
 
 ## View LFC metrics with EXPLAIN ANALYZE
 
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view LFC cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example:
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view LFC cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example, this query fetches data for a `SELECT COUNT(*)` query.
 
 ```sql {5,6,11,12,15,16,20,21}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
@@ -118,38 +122,6 @@ The `FILECACHE` option provides information about the Local File Cache (LFC) usa
 
 ## Views for Neon internal use
 
-The `neon` extension is installed by default to a system-owned `postgres` database in each Neon project. The `postgres` database includes functions and views owned by the Neon system role (`cloud_admin`) that are used to collect statistics. This data helps the Neon team enhance the Neon service.
-
-**Views**:
-
-```sql
-postgres=> \dv
-                    List of relations
- Schema |            Name            | Type |    Owner
---------+----------------------------+------+-------------
- public | local_cache                | view | cloud_admin
- public | neon_backend_perf_counters | view | cloud_admin
- public | neon_lfc_stats             | view | cloud_admin
- public | neon_perf_counters         | view | cloud_admin
- public | neon_stat_file_cache       | view | cloud_admin
-```
-
-**Functions**:
-
-```sql
-postgres=> \df
-                                                                          List of functions
- Schema |                 Name                 | Result data type |                                    Argument data types                                    | Type
---------+--------------------------------------+------------------+-------------------------------------------------------------------------------------------+------
- public | approximate_working_set_size         | integer          | reset boolean                                                                             | func
- public | approximate_working_set_size_seconds | integer          | duration integer DEFAULT NULL::integer                                                    | func
- public | backpressure_lsns                    | record           | OUT received_lsn pg_lsn, OUT disk_consistent_lsn pg_lsn, OUT remote_consistent_lsn pg_lsn | func
- public | backpressure_throttling_time         | bigint           |                                                                                           | func
- public | get_backend_perf_counters            | SETOF record     |                                                                                           | func
- public | get_perf_counters                    | SETOF record     |                                                                                           | func
- public | local_cache_pages                    | SETOF record     |                                                                                           | func
- public | neon_get_lfc_stats                   | SETOF record     |                                                                                           | func
- public | pg_cluster_size                      | bigint           |                                                                                           | func
-```
+The `neon` extension also includes functions and views owned by the Neon system role (`cloud_admin`) that are used to collect statistics. This data helps the Neon team enhance the Neon service. The extension is installed by default in a system-owned `postgres` database in each Neon project.
 
 <NeedHelp/>

@@ -1,6 +1,7 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
+
+import { cn } from 'utils/cn';
 
 const styles = {
   size: {
@@ -8,6 +9,8 @@ const styles = {
     xl: 't-7xl font-medium leading-dense',
     lg: 'text-[72px] font-medium leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
     md: 't-6xl font-medium leading-dense',
+    'md-new':
+      'font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[44px] md:text-[28px]',
     '2sm':
       'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] sm:text-[30px]',
     sm: 't-4xl font-medium',
@@ -20,10 +23,12 @@ const styles = {
 };
 
 const HeadingBadge = ({ text }) => (
-  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-primary-1 lg:text-[10px]">
+  <span className="nowrap mb-2 inline-block rounded-full bg-[rgba(19,236,182,0.1)] px-[14px] py-[7px] text-[12px] leading-none font-semibold -tracking-extra-tight text-primary-1 uppercase lg:text-[10px]">
     {text}
   </span>
 );
+
+const sizesWithCustomFont = new Set(['md-new']);
 
 const Heading = forwardRef(
   (
@@ -39,8 +44,8 @@ const Heading = forwardRef(
     },
     ref
   ) => {
-    const className = clsx(
-      'font-title',
+    const className = cn(
+      !sizesWithCustomFont.has(size) && 'font-title',
       styles.size[size],
       styles.theme[theme],
       additionalClassName
@@ -81,6 +86,8 @@ const Heading = forwardRef(
     );
   }
 );
+
+Heading.displayName = 'Heading';
 
 HeadingBadge.propTypes = {
   text: PropTypes.string.isRequired,

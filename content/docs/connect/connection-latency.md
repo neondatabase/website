@@ -1,9 +1,13 @@
 ---
 title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
+summary: >-
+  Covers strategies for managing connection latencies and timeouts in Neon,
+  including the impact of the _Scale to zero_ feature and how to check the
+  status of a compute resource.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-03T12:36:49.555Z'
+updatedOn: '2026-04-06T14:16:24.000Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -20,13 +24,13 @@ You can check the current status of a compute on the **Branches** page in the Ne
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
-User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="info">
 The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.
 </Admonition>
 
-You can try any of these methods and watch the status of your compute as it changes from an **Idle** to an **Active** state. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. Users on paid plans can configure this delay period, which is described later in this topic.
+You can try any of these methods and watch the status of your compute as it changes from an **Idle** to an **Active** state. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. Users on the Neon [Scale plan](/docs/introduction/plans) can configure this delay period, which is described later in this topic.
 
 ## Strategies for managing latency and timeouts
 
@@ -40,10 +44,12 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your scale to zero configuration
 
-Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. To disable scale to zero, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+If cold starts are not acceptable for your workload, you can disable scale to zero entirely on a paid plan to keep your compute always active. See [Scale to zero](/docs/introduction/scale-to-zero) for configuration steps.
+
+For workloads where occasional cold starts are acceptable, you can also adjust the timeout period. The default is 5 minutes. You can extend it up to 7 days to reduce how often cold starts occur, or on the Scale plan, configure it down to as little as 1 minute.
 
 <Admonition type="important">
-If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
+If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
 </Admonition>
 
 To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
@@ -65,13 +71,11 @@ curl --request PATCH \
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
-![Connection warmup scale to zero and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
-
 For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ### Place your application and database in the same region
 
-A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For information about moving your database to a different region, see [Import data from another Neon project](/docs/import/migrate-from-neon).
+A key strategy for reducing connection latency is ensuring that your application and database are hosted in the same region, or as close as possible, geographically. For the regions supported by Neon, see [Regions](/docs/introduction/regions). For planning a move to another region, see [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) and [Import data from another Neon project](/docs/import/migrate-from-neon).
 
 ### Increase your connection timeout
 
@@ -123,7 +127,7 @@ DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?connect_tim
 </CodeTabs>
 
 <Admonition type="note">
-If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#connection-pool-timeouts) for information about configuring your Prisma connection pool size and pool timeout settings.
+If you are using Prisma Client, your timeout issue could be related to Prisma's connection pool configuration. The Prisma Client query engine instantiates its own connection pool when it opens a first connection to the database. If you encounter a `Timed out fetching a new connection from the connection pool` error, refer to [Prisma connection pool timeouts](/docs/guides/prisma#troubleshooting) for information about configuring your Prisma connection pool size and pool timeout settings.
 </Admonition>
 
 Remember that increasing connection timeout settings might impact the responsiveness of your application, and users could end up waiting longer for their requests to be processed. Always test and monitor your application's performance when making changes like these.
@@ -184,8 +188,11 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
+For complete examples with connection pooling, transaction handling, and idempotency patterns for write operations, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+
 #### Connection retry references
 
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres)
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's scale to zero](/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
@@ -235,14 +242,17 @@ As shown in the example above, using `sslnegotiation=direct` reduces the connect
 postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&sslnegotiation=direct
 ```
 
+## Latency benchmarking
+
+See [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) to learn how to measure and optimize query latency in your Neon database.
+
 ## Conclusion
 
 With the right strategies, you can optimize your system to handle connection latencies and timeouts, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of strategies, so experiment and find the right configuration for your specific use case.
 
 ## Related resources
 
-- [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
-- [Neon latency benchmarks dashboard](https://latency-benchmarks-dashboard.vercel.app) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
+- [Neon latency benchmarks dashboard](/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency
 - [Ship faster with Postgres](https://neon.tech/faster) - Explore examples and case studies demonstrating rapid development workflows

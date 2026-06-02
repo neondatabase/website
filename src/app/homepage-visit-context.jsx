@@ -3,7 +3,7 @@
 // TODO: try to find alternative solution to check whether user has visited homepage or not without using context
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const HomepageVisitContext = createContext();
 

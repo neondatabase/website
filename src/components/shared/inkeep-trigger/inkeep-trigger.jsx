@@ -1,42 +1,42 @@
 'use client';
 
-import clsx from 'clsx';
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import InkeepSearch from 'components/shared/inkeep-search';
-import LINKS from 'constants/links';
-import { baseSettings } from 'lib/inkeep-settings';
+import { aiChatSettings, getInkeepBaseSettings } from 'lib/inkeep-settings';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const InkeepCustomTrigger = dynamic(
-  () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
+import InkeepAIButton from './inkeep-ai-button';
+import InkeepSearch from './inkeep-search';
+
+const InkeepModalSearch = dynamic(
+  () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalSearch),
   { ssr: false }
 );
 
-const tabsOrder = {
-  default: ['Neon Docs', 'PostgreSQL Tutorial', 'Changelog', 'All'],
-  postgres: ['PostgreSQL Tutorial', 'Neon Docs', 'Changelog', 'All'],
-  changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'All'],
-};
+const InkeepModalChat = dynamic(
+  () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalChat),
+  { ssr: false }
+);
 
-const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-  const pathname = usePathname();
-  const [pageType, setPageType] = useState(docPageType);
+  const [sharedChatId, setSharedChatId] = useState(null);
+  const latestInputMessageRef = useRef('');
 
+  // Check if URL contains chatId parameter and open AI chat modal automatically on doc pages
   useEffect(() => {
-    if (pathname === LINKS.changelog) {
-      setPageType('changelog');
-    }
-  }, [pathname]);
+    const urlParams = new URLSearchParams(window.location.search);
+    const chatId = urlParams.get('chatId');
 
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
+    if (chatId) {
+      setSharedChatId(chatId);
+      setIsChatOpen(true);
+    }
   }, []);
 
   let themeMode;
@@ -50,7 +50,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
 
   const handleKeyDown = (event) => {
     if (event.key === 'k' && event.metaKey) {
-      setIsOpen(true);
+      setIsSearchOpen(true);
     }
   };
 
@@ -62,46 +62,61 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     };
   }, []);
 
-  const inkeepCustomTriggerProps = {
-    isOpen,
-    onClose: handleClose,
-    baseSettings: {
-      ...baseSettings,
-      colorMode: {
-        forcedColorMode: themeMode,
-      },
-      theme: {
-        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
-      },
-      optOutFunctionalCookies: true,
-      logEventCallback: (event) => {
-        const { eventName, properties } = event;
-        if (eventName === 'search_query_submitted') {
-          sendGtagEvent('Search Query Submitted', { text: properties.query });
-        }
-      },
-    },
+  const handleInkeepEvent = (event) => {
+    const { eventName, properties = {} } = event;
+
+    if (eventName === 'user_message_submitted') {
+      const payload = latestInputMessageRef.current ? { text: latestInputMessageRef.current } : {};
+      sendGtagEvent('AI Chat Message Submitted', payload);
+      latestInputMessageRef.current = '';
+    }
+
+    if (eventName === 'search_query_submitted') {
+      sendGtagEvent('Search Query Submitted', { text: properties.searchQuery });
+    }
+  };
+
+  const baseSettings = getInkeepBaseSettings({
+    onEvent: handleInkeepEvent,
+    themeMode,
+  });
+
+  const searchModalProps = {
+    baseSettings,
     modalSettings: {
-      defaultView: 'SEARCH',
-      forceInitialDefaultView: true,
-      isModeSwitchingEnabled: false,
+      isOpen: isSearchOpen,
+      onOpenChange: setIsSearchOpen,
     },
-    searchSettings: {
-      tabSettings: {
-        tabOrderByLabel: pageType ? tabsOrder[pageType] : tabsOrder.default,
+  };
+
+  const chatModalProps = {
+    baseSettings,
+    modalSettings: {
+      isOpen: isChatOpen,
+      onOpenChange: setIsChatOpen,
+    },
+    aiChatSettings: {
+      ...aiChatSettings,
+      onInputMessageChange: (message) => {
+        latestInputMessageRef.current = message;
       },
+      ...(sharedChatId && { chatId: sharedChatId }),
     },
   };
 
   return (
-    <>
+    <div className="flex items-center gap-x-2">
       <InkeepSearch
-        className={clsx('lg:w-auto', className)}
-        handleClick={() => setIsOpen(!isOpen)}
+        className={className}
+        handleClick={() => setIsSearchOpen(true)}
         isNotFoundPage={isNotFoundPage}
       />
-      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
-    </>
+      {!isNotFoundPage && (
+        <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
+      )}
+      <InkeepModalSearch {...searchModalProps} />
+      <InkeepModalChat {...chatModalProps} />
+    </div>
   );
 };
 

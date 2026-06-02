@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Laravel with Postgres on Neon, using Laravel's 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-29T00:00:00.000Z'
-updatedOn: '2024-06-29T00:00:00.000Z'
+updatedOn: '2025-05-30T16:53:05.000Z'
 ---
 
 Laravel is a powerful PHP framework known for its elegant syntax and feature-rich ecosystem. Livewire, a full-stack framework for Laravel, allows us to build dynamic interfaces with minimal JavaScript. Together, they provide a robust foundation for creating interactive web applications.

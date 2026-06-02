@@ -1,7 +1,7 @@
 ---
 title: How to use branches
 isDraft: true
-updatedOn: '2024-01-08T20:02:33.928Z'
+updatedOn: '2025-08-02T10:33:29.305Z'
 ---
 
 This guide describes how to use Neon's branching feature, which is currently in preview. If you would like to try branching, send an email to [iwantbranching@neon.tech](mailto:iwantbranching@neon.tech) to request early access.
@@ -26,7 +26,7 @@ Alternatively, you can also use the Neon API to create a branch, as described be
 
 ## Create a branch using the API
 
-Using the Neon API requires an API key. For information about how to obtain an API key for your Project, refer to [Using API keys](/docs/..//get-started-with-neon/using-api-keys/).
+Using the Neon API requires an API key. For information about how to obtain an API key for your Project, refer to [Using API keys](/docs/..//get-started/using-api-keys/).
 
 To create a branch, use the following API method:
 

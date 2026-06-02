@@ -1,8 +1,9 @@
-import clsx from 'clsx';
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
+
+import { cn } from 'utils/cn';
 
 import ChevronRightIcon from './images/chevron-right.inline.svg';
 
@@ -38,7 +39,7 @@ const FilterGroup = ({
 
   return (
     <li
-      className="flex flex-col border-b border-gray-new-80/80 pb-5 pt-5 first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-new-15/80 lg:pb-4 lg:pt-4 lg:last:border-b last:lg:pb-4"
+      className="flex flex-col border-b border-gray-new-80/80 pt-5 pb-5 first:pt-0 last:border-b-0 last:pb-0 dark:border-gray-new-15/80 lg:pt-4 lg:pb-4 lg:first:pt-0 lg:last:border-b last:lg:pb-4"
       key={type}
     >
       <fieldset>
@@ -49,12 +50,12 @@ const FilterGroup = ({
         >
           <div className="flex items-center gap-3">
             <ChevronRightIcon
-              className={clsx(
+              className={cn(
                 'hidden h-5 w-5 transition-transform duration-200 lg:block',
                 isOpen && 'rotate-90'
               )}
             />
-            <legend className="block font-medium leading-tight tracking-extra-tight lg:text-sm">
+            <legend className="block leading-tight font-medium tracking-extra-tight lg:text-sm">
               {type}
             </legend>
           </div>
@@ -81,15 +82,7 @@ const FilterGroup = ({
                       key={value}
                     >
                       <input
-                        className={`
-                h-4 w-4 appearance-none rounded-sm border
-                border-gray-new-70 bg-center bg-no-repeat
-                transition-colors duration-100
-                checked:border-black-new checked:bg-black-new
-                checked:bg-[url('/images/templates/check-light-mode.svg')]
-                dark:border-gray-new-30 dark:checked:border-white dark:checked:bg-white
-                dark:checked:bg-[url('/images/templates/check-dark-mode.svg')]
-              `}
+                        className={`h-4 w-4 appearance-none rounded-sm border border-gray-new-70 bg-center bg-no-repeat transition-colors duration-100 checked:border-black-new checked:bg-black-new checked:bg-[url('/images/templates/check-light-mode.svg')] dark:border-gray-new-30 dark:checked:border-white dark:checked:bg-white dark:checked:bg-[url('/images/templates/check-dark-mode.svg')]`}
                         type="checkbox"
                         name={value}
                         checked={
@@ -146,13 +139,13 @@ const FilterBar = ({
   return (
     <form>
       <input
-        className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-none dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40 lg:w-full"
+        className="templates-search h-9 rounded border border-gray-new-80/80 bg-transparent bg-[url('/images/templates/search-light-mode.svg')] bg-[left_0.625rem_center] bg-no-repeat p-2.5 pl-[34px] text-sm leading-none tracking-extra-tight placeholder:text-gray-new-70 hover:border-gray-new-70 focus:border-gray-new-70 focus:outline-hidden dark:border-gray-new-20 dark:bg-[url('/images/templates/search-dark-mode.svg')] dark:placeholder:text-gray-new-70 dark:hover:border-gray-new-40 dark:focus:border-gray-new-40 lg:w-full"
         type="search"
         placeholder="Search"
         onChange={handleSearch}
       />
       <div className="mt-[26px] flex items-center justify-between">
-        <span className="font-semibold leading-tight tracking-extra-tight">Filters</span>
+        <span className="leading-tight font-semibold tracking-extra-tight">Filters</span>
         {Object.values(filteredTemplates.filters).some((filters) => filters.length > 0) && (
           <button
             className="text-sm leading-none tracking-tighter text-gray-new-30 dark:text-gray-new-70"

@@ -1,36 +1,37 @@
 import LINKS from './links';
 
-export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-05-27';
 
 export default {
   index: {
-    title: 'Neon Serverless Postgres — Ship faster',
+    title: 'Neon — Postgres backends for apps and agents',
     description:
-      'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
+      'The backend for apps and agents. Build with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
+    pathname: '',
+  },
+  about: {
+    title: 'About Us - Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
     pathname: '',
   },
   ai: {
-    title: 'Postgres for AI — Neon',
+    title: 'Postgres and backend platform for AI — Neon',
     description:
-      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+      'Build AI agents faster with Neon: serverless Postgres, Auth, Functions, Storage, and an AI Gateway, built for operation by agents.',
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
-  aiChat: {
-    title: 'Neon AI Chat',
-    description: 'AI assistant trained on documentation, help articles, and other content',
-    pathname: LINKS.aiChat,
-  },
-  awsIsrael: {
-    title: 'AWS Launches in Israel — Neon',
-    description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',
-    imagePath: '/images/social-previews/aws-israel.jpg',
-    pathname: LINKS.awsIsrael,
+  aboutUs: {
+    title: 'About Us — Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
+    pathname: LINKS.aboutUs,
   },
   blog: {
     title: 'Our Blog — Neon',
     description:
-      'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
+      'Learn about Neon and how it can help you build better backends for apps and agents by reading our blog posts.',
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
@@ -39,19 +40,10 @@ export default {
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
   },
-  branching: {
-    title: 'Instant branching for Postgres — Neon',
-    description:
-      'Neon allows you to instantly branch your data the same way that you branch your code.',
-    imagePath: '/images/social-previews/branching.jpg',
-    pathname: LINKS.branching,
-  },
-  careers: {
-    title: 'Careers — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    imagePath: '/images/social-previews/careers.jpg',
-    pathname: LINKS.careers,
+  faqs: {
+    title: 'FAQs — Neon',
+    description: 'Frequently asked questions about Neon.',
+    pathname: LINKS.faqs,
   },
   caseStudies: {
     title: 'Case Studies — Neon',
@@ -61,16 +53,9 @@ export default {
   },
   cli: {
     title: 'Your Neon workflow lives in the terminal',
-    description: 'The Neon CLI brings serverless Postgres to your terminal.',
+    description: 'The Neon CLI brings the Neon backend platform to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
-  },
-  faster: {
-    title: 'Faster is what we help you ship - Neon',
-    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
-    imagePath: '/images/social-previews/faster.jpg',
-    pathname: LINKS.faster,
-    type: 'article',
   },
   contactSales: {
     title: 'Contact Sales — Neon',
@@ -82,20 +67,6 @@ export default {
     description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
     pathname: LINKS.demos,
     imagePath: '/images/social-previews/demos.jpg',
-  },
-  deploy: {
-    title: 'Neon Deploy — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.deploy,
-    imagePath: '/images/social-previews/deploy.jpg',
-  },
-  developerDays1: {
-    title: 'Neon Developer Days — Neon',
-    description:
-      'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
-    imagePath: '/images/social-previews/developer-days-1.jpg',
-    pathname: LINKS.developerDays1,
   },
   enterprise: {
     title: 'Neon for Enterprise - Neon',
@@ -116,10 +87,16 @@ export default {
     pathname: LINKS.multiTB,
     imagePath: '/images/social-previews/multi-tb.jpg',
   },
-  serverlessApps: {
-    title: 'Postgres for serverless apps — Neon',
+  useCases: {
+    title: 'Use Cases — Neon',
     description:
-      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+      'Explore how teams use Neon to support branching databases, CI pipelines, preview environments, and production workloads.',
+    pathname: LINKS.useCases,
+  },
+  serverlessApps: {
+    title: 'Postgres and backend platform for serverless apps — Neon',
+    description:
+      'Scale your app effortlessly on Neon’s serverless backend: Postgres, Auth, Functions, Storage, and an AI Gateway, with automatic scaling and usage-based pricing.',
     pathname: `${LINKS.useCases}/serverless-apps`,
     imagePath: '/images/social-previews/serverless-apps.jpg',
   },
@@ -146,11 +123,6 @@ export default {
     pathname: LINKS.report,
     imagePath: '/images/social-previews/report.jpg',
   },
-  thankYou: {
-    title: 'Thank you for subscribing — Neon',
-    description: 'Thank you for subscribing to the Neon newsletter',
-    pathname: LINKS.thankYou,
-  },
   variable: {
     title: 'Dynamically scale your Postgres database — Neon',
     description:
@@ -165,11 +137,12 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
-  flow: {
+  branching: {
     title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
-    imagePath: '/images/social-previews/flow.jpg',
-    pathname: LINKS.flow,
+    description:
+      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
+    imagePath: '/images/social-previews/branching.jpg',
+    pathname: LINKS.branching,
     type: 'article',
   },
   platforms: {
@@ -177,18 +150,6 @@ export default {
     description: 'Offer Postgres to your users',
     pathname: LINKS.platforms,
     type: 'article',
-  },
-  scalableArchitecture: {
-    title: 'Neon Scalable Architecture — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    pathname: LINKS.scalableArchitecture,
-  },
-  stage: {
-    title: 'Neon Deploy Stage — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.stage,
   },
   security: {
     title: 'Security — Neon',
@@ -203,23 +164,11 @@ export default {
       'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
-    description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
-  ticket({ name, login: githubHandle }) {
-    const userName = name || githubHandle;
-
-    return {
-      title: `${userName}'s ticket for Neon Deploy - Neon`,
-      description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
-    };
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+  autoscalingReport: {
+    title: 'Compute Autoscaling Report',
+    description: 'A deep-dive into the numbers behind Neon Autoscaling.',
+    imagePath: '/images/social-previews/compute-autoscaling-report.jpg',
+    pathname: LINKS.autoscalingReport,
   },
   error: {
     title: 'Page Is Broken — Neon',

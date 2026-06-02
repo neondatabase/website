@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2024-11-05T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
@@ -181,7 +181,7 @@ docker-compose up -d
 ```
 
 <Admonition type="tip" title="Working offline?">
-The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
+The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entries to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
 
 However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
 
@@ -191,7 +191,7 @@ However, this solution requires an internet connection. To work offline, you'll 
 
 For instructions on editing your hosts file on different operating systems, see [this guide](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
 
-[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
+[dnsmasq](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
 </Admonition>
 
 ### Connect your app
@@ -200,7 +200,11 @@ For instructions on editing your hosts file on different operating systems, see 
 
 <TabItem>
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -218,7 +222,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    </CodeTabs>
 
-2. **Configure the connection**
+3. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -259,7 +263,11 @@ For instructions on editing your hosts file on different operating systems, see 
 </TabItem>
 <TabItem>
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -277,7 +285,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    </CodeTabs>
 
-2. **Configure the connection**
+3. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -320,7 +328,7 @@ For instructions on editing your hosts file on different operating systems, see 
    export const drizzleClientWs = drizzleWs({ client: pool });
    ```
 
-3. **Migration setup**
+4. **Migration setup**
 
    To ensure your Drizzle migrations run smoothly and without errors in your development environment, you can install the `postgres` package as a development dependency.
 
@@ -346,7 +354,11 @@ For instructions on editing your hosts file on different operating systems, see 
 
 Note that Driver Adapters are still in preview for Prisma. Please refer to the [Prisma documentation](https://www.prisma.io/docs/orm/overview/databases/neon) for the latest information.
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -364,7 +376,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
 
    </CodeTabs>
 
-2. **Enable the Preview Flag**
+3. **Enable the Preview Flag**
 
    To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
 
@@ -375,19 +387,19 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
      }
    ```
 
-3. **Configure the connection**
+4. **Configure the connection**
 
    ```typescript
-   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import { neonConfig } from '@neondatabase/serverless';
    import { PrismaNeon, PrismaNeonHTTP } from '@prisma/adapter-neon';
    import { PrismaClient } from '@prisma/client';
    import ws from 'ws';
 
-   let connectionString = process.env.DATABASE_URL;
+   let connectionString =
+     process.env.DATABASE_URL || 'postgres://postgres:postgres@db.localtest.me:5432/main';
 
    // Configuring Neon for local development
    if (process.env.NODE_ENV === 'development') {
-     connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/main';
      neonConfig.fetchEndpoint = (host) => {
        const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
        return `${protocol}://${host}:${port}/sql`;
@@ -398,15 +410,12 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
    }
    neonConfig.webSocketConstructor = ws;
 
-   const sql = neon(connectionString);
-   const pool = new Pool({ connectionString });
-
    // Prisma supports both HTTP and WebSocket clients. Choose the one that fits your needs:
 
    // HTTP Client:
    // - Ideal for stateless operations and quick queries
    // - Lower overhead for single queries
-   const adapterHttp = new PrismaNeonHTTP(sql);
+   const adapterHttp = new PrismaNeonHTTP(connectionString!, {});
    export const prismaClientHttp = new PrismaClient({ adapter: adapterHttp });
 
    // WebSocket Client:
@@ -414,7 +423,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
    // - Maintains a persistent connection
    // - More efficient for multiple sequential queries
    // - Better for high-frequency database operations
-   const adapterWs = new PrismaNeon(pool);
+   const adapterWs = new PrismaNeon({ connectionString });
    export const prismaClientWs = new PrismaClient({ adapter: adapterWs });
    ```
 
@@ -431,10 +440,10 @@ Cloud-hosted branches offer several compelling advantages:
 ### Cost-efficient development
 
 - **Minimal storage costs**: Branches are extremely cost-effective as you only pay for unique data changes
-- **Smart compute usage**: Development happens on small computes (0.25 vCPU) that scale to zero by default
+- **Smart compute usage**: Development happens on small computes (0.25 CU) that scale to zero by default
 - **Free Plan benefits**: Even the Free Plan includes 5 compute hours on dev branches
-  - This translates to 20 hours of development time on a 0.25 vCPU compute
-  - One compute hour at 1 vCPU equals four hours at 0.25 vCPU
+  - This translates to 20 hours of development time on a 0.25 CU compute
+  - One compute hour at 1 CU equals four hours at 0.25 CU
 
 ### Developer-friendly features
 

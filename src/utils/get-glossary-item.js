@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const slugify = require('slugify');
 
 /**
@@ -10,6 +8,13 @@ const slugify = require('slugify');
  * @returns {string} item.preview - The preview text of the glossary item.
  */
 const getGlossaryItem = (href) => {
+  // Return null on client-side (fs is not available in the browser)
+  if (typeof window !== 'undefined') {
+    return null;
+  }
+
+  // Only require fs when running on server
+  const fs = require('fs');
   const glossaryFilePath = 'content/docs/reference/glossary.md';
 
   if (!fs.existsSync(glossaryFilePath)) {

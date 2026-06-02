@@ -4,7 +4,7 @@ subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless P
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2025-02-15T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 [GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
@@ -192,7 +192,7 @@ Let's examine the key components of these models:
 
 3. **Relationships**: The `Posts` field in the User model and the `User` field in the Post model establish a one-to-many relationship. The `foreignKey` tag specifies which field serves as the foreign key.
 
-By default, GORM will pluralize struct names to create table names (e.g., "User" becomes "users"), but you can customize this using the `TableName` method or the `gorm:"tableName:custom_name"` tag. This is similar to how other ORMs like Sequelize and Elequent work.
+By default, GORM will pluralize struct names to create table names (e.g., "User" becomes "users"), but you can customize this using the `TableName` method or the `gorm:"tableName:custom_name"` tag. This is similar to how other ORMs like Sequelize and Eloquent work.
 
 GORM provides sensible defaults for table names (pluralized struct names) and column names (field names), but you can customize these using struct tags.
 
@@ -227,7 +227,7 @@ When you run this code, GORM will:
 
 The `AutoMigrate` function works by comparing your Go struct definitions to the actual database schema and making necessary changes to align them. It accepts a list of model struct pointers and returns an error if something goes wrong.
 
-Note that `AutoMigrate` only adds things that are missing—it won't delete columns or tables that exist in the database but not in your models. This is a safety feature to prevent accidental data loss.
+Note that `AutoMigrate` only adds things that are missing; it won't delete columns or tables that exist in the database but not in your models. This is a safety feature to prevent accidental data loss.
 
 This will create the necessary tables if they don't exist and update them to match your model definitions.
 

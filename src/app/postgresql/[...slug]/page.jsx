@@ -4,19 +4,19 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH } from 'constants/content';
-import { getSidebar } from 'utils/api-postgresql';
+import { POSTGRESQL_BASE_PATH } from 'constants/docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getNavigation, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
-import { getAllPostgresTutorials, getNavigationLinks, getPostBySlug } from 'utils/postgresql-pages';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
   slug.includes('shared-content/') ||
   slug.includes('README') ||
-  slug.includes('GUIDE_TEMPLATE') ||
-  slug.includes('RELEASE_NOTES_TEMPLATE');
+  slug.includes('GUIDE_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPostgresTutorials();
@@ -32,7 +32,8 @@ export async function generateStaticParams() {
   });
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
   const currentSlug = slug.join('/');
 
@@ -55,19 +56,20 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const PostgresTutorial = async ({ params }) => {
+const PostgresTutorial = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const currentSlug = slug.join('/');
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
 
   const navigationLinks = getNavigationLinks(currentSlug);
-  const githubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;
+  const gitHubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
   if (!post) return notFound();
@@ -95,10 +97,11 @@ const PostgresTutorial = async ({ params }) => {
         content={content}
         data={data}
         breadcrumbs={breadcrumbs}
+        breadcrumbsBaseUrl={POSTGRESQL_BASE_PATH}
         navigationLinks={navigationLinks}
-        navigationLinksPrefix="/postgresql/"
+        navigationLinksBasePath="/postgresql/"
         currentSlug={currentSlug}
-        githubPath={githubPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isPostgres
       />

@@ -1,8 +1,12 @@
 ---
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
+summary: >-
+  Covers the setup and functionality of the `intarray` extension in Postgres,
+  enabling efficient manipulation and querying of integer arrays, including
+  operations like sorting and counting elements.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.303Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `intarray` extension for Postgres provides functions and operators for handling arrays of integers. It's particularly optimized for arrays that do not contain any `NULL` values, offering significant performance advantages for certain operations compared to Postgres's built-in array functions.
@@ -13,7 +17,7 @@ This extension is useful when you need to perform set-like operations (unions, i
 
 ## Enable the `intarray` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS intarray;
@@ -79,19 +83,19 @@ The `intarray` extension provides several useful functions for array manipulatio
 
 `intarray` offers set of operators for comparing and manipulating integer arrays:
 
-| Operator      | Description                                                                                                                                                                | Example                                 | Result      |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ----------- |
-| `&&`          | Overlap: Do arrays have at least one element in common?                                                                                                                    | `'{1,2,3}'::int[] && '{3,4,5}'::int[]`  | `true`      |
-| `@>`          | Contains: Does the left array contain all elements of the right array?                                                                                                     | `'{1,2,3,4}'::int[] @> '{2,3}'::int[]`  | `true`      |
-| `<@`          | Is contained by: Is the left array contained within the right array?                                                                                                       | `'{2,3}'::int[] <@ '{1,2,3,4}'::int[]`  | `true`      |
-| `+ integer`   | Add element: Adds an integer to the end of the array.                                                                                                                      | `'{1,2}'::int[] + 3`                    | `{1,2,3}`   |
-| `+ integer[]` | Concatenate arrays.                                                                                                                                                        | `'{1,2}'::int[] + '{3,4}'::int[]`       | `{1,2,3,4}` |
-| `- integer`   | Remove element: Removes all occurrences of the integer from the array.                                                                                                     | `'{1,2,3,2}'::int[] - 2`                | `{1,3}`     |
-| `- integer[]` | Remove elements: Removes elements of the right array from the left array.                                                                                                  | `'{1,2,3,4}'::int[] - '{2,4,5}'::int[]` | `{1,3}`     |
-| `\|`          | Union: Computes the union of the two arrays (duplicate elements included unless arrays are pre-sorted and uniqued). For set union, consider `uniq(sort(array1 + array2))`. | `'{1,2}'::int[] \| '{2,3}'::int[]`      | `{1,2,2,3}` |
-| `&`           | Intersection: Computes the intersection of the two arrays (order and duplicates depend on input).                                                                          | `'{1,2,3}'::int[] & '{2,3,4}'::int[]`   | `{2,3}`     |
-| `#` (prefix)  | Number of elements: (Same as `icount` function).                                                                                                                           | `#'{1,2,3,4}'::int[]`                   | `4`         |
-| `#` (infix)   | Index of element in 1-based indexing (Same as `idx` function).                                                                                                             | `'{10,20,30}'::int[] # 20`              | `2`         |
+| Operator      | Description                                                                                                                                                                      | Example                                 | Result      |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ----------- |
+| `&&`          | Overlap: Do arrays have at least one element in common?                                                                                                                          | `'{1,2,3}'::int[] && '{3,4,5}'::int[]`  | `true`      |
+| `@>`          | Contains: Does the left array contain all elements of the right array?                                                                                                           | `'{1,2,3,4}'::int[] @> '{2,3}'::int[]`  | `true`      |
+| `<@`          | Is contained by: Is the left array contained within the right array?                                                                                                             | `'{2,3}'::int[] <@ '{1,2,3,4}'::int[]`  | `true`      |
+| `+ integer`   | Add element: Adds an integer to the end of the array.                                                                                                                            | `'{1,2}'::int[] + 3`                    | `{1,2,3}`   |
+| `+ integer[]` | Concatenate arrays.                                                                                                                                                              | `'{1,2}'::int[] + '{3,4}'::int[]`       | `{1,2,3,4}` |
+| `- integer`   | Remove element: Removes all occurrences of the integer from the array.                                                                                                           | `'{1,2,3,2}'::int[] - 2`                | `{1,3}`     |
+| `- integer[]` | Remove elements: Removes elements of the right array from the left array.                                                                                                        | `'{1,2,3,4}'::int[] - '{2,4,5}'::int[]` | `{1,3}`     |
+| `\|`          | Union: Computes the union of the two arrays (duplicate elements included unless arrays are pre-sorted and de-duplicated). For set union, consider `uniq(sort(array1 + array2))`. | `'{1,2}'::int[] \| '{2,3}'::int[]`      | `{1,2,2,3}` |
+| `&`           | Intersection: Computes the intersection of the two arrays (order and duplicates depend on input).                                                                                | `'{1,2,3}'::int[] & '{2,3,4}'::int[]`   | `{2,3}`     |
+| `#` (prefix)  | Number of elements: (Same as `icount` function).                                                                                                                                 | `#'{1,2,3,4}'::int[]`                   | `4`         |
+| `#` (infix)   | Index of element in 1-based indexing (Same as `idx` function).                                                                                                                   | `'{10,20,30}'::int[] # 20`              | `2`         |
 
 ### `query_int` operators
 
@@ -344,7 +348,7 @@ CREATE INDEX idx_articles_tag_ids_gin ON articles USING GIN (tag_ids gin__int_op
 
 ## Conclusion
 
-The intarray extension provides a powerful set of tools within Postgres for efficiently managing and querying integer arrays. Its rich functions and operators are designed to significantly improve performance, particularly during complex array operations.
+The `intarray` extension adds functions and operators for managing and querying integer arrays in Postgres, with significant performance improvements for complex array operations.
 
 ## Resources
 

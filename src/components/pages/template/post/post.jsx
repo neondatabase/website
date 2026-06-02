@@ -1,59 +1,28 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import Aside from 'components/pages/doc/aside';
-import Breadcrumbs from 'components/pages/doc/breadcrumbs';
-import Modal from 'components/pages/doc/modal';
-import MODALS from 'components/pages/doc/modal/data';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
+import { cn } from 'utils/cn';
 
 const contentClassName =
-  'col-span-6 col-start-4 -mx-10 2xl:col-span-7 2xl:col-start-3 2xl:mx-0 xl:col-span-10 xl:col-start-2 lg:ml-0 lg:pt-0 md:mx-auto';
+  'col-span-6 col-start-4 w-full max-w-[704px] 2xl:col-span-7 2xl:col-start-3 2xl:max-w-[704px] xl:col-span-12 xl:col-start-1 xl:mx-auto xl:max-w-[704px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto';
 
-const Post = ({
-  data: { title, subtitle, updatedOn = null },
-  content,
-  breadcrumbs,
-  currentSlug,
-  githubPath,
-  tableOfContents,
-}) => {
-  const modal = MODALS.find((modal) =>
-    breadcrumbs.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title))
-  );
-
-  return (
-    <>
-      <div className={contentClassName}>
-        {breadcrumbs.length > 0 && (
-          <Breadcrumbs breadcrumbs={breadcrumbs} currentSlug={currentSlug} />
-        )}
-        <h1 className="text-balance text-5xl font-semibold leading-tight tracking-extra-tight md:text-[36px] sm:text-3xl">
-          {title}
-        </h1>
-        {subtitle && (
-          <p className="mt-4 text-2xl leading-snug text-[#A1A1AA] lg:text-xl md:text-lg">
-            {subtitle}
-          </p>
-        )}
-      </div>
-      <div className={clsx(contentClassName, 'mt-20 lg:mt-16 md:mt-10 md:pb-[70px] sm:pb-8')}>
-        <Content content={content} isTemplate />
-        <DocFooter updatedOn={updatedOn} slug={currentSlug} />
-      </div>
-
-      <Aside
-        className="mt-20"
-        tableOfContents={tableOfContents}
-        githubPath={githubPath}
-        isTemplate
-        enableTableOfContents
-      />
-      {modal && <Modal {...modal} />}
-    </>
-  );
-};
+const Post = ({ data: { title, subtitle, updatedOn = null }, content, currentSlug }) => (
+  <div className={cn(contentClassName, 'ml-7')}>
+    <h1 className="text-5xl leading-dense font-medium tracking-tighter text-wrap xl:text-[40px] lg:text-[36px] sm:text-[28px]">
+      {title}
+    </h1>
+    {subtitle && (
+      <p className="mt-[18px] text-xl leading-snug tracking-extra-tight text-gray-new-70 md:text-base sm:mt-4 sm:text-lg">
+        {subtitle}
+      </p>
+    )}
+    <div className="mt-[76px] md:pb-[70px] sm:mt-10 sm:pb-8">
+      <Content content={content} isTemplate />
+      <DocFooter updatedOn={updatedOn} slug={currentSlug} />
+    </div>
+  </div>
+);
 
 Post.propTypes = {
   data: PropTypes.shape({
@@ -62,10 +31,7 @@ Post.propTypes = {
     updatedOn: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
-  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currentSlug: PropTypes.string.isRequired,
-  githubPath: PropTypes.string.isRequired,
-  tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 export default Post;

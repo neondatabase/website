@@ -1,6 +1,6 @@
 import { motion, useAnimation } from 'framer-motion';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const wrapperVariants = {
   hidden: {

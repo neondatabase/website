@@ -1,13 +1,13 @@
 'use client';
 
-import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import infoIcon from 'icons/enterprise/info.svg';
 import lampIcon from 'icons/enterprise/lamp.svg';
+import { cn } from 'utils/cn';
 
 const variants = {
   open: {
@@ -39,8 +39,8 @@ const Tabs = ({ tabs }) => {
         {tabs.map(({ title }, index) => (
           <li key={index}>
             <button
-              className={clsx(
-                'w-full border-l-[3px] py-2.5 pl-3.5 text-left text-xl font-medium leading-snug tracking-tight text-gray-new-90 transition-all duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 lg:py-2 lg:text-lg',
+              className={cn(
+                'w-full border-l-[3px] py-2.5 pl-3.5 text-left text-xl leading-snug font-medium tracking-tight text-gray-new-90 transition-all duration-200 ease-in-out focus-visible:rounded-md focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 lg:py-2 lg:text-lg',
                 index === activeTab
                   ? 'cursor-default border-primary-1 text-white'
                   : 'border-transparent hover:text-white'
@@ -56,7 +56,7 @@ const Tabs = ({ tabs }) => {
       <div className="relative min-h-[280px] w-full grow overflow-hidden rounded-[14px] bg-[#0F1115] bg-[radial-gradient(37.46%_41.61%_at_100%_0%,#153737_0%,rgba(0,33,33,0)_100%),linear-gradient(180deg,rgba(1,119,119,0)_21.94%,rgba(1,119,119,0.1)_100%)] p-8 pb-3.5 lg:px-6 lg:py-5 sm:min-h-[320px]">
         <div className="flex items-center gap-x-2">
           <Image className="shrink-0" src={infoIcon} width={22} height={22} alt="" loading="lazy" />
-          <h3 className="text-xl font-semibold leading-none tracking-tighter text-white lg:text-lg">
+          <h3 className="text-xl leading-none font-semibold tracking-tighter text-white lg:text-lg">
             The problem
           </h3>
         </div>
@@ -88,7 +88,7 @@ const Tabs = ({ tabs }) => {
         />
         <div className="mt-6 flex items-center gap-x-2 lg:mt-5">
           <Image className="shrink-0" src={lampIcon} width={22} height={22} alt="" />
-          <h3 className="text-xl font-semibold leading-none tracking-tighter text-white lg:text-lg">
+          <h3 className="text-xl leading-none font-semibold tracking-tighter text-white lg:text-lg">
             How Neon helps
           </h3>
         </div>

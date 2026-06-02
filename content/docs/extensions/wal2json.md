@@ -1,8 +1,13 @@
 ---
 title: The wal2json plugin
 subtitle: Convert Postgres Write-Ahead Log (WAL) changes to JSON format
+summary: >-
+  Covers the setup and configuration of the `wal2json` plugin for Postgres in
+  Neon, enabling the conversion of Write-Ahead Log changes into JSON format for
+  easier processing in applications like data replication and real-time
+  analytics.
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.052Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `wal2json` plugin is a logical replication decoding output plugin for Postgres. It lets you convert the Write-Ahead Log (WAL) changes into JSON format, making it easier to consume and process database changes in various applications, such as data replication, auditing, event-driven services, and real-time analytics.
@@ -21,7 +26,7 @@ The `wal2json` plugin is available in all Postgres versions supported by Neon. F
 
 ## Enable logical replication
 
-Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. Navigate to the **Settings** page in your Neon Project Dashaboard, and select **Beta** from the list of options. Click **Enable** to enable logical replication.
+Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. Navigate to the **Settings** page in your Neon Project Dashboard, and select **Beta** from the list of options. Click **Enable** to enable logical replication.
 
 <Admonition type="note">
 Once enabled for a project, logical replication cannot be reverted. This action triggers a restart of all active compute endpoints in your Neon project. Any active connections will be dropped and have to reconnect.
@@ -38,11 +43,11 @@ SHOW wal_level;
 (1 row)
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Create a replication slot
 
-To start using `wal2json`, you first need to create a replication slot that explcitly specifies `wal2json` as the decoder plugin. You can do this by running the following query:
+To start using `wal2json`, you first need to create a replication slot that explicitly specifies `wal2json` as the decoder plugin. You can do this by running the following query:
 
 ```sql
 SELECT 'start' FROM pg_create_logical_replication_slot('test_slot', 'wal2json');

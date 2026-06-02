@@ -2,9 +2,13 @@
 title: Replicate data from one Neon project to another
 subtitle: Replicate data to a different Neon project for cross-region replication,
   version migration, or region migration
+summary: >-
+  Covers the setup of logical replication to transfer data between different
+  Neon projects, facilitating cross-region replication, Postgres version
+  migration, and region migration scenarios.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-03T12:36:49.562Z'
+updatedOn: '2026-03-03T14:18:20.105Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -31,6 +35,10 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 - A destination Neon project.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
@@ -92,7 +100,7 @@ This section explains how to prepare your destination Neon Postgres database (th
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/migrate-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 
@@ -104,7 +112,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
    ```sql

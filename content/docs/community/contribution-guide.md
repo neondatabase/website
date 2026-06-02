@@ -1,11 +1,15 @@
 ---
-title: Documentation Contribution Guide
+title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
+summary: >-
+  Covers the guidelines for contributing to the Neon documentation, including
+  how to edit files on GitHub, submit pull requests, and use templates for
+  creating new guides.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.550Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
-This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
+This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
 
 <Admonition type="note" title="TL;DR: Contributing to the Neon Docs">
 - You can edit files on GitHub via the **Edit this page** link on our documentation pages or by forking the [neondatabase/website](https://github.com/neondatabase/website) repository and submitting a pull request.
@@ -15,9 +19,9 @@ This page provides guidelines for contributing to the Neon documentation. Our go
 
 ## Why should you contribute?
 
-Open-source projects are always evolving. Contributing to documentation is a great way for beginners to get started in open source and for experienced developers to explain complex topics while sharing their knowledge with the community.
+Open-source projects are always evolving. Contributing to documentation is a good starting point for open source beginners, and a way for experienced developers to share knowledge with the community.
 
-By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or you've noticed that a certain topic is missing, your contribution is always welcome and appreciated.
+By contributing to the Neon docs, you're helping us create a stronger learning resource for all developers. Whether you've found a typo, a section that's hard to understand, or a topic that's missing, we'd love to have your contribution.
 
 ## How to contribute
 
@@ -39,6 +43,8 @@ If you would rather fork the [neondatabase/website](https://github.com/neondatab
 Neon uses Markdown as the documentation source format. Markdown is a lightweight markup language that lets you add formatting elements to plaintext text documents. It's designed to be easy to read and easy to write.
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
+
+For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide). To add visual diagrams to your documentation, check out our [Mermaid Diagrams Guide](/docs/community/mermaid-diagrams).
 
 ## Preview changes in VSCode
 
@@ -63,7 +69,7 @@ The Neon documentation file structure reflects the navigation you see on the web
     ├── community
     ├── connect
     ├── extensions
-    ├── get-started-with-neon
+    ├── get-started
     ├── guides
     ├── introduction
     ├── manage
@@ -77,48 +83,9 @@ The Neon documentation file structure reflects the navigation you see on the web
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `sidebar.yaml`, which you can find at the root of the `/docs` directory.
+This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in `navigation.yaml`, which you can find at the root of the `/docs` directory.
 
-### Add a new category
-
-To add a new category to the sidebar, add a new item to the top-level array with `title` and `items` key values, as shown below:
-
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
-```
-
-### Add a new page
-
-To add new page, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
-
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-    - title: Page 5
-      slug: page-5
-```
-
-- The `title` in the sidebar may differ from `title` in the Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file. This lets you write longer, more informative page titles while keeping the sidebar titles short, readable, and easy to scan. These titles should remain logically related. For example, in our docs we reduce the page title "Use Grafbase Edge Resolvers with Neon" to just "Grafbase" in the sidebar.
-- `slug` should always exactly match the page's slug (the last part of the URL after the final backslash "/", in our case the name of the Markdown file).
+Refer to the [## Navigation](https://github.com/neondatabase/website/blob/main/content/docs/README.md#navigation) in the docs README for more information on how to update the sidebar.
 
 ## Markdown frontmatter
 
@@ -137,13 +104,13 @@ The only required attribute is `title`, which becomes the page title that appear
 
 Frontmatter attributes include:
 
-| Attribute             | Description                                                                                                                                                                                                                  |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| subtitle              | A secondary title or description that appears on the page, under the main title.                                                                                                                                             |
-| enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether or not to generate a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections. |
-| isDraft               | Adding this attribute and setting it to `true` prevents the page from becoming a documentation page and being searchable. Include this option to avoid publishing the content before its ready.                              |
-| redirectFrom          | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.                                                                                 |
-| updatedOn             | This attribute is added automatically. You do not need to add it.                                                                                                                                                            |
+| Attribute             | Description                                                                                                                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| subtitle              | A secondary title or description that appears on the page, under the main title.                                                                                                                                      |
+| enableTableOfContents | A boolean flag (i.e., true or false) that tells the static site generator whether to generate a right-hand table of contents for the page. We recommend adding this option if your page has more than a few sections. |
+| isDraft               | Adding this attribute and setting it to `true` prevents the page from becoming a documentation page and being searchable. Include this option to avoid publishing the content before it's ready.                      |
+| redirectFrom          | A list of directory paths that should redirect to this file. This is useful if the page has moved and you want old URLs to continue working.                                                                          |
+| updatedOn             | This attribute is added automatically. You do not need to add it.                                                                                                                                                     |
 
 Example:
 
@@ -175,7 +142,7 @@ To add a subsection heading, equivalent to an `h3`, add another `#` character:
 ```
 
 - Try to avoid heading levels beyond h4 (`####`).
-- Do not skip a level, e.g., do not go from `##` to `####`.
+- Do not skip a level, for example, do not go from `##` to `####`.
 - Ensure there's a blank line before and after each heading.
 
 ## Common markup
@@ -197,7 +164,7 @@ To comment out content in a markdown file use this construction:
 [comment]: <> (Single line comment.)
 
 [comment]: <> (
-Multiline comment. 
+Multiline comment.
 You can't use line breaks or () parentheses here.
 )
 ```
@@ -271,6 +238,8 @@ The Neon documentation supports the following admonitions:
 
 To use an admonition, enclose your text with `<Admonition></Admonition>` and specify the admonition type: `note`, `important`, `tip`, `warning`, and `info`. The default is `note`.
 
+For a complete list of available components and their usage, see the [Component Guide](/docs/community/component-guide).
+
 ```md
 <Admonition type="note">
 This is an important note
@@ -296,6 +265,8 @@ This is a very important note.
 Neon uses Figma to create diagrams.
 
 If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. You can use a tool like [tldraw](https://www.tldraw.com/) to create a draft.
+
+For technical details about how components are implemented, see the [Component Architecture](/docs/community/component-architecture) guide.
 
 If possible, please take screen captures on a high resolution monitor (UHD/4K). Screen captures should be unaltered (no borders or special effects).
 
@@ -323,7 +294,7 @@ To add an image to your Markdown file, add an entry that looks like this:
 
 ## Style Guide
 
-This section outlines the stylistic elements that we do our best to follow in the Neon documentation.
+This section covers the style conventions we follow.
 
 ### Voice and language
 
@@ -332,49 +303,41 @@ The voice in the documentation should sound like one human being explaining some
 #### Guidelines
 
 1. **Use contractions**:
-
    - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
      - _Example_: "It's essential to save your progress."
    - **Don't**: Overuse contractions, which can compromise clarity.
 
 2. **Simplicity over jargon**:
-
    - **Do**: Choose simpler words when possible.
      - _Example_: "Use the tool," not "Utilize the instrument."
    - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
 
 3. **Active voice**:
-
    - **Do**: Prefer active voice.
      - _Example_: "The software converts the file."
    - **Don't**: Over-rely on passive voice.
      - _Example_: "The file is converted by the software."
 
 4. **Brief sentences**:
-
    - **Do**: Keep sentences concise.
      - _Example_: "Check the settings."
 
 5. **Personalize when relevant**:
-
    - **Do**: Use "you" to address the reader.
      - _Example_: "You can adjust the setting."
    - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
 
 6. **Consistent terminology**:
-
    - **Do**: Stick to one term for one concept.
      - _Example_: Always use "dashboard". Don't mix that term with "control panel".
    - **Don't**: Confuse with synonyms.
      - _Example_: Switching between "log-in", "sign-in", and "access point".
 
 7. **Examples for clarity**:
-
    - **Do**: Provide clear examples.
      - _Example_: "For instance, to upload a file, click on the 'Upload' button."
 
 8. **Use US English**:
-
    - **Do**: Adhere to US English spelling and grammar rules.
 
 9. **Avoid emojis and exclamations**:
@@ -404,7 +367,6 @@ Generally, feature names should be lowercase.
 
 Capitalize names of:
 
-- Neon plans. For example, "Neon Free Plan".
 - Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
 - Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
 
@@ -442,5 +404,25 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 - `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
 - "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
+
+## Working with doc AI
+
+The Neon website repo includes rules and commands (in Cursor and Claude) to keep documentation consistent. You don't need to memorize them.
+
+- **Open the doc** you're editing so the right rules apply, then describe what you want in plain language.
+- **Optional:** You can ask for specific help (for example "check consistency on this page," "use our style examples," or "walk me through the redirect steps.").
+- **Curious what's available?** Ask: "What doc AI tools are available?" to see the list.
+- All changes go through a pull request and human review.
+
+For the full list of tools, see [AI tools for documentation](/docs/community/ai-tools).
+
+## Additional Resources
+
+These resources are also worth bookmarking:
+
+- **[Component Guide](/docs/community/component-guide)**: Complete reference for common MDX components
+- **[Component Specialized Guide](/docs/community/component-specialized)**: Advanced and specialized components
+- **[Component Icon Guide](/docs/community/component-icon-guide)**: Icon systems and usage guidelines
+- **[Component Architecture](/docs/community/component-architecture)**: Technical implementation details
 
 <NeedHelp/>

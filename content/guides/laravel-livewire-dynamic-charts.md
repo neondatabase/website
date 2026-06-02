@@ -4,7 +4,7 @@ subtitle: Learn how to build dynamic charts with Laravel, Livewire, and Neon Pos
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2024-10-20T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Laravel is an amazing PHP framework for building web applications, while Livewire provides a simple way to build dynamic interfaces using PHP.
@@ -608,7 +608,7 @@ Schema::table('subscriptions', function (Blueprint $table) {
 
 These indexes will optimize queries related to filtering or grouping by `user_id`, `used_at`, `started_at`, and `ended_at`, which are common in analytics.
 
-To learn more about indexing in Neon Postgres, check out the [Neon documentation](/docs/postgres/indexes) on indexes.
+To learn more about indexing in Neon Postgres, check out the [Neon documentation](/docs/postgresql/index-types) on indexes.
 
 ### 2. Implement Caching for Expensive Queries
 

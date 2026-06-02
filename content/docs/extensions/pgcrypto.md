@@ -1,19 +1,23 @@
 ---
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
+summary: >-
+  Covers the setup and usage of the `pgcrypto` extension in Neon, detailing how
+  to enable it and use its cryptographic functions for encryption,
+  decryption, and hashing within Postgres.
 enableTableOfContents: true
-updatedOn: '2025-04-08T22:55:27.445Z'
+updatedOn: '2026-04-18T12:36:02.000Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
 
 <CTA />
 
-In this guide, you'll learn how to enable the `pgcrypto` extension on Neon, use its core cryptographic functions, explore practical applications for data security, and follow best practices for managing security considerations.
+This guide covers how to enable `pgcrypto` on Neon, use its core cryptographic functions, and follow best practices for data security.
 
 ## Enable the `pgcrypto` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -64,7 +68,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
 
 - **`gen_salt(type text [, iter_count integer ])`**:
 
-  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
+  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (for example, `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
 
   ```sql
   SELECT gen_salt('bf'); -- Generate a Blowfish salt
@@ -175,7 +179,7 @@ Let's walk through a practical example of using `pgcrypto` to securely store and
 
 3. Verify a password during login:
 
-   When a user attempts to log in, you'll receive the password they entered (e.g., `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
+   When a user attempts to log in, you'll receive the password they entered (for example, `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
 
    ```sql
    SELECT password_hash = crypt('mypassword', password_hash) AS password_match
@@ -191,7 +195,7 @@ Let's walk through a practical example of using `pgcrypto` to securely store and
 
 4. Incorrect password attempt:
 
-   If the user enters an incorrect password (e.g., `"wrongpassword"`), the verification will fail:
+   If the user enters an incorrect password (for example, `"wrongpassword"`), the verification will fail:
 
    ```sql
    SELECT password_hash = crypt('wrongpassword', password_hash) AS password_match
@@ -209,7 +213,7 @@ By following these steps, you can securely store and verify user passwords using
 
 ## Performance Implications
 
-While `pgcrypto` provides robust security features, it's important to consider the performance implications of cryptographic operations:
+While `pgcrypto` provides strong security features, consider the performance implications of cryptographic operations:
 
 - **Computational overhead**: Encryption, decryption, and hashing operations inherently require computational resources. The extent of the overhead depends on the chosen algorithms, data size, and frequency of operations.
 - **Password hashing**: Password hashing algorithms, like those used in `crypt()`, are intentionally designed to be slow to resist brute-force attacks. This can introduce a slight delay during user authentication processes.
@@ -219,11 +223,11 @@ While `pgcrypto` provides robust security features, it's important to consider t
 When using `pgcrypto`, it's crucial to adhere to security best practices:
 
 - **Key management**: Securely manage encryption keys. Store them outside the database if possible, and implement key rotation policies. Never store keys in plaintext within the database as that would defeat the purpose of encryption.
-- **Algorithm selection**: Choose appropriate cryptographic algorithms based on your security requirements. For password hashing, use strong algorithms like Blowfish with sufficient iteration counts. For data encryption, select robust and widely-vetted algorithms like AES.
+- **Algorithm selection**: Choose appropriate cryptographic algorithms based on your security requirements. For password hashing, use strong algorithms like Blowfish with sufficient iteration counts. For data encryption, select well-vetted algorithms like AES.
 
 ## Conclusion
 
-The `pgcrypto` extension is a powerful and versatile tool for enhancing data security in Postgres. By providing a rich set of cryptographic functions, it enables you to implement robust security measures directly within your database environment. From secure password storage to data encryption and hashing, `pgcrypto` offers a wide range of applications to protect your data.
+`pgcrypto` brings a broad set of cryptographic functions into Postgres, covering password hashing, data encryption, and general-purpose hashing, all available through standard SQL queries.
 
 ## Resources
 

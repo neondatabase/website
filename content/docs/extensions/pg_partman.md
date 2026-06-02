@@ -1,8 +1,12 @@
 ---
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
+summary: >-
+  Covers the setup and usage of the `pg_partman` extension for managing
+  partitioned tables in Postgres, including automated partition creation and
+  maintenance tailored for Neon projects.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.370Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
@@ -14,7 +18,7 @@ While Postgres natively supports partitioning a table, `pg_partman` helps set up
 
 <CTA />
 
-In this guide, we’ll learn how to set up and use the `pg_partman` extension with your Neon Postgres project. We'll cover why partitioning is helpful, how to enable `pg_partman`, creating partitioned tables, and automating partition maintenance.
+This guide covers how to set up `pg_partman` with Neon: why partitioning helps, how to enable the extension, how to create partitioned tables, and how to automate partition maintenance.
 
 <Admonition type="note">
 `pg_partman` is an open-source Postgres extension that can be installed in any Neon project using the instructions below. Detailed installation instructions and compatibility information can be found in the [pg_partman](https://github.com/pgpartman/pg_partman) documentation.
@@ -22,7 +26,7 @@ In this guide, we’ll learn how to set up and use the `pg_partman` extension wi
 
 ## Enable the `pg_partman` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon. Creatig a `partman` schema is optional (but recommended) and you can name the schema whatever you like, but it cannot be changed after installation.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the Neon **SQL Editor** or from a client such as `psql` that is connected to Neon. Creating a `partman` schema is optional (but recommended) and you can name the schema whatever you like, but it cannot be changed after installation.
 
 ```sql
 CREATE SCHEMA partman;
@@ -53,7 +57,7 @@ GRANT CREATE ON DATABASE '{WORKING_DATABASE_NAME}' TO partman_user;
 
 When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman).
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 **Version Compatibility:**
 
@@ -93,7 +97,7 @@ CREATE TABLE measurement_y2006m02 PARTITION OF measurement
 ALTER TABLE measurement DETACH PARTITION measurement_y2005m10;
 ```
 
-`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It is particularly useful when partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance.
+`pg_partman` supports creating partitions that are number or time-based, with each partition covering a range of values. It's designed for cases where partitions need to be created automatically as new records come in. So, list partitioning isn't applicable since the partition key values are not known in advance.
 
 ## Example: Partitioning user-activity data
 

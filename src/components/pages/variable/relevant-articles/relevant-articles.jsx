@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 import evolutionOfPostgres from 'images/pages/variable-load/relevant-articles/evolution-of-postgres.jpg';
-import { getWpPostBySlug } from 'utils/api-wp';
+import { getBlogPostBySlug } from 'utils/api-blog';
 import getFormattedDate from 'utils/get-formatted-date';
 
 import Slider from './slider';
@@ -71,7 +71,7 @@ const externalArticlesData = [
 const fetchBlogArticles = async (articles) =>
   Promise.all(
     articles.map(async (article) => {
-      const { post } = await getWpPostBySlug(article.slug);
+      const { post } = await getBlogPostBySlug(article.slug.replace(/^\/blog\//, ''));
       if (post) {
         return {
           ...article,
@@ -105,7 +105,7 @@ const RelevantArticles = async () => {
 
   return (
     <section className="viewed-articles mt-[72px] xl:mt-16 lg:mt-14 md:mt-11">
-      <Container size="1220" className="md:px-5">
+      <Container size="1280">
         <Slider articles={allArticles} />
       </Container>
     </section>

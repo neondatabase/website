@@ -8,29 +8,29 @@ import Section from '../section';
 
 const items = [
   {
-    text: 'Neon compute costs are <a href="/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon/">up to 80% cheaper</a> vs Aurora&nbsp;Serverless&nbsp;v2.',
+    text: 'Neon compute costs are up to 80% cheaper vs other serverless databases.',
   },
   {
-    text: 'Neon provisions instances in < 1 s, compared to Aurora&apos;s up to&nbsp;20&nbsp;min.',
+    text: 'Neon provisions instances in < 1 s, compared to other serverless databases which can take up to&nbsp;20&nbsp;min.',
   },
   {
-    text: 'Neon uses transparent compute units, vs the ACU abstraction in&nbsp;Aurora&nbsp;Serverless.',
+    text: 'Neon uses transparent compute units, vs abstractions used in other serverless databases.',
   },
   {
     text: 'Neon supports database branching with data and schema via copy-on-write, improving development workflows.',
   },
   {
-    text: 'Neon&apos;s read replicas don&apos;t require storage redundancy, differently than Aurora&apos;s.',
+    text: 'Neon&apos;s read replicas don&apos;t require storage redundancy, differently than other serverless databases.',
   },
   {
-    text: 'Connection pooling is built-in in Neon, vs Aurora&apos;s RDS Proxy.',
+    text: 'Connection pooling is built-in in Neon, unlike some other serverless databases that require separate proxies.',
   },
 ];
 
 const Unique = ({ title }) => (
   <Section className="unique" title={title}>
     <div className="prose-variable">
-      <p>The Neon architecture is inspired in Amazon&nbsp;Aurora, but with some key differences:</p>
+      <p>The Neon architecture is unique in the following ways:</p>
       <List items={items} />
     </div>
     <Testimonial

@@ -36,9 +36,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Typescript v1 declaration files
-typings/
-
 # Optional npm cache directory
 .npm
 
@@ -47,6 +44,7 @@ typings/
 
 # Optional eslint cache
 .stylelintcache
+.prettiercache
 
 # Optional REPL history
 .node_repl_history
@@ -68,6 +66,12 @@ public/sitemap-postgres.xml
 public/sitemap-postgres-0.xml
 public/robots.txt
 
+# ignore generated markdown/llms files
+public/md
+public/docs/**/llms.txt
+public/docs/llms-full.txt
+src/utils/data/github-stars.generated.json
+
 # Mac files
 .DS_Store
 
@@ -80,9 +84,15 @@ yarn-error.log
 
 .idea/
 .vscode/
-content/docs/shared-content/NewPricing
-public/md
+.history/
 
-content/docs/guides/time_travel_tutorial_before-1.png
 yarn.lock
 package-lock.json
+.vercel
+.neon
+
+# Evals directory (test validation for documentation)
+.evals/
+
+# Blog content gets imported automatically
+content/blog

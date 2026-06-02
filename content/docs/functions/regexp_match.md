@@ -1,13 +1,17 @@
 ---
 title: Postgres regexp_match() function
 subtitle: Extract substrings matching a regular expression pattern
+summary: >-
+  Covers the usage of the Postgres `regexp_match()` function to extract
+  substrings from a string based on a specified regular expression pattern,
+  including examples for parsing log entries.
 enableTableOfContents: true
-updatedOn: '2024-06-30T16:27:35.359Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 The Postgres `regexp_match()` function is used to extract substrings that match a regular expression pattern from a given string. It returns an array of matching substrings, including capture groups if specified in the pattern.
 
-This function is particularly useful for complex string parsing tasks, such as extracting structured information from semi-structured text data. For example, it can be used to parse log files, extract specific components from URLs, or analyze text data for specific patterns.
+Use it for complex string parsing tasks, such as extracting structured information from semi-structured text data. For example, it can be used to parse log files, extract specific components from URLs, or analyze text data for specific patterns.
 
 <CTA />
 
@@ -104,7 +108,7 @@ FROM emails
 WHERE regexp_match(email, '^[^@]+@[^@]+\.(com|org|io)$') IS NOT NULL;
 ```
 
-This query selects all rows from the `emails` table where the email address ends with `.com`, ``.org`, or `.io`.
+This query selects all rows from the `emails` table where the email address ends with `.com`, `.org`, or `.io`.
 
 ```text
         email

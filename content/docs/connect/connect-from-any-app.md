@@ -1,8 +1,12 @@
 ---
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
+summary: >-
+  Covers the process of connecting to a Neon database from any application,
+  including how to obtain connection strings and use the Neon VS Code
+  extension for enhanced development.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.885Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <InfoBlock>
@@ -14,15 +18,22 @@ updatedOn: '2025-06-30T11:30:21.885Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/connect/choose-connection">Choosing a driver and connection type</a>
+<a href="/docs/local/vscode-extension">Neon VS Code Extension</a>
 <a href="/docs/connect/connect-securely">Connect to Neon securely</a>
 <a href="/docs/connect/connection-pooling">Connection pooling</a>
 <a href="/docs/connect/query-with-psql-editor">Connect with psql</a>
 </DocsList>
 </InfoBlock>
 
-## Database connection details
+You can connect to your Neon database from any application. The standard method is to copy your [connection string](#get-a-connection-string-from-the-neon-console) from the Neon console and use it in your app or client. For a streamlined development experience, you can also use the [Neon VS Code extension](#connect-with-the-neon-vs-code-extension) to manage connections, browse schemas, and run queries directly in your editor.
 
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.
+<Admonition type="important">
+You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
+</Admonition>
+
+## Get a connection string from the Neon console
+
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. This opens the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
@@ -72,11 +83,23 @@ psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.
 Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by configuring the `sslmode` option. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
+## Connect with the Neon VS Code extension
+
+The [Neon VS Code extension](/docs/local/vscode-extension) lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, this extension lets you:
+
+- Connect to any Neon project and branch with automatic detection of connection strings in your workspace
+- Copy connection strings directly to your `.env` file
+- Browse database schemas, run SQL queries, and edit table data
+- Create and manage branches directly from your editor
+- Enable AI-powered database features with automatic MCP Server configuration
+
+The extension provides a streamlined workflow for working with Neon during development without leaving your editor.
+
 ## Where can I find my password?
 
 It's included in your Neon connection string. Click the **Connection** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
-## Save your connection details to 1Password
+### Save your connection details to 1Password
 
 If have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
 
@@ -92,7 +115,7 @@ The **Connect to your database** modal provides connection examples for differen
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-See our [frameworks](/docs/get-started-with-neon/frameworks) and [languages](/docs/get-started-with-neon/languages) guides for more connection examples.
+See our [frameworks](/docs/get-started/frameworks) and [languages](/docs/get-started/languages) guides for more connection examples.
 
 ## Network protocol support
 

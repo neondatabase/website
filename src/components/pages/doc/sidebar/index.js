@@ -1,5 +1,3 @@
-import Sidebar, { getActiveItems } from './sidebar';
-
-export { getActiveItems };
+import Sidebar from './sidebar';
 
 export default Sidebar;

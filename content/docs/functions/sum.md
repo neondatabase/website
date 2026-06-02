@@ -1,13 +1,17 @@
 ---
 title: Postgres sum() function
 subtitle: Calculate the sum of a set of values
+summary: >-
+  Covers the usage of the Postgres `sum()` function to calculate totals of
+  numeric values, including examples for basic calculations and aggregating data
+  with `GROUP BY`.
 enableTableOfContents: true
-updatedOn: '2024-06-29T11:31:24.999Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `sum()` function calculates the total of a set of numeric values.
 
-It's used in data analysis and reporting to compute totals across rows in a table or grouped data. This function is particularly useful in financial applications for calculating total revenue or expenses, in inventory management for summing up quantities, or in analytics for aggregating metrics across various dimensions.
+It's used in data analysis and reporting to compute totals across rows in a table or grouped data. Use it in financial applications for revenue and expense totals, in inventory management for quantity sums, or in analytics for aggregating metrics.
 
 <CTA />
 
@@ -153,7 +157,7 @@ The `sum()` function ignores NULL values in its calculations. If all values are 
 
 ### Overflow handling
 
-When summing very large numbers, be aware of potential overflow issues. Consider using larger data types (e.g., `bigint` instead of `integer`) or the `numeric` type for precise calculations with large numbers.
+When summing very large numbers, be aware of potential overflow issues. Consider using larger data types (for example, `bigint` instead of `integer`) or the `numeric` type for precise calculations with large numbers.
 
 ### Alternative functions
 

@@ -1,8 +1,11 @@
 ---
-title: Neon CLI commands — me
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: me'
+subtitle: 'View current user info, login details, and project limits'
+summary: >-
+  Covers the usage of the `me` command in the Neon CLI to display information
+  about the current user, including login details and project limits.
 enableTableOfContents: true
-updatedOn: '2024-06-30T14:35:12.895Z'
+updatedOn: '2026-03-26T15:20:43.000Z'
 ---
 
 ## Before you begin
@@ -84,5 +87,7 @@ neon me -o json
   "plan": "free"
 }
 ```
+
+In JSON output, `max_autoscaling_limit` is a numeric value in compute units. A value of `0` means no autoscaling limit is configured.
 
 <NeedHelp/>

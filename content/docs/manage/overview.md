@@ -1,8 +1,12 @@
 ---
 title: Overview of the Neon object hierarchy
+summary: >-
+  Covers the structure of the Neon object hierarchy, detailing how
+  Organizations, Projects, Branches, Computes, Roles, and Databases are
+  organized and managed within a Neon environment.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-11T11:23:50.625Z'
+updatedOn: '2026-02-15T20:51:54.238Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
@@ -17,7 +21,7 @@ Your Neon account represents your user profile and is used for authentication, p
 
 ## Organizations
 
-Organizations are the top-level containers for projects and resources in Neon. They allow you to organize and manage a team's projects under a single Neon account — with billing, role management, and project transfer capabilities all in one accessible location in the Neon Console.
+Organizations are the top-level containers for projects and resources in Neon. They allow you to organize and manage a team's projects under a single Neon account, with billing, role management, and project transfer capabilities all in one accessible location in the Neon Console.
 
 ## Projects
 
@@ -25,11 +29,11 @@ A project is a container for all objects except for API keys, which are global a
 
 ## Default branch
 
-Data resides in a branch. Each Neon project is created with a default branch called `main`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a default branch (named `production` in the Console, `main` via API/CLI). This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
 ## R/W computes and Read Replicas
 
-A compute is a virtualized computing resource that includes vCPU and memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary R/W (read/write) compute is created for a project's default branch. Neon supports both R/W and [Read Replica](/docs/introduction/read-replicas) computes. A branch can have a single primary R/W compute but supports multiple Read Replica computes. To connect to a database that resides on a branch, you must connect via a R/W or Read Replica compute associated with the branch. Your Neon plan defines the resources (vCPU and RAM) available to your R/W and Read Replica computes. For more information, see [Manage computes](/docs/manage/computes). Compute size, autoscaling, and scale to zero are all settings that are configured for R/W and Read Replica computes.
+A compute is a virtualized computing resource that includes memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary R/W (read/write) compute is created for a project's default branch. Neon supports both R/W and [Read Replica](/docs/introduction/read-replicas) computes. A branch can have a single primary R/W compute but supports multiple Read Replica computes. To connect to a database that resides on a branch, you must connect via a R/W or Read Replica compute associated with the branch. Your Neon plan defines the compute resources available to your R/W and Read Replica computes. For more information, see [Manage computes](/docs/manage/computes). Compute size, autoscaling, and scale to zero are all settings that are configured for R/W and Read Replica computes.
 
 ## Roles
 

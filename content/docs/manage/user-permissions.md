@@ -1,7 +1,12 @@
 ---
 title: User Permissions
 subtitle: What each role can do in Neon organizations
+summary: >-
+  Covers the permissions and capabilities associated with different roles in
+  Neon organizations, detailing what Admins, Members, and Collaborators can do
+  at both the organization and project levels.
 enableTableOfContents: true
+updatedOn: '2026-04-17T13:06:52.000Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
@@ -10,9 +15,9 @@ For an overview of organizations, see the [Organizations](/docs/manage/organizat
 
 ## Role descriptions
 
-- **Admin** — Full control over the organization and all its projects. Can manage permissions, billing, members, and organization settings. Only Admins can delete organization projects.
-- **Member** — Access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
-- **Collaborator** — External users invited to specific projects. Collaborators have no organization-level access, but can work on projects they've been invited to.
+- **Admin**: Full control over the organization and all its projects. Can manage permissions, billing, members, and organization settings. Only Admins can delete organization projects.
+- **Member**: Access to all organization projects and can perform most project operations, but cannot modify organization settings or delete projects.
+- **Collaborator**: External users invited to specific projects. Collaborators have no organization-level access, but can work on projects they've been invited to.
 
 <Steps>
 
@@ -53,15 +58,32 @@ The following table shows what each role can do regarding integrations:
 | ---------------------------------------------------- | :---: | :----: | :----------: |
 | Install GitHub integration                           |  ✅   |   ❌   |      ❌      |
 | Install Neon Auth                                    |  ✅   |   ❌   |      ❌      |
-| Install the Neon Native Integration on Vercel\*      |  ✅   |   ❌   |      ❌      |
+| Install the Vercel-managed Neon integration\*        |  ✅   |   ❌   |      ❌      |
 | Connect project to GitHub integration                |  ✅   |   ✅   |      ❌      |
-| Connect project (Neon Postgres Previews Integration) |  ✅   |   ✅   |      ❌      |
+| Connect project to Neon-managed Vercel integration\* |  ✅   |   ✅   |      ❌      |
 
-\*Neon's native Integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon Postgres Previews Integration, projects must first be made available in Vercel before they can be connected to Neon.
+\*Neon's Vercel-managed integration is managed entirely in Vercel and uses Vercel's permission system. For the Neon-managed Vercel integration, projects must first be made available in Vercel before they can be connected to Neon.
+
+## Snapshot management
+
+The following table shows what each role can do with [snapshots](/docs/guides/snapshots):
+
+| Action                       | Admin | Member | Collaborator |
+| ---------------------------- | :---: | :----: | :----------: |
+| List snapshots               |  ✅   |   ✅   |      ✅      |
+| Create snapshots             |  ✅   |   ✅   |      ✅      |
+| Restore snapshots            |  ✅   |   ✅   |      ✅      |
+| Delete snapshots             |  ✅   |   ✅   |      ✅      |
+| Rename snapshots             |  ✅   |   ✅   |      ✅      |
+| View snapshot schedule       |  ✅   |   ✅   |      ✅      |
+| Set/update snapshot schedule |  ✅   |   ✅   |      ✅      |
 
 </Steps>
 
-## Notes and limitations
+## Notes and limitations (#notes-and-limitations)
 
-- **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
-- **Permissions and roles** — The current permissions system may not meet all needs for granular control. Share your feedback and requirements for more detailed permissions settings via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+- **Branch management**: All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
+- **Permissions and roles**: The current permissions system may not meet all needs for granular control. Share your feedback and requirements for more detailed permissions settings via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form or our [Discord feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042).
+- <a id="email-notifications" aria-hidden="true"></a>**Email notifications**: For **organization-owned** projects, Neon sends **approaching maximum storage** notification emails to **organization Admins** only, not to all Members. Admins are responsible for billing and plan limits at the organization level, which aligns with who can [manage organization billing](/docs/manage/user-permissions#organization-management).
+
+<NeedHelp/>

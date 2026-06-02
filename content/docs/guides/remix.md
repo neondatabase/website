@@ -1,9 +1,19 @@
 ---
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
+summary: >-
+  How to connect a Remix application to a Neon project by creating a Neon
+  project, setting up a Remix project, and configuring connection settings
+  securely.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.914Z'
+updatedOn: '2026-02-06T22:07:33.042Z'
 ---
+
+<Admonition type="note">
+Remix is now React Router v7. The features of the Remix framework have been merged into React Router v7. If you are starting a new project, we recommend using React Router. Follow our [React Router guide](/docs/guides/react-router) to connect to Neon.
+
+For more information, see the [Remix announcement](https://remix.run/blog/merging-remix-and-react-router).
+</Admonition>
 
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 
@@ -158,15 +168,5 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-remix" description="Get started with Remix and Neon" icon="github">Get started with Remix and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

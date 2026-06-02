@@ -1,0 +1,14 @@
+- slug: 'startups'
+  name: 'Startups'
+
+- slug: 'fast-moving-teams'
+  name: 'Fast-moving teams'
+
+- slug: 'ai'
+  name: 'AI & Agents'
+
+- slug: 'platforms'
+  name: 'Platforms'
+
+- slug: 'backend'
+  name: 'Backend'

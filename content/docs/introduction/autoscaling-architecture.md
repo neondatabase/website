@@ -1,8 +1,12 @@
 ---
 title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
+summary: >-
+  Covers the structure of Neon's autoscaling architecture, detailing the roles
+  of the autoscaler-agent and Kubernetes scheduler in dynamically allocating
+  compute resources for Postgres instances.
 enableTableOfContents: true
-updatedOn: '2024-08-19T14:50:59.585Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 <InfoBlock>
@@ -22,7 +26,7 @@ A Neon project can have one or more computes, each representing an individual Po
 
 ![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.jpg)
 
-Looking more closely, you can see that each Postgres instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating [vCPU](/docs/reference/glossary#vcpu) and [RAM](/docs/reference/glossary#ram) to each VM.
+Looking more closely, you can see that each Postgres instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating compute resources ([RAM](/docs/reference/glossary#ram)) to each VM.
 
 ![Autoscaling diagram](/docs/introduction/autoscale-architecture.jpg)
 
@@ -36,7 +40,7 @@ A Neon-modified [Kubernetes scheduler](/docs/reference/glossary#kubernetes-sched
 
 ## NeonVM
 
-Kubernetes does not natively support the creation or management of VMs. To address this, Neon uses a tool called [NeonVM](/docs/reference/glossary#neonvm). This tool is a custom resource definition and controller for VMs, handling tasks such as adding or removing CPUs and memory. Internally, NeonVM utilizes [QEMU](/docs/reference/glossary#qemu) and [KVM](/docs/reference/glossary#kvm) (where available) to achieve near-native performance.
+Kubernetes does not natively support the creation or management of VMs. To address this, Neon uses a tool called [NeonVM](/docs/reference/glossary#neonvm). This tool is a custom resource definition and controller for VMs, handling tasks such as adding or removing CPUs and memory. Internally, NeonVM uses [QEMU](/docs/reference/glossary#qemu) and [KVM](/docs/reference/glossary#kvm) (where available) to achieve near-native performance.
 
 When an autoscaler-agent needs to modify a VM's resource allocation, it simply updates the corresponding NeonVM object in Kubernetes, and the VM controller then manages the rest of the process.
 

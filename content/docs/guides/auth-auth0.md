@@ -2,9 +2,17 @@
 title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
+summary: >-
+  Step-by-step guide for integrating Auth0 authentication into a Next.js
+  application using a Neon Postgres database, including setup, schema
+  definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.891Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
+
+<Admonition type="tip" title="Building on Neon?">
+Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
+</Admonition>
 
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
 
@@ -222,7 +230,7 @@ export default handleAuth({
 });
 ```
 
-This sets up the necesssary Auth0 authentication routes for the application at the `/api/auth/auth0/*` endpoints - `login`, `logout`, `callback` (to redirect to after a successful login), and `me` (to fetch the user profile).
+This sets up the necessary Auth0 authentication routes for the application at the `/api/auth/auth0/*` endpoints - `login`, `logout`, `callback` (to redirect to after a successful login), and `me` (to fetch the user profile).
 
 Next, we will wrap the application with the `UserProvider` component from `@auth0/nextjs-auth0`, so all pages have access to the current user context. Replace the contents of the `app/layout.tsx` file with the following:
 

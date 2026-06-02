@@ -10,39 +10,43 @@
   }
 
   .logos {
-    --gap: theme(spacing.24);
-
-    @screen 2xl {
-      --gap: theme(spacing.20);
-    }
-
-    @screen md {
-      --gap: theme(spacing.14);
-    }
-
-    &-sm {
-      --gap: theme(spacing.9);
-    }
-
+    --gap: 5rem;
     gap: var(--gap);
   }
 
-  .logos-content {
-    @apply flex will-change-transform;
+  .logos-animated {
+    @apply relative before:absolute before:top-0 before:bottom-0 before:left-0 before:z-10 before:w-[100px] before:bg-linear-to-r before:from-black-pure before:to-transparent after:absolute after:top-0 after:right-0 after:bottom-0 after:z-10 after:w-[100px] after:bg-linear-to-l after:from-black-pure after:to-transparent;
 
-    gap: var(--gap);
-    animation: infinityScroll 60s linear infinite;
+    .logos-content {
+      @apply will-change-transform;
+      gap: var(--gap);
+      animation: infinityScroll 60s linear infinite;
+    }
   }
 
   .logos-central-mask {
     mask-image: radial-gradient(350px at 50% -200px, black 25%, transparent 100%);
+  }
+}
 
-    @screen md {
-      mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
-    }
+@media (max-width: 1279px) {
+  .logos {
+    --gap: 4rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .logos {
+    --gap: 3.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .logos {
+    --gap: 2.5rem;
   }
 
-  .logos-sides-fade {
-    @apply relative before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-[100px] before:bg-gradient-to-r before:from-black-pure before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-[100px] after:bg-gradient-to-l after:from-black-pure after:to-transparent;
+  .logos-central-mask {
+    mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
   }
 }

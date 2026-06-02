@@ -1,8 +1,12 @@
 ---
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
+summary: >-
+  Covers the setup and usage of the `earthdistance` extension in Postgres for
+  calculating great-circle distances between geographic points, essential for
+  geospatial applications and location-based services.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.302Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `earthdistance` extension for Postgres provides functions to calculate great-circle distances between points on the Earth's surface. This is essential for applications requiring geospatial distance calculations, such as location-based services, mapping applications, logistics, and any system that needs to find nearby points or calculate travel distances.
@@ -17,7 +21,7 @@ You may consider using the [`postgis` extension](/docs/extensions/postgis) if ac
 
 ## Enable the `earthdistance` extension
 
-To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
+To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS cube;
@@ -216,7 +220,7 @@ For applications with many locations that require frequent radius searches or ne
 
 ## Conclusion
 
-The `earthdistance` extension is a powerful and convenient tool in Postgres for applications dealing with geographic locations. It simplifies the calculation of great-circle distances, enabling features like location-based searching and distance filtering directly within your database. By understanding its core functions, data representations, and how to leverage GiST indexing, you can build efficient and effective geospatial queries.
+The `earthdistance` extension is a powerful and convenient tool in Postgres for applications dealing with geographic locations. It simplifies the calculation of great-circle distances, enabling features like location-based searching and distance filtering directly within your database. By understanding its core functions, data representations, and GiST indexing, you can build efficient geospatial queries.
 
 ## Resources
 

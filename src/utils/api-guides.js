@@ -1,23 +1,10 @@
 import fs from 'fs';
 
-import { glob } from 'glob';
-import matter from 'gray-matter';
-
 const { GUIDES_DIR_PATH } = require('../constants/content');
 
-const getPostSlugs = async (pathname) => {
-  const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: [
-      '**/RELEASE_NOTES_TEMPLATE.md',
-      '**/README.md',
-      '**/unused/**',
-      '**/GUIDE_TEMPLATE.md',
-    ],
-  });
-  return files.map((file) => file.replace(pathname, '').replace('.md', ''));
-};
+const { getPostSlugs, getPostBySlug } = require('./api-content');
 
-export const getAuthors = () => {
+const getAuthors = () => {
   const authors = fs.readFileSync(`${process.cwd()}/${GUIDES_DIR_PATH}/authors/data.json`, 'utf8');
   return JSON.parse(authors);
 };
@@ -28,6 +15,7 @@ const getAuthor = (id) => {
     const authorData = authorsData[id];
     const authorPhoto = `/guides/authors/${id}.jpg`;
     const author = {
+      slug: id,
       ...authorData,
       photo: authorPhoto,
     };
@@ -37,20 +25,7 @@ const getAuthor = (id) => {
     }
 
     throw new Error(`Author with ID '${id}' not found.`);
-  } catch (e) {
-    return null;
-  }
-};
-
-const getPostBySlug = (slug, pathname) => {
-  try {
-    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
-    const { data, content } = matter(source);
-    const authorID = data.author;
-    const author = getAuthor(authorID);
-
-    return { data, content, author };
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 };
@@ -64,24 +39,33 @@ const getAllGuides = async () => {
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom },
-        content,
-        author,
+        data: {
+          title,
+          subtitle,
+          createdAt,
+          updatedOn,
+          isDraft,
+          redirectFrom,
+          author,
+          excludeFromBlog,
+        },
+        excerpt,
       } = data;
+      const authorData = getAuthor(author);
 
-      // eslint-disable-next-line consistent-return
       return {
         title,
         subtitle,
         slug: slugWithoutFirstSlash,
         category: 'guides',
-        author,
+        author: authorData,
         createdAt,
         updatedOn,
         date: createdAt,
-        content,
+        excerpt,
         isDraft,
         redirectFrom,
+        excludeFromBlog,
       };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
@@ -100,4 +84,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getPostSlugs, getPostBySlug, getNavigationLinks, getAllGuides, GUIDES_DIR_PATH };
+export { getAllGuides, getAuthor, getAuthors, getNavigationLinks };

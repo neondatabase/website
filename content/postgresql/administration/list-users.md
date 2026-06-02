@@ -1,0 +1,85 @@
+---
+title: PostgreSQL List Users
+page_title: 'PostgreSQL List Users: Shows PostgreSQL Users'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL list users command to show
+  all users in a database server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-list-users/
+ogImage: /postgresqltutorial/PostgreSQL-List-User-Example-1.png
+updatedOn: '2026-05-07T18:15:13.000Z'
+enableTableOfContents: true
+previousLink:
+  title: PostgreSQL DROP ROLE Statement
+  slug: postgresql-administration/postgresql-drop-role
+nextLink:
+  title: How to Change the Password of a PostgreSQL User
+  slug: postgresql-administration/postgresql-change-password
+---
+
+<Admonition type="info" id="CTA">
+Listing users with `\du` or by querying `pg_catalog.pg_user` works the same on any PostgreSQL deployment, so you can apply these techniques wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need to govern roles and data at scale. If you're a developer or startup who needs to ship fast and scale on demand, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+</Admonition>
+
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL list user command to show all users in a PostgreSQL database server.
+
+## Listing users using the psql tool
+
+First, [connect to the PostgreSQL database server](../postgresql-jdbc/connecting-to-postgresql-database) using the `postgres` user:
+
+```bash
+psql -U postgres
+```
+
+It will prompt you for a password:
+
+```
+Password:
+```
+
+Once you enter the password for the `postgres` user, you will see the following PostgreSQL command prompt:
+
+```
+postgres=#
+```
+
+Second, use the `\du` to list all user accounts (or roles) in the current PostgreSQL database server:
+
+```
+\du
+```
+
+![](/postgresqltutorial/PostgreSQL-List-User-Example-1.png)If you want to show more information, you can use the `\du+` command:
+
+```
+postgres=#\du+
+```
+
+The `\du+` command adds column called `description`.
+
+## Listing users using SQL statement
+
+The following statement returns all users in the current database server by [querying data](../postgresql-tutorial/postgresql-select) from the `pg_catalog.pg_user` catalog:
+
+```sql
+SELECT usename AS role_name,
+  CASE
+     WHEN usesuper AND usecreatedb THEN
+	   CAST('superuser, create database' AS pg_catalog.text)
+     WHEN usesuper THEN
+	    CAST('superuser' AS pg_catalog.text)
+     WHEN usecreatedb THEN
+	    CAST('create database' AS pg_catalog.text)
+     ELSE
+	    CAST('' AS pg_catalog.text)
+  END role_attributes
+FROM pg_catalog.pg_user
+ORDER BY role_name desc;
+```
+
+![](/postgresqltutorial/PostgreSQL-List-User-Using-SQL-example.png)
+
+## Summary
+
+- Use `\du` or `\du+` psql command to list all users in the current database server.
+- Use the `SELECT` statement to query the user information from the `pg_catalog.pg_user` catalog.

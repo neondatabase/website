@@ -1,4 +1,9 @@
 {
   "*.{js,jsx,html,css}": "prettier --write",
-  "*.{js,jsx}": "eslint --cache --fix"
+  "*.{js,jsx}": "eslint --cache --fix",
+  "content/{docs,guides,postgresql,branching,faqs}/**/*.{md,mdx}": [
+    "node src/scripts/update-frontmatter.js",
+    "prettier --write"
+  ],
+  "content/changelog/**/*.{md,mdx}": "prettier --write"
 }

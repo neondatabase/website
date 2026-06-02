@@ -2,9 +2,17 @@
 title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
+summary: >-
+  Step-by-step guide for integrating Clerk authentication in a Next.js
+  application using a Neon Postgres database, covering project setup, database
+  connection, schema definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.893Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
+
+<Admonition type="tip" title="Building on Neon?">
+Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
+</Admonition>
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
@@ -144,28 +152,21 @@ This schema defines a table `user_messages` to store a message for each user, wi
 We'll use the `drizzle-kit` CLI tool to generate migrations for the schema we defined. To configure how it connects to the database, add a `drizzle.config.ts` file at the project root.
 
 ```typescript
-/// drizzle.config.ts
-
-import type { Config } from 'drizzle-kit';
-import 'dotenv/config';
-
+// drizzle.config.ts
+import { defineConfig } from 'drizzle-kit';
 if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in environment');
-
-export default {
+export default defineConfig({
+  dialect: 'postgresql',
   schema: './app/db/schema.ts',
+  dbCredentials: { url: process.env.DATABASE_URL! },
   out: './drizzle',
-  driver: 'pg',
-  dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
-  },
-  strict: true,
-} satisfies Config;
+});
 ```
 
 Now, generate the migration files by running the following command:
 
 ```bash
-npx drizzle-kit generate:pg
+npx drizzle-kit generate
 ```
 
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:

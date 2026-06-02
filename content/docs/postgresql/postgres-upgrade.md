@@ -1,8 +1,12 @@
 ---
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
+summary: >-
+  How to upgrade your Neon project to a new major Postgres version, including
+  steps for creating a new project with the desired version and considerations
+  for compatibility and performance testing.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.791Z'
+updatedOn: '2026-04-01T20:14:28.000Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -13,7 +17,7 @@ Neon manages **minor** Postgres version upgrades for you, as per the [Neon Postg
 
 Each Neon project is tied to a specific Postgres major version, which you selected when creating your Neon project.
 
-You can check your Neon project's Postgres version in the **Settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+You can check your Neon project's Postgres version in the **Settings** widget on **Project Dashboard** or by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
@@ -56,6 +60,10 @@ Alternatively, you can apply these configurations after migrating your data.
   - [Migrate data from one Neon project to another by piping data from pg_dump to pg_restore](/docs/import/migrate-from-neon)
 
     If your database is small, you can use this method to pipe `pg_dump` output directly to `pg_restore` to save time. While this method is a bit simpler, we recommend it only for small databases, as it is susceptible to failures during lengthy data migrations.
+
+  <Admonition type="important">
+  Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+  </Admonition>
 
 - **Logical replication**
 

@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Laravel with Postgres on Neon, leveraging Larav
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-25T00:00:00.000Z'
-updatedOn: '2024-05-25T00:00:00.000Z'
+updatedOn: '2024-06-10T10:07:18.000Z'
 ---
 
 When combining the robust features of [Laravel](https://laravel.com/), a highly expressive PHP framework, with the efficiency and scalability of Postgres on Neon, developers gain a powerful toolset for web development.

@@ -1,0 +1,43 @@
+- icon: 'connections'
+  title: 'Faster development'
+  description: "Remove database friction and ship faster thanks to Neon's serverless provisioning and instant branching. "
+  link: '/use-cases/fast-dev-workflows'
+  linkedCaseStudy: 'mindvalley'
+  tags:
+    - slug: 'automation'
+      name: 'Automation'
+    - slug: 'branching'
+      name: 'Branching'
+
+- icon: 'window-code'
+  title: 'Variable load'
+  description: "Your traffic isn't flat, so your compute shouldn't be either. Optimize performance and cost by autoscaling compute in real time."
+  link: '/use-cases/variable-load'
+  linkedCaseStudy: 'nodecraft'
+  tags:
+    - slug: 'connection-pooling'
+      name: 'Connection pooling'
+    - slug: 'autoscaling'
+      name: 'Autoscaling'
+
+- icon: 'sparkle'
+  title: 'Agents'
+  description: 'Build full-stack AI agents that provision Postgres infrastructure autonomously, including prod/dev environments, versioning, and authentication. '
+  link: '/use-cases/ai-agents'
+  linkedCaseStudy: 'replit'
+  tags:
+    - slug: 'scale-to-zero'
+      name: 'Scale-to-zero'
+    - slug: 'instant-provisioning'
+      name: 'Instant provisioning'
+
+- icon: 'database'
+  title: 'Database per user'
+  description: 'Boost your end-user experience by deploying isolated Postgres databases for each one of your customers, fully managed by Neon.'
+  link: '/use-cases/database-per-user'
+  linkedCaseStudy: 'retool'
+  tags:
+    - slug: 'data-isolation'
+      name: 'Data isolation'
+    - slug: 'multi-tenancy'
+      name: 'Multi-tenancy'

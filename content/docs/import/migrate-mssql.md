@@ -2,8 +2,12 @@
 title: Migrate from Microsoft SQL Server to Neon Postgres
 subtitle: Learn how to migrate a Microsoft SQL Server database to Neon Postgres using
   pgloader
+summary: >-
+  Covers the migration of a Microsoft SQL Server database to Neon Postgres using
+  pgloader, detailing prerequisites, setup steps, and configuration requirements
+  for a successful data transfer.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.919Z'
+updatedOn: '2026-02-15T20:51:54.209Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -20,7 +24,7 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
   For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 - Review the [Pgloader MSSQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mssql.html) guide. It will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
@@ -97,7 +101,7 @@ Here's how you can set up `pgloader` for your database migration:
 
    See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html) for Debian (apt), RPM package, and Docker installation instructions.
 
-2. Create a `pgloader` configuration file (e.g., `mssql_to_neon.load`). Use your MSSQL database credentials to define the connection string for your database source. Use the Neon database connection string as the destination.
+2. Create a `pgloader` configuration file (for example, `mssql_to_neon.load`). Use your MSSQL database credentials to define the connection string for your database source. Use the Neon database connection string as the destination.
 
    Example configuration in `mssql_to_neon.load`:
 

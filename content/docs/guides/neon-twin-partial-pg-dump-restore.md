@@ -1,15 +1,23 @@
 ---
-title: Partial Twin
+title: pg_dump / pg_restore — Partial Twin
 subtitle: Create a partial Twin of your production database
+summary: >-
+  Covers the setup of a workflow to create a partial Neon Twin of a production
+  database using `pg_dump`, `pg_restore`, and `psql`, including necessary
+  directory structure and code configuration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-03T18:04:26.405Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.
 
 <Admonition type="note">
-To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started-with-neon/signing-up#sign-up) to learn how.
+To use this workflow, you'll need the Postgres connection string for your Neon database. Follow our [Getting Started Guide](/docs/get-started/signing-up#sign-up) to learn how.
+</Admonition>
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) for `PROD_DATABASE_URL` and `DEV_DATABASE_URL` when they point to Neon.
 </Admonition>
 
 ## Create the workflow
@@ -171,13 +179,13 @@ Before running the Action, ensure that both `PROD_DATABASE_URL` and `DEV_DATABAS
 
 In your repository, go to **Settings** > **Secrets and variables** > **Actions** to add them.
 
-![github repository secrects](/docs/guides/twin_diagram_github_secrets.png)
+![GitHub repository secrets](/docs/guides/twin_diagram_github_secrets.png)
 
 ## Testing the workflow
 
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
-![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
+![GitHub Actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
 
 ## Syncing with migration changes
 

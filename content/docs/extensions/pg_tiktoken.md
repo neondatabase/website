@@ -2,8 +2,12 @@
 title: The pg_tiktoken extension
 subtitle: Efficiently tokenize data in your Postgres database using OpenAI's `tiktoken`
   library
+summary: >-
+  Covers the installation and usage of the `pg_tiktoken` extension for efficient
+  tokenization of data in Postgres databases using OpenAI's `tiktoken` library,
+  including functions for encoding and counting tokens.
 enableTableOfContents: true
-updatedOn: '2025-04-30T02:26:54.981Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
@@ -16,13 +20,13 @@ This topic provides guidance on installing the extension, utilizing its features
 
 Language models process text in units called tokens. A token can be as short as a single character or as long as a complete word, such as "a" or "apple." In some languages, tokens may comprise less than a single character or even extend beyond a single word.
 
-For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: ["Ne", "on", "is", "server", "less", "Post", "gres"].
+For example, consider the sentence "Neon is serverless Postgres." It can be divided into seven tokens: `["Ne", "on", "is", "server", "less", "Post", "gres"]`.
 
 ## `pg_tiktoken` functions
 
 The `pg_tiktoken` offers two functions:
 
-- `tiktoken_encode`: Accepts text inputs and returns tokenized output, allowing you to seamlessly tokenize your text data.
+- `tiktoken_encode`: Accepts text inputs and returns tokenized output.
 - `tiktoken_count`: Counts the number of tokens in a given text. This feature helps you adhere to text length limits, such as those set by OpenAI's language models.
 
 ## Install the `pg_tiktoken` extension
@@ -33,7 +37,7 @@ You can install the `pg_tiktoken` extension by running the following `CREATE EXT
 CREATE EXTENSION pg_tiktoken
 ```
 
-For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon **SQL Editor**, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Use the `tiktoken_encode` function
 
@@ -119,7 +123,7 @@ VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello,
 
 ## Manage text tokens
 
-When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
+When a conversation contains more tokens than a model can process (for example, over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
 
 Additionally, lengthy conversations may result in incomplete replies. For example, if a `gpt-3.5-turbo` conversation spans 4090 tokens, the response will be limited to just six tokens.
 

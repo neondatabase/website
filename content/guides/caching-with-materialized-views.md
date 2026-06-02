@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use materialized views for cach
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-03-21T13:24:36.612Z'
-updatedOn: '2025-03-21T13:24:36.612Z'
+updatedOn: '2025-04-08T21:24:58.000Z'
 ---
 
 PostgreSQL provides powerful tools to optimize query performance, including caching layers that help reduce expensive computations.

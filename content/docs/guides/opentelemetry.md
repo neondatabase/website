@@ -1,9 +1,13 @@
 ---
-title: OpenTelemetry integration
+title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
+summary: >-
+  How to configure OpenTelemetry exports from Neon to send metrics and Postgres
+  logs to any OTEL-compatible observability platform, including setup with
+  Grafana OSS, Tempo, and integration with New Relic.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:31:37.002Z'
+updatedOn: '2026-02-15T20:51:54.183Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -11,18 +15,19 @@ updatedOn: '2025-06-23T15:31:37.002Z'
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to configure OpenTelemetry exports from Neon</p>
+<p>Setup with Grafana OSS and Tempo</p>
+<p>Integration with Grafana Cloud</p>
 <p>Example config using New Relic</p>
 </DocsList>
 
 <DocsList title="External docs" theme="docs">
 <a href="https://opentelemetry.io/docs/specs/otlp/">OpenTelemetry Protocol (OTLP) Specification</a>
+<a href="https://grafana.com/docs/opentelemetry/">Grafana Labs OpenTelemetry Documentation</a>
 <a href="https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/">New Relic OpenTelemetry guide</a>
 </DocsList>
 </InfoBlock>
 
-Available for Scale and Business Plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
-
-If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can see how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
+Available for Scale plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
 
 ## How it works
 
@@ -51,14 +56,43 @@ The Neon OpenTelemetry integration can forward Postgres logs to your destination
 
 Before getting started, ensure the following:
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
 - You have an OpenTelemetry-compatible observability platform account and know your OTLP endpoint URL and authentication credentials (API key, bearer token, or basic auth).
 
 <Steps>
 
 ## Set up your observability platform
 
-If you don't already have an OpenTelemetry-compatible observability platform, you'll need to sign up for one. For this example, we'll use New Relic:
+Choose your preferred observability platform and follow the setup instructions:
+
+### Grafana OSS with Docker OTEL LGTM
+
+For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
+
+**Quick setup with Docker:**
+
+1. **Clone and start the stack**:
+   ```bash
+   git clone https://github.com/grafana/docker-otel-lgtm.git
+   cd docker-otel-lgtm
+   docker compose up -d
+   ```
+
+This provides:
+
+- **Grafana** at http://localhost:3000 (admin/admin)
+- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
+
+For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).
+
+### Grafana Cloud
+
+For a fully managed solution, see the dedicated [Grafana Cloud integration guide](/docs/guides/grafana-cloud).
+
+### New Relic
+
+If you use New Relic, you'll need to sign up for an account and get your license key.
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
 2. Once signed in, you'll need your New Relic license key for authentication.
@@ -106,22 +140,66 @@ You can enable either or both options based on your monitoring needs.
 
 ## Configure the connection
 
-1. Select your connection protocol. For most platforms including New Relic, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
+1. **Select your connection protocol**: For most platforms, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
 
-2. Enter your **Endpoint** URL.
+2. **Enter your Endpoint URL** based on your platform:
 
-   For New Relic, enter:
+   **For Grafana OSS (docker-otel-lgtm)**:
+   - `http://localhost:4318` (if running locally)
+   - `http://your-server-ip:4318` (if running on a remote server)
+
+   **For Grafana Cloud**:
+   - Use your Grafana Cloud OTLP endpoint (typically `https://otlp-gateway-{region}.grafana.net/otlp`)
+   - See the [Grafana Cloud guide](/docs/guides/grafana-cloud) for details
+
+   **For New Relic**:
    - US: `https://otlp.nr-data.net`
    - Europe: `https://otlp.eu01.nr-data.net`
+   - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
-   See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
+   <Admonition type="note">
+   When you configure an OTLP endpoint URL in Neon, you should provide only the **base URL** of your collector or observability platform. The OpenTelemetry Collector automatically appends the correct signal-specific paths:
+   - `/v1/metrics` for metrics
+   - `/v1/logs` for logs
+   - `/v1/traces` for traces
+
+   For example, if you enter:
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp
+   ```
+
+   the Collector will send requests to:
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/metrics
+   ```
+
+   and
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/logs
+   ```
+
+   Make sure your observability platform is configured to receive data at these appended paths. If your platform expects data directly at the base URL without suffixes, you may need to adjust the configuration on that side.
+   </Admonition>
 
 3. Configure authentication:
+
+   **For Grafana OSS**:
+   - No authentication required for local docker setup
+
+   **For Grafana Cloud**:
+   - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
+   - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
+
+   **For New Relic**:
+   - Use **Bearer** or **API Key** with your New Relic license key
+
+   **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
-   - **API Key**: Enter your API key
-
-   For New Relic, you can use either **Bearer** or **API Key** authentication with your New Relic license key (both work the same way).
+   - **API Key**: Enter your API key. You can optionally set a **Custom header name** for the key; it defaults to `X-API-Key` if not specified. Some backends (for example, Honeycomb) expect a different header name, so use this option to match your platform's requirements.
 
 ## Configure resource attributes
 
@@ -135,29 +213,47 @@ Neon automatically organizes your data into separate service entities: your conf
 
 Click **Add** to save your configuration and start the data export.
 
+<Admonition type="tip">
+You can edit your integration settings at any time from the **Integrations** page in the Neon Console. This allows you to update your endpoint URL, change authentication credentials, or modify resource attributes without having to delete and recreate the integration.
+</Admonition>
+
 ## Verify your integration is working
 
 Your Neon data should start appearing in your observability platform within a few minutes.
 
-**For New Relic users**, use these queries to check if data is flowing:
+### For Grafana (OSS and Cloud) users
+
+1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
+
+2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+
+   ```promql
+   neon_connection_counts
+   ```
+
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](/docs/guides/grafana-cloud#create-a-monitoring-dashboard)
+
+### For New Relic users
+
+Use these queries to check if data is flowing:
 
 ```sql
 FROM Metric SELECT * SINCE 1 hour ago
 FROM Log SELECT * SINCE 1 hour ago
 ```
 
-**Success looks like this:**
+**Success looks similar to this:**
 
-Metrics flowing into New Relic
+_Metrics flowing into New Relic_
 ![Neon metrics appearing in New Relic](/docs/guides/new_relic_metrics_success.png)
 
-Postgres logs
+_Postgres logs flowing into New Relic_
 ![Neon PostgreSQL logs appearing in New Relic](/docs/guides/new_relic_logs_success.png)
 
 **Find your data under APM & Services**
 ![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
-- **Logs**: Check your configured service name in APM & Services (e.g., `neon-postgres-test`)
+- **Logs**: Check your configured service name in APM & Services (for example, `neon-postgres-test`)
 - **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services
 
 </Steps>
@@ -169,20 +265,40 @@ You can modify these settings later by editing your integration configuration fr
 <Admonition type="note">
 Neon computes only send logs and metrics when they are active. If the [Scale to Zero](/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. If you notice missing data, check if your compute is suspended. You can verify a compute's status as `Idle` or `Active` on the **Branches** page in the Neon console, and review **Suspend compute** events on the **System operations** tab of the **Monitoring** page.
 
-Additionally, if you are setting up the OpenTelemetry integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any connected client.
+Additionally, if you are setting up the OpenTelemetry integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected client.
 </Admonition>
 
 ## Troubleshooting
 
-If your data isn't appearing in your observability platform:
+- **Data isn't appearing in your observability platform**
+  1. **Verify your endpoint URL** - Ensure the OTLP endpoint URL is correct for your platform.
+  2. **Check authentication** - Verify that your API key, bearer token, or credentials are valid and have the necessary permissions.
+  3. **Confirm compute activity** - Make sure your Neon compute is active and running queries.
+  4. **Review platform-specific requirements** - Some platforms may have specific configuration requirements for OTLP data ingestion.
 
-1. **Verify your endpoint URL** - Ensure the OTLP endpoint URL is correct for your platform.
-2. **Check authentication** - Verify that your API key, bearer token, or credentials are valid and have the necessary permissions.
-3. **Confirm compute activity** - Make sure your Neon compute is active and running queries.
-4. **Review platform-specific requirements** - Some platforms may have specific configuration requirements for OTLP data ingestion.
+- **404 errors on OTLP endpoint**
+
+  If you see errors like the following in your logs:
+
+  ```bash shouldWrap
+  Exporting failed. Dropping data. {"error": "not retryable error: Permanent error: rpc error: code = Unimplemented desc = error exporting items, request to https://example.com/otlp/v1/metrics responded with HTTP Status Code 404"}
+  ```
+
+  This usually means your observability platform is not accepting data on the signal-specific paths automatically appended by the OpenTelemetry Collector.
+
+  The Collector appends these suffixes to the base URL you configure:
+  - `/v1/metrics` for metrics
+  - `/v1/logs` for logs
+  - `/v1/traces` for traces
+
+  **How to fix:**
+  - Double-check that your platform supports OTLP ingestion on these paths.
+  - If your platform expects data directly at the base URL without suffixes, you may need to change its configuration or use a compatible OTLP gateway.
 
 ## Available metrics
 
-For a complete list of metrics exported by Neon, see the [metrics reference in our Datadog integration guide](/docs/guides/datadog#available-metrics).
+Neon exports a comprehensive set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
+
+For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 <NeedHelp />

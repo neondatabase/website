@@ -15,7 +15,8 @@ import VercelIcon from 'images/pages/templates/vercel.inline.svg';
 import templates from 'utils/data/templates';
 import getMetadata from 'utils/get-metadata';
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const { slug } = params;
 
   const template = templates.find((template) => template.slug === slug);
@@ -37,12 +38,13 @@ export async function generateStaticParams() {
   }));
 }
 
-const TemplatePage = ({ params }) => {
+const TemplatePage = async (props) => {
+  const params = await props.params;
   const { slug } = params;
   const template = templates.find((template) => template.slug === slug);
   if (!template) return notFound();
 
-  const { name, description, framework, type, css, cms, publisher, githubUrl } = template;
+  const { name, description, framework, type, css, cms, publisher, gitHubUrl } = template;
   const items = [
     {
       label: 'Framework',
@@ -66,14 +68,14 @@ const TemplatePage = ({ params }) => {
     },
   ];
   return (
-    <Layout headerWithBorder isHeaderSticky hasThemesSupport>
+    <Layout headerWithBorder isHeaderSticky>
       <section>
         <Container
-          className="relative mb-[104px] mt-12 w-full xl:mb-24 xl:mt-10 lg:mb-20 lg:mt-8 sm:mb-[72px] sm:mt-6"
+          className="relative mt-12 mb-[104px] w-full xl:mt-10 xl:mb-24 lg:mt-8 lg:mb-20 sm:mt-6 sm:mb-[72px]"
           size="1344"
         >
           <Link
-            className="absolute left-8 top-0 flex items-baseline gap-x-1.5 font-medium leading-normal tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:text-green-45 dark:text-gray-new-60 dark:hover:text-green-45 lg:static lg:mx-auto lg:max-w-[512px]"
+            className="absolute top-0 left-8 flex items-baseline gap-x-1.5 leading-normal font-medium tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:text-green-45 dark:text-gray-new-60 dark:hover:text-green-45 lg:static lg:mx-auto lg:max-w-[512px]"
             to={LINKS.templates}
           >
             <BackIcon />
@@ -81,10 +83,10 @@ const TemplatePage = ({ params }) => {
           </Link>
 
           <div className="mx-auto max-w-[512px] lg:mt-5">
-            <h1 className="font-title text-[44px] font-medium leading-none tracking-extra-tight xl:text-4xl lg:text-[32px] sm:text-[28px]">
+            <h1 className="font-title text-[44px] leading-none font-medium tracking-extra-tight xl:text-4xl lg:text-[32px] sm:text-[28px]">
               {name}
             </h1>
-            <p className="mt-3 text-lg font-light leading-snug tracking-extra-tight text-gray-new-20 dark:text-gray-new-80 sm:mt-2 sm:text-base">
+            <p className="mt-3 text-lg leading-snug font-light tracking-extra-tight text-gray-new-20 dark:text-gray-new-80 sm:mt-2 sm:text-base">
               {description}
             </p>
             <ul className="mt-10 xl:mt-8 lg:mt-7 sm:mt-6">
@@ -95,7 +97,7 @@ const TemplatePage = ({ params }) => {
                       className="flex justify-between border-t border-gray-new-80/80 py-3.5 last:border-b dark:border-gray-new-15/80 sm:py-3"
                       key={item.label}
                     >
-                      <span className="font-medium leading-tight tracking-extra-tight text-gray-new-20 dark:text-gray-new-90">
+                      <span className="leading-tight font-medium tracking-extra-tight text-gray-new-20 dark:text-gray-new-90">
                         {item.label}
                       </span>
                       <span className="leading-tight tracking-extra-tight text-gray-new-30 dark:text-gray-new-70">
@@ -112,7 +114,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={template.githubUrl}
+                  to={template.gitHubUrl}
                 >
                   <GitHubIcon /> View Repo
                 </Link>
@@ -121,7 +123,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://app.netlify.com/start/deploy?repository=${githubUrl}#DATABASE_URL`}
+                  to={`https://app.netlify.com/start/deploy?repository=${gitHubUrl}#DATABASE_URL`}
                 >
                   <NetlifyIcon /> Deploy to Netlify
                 </Link>
@@ -132,7 +134,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://vercel.com/new/clone?repository-url=${githubUrl}&env=DATABASE_URL`}
+                  to={`https://vercel.com/new/clone?repository-url=${gitHubUrl}&env=DATABASE_URL`}
                 >
                   <VercelIcon /> Deploy to Vercel
                 </Link>
@@ -141,7 +143,7 @@ const TemplatePage = ({ params }) => {
                   theme="black"
                   target="_blank"
                   rel="noopener noreferrer"
-                  to={`https://render.com/deploy?repo=${githubUrl}#DATABASE_URL`}
+                  to={`https://render.com/deploy?repo=${gitHubUrl}#DATABASE_URL`}
                 >
                   <RenderIcon /> Deploy to Render
                 </Link>

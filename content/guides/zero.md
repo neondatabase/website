@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Zero with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-01T00:00:00.000Z'
-updatedOn: '2025-05-01T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide demonstrates how to integrate [Zero](https://zero.rocicorp.dev/) by [Rocicorp](https://rocicorp.dev/) with Neon Postgres. Zero allows you to build reactive, real-time applications by writing queries directly in your client code against your backend database schema. It synchronizes query results efficiently to a client-side cache, enabling instant UI updates and a local-first feel.
@@ -28,7 +28,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 Zero requires a Postgres database (version 15+) with logical replication enabled. You'll configure your Neon project accordingly.
 
-1.  **Create a Neon Project:** If you haven't already, create a new Neon project using [pg.new](https://pg.new).
+1.  **Create a Neon Project:** If you haven't already, create a new Neon project in the [Neon Console](https://console.neon.tech).
 2.  **Enable Logical Replication:** Zero uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project using the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
@@ -67,7 +67,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
 2.  **Apply database schema/seed data:**
     To run the example application, you need to set up the database schema and seed initial data by running the SQL migrations. The project includes the necessary SQL commands in the `docker/seed.sql` file.
 
-    You can execute this file using `psql` (ensure it's installed locally) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+    You can execute this file using `psql` (ensure it's installed locally) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
     Using `psql`, run the following command. Replace `YOUR_NEON_CONNECTION_STRING` with your database connection string copied from the Neon Console:
 

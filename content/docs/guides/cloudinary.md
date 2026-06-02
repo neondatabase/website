@@ -1,8 +1,12 @@
 ---
 title: Media storage with Cloudinary
 subtitle: Store files via Cloudinary and track metadata in Neon
+summary: >-
+  Covers the integration of Cloudinary with Neon for securely uploading files
+  from the client-side, generating backend signatures, and storing asset
+  metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.765Z'
+updatedOn: '2026-03-05T04:12:51.010Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -15,7 +19,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 ## Create a Neon project
 
-1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudinary account and get credentials
@@ -34,25 +38,25 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 We need a table in Neon to store metadata about the assets uploaded to Cloudinary.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS cloudinary_files (
         id SERIAL PRIMARY KEY,
         public_id TEXT NOT NULL UNIQUE,  -- Cloudinary's unique identifier for the asset
         media_url TEXT NOT NULL,         -- Media URL for the asset on Cloudinary's CDN
-        resource_type TEXT NOT NULL,     -- Type of asset (e.g., 'image', 'video', 'raw')
+        resource_type TEXT NOT NULL,     -- Type of asset (for example, 'image', 'video', 'raw')
         user_id TEXT NOT NULL,           -- User associated with the file
         upload_timestamp TIMESTAMPTZ DEFAULT NOW()
     );
     ```
 
-2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (e.g., `version`, `format`, `width`, `height`, `tags`).
+2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (for example, `version`, `format`, `width`, `height`, `tags`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
 
-Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (e.g., via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
+Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (for example, via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
 </Admonition>
 
 ## Upload files to Cloudinary and store metadata in Neon
@@ -457,6 +461,5 @@ This pattern separates media storage, processing, and delivery (handled by Cloud
 - [Cloudinary documentation](https://cloudinary.com/documentation)
 - [Cloudinary Upload API reference](https://cloudinary.com/documentation/image_upload_api_reference)
 - [Neon Documentation](/docs/introduction)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

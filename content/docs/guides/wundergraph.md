@@ -2,9 +2,13 @@
 title: Use WunderGraph with Neon
 subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in
   minutes
+summary: >-
+  Step-by-step guide for integrating WunderGraph with a Neon database to create
+  serverless applications, including setup instructions for deploying a
+  full-stack app with Next.js in under 15 minutes.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-22T15:41:04.377Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
@@ -314,7 +318,7 @@ In under 15 minutes, you were able to:
 5. Add Neon to your WunderGraph project using a code first approach
 6. Write a GraphQL operation to query your Neon database
 7. Update the frontend to display the results of your GraphQL operation securely using JSON-RPC
-8. Commit your changes and trigger a deployment without a CI/CD pipeline or Devops team
+8. Commit your changes and trigger a deployment without a CI/CD pipeline or DevOps team
 9. View your new operations in real time with real-time metrics
 
 If you had trouble with any of the steps outlined above, refer to the video guide below.

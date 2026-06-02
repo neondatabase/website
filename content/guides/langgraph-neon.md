@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents with LangGraph and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-21T00:00:00.000Z'
-updatedOn: '2025-02-21T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 This guide demonstrates how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem that simplifies the development of complex, multi-agent LLM applications by using a directed graph structure for efficient coordination and state management.
@@ -34,7 +34,7 @@ Before building your AI agent workflows, it's important to understand the core c
 LangGraph is an open‐source orchestration framework for building stateful, multi-actor applications with large language models (LLMs). It enables you to create complex agentic workflows by modeling your application as a graph of interconnected nodes. With LangGraph, you can:
 
 - **Manage state:** Persist and update the conversation and workflow state across interactions.
-- **Customize workflows:** Design flexible control flows—including conditional branching, loops, and hierarchical structures—to suit your specific use case.
+- **Customize workflows:** Design flexible control flows (including conditional branching, loops, and hierarchical structures) to suit your specific use case.
 - **Stream agent reasoning:** Deliver real-time, token-by-token streaming of agent actions to enhance user experience.
 
 ### Key components of LangGraph
@@ -45,7 +45,7 @@ LangGraph is an open‐source orchestration framework for building stateful, mul
 - **Tools:** Integration points for external functionalities (like web search, code execution, or API calls) that extend the agent’s capabilities beyond simple text generation.
 - **Human-in-the-loop workflows:** Built-in mechanisms that allow human oversight, ensuring that agent decisions can be validated, corrected, or enhanced before proceeding.
 
-By leveraging these powerful components, LangGraph empowers you to build reliable, scalable, and highly customizable AI agent applications—from prototyping to production.
+By leveraging these powerful components, LangGraph empowers you to build reliable, scalable, and highly customizable AI agent applications, from prototyping to production.
 
 ## Why Neon for AI Agents?
 
@@ -295,7 +295,7 @@ def run_sql_query(connection_uri: str, query: str) -> str:
         conn.close()
 ```
 
-Similarily, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Neon database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.
+Similarly, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Neon database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.
 
 #### Define agent setup and graph invocation
 
@@ -475,7 +475,7 @@ For optimizing application performance and user experience, LangGraph supports [
 
 ## Resources
 
-- [LangGraph Github](https://github.com/langchain-ai/langgraph)
+- [LangGraph GitHub](https://github.com/langchain-ai/langgraph)
 - [LangGraph Documentation](https://python.langchain.com/docs/langgraph)
 - [LangGraph Conceptual Guide](https://langchain-ai.github.io/langgraph/concepts)
 - [LangGraph Glossary](https://langchain-ai.github.io/langgraph/concepts/low_level/#langgraph-glossary)

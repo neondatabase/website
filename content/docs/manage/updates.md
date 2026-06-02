@@ -1,13 +1,27 @@
 ---
 title: Updates
+summary: >-
+  Covers the process for applying updates to Neon computes and Postgres
+  instances, including cache prewarming, scheduling options, types of updates,
+  and handling brief connection drops during the update process.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-04T12:47:21.310Z'
+updatedOn: '2026-04-17T11:58:10.000Z'
 ---
 
-To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
+To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
 
-Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
+## How Neon applies updates
+
+To apply updates to your compute (Postgres upgrades, security patches, and similar changes), Neon restarts the compute where Postgres runs. On paid plans, this happens within the [update window](#updates-on-paid-plans) you choose. On the Free plan, Neon schedules updates for you. The restart itself typically takes only a few seconds.
+
+To protect performance, Neon **prewarms** your compute's cache during the update process, without adding time to the restart. Prewarming means repopulating Postgres's in-memory buffer cache from storage before your workload continues, so frequently used data is already in memory instead of being read cold from storage after the restart. Prewarming runs automatically. You do not configure it. There are no additional compute or storage costs associated with this behavior.
+
+For technical details, see [Zero-Downtime Patching Part 1: Prewarming](https://neon.com/blog/prewarming).
+
+<Admonition type="important">
+Brief connection drops are expected during compute updates. Verify that your application has a retry policy configured to handle these brief interruptions. For guidance on implementing retry logic, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+</Admonition>
 
 ## What updates are included?
 
@@ -29,8 +43,8 @@ Neon applies updates to computes based on the following rules:
 
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
-- Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
-- Computes larger than 8 CU or that can scale past 8 CU are not updated automatically. See [Updating large computes](#updating-large-computes).
+- Computes in a transition state (for example, shutting down or restarting) at the time of an update are not updated.
+- Computes whose **maximum** autoscale size is **greater than 8 CU** are not updated automatically. If your maximum is **exactly 8 CU**, your compute is **not** treated as a large compute and receives scheduled updates like smaller sizes. See [Updating large computes](#updating-large-computes).
 
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
@@ -38,9 +52,9 @@ If a compute is excluded from an update, Neon will apply the missed update with 
 Please be aware that Neon must occasionally perform essential **platform maintenance** outside the scheduled updates performed on Neon computes. This means that you may experience brief disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
 </Admonition>
 
-## Updates on the Free Plan
+## Updates on the Free plan
 
-On the **Free Plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
+On the **Free plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
 
 To view planned updates:
 
@@ -69,6 +83,8 @@ In the Neon Console:
    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
 You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
+
+> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
 
 </TabItem>
 
@@ -118,7 +134,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
 {
@@ -147,7 +163,7 @@ For compute restart instructions, see [Restart a compute](/docs/manage/computes#
 
 ## Updating large computes
 
-Computes larger than 8 CU or set to scale beyond 8 CU are not updated automatically (_scheduled updates do not apply_). To apply updates, you'll need to restart them manually. A restart may occur automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, please plan for manual restarts.
+Computes whose **maximum** autoscale size is **greater than 8 CU** are not updated automatically (_scheduled updates do not apply_). Computes capped at **exactly 8 CU** follow the usual [automatic update rules](#how-often-are-updates-applied) above. To apply updates on a large compute, you'll need to restart it manually. A restart may occur automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, please plan for manual restarts.
 
 Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
@@ -155,10 +171,17 @@ For restart instructions, see [Restart a compute](/docs/manage/computes#restart-
 
 ## Handling connection disruptions during compute updates
 
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
+Prewarming helps keep the cache warm through the update, so query performance is not affected by a cold cache, but you may still experience a brief connection drop due to the compute restart.
+
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will reconnect automatically.
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
 If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+
+## See also
+
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres): Best practices for handling connection drops with retry logic, connection pooling, and idempotency
+- [Connection latency and timeouts](/docs/connect/connection-latency): Strategies for managing connection latencies and timeouts
 
 <NeedHelp/>

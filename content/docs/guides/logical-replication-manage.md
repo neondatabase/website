@@ -1,9 +1,13 @@
 ---
 title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
+summary: >-
+  Covers commands for managing publications, subscriptions, and replication
+  slots in logical replication setups, including creating, modifying, and
+  removing publications and subscriptions.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.322Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -105,7 +109,7 @@ A single subscriber can maintain multiple subscriptions, including multiple subs
 
 ### Create a subscription to be enabled later
 
-This command creates a subscription with `enabled = false` so that you can enable the scription at a later time:
+This command creates a subscription with `enabled = false` so that you can enable the subscription at a later time:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription
@@ -151,7 +155,7 @@ DROP SUBSCRIPTION my_subscription;
 Replication slots are created on the publisher database to track replication progress, ensuring that no data in the WAL is purged before the subscriber has successfully replicated it. This mechanism serves to maintain data consistency and prevent data loss in cases of network interruption or subscriber downtime.
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
 ### Create a replication slot

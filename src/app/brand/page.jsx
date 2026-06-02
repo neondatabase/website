@@ -1,12 +1,16 @@
 import Hero from 'components/pages/brand/hero';
-import Logos from 'components/pages/brand/logos';
+import Logo from 'components/pages/brand/logo';
+import Logomark from 'components/pages/brand/logomark';
+import Spacing from 'components/pages/brand/spacing';
 import Layout from 'components/shared/layout';
 import getMetadata from 'utils/get-metadata';
 
 const BrandPage = () => (
   <Layout>
     <Hero />
-    <Logos />
+    <Logo />
+    <Logomark />
+    <Spacing />
   </Layout>
 );
 

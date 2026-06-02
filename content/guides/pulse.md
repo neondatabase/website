@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-17T00:00:00.000Z'
-updatedOn: '2024-12-17T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 title: Building a Real-Time AI Voice Assistant with ElevenLabs
 subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next.js application with ElevenLabs and Postgres
 ---
@@ -91,7 +91,7 @@ Next, go to `Advanced > Client Events` in your Agent settings, and add two event
 
 ![](/guides/images/pulse/agent-4.png)
 
-Finally, go to [API Keys](https://elevenlabs.io/app/settings/api-keys), create an API key and use the value obtained as `XI_API_KEY` enviroment variable in your application.
+Finally, go to [API Keys](https://elevenlabs.io/app/settings/api-keys), create an API key and use the value obtained as `XI_API_KEY` environment variable in your application.
 
 ## Database Schema Setup
 
@@ -113,7 +113,7 @@ const createMessagesTable = async () => {
     await sql(
       `CREATE INDEX IF NOT EXISTS idx_session_created_at ON messages (session_id, created_at);`
     );
-    console.log('Setup schema succesfully.');
+    console.log('Setup schema successfully.');
   } catch (error) {
     console.error(error);
     console.log('Failed to set up schema.');
@@ -131,7 +131,7 @@ To run the migrations, execute the following command:
 npx tsx schema.tsx
 ```
 
-If it runs succesfully, you should see `Setup schema succesfully.` in the terminal.
+If it runs successfully, you should see `Setup schema successfully.` in the terminal.
 
 ## Build Reusable React Components and Hooks
 

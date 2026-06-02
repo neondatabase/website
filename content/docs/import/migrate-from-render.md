@@ -2,10 +2,14 @@
 title: Migrate from Render to Neon Postgres
 subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
   and pg_restore
+summary: >-
+  Covers the migration process of a database from Render to Neon Postgres using
+  `pg_dump` and `pg_restore`, detailing prerequisites and step-by-step
+  instructions for preparing and exporting data.
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.342Z'
+updatedOn: '2026-05-12T11:27:52.409Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.
@@ -81,7 +85,7 @@ pg_dump: dumping contents of table "public.lego_themes"
 ```
 
 <Admonition type="important">
-Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string) (see PgBouncer issues [452](https://github.com/pgbouncer/pgbouncer/issues/452) & [976](https://github.com/pgbouncer/pgbouncer/issues/976) for details). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
 </Admonition>
 
 ## Prepare your Neon destination database
@@ -92,7 +96,7 @@ This section describes how to prepare your destination Neon Postgres database to
 
 To maintain consistency with your Render setup, you might want to create a new database in Neon with the same database name used in Render.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like `psql`.
+1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a Postgres client like `psql`.
 
 2. Create a new database. For example, if your Render database was named `lego`, run:
 
@@ -106,10 +110,11 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 
 1. In the Neon Console, go to your **Project Dashboard**.
 2. Select **Connect** to open the **Connect to your database** modal.
-3. Copy the connection string. It will look similar to this:
+3. Select the user and database as needed for your connection. Make sure the **Connection pooling** toggle is disabled to get an unpooled connection string.
+4. Copy the connection string. It will look similar to this:
 
-   ```
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   ```text shouldWrap
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
 ## Restore data to Neon with pg_restore
@@ -148,7 +153,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or [psql](/docs/connect/query-with-psql-editor).
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or [psql](/docs/connect/query-with-psql-editor).
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 

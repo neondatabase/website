@@ -1,17 +1,17 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import DocsLink from 'components/pages/doc/docs-link';
+import { cn } from 'utils/cn';
 
 import CheckIcon from './images/check.inline.svg';
-import GithubIcon from './images/github.inline.svg';
+import GitHubIcon from './images/github.inline.svg';
 import PageIcon from './images/page.inline.svg';
 
 const Icon = ({ theme = 'default', className = null }) => {
-  if (theme === 'docs') return <PageIcon className={clsx('top-1', className)} aria-hidden />;
-  if (theme === 'repo') return <GithubIcon className={clsx('top-1', className)} aria-hidden />;
-  return <CheckIcon className={clsx('top-[5px]', className)} aria-hidden />;
+  if (theme === 'docs') return <PageIcon className={cn('top-1', className)} aria-hidden />;
+  if (theme === 'repo') return <GitHubIcon className={cn('top-1', className)} aria-hidden />;
+  return <CheckIcon className={cn('top-[5px]', className)} aria-hidden />;
 };
 
 Icon.propTypes = {
@@ -20,9 +20,9 @@ Icon.propTypes = {
 };
 
 const parsedChildren = (children) =>
-  React.Children.map(children, (child) => {
+  React.Children.toArray(children).map((child) => {
     if (React.isValidElement(child) && child.type === 'a') {
-      return <DocsLink {...child.props} />;
+      return <DocsLink key={child.key} {...child.props} />;
     }
     return child;
   });
@@ -30,19 +30,20 @@ const parsedChildren = (children) =>
 const DocsList = ({ title, theme = 'default', children }) => (
   <>
     {title && (
-      <h3 className="mb-4 mt-0 text-base font-medium leading-tight tracking-extra-tight">
+      <h3 className="mt-0 mb-3 text-base leading-tight font-medium tracking-extra-tight">
         {title}
       </h3>
     )}
-    <ul className="!m-0 !p-0">
-      {parsedChildren(children).map((child) => (
+    <ul className="m-0! flex flex-col gap-y-2 p-0!">
+      {parsedChildren(children).map((child, index) => (
         <li
-          className={clsx(
-            '!mb-0 !mt-2 flex w-fit items-start gap-1.5 text-gray-new-20 before:hidden dark:text-gray-new-70',
+          key={index}
+          className={cn(
+            'group m-0! flex w-fit items-start gap-1.5 text-gray-new-30 before:hidden dark:text-gray-new-85',
             '[&_p]:my-0 [&_p]:pl-5 [&_p]:text-sm [&_p]:tracking-extra-tight',
-            '[&_a]:border-0 [&_a]:pl-5 [&_a]:text-sm [&_a]:tracking-extra-tight',
-            '[&:has(a)]:transition-colors [&:has(a)]:duration-200 [&_a]:!text-inherit',
-            '[&:has(a)]:hover:text-secondary-8 [&:has(a)]:hover:dark:text-green-45'
+            '[&_a]:pl-5 [&_a]:text-sm [&_a]:tracking-extra-tight [&_a]:text-gray-new-30 [&_a]:no-underline! [&_a]:decoration-transparent [&_a]:dark:text-gray-new-85',
+            '[&:has(a)]:transition-colors [&:has(a)]:duration-200',
+            '[&_a]:hover:text-black-pure [&_a]:hover:dark:text-white [&:has(a)]:hover:text-black-pure [&:has(a)]:hover:dark:text-white'
           )}
         >
           <Icon theme={theme} className="pointer-events-none absolute left-0" />

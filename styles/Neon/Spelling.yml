@@ -1,0 +1,15 @@
+extends: spelling
+message: "'%s' does not appear to be a valid word."
+level: warning
+# Built-in filters (active by default when custom: false):
+#   [A-Z]{1}[a-z]+[A-Z]+\w+   — mixed-case starting uppercase (MongoDB, PgBouncer, PostGIS)
+#   [A-Z]+$                   — all-caps words (SQL, API, URL, WAL, PITR)
+#   [^a-zA-Z_']               — words with non-alpha/non-underscore chars ($VAR, 123)
+filters:
+  - '[a-z]+[A-Z]\w*'                     # camelCase starting lowercase (pgBouncer, legendFormat)
+  - '[A-Z]+s\b'                          # pluralized acronyms (APIs, SDKs, UUIDs, JWTs, ORMs)
+  - '[a-zA-Z0-9]+[_.][a-zA-Z0-9_.]+'     # underscored/dotted identifiers (data_source, Next.js)
+  - '_\w+'                               # underscore-prefixed tokens (_inactive_, _staging_)
+  - '\w+_\b'                             # trailing-underscore placeholders (project_, hour_)
+  - "[a-zA-Z]+'s"                        # possessives (Connect's, Inngest's, Grafana's)
+append: true

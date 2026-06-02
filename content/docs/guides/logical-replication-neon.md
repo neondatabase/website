@@ -1,12 +1,66 @@
 ---
 title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
+summary: >-
+  Covers the setup and important considerations for logical replication in Neon,
+  detailing how it functions as both a publisher and subscriber, including
+  management of replication slots and implications for scaling.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-14T17:05:10.001Z'
+updatedOn: '2026-04-27T17:26:37.000Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
+
+## Enable logical replication
+
+When replicating data from Neon, enable logical replication on your Neon project. When replicating data to Neon, enable it on the source database instead.
+
+<Admonition type="important">
+Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
+</Admonition>
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+1. Select your project in the Neon Console.
+2. On the **Project Dashboard**, select **Settings**.
+3. Select **Logical replication**.
+4. Click **Enable** to enable logical replication.
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "project": {
+    "settings": {
+      "enable_logical_replication": true
+    }
+  }
+}'
+```
+
+</TabItem>
+
+</Tabs>
+
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+ wal_level
+-----------
+ logical
+```
 
 ## Important notices
 
@@ -14,20 +68,20 @@ To avoid potential issues, please review the following notices carefully before 
 
 ### Neon as a publisher
 
-These notices apply when replicating data from Neon:
+These notices apply when replicating data **from** Neon (Neon as the publisher):
 
-- **Scale to zero**: Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a Neon Postgres instance with an active subscriber will not scale to zero, which may result in increased compute usage. For more information, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero).
-- **Removal of inactive replication slots**: To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**. If you plan to have more than one subscriber, please read [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) before you begin.
+- **Scale to zero and compute usage**: While a logical replication subscriber is connected, your Neon compute stays active and will not scale to zero. Neon does not "disable" scale to zero; the database is simply always active because replication keeps it in use, so the compute never becomes idle. This results in ongoing compute usage and can significantly affect your bill. For details, see [Logical replication and scale to zero](/docs/guides/logical-replication-neon#logical-replication-and-scale-to-zero). If you are optimizing costs, see also [Cost optimization](/docs/introduction/cost-optimization).
+- **Removal of inactive replication slots**: To prevent storage bloat, \*\*Neon automatically removes _inactive_ replication slots after approximately 40 hours. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) for more information.
 - **Branch restore removes replication slots**: [Restoring a branch](/docs/guides/branch-restore) will delete all replication slots on that branch. Replication slots are not automatically re-created during the restore process.
 
 ### Neon as a subscriber
 
 - Before dropping a database in response to a user issued `DROP DATABASE` command or operation, Neon will drop any logical replication subscriptions defined in the database.
-- To prevent issues due to unintended duplication of logical replication subscriptions, subscriptions defined on a parent branch are not duplicated on child branches — they are dropped from child branches before the compute associated with the child branch starts. This applies to all branching contexts where logical replication subscriptions could be duplicated on a child branch, including creating a child branch, resetting a child branch, and restoring a child branch.
+- To prevent issues due to unintended duplication of logical replication subscriptions, subscriptions defined on a parent branch are not duplicated on child branches; they are dropped from child branches before the compute associated with the child branch starts. This applies to all branching contexts where logical replication subscriptions could be duplicated on a child branch, including creating a child branch, resetting a child branch, and restoring a child branch.
 
 ## Logical replication and scale to zero
 
-Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature suspends a compute after 300 seconds (5 minutes) of inactivity. In a logical replication setup, Neon does not scale to zero a compute that has an active connection from a logical replication subscriber. In other words, a compute with an active subscriber remains active at all times. Neon determines if there are active connections from a logical replication subscriber by checking for `walsender` processes on the Neon Postgres instance using the following query:
+Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature suspends a compute after 300 seconds (5 minutes) of inactivity. When you replicate data **from** Neon (Neon as publisher), a connected logical replication subscriber keeps the database in use, so the compute never becomes idle. Neon therefore does not suspend the compute; it remains active at all times while subscribers are connected. This applies only when Neon is the publisher (replicating from Neon to an external destination), not when Neon is the subscriber (replicating into Neon from an external source). Neon determines whether there are active replication connections by checking for `walsender` processes using the following query:
 
 ```sql
 SELECT *
@@ -39,9 +93,7 @@ If the count is greater than 0, a Neon compute where the publishing Postgres ins
 
 ## Unused replication slots
 
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after approximately 40 hours if there are other _active_ replication slots**.
-
-If you have only one replication slot, and that slot becomes inactive, it will not be dropped because a single replication slot does not cause storage bloat.
+To prevent storage bloat, \*\*Neon automatically removes _inactive_ replication slots after approximately 40 hours.
 
 An inactive replication slot is one that doesn't acknowledge `flush_lsn` progress for more than approximately 40 hours. This is the same `flush_lsn` value found in the `pg_stat_replication` view in your Neon database.
 
@@ -53,7 +105,7 @@ An _inactive_ replication slot can be the result of a dead subscriber, where the
 
   This will ensure that your subscriber reports `flush_lsn` progress more frequently than every 40 hours. If increasing replication frequency is not possible, please contact [Neon Support](/docs/introduction/support) for alternatives.
 
-- If using Debezium, set [flush.lsn.source](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-flush-lsn-source) to `true` to ensure that `flush_lsn` progress is being reported. For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
+- If using Debezium, set [lsn.flush.mode](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-lsn-flush-mode) to `connector` so that the connector reports `flush_lsn` progress. (The older property `flush.lsn.source=true` is deprecated but is automatically mapped to `lsn.flush.mode=connector` for backward compatibility.) For other subscriber platforms, check for an equivalent setting to make sure it's configured to acknowledge progress on the subscriber.
 
 ### What to do if your replication slot is removed
 

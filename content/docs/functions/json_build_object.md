@@ -1,8 +1,12 @@
 ---
 title: Postgres json_build_object() function
 subtitle: Builds a JSON object out of a variadic argument list
+summary: >-
+  Covers the construction of JSON objects using the `json_build_object` function
+  in Postgres, detailing its syntax, usage examples, and performance advantages
+  over application-side JSON conversion.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.374Z'
+updatedOn: '2026-02-06T22:07:32.862Z'
 ---
 
 `json_build_object` is used to construct a JSON object from a set of key-value pairs, creating a JSON representation of a row or set of rows. This has potential performance benefits compared to converting query results to JSON on the application side.

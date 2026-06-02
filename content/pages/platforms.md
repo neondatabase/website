@@ -1,7 +1,6 @@
 ---
 title: 'Embedded Postgres for Platforms'
 subtitle: Provision dedicated Postgres databases for your users — instantly, affordably, and at scale
-enableTableOfContents: true
 updatedOn: '2025-06-17T09:00:00.000Z'
 ---
 
@@ -21,8 +20,8 @@ Neon is the best Postgres provider for deploying one-database-per-user fleets at
 - Custom branching and PITR - instant copies and rollbacks, no manual backups
 - All of this is available across multiple regions, with autoscaling and high availability
 
-<Testimonial
-text="We’ve been able to automate virtually all database management tasks via the Neon API. We manage 300,000+ projects with minimal engineering overhead."
+<QuoteBlock
+quote="We’ve been able to automate virtually all database management tasks via the Neon API. We manage 300,000+ projects with minimal engineering overhead."
 author={{
 name: 'Himanshu Bandoth',
 company: 'Software Engineer at Retool',
@@ -31,7 +30,7 @@ company: 'Software Engineer at Retool',
 
 ## With instant provisioning and scale-to-zero
 
-[Neon databases provision in less than a second](https://github.com/neondatabase/instant-postgres?tab=readme-ov-file#instant-postgres) and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
+Neon databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
 
 - Provisioning time: ~1 second
 - Suspend latency: configurable (default is 5 min)
@@ -88,8 +87,8 @@ You can use these to:
 
 [Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
 
-<Testimonial
-text="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
+<QuoteBlock
+quote="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
 author={{
 name: 'Edouard Bonlieu',
 company: 'co-founder and CPO at Koyeb',

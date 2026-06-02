@@ -1,8 +1,12 @@
 ---
 title: Schema migration with Neon Postgres and SQLAlchemy
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
+summary: >-
+  Step-by-step guide for managing schema migrations in a Neon Postgres database
+  using SQLAlchemy and Alembic, including project setup and connection string
+  retrieval.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.917Z'
+updatedOn: '2026-02-06T22:07:33.054Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.

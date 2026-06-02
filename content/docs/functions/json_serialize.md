@@ -1,11 +1,15 @@
 ---
 title: Postgres json_serialize() Function
 subtitle: Convert JSON Values to Text or Binary Format
+summary: >-
+  Covers the usage of the `json_serialize()` function in PostgreSQL 17 for
+  converting JSON values into text or binary formats, including syntax,
+  parameters, and example implementations.
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.750Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
-The `json_serialize()` function in PostgreSQL 17 provides a flexible way to convert `JSON` values into text or binary format. This function is particularly useful when you need to control the output format of `JSON` data or prepare it for transmission or storage in specific formats.
+The `json_serialize()` function introduced in PostgreSQL 17 provides a flexible way to convert `JSON` values into text or binary format. Use it when you need to control the output format of `JSON` data or prepare it for transmission or storage in specific formats.
 
 Use `json_serialize()` when you need to:
 
@@ -108,7 +112,7 @@ While both `json_serialize()` and `json()` work with `JSON` data, they serve dif
 
 - `json()` converts text or binary data into `JSON` values
 - `json_serialize()` converts `JSON` values into text or binary format
-- `json()` focuses on input validation (e.g., `WITH UNIQUE` keys)
+- `json()` focuses on input validation (for example, `WITH UNIQUE` keys)
 - `json_serialize()` focuses on output format control
 
 Think of them as complementary functions:

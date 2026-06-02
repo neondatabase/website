@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="32" viewBox="0 0 160 32">
+  <rect width="160" height="32" rx="6" fill="#1e1e1e"/>
+  <rect x="0.5" y="0.5" width="159" height="31" rx="5.5" stroke="#3c3c3c" fill="none"/>
+  <!-- Cursor pointer icon -->
+  <g transform="translate(12, 7)">
+    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+      <path d="M1 1L1 12.5L4.5 9.5L7 15L9.5 14L7 8.5L11.5 8.5L1 1Z" fill="white" stroke="white" stroke-width="1" stroke-linejoin="round"/>
+    </svg>
+  </g>
+  <text x="36" y="20.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#ffffff">Add to Cursor</text>
+</svg>

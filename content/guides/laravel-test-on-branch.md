@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Laravel a
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2024-05-26T00:00:00.000Z'
+updatedOn: '2025-06-27T09:33:41.000Z'
 ---
 
 [Laravel](https://laravel.com) is a popular PHP framework widely used for building web applications. It includes powerful tools for automated testing, with [PEST](https://pestphp.com/) being a preferred option due to its simplicity and effectiveness.

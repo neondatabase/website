@@ -1,7 +1,11 @@
 ---
 title: Manage organizations using the Neon API
+summary: >-
+  Covers managing Neon Organizations through the Neon API, including handling
+  organization API keys, member management, and invitations, with distinctions
+  between personal and organization API key usage.
 enableTableOfContents: true
-updatedOn: '2025-06-02T15:04:05.575Z'
+updatedOn: '2026-03-13T19:35:31.433Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -61,10 +65,12 @@ To find your organization's `org_id`, navigate to your Organization's **Settings
 
 There are two types of organization API keys:
 
-- **Organization API keys** — Provide admin-level access to all organization resources, including projects, members, and settings. Only organization admins can create these keys.
-- **Project-scoped organization API keys** — Provide limited, member-level access to specific projects within the organization. Any organization member can create a key for any organization-owned project.
+- **Organization API keys**: Provide admin-level access to all organization resources, including projects, members, and settings. Only organization admins can create these keys.
+- **Project-scoped organization API keys**: Provide limited, member-level access to specific projects within the organization. Any organization member can create a key for any organization-owned project.
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
+
+Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
 
 [Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
 
@@ -154,16 +160,27 @@ Example response:
 
 ## List members
 
-Lists all members in your organization. Each entry includes:
+Retrieves a paginated list of members for the specified organization. Each entry includes the member ID, user ID, organization role, join date, and the user's email. Member objects may include optional `has_mfa` and `deactivated_at` fields.
 
-- Member ID (`id`): The unique identifier for the member
-- User ID (`user_id`): The unique ID of the user's Neon account
-- Organization role and join date
-- User's email address
+- `has_mfa`: Whether the member has TOTP (2FA) enabled.
+- `deactivated_at`: Timestamp indicating the member account is deactivated.
+
+You can sort by `email`, `role`, or `joined_at` (default), set `sort_order` to `asc` or `desc`, and use `limit` (1–500) to control page size. Use the `cursor` from the response `pagination.next` to fetch the next page.
+
+**Example: list members with sorting and pagination**
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members' \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members?limit=20&sort_by=joined_at&sort_order=desc' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+**Example: next page (using cursor from previous response)**
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members?limit=20&sort_by=joined_at&sort_order=desc&cursor=eyJtZW1iZXJfaWQiOi...' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY' | jq
 ```
@@ -182,10 +199,17 @@ Example response:
         "joined_at": "2024-01-01T12:00:00Z"
       },
       "user": {
-        "email": "user@example.com"
+        "email": "user@example.com",
+        "has_mfa": true,
+        "deactivated_at": "2026-05-01T12:00:00Z"
       }
     }
-  ]
+  ],
+  "pagination": {
+    "next": "eyJtZW1iZXJfaWQiOiI1ZmVlMTNhYy05NTdiLTQwY2QtOGRlMC00ZDQ5NGNjMjhlMjgiLCJzb3J0X2J5Ijoiam9pbmVkX2F0In0=",
+    "sort_by": "joined_at",
+    "sort_order": "desc"
+  }
 }
 ```
 

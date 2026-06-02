@@ -4,9 +4,11 @@ import { useThrottleCallback } from '@react-hook/throttle';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import TOCIcon from 'icons/toc.inline.svg';
+
 import Item from './item';
 
-const CURRENT_ANCHOR_GAP_PX = 100;
+const ANCHOR_SCROLL_MARGIN = 130;
 
 const TableOfContents = ({ items, isTemplate }) => {
   const titles = useRef([]);
@@ -41,7 +43,7 @@ const TableOfContents = ({ items, isTemplate }) => {
         return false;
       }
 
-      return top - CURRENT_ANCHOR_GAP_PX >= 0;
+      return top - ANCHOR_SCROLL_MARGIN >= 0;
     });
 
     const idx =
@@ -67,10 +69,11 @@ const TableOfContents = ({ items, isTemplate }) => {
 
   return (
     <>
-      <h3 className="mb-3.5 text-sm font-medium leading-tight tracking-extra-tight">
+      <h3 className="mb-6 flex items-center gap-2 text-sm leading-none font-medium tracking-extra-tight">
+        <TOCIcon className="size-3 shrink-0" aria-hidden />
         On this page
       </h3>
-      <ul className="no-scrollbars overflow-y-auto">
+      <ul className="no-scrollbars flex flex-col gap-3 overflow-y-auto">
         {items.map((item, index) => (
           <li className="group relative" key={index}>
             <Item

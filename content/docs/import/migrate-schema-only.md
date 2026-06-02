@@ -1,15 +1,21 @@
 ---
 title: Migrate a database schema
 subtitle: Perform a schema-only migration with pg_dump and pg_restore
-redirectFrom:
-  - /docs/import/import-schema-only
+summary: >-
+  Covers the setup of a schema-only migration using `pg_dump` and `pg_restore`,
+  detailing how to dump and modify a database schema for compatibility with
+  Neon.
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.343Z'
+updatedOn: '2026-04-01T20:14:28.000Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.
 
 A schema-only migration may be necessary in certain scenarios. For example, when replicating data between two Postgres instances, the tables defined in your publication on the source database must also exist in the destination database, and they must have the same table names and columns. A schema dump and reload in this case may be faster than trying to manually create the required schema on the destination database.
+
+<Admonition type="important">
+Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string). Use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead.
+</Admonition>
 
 <Steps>
 
@@ -62,7 +68,7 @@ To comment out a single line, you can use `--` at the beginning of the line.
 
 ## Load the schema
 
-After making any necessary modifications, load the dumped schema using `pg_restore`:
+After making any necessary modifications, load the dumped schema using `psql`:
 
 ```sql
 psql \

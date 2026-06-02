@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to implement full text search with
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-09-17T13:24:36.612Z'
-updatedOn: '2024-09-17T13:24:36.612Z'
+updatedOn: '2025-08-01T20:49:23.000Z'
 ---
 
 The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search allows you to search text content in a more flexible way than using `LIKE`. Full text search also supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
@@ -19,7 +19,7 @@ The `tsvector` type enables you to use full text search on your text content in 
 
 ## Set up a table with a `tsvector` column
 
-To set up full text search, you need to create a column of type `tsvector` that will enable full text search. You can run the following `CREATE TABLE` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon. This statement will create a table with a column `searchable` of type `tsvector`.
+To set up full text search, you need to create a column of type `tsvector` that will enable full text search. You can run the following `CREATE TABLE` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon. This statement will create a table with a column `searchable` of type `tsvector`.
 
 ```sql
 CREATE TABLE documents (

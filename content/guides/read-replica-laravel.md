@@ -4,7 +4,7 @@ subtitle: Learn how to scale Laravel applications with Neon Postgres Read Replic
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2024-10-20T00:00:00.000Z'
+updatedOn: '2025-12-03T12:37:52.000Z'
 ---
 
 ## Introduction
@@ -17,7 +17,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Prerequisites
 
-- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started-with-neon/signing-up).
+- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started/signing-up).
 - Basic knowledge of [Laravel](https://laravel.com/docs) and PHP
 - [Composer](https://getcomposer.org/) installed on your local machine
 - [PHP](https://www.php.net/manual/en/install.php) installed on your local machine
@@ -278,9 +278,9 @@ To create a read replica:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
+5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
-   The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>
 6. When you finish making selections, click **Create**.
 

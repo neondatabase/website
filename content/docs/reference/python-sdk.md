@@ -1,7 +1,13 @@
 ---
-title: Python SDK for the Neon API
+title: Python SDK (Neon API)
+subtitle: Programmatically manage Neon projects, branches, databases, and other platform
+  resources
+summary: >-
+  Covers the setup and usage of the Neon Python SDK, enabling programmatic
+  management of Neon projects, branches, databases, and other platform resources
+  through the Neon API.
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.079Z'
+updatedOn: '2026-03-25T00:15:20.000Z'
 ---
 
 <InfoBlock>
@@ -28,6 +34,8 @@ updatedOn: '2024-11-30T11:53:56.079Z'
 
 Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/project/neon-api/), a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This SDK simplifies integration of Python applications with the Neon platform, providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations.
 
+<AgentSkillsTip skill_topic="the Neon Python SDK for managing resources programmatically" />
+
 ## Installation
 
 Installation of `neon_api` is easy, with `pip`:
@@ -47,11 +55,12 @@ neon = NeonAPI(api_key='your_api_key')
 
 ## Documentation
 
-Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://neon-api-python.readthedocs.io/en/latest/#quickstart), can be found on **Read the Docs**. See [neon-api — Python client for the Neon API](https://neon-api-python.readthedocs.io/en/latest/#neon-api-python-client-for-the-neon-api).
+Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://neon-api-python.readthedocs.io/en/latest/#quickstart), can be found on **Read the Docs**. See [neon-api: Python client for the Neon API](https://neon-api-python.readthedocs.io/en/latest/#neon-api-python-client-for-the-neon-api).
 
 ## Methods of the `NeonAPI` Class
 
 - `me()`: Returns the current user.
+- `current_user_organizations()`: Returns the current user's organizations.
 
 ### Manage API Keys
 
@@ -61,7 +70,15 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 
 ### Manage Projects
 
-- `projects()`: Returns a list of projects.
+All Neon accounts are organization-based. To list projects, first retrieve the user's organization with `current_user_organizations()`, then pass `org_id`:
+
+```python
+orgs = neon.current_user_organizations()
+org_id = orgs[0].id
+projects = neon.projects(org_id=org_id)
+```
+
+- `projects(org_id=None)`: Returns a list of projects. Pass `org_id` to list projects within an organization.
 - `project(project_id)`: Returns a specific project.
 - `project_create(project_id, **json)`: Creates a new project.
 - `project_update(project_id, **json)`: Updates a given project.
@@ -75,7 +92,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 
 - `branches(project_id)`: Returns a list of branches for a given project.
 - `branch(project_id, branch_id)`: Returns a specific branch.
-- `branch_create(project_id, **json)`: Creates a new branch.
+- `branch_create(project_id, **json)`: Creates a new branch. Branch names are optional (defaults to branch ID if not specified). If provided, names must be unique within the project, can be up to 256 characters, and cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements).
 - `branch_update(project_id, branch_id, **json)`: Updates a given branch.
 - `branch_delete(project_id, branch_id)`: Deletes a given branch.
 - `branch_set_as_primary(project_id, branch_id)`: Sets a given branch as primary.
@@ -105,6 +122,10 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 - `role_delete(project_id, branch_id, role_name)`: Deletes a given role.
 - `role_password_reveal(project_id, branch_id, role_name)`: Reveals the password for a given role.
 - `role_password_reset(project_id, branch_id, role_name)`: Resets the password for a given role.
+
+### Manage Organizations
+
+- `organization(org_id)`: Returns details for a specific organization.
 
 ### Manage Operations
 

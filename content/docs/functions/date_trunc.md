@@ -1,13 +1,17 @@
 ---
 title: Postgres date_trunc() function
 subtitle: Truncate date and time values to a specified precision
+summary: >-
+  Covers the usage of the Postgres `date_trunc()` function to truncate
+  timestamps or intervals to specified precision, facilitating time-based
+  calculations and data grouping for analysis.
 enableTableOfContents: true
-updatedOn: '2024-06-30T15:28:50.890Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `date_trunc()` function truncates a timestamp or interval to a specified precision.
 
-This function is particularly useful for grouping time-series data and performing time-based calculations. For example, it can be used to generate monthly reports, analyze hourly trends, or group events by time period.
+Use it for grouping time-series data and performing time-based calculations. For example, it can be used to generate monthly reports, analyze hourly trends, or group events by time period.
 
 <CTA />
 

@@ -1,15 +1,19 @@
 ---
 title: The pg_prewarm extension
 subtitle: Load data into your Postgres buffer cache with the pg_prewarm extension
+summary: >-
+  Covers the setup and usage of the `pg_prewarm` extension to preload data into
+  the Postgres buffer cache, enhancing query response times after a database
+  restart.
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.615Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 You can use the `pg_prewarm` extension to preload data into the Postgres buffer cache after a restart. Doing so improves query response times by ensuring that your data is readily available in memory. Otherwise, data must be loaded into the buffer cache from disk on-demand, which can result in slower query response times.
 
 <CTA />
 
-In this guide, we'll explore the `pg_prewarm` extension, how to enable it, and how to use it to prewarm your Postgres buffer cache.
+This guide covers the `pg_prewarm` extension: how to enable it and how to use it to prewarm your Postgres buffer cache.
 
 <Admonition type="note">
 The `pg_prewarm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgprewarm.html).
@@ -27,7 +31,7 @@ Enable the `pg_prewarm` extension by running the `CREATE EXTENSION` statement in
 CREATE EXTENSION IF NOT EXISTS pg_prewarm;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Basic usage
 

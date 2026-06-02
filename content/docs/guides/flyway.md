@@ -1,18 +1,22 @@
 ---
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
+summary: >-
+  Step-by-step guide for installing and configuring the Flyway command-line tool
+  to manage schema changes in a Neon database, including setting up the
+  connection and executing migrations.
 enableTableOfContents: true
-updatedOn: '2025-06-02T15:04:05.569Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
-Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
+Flyway is a database migration tool that provides version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
 
 This guide steps you through installing the Flyway command-line tool, configuring Flyway to connect to a Neon database, and running database migrations. The guide follows the setup described in the [Flyway command-line quickstart](https://documentation.red-gate.com/fd/quickstart-command-line-184127576.html).
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - A database. This guide uses the ready-to-use `neondb` database. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Download and extract Flyway

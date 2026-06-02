@@ -1,9 +1,16 @@
 ---
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
+summary: >-
+  Step-by-step guide for creating a Neon project and connecting it to a
+  RedwoodSDK application, including setting up dependencies and storing
+  connection credentials.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.914Z'
+updatedOn: '2026-02-15T20:51:54.192Z'
 ---
+
+<CopyPrompt src="/prompts/redwood-sdk-prompt.md"
+description="Pre-built prompt for connecting RedwoodSDK applications to Neon Postgres"/>
 
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
 
@@ -21,11 +28,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a RedwoodSDK project and add dependencies
 
-1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Minimal Starter](https://github.com/redwoodjs/sdk/tree/main/starters/minimal). To create a new project, run the following command:
-
-    ```bash
-    npx degit redwoodjs/sdk/starters/minimal my-redwood-app
-    ```
+1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Quickstart](https://docs.rwsdk.com/getting-started/quick-start/).
 
 2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
 
@@ -34,7 +37,7 @@ If you do not have one already, create a Neon project. Save your connection deta
     npm install
     ```
 
-3.  Add project dependencies using one of the following commands:
+3.  Add project dependencies depending on the PostgreSQL driver you wish to use (`postgres.js` or `@neondatabase/serverless`):
 
     <CodeTabs reverse={true} labels={["postgres.js", "Neon serverless driver"]}>
 
@@ -58,7 +61,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-In your RedwoodSDK application (e.g., in `src/app/pages/Home.tsx`), import the driver and use it within your route handlers.
+In your RedwoodSDK application (for example, in `src/app/pages/Home.tsx`), import the driver and use it within your route handlers.
 
 Here's how you can set up a simple route to query the database:
 
@@ -102,31 +105,27 @@ export async function Home({ ctx }: RequestInfo) {
 
 ## Run your RedwoodSDK application
 
+Generate the required Wrangler types for RedwoodSDK to detect environment variables:
+
+```bash
+npx wrangler types
+```
+
 Start the development server:
 
 ```bash
-npm dev
+npm run dev
 ```
 
-Navigate to your application's URL ([localhost:5173](http://localhost:5173)) in your browser. You should see the output of your database query.
+Navigate to ([localhost:5173](http://localhost:5173)) in your browser. You should see a response similar to the following, indicating a successful connection to your Neon database:
 
 ```text
-PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
 > The specific version may vary depending on the PostgreSQL version of your Neon project.
 
 </Steps>
-
-## Source code
-
-You can find a sample RedwoodSDK application configured for Neon on GitHub:
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-redwoodsdk" description="Get started with RedwoodSDK and Neon" icon="github">Get started with RedwoodSDK and Neon</a>
-
-</DetailIconCards>
 
 ## Resources
 

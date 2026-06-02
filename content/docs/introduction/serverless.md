@@ -2,19 +2,23 @@
 title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
+summary: >-
+  Covers the setup of serverless Postgres on Neon, detailing features like
+  instant provisioning, automatic scaling, and usage-based billing, enabling
+  efficient management of multiple databases without server maintenance.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.488Z'
+updatedOn: '2026-04-18T11:47:20.000Z'
 ---
 
-Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
+Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Neon Postgres helps teams ship reliable and scalable applications faster.
 
-Enabling serverless Postgres begins with Neon's [native decoupling of storage and compute](/blog/architecture-decisions-in-neon). By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
+Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview), which natively decouples storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 
-This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](/use-cases/database-per-tenant), as well as [database branching workflows](/flow) that accelerate development by enabling the management of dev/testing databases via CI/CD.
+This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](/use-cases/database-per-tenant), as well as [database branching workflows](/branching) that accelerate development by enabling the management of dev/testing databases via CI/CD.
 
-![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
+![Multi-tenant storage](/docs/introduction/neon_architecture_5.jpg)
 
-Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
+Read our [lakebase architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 
 ## What “serverless” means to us
 
@@ -25,7 +29,7 @@ To us, serverless means:
 - **Instant provisioning**: Neon allows you to spin up Postgres databases in seconds, eliminating the long setup times traditionally associated with database provisioning.
 - **No server management**: You don’t have to deal with the complexities of provisioning, maintaining, and administering servers. Neon handles it all, so you can focus on your application.
 - **Autoscaling**: Compute resources automatically scale up or down based on real-time demand, ensuring optimal performance without manual intervention. No restarts are required.
-- **Usage-based pricing**: Your costs are directly tied to the resources your workload consumes—both compute and storage. There's no need to over-provision or pay for idle capacity.
+- **Usage-based pricing**: Your costs are directly tied to the resources your workload consumes (both compute and storage). There's no need to over-provision or pay for idle capacity.
 - **Built-in availability and fault tolerance**: We’ve designed our architecture for high availability and resilience, ensuring your data is safe and your applications are always accessible.
 - **Focus on business logic**: With the heavy lifting of infrastructure management handled by Neon, you can dedicate your time and effort to writing code and delivering value to your users.
 

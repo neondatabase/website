@@ -1,8 +1,12 @@
 ---
 title: The uuid-ossp extension
 subtitle: Generate Universally Unique Identifiers (UUIDs) in your Postgres database
+summary: >-
+  Covers the setup of the `uuid-ossp` extension in Postgres on Neon, detailing
+  how to enable it and use various functions for generating different types
+  of UUIDs for unique data identification.
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.759Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `uuid-ossp` extension provides a suite of functions for generating Universally Unique Identifiers (UUIDs) directly within your Postgres database. UUIDs are essential for ensuring data uniqueness across distributed systems and are widely used as primary keys and for various other applications requiring unique IDs. This extension offers a variety of UUID generation methods, including time-based, random, and name-based UUIDs, providing flexibility for different use cases.
@@ -17,7 +21,7 @@ This guide provides an introduction to the `uuid-ossp` extension. You'll learn h
 
 ## Enable the `uuid-ossp` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -37,7 +41,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 - `uuid_generate_v1()`:
 
-  The `uuid_generate_v1()` function generates UUIDs based on the [version 1 algorithm](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2.2). Version 1 UUIDs are time-based, meaning they incorporate the current timestamp and the MAC address of the computer where the UUID is generated. This approach leverages the uniqueness of hardware identifiers and precise time to create UUIDs that are likely to be unique across different systems and over time.
+  The `uuid_generate_v1()` function generates UUIDs based on the [version 1 algorithm](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2.2). Version 1 UUIDs are time-based, meaning they incorporate the current timestamp and the MAC address of the computer where the UUID is generated. This approach uses hardware identifiers and precise timestamps to create UUIDs that are likely to be unique across different systems and over time.
 
   ```sql
   SELECT uuid_generate_v1();
@@ -119,7 +123,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 ### UUID constants
 
-`uuid-ossp` also provides functions to return predefined UUID constants, which are particularly useful as standard namespace identifiers for Version 3 and Version 5 UUID generation:
+`uuid-ossp` also provides functions to return predefined UUID constants. These are the standard namespace identifiers used for Version 3 and Version 5 UUID generation:
 
 - **`uuid_nil()`: The Nil UUID constant**
 

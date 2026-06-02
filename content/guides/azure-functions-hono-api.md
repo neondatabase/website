@@ -4,7 +4,7 @@ subtitle: Learn how to leverage TypeScript, Neon Postgres Databases, and Azure F
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
-updatedOn: '2025-02-01T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Creating scalable and maintainable APIs is a cornerstone of modern web development. In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.
@@ -20,7 +20,7 @@ Using this combination gives a great balance of development experience and deplo
 
 ### Setting up the project
 
-Because I're creating an application that will be deployed as an Azure Function, it makes sense to start by using the Azure Functions Core Tools to create a new project
+Because I'm creating an application that will be deployed as an Azure Function, it makes sense to start by using the Azure Functions Core Tools to create a new project
 since that configuration can get a little overwhelming to write out yourself.
 
 I'll run the following command to create a new project folder and initialize it with everything I need to start building my API:
@@ -158,7 +158,7 @@ Simple enough, right? Now let's prep our database to store this data.
 
 ### Creating a Postgres Database with Neon
 
-Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Progres databases on Azure.
+Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Postgres databases on Azure.
 So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project with a Postgres database, then use the following schema to create a table to store my recipes:
 
 ```sql
@@ -297,7 +297,7 @@ app.get('/api/recipes/:id', async (c) => {
   const [recipeResults, ingredientsResults] = await Promise.all([
     db.query<Recipe>(
       `SELECT id, name, description, preparation_steps, url
-       FROM recipes 
+       FROM recipes
        WHERE id = $1
        LIMIT 1
      `,
@@ -514,7 +514,7 @@ Define an environment variable in the Azure Function App settings to store the d
     --settings DATABASE_URL="postgresql://recipes_owner:9WAzoqh2NvYm@ep-black-bush-a8jqxdjf-pooler.eastus2.azure.neon.tech/recipes?sslmode=require&channel_binding=require"
 ```
 
-Now when I hit the `/api/recipes` endpoint, I see the repsonse that I expect:
+Now when I hit the `/api/recipes` endpoint, I see the response that I expect:
 
 ```bash
 > curl https://recipes-api-2000.azurewebsites.net/api/recipes

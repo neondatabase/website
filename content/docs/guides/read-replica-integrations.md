@@ -1,14 +1,18 @@
 ---
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
+summary: >-
+  Covers the setup of read replicas in Neon to enhance application scalability
+  by distributing read requests, including integration examples for popular
+  frameworks like Prisma.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.479Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
 
 <Admonition type="note">
-The Free Plan is limited to a maximum of 3 read replica computes per project.
+The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
 A key benefit of read replicas is that you can distribute read requests to one or more read replicas, enabling you to easily scale your applications and achieve higher throughput for both read-write and read-only workloads.
@@ -56,7 +60,7 @@ For more, including configuring multiple read replicas, refer to [Read Replicas]
 
 ## Drizzle ORM
 
-With Drizzle ORM, you can leverage the `withReplicas()` function to direct `SELECT` queries to read replicas, and create, delete, and update operations to your primary compute, as shown in the following example:
+With Drizzle ORM, you can use the `withReplicas()` function to direct `SELECT` queries to read replicas, and create, delete, and update operations to your primary compute, as shown in the following example:
 
 ```javascript
 import { sql } from 'drizzle-orm';

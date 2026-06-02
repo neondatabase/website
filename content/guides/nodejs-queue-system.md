@@ -4,7 +4,7 @@ subtitle: Learn how to implement a job queue system to handle background tasks e
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-16T00:00:00.000Z'
-updatedOn: '2025-03-16T00:00:00.000Z'
+updatedOn: '2026-02-18T14:29:21.000Z'
 ---
 
 Job queues are essential components in modern applications. Queues enable you to handle resource-intensive or time-consuming tasks asynchronously. This approach improves application responsiveness by moving heavy processing out of the request-response cycle.
@@ -521,7 +521,7 @@ async function getJobsByQueue(queueName, limit = 100, offset = 0) {
 
 async function getJobStats() {
   const result = await pool.query(`
-    SELECT 
+    SELECT
       queue_name,
       status,
       COUNT(*) as count
@@ -1013,11 +1013,7 @@ This will show you a breakdown of job counts by queue and status:
 
 ### Bull Board Dashboard
 
-If you've set up Bull Board as described earlier, you can visit `http://localhost:3000/admin/queues` in your browser to see a visual dashboard of all your queues and jobs.
-
-![Bull Board Dashboard](/guides/images/job-queue-system/bull-board.png)
-
-This dashboard provides a real-time view of your queues, including active, waiting, and completed jobs.
+If you've set up Bull Board as described earlier, you can visit `http://localhost:3000/admin/queues` in your browser to see a visual dashboard of all your queues and jobs. This dashboard provides a real-time view of your queues, including active, waiting, and completed jobs.
 
 ## Verifying Database Records
 

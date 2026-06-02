@@ -1,18 +1,22 @@
 ---
 title: Get started with logical replication
 subtitle: Learn how to replicate data to and from your Neon Postgres database
+summary: >-
+  Covers the setup of logical replication in Neon Postgres, enabling data
+  streaming to and from external sources, live migrations, and inter-project
+  data replication using a publisher-subscriber model.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
-  - /docs/guides/logical-replication-clickhouse
-updatedOn: '2025-02-24T15:53:13.359Z'
+  - /docs/guides/logical-replication-aurora-to-neon
+updatedOn: '2026-05-03T13:21:51.000Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
 - Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
-- Perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
+- Perform live migrations to Neon from external sources such as AWS RDS and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
 - Replicate data from one Neon project to another for Neon project, account, Postgres version, or region migration. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_publishers_subscribers.jpg)
@@ -41,15 +45,21 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
+<Admonition type="note">
+To replicate data from Neon, you must first enable logical replication on your project. This setting cannot be reverted once enabled. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for Console and API instructions.
+</Admonition>
+
 <TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
-<a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
+<a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse using ClickPipes" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
+
+<a href="/docs/guides/logical-replication-databricks" title="Databricks" description="Replicate data from Neon to Databricks" icon="databricks"></a>
 
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
@@ -78,8 +88,6 @@ To get started, jump into one of our step-by-step logical replication guides.
 <TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
-
-<a href="/docs/guides/logical-replication-aurora-to-neon" title="Aurora" description="Replicate data from Aurora to Neon" icon="aws-rds"></a>
 
 <a href="/docs/import/migrate-from-azure-postgres" title="Azure PostgreSQL" description="Replicate data from Azure PostgreSQL to Neon" icon="azure"></a>
 

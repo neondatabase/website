@@ -11,6 +11,7 @@ module.exports = defineConfig({
         ...process.env,
         ...config.env,
       };
+
       return config;
     },
   },

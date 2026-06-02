@@ -1,15 +1,19 @@
 ---
 title: The citext Extension
 subtitle: Use the citext extension to handle case-insensitive data in Postgres
+summary: >-
+  Covers the setup and usage of the `citext` extension in Postgres for handling
+  case-insensitive text data, including installation steps and practical
+  examples for applications like user registration systems.
 enableTableOfContents: true
-updatedOn: '2024-06-30T17:25:28.128Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
-The `citext` extension in Postgres provides a case-insensitive data type for text. This is particularly useful in scenarios where the case of text data should not affect queries, such as usernames or email addresses, or any form of textual data where case-insensitivity is desired.
+The `citext` extension in Postgres provides a case-insensitive data type for text. Use it for columns where case shouldn't matter, like usernames or email addresses.
 
 <CTA />
 
-This guide covers the `citext` extension — its setup, usage, and practical examples in Postgres. For datasets where consistent text formatting isn't guaranteed, case-insensitive queries can streamline operations.
+This guide covers the `citext` extension: its setup, usage, and practical examples in Postgres. For datasets where consistent text formatting isn't guaranteed, case-insensitive queries can streamline operations.
 
 <Admonition type="note">
 The `citext` extension is an open-source module for Postgres. It can be easily installed and used in any Postgres database. This guide provides steps for installation and usage, with further details available in the [Postgres Documentation](https://postgresql.org/docs/current/citext.html).
@@ -23,7 +27,7 @@ You can enable `citext` by running the following `CREATE EXTENSION` statement in
 CREATE EXTENSION IF NOT EXISTS citext;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Example usage
 

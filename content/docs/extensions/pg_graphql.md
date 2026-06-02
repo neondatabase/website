@@ -1,19 +1,23 @@
 ---
 title: The pg_graphql extension
 subtitle: Instantly create a GraphQL API for your Postgres database
+summary: >-
+  Covers the setup of the `pg_graphql` extension to create a GraphQL API for
+  your Postgres database, enabling direct querying through the
+  `graphql.resolve()` function while maintaining data security and integrity.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.304Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `pg_graphql` extension adds a GraphQL API layer directly to your Postgres database. It introspects your SQL schema, tables, columns, relationships, and functions and automatically generates a corresponding GraphQL schema. This allows you to query your database using GraphQL through a single SQL function call, `graphql.resolve()`, eliminating the need for external GraphQL servers or middleware.
 
-With `pg_graphql`, you can leverage the flexibility of GraphQL for data fetching while keeping your data and API logic tightly coupled within Postgres. It respects existing Postgres roles ensuring data access remains secure and consistent.
+With `pg_graphql`, you get GraphQL's flexibility for data fetching while keeping your data and API logic tightly coupled within Postgres. It respects existing Postgres roles ensuring data access remains secure and consistent.
 
 <CTA />
 
 ## Enable the `pg_graphql` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_graphql;
@@ -54,7 +58,7 @@ The `Query` type is the entry point for all read operations.
 
 ### Collections
 
-For each accessible table (e.g., `Book`), `pg_graphql` creates a collection field (e.g., `bookCollection`) on the `Query` type. Collections allow you to fetch multiple records and support pagination, filtering, and sorting.
+For each accessible table (for example, `Book`), `pg_graphql` creates a collection field (for example, `bookCollection`) on the `Query` type. Collections allow you to fetch multiple records and support pagination, filtering, and sorting.
 
 #### Basic collection fetch
 
@@ -645,7 +649,7 @@ $$);
 - **Role permissions**: A user querying via `pg_graphql` can only see/interact with tables, columns, and functions they have SQL permissions for. If a role lacks `SELECT` on a table, that table won't appear in their GraphQL schema.
 - **Row-Level Security (RLS)**: All RLS policies are automatically applied.
 
-While this guide provides a solid foundation, `pg_graphql` offers a rich set of advanced features not covered here. For a deeper dive into capabilities like exposing complex SQL functions as queries or mutations, advanced filtering techniques including nested logical operators and array operations, fine-tuning schema generation with more comment directives (e.g., for computed relationships on views or custom naming for all elements), handling transactions, performance optimization strategies, and detailed guides for integrating with client libraries like Apollo and Relay, please refer to the official [`pg_graphql` documentation](https://supabase.github.io/pg_graphql/).
+While this guide provides a solid foundation, `pg_graphql` offers a rich set of advanced features not covered here. For a deeper dive into capabilities like exposing complex SQL functions as queries or mutations, advanced filtering techniques including nested logical operators and array operations, fine-tuning schema generation with more comment directives (for example, for computed relationships on views or custom naming for all elements), handling transactions, performance optimization strategies, and detailed guides for integrating with client libraries like Apollo and Relay, please refer to the official [`pg_graphql` documentation](https://supabase.github.io/pg_graphql/).
 
 ## Conclusion
 

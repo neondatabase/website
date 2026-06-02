@@ -93,42 +93,4 @@
     line-gap-override: 0%;
     size-adjust: 99.47%;
   }
-
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    src: url('/fonts/ibm-plex-mono/ibm-plex-mono-regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Mono Fallback';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Courier New');
-    ascent-override: 102.52%;
-    descent-override: 27.5%;
-    line-gap-override: 0%;
-    size-adjust: 99.98%;
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Mono';
-    src: url('/fonts/ibm-plex-mono/ibm-plex-mono-bold.woff2') format('woff2');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: 'IBM Plex Mono Fallback';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Courier New Bold');
-    ascent-override: 102.52%;
-    descent-override: 27.5%;
-    line-gap-override: 0%;
-    size-adjust: 99.98%;
-  }
 }

@@ -1,9 +1,12 @@
 ---
 title: 'Connect or Use [Name] with Neon'
 subtitle: 'Set up a Neon project in seconds and connect from a [NAME]'
+summary: >-
+  Template for creating new Neon integration guides, providing a standard
+  structure for connecting a Neon project with an external tool or framework.
 enableTableOfContents: true
 isDraft: true
-updatedOn: '2024-01-11T14:49:37.564Z'
+updatedOn: '2026-02-06T22:07:32.901Z'
 ---
 
 [Introduction paragraph describing the service, platform, framework, etc. Refer to other guides for examples.]

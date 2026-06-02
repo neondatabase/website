@@ -37,14 +37,14 @@ const FEATURES = [
 ];
 
 const TrustCenter = () => (
-  <section className="trust-center safe-paddings relative pt-40 xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
+  <section className="trust-center relative pt-40 safe-paddings xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
     <Container className="relative z-10" size="960">
       <div className="flex gap-[72px] lg:mr-[52px] lg:justify-center lg:gap-9 md:mr-0 sm:flex-col sm:gap-10">
         <div className="w-[280px] shrink-0 lg:w-[328px] md:w-1/2 sm:w-full">
-          <h2 className="font-title text-[44px] font-medium leading-[0.9] tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[32px]">
+          <h2 className="font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[32px]">
             Trust Center
           </h2>
-          <div className="text-with-links mt-4 flex flex-col gap-2 leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
+          <div className="mt-4 flex flex-col gap-2 text-with-links leading-snug tracking-extra-tight text-gray-new-70 lg:text-[15px]">
             <p>
               Request audit reports, certifications, and compliance documentation via our{' '}
               <a href={LINKS.trust} target="_blank" rel="noreferrer">
@@ -63,11 +63,11 @@ const TrustCenter = () => (
             <div key={title}>
               <div className="flex items-start gap-2">
                 <Image className="shrink-0" src={icon} alt={title} width={22} height={22} />
-                <h3 className="text-lg font-medium leading-snug tracking-extra-tight sm:text-base">
+                <h3 className="text-lg leading-snug font-medium tracking-extra-tight sm:text-base">
                   {title}
                 </h3>
               </div>
-              <p className="mt-2 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 sm:text-[15px]">
+              <p className="mt-2 leading-snug font-light tracking-extra-tight text-pretty text-gray-new-70 sm:text-[15px]">
                 {description}
               </p>
             </div>

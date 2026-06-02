@@ -1,22 +1,31 @@
-import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import BlogPostCard from 'components/pages/blog/blog-post-card';
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
+import triangleIcon from 'icons/triangle.svg';
+import { cn } from 'utils/cn';
 
-const MoreArticles = ({ className = null, posts }) => (
-  <section className={clsx('more-articles flex flex-col', className)}>
-    <h2 className="flex items-center font-title text-xs font-medium uppercase leading-none -tracking-extra-tight text-blue-80">
+const MoreArticles = ({ className = null, posts, routeConfig = DEFAULT_BLOG_ROUTE_CONFIG }) => (
+  <section className={cn('more-articles flex flex-col', className)}>
+    <h2 className="flex items-center gap-x-2 font-mono text-xs leading-none -tracking-extra-tight text-gray-new-80 uppercase">
+      <Image className="" src={triangleIcon} alt="" width={12} height={14} aria-hidden="true" />
       <span className="">More from Neon</span>
-      <span className="ml-2 h-px grow bg-gray-new-20" />
+      <span className="ml-2.5 h-px grow bg-gray-new-20" />
     </h2>
 
-    <ul className="mt-6 grid grid-cols-3 gap-x-10 xl:gap-x-6 lg:gap-x-4 md:grid-cols-1 md:gap-y-6">
-      {posts.map((post, index) => (
-        <li key={index} className="flex flex-col">
-          <BlogPostCard {...post} imageWidth={380} imageHeight={214} />
-        </li>
+    <div className="mt-8 flex flex-col md:mt-6">
+      {posts.map(({ excerpt: _excerpt, subtitle: _subtitle, ...post }, index) => (
+        <BlogPostCard
+          key={index}
+          {...post}
+          imageWidth={260}
+          imageHeight={146}
+          routeConfig={routeConfig}
+          isSmart
+        />
       ))}
-    </ul>
+    </div>
   </section>
 );
 
@@ -50,6 +59,12 @@ MoreArticles.propTypes = {
       }),
     })
   ),
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default MoreArticles;

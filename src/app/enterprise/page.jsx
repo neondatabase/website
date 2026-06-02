@@ -1,11 +1,11 @@
 import Bento from 'components/pages/enterprise/bento';
 import CaseStudies from 'components/pages/enterprise/case-studies';
-import Faq from 'components/pages/enterprise/faq';
 import Features from 'components/pages/enterprise/features';
 import Hero from 'components/pages/enterprise/hero';
 import HowNeonHelps from 'components/pages/enterprise/how-neon-helps';
 import Usage from 'components/pages/enterprise/usage';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
+import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import TestimonialNew from 'components/shared/testimonial-new';
@@ -45,7 +45,6 @@ export const metadata = getMetadata(SEO_DATA.enterprise);
 const logos = [
   'eqt',
   'openai',
-  'zimmer',
   'outfront',
   'adobe',
   'genomics',
@@ -57,6 +56,8 @@ const logos = [
   'bcg',
   'wordware',
   'commure',
+  'bitso',
+  'framer',
 ];
 
 const features = [
@@ -64,7 +65,7 @@ const features = [
     icon: scalabilityIcon,
     title: 'Scalability',
     description:
-      'Neon offers serverless Postgres, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
+      'Neon offers serverless backend primitives, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
     url: '/docs/introduction/autoscaling',
   },
   {
@@ -157,7 +158,7 @@ const caseStudies = [
   },
   {
     title: '10x less capacity',
-    description: 'vs Aurora Global.',
+    description: 'vs other serverless databases.',
     logo: {
       src: dispatchLogo,
       width: 104,
@@ -276,17 +277,13 @@ const faqItems = [
     answer: `Yes, we provide annual contracts for Enterprise clients accounting for higher resource limits and dedicated requirements. If you’re interested, <a href="/contact-sales">contact us.</a>`,
   },
   {
-    question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/migration-assistance">Tell us here</a> if you’re considering migrating to Neon.`,
-  },
-  {
     question: 'What can I expect during the sales process?',
     answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. <a href="/contact-sales">Reach out to us</a> and tell us about your use case: we're here to help.`,
   },
 ];
 
 const EnterprisePage = () => (
-  <Layout headerClassName="!absolute !bg-transparent">
+  <Layout headerClassName="absolute! bg-transparent!">
     <Hero />
     <Logos className="mt-[102px] xl:mt-[86px] lg:mt-[76px] md:mt-[68px]" logos={logos} />
     <TestimonialNew
@@ -323,12 +320,12 @@ const EnterprisePage = () => (
       }}
     />
     <Faq items={faqItems} />
-    <CTA
-      className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
-      title="The Postgres of tomorrow, <br /> available today"
-      titleClassName="!text-[68px] leading-none xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+    <CTANew
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
+      buttonType="aiHelper"
     />
   </Layout>
 );

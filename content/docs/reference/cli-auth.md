@@ -1,8 +1,12 @@
 ---
-title: Neon CLI commands — auth
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: auth'
+subtitle: Authenticate to Neon via browser or API key and manage credentials
+summary: >-
+  Covers the usage of the `auth` command in the Neon CLI for user
+  authentication, detailing the process of authorizing access to a Neon account
+  and managing credentials.
 enableTableOfContents: true
-updatedOn: '2025-03-18T17:02:17.412Z'
+updatedOn: '2026-02-26T16:28:03.954Z'
 ---
 
 ## Before you begin
@@ -26,7 +30,7 @@ The command launches a browser window where you can authorize the Neon CLI to ac
 ```
 
 <Admonition type="note">
-If you use Neon through the [Native Integration on Vercel](/docs/guides/vercel-native-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+If you use Neon through the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
 </Admonition>
 
 An alternative to authenticating using `neon auth` is to provide an API key when running a CLI command. You can do this using the global `--api-key` option or by setting the `NEON_API_KEY` variable. See [Global options](/docs/reference/neon-cli#global-options) for instructions.

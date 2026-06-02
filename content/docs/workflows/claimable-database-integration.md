@@ -1,15 +1,19 @@
 ---
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
+summary: >-
+  Covers the setup of Neon projects for users through the project database claim
+  API, detailing the process of creating, transferring, and claiming Postgres
+  databases.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.921Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 ## Overview
 
-The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and seamlessly transition ownership. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
+The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and transfer ownership when ready. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
 
-<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>." isIntro></CTA>
+<CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>."></CTA>
 
 ## Simplified workflow
 
@@ -23,7 +27,7 @@ The project transfer functionality enables you to provision fully-configured Pos
    - This URL contains the project ID and transfer request ID
 
 4. **User claims the project**
-   - When they click the URL, Neon transfers the project to their account
+   - When they click the URL, Neon prompts them to transfer the project to their account
 
 ## Step-by-step guide
 
@@ -92,7 +96,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
 }
 ```
 
-Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started-with-neon/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
+Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
 
 ## Create a transfer request
 
@@ -172,9 +176,7 @@ When your user clicks the claim URL:
 
 1. Neon prompts them to log in or create an account
 2. After authentication, Neon displays a confirmation screen
-3. If they belong to organizations, they can select the destination:
-   - Their personal account
-   - Any organization where they have membership
+3. They select their destination Neon organization
 4. Upon confirmation, Neon transfers the project
 5. The user is then:
    - Redirected to your application if `ru` parameter was provided, allowing you to detect the successful claim and continue your onboarding flow
@@ -213,6 +215,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Expiration**: Requests expire after the specified `ttl_seconds` (default: 24 hours). Once expired, you must create a new transfer request
 - **One-time use**: Each transfer request can only be used once
 - **Already claimed**: If a project has already been claimed, subsequent attempts will fail with an error
+- **Vercel orgs not supported**: Transferring a project into a Vercel-managed Neon [organization](/docs/reference/glossary#organization) via the claim flow is not supported, meaning that if you created your Neon account through the [Vercel-managed integration](/docs/guides/vercel-managed-integration), you cannot claim projects into the Neon organization created by that integration.
 
 ### Security considerations
 
@@ -224,7 +227,8 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 
 - **Connection persistence**: Database connection strings remain valid after transfer
 - **Organization transfers**: Users must be members of the target organization
-- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (e.g., `org-cool-breeze-12345678`)
+- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (for example, `org-cool-breeze-12345678`)
+- **Vercel organization limitation**: Projects cannot be claimed into Vercel organizations
 
 ## Example use cases
 
@@ -234,7 +238,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Demo environments** - Create ready-to-use demo databases that prospects can claim
 - **Team environments** - Provision project databases for team members to claim into their organization
 
-For a working implementation of claimable databases, try [Neon Launchpad](https://neon.new/). This service demonstrates the complete flow: users receive a Postgres connection string immediately without creating an account, and databases remain active for 72 hours. To retain the database beyond this period, users claim it by creating a Neon account using the provided transfer URL. See the [Neon Launchpad documentation](/docs/reference/neon-launchpad) for implementation details. This same pattern enables SaaS providers to offer instant database provisioning while allowing users to take ownership when ready.
+For a working implementation of claimable databases, try [Claimable Postgres by Neon](https://neon.new/). This service demonstrates the complete flow: users receive a Postgres connection string immediately without creating an account, and databases remain active for 72 hours. To retain the database beyond this period, users claim it by creating a Neon account using the provided transfer URL. See the [Claimable Postgres documentation](/docs/reference/claimable-postgres) for implementation details. This same pattern enables SaaS providers to offer instant database provisioning while allowing users to take ownership when ready.
 
 ## Troubleshooting
 

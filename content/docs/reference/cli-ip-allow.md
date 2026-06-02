@@ -1,8 +1,12 @@
 ---
-title: Neon CLI commands — ip-allow
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: ip-allow'
+subtitle: 'Manage the IP allowlist: list, add, remove, and reset allowed IPs'
+summary: >-
+  Covers the usage of the `ip-allow` command in the Neon CLI to manage the IP
+  allowlist for a Neon project, including actions to list, add, remove, and
+  reset IP addresses.
 enableTableOfContents: true
-updatedOn: '2024-07-12T11:16:39.830Z'
+updatedOn: '2026-02-26T16:28:03.963Z'
 ---
 
 ## Before you begin
@@ -78,7 +82,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
 | `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
 | `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
-| `--protected-only` | If true, the list will be applied only to the default branch. Use `--protected-only false` to remove this setting. | string |                                                     |
+| `--protected-only` | If true, the list will be applied only to protected branches. Use `--protected-only false` to remove this setting. | string |                                                     |
 
 #### Example
 

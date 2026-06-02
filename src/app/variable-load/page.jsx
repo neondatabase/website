@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import slugify from 'slugify';
 
 import Efficiency from 'components/pages/variable/efficiency';
@@ -6,12 +5,12 @@ import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
 import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
-import Cta from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
+import { cn } from 'utils/cn';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.variable);
@@ -19,7 +18,7 @@ export const metadata = getMetadata(SEO_DATA.variable);
 const titles = [
   'Fixed Compute = Manual Resizes, Extra Costs',
   'Neon Autoscaling Fixes This Problem',
-  'Neon vs Aurora Serverless v2',
+  'Neon vs other serverless databases',
 ];
 
 const VariableLoadPage = async () => {
@@ -33,8 +32,8 @@ const VariableLoadPage = async () => {
   }));
 
   return (
-    <Layout headerWithBorder isHeaderSticky>
-      <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
+    <Layout isHeaderSticky>
+      <div className="flex flex-1 flex-col safe-paddings dark:bg-black-pure dark:text-white lg:block">
         <Container
           className="grid w-full flex-1 grid-cols-12 gap-x-10 pt-[88px] xl:gap-x-7 xl:pt-14 lg:block lg:gap-x-5 lg:pt-11 md:pt-8"
           size="1344"
@@ -49,7 +48,7 @@ const VariableLoadPage = async () => {
           </div>
           <div className="col-span-2 col-start-11 -ml-12 h-full max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px] xl:hidden">
             <div
-              className={clsx(
+              className={cn(
                 'sticky top-[104px]',
                 'before:absolute before:-inset-5 before:-z-10 before:rounded-xl before:bg-black-pure/50 before:backdrop-blur'
               )}
@@ -61,13 +60,12 @@ const VariableLoadPage = async () => {
             </div>
           </div>
         </Container>
-        <Cta
-          className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
-          title="Ask us for a<br> price estimation"
-          description="Start saving with Neon"
-          buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
-          buttonText="Contact us"
-          buttonUrl={LINKS.contactSales}
+        <CTANew
+          label="ASK AI"
+          title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+          description="It knows Neon inside and out."
+          buttonText="Get Answers"
+          buttonType="aiHelper"
         />
       </div>
     </Layout>

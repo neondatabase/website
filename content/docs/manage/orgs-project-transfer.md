@@ -1,10 +1,18 @@
 ---
 title: Transfer projects
+summary: >-
+  Covers the transfer of projects between organizations in Neon, detailing
+  methods for individual and bulk transfers through the Console and API, along
+  with necessary permissions and limitations.
 enableTableOfContents: true
-updatedOn: '2025-06-25T02:56:37.087Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.
+
+<Admonition type="note">
+Transferring a project does not affect its credentials or connection string. Your connected applications will continue to work without any disruption.
+</Admonition>
 
 ## Limits & requirements
 
@@ -13,6 +21,7 @@ You can transfer your projects to any organization you are a member of. You can 
 - Requires **Admin** rights in the source org and at least **Member** rights in the destination org.
 - Projects with GitHub or Vercel integrations cannot be transferred.
 - Vercel-managed orgs are not supported.
+- Projects can only be transferred to organizations you belong to, not to personal Neon accounts.
 
 <Steps>
 ## Transfer a single project
@@ -32,7 +41,7 @@ Use the org switcher in the top navbar to select the Organization that owns the 
 
 You'll need **Admin** rights in the source org, and at least **Member** rights in the destination.
 
-![transfer mulitple projects from org settings](/docs/manage/transfer_multiple.png)
+![transfer multiple projects from org settings](/docs/manage/transfer_multiple.png)
 
 ## Via API (for automation or large numbers of projects)
 

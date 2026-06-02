@@ -1,8 +1,12 @@
 ---
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
+summary: >-
+  Covers the setup and usage of the `pg_stat_statements` extension in Postgres
+  to track SQL statement execution statistics, enabling performance analysis and
+  optimization for Neon projects.
 enableTableOfContents: true
-updatedOn: '2025-02-05T21:06:28.067Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
@@ -25,7 +29,7 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 
 ### Data persistence
 
-In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute restarts. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
+In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute restarts. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/introduction/compute-lifecycle). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
 
 ## Enable the `pg_stat_statements` extension
 
@@ -35,7 +39,7 @@ The extension is installed by running the following `CREATE EXTENSION` statement
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Usage examples
 
@@ -222,7 +226,7 @@ LIMIT 10;
 
 ## Reset statistics
 
-When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics.
+When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. Use it when you want to start fresh with performance statistics collection.
 
 <Admonition type="note">
 In Neon, only [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.

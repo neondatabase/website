@@ -1,12 +1,11 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Container from 'components/shared/container/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import arrowRightIcon from 'icons/enterprise/arrow-right.svg';
+import { cn } from 'utils/cn';
 
 import linesMd from './images/lines-md.svg';
 import lines from './images/lines.svg';
@@ -18,13 +17,13 @@ const bgTransformStyles = {
 };
 
 const CaseStudies = ({ items }) => (
-  <section className="impact safe-paddings relative mx-auto overflow-hidden xl:max-w-[1024px] lg:max-w-[768px] md:w-[360px]">
+  <section className="impact relative mx-auto overflow-hidden safe-paddings xl:max-w-[1024px] lg:max-w-[768px] md:w-[360px]">
     <Container
       className="flex items-end justify-between gap-x-4 md:justify-center md:text-center"
       size="960"
     >
       <div>
-        <h2 className="font-title text-[52px] font-medium tracking-tighter xl:text-5xl lg:text-4xl md:text-[32px]">
+        <h2 className="font-title text-[52px] font-medium tracking-tighter xl:text-5xl/normal lg:text-4xl/normal md:text-[32px]">
           Neon’s impact
         </h2>
         <p className="-mt-1 text-lg leading-snug tracking-tight text-gray-new-80 lg:text-base md:mt-0">
@@ -32,7 +31,7 @@ const CaseStudies = ({ items }) => (
         </p>
       </div>
       <Link
-        className="mb-1 text-lg font-medium leading-none tracking-tight xl:mb-0.5 xl:text-base md:hidden"
+        className="mb-1 rounded-sm text-lg leading-none font-medium tracking-tight xl:mb-0.5 xl:text-base md:hidden"
         theme="white"
         size="xs"
         to={LINKS.caseStudies}
@@ -41,16 +40,16 @@ const CaseStudies = ({ items }) => (
         Explore all case studies
       </Link>
     </Container>
-    <Container className="relative mt-11 xl:mt-12 xl:!px-0 md:mt-10 md:!px-0" size="1216">
+    <Container className="relative mt-11 xl:mt-12 xl:px-0! md:mt-10" size="1280">
       <ul className="grid w-full grid-cols-3 px-6 xl:px-0 md:grid-cols-2">
         {items.map(({ title, description, logo, link }, index) => (
           <li key={index}>
             <Link
-              className="group relative block h-[230px] w-full rounded-xl p-10 xl:h-[196px] xl:p-8 lg:h-[169px] lg:pb-6 md:h-auto md:px-5 md:pb-[22px] md:pt-4"
+              className="group relative block h-[230px] w-full rounded-xl p-10 xl:h-[196px] xl:p-8 lg:h-[169px] lg:pb-6 md:h-auto md:px-5 md:pt-4 md:pb-[22px]"
               to={link}
             >
               <div className="relative z-10 flex h-full flex-col justify-between">
-                <p className="relative text-[28px] font-medium leading-tight tracking-tight text-white xl:text-2xl lg:text-xl md:text-base">
+                <p className="relative text-[28px] leading-tight font-medium tracking-tight text-white xl:text-2xl lg:text-xl md:text-base">
                   {title}{' '}
                   <span
                     className="font-normal text-gray-new-60"
@@ -59,7 +58,7 @@ const CaseStudies = ({ items }) => (
                 </p>
                 <div className="relative flex items-center gap-x-2.5 md:mt-4">
                   <Image
-                    className={clsx(
+                    className={cn(
                       'pointer-events-none h-6 w-fit shrink-0 transition-opacity duration-300 lg:h-5 md:h-[18px]',
                       'opacity-80 group-hover:opacity-100'
                     )}
@@ -69,7 +68,7 @@ const CaseStudies = ({ items }) => (
                     alt=""
                   />
                   <Image
-                    className={clsx(
+                    className={cn(
                       'pointer-events-none -mb-px shrink-0 transition-opacity duration-300 md:w-2.5',
                       'opacity-0 group-hover:opacity-100'
                     )}
@@ -81,7 +80,7 @@ const CaseStudies = ({ items }) => (
                 </div>
               </div>
               <span
-                className={clsx(
+                className={cn(
                   'pointer-events-none absolute inset-px',
                   'opacity-0 transition-opacity duration-300 group-hover:opacity-100',
                   {
@@ -104,7 +103,7 @@ const CaseStudies = ({ items }) => (
         ))}
       </ul>
       <Link
-        className="mt-10 hidden w-full text-center !text-[16px] font-medium leading-none tracking-tight md:flex md:justify-center"
+        className="mt-10 hidden w-full text-center text-[16px]! leading-none font-medium tracking-tight md:flex md:justify-center"
         theme="white"
         size="xs"
         to={LINKS.caseStudies}
@@ -113,7 +112,7 @@ const CaseStudies = ({ items }) => (
         Explore all case studies
       </Link>
       <Image
-        className="pointer-events-none absolute left-0 top-2 -z-10 w-[1216px] max-w-none xl:-left-[22px] xl:top-0 xl:w-[1070px] lg:-left-4 lg:top-[23px] lg:w-[800px] md:hidden"
+        className="pointer-events-none absolute top-2 left-1/2 -z-10 w-[1216px] max-w-none -translate-x-1/2 xl:top-0 xl:w-[1070px] lg:top-[23px] lg:w-[800px] md:hidden"
         src={lines}
         width={1216}
         height={444}

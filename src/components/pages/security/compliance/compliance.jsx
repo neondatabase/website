@@ -36,9 +36,9 @@ const CARDS = [
 ];
 
 const Compliance = () => (
-  <section className="compliance safe-paddings relative pt-28 xl:pt-[104px] lg:pt-20 md:pt-16">
+  <section className="compliance relative pt-28 safe-paddings xl:pt-[104px] lg:pt-20 md:pt-16">
     <Container className="relative z-10" size="960">
-      <h2 className="text-center font-title text-[44px] font-medium leading-[0.9] tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[28px]">
+      <h2 className="text-center font-title text-[44px] leading-[0.9] font-medium tracking-extra-tight xl:text-4xl lg:text-[36px] md:text-[28px]">
         Compliance Frameworks
       </h2>
       <Cards data={CARDS} isPriority />

@@ -6,16 +6,16 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2025-06-03T18:04:26.406Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
 A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 
-Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined restore window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
+Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
 
-The restore window is configurable.The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+The history window is configurable. For configuration instructions, see [Configure the history window for instant restore](/docs/manage/projects#configure-the-history-window-for-instant-restore).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -34,7 +34,7 @@ To create a point-in-time branch:
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
 <Admonition type="note">
-The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your restore window. See [Configure restore window](/docs/manage/projects#configure-restore-window).
+The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history window. See [Configure the history window for instant restore](/docs/manage/projects#configure-the-history-window-for-instant-restore).
 </Admonition>
 
 7. Click **Create new branch** to create your branch.
@@ -48,7 +48,7 @@ You can also create point-in-time branches using the [Neon CLI](/docs/reference/
 neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
-The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+The timestamp must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter).
 
 </Admonition>
 
@@ -57,7 +57,7 @@ The timestamp must be provided in ISO 8601 format. You can use this [timestamp c
 Connecting to your newly created branch requires connecting via the branch's compute. The following steps describe how to connect using `psql` and a connection string obtained from the Neon Console.
 
 <Admonition type="note">
-You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can also query the databases in a branch from the Neon SQL Editor. For instructions, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 </Admonition>
 
 To connect to your branch:
@@ -91,7 +91,7 @@ To make the recovery branch your new default:
 3. Select your `recovery_branch` from the table.
 4. On the branch details page, select **Set as Default**.
 
-The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [default branch](/docs/manage/branches#default-branch).
+For more information, see [default branch](/docs/manage/branches#default-branch).
 
 <Admonition type="note">
 If your previous default branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.

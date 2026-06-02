@@ -1,8 +1,12 @@
 ---
 title: Postgres Integer data types
 subtitle: Work with integers in Postgres
+summary: >-
+  Covers the usage and characteristics of Postgres integer data types, including
+  `SMALLINT`, `INTEGER`, and `BIGINT`, along with examples of their application
+  in database design and operations.
 enableTableOfContents: true
-updatedOn: '2024-02-03T16:07:31.867Z'
+updatedOn: '2026-02-06T22:07:32.821Z'
 ---
 
 In Postgres, integer data types are used for storing numerical values without a fractional component. They are useful as identifiers, counters, and many other common data modeling tasks. Postgres offers multiple integer types, catering to different ranges of values and storage sizes.

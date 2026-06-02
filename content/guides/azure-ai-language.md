@@ -4,7 +4,7 @@ subtitle: Learn how to analyze customer feedback using Azure AI Language and sto
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2024-11-30T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 Analyzing customer sentiment can help you understand your customer satisfaction and identify areas for improvement. The Azure AI Language Services provide tools for sentiment analysis, key phrase extraction, and language detection which can be used to analyze customer feedback and extract valuable insights.
@@ -203,7 +203,7 @@ async function processFeedback() {
 
     // Get unanalyzed feedback
     const feedbackResult = await client.query(`
-      SELECT f.feedback_id, f.feedback_text 
+      SELECT f.feedback_id, f.feedback_text
       FROM customer_feedback f
       LEFT JOIN sentiment_results s ON f.feedback_id = s.feedback_id
       WHERE s.feedback_id IS NULL
@@ -219,7 +219,7 @@ async function processFeedback() {
       // Store results in the sentiment_results table
       await client.query(
         `
-        INSERT INTO sentiment_results 
+        INSERT INTO sentiment_results
         (feedback_id, sentiment_score, sentiment_label, key_phrases, language_code)
         VALUES ($1, $2, $3, $4, $5)
       `,

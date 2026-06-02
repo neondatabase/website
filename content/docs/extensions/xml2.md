@@ -1,8 +1,12 @@
 ---
 title: The xml2 extension
 subtitle: Perform XPath querying and XSLT transformations on XML data in Postgres.
+summary: >-
+  Covers the setup and functionality of the `xml2` extension in Postgres,
+  enabling XML parsing, XPath querying, and XSLT transformations for XML data
+  management within Neon databases.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.308Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The `xml2` extension for Postgres provides functions to parse XML data, evaluate XPath queries against it, and perform XSLT transformations. This can be useful for applications that need to process or extract information from XML documents stored within the database.
@@ -11,7 +15,7 @@ The `xml2` extension for Postgres provides functions to parse XML data, evaluate
 
 ## Enable the `xml2` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS xml2;
@@ -172,14 +176,14 @@ SELECT * FROM
 | TOOL-005    | Mega Wrench  | 75            | Tools            |
 
 **Data type conversion:**
-`xpath_table` internally deals with string representations of XPath results. When you specify a data type (e.g., `INTEGER`) in the `AS` clause, Postgres attempts to convert the string to that type. If conversion fails (e.g., an empty string or non-numeric text to `INTEGER`), an error occurs. It might be safer to extract as `TEXT` and then cast explicitly if data quality is uncertain.
+`xpath_table` internally deals with string representations of XPath results. When you specify a data type (for example, `INTEGER`) in the `AS` clause, Postgres attempts to convert the string to that type. If conversion fails (for example, an empty string or non-numeric text to `INTEGER`), an error occurs. It might be safer to extract as `TEXT` and then cast explicitly if data quality is uncertain.
 
 ### XSLT functions
 
 The `xml2` extension provides functions for XSLT (Extensible Stylesheet Language Transformations).
 
 - **`xslt_process(document text, stylesheet text, paramlist text) returns text`**
-  Applies the XSL `stylesheet` to the XML `document` and returns the transformed text. The `paramlist` argument accepts a string containing parameter assignments for the transformation, formatted as key-value pairs separated by commas (e.g., `'name=value,debug=1'`). It's important to note that due to the straightforward parsing mechanism, individual parameter values within this list cannot themselves contain commas.
+  Applies the XSL `stylesheet` to the XML `document` and returns the transformed text. The `paramlist` argument accepts a string containing parameter assignments for the transformation, formatted as key-value pairs separated by commas (for example, `'name=value,debug=1'`). It's important to note that due to the straightforward parsing mechanism, individual parameter values within this list cannot themselves contain commas.
 
 - **`xslt_process(document text, stylesheet text) returns text`**
   A two-parameter version that applies the stylesheet without passing any external parameters.
@@ -219,7 +223,7 @@ END $$;
 
 ## Conclusion
 
-The `xml2` extension provides powerful tools for working with XML data in Postgres. It allows you to parse, query, and transform XML documents using XPath and XSLT. This can be particularly useful for applications that need to handle XML data efficiently within the database.
+The `xml2` extension lets you parse, query, and transform XML documents using XPath and XSLT directly within Postgres.
 
 ## Resources
 

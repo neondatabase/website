@@ -1,8 +1,12 @@
 ---
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
+summary: >-
+  Covers the use of Neon's Schema Diff tool to compare database schemas across
+  branches, enabling detailed analysis through the Neon Console, CLI, or API for
+  migration reviews, audits, and consistency checks.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.480Z'
+updatedOn: '2026-02-15T20:51:54.199Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -48,7 +52,7 @@ Open the detailed view for the branch whose schema you want to inspect. In the r
 
 ### From the Restore page
 
-Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or ** From another branch** (from another branch's history).
+Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or **From another branch** (from another branch's history).
 
 Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
 
@@ -69,7 +73,7 @@ Use the `schema-diff` subcommand from the `branches` command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `production`, identify `production` as your base branch and `development` as your compare-source.
+The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `main`, identify `main` as your base branch and `development` as your compare-source.
 
 ```bash
 neon branches schema-diff production development
@@ -110,7 +114,7 @@ The `compare_schema` endpoint supports the following parameters:
 | Parameter          | Description                                                                   | Required | Example                    |
 | ------------------ | ----------------------------------------------------------------------------- | -------- | -------------------------- |
 | `<project_id>`     | The ID of your Neon project.                                                  | Yes      | `wispy-butterfly-25042691` |
-| `<branch_id>`      | The ID of the target branch to compare — the branch with the modified schema. | Yes      | `br-rough-boat-a54bs9yb`   |
+| `<branch_id>`      | The ID of the target branch to compare (the branch with the modified schema). | Yes      | `br-rough-boat-a54bs9yb`   |
 | `<base_branch_id>` | The ID of the base branch for comparison.                                     | Yes      | `br-royal-star-a54kykl2`   |
 | `<db_name>`        | The name of the database in the target branch.                                | Yes      | `neondb`                   |
 | `lsn`              | The LSN on the target branch for which the schema is retrieved.               | No       | `0/1EC5378`                |
@@ -122,7 +126,7 @@ The `compare_schema` endpoint supports the following parameters:
 <Admonition type="note" title="notes">
 - The optional `jq -r '.diff'` command appended to the example above extracts the diff field from the JSON response and outputs it as plain text to make it easier to read. This command is not  necessary when using the endpoint programmatically.
 - `timestamp` or `lsn` / `base_timestamp` or `base_lsn` values can be used to compare schemas as they existed as a precise time or [LSN](/docs/reference/glossary#lsn).  
-- `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://en.wikipedia.org/wiki/ISO_8601" title="ISO 8601" preview="An international standard covering the worldwide exchange and communication of date and time-related data.">ISO 8601 format</LinkPreview>.
+- `timestamp` / `base_timestamp` values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc3339#section-5.6" title="RFC 3339" preview="Date and Time on the Internet: Timestamps - RFC 3339 specification for timestamp formats used in Internet protocols.">RFC 3339 format</LinkPreview>.
 </Admonition>
 
 Here’s an example of the `compare_schema` diff output for the `neondb` database after comparing target branch `br-rough-boat-a54bs9yb` with the base branch `br-royal-star-a54kykl2`.

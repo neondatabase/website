@@ -1,8 +1,12 @@
 ---
 title: The pg_cron extension
 subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
+summary: >-
+  Covers the setup and management of the `pg_cron` extension for scheduling and
+  executing SQL commands within a Neon Postgres database, including enabling the
+  extension and monitoring scheduled tasks.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.453Z'
+updatedOn: '2026-02-15T20:51:54.085Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -55,13 +59,13 @@ curl --request POST \
 The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 </Admonition>
 
-You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 ```
 
-If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://t.co/kORvEuCUpJ).
+If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://discord.gg/92vNTzKDGp).
 
 ## `pg_cron` version availability
 
@@ -86,13 +90,13 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 You can use the following special characters:
 
 - `*`: Represents all values within the field.
-- `,`: Specifies a list of values (e.g., `1,3,5` for specific days).
-- `-`: Specifies a range of values (e.g., `10-12` for hours 10, 11, and 12).
-- `/`: Specifies step values (e.g., `*/15` in the minutes field means "every 15 minutes").
+- `,`: Specifies a list of values (for example, `1,3,5` for specific days).
+- `-`: Specifies a range of values (for example, `10-12` for hours 10, 11, and 12).
+- `/`: Specifies step values (for example, `*/15` in the minutes field means "every 15 minutes").
 
 Additionally, `pg_cron` supports:
 
-- Interval scheduling using `'[1-59] seconds'` (e.g., `'5 seconds'`).
+- Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
 
 Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](http://crontab.guru/) and adjust for the UTC timezone.

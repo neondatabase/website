@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-03-01T00:00:00.000Z'
-updatedOn: '2025-03-01T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 title: How to use self-hosted runners with GitHub Actions
 subtitle: Take full control of your GitHub Action's runner environment with DigitalOcean
 ---
@@ -11,13 +11,13 @@ In this guide, I'll walk you through setting up a Linux server on a DigitalOcean
 
 ## What is a self-hosted runner?
 
-[Self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) work similarly to GitHub's default runners, but with the key difference that you manage the server yourself. While the default runners are convenient, they come with some limitations—most notably, they timeout after six hours.
+[Self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) work similarly to GitHub's default runners, but with the key difference that you manage the server yourself. While the default runners are convenient, they come with some limitations; most notably, they timeout after six hours.
 
 This can be a challenge for long-running jobs, particularly for users of our [Neon Twin](docs/guides/neon-twin-intro) workflow who may encounter issues with large databases. In these scenarios, setting up your own self-hosted runner is a more reliable solution.
 
-<CTA title="Create a Neon Twin" description="A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production. <br><br>Learn how to create a Twin <a href='/docs/guides/neon-twin-intro'>here</a>." isIntro />
+<CTA title="Create a Neon Twin" description="A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production. <br><br>Learn how to create a Twin <a href='/docs/guides/neon-twin-intro'>here</a>." />
 
-GitHub's default runners come with several preinstalled packages and dependencies, which you can review in the [GitHub runner-images repository README](https://github.com/actions/runner-images?tab=readme-ov-file#package-managers-usage). The default runner image also includes specific user permissions. To set up an effective self-hosted runner, you'll need to manually configure these packages, dependencies, and permissions. But don't worry—I'll guide you through each step.
+GitHub's default runners come with several preinstalled packages and dependencies, which you can review in the [GitHub runner-images repository README](https://github.com/actions/runner-images?tab=readme-ov-file#package-managers-usage). The default runner image also includes specific user permissions. To set up an effective self-hosted runner, you'll need to manually configure these packages, dependencies, and permissions. But don't worry; I'll guide you through each step.
 
 ## Getting started with Digital Ocean
 
@@ -27,13 +27,13 @@ If you don't have a Digital Ocean account already, create one [here](https://clo
 
 From the navigation list on the left hand side select **Droplets**, then click **Create Droplet**.
 
-![Screenshot of Digital Ocean Create Droploet](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-create-droplet.jpg)
+![Screenshot of Digital Ocean Create Droplet](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-create-droplet.jpg)
 
 On the next screen you'll have a number of options to choose from. In this example I'll be deploying the Droplet to Digital Ocean's New York **Datacenter** and using **Ubuntu** for the Droplet **image**.
 
 ![Screenshot of Digital Ocean Droplet Config - Datacenter](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-droplet-config-1.jpg)
 
-Scroll down to the next section and choose the **Droplet Size** and **CPU Options**. In ths example, I've chosen to use a **Shared CPU** and The smallest **Disk size**.
+Scroll down to the next section and choose the **Droplet Size** and **CPU Options**. In this example, I've chosen to use a **Shared CPU** and The smallest **Disk size**.
 
 ![Screenshot of Digital Ocean Droplet Config - CPU Size](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-droplet-config-2.jpg)
 
@@ -41,7 +41,7 @@ The next step is to select an authentication method. Choose **Password** and set
 
 ![Screenshot of Digital Ocean Droplet Config - Auth Method](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-auth-method.jpg)
 
-The final step is to give your Droplet a name—I've chosen `self-hosted-actions-runner`. This name will appear in the GitHub UI, which I'll explain in a later step. Once you're ready, click **Create Droplet**.
+The final step is to give your Droplet a name; I've chosen `self-hosted-actions-runner`. This name will appear in the GitHub UI, which I'll explain in a later step. Once you're ready, click **Create Droplet**.
 
 ![Screenshot of Digital Ocean Droplet Config- Droplet Name](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-droplet-name.jpg)
 
@@ -51,7 +51,7 @@ After your Droplet is created, it will appear in the DigitalOcean UI. From there
 
 ## Configure Droplet
 
-Now that your Droplet is created, run the following command in your terminal to log in as the `root` user. You'll be prompted for your password—enter it to complete the login.
+Now that your Droplet is created, run the following command in your terminal to log in as the `root` user. You'll be prompted for your password; enter it to complete the login.
 
 ```shell
 ssh root@<Your Droplet's IP address>
@@ -105,7 +105,7 @@ runneruser ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/share/postgresql-common/pgdg/a
 
 To exit `visudo`, press `^X` and confirm the changes. Once you're done, log out as the `root` user by typing `exit` in your terminal.
 
-## Log in as runneruser
+## Log in as `runneruser`
 
 Now that the `runneruser` has been created, you can log in to configure the system for the self-hosted runner. Run the following command in your terminal to log in as `runneruser`.
 
@@ -119,7 +119,7 @@ From the options select **Linux** under the **Runner Image** section and **x64**
 
 ![Screenshot of GitHub - Self-hosted Runners](/guides/images/gihub-actions-self-hosted-runners/gihub-actions-self-hosted-runners-github-runner-instructions.jpg)
 
-Follow the **Download** and **Configure** steps. When you reach the final step, **Create the runner and start the configuration experience**, press **Enter** to accept the default options. However, skip the last step, which runs `./run.sh`—I'll explain why next.
+Follow the **Download** and **Configure** steps. When you reach the final step, **Create the runner and start the configuration experience**, press **Enter** to accept the default options. However, skip the last step, which runs `./run.sh`; I'll explain why next.
 
 ### Running the Self-Hosted Runner
 

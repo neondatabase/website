@@ -1,8 +1,12 @@
 ---
 title: Manage databases
+summary: >-
+  Covers the management of databases within Neon's project branches, including
+  creation, schema details, and privileges, as well as interfaces for database
+  operations like the Neon Console, CLI, API, and SQL.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-05T21:22:28.479Z'
+updatedOn: '2026-04-23T09:17:35.000Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -39,7 +43,7 @@ To create a database:
 1. Select **Branches** from the sidebar.
 1. Select the branch where you want to create the database.
 1. Select the **Roles** & **Databases** tab.
-1. Click **Add Database**.
+1. Click **Add database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
@@ -108,7 +112,7 @@ Some names are not permitted for databases. See [Reserved database names](#reser
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -123,38 +127,30 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "mydb",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "6fc5969a-c445-4bc1-9f94-4dfbab4ad293",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "b51c8ece-b78e-49f7-8ec1-78b37cbae3c4",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
-    },
-    {
-      "id": "a0e78873-399a-45e4-9728-dde0b36f0941",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
+      "created_at": "2025-08-04T08:14:14Z",
+      "updated_at": "2025-08-04T08:14:14Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -180,6 +176,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [List databases](https://api-docs.neon.tech/reference/listprojectbranchdatabases) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -217,7 +215,7 @@ PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters. This example updates the database `name` value to `database1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/mydb' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/mydb' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -231,38 +229,30 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Update database](https://api-docs.neon.tech/reference/updateprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "7a3e05b0-385e-490c-a6a3-60bbb8906f57",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "2f8c0a6a-33b5-4d56-964b-739614b699c0",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:19:35Z",
-      "updated_at": "2023-01-04T21:19:35Z"
-    },
-    {
-      "id": "f2805f7f-4d83-4c58-b3d1-dc678e699106",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:19:35Z",
-      "updated_at": "2023-01-04T21:19:35Z"
+      "created_at": "2025-08-04T08:17:22Z",
+      "updated_at": "2025-08-04T08:17:22Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -282,7 +272,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases/database1' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/database1' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -290,38 +280,30 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Delete database](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "database": {
-    "id": 1140822,
-    "branch_id": "br-blue-tooth-671580",
+    "id": 2889509,
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2023-01-04T21:17:17Z",
-    "updated_at": "2023-01-04T21:17:17Z"
+    "created_at": "2025-08-04T08:14:14Z",
+    "updated_at": "2025-08-04T08:14:14Z"
   },
   "operations": [
     {
-      "id": "1a52afa4-f21b-4ed0-a97f-f7abda9ab49f",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "4cd4881b-2807-4377-a76d-8e7d39bc5448",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T21:20:24Z",
-      "updated_at": "2023-01-04T21:20:24Z"
-    },
-    {
-      "id": "f3fe437e-259a-4442-a750-3613d89dbbff",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T21:20:24Z",
-      "updated_at": "2023-01-04T21:20:24Z"
+      "created_at": "2025-08-04T08:19:39Z",
+      "updated_at": "2025-08-04T08:19:39Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -331,7 +313,7 @@ curl -X 'DELETE' \
 
 ## Manage databases with SQL
 
-You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 ```sql
 CREATE DATABASE testdb;
@@ -346,6 +328,87 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 </Admonition>
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+## Transfer database table ownership between roles
+
+In Neon, roles created via the Console, CLI, or API are members of `neon_superuser` but are not full Postgres superusers. This means you can't directly transfer ownership of a database table from one role to another using `ALTER TABLE ... OWNER TO`.
+
+The workaround is to introduce a shared group role that both roles belong to. You transfer ownership to the group, then the destination role can claim ownership for itself.
+
+<Admonition type="note">
+In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
+</Admonition>
+
+1. Connect as the database owner role and run:
+
+   ```sql
+   -- Create a group role with no login
+   CREATE ROLE table_owners NOLOGIN;
+
+   -- Grant schema access to the group
+   GRANT USAGE, CREATE ON SCHEMA public TO table_owners;
+
+   -- Add both roles to the group
+   GRANT table_owners TO current_owner;
+   GRANT table_owners TO new_owner;
+   ```
+
+   Replace `current_owner` and `new_owner` with the actual role names.
+
+2. Still connected as `current_owner`, transfer the table to the group:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO table_owners;
+   ```
+
+3. Connect as `new_owner`. Transfer ownership from the group to yourself:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO new_owner;
+   ```
+
+4. Verify ownership:
+
+   ```sql
+   \dt your_table
+   ```
+
+   The **Owner** column should now show `new_owner`.
+
+5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done:
+
+   ```sql
+   DROP ROLE table_owners;
+   ```
+
+   `DROP ROLE table_owners` works only after that role no longer owns any objects and has no blocking dependencies.
+
+### Transfer ownership for multiple objects
+
+The numbered steps above show how to transfer one table with `ALTER TABLE ... OWNER TO`.
+
+If you need to transfer ownership for everything a role owns in a database, use `REASSIGN OWNED` instead of running `ALTER ... OWNER TO` for each table.
+
+`REASSIGN OWNED` includes tables and other object types owned by the role, such as views, materialized views, sequences, functions, schemas, and types.
+
+Connect as `current_owner` and move all owned objects to the shared group:
+
+```sql
+REASSIGN OWNED BY current_owner TO table_owners;
+```
+
+Then connect as `new_owner` and move those objects from the group to the destination role:
+
+```sql
+REASSIGN OWNED BY table_owners TO new_owner;
+```
+
+`REASSIGN OWNED` applies within the current database context. Run it in each database where you need to transfer ownership.
+
+<Admonition type="note">
+- `REASSIGN OWNED` runs in the current database context, so run it in each database where you need to transfer ownership.
+- `REASSIGN OWNED` reassigns ownership only. It does not change existing `GRANT` permissions or default privileges.
+</Admonition>
 
 ## Reserved database names
 

@@ -1,7 +1,11 @@
 ---
 title: Enable Autoscaling in Neon
+summary: >-
+  How to enable autoscaling for compute resources in a Neon project, including
+  configuring minimum and maximum compute sizes to automatically adjust based on
+  workload demand.
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.618Z'
+updatedOn: '2026-02-15T20:51:54.123Z'
 ---
 
 <InfoBlock>
@@ -34,7 +38,11 @@ To edit a compute:
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
 1. On the **Edit compute** drawer, select **Autoscale** and use the slider to specify a minimum and maximum compute size.
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 vCPUs. One vCPU has 4 GB of RAM, 2 vCPUs have 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the number of vCPUs. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration). Please note that when the autoscaling maximum is > 10, the autoscaling minimum must be ≥ (max / 8).
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 CU. Each CU allocates approximately 4 GB of RAM; for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+
+   <Admonition type="note">
+   The maximum permitted autoscaling range is 8 CU. This means the difference between your maximum and minimum compute size cannot exceed 8 CU. For example, if you set the minimum to 1 CU, the maximum can be at most 9 CU.
+   </Admonition>
 
    <Admonition type="note">
    You can configure the scale to zero setting for your compute at the same time. For more, see [Scale to Zero](/docs/introduction/scale-to-zero).
@@ -66,19 +74,18 @@ The following table outlines the initial default autoscaling settings for newly 
 | **Neon plan** | **Minimum compute size** | **Maximum compute size** |
 | ------------- | ------------------------ | ------------------------ |
 | Free          | 0.25                     | 2                        |
-| Launch        | 1                        | 4                        |
-| Scale         | 1                        | 8                        |
-| Business      | 1                        | 8                        |
+| Launch        | 0.25                     | 8                        |
+| Scale         | 0.25                     | 8                        |
 
 ## Monitor autoscaling
 
-From the Neon Console, you can view how your vCPU and RAM usage have scaled for the past 24 hours. On the **Project Dashboard** page, navigate down the page to the **Monitoring** section.
+From the Neon Console, you can view how your compute and RAM usage have scaled for the past 24 hours. On the **Project Dashboard** page, navigate down the page to the **Monitoring** section.
 
 Some key points about this Autoscaling graph:
 
-- **Allocated** refers to the vCPU and memory size provisioned to handle current demand; autoscaling automatically adjusts this allocation, increasing or decreasing the allocated vCPU and memory size in a step-wise fashion as demand fluctuates, within your minimum and maximum limits.
-- **VCPU Usage** is represented by the green line
-- **RAM usage** is represented by the blue line.
+- **Allocated** refers to the compute and memory size provisioned to handle current demand; autoscaling automatically adjusts this allocation, increasing or decreasing the allocated compute and memory size in a step-wise fashion as demand fluctuates, within your minimum and maximum limits.
+- **CU Usage** is represented by the blue line
+- **RAM usage** is represented by the green line.
 - A re-activated compute scales up immediately to your minimum allocation, ensuring adequate performance for your anticipated demand.
 
 Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
@@ -98,3 +105,5 @@ Another approach is to set a higher threshold than you need and monitor usage sp
 ### The neon_utils extension
 
 Another tool for understanding usage, the `neon_utils` extension provides a `num_cpus()` function that helps you monitor how the _Autoscaling_ feature allocates compute resources in response to workload. For more information, see [The neon_utils extension](/docs/extensions/neon-utils).
+
+<NeedHelp/>

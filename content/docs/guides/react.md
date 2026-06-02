@@ -1,8 +1,12 @@
 ---
 title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
+summary: >-
+  Step-by-step guide for connecting a React application to a Neon Postgres
+  database using various React meta-frameworks, ensuring proper server-side
+  access.
 enableTableOfContents: true
-updatedOn: '2025-02-24T15:53:13.359Z'
+updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
@@ -15,6 +19,8 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 
 <TechCards>
 
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon" icon="tanstack"></a>
+
 <a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
 
 <a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
@@ -22,5 +28,19 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
 </TechCards>
+
+## Neon Auth
+
+After you connect your database, add managed authentication with [Neon Auth](/docs/auth/overview). Quick starts are available for supported React meta-frameworks:
+
+<TechCards>
+
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Set up Neon Auth with Next.js" icon="next-js"></a>
+
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Set up Neon Auth with TanStack Router" icon="tanstack"></a>
+
+</TechCards>
+
+For React Router, follow the [React Auth quick start](/docs/auth/quick-start/react).
 
 <NeedHelp/>

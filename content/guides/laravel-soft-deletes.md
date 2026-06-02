@@ -4,7 +4,7 @@ subtitle: Learn how to implement and optimize soft deletes in Laravel for improv
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-20T00:00:00.000Z'
-updatedOn: '2024-07-20T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Laravel is a PHP framework that offers a lot of features to simplify database operations. One such feature is soft deletes, which allows you to "delete" records without actually removing them from your database.
@@ -214,7 +214,7 @@ Here's what happens when you run this code:
 2. `find(1)` retrieves the post, even if it's soft-deleted.
 3. `restore()` sets the `deleted_at` column back to `NULL`.
 
-This process effectively "undeletes" the record, making it visible in normal queries again.
+This process restores the record, making it visible in normal queries again.
 
 #### Permanently Deleting a Record
 
@@ -394,7 +394,7 @@ Instead, consider your specific use case:
 
 Always measure the performance impact in your specific scenario before deciding on indexing strategy.
 
-For more information about indexes in general, refer to Neon's documentation on [indexes](/docs/postgres/indexes).
+For more information about indexes in general, refer to Neon's documentation on [indexes](/docs/postgresql/index-types).
 
 ## Testing Soft Deletes
 
@@ -514,7 +514,7 @@ This test verifies that force deleting a post removes it entirely from the datab
 
 Laravel's soft delete feature provides a way to manage data deletion without losing valuable information. By using soft deletes, you can improve your application's data integrity and provide features like data recovery or undo functionality to your users.
 
-Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Neon Postgres's capabilities, such as [indexing](/docs/postgres/indexes) and [table partitioning](/docs/postgres/ddl-partitioning), to maintain high performance as your application scales.
+Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Neon Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
 
 When implementing soft deletes, always think about the lifecycle of your data. Plan on implementing policies for permanent deletion of old soft-deleted records to manage database growth optimally and comply with data retention regulations.
 

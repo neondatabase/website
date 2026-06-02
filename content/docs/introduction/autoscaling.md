@@ -1,8 +1,12 @@
 ---
 title: Autoscaling
 subtitle: An introduction to Neon's autoscaling
+summary: >-
+  Covers the setup of Neon's autoscaling feature, which automatically adjusts
+  compute resources based on demand, optimizing performance and cost without
+  manual intervention.
 enableTableOfContents: true
-updatedOn: '2024-12-12T15:31:10.130Z'
+updatedOn: '2026-02-06T22:07:33.084Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.
@@ -24,7 +28,13 @@ Neon's Autoscaling feature offers the following benefits:
 
 ## Configuring autoscaling
 
-You can enable autoscaling for any compute instance, whether it's a primary compute or a read replica. Simply open the **Edit compute** drawer ([learn how](/docs/guides/autoscaling-guide)) for your compute and set the autoscaling range. This range defines the minimum and maximum compute sizes within which your compute will automatically scale. For example, you might set the minimum to 2 vCPUs with 8 GB of RAM and the maximum to 8 vCPUs with 32 GB of RAM. Your compute resources will dynamically adjust within these limits, never dropping below the minimum or exceeding the maximum, regardless of demand. We recommend regularly [monitoring](/docs/introduction/monitoring-page) your usage from the **Monitoring Dashboard** to determine if adjustments to this range are needed.
+You can enable autoscaling for any compute instance, whether it's a primary compute or a read replica. Simply open the **Edit compute** drawer ([learn how](/docs/guides/autoscaling-guide)) for your compute and set the autoscaling range. This range defines the minimum and maximum compute sizes within which your compute will automatically scale. For example, you might set the minimum to 2 CU (8 GB of RAM) and the maximum to 8 CU (32 GB of RAM). Your compute resources will dynamically adjust within these limits, never dropping below the minimum or exceeding the maximum, regardless of demand.
+
+<Admonition type="note">
+The maximum permitted autoscaling range is 8 CU. This means the difference between your maximum and minimum compute size cannot exceed 8 CU.
+</Admonition>
+
+We recommend regularly [monitoring](/docs/introduction/monitoring-page) your usage from the **Monitoring Dashboard** to determine if adjustments to this range are needed.
 
 ![autoscaling configuration](/docs/introduction/autoscaling_config.png)
 

@@ -182,7 +182,7 @@ const DATA = [
         icon: circuitIcon,
       },
       {
-        title: 'Github Secret Scanning Partner Program',
+        title: 'GitHub Secret Scanning Partner Program',
         description:
           'Neon joined the GitHub Secret Scanning Partnership in to improve secret detection and remediation across repositories.',
         icon: radarIcon,
@@ -226,7 +226,7 @@ const DATA = [
 ];
 
 const Features = () => (
-  <section className="features safe-paddings relative overflow-hidden pt-[168px] xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
+  <section className="features relative overflow-hidden pt-[168px] safe-paddings xl:pt-[136px] lg:pt-[120px] md:pt-[104px]">
     <Container className="relative z-10" size="960">
       <h2 className="sr-only">Features</h2>
       <div className="flex flex-col gap-[136px] xl:gap-[104px] lg:gap-16">

@@ -1,8 +1,12 @@
 ---
 title: Run analytics queries with Read Replicas
 subtitle: Leverage read replicas for running data-intensive analytics queries
+summary: >-
+  How to create and use read replicas in Neon for executing data-intensive
+  analytics queries without affecting the performance of your production
+  database.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.564Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -49,7 +53,7 @@ With this setup, your read replica only wakes up when Metabase connects, scales 
 Creating a read replica involves adding a read replica compute to a branch.
 
 <Admonition type="note">
-The Free Plan is limited to a maximum of 3 read replica computes per project.
+The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
 You can add a read replica compute- to any branch in your Neon project by following these steps:
@@ -57,8 +61,8 @@ You can add a read replica compute- to any branch in your Neon project by follow
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
-4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings**. You can configure a fixed size compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure a **Scale to zero** setting, which determines whether a compute suspends due to inactivity after 5 minutes.
+4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
+5. Specify the **Compute size settings**. You can configure a fixed size compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. You can also configure a **Scale to zero** setting, which determines whether a compute suspends due to inactivity after 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
    </Admonition>

@@ -1,21 +1,27 @@
 ---
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
+summary: >-
+  Covers the setup and usage of the `pg_repack` extension in Neon to efficiently
+  remove bloat from tables and indexes, enhancing database performance with
+  minimal locking during the process.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.454Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
 
 <CTA />
 
-This guide provides an introduction to the `pg_repack` extension and how to leverage it within your Neon database. You’ll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
+This guide covers the `pg_repack` extension and how to use it in your Neon database. You'll learn how to install and use `pg_repack` to reclaim disk space and improve database performance by removing bloat from your tables and indexes.
+
+<Admonition type="important">
+Before using `pg_repack` on Neon, review the [Storage impact on Neon](#best-practices-and-considerations) section to understand how repack operations temporarily increase your project storage due to WAL generation and your [history window](/docs/introduction/history-window) setting.
+</Admonition>
 
 ## Enable the `pg_repack` extension
 
-`pg_repack` is currently available only on paid Neon plans. To install `pg_repack`, it must first be enabled by Neon support. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) with your endpoint ID and database name to request it. After it's enabled by Neon Support, you need to [restart your compute](/docs/manage/computes#restart-a-compute) to apply the changes.
-
-You can then enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_repack;
@@ -81,7 +87,7 @@ Let's break down the key components:
 
 ### Reorganization options
 
-- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (e.g., `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
+- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (for example, `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
 - **`-I TABLE`, `--parent-table=TABLE`**: Reorganize both the specified table(s) and its inheritors.
 - **`-c SCHEMA`, `--schema=SCHEMA`**: Repacks all eligible tables within the specified schema(s).
 - **`-o COLUMNS [,...]`, `--order-by=COLUMNS [,...]`**: Reorders the table rows based on the specified column(s). This performs an online `CLUSTER`.
@@ -106,7 +112,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 ### Generic options
 
 - **`-e`, `--echo`**: Prints the SQL commands executed by `pg_repack` to the terminal. Useful for debugging or understanding the process.
-- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (e.g., `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
+- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (for example, `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
 - `--help`: Displays help information about `pg_repack` and its options.
 - `--version`: Displays the version of `pg_repack`.
 
@@ -175,7 +181,7 @@ Let's walk through a practical example of using `pg_repack` to reorganize a tabl
 
 ### Connect to your Neon Database
 
-Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+Ensure you are connected to your Neon database using [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor). You can find your connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
 
 ### Create a sample table with bloat (Optional)
 
@@ -261,11 +267,28 @@ In this example, the table size was reduced from 8MB to 4MB after running `pg_re
 
 ## Best Practices and Considerations
 
-While `pg_repack` generally works seamlessly with Neon, here are a few things to keep in mind:
+While `pg_repack` generally works well with Neon, here are a few things to keep in mind:
 
 - **`-k` / `--no-superuser-check` flag:** Always use the `-k` / `--no-superuser-check` flag when running `pg_repack` against your Neon database.
-- **Disk space:** `pg_repack` requires temporary disk space roughly double the size of the table being repacked. Ensure you have sufficient storage for your Neon Project.
 - **Resource usage:** While `pg_repack` is designed to be online, it does consume resources (CPU, I/O) during operation. Consider running it during off-peak hours for very resource-intensive operations, especially on production databases.
+
+<Admonition type="important" title="Storage impact on Neon">
+Running `pg_repack` can temporarily **increase** your Neon project's storage size. This happens because `pg_repack` creates a new copy of the target table that generates  Write-Ahead Log (WAL) data during the rewriting process.
+
+**Key points to understand:**
+
+- **Disk space during operation:** `pg_repack` requires temporary disk space roughly double the size of the table being repacked. For example, repacking a 1GB table requires an additional ~2GB of free space during the operation.
+- **History storage increase:** All writes generated by `pg_repack` are stored in your [history window](/docs/introduction/history-window) (also known as your Point-in-Time Recovery or PITR window). This can significantly increase your project storage. See [Instant restore pricing](/docs/introduction/plans#instant-restore) for cost details on paid plans.
+- **Storage remains elevated:** The increased storage persists until the writes age out of your [history window](/docs/introduction/history-window). For example, if you have a 7-day history window, the storage increase from a repack operation will remain for up to 7 days.
+
+**Recommendations:**
+
+- Monitor your project storage before and after running `pg_repack` to understand the impact, but be aware that the increase in storage may not show up immediately due to reporting delays of up to one hour.
+- Consider your [history window](/docs/introduction/history-window) duration when planning repack operations, especially if running them frequently. Different [Neon plans](/docs/introduction/plans#history-window) support different history window limits.
+- For daily or weekly repack schedules on large tables, factor in the cumulative storage costs during your [history window](/docs/introduction/history-window) period.
+- If minimizing storage costs is critical, consider adjusting your history window setting or scheduling repack operations less frequently.
+
+</Admonition>
 
 ## Conclusion
 

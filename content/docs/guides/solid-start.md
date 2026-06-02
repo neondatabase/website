@@ -1,9 +1,16 @@
 ---
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
+summary: >-
+  Step-by-step guide for connecting a SolidStart application to a Neon project,
+  including project creation, dependency installation, and configuration of
+  connection settings for secure server-side requests.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.917Z'
+updatedOn: '2026-02-06T22:07:33.053Z'
 ---
+
+<CopyPrompt src="/prompts/solidstart-prompt.md"
+description="Pre-built prompt for connecting SolidStart applications to Neon"/>
 
 SolidStart is an open-source meta-framework designed to integrate the components that make up a web application.<sup><a target="_blank" href="https://docs.solidjs.com/solid-start#overview">1</a></sup>. This guide explains how to connect SolidStart with Neon using a secure server-side request.
 
@@ -61,9 +68,9 @@ To [load data on the server](https://docs.solidjs.com/solid-start/building-your-
 
 ```typescript
 import pg from 'pg';
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
     const pool = new pg.Pool({
         connectionString: process.env.DATABASE_URL,
@@ -71,10 +78,10 @@ const getVersion = async () => {
     const client = await pool.connect();
     const response = await client.query('SELECT version()');
     return response.rows[0].version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -85,17 +92,17 @@ export default function Page() {
 
 ```typescript
 import postgres from 'postgres';
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
-    const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
     const response = await sql`SELECT version()`;
     return response[0].version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -106,18 +113,19 @@ export default function Page() {
 
 ```typescript
 import { neon } from "@neondatabase/serverless";
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
-    const sql = neon(`${process.env.DATABASE_URL}`);
+    const sql = neon(process.env.DATABASE_URL);
     const response = await sql`SELECT version()`;
     const { version } = response[0];
+
     return version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -138,9 +146,10 @@ In your server endpoints (API Routes) in your SolidStart application, use the fo
 // File: routes/api/test.ts
 
 import { Pool } from 'pg';
+import { json } from '@solidjs/router';
 
 const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
@@ -153,7 +162,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
+  return json(data);
 }
 ```
 
@@ -161,13 +170,13 @@ export async function GET() {
 // File: routes/api/test.ts
 
 import postgres from 'postgres';
+import { json } from '@solidjs/router';
 
 export async function GET() {
-  const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringify(response[0]), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+
+  return json(response[0]);
 }
 ```
 
@@ -175,13 +184,13 @@ export async function GET() {
 // File: routes/api/test.ts
 
 import { neon } from '@neondatabase/serverless';
+import { json } from '@solidjs/router'
 
 export async function GET() {
-  const sql = neon(import.meta.env.DATABASE_URL);
+  const sql = neon(process.env.DATABASE_URL!);
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringify(response[0]), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+
+  return json(response[0]);
 }
 ```
 
@@ -196,15 +205,5 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-solid-start" description="Get started with SolidStart and Neon" icon="github">Get started with SolidStart and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

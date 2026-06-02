@@ -2,7 +2,6 @@
 
 import * as Tooltip from '@radix-ui/react-tooltip';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Link from 'components/shared/link';
 

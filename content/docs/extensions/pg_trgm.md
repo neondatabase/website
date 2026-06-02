@@ -1,17 +1,21 @@
 ---
 title: The pg_trgm extension
 subtitle: Improve Postgres text searches with the pg_trgm extension
+summary: >-
+  Covers the setup and usage of the `pg_trgm` extension in Postgres for
+  enhancing text search capabilities through trigram matching, enabling
+  efficient fuzzy string matching and proximity searches.
 enableTableOfContents: true
-updatedOn: '2025-05-12T16:45:38.220Z'
+updatedOn: '2026-04-18T12:16:58.000Z'
 ---
 
 The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches.
 
-This extension is particularly useful for applications requiring fuzzy string matching or searching within large bodies of text.
+It's especially useful for fuzzy string matching and searching large bodies of text.
 
 <CTA />
 
-In this guide, we'll explore the `pg_trgm` extension, covering how to enable it, use it for text searches, and optimize queries. This extension has applications in data retrieval, text analysis, and anywhere robust text search capabilities are needed.
+This guide covers how to enable `pg_trgm`, use it for text searches, and optimize queries.
 
 <Admonition type="note">
     The `pg_trgm` extension is open-source and can be installed on any Postgres setup. Detailed information about the extension is available in the [PostgreSQL Documentation](https://www.postgresql.org/docs/current/pgtrgm.html).
@@ -29,7 +33,7 @@ Activate `pg_trgm` by running the `CREATE EXTENSION` statement in your Postgres 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Example usage
 

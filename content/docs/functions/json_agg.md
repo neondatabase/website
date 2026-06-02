@@ -1,13 +1,17 @@
 ---
 title: Postgres json_agg() function
 subtitle: Aggregate values into a JSON array
+summary: >-
+  Covers the usage of the Postgres `json_agg()` function to aggregate values
+  from multiple rows into a single JSON array, including syntax, ordering
+  options, and practical examples for data denormalization.
 enableTableOfContents: true
-updatedOn: '2024-06-28T22:29:50.742Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `json_agg()` function is an aggregate function that collects values from multiple rows and returns them as a single JSON array.
 
-It's particularly useful when you need to denormalize data for performance reasons or prepare data for front-end applications and APIs. For example, you might use it to aggregate product reviews for an e-commerce application or collect all posts by a user on a social media platform.
+Use it when you need to denormalize data for performance or prepare data for front-end applications and APIs. For example, you might use it to aggregate product reviews for an e-commerce application or collect all posts by a user on a social media platform.
 
 <CTA />
 

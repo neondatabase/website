@@ -1,6 +1,15 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+@config '../../tailwind.config.js';
+
+@theme {
+  /* Disable Tailwind v4 min-width defaults so our max-width aliases win everywhere. */
+  --breakpoint-sm: initial;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+}
+
 @import './fonts';
 @import './main';
 @import './text';
@@ -18,7 +27,6 @@
 @import './search';
 @import './logos';
 @import './animated-button';
-@import './ticket';
 @import './social-share';
 @import './mask-icons';
 @import './tooltip';

@@ -1,8 +1,12 @@
 ---
-title: Neon CLI commands — projects
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: projects'
+subtitle: 'List, create, update, delete, and get Neon projects'
+summary: >-
+  Covers the usage of the Neon CLI `projects` command for managing Neon
+  projects, including listing, creating, updating, deleting, and retrieving
+  project information directly from the terminal.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.570Z'
+updatedOn: '2026-02-26T16:28:03.966Z'
 ---
 
 ## Before you begin
@@ -22,13 +26,14 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 neon projects <subcommand> [options]
 ```
 
-| Subcommand        | Description      |
-| ----------------- | ---------------- |
-| [list](#list)     | List projects    |
-| [create](#create) | Create a project |
-| [update](#update) | Update a project |
-| [delete](#delete) | Delete a project |
-| [get](#get)       | Get a project    |
+| Subcommand          | Description       |
+| ------------------- | ----------------- |
+| [list](#list)       | List projects     |
+| [create](#create)   | Create a project  |
+| [update](#update)   | Update a project  |
+| [delete](#delete)   | Delete a project  |
+| [recover](#recover) | Recover a project |
+| [get](#get)         | Get a project     |
 
 ### list
 
@@ -44,14 +49,15 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--org-id`       | List all projects belonging to the specified organization.                                    | string |          |
+| Option               | Description                                                                                   | Type    | Required |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`     | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
+| `--org-id`           | List all projects belonging to the specified organization.                                    | string  |          |
+| `--recoverable-only` | List only projects that can be recovered (deleted within the deletion recovery period).       | boolean |          |
 
 #### Examples
 
-- List all projects belonging to your personal acccount
+- List projects in your [default organization](/docs/reference/glossary#default-organization). If no organization context is set, the CLI will prompt you to select one.
 
   ```bash
   neon projects list
@@ -89,6 +95,18 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   └───────────────────────────┴───────────────────────────┴────────────────────┴──────────────────────┘
   ```
 
+- List projects that can be recovered (deleted within the last 7 days).
+
+  ```bash
+  neon projects list --recoverable-only
+  Projects
+  ┌─────────────────────┬───────────┬───────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
+  │ Id                  │ Name      │ Region Id     │ Created At           │ Deleted At           │ Recoverable Until    │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────┼──────────────────────┼──────────────────────┤
+  │ crimson-voice-12345 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │ 2024-04-16T14:22:15Z │ 2024-04-23T14:22:15Z │
+  └─────────────────────┴───────────┴───────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
+  ```
+
 ### create
 
 This subcommand allows you to create a Neon project.
@@ -116,7 +134,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--database`                 | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
 | `--role`                     | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
 | `--set-context`              | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
-| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (for example, "2") or a range delimited by a dash (for example, "0.5-3").                                                        | string  |          |
 
 <Admonition type="note">
 Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
@@ -241,14 +259,14 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option                       | Description                                                                                                                                  | Type    | Required |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
-| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                | string  |          |
-| `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                     | boolean |          |
-| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.             | boolean |          |
-| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                  | boolean |          |
-| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3"). | string  |          |
-| `--name`                     | The project name. The value cannot be empty.                                                                                                 | string  | &check;  |
+| Option                       | Description                                                                                                                                                | Type    | Required |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                              | string  |          |
+| `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                                   | boolean |          |
+| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.                           | boolean |          |
+| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                                | boolean |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (for example, "2") or a range delimited by a dash (for example, "0.5-3"). | string  |          |
+| `--name`                     | The project name. The value cannot be empty.                                                                                                               | string  | &check;  |
 
 #### Examples
 
@@ -297,6 +315,37 @@ neon projects delete muddy-wood-859533
 ```
 
 Information about the deleted project is displayed. You can verify that the project was deleted by running `neon projects list`.
+
+### recover
+
+<EarlyAccess />
+
+This subcommand allows you to recover a deleted project within the deletion recovery period.
+
+#### Usage
+
+```bash
+neon projects recover <id> [options]
+```
+
+The `id` is the project ID, which you can obtain by listing recoverable projects with `neon projects list --recoverable-only`.
+
+#### Options
+
+Only [global options](/docs/reference/neon-cli#global-options) apply.
+
+#### Example
+
+```bash
+neon projects recover crimson-voice-12345678
+┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name      │ Region Id     │ Created At           │
+├────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+For details on what's recovered and what requires reconfiguration after recovery, see [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
 
 ### get
 

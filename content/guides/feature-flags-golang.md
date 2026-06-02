@@ -4,7 +4,7 @@ subtitle: Learn how to create a feature flag system using Go, Neon Postgres, and
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2025-03-29T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 Feature flags are a technique that allows developers to modify system behavior without changing code. They enable you to control when features are visible to specific users, perform A/B testing, and implement kill switches for problematic features.

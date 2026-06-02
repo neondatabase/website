@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents using CrewAI, Composio, and
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-01-31T00:00:00.000Z'
-updatedOn: '2025-01-31T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 In today's AI-driven world, the ability to connect intelligent agents with powerful tools is key to building sophisticated applications. Imagine AI agents that can not only think and plan but also seamlessly interact with your database to retrieve information, manage resources, and perform complex tasks. This guide explores exactly that, demonstrating how to harness the power of **CrewAI** for agent orchestration, **Composio** for tool integration, and **Neon API** for database management.
@@ -280,7 +280,7 @@ and update the task description accordingly.
 Here's a list of all the available actions that you can use with the Neon Composio tool:
 
 <Admonition type="important">
-    These actions are subject to change. For the latest information and a complete list of available actions, please check the availaible actions under [Neon app in your Composio dashboard](https://app.composio.dev/app/neon).
+    These actions are subject to change. For the latest information and a complete list of available actions, please check the available actions under [Neon app in your Composio dashboard](https://app.composio.dev/app/neon).
     ![Neon Composio Tool Actions](/docs/guides/neon-composio-tool-actions.png)
 </Admonition>
 

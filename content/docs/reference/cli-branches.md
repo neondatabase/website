@@ -1,8 +1,13 @@
 ---
-title: Neon CLI commands — branches
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: branches'
+subtitle: 'List, create, rename, and delete branches; set default; run schema diff'
+summary: >-
+  Covers the usage of the `branches` command in the Neon CLI for managing
+  branches in a Neon project, including listing, creating, renaming, and
+  deleting branches, as well as setting defaults and performing schema
+  comparisons.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.569Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 ## Before you begin
@@ -12,7 +17,7 @@ updatedOn: '2025-07-03T12:36:49.569Z'
 
 ## The `branches` command
 
-The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or perforning a [schema diff](/docs/guides/schema-diff) between different branches.
+The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or performing a [schema diff](/docs/guides/schema-diff) between different branches.
 
 ## Usage
 
@@ -20,18 +25,19 @@ The `branches` command allows you to list, create, rename, delete, and retrieve 
 neon branches <subcommand> [options]
 ```
 
-| Subcommand                  | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| [list](#list)               | List branches                                |
-| [create](#create)           | Create a branch                              |
-| [reset](#reset)             | Reset data to parent                         |
-| [restore](#restore)         | Restore a branch to a selected point in time |
-| [rename](#rename)           | Rename a branch                              |
-| [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-default](#set-default) | Set a default branch                         |
-| [add-compute](#add-compute) | Add replica to a branch                      |
-| [delete](#delete)           | Delete a branch                              |
-| [get](#get)                 | Get a branch                                 |
+| Subcommand                        | Description                                  |
+| --------------------------------- | -------------------------------------------- |
+| [list](#list)                     | List branches                                |
+| [create](#create)                 | Create a branch                              |
+| [reset](#reset)                   | Reset data to parent                         |
+| [restore](#restore)               | Restore a branch to a selected point in time |
+| [rename](#rename)                 | Rename a branch                              |
+| [schema-diff](#schema-diff)       | Compare schemas                              |
+| [set-default](#set-default)       | Set a default branch                         |
+| [set-expiration](#set-expiration) | Set expiration date for a branch             |
+| [add-compute](#add-compute)       | Add replica to a branch                      |
+| [delete](#delete)                 | Delete a branch                              |
+| [get](#get)                       | Get a branch                                 |
 
 ## list
 
@@ -122,18 +128,19 @@ neon branches create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option              | Description                                                                                                                                                                                                                                                           | Type    |                      Required                       |
-| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :-------------------------------------------------: |
-| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                         | string  |                                                     |
-| `--project-id`      | Project ID                                                                                                                                                                                                                                                            | string  | Only if your Neon account has more than one project |
-| `--name`            | The branch name                                                                                                                                                                                                                                                       | string  |                                                     |
-| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                             | string  |                                                     |
-| `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
-| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
-| `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
-| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
-| `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
-| `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                 | boolean |                                                     |
+| Option              | Description                                                                                                                                                                                                                                                                     | Type    |                      Required                       |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ | :-------------------------------------------------: |
+| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                   | string  |                                                     |
+| `--project-id`      | Project ID                                                                                                                                                                                                                                                                      | string  | Only if your Neon account has more than one project |
+| `--name`            | The branch name. Optional: if not specified, defaults to the branch ID. If provided, must be unique within the project and can be up to 256 characters. Cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements). | string  |                                                     |
+| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                                       | string  |                                                     |
+| `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                                  | boolean |                                                     |
+| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                                       | string  |                                                     |
+| `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week).           | number  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (for example "2") or a range delimited by a dash (for example "0.5-3").                                                                                                                                                      | string  |                                                     |
+| `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                                | boolean |                                                     |
+| `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                           | boolean |                                                     |
+| `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                                | string  |                                                     |
 
 <Admonition type="note">
 When creating a branch from a protected parent branch, role passwords on the child branch are changed. For more information about this Protected Branches feature, see [New passwords generated for Postgres roles on child branches](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
@@ -261,7 +268,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name my_read_replica_branch --type read_only
   ```
 
-- Create a branch from a parent branch other than your `production` branch
+- Create a branch from a parent branch other than your `main` branch
 
   ```bash
   neon branches create --name feature/payment-api --parent development
@@ -273,7 +280,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
-  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
+  The timestamp must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
 
 - Create a branch and connect to it with `psql`.
 
@@ -373,10 +380,10 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-This command restores the branch `production` to an earlier timestamp, saving to a backup branch called `production_restore_backup_2024-02-20`
+This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-05-06`
 
 ```bash shouldWrap
-neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06
+neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
 ```
 
 Results of the operation:
@@ -393,16 +400,16 @@ Backup branch
 ┌─────────────────────────┬────────────────────────────────┐
 │ Id                      │ Name                           │
 ├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ production_restore_backup_2024-05-06 │
+│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
 └─────────────────────────┴────────────────────────────────┘
 ```
 
 #### Restoring a branch (target) to the head of another branch (source)
 
-This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `production`.
+This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `main`.
 
 ```bash shouldWrap
-neon branches restore feature/user-auth production
+neon branches restore feature/user-auth main
 ```
 
 Results of the operation:
@@ -449,6 +456,8 @@ neon branches rename <id|name> <new-name> [options]
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
+`<new-name>` is the new name for the branch. It must be unique within the project and can be up to 256 characters. It cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for full details.
+
 #### Options
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `rename` subcommand supports these options:
@@ -482,7 +491,7 @@ This command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `production`, select `production` as your base.
+`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
 
 This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
 
@@ -598,6 +607,44 @@ neon branches set-default mybranch
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
+## set-expiration
+
+This subcommand allows you to set or update the expiration date for a branch. When the expiration time is reached, the branch and its compute endpoints are permanently deleted.
+
+#### Usage
+
+```bash
+neon branches set-expiration <id|name> --expires-at <timestamp> [options]
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+`--expires-at <timestamp>` specifies the expiration timestamp in RFC 3339 format (for example, `2025-08-15T18:00:00Z`).
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-expiration` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+| `--expires-at`   | Expiration timestamp in RFC 3339 format                                                       | string |                                                     |
+
+#### Examples
+
+- Set an expiration date for a branch:
+
+  ```bash
+  neon branches set-expiration mybranch --expires-at 2025-08-15T18:00:00Z
+  ```
+
+- Remove expiration from a branch (omit the parameter):
+
+  ```bash
+  neon branches set-expiration mybranch
+  ```
+
 ## add-compute
 
 This subcommand allows you to add a compute to an existing branch in your Neon project.
@@ -619,7 +666,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                       | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                          | string | Only if your Neon account has more than one project |
 | `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A read-only compute is a [read replica](/docs/introduction/read-replicas). A branch can have a single primary read-write compute and multiple read replica computes. | string |                                                     |
-| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (e.g., "2"). For autoscaling, enter a range with a dash (e.g., "0.5-3").                                                                                            | string |                                                     |
+| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (for example, "2"). For autoscaling, enter a range with a dash (for example, "0.5-3").                                                                              | string |                                                     |
 
 #### Examples
 

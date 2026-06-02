@@ -1,0 +1,118 @@
+---
+title: 'PostgreSQL JDBC: Creating Tables'
+page_title: 'PostgreSQL JDBC: Creating Tables'
+page_description: >-
+  In this tutorial, you will learn how to create tables in a PostgreSQL database
+  from a Java program using JDBC.
+prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/create-tables/'
+ogImage: ''
+updatedOn: '2026-05-07T18:15:13.000Z'
+enableTableOfContents: true
+previousLink:
+  title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
+  slug: postgresql-jdbc/connecting-to-postgresql-database
+nextLink:
+  title: 'PostgreSQL JDBC: Insert Data into a Table'
+  slug: postgresql-jdbc/insert
+---
+
+<Admonition type="info" id="CTA">
+Creating tables with JDBC works the same against any PostgreSQL database, so the techniques here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration you need to build for the AI era. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around your workflow.
+</Admonition>
+
+**Summary**: in this tutorial, you will learn how to create tables in a PostgreSQL database from a Java program using JDBC.
+
+## Creating table program
+
+The following example shows how to create tables in the PostgreSQL database from a Java program:
+
+```java
+import java.sql.SQLException;
+
+public class Main {
+    public static void main(String[] args) {
+
+        var sql = "CREATE TABLE products (" +
+                "    id SERIAL PRIMARY KEY," +
+                "    name VARCHAR(255) NOT NULL," +
+                "    price DECIMAL(10, 2) NOT NULL" +
+                ");";
+        try (var conn =  DB.connect();
+             var stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+}
+```
+
+How it works.
+
+First, construct a `CREATE TABLE` statement that creates the `products` table:
+
+```java
+var sql = "CREATE TABLE products (" +
+            "    id SERIAL PRIMARY KEY," +
+            "    name VARCHAR(255) NOT NULL," +
+            "    price DECIMAL(10, 2) NOT NULL" +
+            ");";
+```
+
+Second, [establish a connection](connecting-to-postgresql-database) to `sales` database on the local PostgreSQL server using the `DB` class:
+
+```java
+var conn =  DB.connect();
+```
+
+Third, create a `Statement` by calling the `createStatement()` method of the `Connection` object:
+
+```java
+var stmt = conn.createStatement()
+```
+
+Fourth, execute the `CREATE` `TABLE` statement by calling the `executeUpdate()` method.
+
+```java
+stmt.executeUpdate(sql);
+```
+
+The try\-catch statement will display an error message if any `SQLException` occurs.
+
+Since the `connect()` and `createStatement()` method calls are wrapped in a try\-with\-resources statement, the `Statement` and `Connection` will be closed properly.
+
+If you run the program, it’ll create the `products` in the `sales` database.
+
+## Verify the table creation
+
+First, open the Command Prompt on Windows or Terminal on Unix\-like systems.
+
+Second, connect to the `sales` database on the local PostgreSQL server using the `psql` client tool:
+
+```bash
+psql -U postgres -d sales
+```
+
+It’ll prompt you for a password.
+
+Third, use the `\dt` command to [show tables](../postgresql-administration/postgresql-show-tables) in the `sales` database:
+
+```
+\dt
+```
+
+Output:
+
+```
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | products | table | postgres
+(1 row)
+```
+
+The output indicates that the `products` table has been created successfully.
+
+## Summary
+
+- Call the `executeUpdate()` method of a Statement object to execute a `CREATE TABLE` statement to create a new table in the PostgreSQL database.

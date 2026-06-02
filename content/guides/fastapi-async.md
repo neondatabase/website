@@ -4,7 +4,7 @@ subtitle: Learn how to create an asynchronous API for managing products using Fa
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-08T00:00:00.000Z'
-updatedOn: '2024-10-08T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 Following this guide, you’ll build an asynchronous product management API and leverage FastAPI's async capabilities and connection pools to efficiently manage database connections, ensuring your API can scale and handle high traffic with ease. Whether you’re aiming to improve performance or simply learn the best practices for building async APIs, this guide has you covered.
@@ -88,10 +88,10 @@ Follow these steps to set up your project and virtual environment:
     │ ├── routes/
     │ │ └── product_routes.py
     │ └── main.py
-    ├── .env  
+    ├── .env
     ├── .python-version
-    ├── README.md  
-    ├── pyproject.toml  
+    ├── README.md
+    ├── pyproject.toml
     └── uv.lock
     ```
 

@@ -1,25 +1,27 @@
 'use client';
 
-const { useState } = require('react');
+const { useState, useEffect } = require('react');
 
 function useLocalStorage(key, initialValue) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
+  // Always start with `initialValue` so server HTML matches the client's first
+  // render (hydration). Reading localStorage in useState would diverge when a
+  // value exists in the browser but not on the server (e.g. defaultTab for Tabs).
+  const [storedValue, setStoredValue] = useState(initialValue);
+
+  useEffect(() => {
     if (typeof window === 'undefined') {
-      return initialValue;
+      return undefined;
     }
     try {
-      // Get from local storage by key
       const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
+      if (item !== null) {
+        setStoredValue(JSON.parse(item));
+      }
     } catch (error) {
-      // If error also return initialValue
       console.log(error);
-      return initialValue;
     }
-  });
+    return undefined;
+  }, [key]);
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
   const setValue = (value) => {

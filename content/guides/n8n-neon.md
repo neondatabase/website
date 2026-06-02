@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-27T00:00:00.000Z'
-updatedOn: '2025-05-27T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Neon Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
@@ -17,7 +17,7 @@ Before you begin, ensure you have the following:
 
 - **n8n Instance:** A running n8n instance. This can be a [self-hosted](https://docs.n8n.io/hosting/) version or an [n8n cloud account](https://app.n8n.cloud).
 - **Google Account:** A Google account with access to Google Drive.
-- **Neon Account and Project:** A Neon account and a project are needed to create a Postgres database. You can sign up for a free account at [pg.new](https://pg.new).
+- **Neon Account and Project:** A Neon account and a project are needed to create a Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 - **Google Cloud Platform (GCP) Account:** A [GCP account](https://cloud.google.com/free) is needed to enable the Google Drive API and to manage OAuth credentials. Free tier accounts are sufficient for this guide.
 - **Google Gemini API key:** You'll need an API key for Google Gemini to generate embeddings and power the chat model. You can obtain this from [Google AI Studio](https://aistudio.google.com/apikey).
   ![Google Gemini API Key](/docs/guides/gemini-api-key.png)

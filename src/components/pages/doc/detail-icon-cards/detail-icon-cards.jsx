@@ -1,8 +1,14 @@
-import clsx from 'clsx';
+'use client';
+
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
+import СhevronIcon from 'icons/arrow-label.inline.svg';
+import { cn } from 'utils/cn';
+
+import Tag from '../tag';
 
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
@@ -32,7 +38,7 @@ import Filter from './images/filter.inline.svg';
 import FindReplace from './images/find-replace.inline.svg';
 import Gamepad from './images/gamepad.inline.svg';
 import Gear from './images/gear.inline.svg';
-import Github from './images/github.inline.svg';
+import GitHub from './images/github.inline.svg';
 import Globe from './images/globe.inline.svg';
 import GUI from './images/gui.inline.svg';
 import Handshake from './images/handshake.inline.svg';
@@ -51,7 +57,9 @@ import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
 import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
-import Perfomance from './images/perfomance.inline.svg';
+import patternNumbersSvg from './images/pattern-numbers.svg';
+import patternSvg from './images/pattern.svg';
+import Performance from './images/performance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
 import Prisma from './images/prisma.inline.svg';
 import Privacy from './images/privacy.inline.svg';
@@ -75,6 +83,7 @@ import TrendUp from './images/trend-up.inline.svg';
 import Unlock from './images/unlocked.inline.svg';
 import User from './images/user.inline.svg';
 import Vercel from './images/vercel.inline.svg';
+import VSCode from './images/vscode.inline.svg';
 import Wallet from './images/wallet.inline.svg';
 import Warning from './images/warning.inline.svg';
 import Wrench from './images/wrench.inline.svg';
@@ -109,7 +118,7 @@ const icons = {
   'find-replace': FindReplace,
   gamepad: Gamepad,
   gear: Gear,
-  github: Github,
+  github: GitHub,
   globe: Globe,
   gui: GUI,
   handshake: Handshake,
@@ -128,7 +137,7 @@ const icons = {
   network: Network,
   ollama: Ollama,
   openai: OpenAI,
-  perfomance: Perfomance,
+  performance: Performance,
   postgres: Postgres,
   prisma: Prisma,
   privacy: Privacy,
@@ -152,69 +161,92 @@ const icons = {
   unlock: Unlock,
   user: User,
   vercel: Vercel,
+  vscode: VSCode,
   wallet: Wallet,
   warning: Warning,
   wrench: Wrench,
   x: X,
 };
 
-const monochromeIcons = ['github'];
+// const monochromeIcons = ['github'];
 
-const DetailIconCards = ({ children = null, withNumbers = false }) => {
+const DetailIconCards = ({ children = null, withNumbers = false, compact = false, cols = 2 }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
   return (
-    <ListComponent className="not-prose !my-10 grid grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+    <ListComponent
+      className={cn(
+        'detail-icon-cards not-prose grid p-0!',
+        compact
+          ? 'my-7! grid-cols-2 gap-3 sm:grid-cols-1'
+          : cols === 4
+            ? 'my-10! grid-cols-4 gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'
+            : cols === 3
+              ? 'my-10! grid-cols-3 gap-5 md:grid-cols-2 sm:grid-cols-1'
+              : 'my-10! grid-cols-2 gap-5 sm:grid-cols-1'
+      )}
+    >
       {React.Children.map(children, (child, index) => {
-        const { children, href, description, icon, target } = child.props ?? {};
+        const { children, href, description, icon, target, tag } = child.props ?? {};
         const Icon = icons[icon];
 
+        const isGhost = !withNumbers && !!tag;
+
         return (
-          <li className="!m-0 flex before:hidden" key={index}>
+          <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
             <Link
-              className={clsx(
-                'relative flex w-full items-start rounded-[10px] border border-gray-new-94 py-5 transition-colors duration-200',
-                withNumbers ? 'gap-x-0.5 px-5' : 'gap-x-3.5 px-6',
-                'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
-                'hover:border-gray-new-80 hover:before:opacity-100',
-                'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
+              className={cn(
+                'relative flex w-full flex-col p-5 transition-colors duration-200',
+                withNumbers &&
+                  'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
+                !withNumbers &&
+                  !isGhost &&
+                  'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
+                isGhost &&
+                  'border border-gray-new-90 bg-[#FAFAF9] text-gray-new-30 hover:border-gray-new-80 hover:bg-white dark:border-gray-new-20 dark:bg-[#0F0F0F] dark:text-gray-new-70 dark:hover:border-gray-new-30 dark:hover:bg-[#141414]'
               )}
               to={href}
+              tagName="DocsNavCard"
+              tagText={children}
               {...(target && { target })}
             >
-              <div
-                className={clsx(
-                  'relative z-10 shrink-0',
-                  monochromeIcons.includes(icon)
-                    ? 'text-black-new dark:text-white'
-                    : 'text-secondary-8 dark:text-green-45',
-                  withNumbers
-                    ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
-                    : 'mt-0.5 h-4 w-4'
-                )}
-              >
-                {withNumbers ? (
-                  <span>{index + 1}.</span>
-                ) : (
-                  <div
-                    className={clsx(
-                      'h-full w-full',
-                      withNumbers &&
-                        'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
-                    )}
-                  >
-                    <Icon className="h-full w-full" />
-                  </div>
-                )}
-              </div>
-              <div className="relative z-10 flex flex-col gap-x-2.5">
-                <h3 className="text-balance text-lg font-semibold leading-tight text-black-new dark:text-white">
+              {!isGhost && (
+                <Image
+                  src={withNumbers ? patternNumbersSvg : patternSvg}
+                  alt=""
+                  width={342}
+                  height={172}
+                  className="absolute top-0 right-0 z-0"
+                />
+              )}
+              {tag && <Tag label={tag} size="xs" className="absolute top-3.5 right-3.5 z-10" />}
+              {withNumbers ? (
+                <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm leading-none font-medium uppercase">
+                  <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
+                  Step {index + 1}
+                </span>
+              ) : (
+                <Icon
+                  className={cn(
+                    'mb-[29px] size-7',
+                    isGhost ? 'text-gray-new-50 opacity-70' : 'text-green-44'
+                  )}
+                />
+              )}
+              <div className="mt-auto flex flex-col gap-1.5">
+                <h3
+                  className={cn(
+                    'text-lg leading-snug font-medium tracking-extra-tight',
+                    !withNumbers && !isGhost && 'dark:text-white',
+                    isGhost && 'text-gray-new-30 dark:text-gray-new-70'
+                  )}
+                >
                   {children}
                 </h3>
                 <p
-                  className={clsx(
-                    'text-balance text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
-                    withNumbers ? 'mt-1' : 'mt-2.5'
+                  className={cn(
+                    'text-base leading-snug tracking-extra-tight',
+                    !withNumbers && 'text-gray-new-50 dark:text-gray-new-60'
                   )}
                 >
                   {description}
@@ -231,6 +263,9 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
 DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
+  compact: PropTypes.bool,
+  cols: PropTypes.oneOf([2, 3, 4]),
+  highlightIndex: PropTypes.number,
 };
 
 export default DetailIconCards;

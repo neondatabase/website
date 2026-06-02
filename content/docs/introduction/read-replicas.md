@@ -2,15 +2,19 @@
 title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
+summary: >-
+  Step-by-step guide for creating and managing Neon read replicas, which provide
+  read-only access to the same data as the primary compute without duplicating
+  data, allowing for efficient scaling and resource management.
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.622Z'
+updatedOn: '2026-03-13T18:10:11.941Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
 
 ![read replica simple](/docs/introduction/read_replica_simple.png)
 
-You can instantly create read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
+You can instantly create read replicas for any branch in your Neon project and configure the compute size allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
 
 ## How are Neon read replicas different?
 
@@ -26,7 +30,7 @@ You can create read replicas using the Neon Console, [Neon CLI](/docs/reference/
 From the Neon Console, it's a simple **Add Read Replica** action on a branch.
 
 <Admonition type="note">
-You can add read replicas to a branch as needed to accommodate your workload. The Free Plan is limited to a maximum of 3 read replica computes per project.
+You can add read replicas to a branch as needed to accommodate your workload. The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
 ![Create a read replica](/docs/introduction/create_read_replica.png)
@@ -61,9 +65,9 @@ For more details and how to connect to a read replica, see [Create and manage Re
 
 ## Read Replica architecture
 
-The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
+The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [lakebase architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
 
-![read replica computes](/docs/introduction/read_replicas.jpg)
+![read replica computes](/docs/introduction/read_replicas.png)
 
 Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the most recent changes to maintain data consistency.
 

@@ -2,8 +2,15 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-06-03T18:04:26.405Z'
+summary: >-
+  Covers the setup of the Neon serverless driver for JavaScript and TypeScript,
+  enabling low-latency Postgres queries over HTTP or WebSockets in serverless
+  environments.
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
+
+<CopyPrompt src="/prompts/serverless-driver-prompt.md" 
+description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
@@ -15,6 +22,8 @@ When to query over HTTP vs WebSockets:
 
 - **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
 - **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
+
+<AgentSkillsTip skill_topic="the Neon Serverless Driver, general connection advice," />
 
 ## Install the Neon serverless driver
 
@@ -205,7 +214,7 @@ You can customize the return format using the configuration options `fullResults
     rowCount: 1,
     rowAsArray: false,
     command: "SELECT"
-  } 
+  }
   */
   ```
 
@@ -277,7 +286,7 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 ]);
 ```
 
-The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function — `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
+The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
 
 Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
 
@@ -294,6 +303,50 @@ Note that options **cannot** be supplied for individual queries within a transac
   If `true` (and if `readOnly` is also `true`, and `isolationMode` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
+
+### Using transactions with JWT self-verification
+
+When using Row-Level Security (RLS) to secure backend SQL with the Neon serverless driver, you may need to set JWT claims within a transaction context. Use this for custom JWT verification flows in backend APIs, where you want to ensure user-specific access to rows according to RLS policies.
+
+Here's an example of how to use the `transaction()` function with self-verified JWT claims:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+// Example JWT verification function, typically in a separate auth utilitiy file (implement according to your auth provider)
+async function verifyJWT(jwtToken, jwksURL) {
+  // Your JWT verification logic here
+  // This should return the decoded payload
+  return { payload: { sub: 'user123', email: 'user@example.com' } };
+}
+
+const sql = neon(process.env.DATABASE_URL);
+
+// Get JWT token from request headers or context
+const jwtToken = req.headers.authorization?.replace('Bearer ', '');
+const jwksURL = process.env.JWKS_URL; // Your JWKS endpoint
+
+// Verify the JWT and extract claims
+const { payload } = await verifyJWT(jwtToken, jwksURL);
+const claims = JSON.stringify(payload);
+
+// Use transaction to set JWT claims and query data
+const [, my_table] = await sql.transaction([
+  sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
+  sql`SELECT * FROM my_table`,
+]);
+```
+
+<Admonition type="important">
+When using JWT self-verification with RLS, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role in your connection string, as it bypasses Row-Level Security policies.
+</Admonition>
+
+This pattern allows you to:
+
+- Verify JWTs using your own authentication logic
+- Set the JWT claims in the database session context
+- Access JWT claims in your RLS policies
+- Execute multiple queries within a single transaction while maintaining the auth context
 
 ## Use the driver over WebSockets
 
@@ -420,6 +473,31 @@ The Neon serverless driver enables you to query data over **HTTP** or **WebSocke
 
 For a step-by-step guide to setting up a local environment, refer to this community guide: [Local Development with Neon](/guides/local-development-with-neon). The guide demonstrates how to use a [community-developed Docker Compose file](https://github.com/TimoWilhelm/local-neon-http-proxy) to configure a local Postgres database and a Neon proxy service. This setup allows connections over both WebSockets and HTTP.
 
+## Handling transient connection drops
+
+Like any cloud database service, Neon may occasionally experience brief connection drops during maintenance, updates, or network interruptions. When using the Neon serverless driver, especially over HTTP, you should implement retry logic to handle these transient errors gracefully.
+
+Here's a minimal retry example using the `async-retry` library with the HTTP driver:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+import retry from 'async-retry';
+
+const sql = neon(process.env.DATABASE_URL);
+
+const result = await retry(
+  async () => {
+    return await sql`SELECT * FROM users WHERE id = ${userId}`;
+  },
+  {
+    retries: 5,
+    factor: 2,
+    minTimeout: 1000,
+    randomize: true,
+  }
+);
+```
+
 ## Example applications
 
 Explore the example applications that use the Neon serverless driver.
@@ -428,7 +506,7 @@ Explore the example applications that use the Neon serverless driver.
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
-![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
+![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
 
 There are different implementations of the application to choose from.
 

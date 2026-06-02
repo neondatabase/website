@@ -1,20 +1,47 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/shared/tooltip';
 import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
 import tooltipSvg from 'icons/tooltip.svg';
+import { cn } from 'utils/cn';
 
-const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => (
+function getTooltipHtml(info, link) {
+  if (!link) return info;
+
+  const linkHTML = `
+    <a
+      class="mt-1 block w-fit border-b text-[15px] leading-snug tracking-tighter text-gray-new-80 border-dashed border-[rgba(255,255,255,0.4)] transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+      href="${link.href}"
+    >
+      ${link.text}
+    </a>
+  `;
+
+  return `${info}${linkHTML}`;
+}
+
+const InfoIcon = ({
+  className,
+  tooltip,
+  link,
+  tooltipId,
+  tooltipPlace = 'right',
+  clickable = false,
+}) => (
   <span
-    className={clsx('group/info relative', className)}
+    {...(clickable && { tabIndex: 0 })}
+    className={cn(
+      'group/info relative rounded-full focus-visible:outline-primary-2',
+      clickable && 'cursor-pointer',
+      className
+    )}
     data-tooltip-id={`info-icon-${tooltipId}`}
-    data-tooltip-html={tooltip}
+    data-tooltip-html={getTooltipHtml(tooltip, link)}
     aria-hidden
   >
     <Image
-      className="transition-opacity duration-200 group-hover/info:opacity-0"
+      className="transition-opacity duration-200 group-hover/info:opacity-0 md:group-hover/info:opacity-100"
       src={tooltipSvg}
       width={14}
       height={14}
@@ -22,7 +49,7 @@ const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => 
       loading="lazy"
     />
     <Image
-      className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover/info:opacity-100"
+      className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover/info:opacity-100 md:group-hover/info:opacity-0"
       src={tooltipHoveredSvg}
       width={14}
       height={14}
@@ -30,10 +57,13 @@ const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => 
       loading="lazy"
     />
     <Tooltip
-      className="w-sm z-20 !bg-gray-new-15"
+      className="is-[.react-tooltip]:bg-gray-new-15! z-20 w-sm px-4! pt-3! pb-3.5!"
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"
+      {...(clickable && {
+        clickable: true,
+      })}
     />
   </span>
 );
@@ -41,8 +71,13 @@ const InfoIcon = ({ className, tooltip, tooltipId, tooltipPlace = 'right' }) => 
 InfoIcon.propTypes = {
   className: PropTypes.string,
   tooltip: PropTypes.string.isRequired,
+  link: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+  }),
   tooltipId: PropTypes.string.isRequired,
   tooltipPlace: PropTypes.string,
+  clickable: PropTypes.bool,
 };
 
 export default InfoIcon;

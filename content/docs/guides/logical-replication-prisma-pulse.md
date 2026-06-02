@@ -2,9 +2,13 @@
 title: Stream database changes in real-time with Prisma Pulse
 subtitle: Learn how to create event-driven flows on your backend triggered by changes in
   your Neon Postgres database
+summary: >-
+  How to set up Prisma Pulse with your Neon Postgres database to stream
+  real-time changes and create event-driven workflows using logical replication
+  features.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-10-12T11:16:13.587Z'
+updatedOn: '2026-03-03T14:18:20.106Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
@@ -25,6 +29,10 @@ Set up real-time triggers for your Inngest workflows, re-index your TypeSense se
 - A [Prisma Data Platform account](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
+
 ## Enable logical replication in Neon
 
 <Admonition type="important">
@@ -38,7 +46,7 @@ To enable logical replication in Neon:
 3. Select **Beta**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -79,17 +87,22 @@ npm install @prisma/extension-pulse@latest
 
 ### Extend your Prisma Client instance with the Pulse extension
 
-Add the following to extend your existing Prisma Client instance with the Prisma Pulse extension. Don't forget to insert your own API key.
+Add the following to extend your existing Prisma Client instance with the Prisma Pulse extension.
 
 ```tsx
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter }).$extends(
+  withPulse({ apiKey: process.env.PULSE_API_KEY })
+);
 ```
 
 <Admonition type="note">
-For a real production use case, you should consider moving sensitive values like your API key into environment variables.
+In Prisma 7, you must use a driver adapter since the `url` property is no longer supported in the schema file. See [Connect from Prisma to Neon](/docs/guides/prisma) for complete setup instructions.
 </Admonition>
 
 ### Create your first Pulse stream
@@ -97,10 +110,15 @@ For a real production use case, you should consider moving sensitive values like
 The code below subscribes to a `User` model in your Prisma schema. You can use a similar approach to subscribe to any model that exists in your project.
 
 ```tsx
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter }).$extends(
+  withPulse({ apiKey: process.env.PULSE_API_KEY })
+);
 
 async function main() {
   // Create a stream from the 'User' model

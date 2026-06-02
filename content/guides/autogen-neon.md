@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents using AutoGen and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-12T00:00:00.000Z'
-updatedOn: '2025-02-12T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks.

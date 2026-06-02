@@ -1,61 +1,46 @@
-import Image from 'next/image';
-
-import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+import PauseableVideo from 'components/shared/pauseable-video';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 
-import illustration from './images/illustration.png';
-
 const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden bg-black-pure pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
-    <Container
-      className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-x-0 lg:space-y-14"
-      size="1344"
-    >
-      <div className="max-w-[605px] shrink-0 pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
-        <Heading
-          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
-          tag="h1"
-        >
-          Instant branching for Postgres
-        </Heading>
-        <p className="mt-7 text-xl xl:text-base">
-          Neon allows you to instantly branch your data the same way that you branch your code.
-        </p>
-        <div className="mt-9 space-x-10 xl:space-x-8 xs:flex xs:flex-col xs:items-center xs:space-x-0 xs:space-y-6">
-          <Button
-            className="px-9 py-6 !text-lg xl:!text-base lg:px-8 lg:py-5"
-            theme="primary"
-            size="sm"
-            to={LINKS.signup}
-          >
-            Sign up
-          </Button>
-          <Link
-            className="text-lg font-semibold before:-bottom-1 before:h-[3px] xl:text-base"
-            theme="black-primary-1"
-            to="/docs/introduction/branching/"
-          >
-            Explore the docs
-          </Link>
-        </div>
-      </div>
-      <div>
-        <Image
-          className="lg:max-w-[464px]"
-          src={illustration}
-          quality={70}
-          width={752}
-          height={616}
-          alt=""
-          sizes="100%"
-          priority
-          aria-hidden
-        />
-      </div>
+  <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pt-[104px] pb-20 xl:min-h-[650px] xl:pt-20 xl:pb-[136px] lg:min-h-[525px] lg:pt-16 lg:pb-[88px] md:min-h-[509px] md:pt-12 md:pb-20">
+    <Container className="w-full text-left" size="branching">
+      <SectionLabel icon="arrow" theme="white">
+        Branching
+      </SectionLabel>
+      <h1 className="mt-5 font-sans text-[60px] leading-dense font-normal tracking-tighter xl:mt-[18px] xl:text-[52px] lg:mt-4 lg:text-[44px] md:text-[32px]">
+        Mastering Database
+        <br /> Branching Workflows
+      </h1>
+      <p className="mt-6 text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:mt-[18px] lg:text-base md:mt-4 md:text-[15px]">
+        Ship software faster using Neon branches
+      </p>
     </Container>
+
+    {/*
+     Video optimization parameters:
+     mp4: ffmpeg -i input.mov -c:v libx265 -crf 32 -pix_fmt yuv420p10le -vf "scale=2560:-2,unsharp=3:3:2.5:3:3:0.8" -preset veryslow -x265-params "tune=animation:deblock=-1,-1" -tag:v hvc1 -movflags faststart -an hero.mp4
+     webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 2 -an -y hero.webm
+    */}
+
+    <div className="absolute inset-0 -z-10 mx-auto h-full w-full max-w-[1920px] [@media(min-width:1921px)]:[mask-image:linear-gradient(to_right,black_85%,transparent_100%)]">
+      <PauseableVideo
+        className="relative h-full w-full"
+        width={1920}
+        height={848}
+        videoClassName="h-full w-full object-cover"
+      >
+        <source
+          src={`${LINKS.cdn}/public/pages/branching/hero/branching-anim.mp4`}
+          type="video/mp4"
+        />
+        <source
+          src={`${LINKS.cdn}/public/pages/branching/hero/branching-anim.webm`}
+          type="video/webm"
+        />
+      </PauseableVideo>
+    </div>
   </section>
 );
 

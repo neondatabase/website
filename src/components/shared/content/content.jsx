@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
-import clsx from 'clsx';
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
@@ -15,39 +13,53 @@ import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
-// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
+import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
+import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
+import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
+import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
+import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import QuoteBlocksWrapper from 'components/pages/use-case/quote-blocks-wrapper';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
-import Testimonial from 'components/pages/use-case/testimonial';
-import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
 import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import AutoscalingChart from 'components/shared/autoscaling-chart';
+import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
-import CtaBlock from 'components/shared/cta-block';
-import DeployPostgresButton from 'components/shared/deploy-postgres-button';
+import CopyPrompt from 'components/shared/copy-prompt';
+// import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
-import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
+import Mermaid from 'components/shared/mermaid';
+import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
+import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
+import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
+import FeatureList from '../feature-list';
+import LogosSection from '../grid-features/logos-section';
+import QuickLinks from '../quick-links';
+import QuoteBlock from '../quote-block';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
@@ -70,28 +82,48 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       <table {...props} />
     </div>
   ),
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  undefined: (props) => <Fragment {...props} />,
-  pre: (props) => <CodeBlock {...props} />,
+  undefined: (props) => <>{props.children}</>,
+  pre: (props) => {
+    const codeElement = props?.children;
+    const code = codeElement?.props?.children;
+    const className = codeElement?.props?.className || '';
+
+    // Check if this is a mermaid code block
+    if (
+      codeElement &&
+      typeof code === 'string' &&
+      className &&
+      className.includes('language-mermaid')
+    ) {
+      return <Mermaid chart={code.trim()} />;
+    }
+
+    return <CodeBlock {...props} />;
+  },
   a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
+
+    // AVIF/WebP optimization can flatten PNG/GIF alpha to black; keep originals for local /docs/ rasters.
+    const unoptimizedPreserveAlpha =
+      typeof src === 'string' && /^\/docs\/.+\.(png|gif)$/i.test(src);
 
     // No zoom on PostgreSQLTutorial Images
     if (!isPostgres) {
       return (
         <ImageZoom src={src}>
           <Image
-            className={clsx(
+            className={cn(
               className,
               { 'no-border': title === 'no-border' },
               isTemplate && 'rounded-lg'
             )}
             src={src}
-            width={isReleaseNote ? 762 : 796}
-            height={isReleaseNote ? 428 : 447}
+            width={704}
+            height={447}
             style={{ width: '100%', height: '100%' }}
             title={title !== 'no-border' ? title : undefined}
+            unoptimized={unoptimizedPreserveAlpha}
             {...rest}
           />
           {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
@@ -102,7 +134,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     return src.includes('?') ? (
       // Authors can use anchor tags to make images float right/left
       <Image
-        className={clsx(
+        className={cn(
           className,
           {
             'no-border':
@@ -120,7 +152,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     ) : (
       <Image
-        className={clsx(className, { 'no-border': title === 'no-border' })}
+        className={cn(className, { 'no-border': title === 'no-border' })}
         src={src}
         width={200}
         height={100}
@@ -130,41 +162,57 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     );
   },
+  AutoscalingChart,
+  AutoscalingViz,
   Button,
   YoutubeIframe,
   DefinitionList,
+  FeatureList,
   Admonition,
+  Callout,
   CodeTabs,
   DetailIconCards,
   TechCards,
+  PromptCards,
+  Tag,
+  TwinPaths,
+  QuickPath,
+  GuidedPath,
   CommunityBanner,
+  QuickLinks,
+  QuoteBlock,
   Tabs,
   TabItem,
   InfoBlock,
   LinkPreview,
   DocsList,
   RequestForm,
+  SubprocessorsForm,
+  ProgramForm,
   LatencyCalculator,
-  CTA: isTemplate ? CtaBlock : DocCta,
-  Testimonial,
-  TestimonialsWrapper,
+  // TODO: revert to CTA: isTemplate ? CtaBlock : DocCta when design is ready
+  CTA: (props) => <DocCta isTemplate={isTemplate} {...props} />,
+  QuoteBlocksWrapper,
   UseCaseList,
   UseCaseContext,
   ComputeCalculator,
   SubscriptionForm,
-  InkeepEmbedded,
   Video,
   Steps,
-  DeployPostgresButton,
+  TwoColumnLayout,
+  LogosSection,
   ChatOptions,
+  StickyTable,
   CheckList,
   CheckItem,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
+  CopyPrompt,
+  McpSetupConfigurator,
+  SqlToRestConverter,
   ...sharedComponents,
 });
 
-// eslint-disable-next-line no-return-assign
 const Content = ({
   className = null,
   content,
@@ -173,20 +221,18 @@ const Content = ({
   isReleaseNote = false,
   isPostgres = false,
   isTemplate = false,
-}) => (
-  <div
-    className={clsx(
-      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
-      className,
-      {
-        'prose-template dark:prose-p:text-gray-new-70 dark:prose-strong:text-white dark:prose-li:text-gray-new-70 dark:prose-table:text-gray-new-70':
-          isTemplate,
-      }
-    )}
-  >
-    {asHTML ? (
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-    ) : (
+}) => {
+  const rootClassName = cn(
+    'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+    className
+  );
+
+  if (asHTML) {
+    return <div className={rootClassName} dangerouslySetInnerHTML={{ __html: content }} />;
+  }
+
+  return (
+    <div className={rootClassName}>
       <MDXRemote
         components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
@@ -198,11 +244,13 @@ const Content = ({
             ],
             rehypePlugins: [getCodeProps],
           },
+          blockJS: false,
+          blockDangerousJS: true,
         }}
       />
-    )}
-  </div>
-);
+    </div>
+  );
+};
 Content.propTypes = {
   className: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

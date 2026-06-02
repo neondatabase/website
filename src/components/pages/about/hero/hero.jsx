@@ -1,48 +1,66 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings pt-[194px] xl:pt-[154px] lg:pt-[46px] md:pt-[34px]">
+  <section className="hero relative h-[820px] border-b border-gray-new-20 safe-paddings xl:h-[854px] lg:h-[665px] md:h-[587px]">
     <Container
-      className="flex justify-between xl:max-w-[832px] lg:justify-center lg:gap-x-[60px] md:flex-col md:!px-5"
-      size="960"
+      className="flex h-full w-full flex-col items-center justify-between pt-[360px] pb-12 xl:pt-[353px] lg:pt-[210px] lg:pb-10 md:justify-end md:gap-y-36 md:pt-0"
+      size="1600"
     >
-      <header className="max-w-[510px] grow xl:max-w-[426px] lg:max-w-[356px] md:max-w-none">
-        <Heading
-          className="text-6xl font-medium leading-[0.9] tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[36px]"
-          tag="h1"
-          theme="black"
-        >
-          A better way to build with Postgres
-        </Heading>
-        <div className="mt-7 flex items-center gap-6 lg:mt-6 md:mt-5 md:gap-x-[18px]">
+      <Heading
+        className="text-center lg:max-w-[544px] md:max-w-80"
+        tag="h1"
+        theme="white"
+        size="md-new"
+      >
+        Neon is building the agent-native backend stack.
+      </Heading>
+      <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
+        <p className="max-w-[704px] font-sans text-xl leading-snug font-normal tracking-extra-tight text-gray-new-80 xl:max-w-md lg:max-w-[640px] lg:text-lg md:max-w-80 md:text-[15px]">
+          Database, Authentication, Storage, Compute and AI Gateway, designed from the ground up to
+          be operated by agents: familiar, instant, serverless, and branchable.
+        </p>
+        <div className="flex items-center justify-center gap-x-5 xl:gap-4 xl:pb-2 lg:pb-0 md:w-full md:flex-col">
           <Button
-            className="h-11 w-[178px] !font-semibold tracking-tighter lg:h-10 md:h-9 md:w-40 md:text-sm"
-            theme="primary"
+            size="lg-new"
+            theme="white-filled"
+            className="shrink-0 font-medium md:w-full"
             to={LINKS.signup}
           >
-            Create an Account
+            Create an account
           </Button>
-          <Link
-            className="text-[15px] font-medium tracking-tight md:text-sm"
+          <Button
+            size="lg-new"
+            theme="outlined"
+            className="shrink-0 font-normal md:w-full"
             to={LINKS.careers}
-            theme="white"
           >
-            View Open Positions
-          </Link>
+            View open roles at Databricks
+          </Button>
         </div>
-      </header>
-      <p className="max-w-sm pt-3 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-[352px] xl:pt-1.5 lg:max-w-[288px] lg:pt-1 lg:text-base md:mt-7 md:max-w-none md:pt-0">
-        Neon is an open-source database company. <span className="text-white">Our mission</span> is
-        to take everything that developers love about Postgres — reliability, performance,
-        extensibility — and deliver it as a serverless product that helps teams {` `}
-        <span className="text-white">confidently ship reliable and scalable applications</span>{' '}
-        faster than ever before.
-      </p>
+      </div>
     </Container>
+
+    {/*
+       Video optimization parameters:
+       mp4: ffmpeg -i input.mov -c:v libx265 -crf 28 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -x265-params tune=animation -tag:v hvc1 -movflags faststart -an hero.mp4
+       webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 2 -an -y hero.webm
+    */}
+
+    <div className="absolute inset-0 -z-10 mx-auto max-w-[1920px]">
+      <PauseableVideo
+        className="h-full w-full"
+        videoClassName="h-full w-full object-cover top-0 xl:-top-6 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-24"
+        width={2880}
+        height={1328}
+      >
+        <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.webm`} type="video/webm" />
+      </PauseableVideo>
+    </div>
   </section>
 );
 

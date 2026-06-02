@@ -4,7 +4,7 @@ subtitle: Create an  API for streaming, storing, and querying sensor data using 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-12T00:00:00.000Z'
-updatedOn: '2024-10-12T00:00:00.000Z'
+updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
 In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage.
@@ -89,10 +89,10 @@ Follow these steps to set up your project and virtual environment:
     │ ├── routes/
     │ │ └── product_routes.py
     │ └── main.py
-    ├── .env  
+    ├── .env
     ├── .python-version
-    ├── README.md  
-    ├── pyproject.toml  
+    ├── README.md
+    ├── pyproject.toml
     └── uv.lock
     ```
 

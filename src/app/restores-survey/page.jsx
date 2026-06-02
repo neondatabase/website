@@ -3,9 +3,8 @@ import KeyInsights from 'components/pages/report/key-insights';
 import RecoverySolution from 'components/pages/report/recovery-solution';
 import RecoveryStories from 'components/pages/report/recovery-stories';
 import RecoveryTime from 'components/pages/report/recovery-time';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -18,12 +17,12 @@ const ReportPage = () => (
     <RecoveryStories />
     <RecoveryTime />
     <RecoverySolution />
-    <CTA
-      className="pb-[328px] pt-[380px] xl:pb-[234px] xl:pt-[303px] lg:pb-[193px] lg:pt-[273px] sm:pb-[150px] sm:pt-36"
-      title="Wanna meet us?"
-      titleClassName="font-title !text-[72px] max-w-[745px] xl:max-w-[600px] lg:!text-[56px] lg:max-w-[400px] lg:leading-none sm:!text-[40px]"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+    <CTANew
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
+      buttonType="aiHelper"
     />
   </Layout>
 );

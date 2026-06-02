@@ -1,30 +1,42 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import RssButton from 'components/shared/rss-button';
+import SectionLabel from 'components/shared/section-label';
+import Socials from 'components/shared/socials';
+import { cn } from 'utils/cn';
 
-const BlogHeader = ({ className, title, category, basePath }) => (
+const BlogHeader = ({ className, title, rssTitle, category, basePath, withLabel = false }) => (
   <div
-    className={clsx(
-      'relative mb-12 flex items-end justify-between gap-8 lg:mb-10 md:mb-8 md:flex-col',
+    className={cn(
+      'relative mb-12 flex w-full items-end justify-between gap-5 lg:mb-2 md:mb-8 sm:flex-col sm:items-start sm:gap-5',
       className
     )}
   >
-    <div className="flex items-end gap-5 md:w-full md:justify-between">
-      <h1 className="font-title text-4xl font-medium leading-none tracking-extra-tight lg:text-[32px] md:text-[28px]">
+    <div>
+      {withLabel && (
+        <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4 sm:gap-2! [&>img]:sm:!h-[14px] [&>img]:sm:!w-3 [&>span]:sm:text-xs!">
+          Blog
+        </SectionLabel>
+      )}
+      <h1 className="max-w-[540px] text-[56px] leading-dense tracking-tighter lt:text-[48px] lg:text-[40px] md:text-[32px] sm:text-[28px]">
         {title}
         {category && <span className="sr-only">{category}</span>}
       </h1>
-      <RssButton className="mb-1 lg:mb-0.5" basePath={basePath} title={title} />
+    </div>
+    <div className="mb-2.5 flex items-center gap-x-4 lg:mb-[60px] lg:gap-x-6 md:mb-0 sm:mb-0 [&_svg]:lg:size-4 [&_ul]:lg:gap-6">
+      <Socials withTitle={false} />
+      <RssButton className="" basePath={basePath} title={rssTitle} />
     </div>
   </div>
 );
 
 BlogHeader.propTypes = {
   className: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
+  rssTitle: PropTypes.string,
   category: PropTypes.string,
   basePath: PropTypes.string.isRequired,
+  withLabel: PropTypes.bool,
 };
 
 export default BlogHeader;

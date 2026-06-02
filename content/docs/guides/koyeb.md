@@ -2,8 +2,12 @@
 title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
+summary: >-
+  How to connect a Neon Postgres database to an application deployed on Koyeb,
+  including project creation and deployment steps using the Koyeb control panel
+  or CLI.
 enableTableOfContents: true
-updatedOn: '2024-08-07T21:36:52.654Z'
+updatedOn: '2026-02-06T22:07:32.996Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -11,7 +15,7 @@ updatedOn: '2024-08-07T21:36:52.654Z'
 This guide describes how connect a Neon Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
 
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
-- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started/signing-up).
 
 The example application connects to your Neon Postgres database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
 

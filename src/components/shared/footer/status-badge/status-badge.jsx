@@ -1,54 +1,35 @@
 'use client';
 
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
+import { getNeonStatus, NEON_STATUS } from 'utils/get-neon-status';
 
 const statusData = {
-  UP: {
+  [NEON_STATUS.UP]: {
     color: 'bg-green-45',
     text: 'All systems operational',
   },
-  HASISSUES: {
+  [NEON_STATUS.HASISSUES]: {
     color: 'bg-yellow-70',
     text: 'Experiencing issues',
   },
-  UNDERMAINTENANCE: {
-    color: 'bg-yellow-70',
+  [NEON_STATUS.UNDERMAINTENANCE]: {
+    color: 'bg-[red]',
     text: 'Active maintenance',
   },
 };
 
-const fetchStatus = async () => {
-  const res = await fetch('https://neonstatus.com/api/v1/summary');
-  const response = await res.json();
-  const data = response.subpages;
-
-  const hasOngoingIncidents = data.some((subpage) => subpage.summary.ongoing_incidents.length > 0);
-  const hasInProgressMaintenances = data.some(
-    (subpage) => subpage.summary.in_progress_maintenances.length > 0
-  );
-
-  if (hasOngoingIncidents) {
-    return 'HASISSUES';
-  }
-  if (hasInProgressMaintenances) {
-    return 'UNDERMAINTENANCE';
-  }
-  return 'UP';
-};
-
-const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
+const StatusBadge = () => {
   const [currentStatus, setCurrentStatus] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
   useEffect(() => {
     if (inView) {
-      fetchStatus()
-        .then((status) => {
+      getNeonStatus()
+        .then(({ status }) => {
           setCurrentStatus(status);
         })
         .catch((error) => {
@@ -59,33 +40,23 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
 
   return (
     <Link
+      className="flex items-center justify-center gap-x-1.5 rounded-sm"
       to="https://neonstatus.com/"
       target="_blank"
       rel="noopener noreferrer"
-      className={clsx(
-        'flex items-center justify-center gap-x-1.5',
-        hasThemesSupport ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
-      )}
       ref={ref}
     >
       <span
-        className={clsx(
+        className={cn(
           'h-1.5 w-1.5 rounded-full',
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span
-        className={clsx(
-          'whitespace-nowrap text-sm leading-none tracking-extra-tight dark:text-white',
-          isDarkTheme ? 'text-white' : 'text-black-new'
-        )}
-      >
-        {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
+      <span className="text-sm leading-none tracking-extra-tight whitespace-nowrap text-black-pure dark:text-white">
+        {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>
   );
 };
-
-StatusBadge.propTypes = { hasThemesSupport: PropTypes.bool, isDarkTheme: PropTypes.bool };
 
 export default StatusBadge;

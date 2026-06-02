@@ -1,4 +1,40 @@
+import LINKS from 'constants/links';
 import closeIcon from 'icons/close.svg';
+
+const BASE_URL = 'https://neon.com';
+
+const inkeepTheme = {
+  styles: [
+    {
+      key: 'neon-inkeep-base',
+      type: 'link',
+      value: '/inkeep/css/base.css',
+    },
+    {
+      key: 'neon-inkeep-modal',
+      type: 'link',
+      value: '/inkeep/css/modal.css',
+    },
+    {
+      key: 'neon-inkeep-chat',
+      type: 'link',
+      value: '/inkeep/css/chat.css',
+    },
+  ],
+  components: {
+    AIChatPageWrapper: {
+      defaultProps: {
+        size: 'expand',
+        variant: 'no-shadow',
+      },
+    },
+  },
+  tokens: {
+    colors: {
+      'grayDark.900': '#09090B',
+    },
+  },
+};
 
 const baseSettings = {
   apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
@@ -7,85 +43,59 @@ const baseSettings = {
   primaryBrandColor: '#00E599',
   organizationDisplayName: 'Neon',
   customIcons: {
-    close: { custom: closeIcon },
+    close: { custom: closeIcon.src },
   },
-  customCardSettings: [
-    {
-      filters: {
-        AND: [
-          {
-            UrlMatch: {
-              ruleType: 'PartialUrl',
-              partialUrl: 'https://neon.com/docs',
-            },
-          },
-          {
-            NOT: {
-              UrlMatch: {
-                ruleType: 'PartialUrl',
-                partialUrl: 'https://neon.com/docs/changelog',
-              },
-            },
-          },
-        ],
-      },
-      searchTabLabel: 'Neon Docs',
-    },
-    {
-      filters: {
-        UrlMatch: {
-          ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.com/postgresql',
-        },
-      },
-      searchTabLabel: 'PostgreSQL Tutorial',
-    },
-    {
-      filters: {
-        UrlMatch: {
-          ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.com/docs/changelog',
-        },
-      },
-      searchTabLabel: 'Changelog',
-    },
-  ],
-};
-
-const searchSettings = {
-  searchMode: 'KEYWORD',
-  placeholder: 'Search',
 };
 
 const aiChatSettings = {
-  botName: 'Neon AI',
-  placeholder: 'Ask anything...',
-  quickQuestions: [
+  aiAssistantName: 'Neon AI',
+  chatSubjectName: 'Neon',
+  placeholder: 'How do I get started?',
+  introMessage:
+    "Hi!\nI'm an AI assistant trained on documentation, help articles, and other content.\n\nAsk me anything about Neon.",
+  exampleQuestions: [
     'What’s Neon?',
     'How do I sign up for Neon?',
     'How to create a project?',
     'How to get started with the Neon API?',
   ],
-  botAvatarSrcUrl: '/inkeep/images/bot.svg',
-  botAvatarDarkSrcUrl: '/inkeep/images/bot-dark.svg',
-  userAvatarSrcUrl: '/inkeep/images/user.svg',
-  userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
-  isChatSharingEnabled: true,
-  shareChatUrlBasePath: 'https://neon.com/ai-chat',
-  getHelpCallToActions: [
+  aiAssistantAvatar: {
+    light: '/inkeep/images/bot.svg',
+    dark: '/inkeep/images/bot-dark.svg',
+  },
+  userAvatar: '/inkeep/images/user.svg',
+  isShareButtonVisible: true,
+  shareChatUrlBasePath: `${BASE_URL}${LINKS.docsHome}`,
+  getHelpOptions: [
     {
-      type: 'OPEN_LINK',
       icon: { builtIn: 'FaDiscord' },
       name: 'Discord',
-      url: 'https://discord.gg/92vNTzKDGp',
+      action: {
+        type: 'open_link',
+        url: LINKS.discord,
+      },
     },
     {
-      type: 'OPEN_LINK',
       icon: { builtIn: 'IoChatbubblesOutline' },
       name: 'Neon Support',
-      url: 'https://console.neon.com/app/projects?modal=support',
+      action: {
+        type: 'open_link',
+        url: LINKS.consoleSupport,
+      },
     },
   ],
 };
 
-export { baseSettings, searchSettings, aiChatSettings };
+const getInkeepBaseSettings = ({ onEvent, themeMode }) => ({
+  ...baseSettings,
+  colorMode: {
+    forcedColorMode: themeMode,
+  },
+  theme: inkeepTheme,
+  privacyPreferences: {
+    optOutFunctionalCookies: true,
+  },
+  onEvent,
+});
+
+export { aiChatSettings, baseSettings, getInkeepBaseSettings };

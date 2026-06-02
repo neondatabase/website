@@ -1,11 +1,15 @@
 ---
 title: Postgres json_extract_path() function
 subtitle: Extracts a JSON sub-object at the specified path
+summary: >-
+  Covers the usage of the `json_extract_path` function in Postgres to
+  efficiently extract values from nested JSON documents, including example
+  queries for practical application.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.374Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
-You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. It is particularly useful when dealing with nested `JSON` structures.
+You can use the `json_extract_path` function to extract the value at a specified path within a `JSON` document. This approach is performant compared to querying the entire `JSON` payload and processing it on the application side. Use it when dealing with nested `JSON` structures.
 
 <CTA />
 

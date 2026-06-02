@@ -1,9 +1,9 @@
-/* eslint-disable import/prefer-default-export */
 import Rss from 'rss';
 
 import { CHANGELOG_DIR_PATH } from 'constants/content';
 import { CHANGELOG_BASE_PATH } from 'constants/docs';
-import { getAllChangelogs, getPostBySlug } from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllChangelogs } from 'utils/api-docs';
 import getExcerpt from 'utils/get-excerpt';
 import getFormattedDate from 'utils/get-formatted-date';
 

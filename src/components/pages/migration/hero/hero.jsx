@@ -7,7 +7,7 @@ import LINKS from 'constants/links';
 import claude from './images/claude.png';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative pt-[134px] lg:pt-16 md:pt-12">
+  <section className="hero relative pt-[134px] safe-paddings lg:pt-16 md:pt-12">
     <Container className="lg:mx-8 md:mx-auto md:max-w-[640px]" size="768">
       <div className="relative mb-10 size-[72px] lg:mb-8 lg:size-16 lg:rounded-[14px] md:mb-7 md:size-14">
         <Image
@@ -20,7 +20,7 @@ const Hero = () => (
           priority
         />
         <span
-          className="absolute -right-1 -top-1 size-1/2 rounded-full bg-[#4265CD] blur-xl"
+          className="absolute -top-1 -right-1 size-1/2 rounded-full bg-[#4265CD] blur-xl"
           aria-hidden
         />
         <span
@@ -28,11 +28,11 @@ const Hero = () => (
           aria-hidden
         />
       </div>
-      <h1 className="max-w-[646px] font-title text-[64px] font-medium leading-none tracking-extra-tight xl:text-[56px] lg:max-w-xl lg:text-5xl md:max-w-full md:text-4xl">
+      <h1 className="max-w-[646px] font-title text-[64px] leading-none font-medium tracking-extra-tight xl:text-[56px] lg:max-w-xl lg:text-5xl md:max-w-full md:text-4xl">
         Tools to migrate <br className="xs:hidden" />
         your database to Neon
       </h1>
-      <p className="mt-4 max-w-[570px] text-lg font-light leading-snug tracking-extra-tight text-gray-new-80 lg:mt-3 lg:text-base">
+      <p className="mt-4 max-w-[570px] text-lg leading-snug font-light tracking-extra-tight text-gray-new-80 lg:mt-3 lg:text-base">
         Transfer data from AWS RDS, Azure Database for PostgreSQL, Supabase, and Heroku to Neon with
         minimal downtime.
       </p>

@@ -1,0 +1,426 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks 1`] = `
+"# MDX Conversion Test Page
+
+Exercises every component the processor handles
+
+## Admonition variants
+
+**Note:** This is a simple note with inline content.
+
+**Warning: Breaking change**
+
+The API endpoint has been deprecated.
+
+**Tip:**
+
+- Step one
+- Step two
+- Step three
+
+**Coming Soon:** This feature is coming soon.
+
+## CodeTabs
+
+**Node.js**
+
+\`\`\`javascript
+const { Client } = require('pg');
+const client = new Client(process.env.DATABASE_URL);
+await client.connect();
+\`\`\`
+
+**Python**
+
+\`\`\`python
+import psycopg2
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+\`\`\`
+
+## Tabs and TabItem
+
+**SQL**
+
+\`\`\`sql
+CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT);
+\`\`\`
+
+**CLI**
+
+\`\`\`bash
+neon databases create --name mydb
+\`\`\`
+
+## Steps
+
+### Create a project
+
+Go to the Neon Console and create a new project.
+
+### Connect your app
+
+Use the connection string from your project dashboard.
+
+### Run migrations
+
+Apply your schema migrations to the database.
+
+## DetailIconCards
+
+- [Prisma](https://neon.com/docs/guides/prisma): Connect Prisma ORM to Neon
+- [Next.js](https://neon.com/docs/guides/nextjs): Build Next.js apps with Neon
+
+## TechCards
+
+- [Node.js](https://neon.com/docs/guides/node): Connect a Node.js app to Neon
+- [Python](https://neon.com/docs/guides/python): Connect a Python app to Neon
+
+## DocsList
+
+**Related guides:**
+
+- [Prisma integration](https://neon.com/docs/guides/prisma)
+- [Drizzle ORM guide](https://neon.com/docs/guides/drizzle)
+
+## InfoBlock
+
+This is important information inside an InfoBlock. It can contain **bold text** and [links](https://neon.com/docs/introduction).
+
+## DefinitionList
+
+Compute Unit (CU)
+: A measure of computing resources (CPU and RAM) allocated to a Neon compute.
+
+Endpoint
+: The connection point for your database, providing the hostname and port for client connections.
+
+## CheckList and CheckItem
+
+## Production checklist
+
+- [ ] [Enable connection pooling](https://neon.com/docs/test/mdx-conversion-test#pooling)
+    Connection pooling reduces latency and improves throughput.
+- [ ] [Set up monitoring](https://neon.com/docs/test/mdx-conversion-test#monitoring)
+    Configure alerts for storage and compute usage.
+
+## CTA
+
+> **Get started with Neon**
+>
+> Create a free account and start building.
+>
+> [Sign up](https://console.neon.tech/signup)
+
+## TwoColumnLayout
+
+## Installation
+
+Method: \`npm install @neondatabase/serverless\`
+
+Install the Neon serverless driver from npm.
+
+**Example:**
+
+\`\`\`javascript
+import { neon } from '@neondatabase/serverless';
+const sql = neon(process.env.DATABASE_URL);
+const result = await sql\`SELECT * FROM users\`;
+\`\`\`
+
+## Configure environment
+
+Set the \`DATABASE_URL\` environment variable.
+
+For more details, see the [driver documentation](https://neon.com/docs/serverless/serverless-driver).
+
+## LinkPreview
+
+Values must be provided in [RFC 3339 format](https://tools.ietf.org/html/rfc3339) (Date and Time on the Internet: Timestamps).
+
+## YoutubeIframe
+
+[Watch on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)
+
+## CommunityBanner
+
+Share your feedback: [Join Discord](https://discord.gg/neon)
+
+## PromptCards
+
+**AI Coding Prompts:**
+
+- [Next.js prompt](https://neon.com/prompts/nextjs-prompt.md)
+- [Django prompt](https://neon.com/prompts/django-prompt.md)
+
+## MegaLink
+
+**Case Study** Retool uses the Neon API to manage over 300,000 databases. [Learn more](https://neon.com/blog/retool-case-study)
+
+## QuoteBlock
+
+> Neon's branching feature transformed our development workflow.
+>
+> — Jane Smith, Acme Corp
+>
+> [Read case study](https://neon.com/blog/acme-case-study)
+
+## Testimonial
+
+> The serverless scaling is exactly what we needed.
+>
+> — John Doe, StartupCo
+
+## FeatureList
+
+### Instant provisioning
+
+Create a database in milliseconds via API.
+
+### Autoscaling
+
+Scale compute up and down based on demand.
+
+## ProgramForm
+
+[Apply for the Agent Plan](https://neon.com/use-cases/ai-agents)
+
+## Shared content components
+
+### FeatureBeta (parameterless)
+
+**Note: Beta**
+
+This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### EarlyAccess (parameterless)
+
+**Coming Soon: Early Access**
+
+This feature is available for members of our [Early Access Program](https://neon.com/docs/introduction/early-access). Read more about joining up [here](https://neon.com/docs/introduction/early-access).
+
+### FeatureBetaProps (with prop)
+
+**Note: Beta**
+
+The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+### EarlyAccessProps (with prop)
+
+**Coming Soon: Early Access**
+
+**Schema Diff** is available for members of our Early Access Program.<br/>
+[Sign up](https://neon.com/docs/introduction/early-access) and help shape the future of Neon.
+
+### AgentSkillsTip (with prop)
+
+**Tip: AI assistant support**
+
+Neon's [Agent Skills](https://neon.com/docs/ai/agent-skills) give AI coding assistants context about branching and other Neon features. Install them for more accurate code suggestions.
+
+### MCPTools
+
+## Supported actions (tools)
+
+The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
+
+**Project management:**
+
+- \`list_projects\`: Lists the first 10 Neon projects in your account, providing a summary of each project. If you can't find a specific project, increase the limit by passing a higher value to the limit parameter.
+- \`list_shared_projects\`: Lists Neon projects shared with the current user. Supports a search parameter and limiting the number of projects returned (default: 10).
+- \`describe_project\`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
+- \`create_project\`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
+- \`delete_project\`: Deletes an existing Neon project and all its associated resources.
+- \`list_organizations\`: Lists all organizations that the current user has access to. Optionally filter by organization name or ID using the search parameter.
+
+**Branch management:**
+
+- \`create_branch\`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
+- \`delete_branch\`: Deletes an existing branch from a Neon project.
+- \`describe_branch\`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
+- \`list_branch_computes\`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, last active time, and autoscaling information.
+- \`compare_database_schema\`: Shows the schema diff between the child branch and its parent.
+- \`reset_from_parent\`: Resets the current branch to its parent's state, discarding local changes. Automatically preserves to backup if branch has children, or optionally preserve on request with a custom name.
+
+**SQL query execution:**
+
+- \`get_connection_string\`: Returns your database connection string.
+- \`run_sql\`: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
+- \`run_sql_transaction\`: Executes a series of SQL queries within a single transaction against a Neon database.
+- \`get_database_tables\`: Lists all tables within a specified Neon database.
+- \`describe_table_schema\`: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
+
+**Database migrations (schema changes):**
+
+- \`prepare_database_migration\`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
+- \`complete_database_migration\`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
+
+**Query performance optimization:**
+
+- \`list_slow_queries\`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
+- \`explain_sql_statement\`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
+- \`prepare_query_tuning\`: Analyzes query performance and suggests optimizations, like index creation. Creates a temporary branch for safely testing these optimizations.
+- \`complete_query_tuning\`: Finalizes query tuning by either applying optimizations to the main branch or discarding them. Cleans up the temporary tuning branch.
+
+**Neon Auth:**
+
+- \`provision_neon_auth\`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
+
+**Neon Data API:**
+
+- \`provision_neon_data_api\`: Provisions the Neon Data API for a branch, enabling HTTP-based Data API access with optional JWT authentication.
+
+**Search and discovery:**
+
+- \`search\`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
+- \`fetch\`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
+
+**Documentation and resources:**
+
+- \`list_docs_resources\`: Lists all available Neon documentation pages by fetching the docs index. Returns page URLs and titles that can be fetched individually using the \`get_doc_resource\` tool.
+- \`get_doc_resource\`: Fetches a specific Neon documentation page as markdown content. Use the \`list_docs_resources\` tool first to discover available page slugs, then pass the slug to this tool.
+
+### LinkAPIKey
+
+**Note:** To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
+
+### LRNotice
+
+**Important: Enrollment Pause for Logical Replication Beta**
+
+We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
+
+### ComingSoon
+
+**Coming Soon: Feature coming soon**
+
+This feature is currently available to members in our Early Access Program. Sign up [here](https://console.neon.tech/app/settings/early-access) or from your user profile settings in the [Neon Console](https://console.neon.tech/app/settings/early-access).
+
+### PrivatePreview
+
+**Coming Soon: Private Preview**
+
+This feature is currently accessible in Private Preview only.
+
+### PrivatePreviewEnquire
+
+**Coming Soon: Early Access**
+
+This feature is currently available in Early Access for invited users. Want to try it out? Message us from the [Console](https://console.neon.tech/app/projects?modal=feedback) or on [Discord](https://discord.gg/92vNTzKDGp) and we'll send you an invite.
+
+### PublicPreview
+
+**Note: Public Preview**
+
+This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### LRBeta
+
+**Note: Beta**
+
+Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### MigrationAssistant
+
+**Note: New feature**
+
+If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
+
+### NextSteps
+
+## Next steps
+
+- [Import data into your database](https://neon.com/docs/import/migrate-intro)
+- [Integrate database branching into your dev workflow](https://neon.com/docs/get-started/workflow-primer)
+- [Secure your app with the Neon Data API](https://neon.com/docs/data-api/get-started)
+- [Setup Neon Auth for your app](https://neon.com/docs/guides/neon-auth)
+
+### NewPricing
+
+**Coming Soon: New pricing plans**
+
+On February 19th, 2024, Neon will launch new, simplified pricing plans. You can see the [details of all the plans here](https://neon.com/2024-plan-updates).
+
+### AzureRegionsDeprecation
+
+**Warning: Deprecation notice: Azure regions on Neon**
+
+As of **April 7, 2026**, all Neon Azure regions (\`azure-eastus2\`, \`azure-westus3\`, and \`azure-gwc\`) are deprecated.
+
+**If your project already runs in an Azure region:** your databases keep running as they do today.
+
+**If your organization actively uses Azure regions:** you can continue to create new projects in Azure regions to maintain your current operations. Otherwise, new Azure project creation is no longer available.
+
+We will contact you directly to discuss migration options and timelines. You do not need to migrate on your own before we reach out. See [Region migration](https://neon.com/docs/import/region-migration) if you want to start planning a move.
+
+### ConsumptionAccountApiDeprecation
+
+**Warning: Deprecation notice: GET /consumption_history/account**
+
+The **[Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)** endpoint (\`GET /consumption_history/account\`) is **deprecated**, with a planned sunset of **June 1, 2026**. Migrate to **[Query consumption metrics](https://neon.com/docs/guides/consumption-metrics)** for invoice-aligned project metrics, or to the **[legacy project metrics endpoint](https://neon.com/docs/guides/consumption-metrics-legacy#project-level-endpoint)** (\`GET /consumption_history/projects\`) if you need legacy metrics per project.
+
+## Ignored components
+
+
+
+
+
+## HTML passthrough
+
+<details>
+
+<summary>**Expandable section**</summary>
+
+Content inside a details/summary block that should pass through as HTML.
+
+- Nested list item one
+- Nested list item two
+
+</details>
+
+Inline link with description: [Example](https://example.com)
+
+Line break in a table:
+
+| Feature   | Status               |
+| --------- | -------------------- |
+| Branching | GA<br/>Available now |
+
+## Nested components (known edge case)
+
+**Note: Code example**
+
+**JavaScript**
+
+\`\`\`javascript
+const sql = neon(process.env.DATABASE_URL);
+\`\`\`
+
+**Python**
+
+\`\`\`python
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+\`\`\`
+
+## Markdown fundamentals
+
+Regular paragraph with **bold**, _italic_, \`inline code\`, and a [link](https://neon.com/docs/introduction).
+
+> A standard blockquote.
+
+1. Ordered item one
+2. Ordered item two
+
+- Unordered item one
+- Unordered item two
+
+\`\`\`sql
+SELECT * FROM users WHERE active = true;
+\`\`\`
+
+| Column | Type   | Description |
+| ------ | ------ | ----------- |
+| id     | serial | Primary key |
+| name   | text   | User's name |
+"
+`;

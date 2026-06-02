@@ -1,14 +1,16 @@
 'use client';
 
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import Button from '../button';
 
-const CookieConsent = ({}) => {
+const CookieConsent = ({ isDocPage }) => {
   const [visible, setVisible] = useState(false);
 
   const consentAll = () => {
@@ -39,11 +41,16 @@ const CookieConsent = ({}) => {
   }, []);
 
   return visible ? (
-    <div className="fixed bottom-4 left-4 z-50 flex max-w-[503px] items-center gap-x-10 rounded-lg border border-gray-new-94 bg-white p-4 shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,0.10)] md:bottom-4 md:left-4 md:right-4 sm:flex-col sm:items-start sm:gap-y-4">
-      <p className="text-sm font-light leading-snug tracking-extra-tight text-gray-new-40 dark:text-gray-new-80">
+    <div
+      className={cn(
+        'fixed bottom-4 left-4 z-50 flex max-w-[503px] items-center gap-x-10 rounded-lg border border-gray-new-94 bg-white p-4 shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,0.10)] md:right-4 md:left-4 sm:flex-col sm:items-start sm:gap-y-4',
+        isDocPage ? 'md:bottom-16' : 'md:bottom-4'
+      )}
+    >
+      <p className="text-sm leading-snug font-light tracking-extra-tight text-gray-new-40 dark:text-gray-new-80">
         We use cookies to improve our services. Learn more in our{' '}
         <Link
-          className="whitespace-nowrap font-normal text-black-new underline decoration-black-new underline-offset-4 transition-colors duration-300 hover:decoration-black-new/40 dark:text-white dark:decoration-white/40 dark:hover:decoration-white/100"
+          className="font-normal whitespace-nowrap text-black-new underline decoration-black-new underline-offset-4 transition-colors duration-300 hover:decoration-black-new/40 dark:text-white dark:decoration-white/40 dark:hover:decoration-white/100"
           to={LINKS.cookiePolicy}
         >
           Cookie Policy
@@ -70,6 +77,10 @@ const CookieConsent = ({}) => {
   ) : (
     <></>
   );
+};
+
+CookieConsent.propTypes = {
+  isDocPage: PropTypes.bool,
 };
 
 export default CookieConsent;

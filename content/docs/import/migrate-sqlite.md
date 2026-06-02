@@ -1,8 +1,12 @@
 ---
 title: Migrate from SQLite to Neon Postgres
+summary: >-
+  Covers the migration of an SQLite database to Neon Postgres using pgloader,
+  detailing prerequisites, data type differences, and the process for efficient
+  data transfer and transformation.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-27T09:31:11.052Z'
+updatedOn: '2026-05-12T09:05:54.263Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
@@ -13,10 +17,10 @@ This guide describes how to migrate your SQLite database to Neon Postgres using 
 
 Before you begin, ensure you have the following:
 
-- A Neon account and a project. If you don't have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account and a project. If you don't have one, see [Sign up](/docs/get-started/signing-up).
 - A database created in your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - The file path to your source SQLite database file. If you don't have one, you can create a sample database in the next step.
-- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities.
 
@@ -108,7 +112,11 @@ Now that you have your Neon database and SQLite database ready, you can use `pgl
 
 ## Retrieve your Neon database connection string
 
-Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled:
+
+![Connection details modal with connection pooling disabled](/docs/connect/connection_details_without_connection_pooling.png)
+
+Your connection string should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
@@ -228,13 +236,13 @@ After migrating, always verify your data. One critical area is auto-incrementing
 
 The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. You can verify this manually.
 
-Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-editor) or [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and check the next value for the `books` table's sequence:
+Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-editor) or [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and check the next value for the `books` table's sequence:
 
 ```sql
 SELECT nextval(pg_get_serial_sequence('books', 'id'));
 ```
 
-This should return a value one higher than the max `id` in the `books` table (e.g., `6` for our sample data). If it doesn't, you can reset it manually with this command:
+This should return a value one higher than the max `id` in the `books` table (for example, `6` for our sample data). If it doesn't, you can reset it manually with this command:
 
 ```sql
 SELECT setval(

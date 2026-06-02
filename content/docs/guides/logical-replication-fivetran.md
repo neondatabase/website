@@ -1,9 +1,12 @@
 ---
 title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
+summary: >-
+  Step-by-step guide for defining a Neon Postgres database as a data source in
+  Fivetran to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-30T11:30:21.905Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -18,6 +21,10 @@ In this guide, you will learn how to define a Neon Postgres database as a data s
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
+
 ## Enable logical replication in Neon
 
 <Admonition type="important">
@@ -31,7 +38,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -73,10 +80,10 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -86,6 +93,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
+
+> Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
 
 </TabItem>
 
@@ -131,6 +140,11 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 1. On the **Select your datasource** page, search for the **PostgreSQL** source and click **Set up**.
 1. In your connector setup form, enter a value for **Destination Schema Prefix**. This prefix applies to each replicated schema and cannot be changed once your connector is created. In this example, we'll use `neon` as the prefix.
 1. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+
+   <Admonition type="important">
+   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
+   </Admonition>
+
    For example, let's say this is your connection string:
 
    ```bash shouldWrap
@@ -144,7 +158,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
    - **Password**: AbC123dEf
    - **Database Name**: dbname
 
-1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You deifned these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
+1. For **Connection Method**, select **Logical replication of the WAL using the pgoutput plugin** and enter values for the **Replication Slot** and **Publication Name**. You defined these values earlier (`fivetran_pgoutput_slot` and `fivetran_pub`, respectively).
 
    ![Fivetran connector setup](/docs/guides/fivetran_connector_setup.png)
 
@@ -156,7 +170,7 @@ The name assigned to the replication slot is `fivetran_pgoutput_slot`. You will 
 
 1. Click **Save & Test**. Fivetran tests and validates the connection to your database. Upon successful completion of the setup tests, you can sync your data using Fivetran.
 
-   During the test, Fivetran asks you to confirm the certificate chain by selecting the certificate to use as the trust anchor. Select the `CN=ISRG Root X1, 0=Internet Security Research Group, C=US` option. This certificate is valid unitl until 2035-06-04.
+   During the test, Fivetran asks you to confirm the certificate chain by selecting the certificate to use as the trust anchor. Select the `CN=ISRG Root X1, 0=Internet Security Research Group, C=US` option. This certificate is valid until 2035-06-04.
 
    When the connection test is completed, you should see an **All connection tests passed!** message in Fivetran, as shown below:
 

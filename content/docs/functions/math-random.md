@@ -1,13 +1,18 @@
 ---
 title: Postgres random() function
 subtitle: Generate random values between 0 and 1
+summary: >-
+  Covers the usage of the Postgres `random()` function to generate random
+  floating point values between 0.0 and 1.0, and introduces new capabilities in
+  Postgres 17 for generating random integers and decimals within specified
+  ranges.
 enableTableOfContents: true
-updatedOn: '2024-12-06T19:56:24.870Z'
+updatedOn: '2026-04-18T12:27:58.000Z'
 ---
 
 The Postgres `random()` function generates random floating point values between 0.0 and 1.0. Starting with Postgres 17, it also supports generating random integers or decimals within a specified range using `random(min, max)` syntax.
 
-It's particularly useful for creating some sample data, usage in simulations, or introducing randomness in queries for applications like statistical sampling and testing algorithms.
+Use it for sample data, simulations, or introducing randomness in queries for statistical sampling and testing algorithms.
 
 <CTA />
 

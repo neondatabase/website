@@ -5,10 +5,10 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 
 const Features = ({ title, items }) => (
-  <section className="features safe-paddings mt-[200px] xl:mt-40 lg:mt-32 md:mt-24">
-    <Container className="xl:!px-8 md:!px-5" size="1152">
+  <section className="features mt-[200px] safe-paddings xl:mt-40 lg:mt-32 md:mt-24">
+    <Container className="xl:px-8! md:px-5!" size="1152">
       <div className="flex gap-10 rounded-2xl lg:flex-wrap lg:gap-12 md:gap-10">
-        <h2 className="min-w-[360px] font-title text-[44px] font-medium leading-none tracking-extra-tight xl:min-w-[312px] xl:text-4xl lg:max-w-[440px] lg:text-[32px] md:text-[28px]">
+        <h2 className="min-w-[360px] font-title text-[44px] leading-none font-medium tracking-extra-tight xl:min-w-[312px] xl:text-4xl lg:max-w-[440px] lg:text-[32px] md:text-[28px]">
           {title}
         </h2>
         <ul className="grid grid-cols-2 gap-x-[26px] gap-y-11 xl:gap-x-[30px] lg:gap-10 md:grid-cols-1 md:gap-8">
@@ -23,13 +23,13 @@ const Features = ({ title, items }) => (
                   alt=""
                   loading="lazy"
                 />
-                <h3 className="text-[22px] font-medium leading-tight tracking-extra-tight lg:text-lg">
+                <h3 className="text-[22px] leading-tight font-medium tracking-extra-tight lg:text-lg">
                   {title}
                 </h3>
               </div>
-              <p className="mt-2 font-light leading-snug text-gray-new-70">{description}</p>
+              <p className="mt-2 leading-snug font-light text-gray-new-70">{description}</p>
               <Link
-                className="mt-4 !text-[15px] font-medium leading-none tracking-tight"
+                className="mt-4 text-[15px]! leading-none font-medium tracking-tight"
                 theme="white"
                 size="xs"
                 to={url}
@@ -37,7 +37,7 @@ const Features = ({ title, items }) => (
                 target="_blank"
                 withArrow
               >
-                Learn more <span className="sr-only">about ${title}</span>
+                Learn more <span className="sr-only">about {title}</span>
               </Link>
             </li>
           ))}

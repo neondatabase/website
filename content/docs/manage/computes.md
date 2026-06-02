@@ -1,8 +1,12 @@
 ---
 title: Manage computes
+summary: >-
+  Covers the management of computes in Neon, detailing how to connect
+  applications to Postgres databases via primary and read replica computes,
+  along with viewing and editing compute details in the Neon Console.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-23T15:24:08.789Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -22,7 +26,7 @@ Project
                             |---- database
 ```
 
-Your Neon plan determines the resources (vCPUs and RAM) available to a compute. The [Neon Free Plan](/docs/introduction/plans#free-plan) supports computes with up to 2 vCPUs and 8 GB of RAM. Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
+Your Neon plan determines the resources available to a compute. The Neon Free plan supports computes with up to 2 CU (8 GB of RAM). Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
 
 ## View a compute
 
@@ -33,7 +37,7 @@ Compute details shown on the **Computes** tab include:
 - The type of compute, which can be **Primary** (read-write) or **Read Replica** (read-only).
 - The compute status, typically **Active** or **Idle**.
 - **Endpoint ID**: The compute endpoints ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
-- **Size**: The size of the compute. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
+- **Size**: The size of the compute. Shows autoscaling minimum and maximum CU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
 **Edit**, **Monitor**, and **Connect** actions for a compute can be accessed from the **Computes** tab.
@@ -59,7 +63,7 @@ To edit a compute:
 1. Select a branch.
 1. From the **Computes** tab, select **Edit** for the compute you want to edit.
 
-   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration (if applicable), and your scale to zero setting.
+   The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
 
@@ -74,8 +78,8 @@ Some key points to understand about how your endpoint responds when you make cha
   When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales.
   </Admonition>
 
-* Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-* If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
+- Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
+- If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection. See [Handling connection disruptions](/docs/manage/updates#handling-connection-disruptions).
 
@@ -83,53 +87,53 @@ To avoid prolonged interruptions resulting from compute restarts, we recommend c
 
 You can change compute size settings when [editing a compute](#edit-a-compute).
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly, as shown in the table below.
 
-| Compute Units | vCPU | RAM    |
-| :------------ | :--- | :----- |
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
-| 9             | 9    | 36 GB  |
-| 10            | 10   | 40 GB  |
-| 11            | 11   | 44 GB  |
-| 12            | 12   | 48 GB  |
-| 13            | 13   | 52 GB  |
-| 14            | 14   | 56 GB  |
-| 15            | 15   | 60 GB  |
-| 16            | 16   | 64 GB  |
-| 18            | 18   | 72 GB  |
-| 20            | 20   | 80 GB  |
-| 22            | 22   | 88 GB  |
-| 24            | 24   | 96 GB  |
-| 26            | 26   | 104 GB |
-| 28            | 28   | 112 GB |
-| 30            | 30   | 120 GB |
-| 32            | 32   | 128 GB |
-| 34            | 34   | 136 GB |
-| 36            | 36   | 144 GB |
-| 38            | 38   | 152 GB |
-| 40            | 40   | 160 GB |
-| 42            | 42   | 168 GB |
-| 44            | 44   | 176 GB |
-| 46            | 46   | 184 GB |
-| 48            | 48   | 192 GB |
-| 50            | 50   | 200 GB |
-| 52            | 52   | 208 GB |
-| 54            | 54   | 216 GB |
-| 56            | 56   | 224 GB |
+| Compute Units | RAM    |
+| :------------ | :----- |
+| .25           | 1 GB   |
+| .5            | 2 GB   |
+| 1             | 4 GB   |
+| 2             | 8 GB   |
+| 3             | 12 GB  |
+| 4             | 16 GB  |
+| 5             | 20 GB  |
+| 6             | 24 GB  |
+| 7             | 28 GB  |
+| 8             | 32 GB  |
+| 9             | 36 GB  |
+| 10            | 40 GB  |
+| 11            | 44 GB  |
+| 12            | 48 GB  |
+| 13            | 52 GB  |
+| 14            | 56 GB  |
+| 15            | 60 GB  |
+| 16            | 64 GB  |
+| 18            | 72 GB  |
+| 20            | 80 GB  |
+| 22            | 88 GB  |
+| 24            | 96 GB  |
+| 26            | 104 GB |
+| 28            | 112 GB |
+| 30            | 120 GB |
+| 32            | 128 GB |
+| 34            | 136 GB |
+| 36            | 144 GB |
+| 38            | 152 GB |
+| 40            | 160 GB |
+| 42            | 168 GB |
+| 44            | 176 GB |
+| 46            | 184 GB |
+| 48            | 192 GB |
+| 50            | 200 GB |
+| 52            | 208 GB |
+| 54            | 216 GB |
+| 56            | 224 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 16 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of .25 CU to 16 CU. The maximum permitted autoscaling range is 8 CU, meaning the difference between your maximum and minimum cannot exceed 8 CU. The .25 CU and .5 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info" title="monitoring autoscaling">
 For information about monitoring your compute as it scales up and down, see [Monitor autoscaling](/docs/guides/autoscaling-guide#monitor-autoscaling).
@@ -143,45 +147,43 @@ In Postgres, the `shared_buffers` setting defines the amount of data that can be
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the vCPU, RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+The following table outlines the RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Compute Size (CU) | vCPU | RAM (GB) | LFC size (GB) | max_connections |
-| :---------------- | :--- | :------- | :------------ | :-------------- |
-| 0.25              | 0.25 | 1        | 0.75          | 112             |
-| 0.50              | 0.50 | 2        | 1.5           | 225             |
-| 1                 | 1    | 4        | 3             | 450             |
-| 2                 | 2    | 8        | 6             | 901             |
-| 3                 | 3    | 12       | 9             | 1351            |
-| 4                 | 4    | 16       | 12            | 1802            |
-| 5                 | 5    | 20       | 15            | 2253            |
-| 6                 | 6    | 24       | 18            | 2703            |
-| 7                 | 7    | 28       | 21            | 3154            |
-| 8                 | 8    | 32       | 24            | 3604            |
-| 9                 | 9    | 36       | 27            | 4000            |
-| 10                | 10   | 40       | 30            | 4000            |
-| 11                | 11   | 44       | 33            | 4000            |
-| 12                | 12   | 48       | 36            | 4000            |
-| 13                | 13   | 52       | 39            | 4000            |
-| 14                | 14   | 56       | 42            | 4000            |
-| 15                | 15   | 60       | 45            | 4000            |
-| 16                | 16   | 64       | 48            | 4000            |
-| 18                | 18   | 72       | 54            | 4000            |
-| 20                | 20   | 80       | 60            | 4000            |
-| 22                | 22   | 88       | 66            | 4000            |
-| 24                | 24   | 96       | 72            | 4000            |
-| 26                | 26   | 104      | 78            | 4000            |
-| 28                | 28   | 112      | 84            | 4000            |
-| 30                | 30   | 120      | 90            | 4000            |
-| 32                | 32   | 128      | 96            | 4000            |
-| 34                | 34   | 136      | 102           | 4000            |
-| 36                | 36   | 144      | 108           | 4000            |
-| 38                | 38   | 152      | 114           | 4000            |
-
-|
+| Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
+| :---------------- | :------- | :------------ | :-------------- |
+| 0.25              | 1        | 0.75          | 104             |
+| 0.50              | 2        | 1.5           | 209             |
+| 1                 | 4        | 3             | 419             |
+| 2                 | 8        | 6             | 839             |
+| 3                 | 12       | 9             | 1258            |
+| 4                 | 16       | 12            | 1678            |
+| 5                 | 20       | 15            | 2098            |
+| 6                 | 24       | 18            | 2517            |
+| 7                 | 28       | 21            | 2937            |
+| 8                 | 32       | 24            | 3357            |
+| 9                 | 36       | 27            | 4000            |
+| 10                | 40       | 30            | 4000            |
+| 11                | 44       | 33            | 4000            |
+| 12                | 48       | 36            | 4000            |
+| 13                | 52       | 39            | 4000            |
+| 14                | 56       | 42            | 4000            |
+| 15                | 60       | 45            | 4000            |
+| 16                | 64       | 48            | 4000            |
+| 18                | 72       | 54            | 4000            |
+| 20                | 80       | 60            | 4000            |
+| 22                | 88       | 66            | 4000            |
+| 24                | 96       | 72            | 4000            |
+| 26                | 104      | 78            | 4000            |
+| 28                | 112      | 84            | 4000            |
+| 30                | 120      | 90            | 4000            |
+| 32                | 128      | 96            | 4000            |
+| 34                | 136      | 102           | 4000            |
+| 36                | 144      | 108           | 4000            |
+| 38                | 152      | 114           | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
@@ -210,6 +212,10 @@ As mentioned above, your `max_connections` setting is based on both your minimum
 
 Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after 5 minutes of inactivity. You can disable scale to zero to maintain an "always-active" compute. An "always-active" configuration eliminates the few hundred milliseconds seconds of latency required to reactivate a compute but is likely to increase your compute time usage on systems where the database is not always active.
 
+<Admonition type="note">
+Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
+</Admonition>
+
 For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 <Admonition type="important">
@@ -220,9 +226,9 @@ If you disable scale to zero, you may need to restart your compute manually to g
 
 It is sometimes necessary to restart a compute. Reasons for restarting a compute might include:
 
-- Applying upgraded limits after upgrading to a paid plan
-- Picking up the latest compute-related updates, which Neon typically releases weekly
-- Picking up a new Postgres extension or extension version released by Neon
+- Activating new limits after upgrading to a paid plan
+- Getting the latest compute-related updates, which Neon typically releases weekly
+- Accessing a recently released Postgres extension or extension version
 - Resolving performance issues or unexpected behavior
 
 Restarting ensures your compute is running with the latest configurations and improvements.
@@ -231,8 +237,10 @@ Restarting ensures your compute is running with the latest configurations and im
 Restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
-You can restart a compute using one of the following methods:
+You can restart a compute using these methods:
 
+- Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
+  ![Restart a compute in the console](/docs/manage/restart_compute.png)
 - Issue a [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash
@@ -286,13 +294,13 @@ The API method appears as follows when specified in a cURL command. The branch y
 
 ```bash
 curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
     "type": "read_write"
   }
 }'
@@ -301,41 +309,45 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create compute](https://api-docs.neon.tech/reference/createprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
-    "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
-    "id": "ep-aged-math-668285",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-blue-tooth-671580",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "init",
     "pending_state": "active",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "created_at": "2023-01-04T18:39:41Z",
-    "updated_at": "2023-01-04T18:39:41Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:40:19Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
   "operations": [
     {
-      "id": "e0e4da91-8576-4348-913b-aaf61a46d314",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "endpoint_id": "ep-misty-morning-a1pfa4ez",
       "action": "start_compute",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T18:39:41Z",
-      "updated_at": "2023-01-04T18:39:41Z"
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:40:19Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -355,7 +367,7 @@ The API method appears as follows when specified in a cURL command:
 
 ```bash
 curl -X 'GET' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -363,52 +375,58 @@ curl -X 'GET' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List computes](https://api-docs.neon.tech/reference/listprojectendpoints) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoints": [
     {
-      "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-      "id": "ep-young-art-646685",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-shy-credit-899131",
+      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+      "id": "ep-misty-morning-a1pfa4ez",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
       "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
       "type": "read_write",
       "current_state": "idle",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2023-01-04T18:38:25Z",
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:43:36Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "last_active": "2025-08-03T17:40:20Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:45:24Z",
+      "suspended_at": "2025-08-03T17:45:24Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     },
     {
-      "host": "ep-aged-math-668285.us-east-2.aws.neon.tech",
-      "id": "ep-aged-math-668285",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
+      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
+      "id": "ep-autumn-frost-a1wlmval",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dark-bar-a11jneqm",
       "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
       "type": "read_write",
       "current_state": "idle",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2023-01-04T18:39:42Z",
-      "created_at": "2023-01-04T18:39:41Z",
-      "updated_at": "2023-01-04T18:44:48Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "last_active": "2025-08-03T17:34:40Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T11:27:50Z",
+      "updated_at": "2025-08-03T17:41:11Z",
+      "suspended_at": "2025-08-03T17:41:11Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ]
 }
@@ -428,13 +446,13 @@ The API method appears as follows when specified in a cURL command. The example 
 
 ```bash
 curl -X 'PATCH' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
   "endpoint": {
-    "branch_id": "br-green-lab-617946"
+    "branch_id": "br-raspy-pine-a1hspnzv"
   }
 }'
 ```
@@ -442,55 +460,35 @@ curl -X 'PATCH' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-    "id": "ep-young-art-646685",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-green-lab-617946",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-raspy-pine-a1hspnzv",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
-    "pending_state": "idle",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "last_active": "2023-01-04T18:38:25Z",
-    "created_at": "2023-01-04T18:38:23Z",
-    "updated_at": "2023-01-04T18:47:36Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:49:01Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
-  "operations": [
-    {
-      "id": "03bf0bbc-cc46-4863-a5c4-f31fc1881228",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-green-lab-617946",
-      "endpoint_id": "ep-young-art-646685",
-      "action": "apply_config",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2023-01-04T18:47:36Z",
-      "updated_at": "2023-01-04T18:47:36Z"
-    },
-    {
-      "id": "c96be00c-6340-4fb2-b80a-5ae96f469969",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-green-lab-617946",
-      "endpoint_id": "ep-young-art-646685",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T18:47:36Z",
-      "updated_at": "2023-01-04T18:47:36Z"
-    }
-  ]
+  "operations": []
 }
 ```
 
@@ -508,7 +506,7 @@ The API method appears as follows when specified in a cURL command.
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/endpoints/ep-young-art-646685' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -516,29 +514,33 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Delete compute](https://api-docs.neon.tech/reference/deleteprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
-    "host": "ep-young-art-646685.us-east-2.aws.neon.tech",
-    "id": "ep-young-art-646685",
-    "project_id": "hidden-cell-763301",
-    "branch_id": "br-green-lab-617946",
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-raspy-pine-a1hspnzv",
     "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 1,
-    "region_id": "aws-us-east-2",
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
-    "settings": {
-      "pg_settings": {}
-    },
+    "settings": {},
     "pooler_enabled": false,
     "pooler_mode": "transaction",
     "disabled": false,
     "passwordless_access": true,
-    "last_active": "2023-01-04T18:38:25Z",
-    "created_at": "2023-01-04T18:38:23Z",
-    "updated_at": "2023-01-04T18:47:45Z",
-    "proxy_host": "us-east-2.aws.neon.tech"
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:52:39Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
   },
   "operations": []
 }

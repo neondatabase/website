@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating ElectricSQL with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2025-05-28T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Neon Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
@@ -30,7 +30,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 ElectricSQL requires a Postgres database with logical replication enabled. You'll configure your Neon project accordingly.
 
-1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the Neon Console or [pg.new](https://pg.new).
+1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech).
 2.  **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project in the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
@@ -109,7 +109,7 @@ Now that Electric is running and connected to your Neon database, you can test i
 
 ### Create sample data in Neon
 
-Connect to your Neon database using `psql` or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and run the following SQL commands to create a sample table and insert some data. This is the schema our React application will use.
+Connect to your Neon database using `psql` or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run the following SQL commands to create a sample table and insert some data. This is the schema our React application will use.
 
 ```sql
 CREATE TABLE scores (

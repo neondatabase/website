@@ -1,0 +1,140 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+
+import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
+import { cn } from 'utils/cn';
+
+const TwoColumnLayout = ({ children }) => (
+  <ol
+    className="two-column-layout mt-12! inline-flex w-full flex-col pl-0! xl:mt-8!"
+    style={{
+      counterReset: 'section',
+    }}
+  >
+    {React.Children.map(children, (child, index) => React.cloneElement(child, { index }))}
+  </ol>
+);
+
+TwoColumnLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+const TwoColumnStep = ({ title, children }) => (
+  <li
+    className={cn(
+      'two-column-step relative mt-12! mb-0! flex gap-4 pl-0!',
+      'after:absolute after:top-8 after:-bottom-11 after:left-[.8125rem] after:w-px after:bg-gray-new-80',
+      'first:mt-7! last:after:bottom-0',
+      'dark:after:bg-gray-new-30'
+    )}
+  >
+    {/* Step number badge */}
+    <div
+      className={cn(
+        'flex size-7 shrink-0 items-center justify-center rounded-full bg-gray-new-20 font-mono font-medium tracking-extra-tight text-white',
+        'text-sm leading-none tracking-extra-tight',
+        'before:content-[counter(section)] before:[counter-increment:section]',
+        'dark:bg-gray-new-90 dark:text-black-pure'
+      )}
+    />
+
+    <div className="w-full">
+      {title && (
+        <h3 className="col-span-2 mt-0! mb-3! text-xl leading-tight font-semibold tracking-extra-tight">
+          {title}
+        </h3>
+      )}
+
+      {/* Content grid */}
+      <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
+        {children}
+      </div>
+    </div>
+  </li>
+);
+
+TwoColumnStep.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+const TwoColumnItem = ({ title, method, id, children }) => (
+  <li className="two-column-item relative mt-0! mb-0! block border-b border-gray-new-90 py-14 pl-0! first:border-t dark:border-gray-new-20 xl:py-10">
+    {title && (
+      <>
+        <h2
+          id={id}
+          className="anchor-heading group relative mt-0! mb-1! w-fit scroll-mt-20 pt-0! text-2xl leading-tight font-semibold tracking-extra-tight lg:scroll-mt-5"
+        >
+          <span>{title}</span>
+          {id && (
+            <a
+              className="px-2 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 sm:hidden"
+              href={`#${id}`}
+              aria-label={`Link to ${title}`}
+            >
+              <HashIcon className="inline w-3.5 text-green-45" />
+            </a>
+          )}
+        </h2>
+        {method && (
+          <div className="mt-2 mb-4 flex flex-wrap gap-2">
+            {method.split(',').map((m, index) => (
+              <span
+                key={index}
+                className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs leading-normal font-medium text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60"
+              >
+                {m.trim()}
+              </span>
+            ))}
+          </div>
+        )}
+      </>
+    )}
+    {/* Content grid */}
+    <div className="grid flex-1 grid-cols-2 gap-x-16 2xl:gap-x-8 xl:grid-cols-1 xl:gap-x-0 xl:gap-y-6">
+      {children}
+    </div>
+  </li>
+);
+
+TwoColumnItem.propTypes = {
+  title: PropTypes.string,
+  method: PropTypes.string,
+  id: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+const TwoColumnBlock = ({ label, children }) => (
+  <div className="flex flex-col items-start gap-2">
+    {label && (
+      <div className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2 py-0.5 text-[11px] font-medium text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60">
+        {label}
+      </div>
+    )}
+    <div className="size-full [&_img]:m-0! [&>*:first-child]:mt-0 md:[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+      {children}
+    </div>
+  </div>
+);
+
+TwoColumnBlock.propTypes = {
+  label: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+const TwoColumnFooter = ({ children }) => (
+  <div className="col-span-2 xl:col-span-1">{children}</div>
+);
+
+TwoColumnFooter.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+// Attach sub-components
+TwoColumnLayout.Step = TwoColumnStep;
+TwoColumnLayout.Item = TwoColumnItem;
+TwoColumnLayout.Block = TwoColumnBlock;
+TwoColumnLayout.Footer = TwoColumnFooter;
+
+export default TwoColumnLayout;

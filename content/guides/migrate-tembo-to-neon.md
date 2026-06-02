@@ -4,10 +4,10 @@ subtitle: 'Learn how to migrate your data and applications from Tembo.io to Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2025-05-08T00:00:00.000Z'
+updatedOn: '2025-08-01T20:49:23.000Z'
 ---
 
-[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide. If you're facing a production migration requiring minimal downtime, [reach out to us](/migration-assistance).
+[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide.
 
 <Admonition type="warning" title="Tembo Shutdown Timeline">
 Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.site/Tembo-Cloud-Migration-Guide-1de7c9367d6a80349570e7469ba7f17b)
@@ -56,7 +56,7 @@ Before you begin any migration method, complete these essential preparation step
       ```
       This provides a list of your installed extensions, their versions, and descriptions. Compare this list to Neon's supported extensions. Neon supports many common extensions, and the full list is available here: [Neon supported extensions list](/docs/extensions/pg-extensions). For any unsupported extensions, consider finding alternatives or modifying your application.
 
-2.  **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started-with-neon/signing-up#sign-up).
+2.  **Set up your Neon project:** If you don't have one, [create a Neon account and project](/docs/get-started/signing-up#sign-up).
 
 ## Option 1: Using Neon's Import Data Assistant
 

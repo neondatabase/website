@@ -1,8 +1,14 @@
 ---
 title: Migrate from MySQL to Neon Postgres
+summary: >-
+  Covers the migration of a MySQL database to Neon Postgres using the `pgloader`
+  utility, detailing prerequisites, credential retrieval, and data
+  transformation processes.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-03T12:36:49.567Z'
+redirectFrom:
+  - /docs/import/import-from-mysql
+updatedOn: '2026-05-12T17:58:17.469Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -13,9 +19,9 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it is 
 
 Before you begin, make sure that you have the following:
 
-- A Neon account and a project. See [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account and a project. See [Sign up](/docs/get-started/signing-up).
 - A properly named database. For example, if you are migrating a database named `sakila`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
-- Neon's Free Plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 Also, a close review of the [Pgloader MySQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mysql.html) guide is recommended before you start. This guide will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
@@ -36,7 +42,9 @@ Keep your MySQL database connection details handy for later use.
 
 ## Retrieve your Neon database connection string
 
-Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
+
+Your connection string should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -62,7 +70,7 @@ Here's how you can set up `pgloader` for your database migration:
 
    See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html) for Debian (apt), RPM package, and Docker installation instructions.
 
-2. Create a `pgloader` configuration file (e.g., `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved and modified in the previous step as the destination.
+2. Create a `pgloader` configuration file (for example, `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved and modified in the previous step as the destination.
 
    <Admonition type="note">
    If you need to specify an SSL mode in your connection string, the following format is recommended: `sslmode=require`. Other formats may not work.

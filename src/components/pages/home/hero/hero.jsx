@@ -1,181 +1,199 @@
-'use client';
-
-import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useRef, createRef, useEffect, useCallback } from 'react';
-import useWindowSize from 'react-use/lib/useWindowSize';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
+import Logos from 'components/shared/logos';
+import PauseableVideo from 'components/shared/pauseable-video';
+import SectionLabel from 'components/shared/section-label';
+import Tooltip from 'components/shared/tooltip';
 import LINKS from 'constants/links';
-import useIsSafari from 'hooks/use-is-safari';
-import branchingIcon from 'icons/home/hero/branching.svg';
-import scalingIcon from 'icons/home/hero/scaling.svg';
-import bg from 'images/pages/home/hero/bg.jpg';
+import AIGatewayIcon from 'icons/home/hero/ai-gateway.svg';
+import ComputeIcon from 'icons/home/hero/compute.svg';
+import DatabaseIcon from 'icons/home/hero/database.svg';
+import LockIcon from 'icons/home/hero/lock.svg';
+import StorageIcon from 'icons/home/hero/storage.svg';
+import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
+import { cn } from 'utils/cn';
 
-import Video from './video';
+const logos = [
+  'replit',
+  'outfront',
+  'doordash',
+  'bcg',
+  'pepsi',
+  'retool',
+  'meta',
+  'bitso',
+  'framer',
+];
 
-const Hls = require('hls.js/dist/hls.light.min.js');
-
-const IS_MOBILE_SCREEN_WIDTH = 639;
-
-/* 
-  Video optimization parameters:
-    -mp4: -pix_fmt yuv420p -vf "scale=-2:932" -movflags faststart -vcodec libx264 -crf 20
-    Scaling
-      -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls scaling.m3u8
-    Branching
-      -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls branching.m3u8
-*/
-const ITEMS = [
+const productFeatures = [
   {
-    video: {
-      icon: scalingIcon,
-      title: 'Scaling',
-      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
-      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
-      bgImage: '/videos/pages/home/hero/scaling.jpg',
-    },
-    title: 'Scaling',
-    description:
-      'Focus on building applications with time and money-saving features like instant provisioning, autoscaling according to load, and scale to zero.',
-    linkLabel: 'Discover Autoscaling',
-    linkUrl: LINKS.autoscaling,
+    title: 'Postgres Database',
+    description: 'Serverless Postgres that scales and branches with your app.',
+    icon: DatabaseIcon,
   },
   {
-    video: {
-      icon: branchingIcon,
-      title: 'Branching',
-      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
-      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
-      bgImage: '/videos/pages/home/hero/branching.jpg',
-    },
-    title: 'Branching',
-    description:
-      'Instantly branch your data and schema to access isolated DB copies for development, CI/CD, and schema migrations with copy-on-write storage.',
-    linkLabel: 'Explore Branching',
-    linkUrl: LINKS.docsBranching,
+    title: 'Authentication',
+    description: 'Managed auth with users and sessions stored in Postgres.',
+    icon: LockIcon,
+  },
+  {
+    title: 'Compute',
+    description: 'Functions without timeouts running close to your database.',
+    icon: ComputeIcon,
+    comingSoon: true,
+  },
+  {
+    title: 'Storage',
+    description: 'S3-compatible object storage that branches with your projects.',
+    icon: StorageIcon,
+    comingSoon: true,
+  },
+  {
+    title: 'AI Gateway',
+    description: 'One API for all frontier & open-source models, powered by Databricks.',
+    icon: AIGatewayIcon,
+    comingSoon: true,
   },
 ];
 
-const Hero = () => {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+const Hero = () => (
+  <section className="hero relative mt-16 safe-paddings lg:mt-14">
+    <Container
+      className="relative z-30 pt-88 pb-2 xl:px-16 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
+      size="1600"
+    >
+      <Link href="#backed-by-giants">
+        <SectionLabel theme="white" icon="databricks">
+          A DATABRICKS COMPANY
+        </SectionLabel>
+      </Link>
 
-  const { width: windowWidth } = useWindowSize();
-  const [isMobile, setIsMobile] = useState(false);
-  const [initialVideoPlayback, setInitialVideoPlayback] = useState(true);
+      <h1 className="mt-5 max-w-236 text-[68px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
+        Ship faster on the backend
+        <br />
+        platform for apps and agents.
+      </h1>
 
-  const videoRefs = useRef(ITEMS.map(() => createRef()));
+      <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
+        <Button theme="white-filled" size="new" to={LINKS.signup}>
+          Get started
+        </Button>
+        <Button theme="outlined" size="new" to={LINKS.docsHome}>
+          Read the docs
+        </Button>
+      </div>
 
-  const isSafari = useIsSafari();
+      <div className="relative mt-12 flex border-t border-gray-new-20 pt-12 lg:mt-11 lg:pt-11 sm:mt-10 sm:pt-10">
+        <ul className="flex flex-row gap-x-11 gap-y-10 xl:-mx-16 xl:no-scrollbars xl:flex xl:snap-x xl:snap-mandatory xl:scroll-px-16 xl:gap-x-8 xl:overflow-x-auto xl:px-16 lg:-mx-5 lg:scroll-px-5 lg:px-5">
+          {productFeatures.map(({ title, description, icon: Icon, comingSoon }) => {
+            const tooltipId = `home-hero-${title.toLowerCase().replace(/\s+/g, '-')}-tooltip`;
+            const tooltipProps = comingSoon
+              ? {
+                  'data-tooltip-id': tooltipId,
+                }
+              : {};
 
-  useEffect(() => {
-    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
-  }, [windowWidth]);
+            return (
+              <li
+                className="min-w-0 text-white xl:w-69 xl:shrink-0 xl:snap-start sm:w-60"
+                key={title}
+                {...tooltipProps}
+              >
+                <div className={cn('flex items-center gap-x-3', comingSoon ? 'mb-2.5' : 'mb-3.5')}>
+                  <Image
+                    className="size-4 shrink-0"
+                    src={Icon}
+                    width={16}
+                    height={16}
+                    loading="eager"
+                    alt=""
+                  />
+                  <span
+                    className={cn(
+                      'text-base leading-none font-medium tracking-extra-tight',
+                      comingSoon ? 'text-gray-new-60' : 'text-white'
+                    )}
+                  >
+                    {title}
+                  </span>
+                  {comingSoon && (
+                    <>
+                      <span className="inline-flex items-center rounded-full bg-green-44 px-2 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+                        early access
+                      </span>
+                      <Tooltip
+                        className="-mt-6 max-w-[310px]! border-gray-new-30! bg-gray-new-8! px-3.5! py-2.5! md:-mt-2 [&.react-tooltip\_\_place-right]:-ml-17!"
+                        id={tooltipId}
+                        place="right"
+                        clickable
+                      >
+                        <p className="mb-2 text-base leading-snug tracking-extra-tight text-white">
+                          Subscribe to get early access to the Neon backend platform.
+                        </p>
+                        <Link
+                          class="border-b border-dashed border-gray-new-50 pb-0 text-sm leading-tight tracking-extra-tight text-gray-new-80 transition-colors duration-200"
+                          to="docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform"
+                          theme="gray-80"
+                        >
+                          Register for access
+                        </Link>
+                      </Tooltip>
+                    </>
+                  )}
+                </div>
+                <p className="max-w-[290px] text-base tracking-extra-tight text-gray-new-50">
+                  {description}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
 
-  useEffect(() => {
-    videoRefs.current.forEach((ref, index) => {
-      const videoElement = ref.current;
-      const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
+      <div className="relative mt-40 select-none xl:mt-28 lg:mt-24 md:mt-20 sm:mt-16">
+        <Logos className="max-w-full p-0!" logos={logos} size="md" />
+      </div>
+    </Container>
 
-      if (!videoElement) return;
-
-      // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
-      if (Hls.isSupported() && !isSafari) {
-        const hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(videoElement);
-      } else {
-        const source = document.createElement('source');
-        source.src = videoSrc;
-        source.type = 'video/mp4';
-        videoElement.appendChild(source);
-      }
-    });
-  }, [videoRefs, isSafari]);
-
-  const switchVideo = useCallback(
-    (index) => {
-      videoRefs.current[currentVideoIndex].current.pause();
-      videoRefs.current[currentVideoIndex].current.currentTime = 0;
-      setCurrentVideoIndex(index);
-    },
-    [currentVideoIndex]
-  );
-
-  return (
-    <section className="hero safe-paddings relative pt-[168px] xl:pt-[152px] lg:pt-32 md:pt-[88px]">
-      <Container className="relative z-10 xl:px-8" size="1100">
-        <div className="flex flex-col items-center text-center">
-          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[56px] sm:text-[32px]">
-            Ship faster with Postgres
-          </h1>
-          <p className="mt-2.5 max-w-xl text-lg font-light leading-snug tracking-tighter text-gray-new-80 lg:mt-2.5 lg:text-base">
-            The database developers trust, on a serverless platform designed to help you build
-            reliable and scalable applications faster.
-          </p>
-          <div className="mt-8 flex items-center gap-6">
-            <Button
-              className="!px-8 font-semibold md:!px-7"
-              theme="primary"
-              size="md-new"
-              to={LINKS.signup}
-              target="_blank"
-              tagName="Hero"
-              analyticsEvent="home_hero_start_for_free_clicked"
-            >
-              Start for Free
-            </Button>
-            <Button
-              className="text-[15px] font-medium"
-              theme="white"
-              to={LINKS.contactSales}
-              tagName="Hero"
-              analyticsEvent="home_hero_talk_to_us_clicked"
-              withArrow
-            >
-              Talk to Us
-            </Button>
-          </div>
-        </div>
-
-        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 lg:mt-14 sm:mt-9 sm:flex-col sm:gap-y-9">
-          {ITEMS.map((item, index) => (
-            <Video
-              className={clsx(
-                'transition-all duration-700',
-                currentVideoIndex === index
-                  ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] lg:w-[62.746%] sm:w-full'
-                  : 'w-full'
-              )}
-              videoClassName={clsx(index === 1 && 'left-[-172px]')}
-              {...item}
-              isActive={currentVideoIndex === index}
-              isMobile={isMobile}
-              switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
-              setActiveVideoIndex={() => setCurrentVideoIndex(index)}
-              initialVideoPlayback={initialVideoPlayback}
-              setInitialVideoPlayback={setInitialVideoPlayback}
-              ref={videoRefs.current[index]}
-              index={index}
-              key={index}
-            />
-          ))}
-        </div>
-      </Container>
-
-      <Image
-        className="pointer-events-none absolute left-1/2 top-0 max-w-none -translate-x-1/2 xl:top-8 xl:w-[1588px] lg:top-6 lg:w-[1420px] md:top-[76px] md:w-[1058px]"
-        src={bg}
-        sizes="(max-width: 767px) 1058px"
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+      {/*
+        Video optimization parameters:
+          mp4 av1: ffmpeg -i hero.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an hero-av1.mp4
+          mp4: ffmpeg -i hero.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
+          webm: ffmpeg -i hero.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an hero.webm
+      */}
+      <PauseableVideo
+        className={cn(
+          'relative -top-16 left-1/2 w-[1920px] -translate-x-1/2',
+          'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
+        )}
         width={1920}
-        height={1210}
+        height={832}
+        poster={`${LINKS.cdn}/public/pages/home/hero/poster.jpg`}
+      >
+        <source
+          src={`${LINKS.cdn}/public/pages/home/hero/hero-av1.mp4`}
+          type="video/mp4; codecs=av01.0.05M.08,opus"
+        />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.webm`} type="video/webm" />
+      </PauseableVideo>
+      <Image
+        className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block"
+        src={mobileBgIllustration}
+        width={752}
+        height={326}
         quality={100}
         alt=""
         priority
       />
-    </section>
-  );
-};
+    </div>
+
+    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-[165px] lg:h-[156px] sm:h-[258px]" />
+  </section>
+);
 
 export default Hero;

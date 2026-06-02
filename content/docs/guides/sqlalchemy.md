@@ -1,12 +1,19 @@
 ---
 title: Connect an SQLAlchemy application to Neon
 subtitle: Set up a Neon project in seconds and connect from an SQLAlchemy application
+summary: >-
+  How to connect an SQLAlchemy application to a Neon project by creating the
+  project, installing the necessary Postgres driver, and configuring the
+  connection settings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2025-07-03T12:36:49.564Z'
+updatedOn: '2026-02-06T22:07:33.054Z'
 ---
+
+<CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
+description="Pre-built prompt for connecting SQLAlchemy to Neon Postgres"/>
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
 

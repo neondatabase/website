@@ -1,13 +1,17 @@
 ---
 title: The pgvector extension
 subtitle: Enable Postgres as a vector store with the pgvector extension
+summary: >-
+  Covers the setup of the `pgvector` extension in Neon for storing vector
+  embeddings and performing vector similarity searches, including installation,
+  version management, and table creation for vector storage.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2025-06-04T16:43:36.533Z'
+updatedOn: '2026-04-18T12:36:02.000Z'
 ---
 
-The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
+The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
 
 `pgvector` supports:
 
@@ -23,7 +27,7 @@ This topic describes how to enable the `pgvector` extension in Neon and how to c
 
 ## Enable the pgvector extension
 
-You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon.
+You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon.
 
 ```sql
 CREATE EXTENSION vector;
@@ -39,9 +43,9 @@ For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can i
 CREATE EXTENSION vector VERSION '0.7.4';
 ```
 
-To check the latest supported `pgvector` version on Neon, visit our [Postgres extension page](/docs/extensions/extensions-intro). You can install one version back from that version.
+To check the latest supported `pgvector` version on Neon, visit our [Postgres extensions page](/docs/extensions/pg-extensions). You can install one version back from that version.
 
-For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential — for example, version 0.7.4 was followed by 0.8.0.
+For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential; for example, version 0.7.4 was followed by 0.8.0.
 
 ## Create a table to store vectors
 
@@ -306,7 +310,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
@@ -434,7 +438,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 

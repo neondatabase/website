@@ -4,7 +4,7 @@ subtitle: Leverage Neon's branching with Hasura's dynamic routing for powerful d
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-20T00:00:00.000Z'
-updatedOn: '2025-04-20T00:00:00.000Z'
+updatedOn: '2026-03-04T15:50:25.000Z'
 ---
 
 Managing different database environments for development, testing, staging, and production can be complex. Traditional methods often involve provisioning separate database instances, managing complex data synchronization scripts, or dealing with slow snapshot restores. Neon's serverless Postgres brings efficient, Git-like branching to your database, while Hasura provides an instant GraphQL API layer.
@@ -16,7 +16,7 @@ This guide demonstrates how to combine the power of [Neon's database branching](
 Before you start, ensure you have the following:
 
 - **A Neon Account:** Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-- **A Neon Project:** You need to have a Neon project. If you do not have one, create it via [pg.new](https://pg.new)
+- **A Neon Project:** You need to have a Neon project. If you do not have one, create it in the [Neon Console](https://console.neon.tech)
 - **A Hasura Instance:** A running Hasura instance (v2.x or later). This can be Hasura Cloud Professional or Enterprise tiers, or a self-hosted Enterprise instance. Dynamic routing is not available in the free tier.
 
 ## Understanding the core concepts

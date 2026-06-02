@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-07-04T12:47:21.296Z'
+updatedOn: '2026-05-09T15:15:10.215Z'
 ---
 
 # Docs
@@ -20,134 +20,126 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `sidebar.yaml` file as well.
-4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `navigation.yaml` file as well.
+4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, for example `/docs/old-path/`
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
-## Sidebar
+## Navigation
 
-Sidebar data is stored in the [sidebar.yaml](./sidebar.yaml) file.
+Navigation data is stored in the [navigation.yaml](./navigation.yaml) file.
 
-### How to add a new category
+### Navigation Structure
 
-In order to add a new category to the sidebar, add a new item to the top level array with keys `title` and `items`.
+The navigation system is a unified structure where:
 
-For example:
+- **Top-level items** appear in the header navigation
+- **Child items** appear in the left sidebar
 
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
+This creates a seamless navigation experience where users select a main category from the header and see its detailed structure in the sidebar.
+
+### Top Navigation Structure
+
+Each top-level navigation item has the following structure:
+
+```yaml
+- nav: Get started # Navigation label (displayed in header)
+  slug: introduction # URL slug for the section
+  title: Neon Docs # Page title
+  icon: home # Icon identifier
+  subnav: # Sub-navigation items for header dropdowns
+    - title: Neon platform
+      slug: manage/platform
+      icon: settings
+      items: # Sidebar navigation items
+        ...
 ```
 
-### How to add a new subcategory
+**Important**: Top-level items can contain either:
 
-In order to add a new subcategory, add a new item to `items` array with keys `title` and `items` under specific category.
+- **`subnav`**: Sub-navigation items that appear as header dropdowns
+- **`items`**: Navigation items that appear in the sidebar
 
-For example:
+### Sidebar Navigation Structure
+
+The sidebar navigation supports multiple levels:
+
+```yaml
+  ...
+  items: # Sidebar navigation items
+    - section: Features # Section header
+      icon: features
+      slug: guides/neon-features
+      items: # Section items
+        - title: Serverless
+          slug: introduction/serverless
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items: # Section subitems
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+```
+
+### How to add a new top navigation category
+
+To add a new top-level navigation category, add a new item to the top level array with keys `nav`, `slug`, `title`, `icon`, and optionally `items` or `subnav`.
 
 ```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-+    - title: Subcategory 1
-+      items:
-+        - title: Page 3
-+          slug: page-3
++- nav: New Category
++  slug: new-category
++  title: New Category Title
++  icon: new-icon
++  subnav:
++    ...
+```
+
+### How to add a new section
+
+To add a new section within a navigation category, add a new item with keys `section`, `icon`, and `items`.
+
+```diff
+  ...
+  items:
++   - section: Architecture
++     icon: architecture
++     items:
++       ...
 ```
 
 ### How to add a new page
 
-In order to add a new page to the root level, add `slug` in the same level with `title`. You can add `tag` as well if your page is tagged.
+To add a new page, add a new item with keys `title` and `slug` under the appropriate section or navigation level.
 
-```diff yaml
- - title: Root page 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Root page 2
-   items:
-     - title: Page 2
-       slug: page-2
-+ - title: Root page 1
-+   slug: root-page-1
-+   items:
-+     - title: Page 1
-+       slug: page-1
-+       tag: coming soon
-+ - title: Root page 2
-+   slug: root-page-2
-+   items:
-+     - title: Page 2
-+       slug: page-2
-
+```diff
+  ...
+  items:
++   - title: Overview
++     slug: introduction/architecture-overview
 ```
 
-In order to add new page under Category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+### Navigation Properties
 
-For example:
+- `nav`: The label displayed in the top navigation header
+- `slug`: The URL path for the page/section
+- `title`: The display title for the page/section
+- `icon`: Icon identifier for visual representation
+- `section`: Section header for grouping related items
+- `items`: Array of navigation items
+- `subnav`: Sub-navigation items for the sidebar
+- `tag`: Optional tag (for example, "new", "beta") displayed next to the title
 
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-+   - title: Page 5
-+     slug: page-5
-```
+### Important Notes
 
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-
-### How to add a single page to doc sidebar
-
-To add a single page <https://example.com/changelog> to the docs sidebar, add the boolean `isStandalone` to the first level of the list
-
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-- `isStandalone` - the boolean for the single page in sidebar.
-
-```diff yaml
-+- title: Changelog
-+  slug: changelog
-+  isStandalone: true
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-```
+- `title` in the sidebar may differ from `title` in the Markdown file
+- `slug` should always match the page's slug
+- The navigation supports unlimited nesting levels for complex documentation structures
+- Icons are referenced by name and should match available icon components
+- Tags like "new" or "beta" are automatically displayed with special styling
 
 ## Code blocks
 
@@ -249,6 +241,28 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   ```
   ````
 
+- `filename="..."` - add a filename label above the code block.
+
+  Examples:
+
+  ````md
+  ```jsx filename="src/App.jsx"
+  export default function App() {
+    return <div>Hello</div>;
+  }
+  ```
+  ````
+
+  You can combine it with line highlighting and other flags:
+
+  ````md
+  ```jsx filename="src/App.jsx" {2} showLineNumbers shouldWrap
+  export default function App() {
+    return <div>Hello</div>;
+  }
+  ```
+  ````
+
 ## Code Tabs
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
@@ -325,20 +339,9 @@ The `ExternalCode` component allows embedding code content from external sources
 | showLineNumbers | boolean | false      | Shows line numbers in the code block                          |
 | className       | string  | ''         | Additional CSS classes to apply to the component              |
 
-### Examples
-
-```markdown
-<ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
-  language="markdown"
-  shouldWrap
-  showLineNumbers
-/>
-```
-
 ### Best Practices
 
-1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
+1. Always use raw URLs from the GitHub repository (for example, `https://raw.githubusercontent.com/...`).
 2. Use the `language` prop when the file extension doesn't match the actual content type.
 
 ## Tabs
@@ -447,6 +450,38 @@ Information about features that are coming soon.
 
 </details>
 
+## Callout
+
+A highlighted block for supplementary information the reader should notice but that doesn't fit the urgency of an `Admonition`. Use it for tips, best practices, or "good to know" context.
+
+```md
+<Callout>
+
+Your callout content here. Supports paragraphs, lists, and inline code.
+
+</Callout>
+```
+
+To override the default label, pass a `title` prop:
+
+```md
+<Callout title="Before you start">
+
+Make sure you have Node.js 18+ installed.
+
+</Callout>
+```
+
+| Prop       | Type   | Default        | Description                         |
+| ---------- | ------ | -------------- | ----------------------------------- |
+| `children` | node   | (required)     | Content rendered inside the callout |
+| `title`    | string | `Good to know` | Label displayed in the header       |
+
+### When to use Callout vs Admonition
+
+- **Callout** — supplementary context, best practices, or neutral "good to know" information.
+- **Admonition** — warnings, important notices, tips with urgency, or coming-soon flags. Use when the information could cause user error if missed.
+
 ## CTA
 
 This is a simple block with title, description text and one CTA button that accomplish certain actions.
@@ -467,13 +502,13 @@ Check the example for default data of CTA block
 To change text in CTA block, you can pass to the component props `title`, `description`, `buttonText`, `buttonUrl`:
 
 ```md
-<CTA title="Try it on Neon!" description="Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL Editor. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try it on Neon!" description="Neon is the backend for apps and agents. Sign up for a free Neon account to start building." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 ```
 
 ## Steps
 
 To display numbered steps, wrap the content with `Steps` component.  
-Steps will be splitted by `h2` headings.
+Steps will be split by `h2` headings.
 
 ```md
 <Steps>
@@ -493,6 +528,133 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 <summary>Example</summary>
 
 ![Steps example](images/steps-example.jpg)
+
+</details>
+
+## Sticky Table
+
+Use `StickyTable` for large markdown tables where readers need the header to remain visible while scrolling through the table. Regular markdown tables already get the default docs table styling; only wrap tables that need this sticky header behavior.
+
+```md
+<StickyTable>
+
+| Extension | PG14 | PG15 | Notes |
+| --------- | ---: | ---: | ----- |
+| pgvector  |  0.8 |  0.8 | Vector search support |
+| postgis   |  3.3 |  3.5 | Geospatial support |
+
+</StickyTable>
+```
+
+### Notes
+
+- Use `StickyTable` only around a single markdown table.
+- Keep the table in markdown so it remains easy to edit in one place.
+- The component preserves the normal horizontal table scroll and adds a floating header for long tables.
+- Pass `className` to `StickyTable` to apply classes to the underlying table, for example `<StickyTable className="min-w-[900px]">`.
+
+## Two Column Layout
+
+The `TwoColumnLayout` component creates a two-column layout for tutorial pages and reference documentation. Use `TwoColumnLayout.Step` for numbered tutorial steps or `TwoColumnLayout.Item` for default items. Nested content blocks should be wrapped with `TwoColumnLayout.Block`.
+
+> **Note:** Pages using `TwoColumnLayout` should include `layout: wide` prop to hide the right sidebar (Table of Contents) and provide more space for the two-column layout.
+
+Check [Neon Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk) for usage examples.
+
+````md
+<TwoColumnLayout>
+
+<TwoColumnLayout.Step title="Install dependencies">
+<TwoColumnLayout.Block>
+
+Install the required packages for your project.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Item title="Sign in with email" method="auth.signIn.email()" id="signin-email">
+<TwoColumnLayout.Block>
+
+Authenticate a user with their email and password.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript
+await client.auth.signIn.email({
+  email: 'user@example.com',
+  password: 'password123',
+});
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Footer>
+<Admonition type="note">
+Additional information that spans both columns
+</Admonition>
+</TwoColumnLayout.Footer>
+
+</TwoColumnLayout>
+````
+
+**Components:**
+
+- `TwoColumnLayout.Step` - Numbered step with `title` prop (for tutorials)
+- `TwoColumnLayout.Item` - Default item with `title`, `method`, and `id` prop
+- `TwoColumnLayout.Block` - Nested content block with optional `label` prop
+- `TwoColumnLayout.Footer` - Full-width content at the bottom of a step
+
+<details>
+<summary>Examples</summary>
+
+![Two Column Layout example](images/two-column-layout-example.jpg)
+
+Example with steps:
+
+![Two Column Layout example](images/two-column-layout-steps-example.jpg)
+
+</details>
+
+## Feature List
+
+To display a list of features, use the `FeatureList` component.
+Features will be split by `h2` and `h3` headings.
+
+```md
+<FeatureList>
+
+### Agent creates an app
+
+A vibe coder imagines an app. Your agent builds it, full-stack.
+
+### Gets a working database instantly, with no friction
+
+Neon provisions the database behind the scenes via API.
+
+</FeatureList>
+```
+
+You can pass `icons` prop to the `FeatureList` component to display icons for each feature.
+
+List of available icons (extendable): `src/components/shared/feature-list/icon/icon.jsx`.
+
+```md
+<FeatureList icons={['agent', 'speedometer']}>
+```
+
+<details>
+<summary>Example</summary>
+
+![Feature List example](images/feature-list-example.jpg)
 
 </details>
 
@@ -672,6 +834,41 @@ You can pass props to the shared component:
   {text}
 </Admonition>
 ```
+
+## CopyPrompt
+
+A reusable MDX component that shows a "copy prompt" box and lets users copy curated llm prompts from a file with one click.
+
+**Usage:**
+
+```mdx
+<CopyPrompt
+  src="/prompts/serverless-driver-prompt.md"
+  displayText="Use this pre-built prompt to get started faster."
+  buttonText="Copy prompt"
+/>
+```
+
+`src` prop is mandatory. `displayText` and `buttonText` are optional, if you want to override the defaults.
+
+| Prop          | Type   | Default                                            | Description                                         |
+| ------------- | ------ | -------------------------------------------------- | --------------------------------------------------- |
+| `src`         | string | (required)                                         | Path to the markdown file or prompt content to copy |
+| `displayText` | string | "Use this pre-built prompt to get started faster." | CTA text shown on the left                          |
+| `buttonText`  | string | "Copy prompt"                                      | Button label                                        |
+
+### Where to place prompt files
+
+Prompt markdown files should be placed in the `public/prompts/` directory of your project. This allows them to be fetched at runtime by the `CopyPrompt` component using a path like `/prompts/your-prompt-file.md`.
+
+**Example:**
+
+- Place your prompt file at: `public/prompts/serverless-driver-guardrail-prompt.md`
+- Reference it in your MDX:
+
+  ```mdx
+  <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
+  ```
 
 ## Contributing
 

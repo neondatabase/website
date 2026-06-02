@@ -1,8 +1,12 @@
 ---
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
+summary: >-
+  Step-by-step guide for setting up a developer workflow using Liquibase with
+  Neon's branching feature, enabling schema changes on a development branch and
+  applying them to the production branch of a Neon project.
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.561Z'
+updatedOn: '2026-02-06T22:07:33.001Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -13,8 +17,8 @@ The instructions in this guide are based on the workflow described in the [Liqui
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 - An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase).
 
@@ -35,7 +39,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
    -- Creating the `authors` table

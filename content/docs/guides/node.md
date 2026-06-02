@@ -1,12 +1,18 @@
 ---
 title: Connect a Node.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Node.js application
+summary: >-
+  Covers the setup of a Neon project and the connection process from a Node.js
+  application, including examples using node-postgres and Postgres.js clients.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2025-06-30T11:30:21.909Z'
+updatedOn: '2026-02-06T22:07:33.028Z'
 ---
+
+<CopyPrompt src="/prompts/javascript-prompt.md" 
+description="Pre-built prompt for connecting Node.js applications to Neon."/>
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
@@ -255,14 +261,6 @@ async function getPgVersion() {
 
 getPgVersion();
 ```
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-nodejs" description="Get started with Node.js and Neon" icon="github">Get started with Node.js and Neon</a>
-</DetailIconCards>
 
 ## Community resources
 

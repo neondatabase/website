@@ -1,10 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import { Fragment, useState, useContext, useEffect } from 'react';
 
 import { CodeTabsContext } from 'contexts/code-tabs-context';
+import { cn } from 'utils/cn';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const CodeTabs = ({ labels = [], reverse = false, children }) => {
   const { activeTab, setActiveTab } = useContext(CodeTabsContext);
@@ -22,34 +23,38 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
     const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
+    sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'CodeTab' });
   };
 
   return (
-    <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
-      <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-new-90 dark:after:bg-gray-new-20">
+    <div className="my-0 max-w-full overflow-hidden border border-gray-new-80 dark:border-gray-new-20 [&_.code-block]:my-0 [&_.code-block]:!border-none">
+      {/* Tabs above code block */}
+      <div className="relative no-scrollbars flex min-h-11 w-full flex-nowrap gap-5 overflow-auto bg-gray-new-98 pl-5 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
         {displayedLabels.map((label, index) => (
-          <div
-            className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
+          <button
+            className={cn(
+              'relative z-10 cursor-pointer border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-extra-tight whitespace-nowrap transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
               index === currentIndex
-                ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
-                : 'border-transparent text-gray-new-40 dark:text-gray-7'
+                ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
+                : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
             )}
             key={`lb-${index}`}
-            tabIndex="0"
-            role="button"
+            type="button"
             onClick={() => handleTabClick(index)}
             onKeyDown={() => handleTabClick(index)}
           >
             {label}
-          </div>
+          </button>
         ))}
       </div>
-      {displayedChildren.map((child, index) => {
-        if (index !== currentIndex) return null;
-        return <Fragment key={index}>{child}</Fragment>;
-      })}
-    </figure>
+      {/* Code block container */}
+      <div className="overflow-hidden bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
+        {displayedChildren.map((child, index) => {
+          if (index !== currentIndex) return null;
+          return <Fragment key={index}>{child}</Fragment>;
+        })}
+      </div>
+    </div>
   );
 };
 

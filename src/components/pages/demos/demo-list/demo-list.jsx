@@ -1,10 +1,22 @@
-import clsx from 'clsx';
-
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron.inline.svg';
+import { cn } from 'utils/cn';
 
 const items = [
+  {
+    category: 'Latency benchmarks',
+    categoryTextColor: 'text-green-45',
+    items: [
+      {
+        title: "Latency between cloud hosting platforms and Neon's Postgres regions",
+        description:
+          "An open-source dashboard measuring real-world latency between serverless platforms and Neon's Postgres database regions.",
+        demoLink: '/demos/regional-latency',
+        sourceLink: 'https://github.com/neondatabase-labs/latency-benchmarks',
+      },
+    ],
+  },
   {
     category: 'DB-per-user',
     categoryTextColor: 'text-pink-90',
@@ -42,13 +54,6 @@ const items = [
     categoryTextColor: 'text-blue-80',
     items: [
       {
-        title: 'Neon Twitter',
-        description:
-          "A microblogging application designed to demonstrate the database branching capability of Neon Serverless Postgres with Neon's GitHub Actions.",
-        demoLink: 'https://neon-twitter.vercel.app/',
-        sourceLink: 'https://github.com/neondatabase/neon_twitter',
-      },
-      {
         title: 'Preview Branches',
         description:
           'An example project showing how you can create a branch for every preview deployment on Vercel. If you want to use this project as a playground, you can set it up locally.',
@@ -69,9 +74,9 @@ const items = [
         sourceLink: 'https://github.com/neondatabase/qovery-lifecycle-job',
       },
       {
-        title: 'Preview branches with Fly.io, Neon, and Github Actions',
+        title: 'Preview branches with Fly.io, Neon, and GitHub Actions',
         description:
-          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, Github Actions, and Drizzle for migrations.',
+          'An example repo showing how to create one database branch per PR to automate your dev workflows, using Fly.io, GitHub Actions, and Drizzle for migrations.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/preview-branches-with-fly?tab=readme-ov-file',
       },
@@ -118,13 +123,6 @@ const items = [
         description: 'A sample repository showing how to use Edge Analytics with Astro.',
         demoLink: '#',
         sourceLink: 'https://github.com/neondatabase/neon-edge-analytics-astro-sample',
-      },
-      {
-        title: 'Neon with Next.js and Prisma',
-        description:
-          'Example code using Next.js as the full stack framework, Prisma as the ORM, and Neon as the Postgres database.',
-        demoLink: '#',
-        sourceLink: 'https://github.com/neondatabase/examples/tree/main/with-nextjs-prisma',
       },
     ],
   },
@@ -209,8 +207,8 @@ const items = [
 ];
 
 const DemoList = () => (
-  <section className="demo-list safe-paddings my-20 lg:my-16 md:my-10">
-    <Container className="grid-gap-x grid grid-cols-12 lg:grid-cols-1" size="medium">
+  <section className="demo-list my-20 safe-paddings lg:my-16 md:my-10">
+    <Container className="grid grid-cols-12 grid-gap-x lg:grid-cols-1" size="medium">
       <ul className="col-span-10 col-start-2 flex flex-col gap-y-20 lg:col-span-full lg:col-start-1 lg:gap-y-16 md:gap-y-10">
         {items.map(({ category, categoryTextColor, items }, index) => (
           <li
@@ -218,8 +216,8 @@ const DemoList = () => (
             key={index}
           >
             <h2
-              className={clsx(
-                'flex items-center text-xs font-semibold uppercase leading-none tracking-extra-tight',
+              className={cn(
+                'flex items-center text-xs leading-none font-semibold tracking-extra-tight uppercase',
                 categoryTextColor
               )}
             >
@@ -229,22 +227,25 @@ const DemoList = () => (
             <ul className="mt-7">
               {items.map(({ title, description, sourceLink, demoLink }, index) => (
                 <li
-                  className="mt-6 flex items-center justify-between border-t border-gray-new-15 border-opacity-80 pt-6 first:mt-0 first:border-t-0 first:pt-0 lg:flex-col lg:items-start lg:gap-y-8 md:mt-4 md:gap-y-6 md:pt-4"
+                  className={cn(
+                    'flex items-center justify-between lg:flex-col lg:items-start lg:gap-y-8 md:gap-y-6',
+                    index > 0 && 'mt-6 border-t border-gray-new-15/80 pt-6 md:mt-4 md:pt-4'
+                  )}
                   key={index}
                 >
                   <div className="max-w-[591px] xl:max-w-[500px] lg:max-w-full">
-                    <h3 className="max-w-[510px] text-2xl font-medium leading-tight -tracking-[0.05em] lg:text-xl">
+                    <h3 className="max-w-[510px] text-2xl leading-tight font-medium -tracking-[0.05em] lg:text-xl">
                       {title}
                     </h3>
                     <p
-                      className="with-link-primary mt-3 font-light leading-snug tracking-snug text-gray-new-60"
+                      className="mt-3 leading-snug font-light tracking-snug with-link-primary text-gray-new-60"
                       dangerouslySetInnerHTML={{ __html: description }}
                     />
                   </div>
                   <div className="flex items-center justify-start gap-x-4 text-[15px] leading-none">
                     {demoLink !== '#' && (
                       <Link
-                        className="flex items-center rounded-full bg-gray-new-15 bg-opacity-80 px-5 py-3 text-[15px] font-medium leading-none transition-colors duration-200 hover:bg-gray-new-20"
+                        className="flex items-center rounded-full bg-gray-new-15/80 px-5 py-3 text-[15px] leading-none font-medium transition-colors duration-200 hover:bg-gray-new-20"
                         to={demoLink}
                         target={demoLink.startsWith('http') ? '_blank' : '_self'}
                         rel={demoLink.startsWith('http') ? 'noopener noreferrer' : ''}

@@ -18,19 +18,19 @@ export const activities = [
 
 export const performance = [
   {
-    title: '1 vCPU, 4GB RAM',
+    title: '1 CU (4GB RAM)',
     description: 'Small business, non-profit, personal blogs',
     type: 'Simple static sites',
     unit: 1,
   },
   {
-    title: '5 vCPU, 20GB RAM',
+    title: '5 CU (20GB RAM)',
     description: 'CRM, social media, travel booking',
     type: 'Dynamic SaaS apps',
     unit: 5,
   },
   {
-    title: '7 vCPU, 28GB RAM',
+    title: '7 CU (28GB RAM)',
     description: 'Crypto, banking, data sciences',
     type: 'Data heavy apps',
     unit: 7,

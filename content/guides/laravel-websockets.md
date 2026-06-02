@@ -4,7 +4,7 @@ subtitle: Learn how to create a collaborative task management system using Larav
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2024-08-17T00:00:00.000Z'
+updatedOn: '2026-03-03T03:19:43.000Z'
 ---
 
 Real-time features can significantly improve user experience in web applications. They allow users to see updates immediately without refreshing the page. In this guide, we'll demonstrate how to add real-time functionality to a Laravel application using Neon Postgres and WebSockets.
@@ -617,7 +617,7 @@ As your task board grows, you might need to optimize it for better performance:
 
 2. **Caching**: Use Laravel's caching features to cache frequently accessed data, reducing database queries.
 
-3. **Database Indexing**: Add indexes to frequently queried columns in your Neon Postgres database to speed up queries. For more information, check out the Neon Postgres documentation on [Indexes](/docs/postgres/indexes).
+3. **Database Indexing**: Add indexes to frequently queried columns in your Neon Postgres database to speed up queries. For more information, check out the Neon Postgres documentation on [Indexes](/docs/postgresql/index-types).
 
 4. **Queue Workers**: Use multiple queue workers to process broadcast events concurrently, especially in high-traffic applications. Also, consider using Laravel Horizon for monitoring and managing your queue workers.
 

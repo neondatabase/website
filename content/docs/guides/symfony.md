@@ -1,12 +1,19 @@
 ---
 title: Connect from Symfony with Doctrine to Neon
 subtitle: Set up a Neon project in seconds and connect from Symfony with Doctrine
+summary: >-
+  Step-by-step guide for connecting a Symfony application to a Neon project
+  using Doctrine ORM, including project creation and configuration of the
+  database connection settings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2025-07-03T12:36:49.565Z'
+updatedOn: '2026-02-06T22:07:33.057Z'
 ---
+
+<CopyPrompt src="/prompts/symfony-prompt.md" 
+description="Pre-built prompt for connecting Symfony applications to Neon using Doctrine ORM."/>
 
 Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.
 

@@ -5,8 +5,8 @@ const getExcerpt = (content, length = 5000) => {
     .replace(/^(#+\s.*[a-zA-Z])$/gm, '$1.') // add period to headings ending with a letter
     .replace(/(\r\n|\n|\r)/gm, ' ') // replace new lines with spaces
     .replace(/\s+/g, ' ') // replace multiple spaces with single space
-    .replace(/!\[[^\]]+\]\([^\)]+\)/g, '') // remove markdown images
-    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // replace markdown links with link text
+    .replace(/!\[[^\]]+\]\([^)]+\)/g, '') // remove markdown images
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // replace markdown links with link text
     .replace(/([*~`#])/g, '') // remove markdown formatting
     .replace(/\s*[-:|]+\s*/g, ' ') // replace markdown table delimiters with spaces
     .replace(/Up\s+Home\s+/g, '') // specifically target and remove the 'Up Home' text
