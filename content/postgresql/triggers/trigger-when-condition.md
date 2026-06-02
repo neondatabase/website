@@ -30,7 +30,7 @@ Sometimes, you want the trigger to be activated only when a specific condition i
 ```sql
 CREATE TRIGGER trigger_name
 ON table_name
-WHEN condition
+WHEN (boolean_expression)
 EXECUTE FUNCTION function_name('optional', 'arguments');
 ```
 
