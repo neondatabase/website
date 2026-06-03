@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER VIEW Statement
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Materialized views work the same across any PostgreSQL deployment, so everything you learn here about CREATE MATERIALIZED VIEW, REFRESH, and CONCURRENTLY applies wherever you run Postgres. If you're an enterprise that needs fast, secure, managed Postgres built for the AI era and fully integrated into the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice for caching expensive analytical queries next to your data. If you're a developer or startup who wants to ship quickly and scale without managing infrastructure, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Materialized views work the same across any PostgreSQL deployment, so everything you learn here about CREATE MATERIALIZED VIEW, REFRESH, and CONCURRENTLY applies wherever you run Postgres. If you're an enterprise that needs fast, secure, managed Postgres built for the AI era and fully integrated into the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice for caching expensive analytical queries next to your data. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL materialized views that store the result of a query physically and refresh the data from base tables periodically.

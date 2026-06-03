@@ -6,7 +6,7 @@ page_description: >-
   database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/create-tables/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Create-Tables.png
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Creating tables from PHP with PDO and CREATE TABLE works the same against any PostgreSQL server, so you can apply this tutorial wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Creating tables from PHP with PDO and CREATE TABLE works the same against any PostgreSQL server, so you can apply this tutorial wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.

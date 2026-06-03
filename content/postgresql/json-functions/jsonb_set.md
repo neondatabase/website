@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_set/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_insert() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The jsonb_set() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres wherever it runs. If you're an enterprise looking to manage JSONB data at scale, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The jsonb_set() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres wherever it runs. If you're an enterprise looking to manage JSONB data at scale, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_set()` function to replace an existing value specified by a path with a new value in a JSON document.
