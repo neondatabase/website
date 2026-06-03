@@ -6,7 +6,7 @@ page_description: >-
   to use them properly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Indexes
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. If you're an enterprise standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that AI-era workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. If you're an enterprise standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that AI-era workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about various PostgreSQL index types and how to use them appropriately.

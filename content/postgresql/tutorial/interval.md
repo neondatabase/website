@@ -6,7 +6,7 @@ page_description: >-
   manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Timestamp Data Types
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The interval data type works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run analytical and operational workloads side by side. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around your workflow, with instant branching, autoscaling, and a generous free tier.
+The interval data type works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run analytical and operational workloads side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL interval data type and how to manipulate interval values.

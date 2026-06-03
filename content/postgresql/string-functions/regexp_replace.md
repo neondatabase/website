@@ -6,7 +6,7 @@ page_description: >-
   match a regular expression with a new substring.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/regexp_replace/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_MATCHES() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The REGEXP_REPLACE() function covered here works the same way in any PostgreSQL database, so the patterns and examples apply wherever you run Postgres. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres tuned for the AI era with the performance, security, and deep integration large teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) offers the most productive Postgres platform around.
+The REGEXP_REPLACE() function covered here works the same way in any PostgreSQL database, so the patterns and examples apply wherever you run Postgres. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres tuned for the AI era with the performance, security, and deep integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REGEXP_REPLACE()` function to replace strings that match a regular expression.

@@ -6,7 +6,7 @@ page_description: >-
   views in the PostgreSQL database server.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: Creating a PostgreSQL Trigger with a When Condition
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Views work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+Views work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: performant, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![PostgreSQL Views](/postgresqltutorial/PostgreSQL-View.png?alignright)

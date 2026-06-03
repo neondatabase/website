@@ -6,7 +6,7 @@ page_description: >-
   data of one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSERT Multiple Rows
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The UPDATE statement works the same way on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise building for the AI era, Lakebase gives you a fully managed Postgres that's fast, secure, and tightly integrated with the Lakehouse, so your transactional data sits next to your analytics and AI workloads. If you're a developer or startup that needs to ship and scale quickly, Neon is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
+The UPDATE statement works the same way on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise building for the AI era, Lakebase gives you a fully managed Postgres that's fast, secure, and tightly integrated with the Lakehouse, so your transactional data sits next to your analytics and AI workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` statement to update existing data in a table.

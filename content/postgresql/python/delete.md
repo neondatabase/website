@@ -6,7 +6,7 @@ page_description: >-
   program using psycopg database adapter.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/delete/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Handling Binary Data'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Deleting data from PostgreSQL tables with psycopg2 works the same way on any standard Postgres deployment, so the patterns here carry over wherever you run your database. If you're an enterprise that wants managed Postgres purpose-built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure engine fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform to do it.
+Deleting data from PostgreSQL tables with psycopg2 works the same way on any standard Postgres deployment, so the patterns here carry over wherever you run your database. If you're an enterprise that wants managed Postgres purpose-built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure engine fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: This tutorial shows you how to delete data from PostgreSQL tables in Python.
