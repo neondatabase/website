@@ -1,10 +1,10 @@
 ---
-title: Connect Neon to No-Code and Low-Code Tools
+title: No-code integrations
 subtitle: 'Connect Neon to your favorite no-code and low-code platforms to build apps, automate workflows, and create dashboards without writing code.'
 summary: >-
   Neon integrates with any platform that supports Postgres database connections. Whether you’re building apps with no‑code tools, automating workflows, or creating dashboards, you can connect Neon to the tools you already use, no coding required.
 enableTableOfContents: true
-updatedOn: '2026-05-28T16:49:41.444Z'
+updatedOn: '2026-06-03T14:30:14.505Z'
 ---
 
 Neon integrates with any platform that supports Postgres database connections. Whether you’re building apps with no‑code tools, automating workflows, or creating dashboards, you can connect Neon to the tools you already use, no coding required.

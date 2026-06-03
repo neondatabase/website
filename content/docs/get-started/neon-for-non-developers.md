@@ -2,11 +2,10 @@
 title: Neon for non-developers
 subtitle: 'Set up a cloud database in minutes, no SQL or technical background needed'
 summary: >-
-  A step-by-step guide for non-technical founders, product managers, designers, and no-code
-  builders to create a Postgres database with Neon. Sign up, get a connection
-  string, and connect your favorite tools. No SQL knowledge needed.
+  Learn how to create a Postgres database with Neon, no SQL or technical background needed.
+  Sign up, get a connection string, and connect your favorite tools in under two minutes.
 enableTableOfContents: true
-updatedOn: '2026-05-28T16:28:48.254Z'
+updatedOn: '2026-06-03T14:30:14.505Z'
 ---
 
 <InfoBlock>
@@ -18,7 +17,7 @@ updatedOn: '2026-05-28T16:28:48.254Z'
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
-<a href="/docs/get-started/no-code-tools">No-code tools overview</a>
+<a href="/docs/get-started/no-code-tools">No-code integrations</a>
 <a href="/docs/get-started/why-neon">Why Neon?</a>
 <a href="/docs/get-started/query-with-neon-sql-editor">Query with the SQL Editor</a>
 </DocsList>
@@ -26,7 +25,7 @@ updatedOn: '2026-05-28T16:28:48.254Z'
 
 Traditionally, setting up a database meant navigating complex cloud consoles, entering credit card details, and provisioning servers. This process can take hours even for experienced developers. Neon removes all of that and handles the infrastructure for you.
 
-Neon provides a fully managed Postgres database on a free plan with no credit card required. You sign up, create a project, and get a working connection string in under two minutes. This guide is for non-developers like designers, product managers, and no-code builders who need a reliable database behind their app or project but don't want to deal with the technical backend setup.
+Neon provides a fully managed Postgres database on a free plan with no credit card required. You sign up, create a project, and get a working connection string in under two minutes. If you're a designer, product manager, or no-code builder who needs a reliable database behind your app but doesn't want to deal with technical backend setup, this guide is for you.
 
 ## What is a database?
 
@@ -36,9 +35,9 @@ A database is where your app stores data like user accounts, orders, content, fo
 Don't know SQL? No problem. Neon includes visual tools and an AI assistant that let you explore and manage your data in plain English. We'll cover these in the [Explore your data](#explore-your-data) section below.
 </Admonition>
 
-## Common use cases for non-developers
+## What you can build
 
-Neon works well for a wide range of apps that non-developers build:
+Neon works well for a wide range of apps you might build:
 
 - **Customer and lead databases**: store contact info, form submissions, and CRM data
 - **Content management**: back a blog, portfolio, or marketing site with structured content
@@ -93,7 +92,7 @@ Your connection string includes your database password. Don't post it publicly, 
 
 Because Neon is standard Postgres, it integrates seamlessly with almost any software that supports a database connection. You just paste your connection string to connect your tools to your data.
 
-Here are the most common ways non-developers use their Neon database:
+Here are the most common ways to connect your Neon database:
 
 ### App and website builders
 
