@@ -4,7 +4,7 @@ subtitle: Rapidly provision, manage, and interact with Neon Postgres databases i
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-01-29T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-06-03T18:28:10.050Z'
 ---
 
 The AI landscape is poised for its next "ChatGPT moment" - not with smarter chatbots, but with **autonomous AI agents** that complete real-world tasks. These next-gen assistants go beyond answering questions to independently booking flights, analyzing data trends, and even managing cloud infrastructure.
@@ -26,7 +26,7 @@ There is one thing that is certain: The agent revolution won't be built on legac
 
 ## Neon: The Perfect Database for AI Agents
 
-Neon's serverless Postgres databases are built to be the ideal partner for AI agents. They offer a powerful, scalable, and cost-effective way to manage data. Here are some key benefits of using Neon databases for AI agents:
+Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Its Postgres databases are built to be the ideal partner for AI agents, offering a powerful, scalable, and cost-effective way to manage data. Here are some key benefits of using Neon databases for AI agents:
 
 | Capability           | Agent Benefit                                                                                                                                                                |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
