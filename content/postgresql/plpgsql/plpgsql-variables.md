@@ -219,7 +219,7 @@ In this example, we declare two variables:
 - The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 - The `featured_title` has the same data type as the data type of the `film_title` variable.
 
-We use the [select into](pl-pgsql-select-into) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
+We use the [select into](pl-pgsql-select-into) statement to retrieve from the `title` column of the `film` table and assign it to the `film_title` variable.
 
 Using the type\-copying feature offers the following advantages:
 
