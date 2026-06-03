@@ -90,6 +90,7 @@ const IGNORED_COMPONENTS = [
   'LogosSection', // Decorative logos
   'ComputeCalculator', // Interactive widget
   'UseCaseContext', // Repetitive boilerplate
+  'McpSetupConfigurator', // Interactive MCP setup widget
 ];
 
 // ESM modules loaded dynamically
@@ -1442,6 +1443,106 @@ const componentHandlers = {
         },
       ],
     };
+  },
+
+  /**
+   * Callout -> bold title + content (neutral "good to know" callout)
+   * <Callout title="Before you start">content</Callout>
+   */
+  Callout(node) {
+    const title = getAttr(node, 'title') || 'Good to know';
+    const hasBlockContent = node.children?.some(
+      (c) =>
+        c.type === 'list' ||
+        c.type === 'code' ||
+        c.type === 'heading' ||
+        c.type === 'blockquote' ||
+        c.type === 'mdxJsxFlowElement' ||
+        c.type === 'mdxJsxTextElement'
+    );
+
+    if (hasBlockContent || title) {
+      return [
+        {
+          type: 'paragraph',
+          children: [{ type: 'strong', children: [{ type: 'text', value: `${title}:` }] }],
+        },
+        ...(node.children || []),
+      ];
+    }
+
+    const content = childrenToMarkdown(node.children);
+    return {
+      type: 'paragraph',
+      children: [
+        { type: 'strong', children: [{ type: 'text', value: `${title}:` }] },
+        { type: 'text', value: content ? ` ${content}` : '' },
+      ],
+    };
+  },
+
+  /**
+   * StickyTable -> container with sticky header (table wrapper), extract children
+   */
+  StickyTable(node) {
+    return node.children || null;
+  },
+
+  /**
+   * Tag -> inline badge, emit the label text
+   * <Tag label="beta" size="sm" />
+   */
+  Tag(node) {
+    const label = getAttr(node, 'label');
+    if (!label) return null;
+    return { type: 'inlineCode', value: label };
+  },
+
+  /**
+   * TwinPaths -> two-option chooser, render QuickPath and GuidedPath as a list
+   */
+  TwinPaths(node) {
+    const items = [];
+
+    for (const child of node.children || []) {
+      const isJsx = child.type === 'mdxJsxFlowElement' || child.type === 'mdxJsxTextElement';
+      if (!isJsx) continue;
+
+      const title = getAttr(child, 'title') || child.name;
+      const description = getAttr(child, 'description') || '';
+      const command = getAttr(child, 'command') || '';
+      const href = getAttr(child, 'href') || '';
+
+      const paraChildren = [];
+
+      if (href) {
+        paraChildren.push({
+          type: 'link',
+          url: toAbsoluteUrl(href),
+          children: [{ type: 'text', value: title }],
+        });
+      } else {
+        paraChildren.push({ type: 'strong', children: [{ type: 'text', value: title }] });
+      }
+
+      if (description) {
+        paraChildren.push({ type: 'text', value: `: ${description}` });
+      }
+
+      if (command) {
+        paraChildren.push({ type: 'text', value: '. Run: ' });
+        paraChildren.push({ type: 'inlineCode', value: command });
+      }
+
+      items.push({
+        type: 'listItem',
+        children: [{ type: 'paragraph', children: paraChildren }],
+      });
+    }
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
+      : null;
   },
 };
 

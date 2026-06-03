@@ -295,6 +295,7 @@ ToolsPreviewCard.propTypes = {
 const McpSetupConfigurator = () => {
   const [authMode, setAuthMode] = useState('oauth');
   const [apiKey, setApiKey] = useState('');
+  const [installGlobally, setInstallGlobally] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
   const [projectId, setProjectId] = useState('');
   const [selectedScopes, setSelectedScopes] = useState(SCOPE_IDS);
@@ -350,9 +351,12 @@ const McpSetupConfigurator = () => {
       commandParts.push(
         `--header "Authorization: ${generatedHeaders.Authorization || 'Bearer <NEON_API_KEY>'}"`
       );
+      if (installGlobally) {
+        commandParts.push('-g');
+      }
     }
     return commandParts.join(' \\\n  ');
-  }, [authMode, generatedHeaders.Authorization, generatedServerUrl, queryString]);
+  }, [authMode, generatedHeaders.Authorization, generatedServerUrl, installGlobally, queryString]);
 
   const filteredToolsUrl = useMemo(
     () => appendParams(getListToolsBaseUrl(), queryParams),
@@ -396,11 +400,8 @@ const McpSetupConfigurator = () => {
             <span className={clsx('mt-3 block', HELPER_TEXT_CLASS)}>
               {authMode === 'apiKey' ? (
                 <>
-                  Keep API keys out of your repo. Add{' '}
-                  <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
-                    -g
-                  </code>{' '}
-                  to store the key in your global config instead of a project file.
+                  Keep API keys out of your repo: use a global MCP server, or gitignore the MCP
+                  config file.
                 </>
               ) : (
                 <>OAuth has no static secret, so a project-level config is safe to commit.</>
@@ -526,6 +527,15 @@ const McpSetupConfigurator = () => {
             >
               <HighlightedCode code={addMcpCommand} language="bash" />
             </CodeBlockWrapper>
+            {authMode === 'apiKey' && (
+              <div className="mt-3">
+                <Toggle
+                  checked={installGlobally}
+                  label="Install globally"
+                  onChange={setInstallGlobally}
+                />
+              </div>
+            )}
           </div>
 
           <div>

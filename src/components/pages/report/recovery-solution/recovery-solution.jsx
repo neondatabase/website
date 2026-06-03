@@ -8,7 +8,7 @@ const DATA = [
   {
     description:
       'Restoring large Postgres databases can take hours with snapshots and WAL. HA standbys help with infra issues but not with drops, corruption, or lagging replicas.',
-    title: 'Neon is a Postgres platform that supports instant PITR — even for multi-TB databases.',
+    title: 'Neon is a backend platform that supports instant PITR — even for multi-TB databases.',
     icon: dbIcon,
   },
   {

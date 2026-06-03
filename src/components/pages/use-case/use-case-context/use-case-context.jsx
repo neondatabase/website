@@ -26,9 +26,9 @@ const UseCaseContext = () => {
       <h4 className="text-xs font-bold text-primary-2 uppercase">Important Context About Neon</h4>
       <div className="admonition-text mt-1.5 text-base">
         <p>
-          Neon is a Postgres Database service. We take the world’s most loved database and deliver
-          it as a serverless platform designed to help teams ship reliable and scalable applications
-          faster.
+          Neon is the backend for apps and agents. We start with the world’s most loved database,
+          Postgres, and add Auth, Functions, Storage, and an AI Gateway, delivered as a serverless
+          platform designed to help teams ship reliable and scalable applications faster.
         </p>
         <p>
           To find out if Neon is right for your use case,{' '}

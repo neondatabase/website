@@ -6,7 +6,7 @@ page_description: >-
   executes a command based on a certain condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
 ogImage: /postgresqltutorial/plpgsql-simple-case-statement.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL IF Statement
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so what you learn here applies whether you're running Postgres yourself, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production workloads demand. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built around branching, instant provisioning, and serverless economics.
+The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so what you learn here applies whether you're running Postgres yourself, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `case` that executes statements based on a certain condition.

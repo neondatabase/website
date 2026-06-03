@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/
 ogImage: /postgresqltutorial/PostgreSQL-ALTER-SCHEMA-change-owner-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE SCHEMA
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Renaming a schema or reassigning its owner with ALTER SCHEMA works the same way on any PostgreSQL database, so what you learn here carries over to every Postgres deployment. If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need from a fully managed cloud database. If you're a developer or startup who needs to ship features and scale on demand, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+Renaming a schema or reassigning its owner with ALTER SCHEMA works the same way on any PostgreSQL database, so what you learn here carries over to every Postgres deployment. If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need from a fully managed cloud database. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER SCHEMA` statement to modify the definition of a schema.
