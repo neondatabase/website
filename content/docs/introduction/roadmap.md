@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-05-29T18:34:43.032Z'
+updatedOn: '2026-06-03T10:16:42.918Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -77,6 +77,9 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Schema Diff for larger schemas**: The schema comparison line limit has been raised from 8,000 to 20,000 lines, unblocking diffs on larger production schemas. [Learn more](/docs/guides/schema-diff).
+- **Per-branch consumption metrics**: A new API endpoint returns compute, storage, and transfer usage broken down by branch, making it easier to attribute costs in multi-branch workflows. [Learn more](/docs/guides/consumption-metrics).
+- **Neon MCP Server branch forking**: The `create_branch` MCP tool now accepts a `parentId` parameter so agents can fork any branch, not only the project default. [Learn more](/docs/ai/neon-mcp-server).
 - **Higher manual snapshot limits**: Paid plans (Launch and Scale) now include 100 manual snapshots per project, up from 10. [Learn more](/docs/guides/backup-restore).
 - **Neon Auth new plugins**: Magic Link sign-in, phone number (OTP) sign-in, wildcard trusted domains, and custom application name configuration are now available in Neon Auth. [Learn more](/docs/auth/guides/plugins/magic-link).
 - **Neon Auth MCP tools**: Two new Neon MCP Server tools (`configure_neon_auth` and `get_neon_auth_config`) let you set up and inspect your Neon Auth configuration from your AI editor using natural language. [Learn more](/docs/ai/neon-mcp-server).
@@ -115,6 +118,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 <details>
 <summary>Shipped in 2025</summary>
 
+- **Postgres 18**: Now the default version for all newly created projects.
 - **Project recovery**: Accidentally deleted a project? You can now recover it within 7 days of deletion. This feature restores your entire project infrastructure, including all branches, endpoints, compute configurations, and project settings. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **100 Free plan projects**: The Neon Free plan now includes 100 projects, giving you plenty of room to experiment, prototype, and build. [Learn more](/docs/introduction/plans).
 - **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, and configuration are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
@@ -127,7 +131,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Platform integration paths**: Whether you're building an agent platform, a developer tool, or a SaaS that offers databases to users, there's a [platform integration path](/docs/guides/platform-integration-overview) designed for your use case, including AI Agents integration, Claimable database flow, Embedded Postgres, and OAuth integration.
 - **HIPAA support for Postgres 18**: HIPAA compliance is now supported for Postgres 18 projects in AWS regions. [Learn more](/docs/security/hipaa).
 - **Backup scheduling**: Automate snapshots with daily, weekly, or monthly backup schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
-- **Postgres 18 support (Preview)**: Postgres 18 is now available in preview. Create a new project and select Postgres 18 as your version. [Read the announcement](/blog/postgres-18).
+- **Postgres 18 support**: Postgres 18 is now available on Neon. [Read the announcement](/blog/postgres-18).
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
 - **Usage-based pricing plans**: Our paid plans are fully usage-based. Pay only for what you use. See [Neon plans](/docs/introduction/plans).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
