@@ -89,7 +89,7 @@ begin
 	else
 		raise notice 'film not found';
     end if;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -134,7 +134,7 @@ If no expression evaluates to true, the `case` statement will execute the `else`
 
 The `else` section is optional. If you omit the `else` section and there is no expression evaluated to `true`, the `case` statement will raise the `case_not_found` exception.
 
-The following example illustrates how to use a simple `case` statement:
+The following example illustrates how to use a searched `case` statement:
 
 ```plsql
 do $$
@@ -159,7 +159,7 @@ begin
      else
 	    raise notice 'Customer not found';
 	 end if;
-end; $$
+end; $$;
 
 ```
 
