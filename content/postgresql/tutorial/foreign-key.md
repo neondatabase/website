@@ -12,8 +12,8 @@ previousLink:
   title: PostgreSQL Primary Key
   slug: postgresql-tutorial/postgresql-primary-key
 nextLink:
-  title: PostgreSQL DELETE CASCADE
-  slug: postgresql-tutorial/postgresql-delete-cascade
+  title: PostgreSQL CHECK Constraints
+  slug: postgresql-tutorial/postgresql-check-constraint
 ---
 
 <Admonition type="info" id="CTA">
