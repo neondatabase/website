@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Updating Data'
@@ -100,7 +100,7 @@ catch (NpgsqlException ex)
 
 How it works.
 
-First, construct an `DELETE` statement that deletes a row specified by an id from the `students` table:
+First, construct a `DELETE` statement that deletes a row specified by an id from the `students` table:
 
 ```cs
 var sql = @"DELETE FROM students WHERE id = @id";
@@ -173,4 +173,4 @@ The output indicates that the program has successfully deleted the row id 1\.
 
 ## Summary
 
-- Use the `NpgsqlCommand` object to execute an `DELETE` statement that deletes a row from a table.
+- Use the `NpgsqlCommand` object to execute a `DELETE` statement that deletes a row from a table.

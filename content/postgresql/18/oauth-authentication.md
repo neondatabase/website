@@ -6,7 +6,7 @@ page_description: >-
   token-based database connections with your existing identity providers like
   Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Logical Replication Improvements
@@ -45,7 +45,7 @@ PostgreSQL validates tokens but doesn't issue them, that's handled by your OAuth
 
 OAuth support must be enabled when PostgreSQL is compiled.
 
-As of the latest beta, most distributions do not include this by default, but if you're building from source, you can `--with-libcurl` to enable OAuth client features.
+As of the latest beta, most distributions do not include this by default, but if you're building from source, you can pass `--with-libcurl` to enable OAuth client features.
 
 Note that you will also need a compatible PostgreSQL client which supports OAuth connections, in the case of `psql`, this is available in PostgreSQL 18 and later.
 

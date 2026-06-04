@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-import-csv-file/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Inserting data'
@@ -23,7 +23,7 @@ Importing CSV data into PostgreSQL with C# and Npgsql works the same against any
 
 **Summary**: in this tutorial, you will learn how to import data from a CSV file into a table in PostgreSQL using C\#.
 
-This tutorial begins where the [Inserting data into a table in PostgreSQL tutoria](postgresql-csharp-insert)l left off.
+This tutorial begins where the [Inserting data into a table in PostgreSQL tutorial](postgresql-csharp-insert) left off.
 
 ## How to import a CSV file into the PostgreSQL database using C\#
 

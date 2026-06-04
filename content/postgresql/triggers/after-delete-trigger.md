@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE DELETE Trigger
@@ -153,7 +153,7 @@ Output:
 (1 row)
 ```
 
-The `AFTER INSERT` trigger will be activated that calls the `archive_deleted_employee()` function to insert the deleted row into the `employee_archives` table.
+The `AFTER DELETE` trigger will be activated that calls the `archive_deleted_employee()` function to insert the deleted row into the `employee_archives` table.
 
 Seventh, retrieve data from the `employee_archives` table:
 

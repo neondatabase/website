@@ -1,12 +1,12 @@
 ---
 title: 'PostgreSQL Python: Insert Data Into a Table'
-page_title: 'PostgresSQL Python: Insert Data Into a Table'
+page_title: 'PostgreSQL Python: Insert Data Into a Table'
 page_description: >-
   This tutorial shows you the step by step how to insert one or more rows into a
   PostgreSQL table in Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/insert/'
 ogImage: /postgresqltutorial/vendors_table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Create Tables'

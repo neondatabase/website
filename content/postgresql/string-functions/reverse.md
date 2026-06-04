@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-reverse/
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REPEAT() Function
@@ -41,7 +41,7 @@ The `REVERSE()` function returns a string with the order of all the characters r
 
 The `REVERSE()` function returns `NULL` if the `text` is `NULL`.
 
-## MySQL REVERSE() function examples
+## PostgreSQL REVERSE() function examples
 
 Let’s explore some examples of using the `REVERSE()` function.
 

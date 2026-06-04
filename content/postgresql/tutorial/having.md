@@ -6,7 +6,7 @@ page_description: >-
   filter groups of rows based on a specified condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having/'
 ogImage: /postgresqltutorial/postgresql-having.svg
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUP BY
@@ -96,7 +96,7 @@ Output:
 ...
 ```
 
-The following statement adds the `HAVING`clause to select the only customers who have been spending more than `200`:
+The following statement adds the `HAVING` clause to select only the customers who have been spending more than `200`:
 
 ```sql
 SELECT

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/
 ogImage: /postgresqltutorial/Install-PostgreSQL-macOS-step-1.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: Load PostgreSQL Sample Database
@@ -62,7 +62,7 @@ Eighth, review the installation information. If everything looks correct, click 
 Ninth, click the Next button to start installing the PostgreSQL database server on your computer:
 
 ![](/postgresqltutorial/Install-PostgreSQL-macOS-step-9.png)
-It will take few mintues to complete the installation.
+It will take a few minutes to complete the installation.
 
 ![](/postgresqltutorial/Install-PostgreSQL-step-10.png)
 Finally, click the Finish button once the installation is completed:

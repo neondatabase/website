@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DELETE CASCADE
@@ -77,7 +77,7 @@ The output indicates some duplicate rows such as 2 apples and 3 oranges in the `
 
 If the table has few rows, you can easily see which ones are duplicates immediately. However, this is not the case with a table that has lots of rows.
 
-The find the duplicate rows, you use the following statement:
+To find the duplicate rows, you use the following statement:
 
 ```sql
 SELECT

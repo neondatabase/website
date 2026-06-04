@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MIN() Function
@@ -89,7 +89,7 @@ Output:
 (1 row)
 ```
 
-In this example, the `SUM()` function returns a `NULL` because the `payment` the table has no row with the `customer_id` 2000\.
+In this example, the `SUM()` function returns a `NULL` because the `payment` table has no row with the `customer_id` 2000\.
 
 ### 3\) Using the SUM() function with COALESCE() function example
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-restart-ubuntu/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: How to Check PostgreSQL Version
@@ -21,7 +21,7 @@ nextLink:
 Restarting PostgreSQL on Ubuntu works the same way across any self-managed install, whether you reach for systemctl, service, or pg_ctl. If you'd rather skip the server babysitting altogether, [Lakebase](https://www.databricks.com/product/lakebase) delivers enterprise-grade managed Postgres for the AI era, tightly integrated with the Lakehouse and built for performance and security at scale. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
-**Summary**: in this tutorial, you will how to restart PostgreSQL on Ubuntu using `systemctl`, `service` command, and `pg_ctrl` command.
+**Summary**: in this tutorial, you will learn how to restart PostgreSQL on Ubuntu using `systemctl`, `service` command, and `pg_ctrl` command.
 
 We assume that you have sufficient permissions to restart the PostgreSQL service or can use `sudo` to execute the commands with root privileges.
 

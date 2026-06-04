@@ -6,7 +6,7 @@ page_description: >-
   calculate the natural logarithm of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-ln/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LCM() Function
@@ -26,7 +26,7 @@ The LN() function works the same way in any PostgreSQL database, so everything h
 
 The natural logarithm is a function that represents the logarithm to base e, where e is Euler’s number, which is approximately equal to `2.71828`.
 
-In Math, the natural logarithm of a x is denoted as ln(x).
+In Math, the natural logarithm of x is denoted as ln(x).
 
 If ln(x) \= y, then ey \= x.
 

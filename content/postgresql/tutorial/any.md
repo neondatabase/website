@@ -6,7 +6,7 @@ page_description: >-
   value to a set of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Correlated Subquery
@@ -26,7 +26,7 @@ The ANY operator works the same across every PostgreSQL deployment, so everythin
 
 The PostgreSQL `ANY` operator compares a value with a set of values returned by a [subquery](postgresql-subquery). It is commonly used in combination with comparison operators such as \=, \<, \>, \<\=, \>\=, and \<\>.
 
-Here’s the basic syntax of  the `ANY` operator:
+Here’s the basic syntax of the `ANY` operator:
 
 ```sql
 expression operator ANY(subquery)

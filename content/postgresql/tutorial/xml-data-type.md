@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-xml-data-type/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL enum
@@ -126,7 +126,7 @@ Output:
 
 Each row in the result set is an array of XML values representing person names. Since each person has one name, the result array has only one element.
 
-Fourth, retrieve person names as text from the XML documents using `xpath()` function:
+Fifth, retrieve person names as text from the XML documents using `xpath()` function:
 
 ```sql
 SELECT (xpath('/person/name/text()', info))[1]::text AS name
@@ -151,7 +151,7 @@ How it works.
 - Second, the `[1]` subscript returns the first element of the array.
 - Third, the `::text` casts the XML value to the text.
 
-Fifth, retrieve the ages of persons:
+Sixth, retrieve the ages of persons:
 
 ```sql
 SELECT (xpath('/person/age/text()', info))[1]::text::integer AS age
@@ -179,7 +179,7 @@ In this query:
 
 In this example, we cast an XML value to text and text to an integer because we cannot cast an XML value directly to an integer.
 
-Sixth, retrieve the name, age, and city from the XML document:
+Seventh, retrieve the name, age, and city from the XML document:
 
 ```sql
 SELECT
@@ -202,7 +202,7 @@ Output:
 (4 rows)
 ```
 
-Seventh, find the person with the name “Jane Doe”:
+Eighth, find the person with the name “Jane Doe”:
 
 ```sql
 SELECT *
@@ -263,7 +263,7 @@ Third, call the `generate_persons` to insert 1000 rows into the `person` table:
 SELECT generate_persons();
 ```
 
-Fifth, find a person with the name `Jane Doe`:
+Fourth, find a person with the name `Jane Doe`:
 
 ```sql
 EXPLAIN ANALYZE

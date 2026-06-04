@@ -6,7 +6,7 @@ page_description: >-
   retrieve the scale of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-scale/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SQRT() Function
@@ -59,7 +59,7 @@ Output:
 
 It returns 15 indicating that there are 15 digits after the decimal point.
 
-### 2\) Using the SCALE() table to examine table data
+### 2\) Using the SCALE() function to examine table data
 
 First, [create a table](../postgresql-tutorial/postgresql-create-table) called `product_prices` to store product prices with various scales:
 

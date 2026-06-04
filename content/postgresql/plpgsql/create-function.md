@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Exception
@@ -55,7 +55,7 @@ In this syntax:
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
-![](/postgresqltutorial/film.png)The following statement creates a function that returns the number films whose length between the `len_from` and `len_to` parameters:
+![](/postgresqltutorial/film.png)The following statement creates a function that returns the number of films whose length between the `len_from` and `len_to` parameters:
 
 ```plsql
 create function get_film_count(len_from int, len_to int)

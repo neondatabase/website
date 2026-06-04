@@ -6,7 +6,7 @@ page_description: >-
   connect to the PostgreSQL database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/connect/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Connect.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PHP
@@ -190,7 +190,7 @@ use PostgreSQLTutorial\Connection as Connection;
 
 try {
     Connection::get()->connect();
-    echo 'A connection to the PostgreSQL database sever has been established successfully.';
+    echo 'A connection to the PostgreSQL database server has been established successfully.';
 } catch (\PDOException $e) {
     echo $e->getMessage();
 }
@@ -213,7 +213,7 @@ Generating optimized autoload files
 Finally, launch the `index.php` file from the web browser to test it.
 
 ```
-A connection to the PostgreSQL database sever has been established successfully.
+A connection to the PostgreSQL database server has been established successfully.
 ```
 
 If you want to see the exception that may occur, you can change the parameters in the `database.ini` file to an invalid one and test it.

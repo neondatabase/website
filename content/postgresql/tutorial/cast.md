@@ -6,7 +6,7 @@ page_description: >-
   (::) to cast a value of one type to another.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NULLIF
@@ -387,7 +387,7 @@ Output:
 
 In this example:
 
-- `rating ~ E'^\\d+$'`: This expression matches the values in the rating column with a regular expression `E'^\\d+$'`. The pattern checks if a value contains only digits (`\d+`) from the beginning (`^`) to the end (`$`). The letter `E` before the string indicates is an escape string.
+- `rating ~ E'^\\d+$'`: This expression matches the values in the rating column with a regular expression `E'^\\d+$'`. The pattern checks if a value contains only digits (`\d+`) from the beginning (`^`) to the end (`$`). The letter `E` before the string indicates it is an escape string.
 - If the value contains only digits, the `CAST()` function converts it to an integer. Otherwise, it returns zero.
 
 In this tutorial, you have learned how to use PostgreSQL `CAST` to convert a value of one type to another.

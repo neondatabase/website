@@ -6,7 +6,7 @@ page_description: >-
   calculate the logarithm of a number
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-log/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LN() Function
@@ -120,7 +120,7 @@ Output:
 (1 row)
 ```
 
-In this example, the `LOG()` function converts the text `'64'` into a number and calculate the base\-2 logarithm of 64\.
+In this example, the `LOG()` function converts the text `'64'` into a number and calculates the base\-2 logarithm of 64\.
 
 The following example raises an error because the `LOG()` function cannot convert the string `'64x'` into a number for calculation:
 

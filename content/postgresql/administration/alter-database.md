@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE DATABASE
@@ -35,7 +35,7 @@ The `ALTER DATABASE` statement allows you to carry the following action on the d
 
 ### 1\) Changing attributes of a database
 
-To change the attributes of a database, you use the following form of the `ALTER TABLE` statement:
+To change the attributes of a database, you use the following form of the `ALTER DATABASE` statement:
 
 ```sql
 ALTER DATABASE name WITH option;

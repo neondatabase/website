@@ -6,7 +6,7 @@ page_description: >-
   Boolean, character, number, temporal, special types, and array.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/'
 ogImage: /postgresqltutorial/PostgreSQL-Data-Types-300x254.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: Export PostgreSQL Table to CSV File
@@ -22,7 +22,7 @@ PostgreSQL data types like Boolean, character, numeric, temporal, array, JSON, a
 
 **Summary**: in this tutorial, you will learn about **PostgreSQL data types** including Boolean, character, numeric, temporal, array, json, UUID, and special types.
 
-## PostgreSQL Data TypesOverview of PostgreSQL data types
+## Overview of PostgreSQL data types
 
 PostgreSQL supports the following data types:
 

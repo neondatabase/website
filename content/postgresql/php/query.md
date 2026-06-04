@@ -1,12 +1,12 @@
 ---
 title: 'PostgreSQL PHP: Querying Data'
-page_title: 'PostgreSQL PHP: Queying Data From PostgreSQL Tables'
+page_title: 'PostgreSQL PHP: Querying Data From PostgreSQL Tables'
 page_description: >-
   In this tutorial, you will step by step learn how to query data from the
   tables in the PostgreSQL database using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/query/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Query-Example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'

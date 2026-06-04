@@ -6,7 +6,7 @@ page_description: >-
   data of one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSERT Multiple Rows
@@ -143,7 +143,7 @@ Output:
 
 ### 2\) Updating a row and returning the updated row
 
-The following statement uses the `UPDATE` statement update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
+The following statement uses the `UPDATE` statement to update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
 
 ```sql
 UPDATE courses

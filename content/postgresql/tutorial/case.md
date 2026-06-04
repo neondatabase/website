@@ -6,7 +6,7 @@ page_description: >-
   form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Composite Types
@@ -151,7 +151,7 @@ The `CASE` first evaluates the `expression` and compares the result with each va
 
 Once the result of the `expression` equals a value (value1, value2, etc.) in a `WHEN` clause, the `CASE` returns the corresponding result in the `THEN` clause.
 
-If `CASE` does not find any matches, it returns the `else_result` in that follows the `ELSE`, or `NULL` value if the `ELSE` is not available.
+If `CASE` does not find any matches, it returns the `else_result` that follows the `ELSE`, or `NULL` value if the `ELSE` is not available.
 
 ### 1\) Simple PostgreSQL CASE expression example
 

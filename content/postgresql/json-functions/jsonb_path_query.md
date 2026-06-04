@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Path
@@ -48,7 +48,7 @@ Let’s take some examples of using the `jsonb_path_query()` function.
 
 ### Setting up a sample table
 
-First, [create a table](../postgresql-tutorial/postgresql-create-table) named `products`with a JSONB column names `attributes` to store product attributes:
+First, [create a table](../postgresql-tutorial/postgresql-create-table) named `products` with a JSONB column names `attributes` to store product attributes:
 
 ```sql
 CREATE TABLE products (

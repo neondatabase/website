@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER TABLESPACE
@@ -134,7 +134,7 @@ Seventh, connect to the `postgres` database:
 \c postgres
 ```
 
-Eight, drop the `demodb` database:
+Eighth, drop the `demodb` database:
 
 ```sql
 DROP DATABASE demodb;

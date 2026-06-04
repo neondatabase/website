@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-update-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE UPDATE Trigger
@@ -42,7 +42,7 @@ Additionally, you can access the following variables:
 - `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `AFTER` `UPDATE` trigger.
 - `TG_WHEN`: Represent the trigger timing, which is `AFTER` for the `AFTER UPDATE` trigger.
 
-To create a `AFTER UPDATE` trigger, you use the following steps:
+To create an `AFTER UPDATE` trigger, you use the following steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute when the `AFTER UPDATE` trigger fires:
 
