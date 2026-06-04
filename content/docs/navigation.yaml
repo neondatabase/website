@@ -638,70 +638,18 @@
     - section: Tools & Workflows
       items:
         - title: API, CLI & SDKs
-          slug: reference/api-reference
+          slug: reference/api
           icon: cli
           items:
-            - section: API
-              icon: api
-              items:
-                - title: Neon API
-                  slug: reference/api-reference
-            - section: CLI
-              icon: cli
-              items:
-                - title: Overview
-                  slug: reference/neon-cli
-                - title: Quickstart
-                  slug: reference/cli-quickstart
-                - title: Install and connect
-                  slug: reference/cli-install
-                - title: auth
-                  slug: reference/cli-auth
-                - title: me
-                  slug: reference/cli-me
-                - title: orgs
-                  slug: reference/cli-orgs
-                - title: projects
-                  slug: reference/cli-projects
-                - title: ip-allow
-                  slug: reference/cli-ip-allow
-                - title: vpc
-                  slug: reference/cli-vpc
-                - title: branches
-                  slug: reference/cli-branches
-                - title: databases
-                  slug: reference/cli-databases
-                - title: roles
-                  slug: reference/cli-roles
-                - title: operations
-                  slug: reference/cli-operations
-                - title: connection-string
-                  slug: reference/cli-connection-string
-                - title: set-context
-                  slug: reference/cli-set-context
-                - title: init
-                  slug: reference/cli-init
-                - title: completion
-                  slug: reference/cli-completion
-            - section: SDKs
-              icon: sdk
-              items:
-                - title: Overview
-                  slug: reference/sdk
-                - title: Neon TypeScript SDK
-                  slug: reference/javascript-sdk
-                - title: Neon API TypeScript SDK
-                  slug: reference/typescript-sdk
-                - title: Python SDK (Neon API)
-                  slug: reference/python-sdk
-                - title: The @neondatabase/toolkit
-                  slug: reference/neondatabase-toolkit
-                - title: Go SDK (Neon API)
-                  slug: https://github.com/kislerdm/neon-sdk-go
-                  tag: community
-                - title: Node.js / Deno SDK (Neon API)
-                  slug: https://github.com/paambaati/neon-js-sdk
-                  tag: community
+            - title: Overview
+              slug: reference/api
+            - title: Getting started
+              slug: reference/api/getting-started
+            - title: CLI guide
+              slug: reference/cli-guide
+            - section: API Reference
+              slug: reference/api/reference
+              items: []
 
         - title: Local development
           icon: container

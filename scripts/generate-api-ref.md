@@ -1,0 +1,196 @@
+# API Reference
+
+Build pipeline and UI for the [Neon Management API reference](https://neon.com/docs/reference/api-reference). Generates per-operation pages from the live OpenAPI spec and enriches them with neonctl, MCP, and Console coverage data.
+
+## Quick links
+
+- **Generator entry point:** [`scripts/generate-api-ref.mjs`](generate-api-ref.mjs)
+- **Coverage builder:** [`scripts/build-coverage-data.mjs`](build-coverage-data.mjs) (run on upstream releases)
+- **Spec audit:** [`scripts/audit-api-spec.mjs`](audit-api-spec.mjs) — run manually with `npm run audit:api-ref`
+- **Interactive UI:** [`src/components/pages/doc/api-operation/`](../src/components/pages/doc/api-operation/) (orchestrator + Zustand store + section hooks)
+- **Manual UI verification:** [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md)
+
+## What it produces
+
+| Output                             | Path                                              | Committed       |
+| ---------------------------------- | ------------------------------------------------- | --------------- |
+| Per-operation JSON (React data)    | `src/data/api-ref/{tag}/{slug}.json`              | No (gitignored) |
+| Per-operation Markdown (agent/LLM) | `public/md/docs/reference/api/{tag}/{slug}.md`    | No (gitignored) |
+| Per-tag Markdown (tag overview)    | `public/md/docs/reference/api/{tag}.md`           | No (gitignored) |
+| `llms.txt` index                   | `public/docs/reference/api/llms.txt`              | No (gitignored) |
+| `llms-full.txt` (all ops)          | `public/docs/reference/api/llms-full.txt`         | No (gitignored) |
+| Navigation YAML (sidebar)          | `content/docs/api-navigation.yaml`                | **Yes**         |
+| Cross-page-params list             | `src/data/api-ref/cross-page-params.json`         | No (gitignored) |
+
+Navigation YAML is committed because it drives the sidebar and must be in the repo before `next build` reads it. Everything else is regenerated on every build.
+
+## Running locally
+
+```bash
+npm run generate:api-ref     # one-shot
+npm run dev                  # runs the generator first via `predev`
+npm run build                # runs the generator first via `prebuild`
+```
+
+Or with a custom spec URL:
+
+```bash
+node scripts/generate-api-ref.mjs https://neon.com/api_spec/release/v2.json
+```
+
+## How it runs on Vercel
+
+No special Vercel configuration is needed. The generator is wired into `prebuild` in `package.json`:
+
+```text
+prebuild → node scripts/generate-api-ref.mjs && (other site generators) && check:* validators
+build    → next build
+postbuild → copy generated md to /public + build llms.txt index + sitemaps
+```
+
+Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetches `https://neon.com/api_spec/release/v2.json` over the network; Vercel allows outbound HTTPS by default, so no env vars or build-image tweaks are required.
+
+If the spec fetch fails, the generator throws and the build fails fast. The last good `content/docs/api-navigation.yaml` stays in the repo so a transient outage doesn't ship broken navigation — but the JSON/Markdown data for operations is missing on that build until the next successful run.
+
+## How it works
+
+```text
+OpenAPI spec (neon.com/api_spec/release/v2.json)
+  └─ Dereferenced via @scalar/openapi-parser
+       └─ buildOperationData()          — normalises each operation
+            ├─ mergeParams()             — path-level + op-level params
+            ├─ flattenAllOf()            — collapses allOf schemas
+            ├─ toCurlExample()           — generates curl snippet
+            ├─ toTypescriptExample()     — generates SDK snippet
+            ├─ buildCliFlags()           — maps neonctl flags ↔ API params
+            └─ collectBodyGlobals()      — tags shared-identity body leaves
+       ├─ JSON files  → src/data/api-ref/{tag}/{slug}.json
+       ├─ MD files    → toAgentMarkdown() → public/md/...
+       ├─ llms.txt    → toLlmsTxtLine()
+       └─ nav YAML    → toNavYaml() → content/docs/api-navigation.yaml
+```
+
+The React UI in [`src/components/pages/doc/api-operation/`](../src/components/pages/doc/api-operation/) reads the per-op JSON and renders the interactive editor (path params, request body, CLI flags). Shared edits persist in a Zustand store ([`store.js`](../src/components/pages/doc/api-operation/store.js)) backed by `sessionStorage`; [`StoreHydrator`](../src/components/pages/doc/api-operation/store-hydrator.jsx) rehydrates after mount to avoid SSR hydration mismatches. Section hooks (`useParamsState`, `useBodyState`, `useCliState`, `useRespState`) read and write that store; `operation-client.jsx` coordinates them and builds cross-section live code (curl, CLI, TypeScript).
+
+## Committed inputs (under `scripts/data/`)
+
+These files are read by the generator and must be in the repo. Some are hand-curated; some are produced by `build-coverage-data.mjs` and reviewed before commit.
+
+| File                       | Maintained by                  | Purpose                                                        |
+| -------------------------- | ------------------------------ | -------------------------------------------------------------- |
+| `tag-config.json`          | Humans                         | Tag order, display names, descriptions, groupings, overrides   |
+| `console-breadcrumbs.json` | Humans                         | `operationId` → Neon Console UI path (e.g. "Project > Branches") |
+| `response-examples.json`   | Humans                         | Per-op response example overrides when the spec example is poor |
+| `cli-table-output.json`    | Humans                         | Captured `neonctl ... list` table snippets for the CLI tab     |
+| `cli-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → `neonctl` command (parsed from neonctl source) |
+| `mcp-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → MCP tool name (parsed from mcp-server-neon)    |
+| `mcp-tool-definitions.json`| `build-coverage-data.mjs`      | MCP tool descriptions + argument schemas                       |
+| `cli-global-flags.json`    | Humans (rare)                  | Global neonctl flags (`--help`, `--api-key`, ...); imported by both the generator and the UI |
+
+Additional manual exception lists (small, inline) live near the top of `build-coverage-data.mjs` (`CLI_MANUAL`) and `generate-api-ref.mjs` for cases where the heuristics need a nudge.
+
+## Maintenance
+
+### When the OpenAPI spec changes
+
+Nothing to do. The generator fetches it fresh on every build. Spec changes show up on the next Vercel deploy.
+
+If a brand-new tag appears in the spec, the build fails with `[tag-config] spec tags missing from config: <names>`. Fix by adding entries to `scripts/data/tag-config.json` — see [Adding a new tag](#adding-a-new-tag).
+
+### When neonctl releases
+
+```bash
+GITHUB_TOKEN=$(gh auth token) node scripts/build-coverage-data.mjs
+# inspect git diff scripts/data/cli-coverage.json scripts/data/mcp-coverage.json
+git add scripts/data/cli-coverage.json scripts/data/mcp-coverage.json scripts/data/mcp-tool-definitions.json
+```
+
+Bump `NEONCTL_VERSION` (or `MCP_VERSION` for mcp-server-neon) at the top of [`build-coverage-data.mjs`](build-coverage-data.mjs) before running. Versions are pinned so re-running is deterministic; an unintended change is a real upstream change worth eyeballing in the diff.
+
+`GITHUB_TOKEN` is optional but avoids unauthenticated rate limits.
+
+### When the Neon Console UI changes paths
+
+Edit `scripts/data/console-breadcrumbs.json` by hand. Keys are operationIds; values are the breadcrumb shown on the Console tab when no other surface is available.
+
+### When a new resource type ships (e.g. `clusters`)
+
+1. Add a tag entry in `tag-config.json` (see [Adding a new tag](#adding-a-new-tag)).
+2. If the resource has a session-identity global (e.g. `cluster_id`), no extra wiring is needed — the generator picks it up from the spec automatically via `computeCrossPageParamSet()`.
+3. If the global name doesn't follow `${specName}_id` (e.g. `organizations` → `org_id`), add a `bareId` field to the tag entry.
+
+### Validating changes
+
+```bash
+npx vitest run
+node scripts/generate-api-ref.mjs             # regenerate and visually check git diff
+git diff content/docs/api-navigation.yaml     # only committed generator output
+```
+
+For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
+
+### Spec audit
+
+Run `npm run audit:api-ref` to generate a Markdown report against the live OpenAPI spec. It surfaces drift (missing examples, schema-invalid examples, parameter gaps) without blocking anything — redirect to a file if you want to save it:
+
+```bash
+npm run audit:api-ref > audit-report.md
+```
+
+## Tag configuration
+
+Single source of truth: [`scripts/data/tag-config.json`](data/tag-config.json), loaded via [`scripts/lib/tag-config.mjs`](lib/tag-config.mjs). Each tag entry has:
+
+- **`slug`** — URL segment (e.g. `projects`); array order is the display order
+- **`specName`** — singular tag name as it appears in the OpenAPI spec (e.g. `project`); omit when it matches `slug`
+- **`display`** — human-readable sidebar label
+- **`description`** — short description for the API overview grid; omit to hide the tag from that grid
+- **`groups`** — optional editorial grouping for the tag's operations on the tag landing page
+- **`bareId`** — optional override for the session-identity global a bare `id` body field resolves to. Defaults to `${specName}_id`; set this when the spec naming differs from the global (e.g. `organizations` → `"org_id"`).
+
+Plus a top-level `operationOverrides` map for moving specific operations to a different tag than the spec assigns.
+
+The loader fail-hard validates: duplicate slugs, overrides pointing at unknown slugs, operation slugs listed in multiple groups, malformed `bareId` values, and (when called with the spec) any spec tag not mapped in the config.
+
+## Tag intro pages
+
+Each tag can have an intro file at `content/api-docs/{tag}.md`. This file:
+
+- Appears at the top of the tag overview page (`/docs/reference/api/{tag}`)
+- Is prepended to the per-tag agent markdown file
+- Uses plain markdown only (no JSX components)
+
+If no intro file exists, the tag overview page shows only the operation list.
+
+## URL structure
+
+| URL                                          | Content                                      |
+| -------------------------------------------- | -------------------------------------------- |
+| `/docs/reference/api/{tag}`                  | Tag overview — all operations for the tag    |
+| `/docs/reference/api/{tag}/{slug}`           | Single operation detail page                 |
+| `/md/docs/reference/api/{tag}/{slug}.md`     | Agent/LLM markdown for one operation         |
+| `/md/docs/reference/api/{tag}.md`            | Agent/LLM markdown for entire tag            |
+| `/docs/reference/api/llms.txt`               | One-line index of all operations             |
+| `/docs/reference/api/llms-full.txt`          | Full markdown for all operations             |
+
+## Adding a new tag
+
+1. Add an entry to [`scripts/data/tag-config.json`](data/tag-config.json) — at minimum `{ slug, display }`. Add `specName` if the spec uses a different singular form.
+2. Run `npm run generate:api-ref`. If a spec tag has no config entry the loader throws with the missing names.
+3. Optionally add a `description` (shows on the overview grid), `groups` (editorial grouping on the tag landing page), a `bareId` (when the auto-derivation doesn't match), and `content/api-docs/{tag}.md` (intro paragraph).
+4. Commit the updated `content/docs/api-navigation.yaml`.
+
+## Session-identity globals
+
+Identifiers that appear on multiple operations (`project_id`, `org_id`, `branch_id`, `database_name`, `role_name`, ...) refer to the same session value in the interactive editor. Type `org_id` once on `list-projects` and it pre-fills on `create-project`, `update-project`, the body field on `create-project`, the CLI `--org-id` flag, etc.
+
+The set is computed at build time from the spec by [`computeCrossPageParamSet()`](generate-api-ref.mjs) — any param name ending in `_id` or `_name` that appears in two or more operations qualifies (so it can include names like `database_name`, not only resource IDs). The output is emitted to `src/data/api-ref/cross-page-params.json` and imported by [`store.js`](../src/components/pages/doc/api-operation/store.js). No manual list to maintain when the spec adds new shared params; re-run the generator to refresh the count.
+
+## Tests
+
+```bash
+npx vitest run
+npx vitest run scripts/generate-api-ref.test.js   # generator only
+```
+
+Pure transformation helpers (slug generation, param merging, schema flattening, curl/TypeScript example generation, markdown rendering, navigation YAML structure, CLI flag mapping) are covered as unit tests. React hook integration tests live in [`__tests__/hooks.test.jsx`](../src/components/pages/doc/api-operation/__tests__/hooks.test.jsx) and exercise hydration, cross-section state coordination, and reset cascades.

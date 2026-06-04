@@ -1,0 +1,54 @@
+{
+  "getCurrentUserInfo": "neon me",
+  "listProjectBranches": "neon branches list",
+  "createProjectBranch": "neon branches create",
+  "updateProjectBranch": {
+    "commands": [
+      {
+        "cmd": "neon branches rename <id|name> <new-name>",
+        "covers": [
+          "name"
+        ]
+      },
+      {
+        "cmd": "neon branches set-expiration <id|name>",
+        "covers": [
+          "expires_at"
+        ]
+      }
+    ],
+    "uncovered": [
+      "protected"
+    ]
+  },
+  "setDefaultProjectBranch": "neon branches set-default <id|name>",
+  "deleteProjectBranch": "neon branches delete",
+  "getProjectBranch": "neon branches get <id|name>",
+  "createProjectEndpoint": "neon branches add-compute <id|name>",
+  "restoreProjectBranch": "neon branches restore <id|name>",
+  "listProjectBranchRoles": "neon roles list",
+  "listProjectBranchDatabases": "neon databases list",
+  "getProjectBranchRolePassword": "neon roles get <role> --project-id <id>",
+  "createProjectBranchDatabase": "neon databases create",
+  "deleteProjectBranchDatabase": "neon databases delete",
+  "getProject": "neon projects get",
+  "updateProject": "neon projects update",
+  "listProjectOperations": "neon operations list",
+  "getCurrentUserOrganizations": "neon orgs list",
+  "listProjects": "neon projects list",
+  "listSharedProjects": "neon projects list",
+  "createProject": "neon projects create",
+  "deleteProject": "neon projects delete",
+  "recoverProject": "neon projects recover",
+  "createProjectBranchRole": "neon roles create",
+  "deleteProjectBranchRole": "neon roles delete",
+  "listOrganizationVPCEndpoints": "neon vpc endpoint list --org-id <id>",
+  "deleteOrganizationVPCEndpoint": "neon vpc endpoint delete --org-id <id>",
+  "getOrganizationVPCEndpointDetails": "neon vpc endpoint get --org-id <id>",
+  "listProjectVPCEndpoints": "neon vpc endpoint list --project-id <id>",
+  "deleteProjectVPCEndpoint": "neon vpc endpoint delete --project-id <id>",
+  "getProjectBranchSchema": "neon branches schema-diff [base] [compare]",
+  "getConnectionURI": "neon connection-string [branch]",
+  "assignOrganizationVPCEndpoint": "neon vpc endpoint assign --org-id <id>",
+  "assignProjectVPCEndpoint": "neon vpc endpoint assign --project-id <id>"
+}

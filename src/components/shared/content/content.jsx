@@ -1,12 +1,17 @@
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
+import { Suspense } from 'react';
 import remarkGfm from 'remark-gfm';
 
+import ApiMethodBadge from 'components/pages/doc/api-method-badge';
+import ApiParam from 'components/pages/doc/api-param';
+import ApiResponse from 'components/pages/doc/api-response';
 import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
+import CliCommandTable from 'components/pages/doc/cli-command-table/cli-command-table';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -15,6 +20,9 @@ import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
+import InterfaceStrip from 'components/pages/doc/interface-strip';
+import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
+import InterfaceTabPanel from 'components/pages/doc/interface-tabs/interface-tab-panel';
 import LinkPreview from 'components/pages/doc/link-preview';
 import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import PromptCards from 'components/pages/doc/prompt-cards';
@@ -162,6 +170,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     );
   },
+  ApiMethodBadge,
+  CliCommandTable,
+  ApiParam,
+  ApiResponse,
   AutoscalingChart,
   AutoscalingViz,
   Button,
@@ -183,6 +195,13 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   QuoteBlock,
   Tabs,
   TabItem,
+  InterfaceStrip,
+  InterfaceTabActivator: (props) => (
+    <Suspense>
+      <InterfaceTabActivator {...props} />
+    </Suspense>
+  ),
+  InterfaceTabPanel,
   InfoBlock,
   LinkPreview,
   DocsList,

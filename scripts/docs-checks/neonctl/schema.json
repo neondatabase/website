@@ -1,34 +1,51 @@
 {
   "neonctlVersion": "2.22.0",
-  "generatedAt": "2026-04-20T00:50:56.131Z",
+  "generatedAt": "2026-05-18T17:52:54.673Z",
   "globalOptions": {
     "help": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Show help",
+      "default": false
     },
     "api-key": {
-      "type": "string"
+      "type": "string",
+      "description": "API key"
     },
     "context-file": {
-      "type": "string"
+      "type": "string",
+      "description": "Context file"
     },
     "color": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Colorize the output. Example: --no-color, --color false",
+      "default": true
     },
     "analytics": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Manage analytics. Example: --no-analytics, --analytics false",
+      "default": true
     },
     "config-dir": {
-      "type": "string"
+      "type": "string",
+      "description": "Path to config directory"
     },
     "output": {
       "type": "string",
       "alias": "o",
-      "choices": ["json", "yaml", "table"]
+      "choices": [
+        "json",
+        "yaml",
+        "table"
+      ],
+      "description": "Set output format",
+      "default": "table"
     }
   },
   "commands": {
     "auth": {
-      "aliases": ["login"],
+      "aliases": [
+        "login"
+      ],
       "positionals": [],
       "options": {
         "context-file": {
@@ -50,7 +67,9 @@
       "commands": {}
     },
     "orgs": {
-      "aliases": ["org"],
+      "aliases": [
+        "org"
+      ],
       "positionals": [],
       "options": {},
       "commands": {
@@ -64,35 +83,45 @@
       }
     },
     "projects": {
-      "aliases": ["project"],
+      "aliases": [
+        "project"
+      ],
       "positionals": [],
       "options": {},
       "commands": {
         "get": {
           "name": "get",
           "aliases": [],
-          "positionals": ["id"],
+          "positionals": [
+            "id"
+          ],
           "options": {},
           "commands": {}
         },
         "recover": {
           "name": "recover",
           "aliases": [],
-          "positionals": ["id"],
+          "positionals": [
+            "id"
+          ],
           "options": {},
           "commands": {}
         },
         "delete": {
           "name": "delete",
           "aliases": [],
-          "positionals": ["id"],
+          "positionals": [
+            "id"
+          ],
           "options": {},
           "commands": {}
         },
         "update": {
           "name": "update",
           "aliases": [],
-          "positionals": ["id"],
+          "positionals": [
+            "id"
+          ],
           "options": {
             "block-vpc-connections": {
               "type": "boolean"
@@ -104,7 +133,8 @@
               "type": "boolean"
             },
             "cu": {
-              "type": "string"
+              "type": "string",
+              "description": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
             "name": {
               "type": "string"
@@ -133,10 +163,13 @@
               "type": "string"
             },
             "org-id": {
-              "type": "string"
+              "type": "string",
+              "description": "The project's organization ID"
             },
             "psql": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Connect to a new project via psql",
+              "default": false
             },
             "database": {
               "type": "string"
@@ -145,10 +178,13 @@
               "type": "string"
             },
             "set-context": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Set the current context to the new project",
+              "default": false
             },
             "cu": {
-              "type": "string"
+              "type": "string",
+              "description": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             }
           },
           "commands": {}
@@ -159,10 +195,12 @@
           "positionals": [],
           "options": {
             "org-id": {
-              "type": "string"
+              "type": "string",
+              "description": "List projects of a given organization"
             },
             "recoverable-only": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "List only deleted projects within their deletion grace period"
             }
           },
           "commands": {}
@@ -174,28 +212,35 @@
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         }
       },
       "commands": {
         "reset": {
           "name": "reset",
           "aliases": [],
-          "positionals": ["ips..."],
+          "positionals": [
+            "ips..."
+          ],
           "options": {},
           "commands": {}
         },
         "remove": {
           "name": "remove",
           "aliases": [],
-          "positionals": ["ips..."],
+          "positionals": [
+            "ips..."
+          ],
           "options": {},
           "commands": {}
         },
         "add": {
           "name": "add",
           "aliases": [],
-          "positionals": ["ips..."],
+          "positionals": [
+            "ips..."
+          ],
           "options": {
             "protected-only": {
               "type": "boolean"
@@ -223,24 +268,32 @@
           "positionals": [],
           "options": {
             "project-id": {
-              "type": "string"
+              "type": "string",
+              "description": "Project ID"
             }
           },
           "commands": {
             "remove": {
               "name": "remove",
               "aliases": [],
-              "positionals": ["id"],
+              "positionals": [
+                "id"
+              ],
               "options": {},
               "commands": {}
             },
             "restrict": {
               "name": "restrict",
-              "aliases": ["update"],
-              "positionals": ["id"],
+              "aliases": [
+                "update"
+              ],
+              "positionals": [
+                "id"
+              ],
               "options": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "An optional descriptive label for the VPC endpoint restriction"
                 }
               },
               "commands": {}
@@ -260,7 +313,8 @@
           "positionals": [],
           "options": {
             "org-id": {
-              "type": "string"
+              "type": "string",
+              "description": "Organization ID"
             },
             "region-id": {
               "type": "string",
@@ -271,24 +325,34 @@
             "status": {
               "name": "status",
               "aliases": [],
-              "positionals": ["id"],
+              "positionals": [
+                "id"
+              ],
               "options": {},
               "commands": {}
             },
             "remove": {
               "name": "remove",
               "aliases": [],
-              "positionals": ["id"],
+              "positionals": [
+                "id"
+              ],
               "options": {},
               "commands": {}
             },
             "assign": {
               "name": "assign",
-              "aliases": ["update", "add"],
-              "positionals": ["id"],
+              "aliases": [
+                "update",
+                "add"
+              ],
+              "positionals": [
+                "id"
+              ],
               "options": {
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "An optional descriptive label for the VPC endpoint"
                 }
               },
               "commands": {}
@@ -305,18 +369,26 @@
       }
     },
     "branches": {
-      "aliases": ["branch"],
+      "aliases": [
+        "branch"
+      ],
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         }
       },
       "commands": {
         "schema-diff": {
           "name": "schema-diff",
-          "aliases": ["sd"],
-          "positionals": ["base-branch", "compare-source[@(timestamp|lsn)]"],
+          "aliases": [
+            "sd"
+          ],
+          "positionals": [
+            "base-branch",
+            "compare-source[@(timestamp|lsn)]"
+          ],
           "options": {
             "database": {
               "type": "string",
@@ -328,30 +400,39 @@
         "get": {
           "name": "get",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {},
           "commands": {}
         },
         "delete": {
           "name": "delete",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {},
           "commands": {}
         },
         "add-compute": {
           "name": "add-compute",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of compute to add"
             },
             "cu": {
-              "type": "string"
+              "type": "string",
+              "description": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "Optional name of the compute"
             }
           },
           "commands": {}
@@ -359,10 +440,13 @@
         "set-expiration": {
           "name": "set-expiration",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {
             "expires-at": {
-              "type": "string"
+              "type": "string",
+              "description": "Set a expiration date for the branch. If omitted, expiration will be removed. Format [RFC3339]: 2024-12-31T23:59:59Z"
             }
           },
           "commands": {}
@@ -370,24 +454,33 @@
         "set-default": {
           "name": "set-default",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {},
           "commands": {}
         },
         "rename": {
           "name": "rename",
           "aliases": [],
-          "positionals": ["id|name", "new-name"],
+          "positionals": [
+            "id|name",
+            "new-name"
+          ],
           "options": {},
           "commands": {}
         },
         "restore": {
           "name": "restore",
           "aliases": [],
-          "positionals": ["target-id|name", "source>[@(timestamp|lsn)"],
+          "positionals": [
+            "target-id|name",
+            "source>[@(timestamp|lsn)"
+          ],
           "options": {
             "preserve-under-name": {
-              "type": "unknown"
+              "type": "unknown",
+              "description": "Name under which to preserve the old branch"
             }
           },
           "commands": {}
@@ -395,13 +488,18 @@
         "reset": {
           "name": "reset",
           "aliases": [],
-          "positionals": ["id|name"],
+          "positionals": [
+            "id|name"
+          ],
           "options": {
             "parent": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Reset to a parent branch",
+              "default": false
             },
             "preserve-under-name": {
-              "type": "unknown"
+              "type": "unknown",
+              "description": "Name under which to preserve the old branch"
             }
           },
           "commands": {}
@@ -415,32 +513,45 @@
               "type": "unknown"
             },
             "parent": {
-              "type": "string"
+              "type": "string",
+              "description": "Parent branch name or id or timestamp or LSN. Defaults to the default branch"
             },
             "compute": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Create a branch with or without a compute. By default branch is created with a read-write compute. To create a branch without compute use --no-compute",
+              "default": true
             },
             "type": {
-              "type": "string"
+              "type": "string",
+              "description": "Type of compute to add"
             },
             "suspend-timeout": {
-              "type": "number"
+              "type": "number",
+              "description": "Duration of inactivity in seconds after which the compute endpoint is\nautomatically suspended. The value `0` means use the global default.\nThe value `-1` means never suspend. The default value is `300` seconds (5 minutes).\nThe maximum value is `604800` seconds (1 week).",
+              "default": 0
             },
             "cu": {
-              "type": "string"
+              "type": "string",
+              "description": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
             "psql": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Connect to a new branch via psql",
+              "default": false
             },
             "annotation": {
               "type": "string",
-              "hidden": true
+              "hidden": true,
+              "default": "{}"
             },
             "schema-only": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Create a schema-only branch. Requires exactly one read-write compute.",
+              "default": false
             },
             "expires-at": {
-              "type": "string"
+              "type": "string",
+              "description": "Set an expiration date for the branch. Accepts a date string (e.g., 2024-12-31T23:59:59Z)."
             }
           },
           "commands": {}
@@ -455,21 +566,28 @@
       }
     },
     "databases": {
-      "aliases": ["database", "db"],
+      "aliases": [
+        "database",
+        "db"
+      ],
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         },
         "branch": {
-          "type": "string"
+          "type": "string",
+          "description": "Branch ID or name"
         }
       },
       "commands": {
         "delete": {
           "name": "delete",
           "aliases": [],
-          "positionals": ["database"],
+          "positionals": [
+            "database"
+          ],
           "options": {},
           "commands": {}
         },
@@ -480,10 +598,12 @@
           "options": {
             "name": {
               "type": "string",
-              "required": true
+              "required": true,
+              "description": "Database name"
             },
             "owner-name": {
-              "type": "string"
+              "type": "string",
+              "description": "Owner name"
             }
           },
           "commands": {}
@@ -498,21 +618,27 @@
       }
     },
     "roles": {
-      "aliases": ["role"],
+      "aliases": [
+        "role"
+      ],
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         },
         "branch": {
-          "type": "string"
+          "type": "string",
+          "description": "Branch ID or name"
         }
       },
       "commands": {
         "delete": {
           "name": "delete",
           "aliases": [],
-          "positionals": ["role"],
+          "positionals": [
+            "role"
+          ],
           "options": {},
           "commands": {}
         },
@@ -523,10 +649,12 @@
           "options": {
             "name": {
               "type": "string",
-              "required": true
+              "required": true,
+              "description": "Role name"
             },
             "no-login": {
-              "type": "boolean"
+              "type": "boolean",
+              "description": "Create a passwordless role that cannot login"
             }
           },
           "commands": {}
@@ -541,11 +669,14 @@
       }
     },
     "operations": {
-      "aliases": ["operation"],
+      "aliases": [
+        "operation"
+      ],
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         }
       },
       "commands": {
@@ -559,35 +690,52 @@
       }
     },
     "connection-string": {
-      "aliases": ["cs"],
-      "positionals": ["branch"],
+      "aliases": [
+        "cs"
+      ],
+      "positionals": [
+        "branch"
+      ],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         },
         "role-name": {
-          "type": "string"
+          "type": "string",
+          "description": "Role name"
         },
         "database-name": {
-          "type": "string"
+          "type": "string",
+          "description": "Database name"
         },
         "pooled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Use pooled connection",
+          "default": false
         },
         "prisma": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Use connection string for Prisma setup",
+          "default": false
         },
         "endpoint-type": {
-          "type": "string"
+          "type": "string",
+          "description": "Endpoint type"
         },
         "extended": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Show extended information"
         },
         "psql": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Connect to a database via psql using connection string",
+          "default": false
         },
         "ssl": {
-          "type": "string"
+          "type": "string",
+          "description": "SSL mode",
+          "default": "require"
         }
       },
       "commands": {}
@@ -597,10 +745,12 @@
       "positionals": [],
       "options": {
         "project-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Project ID"
         },
         "org-id": {
-          "type": "string"
+          "type": "string",
+          "description": "Organization ID"
         }
       },
       "commands": {}
@@ -611,7 +761,8 @@
       "options": {
         "agent": {
           "type": "string",
-          "alias": "a"
+          "alias": "a",
+          "description": "Agent to configure (cursor, copilot, code)."
         },
         "context-file": {
           "type": "unknown",
