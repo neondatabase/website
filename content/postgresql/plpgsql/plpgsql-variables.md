@@ -6,7 +6,7 @@ page_description: >-
   and how to use variables effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Block Structure

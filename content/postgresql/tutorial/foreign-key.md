@@ -6,7 +6,7 @@ page_description: >-
   foreign keys to tables using foreign key constraints.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Primary Key

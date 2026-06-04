@@ -4,7 +4,7 @@ subtitle: Build an automated content moderation system for your application usin
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-22T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 ---
 
 Content moderation is essential for maintaining healthy online communities and platforms. In this guide, we'll create a content moderation system that uses OpenAI's moderation API to automatically analyze and flag potentially problematic content before it reaches your users.

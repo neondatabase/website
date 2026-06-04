@@ -30,7 +30,7 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-        <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
+        <div className="flex flex-col items-start justify-between gap-5 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
           <div
             className={cn(

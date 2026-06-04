@@ -4,7 +4,7 @@ subtitle: Learn how to automate database operations and processes by connecting 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-26T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 ---
 
 Azure Logic Apps provides a way to build automated workflows that integrate apps, data, services, and systems.
