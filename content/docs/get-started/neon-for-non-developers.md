@@ -5,15 +5,15 @@ summary: >-
   Learn how to create a Postgres database with Neon, no SQL or technical background needed.
   Sign up, get a connection string, and connect your favorite tools in under two minutes.
 enableTableOfContents: true
-updatedOn: '2026-06-03T14:30:14.505Z'
+updatedOn: '2026-06-04T17:34:40.235Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>What a database is and why your app needs one</p>
-<p>How to sign up and create a Neon database in under two minutes</p>
-<p>How to get a connection string for your app or external tools</p>
-<p>How to view and explore your data without writing SQL</p>
+<p>What a database is and why you need one</p>
+<p>How to sign up and create a database in minutes</p>
+<p>How to get your connection string</p>
+<p>How to explore your data without SQL</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
