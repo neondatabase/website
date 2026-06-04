@@ -6,7 +6,7 @@ page_description: >-
   including SMALLINT, INTEGER, and BIGINT for designing tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
 ogImage: /postgresqltutorial/postgresql-integer-300x59.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T16:09:35.498Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REAL Data Type
@@ -81,7 +81,7 @@ Notice that `INT` is the synonym of `INTEGER`.
 
 ### BIGINT
 
-If you want to store whole numbers that are out of range of the `INTEGER` type, you can use the `BIGINT` type.
+If you want to store whole numbers outside the `INTEGER` range, you can use the `BIGINT` type.
 
 The `BIGINT` type requires 8 bytes storage size that can store any number in the range of (\-9,223,372,036,854,775,808,\+9,223,372,036,854,775,807\).
 
