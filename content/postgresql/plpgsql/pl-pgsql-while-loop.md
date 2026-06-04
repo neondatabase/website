@@ -83,4 +83,4 @@ How it works.
 
 ## Summary
 
-- Use the PL/pgSQL `while` loop statement to execute one or more statements as long as long as a specified condition is true.
+- Use the PL/pgSQL `while` loop statement to execute one or more statements as long as a specified condition is true.
