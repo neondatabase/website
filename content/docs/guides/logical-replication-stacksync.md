@@ -6,14 +6,12 @@ summary: >-
   Stacksync to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-11T00:32:14.276Z'
+updatedOn: '2026-06-04T13:36:09.567Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
 
-[Stacksync](https://www.stacksync.com/) is an integration platform designed for real-time, two-way data synchronization. Stacksync extracts your data and loads it into your data destination.
-
-In this guide, you will learn how to define a Neon Postgres database as a data source in Stacksync so that you can replicate data to one or more of Stacksync's supported destinations.
+[Stacksync](https://www.stacksync.com/) connects databases with CRMs, ERPs, and other systems using real-time, two-way sync. In this guide, you will configure Stacksync to replicate data from your Neon Postgres database to a [supported destination](https://www.stacksync.com/connectors).
 
 ## Prerequisites
 
@@ -57,7 +55,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/cli-roles)
 
 ```bash
 neon roles create --name replication_user
@@ -75,7 +73,7 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 5. Select the **Roles & Databases** tab.
 6. Click **Add Role**.
-7. In the role creation dialog, specify a role name.
+7. In the role creation dialog, specify a role name, such as `replication_user`.
 8. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
@@ -116,6 +114,10 @@ Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables 
 
 ### Create a publication
 
+<Admonition type="important">
+Stacksync requires every table you sync to have a single-column, auto-generated primary key (for example, a `serial` integer or a `uuid`). Tables with composite primary keys, no primary key, or a primary key without a default value will not appear in Stacksync. See [Stacksync Postgres connector requirements](https://docs.stacksync.com/two-way-sync/connectors/postgres).
+</Admonition>
+
 Create the Postgres publication. Include all tables you want to replicate as part of the publication:
 
 ```sql
@@ -130,57 +132,54 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 1. On the **All Resources** page, click **Create Resource**.
 1. Under **Jump right in, create a resource**, click **Connections**.
 1. Select **Postgres**.
-1. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** popup. Select the role you created earlier and click **Copy snippet**.
-1. If you have disabled **Allow traffic via the public internet** under **Networking** in Neon's **Settings**, tick the box in Stacksync for **I confirm I have allowlisted these Stacksync IPs on my side**, and copy the IP addresses into your trusted IP addresses in Neon's settings under **Networking**.
+1. Enter your Neon database connection details. Click **Connect** on your **Project Dashboard**, select the replication role you created earlier (not the default `neondb_owner` role), and click **Copy snippet**. Use a direct connection string; the hostname must not include `-pooler`. Logical replication is not compatible with connection poolers.
+
+1. If you have disabled **Allow traffic via the public internet** under **Networking** in Neon's **Settings**, select **I confirm I have allowlisted these Stacksync IPs on my side** in Stacksync, and copy the IP addresses into your trusted IP addresses in Neon's settings under **Networking**.
 1. In Stacksync, click **Next**.
 1. Enter a name for **Connection Name**.
 1. Click **Create**.
 
-   <Admonition type="important">
-   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
-   </Admonition>
+## Create a connection to your destination in Stacksync
 
-## (optional) Create a connection to your destination in Stacksync
+Skip this step if you already have a destination connection configured in Stacksync.
 
 1. Log in to your [Stacksync](https://www.stacksync.com/) account.
 1. On the **All Resources** page, click **Create Resource**.
 1. Under **Jump right in, create a resource**, click **Connections**.
 1. Select the connector for your destination from one of [Stacksync's connectors](https://www.stacksync.com/connectors).
 1. Follow the prompt in the **Configure connection** popup.
-1. If you have disabled **Allow traffic via the public internet** under **Networking** in Neon's **Settings**, tick the box in Stacksync for **I confirm I have allowlisted these Stacksync IPs on my side**, and copy the IP addresses into your trusted IP addresses in Neon's settings under **Networking**.
+1. If you have disabled public internet access in Neon, allowlist the Stacksync IPs as described in the [Create a Postgres connection in Stacksync](#create-a-postgres-connection-in-stacksync) section above.
 1. In Stacksync, click **Next**.
 1. Enter a name for **Connection Name**.
 1. Click **Create**.
-1. On the schema screen of the newly created sync, click on the **Postgres** connection and select **Logical replication** under **Change Data Capture Method**.
-
-  ![Stacksync Logical Replication](/docs/guides/stacksync-logical-replication.png)
 
    <Admonition type="tip">
    There are in-depth connection setup guides on [Stacksync's connector docs](https://docs.stacksync.com/two-way-sync/connectors).
    </Admonition>
 
-## (optional) Create a sync
+## Create a sync
+
+Skip this step if you already have a sync configured.
 
 1. Log in to your [Stacksync](https://www.stacksync.com/) account.
-2. On the **All Resources** page, click **Create Resource**.
-3. Under **Jump right in, create a resource**, click **Syncs**.
-4. Enter a **Sync Name**.
-5. Click **Postgres** and select the saved connection you created in the [Create a Postgres connection in Stacksync step](#create-a-postgres-connection-in-stacksync).
-6. Click one of the apps you have created a connection for in the [(optional) Create a destination step](#optional-create-a-connection-to-your-destination-in-stacksync).
-7. Click **Link Tables**.
-8. Select a table you would like to sync under **Postgres**.
-9. Select a table you would like to sync the data to under your destination.
-10. Select if you would like the sync to be [one-way or two-way](https://www.stacksync.com/data-sync/two-way-vs-one-way-sync).
-11. Repeat from step 8 for any additional tables you would like to link.
-12. Click **Map Columns**.
-13. Click **Show columns**.
-14. Click **Sync more columns** if there are more fields you want to sync.
-15. Remove any fields you do not want to sync.
-16. Set the direction you want to sync each field. If you have selected two-way sync, either set one-way sync for read-only fields or remove them.
-17. Repeat from step 13 to configure the columns for other tables if desired.
-18. Click **Create**.
-19. On the next page, turn on the sync by clicking the toggle in the top right.
-20. (optional) Update the **Data sync frequency** under **Settings**.
+1. On the **All Resources** page, click **Create Resource**.
+1. Under **Jump right in, create a resource**, click **Syncs**.
+1. Enter a **Sync Name**.
+1. Select **Postgres** and choose the saved connection you created in the [Create a Postgres connection in Stacksync](#create-a-postgres-connection-in-stacksync) section.
+1. On the schema screen, click the **Postgres** connection and select **Logical replication** under **Change Data Capture Method**.
+
+   ![Stacksync Logical Replication](/docs/guides/stacksync-logical-replication.png)
+
+1. Click one of the apps you have created a connection for in the [Create a connection to your destination in Stacksync](#create-a-connection-to-your-destination-in-stacksync) section.
+1. Click **Link Tables**.
+1. Select a table you would like to sync under **Postgres**.
+1. Select a table you would like to sync the data to under your destination.
+1. Select if you would like the sync to be [one-way or two-way](https://www.stacksync.com/data-sync/two-way-vs-one-way-sync).
+1. Repeat from the previous step for any additional tables you would like to link.
+1. Click **Map Columns** to configure which columns to sync and the sync direction for each. Stacksync auto-maps columns by default; select or deselect columns as needed. See [Stacksync's two-way sync docs](https://docs.stacksync.com/two-way-sync/features/two-way-sync) for details on field selection and sync direction.
+1. Click **Create**.
+1. On the next page, turn on the sync by clicking the toggle in the top right.
+1. Optionally, update the **Data sync frequency** under **Settings**.
 
 ## References
 
