@@ -13,8 +13,8 @@ previousLink:
   title: PostgreSQL BYTEA Data Type
   slug: postgresql-tutorial/postgresql-bytea-data-type
 nextLink:
-  title: How to Compare Two Tables in PostgreSQL
-  slug: postgresql-tutorial/compare-two-tables-in-postgresql
+  title: PostgreSQL CASE
+  slug: postgresql-tutorial/postgresql-case
 ---
 
 <Admonition type="info" id="CTA">
