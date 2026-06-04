@@ -6,7 +6,7 @@ page_description: >-
   server from Python using the psycopg2 package.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/connect/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Python
@@ -127,7 +127,7 @@ The `config.py` module uses the built\-in `configparser` module to read data fro
 
 By using the `database.ini`, you can change the PostgreSQL connection parameters when moving the code to different environments such as testing or production.
 
-Notice that if you git source control, you need to add the `database.ini` to the `.gitignore` file to avoid committing sensitive information to a public repository like GitHub:
+Notice that if you use git source control, you need to add the `database.ini` to the `.gitignore` file to avoid committing sensitive information to a public repository like GitHub:
 
 ```
 database.ini

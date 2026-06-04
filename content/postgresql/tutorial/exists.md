@@ -6,7 +6,7 @@ page_description: >-
   existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALL Operator
@@ -92,7 +92,7 @@ We will use the following `customer` and `payment` tables in the [sample databas
 
 ### 1\) Basic EXISTS operator example
 
-The following example uses the `EXISTS` operator to check if the payment value is zero exists in the `payment` table:
+The following example uses the `EXISTS` operator to check if a payment value of zero exists in the `payment` table:
 
 ```sql
 SELECT

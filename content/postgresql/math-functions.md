@@ -2,11 +2,11 @@
 title: PostgreSQL Math Functions
 page_title: PostgreSQL Math Functions
 page_description: >-
-  Provide the most commonly used PostgreSQL Match functions that help you
+  Provide the most commonly used PostgreSQL Math functions that help you
   perform various math operations quickly and effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/math-functions.png'
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TO_NUMBER() Function

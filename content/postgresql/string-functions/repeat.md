@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-repeat/
 ogImage: 'https://www.mysqltutorial.org//postgresqltutorial/products.svg'
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_REPLACE() Function
@@ -50,7 +50,7 @@ Let’s explore some examples of using the `REPEAT()` function.
 
 ### 1\) Basic REPEAT() function example
 
-The following example uses the `REPEAT()` function to repeat the letter “A” there times:
+The following example uses the `REPEAT()` function to repeat the letter “A” three times:
 
 ```sql
 SELECT REPEAT('A',3);

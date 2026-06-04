@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Password of a PostgreSQL User
@@ -55,7 +55,7 @@ The name of the tablespace should not start with `pg_` since these names are res
 
 By default, the user who executes the `CREATE TABLESPACE` become the owner of the tablespace. To assign ownership to another user, you specify it after the `OWNER` keyword.
 
-The `directory_path` is the absolute path to an empty directory used for the tablespace. PostgreSQL system users must have onwership of this directory to read from and write data into it.
+The `directory_path` is the absolute path to an empty directory used for the tablespace. PostgreSQL system users must have ownership of this directory to read from and write data into it.
 
 After creating a new table space, you can specify it in the [`CREATE DATABASE`](postgresql-create-database), [`CREATE TABLE`](../postgresql-tutorial/postgresql-create-table) and [`CREATE INDEX`](../postgresql-indexes/postgresql-create-index) statements to store data files of the objects in the tablespace.
 

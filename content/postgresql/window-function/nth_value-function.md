@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTILE Function
@@ -130,4 +130,4 @@ In this example,
 - The frame clause defined the whole partition as a frame.
 - And the `NTH_VALUE()` function returns the product name of the 2nd row of each product group.
 
-Now, you should how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.
+Now, you should know how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.

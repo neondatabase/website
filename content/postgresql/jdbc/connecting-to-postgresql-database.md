@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JDBC
@@ -59,7 +59,7 @@ You can download the latest version of the driver on the [jdbc.postgresql.org do
 
 ## Creating a new project
 
-First, launch the IntellJ IDE.
+First, launch the IntelliJ IDE.
 
 Next, create a new project called `sales`.
 

@@ -6,7 +6,7 @@ page_description: >-
   install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: ''
@@ -29,7 +29,7 @@ This section helps you get started with PostgreSQL by showing you how to install
 
 ## PostgreSQL on Windows
 
-If you’re using windows, you can follow these tutorials to install PostgreSQL, connect to it, and load the sample database into the PostgreSQL database server:
+If you’re using Windows, you can follow these tutorials to install PostgreSQL, connect to it, and load the sample database into the PostgreSQL database server:
 
 - [Install PostgreSQL on Windows](postgresql-getting-started/install-postgresql 'Install PostgreSQL') – walk you through the steps of how to install PostgreSQL on Windows.
 - [Connect to PostgreSQL database server](postgresql-getting-started/connect-to-postgresql-database 'Connect to PostgreSQL Database') – show you how to connect to the PostgreSQL using psql tool and pgAdmin 4 GUI tool.

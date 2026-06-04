@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an 
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_HOURS() Function
@@ -82,7 +82,7 @@ justify_interval
 
 ### 2\) Using the JUSTIFY_INTERVAL() function with negative intervals
 
-The following example uses the `JUSTIFY_INTERVAL()` function to convert a negative interval into hours days and hours:
+The following example uses the `JUSTIFY_INTERVAL()` function to convert a negative interval into days and hours:
 
 ```sql
 SELECT JUSTIFY_INTERVAL('-2 days 5 hours');

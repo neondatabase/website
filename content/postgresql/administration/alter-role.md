@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CURRENT_USER
@@ -27,7 +27,7 @@ The ALTER ROLE statement works the same way across every PostgreSQL deployment, 
 
 To change attributes of a [role](postgresql-roles), you use the following form of `ALTER ROLE` statement.
 
-Here’s the basic syntax of the
+Here’s the basic syntax of the `ALTER ROLE` statement:
 
 ```sql
 ALTER ROLE role_name [WITH] option;

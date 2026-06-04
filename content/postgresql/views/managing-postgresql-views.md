@@ -1,12 +1,12 @@
 ---
 title: PostgreSQL CREATE VIEW
-page_title: PosgreSQL CREATE VIEW
+page_title: PostgreSQL CREATE VIEW
 page_description: >-
   This tutorial shows you how to use the CREATE VIEW statement to create a new
   view in your database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/'
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Views

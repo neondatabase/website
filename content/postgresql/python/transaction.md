@@ -6,7 +6,7 @@ page_description: >-
   commit() and rollback() methods of the connection object.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/transaction/'
 ogImage: /postgresqltutorial/parts_vendors_tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Querying Data'
@@ -30,7 +30,7 @@ In the `psycopg2` package, the `connection` class is responsible for managing tr
 
 When you send the first SQL statement to the PostgreSQL database using a `cursor` object, `psycopg2` initiates a new [transaction](../postgresql-tutorial/postgresql-transaction).
 
-Subsequentially, all the following statements are executed within the same transaction. If any statement encounters an error, `psycopg2` will abort the entire transaction.
+Subsequently, all the following statements are executed within the same transaction. If any statement encounters an error, `psycopg2` will abort the entire transaction.
 
 The `connection` class has two methods for concluding a transaction:
 

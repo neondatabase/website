@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/
 ogImage: /postgresqltutorial/rental-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AT TIME ZONE Operator
@@ -41,7 +41,7 @@ In this syntax:
 
 ### field
 
-`field` specifies the to which precision to truncate the `source`.
+`field` specifies the precision to which to truncate the `source`.
 
 Here are the valid values for the `field`:
 

@@ -6,7 +6,7 @@ page_description: >-
   multiple grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/'
 ogImage: /postgresqltutorial/PostgreSQL-ROLLUP-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUBE
@@ -171,7 +171,7 @@ ORDER BY
 See the following `rental` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
 ![Rental Table](/postgresqltutorial/rental.png)
-The following statement finds the number of rental per day, month, and year by using the `ROLLUP`:
+The following statement finds the number of rentals per day, month, and year by using the `ROLLUP`:
 
 ```sql
 SELECT

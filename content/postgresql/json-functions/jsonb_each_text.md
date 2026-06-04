@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each_text/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_each() Function
@@ -39,7 +39,7 @@ In this syntax:
 
 The function returns a set of records where each record consists of two fields key and value, both have the type `text`.
 
-If the `json_object` is null, the function returns an empty set. in case the `json_object` is not a JSON object, the function will issue an error.
+If the `json_object` is null, the function returns an empty set. In case the `json_object` is not a JSON object, the function will issue an error.
 
 ## PostgreSQL jsonb_each_text() function examples
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSTEAD OF Triggers
@@ -25,7 +25,7 @@ The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature, so everything he
 
 ## Introduction to the PostgreSQL BEFORE TRUNCATE trigger
 
-A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
+A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all rows from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
 
 PostgreSQL allows you to [create a trigger](creating-first-trigger-postgresql) that fires before a `TRUNCATE` event occurs.
 

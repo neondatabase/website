@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rename-table/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER TABLE
@@ -104,7 +104,7 @@ Indexes:
 
 Notice that the name of the table changed but the [sequence](postgresql-sequences) (`vendors_id_seq`) remains intact.
 
-### 1\) Renaming a table that has dependent objects
+### 2\) Renaming a table that has dependent objects
 
 First, create new tables called `customers` and `groups`:
 

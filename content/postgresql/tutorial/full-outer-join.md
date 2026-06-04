@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
 ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Self-Join
@@ -25,7 +25,7 @@ FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deploy
 
 ## Introduction to the PostgreSQL FULL OUTER JOIN clause
 
-The `FULL OUTER JOIN` combine data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
+The `FULL OUTER JOIN` combines data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
 
 In other words, the `FULL OUTER JOIN` combines the results of both the [left join](postgresql-left-join) and the [right join](postgresql-right-join).
 

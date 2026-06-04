@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NOW() Function
@@ -43,7 +43,7 @@ If you omit the `precision` argument, it defaults to 6\.
 
 The `LOCALTIME` function returns a [`TIME`](../postgresql-tutorial/postgresql-time) value that represents the time at which the current transaction starts.
 
-Note that the `LOCATIME` function returns a `TIME` without time zone whereas the [`CURRENT_TIME`](postgresql-current_time) function returns a `TIME` with the timezone.
+Note that the `LOCALTIME` function returns a `TIME` without time zone whereas the [`CURRENT_TIME`](postgresql-current_time) function returns a `TIME` with the timezone.
 
 ## PostgreSQL LOCALTIME function examples
 

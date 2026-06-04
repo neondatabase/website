@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DENSE_RANK Function
@@ -55,7 +55,7 @@ The `expression` can be an expression, column, or subquery evaluated against the
 
 The `PARTITION BY` clause divides rows in a result set into partitions to which the `FIRST_VALUE()` function is applied.
 
-When you the `PARTITION BY` clause, the `FIRST_VALUE()` function treats the whole result set as a single partition.
+When you omit the `PARTITION BY` clause, the `FIRST_VALUE()` function treats the whole result set as a single partition.
 
 ### ORDER BY clause
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-pg_sleep/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TIMEOFDAY() Function
@@ -90,7 +90,7 @@ pg_sleep |
 now      | 2024-03-21 02:26:37.710939-07
 ```
 
-The output indicates that the result of the `NOW()` function does not change within the same statement even though we use pause the execution between the calls of the `NOW()` functions for 3 seconds.
+The output indicates that the result of the `NOW()` function does not change within the same statement even though we pause the execution between the calls of the `NOW()` functions for 3 seconds.
 
 ### 4\) Using the PG_SLEEP() function with CLOCK_TIMESTAMP() function
 

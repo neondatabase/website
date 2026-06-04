@@ -3,10 +3,10 @@ title: PL/pgSQL Record Types
 page_title: PL/pgSQL Record Types Explained Clearly By Examples
 page_description: >-
   You will learn about the PL/pgSQL record types that allow you to define
-  variables that can hold a sinle row of a result set.
+  variables that can hold a single row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Row Types

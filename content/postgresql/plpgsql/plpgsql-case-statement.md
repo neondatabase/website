@@ -6,7 +6,7 @@ page_description: >-
   executes a command based on a certain condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
 ogImage: /postgresqltutorial/plpgsql-simple-case-statement.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL IF Statement
@@ -22,7 +22,7 @@ The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so 
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `case` that executes statements based on a certain condition.
 
-## Introduction to PL/pgSQL CASE Statment
+## Introduction to PL/pgSQL CASE Statement
 
 Besides the [if statement](plpgsql-if-else-statements), PostgreSQL provides the `case` statements that allow you to execute a block of code based on conditions.
 

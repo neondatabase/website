@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAX Function
@@ -99,7 +99,7 @@ Output:
 
 How it works.
 
-- First, the [subquery](../postgresql-tutorial/postgresql-subquery) to select the lowest rental rate.
+- First, the [subquery](../postgresql-tutorial/postgresql-subquery) selects the lowest rental rate.
 - Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
 
 ### 3\) Using PostgreSQL MIN() function with GROUP BY clause example

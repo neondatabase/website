@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/
 ogImage: /postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Sample Database
@@ -91,7 +91,7 @@ Step 10\. Click the **Finish** button to complete the PostgreSQL installation.
 
 ## 3\) Adding bin directory to the PATH environment variable
 
-By adding the bin directory of the PostgreSQL to the `PATH` environment variable, you enable the execution of common PostgreSQL tools, such as `plsql` and `pg_restore`, from any directory without the need to navigate the bin directory first.
+By adding the bin directory of the PostgreSQL to the `PATH` environment variable, you enable the execution of common PostgreSQL tools, such as `psql` and `pg_restore`, from any directory without the need to navigate the bin directory first.
 
 First, find the path of the `bin` directory of the PostgreSQL installation directory. Typically, it is set to the following:
 
@@ -108,7 +108,7 @@ C:\Program Files\PostgreSQL\16\bin
 Second, open the environment variables:
 
 - Press `Win + R` to open the Run dialog
-- Type `sysdm.cpl` an press Enter. The System Properties dialog will display.
+- Type `sysdm.cpl` and press Enter. The System Properties dialog will display.
 - Select the Advanced tab and click the `Environment Variables...` button.
 
 You’ll see two sections in the `Environment Variables` window:

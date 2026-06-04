@@ -7,7 +7,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BOOL_OR() Function
@@ -25,7 +25,7 @@ The following page shows the most commonly used PostgreSQL date functions that a
 
 ## Section 1\. Getting the current date and time
 
-This section shows you various functions for getting the current date, current date and time, current timestamp, without or without timezone.
+This section shows you various functions for getting the current date, current date and time, current timestamp, with or without timezone.
 
 - [CURRENT_DATE](postgresql-date-functions/postgresql-current_date) – Return the current date.
 - [CURRENT_TIME](postgresql-date-functions/postgresql-current_time) – Return the current time without date parts.

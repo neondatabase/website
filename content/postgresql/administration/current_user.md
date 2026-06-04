@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SET ROLE Statement
@@ -92,7 +92,7 @@ It returns `bob` instead:
 (1 row)
 ```
 
-Six, use the `SESSION_USER` function to retrieve the original user who connected to the session:
+Sixth, use the `SESSION_USER` function to retrieve the original user who connected to the session:
 
 ```sql
 SELECT SESSION_USER;

@@ -2,11 +2,11 @@
 title: PostgreSQL EXCEPT
 page_title: PostgreSQL EXCEPT
 page_description: >-
-  Show you how to the PostgreSQL EXCEPT operator to combine the result sets of
+  Show you how to use the PostgreSQL EXCEPT operator to combine the result sets of
   two queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-except/'
 ogImage: /postgresqltutorial/PostgreSQL-EXCEPT-300x202.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INTERSECT Operator

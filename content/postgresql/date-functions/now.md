@@ -6,7 +6,7 @@ page_description: >-
   current date and time with the timezone.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL STATEMENT_TIMESTAMP() Function
@@ -208,7 +208,7 @@ COMMIT
 
 In this example, we called the `NOW()` function within a transaction and its return values do not change through the transaction.
 
-Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified of seconds.
+Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified number of seconds.
 
 If you want to get the current date and time that does advance during the transaction, you can use the `TIMEOFDAY()` function. Consider the following example:
 

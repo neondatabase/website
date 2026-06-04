@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Backup
@@ -97,7 +97,7 @@ Sixth, exit the psql:
 exit
 ```
 
-Seven, restore the dvdrental database from the backup file using the pg_restore tool:
+Seventh, restore the dvdrental database from the backup file using the pg_restore tool:
 
 ```bash
 pg_restore -U postgres -d dvdrental D:/backup/dvdrental.tar

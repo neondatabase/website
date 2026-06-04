@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Role Membership
@@ -46,7 +46,7 @@ We’ll take an example of using the `SET ROLE` statement.
 First, [connect](../postgresql-getting-started/connect-to-postgresql-database) to the `dvdrental` database using `psql`:
 
 ```bash
-psql -U postres -d dvdrental
+psql -U postgres -d dvdrental
 ```
 
 Second, [create a group role](postgresql-role-membership) called `marketing`:
@@ -90,7 +90,7 @@ Output:
 (1 row)
 ```
 
-Eight, switch the current role to `marketing`:
+Eighth, switch the current role to `marketing`:
 
 ```sql
 SET ROLE marketing;

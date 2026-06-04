@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table/
 ogImage: /postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNCATE TABLE
@@ -182,5 +182,5 @@ DROP TABLE customers;
 ## Summary
 
 - A temporary table is a short\-lived table that exists during a database session or a transaction.
-- Use `the CREATE TEMP TABLE` statement to create a temporary table.
+- Use the `CREATE TEMP TABLE` statement to create a temporary table.
 - Use the `DROP TABLE` statement to drop a temporary table.
