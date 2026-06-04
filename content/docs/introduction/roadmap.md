@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-03T10:32:16.640Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -90,7 +90,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Organization spend limits**: Set a monthly spending limit for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that limit. [Learn more](/docs/introduction/spending-limit).
 - **Neon plugin for OpenAI Codex**: The Neon Postgres plugin is now available in the OpenAI Codex plugin directory, adding the Neon MCP Server and Agent Skills to Codex so you can manage projects, branches, and databases from chat. [Learn more](/docs/ai/ai-codex-plugin)
 - **Neon Postgres in Stripe Projects**: Neon is now part of Stripe Projects, so you can provision a Neon database as part of a Stripe CLI app setup alongside other services. [Read the announcement](/blog/neon-works-with-stripe-projects-for-agentic-provisioning)
-- **Automatic cache prewarming**: Neon now prewarns your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](https://neon.com/blog/prewarming)
+- **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](https://neon.com/blog/prewarming)
 - **Unlimited org members on the Free plan**: You can now add unlimited members to each organization on the Free plan. The members API supports pagination and sorting, and the Console shows a 2FA indicator per member. [Learn more](/docs/manage/orgs-manage).
 - **Neon Auth organization settings and webhooks**: Configure Neon Auth Organizations from the Console (**Auth** > **Plugins**, per branch) and use webhooks to receive HTTP callbacks for auth events (OTP, magic link, user creation). [Learn more](/docs/auth/guides/plugins/organization) and [Webhooks](/docs/auth/guides/webhooks).
 - **Network transfer guide and egress optimizer agent skill**: A new guide explains how to monitor and reduce network transfer costs. An agent skill helps your AI assistant diagnose and fix query patterns that cause excessive egress. [Learn more](/docs/introduction/network-transfer).

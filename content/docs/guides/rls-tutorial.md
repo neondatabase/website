@@ -6,7 +6,7 @@ summary: >-
   using Neon, demonstrating how to secure user data by enforcing access control
   at the database level with JWT authentication.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -308,7 +308,7 @@ pgPolicy('shared_policy', {
 
 The `shared_policy` enables any authenticated user to read notes marked as shared (`shared = true`), allowing others to view shared notes even if they are not the owner. This policy applies similarly to paragraphs, checking if the linked note is shared.
 
-Although RLS permits read access to shared notes for all authenticated users, the shared notes are not directly visible in other users' UI. Instead, sharing occurs via the "Share" button, which copies the note's URL to the clipboard. This URL includes the note's ID, enabling authenticated users to access the shared note and its paragraphs with-in in a read-only mode.
+Although RLS permits read access to shared notes for all authenticated users, the shared notes are not directly visible in other users' UI. Instead, sharing occurs via the "Share" button, which copies the note's URL to the clipboard. This URL includes the note's ID, enabling authenticated users to access the shared note and its paragraphs within a read-only mode.
 
 ### RLS policies table
 

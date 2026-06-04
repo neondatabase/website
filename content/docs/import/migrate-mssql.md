@@ -7,7 +7,7 @@ summary: >-
   pgloader, detailing prerequisites, setup steps, and configuration requirements
   for a successful data transfer.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.209Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -57,7 +57,7 @@ If you are using Azure SQL, you need to allow inbound traffic from your local ma
 
 3. Click on the `Add your Client IPv4 address` option, which will automatically create a new rule with the IP address of your local machine. If you are running `pgloader` elsewhere, replace both the `Start IP` and `End IP` fields with the IP address of that machine.
 
-4. CLick `Save` at the bottom to make sure all changes are saved.
+4. Click `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

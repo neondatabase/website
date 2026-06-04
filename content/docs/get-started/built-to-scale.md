@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-03-13T18:10:11.934Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -28,7 +28,7 @@ When you’re looking for a free plan to run Postgres, what you want is simplici
 
 ## Stage 2: Startups
 
-**Build an iterate fast**
+**Build and iterate fast**
 
 As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a frictionless building experience without compromising on performance and reliability.
 
@@ -70,6 +70,6 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to to hook full-stack applications out of the box
+- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to hook full-stack applications out of the box
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance. " buttonText="Check it out" buttonUrl="/programs/agents" />

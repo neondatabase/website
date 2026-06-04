@@ -6,7 +6,7 @@ summary: >-
   Lambda function using Node.js, including creating the Lambda function and
   deploying it with the Serverless Framework.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.921Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -303,4 +303,4 @@ You can find your `api-id` on the API Gateway dashboard:
 
 ## Conclusion
 
-In this guide, you have learned how to set up a Postgres database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform a basic database read operations.
+In this guide, you have learned how to set up a Postgres database using Neon and connect to it from an AWS Lambda function using Node.js as the runtime environment. You have also learned how to use Serverless Framework to create and deploy the Lambda function, and how to use the `pg` library to perform basic database read operations.

@@ -7,7 +7,7 @@ summary: >-
   including monitoring the Local File Cache hit ratio through the
   `neon_stat_file_cache` view.
 enableTableOfContents: true
-updatedOn: '2026-04-03T10:13:16.000Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -43,7 +43,7 @@ The `neon_stat_file_cache` view includes the following metrics:
   file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
   ```
 
-  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. If you find that your cache hit ration is quite low, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
+  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. If you find that your cache hit ratio is quite low, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 ### Using the neon_stat_file_cache view
 

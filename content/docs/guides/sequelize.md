@@ -7,7 +7,7 @@ summary: >-
   including project initialization, database connection string retrieval, and
   running migrations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.051Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.
@@ -199,7 +199,7 @@ Run the following command to apply the migrations and create the tables in the d
 npx sequelize db:migrate
 ```
 
-If `Sequlize` successfully connects to the database and runs the migrations, you should see a success message in the terminal.
+If `Sequelize` successfully connects to the database and runs the migrations, you should see a success message in the terminal.
 
 ### Add sample data to the database
 

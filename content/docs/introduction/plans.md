@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-29T00:27:59.360Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -181,7 +181,7 @@ average compute size × hours running = CU-hours
 
 #### Compute with scale to zero
 
-Scale to zero suspends computes after inactivity to compute usage and cost.
+Scale to zero suspends computes after inactivity to reduce compute usage and cost.
 
 ### Autoscaling
 
