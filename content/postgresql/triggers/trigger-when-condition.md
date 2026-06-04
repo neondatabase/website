@@ -30,8 +30,8 @@ Sometimes, you want the trigger to be activated only when a specific condition i
 ```sql
 CREATE TRIGGER trigger_name
 ON table_name
-WHEN condition
-EXECUTE FUNCTION function_name(arguments);
+WHEN (boolean_expression)
+EXECUTE FUNCTION function_name('optional', 'arguments');
 ```
 
 In this syntax, the `condition` is a boolean expression. If the `condition` is true, the trigger is fired; otherwise, the trigger will not be activated.
@@ -120,7 +120,7 @@ The `AFTER INSERT` trigger fires and insert rows into the `customer_stats` table
 Sixth, change the order statuses of customer id 1 and 2 to `completed`:
 
 ```sql
-UPDATE order
+UPDATE orders
 SET status = 'completed'
 WHERE customer_id IN (1,2);
 ```
