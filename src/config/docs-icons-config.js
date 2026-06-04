@@ -456,6 +456,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/sqlalchemy.svg',
     darkIconPath: '/images/technology-logos/sqlalchemy-dark.svg',
   },
+  stacksync: {
+    name: 'stacksync',
+    lightIconPath: '/images/technology-logos/stacksync.svg',
+    darkIconPath: null,
+  },
   stepzen: {
     name: 'stepzen',
     lightIconPath: '/images/technology-logos/stepzen.svg',

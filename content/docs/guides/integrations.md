@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-05-09T08:19:13.021Z'
 ---
 
 ## Authentication
@@ -155,6 +155,8 @@ updatedOn: '2026-05-03T13:21:51.000Z'
 <a href="/docs/guides/sequin" title="Sequin" description="Stream changes and rows from your database to anywhere with Sequin" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
+
+<a href="/docs/guides/logical-replication-stacksync" title="Stacksync" description="Replicate data from Neon with Stacksync" icon="stacksync"></a>
 
 </TechCards>
 
