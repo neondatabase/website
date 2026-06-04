@@ -3,12 +3,16 @@ title: 'PostgreSQL 19 New Features'
 page_title: "PostgreSQL 19 New Features: What's New and Why It Matters"
 page_description: 'Explore PostgreSQL 19 new features including SQL/PGQ property graph queries, ON CONFLICT DO SELECT, temporal data operations, pg_plan_advice, REPACK, parallel autovacuum, and more.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 nextLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'
   slug: 'postgresql-19/sql-pgq-graph-queries'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can test the features in this guide for yourself ahead of the final release expected later in 2026. Beta 1 includes SQL/PGQ property graph queries, `ON CONFLICT DO SELECT`, the new `REPACK` command, parallel autovacuum, and native JSON output for `COPY TO`.
+</Admonition>
 
 **Summary**: PostgreSQL 19 is a landmark release that brings SQL/PGQ property graph queries, atomic get-or-create with `ON CONFLICT DO SELECT`, temporal data operations, query plan hints, online table repacking, parallel autovacuum, native JSON export, and logical replication improvements. This overview covers the highlights with links to detailed guides.
 
