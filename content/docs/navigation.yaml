@@ -22,6 +22,8 @@
           slug: get-started/full-backend-quickstart
         - title: Tour the Neon Console
           slug: get-started/signing-up
+        - title: Neon for non-developers
+          slug: get-started/neon-for-non-developers
 
     - section: Migrate to Neon
       icon: import
@@ -264,6 +266,8 @@
           slug: connect/choose-connection
         - title: Connect from any app
           slug: connect/connect-from-any-app
+        - title: No-code integrations
+          slug: get-started/no-code-tools
         - title: Neon serverless driver
           slug: serverless/serverless-driver
         - title: Neon SQL Editor

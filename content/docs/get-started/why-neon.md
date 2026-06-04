@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-04-18T11:47:20.000Z'
+updatedOn: '2026-05-28T16:49:41.444Z'
 ---
 
 ## Our mission
@@ -102,6 +102,24 @@ Full-stack codegen platforms need to spin up thousands of independent applicatio
 
 <Admonition type="tip" title="Join the Agent Program">
   Building a full-stack agent that needs databases? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, and features.
+</Admonition>
+
+### Non-developers: From idea to product, no code required
+
+Non-developers want to build apps without wrestling with infrastructure. They need a database that works out of the box, connects to their no-code tools, and lets them manage data in a spreadsheet-like interface.
+
+**Why they build on Neon**
+
+- Sign up in seconds with email, GitHub, or Google, no credit card required
+- Create a Postgres database in a few clicks, no setup or configuration needed
+- Get a connection string to paste directly into Zapier, n8n, Directus, Metabase, or other tools
+- Query data in plain English with the AI Assistant in the SQL Editor
+- View and edit data through a spreadsheet-like Tables page, no SQL needed
+- Scale-to-zero means you pay nothing when your database is idle
+- Usage-based pricing with no upfront commitments
+
+<Admonition type="tip" title="Get started">
+  Explore the [Neon for non-developers guide](/docs/get-started/neon-for-non-developers) for a step-by-step walkthrough, and see the [no-code tools overview](/docs/get-started/no-code-tools) for integration options.
 </Admonition>
 
 ## The architecture that makes it possible: how Neon works
