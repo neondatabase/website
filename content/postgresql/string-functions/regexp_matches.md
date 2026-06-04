@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-regexp_matches/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REGEXP_REPLACE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The REGEXP_MATCHES() function works the same way in any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The REGEXP_MATCHES() function works the same way in any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REGEXP_MATCHES()` function to extract substrings from a string based on a regular expression.

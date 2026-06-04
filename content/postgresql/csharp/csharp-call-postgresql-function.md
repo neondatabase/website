@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Transaction'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres, so you can apply these ADO.NET patterns wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres, so you can apply these ADO.NET patterns wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn to call a PostgreSQL function from a C\# program using ADO.NET

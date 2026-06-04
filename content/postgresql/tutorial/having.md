@@ -6,7 +6,7 @@ page_description: >-
   filter groups of rows based on a specified condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having/'
 ogImage: /postgresqltutorial/postgresql-having.svg
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUP BY
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The HAVING clause works the same across every PostgreSQL deployment, so everything you learn here carries over no matter where you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+The HAVING clause works the same across every PostgreSQL deployment, so everything you learn here carries over no matter where you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL HAVING** clause to specify a search condition for a group or an aggregate.

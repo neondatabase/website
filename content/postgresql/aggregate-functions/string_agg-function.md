@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-string_agg-function/
 ogImage: /postgresqltutorial/PostgreSQL-STRING_AGG-function-email-list-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BOOL_AND() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The STRING_AGG() function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and deep Lakehouse integration you need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+The STRING_AGG() function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and deep Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `STRING_AGG()` function to concatenate strings and place a separator between them.

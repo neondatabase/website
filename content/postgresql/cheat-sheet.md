@@ -7,7 +7,7 @@ page_description: >-
   effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-cheat-sheet/'
 ogImage: /postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: Getting Started with PostgreSQL
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The commands and statements on this PostgreSQL cheat sheet work against any Postgres database, so you can use them wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The commands and statements on this PostgreSQL cheat sheet work against any Postgres database, so you can use them wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![PostgreSQL Cheat Sheet](/postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png?alignright)The **PostgreSQL cheat sheet** provides you with the common PostgreSQL commands and statements that enable you to work with PostgreSQL quickly and effectively.

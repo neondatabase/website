@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_record/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_to_record() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_populate_record()` function works the same in any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, a managed service, or in production. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data stay in sync. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform that gives you instant branching, autoscaling, and a generous free tier.
+The `jsonb_populate_record()` function works the same in any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, a managed service, or in production. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data stay in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_record()` function to populate the fields of a record type from a JSON object.

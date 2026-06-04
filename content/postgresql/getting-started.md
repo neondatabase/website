@@ -6,7 +6,7 @@ page_description: >-
   install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: ''
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.

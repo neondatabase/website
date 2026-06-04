@@ -6,7 +6,7 @@ summary: >-
   observability platforms, detailing available metrics, their labels, and
   integration specifics with tools like Datadog and Grafana Cloud.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -99,7 +99,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, billed on paid plans for usage over 100 GB
+- Additional network egress for log transmission, billed on paid plans for usage over 500 GB
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">

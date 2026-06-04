@@ -6,7 +6,7 @@ summary: >-
   metrics and Postgres logs to monitor database performance and resource
   utilization directly within Datadog's observability platform.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.945Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 ---
 
 <InfoBlock>
@@ -687,7 +687,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 100 GB on paid plans
+- Additional network egress for log transmission, which is billed after 500 GB on paid plans
 - Associated costs based on log volume in Datadog
 
 ## Feedback and future improvements

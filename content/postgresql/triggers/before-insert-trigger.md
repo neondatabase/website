@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-insert-trigger/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER TRIGGER Statement
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-BEFORE INSERT triggers work the same in any PostgreSQL database, so what you learn here applies wherever you run Postgres. If you're an enterprise looking for a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+BEFORE INSERT triggers work the same in any PostgreSQL database, so what you learn here applies wherever you run Postgres. If you're an enterprise looking for a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL `BEFORE INSERT` trigger associated with a table.

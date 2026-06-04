@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_object_keys() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-JSON path expressions and the jsonb_path_query function work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to a production Postgres with instant branching, autoscaling, and a generous free tier.
+JSON path expressions and the jsonb_path_query function work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL JSON path and how to use it to locate an element within a JSON document.

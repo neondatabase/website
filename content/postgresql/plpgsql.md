@@ -6,7 +6,7 @@ page_description: >-
   stored procedures in PostgreSQL using PL/pgSQL programming language.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL generate_series() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL is a core part of PostgreSQL, so everything you learn here about functions, procedures, control structures, and triggers works on any Postgres deployment. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+PL/pgSQL is a core part of PostgreSQL, so everything you learn here about functions, procedures, control structures, and triggers works on any Postgres deployment. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Stored-Procedure.png?alignright)

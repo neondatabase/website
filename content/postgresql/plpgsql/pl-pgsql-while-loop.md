@@ -6,7 +6,7 @@ page_description: >-
   to execute a block of code as long as a condition is true.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-while-loop/'
 ogImage: /postgresqltutorial/plpgsql-WHILE-loop.png
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Loop Statements
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The PL/pgSQL while loop works the same in any PostgreSQL environment, so everything here applies whether you're running Postgres on your laptop, on a self-managed server, or on a managed service. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed Postgres fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The PL/pgSQL while loop works the same in any PostgreSQL environment, so everything here applies whether you're running Postgres on your laptop, on a self-managed server, or on a managed service. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed Postgres fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PL/pgSQL `while` loop statement to execute statements as long as a condition is true.

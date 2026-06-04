@@ -4,7 +4,7 @@ subtitle: Learn how to build a secure authentication system using Go, JWT tokens
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2026-02-03T11:18:45.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 ---
 
 Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Neon Postgres.
@@ -1296,7 +1296,7 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 
 In this guide, you built a secure authentication system using Go, JWT, and Neon Postgres. The system includes secure password hashing, token-based authentication, refresh token support, middleware-protected routes, and basic rate limiting to prevent brute-force attacks. Security headers were also added to protect against common web vulnerabilities.
 
-By using Neon Postgres as the database, you gain the scalability and performance of a serverless Postgres platform, without sacrificing the reliability and flexibility developers expect from PostgreSQL. It's an ideal foundation for authentication systems that need to scale securely and efficiently.
+By building on Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, you gain the scalability and performance you need without sacrificing the reliability and flexibility developers expect from PostgreSQL. It's an ideal foundation for authentication systems that need to scale securely and efficiently.
 
 ## Additional Resources
 

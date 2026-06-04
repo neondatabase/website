@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRIM_SCALE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The WIDTH_BUCKET() function works the same across any PostgreSQL deployment, so the techniques here for binning numeric data and building histograms apply whether you're running Postgres on your laptop, in your own cluster, or on a managed service. For enterprises standardizing on AI and analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance and security built directly into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that keeps up with you.
+The WIDTH_BUCKET() function works the same across any PostgreSQL deployment, so the techniques here for binning numeric data and building histograms apply whether you're running Postgres on your laptop, in your own cluster, or on a managed service. For enterprises standardizing on AI and analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance and security built directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `WIDTH_BUCKET()` function for binning numeric data into discrete buckets.

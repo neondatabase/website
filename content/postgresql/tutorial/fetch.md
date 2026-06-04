@@ -6,7 +6,7 @@ page_description: >-
   a specific number of rows from a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-fetch/'
 ogImage: /postgresqltutorial/film_table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LIMIT
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The FETCH clause is part of standard SQL and works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed platform. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+The FETCH clause is part of standard SQL and works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed platform. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FETCH` clause to retrieve a portion of rows returned by a query.

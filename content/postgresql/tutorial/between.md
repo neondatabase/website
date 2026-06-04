@@ -6,7 +6,7 @@ page_description: >-
   a value is in a range of values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-between/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL IN
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The BETWEEN operator works the same way in any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The BETWEEN operator works the same way in any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL BETWEEN** operator to check if a value falls in a particular range of values.

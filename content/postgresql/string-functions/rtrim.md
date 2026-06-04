@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPPER() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can apply these examples wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high performance, secure database that plugs directly into the Lakehouse. For developers and startups who need to ship features quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can apply these examples wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high performance, secure database that plugs directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `RTRIM()` function to remove specified characters from the end of a string.

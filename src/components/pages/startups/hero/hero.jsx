@@ -50,7 +50,7 @@ const Hero = () => (
               <br /> $100K in Neon Credits
             </h1>
             <p className="mt-4 text-lg leading-snug tracking-extra-tight text-balance text-gray-new-80 xl:text-base lg:mt-3.5 md:mt-3 md:text-[15px]">
-              Join the Startup Program and start building with the best database for developers:
+              Join the Startup Program and start building with the best backend for developers:
               fast, scalable, and serverless.
             </p>
           </div>

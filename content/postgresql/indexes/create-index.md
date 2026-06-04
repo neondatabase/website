@@ -6,7 +6,7 @@ page_description: >-
   statement to create a new index for a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/'
 ogImage: /postgresqltutorial/address.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Indexes
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-CREATE INDEX works the same across any PostgreSQL deployment, so everything here carries over whether you're running Postgres on your laptop, in your own data center, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres available, natively integrated into the Lakehouse so your operational and analytical data live together. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform for the job, with instant provisioning, branching, and autoscaling built in.
+CREATE INDEX works the same across any PostgreSQL deployment, so everything here carries over whether you're running Postgres on your laptop, in your own data center, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres available, natively integrated into the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE INDEX` statement to define a new index for a table.

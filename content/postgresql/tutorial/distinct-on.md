@@ -6,7 +6,7 @@ page_description: >-
   to retrieve distinct rows based on a specific column.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-distinct-on/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SELECT DISTINCT
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-DISTINCT ON is standard PostgreSQL behavior, so the techniques here work on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform to build on.
+DISTINCT ON is standard PostgreSQL behavior, so the techniques here work on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DISTINCT ON` clause to retrieve distinct rows based on a specific column.

@@ -34,7 +34,7 @@ When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you
 
 - Compute: $0.106/CU-hour
 - Storage: $0.35/GB-month
-- 100 GB of public network transfer included, then $0.10/GB
+- 500 GB of public network transfer included, then $0.10/GB
 
 A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 20 billable days at 0.25 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
 

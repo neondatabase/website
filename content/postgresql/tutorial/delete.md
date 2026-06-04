@@ -6,7 +6,7 @@ page_description: >-
   one or more rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPDATE Join
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DELETE statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, on a major cloud, or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production data teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) offers the most productive Postgres platform, with instant provisioning, branching, and serverless scale built in.
+The DELETE statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop, on a major cloud, or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL DELETE** statement to delete data from a table.

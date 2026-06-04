@@ -6,7 +6,7 @@ page_description: >-
   token-based database connections with your existing identity providers like
   Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Logical Replication Improvements
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: PostgreSQL 18 adds native OAuth 2.0 authentication, letting you connect to your database using tokens from identity providers like Google, Auth0, or your company's SSO system instead of managing database passwords.

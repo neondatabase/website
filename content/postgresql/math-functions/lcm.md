@@ -6,7 +6,7 @@ page_description: >-
   calculate the least common multiple (LCM) of two or more integers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-lcm/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GCD() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `lcm()` function is a standard part of PostgreSQL 13 and later, so everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
+The `lcm()` function is a standard part of PostgreSQL 13 and later, so everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `lcm()` function to calculate the least common multiple (LCM) of two or more integers.

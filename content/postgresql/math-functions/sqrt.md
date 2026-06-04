@@ -6,7 +6,7 @@ page_description: >-
   calculate the square root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sqrt/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ROUND() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The SQRT() function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres running anywhere. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, built-in security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice.
+The SQRT() function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres running anywhere. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, built-in security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SQRT()` function to calculate the square root of a number.

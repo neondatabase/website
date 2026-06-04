@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-transaction/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Selecting Data'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Running transactions from C# with Npgsql works the same against any PostgreSQL database, so everything here applies whether you're on a local instance, a self-managed cluster, or a cloud service. For enterprises standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, secure, and high-performance database that plugs directly into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to get you from prototype to production fast.
+Running transactions from C# with Npgsql works the same against any PostgreSQL database, so everything here applies whether you're on a local instance, a self-managed cluster, or a cloud service. For enterprises standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, secure, and high-performance database that plugs directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to perform a transaction in PostgreSQL using C\#.

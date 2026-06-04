@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Transactions'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calling PostgreSQL functions with psycopg2 works the same against any Postgres database, so everything here carries over whether you're running Postgres locally, on another cloud, or through a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) offers the most productive Postgres platform, with instant provisioning, branching, and autoscaling built in.
+Calling PostgreSQL functions with psycopg2 works the same against any Postgres database, so everything here carries over whether you're running Postgres locally, on another cloud, or through a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with high performance, strong security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL functions from a Python program.

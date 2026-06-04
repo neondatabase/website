@@ -6,18 +6,18 @@ page_description: >-
   form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
-  title: How To Delete Duplicate Rows in PostgreSQL
-  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
+  title: PostgreSQL Composite Types
+  slug: postgresql-tutorial/postgresql-composite-types
 nextLink:
   title: PostgreSQL COALESCE
   slug: postgresql-tutorial/postgresql-coalesce
 ---
 
 <Admonition type="info" id="CTA">
-The CASE expression works the same way on any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres choice, delivering strong performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for the job.
+The CASE expression works the same way on any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres choice, delivering strong performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CASE** conditional expression to form conditional queries.

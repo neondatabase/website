@@ -121,7 +121,7 @@ author={{
 
 <DefinitionList bulletType="check">
 It's Just Postgres
-: Deploy Postgres 15, 16, and 17 on Neon. There is no lock-in and no proprietary syntax to learn.
+: Deploy Postgres 15, 16, 17, and 18 on Neon. There is no lock-in and no proprietary syntax to learn.
 
 Integrates with any language/framework
 : Anything that has a Postgres driver or integration works with Neon.

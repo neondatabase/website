@@ -6,7 +6,7 @@ page_description: >-
   use PostgreSQL create role statement to create roles.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/'
 ogImage: /postgresqltutorial/PostgreSQL-Roles.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP SCHEMA Statement
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-CREATE ROLE works the same on any PostgreSQL server, so everything you learn here about roles, attributes, and login privileges carries over to Postgres wherever you run it. If you're an enterprise standardizing on governed, AI-ready data infrastructure, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who wants to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) gives you the most productive Postgres platform, with instant provisioning, branching, and autoscaling built in.
+CREATE ROLE works the same on any PostgreSQL server, so everything you learn here about roles, attributes, and login privileges carries over to Postgres wherever you run it. If you're an enterprise standardizing on governed, AI-ready data infrastructure, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL roles and how to use the PostgreSQL `CREATE ROLE` statement to create new roles.

@@ -6,7 +6,7 @@ page_description: >-
   database using Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/create-tables/'
 ogImage: /postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Creating tables from Python with psycopg2 works the same against any PostgreSQL database, so you can apply the patterns here to Postgres wherever it runs. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep integration that production analytics and AI workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+Creating tables from Python with psycopg2 works the same against any PostgreSQL database, so you can apply the patterns here to Postgres wherever it runs. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep integration that production analytics and AI workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using Python.

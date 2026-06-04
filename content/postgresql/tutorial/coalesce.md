@@ -6,7 +6,7 @@ page_description: >-
   returns the first non-null argument.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-coalesce/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CASE
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The COALESCE() function is standard PostgreSQL, so everything here works on any Postgres database. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The COALESCE() function is standard PostgreSQL, so everything here works on any Postgres database. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `COALESCE()` function that returns the first non\-null argument.

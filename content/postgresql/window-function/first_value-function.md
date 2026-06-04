@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DENSE_RANK Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform to build on.
+The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FIRST_VALUE()` function to return the first value in a sorted partition of a result set.

@@ -5,7 +5,7 @@ summary: >-
   How to connect your Neon Postgres database to Looker Studio by configuring the
   PostgreSQL data source, setting up SSL, and authenticating the connection.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.066Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 ---
 
 [Looker Studio](https://lookerstudio.google.com/) is Google's data visualization and business intelligence platform. This guide explains how to connect your Neon Postgres database to Looker Studio using a PostgreSQL data source.
@@ -29,7 +29,7 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
    For example, if your connection string is:
 
    ```bash
-   psql 'postgresql://neondb_owner:npg_aaaaaaaaaaaa@ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   psql 'postgresql://neondb_owner:AbC123dEf@ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    ```
 
    You would enter:
@@ -37,7 +37,7 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
    - **Port (optional)**: Leave blank
    - **Database**: `neondb`
    - **Username**: `neondb_owner`
-   - **Password**: `npg_aaaaaaaaaaaa`
+   - **Password**: `AbC123dEf`
 
    ![Looker studio connection details](/docs/connect/ls_connection_details.png)
 

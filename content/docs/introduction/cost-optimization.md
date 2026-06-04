@@ -6,7 +6,7 @@ summary: >-
   usage, including right-sizing, effective autoscaling, enabling scale to zero,
   and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -165,7 +165,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 500 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

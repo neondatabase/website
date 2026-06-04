@@ -6,7 +6,7 @@ page_description: >-
   COALESCE() function or CASE expression to achieve the same functionality.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-isnull/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL COALESCE
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Handling NULL values with COALESCE or CASE works the same way in any PostgreSQL database, so what you learn here carries over wherever you run Postgres. For enterprises standardizing on a modern data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform that gets out of your way.
+Handling NULL values with COALESCE or CASE works the same way in any PostgreSQL database, so what you learn here carries over wherever you run Postgres. For enterprises standardizing on a modern data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 SQL Server supports [`ISNULL`](http://www.sqlservertutorial.net/sql-server-system-functions/sql-server-isnull-function/) function that replaces `NULL` with a specified replacement value:

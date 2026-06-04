@@ -6,7 +6,7 @@ page_description: >-
   array_sort(), array_reverse(), reverse() for bytea, integer-to-bytea casting,
   and MIN/MAX aggregates for arrays and composite types.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Temporal Constraints
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's array and bytea improvements work the same way across any Postgres deployment, so you can use these techniques wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, performant and secure with full integration into the Lakehouse. For developers and startups who need to ship features and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up.
+PostgreSQL 18's array and bytea improvements work the same way across any Postgres deployment, so you can use these techniques wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, performant and secure with full integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's new array and bytea function improvements including `array_sort()`, `array_reverse()`, `reverse()` for bytea, integer-to-bytea casting capabilities, and `MIN`/`MAX` aggregate support for arrays and composite types.

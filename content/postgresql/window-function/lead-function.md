@@ -6,7 +6,7 @@ page_description: >-
   access a row that follows the current row, at a specific physical offset.
 prev_url: index.html
 ogImage: /postgresqltutorial/Sales-sample-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAST_VALUE Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your analytics and AI workloads need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your analytics and AI workloads need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LEAD()` function to access a row that follows the current row, at a specific physical offset.

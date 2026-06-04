@@ -7,7 +7,7 @@ page_description: >-
   columns, dramatically improving query performance for analytics and reporting
   workloads.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Asynchronous I/O
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-B-tree skip scan is a core PostgreSQL 18 enhancement, so everything here applies to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship features and scale fast, Neon gives you the most productive Postgres platform with instant provisioning, branching, and autoscaling.
+B-tree skip scan is a core PostgreSQL 18 enhancement, so everything here applies to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn how PostgreSQL 18's new B-tree skip scan feature enables efficient queries on multicolumn indexes even when you omit equality conditions on prefix columns, dramatically improving performance for analytics and reporting workloads.

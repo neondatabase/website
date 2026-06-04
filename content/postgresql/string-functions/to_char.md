@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRANSLATE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The TO_CHAR() function works the same way on any PostgreSQL database, so the formatting patterns and examples here apply wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup focused on shipping and scaling quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+The TO_CHAR() function works the same way on any PostgreSQL database, so the formatting patterns and examples here apply wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 The PostgreSQL `TO_CHAR()` function converts a [timestamp](../postgresql-tutorial/postgresql-timestamp), an [interval](../postgresql-tutorial/postgresql-interval), an [integer](../postgresql-tutorial/postgresql-integer), a double\-precision, or a [numeric](../postgresql-tutorial/postgresql-numeric) value to a [string](../postgresql-tutorial/postgresql-char-varchar-text).

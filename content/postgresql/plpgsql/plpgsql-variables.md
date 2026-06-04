@@ -6,7 +6,7 @@ page_description: >-
   and how to use variables effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Block Structure
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL variables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+PL/pgSQL variables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PL/pgSQL variables and various ways to declare them
@@ -219,7 +219,7 @@ In this example, we declare two variables:
 - The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 - The `featured_title` has the same data type as the data type of the `film_title` variable.
 
-We use the [select into](pl-pgsql-select-into) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
+We use the [select into](pl-pgsql-select-into) statement to retrieve from the `title` column of the `film` table and assign it to the `film_title` variable.
 
 Using the type\-copying feature offers the following advantages:
 

@@ -4,7 +4,7 @@ page_title: 'PostgreSQL JDBC: Querying Data'
 page_description: "In this tutorial, \_you will learn how to query data from a table in the PostgreSQL database using JDBC API."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/query/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T11:16:32.279Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Insert Data into a Table'
@@ -15,7 +15,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Querying PostgreSQL data with JDBC works the same way against any Postgres database, so the patterns shown here using Statement, PreparedStatement, and ResultSet apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data sit side by side. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform with instant provisioning, branching, and serverless scale.
+Querying PostgreSQL data with JDBC works the same way against any Postgres database, so the patterns shown here using Statement, PreparedStatement, and ResultSet apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data sit side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to query data from a table in the PostgreSQL database using JDBC API.
