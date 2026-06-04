@@ -72,7 +72,7 @@ begin
    for counter in reverse 5..1 loop
       raise notice 'counter: %', counter;
    end loop;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -93,7 +93,7 @@ begin
   for counter in 1..6 by 2 loop
     raise notice 'counter: %', counter;
   end loop;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -131,7 +131,7 @@ begin
 	raise notice '%(% mins)', f.title, f.length;
     end loop;
 end;
-$$
+$$;
 ```
 
 ```
@@ -191,7 +191,7 @@ begin
 	elsif sort_type = 2 then
 	  query := query || 'order by release_year';
 	else
-	   raise 'invalid sort type %s', sort_type;
+	   raise 'invalid sort type %', sort_type;
 	end if;
 
 	query := query || ' limit $1';
@@ -201,7 +201,7 @@ begin
 	     raise notice '% - %', rec.release_year, rec.title;
 	end loop;
 end;
-$$
+$$;
 ```
 
 Output:
@@ -234,4 +234,4 @@ NOTICE:  2006 - Agent Truman
 NOTICE:  2006 - Chamber Italian
 ```
 
-In this tutorial, you have learned various forms of the PL/pgSQL for loop statements
+In this tutorial, you have learned various forms of the PL/pgSQL for loop statements.
