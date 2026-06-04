@@ -5,7 +5,7 @@ summary: >-
   Configure webhooks to receive notifications for authentication events like OTP
   delivery, magic link delivery, and user creation in Neon Auth.
 enableTableOfContents: true
-updatedOn: '2026-05-29T09:07:33.053Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -13,6 +13,8 @@ updatedOn: '2026-05-29T09:07:33.053Z'
 Neon Auth webhooks send HTTP POST requests to your server when authentication events occur.
 
 By default, Neon Auth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
+
+For a quick overview of available email customization options, check out [Customize emails](/docs/auth/guides/customize-emails).
 
 For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Neon Auth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
 

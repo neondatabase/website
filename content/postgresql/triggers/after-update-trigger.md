@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-update-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE UPDATE Trigger
@@ -95,7 +95,7 @@ CREATE TABLE salary_changes (
 
 ```
 
-Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
+Third, define the function `log_salary_change()` that logs the changes of values in the `salary` column to the `salary_changes` table:
 
 ```plsql
 CREATE OR REPLACE FUNCTION log_salary_change()

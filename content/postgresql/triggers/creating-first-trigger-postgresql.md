@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/
 ogImage: /postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL Trigger
@@ -140,7 +140,7 @@ BEGIN
 
 	RETURN NEW;
 END;
-$$
+$$;
 ```
 
 The function inserts the old last name into the `employee_audits` table including employee id, last name, and the time of change if the last name of an employee changes.

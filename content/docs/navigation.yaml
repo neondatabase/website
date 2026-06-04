@@ -481,6 +481,8 @@
                   slug: auth/guides/configure-domains
                 - title: Webhooks
                   slug: auth/guides/webhooks
+                - title: Customize emails
+                  slug: auth/guides/customize-emails
                 - title: Production checklist
                   slug: auth/production-checklist
                 - title: Troubleshooting

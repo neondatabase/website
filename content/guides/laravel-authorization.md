@@ -1,10 +1,10 @@
 ---
 title: Implementing Fine-Grained Authorization in Laravel with Neon Postgres
-subtitle: Learn how to set up and utilize Laravel's powerful authorization features to create a secure and flexible application using Neon's high-performance database.
+subtitle: Learn how to set up and utilize Laravel's powerful authorization features to create a secure and flexible application using Neon, the AI-native backend platform for apps and agents.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 ---
 
 Laravel provides an authorization system that allows developers to implement fine-grained access control in their applications. While Laravel's built-in features are powerful, some projects require even more advanced role-based access control (RBAC). This is where third-party packages like Spatie's Laravel Permission come into play.

@@ -6,11 +6,11 @@ page_description: >-
   form conditional queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-case/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
-  title: How To Delete Duplicate Rows in PostgreSQL
-  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
+  title: PostgreSQL Composite Types
+  slug: postgresql-tutorial/postgresql-composite-types
 nextLink:
   title: PostgreSQL COALESCE
   slug: postgresql-tutorial/postgresql-coalesce

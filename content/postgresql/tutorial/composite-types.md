@@ -7,14 +7,14 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-composite-types/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-04T11:18:39.321Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BYTEA Data Type
   slug: postgresql-tutorial/postgresql-bytea-data-type
 nextLink:
-  title: How to Compare Two Tables in PostgreSQL
-  slug: postgresql-tutorial/compare-two-tables-in-postgresql
+  title: PostgreSQL CASE
+  slug: postgresql-tutorial/postgresql-case
 ---
 
 <Admonition type="info" id="CTA">
