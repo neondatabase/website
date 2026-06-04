@@ -6,7 +6,7 @@ summary: >-
   instructions for various platforms and methods for managing authentication
   through web or API key options.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.967Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -127,7 +127,7 @@ To set the context for your Neon project:
 neon set-context --project-id <your-project-id>
 ```
 
-To set the context for your both your Neon organization and a Neon project:
+To set the context for both your Neon organization and a Neon project:
 
 ```bash
 neon set-context --org-id <your-org-id> --project-id <your-project-id>

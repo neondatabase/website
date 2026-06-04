@@ -7,7 +7,7 @@ summary: >-
   critical data by preventing deletion, resetting, and applying IP restrictions
   on designated branches.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.033Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -27,7 +27,7 @@ The protected branches feature is available on Neon [paid plans](/docs/introduct
 
 ## Set a branch as protected
 
-This example sets branch as protected.
+This example sets a branch as protected.
 
 To set a branch as protected:
 

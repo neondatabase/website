@@ -5,7 +5,7 @@ summary: >-
   the self-serve process to enable features and accept the Business Associate
   Agreement (BAA) for handling Protected Health Information (PHI).
 enableTableOfContents: true
-updatedOn: '2026-05-22T09:50:49.895Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -90,7 +90,7 @@ curl --request POST \
 '
 ```
 
-To enable HIPAA for an existing project, set `hippa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
 
 ```bash
 curl --request PATCH \

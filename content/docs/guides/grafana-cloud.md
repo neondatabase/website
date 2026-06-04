@@ -6,7 +6,7 @@ summary: >-
   configuration for log forwarding and the transmission of metrics related to
   database performance and resource utilization.
 enableTableOfContents: true
-updatedOn: '2026-05-29T00:27:59.360Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 <InfoBlock>
@@ -46,7 +46,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 
 <FeatureBetaProps feature_name="Postgres logs export" />
 
-With the the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
+With the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
 
 ## Prerequisites
 
