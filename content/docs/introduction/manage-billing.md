@@ -7,7 +7,7 @@ summary: >-
   page, updating payment methods, downloading invoices, changing plans, and
   account deletion.
 enableTableOfContents: true
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-06-04T22:34:40.533Z'
 ---
 
 <InfoBlock>
@@ -15,6 +15,7 @@ updatedOn: '2026-04-24T22:05:15.000Z'
 <p>How to access the Billing page</p>
 <p>How to update payment method, billing email, and billing details</p>
 <p>How to download invoices</p>
+<p>How to pay an invoice manually</p>
 <p>How to request billing support</p>
 <p>How to change plans</p>
 <p>How to prevent further monthly charges</p>
@@ -40,7 +41,7 @@ To access your **Billing** page:
 
 The **Billing** page has a sidebar with **Billing summary** and **Payment info**. **Billing summary** shows **This month's summary**: your billing period, plan details (including **Change plan**), and **Charges to date**. **Payment info** shows how you pay, your billing email, and company or address details (see [Update your payment method](#update-your-payment-method) and [Update billing details](#update-billing-details-company-and-address)).
 
-At the top of the page, **View past invoices** opens your invoices. If you are on a **paid** plan, **Request billing support** appears next to it (see [Request billing support](#request-billing-support)).
+At the top of the page, **View/Pay invoices** opens your invoices, where you can download them or pay an outstanding invoice (see [Pay an invoice](#pay-an-invoice)). If you are on a **paid** plan, **Request billing support** appears next to it (see [Request billing support](#request-billing-support)).
 
 ## Update your payment method
 
@@ -60,7 +61,7 @@ If you are unable to update your payment method, please [contact support](/docs/
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in the [Neon Platform Terms](/platform-terms).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. You can also pay an outstanding invoice manually at any time from **View/Pay invoices** (see [Pay an invoice](#pay-an-invoice)). Late fees and payment policies are described in the [Neon Platform Terms](/platform-terms).
 
 ### Failing payments for Indian customers
 
@@ -94,6 +95,22 @@ If you are unable to update this information, please [contact support](/docs/int
 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
+### Pay an invoice
+
+Invoices are charged automatically to your payment method on the first day of the month. If you'd rather not wait for the automatic charge, or an automatic payment didn't go through, organization admins (or the account owner on a personal account) can pay an outstanding invoice manually at any time.
+
+To pay an invoice manually:
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing** from the menu.
+1. Select **View/Pay invoices**.
+1. On an unpaid invoice, select **Pay invoice** to open its secure payment page and complete the payment.
+
+<Admonition type="note">
+**Pay invoice** appears only on unpaid invoices, and only for organization admins (or the account owner on a personal account). Other members can view the invoice without the payment action. Paying an invoice manually settles it immediately instead of waiting for the automatic monthly charge.
+</Admonition>
+
 ### Download invoices
 
 To download an invoice:
@@ -101,7 +118,7 @@ To download an invoice:
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Select **View past invoices**.
+1. Select **View/Pay invoices**.
 1. Find the invoice you want and open its actions menu, then select **Download**.
 
 <Admonition type="note">
@@ -124,7 +141,7 @@ If you have no invoices yet, **Request billing support** may appear disabled wit
 
 #### From past invoices
 
-1. On the **Billing** page, select **View past invoices**.
+1. On the **Billing** page, select **View/Pay invoices**.
 1. For the invoice you care about, open the actions menu (`...`) and select **Request support**. The same form opens with that invoice pre-selected.
 
 You can still use **Download** from the invoice menu to save a PDF. For other support paths (for example **Launch** plan limits on ticket topics), see [Support](/docs/introduction/support).
