@@ -54,7 +54,7 @@ ON table_name
 USING GIN(jsonb_column jsonb_path_ops);
 ```
 
-This index is optimized for the queries that use the @\> (contains), ? (exists), and @@ JSONB operators. It can be useful for searches involving keys or values within JSONB documents.
+This index is optimized for the queries that use the @\> (contains), @?, and @@ JSONB operators. It can be useful for searches involving keys or values within JSONB documents.
 
 The following table displays the `GIN` operator classes:
 
@@ -298,7 +298,7 @@ Output:
 (5 rows)
 ```
 
-In this plan, the query cannot fully utilize the `GIN` index `customer_json_index`. The reason is that the query does not use the JSONB operator (`@`, `@?`, `@@`) that the `jsonb_path_ops` operator class is optimized for.
+In this plan, the query cannot fully utilize the `GIN` index `customer_json_index`. The reason is that the query does not use the JSONB operator (`@>`, `@?`, `@@`) that the `jsonb_path_ops` operator class is optimized for.
 
 ### 4\) Creating an index on a specific field of a JSONB column
 
