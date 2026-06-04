@@ -7,7 +7,7 @@ summary: >-
   uses PostgreSQL's security model to enforce role privileges and Row-Level
   Security for database access control.
 enableTableOfContents: true
-updatedOn: '2026-06-04T01:09:28.144Z'
+updatedOn: '2026-06-04T14:48:01.456Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -44,7 +44,9 @@ When a client sends a valid Bearer token, the API switches to the `authenticated
 
 **Used for:** Requests from unauthenticated users.
 
-Anonymous access still uses a JWT, but your auth provider mints one automatically without requiring a user to sign in. Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
+Anonymous access still uses a JWT, but no user sign-in is required. How you obtain that token depends on your auth setup:
+
+**With Neon Auth:** Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
 
 ```js
 import { createClient } from '@neondatabase/neon-js';
@@ -62,6 +64,8 @@ const client = createClient({
 // No sign-in needed. The SDK fetches and caches an anonymous JWT automatically.
 const { data, error } = await client.from('public_items').select('*');
 ```
+
+**With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 
 - By default, this role has **no permissions**.
 - You can explicitly `GRANT` SELECT permissions to this role to expose public data (for example, a product list or public blog posts) without requiring users to log in.
