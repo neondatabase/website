@@ -20,7 +20,7 @@ updatedOn: '2026-06-05T17:20:02.273Z'
   </DocsList>
 </InfoBlock>
 
-This page covers managing the Data API after it is enabled. To enable via the Console, see [Getting started with Data API](/docs/data-api/get-started). To enable programmatically, see [Enable via the Neon API](#enable) or [Enable via the CLI](#enable-cli). To disable from the Console, scroll to **Disable** at the bottom of the **Settings** tab.
+This page covers managing the Data API after it is enabled. To enable via the Console, see [Getting started with Data API](/docs/data-api/get-started). To enable programmatically, see [Enable via the Neon API](#enable) or [Enable via the CLI](#enable-via-the-cli). To disable from the Console, scroll to **Disable** at the bottom of the **Settings** tab.
 
 ## Manage authentication providers
 
@@ -266,7 +266,7 @@ For the full Data API specification, see the [Neon API reference](https://api-do
 
 You can also manage the Data API from the terminal using the [Neon CLI](/docs/reference/neon-cli). The `data-api` command requires **neonctl 2.22.2** or later.
 
-### Enable {#enable-cli}
+### Enable via the CLI
 
 Provision the Data API for a database. The `--auth-provider` option accepts `neon_auth` or `external`. For external providers, also pass `--jwks-url`:
 
