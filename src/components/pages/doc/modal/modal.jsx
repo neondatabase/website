@@ -158,13 +158,15 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                   Icon && <Icon className="mt-[15px] h-5 w-5 text-secondary-8 dark:text-green-45" />
                 )}
                 <Link
-                  className="mt-4 font-medium"
-                  to={destination.url}
+                  className={cn(
+                    'mt-4 flex w-fit items-center gap-2 leading-none font-medium tracking-extra-tight',
+                    '[&>svg]:text-black-new! [&>svg]:transition-all! dark:[&>svg]:text-white!',
+                    'hover:text-black-new! dark:hover:text-white! [&:hover>svg]:text-black-new! dark:[&:hover>svg]:text-white!'
+                  )}
                   theme="black"
-                  size="2xs"
+                  size="sm"
+                  to={destination.url}
                   withArrow
-                  isExternal={isExternalDestination}
-                  onClick={() => handleLinkClick(destination.label)}
                 >
                   {destination.label}
                 </Link>
