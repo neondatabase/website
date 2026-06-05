@@ -6,7 +6,7 @@ summary: >-
   steps for creating a new project with the desired version and considerations
   for compatibility and performance testing.
 enableTableOfContents: true
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -72,7 +72,7 @@ Alternatively, you can apply these configurations after migrating your data.
     <Admonition type="note" title="Notes">
     - Neon does not support the `pg_dumpall` utility. If upgrading via dump and restore, dumps must be performed one database at a time using `pg_dump`.
     - Neon does not yet support upgrading using `pg_upgrade`. Support for this utility is being considered for a future release.
-    - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous Postgres versions supported by Neon.
+    - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_restore` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of these programs can read data from all previous Postgres versions supported by Neon.
     </Admonition>
 
 ### 3. Switch over your applications

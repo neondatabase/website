@@ -6,7 +6,7 @@ page_description: >-
   statements that execute a block of statements repeatedly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-loop-statements/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL CASE Statement
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL loop statements work the same way on any standard PostgreSQL database, so the patterns covered here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+PL/pgSQL loop statements work the same way on any standard PostgreSQL database, so the patterns covered here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL loop statement that executes a block of code repeatedly.

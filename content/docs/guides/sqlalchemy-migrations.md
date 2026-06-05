@@ -6,7 +6,7 @@ summary: >-
   using SQLAlchemy and Alembic, including project setup and connection string
   retrieval.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.054Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
@@ -70,7 +70,7 @@ pip install fastapi uvicorn python-dotenv
 pip freeze > requirements.txt
 ```
 
-We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We the installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Set up the Database configuration
 

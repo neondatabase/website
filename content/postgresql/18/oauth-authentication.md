@@ -6,7 +6,7 @@ page_description: >-
   token-based database connections with your existing identity providers like
   Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Logical Replication Improvements
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: PostgreSQL 18 adds native OAuth 2.0 authentication, letting you connect to your database using tokens from identity providers like Google, Auth0, or your company's SSO system instead of managing database passwords.
@@ -45,7 +45,7 @@ PostgreSQL validates tokens but doesn't issue them, that's handled by your OAuth
 
 OAuth support must be enabled when PostgreSQL is compiled.
 
-As of the latest beta, most distributions do not include this by default, but if you're building from source, you can `--with-libcurl` to enable OAuth client features.
+As of the latest beta, most distributions do not include this by default, but if you're building from source, you can pass `--with-libcurl` to enable OAuth client features.
 
 Note that you will also need a compatible PostgreSQL client which supports OAuth connections, in the case of `psql`, this is available in PostgreSQL 18 and later.
 

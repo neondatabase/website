@@ -7,7 +7,7 @@ summary: >-
   Postgres custom roles, advanced connection string configurations, and dynamic
   client setup with auth callbacks.
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:27:00.724Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <InfoBlock>
@@ -218,7 +218,7 @@ The `$withAuth` method in Drizzle is deprecated; instead, set JWT claims in the 
 </Admonition>
 
 ```typescript
-iimport { createRemoteJWKSet, jwtVerify, type JWTPayload } from 'jose';
+import { createRemoteJWKSet, jwtVerify, type JWTPayload } from 'jose';
 import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { sql } from 'drizzle-orm';

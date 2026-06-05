@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-bytea-data-type/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL XML Data Type
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The BYTEA data type works the same across any PostgreSQL deployment, so what you learn here applies to Postgres wherever you run it. If you're an enterprise storing binary data alongside analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+The BYTEA data type works the same across any PostgreSQL deployment, so what you learn here applies to Postgres wherever you run it. If you're an enterprise storing binary data alongside analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL `BYTEA` data type and how to use it to store binary strings in the database.

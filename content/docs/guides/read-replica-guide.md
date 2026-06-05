@@ -6,7 +6,7 @@ summary: >-
   replicas to branches, configuring compute sizes, and utilizing features like
   Autoscaling and Scale to Zero for optimized performance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.037Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -126,7 +126,7 @@ curl -X 'GET' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 In the response body for this method, read replica computes are identified by the `type` value, which is `read_only`.
 </TabItem>
@@ -170,7 +170,7 @@ curl --request PATCH \
 '
 ```
 
-Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 
@@ -202,7 +202,7 @@ curl --request DELETE \
      --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
-Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 

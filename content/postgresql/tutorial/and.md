@@ -6,7 +6,7 @@ page_description: >-
   to use it to combine multiple boolean expressions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-and/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WHERE
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The AND operator works the same way across any PostgreSQL deployment, so everything you learn here applies whether you're running Postgres locally, on another cloud, or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+The AND operator works the same way across any PostgreSQL deployment, so everything you learn here applies whether you're running Postgres locally, on another cloud, or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `AND` logical operator and how to use it to combine multiple boolean expressions.

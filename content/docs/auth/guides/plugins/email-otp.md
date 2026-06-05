@@ -6,7 +6,7 @@ summary: >-
   sign in, reset passwords, and verify email addresses using one-time passwords
   sent via email, with automatic handling of OTP generation and delivery.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -121,7 +121,7 @@ export async function verifyEmail(email: string, otp: string) {
 
 > For more details, see the [Verify email with OTP code](/docs/reference/javascript-sdk#auth-verifyemail) in Neon SDK.
 
-Checkout our [Email verification guide](/docs/auth/guides/email-verification) for a complete walkthrough.
+Check out our [Email verification guide](/docs/auth/guides/email-verification) for a complete walkthrough.
 
 ### Check an OTP (optional)
 
@@ -197,5 +197,7 @@ If users exceed the allowed verification attempts, the API returns an error code
 ## Email provider configuration
 
 For production environments, we strongly recommend using a dedicated email provider. The default shared SMTP should be used only during development. Refer to the [Email provider configuration guide](/docs/auth/production-checklist#email-provider) for setup instructions.
+
+A custom SMTP provider changes the sender address but still sends Neon's default templates. For full branding control, use webhooks. See [Customize emails](/docs/auth/guides/customize-emails).
 
 <NeedHelp/>

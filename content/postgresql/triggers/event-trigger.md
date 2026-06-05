@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: How to List All Triggers in PostgreSQL
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Event triggers are a standard PostgreSQL feature, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale and want DDL auditing, security policies, and AI workloads tightly integrated with your data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, fully unified with the Lakehouse. If you're a developer or startup who needs to prototype event triggers and ship to production quickly, Neon gives you branching, instant provisioning, and the scale to grow into.
+Event triggers are a standard PostgreSQL feature, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale and want DDL auditing, security policies, and AI workloads tightly integrated with your data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, fully unified with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.

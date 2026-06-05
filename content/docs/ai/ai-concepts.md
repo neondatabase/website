@@ -6,7 +6,7 @@ summary: >-
   applications, detailing how to transform unstructured data into structured
   formats and measure text similarity through vector distance calculations.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
@@ -105,7 +105,7 @@ If it works, you'll get a response like this:
 
 To learn more about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings). Here, you'll find an example of obtaining embeddings from an [Amazon fine-food reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews) dataset supplied as a CSV file. See [Obtaining the embeddings](https://platform.openai.com/docs/guides/embeddings/use-cases).
 
-There are many embedding models you can use, such as those provided by Mistral AI, Cohere, Hugging Face, etc. AI tools like [LanngChain](https://www.langchain.com/) provide interfaces and integrations for working with a variety of models. See [LangChain: Text embedding models](https://js.langchain.com/v0.1/docs/integrations/text_embedding/). You'll also find a [Neon Postgres guide](https://js.langchain.com/v0.1/docs/integrations/vectorstores/neon/) on the LangChain site and [Class NeonPostgres](https://v02.api.js.langchain.com/classes/langchain_community_vectorstores_neon.NeonPostgres.html), which provides an interface for working with a Neon Postgres database.
+There are many embedding models you can use, such as those provided by Mistral AI, Cohere, Hugging Face, etc. AI tools like [LangChain](https://www.langchain.com/) provide interfaces and integrations for working with a variety of models. See [LangChain: Text embedding models](https://js.langchain.com/v0.1/docs/integrations/text_embedding/). You'll also find a [Neon Postgres guide](https://js.langchain.com/v0.1/docs/integrations/vectorstores/neon/) on the LangChain site and [Class NeonPostgres](https://v02.api.js.langchain.com/classes/langchain_community_vectorstores_neon.NeonPostgres.html), which provides an interface for working with a Neon Postgres database.
 
 ## Storing vector embeddings in Postgres
 

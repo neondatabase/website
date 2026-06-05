@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Breaking Changes and Upgrade Notes'
 page_title: 'PostgreSQL 19 Breaking Changes - What to Check Before Upgrading'
 page_description: 'Review PostgreSQL 19 breaking changes including JIT disabled by default, LZ4 TOAST compression, RADIUS removal, and string handling changes before upgrading your database.'
 ogImage: ''
-updatedOn: '2026-05-01T20:19:36.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Monitoring and Operations'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 New Features'
   slug: 'postgresql-19-new-features'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can test how these changes affect your applications ahead of the final release expected later in 2026. Beta 1 disables JIT by default, switches default TOAST compression to `lz4`, issues a warning after MD5 password authentication, and forces `standard_conforming_strings` on.
+</Admonition>
 
 **Summary**: PostgreSQL 19 includes several breaking changes that may affect your applications and configuration. JIT compilation is now off by default, TOAST compression defaults to LZ4, MD5-hashed passwords are being deprecated and string handling is stricter. Review these changes before upgrading.
 

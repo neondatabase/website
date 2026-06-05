@@ -4,12 +4,12 @@ subtitle: Build a Web scraper AI Agent in minutes with AgentStack, Neon, and Fir
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-04T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.
 
-This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework, and Neon, the serverless Postgres database, and shows how they can be used together to build powerful AI agents with database integration. We'll walk through building a **Web Scraper AI Agent** using AgentStack's CLI and tool integrations.
+This guide introduces [**AgentStack**](https://docs.agentstack.sh/introduction), a rapid development framework, and Neon, the AI-native backend platform for apps and agents (Postgres Database, Auth, Storage, Functions, and AI Gateway), and shows how they can be used together to build powerful AI agents with database integration. We'll walk through building a **Web Scraper AI Agent** using AgentStack's CLI and tool integrations.
 
 With AgentStack and Neon, you can generate complete agent workflows, create new agents and tasks with simple commands, and integrate them directly with your data layer. Let's get started.
 

@@ -6,7 +6,7 @@ page_description: >-
   to use it for debugging purposes.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-assert/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Errors and Messages
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The PL/pgSQL assert statement works the same in any PostgreSQL 9.5 or later environment, so you can use these debugging patterns wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's performant, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The PL/pgSQL assert statement works the same in any PostgreSQL 9.5 or later environment, so you can use these debugging patterns wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's performant, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL assert statement and how to use it for debugging purposes.

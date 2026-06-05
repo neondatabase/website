@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Parallel Autovacuum'
 page_title: 'PostgreSQL 19 Parallel Autovacuum - Faster Index Cleanup'
 page_description: 'Learn how to configure PostgreSQL 19 parallel autovacuum to speed up index vacuuming on large tables with multiple indexes.'
 ogImage: ''
-updatedOn: '2026-05-01T20:19:36.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Monitoring and Operations'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Breaking Changes'
   slug: 'postgresql-19/breaking-changes'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try parallel autovacuum for yourself ahead of the final release expected later in 2026. Beta 1 lets autovacuum use parallel workers for index vacuuming, configured with the new `autovacuum_max_parallel_workers` setting and per-table `autovacuum_parallel_workers`.
+</Admonition>
 
 **Summary**: PostgreSQL 19 lets autovacuum use parallel workers for index vacuuming and cleanup. On tables with multiple large indexes, this can cut vacuum time significantly by processing indexes in parallel instead of one at a time.
 

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Schema Management and Backup'
 page_title: 'PostgreSQL 19 pg_get_*_ddl() Functions and pg_dumpall Improvements'
 page_description: 'Learn how to use PostgreSQL 19 pg_get_database_ddl, pg_get_role_ddl, pg_get_tablespace_ddl functions and pg_dumpall non-text output formats for better schema management and backup workflows.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Query Improvements'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Monitoring and Operations'
   slug: 'postgresql-19/monitoring-operations'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new schema tooling for yourself ahead of the final release expected later in 2026. Beta 1 adds `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` for DDL extraction, and lets `pg_dumpall` produce custom, directory, and tar output formats.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds `pg_get_database_ddl()`, `pg_get_role_ddl()`, and `pg_get_tablespace_ddl()` functions for programmatic DDL extraction, and extends `pg_dumpall` to support custom, directory, and tar output formats. Together, these features give you better tools for schema management, auditing, and backup workflows.
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-to_jsonb/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Functions
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `to_jsonb()` function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, in [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). Lakebase is the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, enterprise-grade security, and native integration into the Lakehouse. Neon is the best Postgres platform for developers and startups who need to ship quickly and scale without friction.
+The `to_jsonb()` function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, in [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). Lakebase is the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, enterprise-grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `to_jsonb()` function to convert an SQL value to a value of `JSONB` type.

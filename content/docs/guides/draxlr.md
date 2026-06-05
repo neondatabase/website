@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/integrations/draxlr
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.955Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 [Draxlr](https://www.draxlr.com) is a no code analytics tool for Neon Postgres that lets you build dashboards, reports, and insights using SQL, visual queries, or AI. It is commonly used for product analytics, reporting, and embedded dashboards.
@@ -69,7 +69,7 @@ Draxlr translates these questions into database queries, runs them on your Neon 
 
 ## What's next?
 
-With Draxlr and Neon, you can go beyond one off queries and build reliable Neon analytics workflows.
+With Draxlr and Neon, you can go beyond one-off queries and build reliable Neon analytics workflows.
 
 You can:
 

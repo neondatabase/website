@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-04-29T16:04:30.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -69,9 +69,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
        - **eu-central-1**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-         - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
        - **eu-west-2**:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:

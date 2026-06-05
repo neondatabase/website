@@ -6,7 +6,7 @@ page_description: >-
   nearest integer or a number of specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RANDOM() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The ROUND() function is standard PostgreSQL, so everything here works the same whether you run Postgres on your laptop, in [Neon](https://neon.com), in [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise looking for managed Postgres built for the AI era, Lakebase delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to build on.
+The ROUND() function is standard PostgreSQL, so everything here works the same whether you run Postgres on your laptop, in [Neon](https://neon.com), in [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise looking for managed Postgres built for the AI era, Lakebase delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 The PostgreSQL `ROUND()` function rounds a numeric value to its nearest [integer](../postgresql-tutorial/postgresql-integer) or a number with the number of decimal places.

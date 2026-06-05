@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_extract_path_text() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the operator `->` and `->>` to extract an element from a JSON array or a value of a key from a JSON object.

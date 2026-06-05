@@ -6,7 +6,7 @@ summary: >-
   workflows, including automation with APIs, CLI, and CI/CD tools for efficient
   branch management and preview deployments.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -41,7 +41,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="filter">Branching with GitHub Actions</a>
 
-<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automating branch creation with Githooks" icon="hook">Branching with Githooks</a>
+<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automate branch creation with Githooks" icon="hook">Branching with Githooks</a>
 
 </DetailIconCards>
 

@@ -4,10 +4,10 @@ subtitle: Learn how to build a .NET application with Neon's serverless Postgres 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
-When building .NET applications, choosing the right database solution is an important step to good performance and scalability. Neon's serverless Postgres is a great choice for .NET developers, thanks to features like automatic scaling, branching, and connection pooling that integrate well with .NET's ecosystem.
+When building .NET applications, choosing the right database solution is an important step to good performance and scalability. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It's a great choice for .NET developers, thanks to features like automatic scaling, branching, and connection pooling that integrate well with .NET's ecosystem.
 
 In this guide, we'll walk through setting up a Neon database with a .NET application and explore best practices for connecting and interacting with Neon Postgres and structuring your application using Entity Framework Core.
 

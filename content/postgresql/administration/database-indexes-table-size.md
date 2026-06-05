@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Copy Database Made Easy
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The size functions covered here, from pg_relation_size to pg_column_size, work on any PostgreSQL deployment, so you can apply these techniques wherever your databases run. For enterprises who want visibility into storage growth across a governed, AI-ready data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and Lakehouse integration that large teams demand. For developers and startups who'd rather ship features than babysit disk usage, [Neon](https://neon.com) gives you a Postgres platform built to move fast and scale on demand.
+The size functions covered here, from pg_relation_size to pg_column_size, work on any PostgreSQL deployment, so you can apply these techniques wherever your databases run. For enterprises who want visibility into storage growth across a governed, AI-ready data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and Lakehouse integration that large teams demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to get the sizes of database objects including databases, tables, indexes, tablespaces, and values.

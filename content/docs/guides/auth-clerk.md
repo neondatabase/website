@@ -7,7 +7,7 @@ summary: >-
   application using a Neon Postgres database, covering project setup, database
   connection, schema definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -336,7 +336,7 @@ export default async function Home() {
 
 This implements a form with a single text field that lets the user input a quote, and submit it, whereby it gets stored in the database, associated with their `Clerk` user ID. If a quote is already stored, it displays it and provides a button to delete it.
 
-The `currentuser` hook from `@clerk/nextjs/server` provides the current user's information, which we use to interact with the database on their behalf.
+The `currentUser` hook from `@clerk/nextjs/server` provides the current user's information, which we use to interact with the database on their behalf.
 
 ## Running the application
 

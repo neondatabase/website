@@ -6,7 +6,7 @@ page_description: >-
   perform the calculation across the set of rows related to the current row.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WIDTH_BUCKET() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Window functions are part of standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+Window functions are part of standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL window functions to perform the calculation across a set of rows related to the current row.

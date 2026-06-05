@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL PL/pgSQL
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Dollar-quoted string constants are a standard PostgreSQL feature, and everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the Postgres platform to do it.
+Dollar-quoted string constants are a standard PostgreSQL feature, and everything here works on any Postgres deployment. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the dollar\-quoted string constants (`$$`) in user\-defined functions and stored procedures.

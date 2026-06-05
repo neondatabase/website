@@ -4,12 +4,12 @@ subtitle: Use Neon Postgres to orchestrate multi-node hyperparameter tuning for 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a bayesian optimization library, to fine-tune models built with popular libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
 
-To orchestrate all the trials, you'll use Neon Postgres, a serverless postgres database. The combination of Neon Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
+To orchestrate all the trials, you'll use Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. The combination of Neon Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
 
 ## Prerequisites
 

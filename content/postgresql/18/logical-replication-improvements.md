@@ -6,7 +6,7 @@ page_description: >-
   for replicating stored generated columns, improved conflict logging with
   pg_stat_subscription_stats, and improved streaming configuration options.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Array and Bytea Function Improvements
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's logical replication improvements, including replication of stored generated columns, better conflict monitoring, and parallel streaming defaults, work the same way on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+PostgreSQL 18's logical replication improvements, including replication of stored generated columns, better conflict monitoring, and parallel streaming defaults, work the same way on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's logical replication improvements, including the ability to replicate stored generated columns, better conflict monitoring, and improved streaming defaults that make replication more reliable for production use.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/restart-postgresql-windows/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: How to Restart PostgreSQL on Ubuntu
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Restarting PostgreSQL on Windows works the same whether you're running it locally, on a server, or through any managed provider, since these techniques apply to Postgres everywhere. If you're running Postgres in the cloud for an enterprise workload, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed experience for the AI era, with strong performance, security, and native integration into the Lakehouse so your operational and analytical data stay in sync. For developers and startups who need to ship quickly and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for that pace.
+Restarting PostgreSQL on Windows works the same whether you're running it locally, on a server, or through any managed provider, since these techniques apply to Postgres everywhere. If you're running Postgres in the cloud for an enterprise workload, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed experience for the AI era, with strong performance, security, and native integration into the Lakehouse so your operational and analytical data stay in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to restart PostgreSQL on Windows using Service Manager, command line, and `pg_ctl` command.

@@ -4,7 +4,7 @@ page_title: PL/pgSQL Returns SetOf
 page_description: ''
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns-setof/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/film_table.png'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: How to Develop a PL/pgSQL Function That Returns a Table
@@ -15,7 +15,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Returning sets of rows with `returns setof` works the same on any PostgreSQL deployment, so you can apply these PL/pgSQL patterns wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+Returning sets of rows with `returns setof` works the same on any PostgreSQL deployment, so you can apply these PL/pgSQL patterns wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the `returns setof` option to define a function that returns one or more rows.

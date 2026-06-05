@@ -8,7 +8,7 @@ prev_url: >-
   https://www.postgresqltutorial.com/postgresql-window-function/postgresql-last_value-function/
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAG Function
@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `LAST_VALUE()` window function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for your pace.
+The `LAST_VALUE()` window function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to get the last value in an ordered partition of a result set by using the PostgreSQL `LAST_VALUE()` function.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-generated-columns/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Identity Column
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Generated columns work the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. For developers and startups who need to ship features fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+Generated columns work the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL generated columns whose values are automatically calculated from other columns.

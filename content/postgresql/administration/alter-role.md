@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CURRENT_USER
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The ALTER ROLE statement works the same way across every PostgreSQL deployment, so everything you learn here about modifying attributes, renaming roles, and setting session defaults applies to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The ALTER ROLE statement works the same way across every PostgreSQL deployment, so everything you learn here about modifying attributes, renaming roles, and setting session defaults applies to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER ROLE` statement to modify the attributes of a role, rename a role, and change a role’s session default for a configuration variable.
@@ -27,7 +27,7 @@ The ALTER ROLE statement works the same way across every PostgreSQL deployment, 
 
 To change attributes of a [role](postgresql-roles), you use the following form of `ALTER ROLE` statement.
 
-Here’s the basic syntax of the
+Here’s the basic syntax of the `ALTER ROLE` statement:
 
 ```sql
 ALTER ROLE role_name [WITH] option;

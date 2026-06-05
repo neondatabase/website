@@ -481,6 +481,8 @@
                   slug: auth/guides/configure-domains
                 - title: Webhooks
                   slug: auth/guides/webhooks
+                - title: Customize emails
+                  slug: auth/guides/customize-emails
                 - title: Production checklist
                   slug: auth/production-checklist
                 - title: Troubleshooting
@@ -855,6 +857,8 @@
                   slug: guides/sequin
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
+                - title: Stacksync
+                  slug: guides/logical-replication-stacksync
 
             - title: Replicate to Neon
               items:

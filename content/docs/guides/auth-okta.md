@@ -7,7 +7,7 @@ summary: >-
   application using Okta, including project setup, database connection, schema
   definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -161,7 +161,7 @@ export const UserMessages = pgTable('user_messages', {
 });
 ```
 
-This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Auth0 as the primary key.
+This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Okta as the primary key.
 
 ### Generate and run migrations
 

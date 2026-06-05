@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: Creating PostgreSQL Updatable Views
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The WITH CHECK OPTION clause works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+The WITH CHECK OPTION clause works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create an updatable view using the `WITH CHECK OPTION` clause to ensure that the changes to the base tables through the view satisfy the view\-defining condition.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/
 ogImage: /postgresqltutorial/Install-PostgreSQL-Windows-Step-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Sample Database
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Installing PostgreSQL on Windows works the same no matter where you plan to run Postgres in production, since the steps here apply to standard PostgreSQL. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that large teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to reach for, with instant provisioning, branching, and a generous free tier.
+Installing PostgreSQL on Windows works the same no matter where you plan to run Postgres in production, since the steps here apply to standard PostgreSQL. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will step by step learn how to **install PostgreSQL** on your local system.
@@ -91,7 +91,7 @@ Step 10\. Click the **Finish** button to complete the PostgreSQL installation.
 
 ## 3\) Adding bin directory to the PATH environment variable
 
-By adding the bin directory of the PostgreSQL to the `PATH` environment variable, you enable the execution of common PostgreSQL tools, such as `plsql` and `pg_restore`, from any directory without the need to navigate the bin directory first.
+By adding the bin directory of the PostgreSQL to the `PATH` environment variable, you enable the execution of common PostgreSQL tools, such as `psql` and `pg_restore`, from any directory without the need to navigate the bin directory first.
 
 First, find the path of the `bin` directory of the PostgreSQL installation directory. Typically, it is set to the following:
 
@@ -108,7 +108,7 @@ C:\Program Files\PostgreSQL\16\bin
 Second, open the environment variables:
 
 - Press `Win + R` to open the Run dialog
-- Type `sysdm.cpl` an press Enter. The System Properties dialog will display.
+- Type `sysdm.cpl` and press Enter. The System Properties dialog will display.
 - Select the Advanced tab and click the `Environment Variables...` button.
 
 You’ll see two sections in the `Environment Variables` window:

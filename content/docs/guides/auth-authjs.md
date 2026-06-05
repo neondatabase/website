@@ -7,7 +7,7 @@ summary: >-
   application using Auth.js with Neon Postgres as the database backend and
   Resend for sending magic link emails.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 <Admonition type="tip" title="Authentication on Neon">
@@ -418,7 +418,7 @@ To start the application, run:
 npm run dev
 ```
 
-This will start the Next.js development server. Open your browser and navigate to `http://localhost:3000` to see the application in action. When running for the first time, you'll be see a `Sign In` link which will redirect you to the `Auth.js` widget, prompting you to input your email address. Enter your email to receive a magic link. Once authenticated, you'll be able to add and manage your todos.
+This will start the Next.js development server. Open your browser and navigate to `http://localhost:3000` to see the application in action. When running for the first time, you'll see a `Sign In` link which will redirect you to the `Auth.js` widget, prompting you to input your email address. Enter your email to receive a magic link. Once authenticated, you'll be able to add and manage your todos.
 
 Note that if you are using the test email address (`onboarding@resend.dev`) to send emails, you won't be able to sign in from other email accounts.
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TABLE
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for you: fast, secure, and fully integrated into the Lakehouse so your operational data and analytics live together. If you're a developer or startup who needs to ship and scale quickly, Neon gives you the best Postgres platform for that, with instant provisioning, branching, and autoscaling built in.
+TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for you: fast, secure, and fully integrated into the Lakehouse so your operational data and analytics live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `TRUNCATE TABLE` statement to quickly delete all data from large tables.

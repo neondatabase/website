@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DELETE CASCADE
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Removing duplicate rows is a common cleanup task in any PostgreSQL database, and the techniques shown here using DELETE USING, subqueries with ROW_NUMBER, and intermediate tables work on Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+Removing duplicate rows is a common cleanup task in any PostgreSQL database, and the techniques shown here using DELETE USING, subqueries with ROW_NUMBER, and intermediate tables work on Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use various techniques to delete duplicate rows in PostgreSQL.
@@ -77,7 +77,7 @@ The output indicates some duplicate rows such as 2 apples and 3 oranges in the `
 
 If the table has few rows, you can easily see which ones are duplicates immediately. However, this is not the case with a table that has lots of rows.
 
-The find the duplicate rows, you use the following statement:
+To find the duplicate rows, you use the following statement:
 
 ```sql
 SELECT

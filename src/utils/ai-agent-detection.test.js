@@ -26,6 +26,7 @@ describe('isAIAgentRequest', () => {
       'llm-agent',
       'axios',
       'got',
+      'curl',
     ];
 
     aiAgentPatterns.forEach((pattern) => {

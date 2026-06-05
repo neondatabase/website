@@ -6,7 +6,7 @@ page_description: >-
   using various PostgreSQL copy table statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-copy-table/'
 ogImage: /postgresqltutorial/PostgreSQL-Copy-Table-300x260.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNCATE TABLE
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Copying tables with CREATE TABLE AS works on any PostgreSQL database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytical and transactional workloads in sync. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you instant branching, autoscaling, and a serverless Postgres platform that gets out of your way.
+Copying tables with CREATE TABLE AS works on any PostgreSQL database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytical and transactional workloads in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![PostgreSQL Copy Table](/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png?alignright)**Summary**: in this tutorial, we will show you step by step how to copy an existing table including table structure and data by using the various forms of PostgreSQL copy table statement.

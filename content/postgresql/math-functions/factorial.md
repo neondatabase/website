@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-factorial/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXP() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The factorial() function is a standard part of PostgreSQL, so everything here works with any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup racing to ship and scale, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+The factorial() function is a standard part of PostgreSQL, so everything here works with any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `factorial()` function to calculate the factorial of a number.

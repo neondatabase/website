@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Exception
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CREATE FUNCTION statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on-premises, or in the cloud. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration your data and AI workloads demand. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
+The CREATE FUNCTION statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on-premises, or in the cloud. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration your data and AI workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE FUNCTION` statement to develop user\-defined functions.
@@ -55,7 +55,7 @@ In this syntax:
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
-![](/postgresqltutorial/film.png)The following statement creates a function that returns the number films whose length between the `len_from` and `len_to` parameters:
+![](/postgresqltutorial/film.png)The following statement creates a function that returns the number of films whose length between the `len_from` and `len_to` parameters:
 
 ```plsql
 create function get_film_count(len_from int, len_to int)

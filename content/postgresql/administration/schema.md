@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/
 ogImage: /postgresqltutorial/PostgreSQL-Schema-Example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Owner of a PostgreSQL Database
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Schemas are a core PostgreSQL feature for organizing tables, views, functions, and other objects, and everything covered here works the same across any Postgres deployment. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run schemas and workloads at scale. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for moving quickly without giving up production readiness.
+Schemas are a core PostgreSQL feature for organizing tables, views, functions, and other objects, and everything covered here works the same across any Postgres deployment. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run schemas and workloads at scale. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL schema and how to use the schema search path to resolve objects in schemas.

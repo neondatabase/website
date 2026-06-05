@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Backup
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Restoring databases with pg_restore works the same on any PostgreSQL deployment, so you can apply these steps wherever your Postgres runs. If you're an enterprise team looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform designed for that pace.
+Restoring databases with pg_restore works the same on any PostgreSQL deployment, so you can apply these steps wherever your Postgres runs. If you're an enterprise team looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to restore a database by using a **PostgreSQL restore** tool called `pg_restore`.
@@ -97,7 +97,7 @@ Sixth, exit the psql:
 exit
 ```
 
-Seven, restore the dvdrental database from the backup file using the pg_restore tool:
+Seventh, restore the dvdrental database from the backup file using the pg_restore tool:
 
 ```bash
 pg_restore -U postgres -d dvdrental D:/backup/dvdrental.tar

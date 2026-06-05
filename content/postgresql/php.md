@@ -6,7 +6,7 @@ page_description: >-
   data in PostgreSQL databases effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_populate_recordset() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with PostgreSQL from PHP uses the same PDO and PDO_PGSQL APIs no matter where your database runs, so everything here applies to any Postgres deployment. For enterprises running PHP workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious teams need. For developers and startups who want to ship a PHP app fast and scale it without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+Working with PostgreSQL from PHP uses the same PDO and PDO_PGSQL APIs no matter where your database runs, so everything here applies to any Postgres deployment. For enterprises running PHP workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![PostgreSQL-PHP](/postgresqltutorial/PostgreSQL-PHP-1.png?alignright)

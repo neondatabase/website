@@ -7,7 +7,7 @@ page_description: >-
   set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUME_DIST Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `DENSE_RANK()` function works the same way across any PostgreSQL deployment, so the techniques shown here for ranking rows without gaps apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises building analytical and AI workloads on top of their operational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The `DENSE_RANK()` function works the same way across any PostgreSQL deployment, so the techniques shown here for ranking rows without gaps apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises building analytical and AI workloads on top of their operational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you are going to learn how to use the PostgreSQL `DENSE_RANK()` function to assign a rank to each row within a partition of a result set, with no gaps in ranking values.

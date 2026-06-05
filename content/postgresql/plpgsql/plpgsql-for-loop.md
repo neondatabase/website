@@ -6,7 +6,7 @@ page_description: >-
   over a range of integers and a result set of a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-for-loop/'
 ogImage: /postgresqltutorial/plpgsql-FOR-loop.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL While Loop
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The PL/pgSQL FOR loop works the same on any PostgreSQL instance, so what you learn here carries over to whichever Postgres you run. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+The PL/pgSQL FOR loop works the same on any PostgreSQL instance, so what you learn here carries over to whichever Postgres you run. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PL/pgSQL `for` loop statements to iterate over a range of integers or a result set of a query.
@@ -72,7 +72,7 @@ begin
    for counter in reverse 5..1 loop
       raise notice 'counter: %', counter;
    end loop;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -93,7 +93,7 @@ begin
   for counter in 1..6 by 2 loop
     raise notice 'counter: %', counter;
   end loop;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -131,7 +131,7 @@ begin
 	raise notice '%(% mins)', f.title, f.length;
     end loop;
 end;
-$$
+$$;
 ```
 
 ```
@@ -191,7 +191,7 @@ begin
 	elsif sort_type = 2 then
 	  query := query || 'order by release_year';
 	else
-	   raise 'invalid sort type %s', sort_type;
+	   raise 'invalid sort type %', sort_type;
 	end if;
 
 	query := query || ' limit $1';
@@ -201,7 +201,7 @@ begin
 	     raise notice '% - %', rec.release_year, rec.title;
 	end loop;
 end;
-$$
+$$;
 ```
 
 Output:
@@ -234,4 +234,4 @@ NOTICE:  2006 - Agent Truman
 NOTICE:  2006 - Chamber Italian
 ```
 
-In this tutorial, you have learned various forms of the PL/pgSQL for loop statements
+In this tutorial, you have learned various forms of the PL/pgSQL for loop statements.

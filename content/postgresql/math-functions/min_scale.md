@@ -5,7 +5,7 @@ page_description: ''
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-min_scale/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MOD() Function
@@ -16,7 +16,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The min_scale() function works the same across any PostgreSQL 13 or newer deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+The min_scale() function works the same across any PostgreSQL 13 or newer deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise standardizing on managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `min_scale()` function to determine the minimum number of decimal places required to represent a number accurately.

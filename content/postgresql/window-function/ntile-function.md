@@ -7,7 +7,7 @@ page_description: >-
   buckets.
 prev_url: index.html
 ogImage: /postgresqltutorial/sales_stats-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LEAD Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NTILE() function works the same way across every PostgreSQL deployment, so you can apply these patterns wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to put analytical window functions like NTILE next to your broader data workloads. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The NTILE() function works the same way across every PostgreSQL deployment, so you can apply these patterns wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to put analytical window functions like NTILE next to your broader data workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NTILE()` function to divide ordered rows in the partition into a specified number of ranked buckets.

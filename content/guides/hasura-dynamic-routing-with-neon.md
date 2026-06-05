@@ -4,10 +4,10 @@ subtitle: Leverage Neon's branching with Hasura's dynamic routing for powerful d
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-20T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
-Managing different database environments for development, testing, staging, and production can be complex. Traditional methods often involve provisioning separate database instances, managing complex data synchronization scripts, or dealing with slow snapshot restores. Neon's serverless Postgres brings efficient, Git-like branching to your database, while Hasura provides an instant GraphQL API layer.
+Managing different database environments for development, testing, staging, and production can be complex. Traditional methods often involve provisioning separate database instances, managing complex data synchronization scripts, or dealing with slow snapshot restores. Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, brings efficient, Git-like branching to your database, while Hasura provides an instant GraphQL API layer.
 
 This guide demonstrates how to combine the power of [Neon's database branching](/docs/introduction/branching) with [Hasura's Dynamic Database Routing](https://hasura.io/docs/2.0/databases/database-config/dynamic-db-connection/) feature. This combination allows you to create isolated database environments instantly using Neon branches and dynamically route GraphQL requests from Hasura to the appropriate branch based on request context (like HTTP headers or session variables), streamlining your development, testing, and preview workflows. By leveraging Neon's branching and Hasura's dynamic routing, you can effectively consolidate your infrastructure, serving multiple development, testing, or preview environments from only one Neon project and one Hasura instance.
 

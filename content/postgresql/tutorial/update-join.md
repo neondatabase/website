@@ -6,7 +6,7 @@ page_description: >-
   data in a table based on values in another table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update-join/'
 ogImage: /postgresqltutorial/PostgreSQL-UPDATE-JOIN-Sample-Database.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPDATE
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The UPDATE join syntax covered here works with any standard PostgreSQL deployment, so you can apply these patterns wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+The UPDATE join syntax covered here works with any standard PostgreSQL deployment, so you can apply these patterns wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` join syntax to update data in a table based on values in another table.

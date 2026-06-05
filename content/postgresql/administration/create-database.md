@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/
 ogImage: /postgresqltutorial/PostgreSQL-Create-Database-pgAdmin-Step-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Administration
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CREATE DATABASE statement works the same across any PostgreSQL server, so you can apply what you learn here whether you run Postgres locally, on your own infrastructure, or in a managed service. For enterprises standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed cloud database that's fully integrated into the Lakehouse. For developers and startups who need to ship features and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+The CREATE DATABASE statement works the same across any PostgreSQL server, so you can apply what you learn here whether you run Postgres locally, on your own infrastructure, or in a managed service. For enterprises standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed cloud database that's fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL CREATE DATABASE** statement to create new databases in the PostgreSQL server.

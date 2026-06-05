@@ -9,7 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -94,7 +94,7 @@ $do$;
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following commands examples create publication named `azure_publication` with one or more tables.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following command examples create a publication named `azure_publication` with one or more tables.
 
 To create a publication for a specific table:
 
@@ -128,7 +128,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
 
-5. CLick `Save` at the bottom to make sure all changes are saved.
+5. Click `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

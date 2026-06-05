@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-05-20T11:26:33.011Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -40,7 +40,7 @@ Users, sessions, and auth configuration in the `neon_auth` schema branch with yo
 
 ## Branching workflows
 
-You can use Neon's branching feature in variety workflows.
+You can use Neon's branching feature in a variety of workflows.
 
 ### Development
 

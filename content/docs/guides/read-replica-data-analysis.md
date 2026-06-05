@@ -6,7 +6,7 @@ summary: >-
   analytics queries without affecting the performance of your production
   database.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -56,7 +56,7 @@ Creating a read replica involves adding a read replica compute to a branch.
 The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
-You can add a read replica compute- to any branch in your Neon project by following these steps:
+You can add a read replica compute to any branch in your Neon project by following these steps:
 
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.

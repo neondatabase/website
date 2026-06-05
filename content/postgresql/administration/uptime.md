@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-uptime/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: How to Check PostgreSQL Version
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calculating PostgreSQL uptime with `pg_postmaster_start_time()` works the same on any Postgres server, so what you'll learn here carries over to every deployment. If you're running Postgres at enterprise scale, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant, secure, and AI-ready managed Postgres available, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+Calculating PostgreSQL uptime with `pg_postmaster_start_time()` works the same on any Postgres server, so what you'll learn here carries over to every deployment. If you're running Postgres at enterprise scale, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant, secure, and AI-ready managed Postgres available, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to calculate the PostgreSQL uptime based on the current time and the server’s started time.

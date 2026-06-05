@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-sum-function/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MIN() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The SUM() aggregate function works the same across any PostgreSQL deployment, so everything you learn here transfers directly to your own databases. For enterprises running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that modern data teams need. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
+The SUM() aggregate function works the same across any PostgreSQL deployment, so everything you learn here transfers directly to your own databases. For enterprises running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that modern data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to use PostgreSQL `SUM()` function to calculate the sum of a set of values.
@@ -89,7 +89,7 @@ Output:
 (1 row)
 ```
 
-In this example, the `SUM()` function returns a `NULL` because the `payment` the table has no row with the `customer_id` 2000\.
+In this example, the `SUM()` function returns a `NULL` because the `payment` table has no row with the `customer_id` 2000\.
 
 ### 3\) Using the SUM() function with COALESCE() function example
 

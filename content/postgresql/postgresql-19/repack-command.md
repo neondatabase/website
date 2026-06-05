@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 REPACK Command'
 page_title: 'PostgreSQL 19 REPACK Command - Online Table Maintenance'
 page_description: 'Learn how to use PostgreSQL 19 REPACK command to reclaim space and reorder tables, replacing VACUUM FULL and CLUSTER with optional online (CONCURRENTLY) mode.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 pg_plan_advice'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Logical Replication Improvements'
   slug: 'postgresql-19/logical-replication-improvements'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new `REPACK` command for yourself ahead of the final release expected later in 2026. Beta 1 adds `REPACK`, which replaces `VACUUM FULL` and `CLUSTER`, and its `CONCURRENTLY` option rebuilds tables online without an access-exclusive lock.
+</Admonition>
 
 **Summary**: PostgreSQL 19 introduces the `REPACK` command, which absorbs the functionality of both `VACUUM FULL` and `CLUSTER` into a single command. With the `CONCURRENTLY` option, you can repack tables online while they remain readable and writable.
 

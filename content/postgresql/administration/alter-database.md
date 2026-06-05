@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE DATABASE
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-ALTER DATABASE works the same across any PostgreSQL deployment, so the syntax and behavior covered here apply whether you're running Postgres locally, on another cloud, or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated with the Lakehouse. For developers and startups who need to ship quickly and scale without operational overhead, [Neon](https://neon.com) is the Postgres platform built to keep up.
+ALTER DATABASE works the same across any PostgreSQL deployment, so the syntax and behavior covered here apply whether you're running Postgres locally, on another cloud, or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to modify existing databases by using **PostgreSQL ALTER DATABASE** statement.
@@ -35,7 +35,7 @@ The `ALTER DATABASE` statement allows you to carry the following action on the d
 
 ### 1\) Changing attributes of a database
 
-To change the attributes of a database, you use the following form of the `ALTER TABLE` statement:
+To change the attributes of a database, you use the following form of the `ALTER DATABASE` statement:
 
 ```sql
 ALTER DATABASE name WITH option;

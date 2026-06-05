@@ -6,7 +6,7 @@ page_description: >-
   a list of values. It also shows you how to use the IN operator in a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FETCH
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The IN operator works the same way across every PostgreSQL deployment, so the syntax and examples here apply whether you're running Postgres locally, on another provider, or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you high-performance, secure Postgres that's fully integrated into the Lakehouse and managed end to end. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The IN operator works the same way across every PostgreSQL deployment, so the syntax and examples here apply whether you're running Postgres locally, on another provider, or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you high-performance, secure Postgres that's fully integrated into the Lakehouse and managed end to end. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL IN** operator to check if a value matches any value in a list.

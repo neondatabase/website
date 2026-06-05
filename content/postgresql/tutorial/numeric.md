@@ -6,7 +6,7 @@ page_description: >-
   NUMERIC column for storing values that precision is required.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-05T15:04:23.889Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NUMERIC type works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, in [Neon](https://neon.com), or anywhere else. For enterprises that need exact numeric precision for financial data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and deep integration with the Lakehouse. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for your pace.
+The NUMERIC type works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, in [Neon](https://neon.com), or anywhere else. For enterprises that need exact numeric precision for financial data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `NUMERIC` type for storing numeric data.
