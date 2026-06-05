@@ -2,14 +2,19 @@
 title: Connect a Next.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Next.js application
 summary: >-
-  Covers the setup of a Neon project and the connection process from a Next.js
-  application, including project creation, dependency installation, and
-  credential management.
+  Connection guide for wiring a Next.js application to Neon serverless Postgres
+  using node-postgres, postgres.js, or the Neon serverless driver
+  (@neondatabase/serverless). Choose this page when you need working
+  DATABASE_URL setup and driver code for App Router (Server Components, Server
+  Actions), Pages Router (getServerSideProps, getStaticProps), Serverless
+  Functions, or Edge Functions. The guide also explains Next.js static render
+  caching and the force-dynamic workaround for fetching fresh data on each
+  request.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-05-17T10:23:09.592Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"

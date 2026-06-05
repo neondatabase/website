@@ -1,11 +1,16 @@
 ---
 title: Neon OAuth integration
 summary: >-
-  How to integrate your application with Neon using OAuth, enabling secure
-  interactions with user accounts while maintaining data privacy and requiring
-  user approval for access.
+  Neon OAuth integration lets partner applications act on Neon user accounts
+  without storing credentials, using an OpenID Connect server at
+  oauth2.neon.tech with predefined project and organization scopes. Use this
+  page when building a third-party integration that must read, create, update,
+  or delete Neon projects and organizations on behalf of end users via the
+  authorization code grant flow. Access is limited to active Neon commercial
+  partners. The page covers the consent screen, authorization URL construction,
+  code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-02-13T12:51:21.153Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.

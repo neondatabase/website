@@ -2,11 +2,13 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 summary: >-
-  Covers the process of connecting to a Neon database from any application,
-  including how to obtain connection strings and use the Neon VS Code
-  extension for enhanced development.
+  Neon connection strings are generated in the Neon Console by selecting a
+  branch, compute, database, and role. Use the pooled endpoint (append
+  `-pooler`) for higher concurrency, or the direct endpoint on port 5432 when
+  your driver requires a native connection. A serverless driver enables
+  WebSocket and HTTP for edge runtimes where TCP is unavailable.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

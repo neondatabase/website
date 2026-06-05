@@ -2,12 +2,16 @@
 title: Replicate data with Inngest
 subtitle: Learn how to replicate data from Neon with Inngest
 summary: >-
-  How to replicate data from a Neon Postgres database to Inngest workflows using
-  Neon's logical replication feature, enabling custom transformations and
-  integration with third-party APIs.
+  Inngest's native Neon integration uses Postgres logical replication to convert
+  row-level database changes into typed events (such as db/users.updated) that
+  trigger durable, serverless TypeScript workflows. Choose this approach when you
+  need to forward Neon Postgres changes to third-party destinations like
+  Amplitude or S3 without writing a custom replication consumer. Setup requires
+  enabling logical replication in the Neon console and supplying admin
+  credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.103Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

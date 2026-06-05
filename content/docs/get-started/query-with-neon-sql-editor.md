@@ -2,13 +2,16 @@
 title: Query with Neon's SQL Editor
 subtitle: Query your database from the Neon Console using the Neon SQL Editor
 summary: >-
-  Covers the use of Neon's SQL Editor for executing queries on databases within
-  the Neon Console, including features like query history, saving queries, and
-  utilizing Explain and Analyze functions.
+  The Neon SQL Editor is a browser-based query interface built into the Neon
+  Console that runs SQL against any database branch without installing a client.
+  Use it to run EXPLAIN and EXPLAIN ANALYZE, query historical data with Time
+  Travel, and generate SQL from natural language. Query history entries are
+  capped at 9 KB. AI features are rate-limited, and results export as CSV,
+  JSON, or XLSX.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.

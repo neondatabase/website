@@ -3,11 +3,16 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 summary: >-
-  Covers the setup of the `neon` extension for gathering Neon-specific metrics,
-  including monitoring the Local File Cache hit ratio through the
-  `neon_stat_file_cache` view.
+  The `neon` PostgreSQL extension exposes the `neon_stat_file_cache` view,
+  which reports Local File Cache (LFC) hit ratio, misses, hits, and writes for
+  a Neon compute instance. Use it to diagnose cache efficiency and determine
+  whether your working set fits in memory. OLTP workloads should target a
+  `file_cache_hit_ratio` of 99% or better; a low ratio signals a need for a
+  larger compute size. LFC statistics reset on compute restart. `EXPLAIN
+  ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query LFC
+  and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.

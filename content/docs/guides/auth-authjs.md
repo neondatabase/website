@@ -3,11 +3,15 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 summary: >-
-  Step-by-step guide for implementing passwordless authentication in a Next.js
-  application using Auth.js with Neon Postgres as the database backend and
-  Resend for sending magic link emails.
+  Auth.js (NextAuth.js v5) with the Neon Postgres adapter stores users,
+  sessions, and magic-link verification tokens directly in a Neon database,
+  enabling passwordless email authentication in Next.js without a separate auth
+  service. Use this guide when you want self-hosted auth with full database
+  control, as an alternative to the managed Neon Auth option. The setup uses
+  @auth/pg-adapter, @neondatabase/serverless, and Resend as the email provider
+  for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="tip" title="Authentication on Neon">

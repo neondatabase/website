@@ -2,11 +2,15 @@
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
 summary: >-
-  Covers the setup of Neon Auth's branching feature, enabling isolated
-  authentication environments for testing changes to permissions and
-  configurations without impacting production data.
+  Neon Auth stores users, sessions, and configuration in the database's
+  neon_auth schema, so authentication data is automatically cloned when you
+  create a branch, giving each branch its own fully isolated auth environment.
+  Use this page when you need to safely test OAuth providers, RBAC policy
+  changes, password reset flows, or full application refactors without touching
+  production users. Each branch gets a unique Auth API URL, and sessions and
+  tokens do not cross between branches.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

@@ -2,10 +2,15 @@
 title: 'Neon CLI command: me'
 subtitle: 'View current user info, login details, and project limits'
 summary: >-
-  Covers the usage of the `me` command in the Neon CLI to display information
-  about the current user, including login details and project limits.
+  The `neon me` CLI command prints the authenticated user's account details:
+  login, email, name, plan type, projects limit, branches limit, and
+  max autoscaling limit in compute units. Use it to confirm which account is
+  active after authentication or to check plan-level quotas without opening
+  the Neon console. JSON output (`-o json`) exposes additional fields including
+  billing_account, auth_accounts, subscription_type, and numeric quota values
+  not shown in the default table format.
 enableTableOfContents: true
-updatedOn: '2026-03-26T15:20:43.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

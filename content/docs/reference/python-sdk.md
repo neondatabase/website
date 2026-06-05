@@ -3,11 +3,13 @@ title: Python SDK (Neon API)
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
 summary: >-
-  Covers the setup and usage of the Neon Python SDK, enabling programmatic
-  management of Neon projects, branches, databases, and other platform resources
-  through the Neon API.
+  The Neon Python SDK (neon-api, installable via pip) wraps the Neon REST API
+  and exposes methods for creating, updating, and deleting projects, branches,
+  databases, endpoints, roles, API keys, and organizations from Python code.
+  Use it when you need to automate Neon platform operations in Python scripts or
+  applications without constructing raw HTTP requests against the Neon API.
 enableTableOfContents: true
-updatedOn: '2026-03-25T00:15:20.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

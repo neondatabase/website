@@ -3,12 +3,17 @@ title: Manage Neon with Terraform
 subtitle: Use Terraform to provision and manage your Neon projects, branches, endpoints,
   roles, databases, and other resources as code.
 summary: >-
-  How to use Terraform to provision and manage Neon projects, including
-  branches, databases, and compute endpoints, enabling automated and consistent
-  infrastructure management.
+  The community-maintained Terraform provider for Neon (`kislerdm/neon`) lets
+  you define Neon projects, branches, compute endpoints, roles, databases, API
+  keys, and VPC endpoints as infrastructure-as-code in declarative HCL. Choose
+  this page when you want to provision new Neon resources or bring existing
+  Console-created resources under Terraform management using `terraform import`
+  or the declarative import-block syntax. The provider is not officially
+  supported by Neon; the guide covers upgrade practices to prevent unintended
+  resource replacements and data loss during `terraform init -upgrade`.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-02-15T20:51:54.266Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.

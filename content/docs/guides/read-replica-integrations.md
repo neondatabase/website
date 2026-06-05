@@ -2,11 +2,15 @@
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
 summary: >-
-  Covers the setup of read replicas in Neon to enhance application scalability
-  by distributing read requests, including integration examples for popular
-  frameworks like Prisma.
+  Neon read replicas are independent read-only computes that share primary
+  storage at no extra cost, letting you route SELECT queries to replicas and
+  writes to the primary to increase read throughput. The page shows how to wire
+  up that routing using each framework's built-in support: Prisma's
+  `@prisma/extension-read-replicas`, Drizzle ORM's `withReplicas()`, Laravel's
+  `read`/`write` database config, Django's `DATABASE_ROUTERS`, and Entity
+  Framework Core's separate `DbContext` classes.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.

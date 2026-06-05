@@ -2,12 +2,16 @@
 title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 summary: >-
-  Covers the technical implementation of database provisioning, versioning, user
-  upgrades, and usage monitoring for AI agent platforms using the Neon agent
-  plan.
+  The Neon Agent Plan integration guide explains how to provision per-tenant
+  Postgres databases, transfer projects between free and paid organizations, and
+  implement snapshot-based database versioning using the Neon API. AI agent
+  platform builders use this guide when embedding Neon as database
+  infrastructure for their users, covering the full lifecycle from free-tier
+  project creation through paid upgrades and PITR/snapshot undo workflows.
+  Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-29T10:41:30.007Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.

@@ -2,11 +2,16 @@
 title: Neon CLI quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 summary: >-
-  How to quickly set up and authenticate the Neon CLI, including installation
-  instructions for various platforms and methods for managing authentication
-  through web or API key options.
+  The Neon CLI quickstart installs neonctl on macOS, Windows, or Linux via
+  Homebrew, npm, or bun, then authenticates using browser-based `neon auth` or
+  a personal API key. Use this page when setting up terminal access to Neon for
+  the first time, before working through the full CLI reference. It also covers
+  the `.neon` context file (`neon set-context`) to avoid repeating
+  `--project-id` and `--org-id` flags, shell tab completion, and first commands
+  like `neon projects list`, `neon branches create`, and
+  `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.

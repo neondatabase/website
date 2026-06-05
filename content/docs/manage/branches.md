@@ -1,14 +1,17 @@
 ---
 title: Manage branches
 summary: >-
-  Covers the management of branches within Neon projects, including creation,
-  naming requirements, and the implications of branch usage on storage and data
-  modification.
+  Neon branches are copy-on-write clones of a parent branch that isolate schema
+  and data changes without affecting the parent. Each project starts with a root
+  branch; you can create child branches from it or any existing branch. Use this
+  page to create, rename, protect, restore, or delete branches via the Console,
+  CLI, or API. Unused branches accumulate storage costs as they age past the
+  history window.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.

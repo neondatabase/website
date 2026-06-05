@@ -3,11 +3,14 @@ title: Connect a JavaScript/Node.js application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from JavaScript using pg, postgres.js, or
   the Neon serverless driver
 summary: >-
-  Covers the setup of connecting a Node.js application to a Neon Postgres
-  database using popular drivers like pg, Postgres.js, and the Neon serverless
-  driver, including performing basic CRUD operations.
+  Connect a Node.js application to Neon Postgres using node-postgres (pg),
+  Postgres.js, or the Neon serverless driver (@neondatabase/serverless). Each
+  driver section includes working CRUD examples covering table creation, insert,
+  select, update, and delete. The Neon serverless driver connects over HTTP and
+  suits serverless and edge runtimes. Bun and Deno users are directed to
+  separate guides.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.166Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

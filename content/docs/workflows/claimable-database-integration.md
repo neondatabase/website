@@ -2,11 +2,15 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 summary: >-
-  Covers the setup of Neon projects for users through the project database claim
-  API, detailing the process of creating, transferring, and claiming Postgres
-  databases.
+  The Neon project transfer API lets you provision a Postgres database,
+  generate a time-limited transfer request, and send the user a claim URL.
+  The user takes full ownership without losing the original connection
+  string. Use this pattern for SaaS onboarding flows, agency handoffs, or
+  demo environments where instant database access must precede account
+  creation. The feature is in private preview and does not support
+  transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Overview

@@ -2,11 +2,16 @@
 title: 'Neon CLI command: set-context'
 subtitle: Set default project context for CLI sessions to avoid repeating project ID
 summary: >-
-  Covers the usage of the `set-context` command in the Neon CLI to establish a
-  background context for CLI sessions, enabling project-specific actions without
-  repeatedly specifying project IDs.
+  The `set-context` Neon CLI command saves a project ID, organization ID, or
+  branch to a `.neon` context file so subsequent commands run against that
+  project or org without requiring `--project-id` or `--org-id` flags each
+  time. Use this command when working repeatedly against the same project to
+  eliminate repetitive flag passing across a CLI session. Context is stored in a
+  `.neon` file (or a named `--context-file`) found by walking up the directory
+  tree to the project root, supports multiple independent named files, and
+  persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.969Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

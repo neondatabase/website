@@ -2,11 +2,17 @@
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
 summary: >-
-  Covers strategies for managing and reducing Neon costs by optimizing compute
-  usage, including right-sizing, effective autoscaling, enabling scale to zero,
-  and managing persistent connections.
+  Practical strategies for cutting Neon costs across every billing metric:
+  compute (CU-hours), storage, instant restore history, extra branches, and
+  public data transfer. Use this page to diagnose an unexpectedly high bill or
+  to proactively reduce spend. Key tactics include right-sizing compute,
+  enabling scale to zero, running VACUUM FULL to reclaim storage space, and
+  trimming the PITR history window. Instant restore storage is billed at
+  $0.20/GB-month on paid plans for root branches only. Extra branches cost
+  $1.50/branch-month over the plan allowance. Paid plans include 500 GB/month
+  of public data transfer, then $0.10/GB.
 enableTableOfContents: true
-updatedOn: '2026-05-29T00:27:59.360Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.

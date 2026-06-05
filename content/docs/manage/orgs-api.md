@@ -1,11 +1,14 @@
 ---
 title: Manage organizations using the Neon API
 summary: >-
-  Covers managing Neon Organizations through the Neon API, including handling
-  organization API keys, member management, and invitations, with distinctions
-  between personal and organization API key usage.
+  Neon Organization API endpoints for managing org API keys, members,
+  invitations, and project transfers. Organization API keys are auto-scoped to
+  the org; personal API keys require an explicit org_id parameter. Some
+  operations, including creating invitations, removing members, and transferring
+  projects, require a personal admin key and reject organization API keys. A
+  permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-03-13T19:35:31.433Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.

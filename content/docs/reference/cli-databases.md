@@ -2,10 +2,14 @@
 title: 'Neon CLI command: databases'
 subtitle: 'List, create, and delete databases in a Neon project'
 summary: >-
-  Covers the usage of the Neon CLI `databases` command for managing databases,
-  including listing, creating, and deleting databases within a Neon project.
+  The Neon CLI `databases` command lists, creates, and deletes Postgres
+  databases within a Neon project branch directly from the terminal. Use
+  `neon databases create --name <db> --owner-name <role>` to provision a
+  database on a named branch, or omit `--branch` to target the project's
+  default branch. Each subcommand accepts `--project-id` (required only for
+  accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.961Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

@@ -2,11 +2,16 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 summary: >-
-  Covers the creation of schema-only branches in Neon, allowing users to
-  replicate only the database schema from a source branch without copying
-  sensitive data, ensuring a secure environment for development and testing.
+  Schema-only branches in Neon copy only the database structure from a source
+  branch, leaving all row data behind, so teams can develop and test against
+  production schemas without exposing confidential records. Use this feature
+  when you need a compliant development or CI/CD environment with realistic
+  table structure but no sensitive data, distinct from standard Neon branches
+  that copy both schema and data via copy-on-write. Schema-only branches are
+  independent root branches with plan-specific storage limits; reset-from-parent
+  is not supported.
 enableTableOfContents: true
-updatedOn: '2026-04-23T14:34:21.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBeta />

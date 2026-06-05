@@ -1,15 +1,18 @@
 ---
 title: Migrate data from Postgres with pg_dump and pg_restore
 summary: >-
-  Covers the migration of data between Postgres databases using `pg_dump` and
-  `pg_restore`, including connection requirements and best practices for Neon
-  environments.
+  Command reference for migrating a Postgres database to Neon using `pg_dump`
+  and `pg_restore`, covering flags (-Fc, -j, -O/--no-owner), custom-format
+  archives, and piping for small databases. Use this page when you need exact
+  dump/restore commands. For region migration or logical replication decisions,
+  see the Region migration page instead. Neon requires unpooled connection
+  strings, and does not support `pg_dumpall` or the `-C/--create` option.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-04-01T20:17:14.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.

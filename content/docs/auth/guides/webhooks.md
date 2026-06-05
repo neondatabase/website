@@ -2,10 +2,17 @@
 title: Webhooks
 subtitle: Handle authentication events with custom server logic
 summary: >-
-  Configure webhooks to receive notifications for authentication events like OTP
-  delivery, magic link delivery, and user creation in Neon Auth.
+  Neon Auth webhooks send HTTP POST requests to your server when authentication
+  events occur, letting you replace the built-in email provider with custom
+  delivery channels (SMS, WhatsApp, custom email) and intercept user signups
+  before they are written to the database. Use this page when you need to
+  override OTP or magic link delivery, block signups by domain, or sync new
+  users to external systems. Webhooks support events including send.otp,
+  send.magic_link, user.before_create, user.created, and
+  phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
+  verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-05-29T09:07:33.053Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

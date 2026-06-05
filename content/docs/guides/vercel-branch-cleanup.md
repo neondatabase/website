@@ -3,11 +3,16 @@ title: Managing Vercel preview branch cleanup
 subtitle: Understand cleanup timing and reduce branch accumulation for the
   Vercel-Managed integration
 summary: >-
-  Explains why Neon preview branches may not be deleted promptly when using the
-  Vercel-Managed integration, how to reduce Vercel's deployment retention
-  policy, and workarounds for immediate cleanup.
+  Neon preview branch cleanup in the Vercel-Managed integration is triggered by
+  Vercel deployment deletion, not Git branch deletion, so branches can persist
+  up to 6 months under Vercel's default retention policy. To clean up sooner,
+  lower Vercel's pre-production retention period, delete deployments manually
+  via the Vercel CLI or API, or add a GitHub Action using
+  neondatabase/delete-branch-action that fires on pull_request closed events.
+  Stale branches count toward plan branch limits and incur storage costs even
+  after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-03-20T16:01:10.989Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

@@ -1,13 +1,14 @@
 ---
 title: Postgres extension explorer
 summary: >-
-  Covers the browsing of supported Postgres extensions categorized by
-  functionality, including installation and update instructions for various
-  extensions related to AI, analytics, and auditing.
+  A category-browsable index of all Postgres extensions supported on Neon,
+  organized into groups such as AI/ML, analytics, geospatial, search, security,
+  and query optimization. Navigate to individual extension docs, install
+  instructions, or the flat alphabetical list.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2026-05-29T09:07:33.053Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Browse supported Postgres extensions by category.

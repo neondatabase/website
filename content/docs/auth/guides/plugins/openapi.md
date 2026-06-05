@@ -2,10 +2,14 @@
 title: Open API
 subtitle: Interactive API documentation and client generation
 summary: >-
-  Covers the setup of the OpenAPI plugin for Neon Auth, providing an interactive
-  API reference UI and a JSON Schema endpoint for generating type-safe clients.
+  The OpenAPI plugin for Neon Auth ships enabled by default and exposes a
+  Scalar-powered interactive API reference UI at /reference and an OpenAPI 3.x
+  JSON schema endpoint at /open-api/generate-schema. Use it to browse and
+  live-test auth endpoints (session, user, organization, admin) directly against
+  your database, or to import the spec into Postman, Insomnia, or a Scalar SDK
+  generator for type-safe clients in languages without a dedicated Neon Auth SDK.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.907Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

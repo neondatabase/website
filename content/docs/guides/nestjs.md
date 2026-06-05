@@ -2,11 +2,14 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 summary: >-
-  Step-by-step guide for connecting a NestJS application to a Neon project,
-  including project setup, dependency installation, and configuration of
-  database credentials for secure access.
+  NestJS-to-Neon integration uses a DatabaseModule that provisions a connection
+  pool via node-postgres, postgres.js, or the Neon serverless driver and injects
+  it as a NestJS provider. Choose this guide when adding a Neon serverless
+  Postgres backend to a TypeScript NestJS project without an ORM. The steps
+  cover Neon project creation, DATABASE_URL configuration in .env, and wiring
+  a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"

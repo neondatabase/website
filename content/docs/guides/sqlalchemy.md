@@ -2,14 +2,18 @@
 title: Connect an SQLAlchemy application to Neon
 subtitle: Set up a Neon project in seconds and connect from an SQLAlchemy application
 summary: >-
-  How to connect an SQLAlchemy application to a Neon project by creating the
-  project, installing the necessary Postgres driver, and configuring the
-  connection settings.
+  SQLAlchemy, a Python SQL toolkit and ORM, connects to Neon Postgres by
+  installing psycopg2 and passing a connection string to SQLAlchemy's
+  create_engine function. Use this guide to build a working connection, then
+  resolve Neon-specific errors caused by compute scale-to-zero suspension,
+  including SSL connection drops when idle connections are reused. A recent
+  version of SQLAlchemy is required to avoid idle connection reuse bugs. Set
+  pool_recycle or pool_pre_ping to prevent SSL SYSCALL EOF errors.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2026-02-06T22:07:33.054Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 

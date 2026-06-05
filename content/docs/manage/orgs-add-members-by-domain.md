@@ -1,8 +1,12 @@
 ---
 title: Add organization members by domain
 summary: >-
-  Add and verify email domains so users who sign up or log in with a matching
-  address are automatically added as organization members.
+  Auto-join by domain lets admins verify email domains via DNS TXT record.
+  Users who sign up or log in with a matching address are automatically added
+  as Members, with no manual invite required. Use this page to auto-provision
+  org membership for your company domain instead of sending individual invites.
+  An org can have multiple verified domains, and the same domain can be shared
+  across multiple Neon organizations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain

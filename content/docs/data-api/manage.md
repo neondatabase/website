@@ -2,11 +2,13 @@
 title: Manage Data API
 subtitle: 'Configure schemas, manage authentication providers, and control API access.'
 summary: >-
-  How to manage the Data API by configuring schemas, setting up authentication
-  providers, and controlling API access to customize its behavior and security
-  settings.
+  Neon Data API management covers post-enablement configuration: registering
+  or replacing JWT authentication providers via JWKS URL, and tuning advanced
+  settings such as exposed schemas, anonymous role, and CORS origins. Use this
+  page to switch auth providers, tighten security, or manage the API lifecycle
+  programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.810Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

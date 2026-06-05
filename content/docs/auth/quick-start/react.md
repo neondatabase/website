@@ -2,11 +2,14 @@
 title: Use Neon Auth with React (API methods)
 subtitle: Build your own auth UI
 summary: >-
-  Step-by-step guide for integrating Neon Auth into a React application,
-  covering project setup, SDK installation, environment variable configuration,
-  and client setup for authentication methods.
+  Neon Auth with React for Vite apps, using the `@neondatabase/neon-js` SDK's
+  programmatic API methods (`signUp()`, `signIn.email()`, `getSession()`) instead
+  of pre-built UI components. Use this page when you need full control over your
+  own auth UI rather than dropping in ready-made components. Registered users are
+  automatically synced to the `neon_auth.user` table in your Neon Postgres
+  database.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components

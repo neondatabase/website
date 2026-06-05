@@ -2,13 +2,17 @@
 title: Create a Neon Twin
 subtitle: Learn how to Twin your production database with Neon
 summary: >-
-  Covers the creation of a Neon Twin, a clone of your production database,
-  enabling developers to work in isolated environments with automatic
-  synchronization and efficient management for development and testing
-  workflows.
+  A Neon Twin is a full or partial clone of your production or staging database
+  hosted on Neon, giving developers isolated, sandboxed environments that stay
+  automatically synchronized with production. Use a Neon Twin when you want to
+  run development and testing against real schema and data without touching
+  production, with instant branches spun up per developer or feature. Choosing
+  between a full Twin (pg_dump/pg_restore of the entire database) and a partial
+  Twin (schema plus selected tables only) depends on data volume and how much
+  production fidelity your workflow requires.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-27T13:00:42.095Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CTA title="Explore our dev/test use case" description="Move development and testing to Neon; keep production right where it is.<br/><br/>Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>."></CTA>
