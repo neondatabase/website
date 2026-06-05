@@ -1,10 +1,14 @@
 ---
 title: Create an S3 bucket to store Postgres backups
 summary: >-
-  How to create an AWS S3 bucket for storing Postgres backups, including setting
-  up IAM roles and an OpenID Connect identity provider for authentication.
+  Part 1 of a 2-part guide for backing up a Postgres database to AWS S3 using
+  GitHub Actions. Covers creating an OIDC identity provider in IAM, an IAM role
+  with a trusted web identity, an S3 bucket, and a bucket policy granting List,
+  Get, Put, and Delete access. Complete this AWS-side setup before wiring up the
+  GitHub Actions workflow in part 2. Co-locating the bucket with the database
+  region reduces latency and transfer costs.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide will walk you through setting up an AWS S3 bucket to store your Postgres backups.

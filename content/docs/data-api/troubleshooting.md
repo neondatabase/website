@@ -2,11 +2,14 @@
 title: Data API troubleshooting
 subtitle: Common issues and solutions when using the Neon Data API
 summary: >-
-  Covers common issues and solutions for troubleshooting the Neon Data API,
-  including permission errors and JWT validation failures, along with steps to
-  resolve them.
+  Troubleshooting reference for the Neon Data API, with exact error messages,
+  root causes, and fixes. Common failures covered include JWT audience mismatch,
+  missing or expired tokens, neon_superuser permission denied, and PostgreSQL
+  error 42501 on the authenticated role. Also addresses RLS returning unexpected
+  rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
+  found" errors.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.811Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

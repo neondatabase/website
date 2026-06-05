@@ -3,9 +3,15 @@ title: Migrate from PlanetScale MySQL to Neon Postgres
 subtitle: Learn how to migrate your database from PlanetScale to Neon Postgres using
   pgloader
 summary: >-
-  Covers the migration of a PlanetScale MySQL database to Neon Postgres using the
-  `pgloader` utility, detailing prerequisites, credential retrieval, and step-by-step
-  instructions for a successful data transfer.
+  Migrating a PlanetScale MySQL (Vitess-compatible) database to Neon Postgres
+  uses pgloader, which converts schema, maps types (MySQL AUTO_INCREMENT to
+  Postgres SERIAL, TINYINT to BOOLEAN), and transfers data in a single
+  point-in-time operation. Writes on PlanetScale must be paused during
+  migration to prevent data loss. Use this guide when switching from PlanetScale
+  to Neon and needing a full schema-plus-data transfer. Neon's Free plan
+  supports up to 0.5 GB; larger databases require a paid plan. The Neon
+  connection string needs the endpoint ID embedded in the password field as a
+  pgloader workaround.
 enableTableOfContents: true
 isDraft: false
 ---

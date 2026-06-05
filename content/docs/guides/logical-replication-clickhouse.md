@@ -2,11 +2,15 @@
 title: Replicate data to ClickHouse
 subtitle: Learn how to replicate data from Neon to ClickHouse Cloud
 summary: >-
-  Step-by-step guide for replicating data from a Neon Postgres database to
-  ClickHouse Cloud using ClickPipes, ClickHouse's native CDC connector.
+  Replicate data from Neon Postgres to ClickHouse Cloud using ClickPipes, a
+  WAL-based ingestion service that reads CDC events via a Postgres publication
+  and a dedicated replication role. Use this guide to sync Neon tables into
+  ClickHouse for real-time analytics without custom ETL, with Console, API,
+  or Terraform setup options. Enabling logical replication permanently sets
+  wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-08T10:09:13.470Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

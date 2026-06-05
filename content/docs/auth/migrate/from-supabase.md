@@ -2,11 +2,16 @@
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 summary: >-
-  Step-by-step guide for migrating from Supabase to Neon, covering the
-  transition of authentication and database access using Neon Auth and Data API,
-  including necessary SDK installations and environment variable updates.
+  Step-by-step migration from Supabase Auth and Supabase database to Neon Auth
+  and Neon Data API. Replace `@supabase/supabase-js` with `@neondatabase/neon-js`,
+  swap environment variables, and update client initialization while keeping
+  existing auth method calls and `from()` database queries code-compatible.
+  Existing password-based users cannot transfer due to incompatible password
+  hashing algorithms, so this guide targets new projects, early development, or
+  OAuth-only apps. Neon Auth does not support phone authentication (SMS/WhatsApp),
+  SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.807Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

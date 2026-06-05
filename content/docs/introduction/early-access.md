@@ -2,11 +2,15 @@
 title: Join the Early Access Program
 subtitle: Help shape the future of Neon
 summary: >-
-  Join the Early Access Program to gain exclusive previews of upcoming Neon
-  features, connect with the team via a private community, and receive weekly
-  updates on developments for personal or organizational accounts.
+  Neon's Early Access Program gives users preview access to unreleased features,
+  a private Discord channel with the Neon team, and weekly product updates.
+  Enrollment is available at independent levels: personal account and
+  organization. Org-level enrollment grants every organization member preview
+  access across all projects in that org. Personal enrollment applies only to
+  projects under your own account. Opting out requires contacting Neon support
+  to avoid disruption to features already in use.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.089Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Sign up for the **Early Access Program** and get:

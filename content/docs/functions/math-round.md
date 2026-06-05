@@ -2,11 +2,15 @@
 title: Postgres round() function
 subtitle: Round numbers to a specified precision
 summary: >-
-  Covers the usage of the Postgres `round()` function to round numeric values to
-  specified decimal places or to the nearest integer, with examples for
-  practical applications in data analysis and financial calculations.
+  The PostgreSQL `round()` function rounds a numeric value to a specified number
+  of decimal places or to the nearest integer using the half-round-up
+  (round-half-away-from-zero) tie-breaking rule. Use it for financial
+  calculations, percentage display, and any query where you need to reduce
+  decimal precision without truncating. For bias-free rounding in accounting
+  contexts, the page explains why `round()` differs from banker's rounding and
+  covers alternatives `ceil()`, `floor()`, and `trunc()`.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `round()` function rounds numeric values to a specified number of decimal places or the nearest integer.

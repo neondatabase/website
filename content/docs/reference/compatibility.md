@@ -2,13 +2,18 @@
 title: Postgres compatibility
 subtitle: Learn about Neon as a managed Postgres service
 summary: >-
-  Covers the differences and features of Neon as a managed Postgres service,
-  including supported Postgres versions, available extensions, and the roles and
-  permissions model specific to Neon.
+  Neon's Postgres compatibility reference catalogs managed-service deviations
+  from standard Postgres: no superuser access (replaced by `neon_superuser`),
+  compute-size-dependent defaults for `max_connections`, `shared_buffers`, and
+  `maintenance_work_mem`, plus unsupported features like tablespaces and
+  persistent unlogged tables. Use this page when migrating to Neon to identify
+  which permissions, extensions, collation providers, or session behaviors
+  differ from a self-hosted install. Instance-level parameters are not
+  user-configurable on Neon except on the Scale plan via Neon Support.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.

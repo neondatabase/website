@@ -2,13 +2,17 @@
 title: Our DX Principles
 subtitle: 'Neon adapts to your workflow, not the other way around.'
 summary: >-
-  Covers the core principles of Neon's developer experience, focusing on
-  invisible infrastructure, instant deployments, modern workflows, and a
-  composable stack to enhance database management and adaptability.
+  Neon replaces traditional Postgres ops with continuous autoscaling,
+  copy-on-write branching, sub-second provisioning, and on-demand storage.
+  Read this page to understand why Neon behaves differently from fixed-instance
+  Postgres and which architectural decisions drive scale-to-zero, instant
+  restore, and branch-per-PR workflows. It also covers MCP and AI agent
+  integration, Neon Auth as a composable authentication primitive, and CLI and
+  GitHub Actions support for database lifecycle automation.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Our developer experience is anchored by four core pillars:

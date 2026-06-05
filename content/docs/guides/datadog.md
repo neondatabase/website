@@ -2,11 +2,15 @@
 title: Datadog integration
 subtitle: Send metrics and logs from Neon Postgres to Datadog
 summary: >-
-  Covers the setup of the Datadog integration for Neon, enabling the export of
-  metrics and Postgres logs to monitor database performance and resource
-  utilization directly within Datadog's observability platform.
+  The Neon Datadog integration exports Postgres metrics and logs from all
+  project computes to Datadog, available on Scale plan projects. Use this page
+  to set up monitoring of CPU, memory, connection counts, replication lag,
+  database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
+  error and activity visibility. Postgres log export is a preview feature.
+  Log transmission counts toward network egress billed after 500 GB on paid
+  plans.
 enableTableOfContents: true
-updatedOn: '2026-05-29T00:27:59.360Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

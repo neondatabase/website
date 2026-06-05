@@ -2,11 +2,16 @@
 title: Secure your app with RLS
 subtitle: Learn how Row-level Security (RLS) protects user data
 summary: >-
-  Step-by-step guide for implementing Row-Level Security (RLS) in a React.js app
-  using Neon, demonstrating how to secure user data by enforcing access control
-  at the database level with JWT authentication.
+  Step-by-step tutorial for securing a React note-taking app against
+  cross-user data leaks using Postgres Row-Level Security on Neon, with
+  JWT-based `auth.user_id()` and Drizzle's `crudPolicy`. Choose this page when
+  you need to verify that database-level RLS policies hold even after removing
+  application-layer `owner_id` filters, or when integrating Neon Auth, Auth0,
+  or Clerk as a JWT provider. The tutorial uses `ALTER TABLE ... DISABLE ROW
+  LEVEL SECURITY` to expose the leak, then shows how `crudPolicy` restores
+  isolation without touching application code.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial

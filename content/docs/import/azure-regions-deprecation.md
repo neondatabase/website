@@ -1,6 +1,14 @@
 ---
 title: Azure regions deprecation
 subtitle: What's changing, what to do, and answers to common questions
+summary: >-
+  Neon Azure regions (azure-eastus2, azure-westus3, azure-gwc) were deprecated
+  on April 7, 2026: new project creation is blocked, but existing projects keep
+  running with no end-of-support date currently set. Readers who need to act can
+  delete the project, migrate to a Neon AWS region, or move to Databricks
+  Lakebase to retain Azure data residency. The page also covers how to confirm
+  which region a project is in via the Console, CLI, or API, and what changes
+  when migrating, including new hostnames and project IDs.
 enableTableOfContents: true
 ---
 

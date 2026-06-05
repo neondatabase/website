@@ -2,14 +2,18 @@
 title: Built to scale
 subtitle: Neon supports you from prototype to scale-up
 summary: >-
-  Covers the stages of growth for using Neon, from free plans for side projects
-  to scalable solutions for startups, emphasizing ease of use, performance, and
-  reliability throughout the development lifecycle.
+  Neon fits every growth stage without requiring an architecture change: free
+  hosted Postgres for side projects, autoscaling and copy-on-write branching
+  for startup teams, and API-driven fleet management for scale-ups. Read this
+  page when evaluating whether Neon fits your current scale or planning how
+  scale-to-zero, programmatic provisioning, and consumption limits apply as your
+  workload grows. It spans the full lifecycle from a first prototype to embedded
+  Postgres for platforms and AI agent deployments.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.

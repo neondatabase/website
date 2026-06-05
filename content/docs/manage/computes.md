@@ -1,12 +1,14 @@
 ---
 title: Manage computes
 summary: >-
-  Covers the management of computes in Neon, detailing how to connect
-  applications to Postgres databases via primary and read replica computes,
-  along with viewing and editing compute details in the Neon Console.
+  Neon computes are virtualized Postgres instances attached to branches,
+  available as primary read-write or read-replica types. Use this page to
+  create, resize, or delete a compute, configure autoscaling or scale-to-zero,
+  size your compute based on working set and connection limits, or manage
+  compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.

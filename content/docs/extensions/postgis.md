@@ -2,11 +2,15 @@
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
 summary: >-
-  Covers the setup of the PostGIS extension in Neon for managing and analyzing
-  geospatial data, including enabling the extension, storing spatial data, and
-  querying with practical examples.
+  PostGIS extends Postgres with GEOMETRY and GEOGRAPHY data types, spatial
+  functions (ST_DWithin, ST_Intersects, ST_Buffer, ST_Distance), and GiST
+  indexing for querying coordinates, polygons, and location-based data. Use this
+  page to enable PostGIS on Neon with CREATE EXTENSION, store and query spatial
+  data, and tune performance for large geospatial datasets. For related
+  extensions such as pgRouting, PostGIS SFCGAL, and PostGIS Tiger Geocoder, see
+  the PostGIS-related extensions page.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.

@@ -2,11 +2,14 @@
 title: 'Neon CLI command: completion'
 subtitle: Generate shell completion scripts for neonctl commands and options
 summary: >-
-  Covers the usage of the `completion` command in the Neon CLI to generate a
-  script that enhances command-line efficiency by providing auto-completion for
-  `neonctl` commands and options.
+  The `neon completion` command generates a yargs-based shell tab-completion
+  script for `neonctl` that surfaces available commands and options when you
+  press Tab. Use this page when you want to enable autocomplete for the Neon
+  CLI in your terminal, so you can stop typing full command names from memory.
+  Installation targets include `.bashrc`, `.bash_profile`, `.profile`, and
+  `.zshrc` on Linux and macOS.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.960Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

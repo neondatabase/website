@@ -3,9 +3,15 @@ title: Instant restore
 subtitle: Learn how to revert changes or recover lost data using Neon's instant restore
   with Time Travel Assist
 summary: >-
-  Covers the process of using Neon's instant restore feature to revert root
-  branches to previous states, allowing recovery of lost data and querying
-  historical data through Time Travel Assist.
+  Instant restore (point-in-time restore, PITR) lets you revert a Neon root
+  branch to any earlier state within your plan's history window using a
+  timestamp or Log Sequence Number (LSN). It overwrites all data and schema on
+  all databases in that branch. Use it to recover from accidental data loss or
+  schema changes on production or main branches; child branches do not support
+  PITR. Before restoring, Time Travel Assist lets you run read-only queries
+  against any historical point to confirm the exact restore target. After
+  restoring, a backup branch is automatically created so you can roll back if
+  needed.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
@@ -13,7 +19,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

@@ -2,11 +2,14 @@
 title: Email verification
 subtitle: Verify user email addresses during sign-up or account creation
 summary: >-
-  Covers the setup of email verification in Neon Auth, detailing methods for
-  verifying user email addresses during sign-up, including verification codes
-  and links, along with configuration steps for each method.
+  Neon Auth email verification confirms that users own the email address
+  they register with, using either a numeric OTP code (works with shared or
+  custom email providers) or a click-through verification link (requires a
+  custom email provider). Both methods expire after 15 minutes and can be
+  resent; verification can be configured as required or optional in the Neon
+  Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-05-13T12:43:58.316Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

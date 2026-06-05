@@ -2,11 +2,13 @@
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
 summary: >-
-  Covers backup strategies for Neon Postgres, including instant restore
-  capabilities and the use of `pg_dump` for traditional and automated backups,
-  ensuring data recovery and compliance.
+  Neon supports built-in point-in-time restore (PITR), manual backups using
+  `pg_dump` and `pg_restore`, and automated nightly `pg_dump` exports to AWS
+  S3 via GitHub Actions. Choose PITR for instant recovery without additional
+  tooling; choose `pg_dump` workflows for business continuity, disaster
+  recovery, or compliance. Each strategy links to a dedicated setup guide.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

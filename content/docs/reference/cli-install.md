@@ -2,10 +2,14 @@
 title: 'Neon CLI: Install and connect'
 subtitle: Install the Neon CLI and connect with web auth or API key
 summary: >-
-  How to install the Neon CLI on macOS, Windows, and Linux, and connect using
-  web authentication or API key for terminal management of Neon.
+  Install the Neon CLI (neonctl) on macOS, Windows, or Linux via Homebrew, npm,
+  bun, or standalone binary, with no-install options via npx or bunx. After
+  installing, connect by running `neon auth` for browser-based authentication,
+  or set the NEON_API_KEY environment variable or pass --api-key per command.
+  Vercel-Managed Integration users must use an API key because web auth requires
+  a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.963Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.

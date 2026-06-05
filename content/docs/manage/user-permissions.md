@@ -2,11 +2,14 @@
 title: User Permissions
 subtitle: What each role can do in Neon organizations
 summary: >-
-  Covers the permissions and capabilities associated with different roles in
-  Neon organizations, detailing what Admins, Members, and Collaborators can do
-  at both the organization and project levels.
+  Neon organization roles (Admin, Member, Collaborator) control which actions
+  each user can take across organization settings, project operations,
+  integrations, and snapshots. Only Admins can delete projects, transfer
+  projects out of an org, manage billing, and install integrations like GitHub
+  or Neon Auth. Collaborators have no organization-level access and are limited
+  to the specific projects they have been invited to.
 enableTableOfContents: true
-updatedOn: '2026-04-17T13:06:52.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.

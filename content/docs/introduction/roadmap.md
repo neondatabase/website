@@ -1,15 +1,18 @@
 ---
 title: Roadmap
 summary: >-
-  Covers the development roadmap for Neon, detailing current projects like Neon
-  Auth and performance optimizations, as well as upcoming features in backups,
-  security, and cloud region expansions.
+  Neon's public product roadmap tracks what is in flight, recently shipped, and
+  planned across compute, storage, security, and cloud regions. Planned features
+  include higher storage and compute limits, CMK encryption, RBAC, PCI
+  compliance, and GCP support. Recently shipped milestones include Postgres 18
+  GA, a major write throughput improvement, Neon Auth GA, and the AI agent
+  pricing plan.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.

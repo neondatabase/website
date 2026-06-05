@@ -2,10 +2,15 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 summary: >-
-  Covers the creation, viewing, and deletion of branches using the Neon CLI,
-  including authentication methods and output format options.
+  Neon CLI branch management guide with runnable examples for neon branches
+  create, list, delete, reset, restore, and set-expiration. Covers
+  table/json/yaml output formats and API key authentication via NEON_API_KEY.
+  Use this page to automate branching in CI pipelines, create branches from a
+  non-default parent with --parent, or set a branch TTL with --expires-at.
+  Console and API equivalents for these operations are covered on separate
+  pages.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.

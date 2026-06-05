@@ -2,11 +2,14 @@
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
 summary: >-
-  Covers the current support status and future roadmap for Neon Auth, including
-  frameworks, authentication methods, Better Auth plugins, platform features,
-  SDK references, and migration guides.
+  Neon Auth roadmap showing supported frameworks (Next.js, Vite+React, TanStack
+  Router) and Better Auth plugins (email OTP, magic link, JWT, organization)
+  alongside features still in progress. Check here to confirm whether MFA, admin
+  plugin customization, or standalone frontend/backend architectures are available
+  yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
+  for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
-updatedOn: '2026-05-27T14:54:36.584Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

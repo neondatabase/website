@@ -2,8 +2,18 @@
 title: Automate branching with CircleCI
 subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres
   branches for every CI pipeline run
+summary: >-
+  The Neon CircleCI Orb provisions an isolated Neon Postgres branch per CircleCI
+  pipeline run, giving each CI job a real managed Postgres environment instead of
+  a generic Docker container. Use it to eliminate shared-database race conditions
+  and "works in CI, breaks in prod" failures by forking from a pre-migrated parent
+  branch, running tests against that branch, then auto-cleaning up. The orb
+  provides the neon/run_tests job and neon/create_branch, neon/delete_branch, and
+  neon/reset_branch commands. Branches default to a 3600-second TTL and scale to
+  zero between runs. The orb is community-maintained, not officially supported by
+  Neon.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 tag: community
 ---
 

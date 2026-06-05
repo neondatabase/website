@@ -2,10 +2,14 @@
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
 summary: >-
-  Step-by-step guide for integrating ImageKit.io with Neon to upload media files
-  directly from the client-side and store their metadata in a Neon database.
+  Integrate ImageKit.io with Neon Postgres for client-side media uploads to
+  ImageKit's CDN, with file metadata stored in a Neon database. Backend
+  authentication generates signed parameters (token, expire, signature) so
+  uploads never touch your server. Includes backend examples for Node.js
+  (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
+  per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.011Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.

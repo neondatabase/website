@@ -2,11 +2,15 @@
 title: Monitor Neon with PgHero
 subtitle: Monitor your Neon Postgres database with PgHero
 summary: >-
-  How to install and connect PgHero to monitor your Neon Postgres database,
-  enabling the identification of long-running queries, vacuuming needs, and
-  indexing issues through a user-friendly dashboard interface.
+  PgHero is an open-source Postgres performance dashboard that surfaces
+  long-running queries, tables needing vacuuming, duplicate or missing indexes,
+  and per-user connection counts through a browser UI. Connect PgHero to a Neon
+  database via Docker and a Neon connection string, with pg_stat_statements
+  enabled as a prerequisite. Agent-based monitoring tools that require
+  host-level installation are not supported by Neon. PgHero runs externally
+  and connects over the standard Postgres protocol.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.093Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [PgHero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.

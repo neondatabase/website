@@ -3,13 +3,19 @@ title: Connect MCP clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
   ChatGPT, and other tools to your Neon Postgres database.
 summary: >-
-  Covers the setup of connecting MCP clients like Cursor, Claude Code, and VS
-  Code to the Neon Postgres database, including quick setup, OAuth
-  authentication, and local server options.
+  Connection guide for wiring MCP clients (Cursor, Claude Code, VS Code with
+  GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
+  the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
+  Neon Postgres databases using natural language. Use this page when you need
+  per-client setup instructions for `npx neonctl@latest init`, OAuth, or local
+  API key authentication with `@neondatabase/mcp-server-neon`. Also covers
+  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
+  and the deprecated SSE endpoint for clients that do not support Streamable
+  HTTP.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-04-24T10:03:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.

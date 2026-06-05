@@ -1,11 +1,13 @@
 ---
 title: Manage Organizations using the Neon CLI
 summary: >-
-  Covers the management of organizations using the Neon CLI, including
-  authentication, listing organizations, and managing projects within specified
-  organizations.
+  The Neon CLI supports organization-scoped commands using the `--org-id` flag
+  or a saved context file. Run `neon orgs list` to look up an org ID, and use
+  `neon projects list` or `neon projects create` scoped to an org. To avoid
+  repeating `--org-id` on every command, set a persistent org context with
+  `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.119Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.

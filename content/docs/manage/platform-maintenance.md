@@ -1,13 +1,15 @@
 ---
 title: Platform maintenance
 summary: >-
-  Covers the process of Neon platform maintenance, detailing potential
-  disruptions, types of updates performed, and how to monitor for maintenance
-  notifications while ensuring applications handle brief interruptions
-  effectively.
+  Neon platform maintenance covers unscheduled infrastructure updates, resource
+  rebalancing, and critical security patches. These may cause brief compute
+  restarts or temporary latency on queries, API requests, and compute starts.
+  Use this page to monitor upcoming maintenance via the Neon Status page or the
+  Console maintenance indicator. Includes guidance on connection retry logic,
+  timeouts, and pooling strategies for strict SLOs.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.239Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.

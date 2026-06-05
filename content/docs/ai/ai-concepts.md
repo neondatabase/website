@@ -2,11 +2,15 @@
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
 summary: >-
-  Covers the use, generation, and storage of embeddings in Postgres for AI
-  applications, detailing how to transform unstructured data into structured
-  formats and measure text similarity through vector distance calculations.
+  Embeddings are floating-point vectors that encode semantic meaning from
+  unstructured data, enabling similarity search by computing vector distance in
+  Postgres. Read this page to understand how embeddings work before building AI
+  features such as semantic search, recommendations, or anomaly detection on
+  Neon. Topics include distance metrics (Euclidean, Manhattan, cosine),
+  generating embeddings with OpenAI models, and storing vectors in Postgres
+  using the pgvector extension.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.

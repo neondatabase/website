@@ -1,11 +1,12 @@
 ---
 title: Acceptable Use Policy
 summary: >-
-  Covers the acceptable use of Neon's Platform and Services, detailing
-  guidelines for lawful and ethical use, security responsibilities, and
-  prohibited activities to ensure a secure computing environment.
+  Neon's Acceptable Use Policy defers to the Databricks Acceptable Use Policy,
+  which governs lawful and ethical use of the platform. For Neon-specific rules
+  on resource abuse, unauthorized modifications, and security compliance, see
+  the Neon Security overview.
 enableTableOfContents: false
-updatedOn: '2026-04-09T18:03:40.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon is a Databricks Company. Please refer to the [Databricks Acceptable Use Policy](https://www.databricks.com/legal/acceptable-use-policy).

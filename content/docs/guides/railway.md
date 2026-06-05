@@ -3,11 +3,15 @@ title: Use Neon Postgres with Railway
 subtitle: Connect a Neon Postgres database to your Node application deployed with
   Railway
 summary: >-
-  Step-by-step guide for deploying a Node.js application connected to a Neon
-  Postgres database on Railway, including prerequisites and setup instructions
-  for both quick start and manual configurations.
+  Connecting a Neon Postgres database to a Node.js application deployed on
+  Railway lets you use GitHub-based continuous deployment with a serverless
+  Postgres backend. Use this guide when you need a manual Express + pg setup
+  with full control over schema creation, environment variables, and deployment
+  steps. A faster alternative uses the Railway Next.js template with Claimable
+  Postgres, which provisions a Neon database instantly without signup and stays
+  claimable for 72 hours.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.

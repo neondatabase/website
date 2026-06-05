@@ -2,13 +2,18 @@
 title: Legacy Neon Auth - Database Integration
 subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
 summary: >-
-  Covers how to use the `neon_auth.users_sync` table for user data
-  synchronization, authenticate backend requests, and implement Row-Level
-  Security (RLS) within the Legacy Neon Auth framework.
+  The legacy Neon Auth `neon_auth.users_sync` table is automatically created
+  and kept in sync with your Stack Auth provider, so you can query user data
+  and add foreign keys without building custom webhook handlers. This reference
+  covers foreign key patterns (CASCADE vs SET NULL), Row-Level Security setup
+  using a Stack Auth JWKS URL, and backend token verification via JWT or the
+  Stack Auth REST API in Node.js and Python. Legacy Neon Auth is no longer
+  available for new projects; new projects should use Neon Auth with
+  Better Auth.
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">

@@ -3,13 +3,19 @@ title: Neon data migration guides
 subtitle: Learn how to migrate data to Neon Postgres from different database providers
   and sources
 summary: >-
-  Covers the selection of migration methods for transferring data to Neon
-  Postgres from various database sources, considering factors like database
-  size, downtime tolerance, and technical skill requirements.
+  Neon migration guide selection page compares transfer methods (Import Data
+  Assistant, pg_dump/restore, pgcopydb, Logical Replication, pgloader, AWS DMS)
+  by database size, downtime tolerance, and skill level to help you pick the
+  right approach. Import Data Assistant is automated and targets databases under
+  10 GB. Logical Replication delivers near-zero downtime for production Postgres
+  workloads. pgloader covers non-Postgres sources including MySQL, MSSQL, and
+  SQLite. Also indexes provider-specific migration paths for Heroku, Supabase,
+  PlanetScale, RDS, Cloud SQL, and Azure, plus guidance for region migration and
+  Neon-to-Neon moves.
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-05-12T18:00:18.436Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.

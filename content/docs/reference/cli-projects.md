@@ -2,11 +2,16 @@
 title: 'Neon CLI command: projects'
 subtitle: 'List, create, update, delete, and get Neon projects'
 summary: >-
-  Covers the usage of the Neon CLI `projects` command for managing Neon
-  projects, including listing, creating, updating, deleting, and retrieving
-  project information directly from the terminal.
+  The Neon CLI `neon projects` command provides subcommands to list, create,
+  update, delete, recover, and retrieve Neon projects from the terminal,
+  including support for region selection (AWS and Azure), blocking public or VPC
+  connections, and filtering shared projects. Use this page when you need CLI
+  automation for project lifecycle tasks or to recover a deleted project within
+  its 7-day recovery window. Projects created via the CLI default to Postgres
+  18; use the Neon Console or API to create projects on earlier Postgres
+  versions.
 enableTableOfContents: true
-updatedOn: '2026-06-03T10:16:42.918Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

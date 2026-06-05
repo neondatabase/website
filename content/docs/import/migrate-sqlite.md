@@ -1,12 +1,16 @@
 ---
 title: Migrate from SQLite to Neon Postgres
 summary: >-
-  Covers the migration of an SQLite database to Neon Postgres using pgloader,
-  detailing prerequisites, data type differences, and the process for efficient
-  data transfer and transformation.
+  SQLite-to-Neon Postgres migration using pgloader transfers schemas and data
+  while mapping SQLite type affinities to strict Postgres types. Use this page
+  when moving an existing SQLite or Turso database to Neon and needing control
+  over type casting via pgloader CAST clauses, as distinct from guides covering
+  MySQL, CSV, or logical replication imports. Neon's Free plan supports up to
+  0.5 GB; the guide also covers sequence verification after import and a Docker
+  SSL workaround.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T09:05:54.263Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)

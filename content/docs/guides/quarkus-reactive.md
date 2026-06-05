@@ -2,11 +2,14 @@
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 summary: >-
-  How to connect a Quarkus application to Neon using a Reactive SQL Client,
-  including project creation, configuration of a PostgreSQL data source, and
-  usage of the Reactive PostgreSQL client.
+  Quarkus Reactive SQL Client connects Java applications to Neon Postgres using
+  non-blocking I/O via the Vert.x PgPool driver, instead of JDBC, making it the
+  right choice when building reactive, cloud-native Quarkus services. The guide
+  covers scaffolding a project with the reactive-pg-client extension,
+  configuring QUARKUS_DATASOURCE_REACTIVE_URL with sslmode=require, and
+  exposing a REST endpoint that queries Neon asynchronously using Mutiny.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.034Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"

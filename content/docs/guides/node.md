@@ -2,13 +2,18 @@
 title: Connect a Node.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Node.js application
 summary: >-
-  Covers the setup of a Neon project and the connection process from a Node.js
-  application, including examples using node-postgres and Postgres.js clients.
+  Step-by-step connection guide for Node.js, Express, and Next.js apps targeting
+  a Neon serverless Postgres database, with working code for three clients: the
+  Neon serverless driver (@neondatabase/serverless), node-postgres (pg), and
+  Postgres.js. Use this page when you need to wire up environment-variable-based
+  SSL credentials and pick the right client for your project. Also covers the
+  ENDPOINT_ID workaround required by older clients that lack SNI support, which
+  newer node-postgres and Postgres.js releases do not need.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2026-02-06T22:07:33.028Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

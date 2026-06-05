@@ -2,11 +2,14 @@
 title: 'Neon CLI command: ip-allow'
 subtitle: 'Manage the IP allowlist: list, add, remove, and reset allowed IPs'
 summary: >-
-  Covers the usage of the `ip-allow` command in the Neon CLI to manage the IP
-  allowlist for a Neon project, including actions to list, add, remove, and
-  reset IP addresses.
+  The Neon CLI `ip-allow` command controls project-level IP allowlists with
+  subcommands `list`, `add`, `remove`, and `reset`, supporting individual IP
+  addresses, IP ranges, and CIDR notation. Use this page when you need to
+  restrict database access to specific IPs from the command line, rather than
+  through the Neon console. The `add` subcommand accepts a `--protected-only`
+  flag to scope the allowlist to protected branches only.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.963Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

@@ -2,11 +2,15 @@
 title: The pg_graphql extension
 subtitle: Instantly create a GraphQL API for your Postgres database
 summary: >-
-  Covers the setup of the `pg_graphql` extension to create a GraphQL API for
-  your Postgres database, enabling direct querying through the
-  `graphql.resolve()` function while maintaining data security and integrity.
+  The `pg_graphql` Postgres extension auto-generates a GraphQL API by
+  introspecting your SQL schema and exposing it through `graphql.resolve()`,
+  with no external GraphQL server required. Use it to add GraphQL querying,
+  mutations, filtering, pagination, or relationship traversal to a Neon
+  Postgres database without deploying separate middleware. The extension
+  enforces existing Postgres role permissions and row-level security policies,
+  and supports customization via `@graphql` comment directives.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pg_graphql` extension adds a GraphQL API layer directly to your Postgres database. It introspects your SQL schema, tables, columns, relationships, and functions and automatically generates a corresponding GraphQL schema. This allows you to query your database using GraphQL through a single SQL function call, `graphql.resolve()`, eliminating the need for external GraphQL servers or middleware.

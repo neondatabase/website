@@ -2,12 +2,16 @@
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 summary: >-
-  Covers the process of using the Backup & Restore feature in Neon to instantly
-  restore branches to previous states, create and manage snapshots, and schedule
-  automated backups for data recovery.
+  Neon's Backup & Restore feature combines instant point-in-time restore (PITR)
+  and snapshots to recover a branch from accidental changes, schema issues, or
+  data loss. Use it when you need to roll back a root branch to a specific
+  timestamp or LSN, create manual snapshots before risky changes, or schedule
+  automated daily, weekly, or monthly backups. Snapshot storage is billed at
+  $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
+  limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="note" title="Snapshots">

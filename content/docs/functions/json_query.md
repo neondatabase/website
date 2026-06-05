@@ -2,11 +2,16 @@
 title: Postgres JSON_QUERY() Function
 subtitle: Extract and Transform JSON Values with SQL/JSON Path Expressions
 summary: >-
-  Covers the usage of the `JSON_QUERY()` function in PostgreSQL 17 for
-  extracting and transforming JSON values using SQL/JSON path expressions,
-  including details on wrappers and quote behavior.
+  JSON_QUERY(), added in PostgreSQL 17, extracts JSON or JSONB fragments using
+  SQL/JSON path expressions and returns jsonb. Unlike JSON_VALUE(), it supports
+  multi-value results through WITHOUT, WITH CONDITIONAL, and WITH UNCONDITIONAL
+  WRAPPER modes. Use it when a query must return a JSON object or array rather
+  than a scalar, or when you need OMIT QUOTES, PASSING variables, or ON EMPTY /
+  ON ERROR fallback behavior. It accepts any JSON or JSONB input, supports a
+  RETURNING clause for type conversion, and raises SQLSTATE 22034 when multiple
+  values are returned without a wrapper.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.868Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `JSON_QUERY()` function introduced in PostgreSQL 17 provides a powerful way to extract and transform `JSON` values using `SQL/JSON` path expressions. This function offers fine-grained control over how `JSON` values are extracted and formatted in the results.

@@ -1,13 +1,17 @@
 ---
 title: Manage roles
 summary: >-
-  Covers the management of Postgres roles in Neon, including role creation,
-  permissions, and the relationship between roles and project branches.
+  Postgres roles in Neon are branch-scoped, with a limit of 500 roles per
+  branch. Roles created via the Console, CLI, or API automatically receive
+  neon_superuser membership (CREATEDB, CREATEROLE, BYPASSRLS, REPLICATION).
+  Roles created with SQL receive only basic public schema privileges and must
+  be granted permissions explicitly. Use this page to create, delete, list,
+  and reset passwords for roles using the Console, CLI, API, or SQL.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.

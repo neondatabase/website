@@ -1,11 +1,13 @@
 ---
 title: Neon Postgres Version Support Policy
 summary: >-
-  Covers the support policy for PostgreSQL versions used by Neon, detailing
-  major and minor release schedules, end-of-life timelines, and version
-  numbering conventions.
+  Neon's Postgres version support policy tracks the latest major versions,
+  applies minor releases automatically at the next compute restart, and
+  aligns end-of-life with the official PostgreSQL five-year support window.
+  Minor release downgrades and version skipping are not supported. Upgrading
+  to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-04-29T21:38:32.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
