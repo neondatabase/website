@@ -6,7 +6,7 @@ summary: >-
   workflows, including automatic retries, caching, and integration with Neon
   Postgres for triggering workflows based on database changes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-05T16:32:17.840Z'
 ---
 
 Inngest is a popular framework for building AI RAG and Agentic workflows. [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=inngest-ai-integration) provides automatic retries, caching along with concurrency and throttling management and AI requests offloading.

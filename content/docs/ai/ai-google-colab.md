@@ -6,7 +6,7 @@ summary: >-
   connect to a Neon database, install the `pgvector` extension, and execute
   vector similarity search queries.
 enableTableOfContents: true
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-05T16:32:17.840Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.

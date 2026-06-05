@@ -6,7 +6,7 @@ summary: >-
   magic links, and verification emails — by intercepting delivery events with
   webhooks and sending them through your own email provider.
 enableTableOfContents: true
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-05T16:32:17.840Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

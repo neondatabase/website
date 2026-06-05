@@ -6,7 +6,7 @@ summary: >-
   Stacksync to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-05T16:32:17.840Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

@@ -7,7 +7,7 @@ summary: >-
   critical data by preventing deletion, resetting, and applying IP restrictions
   on designated branches.
 enableTableOfContents: true
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-05T16:32:17.840Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
