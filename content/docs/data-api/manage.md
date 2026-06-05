@@ -6,7 +6,7 @@ summary: >-
   providers, and controlling API access to customize its behavior and security
   settings.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:08:34.935Z'
+updatedOn: '2026-06-05T17:20:02.273Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -14,7 +14,7 @@ updatedOn: '2026-06-05T17:08:34.935Z'
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
-    <a href="/docs/data-api/access-control">Access control & security</a>
+    <a href="/docs/data-api/access-control">Access control &amp; security</a>
     <a href="/docs/data-api/troubleshooting">Troubleshooting</a>
     <a href="/docs/reference/cli-data-api">Neon CLI: data-api command</a>
   </DocsList>
