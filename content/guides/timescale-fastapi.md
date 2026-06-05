@@ -4,7 +4,7 @@ subtitle: Create an  API for streaming, storing, and querying sensor data using 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-12T00:00:00.000Z'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage.

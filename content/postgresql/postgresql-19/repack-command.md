@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 REPACK Command'
 page_title: 'PostgreSQL 19 REPACK Command - Online Table Maintenance'
 page_description: 'Learn how to use PostgreSQL 19 REPACK command to reclaim space and reorder tables, replacing VACUUM FULL and CLUSTER with optional online (CONCURRENTLY) mode.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 pg_plan_advice'

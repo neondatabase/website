@@ -6,7 +6,7 @@ page_description: >-
   calculate the least common multiple (LCM) of two or more integers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-lcm/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GCD() Function

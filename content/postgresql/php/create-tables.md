@@ -6,7 +6,7 @@ page_description: >-
   database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/create-tables/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Create-Tables.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'

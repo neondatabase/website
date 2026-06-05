@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/
 ogImage: /postgresqltutorial/PostgreSQL-create-database-pgadmin4.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: Connect to a PostgreSQL Database Server

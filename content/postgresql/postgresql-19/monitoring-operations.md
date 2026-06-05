@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Monitoring and Operations'
 page_title: 'PostgreSQL 19 Monitoring and Operations Improvements'
 page_description: 'Learn about PostgreSQL 19 monitoring and operational improvements including online data checksums, WAL statistics, vacuum progress tracking, per-process logging, psql enhancements, and 64-bit MultiXactOffset.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Schema Management'

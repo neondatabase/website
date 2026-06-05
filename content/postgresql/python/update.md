@@ -6,7 +6,7 @@ page_description: >-
   table in a Python program using psycopg2 package.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/update/'
 ogImage: /postgresqltutorial/vendors_table.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Insert Data Into a Table'

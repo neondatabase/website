@@ -6,7 +6,7 @@ page_description: >-
   that help you manipulate strings effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/string-functions.png'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PG_SLEEP() Function

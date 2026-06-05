@@ -6,7 +6,7 @@ page_description: >-
   function to calculate the relative rank of a value within a set of values.
 prev_url: index.html
 ogImage: /postgresqltutorial/sales_stats-table.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTH_VALUE Function

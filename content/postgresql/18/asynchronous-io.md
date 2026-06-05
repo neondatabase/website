@@ -5,7 +5,7 @@ page_description: >-
   In this tutorial, you will learn about PostgreSQL 18 asynchronous I/O and how
   to configure it to improve read performance for your database workloads.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 New Features

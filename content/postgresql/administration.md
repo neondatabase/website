@@ -6,7 +6,7 @@ page_description: >-
   including role and database management, backup, and restore.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Index

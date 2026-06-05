@@ -6,7 +6,7 @@ page_description: >-
   programming language using the psycopg2 database driver.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Delete Data From a Table'

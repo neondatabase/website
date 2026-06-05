@@ -6,7 +6,7 @@ page_description: >-
   nearest integer or a number of specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RANDOM() Function

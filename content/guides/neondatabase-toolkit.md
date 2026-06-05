@@ -4,7 +4,7 @@ subtitle: Rapidly provision, manage, and interact with Neon Postgres databases i
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-01-29T00:00:00.000Z'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T18:28:10.050Z'
 ---
 
 The AI landscape is poised for its next "ChatGPT moment" - not with smarter chatbots, but with **autonomous AI agents** that complete real-world tasks. These next-gen assistants go beyond answering questions to independently booking flights, analyzing data trends, and even managing cloud infrastructure.

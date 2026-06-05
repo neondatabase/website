@@ -6,7 +6,7 @@ page_description: >-
   use PostgreSQL create role statement to create roles.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-roles/'
 ogImage: /postgresqltutorial/PostgreSQL-Roles.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP SCHEMA Statement

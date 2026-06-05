@@ -6,7 +6,7 @@ page_description: >-
   numbers to the specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trunc/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SIGN() Function

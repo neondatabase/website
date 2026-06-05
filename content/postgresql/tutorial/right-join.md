@@ -7,7 +7,7 @@ page_description: >-
   table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-right-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Right-Join.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LEFT JOIN

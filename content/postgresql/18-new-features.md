@@ -7,7 +7,7 @@ page_description: >-
   Discover how these changes will impact performance, development, and
   operations.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 nextLink:
   title: PostgreSQL 18 Asynchronous I/O

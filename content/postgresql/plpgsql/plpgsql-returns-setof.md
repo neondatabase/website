@@ -4,7 +4,7 @@ page_title: PL/pgSQL Returns SetOf
 page_description: ''
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-returns-setof/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/film_table.png'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: How to Develop a PL/pgSQL Function That Returns a Table

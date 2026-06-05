@@ -4,7 +4,7 @@ page_title: 'PostgreSQL JDBC: Querying Data'
 page_description: "In this tutorial, \_you will learn how to query data from a table in the PostgreSQL database using JDBC API."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/query/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Insert Data into a Table'

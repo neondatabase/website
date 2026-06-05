@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T18:28:10.050Z'
 ---
 
 Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Like Fauna, it offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.

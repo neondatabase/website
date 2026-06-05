@@ -6,7 +6,7 @@ page_description: >-
   to use it to get the plan for a given query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/'
 ogImage: /postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'

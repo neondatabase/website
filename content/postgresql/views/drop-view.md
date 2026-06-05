@@ -6,7 +6,7 @@ page_description: >-
   to remove one or more views from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE VIEW

@@ -6,7 +6,7 @@ page_description: >-
   character based on its ASCII value or Unicode code point.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-chr/'
 ogImage: /postgresqltutorial/PostgreSQL-CHR-ASCII-example.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ASCII() Function

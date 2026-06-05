@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 pg_plan_advice'
 page_title: 'PostgreSQL 19 pg_plan_advice - Query Plan Hints for PostgreSQL'
 page_description: 'Learn how to use PostgreSQL 19 pg_plan_advice to stabilize query plans, override planner decisions, and diagnose performance issues with plan hints.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Temporal Data Operations'

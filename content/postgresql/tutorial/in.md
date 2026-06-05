@@ -6,7 +6,7 @@ page_description: >-
   a list of values. It also shows you how to use the IN operator in a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FETCH

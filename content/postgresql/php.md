@@ -6,7 +6,7 @@ page_description: >-
   data in PostgreSQL databases effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-1.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_populate_recordset() Function

@@ -8,7 +8,7 @@ prev_url: >-
   https://www.postgresqltutorial.com/postgresql-window-function/postgresql-last_value-function/
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAG Function

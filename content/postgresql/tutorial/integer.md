@@ -6,7 +6,7 @@ page_description: >-
   including SMALLINT, INTEGER, and BIGINT for designing tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
 ogImage: /postgresqltutorial/postgresql-integer-300x59.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T16:09:35.498Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REAL Data Type

@@ -6,7 +6,7 @@ page_description: >-
   using JDBC API utilizing the commit() and rollback() methods.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/transaction/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Call Stored Functions'

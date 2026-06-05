@@ -6,7 +6,7 @@ page_description: >-
   and database objects provided by PostgreSQL
 prev_url: index.html
 ogImage: /postgresqltutorial/postgresql-databases.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXPLAIN

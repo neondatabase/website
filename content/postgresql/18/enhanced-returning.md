@@ -6,7 +6,7 @@ page_description: >-
   Clause, which allows you to access both old and new values in DML operations,
   making it easier to track changes and improve data integrity.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 UUIDv7 Support

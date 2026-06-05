@@ -6,7 +6,7 @@ page_description: >-
   the result sets of multiple queries into a single result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-union/'
 ogImage: /postgresqltutorial/PostgresQL-UNION.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL HAVING

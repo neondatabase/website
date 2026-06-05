@@ -6,7 +6,7 @@ page_description: >-
   connect to the PostgreSQL database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/connect/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Connect.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PHP

@@ -6,7 +6,7 @@ page_description: >-
   current date and time with the timezone.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL STATEMENT_TIMESTAMP() Function

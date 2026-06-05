@@ -6,7 +6,7 @@ page_description: >-
   define a list of fixed values for a column.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-enum/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: A Look at PostgreSQL User-defined Data Types

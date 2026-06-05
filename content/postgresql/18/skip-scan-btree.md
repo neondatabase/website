@@ -7,7 +7,7 @@ page_description: >-
   columns, dramatically improving query performance for analytics and reporting
   workloads.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Asynchronous I/O

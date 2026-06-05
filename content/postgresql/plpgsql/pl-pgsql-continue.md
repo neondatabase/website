@@ -6,7 +6,7 @@ page_description: >-
   the current loop iteration and continue the next one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/pl-pgsql-continue/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Exit Statement

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Breaking Changes and Upgrade Notes'
 page_title: 'PostgreSQL 19 Breaking Changes - What to Check Before Upgrading'
 page_description: 'Review PostgreSQL 19 breaking changes including JIT disabled by default, LZ4 TOAST compression, RADIUS removal, and string handling changes before upgrading your database.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Monitoring and Operations'

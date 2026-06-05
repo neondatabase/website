@@ -6,7 +6,7 @@ page_description: >-
   includes buffer information, index lookup counts, and comprehensive CPU and
   WAL statistics for better query optimization.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 B-tree Skip Scan for Better Queries

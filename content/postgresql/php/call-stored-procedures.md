@@ -4,7 +4,7 @@ page_title: 'PostgreSQL PHP: Calling Stored Procedures'
 page_description: ''
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/call-stored-procedures/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-store-procedure.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Transaction'

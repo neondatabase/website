@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Parallel Autovacuum'
 page_title: 'PostgreSQL 19 Parallel Autovacuum - Faster Index Cleanup'
 page_description: 'Learn how to configure PostgreSQL 19 parallel autovacuum to speed up index vacuuming on large tables with multiple indexes.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Monitoring and Operations'

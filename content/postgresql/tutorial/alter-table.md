@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL ALTER TABLE statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table/'
 ogImage: /postgresqltutorial/PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Generated Columns

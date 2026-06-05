@@ -6,7 +6,7 @@ page_description: >-
   retrieve the scale of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-scale/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SQRT() Function

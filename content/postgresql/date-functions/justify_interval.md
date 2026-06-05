@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an 
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_HOURS() Function

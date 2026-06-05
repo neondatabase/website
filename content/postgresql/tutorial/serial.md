@@ -6,7 +6,7 @@ page_description: >-
   auto-increment column in a database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/'
 ogImage: /postgresqltutorial/PostgreSQL-Serial-268x300.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE TABLE AS

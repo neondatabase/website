@@ -6,7 +6,7 @@ page_description: >-
   a table to itself.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-self-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Self-Join-Reporting-Structure.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RIGHT JOIN

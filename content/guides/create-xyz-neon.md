@@ -4,7 +4,7 @@ subtitle: Go from Text prompt to Full-Stack Database backed applications in minu
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-12T00:00:00.000Z'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The landscape of application development is rapidly changing, with AI-powered tools empowering even non technical users to build faster and more intuitively than ever before. Imagine describing your app idea in a simple conversation and watching it materialize in seconds, complete with a fully functional database. This is now possible with [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.

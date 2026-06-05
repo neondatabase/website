@@ -4,7 +4,7 @@ page_title: PostgreSQL MD5() Function
 page_description: "The PostgreSQL MD5() function calculates the MD5\_hash of a string and returns the result in hexadecimal."
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-md5/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FORMAT() Function

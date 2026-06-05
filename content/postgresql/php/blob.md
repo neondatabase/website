@@ -6,7 +6,7 @@ page_description: >-
   such inserting BLOB, querying BLOB, and deleting BLOB.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-BLOB.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Calling Stored Procedures'

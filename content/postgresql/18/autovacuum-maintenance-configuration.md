@@ -8,7 +8,7 @@ page_description: >-
   management, better threshold controls, improved monitoring, and new security
   features for maintenance operations.
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 psql Improvements

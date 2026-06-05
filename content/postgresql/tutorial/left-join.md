@@ -6,7 +6,7 @@ page_description: >-
   from one table that may or may not have corresponding rows in another table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-left-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Left-Join.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INNER JOIN

@@ -6,7 +6,7 @@ page_description: >-
   ALTER TABLE statement to remove one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-column/'
 ogImage: /postgresqltutorial/PostgreSQL-Drop-Column-300x128.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'

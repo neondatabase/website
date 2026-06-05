@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 ON CONFLICT DO SELECT'
 page_title: 'PostgreSQL 19 ON CONFLICT DO SELECT - Atomic Get-or-Create'
 page_description: 'Learn how to use PostgreSQL 19 ON CONFLICT DO SELECT for atomic get-or-create operations without dead rows, extra queries, or CTE workarounds.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'

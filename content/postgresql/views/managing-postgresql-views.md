@@ -6,7 +6,7 @@ page_description: >-
   view in your database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/'
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Views

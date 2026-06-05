@@ -6,7 +6,7 @@ page_description: >-
   new row into a table and return the last inserted id.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Recursive Query

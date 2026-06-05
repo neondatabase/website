@@ -6,7 +6,7 @@ page_description: >-
   AVG(), COUNT(), MIN(), MAX(), and SUM() to summarize data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/aggregate-functions.png'
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Functions

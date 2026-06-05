@@ -6,7 +6,7 @@ page_description: >-
   using various PostgreSQL copy table statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-copy-table/'
 ogImage: /postgresqltutorial/PostgreSQL-Copy-Table-300x260.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNCATE TABLE

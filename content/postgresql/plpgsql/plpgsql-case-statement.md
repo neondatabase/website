@@ -6,7 +6,7 @@ page_description: >-
   executes a command based on a certain condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
 ogImage: /postgresqltutorial/plpgsql-simple-case-statement.png
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL IF Statement

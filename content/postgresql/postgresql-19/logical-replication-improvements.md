@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Logical Replication Improvements'
 page_title: 'PostgreSQL 19 Logical Replication - Sequence Sync, EXCEPT TABLE, and More'
 page_description: 'Learn about PostgreSQL 19 logical replication improvements including sequence synchronization, EXCEPT TABLE for publications, and dynamic WAL level configuration.'
 ogImage: ''
-updatedOn: '2026-06-05T15:04:23.889Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 REPACK Command'
