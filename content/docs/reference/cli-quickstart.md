@@ -6,7 +6,7 @@ summary: >-
   instructions for various platforms and methods for managing authentication
   through web or API key options.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-05T17:12:03.638Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -131,6 +131,10 @@ neon link --org-id <your-org-id> --project-id <your-project-id>
 If you run a CLI command without an organization context, the CLI will prompt you to select an organization and offer to save it as your default. If you choose to save, this creates a `.neon` context file automatically.
 </Admonition>
 
+<Admonition type="tip">
+Once linked, you can run CLI commands from any subdirectory of your project. The CLI walks up parent folders to find the `.neon` file, so you don't need to be in the root directory. The `.neon` file is also automatically added to `.gitignore` so it's not committed by accident.
+</Admonition>
+
 Alternatively, set context manually with [`neon set-context`](/docs/reference/cli-set-context):
 
 ```bash
@@ -216,10 +220,10 @@ neon branches create --name <branch-name>
 
 Set your project context or specify `--project-id <your-project-id>` if you have more than one Neon project.
 
-To switch the active branch in your context file, use [`neon checkout`](/docs/reference/cli-checkout). New projects create a default branch named `production`:
+To switch the active branch in your context file, use [`neon checkout`](/docs/reference/cli-checkout):
 
 ```bash
-neon checkout production
+neon checkout <branch>
 ```
 
 For more about the `branches` command, see [Neon CLI commands — branches](/docs/reference/cli-branches).
