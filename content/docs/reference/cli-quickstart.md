@@ -6,7 +6,7 @@ summary: >-
   instructions for various platforms and methods for managing authentication
   through web or API key options.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.967Z'
+updatedOn: '2026-06-05T12:06:47.985Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -113,21 +113,25 @@ export NEON_API_KEY=<your-api-key>
 
 For more about authenticating, see [Neon CLI commands — auth](/docs/reference/cli-auth).
 
-## Set up your context file
+## Link your project
 
-Context files allow you to use CLI commands without specifying your project ID or organization ID with each command.
+The easiest way to set up CLI context is with [`neon link`](/docs/reference/cli-link). It guides you through organization and project selection and writes a `.neon` context file in your project directory. Requires **neonctl 2.22.2** or later.
+
+```bash
+neon link
+```
+
+You can also link non-interactively for scripts and CI:
+
+```bash
+neon link --org-id <your-org-id> --project-id <your-project-id>
+```
 
 <Admonition type="tip">
 If you run a CLI command without an organization context, the CLI will prompt you to select an organization and offer to save it as your default. If you choose to save, this creates a `.neon` context file automatically.
 </Admonition>
 
-To set the context for your Neon project:
-
-```bash
-neon set-context --project-id <your-project-id>
-```
-
-To set the context for your both your Neon organization and a Neon project:
+Alternatively, set context manually with [`neon set-context`](/docs/reference/cli-set-context):
 
 ```bash
 neon set-context --org-id <your-org-id> --project-id <your-project-id>
@@ -212,6 +216,12 @@ neon branches create --name <branch-name>
 
 Set your project context or specify `--project-id <your-project-id>` if you have more than one Neon project.
 
+To switch the active branch in your context file, use [`neon checkout`](/docs/reference/cli-checkout). New projects create a default branch named `production`:
+
+```bash
+neon checkout production
+```
+
 For more about the `branches` command, see [Neon CLI commands — branches](/docs/reference/cli-branches).
 
 ### Get a connection string
@@ -226,6 +236,12 @@ For a specific branch, specify the branch name:
 
 ```bash
 neon connection-string <branch-name>
+```
+
+To connect with `psql` directly, use the dedicated [`neon psql`](/docs/reference/cli-psql) command:
+
+```bash
+neon psql
 ```
 
 There's lots more you can do with the `connection-string` command. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).

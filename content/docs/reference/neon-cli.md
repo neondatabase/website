@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-05-10T14:17:36.447Z'
+updatedOn: '2026-06-05T12:06:47.985Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -164,7 +164,11 @@ Commands:
   neon roles                       Manage roles                        [aliases: role]
   neon operations                  Manage operations               [aliases: operation]
   neon connection-string [branch]  Get connection string                  [aliases: cs]
+  neon psql [branch]               Connect to a database via psql
+  neon link                        Link the current directory to a Neon project
+  neon checkout [id|name]          Pin a branch in the local context (.neon)
   neon set-context                 Set the current context
+  neon data-api <subcommand>       Manage the Neon Data API for a database
   neon init                        Initialize Neon for AI assistants (MCP, skills, wizard)
   neon completion                  generate completion script
 
@@ -197,7 +201,11 @@ Options:
 | [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                            |
 | [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                       |
 | [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                                   |
+| [psql](/docs/reference/cli-psql)                           |                                                                                                              | Connect to a database via psql                          |
+| [link](/docs/reference/cli-link)                           |                                                                                                              | Link a directory to a Neon project                      |
+| [checkout](/docs/reference/cli-checkout)                   |                                                                                                              | Pin a branch in `.neon`                                 |
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                                 |
+| [data-api](/docs/reference/cli-data-api)                   | `create`, `get`, `update`, `refresh-schema`, `delete`                                                        | Manage the Neon Data API                                |
 | [init](/docs/reference/cli-init)                           |                                                                                                              | Init Neon for AI assistants (MCP, agent skills, wizard) |
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                            |
 
