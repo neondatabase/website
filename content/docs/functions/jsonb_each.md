@@ -2,11 +2,15 @@
 title: Postgres jsonb_each() function
 subtitle: Expands JSONB into a record per key-value pair
 summary: >-
-  Covers the usage of the `jsonb_each()` function in Postgres to expand a
-  `JSONB` object into key-value pairs, facilitating data iteration and
-  transformations.
+  `jsonb_each()` is a Postgres set-returning function that expands a JSONB
+  object into one row per key-value pair, returning key as text and value as
+  jsonb. Use it when you need to iterate over a JSONB object with a dynamic or
+  unknown schema, or when you want to join expanded JSONB key-value pairs
+  against other tables in a FROM clause. Choose `jsonb_each_text()` instead
+  when you need the value as plain text, or `json_each()` when the input is
+  JSON rather than JSONB.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.873Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `jsonb_each` function in Postgres is used to expand a `JSONB` object into a set of key-value pairs.

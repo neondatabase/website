@@ -2,13 +2,19 @@
 title: Optimize Postgres query performance
 subtitle: Learn about strategies for optimizing Postgres query performance
 summary: >-
-  Covers strategies for optimizing Postgres query performance, including query
-  analysis, database design, and resource optimization, with a focus on using
-  the pg_stat_statements extension for monitoring.
+  Postgres query performance optimization guide covering query analysis with
+  pg_stat_statements and EXPLAIN, database design with indexes, efficient data
+  types, and prepared statements, and resource tuning via compute sizing,
+  cache hit ratio, connection pooling, and bloat reduction. Reach for this
+  page when slow queries, high sequential scan counts, index or table bloat,
+  or low cache hit ratios call for systematic diagnosis rather than a single
+  targeted fix. Neon-specific coverage includes the neon_stat_file_cache view
+  and enabling PgBouncer connection pooling by appending -pooler to the
+  connection string hostname.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2026-02-15T20:51:54.248Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.

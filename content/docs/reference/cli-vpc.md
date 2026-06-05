@@ -2,10 +2,15 @@
 title: 'Neon CLI command: vpc'
 subtitle: Manage Private Networking VPC endpoints and project-level restrictions
 summary: >-
-  Covers the usage of the Neon CLI `vpc` command for managing Private Networking
-  configurations, including VPC endpoints and project-level restrictions.
+  The Neon CLI `vpc` command controls Private Networking by registering,
+  updating, removing, and checking VPC endpoints at the organization level, and
+  by restricting or removing per-project VPC access. Use it when you need to
+  limit Neon project connections to a specific AWS or Azure VPC rather than the
+  public internet. Supported regions include aws-us-east-1, aws-us-east-2,
+  aws-us-west-2, aws-eu-central-1, aws-ap-southeast-1, aws-ap-southeast-2, and
+  azure-eastus2.
 enableTableOfContents: true
-updatedOn: '2026-02-27T16:24:41.391Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

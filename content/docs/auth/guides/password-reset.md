@@ -2,11 +2,13 @@
 title: Password reset
 subtitle: Allow users to reset forgotten passwords
 summary: >-
-  Covers the setup of password reset functionality in Neon Auth, including
-  enabling email authentication and using pre-built UI components for user
-  password recovery.
+  Neon Auth password reset sends a verification link to the user's email and
+  requires email authentication to be enabled in project Settings. The pre-built
+  `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
+  forgot-password flow; reset links expire after 15 minutes, and the SDK
+  `resetPasswordForEmail` method is not yet supported.
 enableTableOfContents: true
-updatedOn: '2026-05-13T12:43:58.316Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

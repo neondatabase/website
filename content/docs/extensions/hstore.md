@@ -2,11 +2,14 @@
 title: The hstore extension
 subtitle: Manage key-value pairs in Postgres using hstore
 summary: >-
-  Covers the setup and usage of the `hstore` extension in Postgres for managing
-  key-value pairs, including enabling the extension, storing, querying, and
-  performing operations on hstore data.
+  The `hstore` extension stores schema-less key-value pairs inside a single
+  Postgres column, with operators like `->`, `?`, `@>`, and `||` for querying,
+  filtering, and updating individual keys. Use it instead of `jsonb` when all
+  keys and values are strings and the data model is flat. It avoids JSON
+  overhead and supports GIN and GiST indexes for key-level filtering on large
+  datasets.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It works well for semi-structured data or data without a rigid schema.

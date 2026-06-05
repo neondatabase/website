@@ -2,9 +2,12 @@
 title: 'Neon CLI command: connection-string'
 subtitle: Get Postgres connection strings for branches and databases
 summary: >-
-  Covers the usage of the Neon CLI `connection-string` command to retrieve a
-  Postgres connection string for databases in Neon projects, including options
-  for specifying branches and historical states.
+  The Neon connection string command (`neon connection-string`) outputs a
+  PostgreSQL connection URL for a specified branch, role, and database,
+  including the role password.
+  Use it to get connection strings for psql, Prisma (--prisma), connection
+  pooling (--pooled), read-only replicas (--endpoint-type read_only), or
+  time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
 updatedOn: '2026-06-05T12:06:47.985Z'
 ---

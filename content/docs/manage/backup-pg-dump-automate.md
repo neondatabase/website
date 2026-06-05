@@ -2,11 +2,13 @@
 title: Automate pg_dump backups
 subtitle: Automate backups of your Neon database to S3 with pg_dump and GitHub Actions
 summary: >-
-  Step-by-step guide for automating backups of a Neon database using pg_dump and
-  GitHub Actions, enabling nightly backups to S3 for long-term data retention
-  and recovery.
+  Automated pg_dump backups combine GitHub Actions and AWS S3 to store nightly
+  exports beyond Neon's built-in point-in-time restore window. Read this before
+  following the setup steps. Suited to teams that need long-term retention,
+  disaster recovery, or compliance-driven backup files outside of Neon's native
+  restore feature.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.224Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Keeping regular backups of your database is critical for protecting against data loss. While Neon offers an [instant restore](/docs/introduction/branch-restore) feature (point-in-time restore) for backups of up to 30 days, there are scenarios (such as business continuity, disaster recovery, or regulatory compliance) where maintaining independent and longer-lived backup files may be necessary. In these cases, using the Postgres `pg_dump` tool to create backups and storing them on a reliable external service (like an AWS S3 bucket) gives you control over long-term retention and recovery of your data.

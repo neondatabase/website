@@ -2,13 +2,16 @@
 title: Branching — Testing queries
 subtitle: Create a Neon branch to test queries before running them in production
 summary: >-
-  Step-by-step guide for creating a Neon branch to test potentially destructive
-  queries using a copy of production data, including instructions for testing
-  and deleting the branch afterward.
+  Neon branching lets you create an instant copy-on-write clone of your
+  production database to safely run destructive or schema-altering queries
+  before they touch live data. Use this page when you need to test a DELETE,
+  UPDATE, or DDL statement against real production data without risk of data
+  loss. The guide covers creating a test branch via the Neon Console, CLI, or
+  API; running queries in the SQL Editor; and deleting the branch when done.
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2026-02-06T22:07:32.932Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.

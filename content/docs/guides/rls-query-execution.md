@@ -3,11 +3,14 @@ title: Run RLS queries with Drizzle ORM
 subtitle: Learn how to execute RLS queries securely with Drizzle ORM, including best
   practices for Postgres roles, connection management, and dynamic client setup.
 summary: >-
-  Covers how to execute RLS queries using Drizzle ORM securely, with details on
-  Postgres custom roles, advanced connection string configurations, and dynamic
-  client setup with auth callbacks.
+  Running RLS queries with Drizzle ORM on Neon requires custom Postgres roles
+  with LOGIN and no BYPASSRLS, plus separate connection strings for
+  authenticated vs. admin access. JWT claims are injected via set_config inside
+  a transaction. Use this page after defining RLS policies in your Drizzle
+  schema to wire up the runtime connection layer, whether from a frontend using
+  the Data API or a backend using the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

@@ -2,13 +2,19 @@
 title: Connection pooling
 subtitle: Learn how connection pooling works in Neon
 summary: >-
-  Covers the setup and functionality of connection pooling in Neon using
-  PgBouncer, detailing how to manage concurrent connections effectively and
-  avoid common pitfalls related to connection limits based on compute size.
+  Neon connection pooling uses PgBouncer in transaction mode, accepting up to
+  10,000 client connections through per-user, per-database pools sized at 90%
+  of max_connections. Use the pooled connection string (hostname with -pooler
+  suffix) for serverless functions and connection-per-request workloads. Use a
+  direct connection for schema migrations, pg_dump, logical replication, and
+  queries that depend on SET, LISTEN/NOTIFY, or session-level state. In
+  transaction mode, SET, temporary tables, and SQL-level PREPARE/DEALLOCATE
+  are not supported on pooled connections, though protocol-level prepared
+  statements are supported.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-04-03T11:15:22.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.

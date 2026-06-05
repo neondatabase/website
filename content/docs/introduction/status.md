@@ -2,11 +2,14 @@
 title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
 summary: >-
-  Covers the monitoring of Neon's performance and availability, detailing how to
-  access the status page, track specific project components, and subscribe for
-  updates on incidents and maintenance.
+  The Neon status page (neonstatus.com) reports real-time uptime and incident
+  status for platform components including database connectivity, project/branch
+  operations, Console API, Console Frontend, account creation, login, and the
+  Neon website. Check here to confirm whether an outage is regional, and
+  subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams. Routine
+  maintenance and compute updates are not posted here.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Stay informed about Neon's performance and availability at [https://neonstatus.com/](https://neonstatus.com/).

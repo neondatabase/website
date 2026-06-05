@@ -4,7 +4,16 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
+summary: >-
+  Neon legacy plans (Free, Launch, Scale, Business, and Enterprise) are
+  discontinued pricing tiers no longer available to new signups. Existing paid
+  users were automatically migrated to new plans in February 2026. Check this
+  page for your legacy plan's specific allowances and extra usage rates, such
+  as extra compute at $0.16/compute-hour and extra storage from $0.50 to
+  $1.75/GB-month depending on tier. Azure Marketplace users remain on legacy
+  plans. The page also documents how storage, archive storage, compute hours,
+  and project limits are measured under these tiers.
 ---
 
 This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.

@@ -2,11 +2,14 @@
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
 summary: >-
-  Covers the setup and usage of the `pg_repack` extension in Neon to efficiently
-  remove bloat from tables and indexes, enhancing database performance with
-  minimal locking during the process.
+  pg_repack rewrites bloated tables and indexes online, reclaiming dead-tuple
+  space without the exclusive locks required by VACUUM FULL or CLUSTER. Use it
+  on Neon when frequent updates and deletes have degraded query performance or
+  inflated storage. Always pass `--no-superuser-check` (`-k`) since Neon users
+  are not superusers. Repacking temporarily doubles storage and increases WAL
+  history for the duration of your PITR window.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.

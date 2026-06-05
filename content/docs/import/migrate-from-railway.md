@@ -3,11 +3,16 @@ title: Migrate from Railway Postgres to Neon Postgres
 subtitle: Learn how to migrate your database from Railway to Neon Postgres using
   pg_dump and pg_restore
 summary: >-
-  Covers the migration process of a database from Railway to Neon Postgres using
-  `pg_dump` and `pg_restore`, detailing prerequisites and step-by-step
-  instructions for preparing and exporting data.
+  Step-by-step guide for moving a Railway Postgres database to Neon using
+  `pg_dump` and `pg_restore`. Covers how to retrieve Railway's
+  `DATABASE_PUBLIC_URL` via the TCP Proxy setting and apply `--no-owner
+  --no-acl` flags during restore to drop Railway-specific ownership and access
+  control settings. Use this page when migrating from Railway specifically, as
+  distinct from the general Postgres migration guide. Also covers logical
+  replication and CSV import as alternatives for larger datasets or
+  minimal-downtime requirements.
 enableTableOfContents: true
-updatedOn: '2026-05-12T17:58:17.469Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate a database from Railway to Neon Postgres using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.

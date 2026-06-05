@@ -2,12 +2,14 @@
 title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 summary: >-
-  Covers the setup of logical replication from Amazon RDS PostgreSQL to Neon,
-  including prerequisites, enabling logical replication, and preparing the
-  source database for data migration.
+  Migrate from Amazon RDS PostgreSQL to Neon with minimal downtime using logical
+  replication. Set rds.logical_replication=1 on RDS, create a publication, then
+  create a matching subscription on Neon to stream row-level changes. The guide
+  covers enabling WAL logical level on RDS, allowlisting Neon NAT gateway IPs
+  in the RDS security group, schema preparation, and application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <MigrationAssistant/>

@@ -2,11 +2,13 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 summary: >-
-  Covers the setup of Grafana Cloud integration for Neon Postgres, detailing
-  configuration for log forwarding and the transmission of metrics related to
-  database performance and resource utilization.
+  Grafana Cloud integration for Neon Postgres sends metrics and logs via the
+  OTLP endpoint, routing metrics to Mimir and Postgres logs to Loki. Use this
+  page to connect Neon to Grafana Cloud for dashboards, alerts, and LogQL
+  queries covering connection counts, CPU, memory, cache hit rate, replication
+  delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

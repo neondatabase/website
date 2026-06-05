@@ -2,11 +2,17 @@
 title: The pg_uuidv7 extension
 subtitle: Generate and manage time-ordered version 7 UUIDs in Postgres
 summary: >-
-  Covers the setup and usage of the `pg_uuidv7` extension in Postgres for
-  generating and managing time-ordered version 7 UUIDs, enhancing database
-  performance through improved indexing and data locality.
+  The `pg_uuidv7` extension generates time-ordered UUIDv7 values in Postgres by
+  embedding a Unix millisecond timestamp in the leading bits, keeping B-tree
+  index insertions sequential and reducing page splits compared to random
+  UUIDv4. Use it when you need globally unique identifiers that also support
+  efficient time-range queries, chronological sorting, or high-insert-rate
+  primary keys without a separate timestamp column. Key functions are
+  `uuid_generate_v7()`, `uuid_v7_to_timestamptz()`, and
+  `uuid_timestamptz_to_v7()`. The last function supports zeroed random bits for
+  boundary UUID generation in range scans.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pg_uuidv7` extension allows you to generate and work with version 7 Universally Unique Identifiers (UUIDs) in Postgres. UUIDv7 is a newer UUID format designed to be time-ordered and sortable, which offers significant benefits for database performance, especially when used as primary keys or in time-series data.

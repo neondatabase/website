@@ -2,11 +2,18 @@
 title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
 summary: >-
-  Covers the structure of Neon's autoscaling architecture, detailing the roles
-  of the autoscaler-agent and Kubernetes scheduler in dynamically allocating
-  compute resources for Postgres instances.
+  Neon's autoscaling architecture runs each Postgres instance inside a VM on a
+  Kubernetes node. CPU and RAM scale dynamically through an autoscaler-agent
+  that collects metrics, a modified Kubernetes scheduler that approves
+  upscaling requests to prevent memory overcommit, and NeonVM, a custom VM
+  controller built on QEMU/KVM. When a node is saturated, NeonVM live-migrates
+  VMs to another machine in roughly 100ms, preserving the VM's IP address and
+  keeping active queries uninterrupted. Memory scaling is event-driven through
+  Linux cgroups notifications. A Local File Cache (LFC) Postgres extension
+  dedicates a portion of each VM's allocated RAM to disk-backed caching to
+  accelerate repeated scans and index builds.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

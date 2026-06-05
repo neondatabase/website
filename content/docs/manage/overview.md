@@ -1,12 +1,15 @@
 ---
 title: Overview of the Neon object hierarchy
 summary: >-
-  Covers the structure of the Neon object hierarchy, detailing how
-  Organizations, Projects, Branches, Computes, Roles, and Databases are
-  organized and managed within a Neon environment.
+  The Neon object hierarchy nests Organizations > Projects > Branches, with
+  each branch holding Computes, Roles, and Databases. Read this page before
+  structuring a Neon environment to understand how resources are scoped and
+  what plan limits apply at each level. Roles created via the Console, CLI,
+  or API receive neon_superuser privileges. API keys are account-scoped or
+  organization-scoped, not branch-scoped.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.238Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.

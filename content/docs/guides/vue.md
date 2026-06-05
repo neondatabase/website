@@ -2,10 +2,12 @@
 title: Connect a Vue.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Vue.js application
 summary: >-
-  Step-by-step guide for connecting a Vue.js application to Neon, focusing on
-  server-side access through frameworks like Nuxt.js and Quasar Framework.
+  Connecting a Vue.js application to a Neon Postgres database requires
+  server-side access because Neon cannot be queried directly from the browser.
+  Use a Vue meta-framework such as Nuxt.js or Quasar Framework to run database
+  queries on the server and expose data to your Vue frontend.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.065Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.

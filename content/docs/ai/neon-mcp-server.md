@@ -3,11 +3,15 @@ title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
 summary: >-
-  Covers the setup and management of Neon Postgres databases using the Neon MCP
-  Server, enabling users to execute commands and make schema changes through
-  natural language without coding.
+  Neon MCP Server is an open-source bridge between natural language requests and
+  the Neon API, letting AI assistants create projects, run SQL, manage branches,
+  and perform schema migrations without manual API calls or code. Use it when
+  you want to control Neon Postgres databases through conversational commands in
+  editors like Cursor, VS Code, or Claude Code instead of the Neon Console. Set
+  up with a single command (`npx neonctl@latest init` or `npx add-mcp
+  https://mcp.neon.tech/mcp`); supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-04-24T10:03:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**:

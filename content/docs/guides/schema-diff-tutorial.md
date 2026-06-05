@@ -3,11 +3,15 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 summary: >-
-  Step-by-step guide for comparing two development branches using the Schema
-  Diff tool in Neon, including creating an initial schema and visualizing
-  differences between branches.
+  Schema Diff tutorial for comparing a feature branch against a production
+  branch in Neon using a side-by-side, GitHub-style diff. Available from the
+  Console, the `neon branches schema-diff` CLI command, or the compare-schema
+  REST API. Use this page when you need a concrete end-to-end example: create a
+  database on production, branch it to a dev branch, alter the schema, then run
+  Schema Diff to see exactly which tables, sequences, and constraints differ
+  before merging or restoring.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.197Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.

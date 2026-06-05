@@ -2,11 +2,16 @@
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
 summary: >-
-  Covers the setup and functionality of the `intarray` extension in Postgres,
-  enabling efficient manipulation and querying of integer arrays, including
-  operations like sorting and counting elements.
+  The `intarray` Postgres extension adds functions and operators for NULL-free
+  integer arrays. It enables set operations (union, intersection, overlap,
+  containment) and a `query_int` type for boolean AND/OR/NOT searches. Use it
+  when built-in array functions are too slow for large datasets with overlap or
+  containment queries, common in tagging systems, access control lists, and
+  product categorization. GiST and GIN index classes accelerate `&&`, `@>`,
+  `<@`, and `@@` operators, with tunable parameters like `numranges` and
+  `siglen`.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `intarray` extension for Postgres provides functions and operators for handling arrays of integers. It's particularly optimized for arrays that do not contain any `NULL` values, offering significant performance advantages for certain operations compared to Postgres's built-in array functions.

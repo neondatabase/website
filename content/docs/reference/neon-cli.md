@@ -2,9 +2,11 @@
 title: Neon CLI overview
 subtitle: 'Overview of the Neon CLI: installation, commands, and options'
 summary: >-
-  How to manage Neon using the command-line interface (CLI), including
-  installation instructions for macOS, Windows, and Linux, along with available
-  commands and options.
+  Neon CLI (neonctl) is the terminal tool for managing Neon projects, branches,
+  databases, roles, and connection strings without using the web console. Use
+  this page to install on macOS, Windows, or Linux via npm, Homebrew, bun, or
+  standalone binary, and to find the full command reference with global options
+  including --api-key, --output, and --context-file.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-create-app

@@ -2,14 +2,16 @@
 title: Getting ready for production
 subtitle: 'Guidelines to optimize price, performance, and reliability'
 summary: >-
-  Covers the setup of production environments in Neon, including guidelines for
-  selecting plans, optimizing performance, managing branches, enabling
-  autoscaling, and ensuring reliability through connection testing and restore
-  settings.
+  A production readiness checklist for Neon Postgres covering plan selection,
+  region placement, autoscaling limits, branch protection, and connection
+  pooling. Use this page when moving a Neon project out of development. It
+  covers scale-to-zero tradeoffs, instant restore history windows, snapshot
+  schedules, IP Allow, pg_stat_statements for query monitoring, and metric
+  exports to Datadog, Grafana, or any OTEL-compatible platform.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CheckList title="Production checklist">

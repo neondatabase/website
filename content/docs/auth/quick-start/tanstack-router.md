@@ -2,11 +2,14 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 summary: >-
-  Step-by-step guide for setting up Neon Auth with TanStack Router, including
-  project creation, SDK installation, environment variable configuration, and
-  style integration.
+  Neon Auth quick start for TanStack Router (file-router) using the
+  `@neondatabase/neon-js` and `@neondatabase/auth-ui` SDKs. Pre-built components
+  include AuthView, AccountView, SignedIn, and RedirectToSignIn. Use this page
+  when you need sign-in, sign-up, and route protection without writing custom
+  auth UI. User profiles are stored automatically in the `neon_auth.user` table
+  in your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 layout: wide
 ---
 

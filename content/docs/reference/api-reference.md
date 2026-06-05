@@ -1,14 +1,21 @@
 ---
 title: Neon API
 summary: >-
-  How to manage Neon projects programmatically using the Neon API, including
-  creating and managing projects, branches, databases, and roles, along with
-  guidance on obtaining an API key and using SDKs.
+  The Neon API (REST, base URL https://console.neon.tech/api/v2/) lets
+  developers create and manage projects, branches, databases, roles, and
+  compute endpoints programmatically, mirroring every action available in the
+  Neon Console. Use this page to get an API key, authenticate with Bearer
+  tokens, and understand constraints like rate limits, async operation
+  polling, and branch deletion rules before building automation or CI/CD
+  pipelines. Neon supports multiple API key scopes (personal, organization,
+  and project-scoped), TypeScript and Python SDKs, an OpenAPI 3.0 spec, and
+  an index of API examples covering branching, read replicas, snapshots,
+  schema diff, and data anonymization.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2026-05-15T17:51:14.030Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API"

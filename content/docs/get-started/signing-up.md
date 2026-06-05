@@ -2,16 +2,19 @@
 title: Tour the Neon Console
 subtitle: Sign up and explore Neon's core features — the SQL Editor, branching, the Tables view, and Neon Auth
 summary: >-
-  Walk through the Neon Console and learn how to sign up, query data in the
-  SQL Editor, branch your database, view and modify rows in the Tables view,
-  and set up Neon Auth.
+  The Neon Console tour walks first-time users through sign-up, querying with
+  the SQL Editor and AI assistant, editing rows in the Tables view, enabling
+  Neon Auth, and creating an isolated development branch with the Neon CLI.
+  Choose this page to understand the object hierarchy (project, branch,
+  database, compute) and how branching isolates schema and data from production
+  before you connect an application stack.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-05-22T02:29:34.734Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

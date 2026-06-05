@@ -1,11 +1,17 @@
 ---
 title: Migrate from Turso to Neon Postgres
 summary: >-
-  Covers the migration of a Turso database to Neon Postgres using pgloader,
-  including exporting data from Turso, schema and data type considerations
+  Migration guide for moving a Turso (libSQL/SQLite) database to Neon Postgres
+  using pgloader. Dumps the Turso database to a local SQLite file with the
+  Turso CLI, then loads it into Neon where pgloader converts SQLite type
+  affinities to Postgres types. Use this guide when the source is Turso or
+  SQLite; it also covers swapping Turso drivers for the Neon serverless driver,
+  translating `?` placeholders to `$1` parameters, adapting dialect differences
+  like LIKE vs ILIKE, and verifying sequences after migration. Neon's Free plan
+  supports up to 0.5 GB; larger Turso databases require a paid Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-13T07:11:52.174Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

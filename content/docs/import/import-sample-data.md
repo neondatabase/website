@@ -2,11 +2,14 @@
 title: Postgres sample data
 subtitle: 'Import sample data for learning, testing, and exploring Neon'
 summary: >-
-  Covers the process of downloading and installing sample data for Neon,
-  including prerequisites and instructions for various datasets for
-  learning, testing, and exploration.
+  Curated Postgres sample datasets with load instructions using psql,
+  pg_restore, or the Neon CLI for learning, testing, and exploration. Choose
+  this page when you need real data in a Neon database fast; larger datasets
+  require a paid plan because the Free plan caps storage per branch. Includes
+  Pagila, Chinook, Employees, Wikipedia vector embeddings (pgvector), and
+  Postgres Air.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.

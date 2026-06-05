@@ -2,11 +2,13 @@
 title: Connect an Encore application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Encore.ts application
 summary: >-
-  Step-by-step guide for connecting an Encore application to Neon, including
-  installation, application creation, database schema definition, and API
-  endpoint setup for production deployments.
+  Encore.ts is a type-safe TypeScript backend framework that integrates with
+  Neon to automatically provision and migrate a Neon Postgres database when you
+  deploy a production environment from the Encore Cloud dashboard. Use this
+  guide when you want Encore to create and manage your Neon database, including
+  per-pull-request Neon branch preview environments for safe schema testing.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.152Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.

@@ -1,15 +1,17 @@
 ---
 title: Security overview
 summary: >-
-  Covers the security measures implemented by Neon, including SSL/TLS encryption
-  for secure connections, password enforcement with 60-bit entropy, abuse of
-  resources and unauthorized modifications policy, and the use of a proxy to
-  protect against unauthorized access.
+  Neon enforces SSL/TLS encryption (verify-full mode), 60-bit entropy
+  passwords, AES-256 data-at-rest encryption, IP allowlists (Scale plan),
+  and AWS PrivateLink private networking. A connection proxy blocks
+  unauthorized login attempts. The page also covers GitHub secret scanning,
+  protected branches, vulnerability management, and the HackerOne bug
+  bounty program.
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-04-28T11:59:46.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.

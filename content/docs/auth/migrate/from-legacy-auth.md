@@ -2,11 +2,14 @@
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 summary: >-
-  Covers the code differences and necessary updates for migrating from legacy
-  Neon Auth (Stack Auth) to Neon Auth with Better Auth, including environment
-  variable changes and benefits of the new system.
+  Migration guide for upgrading from legacy Neon Auth (Stack Auth) to Neon Auth
+  with Better Auth. Replace Stack Auth environment variables with a single
+  `NEON_AUTH_BASE_URL` and swap the `@stackframe/stack` SDK for
+  `@neondatabase/auth`. Use this page when moving an existing Next.js or React
+  SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
+  project.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react

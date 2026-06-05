@@ -2,10 +2,14 @@
 title: 'Neon CLI command: roles'
 subtitle: 'List, create, and delete database roles in a Neon project'
 summary: >-
-  Covers the usage of the `roles` command in the Neon CLI for managing roles
-  within a Neon project, including listing, creating, and deleting roles.
+  The `neon roles` CLI command lists, creates, and deletes database roles in a
+  Neon project, with subcommands scoped to a specific branch or the project
+  default. Use it when you need to add a login role, create a passwordless role
+  with `--no-login`, or remove an existing role from the command line. Role
+  names are capped at 63 bytes; commands require the Neon CLI and either
+  browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.968Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

@@ -3,11 +3,16 @@ title: Use Neon with Cloudflare Hyperdrive
 subtitle: Connect Cloudflare Hyperdrive to your Neon Postgres database for faster
   queries
 summary: >-
-  How to configure Cloudflare Hyperdrive to connect to a Neon Postgres database,
-  enhancing query performance for serverless applications by utilizing a
-  globally distributed pool of database connections.
+  Cloudflare Hyperdrive proxies and accelerates Neon Postgres queries from
+  Cloudflare Workers by routing requests through a globally distributed
+  connection pool, reducing per-request connection latency for serverless
+  workloads. Use this guide when you need to connect a Workers application
+  (node-postgres or postgres.js) to Neon via Hyperdrive, including Wrangler
+  binding setup and worker placement by region. Covers the sslmode=disable
+  behavior in Hyperdrive local connection strings and how to test with
+  wrangler dev --remote.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.141Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.

@@ -3,11 +3,15 @@ title: 'Neon CLI command: init'
 subtitle: Initialize an app project with Neon, including auth, MCP server, extensions,
   and agent skills
 summary: >-
-  Step-by-step guide for initializing an app project with Neon using the CLI,
-  including authentication, configuring the Neon MCP Server, and installing
-  necessary extensions and agent skills for supported editors.
+  The `neon init` command sets up a project to use Neon with an AI coding
+  assistant by running OAuth, creating an API key, writing the Neon MCP server
+  config, and installing agent skills. It supports Cursor, VS Code, Claude
+  Code, and any editor supported by add-mcp. Use this page when starting a
+  new project with `npx neonctl@latest init` or when you need to know which
+  files get created and where. The `--agent` flag targets a specific editor
+  without the interactive prompt.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.457Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## The `init` command

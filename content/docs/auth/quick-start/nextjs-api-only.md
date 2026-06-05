@@ -2,11 +2,14 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 summary: >-
-  How to integrate Neon Auth into a Next.js project using SDK methods, including
-  enabling authentication, installing the Neon SDK, and setting up environment
-  variables.
+  Neon Auth SDK integration for Next.js App Router using raw API methods. Call
+  `createNeonAuth`, `auth.signUp.email()`, `auth.signIn.email()`, and
+  `auth.middleware()` directly from the `@neondatabase/auth` package for full
+  control over your auth UI. Use this guide instead of the UI components
+  reference when you need custom sign-up and sign-in forms. Requires Next.js
+  App Router.
 enableTableOfContents: true
-updatedOn: '2026-05-17T20:37:50.454Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs

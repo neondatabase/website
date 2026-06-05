@@ -1,10 +1,14 @@
 ---
 title: Support
 summary: >-
-  Covers the support plans, channels, and policies available for Neon users,
-  detailing how to access support based on their specific pricing plan.
+  Neon support plans map to pricing tiers. Free plan users get community
+  (Discord) support only. Launch adds billing-only tickets. Scale unlocks
+  Standard support, with optional Business or Production upgrades that include
+  response-time SLAs. Use this page to find which channels your plan includes,
+  understand how tickets are prioritized by severity, and review the general
+  support policy.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.

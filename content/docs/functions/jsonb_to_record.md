@@ -2,11 +2,15 @@
 title: Postgres jsonb_to_record() function
 subtitle: Convert a JSONB object to a record
 summary: >-
-  Covers the usage of the `jsonb_to_record` function to convert a JSONB object
-  into a structured record, enabling the extraction and insertion of JSONB data
-  into PostgreSQL tables.
+  The `jsonb_to_record` function converts a single JSONB object into a typed
+  row using an inline column definition list in the AS clause, mapping JSON keys
+  to typed columns and producing NULL for missing keys. Use it when ingesting
+  JSONB from external sources such as APIs or file uploads and you need to parse
+  one record at a time without pre-defining a named type. It differs from
+  `jsonb_populate_record`, which requires a pre-existing record type, and from
+  `jsonb_to_recordset`, which expands a JSONB array into multiple rows.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.876Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 You can use the `jsonb_to_record` function to convert a top-level `JSONB` object into a row, with the type specified by the `AS` clause.

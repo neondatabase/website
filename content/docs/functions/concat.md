@@ -2,11 +2,16 @@
 title: Postgres concat() function
 subtitle: Concatenate strings in Postgres with the concat() function
 summary: >-
-  Covers the usage of the `concat()` function in Postgres to concatenate
-  multiple strings, including examples for combining data from columns and
-  generating dynamic outputs.
+  The Postgres `concat()` function is a variadic string function that joins two
+  or more strings or values into a single string, automatically converting
+  numeric arguments and silently treating NULL inputs as empty strings. Use it
+  instead of the `||` operator when NULL values should be ignored rather than
+  propagate through the result. The function accepts either individual
+  arguments or a variadic array form (`concat(variadic arr)`), covering use
+  cases such as combining column values, generating composite keys, and
+  building dynamic labels.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.855Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `concat()` function in Postgres is used to concatenate two or more strings into a single string. It is a variadic function, meaning it can accept any number of arguments.

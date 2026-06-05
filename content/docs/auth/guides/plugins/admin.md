@@ -2,11 +2,15 @@
 title: Admin
 subtitle: 'Manage users, roles, bans, sessions, and impersonation'
 summary: >-
-  Covers the management of users, roles, bans, sessions, and impersonation
-  through the Admin plugin APIs in Neon, enabling the creation and updating of
-  user accounts and their authentication states.
+  The Neon Auth Admin plugin exposes Better Auth admin APIs through the
+  Neon SDK without manual plugin configuration, letting server-side code create
+  users, assign roles, ban accounts, list or revoke sessions, and impersonate
+  users for support and debugging. Use this page when building admin dashboards
+  or support tooling that must manage user authentication state programmatically.
+  Admin operations require an authenticated session with HTTP-only cookies, and
+  impersonation sessions are capped at 1 hour.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.902Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

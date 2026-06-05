@@ -2,10 +2,13 @@
 title: 'Neon CLI command: branches'
 subtitle: 'List, create, rename, and delete branches; set default; run schema diff'
 summary: >-
-  Covers the usage of the `branches` command in the Neon CLI for managing
-  branches in a Neon project, including listing, creating, renaming, and
-  deleting branches, as well as setting defaults and performing schema
-  comparisons.
+  The Neon CLI `branches` command provides subcommands (list, create, reset,
+  restore, rename, schema-diff, set-default, set-expiration, add-compute,
+  delete) to manage Neon project branches from the terminal. Use this
+  reference when you need exact flags and syntax for branch operations:
+  point-in-time restore via RFC 3339 timestamp or LSN, schema diff between
+  any two branches or historical states, expiration timestamps, or adding
+  read replica computes.
 enableTableOfContents: true
 updatedOn: '2026-06-05T12:06:47.985Z'
 ---

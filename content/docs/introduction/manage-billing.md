@@ -3,11 +3,16 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 summary: >-
-  Covers the management of billing in Neon, including accessing the Billing
-  page, updating payment methods, downloading invoices, changing plans, and
-  account deletion.
+  The Neon Billing page in the Neon Console centralizes account billing
+  actions: viewing charges to date, updating payment methods and billing
+  email, downloading invoices, and upgrading or downgrading plans. Use it to
+  stop monthly charges by switching to the Free plan, fix a failed payment, or
+  request billing support (available on paid plans only). Legacy Enterprise
+  plan downgrades require a support ticket. Indian customers must pay invoices
+  manually because Stripe does not support e-Mandate recurring payments in
+  India.
 enableTableOfContents: true
-updatedOn: '2026-06-04T22:34:40.533Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

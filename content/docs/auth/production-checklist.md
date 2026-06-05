@@ -2,11 +2,15 @@
 title: Auth production checklist
 subtitle: Required configuration before launching with Neon Auth
 summary: >-
-  Step-by-step guide for configuring essential settings before launching an
-  application with Neon Auth, including trusted domains, custom email providers,
-  OAuth credentials, email verification, and security measures.
+  Required steps before going live with Neon Auth: trusted domains, custom SMTP
+  provider, application name, OAuth credentials, email verification, and
+  disabling localhost access. Use this page when Neon Auth is already configured
+  for development and you need to confirm every production-blocking setting
+  before launch. The default shared SMTP provider (`auth@mail.myneon.app`) is
+  rate-limited and does not support verification links. A custom SMTP provider
+  is required for both.
 enableTableOfContents: true
-updatedOn: '2026-05-15T10:42:42.837Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

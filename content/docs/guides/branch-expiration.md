@@ -3,11 +3,16 @@ title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete
   temporary branches
 summary: >-
-  Covers the setup of Neon's branch expiration feature, enabling automatic
-  deletion of temporary branches by setting expiration timestamps through the
-  Console, CLI, or API.
+  Branch expiration automatically deletes Neon branches at a scheduled time
+  using a TTL model, with expiration set via the Console, CLI (--expires-at
+  flag), or API (expires_at) using RFC 3339 timestamps up to 30 days in the
+  future. Use this feature to prevent storage accumulation from CI/CD test
+  branches, ephemeral AI workflows, or time-boxed feature branches that would
+  otherwise require manual cleanup. Expiration cannot be set on protected,
+  default, or parent branches, and deletion is permanent and also removes
+  associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.140Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Overview

@@ -2,13 +2,18 @@
 title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
 summary: >-
-  Covers the setup and functionality of the legacy Neon Auth system using Stack
-  Auth for existing users, detailing user management and data synchronization
-  within a Neon Postgres database.
+  Legacy Neon Auth (Stack Auth-based, archived) automatically syncs
+  authenticated user profiles into a `neon_auth.users_sync` Postgres table,
+  making user data available for SQL queries without custom sync code. Only
+  existing projects using the Stack Auth integration should reference this page;
+  new projects must use Neon Auth with Better Auth instead. Setup requires
+  environment variables including NEXT_PUBLIC_STACK_PROJECT_ID and
+  STACK_SECRET_SERVER_KEY, and existing users can claim their Stack Auth
+  project to manage OAuth providers and production settings.
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2026-02-15T20:51:54.041Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">

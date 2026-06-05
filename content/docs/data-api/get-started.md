@@ -2,11 +2,15 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 summary: >-
-  How to enable the Neon Data API for your database, create a table with
-  Row-Level Security (RLS), and execute your first query, including optional
-  authentication and schema access configurations.
+  The Neon Data API exposes your Postgres database as a REST endpoint secured
+  by JWT authentication and Row-Level Security. Applications can query tables
+  without a connection pool or SQL driver. Use this page to enable the API,
+  create an RLS-protected table, and run your first queries via the
+  @neondatabase/neon-js client or direct HTTP requests. The API is enabled per
+  branch for a single database and does not support projects with IP Allow or
+  Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-05-27T21:49:12.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.

@@ -3,14 +3,19 @@ title: Querying consumption metrics
 subtitle: Learn how to query project consumption metrics for usage-based plans using the
   Neon API
 summary: >-
-  How to query project consumption metrics for usage-based plans using the Neon
-  API. Retrieve compute, storage, and data transfer metrics without activating
-  compute endpoints.
+  The Neon consumption metrics API (/consumption_history/v2) returns
+  invoice-aligned usage metrics per project (compute units, storage types, data
+  transfer, extra branches) and per-branch metrics, available on Launch, Scale,
+  Agent, and Enterprise plans. Use the project endpoint for billing-aligned
+  totals and invoicing; use the branch endpoint to attribute compute and storage
+  costs to individual branches, CI environments, or development workflows.
+  Consumption history starts March 1, 2024. Granularity options are hourly,
+  daily, and monthly. Calls do not wake suspended compute endpoints.
 redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-05-29T11:35:42.669Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).

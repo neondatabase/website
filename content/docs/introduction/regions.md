@@ -1,8 +1,11 @@
 ---
 title: Regions
 summary: >-
-  Covers the selection and deployment of Neon projects across various AWS and
-  Azure regions to optimize latency between databases and application servers.
+  Neon projects deploy to multiple AWS and Azure regions. The region is fixed at
+  project creation and cannot be changed afterward. Use this page to choose a
+  region close to your application server, or to find NAT gateway IP addresses
+  for outbound connection allowlists. To move data to a different region, create
+  a new project there and migrate.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

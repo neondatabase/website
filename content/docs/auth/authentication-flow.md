@@ -2,11 +2,15 @@
 title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
 summary: >-
-  Covers the authentication flow for sign-in and sign-up processes using Neon
-  Auth, detailing the SDK integration, session creation, and database
-  interactions.
+  Neon Auth (Better Auth) authentication flow traces every step from SDK
+  call to HTTP-only session cookie, JWT issuance, and writes to the neon_auth
+  schema, covering email sign-in, sign-up, and OAuth providers such as Google
+  and GitHub. Use this page to understand what happens under the hood during
+  login, debug session or token problems, or wire auth.uid() into Row-Level
+  Security policies via the Data API. All auth state lands directly in your
+  Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.805Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
