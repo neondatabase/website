@@ -20,12 +20,15 @@ const icons = {
   // slack: SlackIcon,
 };
 
+const MOBILE_MEDIA_QUERY = '(max-width: 47.9375rem)';
+
 const Modal = ({ id, title, description, destination, embedId }) => {
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
 
   useEffect(() => {
+    setIsMinimized(window.matchMedia(MOBILE_MEDIA_QUERY).matches);
     setIsMounted(true);
   }, []);
 
