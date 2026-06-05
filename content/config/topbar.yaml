@@ -1,4 +1,4 @@
-text: 'All paid plans now include 5x more free data transfer: 500 GB per month, up from 100 GB. Read the details here.'
+text: 'New in Neon: a backend for apps and agents, Postgres 18 by default, and more. Read the latest changelog.'
 link:
-  url: 'https://neon.com/blog/more-data-transfer-on-paid-plans'
-  target: '_blank'
+  url: '/docs/changelog/2026-06-05'
+  target: '_self'
