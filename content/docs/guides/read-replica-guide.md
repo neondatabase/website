@@ -6,7 +6,7 @@ summary: >-
   replicas to branches, configuring compute sizes, and utilizing features like
   Autoscaling and Scale to Zero for optimized performance.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.

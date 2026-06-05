@@ -6,7 +6,7 @@ summary: >-
   arrays into JSON arrays, facilitating data integration with web services and
   APIs.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 You can use the `array_to_json` function to convert a Postgres array into its `JSON` representation, transforming an array of values into a `JSON` array. This makes it easier to integrate with web services, APIs, and web frameworks that rely on `JSON`.

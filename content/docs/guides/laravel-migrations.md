@@ -6,7 +6,7 @@ summary: >-
   initializing a project, retrieving the database connection string, and
   managing schema migrations using Laravel's migration system.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.

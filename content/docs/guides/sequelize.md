@@ -7,7 +7,7 @@ summary: >-
   including project initialization, database connection string retrieval, and
   running migrations.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.

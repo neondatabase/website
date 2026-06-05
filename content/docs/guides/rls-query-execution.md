@@ -7,7 +7,7 @@ summary: >-
   Postgres custom roles, advanced connection string configurations, and dynamic
   client setup with auth callbacks.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 <InfoBlock>

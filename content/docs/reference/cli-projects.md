@@ -6,7 +6,7 @@ summary: >-
   projects, including listing, creating, updating, deleting, and retrieving
   project information directly from the terminal.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-03T10:16:42.918Z'
 ---
 
 ## Before you begin

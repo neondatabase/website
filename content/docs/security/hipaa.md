@@ -5,7 +5,7 @@ summary: >-
   the self-serve process to enable features and accept the Business Associate
   Agreement (BAA) for handling Protected Health Information (PHI).
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.

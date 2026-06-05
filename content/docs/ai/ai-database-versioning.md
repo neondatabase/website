@@ -8,7 +8,7 @@ summary: >-
   and stable connection strings for applications in AI agent and code generation
   contexts.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-05-20T14:13:43.586Z'
 ---
 
 <Admonition type="note">

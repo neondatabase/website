@@ -7,7 +7,7 @@ summary: >-
   uses PostgreSQL's security model to enforce role privileges and Row-Level
   Security for database access control.
 enableTableOfContents: true
-updatedOn: '2026-06-05T16:32:17.840Z'
+updatedOn: '2026-06-04T14:48:01.456Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
