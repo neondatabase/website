@@ -1,4 +1,16 @@
+const { execFileSync } = require('child_process');
 const fs = require('fs');
+
+let isMergeCommit = false;
+
+try {
+  execFileSync('git', ['rev-parse', '--verify', '--quiet', 'MERGE_HEAD'], { stdio: 'ignore' });
+  isMergeCommit = true;
+} catch {
+  // MERGE_HEAD is only available while Git is creating a merge commit.
+}
+
+if (isMergeCommit) process.exit(0);
 
 const filePaths = process.argv.slice(2).filter(Boolean);
 const updatedOn = new Date().toISOString();
