@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-05T12:06:47.985Z'
 ---
 
 ## Before you begin
@@ -21,6 +21,10 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 ## The `branches` command
 
 The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or performing a [schema diff](/docs/guides/schema-diff) between different branches.
+
+<Admonition type="tip" title="Switch the active branch">
+To pin a branch in your local `.neon` context file so subsequent commands target it, use [`neon checkout`](/docs/reference/cli-checkout) (requires neonctl 2.22.2+).
+</Admonition>
 
 ## Usage
 
@@ -494,7 +498,7 @@ This command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
+`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the default `production` branch, select `production` as your base.
 
 This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
 

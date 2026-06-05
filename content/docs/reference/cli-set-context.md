@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-05T12:06:47.985Z'
 ---
 
 ## Before you begin
@@ -25,8 +25,14 @@ This command sets a background context for your CLI sessions, letting you perfor
 
 The context remains in place until you reset to a new context or remove the `context-file`.
 
-<Admonition type="tip" title="Context file location">
-The Neon CLI determines where to read or create the `.neon` context file by walking up the directory tree from your current directory. It stops at the first directory containing `.neon`, `package.json`, or `.git`. This ensures the context file is stored at your project root (where `package.json` or `.git` typically exists) rather than in a subdirectory. The search stops at your home directory.
+<Admonition type="tip" title="Prefer link or checkout">
+For most workflows, use [`neon link`](/docs/reference/cli-link) to bind a directory to a project or [`neon checkout`](/docs/reference/cli-checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
+</Admonition>
+
+<Admonition type="tip" title="How the CLI finds your `.neon` file">
+When you run a command, the CLI starts in your current directory and checks for a `.neon` file. If it does not find one, it checks the parent directory, then the parent of that, and so on until it finds a `.neon` file or reaches your home directory. This means you can run commands from any subdirectory of a linked project without re-specifying `--project-id`.
+
+To write context to a specific file or location, use `--context-file`.
 </Admonition>
 
 ### Usage
@@ -59,6 +65,7 @@ The `set-context` command requires you set at least one of these options:
 | ---------------- | ------------------ | ------ | :--------------------------------------------------------------------------------------------------: |
 | `--project-id`   | Project ID         | string |          Sets the identified project as the context until you reset or remove context-file           |
 | `--org-id`       | Organization ID    | string | Sets the organization context, which allows you to perform actions in the context of an organization |
+| `--branch-id`    | Branch ID          | string |                  Sets the branch context for commands that target a specific branch                  |
 | `--context-file` | Path and file name | string |              Creates a file that holds organization-id, project-id, and branch context               |
 
 [Global options](/docs/reference/neon-cli#global-options) are also supported.
@@ -160,6 +167,15 @@ To reset or clear the current context, you have two options:
    # Or for a custom context file:
    rm your_context_file
    ```
+
+### `.gitignore` on first create
+
+The first time a `.neon` file is created in a directory, the CLI adds `.neon` to `.gitignore` in that same folder:
+
+- If no `.gitignore` exists, the CLI creates one with a single `.neon` line.
+- If `.gitignore` already exists, the CLI appends `.neon` only if it is not already listed.
+
+This keeps local project settings out of git by default. If you want to commit `.neon` and share context with your team, remove the entry from `.gitignore`. The CLI will not re-add it when updating an existing `.neon` file.
 
 <Admonition type="note">
 Neon does not save any confidential information to the context file (for example, auth tokens). You can safely commit this file to your repository or share with others.

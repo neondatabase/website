@@ -384,8 +384,9 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
             branch_date=$(git log -1 --format=%aI "$branch" 2>/dev/null | cut -d'T' -f1)
 
             if [[ "$branch_date" > "$SINCE_DATE_COMPARE" ]] || [[ "$branch_date" == "$SINCE_DATE_COMPARE" ]]; then
-                # Get commits
-                git log --oneline --no-merges "$branch" --format="%s" | head -30 | \
+                # Only include commits within the report window (branch HEAD date alone
+                # is not enough — release cuts can carry older PRs cherry-picked in).
+                git log --since="$GIT_LOG_SINCE" --oneline --no-merges "$branch" --format="%s" | head -30 | \
                 while read -r line; do
                     echo "$line" | grep -qE "^(Release|Hotfix|Control-plane release)" && continue
                     pr=$(echo "$line" | grep -oE '#[0-9]+' | head -1 | tr -d '#' || echo "")

@@ -669,6 +669,8 @@
                   slug: reference/cli-vpc
                 - title: branches
                   slug: reference/cli-branches
+                - title: checkout
+                  slug: reference/cli-checkout
                 - title: databases
                   slug: reference/cli-databases
                 - title: roles
@@ -677,8 +679,14 @@
                   slug: reference/cli-operations
                 - title: connection-string
                   slug: reference/cli-connection-string
+                - title: psql
+                  slug: reference/cli-psql
+                - title: link
+                  slug: reference/cli-link
                 - title: set-context
                   slug: reference/cli-set-context
+                - title: data-api
+                  slug: reference/cli-data-api
                 - title: init
                   slug: reference/cli-init
                 - title: completion
