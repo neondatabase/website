@@ -4,9 +4,9 @@ subtitle: Upload your first file in minutes
 summary: >-
   This quickstart walks you through creating a storage credential, configuring
   your S3 client, creating a bucket, and uploading and downloading your first
-  file. Any AWS S3-compatible SDK works — just point it at your branch endpoint.
+  file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:26:22.039Z'
+updatedOn: '2026-06-08T19:36:47.586Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -26,7 +26,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user"}'
 ```
 
-The response includes your S3 credentials. Store them immediately — they are returned only once:
+The response includes your S3 credentials. Store them immediately. They are returned only once:
 
 ```json
 {

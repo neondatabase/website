@@ -4,17 +4,17 @@ subtitle: S3-compatible object storage that branches with your database
 summary: >-
   Neon Storage is S3-compatible object storage built into the Neon backend.
   Every branch gets its own isolated storage namespace. Use any AWS S3 SDK
-  or tool — point it at your branch endpoint and authenticate with your Neon
+  or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:26:22.039Z'
+updatedOn: '2026-06-08T19:36:47.586Z'
 ---
 
 <Admonition type="note" title="Private Preview">
 Neon Storage is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
 </Admonition>
 
-Neon Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool — point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
+Neon Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, and any other S3-compatible tool works out of the box.

@@ -6,10 +6,10 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:26:22.039Z'
+updatedOn: '2026-06-08T19:36:47.586Z'
 ---
 
-Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database — each branch has its own view of storage.
+Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
 
 ## Upload
 
@@ -260,7 +260,7 @@ curl -X DELETE \
 
 ## Presigned URLs
 
-Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object — without exposing your credentials.
+Generate a time-limited URL that allows a browser or unauthenticated client to upload or download a specific object, without exposing your credentials.
 
 **Presigned GET (download):**
 

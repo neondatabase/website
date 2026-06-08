@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:26:22.039Z'
+updatedOn: '2026-06-08T19:36:47.586Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -15,8 +15,8 @@ Neon Storage uses the same credential system as AI Gateway and Functions. You cr
 
 A Storage credential requires at minimum one of:
 
-- `storage:read` — allows GetObject, HeadObject, ListObjects, and ListBuckets
-- `storage:write` — allows all read operations plus PutObject and DeleteObject
+- `storage:read`: allows GetObject, HeadObject, ListObjects, and ListBuckets
+- `storage:write`: allows all read operations plus PutObject and DeleteObject
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -25,7 +25,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user"}'
 ```
 
-The response includes these fields (returned once only — store them immediately):
+The response includes these fields. Both secrets are returned once only, so store them immediately:
 
 ```json
 {
