@@ -538,6 +538,31 @@
                     - title: Database integration
                       slug: auth/legacy/database-integration
 
+        - title: Storage
+          icon: data
+          slug: storage/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: storage/overview
+                - title: Quickstart
+                  slug: storage/get-started
+            - section: Guides
+              items:
+                - title: Buckets
+                  slug: storage/buckets
+                - title: Objects
+                  slug: storage/objects
+                - title: Authentication
+                  slug: storage/authentication
+            - section: Reference
+              items:
+                - title: S3 compatibility
+                  slug: storage/s3-compatibility
+                - title: Troubleshooting
+                  slug: storage/troubleshooting
+
         - title: Postgres RLS
           icon: lock
           slug: guides/row-level-security
