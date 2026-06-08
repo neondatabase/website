@@ -49,7 +49,7 @@ const MODALS = [
       all: true,
     },
     destination: {
-      label: 'Learn about branching',
+      label: 'Watch the video',
       url: '/docs/introduction/branching',
     },
   },
