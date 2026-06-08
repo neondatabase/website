@@ -6,11 +6,11 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T17:15:18.099Z'
+updatedOn: '2026-06-08T18:39:44.797Z'
 ---
 
 <Admonition type="note" title="Private Preview">
-Neon AI Gateway is currently in Private Preview. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
+Neon AI Gateway is currently in Private Preview and available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
 </Admonition>
 
 <Steps>
