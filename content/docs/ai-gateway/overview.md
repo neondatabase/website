@@ -8,11 +8,11 @@ summary: >-
   SDKs work out of the box. Point them at your branch host and start calling
   models immediately.
 enableTableOfContents: true
-updatedOn: '2026-06-08T18:39:44.797Z'
+updatedOn: '2026-06-08T18:44:46.877Z'
 ---
 
 <Admonition type="note" title="Private Preview">
-Neon AI Gateway is currently in Private Preview and available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan. Free plan users receive access to open-source models on a round-robin basis.
+Neon AI Gateway is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
 </Admonition>
 
 Neon AI Gateway is the LLM inference layer in the Neon backend for apps and agents. Use your branch credential to call foundation models from Anthropic, OpenAI, Google, and Alibaba. No provider API keys required. Your existing OpenAI or Anthropic SDK works without changes. Point it at your branch host and start making requests.
