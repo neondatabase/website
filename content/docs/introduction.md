@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-08T16:11:48.651Z'
 ---
 
 <TwinPaths>
@@ -48,7 +48,7 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 <a href="https://neon.com/blog/were-building-backends#access" description="Serverless compute, deployed alongside your DB." icon="code" tag="coming soon">Compute</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Early Access">AI Gateway</a>
 
 </DetailIconCards>
 

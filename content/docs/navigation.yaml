@@ -538,6 +538,35 @@
                     - title: Database integration
                       slug: auth/legacy/database-integration
 
+        - title: AI Gateway
+          icon: sparkle
+          slug: ai-gateway/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: ai-gateway/overview
+                - title: Quickstart
+                  slug: ai-gateway/get-started
+                - title: Models
+                  slug: ai-gateway/models
+            - section: APIs
+              items:
+                - title: Chat completions
+                  slug: ai-gateway/chat-completions
+                - title: Anthropic Messages API
+                  slug: ai-gateway/anthropic-messages
+                - title: OpenAI Responses API
+                  slug: ai-gateway/openai-responses
+                - title: Gemini API
+                  slug: ai-gateway/gemini
+            - section: Reference
+              items:
+                - title: Authentication
+                  slug: ai-gateway/authentication
+                - title: Troubleshooting
+                  slug: ai-gateway/troubleshooting
+
         - title: Postgres RLS
           icon: lock
           slug: guides/row-level-security
