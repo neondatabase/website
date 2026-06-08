@@ -46,7 +46,7 @@ const MODALS = [
     title: 'Watch: Git for databases',
     description: 'See how Neon branching works in practice.',
     targeting: {
-      pages: ['/docs/introduction/architecture-overview'],
+      all: true,
     },
     destination: {
       label: 'Learn about branching',
