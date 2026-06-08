@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T17:00:11.574Z'
+updatedOn: '2026-06-08T17:01:35.240Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -30,7 +30,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
 ```
 
-The response includes an `api_token` field — that is your credential. Store it as an environment variable:
+The response includes an `api_token` field. That is your credential. Store it as an environment variable:
 
 ```bash
 export NEON_AI_GATEWAY_KEY=nt_live_...
