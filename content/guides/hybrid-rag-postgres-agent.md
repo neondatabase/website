@@ -1,5 +1,5 @@
 ---
-title: 'Production RAG in Postgres: the guide for coding agents'
+title: 'Production RAG in Postgres: a blueprint for coding agents'
 subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and session-aware context on Neon Postgres with copy-paste SQL and TypeScript patterns.
 author: rishi-raj-jain
 enableTableOfContents: true
