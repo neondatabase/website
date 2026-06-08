@@ -6,18 +6,18 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:51:30.288Z'
+updatedOn: '2026-06-08T17:00:11.574Z'
 ---
 
 <Admonition type="note" title="Private Preview">
-Neon AI Gateway is currently in Private Preview. To request access, sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
+Neon AI Gateway is currently in Private Preview. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
 </Admonition>
 
 <Steps>
 
 ## Get access
 
-Neon AI Gateway is invite-only during Private Preview. Sign up for the waitlist at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends). You'll receive an email and a Discord invite when your account is enabled.
+Neon AI Gateway is invite-only during Private Preview. Sign up for the waitlist at [We're building backends](https://neon.com/blog/were-building-backends). You'll receive an email and a Discord invite when your account is enabled.
 
 ## Create a credential
 
