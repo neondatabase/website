@@ -189,7 +189,7 @@ Output:
 (3 rows)
 ```
 
-The `->` operator extracts a JSON object field by a key. In this example, we use the \-\> operator `->` to extract the color of the properties object:
+The `->` operator extracts a JSON object field by a key. In this example, we use the operator `->` to extract the color of the properties object:
 
 ```sql
 properties -> 'color'
@@ -296,7 +296,7 @@ Output:
 (2 rows)
 ```
 
-The `->> index` extract the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
+The `->> index` extracts the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
 
 [Check JSON functions to process JSON data](../postgresql-json-functions).
 
