@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:51:30.288Z'
+updatedOn: '2026-06-08T17:18:39.505Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It is fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
@@ -84,6 +84,8 @@ curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/mlflow/v1/chat/completion
 </CodeTabs>
 
 ## Streaming
+
+Add `stream: true` to receive a server-sent events response.
 
 <CodeTabs labels={["TypeScript (OpenAI SDK)", "Python (OpenAI SDK)", "cURL"]}>
 
