@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:41:51.165Z'
+updatedOn: '2026-06-08T16:51:30.288Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -19,32 +19,40 @@ Neon AI Gateway is currently in Private Preview. To request access, sign up at [
 
 Neon AI Gateway is invite-only during Private Preview. Sign up for the waitlist at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends). You'll receive an email and a Discord invite when your account is enabled.
 
-## Set up your environment
+## Create a credential
 
-The easiest way to get your AI Gateway credential and branch host is with `neonctl`:
+Use the Neon API to create a credential with the `ai_gateway:invoke` scope:
+
+```bash shouldWrap
+curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
+```
+
+The response includes an `api_token` field — that is your credential. Store it as an environment variable:
 
 ```bash
-neonctl env pull
+export NEON_AI_GATEWAY_KEY=nt_live_...
 ```
 
-This writes a `.env` file containing your AI Gateway credential, branch host, database connection string, and any other Neon service credentials for the current branch.
+Your project ID and branch ID are available in the Neon Console URL or via `neonctl projects list` and `neonctl branches list`.
 
-<Admonition type="note">
-`neonctl env pull` support for AI Gateway is shipping with Private Preview. Environment variable names will be confirmed in the `neonctl` documentation when available.
-</Admonition>
+## Find your branch host
 
-<Admonition type="tip" title="Using the Neon API instead">
-If you prefer to create credentials manually, call `POST /projects/{project_id}/branches/{branch_id}/credentials` with `{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}`. See [Authentication](/docs/ai-gateway/authentication) for the full API example.
-</Admonition>
-
-Your `.env` file will contain values like:
+Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
 
 ```
-NEON_AI_GATEWAY_KEY=nt_live_...
-NEON_AI_GATEWAY_HOST=br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+br-<name>-api.<cell>.<region>.aws.neon.tech
 ```
 
-`NEON_AI_GATEWAY_HOST` is your branch's AI Gateway host. It is different from your database connection string.
+For example:
+
+```bash
+export NEON_AI_GATEWAY_HOST=br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+```
+
+This is different from your database connection string.
 
 ## Install dependencies
 
