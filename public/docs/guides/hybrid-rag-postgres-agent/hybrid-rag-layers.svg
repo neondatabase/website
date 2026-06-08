@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah2" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="318" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Three layers to build before tuning prompts</text>
+
+  <!-- user question -->
+  <rect x="40" y="66" width="150" height="44" rx="10" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="115" y="86" font-size="12" font-weight="600" fill="#3730a3" text-anchor="middle">user question</text>
+  <text x="115" y="102" font-size="11" fill="#4338ca" text-anchor="middle">+ recent turns</text>
+
+  <line x1="190" y1="88" x2="226" y2="88" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah2)"/>
+
+  <!-- Postgres on Neon container -->
+  <rect x="230" y="50" width="350" height="220" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="246" y="72" font-size="11" font-weight="700" fill="#15803d" letter-spacing="0.3">POSTGRES ON NEON · ONE DATABASE</text>
+
+  <rect x="250" y="84" width="312" height="50" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <circle cx="270" cy="109" r="11" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="270" y="113" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">1</text>
+  <text x="290" y="105" font-size="12.5" font-weight="600" fill="#111827">Chunk table</text>
+  <text x="290" y="121" font-size="11" fill="#6b7280">content + tsvector + vector embedding</text>
+
+  <rect x="250" y="142" width="312" height="50" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <circle cx="270" cy="167" r="11" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="270" y="171" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">2</text>
+  <text x="290" y="163" font-size="12.5" font-weight="600" fill="#111827">Hybrid retrieval</text>
+  <text x="290" y="179" font-size="11" fill="#6b7280">keyword + semantic, fused by RRF</text>
+
+  <rect x="250" y="200" width="312" height="50" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <circle cx="270" cy="225" r="11" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="270" y="229" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">3</text>
+  <text x="290" y="221" font-size="12.5" font-weight="600" fill="#111827">Session state</text>
+  <text x="290" y="237" font-size="11" fill="#6b7280">recent intent folded into the query</text>
+
+  <line x1="580" y1="160" x2="616" y2="160" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah2)"/>
+
+  <!-- LLM -->
+  <rect x="620" y="120" width="116" height="80" rx="10" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="678" y="150" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">LLM</text>
+  <text x="678" y="168" font-size="11" fill="#6b7280" text-anchor="middle">grounded</text>
+  <text x="678" y="182" font-size="11" fill="#6b7280" text-anchor="middle">answer</text>
+
+  <text x="40" y="300" font-size="11" fill="#6b7280">Skip a layer and the model carries the slack: more chunks in the prompt, higher token cost, lower precision.</text>
+</svg>

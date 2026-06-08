@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah6" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="298" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Rebuild the query from thread context, then embed</text>
+
+  <!-- inputs -->
+  <text x="40" y="64" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">INPUTS</text>
+  <rect x="40" y="74" width="210" height="34" rx="7" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="52" y="95" font-size="11" fill="#9a3412">last 6 turns from chat_messages</text>
+  <rect x="40" y="116" width="210" height="34" rx="7" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="52" y="137" font-size="11" fill="#9a3412">rolling summary (long threads)</text>
+  <rect x="40" y="158" width="210" height="34" rx="7" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="52" y="179" font-size="11" fill="#3730a3">latest message</text>
+
+  <line x1="250" y1="91" x2="300" y2="120" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah6)"/>
+  <line x1="250" y1="133" x2="300" y2="130" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah6)"/>
+  <line x1="250" y1="175" x2="300" y2="142" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah6)"/>
+
+  <!-- builder -->
+  <rect x="304" y="98" width="170" height="64" rx="10" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="389" y="124" font-size="12" font-weight="700" fill="#111827" text-anchor="middle">buildRetrievalQuery()</text>
+  <text x="389" y="144" font-size="11" fill="#6b7280" text-anchor="middle">one string with history</text>
+  <text x="389" y="158" font-size="11" fill="#6b7280" text-anchor="middle">+ latest question</text>
+
+  <line x1="474" y1="130" x2="520" y2="130" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah6)"/>
+
+  <!-- embed + retrieve -->
+  <rect x="524" y="98" width="100" height="64" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="574" y="126" font-size="12" font-weight="600" fill="#1e40af" text-anchor="middle">embed</text>
+  <text x="574" y="144" font-size="11" fill="#1e3a8a" text-anchor="middle">the string</text>
+
+  <line x1="624" y1="130" x2="660" y2="130" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah6)"/>
+  <rect x="664" y="98" width="72" height="64" rx="10" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="700" y="126" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">hybrid</text>
+  <text x="700" y="144" font-size="11" fill="#047857" text-anchor="middle">retrieve</text>
+
+  <!-- write-back loop -->
+  <path d="M700 162 Q700 232 389 232 Q150 232 150 200" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah6)"/>
+  <text x="420" y="252" font-size="11" fill="#6b7280" text-anchor="middle">after each turn, write both messages back so the next retrieval sees them</text>
+
+  <text x="40" y="284" font-size="11" fill="#6b7280">Embedding the assembled string (not the raw last message) is what makes “the second one” resolve.</text>
+</svg>

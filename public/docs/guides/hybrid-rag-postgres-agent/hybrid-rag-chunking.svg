@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah3" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="298" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Chunk on structure, with overlap</text>
+
+  <!-- source doc -->
+  <text x="24" y="62" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">SOURCE DOCUMENT</text>
+  <rect x="24" y="72" width="712" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb"/>
+  <rect x="34" y="80" width="150" height="24" rx="5" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="109" y="96" font-size="11" fill="#3730a3" text-anchor="middle"># Heading: Refund policy</text>
+  <line x1="192" y1="92" x2="700" y2="92" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+
+  <text x="24" y="142" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">SPLIT ON HEADINGS &amp; PARAGRAPHS · 400 TO 800 TOKENS</text>
+
+  <!-- chunks with overlap -->
+  <rect x="24" y="154" width="240" height="52" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="38" y="176" font-size="12" font-weight="600" fill="#065f46">chunk 0</text>
+  <text x="38" y="194" font-size="11" fill="#047857">paragraph 1 + 2</text>
+
+  <rect x="252" y="154" width="60" height="52" rx="8" fill="#fef9c3" stroke="#facc15"/>
+  <text x="282" y="184" font-size="10" fill="#854d0e" text-anchor="middle">overlap</text>
+
+  <rect x="300" y="154" width="240" height="52" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="314" y="176" font-size="12" font-weight="600" fill="#065f46">chunk 1</text>
+  <text x="314" y="194" font-size="11" fill="#047857">paragraph 2 (tail) + 3</text>
+
+  <rect x="528" y="154" width="60" height="52" rx="8" fill="#fef9c3" stroke="#facc15"/>
+  <text x="558" y="184" font-size="10" fill="#854d0e" text-anchor="middle">overlap</text>
+
+  <rect x="576" y="154" width="160" height="52" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="590" y="176" font-size="12" font-weight="600" fill="#065f46">chunk 2</text>
+  <text x="590" y="194" font-size="11" fill="#047857">paragraph 4</text>
+
+  <text x="282" y="226" font-size="10.5" fill="#854d0e" text-anchor="middle">50 to 100 tokens shared so boundary sentences are not orphaned</text>
+
+  <!-- metadata -->
+  <rect x="24" y="244" width="712" height="40" rx="8" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="38" y="269" font-size="11" fill="#6b7280">each chunk stores</text>
+  <rect x="150" y="252" width="120" height="24" rx="5" fill="#fff" stroke="#cbd5e1"/>
+  <text x="210" y="268" font-size="10.5" fill="#111827" text-anchor="middle">source_id</text>
+  <rect x="280" y="252" width="100" height="24" rx="5" fill="#fff" stroke="#cbd5e1"/>
+  <text x="330" y="268" font-size="10.5" fill="#111827" text-anchor="middle">title</text>
+  <rect x="390" y="252" width="150" height="24" rx="5" fill="#fff" stroke="#cbd5e1"/>
+  <text x="465" y="268" font-size="10.5" fill="#111827" text-anchor="middle">heading path</text>
+  <text x="556" y="269" font-size="11" fill="#6b7280">→ citations without a re-fetch</text>
+</svg>
