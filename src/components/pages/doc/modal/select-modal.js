@@ -14,6 +14,9 @@ const matchesFolder = (pathname, folder) => {
 
 const getMatchPriority = (modal, pathname) => {
   const { targeting } = modal;
+  const destinationPath = modal.destination?.url;
+
+  if (destinationPath?.startsWith('/') && normalizePath(destinationPath) === pathname) return 0;
 
   if (!targeting) return 1;
 

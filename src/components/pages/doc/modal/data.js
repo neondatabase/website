@@ -41,33 +41,42 @@
 /** @type {VideoModalConfig[]} */
 const MODALS = [
   {
-    id: 'neon-database-video',
-    embedId: 'llSTZMVrbx8',
-    title: 'Watch: Neon Database',
-    description: 'See Neon in action and learn how it simplifies working with Postgres.',
-    targeting: {
-      all: true,
-      folders: [],
-      pages: [],
-    },
-    destination: {
-      label: 'Watch on YouTube',
-      url: 'https://www.youtube.com/watch?v=llSTZMVrbx8',
-    },
-  },
-  {
     id: 'branching-video',
     embedId: 'UuHnFlg66Io',
     title: 'Watch: Git for databases',
     description: 'See how Neon branching works in practice.',
     targeting: {
-      all: true,
-      folders: ['/docs/introduction', '/guides'],
-      pages: ['/docs/introduction/branching', '/faqs/connection-errors'],
+      pages: ['/docs/introduction/architecture-overview'],
     },
     destination: {
-      label: 'Watch the video',
+      label: 'Learn about branching',
       url: '/docs/introduction/branching',
+    },
+  },
+  {
+    id: 'serverless-video',
+    embedId: 'llSTZMVrbx8',
+    title: 'Watch: Neon Database',
+    description: 'See Neon in action and learn how it simplifies working with Postgres.',
+    targeting: {
+      pages: ['/docs/introduction/serverless'],
+    },
+    destination: {
+      label: 'Learn about autoscaling',
+      url: '/docs/introduction/autoscaling',
+    },
+  },
+  {
+    id: 'autoscaling-video',
+    embedId: 'ZnxLCOkb_R0',
+    title: 'Watch: Autoscaling in action',
+    description: 'See how Neon adjusts compute resources to match your workload.',
+    targeting: {
+      pages: ['/docs/introduction/autoscaling'],
+    },
+    destination: {
+      label: 'Watch on YouTube',
+      url: 'https://www.youtube.com/watch?v=ZnxLCOkb_R0',
     },
   },
 ];
