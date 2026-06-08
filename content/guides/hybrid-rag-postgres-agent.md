@@ -13,7 +13,7 @@ When you start building retrieval-augmented generation (RAG), the typical first 
 
 2. A single query vector does not track previous messages. If a user asks a follow-up like "what about the second one?" the query will be embedded without any knowledge of the earlier conversation. The result is that the query lands in an area of the vector space that is unrelated to what came before.
 
-![How vector-only retrieval misses on exact tokens and on follow-up questions that depend on earlier turns](/docs/guides/hybrid-rag-vector-limits.svg 'no-border')
+![How vector-only retrieval misses on exact tokens and on follow-up questions that depend on earlier turns](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-vector-limits.svg 'no-border')
 
 These are retrieval design problems, not model problems, and Postgres holds every layer that fixes them in one database, covering chunks, keyword indexes, vectors, and conversation state. This guide builds those layers with copy-paste SQL and TypeScript, in sections you can hand straight to a coding agent.
 
@@ -58,13 +58,13 @@ Build these three layers before you tune any prompts, in order.
 2. **Hybrid retrieval** that runs keyword and semantic search in parallel, then fuses the ranks.
 3. **Session state** in Postgres so retrieval sees recent intent, not just the latest message.
 
-![The chunk table, hybrid retrieval, and session state all living in one Postgres database and feeding a grounded answer to the LLM](/docs/guides/hybrid-rag-layers.svg 'no-border')
+![The chunk table, hybrid retrieval, and session state all living in one Postgres database and feeding a grounded answer to the LLM](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-layers.svg 'no-border')
 
 If you leave out one of these layers, your model has to compensate. This leads to adding extra chunks to the prompt, which increases token cost and makes the answer less focused as lower-value content fills up the context window.
 
 ## Schema: organize your tables for RAG in Postgres
 
-![Entity diagram showing rag_documents one-to-many rag_chunks, and chat_sessions one-to-many chat_messages, with the chunk table holding tsvector and vector columns](/docs/guides/hybrid-rag-schema.svg 'no-border')
+![Entity diagram showing rag_documents one-to-many rag_chunks, and chat_sessions one-to-many chat_messages, with the chunk table holding tsvector and vector columns](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-schema.svg 'no-border')
 
 Neon is standard Postgres, so enable the `vector` extension once.
 
@@ -140,7 +140,7 @@ The `tenant_id` column keeps every customer in one set of tables, which means on
 
 Chunk boundaries determine your maximum retrieval quality since each chunk is what you embed, rank, and send to the model. If a chunk is split in the middle of a sentence, it might rank highest but only contain part of the answer.
 
-![A source document split on headings and paragraphs into chunks with shared overlap between neighbors, each chunk carrying source_id, title, and heading path metadata](/docs/guides/hybrid-rag-chunking.svg 'no-border')
+![A source document split on headings and paragraphs into chunks with shared overlap between neighbors, each chunk carrying source_id, title, and heading path metadata](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-chunking.svg 'no-border')
 
 A few defaults that might help:
 
@@ -163,7 +163,7 @@ When you split a document into chunks again, it's important to keep each chunk's
 
 ## Ingest documents: chunk, embed, and upsert
 
-![The write path: a source document split into chunks, embedded in one batch call, then upserted on document_id and chunk_index, writing only the chunks whose content_hash changed](/docs/guides/hybrid-rag-ingest.svg 'no-border')
+![The write path: a source document split into chunks, embedded in one batch call, then upserted on document_id and chunk_index, writing only the chunks whose content_hash changed](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-ingest.svg 'no-border')
 
 You need to populate the `embedding` column by splitting the document, embedding all the resulting chunks in a single batch, and upserting each one based on the `(document_id, chunk_index)` pair. The `searchable` column is generated automatically, so keyword search stays up to date without extra work.
 
@@ -204,7 +204,7 @@ The `WHERE content_hash IS DISTINCT FROM EXCLUDED.content_hash` clause ensures t
 
 ## Baseline: vector-only retrieval (understand what you are improving)
 
-![A query embedded into vector space, with the nearest chunks by cosine distance returned as the top k baseline result list](/docs/guides/hybrid-rag-baseline.svg 'no-border')
+![A query embedded into vector space, with the nearest chunks by cosine distance returned as the top k baseline result list](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-baseline.svg 'no-border')
 
 Start by using semantic search on its own to retrieve the most relevant chunks for a given tenant. This approach provides a clear baseline to compare against once you introduce keyword search or fusion. Here’s an example query that returns the ten nearest chunks.
 
@@ -223,7 +223,7 @@ LIMIT 10;
 
 Embeddings are great at capturing meaning, but they often overlook rare tokens like SKUs, error codes, or specific names. For example, searching for `ERR_4042` might bring up chunks with similar errors, not the exact match. Keyword search finds the exact token and helps retrieve those specific cases.
 
-![A query fanning out to a semantic vector retriever that matches meaning and a keyword tsvector retriever that matches the exact token, then merging into one fused result](/docs/guides/hybrid-rag-keyword-vs-vector.svg 'no-border')
+![A query fanning out to a semantic vector retriever that matches meaning and a keyword tsvector retriever that matches the exact token, then merging into one fused result](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-keyword-vs-vector.svg 'no-border')
 
 When handling user input, `websearch_to_tsquery` treats it like a search box by splitting the text into words and honoring quoted phrases.
 
@@ -243,7 +243,7 @@ Send user input to [`websearch_to_tsquery`](https://www.postgresql.org/docs/curr
 
 You handle fusion directly in SQL by running both retrievers and ranking the results in their own lists. Then, use reciprocal rank fusion (RRF) to merge the results. Each row gets a score calculated as the sum of `1 / (k + rank)` for every list where it appears. Set the constant `k` to 60 so that one top-ranked result does not completely control the final ranking.
 
-![A semantic ranked list and a keyword ranked list scored by one over k plus rank, then merged so chunks that appear in both lists rise to the top](/docs/guides/hybrid-rag-rrf.svg 'no-border')
+![A semantic ranked list and a keyword ranked list scored by one over k plus rank, then merged so chunks that appear in both lists rise to the top](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-rrf.svg 'no-border')
 
 ```sql
 WITH
@@ -288,7 +288,7 @@ Hybrid retrieval shines on real datasets like support bots, internal documentati
 
 Relying only on the most recent message creates a poor query. For example, "what about the second option?" is meaningless without the previous conversation, since the context is in earlier turns. Combine recent messages with the new input before generating the embedding.
 
-![Recent turns, a rolling summary, and the latest message combined by buildRetrievalQuery into one string that is embedded and used for hybrid retrieval, with messages written back after each turn](/docs/guides/hybrid-rag-session.svg 'no-border')
+![Recent turns, a rolling summary, and the latest message combined by buildRetrievalQuery into one string that is embedded and used for hybrid retrieval, with messages written back after each turn](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-session.svg 'no-border')
 
 Combine the conversation history and the latest message for embedding, but perform keyword search on just the latest message. If your threads grow long, use a rolling summary that a background job updates every few turns. When users refer back to earlier content, you can boost chunks that were already cited in the session by adding a small constant to their fused score. Track these citations in `chat_messages.metadata`.
 
@@ -327,7 +327,7 @@ Once the window overflows, include the summary in your retrieval string. If retr
 
 ## End-to-end handler your agent can implement
 
-![One chat request flowing through fetch recent turns, build and embed the query, hybrid retrieve, format context within a token budget, stream the LLM response, and persist the assistant message with cited chunk ids](/docs/guides/hybrid-rag-request-flow.svg 'no-border')
+![One chat request flowing through fetch recent turns, build and embed the query, hybrid retrieve, format context within a token budget, stream the LLM response, and persist the assistant message with cited chunk ids](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-request-flow.svg 'no-border')
 
 A minimal Next.js route that ties chat, retrieval, and persistence together:
 
@@ -387,7 +387,7 @@ Before you add rerankers or query rewriting, build a way to measure retrieval qu
 - **Exact code or SKU lookups**, where keyword or hybrid should win.
 - **Follow-ups** that only make sense with session context, like "tell me more about that."
 
-![An eval set of paraphrase, exact-lookup, and follow-up queries run against a Neon branch, with a recall at k bar chart comparing vector-only against hybrid](/docs/guides/hybrid-rag-eval.svg 'no-border')
+![An eval set of paraphrase, exact-lookup, and follow-up queries run against a Neon branch, with a recall at k bar chart comparing vector-only against hybrid](/docs/guides/hybrid-rag-postgres-agent/hybrid-rag-eval.svg 'no-border')
 
 Test your retrieval approach on a [Neon branch](/docs/introduction/branching) that has a realistic number of chunks, similar to what you'll see in production. When your database is small, items often look more similar than they should, so the difference between good and bad chunk selection only becomes clear with a large enough dataset that includes real distractors.
 
