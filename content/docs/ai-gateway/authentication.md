@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:51:30.288Z'
+updatedOn: '2026-06-08T16:53:15.172Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -93,7 +93,7 @@ This design lets you use a single credential across your entire development work
 
 ## Rotating credentials
 
-To rotate a credential, create a new one via `neonctl` or the Neon API, update your environment variables, then revoke the old credential via the Neon API:
+To rotate a credential, create a new one via the Neon API (see [Creating a credential](#creating-a-credential)), update your environment variables, then revoke the old one:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
