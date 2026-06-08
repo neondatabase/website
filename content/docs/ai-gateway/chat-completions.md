@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:34:05.027Z'
+updatedOn: '2026-06-08T16:41:51.165Z'
 ---
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It is fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
@@ -174,13 +174,14 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 
 ## Error handling
 
-| Status                  | Meaning               | Common cause                                                                    |
-| ----------------------- | --------------------- | ------------------------------------------------------------------------------- |
-| `400 Bad Request`       | Invalid request       | Unknown model ID, or model used on the wrong endpoint                           |
-| `401 Unauthorized`      | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_KEY`                                        |
-| `403 Forbidden`         | Access denied         | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage |
-| `429 Too Many Requests` | Rate limited          | Upstream provider rate limit. Check the `Retry-After` header.                   |
-| `502 Bad Gateway`       | Upstream error        | Temporary issue with the upstream workspace. Retry the request.                 |
+| Status                         | Meaning               | Common cause                                                                    |
+| ------------------------------ | --------------------- | ------------------------------------------------------------------------------- |
+| `400 Bad Request`              | Invalid request       | Unknown model ID, or model used on the wrong endpoint                           |
+| `413 Request Entity Too Large` | Body too large        | Request body exceeds 32 MiB. Reduce the size of your request.                   |
+| `401 Unauthorized`             | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_KEY`                                        |
+| `403 Forbidden`                | Access denied         | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage |
+| `429 Too Many Requests`        | Rate limited          | Upstream provider rate limit. Check the `Retry-After` header.                   |
+| `502 Bad Gateway`              | Upstream error        | Temporary issue with the upstream workspace. Retry the request.                 |
 
 Error responses use the standard OpenAI error format:
 

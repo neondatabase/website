@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:34:05.027Z'
+updatedOn: '2026-06-08T16:41:51.165Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -30,7 +30,7 @@ This fetches your AI Gateway credential, Storage credentials, and database conne
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"scopes": ["ai_gateway:invoke"]}'
+  -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
 ```
 
 Store the returned token as `NEON_AI_GATEWAY_KEY`.
@@ -90,12 +90,12 @@ This design lets you use a single credential across your entire development work
 
 ## Common auth errors
 
-| Error                     | Cause                                      | Fix                                                                 |
-| ------------------------- | ------------------------------------------ | ------------------------------------------------------------------- |
-| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_KEY` is set and contains the full token |
-| `403 Forbidden`           | Credential lacks `ai_gateway:invoke` scope | Recreate the credential with the correct scope                      |
-| `403 Forbidden`           | Branch not in credential lineage           | Use a credential created on this branch or an ancestor branch       |
-| `503 Service Unavailable` | Auth store temporarily unavailable         | Retry the request                                                   |
+| Error                     | Cause                                      | Fix                                                                                                                             |
+| ------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_KEY` is set and contains the full token                                                             |
+| `403 Forbidden`           | Credential lacks `ai_gateway:invoke` scope | Recreate the credential with the correct scope                                                                                  |
+| `403 Forbidden`           | Branch not in credential lineage           | Use a credential created on this branch or an ancestor branch. The gateway returns: `credential not authorized for this branch` |
+| `503 Service Unavailable` | Auth store temporarily unavailable         | Retry the request                                                                                                               |
 
 ## Rotating credentials
 

@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:34:05.027Z'
+updatedOn: '2026-06-08T16:41:51.165Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -27,10 +27,14 @@ The easiest way to get your AI Gateway credential and branch host is with `neonc
 neonctl env pull
 ```
 
-This writes a `.env` file containing `NEON_AI_GATEWAY_KEY`, `NEON_AI_GATEWAY_HOST`, your database connection string, and any other Neon service credentials for the current branch.
+This writes a `.env` file containing your AI Gateway credential, branch host, database connection string, and any other Neon service credentials for the current branch.
+
+<Admonition type="note">
+`neonctl env pull` support for AI Gateway is shipping with Private Preview. Environment variable names will be confirmed in the `neonctl` documentation when available.
+</Admonition>
 
 <Admonition type="tip" title="Using the Neon API instead">
-If you prefer to create credentials manually, call `POST /projects/{project_id}/branches/{branch_id}/credentials` with `scopes: ["ai_gateway:invoke"]`. See [Authentication](/docs/ai-gateway/authentication) for the full API example.
+If you prefer to create credentials manually, call `POST /projects/{project_id}/branches/{branch_id}/credentials` with `{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}`. See [Authentication](/docs/ai-gateway/authentication) for the full API example.
 </Admonition>
 
 Your `.env` file will contain values like:
