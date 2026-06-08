@@ -6,7 +6,7 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:36:47.586Z'
+updatedOn: '2026-06-08T21:59:22.991Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
@@ -91,7 +91,13 @@ client.upload_file(
 
 ## Download
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+# Downloads to ./photo.jpg by default; use --file to specify a different path
+neonctl bucket object get my-bucket/images/photo.jpg
+neonctl bucket object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
+```
 
 ```typescript shouldWrap
 import { GetObjectCommand } from '@aws-sdk/client-s3';
@@ -134,7 +140,15 @@ const response = await client.send(new GetObjectCommand({
 
 Use a prefix and delimiter to simulate a folder structure.
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+# List all objects in a bucket
+neonctl bucket object list my-bucket
+
+# List objects under a prefix, showing folders
+neonctl bucket object list my-bucket/images/ --delimiter /
+```
 
 ```typescript shouldWrap
 import { ListObjectsV2Command } from '@aws-sdk/client-s3';
@@ -194,7 +208,11 @@ do {
 
 **Single object:**
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+neonctl bucket object delete my-bucket/images/photo.jpg
+```
 
 ```typescript shouldWrap
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
@@ -250,13 +268,20 @@ client.delete_objects(
 
 **Delete a folder (all objects under a prefix):**
 
-Use the Neon API to delete all objects with a given prefix in one call:
+<CodeTabs labels={["neonctl", "Neon API"]}>
+
+```bash
+# The prefix must end with /
+neonctl bucket object delete my-bucket/images/ --recursive
+```
 
 ```bash shouldWrap
 curl -X DELETE \
   "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/buckets/my-bucket/objects-by-prefix?prefix=images/" \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
+
+</CodeTabs>
 
 ## Presigned URLs
 

@@ -6,20 +6,24 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:36:47.586Z'
+updatedOn: '2026-06-08T21:59:22.991Z'
 ---
 
 A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch. Each branch has its own view of storage, and buckets inherit from parent branches when a new branch is created.
 
 ## Create a bucket
 
-You can create a bucket from the Neon Console, the Neon API, or directly via the S3 API.
+You can create a bucket from the Neon Console, the Neon CLI, the Neon API, or directly via the S3 API.
 
 **Neon Console**
 
 In the Neon Console, navigate to your project, select a branch, and open the **Storage** tab. Click **New bucket**, enter a name, choose an access level, and click **Create**.
 
-**Neon API**
+<CodeTabs labels={["neonctl", "Neon API", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+neonctl bucket create my-bucket
+```
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/buckets" \
@@ -27,10 +31,6 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -H "Content-Type: application/json" \
   -d '{"name": "my-bucket", "access_level": "private"}'
 ```
-
-**S3 API**
-
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { S3Client, CreateBucketCommand } from '@aws-sdk/client-s3';
@@ -71,13 +71,23 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
+To create a `public_read` bucket with neonctl:
+
+```bash
+neonctl bucket create my-public-bucket --access-level public_read
+```
+
 <Admonition type="note">
 `NEON_STORAGE_HOST` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
 </Admonition>
 
 ## List buckets
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+neonctl bucket list
+```
 
 ```typescript shouldWrap
 import { S3Client, ListBucketsCommand } from '@aws-sdk/client-s3';
@@ -101,7 +111,11 @@ aws s3api list-buckets --endpoint-url "https://$NEON_STORAGE_HOST"
 
 Buckets must be empty before deletion. Delete all objects first, then delete the bucket.
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+neonctl bucket delete my-bucket
+```
 
 ```typescript shouldWrap
 import { S3Client, DeleteBucketCommand } from '@aws-sdk/client-s3';
@@ -138,16 +152,7 @@ Access level is set through the Neon Console or API, not through the S3 API. S3 
 
 **public_read example**
 
-Creating a `public_read` bucket allows anyone to fetch objects without a credential:
-
-```bash shouldWrap
-curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/buckets" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "my-public-bucket", "access_level": "public_read"}'
-```
-
-Objects in this bucket are accessible at:
+Objects in a `public_read` bucket are accessible at:
 
 ```
 https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<object-key>
