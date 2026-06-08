@@ -7,13 +7,13 @@ summary: >-
   Use these IDs in the model field of any request regardless of which endpoint
   you are using.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:11:48.651Z'
+updatedOn: '2026-06-08T16:34:05.027Z'
 ---
 
-Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix — for example, `databricks-claude-sonnet-4-6`. Use these IDs in the `model` field of any request, regardless of which endpoint you use.
+Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
 
 <Admonition type="note">
-Model availability may vary by region. The catalog expands over time — check back for new additions.
+Model availability may vary by region. The catalog expands over time, so check back for new additions.
 </Admonition>
 
 ## Available models
@@ -65,7 +65,7 @@ Model availability may vary by region. The catalog expands over time — check b
 
 ## Which endpoint to use
 
-You can use any model with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint — it is provider-agnostic. Use a provider-specific endpoint when you need native features:
+You can use any model with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is provider-agnostic. Use a provider-specific endpoint when you need native features:
 
 | Provider  | Recommended endpoint                     | When to use the native endpoint                                                          |
 | --------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |

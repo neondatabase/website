@@ -7,10 +7,10 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:11:48.651Z'
+updatedOn: '2026-06-08T16:34:05.027Z'
 ---
 
-AI Gateway uses Neon bearer credentials — the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
+AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
 
 ## Creating a credential
 
@@ -73,7 +73,7 @@ client = OpenAI(
 A credential is bound to the branch it was created on. It is valid for:
 
 - That branch (the anchor branch)
-- Any branch descended from it — preview branches, feature branches, CI branches
+- Any branch descended from it: preview branches, feature branches, CI branches
 
 It is **not** valid for branches outside that lineage.
 
@@ -86,7 +86,7 @@ main  ──── credential valid here
 staging  ──── credential NOT valid here (different lineage)
 ```
 
-This design lets you use a single credential across your entire development workflow — local dev, preview deployments, and CI — without creating separate credentials for each environment.
+This design lets you use a single credential across your entire development workflow (local dev, preview deployments, and CI) without creating separate credentials for each environment.
 
 ## Common auth errors
 

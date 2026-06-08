@@ -4,9 +4,9 @@ subtitle: Make your first inference request in minutes
 summary: >-
   This quickstart walks you through getting a credential, finding your branch
   host, and making your first request to the Neon AI Gateway using the OpenAI
-  SDK. No provider API keys required — authenticate with your Neon credential.
+  SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:11:48.651Z'
+updatedOn: '2026-06-08T16:34:05.027Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -66,7 +66,7 @@ pip install openai python-dotenv
 
 ## Make your first request
 
-The chat completions endpoint is OpenAI-compatible — set `baseURL` to your branch host and `apiKey` to your credential. No other changes needed.
+The chat completions endpoint is OpenAI-compatible. Set `baseURL` to your branch host and `apiKey` to your credential. No other changes needed.
 
 <CodeTabs labels={["TypeScript", "Python", "cURL"]}>
 
@@ -121,7 +121,7 @@ curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/mlflow/v1/chat/completion
 
 ## Stream a response
 
-Add `stream: true` to receive a streamed response. Your existing streaming code works without changes — the gateway forwards `text/event-stream` responses from the upstream provider.
+Add `stream: true` to receive a streamed response. Your existing streaming code works without changes. The gateway forwards `text/event-stream` responses from the upstream provider.
 
 <CodeTabs labels={["TypeScript", "Python", "cURL"]}>
 
