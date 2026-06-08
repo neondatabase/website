@@ -6,12 +6,14 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-08T21:59:22.991Z'
+updatedOn: '2026-06-08T22:01:37.795Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
 
 ## Upload
+
+Uploads use the S3-compatible API directly. `neonctl` does not currently support object uploads.
 
 <CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
 
