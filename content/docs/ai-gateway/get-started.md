@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T17:01:35.240Z'
+updatedOn: '2026-06-08T17:15:18.099Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -55,6 +55,8 @@ export NEON_AI_GATEWAY_HOST=br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.te
 This is different from your database connection string.
 
 ## Install dependencies
+
+The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with any model in the catalog, including Claude and Gemini.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "pip"]}>
 
