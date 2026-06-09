@@ -10,7 +10,7 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:13:03.492Z'
+updatedOn: '2026-06-09T09:47:03.155Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />
@@ -27,8 +27,6 @@ PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN wor
 - **No top-K pushdown.** GIN must score all matching documents even when you only need the top 10. For large tables, this means significant unnecessary work on every query.
 
 `lakebase_bm25` adds a first-class BM25 index with Block-Max WAND top-K pushdown: the index returns only the K most relevant results directly, without scoring the entire match set. It fully preserves standard `tsvector` types and existing query operators. No application logic changes are required.
-
-**vs `pg_search`:** `pg_search` (ParadeDB) wraps Tantivy, a search engine designed for sequential file I/O. Forcing Tantivy's I/O model through Postgres 8KB block chains degrades its native performance. `lakebase_text` is built directly for Postgres page storage, uses standard WAL logging via GenericXLog, and supports read replicas without shared memory.
 
 ## Enable the lakebase_text extension
 
