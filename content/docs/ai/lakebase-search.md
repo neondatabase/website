@@ -9,10 +9,10 @@ summary: >-
   learn what each extension provides, and navigate to the extension reference
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-09T18:14:35.596Z'
+updatedOn: '2026-06-09T19:58:30.808Z'
 ---
 
-<EarlyAccessProps feature_name="Lakebase Search" />
+<RequestForm type="lakebase-search" />
 
 <Callout title="About Lakebase">
 Lakebase Search is developed by Databricks. Neon joined Databricks in 2025, and these extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.

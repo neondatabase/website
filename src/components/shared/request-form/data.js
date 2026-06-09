@@ -174,10 +174,20 @@ const BACKEND_PLATFORM = {
   eventName: 'Backend Platform Access Requested',
 };
 
+const LAKEBASE_SEARCH = {
+  title: 'Request access to Lakebase Search',
+  description:
+    "Lakebase Search is in private preview. Drop your email and we'll reach out when we can get you access.",
+  buttonText: 'Request access',
+  confirmation: "You're on the list. We'll be in touch soon.",
+  eventName: 'Lakebase Search Access Requested',
+};
+
 const DATA = {
   region: REGIONS,
   extension: EXTENSIONS,
   'backend-platform': BACKEND_PLATFORM,
+  'lakebase-search': LAKEBASE_SEARCH,
 };
 
 export default DATA;
