@@ -115,7 +115,7 @@ Note that you will learn more about the [`for loop`](plpgsql-for-loop) statement
 
 How it works:
 
-- First, declare a variable named r with the type `record`.
+- First, declare a variable named rec with the type `record`.
 - Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](../postgresql-getting-started/postgresql-sample-database)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
 - Third, show the contents of the fields of the record variable by using the dot notation (`rec.title` and `rec.length`)
 
