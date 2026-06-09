@@ -10,7 +10,7 @@ summary: >-
   search with the lakebase_ann.probes GUC, and reference all operator classes and
   index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T17:08:47.963Z'
+updatedOn: '2026-06-09T17:17:42.901Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
@@ -71,7 +71,7 @@ build.internal.lists = [1000]
 $$);
 ```
 
-Use the `lakebase_ann.probes` GUC to control how many lists are searched at query time. More probes improves recall at the cost of speed.
+Use the `lakebase_ann.probes` GUC to control how many lists are searched at query time. More probes improves recall at the cost of speed. This GUC only applies when the index has `build.internal.lists` configured; no probes setting is needed for the default (no-lists) configuration.
 
 ```sql
 SET lakebase_ann.probes TO '10';
@@ -140,7 +140,7 @@ REINDEX INDEX CONCURRENTLY items_embedding_ann;
 
 ### Operator classes
 
-`lakebase_ann` supports the following operator classes. The `<->`, `<#>`, and `<=>` operators are defined by `pgvector`. The `<<->>`, `<<#>>`, and `<<->>` operators are defined by `lakebase_vector` for similarity filtering.
+`lakebase_ann` supports the following operator classes. The `<->`, `<#>`, and `<=>` operators are defined by `pgvector`. The `<<->>`, `<<#>>`, and `<<=>>` operators are defined by `lakebase_vector` for similarity filtering.
 
 | Operator class       | Operator 1              | Operator 2                |
 | :------------------- | :---------------------- | :------------------------ |
@@ -163,13 +163,13 @@ The `rabitq8` and `rabitq4` types are quantization types defined by `lakebase_ve
 
 Options are passed as a TOML string to the `WITH (options = $$ ... $$)` clause.
 
-| Option                               | Type               | Default | Description                                                                                                                                                |
-| :----------------------------------- | :----------------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build.internal.lists`               | array              | `[]`    | Number of partitions for the vector space. Set based on dataset size. See [Index tuning](#index-tuning).                                                   |
-| `residual_quantization`              | boolean            | `false` | Enables residual quantization to improve recall. Recommended for cosine similarity workloads. Not supported with `rabitq8` or `rabitq4` operator classes.  |
-| `build.internal.spherical_centroids` | boolean            | `false` | Enables spherical centroids. Recommended alongside `residual_quantization` for cosine similarity.                                                          |
-| `build.pin`                          | integer or boolean | `-1`    | Controls shared memory usage during index builds. Set to `2` to use more shared memory and speed up builds on large tables.                                |
-| `degree_of_parallelism`              | integer            | `32`    | Hint for the number of concurrent processes accessing the index. Increase only if you have more than 32 CPU threads and want to use more for index builds. |
+| Option                               | Type               | Default | Description                                                                                                                                                  |
+| :----------------------------------- | :----------------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build.internal.lists`               | array              | `[]`    | Number of partitions for the vector space. Set based on dataset size. See [Index tuning](#index-tuning).                                                     |
+| `residual_quantization`              | boolean            | `false` | Enables residual quantization to improve recall. Recommended for cosine similarity workloads. Not supported with `rabitq8` or `rabitq4` operator classes.    |
+| `build.internal.spherical_centroids` | boolean            | `false` | Enables spherical centroids. Recommended alongside `residual_quantization` for cosine similarity.                                                            |
+| `build.pin`                          | integer or boolean | `-1`    | Controls shared memory usage during index builds. `-1` disables pinning (default). Set to `2` to use more shared memory and speed up builds on large tables. |
+| `degree_of_parallelism`              | integer            | `32`    | Hint for the number of concurrent processes accessing the index. Increase only if you have more than 32 CPU threads and want to use more for index builds.   |
 
 ### Search parameters
 

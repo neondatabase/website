@@ -10,7 +10,7 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-09T09:47:03.155Z'
+updatedOn: '2026-06-09T17:17:42.901Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />
@@ -33,10 +33,10 @@ PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN wor
 Run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
-CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
+CREATE EXTENSION IF NOT EXISTS lakebase_text;
 ```
 
-`lakebase_text` requires Postgres 16 or later.
+`lakebase_text` requires Postgres 16 or later. It has no extension dependencies; unlike `lakebase_vector`, it does not require `pgvector`.
 
 ## Quick start
 
@@ -62,6 +62,10 @@ Create a `lakebase_bm25` index on the `tsvector` column:
 ```sql
 CREATE INDEX documents_passage_bm25 ON documents USING lakebase_bm25 (vector bm25_ops);
 ```
+
+<Admonition type="important" title="Create the index after inserting data">
+`lakebase_bm25` computes corpus-wide statistics (document count, term frequencies, IDF values) at index build time, not incrementally. Create the index after your initial data load. If you insert a large number of new documents later, drop and recreate the index to keep BM25 scores accurate.
+</Admonition>
 
 Set how many results the index returns and run a BM25 search:
 

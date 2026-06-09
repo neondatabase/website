@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-09T17:08:47.963Z'
+updatedOn: '2026-06-09T17:17:42.901Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -130,6 +130,7 @@ async function vectorSearch(query: string, limit = 5) {
   `;
 }
 
+// BM25 scores are negative — lower (more negative) means more relevant
 async function textSearch(query: string, limit = 5) {
   return sql`
     SELECT id, title,
