@@ -47,7 +47,7 @@ interval '3 hours 20 minutes';
 
 Internally, PostgreSQL stores interval values as months, days, and seconds. The months and days values are integers while the seconds field can have fractions.
 
-The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 2 minutes ago at the current time of last year, you can use the following statement:
+The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 20 minutes ago at the current time of last year, you can use the following statement:
 
 ```sql
 SELECT
@@ -238,7 +238,7 @@ SELECT
 In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
 ```text
- date_part
+ extract
 -----------
         21
 (1 row)
@@ -246,7 +246,7 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 
 ### Adjusting interval values
 
-PostgreSQL provides two functions `justifydays` and `justifyhours` that allows you to adjust the interval of 30\-day as one month and the interval of 24 hours as one day:
+PostgreSQL provides two functions `justifydays` and `justifyhours` that allow you to adjust the interval of 30 days as one month and the interval of 24 hours as one day:
 
 ```sql
 SELECT
@@ -310,7 +310,7 @@ Output:
 INSERT 0 2
 ```
 
-Third, extract components (days, hours, minutes) from values in the `interval` column:
+Third, extract components (days, hours, minutes) from values in the `duration` column:
 
 ```sql
 SELECT
