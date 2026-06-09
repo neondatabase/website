@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:05:06.030Z'
+updatedOn: '2026-06-09T00:13:03.492Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -16,7 +16,7 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 
 ## Prerequisites
 
-- A Neon project with Lakebase Search enabled — see [Lakebase Search](/docs/ai/lakebase-search) to request access
+- A Neon project with Lakebase Search enabled. See [Lakebase Search](/docs/ai/lakebase-search) to request access.
 - Postgres 16 or later (Lakebase Search requires PG16+)
 - Node.js 18 or later
 - An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings
@@ -59,7 +59,7 @@ CREATE INDEX documents_bm25 ON documents
   WITH (default_limit = 10);
 ```
 
-`default_limit = 10` stores the result limit in the index itself, so it applies without a `SET` command — useful for stateless serverless connections.
+`default_limit = 10` stores the result limit in the index itself, so it applies without a `SET` command. This is useful for stateless serverless connections.
 
 ## Insert documents
 
@@ -158,11 +158,11 @@ const results = await textSearch('vector index postgres');
 console.log(results);
 ```
 
-Results are ordered by score ascending — a lower (more negative) score means higher relevance.
+Results are ordered by score ascending. A lower (more negative) score means higher relevance.
 
 ## Next steps
 
-- [lakebase_vector reference](/docs/extensions/lakebase-vector) — index options, operator classes, tuning guide
-- [lakebase_text reference](/docs/extensions/lakebase-text) — BM25 operators, functions, fallback parameters, prefilter
+- [lakebase_vector reference](/docs/extensions/lakebase-vector): index options, operator classes, tuning guide
+- [lakebase_text reference](/docs/extensions/lakebase-text): BM25 operators, functions, fallback parameters, prefilter
 
 <NeedHelp />

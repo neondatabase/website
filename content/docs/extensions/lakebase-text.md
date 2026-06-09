@@ -10,12 +10,12 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:05:06.030Z'
+updatedOn: '2026-06-09T00:13:03.492Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />
 
-The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to PostgreSQL's built-in full-text search: standard `tsvector` types and query operators work unchanged — only the index type changes.
+The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to PostgreSQL's built-in full-text search: standard `tsvector` types and query operators work unchanged; only the index type changes.
 
 For an overview of Lakebase Search and its architecture advantages, see [Lakebase Search](/docs/ai/lakebase-search).
 
@@ -23,12 +23,12 @@ For an overview of Lakebase Search and its architecture advantages, see [Lakebas
 
 PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN works well for boolean filtering, but it has two limitations for search relevance:
 
-- **No BM25 ranking.** GIN uses `ts_rank`, a TF-IDF variant that scores documents by fetching `tsvector` values from the heap at query time. BM25 is more accurate — it accounts for term frequency, document length, and corpus-wide statistics together.
+- **No BM25 ranking.** GIN uses `ts_rank`, a TF-IDF variant that scores documents by fetching `tsvector` values from the heap at query time. BM25 is more accurate, accounting for term frequency, document length, and corpus-wide statistics together.
 - **No top-K pushdown.** GIN must score all matching documents even when you only need the top 10. For large tables, this means significant unnecessary work on every query.
 
-`lakebase_bm25` adds a first-class BM25 index with Block-Max WAND top-K pushdown: the index returns only the K most relevant results directly, without scoring the entire match set. It fully preserves standard `tsvector` types and existing query operators — no application logic changes are required.
+`lakebase_bm25` adds a first-class BM25 index with Block-Max WAND top-K pushdown: the index returns only the K most relevant results directly, without scoring the entire match set. It fully preserves standard `tsvector` types and existing query operators. No application logic changes are required.
 
-**vs `pg_search`:** `pg_search` (ParadeDB) wraps Tantivy, a search engine designed for sequential file I/O. Forcing Tantivy's I/O model through Postgres 8KB block chains degrades its native performance. `lakebase_text` is built directly for Postgres page storage, uses standard WAL logging via GenericXLog, and supports read replicas — all without shared memory.
+**vs `pg_search`:** `pg_search` (ParadeDB) wraps Tantivy, a search engine designed for sequential file I/O. Forcing Tantivy's I/O model through Postgres 8KB block chains degrades its native performance. `lakebase_text` is built directly for Postgres page storage, uses standard WAL logging via GenericXLog, and supports read replicas without shared memory.
 
 ## Enable the lakebase_text extension
 

@@ -10,12 +10,12 @@ summary: >-
   search with the lakebase_ann.probes GUC, and reference all operator classes and
   index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:05:06.030Z'
+updatedOn: '2026-06-09T00:13:03.492Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
 
-The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged — only the index type changes.
+The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
 
 For an overview of Lakebase Search and its architecture advantages, see [Lakebase Search](/docs/ai/lakebase-search).
 
@@ -24,7 +24,7 @@ For an overview of Lakebase Search and its architecture advantages, see [Lakebas
 Standard `pgvector` HNSW works well up to around 100 million rows, but it has two structural limitations that make it difficult to scale further on Neon:
 
 - **HNSW requires the index to fit in memory.** For large datasets, the index can reach tens of gigabytes, making cold starts slow and memory costs high.
-- **HNSW graph traversal is random I/O.** Each hop in the graph reads a different page. On Neon's disaggregated storage architecture, random page reads go over the network — each one adds latency.
+- **HNSW graph traversal is random I/O.** Each hop in the graph reads a different page. On Neon's disaggregated storage architecture, random page reads go over the network, adding latency.
 
 `lakebase_ann` uses IVF (Inverted File) partitioning combined with RaBitQ quantization. IVF partitions the vector space into lists and searches only the most relevant lists at query time, enabling sequential I/O rather than random pointer-chasing. RaBitQ compresses vectors 4–8x, dramatically reducing the index size and memory footprint. Together, this architecture scales to **over 1 billion vectors on a single index** while keeping cold starts fast and query performance stable.
 
@@ -170,7 +170,7 @@ Options are passed as a TOML string to the `WITH (options = $$ ... $$)` clause.
 
 | Option                               | Type               | Default | Description                                                                                                                                                |
 | :----------------------------------- | :----------------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build.internal.lists`               | array              | `[]`    | Number of partitions for the vector space. Set based on dataset size — see [Index tuning](#index-tuning).                                                  |
+| `build.internal.lists`               | array              | `[]`    | Number of partitions for the vector space. Set based on dataset size. See [Index tuning](#index-tuning).                                                   |
 | `residual_quantization`              | boolean            | `false` | Enables residual quantization to improve recall. Recommended for cosine similarity workloads. Not supported with `rabitq8` or `rabitq4` operator classes.  |
 | `build.internal.spherical_centroids` | boolean            | `false` | Enables spherical centroids. Recommended alongside `residual_quantization` for cosine similarity.                                                          |
 | `build.pin`                          | integer or boolean | `-1`    | Controls shared memory usage during index builds. Set to `2` to use more shared memory and speed up builds on large tables.                                |
