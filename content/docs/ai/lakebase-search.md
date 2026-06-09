@@ -9,13 +9,13 @@ summary: >-
   learn what each extension provides, and navigate to the extension reference
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-09T18:14:35.596Z'
+updatedOn: '2026-06-09T20:13:02.957Z'
 ---
 
-<EarlyAccessProps feature_name="Lakebase Search" />
+<RequestForm type="lakebase-search" />
 
 <Callout title="About Lakebase">
-Lakebase Search is developed by Databricks. Neon joined Databricks in 2025, and these extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
+Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
 </Callout>
 
 Lakebase Search is two Postgres extensions, `lakebase_vector` and `lakebase_text`, that bring scalable vector and BM25 full-text search to Neon, designed for backends that need both semantic and keyword search in a single database.

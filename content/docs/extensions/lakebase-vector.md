@@ -10,14 +10,14 @@ summary: >-
   search with the lakebase_ann.probes GUC, and reference all operator classes and
   index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T17:17:42.901Z'
+updatedOn: '2026-06-09T20:13:02.957Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
 
-For an overview of Lakebase Search and its architecture advantages, see [Lakebase Search](/docs/ai/lakebase-search).
+Lakebase Search is in private preview. To request access or learn about its architecture advantages, see [Lakebase Search](/docs/ai/lakebase-search).
 
 ## Why lakebase_vector?
 
