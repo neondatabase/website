@@ -177,7 +177,7 @@ const BACKEND_PLATFORM = {
 const LAKEBASE_SEARCH = {
   title: 'Request access to Lakebase Search',
   description:
-    "Lakebase Search is in private preview. Drop your email and we'll reach out when we can get you access.",
+    "Lakebase Search is in private preview. Submit your email and we'll enable it for you.",
   buttonText: 'Request access',
   confirmation: "You're on the list. We'll be in touch soon.",
   eventName: 'Lakebase Search Access Requested',
