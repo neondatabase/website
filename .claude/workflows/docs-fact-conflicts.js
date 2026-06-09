@@ -11,42 +11,60 @@
  *   each flagged conflict before it is reported, which is what keeps false positives near zero.
  *
  * HOW TO RUN
- *   This is a dynamic (scriptPath) workflow, not a registered named one. Run it with:
+ *   This is a dynamic (scriptPath) workflow, not a registered named one.
+ *   Grep-only (default, no deps):
  *     Workflow({ scriptPath: ".claude/workflows/docs-fact-conflicts.js",
  *                args: "content/docs/introduction/plans.md" })
- *   `args` is the target page path, relative to the repo root. Pass exactly one page.
+ *   Grep + local semantic search (higher recall, see SEMANTIC SEARCH below):
+ *     Workflow({ scriptPath: ".claude/workflows/docs-fact-conflicts.js",
+ *                args: { path: "content/docs/introduction/plans.md", semantic: true } })
+ *   `args` is the target page path (string) or { path, semantic }. Pass exactly one page.
  *   Agents inherit the repo working directory, so relative content/docs paths resolve directly.
  *
  * OUTPUT
  *   Returns { target, counts:{facts,searched,flagged,confirmed,refuted}, confirmed:[...], refuted:[...] }.
  *   Each confirmed item has the source file:line, the claim, and the conflicting file:line(s).
- *   Treat `confidence: "medium"` findings as leads, not verdicts — always open the cited
- *   file:line pairs and confirm by hand before editing docs (a real bug was found this way:
- *   plans.md said 5,000 branches/project max while ai-agent-integration.md said 1,000).
+ *   Treat findings as LEADS, not verdicts — always open the cited file:line pairs and confirm by
+ *   hand before editing docs. Real bugs found this way: plans.md "5,000 branches/project max" vs
+ *   ai-agent-integration.md "1,000"; plans.md HIPAA "additional charge" vs hipaa.md "no additional
+ *   cost". NOTE: the Extract stage is non-deterministic — different runs surface different facts,
+ *   so re-running can find new conflicts. Run a few times for fuller coverage.
  *
- * COST / SCALE (measured on plans.md, ~550 lines)
- *   ~52 facts extracted -> ~107 subagents, ~3.4M subagent tokens, ~5 min wall-clock.
- *   Cost scales with the NUMBER OF FACTS on the target page, not corpus size — the per-fact
- *   Search agents (one ripgrep+read pass each) dominate. To cut cost 3-5x on a big page:
- *     - run the Extract and Search stages on a cheaper model (e.g. {model:'haiku'} on those agents);
- *     - or batch ~5 facts per Search agent instead of one-each.
- *   The Search stage is the only exhaustive part and it is bounded per-fact (~40 candidates).
+ * COST / SCALE (measured on plans.md, ~550 lines, grep-only)
+ *   ~52 facts extracted. The Search stage is now ONE batched agent (was ~52 per-fact agents),
+ *   so total agents ≈ 1 extract + 1 search + ~52 judge + a few verify ≈ ~55 (down from ~107).
+ *   Cost still scales with NUMBER OF FACTS, dominated by the per-fact Judge agents. To cut further:
+ *     - run Extract/Search/Judge on a cheaper model (e.g. {model:'haiku'} on those agent calls);
+ *     - batch the Judge stage too (groups of facts per agent) — trades some reasoning quality.
+ *   Semantic mode adds one incremental index refresh (seconds if docs unchanged) + per-fact vector
+ *   queries inside the single search agent; negligible token cost, small wall-clock add.
  *
- * KNOWN LIMITATIONS (both inherent to single-page mode — verified, not bugs)
- *   1. Intra-page contradictions are invisible: the candidate search EXCLUDES the target file,
- *      so a page that contradicts itself (e.g. "per branch" on one line, "per project" on
- *      another) is not caught. To catch these, stop excluding the target file in the Search
- *      stage and let the judge compare same-page lines.
+ * SEMANTIC SEARCH (opt-in, args.semantic = true)
+ *   Grep is lexical: it misses conflicting facts phrased with no shared keywords. The semantic
+ *   path adds a local vector search to raise recall. It is fully LOCAL — no API keys:
+ *     - lib/build-index.mjs embeds every content/docs chunk with Xenova/all-MiniLM-L6-v2
+ *       (384-d, runs offline in Node) into a SQLite + sqlite-vec database at lib/.cache/.
+ *     - lib/query-index.mjs embeds a query and runs a KNN lookup, returning file:line hits.
+ *   The build is INCREMENTAL (sha1 per file), so refreshing before a run is cheap and also picks
+ *   up edits to the page you are checking (fixes the staleness trap). Deps live in lib/package.json,
+ *   isolated from the website build; lib/node_modules and lib/.cache are gitignored. First build
+ *   downloads the ~90MB model once. Semantic is best as a COMPLEMENT to grep: grep nails exact
+ *   numbers/units, vectors find paraphrases; the search agent merges both, deduped by file:line.
+ *
+ * KNOWN LIMITATIONS (inherent to single-page mode — verified, not bugs)
+ *   1. Intra-page contradictions are invisible: the search EXCLUDES the target file, so a page
+ *      that contradicts itself (e.g. "per branch" vs "per project") is not caught. To catch these,
+ *      stop excluding the target file in the Search stage and let the judge compare same-page lines.
  *   2. It only finds conflicts that INVOLVE the target page. A mismatch between two OTHER pages
  *      (e.g. "2 CPUs" vs "2 CUs" in two get-started pages) is unreachable from a single target.
- *      Catching those requires the full-corpus sweep (extract all -> fact index -> all-pairs),
- *      which is a separate, much pricier mode not implemented here.
+ *      Catching those requires a full-corpus sweep (extract all -> fact index -> all-pairs), a
+ *      separate, pricier mode not implemented here.
  *
  * ARCHITECTURE NOTE
- *   Workflow scripts have NO filesystem/shell access, so the "deterministic ripgrep" step runs
- *   inside a lightweight Search agent (which has Grep/Bash) rather than in the script body.
- *   Stages 2-4 are pipelined per fact (no barriers): a fact's judge+verify runs as soon as its
- *   own search completes, so wall-clock is the slowest single fact's chain, not the sum.
+ *   Workflow scripts have NO filesystem/shell access, so all file I/O (grep AND the node-based
+ *   index build/query) runs inside agents (which have Grep/Bash), not the script body. The script
+ *   only orchestrates. Stage 2 is a single batched search agent; stages 3-4 (judge -> verify) are
+ *   pipelined per fact (no barriers), so a fact's judge+verify runs as soon as it is ready.
  */
 export const meta = {
   name: 'docs-fact-conflicts',
@@ -55,16 +73,37 @@ export const meta = {
     'Verify a docs page you just edited does not contradict facts (plan limits, prices, defaults, units, product-name casing) stated elsewhere in content/docs. Pass the target page path as args.',
   phases: [
     { title: 'Extract', detail: 'pull cross-referenceable facts from the target page' },
-    { title: 'Search', detail: 'ripgrep the corpus for each fact (one retriever per fact)' },
+    { title: 'Search', detail: 'one batched agent greps (and optionally vector-searches) the corpus for every fact' },
     { title: 'Judge', detail: 'scope-aware conflict decision per fact' },
     { title: 'Verify', detail: 'adversarially refute each flagged conflict' },
   ],
 }
 
-// ---- target page -----------------------------------------------------------
-const TARGET = typeof args === 'string' ? args.trim() : (args && args.path)
+// ---- args ------------------------------------------------------------------
+// args may be:
+//   - a plain page path string: "content/docs/..."
+//   - an object: { path: "content/docs/...", semantic: true }
+//   - a JSON STRING of that object (some callers stringify args), which we parse here.
+// semantic=true adds a local sqlite-vec vector search alongside grep (see lib/).
+let parsedArgs = args
+if (typeof args === 'string') {
+  const s = args.trim()
+  if (s.startsWith('{')) {
+    try {
+      parsedArgs = JSON.parse(s)
+    } catch {
+      parsedArgs = { path: s }
+    }
+  } else {
+    parsedArgs = { path: s }
+  }
+}
+const TARGET = parsedArgs && typeof parsedArgs === 'object' ? parsedArgs.path : undefined
+const SEMANTIC = !!(parsedArgs && parsedArgs.semantic)
 if (!TARGET) {
-  throw new Error('Pass the target page path as args, e.g. "content/docs/introduction/plans.md"')
+  throw new Error(
+    'Pass the target page path as args, e.g. "content/docs/introduction/plans.md" or { path, semantic: true }'
+  )
 }
 
 // ---- schemas ---------------------------------------------------------------
@@ -98,19 +137,30 @@ const FACTS_SCHEMA = {
   },
 }
 
-const CANDIDATES_SCHEMA = {
+// One batched search agent returns candidates for every fact at once.
+const BATCH_SEARCH_SCHEMA = {
   type: 'object',
-  required: ['candidates'],
+  required: ['results'],
   properties: {
-    candidates: {
+    results: {
       type: 'array',
       items: {
         type: 'object',
-        required: ['file', 'line', 'snippet'],
+        required: ['fact_id', 'candidates'],
         properties: {
-          file: { type: 'string' },
-          line: { type: 'integer' },
-          snippet: { type: 'string', description: 'the matching line plus a little context' },
+          fact_id: { type: 'string' },
+          candidates: {
+            type: 'array',
+            items: {
+              type: 'object',
+              required: ['file', 'line', 'snippet'],
+              properties: {
+                file: { type: 'string' },
+                line: { type: 'integer' },
+                snippet: { type: 'string' },
+              },
+            },
+          },
         },
       },
     },
@@ -176,24 +226,54 @@ const facts = (extracted && extracted.facts) || []
 log(`Extracted ${facts.length} cross-referenceable facts from ${TARGET}`)
 if (!facts.length) return { target: TARGET, counts: { facts: 0 }, confirmed: [] }
 
-// ---- stages 2-4: pipeline per fact ----------------------------------------
+// ---- stage 2: ONE batched search agent ------------------------------------
+// Collapsing the former per-fact search agents into a single agent that loops
+// over all facts is the big cost win: ~N search agents -> 1. The mechanical
+// grep work does not benefit from per-fact LLM parallelism; the reasoning
+// (judge) still runs per fact below.
+phase('Search')
+const semanticInstructions = SEMANTIC
+  ? `
+
+SEMANTIC SEARCH (enabled): the corpus also has a local vector index under
+\`.claude/workflows/lib\`. Use it to catch conflicting facts that share no keywords with grep.
+  1. First refresh the index (incremental — only re-embeds changed files, so it also picks up
+     edits to the target page):
+       node .claude/workflows/lib/build-index.mjs --root "$(pwd)"
+  2. For EACH fact, in addition to grep, run a vector query and merge the hits:
+       node .claude/workflows/lib/query-index.mjs "<subject>. <claim>" --exclude "${TARGET}" --k 8
+     (run it from the repo root; it prints JSON {results:[{file,line,distance,preview}]}).
+  Merge semantic hits with the grep hits, de-duplicating by file:line. Keep a semantic hit only
+  if its preview looks topically related to the fact.`
+  : ''
+
+const batch = await agent(
+  `You are the retrieval step of a docs conflict checker. For EVERY fact below, find other
+places in \`content/docs\` that state the same thing, so a later step can check for conflicts.
+
+Facts (JSON array):
+${JSON.stringify(facts)}
+
+For each fact: run ripgrep over \`content/docs\` (case-insensitive, use Grep/Bash) for its
+search_terms and for numeric variants of its claim. EXCLUDE the source file \`${TARGET}\`.
+Collect plausibly-related lines as candidates (file, 1-based line, the matching line plus a
+little context). Do NOT judge conflicts here — just retrieve. Cap each fact at ~15 of its most
+relevant candidates.${semanticInstructions}
+
+Return one results entry per fact (use the fact's \`id\` as \`fact_id\`), even if its candidates
+array is empty.`,
+  { label: 'search:all-facts', phase: 'Search', schema: BATCH_SEARCH_SCHEMA }
+)
+
+const byId = new Map(((batch && batch.results) || []).map((r) => [r.fact_id, r.candidates || []]))
+const searched = facts.map((fact) => ({ fact, candidates: byId.get(fact.id) || [] }))
+log(
+  `Searched ${searched.length} facts -> ${searched.reduce((n, s) => n + s.candidates.length, 0)} candidate lines${SEMANTIC ? ' (grep + semantic)' : ' (grep)'}`
+)
+
+// ---- stages 3-4: pipeline per fact (judge -> verify) ----------------------
 const results = await pipeline(
-  facts,
-
-  // stage 2: retrieve candidate mentions from OTHER files
-  (fact) =>
-    agent(
-      `Search the Neon docs corpus for other mentions of this fact so we can check for conflicts.
-
-Fact: ${JSON.stringify(fact)}
-
-Run ripgrep over \`content/docs\` (case-insensitive) for each of the search_terms and for
-numeric variants of the claim. Use Grep/Bash. EXCLUDE the source file \`${TARGET}\` itself.
-Return every plausibly-related line as a candidate with its file, 1-based line number, and the
-matching line plus one line of surrounding context. Cast a wide net — do NOT judge conflicts
-here, just retrieve. Cap at ~40 candidates; if more, keep the most relevant.`,
-      { label: `search:${fact.id}`, phase: 'Search', schema: CANDIDATES_SCHEMA },
-    ).then((r) => ({ fact, candidates: (r && r.candidates) || [] })),
+  searched,
 
   // stage 3: scope-aware judge (skip if nothing to compare)
   (sc) => {
