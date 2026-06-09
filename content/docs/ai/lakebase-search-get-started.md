@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-09T17:04:41.277Z'
+updatedOn: '2026-06-09T17:08:47.963Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -68,7 +68,7 @@ OPENAI_API_KEY=your-openai-api-key
 
 ## Run the demo
 
-Create `search.ts` and paste the following. It inserts documents with embeddings, runs a vector search, then runs a BM25 text search:
+Create `search.ts` and paste the following. It inserts documents with embeddings, creates the `lakebase_bm25` index, runs a vector search, then runs a BM25 text search:
 
 ```typescript filename="search.ts"
 import 'dotenv/config';

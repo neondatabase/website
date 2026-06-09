@@ -10,7 +10,7 @@ summary: >-
   search with the lakebase_ann.probes GUC, and reference all operator classes and
   index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T09:48:47.730Z'
+updatedOn: '2026-06-09T17:08:47.963Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
@@ -173,9 +173,9 @@ Options are passed as a TOML string to the `WITH (options = $$ ... $$)` clause.
 
 ### Search parameters
 
-| GUC                        | Type    | Default | Description                                                                                          |
-| :------------------------- | :------ | :------ | :--------------------------------------------------------------------------------------------------- |
-| `lakebase_ann.probes`      | integer | `1`     | Number of lists to search at query time. Higher values improve recall at the cost of speed.          |
-| `lakebase_ann.enable_scan` | boolean | `on`    | Enables or disables `lakebase_ann` index scans. Set to `off` for testing to force a sequential scan. |
+| GUC                        | Type    | Default | Description                                                                                                                                                                    |
+| :------------------------- | :------ | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lakebase_ann.probes`      | integer | not set | Number of lists to search at query time. Must be set explicitly when using an index with `build.internal.lists` configured. Higher values improve recall at the cost of speed. |
+| `lakebase_ann.enable_scan` | boolean | `on`    | Enables or disables `lakebase_ann` index scans. Set to `off` for testing to force a sequential scan.                                                                           |
 
 <NeedHelp />
