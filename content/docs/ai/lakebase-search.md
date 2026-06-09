@@ -9,7 +9,7 @@ summary: >-
   learn what each extension provides, and navigate to the extension reference
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-09T16:13:07.742Z'
+updatedOn: '2026-06-09T17:04:41.277Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -20,10 +20,10 @@ Lakebase Search is developed by Databricks. Neon joined Databricks in 2025, and 
 
 Lakebase Search is two Postgres extensions, `lakebase_vector` and `lakebase_text`, that bring scalable vector and BM25 full-text search to Neon, designed for backends that need both semantic and keyword search in a single database.
 
-- **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required; the same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
-- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from PostgreSQL FTS required; standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
+- **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
+- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from PostgreSQL FTS required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
 
-## Why Lakebase architecture
+## How `lakebase_ann` scales
 
 `lakebase_ann` uses IVF partitioning and RaBitQ quantization, an architecture built to scale beyond what HNSW can reach. HNSW indexes must fit in memory and traverse the graph with random I/O at query time. IVF partitions the vector space into lists and searches only the most relevant ones, enabling sequential I/O and 4–8x compression. The result:
 

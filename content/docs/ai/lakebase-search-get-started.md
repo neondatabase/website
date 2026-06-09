@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:13:03.492Z'
+updatedOn: '2026-06-09T17:04:41.277Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -21,11 +21,7 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 - Node.js 18 or later
 - An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings
 
-## Install dependencies
-
-```bash
-npm install @neondatabase/serverless openai
-```
+<Steps>
 
 ## Enable the extensions
 
@@ -38,9 +34,7 @@ CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
 
 `CASCADE` automatically installs `pgvector` if it is not already present, since `lakebase_vector` depends on it.
 
-## Create a schema
-
-Create a table that stores document content alongside a vector embedding and a generated `tsvector` column for full-text search:
+## Create a table
 
 ```sql
 CREATE TABLE documents (
@@ -53,19 +47,31 @@ CREATE TABLE documents (
 
 CREATE INDEX ON documents
   USING lakebase_ann (embedding vector_cosine_ops);
-
-CREATE INDEX documents_bm25 ON documents
-  USING lakebase_bm25 (body_tsv bm25_ops)
-  WITH (default_limit = 10);
 ```
 
-`default_limit = 10` stores the result limit in the index itself, so it applies without a `SET` command. This is useful for stateless serverless connections.
+The `lakebase_bm25` index is created in a later step, after data is inserted. BM25 computes corpus-wide statistics (document count, term frequencies) at index build time, so the index must be built on populated data to return meaningful scores.
 
-## Insert documents
+## Set up your project
 
-Connect to your database and insert documents. Each document's body is embedded with OpenAI before insertion:
+The remaining steps run from a local TypeScript project. Install dependencies:
 
-```typescript
+```bash
+npm install @neondatabase/serverless openai dotenv
+```
+
+Create a `.env` file with your Neon connection string and OpenAI API key:
+
+```ini filename=".env"
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+OPENAI_API_KEY=your-openai-api-key
+```
+
+## Run the demo
+
+Create `search.ts` and paste the following. It inserts documents with embeddings, runs a vector search, then runs a BM25 text search:
+
+```typescript filename="search.ts"
+import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';
 import OpenAI from 'openai';
 
@@ -109,14 +115,6 @@ async function embedAndInsert() {
   }
 }
 
-await embedAndInsert();
-```
-
-## Run a vector search
-
-Vector search finds documents semantically similar to a query, even when the exact words don't match:
-
-```typescript
 async function vectorSearch(query: string, limit = 5) {
   const { data } = await openai.embeddings.create({
     model: 'text-embedding-3-small',
@@ -132,15 +130,6 @@ async function vectorSearch(query: string, limit = 5) {
   `;
 }
 
-const results = await vectorSearch('how do agents store memory?');
-console.log(results);
-```
-
-## Run a BM25 text search
-
-BM25 search ranks documents by keyword relevance, taking into account term frequency and document length:
-
-```typescript
 async function textSearch(query: string, limit = 5) {
   return sql`
     SELECT id, title,
@@ -154,11 +143,34 @@ async function textSearch(query: string, limit = 5) {
   `;
 }
 
-const results = await textSearch('vector index postgres');
-console.log(results);
+async function main() {
+  console.log('Inserting documents...');
+  await embedAndInsert();
+
+  console.log('Building BM25 index...');
+  await sql`
+    CREATE INDEX IF NOT EXISTS documents_bm25 ON documents
+    USING lakebase_bm25 (body_tsv bm25_ops)
+    WITH (default_limit = 10)
+  `;
+
+  console.log('\nVector search — "how do agents store memory?":');
+  console.log(await vectorSearch('how do agents store memory?'));
+
+  console.log('\nBM25 search — "vector search":');
+  console.log(await textSearch('vector search'));
+}
+
+main();
 ```
 
-Results are ordered by score ascending. A lower (more negative) score means higher relevance.
+Run it:
+
+```bash
+npx tsx search.ts
+```
+
+</Steps>
 
 ## Next steps
 
