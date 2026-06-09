@@ -9,7 +9,7 @@ summary: >-
   learn what each extension provides, and navigate to the extension reference
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:13:03.492Z'
+updatedOn: '2026-06-09T00:14:08.087Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -21,12 +21,10 @@ Lakebase Search is two Postgres extensions that bring scalable vector and BM25 f
 
 ## Why Lakebase architecture
 
-Traditional Postgres search extensions cap out at what fits in memory. On Neon's disaggregated storage architecture, HNSW's random I/O graph traversal is especially costly. Each graph hop is a network round-trip to the page server.
+`lakebase_ann` uses IVF partitioning and RaBitQ quantization, an architecture built to scale beyond what HNSW can reach. HNSW indexes must fit in memory and traverse the graph with random I/O at query time. IVF partitions the vector space into lists and searches only the most relevant ones, enabling sequential I/O and 4–8x compression. The result:
 
-Lakebase Search is designed for this architecture from the ground up:
-
-- **Scale to 1 billion+ vectors**: a single `lakebase_ann` index grows with your data using IVF partitioning and RaBitQ quantization, without resharding or rebuilding
-- **Faster index builds**: quantization reduces the index to a fraction of the size of HNSW, making builds and cold starts significantly faster
+- **Scale to 1 billion+ vectors**: a single `lakebase_ann` index grows with your data without resharding or rebuilding
+- **Faster index builds**: compression reduces index size significantly, making builds and cold starts faster than HNSW
 - **Branching without index rebuilds**: Neon branches copy-on-write; your search indexes are available instantly on every branch without re-indexing
 - **Scale-to-zero compatible**: indexes survive cold starts without warmup; you don't pay for idle compute
 
