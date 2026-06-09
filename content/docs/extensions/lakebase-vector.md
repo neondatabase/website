@@ -10,7 +10,7 @@ summary: >-
   search with the lakebase_ann.probes GUC, and reference all operator classes and
   index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:14:08.087Z'
+updatedOn: '2026-06-09T09:48:47.730Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
@@ -21,7 +21,7 @@ For an overview of Lakebase Search and its architecture advantages, see [Lakebas
 
 ## Why lakebase_vector?
 
-`lakebase_ann` uses IVF (Inverted File) partitioning combined with RaBitQ quantization, an architecture built to scale beyond what HNSW can reach. HNSW indexes must fit entirely in memory and traverse the graph with random I/O at query time, which limits how far they can scale. IVF partitions the vector space into lists and searches only the most relevant ones at query time, enabling sequential I/O rather than random pointer-chasing. RaBitQ compresses vectors 4–8x, dramatically reducing the index size and memory footprint. Together, this scales to **over 1 billion vectors on a single index** while keeping cold starts fast and query performance stable.
+`lakebase_ann` uses IVF (Inverted File) partitioning combined with RaBitQ quantization, an architecture built to scale beyond what HNSW can reach. HNSW indexes must fit entirely in memory and traverse the graph with random I/O at query time, which limits how far they can scale. IVF partitions the vector space into lists and searches only the most relevant ones at query time, enabling sequential I/O rather than random pointer-chasing. RaBitQ compresses vectors 4–8x, reducing the index size and enabling index builds 50–100x faster than HNSW. Together, this scales to **over 1 billion vectors on a single index** while keeping cold starts fast and query performance stable.
 
 There is no migration involved. `lakebase_vector` inherits all `pgvector` data types and operators. You can create a `lakebase_ann` index on your existing `pgvector` columns without changing your schema or application code.
 
