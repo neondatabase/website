@@ -184,6 +184,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/cookie-policy',
+        destination: 'https://www.databricks.com/legal/cookienotice',
+        permanent: true,
+      },
+      {
         source: '/docs/use-cases/:path*',
         destination: '/use-cases',
         permanent: true,
