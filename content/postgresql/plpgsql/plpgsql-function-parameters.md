@@ -60,12 +60,12 @@ begin
 
   return film_title;
 
-end;$$
+end;$$;
 ```
 
 Because we don’t specify the mode for `p_film_id` parameter, it takes the `in` mode by default.
 
-The following shows how to call the find_film_by_id() function to find the title of the film with the id 100:
+The following shows how to call the find_film_by_id() function to find the title of the film with the id 1:
 
 ```plsql
 select * from find_film_by_id(1);
@@ -111,7 +111,7 @@ begin
   into min_len, max_len, avg_len
   from film;
 
-end;$$
+end;$$;
 ```
 
 In the `get_film_stat` function, we select the min, max, and average film length from the `film` table using the `min`, `max`, and `avg` aggregate functions and assign the results to the corresponding `out` parameters.
