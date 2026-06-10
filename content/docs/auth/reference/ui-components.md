@@ -2,11 +2,14 @@
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
 summary: >-
-  Step-by-step guide for integrating Neon Auth UI components using
-  `@neondatabase/neon-js`, including installation, provider setup, and
-  configuration of common props for customization.
+  Reference for the `@neondatabase/auth-ui` package, which provides prebuilt
+  React components for sign-in, sign-up, user menus, and protected routes.
+  Components include `NeonAuthUIProvider`, `AuthView`, `UserButton`, and
+  `SignedIn`, built on Better Auth UI. Use this page for the full
+  `NeonAuthUIProvider` prop table, CSS import instructions for Tailwind v4 and
+  non-Tailwind projects, or the `neon-auth-codemod` migration command.
 enableTableOfContents: true
-updatedOn: '2026-05-15T14:48:25.606Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

@@ -2,12 +2,15 @@
 title: Build a full backend with Next.js and Neon
 subtitle: Connect Postgres with Drizzle, add managed authentication, and ship a typed server-side backend
 summary: >-
-  Step-by-step tutorial for building a Next.js application backend on Neon.
-  Uses Drizzle for type-safe Postgres queries and Neon Auth for sign-up and
-  sign-in. Server-side data access, ready to deploy on Vercel.
+  End-to-end Next.js App Router tutorial that wires Neon Postgres, Drizzle ORM,
+  and Neon Auth into a working server-side backend. Choose this page when
+  building a Next.js project that needs a type-safe Postgres data layer and
+  managed email authentication without a third-party auth service. Walks through
+  schema push with drizzle-kit, session-aware Server Components, route
+  middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-27T02:23:28.348Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you start

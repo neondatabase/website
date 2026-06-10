@@ -2,11 +2,14 @@
 title: 'Neon CLI command: connection-string'
 subtitle: Get Postgres connection strings for branches and databases
 summary: >-
-  Covers the usage of the Neon CLI `connection-string` command to retrieve a
-  Postgres connection string for databases in Neon projects, including options
-  for specifying branches and historical states.
+  The Neon connection string command (`neon connection-string`) outputs a
+  PostgreSQL connection URL for a specified branch, role, and database,
+  including the role password.
+  Use it to get connection strings for psql, Prisma (--prisma), connection
+  pooling (--pooled), read-only replicas (--endpoint-type read_only), or
+  time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -20,6 +23,10 @@ For information about connecting to Neon, see [Connect from any application](/do
 
 This command gets a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
+<Admonition type="tip" title="Connect with psql">
+To open a `psql` session directly, use the dedicated [`neon psql`](/docs/reference/cli-psql) command (requires neonctl 2.22.2+). You can also pass `--psql` to `connection-string` to achieve the same result.
+</Admonition>
+
 ### Usage
 
 ```bash
@@ -32,17 +39,18 @@ neon connection-string [branch[@timestamp|@LSN]] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `connection-string` command supports these options:
 
-| Option            | Description                                                                                          | Type    |                      Required                       |
-| ----------------- | ---------------------------------------------------------------------------------------------------- | ------- | :-------------------------------------------------: |
-| `--context-file`  | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name        | string  |                                                     |
-| `--project-id`    | Project ID                                                                                           | string  | Only if your Neon account has more than one project |
-| `--role-name`     | Role name                                                                                            | string  |     Only if your branch has more than one role      |
-| `--database-name` | Database name                                                                                        | string  |   Only if your branch has more than one database    |
-| `--pooled`        | Construct a pooled connection. The default is `false`.                                               | boolean |                                                     |
-| `--prisma`        | Construct a connection string for use with Prisma. The default is `false`.                           | boolean |                                                     |
-| `--endpoint-type` | The compute type. The default is `read-write`. The choices are `read_only` and `read_write`          | string  |                                                     |
-| `--extended`      | Show extended information. The default is `false`.                                                   | boolean |                                                     |
-| `--psql`          | Connect to a database via psql using connection string. `psql` must be installed to use this option. | boolean |                                                     |
+| Option            | Description                                                                                                                                                   | Type    |                      Required                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :-------------------------------------------------: |
+| `--context-file`  | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                 | string  |                                                     |
+| `--project-id`    | Project ID                                                                                                                                                    | string  | Only if your Neon account has more than one project |
+| `--role-name`     | Role name                                                                                                                                                     | string  |     Only if your branch has more than one role      |
+| `--database-name` | Database name                                                                                                                                                 | string  |   Only if your branch has more than one database    |
+| `--pooled`        | Construct a pooled connection. The default is `false`.                                                                                                        | boolean |                                                     |
+| `--prisma`        | Construct a connection string for use with Prisma. The default is `false`.                                                                                    | boolean |                                                     |
+| `--endpoint-type` | The compute type. The default is `read-write`. The choices are `read_only` and `read_write`                                                                   | string  |                                                     |
+| `--extended`      | Show extended information.                                                                                                                                    | boolean |                                                     |
+| `--ssl`           | SSL mode. The default is `require`. Choices: `require`, `verify-ca`, `verify-full`, `omit`                                                                    | string  |                                                     |
+| `--psql`          | Connect to a database via psql using connection string. No psql installation required. Neonctl uses a built-in implementation if psql is not on your `$PATH`. | boolean |                                                     |
 
 ### Examples
 

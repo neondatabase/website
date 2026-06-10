@@ -2,12 +2,16 @@
 title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 summary: >-
-  Step-by-step guide for replicating data from a Neon Postgres database to
-  Materialize using logical replication, enabling low-latency data processing
-  for operational workloads.
+  Neon-to-Materialize logical replication streams Postgres WAL change events
+  from a Neon publication into a Materialize PostgreSQL source, enabling
+  real-time operational analytics without a separate ETL pipeline. Follow this
+  guide to enable logical replication, set REPLICA IDENTITY FULL on replicated
+  tables, and verify snapshot completion via mz_source_statistics. A direct
+  (non-pooled) Neon connection is required; active replication prevents
+  scale-to-zero and increases compute billing.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

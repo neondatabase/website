@@ -2,11 +2,16 @@
 title: Data anonymization API reference
 subtitle: API endpoints for managing anonymized branches and masking rules
 summary: >-
-  Covers the API endpoints for creating anonymized branches and managing masking
-  rules using PostgreSQL Anonymizer, enabling users to handle sensitive data
-  effectively within Neon.
+  The Neon data anonymization REST API provides endpoints for creating
+  PostgreSQL Anonymizer-backed branches and managing per-column masking
+  rules via `masking_function` or `masking_value` parameters. Use this
+  reference when automating PII redaction in CI/CD pipelines or scripting
+  sensitive-data workflows. The PATCH masking-rules endpoint replaces all
+  rules atomically, so callers must include every existing rule when adding
+  one. Anonymized branches cannot be restored or have their read-write
+  endpoint deleted.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.278Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).

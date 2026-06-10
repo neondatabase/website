@@ -3,11 +3,15 @@ title: The online_advisor extension
 subtitle: Get index, statistics, and prepared statement recommendations based on your
   query workload
 summary: >-
-  Covers the setup of the `online_advisor` extension, which provides
-  recommendations for indexes, extended statistics, and prepared statements
-  based on query workload analysis in PostgreSQL 17.
+  The `online_advisor` extension analyzes your live query workload using an
+  executor hook to recommend indexes, extended statistics, and prepared
+  statements. Use it when you want data-driven tuning suggestions based on
+  actual query execution rather than manual analysis. The extension observes
+  and reports but never creates indexes or statistics itself. Configurable
+  thresholds control when recommendations surface, and system-level settings
+  like `max_index_proposals` use fixed defaults on Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.081Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `online_advisor` extension recommends **indexes**, **extended statistics**, and **prepared statements** based on your actual query workload. It uses the same executor hook mechanism as [`auto_explain`](https://www.postgresql.org/docs/current/auto-explain.html) to collect and analyze execution data.

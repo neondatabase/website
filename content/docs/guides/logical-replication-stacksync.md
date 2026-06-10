@@ -2,11 +2,16 @@
 title: Replicate data with Stacksync
 subtitle: Learn how to replicate data from Neon with Stacksync
 summary: >-
-  Step-by-step guide for defining a Neon Postgres database as a data source in
-  Stacksync to enable data replication to supported destinations.
+  Stacksync connects a Neon Postgres database to CRMs, ERPs, and other
+  destinations via real-time one-way or two-way sync, using Postgres logical
+  replication (wal_level=logical) as the change data capture method. Use this
+  guide when you need to sync Neon table data to a Stacksync-supported connector
+  without a third-party ETL tool. Each synced table must have a single-column
+  auto-generated primary key, and you must use a direct connection string (no
+  connection pooler) when configuring the Postgres source.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-04T13:36:09.567Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

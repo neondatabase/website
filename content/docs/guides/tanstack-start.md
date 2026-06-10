@@ -2,14 +2,17 @@
 title: Connect a TanStack Start application to Neon
 subtitle: Set up a Neon project in seconds and connect from a TanStack Start application
 summary: >-
-  How to connect a TanStack Start application to a Neon project by creating a
-  Neon project, adding necessary dependencies, and configuring connection
-  settings with your database credentials.
+  TanStack Start integration guide for Neon Postgres covers creating a Neon
+  project, installing a supported driver (node-postgres, postgres.js, or the
+  Neon serverless driver), and writing server functions that query the database.
+  Choose this page when building a type-safe React or Solid app with TanStack
+  Start and need working code for both regular and static server functions
+  backed by Neon.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"

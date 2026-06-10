@@ -1,12 +1,14 @@
 ---
 title: Postgres guides
 summary: >-
-  Covers the features of Postgres within the Neon environment, including data
-  types, extensions, functions, and strategies for optimizing query performance.
+  Postgres guides index for Neon, linking to reference and tutorial content on
+  data types, extensions, functions, indexes, query performance, and version
+  upgrades. Choose this page when looking for a Postgres topic within Neon's
+  managed environment rather than a specific Neon platform feature.
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/postgres-intro
-updatedOn: '2026-02-06T22:07:33.125Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Explore Postgres features with Neon's Postgres guides. Learn about data types, extensions, functions, and optimizing query performance. Remember, **Neon is Postgres**, so you're encouraged to reference both the Neon documentation and the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/).

@@ -1,14 +1,18 @@
 ---
 title: Glossary
 summary: >-
-  Covers definitions and explanations of key terms related to Neon's services,
-  including access tokens, compute activity metrics, user roles, API
-  authentication, and resource management operations.
+  The Neon glossary defines platform-specific and Postgres terms including
+  branch, Compute Unit (CU), WAL, autoscaling, pooled connection string, instant
+  restore, and logical replication. Look up Neon concepts like scale-to-zero,
+  Pageserver, history window, Safekeeper, or GB-month, or distinguish
+  Neon-specific usage from standard Postgres terminology. Billing metrics,
+  organization roles, branch types, and Control Plane operations are all
+  defined here.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## access token

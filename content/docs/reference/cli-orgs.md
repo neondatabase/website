@@ -2,11 +2,12 @@
 title: 'Neon CLI command: orgs'
 subtitle: List and manage Neon organizations
 summary: >-
-  How to manage organizations within the Neon CLI using the `orgs` command,
-  including listing all associated organizations and utilizing various output
-  formats.
+  The `neon orgs` CLI command lists all Neon organizations associated with the
+  authenticated user, returning org ID, name, handle, and timestamps in table
+  or JSON output. Use this command to identify which organizations your account
+  belongs to before running project or branch commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.965Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Before you begin

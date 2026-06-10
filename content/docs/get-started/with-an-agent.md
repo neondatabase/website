@@ -1,11 +1,14 @@
 ---
 title: Get started with your AI agent
+subtitle: Connect your AI coding assistant to Neon
+summary: >-
+  `npx neonctl@latest init` connects an AI coding assistant to Neon,
+  installing agent skills and configuring the MCP server in one command.
 enableTableOfContents: true
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-Let your agent wire your app to Neon with `neon init`.
-
-`neon init` gives your agent two things: Neon-specific context from agent skills, and tools to act on your Neon account through the MCP server. The result is an agent that can connect your app to Neon and help you use Neon features as you build. For Cursor and VS Code, it also installs the Neon Local Connect extension for in-editor schema browsing.
+`npx neonctl@latest init` gives your agent two things: Neon-specific context from agent skills, and tools to act on your Neon account through the MCP server. The result is an agent that can connect your app to Neon and help you use Neon features as you build. For Cursor and VS Code, it also installs the Neon Local Connect extension for in-editor schema browsing.
 
 For a full app walkthrough, see [Build a full backend](/docs/get-started/full-backend-quickstart).
 
@@ -34,7 +37,7 @@ The wizard asks which editor to configure, then:
 - Configures the [Neon MCP server](/docs/ai/neon-mcp-server)
 - For Cursor and VS Code, installs the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect)
 
-Run this from your project root so the skills are installed in the right place. For details and manual setup, see the [`neon init` reference](/docs/reference/cli-init).
+Run this from your project root so the skills are installed in the right place. For details and manual setup, see the [`neonctl init` reference](/docs/reference/cli-init).
 
 ## Restart your editor
 
@@ -65,6 +68,6 @@ The exact flow depends on your project. Your agent can scaffold a new connection
 - [Neon Auth](/docs/auth/overview)
 - [Data API](/docs/data-api/overview)
 - [Browse your schema with Neon Local Connect](/docs/local/vscode-extension)
-- [`neon init` reference](/docs/reference/cli-init)
+- [`neonctl init` reference](/docs/reference/cli-init)
 
 <NeedHelp/>

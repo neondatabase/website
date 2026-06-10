@@ -2,11 +2,16 @@
 title: 'Neon CLI command: projects'
 subtitle: 'List, create, update, delete, and get Neon projects'
 summary: >-
-  Covers the usage of the Neon CLI `projects` command for managing Neon
-  projects, including listing, creating, updating, deleting, and retrieving
-  project information directly from the terminal.
+  The Neon CLI `neon projects` command provides subcommands to list, create,
+  update, delete, recover, and retrieve Neon projects from the terminal,
+  including support for region selection (AWS and Azure), blocking public or VPC
+  connections, and filtering shared projects. Use this page when you need CLI
+  automation for project lifecycle tasks or to recover a deleted project within
+  its 7-day recovery window. Projects created via the CLI default to Postgres
+  18; use the Neon Console or API to create projects on earlier Postgres
+  versions.
 enableTableOfContents: true
-updatedOn: '2026-06-03T10:16:42.918Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -130,7 +135,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--name`                     | The project name. The project ID is used if a name is not specified.                                                                                                                                              | string  |          |
 | `--region-id`                | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-1`, `aws-us-east-2`, `azure-eastus2`. Defaults to `aws-us-east-2` if not specified. | string  |          |
 | `--org-id`                   | The organization ID where you want this project to be created. If unspecified, your [default organization](/docs/reference/glossary#default-organization) will be used.                                           | string  |          |
-| `--psql`                     | Connect to your new project's database via `psql` immediately on project creation.                                                                                                                                | boolean |          |
+| `--psql`                     | Connect to your new project's database via psql immediately on project creation. No psql installation required. Neonctl uses a built-in implementation if psql is not on your `$PATH`.                            | boolean |          |
 | `--database`                 | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
 | `--role`                     | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
 | `--set-context`              | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
@@ -160,7 +165,7 @@ Neon projects created using the CLI use the default Postgres version, which is P
   ```
 
     <Admonition type="tip">
-    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
+    The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [the connection-string command](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a project with the `--output` format of the command set to `json`. This output format returns all of the project response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.
@@ -266,7 +271,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.                           | boolean |          |
 | `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                                | boolean |          |
 | `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (for example, "2") or a range delimited by a dash (for example, "0.5-3"). | string  |          |
-| `--name`                     | The project name. The value cannot be empty.                                                                                                               | string  | &check;  |
+| `--name`                     | The project name. The value cannot be empty.                                                                                                               | string  |          |
 
 #### Examples
 
@@ -283,7 +288,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 - Block connections from the public internet:
 
-  This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking — Restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access). You must specify the ID of you Neon project, as shown below.
+  This option is used with Neon's Private Networking feature to block access from the public internet. See [Private Networking: restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access). You must specify the ID of you Neon project, as shown below.
 
   ```bash
   neon projects update orange-credit-12345678 --block-public-connections=true

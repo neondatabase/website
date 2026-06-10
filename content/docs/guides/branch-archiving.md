@@ -3,11 +3,14 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 summary: >-
-  Covers the automatic archiving of inactive branches in Neon to reduce storage
-  costs, including conditions for archiving and unarchiving processes, as well
-  as monitoring branch status.
+  Neon automatically archives inactive branches older than 14 days, moving
+  their data to cost-effective object storage to reduce costs. Archived branches
+  unarchive automatically on first access, though paid plans enforce a limit on
+  unarchived branches per project before forced early archiving applies. Use
+  this page to understand archiving thresholds, blocking conditions, and how to
+  monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.137Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

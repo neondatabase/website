@@ -2,12 +2,18 @@
 title: Neon TypeScript SDK
 subtitle: Reference documentation for authentication and Data API database queries
 summary: >-
-  Covers the setup and usage of the Neon TypeScript SDK for implementing
-  authentication and database operations in applications, including various
-  adapter options for different frameworks.
+  The `@neondatabase/neon-js` TypeScript SDK combines Neon Auth and the Neon
+  Data API in one client, covering auth methods (email/password, OAuth, OTP,
+  password reset) alongside a PostgREST-style query builder (select, insert,
+  update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
+  over the standalone `@neondatabase/postgrest-js` or `@neondatabase/auth`
+  packages when you need the full combined API reference in one place. Three
+  adapters are documented: BetterAuthVanillaAdapter (default, Promise-based),
+  BetterAuthReactAdapter (React hooks), and SupabaseAuthAdapter
+  (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-03-25T00:15:20.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page documents `@neondatabase/neon-js`, which combines Neon Auth and the Data API in a single client. Neon also publishes standalone packages:

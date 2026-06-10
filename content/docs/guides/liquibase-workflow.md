@@ -2,11 +2,14 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 summary: >-
-  Step-by-step guide for setting up a developer workflow using Liquibase with
-  Neon's branching feature, enabling schema changes on a development branch and
-  applying them to the production branch of a Neon project.
+  Iterate on XML changesets against an isolated Neon development branch, then
+  promote reviewed changes to production using Liquibase update, status, diff,
+  and updateSQL commands. Use this page when you need a repeatable
+  branch-develop-promote schema migration pattern, not initial Liquibase
+  setup. Neon's copy-on-write branching keeps development changes isolated
+  until explicitly promoted.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.001Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).

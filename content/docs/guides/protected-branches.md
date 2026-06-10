@@ -3,11 +3,14 @@ title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
 summary: >-
-  Covers the setup of Neon's protected branches feature, detailing how to secure
-  critical data by preventing deletion, resetting, and applying IP restrictions
-  on designated branches.
+  Protected branches in Neon prevent deletion, reset, and archiving of critical
+  branches such as production, and automatically generate new Postgres role
+  passwords on child branches to block credential leakage. Use this feature when
+  you need to lock down a branch against accidental or unauthorized changes. It
+  can be combined with the IP Allow feature to restrict network access to
+  protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's protected branches feature implements a series of protections:

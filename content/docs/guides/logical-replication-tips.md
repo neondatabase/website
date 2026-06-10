@@ -2,12 +2,17 @@
 title: Logical replication tips
 subtitle: Learn how to optimize for logical replication
 summary: >-
-  Covers tips for optimizing logical replication in Neon, including strategies
-  for managing initial data load, adjusting timeout settings, and ensuring
-  compatibility with Postgres extensions during data migrations.
+  Practical tips for migrating to Neon with logical replication, drawn from
+  real customer migrations. Covers compute scaling for initial data loads,
+  deferring index creation, raising wal_sender_timeout and wal_receiver_timeout
+  beyond the default, and reducing the history window to limit storage growth.
+  Use this page when troubleshooting replication timeouts, slow initial copies,
+  or extension compatibility blockers. Also explains why FOR ALL TABLES
+  publications prevent later table additions or removals, with the correct
+  per-table CREATE PUBLICATION syntax as an alternative.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The following tips are based on actual customer data migrations to Neon using logical replication:

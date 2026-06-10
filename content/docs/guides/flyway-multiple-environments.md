@@ -2,11 +2,16 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 summary: >-
-  Covers the management of multiple database environments using Flyway with
-  Neon's branching feature, detailing how to configure schema changes across
-  development, staging, and production environments.
+  Flyway multi-environment schema management with Neon maps each environment
+  (development, staging, production) to a separate Neon branch, giving each an
+  isolated Postgres instance and its own JDBC connection string. A
+  per-environment Flyway config file controls which database receives each
+  `flyway migrate -configFiles=` run, keeping schemas consistent across the
+  pipeline. Use this guide when automating releases across a chain of
+  environments and want to integrate Neon branch creation with Flyway migration
+  ordering.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.965Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.

@@ -2,13 +2,17 @@
 title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Neon Auth
 summary: >-
-  Covers the setup of the Neon Auth Next.js server SDK for implementing
-  server-side authentication in Next.js applications, detailing installation,
-  environment variable configuration, and core functionalities like session
-  management and middleware creation.
+  Neon Auth Next.js Server SDK (`@neondatabase/auth/next/server`) provides
+  server-side authentication for Next.js apps via React Server Components, API
+  routes, middleware, and server actions. Session caching uses a signed HTTP-only
+  cookie to reduce Auth Server calls. Use this page to implement or debug
+  server-side sign-in, sign-up, route protection, and admin user management in
+  Next.js. Covers `createNeonAuth()` configuration, `auth.middleware()`,
+  `auth.getSession()`, email/OTP/OAuth sign-in, organization and admin APIs,
+  structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-05-18T21:06:51.697Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.

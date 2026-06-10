@@ -2,12 +2,14 @@
 title: Postgres rank() window function
 subtitle: Use rank() to assign ranks to rows within a result set
 summary: >-
-  Covers the usage of the `rank()` window function in Postgres to assign ranks
-  to rows within a result set based on specified ordering, including examples
-  for practical applications like ranking employees by salary within
-  departments.
+  The `rank()` window function assigns integer ranks to rows within a partition,
+  giving tied rows the same rank and skipping subsequent rank values after ties.
+  Use `rank()` for top-N-per-group queries, leaderboards, or percentile
+  calculations where gaps in the rank sequence after ties are acceptable. Unlike
+  `dense_rank()` (consecutive ranks, no gaps) or `row_number()` (unique integers
+  regardless of ties), `rank()` reflects tied positions by leaving gaps.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.885Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `rank()` window function computes a ranking for each row within a partition of the result set. The rank is determined by the order of rows specified in the `ORDER BY` clause of the `OVER` clause. Rows with equal values for the ranking criteria receive the same rank, with the next rank(s) skipped.

@@ -1,9 +1,12 @@
 ---
 title: Neon plans
 summary: >-
-  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
-  features, pricing, and target users to support projects from prototypes to
-  production at scale.
+  Neon's Free, Launch, and Scale plans differ in compute rates, branch counts,
+  storage pricing, and autoscaling limits. Compare per-unit pricing, feature
+  availability, and billing examples to choose a plan or estimate monthly costs.
+  Scale adds compliance certifications, uptime SLAs, private networking, and
+  configurable scale-to-zero. Launch and Free plans share pay-only-for-what-you-use
+  pricing with no monthly minimum.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -19,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.

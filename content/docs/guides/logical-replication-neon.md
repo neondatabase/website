@@ -2,12 +2,16 @@
 title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 summary: >-
-  Covers the setup and important considerations for logical replication in Neon,
-  detailing how it functions as both a publisher and subscriber, including
-  management of replication slots and implications for scaling.
+  Logical replication in Neon requires enabling it per project, which
+  permanently changes `wal_level` to `logical` and restarts all computes.
+  Use this page when configuring Neon as a publisher or subscriber. It covers
+  Neon-specific constraints: inactive replication slots are removed after ~40
+  hours, subscribers prevent scale-to-zero, and `max_wal_senders` and
+  `max_replication_slots` are both set to 10. Supported decoder plugins are
+  `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-27T17:26:37.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.

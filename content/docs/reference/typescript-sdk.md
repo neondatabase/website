@@ -3,11 +3,14 @@ title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
 summary: >-
-  Covers the setup and usage of the Neon TypeScript SDK to programmatically
-  manage projects, branches, databases, and other resources within the Neon
-  platform, simplifying API interactions and resource management.
+  The Neon TypeScript SDK (`@neondatabase/api-client` on npm) is a typed
+  wrapper around the Neon REST API. It lets you programmatically create,
+  update, and delete projects, branches, databases, endpoints, roles,
+  organizations, and consumption metrics. It provides TypeScript type safety,
+  IDE autocompletion, and structured Axios error handling. Install via npm,
+  yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

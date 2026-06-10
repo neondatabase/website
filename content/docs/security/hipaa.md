@@ -1,11 +1,13 @@
 ---
 title: HIPAA Compliance
 summary: >-
-  Covers the setup of HIPAA compliance for organizations using Neon, detailing
-  the self-serve process to enable features and accept the Business Associate
-  Agreement (BAA) for handling Protected Health Information (PHI).
+  HIPAA compliance on Neon is a self-serve feature on the Scale plan.
+  Customers can accept a Business Associate Agreement (BAA) and enable PHI
+  protection at the organization and project level via the Console, API, or
+  CLI. Enabling HIPAA on a project is irreversible and triggers a compute
+  restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.

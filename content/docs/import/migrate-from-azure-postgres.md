@@ -3,13 +3,18 @@ title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
 summary: >-
-  Covers the migration of a database from Azure PostgreSQL to Neon using logical
-  replication, detailing the necessary preparations and steps to ensure minimal
-  downtime during the process.
+  Migration guide for moving an Azure Database for PostgreSQL instance to Neon
+  using Postgres logical replication, which streams row changes to minimize
+  downtime during the cutover. Use this page when you need a live-replication
+  approach rather than a full-stop dump: it walks through setting wal_level to
+  LOGICAL in Azure, creating a replication role and publication, importing the
+  schema with pg_dump, and creating a subscription on the Neon side.
+  Alternative paths using pg_dump/pg_restore, pgAdmin, and CSV import are also
+  described.
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.

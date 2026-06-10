@@ -1,12 +1,15 @@
 ---
 title: Manage databases
 summary: >-
-  Covers the management of databases within Neon's project branches, including
-  creation, schema details, and privileges, as well as interfaces for database
-  operations like the Neon Console, CLI, API, and SQL.
+  Neon databases are Postgres containers for schemas, tables, and indexes that
+  exist within a project branch. Use this page to create, rename, or delete
+  databases via the Neon Console, CLI, API, or SQL. Note that the TABLESPACE
+  parameter is not supported. Because Neon roles are not full Postgres
+  superusers, ownership transfers require a group-role workaround using
+  ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-23T09:17:35.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.

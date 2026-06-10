@@ -1,13 +1,16 @@
 ---
 title: Postgres extensions
 summary: >-
-  Covers the supported Postgres extensions in Neon, including version
-  compatibility and installation instructions, along with options for updating
-  and requesting additional extensions.
+  Neon's supported Postgres extensions reference lists every available
+  extension with version numbers by Postgres version, so you can confirm
+  availability before running CREATE EXTENSION. Use this page to check which
+  extensions are supported, install or update them with ALTER EXTENSION, request
+  new ones, configure shared_preload_libraries via the API, or understand the
+  experimental extension opt-in policy.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-05-29T09:07:33.053Z'
+updatedOn: '2026-06-09T00:05:06.030Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -43,6 +46,8 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [intarray](/docs/extensions/intarray)                                                            |     1.5 |     1.5 |     1.5 |     1.5 |    1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ip4r](https://github.com/RhodiumToad/ip4r)                                                      |     2.4 |     2.4 |     2.4 |     2.4 |    2.4 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [isn](https://www.postgresql.org/docs/16/isn.html)                                               |     1.2 |     1.2 |     1.2 |     1.2 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [lakebase_text](/docs/extensions/lakebase-text)                                                  |       - |       - |     0.1 |     0.1 |    0.1 | Early access. Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                    |
+| [lakebase_vector](/docs/extensions/lakebase-vector)                                              |       - |       - |     0.1 |     0.1 |    0.1 | Early access. Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                    |
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |     1.1 |     1.1 |     1.1 |     1.1 |    1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ltree](/docs/extensions/ltree)                                                                  |     1.2 |     1.2 |     1.2 |     1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |

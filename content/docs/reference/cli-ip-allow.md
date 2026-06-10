@@ -2,11 +2,14 @@
 title: 'Neon CLI command: ip-allow'
 subtitle: 'Manage the IP allowlist: list, add, remove, and reset allowed IPs'
 summary: >-
-  Covers the usage of the `ip-allow` command in the Neon CLI to manage the IP
-  allowlist for a Neon project, including actions to list, add, remove, and
-  reset IP addresses.
+  The Neon CLI `ip-allow` command controls project-level IP allowlists with
+  subcommands `list`, `add`, `remove`, and `reset`, supporting individual IP
+  addresses, IP ranges, and CIDR notation. Use this page when you need to
+  restrict database access to specific IPs from the command line, rather than
+  through the Neon console. The `add` subcommand accepts a `--protected-only`
+  flag to scope the allowlist to protected branches only.
 enableTableOfContents: true
-updatedOn: '2026-02-26T16:28:03.963Z'
+updatedOn: '2026-06-10T09:19:01.120Z'
 ---
 
 ## Before you begin
@@ -78,11 +81,11 @@ neon ip-allow add [ips ...] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `add` subcommand supports these options:
 
-| Option             | Description                                                                                                        | Type   |                      Required                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
-| `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
-| `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
-| `--protected-only` | If true, the list will be applied only to protected branches. Use `--protected-only false` to remove this setting. | string |                                                     |
+| Option             | Description                                                                                                        | Type    |                      Required                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------- | :-------------------------------------------------: |
+| `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string  |                                                     |
+| `--project-id`     | Project ID                                                                                                         | string  | Only if your Neon account has more than one project |
+| `--protected-only` | If true, the list will be applied only to protected branches. Use `--protected-only false` to remove this setting. | boolean |                                                     |
 
 #### Example
 

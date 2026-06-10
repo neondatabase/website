@@ -1,14 +1,17 @@
 ---
 title: Migrate from MySQL to Neon Postgres
 summary: >-
-  Covers the migration of a MySQL database to Neon Postgres using the `pgloader`
-  utility, detailing prerequisites, credential retrieval, and data
-  transformation processes.
+  MySQL to Neon Postgres migration uses pgloader, which reads from a MySQL
+  source and streams data into Postgres via the COPY protocol, automatically
+  transforming data types. Use this page when moving an existing MySQL database
+  to Neon. It covers credentials, connection string setup including the required
+  endpoint ID workaround, and running pgloader from the command line or Docker.
+  Neon's Free plan supports up to 0.5 GB; larger databases require a paid plan.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/import/import-from-mysql
-updatedOn: '2026-05-12T17:58:17.469Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

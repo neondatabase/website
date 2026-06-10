@@ -2,11 +2,15 @@
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
 summary: >-
-  Step-by-step guide for creating a Neon project and connecting it to a
-  RedwoodSDK application, including setting up dependencies and storing
-  connection credentials.
+  RedwoodSDK is a full-stack framework for Cloudflare Workers, and connecting it
+  to Neon Postgres requires choosing between two drivers: postgres.js or the
+  Neon serverless driver (@neondatabase/serverless). This guide walks through
+  creating a Neon project, installing the chosen driver, storing the
+  DATABASE_URL connection string in .env, and configuring route handlers in
+  TypeScript to query Postgres on Neon. Use this page when building a RedwoodSDK
+  app on Cloudflare that needs a serverless Postgres backend.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.192Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"

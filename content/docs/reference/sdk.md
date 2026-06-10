@@ -1,11 +1,16 @@
 ---
 title: Neon SDKs
 summary: >-
-  Covers the setup of Client and Management SDKs for Neon, enabling application
-  developers to implement user authentication and database queries, as well as
-  manage platform resources programmatically.
+  Neon SDKs split into two categories: Client SDKs (TypeScript) for building
+  apps with the Data API and Neon Auth, and Management SDKs (TypeScript, Python,
+  @neondatabase/toolkit) for programmatically creating and controlling projects,
+  branches, databases, endpoints, and roles via the Neon API. Client SDKs target
+  app developers who need database queries and user authentication; Management
+  SDKs target platform automation and DevOps workflows. Community-maintained Go
+  and Node.js/Deno API wrappers are listed here but are not officially supported
+  by Neon.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.813Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon provides two categories of SDKs to support different use cases:

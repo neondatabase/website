@@ -2,14 +2,18 @@
 title: Connection errors
 subtitle: Learn how to resolve connection errors
 summary: >-
-  Covers how to resolve various connection errors encountered when using Neon,
-  including issues related to endpoint IDs, authentication failures, and
-  database server accessibility.
+  Neon connection error troubleshooting reference maps named Postgres errors to
+  root causes and fixes. Errors covered include SNI endpoint ID missing,
+  password auth failures, Prisma P1001 cold-start timeouts, PgBouncer
+  unsupported startup parameters, max_connections exhaustion, and DNS
+  resolution failures. Use this page when a connection attempt returns a named
+  error and you need the exact fix rather than general connection setup
+  guidance.
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:

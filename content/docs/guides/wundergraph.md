@@ -3,12 +3,15 @@ title: Use WunderGraph with Neon
 subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in
   minutes
 summary: >-
-  Step-by-step guide for integrating WunderGraph with a Neon database to create
-  serverless applications, including setup instructions for deploying a
-  full-stack app with Next.js in under 15 minutes.
+  WunderGraph is an open-source Backend for Frontend (BFF) framework that
+  introspects a Neon Postgres database and exposes it as a typesafe GraphQL or
+  JSON-RPC API, enabling a fully serverless Next.js stack deployable on
+  WunderGraph Cloud in under 15 minutes. Use this guide when you want to connect
+  a Neon project to WunderGraph, generate a typesafe client, and ship a
+  full-stack app without a dedicated CI/CD pipeline or DevOps setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_

@@ -1,8 +1,19 @@
 ---
 title: Agent Skills
 subtitle: Teach your AI coding assistant how to work with Neon
+summary: >-
+  Agent Skills are structured context files (SKILL.md) that give AI coding
+  assistants accurate knowledge of Neon's APIs, SDKs, and best practices so
+  generated code is correct on the first attempt. Install them when using
+  Cursor, Claude Code, OpenAI Codex, or any Agent Skills-compatible tool to
+  avoid common mistakes such as wrong imports, missing connection pooling, or
+  incorrect serverless driver usage. Skills are installed via `npx skills add`,
+  `neonctl init`, or editor plugins at project level (committable to the repo)
+  or globally; available skills include `neon-postgres`,
+  `neon-postgres-branches`, `neon-postgres-egress-optimizer`, and
+  `claimable-postgres`.
 enableTableOfContents: true
-updatedOn: '2026-04-16T20:40:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit

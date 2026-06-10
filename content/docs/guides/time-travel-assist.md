@@ -2,11 +2,16 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 summary: >-
-  Covers the setup of Time Travel in Neon, enabling users to query data at
-  specific points in time within the history window used for instant restore,
-  using the SQL Editor, Backup & Restore flow, or Neon CLI for historical data analysis.
+  Time Travel in Neon lets you run read-only queries against any point in time
+  within your project's instant restore history window. A temporary branch is
+  created for the query and automatically deleted 30 seconds after you stop
+  querying. Use it to investigate data anomalies, verify a restore point before
+  committing a branch restore, or retrieve historical row states without
+  altering production data. Access Time Travel from the SQL Editor, the Backup
+  & Restore page, or the Neon CLI using RFC 3339 timestamps or Log Sequence
+  Numbers (LSN).
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time still covered by your project's **history window** (the retention configured for **instant restore**) and then run queries against that connection. Time Travel is part of Neon's **instant restore** feature, which maintains a history of changes through Write-Ahead Log (WAL) records.

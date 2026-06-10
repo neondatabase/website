@@ -1,12 +1,16 @@
 ---
 title: System operations
 summary: >-
-  Covers the operations performed by the Neon Control Plane on various
-  resources, including user-initiated actions like creating branches and
-  system-initiated tasks such as monitoring compute availability.
+  Neon Control Plane system operations are discrete, trackable actions that the
+  control plane records for every user-initiated or system-initiated change to a
+  project. Use this page to view operation history via the Console, CLI, or API;
+  poll operation status before issuing the next API call to prevent race
+  conditions; and recover from 423 Locked responses using exponential backoff.
+  Terminal statuses are finished, skipped, and cancelled; failed is non-terminal
+  and can be retried.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).

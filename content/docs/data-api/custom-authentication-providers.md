@@ -2,11 +2,15 @@
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 summary: >-
-  Covers the configuration of custom authentication providers for the Data API,
-  enabling integration with existing systems that issue JSON Web Tokens (JWTs)
-  like Auth0, Clerk, and AWS Cognito.
+  The Neon Data API works with any JWT-issuing identity system. Supply a JWKS
+  URL to let the Data API validate tokens and enforce Row-Level Security,
+  without requiring Neon Auth. Provider-specific JWKS URL formats and JWT
+  Audience (aud claim) requirements are given for Auth0, Clerk, AWS Cognito,
+  Azure AD, Firebase, and Keycloak. Use this page when your application already
+  uses an existing auth provider and you need provider-specific configuration
+  details rather than the default Neon Auth setup.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.006Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---

@@ -3,11 +3,16 @@ title: The fuzzystrmatch extension
 subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
   Postgres
 summary: >-
-  Covers the setup and usage of the `fuzzystrmatch` extension in Postgres,
-  providing functions for fuzzy string matching to handle typos, phonetic
-  variations, and approximate text comparisons.
+  The `fuzzystrmatch` extension adds fuzzy and phonetic string matching to
+  Postgres using algorithms including Soundex, Levenshtein edit distance,
+  Metaphone/Double Metaphone, and Daitch-Mokotoff Soundex. Use it when
+  queries must tolerate typos, name misspellings, or phonetic variations
+  such as matching "Jon Dow" against "John Doe" or deduplicating customer
+  records. Levenshtein inputs are capped at 255 characters. Soundex and
+  Metaphone functions are unreliable with UTF-8 multibyte encodings; use
+  `daitch_mokotoff` or `levenshtein` for non-ASCII data.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.829Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `fuzzystrmatch` extension for Postgres provides a suite of functions to determine similarities and distances between strings. This is useful for applications that need to handle misspellings, phonetic variations, or simply find "close enough" matches in text data. Whether you're building a search engine, cleaning customer data, or trying to identify duplicate records, `fuzzystrmatch` offers powerful tools to compare strings beyond exact equality.

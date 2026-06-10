@@ -1,11 +1,13 @@
 ---
 title: Monitoring dashboard
 summary: >-
-  Covers the setup of the Monitoring dashboard in the Neon console, detailing
-  how to view and analyze system and database metrics based on your Neon plan
-  and selected compute or branch.
+  The Monitoring dashboard in the Neon console shows real-time graphs for RAM,
+  CPU, connection counts, database size, deadlocks, row changes, replication
+  delay, and cache hit rate. Use it to interpret each metric, diagnose
+  connection saturation, cache misses, or replication lag, and decide whether
+  to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:

@@ -2,13 +2,16 @@
 title: Neon Private Networking
 subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 summary: >-
-  Covers the setup of secure connections to Neon databases using AWS
-  PrivateLink, allowing traffic to remain within AWS's private network instead
-  of the public internet.
+  Neon Private Networking routes database traffic through AWS PrivateLink,
+  keeping connections entirely within AWS's private network rather than the
+  public internet. Use this page when your client application runs on AWS and
+  you need to eliminate public internet exposure for a Neon project on the Scale
+  or Business plan (org Admin required). Removed VPC endpoints cannot be
+  re-added to the same organization.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-04-29T16:04:30.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -57,10 +60,14 @@ To configure Neon Private Networking, perform the following steps:
 
        - **us-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`

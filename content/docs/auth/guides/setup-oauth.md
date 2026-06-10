@@ -2,11 +2,17 @@
 title: Set up OAuth
 subtitle: Add Google, GitHub, or Vercel sign-in to your application
 summary: >-
-  Step-by-step guide for setting up OAuth sign-in with Google, GitHub, or Vercel
-  in your application using Neon Auth, including Google Cloud redirect URIs,
-  trusted domains, and production configuration.
+  Neon Auth OAuth setup adds Google, GitHub, and Vercel social sign-in to
+  an application using `signIn.social()`, with Google enabled in development via
+  shared credentials and GitHub and Vercel requiring custom OAuth app credentials.
+  For production, register the provider's authorized redirect URI as
+  `{NEON_AUTH_BASE_URL}/callback/{provider}` in each provider's console (not the
+  app's callbackURL), and add every callbackURL origin to Neon Auth's trusted
+  domains allowlist. Because each Neon branch has its own Auth base URL, OAuth
+  credentials and redirect URIs must be configured per branch; preview
+  deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-05-15T15:00:29.570Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

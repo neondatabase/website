@@ -2,11 +2,15 @@
 title: Postgres array_length() function
 subtitle: Determine the length of an array
 summary: >-
-  How to use the Postgres `array_length()` function to determine the length of
-  an array along a specified dimension, including examples for data analysis and
-  application development.
+  The Postgres `array_length(anyarray, int)` function returns the number of
+  elements along a specified dimension of an array, returning NULL when the
+  dimension does not exist or the input is NULL. Use it to filter rows by array
+  size in WHERE clauses, enforce array size with CHECK constraints, or inspect
+  multi-dimensional arrays by querying each dimension separately. Differs from
+  `cardinality()`, which counts all elements across all dimensions, and from
+  `array_dims()`, which returns dimension bounds as text.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `array_length()` function is used to determine the length of an array along a specified dimension.

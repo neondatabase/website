@@ -2,11 +2,13 @@
 title: Manage Data API
 subtitle: 'Configure schemas, manage authentication providers, and control API access.'
 summary: >-
-  How to manage the Data API by configuring schemas, setting up authentication
-  providers, and controlling API access to customize its behavior and security
-  settings.
+  Neon Data API management covers post-enablement configuration: registering
+  or replacing JWT authentication providers via JWKS URL, and tuning advanced
+  settings such as exposed schemas, anonymous role, and CORS origins. Use this
+  page to switch auth providers, tighten security, or manage the API lifecycle
+  programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.810Z'
+updatedOn: '2026-06-05T17:20:02.273Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -14,12 +16,13 @@ updatedOn: '2026-03-20T21:22:58.810Z'
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
-    <a href="/docs/data-api/access-control">Access control & security</a>
+    <a href="/docs/data-api/access-control">Access control &amp; security</a>
     <a href="/docs/data-api/troubleshooting">Troubleshooting</a>
+    <a href="/docs/reference/cli-data-api">Neon CLI: data-api command</a>
   </DocsList>
 </InfoBlock>
 
-This page covers managing the Data API after it is enabled. To enable via the Console, see [Getting started with Data API](/docs/data-api/get-started). To enable programmatically, see [Enable via the Neon API](#enable). To disable from the Console, scroll to **Disable** at the bottom of the **Settings** tab.
+This page covers managing the Data API after it is enabled. To enable via the Console, see [Getting started with Data API](/docs/data-api/get-started). To enable programmatically, see [Enable via the Neon API](#enable) or [Enable via the CLI](#enable-via-the-cli). To disable from the Console, scroll to **Disable** at the bottom of the **Settings** tab.
 
 ## Manage authentication providers
 
@@ -260,3 +263,47 @@ Disabling the Data API immediately terminates all active connections and blocks 
 </Admonition>
 
 For the full Data API specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdataapi).
+
+## Manage via the Neon CLI
+
+You can also manage the Data API from the terminal using the [Neon CLI](/docs/reference/neon-cli). The `data-api` command requires **neonctl 2.22.2** or later.
+
+### Enable via the CLI
+
+Provision the Data API for a database. The `--auth-provider` option accepts `neon_auth` or `external`. For external providers, also pass `--jwks-url`:
+
+```bash
+neon data-api create --database neondb --auth-provider neon_auth
+```
+
+### Get Data API details
+
+Show the current status and configuration:
+
+```bash
+neon data-api get --database neondb
+```
+
+### Update configuration
+
+Update settings using [settings flags](/docs/reference/cli-data-api#settings-flags). By default, flags are merged with the current configuration. Pass `--replace` to overwrite all settings with only the provided flags:
+
+```bash
+neon data-api update --database neondb --db-max-rows 1000
+```
+
+To refresh the schema cache without changing settings:
+
+```bash
+neon data-api refresh-schema --database neondb
+```
+
+### Disable
+
+Remove the Data API from a database:
+
+```bash
+neon data-api delete --database neondb
+```
+
+For the full command reference including all options and flags, see [Neon CLI command: data-api](/docs/reference/cli-data-api).

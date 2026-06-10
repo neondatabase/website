@@ -2,9 +2,17 @@
 title: Connect a Tortoise ORM application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Python async application
 summary: >-
-  How to connect an asynchronous Python application to a Neon project using Tortoise ORM, the asyncpg driver.
+  Tortoise ORM is an asyncio-native Python ORM (inspired by Django) that
+  connects to Neon Postgres via the asyncpg driver, enabling non-blocking
+  database access in FastAPI, Starlette, and other async frameworks. Use this
+  guide for setup including virtual environment configuration, connection string
+  formatting with ssl=true, model definition, schema generation, and
+  transaction rollback with in_transaction(). It walks through installing
+  tortoise-orm[asyncpg], loading credentials from a .env file with
+  python-dotenv, and avoiding hanging processes by calling
+  Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 

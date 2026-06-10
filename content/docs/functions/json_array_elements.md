@@ -2,11 +2,16 @@
 title: Postgres json_array_elements() function
 subtitle: Expand a JSON array into a set of rows
 summary: >-
-  Covers the use of the `json_array_elements` function to expand a JSON array
-  into individual rows, simplifying data extraction from JSON structures in
-  PostgreSQL.
+  `json_array_elements(json)` is a PostgreSQL set-returning function that unpacks
+  a JSON array into one row per element, returning each element as a JSON value
+  rather than plain text. Use it to JOIN, filter, or aggregate across array
+  elements stored in a JSON column inside the database, avoiding the cost of
+  shipping full JSON payloads to application code for processing. For binary
+  jsonb columns, `jsonb_array_elements` gives better performance; use
+  `json_array_elements_text` when plain-text output is needed instead of JSON
+  values.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.862Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 You can use `json_array_elements` function to expand a `JSON` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.

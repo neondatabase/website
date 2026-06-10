@@ -3,11 +3,16 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 summary: >-
-  Step-by-step guide for connecting your Neon database to Sequin to capture and
-  stream real-time changes, including inserts, updates, and deletes, to various
-  applications and services using logical replication.
+  Sequin is an open-source tool that reads Neon's Write Ahead Log via logical
+  replication and forwards every insert, update, and delete to external services
+  with exactly-once delivery. Use this guide when you need to trigger webhooks,
+  fan out work to cloud functions, or stream database changes to services like
+  trigger.dev without building a custom CDC pipeline. Changes are delivered via
+  HTTP push (webhooks) or HTTP pull (SQS-style). Enabling logical replication
+  sets wal_level=logical, which is permanent and keeps compute active while
+  consumers are connected.
 enableTableOfContents: true
-updatedOn: '2026-03-03T14:18:20.108Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.

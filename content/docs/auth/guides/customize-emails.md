@@ -2,11 +2,16 @@
 title: Customize emails
 subtitle: Custom branding, content, and delivery for Neon Auth emails
 summary: >-
-  Customize the emails Neon Auth sends to your users — including OTP codes,
-  magic links, and verification emails — by intercepting delivery events with
-  webhooks and sending them through your own email provider.
+  Neon Auth email customization lets you intercept OTP code and magic link
+  delivery events via webhooks and send fully branded emails through your own
+  provider (Resend, SendGrid, Postmark, or any SMTP service) instead of Neon's
+  default shared-branded emails. Use this page when you need custom sender
+  addresses, HTML templates, multi-language support, or your own branding for
+  sign-in, email-verification, and password-reset emails. Dashboard-based email
+  templates are not yet available; webhook-based delivery is the current
+  customization path.
 enableTableOfContents: true
-updatedOn: '2026-05-27T07:50:31.326Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

@@ -3,13 +3,18 @@ title: Migrate from Render to Neon Postgres
 subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
   and pg_restore
 summary: >-
-  Covers the migration process of a database from Render to Neon Postgres using
-  `pg_dump` and `pg_restore`, detailing prerequisites and step-by-step
-  instructions for preparing and exporting data.
+  Migration guide for moving a PostgreSQL database from Render to Neon using
+  `pg_dump` and `pg_restore`. Retrieve the Render External Database URL, dump
+  the public schema to a custom-format file (`-Fc`), then restore to Neon using
+  an unpooled connection string with `--no-owner` and `--no-acl`. Choose this
+  page over the general Postgres migration guide when Render is the source, as
+  it covers Render-specific connection steps and the ownership flags required
+  when moving between hosted providers. Also covers logical replication as an
+  alternative for large databases with minimal downtime.
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2026-05-12T11:27:52.409Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate a database from Render to Neon Postgres.

@@ -635,6 +635,14 @@
                   slug: ai/ai-scale-with-neon
             - title: Google Colab
               slug: ai/ai-google-colab
+        - title: Lakebase Search
+          icon: sparks
+          slug: ai/lakebase-search
+          items:
+            - title: Overview
+              slug: ai/lakebase-search
+            - title: Get started
+              slug: ai/lakebase-search-get-started
     - section: Tools & Workflows
       items:
         - title: API, CLI & SDKs
@@ -669,6 +677,8 @@
                   slug: reference/cli-vpc
                 - title: branches
                   slug: reference/cli-branches
+                - title: checkout
+                  slug: reference/cli-checkout
                 - title: databases
                   slug: reference/cli-databases
                 - title: roles
@@ -677,8 +687,16 @@
                   slug: reference/cli-operations
                 - title: connection-string
                   slug: reference/cli-connection-string
+                - title: psql
+                  slug: reference/cli-psql
+                - title: link
+                  slug: reference/cli-link
                 - title: set-context
                   slug: reference/cli-set-context
+                - title: data-api
+                  slug: reference/cli-data-api
+                - title: neon-auth
+                  slug: reference/cli-neon-auth
                 - title: init
                   slug: reference/cli-init
                 - title: completion
@@ -1158,6 +1176,10 @@
           slug: extensions/hstore
         - title: intarray
           slug: extensions/intarray
+        - title: lakebase_text
+          slug: extensions/lakebase-text
+        - title: lakebase_vector
+          slug: extensions/lakebase-vector
         - title: ltree
           slug: extensions/ltree
         - title: neon

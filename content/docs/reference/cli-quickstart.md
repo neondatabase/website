@@ -2,11 +2,16 @@
 title: Neon CLI quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 summary: >-
-  How to quickly set up and authenticate the Neon CLI, including installation
-  instructions for various platforms and methods for managing authentication
-  through web or API key options.
+  The Neon CLI quickstart installs neonctl on macOS, Windows, or Linux via
+  Homebrew, npm, or bun, then authenticates using browser-based `neon auth` or
+  a personal API key. Use this page when setting up terminal access to Neon for
+  the first time, before working through the full CLI reference. It also covers
+  the `.neon` context file (`neon set-context`) to avoid repeating
+  `--project-id` and `--org-id` flags, shell tab completion, and first commands
+  like `neon projects list`, `neon branches create`, and
+  `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-05T17:12:03.638Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -113,21 +118,29 @@ export NEON_API_KEY=<your-api-key>
 
 For more about authenticating, see [Neon CLI commands — auth](/docs/reference/cli-auth).
 
-## Set up your context file
+## Link your project
 
-Context files allow you to use CLI commands without specifying your project ID or organization ID with each command.
+The easiest way to set up CLI context is with [`neon link`](/docs/reference/cli-link). It guides you through organization and project selection and writes a `.neon` context file in your project directory. Requires **neonctl 2.22.2** or later.
+
+```bash
+neon link
+```
+
+You can also link non-interactively for scripts and CI:
+
+```bash
+neon link --org-id <your-org-id> --project-id <your-project-id>
+```
 
 <Admonition type="tip">
 If you run a CLI command without an organization context, the CLI will prompt you to select an organization and offer to save it as your default. If you choose to save, this creates a `.neon` context file automatically.
 </Admonition>
 
-To set the context for your Neon project:
+<Admonition type="tip">
+Once linked, you can run CLI commands from any subdirectory of your project. The CLI walks up parent folders to find the `.neon` file, so you don't need to be in the root directory. The `.neon` file is also automatically added to `.gitignore` so it's not committed by accident.
+</Admonition>
 
-```bash
-neon set-context --project-id <your-project-id>
-```
-
-To set the context for both your Neon organization and a Neon project:
+Alternatively, set context manually with [`neon set-context`](/docs/reference/cli-set-context):
 
 ```bash
 neon set-context --org-id <your-org-id> --project-id <your-project-id>
@@ -212,6 +225,12 @@ neon branches create --name <branch-name>
 
 Set your project context or specify `--project-id <your-project-id>` if you have more than one Neon project.
 
+To switch the active branch in your context file, use [`neon checkout`](/docs/reference/cli-checkout):
+
+```bash
+neon checkout <branch>
+```
+
 For more about the `branches` command, see [Neon CLI commands — branches](/docs/reference/cli-branches).
 
 ### Get a connection string
@@ -226,6 +245,12 @@ For a specific branch, specify the branch name:
 
 ```bash
 neon connection-string <branch-name>
+```
+
+To connect with `psql` directly, use the dedicated [`neon psql`](/docs/reference/cli-psql) command:
+
+```bash
+neon psql
 ```
 
 There's lots more you can do with the `connection-string` command. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).

@@ -1,10 +1,14 @@
 ---
 title: Manage Neon Organizations
 summary: >-
-  Covers the management of Neon organizations, including creating organizations,
-  inviting members, and setting permissions based on assigned roles.
+  Neon organization management covers Console workflows for creating
+  organizations, inviting members and collaborators, promoting users to Admin,
+  requiring 2FA, and managing per-organization billing. Use this page to add or
+  remove members, adjust role permissions, or delete an organization from the
+  UI. Admins control deletions, billing changes, 2FA enforcement, and project
+  deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-03-13T19:35:31.437Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.

@@ -2,15 +2,18 @@
 title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
-  How to build application backends on Neon. Postgres, Auth, Data API, Storage,
-  Compute, and AI Gateway, all instant, branchable, and serverless.
+  Neon documentation root covers the full Neon backend platform: serverless
+  Postgres with branching and autoscaling, Neon Auth, Data API, and upcoming
+  Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
+  editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 layout: wide
 redirectFrom:
   - /guides/neon-azure-integration
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-05-28T21:30:27.166Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <TwinPaths>

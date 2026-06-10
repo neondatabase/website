@@ -2,13 +2,15 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 summary: >-
-  Covers the monitoring of resources and metrics in Neon, including usage
-  tracking, performance analysis, and integration with Datadog and OpenTelemetry
-  for enhanced observability.
+  Neon's monitoring hub links every observability tool for your databases:
+  the built-in Monitoring dashboard, usage metrics, active queries, query
+  performance, and pg_stat_statements. Find the right tool for your need,
+  from in-console visibility to external export for Datadog, Grafana Cloud,
+  and New Relic.
 enableTableOfContents: false
 redirectFrom:
   - /docs/introduction/monitor-external-tools
-updatedOn: '2026-03-26T15:20:43.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.

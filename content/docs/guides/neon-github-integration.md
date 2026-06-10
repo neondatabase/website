@@ -3,13 +3,19 @@ title: The Neon GitHub integration
 subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
   workflows
 summary: >-
-  Covers the setup of the Neon GitHub integration, enabling connection between a
-  Neon Postgres project and a GitHub repository for database
-  development and automated workflows using GitHub Actions.
+  The Neon GitHub integration connects a Neon Postgres project to a GitHub
+  repository by installing a GitHub App that stores a NEON_API_KEY secret and
+  NEON_PROJECT_ID variable in the repo. GitHub Actions workflows use these to
+  create a database branch when a pull request opens and delete it on close.
+  Choose this page to install the integration, add the sample branching
+  workflow, or build custom workflows with the create-branch, delete-branch,
+  schema-diff, and reset-branch actions. Also covers disconnecting a project,
+  removing the integration, and example apps for Vercel, Cloudflare Pages, and
+  Fly.io preview deployments.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2026-04-20T17:20:38.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).

@@ -2,11 +2,15 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 summary: >-
-  Step-by-step guide for connecting a SvelteKit application to a Neon project,
-  including project creation, dependency installation, and configuration of
-  database credentials.
+  SvelteKit integration with Neon Postgres connects a SvelteKit app to a
+  serverless Postgres database through a secure server-side route using
+  node-postgres, postgres.js, or the Neon serverless driver. Use this guide
+  when setting up a new SvelteKit project that needs a Postgres backend, covering
+  Neon project creation, db.server.ts configuration, and a +page.server.ts load
+  function. Requires a DATABASE_URL connection string with sslmode=require and
+  channel_binding=require.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.056Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"
