@@ -171,6 +171,7 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                   to={destination.url}
                   isExternal={isExternalDestination}
                   withArrow
+                  onClick={() => handleLinkClick(destination.label)}
                 >
                   {destination.label}
                 </Link>
