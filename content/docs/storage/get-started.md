@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-10T16:53:44.852Z'
+updatedOn: '2026-06-10T16:54:18.281Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -179,11 +179,11 @@ print('Uploaded!')
 # Create a bucket
 aws s3api create-bucket \
   --bucket my-bucket \
-  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 
 # Upload a file
 aws s3 cp hello.txt s3://my-bucket/hello.txt \
-  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -212,7 +212,7 @@ print(response['Body'].read().decode('utf-8'))  # Hello from Neon Storage!
 
 ```bash shouldWrap
 aws s3 cp s3://my-bucket/hello.txt ./downloaded.txt \
-  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
