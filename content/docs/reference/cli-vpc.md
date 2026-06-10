@@ -10,7 +10,7 @@ summary: >-
   aws-us-west-2, aws-eu-central-1, aws-ap-southeast-1, aws-ap-southeast-2, and
   azure-eastus2.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:19:01.120Z'
 ---
 
 ## Before you begin
@@ -51,6 +51,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                      | string |                                                                                                                                   |
 | `--org-id`       | Organization ID                                                                                                                                                    | string | Only if the user has more than one organization. If not specified, and the user has only one organization, that `org_id` is used. |
 | `--region-id`    | The region ID. Possible values: `aws-us-west-2`, `aws-ap-southeast-1`, `aws-ap-southeast-2`, `aws-eu-central-1`, `aws-us-east-2`, `aws-us-east-1`, `azure-eastus2` | string | yes                                                                                                                               |
+
+### `assign` options
+
+| Option    | Description                                        | Type   |
+| :-------- | :------------------------------------------------- | :----- |
+| `--label` | An optional descriptive label for the VPC endpoint | string |
 
 ### Examples
 
@@ -108,10 +114,16 @@ The `vpc project` subcommand lets you list, configure, or remove VPC endpoint re
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `vpc project` subcommand supports these options:
 
-| Option           | Description                                                                                   | Type   | Required |
-| :--------------- | :-------------------------------------------------------------------------------------------- | :----- | :------- |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--project-id`   | The Project ID.                                                                               | string | yes      |
+| Option           | Description                                                                                   | Type   | Required                                            |
+| :--------------- | :-------------------------------------------------------------------------------------------- | :----- | :-------------------------------------------------- |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | The Project ID.                                                                               | string | Only if your Neon account has more than one project |
+
+### `restrict` options
+
+| Option    | Description                                                    | Type   |
+| :-------- | :------------------------------------------------------------- | :----- |
+| `--label` | An optional descriptive label for the VPC endpoint restriction | string |
 
 ### Examples
 

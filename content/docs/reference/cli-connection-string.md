@@ -9,7 +9,7 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -39,17 +39,18 @@ neon connection-string [branch[@timestamp|@LSN]] [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `connection-string` command supports these options:
 
-| Option            | Description                                                                                          | Type    |                      Required                       |
-| ----------------- | ---------------------------------------------------------------------------------------------------- | ------- | :-------------------------------------------------: |
-| `--context-file`  | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name        | string  |                                                     |
-| `--project-id`    | Project ID                                                                                           | string  | Only if your Neon account has more than one project |
-| `--role-name`     | Role name                                                                                            | string  |     Only if your branch has more than one role      |
-| `--database-name` | Database name                                                                                        | string  |   Only if your branch has more than one database    |
-| `--pooled`        | Construct a pooled connection. The default is `false`.                                               | boolean |                                                     |
-| `--prisma`        | Construct a connection string for use with Prisma. The default is `false`.                           | boolean |                                                     |
-| `--endpoint-type` | The compute type. The default is `read-write`. The choices are `read_only` and `read_write`          | string  |                                                     |
-| `--extended`      | Show extended information. The default is `false`.                                                   | boolean |                                                     |
-| `--psql`          | Connect to a database via psql using connection string. `psql` must be installed to use this option. | boolean |                                                     |
+| Option            | Description                                                                                                                                                   | Type    |                      Required                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :-------------------------------------------------: |
+| `--context-file`  | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                 | string  |                                                     |
+| `--project-id`    | Project ID                                                                                                                                                    | string  | Only if your Neon account has more than one project |
+| `--role-name`     | Role name                                                                                                                                                     | string  |     Only if your branch has more than one role      |
+| `--database-name` | Database name                                                                                                                                                 | string  |   Only if your branch has more than one database    |
+| `--pooled`        | Construct a pooled connection. The default is `false`.                                                                                                        | boolean |                                                     |
+| `--prisma`        | Construct a connection string for use with Prisma. The default is `false`.                                                                                    | boolean |                                                     |
+| `--endpoint-type` | The compute type. The default is `read-write`. The choices are `read_only` and `read_write`                                                                   | string  |                                                     |
+| `--extended`      | Show extended information.                                                                                                                                    | boolean |                                                     |
+| `--ssl`           | SSL mode. The default is `require`. Choices: `require`, `verify-ca`, `verify-full`, `omit`                                                                    | string  |                                                     |
+| `--psql`          | Connect to a database via psql using connection string. No psql installation required. Neonctl uses a built-in implementation if psql is not on your `$PATH`. | boolean |                                                     |
 
 ### Examples
 
