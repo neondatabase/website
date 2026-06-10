@@ -13,7 +13,7 @@ summary: >-
   agents.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-06-10T17:52:31.210Z'
+updatedOn: '2026-06-10T17:55:26.061Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.
@@ -46,7 +46,7 @@ With the Neon extension, you can:
 
 Click one of the buttons below to install the extension directly, or search for **"Neon - Serverless Postgres"** in your editor's Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X` on Mac).
 
-<div style={{display: 'flex', gap: '12px', alignItems: 'center'}}><a href="vscode:extension/databricks.neon-local-connect"><img src="/docs/local/vscode-install-dark.svg" alt="Add to VS Code" height="32" /></a><a href="cursor:extension/databricks.neon-local-connect"><img src="/docs/local/mcp-install-dark.svg" alt="Add to Cursor" height="32" /></a></div>
+<div style={{display: 'flex', gap: '12px', alignItems: 'center'}}><a href="vscode:extension/databricks.neon-local-connect"><img src="/docs/local/vscode-install-dark.svg" alt="Add to VS Code" height="32" /></a><a href="cursor:extension/databricks.neon-local-connect"><img src="/docs/local/cursor-install-dark.svg" alt="Add to Cursor" height="32" /></a></div>
 
 For other VS Code-compatible editors, install from the [Open VSX Registry](https://open-vsx.org/extension/databricks/neon-local-connect).
 
