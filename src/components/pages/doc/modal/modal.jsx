@@ -169,6 +169,7 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                   theme="black"
                   size="sm"
                   to={destination.url}
+                  isExternal={isExternalDestination}
                   withArrow
                 >
                   {destination.label}
