@@ -7,7 +7,7 @@ summary: >-
   Use these IDs in the model field of any request regardless of which endpoint
   you are using.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:02:23.973Z'
+updatedOn: '2026-06-10T17:16:40.599Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
@@ -66,19 +66,19 @@ Use the `id` field in the `model` parameter of any inference request.
 
 ### OpenAI
 
-| Model ID                        | Notes |
-| ------------------------------- | ----- |
-| `databricks-gpt-5-5-pro`        |       |
-| `databricks-gpt-5-5`            |       |
-| `databricks-gpt-5-4`            |       |
-| `databricks-gpt-5-4-mini`       |       |
-| `databricks-gpt-5-4-nano`       |       |
-| `databricks-gpt-5-3-codex`      |       |
-| `databricks-gpt-5-2-codex`      |       |
-| `databricks-gpt-5-2`            |       |
-| `databricks-gpt-5-1-codex-max`  |       |
-| `databricks-gpt-5-1-codex-mini` |       |
-| `databricks-gpt-5-1`            |       |
+| Model ID                        | Notes                                                              |
+| ------------------------------- | ------------------------------------------------------------------ |
+| `databricks-gpt-5-5-pro`        | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-5`            |                                                                    |
+| `databricks-gpt-5-4`            |                                                                    |
+| `databricks-gpt-5-4-mini`       |                                                                    |
+| `databricks-gpt-5-4-nano`       |                                                                    |
+| `databricks-gpt-5-3-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-2-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-2`            |                                                                    |
+| `databricks-gpt-5-1-codex-max`  | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-1-codex-mini` | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-1`            |                                                                    |
 
 ### Alibaba
 
@@ -88,13 +88,14 @@ Use the `id` field in the `model` parameter of any inference request.
 
 ## Which endpoint to use
 
-You can use any model with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is provider-agnostic. Use a provider-specific endpoint when you need native features:
+Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is the recommended starting point and works with all providers. Use a provider-specific endpoint when required:
 
-| Provider  | Recommended endpoint                     | When to use the native endpoint                                                          |
-| --------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
-| OpenAI    | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for the Responses API                              |
-| Google    | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Alibaba   | `/ai-gateway/mlflow/v1/chat/completions` | —                                                                                        |
+| Provider                               | Recommended endpoint                     | Notes                                                                                    |
+| -------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Anthropic                              | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
+| OpenAI (most models)                   | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
+| OpenAI (`gpt-5-5-pro`, codex variants) | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and do not work with chat/completions             |
+| Google                                 | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Alibaba                                | `/ai-gateway/mlflow/v1/chat/completions` |                                                                                          |
 
 <NeedHelp/>
