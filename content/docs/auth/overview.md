@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -148,7 +148,7 @@ See [Branching authentication](/docs/auth/branching-authentication) for details 
 
 ## Example applications
 
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
+Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [examples/](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
 
 ## Availability
 

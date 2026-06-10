@@ -9,7 +9,7 @@ summary: >-
   (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
   per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
@@ -70,7 +70,7 @@ This requires two backend endpoints:
 <TabItem>
 
 We'll use [Hono](https://hono.dev/) for the server, [`imagekit
-`](https://www.npmjs.com/package/imagekit) for ImageKit interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+`](https://www.npmjs.com/package/imagekit) for ImageKit interaction, and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -171,7 +171,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`imagekitio`](https://pypi.org/project/imagekitio/) (ImageKit Python SDK), and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [imagekitio](https://pypi.org/project/imagekitio/) (ImageKit Python SDK), and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

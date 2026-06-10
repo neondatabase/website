@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Like Fauna, it offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
@@ -577,7 +577,7 @@ RETURNING *;
 
 1.  **Review application queries:** Identify the key queries in your application that interact with FaunaDB.
 2.  **Translate FQL to SQL (focus on key queries):** Translate these key FQL queries into equivalent SQL queries, focusing on the patterns shown in the examples above.
-3.  **Test SQL queries:** Test your translated SQL queries against your Neon Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
+3.  **Test SQL queries:** Test your translated SQL queries against your Neon Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [EXPLAIN ANALYZE](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
 
 <Admonition type="note" title="Recommendation for complex queries">
 Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a short timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)

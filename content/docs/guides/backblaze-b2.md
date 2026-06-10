@@ -12,7 +12,7 @@ summary: >-
   implementations in JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask,
   boto3).
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -99,7 +99,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, [`@aws-sdk/client-s3`](https://www.npmjs.com/package/@aws-sdk/client-s3) and [`@aws-sdk/s3-request-presigner`](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for B2 interaction (due to S3 compatibility), and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) and [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for B2 interaction (due to S3 compatibility), and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -213,7 +213,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python, leveraging S3 compatibility), and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python, leveraging S3 compatibility), and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

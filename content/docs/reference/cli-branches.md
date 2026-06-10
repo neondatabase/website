@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
@@ -23,7 +23,7 @@ updatedOn: '2026-06-05T12:06:47.985Z'
 The `branches` command allows you to list, create, rename, delete, and retrieve information about branches in your Neon project. It also permits setting a branch as the default branch, adding a compute to a branch, adding a [read replica](/docs/introduction/read-replicas), or performing a [schema diff](/docs/guides/schema-diff) between different branches.
 
 <Admonition type="tip" title="Switch the active branch">
-To pin a branch in your local `.neon` context file so subsequent commands target it, use [`neon checkout`](/docs/reference/cli-checkout) (requires neonctl 2.22.2+).
+To pin a branch in your local `.neon` context file so subsequent commands target it, use [neon checkout](/docs/reference/cli-checkout) (requires neonctl 2.22.2+).
 </Admonition>
 
 ## Usage

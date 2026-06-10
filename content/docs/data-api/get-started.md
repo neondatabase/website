@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -234,7 +234,7 @@ Install a client library and run your first query. Choose the option that matche
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Neon Auth](/docs/auth/overview). This library handles token management automatically.
+Use [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Neon Auth](/docs/auth/overview). This library handles token management automatically.
 
 **1. Install**
 
@@ -271,7 +271,7 @@ console.log(data);
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
+Use [@neondatabase/postgrest-js](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 

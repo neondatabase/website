@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-05-22T11:36:40.349Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -24,7 +24,7 @@ The key idea is simple: **pair your agent's execution state with durable databas
 
 Making an agent replayable requires capturing two critical pieces of state at the moment of interruption:
 
-1. **Agent state**: The conversation history, tool calls, and execution graph. The OpenAI Agents SDK provides this via the [`RunState`](https://openai.github.io/openai-agents-python/ref/run_state/) object, which can be serialized to JSON and resumed after a [human-in-the-loop](https://openai.github.io/openai-agents-python/human_in_the_loop/) interruption.
+1. **Agent state**: The conversation history, tool calls, and execution graph. The OpenAI Agents SDK provides this via the [RunState](https://openai.github.io/openai-agents-python/ref/run_state/) object, which can be serialized to JSON and resumed after a [human-in-the-loop](https://openai.github.io/openai-agents-python/human_in_the_loop/) interruption.
 2. **Database state**: The schema and data at the moment of the pause. Neon handles this with copy-on-write **snapshots**, which capture large databases instantly without heavy duplication.
 
 ### What are Neon Snapshots?

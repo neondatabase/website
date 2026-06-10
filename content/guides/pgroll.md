@@ -4,10 +4,10 @@ subtitle: A comprehensive guide to using pgroll for safe, reversible Postgres mi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-06-30T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
-Database schema migrations are a critical but often risky part of application development. Traditional migration tools can lock tables, cause downtime, and make rollbacks difficult, especially for applications that require high availability. [`pgroll`](https://github.com/xataio/pgroll) is an open-source CLI tool that solves this problem for Postgres, enabling zero-downtime, reversible schema changes.
+Database schema migrations are a critical but often risky part of application development. Traditional migration tools can lock tables, cause downtime, and make rollbacks difficult, especially for applications that require high availability. [pgroll](https://github.com/xataio/pgroll) is an open-source CLI tool that solves this problem for Postgres, enabling zero-downtime, reversible schema changes.
 
 This guide will walk you through understanding `pgroll`, and how to use it effectively in your development workflow to ensure safe, continuous database migrations without service interruptions.
 

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Convex with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This guide explores Convex's self-hosting capability and demonstrates how to use it with Neon Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) significantly enhances the self-hosted experience, overcoming limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a robust and scalable database option.
@@ -68,7 +68,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     npx degit get-convex/convex-backend/self-hosted/docker/docker-compose.yml docker-compose.yml
     ```
 
-    This command uses [`npx degit`](https://www.npmjs.com/package/degit) to fetch the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml).
+    This command uses [npx degit](https://www.npmjs.com/package/degit) to fetch the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml).
 
 3.  **Set up Neon connection string:** Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
     1.  Create a `.env` file in the same directory as `docker-compose.yml`.

@@ -4,10 +4,10 @@ Represents an API key for a user or project in Neon Auth.
 
 On this page:
 
-- [`ApiKey`](#apikey)
+- [ApiKey](#apikey)
 - Types:
-  - [`UserApiKey`](#userapikey)
-  - [`TeamApiKey`](#teamapikey)
+  - [UserApiKey](#userapikey)
+  - [TeamApiKey](#teamapikey)
 
 ## `ApiKey`
 
@@ -15,12 +15,12 @@ API keys provide a way for users to authenticate with your backend services with
 
 API keys can be obtained through:
 
-- [`user.createApiKey()`](/docs/neon-auth/sdk/{slug}/types/user#currentusercreateapikeyoptions)
-- [`user.listApiKeys()`](/docs/neon-auth/sdk/{slug}/types/user#currentuserlistapikeys)
-- [`user.useApiKeys()`](/docs/neon-auth/sdk/{slug}/types/user#currentuseruseapikeys) (React hook)
-- [`team.createApiKey()`](/docs/neon-auth/sdk/{slug}/types/team#teamcreateapikeyoptions)
-- [`team.listApiKeys()`](/docs/neon-auth/sdk/{slug}/types/team#teamlistapikeys)
-- [`team.useApiKeys()`](/docs/neon-auth/sdk/{slug}/types/team#teamuseapikeys) (React hook)
+- [user.createApiKey()](/docs/neon-auth/sdk/{slug}/types/user#currentusercreateapikeyoptions)
+- [user.listApiKeys()](/docs/neon-auth/sdk/{slug}/types/user#currentuserlistapikeys)
+- [user.useApiKeys()](/docs/neon-auth/sdk/{slug}/types/user#currentuseruseapikeys) (React hook)
+- [team.createApiKey()](/docs/neon-auth/sdk/{slug}/types/team#teamcreateapikeyoptions)
+- [team.listApiKeys()](/docs/neon-auth/sdk/{slug}/types/team#teamlistapikeys)
+- [team.useApiKeys()](/docs/neon-auth/sdk/{slug}/types/team#teamuseapikeys) (React hook)
 
 ### Type Definition
 

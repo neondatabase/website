@@ -10,7 +10,7 @@ summary: >-
   double-pooling or WebSocket lifecycle errors in serverless request handlers.
   ORM compatibility for Drizzle, Prisma, Kysely, and TypeORM is also covered.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.
@@ -19,15 +19,15 @@ Your connection method depends on where your code runs. Use the table below for 
 
 Each scenario is [described in detail](#find-your-scenario) further down the page.
 
-| Environment                                                                         | Recommended driver         | Pooling                                                                | Guide                                                   |
-| ----------------------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- |
-| [Any platform (non-JS/TS)](#not-using-javascript-or-typescript)                     | Native Postgres driver     | [Neon pooled connection](/docs/connect/connection-pooling)             | [Language guides](/docs/get-started/languages)          |
-| [Railway / Render / VPS / Docker](#running-on-a-long-lived-server-jsts)             | `pg` or `postgres.js`      | Client-side or [Neon pooling](/docs/connect/connection-pooling)        | [Framework guides](/docs/get-started/frameworks)        |
-| [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling)          | `pg` (node-postgres)       | [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods)  |
-| [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)            | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
-| [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
+| Environment                                                                         | Recommended driver         | Pooling                                                              | Guide                                                   |
+| ----------------------------------------------------------------------------------- | -------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Any platform (non-JS/TS)](#not-using-javascript-or-typescript)                     | Native Postgres driver     | [Neon pooled connection](/docs/connect/connection-pooling)           | [Language guides](/docs/get-started/languages)          |
+| [Railway / Render / VPS / Docker](#running-on-a-long-lived-server-jsts)             | `pg` or `postgres.js`      | Client-side or [Neon pooling](/docs/connect/connection-pooling)      | [Framework guides](/docs/get-started/frameworks)        |
+| [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling)          | `pg` (node-postgres)       | [@vercel/functions](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods)  |
+| [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)          | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
+| [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                  | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                  | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                  | [Data API](/docs/data-api/overview)                     |
 
 ## Find your scenario
 
@@ -52,13 +52,13 @@ For the full list, see [Language quickstarts](/docs/get-started/languages).
 
 If you deploy a JavaScript or TypeScript app to Railway, Render, a VPS, Docker, or any self-hosted environment with persistent processes, use a standard TCP driver with [connection pooling](/docs/connect/connection-pooling). Your server can maintain a connection pool across requests, making TCP the fastest and most efficient option.
 
-Recommended drivers: [`pg` (node-postgres)](https://node-postgres.com/), [`postgres.js`](https://github.com/porsager/postgres), or [`Bun.SQL`](https://bun.com/docs/runtime/sql#postgresql).
+Recommended drivers: [`pg` (node-postgres)](https://node-postgres.com/), [postgres.js](https://github.com/porsager/postgres), or [Bun.SQL](https://bun.com/docs/runtime/sql#postgresql).
 
 ### Deploying to Vercel or Cloudflare with platform pooling?
 
 These platforms provide their own connection pooling, which makes standard TCP the best choice.
 
-**Vercel (Fluid compute):** Use `pg` (node-postgres) with [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions). Vercel Fluid keeps functions warm long enough to reuse TCP connections, so you skip the connection setup cost on subsequent requests. See the [Vercel connection methods guide](/docs/guides/vercel-connection-methods) for details.
+**Vercel (Fluid compute):** Use `pg` (node-postgres) with [@vercel/functions](https://www.npmjs.com/package/@vercel/functions). Vercel Fluid keeps functions warm long enough to reuse TCP connections, so you skip the connection setup cost on subsequent requests. See the [Vercel connection methods guide](/docs/guides/vercel-connection-methods) for details.
 
 **Cloudflare (Hyperdrive):** Use `pg` (node-postgres) with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/), which provides connection pooling for Workers. See the [Cloudflare Hyperdrive guide](/docs/guides/cloudflare-hyperdrive) for setup.
 
@@ -70,7 +70,7 @@ Choose your transport based on your query pattern: use **HTTP** for single queri
 
 ### Building a client-side app without a backend?
 
-Use the [Neon Data API](/docs/data-api/overview) via [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
+Use the [Neon Data API](/docs/data-api/overview) via [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
 
 <Admonition type="note">
 The Data API is currently in beta.

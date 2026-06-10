@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -67,7 +67,7 @@ Navigate to **Organization > Billing** to see **Public network transfer** and **
 On the Free plan? Skip to [Project and branch detail APIs](#project-and-branch-detail-apis) for an API option available on all plans.
 </Admonition>
 
-The [`/consumption_history/v2/projects`](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) endpoint provides programmatic access to network transfer metrics on paid plans.
+The [/consumption_history/v2/projects](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) endpoint provides programmatic access to network transfer metrics on paid plans.
 
 It supports three granularity levels:
 
@@ -191,7 +191,7 @@ The response includes `data_transfer_bytes` in the branch object:
 
 Neon does not provide per-query or per-connection network transfer breakdowns. To identify the source of a spike, use `hourly` granularity from the Consumption API to narrow down the time window, then correlate it with known operations: scheduled `pg_dump` jobs, logical replication initial syncs, application deployments, or changes to query patterns. If you have multiple projects, compare per-project hourly data to isolate which project is responsible. On the Free plan, compare `data_transfer_bytes` across branches using the branch detail API to identify which branch contributes the most. Once you identify the branch, connect to it and run the `pg_stat_statements` queries below to find the top queries.
 
-To find which queries return the most rows, use the [`pg_stat_statements`](/docs/extensions/pg_stat_statements) extension. The `rows` column is not an exact byte count, but queries returning many rows or wide rows (TEXT, JSONB, BYTEA columns) are the most likely contributors to high network transfer.
+To find which queries return the most rows, use the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension. The `rows` column is not an exact byte count, but queries returning many rows or wide rows (TEXT, JSONB, BYTEA columns) are the most likely contributors to high network transfer.
 
 <Tabs labels={["Total rows", "Rows per execution", "Most frequent", "Longest running"]}>
 
@@ -271,7 +271,7 @@ LIMIT 10;
 </Tabs>
 
 <Admonition type="tip">
-In Neon, [scaling to zero](/docs/introduction/scale-to-zero) clears [`pg_stat_statements`](/docs/extensions/pg_stat_statements) data, so computes that recently woke up already have fresh statistics. For long-running computes, run `SELECT pg_stat_statements_reset();` to start a clean measurement window. This cannot be undone and resets stats for all database roles.
+In Neon, [scaling to zero](/docs/introduction/scale-to-zero) clears [pg_stat_statements](/docs/extensions/pg_stat_statements) data, so computes that recently woke up already have fresh statistics. For long-running computes, run `SELECT pg_stat_statements_reset();` to start a clean measurement window. This cannot be undone and resets stats for all database roles.
 </Admonition>
 
 For wire-level analysis of exact message sizes, see [Elephantshark](https://neon.com/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
@@ -284,7 +284,7 @@ For broader cost reduction strategies across all billing metrics, see [Cost opti
 
 **Reduce pg_dump frequency.** Use [Neon snapshots](/docs/guides/backup-restore) with [scheduled backups](/docs/guides/backup-restore#create-backup-schedules) as a backup alternative that keeps data within Neon. Reserve `pg_dump` for migrations or situations that require an external copy. When you do run `pg_dump`, use `-t` to dump only specific tables, `--exclude-table` to skip large ones, or `--schema-only` if you only need the schema. Note that compression flags (`-Fc`, `-Z`) compress the output file on the client after the data has already been sent from Neon, so they do not reduce your billed network transfer.
 
-**Manage logical replication.** Initial table syncs can produce large spikes in network transfer. Dropping and re-creating a replication slot forces a new full sync, so avoid resetting slots as a troubleshooting step unless necessary. Replicate only the tables or columns you need by using row filters (WHERE clauses) and column lists on [`CREATE PUBLICATION`](https://www.postgresql.org/docs/current/sql-createpublication.html) (PostgreSQL 15+). Monitor replication lag and throughput to understand ongoing transfer volume.
+**Manage logical replication.** Initial table syncs can produce large spikes in network transfer. Dropping and re-creating a replication slot forces a new full sync, so avoid resetting slots as a troubleshooting step unless necessary. Replicate only the tables or columns you need by using row filters (WHERE clauses) and column lists on [CREATE PUBLICATION](https://www.postgresql.org/docs/current/sql-createpublication.html) (PostgreSQL 15+). Monitor replication lag and throughput to understand ongoing transfer volume.
 
 **Use Private Link for internal traffic.** If your application runs in AWS, [Private Networking](/docs/guides/neon-private-networking) (Scale plan) routes traffic over PrivateLink at $0.01/GB instead of $0.10/GB for public network transfer beyond the included allowance.
 

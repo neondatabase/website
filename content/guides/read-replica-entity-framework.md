@@ -4,7 +4,7 @@ subtitle: Learn how to scale .NET applications with Entity Framework's DbContext
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
@@ -239,7 +239,7 @@ Start the application:
 dotnet run
 ```
 
-Visit the Swagger UI at [`http://localhost:5001/swagger`](http://localhost:5001/swagger) to test the API.
+Visit the Swagger UI at [http://localhost:5001/swagger](http://localhost:5001/swagger) to test the API.
 
 ![Swagger UI](/docs/guides/dotnet_ef_todo_swagger_demo.png)
 

@@ -9,13 +9,13 @@ summary: >-
   queries without PostGIS. It requires the `cube` extension and supports
   GiST indexing via `earth_box` for efficient radius searches.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 The `earthdistance` extension for Postgres provides functions to calculate great-circle distances between points on the Earth's surface. This is essential for applications requiring geospatial distance calculations, such as location-based services, mapping applications, logistics, and any system that needs to find nearby points or calculate travel distances.
 
 <Admonition type="important" title="Accuracy and assumptions">
-The `earthdistance` extension primarily assumes a spherical Earth model for its calculations, which provides good approximations for many use cases. It relies on the [`cube`](/docs/extensions/cube) extension for some of its underlying operations.
+The `earthdistance` extension primarily assumes a spherical Earth model for its calculations, which provides good approximations for many use cases. It relies on the [cube](/docs/extensions/cube) extension for some of its underlying operations.
 
 You may consider using the [`postgis` extension](/docs/extensions/postgis) if accurate geospatial calculations are critical for your application.
 </Admonition>

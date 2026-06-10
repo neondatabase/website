@@ -11,7 +11,7 @@ summary: >-
   and inverted index concepts, and examples for creating indexes, sorting by
   relevance, highlighting matches, and tuning performance.
 enableTableOfContents: true
-updatedOn: '2026-06-09T00:05:06.030Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -28,9 +28,9 @@ As of March 19, 2026, `pg_search` is no longer available for new Neon projects.
 Depending on your use case, consider these alternatives:
 
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
-- **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
-- **Semantic/vector search**: [`pgvector`](/docs/extensions/pgvector) for embedding-based search
-- **BM25 search**: [`lakebase_text`](/docs/extensions/lakebase-text) — a BM25 index for Neon, fully compatible with `tsvector` (Early Access); or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
+- **Fuzzy search**: [pg_trgm](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
+- **Semantic/vector search**: [pgvector](/docs/extensions/pgvector) for embedding-based search
+- **BM25 search**: [lakebase_text](/docs/extensions/lakebase-text) — a BM25 index for Neon, fully compatible with `tsvector` (Early Access); or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
 
 </Admonition>
 

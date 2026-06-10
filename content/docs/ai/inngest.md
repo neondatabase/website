@@ -10,7 +10,7 @@ summary: >-
   unnecessary serverless compute costs during LLM calls. Starter apps for
   Next.js RAG, multi-tenant RAG, and auto-embeddings with OpenAI are included.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Inngest is a popular framework for building AI RAG and Agentic workflows. [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=inngest-ai-integration) provides automatic retries, caching along with concurrency and throttling management and AI requests offloading.
@@ -65,7 +65,7 @@ By using `step.ai.infer()` your AI workflows will pause while waiting for the sl
 
 ![An AI workflow built with Inngest. The AI request is offloaded to the LLM provider.](/docs/guides/inngest-without-step-ai-infer.png)
 
-The previous RAG workflow can be rewritten to use [`step.ai.infer()`](https://www.inngest.com/docs/features/inngest-functions/steps-workflows/step-ai-orchestration?utm_source=neon&utm_medium=inngest-ai-integration#step-ai-infer) to offload the AI request to the LLM provider:
+The previous RAG workflow can be rewritten to use [step.ai.infer()](https://www.inngest.com/docs/features/inngest-functions/steps-workflows/step-ai-orchestration?utm_source=neon&utm_medium=inngest-ai-integration#step-ai-infer) to offload the AI request to the LLM provider:
 
 ```typescript
 import { inngest } from '@/inngest';

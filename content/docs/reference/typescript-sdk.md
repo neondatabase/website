@@ -10,7 +10,7 @@ summary: >-
   IDE autocompletion, and structured Axios error handling. Install via npm,
   yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <InfoBlock>
@@ -123,7 +123,7 @@ async function listNeonProjects() {
 listNeonProjects();
 ```
 
-Execute the TypeScript file using [`tsx`](https://tsx.is) (or compile to JavaScript and run with `node`)
+Execute the TypeScript file using [tsx](https://tsx.is) (or compile to JavaScript and run with `node`)
 
 ```bash
 tsx list-projects.ts

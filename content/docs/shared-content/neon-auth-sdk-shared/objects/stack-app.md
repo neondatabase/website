@@ -4,7 +4,7 @@ This is a detailed reference for the client-side `StackApp` object in the {sdkNa
 
 The main object for interacting with Stack Auth on the client. It provides methods for authentication, user management, and team management.
 
-Most commonly you get an instance of `StackClientApp` by calling [`useStackApp()`](../hooks/use-stack-app) in a Client Component.
+Most commonly you get an instance of `StackClientApp` by calling [useStackApp()](../hooks/use-stack-app) in a Client Component.
 
 ## Table of Contents
 

@@ -10,7 +10,7 @@ summary: >-
   server and a Python Flask server, both writing to an uploadcare_files table
   with optional Row Level Security.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides a cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -66,7 +66,7 @@ You can integrate file uploads using any of Uploadcare's [many options](https://
 
 <TabItem>
 
-For this example, we'll build a simple Node.js server using [Hono](https://hono.dev/) to handle file uploads. It will use the [`@uploadcare/upload-client`](https://www.npmjs.com/package/@uploadcare/upload-client) package to upload files to Uploadcare and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) package to save metadata into your Neon database.
+For this example, we'll build a simple Node.js server using [Hono](https://hono.dev/) to handle file uploads. It will use the [@uploadcare/upload-client](https://www.npmjs.com/package/@uploadcare/upload-client) package to upload files to Uploadcare and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) package to save metadata into your Neon database.
 
 First, install the necessary dependencies:
 
@@ -154,7 +154,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-For this example, we'll build a simple [Flask](https://flask.palletsprojects.com/en/stable/) server to handle file uploads. It will use the [`pyuploadcare`](https://pypi.org/project/pyuploadcare/) package to upload files to Uploadcare and [`psycopg2`](https://pypi.org/project/psycopg2/) to save metadata into your Neon database.
+For this example, we'll build a simple [Flask](https://flask.palletsprojects.com/en/stable/) server to handle file uploads. It will use the [pyuploadcare](https://pypi.org/project/pyuploadcare/) package to upload files to Uploadcare and [psycopg2](https://pypi.org/project/psycopg2/) to save metadata into your Neon database.
 
 First, install the necessary dependencies:
 

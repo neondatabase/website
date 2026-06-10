@@ -12,7 +12,7 @@ summary: >-
   function groups, and security best practices for key management and algorithm
   selection.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
@@ -43,7 +43,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
 
 - **`digest(data, type)`**:
 
-  The `digest` function computes a binary hash of the input `data` using the algorithm specified by `type`. This function supports a wide range of algorithms, including [`md5`](https://en.wikipedia.org/wiki/MD5), [`sha1`](https://en.wikipedia.org/wiki/SHA1), and the [SHA-2](https://en.wikipedia.org/wiki/SHA2) family (`sha224`, `sha256`, `sha384`, `sha512`), as well as any other digest algorithm supported by the underlying OpenSSL library.
+  The `digest` function computes a binary hash of the input `data` using the algorithm specified by `type`. This function supports a wide range of algorithms, including [md5](https://en.wikipedia.org/wiki/MD5), [sha1](https://en.wikipedia.org/wiki/SHA1), and the [SHA-2](https://en.wikipedia.org/wiki/SHA2) family (`sha224`, `sha256`, `sha384`, `sha512`), as well as any other digest algorithm supported by the underlying OpenSSL library.
 
   ```sql
   SELECT digest('Sensitive Information', 'sha256');
@@ -139,7 +139,7 @@ For general-purpose encryption needs, `pgcrypto` implements the encryption part 
 
 - **`gen_random_uuid()`**:
 
-  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers. This is functionally equivalent to PostgreSQL's built-in [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
+  The `gen_random_uuid()` function generates a version 4 universally unique identifier (UUID) based on random numbers. This is functionally equivalent to PostgreSQL's built-in [gen_random_uuid()](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values).
 
   ```sql
   SELECT gen_random_uuid();

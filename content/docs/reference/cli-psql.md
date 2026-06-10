@@ -6,21 +6,21 @@ summary: >-
   against a branch in your Neon project, including pooled connections and
   time-travel support.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
 
 - Before running the `psql` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
 - The `psql` command requires **neonctl 2.22.2** or later. Check your version with `neon --version`.
-- The [`psql`](https://www.postgresql.org/docs/current/app-psql.html) client must be installed on your system.
+- The [psql](https://www.postgresql.org/docs/current/app-psql.html) client must be installed on your system.
 - If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 ## The `psql` command
 
 The `psql` command connects to a database in your Neon project using the `psql` client. It builds a connection string for the specified branch (or the default branch from your [context file](/docs/reference/cli-set-context)) and launches `psql`.
 
-This is equivalent to running [`neon connection-string --psql`](/docs/reference/cli-connection-string), but as a dedicated top-level command.
+This is equivalent to running [neon connection-string --psql](/docs/reference/cli-connection-string), but as a dedicated top-level command.
 
 ### Usage
 

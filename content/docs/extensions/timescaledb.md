@@ -10,7 +10,7 @@ summary: >-
   `histogram` for time-oriented analysis. Only Apache-2 licensed features are
   supported on Neon; compression is not available.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.
@@ -52,7 +52,7 @@ CREATE TABLE weather_conditions (
 );
 ```
 
-Convert it to a hypertable using the [`create_hypertable`](https://docs.timescale.com/api/latest/hypertable/create_hypertable/) function:
+Convert it to a hypertable using the [create_hypertable](https://docs.timescale.com/api/latest/hypertable/create_hypertable/) function:
 
 ```sql
 SELECT create_hypertable('weather_conditions', 'time');
@@ -135,7 +135,7 @@ GROUP BY device_id
 LIMIT 10;
 ```
 
-The aggregate function [`first`](https://docs.timescale.com/api/latest/hyperfunctions/first/) was used to get the earliest `temperature` value based on `time` within an aggregate group.
+The aggregate function [first](https://docs.timescale.com/api/latest/hyperfunctions/first/) was used to get the earliest `temperature` value based on `time` within an aggregate group.
 
 You should receive the following output:
 
@@ -167,7 +167,7 @@ GROUP BY device_id
 LIMIT 10;
 ```
 
-The aggregate function [`last`](https://docs.timescale.com/api/latest/hyperfunctions/last/) was used to get the latest `temperature` value based on `time` within an aggregate group.
+The aggregate function [last](https://docs.timescale.com/api/latest/hyperfunctions/last/) was used to get the latest `temperature` value based on `time` within an aggregate group.
 
 You should receive the following output:
 
@@ -201,7 +201,7 @@ ORDER BY bucket_time
 LIMIT 10;
 ```
 
-The query uses the [`time_bucket`](https://docs.timescale.com/api/latest/hyperfunctions/time_bucket/) hyperfunction to group timestamps into one-hour intervals, calculating the average temperature for each interval from the table for a specific device, and then displays the results for the top 10 intervals.
+The query uses the [time_bucket](https://docs.timescale.com/api/latest/hyperfunctions/time_bucket/) hyperfunction to group timestamps into one-hour intervals, calculating the average temperature for each interval from the table for a specific device, and then displays the results for the top 10 intervals.
 
 You should receive the following output:
 
@@ -231,7 +231,7 @@ GROUP BY device_id
 LIMIT 10;
 ```
 
-Here, we use the [`histogram`](https://docs.timescale.com/api/latest/hyperfunctions/histogram/) function to create a distribution of humidity values within specified buckets (`40` to `60` with a size of `5`) for each `device_id`.
+Here, we use the [histogram](https://docs.timescale.com/api/latest/hyperfunctions/histogram/) function to create a distribution of humidity values within specified buckets (`40` to `60` with a size of `5`) for each `device_id`.
 
 You should receive the following output:
 
@@ -252,7 +252,7 @@ You should receive the following output:
 
 [**approximate_row_count()**](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/)
 
-Use the [`approximate_row_count`](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/) function to get the approximate number of rows in `weather_conditions` hypertable:
+Use the [approximate_row_count](https://docs.timescale.com/api/latest/hyperfunctions/approximate_row_count/) function to get the approximate number of rows in `weather_conditions` hypertable:
 
 ```sql
 SELECT approximate_row_count('weather_conditions');
@@ -272,7 +272,7 @@ Chunks are fundamental storage units within hypertables. Instead of storing the 
 
 [**show_chunks()**](https://docs.timescale.com/api/latest/hypertable/show_chunks/)
 
-The [`show_chunks`](https://docs.timescale.com/api/latest/hypertable/show_chunks/) function can be used to understand the underlying structure and organization of your time-series data and provides insights into how your hypertable is partitioned.
+The [show_chunks](https://docs.timescale.com/api/latest/hypertable/show_chunks/) function can be used to understand the underlying structure and organization of your time-series data and provides insights into how your hypertable is partitioned.
 
 ```sql
 SELECT show_chunks('weather_conditions');
@@ -304,7 +304,7 @@ You should receive the following output:
 
 [**drop_chunks()**](https://docs.timescale.com/api/latest/hypertable/drop_chunks/)
 
-You can use the [`drop_chunks`](https://docs.timescale.com/api/latest/hypertable/drop_chunks/) function to remove data chunks whose time range falls completely before (or after) a specified time.
+You can use the [drop_chunks](https://docs.timescale.com/api/latest/hypertable/drop_chunks/) function to remove data chunks whose time range falls completely before (or after) a specified time.
 
 ```sql
 SELECT drop_chunks('temperature_data', INTERVAL '1 days');
@@ -325,7 +325,7 @@ You should receive the following output:
 
 You may run into space concerns as data accumulates in timescaledb hypertables. While Neon's Postgres service does not support compression, deleting old data is an option if you don't need to hold on to it for long periods of time.
 
-You can use the [`drop_chunks`](<https://docs.timescale.com/api/latest/hypertable/drop_chunks/#:~:text=drop_chunks(),always%20before%20the%20end%20time.>) function outlined above to easily delete outdated chunks from a hypertable. For example, to delete all chunks older than 3 months:
+You can use the [drop_chunks](<https://docs.timescale.com/api/latest/hypertable/drop_chunks/#:~:text=drop_chunks(),always%20before%20the%20end%20time.>) function outlined above to easily delete outdated chunks from a hypertable. For example, to delete all chunks older than 3 months:
 
 ```sql
 SELECT drop_chunks('temperature_data', INTERVAL '3 months');

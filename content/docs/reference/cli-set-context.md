@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
@@ -26,7 +26,7 @@ This command sets a background context for your CLI sessions, letting you perfor
 The context remains in place until you reset to a new context or remove the `context-file`.
 
 <Admonition type="tip" title="Prefer link or checkout">
-For most workflows, use [`neon link`](/docs/reference/cli-link) to bind a directory to a project or [`neon checkout`](/docs/reference/cli-checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
+For most workflows, use [neon link](/docs/reference/cli-link) to bind a directory to a project or [neon checkout](/docs/reference/cli-checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
 </Admonition>
 
 <Admonition type="tip" title="How the CLI finds your `.neon` file">

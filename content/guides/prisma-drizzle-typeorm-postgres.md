@@ -4,7 +4,7 @@ subtitle: Learn real-world differences in schema modeling, migrations, and devel
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 If you are choosing a data layer for a TypeScript or JavaScript service on Postgres, you will almost certainly run into these three names. They are not interchangeable implementations of the same idea. They reflect different opinions about where your schema should live, how close to SQL you want to stay day to day, and how much tooling you want wrapped around migrations and collaboration.
@@ -87,7 +87,7 @@ Prisma’s comparison page contrasts Drizzle’s SQL-adjacent API with Prisma’
 
 ## TypeORM - Decorator-based entities and repository-style access
 
-TypeORM maps tables to **TypeScript classes** decorated with [`@Entity`](https://typeorm.io/docs/entity/entities), `@Column`, and [relation decorators](https://typeorm.io/docs/relations/relations). You wire a [`DataSource`](https://typeorm.io/docs/data-source/data-source) (or legacy patterns around connection options) to your database, then load and save rows through **repositories**, the [QueryBuilder](https://typeorm.io/docs/query-builder/select-query-builder#what-is-a-querybuilder), or [Active Record](https://typeorm.io/docs/guides/active-record-data-mapper#what-is-the-active-record-pattern)-style methods on entity classes depending on how you prefer to structure the app. Migrations are usually generated from entity diffs and run through the CLI ([`migration:generate`](https://typeorm.io/docs/migrations/generating), [`migration:run`](https://typeorm.io/docs/migrations/executing)), and TypeORM has been part of the Node ecosystem long enough to accumulate both strong patterns and sharp edges.
+TypeORM maps tables to **TypeScript classes** decorated with [@Entity](https://typeorm.io/docs/entity/entities), `@Column`, and [relation decorators](https://typeorm.io/docs/relations/relations). You wire a [DataSource](https://typeorm.io/docs/data-source/data-source) (or legacy patterns around connection options) to your database, then load and save rows through **repositories**, the [QueryBuilder](https://typeorm.io/docs/query-builder/select-query-builder#what-is-a-querybuilder), or [Active Record](https://typeorm.io/docs/guides/active-record-data-mapper#what-is-the-active-record-pattern)-style methods on entity classes depending on how you prefer to structure the app. Migrations are usually generated from entity diffs and run through the CLI ([migration:generate](https://typeorm.io/docs/migrations/generating), [migration:run](https://typeorm.io/docs/migrations/executing)), and TypeORM has been part of the Node ecosystem long enough to accumulate both strong patterns and sharp edges.
 
 That class-first model feels immediately familiar if you come from **C# Entity Framework**, or similar stacks where you think in objects and associations first, and SQL appears when you open the query builder or write raw queries. TypeORM also targets **several databases** beyond Postgres, which matters when one team or company wants a single ORM style across engines. The flip side is that **type precision** is not as uniform as a generated client: `QueryBuilder` and raw paths can widen to `any` unless you are deliberate, and the flexibility that helps with odd legacy schemas can also make reviews noisier than a single schema file.
 

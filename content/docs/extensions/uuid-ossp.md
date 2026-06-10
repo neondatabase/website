@@ -9,7 +9,7 @@ summary: >-
   distributed systems. Privacy trade-offs for v1 MAC-address embedding, index
   fragmentation from random v4 UUIDs, and storage costs are also covered.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 The `uuid-ossp` extension provides a suite of functions for generating Universally Unique Identifiers (UUIDs) directly within your Postgres database. UUIDs are essential for ensuring data uniqueness across distributed systems and are widely used as primary keys and for various other applications requiring unique IDs. This extension offers a variety of UUID generation methods, including time-based, random, and name-based UUIDs, providing flexibility for different use cases.
@@ -92,7 +92,7 @@ The version 1 UUID generation functions in `uuid-ossp` are based on the time of 
 
 - `uuid_generate_v4()`:
 
-  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. Postgres also provides the built-in function [`gen_random_uuid()`](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
+  The `uuid_generate_v4()` function generates version 4 UUIDs, which are derived entirely from random numbers. These are the most common type of UUIDs due to their simplicity and strong guarantee of uniqueness. Postgres also provides the built-in function [gen_random_uuid()](/postgresql/postgresql-tutorial/postgresql-uuid#generating-uuid-values) which is functionally equivalent to `uuid_generate_v4()`.
 
   ```sql
   SELECT uuid_generate_v4();

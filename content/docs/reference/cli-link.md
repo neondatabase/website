@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive, non-interactive, and
   agent-oriented workflows.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
@@ -19,7 +19,7 @@ updatedOn: '2026-06-05T12:06:47.985Z'
 
 The `link` command binds the current directory to a Neon project. It picks (or creates) an organization, picks (or creates) a project, resolves the project's default branch, and writes a `.neon` file with `orgId`, `projectId`, and `branchId`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context.
 
-`link` is a thin wrapper around [`set-context`](/docs/reference/cli-set-context): both write to the same `.neon` file, so anything `link` can write, `set-context` can write too.
+`link` is a thin wrapper around [set-context](/docs/reference/cli-set-context): both write to the same `.neon` file, so anything `link` can write, `set-context` can write too.
 
 <Admonition type="tip" title="Prefer link over set-context">
 For most workflows, use `neon link` instead of manually running `neon set-context --project-id ...`. The `link` command guides you through organization and project selection and ensures the context file is complete.

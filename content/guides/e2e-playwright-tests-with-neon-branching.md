@@ -266,7 +266,7 @@ The workflow consists of three jobs:
 This job runs when a pull request is opened, reopened, or synchronized:
 
 1. **Branch creation**:
-   - Uses Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
+   - Uses Neon's [create-branch-action](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
    - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
    - Inherits the schema and data from the parent branch
 
@@ -286,7 +286,7 @@ This job runs when a pull request is opened, reopened, or synchronized:
    - Uploads the Playwright report as an artifact for later review
 
 5. **Schema diff generation**:
-   - Uses Neon's [`schema-diff-action`](https://github.com/marketplace/actions/neon-schema-diff-github-action)
+   - Uses Neon's [schema-diff-action](https://github.com/marketplace/actions/neon-schema-diff-github-action)
    - Compares the schema of the new branch with the parent branch
    - Automatically posts the differences as a comment on the pull request
    - Helps reviewers understand database changes at a glance
@@ -299,7 +299,7 @@ This job runs when a pull request is opened, reopened, or synchronized:
    - Ensures production database stays in sync with merged changes
 
 2. **Cleanup**:
-   - Removes the preview branch using Neon's [`delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)
+   - Removes the preview branch using Neon's [delete-branch-action](https://github.com/marketplace/actions/neon-database-delete-branch)
 
 ## Test the workflow
 

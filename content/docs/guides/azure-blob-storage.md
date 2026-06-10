@@ -11,7 +11,7 @@ summary: >-
   (generate-upload-sas and save-metadata) in JavaScript (Hono) and Python
   (Flask), and generating read-only SAS tokens for secure file retrieval.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -100,7 +100,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, [`@azure/storage-blob`](https://www.npmjs.com/package/@azure/storage-blob) for Azure interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, [@azure/storage-blob](https://www.npmjs.com/package/@azure/storage-blob) for Azure interaction, and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -218,7 +218,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`azure-storage-blob`](https://pypi.org/project/azure-storage-blob/) (Azure SDK for Python), and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [azure-storage-blob](https://pypi.org/project/azure-storage-blob/) (Azure SDK for Python), and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

@@ -4,7 +4,7 @@ subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Ne
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
@@ -158,7 +158,7 @@ After updating `.github/workflows/opencode.yml`, commit and push the workflow to
 The GitHub Action is designed to respond to issue comments that contain specific trigger phrases. Here's a breakdown of the key steps:
 
 1. **The Trigger:** The `if` condition ensures the workflow only runs when an issue comment contains `/oc` or `/opencode`.
-2. **Branch creation:** You'll use Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to instantly fork the primary database. Because Neon uses copy-on-write, this takes less than a second and gives the Action a completely isolated database containing production-like data.
+2. **Branch creation:** You'll use Neon's [create-branch-action](https://github.com/marketplace/actions/neon-create-branch-github-action) to instantly fork the primary database. Because Neon uses copy-on-write, this takes less than a second and gives the Action a completely isolated database containing production-like data.
 3. **Context Injection:** You'll pass the output of the branch creation (`${{ steps.create_neon_branch.outputs.db_url }}`) into OpenCode's environment as `DATABASE_URL`.
 4. **The system prompt:** Using OpenCode's `prompt` parameter, you'll explicitly tell the AI that it has a safe, isolated Postgres database to work with. You set the expectation that it should make any necessary schema changes, generate and run migrations, and validate its code against that database before opening a PR.
 
@@ -214,7 +214,7 @@ If you want these temporary Neon branches to clean themselves up automatically, 
 
 Setting `expires_at` to 48 hours is a good default for ephemeral AI workspaces because it keeps cleanup simple and prevents old branches from accumulating if an issue is abandoned.
 
-If you need more advanced lifecycle management, use Neon's [`delete-branch-action`](https://github.com/neondatabase/delete-branch-action) in a separate workflow. That approach is useful when cleanup should happen in response to a specific event, such as an issue being closed, a pull request being merged, or another repository-specific automation trigger.
+If you need more advanced lifecycle management, use Neon's [delete-branch-action](https://github.com/neondatabase/delete-branch-action) in a separate workflow. That approach is useful when cleanup should happen in response to a specific event, such as an issue being closed, a pull request being merged, or another repository-specific automation trigger.
 
 Follow [Automated Database Branching with GitHub Actions](/guides/neon-github-actions-authomated-branching) for an example of how to set up that kind of event-driven cleanup workflow.
 

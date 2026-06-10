@@ -10,7 +10,7 @@ summary: >-
   Postgres. Includes JavaScript (Hono) and Python (Flask) backend examples
   covering the /generate-signature and /save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -76,7 +76,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, the official [`cloudinary`](https://www.npmjs.com/package/cloudinary) Node.js SDK for signature generation, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, the official [cloudinary](https://www.npmjs.com/package/cloudinary) Node.js SDK for signature generation, and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -188,7 +188,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), the official [`cloudinary`](https://pypi.org/project/cloudinary/) Python SDK, and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), the official [cloudinary](https://pypi.org/project/cloudinary/) Python SDK, and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

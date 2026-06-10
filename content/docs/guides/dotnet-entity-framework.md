@@ -12,7 +12,7 @@ summary: >-
   `Microsoft.EntityFrameworkCore.Design`, and `dotnet-ef`, then applying the
   initial schema with `dotnet ef database update`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"
@@ -201,7 +201,7 @@ If you do not have one already, create a Neon project.
    dotnet run
    ```
 
-2. Test the connection by navigating to [`http://localhost:5001/swagger`](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
+2. Test the connection by navigating to [http://localhost:5001/swagger](http://localhost:5001/swagger) in your browser. You can use the Swagger UI to create and retrieve Todo items.
 
 ## Resources
 

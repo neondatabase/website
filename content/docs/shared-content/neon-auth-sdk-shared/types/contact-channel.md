@@ -6,14 +6,14 @@ Represents a contact method (email, phone, etc.) for a user.
 
 On this page:
 
-- [`ContactChannel`](#contactchannel)
+- [ContactChannel](#contactchannel)
 
 ## `ContactChannel`
 
 Basic information about a contact channel, as seen by a user themselves.
 
-Usually obtained by calling [`user.listContactChannels()`](/docs/neon-auth/sdk/nextjs/types/user#currentuserlistcontactchannels)
-or [`user.useContactChannels()`](/docs/neon-auth/sdk/nextjs/types/user#currentuserusecontactchannels).
+Usually obtained by calling [user.listContactChannels()](/docs/neon-auth/sdk/nextjs/types/user#currentuserlistcontactchannels)
+or [user.useContactChannels()](/docs/neon-auth/sdk/nextjs/types/user#currentuserusecontactchannels).
 
 ### Type Definition
 

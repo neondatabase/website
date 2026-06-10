@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
@@ -17,7 +17,7 @@ updatedOn: '2026-06-05T12:06:47.985Z'
 
 ## The `checkout` command
 
-The `checkout` command pins a branch in the local context so subsequent commands target it. It is a focused helper over [`set-context`](/docs/reference/cli-set-context) for the common "switch the branch I'm working on" case.
+The `checkout` command pins a branch in the local context so subsequent commands target it. It is a focused helper over [set-context](/docs/reference/cli-set-context) for the common "switch the branch I'm working on" case.
 
 `checkout` resolves the branch (by name or ID) against the project, then **heals** the `.neon` file: it always (re)writes `projectId`, `branchId`, and `orgId` (when the project has one), so a `.neon` that was missing fields or drifted ends up complete and consistent.
 
@@ -44,7 +44,7 @@ The project is resolved through the standard Neon CLI chain, each entry winning 
 2. `projectId` from the closest `.neon` file (found by walking up from the current directory)
 3. If still unresolved and the API key maps to exactly one project, that project is auto-detected (same behavior as `branches` and `connection-string`)
 
-If none of those resolve a project, `checkout` prints an error explaining the chain above. In an interactive terminal it then offers to run [`neon link`](/docs/reference/cli-link) in the current folder so you can pick (or create) a project on the spot. In non-interactive contexts, it exits with a non-zero code instead of prompting.
+If none of those resolve a project, `checkout` prints an error explaining the chain above. In an interactive terminal it then offers to run [neon link](/docs/reference/cli-link) in the current folder so you can pick (or create) a project on the spot. In non-interactive contexts, it exits with a non-zero code instead of prompting.
 
 ### Options
 
@@ -89,6 +89,6 @@ Pin a branch by ID:
 neon checkout br-cool-snow-12345678 --project-id polished-snowflake-12345678
 ```
 
-After checking out a branch, commands such as [`connection-string`](/docs/reference/cli-connection-string) and [`psql`](/docs/reference/cli-psql) use the pinned branch by default.
+After checking out a branch, commands such as [connection-string](/docs/reference/cli-connection-string) and [psql](/docs/reference/cli-psql) use the pinned branch by default.
 
 <NeedHelp/>

@@ -11,7 +11,7 @@ summary: >-
   request is stateless, so the API scales to thousands of concurrent users
   without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -36,7 +36,7 @@ The Neon Data API is the HTTP query service in the Neon backend for apps and age
 
 ## PostgREST compatibility
 
-The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using client libraries, including [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) and [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js).
+The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using client libraries, including [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js) and [@neondatabase/postgrest-js](https://www.npmjs.com/package/@neondatabase/postgrest-js).
 
 ## Quickstart
 

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating ElectricSQL with Neon Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Neon Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
@@ -166,13 +166,13 @@ INSERT INTO scores (name, value) VALUES
     npm run dev
     ```
 
-    This will start the development server at [`localhost:5173`](http://localhost:5173)
+    This will start the development server at [localhost:5173](http://localhost:5173)
 
 ## Using the demo application
 
 Your React application should now be running in your browser. It's actively connected to the Electric, which maintains a real-time link to your Neon Postgres database via Logical Replication.
 
-1.  **Access the application:** Open [`localhost:5173`](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
+1.  **Access the application:** Open [localhost:5173](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
 
     ```json
     [

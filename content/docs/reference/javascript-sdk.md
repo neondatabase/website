@@ -13,13 +13,13 @@ summary: >-
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This page documents `@neondatabase/neon-js`, which combines Neon Auth and the Data API in a single client. Neon also publishes standalone packages:
 
-- [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
-- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Neon Auth without the Data API
+- [@neondatabase/postgrest-js](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
+- [@neondatabase/auth](https://www.npmjs.com/package/@neondatabase/auth): Neon Auth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 

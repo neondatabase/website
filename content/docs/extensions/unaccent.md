@@ -11,7 +11,7 @@ summary: >-
   `unaccent()` requires an IMMUTABLE wrapper function; on Neon, customizing
   `unaccent.rules` requires opening a support ticket.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. Use it in multilingual applications where users might not consistently use accents when typing search queries.
@@ -119,7 +119,7 @@ id | name
 
 ### Case-insensitive and accent-insensitive searching with `ILIKE`
 
-For even more flexible searching, you can combine `unaccent()` with the [`ILIKE`](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This comes in handy for free-text search scenarios.
+For even more flexible searching, you can combine `unaccent()` with the [ILIKE](/postgresql/postgresql-tutorial/postgresql-like#postgresql-extensions-of-the-like-operator) operator for case-insensitive and accent-insensitive searches. This comes in handy for free-text search scenarios.
 
 ```sql
 SELECT * FROM product WHERE unaccent(name) ILIKE unaccent('%cafe%');

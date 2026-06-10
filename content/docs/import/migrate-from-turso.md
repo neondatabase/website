@@ -11,7 +11,7 @@ summary: >-
   supports up to 0.5 GB; larger Turso databases require a paid Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -203,7 +203,7 @@ After migrating, always verify your data.
 
 ### Verify sequences
 
-The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and check the next value for a table's sequence:
+The `reset sequences` option in the load file ensures that auto-incrementing columns start from the correct value. Connect to your Neon database using [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and check the next value for a table's sequence:
 
 ```sql
 SELECT nextval(pg_get_serial_sequence('books', 'id'));

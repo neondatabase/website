@@ -11,7 +11,7 @@ summary: >-
   LEVEL SECURITY` to expose the leak, then shows how `crudPolicy` restores
   isolation without touching application code.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -57,7 +57,7 @@ Start the sample application:
 npm run dev
 ```
 
-Open the app in your browser using [`localhost:5173`](http://localhost:5173).
+Open the app in your browser using [localhost:5173](http://localhost:5173).
 
 Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and GitHub logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
 

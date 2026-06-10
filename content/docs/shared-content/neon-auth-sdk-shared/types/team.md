@@ -4,10 +4,10 @@ Represents a team in Neon Auth.
 
 On this page:
 
-- [`Team`](#team)
+- [Team](#team)
 - Types:
-  - [`TeamUser`](#teamuser)
-  - [`TeamApiKey`](#teamapikey)
+  - [TeamUser](#teamuser)
+  - [TeamApiKey](#teamapikey)
 
 ## `Team`
 

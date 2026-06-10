@@ -10,7 +10,7 @@ summary: >-
   working backend examples in JavaScript (Hono, AWS SDK v3) and Python (Flask,
   boto3) with an s3_files schema and presign/save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -129,7 +129,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, [`@aws-sdk/client-s3`](https://www.npmjs.com/package/@aws-sdk/client-s3) and [`@aws-sdk/s3-request-presigner`](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for S3 interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) and [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for S3 interaction, and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -239,7 +239,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python), and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python), and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

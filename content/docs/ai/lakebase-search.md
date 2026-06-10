@@ -9,7 +9,7 @@ summary: >-
   learn what each extension provides, and navigate to the extension reference
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-09T20:13:02.957Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <RequestForm type="lakebase-search" />
@@ -20,8 +20,8 @@ Lakebase Search is developed by Databricks. These extensions are part of the sha
 
 Lakebase Search is two Postgres extensions, `lakebase_vector` and `lakebase_text`, that bring scalable vector and BM25 full-text search to Neon, designed for backends that need both semantic and keyword search in a single database.
 
-- **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
-- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from PostgreSQL FTS required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
+- **[lakebase_vector](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
+- **[lakebase_text](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from PostgreSQL FTS required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
 
 ## How `lakebase_ann` scales
 

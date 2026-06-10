@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <InfoBlock>
@@ -108,7 +108,7 @@ This approach is practical for cleaning up a small number of branches manually. 
 
 ### GitHub Action on PR close (recommended)
 
-Neon's [`delete-branch-action`](https://github.com/neondatabase/delete-branch-action) deletes a Neon branch by name. Add this workflow to your repository to clean up the preview branch as soon as a PR is closed or merged:
+Neon's [delete-branch-action](https://github.com/neondatabase/delete-branch-action) deletes a Neon branch by name. Add this workflow to your repository to clean up the preview branch as soon as a PR is closed or merged:
 
 ```yaml
 name: Cleanup Neon preview branch

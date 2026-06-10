@@ -4,7 +4,7 @@ subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
-updatedOn: '2026-03-05T08:21:55.000Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
@@ -69,7 +69,7 @@ Run the following command:
 npx add-mcp https://mcp.vercel.com
 ```
 
-When prompted, choose Claude Code as the agent. This connects the Vercel MCP server as a context provider, enabling Claude Code to use tools like [`get_runtime_logs`](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs) to fetch logs directly from your deployments.
+When prompted, choose Claude Code as the agent. This connects the Vercel MCP server as a context provider, enabling Claude Code to use tools like [get_runtime_logs](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs) to fetch logs directly from your deployments.
 
 ## Step 3: Investigate the incident
 
@@ -89,7 +89,7 @@ We are seeing dropped analytics events. Use the Vercel MCP tools to check the pr
 
 ![Claude Code terminal session where the investigation prompt is submitted, then `get_runtime_logs` is used to pull logs for the production deployment and isolate failures on `/api/analytics/track`.](/docs/guides/claude-code-vercel-logs.png)
 
-In this step, Claude Code calls Vercel MCP tools (specifically [`get_runtime_logs`](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs)) to retrieve production logs and parse relevant stack traces.
+In this step, Claude Code calls Vercel MCP tools (specifically [get_runtime_logs](https://vercel.com/docs/agent-resources/vercel-mcp/tools#get_runtime_logs)) to retrieve production logs and parse relevant stack traces.
 
 From the logs, it identifies a PostgreSQL error indicating a schema mismatch: the application is trying to write fields that do not exist yet in `analytics_events`.
 

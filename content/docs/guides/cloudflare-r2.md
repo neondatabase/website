@@ -11,7 +11,7 @@ summary: >-
   setup, CORS configuration, metadata schema, and backend endpoints in
   JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask, boto3, psycopg2).
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
@@ -98,7 +98,7 @@ This requires two backend endpoints:
 
 <TabItem>
 
-We'll use [Hono](https://hono.dev/) for the server, [`@aws-sdk/client-s3`](https://www.npmjs.com/package/@aws-sdk/client-s3) and [`@aws-sdk/s3-request-presigner`](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for R2 interaction, and [`@neondatabase/serverless`](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
+We'll use [Hono](https://hono.dev/) for the server, [@aws-sdk/client-s3](https://www.npmjs.com/package/@aws-sdk/client-s3) and [@aws-sdk/s3-request-presigner](https://www.npmjs.com/package/@aws-sdk/s3-request-presigner) for R2 interaction, and [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) for Neon.
 
 First, install the necessary dependencies:
 
@@ -216,7 +216,7 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 <TabItem>
 
-We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python), and [`psycopg2`](https://pypi.org/project/psycopg2/).
+We'll use [Flask](https://flask.palletsprojects.com/en/stable/), [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) (AWS SDK for Python), and [psycopg2](https://pypi.org/project/psycopg2/).
 
 First, install the necessary dependencies:
 

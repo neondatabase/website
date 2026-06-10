@@ -4,7 +4,7 @@ subtitle: Build a Todo app using React, Neon Auth, and the Neon Data API
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-24T00:00:00.000Z'
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 This guide will walk you through building a secure Todo application using **React**, [Neon Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
@@ -90,9 +90,9 @@ $ npm create vite@latest react-neon-todo -- --template react-ts
 
 You will need the following packages for this project:
 
-- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
-- **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
-- **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
+- **Neon SDK:** [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
+- **React Router:** [react-router](https://www.npmjs.com/package/react-router) for routing between pages.
+- **Drizzle ORM:** [drizzle-orm](https://www.npmjs.com/package/drizzle-orm) and [drizzle-kit](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
 ```bash
 npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router drizzle-orm

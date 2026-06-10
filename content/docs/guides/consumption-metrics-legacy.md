@@ -13,12 +13,12 @@ summary: >-
   your invoice or for Launch plan access, use the Query consumption metrics
   page instead.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <ConsumptionAccountApiDeprecation/>
 
-Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. The Management API only allows these paths for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). They are **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, these endpoints return **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
+Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. The Management API only allows these paths for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). They are **not** available on **Launch**; use [GET /consumption_history/v2/projects](/docs/guides/consumption-metrics) instead. On every eligible plan, these endpoints return **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
 
 | API                 | Endpoint                        | Description                               | Available on                                                          |
 | ------------------- | ------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- |

@@ -12,7 +12,7 @@ summary: >-
   `--output`, and `--schemas` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -25,7 +25,7 @@ updatedOn: '2026-06-05T17:20:32.620Z'
   </DocsList>
 </InfoBlock>
 
-The Neon SDK offers a CLI tool that introspects your database schema to generate a TypeScript definition file. This promotes type safety and enhances the developer experience when interacting with your database via the Data API, particularly with PostgREST clients like [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) and [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Key benefits include:
+The Neon SDK offers a CLI tool that introspects your database schema to generate a TypeScript definition file. This promotes type safety and enhances the developer experience when interacting with your database via the Data API, particularly with PostgREST clients like [@neondatabase/postgrest-js](https://www.npmjs.com/package/@neondatabase/postgrest-js) and [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js). Key benefits include:
 
 - **Autocomplete** for table names and columns.
 - **Type inference** for query results.

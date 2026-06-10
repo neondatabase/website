@@ -2,8 +2,8 @@ This is a reference for the `Project` type in the {sdkName} SDK.
 
 The `Project` object contains the information and configuration of a project, such as the name, description, and enabled authentication methods.
 
-Each [Stack app](/docs/neon-auth/concepts/stack-app) corresponds to a project. You can obtain its `Project` object by calling [`stackApp.getProject()`](../objects/stack-app#stackappgetproject)
-or [`stackApp.useProject()`](../objects/stack-app#stackappuseproject).
+Each [Stack app](/docs/neon-auth/concepts/stack-app) corresponds to a project. You can obtain its `Project` object by calling [stackApp.getProject()](../objects/stack-app#stackappgetproject)
+or [stackApp.useProject()](../objects/stack-app#stackappuseproject).
 
 ### Table of Contents
 

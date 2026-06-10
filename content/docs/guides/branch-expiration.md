@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Overview
@@ -324,13 +324,13 @@ curl --request GET \
 
 ### Create project branch
 
-[`POST /projects/{project_id}/branches`](https://api-docs.neon.tech/reference/createprojectbranch)
+[POST /projects/{project_id}/branches](https://api-docs.neon.tech/reference/createprojectbranch)
 
 - **`expires_at`** (optional) - Timestamp for automatic deletion in [RFC 3339](#timestamp-format-requirements) format
 
 ### Update project branch
 
-[`PATCH /projects/{project_id}/branches/{branch_id}`](https://api-docs.neon.tech/reference/updateprojectbranch)
+[PATCH /projects/{project_id}/branches/{branch_id}](https://api-docs.neon.tech/reference/updateprojectbranch)
 
 - **`expires_at`** (optional, nullable) - Update or remove expiration
   - Timestamp value: Sets/updates expiration

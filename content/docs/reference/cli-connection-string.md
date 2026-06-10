@@ -9,7 +9,7 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 ## Before you begin
@@ -24,7 +24,7 @@ For information about connecting to Neon, see [Connect from any application](/do
 This command gets a Postgres connection string for connecting to a database in your Neon project. You can construct a connection string for any database in any branch. The connection string includes the password for the specified role.
 
 <Admonition type="tip" title="Connect with psql">
-To open a `psql` session directly, use the dedicated [`neon psql`](/docs/reference/cli-psql) command (requires neonctl 2.22.2+). You can also pass `--psql` to `connection-string` to achieve the same result.
+To open a `psql` session directly, use the dedicated [neon psql](/docs/reference/cli-psql) command (requires neonctl 2.22.2+). You can also pass `--psql` to `connection-string` to achieve the same result.
 </Admonition>
 
 ### Usage

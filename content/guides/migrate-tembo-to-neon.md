@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from Tembo.io to Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 [Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your service from Tembo.io to Neon, follow the steps in this guide.
@@ -273,8 +273,8 @@ Once Neon is fully synchronized and replication lag is minimal:
   - [Connect to Neon](/docs/connect/connect-from-any-app)
   - [Supported Postgres extensions in Neon](/docs/extensions/pg-extensions)
 - PostgreSQL Documentation:
-  - [`pg_dump`](https://www.postgresql.org/docs/current/app-pgdump.html)
-  - [`pg_restore`](https://www.postgresql.org/docs/current/app-pgrestore.html)
+  - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
+  - [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
   - [Logical Replication](https://www.postgresql.org/docs/current/logical-replication.html)
 
 <NeedHelp />

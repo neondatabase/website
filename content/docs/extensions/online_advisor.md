@@ -11,10 +11,10 @@ summary: >-
   thresholds control when recommendations surface, and system-level settings
   like `max_index_proposals` use fixed defaults on Neon.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
-The `online_advisor` extension recommends **indexes**, **extended statistics**, and **prepared statements** based on your actual query workload. It uses the same executor hook mechanism as [`auto_explain`](https://www.postgresql.org/docs/current/auto-explain.html) to collect and analyze execution data.
+The `online_advisor` extension recommends **indexes**, **extended statistics**, and **prepared statements** based on your actual query workload. It uses the same executor hook mechanism as [auto_explain](https://www.postgresql.org/docs/current/auto-explain.html) to collect and analyze execution data.
 
 <CTA />
 

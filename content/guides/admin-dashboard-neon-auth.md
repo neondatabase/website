@@ -4,7 +4,7 @@ subtitle: Learn how to create an internal admin dashboard for user management us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-31T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-06-10T09:37:04.355Z'
 ---
 
 In a production application, internal tooling is often critical for operations and support teams. The Neon Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
@@ -91,8 +91,8 @@ $ npm create vite@latest react-neon-todo -- --template react-ts
 
 You will need the following packages for this project:
 
-- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
-- **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
+- **Neon SDK:** [@neondatabase/neon-js](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
+- **React Router:** [react-router](https://www.npmjs.com/package/react-router) for routing between pages.
 
 ```bash
 npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router

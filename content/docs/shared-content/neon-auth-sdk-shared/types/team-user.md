@@ -38,7 +38,7 @@ declare const teamProfile: TeamProfile;
 
 ## `ServerTeamUser`
 
-The `ServerTeamUser` object is used on the server side to represent a user within a team. Besides the team profile, it also includes all the functionality of a [`ServerUser`](../types/user).
+The `ServerTeamUser` object is used on the server side to represent a user within a team. Besides the team profile, it also includes all the functionality of a [ServerUser](../types/user).
 
 It is usually obtained by calling `serverTeam.listUsers()` on a [`ServerTeam` object](../types/team).
 
