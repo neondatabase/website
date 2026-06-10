@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-06-05T12:06:47.985Z'
+updatedOn: '2026-06-10T09:19:01.120Z'
 ---
 
 ## Before you begin
@@ -50,10 +50,9 @@ If none of those resolve a project, `checkout` prints an error explaining the ch
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `checkout` command supports these options:
 
-| Option           | Description                                                        | Type   |
-| ---------------- | ------------------------------------------------------------------ | ------ |
-| `--project-id`   | Project ID                                                         | string |
-| `--context-file` | [Context file](/docs/reference/cli-set-context) path and file name | string |
+| Option         | Description | Type   |
+| -------------- | ----------- | ------ |
+| `--project-id` | Project ID  | string |
 
 ### Examples
 

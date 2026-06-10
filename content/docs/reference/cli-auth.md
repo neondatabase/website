@@ -11,7 +11,7 @@ summary: >-
   `--api-key` flag, then `NEON_API_KEY` env var, then the credentials file,
   then triggers browser auth if none are found.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T09:19:01.120Z'
 ---
 
 ## Before you begin
@@ -27,6 +27,8 @@ Authenticates the user or caller to Neon.
 ```bash
 neon auth
 ```
+
+`neon login` is an alias for `neon auth` and can be used interchangeably.
 
 The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permissions to the Neon CLI, your credentials are saved locally to a configuration file named `credentials.json`, enabling you manage your account's projects from the command line.
 
