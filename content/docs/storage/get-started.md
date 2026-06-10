@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:36:47.586Z'
+updatedOn: '2026-06-10T16:53:44.852Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -47,19 +47,30 @@ Your project ID and branch ID are available in the Neon Console URL or via `neon
 
 ## Find your branch endpoint
 
-Your branch's storage endpoint is available in the Console on the **Storage** tab, or via the Neon API. It follows this format:
+Fetch your branch's storage state from the Neon API. The response includes the full S3 endpoint URL, the region, and whether path-style addressing is required:
 
-```
-<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech
+```bash shouldWrap
+curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/storage" \
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-For example:
+```json
+{
+  "enabled": true,
+  "s3_endpoint": "https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech",
+  "region": "us-east-2",
+  "force_path_style": true
+}
+```
+
+Set these as environment variables:
 
 ```bash
-export NEON_STORAGE_HOST=br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
+export NEON_STORAGE_ENDPOINT=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
+export NEON_STORAGE_REGION=us-east-2
 ```
 
-This is different from your database connection string.
+A `404` response means Storage is not yet enabled for that branch. Make sure you're using a project in the AWS us-east-2 region.
 
 ## Install dependencies
 
@@ -93,7 +104,7 @@ import 'dotenv/config';
 
 export const client = new S3Client({
   region: 'us-east-2',
-  endpoint: `https://${process.env.NEON_STORAGE_HOST}`,
+  endpoint: process.env.NEON_STORAGE_ENDPOINT,
   credentials: {
     accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID!,
     secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY!,
@@ -112,7 +123,7 @@ load_dotenv()
 client = boto3.client(
     's3',
     region_name='us-east-2',
-    endpoint_url=f"https://{os.environ['NEON_STORAGE_HOST']}",
+    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
     aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],
     aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],
 )
@@ -168,11 +179,11 @@ print('Uploaded!')
 # Create a bucket
 aws s3api create-bucket \
   --bucket my-bucket \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
 
 # Upload a file
 aws s3 cp hello.txt s3://my-bucket/hello.txt \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -201,7 +212,7 @@ print(response['Body'].read().decode('utf-8'))  # Hello from Neon Storage!
 
 ```bash shouldWrap
 aws s3 cp s3://my-bucket/hello.txt ./downloaded.txt \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "https://$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>

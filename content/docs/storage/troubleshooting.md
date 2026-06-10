@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-08T22:07:44.844Z'
+updatedOn: '2026-06-10T16:53:44.852Z'
 ---
 
 ## Authentication errors
@@ -50,7 +50,7 @@ If you forget to set the custom endpoint, the SDK will route requests to AWS S3 
 
 ```typescript
 const client = new S3Client({
-  endpoint: `https://${process.env.NEON_STORAGE_HOST}`,
+  endpoint: process.env.NEON_STORAGE_ENDPOINT,
   // ...
 });
 ```

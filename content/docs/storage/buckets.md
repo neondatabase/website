@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-08T21:59:22.991Z'
+updatedOn: '2026-06-10T16:53:44.852Z'
 ---
 
 A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch. Each branch has its own view of storage, and buckets inherit from parent branches when a new branch is created.
@@ -37,7 +37,7 @@ import { S3Client, CreateBucketCommand } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
   region: 'us-east-2',
-  endpoint: `https://${process.env.NEON_STORAGE_HOST}`,
+  endpoint: process.env.NEON_STORAGE_ENDPOINT,
   credentials: {
     accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID,
     secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY,
@@ -54,7 +54,7 @@ import boto3, os
 client = boto3.client(
     's3',
     region_name='us-east-2',
-    endpoint_url=f"https://{os.environ['NEON_STORAGE_HOST']}",
+    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
     aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],
     aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],
 )
@@ -66,7 +66,7 @@ client.create_bucket(Bucket='my-bucket')
 aws s3api create-bucket \
   --bucket my-bucket \
   --region us-east-2 \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -78,7 +78,7 @@ neonctl bucket create my-public-bucket --access-level public_read
 ```
 
 <Admonition type="note">
-`NEON_STORAGE_HOST` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
+`NEON_STORAGE_ENDPOINT` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
 </Admonition>
 
 ## List buckets
@@ -102,7 +102,7 @@ print(response['Buckets'])
 ```
 
 ```bash
-aws s3api list-buckets --endpoint-url "https://$NEON_STORAGE_HOST"
+aws s3api list-buckets --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -130,7 +130,7 @@ client.delete_bucket(Bucket='my-bucket')
 ```bash
 aws s3api delete-bucket \
   --bucket my-bucket \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>

@@ -6,7 +6,7 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-08T22:01:37.795Z'
+updatedOn: '2026-06-10T16:53:44.852Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
@@ -45,7 +45,7 @@ client.put_object(
 ```bash shouldWrap
 aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
   --content-type image/jpeg \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -123,7 +123,7 @@ with open('./photo.jpg', 'wb') as f:
 
 ```bash shouldWrap
 aws s3 cp s3://my-bucket/images/photo.jpg ./photo.jpg \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -185,7 +185,7 @@ print(response.get('CommonPrefixes', []))
 
 ```bash shouldWrap
 aws s3 ls s3://my-bucket/images/ \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>
@@ -231,7 +231,7 @@ client.delete_object(Bucket='my-bucket', Key='images/photo.jpg')
 
 ```bash shouldWrap
 aws s3 rm s3://my-bucket/images/photo.jpg \
-  --endpoint-url "https://$NEON_STORAGE_HOST"
+  --endpoint-url "$NEON_STORAGE_ENDPOINT"
 ```
 
 </CodeTabs>

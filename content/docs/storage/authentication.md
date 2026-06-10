@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-08T19:36:47.586Z'
+updatedOn: '2026-06-10T16:53:44.852Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -60,7 +60,7 @@ import { S3Client } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
   region: 'us-east-2',
-  endpoint: `https://${process.env.NEON_STORAGE_HOST}`,
+  endpoint: process.env.NEON_STORAGE_ENDPOINT,
   credentials: {
     accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID,   // token_id
     secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY, // s3_secret_access_key
@@ -75,7 +75,7 @@ import boto3, os
 client = boto3.client(
     's3',
     region_name='us-east-2',
-    endpoint_url=f"https://{os.environ['NEON_STORAGE_HOST']}",
+    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
     aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],      # token_id
     aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],  # s3_secret_access_key
 )
