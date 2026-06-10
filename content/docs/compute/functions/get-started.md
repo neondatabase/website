@@ -42,6 +42,8 @@ Connect the directory to a Neon project (pick one or create it):
 neonctl link
 ```
 
+`link` also pulls the branch's Neon env vars into a local env file (`.env` if one exists, otherwise `.env.local`), so other tools can use them. You don't need the file for this guide; `neonctl dev` injects the vars itself. See [Environment variables](/docs/compute/functions/environment-variables#pull-variables-locally) for details.
+
 To target a specific branch, use `neonctl checkout`. It switches the branch pointer, and creates the branch if it doesn't exist:
 
 ```bash

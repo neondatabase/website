@@ -27,9 +27,19 @@ Neon injects connection strings and service URLs automatically at runtime. You d
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
+For type-safe access, the [`@neondatabase/env`](https://www.npmjs.com/package/@neondatabase/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
+
+```ts
+import { parseEnv } from '@neondatabase/env/v1';
+import config from './neon';
+
+const env = parseEnv(config);
+env.postgres.databaseUrl; // typed, validated
+```
+
 ## User-defined variables
 
-User-defined variables are baked into the deployment at deploy time. Changing a variable requires a new deployment.
+Each deployment carries its own snapshot of user-defined variables. To change one, deploy again.
 
 ### At deploy time
 
@@ -77,7 +87,7 @@ The file isn't forwarded to the function directly. Only variables declared in th
 
 ## Pull variables locally
 
-`neonctl env pull` writes the linked branch's Neon-injected variables to a local `.env` file:
+`neonctl link` and `neonctl checkout` pull the branch's Neon-injected variables into a local `.env` file automatically (pass `--no-env-pull` to skip). To re-pull at any time:
 
 ```bash
 neonctl env pull
@@ -89,7 +99,7 @@ By default this writes to `.env` if it exists, otherwise `.env.local`. Use `--fi
 neonctl env pull --file .env.preview
 ```
 
-To pull from a different branch, switch with `neonctl checkout` first.
+To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
 
 `env pull` writes only the Neon-managed variables (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and enabled service URLs) and preserves every other line in the file.
 

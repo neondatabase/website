@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-10T03:57:18.581Z'
+updatedOn: '2026-06-10T12:55:19.407Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -47,7 +47,7 @@ const app = new Hono();
 
 app.post('/event', async (c) => {
   const defer = waitUntil();
-  defer(writeAnalytics(c.req.raw));
+  defer(writeAnalytics(c.req.raw)); // your async follow-up work
   return c.json({ ok: true });
 });
 

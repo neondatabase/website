@@ -23,7 +23,8 @@ Sign up for the waitlist at [neon.com/blog/were-building-backends](https://neon.
 - Long-running compute: WebSocket servers, SSE endpoints, AI agents
 - `DATABASE_URL` auto-injected from the branch's Postgres database
 - `neonctl dev` for local development with hot reload
-- `neonctl functions deploy` for CLI deployment
+- `neon.ts` config with `neonctl deploy` for declarative branch setup
+- `neonctl functions deploy` for direct CLI deployment
 - Neon API for programmatic deployment
 - Branch-scoped functions: each branch runs its own version at its own URL
 

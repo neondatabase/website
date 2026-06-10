@@ -18,16 +18,16 @@ Neon Functions is currently in Private Preview, available for new projects in th
 neonctl functions deploy <slug> [--path <dir>] [--entry <file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. At least one of `--path`, `--entry`, `--env`, or `--runtime` is required; bare `neonctl functions deploy <slug>` with no flags will error.
+The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. At least one of `--path`, `--entry`, `--env`, or `--runtime` is required; bare `neonctl functions deploy <slug>` with no flags errors.
 
-| Flag              | Default       | Description                                                        |
-| ----------------- | ------------- | ------------------------------------------------------------------ |
-| `--path`          | `.`           | Directory containing the function source                           |
-| `--entry`         | `index.ts`    | Entry file relative to `--path`                                    |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Baked into the deployment |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value               |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                   |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes               |
+| Flag              | Default       | Description                                                         |
+| ----------------- | ------------- | ------------------------------------------------------------------- |
+| `--path`          | `.`           | Directory containing the function source                            |
+| `--entry`         | `index.ts`    | Entry file relative to `--path`                                     |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                    |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                |
 
 **Examples:**
 
@@ -54,14 +54,16 @@ Bundle with esbuild, zip the output, then POST to the deploy endpoint.
 **1. Bundle:**
 
 ```bash
-esbuild functions/hello.ts --bundle --platform=node --target=node24 --outfile=dist/index.js
+esbuild functions/hello.ts --bundle --platform=node --target=node24 --outfile=dist/index.mjs
 ```
 
 **2. Zip:**
 
 ```bash
-zip -j function.zip dist/index.js
+zip -j function.zip dist/index.mjs
 ```
+
+The archive's entry file must be named `index.mjs`; the runtime imports it by that name.
 
 From Node.js, `buildFunctionBundle` from [`@neondatabase/config-runtime`](https://www.npmjs.com/package/@neondatabase/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
 
@@ -93,7 +95,7 @@ curl -X POST \
 | `runtime`     | string | No                | `nodejs24` is the only valid value                         |
 | `environment` | string | No                | JSON-encoded string-to-string map                          |
 
-The API returns immediately. Poll the get endpoint to check status.
+The API returns immediately. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes.
 
 ## Slugs
 
