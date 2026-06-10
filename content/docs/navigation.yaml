@@ -695,6 +695,8 @@
                   slug: reference/cli-set-context
                 - title: data-api
                   slug: reference/cli-data-api
+                - title: neon-auth
+                  slug: reference/cli-neon-auth
                 - title: init
                   slug: reference/cli-init
                 - title: completion
