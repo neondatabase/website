@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-10T09:19:01.120Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -145,7 +145,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                                       | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The maximum value is `604800` seconds (1 week).                                                           | number  |                                                     |
 | `--cu`              | The number of Compute Units. Could be a fixed size (for example "2") or a range delimited by a dash (for example "0.5-3").                                                                                                                                                      | string  |                                                     |
-| `--psql`            | Connect to a new branch via psql. No psql installation required — neonctl uses a built-in implementation if psql is not on your `$PATH`.                                                                                                                                        | boolean |                                                     |
+| `--psql`            | Connect to a new branch via psql. No psql installation required. Neonctl uses a built-in implementation if psql is not on your `$PATH`.                                                                                                                                         | boolean |                                                     |
 | `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                           | boolean |                                                     |
 | `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                                | string  |                                                     |
 
@@ -179,7 +179,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   ```
 
     <Admonition type="note">
-    If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
+    If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [the connection-string command](/docs/reference/cli-connection-string).
     </Admonition>
 
 - Create a branch with the `--output` format of the command set to `json`. This output format returns all of the branch response data, whereas the default `table` output format (shown in the preceding example) is limited in the information it can display.

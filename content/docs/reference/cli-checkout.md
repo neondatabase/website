@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-06-10T09:19:01.120Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -33,8 +33,8 @@ The branch argument is **optional**. Run `neon checkout` with no branch in an in
 
 Branch **ID vs name** is detected automatically (a `br-…` value is treated as an ID):
 
-- **ID** — matched strictly by ID. A non-existent ID is a hard "not found" error (IDs are server-assigned, so `checkout` never creates one).
-- **Name** — matched by name. If the name does not exist, in an interactive terminal `checkout` offers to **create** it (equivalent to `neon branches create --name <name>`: branched from the project's default branch with a read-write compute), then checks it out. In a non-interactive context, a missing name is the usual "not found" error.
+- **ID:** Matched strictly by ID. A non-existent ID is a hard "not found" error (IDs are server-assigned, so `checkout` never creates one).
+- **Name:** Matched by name. If the name does not exist, in an interactive terminal `checkout` offers to **create** it (equivalent to `neon branches create --name <name>`: branched from the project's default branch with a read-write compute), then checks it out. In a non-interactive context, a missing name is the usual "not found" error.
 
 ### Project resolution
 

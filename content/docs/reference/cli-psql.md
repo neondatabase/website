@@ -6,7 +6,7 @@ summary: >-
   against a branch in your Neon project, including pooled connections and
   time-travel support.
 enableTableOfContents: true
-updatedOn: '2026-06-10T09:19:01.120Z'
+updatedOn: '2026-06-10T09:24:02.657Z'
 ---
 
 ## Before you begin
@@ -23,7 +23,7 @@ This is equivalent to running [`neon connection-string --psql`](/docs/reference/
 
 ### psql binary
 
-`neon psql` uses the native `psql` binary from your `$PATH` if one is available. If not, it falls back to a built-in TypeScript implementation automatically — no separate PostgreSQL client tools installation required. The built-in implementation supports SCRAM-SHA-256 authentication and standard interactive and non-interactive usage, and is verified against PostgreSQL 14–18.
+`neon psql` uses the native `psql` binary from your `$PATH` if one is available. If not, it falls back to a built-in TypeScript implementation automatically, with no separate PostgreSQL client tools installation required. The built-in implementation supports SCRAM-SHA-256 authentication and standard interactive and non-interactive usage, and is verified against PostgreSQL 14–18.
 
 To force the built-in implementation in CI or other environments where native `psql` is present but you want consistent behavior, set `NEONCTL_PSQL_FALLBACK=1`.
 
