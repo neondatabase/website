@@ -310,15 +310,19 @@
 
     a:has(> code) {
       > code {
-        @apply relative underline decoration-transparent decoration-dashed decoration-1 underline-offset-2 transition-colors duration-200;
+        @apply relative underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-2 transition-colors duration-200;
       }
 
       &:hover > code {
-        @apply bg-gray-new-94 decoration-black-pure/70;
+        @apply bg-gray-new-94;
+      }
+
+      .dark & > code {
+        @apply decoration-white/40;
       }
 
       .dark &:hover > code {
-        @apply bg-gray-new-10 decoration-white/70;
+        @apply bg-gray-new-10;
       }
 
       > code::after {
