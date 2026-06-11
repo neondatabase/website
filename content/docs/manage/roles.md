@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -114,7 +114,7 @@ For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage
 
 ## Manage roles with the Neon CLI
 
-The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/reference/cli-roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
+The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/cli/roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
 
 ## Manage roles with the Neon API
 
@@ -392,7 +392,7 @@ Roles with `NOLOGIN` are commonly used for permission management. For an example
 The Neon API and CLI also support creating `NOLOGIN` roles:
 
 - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
-- The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
+- The Neon CLI [`neon roles create`](/docs/cli/roles#create) command supports a `--no-login` option.
 
 ## Reserved role names
 

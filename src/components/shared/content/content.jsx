@@ -7,6 +7,13 @@ import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
+import {
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
+} from 'components/pages/doc/cli-reference';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -205,6 +212,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   StickyTable,
   CheckList,
   CheckItem,
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,

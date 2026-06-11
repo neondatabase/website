@@ -17,7 +17,7 @@
 
 module.exports = {
   tagline:
-    "Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.",
+    'Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.',
 
   intro: [
     'Neon docs are available as markdown.',
@@ -231,7 +231,7 @@ module.exports = {
   // Reclassify specific files into a different subsection.
   // Keys are relative paths (same as doc.path). Keep minimal.
   reclassify: {
-    'reference/neon-cli.md': { section: 'Neon CLI' },
+    'cli.md': { section: 'Neon CLI' },
     'serverless/serverless-driver.md': { section: 'Connect' },
     'local/neon-local.md': { section: 'Connect', subsection: 'Local Development' },
     'local/vscode-extension.md': { section: 'Connect', subsection: 'Local Development' },
@@ -243,7 +243,7 @@ module.exports = {
   // Prefix-based reclassification (first match wins). More maintainable than
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
-    { pathPrefix: 'reference/cli-', section: 'Neon CLI' },
+    { pathPrefix: 'cli/', section: 'Neon CLI' },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
     { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },

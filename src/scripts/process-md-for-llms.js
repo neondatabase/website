@@ -35,6 +35,13 @@ const path = require('path');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
+// CLI reference components (<CliOptions command="..."/> etc.) render
+// generated content from the committed neonctl schema. These are the SAME
+// renderer functions used by src/components/pages/doc/cli-reference, so the
+// web page and this llms mirror can never disagree on the generated tables.
+const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
+const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
 
@@ -381,15 +388,20 @@ function loadSharedContent(templateName, props = {}) {
     processed = processed.replace(new RegExp(`\\{${key}\\}`, 'g'), value);
   }
 
-  // Parse the content as MDX
+  return parseMarkdownToNodes(processed);
+}
+
+/**
+ * Parse a markdown string into transformed MDAST nodes ready for splicing
+ * into the output tree. Nested MDX components inside the string are
+ * transformed too.
+ * @param {string} markdown
+ * @returns {Array} - Array of AST nodes
+ */
+function parseMarkdownToNodes(markdown) {
   const processor = unified().use(remarkParse).use(remarkGfm).use(remarkMdx);
-
-  const tree = processor.parse(processed);
-
-  // Transform the parsed content (this will handle nested MDX components)
-  const transformedChildren = transformChildren(tree.children);
-
-  return transformedChildren;
+  const tree = processor.parse(markdown);
+  return transformChildren(tree.children);
 }
 
 /**
@@ -421,7 +433,53 @@ function buildCheckItem(node) {
 /**
  * Component handlers - transform MDX JSX nodes into markdown nodes
  */
+/**
+ * Resolve the `command` attribute of a CLI reference component to its
+ * schema node + path parts. Returns null (with a warning) when unknown, so
+ * a stale page degrades visibly instead of crashing the postbuild.
+ */
+function resolveCliCommand(node, componentName) {
+  const command = getAttr(node, 'command') || '';
+  const parts = command.trim().split(/\s+/).filter(Boolean);
+  const target = cliDocs.resolveCommand(cliSchema, parts);
+  if (!target) {
+    console.warn(`${componentName}: unknown neonctl command "${command}" in ${currentFile}`);
+    processingErrors.push({ file: currentFile, error: `unknown neonctl command "${command}"` });
+    return null;
+  }
+  return { target, parts };
+}
+
 const componentHandlers = {
+  /**
+   * CLI reference components -> generated markdown from the neonctl schema
+   * (same renderers as the web components in components/pages/doc/cli-reference).
+   */
+  CliUsage(node) {
+    const resolved = resolveCliCommand(node, 'CliUsage');
+    return resolved
+      ? parseMarkdownToNodes(cliDocs.renderUsage(resolved.target, resolved.parts))
+      : null;
+  },
+  CliOptions(node) {
+    const resolved = resolveCliCommand(node, 'CliOptions');
+    return resolved ? parseMarkdownToNodes(cliDocs.renderOptions(resolved.target)) : null;
+  },
+  CliSubcommands(node) {
+    const resolved = resolveCliCommand(node, 'CliSubcommands');
+    if (!resolved) return null;
+    const anchorParts = (getAttr(node, 'anchorParts') || '').trim().split(/\s+/).filter(Boolean);
+    return parseMarkdownToNodes(cliDocs.renderSubcommands(resolved.target, anchorParts));
+  },
+  CliGlobalOptions() {
+    return parseMarkdownToNodes(cliDocs.renderGlobalOptions(cliSchema));
+  },
+  CliCommandIndex() {
+    // The interactive index on the web page degrades to the full static
+    // command tree for agents reading the .md mirror.
+    return parseMarkdownToNodes(cliDocs.renderCommandIndex(cliSchema));
+  },
+
   /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
@@ -1727,6 +1785,15 @@ function remarkAbsoluteUrls(pageUrl) {
     // Convert images
     visit(tree, 'image', (node) => {
       node.url = toAbsoluteUrl(node.url, pageUrl);
+    });
+    // Strip custom anchor IDs from heading text: "### create (#create)" is
+    // an authoring convention for short anchors; the "(#create)" suffix is
+    // noise in the rendered markdown the mirror serves to agents.
+    visit(tree, 'heading', (node) => {
+      const last = node.children?.[node.children.length - 1];
+      if (last?.type === 'text') {
+        last.value = last.value.replace(/\s*(?:\(#[^)]+\)|\{#[^}]+\})\s*$/, '');
+      }
     });
   };
 }

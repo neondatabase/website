@@ -11,7 +11,7 @@ summary: >-
   independent root branches with plan-specific storage limits; reset-from-parent
   is not supported.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <FeatureBeta />
@@ -48,7 +48,7 @@ To create a schema-only branch using the Neon CLI:
 neon branch create --schema-only
 ```
 
-If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/cli/branches#create).
 
 </TabItem>
 

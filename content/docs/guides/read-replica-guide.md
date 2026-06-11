@@ -11,7 +11,7 @@ summary: >-
   automatic synchronization of max_connections and related Postgres parameters
   between primary and replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -31,7 +31,7 @@ Regardless of the application, the steps for creating, configuring, and connecti
 
 ## Create a read replica
 
-Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/reference/cli-branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/cli/branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 <Admonition type="note">
 The Free plan is limited to a maximum of 3 read replica computes per project.
@@ -57,7 +57,7 @@ In a few seconds, your read replica is provisioned and appears on the **Computes
 
 <TabItem>
 
-To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
+To create a read replica using the Neon CLI, use the [branches](/docs/cli/branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
 
 ```bash
 neon branches add-compute mybranch --type read_only

@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -39,7 +39,7 @@ neon projects create \
   --region-id aws-us-east-2
 ```
 
-Add `--org-id` to target a specific organization. The output includes the new project ID and the default connection string. See the [`projects` command reference](/docs/reference/cli-projects).
+Add `--org-id` to target a specific organization. The output includes the new project ID and the default connection string. See the [`projects` command reference](/docs/cli/projects).
 
 </TabItem>
 

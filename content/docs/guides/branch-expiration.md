@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 ## Overview
@@ -302,7 +302,7 @@ Check expiration status of your branches:
 <TabItem>
 
 ```bash
-neon branches info <branch_id> --project-id <project_id>
+neon branches get <branch_id> --project-id <project_id>
 ```
 
 </TabItem>

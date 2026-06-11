@@ -13,7 +13,7 @@ summary: >-
   Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -92,7 +92,7 @@ Neon is working with the Vercel team to transition Enterprise customers.
 ### Immediate access (all users)
 
 - **Neon Console** - Dedicated database management interface
-- **CLI support** - Full [Neon CLI](/docs/reference/neon-cli) (Vercel CLI didn't support Postgres)
+- **CLI support** - Full [Neon CLI](/docs/cli) (Vercel CLI didn't support Postgres)
 - **Terraform support** - [Neon Terraform provider](/docs/reference/terraform)
 - **Multiple Postgres roles** - No longer limited to single role
 - **Larger computes** - Up to 2 CU (8 GB RAM) on Free plan, more on paid plans

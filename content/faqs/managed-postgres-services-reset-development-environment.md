@@ -32,7 +32,7 @@ For more precise rollbacks, use [instant restore](https://neon.com/docs/guides/b
 Restore creates a backup branch at the previous state so the rollback is reversible.
 
 <Callout title="CI integration">
-Both operations work from the [Neon CLI](https://neon.com/docs/reference/cli-branches) and [API](https://api-docs.neon.tech/reference/restoreprojectbranch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.
+Both operations work from the [Neon CLI](https://neon.com/docs/cli/branches) and [API](https://api-docs.neon.tech/reference/restoreprojectbranch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.
 </Callout>
 
 The Free plan includes 10 branches per project and 0.5 GB of storage per project, which is enough to wire reset-from-parent into a CI pipeline before paying anything.
