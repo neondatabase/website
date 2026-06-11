@@ -2,25 +2,22 @@
 title: Neon AI Gateway
 subtitle: LLM inference built into your Neon branch
 summary: >-
-  Neon AI Gateway is the LLM inference layer in the Neon backend for apps and
-  agents. Use your branch credential to call foundation models from Anthropic,
-  OpenAI, Google, and Alibaba without managing provider API keys. Standard AI
-  SDKs work out of the box. Point them at your branch host and start calling
-  models immediately.
+  Neon AI Gateway is the LLM inference layer built into the Neon backend. One
+  Neon credential gives you access to 39 models across 7 providers. Standard AI
+  SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:29:12.425Z'
+updatedOn: '2026-06-11T16:33:40.799Z'
 ---
 
 <Admonition type="note" title="Private Preview">
 Neon AI Gateway is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends). Foundation model access requires a paid Neon plan.
 </Admonition>
 
-Neon AI Gateway is the LLM inference layer in the Neon backend for apps and agents. Use your branch credential to call foundation models from Anthropic, OpenAI, Google, and Alibaba. No provider API keys required. Your existing OpenAI or Anthropic SDK works without changes. Point it at your branch host and start making requests.
+Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
-- **No provider credentials to manage.** Authenticate with your existing Neon credential.
+- **One credential for all providers.** A single Neon credential gives you access to 39 models across Anthropic, OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. No separate provider accounts needed.
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
-- **Branches with your database.** Every branch gets its own gateway endpoint, so you can test AI features in preview branches without touching production.
-- **39 models across 7 providers.** Claude, GPT, Gemini, Llama, DeepSeek, and more, all accessible with the same credential.
+- **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
 
 ## Quickstart
