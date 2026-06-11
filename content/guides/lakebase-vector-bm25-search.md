@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T14:10:13.754Z'
+updatedOn: '2026-06-11T14:23:54.835Z'
 ---
 
 <RequestForm type="lakebase-search" />
@@ -347,22 +347,29 @@ export default function Home() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSearching(true);
+  const performSearch = async (searchQuery: string, searchMode: 'vector' | 'keyword') => {
+    if (!searchQuery.trim()) return;
 
+    setIsSearching(true);
     try {
-      if (mode === 'vector') {
-        const res = await vectorSearch(query);
+      if (searchMode === 'vector') {
+        const res = await vectorSearch(searchQuery);
         setResults(res);
       } else {
-        const res = await keywordSearch(query);
+        const res = await keywordSearch(searchQuery);
         setResults(res);
       }
     } catch (error) {
       console.error("Search failed:", error);
     } finally {
       setIsSearching(false);
+    }
+  };
+
+  const handleModeChange = (newMode: 'vector' | 'keyword') => {
+    setMode(newMode);
+    if (query.trim()) {
+      performSearch(query, newMode);
     }
   };
 
@@ -378,7 +385,13 @@ export default function Home() {
           </p>
         </div>
 
-        <form onSubmit={handleSearch} className="bg-white p-6 rounded-lg shadow-sm border space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            performSearch(query, mode);
+          }}
+          className="bg-white p-6 rounded-lg shadow-sm border space-y-4"
+        >
           <div className="flex gap-4">
             <input
               type="text"
@@ -404,7 +417,7 @@ export default function Home() {
                 name="mode"
                 value="vector"
                 checked={mode === 'vector'}
-                onChange={() => setMode('vector')}
+                onChange={() => handleModeChange('vector')}
                 className="text-blue-600 focus:ring-blue-500"
               />
               Semantic Vector Search
@@ -415,7 +428,7 @@ export default function Home() {
                 name="mode"
                 value="keyword"
                 checked={mode === 'keyword'}
-                onChange={() => setMode('keyword')}
+                onChange={() => handleModeChange('keyword')}
                 className="text-blue-600 focus:ring-blue-500"
               />
               BM25 Keyword Search
@@ -468,9 +481,13 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
    Select _Semantic Vector Search_ and search for: `"How do I safely duplicate my database?"`
    Even though the exact words "duplicate" and "safely" might not be in the articles, the vector search understands the _meaning_ and will successfully return the "Understanding Database Branching" article.
 
+   ![Vector Search Result](/docs/guides/lakebase-vector-search-result.png)
+
 2. **Test BM25 keyword search:**
    Select _BM25 Keyword Search_ and search for: `"password reset"`
    Keyword search excels at exact terminology matches. It will bypass unrelated articles and return the "How to reset your password" article with a strong BM25 score, while ignoring the branching and billing articles that don't contain those keywords.
+
+   ![BM25 Search Result](/docs/guides/lakebase-bm25-search-result.png)
 
 </Steps>
 
