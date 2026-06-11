@@ -6,7 +6,7 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:39:34.297Z'
+updatedOn: '2026-06-11T11:44:51.348Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
@@ -152,11 +152,14 @@ Use a prefix and delimiter to simulate a folder structure.
 <CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-# List all objects in a bucket
+# Folder-collapsed view by default (same as aws s3 ls)
 neonctl bucket object list my-bucket
 
-# List objects under a prefix, showing folders
-neonctl bucket object list my-bucket/images/ --delimiter /
+# List objects under a prefix
+neonctl bucket object list my-bucket/images/
+
+# Flat listing of every key, no folder collapsing
+neonctl bucket object list my-bucket --recursive
 ```
 
 ```typescript shouldWrap
