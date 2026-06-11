@@ -8,7 +8,7 @@ summary: >-
   SDKs work out of the box. Point them at your branch host and start calling
   models immediately.
 enableTableOfContents: true
-updatedOn: '2026-06-08T18:44:46.877Z'
+updatedOn: '2026-06-11T11:29:12.425Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -20,7 +20,7 @@ Neon AI Gateway is the LLM inference layer in the Neon backend for apps and agen
 - **No provider credentials to manage.** Authenticate with your existing Neon credential.
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
 - **Branches with your database.** Every branch gets its own gateway endpoint, so you can test AI features in preview branches without touching production.
-- **20+ models across 4 providers.** Claude, GPT, Gemini, and Qwen, all accessible with the same credential.
+- **39 models across 7 providers.** Claude, GPT, Gemini, Llama, DeepSeek, and more, all accessible with the same credential.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
 
 ## Quickstart

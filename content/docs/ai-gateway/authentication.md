@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-08T16:53:15.172Z'
+updatedOn: '2026-06-11T11:29:12.425Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -61,6 +61,28 @@ client = OpenAI(
 ```
 
 </CodeTabs>
+
+## Credentials in Neon Functions
+
+When your code runs inside Neon Functions, the following environment variables are injected automatically — no credential creation step required:
+
+| Variable                   | Value                                                   |
+| -------------------------- | ------------------------------------------------------- |
+| `NEON_AI_GATEWAY_TOKEN`    | Bearer token for the AI Gateway                         |
+| `NEON_AI_GATEWAY_BASE_URL` | Branch gateway host with `https://` prefix, no path     |
+| `OPENAI_API_KEY`           | Same value as `NEON_AI_GATEWAY_TOKEN`                   |
+| `OPENAI_BASE_URL`          | Branch gateway host including the chat completions path |
+
+`OPENAI_BASE_URL` and `OPENAI_API_KEY` let standard OpenAI SDK calls work with zero configuration. The `NEON_AI_GATEWAY_*` aliases are useful when you want credentials that survive a user overriding the `OPENAI_*` variables with their own keys:
+
+```typescript
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+});
+```
 
 ## How branch binding works
 

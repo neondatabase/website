@@ -3,11 +3,11 @@ title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
   Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
-  OpenAI, Google, and Alibaba. All model IDs use the databricks- prefix.
-  Use these IDs in the model field of any request regardless of which endpoint
-  you are using.
+  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. All model IDs use
+  the databricks- prefix. Use these IDs in the model field of any request
+  regardless of which endpoint you are using.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:16:40.599Z'
+updatedOn: '2026-06-11T11:29:12.425Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
@@ -49,20 +49,24 @@ Use the `id` field in the `model` parameter of any inference request.
 | `databricks-claude-opus-4-7`   |                                |
 | `databricks-claude-opus-4-6`   |                                |
 | `databricks-claude-opus-4-5`   |                                |
+| `databricks-claude-opus-4-1`   |                                |
 | `databricks-claude-sonnet-4-6` | Recommended for most use cases |
+| `databricks-claude-sonnet-4-5` |                                |
+| `databricks-claude-sonnet-4`   |                                |
 | `databricks-claude-haiku-4-5`  | Fast and cost-effective        |
 
 ### Google
 
-| Model ID                           | Notes |
-| ---------------------------------- | ----- |
-| `databricks-gemini-3-5-flash`      |       |
-| `databricks-gemini-3-1-pro`        |       |
-| `databricks-gemini-3-1-flash-lite` |       |
-| `databricks-gemini-3-pro`          |       |
-| `databricks-gemini-3-flash`        |       |
-| `databricks-gemini-2-5-pro`        |       |
-| `databricks-gemini-2-5-flash`      |       |
+| Model ID                           | Notes                 |
+| ---------------------------------- | --------------------- |
+| `databricks-gemini-3-5-flash`      |                       |
+| `databricks-gemini-3-1-pro`        |                       |
+| `databricks-gemini-3-1-flash-lite` |                       |
+| `databricks-gemini-3-pro`          |                       |
+| `databricks-gemini-3-flash`        |                       |
+| `databricks-gemini-2-5-pro`        |                       |
+| `databricks-gemini-2-5-flash`      |                       |
+| `databricks-gemma-3-12b`           | Chat completions only |
 
 ### OpenAI
 
@@ -79,12 +83,39 @@ Use the `id` field in the `model` parameter of any inference request.
 | `databricks-gpt-5-1-codex-max`  | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
 | `databricks-gpt-5-1-codex-mini` | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
 | `databricks-gpt-5-1`            |                                                                    |
+| `databricks-gpt-5`              |                                                                    |
+| `databricks-gpt-5-mini`         |                                                                    |
+| `databricks-gpt-5-nano`         |                                                                    |
+
+### Databricks
+
+Open-weight models hosted by Databricks. Chat completions only.
+
+| Model ID                  | Notes |
+| ------------------------- | ----- |
+| `databricks-gpt-oss-120b` |       |
+| `databricks-gpt-oss-20b`  |       |
+
+### Meta
+
+| Model ID                                 | Notes |
+| ---------------------------------------- | ----- |
+| `databricks-llama-4-maverick`            |       |
+| `databricks-meta-llama-3-3-70b-instruct` |       |
+| `databricks-meta-llama-3-1-8b-instruct`  |       |
 
 ### Alibaba
 
-| Model ID                      | Notes |
-| ----------------------------- | ----- |
-| `databricks-qwen35-122b-a10b` |       |
+| Model ID                                 | Notes |
+| ---------------------------------------- | ----- |
+| `databricks-qwen3-next-80b-a3b-instruct` |       |
+| `databricks-qwen35-122b-a10b`            |       |
+
+### DeepSeek
+
+| Model ID                   | Notes |
+| -------------------------- | ----- |
+| `databricks-deepseek-v3-2` |       |
 
 ## Which endpoint to use
 
@@ -95,7 +126,8 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 | Anthropic                              | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
 | OpenAI (most models)                   | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
 | OpenAI (`gpt-5-5-pro`, codex variants) | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and do not work with chat/completions             |
-| Google                                 | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Alibaba                                | `/ai-gateway/mlflow/v1/chat/completions` |                                                                                          |
+| Google Gemini                          | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B                     | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only; does not support the Gemini SDK endpoint                          |
+| Meta, DeepSeek, Databricks, Alibaba    | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
 
 <NeedHelp/>
