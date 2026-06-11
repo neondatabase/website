@@ -1,10 +1,10 @@
 ---
-title: 'Building a knowledge base with vector and BM25 search using Neon Lakebase Extensions'
+title: 'Building a knowledge base with Vector and BM25 search using Neon Lakebase extensions'
 subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text search application using Next.js and Neon’s lakebase_vector and lakebase_text extensions.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T14:35:01.672Z'
+updatedOn: '2026-06-11T14:38:06.386Z'
 ---
 
 <RequestForm type="lakebase-search" />
