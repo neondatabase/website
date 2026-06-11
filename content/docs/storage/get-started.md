@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T12:24:01.926Z'
+updatedOn: '2026-06-11T14:15:18.616Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -31,7 +31,7 @@ The response includes your S3 credentials. Store them immediately — they are r
 ```json
 {
   "token_id": "550e8400-e29b-41d4-a716-446655440000",
-  "s3_secret_access_key": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+  "s3_secret_access_key": "a665a459...",
   ...
 }
 ```
