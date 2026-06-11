@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:24:23.574Z'
+updatedOn: '2026-06-11T14:42:07.067Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -103,13 +103,13 @@ Issue separate credentials for read and write access when you want to limit expo
 
 - **Server-side code** that uploads files: `storage:write` (includes read)
 - **Client-side or CDN code** that only fetches: `storage:read`
-- **Presigned URLs**: generated server-side from a `storage:write` credential; the URL itself requires no credential in the browser
+- **Presigned URLs**: generate these server-side from a `storage:write` credential. The URL itself requires no credential in the browser.
 
-Scope enforcement is applied by the S3 data plane. A credential without a storage scope returns `403 AccessDenied` on all S3 operations. Server-side COPY requires both `storage:read` and `storage:write`.
+The S3 data plane enforces scope on every request. A credential without a storage scope returns `403 AccessDenied` on all S3 operations. Server-side COPY requires both `storage:read` and `storage:write`.
 
 ## Credentials in Neon Functions
 
-When your code runs inside Neon Functions, storage credentials are injected automatically. No credential creation step is required:
+When your code runs inside Neon Functions, Neon injects storage credentials automatically. You don't need to create a credential:
 
 | Variable                         | Value                             |
 | -------------------------------- | --------------------------------- |
@@ -119,7 +119,7 @@ When your code runs inside Neon Functions, storage credentials are injected auto
 | `NEON_STORAGE_SECRET_ACCESS_KEY` | S3 Secret Access Key              |
 | `NEON_STORAGE_FORCE_PATH_STYLE`  | Always `"true"`                   |
 
-Credentials are branch-scoped and tied to the function's serving branch. They cannot be overridden by user-supplied environment variables of the same name (the injected secret access key always wins). Use them directly with your S3 client:
+Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Use them directly with your S3 client:
 
 ```typescript
 import { S3Client } from '@aws-sdk/client-s3';
@@ -137,12 +137,12 @@ const client = new S3Client({
 
 ## How branch binding works
 
-A credential is bound to the branch it was created on. It is valid for:
+Each credential is tied to the branch it was created on. It is valid for:
 
 - That branch (the anchor branch)
 - Any branch descended from it: preview branches, feature branches, CI branches
 
-It is **not** valid for branches outside that lineage.
+It's **not** valid for branches outside that lineage.
 
 ```
 main  ──── credential valid here

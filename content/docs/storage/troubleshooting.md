@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:33:47.211Z'
+updatedOn: '2026-06-11T14:42:07.067Z'
 ---
 
 ## Authentication errors
@@ -32,7 +32,7 @@ The credential does not have the required scope for the operation.
 - `storage:read` allows GetObject, HeadObject, ListBuckets, and ListObjectsV2
 - `storage:write` allows all reads plus PutObject, DeleteObject, CreateBucket, and DeleteBucket
 
-To add write access, create a new credential with `storage:write`. Scopes cannot be added to an existing credential.
+To add write access, create a new credential with `storage:write`. You can't add scopes to an existing credential.
 
 ### `403 AccessDenied`: wrong branch
 
@@ -57,7 +57,7 @@ const client = new S3Client({
 
 ### `NoSuchBucket` on every request
 
-The bucket name is being treated as a subdomain instead of a path segment. This happens when `forcePathStyle` is not set.
+Without `forcePathStyle: true`, the SDK treats the bucket name as a subdomain instead of a path segment.
 
 **Fix:** Add `forcePathStyle: true` to your `S3Client` configuration:
 
@@ -68,13 +68,13 @@ const client = new S3Client({
 });
 ```
 
-Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Storage does not support.
+Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Storage doesn't support.
 
 ### SigV2 errors
 
 If you see signature-related errors mentioning `AWS2` or `AWSAccessKeyId`, your client is using the older AWS Signature Version 2.
 
-**Fix:** Use AWS Signature Version 4 (SigV4). The AWS SDK v3 for JavaScript and boto3 use SigV4 by default. If you are using an older SDK or a custom HTTP client, update it or configure it to use SigV4 explicitly.
+**Fix:** Use AWS Signature Version 4 (SigV4). The AWS SDK v3 for JavaScript and boto3 use SigV4 by default. If you're using an older SDK or a custom HTTP client, update it or configure it to use SigV4 explicitly.
 
 ## Access level errors
 
@@ -106,7 +106,7 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement is not available in Private Preview. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available in Private Preview. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ## Connection and performance errors
 

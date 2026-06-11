@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:24:23.574Z'
+updatedOn: '2026-06-11T14:42:07.067Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -26,7 +26,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user"}'
 ```
 
-The response includes your S3 credentials. Store them immediately. They are returned only once. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for how each field maps to your S3 client.
+The response includes your S3 credentials. Store them immediately. You'll only get them once. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for how each field maps to your S3 client.
 
 ```json
 {
