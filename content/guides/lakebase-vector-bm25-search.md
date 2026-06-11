@@ -4,8 +4,10 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T12:53:46.490Z'
+updatedOn: '2026-06-11T14:09:08.062Z'
 ---
+
+<RequestForm type="lakebase-search" />
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
 
@@ -14,7 +16,7 @@ When building an AI application, like a knowledge base, a support agent, or a re
 
 Historically, doing this in Postgres meant using `pgvector` with an HNSW index for vectors, and built-in full-text search with a GIN index for keywords. While functional, this approach hits scaling limits. HNSW indexes consume massive amounts of memory and build slowly. Meanwhile, GIN indexes lack native BM25 relevance scoring and must scan every single match before applying a `LIMIT` (no top-K pushdown), making keyword search sluggish on large tables.
 
-Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, solve these problems by introducing two new index types:
+Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, solve these problems by introducing two new index types. Here’s how they work together:
 
 - **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF (Inverted File) partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101) to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
 - **`lakebase_text`**: A BM25 full-text search index that seamlessly integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
@@ -74,7 +76,7 @@ SELECT '[1,0,0]'::vector <=> '[0,0,1]'::vector;
 
 **BM25 scoring (`<&>`)**
 
-BM25 is the algorithm behind search engines like Elasticsearch. It ranks documents based on how often a term appears in a document, how rare the term is across all documents, and document length. The `<&>` operator returns a negative score because it uses log-odds math - lower (more negative) values mean higher relevance.
+BM25 is the algorithm behind search engines like Elasticsearch. It ranks documents based on how often a term appears in a document, how rare the term is across all documents, and document length. The `<&>` operator returns a negative score because it uses log-odds math where lower (more negative) values mean higher relevance.
 
 ```sql
 -- "password reset" matches the password article strongly
@@ -89,6 +91,8 @@ SELECT content_tsv <&> to_bm25query(
 
 Without top-K pushdown, the database must find all matches, score every one, sort them, then return only the top N. With `default_limit = 10`, the index calculates scores for only the top 10 most promising results before returning them. This is like asking a librarian "find me the 10 most relevant books" instead of "find all books, then tell me the top 10."
 
+For more detailed reference on these concepts, see [lakebase_vector extension](/docs/extensions/lakebase-vector) and [lakebase_text extension](/docs/extensions/lakebase-text).
+
 <Steps>
 
 ## Create a Neon project
@@ -102,7 +106,7 @@ You will need a Neon database to store your knowledge base articles and the asso
 5. You will be greeted with the connection details for your new database. Copy the `Connection string` as you will need it later to connect your Next.js application to the database.
    ![Neon Console Connection String](/docs/connect/connection_details.png)
 
-## Enable the Lakebase Extensions
+## Enable the Lakebase extensions
 
 Enable the `lakebase_vector` and `lakebase_text` extensions in your Neon database. These extensions will allow you to create the necessary indexes for vector and BM25 search.
 
@@ -193,7 +197,7 @@ async function seed() {
       content TEXT NOT NULL,
       category TEXT NOT NULL,
       embedding VECTOR(1536),
-      content_tsv TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', title || ' ' || content)) STORED -- auto-generated tsvector for BM25 search
+      content_tsv TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', title || ' ' || content)) STORED
     );
   `;
 
@@ -223,14 +227,14 @@ async function seed() {
   // Create lakebase_ann vector index using cosine similarity
   await sql`
     CREATE INDEX IF NOT EXISTS kb_articles_ann_idx
-    ON kb_articles USING lakebase_ann (embedding vector_cosine_ops); -- vector_cosine_ops: index for cosine distance searches
+    ON kb_articles USING lakebase_ann (embedding vector_cosine_ops);
   `;
 
   // Create lakebase_bm25 text index for BM25 relevance scoring
   await sql`
     CREATE INDEX IF NOT EXISTS kb_articles_bm25_idx
-    ON kb_articles USING lakebase_bm25 (content_tsv bm25_ops) -- bm25_ops: enables BM25 scoring on tsvector columns
-    WITH (default_limit = 10); -- top-K pushdown: score only the top 10 candidates before applying LIMIT
+    ON kb_articles USING lakebase_bm25 (content_tsv bm25_ops)
+    WITH (default_limit = 10);
   `;
 
   console.log('✅ Database seeded successfully.');
@@ -285,7 +289,7 @@ export async function vectorSearch(query: string, limit = 3): Promise<SearchResu
     SELECT id, title, category, content,
            (embedding <=> ${JSON.stringify(queryEmbedding)}::vector) AS score -- <=> returns cosine distance (0 = identical, 2 = opposite)
     FROM kb_articles
-    ORDER BY score ASC -- lower distance = higher similarity
+    ORDER BY score ASC
     LIMIT ${limit}
   `;
 
@@ -298,12 +302,12 @@ export async function keywordSearch(query: string, limit = 3): Promise<SearchRes
   // Query using the lakebase_text <&> operator and to_bm25query function
   const results = await sql`
     SELECT id, title, category, content,
-           (content_tsv <&> to_bm25query( -- <&> returns BM25 score (more negative = more relevant)
-             to_tsvector('english', ${query}), -- convert query to tsvector format
-             'kb_articles_bm25_idx' -- name of the BM25 index to use for scoring
+           (content_tsv <&> to_bm25query(
+             to_tsvector('english', ${query}),
+             'kb_articles_bm25_idx'
            )) AS score
     FROM kb_articles
-    ORDER BY score ASC -- lower (more negative) score = higher relevance
+    ORDER BY score ASC
     LIMIT ${limit}
   `;
 
