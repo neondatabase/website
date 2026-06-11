@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:24:23.574Z'
+updatedOn: '2026-06-11T14:33:47.211Z'
 ---
 
 ## Authentication errors
@@ -82,7 +82,11 @@ If you see signature-related errors mentioning `AWS2` or `AWSAccessKeyId`, your 
 
 The bucket's access level is `private` (the default), which requires authentication for all reads.
 
-**Fix:** If the bucket should allow public reads, set its access level to `public_read` using the Neon Console or API. See [Access levels](/docs/storage/buckets#access-levels). Note: you cannot change access level via the S3 API (`PutBucketAcl` returns `501`).
+**Fix:** If the bucket should allow public reads, set its access level to `public_read` using the Neon Console or API. See [Access levels](/docs/storage/buckets#access-levels).
+
+<Admonition type="note">
+You cannot change access level via the S3 API. `PutBucketAcl` returns `501 Not Implemented`.
+</Admonition>
 
 ## S3 operation errors
 
