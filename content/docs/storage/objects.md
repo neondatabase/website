@@ -6,14 +6,19 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:35:46.410Z'
+updatedOn: '2026-06-11T11:39:34.297Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
 
 ## Upload
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+
+```bash
+neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
+neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
+```
 
 ```typescript shouldWrap
 import { PutObjectCommand } from '@aws-sdk/client-s3';
@@ -49,7 +54,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-The Neon CLI does not support uploading objects. Use the AWS SDK or AWS CLI with your branch endpoint and SigV4 credentials.
+`neonctl bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with multipart upload.
 </Admonition>
 
 ## Multipart upload
