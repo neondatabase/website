@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T09:07:49.857Z'
+updatedOn: '2026-06-11T09:49:56.374Z'
 ---
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
@@ -16,30 +16,40 @@ Historically, doing this in Postgres meant using `pgvector` with an HNSW index f
 
 Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, solve these problems by introducing two new index types:
 
-- **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF partitioning and RaBitQ quantization to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
+- **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF (Inverted File) partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101) to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
 - **`lakebase_text`**: A BM25 full-text search index that seamlessly integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
 
-Because these indexes live in storage rather than being bound to compute memory, they survive Neon's scale-to-zero cold starts instantly and carry over effortlessly when you branch your database.
+Because these indexes live in storage rather than being bound to compute memory, they survive Neon's [scale-to-zero](/docs/introduction/scale-to-zero) cold starts instantly and carry over effortlessly when you [branch your database](/docs/introduction/branching).
 
-In this guide, you will build a functional **knowledge base** using **Next.js**, the Neon serverless driver, and OpenAI. Your application will feature a UI that lets users toggle between Vector Search and BM25 Keyword Search so you can see the strengths of both engines in action.
+In this guide, you’ll build a simple knowledge base application with Next.js that showcases how to use the `lakebase_vector` and `lakebase_text` extensions to enable both semantic and keyword search. By the end, you’ll have a fully functional search interface powered entirely by Neon Postgres, no external search services or vector databases required.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 - **Node.js:** Version `18` or later installed.
-- **Neon account:** A Neon project with Postgres 16 or later. If you don't have one, [sign up for free](https://console.neon.tech/signup).
-- **OpenAI API key:** An active API key from [OpenAI](https://platform.openai.com/api-keys) to generate text embeddings.
+- **Neon account:** A free Neon account. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
+- **OpenAI API key:** Required for generating vector embeddings. You can generate one in the [OpenAI dashboard](https://platform.openai.com/api-keys).
 
 <Steps>
 
-## Set up your Neon database
+## Create a Neon project
 
-First, enable the required extensions in your Neon database.
+You will need a Neon database to store your knowledge base articles and the associated vector and text indexes.
 
-1. Navigate to your project in the [Neon Console](https://console.neon.tech).
-2. Open the **SQL Editor**.
-3. Run the following command to enable both extensions:
+1. Log in to the [Neon Console](https://console.neon.tech).
+2. Click on **New Project**.
+3. Choose a name for your project and select the region closest to you. Ensure you chose Postgres 16 or later.
+4. Click **Create**.
+5. You will be greeted with the connection details for your new database. Copy the `Connection string` as you will need it later to connect your Next.js application to the database.
+   ![Neon Console Connection String](/docs/connect/connection_details.png)
+
+## Enable the Lakebase Extensions
+
+Enable the `lakebase_vector` and `lakebase_text` extensions in your Neon database. These extensions will allow you to create the necessary indexes for vector and BM25 search.
+
+1. Open the **SQL Editor** from the left sidebar in your Neon project dashboard.
+2. Run the following command to enable both extensions:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
@@ -50,46 +60,42 @@ CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
 The `CASCADE` keyword on `lakebase_vector` automatically installs the standard `pgvector` extension if it isn't already present, since `lakebase_vector` relies on standard `pgvector` data types.
 </Admonition>
 
-4. Navigate to your project **Dashboard** and copy your Postgres connection string (ensure you select the "Pooled connection").
-
 ## Initialize the Next.js project
 
-Create a new Next.js application and install the necessary dependencies for database connectivity and AI embeddings.
+Now that your database is set up, create a new Next.js application that will serve as the frontend for your knowledge base search.
 
-1. **Create the app:**
+In your terminal, run the following commands to create and navigate into a new Next.js project:
 
 ```bash
 npx create-next-app@latest next-lakebase-search --yes
 cd next-lakebase-search
 ```
 
-2. **Install dependencies:**
+Install the necessary dependencies:
 
 ```bash
 npm install @neondatabase/serverless openai dotenv
 npm install -D tsx
 ```
 
-3. **Configure environment variables:**
-
 Create a `.env.local` file in the root of your project and add your database and OpenAI credentials:
 
-```env filename=".env.local"
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require"
-OPENAI_API_KEY="your-openai-api-key"
+```env
+DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+OPENAI_API_KEY="sk-..."
 ```
 
 ## Create the Database Schema and Seed Script
 
-We need a table to hold our knowledge base articles. We'll use a Next.js script to create the table, insert data (while generating embeddings via OpenAI), and _then_ create our Lakebase indexes.
+You will need a table to store your knowledge base articles, along with columns for vector embeddings and full-text search.
 
-<Admonition type="important" title="Create indexes after inserting data">
+<Admonition type="tip" title="Create indexes after inserting data">
 Both `lakebase_ann` and `lakebase_bm25` compute statistics at index build time. Building the index *after* you populate your initial data ensures accurate BM25 scoring (which relies on corpus-wide statistics) and optimal vector partitioning.
 </Admonition>
 
 Create a `scripts` folder in the root of your project, and add a `seed.ts` file:
 
-```typescript filename="scripts/seed.ts" shouldWrap
+```typescript shouldWrap
 import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';
 import OpenAI from 'openai';
@@ -183,13 +189,13 @@ npx tsx scripts/seed.ts
 
 Notice the `WITH (default_limit = 10)` parameter on the text index. This tells Postgres to only calculate the top 10 results from the index before applying query limits. This is the "top-K pushdown" feature that makes `lakebase_text` incredibly fast.
 
-## Create Server Actions for Search
+## Create server actions for search queries
 
-Next, we'll create the backend logic to handle search queries from our frontend. We will use Next.js Server Actions to securely query the database.
+You will create two server actions: one for vector search and one for keyword search. These actions will be responsible for querying the database using the appropriate index based on the user's selection.
 
-Create a file named `app/actions.ts`:
+Create a file named `app/actions.ts` and add the following code:
 
-```typescript filename="app/actions.ts" shouldWrap
+```typescript shouldWrap
 'use server';
 
 import { neon } from '@neondatabase/serverless';
@@ -209,14 +215,14 @@ export type SearchResult = {
 export async function vectorSearch(query: string, limit = 3): Promise<SearchResult[]> {
   if (!query) return [];
 
-  // 1. Convert user query to vector embedding
+  // Convert user query to vector embedding
   const { data } = await openai.embeddings.create({
     model: 'text-embedding-3-small',
     input: query,
   });
   const queryEmbedding = data[0].embedding;
 
-  // 2. Query using the standard pgvector <=> (cosine distance) operator
+  // Query using the standard pgvector <=> (cosine distance) operator
   const results = await sql`
     SELECT id, title, category, content,
            (embedding <=> ${JSON.stringify(queryEmbedding)}::vector) AS score
@@ -247,18 +253,27 @@ export async function keywordSearch(query: string, limit = 3): Promise<SearchRes
 }
 ```
 
-### Understanding the queries
+### Understanding the Queries
 
-- **Vector Search:** We use the `<=>` operator to calculate the cosine distance between the query embedding and the document embedding. Lower distance means higher similarity, so we order by `score ASC`.
-- **Keyword Search:** We use `to_bm25query()`, passing our `tsvector` query and the exact name of our BM25 index (`'kb_articles_bm25_idx'`). The `<&>` operator calculates the **negative** BM25 score. By ordering `ASC`, the lowest negative number (the highest relevance) comes first.
+When a user submits a search query, the application decides whether to use `vectorSearch` or `keywordSearch` based on the selected option. Each search type works differently:
 
-## Build the User Interface
+#### Vector search
 
-Now let's build a simple UI that allows users to search the knowledge base and toggle between the two search engines.
+1. **Embedding generation:** The server action creates an embedding for the user’s query using OpenAI’s embedding API.
+2. **Similarity calculation:** The `<=>` operator computes the cosine distance between the query embedding and the stored document embeddings.
+3. **Result ordering:** Results are sorted by `score ASC`, meaning documents with the lowest distance (highest similarity) appear first.
 
-Replace the contents of `app/page.tsx` with the following code:
+#### Keyword search
 
-```tsx filename="app/page.tsx" shouldWrap
+1. **BM25 scoring:** The server action uses the `<&>` operator from the `lakebase_text` extension to calculate BM25 relevance between the query and the `content_tsv` column.
+2. **Query conversion:** The `to_bm25query()` function transforms the user’s query into a format optimized for BM25 scoring.
+3. **Result ordering:** Results are sorted by `score ASC`. This is necessary because `<&>` returns a **negative BM25 score** where lower (more negative) values indicate higher relevance.
+
+## Build the Next.js frontend
+
+Create a simple user interface in `app/page.tsx` that allows users to enter a search query, select the search mode (vector or keyword), and display the results.
+
+```tsx shouldWrap
 'use client';
 
 import { useState } from 'react';
@@ -375,6 +390,8 @@ export default function Home() {
 }
 ```
 
+The UI consists of a search input, a toggle for selecting the search mode (vector or keyword), and a results section that displays the search results returned from the server actions. Each result shows the article title, category, content snippet, and the relevance score (cosine distance for vector search or BM25 score for keyword search).
+
 ## Run and test the application
 
 Start your Next.js development server:
@@ -391,31 +408,29 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
 
 2. **Test BM25 Keyword Search:**
    Select _BM25 Keyword Search_ and search for: `"password reset"`
-   Keyword search excels at exact terminology matches. It will bypass unrelated articles and hone in immediately on the "How to reset your password" article based on term frequency.
+   Keyword search excels at exact terminology matches. It will bypass unrelated articles and return the "How to reset your password" article with a strong BM25 score, while ignoring the branching and billing articles that don't contain those keywords.
 
 </Steps>
 
-## Why Lakebase Search changes the game
+## Conclusion
 
 By writing a simple Next.js app, you've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Neon Postgres.
 
 But the real magic happens as your application grows:
 
-- **Massive Vector Scaling:** As your knowledge base grows, standard HNSW indexes eventually exhaust compute RAM. `lakebase_ann` utilizes IVF partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101), dramatically shrinking index size and utilizing sequential storage I/O. It handles **over 1 billion vectors** smoothly.
-- **Instant Cold Starts:** AI agents and development environments often sit idle. When a Neon database scales to zero and wakes up, your `lakebase_ann` and `lakebase_bm25` indexes are available immediately without needing to load massive graphs into memory.
-- **Painless Branching:** Want to test a new OpenAI embedding model (`text-embedding-3-large`) or a different text chunking strategy? Create a Neon branch. Your Lakebase Search indexes instantly carry over via copy-on-write, with zero rebuild time required.
+- **Massive vector scaling:** As your knowledge base grows, standard HNSW indexes eventually exhaust compute RAM. `lakebase_ann` utilizes IVF partitioning and RaBitQ quantization, dramatically shrinking index size and utilizing sequential storage I/O. It can handle **over 1 billion vectors** smoothly.
+- **Instant cold starts:** AI agents and development environments often sit idle. When a Neon database scales to zero and wakes up, your `lakebase_ann` and `lakebase_bm25` indexes are available immediately without needing to load massive graphs into memory.
+- **Painless branching:** Want to test a new OpenAI embedding model (`text-embedding-3-large`) or a different text chunking strategy? Create a Neon branch. Your Lakebase Search indexes instantly carry over via copy-on-write, with zero rebuild time required.
 
-## Source Code
+## Source code
 
-You can find the complete source code for this example on GitHub.
+You can find the complete source code for this example on GitHub, which is adapted from the code in this guide with added styling and Shadcn UI components while preserving the core database interaction and search logic.
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase-labs/next-lakebase-search-example" description="Complete source code for the Next.js Lakebase Search example" icon="github">Lakebase Search Example Repository</a>
 </DetailIconCards>
 
 ## Resources
-
-To take your application further, explore the official extension documentation to learn about fine-tuning your indexes:
 
 - [The `lakebase_vector` extension](/docs/extensions/lakebase-vector) - Learn how to tune lists, probes, and configure residual quantization.
 - [The `lakebase_text` extension](/docs/extensions/lakebase-text) - Learn how to optimize queries with the `prefilter` GUC for lightning-fast filtered text searches.
