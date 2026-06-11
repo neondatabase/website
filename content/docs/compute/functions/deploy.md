@@ -63,7 +63,7 @@ esbuild functions/hello.ts --bundle --platform=node --target=node24 --outfile=di
 zip -j function.zip dist/index.mjs
 ```
 
-The archive's entry file must be named `index.mjs`; the runtime imports it by that name.
+The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
 From Node.js, `buildFunctionBundle` from [`@neondatabase/config-runtime`](https://www.npmjs.com/package/@neondatabase/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
 

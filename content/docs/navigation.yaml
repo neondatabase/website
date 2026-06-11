@@ -540,7 +540,6 @@
 
         - title: Neon Functions
           icon: features
-          tag: beta
           slug: compute/functions/overview
           items:
             - title: Overview
