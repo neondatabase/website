@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-11T12:20:31.702Z'
+updatedOn: '2026-06-11T12:24:01.926Z'
 ---
 
 A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch. Each branch has its own view of storage, and buckets inherit from parent branches when a new branch is created.
@@ -132,7 +132,7 @@ aws s3api list-buckets --endpoint-url "$NEON_STORAGE_ENDPOINT"
 
 ## Delete a bucket
 
-Buckets must be empty before deletion. Delete all objects first, then delete the bucket.
+Buckets must be empty before deletion. [Delete all objects](/docs/storage/objects#delete-objects) first, then delete the bucket.
 
 <CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
 

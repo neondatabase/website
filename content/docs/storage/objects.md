@@ -6,10 +6,12 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:44:51.348Z'
+updatedOn: '2026-06-11T12:24:01.926Z'
 ---
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
+
+The examples below use an S3 client configured with your branch endpoint and credentials. See [Get started](/docs/storage/get-started) to set that up, or [Authentication](/docs/storage/authentication) if you need to create a credential.
 
 ## Upload
 
@@ -54,7 +56,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-`neonctl bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with multipart upload.
+`neonctl bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
 </Admonition>
 
 ## Multipart upload
