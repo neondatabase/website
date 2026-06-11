@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T14:23:54.835Z'
+updatedOn: '2026-06-11T14:26:15.065Z'
 ---
 
 <RequestForm type="lakebase-search" />
@@ -513,9 +513,9 @@ You can find the complete source code for this example on GitHub, which is adapt
 
 ## Resources
 
-- [The `lakebase_vector` extension](/docs/extensions/lakebase-vector)
-- [The `lakebase_text` extension](/docs/extensions/lakebase-text)
 - [Lakebase Search](/docs/ai/lakebase-search)
 - [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started)
+- [The `lakebase_vector` extension](/docs/extensions/lakebase-vector)
+- [The `lakebase_text` extension](/docs/extensions/lakebase-text)
 
 <NeedHelp />
