@@ -6,10 +6,10 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-11T17:20:52.899Z'
 ---
 
-The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it with the official Anthropic SDK by changing only the `base_url`. Prompt caching, extended thinking, and streaming all work without additional configuration.
+The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
 **Base URL:** `https://<branch-host>/ai-gateway/anthropic`
 
@@ -82,46 +82,7 @@ curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/anthropic/v1/messages" \
 
 ## Streaming
 
-<CodeTabs labels={["TypeScript (Anthropic SDK)", "Python (Anthropic SDK)", "cURL"]}>
-
-```typescript shouldWrap
-const stream = client.messages.stream({
-  model: 'databricks-claude-sonnet-4-6',
-  max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Explain database branching.' }],
-});
-
-for await (const event of stream) {
-  if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
-    process.stdout.write(event.delta.text);
-  }
-}
-```
-
-```python shouldWrap
-with client.messages.stream(
-    model='databricks-claude-sonnet-4-6',
-    max_tokens=1024,
-    messages=[{'role': 'user', 'content': 'Explain database branching.'}],
-) as stream:
-    for text in stream.text_stream:
-        print(text, end='', flush=True)
-```
-
-```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/anthropic/v1/messages" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
-  -H "Content-Type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
-  -d '{
-    "model": "databricks-claude-sonnet-4-6",
-    "max_tokens": 1024,
-    "stream": true,
-    "messages": [{"role": "user", "content": "Explain database branching."}]
-  }'
-```
-
-</CodeTabs>
+Streaming works the same as with the Anthropic SDK directly. Use `client.messages.stream()` or pass `"stream": true` in a cURL request. The only change from standard usage is `base_url`.
 
 ## Prompt caching
 
@@ -171,6 +132,52 @@ print(message.usage)
 
 </CodeTabs>
 
+## Extended thinking
+
+The gateway forwards the `thinking` parameter to Anthropic unchanged. Set `budget_tokens` to control how many tokens Claude can use for thinking. `max_tokens` must be greater than `budget_tokens`.
+
+<CodeTabs labels={["TypeScript (Anthropic SDK)", "Python (Anthropic SDK)"]}>
+
+```typescript shouldWrap
+const message = await client.messages.create({
+  model: 'databricks-claude-sonnet-4-6',
+  max_tokens: 16000,
+  thinking: {
+    type: 'enabled',
+    budget_tokens: 10000,
+  },
+  messages: [{ role: 'user', content: 'Design a database schema for a multi-tenant SaaS app.' }],
+});
+
+for (const block of message.content) {
+  if (block.type === 'thinking') {
+    console.log('Thinking:', block.thinking);
+  } else if (block.type === 'text') {
+    console.log(block.text);
+  }
+}
+```
+
+```python shouldWrap
+message = client.messages.create(
+    model='databricks-claude-sonnet-4-6',
+    max_tokens=16000,
+    thinking={
+        'type': 'enabled',
+        'budget_tokens': 10000,
+    },
+    messages=[{'role': 'user', 'content': 'Design a database schema for a multi-tenant SaaS app.'}],
+)
+
+for block in message.content:
+    if block.type == 'thinking':
+        print('Thinking:', block.thinking)
+    elif block.type == 'text':
+        print(block.text)
+```
+
+</CodeTabs>
+
 ## Forwarded headers
 
 The gateway forwards these request headers to the upstream provider:
@@ -180,15 +187,12 @@ All other headers are stripped. The `Authorization` header is replaced with the 
 
 ## Error handling
 
-| Status                  | Message                                     | Cause                                                   |
-| ----------------------- | ------------------------------------------- | ------------------------------------------------------- |
-| `400 Bad Request`       | `unknown model`                             | Model ID not in the catalog                             |
-| `400 Bad Request`       | `model is not available on this endpoint`   | Non-Anthropic model ID sent to this endpoint            |
-| `401 Unauthorized`      | `invalid or missing credential`             | Missing or invalid `NEON_AI_GATEWAY_KEY`                |
-| `403 Forbidden`         | `credential not authorized for ai gateway`  | Credential lacks `ai_gateway:invoke` scope              |
-| `403 Forbidden`         | `credential not authorized for this branch` | Credential's branch not in the request branch's lineage |
-| `429 Too Many Requests` | `ai gateway quota exceeded`                 | Account quota blocked; check `Retry-After` header       |
-| `502 Bad Gateway`       | `upstream request failed`                   | Upstream Anthropic/Databricks error; retry              |
+| Status            | Message                                   | Cause                                     |
+| ----------------- | ----------------------------------------- | ----------------------------------------- |
+| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog               |
+| `400 Bad Request` | `model is not available on this endpoint` | Non-Anthropic model sent to this endpoint |
+
+For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
 ## Next steps
 

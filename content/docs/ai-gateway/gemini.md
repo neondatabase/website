@@ -6,10 +6,10 @@ summary: >-
   AI Gateway. Use the google-genai SDK with a custom base URL. Only the
   generateContent action is supported.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-11T17:20:52.899Z'
 ---
 
-The Gemini endpoint exposes the [Google Gemini generateContent API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use the `google-genai` SDK with a custom base URL, or call the API directly.
+The Gemini endpoint exposes the [Google Gemini generateContent API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use it when you're already working with the `google-genai` SDK and want to keep your existing code. For most use cases, the [chat completions](/docs/ai-gateway/chat-completions) endpoint is simpler to set up and works with Gemini models via the OpenAI SDK.
 
 **Endpoint pattern:** `https://<branch-host>/ai-gateway/gemini/v1beta/models/<model>:generateContent`
 
@@ -128,18 +128,15 @@ When calling the REST API directly, the model ID and `:generateContent` action m
 
 ## Error handling
 
-| Status                  | Message                                     | Cause                                                   |
-| ----------------------- | ------------------------------------------- | ------------------------------------------------------- |
-| `400 Bad Request`       | `unknown model`                             | Model ID not in the catalog                             |
-| `400 Bad Request`       | `model is not available on this endpoint`   | Non-Google model sent to this endpoint                  |
-| `400 Bad Request`       | `missing or invalid model`                  | No model field in request body                          |
-| `404 Not Found`         | `unsupported gemini action`                 | Action other than `generateContent` in the URL          |
-| `404 Not Found`         | `invalid gemini model path`                 | Malformed `model:action` segment in URL                 |
-| `401 Unauthorized`      | `invalid or missing credential`             | Missing or invalid `NEON_AI_GATEWAY_KEY`                |
-| `403 Forbidden`         | `credential not authorized for ai gateway`  | Credential lacks `ai_gateway:invoke` scope              |
-| `403 Forbidden`         | `credential not authorized for this branch` | Credential's branch not in the request branch's lineage |
-| `429 Too Many Requests` | `ai gateway quota exceeded`                 | Account quota blocked; check `Retry-After` header       |
-| `502 Bad Gateway`       | `upstream request failed`                   | Upstream Google/Databricks error; retry                 |
+| Status            | Message                                   | Cause                                      |
+| ----------------- | ----------------------------------------- | ------------------------------------------ |
+| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog                |
+| `400 Bad Request` | `model is not available on this endpoint` | Non-Google model sent to this endpoint     |
+| `400 Bad Request` | `missing or invalid model`                | No model field in request body             |
+| `404 Not Found`   | `unsupported gemini action`               | Action other than `generateContent` in URL |
+| `404 Not Found`   | `invalid gemini model path`               | Malformed `model:action` segment in URL    |
+
+For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
 ## Next steps
 

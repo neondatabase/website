@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for gpt-5-5-pro and codex model variants, which do not
   work with the chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-11T17:20:52.899Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -129,15 +129,12 @@ curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/openai/v1/responses" \
 
 ## Error handling
 
-| Status                  | Message                                     | Cause                                                   |
-| ----------------------- | ------------------------------------------- | ------------------------------------------------------- |
-| `400 Bad Request`       | `unknown model`                             | Model ID not in the catalog                             |
-| `400 Bad Request`       | `model is not available on this endpoint`   | Non-OpenAI model sent to this endpoint                  |
-| `401 Unauthorized`      | `invalid or missing credential`             | Missing or invalid `NEON_AI_GATEWAY_KEY`                |
-| `403 Forbidden`         | `credential not authorized for ai gateway`  | Credential lacks `ai_gateway:invoke` scope              |
-| `403 Forbidden`         | `credential not authorized for this branch` | Credential's branch not in the request branch's lineage |
-| `429 Too Many Requests` | `ai gateway quota exceeded`                 | Account quota blocked; check `Retry-After` header       |
-| `502 Bad Gateway`       | `upstream request failed`                   | Upstream OpenAI/Databricks error; retry                 |
+| Status            | Message                                   | Cause                                  |
+| ----------------- | ----------------------------------------- | -------------------------------------- |
+| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog            |
+| `400 Bad Request` | `model is not available on this endpoint` | Non-OpenAI model sent to this endpoint |
+
+For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
 ## Next steps
 
