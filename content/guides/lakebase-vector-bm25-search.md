@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T14:09:08.062Z'
+updatedOn: '2026-06-11T14:10:13.754Z'
 ---
 
 <RequestForm type="lakebase-search" />
@@ -491,7 +491,7 @@ You've built a search system that mirrors the capabilities of heavy, dedicated s
 You can find the complete source code for this example on GitHub, which is adapted from the code in this guide with added styling and Shadcn UI components while preserving the core database interaction and search logic.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase-labs/next-lakebase-search-example" description="Complete source code for the Next.js Lakebase Search example" icon="github">Lakebase Search Example Repository</a>
+<a href="https://github.com/dhanushreddy291/nextjs-lakebase-search-example" description="Complete source code for the Next.js Lakebase Search example" icon="github">Lakebase Search Example Repository</a>
 </DetailIconCards>
 
 ## Resources
