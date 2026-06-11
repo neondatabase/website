@@ -21,7 +21,7 @@ Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, so
 - **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF (Inverted File) partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101) to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
 - **`lakebase_text`**: A BM25 full-text search index that seamlessly integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
 
-Because these indexes live in storage rather than being bound to compute memory, they survive Neon's [scale-to-zero](/docs/introduction/scale-to-zero) cold starts instantly and carry over effortlessly when you [branch your database](/docs/introduction/branching).
+Because these indexes live in storage rather than being bound to compute memory, they work with Neon's [scale-to-zero](/docs/introduction/scale-to-zero) compute and carry over when you [branch your database](/docs/introduction/branching).
 
 In this guide, you’ll build a simple knowledge base application with Next.js that showcases how to use the `lakebase_vector` and `lakebase_text` extensions to enable both semantic and keyword search. By the end, you’ll have a fully functional search interface powered entirely by Neon Postgres, no external search services or vector databases required.
 
