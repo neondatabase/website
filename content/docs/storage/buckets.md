@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-10T16:53:44.852Z'
+updatedOn: '2026-06-11T12:20:31.702Z'
 ---
 
 A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch. Each branch has its own view of storage, and buckets inherit from parent branches when a new branch is created.
@@ -81,6 +81,29 @@ neonctl bucket create my-public-bucket --access-level public_read
 `NEON_STORAGE_ENDPOINT` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
 </Admonition>
 
+## Access levels
+
+Every bucket has an access level that controls who can read objects in it.
+
+| Access level  | Reads                                 | Writes                     |
+| ------------- | ------------------------------------- | -------------------------- |
+| `private`     | Require a valid credential            | Require a valid credential |
+| `public_read` | Open to anyone (no credential needed) | Require a valid credential |
+
+The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Storage** tab in the Console.
+
+<Admonition type="note">
+Access level is set through the Neon Console or API, not through the S3 API. S3 ACL and bucket policy mutation requests (PutBucketAcl, PutBucketPolicy) return `501 Not Implemented`. If you need to change access level on an existing bucket, use the Console or Neon API.
+</Admonition>
+
+**public_read example**
+
+Objects in a `public_read` bucket are accessible at:
+
+```
+https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<object-key>
+```
+
 ## List buckets
 
 <CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
@@ -134,29 +157,6 @@ aws s3api delete-bucket \
 ```
 
 </CodeTabs>
-
-## Access levels
-
-Every bucket has an access level that controls who can read objects in it.
-
-| Access level  | Reads                                 | Writes                     |
-| ------------- | ------------------------------------- | -------------------------- |
-| `private`     | Require a valid credential            | Require a valid credential |
-| `public_read` | Open to anyone (no credential needed) | Require a valid credential |
-
-The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Storage** tab in the Console.
-
-<Admonition type="note">
-Access level is set through the Neon Console or API, not through the S3 API. S3 ACL and bucket policy mutation requests (PutBucketAcl, PutBucketPolicy) return `501 Not Implemented`. If you need to change access level on an existing bucket, use the Console or Neon API.
-</Admonition>
-
-**public_read example**
-
-Objects in a `public_read` bucket are accessible at:
-
-```
-https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<object-key>
-```
 
 ## Bucket branching
 
