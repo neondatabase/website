@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Use the google-genai SDK with a custom base URL. Only the
   generateContent action is supported.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:21:35.055Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 The Gemini endpoint exposes the [Google Gemini generateContent API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use the `google-genai` SDK with a custom base URL, or call the API directly.
@@ -14,7 +14,7 @@ The Gemini endpoint exposes the [Google Gemini generateContent API](https://ai.g
 **Endpoint pattern:** `https://<branch-host>/ai-gateway/gemini/v1beta/models/<model>:generateContent`
 
 <Admonition type="note">
-Only the `generateContent` action is supported. Requests to other actions (such as `streamGenerateContent` or `countTokens`) return `404 unsupported gemini action`. The `google-genai` SDK handles streaming via `generateContent` with a stream flag — this works correctly.
+Only the `generateContent` action is supported. Requests to other actions (such as `streamGenerateContent` or `countTokens`) return `404 unsupported gemini action`. The `google-genai` SDK handles streaming via `generateContent` with a stream flag. This works correctly.
 </Admonition>
 
 ## Supported models
@@ -143,8 +143,8 @@ When calling the REST API directly, the model ID and `:generateContent` action m
 
 ## Next steps
 
-- [Models](/docs/ai-gateway/models) — full model catalog
-- [Chat completions](/docs/ai-gateway/chat-completions) — use Gemini models via the unified OpenAI-compatible endpoint
-- [Authentication](/docs/ai-gateway/authentication) — credential scopes and branch binding
+- [Models](/docs/ai-gateway/models): full model catalog
+- [Chat completions](/docs/ai-gateway/chat-completions): use Gemini models via the unified OpenAI-compatible endpoint
+- [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
 
 <NeedHelp/>

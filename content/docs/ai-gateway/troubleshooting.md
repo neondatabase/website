@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:21:35.055Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 ## Authentication errors
@@ -20,7 +20,7 @@ The bearer token is missing, malformed, or has been revoked.
 
 The credential exists but lacks the `ai_gateway:invoke` scope.
 
-**Fix:** Create a new credential that includes `ai_gateway:invoke` in the `scopes` array. Scopes cannot be added to an existing credential. See [Authentication](/docs/ai-gateway/authentication#creating-a-credential).
+**Fix:** Create a new credential that includes `ai_gateway:invoke` in the `scopes` array. You can't add scopes to an existing credential. See [Authentication](/docs/ai-gateway/authentication#creating-a-credential).
 
 ### `403 credential not authorized for this branch`
 
@@ -46,7 +46,7 @@ The `model` field in the request body does not match any entry in the AI Gateway
 
 ### `400 model is not available on this endpoint`
 
-The model exists in the catalog but does not work with the endpoint you are calling.
+The model exists in the catalog but doesn't work with the endpoint you're calling.
 
 **Fix:** Check which endpoint the model requires:
 
@@ -82,7 +82,7 @@ The `{modelAction}` segment in the Gemini URL path is malformed. It must follow 
 
 ## Workspace resolution errors
 
-### `403` or `400` — `could not resolve workspace from host`
+### `403` or `400`: `could not resolve workspace from host`
 
 The request host does not match the expected format or region.
 
@@ -98,13 +98,13 @@ The request host does not match the expected format or region.
 
 ## Rate limiting and quota
 
-### `429` — upstream provider rate limit
+### `429`: upstream provider rate limit
 
 The request hit the upstream Databricks/provider rate limit.
 
 **Fix:** Implement exponential backoff. The response includes a `Retry-After` header and provider-specific rate limit headers (`X-Ratelimit-*`, `Anthropic-Ratelimit-*`). See [Rate limiting](/docs/ai-gateway/chat-completions#rate-limiting).
 
-### `429` — account quota exceeded
+### `429`: account quota exceeded
 
 Your account's AI Gateway quota is blocked. The response body is:
 
@@ -115,7 +115,7 @@ Your account's AI Gateway quota is blocked. The response body is:
 }
 ```
 
-**Fix:** Check the `Retry-After` header — if present, the block is temporary and will lift at that time. If `Retry-After` is absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block.
 
 ---
 

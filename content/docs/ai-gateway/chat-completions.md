@@ -6,10 +6,10 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:02:23.973Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
-The chat completions endpoint is the recommended way to use Neon AI Gateway. It is fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
+The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
 
 **Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
 
@@ -200,9 +200,9 @@ Error responses use the standard OpenAI error format:
 
 ## Next steps
 
-- [Models](/docs/ai-gateway/models) — full model catalog
-- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages) — native Anthropic features
-- [OpenAI Responses API](/docs/ai-gateway/openai-responses) — Responses API endpoint
-- [Authentication](/docs/ai-gateway/authentication) — credential scopes and branch binding
+- [Models](/docs/ai-gateway/models): full model catalog
+- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages): native Anthropic features
+- [OpenAI Responses API](/docs/ai-gateway/openai-responses): Responses API endpoint
+- [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
 
 <NeedHelp/>

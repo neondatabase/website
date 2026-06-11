@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:21:35.055Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it with the official Anthropic SDK by changing only the `base_url`. Prompt caching, extended thinking, and streaming all work without additional configuration.
@@ -176,7 +176,7 @@ print(message.usage)
 The gateway forwards these request headers to the upstream provider:
 `Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `User-Agent`.
 
-All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding — your `NEON_AI_GATEWAY_KEY` is never sent to Anthropic directly.
+All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding. Your `NEON_AI_GATEWAY_KEY` is never sent to Anthropic directly.
 
 ## Error handling
 
@@ -192,8 +192,8 @@ All other headers are stripped. The `Authorization` header is replaced with the 
 
 ## Next steps
 
-- [Models](/docs/ai-gateway/models) — full model catalog
-- [Chat completions](/docs/ai-gateway/chat-completions) — use any model including Anthropic via the unified endpoint
-- [Authentication](/docs/ai-gateway/authentication) — credential scopes and branch binding
+- [Models](/docs/ai-gateway/models): full model catalog
+- [Chat completions](/docs/ai-gateway/chat-completions): use any model including Anthropic via the unified endpoint
+- [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
 
 <NeedHelp/>

@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:29:12.425Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -64,7 +64,7 @@ client = OpenAI(
 
 ## Credentials in Neon Functions
 
-When your code runs inside Neon Functions, the following environment variables are injected automatically — no credential creation step required:
+When your code runs inside Neon Functions, Neon injects the following environment variables automatically. No credential creation step required:
 
 | Variable                   | Value                                                   |
 | -------------------------- | ------------------------------------------------------- |
@@ -86,12 +86,12 @@ const client = new OpenAI({
 
 ## How branch binding works
 
-A credential is bound to the branch it was created on. It is valid for:
+Each credential is tied to the branch it was created on. It's valid for:
 
 - That branch (the anchor branch)
 - Any branch descended from it: preview branches, feature branches, CI branches
 
-It is **not** valid for branches outside that lineage.
+It's **not** valid for branches outside that lineage.
 
 This means a credential created on your `main` branch works in all branches that were forked from `main`. A credential created on a feature branch only works within that feature branch's descendants.
 

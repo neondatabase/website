@@ -7,7 +7,7 @@ summary: >-
   the databricks- prefix. Use these IDs in the model field of any request
   regardless of which endpoint you are using.
 enableTableOfContents: true
-updatedOn: '2026-06-11T11:29:12.425Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
@@ -125,9 +125,9 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 | -------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
 | Anthropic                              | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
 | OpenAI (most models)                   | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
-| OpenAI (`gpt-5-5-pro`, codex variants) | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and do not work with chat/completions             |
+| OpenAI (`gpt-5-5-pro`, codex variants) | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
 | Google Gemini                          | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B                     | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only; does not support the Gemini SDK endpoint                          |
+| Google Gemma 3 12B                     | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
 | Meta, DeepSeek, Databricks, Alibaba    | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
 
 <NeedHelp/>

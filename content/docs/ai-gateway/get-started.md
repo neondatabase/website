@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-08T18:39:44.797Z'
+updatedOn: '2026-06-11T16:21:17.644Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -214,9 +214,9 @@ See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
 
 ## Next steps
 
-- [Models](/docs/ai-gateway/models) — full model catalog and which endpoint to use per provider
-- [Chat completions](/docs/ai-gateway/chat-completions) — detailed reference for the unified endpoint
-- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages) — native Anthropic features including extended thinking and prompt caching
-- [Authentication](/docs/ai-gateway/authentication) — credential scopes, branch binding, and rotation
+- [Models](/docs/ai-gateway/models): full model catalog and which endpoint to use per provider
+- [Chat completions](/docs/ai-gateway/chat-completions): detailed reference for the unified endpoint
+- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages): native Anthropic features including extended thinking and prompt caching
+- [Authentication](/docs/ai-gateway/authentication): credential scopes, branch binding, and rotation
 
 <NeedHelp/>
