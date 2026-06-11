@@ -6,10 +6,10 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-11T12:24:01.926Z'
+updatedOn: '2026-06-11T12:58:10.626Z'
 ---
 
-A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch. Each branch has its own view of storage, and buckets inherit from parent branches when a new branch is created.
+A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
 
 ## Create a bucket
 
@@ -160,7 +160,7 @@ aws s3api delete-bucket \
 
 ## Bucket branching
 
-When you create a new branch, it inherits all buckets from its parent at the point of forking. From that point on, each branch has its own independent view of storage:
+When you create a new branch, it inherits all buckets from its parent at the point of forking. No data is copied. From that point on:
 
 - Creating or deleting a bucket on a child branch does not affect the parent.
 - Objects uploaded to a child branch are only visible on that branch and its descendants.

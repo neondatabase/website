@@ -6,10 +6,10 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-11T12:24:01.926Z'
+updatedOn: '2026-06-11T12:58:10.626Z'
 ---
 
-Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch has its own view of storage.
+Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
 
 The examples below use an S3 client configured with your branch endpoint and credentials. See [Get started](/docs/storage/get-started) to set that up, or [Authentication](/docs/storage/authentication) if you need to create a credential.
 
@@ -370,7 +370,7 @@ print(url)
 
 ## Object branching
 
-Objects branch with your database. When you fork a branch, the child starts with the same view of storage as the parent at that point in time:
+Objects branch with your database. When you fork a branch, the child immediately inherits the parent's buckets and objects at that point in time. No data is copied. From that point:
 
 - Uploading a new object to a child branch is only visible on that branch and its descendants.
 - Deleting an object on a child branch does not affect the parent.
