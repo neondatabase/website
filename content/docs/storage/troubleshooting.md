@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-10T16:53:44.852Z'
+updatedOn: '2026-06-11T14:24:23.574Z'
 ---
 
 ## Authentication errors
@@ -21,9 +21,9 @@ The Access Key ID is wrong, missing, or the credential has been revoked.
 
 The Secret Access Key is wrong.
 
-**Fix:** Check that `NEON_STORAGE_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation — if you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
+**Fix:** Check that `NEON_STORAGE_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
 
-### `403 AccessDenied` — missing scope
+### `403 AccessDenied`: missing scope
 
 The credential does not have the required scope for the operation.
 
@@ -34,7 +34,7 @@ The credential does not have the required scope for the operation.
 
 To add write access, create a new credential with `storage:write`. Scopes cannot be added to an existing credential.
 
-### `403 AccessDenied` — wrong branch
+### `403 AccessDenied`: wrong branch
 
 The credential was issued on a branch that is not an ancestor of the branch you are making requests against.
 
@@ -92,9 +92,9 @@ You are calling an S3 operation that Neon Storage does not support.
 
 **Common causes:**
 
-- `PutBucketAcl` or `PutBucketPolicy` — use the Neon Console or API to set bucket access level instead
-- `PutBucketNotificationConfiguration` — event notifications are not supported
-- `PutBucketLogging` — server-side access logging is not supported
+- `PutBucketAcl` or `PutBucketPolicy`: use the Neon Console or API to set bucket access level instead
+- `PutBucketNotificationConfiguration`: event notifications are not supported
+- `PutBucketLogging`: server-side access logging is not supported
 
 See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the full list of unsupported operations.
 

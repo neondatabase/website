@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-11T12:58:10.626Z'
+updatedOn: '2026-06-11T14:24:23.574Z'
 ---
 
 A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -170,7 +170,7 @@ This makes it safe to test bucket changes in a preview branch without affecting 
 
 ## Next steps
 
-- [Objects](/docs/storage/objects) — upload, download, list, and delete objects
-- [Authentication](/docs/storage/authentication) — credential scopes and branch binding
+- [Objects](/docs/storage/objects): upload, download, list, and delete objects
+- [Authentication](/docs/storage/authentication): credential scopes and branch binding
 
 <NeedHelp/>

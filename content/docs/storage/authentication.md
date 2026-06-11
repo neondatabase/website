@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:15:18.616Z'
+updatedOn: '2026-06-11T14:24:23.574Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -109,7 +109,7 @@ Scope enforcement is applied by the S3 data plane. A credential without a storag
 
 ## Credentials in Neon Functions
 
-When your code runs inside Neon Functions, storage credentials are injected automatically — no credential creation step required:
+When your code runs inside Neon Functions, storage credentials are injected automatically. No credential creation step is required:
 
 | Variable                         | Value                             |
 | -------------------------------- | --------------------------------- |
