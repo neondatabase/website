@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive, non-interactive, and
   agent-oriented workflows.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -37,7 +37,7 @@ Run `neonctl link` with no flags for guided prompts:
 neonctl link
 ```
 
-```text
+```text filename="Output"
 ? Which organization would you like to link? › Personal Org (org-abc123)
 ? Which project would you like to link? › + Create new project
 ? Name for the new project: › my-app

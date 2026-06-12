@@ -9,7 +9,7 @@ summary: >-
   names are capped at 63 bytes; commands require the Neon CLI and either
   browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-roles
 ---
@@ -30,42 +30,42 @@ Lists roles. If you don't specify a branch ID or name with `--branch`, the comma
 
 <CliOptions command="roles list" />
 
-- List roles with the default `table` output format:
+List roles with the default `table` output format:
 
-  ```bash
-  neonctl roles list
-  ```
+```bash
+neonctl roles list
+```
 
-  ```text
-  ┌────────┬──────────────────────┐
-  │ Name   │ Created At           │
-  ├────────┼──────────────────────┤
-  │ daniel │ 2023-06-19T18:27:19Z │
-  └────────┴──────────────────────┘
-  ```
+```text filename="Output"
+┌────────┬──────────────────────┐
+│ Name   │ Created At           │
+├────────┼──────────────────────┤
+│ daniel │ 2023-06-19T18:27:19Z │
+└────────┴──────────────────────┘
+```
 
-- List roles with the `--output` format set to `json`:
+List roles with the `--output` format set to `json`:
 
-  ```bash
-  neonctl roles list --output json
-  ```
+```bash
+neonctl roles list --output json
+```
 
-  <details>
-  <summary>Show output</summary>
+<details>
+<summary>Show output</summary>
 
-  ```json
-  [
-    {
-      "branch_id": "br-odd-frog-703504",
-      "name": "daniel",
-      "protected": false,
-      "created_at": "2023-06-28T10:17:28Z",
-      "updated_at": "2023-06-28T10:17:28Z"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "branch_id": "br-odd-frog-703504",
+    "name": "daniel",
+    "protected": false,
+    "created_at": "2023-06-28T10:17:28Z",
+    "updated_at": "2023-06-28T10:17:28Z"
+  }
+]
+```
 
-  </details>
+</details>
 
 ## neonctl roles create (#create)
 
@@ -79,7 +79,7 @@ Creates a role. The role name cannot exceed 63 bytes.
 neonctl roles create --name sally
 ```
 
-```text
+```text filename="Output"
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤
@@ -99,7 +99,7 @@ Deletes a role. The `<role>` is the role name.
 neonctl roles delete sally
 ```
 
-```text
+```text filename="Output"
 ┌───────┬──────────────────────┐
 │ Name  │ Created At           │
 ├───────┼──────────────────────┤

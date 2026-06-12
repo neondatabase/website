@@ -11,7 +11,7 @@ summary: >-
   files get created and where. The `--agent` flag targets a specific editor
   without the interactive prompt.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -80,7 +80,7 @@ npx neonctl@latest init
 <details>
 <summary>Show output</summary>
 
-```text
+```text filename="Output"
 ┌  Adding Neon MCP server, extension (for VS Code and Cursor) and agent skills
 │
 ◆  Which editor(s) would you like to configure? (Space to toggle each option, Enter to confirm your selection)

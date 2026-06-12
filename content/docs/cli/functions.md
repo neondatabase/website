@@ -28,27 +28,27 @@ Deploys a function from a local directory. The `<slug>` is the permanent functio
 
 Use `--wait` to block until the deployment finishes building, which is the predictable path for scripts and CI.
 
-- Deploy a function from the current directory:
+Deploy a function from the current directory:
 
-  ```bash
-  neonctl functions deploy hello --path . --entry functions/hello.ts
-  ```
+```bash
+neonctl functions deploy hello --path . --entry functions/hello.ts
+```
 
-  ```text
-  INFO: Function deployment triggered for function hello.
-  ┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
-  │ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
-  ├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
-  │ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
-  └────┴───────────┴──────────┴────────────┴─────────────────────────────┘
-  INFO: Function deployment hello/1 completed.
-  ```
+```text filename="Output"
+INFO: Function deployment triggered for function hello.
+┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
+│ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
+├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
+│ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
+└────┴───────────┴──────────┴────────────┴─────────────────────────────┘
+INFO: Function deployment hello/1 completed.
+```
 
-- Deploy with environment variables and wait for the build:
+Deploy with environment variables and wait for the build:
 
-  ```bash
-  neonctl functions deploy hello --entry functions/hello.ts --env LOG_LEVEL=info --wait
-  ```
+```bash
+neonctl functions deploy hello --entry functions/hello.ts --env LOG_LEVEL=info --wait
+```
 
 ## neonctl functions list (#list)
 
@@ -58,56 +58,54 @@ Lists the functions on the branch.
 
 <CliOptions command="functions list" />
 
-- List the functions on the branch:
+```bash
+neonctl functions list
+```
 
-  ```bash
-  neonctl functions list
-  ```
+```text filename="Output"
+┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
+│ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
+├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
+└───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
+```
 
-  ```text
-  ┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
-  │ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
-  ├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
-  │ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
-  └───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
-  ```
+List with full deployment details for scripts and agents:
 
-- List with full deployment details for scripts and agents:
+```bash
+neonctl functions list --output json
+```
 
-  ```bash
-  neonctl functions list --output json
-  ```
+<details>
+<summary>Show output</summary>
 
-  <details>
-  <summary>Show output</summary>
+```json
+[
+  {
+    "id": "hello",
+    "slug": "hello",
+    "name": "hello",
+    "invocation_url": "https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/",
+    "current_deployment": {
+      "id": 1,
+      "status": "completed",
+      "memory_mib": 2048,
+      "runtime": "nodejs24",
+      "created_at": "2026-06-12T00:14:58.044690Z"
+    },
+    "active_deployment": {
+      "id": 1,
+      "status": "completed",
+      "memory_mib": 2048,
+      "runtime": "nodejs24",
+      "created_at": "2026-06-12T00:14:58.044690Z"
+    },
+    "created_at": "2026-06-12T00:14:57.942988Z"
+  }
+]
+```
 
-  ```json
-  [
-    {
-      "id": "hello",
-      "slug": "hello",
-      "name": "hello",
-      "invocation_url": "https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/",
-      "current_deployment": {
-        "id": 1,
-        "status": "completed",
-        "memory_mib": 2048,
-        "runtime": "nodejs24",
-        "created_at": "2026-06-12T00:14:58.044690Z"
-      },
-      "active_deployment": {
-        "id": 1,
-        "status": "completed",
-        "memory_mib": 2048,
-        "runtime": "nodejs24",
-        "created_at": "2026-06-12T00:14:58.044690Z"
-      },
-      "created_at": "2026-06-12T00:14:57.942988Z"
-    }
-  ]
-  ```
-
-  </details>
+</details>
 
 ## neonctl functions get (#get)
 
@@ -121,7 +119,7 @@ Shows a function's details.
 neonctl functions get hello
 ```
 
-```text
+```text filename="Output"
 function
 ┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
 │ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
@@ -148,6 +146,6 @@ Deletes a function on the branch.
 neonctl functions delete hello
 ```
 
-```text
+```text filename="Output"
 INFO: Function hello deleted from branch br-cool-darkness-123456
 ```

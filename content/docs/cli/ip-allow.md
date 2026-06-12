@@ -9,7 +9,7 @@ summary: >-
   through the Neon console. The `add` subcommand accepts a `--protected-only`
   flag to scope the allowlist to protected branches only.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:29:16.599Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-ip-allow
 ---
@@ -32,17 +32,17 @@ Lists the addresses in the IP allowlist.
 
 <CliOptions command="ip-allow list" />
 
-- List the IP allowlist:
+List the IP allowlist:
 
-  ```bash
-  neonctl ip-allow list --project-id cold-grass-40154007
-  ```
+```bash
+neonctl ip-allow list --project-id cold-grass-40154007
+```
 
-- List the IP allowlist with the `--output` format set to `json`:
+List the IP allowlist with the `--output` format set to `json`:
 
-  ```bash
-  neonctl ip-allow list --project-id cold-grass-40154007 --output json
-  ```
+```bash
+neonctl ip-allow list --project-id cold-grass-40154007 --output json
+```
 
 ## neonctl ip-allow add (#add)
 

@@ -11,7 +11,7 @@ summary: >-
   `--api-key` flag, then `NEON_API_KEY` env var, then the credentials file,
   then triggers browser auth if none are found.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:29:16.599Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-auth
 ---
@@ -24,7 +24,7 @@ The `auth` command authenticates you to Neon. `neonctl login` is an alias for `n
 
 The command launches a browser window where you authorize the Neon CLI to access your Neon account. Your credentials are then saved locally to `credentials.json`:
 
-```text
+```text filename="Output"
 /home/<home>/.config/neonctl/credentials.json
 ```
 

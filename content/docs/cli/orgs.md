@@ -7,7 +7,7 @@ summary: >-
   or JSON output. Use this command to identify which organizations your account
   belongs to before running project or branch commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:29:16.599Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-orgs
 ---
@@ -28,40 +28,40 @@ Lists all organizations associated with the authenticated Neon CLI user.
 
 <CliOptions command="orgs list" />
 
-- List your organizations with the default `table` output format:
+List your organizations with the default `table` output format:
 
-  ```bash
-  neonctl orgs list
-  ```
+```bash
+neonctl orgs list
+```
 
-  ```text
-  Organizations
-  ┌────────────────────────┬──────────────────┐
-  │ Id                     │ Name             │
-  ├────────────────────────┼──────────────────┤
-  │ org-xxxxxxxx-xxxxxxxx  │ Example Org      │
-  └────────────────────────┴──────────────────┘
-  ```
+```text filename="Output"
+Organizations
+┌────────────────────────┬──────────────────┐
+│ Id                     │ Name             │
+├────────────────────────┼──────────────────┤
+│ org-xxxxxxxx-xxxxxxxx  │ Example Org      │
+└────────────────────────┴──────────────────┘
+```
 
-- List your organizations with `--output json`, which also shows the `created_at` and `updated_at` timestamps omitted from the `table` output:
+List your organizations with `--output json`, which also shows the `created_at` and `updated_at` timestamps omitted from the `table` output:
 
-  ```bash
-  neonctl orgs list -o json
-  ```
+```bash
+neonctl orgs list -o json
+```
 
-  <details>
-  <summary>Show output</summary>
+<details>
+<summary>Show output</summary>
 
-  ```json
-  [
-    {
-      "id": "org-xxxxxxxx-xxxxxxxx",
-      "name": "Example Org",
-      "handle": "example-org-xxxxxxxx",
-      "created_at": "2024-04-22T16:50:41Z",
-      "updated_at": "2024-06-28T15:38:26Z"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "id": "org-xxxxxxxx-xxxxxxxx",
+    "name": "Example Org",
+    "handle": "example-org-xxxxxxxx",
+    "created_at": "2024-04-22T16:50:41Z",
+    "updated_at": "2024-06-28T15:38:26Z"
+  }
+]
+```
 
-  </details>
+</details>

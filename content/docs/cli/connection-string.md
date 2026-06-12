@@ -9,7 +9,7 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-connection-string
 ---
@@ -34,15 +34,15 @@ The `--endpoint-type` value can be `read_write` (the default) or `read_only`. Th
 
 ## Examples
 
-- Get a connection string for a branch:
+Get a connection string for a branch:
 
-  ```bash
-  neonctl connection-string mybranch
-  ```
+```bash
+neonctl connection-string mybranch
+```
 
-  ```text shouldWrap
-  postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-  ```
+```text filename="Output" shouldWrap
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
 
 - Get a pooled connection string. The `--pooled` option adds a `-pooler` suffix to the host name, which enables connection pooling for clients that use this connection string.
 
@@ -70,20 +70,20 @@ The `--endpoint-type` value can be `read_write` (the default) or `read_only`. Th
   neonctl connection-string @2024-04-21T00:00:00Z
   ```
 
-- Get a connection string and connect with `psql`:
+Get a connection string and connect with `psql`:
 
-  ```bash
-  neonctl connection-string --psql
-  ```
+```bash
+neonctl connection-string --psql
+```
 
-- Get a connection string, connect with `psql`, and run an `.sql` file:
+Get a connection string, connect with `psql`, and run an `.sql` file:
 
-  ```bash
-  neonctl connection-string --psql -- -f dump.sql
-  ```
+```bash
+neonctl connection-string --psql -- -f dump.sql
+```
 
-- Get a connection string, connect with `psql`, and run a query:
+Get a connection string, connect with `psql`, and run a query:
 
-  ```bash
-  neonctl connection-string --psql -- -c "SELECT version()"
-  ```
+```bash
+neonctl connection-string --psql -- -c "SELECT version()"
+```

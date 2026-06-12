@@ -9,7 +9,7 @@ summary: >-
   Installation targets include `.bashrc`, `.bash_profile`, `.profile`, and
   `.zshrc` on Linux and macOS.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-completion
 ---
@@ -29,7 +29,7 @@ Generate the completion script in your own terminal, as the script may differ de
 <details>
 <summary>Show output</summary>
 
-```text
+```text filename="Output"
 ###-begin-neonctl-completions-###
 #
 # yargs command completion script
@@ -66,30 +66,30 @@ complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
 
 Add the completion script to your shell configuration file in your home directory. The file differs by platform: Ubuntu typically uses `.bashrc`, while macOS uses `.bash_profile` or `.zshrc`. The `source` command applies the change to the current shell session.
 
-- Add the completion script to `.bashrc`:
+Add the completion script to `.bashrc`:
 
-  ```bash
-  neonctl completion >> ~/.bashrc
-  source ~/.bashrc
-  ```
+```bash
+neonctl completion >> ~/.bashrc
+source ~/.bashrc
+```
 
-- Add the completion script to `.bash_profile`:
+Add the completion script to `.bash_profile`:
 
-  ```bash
-  neonctl completion >> ~/.bash_profile
-  source ~/.bash_profile
-  ```
+```bash
+neonctl completion >> ~/.bash_profile
+source ~/.bash_profile
+```
 
-- Add the completion script to `.profile`:
+Add the completion script to `.profile`:
 
-  ```bash
-  neonctl completion >> ~/.profile
-  source ~/.profile
-  ```
+```bash
+neonctl completion >> ~/.profile
+source ~/.profile
+```
 
-- Add the completion script to `.zshrc`:
+Add the completion script to `.zshrc`:
 
-  ```bash
-  neonctl completion >> ~/.zshrc
-  source ~/.zshrc
-  ```
+```bash
+neonctl completion >> ~/.zshrc
+source ~/.zshrc
+```

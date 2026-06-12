@@ -10,7 +10,7 @@ summary: >-
   to be installed and authenticated; scope to a specific project with
   `--project-id` when your account has multiple projects.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-operations
 ---
@@ -35,7 +35,7 @@ Lists operations for a Neon project.
 neonctl operations list
 ```
 
-```text
+```text filename="Output"
 ┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
 │ Id                                   │ Action             │ Status   │ Created At           │
 ├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤

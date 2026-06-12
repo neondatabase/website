@@ -26,14 +26,14 @@ Writes the branch's Neon environment variables to a local `.env` file.
 
 <CliOptions command="env pull" />
 
-- Write the linked branch's Neon variables into `.env.local` (or `.env` if present):
+Write the linked branch's Neon variables into `.env.local` (or `.env` if present):
 
-  ```bash
-  neonctl env pull
-  ```
+```bash
+neonctl env pull
+```
 
-- Pull a specific branch into a specific file:
+Pull a specific branch into a specific file:
 
-  ```bash
-  neonctl env pull --branch preview --file .env.preview
-  ```
+```bash
+neonctl env pull --branch preview --file .env.preview
+```

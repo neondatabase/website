@@ -9,7 +9,7 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-databases
 ---
@@ -34,7 +34,7 @@ Lists databases. If you don't specify a branch ID or name with `--branch`, the c
 neonctl databases list --branch br-autumn-dust-190886
 ```
 
-```text
+```text filename="Output"
 ┌────────┬────────────┬──────────────────────┐
 │ Name   │ Owner Name │ Created At           │
 ├────────┼────────────┼──────────────────────┤
@@ -54,7 +54,7 @@ Creates a database. If you don't specify `--owner-name`, the current user become
 neonctl databases create --name mynewdb --owner-name john
 ```
 
-```text
+```text filename="Output"
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤
@@ -74,7 +74,7 @@ Deletes a database. The `<database>` is the database name.
 neonctl databases delete mydb
 ```
 
-```text
+```text filename="Output"
 ┌─────────┬────────────┬──────────────────────┐
 │ Name    │ Owner Name │ Created At           │
 ├─────────┼────────────┼──────────────────────┤

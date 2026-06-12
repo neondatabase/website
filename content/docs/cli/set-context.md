@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neonctl set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
@@ -54,7 +54,7 @@ List all branches for this project with `branches list`, without including `--pr
 neonctl branches list
 ```
 
-```text
+```text filename="Output"
 ┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                       │ Name        │ Default │ Created At           │ Updated At           │
 ├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -78,7 +78,7 @@ List all branches with `branches list`. The context file provides the project:
 neonctl branches list --context-file Documents/MyContext
 ```
 
-```text
+```text filename="Output"
 ┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                          │ Name        │ Default │ Created At           │ Updated At           │
 ├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤

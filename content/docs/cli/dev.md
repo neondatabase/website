@@ -21,20 +21,20 @@ The `dev` command runs [Neon Functions](/docs/compute/functions/overview) locall
 
 ## Examples
 
-- Serve one function on a free port with hot reload:
+Serve one function on a free port with hot reload:
 
-  ```bash
-  neonctl dev --source ./functions/hello.ts
-  ```
+```bash
+neonctl dev --source ./functions/hello.ts
+```
 
-- Serve every function declared in `neon.ts` (one dev server each):
+Serve every function declared in `neon.ts` (one dev server each):
 
-  ```bash
-  neonctl dev
-  ```
+```bash
+neonctl dev
+```
 
-- Serve one function on an explicit port (fails if the port is taken):
+Serve one function on an explicit port (fails if the port is taken):
 
-  ```bash
-  neonctl dev --source ./functions/hello.ts --port 3000
-  ```
+```bash
+neonctl dev --source ./functions/hello.ts --port 3000
+```

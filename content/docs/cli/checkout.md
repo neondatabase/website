@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:33:31.980Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -46,36 +46,36 @@ If none of those resolve a project, `checkout` prints an error explaining the ch
 
 ## Examples
 
-- Pin a branch by name. New Neon projects create a default branch named `production`:
+Pin a branch by name. New Neon projects create a default branch named `production`:
 
-  ```bash
-  neonctl checkout production --project-id polished-snowflake-12345678
-  ```
+```bash
+neonctl checkout production --project-id polished-snowflake-12345678
+```
 
-  ```text
-  INFO: Checked out branch br-steep-math-aiu3vve7 on project polished-snowflake-12345678. Updated /path/to/cwd/.neon.
-  ```
+```text filename="Output"
+INFO: Checked out branch br-steep-math-aiu3vve7 on project polished-snowflake-12345678. Updated /path/to/cwd/.neon.
+```
 
-  The updated `.neon` file:
+The updated `.neon` file:
 
-  ```json
-  {
-    "orgId": "org-abc123",
-    "projectId": "polished-snowflake-12345678",
-    "branchId": "br-steep-math-aiu3vve7"
-  }
-  ```
+```json
+{
+  "orgId": "org-abc123",
+  "projectId": "polished-snowflake-12345678",
+  "branchId": "br-steep-math-aiu3vve7"
+}
+```
 
-- Pick a branch interactively (requires a linked project or `--project-id`):
+Pick a branch interactively (requires a linked project or `--project-id`):
 
-  ```bash
-  neonctl checkout
-  ```
+```bash
+neonctl checkout
+```
 
-- Pin a branch by ID:
+Pin a branch by ID:
 
-  ```bash
-  neonctl checkout br-cool-snow-12345678 --project-id polished-snowflake-12345678
-  ```
+```bash
+neonctl checkout br-cool-snow-12345678 --project-id polished-snowflake-12345678
+```
 
 After checking out a branch, commands such as [`connection-string`](/docs/cli/connection-string) and [`psql`](/docs/cli/psql) use the pinned branch by default.
