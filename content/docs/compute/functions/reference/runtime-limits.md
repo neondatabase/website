@@ -6,12 +6,10 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:12:57.837Z'
+updatedOn: '2026-06-12T16:38:29.112Z'
 ---
 
-<Admonition type="note" title="Private Preview">
-Neon Functions is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
-</Admonition>
+<PrivatePreviewEnquire/>
 
 Neon Functions run on Node.js 24 in isolated microVMs.
 

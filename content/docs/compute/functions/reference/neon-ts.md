@@ -8,9 +8,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<Admonition type="note" title="Private Preview">
-Neon Functions is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
-</Admonition>
+<PrivatePreviewEnquire/>
 
 `neon.ts` is a TypeScript config file that declares which functions and services exist on a project and how each branch should be configured. Place it at the root of your project.
 

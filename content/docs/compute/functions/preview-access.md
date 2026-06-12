@@ -8,13 +8,9 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<Admonition type="note" title="Private Preview">
-Neon Functions is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
-</Admonition>
-
 ## Request access
 
-Sign up for the waitlist at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends). The team will reach out with access details. Functions are available on new projects only; you can't enable them on an existing project.
+Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends#access). The team will reach out with access details. Functions are available on new projects only.
 
 ## What's included
 
