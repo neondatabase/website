@@ -13,6 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
 updatedOn: '2026-06-12T01:28:52.381Z'
+---
 
 ## access token
 
