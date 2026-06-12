@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:42:37.157Z'
+updatedOn: '2026-06-12T12:32:37.482Z'
 redirectFrom:
   - /docs/reference/cli-branches
 ---
@@ -38,14 +38,16 @@ neonctl branches list --project-id solitary-leaf-288182
 ```
 
 ```text filename="Output"
-┌────────────────────────┬─────────────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name        │ Created At           │ Updated At           │
-├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ production  │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
-├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
-│ br-round-queen-335380  │ development │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-└────────────────────────┴─────────────┴──────────────────────┴──────────────────────┘
+┌────────────────────────┬──────────────────────────┬──────────────────────┬──────────────────────┐
+│ Id                     │ Name                     │ Created At           │ Updated At           │
+├────────────────────────┼──────────────────────────┼──────────────────────┼──────────────────────┤
+│ br-small-meadow-878874 │ production [default]     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
+├────────────────────────┼──────────────────────────┼──────────────────────┼──────────────────────┤
+│ br-round-queen-335380  │ development [current]    │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
+└────────────────────────┴──────────────────────────┴──────────────────────┴──────────────────────┘
 ```
+
+Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, and `[current]` marks the branch pinned in your local `.neon` context file.
 
 List branches with `--output json`, which returns more information than the `table` format:
 

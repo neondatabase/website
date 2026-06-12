@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T12:32:37.482Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -23,7 +23,7 @@ Neon supports three types of API keys:
 | ---------------------- | --------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------ |
 | Personal API Key       | Any user                    | All organization projects where the user is a member | Valid until revoked; org project access ends if user leaves organization |
 | Organization API Key   | Organization administrators | All projects within the organization                 | Valid until revoked                                                      |
-| Project-scoped API Key | Any organization member     | Single specified project                             | Valid until revoked or project leaves organization                       |
+| Project-scoped API Key | Organization administrators | Single specified project                             | Valid until revoked or project leaves organization                       |
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
@@ -138,7 +138,7 @@ In your organization's **Settings** > **API keys**, click **Create new** and sel
 </TabItem>
 
 <TabItem>
-Any organization member can create an API key for any organization-owned project using the following command:
+Organization administrators can create an API key for any organization-owned project using the following command:
 
 ```bash shouldWrap
 curl --request POST \
