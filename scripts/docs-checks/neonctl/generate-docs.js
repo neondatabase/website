@@ -74,13 +74,9 @@ function formatDefault(spec) {
   return '—';
 }
 
-// The empty-state sentence lives in the renderer so the web page and the
-// agent .md mirror can never disagree on it.
-const NO_OPTIONS_SENTENCE = 'No options beyond the [global options](/docs/cli#global-options).';
-
 function renderOptions(node) {
   const entries = Object.entries(node.options || {}).filter(([, spec]) => !spec.hidden);
-  if (entries.length === 0) return NO_OPTIONS_SENTENCE;
+  if (entries.length === 0) return '';
   const rows = entries.map(([name, spec]) => {
     let desc = spec.describe ? escapeCell(spec.describe) : '';
     if (spec.choices && desc && !/possible values|supported values/i.test(desc)) {
@@ -99,6 +95,31 @@ function renderOptions(node) {
     '| ------ | ----------- | ---- | ------- | :------: |',
     ...rows,
   ].join('\n');
+}
+
+// Options table for a command path, including options inherited from
+// parent commands (yargs passes parent .options() down to leaves; a table
+// showing only a leaf's own options understates what it accepts —
+// `branches delete` takes the parent's `--project-id`). Own options come
+// first, then ancestors nearest-first; a leaf redefinition wins. Returns
+// '' when nothing applies beyond the global options: the section then
+// renders no table at all, and the synopsis without it is the signal.
+function renderOptionsForPath(schema, parts) {
+  const merged = {};
+  const chain = [];
+  let pool = schema.commands;
+  for (const part of parts) {
+    const node = pool && pool[part];
+    if (!node) return '';
+    chain.push(node);
+    pool = node.commands;
+  }
+  for (const node of chain.reverse()) {
+    for (const [name, spec] of Object.entries(node.options || {})) {
+      if (!spec.hidden && !(name in merged)) merged[name] = spec;
+    }
+  }
+  return renderOptions({ options: merged });
 }
 
 // Renders a positional as it appears in a synopsis: `<id>` required,
@@ -219,6 +240,7 @@ function main() {
 }
 
 module.exports = {
+  renderOptionsForPath,
   renderOptions,
   renderUsage,
   renderSubcommands,

@@ -7,8 +7,14 @@
 import generateDocs from '../../../../../scripts/docs-checks/neonctl/generate-docs';
 import schema from '../../../../../scripts/docs-checks/neonctl/schema.json';
 
-const { renderOptions, renderUsage, renderSubcommands, renderGlobalOptions, resolveCommand } =
-  generateDocs;
+const {
+  renderOptions,
+  renderOptionsForPath,
+  renderUsage,
+  renderSubcommands,
+  renderGlobalOptions,
+  resolveCommand,
+} = generateDocs;
 
 // Resolves a space-separated command path ("branches create") to its schema
 // node. Throws at build time so a typo in a doc page fails the build loudly
@@ -24,4 +30,12 @@ const getNode = (command) => {
   return node;
 };
 
-export { schema, getNode, renderOptions, renderUsage, renderSubcommands, renderGlobalOptions };
+export {
+  schema,
+  getNode,
+  renderOptions,
+  renderOptionsForPath,
+  renderUsage,
+  renderSubcommands,
+  renderGlobalOptions,
+};

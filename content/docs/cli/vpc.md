@@ -8,7 +8,7 @@ summary: >-
   Use it when you need to limit Neon project connections to a specific AWS or
   Azure VPC rather than the public internet.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:29:16.599Z'
 redirectFrom:
   - /docs/reference/cli-vpc
 ---
@@ -26,10 +26,6 @@ The `vpc` command manages [Private Networking](/docs/guides/neon-private-network
 The `vpc endpoint` subcommands list, assign, remove, and check the status of VPC endpoints for a Neon organization.
 
 <CliSubcommands command="vpc endpoint" anchorParts="endpoint" />
-
-These options apply to all `vpc endpoint` subcommands:
-
-<CliOptions command="vpc endpoint" />
 
 You only need `--org-id` if your Neon account belongs to more than one organization. If your account has a single organization, the CLI uses it automatically. Instead of passing IDs on each command, you can also set them in a [context file](/docs/cli/set-context#using-a-named-context-file) and reference it with the `--context-file` option.
 
@@ -94,10 +90,6 @@ neonctl vpc endpoint status vpce-1234567890abcdef0 --org-id org-bold-bonus-12345
 The `vpc project` subcommands list, configure, or remove VPC endpoint restrictions for specific projects in your Neon organization. By default, a project accepts connections from any VPC configured at the organization level. A restriction limits a project to connections from a specific VPC.
 
 <CliSubcommands command="vpc project" anchorParts="project" />
-
-These options apply to all `vpc project` subcommands:
-
-<CliOptions command="vpc project" />
 
 You only need `--project-id` if your Neon account has more than one project.
 

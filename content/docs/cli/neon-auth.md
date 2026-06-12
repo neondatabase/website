@@ -26,10 +26,6 @@ Requires neonctl 2.23.0 or later. Check your version with `neonctl --version`.
 
 <CliSubcommands command="neon-auth" />
 
-These options apply to all `neon-auth` subcommands:
-
-<CliOptions command="neon-auth" />
-
 If `--project-id` or `--branch` are omitted, the CLI resolves them from your [context file](/docs/cli/set-context), auto-selects when there is only one option, and prompts otherwise.
 
 ## Enable and status (#enable-and-status)

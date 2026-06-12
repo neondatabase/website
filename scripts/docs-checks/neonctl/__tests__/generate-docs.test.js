@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 const require = createRequire(import.meta.url);
 
 const {
+  renderOptionsForPath,
   renderOptions,
   renderUsage,
   renderSubcommands,
@@ -37,9 +38,17 @@ describe('generate-docs rendering', () => {
     expect(table).not.toContain('&check;');
   });
 
-  it('commands without options render the canonical no-options sentence', () => {
-    const out = renderOptions(resolveCommand(schema, ['auth']));
-    expect(out).toBe('No options beyond the [global options](/docs/cli#global-options).');
+  it('commands with no visible options render nothing', () => {
+    expect(renderOptions(resolveCommand(schema, ['auth']))).toBe('');
+    expect(renderOptionsForPath(schema, ['auth'])).toBe('');
+  });
+
+  it('leaf tables include options inherited from parent commands', () => {
+    const table = renderOptionsForPath(schema, ['branches', 'delete']);
+    expect(table).toContain('`--project-id`');
+    const own = renderOptionsForPath(schema, ['branches', 'create']);
+    expect(own).toContain('`--name`'); // own options still present
+    expect(own).toContain('`--project-id`'); // plus inherited
   });
 
   it('subcommand anchors honor anchorParts on nested pages', () => {

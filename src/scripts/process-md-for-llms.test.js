@@ -975,8 +975,6 @@ describe('CLI reference components', () => {
         '',
         '<CliOptions command="projects create" />',
         '',
-        '<CliOptions command="auth" />',
-        '',
         '<CliGlobalOptions />',
         '',
       ].join('\n')
@@ -994,8 +992,8 @@ describe('CLI reference components', () => {
     expect(result).toContain('neonctl projects create [options]');
     // Subcommand table links
     expect(result).toContain('#create');
-    // Empty-options sentence (auth has no visible options)
-    expect(result).toContain('No options beyond the');
+    // Inherited options appear in leaf tables; only-global commands render nothing
+    expect(result).not.toContain('No options beyond the');
     // Global options include --output
     expect(result).toContain('`--output`');
     // No raw component tags survive

@@ -7,12 +7,12 @@ summary: >-
   or JSON output. Use this command to identify which organizations your account
   belongs to before running project or branch commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:29:16.599Z'
 redirectFrom:
   - /docs/reference/cli-orgs
 ---
 
-The `orgs` command lists the organizations you belong to.
+The `orgs` command lists the organizations you belong to. Its subcommand takes only the [global options](/docs/cli#global-options).
 
 ## Subcommands
 

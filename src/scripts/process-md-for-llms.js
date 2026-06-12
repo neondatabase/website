@@ -463,7 +463,11 @@ const componentHandlers = {
   },
   CliOptions(node) {
     const resolved = resolveCliCommand(node, 'CliOptions');
-    return resolved ? parseMarkdownToNodes(cliDocs.renderOptions(resolved.target)) : null;
+    if (!resolved) return null;
+    // Same inherited-options merge as the web component; '' (only global
+    // options apply) renders nothing in the mirror too.
+    const table = cliDocs.renderOptionsForPath(cliSchema, resolved.parts);
+    return table ? parseMarkdownToNodes(table) : null;
   },
   CliSubcommands(node) {
     const resolved = resolveCliCommand(node, 'CliSubcommands');

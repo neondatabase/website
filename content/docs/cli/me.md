@@ -10,7 +10,7 @@ summary: >-
   billing_account, auth_accounts, subscription_type, and numeric quota values
   not shown in the default table format.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:29:16.599Z'
 redirectFrom:
   - /docs/reference/cli-me
 ---
@@ -23,7 +23,7 @@ The `me` command shows information about the authenticated Neon CLI user: login,
 
 ## Options
 
-<CliOptions command="me" />
+Takes only the [global options](/docs/cli#global-options).
 
 ## Examples
 

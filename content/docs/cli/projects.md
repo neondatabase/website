@@ -11,12 +11,12 @@ summary: >-
   18; use the Neon Console or API to create projects on earlier Postgres
   versions.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:29:16.599Z'
 redirectFrom:
   - /docs/reference/cli-projects
 ---
 
-The `projects` command lists, creates, updates, deletes, recovers, and retrieves Neon projects from the terminal. For information about projects in Neon, see [Projects](/docs/manage/projects).
+The `projects` command lists, creates, updates, deletes, recovers, and retrieves Neon projects from the terminal. For information about projects in Neon, see [Projects](/docs/manage/projects). Subcommands that show no options table accept only the [global options](/docs/cli#global-options).
 
 ## Subcommands
 

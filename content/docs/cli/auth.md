@@ -11,7 +11,7 @@ summary: >-
   `--api-key` flag, then `NEON_API_KEY` env var, then the credentials file,
   then triggers browser auth if none are found.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T00:29:16.599Z'
 redirectFrom:
   - /docs/reference/cli-auth
 ---
@@ -47,4 +47,4 @@ The Neon CLI resolves authentication in this order:
 
 ## Options
 
-<CliOptions command="auth" />
+Takes only the [global options](/docs/cli#global-options).
