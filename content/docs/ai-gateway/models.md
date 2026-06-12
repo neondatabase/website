@@ -7,7 +7,7 @@ summary: >-
   the databricks- prefix. Use these IDs in the model field of any request
   regardless of which endpoint you are using.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-12T17:35:46.364Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
@@ -15,6 +15,17 @@ Neon AI Gateway serves models hosted by Databricks. All model IDs use the `datab
 <Admonition type="note">
 Model availability may vary by region. The catalog expands over time, so check back for new additions.
 </Admonition>
+
+## Rate limits
+
+During the private preview, the following limits apply:
+
+| Limit                                   | Value         |
+| --------------------------------------- | ------------- |
+| Per model (tokens per minute)           | 200,000 TPM   |
+| All models combined (tokens per minute) | 1,000,000 TPM |
+
+If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
 
 ## List available models
 
