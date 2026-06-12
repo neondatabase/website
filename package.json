@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
-    "predev": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "prebuild": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/sync-bootstrap-templates.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "predev": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/sync-bootstrap-templates.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
@@ -31,6 +31,7 @@
     "check:broken-links": "linkinator --config linkinator.config.json",
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
     "check:content-data": "node scripts/validate-content-data.js",
+    "sync:bootstrap-templates": "node src/scripts/sync-bootstrap-templates.js",
     "prepare": "husky install",
     "test": "npx cypress open",
     "test:unit": "vitest",
