@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-10T12:55:19.407Z'
+updatedOn: '2026-06-12T01:12:57.837Z'
 ---
 
 <Admonition type="note" title="Private Preview">
@@ -37,7 +37,7 @@ Without it, open connections are abandoned on eviction and remain open until the
 
 **Heartbeat: 15 minutes.** Active WebSocket connections and HTTP streams stay open as long as data flows. The timeout only fires when the connection goes silent. Send at least one byte every 15 minutes to keep a quiet stream alive.
 
-**`waitUntil`: 15 minutes.** Work registered with `waitUntil` runs after the response is sent. It's for cleanup: analytics writes, audit logs, short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
+**`waitUntil`: 15 minutes.** Work registered with `waitUntil` continues after the response is sent. It's for cleanup: analytics writes, audit logs, short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
 
 ```ts
 import { Hono } from 'hono';
@@ -46,17 +46,14 @@ import { waitUntil } from '@neondatabase/functions/v1';
 const app = new Hono();
 
 app.post('/event', async (c) => {
-  const defer = waitUntil();
-  defer(writeAnalytics(c.req.raw)); // your async follow-up work
+  waitUntil(writeAnalytics(c.req.raw)); // your async follow-up work
   return c.json({ ok: true });
 });
 
 export default app;
 ```
 
-<Admonition type="note">
-`waitUntil` is currently a stub. The deferred promise is accepted but not yet wired to the host runtime. The API is stable. Use it now and it will work automatically once the runtime support ships.
-</Admonition>
+`waitUntil` takes a promise and keeps the invocation alive until it settles, up to the 15-minute cap. It's the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
 
 ## Slug constraints
 

@@ -2,8 +2,8 @@
 title: Get started
 subtitle: Deploy your first Neon Function and call it over HTTP.
 summary: >-
-  Deploy your first Neon Function with neonctl: link a project, define the
-  function in neon.ts, develop locally with neonctl dev, and deploy with
+  Deploy your first Neon Function with neonctl: initialize a project, define
+  the function in neon.ts, develop locally with neonctl dev, and deploy with
   neonctl deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
@@ -21,7 +21,7 @@ Neon Functions is currently in Private Preview, available for new projects in th
 - The latest `neonctl`, installed and authenticated. Functions commands are new and change often during the preview, so upgrade before you start (`npm install -g neonctl@latest`).
 - Node.js 18 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
-Functions are available on new projects in AWS us-east-2 only. You can create the project during `neonctl link` below.
+Functions are available on new projects in AWS us-east-2 only.
 
 ## Set up your project
 
@@ -32,17 +32,7 @@ mkdir my-function && cd my-function
 neonctl init --preview
 ```
 
-`init --preview` sets up the directory and installs the Neon preview packages.
-
-## Link your project
-
-Connect the directory to a Neon project (pick one or create it):
-
-```bash
-neonctl link
-```
-
-`link` also pulls the branch's Neon env vars into a local env file (`.env` if one exists, otherwise `.env.local`), so other tools can use them. You don't need the file for this guide; `neonctl dev` injects the vars itself. See [Environment variables](/docs/compute/functions/environment-variables#pull-variables-locally) for details.
+`init --preview` sets up the directory, installs the Neon preview packages, and connects the directory to a Neon project. There's no separate link step.
 
 To target a specific branch, use `neonctl checkout`. It switches the branch pointer, and creates the branch if it doesn't exist:
 
@@ -77,7 +67,19 @@ Install dependencies:
 npm install hono @neondatabase/serverless
 ```
 
-Write the handler. `DATABASE_URL` is injected automatically from the linked branch's Postgres database:
+A function is any module whose default export has a `fetch(request)` method that returns a `Response`. A Hono app exports exactly that shape, so a minimal function looks like this:
+
+```ts
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.get('/', (c) => c.text('Hello World!'));
+
+export default app;
+```
+
+For this guide, write a handler that queries Postgres instead. `DATABASE_URL` is injected automatically from the linked branch's Postgres database:
 
 ```ts filename="functions/hello.ts"
 import { Hono } from 'hono';
@@ -96,7 +98,7 @@ export default app;
 
 ## Develop locally
 
-`neonctl dev` serves all functions declared in `neon.ts` with hot reload. It injects `DATABASE_URL` and other Neon env vars from the linked branch.
+`neonctl dev` serves all functions declared in `neon.ts` with hot reload. It injects `DATABASE_URL` and other Neon env vars from the linked branch. See [Environment variables](/docs/compute/functions/environment-variables) for the full list and how to pull them into a local `.env` file.
 
 ```bash
 neonctl dev

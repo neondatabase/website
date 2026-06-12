@@ -38,10 +38,12 @@ export default defineConfig({
     },
   },
   // Dynamic: per-branch tuning
-  branch: (branch) => ({
-    protected: branch.name === "main",
-    ...(branch.name !== "main" && { parent: "main", ttl: "7d" }),
-  }),
+  branch: (branch) => {
+    if (branch.name === "main") {
+      return { protected: true };
+    }
+    return { parent: "main", ttl: "7d" };
+  },
 });
 ```
 
@@ -74,7 +76,6 @@ preview: {
       env?: Record<string, string>,
       dev?: {
         port?: number,    // bind to this port in neonctl dev; omit for auto-assigned
-        portless?: boolean,
       },
     },
   },
@@ -88,7 +89,6 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 **`dev`** settings apply only to `neonctl dev`. They never affect deploy.
 
 - `port`: the local server binds this exact port and fails if it's taken. When omitted, a free port is found automatically.
-- `portless`: expose the function through the `portless` tool at a stable `<slug>.localhost` URL instead of a numbered port. Requires the `portless` binary on your PATH. Portless assigns the port itself, so `port` is ignored when this is set.
 
 The `preview` block also accepts `aiGateway` and `buckets` fields. They aren't part of the Functions preview and aren't covered here.
 

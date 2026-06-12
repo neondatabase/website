@@ -2,9 +2,9 @@
 title: Deploy and manage functions
 subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
-  Reference for deploying Neon Functions with neonctl functions deploy or the
-  Neon API, including flags, deployment states, and slug rules. Also covers
-  checking status, listing functions, and deleting them.
+  Reference for deploying Neon Functions with neonctl deploy, neonctl functions
+  deploy, or the Neon API, including flags, deployment states, and slug rules.
+  Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
 ---
 
@@ -12,7 +12,30 @@ enableTableOfContents: true
 Neon Functions is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
 </Admonition>
 
-## Deploy with the CLI
+## Deploy with `neon.ts`
+
+If your project has a [`neon.ts`](/docs/compute/functions/reference/neon-ts) config, this is the recommended way to deploy. `neonctl deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
+
+```bash
+neonctl deploy
+```
+
+| Flag                | Default           | Description                                                                                          |
+| ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
+| `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--branch`          | linked branch     | Target branch ID or name                                                                             |
+| `--project-id`      | linked project    | Project ID                                                                                           |
+| `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
+| `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
+
+`neonctl deploy` is an alias for `neonctl config apply`. To preview what a deploy would change without applying it, run `neonctl config plan`.
+
+Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neonctl functions deploy` below takes `KEY=VALUE` pairs instead.
+
+## Deploy with `neonctl functions deploy`
+
+To deploy one function directly, without a `neon.ts` config:
 
 ```bash shouldWrap
 neonctl functions deploy <slug> [--path <dir>] [--entry <file>] [--env KEY=VALUE] [--wait]
@@ -42,10 +65,6 @@ neonctl functions deploy hello --path . --env OPENAI_API_KEY=sk-...
 ```bash
 neonctl functions deploy hello --path . --branch feat/my-feature
 ```
-
-<Callout>
-If you use `neon.ts`, `neonctl deploy` applies your entire branch config (functions and all) in one step. See `neonctl deploy --help` for details.
-</Callout>
 
 ## Deploy with the API
 
