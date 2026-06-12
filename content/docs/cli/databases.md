@@ -9,12 +9,12 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 redirectFrom:
   - /docs/reference/cli-databases
 ---
 
-The `databases` command lists, creates, and deletes databases in a Neon project from the terminal. For information about databases in Neon, see [Manage databases](/docs/manage/databases).
+The `databases` command lists, creates, and deletes databases in a Neon project from the terminal. For information about databases in Neon, see [Manage databases](/docs/manage/databases). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="databases" />
 

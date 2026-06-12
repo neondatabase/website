@@ -9,12 +9,12 @@ summary: >-
   names are capped at 63 bytes; commands require the Neon CLI and either
   browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 redirectFrom:
   - /docs/reference/cli-roles
 ---
 
-The `roles` command lists, creates, and deletes roles in a Neon project from the terminal. For information about roles in Neon, see [Manage roles](/docs/manage/roles).
+The `roles` command lists, creates, and deletes roles in a Neon project from the terminal. For information about roles in Neon, see [Manage roles](/docs/manage/roles). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="roles" />
 

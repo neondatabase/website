@@ -9,12 +9,12 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 redirectFrom:
   - /docs/reference/cli-connection-string
 ---
 
-The `connection-string` command gets a Postgres connection string for any database on any branch in your Neon project. The connection string includes the password for the specified role. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
+The `connection-string` command gets a Postgres connection string for any database on any branch in your Neon project. The connection string includes the password for the specified role. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise. `--role-name` and `--database-name` are needed only when the branch has more than one role or database.
 
 <Admonition type="tip" title="Connect with psql">
 To open a `psql` session directly, use the dedicated [`neonctl psql`](/docs/cli/psql) command (requires neonctl 2.22.2+). You can also pass `--psql` to `connection-string` to achieve the same result.

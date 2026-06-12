@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 ---
 
 One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Neon Auth from the terminal, with branch-scoped workflows built in.
@@ -55,7 +55,7 @@ You can use global options with any Neon CLI command.
 
 - <a id="api-key"></a>`--api-key`
 
-  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+  Specifies your Neon API key. You can authenticate using a Neon API key when running a Neon CLI command instead of using `neonctl auth`. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#creating-api-keys).
 
   ```bash
   neonctl <command> --api-key <neon_api_key>

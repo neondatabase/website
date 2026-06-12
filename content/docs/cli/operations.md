@@ -10,12 +10,12 @@ summary: >-
   to be installed and authenticated; scope to a specific project with
   `--project-id` when your account has multiple projects.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 redirectFrom:
   - /docs/reference/cli-operations
 ---
 
-The `operations` command lists operations for a Neon project from the terminal. For information about operations in Neon, see [System operations](/docs/manage/operations).
+The `operations` command lists operations for a Neon project from the terminal. For information about operations in Neon, see [System operations](/docs/manage/operations). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="operations" />
 

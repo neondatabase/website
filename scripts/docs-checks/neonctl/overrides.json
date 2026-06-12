@@ -69,14 +69,14 @@
               "defaultText": "{database}_owner"
             },
             "hipaa": {
-              "describe": "Enable HIPAA compliance for the project (sets project.settings.hipaa). Description missing from the upstream OpenAPI spec."
+              "describe": "Enable HIPAA compliance for the project."
             }
           }
         },
         "update": {
           "options": {
             "hipaa": {
-              "describe": "Enable HIPAA compliance for the project (sets project.settings.hipaa). Description missing from the upstream OpenAPI spec."
+              "describe": "Enable HIPAA compliance for the project."
             }
           }
         }
@@ -90,7 +90,11 @@
               "options": {
                 "provider-id": {
                   "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
                 }
               }
             },
@@ -98,7 +102,11 @@
               "options": {
                 "provider-id": {
                   "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
                 }
               }
             },
@@ -106,11 +114,27 @@
               "options": {
                 "provider-id": {
                   "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
                 }
               }
             }
           }
+        }
+      }
+    },
+    "init": {
+      "options": {
+        "agent": {
+          "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
+          "choices": [
+            "cursor",
+            "copilot",
+            "claude"
+          ]
         }
       }
     }

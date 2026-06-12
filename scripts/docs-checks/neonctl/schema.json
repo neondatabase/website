@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "neonctlVersion": "2.24.2",
-  "generatedAt": "2026-06-11T23:10:32.826Z",
+  "generatedAt": "2026-06-12T01:42:01.266Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -109,7 +109,7 @@
             },
             "hipaa": {
               "type": "boolean",
-              "describe": "Enable HIPAA compliance for the project (sets project.settings.hipaa). Description missing from the upstream OpenAPI spec."
+              "describe": "Enable HIPAA compliance for the project."
             },
             "name": {
               "type": "string",
@@ -178,7 +178,7 @@
             },
             "hipaa": {
               "type": "boolean",
-              "describe": "Enable HIPAA compliance for the project (sets project.settings.hipaa). Description missing from the upstream OpenAPI spec."
+              "describe": "Enable HIPAA compliance for the project."
             },
             "cu": {
               "type": "string",
@@ -1187,8 +1187,13 @@
       "options": {
         "agent": {
           "type": "string",
-          "describe": "Agent to configure (cursor, copilot, code).",
-          "alias": "a"
+          "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
+          "alias": "a",
+          "choices": [
+            "cursor",
+            "copilot",
+            "claude"
+          ]
         },
         "context-file": {
           "type": "unknown",

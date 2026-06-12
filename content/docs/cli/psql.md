@@ -6,12 +6,12 @@ summary: >-
   against a branch in your Neon project, including pooled connections and
   time-travel support.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-06-12T01:42:37.157Z'
 redirectFrom:
   - /docs/reference/cli-psql
 ---
 
-The `psql` command connects to a database in your Neon project using the `psql` client. It builds a connection string for the specified branch (or the default branch from your [context file](/docs/cli/set-context)) and launches `psql`, equivalent to running [`neonctl connection-string --psql`](/docs/cli/connection-string) as a dedicated top-level command. Requires neonctl 2.22.2 or later. Check your version with `neonctl --version`.
+The `psql` command connects to a database in your Neon project using the `psql` client. It builds a connection string for the specified branch (or the default branch from your [context file](/docs/cli/set-context)) and launches `psql`, equivalent to running [`neonctl connection-string --psql`](/docs/cli/connection-string) as a dedicated top-level command. Requires neonctl 2.22.2 or later. Check your version with `neonctl --version`. If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise. `--role-name` and `--database-name` are needed only when the branch has more than one role or database.
 
 ## Usage
 
