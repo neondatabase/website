@@ -1,4 +1,4 @@
-text: 'All paid plans now include 5x more free data transfer: 500 GB per month, up from 100 GB. Read the details here.'
+text: 'New in Neon: Lakebase Search brings scalable vector and BM25 full-text search to a single Postgres database. See what shipped this week.'
 link:
-  url: 'https://neon.com/blog/more-data-transfer-on-paid-plans'
+  url: 'https://neon.com/docs/changelog/2026-06-12'
   target: '_blank'
