@@ -30,13 +30,9 @@ mkdir my-function && cd my-function
 neonctl init --preview
 ```
 
-`init --preview` sets up the directory, installs the Neon preview packages, and connects the directory to a Neon project. There's no separate link step.
+`neonctl init --preview` runs an interactive setup: it installs the Neon MCP server and agent skills for your editor and, in an empty directory, offers to scaffold the project from a Neon template. Scaffolding links the directory to a Neon project and pulls the branch's variables into a local `.env` file. If you build by hand instead, finish by running `neonctl link`.
 
-To target a specific branch, use `neonctl checkout`. It switches the branch pointer, and creates the branch if it doesn't exist:
-
-```bash
-neonctl checkout feat/my-feature
-```
+To go straight to a working example, run `neonctl bootstrap`. It scaffolds a starter template (a Hono API, an AI SDK agent, or a Mastra agent, all on Neon Functions) and links it. This guide builds the function by hand.
 
 ## Define your function
 
