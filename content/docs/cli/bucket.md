@@ -11,6 +11,8 @@ summary: >-
 enableTableOfContents: true
 ---
 
+<PrivatePreviewEnquire/>
+
 The `bucket` command manages branch object-storage buckets and their objects. Buckets belong to a branch; the `object` subcommands work with the objects inside a bucket.
 
 <CliSubcommands command="bucket" />
