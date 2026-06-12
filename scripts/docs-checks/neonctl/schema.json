@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.24.2",
-  "generatedAt": "2026-06-12T01:42:01.266Z",
+  "neonctlVersion": "2.25.0",
+  "generatedAt": "2026-06-12T14:07:18.552Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -1095,7 +1095,7 @@
         }
       },
       "commands": {},
-      "describe": "Set the current context",
+      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
     },
     "checkout": {
@@ -1156,6 +1156,11 @@
           "type": "string",
           "describe": "Region ID for a new project (e.g. aws-us-east-2). Required with --project-name."
         },
+        "branch": {
+          "type": "string",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
+          "alias": "branch-id"
+        },
         "params": {
           "type": "string",
           "describe": "JSON object with link parameters, e.g. '{\"orgId\":\"...\",\"projectId\":\"...\"}' or '{\"orgId\":\"...\",\"projectName\":\"...\",\"regionId\":\"...\"}'. Flags take precedence over fields in --params."
@@ -1171,6 +1176,16 @@
           "default": false,
           "alias": "y"
         },
+        "clear": {
+          "type": "boolean",
+          "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
+          "default": false
+        },
+        "checks": {
+          "type": "boolean",
+          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
+          "default": true
+        },
         "env-pull": {
           "type": "boolean",
           "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neondatabase/env`) or `neonctl dev`.",
@@ -1179,7 +1194,29 @@
       },
       "commands": {},
       "describe": "Link the current directory to a Neon project",
-      "usage": "$0 link [options]"
+      "usage": "$0 link [options]",
+      "examples": [
+        {
+          "command": "$0 link --clear",
+          "description": "Forget the current org/project/branch context"
+        },
+        {
+          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678",
+          "description": "Write the context offline (no API calls, no verification)"
+        },
+        {
+          "command": "$0 link --branch-id br-…",
+          "description": "Pin a branch in the already-linked project"
+        },
+        {
+          "command": "$0 link --org-id org-… --project-name my-app --region-id aws-us-east-2",
+          "description": "Create a new project and link it"
+        },
+        {
+          "command": "$0 link --project-id polished-snowflake-12345678",
+          "description": "Link an existing project (org is inferred); pin a branch later with 'neonctl checkout'"
+        }
+      ]
     },
     "init": {
       "aliases": [],
@@ -2053,7 +2090,14 @@
               "type": "string"
             }
           ],
-          "options": {},
+          "options": {
+            "list-env-variables": {
+              "type": "boolean",
+              "describe": "List the environment variable names of the active deployment",
+              "default": false,
+              "alias": "E"
+            }
+          },
           "commands": {},
           "describe": "Show a function's details"
         },
@@ -2174,6 +2218,11 @@
               "type": "boolean",
               "describe": "Auto-confirm applying to a branch marked protected on Neon",
               "default": false
+            },
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
+              "default": true
             }
           },
           "commands": {},
@@ -2212,6 +2261,11 @@
           "type": "boolean",
           "describe": "Auto-confirm applying to a branch marked protected on Neon",
           "default": false
+        },
+        "env-pull": {
+          "type": "boolean",
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
+          "default": true
         }
       },
       "commands": {},
@@ -2412,6 +2466,40 @@
               "describe": "Download an object from a bucket to a local file",
               "usage": "$0 bucket object get <bucket>/<key> [options]"
             },
+            "put": {
+              "name": "put",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "target",
+                  "required": true,
+                  "describe": "The object to upload to: <bucket>/<key>",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "project-id": {
+                  "type": "string",
+                  "describe": "Project ID"
+                },
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                },
+                "file": {
+                  "type": "string",
+                  "describe": "Path to the local file to upload",
+                  "required": true
+                },
+                "content-type": {
+                  "type": "string",
+                  "describe": "Content-Type to store the object with (e.g. text/plain)"
+                }
+              },
+              "commands": {},
+              "describe": "Upload a local file to a bucket as an object",
+              "usage": "$0 bucket object put <bucket>/<key> [options]"
+            },
             "delete": {
               "name": "delete",
               "aliases": [
@@ -2445,12 +2533,89 @@
               "usage": "$0 bucket object delete <bucket>/<key> [options]"
             }
           },
-          "describe": "List, download or delete objects in a bucket",
+          "describe": "List, download, upload or delete objects in a bucket",
           "usage": "$0 bucket object <sub-command> [options]"
         }
       },
       "describe": "Manage branch object-storage buckets and their objects",
       "usage": "$0 bucket <sub-command> [options]"
+    },
+    "bootstrap": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "directory",
+          "describe": "Directory to scaffold into. Use \".\" for the current directory. Omit to be prompted.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "template": {
+          "type": "string",
+          "describe": "Template to use (skips the interactive picker). Run with --list-templates to see available templates."
+        },
+        "list-templates": {
+          "type": "boolean",
+          "describe": "List available templates and exit.",
+          "default": false,
+          "alias": [
+            "list",
+            "ls"
+          ]
+        },
+        "force": {
+          "type": "boolean",
+          "describe": "Scaffold into the target directory even if it is not empty (colliding files are overwritten).",
+          "default": false
+        },
+        "agent": {
+          "type": "boolean",
+          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
+          "default": false
+        },
+        "default": {
+          "type": "boolean",
+          "describe": "Quick start: scaffold the default template (or --template) and run the usual setup (install dependencies, git init) without prompting. Linking is left to you since it needs a project choice.",
+          "default": false,
+          "alias": "y"
+        },
+        "install": {
+          "type": "boolean",
+          "describe": "Install dependencies after scaffolding. In interactive mode this is offered as a prompt; use --no-install to skip without being asked.",
+          "default": true
+        },
+        "git": {
+          "type": "boolean",
+          "describe": "Initialize a git repository after scaffolding. In interactive mode this is offered as a prompt; use --no-git to skip without being asked.",
+          "default": true
+        },
+        "link": {
+          "type": "boolean",
+          "describe": "Run `neon link` in the scaffolded directory after installing. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "default": true
+        }
+      },
+      "commands": {},
+      "describe": "Scaffold a new project from a Neon starter template",
+      "usage": "$0 bootstrap [directory] [options]",
+      "examples": [
+        {
+          "command": "$0 bootstrap my-app",
+          "description": "Create ./my-app from an interactively chosen template"
+        },
+        {
+          "command": "$0 bootstrap . --template hono",
+          "description": "Scaffold the Hono template into the current directory"
+        },
+        {
+          "command": "$0 bootstrap my-app --default",
+          "description": "Quick start: scaffold the default template and run setup without prompting"
+        },
+        {
+          "command": "$0 bootstrap my-app --template hono --agent",
+          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
+        }
+      ]
     }
   }
 }
