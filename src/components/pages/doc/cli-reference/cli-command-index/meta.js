@@ -78,7 +78,7 @@ const META = {
   },
   functions: {
     desc: 'Deploy and manage Neon Functions on a branch.',
-    examples: ['neonctl functions deploy api --entry ./api.ts'],
+    examples: ['neonctl functions deploy api --src ./api.ts'],
   },
   bucket: {
     desc: 'Branch-scoped object storage and its objects.',

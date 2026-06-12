@@ -4,7 +4,7 @@ subtitle: 'Deploy, list, inspect, and delete Neon Functions'
 summary: >-
   The Neon CLI `neonctl functions` command manages Neon Functions on a branch:
   `neonctl functions deploy <slug>` bundles and deploys a function from a local
-  directory (with --path, --entry, --runtime, --env, and --wait), and the list,
+  directory or entry file (with --src, --runtime, --env, and --wait), and the list,
   get, and delete subcommands manage deployed functions. The slug is the
   permanent function identifier: 1 to 20 lowercase letters and digits.
 enableTableOfContents: true
@@ -18,7 +18,7 @@ The `functions` command manages [Neon Functions](/docs/compute/functions/overvie
 
 ## neonctl functions deploy (#deploy)
 
-Deploys a function from a local directory. The `<slug>` is the permanent function identifier: 1 to 20 lowercase letters and digits (`^[a-z0-9]{1,20}$`).
+Deploys a function from a local directory or entry file. The `<slug>` is the permanent function identifier: 1 to 20 lowercase letters and digits (`^[a-z0-9]{1,20}$`).
 
 <CliUsage command="functions deploy" />
 
@@ -26,10 +26,10 @@ Deploys a function from a local directory. The `<slug>` is the permanent functio
 
 Use `--wait` to block until the deployment finishes building, which is the predictable path for scripts and CI.
 
-Deploy a function from the current directory:
+Deploy a function from an entry file:
 
 ```bash
-neonctl functions deploy hello --path . --entry functions/hello.ts
+neonctl functions deploy hello --src functions/hello.ts
 ```
 
 ```text filename="Output"
@@ -45,7 +45,7 @@ INFO: Function deployment hello/1 completed.
 Deploy with environment variables and wait for the build:
 
 ```bash
-neonctl functions deploy hello --entry functions/hello.ts --env LOG_LEVEL=info --wait
+neonctl functions deploy hello --src functions/hello.ts --env LOG_LEVEL=info --wait
 ```
 
 ## neonctl functions list (#list)

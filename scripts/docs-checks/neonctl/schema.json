@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.25.0",
-  "generatedAt": "2026-06-12T14:07:18.552Z",
+  "neonctlVersion": "2.26.1",
+  "generatedAt": "2026-06-12T17:35:24.759Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -1222,6 +1222,21 @@
       "aliases": [],
       "positionals": [],
       "options": {
+        "preview": {
+          "type": "boolean",
+          "describe": "Enable preview features (e.g. project bootstrapping from templates).",
+          "default": false
+        },
+        "skip-migrations": {
+          "type": "boolean",
+          "describe": "Skip the migrations phase.",
+          "default": false
+        },
+        "skip-neon-auth": {
+          "type": "boolean",
+          "describe": "Skip the Neon Auth setup phase.",
+          "default": false
+        },
         "agent": {
           "type": "string",
           "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
@@ -2043,13 +2058,17 @@
             }
           ],
           "options": {
+            "src": {
+              "type": "string",
+              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
+            },
             "path": {
               "type": "string",
-              "describe": "Base directory for the function (resolves --entry)"
+              "hidden": true
             },
             "entry": {
               "type": "string",
-              "describe": "Entry file to bundle, relative to --path"
+              "hidden": true
             },
             "runtime": {
               "type": "string",
