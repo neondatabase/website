@@ -11,7 +11,7 @@ summary: >-
   up with a single command (`npx neonctl@latest init` or `npx add-mcp
   https://mcp.neon.tech/mcp`); supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**:
@@ -28,7 +28,7 @@ The fastest way to set up Neon's MCP Server is with one command:
 npx neonctl@latest init
 ```
 
-This configures the Neon MCP Server for compatible MCP clients in your workspace using API key authentication, including Cursor, VS Code, Claude Code, and other assistants [add-mcp can target](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). See the [neonctl init documentation](/docs/reference/cli-init).
+This configures the Neon MCP Server for compatible MCP clients in your workspace using API key authentication, including Cursor, VS Code, Claude Code, and other assistants [add-mcp can target](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). See the [neonctl init documentation](/docs/cli/init).
 
 **If you only want the MCP server and nothing else**, use:
 

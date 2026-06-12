@@ -3,7 +3,7 @@ title: 'How do I create a new database in my Neon project?'
 subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -40,7 +40,7 @@ neon databases create \
   --branch <branch-id-or-name>
 ```
 
-If you've set a default project with `neon set-context`, you can drop `--project-id`. See the [`databases` command reference](/docs/reference/cli-databases).
+If you've set a default project with `neon set-context`, you can drop `--project-id`. See the [`databases` command reference](/docs/cli/databases).
 
 </TabItem>
 

@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-06-10T17:52:31.210Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.
@@ -32,7 +32,7 @@ The fastest way to get started:
 npx neonctl@latest init
 ```
 
-**`neonctl init`** (see [`neonctl init` reference](/docs/reference/cli-init)) creates a Neon API key and configures the MCP server with **API key** auth so you can skip OAuth when using the connection. It installs the VS Code/Cursor extension where applicable, wires **Claude Code** and **many other assistants** the wizard supports, and installs Neon's [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.
+**`neonctl init`** (see [`neonctl init` reference](/docs/cli/init)) creates a Neon API key and configures the MCP server with **API key** auth so you can skip OAuth when using the connection. It installs the VS Code/Cursor extension where applicable, wires **Claude Code** and **many other assistants** the wizard supports, and installs Neon's [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.
 
 <Admonition type="note">
 Each run of `npx neonctl@latest init` creates a new Neon API key. If you run it multiple times, review your [API keys](https://console.neon.tech/app/settings/api-keys) and revoke any you no longer need.
@@ -90,7 +90,7 @@ For manual configuration, Kiro reads **`~/.kiro/settings/mcp.json`** (global) or
 <Tabs labels={["Quick Setup", "OAuth", "Local"]}>
 <TabItem>
 
-Run the [init](/docs/reference/cli-init) command:
+Run the [init](/docs/cli/init) command:
 
 ```bash
 npx neonctl@latest init
@@ -141,7 +141,7 @@ For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cur
 <Tabs labels={["Quick Setup", "OAuth", "Local"]}>
 <TabItem>
 
-Run the [init](/docs/reference/cli-init) command:
+Run the [init](/docs/cli/init) command:
 
 ```bash
 npx neonctl@latest init
@@ -183,7 +183,7 @@ To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.v
 <Tabs labels={["Quick Setup", "OAuth", "Local"]}>
 <TabItem>
 
-Run the [init](/docs/reference/cli-init) command:
+Run the [init](/docs/cli/init) command:
 
 ```bash
 npx neonctl@latest init

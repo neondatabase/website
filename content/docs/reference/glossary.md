@@ -193,7 +193,7 @@ Example context file contents:
 }
 ```
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## copy-on-write
 
@@ -451,7 +451,7 @@ When you run a Neon CLI command without specifying an organization (via `--org-i
 
 Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## Project
 

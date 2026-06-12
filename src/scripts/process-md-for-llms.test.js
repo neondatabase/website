@@ -945,3 +945,76 @@ See [CONN_MAX_AGE](https://example.com).
     });
   });
 });
+
+// CLI reference components expand to generated markdown from the neonctl
+// schema via the same renderers the web components use.
+describe('CLI reference components', () => {
+  const writeFixture = async (content) => {
+    const os = await import('os');
+    const pathMod = await import('path');
+    const dir = await fs.mkdtemp(pathMod.join(os.tmpdir(), 'cli-llms-'));
+    const file = pathMod.join(dir, 'fixture.md');
+    await fs.writeFile(file, content);
+    return file;
+  };
+
+  it('expands CliUsage, CliOptions, CliSubcommands, and CliGlobalOptions', async () => {
+    const file = await writeFixture(
+      [
+        '---',
+        'title: CLI fixture',
+        '---',
+        '',
+        '## Subcommands',
+        '',
+        '<CliSubcommands command="projects" />',
+        '',
+        '### neonctl projects create (#create)',
+        '',
+        '<CliUsage command="projects create" />',
+        '',
+        '<CliOptions command="projects create" />',
+        '',
+        '<CliGlobalOptions />',
+        '',
+      ].join('\n')
+    );
+    const result = await processFile(file, 'https://neon.com/docs/cli/projects');
+
+    // Options table with the settled column contract (toMarkdown pads cells)
+    expect(result).toMatch(/\| Option\s+\| Description\s+\| Type\s+\| Default\s+\| Required\s+\|/);
+    expect(result).toContain('`--name`');
+    expect(result).toMatch(/\|\s+No\s+\|/);
+    // Custom anchor IDs are stripped from heading text in the mirror
+    expect(result).toContain('### neonctl projects create');
+    expect(result).not.toContain('(#create)');
+    // Synopsis
+    expect(result).toContain('neonctl projects create [options]');
+    // Subcommand table links
+    expect(result).toContain('#create');
+    // Inherited options appear in leaf tables; only-global commands render nothing
+    expect(result).not.toContain('No options beyond the');
+    // Global options include --output
+    expect(result).toContain('`--output`');
+    // No raw component tags survive
+    expect(result).not.toContain('<CliUsage');
+    expect(result).not.toContain('<CliOptions');
+    expect(result).not.toContain('<CliSubcommands');
+    expect(result).not.toContain('<CliGlobalOptions');
+  });
+
+  it('expands CliCommandIndex to the full static command tree', async () => {
+    const file = await writeFixture(
+      ['---', 'title: Overview fixture', '---', '', '<CliCommandIndex />', ''].join('\n')
+    );
+    const result = await processFile(file, 'https://neon.com/docs/cli');
+
+    // Every top-level command appears as a heading in the tree
+    for (const name of ['projects', 'branches', 'functions', 'bucket', 'neon-auth']) {
+      expect(result).toContain(`### ${name}`);
+    }
+    // Nested subtrees flatten to full invocations
+    expect(result).toContain('neonctl bucket object list');
+    expect(result).not.toContain('<CliCommandIndex');
+  });
+});

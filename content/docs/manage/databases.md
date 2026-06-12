@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -79,7 +79,7 @@ To delete a database:
 
 ## Manage databases with the Neon CLI
 
-The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/reference/cli-databases).
+The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/cli/databases).
 
 ## Manage databases with the Neon API
 

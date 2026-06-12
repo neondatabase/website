@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
-    "predev": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync",
+    "prebuild": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "predev": "node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
@@ -38,7 +38,10 @@
     "test:unit:run": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "check:docs": "vitest run scripts/docs-checks/**/__tests__/*.test.js",
-    "check:docs:neonctl": "vitest run scripts/docs-checks/neonctl/__tests__/neonctl-docs.test.js"
+    "check:docs:neonctl": "vitest run scripts/docs-checks/neonctl/__tests__/",
+    "gen:schema:neonctl": "node scripts/docs-checks/neonctl/generate-schema.js",
+    "gen:docs:neonctl": "node scripts/docs-checks/neonctl/generate-docs.js",
+    "refresh:cli-docs": "node scripts/docs-checks/neonctl/refresh.js"
   },
   "dependencies": {
     "@codemirror/lang-sql": "^6.9.1",

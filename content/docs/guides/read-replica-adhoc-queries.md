@@ -9,7 +9,7 @@ summary: >-
   running them against production. Replicas share primary storage at no extra
   cost and automatically suspend after 5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries work well for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
@@ -60,7 +60,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+Alternatively, you can create read replicas using the [Neon CLI](/docs/cli/branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 <CodeTabs labels={["CLI", "API"]}>
 

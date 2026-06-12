@@ -4,7 +4,7 @@ subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-01-31T14:05:11.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).
@@ -54,7 +54,7 @@ Before you begin, ensure you have the following:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neonctl init`](/docs/reference/cli-init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
+The fastest way to get started is with the [`neonctl init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
 
 ```bash
 npx neonctl@latest init

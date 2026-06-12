@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -28,7 +28,7 @@ Our developer experience is anchored by four core pillars:
 
 Traditional OLTP databases force you to provision compute upfront (i.e., choose an instance size), plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
-You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
+You can build your database branching workflows using the [Neon CLI](/docs/cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 **How it works**
 
@@ -137,7 +137,7 @@ The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-ap
 
 **CLI and native integrations**
 
-For local development and CI pipelines, the [Neon CLI](/docs/reference/neon-cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
+For local development and CI pipelines, the [Neon CLI](/docs/cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
 
 - GitHub Actions for CI-driven branching and cleanup
 - Vercel for automatic database branches per preview deployment

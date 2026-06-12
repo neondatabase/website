@@ -11,7 +11,7 @@ summary: >-
   Schema Diff to see exactly which tables, sequences, and constraints differ
   before merging or restoring.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -22,7 +22,7 @@ To complete this tutorial, you'll need:
 
 - A Neon account. Sign up [here](/docs/get-started/signing-up).
 - To interact with your Neon database from the command line:
-  - Install the [Neon CLI](/docs/reference/cli-install)
+  - Install the [Neon CLI](/docs/cli/install)
   - Download and install the [psql](https://www.postgresql.org/download/) client
 
 <Steps>

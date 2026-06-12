@@ -10,7 +10,7 @@ summary: >-
   and can be retried.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
@@ -33,7 +33,7 @@ An operation is an action performed by the Neon Control Plane on a Neon object o
 
 ## View operations
 
-You can view system operations via the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view system operations via the Neon Console, [Neon CLI](/docs/cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
 
@@ -64,7 +64,7 @@ To view operation using the Neon CLI:
 neon operations list --project-id <project_id>
 ```
 
-See [Neon CLI commands — operations](/docs/reference/cli-operations).
+See [Neon CLI commands — operations](/docs/cli/operations).
 
 </TabItem>
 

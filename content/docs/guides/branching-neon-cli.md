@@ -10,21 +10,21 @@ summary: >-
   Console and API equivalents for these operations are covered on separate
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
-The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
+The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
 
 The examples show the default `table` output format. The Neon CLI also supports `json` and `yaml` output formats. For example, if you prefer output in `json`, add `--output json` to your Neon CLI command.
 
 ## Prerequisites
 
-- The Neon CLI. See [Install the Neon CLI](/docs/reference/cli-install) for instructions.
-- To run CLI commands, you must either authenticate through your browser or supply an API key using the `--api-key` option. See [Connect with the Neon CLI](/docs/reference/neon-cli#connect).
+- The Neon CLI. See [Install the Neon CLI](/docs/cli/install) for instructions.
+- To run CLI commands, you must either authenticate through your browser or supply an API key using the `--api-key` option. See [Connect with the Neon CLI](/docs/cli/install#connect).
 
 ## Create a branch with the CLI
 
-The following Neon CLI command creates a branch. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#create).
+The following Neon CLI command creates a branch. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/cli/branches#create).
 The command response includes the branch ID, the compute endpoint ID, and the connection URI for connecting to the branch.
 
 <Admonition type="tip">
@@ -55,7 +55,7 @@ connection_uris
 ```
 
 <Admonition type="tip">
-The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
+The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/cli/connection-string).
 </Admonition>
 
 ## Create a branch from a non-default parent
@@ -88,7 +88,7 @@ connection_uris
 
 ## List branches with the CLI
 
-The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches#list).
+The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/cli/branches#list).
 
 First, list your projects to get your project ID:
 
@@ -126,12 +126,12 @@ neon branches list --project-id crimson-voice-12345678
 ```
 
 <Admonition type="tip">
-To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/cli/set-context) for details.
 </Admonition>
 
 ## Delete a branch with the CLI
 
-The following Neon CLI command deletes the specified branch. This command requires a `--project-id` option unless you've set a default project with `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#delete). You can delete a branch by its ID or name.
+The following Neon CLI command deletes the specified branch. This command requires a `--project-id` option unless you've set a default project with `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/cli/branches#delete). You can delete a branch by its ID or name.
 
 ```bash
 neon branches delete br-rough-sky-158193 --project-id crimson-voice-12345678

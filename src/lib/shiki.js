@@ -43,6 +43,62 @@ const parseHighlightLines = (meta) => {
   return highlightLines;
 };
 
+// Shell grammars tokenize the `>` in placeholders like `<slug>` as an
+// output redirection, splitting the placeholder's coloring mid-word
+// (`<slu` one color, `g>` another). This transformer rebuilds each line's
+// tokens so a `<placeholder>` renders as a single token with one color.
+// Applies to shell languages only; placeholders are the man-page
+// convention used across the CLI docs.
+const SHELL_LANGS = new Set(['bash', 'sh', 'shell', 'shellscript', 'zsh']);
+const PLACEHOLDER_RE = /<[a-zA-Z0-9_|.-]+(?:\.\.\.)?>/g;
+
+const transformerShellPlaceholders = () => ({
+  name: 'shell-placeholders',
+  tokens(lines) {
+    if (!SHELL_LANGS.has(this.options.lang)) return lines;
+    return lines.map((tokens) => {
+      const lineText = tokens.map((token) => token.content).join('');
+      const matches = [...lineText.matchAll(PLACEHOLDER_RE)];
+      if (matches.length === 0) return tokens;
+
+      // Boundaries of placeholder ranges within the line.
+      const ranges = matches.map((m) => [m.index, m.index + m[0].length]);
+      const inRange = (pos) => ranges.find(([start, end]) => pos >= start && pos < end);
+
+      const result = [];
+      let pos = 0;
+      for (const token of tokens) {
+        let local = 0;
+        while (local < token.content.length) {
+          const range = inRange(pos + local);
+          if (range) {
+            // Emit the whole placeholder once (when we hit its start),
+            // then skip past whatever part of it this token covers.
+            if (pos + local === range[0]) {
+              result.push({
+                content: lineText.slice(range[0], range[1]),
+                color: 'var(--shiki-token-constant)',
+              });
+            }
+            const consumed = Math.min(range[1] - (pos + local), token.content.length - local);
+            local += consumed;
+          } else {
+            const nextBoundary = ranges
+              .map(([start]) => start)
+              .filter((start) => start > pos + local)
+              .reduce((min, start) => Math.min(min, start), Infinity);
+            const sliceEnd = Math.min(token.content.length, nextBoundary - pos);
+            result.push({ ...token, content: token.content.slice(local, sliceEnd) });
+            local = sliceEnd;
+          }
+        }
+        pos += token.content.length;
+      }
+      return result;
+    });
+  },
+});
+
 export default async function highlight(code, lang = 'bash', meta = '', theme = customTheme) {
   let language = lang.toLocaleLowerCase();
 
@@ -86,6 +142,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
       transformerNotationDiff(),
       transformerNotationHighlight(),
       transformerNotationWordHighlight(),
+      transformerShellPlaceholders(),
     ],
   });
 

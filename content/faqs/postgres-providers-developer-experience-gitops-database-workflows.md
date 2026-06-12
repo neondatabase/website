@@ -16,7 +16,7 @@ Neon's branching model maps directly onto Git workflows. Every pull request gets
 A typical GitOps loop with Neon:
 
 1. Developer opens a feature branch in Git.
-2. CI calls the [Neon API](/docs/reference/api-reference) or [CLI](/docs/reference/neon-cli) to create a child branch from `main`.
+2. CI calls the [Neon API](/docs/reference/api-reference) or [CLI](/docs/cli) to create a child branch from `main`.
 3. Migrations run against the new branch as part of the build.
 4. Preview deployment gets the branch's connection string injected as an environment variable.
 5. PR merges, migration is applied to `main`, child branch auto-expires.

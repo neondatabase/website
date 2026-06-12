@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cursor and Neon MCP S
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-20T00:00:00.000Z'
-updatedOn: '2026-06-10T17:52:31.210Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).
@@ -53,7 +53,7 @@ Before you begin, ensure you have the following:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neonctl init`](/docs/reference/cli-init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
+The fastest way to get started is with the [`neonctl init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
 
 ```bash
 npx neonctl@latest init
