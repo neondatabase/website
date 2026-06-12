@@ -12,7 +12,7 @@ summary: >-
   signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
   computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T12:32:37.482Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -32,7 +32,7 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 </DocsList>
 </InfoBlock>
 
-Available for Scale plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
+Available for Scale plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, PostHog, Honeycomb, or any other OTEL-compatible service.
 
 ## How it works
 
@@ -162,6 +162,10 @@ You can enable either or both options based on your monitoring needs.
    - Europe: `https://otlp.eu01.nr-data.net`
    - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
+   **For PostHog**:
+   - US: `https://us.i.posthog.com`
+   - EU: `https://eu.i.posthog.com`
+
    <Admonition type="note">
    When you configure an OTLP endpoint URL in Neon, you should provide only the **base URL** of your collector or observability platform. The OpenTelemetry Collector automatically appends the correct signal-specific paths:
    - `/v1/metrics` for metrics
@@ -200,6 +204,9 @@ You can enable either or both options based on your monitoring needs.
 
    **For New Relic**:
    - Use **Bearer** or **API Key** with your New Relic license key
+
+   **For PostHog**:
+   - Use **API Key** with your PostHog project API key
 
    **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
