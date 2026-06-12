@@ -34,6 +34,16 @@ Use `--wait` to block until the deployment finishes building, which is the predi
   neonctl functions deploy hello --path . --entry functions/hello.ts
   ```
 
+  ```text
+  INFO: Function deployment triggered for function hello.
+  ┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
+  │ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
+  ├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
+  │ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
+  └────┴───────────┴──────────┴────────────┴─────────────────────────────┘
+  INFO: Function deployment hello/1 completed.
+  ```
+
 - Deploy with environment variables and wait for the build:
 
   ```bash
@@ -48,9 +58,56 @@ Lists the functions on the branch.
 
 <CliOptions command="functions list" />
 
-```bash
-neonctl functions list --output json
-```
+- List the functions on the branch:
+
+  ```bash
+  neonctl functions list
+  ```
+
+  ```text
+  ┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
+  │ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
+  ├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
+  └───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
+  ```
+
+- List with full deployment details for scripts and agents:
+
+  ```bash
+  neonctl functions list --output json
+  ```
+
+  <details>
+  <summary>Show output</summary>
+
+  ```json
+  [
+    {
+      "id": "hello",
+      "slug": "hello",
+      "name": "hello",
+      "invocation_url": "https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/",
+      "current_deployment": {
+        "id": 1,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2026-06-12T00:14:58.044690Z"
+      },
+      "active_deployment": {
+        "id": 1,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2026-06-12T00:14:58.044690Z"
+      },
+      "created_at": "2026-06-12T00:14:57.942988Z"
+    }
+  ]
+  ```
+
+  </details>
 
 ## neonctl functions get (#get)
 
@@ -64,6 +121,21 @@ Shows a function's details.
 neonctl functions get hello
 ```
 
+```text
+function
+┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
+│ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
+├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
+└───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
+active deployment
+┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
+│ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
+├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
+│ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
+└────┴───────────┴──────────┴────────────┴─────────────────────────────┘
+```
+
 ## neonctl functions delete (#delete)
 
 Deletes a function on the branch.
@@ -74,4 +146,8 @@ Deletes a function on the branch.
 
 ```bash
 neonctl functions delete hello
+```
+
+```text
+INFO: Function hello deleted from branch br-cool-darkness-123456
 ```
