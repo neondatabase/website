@@ -6,12 +6,12 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:42:07.067Z'
+updatedOn: '2026-06-12T16:38:26.381Z'
 ---
 
-<Admonition type="note" title="Private Preview">
-Neon Storage is currently in Private Preview, available for new projects in the AWS us-east-2 region only. To request access, sign up at [We're building backends](https://neon.com/blog/were-building-backends).
-</Admonition>
+<PrivatePreviewEnquire/>
+
+To follow this guide, you need a new project in the AWS us-east-2 region.
 
 <Steps>
 
