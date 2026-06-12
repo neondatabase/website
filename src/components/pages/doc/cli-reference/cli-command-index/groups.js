@@ -14,6 +14,7 @@ const GROUPS = [
 const GROUP_OF = {
   auth: 'setup',
   init: 'setup',
+  bootstrap: 'setup',
   link: 'setup',
   checkout: 'setup',
   'set-context': 'setup',

@@ -72,6 +72,32 @@ function diffSchemas(before, after) {
   return { added, removed };
 }
 
+// Targeted checklists for added command keys (option keys contain " --").
+// New top-level commands need the full page wiring; new subcommands usually
+// need a section on the parent command's page (its <CliSubcommands> table
+// links to a per-subcommand anchor that won't exist until someone adds it).
+function newCommandNotes(added) {
+  const commands = added.filter((k) => !k.includes('--'));
+  const notes = [];
+  for (const cmd of commands) {
+    const [top, ...rest] = cmd.split(' ');
+    if (rest.length === 0) {
+      notes.push(
+        `New top-level command "${top}" needs:\n` +
+          `  - a GROUP_OF entry in src/components/pages/doc/cli-reference/cli-command-index/groups.js\n` +
+          `  - a doc page at content/docs/cli/${top}.md\n` +
+          `  - a navigation entry in content/docs/navigation.yaml (CLI section matching its group)`
+      );
+    } else if (!commands.includes(top)) {
+      notes.push(
+        `New subcommand "${cmd}": content/docs/cli/${top}.md likely needs a section for it\n` +
+          `  (check its <CliSubcommands> table for a dangling anchor)`
+      );
+    }
+  }
+  return notes;
+}
+
 async function main() {
   const before = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
   console.log(`Committed schema: neonctl ${before.neonctlVersion}`);
@@ -97,7 +123,8 @@ async function main() {
     } else {
       if (added.length) console.log(`Added (${added.length}):\n  ${added.join('\n  ')}`);
       if (removed.length) console.log(`Removed (${removed.length}):\n  ${removed.join('\n  ')}`);
-      console.log('\nNew commands need doc pages + navigation entries; removed ones need cleanup.');
+      for (const note of newCommandNotes(added)) console.log(`\n${note}`);
+      if (removed.length) console.log('\nRemoved commands need their doc pages cleaned up.');
       console.log(
         'If a changed command has curated copy in src/components/pages/doc/cli-reference/cli-command-index/meta.js,\n' +
           'review its desc/examples for semantic drift (the tests only catch syntactic breakage).'
@@ -115,7 +142,7 @@ async function main() {
   }
 }
 
-module.exports = { diffSchemas, flatten };
+module.exports = { diffSchemas, flatten, newCommandNotes };
 
 if (require.main === module) {
   main().catch((err) => {

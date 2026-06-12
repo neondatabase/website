@@ -4,10 +4,10 @@ subtitle: 'Manage branch object-storage buckets and their objects'
 summary: >-
   The Neon CLI `neonctl bucket` command manages branch object-storage buckets
   and their contents: create, list, and delete buckets, and use the `neonctl
-  bucket object` subcommands to list, download, and delete objects. Object
-  listing supports prefixes, a --delimiter to collapse keys into folders, and
-  cursor-based pagination; `bucket object delete --recursive` removes every
-  object under a prefix.
+  bucket object` subcommands to list, download, upload, and delete objects.
+  Object listing supports prefixes, a --delimiter to collapse keys into
+  folders, and cursor-based pagination; `bucket object delete --recursive`
+  removes every object under a prefix.
 enableTableOfContents: true
 ---
 
@@ -57,7 +57,7 @@ neonctl bucket delete my-bucket
 
 ## Bucket objects (#object)
 
-Lists, downloads, or deletes objects in a bucket.
+Lists, downloads, uploads, or deletes objects in a bucket.
 
 <CliSubcommands command="bucket object" anchorParts="object" />
 
@@ -85,6 +85,21 @@ Downloads an object from a bucket to a local file.
 
 ```bash
 neonctl bucket object get my-bucket/images/logo.png --file ./logo.png
+```
+
+### neonctl bucket object put (#object-put)
+
+Uploads a local file to a bucket as an object.
+
+<CliUsage command="bucket object put" />
+
+<CliOptions command="bucket object put" />
+
+Upload a file, optionally setting the Content-Type to store it with:
+
+```bash
+neonctl bucket object put my-bucket/images/logo.png --file ./logo.png
+neonctl bucket object put my-bucket/notes/readme.txt --file ./readme.txt --content-type text/plain
 ```
 
 ### neonctl bucket object delete (#object-delete)

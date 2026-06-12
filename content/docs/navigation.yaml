@@ -669,6 +669,8 @@
                       slug: cli/auth
                     - title: init
                       slug: cli/init
+                    - title: bootstrap
+                      slug: cli/bootstrap
                     - title: link
                       slug: cli/link
                     - title: checkout
