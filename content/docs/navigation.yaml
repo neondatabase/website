@@ -703,8 +703,6 @@
                   items:
                     - title: config
                       slug: cli/config
-                    - title: neon.ts reference
-                      slug: cli/neon-ts
                     - title: dev
                       slug: cli/dev
                 - section: Functions, storage & data

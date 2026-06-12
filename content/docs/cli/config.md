@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `config` command manages a branch declaratively with a `neon.ts` policy file: inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/cli/neon-ts).
+The `config` command manages a branch declaratively with a `neon.ts` policy file: inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/compute/functions/reference/neon-ts).
 
 <CliSubcommands command="config" />
 
