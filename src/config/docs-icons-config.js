@@ -436,6 +436,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/sequin.svg',
     darkIconPath: '/images/technology-logos/sequin-dark.svg',
   },
+  signoz: {
+    name: 'signoz',
+    lightIconPath: '/images/technology-logos/signoz.svg',
+    darkIconPath: null,
+  },
   snowflake: {
     name: 'snowflake',
     lightIconPath: '/images/technology-logos/snowflake.svg',

@@ -6,11 +6,11 @@ summary: >-
   the built-in Monitoring dashboard, usage metrics, active queries, query
   performance, and pg_stat_statements. Find the right tool for your need,
   from in-console visibility to external export for Datadog, Grafana Cloud,
-  and New Relic.
+  New Relic, and SigNoz.
 enableTableOfContents: false
 redirectFrom:
   - /docs/introduction/monitor-external-tools
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T10:21:08.568Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -54,6 +54,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 <a href="https://neon.com/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
 
 <a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
+
+<a href="https://neon.com/guides/signoz-otel-neon" description="Monitor Neon with SigNoz using the OpenTelemetry integration" icon="trend-up">SigNoz</a>
 
 <a href="/docs/reference/metrics-logs" description="Metrics and logs reference for monitoring" icon="research">Metrics and logs reference</a>
 

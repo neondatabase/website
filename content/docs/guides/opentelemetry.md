@@ -12,7 +12,7 @@ summary: >-
   signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
   computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T10:21:08.568Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -162,6 +162,10 @@ You can enable either or both options based on your monitoring needs.
    - Europe: `https://otlp.eu01.nr-data.net`
    - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
+   **For SigNoz**:
+   - SigNoz Cloud: `https://ingest.<region>.signoz.cloud` (for example, `https://ingest.us.signoz.cloud`)
+   - See the [SigNoz integration guide](/guides/signoz-otel-neon) for a full walkthrough
+
    <Admonition type="note">
    When you configure an OTLP endpoint URL in Neon, you should provide only the **base URL** of your collector or observability platform. The OpenTelemetry Collector automatically appends the correct signal-specific paths:
    - `/v1/metrics` for metrics
@@ -200,6 +204,9 @@ You can enable either or both options based on your monitoring needs.
 
    **For New Relic**:
    - Use **Bearer** or **API Key** with your New Relic license key
+
+   **For SigNoz**:
+   - Use **API Key** with a **Custom header name** of `signoz-ingestion-key` and your SigNoz ingestion key as the value
 
    **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key

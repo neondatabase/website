@@ -11,7 +11,7 @@ summary: >-
   suspended by Scale to Zero, which can cause gaps; log export may also incur
   network egress charges on paid plans above 500 GB.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T10:21:08.568Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -124,5 +124,6 @@ For platform-specific setup instructions and examples, see:
 - [Datadog integration](/docs/guides/datadog) - Setup instructions, dashboard configuration, and Datadog-specific features
 - [Grafana Cloud integration](/docs/guides/grafana-cloud) - Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
 - [OpenTelemetry integration](/docs/guides/opentelemetry) - OTLP configuration for any compatible observability platform
+- [SigNoz integration](/guides/signoz-otel-neon) - Send Neon metrics and Postgres logs to SigNoz with OpenTelemetry
 
 <NeedHelp />
