@@ -44,8 +44,10 @@ Each deployment carries its own snapshot of user-defined variables. To change on
 Pass `--env KEY=VALUE` to `neonctl functions deploy`. The flag is repeatable:
 
 ```bash shouldWrap
-neonctl functions deploy hello --path . --entry functions/hello.ts --env OPENAI_API_KEY=sk-...
+neonctl functions deploy hello --path . --entry functions/hello.ts --env RESEND_API_KEY=re_...
 ```
+
+Don't define variables under the names Neon injects (`DATABASE_URL`, `OPENAI_*`, `AWS_*`). Those are provided by the platform when the matching service is enabled on the branch, and setting your own collides with the injected values. The `NEON_` prefix is reserved (see [Constraints](#constraints)).
 
 A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pass are merged into the existing set:
 
@@ -67,7 +69,7 @@ export default defineConfig({
         name: "My first function",
         source: "./functions/hello.ts",
         env: {
-          OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
+          RESEND_API_KEY: process.env.RESEND_API_KEY!,
         },
       },
     },
@@ -99,7 +101,7 @@ neonctl env pull --file .env.preview
 
 To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and enabled service URLs) and preserves every other line in the file.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, plus the variables for every service enabled on the branch: the Neon Auth and Data API URLs, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the object storage credentials (`AWS_*`, `NEON_STORAGE_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
 
 ## Constraints
 

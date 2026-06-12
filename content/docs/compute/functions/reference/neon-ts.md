@@ -30,7 +30,7 @@ export default defineConfig({
       hello: {
         name: "My first function",
         source: "./functions/hello.ts",
-        env: { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
+        env: { RESEND_API_KEY: process.env.RESEND_API_KEY! },
         dev: { port: 8787 },
       },
     },
@@ -88,7 +88,7 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 
 - `port`: the local server binds this exact port and fails if it's taken. When omitted, a free port is found automatically.
 
-The `preview` block also accepts `aiGateway` and `buckets` fields. They aren't part of the Functions preview and aren't covered here.
+The `preview` block also accepts `aiGateway` and `buckets` fields, which enable the [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) previews on the branch and inject their credentials into deployed functions. They aren't part of the Functions preview and aren't covered here.
 
 ## `branch` closure
 

@@ -7,7 +7,7 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-12T16:38:29.112Z'
+updatedOn: '2026-06-12T21:36:14.443Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -18,7 +18,7 @@ During the private preview, Functions are available for new projects in the AWS 
 
 Functions are branch-scoped. When you branch a project, the function branches with it: the child branch inherits the function as it was at the branch point, and runs it at its own URL against its own isolated database state. Deploying to the child doesn't affect the parent.
 
-Functions use the [Workers-compatible](https://wintercg.org/) handler interface: a `fetch(request)` export that receives a standard `Request` and returns a `Response`. Hono is the recommended framework.
+Functions use the Workers-style handler interface standardized by [WinterTC](https://wintertc.org/): a `fetch(request)` export that receives a standard `Request` and returns a `Response`. Hono is the recommended framework.
 
 ## When to use Neon Functions
 

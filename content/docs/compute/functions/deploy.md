@@ -41,14 +41,14 @@ neonctl functions deploy <slug> [--path <dir>] [--entry <file>] [--env KEY=VALUE
 
 The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. At least one of `--path`, `--entry`, `--env`, or `--runtime` is required; bare `neonctl functions deploy <slug>` with no flags errors.
 
-| Flag              | Default       | Description                                                         |
-| ----------------- | ------------- | ------------------------------------------------------------------- |
-| `--path`          | `.`           | Directory containing the function source                            |
-| `--entry`         | `index.ts`    | Entry file relative to `--path`                                     |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                    |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                |
+| Flag              | Default       | Description                                                                                                                                      |
+| ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--path`          | `.`           | Directory containing the function source                                                                                                         |
+| `--entry`         | `index.ts`    | Entry file relative to `--path`                                                                                                                  |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neonctl deploy --env` |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                             |
 
 **Examples:**
 
@@ -57,7 +57,7 @@ neonctl functions deploy hello --path . --entry functions/hello.ts
 ```
 
 ```bash
-neonctl functions deploy hello --path . --env OPENAI_API_KEY=sk-...
+neonctl functions deploy hello --path . --env RESEND_API_KEY=re_...
 ```
 
 ```bash

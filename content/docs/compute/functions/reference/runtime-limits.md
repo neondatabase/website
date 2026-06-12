@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-12T16:38:29.112Z'
+updatedOn: '2026-06-12T21:36:14.443Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -22,6 +22,7 @@ The platform may also evict and restart your function for operational reasons. A
 The platform sends `SIGINT` before evicting to allow graceful shutdown. Register a handler to close open connections and flush in-flight work before the process exits:
 
 ```ts
+// pool is your module-scope pg.Pool
 process.on('SIGINT', () => {
   pool.end().then(() => process.exit(0));
 });
@@ -37,6 +38,10 @@ Without it, open connections are abandoned on eviction and remain open until the
 
 **`waitUntil`: 15 minutes.** Work registered with `waitUntil` continues after the response is sent. It's for cleanup: analytics writes, audit logs, short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
 
+<Admonition type="important">
+During the private preview, `waitUntil` is a no-op placeholder: it accepts the promise but does not keep the invocation alive. Await any work that has to finish before the response stream closes. The API is in place to code against, but don't rely on post-response execution until the runtime integration ships.
+</Admonition>
+
 ```ts
 import { Hono } from 'hono';
 import { waitUntil } from '@neondatabase/functions/v1';
@@ -44,14 +49,27 @@ import { waitUntil } from '@neondatabase/functions/v1';
 const app = new Hono();
 
 app.post('/event', async (c) => {
-  waitUntil(writeAnalytics(c.req.raw)); // your async follow-up work
+  const wait = waitUntil(); // returns the waitUntil function for this invocation
+  wait(writeAnalytics(c.req.raw)); // your async follow-up work
   return c.json({ ok: true });
 });
 
 export default app;
 ```
 
-`waitUntil` takes a promise and keeps the invocation alive until it settles, up to the 15-minute cap. It's the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
+`waitUntil()` returns a function for the current invocation; pass that function a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The registered work is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
+
+## Concurrency
+
+Each isolate handles one request at a time. The platform adds isolates on demand: requests that arrive while existing isolates are busy are served by newly booted isolates (cold start is on the order of a second), and requests that can't be placed queue rather than fail.
+
+Streaming responses don't hold the slot. Once your handler returns a `Response`, the isolate can accept the next request, even while the response body is still streaming.
+
+Because each isolate is its own Node.js process, module-scope state multiplies with scale-out:
+
+- Each isolate creates its own `pg` pool, so the effective connection count is `max` × the number of isolates. Keep `max` small (for example, 5).
+- Module-scope initialization (seeding, migrations) runs once per isolate, not once per deployment. Make it idempotent, or serialize it with a Postgres advisory lock.
+- In-memory state (caches, counters, sessions) is per-isolate and disappears on eviction. Persist anything that matters in Postgres.
 
 ## Slug constraints
 
@@ -59,12 +77,12 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 
 ## Runtime
 
-| Property    | Value                                                                        |
-| ----------- | ---------------------------------------------------------------------------- |
-| Runtime     | Node.js 24                                                                   |
-| Isolation   | microVM per isolate                                                          |
-| Concurrency | 1 request at a time per isolate. Additional requests queue, they don't fail. |
-| Memory      | 2048 MiB (fixed during the private preview, not configurable)                |
+| Property    | Value                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| Runtime     | Node.js 24                                                                                              |
+| Isolation   | microVM per isolate                                                                                     |
+| Concurrency | 1 request at a time per isolate, scaling out with additional isolates. See [Concurrency](#concurrency). |
+| Memory      | 2048 MiB (fixed during the private preview, not configurable)                                           |
 
 ## Environment variables
 
