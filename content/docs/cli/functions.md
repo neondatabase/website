@@ -12,10 +12,6 @@ enableTableOfContents: true
 
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neonctl dev`](/docs/cli/dev).
 
-## Subcommands
-
-<CliUsage command="functions" />
-
 <CliSubcommands command="functions" />
 
 ## neonctl functions deploy (#deploy)

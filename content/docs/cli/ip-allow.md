@@ -9,16 +9,12 @@ summary: >-
   through the Neon console. The `add` subcommand accepts a `--protected-only`
   flag to scope the allowlist to protected branches only.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-06-12T00:40:08.097Z'
 redirectFrom:
   - /docs/reference/cli-ip-allow
 ---
 
 The `ip-allow` command lists, adds, removes, and resets the IP allowlist for your Neon project. An allowlist can contain individual IP addresses, IP ranges, or [CIDR notation](/docs/reference/glossary#cidr-notation). For information about Neon's IP Allow feature, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
-
-## Subcommands
-
-<CliUsage command="ip-allow" />
 
 <CliSubcommands command="ip-allow" />
 

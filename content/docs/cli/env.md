@@ -12,10 +12,6 @@ enableTableOfContents: true
 
 The `env` command manages a branch's Neon environment variables locally. [`neonctl link`](/docs/cli/link) and [`neonctl checkout`](/docs/cli/checkout) pull env variables automatically by default.
 
-## Subcommands
-
-<CliUsage command="env" />
-
 <CliSubcommands command="env" />
 
 ## neonctl env pull (#pull)

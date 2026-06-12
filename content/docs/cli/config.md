@@ -15,10 +15,6 @@ enableTableOfContents: true
 
 The `config` command manages a branch declaratively with a `neon.ts` policy file: inspect the branch's live state, preview what an apply would change, and apply the policy. For the `neon.ts` file format, see the [neon.ts reference](/docs/compute/functions/reference/neon-ts).
 
-## Subcommands
-
-<CliUsage command="config" />
-
 <CliSubcommands command="config" />
 
 The top-level [`neonctl deploy`](#deploy) command is an alias for `config apply`.

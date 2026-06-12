@@ -5,7 +5,7 @@ summary: >-
   Covers the usage of the `data-api` command in the Neon CLI to create, inspect,
   update, refresh, and delete the Neon Data API for a database.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:29:16.599Z'
+updatedOn: '2026-06-12T00:40:08.097Z'
 redirectFrom:
   - /docs/reference/cli-data-api
 ---
@@ -13,10 +13,6 @@ redirectFrom:
 The `data-api` command provisions and manages the [Neon Data API](/docs/data-api/overview) for a database. For Console-based management, see [Manage Data API](/docs/data-api/manage).
 
 Requires neonctl 2.22.2 or later. Check your version with `neonctl --version`.
-
-## Subcommands
-
-<CliUsage command="data-api" />
 
 <CliSubcommands command="data-api" />
 

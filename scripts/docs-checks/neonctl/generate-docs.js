@@ -149,14 +149,16 @@ function renderUsage(node, parts) {
 function renderSubcommands(node, anchorParts = []) {
   const entries = Object.entries(node.commands || {});
   if (entries.length === 0) return '';
-  const rows = entries.map(([name, sub]) => {
+  const links = entries.map(([name]) => {
     const anchor = [...anchorParts, name]
       .join('-')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-');
-    return `| [${name}](#${anchor}) | ${sub.describe ? escapeCell(sub.describe) : ''} |`;
+    return `[${name}](#${anchor})`;
   });
-  return ['| Subcommand | Description |', '| ---------- | ----------- |', ...rows].join('\n');
+  // One inline sentence, not a table: each linked section carries its own
+  // description, so a Description column only duplicated them.
+  return `Subcommands: ${links.join(', ')}`;
 }
 
 // The overview page's full command tree: one H3 per top-level command with

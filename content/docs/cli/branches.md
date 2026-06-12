@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-06-12T00:40:08.097Z'
 redirectFrom:
   - /docs/reference/cli-branches
 ---
@@ -20,10 +20,6 @@ The `branches` command lists, creates, renames, deletes, and retrieves details a
 <Admonition type="tip" title="Switch the active branch">
 To pin a branch in your local `.neon` context file so subsequent commands target it, use [`neonctl checkout`](/docs/cli/checkout).
 </Admonition>
-
-## Subcommands
-
-<CliUsage command="branches" />
 
 <CliSubcommands command="branches" />
 

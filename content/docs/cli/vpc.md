@@ -8,16 +8,12 @@ summary: >-
   Use it when you need to limit Neon project connections to a specific AWS or
   Azure VPC rather than the public internet.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:29:16.599Z'
+updatedOn: '2026-06-12T00:40:08.097Z'
 redirectFrom:
   - /docs/reference/cli-vpc
 ---
 
 The `vpc` command manages [Private Networking](/docs/guides/neon-private-networking) configurations in Neon. Use it to register VPC endpoints at the organization level and to restrict individual projects to connections from a specific VPC.
-
-## Subcommands
-
-<CliUsage command="vpc" />
 
 <CliSubcommands command="vpc" />
 

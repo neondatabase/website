@@ -20,10 +20,6 @@ The `neon-auth` command manages [Neon Auth](/docs/auth/overview) on a database b
 
 Requires neonctl 2.23.0 or later. Check your version with `neonctl --version`.
 
-## Subcommands
-
-<CliUsage command="neon-auth" />
-
 <CliSubcommands command="neon-auth" />
 
 If `--project-id` or `--branch` are omitted, the CLI resolves them from your [context file](/docs/cli/set-context), auto-selects when there is only one option, and prompts otherwise.
@@ -174,8 +170,6 @@ neonctl neon-auth domain delete example.com
 
 Manages localhost connection settings for the branch.
 
-<CliUsage command="neon-auth domain allow-localhost" />
-
 <CliSubcommands command="neon-auth domain allow-localhost" anchorParts="domain-allow-localhost" />
 
 ### neonctl neon-auth domain allow-localhost get (#domain-allow-localhost-get)
@@ -224,8 +218,6 @@ The `config` subcommands configure auth features for the branch: email and passw
 
 Manages email and password authentication settings.
 
-<CliUsage command="neon-auth config email-password" />
-
 <CliSubcommands command="neon-auth config email-password" anchorParts="config-email-password" />
 
 ### neonctl neon-auth config email-password get (#config-email-password-get)
@@ -255,8 +247,6 @@ neonctl neon-auth config email-password update --enabled --require-email-verific
 ### neonctl neon-auth config email-provider (#config-email-provider)
 
 Manages the email provider configuration.
-
-<CliUsage command="neon-auth config email-provider" />
 
 <CliSubcommands command="neon-auth config email-provider" anchorParts="config-email-provider" />
 
@@ -302,8 +292,6 @@ neonctl neon-auth config email-provider test --recipient-email user@example.com 
 
 Manages organization plugin settings.
 
-<CliUsage command="neon-auth config organization" />
-
 <CliSubcommands command="neon-auth config organization" anchorParts="config-organization" />
 
 ### neonctl neon-auth config organization get (#config-organization-get)
@@ -333,8 +321,6 @@ neonctl neon-auth config organization update --enabled --limit 5 --creator-role 
 ### neonctl neon-auth config webhook (#config-webhook)
 
 Manages webhook configuration.
-
-<CliUsage command="neon-auth config webhook" />
 
 <CliSubcommands command="neon-auth config webhook" anchorParts="config-webhook" />
 

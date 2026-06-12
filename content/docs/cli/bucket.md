@@ -13,10 +13,6 @@ enableTableOfContents: true
 
 The `bucket` command manages branch object-storage buckets and their objects. Buckets belong to a branch; the `object` subcommands work with the objects inside a bucket.
 
-## Subcommands
-
-<CliUsage command="bucket" />
-
 <CliSubcommands command="bucket" />
 
 ## neonctl bucket create (#create)
@@ -62,8 +58,6 @@ neonctl bucket delete my-bucket
 ## Bucket objects (#object)
 
 Lists, downloads, or deletes objects in a bucket.
-
-<CliUsage command="bucket object" />
 
 <CliSubcommands command="bucket object" anchorParts="object" />
 
