@@ -10,17 +10,17 @@
   "globalOptions": {
     "help": {
       "type": "boolean",
-      "describe": "Show help",
+      "describe": "Show help for a command or subcommand",
       "alias": "h"
     },
     "api-key": {
       "type": "string",
-      "describe": "API key",
+      "describe": "Neon API key, authenticates without `neonctl auth`",
       "defaultText": "NEON_API_KEY environment variable"
     },
     "context-file": {
       "type": "string",
-      "describe": "Context file",
+      "describe": "Context file with default org, project, and branch IDs, created by `neonctl link`",
       "defaultText": "nearest .neon file, searching upward from the current directory"
     },
     "color": {
