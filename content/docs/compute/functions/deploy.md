@@ -36,15 +36,14 @@ Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neonc
 To deploy one function directly, without a `neon.ts` config:
 
 ```bash shouldWrap
-neonctl functions deploy <slug> [--path <dir>] [--entry <file>] [--env KEY=VALUE] [--wait]
+neonctl functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. At least one of `--path`, `--entry`, `--env`, or `--runtime` is required; bare `neonctl functions deploy <slug>` with no flags errors.
+The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neonctl functions reference](/docs/cli/functions) for the full command surface.
 
 | Flag              | Default       | Description                                                                                                                                      |
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--path`          | `.`           | Directory containing the function source                                                                                                         |
-| `--entry`         | `index.ts`    | Entry file relative to `--path`                                                                                                                  |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                      |
 | `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neonctl deploy --env` |
 | `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
 | `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
@@ -53,15 +52,15 @@ The CLI bundles with esbuild, zips the output, and uploads it. The first deploy 
 **Examples:**
 
 ```bash
-neonctl functions deploy hello --path . --entry functions/hello.ts
+neonctl functions deploy hello --src functions/hello.ts
 ```
 
 ```bash
-neonctl functions deploy hello --path . --env RESEND_API_KEY=re_...
+neonctl functions deploy hello --src . --env RESEND_API_KEY=re_...
 ```
 
 ```bash
-neonctl functions deploy hello --path . --branch feat/my-feature
+neonctl functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
 
 ## Deploy with the API

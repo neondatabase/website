@@ -44,7 +44,7 @@ Each deployment carries its own snapshot of user-defined variables. To change on
 Pass `--env KEY=VALUE` to `neonctl functions deploy`. The flag is repeatable:
 
 ```bash shouldWrap
-neonctl functions deploy hello --path . --entry functions/hello.ts --env RESEND_API_KEY=re_...
+neonctl functions deploy hello --src functions/hello.ts --env RESEND_API_KEY=re_...
 ```
 
 Don't define variables under the names Neon injects (`DATABASE_URL`, `OPENAI_*`, `AWS_*`). Those are provided by the platform when the matching service is enabled on the branch, and setting your own collides with the injected values. The `NEON_` prefix is reserved (see [Constraints](#constraints)).
