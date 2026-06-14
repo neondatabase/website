@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-12T21:36:14.443Z'
+updatedOn: '2026-06-14T04:15:20.563Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -38,10 +38,6 @@ Without it, open connections are abandoned on eviction and remain open until the
 
 **`waitUntil`: 15 minutes.** Work registered with `waitUntil` continues after the response is sent. It's for cleanup: analytics writes, audit logs, short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
 
-<Admonition type="important">
-During the private preview, `waitUntil` is a no-op placeholder: it accepts the promise but does not keep the invocation alive. Await any work that has to finish before the response stream closes. The API is in place to code against, but don't rely on post-response execution until the runtime integration ships.
-</Admonition>
-
 ```ts
 import { Hono } from 'hono';
 import { waitUntil } from '@neondatabase/functions/v1';
@@ -61,15 +57,13 @@ export default app;
 
 ## Concurrency
 
-Each isolate handles one request at a time. The platform adds isolates on demand: requests that arrive while existing isolates are busy are served by newly booted isolates (cold start is on the order of a second), and requests that can't be placed queue rather than fail.
+Each isolate is a Node.js process. Requests are interleaved on the event loop, so multiple requests can be in flight on the same isolate concurrently. The platform adds isolates on demand under load: requests that can't be placed on an existing isolate are routed to a newly booted one or queued briefly.
 
-Streaming responses don't hold the slot. Once your handler returns a `Response`, the isolate can accept the next request, even while the response body is still streaming.
+Because each isolate is its own process and handles concurrent requests, module-scope state behaves as follows:
 
-Because each isolate is its own Node.js process, module-scope state multiplies with scale-out:
-
-- Each isolate creates its own `pg` pool, so the effective connection count is `max` × the number of isolates. Keep `max` small (for example, 5).
-- Module-scope initialization (seeding, migrations) runs once per isolate, not once per deployment. Make it idempotent, or serialize it with a Postgres advisory lock.
-- In-memory state (caches, counters, sessions) is per-isolate and disappears on eviction. Persist anything that matters in Postgres.
+- **Shared within an isolate**: module-scope objects (a `pg` pool, an in-memory cache) are shared across all requests on the same isolate. Create connection pools once at module scope and reuse them.
+- **Not shared across isolates**: each isolate has its own copy of module state. Keep `max` small on `pg` pools (for example, 5) — effective connection count is `max` × the number of live isolates. Module-scope initialization (seeding, migrations) runs once per isolate; make it idempotent or serialize with a Postgres advisory lock.
+- **Lost on eviction**: in-memory state disappears when an isolate is evicted. Persist anything that matters in Postgres.
 
 ## Slug constraints
 
@@ -77,12 +71,12 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 
 ## Runtime
 
-| Property    | Value                                                                                                   |
-| ----------- | ------------------------------------------------------------------------------------------------------- |
-| Runtime     | Node.js 24                                                                                              |
-| Isolation   | microVM per isolate                                                                                     |
-| Concurrency | 1 request at a time per isolate, scaling out with additional isolates. See [Concurrency](#concurrency). |
-| Memory      | 2048 MiB (fixed during the private preview, not configurable)                                           |
+| Property    | Value                                                                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Runtime     | Node.js 24                                                                                                                                      |
+| Isolation   | microVM per isolate                                                                                                                             |
+| Concurrency | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
+| Memory      | 2048 MiB (fixed during the private preview, not configurable)                                                                                   |
 
 ## Environment variables
 

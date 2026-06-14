@@ -21,6 +21,12 @@ enableTableOfContents: true
 
 Functions are available on new projects in AWS us-east-2 only.
 
+`neonctl init --preview` installs the `neon` and `neon-functions` agent skills for your AI editor automatically. To install them separately:
+
+```bash
+npx skills add neondatabase/agent-skills -s neon -s neon-functions -y
+```
+
 ## Set up your project
 
 Create a project directory and initialize it for the Functions preview:
@@ -136,7 +142,7 @@ Call it with curl:
 curl https://<branch_id>-hello.compute.c-1.us-east-2.aws.neon.tech
 ```
 
-You should see a JSON response with your branch's Postgres version:
+The response is a JSON object with your branch's Postgres version:
 
 ```json
 { "version": "PostgreSQL 17.x on ..., compiled by gcc ..." }

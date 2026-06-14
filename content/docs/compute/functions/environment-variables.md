@@ -22,6 +22,7 @@ Neon injects connection strings and service URLs automatically at runtime. You d
 | `DATABASE_URL_UNPOOLED` | Direct (unpooled) connection string. Use for migrations, `LISTEN`/`NOTIFY`, and transactions that span multiple round-trips. |
 | `NEON_AUTH_BASE_URL`    | Base URL for Neon Auth. Present only when Neon Auth is enabled on the branch.                                                |
 | `NEON_DATA_API_URL`     | URL for the Neon Data API. Present only when the Data API is enabled on the branch.                                          |
+| `NEON_BRANCH`           | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                           |
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
@@ -101,7 +102,7 @@ neonctl env pull --file .env.preview
 
 To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, plus the variables for every service enabled on the branch: the Neon Auth and Data API URLs, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the object storage credentials (`AWS_*`, `NEON_STORAGE_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH` (the branch name), plus the variables for every service enabled on the branch: the Neon Auth and Data API URLs, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the object storage credentials (`AWS_*`, `NEON_STORAGE_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
 
 ## Constraints
 
