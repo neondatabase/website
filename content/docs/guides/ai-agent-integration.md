@@ -73,7 +73,7 @@ Each organization has different limits that apply to all projects created within
 
 | Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
 | ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Max branches**         | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots)                                                       |
+| **Max branches**         | 10 per project    | 5,000 per project | Includes all branches (production, development, snapshots)                                                       |
 | **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
 | **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
 | **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
@@ -429,7 +429,7 @@ Development branches are:
 - **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
-**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **1,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
+**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **5,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
 Example creating a development branch using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
