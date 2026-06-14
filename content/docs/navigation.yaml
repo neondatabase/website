@@ -552,6 +552,8 @@
               slug: compute/functions/deploy
             - title: Environment variables
               slug: compute/functions/environment-variables
+            - title: WebSocket servers
+              slug: compute/functions/websockets
             - section: Reference
               items:
                 - title: neon.ts
