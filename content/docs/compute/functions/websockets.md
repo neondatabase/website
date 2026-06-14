@@ -5,7 +5,7 @@ summary: >-
   Neon Functions support long-lived WebSocket connections via an upgrade export.
   Use the ws package alongside your fetch handler to accept WebSocket clients,
   and Postgres LISTEN/NOTIFY to broadcast across isolates.
-updatedOn: '2026-06-14T16:00:07.344Z'
+updatedOn: '2026-06-14T16:32:23.692Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -82,7 +82,7 @@ Type a message and press Enter. The server echoes it back.
 If your function uses Hono, export `fetch` from the Hono app and the `upgrade` handler separately. The runtime routes WebSocket upgrades directly to `upgrade`. Hono never sees the upgrade request, so Hono middleware and route guards don't apply. Handle auth in `upgrade` directly.
 
 <Admonition type="warning">
-`upgradeWebSocket` from `@hono/node-server` doesn't work with Neon Functions. It requires Hono's own `serve()` wrapper, which the runtime doesn't use. Use the `upgrade` export pattern shown here instead.
+`upgradeWebSocket` from `@hono/node-server` doesn't work with Neon Functions. It requires Hono's own `serve()` wrapper, which the runtime doesn't use. Use the `upgrade` export pattern shown here instead. For Hono-style `onOpen`/`onMessage`/`onClose` route declarations, use the `neon-functions` agent skill.
 </Admonition>
 
 ```ts filename="functions/hono-echo.ts"
@@ -181,18 +181,19 @@ Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` r
 Browsers can't set custom headers on a WebSocket connection, so you can't use `Authorization`. Pass the token as a query parameter and verify it in `upgrade` before calling `wss.handleUpgrade`:
 
 ```ts
-upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
+async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
   const url = new URL(req.url ?? '/', 'http://localhost');
   const token = url.searchParams.get('token');
+  const identity = token ? await verifyToken(token) : null; // e.g. jwtVerify with jose
 
-  if (!token || !isValidToken(token)) { // replace with your actual token verification
+  if (!identity) {
     socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
     socket.destroy();
     return;
   }
 
   wss.handleUpgrade(req, socket, head, (ws) => {
-    // authenticated
+    // authenticated — identity is in scope
   });
 },
 ```
