@@ -82,7 +82,7 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment. See [Slugs](/docs/compute/functions/deploy#slugs) for the full rules. Because slugs can't use separators, use `name` for a human-readable label, for example `slug: "myrestapi"` with `name: "My REST API"`.
 
-**`env`** values are resolved at deploy time (when `neonctl deploy` runs). Reading `process.env.X` here captures the value in your shell at deploy time, not at runtime inside the function. Use `neonctl deploy --env .env.production` to load a `.env` file before evaluation.
+**`env`** values are resolved at deploy time (when `neonctl deploy` runs). Reading `process.env.X` here captures the value in your shell at deploy time, not at runtime inside the function. Use `neonctl deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
 **`dev`** settings apply only to `neonctl dev`. They never affect deploy.
 

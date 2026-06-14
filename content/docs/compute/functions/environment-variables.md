@@ -33,8 +33,13 @@ import { parseEnv } from '@neondatabase/env/v1';
 import config from './neon';
 
 const env = parseEnv(config);
-env.postgres.databaseUrl; // typed, validated
+env.postgres.databaseUrl;          // DATABASE_URL
+env.postgres.databaseUrlUnpooled;  // DATABASE_URL_UNPOOLED
+env.auth.baseUrl;                  // NEON_AUTH_BASE_URL (only when auth: true)
+env.auth.jwksUrl;                  // NEON_AUTH_JWKS_URL (only when auth: true)
 ```
+
+TypeScript narrows the shape based on your config: `env.auth` is only present when `auth: true` is set in `neon.ts`.
 
 ## User-defined variables
 
