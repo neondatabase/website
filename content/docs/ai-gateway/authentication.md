@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-14T11:12:18.690Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -28,6 +28,22 @@ The response includes an `api_token` field. Store it as an environment variable:
 ```bash
 export NEON_AI_GATEWAY_KEY=nt_live_...
 ```
+
+## Pull credentials with neonctl
+
+For local development, `neonctl env pull` writes your AI Gateway credentials to your `.env` file automatically — no manual copy-paste from the API response:
+
+```bash
+neonctl env pull .env
+```
+
+This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neonctl config apply` or `neonctl deploy` also auto-pulls credentials after a successful apply. To check current credential status:
+
+```bash
+neonctl config status
+```
+
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials with optional expiry.
 
 ## Using your credential
 

@@ -3,14 +3,14 @@ title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
   Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
-  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. All model IDs use
-  the databricks- prefix. Use these IDs in the model field of any request
-  regardless of which endpoint you are using.
+  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. Model IDs use the
+  databricks- prefix, but the short form without the prefix also works. Use
+  either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-12T17:35:46.364Z'
+updatedOn: '2026-06-14T11:12:18.690Z'
 ---
 
-Neon AI Gateway serves models hosted by Databricks. All model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Use these IDs in the `model` field of any request, regardless of which endpoint you use.
+Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). You can also use the short form without the prefix (for example, `claude-sonnet-4-6`) — both are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
 
 <Admonition type="note">
 Model availability may vary by region. The catalog expands over time, so check back for new additions.
@@ -23,7 +23,7 @@ During the private preview, the following limits apply:
 | Limit                                   | Value         |
 | --------------------------------------- | ------------- |
 | Per model (tokens per minute)           | 200,000 TPM   |
-| All models combined (tokens per minute) | 1,000,000 TPM |
+| All models combined (tokens per minute) | 1,100,000 TPM |
 
 If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
 
@@ -36,19 +36,19 @@ curl "https://console.neon.tech/api/v2/ai_gateway/models" \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-The response includes each model's `id`, `provider`, and `display_name`:
+The response includes each model's `id`, `provider`, `display_name`, and `dialects`. The `dialects` field lists which API surfaces that model supports:
 
 ```json
 {
   "models": [
-    { "id": "databricks-claude-sonnet-4-6", "provider": "anthropic", "display_name": "Claude Sonnet 4.6" },
-    { "id": "databricks-gpt-5-4", "provider": "openai", "display_name": "GPT-5.4" },
-    { "id": "databricks-gemini-2-5-flash", "provider": "google", "display_name": "Gemini 2.5 Flash" }
+    { "id": "databricks-claude-sonnet-4-6", "provider": "anthropic", "display_name": "Claude Sonnet 4.6", "dialects": ["chat_completions", "anthropic_messages"] },
+    { "id": "databricks-gpt-5-4", "provider": "openai", "display_name": "GPT-5.4", "dialects": ["chat_completions", "openai_responses"] },
+    { "id": "databricks-gemini-2-5-flash", "provider": "google", "display_name": "Gemini 2.5 Flash", "dialects": ["chat_completions", "gemini"] }
   ]
 }
 ```
 
-Use the `id` field in the `model` parameter of any inference request.
+Use the `id` field in the `model` parameter of any inference request. Models that list only `openai_responses` in `dialects` require the [OpenAI Responses API](/docs/ai-gateway/openai-responses) endpoint and don't work with chat completions.
 
 ## Available models
 
