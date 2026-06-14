@@ -13,6 +13,7 @@ import ComputeIcon from 'icons/home/hero/compute.svg';
 import DatabaseIcon from 'icons/home/hero/database.svg';
 import LockIcon from 'icons/home/hero/lock.svg';
 import StorageIcon from 'icons/home/hero/storage.svg';
+import bgNoise from 'images/pages/home/backed-by/bg-noise.jpg';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 import { cn } from 'utils/cn';
 
@@ -78,13 +79,21 @@ const HeroMts = () => (
       </h1>
 
       <Link
-        className="group mt-8 inline-flex max-w-full items-center gap-x-3 rounded-full bg-green-45 py-2.5 pr-5 pl-2.5 shadow-[0_0_40px_-8px_rgba(0,229,153,0.6)] transition-all duration-200 hover:bg-[#54f0b8] hover:shadow-[0_0_48px_-6px_rgba(0,229,153,0.8)] lg:mt-7"
+        className="group relative mt-8 inline-flex max-w-full items-center gap-x-3 overflow-hidden bg-[#E4F1EB] py-3 pr-5 pl-3 text-black-pure lg:mt-7"
         to={LINKS.startups}
       >
-        <span className="inline-flex shrink-0 items-center rounded-full bg-black-pure/15 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+        <Image
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-right"
+          src={bgNoise}
+          width={1175}
+          height={927}
+          quality={100}
+          alt=""
+        />
+        <span className="relative z-10 inline-flex shrink-0 items-center rounded-full bg-black-pure/10 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
           Startups
         </span>
-        <span className="text-base leading-snug font-medium tracking-extra-tight text-black-pure">
+        <span className="relative z-10 text-base leading-snug font-medium tracking-extra-tight text-black-pure">
           Qualifying startups get up to <span className="font-semibold">$100K in credits</span> to
           scale on Neon
           <span className="ml-1 inline-block transition-transform duration-200 group-hover:translate-x-0.5">
