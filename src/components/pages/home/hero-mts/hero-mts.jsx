@@ -90,7 +90,7 @@ const HeroMts = () => (
           quality={100}
           alt=""
         />
-        <span className="relative z-10 inline-flex shrink-0 items-center rounded-full bg-black-pure/10 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+        <span className="relative z-10 inline-flex shrink-0 items-center rounded-full bg-green-45 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
           Startups
         </span>
         <span className="relative z-10 text-base leading-snug font-medium tracking-extra-tight text-black-pure">
