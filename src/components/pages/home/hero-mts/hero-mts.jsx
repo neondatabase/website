@@ -78,15 +78,15 @@ const HeroMts = () => (
       </h1>
 
       <Link
-        className="group mt-8 inline-flex max-w-full items-center gap-x-3 rounded-full border border-gray-new-20 bg-gray-new-8 py-2 pr-4 pl-2 transition-colors duration-200 hover:border-gray-new-30 lg:mt-7"
+        className="group mt-8 inline-flex max-w-full items-center gap-x-3 rounded-full bg-green-45 py-2.5 pr-5 pl-2.5 shadow-[0_0_40px_-8px_rgba(0,229,153,0.6)] transition-all duration-200 hover:bg-[#54f0b8] hover:shadow-[0_0_48px_-6px_rgba(0,229,153,0.8)] lg:mt-7"
         to={LINKS.startups}
       >
-        <span className="inline-flex shrink-0 items-center rounded-full bg-green-44 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+        <span className="inline-flex shrink-0 items-center rounded-full bg-black-pure/15 px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
           Startups
         </span>
-        <span className="text-base leading-snug tracking-extra-tight text-gray-new-80">
-          Qualifying startups get up to{' '}
-          <span className="font-medium text-white">$100K in credits</span> to scale on Neon
+        <span className="text-base leading-snug font-medium tracking-extra-tight text-black-pure">
+          Qualifying startups get up to <span className="font-semibold">$100K in credits</span> to
+          scale on Neon
           <span className="ml-1 inline-block transition-transform duration-200 group-hover:translate-x-0.5">
             &rarr;
           </span>
