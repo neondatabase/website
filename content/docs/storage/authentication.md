@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:42:07.067Z'
+updatedOn: '2026-06-14T10:35:51.194Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -96,6 +96,22 @@ export AWS_DEFAULT_REGION=us-east-2
 <Admonition type="note">
 `forcePathStyle: true` is required for the AWS SDK for JavaScript when using a custom S3 endpoint.
 </Admonition>
+
+## Pull credentials with neonctl
+
+For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically — no manual copy-paste from the API response:
+
+```bash
+neonctl env pull .env
+```
+
+This populates `NEON_STORAGE_ENDPOINT`, `NEON_STORAGE_ACCESS_KEY_ID`, and `NEON_STORAGE_SECRET_ACCESS_KEY` for the current branch alongside your database connection string. To check the current credential status:
+
+```bash
+neonctl config status
+```
+
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named, scoped credentials with optional expiry.
 
 ## Read vs write scopes
 
