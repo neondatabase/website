@@ -12,17 +12,17 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-15T07:55:10.132Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## New backend primitives for apps and agents
 
-We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Neon Postgres, Neon Auth, Compute, Storage, and AI Gateway.
+We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Neon Postgres, Neon Auth, Functions, Storage, and AI Gateway.
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
-- **Compute**: Reliable compute for short-lived functions or long-running tasks.
+- **Functions**: Node.js functions that deploy on your Neon branch, with automatic access to your database, storage, and AI Gateway.
 - **Storage**: S3-compatible object storage that branches with your projects.
 - **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
 
