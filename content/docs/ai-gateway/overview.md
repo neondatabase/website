@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to 39 models across 7 providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T11:08:43.679Z'
+updatedOn: '2026-06-15T14:32:24.523Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -34,14 +34,24 @@ During the private preview, AI Gateway is available for new projects in the AWS 
 
 </DetailIconCards>
 
-## Example apps
+## Starter templates
 
-<DetailIconCards>
+Browse templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one directly with `neonctl bootstrap`:
 
-<a href="https://github.com/andrelandgraf/rate-my-pricing" description="A pricing clarity scorer that runs an LLM agent on a Neon Function, routing model calls through AI Gateway with no separate provider credentials required." icon="github">Rate My Pricing</a>
+```bash
+neonctl bootstrap
+```
 
-<a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that routes OpenAI image generation and Claude moderation through the same AI Gateway config, from a single Neon Function." icon="github">Vibecastly</a>
+Use `--template` to skip the interactive picker:
 
-</DetailIconCards>
+| Template        | What it builds                                                                         |
+| --------------- | -------------------------------------------------------------------------------------- |
+| `hono`          | REST API with Drizzle and Postgres on Neon Functions                                   |
+| `ai-sdk`        | Image-generation agent with AI Gateway, Object Storage, and Postgres on Neon Functions |
+| `mastra`        | Personal assistant with AI Gateway and Postgres-backed memory on Neon Functions        |
+| `realtime-chat` | Realtime chat with Next.js, Neon Auth, and WebSockets on Neon Functions                |
+| `realtime-sse`  | Realtime counter with TanStack Router and SSE on Neon Functions                        |
+
+`neonctl bootstrap` scaffolds files, links to a Neon project, and pulls env vars. Then follow the README to set up and deploy.
 
 <NeedHelp/>
