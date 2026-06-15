@@ -6,10 +6,10 @@ summary: >-
   Neon credential gives you access to 39 models across 7 providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T15:47:52.073Z'
+updatedOn: '2026-06-15T17:21:55.421Z'
 ---
 
-<PrivatePreviewEnquire/>
+<RequestForm type="backend-platform" />
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
