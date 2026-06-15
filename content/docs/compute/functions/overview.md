@@ -7,14 +7,14 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:47:36.989Z'
+updatedOn: '2026-06-15T15:43:05.726Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 Neon Functions give you long-running Node.js compute in the same AWS region as your database. Each function deploys to a Neon branch and gets a public HTTPS URL. If the branch has a Postgres database, `DATABASE_URL` is injected automatically. No configuration needed, no cross-region round trips.
 
-During the private preview, Functions are available for new projects in the AWS us-east-2 region only. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only. See [Preview access](/docs/compute/functions/preview-access) for what's included.
 
 Functions are branch-scoped. When you branch a project, the function branches with it: the child branch inherits the function as it was at the branch point, and runs it at its own URL against its own isolated database state. Deploying to the child doesn't affect the parent.
 
