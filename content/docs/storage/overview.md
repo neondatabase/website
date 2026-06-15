@@ -7,10 +7,10 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T15:46:37.989Z'
+updatedOn: '2026-06-15T17:25:12.087Z'
 ---
 
-<PrivatePreviewEnquire/>
+<RequestForm type="backend-platform" title="Get early access to Neon Storage" description="Neon Storage is in private preview. Drop your email and we'll reach out with access." />
 
 Neon Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 

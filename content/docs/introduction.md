@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-15T15:38:36.952Z'
+updatedOn: '2026-06-15T17:50:24.620Z'
 ---
 
 <TwinPaths>
@@ -29,10 +29,7 @@ updatedOn: '2026-06-15T15:38:36.952Z'
   />
 </TwinPaths>
 
-<div className="mt-12 mb-3.5 flex items-baseline justify-between gap-4">
-  <h2 className="m-0!">Your Neon backend</h2>
-  <a href="https://neon.com/blog/were-building-backends#access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Get early access →</a>
-</div>
+## Products
 
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
 
@@ -51,6 +48,8 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 <a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Private Preview">AI Gateway</a>
 
 </DetailIconCards>
+
+<RequestForm type="backend-platform" />
 
 ## Connect your framework
 
