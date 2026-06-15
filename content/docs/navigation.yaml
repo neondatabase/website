@@ -538,6 +538,29 @@
                     - title: Database integration
                       slug: auth/legacy/database-integration
 
+        - title: Neon Functions
+          icon: features
+          slug: compute/functions/overview
+          items:
+            - title: Overview
+              slug: compute/functions/overview
+            - title: Preview access
+              slug: compute/functions/preview-access
+            - title: Get started
+              slug: compute/functions/get-started
+            - title: Deploy and manage
+              slug: compute/functions/deploy
+            - title: Environment variables
+              slug: compute/functions/environment-variables
+            - title: WebSocket servers
+              slug: compute/functions/websockets
+            - section: Reference
+              items:
+                - title: neon.ts
+                  slug: compute/functions/reference/neon-ts
+                - title: Runtime limits
+                  slug: compute/functions/reference/runtime-limits
+
         - title: Postgres RLS
           icon: lock
           slug: guides/row-level-security
