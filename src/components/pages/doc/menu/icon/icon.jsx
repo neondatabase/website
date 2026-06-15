@@ -18,6 +18,7 @@ import ConnectIcon from 'icons/docs/sidebar/connect.inline.svg';
 import ContainerIcon from 'icons/docs/sidebar/container.inline.svg';
 import DocsIcon from 'icons/docs/sidebar/docs.inline.svg';
 import ExtensionIcon from 'icons/docs/sidebar/extension.inline.svg';
+import FaqIcon from 'icons/docs/sidebar/faq.inline.svg';
 import FeaturesIcon from 'icons/docs/sidebar/features.inline.svg';
 import FeedsIcon from 'icons/docs/sidebar/feeds.inline.svg';
 import FrameworksIcon from 'icons/docs/sidebar/frameworks.inline.svg';
@@ -73,6 +74,7 @@ const icons = {
   container: ContainerIcon,
   docs: DocsIcon,
   extension: ExtensionIcon,
+  faq: FaqIcon,
   features: FeaturesIcon,
   feeds: FeedsIcon,
   frameworks: FrameworksIcon,

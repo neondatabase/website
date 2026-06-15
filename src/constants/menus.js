@@ -223,7 +223,7 @@ export default {
         },
         {
           text: 'FAQs',
-          to: LINKS.faqs,
+          to: '/docs/faqs',
         },
         {
           text: 'PostgreSQL Tutorial',

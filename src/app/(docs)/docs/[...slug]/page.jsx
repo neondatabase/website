@@ -2,11 +2,14 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import FaqsIndex from 'components/pages/faqs/faqs-index';
+import ProgrammaticCTA from 'components/pages/faqs/programmatic-cta';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
+import { getAllDocsFaqs } from 'utils/api-faqs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -23,13 +26,16 @@ export async function generateStaticParams() {
 
   if (!posts) return notFound();
 
-  return posts.map(({ slug }) => {
+  const params = posts.map(({ slug }) => {
     const slugsArray = slug.split('/');
 
     return {
       slug: slugsArray,
     };
   });
+
+  // The FAQ hub at /docs/faqs is a generated index page, not a markdown file.
+  return [...params, { slug: ['faqs'] }];
 }
 
 export async function generateMetadata(props) {
@@ -38,6 +44,16 @@ export async function generateMetadata(props) {
   const currentSlug = slug.join('/');
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
+
+  if (currentSlug === 'faqs') {
+    return getMetadata({
+      title: 'Neon FAQs - Neon Docs',
+      description:
+        'Quick answers to common questions about Neon, each linking to the full documentation.',
+      pathname: `${LINKS.docs}/faqs`,
+      type: 'article',
+    });
+  }
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
 
@@ -73,14 +89,27 @@ const DocPost = async (props) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
+  // The FAQ hub at /docs/faqs is a generated, searchable index rather than a markdown page.
+  if (currentSlug === 'faqs') {
+    const faqs = await getAllDocsFaqs();
+    return <FaqsIndex posts={faqs} />;
+  }
+
   const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
   const isDocsIndex = currentSlug === 'introduction';
+  const isFaqPage = currentSlug === 'faqs' || currentSlug.startsWith('faqs/');
   const isChangelogIndex = currentSlug === 'changelog' || currentSlug.startsWith('changelog/');
   const allChangelogPosts = await getAllChangelogs();
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  const baseBreadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+  // FAQ atomic pages get an explicit "FAQs" crumb so the zone is visible; the hub itself shows none.
+  const breadcrumbs = isFaqPage
+    ? currentSlug === 'faqs'
+      ? []
+      : [{ title: 'FAQs', slug: 'faqs' }, ...baseBreadcrumbs]
+    : baseBreadcrumbs;
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 
@@ -131,6 +160,8 @@ const DocPost = async (props) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
+        isFaq={isFaqPage}
+        aboveContent={isFaqPage ? <ProgrammaticCTA /> : undefined}
       />
     </>
   );

@@ -1,13 +1,13 @@
-const { FAQS_DIR_PATH } = require('../constants/content');
+const { FAQS_DIR_PATH, DOCS_FAQS_DIR_PATH } = require('../constants/content');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
-const getAllFaqs = async () => {
-  const slugs = await getPostSlugs(FAQS_DIR_PATH);
+const buildFaqs = async (dirPath) => {
+  const slugs = await getPostSlugs(dirPath);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, FAQS_DIR_PATH)) return;
-      const data = getPostBySlug(slug, FAQS_DIR_PATH);
+      if (!getPostBySlug(slug, dirPath)) return;
+      const data = getPostBySlug(slug, dirPath);
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -28,9 +28,19 @@ const getAllFaqs = async () => {
         redirectFrom,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
-    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
+    .sort((a, b) => {
+      // Established FAQs carry no createdAt; fall back to title order so results are stable.
+      const at = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const bt = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      if (at !== bt) return bt - at;
+      return a.title.localeCompare(b.title);
+    });
 };
+
+const getAllFaqs = () => buildFaqs(FAQS_DIR_PATH);
+const getAllDocsFaqs = () => buildFaqs(DOCS_FAQS_DIR_PATH);
 
 const getNavigationLinks = (slug, posts) => {
   const currentItemIndex = posts.findIndex((item) => item.slug === slug);
@@ -44,4 +54,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getAllFaqs, getNavigationLinks };
+export { getAllFaqs, getAllDocsFaqs, getNavigationLinks };

@@ -122,6 +122,11 @@ module.exports = {
       },
     },
     {
+      name: 'Faqs',
+      description:
+        'Concise answers to common questions, each linking to the canonical doc. A quick-answer discovery layer over the core documentation.',
+    },
+    {
       name: 'Guides',
       description:
         'Step-by-step integration guides for frameworks, ORMs, auth providers, and deployment platforms.',

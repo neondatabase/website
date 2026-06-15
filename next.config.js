@@ -184,6 +184,18 @@ const defaultConfig = {
 
     return [
       {
+        // FAQs moved from /faqs to /docs/faqs. Per-page redirects come from each page's
+        // redirectFrom; this covers the index and any other /faqs/* path.
+        source: '/faqs',
+        destination: '/docs/faqs',
+        permanent: true,
+      },
+      {
+        source: '/faqs/:path*',
+        destination: '/docs/faqs/:path*',
+        permanent: true,
+      },
+      {
         source: '/cookie-policy',
         destination: 'https://www.databricks.com/legal/cookienotice',
         permanent: true,
