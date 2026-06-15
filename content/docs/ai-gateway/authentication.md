@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-15T08:44:06.988Z'
+updatedOn: '2026-06-15T11:36:12.057Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
@@ -46,7 +46,7 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 
 ## Pull credentials with neonctl
 
-For local development, `neonctl env pull` writes your AI Gateway credentials to your `.env` file automatically — no manual copy-paste from the API response:
+For local development, `neonctl env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
 
 ```bash
 neonctl env pull .env

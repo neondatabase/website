@@ -7,7 +7,7 @@ summary: >-
   databricks- prefix, but the short form without the prefix also works. Use
   either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-15T11:35:31.736Z'
+updatedOn: '2026-06-15T11:36:12.057Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Both forms are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
@@ -138,6 +138,6 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | See the Notes column in the [Meta models table](#meta) above — terms differ by Llama version.                                                                                       |
+| Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
 
 <NeedHelp/>
