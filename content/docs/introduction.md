@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-08T16:11:48.651Z'
+updatedOn: '2026-06-15T13:50:46.182Z'
 ---
 
 <TwinPaths>
@@ -44,11 +44,11 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="binary-code">Data API</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
+<a href="https://neon.com/blog/were-building-backends#access" description="S3-compatible object storage that branches with your database." icon="data" tag="coming soon">Storage</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="Serverless compute, deployed alongside your DB." icon="code" tag="coming soon">Compute</a>
+<a href="https://neon.com/blog/were-building-backends#access" description="Serverless compute, deployed alongside your database." icon="code" tag="coming soon">Compute</a>
 
-<a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Early Access">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Private Beta">AI Gateway</a>
 
 </DetailIconCards>
 
