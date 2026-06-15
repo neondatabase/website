@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:35:48.581Z'
+updatedOn: '2026-06-15T14:40:49.535Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -37,6 +37,10 @@ During the private preview, Storage is available for new projects in the AWS us-
 
 ## Starter templates
 
-Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one with `neonctl bootstrap`.
+Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). The `ai-sdk` template uses Neon Storage — it's an image-generation agent that stores uploaded photos and AI-generated images in branch-scoped buckets, served via presigned URLs from a Neon Function:
+
+```bash
+neonctl bootstrap --template ai-sdk
+```
 
 <NeedHelp/>
