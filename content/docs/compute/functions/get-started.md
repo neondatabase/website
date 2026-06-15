@@ -19,9 +19,9 @@ enableTableOfContents: true
 - The latest `neonctl`, installed and authenticated. Functions commands are new and change often during the preview, so upgrade before you start (`npm install -g neonctl@latest`).
 - Node.js 18 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
-Functions are available on new projects in AWS us-east-2 only.
+Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
 
-`neonctl init --preview` installs the `neon` and `neon-functions` agent skills for your AI editor automatically. To install them separately:
+`neonctl init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install skills separately:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon -s neon-functions -y
@@ -29,16 +29,21 @@ npx skills add neondatabase/agent-skills -s neon -s neon-functions -y
 
 ## Set up your project
 
-Create a project directory and initialize it for the Functions preview:
+Create your project directory:
 
 ```bash
 mkdir my-function && cd my-function
+```
+
+Then ask your AI coding assistant to run:
+
+```bash
 neonctl init --preview
 ```
 
-`neonctl init --preview` runs an interactive setup: it installs the Neon MCP server and agent skills for your editor and, in an empty directory, offers to scaffold the project from a Neon template. Scaffolding links the directory to a Neon project and pulls the branch's variables into a local `.env` file. If you build by hand instead, finish by running `neonctl link`.
+When your AI coding assistant runs `neonctl init --preview`, it receives structured JSON instructions for the full setup: MCP server and agent skills, optional template scaffolding, project linking, and env var pull. Sign-in opens a browser window. The agent will pause and wait for you to complete the OAuth step. If you ran init yourself and exited before the linking step, run `neonctl link` to connect the directory to your project manually.
 
-To go straight to a working example, run `neonctl bootstrap`. It scaffolds a starter template (a Hono API, an AI SDK agent, or a Mastra agent, all on Neon Functions) and links it. This guide builds the function by hand.
+To go straight to a working example, run `neonctl bootstrap`. It scaffolds a starter template and links it. Available templates: Hono API, AI SDK agent, Mastra agent, Realtime chat (Next.js + WebSockets), and Realtime counter (TanStack Router + SSE), all on Neon Functions. This guide builds the function by hand.
 
 ## Define your function
 
@@ -64,7 +69,7 @@ The key (`hello`) is the function's slug: its permanent identifier in CLI comman
 Install dependencies:
 
 ```bash
-npm install hono @neondatabase/serverless
+npm install @neondatabase/config @neondatabase/serverless hono
 ```
 
 A function is any module whose default export has a `fetch(request)` method that returns a `Response`. A Hono app exports exactly that shape, so a minimal function looks like this:
