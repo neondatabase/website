@@ -138,13 +138,13 @@ neonctl functions get hello
 The `invocation_url` field contains the public URL for your function:
 
 ```
-https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech
+https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
 ```
 
 Call it with curl:
 
 ```bash shouldWrap
-curl https://<branch_id>-hello.compute.c-1.us-east-2.aws.neon.tech
+curl https://<branch_id>-hello.compute.<cell>.us-east-2.aws.neon.tech
 ```
 
 The response is a JSON object with your branch's Postgres version:
