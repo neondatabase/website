@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:32:45.581Z'
+updatedOn: '2026-06-15T14:35:48.581Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -37,22 +37,6 @@ During the private preview, Storage is available for new projects in the AWS us-
 
 ## Starter templates
 
-Browse templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one directly with `neonctl bootstrap`:
-
-```bash
-neonctl bootstrap
-```
-
-Use `--template` to skip the interactive picker:
-
-| Template        | What it builds                                                                         |
-| --------------- | -------------------------------------------------------------------------------------- |
-| `hono`          | REST API with Drizzle and Postgres on Neon Functions                                   |
-| `ai-sdk`        | Image-generation agent with AI Gateway, Object Storage, and Postgres on Neon Functions |
-| `mastra`        | Personal assistant with AI Gateway and Postgres-backed memory on Neon Functions        |
-| `realtime-chat` | Realtime chat with Next.js, Neon Auth, and WebSockets on Neon Functions                |
-| `realtime-sse`  | Realtime counter with TanStack Router and SSE on Neon Functions                        |
-
-`neonctl bootstrap` scaffolds files, links to a Neon project, and pulls env vars. Then follow the README to set up and deploy.
+Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one with `neonctl bootstrap`.
 
 <NeedHelp/>
