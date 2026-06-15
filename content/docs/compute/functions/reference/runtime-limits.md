@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:47:36.989Z'
+updatedOn: '2026-06-15T17:47:53.882Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -40,20 +40,19 @@ Without it, open connections are abandoned on eviction and remain open until the
 
 ```ts
 import { Hono } from 'hono';
-import { waitUntil } from '@neondatabase/functions/v1';
+import { waitUntil } from '@neondatabase/functions';
 
 const app = new Hono();
 
 app.post('/event', async (c) => {
-  const wait = waitUntil(); // returns the waitUntil function for this invocation
-  wait(writeAnalytics(c.req.raw)); // your async follow-up work
+  waitUntil(writeAnalytics(c.req.raw)); // writeAnalytics returns Promise
   return c.json({ ok: true });
 });
 
 export default app;
 ```
 
-`waitUntil()` returns a function for the current invocation; pass that function a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The registered work is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
 
 ## Concurrency
 
