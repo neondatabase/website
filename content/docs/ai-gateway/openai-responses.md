@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T18:57:11.444Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -16,24 +16,24 @@ The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platfor
 **Base URL:** `https://<branch-host>/ai-gateway/openai/v1`
 
 <Admonition type="warning">
-All codex model variants (`databricks-gpt-5-3-codex`, `databricks-gpt-5-2-codex`, `databricks-gpt-5-1-codex-max`, `databricks-gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
+All codex model variants (`gpt-5-3-codex`, `gpt-5-2-codex`, `gpt-5-1-codex-max`, `gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
 </Admonition>
 
 ## Supported models
 
 This endpoint accepts OpenAI models only:
 
-| Model ID                        | Notes                  |
-| ------------------------------- | ---------------------- |
-| `databricks-gpt-5-4`            |                        |
-| `databricks-gpt-5-4-mini`       |                        |
-| `databricks-gpt-5-4-nano`       |                        |
-| `databricks-gpt-5-3-codex`      | Requires this endpoint |
-| `databricks-gpt-5-2-codex`      | Requires this endpoint |
-| `databricks-gpt-5-2`            |                        |
-| `databricks-gpt-5-1-codex-max`  | Requires this endpoint |
-| `databricks-gpt-5-1-codex-mini` | Requires this endpoint |
-| `databricks-gpt-5-1`            |                        |
+| Model ID             | Notes                  |
+| -------------------- | ---------------------- |
+| `gpt-5-4`            |                        |
+| `gpt-5-4-mini`       |                        |
+| `gpt-5-4-nano`       |                        |
+| `gpt-5-3-codex`      | Requires this endpoint |
+| `gpt-5-2-codex`      | Requires this endpoint |
+| `gpt-5-2`            |                        |
+| `gpt-5-1-codex-max`  | Requires this endpoint |
+| `gpt-5-1-codex-mini` | Requires this endpoint |
+| `gpt-5-1`            |                        |
 
 Sending a non-OpenAI model ID returns `400 model is not available on this endpoint`.
 
@@ -45,12 +45,12 @@ Sending a non-OpenAI model ID returns `400 model is not available on this endpoi
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1`,
 });
 
 const response = await client.responses.create({
-  model: 'databricks-gpt-5-4',
+  model: 'gpt-5-4',
   input: [{ role: 'user', content: 'What is Neon?' }],
 });
 
@@ -62,12 +62,12 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-    api_key=os.environ['NEON_AI_GATEWAY_KEY'],
+    api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/openai/v1",
 )
 
 response = client.responses.create(
-    model='databricks-gpt-5-4',
+    model='gpt-5-4',
     input=[{'role': 'user', 'content': 'What is Neon?'}],
 )
 
@@ -76,10 +76,10 @@ print(response.output_text)
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-gpt-5-4",
+    "model": "gpt-5-4",
     "input": [{"role": "user", "content": "What is Neon?"}]
   }'
 ```
@@ -92,7 +92,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
 
 ```typescript shouldWrap
 const stream = await client.responses.create({
-  model: 'databricks-gpt-5-4',
+  model: 'gpt-5-4',
   input: [{ role: 'user', content: 'Explain database branching.' }],
   stream: true,
 });
@@ -106,7 +106,7 @@ for await (const event of stream) {
 
 ```python shouldWrap
 with client.responses.stream(
-    model='databricks-gpt-5-4',
+    model='gpt-5-4',
     input=[{'role': 'user', 'content': 'Explain database branching.'}],
 ) as stream:
     for event in stream:
@@ -116,10 +116,10 @@ with client.responses.stream(
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-gpt-5-4",
+    "model": "gpt-5-4",
     "input": [{"role": "user", "content": "Explain database branching."}],
     "stream": true
   }'

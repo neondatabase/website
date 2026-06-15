@@ -6,12 +6,12 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
+The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
 
 **Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
 
@@ -20,7 +20,7 @@ The chat completions endpoint is the recommended way to use Neon AI Gateway. It'
 Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
 
 ```bash
-NEON_AI_GATEWAY_KEY=nt_live_...
+NEON_AI_GATEWAY_TOKEN=nt_live_...
 NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
 ```
 
@@ -32,12 +32,12 @@ NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.ne
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const response = await client.chat.completions.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   messages: [
     { role: 'system', content: 'You are a helpful assistant.' },
     { role: 'user', content: 'What is Neon?' },
@@ -53,12 +53,12 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-    api_key=os.environ["NEON_AI_GATEWAY_KEY"],
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 response = client.chat.completions.create(
-    model="databricks-claude-sonnet-4-6",
+    model="claude-sonnet-4-6",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What is Neon?"},
@@ -71,10 +71,10 @@ print(response.choices[0].message.content)
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-claude-sonnet-4-6",
+    "model": "claude-sonnet-4-6",
     "messages": [
       {"role": "system", "content": "You are a helpful assistant."},
       {"role": "user", "content": "What is Neon?"}
@@ -95,12 +95,12 @@ Add `stream: true` to receive a server-sent events response.
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const stream = await client.chat.completions.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   messages: [{ role: 'user', content: 'Explain branching in Postgres.' }],
   stream: true,
 });
@@ -115,12 +115,12 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-    api_key=os.environ["NEON_AI_GATEWAY_KEY"],
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 with client.chat.completions.create(
-    model="databricks-claude-sonnet-4-6",
+    model="claude-sonnet-4-6",
     messages=[{"role": "user", "content": "Explain branching in Postgres."}],
     stream=True,
 ) as stream:
@@ -130,10 +130,10 @@ with client.chat.completions.create(
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-claude-sonnet-4-6",
+    "model": "claude-sonnet-4-6",
     "messages": [{"role": "user", "content": "Explain branching in Postgres."}],
     "stream": true
   }'
@@ -147,13 +147,13 @@ Change the `model` field to use a different provider. Everything else stays the 
 
 ```typescript
 // Anthropic
-model: 'databricks-claude-sonnet-4-6'
+model: 'claude-sonnet-4-6'
 
 // OpenAI
-model: 'databricks-gpt-5-4'
+model: 'gpt-5-4'
 
 // Google
-model: 'databricks-gemini-2-5-flash'
+model: 'gemini-2-5-flash'
 
 // Alibaba
 model: 'databricks-qwen35-122b-a10b'
@@ -182,7 +182,7 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 | ------------------------------ | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `400 Bad Request`              | Invalid request        | Unknown model ID, or model used on the wrong endpoint                                                                                        |
 | `413 Request Entity Too Large` | Body too large         | Request body exceeds 32 MiB. Reduce the size of your request.                                                                                |
-| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_KEY`                                                                                                     |
+| `401 Unauthorized`             | Authentication failed  | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                                                                   |
 | `403 Forbidden`                | Access denied          | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                                                              |
 | `429 Too Many Requests`        | Account quota exceeded | Your account's AI Gateway quota is blocked. Error code: `REQUEST_LIMIT_EXCEEDED`. Check `Retry-After` for when to retry, or contact support. |
 | `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                           |

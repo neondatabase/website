@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-15T18:57:11.444Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -16,7 +16,7 @@ updatedOn: '2026-06-15T18:57:11.444Z'
 
 The bearer token is missing, malformed, or has been revoked.
 
-**Fix:** Check that `NEON_AI_GATEWAY_KEY` is set and contains the full `nt_live_...` token returned when you created the credential. If the credential was revoked, create a new one. See [Authentication](/docs/ai-gateway/authentication#creating-a-credential).
+**Fix:** Check that `NEON_AI_GATEWAY_TOKEN` is set and contains the full `nt_live_...` token returned when you created the credential. If the credential was revoked, create a new one. See [Authentication](/docs/ai-gateway/authentication#creating-a-credential).
 
 ### `403 credential not authorized for ai gateway`
 
@@ -44,7 +44,7 @@ The credential store or branch resolver is temporarily unavailable.
 
 The `model` field in the request body does not match any entry in the AI Gateway catalog.
 
-**Fix:** Check the model ID. All model IDs use the `databricks-` prefix (e.g., `databricks-claude-sonnet-4-6`). See the [full model catalog](/docs/ai-gateway/models) for valid IDs.
+**Fix:** Check the model ID against the [full model catalog](/docs/ai-gateway/models). Use the short form (e.g., `claude-sonnet-4-6`) or the `databricks-` prefixed form (`databricks-claude-sonnet-4-6`) — both are accepted.
 
 ### `400 model is not available on this endpoint`
 
@@ -52,7 +52,7 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 
 **Fix:** Check which endpoint the model requires:
 
-- Anthropic models (`databricks-claude-*`) on `/openai/v1/responses` → use `/anthropic/v1/messages` or `/mlflow/v1/chat/completions`
+- Anthropic models (`claude-*`) on `/openai/v1/responses` → use `/anthropic/v1/messages` or `/mlflow/v1/chat/completions`
 - OpenAI codex models on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
 - Google models on `/anthropic/v1/messages` → use `/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
 
@@ -78,7 +78,7 @@ The action in the Gemini endpoint URL is not `generateContent`.
 
 The `{modelAction}` segment in the Gemini URL path is malformed. It must follow the format `<model>:<action>` where both parts are non-empty.
 
-**Fix:** Ensure the URL path contains exactly one colon separating the model ID and action, e.g. `databricks-gemini-2-5-flash:generateContent`.
+**Fix:** Ensure the URL path contains exactly one colon separating the model ID and action, e.g. `gemini-2-5-flash:generateContent`.
 
 ---
 
