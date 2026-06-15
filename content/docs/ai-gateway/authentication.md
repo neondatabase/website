@@ -7,14 +7,26 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-14T11:12:18.690Z'
+updatedOn: '2026-06-15T08:44:06.988Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
 
 ## Creating a credential
 
-A credential must include the `ai_gateway:invoke` scope. Use the Neon API to create one:
+A credential must include the `ai_gateway:invoke` scope.
+
+<Tabs labels={["Console", "API"]}>
+<TabItem>
+
+In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
+
+After creation, the credentials are shown once. Copy the snippet or click **Download .env** before closing. The snippet includes `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, and `NEON_AI_GATEWAY_BASE_URL`. `OPENAI_API_KEY` and `OPENAI_BASE_URL` let standard OpenAI SDK calls work without any configuration changes. The `NEON_AI_GATEWAY_*` aliases are useful when you need credentials that survive a user overriding the `OPENAI_*` variables.
+
+To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
+
+</TabItem>
+<TabItem>
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -26,8 +38,11 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 The response includes an `api_token` field. Store it as an environment variable:
 
 ```bash
-export NEON_AI_GATEWAY_KEY=nt_live_...
+export NEON_AI_GATEWAY_TOKEN=nt_live_...
 ```
+
+</TabItem>
+</Tabs>
 
 ## Pull credentials with neonctl
 
@@ -61,8 +76,8 @@ When using an AI SDK, set this as the `apiKey` parameter:
 import OpenAI from 'openai';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
-  baseURL: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/mlflow/v1`,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 ```
 
@@ -71,8 +86,8 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-    api_key=os.environ["NEON_AI_GATEWAY_KEY"],
-    base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/mlflow/v1",
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 ```
 
@@ -124,14 +139,16 @@ This design lets you use a single credential across your entire development work
 
 | Error                     | Cause                                      | Fix                                                                                                                             |
 | ------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_KEY` is set and contains the full token                                                             |
+| `401 Unauthorized`        | Missing or invalid credential              | Check that `NEON_AI_GATEWAY_TOKEN` is set and contains the full token                                                           |
 | `403 Forbidden`           | Credential lacks `ai_gateway:invoke` scope | Recreate the credential with the correct scope                                                                                  |
 | `403 Forbidden`           | Branch not in credential lineage           | Use a credential created on this branch or an ancestor branch. The gateway returns: `credential not authorized for this branch` |
 | `503 Service Unavailable` | Auth store temporarily unavailable         | Retry the request                                                                                                               |
 
 ## Rotating credentials
 
-To rotate a credential, create a new one via the Neon API (see [Creating a credential](#creating-a-credential)), update your environment variables, then revoke the old one:
+To rotate a credential: create a new one, update your environment variables, then revoke the old one.
+
+To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
