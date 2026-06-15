@@ -1,4 +1,4 @@
-text: 'New in Neon: Lakebase Search brings scalable vector and BM25 full-text search to Postgres, scaling from 0 to 1B vectors on a single index. Read the docs.'
+text: "New in Neon: vector (ANN) and text (BM25) search extensions optimized for Neon's lakebase architecture. Read the docs."
 link:
   url: 'https://neon.com/docs/ai/lakebase-search'
   target: '_blank'
