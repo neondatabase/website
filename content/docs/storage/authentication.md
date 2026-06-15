@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-14T10:35:51.194Z'
+updatedOn: '2026-06-15T08:44:47.016Z'
 ---
 
 Neon Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -17,6 +17,25 @@ A Storage credential requires at minimum one of:
 
 - [`storage:read`](#read-vs-write-scopes): allows GetObject, HeadObject, ListObjects, and ListBuckets
 - [`storage:write`](#read-vs-write-scopes): allows all read operations plus PutObject and DeleteObject
+
+<Tabs labels={["Console", "API"]}>
+<TabItem>
+
+In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check the storage scopes you need.
+
+After creation, the credentials are shown once. Copy the snippet or click **Download .env** before closing:
+
+```text
+AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.build
+AWS_ACCESS_KEY_ID=nak_live_...
+AWS_SECRET_ACCESS_KEY=nsk_live_...
+AWS_REGION=us-east-2
+```
+
+To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
+
+</TabItem>
+<TabItem>
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -42,6 +61,9 @@ The response includes these fields. Both secrets are returned once only, so stor
   "expires_at": null
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ## Mapping to your S3 SDK
 
@@ -169,6 +191,8 @@ staging  ──── credential NOT valid here (different lineage)
 
 ## Listing credentials
 
+The **Credentials** page in the Console shows all credentials for the current branch — name, key ID, creation date, and last used time. To list via the API:
+
 ```bash shouldWrap
 curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
   -H "Authorization: Bearer $NEON_API_KEY"
@@ -177,6 +201,8 @@ curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id
 This returns credential metadata. Secrets are never returned after creation.
 
 ## Revoking credentials
+
+To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
