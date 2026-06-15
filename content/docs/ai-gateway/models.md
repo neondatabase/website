@@ -7,7 +7,7 @@ summary: >-
   databricks- prefix, but the short form without the prefix also works. Use
   either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-15T10:50:05.465Z'
+updatedOn: '2026-06-15T11:22:30.818Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). You can also use the short form without the prefix (for example, `claude-sonnet-4-6`) — both are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
@@ -58,79 +58,85 @@ Use the `id` field in the `model` parameter of any inference request. Models tha
 
 ### Anthropic
 
-| Model ID                       | Notes                          |
-| ------------------------------ | ------------------------------ |
-| `databricks-claude-opus-4-8`   | Most capable Claude model      |
-| `databricks-claude-opus-4-7`   |                                |
-| `databricks-claude-opus-4-6`   |                                |
-| `databricks-claude-opus-4-5`   |                                |
-| `databricks-claude-opus-4-1`   |                                |
-| `databricks-claude-sonnet-4-6` | Recommended for most use cases |
-| `databricks-claude-sonnet-4-5` |                                |
-| `databricks-claude-sonnet-4`   |                                |
-| `databricks-claude-haiku-4-5`  | Fast and cost-effective        |
+| Model ID                       | Inputs      | Context | Notes                                    |
+| ------------------------------ | ----------- | ------- | ---------------------------------------- |
+| `databricks-claude-opus-4-8`   | text, image | —       | Most capable Claude model                |
+| `databricks-claude-opus-4-7`   | text, image | 1M      | Extended thinking available              |
+| `databricks-claude-opus-4-6`   | text, image | 1M      | Adaptive thinking with max effort level  |
+| `databricks-claude-opus-4-5`   | text, image | 200K    | Extended thinking available              |
+| `databricks-claude-opus-4-1`   | text, image | 200K    |                                          |
+| `databricks-claude-sonnet-4-6` | text, image | —       | Recommended. Instant + extended thinking |
+| `databricks-claude-sonnet-4-5` | text, image | —       | Instant + extended thinking              |
+| `databricks-claude-sonnet-4`   | text, image | —       | Instant + extended thinking              |
+| `databricks-claude-haiku-4-5`  | text, image | —       | Fast and cost-effective                  |
 
 ### Google
 
-| Model ID                           | Notes                 |
-| ---------------------------------- | --------------------- |
-| `databricks-gemini-3-5-flash`      |                       |
-| `databricks-gemini-3-1-pro`        |                       |
-| `databricks-gemini-3-1-flash-lite` |                       |
-| `databricks-gemini-3-pro`          |                       |
-| `databricks-gemini-3-flash`        |                       |
-| `databricks-gemini-2-5-pro`        |                       |
-| `databricks-gemini-2-5-flash`      |                       |
-| `databricks-gemma-3-12b`           | Chat completions only |
+| Model ID                           | Inputs                    | Context | Notes                 |
+| ---------------------------------- | ------------------------- | ------- | --------------------- |
+| `databricks-gemini-3-5-flash`      | text, image, video, audio | —       |                       |
+| `databricks-gemini-3-1-pro`        | text, image, video, audio | 1M      |                       |
+| `databricks-gemini-3-1-flash-lite` | text, image, video, audio | —       |                       |
+| `databricks-gemini-3-pro`          | text, image, video, audio | 1M      |                       |
+| `databricks-gemini-3-flash`        | text, image, video, audio | —       |                       |
+| `databricks-gemini-2-5-pro`        | text, image, video, audio | 1M      | Deep Think Mode       |
+| `databricks-gemini-2-5-flash`      | text, image, video, audio | 1M      |                       |
+| `databricks-gemma-3-12b`           | text, image               | 128K    | Chat completions only |
 
 ### OpenAI
 
-| Model ID                        | Notes                                                              |
-| ------------------------------- | ------------------------------------------------------------------ |
-| `databricks-gpt-5-5-pro`        | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-5`            |                                                                    |
-| `databricks-gpt-5-4`            |                                                                    |
-| `databricks-gpt-5-4-mini`       |                                                                    |
-| `databricks-gpt-5-4-nano`       |                                                                    |
-| `databricks-gpt-5-3-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-2-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-2`            |                                                                    |
-| `databricks-gpt-5-1-codex-max`  | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-1-codex-mini` | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-1`            |                                                                    |
-| `databricks-gpt-5`              |                                                                    |
-| `databricks-gpt-5-mini`         |                                                                    |
-| `databricks-gpt-5-nano`         |                                                                    |
+All OpenAI models have a 400K token context window and accept text and image inputs.
+
+| Model ID                        | Notes                                                                              |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| `databricks-gpt-5-5-pro`        | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses). Prompt caching |
+| `databricks-gpt-5-5`            | Prompt caching                                                                     |
+| `databricks-gpt-5-4`            |                                                                                    |
+| `databricks-gpt-5-4-mini`       |                                                                                    |
+| `databricks-gpt-5-4-nano`       |                                                                                    |
+| `databricks-gpt-5-3-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
+| `databricks-gpt-5-2-codex`      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
+| `databricks-gpt-5-2`            |                                                                                    |
+| `databricks-gpt-5-1-codex-max`  | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
+| `databricks-gpt-5-1-codex-mini` | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
+| `databricks-gpt-5-1`            | Instant + Thinking modes                                                           |
+| `databricks-gpt-5`              |                                                                                    |
+| `databricks-gpt-5-mini`         |                                                                                    |
+| `databricks-gpt-5-nano`         |                                                                                    |
 
 ### Databricks
 
-Open-weight models hosted by Databricks. Chat completions only.
+Open-weight models hosted by Databricks. Text input only. Chat completions only.
 
-| Model ID                  | Notes |
-| ------------------------- | ----- |
-| `databricks-gpt-oss-120b` |       |
-| `databricks-gpt-oss-20b`  |       |
+| Model ID                  | Context | Notes                       |
+| ------------------------- | ------- | --------------------------- |
+| `databricks-gpt-oss-120b` | 128K    | Adjustable reasoning effort |
+| `databricks-gpt-oss-20b`  | 128K    |                             |
 
 ### Meta
 
-| Model ID                                 | Notes                                                                                                                                                                                                              |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `databricks-llama-4-maverick`            | [Llama 4 Community License](https://www.llama.com/llama4/license) · [Acceptable Use](https://www.llama.com/llama4/use-policy)                                                                                      |
-| `databricks-meta-llama-3-3-70b-instruct` | [Llama 3.3 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/LICENSE) · [Acceptable Use](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/USE_POLICY.md) |
-| `databricks-meta-llama-3-1-8b-instruct`  | [Llama 3.1 Community License](https://www.llama.com/llama3_1/license/) · [Acceptable Use](https://www.llama.com/llama3_1/use-policy/)                                                                              |
+| Model ID                                 | Inputs      | Context | Notes                                                                                                                                                                                                              |
+| ---------------------------------------- | ----------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `databricks-llama-4-maverick`            | text, image | —       | [Llama 4 Community License](https://www.llama.com/llama4/license) · [Acceptable Use](https://www.llama.com/llama4/use-policy)                                                                                      |
+| `databricks-meta-llama-3-3-70b-instruct` | text        | 128K    | [Llama 3.3 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/LICENSE) · [Acceptable Use](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/USE_POLICY.md) |
+| `databricks-meta-llama-3-1-8b-instruct`  | text        | 128K    | [Llama 3.1 Community License](https://www.llama.com/llama3_1/license/) · [Acceptable Use](https://www.llama.com/llama3_1/use-policy/)                                                                              |
 
 ### Alibaba
 
-| Model ID                                 | Notes |
-| ---------------------------------------- | ----- |
-| `databricks-qwen3-next-80b-a3b-instruct` |       |
-| `databricks-qwen35-122b-a10b`            |       |
+Text input only. Chat completions only.
+
+| Model ID                                 | Context | Notes                            |
+| ---------------------------------------- | ------- | -------------------------------- |
+| `databricks-qwen3-next-80b-a3b-instruct` | —       |                                  |
+| `databricks-qwen35-122b-a10b`            | 256K    | Always reasons before responding |
 
 ### DeepSeek
 
-| Model ID                   | Notes |
-| -------------------------- | ----- |
-| `databricks-deepseek-v3-2` |       |
+Text input only. Chat completions only.
+
+| Model ID                   | Context | Notes |
+| -------------------------- | ------- | ----- |
+| `databricks-deepseek-v3-2` | —       |       |
 
 ## Which endpoint to use
 
