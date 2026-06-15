@@ -7,10 +7,14 @@ summary: >-
   databricks- prefix, but the short form without the prefix also works. Use
   either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-14T11:12:18.690Z'
+updatedOn: '2026-06-15T10:50:05.465Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). You can also use the short form without the prefix (for example, `claude-sonnet-4-6`) — both are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
+
+<Admonition type="important">
+Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
+</Admonition>
 
 <Admonition type="note">
 Model availability may vary by region. The catalog expands over time, so check back for new additions.
@@ -109,11 +113,11 @@ Open-weight models hosted by Databricks. Chat completions only.
 
 ### Meta
 
-| Model ID                                 | Notes |
-| ---------------------------------------- | ----- |
-| `databricks-llama-4-maverick`            |       |
-| `databricks-meta-llama-3-3-70b-instruct` |       |
-| `databricks-meta-llama-3-1-8b-instruct`  |       |
+| Model ID                                 | Notes                                                                                                                                                                                                              |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `databricks-llama-4-maverick`            | [Llama 4 Community License](https://www.llama.com/llama4/license) · [Acceptable Use](https://www.llama.com/llama4/use-policy)                                                                                      |
+| `databricks-meta-llama-3-3-70b-instruct` | [Llama 3.3 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/LICENSE) · [Acceptable Use](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/USE_POLICY.md) |
+| `databricks-meta-llama-3-1-8b-instruct`  | [Llama 3.1 Community License](https://www.llama.com/llama3_1/license/) · [Acceptable Use](https://www.llama.com/llama3_1/use-policy/)                                                                              |
 
 ### Alibaba
 
@@ -140,5 +144,17 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 | Google Gemini                          | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
 | Google Gemma 3 12B                     | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
 | Meta, DeepSeek, Databricks, Alibaba    | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
+
+## Provider terms
+
+Models are hosted by Databricks and served through Neon AI Gateway. You are responsible for complying with each provider's applicable terms of use.
+
+| Provider      | Terms                                                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Anthropic     | [Anthropic Usage Policy](https://www.anthropic.com/legal/aup)                                                                                                                       |
+| OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
+| Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
+| Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
+| Meta          | See the Notes column in the [Meta models table](#meta) above — terms differ by Llama version.                                                                                       |
 
 <NeedHelp/>
