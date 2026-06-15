@@ -4,19 +4,19 @@ subtitle: Send Neon metrics and Postgres logs to SigNoz using the OpenTelemetry 
 author: nagesh-bansal
 enableTableOfContents: true
 createdAt: '2026-06-12T00:00:00.000Z'
-updatedOn: '2026-06-12T00:00:00.000Z'
+updatedOn: '2026-06-15T12:50:23.616Z'
 ---
 
-[SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that unifies logs, metrics, and traces in a single application. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) allows you to send your project's metrics and Postgres logs directly to SigNoz, giving you a centralized view of your database's performance and activity.
+[SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that brings logs, metrics, and traces together in one application. [Neon's OpenTelemetry integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs to SigNoz, so you can monitor your database alongside the rest of your stack.
 
-This guide will walk you through setting up the integration between Neon and SigNoz. You'll learn how to:
+This guide walks you through setting up the integration. You'll learn how to:
 
 - Find the ingestion key and OTLP endpoint for your SigNoz Cloud account.
 - Set up the OpenTelemetry integration in your Neon project.
-- Verify that your Neon metrics and logs are successfully flowing into SigNoz.
-- Build an example dashboard in SigNoz to visualize your Neon metrics.
+- Verify that your Neon metrics and logs are flowing into SigNoz.
+- Build a dashboard in SigNoz to visualize your Neon metrics.
 
-By the end, you'll have a complete observability pipeline from your Neon database to your SigNoz dashboard.
+By the end, you'll have Neon metrics and logs flowing into a SigNoz dashboard.
 
 ## Prerequisites
 
@@ -29,18 +29,18 @@ Before you begin, ensure you have the following:
 
 ## Get your SigNoz ingestion key and endpoint
 
-First, you need the credentials that authorize Neon to send OpenTelemetry data to your SigNoz Cloud instance.
+You need credentials that authorize Neon to send OpenTelemetry data to your SigNoz Cloud instance.
 
 1.  Log in to your [SigNoz Cloud](https://signoz.io/teams/) account.
 2.  Navigate to **Settings** > **Ingestion Settings**.
-3.  Copy your **Ingestion Key**. This is the value Neon will send with every request to authenticate your data.
+3.  Copy your **Ingestion Key**. Neon sends this value with every request to authenticate your data.
 4.  Note your **region**. SigNoz Cloud is available in multiple regions, and your OTLP endpoint depends on it:
 
-    | Region | Endpoint                          |
-    | ------ | --------------------------------- |
-    | US     | `https://ingest.us.signoz.cloud`  |
-    | EU     | `https://ingest.eu.signoz.cloud`  |
-    | India  | `https://ingest.in.signoz.cloud`  |
+    | Region | Endpoint                         |
+    | ------ | -------------------------------- |
+    | US     | `https://ingest.us.signoz.cloud` |
+    | EU     | `https://ingest.eu.signoz.cloud` |
+    | India  | `https://ingest.in.signoz.cloud` |
 
     Your region and endpoint are shown on the **Ingestion Settings** page. For more details, see the [SigNoz ingestion overview](https://signoz.io/docs/ingestion/signoz-cloud/overview/).
 
@@ -48,7 +48,7 @@ First, you need the credentials that authorize Neon to send OpenTelemetry data t
 
 ## Configure the Neon OpenTelemetry integration
 
-Now, you will use the credentials from SigNoz to configure the integration in your Neon project.
+Use the credentials from SigNoz to configure the integration in your Neon project.
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) and select your project.
 2.  From the sidebar, go to the **Integrations** page.
@@ -56,7 +56,7 @@ Now, you will use the credentials from SigNoz to configure the integration in yo
 
     ![Neon Integrations page with OpenTelemetry card](/docs/guides/neon-add-otel.png)
 
-4.  A sidebar form will open. Start by choosing the telemetry you want to export. Check both **Metrics** and **Postgres logs** to send all available data.
+4.  A sidebar form opens. Choose the telemetry you want to export. Check both **Metrics** and **Postgres logs** to send all available data.
 
     ![Selecting metrics and Postgres logs to export from Neon](/docs/guides/signoz-neon-export-type.webp)
 
@@ -69,10 +69,10 @@ Now, you will use the credentials from SigNoz to configure the integration in yo
     - **Authentication:** Select **API Key**.
     - **Header name:** Enter `signoz-ingestion-key`.
     - **API Key:** Paste the **Ingestion Key** you copied from SigNoz.
-    - **Resource attributes:** It's a best practice to add a `service.name` attribute to identify your data source within SigNoz. For example, set the key to `service.name` and the value to `neon`.
+    - **Resource attributes:** Add a `service.name` attribute to identify your data source in SigNoz. For example, set the key to `service.name` and the value to `neon`.
     - Click **Save**.
 
-    <Admonition type="note" title="Data Scope">
+    <Admonition type="note" title="Data scope">
     The Neon OpenTelemetry integration sends data for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics and logs will be collected and sent for each one.
     </Admonition>
 
@@ -103,13 +103,13 @@ To confirm that your integration is working, check that both logs and metrics ar
 
     ![Neon metrics in the SigNoz Metrics Explorer](/docs/guides/signoz-neon-metrics.webp)
 
-    <Admonition type="info" title="Compute Activity">
+    <Admonition type="info" title="Compute activity">
     Neon computes only send logs and metrics when they are active. If you have the [Scale to Zero](/docs/manage/endpoints#scale-to-zero) feature enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon console.
     </Admonition>
 
-## Visualizing Neon metrics with dashboards
+## Visualize Neon metrics with dashboards
 
-While the Metrics Explorer is great for ad-hoc queries, SigNoz **Dashboards** are the best way to visualize your Neon metrics, track trends over time, and get a high-level overview of your database's health.
+The Metrics Explorer works for ad-hoc queries. To track trends over time and see an overview of your database's health, build a SigNoz **dashboard**.
 
 ### Create a custom Neon dashboard
 
@@ -125,7 +125,7 @@ While the Metrics Explorer is great for ad-hoc queries, SigNoz **Dashboards** ar
 
 ### Explore available Neon metrics
 
-Neon exports a rich set of metrics that you can use to build your dashboards. These include both Neon-specific metrics and general compute host metrics. For example:
+Neon exports a range of metrics for your dashboards, including Neon-specific metrics and compute host metrics. For example:
 
 - `neon_connection_counts`: Monitor the number of active and idle database connections.
 - `neon_db_total_size`: Track the total size of all databases in your project, in bytes.
@@ -140,9 +140,9 @@ With Neon's database metrics and logs flowing into SigNoz alongside your applica
 
 ## Summary
 
-Congratulations! You have successfully configured Neon to send metrics and Postgres logs to SigNoz using the OpenTelemetry integration. You now have a centralized observability setup that provides real-time insights into your database's health and activity.
+You've configured Neon to send metrics and Postgres logs to SigNoz using the OpenTelemetry integration. Your database's metrics and logs now arrive in SigNoz alongside the rest of your application telemetry.
 
-By leveraging this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within SigNoz.
+From here, you can build dashboards, set up alerts, and correlate database behavior with the rest of your stack.
 
 ## Resources
 
