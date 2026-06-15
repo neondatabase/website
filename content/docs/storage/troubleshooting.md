@@ -6,8 +6,10 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:42:07.067Z'
+updatedOn: '2026-06-15T13:33:22.356Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 ## Authentication errors
 

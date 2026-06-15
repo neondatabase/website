@@ -6,8 +6,10 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-11T14:42:07.067Z'
+updatedOn: '2026-06-15T13:33:22.356Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
 
