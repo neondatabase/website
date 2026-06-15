@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to 39 models across 7 providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T15:43:05.726Z'
+updatedOn: '2026-06-15T15:47:52.073Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -38,13 +38,13 @@ During the private preview, AI Gateway is available for **new projects** in the 
 
 Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Two templates use AI Gateway:
 
-**`ai-sdk`** — An image-generation agent that routes model calls through AI Gateway, stores results in Neon Storage, and writes metadata to Postgres on a Neon Function.
+**`ai-sdk`**: An image-generation agent that routes model calls through AI Gateway, stores results in Neon Storage, and writes metadata to Postgres on a Neon Function.
 
 ```bash
 neonctl bootstrap --template ai-sdk
 ```
 
-**`mastra`** — A personal assistant that uses AI Gateway for LLM calls with Postgres-backed memory on a Neon Function.
+**`mastra`**: A personal assistant that uses AI Gateway for LLM calls with Postgres-backed memory on a Neon Function.
 
 ```bash
 neonctl bootstrap --template mastra
