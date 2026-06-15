@@ -30,7 +30,7 @@ All usage of Functions, Storage, and AI Gateway during the preview is free, subj
 
 ## Check your access
 
-Go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Functions**, **Storage**, and **AI Gateway**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+Go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Functions**, **Storage**, **Credentials**, and **AI Gateway**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
 
 ## Get started
 
