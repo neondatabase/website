@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-15T20:35:44.700Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -87,11 +87,11 @@ Configure your S3 client using these values:
 import { S3Client } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
-  region: 'us-east-2',
-  endpoint: process.env.NEON_STORAGE_ENDPOINT,
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   credentials: {
-    accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID,   // token_id
-    secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY, // s3_secret_access_key
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,   // token_id
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!, // s3_secret_access_key
   },
   forcePathStyle: true,
 });
@@ -102,17 +102,18 @@ import boto3, os
 
 client = boto3.client(
     's3',
-    region_name='us-east-2',
-    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
-    aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],      # token_id
-    aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],  # s3_secret_access_key
+    region_name=os.environ['AWS_REGION'],
+    endpoint_url=os.environ['AWS_ENDPOINT_URL_S3'],
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],         # token_id
+    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'], # s3_secret_access_key
 )
 ```
 
 ```bash
-export AWS_ACCESS_KEY_ID=$NEON_STORAGE_ACCESS_KEY_ID
-export AWS_SECRET_ACCESS_KEY=$NEON_STORAGE_SECRET_ACCESS_KEY
-export AWS_DEFAULT_REGION=us-east-2
+# These env vars are already in AWS-standard form; no remapping needed.
+export AWS_ACCESS_KEY_ID=nak_live_...
+export AWS_SECRET_ACCESS_KEY=nsk_live_...
+export AWS_REGION=us-east-2
 ```
 
 </CodeTabs>
@@ -126,10 +127,10 @@ export AWS_DEFAULT_REGION=us-east-2
 For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically — no manual copy-paste from the API response:
 
 ```bash
-neonctl env pull .env
+neonctl env pull --file .env.local
 ```
 
-This populates `NEON_STORAGE_ENDPOINT`, `NEON_STORAGE_ACCESS_KEY_ID`, and `NEON_STORAGE_SECRET_ACCESS_KEY` for the current branch alongside your database connection string. To check the current credential status:
+This populates `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` for the current branch alongside your database connection string. To check the current credential status:
 
 ```bash
 neonctl config status
@@ -151,25 +152,26 @@ The S3 data plane enforces scope on every request. A credential without a storag
 
 When your code runs inside Neon Functions, Neon injects storage credentials automatically. You don't need to create a credential:
 
-| Variable                         | Value                             |
-| -------------------------------- | --------------------------------- |
-| `NEON_STORAGE_ENDPOINT`          | Branch S3 endpoint URL            |
-| `NEON_STORAGE_REGION`            | Storage region (e.g. `us-east-2`) |
-| `NEON_STORAGE_ACCESS_KEY_ID`     | S3 Access Key ID                  |
-| `NEON_STORAGE_SECRET_ACCESS_KEY` | S3 Secret Access Key              |
-| `NEON_STORAGE_FORCE_PATH_STYLE`  | Always `"true"`                   |
+| Variable                        | Value                                                     |
+| ------------------------------- | --------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`             | S3 Access Key ID                                          |
+| `AWS_SECRET_ACCESS_KEY`         | S3 Secret Access Key                                      |
+| `AWS_ENDPOINT_URL_S3`           | Branch S3 endpoint URL                                    |
+| `AWS_REGION`                    | Storage region (e.g. `us-east-2`)                         |
+| `NEON_STORAGE_REGION`           | Region, e.g. `us-east-2` (also available as `AWS_REGION`) |
+| `NEON_STORAGE_FORCE_PATH_STYLE` | Always `"true"` — path-style addressing is required       |
 
-Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Use them directly with your S3 client:
+Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically. Only `forcePathStyle` needs explicit configuration:
 
 ```typescript
 import { S3Client } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
-  region: process.env.NEON_STORAGE_REGION,
-  endpoint: process.env.NEON_STORAGE_ENDPOINT,
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   credentials: {
-    accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
   forcePathStyle: true,
 });
@@ -215,11 +217,11 @@ To rotate a credential, create a new one, update your environment variables, the
 
 ## Common errors
 
-| Error                       | Cause                               | Fix                                                                                      |
-| --------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------- |
-| `403 InvalidAccessKeyId`    | `token_id` is wrong or revoked      | Check `NEON_STORAGE_ACCESS_KEY_ID` is set to the full UUID                               |
-| `403 SignatureDoesNotMatch` | Wrong secret access key             | Check `NEON_STORAGE_SECRET_ACCESS_KEY` is the 64-char hex value from credential creation |
-| `403 AccessDenied`          | Credential lacks the required scope | Recreate with `storage:write` for uploads/deletes                                        |
-| `403 AccessDenied`          | Branch not in credential lineage    | Use a credential created on this branch or an ancestor                                   |
+| Error                       | Cause                               | Fix                                                                                                                           |
+| --------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `403 InvalidAccessKeyId`    | `token_id` is wrong or revoked      | Check `AWS_ACCESS_KEY_ID` is set correctly. If you rotated the credential, update the value.                                  |
+| `403 SignatureDoesNotMatch` | Wrong secret access key             | Check `AWS_SECRET_ACCESS_KEY` is the value from credential creation. Secrets can't be retrieved. Revoke and recreate if lost. |
+| `403 AccessDenied`          | Credential lacks the required scope | Recreate with `storage:write` for uploads/deletes                                                                             |
+| `403 AccessDenied`          | Branch not in credential lineage    | Use a credential created on this branch or an ancestor                                                                        |
 
 <NeedHelp/>

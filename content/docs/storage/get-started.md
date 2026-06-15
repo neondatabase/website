@@ -6,12 +6,39 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-15T20:35:44.700Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 To follow this guide, you need a new project in the AWS us-east-2 region.
+
+## Recommended: enable storage with neon.ts
+
+The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Declare buckets under `preview.buckets`, then run `neonctl deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neondatabase/config/v1';
+
+export default defineConfig({
+  preview: {
+    buckets: {
+      'my-bucket': {},                          // private (default)
+      'public-assets': { access: 'public_read' },
+    },
+  },
+});
+```
+
+```bash
+neonctl deploy          # provisions buckets and writes AWS_* vars to .env.local
+```
+
+After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`, and `NEON_STORAGE_FORCE_PATH_STYLE`. Skip to [Configure your S3 client](#configure-your-s3-client) below.
+
+---
+
+If you prefer to manage credentials manually (for example, for CI or production deployments), follow the steps below.
 
 <Steps>
 
@@ -39,8 +66,8 @@ The response includes your S3 credentials. Store them immediately. You'll only g
 Set these as environment variables:
 
 ```bash
-export NEON_STORAGE_ACCESS_KEY_ID=550e8400-e29b-41d4-a716-446655440000   # token_id
-export NEON_STORAGE_SECRET_ACCESS_KEY=a665a45920422f9d...                 # s3_secret_access_key
+export AWS_ACCESS_KEY_ID=550e8400-e29b-41d4-a716-446655440000   # token_id
+export AWS_SECRET_ACCESS_KEY=a665a459...                         # s3_secret_access_key
 ```
 
 Your project ID and branch ID are available in the Neon Console URL or via `neonctl projects list` and `neonctl branches list`.
@@ -66,8 +93,8 @@ curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id
 Set these as environment variables:
 
 ```bash
-export NEON_STORAGE_ENDPOINT=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
-export NEON_STORAGE_REGION=us-east-2
+export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
+export AWS_REGION=us-east-2
 ```
 
 A `404` response means Storage is not yet enabled for that branch. Make sure you're using a project in the AWS us-east-2 region.
@@ -103,11 +130,11 @@ import { S3Client } from '@aws-sdk/client-s3';
 import 'dotenv/config';
 
 export const client = new S3Client({
-  region: 'us-east-2',
-  endpoint: process.env.NEON_STORAGE_ENDPOINT,
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   credentials: {
-    accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
   forcePathStyle: true,
 });
@@ -122,18 +149,17 @@ load_dotenv()
 
 client = boto3.client(
     's3',
-    region_name='us-east-2',
-    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
-    aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],
+    region_name=os.environ['AWS_REGION'],
+    endpoint_url=os.environ['AWS_ENDPOINT_URL_S3'],
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
 )
 ```
 
-```bash
-# Add to ~/.aws/credentials or export as env vars
-export AWS_ACCESS_KEY_ID=$NEON_STORAGE_ACCESS_KEY_ID
-export AWS_SECRET_ACCESS_KEY=$NEON_STORAGE_SECRET_ACCESS_KEY
-export AWS_DEFAULT_REGION=us-east-2
+```bash shouldWrap
+# The AWS CLI reads AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_REGION
+# from the environment automatically. Set the endpoint explicitly:
+aws configure set endpoint_url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -179,11 +205,11 @@ print('Uploaded!')
 # Create a bucket
 aws s3api create-bucket \
   --bucket my-bucket \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 
 # Upload a file
 aws s3 cp hello.txt s3://my-bucket/hello.txt \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -212,7 +238,7 @@ print(response['Body'].read().decode('utf-8'))  # Hello from Neon Storage!
 
 ```bash shouldWrap
 aws s3 cp s3://my-bucket/hello.txt ./downloaded.txt \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
