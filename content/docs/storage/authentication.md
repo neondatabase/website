@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:35:44.700Z'
+updatedOn: '2026-06-15T20:45:19.947Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -52,11 +52,11 @@ The response includes these fields. Both secrets are returned once only, so stor
 
 ```json
 {
-  "token_id": "550e8400-e29b-41d4-a716-446655440000",
-  "token_id_short": "550e8400e29b",
+  "token_id": "nak_live_...",
+  "token_id_short": "9043e374b584...",
   "name": "my-app-credential",
-  "api_token": "nt_live_550e8400e29b_...",
-  "s3_secret_access_key": "a665a459...",
+  "api_token": "nt_live_...",
+  "s3_secret_access_key": "nsk_live_...",
   "scopes": ["storage:read", "storage:write"],
   "branch_id": "br-winter-pond-aptw82ef",
   "created_at": "2026-06-08T00:00:00Z",

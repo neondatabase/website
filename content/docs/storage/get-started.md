@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:35:44.700Z'
+updatedOn: '2026-06-15T20:45:19.947Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -57,8 +57,8 @@ The response includes your S3 credentials. Store them immediately. You'll only g
 
 ```json
 {
-  "token_id": "550e8400-e29b-41d4-a716-446655440000",
-  "s3_secret_access_key": "a665a459...",
+  "token_id": "nak_live_...",
+  "s3_secret_access_key": "nsk_live_...",
   ...
 }
 ```
@@ -66,8 +66,8 @@ The response includes your S3 credentials. Store them immediately. You'll only g
 Set these as environment variables:
 
 ```bash
-export AWS_ACCESS_KEY_ID=550e8400-e29b-41d4-a716-446655440000   # token_id
-export AWS_SECRET_ACCESS_KEY=a665a459...                         # s3_secret_access_key
+export AWS_ACCESS_KEY_ID=nak_live_...   # token_id
+export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 ```
 
 Your project ID and branch ID are available in the Neon Console URL or via `neonctl projects list` and `neonctl branches list`.
