@@ -1,10 +1,10 @@
 ---
-title: Getting started with Neon and SigNoz
+title: How to send Postgres logs and metrics from Neon to SigNoz
 subtitle: Send Neon metrics and Postgres logs to SigNoz using the OpenTelemetry integration
 author: nagesh-bansal
 enableTableOfContents: true
 createdAt: '2026-06-12T00:00:00.000Z'
-updatedOn: '2026-06-15T12:50:23.616Z'
+updatedOn: '2026-06-15T12:58:38.859Z'
 ---
 
 [SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that brings logs, metrics, and traces together in one application. [Neon's OpenTelemetry integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs to SigNoz, so you can monitor your database alongside the rest of your stack.
