@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2026-06-12T10:21:08.568Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Authentication
@@ -98,8 +98,6 @@ updatedOn: '2026-06-12T10:21:08.568Z'
 <a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Neon Postgres to Grafana Cloud" icon="grafana"></a>
 
 <a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
-
-<a href="/guides/signoz-otel-neon" title="SigNoz" description="Send metrics and Postgres logs from Neon to SigNoz with OpenTelemetry" icon="signoz"></a>
 
 </TechCards>
 
