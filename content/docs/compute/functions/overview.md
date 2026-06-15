@@ -7,7 +7,7 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-12T21:36:14.443Z'
+updatedOn: '2026-06-15T11:31:11.292Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -43,6 +43,16 @@ Functions use the Workers-style handler interface standardized by [WinterTC](htt
 <a href="/docs/compute/functions/reference/neon-ts" description="Configuration schema for functions and branch policy." icon="setup">neon.ts reference</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
+
+</DetailIconCards>
+
+## Example apps
+
+<DetailIconCards>
+
+<a href="https://github.com/andrelandgraf/rate-my-pricing" description="A pricing clarity scorer that runs an LLM agent on a Neon Function, holding connections open across multiple model calls and writing results to Postgres." icon="github">Rate My Pricing</a>
+
+<a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that uses a JWT-protected Neon Function as its backend, handling long-running image generation without serverless timeouts." icon="github">Vibecastly</a>
 
 </DetailIconCards>
 
