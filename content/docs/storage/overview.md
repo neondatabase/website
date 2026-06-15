@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-12T16:38:26.381Z'
+updatedOn: '2026-06-15T10:38:40.119Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -32,6 +32,14 @@ During the private preview, Storage is available for new projects in the AWS us-
 <a href="/docs/storage/objects" description="Upload, download, list, delete, and generate presigned URLs for objects." icon="data">Objects</a>
 
 <a href="/docs/storage/authentication" description="Understand how Neon credentials map to S3 access keys." icon="lock-landscape">Authentication</a>
+
+</DetailIconCards>
+
+## Example apps
+
+<DetailIconCards>
+
+<a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that stores user photos and generated images in branch-scoped Neon Storage buckets, served via presigned URLs from a Neon Function." icon="github">Vibecastly</a>
 
 </DetailIconCards>
 
