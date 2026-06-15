@@ -7,7 +7,7 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-15T11:31:11.292Z'
+updatedOn: '2026-06-15T14:31:22.519Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -46,14 +46,24 @@ Functions use the Workers-style handler interface standardized by [WinterTC](htt
 
 </DetailIconCards>
 
-## Example apps
+## Starter templates
 
-<DetailIconCards>
+Browse templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one directly with `neonctl bootstrap`:
 
-<a href="https://github.com/andrelandgraf/rate-my-pricing" description="A pricing clarity scorer that runs an LLM agent on a Neon Function, holding connections open across multiple model calls and writing results to Postgres." icon="github">Rate My Pricing</a>
+```bash
+neonctl bootstrap
+```
 
-<a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that uses a JWT-protected Neon Function as its backend, handling long-running image generation without serverless timeouts." icon="github">Vibecastly</a>
+Use `--template` to skip the interactive picker:
 
-</DetailIconCards>
+| Template        | What it builds                                                                         |
+| --------------- | -------------------------------------------------------------------------------------- |
+| `hono`          | REST API with Drizzle and Postgres on Neon Functions                                   |
+| `ai-sdk`        | Image-generation agent with AI Gateway, Object Storage, and Postgres on Neon Functions |
+| `mastra`        | Personal assistant with AI Gateway and Postgres-backed memory on Neon Functions        |
+| `realtime-chat` | Realtime chat with Next.js, Neon Auth, and WebSockets on Neon Functions                |
+| `realtime-sse`  | Realtime counter with TanStack Router and SSE on Neon Functions                        |
+
+`neonctl bootstrap` scaffolds files, links to a Neon project, and pulls env vars. Then follow the README to set up and deploy.
 
 <NeedHelp/>
