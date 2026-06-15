@@ -3,10 +3,10 @@ title: OpenAI Responses API
 subtitle: Use the OpenAI Responses API with Neon AI Gateway
 summary: >-
   The OpenAI Responses endpoint exposes the OpenAI Responses API through Neon
-  AI Gateway. Required for gpt-5-5-pro and codex model variants, which do not
-  work with the chat completions endpoint.
+  AI Gateway. Required for codex model variants, which do not work with the
+  chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T18:57:11.444Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -16,7 +16,7 @@ The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platfor
 **Base URL:** `https://<branch-host>/ai-gateway/openai/v1`
 
 <Admonition type="warning">
-`databricks-gpt-5-5-pro` and all codex model variants (`databricks-gpt-5-3-codex`, `databricks-gpt-5-2-codex`, `databricks-gpt-5-1-codex-max`, `databricks-gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
+All codex model variants (`databricks-gpt-5-3-codex`, `databricks-gpt-5-2-codex`, `databricks-gpt-5-1-codex-max`, `databricks-gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
 </Admonition>
 
 ## Supported models
@@ -25,8 +25,6 @@ This endpoint accepts OpenAI models only:
 
 | Model ID                        | Notes                  |
 | ------------------------------- | ---------------------- |
-| `databricks-gpt-5-5-pro`        | Requires this endpoint |
-| `databricks-gpt-5-5`            |                        |
 | `databricks-gpt-5-4`            |                        |
 | `databricks-gpt-5-4-mini`       |                        |
 | `databricks-gpt-5-4-nano`       |                        |

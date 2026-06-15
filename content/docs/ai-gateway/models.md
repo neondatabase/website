@@ -7,7 +7,7 @@ summary: >-
   databricks- prefix, but the short form without the prefix also works. Use
   either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T18:57:11.444Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -83,22 +83,20 @@ Endpoints are shown in short form. See [Which endpoint to use](#which-endpoint-t
 
 All OpenAI models have a 400K token context window and accept text and image inputs.
 
-| Model ID                        | Endpoints                               | Notes                                                                              |
-| ------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| `databricks-gpt-5-5-pro`        | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses). Prompt caching |
-| `databricks-gpt-5-5`            | `chat/completions` · `openai/responses` | Prompt caching                                                                     |
-| `databricks-gpt-5-4`            | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-4-mini`       | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-4-nano`       | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-3-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
-| `databricks-gpt-5-2-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
-| `databricks-gpt-5-2`            | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-1-codex-max`  | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
-| `databricks-gpt-5-1-codex-mini` | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses)                 |
-| `databricks-gpt-5-1`            | `chat/completions` · `openai/responses` | Instant + Thinking modes                                                           |
-| `databricks-gpt-5`              | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-mini`         | `chat/completions` · `openai/responses` |                                                                                    |
-| `databricks-gpt-5-nano`         | `chat/completions` · `openai/responses` |                                                                                    |
+| Model ID                        | Endpoints                               | Notes                                                              |
+| ------------------------------- | --------------------------------------- | ------------------------------------------------------------------ |
+| `databricks-gpt-5-4`            | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-4-mini`       | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-4-nano`       | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-3-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-2-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-2`            | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-1-codex-max`  | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-1-codex-mini` | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `databricks-gpt-5-1`            | `chat/completions` · `openai/responses` | Instant + Thinking modes                                           |
+| `databricks-gpt-5`              | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-mini`         | `chat/completions` · `openai/responses` |                                                                    |
+| `databricks-gpt-5-nano`         | `chat/completions` · `openai/responses` |                                                                    |
 
 ### Databricks
 
@@ -138,14 +136,14 @@ Text input only. Chat completions only.
 
 Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is the recommended starting point and works with all providers. Use a provider-specific endpoint when required:
 
-| Provider                               | Recommended endpoint                     | Notes                                                                                    |
-| -------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic                              | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
-| OpenAI (most models)                   | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
-| OpenAI (`gpt-5-5-pro`, codex variants) | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
-| Google Gemini                          | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B                     | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
-| Meta, DeepSeek, Databricks, Alibaba    | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
+| Provider                            | Recommended endpoint                     | Notes                                                                                    |
+| ----------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Anthropic                           | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
+| OpenAI (most models)                | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
+| OpenAI (codex variants)             | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
+| Google Gemini                       | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B                  | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
+| Meta, DeepSeek, Databricks, Alibaba | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
 
 ## Provider terms
 
