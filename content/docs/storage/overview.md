@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T10:38:40.119Z'
+updatedOn: '2026-06-15T14:32:45.581Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -35,12 +35,24 @@ During the private preview, Storage is available for new projects in the AWS us-
 
 </DetailIconCards>
 
-## Example apps
+## Starter templates
 
-<DetailIconCards>
+Browse templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one directly with `neonctl bootstrap`:
 
-<a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that stores user photos and generated images in branch-scoped Neon Storage buckets, served via presigned URLs from a Neon Function." icon="github">Vibecastly</a>
+```bash
+neonctl bootstrap
+```
 
-</DetailIconCards>
+Use `--template` to skip the interactive picker:
+
+| Template        | What it builds                                                                         |
+| --------------- | -------------------------------------------------------------------------------------- |
+| `hono`          | REST API with Drizzle and Postgres on Neon Functions                                   |
+| `ai-sdk`        | Image-generation agent with AI Gateway, Object Storage, and Postgres on Neon Functions |
+| `mastra`        | Personal assistant with AI Gateway and Postgres-backed memory on Neon Functions        |
+| `realtime-chat` | Realtime chat with Next.js, Neon Auth, and WebSockets on Neon Functions                |
+| `realtime-sse`  | Realtime counter with TanStack Router and SSE on Neon Functions                        |
+
+`neonctl bootstrap` scaffolds files, links to a Neon project, and pulls env vars. Then follow the README to set up and deploy.
 
 <NeedHelp/>
