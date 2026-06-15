@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260615';
+const VIDEO_VERSION = '20260615-1';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 2000;
@@ -147,7 +147,7 @@ const HeroServices = ({ items }) => {
   const itemRefs = useRef([]);
   const isUserScrollingRef = useRef(false);
   const { ref: inViewRef, inView: isListInView } = useInView({ threshold: 0.2 });
-  const { ref: autoPlayInViewRef, inView: isAutoPlayInView } = useInView({ threshold: 0.5 });
+  const { ref: autoPlayInViewRef, inView: isAutoPlayInView } = useInView({ threshold: 0.4 });
 
   const setListRef = useCallback(
     (node) => {

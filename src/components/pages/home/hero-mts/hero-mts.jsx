@@ -27,17 +27,14 @@ const logos = [
 
 const HeroMts = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
-    <Container
-      className="relative z-30 pt-96 pb-2 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
-      size="1600"
-    >
+    <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
           A DATABRICKS COMPANY
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-[1120px] text-[72px] leading-dense tracking-tighter xl:max-w-[860px] xl:text-[64px] lg:max-w-[720px] lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
+      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
         Neon is the Postgres backend
         <br />
         designed for apps and agents.
@@ -94,8 +91,8 @@ const HeroMts = () => (
       */}
       <PauseableVideo
         className={cn(
-          'relative -top-16 left-1/2 w-[1920px] -translate-x-1/2',
-          'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
+          'relative -top-16 left-1/2 w-480 -translate-x-1/2',
+          'xl:-top-12.5 xl:w-326 lg:-top-2 lg:w-254 sm:hidden'
         )}
         width={1920}
         height={832}
@@ -109,7 +106,7 @@ const HeroMts = () => (
         <source src={`${LINKS.cdn}/public/pages/home/hero/hero.webm`} type="video/webm" />
       </PauseableVideo>
       <Image
-        className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block"
+        className="relative left-[40%] hidden w-188 max-w-none -translate-x-1/2 sm:block"
         src={mobileBgIllustration}
         width={752}
         height={326}
@@ -119,7 +116,7 @@ const HeroMts = () => (
       />
     </div>
 
-    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-[165px] lg:h-[156px] sm:h-[258px]" />
+    <div className="absolute bottom-0 z-20 h-22 w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-41 lg:h-39 sm:h-64.5" />
   </section>
 );
 
