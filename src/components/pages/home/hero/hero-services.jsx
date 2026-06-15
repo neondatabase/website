@@ -26,6 +26,16 @@ const getScrollPaddingLeft = (element) => {
 const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase, width }) => {
   const videoRef = useRef(null);
   const endDelayTimeoutRef = useRef(null);
+  const shouldLoopRef = useRef(shouldLoop);
+  const onEndedRef = useRef(onEnded);
+
+  useEffect(() => {
+    shouldLoopRef.current = shouldLoop;
+  }, [shouldLoop]);
+
+  useEffect(() => {
+    onEndedRef.current = onEnded;
+  }, [onEnded]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -46,19 +56,20 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
     }
   }, [isActive, title]);
 
-  useEffect(
-    () => () => {
+  useEffect(() => () => window.clearTimeout(endDelayTimeoutRef.current), []);
+
+  useEffect(() => {
+    if (!isActive) {
       window.clearTimeout(endDelayTimeoutRef.current);
-    },
-    [isActive, shouldLoop]
-  );
+    }
+  }, [isActive]);
 
   const handleEnded = useCallback(() => {
     const video = videoRef.current;
 
     window.clearTimeout(endDelayTimeoutRef.current);
     endDelayTimeoutRef.current = window.setTimeout(() => {
-      if (shouldLoop && video) {
+      if (shouldLoopRef.current && video) {
         video.currentTime = 0;
         const playPromise = video.play();
         if (playPromise !== undefined) {
@@ -69,9 +80,9 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
         return;
       }
 
-      onEnded();
+      onEndedRef.current();
     }, VIDEO_SWITCH_DELAY_MS);
-  }, [onEnded, shouldLoop, title]);
+  }, [title]);
 
   return (
     <video
