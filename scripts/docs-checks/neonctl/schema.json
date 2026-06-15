@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.26.1",
-  "generatedAt": "2026-06-12T17:35:24.759Z",
+  "neonctlVersion": "2.26.2",
+  "generatedAt": "2026-06-14T21:33:24.682Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -1236,6 +1236,10 @@
           "type": "boolean",
           "describe": "Skip the Neon Auth setup phase.",
           "default": false
+        },
+        "data": {
+          "type": "string",
+          "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
         },
         "agent": {
           "type": "string",
