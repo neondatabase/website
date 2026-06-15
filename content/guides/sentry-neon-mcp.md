@@ -108,7 +108,7 @@ Instead, use Neon branching through MCP to create an isolated copy of production
 Prompt Cursor with the remediation task:
 
 ```text shouldWrap
-Ok, please add indexes. Test if it solves the issue by using a seperate Neon Branch.
+Ok, please add indexes. Test if it solves the issue by using a separate Neon Branch.
 ```
 
 ![Cursor transitions from Sentry findings to Neon branch remediation](/docs/guides/neon-mcp-remediation-request.png)
