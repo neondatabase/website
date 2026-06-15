@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -21,11 +21,11 @@ The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the 
 
 ## Supported models
 
-This endpoint accepts Anthropic models only. Use the `databricks-` prefixed model IDs from the [AI Gateway catalog](/docs/ai-gateway/models):
+This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/ai-gateway/models) for the full list. Supported models:
 
-- `databricks-claude-opus-4-8`, `databricks-claude-opus-4-7`, `databricks-claude-opus-4-6`, `databricks-claude-opus-4-5`
-- `databricks-claude-sonnet-4-6`
-- `databricks-claude-haiku-4-5`
+- `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`
+- `claude-sonnet-4-6`
+- `claude-haiku-4-5`
 
 Sending a non-Anthropic model ID returns `400 model is not available on this endpoint`. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
 
@@ -37,12 +37,12 @@ Sending a non-Anthropic model ID returns `400 model is not available on this end
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`,
 });
 
 const message = await client.messages.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   max_tokens: 1024,
   messages: [{ role: 'user', content: 'What is Neon?' }],
 });
@@ -55,12 +55,12 @@ import anthropic
 import os
 
 client = anthropic.Anthropic(
-    api_key=os.environ['NEON_AI_GATEWAY_KEY'],
+    api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/anthropic",
 )
 
 message = client.messages.create(
-    model='databricks-claude-sonnet-4-6',
+    model='claude-sonnet-4-6',
     max_tokens=1024,
     messages=[{'role': 'user', 'content': 'What is Neon?'}],
 )
@@ -70,11 +70,11 @@ print(message.content[0].text)
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/anthropic/v1/messages" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
-    "model": "databricks-claude-sonnet-4-6",
+    "model": "claude-sonnet-4-6",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "What is Neon?"}]
   }'
@@ -94,7 +94,7 @@ The gateway forwards the `cache_control` field to Anthropic unchanged. Prompt ca
 
 ```typescript shouldWrap
 const message = await client.messages.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   max_tokens: 1024,
   system: [
     { type: 'text', text: 'You are a helpful assistant.' },
@@ -114,7 +114,7 @@ console.log(message.usage);
 
 ```python shouldWrap
 message = client.messages.create(
-    model='databricks-claude-sonnet-4-6',
+    model='claude-sonnet-4-6',
     max_tokens=1024,
     system=[
         {'type': 'text', 'text': 'You are a helpful assistant.'},
@@ -142,7 +142,7 @@ The gateway forwards the `thinking` parameter to Anthropic unchanged. Set `budge
 
 ```typescript shouldWrap
 const message = await client.messages.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   max_tokens: 16000,
   thinking: {
     type: 'enabled',
@@ -162,7 +162,7 @@ for (const block of message.content) {
 
 ```python shouldWrap
 message = client.messages.create(
-    model='databricks-claude-sonnet-4-6',
+    model='claude-sonnet-4-6',
     max_tokens=16000,
     thinking={
         'type': 'enabled',
@@ -185,7 +185,7 @@ for block in message.content:
 The gateway forwards these request headers to the upstream provider:
 `Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `User-Agent`.
 
-All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding. Your `NEON_AI_GATEWAY_KEY` is never sent to Anthropic directly.
+All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding. Your `NEON_AI_GATEWAY_TOKEN` is never sent to Anthropic directly.
 
 ## Error handling
 

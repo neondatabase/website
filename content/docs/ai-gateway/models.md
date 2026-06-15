@@ -3,16 +3,15 @@ title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
   Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
-  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. Model IDs use the
-  databricks- prefix, but the short form without the prefix also works. Use
-  either form in the model field of any request.
+  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. Use short model IDs
+  like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-06-15T18:57:11.444Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Both forms are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
+Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field — for example, `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
 Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
@@ -26,16 +25,16 @@ Model availability may vary by region. The catalog expands over time, so check b
 
 Not sure which model to use? Start here.
 
-| I want to...                            | Recommended model                                               |
-| --------------------------------------- | --------------------------------------------------------------- |
-| Build a general chat or reasoning app   | `databricks-claude-sonnet-4-6`                                  |
-| Understand images                       | `databricks-claude-sonnet-4-6` or `databricks-gemini-2-5-flash` |
-| Process audio or video                  | `databricks-gemini-3-5-flash`                                   |
-| Generate or review code                 | `databricks-gpt-5-3-codex`                                      |
-| Run extended or deep reasoning          | `databricks-claude-opus-4-7` or `databricks-gpt-5-1`            |
-| Handle very long documents (1M+ tokens) | `databricks-gemini-3-1-pro` or `databricks-claude-opus-4-7`     |
-| Keep costs low for lightweight tasks    | `databricks-claude-haiku-4-5` or `databricks-gpt-5-4-nano`      |
-| Use an open-weight model                | `databricks-gpt-oss-120b`                                       |
+| I want to...                            | Recommended model                         |
+| --------------------------------------- | ----------------------------------------- |
+| Build a general chat or reasoning app   | `claude-sonnet-4-6`                       |
+| Understand images                       | `claude-sonnet-4-6` or `gemini-2-5-flash` |
+| Process audio or video                  | `gemini-3-5-flash`                        |
+| Generate or review code                 | `gpt-5-3-codex`                           |
+| Run extended or deep reasoning          | `claude-opus-4-7` or `gpt-5-1`            |
+| Handle very long documents (1M+ tokens) | `gemini-3-1-pro` or `claude-opus-4-7`     |
+| Keep costs low for lightweight tasks    | `claude-haiku-4-5` or `gpt-5-4-nano`      |
+| Use an open-weight model                | `gpt-oss-120b`                            |
 
 ## Rate limits
 
@@ -54,49 +53,49 @@ Endpoints are shown in short form. See [Which endpoint to use](#which-endpoint-t
 
 ### Anthropic
 
-| Model ID                       | Inputs      | Context | Endpoints                                 | Notes                                    |
-| ------------------------------ | ----------- | ------- | ----------------------------------------- | ---------------------------------------- |
-| `databricks-claude-opus-4-8`   | text, image | —       | `chat/completions` · `anthropic/messages` | Most capable Claude model                |
-| `databricks-claude-opus-4-7`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Extended thinking available              |
-| `databricks-claude-opus-4-6`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Adaptive thinking with max effort level  |
-| `databricks-claude-opus-4-5`   | text, image | 200K    | `chat/completions` · `anthropic/messages` | Extended thinking available              |
-| `databricks-claude-opus-4-1`   | text, image | 200K    | `chat/completions` · `anthropic/messages` |                                          |
-| `databricks-claude-sonnet-4-6` | text, image | —       | `chat/completions` · `anthropic/messages` | Recommended. Instant + extended thinking |
-| `databricks-claude-sonnet-4-5` | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
-| `databricks-claude-sonnet-4`   | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
-| `databricks-claude-haiku-4-5`  | text, image | —       | `chat/completions` · `anthropic/messages` | Fast and cost-effective                  |
+| Model ID            | Inputs      | Context | Endpoints                                 | Notes                                    |
+| ------------------- | ----------- | ------- | ----------------------------------------- | ---------------------------------------- |
+| `claude-opus-4-8`   | text, image | —       | `chat/completions` · `anthropic/messages` | Most capable Claude model                |
+| `claude-opus-4-7`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Extended thinking available              |
+| `claude-opus-4-6`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Adaptive thinking with max effort level  |
+| `claude-opus-4-5`   | text, image | 200K    | `chat/completions` · `anthropic/messages` | Extended thinking available              |
+| `claude-opus-4-1`   | text, image | 200K    | `chat/completions` · `anthropic/messages` |                                          |
+| `claude-sonnet-4-6` | text, image | —       | `chat/completions` · `anthropic/messages` | Recommended. Instant + extended thinking |
+| `claude-sonnet-4-5` | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
+| `claude-sonnet-4`   | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
+| `claude-haiku-4-5`  | text, image | —       | `chat/completions` · `anthropic/messages` | Fast and cost-effective                  |
 
 ### Google
 
-| Model ID                           | Inputs                    | Context | Endpoints                     | Notes                 |
-| ---------------------------------- | ------------------------- | ------- | ----------------------------- | --------------------- |
-| `databricks-gemini-3-5-flash`      | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `databricks-gemini-3-1-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `databricks-gemini-3-1-flash-lite` | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `databricks-gemini-3-pro`          | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `databricks-gemini-3-flash`        | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `databricks-gemini-2-5-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` | Deep Think Mode       |
-| `databricks-gemini-2-5-flash`      | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `databricks-gemma-3-12b`           | text, image               | 128K    | `chat/completions`            | Chat completions only |
+| Model ID                | Inputs                    | Context | Endpoints                     | Notes                 |
+| ----------------------- | ------------------------- | ------- | ----------------------------- | --------------------- |
+| `gemini-3-5-flash`      | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
+| `gemini-3-1-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
+| `gemini-3-1-flash-lite` | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
+| `gemini-3-pro`          | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
+| `gemini-3-flash`        | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
+| `gemini-2-5-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` | Deep Think Mode       |
+| `gemini-2-5-flash`      | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
+| `gemma-3-12b`           | text, image               | 128K    | `chat/completions`            | Chat completions only |
 
 ### OpenAI
 
 All OpenAI models have a 400K token context window and accept text and image inputs.
 
-| Model ID                        | Endpoints                               | Notes                                                              |
-| ------------------------------- | --------------------------------------- | ------------------------------------------------------------------ |
-| `databricks-gpt-5-4`            | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-4-mini`       | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-4-nano`       | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-3-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-2-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-2`            | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-1-codex-max`  | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-1-codex-mini` | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `databricks-gpt-5-1`            | `chat/completions` · `openai/responses` | Instant + Thinking modes                                           |
-| `databricks-gpt-5`              | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-mini`         | `chat/completions` · `openai/responses` |                                                                    |
-| `databricks-gpt-5-nano`         | `chat/completions` · `openai/responses` |                                                                    |
+| Model ID             | Endpoints                               | Notes                                                              |
+| -------------------- | --------------------------------------- | ------------------------------------------------------------------ |
+| `gpt-5-4`            | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-4-mini`       | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-4-nano`       | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-3-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `gpt-5-2-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `gpt-5-2`            | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-1-codex-max`  | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `gpt-5-1-codex-mini` | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
+| `gpt-5-1`            | `chat/completions` · `openai/responses` | Instant + Thinking modes                                           |
+| `gpt-5`              | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-mini`         | `chat/completions` · `openai/responses` |                                                                    |
+| `gpt-5-nano`         | `chat/completions` · `openai/responses` |                                                                    |
 
 ### Databricks
 

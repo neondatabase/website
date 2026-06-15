@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -19,7 +19,9 @@ You need a new project in the AWS us-east-2 region, and foundation model access 
 
 ## Create a credential
 
-Use the Neon API to create a credential with the `ai_gateway:invoke` scope:
+In the Neon Console, select your branch, click **Credentials** under **APP BACKEND**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing — it's shown only once.
+
+Or use the API:
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -28,13 +30,15 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
 ```
 
-The response includes an `api_token` field. That is your credential. Store it as an environment variable:
+<Callout title="Using neon.ts?">
+If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` and run `neonctl deploy`. Credentials are provisioned and pulled into your local `.env` automatically — no manual creation needed. See [Authentication](/docs/ai-gateway/authentication) for details.
+</Callout>
+
+Store the credential as an environment variable:
 
 ```bash
-export NEON_AI_GATEWAY_KEY=nt_live_...
+export NEON_AI_GATEWAY_TOKEN=nt_live_...
 ```
-
-Your project ID and branch ID are available in the Neon Console URL or via `neonctl projects list` and `neonctl branches list`.
 
 ## Find your branch host
 
@@ -87,12 +91,12 @@ import OpenAI from 'openai';
 import 'dotenv/config';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const response = await client.chat.completions.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   messages: [{ role: 'user', content: 'Hello!' }],
 });
 
@@ -107,12 +111,12 @@ import os
 load_dotenv()
 
 client = OpenAI(
-    api_key=os.environ["NEON_AI_GATEWAY_KEY"],
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 response = client.chat.completions.create(
-    model="databricks-claude-sonnet-4-6",
+    model="claude-sonnet-4-6",
     messages=[{"role": "user", "content": "Hello!"}],
 )
 
@@ -121,10 +125,10 @@ print(response.choices[0].message.content)
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-claude-sonnet-4-6",
+    "model": "claude-sonnet-4-6",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
@@ -142,12 +146,12 @@ import OpenAI from 'openai';
 import 'dotenv/config';
 
 const client = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_KEY,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const stream = await client.chat.completions.create({
-  model: 'databricks-claude-sonnet-4-6',
+  model: 'claude-sonnet-4-6',
   messages: [{ role: 'user', content: 'Write a haiku about serverless databases.' }],
   stream: true,
 });
@@ -165,12 +169,12 @@ import os
 load_dotenv()
 
 client = OpenAI(
-    api_key=os.environ["NEON_AI_GATEWAY_KEY"],
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 with client.chat.completions.create(
-    model="databricks-claude-sonnet-4-6",
+    model="claude-sonnet-4-6",
     messages=[{"role": "user", "content": "Write a haiku about serverless databases."}],
     stream=True,
 ) as stream:
@@ -180,10 +184,10 @@ with client.chat.completions.create(
 
 ```bash shouldWrap
 curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
-  -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "databricks-claude-sonnet-4-6",
+    "model": "claude-sonnet-4-6",
     "messages": [{"role": "user", "content": "Write a haiku about serverless databases."}],
     "stream": true
   }'
@@ -197,13 +201,13 @@ Change the `model` field to use a different provider. No other code changes requ
 
 ```typescript
 // Anthropic
-model: 'databricks-claude-sonnet-4-6'
+model: 'claude-sonnet-4-6'
 
 // OpenAI
-model: 'databricks-gpt-5-4'
+model: 'gpt-5-4'
 
 // Google
-model: 'databricks-gemini-2-5-flash'
+model: 'gemini-2-5-flash'
 ```
 
 See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
