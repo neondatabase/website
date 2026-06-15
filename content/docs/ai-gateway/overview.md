@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to 39 models across 7 providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T10:38:48.744Z'
+updatedOn: '2026-06-15T11:08:43.679Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -38,7 +38,7 @@ During the private preview, AI Gateway is available for new projects in the AWS 
 
 <DetailIconCards>
 
-<a href="https://github.com/andrelandgraf/rate-my-pricing" description="A pricing clarity scorer that runs an LLM agent on a Neon Function, routing model calls through AI Gateway — no separate provider credentials required." icon="github">Rate My Pricing</a>
+<a href="https://github.com/andrelandgraf/rate-my-pricing" description="A pricing clarity scorer that runs an LLM agent on a Neon Function, routing model calls through AI Gateway with no separate provider credentials required." icon="github">Rate My Pricing</a>
 
 <a href="https://github.com/andrelandgraf/vibecastly" description="An AI image studio that routes OpenAI image generation and Claude moderation through the same AI Gateway config, from a single Neon Function." icon="github">Vibecastly</a>
 
