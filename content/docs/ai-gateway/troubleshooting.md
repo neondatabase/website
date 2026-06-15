@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:47.636Z'
+updatedOn: '2026-06-15T18:57:11.444Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -53,7 +53,7 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 **Fix:** Check which endpoint the model requires:
 
 - Anthropic models (`databricks-claude-*`) on `/openai/v1/responses` → use `/anthropic/v1/messages` or `/mlflow/v1/chat/completions`
-- OpenAI codex models or `gpt-5-5-pro` on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
+- OpenAI codex models on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
 - Google models on `/anthropic/v1/messages` → use `/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
