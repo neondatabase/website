@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-15T17:16:55.141Z'
+updatedOn: '2026-06-15T17:18:06.665Z'
 ---
 
 <TwinPaths>
@@ -29,7 +29,7 @@ updatedOn: '2026-06-15T17:16:55.141Z'
   />
 </TwinPaths>
 
-## Your Neon backend
+## Neon Backend Primitives
 
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
 
