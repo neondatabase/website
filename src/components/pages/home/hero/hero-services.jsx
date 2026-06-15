@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -21,6 +22,7 @@ const getScrollPaddingLeft = (element) => {
   Service video optimization:
     webm: ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 18 -b:v 0 -pix_fmt yuv420p -vf "scale=512:-2:flags=lanczos" -deadline best -row-mt 1 -threads 8 -an output.webm
     mp4:  ffmpeg -i input.mp4 -c:v libx265 -crf 14 -pix_fmt yuv420p -vf "scale=512:-2:flags=lanczos" -preset veryslow -tag:v hvc1 -movflags faststart -an output.mp4
+    poster: ffmpeg -ss 00:00:00 -i sources/input.mp4 -frames:v 1 -vf "scale=512:-2:flags=lanczos" -q:v 1 output.jpg
 */
 
 const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase, width }) => {
@@ -28,6 +30,8 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
   const endDelayTimeoutRef = useRef(null);
   const shouldLoopRef = useRef(shouldLoop);
   const onEndedRef = useRef(onEnded);
+  const posterImagePath = `/videos/pages/home/hero/${videoBase}.jpg`;
+  const posterVideoPath = `${posterImagePath}?updated=${VIDEO_VERSION}`;
 
   useEffect(() => {
     shouldLoopRef.current = shouldLoop;
@@ -85,26 +89,42 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
   }, [title]);
 
   return (
-    <video
-      className="absolute inset-0 h-full w-full object-cover"
-      ref={videoRef}
-      preload="auto"
-      muted
-      playsInline
-      width={width}
-      height={height}
-      aria-hidden="true"
-      onEnded={handleEnded}
-    >
-      <source
-        src={`/videos/pages/home/hero/${videoBase}.webm?updated=${VIDEO_VERSION}`}
-        type="video/webm"
+    <>
+      <Image
+        className="absolute inset-0 h-full w-full object-cover"
+        src={posterImagePath}
+        alt=""
+        width={width}
+        height={height}
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
       />
-      <source
-        src={`/videos/pages/home/hero/${videoBase}.mp4?updated=${VIDEO_VERSION}`}
-        type="video/mp4"
-      />
-    </video>
+      <video
+        className={cn(
+          'absolute inset-0 h-full w-full object-cover transition-opacity duration-200',
+          isActive ? 'opacity-100' : 'opacity-0'
+        )}
+        ref={videoRef}
+        preload="auto"
+        muted
+        playsInline
+        poster={posterVideoPath}
+        width={width}
+        height={height}
+        aria-hidden="true"
+        onEnded={handleEnded}
+      >
+        <source
+          src={`/videos/pages/home/hero/${videoBase}.webm?updated=${VIDEO_VERSION}`}
+          type="video/webm"
+        />
+        <source
+          src={`/videos/pages/home/hero/${videoBase}.mp4?updated=${VIDEO_VERSION}`}
+          type="video/mp4"
+        />
+      </video>
+    </>
   );
 };
 
@@ -125,8 +145,9 @@ const HeroServices = ({ items }) => {
   const [trailingSpacerWidth, setTrailingSpacerWidth] = useState(0);
   const listRef = useRef(null);
   const itemRefs = useRef([]);
+  const isUserScrollingRef = useRef(false);
   const { ref: inViewRef, inView: isListInView } = useInView({ threshold: 0.2 });
-  const { ref: autoPlayInViewRef, inView: isAutoPlayInView } = useInView({ threshold: 0.9 });
+  const { ref: autoPlayInViewRef, inView: isAutoPlayInView } = useInView({ threshold: 0.5 });
 
   const setListRef = useCallback(
     (node) => {
@@ -157,6 +178,29 @@ const HeroServices = ({ items }) => {
     );
   }, [items.length]);
 
+  const syncAutoPlayIndexWithSliderScroll = useCallback(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const scrollPosition = list.scrollLeft + getScrollPaddingLeft(list);
+    const closestIndex = itemRefs.current.reduce(
+      (closest, item, index) => {
+        if (!item) return closest;
+
+        const distance = Math.abs(item.offsetLeft - scrollPosition);
+
+        return distance < closest.distance ? { distance, index } : closest;
+      },
+      { distance: Number.POSITIVE_INFINITY, index: null }
+    ).index;
+
+    if (closestIndex !== null) {
+      setAutoPlayIndex((currentIndex) =>
+        currentIndex === closestIndex ? currentIndex : closestIndex
+      );
+    }
+  }, []);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia(SLIDER_VIEWPORT_QUERY);
     const update = () => {
@@ -174,6 +218,12 @@ const HeroServices = ({ items }) => {
   }, []);
 
   useEffect(() => {
+    if (isSliderViewport) {
+      setHoveredIndex(null);
+    }
+  }, [isSliderViewport]);
+
+  useEffect(() => {
     if (isAutoPlayInView && hoveredIndex === null) {
       setAutoPlayIndex((currentIndex) => currentIndex ?? 0);
     }
@@ -186,13 +236,60 @@ const HeroServices = ({ items }) => {
 
     const list = listRef.current;
     const item = itemRefs.current[autoPlayIndex];
-    if (!list || !item) return;
+    if (!list || !item || isUserScrollingRef.current) return;
 
     list.scrollTo({
       left: item.offsetLeft - getScrollPaddingLeft(list),
       behavior: 'smooth',
     });
   }, [autoPlayIndex, hoveredIndex, isAutoPlayInView, isSliderViewport]);
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (!isSliderViewport || !isAutoPlayInView || !list) {
+      return undefined;
+    }
+
+    let animationFrameId;
+    let userScrollTimeoutId;
+
+    const finishUserScroll = () => {
+      syncAutoPlayIndexWithSliderScroll();
+      isUserScrollingRef.current = false;
+    };
+
+    const scheduleUserScrollEnd = () => {
+      window.clearTimeout(userScrollTimeoutId);
+      userScrollTimeoutId = window.setTimeout(finishUserScroll, 250);
+    };
+
+    const markUserScroll = () => {
+      isUserScrollingRef.current = true;
+      scheduleUserScrollEnd();
+    };
+
+    const handleScroll = () => {
+      if (!isUserScrollingRef.current || hoveredIndex !== null) return;
+
+      scheduleUserScrollEnd();
+      window.cancelAnimationFrame(animationFrameId);
+      animationFrameId = window.requestAnimationFrame(syncAutoPlayIndexWithSliderScroll);
+    };
+
+    list.addEventListener('pointerdown', markUserScroll, { passive: true });
+    list.addEventListener('touchstart', markUserScroll, { passive: true });
+    list.addEventListener('wheel', markUserScroll, { passive: true });
+    list.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+      window.clearTimeout(userScrollTimeoutId);
+      list.removeEventListener('pointerdown', markUserScroll);
+      list.removeEventListener('touchstart', markUserScroll);
+      list.removeEventListener('wheel', markUserScroll);
+      list.removeEventListener('scroll', handleScroll);
+    };
+  }, [hoveredIndex, isAutoPlayInView, isSliderViewport, syncAutoPlayIndexWithSliderScroll]);
 
   useEffect(() => {
     if (!isSliderViewport || !isListInView) {
@@ -222,14 +319,25 @@ const HeroServices = ({ items }) => {
     );
   }, [hoveredIndex, isAutoPlayInView, items.length]);
 
-  const handleMouseEnter = useCallback((index) => {
-    setHoveredIndex(index);
-    setAutoPlayIndex(index);
-  }, []);
+  const handleMouseEnter = useCallback(
+    (index) => {
+      if (isSliderViewport) return;
+
+      setHoveredIndex(index);
+      setAutoPlayIndex(index);
+    },
+    [isSliderViewport]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isSliderViewport) {
+      setHoveredIndex(null);
+    }
+  }, [isSliderViewport]);
 
   return (
     <ul
-      className="grid grid-cols-5 gap-x-16 2xl:gap-x-6 xl:gap-x-6 lg:-mx-5 lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:gap-x-8 lg:overflow-x-auto lg:px-5 md:gap-x-6"
+      className="grid grid-cols-5 grid-rows-[auto_auto] gap-x-16 gap-y-8 2xl:gap-x-6 xl:gap-x-6 xl:gap-y-6 lg:-mx-5 lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:gap-x-8 lg:gap-y-0 lg:overflow-x-auto lg:px-5 md:gap-x-6"
       ref={setListRef}
     >
       {items.map(({ title, description, videoBase, aspectRatio, width, height }, index) => {
@@ -239,22 +347,24 @@ const HeroServices = ({ items }) => {
         return (
           <li
             className={cn(
-              'group w-full max-w-64 cursor-default text-white transition-opacity duration-200 lg:shrink-0 lg:snap-start',
-              isActive ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
+              'group row-span-2 grid w-full max-w-64 cursor-default grid-rows-subgrid content-start text-white transition-opacity duration-200 lg:shrink-0 lg:snap-start lg:grid-rows-[auto_auto] lg:gap-y-8 lg:self-start md:gap-y-6',
+              isActive
+                ? 'opacity-100'
+                : cn('opacity-80', !isSliderViewport && 'group-hover:opacity-100')
             )}
             key={title}
             ref={(node) => {
               itemRefs.current[index] = node;
             }}
             onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+            onMouseLeave={handleMouseLeave}
           >
-            <p className="block max-w-[300px] text-base tracking-extra-tight text-pretty text-gray-new-60 xl:text-sm/normal lg:text-base">
+            <p className="block max-w-sm text-base tracking-extra-tight text-pretty text-gray-new-60 xl:text-sm/normal lg:text-base">
               <span className="font-semibold text-white">{title}.</span> {description}
             </p>
             <span
               className={cn(
-                'relative mt-8 block overflow-hidden bg-[#111315] ring-1 ring-white/5 xl:mt-6',
+                'relative block overflow-hidden bg-[#111315] ring-1 ring-white/5',
                 aspectRatio
               )}
             >
@@ -262,7 +372,7 @@ const HeroServices = ({ items }) => {
                 height={height}
                 isActive={isActive}
                 onEnded={handleAutoPlayVideoEnd}
-                shouldLoop={hoveredIndex === index}
+                shouldLoop={!isSliderViewport && hoveredIndex === index}
                 title={title}
                 videoBase={videoBase}
                 width={width}
