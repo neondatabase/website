@@ -1465,3 +1465,8 @@
       items:
         - title: Claimable database integration
           slug: workflows/claimable-database-integration
+
+- nav: FAQs
+  slug: faqs
+  title: FAQs
+  icon: faq
