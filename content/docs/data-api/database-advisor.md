@@ -1,8 +1,17 @@
 ---
 title: Data API Advisors
 subtitle: Identify security and performance issues in your API-exposed database
+summary: >-
+  Data API Advisors scan your Neon database schema and configuration for
+  security and performance issues specific to objects exposed by the Data API
+  over HTTP. Security checks catch exploitable misconfigurations such as missing
+  RLS, security definer views, and Neon Auth exposure. Performance checks flag
+  unindexed foreign keys, duplicate indexes, and table bloat before they reach
+  production. Checks are categorized as SECURITY or PERFORMANCE with severity
+  levels INFO, WARN, or ERROR, and are accessible via the Neon Console or the
+  REST API.
 enableTableOfContents: true
-updatedOn: '2026-04-18T11:47:20.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Data API Advisors analyze your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. They run a set of checks against your database and report issues with severity levels and recommended fixes.

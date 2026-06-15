@@ -2,11 +2,14 @@
 title: Postgres substring() function
 subtitle: Extract a substring from a string
 summary: >-
-  Covers the usage of the `substring()` function in Postgres to extract portions
-  of strings based on specified positions or regular expression patterns, aiding
-  in data cleaning and transformation tasks.
+  The PostgreSQL `substring()` function extracts part of a string by position
+  and length or by a POSIX regex pattern with optional capture groups. Use it
+  to pull fixed-length fields, zip codes, timestamps, or structured tokens from
+  raw text without splitting on a delimiter. When filtering rows on a substring
+  expression, add a functional index to avoid full column scans; alternatives
+  include `left`, `right`, `split_part`, and `regexp_match`.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.882Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `substring()` function in Postgres is used to extract a portion of a string based on specified start and end positions, or a regular expression pattern.

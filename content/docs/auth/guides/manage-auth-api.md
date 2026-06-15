@@ -2,13 +2,20 @@
 title: Manage Neon Auth via the API
 subtitle: 'Enable, configure, and disable Neon Auth using the Neon API'
 summary: >-
-  How to enable, retrieve, and disable Neon Auth on a branch using the Neon REST
-  API, including curl examples and response reference.
+  Neon Auth REST API operations for enabling (POST), retrieving (GET),
+  updating (PATCH), and disabling (DELETE) auth on a per-branch basis, with
+  curl examples and a full response field reference. Use this page when
+  automating auth provisioning or teardown: the enable response is the only
+  call that returns `pub_client_key` and `secret_server_key`, and the
+  `delete_data` flag on DELETE controls whether the `neon_auth` schema is
+  permanently removed. Also covers related branch-scoped endpoints for OAuth
+  providers, email configuration, domains, users, plugins, and webhooks, plus
+  equivalent MCP tools for AI-editor workflows.
 enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

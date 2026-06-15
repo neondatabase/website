@@ -31,6 +31,7 @@ export function isAIAgentRequest(request) {
     'llm-agent',
     'axios', // Used by Claude Code
     'got', // Used by Cursor
+    'curl', // Common CLI HTTP client used to fetch docs as markdown
   ];
 
   const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>

@@ -2,12 +2,16 @@
 title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 summary: >-
-  Covers the technical implementation of database provisioning, versioning, user
-  upgrades, and usage monitoring for AI agent platforms using the Neon agent
-  plan.
+  The Neon Agent Plan integration guide explains how to provision per-tenant
+  Postgres databases, transfer projects between free and paid organizations, and
+  implement snapshot-based database versioning using the Neon API. AI agent
+  platform builders use this guide when embedding Neon as database
+  infrastructure for their users, covering the full lifecycle from free-tier
+  project creation through paid upgrades and PITR/snapshot undo workflows.
+  Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -481,6 +485,10 @@ Available metrics:
 - `compute_time_seconds`: CPU seconds consumed
 - `written_data_bytes`: Data written to all branches
 - `synthetic_storage_size_bytes`: Total storage used
+
+<Admonition type="tip">
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+</Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 

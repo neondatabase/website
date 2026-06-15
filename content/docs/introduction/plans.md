@@ -1,9 +1,12 @@
 ---
 title: Neon plans
 summary: >-
-  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
-  features, pricing, and target users to support projects from prototypes to
-  production at scale.
+  Neon's Free, Launch, and Scale plans differ in compute rates, branch counts,
+  storage pricing, and autoscaling limits. Compare per-unit pricing, feature
+  availability, and billing examples to choose a plan or estimate monthly costs.
+  Scale adds compliance certifications, uptime SLAs, private networking, and
+  configurable scale-to-zero. Launch and Free plans share pay-only-for-what-you-use
+  pricing with no monthly minimum.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -19,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -47,7 +50,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
+| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 500 GB included, then $0.10/GB       | 500 GB included, then $0.10/GB                                                                    |
 | [Monitoring](#monitoring)                             | 1 day                                      | 3 days                               | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
@@ -181,7 +184,7 @@ average compute size × hours running = CU-hours
 
 #### Compute with scale to zero
 
-Scale to zero suspends computes after inactivity to compute usage and cost.
+Scale to zero suspends computes after inactivity to reduce compute usage and cost.
 
 ### Autoscaling
 
@@ -238,8 +241,8 @@ Public network transfer (egress) is the total volume of data sent from your data
 Allowances per plan:
 
 - **Free**: 5 GB/month
-- **Launch**: 100 GB/month, then $0.10/GB
-- **Scale**: 100 GB/month, then $0.10/GB
+- **Launch**: 500 GB/month, then $0.10/GB
+- **Scale**: 500 GB/month, then $0.10/GB
 
 ### Monitoring
 
@@ -511,7 +514,7 @@ How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
 
 Do public network transfer limits reset each month?
-: Yes. Free plan includes 5 GB/month, Launch and Scale include 100 GB/month. Beyond that, it's $0.10/GB.
+: Yes. Free plan includes 5 GB/month, Launch and Scale include 500 GB/month. Beyond that, it's $0.10/GB.
 
 How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.

@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Laravel a
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2025-06-27T09:33:41.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 [Laravel](https://laravel.com) is a popular PHP framework widely used for building web applications. It includes powerful tools for automated testing, with [PEST](https://pestphp.com/) being a preferred option due to its simplicity and effectiveness.
@@ -175,7 +175,7 @@ To set up your testing environment with Neon and Laravel, follow these steps:
 
 This setup provides a simple API endpoint to retrieve all questions from the database.
 
-To, verify the setup, you can run the Laravel development server:
+To verify the setup, you can run the Laravel development server:
 
 ```
 php artisan serve
@@ -286,13 +286,13 @@ With the `neonctl` CLI tool, managing these branches becomes straightforward and
 
 ### Installing `neonctl`
 
-Before you can start using `neonctl`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/reference/cli-install) to set up `neonctl` on your system.
+Before you can start using `neonctl`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/cli/install) to set up `neonctl` on your system.
 
 ### Using `neonctl` to Manage Branches
 
 Once `neonctl` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
 
-#### 1. [Creating a Branch](/docs/reference/cli-branches#create)
+#### 1. [Creating a Branch](/docs/cli/branches#create)
 
 To create a new branch, use the `neonctl branches create` command:
 
@@ -302,7 +302,7 @@ neonctl branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name
 
 Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch.
 
-#### 2. [Listing Branches](/docs/reference/cli-branches#list)
+#### 2. [Listing Branches](/docs/cli/branches#list)
 
 To list all branches in your Neon project, use the `neonctl branches list` command:
 
@@ -312,7 +312,7 @@ neonctl branches list --project-id PROJECT_ID
 
 Replace `PROJECT_ID` with your Neon project ID. This command will display a list of all branches along with their IDs, names, and other relevant information.
 
-#### 3. [Obtaining Connection String](/docs/reference/cli-connection-string)
+#### 3. [Obtaining Connection String](/docs/cli/connection-string)
 
 Once you've created a branch, you'll need to obtain the connection string to configure your Laravel application. Use the `neonctl connection-string` command:
 
@@ -322,7 +322,7 @@ neonctl connection-string BRANCH_ID
 
 Replace `BRANCH_ID` with the ID of the branch you want to connect to. This command will output the connection string that you can use to configure your Laravel `.env` file.
 
-#### 4. [Deleting a Branch](/docs/reference/cli-branches#delete)
+#### 4. [Deleting a Branch](/docs/cli/branches#delete)
 
 After you've finished testing with a branch, you can delete it using the `neonctl branches delete` command:
 

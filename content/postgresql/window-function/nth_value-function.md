@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTILE Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NTH_VALUE() window function works the same way on any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance and security with full Lakehouse integration. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The NTH_VALUE() window function works the same way on any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance and security with full Lakehouse integration. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row in a result set.
@@ -130,4 +130,4 @@ In this example,
 - The frame clause defined the whole partition as a frame.
 - And the `NTH_VALUE()` function returns the product name of the 2nd row of each product group.
 
-Now, you should how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.
+Now, you should know how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.

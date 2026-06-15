@@ -2,12 +2,17 @@
 title: Replicate data from Supabase
 subtitle: Learn how to replicate data from Supabase to Neon
 summary: >-
-  Step-by-step guide for replicating data from a Supabase Postgres database to a
-  Neon database using native Postgres logical replication, including
-  prerequisites and configuration details.
+  Logical replication from Supabase to Neon streams live Postgres data changes
+  by creating a publication on Supabase and a subscription on Neon. A direct
+  IPv4 connection string is required (the Supabase IPv4 add-on), and Neon NAT
+  Gateway IPs must be allowlisted in Supabase network restrictions. Use this
+  page when migrating or syncing a Supabase Postgres database to Neon with
+  minimal downtime. Supabase enables wal_level=logical by default; replication
+  slot limits vary by plan and may require an instance upgrade for large
+  datasets.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.017Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.

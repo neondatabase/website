@@ -5,7 +5,7 @@ page_description: >-
   In this tutorial, you will learn about PostgreSQL 18 asynchronous I/O and how
   to configure it to improve read performance for your database workloads.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 New Features
@@ -16,7 +16,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's asynchronous I/O is a core engine feature, so everything covered here applies to any Postgres 18 deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+PostgreSQL 18's asynchronous I/O is a core engine feature, so everything covered here applies to any Postgres 18 deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn how to configure and use PostgreSQL 18's new asynchronous I/O features to improve database performance for read-heavy workloads.

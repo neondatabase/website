@@ -2,12 +2,15 @@
 title: Migrate to another Neon region
 subtitle: Choose a migration method for a new Neon project in another region
 summary: >-
-  A Neon project's region is fixed. To run in another region, create a new project there and migrate.
-  Compare the Import Data Assistant, dump and restore, and logical replication, then use the Region migration
-  guide and the how-to for your chosen method.
+  Neon project regions are fixed, so moving a database to another region
+  requires creating a new Neon project in the target region and migrating the
+  data into it. This page helps you choose a migration method: Import Data
+  Assistant (recommended for databases under 10 GB), pg_dump/pg_restore (for
+  full control over dump files and restore timing), or logical replication (for
+  minimal-downtime cutover on busy databases).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-01T22:55:35.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/guides/migrate-neon-to-another-region
 ---

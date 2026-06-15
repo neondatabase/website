@@ -16,14 +16,13 @@
     - section: Start with Neon
       icon: start
       items:
-        - title: 1 - Basics
+        - title: One-command setup
+          slug: get-started/with-an-agent
+        - title: Build a full backend
+          slug: get-started/full-backend-quickstart
+        - title: Tour the Neon Console
           slug: get-started/signing-up
-        - title: 2 - Connect
-          slug: get-started/connect-neon
-        - title: 3 - Branching
-          slug: get-started/workflow-primer
-        - title: 4 - Setup Neon Auth
-          slug: auth/overview
+
     - section: Migrate to Neon
       icon: import
       items:
@@ -132,6 +131,12 @@
         - title: Serverless
           slug: introduction/serverless
 
+    - section: Neon Postgres
+      icon: book
+      items:
+        - title: Neon Postgres
+          slug: postgres/overview
+
     - section: Autoscaling
       icon: features
       items:
@@ -159,6 +164,8 @@
           slug: guides/branching-intro
         - title: About branching
           slug: introduction/branching
+        - title: Branching workflow primer
+          slug: get-started/workflow-primer
         - title: Branching workflows
           slug: guides/branching-test-queries
         - title: Branch archiving
@@ -474,6 +481,8 @@
                   slug: auth/guides/configure-domains
                 - title: Webhooks
                   slug: auth/guides/webhooks
+                - title: Customize emails
+                  slug: auth/guides/customize-emails
                 - title: Production checklist
                   slug: auth/production-checklist
                 - title: Troubleshooting
@@ -528,6 +537,83 @@
                       slug: auth/legacy/overview
                     - title: Database integration
                       slug: auth/legacy/database-integration
+
+        - title: Neon Functions
+          icon: features
+          slug: compute/functions/overview
+          items:
+            - title: Overview
+              slug: compute/functions/overview
+            - title: Preview access
+              slug: compute/functions/preview-access
+            - title: Get started
+              slug: compute/functions/get-started
+            - title: Deploy and manage
+              slug: compute/functions/deploy
+            - title: Environment variables
+              slug: compute/functions/environment-variables
+            - title: WebSocket servers
+              slug: compute/functions/websockets
+            - section: Reference
+              items:
+                - title: neon.ts
+                  slug: compute/functions/reference/neon-ts
+                - title: Runtime limits
+                  slug: compute/functions/reference/runtime-limits
+
+        - title: Storage
+          icon: data
+          slug: storage/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: storage/overview
+                - title: Quickstart
+                  slug: storage/get-started
+            - section: Guides
+              items:
+                - title: Buckets
+                  slug: storage/buckets
+                - title: Objects
+                  slug: storage/objects
+                - title: Authentication
+                  slug: storage/authentication
+            - section: Reference
+              items:
+                - title: S3 compatibility
+                  slug: storage/s3-compatibility
+                - title: Troubleshooting
+                  slug: storage/troubleshooting
+
+        - title: AI Gateway
+          icon: sparkle
+          slug: ai-gateway/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: ai-gateway/overview
+                - title: Quickstart
+                  slug: ai-gateway/get-started
+                - title: Models
+                  slug: ai-gateway/models
+            - section: APIs
+              items:
+                - title: Chat completions
+                  slug: ai-gateway/chat-completions
+                - title: Anthropic Messages API
+                  slug: ai-gateway/anthropic-messages
+                - title: OpenAI Responses API
+                  slug: ai-gateway/openai-responses
+                - title: Gemini API
+                  slug: ai-gateway/gemini
+            - section: Reference
+              items:
+                - title: Authentication
+                  slug: ai-gateway/authentication
+                - title: Troubleshooting
+                  slug: ai-gateway/troubleshooting
 
         - title: Postgres RLS
           icon: lock
@@ -626,6 +712,14 @@
                   slug: ai/ai-scale-with-neon
             - title: Google Colab
               slug: ai/ai-google-colab
+        - title: Lakebase Search
+          icon: sparks
+          slug: ai/lakebase-search
+          items:
+            - title: Overview
+              slug: ai/lakebase-search
+            - title: Get started
+              slug: ai/lakebase-search-get-started
     - section: Tools & Workflows
       items:
         - title: API, CLI & SDKs
@@ -641,39 +735,73 @@
               icon: cli
               items:
                 - title: Overview
-                  slug: reference/neon-cli
-                - title: Quickstart
-                  slug: reference/cli-quickstart
+                  slug: cli
                 - title: Install and connect
-                  slug: reference/cli-install
-                - title: auth
-                  slug: reference/cli-auth
-                - title: me
-                  slug: reference/cli-me
-                - title: orgs
-                  slug: reference/cli-orgs
-                - title: projects
-                  slug: reference/cli-projects
-                - title: ip-allow
-                  slug: reference/cli-ip-allow
-                - title: vpc
-                  slug: reference/cli-vpc
-                - title: branches
-                  slug: reference/cli-branches
-                - title: databases
-                  slug: reference/cli-databases
-                - title: roles
-                  slug: reference/cli-roles
-                - title: operations
-                  slug: reference/cli-operations
-                - title: connection-string
-                  slug: reference/cli-connection-string
-                - title: set-context
-                  slug: reference/cli-set-context
-                - title: init
-                  slug: reference/cli-init
-                - title: completion
-                  slug: reference/cli-completion
+                  slug: cli/install
+                - title: Quickstart
+                  slug: cli/quickstart
+                - section: Setup & context
+                  items:
+                    - title: auth
+                      slug: cli/auth
+                    - title: init
+                      slug: cli/init
+                    - title: bootstrap
+                      slug: cli/bootstrap
+                    - title: link
+                      slug: cli/link
+                    - title: checkout
+                      slug: cli/checkout
+                    - title: env
+                      slug: cli/env
+                    - title: set-context
+                      slug: cli/set-context
+                    - title: me
+                      slug: cli/me
+                    - title: completion
+                      slug: cli/completion
+                - section: Projects & branches
+                  items:
+                    - title: projects
+                      slug: cli/projects
+                    - title: branches
+                      slug: cli/branches
+                    - title: databases
+                      slug: cli/databases
+                    - title: roles
+                      slug: cli/roles
+                    - title: operations
+                      slug: cli/operations
+                - section: Connect to Postgres
+                  items:
+                    - title: connection-string
+                      slug: cli/connection-string
+                    - title: psql
+                      slug: cli/psql
+                - section: Config as code
+                  items:
+                    - title: config
+                      slug: cli/config
+                    - title: dev
+                      slug: cli/dev
+                - section: Functions, storage & data
+                  items:
+                    - title: functions
+                      slug: cli/functions
+                    - title: bucket
+                      slug: cli/bucket
+                    - title: data-api
+                      slug: cli/data-api
+                    - title: neon-auth
+                      slug: cli/neon-auth
+                - section: Org & network
+                  items:
+                    - title: orgs
+                      slug: cli/orgs
+                    - title: ip-allow
+                      slug: cli/ip-allow
+                    - title: vpc
+                      slug: cli/vpc
             - section: SDKs
               icon: sdk
               items:
@@ -840,6 +968,8 @@
                   slug: guides/sequin
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
+                - title: Stacksync
+                  slug: guides/logical-replication-stacksync
 
             - title: Replicate to Neon
               items:
@@ -1147,6 +1277,10 @@
           slug: extensions/hstore
         - title: intarray
           slug: extensions/intarray
+        - title: lakebase_text
+          slug: extensions/lakebase-text
+        - title: lakebase_vector
+          slug: extensions/lakebase-vector
         - title: ltree
           slug: extensions/ltree
         - title: neon

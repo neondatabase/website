@@ -65,7 +65,7 @@ const features = [
     icon: scalabilityIcon,
     title: 'Scalability',
     description:
-      'Neon offers serverless Postgres, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
+      'Neon offers serverless backend primitives, scaling CPU, memory, and connections instantly to match demand for optimal cost-performance.',
     url: '/docs/introduction/autoscaling',
   },
   {

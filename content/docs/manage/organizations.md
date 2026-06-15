@@ -2,11 +2,15 @@
 title: Organizations
 subtitle: Manage your projects and collaborate with team members
 summary: >-
-  Covers the management of projects within organizations in Neon, detailing user
-  roles, permissions, and the process for creating and overseeing organizations
-  and their associated projects.
+  Neon Organizations are the top-level containers for all projects, providing
+  centralized billing, member management, and access controls for teams on free
+  and paid plans. Teams use organizations to collaborate across projects, assign
+  Admin or Member roles, and auto-provision users by verified email domain.
+  Current limitations include all users being able to manage protected branches
+  regardless of role, and a permissions model that does not yet support
+  fine-grained access controls.
 enableTableOfContents: true
-updatedOn: '2026-04-17T11:58:10.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.

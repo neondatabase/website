@@ -3,11 +3,14 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 summary: >-
-  Covers the automatic archiving of inactive branches in Neon to reduce storage
-  costs, including conditions for archiving and unarchiving processes, as well
-  as monitoring branch status.
+  Neon automatically archives inactive branches older than 14 days, moving
+  their data to cost-effective object storage to reduce costs. Archived branches
+  unarchive automatically on first access, though paid plans enforce a limit on
+  unarchived branches per project before forced early archiving applies. Use
+  this page to understand archiving thresholds, blocking conditions, and how to
+  monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.137Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -19,7 +22,7 @@ updatedOn: '2026-02-15T20:51:54.137Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/introduction/architecture-overview#archive-storage">Archive storage</a>
-  <a href="/docs/reference/cli-branches#list">Branches list command (Neon CLI)</a>
+  <a href="/docs/cli/branches#list">Branches list command (Neon CLI)</a>
   <a href="https://api-docs.neon.tech/reference/getprojectbranch">Get branch details (Neon API)</a>
 </DocsList>
 
@@ -66,7 +69,7 @@ The following actions will automatically unarchive a branch, transferring the br
 - [Reset the branch from its parent](/docs/manage/branches#reset-a-branch-from-parent)
 - [Performing a restore operation on a branch](/docs/guides/branch-restore)
 - [Setting the branch as protected](/docs/guides/protected-branches)
-- Running [Neon CLI](/docs/reference/neon-cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
+- Running [Neon CLI](/docs/cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
 
 ## Identifying archived branches
 
@@ -108,7 +111,7 @@ You can also monitor branch archiving using the Neon CLI or Neon API.
 <Tabs labels={["CLI", "API"]}>
 
 <TabItem>
-The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a branch's `Current State`. Branch states include:
+The Neon CLI [branches list](/docs/cli/branches#list) command shows a branch's `Current State`. Branch states include:
 
 - `init` - the branch is being created but is not available for querying.
 - `ready` - the branch is fully operational and ready for querying. Expect normal query response times.

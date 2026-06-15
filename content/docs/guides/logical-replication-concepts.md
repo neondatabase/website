@@ -2,12 +2,16 @@
 title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
 summary: >-
-  Covers the concepts of PostgreSQL logical replication, detailing how to
-  replicate data between databases using a publisher-subscriber model, and
-  enabling logical replication in Neon for real-time data updates.
+  PostgreSQL logical replication replicates row-level changes (INSERT, UPDATE,
+  DELETE, TRUNCATE) from a publisher to subscribers using WAL decoding,
+  replication slots, and decoder plugins such as pgoutput or wal2json. Read
+  this page to understand the publisher-subscriber model, publications,
+  subscriptions, and WAL components before setting up replication with Neon.
+  Neon automatically removes inactive replication slots and supports wal2json
+  alongside the standard pgoutput plugin.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
@@ -117,7 +121,7 @@ To use this decoder plugin, you'll need to create a dedicated replication slot f
 SELECT pg_create_logical_replication_slot('my_replication_slot', 'wal2json');
 ```
 
-For for more information about this alternative decoder plugin and how top use it, see [wal2json](https://github.com/eulerto/wal2json).
+For more information about this alternative decoder plugin and how to use it, see [wal2json](https://github.com/eulerto/wal2json).
 
 ### WAL senders
 

@@ -1,10 +1,11 @@
 ---
-title: 'How do I check which PostgreSQL version my Neon database is running?'
+title: How do I check which PostgreSQL version my Neon database is running?
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/check-postgresql-version-neon']
+redirectFrom:
+  - /faqs/check-postgresql-version-neon
 ---
 
 Every Neon project is tied to a specific Postgres major version that you picked at project creation. To check which one you're on, run `SELECT version();` from any SQL client, or read it from the **Settings** widget on the **Project Dashboard** in the [Neon Console](https://console.neon.tech). The CLI command `neon projects get` shows the same value. Neon supports Postgres 14, 15, 16, 17, and 18. See [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade) for details.
@@ -41,7 +42,7 @@ The first number is the major version. The second is the minor version, which Ne
 
 <TabItem>
 
-With [neonctl](/docs/reference/neon-cli) installed and authenticated:
+With [neonctl](/docs/cli) installed and authenticated:
 
 ```bash
 neon projects get <project_id>

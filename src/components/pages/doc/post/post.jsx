@@ -33,6 +33,7 @@ const Post = ({
   data: {
     title,
     subtitle,
+    eyebrow = null,
     enableTableOfContents = false,
     tag = null,
     layout = null,
@@ -110,10 +111,23 @@ const Post = ({
               </div>
             ) : (
               <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
-                <div className={cn(!isChangelog && 'max-w-xl 2xl:max-w-[520px]')}>
+                <div
+                  className={cn(
+                    !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
+                    !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
+                  )}
+                >
+                  {eyebrow && (
+                    <div className="mb-3.5 text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
+                      {eyebrow}
+                    </div>
+                  )}
                   <h1
                     className={cn(
-                      'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                      eyebrow
+                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
                       tag && 'inline'
                     )}
                   >
@@ -121,12 +135,18 @@ const Post = ({
                   </h1>
                   {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
                   {subtitle && (
-                    <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
+                    <p
+                      className={cn(
+                        eyebrow
+                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
+                          : 'mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg'
+                      )}
+                    >
                       {subtitle}
                     </p>
                   )}
                 </div>
-                {!isChangelog && <DropdownMenu gitHubPath={gitHubPath} />}
+                {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
               </div>
             )}
             {aboveContent}
@@ -170,6 +190,7 @@ Post.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,
+    eyebrow: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
     updatedOn: PropTypes.string,

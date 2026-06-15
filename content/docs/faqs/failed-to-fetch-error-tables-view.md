@@ -1,10 +1,15 @@
 ---
-title: "Why am I getting 'Error connecting to database: Failed to fetch' in the Neon Console Tables view?"
-subtitle: 'Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk through these in order.'
+title: >-
+  Why am I getting 'Error connecting to database: Failed to fetch' in the Neon
+  Console Tables view?
+subtitle: >-
+  Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk
+  through these in order.
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-05-22T12:41:06.646Z'
 isDraft: false
-redirectFrom: ['/faqs/failed-to-fetch-error-tables-view']
+redirectFrom:
+  - /faqs/failed-to-fetch-error-tables-view
 ---
 
 ## Quick answer
@@ -55,5 +60,3 @@ If none of the above explain it, check the [Neon status page](https://neonstatus
 <Admonition type="tip" title="Grab the error ID before contacting Support">
 The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. Support uses that ID to look up the exact request in our logs, which is much faster than reproducing the issue.
 </Admonition>
-
-<CTA title="Still stuck?" description="Open a Support ticket with the error ID, your project ID, and the branch you were viewing." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />

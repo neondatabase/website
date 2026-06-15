@@ -2,11 +2,15 @@
 title: Schema migration with Neon Postgres and Entity Framework
 subtitle: Set up Neon Postgres and run migrations for your Entity Framework project
 summary: >-
-  Step-by-step guide for setting up Neon Postgres with Entity Framework,
-  including project initialization, database connection string retrieval, and
-  managing schema migrations in a .NET application.
+  Entity Framework Core schema migrations on Neon Postgres walks through
+  installing the Npgsql EF Core provider, defining C# models, and running
+  dotnet-ef commands to create and evolve tables in a Neon database. Use this
+  guide when you need to connect an EF Core application to Neon and generate or
+  apply migrations, including incremental schema changes such as adding a
+  column. Migrations must use a direct (non-pooled) Neon connection string;
+  PgBouncer pooled strings are not supported for dotnet-ef operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.961Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.

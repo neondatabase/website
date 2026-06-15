@@ -22,10 +22,10 @@ A branch is the cheapest unit of isolation. It's a full Postgres database that s
 neon branches create \
   --name ci-pr-${PR_NUMBER} \
   --project-id $NEON_PROJECT_ID \
-  --expiration 1h
+  --expires-at "$(date -u -d '+1 hour' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-The `--expiration 1h` flag auto-deletes the branch after one hour. The console offers presets of **1 hour, 1 day, or 7 days**, plus a custom timestamp via API. See [Branch expiration](/docs/guides/branch-expiration).
+The `--expires-at` flag sets a deletion timestamp. The branch auto-deletes when that time is reached. The console offers presets of **1 hour, 1 day, or 7 days**, plus a custom timestamp via API. See [Branch expiration](/docs/guides/branch-expiration).
 
 For the API equivalent:
 

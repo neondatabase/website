@@ -7,6 +7,13 @@ import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
+import {
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
+} from 'components/pages/doc/cli-reference';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
@@ -16,12 +23,15 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
+import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
+import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -171,6 +181,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DetailIconCards,
   TechCards,
   PromptCards,
+  Tag,
+  TwinPaths,
+  QuickPath,
+  GuidedPath,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -198,9 +212,15 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   StickyTable,
   CheckList,
   CheckItem,
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  McpSetupConfigurator,
   SqlToRestConverter,
   ...sharedComponents,
 });

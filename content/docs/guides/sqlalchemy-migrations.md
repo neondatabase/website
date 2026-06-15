@@ -2,11 +2,15 @@
 title: Schema migration with Neon Postgres and SQLAlchemy
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
 summary: >-
-  Step-by-step guide for managing schema migrations in a Neon Postgres database
-  using SQLAlchemy and Alembic, including project setup and connection string
-  retrieval.
+  SQLAlchemy with Alembic autogenerates and applies versioned schema migrations
+  to a Neon Postgres database using `alembic revision --autogenerate` and
+  `alembic upgrade head`. A direct (non-pooled) connection string is required to
+  avoid migration errors. Use this guide when you need to track and apply
+  incremental DDL changes (such as adding columns) without writing manual SQL.
+  The guide builds a FastAPI app with SQLAlchemy ORM models and walks through an
+  end-to-end schema evolution cycle.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.054Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
@@ -70,7 +74,7 @@ pip install fastapi uvicorn python-dotenv
 pip freeze > requirements.txt
 ```
 
-We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We the installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Set up the Database configuration
 

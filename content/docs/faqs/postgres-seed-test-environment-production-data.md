@@ -33,7 +33,7 @@ Through the CLI:
 
 ```bash
 neon branches create --name test --parent main
-neon connection-string --branch test
+neon connection-string test
 ```
 
 Through the API or a [GitHub Action](https://neon.com/docs/guides/branching-github-actions), the equivalent call is one HTTP request. Branch creation imposes no load on the parent. See the [branching foundational concepts](https://neon.com/branching/foundational-concepts) for the storage model.

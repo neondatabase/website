@@ -1,10 +1,13 @@
 ---
-title: 'How do I delete a database in Neon?'
-subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
+title: How do I delete a database in Neon?
+subtitle: >-
+  Use the Console, CLI, API, or SQL. Connect to a different database first if
+  you go the SQL route.
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/delete-database-neon']
+redirectFrom:
+  - /faqs/delete-database-neon
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), go to **Databases**, select the branch, and click the delete icon on the database row. You can also delete a database with the Neon CLI, the API, or SQL (`DROP DATABASE`). Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. See [Delete a database](/docs/manage/databases#delete-a-database) for the full reference.
@@ -29,7 +32,7 @@ Open your project in the [Neon Console](https://console.neon.tech), go to **Data
 neon databases delete <database_name> --branch <branch_id_or_name>
 ```
 
-If you omit `--branch`, the CLI assumes the project's default branch. See [Neon CLI command: databases](/docs/reference/cli-databases#delete).
+If you omit `--branch`, the CLI assumes the project's default branch. See [Neon CLI command: databases](/docs/cli/databases#delete).
 
 </TabItem>
 

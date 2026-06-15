@@ -23,7 +23,7 @@ Neon separates storage from compute, so a database isn't tied to a fixed instanc
 
 ## Provisioning a database
 
-Two lines, using the [Neon CLI](https://neon.com/docs/reference/neon-cli):
+Two lines, using the [Neon CLI](https://neon.com/docs/cli):
 
 ```bash
 neon projects create --name my-app

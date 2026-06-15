@@ -32,8 +32,7 @@ Or branch from a past timestamp:
 
 ```bash
 neon branches create --name pre-incident \
-  --parent main \
-  --parent-timestamp 2026-04-25T14:00:00Z
+  --parent 2026-04-25T14:00:00Z
 ```
 
 ## Branches per plan

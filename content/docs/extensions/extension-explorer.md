@@ -1,13 +1,14 @@
 ---
 title: Postgres extension explorer
 summary: >-
-  Covers the browsing of supported Postgres extensions categorized by
-  functionality, including installation and update instructions for various
-  extensions related to AI, analytics, and auditing.
+  A category-browsable index of all Postgres extensions supported on Neon,
+  organized into groups such as AI/ML, analytics, geospatial, search, security,
+  and query optimization. Navigate to individual extension docs, install
+  instructions, or the flat alphabetical list.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2026-05-01T11:17:30.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Browse supported Postgres extensions by category.
@@ -156,8 +157,6 @@ Browse supported Postgres extensions by category.
 <a href="/docs/extensions/btree_gist" description="Provides GiST index operator classes that implement B-tree equivalent behavior" icon="table">btree_gist</a>
 
 <a href="https://github.com/RhodiumToad/ip4r" description="Provides a range index type and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres" icon="table">ip4r</a>
-
-<a href="https://github.com/sraoss/pg_ivm" description="Provides an Incremental View Maintenance (IVM) feature for Postgres" icon="table">pg_ivm</a>
 
 <a href="https://github.com/pgpartman/pg_partman" description="A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres" icon="table">pg_partman</a>
 

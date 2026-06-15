@@ -3,13 +3,18 @@ title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
 summary: >-
-  Covers the migration of a database from Azure PostgreSQL to Neon using logical
-  replication, detailing the necessary preparations and steps to ensure minimal
-  downtime during the process.
+  Migration guide for moving an Azure Database for PostgreSQL instance to Neon
+  using Postgres logical replication, which streams row changes to minimize
+  downtime during the cutover. Use this page when you need a live-replication
+  approach rather than a full-stop dump: it walks through setting wal_level to
+  LOGICAL in Azure, creating a replication role and publication, importing the
+  schema with pg_dump, and creating a subscription on the Neon side.
+  Alternative paths using pg_dump/pg_restore, pgAdmin, and CSV import are also
+  described.
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -94,7 +99,7 @@ $do$;
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following commands examples create publication named `azure_publication` with one or more tables.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following command examples create a publication named `azure_publication` with one or more tables.
 
 To create a publication for a specific table:
 
@@ -128,7 +133,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
 
-5. CLick `Save` at the bottom to make sure all changes are saved.
+5. Click `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

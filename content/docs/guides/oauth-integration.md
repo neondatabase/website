@@ -1,11 +1,16 @@
 ---
 title: Neon OAuth integration
 summary: >-
-  How to integrate your application with Neon using OAuth, enabling secure
-  interactions with user accounts while maintaining data privacy and requiring
-  user approval for access.
+  Neon OAuth integration lets partner applications act on Neon user accounts
+  without storing credentials, using an OpenID Connect server at
+  oauth2.neon.tech with predefined project and organization scopes. Use this
+  page when building a third-party integration that must read, create, update,
+  or delete Neon projects and organizations on behalf of end users via the
+  authorization code grant flow. Access is limited to active Neon commercial
+  partners. The page covers the consent screen, authorization URL construction,
+  code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-02-13T12:51:21.153Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -84,7 +89,7 @@ Here is an example response:
 You must add `offline` and `offline_access` scopes to your request to receive the `refresh_token`.
 </Admonition>
 
-Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/reference/neon-cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/3764c5d5675197ef9bc7ed78d5531bd318f7f13b/src/auth.ts#L63-L81). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/3764c5d5675197ef9bc7ed78d5531bd318f7f13b/src/auth.ts#L63-L81). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
 ## Supported OAuth Scopes
 

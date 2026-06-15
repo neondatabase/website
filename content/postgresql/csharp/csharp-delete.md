@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-delete/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Updating Data'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Deleting rows with C# and Npgsql works the same against any PostgreSQL database, so the patterns here carry over wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that large teams need. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and autoscaling.
+Deleting rows with C# and Npgsql works the same against any PostgreSQL database, so the patterns here carry over wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to delete data from a table in a PostgreSQL database from a C\# program.
@@ -100,7 +100,7 @@ catch (NpgsqlException ex)
 
 How it works.
 
-First, construct an `DELETE` statement that deletes a row specified by an id from the `students` table:
+First, construct a `DELETE` statement that deletes a row specified by an id from the `students` table:
 
 ```cs
 var sql = @"DELETE FROM students WHERE id = @id";
@@ -173,4 +173,4 @@ The output indicates that the program has successfully deleted the row id 1\.
 
 ## Summary
 
-- Use the `NpgsqlCommand` object to execute an `DELETE` statement that deletes a row from a table.
+- Use the `NpgsqlCommand` object to execute a `DELETE` statement that deletes a row from a table.

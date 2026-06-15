@@ -17,7 +17,7 @@ If you need code to create and tear down Postgres databases, look for a platform
 
 Three things tend to matter for automated provisioning:
 
-1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api-reference), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/reference/neon-cli).
+1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api-reference), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
 2. **Provisioning that returns in seconds, not minutes.** Neon's [branching](/docs/introduction/branching) uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
 3. **Billing that doesn't punish idle databases.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges.
 

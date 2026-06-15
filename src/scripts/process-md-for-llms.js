@@ -35,6 +35,13 @@ const path = require('path');
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
+// CLI reference components (<CliOptions command="..."/> etc.) render
+// generated content from the committed neonctl schema. These are the SAME
+// renderer functions used by src/components/pages/doc/cli-reference, so the
+// web page and this llms mirror can never disagree on the generated tables.
+const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
+const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
 
@@ -90,6 +97,7 @@ const IGNORED_COMPONENTS = [
   'LogosSection', // Decorative logos
   'ComputeCalculator', // Interactive widget
   'UseCaseContext', // Repetitive boilerplate
+  'McpSetupConfigurator', // Interactive MCP setup widget
 ];
 
 // ESM modules loaded dynamically
@@ -380,15 +388,20 @@ function loadSharedContent(templateName, props = {}) {
     processed = processed.replace(new RegExp(`\\{${key}\\}`, 'g'), value);
   }
 
-  // Parse the content as MDX
+  return parseMarkdownToNodes(processed);
+}
+
+/**
+ * Parse a markdown string into transformed MDAST nodes ready for splicing
+ * into the output tree. Nested MDX components inside the string are
+ * transformed too.
+ * @param {string} markdown
+ * @returns {Array} - Array of AST nodes
+ */
+function parseMarkdownToNodes(markdown) {
   const processor = unified().use(remarkParse).use(remarkGfm).use(remarkMdx);
-
-  const tree = processor.parse(processed);
-
-  // Transform the parsed content (this will handle nested MDX components)
-  const transformedChildren = transformChildren(tree.children);
-
-  return transformedChildren;
+  const tree = processor.parse(markdown);
+  return transformChildren(tree.children);
 }
 
 /**
@@ -420,7 +433,57 @@ function buildCheckItem(node) {
 /**
  * Component handlers - transform MDX JSX nodes into markdown nodes
  */
+/**
+ * Resolve the `command` attribute of a CLI reference component to its
+ * schema node + path parts. Returns null (with a warning) when unknown, so
+ * a stale page degrades visibly instead of crashing the postbuild.
+ */
+function resolveCliCommand(node, componentName) {
+  const command = getAttr(node, 'command') || '';
+  const parts = command.trim().split(/\s+/).filter(Boolean);
+  const target = cliDocs.resolveCommand(cliSchema, parts);
+  if (!target) {
+    console.warn(`${componentName}: unknown neonctl command "${command}" in ${currentFile}`);
+    processingErrors.push({ file: currentFile, error: `unknown neonctl command "${command}"` });
+    return null;
+  }
+  return { target, parts };
+}
+
 const componentHandlers = {
+  /**
+   * CLI reference components -> generated markdown from the neonctl schema
+   * (same renderers as the web components in components/pages/doc/cli-reference).
+   */
+  CliUsage(node) {
+    const resolved = resolveCliCommand(node, 'CliUsage');
+    return resolved
+      ? parseMarkdownToNodes(cliDocs.renderUsage(resolved.target, resolved.parts))
+      : null;
+  },
+  CliOptions(node) {
+    const resolved = resolveCliCommand(node, 'CliOptions');
+    if (!resolved) return null;
+    // Same inherited-options merge as the web component; '' (only global
+    // options apply) renders nothing in the mirror too.
+    const table = cliDocs.renderOptionsForPath(cliSchema, resolved.parts);
+    return table ? parseMarkdownToNodes(table) : null;
+  },
+  CliSubcommands(node) {
+    const resolved = resolveCliCommand(node, 'CliSubcommands');
+    if (!resolved) return null;
+    const anchorParts = (getAttr(node, 'anchorParts') || '').trim().split(/\s+/).filter(Boolean);
+    return parseMarkdownToNodes(cliDocs.renderSubcommands(resolved.target, anchorParts));
+  },
+  CliGlobalOptions() {
+    return parseMarkdownToNodes(cliDocs.renderGlobalOptions(cliSchema));
+  },
+  CliCommandIndex() {
+    // The interactive index on the web page degrades to the full static
+    // command tree for agents reading the .md mirror.
+    return parseMarkdownToNodes(cliDocs.renderCommandIndex(cliSchema));
+  },
+
   /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
@@ -1443,6 +1506,106 @@ const componentHandlers = {
       ],
     };
   },
+
+  /**
+   * Callout -> bold title + content (neutral "good to know" callout)
+   * <Callout title="Before you start">content</Callout>
+   */
+  Callout(node) {
+    const title = getAttr(node, 'title') || 'Good to know';
+    const hasBlockContent = node.children?.some(
+      (c) =>
+        c.type === 'list' ||
+        c.type === 'code' ||
+        c.type === 'heading' ||
+        c.type === 'blockquote' ||
+        c.type === 'mdxJsxFlowElement' ||
+        c.type === 'mdxJsxTextElement'
+    );
+
+    if (hasBlockContent || title) {
+      return [
+        {
+          type: 'paragraph',
+          children: [{ type: 'strong', children: [{ type: 'text', value: `${title}:` }] }],
+        },
+        ...(node.children || []),
+      ];
+    }
+
+    const content = childrenToMarkdown(node.children);
+    return {
+      type: 'paragraph',
+      children: [
+        { type: 'strong', children: [{ type: 'text', value: `${title}:` }] },
+        { type: 'text', value: content ? ` ${content}` : '' },
+      ],
+    };
+  },
+
+  /**
+   * StickyTable -> container with sticky header (table wrapper), extract children
+   */
+  StickyTable(node) {
+    return node.children || null;
+  },
+
+  /**
+   * Tag -> inline badge, emit the label text
+   * <Tag label="beta" size="sm" />
+   */
+  Tag(node) {
+    const label = getAttr(node, 'label');
+    if (!label) return null;
+    return { type: 'inlineCode', value: label };
+  },
+
+  /**
+   * TwinPaths -> two-option chooser, render QuickPath and GuidedPath as a list
+   */
+  TwinPaths(node) {
+    const items = [];
+
+    for (const child of node.children || []) {
+      const isJsx = child.type === 'mdxJsxFlowElement' || child.type === 'mdxJsxTextElement';
+      if (!isJsx) continue;
+
+      const title = getAttr(child, 'title') || child.name;
+      const description = getAttr(child, 'description') || '';
+      const command = getAttr(child, 'command') || '';
+      const href = getAttr(child, 'href') || '';
+
+      const paraChildren = [];
+
+      if (href) {
+        paraChildren.push({
+          type: 'link',
+          url: toAbsoluteUrl(href),
+          children: [{ type: 'text', value: title }],
+        });
+      } else {
+        paraChildren.push({ type: 'strong', children: [{ type: 'text', value: title }] });
+      }
+
+      if (description) {
+        paraChildren.push({ type: 'text', value: `: ${description}` });
+      }
+
+      if (command) {
+        paraChildren.push({ type: 'text', value: '. Run: ' });
+        paraChildren.push({ type: 'inlineCode', value: command });
+      }
+
+      items.push({
+        type: 'listItem',
+        children: [{ type: 'paragraph', children: paraChildren }],
+      });
+    }
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
+      : null;
+  },
 };
 
 // Register data-driven handlers (definitions are at the top of the file)
@@ -1626,6 +1789,15 @@ function remarkAbsoluteUrls(pageUrl) {
     // Convert images
     visit(tree, 'image', (node) => {
       node.url = toAbsoluteUrl(node.url, pageUrl);
+    });
+    // Strip custom anchor IDs from heading text: "### create (#create)" is
+    // an authoring convention for short anchors; the "(#create)" suffix is
+    // noise in the rendered markdown the mirror serves to agents.
+    visit(tree, 'heading', (node) => {
+      const last = node.children?.[node.children.length - 1];
+      if (last?.type === 'text') {
+        last.value = last.value.replace(/\s*(?:\(#[^)]+\)|\{#[^}]+\})\s*$/, '');
+      }
     });
   };
 }

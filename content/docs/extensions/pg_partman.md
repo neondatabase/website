@@ -2,11 +2,16 @@
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
 summary: >-
-  Covers the setup and usage of the `pg_partman` extension for managing
-  partitioned tables in Postgres, including automated partition creation and
-  maintenance tailored for Neon projects.
+  pg_partman is a Postgres extension that automates time-based and number-based
+  range partition creation and maintenance on large tables, removing the need
+  for manual partition DDL or an external cron scheduler. Use it when a table
+  grows too large for full-table scans and you need automatic partition
+  creation, retention policies, and background worker maintenance. The page
+  covers enabling the extension, partitioning new and existing tables with
+  `create_parent()`, setting retention policies, and uniqueness constraint
+  rules for partitioned tables.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
@@ -286,7 +291,7 @@ SELECT partman.create_parent(
 );
 ```
 
-4. Now, to we can migrate data from the old table to the new partitioned table in smaller batches:
+4. Now, we can migrate data from the old table to the new partitioned table in smaller batches:
 
 ```sql
 CALL partman.partition_data_proc(

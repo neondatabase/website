@@ -2,11 +2,15 @@
 title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 summary: >-
-  Covers the guidelines for contributing to the Neon documentation, including
-  how to edit files on GitHub, submit pull requests, and use templates for
-  creating new guides.
+  How to submit edits and new guides to the neondatabase/website repository.
+  Edit files directly on GitHub or fork the repo and open a pull request. The
+  full authoring workflow covers frontmatter fields, navigation.yaml sidebar
+  updates, Markdown syntax, CodeTabs, admonitions, image paths, and style rules
+  for voice, capitalization, connection strings, and fake user data. Also covers
+  the doc AI tools (Cursor and Claude slash commands) for consistency checks,
+  redirects, and guided writing.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.

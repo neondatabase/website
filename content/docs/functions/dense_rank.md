@@ -2,11 +2,15 @@
 title: Postgres dense_rank() function
 subtitle: Returns the rank of the current row without gaps
 summary: >-
-  Covers the usage of the `dense_rank()` function in PostgreSQL to assign
-  non-gapped ranks to rows in a dataset, including examples with and without the
-  `PARTITION BY` clause.
+  The PostgreSQL `dense_rank()` window function assigns consecutive integer ranks
+  to rows within an ordered partition, giving tied rows the same rank and never
+  skipping rank values, unlike `rank()` which leaves gaps after ties. Use
+  `dense_rank()` when you need contiguous rankings for leaderboards, scoring
+  systems, or top-N filtering via a CTE. The function accepts `PARTITION BY` to
+  reset ranking within groups, and pairs with aggregate functions such as
+  `COUNT`, `SUM`, and `AVG`.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 You can use the `dense_rank` function to assign a rank to each distinct row within a result set. It provides a non-gapped ranking of values which is the right choice when ties need to be acknowledged without leaving gaps in the ranking sequence.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-trigger-when-condition/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Event Trigger
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Conditional triggers with a WHEN clause work the same way on any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Conditional triggers with a WHEN clause work the same way on any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a conditional trigger that fires only when a condition is true.
@@ -30,8 +30,8 @@ Sometimes, you want the trigger to be activated only when a specific condition i
 ```sql
 CREATE TRIGGER trigger_name
 ON table_name
-WHEN condition
-EXECUTE FUNCTION function_name(arguments);
+WHEN (boolean_expression)
+EXECUTE FUNCTION function_name('optional', 'arguments');
 ```
 
 In this syntax, the `condition` is a boolean expression. If the `condition` is true, the trigger is fired; otherwise, the trigger will not be activated.
@@ -120,7 +120,7 @@ The `AFTER INSERT` trigger fires and insert rows into the `customer_stats` table
 Sixth, change the order statuses of customer id 1 and 2 to `completed`:
 
 ```sql
-UPDATE order
+UPDATE orders
 SET status = 'completed'
 WHERE customer_id IN (1,2);
 ```

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-current_user/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SET ROLE Statement
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `CURRENT_USER` function works the same way on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built to move at your speed.
+The `CURRENT_USER` function works the same way on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CURRENT_USER` function to return the name of the currently logged\-in database user.
@@ -92,7 +92,7 @@ It returns `bob` instead:
 (1 row)
 ```
 
-Six, use the `SESSION_USER` function to retrieve the original user who connected to the session:
+Sixth, use the `SESSION_USER` function to retrieve the original user who connected to the session:
 
 ```sql
 SELECT SESSION_USER;

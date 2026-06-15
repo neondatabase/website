@@ -1,10 +1,13 @@
 ---
-title: 'How do I rotate my database URL or connection string in Neon?'
-subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
+title: How do I rotate my database URL or connection string in Neon?
+subtitle: >-
+  Two paths: reset the role password (fast), or create a new role and migrate
+  consumers (zero-downtime).
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/rotate-database-url-connection-string']
+redirectFrom:
+  - /faqs/rotate-database-url-connection-string
 ---
 
 ## Quick answer
@@ -48,7 +51,7 @@ See [Reset a password](/docs/manage/roles#reset-a-password) for details.
 
 ## Option 2: Create a new role and migrate consumers
 
-If you have many consumers and want zero downtime, create a parallel role. Both connection strings keep working until you remove the old one.
+If you have many consumers and want zero downtime, create a parallel role. Both connection strings keep working while you migrate, then you invalidate the old credentials at the end.
 
 ```sql
 -- Create the new role (or use the Console UI under Roles & Databases)
@@ -62,23 +65,26 @@ GRANT neon_superuser TO app_v2;
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_v2;
 ```
 
-Create new roles in the Console (**Branches → branch → Roles & Databases → Add role**) to get automatic `neon_superuser` membership, or with [`neon roles create`](/docs/reference/cli-roles#create). See [Manage roles](/docs/manage/roles) for the differences between Console-created and SQL-created roles.
+Create new roles in the Console (**Branches → branch → Roles & Databases → Add role**) to get automatic `neon_superuser` membership, or with [`neon roles create`](/docs/cli/roles#create). See [Manage roles](/docs/manage/roles) for the differences between Console-created and SQL-created roles.
 
 Then:
 
 1. Build the new `DATABASE_URL` using `app_v2` and its password.
 2. Roll it out to your deploy targets one service at a time.
 3. Monitor connection counts to confirm nothing still uses the old role.
-4. Drop the old role once it's idle:
+4. **Reset the old role's password** to invalidate the leaked credentials:
 
    ```sql
-   DROP ROLE old_role_name;
+   ALTER USER old_role_name WITH PASSWORD 'a-strong-random-value-no-one-keeps';
    ```
 
-   The role can only be dropped if it doesn't own any database objects. See [Delete a role](/docs/manage/roles#delete-a-role).
+   This is the step that actually closes the breach. You can also reset it from the Console under **Roles & Databases**. Do not skip this step, even if no service uses the old role anymore.
 
-<Admonition type="tip" title="The hostname doesn't change">
-Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx-yyy` portion of your URL is the compute ID. If you need to change the hostname too, you'll need to recreate the project or compute.
+<Admonition type="important" title="Why you usually can't drop the old role">
+In most projects, the original role owns the database, schemas, and tables. `DROP ROLE` fails if the role owns any objects, and during an incident is the wrong time to reassign ownership across your schema. Resetting the password is the realistic 99% path: the role stays as the owner of its objects, but the leaked credentials no longer authenticate.
+
+If you do want to remove the role later (outside of incident pressure), you'll need to [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of every object it owns, then drop it. See [Delete a role](/docs/manage/roles#delete-a-role).
 </Admonition>
 
-<CTA title="Need help with a complex rotation?" description="Contact Neon Support if you're rotating across many projects or need help auditing access." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />
+**Note: The hostname doesn't change**
+Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx-yyy` portion of your URL is the compute ID. If you need to change the hostname too, you'll need to recreate the project or compute.

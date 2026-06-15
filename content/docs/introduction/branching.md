@@ -2,16 +2,18 @@
 title: Branching
 subtitle: Branch your data the same way you branch your code
 summary: >-
-  Covers the creation and management of data branches in Neon, allowing for
-  isolated development, testing, and historical analysis without impacting the
-  performance of the production database.
+  Neon branching creates copy-on-write clones of your database instantly, with
+  writes saved as deltas so parent branches see zero load or performance impact.
+  Use branching to spin up isolated development or test environments pre-loaded
+  with production data, or run parallel CI/CD pipelines. You can also recover
+  from data loss by rolling back to any point within your history window.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-05-20T11:26:33.011Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -40,7 +42,7 @@ Users, sessions, and auth configuration in the `neon_auth` schema branch with yo
 
 ## Branching workflows
 
-You can use Neon's branching feature in variety workflows.
+You can use Neon's branching feature in a variety of workflows.
 
 ### Development
 

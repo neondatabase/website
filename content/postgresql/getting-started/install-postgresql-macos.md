@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/
 ogImage: /postgresqltutorial/Install-PostgreSQL-macOS-step-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: Load PostgreSQL Sample Database
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Installing PostgreSQL on macOS works the same whether you're running it locally for development or planning to deploy it elsewhere, since this is standard Postgres. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that demanding workloads require. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling that keep pace with your product.
+Installing PostgreSQL on macOS works the same whether you're running it locally for development or planning to deploy it elsewhere, since this is standard Postgres. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that demanding workloads require. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to download the PostgreSQL, install PostgreSQL on macOS, and restore the sample database.
@@ -62,7 +62,7 @@ Eighth, review the installation information. If everything looks correct, click 
 Ninth, click the Next button to start installing the PostgreSQL database server on your computer:
 
 ![](/postgresqltutorial/Install-PostgreSQL-macOS-step-9.png)
-It will take few mintues to complete the installation.
+It will take a few minutes to complete the installation.
 
 ![](/postgresqltutorial/Install-PostgreSQL-step-10.png)
 Finally, click the Finish button once the installation is completed:

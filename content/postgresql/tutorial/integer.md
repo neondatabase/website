@@ -6,7 +6,7 @@ page_description: >-
   including SMALLINT, INTEGER, and BIGINT for designing tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
 ogImage: /postgresqltutorial/postgresql-integer-300x59.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T16:09:35.498Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REAL Data Type
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's integer types behave the same way wherever you run Postgres, so everything covered here about SMALLINT, INTEGER, and BIGINT applies to any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+PostgreSQL's integer types behave the same way wherever you run Postgres, so everything covered here about SMALLINT, INTEGER, and BIGINT applies to any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: this tutorial introduces you to various PostgreSQL integer types including `SMALLINT`, `INTEGER`, and `BIGINT`.
@@ -25,7 +25,7 @@ PostgreSQL's integer types behave the same way wherever you run Postgres, so eve
 ## Introduction to PostgreSQL integer types
 
 ![postgresql integer](/postgresqltutorial/postgresql-integer-300x59.png?alignright)
-To store the whole numbers in PostgreSQL, you can use one of the following integer types:
+To store whole numbers in PostgreSQL, you can use one of the following integer types:
 
 - `SMALLINT`
 - `INTEGER`
@@ -81,7 +81,7 @@ Notice that `INT` is the synonym of `INTEGER`.
 
 ### BIGINT
 
-If you want to store the whole numbers that are out of the range of the `INTEGER` type, you can use the `BIGINT` type.
+If you want to store whole numbers outside the `INTEGER` range, you can use the `BIGINT` type.
 
 The `BIGINT` type requires 8 bytes storage size that can store any number in the range of (\-9,223,372,036,854,775,808,\+9,223,372,036,854,775,807\).
 

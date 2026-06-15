@@ -1,12 +1,12 @@
 ---
 title: PostgreSQL CREATE VIEW
-page_title: PosgreSQL CREATE VIEW
+page_title: PostgreSQL CREATE VIEW
 page_description: >-
   This tutorial shows you how to use the CREATE VIEW statement to create a new
   view in your database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/managing-postgresql-views/'
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Views
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CREATE VIEW statement works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres on your laptop, on a VM, or on a managed service. For enterprises standardizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration alongside your analytics data. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) offers the fastest path to production Postgres with instant branching, autoscaling, and a generous free tier.
+The CREATE VIEW statement works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres on your laptop, on a VM, or on a managed service. For enterprises standardizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration alongside your analytics data. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE VIEW` statement to create a new view in your database.

@@ -6,7 +6,7 @@ page_description: >-
   current date and time with the timezone.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL STATEMENT_TIMESTAMP() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NOW() function works the same across every PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup looking to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed.
+The NOW() function works the same across every PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NOW()` function to get the current date and time with the time zone.
@@ -208,7 +208,7 @@ COMMIT
 
 In this example, we called the `NOW()` function within a transaction and its return values do not change through the transaction.
 
-Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified of seconds.
+Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified number of seconds.
 
 If you want to get the current date and time that does advance during the transaction, you can use the `TIMEOFDAY()` function. Consider the following example:
 

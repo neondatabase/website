@@ -33,7 +33,7 @@ Creating the branch doesn't increase load on the parent, and writes on the branc
 If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
 
 ```bash
-neon branches create --name pre-incident --parent main --timestamp 2026-04-25T09:00:00Z
+neon branches create --name pre-incident --parent 2026-04-25T09:00:00Z
 ```
 
 You can connect that branch to a staging app, dump the rows you care about, and compare against current production, all without touching the primary compute.

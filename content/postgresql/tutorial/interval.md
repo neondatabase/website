@@ -6,7 +6,7 @@ page_description: >-
   manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Timestamp Data Types
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The interval data type works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run analytical and operational workloads side by side. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built around your workflow, with instant branching, autoscaling, and a generous free tier.
+The interval data type works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run analytical and operational workloads side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL interval data type and how to manipulate interval values.
@@ -47,7 +47,7 @@ interval '3 hours 20 minutes';
 
 Internally, PostgreSQL stores interval values as months, days, and seconds. The months and days values are integers while the seconds field can have fractions.
 
-The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 2 minutes ago at the current time of last year, you can use the following statement:
+The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 20 minutes ago at the current time of last year, you can use the following statement:
 
 ```sql
 SELECT
@@ -238,7 +238,7 @@ SELECT
 In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
 ```text
- date_part
+ extract
 -----------
         21
 (1 row)
@@ -246,7 +246,7 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 
 ### Adjusting interval values
 
-PostgreSQL provides two functions `justifydays` and `justifyhours` that allows you to adjust the interval of 30\-day as one month and the interval of 24 hours as one day:
+PostgreSQL provides two functions `justifydays` and `justifyhours` that allow you to adjust the interval of 30 days as one month and the interval of 24 hours as one day:
 
 ```sql
 SELECT
@@ -310,7 +310,7 @@ Output:
 INSERT 0 2
 ```
 
-Third, extract components (days, hours, minutes) from values in the `interval` column:
+Third, extract components (days, hours, minutes) from values in the `duration` column:
 
 ```sql
 SELECT

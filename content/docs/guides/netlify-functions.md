@@ -2,11 +2,15 @@
 title: Use Neon with Netlify Functions
 subtitle: Connect a Neon Postgres database to your Netlify Functions application
 summary: >-
-  Step-by-step guide for connecting a Neon Postgres database to a Netlify
-  Functions application, utilizing the Neon serverless driver for database
-  queries and setup.
+  End-to-end tutorial for querying a Neon Postgres database from a Netlify
+  Function using the @neondatabase/serverless driver and ES module (.mjs)
+  syntax. The guide walks through creating a Neon project, writing a Node.js
+  serverless handler with the neon() tagged-template client, and deploying via
+  the Netlify CLI with DATABASE_URL set as an environment variable. Choose this
+  page when the goal is serverless backend database access inside a Netlify
+  Function, not edge middleware or static site build steps.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.027Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.

@@ -1,10 +1,11 @@
 ---
-title: 'How can I check which region my Neon project is running in?'
+title: How can I check which region my Neon project is running in?
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/check-neon-project-region']
+redirectFrom:
+  - /faqs/check-neon-project-region
 ---
 
 ## Quick answer
@@ -41,7 +42,7 @@ Or for a specific project:
 neon projects get crimson-voice-12345678
 ```
 
-See [`neon projects get`](/docs/reference/cli-projects#get).
+See [`neon projects get`](/docs/cli/projects#get).
 
 ## Connection string
 

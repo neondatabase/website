@@ -2,13 +2,16 @@
 title: Built to scale
 subtitle: Neon supports you from prototype to scale-up
 summary: >-
-  Covers the scalability of Neon from initial side projects to large production
-  databases, highlighting features like a free plan, autoscaling, and Postgres
-  compatibility to support various stages of development.
+  Neon's serverless Postgres platform scales across distinct growth stages,
+  from a free plan with scale-to-zero compute, to a startup tier with
+  autoscaling and copy-on-write branching, to fleet-scale with
+  database-per-tenant isolation and API-driven provisioning. Read this page to
+  match Neon features to your current growth stage before selecting a plan or
+  designing a multi-tenant architecture.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-updatedOn: '2026-03-04T23:56:12.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -27,7 +30,7 @@ When you’re looking for a free plan to run Postgres, what you want is simplici
 
 ## Stage 2: Startups
 
-**Build an iterate fast**
+**Build and iterate fast**
 
 As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a frictionless building experience without compromising on performance and reliability.
 
@@ -64,11 +67,11 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 
 ### Fleet management for platforms and agents
 
-- Instant, API-driven database provisioning allows to deploy a full serverless Postgres backend as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
+- Instant, API-driven database provisioning lets you deploy a full Neon backend as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
 - The fully embedded database experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to to hook full-stack applications out of the box
+- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to hook full-stack applications out of the box
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance. " buttonText="Check it out" buttonUrl="/programs/agents" />

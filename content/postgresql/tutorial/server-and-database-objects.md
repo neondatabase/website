@@ -6,7 +6,7 @@ page_description: >-
   and database objects provided by PostgreSQL
 prev_url: index.html
 ogImage: /postgresqltutorial/postgresql-databases.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXPLAIN
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The server and database objects covered here are standard PostgreSQL concepts that apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run critical workloads. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
+The server and database objects covered here are standard PostgreSQL concepts that apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run critical workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.

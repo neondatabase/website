@@ -24,8 +24,7 @@ If the bug only existed for a window, branch from a point in time inside your hi
 
 ```bash
 neon branches create --name repro-pre-deploy \
-  --parent main \
-  --timestamp 2026-04-25T09:00:00Z
+  --parent 2026-04-25T09:00:00Z
 ```
 
 Branch creation is copy-on-write: no data is copied at creation time, and the branch only diverges as you write. Reads pull from shared storage, so a 200 GB production database makes a 200 GB-equivalent test branch with no upfront storage cost.

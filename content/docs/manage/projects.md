@@ -4,11 +4,16 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  How to manage Neon projects using the Neon Console or API, including creating
-  branches, databases, roles, and computes within each project workspace.
+  A Neon project is the top-level workspace that groups branches, databases,
+  roles, and computes. This page covers the full project lifecycle: create,
+  configure, and delete, via the Console or API. Use it when you need to set
+  project-level defaults such as compute autoscaling, history window for
+  instant restore and Time Travel, IP Allow rules, logical replication, or
+  collaborator access. Deleted projects can be recovered within a 7-day
+  window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -175,7 +180,7 @@ To configure an allowlist:
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
@@ -277,7 +282,7 @@ This list combines individual IP addresses, a range of IP addresses, a CIDR bloc
 
 You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.0.2.1`, and you want to extend access to IP address `192.0.2.2`, specify both addresses in your new configuration: `192.0.2.1, 192.0.2.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
-The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/cli/ip-allow).
 
 #### Remove an IP Allow configuration
 
@@ -298,7 +303,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
 neon ip-allow reset
@@ -402,6 +407,10 @@ To delete a project:
 2. Select the project that you want to delete.
 3. Select **Settings**.
 4. Select **Delete**.
+
+<Admonition type="note">
+For HIPAA-compliant projects, see [HIPAA Compliance](/docs/security/hipaa#delete-a-hipaa-compliant-project) before deleting a project—for example, to export audit logs you may need.
+</Admonition>
 
 <Admonition type="important">
 If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
@@ -955,7 +964,7 @@ neon projects recover crimson-voice-12345678
 └────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
-For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/cli/projects).
 
 </TabItem>
 

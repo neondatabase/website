@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-set-role/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Role Membership
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-SET ROLE works the same way across every PostgreSQL deployment, so what you learn here carries over to any Postgres database you run. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed, high performance, secure database that plugs directly into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+SET ROLE works the same way across every PostgreSQL deployment, so what you learn here carries over to any Postgres database you run. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed, high performance, secure database that plugs directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the `SET ROLE` statement to temporarily change the current role within a database session.
@@ -46,7 +46,7 @@ We’ll take an example of using the `SET ROLE` statement.
 First, [connect](../postgresql-getting-started/connect-to-postgresql-database) to the `dvdrental` database using `psql`:
 
 ```bash
-psql -U postres -d dvdrental
+psql -U postgres -d dvdrental
 ```
 
 Second, [create a group role](postgresql-role-membership) called `marketing`:
@@ -90,7 +90,7 @@ Output:
 (1 row)
 ```
 
-Eight, switch the current role to `marketing`:
+Eighth, switch the current role to `marketing`:
 
 ```sql
 SET ROLE marketing;

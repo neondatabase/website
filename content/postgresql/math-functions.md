@@ -2,11 +2,11 @@
 title: PostgreSQL Math Functions
 page_title: PostgreSQL Math Functions
 page_description: >-
-  Provide the most commonly used PostgreSQL Match functions that help you
+  Provide the most commonly used PostgreSQL Math functions that help you
   perform various math operations quickly and effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/math-functions.png'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TO_NUMBER() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's math functions work the same across any Postgres deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres inside the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for speed.
+PostgreSQL's math functions work the same across any Postgres deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres inside the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 This page provides the most commonly used PostgreSQL Math functions that help you perform various math operations quickly and effectively.

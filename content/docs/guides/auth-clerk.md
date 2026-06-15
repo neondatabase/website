@@ -3,11 +3,16 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 summary: >-
-  Step-by-step guide for integrating Clerk authentication in a Next.js
-  application using a Neon Postgres database, covering project setup, database
-  connection, schema definition, and user data management.
+  Clerk authentication integration with Neon Postgres in a Next.js app uses
+  Clerk user IDs as primary keys in a Drizzle ORM schema to associate database
+  rows with authenticated users, supporting social login, email, and
+  multi-factor auth without building auth infrastructure. Choose this guide
+  when Clerk is your identity provider and you need clerkMiddleware to protect
+  routes and server actions for per-user Postgres data. The walkthrough covers
+  Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
+  actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -336,7 +341,7 @@ export default async function Home() {
 
 This implements a form with a single text field that lets the user input a quote, and submit it, whereby it gets stored in the database, associated with their `Clerk` user ID. If a quote is already stored, it displays it and provides a button to delete it.
 
-The `currentuser` hook from `@clerk/nextjs/server` provides the current user's information, which we use to interact with the database on their behalf.
+The `currentUser` hook from `@clerk/nextjs/server` provides the current user's information, which we use to interact with the database on their behalf.
 
 ## Running the application
 

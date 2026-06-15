@@ -2,11 +2,17 @@
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
 summary: >-
-  Covers strategies for managing and reducing Neon costs by optimizing compute
-  usage, including right-sizing, effective autoscaling, enabling scale to zero,
-  and managing persistent connections.
+  Practical strategies for cutting Neon costs across every billing metric:
+  compute (CU-hours), storage, instant restore history, extra branches, and
+  public data transfer. Use this page to diagnose an unexpectedly high bill or
+  to proactively reduce spend. Key tactics include right-sizing compute,
+  enabling scale to zero, running VACUUM FULL to reclaim storage space, and
+  trimming the PITR history window. Instant restore storage is billed at
+  $0.20/GB-month on paid plans for root branches only. Extra branches cost
+  $1.50/branch-month over the plan allowance. Paid plans include 500 GB/month
+  of public data transfer, then $0.10/GB.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -165,7 +171,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 500 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

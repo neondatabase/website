@@ -49,7 +49,7 @@ const faqItems = [
     id: 'compute-usage',
     answer: `
       <p>A CU-hour is Neon's unit for measuring compute usage.</p>
-      <p>Because Neon is a serverless database, you're billed only for the compute resources you actually use. In other words, your monthly compute usage depends on:</p>
+      <p>Because Neon runs on serverless architecture, you're billed only for the compute resources you actually use. In other words, your monthly compute usage depends on:</p>
       <ul>
         <li>How many compute endpoints are you running</li>
         <li>How large your compute endpoints are (in CUs)</li>

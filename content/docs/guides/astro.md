@@ -3,11 +3,13 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 summary: >-
-  Step-by-step guide for connecting an Astro project to a Neon Postgres
-  database, including project creation, dependency installation, and enabling
-  on-demand rendering for real-time queries.
+  Connecting Astro to Neon Postgres requires the Astro Node adapter for
+  on-demand (SSR) rendering so pages query the database at request time rather
+  than only at build time. The guide covers driver options including
+  node-postgres, postgres.js, and the Neon serverless driver, and shows query
+  patterns for both .astro page components and server endpoint API routes.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.115Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 

@@ -1,25 +1,30 @@
 ---
 title: Azure regions deprecation
 subtitle: What's changing, what to do, and answers to common questions
+summary: >-
+  Neon Azure regions (azure-eastus2, azure-westus3, azure-gwc) were deprecated
+  on April 7, 2026: new project creation is blocked, but existing projects keep
+  running with no end-of-support date currently set. Readers who need to act can
+  delete the project, migrate to a Neon AWS region, or move to Databricks
+  Lakebase to retain Azure data residency. The page also covers how to confirm
+  which region a project is in via the Console, CLI, or API, and what changes
+  when migrating, including new hostnames and project IDs.
 enableTableOfContents: true
 ---
 
-Neon Azure regions are deprecated and will no longer be supported as of **August 27, 2026**. This guide explains what the deprecation means and what actions are available if you have active projects in Azure regions.
+Neon Azure regions are deprecated. You can no longer create new projects in Azure regions, but existing Azure projects continue to be supported until further notice. This guide explains what the deprecation means and what actions are available if you have active projects in Azure regions.
 
 You should receive personalized email communication about your specific projects and next steps. This guide answers common questions and provides general guidance during the deprecation.
 
-## Key dates
+## What changed
 
-| Date            | What changes                                                                                                                |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| April 7, 2026   | Azure regions are deprecated. New project creation in Azure regions is restricted. Existing projects keep running normally. |
-| August 27, 2026 | Azure regions are no longer supported. Projects that haven't been migrated or deleted may be removed.                       |
+As of **April 7, 2026**, Azure regions are deprecated and new project creation in Azure regions is restricted. Existing projects keep running normally and remain supported until further notice. There is no end-of-support date today. If that changes, we'll give you advance notice and time to migrate.
 
 We'll contact organizations with active Azure projects directly to discuss migration options and timelines.
 
 ## What to do
 
-If you have one or more projects in an Azure region, take action before **August 27, 2026** or your projects may be removed and may not be recoverable. You have three options:
+Your existing Azure projects keep running, so there's no immediate action to take. If you'd like to move off Azure, you have three options:
 
 1. **Delete the project** if you no longer need it. This also stops storage costs from accruing. See [Delete a project](/docs/manage/projects#delete-a-project).
 2. **Migrate to a Neon AWS region.** Best if you don't need Azure residency. See [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) for the available migration methods.
@@ -43,17 +48,17 @@ You can check from the Console, the CLI, or the API:
 
 ![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)
 
-### Will my Azure project keep running until August 27, 2026?
+### Will my Azure project keep running?
 
-Yes. Until that date, your Azure project keeps running as it does today. Compute, storage, branching, and connections are unaffected.
+Yes. Your Azure project keeps running as it does today. Compute, storage, branching, and connections are unaffected. Existing Azure projects remain supported until further notice.
 
-### What happens on August 27, 2026?
+### Will my Azure project be removed?
 
-On that date, Azure regions are no longer supported. Projects that haven't been migrated or deleted may be removed, and removed projects may not be recoverable.
+No. Existing Azure projects remain supported until further notice. If we set a date to end Azure support in the future, we'll notify you in advance and give you time to migrate or export your data.
 
 ### What if I do nothing?
 
-Your project continues running until August 27, 2026. After that, it becomes eligible for removal with no guarantee of recovery. We'll reach out before then to discuss your options.
+Your project continues running as it does today. There's no deadline to migrate. If we decide to end Azure support in the future, we'll contact you ahead of time so you can plan a migration or export.
 
 ### I picked Azure for data residency. What are my options?
 
@@ -69,9 +74,9 @@ Project-level settings (branches, integrations, autoscaling configuration, IP Al
 
 If your migration method uses `pg_dump` and `pg_restore`, the dump itself is a backup. If you're using logical replication or the [Import Data Assistant](/docs/import/import-data-assistant), it's still good practice to take a `pg_dump` snapshot of your source database before you start. See [Backups](/docs/manage/backups) for details.
 
-### I need more time. Can I get an extension?
+### What if I need to stay on Azure for now?
 
-Reply to the migration outreach email when you receive it. If you have specific constraints, such as regulatory requirements, application architecture changes, or customer migration dependencies, we'll work through them with you to find a workable timeline.
+That's fine. Existing Azure projects remain supported until further notice, so you can keep running on Azure. If you have specific constraints, such as regulatory requirements, application architecture changes, or customer migration dependencies, and want to talk through a plan, reply to any migration outreach you receive or contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
 
 ### How do I contact Neon about my Azure projects?
 

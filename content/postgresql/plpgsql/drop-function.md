@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Returns SetOf
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DROP FUNCTION statement works the same across every standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or through a managed service. For enterprises operating in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built to keep you moving fast.
+The DROP FUNCTION statement works the same across every standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or through a managed service. For enterprises operating in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `drop function` statement to remove a function.

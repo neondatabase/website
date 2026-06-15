@@ -28,8 +28,8 @@ When you write to a Neon branch, the storage layer keeps the older versions of t
 From the CLI, restore to a specific timestamp:
 
 ```bash
-neon branches restore main --source main --preserve-under-name main-pre-restore \
-  --timestamp 2026-05-17T14:30:00Z
+neon branches restore main ^self@2026-05-17T14:30:00Z \
+  --preserve-under-name main-pre-restore
 ```
 
 This rewinds `main` to the chosen timestamp and keeps the pre-restore state under a new branch name in case you need it. See [instant restore](/docs/guides/branch-restore) for the full workflow.

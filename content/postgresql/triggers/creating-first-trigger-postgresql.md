@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/creating-first-trigger-postgresql/
 ogImage: /postgresqltutorial/PostgreSQL-Cretae-Trigger-Sample-Table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL Trigger
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-CREATE TRIGGER works the same on any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for the way you work.
+CREATE TRIGGER works the same on any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration that production workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE TRIGGER` statement to create a trigger.
@@ -140,7 +140,7 @@ BEGIN
 
 	RETURN NEW;
 END;
-$$
+$$;
 ```
 
 The function inserts the old last name into the `employee_audits` table including employee id, last name, and the time of change if the last name of an employee changes.

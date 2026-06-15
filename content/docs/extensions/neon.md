@@ -3,11 +3,16 @@ title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
 summary: >-
-  Covers the setup of the `neon` extension for gathering Neon-specific metrics,
-  including monitoring the Local File Cache hit ratio through the
-  `neon_stat_file_cache` view.
+  The `neon` PostgreSQL extension exposes the `neon_stat_file_cache` view,
+  which reports Local File Cache (LFC) hit ratio, misses, hits, and writes for
+  a Neon compute instance. Use it to diagnose cache efficiency and determine
+  whether your working set fits in memory. OLTP workloads should target a
+  `file_cache_hit_ratio` of 99% or better; a low ratio signals a need for a
+  larger compute size. LFC statistics reset on compute restart. `EXPLAIN
+  ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query LFC
+  and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-04-03T10:13:16.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -43,7 +48,7 @@ The `neon_stat_file_cache` view includes the following metrics:
   file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
   ```
 
-  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. If you find that your cache hit ration is quite low, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
+  For OLTP workloads, you should aim for a cache hit ratio of 99% or better. However, the ideal cache hit ratio depends on your specific workload and data access patterns. In some cases, a slightly lower ratio might still be acceptable, especially if the workload involves a lot of sequential scanning of large tables where caching might be less effective. If you find that your cache hit ratio is quite low, your working set may not be fully or adequately in memory. In this case, consider using a larger compute with more memory. Please keep in mind that the statistics are for the entire compute, not specific databases or tables.
 
 ### Using the neon_stat_file_cache view
 

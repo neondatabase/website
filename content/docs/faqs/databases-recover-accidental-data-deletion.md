@@ -28,13 +28,13 @@ History is billed at $0.20/GB-month on root branches only. See [History window](
 From the CLI:
 
 ```bash
-neon branches restore main --source-timestamp 2026-04-24T14:30:00Z
+neon branches restore main ^self@2026-04-24T14:30:00Z
 ```
 
 You can also create a new branch from the past, inspect it, then promote it. This is the safer pattern when you're not 100% sure about the timestamp:
 
 ```bash
-neon branches create --name recovery --parent main --timestamp 2026-04-24T14:30:00Z
+neon branches create --name recovery --parent 2026-04-24T14:30:00Z
 ```
 
 Connect to the new branch, verify the data is what you expect, then either copy rows back to `main` or promote the recovery branch. See [Instant restore](https://neon.com/docs/introduction/branch-restore).

@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 pg_plan_advice'
 page_title: 'PostgreSQL 19 pg_plan_advice - Query Plan Hints for PostgreSQL'
 page_description: 'Learn how to use PostgreSQL 19 pg_plan_advice to stabilize query plans, override planner decisions, and diagnose performance issues with plan hints.'
 ogImage: ''
-updatedOn: '2026-05-01T20:19:36.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Temporal Data Operations'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 REPACK Command'
   slug: 'postgresql-19/repack-command'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try `pg_plan_advice` for yourself ahead of the final release expected later in 2026. Beta 1 adds the `pg_plan_advice` module to stabilize and control planner decisions, generated and applied through an `EXPLAIN` workflow rather than inline SQL hints.
+</Admonition>
 
 **Summary**: PostgreSQL 19 introduces `pg_plan_advice`, a contrib module that brings query plan hints to PostgreSQL. Unlike Oracle or MySQL hints embedded in SQL comments, pg_plan_advice uses a GUC setting and an `EXPLAIN (PLAN_ADVICE)` workflow to generate, apply, and validate plan advice externally from query text.
 

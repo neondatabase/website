@@ -4,7 +4,7 @@ subtitle: 'Automate parallel feature development by giving every Claude Code sub
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-03T00:00:00.000Z'
-updatedOn: '2026-03-04T06:14:02.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 While modern AI assistants generate code at remarkable speeds, the development process often remains sequential. You ask an agent to build a feature and wait. You request a query optimization and wait again. This workflow is bottlenecked by the linear nature of the standard AI interface, which can only run one agent at a time, completing one task before starting the next.
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following:
 
 - **Claude Code:** Anthropic's official CLI tool installed. Visit [Claude code docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code) for installation instructions.
 - **Neon account and project:** A Neon account with an active project. Sign up at [neon.new](https://neon.new).
-- The [Neon CLI](/docs/reference/neon-cli) installed (`npm i -g neonctl` or `brew install neonctl`).
+- The [Neon CLI](/docs/cli) installed (`npm i -g neonctl` or `brew install neonctl`).
 - **Example application with Git repository**: Any application with a Git repository. This guide uses a Next.js app with Drizzle ORM (a simple social media app) as an example, but you can follow along with your own codebase. The emphasis here is on demonstrating the parallel workflow rather than the specifics of the application.
 
 <Steps>

@@ -36,7 +36,7 @@ The simplest path is the official GitHub Action. It creates a branch on PR open,
     DATABASE_URL: ${{ steps.create-branch.outputs.db_url }}
 ```
 
-For non-GitHub setups, the [Neon CLI](/docs/reference/neon-cli) exposes the same primitives: `neon branches create --name pr-123` and `neon branches delete pr-123`.
+For non-GitHub setups, the [Neon CLI](/docs/cli) exposes the same primitives: `neon branches create --name pr-123` and `neon branches delete pr-123`.
 
 <Admonition type="tip" title="Cost control on busy repos">
 Set a [branch time-to-live](/docs/guides/branch-expiration) on paid plans so abandoned PR branches clean themselves up. The Launch and Scale plans charge $1.50/branch-month (prorated hourly) for branches beyond the plan allowance.

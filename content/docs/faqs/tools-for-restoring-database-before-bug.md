@@ -35,8 +35,7 @@ You can restore through the Neon Console, the CLI, or the API.
 neon branches restore main ^self@2026-05-17T13:45:00Z
 
 # Or fork a new branch from that point and inspect first
-neon branches create --name recovery --parent main \
-  --parent-timestamp 2026-05-17T13:45:00Z
+neon branches create --name recovery --parent 2026-05-17T13:45:00Z
 ```
 
 The second approach is the safer pattern: create a recovery branch, verify the data, then promote it.

@@ -2,12 +2,16 @@
 title: pg_dump / pg_restore — Partial Twin
 subtitle: Create a partial Twin of your production database
 summary: >-
-  Covers the setup of a workflow to create a partial Neon Twin of a production
-  database using `pg_dump`, `pg_restore`, and `psql`, including necessary
-  directory structure and code configuration.
+  A GitHub Actions workflow that mirrors a production PostgreSQL schema and a
+  row-limited data subset into a Neon development database using `pg_dump
+  --schema-only`, `psql \copy`, and `pg_restore`. Use this approach when you
+  need a lightweight dev environment that reflects production structure without
+  copying the full dataset. The workflow runs on a daily cron schedule, supports
+  multi-table foreign key relationships, requires unpooled connection strings,
+  and is subject to GitHub Actions' 6-hour job limit.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.

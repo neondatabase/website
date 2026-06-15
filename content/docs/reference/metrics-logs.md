@@ -2,11 +2,16 @@
 title: Metrics and logs reference
 subtitle: Complete reference for all metrics and log fields exported by Neon
 summary: >-
-  Covers the reference for metrics and log fields exported by Neon to
-  observability platforms, detailing available metrics, their labels, and
-  integration specifics with tools like Datadog and Grafana Cloud.
+  Complete field-level reference for all metrics and Postgres log fields that
+  Neon exports to Datadog, Grafana Cloud, and OpenTelemetry, including metric
+  names, label keys (project_id, endpoint_id, compute_id, job), and log
+  metadata. Use this page to identify exact metric identifiers such as
+  neon_connection_counts, neon_lfc_hits, and host_cpu_seconds_total when
+  building dashboards or alerts. Metrics are not sent while a compute is
+  suspended by Scale to Zero, which can cause gaps; log export may also incur
+  network egress charges on paid plans above 500 GB.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -99,7 +104,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, billed on paid plans for usage over 100 GB
+- Additional network egress for log transmission, billed on paid plans for usage over 500 GB
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">

@@ -1,10 +1,13 @@
 ---
-title: 'How do I create a new database in my Neon project?'
-subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
+title: How do I create a new database in my Neon project?
+subtitle: >-
+  Add a database from the Console, the Neon CLI, or with a CREATE DATABASE
+  statement.
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/create-new-database-neon-project']
+redirectFrom:
+  - /faqs/create-new-database-neon-project
 ---
 
 A Neon project starts with one database (`neondb` by default) on its root branch. You can add more databases to that branch (or any child branch) from the **Roles & Databases** tab in the Console, with the Neon CLI, or with a standard `CREATE DATABASE` statement. Each branch supports up to 500 databases.
@@ -39,7 +42,7 @@ neon databases create \
   --branch <branch-id-or-name>
 ```
 
-If you've set a default project with `neon set-context`, you can drop `--project-id`. See the [`databases` command reference](/docs/reference/cli-databases).
+If you've set a default project with `neon set-context`, you can drop `--project-id`. See the [`databases` command reference](/docs/cli/databases).
 
 </TabItem>
 

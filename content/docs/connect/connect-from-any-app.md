@@ -2,11 +2,13 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 summary: >-
-  Covers the process of connecting to a Neon database from any application,
-  including how to obtain connection strings and use the Neon VS Code
-  extension for enhanced development.
+  Neon connection strings are generated in the Neon Console by selecting a
+  branch, compute, database, and role. Use the pooled endpoint (append
+  `-pooler`) for higher concurrency, or the direct endpoint on port 5432 when
+  your driver requires a native connection. A serverless driver enables
+  WebSocket and HTTP for edge runtimes where TCP is unavailable.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>
@@ -101,7 +103,7 @@ It's included in your Neon connection string. Click the **Connection** button on
 
 ### Save your connection details to 1Password
 
-If have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
+If you have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
 
 ![1Password button on connection modal](/docs/connect/1_password_button.png)
 

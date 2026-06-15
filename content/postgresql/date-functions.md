@@ -7,7 +7,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BOOL_OR() Function
@@ -18,14 +18,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's date and time functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around your workflow, from instant branching to effortless autoscaling.
+PostgreSQL's date and time functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 The following page shows the most commonly used PostgreSQL date functions that allow you to effectively manipulate date and time values.
 
 ## Section 1\. Getting the current date and time
 
-This section shows you various functions for getting the current date, current date and time, current timestamp, without or without timezone.
+This section shows you various functions for getting the current date, current date and time, current timestamp, with or without timezone.
 
 - [CURRENT_DATE](postgresql-date-functions/postgresql-current_date) – Return the current date.
 - [CURRENT_TIME](postgresql-date-functions/postgresql-current_time) – Return the current time without date parts.

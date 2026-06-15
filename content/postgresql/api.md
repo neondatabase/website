@@ -7,7 +7,7 @@ page_description: >-
   and APIs.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-api/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Functions
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Connecting to PostgreSQL from C#, Java, PHP, or Python works the same way on any standard Postgres deployment, so the drivers and patterns covered here apply wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to power production workloads. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform that gets out of your way with instant provisioning, branching, and serverless economics.
+Connecting to PostgreSQL from C#, Java, PHP, or Python works the same way on any standard Postgres deployment, so the drivers and patterns covered here apply wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to power production workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 The **PostgreSQL API** section covers how to interact with PostgreSQL databases from various programming languages. Each language has its own database driver and API that provides a standardized way to connect to, query, and manipulate data in PostgreSQL databases.

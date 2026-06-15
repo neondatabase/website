@@ -34,8 +34,7 @@ The branch keeps its name and connection string. Any writes made after the targe
 
 ```bash
 neon branches create --name pre-incident \
-  --parent main \
-  --parent-timestamp 2026-04-25T14:32:00Z
+  --parent 2026-04-25T14:32:00Z
 ```
 
 This gives you a separate branch at the pre-bug state. Useful when you want to inspect the historical data without touching production.

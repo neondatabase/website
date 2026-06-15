@@ -2,11 +2,12 @@
 title: Neon community
 subtitle: Learn how to get involved in the Neon community
 summary: >-
-  Covers how to contribute to the Neon community through documentation,
-  community guides, code contributions, and engagement on platforms like Discord
-  and YouTube.
+  Ways to contribute to Neon's open-source serverless Postgres project: write
+  docs, submit community guides, share example applications, or file bugs in
+  Neon's GitHub repositories. Find the right entry point for contributing or
+  connecting with other Neon users on Discord, X (Twitter), or YouTube.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:01:14.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon is [open source](/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:

@@ -13,8 +13,8 @@ import Blob from './images/blob.inline.svg';
 const STATS_DATA = [
   {
     icon: databaseIcon,
-    value: '40,000+',
-    description: 'Databases provisioned daily by developers worldwide.',
+    value: '12,000,000',
+    description: 'Postgres databases turned on every day.',
   },
   {
     icon: gearIcon,
@@ -58,7 +58,7 @@ const Vision = () => (
 
         <h3 className="mt-5 max-w-[736px] text-5xl leading-dense font-normal tracking-tighter text-gray-new-40 xl:max-w-[600px] xl:text-[36px] lg:max-w-full lg:text-2xl md:mt-4 md:text-xl">
           <span className="text-black-pure">Neon is a Databricks company.</span> In May 2025, Neon
-          joined Databricks to shape the future of Postgres and AI-native development.
+          joined Databricks to shape the future of AI-native application backends.
         </h3>
 
         <div className="mt-[194px] flex gap-x-24 xl:mt-[136px] xl:gap-x-16 lg:gap-x-8 md:mt-9 md:flex-col md:gap-y-7 md:pr-24">
@@ -73,9 +73,12 @@ const Vision = () => (
 
         <div className="grid gap-y-10 xl:gap-y-9 lg:gap-y-7 md:gap-y-4">
           <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:text-[15px]">
-            The mission stays the same:{' '}
-            <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">deliver Postgres</mark> for
-            developers and AI agents — now backed by the scale and expertise of Databricks.
+            The mission stays the same: deliver backend primitives{' '}
+            <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">
+              {' '}
+              for developers and AI agents
+            </mark>{' '}
+            — now backed by the scale and expertise of Databricks.
           </p>
 
           <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:mr-8 md:text-[15px]">

@@ -2,11 +2,16 @@
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
 summary: >-
-  How to create and manage read replicas in Neon, including steps for adding
-  replicas to branches, configuring compute sizes, and utilizing features like
-  Autoscaling and Scale to Zero for optimized performance.
+  Neon read replica management guide covering how to add a read-only compute to
+  any branch, connect to it, and adjust its size or Scale to Zero settings via
+  the Console, CLI, or API. Use this page when you need step-by-step
+  instructions for offloading read traffic (analytics, horizontal scaling,
+  read-only access) to a separate compute endpoint on an existing Neon branch.
+  Available on all Neon plans. Includes replication delay monitoring and
+  automatic synchronization of max_connections and related Postgres parameters
+  between primary and replica computes.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.037Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -26,7 +31,7 @@ Regardless of the application, the steps for creating, configuring, and connecti
 
 ## Create a read replica
 
-Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/reference/cli-branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+Creating a read replica involves adding a read replica compute to a branch. You can add a read replica compute to any branch in your Neon project using the Neon Console, [Neon CLI](/docs/cli/branches#create), or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 <Admonition type="note">
 The Free plan is limited to a maximum of 3 read replica computes per project.
@@ -52,7 +57,7 @@ In a few seconds, your read replica is provisioned and appears on the **Computes
 
 <TabItem>
 
-To create a read replica using the Neon CLI, use the [branches](/docs/reference/cli-branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
+To create a read replica using the Neon CLI, use the [branches](/docs/cli/branches) command, specifying the `add-compute` subcommand with `--type read_only`. If you have more than one Neon project, also include the `--project-id` option.
 
 ```bash
 neon branches add-compute mybranch --type read_only
@@ -126,7 +131,7 @@ curl -X 'GET' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+For information about obtaining the required `project_id` parameter for this command, refer to [Get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 In the response body for this method, read replica computes are identified by the `type` value, which is `read_only`.
 </TabItem>
@@ -170,7 +175,7 @@ curl --request PATCH \
 '
 ```
 
-Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Update endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 
@@ -202,7 +207,7 @@ curl --request DELETE \
      --header "Authorization: Bearer $NEON_API_KEY"
 ```
 
-Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining an Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+Computes are identified by their `project_id` and `endpoint_id`. For information about obtaining the required `project_id` and `endpoint_id` parameters, refer to [Delete endpoint](https://api-docs.neon.tech/reference/deleteprojectendpoint), in the _Neon API reference_. For information about obtaining a Neon API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
 
 </TabItem>
 

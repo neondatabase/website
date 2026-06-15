@@ -1,10 +1,13 @@
 ---
-title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
-subtitle: 'Project Dashboard → Connect. Pick branch, database, and role; copy the string for your framework.'
+title: Where do I find a copy-pasteable Postgres connection string in Neon?
+subtitle: >-
+  Project Dashboard → Connect. Pick branch, database, and role; copy the string
+  for your framework.
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/where-find-database-connection-string']
+redirectFrom:
+  - /faqs/where-find-database-connection-string
 ---
 
 ## Quick answer
@@ -53,7 +56,7 @@ If you want the connection string from the terminal:
 neon connection-string
 ```
 
-Pass the branch name as a positional argument, and use `--database-name <db>`, `--role-name <role>`, or `--pooled` to control the output. See [`neon connection-string`](/docs/reference/cli-connection-string).
+Pass the branch name as a positional argument, and use `--database-name <db>`, `--role-name <role>`, or `--pooled` to control the output. See [`neon connection-string`](/docs/cli/connection-string).
 
 <Admonition type="tip" title="Save it to a password manager">
 The Console's modal has a **Save in 1Password** button if you have the 1Password browser extension installed. It pushes the connection details straight into a new 1Password item so you don't have to copy-paste into the secret manager separately.

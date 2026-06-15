@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Serverless Postgres with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
+> Postgres Database, Authentication, and more backend primitives coming soon with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
 
 ## How billing works
 
@@ -33,9 +33,9 @@ Invoices under $0.50 are not collected.
 | Storage                          | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                   |
 | Instant restore                  | -                                          | $0.20/GB-month                       | $0.20/GB-month                                                   |
 | History window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
-| Snapshots (manual)               | 1                                          | 10                                   | 10                                                               |
+| Snapshots (manual)               | 1                                          | 100                                  | 100                                                              |
 | Snapshots (scheduled)            | -                                          | Yes                                  | Yes                                                              |
-| Public network transfer (egress) | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                   |
+| Public network transfer (egress) | 5 GB included                              | 500 GB included, then $0.10/GB       | 500 GB included, then $0.10/GB                                   |
 | Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                     |
 | Monitoring retention             | 1 day                                      | 3 days                               | 14 days                                                          |
@@ -99,7 +99,9 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 ## Links
 
 - Get started: https://neon.com/signup
-- Full plan details: https://neon.com/docs/introduction/plans.md
-- Open Source Program: https://neon.com/programs/open-source.md
-- Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
-- Startup credits: https://neon.com/startups
+- Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
+- Get up to $100k in credits for your startup: https://neon.com/startups
+- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
+- More plan details: https://neon.com/docs/introduction/plans.md
+

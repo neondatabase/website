@@ -2,10 +2,16 @@
 title: Magic Link
 subtitle: Passwordless sign-in via email magic links
 summary: >-
-  Covers the setup of Magic Link functionality in Neon Auth, enabling users to
-  sign in by clicking a link sent to their email, with no password required.
+  Magic Link is a Neon Auth plugin that lets users sign in without a
+  password by clicking a time-limited link sent to their email, with expiration
+  configurable from 5 to 1440 minutes. Use this page when you want to add
+  passwordless email authentication to a project that already has Neon Auth
+  enabled, using either the Neon SDK's `signIn.magicLink()` method or the
+  `magicLink` prop on `NeonAuthUIProvider`. The plugin also supports a webhook
+  event (`send.magic_link`) to bypass the built-in mailer and deliver links
+  through a custom email provider.
 enableTableOfContents: true
-updatedOn: '2026-05-12T20:18:01.470Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

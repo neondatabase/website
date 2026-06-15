@@ -2,11 +2,13 @@
 title: Component guide
 subtitle: Most commonly used components for documentation writers
 summary: >-
-  Step-by-step guide for using common MDX components in Neon documentation,
-  including best practices, syntax, and prop usage for effective content
-  organization and presentation.
+  MDX component reference for Neon documentation writers. Covers syntax, props,
+  and live-rendered previews for frequently used components: Admonition, Steps,
+  CodeTabs, TechCards, DetailIconCards, TwoColumnLayout, CheckList, and InfoBlock.
+  Use this page when choosing between similar components or looking up correct
+  prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.

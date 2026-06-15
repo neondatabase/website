@@ -1,6 +1,12 @@
 ---
 title: Spending limit
 subtitle: Manage your organization's spending with better visibility and control
+summary: >-
+  Spending limits cap an organization's total monthly Neon charges on Launch and
+  Scale plans, triggering email alerts at 80% and 100% of the configured amount.
+  When the limit is reached, projects continue running and charges accumulate
+  until you raise the limit or the billing cycle resets. Organization admins
+  set, edit, or disable the limit in the Neon Console or via the Management API.
 enableTableOfContents: true
 tag: new
 ---

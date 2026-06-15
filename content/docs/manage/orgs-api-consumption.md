@@ -1,11 +1,15 @@
 ---
 title: Query organization usage metrics with the Neon API
 summary: >-
-  Covers the retrieval of account-level and project-level consumption metrics
-  for organizations using the Neon API, including how to find organization IDs
-  necessary for querying.
+  The Neon API provides two organization-scoped consumption endpoints on the
+  Scale plan: `/consumption_history/account` for org-wide totals and
+  `/consumption_history/projects` for per-project breakdowns. Both return
+  usage metrics at hourly, daily, or monthly granularity. Use this page to
+  audit cross-project usage, build chargeback reports, or monitor billing
+  trends. To find your org_id before querying, use GET
+  `/users/me/organizations` with a personal API key.
 enableTableOfContents: true
-updatedOn: '2026-04-02T11:15:22.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <ConsumptionAccountApiDeprecation/>

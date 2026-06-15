@@ -2,11 +2,14 @@
 title: Component architecture
 subtitle: Technical implementation details for developers and maintainers
 summary: >-
-  Covers the architecture and implementation details of the Neon documentation
-  component system, including MDX integration, file structure, and development
-  workflows for modifying and extending components.
+  Technical reference for the Neon documentation MDX component system. Covers
+  file layout under src/components/pages/doc/, the sharedMdxComponents.js
+  registry, and the two icon loading strategies. TechCards loads dynamic SVG
+  files from /public/images/technology-logos/. DetailIconCards uses static
+  inline imports mapped in component code. Use this page when adding, modifying,
+  or debugging MDX components, not when looking for usage examples or icon names.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.777Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A technical reference for developers and maintainers who need to understand, modify, or extend the Neon documentation component system. This guide covers the architecture, file structure, and implementation details.

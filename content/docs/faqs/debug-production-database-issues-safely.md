@@ -35,8 +35,7 @@ The branch runs on its own compute and uses copy-on-write storage, so writes don
 
 ```bash
 neon branches create --name pre-deploy \
-  --parent main \
-  --timestamp 2026-04-25T08:00:00Z
+  --parent 2026-04-25T08:00:00Z
 ```
 
 History window: 6 hours on Free, up to 7 days on Launch, up to 30 days on Scale.

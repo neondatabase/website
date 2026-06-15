@@ -2,11 +2,13 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 summary: >-
-  Covers the setup of Neon Auth, a managed authentication service that
-  integrates with your Neon database, allowing for branch-aware authentication
-  and seamless testing of authentication workflows in isolated environments.
+  Neon Auth is a managed authentication service built on Better Auth. It stores
+  users, sessions, and OAuth configuration in your Neon Postgres database under
+  the neon_auth schema, compatible with Row Level Security. Every database branch
+  gets its own isolated auth environment, so you can test sign-up, login, and
+  OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -24,7 +26,7 @@ redirectFrom:
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
+Neon Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
 
 ## Quick start guides
 

@@ -2,16 +2,20 @@
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 summary: >-
-  Covers the process of using the Backup & Restore feature in Neon to instantly
-  restore branches to previous states, create and manage snapshots, and schedule
-  automated backups for data recovery.
+  Neon's Backup & Restore feature combines instant point-in-time restore (PITR)
+  and snapshots to recover a branch from accidental changes, schema issues, or
+  data loss. Use it when you need to roll back a root branch to a specific
+  timestamp or LSN, create manual snapshots before risky changes, or schedule
+  automated daily, weekly, or monthly backups. Snapshot storage is billed at
+  $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
+  limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
-<Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+<Admonition type="note" title="Snapshots">
+The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
 **Pricing:** Snapshot storage is billed at $0.09/GB-month.
 
@@ -93,7 +97,7 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
-For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 
 </TabItem>
 

@@ -1,14 +1,18 @@
 ---
 title: Glossary
 summary: >-
-  Covers definitions and explanations of key terms related to Neon's services,
-  including access tokens, compute activity metrics, user roles, API
-  authentication, and resource management operations.
+  The Neon glossary defines platform-specific and Postgres terms including
+  branch, Compute Unit (CU), WAL, autoscaling, pooled connection string, instant
+  restore, and logical replication. Look up Neon concepts like scale-to-zero,
+  Pageserver, history window, Safekeeper, or GB-month, or distinguish
+  Neon-specific usage from standard Postgres terminology. Billing metrics,
+  organization roles, branch types, and Control Plane operations are all
+  defined here.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-12T01:28:52.381Z'
 ---
 
 ## access token
@@ -189,7 +193,7 @@ Example context file contents:
 }
 ```
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## copy-on-write
 
@@ -333,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-A serverless Postgres platform designed to help developers build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as autoscaling, branching, instant restore, and more. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Neon Postgres, Neon Auth, and Data API today, with Storage, Compute, and AI Gateway coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -373,7 +377,7 @@ A feature in Neon that enables teams to collaborate on projects under a shared a
 
 Admins oversee all aspects of the organization, including managing members, permissions, billing, and projects. Members have access to all organizational projects but cannot manage billing or members. Collaborators have limited access to specific projects shared with them and do not have access to the organization dashboard.
 
-You get one Org with a Free plan account. Additional organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
+Neon organizations can be free or paid. You can create new organizations at any time. For more, see [Organizations](/docs/manage/organizations).
 
 ## Page
 
@@ -447,7 +451,7 @@ When you run a Neon CLI command without specifying an organization (via `--org-i
 
 Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## Project
 

@@ -2,16 +2,21 @@
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
 summary: >-
-  Covers the setup of the Neon Data API, a secure HTTP interface for managing
-  Neon databases, enabling access from browsers and serverless functions while
-  ensuring scalability and security.
+  Neon Data API is a PostgREST-compatible HTTP query interface for Neon
+  Postgres. It lets web browsers, Cloudflare Workers, Vercel Edge, and
+  serverless functions query a database without persistent TCP connections.
+  Standard Postgres drivers don't work in browsers or edge runtimes. The Data
+  API solves this by accepting standard HTTP requests, validating JWTs from any
+  auth provider, and enforcing PostgreSQL Row-Level Security policies. Each
+  request is stateless, so the API scales to thousands of concurrent users
+  without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
-The Neon Data API provides a secure, stateless HTTP interface to your database. It lets you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
+The Neon Data API is the HTTP query service in the Neon backend for apps and agents. It provides a secure, stateless interface to your database, letting you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
 
 - **Browser & edge compatibility**
 

@@ -2,11 +2,15 @@
 title: Monitor query performance
 subtitle: View and analyze query performance for your Neon database
 summary: >-
-  Covers the monitoring of query performance in a Neon database, detailing how
-  to access and analyze query history through the Neon Console's Monitoring
-  page.
+  The Query performance tab in the Neon Console Monitoring page displays the
+  top previously run queries for a branch, compute, and database, grouped by
+  normalized form and sortable by frequency or average execution time. Use it
+  to identify slow or high-frequency queries without installing any extensions,
+  since the view is built on the `pg_stat_statements` extension installed on a
+  system-managed database. Query history resets whenever the Neon compute
+  suspends or restarts, including after scaling to zero due to inactivity.
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---

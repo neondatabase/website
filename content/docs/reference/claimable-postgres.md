@@ -2,14 +2,18 @@
 title: Claimable Postgres by Neon
 subtitle: Launch an instant Neon Postgres database with zero configuration
 summary: >-
-  How to launch an instant Neon Postgres database with a single API call, which
-  expires after 72 hours unless claimed to a Neon account, with details on usage
-  limits and claiming process.
+  Claimable Postgres provisions an instant database via a single
+  unauthenticated API call, CLI command, Node.js SDK, or Vite plugin with no
+  account required. Unclaimed databases expire after 72 hours and are capped
+  at 100 MB storage and 1 GB transfer. Claiming to a Neon account removes
+  expiration and raises limits to the Free plan. Use this page for the REST
+  API reference, neon-new CLI options, and SDK integration for building
+  instant-database or launchpad experiences.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-03-09T15:58:12.493Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Claimable Postgres gives you an instant Postgres database with a single API call. No account required.

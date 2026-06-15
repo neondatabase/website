@@ -2,12 +2,16 @@
 title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 summary: >-
-  How to replicate data from a Neon Postgres database to external destinations
-  using Estuary Flow by configuring a Postgres source connector for real-time
-  data streaming and optional transformations.
+  Estuary Flow's Neon PostgreSQL source connector streams CDC events from a
+  Neon Postgres database to any Estuary materialization destination at
+  sub-100ms latency. Use this guide when you need continuous, low-latency
+  replication of inserts, updates, and deletes from Neon to an external system.
+  Setup requires enabling logical replication (permanently sets wal_level to
+  logical project-wide), a direct non-pooled connection string, and IP
+  allowlisting for Estuary's egress addresses.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

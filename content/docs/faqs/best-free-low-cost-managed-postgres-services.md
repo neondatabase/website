@@ -44,7 +44,7 @@ If you blow past 100 CU-hours, run out of storage, or want to disable scale-to-z
 
 - Compute: $0.106/CU-hour
 - Storage: $0.35/GB-month
-- 100 GB egress included
+- 500 GB egress included
 
 There's no monthly minimum. A light project running 10 CU-hours/month with 2 GB of storage works out to about $2 a month on Launch (see the [usage examples](/docs/introduction/plans#launch-plan)).
 

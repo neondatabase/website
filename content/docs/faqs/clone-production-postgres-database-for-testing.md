@@ -32,8 +32,7 @@ You can also branch from a specific point in time, which is useful for reproduci
 ```bash
 neon branches create \
   --name repro-bug-1234 \
-  --parent main \
-  --parent-timestamp 2026-04-24T15:00:00Z
+  --parent 2026-04-24T15:00:00Z
 ```
 
 ## Keep dev branches short-lived

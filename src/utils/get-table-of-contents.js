@@ -29,8 +29,19 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
     const title = currentHeading.title.replace(/(#+)\s/, '');
     const customId = extractCustomId(title);
-    const cleanedTitle = title.replace(/\(#[^)]+\)$/, '');
-    const titleWithInlineCode = cleanedTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
+    const cleanedTitle = title.replace(/\(#[^)]+\)$/, '').trim();
+    // CLI reference pages use full-path headings ("### neonctl branches
+    // restore (#restore)") for unambiguous, copy-pasteable anchors. Keep the
+    // right-rail label short: drop the binary and top-level command, leaving
+    // "restore" (or "oauth-provider add" on nested pages). Double-gated on a
+    // custom ID so ordinary headings that merely mention neonctl (e.g.
+    // "### neonctl init" in prose docs) keep their full text.
+    let displayTitle = cleanedTitle;
+    if (customId && /^neonctl\s+\S+/.test(cleanedTitle)) {
+      const rest = cleanedTitle.replace(/^neonctl\s+\S+\s*/, '').trim();
+      displayTitle = rest || cleanedTitle.replace(/^neonctl\s+/, '');
+    }
+    const titleWithInlineCode = displayTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
       if (isNumbered && stepsIndex !== currentStepsIndex) {

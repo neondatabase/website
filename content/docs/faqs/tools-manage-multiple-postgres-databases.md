@@ -13,7 +13,7 @@ redirectFrom:
 
 ## Short answer
 
-Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/reference/neon-cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
+Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
 
 ## How the hierarchy works
 
@@ -46,7 +46,7 @@ The CLI handles bulk operations cleanly:
 neon projects list
 
 # Create a project for a new customer
-neon projects create --name acme-corp --region aws-us-east-1
+neon projects create --name acme-corp --region-id aws-us-east-1
 
 # Get the connection string for its main branch
 neon connection-string --project-id quiet-frost-12345

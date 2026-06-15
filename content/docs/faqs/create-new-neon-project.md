@@ -1,10 +1,13 @@
 ---
-title: 'How do I create a new project in Neon?'
-subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
+title: How do I create a new project in Neon?
+subtitle: >-
+  Create one from the Console or the Neon CLI. Each project gets its own
+  Postgres database, branches, and computes.
 enableTableOfContents: true
-updatedOn: '2026-06-15T16:20:23.364Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
-redirectFrom: ['/faqs/create-new-neon-project']
+redirectFrom:
+  - /faqs/create-new-neon-project
 ---
 
 A Neon project is your top-level workspace. Each project has its own root branch, default database, default role, and primary compute. To create one, click **New Project** in the [Neon Console](https://console.neon.tech) and pick a name, Postgres version, and region. Or use the Neon CLI with `neon projects create`. Project limits depend on your plan: Free and Launch get 100 projects, Scale gets 1,000.
@@ -38,7 +41,7 @@ neon projects create \
   --region-id aws-us-east-2
 ```
 
-Add `--org-id` to target a specific organization. The output includes the new project ID and the default connection string. See the [`projects` command reference](/docs/reference/cli-projects).
+Add `--org-id` to target a specific organization. The output includes the new project ID and the default connection string. See the [`projects` command reference](/docs/cli/projects).
 
 </TabItem>
 

@@ -1,4 +1,4 @@
-text: 'Team accounts with unlimited members now available to everyone! Invite your teammates and ship faster together, even on the Free Plan.'
+text: "New in Neon: vector (ANN) and text (BM25) search extensions optimized for Neon's lakebase architecture. Read the docs."
 link:
-  url: 'https://neon.com/docs/changelog/2026-03-13'
+  url: 'https://neon.com/docs/ai/lakebase-search'
   target: '_blank'
