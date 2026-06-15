@@ -89,27 +89,25 @@ const Post = ({
         ) : (
           <article>
             {isFaq ? (
-              <>
-                <div className="mb-5 flex justify-end sm:mb-3">
+              <div>
+                <h1
+                  className={cn(
+                    'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                    tag && 'inline'
+                  )}
+                >
+                  {title}
+                </h1>
+                {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                {subtitle && (
+                  <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
+                    {subtitle}
+                  </p>
+                )}
+                <div className="mt-5 md:mt-4">
                   <DropdownMenu gitHubPath={gitHubPath} />
                 </div>
-                <div>
-                  <h1
-                    className={cn(
-                      'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                      tag && 'inline'
-                    )}
-                  >
-                    {title}
-                  </h1>
-                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-                  {subtitle && (
-                    <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
-                      {subtitle}
-                    </p>
-                  )}
-                </div>
-              </>
+              </div>
             ) : (
               <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
                 <div className={cn(!isChangelog && 'max-w-xl 2xl:max-w-[520px]')}>

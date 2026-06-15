@@ -8,7 +8,7 @@ import FaqCard from 'components/pages/faqs/faq-card';
 import SearchInput from 'components/shared/blog-search/search-input';
 import debounce from 'utils/debounce';
 
-const FaqSearch = ({ children, posts, searchInputClassName }) => {
+const FaqSearch = ({ children, posts, searchInputClassName, basePath }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -95,7 +95,7 @@ const FaqSearch = ({ children, posts, searchInputClassName }) => {
             {filteredPosts.length} results found
           </div>
           {filteredPosts.map((post) => (
-            <FaqCard key={post.slug} {...post} />
+            <FaqCard key={post.slug} {...post} basePath={basePath} />
           ))}
         </div>
       )}
@@ -114,6 +114,7 @@ FaqSearch.propTypes = {
     })
   ).isRequired,
   searchInputClassName: PropTypes.string,
+  basePath: PropTypes.string,
 };
 
 export default FaqSearch;

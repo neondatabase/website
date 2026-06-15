@@ -41,7 +41,9 @@ const getActiveMenu = (navigation, slug) => {
 const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const menu = getActiveMenu(navigation, currentSlug);
+  const isFaqZone = currentSlug === 'faqs' || currentSlug.startsWith('faqs/');
+  // FAQ zone keeps the bordered sidebar column for alignment but renders no nav — browse via the hub.
+  const menu = isFaqZone ? null : getActiveMenu(navigation, currentSlug);
   const navRef = useRef(null);
 
   // Get SDK TOC for current page from pre-loaded data

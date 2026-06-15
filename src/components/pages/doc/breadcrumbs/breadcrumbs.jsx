@@ -27,7 +27,7 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
       if (slug === 'guides') {
         href = LINKS.guides;
       } else if (slug === 'faqs') {
-        href = LINKS.faqs;
+        href = `${DOCS_BASE_PATH}faqs`;
       } else {
         href = `${baseUrl}${slug}`;
       }

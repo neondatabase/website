@@ -55,8 +55,9 @@ SubItem.propTypes = {
   basePath: PropTypes.string.isRequired,
 };
 
-const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiveItems }) => {
+const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, setActiveItems }) => {
   const LinkTag = slug ? Link : 'button';
+  const isFaq = slug === 'faqs';
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
@@ -77,7 +78,14 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
   const isLastActive = isActive && activeItems.at(-1) === slug;
 
   return (
-    <li className={cn('relative hover:z-10', subnav && 'group')}>
+    <li
+      className={cn(
+        'relative hover:z-10',
+        subnav && 'group',
+        isFaq &&
+          "flex items-center pl-6 before:absolute before:top-1/2 before:left-0 before:h-[18px] before:w-px before:-translate-y-1/2 before:bg-gray-new-90 before:content-[''] dark:before:bg-gray-new-15"
+      )}
+    >
       <LinkTag
         className={cn(
           'relative flex h-full items-center gap-1',
@@ -92,6 +100,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
         )}
         to={href || undefined}
       >
+        {isFaq && icon && <Icon title={icon} className="mr-1.5 size-4 shrink-0 text-primary-2" />}
         {title}
         {subnav && (
           <ChevronIcon
@@ -149,6 +158,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
 Item.propTypes = {
   nav: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
