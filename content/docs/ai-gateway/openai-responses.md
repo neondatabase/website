@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for gpt-5-5-pro and codex model variants, which do not
   work with the chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-11T17:20:52.899Z'
+updatedOn: '2026-06-15T08:51:16.298Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -46,7 +46,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_KEY,
-  baseURL: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/openai/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1`,
 });
 
 const response = await client.responses.create({
@@ -63,7 +63,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ['NEON_AI_GATEWAY_KEY'],
-    base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/openai/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/openai/v1",
 )
 
 response = client.responses.create(
@@ -75,7 +75,7 @@ print(response.output_text)
 ```
 
 ```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/openai/v1/responses" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -115,7 +115,7 @@ with client.responses.stream(
 ```
 
 ```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/openai/v1/responses" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -d '{

@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-12T16:38:18.194Z'
+updatedOn: '2026-06-15T08:51:16.298Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -47,7 +47,7 @@ br-<name>-api.<cell>.<region>.aws.neon.tech
 For example:
 
 ```bash
-export NEON_AI_GATEWAY_HOST=br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
 ```
 
 This is different from your database connection string.
@@ -88,7 +88,7 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_KEY,
-  baseURL: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const response = await client.chat.completions.create({
@@ -108,7 +108,7 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_KEY"],
-    base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 response = client.chat.completions.create(
@@ -120,7 +120,7 @@ print(response.choices[0].message.content)
 ```
 
 ```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -143,7 +143,7 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_KEY,
-  baseURL: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
 });
 
 const stream = await client.chat.completions.create({
@@ -166,7 +166,7 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_KEY"],
-    base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
 )
 
 with client.chat.completions.create(
@@ -179,7 +179,7 @@ with client.chat.completions.create(
 ```
 
 ```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -d '{

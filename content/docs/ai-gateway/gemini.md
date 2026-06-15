@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-06-14T11:12:18.690Z'
+updatedOn: '2026-06-15T08:51:16.298Z'
 ---
 
 The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use it when you're already working with the `google-genai` SDK and want to keep your existing code. For most use cases, the [chat completions](/docs/ai-gateway/chat-completions) endpoint is simpler to set up and works with Gemini models via the OpenAI SDK.
@@ -45,7 +45,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({
   apiKey: process.env.NEON_AI_GATEWAY_KEY,
   httpOptions: {
-    baseUrl: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/gemini`,
+    baseUrl: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini`,
   },
 });
 
@@ -65,7 +65,7 @@ import os
 client = genai.Client(
     api_key=os.environ['NEON_AI_GATEWAY_KEY'],
     http_options=types.HttpOptions(
-        base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/gemini",
+        base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/gemini",
     ),
 )
 
@@ -79,7 +79,7 @@ print(response.text)
 
 ```bash shouldWrap
 curl -X POST \
-  "https://$NEON_AI_GATEWAY_HOST/ai-gateway/gemini/v1beta/models/databricks-gemini-2-5-flash:generateContent" \
+  "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/gemini/v1beta/models/databricks-gemini-2-5-flash:generateContent" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -d '{

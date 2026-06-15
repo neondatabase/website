@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-11T17:20:52.899Z'
+updatedOn: '2026-06-15T08:51:16.298Z'
 ---
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
@@ -36,7 +36,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   apiKey: process.env.NEON_AI_GATEWAY_KEY,
-  baseURL: `https://${process.env.NEON_AI_GATEWAY_HOST}/ai-gateway/anthropic`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`,
 });
 
 const message = await client.messages.create({
@@ -54,7 +54,7 @@ import os
 
 client = anthropic.Anthropic(
     api_key=os.environ['NEON_AI_GATEWAY_KEY'],
-    base_url=f"https://{os.environ['NEON_AI_GATEWAY_HOST']}/ai-gateway/anthropic",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/anthropic",
 )
 
 message = client.messages.create(
@@ -67,7 +67,7 @@ print(message.content[0].text)
 ```
 
 ```bash shouldWrap
-curl -X POST "https://$NEON_AI_GATEWAY_HOST/ai-gateway/anthropic/v1/messages" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/anthropic/v1/messages" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_KEY" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \
