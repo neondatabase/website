@@ -6,8 +6,10 @@ summary: >-
   AI Gateway. Required for gpt-5-5-pro and codex model variants, which do not
   work with the chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T08:51:16.298Z'
+updatedOn: '2026-06-15T13:34:36.031Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
 

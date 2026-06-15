@@ -7,8 +7,10 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-15T11:36:12.057Z'
+updatedOn: '2026-06-15T13:34:36.031Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
 

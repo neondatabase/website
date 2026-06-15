@@ -5,8 +5,10 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-11T16:21:17.644Z'
+updatedOn: '2026-06-15T13:34:36.031Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 ## Authentication errors
 

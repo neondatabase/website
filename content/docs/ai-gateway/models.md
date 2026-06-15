@@ -7,8 +7,10 @@ summary: >-
   databricks- prefix, but the short form without the prefix also works. Use
   either form in the model field of any request.
 enableTableOfContents: true
-updatedOn: '2026-06-15T11:49:45.116Z'
+updatedOn: '2026-06-15T13:34:36.031Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 Neon AI Gateway serves models hosted by Databricks. Model IDs use the `databricks-` prefix (for example, `databricks-claude-sonnet-4-6`). Both forms are accepted. Use either form in the `model` field of any request, regardless of which endpoint you use.
 

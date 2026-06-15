@@ -6,8 +6,10 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-15T08:51:16.298Z'
+updatedOn: '2026-06-15T13:34:36.031Z'
 ---
+
+<PrivatePreviewEnquire/>
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models): Anthropic, OpenAI, Google, and Alibaba. Switch models by changing a single field.
 
