@@ -6,7 +6,7 @@ summary: >-
   Supports single-part and multipart uploads, range requests, batch deletes,
   and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-15T20:35:44.700Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -52,7 +52,7 @@ client.put_object(
 ```bash shouldWrap
 aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
   --content-type image/jpeg \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -134,7 +134,7 @@ with open('./photo.jpg', 'wb') as f:
 
 ```bash shouldWrap
 aws s3 cp s3://my-bucket/images/photo.jpg ./photo.jpg \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -199,7 +199,7 @@ print(response.get('CommonPrefixes', []))
 
 ```bash shouldWrap
 aws s3 ls s3://my-bucket/images/ \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -245,7 +245,7 @@ client.delete_object(Bucket='my-bucket', Key='images/photo.jpg')
 
 ```bash shouldWrap
 aws s3 rm s3://my-bucket/images/photo.jpg \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>

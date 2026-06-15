@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-15T20:35:44.700Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -38,11 +38,11 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 import { S3Client, CreateBucketCommand } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
-  region: 'us-east-2',
-  endpoint: process.env.NEON_STORAGE_ENDPOINT,
+  region: process.env.AWS_REGION,
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   credentials: {
-    accessKeyId: process.env.NEON_STORAGE_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEON_STORAGE_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
   forcePathStyle: true,
 });
@@ -55,10 +55,10 @@ import boto3, os
 
 client = boto3.client(
     's3',
-    region_name='us-east-2',
-    endpoint_url=os.environ['NEON_STORAGE_ENDPOINT'],
-    aws_access_key_id=os.environ['NEON_STORAGE_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['NEON_STORAGE_SECRET_ACCESS_KEY'],
+    region_name=os.environ['AWS_REGION'],
+    endpoint_url=os.environ['AWS_ENDPOINT_URL_S3'],
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
 )
 
 client.create_bucket(Bucket='my-bucket')
@@ -68,7 +68,7 @@ client.create_bucket(Bucket='my-bucket')
 aws s3api create-bucket \
   --bucket my-bucket \
   --region us-east-2 \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -80,7 +80,7 @@ neonctl bucket create my-public-bucket --access-level public_read
 ```
 
 <Admonition type="note">
-`NEON_STORAGE_ENDPOINT` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
+`AWS_ENDPOINT_URL_S3` is your branch's storage endpoint. See [Get started](/docs/storage/get-started) for how to obtain it.
 </Admonition>
 
 ## Access levels
@@ -127,7 +127,7 @@ print(response['Buckets'])
 ```
 
 ```bash
-aws s3api list-buckets --endpoint-url "$NEON_STORAGE_ENDPOINT"
+aws s3api list-buckets --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>
@@ -155,7 +155,7 @@ client.delete_bucket(Bucket='my-bucket')
 ```bash
 aws s3api delete-bucket \
   --bucket my-bucket \
-  --endpoint-url "$NEON_STORAGE_ENDPOINT"
+  --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
 
 </CodeTabs>

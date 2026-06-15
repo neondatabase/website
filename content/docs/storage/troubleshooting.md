@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-15T20:35:44.700Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -17,13 +17,13 @@ updatedOn: '2026-06-15T14:48:06.925Z'
 
 The Access Key ID is wrong, missing, or the credential has been revoked.
 
-**Fix:** Check that `NEON_STORAGE_ACCESS_KEY_ID` is set to the full `token_id` UUID from the credential response (e.g. `550e8400-e29b-41d4-a716-446655440000`). This is not the same as the `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping.
+**Fix:** Check that `AWS_ACCESS_KEY_ID` is set to the `token_id` from the credential response, not `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping. If you no longer have it, revoke the credential and create a new one.
 
 ### `403 SignatureDoesNotMatch`
 
 The Secret Access Key is wrong.
 
-**Fix:** Check that `NEON_STORAGE_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
+**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
 
 ### `403 AccessDenied`: missing scope
 
@@ -52,7 +52,7 @@ If you forget to set the custom endpoint, the SDK will route requests to AWS S3 
 
 ```typescript
 const client = new S3Client({
-  endpoint: process.env.NEON_STORAGE_ENDPOINT,
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
   // ...
 });
 ```
