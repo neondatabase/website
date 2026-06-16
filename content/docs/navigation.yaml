@@ -405,7 +405,7 @@
     - section: Backend
       items:
         - title: neon.ts
-          icon: setup
+          icon: sdk
           slug: reference/neon-ts
         - title: Data API
           icon: api
@@ -563,7 +563,7 @@
                   slug: compute/functions/reference/runtime-limits
 
         - title: Storage
-          icon: data
+          icon: import
           slug: storage/overview
           items:
             - section: Get started
@@ -588,7 +588,7 @@
                   slug: storage/troubleshooting
 
         - title: AI Gateway
-          icon: sparkle
+          icon: sparks
           slug: ai-gateway/overview
           items:
             - section: Get started
