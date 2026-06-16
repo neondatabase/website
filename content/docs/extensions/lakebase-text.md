@@ -10,7 +10,7 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-16T12:11:52.162Z'
+updatedOn: '2026-06-16T18:44:07.041Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />
@@ -30,7 +30,7 @@ PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN wor
 
 ## Enable the lakebase_text extension
 
-Run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
+[Lakebase Search](/docs/ai/lakebase-search) must be enabled on your Neon project before you can install this extension. Once it's enabled, run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_text;

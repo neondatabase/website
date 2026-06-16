@@ -6,10 +6,10 @@ summary: >-
   for fast approximate nearest-neighbor vector search. It requires no migration
   from pgvector — the same vector types, distance operators, and query syntax
   work unchanged. Use this page to enable the extension, create a lakebase_ann
-  index, configure build_mode, tune search with the lakebase_ann.probes GUC, and
-  reference all operator classes and index options.
+  index, configure build_mode, tune search with the lakebase_ann.probes and
+  lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-06-16T12:11:52.162Z'
+updatedOn: '2026-06-16T18:44:07.041Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
@@ -26,7 +26,7 @@ There is no migration involved. `lakebase_vector` inherits all `pgvector` data t
 
 ## Enable the lakebase_vector extension
 
-Run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
+[Lakebase Search](/docs/ai/lakebase-search) must be enabled on your Neon project before you can install this extension. Once it's enabled, run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
@@ -71,11 +71,17 @@ CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (build_m
 
 Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
 
-Use the `lakebase_ann.probes` GUC to control how many lists are searched at query time. Higher values improve recall at the cost of speed.
+Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of speed.
 
 ```sql
 SET lakebase_ann.probes TO '10';
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
+```
+
+`lakebase_ann.epsilon` controls the re-ranking margin. The default value of `1.9` works well for most workloads.
+
+```sql
+SET lakebase_ann.epsilon TO '1.5';
 ```
 
 ### Concurrent index updates
@@ -120,9 +126,9 @@ The `rabitq8` and `rabitq4` types are quantization types defined by `lakebase_ve
 
 ### Search parameters
 
-| GUC                        | Type    | Default | Description                                                                                          |
-| :------------------------- | :------ | :------ | :--------------------------------------------------------------------------------------------------- |
-| `lakebase_ann.probes`      | integer | not set | Number of lists to search at query time. Higher values improve recall at the cost of speed.          |
-| `lakebase_ann.enable_scan` | boolean | `on`    | Enables or disables `lakebase_ann` index scans. Set to `off` for testing to force a sequential scan. |
+| GUC                    | Type    | Default | Description                                                                                              |
+| :--------------------- | :------ | :------ | :------------------------------------------------------------------------------------------------------- |
+| `lakebase_ann.probes`  | integer | not set | Number of IVF partitions to scan at query time. Higher values improve recall at the cost of query speed. |
+| `lakebase_ann.epsilon` | float   | `1.9`   | Re-ranking margin. Valid range: `0.0` to `4.0`.                                                          |
 
 <NeedHelp />
