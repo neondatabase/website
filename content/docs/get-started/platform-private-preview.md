@@ -30,20 +30,37 @@ All usage of Functions, Storage, and AI Gateway during the preview is free, subj
 
 ## Check your access
 
-Go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Functions**, **Storage**, **Credentials**, and **AI Gateway**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+Go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+
+![Neon app backend navaigation](/docs/get-started/neon_app_backend.png)
 
 ## Get started
 
 ### 1. Check your CLI version
 
-Confirm `neonctl` is at version 2.26.2 or later:
+Confirm `neonctl` is at version 2.26.2 or later. Install or upgrade:
+
+<CodeTabs labels={["npm", "Homebrew"]}>
 
 ```bash
 npm install -g neonctl@latest
+```
+
+```bash
+brew install neonctl
+```
+
+</CodeTabs>
+
+If using Homebrew and `neonctl` is already installed, run `brew upgrade neonctl` instead.
+
+Then verify the version:
+
+```bash
 neonctl --version
 ```
 
-If the version is still older after upgrading, another copy on your `PATH` is shadowing the npm install. Run `which -a neonctl` to find all copies. Homebrew's `neonctl` may be outdated; run `brew uninstall neonctl` if needed.
+If the version is still older after upgrading, another copy on your `PATH` is shadowing the install. Run `which -a neonctl` to find all copies and remove the outdated one.
 
 ### 2. Create or navigate to your project directory
 
