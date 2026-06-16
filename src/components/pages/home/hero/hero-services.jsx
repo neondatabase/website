@@ -7,10 +7,10 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260615-1';
+const VIDEO_VERSION = '20260616';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
-const VIDEO_SWITCH_DELAY_MS = 2000;
+const VIDEO_SWITCH_DELAY_MS = 20;
 
 const getScrollPaddingLeft = (element) => {
   const scrollPaddingLeft = Number.parseFloat(window.getComputedStyle(element).scrollPaddingLeft);
