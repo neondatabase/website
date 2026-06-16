@@ -28,6 +28,13 @@
       "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\" and \"sensitive data testing\".",
       "url": "/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
       "digest": "sha256:14ec4806726465de30bb6dd309025d380e25de0036465479dc2169453d6d1b32"
+    },
+    {
+      "name": "neon",
+      "type": "skill-md",
+      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
+      "url": "/.well-known/agent-skills/neon/SKILL.md",
+      "digest": "sha256:76e46a0b9ec7fac1491ea6a36fb5afb98ebcc2de856943409fb34b9fb1f41211"
     }
   ]
 }
