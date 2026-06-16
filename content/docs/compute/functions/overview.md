@@ -7,7 +7,7 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:07:32.151Z'
+updatedOn: '2026-06-16T19:09:47.023Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Functions" description="Neon Functions are in private preview. Drop your email and we'll reach out with access." />
@@ -40,7 +40,7 @@ Functions use the Workers-style handler interface standardized by [WinterTC](htt
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
 
-<a href="/docs/compute/functions/reference/neon-ts" description="Configuration schema for functions and branch policy." icon="setup">neon.ts reference</a>
+<a href="/docs/reference/neon-ts" description="Infrastructure-as-code config for Neon projects and branch policy." icon="setup">neon.ts reference</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 

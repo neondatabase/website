@@ -12,7 +12,7 @@ enableTableOfContents: true
 
 ## Deploy with `neon.ts`
 
-If your project has a [`neon.ts`](/docs/compute/functions/reference/neon-ts) config, this is the recommended way to deploy. `neonctl deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
+If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the recommended way to deploy. `neonctl deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
 
 ```bash
 neonctl deploy
