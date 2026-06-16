@@ -197,6 +197,52 @@ After branch creation, ask whether the user wants to update local environment cr
 - If no, leave credentials unchanged and share the connection string for manual use.
 - Never overwrite an existing env key without explicit confirmation.
 
+## Neon Infrastructure as Code (`neon.ts`)
+
+Beyond creating branches imperatively (CLI / MCP / API above), you can **program what configuration new branches receive** declaratively in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference). The `branch` property is a function of the branch being evaluated that returns its settings, so every branch born from your project gets a consistent lifecycle and compute profile without per-branch flags.
+
+```bash
+npm i @neondatabase/config
+```
+
+```typescript
+// neon.ts
+import { defineConfig } from "@neondatabase/config/v1";
+
+export default defineConfig({
+  branch: (branch) => {
+    if (branch.exists) return {}; // never reconcile existing branches
+    if (branch.isDefault) return { protected: true };
+    if (branch.name.startsWith("preview/") || branch.name.startsWith("dev")) {
+      return {
+        parent: "main",
+        ttl: "7d", // ephemeral: auto-expire 7 days after creation (max 30d)
+        postgres: {
+          computeSettings: {
+            autoscalingLimitMinCu: 0.25, // scale to zero
+            autoscalingLimitMaxCu: 1, // keep throwaway branches cheap
+            suspendTimeout: "5m",
+          },
+        },
+      };
+    }
+    return {};
+  },
+});
+```
+
+The closure receives a read-only descriptor of the target branch — `name`, `exists`, `isDefault`, `parentId`, and more — and returns the tuning to apply: `parent`, `ttl` (auto-expiry), `protected`, and `postgres.computeSettings`. This is the declarative complement to the **Ephemeral lifecycle hygiene** and per-PR / per-test patterns above: instead of remembering `--expires-at` on every `neonctl branches create`, the TTL and compute profile live in version control and apply to every matching branch.
+
+Because `neonctl checkout` applies this policy when it **creates** a branch, a fresh `preview/*` or `dev-*` branch comes up already expiring and scaled-to-zero. Checking out an _existing_ branch doesn't reconcile it — run `neonctl deploy` (alias for `neonctl config apply`) to apply changes to a branch that already exists.
+
+## Branching in CI/CD
+
+Common CI/CD use cases for Neon branches:
+
+- **Per-PR preview deployments:** Branch on PR open, deploy the preview against it, delete on close. Each PR gets an isolated database branch. Injecting the branch's `DATABASE_URL` into the deployed app is hosting-provider-specific — see [preview-branches-with-cloudflare](https://github.com/neondatabase/preview-branches-with-cloudflare), [preview-branches-with-vercel](https://github.com/neondatabase/preview-branches-with-vercel), or [preview-branches-with-fly](https://github.com/neondatabase/preview-branches-with-fly) for tested patterns.
+- **Migration testing in CI:** Run risky schema changes against a branch with production-like data before merge.
+- **Schema diff visibility:** Use the [schema-diff GitHub Action](https://github.com/marketplace/actions/neon-schema-diff-github-action) to auto-comment a DB-layer diff on the PR.
+
 ## Examples
 
 ### Example 1: Migration testing with realistic data
