@@ -64,7 +64,7 @@ export default defineConfig({
 });
 ```
 
-The key (`hello`) is the function's slug: its permanent identifier in CLI commands and the function URL. `name` is only a display label. See the [neon.ts reference](/docs/compute/functions/reference/neon-ts) for all options.
+The key (`hello`) is the function's slug: its permanent identifier in CLI commands and the function URL. `name` is only a display label. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
 Install dependencies:
 

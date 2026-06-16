@@ -404,6 +404,9 @@
               slug: guides/typeorm
     - section: Backend
       items:
+        - title: neon.ts
+          icon: setup
+          slug: reference/neon-ts
         - title: Data API
           icon: api
           slug: data-api/overview
@@ -556,8 +559,6 @@
               slug: compute/functions/websockets
             - section: Reference
               items:
-                - title: neon.ts
-                  slug: compute/functions/reference/neon-ts
                 - title: Runtime limits
                   slug: compute/functions/reference/runtime-limits
 
