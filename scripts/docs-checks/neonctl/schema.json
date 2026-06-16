@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.26.5",
-  "generatedAt": "2026-06-15T23:21:40.271Z",
+  "neonctlVersion": "2.26.6",
+  "generatedAt": "2026-06-16T12:27:53.002Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -1237,14 +1237,10 @@
           "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
         },
         "agent": {
-          "type": "string",
-          "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
-          "alias": "a",
-          "choices": [
-            "cursor",
-            "copilot",
-            "claude"
-          ]
+          "type": "boolean",
+          "describe": "Enable agent/JSON mode (agent type is auto-detected).",
+          "default": false,
+          "alias": "a"
         },
         "context-file": {
           "type": "unknown",

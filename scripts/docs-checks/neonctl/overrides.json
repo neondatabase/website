@@ -130,18 +130,6 @@
           }
         }
       }
-    },
-    "init": {
-      "options": {
-        "agent": {
-          "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
-          "choices": [
-            "cursor",
-            "copilot",
-            "claude"
-          ]
-        }
-      }
     }
   }
 }
