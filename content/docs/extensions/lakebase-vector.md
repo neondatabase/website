@@ -6,11 +6,10 @@ summary: >-
   for fast approximate nearest-neighbor vector search. It requires no migration
   from pgvector — the same vector types, distance operators, and query syntax
   work unchanged. Use this page to enable the extension, create a lakebase_ann
-  index, tune build parameters (lists, residual_quantization, build.pin), configure
-  search with the lakebase_ann.probes GUC, and reference all operator classes and
-  index options.
+  index, configure build_mode, tune search with the lakebase_ann.probes GUC, and
+  reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-06-09T20:13:02.957Z'
+updatedOn: '2026-06-16T12:11:52.162Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />
@@ -61,77 +60,31 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 
 ## Index tuning
 
-For tables with fewer than 100,000 rows, no tuning is required.
+Set `build_mode` at index creation to control the accuracy/speed tradeoff:
 
-As your dataset grows, configure the `build.internal.lists` option to partition the vector space into an appropriate number of lists. Pass options as a [TOML](https://toml.io/) string:
+- `standard` (default): optimizes for recall. Use for most workloads.
+- `fast`: builds faster at lower recall. Use when build time matters more than search quality.
 
 ```sql
-CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (options = $$
-build.internal.lists = [1000]
-$$);
+CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (build_mode = 'fast');
 ```
 
-Use the `lakebase_ann.probes` GUC to control how many lists are searched at query time. More probes improves recall at the cost of speed. This GUC only applies when the index has `build.internal.lists` configured; no probes setting is needed for the default (no-lists) configuration.
+Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
+
+Use the `lakebase_ann.probes` GUC to control how many lists are searched at query time. Higher values improve recall at the cost of speed.
 
 ```sql
 SET lakebase_ann.probes TO '10';
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
 ```
 
-Use the following guidelines when choosing `lists` based on your row count:
-
-| Rows                   | Recommended lists | Example   |
-| :--------------------- | :---------------- | :-------- |
-| Fewer than 100,000     | Not needed        | `[]`      |
-| 100,000 – 2,000,000    | N / 500           | `[2000]`  |
-| 2,000,000 – 50,000,000 | 4√N – 8√N         | `[10000]` |
-| 50,000,000+            | 8√N – 16√N        | `[80000]` |
-
-### Cosine similarity with residual quantization
-
-For most datasets using cosine similarity, enabling `residual_quantization` and `spherical_centroids` improves both queries per second and recall:
-
-```sql
-CREATE INDEX ON items USING lakebase_ann (embedding vector_cosine_ops) WITH (options = $$
-residual_quantization = true
-build.internal.spherical_centroids = true
-build.internal.lists = [1000]
-$$);
-```
-
-### Faster index builds
-
-To speed up index builds on large tables, set `build.pin = 2` to use more shared memory during the build process:
-
-```sql
-CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (options = $$
-residual_quantization = true
-build.internal.spherical_centroids = true
-build.internal.lists = [1000]
-build.pin = 2
-$$);
-```
-
 ### Concurrent index updates
 
-For large, frequently changing datasets, use `CREATE INDEX CONCURRENTLY` to build or rebuild an index without blocking reads and writes. You can then update the index options and rebuild with `REINDEX INDEX CONCURRENTLY`:
+For large, frequently changing datasets, use `CREATE INDEX CONCURRENTLY` to build or rebuild an index without blocking reads and writes:
 
 ```sql
 CREATE INDEX CONCURRENTLY items_embedding_ann ON items
-USING lakebase_ann (embedding vector_l2_ops) WITH (options = $$
-residual_quantization = true
-build.internal.spherical_centroids = true
-build.internal.lists = [1024]
-build.pin = 2
-$$);
-
--- Update options and rebuild without downtime
-ALTER INDEX items_embedding_ann SET (options = $$
-residual_quantization = true
-build.internal.spherical_centroids = true
-build.internal.lists = [4096]
-build.pin = 2
-$$);
+  USING lakebase_ann (embedding vector_l2_ops);
 
 REINDEX INDEX CONCURRENTLY items_embedding_ann;
 ```
@@ -161,21 +114,15 @@ The `rabitq8` and `rabitq4` types are quantization types defined by `lakebase_ve
 
 ### Index options
 
-Options are passed as a TOML string to the `WITH (options = $$ ... $$)` clause.
-
-| Option                               | Type               | Default | Description                                                                                                                                                  |
-| :----------------------------------- | :----------------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build.internal.lists`               | array              | `[]`    | Number of partitions for the vector space. Set based on dataset size. See [Index tuning](#index-tuning).                                                     |
-| `residual_quantization`              | boolean            | `false` | Enables residual quantization to improve recall. Recommended for cosine similarity workloads. Not supported with `rabitq8` or `rabitq4` operator classes.    |
-| `build.internal.spherical_centroids` | boolean            | `false` | Enables spherical centroids. Recommended alongside `residual_quantization` for cosine similarity.                                                            |
-| `build.pin`                          | integer or boolean | `-1`    | Controls shared memory usage during index builds. `-1` disables pinning (default). Set to `2` to use more shared memory and speed up builds on large tables. |
-| `degree_of_parallelism`              | integer            | `32`    | Hint for the number of concurrent processes accessing the index. Increase only if you have more than 32 CPU threads and want to use more for index builds.   |
+| Option       | Type   | Default      | Description                                                                                                                            |
+| :----------- | :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff at index build time. `'standard'` optimizes for recall; `'fast'` builds faster with lower recall. |
 
 ### Search parameters
 
-| GUC                        | Type    | Default | Description                                                                                                                                                                    |
-| :------------------------- | :------ | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `lakebase_ann.probes`      | integer | not set | Number of lists to search at query time. Must be set explicitly when using an index with `build.internal.lists` configured. Higher values improve recall at the cost of speed. |
-| `lakebase_ann.enable_scan` | boolean | `on`    | Enables or disables `lakebase_ann` index scans. Set to `off` for testing to force a sequential scan.                                                                           |
+| GUC                        | Type    | Default | Description                                                                                          |
+| :------------------------- | :------ | :------ | :--------------------------------------------------------------------------------------------------- |
+| `lakebase_ann.probes`      | integer | not set | Number of lists to search at query time. Higher values improve recall at the cost of speed.          |
+| `lakebase_ann.enable_scan` | boolean | `on`    | Enables or disables `lakebase_ann` index scans. Set to `off` for testing to force a sequential scan. |
 
 <NeedHelp />
