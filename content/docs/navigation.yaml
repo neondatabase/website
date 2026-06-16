@@ -562,7 +562,7 @@
                 - title: Runtime limits
                   slug: compute/functions/reference/runtime-limits
 
-        - title: Storage
+        - title: Object Storage
           icon: import
           slug: storage/overview
           items:
