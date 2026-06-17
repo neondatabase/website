@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-16T19:09:47.023Z'
+updatedOn: '2026-06-17T18:33:13.040Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -44,8 +44,16 @@ export default defineConfig({
 
   // Branch policy: per-branch tuning
   branch: (branch) => {
-    if (branch.isDefault) return {};
-    return { ttl: "7d" };
+    if (branch.isDefault) {
+      // Default branch: no overrides, uses project defaults
+      return {};
+    }
+    if (!branch.exists) {
+      // New non-default branches: auto-expire
+      return { ttl: "7d" };
+    }
+    // Existing branch: no changes
+    return {};
   },
 });
 ```
@@ -57,26 +65,31 @@ export default defineConfig({
 
 ## Branch policy
 
-The `branch` closure works on any Neon project. Expire short-lived branches and tune compute per environment:
+The `branch` closure works on any Neon project. The examples below configure the default branch and apply TTL and compute to new branches at creation. Returning `{}` for existing branches is deliberate: it avoids overwriting settings on branches already in use:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neondatabase/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
-    if (branch.isDefault) return {};
-    if (branch.name.startsWith("dev/")) {
+    if (branch.isDefault) {
+      // Default branch: no overrides, uses project defaults
+      return {};
+    }
+    if (!branch.exists) {
+      // New non-default branches: minimum compute, auto-expire
       return {
         ttl: "7d",
         postgres: {
           computeSettings: {
             autoscalingLimitMinCu: 0.25,
-            autoscalingLimitMaxCu: 1,
+            autoscalingLimitMaxCu: 0.25,
           },
         },
       };
     }
-    return { ttl: "3d" };
+    // Existing branch: no changes
+    return {};
   },
 });
 ```
@@ -89,21 +102,32 @@ import { defineConfig } from "@neondatabase/config/v1";
 export default defineConfig({
   branch: (branch) => {
     if (branch.isDefault) {
-      return { protected: true };
+      // Protect and size for production
+      return {
+        protected: true,
+        postgres: {
+          computeSettings: {
+            autoscalingLimitMinCu: 0.5,
+            autoscalingLimitMaxCu: 4,
+          },
+        },
+      };
     }
-    if (branch.name.startsWith("dev/")) {
+    if (!branch.exists) {
+      // New non-default branches: minimum compute, auto-expire, suspend on idle
       return {
         ttl: "7d",
         postgres: {
           computeSettings: {
             autoscalingLimitMinCu: 0.25,
-            autoscalingLimitMaxCu: 1,
+            autoscalingLimitMaxCu: 0.25,
             suspendTimeout: "5m",
           },
         },
       };
     }
-    return { ttl: "3d" };
+    // Existing branch: no changes
+    return {};
   },
 });
 ```
@@ -112,26 +136,26 @@ Run `neonctl deploy` to apply. When `neonctl checkout` creates a new branch, the
 
 ### BranchTarget fields
 
-| Field         | Type      | Description                                                                          |
-| ------------- | --------- | ------------------------------------------------------------------------------------ |
-| `name`        | `string`  | Branch name                                                                          |
-| `id`          | `string`  | Branch ID. Not set during pre-create evaluation                                      |
-| `exists`      | `boolean` | `false` during pre-create evaluation                                                 |
-| `isDefault`   | `boolean` | Whether this is the project's default branch. Not set during pre-create evaluation   |
-| `isProtected` | `boolean` | Whether the branch is marked protected in Neon. Not set during pre-create evaluation |
-| `parentId`    | `string`  | ID of the parent branch. Not always present                                          |
-| `expiresAt`   | `string`  | Branch expiry timestamp. Not always present                                          |
+| Field         | Type       | Description                                                                          |
+| ------------- | ---------- | ------------------------------------------------------------------------------------ |
+| `name`        | `string`   | Branch name                                                                          |
+| `id`          | `string?`  | Branch ID. Not set during pre-create evaluation                                      |
+| `exists`      | `boolean`  | `false` during pre-create evaluation                                                 |
+| `isDefault`   | `boolean?` | Whether this is the project's default branch. Not set during pre-create evaluation   |
+| `isProtected` | `boolean?` | Whether the branch is marked protected in Neon. Not set during pre-create evaluation |
+| `parentId`    | `string?`  | ID of the parent branch. Not always present                                          |
+| `expiresAt`   | `string?`  | Branch expiry timestamp. Not always present                                          |
 
 ### BranchTuning fields
 
-| Field                                            | Type                              | Description                                                              |
-| ------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------------ |
-| `parent`                                         | `string`                          | Parent branch name or ID                                                 |
-| `protected`                                      | `boolean`                         | Mark the branch as protected                                             |
-| `ttl`                                            | `string \| number`                | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days |
-| `postgres.computeSettings.autoscalingLimitMinCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Minimum compute units                                                    |
-| `postgres.computeSettings.autoscalingLimitMaxCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Maximum compute units                                                    |
-| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number`       | Idle suspend timeout. `false` disables suspend                           |
+| Field                                            | Type                              | Description                                                                                                           |
+| ------------------------------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `parent`                                         | `string`                          | Parent branch name or ID                                                                                              |
+| `protected`                                      | `boolean`                         | Mark the branch as protected                                                                                          |
+| `ttl`                                            | `string \| number`                | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript |
+| `postgres.computeSettings.autoscalingLimitMinCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Minimum compute units                                                                                                 |
+| `postgres.computeSettings.autoscalingLimitMaxCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Maximum compute units                                                                                                 |
+| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number`       | Idle suspend timeout. `false` disables suspend                                                                        |
 
 ## Services
 
@@ -144,7 +168,16 @@ Run `neonctl deploy` to apply. When `neonctl checkout` creates a new branch, the
 
 ### `dataApi` config
 
-`dataApi: true` uses Neon Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Leave it out and you'll get a TypeScript error with instructions for fixing it. To use the Data API with an external identity provider instead, pass the object form:
+`dataApi: true` uses Neon Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+
+```text
+Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
+`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
+Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
+authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
+```
+
+To use the Data API with an external identity provider instead, pass the object form:
 
 ```ts
 dataApi: {
@@ -155,7 +188,7 @@ dataApi: {
 
 ## Type-safe environment variables
 
-The `@neondatabase/env` package gives you typed access to Neon-injected variables. It reads your `neon.ts` config and narrows the type to only the variables your declared services inject:
+`@neondatabase/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
 
 ```bash
 npm install @neondatabase/env
@@ -243,7 +276,15 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
 
-`env` values are resolved at deploy time when `neonctl deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Use `neonctl deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+`env` values are resolved at deploy time when `neonctl deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
+
+```ts
+env: {
+  API_KEY: process.env.API_KEY ?? "",
+}
+```
+
+Use `neonctl deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
 `dev` settings apply only to `neonctl dev` and never affect deploy.
 
@@ -287,21 +328,32 @@ export default defineConfig({
 
   branch: (branch) => {
     if (branch.isDefault) {
-      return { protected: true };
+      // Protect and size for production
+      return {
+        protected: true,
+        postgres: {
+          computeSettings: {
+            autoscalingLimitMinCu: 0.5,
+            autoscalingLimitMaxCu: 4,
+          },
+        },
+      };
     }
-    if (branch.name.startsWith("dev/")) {
+    if (!branch.exists) {
+      // New non-default branches: minimum compute, auto-expire, suspend on idle
       return {
         ttl: "7d",
         postgres: {
           computeSettings: {
             autoscalingLimitMinCu: 0.25,
-            autoscalingLimitMaxCu: 1,
+            autoscalingLimitMaxCu: 0.25,
             suspendTimeout: "5m",
           },
         },
       };
     }
-    return { ttl: "3d" };
+    // Existing branch: no changes
+    return {};
   },
 });
 ```
