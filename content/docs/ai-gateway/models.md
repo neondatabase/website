@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-06-17T11:22:51.192Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -46,6 +46,8 @@ During the private preview, the following limits apply:
 | All models combined (tokens per minute) | 1,100,000 TPM |
 
 If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
+
+These limits apply to input tokens. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the input limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
 ## Available models
 
