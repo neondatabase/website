@@ -6,11 +6,11 @@ summary: >-
   for BM25 full-text search. It requires no migration from PostgreSQL's built-in
   full-text search — standard tsvector types and tsquery operators work unchanged.
   Use this page to enable the extension, create a lakebase_bm25 index, query
-  with the <@> operator and to_bm25query function, configure the default_limit
+  with the <&> operator and to_bm25query function, configure the default_limit
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-16T18:44:07.041Z'
+updatedOn: '2026-06-17T09:37:43.036Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />
@@ -60,7 +60,7 @@ INSERT INTO documents (passage, vector) VALUES
 Create a `lakebase_bm25` index on the `tsvector` column:
 
 ```sql
-CREATE INDEX documents_passage_bm25 ON documents USING lakebase_bm25 (vector);
+CREATE INDEX documents_passage_bm25 ON documents USING lakebase_bm25 (vector bm25_ops);
 ```
 
 <Admonition type="important" title="Create the index after inserting data">
@@ -74,15 +74,15 @@ SET lakebase_bm25.default_limit TO 5;
 
 SELECT
   id,
-  vector <@> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
+  vector <&> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
 FROM documents
 ORDER BY score
 LIMIT 5;
 ```
 
-The `<@>` operator calculates the negative BM25 score of a document against a query. Ordering by score ascending returns the most relevant documents first (lower negative score = higher relevance).
+The `<&>` operator calculates the negative BM25 score of a document against a query. Ordering by score ascending returns the most relevant documents first (lower negative score = higher relevance).
 
-`to_bm25query` constructs a `bm25query_tsvector` value by combining the query `tsvector` with the object identifier of the BM25 index. The index identifier is required because BM25 scoring depends on corpus-wide statistics stored in the index.
+`to_bm25query` constructs a `bm25query` value by combining the query `tsvector` with the object identifier of the BM25 index. The index identifier is required because BM25 scoring depends on corpus-wide statistics stored in the index.
 
 ## Configure default_limit
 
@@ -102,7 +102,7 @@ You can store search parameters directly in an index as storage parameters, rath
 Set `default_limit` at index creation:
 
 ```sql
-CREATE INDEX documents_passage_bm25 ON documents USING lakebase_bm25 (vector)
+CREATE INDEX documents_passage_bm25 ON documents USING lakebase_bm25 (vector bm25_ops)
 WITH (default_limit = 5);
 ```
 
@@ -111,7 +111,7 @@ Queries against this index use `default_limit = 5` without requiring a `SET` com
 ```sql
 SELECT
   id,
-  vector <@> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
+  vector <&> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
 FROM documents
 ORDER BY score
 LIMIT 5;
@@ -137,7 +137,7 @@ SET lakebase_bm25.prefilter = on;
 
 SELECT
   id,
-  vector <@> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
+  vector <&> to_bm25query(to_tsvector('english', 'PostgreSQL'), 'documents_passage_bm25') AS score
 FROM documents
 WHERE id % 1000 = 0
 ORDER BY score
@@ -150,27 +150,27 @@ Prefilter is recommended when the filter is **strict** (eliminates many rows) or
 
 ### Types
 
-| Type                 | Description                                                                                                   |
-| :------------------- | :------------------------------------------------------------------------------------------------------------ |
-| `bm25query_tsvector` | Combines a query `tsvector` with the object identifier of a BM25 index. Passed as the right operand to `<@>`. |
+| Type        | Description                                                                                                   |
+| :---------- | :------------------------------------------------------------------------------------------------------------ |
+| `bm25query` | Combines a query `tsvector` with the object identifier of a BM25 index. Passed as the right operand to `<&>`. |
 
 ### Operators
 
-| Operator | Arguments                        | Result   | Description                                                                                                                               |
-| :------- | :------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| `<@>`    | `tsvector`, `bm25query_tsvector` | `double` | Returns the negative BM25 score of a document against a query, in the context of the BM25 index. Order ascending for most-relevant-first. |
+| Operator | Arguments               | Result   | Description                                                                                                                               |
+| :------- | :---------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| `<&>`    | `tsvector`, `bm25query` | `double` | Returns the negative BM25 score of a document against a query, in the context of the BM25 index. Order ascending for most-relevant-first. |
 
 ### Operator classes
 
-| Operator class      | Default | Operator                            |
-| :------------------ | :------ | :---------------------------------- |
-| `tsvector_bm25_ops` | Yes     | `<@>(tsvector, bm25query_tsvector)` |
+| Operator class | Default | Operator                   |
+| :------------- | :------ | :------------------------- |
+| `bm25_ops`     | No      | `<&>(tsvector, bm25query)` |
 
 ### Functions
 
-| Function                                       | Returns              | Description                                                                                          |
-| :--------------------------------------------- | :------------------- | :--------------------------------------------------------------------------------------------------- |
-| `to_bm25query(query tsvector, index regclass)` | `bm25query_tsvector` | Constructs a `bm25query_tsvector` from a query `tsvector` and the object identifier of a BM25 index. |
+| Function                                       | Returns     | Description                                                                                 |
+| :--------------------------------------------- | :---------- | :------------------------------------------------------------------------------------------ |
+| `to_bm25query(query tsvector, index regclass)` | `bm25query` | Constructs a `bm25query` from a query `tsvector` and the object identifier of a BM25 index. |
 
 ### Index storage parameters
 
