@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-06-17T11:08:12.470Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -162,6 +162,11 @@ model: 'databricks-qwen35-122b-a10b'
 See [Models](/docs/ai-gateway/models) for the full list.
 
 ## Rate limiting
+
+There are two separate rate limit tiers:
+
+- **Neon account quota:** enforced by Neon. Returns `429` with error code `REQUEST_LIMIT_EXCEEDED`. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current limits.
+- **Upstream provider limit:** enforced by the Databricks workspace serving the model. Returns `429` with forwarded rate limit headers.
 
 When the upstream provider rate-limits a request, AI Gateway forwards the relevant headers so your client can back off correctly:
 
