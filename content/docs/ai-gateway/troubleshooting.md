@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-06-17T11:29:14.727Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -117,7 +117,7 @@ Your account's AI Gateway quota is blocked. The response body is:
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current quota values.
 
 ---
 
