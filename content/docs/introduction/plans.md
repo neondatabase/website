@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -519,8 +519,11 @@ Do public network transfer limits reset each month?
 How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
+What are the limits and quotas for the Free plan?
+: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Neon Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (for example, CU-hours or public network transfer). To continue, upgrade to a paid plan.
+: On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.

@@ -10,7 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-06-16T13:50:08.013Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -48,11 +48,22 @@ All branches and databases created in a Neon project are created in the region s
 After you select a region for a Neon project, it cannot be changed for that project. To run your database in a different region, create a **new** project there and migrate your data. See [Region migration](/docs/import/region-migration).
 </Admonition>
 
+## Check which region your project uses
+
+To find the region an existing project runs in, use any of these:
+
+- **Console:** open the project and check the **Settings** widget on the **Project Dashboard**. The region is listed alongside the cloud provider.
+- **CLI:** run `neon projects list` or `neon projects get <project_id>`. The output includes the region ID (for example, `aws-us-east-2`).
+- **Connection string:** the region is the segment before `.aws.neon.tech` or `.azure.neon.tech` in the hostname. For example, `us-east-2.aws.neon.tech` is AWS US East (Ohio).
+- **API:** read the `region_id` field from `GET /projects/{project_id}`.
+
+All branches and databases in a project share the project's region, so the project region is the region for everything inside it.
+
 ## NAT Gateway IP addresses
 
 A NAT gateway has a public IP address that external systems see when private resources initiate outbound connections. Neon uses multiple IP addresses per region for this outbound communication, with the number varying by region. To ensure proper connectivity for setups such as replicating data to Neon, you should allow access to all the NAT gateway IP addresses associated with your Neon project's region.
 
-If you are unsure of your project's region, you can find this information in the **Settings** widget on the **Project Dashboard**.
+If you are unsure of your project's region, see [Check which region your project uses](#check-which-region-your-project-uses).
 
 ### AWS NAT Gateway IP Addresses
 
