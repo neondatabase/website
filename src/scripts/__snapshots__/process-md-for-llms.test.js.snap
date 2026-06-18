@@ -235,7 +235,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Branch management:**
 
-- \`create_branch\`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
+- \`create_branch\`: Creates a new branch within a specified Neon project. By default the branch is created from the project's default branch; pass optional \`parentId\` (a branch ID such as \`br-...\`) to fork from an existing non-default branch instead. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
 - \`delete_branch\`: Deletes an existing branch from a Neon project.
 - \`describe_branch\`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
 - \`list_branch_computes\`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, last active time, and autoscaling information.
@@ -255,7 +255,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - \`prepare_database_migration\`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
 - \`complete_database_migration\`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
 
-**Query performance optimization:**
+**SQL querying and optimization:**
 
 - \`list_slow_queries\`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
 - \`explain_sql_statement\`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
@@ -264,7 +264,11 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Neon Auth:**
 
-- \`provision_neon_auth\`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
+To set up Neon Auth in your application code, use [Agent Skills](https://neon.com/docs/ai/agent-skills) after running \`npx neonctl@latest init\`. See [Set up Neon Auth with your AI editor](https://neon.com/docs/auth/overview#set-up-with-your-ai-editor).
+
+- \`provision_neon_auth\`: Provisions [Neon Auth](https://neon.com/docs/auth/overview) for a project's branch so you can add authentication to your app without standing up a separate auth service. If Neon Auth is already provisioned, this returns the existing configuration instead of erroring.
+- \`get_neon_auth_config\`: Returns the Neon Auth configuration for a branch, including the auth \`base_url\`, \`jwks_url\`, trusted origins, allowed auth methods (for example email and password), configured OAuth providers, and email provider settings. Secrets such as OAuth client secrets and SMTP passwords are redacted.
+- \`configure_neon_auth\`: Updates the Neon Auth configuration for a branch. Use it to manage trusted origins, toggle localhost, enable or tune email and password sign-in, add or update OAuth providers, configure the email provider, and send a test email.
 
 **Neon Data API:**
 
@@ -274,6 +278,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 - \`search\`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
 - \`fetch\`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
+
+In project-scoped mode, \`search\` and \`fetch\` are not available.
 
 **Documentation and resources:**
 
@@ -304,9 +310,9 @@ This feature is currently accessible in Private Preview only.
 
 ### PrivatePreviewEnquire
 
-**Coming Soon: Early Access**
+**Coming Soon: Private Preview**
 
-This feature is currently available in Early Access for invited users. Want to try it out? Message us from the [Console](https://console.neon.tech/app/projects?modal=feedback) or on [Discord](https://discord.gg/92vNTzKDGp) and we'll send you an invite.
+This feature is in private preview: it's not ready for production use, and it may be briefly unavailable as we deploy updates. To get access, [sign up here](https://neon.com/blog/were-building-backends#access).
 
 ### PublicPreview
 
@@ -333,7 +339,7 @@ If you are looking to migrate your database to Neon, you may want to try our new
 - [Import data into your database](https://neon.com/docs/import/migrate-intro)
 - [Integrate database branching into your dev workflow](https://neon.com/docs/get-started/workflow-primer)
 - [Secure your app with the Neon Data API](https://neon.com/docs/data-api/get-started)
-- [Setup Neon Auth for your app](https://neon.com/docs/guides/neon-auth)
+- [Set up Neon Auth for your app](https://neon.com/docs/auth/overview)
 
 ### NewPricing
 
@@ -343,15 +349,11 @@ On February 19th, 2024, Neon will launch new, simplified pricing plans. You can 
 
 ### AzureRegionsDeprecation
 
-**Warning: Deprecation notice: Azure regions on Neon**
+**Warning: Azure regions deprecation**
 
-As of **April 7, 2026**, all Neon Azure regions (\`azure-eastus2\`, \`azure-westus3\`, and \`azure-gwc\`) are deprecated.
+Neon Azure regions (\`azure-eastus2\`, \`azure-westus3\`, \`azure-gwc\`) are deprecated. You can no longer create new projects in Azure regions. Existing Azure projects continue to be supported until further notice.
 
-**If your project already runs in an Azure region:** your databases keep running as they do today.
-
-**If your organization actively uses Azure regions:** you can continue to create new projects in Azure regions to maintain your current operations. Otherwise, new Azure project creation is no longer available.
-
-We will contact you directly to discuss migration options and timelines. You do not need to migrate on your own before we reach out. See [Region migration](https://neon.com/docs/import/region-migration) if you want to start planning a move.
+If you have active projects in Azure regions, see [Azure regions deprecation](https://neon.com/docs/import/azure-regions-deprecation) for additional information and recommendations.
 
 ### ConsumptionAccountApiDeprecation
 
@@ -360,6 +362,8 @@ We will contact you directly to discuss migration options and timelines. You do 
 The **[Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)** endpoint (\`GET /consumption_history/account\`) is **deprecated**, with a planned sunset of **June 1, 2026**. Migrate to **[Query consumption metrics](https://neon.com/docs/guides/consumption-metrics)** for invoice-aligned project metrics, or to the **[legacy project metrics endpoint](https://neon.com/docs/guides/consumption-metrics-legacy#project-level-endpoint)** (\`GET /consumption_history/projects\`) if you need legacy metrics per project.
 
 ## Ignored components
+
+[View prompt](https://neon.com/prompts/test.md)
 
 
 
