@@ -3,10 +3,10 @@ title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
   Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
-  OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. Use short model IDs
+  OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:22:51.192Z'
+updatedOn: '2026-06-18T09:59:52.874Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -125,26 +125,18 @@ Text input only. Chat completions only.
 | `databricks-qwen3-next-80b-a3b-instruct` | —       | `chat/completions` |                                  |
 | `databricks-qwen35-122b-a10b`            | 256K    | `chat/completions` | Always reasons before responding |
 
-### DeepSeek
-
-Text input only. Chat completions only.
-
-| Model ID                   | Context | Endpoints          | Notes |
-| -------------------------- | ------- | ------------------ | ----- |
-| `databricks-deepseek-v3-2` | —       | `chat/completions` |       |
-
 ## Which endpoint to use
 
 Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is the recommended starting point and works with all providers. Use a provider-specific endpoint when required:
 
-| Provider                            | Recommended endpoint                     | Notes                                                                                    |
-| ----------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic                           | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
-| OpenAI (most models)                | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
-| OpenAI (codex variants)             | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
-| Google Gemini                       | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B                  | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
-| Meta, DeepSeek, Databricks, Alibaba | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
+| Provider                  | Recommended endpoint                     | Notes                                                                                    |
+| ------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Anthropic                 | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
+| OpenAI (most models)      | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
+| OpenAI (codex variants)   | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
+| Google Gemini             | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B        | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
+| Meta, Databricks, Alibaba | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
 
 ## Provider terms
 
