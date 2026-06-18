@@ -979,7 +979,7 @@ describe('CLI reference components', () => {
         '',
       ].join('\n')
     );
-    const result = await processFile(file, 'https://neon.com/docs/cli/projects');
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli/projects');
 
     // Options table with the settled column contract (toMarkdown pads cells)
     expect(result).toMatch(/\| Option\s+\| Description\s+\| Type\s+\| Default\s+\| Required\s+\|/);
@@ -1007,7 +1007,7 @@ describe('CLI reference components', () => {
     const file = await writeFixture(
       ['---', 'title: Overview fixture', '---', '', '<CliCommandIndex />', ''].join('\n')
     );
-    const result = await processFile(file, 'https://neon.com/docs/cli');
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli');
 
     // Every top-level command appears as a heading in the tree
     for (const name of ['projects', 'branches', 'functions', 'bucket', 'neon-auth']) {
