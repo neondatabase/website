@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-06-18T09:59:52.874Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
@@ -19,7 +19,7 @@ During the private preview, AI Gateway is available for **new projects** in the 
 Participation in this Private Preview is subject to our Private Preview Terms. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
 
-- **One credential for all providers.** A single Neon credential gives you access to models from Anthropic, OpenAI, Google, Meta, DeepSeek, Databricks, and Alibaba. No separate provider accounts needed.
+- **One credential for all providers.** A single Neon credential gives you access to models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
