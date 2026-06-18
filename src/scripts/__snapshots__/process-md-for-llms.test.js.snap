@@ -193,12 +193,6 @@ Scale compute up and down based on demand.
 
 This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
 
-### EarlyAccess (parameterless)
-
-**Coming Soon: Early access**
-
-This feature is currently in early access.
-
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
@@ -294,12 +288,6 @@ In project-scoped mode, \`search\` and \`fetch\` are not available.
 **Important: Enrollment Pause for Logical Replication Beta**
 
 We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
-
-### ComingSoon
-
-**Coming Soon: Feature coming soon**
-
-This feature is coming soon.
 
 ### PrivatePreview
 
