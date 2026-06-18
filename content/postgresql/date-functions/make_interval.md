@@ -63,7 +63,7 @@ Let’s explore some examples of using the `MAKE_INTERVAL()` function.
 
 ### 1\) Basic MAKE_INTERVAL() function example
 
-The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 1 year, 2 months, 3 days, and 4 hours:
+The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 3 years, 6 months, 15 days, and 4 hours:
 
 ```sql
 SELECT
