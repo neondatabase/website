@@ -16,7 +16,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 // Children are <QuickPath> and <GuidedPath> (any order; QuickPath rendered first).
 
 const TwinPaths = ({ children }) => (
-  <div className="twin-paths not-prose my-7 grid w-full max-w-208 grid-cols-2 gap-6 md:grid-cols-1 md:gap-4">
+  <div className="twin-paths not-prose my-7 grid w-full grid-cols-2 gap-6 md:grid-cols-1 md:gap-4">
     {children}
   </div>
 );

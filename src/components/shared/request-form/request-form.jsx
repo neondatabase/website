@@ -222,11 +222,12 @@ const RequestForm = ({ className, type }) => {
 
             <Button
               className={cn(
-                'rounded-full bg-black-pure px-7 py-3.5 text-base leading-none font-medium tracking-tight text-white dark:text-black-pure md:w-full',
+                'rounded-full px-7 py-3.5 text-base leading-none font-medium tracking-tight md:w-full',
                 !isValid
                   ? 'pointer-events-none bg-gray-new-40 select-none dark:bg-gray-new-80'
                   : 'bg-black-pure dark:bg-white'
               )}
+              theme="white-filled-multi"
               type="submit"
               disabled={!isValid}
             >

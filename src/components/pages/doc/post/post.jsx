@@ -72,7 +72,8 @@ const Post = ({
     <>
       <div
         className={cn(
-          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          'min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isChangelog && 'mx-auto',
           className,
           isWideLayout && 'max-w-none'
         )}

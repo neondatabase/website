@@ -15,8 +15,8 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 const CARDS_TO_SHOW = 12;
 const GRID_CLASS_NAMES = {
-  2: 'grid-cols-2 gap-x-20 gap-y-7 xl:gap-x-8 lg:gap-5 md:grid-cols-1',
-  4: 'grid-cols-4 gap-x-20 gap-y-7 xl:gap-x-8 lg:gap-5 md:grid-cols-3 sm:grid-cols-2',
+  2: 'grid-cols-2 gap-x-10 gap-y-7 xl:gap-x-6 lg:gap-5 md:grid-cols-1',
+  4: 'grid-cols-4 gap-x-10 gap-y-7 xl:gap-x-6 lg:gap-5 md:grid-cols-3 sm:grid-cols-2',
 };
 
 const CompactCards = ({ className, children = null, cols = 2, withToggler = false }) => {
@@ -166,7 +166,7 @@ const CompactCard = ({
         )}
       </div>
       <div className="relative z-10 min-w-0 flex-1 self-center">
-        <span className="compact-card-title block text-base leading-snug font-medium tracking-extra-tight text-black-pure transition-colors duration-200 group-hover/card:text-green-45 dark:text-white dark:group-hover/card:text-green-45">
+        <span className="compact-card-title block text-base leading-snug font-medium tracking-extra-tight text-black-pure transition-colors duration-200 group-hover/card:text-green-44 dark:text-white dark:group-hover/card:text-green-44">
           {title}
         </span>
         {description && (
@@ -207,8 +207,8 @@ const CompactCard = ({
     return (
       <li className="m-0! before:hidden">
         <Link
-          href={href}
           className={sharedClassName}
+          href={href}
           onClick={() => sendGtagEvent('Card Clicked', { text: `Compact card link - ${title}` })}
         >
           {innerContent}
