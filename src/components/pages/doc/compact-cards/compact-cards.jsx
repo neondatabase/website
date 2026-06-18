@@ -14,8 +14,12 @@ import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const CARDS_TO_SHOW = 12;
+const GRID_CLASS_NAMES = {
+  2: 'grid-cols-2 gap-x-20 gap-y-7 xl:gap-x-8 lg:gap-5 md:grid-cols-1',
+  4: 'grid-cols-4 gap-x-20 gap-y-7 xl:gap-x-8 lg:gap-5 md:grid-cols-3 sm:grid-cols-2',
+};
 
-const PromptCards = ({ children = null, withToggler = false }) => {
+const CompactCards = ({ className, children = null, cols = 2, withToggler = false }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -25,15 +29,23 @@ const PromptCards = ({ children = null, withToggler = false }) => {
   const childrenArray = React.Children.toArray(children).filter(Boolean);
   const displayedChildren =
     withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
+  const columns = Number(cols);
+  const gridClassName = GRID_CLASS_NAMES[columns] || GRID_CLASS_NAMES[2];
 
   return (
-    <div className="prompt-cards not-prose my-9">
-      <ul className="my-0! grid grid-cols-4 gap-5 p-0! lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
+    <div className={cn('compact-cards not-prose my-7', className)}>
+      <ul className={cn('my-0! grid p-0!', gridClassName)}>
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 
-          const { title, icon, promptSrc, href } = child.props;
+          const { title: titleProp, description, icon, promptSrc, href } = child.props;
+          const title = titleProp || child.props.children;
           const iconConfig = ICONS_CONFIG[icon];
+
+          if (!title) {
+            console.warn('CompactCards item is missing a title');
+            return null;
+          }
 
           if (!iconConfig) {
             console.warn(`Icon "${icon}" not found in ICONS_CONFIG`);
@@ -43,9 +55,10 @@ const PromptCards = ({ children = null, withToggler = false }) => {
           const { lightIconPath, darkIconPath } = iconConfig;
 
           return (
-            <PromptCard
+            <CompactCard
               key={index}
               title={title}
+              description={description}
               icon={icon}
               lightIconPath={lightIconPath}
               darkIconPath={darkIconPath}
@@ -59,14 +72,14 @@ const PromptCards = ({ children = null, withToggler = false }) => {
       {withToggler && (
         <button
           type="button"
-          className="mx-auto mt-[18px] flex items-center rounded-full border border-gray-new-80 px-[18px] py-1.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15"
+          className="mx-auto mt-7 flex items-center rounded-full border border-gray-new-80 py-1.5 pr-4 pl-4.5 text-black-new transition-colors duration-200 hover:bg-gray-new-94 dark:border-gray-new-20 dark:text-white dark:hover:bg-gray-new-15"
           onClick={handleToggle}
         >
           <span className="text-sm tracking-extra-tight">
             {isOpen
               ? 'Hide'
               : childrenArray.length > CARDS_TO_SHOW
-                ? `+${childrenArray.length - CARDS_TO_SHOW} more`
+                ? `${childrenArray.length - CARDS_TO_SHOW}+ more`
                 : 'Show more'}
           </span>
           <span className="ml-1.5 flex h-auto w-3 shrink-0 items-center justify-center">
@@ -83,8 +96,9 @@ const PromptCards = ({ children = null, withToggler = false }) => {
   );
 };
 
-const PromptCard = ({
+const CompactCard = ({
   title,
+  description = null,
   icon,
   lightIconPath,
   darkIconPath,
@@ -119,39 +133,47 @@ const PromptCard = ({
   };
 
   const sharedClassName = cn(
-    'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 transition-all duration-200',
-    'border-gray-new-80 bg-[#E4F1EB]/40 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
-    'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
+    'group/card relative flex min-h-10 w-full items-start gap-3 overflow-hidden text-left transition-colors duration-200',
     'focus:ring-2 focus:ring-green-45 focus:ring-offset-2 focus:outline-hidden dark:focus:ring-offset-gray-new-8',
-    isCopied && 'border-green-45 dark:border-green-45'
+    promptSrc && 'pr-7'
   );
 
   const innerContent = (
     <>
-      <div className="relative z-10 flex min-w-0 flex-1 items-center gap-2.5">
-        <div className="relative h-6 w-6 shrink-0">
+      <div
+        className={cn(
+          'relative flex size-10 shrink-0 items-center justify-center border border-gray-new-80 bg-gray-new-98 transition-colors duration-200 group-hover/card:border-gray-new-70 dark:border-gray-new-20 dark:bg-gray-new-8 dark:group-hover/card:border-gray-new-40',
+          !!description && 'top-0.5'
+        )}
+      >
+        <img
+          className={cn('size-6', darkIconPath && 'dark:hidden')}
+          src={lightIconPath}
+          width={24}
+          height={24}
+          alt={`${icon} logo`}
+          loading={index > 7 ? 'lazy' : 'eager'}
+        />
+        {darkIconPath && (
           <img
-            className={cn('h-full w-full object-contain', darkIconPath && 'dark:hidden')}
-            src={lightIconPath}
+            className="hidden size-6 dark:block"
+            src={darkIconPath}
             width={24}
             height={24}
             alt={`${icon} logo`}
             loading={index > 7 ? 'lazy' : 'eager'}
           />
-          {darkIconPath && (
-            <img
-              className="hidden h-full w-full object-contain dark:block"
-              src={darkIconPath}
-              width={24}
-              height={24}
-              alt={`${icon} logo`}
-              loading={index > 7 ? 'lazy' : 'eager'}
-            />
-          )}
-        </div>
-        <span className="max-w-[calc(100%-2.5rem)] truncate text-base leading-snug tracking-extra-tight text-black-pure dark:text-white">
+        )}
+      </div>
+      <div className="relative z-10 min-w-0 flex-1 self-center">
+        <span className="compact-card-title block text-base leading-snug font-medium tracking-extra-tight text-black-pure transition-colors duration-200 group-hover/card:text-green-45 dark:text-white dark:group-hover/card:text-green-45">
           {title}
         </span>
+        {description && (
+          <span className="mt-0.5 block text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-50">
+            {description}
+          </span>
+        )}
       </div>
 
       {promptSrc && (
@@ -171,13 +193,23 @@ const PromptCard = ({
     </>
   );
 
+  if (promptSrc) {
+    return (
+      <li className="m-0! before:hidden">
+        <button type="button" className={sharedClassName} disabled={!markdown} onClick={handleCopy}>
+          {innerContent}
+        </button>
+      </li>
+    );
+  }
+
   if (href) {
     return (
-      <li className="m-0! h-11 before:hidden">
+      <li className="m-0! before:hidden">
         <Link
           href={href}
           className={sharedClassName}
-          onClick={() => sendGtagEvent('Card Clicked', { text: `Prompt card link - ${title}` })}
+          onClick={() => sendGtagEvent('Card Clicked', { text: `Compact card link - ${title}` })}
         >
           {innerContent}
         </Link>
@@ -186,16 +218,15 @@ const PromptCard = ({
   }
 
   return (
-    <li className="m-0! h-11 before:hidden">
-      <button type="button" className={sharedClassName} disabled={!markdown} onClick={handleCopy}>
-        {innerContent}
-      </button>
+    <li className="m-0! before:hidden">
+      <div className={sharedClassName}>{innerContent}</div>
     </li>
   );
 };
 
-PromptCard.propTypes = {
-  title: PropTypes.string.isRequired,
+CompactCard.propTypes = {
+  title: PropTypes.node.isRequired,
+  description: PropTypes.string,
   icon: PropTypes.string.isRequired,
   lightIconPath: PropTypes.string.isRequired,
   darkIconPath: PropTypes.string,
@@ -204,9 +235,12 @@ PromptCard.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-PromptCards.propTypes = {
+CompactCards.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node,
+  cols: PropTypes.oneOfType([PropTypes.oneOf([2, 4]), PropTypes.oneOf(['2', '4'])]),
   withToggler: PropTypes.bool,
 };
 
-export default PromptCards;
+export { CompactCards };
+export default CompactCards;

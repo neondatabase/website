@@ -146,12 +146,10 @@ Values must be provided in [RFC 3339 format](https://tools.ietf.org/html/rfc3339
 
 Share your feedback: [Join Discord](https://discord.gg/neon)
 
-## PromptCards
+## CompactCards
 
-**AI Coding Prompts:**
-
-- [Next.js prompt](https://neon.com/prompts/nextjs-prompt.md)
-- [Django prompt](https://neon.com/prompts/django-prompt.md)
+- [Next.js prompt](https://neon.com/prompts/nextjs-prompt.md): Copy a Next.js setup prompt
+- [Django](https://neon.com/docs/guides/django): Open the Django guide
 
 ## MegaLink
 

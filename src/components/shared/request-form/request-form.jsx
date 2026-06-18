@@ -14,6 +14,8 @@ import { useState, useEffect, useMemo } from 'react';
 import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import backendFormDarkBg from 'images/pages/docs/request-form/backend-form-dark-bg.png';
+import backendFormLightBg from 'images/pages/docs/request-form/backend-form-light-bg.png';
 import patternSvg from 'images/pages/docs/request-form/pattern.svg';
 import { cn } from 'utils/cn';
 import { emailRegexp } from 'utils/forms';
@@ -21,7 +23,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
 
-const RequestForm = ({ type }) => {
+const RequestForm = ({ className, type }) => {
   const { title, description, placeholder, buttonText, confirmation, options, extendedOptions } =
     DATA[type];
   const hasOptions = Array.isArray(options) && options.length > 0;
@@ -75,25 +77,50 @@ const RequestForm = ({ type }) => {
     }
   };
 
+  const isBackendPlatformForm = type === 'backend-platform';
+  const backendFormBgClassName =
+    'pointer-events-none absolute -top-3.25 left-[max(27rem,calc(100%_-_22.5rem))] aspect-400/275 w-100 md:hidden';
+
   return (
     <figure
       className={cn(
-        'doc-cta not-prose relative my-5 overflow-hidden border border-gray-new-80 bg-[rgba(228,241,235,0.4)] px-7 py-6 sm:p-6',
-        'dark:border-gray-new-30 dark:bg-gray-new-10'
+        'doc-cta not-prose relative my-5 overflow-hidden border border-gray-new-80 bg-gray-new-98 px-7 py-6 sm:p-6',
+        'dark:border-gray-new-20 dark:bg-gray-new-8',
+        isBackendPlatformForm && 'p-5 sm:p-5',
+        className
       )}
     >
-      <Image
-        className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover md:hidden"
-        src={patternSvg}
-        alt=""
-        width={188}
-        height={195}
-      />
+      {isBackendPlatformForm ? (
+        <>
+          <Image
+            className={cn(backendFormBgClassName, 'dark:hidden')}
+            src={backendFormLightBg}
+            alt=""
+            width={400}
+            height={275}
+          />
+          <Image
+            className={cn(backendFormBgClassName, 'hidden dark:block')}
+            src={backendFormDarkBg}
+            alt=""
+            width={400}
+            height={275}
+          />
+        </>
+      ) : (
+        <Image
+          className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover md:hidden"
+          src={patternSvg}
+          alt=""
+          width={188}
+          height={195}
+        />
+      )}
       <div className="relative z-10">
         <h2 className="my-0! text-xl leading-tight font-medium tracking-tight text-black-pure dark:text-white">
           {title}
         </h2>
-        <p className="mt-2.5 max-w-[490px] text-base leading-normal font-normal tracking-tight text-gray-new-20 opacity-90 dark:text-gray-new-85">
+        <p className="mt-2.5 max-w-md text-base leading-normal font-normal tracking-tight text-gray-new-20 opacity-90 dark:text-gray-new-80">
           {description}
         </p>
         {!isSent ? (
@@ -114,7 +141,7 @@ const RequestForm = ({ type }) => {
                   <div className="relative">
                     <ComboboxInput
                       className={cn(
-                        'h-11 w-full border border-gray-new-80 bg-white py-2 pr-8 pl-4 text-[15px] leading-snug tracking-extra-tight placeholder:text-gray-new-40 xl:text-sm',
+                        'h-11 w-full min-w-82.5 border border-gray-new-80 bg-white py-2 pr-8 pl-4 text-base leading-snug tracking-extra-tight placeholder:text-gray-new-40 xl:text-sm md:min-w-0',
                         'focus:outline-none data-focus:outline-1 data-focus:-outline-offset-1 data-focus:outline-gray-new-70',
                         'dark:border-gray-new-30 dark:bg-gray-new-15 dark:placeholder:text-gray-new-60 dark:data-focus:outline-gray-new-30'
                       )}
@@ -181,10 +208,11 @@ const RequestForm = ({ type }) => {
                 name="email"
                 value={email}
                 className={cn(
-                  'h-11 min-w-64 border border-gray-new-80 bg-white px-4 py-2 text-[15px] leading-snug tracking-extra-tight remove-autocomplete-styles placeholder:text-gray-new-40 md:w-full',
-                  '2xl:min-w-52 xl:min-w-40 xl:text-sm',
+                  'h-11 min-w-64 border border-gray-new-80 bg-white px-4 py-2 text-base leading-snug tracking-extra-tight remove-autocomplete-styles placeholder:text-gray-new-40 md:w-full',
+                  '2xl:min-w-52 xl:min-w-40',
                   'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                  'dark:border-gray-new-30 dark:bg-gray-new-15 dark:placeholder:text-gray-new-60 dark:focus:outline-gray-new-30'
+                  'dark:border-gray-new-30 dark:bg-gray-new-15 dark:placeholder:text-gray-new-60 dark:focus:outline-gray-new-30',
+                  isBackendPlatformForm && 'min-w-82.5 2xl:min-w-82.5 xl:min-w-82.5 md:min-w-0'
                 )}
                 placeholder="Email"
                 required
@@ -219,6 +247,7 @@ const RequestForm = ({ type }) => {
 };
 
 RequestForm.propTypes = {
+  className: PropTypes.string,
   type: PropTypes.oneOf(Object.keys(DATA)).isRequired,
 };
 

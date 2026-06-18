@@ -468,17 +468,32 @@ Join our community!
       expect(result).not.toContain('<CommunityBanner');
     });
 
-    it('should convert PromptCards to list of links', async () => {
+    it('should convert CompactCards prompt links to list of links', async () => {
       const result = await processInlineMdx(`
-<PromptCards>
+<CompactCards cols={4}>
 <a title="Next.js" promptSrc="/prompts/nextjs.md" />
 <a title="Django" promptSrc="/prompts/django.md" />
-</PromptCards>
+</CompactCards>
 `);
-      expect(result).toContain('**AI Coding Prompts:**');
       expect(result).toContain('[Next.js prompt](https://neon.com/prompts/nextjs.md)');
       expect(result).toContain('[Django prompt](https://neon.com/prompts/django.md)');
-      expect(result).not.toContain('<PromptCards');
+      expect(result).not.toContain('<CompactCards');
+    });
+
+    it('should convert CompactCards to list of links with descriptions', async () => {
+      const result = await processInlineMdx(`
+<CompactCards>
+<a title="Cursor" description="Connect Neon to Cursor." href="/docs/ai/ai-cursor-plugin" icon="cli-cursor" />
+<a title="Claude Code" description="Connect Neon to Claude Code." href="/docs/ai/ai-claude-code-plugin" icon="cli" />
+</CompactCards>
+`);
+      expect(result).toContain(
+        '- [Cursor](https://neon.com/docs/ai/ai-cursor-plugin): Connect Neon to Cursor.'
+      );
+      expect(result).toContain(
+        '- [Claude Code](https://neon.com/docs/ai/ai-claude-code-plugin): Connect Neon to Claude Code.'
+      );
+      expect(result).not.toContain('<CompactCards');
     });
 
     it('should convert Tabs with labels', async () => {
@@ -900,7 +915,7 @@ See [CONN_MAX_AGE](https://example.com).
         'LinkPreview',
         'YoutubeIframe',
         'CommunityBanner',
-        'PromptCards',
+        'CompactCards',
         'MegaLink',
         'QuoteBlock',
         'Testimonial',

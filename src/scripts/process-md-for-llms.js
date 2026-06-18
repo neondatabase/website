@@ -18,6 +18,7 @@
  * - Tabs/TabItem -> **Tab: label** + content
  * - Steps -> extracts children
  * - DetailIconCards -> bullet list with links
+ * - CompactCards -> bullet list with links or prompt links
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
@@ -346,6 +347,48 @@ function findJsxElements(node, names) {
 
   traverse(node);
   return found;
+}
+
+function compactCardsToList(node) {
+  const anchors = findJsxElements(node, 'a');
+  const cardItems = anchors
+    .map((a) => {
+      const href = getAttr(a, 'href');
+      const promptSrc = getAttr(a, 'promptSrc');
+      const title =
+        getAttr(a, 'title') ||
+        (a.children?.length > 0 ? childrenToMarkdown(a.children) : href || promptSrc);
+      const description = getAttr(a, 'description');
+
+      if (!title || (!href && !promptSrc)) return null;
+
+      const isPrompt = Boolean(promptSrc);
+      const linkChildren = [
+        {
+          type: 'link',
+          url: isPrompt ? `${BASE_URL}${promptSrc}` : toAbsoluteUrl(href),
+          children: [{ type: 'text', value: isPrompt ? `${title} prompt` : title }],
+        },
+      ];
+
+      if (description) {
+        linkChildren.push({ type: 'text', value: `: ${description}` });
+      }
+
+      return { type: 'listItem', children: [{ type: 'paragraph', children: linkChildren }] };
+    })
+    .filter(Boolean);
+
+  if (cardItems.length === 0) return null;
+
+  const list = {
+    type: 'list',
+    ordered: false,
+    spread: false,
+    children: cardItems,
+  };
+
+  return list;
 }
 
 /**
@@ -1214,43 +1257,11 @@ const componentHandlers = {
   },
 
   /**
-   * PromptCards -> list of prompt links (useful for AI agents)
-   * Children are <a> elements with title and promptSrc attributes
+   * CompactCards -> list of card links, including optional descriptions.
+   * Children are <a> elements with href or promptSrc attributes.
    */
-  PromptCards(node) {
-    const anchors = findJsxElements(node, 'a');
-    const items = anchors
-      .map((a) => {
-        const title = getAttr(a, 'title');
-        const promptSrc = getAttr(a, 'promptSrc');
-        if (!title || !promptSrc) return null;
-        return {
-          type: 'listItem',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'link',
-                  url: `${BASE_URL}${promptSrc}`,
-                  children: [{ type: 'text', value: `${title} prompt` }],
-                },
-              ],
-            },
-          ],
-        };
-      })
-      .filter(Boolean);
-
-    if (items.length === 0) return null;
-
-    return [
-      {
-        type: 'paragraph',
-        children: [{ type: 'strong', children: [{ type: 'text', value: 'AI Coding Prompts:' }] }],
-      },
-      { type: 'list', ordered: false, spread: false, children: items },
-    ];
+  CompactCards(node) {
+    return compactCardsToList(node);
   },
 
   /**
