@@ -1,7 +1,7 @@
 ---
-updatedOn: '2025-05-23T18:48:33.111Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
-<Admonition type="comingSoon" title="Early Access">
-This feature is available for members of our [Early Access Program](/docs/introduction/early-access). Read more about joining up [here](/docs/introduction/early-access).
+<Admonition type="comingSoon" title="Early access">
+This feature is currently in early access.
 </Admonition>

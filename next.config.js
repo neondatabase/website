@@ -2079,6 +2079,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/introduction/early-access',
+        destination: '/docs/introduction/roadmap',
+        permanent: true,
+      },
+      {
         source: '/docs/import/migration-assistant',
         destination: '/docs/import/import-data-assistant',
         permanent: true,
@@ -2186,7 +2191,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        destination: '/',
         permanent: true,
       },
       {
