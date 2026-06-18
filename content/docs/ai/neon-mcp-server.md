@@ -109,6 +109,15 @@ The Neon MCP server provides powerful database tools. We recommend MCP for **dev
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
 
+### Allowlist IP addresses
+
+The hosted Neon MCP Server (`mcp.neon.tech`) connects to your Neon databases from the following static IP addresses:
+
+- `34.192.103.46`
+- `23.22.233.166`
+
+If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these addresses to your allowlist so the MCP server can connect.
+
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
