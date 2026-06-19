@@ -1,5 +1,5 @@
 ---
-title: Neon's lakebase architecture
+title: "Neon Postgres' lakebase architecture"
 subtitle: 'Inside Neon Postgres: decoupled compute and durable storage'
 summary: >-
   Neon's lakebase architecture splits Postgres into an ephemeral compute layer
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-19T12:24:47.971Z'
 ---
 
 ## Top level overview
