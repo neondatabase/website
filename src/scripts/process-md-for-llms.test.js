@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 import {
   processFile,
@@ -79,18 +79,6 @@ describe('MDX to Markdown Conversion', () => {
       expect(result).toContain('Azure regions');
       expect(result).toContain('You can no longer create new projects in Azure regions');
       expect(result).not.toContain('<AzureRegionsDeprecation');
-    });
-
-    it('should expand ConsumptionAccountApiDeprecation shared content', async () => {
-      const inputPath = 'content/docs/guides/consumption-limits.md';
-      const pageUrl = 'https://neon.com/docs/guides/consumption-limits';
-      const projectRoot = process.cwd();
-
-      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
-
-      expect(result).toContain('consumption_history/account');
-      expect(result).toContain('deprecated');
-      expect(result).not.toContain('<ConsumptionAccountApiDeprecation');
     });
 
     it('should unwrap QuoteBlocksWrapper and preserve all quotes', async () => {
@@ -531,9 +519,11 @@ Content after.
     });
 
     it('should handle unknown components with attributes', async () => {
+      const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       const result = await processInlineMdx(`
 <UnknownWidget foo="bar" baz="qux" />
 `);
+      spy.mockRestore();
       // Should show component name and attributes
       expect(result).toContain('[UnknownWidget]');
       expect(result).toContain('foo: bar');
@@ -876,6 +866,14 @@ See [CONN_MAX_AGE](https://example.com).
   });
 
   describe('Component conversion test page (snapshot)', () => {
+    // This test renders src/scripts/fixtures/mdx-conversion-test.md through the
+    // LLM processor and snapshots the output section by section.
+    //
+    // If you added, removed, or changed a component and this test fails:
+    //   1. Check the diff — the failing snapshot name tells you which section changed.
+    //   2. If the change is intentional, update the fixture and run:
+    //        npx vitest run src/scripts/process-md-for-llms.test.js -u
+    //   3. Commit the updated snapshot file alongside your change.
     it('should convert every component without raw MDX leaks', async () => {
       const fixturePath = 'src/scripts/fixtures/mdx-conversion-test.md';
       const pageUrl = 'https://neon.com/docs/test/mdx-conversion-test';
@@ -921,7 +919,6 @@ See [CONN_MAX_AGE](https://example.com).
         'NextSteps',
         'NewPricing',
         'AzureRegionsDeprecation',
-        'ConsumptionAccountApiDeprecation',
         'CopyPrompt',
         'NeedHelp',
         'Comment',
@@ -939,7 +936,13 @@ See [CONN_MAX_AGE](https://example.com).
         expect(result).not.toContain(`<${name}`);
       }
 
-      expect(result).toMatchSnapshot();
+      // Split by top-level sections (## headings) so each component gets its own
+      // named snapshot — changes show as a scoped diff instead of a full-file diff.
+      const sections = result.split(/\n(?=## )/);
+      for (const section of sections) {
+        const heading = section.match(/^## (.+)/)?.[1]?.trim() ?? 'preamble';
+        expect(section).toMatchSnapshot(heading);
+      }
     });
   });
 });

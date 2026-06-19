@@ -87,6 +87,8 @@ npm run fix:js
 
 For markdown changes in `content/`, no manual step is needed. The pre-commit hook runs prettier and updates `updatedOn` automatically on staged files. To manually reformat all content markdown (prettier only), run `npm run fix:md`.
 
+The pre-push hook runs `npm run test:unit:run` automatically. If unit tests fail, the push is aborted.
+
 ## Environment Setup
 
 Copy `.env.example` to `.env` and configure. See internal Notion page for values.
