@@ -6,7 +6,7 @@ page_description: >-
   a sequence object to generate a sequence of numbers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/'
 ogImage: /postgresqltutorial/PostgreSQL-Sequence-simple-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: Using PostgreSQL SERIAL to Create Auto-increment Column
@@ -54,7 +54,7 @@ The sequence name must be distinct from any other sequences, tables, [indexes](.
 
 ### \[ AS \{ SMALLINT \| INT \| BIGINT \} \]
 
-Specify the [data type](postgresql-data-types) of the sequence. The valid data type is [`SMALLINT`](postgresql-integer), [`INT`](postgresql-interval), and [`BIGINT`](postgresql-integer). The default data type is `BIGINT` if you skip it.
+Specify the [data type](postgresql-data-types) of the sequence. The valid data type is [`SMALLINT`](postgresql-integer), [`INT`](postgresql-integer), and [`BIGINT`](postgresql-integer). The default data type is `BIGINT` if you skip it.
 
 The data type of the sequence determines the sequence’s minimum and maximum values.
 

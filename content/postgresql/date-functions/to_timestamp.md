@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_timestamp/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TO_DATE() Function
@@ -58,7 +58,7 @@ To construct `format` strings, you use the following template patterns for forma
 | IYY                      | The last 3 digits of ISO 8601 week\-numbering year                                                  |
 | IY                       | The last 2 digits of ISO 8601 week\-numbering year                                                  |
 | I                        | The last digit of ISO 8601 week\-numbering year                                                     |
-| BC, bc, AD or ad         | Abbreviated capitalized month name e.g., Jan, Feb,  etc.                                            |
+| BC, bc, AD or ad         | Era indicator without periods                                                                       |
 | B.C., b.c., A.D. ora.d.  | Era indicator with periods                                                                          |
 | MONTH                    | English month name in uppercase                                                                     |
 | Month                    | Full capitalized English month name                                                                 |

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ascii/
 ogImage: /postgresqltutorial/PostgreSQL-ASCII-function-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL String Functions
@@ -79,6 +79,6 @@ The following example illustrates how to use the `ASCII()` function to get the U
 
 ## Remarks
 
-To get the ASCII code value or Unicode code point of an integer, you use the [`CHR()`](postgresql-chr) function.
+To get the character corresponding to an ASCII code value or Unicode code point, you use the [`CHR()`](postgresql-chr) function.
 
 In this tutorial, you have learned how to use the PostgreSQL `ASCII()` function to get the ASCII code or Unicode code point of a character.

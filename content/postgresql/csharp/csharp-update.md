@@ -6,7 +6,7 @@ page_description: >-
   database from a C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-update/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Importing Data from a CSV File into a Table'
@@ -102,7 +102,7 @@ catch (NpgsqlException ex)
 
 How it works.
 
-First, construct an [UPDATE](../postgresql-tutorial/postgresql-update) statement that inserts a new row into the `students` table:
+First, construct an [UPDATE](../postgresql-tutorial/postgresql-update) statement that updates a row in the `students` table:
 
 ```cs
 var sql = @"UPDATE email = @email FROM students WHERE id= @id";

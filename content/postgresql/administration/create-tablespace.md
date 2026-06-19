@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Password of a PostgreSQL User
@@ -59,7 +59,7 @@ The `directory_path` is the absolute path to an empty directory used for the tab
 
 After creating a new table space, you can specify it in the [`CREATE DATABASE`](postgresql-create-database), [`CREATE TABLE`](../postgresql-tutorial/postgresql-create-table) and [`CREATE INDEX`](../postgresql-indexes/postgresql-create-index) statements to store data files of the objects in the tablespace.
 
-## PostgreSQL CREATE TABLE examples
+## PostgreSQL CREATE TABLESPACE examples
 
 The following statement uses the `CREATE TABLESPACE` to create a new tablespace called `ts_primary` with the physical location `c:\pgdata\primary`.
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_DAYS() Function
@@ -100,9 +100,9 @@ SELECT JUSTIFY_HOURS(INTERVAL '15 days 2 hours'),
 Output:
 
 ```text
-   justify_days   |      justify_days      |      justify_days
+   justify_hours   |      justify_hours      |      justify_hours
 ------------------+------------------------+-------------------------
- 15 days 02:00:00 | 1 mon 25 days 00:30:00 | 2 mons 15 days 00:00:45
+ 15 days 02:00:00 | 55 days 00:30:00        | 75 days 00:00:45
 (1 row)
 ```
 

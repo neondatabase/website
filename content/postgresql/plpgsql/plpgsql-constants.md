@@ -2,11 +2,11 @@
 title: PL/pgSQL Constants
 page_title: PL/pgSQL Constants
 page_description: >-
-  In this tutorial, you will learn how to declare and PL/pgSQL constants in a
+  In this tutorial, you will learn how to declare PL/pgSQL constants in a
   block.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Record Types

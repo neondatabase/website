@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: How to Change the Password of a PostgreSQL User
@@ -138,7 +138,7 @@ Output:
 
 ## Summary
 
-- In PostgreSQL, a superuser bypass all permission checks except the permission to log in.
+- In PostgreSQL, a superuser bypasses all permission checks except the permission to log in.
 - Use the `CREATE ROLE...SUPERUSER` statement to create a superuser.
 - Use the `ALTER ROLE...SUPERUSER` statement to make a role a superuser.
 - Use the `ALTER ROLE...NOSUPERUSER` statement to revoke the superuser from a user.

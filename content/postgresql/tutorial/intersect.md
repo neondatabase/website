@@ -6,7 +6,7 @@ page_description: >-
   sets and return the rows that appear in both result sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-intersect/'
 ogImage: /postgresqltutorial/PostgreSQL-INTERSECT-Operator-300x206.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UNION
@@ -24,7 +24,7 @@ The INTERSECT operator works the same way in any PostgreSQL deployment, so you c
 
 ## Introduction to PostgreSQL INTERSECT operator
 
-Like the [UNION](postgresql-union) and [EXCEPT](postgresql-except) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both results sets.
+Like the [UNION](postgresql-union) and [EXCEPT](postgresql-except) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both result sets.
 
 Here is the basic syntax of the `INTERSECT` operator:
 

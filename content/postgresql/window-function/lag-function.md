@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-window-function/postgresql-lag-function/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FIRST_VALUE Function
@@ -91,7 +91,7 @@ VALUES
 RETURNING *;
 ```
 
-Here is the data from the `sales` function:
+Here is the data from the `sales` table:
 
 ```
  year | group_id | amount

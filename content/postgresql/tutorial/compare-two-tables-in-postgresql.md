@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/compare-two-tables-in-postgresql/
 ogImage: /postgresqltutorial/compare-two-tables-postgresql.jpg
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Server and Database Objects
@@ -27,7 +27,7 @@ There are several ways to compare the content of two tables to find the differen
 
 ## Comparing two tables using EXCEPT and UNION operators
 
-First, [create table](postgresql-create-table) two tables called `foo` and `bar`, and [insert](postgresql-insert) some sample data for demonstration purposes:
+First, [create](postgresql-create-table) two tables called `foo` and `bar`, and [insert](postgresql-insert) some sample data for demonstration purposes:
 
 ```sql
 CREATE TABLE foo (
