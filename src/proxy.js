@@ -122,6 +122,9 @@ export async function proxy(req) {
     // Bare /docs has no page of its own. Agents / Accept: markdown are handled above
     // (served /docs/llms.txt); everyone else (browsers) is redirected to the intro.
     // This redirect lives here, not in next.config, so it runs after the markdown check.
+    // Note: trailing slash (/docs/) intentionally not handled here — Next.js
+    // normalizes trailing slashes before middleware on most paths, and the matcher
+    // pattern '/docs' does not match '/docs/', so it falls through harmlessly.
     if (pathname === '/docs') {
       const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
       // The /docs response is content-negotiated (agents/markdown get llms.txt above),

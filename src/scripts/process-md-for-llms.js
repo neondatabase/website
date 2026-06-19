@@ -2343,6 +2343,12 @@ const ROUTE_LABELS = {
 // (see next.config.js beforeFiles rewrite and ai-agent-detection CUSTOM_MARKDOWN_PATHS).
 // llms.txt is written later in postbuild (generate-llms-index.js), so we can't copy
 // its content here; we alias at the routing layer instead.
+// Routes whose /${route}.md URL is aliased to /docs/llms.txt at the routing layer
+// rather than getting a generated page-listing. Three places enforce this alias —
+// keep them in sync if this set changes:
+//   1. Here (skips generating public/md/${route}.md at postbuild)
+//   2. next.config.js beforeFiles rewrite: /${route}.md → /docs/llms.txt
+//   3. ai-agent-detection.js CUSTOM_MARKDOWN_PATHS (middleware serving for agents)
 const ROUTES_ALIASED_TO_LLMS = new Set(['docs']);
 
 /**
@@ -2351,6 +2357,8 @@ const ROUTES_ALIASED_TO_LLMS = new Set(['docs']);
  */
 async function generateRouteIndex(route, pages, outputDir) {
   const label = ROUTE_LABELS[route] || route.charAt(0).toUpperCase() + route.slice(1);
+  // Writes to public/md/${route}.md — must match the destination in the
+  // next.config.js beforeFiles rewrite: /${route}.md → /md/${route}.md.
   const outputPath = path.join(outputDir, `${route}.md`);
 
   const lines = [
