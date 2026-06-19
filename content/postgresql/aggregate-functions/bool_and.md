@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ARRAY_AGG Function
@@ -132,7 +132,7 @@ Output:
 
 The `BOOL_AND()` function returns false indicating that there are inactive projects in the `projects` table.
 
-### 2\) Using BOOL_AND() function with GROUP BY clause
+### 3\) Using BOOL_AND() function with GROUP BY clause
 
 The following example uses the `BOOL_AND()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to check if there are active projects in each team:
 

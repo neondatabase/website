@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAX Function
@@ -137,7 +137,7 @@ Output:
 
 ### 4\) Using PostgreSQL MIN() function with the HAVING clause example
 
-It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutorial/postgresql-having) clause the filter of the groups whose minimum values meet a specific condition.
+It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutorial/postgresql-having) clause to filter the groups whose minimum values meet a specific condition.
 
 The following query uses the `MIN()` function to find the lowest replacement costs of films grouped by category, selecting only groups with replacement costs greater than `9.99`:
 

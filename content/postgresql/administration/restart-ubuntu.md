@@ -2,12 +2,12 @@
 title: How to Restart PostgreSQL on Ubuntu
 page_title: How to Restart PostgreSQL on Ubuntu
 page_description: >-
-  In this tutorial, you will how to restart PostgreSQL on Ubuntu using
-  systemctl, service command, and pg_ctrl command.
+  In this tutorial, you will learn how to restart PostgreSQL on Ubuntu using
+  systemctl, service command, and pg_ctl command.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-restart-ubuntu/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: How to Check PostgreSQL Version
@@ -54,7 +54,7 @@ sudo service postgresql restart
 
 ## Restarting PostgreSQL on Ubuntu using the pg_ctl command
 
-If you show more information about the restart process, you can use the `pg_ctl` command:
+If you want more information about the restart process, you can use the `pg_ctl` command:
 
 ```bash
 sudo -u postgres pg_ctl restart -D /var/lib/postgresql/<version>/main
@@ -77,7 +77,7 @@ If you encounter the following error, the `pg_ctl` may not be in your system’s
 sudo: pg_ctl: command not found
 ```
 
-To fix it, you need to create a symbolic link to pg_ctrl in `/usr/local/bin/`:
+To fix it, you need to create a symbolic link to pg_ctl in `/usr/local/bin/`:
 
 ```bash
 sudo ln -s /usr/lib/postgresql/<version>/bin/pg_ctl /usr/local/bin/pg_ctl

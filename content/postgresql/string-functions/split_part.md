@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL\_SPLIT_PART() function to split a s
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-split_part/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SUBSTRING() Function
@@ -74,7 +74,7 @@ Here is the output:
 (1 row)
 ```
 
-### 1\) Using PostgreSQL SPLIT_PART() function with a position that does not exist
+### 2\) Using PostgreSQL SPLIT_PART() function with a position that does not exist
 
 The following example returns an empty string because the position is greater than the number of parts (3\):
 

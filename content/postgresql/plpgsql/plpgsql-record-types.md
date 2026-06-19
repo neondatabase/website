@@ -6,7 +6,7 @@ page_description: >-
   variables that can hold a single row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/'
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Row Types
@@ -76,7 +76,7 @@ language plpgsql;
 How it works.
 
 - First, declare a record variable called `rec` in the declaration section.
-- Second use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
+- Second, use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
 - Third, print out the information of the film via the record variable.
 
 ### 2\) Using record variables in the for loop statement

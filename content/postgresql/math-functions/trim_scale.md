@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trim_scale/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNC() Function
@@ -130,4 +130,4 @@ Output:
 
 ## Summary
 
-- Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.
+- Use the `TRIM_SCALE()` function to reduce the scale of a number by removing trailing zeroes.
