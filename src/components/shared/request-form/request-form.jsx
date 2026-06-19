@@ -23,9 +23,30 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
 
-const RequestForm = ({ className, type }) => {
-  const { title, description, placeholder, buttonText, confirmation, options, extendedOptions } =
-    DATA[type];
+const RequestForm = ({
+  className,
+  type,
+  title: titleOverride,
+  description: descriptionOverride,
+  buttonText: buttonTextOverride,
+  confirmation: confirmationOverride,
+}) => {
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    placeholder,
+    buttonText: defaultButtonText,
+    confirmation: defaultConfirmation,
+    options,
+    extendedOptions,
+  } = DATA[type];
+
+  // Allow pages to override the display copy while keeping the type-based analytics.
+  const title = titleOverride || defaultTitle;
+  const description = descriptionOverride || defaultDescription;
+  const buttonText = buttonTextOverride || defaultButtonText;
+  const confirmation = confirmationOverride || defaultConfirmation;
+
   const hasOptions = Array.isArray(options) && options.length > 0;
 
   const isRecognized = false;
@@ -250,6 +271,10 @@ const RequestForm = ({ className, type }) => {
 RequestForm.propTypes = {
   className: PropTypes.string,
   type: PropTypes.oneOf(Object.keys(DATA)).isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  buttonText: PropTypes.string,
+  confirmation: PropTypes.string,
 };
 
 export default RequestForm;

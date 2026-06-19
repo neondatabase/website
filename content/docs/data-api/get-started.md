@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-19T13:59:31.895Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -198,7 +198,7 @@ export const posts = pgTable(
 </CodeTabs>
 
 <Admonition type="info" title="What is auth.user_id() and authUid()?">
-`auth.user_id()` is a Data API helper that extracts the User ID from the JWT token for secure database permission enforcement. `authUid()` is a Drizzle ORM helper that simplifies using `auth.user_id()` in policies.
+`auth.user_id()` returns the JWT `sub` claim as `text`. Use `auth.uid()` instead if your `user_id` column is `uuid`; it parses `sub` as a UUID and returns `NULL` if it's not valid. `authUid()` is a Drizzle helper for `auth.user_id()`.
 </Admonition>
 
 ## Refresh schema cache

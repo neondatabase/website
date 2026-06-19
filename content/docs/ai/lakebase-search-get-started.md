@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-09T17:17:42.901Z'
+updatedOn: '2026-06-19T13:59:31.895Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />
@@ -134,7 +134,7 @@ async function vectorSearch(query: string, limit = 5) {
 async function textSearch(query: string, limit = 5) {
   return sql`
     SELECT id, title,
-           body_tsv <&> to_bm25query(
+           body_tsv <@> to_bm25query(
              to_tsvector('english', ${query}),
              'documents_bm25'
            ) AS score
@@ -151,7 +151,7 @@ async function main() {
   console.log('Building BM25 index...');
   await sql`
     CREATE INDEX IF NOT EXISTS documents_bm25 ON documents
-    USING lakebase_bm25 (body_tsv bm25_ops)
+    USING lakebase_bm25 (body_tsv)
     WITH (default_limit = 10)
   `;
 

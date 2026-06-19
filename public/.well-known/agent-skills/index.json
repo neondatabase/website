@@ -6,28 +6,35 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neonctl\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:e4f845622b7bd7d7c348d738d98f1ad88dd5bd1e146e935865e5c12233d63b95"
+      "digest": "sha256:e86b39e63798b79736645bbc5d3925ac52f8dbe7c0c9cc0b106a592771dbc338"
     },
     {
       "name": "claimable-postgres",
       "type": "skill-md",
       "description": "Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres environment, a throwaway DATABASE_URL for prototyping/tests, or \"just give me a DB now\". Triggers include: \"quick postgres\", \"temporary postgres\", \"no signup database\", \"no credit card database\", \"instant DATABASE_URL\", \"npx neon-new\", \"neon.new\", \"neon.new API\", \"claimable postgres API\".",
       "url": "/.well-known/agent-skills/claimable-postgres/SKILL.md",
-      "digest": "sha256:d57e51f1cd51912ee6c592ea1a00c6825223fe35642d716653d316099e0e8b9f"
+      "digest": "sha256:d05a1a6618d517f985b79bc7a627f4dc6d7f0d19acd81be7febaeb1e506db056"
     },
     {
       "name": "neon-postgres-egress-optimizer",
       "type": "skill-md",
       "description": "Diagnose and fix excessive Postgres egress (network data transfer) in a codebase. Use when a user mentions high database bills, unexpected data transfer costs, network transfer charges, egress spikes, \"why is my Neon bill so high\", \"database costs jumped\", SELECT * optimization, query overfetching, reduce Neon costs, optimize database usage, or wants to reduce data sent from their database to their application. Also use when reviewing query patterns for cost efficiency, even if the user doesn't explicitly mention egress or data transfer.",
       "url": "/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md",
-      "digest": "sha256:33e2b2bcb19dc47ecdaf6bdca2e3e77be87341ba846ddf64ea090b9fa45c51c0"
+      "digest": "sha256:cb86cc3fce7d5c5ecd1cd581683292478c6cfa6104fff229a9e52feeec957e00"
     },
     {
       "name": "neon-postgres-branches",
       "type": "skill-md",
       "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\" and \"sensitive data testing\".",
       "url": "/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
-      "digest": "sha256:54e76a777a0bbaf2fa2b66e0516a5cc98e70930245505e31e5b14c33140aa117"
+      "digest": "sha256:14ec4806726465de30bb6dd309025d380e25de0036465479dc2169453d6d1b32"
+    },
+    {
+      "name": "neon",
+      "type": "skill-md",
+      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
+      "url": "/.well-known/agent-skills/neon/SKILL.md",
+      "digest": "sha256:76e46a0b9ec7fac1491ea6a36fb5afb98ebcc2de856943409fb34b9fb1f41211"
     }
   ]
 }

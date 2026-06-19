@@ -116,7 +116,7 @@ const Post = ({
               <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
                 <div
                   className={cn(
-                    !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
+                    !isChangelog && 'max-w-[calc(100%-8.5rem)] min-w-0 flex-1',
                     !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
                     eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
                   )}

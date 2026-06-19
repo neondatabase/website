@@ -1,5 +1,5 @@
 ---
-title: Welcome to Neon Docs
+title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-18T10:08:29.757Z'
+updatedOn: '2026-06-19T13:59:31.895Z'
 ---
 
 ## Getting started
@@ -32,7 +32,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   />
 </TwinPaths>
 
-## Explore products
+## Products
 
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. <br />
 Every service is agent-ready: instant, branchable, and serverless.
@@ -41,15 +41,15 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="S3-compatible object storage that branches with your database." icon="data" tag="private preview">Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="Long-running Node.js compute, deployed alongside your database." icon="app-store" tag="private preview">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="private preview">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Private Preview">AI Gateway</a>
 
 </DetailIconCards>
 

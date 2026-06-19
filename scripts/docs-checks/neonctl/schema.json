@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.26.2",
-  "generatedAt": "2026-06-14T21:33:24.682Z",
+  "neonctlVersion": "2.26.6",
+  "generatedAt": "2026-06-16T12:27:53.002Z",
   "binaries": [
     "neonctl",
     "neon"
@@ -1232,24 +1232,15 @@
           "describe": "Skip the migrations phase.",
           "default": false
         },
-        "skip-neon-auth": {
-          "type": "boolean",
-          "describe": "Skip the Neon Auth setup phase.",
-          "default": false
-        },
         "data": {
           "type": "string",
           "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
         },
         "agent": {
-          "type": "string",
-          "describe": "Agent to configure. Supported values: `cursor`, `copilot` (VS Code), `claude` (Claude Code).",
-          "alias": "a",
-          "choices": [
-            "cursor",
-            "copilot",
-            "claude"
-          ]
+          "type": "boolean",
+          "describe": "Enable agent/JSON mode (agent type is auto-detected).",
+          "default": false,
+          "alias": "a"
         },
         "context-file": {
           "type": "unknown",
@@ -2034,115 +2025,6 @@
       "describe": "Manage Neon Auth",
       "usage": "$0 neon-auth <sub-command> [options]"
     },
-    "functions": {
-      "aliases": [
-        "function"
-      ],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        }
-      },
-      "commands": {
-        "deploy": {
-          "name": "deploy",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug (1-20 lowercase letters and digits)",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "src": {
-              "type": "string",
-              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
-            },
-            "path": {
-              "type": "string",
-              "hidden": true
-            },
-            "entry": {
-              "type": "string",
-              "hidden": true
-            },
-            "runtime": {
-              "type": "string",
-              "describe": "Function runtime",
-              "choices": [
-                "nodejs24"
-              ]
-            },
-            "env": {
-              "type": "string",
-              "describe": "Environment variable as KEY=VALUE (repeatable)"
-            },
-            "wait": {
-              "type": "boolean",
-              "describe": "Wait for the deployment to finish building",
-              "default": true
-            }
-          },
-          "commands": {},
-          "describe": "Deploy a function from a local directory"
-        },
-        "list": {
-          "name": "list",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "List functions on the branch"
-        },
-        "get": {
-          "name": "get",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "list-env-variables": {
-              "type": "boolean",
-              "describe": "List the environment variable names of the active deployment",
-              "default": false,
-              "alias": "E"
-            }
-          },
-          "commands": {},
-          "describe": "Show a function's details"
-        },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug",
-              "type": "string"
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a function on the branch"
-        }
-      },
-      "describe": "Manage Neon Functions",
-      "usage": "$0 functions <sub-command> [options]"
-    },
     "dev": {
       "aliases": [],
       "positionals": [],
@@ -2443,9 +2325,14 @@
                   "type": "string",
                   "describe": "Branch ID or name"
                 },
+                "recursive": {
+                  "type": "boolean",
+                  "describe": "List every key flat, descending into nested folders (no delimiter). Mutually exclusive with --delimiter. Mirrors \"aws s3 ls --recursive\"",
+                  "default": false
+                },
                 "delimiter": {
                   "type": "string",
-                  "describe": "Collapse keys sharing a common prefix (e.g. \"/\") into folders"
+                  "describe": "Collapse keys sharing this prefix separator into folders. Defaults to \"/\" (folder view); ignored when --recursive is set"
                 },
                 "cursor": {
                   "type": "string",
@@ -2457,7 +2344,7 @@
                 }
               },
               "commands": {},
-              "describe": "List objects in a bucket",
+              "describe": "List objects in a bucket. By default folders are collapsed (like \"aws s3 ls\"); pass --recursive for a flat listing of every key",
               "usage": "$0 bucket object list <bucket>[/<prefix>] [options]"
             },
             "get": {
@@ -2639,6 +2526,115 @@
           "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
         }
       ]
+    },
+    "functions": {
+      "aliases": [
+        "function"
+      ],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        },
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        }
+      },
+      "commands": {
+        "deploy": {
+          "name": "deploy",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug (1-20 lowercase letters and digits)",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "src": {
+              "type": "string",
+              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
+            },
+            "path": {
+              "type": "string",
+              "hidden": true
+            },
+            "entry": {
+              "type": "string",
+              "hidden": true
+            },
+            "runtime": {
+              "type": "string",
+              "describe": "Function runtime",
+              "choices": [
+                "nodejs24"
+              ]
+            },
+            "env": {
+              "type": "string",
+              "describe": "Environment variable as KEY=VALUE (repeatable)"
+            },
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait for the deployment to finish building",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Deploy a function from a local directory"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List functions on the branch"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "list-env-variables": {
+              "type": "boolean",
+              "describe": "List the environment variable names of the active deployment",
+              "default": false,
+              "alias": "E"
+            }
+          },
+          "commands": {},
+          "describe": "Show a function's details"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a function on the branch"
+        }
+      },
+      "describe": "Manage Neon Functions",
+      "usage": "$0 function <sub-command> [options]"
     }
   }
 }

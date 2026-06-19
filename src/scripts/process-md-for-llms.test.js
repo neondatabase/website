@@ -77,7 +77,7 @@ describe('MDX to Markdown Conversion', () => {
       const result = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).toContain('Azure regions');
-      expect(result).toContain('April 7, 2026');
+      expect(result).toContain('You can no longer create new projects in Azure regions');
       expect(result).not.toContain('<AzureRegionsDeprecation');
     });
 
@@ -638,7 +638,7 @@ See [CONN_MAX_AGE](https://example.com).
       expect(navMap.size).toBeGreaterThan(0);
 
       // Check a known page from docs navigation
-      const connectEntry = navMap.get('get-started/connect-neon');
+      const connectEntry = navMap.get('get-started/signing-up');
       expect(connectEntry).toBeDefined();
       expect(connectEntry.sectionName).toBeTruthy();
       expect(connectEntry.siblings.length).toBeGreaterThan(0);
@@ -729,7 +729,7 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      const connectEntry = navMap.get('get-started/connect-neon');
+      const connectEntry = navMap.get('get-started/signing-up');
       expect(connectEntry).toBeDefined();
       expect(connectEntry.breadcrumbs).toBeDefined();
       expect(Array.isArray(connectEntry.breadcrumbs)).toBe(true);
