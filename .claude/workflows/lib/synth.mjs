@@ -198,6 +198,8 @@ if (jsonOnly) {
   if (!confirmed.length && !unverified.length && coverageOk) {
     L.push(`No conflicts found. (A clean result only means something on a fresh tree — run against current \`main\`.)`)
   }
+  L.push(``)
+  L.push(`_Consistency check, not correctness: a finding means two pages disagree, not which side is right — a human picks the canonical value._`)
   console.log(L.join('\n'))
 }
 

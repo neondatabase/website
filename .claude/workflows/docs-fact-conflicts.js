@@ -105,6 +105,14 @@ if (!TARGET) {
     'Pass the target page path as args, e.g. "content/docs/introduction/plans.md" or { path, semantic: true }'
   )
 }
+// Corpus root the search/index step works against. Without this, agents grep a cwd-relative
+// "content/docs", which silently checks whatever checkout the session happens to sit in — the
+// wrong tree when the target lives in another worktree, and it fails without any error. Resolve it
+// explicitly: an ABSOLUTE target derives its own root, or pass { path, docsRoot } to override.
+// To check a specific branch/worktree, pass an absolute target path.
+const rootMatch = typeof TARGET === 'string' ? TARGET.match(/^(.*\/content\/docs)(?:\/|$)/) : null
+const DOCS_ROOT = (parsedArgs && parsedArgs.docsRoot) || (rootMatch ? rootMatch[1] : 'content/docs')
+const REPO_ROOT = DOCS_ROOT === 'content/docs' ? '.' : DOCS_ROOT.replace(/\/content\/docs$/, '')
 
 // ---- schemas ---------------------------------------------------------------
 const FACTS_SCHEMA = {
@@ -239,7 +247,7 @@ SEMANTIC SEARCH (enabled): the corpus also has a local vector index under
 \`.claude/workflows/lib\`. Use it to catch conflicting facts that share no keywords with grep.
   1. First refresh the index (incremental — only re-embeds changed files, so it also picks up
      edits to the target page):
-       node .claude/workflows/lib/build-index.mjs --root "$(pwd)"
+       node .claude/workflows/lib/build-index.mjs --root "${REPO_ROOT}"
   2. For EACH fact, in addition to grep, run a vector query and merge the hits:
        node .claude/workflows/lib/query-index.mjs "<subject>. <claim>" --exclude "${TARGET}" --k 8
      (run it from the repo root; it prints JSON {results:[{file,line,distance,preview}]}).
@@ -249,12 +257,12 @@ SEMANTIC SEARCH (enabled): the corpus also has a local vector index under
 
 const batch = await agent(
   `You are the retrieval step of a docs conflict checker. For EVERY fact below, find other
-places in \`content/docs\` that state the same thing, so a later step can check for conflicts.
+places in \`${DOCS_ROOT}\` that state the same thing, so a later step can check for conflicts.
 
 Facts (JSON array):
 ${JSON.stringify(facts)}
 
-For each fact: run ripgrep over \`content/docs\` (case-insensitive, use Grep/Bash) for its
+For each fact: run ripgrep over \`${DOCS_ROOT}\` (case-insensitive, use Grep/Bash) for its
 search_terms and for numeric variants of its claim. EXCLUDE the source file \`${TARGET}\`.
 Collect plausibly-related lines as candidates (file, 1-based line, the matching line plus a
 little context). Do NOT judge conflicts here — just retrieve. Cap each fact at ~15 of its most

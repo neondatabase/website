@@ -63,8 +63,11 @@ large JSON back into the main thread. Files:
 
 ### 1. Setup
 
-Create the scratch dir and write `meta.json` (`{target, mode, scope}`). For full-corpus, list the
-target pages (`content/docs/**/*.md`, minus anything intentionally divergent like `legacy-*`).
+Resolve an ABSOLUTE docs root from the target worktree (e.g. `/abs/<worktree>/content/docs`) and
+pass absolute paths to every agent — they otherwise grep a cwd-relative `content/docs` and can
+silently check the wrong checkout. Create the scratch dir and write `meta.json`
+(`{target, mode, scope}`). For full-corpus, list the target pages (`content/docs/**/*.md`, minus
+anything intentionally divergent like `legacy-*`).
 
 ### 2. Extract — one agent per page
 
@@ -121,8 +124,10 @@ clean, for each flagged conflict spawn a skeptical verify agent:
 ### 6. Report
 
 Re-run `synth.mjs` to fold in verdicts. It writes `report.json` and prints the summary
-(confirmed / unverified / refuted). **Report only — never edit docs.** Treat findings as leads:
-open each cited `file:line` pair before acting. A clean result only means something on a fresh
+(confirmed / unverified / refuted). **The sweep stage is report-only.** Resolving a conflict
+(confirm which value is canonical → propose aligning edits one page at a time, each reviewed) is a
+separate human-in-the-loop step — see "Report and resolve" in `fact-check.md`. Never auto-edit, and
+remember this checks consistency, not correctness. A clean result only means something on a fresh
 tree, so run against current `origin/main`.
 
 ## Full-corpus — known gaps (TODO for a dedicated engine)
