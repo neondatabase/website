@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-statement_timestamp/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CLOCK_TIMESTAMP() Function
@@ -60,7 +60,7 @@ The output indicates that the `STATEMENT_TIMESTAMP()` function returns a timesta
 
 ### 2\) Using the statement_timestamp() within a transaction
 
-The following example calls the `STATEMENT_TIMESTAMP()` function within a transaction multiple times and log the result into a table:
+The following example calls the `STATEMENT_TIMESTAMP()` function within a transaction multiple times and logs the result into a table:
 
 ```sql
 -- create a new table for logging
