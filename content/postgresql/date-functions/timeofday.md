@@ -45,6 +45,12 @@ Let’s take some examples of using the `TIMEOFDAY()` function.
 
 The following example uses the `TIMEOFDAY()` function to retrieve the current date and time as a string:
 
+```sql
+SELECT TIMEOFDAY();
+```
+
+Output:
+
 ```text
               timeofday
 -------------------------------------
