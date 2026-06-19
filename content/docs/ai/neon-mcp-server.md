@@ -11,7 +11,7 @@ summary: >-
   up with a single command (`npx neonctl@latest init` or `npx add-mcp
   https://mcp.neon.tech/mcp`); supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-06-19T14:28:23.449Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**:

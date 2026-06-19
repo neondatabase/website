@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/
 ogImage: ''
-updatedOn: '2026-06-19T14:28:23.449Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_INTERVAL() Function
