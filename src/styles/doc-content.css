@@ -5,6 +5,12 @@
     }
   }
 
+  .callout-content {
+    a {
+      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 dark:hover:decoration-white sm:break-words;
+    }
+  }
+
   .admonition-text {
     @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
