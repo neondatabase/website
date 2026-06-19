@@ -10,7 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-19T19:20:32.356Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -54,7 +54,7 @@ To find the region an existing project runs in, use any of these:
 
 - **Console:** open the project and check the **Settings** widget on the **Project Dashboard**. The region is listed alongside the cloud provider.
 - **CLI:** run `neon projects list` or `neon projects get <project_id>`. The output includes the region ID (for example, `aws-us-east-2`).
-- **Connection string:** the region is the segment before `.aws.neon.tech` or `.azure.neon.tech` in the hostname. For example, `us-east-2.aws.neon.tech` is AWS US East (Ohio).
+- **Connection string:** the region is the segment before `.aws.neon.tech` in the hostname. For example, `us-east-2.aws.neon.tech` is AWS US East (Ohio).
 - **API:** read the `region_id` field from `GET /projects/{project_id}`.
 
 All branches and databases in a project share the project's region, so the project region is the region for everything inside it.

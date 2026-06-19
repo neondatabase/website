@@ -11,12 +11,12 @@ summary: >-
   provider.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-19T19:20:32.356Z'
 redirectFrom:
   - /docs/guides/region-migration
 ---
 
-**Can you change the region of an existing Neon project?** No. A Neon **project** is created in a single [region](/docs/introduction/regions), and you **cannot change the region** for that project after creation. All branches in a project share the project's region, so branching alone won't move your data.
+**Can you change the region of an existing Neon project?** Not directly, but you have options. A Neon **project** is created in a single [region](/docs/introduction/regions), and that region is fixed after creation. All branches in a project share the project's region, so branching alone won't move your data.
 
 To run your database in a different region, you **create a new Neon project** in that region and **migrate your database** into it.
 
