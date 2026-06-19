@@ -2532,6 +2532,7 @@ const defaultConfig = {
         // /docs.md serves the canonical, curated docs index (llms.txt) instead of a
         // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
         { source: '/docs.md', destination: '/docs/llms.txt' },
+        { source: '/blog.md', destination: '/blog/llms.txt' },
         // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
         // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
         ...indexRewrites,

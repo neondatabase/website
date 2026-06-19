@@ -607,7 +607,7 @@ function buildTests() {
     { note: 'homepage is not a CONTENT_ROUTE' }
   );
 
-  const nonContentRoutes = ['/about', '/blog'];
+  const nonContentRoutes = ['/about'];
 
   for (const path of nonContentRoutes) {
     add(
@@ -638,6 +638,203 @@ function buildTests() {
       { note: 'should not serve markdown' }
     );
   }
+
+  // ── 9b-blog. Blog markdown serving ──────────────────────────────────────────
+  // /blog is content-negotiated: agents get blog/llms.txt index; browsers get HTML.
+  // /blog/[slug].md is served from CDN for all requesters (no agent detection needed).
+  // /blog/[slug] without .md always serves HTML — the middleware matcher does NOT catch
+  // bare blog slugs even with Accept: text/markdown. This is intentional; adding the
+  // matcher would add overhead to every blog page load.
+
+  // blog index: agent UA gets markdown
+  add(
+    'Blog index (agent UA)',
+    '/blog',
+    'agent-ua',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => {
+        if (!r.body.includes('# Neon Blog')) return 'body missing "# Neon Blog" heading';
+        return null;
+      },
+    ],
+    { note: 'agent UA should get blog/llms.txt content' }
+  );
+
+  // blog index: Accept: text/markdown gets markdown
+  add(
+    'Blog index (Accept: markdown)',
+    '/blog',
+    'accept-md',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => {
+        if (!r.body.includes('# Neon Blog')) return 'body missing "# Neon Blog" heading';
+        return null;
+      },
+    ],
+    { note: 'Accept: text/markdown should get blog index markdown' }
+  );
+
+  // blog index: browser gets HTML
+  add(
+    'Blog index (browser)',
+    '/blog',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'browser must get HTML, not blog markdown index' }
+  );
+
+  // blog/llms.txt: static route handler serves text/plain index
+  add(
+    'Blog llms.txt',
+    '/blog/llms.txt',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/plain'),
+      (r) => {
+        if (!r.body.includes('# Neon Blog')) return 'body missing "# Neon Blog" heading';
+        return null;
+      },
+      (r) => {
+        if (!r.body.includes('](') || !r.body.includes('/blog/'))
+          return 'body missing blog post links';
+        return null;
+      },
+    ],
+    { note: 'static route handler serves blog post index as text/plain' }
+  );
+
+  // blog.md rewrite → blog/llms.txt
+  add(
+    'Blog .md rewrite',
+    '/blog.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => {
+        if (r.contentType.includes('text/html'))
+          return `expected non-HTML content type, got ${r.contentType}`;
+        return null;
+      },
+      (r) => {
+        if (!r.body.includes('# Neon Blog')) return 'body missing "# Neon Blog" heading';
+        return null;
+      },
+    ],
+    { note: '/blog.md must rewrite to /blog/llms.txt content, not HTML' }
+  );
+
+  // individual post .md: served from CDN
+  add(
+    'Blog post .md (exists)',
+    '/blog/slop-fork-neon.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => {
+        const src = r.headers.get('x-content-source');
+        if (src !== 'markdown') return `expected x-content-source: markdown, got ${src}`;
+        return null;
+      },
+      (r) => {
+        if (!r.body.includes('Slop Fork') && !r.body.includes('slop-fork-neon'))
+          return 'body does not appear to be the expected blog post';
+        return null;
+      },
+    ],
+    { note: 'CDN-fetched blog post markdown with content verification' }
+  );
+
+  // individual post .md: 404 for nonexistent slug
+  add(
+    'Blog post .md (404)',
+    '/blog/nonexistent-slug-xyz-does-not-exist.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 404),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => {
+        if (!r.body.includes('# Page Not Found')) return 'body missing "# Page Not Found" heading';
+        return null;
+      },
+      (r) => {
+        if (!r.body.includes('/blog/llms.txt')) return 'body missing link to /blog/llms.txt';
+        return null;
+      },
+      (r) => {
+        if (!r.body.includes('Neon Blog')) return 'body missing "Neon Blog" context';
+        return null;
+      },
+    ],
+    { note: 'missing blog .md must return 404 text/markdown with blog index link' }
+  );
+
+  // PITFALL: bare slug with Accept: text/markdown → HTML (or 404), NOT markdown.
+  // The middleware matcher only covers /blog/:slug.md (literal .md suffix).
+  // /blog/[slug] never hits the blog .md handler regardless of Accept header.
+  // (Blog pages 404 locally since blog is hosted separately; on Vercel they return 200 HTML.)
+  add(
+    'Blog post bare slug (Accept: markdown) — pitfall',
+    '/blog/slop-fork-neon',
+    'accept-md',
+    [
+      (r) => {
+        if (r.status !== 200 && r.status !== 404)
+          return `unexpected status ${r.status} — expected 200 (HTML) or 404`;
+        return null;
+      },
+      (r) => {
+        const src = r.headers.get('x-content-source');
+        if (src === 'markdown')
+          return 'bare blog slug must not return markdown — use /blog/[slug].md';
+        return null;
+      },
+      (r) => {
+        if (r.contentType.includes('text/markdown'))
+          return 'bare blog slug must not serve text/markdown — use .md suffix';
+        return null;
+      },
+    ],
+    {
+      note: 'pitfall: Accept: text/markdown on bare slug gets HTML/404; use /blog/[slug].md instead',
+    }
+  );
+
+  // PITFALL: agent UA on bare slug → HTML (or 404), NOT markdown.
+  // Same reason: /blog/[slug] not in matcher, so middleware blog handler never fires.
+  add(
+    'Blog post bare slug (agent UA) — pitfall',
+    '/blog/slop-fork-neon',
+    'agent-ua',
+    [
+      (r) => {
+        if (r.status !== 200 && r.status !== 404)
+          return `unexpected status ${r.status} — expected 200 (HTML) or 404`;
+        return null;
+      },
+      (r) => {
+        const src = r.headers.get('x-content-source');
+        if (src === 'markdown')
+          return 'bare blog slug must not return markdown — agent should use /blog/[slug].md';
+        return null;
+      },
+      (r) => {
+        if (r.contentType.includes('text/markdown'))
+          return 'bare blog slug must not serve text/markdown — use .md suffix';
+        return null;
+      },
+    ],
+    { note: 'pitfall: agent UA on bare slug gets HTML/404; agents must request /blog/[slug].md' }
+  );
 
   // ── 9b. Non-docs marketing page (stays HTML for agents / Accept: markdown)
   // Tests that middleware does not serve markdown for pages outside CONTENT_ROUTES.
