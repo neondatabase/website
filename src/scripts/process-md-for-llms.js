@@ -41,6 +41,7 @@ const jsYaml = require('js-yaml');
 // web page and this llms mirror can never disagree on the generated tables.
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+const { isUnusedOrSharedContent } = require('../constants/content');
 
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
@@ -2012,7 +2013,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
 
-  return output;
+  return { content: output, title: frontmatter.title || null };
 }
 
 /**
@@ -2290,34 +2291,89 @@ function stripNavigationContext(content) {
 }
 
 /**
- * Process a directory recursively
+ * Process a directory recursively.
+ * Returns an array of { title, url } for every page written (used to build route indexes).
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
   const entries = await fs.readdir(inputDir, { withFileTypes: true });
+  const pages = [];
 
   for (const entry of entries) {
     const inputPath = path.join(inputDir, entry.name);
 
     if (entry.isDirectory()) {
-      await processDirectory(inputPath, outputDir, baseContentDir, rootDir);
+      const dirRelPath = path.relative(baseContentDir, inputPath) + '/';
+      if (isUnusedOrSharedContent(dirRelPath)) continue;
+      const subPages = await processDirectory(inputPath, outputDir, baseContentDir, rootDir);
+      pages.push(...subPages);
     } else if (entry.name.endsWith('.md')) {
       const relativePath = path.relative(baseContentDir, inputPath);
+      if (isUnusedOrSharedContent(relativePath)) continue;
       const outputPath = path.join(outputDir, relativePath);
       const pageUrl = getPageUrl(inputPath, baseContentDir);
 
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
       try {
-        let result = await processFile(inputPath, pageUrl, rootDir);
-        result = addNavigationContext(result, relativePath, navigationMap);
-        await fs.writeFile(outputPath, result);
+        const { content, title } = await processFile(inputPath, pageUrl, rootDir);
+        const withNav = addNavigationContext(content, relativePath, navigationMap);
+        await fs.writeFile(outputPath, withNav);
         console.log(`✓ ${relativePath}`);
+        if (pageUrl) {
+          pages.push({ title: title || path.basename(entry.name, '.md'), url: `${pageUrl}.md` });
+        }
       } catch (error) {
         console.error(`✗ ${relativePath}: ${error.message}`);
         processingErrors.push({ file: inputPath, error: error.message });
       }
     }
   }
+
+  return pages;
+}
+
+const ROUTE_LABELS = {
+  faqs: 'FAQs',
+  postgresql: 'PostgreSQL',
+  'use-cases': 'Use Cases',
+};
+
+// Routes that should NOT get a generated page-listing index. Instead, their
+// /${route}.md URL is aliased to the canonical, curated index at /docs/llms.txt
+// (see next.config.js beforeFiles rewrite and ai-agent-detection CUSTOM_MARKDOWN_PATHS).
+// llms.txt is written later in postbuild (generate-llms-index.js), so we can't copy
+// its content here; we alias at the routing layer instead.
+// Routes whose /${route}.md URL is aliased to /docs/llms.txt at the routing layer
+// rather than getting a generated page-listing. Three places enforce this alias —
+// keep them in sync if this set changes:
+//   1. Here (skips generating public/md/${route}.md at postbuild)
+//   2. next.config.js beforeFiles rewrite: /${route}.md → /docs/llms.txt
+//   3. ai-agent-detection.js CUSTOM_MARKDOWN_PATHS (middleware serving for agents)
+const ROUTES_ALIASED_TO_LLMS = new Set(['docs']);
+
+/**
+ * Generate a /${route}.md index file listing all pages in that route.
+ * Called by processAllContent for every non-nested route after its files are written.
+ */
+async function generateRouteIndex(route, pages, outputDir) {
+  const label = ROUTE_LABELS[route] || route.charAt(0).toUpperCase() + route.slice(1);
+  // Writes to public/md/${route}.md — must match the destination in the
+  // next.config.js beforeFiles rewrite: /${route}.md → /md/${route}.md.
+  const outputPath = path.join(outputDir, `${route}.md`);
+
+  const lines = [
+    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    '',
+    `# Neon ${label}`,
+    '',
+    '## All pages',
+    '',
+    ...pages.map(({ title, url }) => `- [${title}](${url})`),
+    '',
+  ];
+
+  await fs.writeFile(outputPath, lines.join('\n'));
+  console.log(`✓ ${route}.md (index, ${pages.length} pages)`);
 }
 
 /**
@@ -2330,13 +2386,19 @@ async function processAllContent(contentRoutes, rootDir) {
   navigationMap = buildNavigationMap(rootDir);
   console.log(`Navigation map: ${navigationMap.size} pages with sibling links\n`);
 
-  const baseContentDir = path.join(rootDir, 'content');
   const outputDir = path.join(rootDir, 'public/md');
 
   for (const [route, srcPath] of Object.entries(contentRoutes)) {
     const inputDir = path.join(rootDir, srcPath);
+    // Use parent of inputDir as base so relative paths start with the dir name,
+    // not any intermediate segments (e.g. content/pages/programs → programs/...).
+    const baseContentDir = path.dirname(inputDir);
     console.log(`Processing ${srcPath} -> public/md/${route}`);
-    await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
+    const pages = await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
+
+    if (!route.includes('/') && !ROUTES_ALIASED_TO_LLMS.has(route) && pages.length > 0) {
+      await generateRouteIndex(route, pages, outputDir);
+    }
   }
 
   // Build-time verification: fail if no markdown files were generated
@@ -2368,6 +2430,7 @@ module.exports = {
   processFile,
   processDirectory,
   processAllContent,
+  generateRouteIndex,
   loadDependencies,
   clearState,
   printBuildSummary,
@@ -2390,8 +2453,8 @@ async function main() {
     const inputPath = path.resolve(args[1]);
     const baseContentDir = path.join(rootDir, 'content');
     const pageUrl = getPageUrl(inputPath, baseContentDir);
-    const result = await processFile(inputPath, pageUrl, rootDir);
-    console.log(result);
+    const { content } = await processFile(inputPath, pageUrl, rootDir);
+    console.log(content);
   } else if (args[0] === '--dir') {
     // Process specific directory
     const dir = args[1] || 'docs/guides';

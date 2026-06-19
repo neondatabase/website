@@ -13,7 +13,7 @@ vi.mock('next/server', () => ({
     }
 
     static redirect(url) {
-      return { type: 'redirect', url };
+      return { type: 'redirect', url, headers: new Headers() };
     }
   },
 }));
@@ -119,6 +119,46 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(global.fetch).not.toHaveBeenCalled();
         expect(response.type).toBe('next');
       });
+    });
+  });
+
+  describe('Bare /docs root', () => {
+    it('serves llms.txt markdown for AI User-Agent', async () => {
+      const req = createMockRequest('/docs', 'Claude/1.0', 'text/html');
+      mockMarkdownFetch('# Neon Postgres');
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      const text = await response.text();
+      expect(text).toContain('# Neon Postgres');
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+    });
+
+    it('serves llms.txt markdown for Accept: text/markdown', async () => {
+      const req = createMockRequest('/docs', 'Mozilla/5.0', 'text/markdown');
+      mockMarkdownFetch('# Neon Postgres');
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      const text = await response.text();
+      expect(text).toContain('# Neon Postgres');
+    });
+
+    it('redirects browsers to /docs/introduction without fetching markdown', async () => {
+      const req = createMockRequest(
+        '/docs',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toContain('/docs/introduction');
+      expect(response.headers.get('Vary')).toBe('Accept');
+      expect(global.fetch).not.toHaveBeenCalled();
     });
   });
 

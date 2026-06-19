@@ -16,14 +16,12 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { CONTENT_ROUTES } = require('../constants/content');
+const { CONTENT_ROUTES, EXCLUDED_DIRS } = require('../constants/content');
 
 const config = require('./llms-index-config');
 
 const BASE_URL = 'https://neon.com';
 const OUTPUT_PATH = 'public/docs/llms.txt';
-
-const EXCLUDED_DIRS = ['shared-content', 'unused'];
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md'];
 
 const COLLAPSED_ROUTES = config.collapsedRoutes || {};

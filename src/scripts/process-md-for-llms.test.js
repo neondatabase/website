@@ -17,7 +17,7 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/prisma.md';
       const pageUrl = 'https://neon.com/docs/guides/prisma';
 
-      const result = await processFile(inputPath, pageUrl);
+      const { content: result } = await processFile(inputPath, pageUrl);
 
       // Should have title from frontmatter
       expect(result).toContain('# Connect from Prisma to Neon');
@@ -44,7 +44,7 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
-      const result = await processFile(inputPath, pageUrl);
+      const { content: result } = await processFile(inputPath, pageUrl);
 
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
@@ -61,7 +61,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/workflows/data-anonymization';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
@@ -74,7 +74,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/introduction/regions';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).toContain('Azure regions');
       expect(result).toContain('You can no longer create new projects in Azure regions');
@@ -86,7 +86,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/guides/consumption-limits';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).toContain('consumption_history/account');
       expect(result).toContain('deprecated');
@@ -98,7 +98,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/use-cases/dev-test';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).not.toContain('<QuoteBlocksWrapper');
       expect(result).not.toContain('</QuoteBlocksWrapper>');
@@ -112,7 +112,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/auth/reference/nextjs-server';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // TwoColumnLayout.Item should become headings
       expect(result).toContain('## Installation');
@@ -138,7 +138,7 @@ title: Test
 
 ${mdxContent}`;
       await fs.writeFile(tempPath, fullContent);
-      return processFile(tempPath, pageUrl, rootDir);
+      return (await processFile(tempPath, pageUrl, rootDir)).content;
     }
 
     it('should convert Admonition to bold label', async () => {
@@ -299,7 +299,7 @@ Install the package using npm.
     async function processInlineMdx(mdxContent, pageUrl = 'https://neon.com/docs/test') {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test\n---\n${mdxContent}`);
-      return processFile(tempPath, pageUrl);
+      return (await processFile(tempPath, pageUrl)).content;
     }
 
     it('should convert relative URLs to absolute', async () => {
@@ -351,7 +351,7 @@ title: Test
 
 ${mdxContent}`;
       await fs.writeFile(tempPath, fullContent);
-      return processFile(tempPath, pageUrl);
+      return (await processFile(tempPath, pageUrl)).content;
     }
 
     it('should convert MegaLink to descriptive link', async () => {
@@ -406,7 +406,7 @@ ${mdxContent}`;
     it('should handle QuoteBlock with object author and link in real file', async () => {
       const inputPath = 'content/pages/use-cases/dev-test.md';
       const pageUrl = 'https://neon.com/use-cases/dev-test';
-      const result = await processFile(inputPath, pageUrl, process.cwd());
+      const { content: result } = await processFile(inputPath, pageUrl, process.cwd());
 
       expect(result).toContain('— Jonathan Reyes, Principal Engineer at Dispatch');
       expect(result).not.toContain("name: 'Jonathan Reyes'");
@@ -579,7 +579,7 @@ Below the line.
     async function processInlineMdx(mdxContent) {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test\n---\n${mdxContent}`);
-      return processFile(tempPath);
+      return (await processFile(tempPath)).content;
     }
 
     it('should not escape backticks in text', async () => {
@@ -604,7 +604,7 @@ See [CONN_MAX_AGE](https://example.com).
     it('should not include index pointer in processFile output (moved to page header)', async () => {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test Page\n---\nSome content here.`);
-      const result = await processFile(tempPath);
+      const { content: result } = await processFile(tempPath);
 
       // Index pointer is no longer in processFile -- it's added by addNavigationContext
       expect(result).not.toContain('llms.txt');
@@ -879,7 +879,7 @@ See [CONN_MAX_AGE](https://example.com).
     it('should convert every component without raw MDX leaks', async () => {
       const fixturePath = 'src/scripts/fixtures/mdx-conversion-test.md';
       const pageUrl = 'https://neon.com/docs/test/mdx-conversion-test';
-      const result = await processFile(fixturePath, pageUrl, process.cwd());
+      const { content: result } = await processFile(fixturePath, pageUrl, process.cwd());
 
       // No raw MDX component tags should survive conversion
       const componentNames = [
@@ -979,7 +979,7 @@ describe('CLI reference components', () => {
         '',
       ].join('\n')
     );
-    const result = await processFile(file, 'https://neon.com/docs/cli/projects');
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli/projects');
 
     // Options table with the settled column contract (toMarkdown pads cells)
     expect(result).toMatch(/\| Option\s+\| Description\s+\| Type\s+\| Default\s+\| Required\s+\|/);
@@ -1007,7 +1007,7 @@ describe('CLI reference components', () => {
     const file = await writeFixture(
       ['---', 'title: Overview fixture', '---', '', '<CliCommandIndex />', ''].join('\n')
     );
-    const result = await processFile(file, 'https://neon.com/docs/cli');
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli');
 
     // Every top-level command appears as a heading in the tree
     for (const name of ['projects', 'branches', 'functions', 'bucket', 'neon-auth']) {
