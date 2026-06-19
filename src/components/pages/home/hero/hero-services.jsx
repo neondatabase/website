@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260616';
+const VIDEO_VERSION = '20260619';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 20;
@@ -340,7 +341,7 @@ const HeroServices = ({ items }) => {
       className="grid grid-cols-5 grid-rows-[auto_auto] gap-x-16 gap-y-8 2xl:gap-x-6 xl:gap-x-6 xl:gap-y-6 lg:-mx-5 lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:gap-x-8 lg:gap-y-0 lg:overflow-x-auto lg:px-5 md:gap-x-6"
       ref={setListRef}
     >
-      {items.map(({ title, description, videoBase, aspectRatio, width, height }, index) => {
+      {items.map(({ title, description, url, videoBase, aspectRatio, width, height }, index) => {
         const activeIndex = hoveredIndex ?? (isAutoPlayInView ? autoPlayIndex : null);
         const isActive = activeIndex === index;
 
@@ -361,6 +362,20 @@ const HeroServices = ({ items }) => {
           >
             <p className="block max-w-sm text-base tracking-extra-tight text-pretty text-gray-new-60 xl:text-sm/normal lg:text-base">
               <span className="font-semibold text-white">{title}.</span> {description}
+              {url && (
+                <>
+                  {' '}
+                  <Link
+                    className="group/link inline-flex items-baseline text-gray-new-80 transition-colors duration-200 hover:text-gray-new-90"
+                    to={url}
+                    icon="external"
+                  >
+                    <span className="border-b border-dashed border-white/40 transition-colors duration-200 group-hover/link:border-white/60">
+                      Early access
+                    </span>
+                  </Link>
+                </>
+              )}
             </p>
             <span
               className={cn(
@@ -395,6 +410,7 @@ HeroServices.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      url: PropTypes.string,
       videoBase: PropTypes.string.isRequired,
       aspectRatio: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,

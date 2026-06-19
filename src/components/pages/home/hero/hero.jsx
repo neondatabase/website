@@ -35,15 +35,16 @@ export const heroServiceItems = [
   },
   {
     title: 'Authentication',
-    description: 'Managed auth with users and sessions stored in Postgres.',
+    description: 'Managed Better-Auth with users and sessions stored in Postgres.',
     videoBase: 'authentication',
     aspectRatio: 'aspect-512/390',
     width: 512,
     height: 390,
   },
   {
-    title: 'Compute',
-    description: 'Functions without timeouts running close to your database.',
+    title: 'Functions',
+    description: 'Long-running serverless compute, close to your database.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
     videoBase: 'compute',
     aspectRatio: 'aspect-512/308',
     width: 512,
@@ -52,6 +53,7 @@ export const heroServiceItems = [
   {
     title: 'Storage',
     description: 'S3-compatible object storage that branches with your projects.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
     videoBase: 'storage',
     aspectRatio: 'aspect-512/696',
     width: 512,
@@ -59,7 +61,8 @@ export const heroServiceItems = [
   },
   {
     title: 'AI Gateway',
-    description: 'One API for all frontier & open-source models, powered by Databricks.',
+    description: 'Access frontier and open-source models through a single API.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
     videoBase: 'ai-gateway',
     aspectRatio: 'aspect-512/226',
     width: 512,
