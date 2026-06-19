@@ -9,10 +9,16 @@ summary: >-
   (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
   per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how to upload files directly from the client-side to ImageKit.io using securely generated authentication parameters from your backend, and then store the resulting file metadata (like the ImageKit File ID and URL) in your Neon database.
 
