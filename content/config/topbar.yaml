@@ -1,4 +1,4 @@
-text: "New in Neon: vector (ANN) and text (BM25) search extensions optimized for Neon's lakebase architecture. Read the docs."
+text: 'New in Neon: Refer a friend and earn credits, Neon backend private preview, and more. Read the changelog.'
 link:
-  url: 'https://neon.com/docs/ai/lakebase-search'
+  url: 'https://neon.com/docs/changelog/2026-06-19'
   target: '_blank'
