@@ -11,7 +11,7 @@ summary: >-
   up with a single command (`npx neonctl@latest init` or `npx add-mcp
   https://mcp.neon.tech/mcp`); supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-19T14:28:23.449Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**:
@@ -108,6 +108,15 @@ The Neon MCP server provides powerful database tools. We recommend MCP for **dev
 - Avoid exposing production or PII data; use anonymized data only
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
+
+### Allowlist IP addresses
+
+The hosted Neon MCP Server (`mcp.neon.tech`) connects to your Neon databases from the following static IP addresses:
+
+- `34.192.103.46`
+- `23.22.233.166`
+
+If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these addresses to your allowlist so the MCP server can connect.
 
 ## Resources
 

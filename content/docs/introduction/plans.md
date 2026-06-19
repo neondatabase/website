@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-19T14:28:23.449Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -56,7 +56,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
-| [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
+| [Auth](#auth) (Beta)                                  | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
@@ -508,7 +508,7 @@ Can I disable scale-to-zero?
  Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
-: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
 
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.

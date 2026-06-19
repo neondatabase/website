@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-19T14:28:23.449Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -291,11 +291,11 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 ]);
 ```
 
-The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
+The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationLevel`, `readOnly` and `deferrable`.
 
 Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
 
-- `isolationMode`
+- `isolationLevel`
 
   This option selects a Postgres [transaction isolation mode](https://www.postgresql.org/docs/current/transaction-iso.html). If present, it must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
 
@@ -305,7 +305,7 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 - `deferrable`
 
-  If `true` (and if `readOnly` is also `true`, and `isolationMode` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
+  If `true` (and if `readOnly` is also `true`, and `isolationLevel` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
@@ -421,13 +421,18 @@ export default async () => {
 import { Pool } from '@neondatabase/serverless';
 
 export default async (req: Request, ctx: any) => {
+  const postId = new URL(req.url).searchParams.get('id');
+  if (!postId) return new Response('Missing id', { status: 400 });
+
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
   await pool.connect();
 
   const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const post = posts.rows[0];
 
   ctx.waitUntil(pool.end());
 
+  if (!post) return new Response('Not found', { status: 404 });
   return new Response(JSON.stringify(post), {
     headers: { 'content-type': 'application/json' }
   });
@@ -443,12 +448,17 @@ import { Pool } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(request: NextApiRequest, res: NextApiResponse) {
+  const postId = Array.isArray(request.query.id) ? request.query.id[0] : request.query.id;
+  if (!postId) return res.status(400).send('Missing id');
+
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
 
   await pool.end();
 
-  return res.status(500).send(post);
+  const post = posts.rows[0];
+  if (!post) return res.status(404).send('Not found');
+  return res.status(200).json(post);
 }
 ```
 

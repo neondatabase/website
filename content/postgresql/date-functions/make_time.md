@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T14:28:23.449Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_DATE() Function
@@ -35,8 +35,8 @@ MAKE_TIME ( hour int, min int, sec double precision ) → time
 
 In this syntax:
 
-- `hour`: The hour part of the time. The valid range for the hour is from 0 to 23\. 0 represents midnight (12:00 AM) and 24 represents noon.
-- `min`: The minute part of the time. The valid range for the second is from 0 to 59\.
+- `hour`: The hour part of the time. The valid range for the hour is from 0 to 23\. 0 represents midnight (12:00 AM) and 12 represents noon.
+- `min`: The minute part of the time. The valid range for the minute is from 0 to 59\.
 - `sec`: The second within a minute. Its valid range is from 0 to `59.999999`.
 
 The `MAKE_TIME()` function returns a time value constructed from the hour, min, and sec.

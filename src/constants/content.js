@@ -29,11 +29,21 @@ const EXCLUDED_ROUTES = [
   'use-cases/serverless-apps',
 ];
 
+const EXCLUDED_DIRS = ['shared-content', 'unused'];
+
 const EXCLUDED_FILES = ['rss.xml', 'context7.json'];
+
+const isUnusedOrSharedContent = (slug) =>
+  slug.includes('unused/') ||
+  slug.includes('shared-content/') ||
+  slug.includes('README') ||
+  slug.includes('GUIDE_TEMPLATE');
 
 module.exports = {
   CONTENT_ROUTES,
+  isUnusedOrSharedContent,
   EXCLUDED_ROUTES,
+  EXCLUDED_DIRS,
   EXCLUDED_FILES,
   DOCS_DIR_PATH,
   BRANCHING_DIR_PATH,
