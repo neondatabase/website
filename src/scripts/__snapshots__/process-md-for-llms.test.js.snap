@@ -19,6 +19,67 @@ The API endpoint has been deprecated.
 "
 `;
 
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Available tools 1`] = `
+"## Available tools
+
+Tools are grouped into categories. Use the \`?category=\` URL parameter to restrict which categories are active. You can pass it more than once to enable multiple categories.
+
+| Category                        | What it enables                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| Project management (\`projects\`) | List, create, describe, and delete projects and organizations                       |
+| Branch management (\`branches\`)  | Create branches, compare schemas, reset branches to parent state                    |
+| Schema (\`schema\`)               | Inspect tables and columns; run schema changes via a safe temporary branch workflow |
+| SQL (\`querying\`)                | Execute queries and transactions; inspect database structure                        |
+| Neon Auth (\`neon_auth\`)         | Set up and configure app authentication for a branch                                |
+| Neon Data API (\`data_api\`)      | Enable HTTP-based Data API access for a branch                                      |
+| Documentation (\`docs\`)          | Look up Neon documentation from within your assistant (no OAuth required)           |
+
+Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](https://neon.com/docs/ai/neon-mcp-server#project-scoped-mode).
+
+### LinkAPIKey
+
+**Note:** To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
+
+### LRNotice
+
+**Important: Enrollment Pause for Logical Replication Beta**
+
+We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
+
+### PrivatePreview
+
+**Coming Soon: Private Preview**
+
+This feature is currently accessible in Private Preview only.
+
+### PrivatePreviewEnquire
+
+**Coming Soon: Private Preview**
+
+This feature is in private preview: it's not ready for production use, and it may be briefly unavailable as we deploy updates. To get access, [sign up here](https://neon.com/blog/were-building-backends#access).
+
+### PublicPreview
+
+**Note: Public Preview**
+
+This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### LRBeta
+
+**Note: Beta**
+
+Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### MigrationAssistant
+
+**Note: New feature**
+
+If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
+
+### NextSteps
+"
+`;
+
 exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CTA 1`] = `
 "## CTA
 
