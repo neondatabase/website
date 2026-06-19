@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-11T14:38:06.386Z'
+updatedOn: '2026-06-19T10:53:44.178Z'
 ---
 
 <RequestForm type="lakebase-search" />
@@ -45,13 +45,13 @@ You will be working with two main Lakebase Search extensions, each introducing n
 ### Operators
 
 - **`<=>`**: Cosine distance between two vectors (from `pgvector`). Returns a value between `0` (identical) and `2` (opposite).
-- **`<&>`**: BM25 relevance score (from `lakebase_text`). Returns a negative score where lower values mean higher relevance.
+- **`<@>`**: BM25 relevance score (from `lakebase_text`). Returns a negative score where lower values mean higher relevance.
 
 ### Functions and types
 
 - **`tsvector`**: A Postgres type that stores preprocessed text for search. Example: `'hello':1 'world':2`
 - **`to_tsvector()`**: Converts raw text into a `tsvector`. Example: `to_tsvector('english', 'hello world')`
-- **`to_bm25query()`**: Converts a `tsvector` into a BM25-optimized query for the `<&>` operator. Example: `to_bm25query(to_tsvector('english', 'search term'), 'index_name')`
+- **`to_bm25query()`**: Converts a `tsvector` into a BM25-optimized query for the `<@>` operator. Example: `to_bm25query(to_tsvector('english', 'search term'), 'index_name')`
 
 ### Operator classes
 
@@ -74,13 +74,13 @@ SELECT '[1,0,0]'::vector <=> '[0,0,1]'::vector;
 -- Result: 1
 ```
 
-**BM25 scoring (`<&>`)**
+**BM25 scoring (`<@>`)**
 
-BM25 is the algorithm behind search engines like Elasticsearch. It ranks documents based on how often a term appears in a document, how rare the term is across all documents, and document length. The `<&>` operator returns a negative score because it uses log-odds math where lower (more negative) values mean higher relevance.
+BM25 is the algorithm behind search engines like Elasticsearch. It ranks documents based on how often a term appears in a document, how rare the term is across all documents, and document length. The `<@>` operator returns a negative score because it uses log-odds math where lower (more negative) values mean higher relevance.
 
 ```sql
 -- "password reset" matches the password article strongly
-SELECT content_tsv <&> to_bm25query(
+SELECT content_tsv <@> to_bm25query(
   to_tsvector('english', 'password reset'),
   'kb_articles_bm25_idx'
 ) AS score FROM kb_articles;
@@ -299,10 +299,10 @@ export async function vectorSearch(query: string, limit = 3): Promise<SearchResu
 export async function keywordSearch(query: string, limit = 3): Promise<SearchResult[]> {
   if (!query) return [];
 
-  // Query using the lakebase_text <&> operator and to_bm25query function
+  // Query using the lakebase_text <@> operator and to_bm25query function
   const results = await sql`
     SELECT id, title, category, content,
-           (content_tsv <&> to_bm25query(
+           (content_tsv <@> to_bm25query(
              to_tsvector('english', ${query}),
              'kb_articles_bm25_idx'
            )) AS score
@@ -327,9 +327,9 @@ When a user submits a search query, the application decides whether to use `vect
 
 #### Keyword search
 
-1. **BM25 scoring:** The server action uses the `<&>` operator from the `lakebase_text` extension to calculate BM25 relevance between the query and the `content_tsv` column.
+1. **BM25 scoring:** The server action uses the `<@>` operator from the `lakebase_text` extension to calculate BM25 relevance between the query and the `content_tsv` column.
 2. **Query conversion:** The `to_bm25query()` function transforms the user’s query into a format optimized for BM25 scoring.
-3. **Result ordering:** Results are sorted by `score ASC`. This is necessary because `<&>` returns a **negative BM25 score** where lower (more negative) values indicate higher relevance.
+3. **Result ordering:** Results are sorted by `score ASC`. This is necessary because `<@>` returns a **negative BM25 score** where lower (more negative) values indicate higher relevance.
 
 ## Build the Next.js frontend
 
@@ -493,7 +493,7 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
 
 ## Extending this guide
 
-This guide covered the fundamentals: creating indexes, querying with cosine distance and BM25 scoring, and understanding the `<=>` and `<&>` operators. Both extensions offer significantly more tuning options that become important as your dataset grows:
+This guide covered the fundamentals: creating indexes, querying with cosine distance and BM25 scoring, and understanding the `<=>` and `<@>` operators. Both extensions offer significantly more tuning options that become important as your dataset grows:
 
 - **Vector index tuning:** Configure `build.internal.lists` to partition the vector space for datasets over 100,000 rows, adjust `lakebase_ann.probes` to trade off recall versus query speed, and enable `residual_quantization` with `spherical_centroids` for better cosine similarity performance. See [The `lakebase_vector` extension](/docs/extensions/lakebase-vector) for details.
 - **Text search tuning:** Adjust `lakebase_bm25.default_limit` to control how many results the index returns, enable `lakebase_bm25.prefilter` to prune the search space before BM25 scoring on filtered queries, and tune BM25 parameters (`k1`, `b`) stored directly in the index. See [The `lakebase_text` extension](/docs/extensions/lakebase-text) for details.

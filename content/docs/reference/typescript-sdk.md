@@ -10,7 +10,7 @@ summary: >-
   IDE autocompletion, and structured Axios error handling. Install via npm,
   yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 <InfoBlock>
@@ -475,9 +475,6 @@ To give you a better overview of the SDK, here are some of the key methods avail
 
 ### Retrieve Consumption Metrics
 
-<ConsumptionAccountApiDeprecation/>
-
-- `getConsumptionHistoryPerAccount(query: GetConsumptionHistoryPerAccountParams)`: Retrieves account consumption metrics.
 - `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.
 
 ### Manage Organizations
