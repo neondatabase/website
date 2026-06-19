@@ -2191,7 +2191,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
