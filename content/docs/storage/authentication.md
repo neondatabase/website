@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-15T20:45:19.947Z'
 ---
 
 <PrivatePreviewEnquire/>

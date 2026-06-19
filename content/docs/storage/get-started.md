@@ -6,7 +6,7 @@ summary: >-
   your S3 client, creating a bucket, and uploading and downloading your first
   file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-15T20:45:19.947Z'
 ---
 
 <PrivatePreviewEnquire/>

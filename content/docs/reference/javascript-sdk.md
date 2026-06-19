@@ -13,7 +13,7 @@ summary: >-
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-18T22:47:28.438Z'
 ---
 
 This page documents `@neondatabase/neon-js`, which combines Neon Auth and the Data API in a single client. Neon also publishes standalone packages:

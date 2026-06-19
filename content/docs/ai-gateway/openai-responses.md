@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>

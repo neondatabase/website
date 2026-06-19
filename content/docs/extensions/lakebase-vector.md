@@ -9,7 +9,7 @@ summary: >-
   index, configure build_mode, tune search with the lakebase_ann.probes and
   lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-16T18:44:07.041Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_vector" />

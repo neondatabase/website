@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-18T22:47:28.438Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 

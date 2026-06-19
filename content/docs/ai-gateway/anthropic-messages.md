@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-15T19:57:08.490Z'
 ---
 
 <PrivatePreviewEnquire/>

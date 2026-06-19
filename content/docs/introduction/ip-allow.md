@@ -9,7 +9,7 @@ summary: >-
   branches only, leaving other branches unrestricted, and are configured in
   project settings.
 enableTableOfContents: true
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](/docs/reference/glossary#cidr-notation).

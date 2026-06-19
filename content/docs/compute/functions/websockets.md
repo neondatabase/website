@@ -5,7 +5,7 @@ summary: >-
   Neon Functions support long-lived WebSocket connections via an upgrade export.
   Use the ws package alongside your fetch handler to accept WebSocket clients,
   and Postgres LISTEN/NOTIFY to broadcast across isolates.
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-15T14:47:36.989Z'
 ---
 
 <PrivatePreviewEnquire/>

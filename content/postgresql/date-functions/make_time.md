@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_time/
 ogImage: ''
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_DATE() Function
