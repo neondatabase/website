@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -60,6 +60,18 @@ The `pg_dump` command above includes these arguments:
 - `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+
+### Export a database as a plain SQL file
+
+To export your database as a portable, human-readable `.sql` file instead of a custom-format archive, leave out the `-F` option. Plain text is the default `pg_dump` format:
+
+```bash shouldWrap
+pg_dump -d <source_database_connection_string> -f dump.sql
+```
+
+The result is a SQL script you can read, edit, version, or grep, and replay with `psql -f dump.sql`. You can narrow what you export with `--schema-only` (no data), `--data-only` (no DDL), or `-t <table_name>` (a single table). Add `--no-owner` to skip `ALTER OWNER` statements when you plan to restore to a different role. See [Database object ownership considerations](#database-object-ownership-considerations).
+
+Choose the custom format (`-Fc`) shown above when you want `pg_restore` features such as selective or parallel restore. Choose plain SQL when you want to read or edit the output, or load it with `psql`. Note that `psql` only supports plain-text dumps.
 
 ## Restore data to Neon with pg_restore
 

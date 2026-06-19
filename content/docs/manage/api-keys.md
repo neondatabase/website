@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-06-12T12:32:37.482Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -29,7 +29,12 @@ While there is no strict limit on the number of API keys you can create, we reco
 
 ## Creating API keys
 
-You'll need to create your first API key from the Neon Console, where you are already authenticated. You can then use that key to generate new keys from the API.
+You create and manage API keys in the [Neon Console](https://console.neon.tech), and where you go depends on the key type:
+
+- **Personal keys:** open the user menu and select **Account settings** > **API keys**.
+- **Organization and project-scoped keys:** switch to your organization, then go to **Settings** > **API keys**.
+
+Each page lists your existing keys with their name, ID, and creation details, plus a button to create a new key. You'll need to create your first API key from the Console, where you are already authenticated. You can then use that key to generate new keys from the API.
 
 > When creating API keys from the Neon Console, the secret token will be displayed only once. Copy it immediately and store it securely in a credential manager (like AWS Key Management Service or Azure Key Vault); you won't be able to retrieve it later. If you lose an API key, you'll need to revoke it and create a new one.
 
@@ -297,6 +302,16 @@ For attribute definitions, find the [Revoke API key](https://api-docs.neon.tech/
 </details>
 </TabItem>
 </Tabs>
+
+## Rotate an API key
+
+Neon API keys don't expire or rotate on a schedule, so you rotate one manually. Because revocation is immediate, create the replacement first to avoid downtime:
+
+1. Create a new key with the same scope as the old one (see [Creating API keys](#creating-api-keys)).
+2. Update every caller that uses the old key, such as CI secrets, Terraform variables, serverless functions, the Neon CLI, and any MCP server configuration.
+3. Revoke the old key once nothing depends on it.
+
+If you're rotating because a key was exposed, revoke the compromised key first, then create and roll out its replacement. For rotating Postgres passwords alongside API keys, see [Reset a password](/docs/manage/roles#reset-a-password).
 
 <NeedHelp/>
 
