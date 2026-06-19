@@ -81,7 +81,7 @@ Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs
 | Private transfer | GB x rate                         | n/a          | $0.01/GB     |
 | Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
 
-Agent and Enterprise rates match Scale. Enterprise plans may include custom negotiated pricing.
+Agent plan rates match Scale except compute, which is billed at $0.106/CU-hr (the Launch rate). Enterprise rates match Scale, and Enterprise plans may include custom negotiated pricing.
 
 ### Example: compute
 
