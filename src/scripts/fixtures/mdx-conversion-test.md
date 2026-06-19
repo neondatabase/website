@@ -297,10 +297,6 @@ Scale compute up and down based on demand.
 
 <AzureRegionsDeprecation />
 
-### ConsumptionAccountApiDeprecation
-
-<ConsumptionAccountApiDeprecation />
-
 ## Ignored components
 
 <CopyPrompt src="/prompts/test.md" />

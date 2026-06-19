@@ -243,12 +243,14 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should fallback to next() when markdown fetch throws error', async () => {
       const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       global.fetch
         .mockRejectedValueOnce(new Error('Network error')) // markdown fetch throws
         .mockResolvedValueOnce({ ok: true }); // analytics (still fires after catch)
 
       const response = await middleware(req);
+      spy.mockRestore();
 
       expect(global.fetch).toHaveBeenCalled();
       expect(response.type).toBe('next');
