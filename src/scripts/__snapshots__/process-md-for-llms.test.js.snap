@@ -193,12 +193,6 @@ Scale compute up and down based on demand.
 
 This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
 
-### EarlyAccess (parameterless)
-
-**Coming Soon: Early Access**
-
-This feature is available for members of our [Early Access Program](https://neon.com/docs/introduction/early-access). Read more about joining up [here](https://neon.com/docs/introduction/early-access).
-
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
@@ -207,10 +201,9 @@ The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord
 
 ### EarlyAccessProps (with prop)
 
-**Coming Soon: Early Access**
+**Coming Soon: Early access**
 
-**Schema Diff** is available for members of our Early Access Program.<br/>
-[Sign up](https://neon.com/docs/introduction/early-access) and help shape the future of Neon.
+**Schema Diff** is currently in early access.
 
 ### AgentSkillsTip (with prop)
 
@@ -295,12 +288,6 @@ In project-scoped mode, \`search\` and \`fetch\` are not available.
 **Important: Enrollment Pause for Logical Replication Beta**
 
 We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
-
-### ComingSoon
-
-**Coming Soon: Feature coming soon**
-
-This feature is currently available to members in our Early Access Program. Sign up [here](https://console.neon.tech/app/settings/early-access) or from your user profile settings in the [Neon Console](https://console.neon.tech/app/settings/early-access).
 
 ### PrivatePreview
 

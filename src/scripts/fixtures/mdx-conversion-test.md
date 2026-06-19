@@ -241,10 +241,6 @@ Scale compute up and down based on demand.
 
 <FeatureBeta />
 
-### EarlyAccess (parameterless)
-
-<EarlyAccess />
-
 ### FeatureBetaProps (with prop)
 
 <FeatureBetaProps feature_name="Autoscaling" />
@@ -268,10 +264,6 @@ Scale compute up and down based on demand.
 ### LRNotice
 
 <LRNotice />
-
-### ComingSoon
-
-<ComingSoon />
 
 ### PrivatePreview
 
