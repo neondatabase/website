@@ -53,6 +53,40 @@ const FALLBACK_MANIFEST = `templates:
       repo: examples
       ref: main
       subdir: with-mastra
+  - id: mcp
+    title: "MCP server (Model Context Protocol SDK, Hono, Drizzle) on Neon Functions"
+    description: "An MCP server on Neon Functions exposing CRUD tools (create, update, delete, search) over a contact-management database. Built with the Anthropic MCP TypeScript SDK and Hono's streamable HTTP transport, backed by Neon Postgres via Drizzle."
+    services:
+      - Postgres
+      - Functions
+    source:
+      owner: neondatabase
+      repo: examples
+      ref: main
+      subdir: with-mcp
+  - id: realtime-chat
+    title: "Realtime chat (Next.js, Neon Auth, WebSockets) on Neon Functions"
+    description: "A full-stack realtime chat: a Next.js app with Neon Auth talking over WebSockets to a Hono server on Neon Functions. Messages are stored in Neon Postgres via Drizzle and fanned out to all clients across isolates with Postgres LISTEN/NOTIFY."
+    services:
+      - Postgres
+      - Functions
+      - Neon Auth
+    source:
+      owner: neondatabase
+      repo: examples
+      ref: main
+      subdir: with-realtime-chat
+  - id: realtime-sse
+    title: "Realtime counter (TanStack Router, SSE) on Neon Functions"
+    description: "A realtime shared counter: a client-only TanStack Router SPA talking over server-sent events to a Hono server on Neon Functions. The count is stored in Neon Postgres via Drizzle and pushed to all clients across isolates with Postgres LISTEN/NOTIFY."
+    services:
+      - Postgres
+      - Functions
+    source:
+      owner: neondatabase
+      repo: examples
+      ref: main
+      subdir: with-realtime-sse
 `;
 
 // Cheap structural guard so a 200 that returns an error page / truncated body
