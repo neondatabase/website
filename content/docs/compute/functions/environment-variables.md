@@ -29,7 +29,7 @@ These variables are branch-scoped: each branch injects its own values. A functio
 For type-safe access, the [`@neondatabase/env`](https://www.npmjs.com/package/@neondatabase/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
 
 ```ts
-import { parseEnv } from '@neondatabase/env/v1';
+import { parseEnv } from '@neondatabase/env';
 import config from './neon';
 
 const env = parseEnv(config);
