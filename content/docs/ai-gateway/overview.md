@@ -1,12 +1,12 @@
 ---
 title: Neon AI Gateway
-subtitle: One API for all frontier & open-source models. At-cost rates.
+subtitle: One API for frontier and open-source models from Anthropic, OpenAI, Google, and more. Built into your Neon project.
 summary: >-
-  Neon AI Gateway is the LLM inference layer built into the Neon backend. One
+  Neon AI Gateway is the LLM gateway built into the Neon backend. One
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-18T09:59:52.874Z'
+updatedOn: '2026-06-22T13:48:28.109Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
