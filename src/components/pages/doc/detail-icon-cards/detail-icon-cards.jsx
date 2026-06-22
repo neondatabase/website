@@ -248,7 +248,6 @@ const DetailIconCards = ({
         const cardTheme = isGhost
           ? GHOST_CARD_THEME
           : CARD_THEMES[cardThemeName] || CARD_THEMES['green-dotted'];
-        const isFlatCardTheme = cardThemeName !== 'green-dotted';
 
         return (
           <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
@@ -292,11 +291,9 @@ const DetailIconCards = ({
                   Step {index + 1}
                 </span>
               ) : (
-                <Icon
-                  className={cn('size-7', isFlatCardTheme ? 'mb-8' : 'mb-[29px]', cardTheme.icon)}
-                />
+                <Icon className={cn('mb-8 size-7', cardTheme.icon)} />
               )}
-              <div className="mt-auto flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5">
                 <h3
                   className={cn(
                     'text-lg leading-snug font-medium tracking-extra-tight',
