@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-17T18:33:13.040Z'
+updatedOn: '2026-06-22T21:05:22.619Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -195,7 +195,7 @@ npm install @neondatabase/env
 ```
 
 ```ts
-import { parseEnv } from '@neondatabase/env/v1';
+import { parseEnv } from '@neondatabase/env';
 import config from './neon';
 
 const env = parseEnv(config);
