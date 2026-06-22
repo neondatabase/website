@@ -300,6 +300,11 @@ module.exports = {
       url: 'https://neon.com/docs/reference/glossary.md',
       sourcePath: 'reference/glossary.md',
     },
+    {
+      title: 'Blog',
+      url: 'https://neon.com/blog.md',
+      description: 'Engineering, product, and community posts from the Neon team',
+    },
   ],
 
   // Configuration for llms-full.txt (single file with all doc content).
