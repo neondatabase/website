@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_extract_path_text() Function
@@ -127,7 +127,7 @@ Output:
 
 ### 3\) Extracting the last array element example
 
-The following example uses the `->` operator to retrieve the first phone number of an employee with the name `Jane Smith`:
+The following example uses the `->` operator to retrieve the last phone number of an employee with the name `Jane Smith`:
 
 ```sql
 SELECT
@@ -291,7 +291,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extract a key that does not exist
+### 3\) Extract a key that does not exist
 
 The following example attempts to extract a value of a non\-existing key from a JSON object:
 

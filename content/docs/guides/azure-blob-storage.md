@@ -11,10 +11,16 @@ summary: >-
   (generate-upload-sas and save-metadata) in JavaScript (Hono) and Python
   (Flask), and generating read-only SAS tokens for secure file retrieval.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate Azure Blob Storage with Neon by storing file metadata (like the blob name and URL) in your Neon database, while using Azure Blob Storage for file storage.
 

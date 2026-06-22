@@ -6,7 +6,7 @@ page_description: >-
   automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Cursor
@@ -43,7 +43,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 ## Section 4\. DELETE triggers
 
 - [BEFORE DELETE triggers](postgresql-triggers/postgresql-before-delete-trigger) – Define a BEFORE DELETE trigger that fires before a delete event occurs.
-- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-update-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
+- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-delete-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
 
 ## Section 5\. INSTEAD OF triggers
 

@@ -11,7 +11,7 @@ summary: >-
   18; use the Neon Console or API to create projects on earlier Postgres
   versions.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:42:37.157Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 redirectFrom:
   - /docs/reference/cli-projects
 ---
@@ -237,8 +237,6 @@ neonctl projects delete muddy-wood-859533
 Verify the deletion with `neonctl projects list`.
 
 ## neonctl projects recover (#recover)
-
-<EarlyAccess />
 
 Recovers a deleted project within the deletion recovery period. The `<id>` is the project ID, which you can obtain by listing recoverable projects with `neonctl projects list --recoverable-only`.
 

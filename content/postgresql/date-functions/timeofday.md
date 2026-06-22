@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-timeofday/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISFINITE() Function
@@ -44,6 +44,12 @@ Let’s take some examples of using the `TIMEOFDAY()` function.
 ### 1\) Basic TIMEOFDAY() function example
 
 The following example uses the `TIMEOFDAY()` function to retrieve the current date and time as a string:
+
+```sql
+SELECT TIMEOFDAY();
+```
+
+Output:
 
 ```text
               timeofday

@@ -6,7 +6,7 @@ page_description: >-
   handy date functions to handle date values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-date/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Integer Data Types
@@ -112,7 +112,7 @@ Output:
 (1 row)
 ```
 
-To get the date part only (without the time part), you use the cast operator (::) to cast a `DATETIME` value to a `DATE` value:
+To get the date part only (without the time part), you use the cast operator (::) to cast a `TIMESTAMP` value to a `DATE` value:
 
 ```sql
 SELECT NOW()::date;

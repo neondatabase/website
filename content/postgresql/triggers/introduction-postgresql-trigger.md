@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Triggers
@@ -54,7 +54,7 @@ The main drawback of using a trigger is that you must know the trigger exists an
 
 ## PostgreSQL triggers vs SQL standard triggers
 
-Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some specific features:
+Even though PostgreSQL implements SQL standard, triggers in PostgreSQL have some specific features:
 
 - PostgreSQL fires trigger for the [`TRUNCATE`](../postgresql-tutorial/postgresql-truncate-table) event.
 - PostgreSQL allows you to define the statement\-level trigger on [views](../postgresql-views).

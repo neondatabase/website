@@ -23,6 +23,15 @@ const path = require('path');
 const REPO = 'neondatabase/neonctl';
 const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 
+// When the CLI ships a rename, docs may lag. List preferred names here:
+//   key   = what the schema currently calls it (new primary)
+//   value = what the docs expect (old primary, now an alias in schema)
+// The refresh script will swap these so docs-facing tooling stays stable.
+// Remove an entry once docs are updated to match the CLI's new name.
+const PREFER_ALIAS = {
+  function: 'functions', // neonctl 2.26.5 renamed functions→function; revert when docs catch up
+};
+
 async function latestTag() {
   const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
     headers: { accept: 'application/vnd.github+json' },
@@ -98,6 +107,24 @@ function newCommandNotes(added) {
   return notes;
 }
 
+// For each PREFER_ALIAS entry, if the schema's primary key matches and the preferred
+// name is listed as an alias, swap them so the docs-facing name stays primary.
+function applyAliasPreferences(schema) {
+  let commands = { ...schema.commands };
+  let changed = false;
+  for (const [schemaPrimary, docsPrimary] of Object.entries(PREFER_ALIAS)) {
+    const node = commands[schemaPrimary];
+    if (!node || !node.aliases?.includes(docsPrimary)) continue;
+    commands[docsPrimary] = {
+      ...node,
+      aliases: node.aliases.map((a) => (a === docsPrimary ? schemaPrimary : a)),
+    };
+    delete commands[schemaPrimary];
+    changed = true;
+  }
+  return changed ? { ...schema, commands } : schema;
+}
+
 async function main() {
   const before = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
   console.log(`Committed schema: neonctl ${before.neonctlVersion}`);
@@ -115,7 +142,17 @@ async function main() {
       }
     );
 
-    const after = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
+    const patched = applyAliasPreferences(raw);
+    if (patched !== raw) {
+      fs.writeFileSync(SCHEMA_PATH, JSON.stringify(patched, null, 2) + '\n');
+      const swaps = Object.entries(PREFER_ALIAS)
+        .filter(([k]) => raw.commands[k])
+        .map(([k, v]) => `${k}→${v}`)
+        .join(', ');
+      console.log(`  (patched schema: swapped ${swaps} to preserve docs compatibility)`);
+    }
+    const after = patched;
     const { added, removed } = diffSchemas(before, after);
     console.log('');
     if (added.length === 0 && removed.length === 0) {

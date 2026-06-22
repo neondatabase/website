@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NTILE Function
@@ -125,7 +125,7 @@ The following picture illustrates the output:
 ![PostgreSQL NTH_VALUE function over a partition example](/postgresqltutorial/PostgreSQL-NTH_VALUE-function-over-a-partition-example.png)
 In this example,
 
-- The `PARTITION BY` clause to distributed products into product groups (or partitions) specified by the values in the `group_id` column.
+- The `PARTITION BY` clause distributed products into product groups (or partitions) specified by the values in the `group_id` column.
 - The `ORDER BY` clause sorted the products in each product group from high to low.
 - The frame clause defined the whole partition as a frame.
 - And the `NTH_VALUE()` function returns the product name of the 2nd row of each product group.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: How to List All Triggers in PostgreSQL
@@ -38,7 +38,7 @@ PostgreSQL supports the following events:
 - `table_rewrite`
 - `sql_drop`
 
-The `ddl_command_start` events before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For additional information, see the [overview of event trigger behavior](https://www.postgresql.org/docs/current/event-trigger-definition.html).
+The `ddl_command_start` event fires before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For additional information, see the [overview of event trigger behavior](https://www.postgresql.org/docs/current/event-trigger-definition.html).
 
 Please note that the `ddl_command_start` does not occur for shared objects like databases, tablespaces, and roles.
 

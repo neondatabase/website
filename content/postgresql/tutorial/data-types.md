@@ -6,7 +6,7 @@ page_description: >-
   Boolean, character, number, temporal, special types, and array.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/'
 ogImage: /postgresqltutorial/PostgreSQL-Data-Types-300x254.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: Export PostgreSQL Table to CSV File
@@ -113,7 +113,7 @@ Besides the primitive data types, PostgreSQL also provides several special data 
 - `point` – a geometric pair of numbers.
 - `lseg` – a line segment.
 - `polygon` – a closed geometric.
-- `inet` – an IP4 address.
+- `inet` – an IPv4 address.
 - `macaddr`– a MAC address.
 
 In this tutorial, we have introduced you to the PostgreSQL data types so that you can use them to create tables in the next tutorial.

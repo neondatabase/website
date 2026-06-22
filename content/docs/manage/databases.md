@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -79,7 +79,7 @@ To delete a database:
 
 ## Manage databases with the Neon CLI
 
-The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/cli/databases).
+The Neon CLI supports creating and deleting databases with `neon databases create --name <database_name>` and `neon databases delete <database_name>`. If you omit `--branch`, the CLI uses the project's default branch. For full instructions and options, see [Neon CLI commands — databases](/docs/cli/databases).
 
 ## Manage databases with the Neon API
 
@@ -331,6 +331,35 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 </Admonition>
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+### Rename a database with SQL
+
+To rename a database, use `ALTER DATABASE`. Postgres won't let you rename a database while you're connected to it, so connect to a different database on the same branch first (for example, the default `neondb`), then run:
+
+```sql
+ALTER DATABASE old_db_name RENAME TO new_db_name;
+```
+
+If open connections to the database block the rename, terminate them first:
+
+```sql
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'old_db_name'
+  AND pid <> pg_backend_pid();
+```
+
+The rename is instant, and data, schemas, tables, roles, and grants are unaffected. The database name is part of every connection string for the database, so update any application, script, or stored secret that references the old name. You can also rename a database with the [Neon API](#update-a-database-with-the-api).
+
+### Delete a database with SQL
+
+To delete a database, use `DROP DATABASE`. As with renaming, connect to a different database on the same branch first, since Postgres won't drop the database you're connected to:
+
+```sql
+DROP DATABASE old_db_name;
+```
+
+Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. You can also delete a database from the [Neon Console](#delete-a-database), the [Neon CLI](#manage-databases-with-the-neon-cli), or the [Neon API](#delete-a-database-with-the-api).
 
 ## Transfer database table ownership between roles
 

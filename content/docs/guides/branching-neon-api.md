@@ -10,7 +10,7 @@ summary: >-
   RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
   via init_source=schema-only is available as a preview feature.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -278,8 +278,6 @@ curl --request POST \
 ```
 
 ## Creating a branch with expiration using the API
-
-<ComingSoon />
 
 To create a branch with an automatic expiration timestamp using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `expires_at` option. When a branch reaches its expiration time, it is automatically deleted. Required values include:
 

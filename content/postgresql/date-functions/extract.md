@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE_PART() Function
@@ -50,9 +50,9 @@ The following table illustrates the valid field values:
 | HOUR            | The hour (0\-23\)                                                   | The number of hours                         |
 | ISODOW          | The day of the week, Monday (1\) to Sunday (7\)                     | N/A                                         |
 | ISOYEAR         | The ISO 8601 week number of year                                    | N/A                                         |
-| MICROSECONDS    | The second field, including fractional parts, multiplied by 1000000 | Sames as TIMESTAMP                          |
+| MICROSECONDS    | The second field, including fractional parts, multiplied by 1000000 | Same as TIMESTAMP                           |
 | MILLENNIUM      | The millennium                                                      | The number of millennium                    |
-| MILLISECONDS    | The second field, including fractional parts, multiplied by 1000    | Sames as TIMESTAMP                          |
+| MILLISECONDS    | The second field, including fractional parts, multiplied by 1000    | Same as TIMESTAMP                           |
 | MINUTE          | The minute (0\-59\)                                                 | The number of minutes                       |
 | MONTH           | The month 1\-12                                                     | The number of months, modulo (0\-11\)       |
 | QUARTER         | The quarter of the year (1 – 4\)                                    | The number of quarters                      |
@@ -61,7 +61,7 @@ The following table illustrates the valid field values:
 | TIMEZONE_HOUR   | The hour component of the time zone offset                          | N/A                                         |
 | TIMEZONE_MINUTE | The minute component of the time zone offset                        | N/A                                         |
 | WEEK            | The number of the ISO 8601 week\-numbering week of the year         | N/A                                         |
-| YEAR            | The year                                                            | Sames as TIMESTAMP                          |
+| YEAR            | The year                                                            | Same as TIMESTAMP                           |
 
 **2\)** `source`
 

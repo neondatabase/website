@@ -4,7 +4,7 @@ subtitle: 'How to use AI agents to fetch stack traces from Sentry and safely tes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-06T00:00:00.000Z'
-updatedOn: '2026-04-08T10:44:25.000Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 Resolving stateful production bugs requires exact runtime context and a safe place to experiment. If an AI agent only has access to your local codebase, its ability to troubleshoot database bottlenecks is severely limited.
@@ -108,7 +108,7 @@ Instead, use Neon branching through MCP to create an isolated copy of production
 Prompt Cursor with the remediation task:
 
 ```text shouldWrap
-Ok, please add indexes. Test if it solves the issue by using a seperate Neon Branch.
+Ok, please add indexes. Test if it solves the issue by using a separate Neon Branch.
 ```
 
 ![Cursor transitions from Sentry findings to Neon branch remediation](/docs/guides/neon-mcp-remediation-request.png)

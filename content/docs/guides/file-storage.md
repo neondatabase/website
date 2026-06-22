@@ -11,12 +11,18 @@ summary: >-
   a relational store for querying and filtering metadata without building a
   native file store.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
-Applications often need to handle file uploads and storage, from user avatars and documents to images and other media. Neon does not yet provide a native file storage solution. Instead, we recommend combining Neon with a specialized storage service.
+Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.
 
-The typical pattern looks like this:
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
+
+If you prefer an external provider or need features like image optimization, transformations, or CDN delivery, you can combine Neon with a specialized storage service instead. The typical pattern looks like this:
 
 1. Upload files from your application (client or backend) to an object storage provider or file management service.
 2. Store references (such as the file URL, unique key, or identifier) and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.

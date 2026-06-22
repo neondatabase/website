@@ -6,7 +6,7 @@ page_description: >-
   statement to create a new index for a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/'
 ogImage: /postgresqltutorial/address.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Indexes
@@ -84,7 +84,7 @@ Output:
 
 To find the row whose value in the `phone` column is `223664661973`, PostgreSQL must scan the entire `address` table.
 
-Third, show the query plan using the following `EXPLAIN` statement::
+Third, show the query plan using the following `EXPLAIN` statement:
 
 ```sql
 EXPLAIN SELECT
@@ -150,7 +150,7 @@ Two other indexes `address_pkey` and `idx_fk_city_id` were created implicitly wh
 
 More specifically, the `address_pkey` index was created for the [primary key](../postgresql-tutorial/postgresql-primary-key) column `address_id` and `idx_fk_city_id` was created for the [foreign key](../postgresql-tutorial/postgresql-foreign-key) city_id column.
 
-Fifth, execute the following query again:
+Sixth, execute the following query again:
 
 ```sql
 EXPLAIN SELECT

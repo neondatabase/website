@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRIM_SCALE() Function
@@ -86,7 +86,7 @@ In this example:
 - The `WIDTH_BUCKET()` function returns 1 for the value 0 because 0 falls in the range of the first bucket (0,10\).
 - The `WIDTH_BUCKET()` function returns 2 for the value 12 because 12 falls in the second bucket (10, 20\).
 - The `WIDTH_BUCKET()` function returns 3 for the value 25 because 25 falls in the third bucket (20, 30\).
-- The `WIDTH_BUCKET()` functions return 3 for the value 35 because 35 is greater than the upper bound (30\).
+- The `WIDTH_BUCKET()` function returns 4 for the value 35 because 35 is greater than the upper bound (30\).
 
 ### 2\) Using the WIDTH_BUCKET() function with table data
 

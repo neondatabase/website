@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-password-file-pgpass/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Uptime
@@ -94,7 +94,7 @@ localhost:5432:dvdrental:postgres:moreSecure
 
 Fourth, save the file and exit.
 
-Finally, ensure security by giving the .pgpass file has proper permissions:
+Finally, ensure the .pgpass file has proper permissions:
 
 ```bash
 chmod 600 ~/.pgpass

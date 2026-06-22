@@ -1,24 +1,20 @@
 ---
 title: Query organization usage metrics with the Neon API
 summary: >-
-  The Neon API provides two organization-scoped consumption endpoints on the
-  Scale plan: `/consumption_history/account` for org-wide totals and
-  `/consumption_history/projects` for per-project breakdowns. Both return
-  usage metrics at hourly, daily, or monthly granularity. Use this page to
-  audit cross-project usage, build chargeback reports, or monitor billing
-  trends. To find your org_id before querying, use GET
+  The Neon API provides an organization-scoped consumption endpoint on the
+  Scale plan: `/consumption_history/projects` for per-project breakdowns.
+  It returns usage metrics at hourly, daily, or monthly granularity. Use this
+  page to audit cross-project usage, build chargeback reports, or monitor
+  billing trends. To find your org_id before querying, use GET
   `/users/me/organizations` with a personal API key.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve two types of consumption history metrics for your organization:
+You can use the Neon API to retrieve project-level consumption metrics for your organization:
 
 | Metric                                                                                           | Description                                                                       | Plan Availability |
 | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale             |
 | [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale             |
 
 ## Finding organizations for consumption queries
@@ -58,86 +54,6 @@ The response includes details about each organization, including the `org_id` yo
   ]
 }
 ```
-
-## Account-level metrics
-
-To get global totals for all projects in the organization `org-ocean-art-12345678`, include the `org_id` in the `GET /consumption/projects` request. Required parameters:
-
-- A start date
-- An end date
-- A level of granularity
-
-The following example requests hourly metrics between June 30th and July 2nd, 2024:
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T15%3A30%3A00Z&to=2024-07-02T15%3A30%3A00Z&granularity=hourly&org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-The response will provide aggregated hourly consumption metrics, including `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes`, for each hour between June 30 and July 2.
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Retrieve account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "periods": [
-    {
-      "period_id": "random-period-abcdef",
-      "period_plan": "scale",
-      "period_start": "2024-06-01T00:00:00Z",
-      "consumption": [
-        {
-          "timeframe_start": "2024-06-30T15:00:00Z",
-          "timeframe_end": "2024-06-30T16:00:00Z",
-          "active_time_seconds": 147452,
-          "compute_time_seconds": 43215,
-          "written_data_bytes": 111777920,
-          "synthetic_storage_size_bytes": 41371988928
-        },
-        {
-          "timeframe_start": "2024-06-30T16:00:00Z",
-          "timeframe_end": "2024-06-30T17:00:00Z",
-          "active_time_seconds": 147468,
-          "compute_time_seconds": 43223,
-          "written_data_bytes": 110483584,
-          "synthetic_storage_size_bytes": 41467955616
-        }
-        // ... More consumption data
-      ]
-    },
-    {
-      "period_id": "random-period-ghijkl",
-      "consumption": [
-        {
-          "timeframe_start": "2024-07-01T00:00:00Z",
-          "timeframe_end": "2024-07-01T01:00:00Z",
-          "active_time_seconds": 145672,
-          "compute_time_seconds": 42691,
-          "written_data_bytes": 115110912,
-          "synthetic_storage_size_bytes": 42194712672
-        },
-        {
-          "timeframe_start": "2024-07-01T01:00:00Z",
-          "timeframe_end": "2024-07-01T02:00:00Z",
-          "active_time_seconds": 147464,
-          "compute_time_seconds": 43193,
-          "written_data_bytes": 110078200,
-          "synthetic_storage_size_bytes": 42291858520
-        }
-        // ... More consumption data
-      ]
-    }
-    // ... More periods
-  ]
-}
-```
-
-</details>
 
 ### Project-level metrics (granular)
 

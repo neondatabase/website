@@ -6,7 +6,7 @@ page_description: >-
   perform the calculation across the set of rows related to the current row.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/window-functions.png'
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL WIDTH_BUCKET() Function
@@ -202,7 +202,7 @@ The following table lists all window functions provided by PostgreSQL. Note that
 
 | Name                                                                        | Description                                                                                                                 |
 | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [CUME_DIST](postgresql-window-function/postgresql-cume_dist-function)       | Return the relative rank of the current row.                                                                                |
+| [CUME_DIST](postgresql-window-function/postgresql-cume_dist-function)       | Return the cumulative distribution of the current row.                                                                      |
 | [DENSE_RANK](postgresql-window-function/postgresql-dense_rank-function)     | Rank the current row within its partition without gaps.                                                                     |
 | [FIRST_VALUE](postgresql-window-function/postgresql-first_value-function)   | Return a value evaluated against the first row within its partition.                                                        |
 | [LAG](postgresql-window-function/postgresql-lag-function)                   | Return a value evaluated at the row that is at a specified physical offset row before the current row within the partition. |

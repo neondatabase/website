@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
 ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Self-Join
@@ -188,7 +188,7 @@ Additionally, it includes every employee who does not belong to a department and
 
 ### 2\) Using FULL OUTER JOIN with WHERE clause example
 
-The following example use the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
+The following example uses the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
 
 ```sql
 SELECT
@@ -214,7 +214,7 @@ Output:
 
 The result shows that the `Production` department does not have any employees.
 
-The following example use the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
+The following example uses the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
 
 ```sql
 SELECT

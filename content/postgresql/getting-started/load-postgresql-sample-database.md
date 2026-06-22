@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/
 ogImage: /postgresqltutorial/PostgreSQL-create-database-pgadmin4.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: Connect to a PostgreSQL Database Server
@@ -99,7 +99,7 @@ Output:
 (4 rows)
 ```
 
-The output shows that `dvdrental` on the list, meaning that you have created the `dvdrental` database successfully.
+The output shows that `dvdrental` is on the list, meaning that you have created the `dvdrental` database successfully.
 
 Note that other databases such as `postgres`, `template0`, and `template1` are the system databases.
 

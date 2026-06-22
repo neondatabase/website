@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_each_text() Function
@@ -47,7 +47,7 @@ If the `json_object` is `NULL`, the function will return an empty set.
 
 Let’s take some examples of using the `jsonb_object_keys()` function.
 
-### 1\) Basic the jsonb_object_keys() function examples
+### 1\) Basic jsonb_object_keys() function examples
 
 The following example uses the `jsonb_object_keys()` function to extract the keys of a JSON object as a set of text values:
 

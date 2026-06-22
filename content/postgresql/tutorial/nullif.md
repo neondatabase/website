@@ -6,7 +6,7 @@ page_description: >-
   values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISNULL
@@ -32,7 +32,7 @@ Here’s the basic syntax of the `NULLIF` function:
 NULLIF(argument_1,argument_2);
 ```
 
-The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
+The `NULLIF` function returns a null value if `argument_1` equals `argument_2`, otherwise, it returns `argument_1`.
 
 ## PostgreSQL NULLIF function examples
 

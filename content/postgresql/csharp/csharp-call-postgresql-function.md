@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Transaction'
@@ -76,7 +76,7 @@ psql -U ed -d elearning
 
 It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL server.
 
-Second, create a stored procedure in PostgreSQL, which enrolls a student in a course and creates a corresponding invoice:
+Second, create a function in PostgreSQL that returns the count of students who registered within a date range:
 
 ```sql
 create function get_student_count(begin_date date, end_date date)

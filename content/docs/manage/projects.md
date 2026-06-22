@@ -13,7 +13,7 @@ summary: >-
   window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -32,7 +32,11 @@ When you add a new project, Neon creates the following resources by default:
 
 The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
-To create a Neon project:
+You can create a project from the Console or the Neon CLI. To create one with the API, see [Create a project with the API](#create-a-project-with-the-api).
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
@@ -40,6 +44,22 @@ To create a Neon project:
 4. Click **Create Project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
+
+</TabItem>
+
+<TabItem>
+
+Install the CLI with `npm i -g neonctl` and run `neon auth` to log in. Then create a project with `neon projects create`:
+
+```bash
+neon projects create --name myproject --region-id aws-us-east-2
+```
+
+The output includes the new project ID and the default connection string. For all options, see [Neon CLI — projects](/docs/cli/projects).
+
+</TabItem>
+
+</Tabs>
 
 ## View projects
 
@@ -417,7 +437,7 @@ If you are any of Neon's paid plans, deleting all your Neon projects won't stop 
 </Admonition>
 
 <Admonition type="note">
-**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
 </Admonition>
 
 ## Manage projects with the Neon API

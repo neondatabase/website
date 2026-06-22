@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/what-is-postgresql/
 ogImage: /postgresqltutorial/What-is-PostgreSQL.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Cheat Sheet
@@ -39,7 +39,7 @@ PostgreSQL’s community pronounces PostgreSQL as /ˈpoʊstɡrɛs ˌkjuː ˈɛl/
 
 The PostgreSQL project started in 1986 at [Berkeley Computer Science Department](http://www.cs.berkeley.edu/), University of California.
 
-The project was originally named POSTGRES, about the older Ingres database which was also developed at Berkeley. The goal of the POSTGRES project was to add the minimal features needed to support multiple data types.
+The project was originally named POSTGRES, after the older Ingres database which was also developed at Berkeley. The goal of the POSTGRES project was to add the minimal features needed to support multiple data types.
 
 In 1996, the POSTGRES project was renamed to PostgreSQL to clearly illustrate its support for SQL. Today, PostgreSQL is commonly abbreviated as Postgres.
 

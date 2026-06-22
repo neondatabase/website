@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -28,7 +28,9 @@ To use the SQL Editor:
 
 ![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
-You can use the following query to try the SQL Editor. The query creates a table, adds data, and retrieves the data from the table.
+## Create a table with SQL
+
+Neon runs standard Postgres, so you create tables from the SQL Editor with standard `CREATE TABLE` syntax. Enter the statement and click **Run**. The following query creates a table, adds data, and retrieves the data from the table, so you can try the editor end to end:
 
 ```sql
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -38,6 +40,8 @@ SELECT * FROM playing_with_neon;
 ```
 
 Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution, as shown above.
+
+For schema design and repeatable migrations in real projects, use an ORM or migration tool rather than ad hoc SQL. See the [ORM guides](/docs/get-started/orms).
 
 To clear the editor, click **New Query**.
 

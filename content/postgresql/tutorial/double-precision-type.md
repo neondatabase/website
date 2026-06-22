@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NUMERIC Type
@@ -152,7 +152,7 @@ Output:
 
 The output indicates that the sum of `0.1`, `0.1`, and `0.1` is not `0.3` but `0.30000000000000004`. This indicates that PostgreSQL cannot store the exact number `0.1` using the `DOUBLE PRECISION` type.
 
-### 2\) Inserting too small numbers
+### 3\) Inserting too small numbers
 
 The following statement attempts to [insert](postgresql-insert) a very small number into the `c` column of the `t` table:
 

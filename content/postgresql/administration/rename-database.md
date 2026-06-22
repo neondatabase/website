@@ -3,11 +3,11 @@ title: PostgreSQL Rename Database
 page_title: 'PostgreSQL Rename Database: A Quick Guide'
 page_description: >-
   In this tutorial, you will learn step by step how to rename a PostgreSQL
-  database by using the ALTER TABLE RENAME TO statement.
+  database by using the ALTER DATABASE RENAME TO statement.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-rename-database/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP DATABASE

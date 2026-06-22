@@ -6,7 +6,7 @@ page_description: >-
   statement to remove one or more tables from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-table/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL RENAME COLUMN: Renaming a column'
@@ -111,7 +111,7 @@ The following statement uses the `DROP TABLE` to drop the `authors` table:
 DROP TABLE IF EXISTS authors;
 ```
 
-Because the `authors` table has a dependent object which is a foreign key that references the `pages` table, PostgreSQL issues an error message:
+Because the `authors` table has a dependent object which is a foreign key constraint in the `pages` table that references the `authors` table, PostgreSQL issues an error message:
 
 ```
 ERROR:  cannot drop table authors because other objects depend on it

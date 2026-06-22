@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL using the PostgreSQL JSON and JSONB data types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: UUID
@@ -144,8 +144,8 @@ Output:
 ```text
  id |        name         |                    properties
 ----+---------------------+---------------------------------------------------
-  2 | ThreadVerse T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "white"}
-  3 | Design Dynamo       | {"size": ["S", "M", "L", "XL"], "color": "blue"}
+  2 | ThreadVerse T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "black"}
+  3 | Design Dynamo T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "blue"}
 (2 rows)
 ```
 

@@ -404,6 +404,9 @@
               slug: guides/typeorm
     - section: Backend
       items:
+        - title: neon.ts
+          icon: sdk
+          slug: reference/neon-ts
         - title: Data API
           icon: api
           slug: data-api/overview
@@ -537,6 +540,81 @@
                       slug: auth/legacy/overview
                     - title: Database integration
                       slug: auth/legacy/database-integration
+
+        - title: Neon Functions
+          icon: features
+          slug: compute/functions/overview
+          items:
+            - title: Overview
+              slug: compute/functions/overview
+            - title: Preview access
+              slug: compute/functions/preview-access
+            - title: Get started
+              slug: compute/functions/get-started
+            - title: Deploy and manage
+              slug: compute/functions/deploy
+            - title: Environment variables
+              slug: compute/functions/environment-variables
+            - title: WebSocket servers
+              slug: compute/functions/websockets
+            - section: Reference
+              items:
+                - title: Runtime limits
+                  slug: compute/functions/reference/runtime-limits
+
+        - title: Object Storage
+          icon: import
+          slug: storage/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: storage/overview
+                - title: Quickstart
+                  slug: storage/get-started
+            - section: Guides
+              items:
+                - title: Buckets
+                  slug: storage/buckets
+                - title: Objects
+                  slug: storage/objects
+                - title: Authentication
+                  slug: storage/authentication
+            - section: Reference
+              items:
+                - title: S3 compatibility
+                  slug: storage/s3-compatibility
+                - title: Troubleshooting
+                  slug: storage/troubleshooting
+
+        - title: AI Gateway
+          icon: sparks
+          slug: ai-gateway/overview
+          items:
+            - section: Get started
+              items:
+                - title: Overview
+                  slug: ai-gateway/overview
+                - title: Quickstart
+                  slug: ai-gateway/get-started
+                - title: Models
+                  slug: ai-gateway/models
+            - section: APIs
+              items:
+                - title: Chat completions
+                  slug: ai-gateway/chat-completions
+                - title: Anthropic Messages API
+                  slug: ai-gateway/anthropic-messages
+                - title: OpenAI Responses API
+                  slug: ai-gateway/openai-responses
+                - title: Gemini API
+                  slug: ai-gateway/gemini
+            - section: Reference
+              items:
+                - title: Authentication
+                  slug: ai-gateway/authentication
+                - title: Troubleshooting
+                  slug: ai-gateway/troubleshooting
 
         - title: Postgres RLS
           icon: lock
@@ -1448,9 +1526,6 @@
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-    - title: Early access
-      slug: introduction/early-access
-      icon: sparks
     - title: Community
       slug: community/community-intro
       icon: community

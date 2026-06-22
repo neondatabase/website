@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AFTER DELETE Trigger
@@ -152,7 +152,7 @@ FOR EACH ROW
 EXECUTE FUNCTION update_employee_salaries();
 ```
 
-### 1\) Inserting data into tables via the view
+### 2\) Inserting data into tables via the view
 
 First, insert a new employee with a salary via the view:
 
@@ -255,10 +255,10 @@ SELECT * FROM employees;
 Output:
 
 ```text
- employee_id | effective_date |  salary
--------------+----------------+----------
-           1 | 2024-03-01     | 60000.00
-           2 | 2024-03-01     | 70000.00
+ employee_id |  name
+-------------+-------
+           1 | Alice
+           2 | Bob
 (2 rows)
 ```
 

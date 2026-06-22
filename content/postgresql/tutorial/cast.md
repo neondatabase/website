@@ -6,7 +6,7 @@ page_description: >-
   (::) to cast a value of one type to another.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast/'
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NULLIF
@@ -240,7 +240,7 @@ Output:
 (1 row)
 ```
 
-### 10\) Cast a JSON to a JSONB
+### 9\) Cast a JSON to a JSONB
 
 The following example uses the `CAST()` function to convert JSON to JSONB:
 
@@ -339,7 +339,7 @@ VALUES
   (3);
 ```
 
-Consequentially, the `ratings` table stores both alphabets \& numbers.
+Consequently, the `ratings` table stores both alphabets \& numbers.
 
 ```sql
 SELECT * FROM ratings;

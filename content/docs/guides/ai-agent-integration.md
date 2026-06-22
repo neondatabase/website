@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -71,13 +71,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
-| ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Max branches**         | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| Limit                    | Free Organization | Paid Organization       | Notes                                                                                                            |
+| ------------------------ | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
+| **Max manual snapshots** | 1 per project     | 100 per project         | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
+| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU            | CU = Compute Units (~4GB RAM per CU)                                                                             |
+| **History window**       | 1 day             | Up to 7 days            | Point-in-time recovery window                                                                                    |
+| **Min auto-suspend**     | 5 minutes         | 1 minute                | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 
@@ -429,7 +429,7 @@ Development branches are:
 - **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
-**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **1,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
+**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects have **custom limits available** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
 Example creating a development branch using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
@@ -470,14 +470,7 @@ This workflow prevents common issues like development data contaminating product
 
 ### Track usage per project
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve consumption metrics for your organizations and projects using these endpoints:
-
-| Endpoint                                                                                                         | Description                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                |
-| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) |
+You can use the Neon API to retrieve consumption metrics for your organizations and projects using the [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, which provides detailed metrics per project at hourly, daily, or monthly granularity.
 
 Available metrics:
 

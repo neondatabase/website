@@ -6,7 +6,7 @@ page_description: >-
   character based on its ASCII value or Unicode code point.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-chr/'
 ogImage: /postgresqltutorial/PostgreSQL-CHR-ASCII-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ASCII() Function
@@ -42,7 +42,7 @@ It could be a Unicode code point which is converted to a UTF8 character.
 
 ## Return Value
 
-The `CHR()` function returns a character that corresponds the ASCII code value or Unicode code point.
+The `CHR()` function returns a character that corresponds to the ASCII code value or Unicode code point.
 
 ## Examples
 

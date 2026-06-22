@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/insert/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Insert-Example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Create New Tables'
@@ -66,17 +66,17 @@ public function insertStock($symbol, $company) {
 }
 ```
 
-First, construct an `INSERT` statement that uses two named placed holders: `:symbol` and `:company` for binding values later.
+First, construct an `INSERT` statement that uses two named placeholders: `:symbol` and `:company` for binding values later.
 
 Next, prepare the insert statement for execution by calling the `prepare()` method of the PDO object.
 
-Then, passing the values to the statement by calling the `bindValue()` method.
+Then, pass the values to the statement by calling the `bindValue()` method.
 
 After that, execute the `INSERT` statement by calling the `execute()` method.
 
 Finally, get the ID of the last inserted row by calling the `lastInsertId()` method of the PDO object
 
-the `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
+The `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
 
 ## Insert multiple rows into a table example
 

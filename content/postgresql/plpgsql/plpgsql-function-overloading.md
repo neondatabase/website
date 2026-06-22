@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
@@ -54,7 +54,7 @@ end; $$
 
 ```
 
-The `get_rental_function` function has the `p_customer_id` as an `in` parameter.
+The `get_rental_duration` function has the `p_customer_id` as an `in` parameter.
 
 The following returns the number of rental days of customer id 232:
 

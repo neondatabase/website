@@ -1,13 +1,13 @@
 ---
 title: PostgreSQL POSITION() Function
-page_title: 'PostgresQL POSITION: Locate a Substring in a String'
+page_title: 'PostgreSQL POSITION: Locate a Substring in a String'
 page_description: >-
   This tutorial shows you how to use the PostgreSQL POSITION() function to
   locate a substring in a string.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-position/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function
@@ -66,7 +66,7 @@ position
 (1 row)
 ```
 
-Note that the `POSITION()` function searches for the substring case\-insensitively.
+Note that the `POSITION()` function searches for the substring case-sensitively.
 
 See the following example:
 

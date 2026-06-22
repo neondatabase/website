@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_agg() Function
@@ -198,4 +198,4 @@ The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` fun
 ## Summary
 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
-- Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
+- Use the `jsonb_object_agg_strict()` function to aggregate key/value pairs into a JSON object and skip null values.

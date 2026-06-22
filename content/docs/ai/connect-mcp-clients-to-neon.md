@@ -10,12 +10,12 @@ summary: >-
   per-client setup instructions for `npx neonctl@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
-  and the deprecated SSE endpoint for clients that do not support Streamable
+  and the deprecated SSE endpoint for clients that don't support Streamable
   HTTP.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.
@@ -68,14 +68,6 @@ This adds the MCP config to your editor's configuration files. Add `-g` for glob
 | Zed                       | `zed`                |
 
 **Aliases:** `cline-vscode` → `cline`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
-
-## Setup options
-
-- **Quick setup:** `npx neonctl@latest init` (MCP with API key auth, extension where supported, agent skills, and many assistants via the wizard)
-- **OAuth:** Connect to Neon's remote MCP server (no local installation needed)
-- **Local:** Run the MCP server locally with your API key (requires Node.js >= v18)
-
-For Local setup, you'll need a [Neon API key](/docs/manage/api-keys#creating-api-keys).
 
 ## Kiro
 
@@ -461,13 +453,13 @@ This tool auto-detects supported clients and configures them. Use `-a <agent>` t
 }
 ```
 
-For Windows-specific configurations, see [Local MCP Server](/docs/ai/neon-mcp-server#other-setup-options).
+For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mcp-clients-to-neon#other-mcp-clients).
 
 ## Troubleshooting
 
 ### Configuration Issues
 
-If your client does not use `JSON` for configuration of MCP servers (such as older versions of Cursor), you can use the following command when prompted:
+If your client doesn't support JSON config (such as older Cursor versions), run:
 
 ```bash
 # For OAuth (remote server)
@@ -498,11 +490,9 @@ This typically occurs when there are issues with cached OAuth credentials. To re
 2. Restart your MCP client application
 3. The OAuth flow will start fresh, allowing you to properly authenticate
 
-This error is most common when using OAuth authentication and can occur after OAuth configuration changes or when cached credentials become invalid.
-
 ## Next steps
 
-Once connected, explore the [available MCP tools](/docs/ai/neon-mcp-server#supported-actions-tools) to see what you can do with natural language.
+Once connected, explore the [available tools](/docs/ai/neon-mcp-server#available-tools) to see what you can do with natural language.
 
 ## Resources
 

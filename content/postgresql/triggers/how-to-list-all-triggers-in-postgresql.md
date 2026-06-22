@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: Enable Triggers
@@ -165,7 +165,7 @@ SELECT * FROM get_triggers('employees');
 | -------------- | -------------------------------------------------------------------------------------------------------------- |
 | `tgname`       | The name of the trigger.                                                                                       |
 | `tgrelid`      | The object ID of the table or view to which the trigger belongs.                                               |
-| `tgfoid`       | The object ID of the function is called when the trigger fires.                                                |
+| `tgfoid`       | The object ID of the function that is called when the trigger fires.                                           |
 | `tgtype`       | The type of the trigger, such as `BEFORE`, `AFTER`, or [`INSTEAD OF`](postgresql-instead-of-triggers).         |
 | `tgenabled`    | The status of the trigger, either enabled or disabled.                                                         |
 | `tgisinternal` | The boolean indicator indicates whether the trigger is a system\-generated trigger or a user\-defined trigger. |

@@ -6,7 +6,7 @@ page_description: >-
   filter groups of rows based on a specified condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having/'
 ogImage: /postgresqltutorial/postgresql-having.svg
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUP BY
@@ -58,7 +58,7 @@ This restriction arises from the fact that, at the point of `HAVING` clause eval
 
 ### HAVING vs. WHERE
 
-The [`WHERE`](postgresql-where) clause filters the rows based on a specified condition whereas the `HAVING` clause filter groups of rows according to a specified condition.
+The [`WHERE`](postgresql-where) clause filters the rows based on a specified condition whereas the `HAVING` clause filters groups of rows according to a specified condition.
 
 In other words, you apply the condition in the `WHERE` clause to the rows while you apply the condition in the `HAVING` clause to the groups of rows.
 

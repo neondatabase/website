@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_set/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_insert() Function
@@ -149,7 +149,7 @@ In this example:
 
 Therefore, the `jsonb_set()` set the value of the `name` key in the JSON object to “Jane Smith”.
 
-Note that if you attempt to set a key that does not exist, you’ll get an error, the jsonb_set will insert it. For example:
+Note that if you attempt to set a key that does not exist, the jsonb_set will insert it. For example:
 
 ```sql
 SELECT jsonb_set('{"name": "Jane Doe"}', '{age}', '25');

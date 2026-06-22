@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CURRENT_USER
@@ -49,8 +49,8 @@ The option can be:
 The following rules are applied:
 
 - Superusers can change any of those attributes for any role.
-- Roles that have the `CREATEROLE` attribute can change any of these attributes for only non\-superusers and no\-replication roles.
-- Ordinal roles can only change their passwords.
+- Roles that have the `CREATEROLE` attribute can change any of these attributes for only non\-superusers and non\-replication roles.
+- Ordinary roles can only change their passwords.
 
 First, log in to PostgreSQL server using the `postgres` role.
 

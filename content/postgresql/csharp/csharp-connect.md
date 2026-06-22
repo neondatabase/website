@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/
 ogImage: /postgresqltutorial/PostgreSQL-C-Connect.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL C#
@@ -83,7 +83,7 @@ dotnet add package Npgsql
 - The `Npgsql` is a .NET data provider for PostgreSQL.
 - The `Microsoft.Extensions`.Configuration and `Microsoft.Extensions`.`Configuration.Json` are packages that manage configurations.
 
-Fourth, create `appsettings.json` file in the project and add the `ConnnectionStrings` setting as follows:
+Fourth, create `appsettings.json` file in the project and add the `ConnectionStrings` setting as follows:
 
 ```json
 {

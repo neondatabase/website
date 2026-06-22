@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PL/pgSQL
@@ -41,7 +41,7 @@ Since PostgreSQL 9\.0, PL/pgSQL is installed by default.
 
 SQL is a query language that allows you to effectively manage data in the database. However, PostgreSQL only can execute SQL statements individually.
 
-It means that you have multiple statements, and you need to execute them one by one like this:
+It means that if you have multiple statements, and you need to execute them one by one like this:
 
 - First, send a query to the PostgreSQL database server.
 - Next, wait for it to process.

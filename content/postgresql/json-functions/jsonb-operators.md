@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb-operators/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_path_exists() Function
@@ -294,7 +294,7 @@ Output:
 
 ### 6\) Operator \<@
 
-The operator `<@` returns true if a JSON value is contained within the another JSONB value or false otherwise:
+The operator `<@` returns true if a JSON value is contained within another JSONB value or false otherwise:
 
 ```sql
 jsonb <@ jsonb → boolean
@@ -442,7 +442,7 @@ The operator `?&` returns true if all elements in a text array exist as the top\
 jsonb ?& text[] → boolean
 ```
 
-For example, the following statement uses the operator `?&` to retrieve the products whose `attributes` have both `color` or `storage` keys:
+For example, the following statement uses the operator `?&` to retrieve the products whose `attributes` have both `color` and `storage` keys:
 
 ```sql
 SELECT

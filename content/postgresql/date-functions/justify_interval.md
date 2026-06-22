@@ -5,7 +5,7 @@ page_description: "How to use the PostgreSQL JUSTIFY_INTERVAL() to normalize an 
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_interval/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_HOURS() Function
@@ -99,7 +99,7 @@ Output:
 
 In this example:
 
-- \-2 days 5 hours is \-48 hours \+ 5 hours which is 43 hours.
+- \-2 days 5 hours is \-48 hours \+ 5 hours which is \-43 hours.
 - The function converts – 43 hours to \-24 hours \+ – 19 hours, which results in \-1 days \-19:00:00\.
 
 ## Summary

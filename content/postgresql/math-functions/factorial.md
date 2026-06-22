@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-factorial/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXP() Function
@@ -51,7 +51,7 @@ ERROR:  factorial of a negative number is undefined
 
 Let’s take some examples of using the `factorial()` function.
 
-The following example uses the `factorial()` function to calculate the factorial of the number 10:
+The following example uses the `factorial()` function to calculate the factorial of the number 5:
 
 ```sql
 SELECT factorial(5);

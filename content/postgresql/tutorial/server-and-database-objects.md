@@ -6,7 +6,7 @@ page_description: >-
   and database objects provided by PostgreSQL
 prev_url: index.html
 ogImage: /postgresqltutorial/postgresql-databases.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXPLAIN
@@ -52,7 +52,7 @@ A [schema](../postgresql-administration/postgresql-schema) is a logical containe
 
 ## Tablespaces
 
-Tablespaces are where PostgreSQL stores the data physically. [Tablespace](../postgresql-administration/postgresql-create-tablespace 'PostgreSQL Tablespaces')s allow you to move your data to different physical locations across drivers easily by using simple commands.
+Tablespaces are where PostgreSQL stores the data physically. [Tablespace](../postgresql-administration/postgresql-create-tablespace 'PostgreSQL Tablespaces')s allow you to move your data to different physical locations across drives easily by using simple commands.
 
 By default, PostgreSQL provides you with two tablespaces:
 
@@ -71,7 +71,7 @@ The following picture shows the default tablespaces:
 
 ## Functions
 
-A [function](/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures) is a reusable block of SQL code that returns a scalar value of a set of rows.
+A [function](/postgresql/postgresql-plpgsql/postgresql-create-function) is a reusable block of SQL code that returns a scalar value of a set of rows.
 
 ![](/postgresqltutorial/postgresql-functions.png)
 

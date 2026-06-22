@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -111,6 +111,10 @@ ALTER USER user_name WITH PASSWORD 'new_password';
 
 For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 </Admonition>
+
+A password reset takes effect immediately. The old password stops working on the next connection, so copy the new connection string from the **Connect** modal and update it wherever it is stored (deployment environment variables, secret managers, and `.env` files). Resets are branch-scoped, so reset the role on each branch where it is used.
+
+Resetting a password is also how you rotate the credential behind a connection string. To rotate after a leak or as routine security practice, see [Rotate credentials](/docs/security/security-overview#rotate-credentials).
 
 ## Manage roles with the Neon CLI
 

@@ -6,7 +6,7 @@ page_description: >-
   time-related functions to handle time values effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/'
 ogImage: /postgresqltutorial/PostgreSQL-TIME-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Interval Data Type
@@ -223,7 +223,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extracting hours, minutes, and seconds from a time value
+### 3\) Extracting hours, minutes, and seconds from a time value
 
 To extract hours, minutes, and seconds from a time value, you use the [`EXTRACT`](../postgresql-date-functions/postgresql-extract) function as follows:
 

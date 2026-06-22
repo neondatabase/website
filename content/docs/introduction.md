@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-15T08:03:00.254Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <TwinPaths>
@@ -29,10 +29,7 @@ updatedOn: '2026-06-15T08:03:00.254Z'
   />
 </TwinPaths>
 
-<div className="mt-12 mb-3.5 flex items-baseline justify-between gap-4">
-  <h2 className="m-0!">Your Neon backend</h2>
-  <a href="https://neon.com/blog/were-building-backends#access" className="text-sm font-medium text-[#00CC88] hover:underline dark:text-[#00E599]">Join Early Access →</a>
-</div>
+## Products
 
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
 
@@ -44,13 +41,15 @@ Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="binary-code">Data API</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="S3-compatible object storage that branches with your DB." icon="data" tag="coming soon">Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="Node.js functions deployed alongside your database." icon="code" tag="coming soon">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
 
-<a href="https://neon.com/blog/were-building-backends#access" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="coming soon">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="LLM gateway for AI workloads, integrated with Neon Auth." icon="sparkle" tag="Private Preview">AI Gateway</a>
 
 </DetailIconCards>
+
+<RequestForm type="backend-platform" />
 
 ## Connect your framework
 

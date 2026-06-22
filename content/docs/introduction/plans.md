@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -56,7 +56,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
-| [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
+| [Auth](#auth) (Beta)                                  | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
@@ -82,7 +82,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -508,7 +508,7 @@ Can I disable scale-to-zero?
  Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
-: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
 
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
@@ -519,8 +519,11 @@ Do public network transfer limits reset each month?
 How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
+What are the limits and quotas for the Free plan?
+: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Neon Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (for example, CU-hours or public network transfer). To continue, upgrade to a paid plan.
+: On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.

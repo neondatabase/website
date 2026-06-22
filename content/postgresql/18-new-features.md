@@ -7,7 +7,7 @@ page_description: >-
   Discover how these changes will impact performance, development, and
   operations.
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 nextLink:
   title: PostgreSQL 18 Asynchronous I/O
@@ -128,7 +128,7 @@ SELECT uuid_extract_timestamp(uuidv7());
 - Reduced page splits and improved caching
 - Ideal for distributed systems requiring sortable IDs
 
-It is worth noting that `uuidv4()` in this release is now an alias for `gen_rand_uuid`.
+It is worth noting that `uuidv4()` in this release is now an alias for `gen_random_uuid`.
 
 ### [Enhanced RETURNING Clause](/postgresql/postgresql-18/enhanced-returning)
 

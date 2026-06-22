@@ -6,7 +6,7 @@ page_description: >-
   connect to the PostgreSQL database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/connect/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-Connect.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PHP
@@ -196,7 +196,7 @@ try {
 }
 ```
 
-PHP throws a `\PDOException` if there is an exception occurs when connecting to the PostgreSQL database server, therefore, you need to place the code to create a new `PDO` object inside the  `try...catch` block to handle the exception.
+PHP throws a `\PDOException` if an exception occurs when connecting to the PostgreSQL database server, therefore, you need to place the code to create a new `PDO` object inside the  `try...catch` block to handle the exception.
 
 Run the following composer command to update the autoload files:
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOCALTIMESTAMP Function
@@ -166,7 +166,7 @@ Output:
 (1 row)
 ```
 
-### 7\) Extracting a week number from a timestamp
+### 7\) Extracting a millennium from a timestamp
 
 To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](postgresql-now) function as follows:
 

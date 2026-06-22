@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Returns SetOf
@@ -123,7 +123,7 @@ HINT:  Specify the argument list to select the function unambiguously.
 SQL state: 42725
 ```
 
-Since the `get_film_actors` stored procedure is not unique, you need to specify which function you want to drop.
+Since the `get_film_actors` function is not unique, you need to specify which function you want to drop.
 
 The following statement drops the `get_film_actors` function that has zero parameters:
 

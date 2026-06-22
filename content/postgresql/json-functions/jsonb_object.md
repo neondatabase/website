@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_build_object() Function
@@ -70,7 +70,7 @@ Output:
 (1 row)
 ```
 
-Alternatively, you can use a two\-dimensional arrays to create the JSON object:
+Alternatively, you can use a two\-dimensional array to create the JSON object:
 
 ```sql
 SELECT

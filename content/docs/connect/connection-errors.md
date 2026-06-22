@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -32,6 +32,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [Error connecting to database: Failed to fetch](#error-connecting-to-database-failed-to-fetch)
 - [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
@@ -104,7 +105,7 @@ postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-12
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend to deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -272,6 +273,26 @@ If you encounter this error, you can adjust the `idle_in_transaction_session_tim
 
 Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
 
+## Error connecting to database: Failed to fetch
+
+This error appears on the **Tables** page in the Neon Console when the Console's request to your compute doesn't complete:
+
+```text
+Error connecting to database: Failed to fetch
+```
+
+The most common causes, in order, are:
+
+- **The compute is starting up.** If your compute is suspended after [scale to zero](/docs/introduction/scale-to-zero), the Console wakes it before listing tables, and the first request can fail before the compute is ready. Wait a second or two and click **Refresh**. The second request usually succeeds. You can confirm the compute state on the **Branches** page, where a suspended compute shows as **Idle**. See [Couldn't connect to compute node](#couldnt-connect-to-compute-node) for more on cold-start timing.
+- **A browser extension is blocking the request.** Ad-blockers, privacy extensions, and corporate browser security tools sometimes block requests to `*.neon.tech`. Open the Console in an incognito window with extensions disabled, or temporarily disable extensions like uBlock Origin or Privacy Badger on `console.neon.tech` and reload. Check the browser's developer console (**F12 → Network**) for blocked requests to your compute hostname.
+- **IP Allow is rejecting your connection.** If you've configured an [IP Allow](/docs/manage/projects#configure-ip-allow) list (Scale plan), the Tables view connects from the IP address you're browsing from, so the request is rejected when that address isn't on the allowlist. Add your current IP address under **Settings → Network security**, or if you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so queries against development branches still work.
+- **A DNS resolution issue.** Some networks fail to resolve compute hostnames. See [DNS resolution issues](#dns-resolution-issues) below to test and resolve this.
+- **A transient backend error.** If none of the above explain it, check the [Neon status page](https://neonstatus.com/) for ongoing incidents.
+
+<Admonition type="tip" title="Grab the error ID before contacting Support">
+The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. Support uses that ID to look up the exact request in our logs, which is faster than reproducing the issue.
+</Admonition>
+
 ## DNS resolution issues
 
 Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
@@ -292,7 +313,7 @@ Server:		192.168.2.1
 Address:	192.168.2.1#53
 
 Non-authoritative answer:
-p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
 Name:	ap-southeast-1.aws.neon.tech
 Address: 203.0.113.10
 Name:	ap-southeast-1.aws.neon.tech

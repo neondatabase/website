@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JUSTIFY_INTERVAL() Function
@@ -63,7 +63,7 @@ Let’s explore some examples of using the `MAKE_INTERVAL()` function.
 
 ### 1\) Basic MAKE_INTERVAL() function example
 
-The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 1 year, 2 months, 3 days, and 4 hours:
+The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 3 years, 6 months, 15 days, and 4 hours:
 
 ```sql
 SELECT

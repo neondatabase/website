@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.
@@ -192,6 +192,17 @@ postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.t
 You can copy a pooled connection string from the Neon Console by clicking **Connect** on your Project Dashboard and enabling the **Connection pooling** toggle.
 
 ![Connection Details pooled connection string](/docs/connect/connection_details.png)
+
+### Enable, disable, and find the pooled connection string in the Console
+
+To get the pooled connection string or switch between pooled and direct from the dashboard:
+
+1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
+2. On the **Project Dashboard**, click **Connect**.
+3. In the **Connect to your database** modal, choose a **Branch**, **Compute**, **Database**, and **Role**.
+4. Turn the **Connection pooling** toggle on to get the pooled string, or off to get the direct string, then copy it.
+
+The toggle is on by default for new projects. It doesn't start or stop the pooler at the compute. The pooled endpoint is always available. The toggle just switches the displayed connection string between the pooled hostname (with the `-pooler` suffix) and the direct hostname, so you can pick which one your app uses. To enable pooling in your app, use the pooled string; to disable it, use the direct string.
 
 ### When to use pooled vs direct connections
 

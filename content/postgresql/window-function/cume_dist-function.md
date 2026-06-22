@@ -8,7 +8,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Window Functions
@@ -54,7 +54,7 @@ The `ORDER BY` clause sorts rows in each partition to which the `CUME_DIST()` fu
 
 ### Return value
 
-The `CUME_DIST()` a double precision value which is greater than 0 and less than or equal to 1:
+The `CUME_DIST()` returns a double precision value which is greater than 0 and less than or equal to 1:
 
 ```sql
 0 < CUME_DIST() <= 1

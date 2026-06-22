@@ -6,7 +6,7 @@ page_description: >-
   and how to use variables effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Block Structure
@@ -274,4 +274,4 @@ In this example:
 
 - A variable is a named storage location with a data type that can hold a value.
 - PostgreSQL evaluates the default value of a variable and assigns it to the variable when it enters the block.
-- Declare variables and optionally an initial value to it in the declaration section of the block.
+- Declare variables and optionally assign an initial value to them in the declaration section of the block.

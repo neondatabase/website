@@ -6,7 +6,7 @@ page_description: >-
   including SMALLINT, INTEGER, and BIGINT for designing tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-integer/'
 ogImage: /postgresqltutorial/postgresql-integer-300x59.png
-updatedOn: '2026-06-04T16:09:35.498Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REAL Data Type
@@ -45,7 +45,7 @@ Unlike [MySQL integer](https://www.mysqltutorial.org/mysql-basics/mysql-int/), P
 
 ### SMALLINT
 
-The `SMALLINT` requires 2 bytes storage size which can store any integer numbers that are in the range of (\-32,767, 32,767\).
+The `SMALLINT` requires 2 bytes storage size which can store any integer numbers that are in the range of (\-32,768, 32,767\).
 
 You can use the `SMALLINT` type for storing something like the ages of people, the number of pages of a book, and so on.
 
