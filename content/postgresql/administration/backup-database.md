@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TABLESPACE Statement
@@ -190,7 +190,7 @@ pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 
 The following backup script assumes that you have [a password file](postgresql-password-file-pgpass) setup properly.
 
-First, open a text editor such a Notepad.
+First, open a text editor such as Notepad.
 
 Second, write a batch script to generate backup file with a date and timestamp:
 

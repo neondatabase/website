@@ -134,7 +134,7 @@ See existing handlers in the code for examples of each pattern.
 | ProgramForm                                                                            | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Backup
@@ -48,7 +48,7 @@ The following table presents the most commonly used command\-line options for th
 | \-p, –port\=PORT             | Specifies the port number on which the PostgreSQL server is listening.                                                                                                        |
 | \-d, –dbname\=DBNAME         | Specifies the name of the database that you want to restore into.                                                                                                             |
 | \-t, –table\=TABLE           | Specifies one or more tables that you want to restore. If you restore multiple tables, you need to separate them by commas.                                                   |
-| \-v, –verbose                | Shows verbose output that including information about the objects being restored.                                                                                             |
+| \-v, –verbose                | Shows verbose output that includes information about the objects being restored.                                                                                              |
 | \-c, –clean                  | Drops existing database objects from the database before restoring the dump.                                                                                                  |
 | \-C, –create                 | Creates the database before restoring it.                                                                                                                                     |
 | \-e, –exit\-on\-error        | Stops the restore process in case of an error.                                                                                                                                |
@@ -103,7 +103,7 @@ Seventh, restore the dvdrental database from the backup file using the pg_restor
 pg_restore -U postgres -d dvdrental D:/backup/dvdrental.tar
 ```
 
-Eight, connect to the dvdrental database:
+Eighth, connect to the dvdrental database:
 
 ```bash
 psql -U postgres -d dvdrental

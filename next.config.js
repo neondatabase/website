@@ -30,6 +30,18 @@ const defaultConfig = {
     ],
   },
   async headers() {
+    // Serve top-level index URLs (e.g. /faqs.md, /programs.md, /docs.md) as inline markdown.
+    // Only non-nested routes have an index file; /docs.md is aliased to /docs/llms.txt via rewrite.
+    const mdIndexHeaders = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+        ],
+      }));
+
     return [
       {
         source: '/',
@@ -136,7 +148,9 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*.md',
+        source: `/(${Object.keys(CONTENT_ROUTES)
+          .filter((r) => !r.includes('/'))
+          .join('|')})/:path*.md`,
         headers: [
           {
             key: 'Content-Disposition',
@@ -148,6 +162,7 @@ const defaultConfig = {
           },
         ],
       },
+      ...mdIndexHeaders,
     ];
   },
   async redirects() {
@@ -2063,11 +2078,10 @@ const defaultConfig = {
         destination: '/docs/connect/connection-errors',
         permanent: true,
       },
-      {
-        source: '/docs',
-        destination: '/docs/introduction',
-        permanent: true,
-      },
+      // NOTE: bare `/docs` is intentionally NOT redirected here. The middleware
+      // (src/proxy.js) owns it: agents / Accept: markdown get /docs/llms.txt, and
+      // browsers are redirected to /docs/introduction. A next.config redirect would
+      // run before middleware and intercept the markdown case.
       {
         source: '/docs/postgres',
         destination: '/docs/postgres/index',
@@ -2076,6 +2090,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/early-access',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2186,7 +2205,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2482,8 +2501,10 @@ const defaultConfig = {
 
     // /:path*.md above requires at least one segment after the route name,
     // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    // /docs.md is excluded here: it's aliased to the canonical /docs/llms.txt index
+    // below rather than a generated page-listing (see process-md-for-llms.js).
     const indexRewrites = Object.keys(CONTENT_ROUTES)
-      .filter((route) => !route.includes('/'))
+      .filter((route) => !route.includes('/') && route !== 'docs')
       .map((route) => ({
         source: `/${route}.md`,
         destination: `/md/${route}.md`,
@@ -2508,6 +2529,12 @@ const defaultConfig = {
           source: '/docs/.well-known/skills/:name/SKILL.md',
           destination: '/docs/ai/skills/:name/SKILL.md',
         },
+        // /docs.md serves the canonical, curated docs index (llms.txt) instead of a
+        // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
+        { source: '/docs.md', destination: '/docs/llms.txt' },
+        // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
+        // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
+        ...indexRewrites,
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -2528,7 +2555,6 @@ const defaultConfig = {
         },
         { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
-        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

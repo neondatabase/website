@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRANSLATE() Function
@@ -70,8 +70,8 @@ The following table shows the valid timestamp format strings:
 | Y,YYY                    | year in 4 digits with comma                                                                         |
 | YYYY                     | year in 4 digits                                                                                    |
 | YYY                      | The last 3 digits of ISO 8601 week\-numbering year                                                  |
-| YY                       | last 3 digits of the year                                                                           |
-| Y                        | last 2 digits of the year                                                                           |
+| YY                       | last 2 digits of the year                                                                           |
+| Y                        | last digit of the year                                                                              |
 | IYYY                     | ISO 8601 week\-numbering year (4 or more digits)                                                    |
 | IYY                      | The last 2 digits of ISO 8601 week\-numbering year                                                  |
 | IY                       | The last digit of ISO 8601 week\-numbering year                                                     |
@@ -82,7 +82,7 @@ The following table shows the valid timestamp format strings:
 | Month                    | Full capitalized English month name                                                                 |
 | month                    | Full lowercase English month name                                                                   |
 | MON                      | Abbreviated uppercase month name e.g., JAN, FEB, etc.                                               |
-| Mon                      | Week number of the year (1\-53\) (the first week starts on the first day of the year)               |
+| Mon                      | Abbreviated capitalized month name e.g., Jan, Feb, etc.                                             |
 | mon                      | Abbreviated capitalized month name e.g., Jan, Feb,  etc.                                            |
 | MM                       | month number from 01 to 12                                                                          |
 | DAY                      | Full uppercase day name                                                                             |
@@ -97,7 +97,7 @@ The following table shows the valid timestamp format strings:
 | D                        | Day of the week, Sunday (1\) to Saturday (7\)                                                       |
 | ID                       | ISO 8601 day of the week, Monday (1\) to Sunday (7\)                                                |
 | W                        | Week of month (1\-5\) (the first week starts on the first day of the month)                         |
-| WW                       | Century e.g., 21, 22, etc.                                                                          |
+| WW                       | Week number of the year (1-53) (the first week starts on the first day of the year)                 |
 | IW                       | Week number of ISO 8601 week\-numbering year (01\-53; the first Thursday of the year is in week 1\) |
 | CC                       | Century e.g, 21, 22, etc.                                                                           |
 | J                        | Julian Day (integer days since November 24, 4714 BC at midnight UTC)                                |

@@ -119,6 +119,20 @@ export async function proxy(req) {
       }
     }
 
+    // Bare /docs has no page of its own. Agents / Accept: markdown are handled above
+    // (served /docs/llms.txt); everyone else (browsers) is redirected to the intro.
+    // This redirect lives here, not in next.config, so it runs after the markdown check.
+    // Note: trailing slash (/docs/) intentionally not handled here — Next.js
+    // normalizes trailing slashes before middleware on most paths, and the matcher
+    // pattern '/docs' does not match '/docs/', so it falls through harmlessly.
+    if (pathname === '/docs') {
+      const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
+      // The /docs response is content-negotiated (agents/markdown get llms.txt above),
+      // so the redirect must vary on Accept to stay correct in shared caches.
+      res.headers.set('Vary', 'Accept');
+      return res;
+    }
+
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
     // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
     if (isContentRoute(pathname)) {
@@ -214,6 +228,7 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
+    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
   ],

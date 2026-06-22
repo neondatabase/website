@@ -1,11 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks 1`] = `
-"# MDX Conversion Test Page
-
-Exercises every component the processor handles
-
-## Admonition variants
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Admonition variants 1`] = `
+"## Admonition variants
 
 **Note:** This is a simple note with inline content.
 
@@ -20,269 +16,25 @@ The API endpoint has been deprecated.
 - Step three
 
 **Coming Soon:** This feature is coming soon.
-
-## CodeTabs
-
-**Node.js**
-
-\`\`\`javascript
-const { Client } = require('pg');
-const client = new Client(process.env.DATABASE_URL);
-await client.connect();
-\`\`\`
-
-**Python**
-
-\`\`\`python
-import psycopg2
-conn = psycopg2.connect(os.environ["DATABASE_URL"])
-\`\`\`
-
-## Tabs and TabItem
-
-**SQL**
-
-\`\`\`sql
-CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT);
-\`\`\`
-
-**CLI**
-
-\`\`\`bash
-neon databases create --name mydb
-\`\`\`
-
-## Steps
-
-### Create a project
-
-Go to the Neon Console and create a new project.
-
-### Connect your app
-
-Use the connection string from your project dashboard.
-
-### Run migrations
-
-Apply your schema migrations to the database.
-
-## DetailIconCards
-
-- [Prisma](https://neon.com/docs/guides/prisma): Connect Prisma ORM to Neon
-- [Next.js](https://neon.com/docs/guides/nextjs): Build Next.js apps with Neon
-
-## TechCards
-
-- [Node.js](https://neon.com/docs/guides/node): Connect a Node.js app to Neon
-- [Python](https://neon.com/docs/guides/python): Connect a Python app to Neon
-
-## DocsList
-
-**Related guides:**
-
-- [Prisma integration](https://neon.com/docs/guides/prisma)
-- [Drizzle ORM guide](https://neon.com/docs/guides/drizzle)
-
-## InfoBlock
-
-This is important information inside an InfoBlock. It can contain **bold text** and [links](https://neon.com/docs/introduction).
-
-## DefinitionList
-
-Compute Unit (CU)
-: A measure of computing resources (CPU and RAM) allocated to a Neon compute.
-
-Endpoint
-: The connection point for your database, providing the hostname and port for client connections.
-
-## CheckList and CheckItem
-
-## Production checklist
-
-- [ ] [Enable connection pooling](https://neon.com/docs/test/mdx-conversion-test#pooling)
-    Connection pooling reduces latency and improves throughput.
-- [ ] [Set up monitoring](https://neon.com/docs/test/mdx-conversion-test#monitoring)
-    Configure alerts for storage and compute usage.
-
-## CTA
-
-> **Get started with Neon**
->
-> Create a free account and start building.
->
-> [Sign up](https://console.neon.tech/signup)
-
-## TwoColumnLayout
-
-## Installation
-
-Method: \`npm install @neondatabase/serverless\`
-
-Install the Neon serverless driver from npm.
-
-**Example:**
-
-\`\`\`javascript
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL);
-const result = await sql\`SELECT * FROM users\`;
-\`\`\`
-
-## Configure environment
-
-Set the \`DATABASE_URL\` environment variable.
-
-For more details, see the [driver documentation](https://neon.com/docs/serverless/serverless-driver).
-
-## LinkPreview
-
-Values must be provided in [RFC 3339 format](https://tools.ietf.org/html/rfc3339) (Date and Time on the Internet: Timestamps).
-
-## YoutubeIframe
-
-[Watch on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)
-
-## CommunityBanner
-
-Share your feedback: [Join Discord](https://discord.gg/neon)
-
-## CompactCards
-
-- [Next.js prompt](https://neon.com/prompts/nextjs-prompt.md): Copy a Next.js setup prompt
-- [Django](https://neon.com/docs/guides/django): Open the Django guide
-
-## MegaLink
-
-**Case Study** Retool uses the Neon API to manage over 300,000 databases. [Learn more](https://neon.com/blog/retool-case-study)
-
-## QuoteBlock
-
-> Neon's branching feature transformed our development workflow.
->
-> — Jane Smith, Acme Corp
->
-> [Read case study](https://neon.com/blog/acme-case-study)
-
-## Testimonial
-
-> The serverless scaling is exactly what we needed.
->
-> — John Doe, StartupCo
-
-## FeatureList
-
-### Instant provisioning
-
-Create a database in milliseconds via API.
-
-### Autoscaling
-
-Scale compute up and down based on demand.
-
-## ProgramForm
-
-[Apply for the Agent Plan](https://neon.com/use-cases/ai-agents)
-
-## Shared content components
-
-### FeatureBeta (parameterless)
-
-**Note: Beta**
-
-This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
-
-### EarlyAccess (parameterless)
-
-**Coming Soon: Early Access**
-
-This feature is available for members of our [Early Access Program](https://neon.com/docs/introduction/early-access). Read more about joining up [here](https://neon.com/docs/introduction/early-access).
-
-### FeatureBetaProps (with prop)
-
-**Note: Beta**
-
-The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
-
-### EarlyAccessProps (with prop)
-
-**Coming Soon: Early Access**
-
-**Schema Diff** is available for members of our Early Access Program.<br/>
-[Sign up](https://neon.com/docs/introduction/early-access) and help shape the future of Neon.
-
-### AgentSkillsTip (with prop)
-
-**Tip: AI assistant support**
-
-Neon's [Agent Skills](https://neon.com/docs/ai/agent-skills) give AI coding assistants context about branching and other Neon features. Install them for more accurate code suggestions.
-
-### MCPTools
-
-## Supported actions (tools)
-
-The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
-
-**Project management:**
-
-- \`list_projects\`: Lists the first 10 Neon projects in your account, providing a summary of each project. If you can't find a specific project, increase the limit by passing a higher value to the limit parameter.
-- \`list_shared_projects\`: Lists Neon projects shared with the current user. Supports a search parameter and limiting the number of projects returned (default: 10).
-- \`describe_project\`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
-- \`create_project\`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
-- \`delete_project\`: Deletes an existing Neon project and all its associated resources.
-- \`list_organizations\`: Lists all organizations that the current user has access to. Optionally filter by organization name or ID using the search parameter.
-
-**Branch management:**
-
-- \`create_branch\`: Creates a new branch within a specified Neon project. By default the branch is created from the project's default branch; pass optional \`parentId\` (a branch ID such as \`br-...\`) to fork from an existing non-default branch instead. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
-- \`delete_branch\`: Deletes an existing branch from a Neon project.
-- \`describe_branch\`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
-- \`list_branch_computes\`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, last active time, and autoscaling information.
-- \`compare_database_schema\`: Shows the schema diff between the child branch and its parent.
-- \`reset_from_parent\`: Resets the current branch to its parent's state, discarding local changes. Automatically preserves to backup if branch has children, or optionally preserve on request with a custom name.
-
-**SQL query execution:**
-
-- \`get_connection_string\`: Returns your database connection string.
-- \`run_sql\`: Executes a single SQL query against a specified Neon database. Supports both read and write operations.
-- \`run_sql_transaction\`: Executes a series of SQL queries within a single transaction against a Neon database.
-- \`get_database_tables\`: Lists all tables within a specified Neon database.
-- \`describe_table_schema\`: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
-
-**Database migrations (schema changes):**
-
-- \`prepare_database_migration\`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
-- \`complete_database_migration\`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
-
-**SQL querying and optimization:**
-
-- \`list_slow_queries\`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
-- \`explain_sql_statement\`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
-- \`prepare_query_tuning\`: Analyzes query performance and suggests optimizations, like index creation. Creates a temporary branch for safely testing these optimizations.
-- \`complete_query_tuning\`: Finalizes query tuning by either applying optimizations to the main branch or discarding them. Cleans up the temporary tuning branch.
-
-**Neon Auth:**
-
-To set up Neon Auth in your application code, use [Agent Skills](https://neon.com/docs/ai/agent-skills) after running \`npx neonctl@latest init\`. See [Set up Neon Auth with your AI editor](https://neon.com/docs/auth/overview#set-up-with-your-ai-editor).
-
-- \`provision_neon_auth\`: Provisions [Neon Auth](https://neon.com/docs/auth/overview) for a project's branch so you can add authentication to your app without standing up a separate auth service. If Neon Auth is already provisioned, this returns the existing configuration instead of erroring.
-- \`get_neon_auth_config\`: Returns the Neon Auth configuration for a branch, including the auth \`base_url\`, \`jwks_url\`, trusted origins, allowed auth methods (for example email and password), configured OAuth providers, and email provider settings. Secrets such as OAuth client secrets and SMTP passwords are redacted.
-- \`configure_neon_auth\`: Updates the Neon Auth configuration for a branch. Use it to manage trusted origins, toggle localhost, enable or tune email and password sign-in, add or update OAuth providers, configure the email provider, and send a test email.
-
-**Neon Data API:**
-
-- \`provision_neon_data_api\`: Provisions the Neon Data API for a branch, enabling HTTP-based Data API access with optional JWT authentication.
-
-**Search and discovery:**
-
-- \`search\`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
-- \`fetch\`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
-
-In project-scoped mode, \`search\` and \`fetch\` are not available.
-
-**Documentation and resources:**
-
-- \`list_docs_resources\`: Lists all available Neon documentation pages by fetching the docs index. Returns page URLs and titles that can be fetched individually using the \`get_doc_resource\` tool.
-- \`get_doc_resource\`: Fetches a specific Neon documentation page as markdown content. Use the \`list_docs_resources\` tool first to discover available page slugs, then pass the slug to this tool.
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Available tools 1`] = `
+"## Available tools
+
+Tools are grouped into categories. Use the \`?category=\` URL parameter to restrict which categories are active. You can pass it more than once to enable multiple categories.
+
+| Category                        | What it enables                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| Project management (\`projects\`) | List, create, describe, and delete projects and organizations                       |
+| Branch management (\`branches\`)  | Create branches, compare schemas, reset branches to parent state                    |
+| Schema (\`schema\`)               | Inspect tables and columns; run schema changes via a safe temporary branch workflow |
+| SQL (\`querying\`)                | Execute queries and transactions; inspect database structure                        |
+| Neon Auth (\`neon_auth\`)         | Set up and configure app authentication for a branch                                |
+| Neon Data API (\`data_api\`)      | Enable HTTP-based Data API access for a branch                                      |
+| Documentation (\`docs\`)          | Look up Neon documentation from within your assistant (no OAuth required)           |
+
+Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](https://neon.com/docs/ai/neon-mcp-server#project-scoped-mode).
 
 ### LinkAPIKey
 
@@ -293,12 +45,6 @@ In project-scoped mode, \`search\` and \`fetch\` are not available.
 **Important: Enrollment Pause for Logical Replication Beta**
 
 We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
-
-### ComingSoon
-
-**Coming Soon: Feature coming soon**
-
-This feature is currently available to members in our Early Access Program. Sign up [here](https://console.neon.tech/app/settings/early-access) or from your user profile settings in the [Neon Console](https://console.neon.tech/app/settings/early-access).
 
 ### PrivatePreview
 
@@ -331,43 +77,113 @@ Replicating data to Neon, where Neon is configured as a subscriber in a Postgres
 If you are looking to migrate your database to Neon, you may want to try our new **Migration Assistant**, which can help. Read the [guide](https://neon.com/docs/import/migration-assistant) to learn more.
 
 ### NextSteps
+"
+`;
 
-## Next steps
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CTA 1`] = `
+"## CTA
 
-- [Import data into your database](https://neon.com/docs/import/migrate-intro)
-- [Integrate database branching into your dev workflow](https://neon.com/docs/get-started/workflow-primer)
-- [Secure your app with the Neon Data API](https://neon.com/docs/data-api/get-started)
-- [Set up Neon Auth for your app](https://neon.com/docs/auth/overview)
+> **Get started with Neon**
+>
+> Create a free account and start building.
+>
+> [Sign up](https://console.neon.tech/signup)
+"
+`;
 
-### NewPricing
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CheckList and CheckItem 1`] = `
+"## CheckList and CheckItem
+"
+`;
 
-**Coming Soon: New pricing plans**
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CodeTabs 1`] = `
+"## CodeTabs
 
-On February 19th, 2024, Neon will launch new, simplified pricing plans. You can see the [details of all the plans here](https://neon.com/2024-plan-updates).
+**Node.js**
 
-### AzureRegionsDeprecation
+\`\`\`javascript
+const { Client } = require('pg');
+const client = new Client(process.env.DATABASE_URL);
+await client.connect();
+\`\`\`
 
-**Warning: Azure regions deprecation**
+**Python**
 
-Neon Azure regions (\`azure-eastus2\`, \`azure-westus3\`, \`azure-gwc\`) are deprecated. You can no longer create new projects in Azure regions. Existing Azure projects continue to be supported until further notice.
+\`\`\`python
+import psycopg2
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+\`\`\`
+"
+`;
 
-If you have active projects in Azure regions, see [Azure regions deprecation](https://neon.com/docs/import/azure-regions-deprecation) for additional information and recommendations.
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CommunityBanner 1`] = `
+"## CommunityBanner
 
-### ConsumptionAccountApiDeprecation
+Share your feedback: [Join Discord](https://discord.gg/neon)
+"
+`;
 
-**Warning: Deprecation notice: GET /consumption_history/account**
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > CompactCards 1`] = `
+"## CompactCards
 
-The **[Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)** endpoint (\`GET /consumption_history/account\`) is **deprecated**, with a planned sunset of **June 1, 2026**. Migrate to **[Query consumption metrics](https://neon.com/docs/guides/consumption-metrics)** for invoice-aligned project metrics, or to the **[legacy project metrics endpoint](https://neon.com/docs/guides/consumption-metrics-legacy#project-level-endpoint)** (\`GET /consumption_history/projects\`) if you need legacy metrics per project.
+- [Next.js prompt](https://neon.com/prompts/nextjs-prompt.md): Copy a Next.js setup prompt
+- [Django](https://neon.com/docs/guides/django): Open the Django guide
+"
+`;
 
-## Ignored components
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Configure environment 1`] = `
+"## Configure environment
 
-[View prompt](https://neon.com/prompts/test.md)
+Set the \`DATABASE_URL\` environment variable.
 
+For more details, see the [driver documentation](https://neon.com/docs/serverless/serverless-driver).
+"
+`;
 
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > DefinitionList 1`] = `
+"## DefinitionList
 
+Compute Unit (CU)
+: A measure of computing resources (CPU and RAM) allocated to a Neon compute.
 
+Endpoint
+: The connection point for your database, providing the hostname and port for client connections.
+"
+`;
 
-## HTML passthrough
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > DetailIconCards 1`] = `
+"## DetailIconCards
+
+- [Prisma](https://neon.com/docs/guides/prisma): Connect Prisma ORM to Neon
+- [Next.js](https://neon.com/docs/guides/nextjs): Build Next.js apps with Neon
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > DocsList 1`] = `
+"## DocsList
+
+**Related guides:**
+
+- [Prisma integration](https://neon.com/docs/guides/prisma)
+- [Drizzle ORM guide](https://neon.com/docs/guides/drizzle)
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > FeatureList 1`] = `
+"## FeatureList
+
+### Instant provisioning
+
+Create a database in milliseconds via API.
+
+### Autoscaling
+
+Scale compute up and down based on demand.
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > HTML passthrough 1`] = `
+"## HTML passthrough
 
 <details>
 
@@ -387,24 +203,53 @@ Line break in a table:
 | Feature   | Status               |
 | --------- | -------------------- |
 | Branching | GA<br/>Available now |
+"
+`;
 
-## Nested components (known edge case)
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Ignored components 1`] = `
+"## Ignored components
 
-**Note: Code example**
+[View prompt](https://neon.com/prompts/test.md)
 
-**JavaScript**
+
+
+
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > InfoBlock 1`] = `
+"## InfoBlock
+
+This is important information inside an InfoBlock. It can contain **bold text** and [links](https://neon.com/docs/introduction).
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Installation 1`] = `
+"## Installation
+
+Method: \`npm install @neondatabase/serverless\`
+
+Install the Neon serverless driver from npm.
+
+**Example:**
 
 \`\`\`javascript
+import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
+const result = await sql\`SELECT * FROM users\`;
 \`\`\`
+"
+`;
 
-**Python**
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > LinkPreview 1`] = `
+"## LinkPreview
 
-\`\`\`python
-conn = psycopg2.connect(os.environ["DATABASE_URL"])
-\`\`\`
+Values must be provided in [RFC 3339 format](https://tools.ietf.org/html/rfc3339) (Date and Time on the Internet: Timestamps).
+"
+`;
 
-## Markdown fundamentals
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Markdown fundamentals 1`] = `
+"## Markdown fundamentals
 
 Regular paragraph with **bold**, _italic_, \`inline code\`, and a [link](https://neon.com/docs/introduction).
 
@@ -424,5 +269,184 @@ SELECT * FROM users WHERE active = true;
 | ------ | ------ | ----------- |
 | id     | serial | Primary key |
 | name   | text   | User's name |
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > MegaLink 1`] = `
+"## MegaLink
+
+**Case Study** Retool uses the Neon API to manage over 300,000 databases. [Learn more](https://neon.com/blog/retool-case-study)
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Nested components (known edge case) 1`] = `
+"## Nested components (known edge case)
+
+**Note: Code example**
+
+**JavaScript**
+
+\`\`\`javascript
+const sql = neon(process.env.DATABASE_URL);
+\`\`\`
+
+**Python**
+
+\`\`\`python
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+\`\`\`
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Next steps 1`] = `
+"## Next steps
+
+- [Import data into your database](https://neon.com/docs/import/migrate-intro)
+- [Integrate database branching into your dev workflow](https://neon.com/docs/get-started/workflow-primer)
+- [Secure your app with the Neon Data API](https://neon.com/docs/data-api/get-started)
+- [Set up Neon Auth for your app](https://neon.com/docs/auth/overview)
+
+### NewPricing
+
+**Coming Soon: New pricing plans**
+
+On February 19th, 2024, Neon will launch new, simplified pricing plans. You can see the [details of all the plans here](https://neon.com/2024-plan-updates).
+
+### AzureRegionsDeprecation
+
+**Warning: Azure regions deprecation**
+
+Neon Azure regions (\`azure-eastus2\`, \`azure-westus3\`, \`azure-gwc\`) are deprecated. You can no longer create new projects in Azure regions. Existing Azure projects continue to be supported until further notice.
+
+If you have active projects in Azure regions, see [Azure regions deprecation](https://neon.com/docs/import/azure-regions-deprecation) for additional information and recommendations.
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Production checklist 1`] = `
+"## Production checklist
+
+- [ ] [Enable connection pooling](https://neon.com/docs/test/mdx-conversion-test#pooling)
+    Connection pooling reduces latency and improves throughput.
+- [ ] [Set up monitoring](https://neon.com/docs/test/mdx-conversion-test#monitoring)
+    Configure alerts for storage and compute usage.
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > ProgramForm 1`] = `
+"## ProgramForm
+
+[Apply for the Agent Plan](https://neon.com/use-cases/ai-agents)
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > QuoteBlock 1`] = `
+"## QuoteBlock
+
+> Neon's branching feature transformed our development workflow.
+>
+> — Jane Smith, Acme Corp
+>
+> [Read case study](https://neon.com/blog/acme-case-study)
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Shared content components 1`] = `
+"## Shared content components
+
+### FeatureBeta (parameterless)
+
+**Note: Beta**
+
+This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+
+### FeatureBetaProps (with prop)
+
+**Note: Beta**
+
+The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+### EarlyAccessProps (with prop)
+
+**Coming Soon: Early access**
+
+**Schema Diff** is currently in early access.
+
+### AgentSkillsTip (with prop)
+
+**Tip: AI assistant support**
+
+Neon's [Agent Skills](https://neon.com/docs/ai/agent-skills) give AI coding assistants context about branching and other Neon features. Install them for more accurate code suggestions.
+
+### MCPTools
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Steps 1`] = `
+"## Steps
+
+### Create a project
+
+Go to the Neon Console and create a new project.
+
+### Connect your app
+
+Use the connection string from your project dashboard.
+
+### Run migrations
+
+Apply your schema migrations to the database.
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Tabs and TabItem 1`] = `
+"## Tabs and TabItem
+
+**SQL**
+
+\`\`\`sql
+CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT);
+\`\`\`
+
+**CLI**
+
+\`\`\`bash
+neon databases create --name mydb
+\`\`\`
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > TechCards 1`] = `
+"## TechCards
+
+- [Node.js](https://neon.com/docs/guides/node): Connect a Node.js app to Neon
+- [Python](https://neon.com/docs/guides/python): Connect a Python app to Neon
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > Testimonial 1`] = `
+"## Testimonial
+
+> The serverless scaling is exactly what we needed.
+>
+> — John Doe, StartupCo
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > TwoColumnLayout 1`] = `
+"## TwoColumnLayout
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > YoutubeIframe 1`] = `
+"## YoutubeIframe
+
+[Watch on YouTube](https://youtube.com/watch?v=dQw4w9WgXcQ)
+"
+`;
+
+exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) > should convert every component without raw MDX leaks > preamble 1`] = `
+"# MDX Conversion Test Page
+
+Exercises every component the processor handles
 "
 `;

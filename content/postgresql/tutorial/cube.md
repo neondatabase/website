@@ -6,7 +6,7 @@ page_description: >-
   grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cube/'
 ogImage: /postgresqltutorial/sales-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUPING SETS
@@ -26,7 +26,7 @@ The CUBE subclause is standard PostgreSQL, so everything you learn here works on
 
 PostgreSQL `CUBE` is a subclause of the [`GROUP BY`](postgresql-group-by) clause. The `CUBE` allows you to generate multiple grouping sets.
 
-A grouping set is a set of columns to which you want to group. For more information on the grouping sets, check it out the [`GROUPING SETS`](postgresql-grouping-sets) tutorial.
+A grouping set is a set of columns to which you want to group. For more information on the grouping sets, check out the [`GROUPING SETS`](postgresql-grouping-sets) tutorial.
 
 The following illustrates the syntax of the `CUBE` subclause:
 

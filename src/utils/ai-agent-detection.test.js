@@ -163,12 +163,12 @@ describe('getMarkdownPath', () => {
 
     it('should convert /programs/agents to markdown path', () => {
       const result = getMarkdownPath('/programs/agents');
-      expect(result).toBe('/md/pages/programs/agents.md');
+      expect(result).toBe('/md/programs/agents.md');
     });
 
     it('should convert /use-cases/ai-agents to markdown path', () => {
       const result = getMarkdownPath('/use-cases/ai-agents');
-      expect(result).toBe('/md/pages/use-cases/ai-agents.md');
+      expect(result).toBe('/md/use-cases/ai-agents.md');
     });
 
     it('should handle nested docs paths', () => {
@@ -186,6 +186,21 @@ describe('getMarkdownPath', () => {
     it('should exclude index page /branching', () => {
       const result = getMarkdownPath('/branching');
       expect(result).toBeNull();
+    });
+
+    it('should alias /docs.md to the curated llms.txt index', () => {
+      const result = getMarkdownPath('/docs.md');
+      expect(result).toBe('/docs/llms.txt');
+    });
+
+    it('should alias bare /docs to the curated llms.txt index (agent / Accept: markdown)', () => {
+      const result = getMarkdownPath('/docs');
+      expect(result).toBe('/docs/llms.txt');
+    });
+
+    it('should not alias docs subpaths to llms.txt', () => {
+      const result = getMarkdownPath('/docs/introduction');
+      expect(result).toBe('/md/docs/introduction.md');
     });
 
     it('should resolve /docs/changelog to custom markdown path', () => {
@@ -279,9 +294,9 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/postgresql.md');
     });
 
-    it('should map /programs.md to /md/pages/programs.md (file may not exist)', () => {
+    it('should map /programs.md to /md/programs.md', () => {
       const result = getMarkdownPath('/programs.md');
-      expect(result).toBe('/md/pages/programs.md');
+      expect(result).toBe('/md/programs.md');
     });
   });
 });

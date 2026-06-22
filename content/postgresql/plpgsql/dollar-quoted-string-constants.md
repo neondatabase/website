@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/dollar-quoted-string-constants/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: Introduction to PostgreSQL PL/pgSQL
@@ -183,7 +183,7 @@ $$
 $$;
 ```
 
-Now, you can place any piece of code between the `$$` and `$$` without using the need to escape single quotes.
+Now, you can place any piece of code between the `$$` and `$$` without the need to escape single quotes.
 
 ## Using dollar\-quoted string constants in stored procedures
 

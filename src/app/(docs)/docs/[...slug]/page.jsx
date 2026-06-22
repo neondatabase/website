@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
-import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
+import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
@@ -11,12 +11,6 @@ import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
-
-const isUnusedOrSharedContent = (slug) =>
-  slug.includes('unused/') ||
-  slug.includes('shared-content/') ||
-  slug.includes('README') ||
-  slug.includes('GUIDE_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
