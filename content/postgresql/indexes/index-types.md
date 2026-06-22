@@ -6,7 +6,7 @@ page_description: >-
   to use them properly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/'
 ogImage: ''
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Indexes

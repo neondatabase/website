@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:07:32.151Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Storage" description="Neon Storage is in private preview. Drop your email and we'll reach out with access." />

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 summary: >-
   Neon legacy plans (Free, Launch, Scale, Business, and Enterprise) are
   discontinued pricing tiers no longer available to new signups. Existing paid

@@ -7,7 +7,7 @@ summary: >-
   regions. Always use a direct (unpooled) connection string for both
   operations; pooled connections are not supported and will cause errors.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.

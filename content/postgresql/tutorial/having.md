@@ -6,7 +6,7 @@ page_description: >-
   filter groups of rows based on a specified condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having/'
 ogImage: /postgresqltutorial/postgresql-having.svg
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUP BY

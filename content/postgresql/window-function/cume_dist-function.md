@@ -8,7 +8,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Window Functions

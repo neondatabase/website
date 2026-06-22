@@ -6,7 +6,7 @@ summary: >-
   for JavaScript, boto3, and the AWS CLI. Not all S3 operations are supported.
   This page lists what works, what returns 501, and known limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <PrivatePreviewEnquire/>

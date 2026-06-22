@@ -7,7 +7,7 @@ summary: >-
   autoscaling up to 16 CU, and horizontal scaling via read replicas for
   offloading vector similarity search workloads at no extra storage cost.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.

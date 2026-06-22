@@ -10,7 +10,7 @@ summary: >-
   IDE autocompletion, and structured Axios error handling. Install via npm,
   yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <InfoBlock>

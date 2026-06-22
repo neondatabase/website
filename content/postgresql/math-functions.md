@@ -6,7 +6,7 @@ page_description: >-
   perform various math operations quickly and effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/math-functions.png'
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TO_NUMBER() Function

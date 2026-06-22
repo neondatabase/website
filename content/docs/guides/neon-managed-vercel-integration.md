@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:42.244Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <InfoBlock>

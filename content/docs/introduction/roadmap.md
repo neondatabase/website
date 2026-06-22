@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.

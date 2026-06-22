@@ -10,7 +10,7 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-16T18:44:07.041Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <EarlyAccessProps feature_name="lakebase_text" />

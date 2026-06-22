@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:08:12.470Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <PrivatePreviewEnquire/>

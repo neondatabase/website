@@ -11,7 +11,7 @@ summary: >-
   18; use the Neon Console or API to create projects on earlier Postgres
   versions.
 enableTableOfContents: true
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 redirectFrom:
   - /docs/reference/cli-projects
 ---

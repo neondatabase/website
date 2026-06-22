@@ -4,7 +4,7 @@ subtitle: Using the OpenTelemetry (OTEL) integration in Neon
 author: nagesh-bansal
 enableTableOfContents: true
 createdAt: '2026-06-12T00:00:00.000Z'
-updatedOn: '2026-06-15T13:17:56.974Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 [SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that brings logs, metrics, and traces together in one application. [Neon's OpenTelemetry integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs to SigNoz, so you can monitor your database alongside the rest of your stack.

@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-15T17:47:53.882Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <PrivatePreviewEnquire/>

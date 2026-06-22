@@ -7,7 +7,7 @@ summary: >-
   Use them for AI agents, WebSocket servers, and webhook handlers that need
   compute next to their data.
 enableTableOfContents: true
-updatedOn: '2026-06-16T19:09:47.023Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Functions" description="Neon Functions are in private preview. Drop your email and we'll reach out with access." />

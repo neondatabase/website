@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Zed and Neon MCP Serv
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This guide shows how to use [Zed](https://zed.dev) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.

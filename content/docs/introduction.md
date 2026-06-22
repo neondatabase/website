@@ -13,7 +13,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-15T19:07:32.151Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <TwinPaths>

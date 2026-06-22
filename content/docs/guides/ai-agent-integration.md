@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -71,13 +71,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
-| ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Limit                    | Free Organization | Paid Organization       | Notes                                                                                                            |
+| ------------------------ | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| **Max manual snapshots** | 1 per project     | 100 per project         | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
+| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU            | CU = Compute Units (~4GB RAM per CU)                                                                             |
+| **History window**       | 1 day             | Up to 7 days            | Point-in-time recovery window                                                                                    |
+| **Min auto-suspend**     | 5 minutes         | 1 minute                | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 

@@ -6,7 +6,7 @@ page_description: >-
   access a row that follows the current row, at a specific physical offset.
 prev_url: index.html
 ogImage: /postgresqltutorial/Sales-sample-table.png
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAST_VALUE Function

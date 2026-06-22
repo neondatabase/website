@@ -8,7 +8,7 @@ summary: >-
   your driver requires a native connection. A serverless driver enables
   WebSocket and HTTP for edge runtimes where TCP is unavailable.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <InfoBlock>

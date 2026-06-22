@@ -9,7 +9,7 @@ summary: >-
   or Neon Auth. Collaborators have no organization-level access and are limited
   to the specific projects they have been invited to.
 enableTableOfContents: true
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.

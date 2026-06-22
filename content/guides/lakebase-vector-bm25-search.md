@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-19T10:53:44.178Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <RequestForm type="lakebase-search" />

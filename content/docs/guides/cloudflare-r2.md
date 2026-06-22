@@ -11,7 +11,7 @@ summary: >-
   setup, CORS configuration, metadata schema, and backend endpoints in
   JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask, boto3, psycopg2).
 enableTableOfContents: true
-updatedOn: '2026-06-19T20:06:14.133Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.

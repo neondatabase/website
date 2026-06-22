@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-17T09:53:50.753Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 <EarlyAccessProps feature_name="Lakebase Search" />

@@ -4,7 +4,7 @@ subtitle: 'Connect Claude Desktop to Neon to manage projects, run queries, and m
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-06T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 This guide shows how to connect Claude Desktop to the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) so you can manage your Neon Postgres databases.

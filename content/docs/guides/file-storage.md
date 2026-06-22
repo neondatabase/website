@@ -11,7 +11,7 @@ summary: >-
   a relational store for querying and filtering metadata without building a
   native file store.
 enableTableOfContents: true
-updatedOn: '2026-06-19T20:06:14.133Z'
+updatedOn: '2026-06-22T12:42:26.466Z'
 ---
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.
