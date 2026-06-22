@@ -184,7 +184,7 @@ const CARD_THEMES = {
     icon: 'text-gray-new-50 dark:text-gray-new-60',
     title: 'text-black-pure dark:text-white',
     description: 'text-gray-new-50',
-    tag: 'px-2.5 font-mono text-[0.8125rem] font-medium tracking-normal',
+    tag: 'flex items-center justify-center px-2.5 font-mono text-xs leading-none font-medium tracking-normal',
     withPattern: false,
   },
   'green-dotted': {
@@ -255,6 +255,7 @@ const DetailIconCards = ({
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
+                cols === 3 && 'p-4 md:p-5',
                 withNumbers &&
                   'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
                 !withNumbers && cardTheme.card
@@ -279,7 +280,8 @@ const DetailIconCards = ({
                   size="xs"
                   className={cn(
                     'absolute z-10 h-6',
-                    cardTheme.tag ? 'top-5 right-5' : 'top-3.5 right-3.5',
+                    'top-3.5 right-3.5',
+                    cols === 3 && 'top-4 right-4',
                     cardTheme.tag
                   )}
                 />
@@ -306,6 +308,7 @@ const DetailIconCards = ({
                 <p
                   className={cn(
                     'text-base leading-snug tracking-extra-tight',
+                    cols === 3 && 'text-[0.9375rem] md:text-base/snug',
                     !withNumbers && cardTheme.description
                   )}
                 >

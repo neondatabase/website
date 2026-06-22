@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-19T13:59:31.895Z'
+updatedOn: '2026-06-22T10:15:13.814Z'
 ---
 
 ## Getting started
@@ -37,7 +37,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. <br />
 Every service is agent-ready: instant, branchable, and serverless.
 
-<DetailIconCards className="my-7! gap-6" cols={2} theme="green-flat">
+<DetailIconCards className="my-7!" cols={3} theme="green-flat">
 
 <a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
@@ -53,7 +53,9 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 </DetailIconCards>
 
-<RequestForm type="backend-platform" />
+## Early access to the Neon backend platform
+
+<RequestForm type="backend-platform" title="Join the waitlist" buttonText="Notify me" />
 
 ## Connect your framework
 
