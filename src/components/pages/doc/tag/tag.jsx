@@ -8,6 +8,8 @@ const themes = {
   'coming soon':
     'text-[#92400E] dark:text-[#FCD34D] bg-[#FEF3C7] dark:bg-[#78350F]/30 border border-[#FDE68A] dark:border-[#92400E]/50',
   deprecated: 'text-[#1897DF] dark:text-blue-80 bg-[#1897DF]/10 dark:bg-blue-80/10',
+  'private preview':
+    'text-gray-new-30 bg-gray-new-90 font-mono dark:text-gray-new-70 dark:bg-gray-new-15',
   default: 'text-gray-new-50 dark:text-gray-new-80 bg-gray-new-50/10 dark:bg-gray-new-80/10',
 };
 
@@ -21,9 +23,9 @@ const Tag = ({ className, label, size }) => (
   <span
     className={cn(
       'block w-fit rounded-[40px] leading-none font-semibold whitespace-nowrap uppercase',
-      className,
       themes?.[label] || themes.default,
-      sizes?.[size] || sizes.md
+      sizes?.[size] || sizes.md,
+      className
     )}
   >
     {label}
