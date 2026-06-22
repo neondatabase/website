@@ -68,7 +68,7 @@ const TemplatePage = async (props) => {
     },
   ];
   return (
-    <Layout headerWithBorder isHeaderSticky>
+    <Layout isHeaderSticky>
       <section>
         <Container
           className="relative mt-12 mb-[104px] w-full xl:mt-10 xl:mb-24 lg:mt-8 lg:mb-20 sm:mt-6 sm:mb-[72px]"
