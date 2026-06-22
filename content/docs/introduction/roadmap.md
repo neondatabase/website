@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-06-22T16:36:18.455Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -49,7 +49,6 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Clouds & regions
 
 - Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
-- Private Networking on Azure
 - Google Cloud Platform (GCP) support (targeting late 2025)
 
 ### Database storage
