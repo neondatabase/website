@@ -30,6 +30,8 @@
 
 const fs = require('fs').promises;
 const fsSync = require('fs');
+const { fork } = require('child_process');
+const os = require('os');
 const path = require('path');
 
 const matter = require('gray-matter');
@@ -56,6 +58,33 @@ const externalCodeCache = new Map();
 const unknownComponents = [];
 const fetchFailures = [];
 const processingErrors = [];
+
+const isVerboseLogging = () => process.env.LLMS_PROCESSOR_VERBOSE === '1';
+
+const logFileProcessed = (message) => {
+  if (isVerboseLogging()) {
+    console.log(message);
+  }
+};
+
+const createProcessingStats = () => ({
+  createdDirs: new Set(),
+  filesWritten: 0,
+});
+
+const ensureOutputDirectory = async (dirPath, stats) => {
+  if (stats?.createdDirs?.has(dirPath)) return;
+
+  await fs.mkdir(dirPath, { recursive: true });
+  stats?.createdDirs?.add(dirPath);
+};
+
+const getRouteConcurrency = () => {
+  const configured = Number.parseInt(process.env.LLMS_PROCESSOR_ROUTE_CONCURRENCY || '', 10);
+  if (Number.isInteger(configured) && configured > 0) return configured;
+
+  return Math.max(1, Math.min(4, os.cpus().length));
+};
 
 /**
  * Parameterless shared content components - map of ComponentName -> template-name
@@ -2292,7 +2321,7 @@ function stripNavigationContext(content) {
  * Process a directory recursively.
  * Returns an array of { title, url } for every page written (used to build route indexes).
  */
-async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
+async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats = null) {
   const entries = await fs.readdir(inputDir, { withFileTypes: true });
   const pages = [];
 
@@ -2302,7 +2331,7 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
     if (entry.isDirectory()) {
       const dirRelPath = path.relative(baseContentDir, inputPath) + '/';
       if (isUnusedOrSharedContent(dirRelPath)) continue;
-      const subPages = await processDirectory(inputPath, outputDir, baseContentDir, rootDir);
+      const subPages = await processDirectory(inputPath, outputDir, baseContentDir, rootDir, stats);
       pages.push(...subPages);
     } else if (entry.name.endsWith('.md')) {
       const relativePath = path.relative(baseContentDir, inputPath);
@@ -2310,13 +2339,14 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
       const outputPath = path.join(outputDir, relativePath);
       const pageUrl = getPageUrl(inputPath, baseContentDir);
 
-      await fs.mkdir(path.dirname(outputPath), { recursive: true });
+      await ensureOutputDirectory(path.dirname(outputPath), stats);
 
       try {
         const { content, title } = await processFile(inputPath, pageUrl, rootDir);
         const withNav = addNavigationContext(content, relativePath, navigationMap);
         await fs.writeFile(outputPath, withNav);
-        console.log(`✓ ${relativePath}`);
+        stats && (stats.filesWritten += 1);
+        logFileProcessed(`✓ ${relativePath}`);
         if (pageUrl) {
           pages.push({ title: title || path.basename(entry.name, '.md'), url: `${pageUrl}.md` });
         }
@@ -2353,7 +2383,7 @@ const ROUTES_ALIASED_TO_LLMS = new Set(['docs']);
  * Generate a /${route}.md index file listing all pages in that route.
  * Called by processAllContent for every non-nested route after its files are written.
  */
-async function generateRouteIndex(route, pages, outputDir) {
+async function generateRouteIndex(route, pages, outputDir, stats = null) {
   const label = ROUTE_LABELS[route] || route.charAt(0).toUpperCase() + route.slice(1);
   // Writes to public/md/${route}.md — must match the destination in the
   // next.config.js beforeFiles rewrite: /${route}.md → /md/${route}.md.
@@ -2371,11 +2401,53 @@ async function generateRouteIndex(route, pages, outputDir) {
   ];
 
   await fs.writeFile(outputPath, lines.join('\n'));
-  console.log(`✓ ${route}.md (index, ${pages.length} pages)`);
+  stats && (stats.filesWritten += 1);
+  logFileProcessed(`✓ ${route}.md (index, ${pages.length} pages)`);
 }
 
 /**
- * Process all content routes (for postbuild integration)
+ * Process one content route. Used by both sequential processing and route workers.
+ */
+async function processContentRoute(route, srcPath, rootDir, options = {}) {
+  if (!navigationMap) {
+    navigationMap = buildNavigationMap(rootDir);
+  }
+
+  const outputDir = path.join(rootDir, 'public/md');
+  const inputDir = path.join(rootDir, srcPath);
+  // Use parent of inputDir as base so relative paths start with the dir name,
+  // not any intermediate segments (e.g. content/pages/programs → programs/...).
+  const baseContentDir = path.dirname(inputDir);
+  const stats = options.stats || createProcessingStats();
+  const startingFileCount = stats.filesWritten;
+
+  console.log(`Processing ${srcPath} -> public/md/${route}`);
+  const pages = await processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats);
+
+  if (!route.includes('/') && !ROUTES_ALIASED_TO_LLMS.has(route) && pages.length > 0) {
+    await generateRouteIndex(route, pages, outputDir, stats);
+  }
+
+  const filesWritten = stats.filesWritten - startingFileCount;
+  console.log(`Finished ${route}: ${filesWritten} markdown files`);
+
+  return {
+    route,
+    pages: pages.length,
+    filesWritten,
+  };
+}
+
+const throwIfProcessingErrors = () => {
+  if (processingErrors.length > 0) {
+    throw new Error(
+      `BUILD FAILED: ${processingErrors.length} file(s) failed to process. See errors above.`
+    );
+  }
+};
+
+/**
+ * Process all content routes (sequential mode)
  */
 async function processAllContent(contentRoutes, rootDir) {
   clearState();
@@ -2384,43 +2456,88 @@ async function processAllContent(contentRoutes, rootDir) {
   navigationMap = buildNavigationMap(rootDir);
   console.log(`Navigation map: ${navigationMap.size} pages with sibling links\n`);
 
-  const outputDir = path.join(rootDir, 'public/md');
+  const stats = createProcessingStats();
 
   for (const [route, srcPath] of Object.entries(contentRoutes)) {
-    const inputDir = path.join(rootDir, srcPath);
-    // Use parent of inputDir as base so relative paths start with the dir name,
-    // not any intermediate segments (e.g. content/pages/programs → programs/...).
-    const baseContentDir = path.dirname(inputDir);
-    console.log(`Processing ${srcPath} -> public/md/${route}`);
-    const pages = await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
-
-    if (!route.includes('/') && !ROUTES_ALIASED_TO_LLMS.has(route) && pages.length > 0) {
-      await generateRouteIndex(route, pages, outputDir);
-    }
+    await processContentRoute(route, srcPath, rootDir, { stats });
   }
 
-  // Build-time verification: fail if no markdown files were generated
-  try {
-    const allFiles = await fs.readdir(outputDir, { recursive: true });
-    const mdFiles = allFiles.filter((f) => f.endsWith('.md'));
-    if (mdFiles.length === 0) {
-      throw new Error('BUILD FAILED: No agent markdown files were generated!');
-    }
-    console.log(`\nGenerated ${mdFiles.length} markdown files for AI agents.`);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      throw new Error('BUILD FAILED: Output directory public/md/ does not exist!');
-    }
-    throw err;
+  if (stats.filesWritten === 0) {
+    throw new Error('BUILD FAILED: No agent markdown files were generated!');
   }
 
+  console.log(`\nGenerated ${stats.filesWritten} markdown files for AI agents.`);
   printBuildSummary(rootDir);
+  throwIfProcessingErrors();
+}
 
-  if (processingErrors.length > 0) {
-    throw new Error(
-      `BUILD FAILED: ${processingErrors.length} file(s) failed to process. See errors above.`
-    );
+const runWithConcurrency = async (items, concurrency, mapper) => {
+  const results = [];
+  let nextIndex = 0;
+
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  });
+
+  await Promise.all(workers);
+
+  return results;
+};
+
+const runRouteWorker = async ([route, srcPath], rootDir) =>
+  new Promise((resolve, reject) => {
+    const child = fork(__filename, ['--route', route, srcPath], {
+      cwd: rootDir,
+      env: {
+        ...process.env,
+        LLMS_PROCESSOR_VERBOSE: process.env.LLMS_PROCESSOR_VERBOSE || '0',
+      },
+      stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
+    });
+
+    let result = null;
+
+    child.stdout.on('data', (chunk) => process.stdout.write(chunk));
+    child.stderr.on('data', (chunk) => process.stderr.write(chunk));
+    child.on('message', (message) => {
+      if (message?.type === 'route-result') {
+        result = message.result;
+      }
+    });
+    child.on('error', reject);
+    child.on('exit', (code, signal) => {
+      if (code === 0 && result) {
+        resolve(result);
+        return;
+      }
+
+      reject(new Error(`Route worker ${route} failed${signal ? ` (${signal})` : ''}`));
+    });
+  });
+
+/**
+ * Process all content routes in separate Node workers.
+ */
+async function processAllContentParallel(contentRoutes, rootDir, options = {}) {
+  const entries = Object.entries(contentRoutes);
+  const concurrency = options.concurrency || getRouteConcurrency();
+
+  console.log(`Processing ${entries.length} content routes with ${concurrency} workers...`);
+
+  const results = await runWithConcurrency(entries, concurrency, (entry) =>
+    runRouteWorker(entry, rootDir)
+  );
+  const filesWritten = results.reduce((sum, result) => sum + result.filesWritten, 0);
+
+  if (filesWritten === 0) {
+    throw new Error('BUILD FAILED: No agent markdown files were generated!');
   }
+
+  console.log(`\nGenerated ${filesWritten} markdown files for AI agents.`);
 }
 
 // Export for use by other scripts
@@ -2428,6 +2545,8 @@ module.exports = {
   processFile,
   processDirectory,
   processAllContent,
+  processAllContentParallel,
+  processContentRoute,
   generateRouteIndex,
   loadDependencies,
   clearState,
@@ -2463,6 +2582,23 @@ async function main() {
     console.log(`Processing content/${dir} -> public/md/${dir}\n`);
     await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
     console.log('\nDone!');
+  } else if (args[0] === '--route') {
+    const route = args[1];
+    const srcPath = args[2];
+
+    if (!route || !srcPath) {
+      throw new Error('Usage: node process-md-for-llms.js --route <route> <srcPath>');
+    }
+
+    clearState();
+    navigationMap = buildNavigationMap(rootDir);
+    const result = await processContentRoute(route, srcPath, rootDir);
+    printBuildSummary(rootDir);
+    throwIfProcessingErrors();
+
+    if (process.send) {
+      process.send({ type: 'route-result', result });
+    }
   } else if (args[0] === '--all') {
     // Process all content routes
     const { CONTENT_ROUTES } = require('../constants/content');
@@ -2475,6 +2611,7 @@ async function main() {
     console.log(
       '  node process-md-for-llms.js --dir <dir>     Process directory (e.g., docs/guides)'
     );
+    console.log('  node process-md-for-llms.js --route <route> <srcPath>  Process one route');
     console.log('  node process-md-for-llms.js --all           Process all content routes');
   }
 }
