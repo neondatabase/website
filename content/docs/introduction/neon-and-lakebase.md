@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-23T15:53:05.538Z'
+updatedOn: '2026-06-23T19:03:35.937Z'
 ---
 
 In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
@@ -75,6 +75,8 @@ Neon and Lakebase share the same Postgres engine and serverless storage architec
 | **Scale to zero**                                    | Yes ([Scale to zero](/docs/introduction/scale-to-zero))                            | Yes ([Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero))                                                      |
 | **Read replicas**                                    | Yes ([Read replicas](/docs/introduction/read-replicas))                            | Yes ([Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas))                                                      |
 | **Instant restore (point-in-time)**                  | Yes ([Instant restore](/docs/introduction/branch-restore))                         | Yes ([Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore))                                      |
+| **High availability**                                | Coming soon ([Roadmap](/docs/introduction/roadmap))                                | Yes ([High availability](https://docs.databricks.com/aws/en/oltp/projects/manage-high-availability))                                       |
+| **Cross-cloud disaster recovery (DR)**               | Not available                                                                      | Private preview                                                                                                                            |
 | **Connection pooling**                               | Yes ([Connection pooling](/docs/connect/connection-pooling))                       | Yes, built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))                                              |
 | **Private networking (Private Link)**                | Yes ([Private Networking](/docs/guides/neon-private-networking))                   | Yes ([Data protection](https://docs.databricks.com/aws/en/oltp/projects/private-link))                                                     |
 | **Managed user authentication**                      | Yes ([Neon Auth](/docs/auth/overview))                                             | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
