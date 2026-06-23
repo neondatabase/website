@@ -61,9 +61,9 @@ const faqItems = [
     `,
   },
   {
-    question: 'What can the credits be used towards?',
+    question: 'What can the credits be used for?',
     answer: `
-      <p>The program provides credits for both Databricks and Neon. The exact amount you receive depends on your stage and funding.</p>
+      <p>The program provides credits for both Neon and Databricks. The exact amount you receive depends on your stage and funding.</p>
     `,
   },
   {
