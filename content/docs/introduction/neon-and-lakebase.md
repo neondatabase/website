@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T15:53:05.538Z'
 ---
 
 In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
@@ -63,6 +63,36 @@ Neon and Lakebase share the same core architectural principles, but they are opt
 | **Governance & security**      | Project-level access controls                          | Lakehouse-wide governance via Unity Catalog                            |
 | **Analytics & AI integration** | Via external tools and pipelines                       | Native integration with Databricks analytics and AI                    |
 | **Best fit when**              | You’re building and shipping applications quickly      | You want OLTP data to participate directly in the Lakehouse            |
+
+### Feature availability
+
+Neon and Lakebase share the same Postgres engine and serverless storage architecture, so many capabilities exist in both. The table below maps concrete features to each product, with links to the documentation. Lakebase availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
+
+| Feature                                              | Neon                                                                               | Lakebase                                                                                                                                   |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Branching**                                        | Yes ([Branching](/docs/introduction/branching))                                    | Yes ([Branches](https://docs.databricks.com/aws/en/oltp/projects/branches))                                                                |
+| **Autoscaling**                                      | Yes ([Autoscaling](/docs/introduction/autoscaling))                                | Yes ([Autoscaling](https://docs.databricks.com/aws/en/oltp/projects/autoscaling))                                                          |
+| **Scale to zero**                                    | Yes ([Scale to zero](/docs/introduction/scale-to-zero))                            | Yes ([Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero))                                                      |
+| **Read replicas**                                    | Yes ([Read replicas](/docs/introduction/read-replicas))                            | Yes ([Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas))                                                      |
+| **Instant restore (point-in-time)**                  | Yes ([Instant restore](/docs/introduction/branch-restore))                         | Yes ([Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore))                                      |
+| **Connection pooling**                               | Yes ([Connection pooling](/docs/connect/connection-pooling))                       | Yes, built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))                                              |
+| **Private networking (Private Link)**                | Yes ([Private Networking](/docs/guides/neon-private-networking))                   | Yes ([Data protection](https://docs.databricks.com/aws/en/oltp/projects/private-link))                                                     |
+| **Managed user authentication**                      | Yes ([Neon Auth](/docs/auth/overview))                                             | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
+| **Metrics and logs export (Datadog, OpenTelemetry)** | Yes ([Datadog](/docs/guides/datadog), [OpenTelemetry](/docs/guides/opentelemetry)) | Via the Databricks platform                                                                                                                |
+| **HIPAA compliance**                                 | Yes ([HIPAA](/docs/security/hipaa))                                                | Yes, via Databricks ([HIPAA](https://docs.databricks.com/aws/en/security/privacy/hipaa))                                                   |
+| **SOC 2**                                            | Yes ([Compliance](/docs/security/compliance))                                      | Yes, via Databricks ([SOC](https://www.databricks.com/trust/compliance/soc))                                                               |
+| **Vercel Marketplace**                               | Yes ([Vercel integration](/docs/guides/vercel-overview))                           | Not yet                                                                                                                                    |
+| **Vercel Integration**                               | Yes ([Vercel-Managed integration](/docs/guides/vercel-managed-integration))        | Not yet                                                                                                                                    |
+
+### Provider and region availability
+
+Neon runs on AWS. Lakebase inherits the cloud reach of the Databricks platform, with availability that varies by provider. For the full, current region lists, follow the links below.
+
+| Cloud provider | Neon                                                                                             | Lakebase                                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| **AWS**        | Yes ([Neon regions](/docs/introduction/regions))                                                 | Yes, generally available ([AWS regions](https://docs.databricks.com/aws/en/oltp/projects/manage-projects#availability)) |
+| **Azure**      | No, Azure support is being deprecated ([Neon regions](/docs/introduction/regions#azure-regions)) | Yes, in beta ([Azure regions](https://learn.microsoft.com/en-us/azure/databricks/oltp/projects/manage-projects))        |
+| **GCP**        | No, on the [roadmap](/docs/introduction/roadmap)                                                 | Yes, in beta ([GCP regions](https://docs.databricks.com/gcp/en/oltp/projects/manage-projects#availability))             |
 
 <Admonition type="tip" title="Keep exploring Lakebase">
     See the [Lakebase docs](https://docs.databricks.com/aws/en/oltp), review the [latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update), explore [customer stories](https://www.databricks.com/product/lakebase#customer-stories), and [watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center).
