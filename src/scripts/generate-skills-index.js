@@ -183,6 +183,10 @@ async function main() {
   console.log('\nDone.');
 }
 
+// Only run main() when invoked directly. Without this gate, importing the
+// module (e.g. from generate-skills-index.test.js to grab the exported
+// helpers) re-triggers main(), which races the test worker shutdown and can
+// truncate one of the 4 output files to 0 bytes.
 if (require.main === module) {
   main().catch((err) => {
     console.error('Error:', err.message);

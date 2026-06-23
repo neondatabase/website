@@ -726,7 +726,7 @@
     - section: Tools & Workflows
       items:
         - title: API, CLI & SDKs
-          slug: reference/api-reference
+          slug: reference/api
           icon: cli
           items:
             - section: API
@@ -734,6 +734,11 @@
               items:
                 - title: Neon API
                   slug: reference/api-reference
+                - title: Getting started
+                  slug: reference/api/getting-started
+                - section: API Reference
+                  slug: reference/api/reference
+                  items: []
             - section: CLI
               icon: cli
               items:

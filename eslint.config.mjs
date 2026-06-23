@@ -97,6 +97,23 @@ export default [
   },
 
   {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: { ...globals.node },
+    },
+    rules: {
+      'import/no-unresolved': 'off',
+      'import/named': 'off',
+      'no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
+    },
+  },
+
+  {
     files: ['src/scripts/**/*.js'],
     rules: {
       'no-console': 'off',
