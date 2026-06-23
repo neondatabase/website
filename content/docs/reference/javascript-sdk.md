@@ -292,7 +292,7 @@ console.error('Sign out error:', error.message)
 const { data, error } = await client.auth.getSession()
 
 if (data.session) {
-console.log('User is logged in:', data.session.user.email)
+console.log('User is logged in:', data.user.email)
 } else {
 console.log('No active session')
 }
