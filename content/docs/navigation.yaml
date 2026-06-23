@@ -725,15 +725,16 @@
               slug: ai/lakebase-search-get-started
     - section: Tools & Workflows
       items:
-        - title: Reference
-          slug: reference
-          icon: cli
         - title: API reference
           slug: reference/api
           icon: api
           items:
             - title: Overview
               slug: reference/api
+            - title: Get started
+              slug: reference/api/get-started
+            - title: Key concepts
+              slug: reference/api/key-concepts
             - section: API Reference
               title: Endpoint index
               slug: reference/api/reference

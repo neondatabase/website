@@ -140,7 +140,7 @@ CodeCard.propTypes = {
 
 const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
   const examples = useMemo(() => availableExamples(operation), [operation]);
-  const [selectedId, setSelectedId] = useState(() => examples[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState(null);
   const { handleCopy } = useCopyToClipboard(1800);
   const [copiedId, setCopiedId] = useState(null);
   const clearCopiedTimer = useRef(null);
@@ -150,8 +150,8 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
       setSelectedId(null);
       return;
     }
-    if (!examples.some((example) => example.id === selectedId)) {
-      setSelectedId(examples[0].id);
+    if (selectedId && !examples.some((example) => example.id === selectedId)) {
+      setSelectedId(null);
     }
   }, [examples, selectedId]);
 
@@ -173,7 +173,7 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
   );
 
   const restCode = operation.examples?.representative?.curl ?? operation.examples?.curl ?? '';
-  const selected = examples.find((example) => example.id === selectedId) ?? examples[0] ?? null;
+  const selected = examples.find((example) => example.id === selectedId) ?? null;
   const noRequired =
     requiredLeafCount === null
       ? (operation.requestBody?.requiredFields ?? []).length === 0
@@ -213,7 +213,9 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
                 <button
                   key={example.id}
                   type="button"
-                  onClick={() => setSelectedId(example.id)}
+                  onClick={() =>
+                    setSelectedId((currentId) => (currentId === example.id ? null : example.id))
+                  }
                   aria-pressed={selectedPill}
                   aria-label={
                     example.descriptor ? `${example.label} ${example.descriptor}` : example.label

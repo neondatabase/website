@@ -24,8 +24,10 @@ const operation = {
   errors: [
     {
       status: 'default',
-      description: 'General Error.',
-      descriptionHtml: '<p>General Error.</p>',
+      description:
+        'General Error.\n\nThe request may or may not be safe to retry, depending on the HTTP method, response status code,\nand whether a response was received.',
+      descriptionHtml:
+        '<p>General Error.</p><p>The request may or may not be safe to retry, depending on the HTTP method, response status code,<br />and whether a response was received.</p>',
     },
   ],
 };
@@ -47,7 +49,21 @@ describe('OperationDoc', () => {
     ).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Response' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Errors' })).toBeInTheDocument();
-    expect(screen.getByText('General Error.')).toBeInTheDocument();
+    expect(screen.getByText('General error')).toBeInTheDocument();
+    expect(
+      screen.getByText('This endpoint can return the standard Neon API error response.')
+    ).toBeInTheDocument();
+    expect(screen.getByText('request_id')).toBeInTheDocument();
+    expect(
+      screen.queryByText(/The request may or may not be safe to retry/)
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Required. Human-readable error message.')).toBeInTheDocument();
+    expect(screen.getByText('Required. Machine-readable error code.')).toBeInTheDocument();
+    expect(screen.getByText(/Optional\. Request identifier for debugging/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/If no response is returned, the request may still have reached the server/)
+    ).toBeInTheDocument();
+    expect(screen.getByText(/resource is temporarily locked/)).toBeInTheDocument();
     expect(screen.queryByText('REST API', { selector: 'button *' })).not.toBeInTheDocument();
   });
 });

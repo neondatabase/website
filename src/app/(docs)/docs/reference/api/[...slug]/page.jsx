@@ -9,18 +9,23 @@ import ApiOperation from 'components/pages/doc/api-operation';
 import ApiTagPage from 'components/pages/doc/api-tag-page';
 import EndpointIndexPage from 'components/pages/doc/endpoint-index/endpoint-index';
 import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
+import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
+import { DOCS_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
+import { getPostBySlug } from 'utils/api-content';
 import { getNavigation, getNavigationLinks } from 'utils/api-docs';
 import { loadAllTagGroups } from 'utils/api-ref-server';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
+import getTableOfContents from 'utils/get-table-of-contents';
 
 const API_DATA_DIR = resolve(process.cwd(), 'src/data/api-ref');
 const API_DOCS_DIR = resolve(process.cwd(), 'content/api-docs');
 const API_SLUG_PREFIX = 'reference/api';
 const SAFE_SLUG = /^[a-z0-9][a-z0-9-]*$/;
+const STATIC_PAGES = new Set(['get-started', 'key-concepts']);
 
 // Only serve pre-generated slugs — no dynamic fallback to filesystem
 export const dynamicParams = false;
@@ -60,7 +65,7 @@ function loadTagOperations(tag) {
 }
 
 export async function generateStaticParams() {
-  const params = [{ slug: ['reference'] }];
+  const params = [...STATIC_PAGES, 'reference'].map((page) => ({ slug: [page] }));
 
   if (!existsSync(API_DATA_DIR)) return params;
 
@@ -86,6 +91,19 @@ export async function generateMetadata(props) {
       description: 'All Neon API endpoints grouped by resource',
       pathname: `${LINKS.docs}/${API_SLUG_PREFIX}/reference`,
       type: 'article',
+    });
+  }
+
+  if (STATIC_PAGES.has(tag) && !id) {
+    const currentSlug = `${API_SLUG_PREFIX}/${tag}`;
+    const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+    if (!post) return { title: 'Not Found' };
+    return getMetadata({
+      title: `${post.data.title} - Neon Docs`,
+      description: post.data.summary ?? post.excerpt,
+      pathname: `${LINKS.docs}/${currentSlug}`,
+      type: 'article',
+      markdownPath: `/docs/${currentSlug}.md`,
     });
   }
 
@@ -160,6 +178,30 @@ const ApiRefPage = async (props) => {
       <InterfaceTabActivator />
     </Suspense>
   );
+
+  if (STATIC_PAGES.has(tag) && !id) {
+    const currentSlug = `${API_SLUG_PREFIX}/${tag}`;
+    const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
+    if (!post) return notFound();
+    const { data, content } = post;
+    const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
+    const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
+    const tableOfContents = getTableOfContents(content);
+    return (
+      <>
+        {tabActivator}
+        <Post
+          content={content}
+          data={data}
+          breadcrumbs={breadcrumbs}
+          navigationLinks={navigationLinks}
+          currentSlug={currentSlug}
+          gitHubPath={`${DOCS_DIR_PATH}/${currentSlug}.md`}
+          tableOfContents={tableOfContents}
+        />
+      </>
+    );
+  }
 
   if (!id) {
     const operations = loadTagOperations(tag);
