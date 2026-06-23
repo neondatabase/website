@@ -39,7 +39,7 @@ const Menu = ({
                 {...(item.slug ? { to: `${basePath}${item.slug}` } : {})}
               >
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
-                {item.section}
+                {item.title || item.section}
               </SectionLabel>
               <ul className="flex flex-col">
                 {item.items?.map((item, index) => (

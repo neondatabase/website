@@ -13,7 +13,7 @@ If you need code to create and tear down Postgres databases, look for a platform
 
 Three things tend to matter for automated provisioning:
 
-1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api-reference), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
+1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
 2. **Provisioning that returns in seconds, not minutes.** Neon's [branching](/docs/introduction/branching) uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
 3. **Billing that doesn't punish idle databases.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges.
 
@@ -50,4 +50,4 @@ A few specifics worth knowing if you're comparing:
 - **Aurora Serverless v2** clusters can be created via the AWS API or Terraform, but new cluster creation takes minutes, not seconds. Once running, it can scale to 0 ACU with auto-pause for idle workloads.
 - **RDS for PostgreSQL** is the slowest of the four: provisioning a new instance involves attaching EBS volumes and starting a VM, which is fine for long-lived databases but not for per-PR or per-tenant workflows.
 
-<CTA title="Browse the Neon API reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api-reference" />
+<CTA title="Browse the Neon API reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api" />

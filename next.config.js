@@ -204,6 +204,26 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/reference/api/getting-started',
+        destination: '/docs/reference/api',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/api/getting-started.md',
+        destination: '/docs/reference/api.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/api-reference',
+        destination: '/docs/reference/api',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/api-reference.md',
+        destination: '/docs/reference/api.md',
+        permanent: true,
+      },
+      {
         source: '/backend',
         destination: '/docs/introduction#products',
         permanent: false,

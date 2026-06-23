@@ -1,6 +1,6 @@
 # API Reference
 
-Build pipeline and UI for the [Neon Management API reference](https://neon.com/docs/reference/api-reference). Generates per-operation pages from the live OpenAPI spec and enriches them with neonctl, MCP, and Console coverage data.
+Build pipeline and UI for the [Neon Management API reference](https://neon.com/docs/reference/api). Generates per-operation pages from the live OpenAPI spec and enriches them with neonctl, MCP, and Console coverage data.
 
 ## Quick links
 
@@ -78,7 +78,7 @@ The React UI in [`src/components/pages/doc/api-operation/`](../src/components/pa
 - `ResponseSection` and the errors block render documentation-style response details.
 - `operation-toc.js` builds the right-rail TOC from sections that actually render.
 
-The older interactive editor stack (`operation-client.jsx`, `operation-body.jsx`, hooks, and the Zustand store) is preserved for possible future reuse, but it is not the shipped operation-page path.
+The older interactive editor stack is preserved for possible future reuse, but it is not the shipped operation-page path. See [Dormant interactive stack](#dormant-interactive-stack) for the full file list.
 
 ## Committed inputs (under `scripts/data/`)
 
@@ -227,11 +227,30 @@ If no intro file exists, the tag overview page shows only the operation list.
 3. Optionally add a `description` (shows on the overview grid), `groups` (editorial grouping on the tag landing page), a `bareId` (when the auto-derivation doesn't match), and `content/api-docs/{tag}.md` (intro paragraph).
 4. Commit the updated `content/docs/api-navigation.yaml`.
 
-## Session-identity globals
+## Dormant interactive stack
 
-Identifiers that appear on multiple operations (`project_id`, `org_id`, `branch_id`, `database_name`, `role_name`, ...) refer to the same session value in the interactive editor. Type `org_id` once on `list-projects` and it pre-fills on `create-project`, `update-project`, the body field on `create-project`, the CLI `--org-id` flag, etc.
+The shipped operation page (described above) is read-only. An older interactive editor stack is kept in the tree for possible future reuse but is **not** imported by the page entry ([`index.js`](../src/components/pages/doc/api-operation/index.js) → `api-operation.jsx`). It is exercised only by unit tests, so removing it would not change anything that renders.
 
-The set is computed at build time from the spec by [`computeCrossPageParamSet()`](generate-api-ref.mjs) — any param name ending in `_id` or `_name` that appears in two or more operations qualifies (so it can include names like `database_name`, not only resource IDs). The output is emitted to `src/data/api-ref/cross-page-params.json` and imported by [`store.js`](../src/components/pages/doc/api-operation/store.js). No manual list to maintain when the spec adds new shared params; re-run the generator to refresh the count.
+Dormant files under [`src/components/pages/doc/api-operation/`](../src/components/pages/doc/api-operation/):
+
+| File                                       | Was                                  |
+| ------------------------------------------ | ------------------------------------ |
+| `operation-client.jsx`                     | Interactive page orchestrator        |
+| `operation-body.jsx`, `operation-params.jsx` | Editable body and parameter renderers |
+| `operation-cli.jsx`, `operation-cli-multi.jsx` | Interactive CLI builders          |
+| `operation-mcp.jsx`                        | Interactive MCP panel                |
+| `store.js`, `store-hydrator.jsx`           | Zustand state and hydration          |
+
+Related dormant assets:
+
+- `src/data/api-ref/cross-page-params.json` is consumed only by `store.js`.
+- `CliCommandTable` ([`src/components/pages/doc/cli-command-table/`](../src/components/pages/doc/cli-command-table/)) is still registered in the MDX component map but is no longer referenced by any page (its only consumer, `reference/cli-guide.md`, was removed in favor of `/docs/cli`).
+
+### Session-identity globals (dormant behavior)
+
+In the interactive editor, identifiers that appear on multiple operations (`project_id`, `org_id`, `branch_id`, `database_name`, `role_name`, ...) share one session value, so typing `org_id` once pre-fills it on every operation that uses it, the matching body field, and the CLI `--org-id` flag. The read-only page does not use this.
+
+The set is computed at build time by [`computeCrossPageParamSet()`](generate-api-ref.mjs): any param name ending in `_id` or `_name` that appears in two or more operations qualifies (so it can include names like `database_name`, not only resource IDs). It is emitted to `src/data/api-ref/cross-page-params.json` and imported by `store.js`. The generator still produces this file so the stack stays runnable if revived; re-run the generator to refresh it.
 
 ## Tests
 

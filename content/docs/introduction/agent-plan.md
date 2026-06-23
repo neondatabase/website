@@ -12,7 +12,7 @@ summary: >-
   provisioning and fleet management runs through the Neon API, with
   autoscaling, scale-to-zero, branching, and point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 <InfoBlock>
@@ -52,7 +52,7 @@ To join the agent plan:
 
 - Your application requires approval from the Neon team
 
-Once your application is approved, the Neon team switches your Scale account to the Agent Plan and helps you set up a second Free Account for your Free Tier if needed. After setup, you manage all projects and configurations independently via the [Neon API](/docs/reference/api-reference).
+Once your application is approved, the Neon team switches your Scale account to the Agent Plan and helps you set up a second Free Account for your Free Tier if needed. After setup, you manage all projects and configurations independently via the [Neon API](/docs/reference/api).
 
 <CTA
   title="Neon agent plan"
@@ -81,7 +81,7 @@ Compute is billed at $0.106 per compute unit hour (lower than standard Scale pri
 
 ## Managing projects
 
-After initial enrollment, you have full control over both organizations as admin. Each organization supports 30,000 projects by default. All project operations are performed through the [Neon API](/docs/reference/api-reference), enabling fleet management at scale with small engineering teams. You can:
+After initial enrollment, you have full control over both organizations as admin. Each organization supports 30,000 projects by default. All project operations are performed through the [Neon API](/docs/reference/api), enabling fleet management at scale with small engineering teams. You can:
 
 - Create and delete projects in either organization
 - Set per-project resource quotas and billing limits

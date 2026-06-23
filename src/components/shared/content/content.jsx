@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
 import ApiParam from 'components/pages/doc/api-param';
+import ApiResourceGrid from 'components/pages/doc/api-resource-grid/api-resource-grid';
 import ApiResponse from 'components/pages/doc/api-response';
 import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
@@ -178,6 +179,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     );
   },
   ApiMethodBadge,
+  ApiResourceGrid,
   CliCommandTable,
   ApiParam,
   ApiResponse,

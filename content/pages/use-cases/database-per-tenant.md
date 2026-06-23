@@ -117,7 +117,7 @@ Neon was built to help you manage thousands of Postgres databases like they’re
 - **One engineer can manage thousands of tenants** - With the right automation in place, there's no need for a large DevOps team.
 
 <Admonition type="note" title="Info">
-Explore the [Neon API documentation](/docs/reference/api-reference) and start building.
+Explore the [Neon API documentation](/docs/reference/api) and start building.
 </Admonition>
 
 ### Data compliance and security

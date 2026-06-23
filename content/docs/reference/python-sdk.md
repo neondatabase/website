@@ -9,7 +9,7 @@ summary: >-
   Use it when you need to automate Neon platform operations in Python scripts or
   applications without constructing raw HTTP requests against the Neon API.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 <InfoBlock>
@@ -22,7 +22,7 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api">Neon API Reference</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">

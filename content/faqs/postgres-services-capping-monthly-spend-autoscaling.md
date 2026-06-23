@@ -22,7 +22,7 @@ A common production setup:
 - **Production branch:** min 0.25 CU, max 4 CU. Burst capacity for traffic spikes, low baseline cost.
 - **Dev and preview branches:** min 0.25 CU, max 1 CU. Small ceiling so a runaway test query doesn't drive a bill.
 
-You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api-reference).
+You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api).
 
 ## Scale to zero on idle
 

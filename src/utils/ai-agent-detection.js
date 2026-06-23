@@ -119,7 +119,7 @@ const DEFAULT_404_LINKS = [
   },
   {
     label: 'Neon API reference',
-    href: '/docs/reference/api-reference.md',
+    href: '/docs/reference/api.md',
     description: 'API endpoints and usage',
   },
 ];

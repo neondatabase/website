@@ -315,7 +315,7 @@ describe('buildAgent404Response', () => {
 
   it('should include a link to the API reference', () => {
     const result = buildAgent404Response('/docs/some-page');
-    expect(result).toContain('/docs/reference/api-reference.md');
+    expect(result).toContain('/docs/reference/api.md');
   });
 
   it('should work with deeply nested paths', () => {

@@ -35,7 +35,7 @@ For larger fleets, the Scale plan supports project counts above 1,000 on request
 Each tenant's compute has its own [`max_connections`](/docs/connect/connection-pooling) tied to compute size. A 0.25 CU compute allows 104 direct Postgres connections. Use the pooled connection string (`-pooler` in the hostname) and PgBouncer accepts up to 10,000 client connections, routed through the underlying pool. For serverless or per-request workloads, always use the pooled string.
 
 <Admonition type="tip" title="Provisioning tenants programmatically">
-Use the [Neon API](/docs/reference/api-reference) or [Terraform provider](/docs/reference/terraform) to create a project per customer at signup. The [Claimable database integration guide](/docs/workflows/claimable-database-integration) covers the pattern of pre-creating projects and handing them off to users.
+Use the [Neon API](/docs/reference/api) or [Terraform provider](/docs/reference/terraform) to create a project per customer at signup. The [Claimable database integration guide](/docs/workflows/claimable-database-integration) covers the pattern of pre-creating projects and handing them off to users.
 </Admonition>
 
 ## How other providers handle database-per-tenant

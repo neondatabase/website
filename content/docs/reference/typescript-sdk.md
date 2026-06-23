@@ -10,7 +10,7 @@ summary: >-
   IDE autocompletion, and structured Axios error handling. Install via npm,
   yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 <InfoBlock>
@@ -21,7 +21,7 @@ updatedOn: '2026-06-18T20:28:34.156Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api">Neon API Reference</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">

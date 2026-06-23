@@ -42,7 +42,7 @@ module.exports = {
     },
     {
       label: 'Neon API reference (projects, branches, databases, endpoints)',
-      url: 'https://neon.com/docs/reference/api-reference.md',
+      url: 'https://neon.com/docs/reference/api.md',
     },
   ],
 

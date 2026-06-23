@@ -108,7 +108,7 @@ All three options return your projects:
 ## Key Resources
 
 - **Interactive API Reference:** https://api-docs.neon.tech/reference/getting-started-with-neon-api (try endpoints directly)
-- **Full API Documentation:** https://neon.com/docs/reference/api-reference
+- **Full API Documentation:** https://neon.com/docs/reference/api
 - **SDKs:** https://neon.com/docs/reference/sdk
 
 ---
