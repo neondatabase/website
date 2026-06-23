@@ -68,13 +68,11 @@ Give your AI assistant structured context about Neon's features, APIs, and best 
 
 ## Build AI agents
 
-Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with our terse JavaScript client or the Neon API.
+Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with the Neon API.
 
 <DetailIconCards>
 
 <a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
-
-<a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
 
 <a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 

@@ -2,14 +2,15 @@
 title: Neon SDKs
 summary: >-
   Neon SDKs split into two categories: Client SDKs (TypeScript) for building
-  apps with the Data API and Neon Auth, and Management SDKs (TypeScript, Python,
-  @neondatabase/toolkit) for programmatically creating and controlling projects,
-  branches, databases, endpoints, and roles via the Neon API. Client SDKs target
-  app developers who need database queries and user authentication; Management
-  SDKs target platform automation and DevOps workflows. Community-maintained Go
-  and Node.js/Deno API wrappers are listed here but are not officially supported
-  by Neon.
+  apps with the Data API and Neon Auth, and Management SDKs (TypeScript, Python)
+  for programmatically creating and controlling projects, branches, databases,
+  endpoints, and roles via the Neon API. Client SDKs target app developers who
+  need database queries and user authentication; Management SDKs target platform
+  automation and DevOps workflows. Community-maintained Go and Node.js/Deno API
+  wrappers are listed here but are not officially supported by Neon.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/neondatabase-toolkit
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
@@ -37,8 +38,6 @@ Use these SDKs to programmatically manage your Neon infrastructure (projects, br
 <a href="/docs/reference/typescript-sdk" description="Programmatically manage Neon projects, branches, databases, and other platform resources" icon="neon">Neon API TypeScript SDK</a>
 
 <a href="/docs/reference/python-sdk" description="Programmatically manage Neon projects, branches, databases, and other platform resources" icon="neon">Python SDK (Neon API)</a>
-
-<a href="/docs/reference/neondatabase-toolkit" description="An SDK for AI Agents (and humans) that includes both the Neon API TypeScript SDK and the Neon Serverless Driver" icon="neon">@neondatabase/toolkit</a>
 
 </DetailIconCards>
 
