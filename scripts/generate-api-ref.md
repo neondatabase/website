@@ -102,9 +102,18 @@ Additional manual exception lists (small, inline) live near the top of `build-co
 
 ### When the OpenAPI spec changes
 
-Nothing to do. The generator fetches it fresh on every build. Spec changes show up on the next Vercel deploy.
+The generator fetches the spec fresh on every build, so most spec changes ship on the next Vercel deploy with no action. The spec is the source of truth for operation structure, field order, types, defaults, enums, descriptions, the `deprecated` flag, and which fields are required. The committed config files (`tag-config.json`, `field-group-config.mjs`, `console-breadcrumbs.json`, `response-examples.json`, coverage data) only enrich and organize; they never gate rendering. The only committed generator output is `content/docs/api-navigation.yaml`, so changes that add or remove pages or sections require committing the regenerated nav file.
 
-If a brand-new tag appears in the spec, the build fails with `[tag-config] spec tags missing from config: <names>`. Fix by adding entries to `scripts/data/tag-config.json` — see [Adding a new tag](#adding-a-new-tag).
+What happens for the common kinds of spec drift:
+
+| Spec change | Ships automatically? | Human action |
+| --- | --- | --- |
+| New endpoint | Yes. Generates its own page, markdown, llms entry, and nav entry. Request body renders as the flat read-only tree (no editorial section cards) with generated curl + SDK examples. | Commit the regenerated `api-navigation.yaml`. Optional polish: add a `FIELD_GROUPS` entry for grouped cards + a representative `seed`, a `console-breadcrumbs.json` entry, and re-run `build-coverage-data.mjs` so the CLI/MCP pills appear. |
+| Endpoint description changed | Yes. Flows into the page, per-op markdown, and llms files. | None. |
+| Default value, type, enum, or required-ness changed | Yes. The rendered field rows, type badges, enum pills, and the "N required" summary update from the schema. | Only if a curated example now conflicts: `seed` values in `field-group-config.mjs` and `response-examples.json` overrides do not auto-track the spec. `npm run audit:api-ref` flags schema-invalid examples. |
+| New tag (set of endpoints) | Yes, warn-only. `loadTagConfig(schema)` auto-injects a minimal entry (slug/display derived from the raw spec tag name) and the operations appear in nav. The build does not fail. | Add a proper entry to `scripts/data/tag-config.json` for display name, order, description, and groups (see [Adding a new tag](#adding-a-new-tag)), optionally a `content/api-docs/{tag}.md` intro, then commit `api-navigation.yaml`. |
+
+For request-body grouping drift specifically (new/renamed/removed fields on a configured operation), see the table in [`field-group-config.md`](field-group-config.md#spec-drift-what-happens-the-site-build-never-breaks).
 
 ### When neonctl releases
 

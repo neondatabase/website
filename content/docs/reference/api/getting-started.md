@@ -2,7 +2,7 @@
 title: Getting started
 summary: Set up and make your first request using the Neon REST API, TypeScript SDK, CLI, or MCP server.
 enableTableOfContents: true
-updatedOn: '2026-06-23T13:45:07.670Z'
+updatedOn: '2026-06-23T15:47:09.519Z'
 ---
 
 Every operation available in the Neon Console can be performed programmatically. Choose the interface that fits your workflow.
@@ -60,7 +60,7 @@ curl https://console.neon.tech/api/v2/projects \
 
 ### Explore the reference
 
-Each operation page in this reference includes a live example you can edit and copy. Browse by resource using the navigation on the left.
+Each operation page in this reference includes copyable examples for the REST API, CLI, SDK, and MCP. Browse by resource using the navigation on the left.
 
 </InterfaceTabPanel>
 
@@ -101,7 +101,7 @@ If you belong to multiple organizations, pass `org_id` to scope results to one. 
 
 ### Explore the reference
 
-Every REST endpoint has a matching typed method. Method names follow the `operationId` from the OpenAPI spec — each operation page shows the exact call in the SDK tab. Types are generated directly from the spec.
+Every REST endpoint has a matching typed method. Method names follow the `operationId` from the OpenAPI spec, and each operation page shows the exact SDK call. Types are generated directly from the spec.
 
 </InterfaceTabPanel>
 
@@ -141,7 +141,7 @@ neon projects list
 
 ### Explore the reference
 
-Each operation page shows the equivalent CLI command and flags in the CLI tab. For the full CLI reference, see [Neon CLI](/docs/reference/cli-quickstart).
+Each operation page shows the equivalent CLI command and flags. For the full CLI reference, see [Neon CLI](/docs/cli).
 
 </InterfaceTabPanel>
 
@@ -161,7 +161,7 @@ Append `--agent <name>` to target a specific tool: `cursor`, `claude-desktop`, `
 
 ### Explore the reference
 
-Each operation page shows the equivalent MCP tool in the MCP tab. For full per-client setup instructions, see [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+Each operation page shows the equivalent MCP tool. For full per-client setup instructions, see [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
 
 <Admonition type="important" title="Security">
 The Neon MCP server is intended for development and testing only. Always review LLM-requested actions before execution.
