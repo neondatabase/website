@@ -33,9 +33,9 @@ When this prompt is triggered, automatically configure the open ExpressJS projec
 
 1.  **Prompt the user to select a PostgreSQL driver.** Present the following options, explaining the ideal use case for each:
 
-    *   **`@neondatabase/serverless` (Recommended for Serverless):** Optimized for serverless and edge functions with HTTP connections. Best choice for apps deployed on Vercel, Netlify, or AWS Lambda.
-    *   **`postgres` (postgres.js):** A fast, full-featured client, great for both serverless and traditional Node.js server environments.
-    *   **`pg` (node-postgres):** The classic, widely-used driver for traditional, long-running Node.js servers.
+    -   **`@neondatabase/serverless` (Recommended for Serverless):** Optimized for serverless and edge functions with HTTP connections. Best choice for apps deployed on Vercel, Netlify, or AWS Lambda.
+    -   **`postgres` (postgres.js):** A fast, full-featured client, great for both serverless and traditional Node.js server environments.
+    -   **`pg` (node-postgres):** The classic, widely-used driver for traditional, long-running Node.js servers.
 
     Make sure to ask the user to choose one of the above options and do not proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 

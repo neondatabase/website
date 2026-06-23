@@ -2,16 +2,21 @@
 title: Postgres regexp_match() function
 subtitle: Extract substrings matching a regular expression pattern
 summary: >-
-  Covers the usage of the Postgres `regexp_match()` function to extract
-  substrings from a string based on a specified regular expression pattern,
-  including examples for parsing log entries.
+  The Postgres `regexp_match()` function returns a `text[]` array of substrings
+  from the first POSIX regular expression match in an input string, capturing
+  each named or unnamed group as a separate array element. Use it when `LIKE`
+  and `SIMILAR TO` are too limited and you need to extract structured fields
+  from semi-structured text such as log entries, URLs, or user agent strings.
+  The function returns NULL on no match, accepts an optional flags argument
+  (e.g., `i` for case-insensitive), and differs from `regexp_matches()` which
+  returns all matches, and `regexp_replace()` which substitutes matches.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.881Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `regexp_match()` function is used to extract substrings that match a regular expression pattern from a given string. It returns an array of matching substrings, including capture groups if specified in the pattern.
 
-This function is particularly useful for complex string parsing tasks, such as extracting structured information from semi-structured text data. For example, it can be used to parse log files, extract specific components from URLs, or analyze text data for specific patterns.
+Use it for complex string parsing tasks, such as extracting structured information from semi-structured text data. For example, it can be used to parse log files, extract specific components from URLs, or analyze text data for specific patterns.
 
 <CTA />
 
@@ -108,7 +113,7 @@ FROM emails
 WHERE regexp_match(email, '^[^@]+@[^@]+\.(com|org|io)$') IS NOT NULL;
 ```
 
-This query selects all rows from the `emails` table where the email address ends with `.com`, ``.org`, or `.io`.
+This query selects all rows from the `emails` table where the email address ends with `.com`, `.org`, or `.io`.
 
 ```text
         email

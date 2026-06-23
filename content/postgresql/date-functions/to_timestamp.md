@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL TO_TIMESTAMP Function'
-page_title: 'PostgreSQL TO_TIMESTAMP() Function By Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL TO_TIMESTAMP() function to convert a string to a timestamp'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_timestamp/'
+title: PostgreSQL TO_TIMESTAMP Function
+page_title: PostgreSQL TO_TIMESTAMP() Function By Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TO_TIMESTAMP() function to
+  convert a string to a timestamp
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-to_timestamp/
 ogImage: ''
-updatedOn: '2024-02-12T11:37:48+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TO_DATE() Function'
-  slug: 'postgresql-date-functions/postgresql-to_date'
+  title: PostgreSQL TO_DATE() Function
+  slug: postgresql-date-functions/postgresql-to_date
 nextLink:
-  title: 'PostgreSQL MAKE_DATE() Function'
-  slug: 'postgresql-date-functions/postgresql-make_date'
+  title: PostgreSQL MAKE_DATE() Function
+  slug: postgresql-date-functions/postgresql-make_date
 ---
+
+<Admonition type="info" id="CTA">
+The TO_TIMESTAMP() function works the same on any PostgreSQL deployment, so the patterns and examples here apply whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TO_TIMESTAMP()` function to convert a string to a timestamp based on a specified format
 
@@ -51,7 +58,7 @@ To construct `format` strings, you use the following template patterns for forma
 | IYY                      | The last 3 digits of ISO 8601 week\-numbering year                                                  |
 | IY                       | The last 2 digits of ISO 8601 week\-numbering year                                                  |
 | I                        | The last digit of ISO 8601 week\-numbering year                                                     |
-| BC, bc, AD or ad         | Abbreviated capitalized month name e.g., Jan, Feb,  etc.                                            |
+| BC, bc, AD or ad         | Era indicator without periods                                                                       |
 | B.C., b.c., A.D. ora.d.  | Era indicator with periods                                                                          |
 | MONTH                    | English month name in uppercase                                                                     |
 | Month                    | Full capitalized English month name                                                                 |

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL CHECK Constraints'
-page_title: 'PostgreSQL CHECK Constraints'
-page_description: 'You will learn how to use PostgreSQL CHECK constraints to ensure the data integrity of values in a column or a group of columns in a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-check-constraint/'
+title: PostgreSQL CHECK Constraints
+page_title: PostgreSQL CHECK Constraints
+page_description: >-
+  You will learn how to use PostgreSQL CHECK constraints to ensure the data
+  integrity of values in a column or a group of columns in a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-check-constraint/
 ogImage: ''
-updatedOn: '2024-01-25T09:16:13+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DELETE CASCADE'
-  slug: 'postgresql-tutorial/postgresql-delete-cascade'
+  title: PostgreSQL DELETE CASCADE
+  slug: postgresql-tutorial/postgresql-delete-cascade
 nextLink:
-  title: 'PostgreSQL UNIQUE Constraint'
-  slug: 'postgresql-tutorial/postgresql-unique-constraint'
+  title: PostgreSQL UNIQUE Constraint
+  slug: postgresql-tutorial/postgresql-unique-constraint
 ---
+
+<Admonition type="info" id="CTA">
+CHECK constraints work the same way across every PostgreSQL deployment, so the syntax and behavior here apply whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises enforcing data integrity at scale, Lakebase delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration that serious workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `CHECK` constraints and how to use them to constrain values in columns of a table based on a boolean expression.
 

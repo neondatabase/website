@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Temporary Table'
-page_title: 'PostgreSQL Temporary Table'
-page_description: 'You will learn about the PostgreSQL temporary table and how to manage it using the CREATE TEMP TABLE and DROP TABLE statements.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table/'
-ogImage: '/postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png'
-updatedOn: '2024-02-18T10:49:32+00:00'
+title: PostgreSQL Temporary Table
+page_title: PostgreSQL Temporary Table
+page_description: >-
+  You will learn about the PostgreSQL temporary table and how to manage it using
+  the CREATE TEMP TABLE and DROP TABLE statements.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table/
+ogImage: /postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRUNCATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-truncate-table'
+  title: PostgreSQL TRUNCATE TABLE
+  slug: postgresql-tutorial/postgresql-truncate-table
 nextLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-copy-table'
+  slug: postgresql-tutorial/postgresql-copy-table
 ---
+
+<Admonition type="info" id="CTA">
+Temporary tables are a standard PostgreSQL feature, and everything covered here works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 ![PostgreSQL Temporary Table](/postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png?alignright)**Summary**: in this tutorial, you will learn about the PostgreSQL temporary table and how to manage it effectively.
 
@@ -175,5 +182,5 @@ DROP TABLE customers;
 ## Summary
 
 - A temporary table is a short\-lived table that exists during a database session or a transaction.
-- Use `the CREATE TEMP TABLE` statement to create a temporary table.
+- Use the `CREATE TEMP TABLE` statement to create a temporary table.
 - Use the `DROP TABLE` statement to drop a temporary table.

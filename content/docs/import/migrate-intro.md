@@ -3,13 +3,19 @@ title: Neon data migration guides
 subtitle: Learn how to migrate data to Neon Postgres from different database providers
   and sources
 summary: >-
-  Covers the selection of migration methods for transferring data to Neon
-  Postgres from various database sources, considering factors like database
-  size, downtime tolerance, and technical skill requirements.
+  Neon migration guide selection page compares transfer methods (Import Data
+  Assistant, pg_dump/restore, pgcopydb, Logical Replication, pgloader, AWS DMS)
+  by database size, downtime tolerance, and skill level to help you pick the
+  right approach. Import Data Assistant is automated and targets databases under
+  10 GB. Logical Replication delivers near-zero downtime for production Postgres
+  workloads. pgloader covers non-Postgres sources including MySQL, MSSQL, and
+  SQLite. Also indexes provider-specific migration paths for Heroku, Supabase,
+  PlanetScale, RDS, Cloud SQL, and Azure, plus guidance for region migration and
+  Neon-to-Neon moves.
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
@@ -35,7 +41,7 @@ If you need your Neon **database** in a different **region**, or a **Postgres-co
 
 ## Provider-specific guides
 
-For step-by-step instructions tailored to specific databases or providers, see [MySQL](/docs/import/migrate-mysql), [MSSQL](/docs/import/migrate-mssql), [SQLite](/docs/import/migrate-sqlite), [Heroku](/docs/import/migrate-from-heroku), [Supabase](/docs/import/migrate-from-supabase), [Render](/docs/import/migrate-from-render), [Azure](/docs/import/migrate-from-azure-postgres), [Digital Ocean](/docs/import/migrate-from-digital-ocean), [Firebase](/docs/import/migrate-from-firebase), or [another Neon project](/docs/import/migrate-from-neon).
+For step-by-step instructions tailored to specific databases or providers, see [MySQL](/docs/import/migrate-mysql), [MSSQL](/docs/import/migrate-mssql), [SQLite](/docs/import/migrate-sqlite), [Heroku](/docs/import/migrate-from-heroku), [Supabase](/docs/import/migrate-from-supabase), [PlanetScale](/docs/import/migrate-from-planetscale), [Turso](/docs/import/migrate-from-turso), [Render](/docs/import/migrate-from-render), [Azure](/docs/import/migrate-from-azure-postgres), [Digital Ocean](/docs/import/migrate-from-digital-ocean), [Railway](/docs/import/migrate-from-railway), [Firebase](/docs/import/migrate-from-firebase), or [another Neon project](/docs/import/migrate-from-neon).
 
 ## Logical replication guides
 

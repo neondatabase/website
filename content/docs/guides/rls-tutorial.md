@@ -2,11 +2,16 @@
 title: Secure your app with RLS
 subtitle: Learn how Row-level Security (RLS) protects user data
 summary: >-
-  Step-by-step guide for implementing Row-Level Security (RLS) in a React.js app
-  using Neon, demonstrating how to secure user data by enforcing access control
-  at the database level with JWT authentication.
+  Step-by-step tutorial for securing a React note-taking app against
+  cross-user data leaks using Postgres Row-Level Security on Neon, with
+  JWT-based `auth.user_id()` and Drizzle's `crudPolicy`. Choose this page when
+  you need to verify that database-level RLS policies hold even after removing
+  application-layer `owner_id` filters, or when integrating Neon Auth, Auth0,
+  or Clerk as a JWT provider. The tutorial uses `ALTER TABLE ... DISABLE ROW
+  LEVEL SECURITY` to expose the leak, then shows how `crudPolicy` restores
+  isolation without touching application code.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.812Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -54,9 +59,9 @@ npm run dev
 
 Open the app in your browser using [`localhost:5173`](http://localhost:5173).
 
-Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and Github logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
+Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and GitHub logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
 
-Create your `Alice` user using Google. Then, using a private browser session, create your `Bob` user account using Github or other Google account.
+Create your `Alice` user using Google. Then, using a private browser session, create your `Bob` user account using GitHub or other Google account.
 
 Side by side, here's the empty state for both users:
 
@@ -308,7 +313,7 @@ pgPolicy('shared_policy', {
 
 The `shared_policy` enables any authenticated user to read notes marked as shared (`shared = true`), allowing others to view shared notes even if they are not the owner. This policy applies similarly to paragraphs, checking if the linked note is shared.
 
-Although RLS permits read access to shared notes for all authenticated users, the shared notes are not directly visible in other users' UI. Instead, sharing occurs via the "Share" button, which copies the note's URL to the clipboard. This URL includes the note's ID, enabling authenticated users to access the shared note and its paragraphs with-in in a read-only mode.
+Although RLS permits read access to shared notes for all authenticated users, the shared notes are not directly visible in other users' UI. Instead, sharing occurs via the "Share" button, which copies the note's URL to the clipboard. This URL includes the note's ID, enabling authenticated users to access the shared note and its paragraphs within a read-only mode.
 
 ### RLS policies table
 

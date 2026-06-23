@@ -2,24 +2,20 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 summary: >-
-  Step-by-step guide for setting up Neon Auth with TanStack Router, including
-  project creation, SDK installation, environment variable configuration, and
-  style integration.
+  Neon Auth quick start for TanStack Router (file-router) using the
+  `@neondatabase/neon-js` and `@neondatabase/auth-ui` SDKs. Pre-built components
+  include AuthView, AccountView, SignedIn, and RedirectToSignIn. Use this page
+  when you need sign-in, sign-up, and route protection without writing custom
+  auth UI. User profiles are stored automatically in the `neon_auth.user` table
+  in your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.134Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
-
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetupTip />
 
 <TwoColumnLayout>
 
@@ -64,7 +60,7 @@ Install the Neon Auth SDK and UI library:
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-cd my-app && npm install @neondatabase/neon-js@latest
+cd my-app && npm install @neondatabase/neon-js@latest @neondatabase/auth-ui
 ```
 
 </TwoColumnLayout.Block>
@@ -102,7 +98,7 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 <TwoColumnLayout.Block label="Add to src/styles.css">
 
 ```css
-@import '@neondatabase/neon-js/ui/tailwind';
+@import '@neondatabase/auth-ui/tailwind';
 ```
 
 </TwoColumnLayout.Block>
@@ -156,7 +152,7 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
 import { authClient } from '../auth';
 
 export const Route = createRootRoute({
@@ -192,7 +188,7 @@ Create a route to handle authentication views (sign in, sign up, etc.). Create `
 
 ```tsx filename="src/routes/auth.$pathname.tsx"
 import { createFileRoute } from '@tanstack/react-router';
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { AuthView } from '@neondatabase/auth-ui';
 
 export const Route = createFileRoute('/auth/$pathname')({
   component: Auth,
@@ -228,7 +224,7 @@ Create a route to handle account management views. Create `src/routes/account.$p
 
 ```tsx filename="src/routes/account.$pathname.tsx"
 import { createFileRoute } from '@tanstack/react-router';
-import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+import { AccountView } from '@neondatabase/auth-ui';
 
 export const Route = createFileRoute('/account/$pathname')({
   component: Account,
@@ -266,7 +262,7 @@ Update `src/routes/index.tsx` to protect the home page:
 
 ```tsx filename="src/routes/index.tsx"
 import { createFileRoute } from '@tanstack/react-router';
-import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
+import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/auth-ui';
 import { authClient } from '@/auth';
 
 export const Route = createFileRoute('/')({

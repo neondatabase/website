@@ -49,14 +49,24 @@ fi
 [[ "$SINCE_DATE" =~ ^--since= ]] && SINCE_DATE="${SINCE_DATE#--since=}"
 
 # Calculate the since date in YYYY-MM-DD format for comparisons
-# This handles "N days ago" format and converts to a date
-# Default is calculated as "last Friday 00:00 UTC"
+# This handles "N days ago", "yesterday", and absolute date formats.
+# SINCE_DATE_COMPARE must be a valid YYYY-MM-DD string — if it is not,
+# the lexicographic branch-date check will silently drop all releases.
 if [[ "$SINCE_DATE" =~ ([0-9]+)\ days?\ ago ]]; then
     DAYS_AGO="${BASH_REMATCH[1]}"
     SINCE_DATE_COMPARE=$(date -u -v-${DAYS_AGO}d "+%Y-%m-%d" 2>/dev/null || date -u -d "$SINCE_DATE" "+%Y-%m-%d")
+elif [[ "$SINCE_DATE" =~ ^yesterday ]]; then
+    # "yesterday" and "yesterday HH:MM" — macOS date doesn't support -d, so use -v
+    SINCE_DATE_COMPARE=$(date -u -v-1d "+%Y-%m-%d" 2>/dev/null || date -u -d "yesterday" "+%Y-%m-%d")
+elif [[ "$SINCE_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2} ]]; then
+    # Already in YYYY-MM-DD (optionally with time suffix) — extract the date part
+    SINCE_DATE_COMPARE="${SINCE_DATE:0:10}"
 else
-    # For absolute dates like "2026-01-20", use as-is or parse
-    SINCE_DATE_COMPARE=$(date -u -j -f "%Y-%m-%d" "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null || date -u -d "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null || echo "$SINCE_DATE")
+    # Last resort: try macOS -j and GNU -d; fall back to today so we never
+    # silently drop releases due to an unparseable SINCE_DATE_COMPARE.
+    SINCE_DATE_COMPARE=$(date -u -j -f "%Y-%m-%d" "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null \
+        || date -u -d "$SINCE_DATE" "+%Y-%m-%d" 2>/dev/null \
+        || date -u "+%Y-%m-%d")
 fi
 
 # For git log --since, use start of SINCE_DATE_COMPARE (UTC) when it is a calendar
@@ -374,8 +384,9 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
             branch_date=$(git log -1 --format=%aI "$branch" 2>/dev/null | cut -d'T' -f1)
 
             if [[ "$branch_date" > "$SINCE_DATE_COMPARE" ]] || [[ "$branch_date" == "$SINCE_DATE_COMPARE" ]]; then
-                # Get commits
-                git log --oneline --no-merges "$branch" --format="%s" | head -30 | \
+                # Only include commits within the report window (branch HEAD date alone
+                # is not enough — release cuts can carry older PRs cherry-picked in).
+                git log --since="$GIT_LOG_SINCE" --oneline --no-merges "$branch" --format="%s" | head -30 | \
                 while read -r line; do
                     echo "$line" | grep -qE "^(Release|Hotfix|Control-plane release)" && continue
                     pr=$(echo "$line" | grep -oE '#[0-9]+' | head -1 | tr -d '#' || echo "")

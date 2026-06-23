@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Insert Data Into Tables'
 page_title: 'PostgreSQL PHP: Insert Data Into Tables'
-page_description: 'In this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.'
+page_description: >-
+  In this tutorial, you will learn how to use PHP PDO API to insert data into a
+  PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/insert/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Insert-Example.png'
-updatedOn: '2022-02-09T15:05:02+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Insert-Example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Create New Tables'
-  slug: 'postgresql-php/create-tables'
+  slug: postgresql-php/create-tables
 nextLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'
-  slug: 'postgresql-php/update'
+  slug: postgresql-php/update
 ---
+
+<Admonition type="info" id="CTA">
+Inserting data into PostgreSQL with PHP PDO works the same way on any Postgres deployment, so the techniques here carry over wherever your database lives. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PHP PDO API to insert data into a PostgreSQL database table.
 
@@ -60,17 +66,17 @@ public function insertStock($symbol, $company) {
 }
 ```
 
-First, construct an `INSERT` statement that uses two named placed holders: `:symbol` and `:company` for binding values later.
+First, construct an `INSERT` statement that uses two named placeholders: `:symbol` and `:company` for binding values later.
 
 Next, prepare the insert statement for execution by calling the `prepare()` method of the PDO object.
 
-Then, passing the values to the statement by calling the `bindValue()` method.
+Then, pass the values to the statement by calling the `bindValue()` method.
 
 After that, execute the `INSERT` statement by calling the `execute()` method.
 
 Finally, get the ID of the last inserted row by calling the `lastInsertId()` method of the PDO object
 
-the `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
+The `PDO_PGSQL` extension requires us to specify the name of the sequence object as the parameter, we passed the `stocks_id_seq` string to the function to get the generated ID.
 
 ## Insert multiple rows into a table example
 

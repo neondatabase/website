@@ -2,14 +2,24 @@
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
 summary: >-
-  Covers the integration of AWS S3 with Neon for storing files and managing
-  metadata, including setup instructions for creating a Neon project and
-  configuring an S3 bucket.
+  AWS S3 and Neon integration pattern that stores binary files (images, videos,
+  uploads) in an S3 bucket while persisting file metadata (object key, URL,
+  user ID, timestamp) in a Neon Postgres table. Use this guide when you need a
+  scalable file-upload architecture with presigned upload URLs, IAM credentials,
+  CORS configuration, and a queryable metadata index in Postgres. Includes
+  working backend examples in JavaScript (Hono, AWS SDK v3) and Python (Flask,
+  boto3) with an s3_files schema and presign/save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.007Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate AWS S3 with Neon by storing file metadata (like the object key and URL) in your Neon database, while using S3 for file storage.
 

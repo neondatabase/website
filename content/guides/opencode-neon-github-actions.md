@@ -4,7 +4,7 @@ subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Ne
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-03-10T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
@@ -30,7 +30,7 @@ To follow along with this guide, you will need:
 
 - **Neon account and project:** A Neon account with an active project. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 - **OpenCode CLI:** OpenCode CLI installed and configured. You can find installation instructions in the [OpenCode documentation](https://opencode.ai/docs#install).
-- **Application repository on Github:** A GitHub repository containing an application that uses your Neon project as its database. In this example, you'll use a simple snippet management tool called SnippetHub built with Next.js and Drizzle ORM. You can follow along with any of your own Neon-backed projects - the focus is on the workflow rather than the specific application.
+- **Application repository on GitHub:** A GitHub repository containing an application that uses your Neon project as its database. In this example, you'll use a simple snippet management tool called SnippetHub built with Next.js and Drizzle ORM. You can follow along with any of your own Neon-backed projects - the focus is on the workflow rather than the specific application.
 
 ## The sample application
 

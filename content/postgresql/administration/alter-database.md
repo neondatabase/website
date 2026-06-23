@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ALTER DATABASE'
-page_title: 'PostgreSQL ALTER DATABASE Statement By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ALTER DATABASE to modify an existing database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/'
+title: PostgreSQL ALTER DATABASE
+page_title: PostgreSQL ALTER DATABASE Statement By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ALTER DATABASE to
+  modify an existing database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-database/
 ogImage: ''
-updatedOn: '2024-02-12T12:18:32+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE DATABASE'
-  slug: 'postgresql-administration/postgresql-create-database'
+  title: PostgreSQL CREATE DATABASE
+  slug: postgresql-administration/postgresql-create-database
 nextLink:
-  title: 'PostgreSQL DROP DATABASE'
-  slug: 'postgresql-administration/postgresql-drop-database'
+  title: PostgreSQL DROP DATABASE
+  slug: postgresql-administration/postgresql-drop-database
 ---
+
+<Admonition type="info" id="CTA">
+ALTER DATABASE works the same across any PostgreSQL deployment, so the syntax and behavior covered here apply whether you're running Postgres locally, on another cloud, or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to modify existing databases by using **PostgreSQL ALTER DATABASE** statement.
 
@@ -28,7 +35,7 @@ The `ALTER DATABASE` statement allows you to carry the following action on the d
 
 ### 1\) Changing attributes of a database
 
-To change the attributes of a database, you use the following form of the `ALTER TABLE` statement:
+To change the attributes of a database, you use the following form of the `ALTER DATABASE` statement:
 
 ```sql
 ALTER DATABASE name WITH option;

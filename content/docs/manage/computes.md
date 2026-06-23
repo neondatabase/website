@@ -1,12 +1,14 @@
 ---
 title: Manage computes
 summary: >-
-  Covers the management of computes in Neon, detailing how to connect
-  applications to Postgres databases via primary and read replica computes,
-  along with viewing and editing compute details in the Neon Console.
+  Neon computes are virtualized Postgres instances attached to branches,
+  available as primary read-write or read-replica types. Use this page to
+  create, resize, or delete a compute, configure autoscaling or scale-to-zero,
+  size your compute based on working set and connection limits, or manage
+  compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.115Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -78,8 +80,8 @@ Some key points to understand about how your endpoint responds when you make cha
   When your compute resizes automatically as part of the autoscaling feature, there are no restarts or disconnects; it just scales.
   </Admonition>
 
-* Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
-* If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
+- Editing minimum or maximum autoscaling sizes also requires a restart; existing connections are temporarily disconnected.
+- If you disable scale to zero, you may need to restart your compute manually to get the latest compute-related release updates from Neon if updates are not applied automatically by a [scheduled update](/docs/manage/updates). Scheduled updates are applied according to certain criteria, so not all computes receive these updates automatically. See [Restart a compute](#restart-a-compute).
 
 To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection. See [Handling connection disruptions](/docs/manage/updates#handling-connection-disruptions).
 

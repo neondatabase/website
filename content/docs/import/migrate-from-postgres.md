@@ -1,15 +1,18 @@
 ---
 title: Migrate data from Postgres with pg_dump and pg_restore
 summary: >-
-  Covers the migration of data between Postgres databases using `pg_dump` and
-  `pg_restore`, including connection requirements and best practices for Neon
-  environments.
+  Command reference for migrating a Postgres database to Neon using `pg_dump`
+  and `pg_restore`, covering flags (-Fc, -j, -O/--no-owner), custom-format
+  archives, and piping for small databases. Use this page when you need exact
+  dump/restore commands. For region migration or logical replication decisions,
+  see the Region migration page instead. Neon requires unpooled connection
+  strings, and does not support `pg_dumpall` or the `-C/--create` option.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -57,6 +60,18 @@ The `pg_dump` command above includes these arguments:
 - `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+
+### Export a database as a plain SQL file
+
+To export your database as a portable, human-readable `.sql` file instead of a custom-format archive, leave out the `-F` option. Plain text is the default `pg_dump` format:
+
+```bash shouldWrap
+pg_dump -d <source_database_connection_string> -f dump.sql
+```
+
+The result is a SQL script you can read, edit, version, or grep, and replay with `psql -f dump.sql`. You can narrow what you export with `--schema-only` (no data), `--data-only` (no DDL), or `-t <table_name>` (a single table). Add `--no-owner` to skip `ALTER OWNER` statements when you plan to restore to a different role. See [Database object ownership considerations](#database-object-ownership-considerations).
+
+Choose the custom format (`-Fc`) shown above when you want `pg_restore` features such as selective or parallel restore. Choose plain SQL when you want to read or edit the output, or load it with `psql`. Note that `psql` only supports plain-text dumps.
 
 ## Restore data to Neon with pg_restore
 

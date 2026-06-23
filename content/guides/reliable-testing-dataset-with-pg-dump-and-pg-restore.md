@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2025-02-14T00:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 title: How to Create a Reliable Testing Dataset with pg_dump and pg_restore
 subtitle: A practical guide to extracting a test dataset from Postgres using pg_dump, pg_restore and psql
 ---
@@ -215,7 +215,7 @@ The flags used in this step are explained below:
 | --------------- | -------------------------------------------------------------------------------- |
 | `-Fc`           | Dumps the database in a custom format.                                           |
 | `--schema-only` | Dumps only the schema (table structures, indexes, constraints) without any data. |
-| `-f `           | Specifies the output file where the schema dump will be stored.                  |
+| `-f`            | Specifies the output file where the schema dump will be stored.                  |
 
 ### Dump data
 

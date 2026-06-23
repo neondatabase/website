@@ -2,14 +2,18 @@
 title: Postgres json_object() function
 subtitle: Creates a JSON object from key-value pairs
 summary: >-
-  Covers the usage of the `json_object` function in Postgres for creating JSON
-  objects from key-value pairs, enabling dynamic JSON data generation from table
-  data or input parameters.
+  The Postgres `json_object` function constructs a JSON object from two parallel
+  text arrays (keys and values) or a single interleaved text array, returning a
+  `JSON` value per row. Use it when you need to shape relational columns into a
+  JSON object at query time without writing application-side serialization code.
+  Unlike `json_build_object`, which accepts a variable argument list of any
+  type, `json_object` requires text arrays and casts all values to text; use
+  `jsonb_object` for the binary JSONB equivalent.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.865Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The `json_object` function in Postgres is used to create a `JSON` object from a set of key-value pairs. It is particularly useful when you need to generate `JSON` data dynamically from existing table data or input parameters.
+The `json_object` function in Postgres is used to create a `JSON` object from a set of key-value pairs. Use it when you need to generate `JSON` data dynamically from existing table data or input parameters.
 
 <CTA />
 

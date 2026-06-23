@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_object_agg() Function'
-page_title: 'PostgreSQL jsonb_object_agg() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_object_agg() function to aggregate key/value pairs into a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/'
+title: PostgreSQL jsonb_object_agg() Function
+page_title: PostgreSQL jsonb_object_agg() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_object_agg()
+  function to aggregate key/value pairs into a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_agg/
 ogImage: ''
-updatedOn: '2024-02-25T09:00:30+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_agg() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_agg'
+  title: PostgreSQL jsonb_agg() Function
+  slug: postgresql-json-functions/postgresql-jsonb_agg
 nextLink:
-  title: 'PostgreSQL jsonb_typeof() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_typeof'
+  title: PostgreSQL jsonb_typeof() Function
+  slug: postgresql-json-functions/postgresql-jsonb_typeof
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_object_agg()` function works on any PostgreSQL database, so everything you learn here applies whether you run Postgres on your laptop, on a VM, or on a managed service. If you're an enterprise shipping AI-driven products, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse so your operational and analytical data live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
 
@@ -191,4 +198,4 @@ The `jsonb_object_agg_strict()` function works like the `jsonb_object_agg()` fun
 ## Summary
 
 - Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
-- Use the `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object and skip null values.
+- Use the `jsonb_object_agg_strict()` function to aggregate key/value pairs into a JSON object and skip null values.

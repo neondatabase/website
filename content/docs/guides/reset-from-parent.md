@@ -2,11 +2,15 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 summary: >-
-  Covers the process of resetting a branch in Neon to match the latest schema
-  and data from its parent branch, allowing for quick updates and
-  synchronization without preserving local changes.
+  Reset from parent instantly overwrites all databases on a Neon child branch
+  with the latest schema and data from its parent, discarding any local changes.
+  Use this feature to refresh a development or staging branch from production
+  without creating a backup. Unlike Instant restore, it does not preserve a
+  backup and is intended for syncing rather than data recovery. Root branches
+  cannot be reset, and branches with their own children must have those children
+  deleted first.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.042Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -47,7 +51,7 @@ You can reset any branch to its parent using any of our tools.
 <TabItem>
 On the **Branches** page in the Neon Console, select the branch that you want to reset.
 
-The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevent detail.
+The console opens to the details page for your branch, giving you key information about the branch and its child status: its parent, the last time it was reset, and other relevant detail.
 
 To reset the branch, select **Reset from parent** from the **Actions** menu or the **Last data reset** panel.
 
@@ -86,7 +90,7 @@ Alternatively, you can set the `project-id` as a background context for your CLI
 neon set-context --project-id <project id>
 ```
 
-Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+Read more about performing branching actions from the CLI in [CLI - branches](/docs/cli/branches), and more about setting contexts in [CLI - set-context](/docs/cli/set-context).
 
 </TabItem>
 

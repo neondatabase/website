@@ -2,18 +2,22 @@
 title: Organizations
 subtitle: Manage your projects and collaborate with team members
 summary: >-
-  Covers the management of projects within organizations in Neon, detailing user
-  roles, permissions, and the process for creating and overseeing organizations
-  and their associated projects.
+  Neon Organizations are the top-level containers for all projects, providing
+  centralized billing, member management, and access controls for teams on free
+  and paid plans. Teams use organizations to collaborate across projects, assign
+  Admin or Member roles, and auto-provision users by verified email domain.
+  Current limitations include all users being able to manage protected branches
+  regardless of role, and a permissions model that does not yet support
+  fine-grained access controls.
 enableTableOfContents: true
-updatedOn: '2026-03-12T17:34:43.559Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members, billing information, and access to preview features through the [Early Access Program](/docs/introduction/roadmap#organization-early-access).
+In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members and billing information.
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 
@@ -24,7 +28,7 @@ Organizations have two main member roles:
 - **Admin**: Full control over the organization and all its projects.
 - **Member**: Access to all organization projects, but cannot modify org settings or delete projects.
 
-For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
+For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page. That page also explains [which roles receive certain organization emails](/docs/manage/user-permissions#email-notifications) (for example, alerts when a project is close to its storage limit).
 
 You can also [auto-provision members by email domain](/docs/manage/orgs-add-members-by-domain) so that users whose email matches a verified domain are added to the organization automatically when they sign up or log in.
 

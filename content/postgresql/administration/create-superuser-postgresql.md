@@ -1,18 +1,25 @@
 ---
-title: 'How to Create Superuser in PostgreSQL'
-page_title: 'How to Create Superuser in PostgreSQL'
-page_description: 'In this tutorial, you will learn about PostgreSQL superusers and how to create them using the CREATE ROLE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/'
+title: How to Create Superuser in PostgreSQL
+page_title: How to Create Superuser in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL superusers and how to create
+  them using the CREATE ROLE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/create-superuser-postgresql/
 ogImage: ''
-updatedOn: '2024-02-22T08:40:18+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Change the Password of a PostgreSQL User'
-  slug: 'postgresql-administration/postgresql-change-password'
+  title: How to Change the Password of a PostgreSQL User
+  slug: postgresql-administration/postgresql-change-password
 nextLink:
-  title: 'PostgreSQL Row-Level Security'
-  slug: 'postgresql-administration/postgresql-row-level-security'
+  title: PostgreSQL Row-Level Security
+  slug: postgresql-administration/postgresql-row-level-security
 ---
+
+<Admonition type="info" id="CTA">
+Creating superusers with CREATE ROLE and ALTER ROLE works the same on any PostgreSQL deployment, so the techniques here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL superusers and how to create them using the `CREATE` `ROLE` statement.
 
@@ -131,7 +138,7 @@ Output:
 
 ## Summary
 
-- In PostgreSQL, a superuser bypass all permission checks except the permission to log in.
+- In PostgreSQL, a superuser bypasses all permission checks except the permission to log in.
 - Use the `CREATE ROLE...SUPERUSER` statement to create a superuser.
 - Use the `ALTER ROLE...SUPERUSER` statement to make a role a superuser.
 - Use the `ALTER ROLE...NOSUPERUSER` statement to revoke the superuser from a user.

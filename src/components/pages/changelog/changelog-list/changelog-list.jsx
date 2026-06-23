@@ -18,13 +18,13 @@ const ChangelogPost = (post) => {
       <div
         className={cn(
           'relative w-full pt-10 pb-24',
-          'before:absolute before:top-0 before:right-0 before:-left-40 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
+          'before:absolute before:top-0 before:right-0 before:-left-40 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20 xl:before:left-0 xl:before:w-full',
           'group-last:pb-0 dark:before:bg-gray-new-20',
           'md:pb-7 sm:ml-0 sm:max-w-full sm:pt-0 sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
         )}
       >
         <Link
-          className="absolute top-7 right-0 -left-40 shrink-0 font-mono text-[13px] leading-none font-medium whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
+          className="absolute top-9.5 right-0 -left-40 w-fit shrink-0 font-mono text-[13px] leading-none font-medium whitespace-nowrap text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white xl:relative xl:top-0 xl:left-0"
           to={changelogPath}
         >
           <div className="flex w-32 items-center gap-1.5 py-[15px]">

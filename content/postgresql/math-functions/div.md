@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DIV() Function'
-page_title: 'PostgreSQL DIV() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DIV() function to perform integer division and apply it effectively.'
+title: PostgreSQL DIV() Function
+page_title: PostgreSQL DIV() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DIV() function to
+  perform integer division and apply it effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
 ogImage: ''
-updatedOn: '2024-02-17T05:09:08+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CBRT() Function'
-  slug: 'postgresql-math-functions/postgresql-cbrt'
+  title: PostgreSQL CBRT() Function
+  slug: postgresql-math-functions/postgresql-cbrt
 nextLink:
-  title: 'PostgreSQL DEGREES() Function'
-  slug: 'postgresql-math-functions/postgresql-degrees'
+  title: PostgreSQL DEGREES() Function
+  slug: postgresql-math-functions/postgresql-degrees
 ---
+
+<Admonition type="info" id="CTA">
+The DIV() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DIV()` function to perform integer division.
 
@@ -29,7 +35,7 @@ DIV(dividend, divisor)
 In this syntax:
 
 - `dividend` is the number that you want to divide.
-- `divisor` is the number to which to divide the dividend.
+- `divisor` is the number by which to divide the dividend.
 
 The `DIV()` function returns the integer quotient of the division.
 
@@ -60,7 +66,7 @@ Unlike regular division, the `DIV()` function truncates any fractional part of t
 
 ### 2\) Grouping data into bins
 
-You can group numerical data data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
+You can group numerical data into bins using the `DIV()` function. For example, you can group film from the `film` table of the [sample database](../postgresql-getting-started/postgresql-sample-database) into bins of 30 minutes:
 
 ```sql
 SELECT

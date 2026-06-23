@@ -4,7 +4,7 @@ subtitle: Go from Text prompt to Full-Stack Database backed applications in minu
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-12T00:00:00.000Z'
-updatedOn: '2025-03-12T00:00:00.000Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The landscape of application development is rapidly changing, with AI-powered tools empowering even non technical users to build faster and more intuitively than ever before. Imagine describing your app idea in a simple conversation and watching it materialize in seconds, complete with a fully functional database. This is now possible with [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
@@ -15,7 +15,7 @@ This guide will introduce you to Anything and demonstrate how you can use it to 
 
 Anything leverages Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Anything's rapid app development experience. By abstracting away database complexities, Anything users can concentrate solely on their application's functionality and design.
 
-This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and and focus on developing their application. Neon operates invisibly in the background. To learn more about how Anything uses Neon, see [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
+This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and focus on developing their application. Neon operates invisibly in the background. To learn more about how Anything uses Neon, see [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
 
 ## Prerequisites
 

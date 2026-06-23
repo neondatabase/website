@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL UNIQUE Index'
-page_title: 'PostgreSQL UNIQUE Index'
-page_description: 'In this tutorial, you will learn how to create a PostgreSQL UNIQUE index to ensure the uniqueness of values in one or more columns.'
+title: PostgreSQL UNIQUE Index
+page_title: PostgreSQL UNIQUE Index
+page_description: >-
+  In this tutorial, you will learn how to create a PostgreSQL UNIQUE index to
+  ensure the uniqueness of values in one or more columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-unique-index/'
 ogImage: ''
-updatedOn: '2024-02-28T13:08:05+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE INDEX Statement'
-  slug: 'postgresql-indexes/postgresql-create-index'
+  title: PostgreSQL CREATE INDEX Statement
+  slug: postgresql-indexes/postgresql-create-index
 nextLink:
-  title: 'PostgreSQL Index on Expression'
-  slug: 'postgresql-indexes/postgresql-index-on-expression'
+  title: PostgreSQL Index on Expression
+  slug: postgresql-indexes/postgresql-index-on-expression
 ---
+
+<Admonition type="info" id="CTA">
+Unique indexes work the same way on any PostgreSQL deployment, so everything you learn here about CREATE UNIQUE INDEX, NULLS DISTINCT behavior, and multi-column uniqueness applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL unique index to ensure the uniqueness of values in one or more columns.
 
@@ -32,7 +38,7 @@ In this syntax:
 
 - First, specify the index name in the `CREATE UNIQUE INDEX` statement.
 - Second, provide the name of the table along with a list of indexed columns in the ON clause.
-- Third, the `NULL NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
+- Third, the `NULLS NOT DISTINCT` option treats nulls as equal, whereas `NULLS DISTINCT` treats nulls as distinct values. By default, the statement uses `NULLS DISTINCT`, meaning that the indexed column may contain multiple nulls.
 
 PostgreSQL offers [multiple index types](postgresql-index-types), but only the B\-tree index type supports unique indexes.
 

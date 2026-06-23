@@ -2,15 +2,20 @@
 title: Connect a Django application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Django application
 summary: >-
-  How to connect a Django application to a Neon project by creating a project in
-  the Neon Console and configuring the database connection settings in the
-  Django `settings.py` file.
+  Connecting Django to Neon serverless Postgres requires configuring the
+  `DATABASES` block in `settings.py` with the psycopg3 driver, `sslmode:
+  require`, and `CONN_HEALTH_CHECKS: True` to prevent dropped connections when
+  Neon's compute scales to zero after 5 minutes of inactivity. Use this page
+  when setting up a new Django-to-Neon connection or debugging the `Endpoint ID
+  is not specified` SNI error, which occurs with psycopg2 and libpq versions
+  older than v14. For schema migrations after connecting, see the separate Django
+  Migrations guide.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-02-06T22:07:32.948Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -32,6 +37,7 @@ python3 -m venv venv
 source venv/bin/activate   # macOS / Linux
 # venv\Scripts\activate    # Windows
 ```
+
 </Admonition>
 
 ## Install the PostgreSQL driver
@@ -198,5 +204,9 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 - The `.env` file should use individual `PG*` variables (`PGHOST`, `PGDATABASE`, etc.), not a single `DATABASE_URL`, since Django's database configuration expects separate fields.
 
 </details>
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
 
 <NeedHelp/>

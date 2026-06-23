@@ -1,13 +1,14 @@
 ---
 title: Postgres extension explorer
 summary: >-
-  Covers the browsing of supported Postgres extensions categorized by
-  functionality, including installation and update instructions for various
-  extensions related to AI, analytics, and auditing.
+  A category-browsable index of all Postgres extensions supported on Neon,
+  organized into groups such as AI/ML, analytics, geospatial, search, security,
+  and query optimization. Navigate to individual extension docs, install
+  instructions, or the flat alphabetical list.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2026-03-19T19:40:30.841Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Browse supported Postgres extensions by category.
@@ -157,8 +158,6 @@ Browse supported Postgres extensions by category.
 
 <a href="https://github.com/RhodiumToad/ip4r" description="Provides a range index type and functions for efficiently storing and querying IPv4 and IPv6 ranges and addresses in Postgres" icon="table">ip4r</a>
 
-<a href="https://github.com/sraoss/pg_ivm" description="Provides an Incremental View Maintenance (IVM) feature for Postgres" icon="table">pg_ivm</a>
-
 <a href="https://github.com/pgpartman/pg_partman" description="A partition manager extension that enables creating and managing time-based and number-based table partition sets in Postgres" icon="table">pg_partman</a>
 
 <a href="/docs/extensions/pg_prewarm" description="Allows manual preloading of relation data into the Postgres buffer cache, reducing access times for frequently queried tables" icon="table">pg_prewarm</a>
@@ -205,7 +204,7 @@ Browse supported Postgres extensions by category.
 
 <a href="https://livescript.net/" description="Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript" icon="binary-code">plls</a>
 
-<a href="https://github.com/plv8/plv8/" description="A Postgres procedural language powered by V8 Javascript Engine for writing functions in Javascript that are callable from SQL" icon="binary-code">plv8</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a Postgres procedural language powered by V8 for JavaScript callable from SQL; use plpgsql or app-side logic instead" icon="binary-code">plv8</a>
 
 <a href="https://www.postgresql.org/docs/16/plpgsql.html" description="The default procedural language for Postgres, enabling the creation of complex functions and triggers" icon="binary-code">plpgsql</a>
 

@@ -2,12 +2,17 @@
 title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 summary: >-
-  Step-by-step guide for configuring a Postgres source connector in Decodable to
-  replicate data from a Neon Postgres database, including enabling logical
-  replication and creating a dedicated Postgres role for the process.
+  Logical replication from Neon Postgres to Decodable uses a Postgres CDC
+  connector (Apache Flink and Debezium) to stream row-level changes into
+  Decodable streams for routing to sinks such as Snowflake, Kafka, Amazon S3,
+  or Elasticsearch. Use this guide when you need continuous, low-latency change
+  capture from Neon with optional SQL or Flink transformations before data
+  reaches its destination. Setup requires enabling wal_level=logical on the Neon
+  project (irreversible) and setting replica identity to FULL on each source
+  table. Connect Decodable using a direct non-pooled connection string.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.102Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -82,10 +87,10 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -95,6 +100,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
+
+> Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
 
 </TabItem>
 

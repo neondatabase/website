@@ -2,11 +2,13 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 summary: >-
-  Covers the setup of Neon Auth, a managed authentication service that
-  integrates with your Neon database, allowing for branch-aware authentication
-  and seamless testing of authentication workflows in isolated environments.
+  Neon Auth is a managed authentication service built on Better Auth. It stores
+  users, sessions, and OAuth configuration in your Neon Postgres database under
+  the neon_auth schema, compatible with Row Level Security. Every database branch
+  gets its own isolated auth environment, so you can test sign-up, login, and
+  OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.131Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -24,7 +26,7 @@ redirectFrom:
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
+Neon Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
 
 ## Quick start guides
 
@@ -40,14 +42,9 @@ Choose your framework to get started:
 
 </TechCards>
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
+## Set up with your AI editor
 
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetup />
 
 ## Why Neon Auth?
 
@@ -68,7 +65,7 @@ Neon Auth currently supports Better Auth version **1.4.18**.
 
 ### When to use Neon Auth vs. self-hosting Better Auth
 
-Neon Auth is a managed authentication service that integrates seamlessly with Neon's architecture and offerings:
+Neon Auth is a managed authentication service built into Neon's architecture:
 
 - **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
 - **Built-in Data API integration**: JWT token validation for the Data API has native support for Neon Auth.
@@ -86,7 +83,7 @@ As Neon Auth evolves, more Better Auth integrations and features will be added. 
 
 ## Basic usage
 
-Enable Auth in your Neon project, then add authentication to your app.
+Enable Auth in the Neon Console or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
 
 **For Next.js (server-side):**
 
@@ -118,7 +115,7 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 export default function App() {
@@ -151,7 +148,7 @@ See [Branching authentication](/docs/auth/branching-authentication) for details 
 
 ## Example applications
 
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples)—Next.js and React apps, cross-subdomain setups, the Organization plugin, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
+Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Neon Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
 
 ## Availability
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_each_text() Function'
-page_title: 'PostgreSQL jsonb_each_text() Function'
-page_description: 'You will learn how to use the PostgreSQL jsonb_each_text() function to expand a JSON object into a set of key/value pairs of type text.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each_text/'
+title: PostgreSQL jsonb_each_text() Function
+page_title: PostgreSQL jsonb_each_text() Function
+page_description: >-
+  You will learn how to use the PostgreSQL jsonb_each_text() function to expand
+  a JSON object into a set of key/value pairs of type text.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_each_text/
 ogImage: ''
-updatedOn: '2024-02-24T09:02:58+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_each() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_each'
+  title: PostgreSQL jsonb_each() Function
+  slug: postgresql-json-functions/postgresql-jsonb_each
 nextLink:
-  title: 'PostgreSQL jsonb_object_keys() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_object_keys'
+  title: PostgreSQL jsonb_object_keys() Function
+  slug: postgresql-json-functions/postgresql-jsonb_object_keys
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_each_text()` function works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_each_text()` function to expand a JSON object into a set of key/value pairs of type text.
 
@@ -32,7 +39,7 @@ In this syntax:
 
 The function returns a set of records where each record consists of two fields key and value, both have the type `text`.
 
-If the `json_object` is null, the function returns an empty set. in case the `json_object` is not a JSON object, the function will issue an error.
+If the `json_object` is null, the function returns an empty set. In case the `json_object` is not a JSON object, the function will issue an error.
 
 ## PostgreSQL jsonb_each_text() function examples
 

@@ -3,13 +3,19 @@ title: The Neon GitHub integration
 subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
   workflows
 summary: >-
-  Covers the setup of the Neon GitHub integration, enabling connection between a
-  Neon Postgres project and a GitHub repository to facilitate database
-  development and automate workflows using GitHub Actions.
+  The Neon GitHub integration connects a Neon Postgres project to a GitHub
+  repository by installing a GitHub App that stores a NEON_API_KEY secret and
+  NEON_PROJECT_ID variable in the repo. GitHub Actions workflows use these to
+  create a database branch when a pull request opens and delete it on close.
+  Choose this page to install the integration, add the sample branching
+  workflow, or build custom workflows with the create-branch, delete-branch,
+  schema-diff, and reset-branch actions. Also covers disconnecting a project,
+  removing the integration, and example apps for Vercel, Cloudflare Pages, and
+  Fly.io preview deployments.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2026-02-06T22:07:33.022Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
@@ -223,7 +229,7 @@ If you're new to GitHub Actions and workflows, GitHub's [Quickstart for GitHub A
 
 ## Example applications with GitHub Actions workflows
 
-The following example applications utilize GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
+The following example applications use GitHub Actions workflows to create and delete branches in Neon. These examples can serve as references when building your own workflows.
 
 <Admonition type="note">
 The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID` variable in your GitHub repository. Depending on the specific example application, additional or different variables and secrets may have been used. As you develop your workflows, you might also need to incorporate various other variables and secrets.
@@ -238,8 +244,6 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
-
-<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
 
 </DetailIconCards>
 
@@ -266,7 +270,7 @@ When connecting a Neon project to a GitHub repository, the GitHub integration pe
 - Creates a `NEON_API_KEY` secret in your GitHub repository
 - Adds a `NEON_PROJECT_ID` variable to your GitHub repository
 
-The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](/docs/reference/neon-cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
+The `NEON_API_KEY` allows you to run any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) method or [Neon CLI](/docs/cli) command, which means you can develop actions and workflows that create, update, and delete various objects in Neon such as projects, branches, databases, roles, and computes.
 
 The `NEON_PROJECT_ID` variable defines the Neon project that is connected to the repository. Operations run on Neon via the Neon API or CLI typically require specifying the Neon project ID, as a Neon account may have more than one Neon project.
 

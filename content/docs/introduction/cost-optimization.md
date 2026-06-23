@@ -2,11 +2,17 @@
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
 summary: >-
-  Covers strategies for managing and reducing Neon costs by optimizing compute
-  usage, including right-sizing, effective autoscaling, enabling scale to zero,
-  and managing persistent connections.
+  Practical strategies for cutting Neon costs across every billing metric:
+  compute (CU-hours), storage, instant restore history, extra branches, and
+  public data transfer. Use this page to diagnose an unexpectedly high bill or
+  to proactively reduce spend. Key tactics include right-sizing compute,
+  enabling scale to zero, running VACUUM FULL to reclaim storage space, and
+  trimming the PITR history window. Instant restore storage is billed at
+  $0.20/GB-month on paid plans for root branches only. Extra branches cost
+  $1.50/branch-month over the plan allowance. Paid plans include 500 GB/month
+  of public data transfer, then $0.10/GB.
 enableTableOfContents: true
-updatedOn: '2026-03-20T16:01:10.992Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
@@ -37,7 +43,7 @@ Storage costs are based on actual data size for root branches and the minimum of
 
 **Optimization strategies:**
 
-- **Clean up unused data.** Delete old rows, drop unused tables, and remove test data to reduce your root branch data size. Be aware that delete operations generate WAL records that temporarily add to your [instant restore storage](#instant-restore-storage) until they age out of your restore window. For bulk deletions, use `TRUNCATE TABLE` instead of `DELETE` when possible (it generates far less WAL).
+- **Clean up unused data.** Delete old rows, drop unused tables, and remove test data to reduce your root branch data size. Be aware that delete operations generate WAL records that temporarily add to your [instant restore storage](#instant-restore-storage) until they age out of your history window. For bulk deletions, use `TRUNCATE TABLE` instead of `DELETE` when possible (it generates far less WAL).
 
 - **Reclaim space from bloated tables.** Frequent updates and deletes leave dead tuples that inflate your data size. You can run `VACUUM FULL` on heavily modified tables to reclaim space. However, see the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) first to understand the trade-offs before taking action.
 
@@ -60,7 +66,7 @@ When branches are created, they initially do not add to storage since they share
 <details>
 <summary>**Do delete operations add to storage?**</summary>
 
-Yes. Any data-modifying operation, including deletes, generates [WAL records](/docs/reference/glossary#write-ahead-logging-wal) that temporarily increase your storage size until they age out of your restore window. For mass deletions, `TRUNCATE TABLE` is more storage-efficient since it logs a single operation rather than a record for each deleted row.
+Yes. Any data-modifying operation, including deletes, generates [WAL records](/docs/reference/glossary#write-ahead-logging-wal) that temporarily increase your storage size until they age out of your history window. For mass deletions, `TRUNCATE TABLE` is more storage-efficient since it logs a single operation rather than a record for each deleted row.
 
 </details>
 
@@ -79,7 +85,7 @@ Storage limits depend on your Neon plan:
 
 If your database is small but your bill seems high, check these factors:
 
-- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day restore window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
+- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day history window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
 - **Unused branches:** If you created branches, performed write operations, and forgot about the branches, they could be contributing to your storage costs. Review and [delete](/docs/manage/branches#delete-a-branch) branches you no longer need.
 - **Table bloat:** Frequent updates and deletes can cause table bloat (dead tuples), which can make your data size larger than expected. See the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) for details.
 
@@ -135,7 +141,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 </details>
 
@@ -145,11 +151,11 @@ Instant restore storage (PITR storage) is the change history retained for point-
 
 **Optimization strategies:**
 
-- **Adjust your restore window.** By default, Neon retains instant restore history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, reduce your restore window to lower costs. See [Restore window](/docs/introduction/restore-window).
+- **Adjust your history window.** By default, Neon retains instant restore history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, reduce your history window to lower costs. See [History window](/docs/introduction/history-window).
 
-- **Understand the trade-offs.** A longer restore window means more recovery options but higher instant restore storage costs. A shorter window reduces costs but limits how far back you can restore. Consider your actual recovery requirements when setting the window.
+- **Understand the trade-offs.** A longer history window means more recovery options for **instant restore** but higher instant restore storage costs. A shorter window reduces costs but limits how far back **instant restore** can go. Consider your actual recovery requirements when setting the window.
 
-- **High-write workloads on root branches generate more history.** The more writes on your root branch(es), the more instant restore history accumulates. For write-heavy root branches, a shorter restore window can significantly reduce costs.
+- **High-write workloads on root branches generate more history.** The more writes on your root branch(es), the more instant restore history accumulates. For write-heavy root branches, a shorter history window can significantly reduce costs.
 
 ## Extra branches
 
@@ -165,7 +171,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 500 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Role Membership'
-page_title: 'PostgreSQL Role Membership'
-page_description: 'In this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/'
+title: PostgreSQL Role Membership
+page_title: PostgreSQL Role Membership
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL group roles and how to use
+  them to manage privileges more effectively.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/
 ogImage: ''
-updatedOn: '2024-02-22T02:54:15+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REVOKE Statement'
-  slug: 'postgresql-administration/postgresql-revoke'
+  title: PostgreSQL REVOKE Statement
+  slug: postgresql-administration/postgresql-revoke
 nextLink:
-  title: 'PostgreSQL SET ROLE Statement'
-  slug: 'postgresql-administration/postgresql-set-role'
+  title: PostgreSQL SET ROLE Statement
+  slug: postgresql-administration/postgresql-set-role
 ---
+
+<Admonition type="info" id="CTA">
+Group roles work the same way across any PostgreSQL deployment, so the patterns you learn here apply whether you're running Postgres yourself or on a managed platform. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and tightly integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.
 
@@ -138,7 +145,7 @@ Output:
 
 The output indicates that the role `alice` has the `SELECT` privilege on the `rental` table even though we did not explicitly assign it.
 
-### Removing a role to a group role
+### Removing a role from a group role
 
 To remove a role from a group role, you use the `REVOKE` statement:
 

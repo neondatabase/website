@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL MIN() Function'
-page_title: 'PostgreSQL MIN() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL MIN() function to get the minimum value in a set of values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/'
-ogImage: '/postgresqltutorial/film-film_category-category-tables.png'
-updatedOn: '2024-01-26T03:16:19+00:00'
+title: PostgreSQL MIN() Function
+page_title: PostgreSQL MIN() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL MIN() function to
+  get the minimum value in a set of values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-min-function/
+ogImage: /postgresqltutorial/film-film_category-category-tables.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MAX Function'
-  slug: 'postgresql-aggregate-functions/postgresql-max-function'
+  title: PostgreSQL MAX Function
+  slug: postgresql-aggregate-functions/postgresql-max-function
 nextLink:
-  title: 'PostgreSQL SUM Function'
-  slug: 'postgresql-aggregate-functions/postgresql-sum-function'
+  title: PostgreSQL SUM Function
+  slug: postgresql-aggregate-functions/postgresql-sum-function
 ---
+
+<Admonition type="info" id="CTA">
+The MIN() function works the same way in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, a VM, or a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed Postgres that's fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL`MIN()` function to get the minimum value of a set.
 
@@ -92,7 +99,7 @@ Output:
 
 How it works.
 
-- First, the [subquery](../postgresql-tutorial/postgresql-subquery) to select the lowest rental rate.
+- First, the [subquery](../postgresql-tutorial/postgresql-subquery) selects the lowest rental rate.
 - Then, the outer query selects films with rental rates equal to the lowest rental rate returned by the subquery.
 
 ### 3\) Using PostgreSQL MIN() function with GROUP BY clause example
@@ -130,7 +137,7 @@ Output:
 
 ### 4\) Using PostgreSQL MIN() function with the HAVING clause example
 
-It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutorial/postgresql-having) clause the filter of the groups whose minimum values meet a specific condition.
+It’s possible to use the `MIN` function in the [`HAVING`](../postgresql-tutorial/postgresql-having) clause to filter the groups whose minimum values meet a specific condition.
 
 The following query uses the `MIN()` function to find the lowest replacement costs of films grouped by category, selecting only groups with replacement costs greater than `9.99`:
 

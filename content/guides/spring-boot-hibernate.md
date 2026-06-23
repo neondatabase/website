@@ -4,7 +4,7 @@ subtitle: Learn how to manage database schema changes with Hibernate, Spring Boo
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-07T00:00:00.000Z'
-updatedOn: '2024-09-07T00:00:00.000Z'
+updatedOn: '2025-06-23T15:22:02.000Z'
 ---
 
 Managing database schema changes is an important aspect of any application development lifecycle.

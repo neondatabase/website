@@ -2,12 +2,15 @@
 title: Import Data Assistant
 subtitle: Import a database under 10 GB to Neon using our automated import tool
 summary: >-
-  How to use the Import Data Assistant to import an existing Postgres database
-  under 10 GB to Neon using a connection string, or to migrate data between
-  Neon projects.
+  Import Data Assistant is a guided, automated tool in the Neon console
+  that migrates a Postgres database under 10 GB to Neon using only a connection
+  string, with no manual pg_dump steps required. Use it to migrate from any
+  supported Postgres platform (excluding Supabase and Heroku) or to move data
+  between Neon projects for a version upgrade or region change. For databases
+  over 10 GB, use pg_dump and pg_restore instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-04-01T18:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -17,7 +20,7 @@ The **Import Data Assistant** can help you automatically import your existing da
 <FeatureBetaProps feature_name="Import Data Assistant"/>
 
 <Admonition type="tip" title="Migrate between Neon projects">
-In additiion to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
+In addition to migrating from other Postgres platforms, you can use the **Import Data Assistant** to migrate data between Neon projects. Use it to upgrade to a newer Postgres version (for example, from Postgres 16 to 17) or move your database to a different region. The assistant steps you through creating a new Neon project.
 </Admonition>
 
 ## Before you start

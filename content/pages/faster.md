@@ -45,9 +45,8 @@ Is your company using Neon to ship faster experiences faster? [Let us know in th
 
 Great software isn’t just functional—it’s fast. At Neon, it’s something we refine and build into our service in countless small ways. Here are some of the faster features we’re particularly proud of.
 
-- **Faster Provisioning** - Get a ready-to-use Postgres database in less than a second with [Claimable Postgres](https://neon.new/) (no signup). Try it right here. 👇
-  <DeployPostgresButton />
-- **Faster Branching** - Our custom storage engine enables data + schema clones for databases of any size in less than a second. [Try it in a web demo](https://neon-demos-branching.vercel.app/) [View Source](https://github.com/neondatabase/branching-demo)
+- **Faster Provisioning** - Databases create in about 350 milliseconds.
+- **Faster Branching** - Our custom storage engine enables data + schema clones for databases of any size in less than a second.
 - **Faster recovery** - The same storage engine lets you restore a 1TB DB in seconds [Demo video](https://www.youtube.com/watch?v=ZnxLCOkb_R0)
 - **Faster autoscaling** - Our [Postgres autoscaling](/docs/guides/autoscaling-algorithm) algorithm checks memory usage 10 times/second and VM metrics every 5 seconds to provision exactly the right compute to serve your workload. [How we do it](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 - **Faster serverless connections** - We built an open-source HTTP proxy to reduce the number of roundtrips required to establish a database connection from 8 to 4. [Read how](/blog/quicker-serverless-postgres)

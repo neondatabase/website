@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL enum'
-page_title: 'PostgreSQL Enum'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL enum data type to define a list of fixed values for a column.'
+title: PostgreSQL enum
+page_title: PostgreSQL Enum
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL enum data type to
+  define a list of fixed values for a column.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-enum/'
 ogImage: ''
-updatedOn: '2024-04-19T10:27:07+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'A Look at PostgreSQL User-defined Data Types'
-  slug: 'postgresql-tutorial/postgresql-user-defined-data-types'
+  title: A Look at PostgreSQL User-defined Data Types
+  slug: postgresql-tutorial/postgresql-user-defined-data-types
 nextLink:
-  title: 'PostgreSQL XML Data Type'
-  slug: 'postgresql-tutorial/postgresql-xml-data-type'
+  title: PostgreSQL XML Data Type
+  slug: postgresql-tutorial/postgresql-xml-data-type
 ---
+
+<Admonition type="info" id="CTA">
+Enum types work the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL enum data type to define a list of fixed values for a column.
 
@@ -33,7 +39,7 @@ In this syntax:
 - First, specify the name of the enum after the `CREATE` `TYPE` keyword.
 - Second, provide a list of comma\-separated enum values within the parentheses followed by the `ENUM` keyword. These values are case\-sensitive.
 
-When you define a column with an enum type, you specify that the column can only accept a fixed of values declared in the enum.:
+When you define a column with an enum type, you specify that the column can only accept a fixed set of values declared in the enum:
 
 ```sql
 column_name enum_type

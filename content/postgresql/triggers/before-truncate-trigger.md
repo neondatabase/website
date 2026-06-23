@@ -1,24 +1,31 @@
 ---
-title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-page_title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-page_description: 'In this tutorial, you will learn how to define a PostgreSQL BEFORE TRUNCATE trigger that fires before a TRUNCATE event occurs on a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/'
+title: PostgreSQL BEFORE TRUNCATE Trigger
+page_title: PostgreSQL BEFORE TRUNCATE Trigger
+page_description: >-
+  In this tutorial, you will learn how to define a PostgreSQL BEFORE TRUNCATE
+  trigger that fires before a TRUNCATE event occurs on a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ''
-updatedOn: '2024-03-29T02:17:22+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INSTEAD OF Triggers'
-  slug: 'postgresql-triggers/postgresql-instead-of-triggers'
+  title: PostgreSQL INSTEAD OF Triggers
+  slug: postgresql-triggers/postgresql-instead-of-triggers
 nextLink:
-  title: 'Disable Triggers'
-  slug: 'postgresql-triggers/managing-postgresql-trigger'
+  title: Disable Triggers
+  slug: postgresql-triggers/managing-postgresql-trigger
 ---
+
+<Admonition type="info" id="CTA">
+The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature, so everything here works the same on any Postgres deployment. If you're an enterprise looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE TRUNCATE` trigger that fires before a `TRUNCATE` event occurs on a table.
 
 ## Introduction to the PostgreSQL BEFORE TRUNCATE trigger
 
-A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
+A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all rows from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
 
 PostgreSQL allows you to [create a trigger](creating-first-trigger-postgresql) that fires before a `TRUNCATE` event occurs.
 

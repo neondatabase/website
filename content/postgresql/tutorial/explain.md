@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL EXPLAIN'
-page_title: 'PostgreSQL EXPLAIN Explained'
-page_description: 'This tutorial explains you the PostgreSQL EXPLAIN statement and shows you how to use it to get the plan for a given query.'
+title: PostgreSQL EXPLAIN
+page_title: PostgreSQL EXPLAIN Explained
+page_description: >-
+  This tutorial explains you the PostgreSQL EXPLAIN statement and shows you how
+  to use it to get the plan for a given query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-explain/'
-ogImage: '/postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png'
-updatedOn: '2024-02-01T09:33:46+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-EXPLAIN-shows-plan-for-a-simple-query.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'
-  slug: 'postgresql-tutorial/postgresql-cast'
+  slug: postgresql-tutorial/postgresql-cast
 nextLink:
-  title: 'PostgreSQL Server and Database Objects'
-  slug: 'postgresql-tutorial/postgresql-server-and-database-objects'
+  title: PostgreSQL Server and Database Objects
+  slug: postgresql-tutorial/postgresql-server-and-database-objects
 ---
+
+<Admonition type="info" id="CTA">
+EXPLAIN works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking to tune queries against a Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration to make it the best managed cloud Postgres available. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you have learned how to use the PostgreSQL `EXPLAIN` statement to display the execution plan of a statement.
 

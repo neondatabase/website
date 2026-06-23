@@ -4,7 +4,7 @@ subtitle: 'Learn how to safely offload complex schema migrations to AI agents us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-04T00:00:00.000Z'
-updatedOn: '2026-03-04T00:00:00.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Refactoring a database schema like splitting tables or dropping columns is inherently risky. When you introduce an AI coding assistant to handle these complex operations autonomously, the stakes get even higher. One wrong `DROP` statement or flawed migration in a shared environment can easily wipe out critical staging data and block your entire team's workflow.
@@ -21,7 +21,7 @@ Before you begin, ensure you have the following:
 
 - **OpenAI Codex CLI:** Installed on your system. Follow the instructions on the [Codex CLI install page](https://developers.openai.com/codex/cli/).
 - **Neon account and project:** A Neon account with at least one active project. Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
-- **Neon CLI:** Neon CLI installed and configured. Follow the [Neon CLI setup guide](/docs/reference/neon-cli#install).
+- **Neon CLI:** Neon CLI installed and configured. Follow the [Neon CLI setup guide](/docs/cli/install).
 - **Example application with Git repository:** Any application with a Git repository. This guide uses a Node.js app with Drizzle ORM (a simple ecommerce app) as an example, but you can follow along with your own codebase. The emphasis here is on demonstrating the workflow for safe AI-driven migrations rather than the specifics of the application.
 
 <Steps>
@@ -102,10 +102,10 @@ If the SQL has a syntax error or a constraint violation during execution, it wil
 
 After Codex has finished development on its isolated database branch, the new schema drift, backfilled data, and corresponding code changes are all confined to your new branch. You are now free to test the app locally using the database URL of this new branch.
 
-If Codex indicated it created a branch with a specific ID (e.g., `br-nameless-cloud-123456`), you can easily retrieve its connection string using the [Neon CLI](/docs/reference/neon-cli):
+If Codex indicated it created a branch with a specific ID (e.g., `br-nameless-cloud-123456`), you can easily retrieve its connection string using the [Neon CLI](/docs/cli):
 
 ```bash
-neon connection-string --branch-id <branch-id>
+neon connection-string <branch-id-or-name>
 ```
 
 Set this connection string in your local environment variables to thoroughly test the application against the new schema.

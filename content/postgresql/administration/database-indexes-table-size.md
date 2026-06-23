@@ -1,18 +1,25 @@
 ---
-title: 'How to Get Sizes of Database Objects in PostgreSQL'
-page_title: 'How to Get Sizes of Database Objects in PostgreSQL'
-page_description: 'This tutorial shows you how to get the sizes of database objects including databases, tables, indexes, tablespaces, and values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/'
+title: How to Get Sizes of Database Objects in PostgreSQL
+page_title: How to Get Sizes of Database Objects in PostgreSQL
+page_description: >-
+  This tutorial shows you how to get the sizes of database objects including
+  databases, tables, indexes, tablespaces, and values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/
 ogImage: ''
-updatedOn: '2024-02-19T04:10:36+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Copy Database Made Easy'
-  slug: 'postgresql-administration/postgresql-copy-database'
+  title: PostgreSQL Copy Database Made Easy
+  slug: postgresql-administration/postgresql-copy-database
 nextLink:
-  title: 'How to Change the Owner of a PostgreSQL Database'
-  slug: 'postgresql-administration/postgres-change-database-owner'
+  title: How to Change the Owner of a PostgreSQL Database
+  slug: postgresql-administration/postgres-change-database-owner
 ---
+
+<Admonition type="info" id="CTA">
+The size functions covered here, from pg_relation_size to pg_column_size, work on any PostgreSQL deployment, so you can apply these techniques wherever your databases run. For enterprises who want visibility into storage growth across a governed, AI-ready data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and Lakehouse integration that large teams demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to get the sizes of database objects including databases, tables, indexes, tablespaces, and values.
 
@@ -157,7 +164,7 @@ To get the total size of all indexes attached to a table, you use the `pg_indexe
 
 The `pg_indexes_size()` function accepts the OID or table name as the argument and returns the total disk space used by all indexes attached to that table.
 
-For example, to get the total size of all indexes attached to the `film` table, you use the following statement:
+For example, to get the total size of all indexes attached to the `actor` table, you use the following statement:
 
 ```sql
 SELECT

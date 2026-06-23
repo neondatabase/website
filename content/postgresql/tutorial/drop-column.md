@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
-page_title: 'PostgreSQL DROP COLUMN'
-page_description: 'This tutorial shows you how to use the PostgreSQL DROP COLUMN clause in the ALTER TABLE statement to remove one or more columns of a table.'
+page_title: PostgreSQL DROP COLUMN
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL DROP COLUMN clause in the
+  ALTER TABLE statement to remove one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-column/'
-ogImage: '/postgresqltutorial/PostgreSQL-Drop-Column-300x128.png'
-updatedOn: '2024-01-25T04:15:44+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-Drop-Column-300x128.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
-  slug: 'postgresql-tutorial/postgresql-add-column'
+  slug: postgresql-tutorial/postgresql-add-column
 nextLink:
-  title: 'PostgreSQL Change Column Type'
-  slug: 'postgresql-tutorial/postgresql-change-column-type'
+  title: PostgreSQL Change Column Type
+  slug: postgresql-tutorial/postgresql-change-column-type
 ---
+
+<Admonition type="info" id="CTA">
+Dropping columns with ALTER TABLE works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that regulated teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 ![PostgreSQL DROP COLUMN](/postgresqltutorial/PostgreSQL-Drop-Column-300x128.png?alignright)
 **Summary**: In this tutorial, you will learn how to use the PostgreSQL `DROP COLUMN` clause in the `ALTER TABLE` statement to remove one or more columns from a table.
@@ -57,7 +63,7 @@ DROP COLUMN column_name2,
 
 Notice that you need to add a comma (`,`) after each `DROP COLUMN` clause.
 
-If a table has one column, you can use drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
+If a table has one column, you can drop it using the `ALTER TABLE...DROP COLUMN` statement. Consequently, the table will have no columns.
 
 It’s worth noting that while PostgreSQL allows a table that has no column, it may be not allowed according to the standard SQL.
 

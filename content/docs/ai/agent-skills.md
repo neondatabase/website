@@ -1,8 +1,19 @@
 ---
 title: Agent Skills
 subtitle: Teach your AI coding assistant how to work with Neon
+summary: >-
+  Agent Skills are structured context files (SKILL.md) that give AI coding
+  assistants accurate knowledge of Neon's APIs, SDKs, and best practices so
+  generated code is correct on the first attempt. Install them when using
+  Cursor, Claude Code, OpenAI Codex, or any Agent Skills-compatible tool to
+  avoid common mistakes such as wrong imports, missing connection pooling, or
+  incorrect serverless driver usage. Skills are installed via `npx skills add`,
+  `neonctl init`, or editor plugins at project level (committable to the repo)
+  or globally; available skills include `neon-postgres`,
+  `neon-postgres-branches`, `neon-postgres-egress-optimizer`, and
+  `claimable-postgres`.
 enableTableOfContents: true
-updatedOn: '2026-04-16T18:23:32.432Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -30,7 +41,7 @@ For any AI tool that supports the [Agent Skills](https://agentskills.io) format,
 npx skills add neondatabase/agent-skills -s neon-postgres
 ```
 
-This works with Cursor, Claude Code, and other compatible tools. The `-s` flag selects a specific skill from the repository. Available skills include `neon-postgres` (the main Neon development skill) and `claimable-postgres` (for [disposable databases](/docs/reference/claimable-postgres)).
+This works with Cursor, Claude Code, and other compatible tools. The `-s` flag selects a specific skill from the repository. Available skills include `neon-postgres` (the main Neon development skill), `neon-postgres-egress-optimizer` (for optimizing egress traffic), `neon-postgres-branches` (for working with branches), and `claimable-postgres` (for [disposable databases](/docs/reference/claimable-postgres)).
 
 Useful flags:
 
@@ -74,7 +85,7 @@ The `neonctl init` command sets up your project to use Neon with your AI coding 
 npx neonctl@latest init
 ```
 
-After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/reference/cli-init) for details.
+After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/cli/init) for details.
 
 ## Project-level vs. global install
 

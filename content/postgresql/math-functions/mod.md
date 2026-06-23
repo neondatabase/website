@@ -1,20 +1,26 @@
 ---
-title: 'PostgreSQL MOD() Function'
-page_title: 'PostgreSQL MOD() Function'
-page_description: 'The PostgreSQL MOD() function performs the modulo operation, returning the remainder after dividing the first argument by the second one.'
+title: PostgreSQL MOD() Function
+page_title: PostgreSQL MOD() Function
+page_description: >-
+  The PostgreSQL MOD() function performs the modulo operation, returning the
+  remainder after dividing the first argument by the second one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/'
 ogImage: ''
-updatedOn: '2024-02-18T07:38:31+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LOG() Function'
-  slug: 'postgresql-math-functions/postgresql-log'
+  title: PostgreSQL LOG() Function
+  slug: postgresql-math-functions/postgresql-log
 nextLink:
-  title: 'PostgreSQL MIN_SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-min_scale'
+  title: PostgreSQL MIN_SCALE() Function
+  slug: postgresql-math-functions/postgresql-min_scale
 ---
 
-**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function performs the modulo operation, returning the remainder after dividing the first argument by the second one.
+<Admonition type="info" id="CTA">
+The MOD() function works the same way across every PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and tight integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
+
+**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function to perform the modulo operation, returning the remainder after dividing the first argument by the second one.
 
 ## Introduction to the PostgreSQL MOD() function
 

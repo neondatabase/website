@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SELECT INTO'
-page_title: 'PostgreSQL SELECT INTO Statement by Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL SELECT INTO statement to create a new table and fill it with the data returned by a query.'
+title: PostgreSQL SELECT INTO
+page_title: PostgreSQL SELECT INTO Statement by Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL SELECT INTO statement to
+  create a new table and fill it with the data returned by a query.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select-into/'
-ogImage: '/postgresqltutorial/film_table.png'
-updatedOn: '2024-01-24T04:16:44+00:00'
+ogImage: /postgresqltutorial/film_table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-create-table'
+  title: PostgreSQL CREATE TABLE
+  slug: postgresql-tutorial/postgresql-create-table
 nextLink:
-  title: 'PostgreSQL CREATE TABLE AS'
-  slug: 'postgresql-tutorial/postgresql-create-table-as'
+  title: PostgreSQL CREATE TABLE AS
+  slug: postgresql-tutorial/postgresql-create-table-as
 ---
+
+<Admonition type="info" id="CTA">
+The SELECT INTO statement works the same across any PostgreSQL deployment, so you can apply what you learn here on Postgres anywhere you run it. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and tight Lakehouse integration you need to build on trusted data. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT INTO` statement to create a new table from the result set of a query.
 

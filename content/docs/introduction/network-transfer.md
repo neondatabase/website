@@ -3,11 +3,13 @@ title: Reduce network transfer costs
 subtitle: Monitor and reduce data egress costs
 enableTableOfContents: true
 summary: >-
-  Covers the monitoring and reduction of network transfer (egress) costs in
-  Neon, including the egress optimizer agent skill, public and private transfer
-  types, common causes of high usage, Console and API monitoring, and strategies
-  to reduce transfer.
-updatedOn: '2026-03-16T10:19:48.546Z'
+  Network transfer (egress) in Neon counts all outbound data through the Neon
+  proxy, with per-plan monthly allowances and overage rates. Use this page to
+  diagnose high egress costs from large result sets, pg_dump exports, or logical
+  replication syncs, and to monitor usage via the Console or Consumption API.
+  Reduction strategies include scoping SELECT columns, using Neon snapshots,
+  adding replication filters, and routing traffic over Private Link.
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -20,7 +22,7 @@ There are two types of network transfer:
 
 - **Public network transfer**: Data sent over the public internet. [Logical replication](/docs/guides/logical-replication-neon) to any destination counts as public network transfer.
   - **Free plan**: 5 GB/month included. Exceeding this suspends your compute until the next billing cycle or you upgrade.
-  - **Launch / Scale plans**: 100 GB/month included, then $0.10/GB.
+  - **Launch / Scale plans**: 500 GB/month included, then $0.10/GB.
 - **Private network transfer**: Traffic routed over AWS PrivateLink. Available on the Scale plan only. Billed at $0.01/GB, bi-directional. Unlike public network transfer, which only counts outbound data, private network transfer counts traffic in both directions: data sent from your database to clients and data sent from clients to your database.
 
 In the Console, these appear as **Public network transfer** and **Private network transfer**. In the Consumption API, the fields are `public_network_transfer_bytes` and `private_network_transfer_bytes`. In project and branch detail API responses, the combined field is `data_transfer_bytes`.

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Server and Database Objects'
-page_title: 'PostgreSQL Server and Database Objects'
-page_description: 'In this tutorial, you are going to get familiar with the most common server and database objects provided by PostgreSQL'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/postgresql-databases.png'
-updatedOn: '2020-07-17T02:50:14+00:00'
+title: PostgreSQL Server and Database Objects
+page_title: PostgreSQL Server and Database Objects
+page_description: >-
+  In this tutorial, you are going to get familiar with the most common server
+  and database objects provided by PostgreSQL
+prev_url: index.html
+ogImage: /postgresqltutorial/postgresql-databases.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXPLAIN'
-  slug: 'postgresql-tutorial/postgresql-explain'
+  title: PostgreSQL EXPLAIN
+  slug: postgresql-tutorial/postgresql-explain
 nextLink:
-  title: 'How to Compare Two Tables in PostgreSQL'
-  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
+  title: How to Compare Two Tables in PostgreSQL
+  slug: postgresql-tutorial/compare-two-tables-in-postgresql
 ---
+
+<Admonition type="info" id="CTA">
+The server and database objects covered here are standard PostgreSQL concepts that apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration you need to run critical workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.
 
@@ -46,7 +52,7 @@ A [schema](../postgresql-administration/postgresql-schema) is a logical containe
 
 ## Tablespaces
 
-Tablespaces are where PostgreSQL stores the data physically. [Tablespace](../postgresql-administration/postgresql-create-tablespace 'PostgreSQL Tablespaces')s allow you to move your data to different physical locations across drivers easily by using simple commands.
+Tablespaces are where PostgreSQL stores the data physically. [Tablespace](../postgresql-administration/postgresql-create-tablespace 'PostgreSQL Tablespaces')s allow you to move your data to different physical locations across drives easily by using simple commands.
 
 By default, PostgreSQL provides you with two tablespaces:
 
@@ -65,7 +71,7 @@ The following picture shows the default tablespaces:
 
 ## Functions
 
-A [function](/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures) is a reusable block of SQL code that returns a scalar value of a set of rows.
+A [function](/postgresql/postgresql-plpgsql/postgresql-create-function) is a reusable block of SQL code that returns a scalar value of a set of rows.
 
 ![](/postgresqltutorial/postgresql-functions.png)
 

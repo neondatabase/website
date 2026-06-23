@@ -2,11 +2,14 @@
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
 summary: >-
-  Covers the setup and usage of the `earthdistance` extension in Postgres for
-  calculating great-circle distances between geographic points, essential for
-  geospatial applications and location-based services.
+  The `earthdistance` extension calculates great-circle distances in Postgres
+  using two approaches: the `earth` type with `ll_to_earth` and
+  `earth_distance`, or the native `point` type with the `<@>` operator.
+  Use it for location-based search, radius filtering, or nearest-neighbor
+  queries without PostGIS. It requires the `cube` extension and supports
+  GiST indexing via `earth_box` for efficient radius searches.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.827Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `earthdistance` extension for Postgres provides functions to calculate great-circle distances between points on the Earth's surface. This is essential for applications requiring geospatial distance calculations, such as location-based services, mapping applications, logistics, and any system that needs to find nearby points or calculate travel distances.
@@ -220,7 +223,7 @@ For applications with many locations that require frequent radius searches or ne
 
 ## Conclusion
 
-The `earthdistance` extension is a powerful and convenient tool in Postgres for applications dealing with geographic locations. It simplifies the calculation of great-circle distances, enabling features like location-based searching and distance filtering directly within your database. By understanding its core functions, data representations, and how to leverage GiST indexing, you can build efficient and effective geospatial queries.
+The `earthdistance` extension is a powerful and convenient tool in Postgres for applications dealing with geographic locations. It simplifies the calculation of great-circle distances, enabling features like location-based searching and distance filtering directly within your database. By understanding its core functions, data representations, and GiST indexing, you can build efficient geospatial queries.
 
 ## Resources
 

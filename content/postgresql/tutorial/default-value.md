@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL DEFAULT Value'
-page_title: 'PostgreSQL DEFAULT Value'
-page_description: 'In this tutorial, you will learn how to assign a default value to a column using the PostgreSQL default constraint.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-default-value/'
+title: PostgreSQL DEFAULT Value
+page_title: PostgreSQL DEFAULT Value
+page_description: >-
+  In this tutorial, you will learn how to assign a default value to a column
+  using the PostgreSQL default constraint.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-default-value/
 ogImage: ''
-updatedOn: '2024-03-15T04:07:10+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Not-Null Constraint'
-  slug: 'postgresql-tutorial/postgresql-not-null-constraint'
+  title: PostgreSQL Not-Null Constraint
+  slug: postgresql-tutorial/postgresql-not-null-constraint
 nextLink:
-  title: 'PostgreSQL Boolean Data Type with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-boolean'
+  title: PostgreSQL Boolean Data Type with Practical Examples
+  slug: postgresql-tutorial/postgresql-boolean
 ---
+
+<Admonition type="info" id="CTA">
+The DEFAULT constraint works the same way on any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to assign a default value to a column using the PostgreSQL DEFAULT constraint.
 

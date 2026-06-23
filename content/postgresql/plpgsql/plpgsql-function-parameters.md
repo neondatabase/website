@@ -1,18 +1,25 @@
 ---
 title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
 page_title: 'PL/pgSQL Function Parameter Modes: IN, OUT, and INOUT'
-page_description: 'In this tutorial, you will learn about parameter modes of functions including in, out, and inout.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-parameters/'
+page_description: >-
+  In this tutorial, you will learn about parameter modes of functions including
+  in, out, and inout.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-parameters/
 ogImage: ''
-updatedOn: '2024-02-07T12:54:31+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Create Function Statement'
-  slug: 'postgresql-plpgsql/postgresql-create-function'
+  title: PostgreSQL Create Function Statement
+  slug: postgresql-plpgsql/postgresql-create-function
 nextLink:
-  title: 'PL/pgSQL Function Overloading'
-  slug: 'postgresql-plpgsql/plpgsql-function-overloading'
+  title: PL/pgSQL Function Overloading
+  slug: postgresql-plpgsql/plpgsql-function-overloading
 ---
+
+<Admonition type="info" id="CTA">
+PL/pgSQL parameter modes work the same on any PostgreSQL deployment, so everything about IN, OUT, and INOUT applies whether you run Postgres yourself or on a managed service. If you're an enterprise building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about parameter modes of functions including: `in`, `out`, and `inout`.
 
@@ -53,12 +60,12 @@ begin
 
   return film_title;
 
-end;$$
+end;$$;
 ```
 
 Because we don’t specify the mode for `p_film_id` parameter, it takes the `in` mode by default.
 
-The following shows how to call the find_film_by_id() function to find the title of the film with the id 100:
+The following shows how to call the find_film_by_id() function to find the title of the film with the id 1:
 
 ```plsql
 select * from find_film_by_id(1);
@@ -104,7 +111,7 @@ begin
   into min_len, max_len, avg_len
   from film;
 
-end;$$
+end;$$;
 ```
 
 In the `get_film_stat` function, we select the min, max, and average film length from the `film` table using the `min`, `max`, and `avg` aggregate functions and assign the results to the corresponding `out` parameters.
@@ -141,7 +148,7 @@ Output:
 
 ## The INOUT mode
 
-The `inout` mode is the combination `in` and `out` modes.
+The `inout` mode is the combination of `in` and `out` modes.
 
 It means that the caller can pass an argument to a function. The function changes the argument and returns the updated value.
 

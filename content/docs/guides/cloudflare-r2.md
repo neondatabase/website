@@ -2,14 +2,25 @@
 title: File storage with Cloudflare R2
 subtitle: Store files via Cloudflare R2 and track metadata in Neon
 summary: >-
-  Step-by-step guide for integrating Cloudflare R2 with Neon to store files and
-  track metadata in your Neon database, utilizing R2's S3-compatible object
-  storage capabilities.
+  Cloudflare R2 file storage paired with Neon gives you S3-compatible object
+  storage with zero egress fees while keeping structured file metadata (object
+  key, public URL, user ID, upload timestamp) in a Neon Postgres table. Use
+  this guide when you need a split-storage architecture where R2 holds blobs and
+  Neon holds queryable metadata, using presigned upload URLs to let clients
+  upload directly without routing files through your backend. Covers bucket
+  setup, CORS configuration, metadata schema, and backend endpoints in
+  JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask, boto3, psycopg2).
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.009Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your Neon database, while using R2 for file storage.
 

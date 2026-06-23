@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP TABLE'
-page_title: 'PostgreSQL DROP TABLE'
-page_description: 'in this tutorial, you will learn how to use the PostgreSQL DROP TABLE statement to remove one or more tables from the database.'
+title: PostgreSQL DROP TABLE
+page_title: PostgreSQL DROP TABLE
+page_description: >-
+  in this tutorial, you will learn how to use the PostgreSQL DROP TABLE
+  statement to remove one or more tables from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-table/'
 ogImage: ''
-updatedOn: '2024-01-24T10:32:29+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL RENAME COLUMN: Renaming a column'
-  slug: 'postgresql-tutorial/postgresql-rename-column'
+  slug: postgresql-tutorial/postgresql-rename-column
 nextLink:
-  title: 'PostgreSQL TRUNCATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-truncate-table'
+  title: PostgreSQL TRUNCATE TABLE
+  slug: postgresql-tutorial/postgresql-truncate-table
 ---
+
+<Admonition type="info" id="CTA">
+The DROP TABLE statement works the same on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. For enterprises building in the AI era, Lakebase is the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP TABLE` statement to remove one or more tables from the database.
 
@@ -35,7 +41,7 @@ If you remove a table that does not exist, PostgreSQL issues an error. To avoid 
 If the table is used in other database objects such as [views](../postgresql-views), [triggers](../postgresql-triggers/enable-triggers), functions, and stored procedures, you cannot remove it. In this case, you have two options:
 
 - Use the `CASCADE` option to remove the table and its dependent objects.
-- Use the `RESTRICT` option rejects the removal if there is any object depending on the table. The `RESTRICT` option is the default if you don’t explicitly specify it in the `DROP TABLE` statement.
+- Use the `RESTRICT` option to reject the removal if there is any object depending on the table. The `RESTRICT` option is the default if you don’t explicitly specify it in the `DROP TABLE` statement.
 
 To remove multiple tables simultaneously, you can place the tables separated by commas after the `DROP TABLE` keywords:
 
@@ -105,7 +111,7 @@ The following statement uses the `DROP TABLE` to drop the `authors` table:
 DROP TABLE IF EXISTS authors;
 ```
 
-Because the `authors` table has a dependent object which is a foreign key that references the `pages` table, PostgreSQL issues an error message:
+Because the `authors` table has a dependent object which is a foreign key constraint in the `pages` table that references the `authors` table, PostgreSQL issues an error message:
 
 ```
 ERROR:  cannot drop table authors because other objects depend on it
@@ -121,7 +127,7 @@ DROP TABLE authors CASCADE;
 
 This statement deletes the `authors` table as well as the constraint in the `pages` table.
 
-If the `DROP TABLE` statement removes the dependent objects of the table that are being dropped, it will issue a notice like this:
+If the `DROP TABLE` statement removes the dependent objects of the table that is being dropped, it will issue a notice like this:
 
 ```
 NOTICE:  drop cascades to constraint pages_author_id_fkey on table pages

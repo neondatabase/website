@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL Python: Handling Binary Data'
 page_title: 'PostgreSQL Python: Handling Binary Data'
-page_description: 'In this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.'
+page_description: >-
+  In this tutorial, you will learn how to store binary data in the PostgreSQL
+  database using Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/blob/'
-ogImage: '/postgresqltutorial/parts_part_drawings_tables.png'
-updatedOn: '2024-04-20T13:39:35+00:00'
+ogImage: /postgresqltutorial/parts_part_drawings_tables.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Call Stored Procedures'
-  slug: 'postgresql-python/call-stored-procedures'
+  slug: postgresql-python/call-stored-procedures
 nextLink:
   title: 'PostgreSQL Python: Delete Data from Tables'
-  slug: 'postgresql-python/delete'
+  slug: postgresql-python/delete
 ---
+
+<Admonition type="info" id="CTA">
+Working with BYTEA from Python is the same on any PostgreSQL database, so you can apply these psycopg2 patterns to Postgres wherever you run it. If you're storing binary data at enterprise scale and want it unified with your analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong performance, security, and native Lakehouse integration. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.
 

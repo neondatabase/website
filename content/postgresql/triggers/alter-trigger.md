@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ALTER TRIGGER Statement'
-page_title: 'PostgreSQL ALTER TRIGGER Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ALTER TRIGGER statement to rename a trigger.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-alter-trigger/'
-ogImage: '/postgresqltutorial/PostgreSQL-ALTER-TRIGGER-example.png'
-updatedOn: '2024-03-30T03:14:14+00:00'
+title: PostgreSQL ALTER TRIGGER Statement
+page_title: PostgreSQL ALTER TRIGGER Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ALTER TRIGGER
+  statement to rename a trigger.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-alter-trigger/
+ogImage: /postgresqltutorial/PostgreSQL-ALTER-TRIGGER-example.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP TRIGGER Statement'
-  slug: 'postgresql-triggers/postgresql-drop-trigger'
+  title: PostgreSQL DROP TRIGGER Statement
+  slug: postgresql-triggers/postgresql-drop-trigger
 nextLink:
-  title: 'PostgreSQL BEFORE INSERT Trigger'
-  slug: 'postgresql-triggers/postgresql-before-insert-trigger'
+  title: PostgreSQL BEFORE INSERT Trigger
+  slug: postgresql-triggers/postgresql-before-insert-trigger
 ---
+
+<Admonition type="info" id="CTA">
+The `ALTER TRIGGER` statement works the same in any PostgreSQL database, so you can apply what you learn here on any Postgres instance. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER TRIGGER` statement to rename a trigger.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL FLOOR() Function'
-page_title: 'PostgreSQL FLOOR() Function By Practical Examples'
-page_description: 'Show you how to use the PostgreSQL FLOOR() function to round a number down to the nearest integer, which is less than or equal to the number.'
+title: PostgreSQL FLOOR() Function
+page_title: PostgreSQL FLOOR() Function By Practical Examples
+page_description: >-
+  Show you how to use the PostgreSQL FLOOR() function to round a number down to
+  the nearest integer, which is less than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-floor/'
-ogImage: '/postgresqltutorial/payment-table.png'
-updatedOn: '2024-02-25T04:31:17+00:00'
+ogImage: /postgresqltutorial/payment-table.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FACTORIAL() Function'
-  slug: 'postgresql-math-functions/postgresql-factorial'
+  title: PostgreSQL FACTORIAL() Function
+  slug: postgresql-math-functions/postgresql-factorial
 nextLink:
-  title: 'PostgreSQL GCD() Function'
-  slug: 'postgresql-math-functions/postgresql-gcd'
+  title: PostgreSQL GCD() Function
+  slug: postgresql-math-functions/postgresql-gcd
 ---
+
+<Admonition type="info" id="CTA">
+The FLOOR() function is standard PostgreSQL and works the same on any Postgres deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The PostgreSQL `FLOOR()` function returns a number rounded down to the next whole number.
 
@@ -74,6 +80,6 @@ The following picture illustrates the result:
 
 ## Remarks
 
-To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-floor) function.
+To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-ceil) function.
 
 In this tutorial, you have learned how to use the PostgreSQL `FLOOR()` function to round a number down to the nearest integer, which is less than or equal to the number.

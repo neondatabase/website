@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ROUND() Function'
-page_title: 'PostgreSQL ROUND() Function'
-page_description: 'Show you how to use the PostgreSQL ROUND() function to round a number to its nearest integer or a number of specified decimal places.'
+title: PostgreSQL ROUND() Function
+page_title: PostgreSQL ROUND() Function
+page_description: >-
+  Show you how to use the PostgreSQL ROUND() function to round a number to its
+  nearest integer or a number of specified decimal places.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-round/'
-ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
-updatedOn: '2024-02-16T14:25:02+00:00'
+ogImage: /postgresqltutorial/customer-and-payment-tables.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RANDOM() Function'
-  slug: 'postgresql-math-functions/postgresql-random'
+  title: PostgreSQL RANDOM() Function
+  slug: postgresql-math-functions/postgresql-random
 nextLink:
-  title: 'PostgreSQL SQRT() Function'
-  slug: 'postgresql-math-functions/postgresql-sqrt'
+  title: PostgreSQL SQRT() Function
+  slug: postgresql-math-functions/postgresql-sqrt
 ---
+
+<Admonition type="info" id="CTA">
+The ROUND() function is standard PostgreSQL, so everything here works the same whether you run Postgres on your laptop, in [Neon](https://neon.com), in [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise looking for managed Postgres built for the AI era, Lakebase delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The PostgreSQL `ROUND()` function rounds a numeric value to its nearest [integer](../postgresql-tutorial/postgresql-integer) or a number with the number of decimal places.
 

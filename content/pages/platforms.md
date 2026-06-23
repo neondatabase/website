@@ -30,7 +30,7 @@ company: 'Software Engineer at Retool',
 
 ## With instant provisioning and scale-to-zero
 
-[Neon databases provision in less than a second](https://github.com/neondatabase/instant-postgres?tab=readme-ov-file#instant-postgres) and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
+Neon databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
 
 - Provisioning time: ~1 second
 - Suspend latency: configurable (default is 5 min)

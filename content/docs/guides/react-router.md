@@ -2,11 +2,13 @@
 title: Connect a React Router application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React Router application
 summary: >-
-  Step-by-step guide for connecting a React Router application to a Neon
-  project, including project creation, dependency installation, and
-  configuration of the Postgres client using a server-side `loader` function.
+  React Router full-stack integration with Neon Postgres runs database queries
+  server-side inside a route `loader` function, keeping credentials and SQL out
+  of the browser. Use this guide when building a React Router app that needs a
+  serverless Postgres backend, with driver options for node-postgres,
+  postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.036Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.
@@ -182,14 +184,8 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 </Steps>
 
-## Source code
+## Next steps
 
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-react-router" description="Get started with React Router and Neon" icon="github">Get started with React Router and Neon</a>
-
-</DetailIconCards>
+- [Set up Neon Auth](/docs/auth/quick-start/react): Add managed authentication that branches with your database
 
 <NeedHelp/>

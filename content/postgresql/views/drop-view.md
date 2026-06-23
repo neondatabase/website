@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Drop View'
-page_title: 'PostgreSQL DROP VIEW Statement Explained By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DROP VIEW statement to remove one or more views from the database.'
+title: PostgreSQL Drop View
+page_title: PostgreSQL DROP VIEW Statement Explained By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DROP VIEW statement
+  to remove one or more views from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/'
-ogImage: '/postgresqltutorial/film-film_category-category-tables.png'
-updatedOn: '2024-03-16T04:09:52+00:00'
+ogImage: /postgresqltutorial/film-film_category-category-tables.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE VIEW'
-  slug: 'postgresql-views/managing-postgresql-views'
+  title: PostgreSQL CREATE VIEW
+  slug: postgresql-views/managing-postgresql-views
 nextLink:
-  title: 'Creating PostgreSQL Updatable Views'
-  slug: 'postgresql-views/postgresql-updatable-views'
+  title: Creating PostgreSQL Updatable Views
+  slug: postgresql-views/postgresql-updatable-views
 ---
+
+<Admonition type="info" id="CTA">
+The DROP VIEW syntax covered here works on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP VIEW` statement to delete a view from your database.
 
@@ -85,7 +91,7 @@ WHERE
   category = 'Horror';
 ```
 
-The following statement creates a view called `comedy_film` based on the `film_master` view:
+The following statement creates a view called `comedy_film` based on the `film_info` view:
 
 ```sql
 CREATE VIEW comedy_film AS

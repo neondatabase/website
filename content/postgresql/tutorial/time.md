@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL TIME Data Type'
-page_title: 'PostgreSQL TIME Data Type'
-page_description: 'This tutorial introduces you to the PostgreSQL TIME data type and some useful time-related functions to handle time values effectively.'
+title: PostgreSQL TIME Data Type
+page_title: PostgreSQL TIME Data Type
+page_description: >-
+  This tutorial introduces you to the PostgreSQL TIME data type and some useful
+  time-related functions to handle time values effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/'
-ogImage: '/postgresqltutorial/PostgreSQL-TIME-example.png'
-updatedOn: '2024-02-02T06:49:37+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-TIME-example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Interval Data Type'
-  slug: 'postgresql-tutorial/postgresql-interval'
+  title: PostgreSQL Interval Data Type
+  slug: postgresql-tutorial/postgresql-interval
 nextLink:
-  title: 'PostgreSQL UUID Data Type'
-  slug: 'postgresql-tutorial/postgresql-uuid'
+  title: PostgreSQL UUID Data Type
+  slug: postgresql-tutorial/postgresql-uuid
 ---
+
+<Admonition type="info" id="CTA">
+The TIME data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `TIME` data types and some handy functions to handle time values.
 
@@ -217,7 +223,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extracting hours, minutes, and seconds from a time value
+### 3\) Extracting hours, minutes, and seconds from a time value
 
 To extract hours, minutes, and seconds from a time value, you use the [`EXTRACT`](../postgresql-date-functions/postgresql-extract) function as follows:
 

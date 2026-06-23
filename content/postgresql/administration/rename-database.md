@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Rename Database'
+title: PostgreSQL Rename Database
 page_title: 'PostgreSQL Rename Database: A Quick Guide'
-page_description: 'In this tutorial, you will learn step by step how to rename a PostgreSQL database by using the ALTER TABLE RENAME TO statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-rename-database/'
+page_description: >-
+  In this tutorial, you will learn step by step how to rename a PostgreSQL
+  database by using the ALTER DATABASE RENAME TO statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-rename-database/
 ogImage: ''
-updatedOn: '2024-02-12T12:21:09+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP DATABASE'
-  slug: 'postgresql-administration/postgresql-drop-database'
+  title: PostgreSQL DROP DATABASE
+  slug: postgresql-administration/postgresql-drop-database
 nextLink:
-  title: 'PostgreSQL Copy Database Made Easy'
-  slug: 'postgresql-administration/postgresql-copy-database'
+  title: PostgreSQL Copy Database Made Easy
+  slug: postgresql-administration/postgresql-copy-database
 ---
+
+<Admonition type="info" id="CTA">
+Renaming a database with ALTER DATABASE...RENAME TO works the same on any PostgreSQL deployment, so the steps here apply whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed Postgres that's fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn step\-by\-step how to rename a PostgreSQL database using the `ALTER DATABASE...RENAME TO` statement.
 

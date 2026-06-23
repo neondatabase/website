@@ -1,7 +1,7 @@
 ---
 title: 'The building blocks'
 subtitle: 'Learn how Neon projects, branches, and hierarchies work: fast copy-on-write branching, isolated compute per branch, and instant restore with snapshots'
-updatedOn: '2026-01-22T00:00:00.000Z'
+updatedOn: '2026-05-12T14:01:17.544Z'
 ---
 
 ## Projects
@@ -53,7 +53,7 @@ Compute [scales independently per branch based on load](https://neon.com/docs/in
 
 ## Instant restore and snapshots
 
-Because Neon’s storage is versioned, every branch preserves [history](https://neon.com/docs/introduction/restore-window). This allows you to:
+Because Neon’s storage is versioned, every branch preserves [history](https://neon.com/docs/introduction/history-window). This allows you to:
 
 - Create a new branch from any previous point in time
 - Recover dropped tables or deleted data

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL WITH CHECK OPTION'
-page_title: 'Creating PostgreSQL Views WITH CHECK OPTION'
-page_description: 'Show you create views using the PostgreSQL WITH CHECK OPTION to ensure that the changes to the base table satisfy the view-defining condition.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/'
+title: PostgreSQL WITH CHECK OPTION
+page_title: Creating PostgreSQL Views WITH CHECK OPTION
+page_description: >-
+  Show you create views using the PostgreSQL WITH CHECK OPTION to ensure that
+  the changes to the base table satisfy the view-defining condition.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-views/postgresql-views-with-check-option/
 ogImage: ''
-updatedOn: '2024-03-16T04:31:23+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'Creating PostgreSQL Updatable Views'
-  slug: 'postgresql-views/postgresql-updatable-views'
+  title: Creating PostgreSQL Updatable Views
+  slug: postgresql-views/postgresql-updatable-views
 nextLink:
-  title: 'PostgreSQL ALTER VIEW Statement'
-  slug: 'postgresql-views/postgresql-alter-view'
+  title: PostgreSQL ALTER VIEW Statement
+  slug: postgresql-views/postgresql-alter-view
 ---
+
+<Admonition type="info" id="CTA">
+The WITH CHECK OPTION clause works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create an updatable view using the `WITH CHECK OPTION` clause to ensure that the changes to the base tables through the view satisfy the view\-defining condition.
 
@@ -138,7 +145,7 @@ VALUES ('John', 'Smith', 1, 'Contractor');
 
 It succeeds.
 
-The issue is that we can insert an employee with the type of `Contractor` into the `employee` table via the view that exposes the employee to the type of `FTE`.
+The issue is that we can insert an employee with the type of `Contractor` into the `employees` table via the view that exposes the employee to the type of `FTE`.
 
 To ensure that we can insert only employees with the type `FTE` into the `employees` table via the `fte` view, you can use the `WITH CHECK OPTION`:
 
@@ -159,7 +166,7 @@ WHERE
 WITH CHECK OPTION;
 ```
 
-After adding the `WITH CHECK OPTION`, you perform insert, [update](../postgresql-tutorial/postgresql-update), and [delete](../postgresql-tutorial/postgresql-delete) on `employees` table that satisfies the `WHERE` clause in the defining query of the view.
+After adding the `WITH CHECK OPTION`, you can perform insert, [update](../postgresql-tutorial/postgresql-update), and [delete](../postgresql-tutorial/postgresql-delete) on the `employees` table that satisfies the `WHERE` clause in the defining query of the view.
 
 For example, the following `INSERT` statement will fail with an error:
 
@@ -302,7 +309,7 @@ WHERE
 WITH CASCADED CHECK OPTION;
 ```
 
-Second, insert a new row into `employee` table via the `fte_1` view:
+Second, insert a new row into `employees` table via the `fte_1` view:
 
 ```sql
 INSERT INTO fte_1(first_name, last_name, department_id, employee_type)

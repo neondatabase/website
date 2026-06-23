@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Sample Database'
-page_title: 'PostgreSQL Sample Database'
-page_description: 'This tutorial introduces you to a PostgreSQL sample database that you can use for learning and practicing with PostgreSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/'
-ogImage: '/postgresqltutorial/dvd-rental-sample-database-diagram.png'
-updatedOn: '2024-01-16T02:36:36+00:00'
+title: PostgreSQL Sample Database
+page_title: PostgreSQL Sample Database
+page_description: >-
+  This tutorial introduces you to a PostgreSQL sample database that you can use
+  for learning and practicing with PostgreSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/
+ogImage: /postgresqltutorial/dvd-rental-sample-database-diagram.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'What is PostgreSQL?'
-  slug: 'postgresql-getting-started/what-is-postgresql'
+  title: What is PostgreSQL?
+  slug: postgresql-getting-started/what-is-postgresql
 nextLink:
-  title: 'Install PostgreSQL on Windows'
-  slug: 'postgresql-getting-started/install-postgresql'
+  title: Install PostgreSQL on Windows
+  slug: postgresql-getting-started/install-postgresql
 ---
+
+<Admonition type="info" id="CTA">
+The DVD rental sample database works with any PostgreSQL server, so you can follow along on a local install, [Neon](https://neon.com), [Lakebase](https://www.databricks.com/product/lakebase), or any other Postgres environment. For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with strong performance and security, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, we will introduce you to a PostgreSQL sample database that you can use for learning and practicing PostgreSQL.
 

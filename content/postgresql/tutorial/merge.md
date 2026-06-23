@@ -1,19 +1,25 @@
 ---
-title: 'PostgreSQL MERGE Statement'
-page_title: 'PostgreSQL MERGE Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL MERGE statement to conditionally insert, update, and delete rows of a table.'
+title: PostgreSQL MERGE Statement
+page_title: PostgreSQL MERGE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL MERGE statement to
+  conditionally insert, update, and delete rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-merge/'
 ogImage: ''
-updatedOn: '2024-03-27T06:10:50+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
-  slug: 'postgresql-tutorial/postgresql-upsert'
+  title: PostgreSQL UPSERT using INSERT ON CONFLICT Statement
+  slug: postgresql-tutorial/postgresql-upsert
 nextLink:
-  title: 'PostgreSQL Transaction'
-  slug: 'postgresql-tutorial/postgresql-transaction'
+  title: PostgreSQL Transaction
+  slug: postgresql-tutorial/postgresql-transaction
 tag: new
 ---
+
+<Admonition type="info" id="CTA">
+The MERGE statement works the same way across any PostgreSQL 15 or later deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises standardizing on an AI-ready data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated with the Lakehouse so your transactional and analytical data stay in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn how to use the PostgreSQL `MERGE` statement to conditionally insert, update, and delete rows of a table.
 

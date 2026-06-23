@@ -1,15 +1,21 @@
 ---
 title: Neon's lakebase architecture
-subtitle: Serverless Postgres with decoupled compute and durable storage
+subtitle: 'Inside Neon Postgres: decoupled compute and durable storage'
 summary: >-
-  Covers the architecture of Neon, a serverless Postgres database that separates
-  compute and storage layers, enabling independent scaling and optimized
-  performance while ensuring data durability and history management.
+  Neon's lakebase architecture splits Postgres into an ephemeral compute layer
+  and a durable storage layer connected by WAL, so compute nodes can scale,
+  restart, or fail without data loss. The storage layer uses Paxos-based WAL
+  quorum across safekeepers to define commit correctness, a pageserver to
+  reconstruct page versions on demand, and object storage for immutable
+  long-term history. None of those components sit on the hot query path. This
+  design enables copy-on-write branching, instant point-in-time restores, and
+  serverless autoscaling including scale-to-zero, all as metadata operations
+  rather than data copies.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-03-14T05:17:06.221Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Top level overview
@@ -163,7 +169,7 @@ This layering is what allows Neon to tolerate failures intrinsically:
 
 ## In short
 
-Neon is a serverless Postgres engine that treats:
+Neon Postgres, the database service in the Neon backend, is a serverless engine that treats:
 
 - compute as ephemeral and replaceable;
 - storage as durable, replicated, and shared;

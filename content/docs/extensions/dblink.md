@@ -2,11 +2,16 @@
 title: The dblink extension
 subtitle: Connect to and query other Postgres databases from Neon using dblink
 summary: >-
-  Covers the setup and usage of the `dblink` extension in Neon, enabling
-  connections to and querying of remote Postgres databases for data integration
-  and cross-database operations.
+  The `dblink` extension lets a Neon session connect to and query remote
+  Postgres databases, returning results as local rows for cross-database
+  reporting, data synchronization, and ad-hoc data pulls. Use `dblink` for a
+  quick, session-scoped connection to another Postgres instance without
+  persistent foreign tables. Use `postgres_fdw` instead for a structured,
+  more secure mapping of remote tables. The extension supports multiple named
+  connections and requires explicit column type definitions in every query
+  result.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.826Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `dblink` extension provides the ability to connect to other Postgres databases from within your current database. This is invaluable for tasks such as data integration, cross-database querying, and building applications that span multiple database instances. `dblink` allows you to execute queries on these remote databases and retrieve the results directly into your Neon project.
@@ -218,7 +223,7 @@ While `dblink` provides direct connectivity, Postgres' Foreign Data Wrappers (FD
 
 ## Conclusion
 
-The `dblink` extension provides a powerful mechanism for connecting to and querying remote Postgres databases from your Neon project. Whether you need to perform one-off data pulls or build complex cross-database applications, `dblink` offers the flexibility to execute arbitrary queries on remote instances. Remember to prioritize security when managing connections and credentials. For more structured and potentially more secure access, consider exploring the capabilities of Foreign Data Wrappers.
+`dblink` lets you connect to and query remote Postgres databases from your Neon project. It's flexible enough for one-off data pulls or complex cross-database queries. Keep security in mind when managing connections and credentials. For more structured access, see [postgres_fdw](/docs/extensions/postgres_fdw).
 
 ## Reference
 

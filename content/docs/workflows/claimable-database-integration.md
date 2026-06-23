@@ -2,16 +2,20 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 summary: >-
-  Covers the setup of Neon projects for users through the project database claim
-  API, detailing the process of creating, transferring, and claiming Postgres
-  databases.
+  The Neon project transfer API lets you provision a Postgres database,
+  generate a time-limited transfer request, and send the user a claim URL.
+  The user takes full ownership without losing the original connection
+  string. Use this pattern for SaaS onboarding flows, agency handoffs, or
+  demo environments where instant database access must precede account
+  creation. The feature is in private preview and does not support
+  transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-03-14T03:21:15.123Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Overview
 
-The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and seamlessly transition ownership. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
+The project transfer functionality enables you to provision fully-configured Postgres databases on behalf of your users and transfer ownership when ready. This capability eliminates the technical overhead of database setup while ensuring your users maintain complete control of their database resources.
 
 <CTA title="Availability Status" description="This feature is available in private preview only. To enable this functionality for your account, <a href='https://neon.com/partners#partners-apply'>contact our partnership team</a>."></CTA>
 
@@ -215,7 +219,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Expiration**: Requests expire after the specified `ttl_seconds` (default: 24 hours). Once expired, you must create a new transfer request
 - **One-time use**: Each transfer request can only be used once
 - **Already claimed**: If a project has already been claimed, subsequent attempts will fail with an error
-- **Vercel orgs not supported**: Transferring a project into a Vercel-managed Neon [organization](/docs/reference/glossary#organization) via the claim flow is not supported, meaning that if you created your Neon account through the [Vercel-managed integration](/docs/guides/vercel-managed-integration), you cannot claim projects into the Neon organizaton created by that integration.
+- **Vercel orgs not supported**: Transferring a project into a Vercel-managed Neon [organization](/docs/reference/glossary#organization) via the claim flow is not supported, meaning that if you created your Neon account through the [Vercel-managed integration](/docs/guides/vercel-managed-integration), you cannot claim projects into the Neon organization created by that integration.
 
 ### Security considerations
 

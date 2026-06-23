@@ -1,18 +1,24 @@
 ---
-title: 'Using PostgreSQL SERIAL to Create Auto-increment Column'
-page_title: 'Using PostgreSQL SERIAL to Create Auto-increment Columns'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL SERIAL to create an auto-increment column in a database table.'
+title: Using PostgreSQL SERIAL to Create Auto-increment Column
+page_title: Using PostgreSQL SERIAL to Create Auto-increment Columns
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL SERIAL to create an
+  auto-increment column in a database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/'
-ogImage: '/postgresqltutorial/PostgreSQL-Serial-268x300.png'
-updatedOn: '2024-02-01T08:57:58+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-Serial-268x300.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE TABLE AS'
-  slug: 'postgresql-tutorial/postgresql-create-table-as'
+  title: PostgreSQL CREATE TABLE AS
+  slug: postgresql-tutorial/postgresql-create-table-as
 nextLink:
-  title: 'PostgreSQL Sequences'
-  slug: 'postgresql-tutorial/postgresql-sequences'
+  title: PostgreSQL Sequences
+  slug: postgresql-tutorial/postgresql-sequences
 ---
+
+<Admonition type="info" id="CTA">
+The PostgreSQL SERIAL pseudo-type works the same way across any Postgres deployment, so what you learn here applies whether you're running Postgres on your laptop, on premises, or in a managed cloud. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 ![PostgreSQL Serial](/postgresqltutorial/PostgreSQL-Serial-268x300.png?alignright)**Summary**: in this tutorial,  you will learn about the PostgreSQL `SERIAL` pseudo\-type and how to use the `SERIAL` pseudo\-type to define auto\-increment columns in tables.
 
@@ -94,7 +100,7 @@ INSERT INTO fruits(id,name)
 VALUES(DEFAULT,'Apple');
 ```
 
-PostgreSQL inserted two rows into the `fruits` table with the values for the `id` column are 1 and 2\.
+PostgreSQL inserted two rows into the `fruits` table with the values for the `id` column being 1 and 2.
 
 ```sql
 SELECT * FROM fruits;

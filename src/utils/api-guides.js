@@ -34,12 +34,21 @@ const getAllGuides = async () => {
   const slugs = await getPostSlugs(GUIDES_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, GUIDES_DIR_PATH)) return;
       const data = getPostBySlug(slug, GUIDES_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
-        data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, author },
+        data: {
+          title,
+          subtitle,
+          createdAt,
+          updatedOn,
+          isDraft,
+          redirectFrom,
+          author,
+          excludeFromBlog,
+        },
         excerpt,
       } = data;
       const authorData = getAuthor(author);
@@ -56,8 +65,10 @@ const getAllGuides = async () => {
         excerpt,
         isDraft,
         redirectFrom,
+        excludeFromBlog,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
     .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };

@@ -2,12 +2,16 @@
 title: Migrate data to Neon Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
 summary: >-
-  Step-by-step guide for migrating data to Neon Postgres using pgcopydb,
-  covering setup, monitoring, and advanced usage options for efficient and
-  reliable database transfers.
+  pgcopydb is an open-source Postgres-to-Postgres migration tool that
+  parallelizes table copying, index creation, and constraint application to
+  reduce downtime for one-time migrations to Neon. Use it when migrating large
+  databases from AWS RDS, GCP Cloud SQL, Azure, or any Postgres source where
+  pg_dump alone is too slow. Note that `pgcopydb clone --follow` (logical
+  replication) is not supported on Neon, and both source and target URIs must
+  use unpooled connection strings.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-01T22:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

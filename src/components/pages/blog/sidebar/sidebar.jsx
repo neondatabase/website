@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 
 import BlogNavLink from 'components/pages/blog/blog-nav-link';
+import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 
-const Sidebar = ({ categories }) => {
+const Sidebar = ({ categories, routeConfig = DEFAULT_BLOG_ROUTE_CONFIG }) => {
   const allCategories = [
     {
       name: 'All posts',
@@ -19,7 +20,7 @@ const Sidebar = ({ categories }) => {
             <ul className="flex flex-col gap-y-3.5 lg:flex-row lg:gap-x-5 lg:after:shrink-0 lg:after:grow-0 lg:after:basis-8 lg:after:content-[''] md:after:basis-4">
               {allCategories.map(({ name, slug }, index) => (
                 <li className="flex" key={index}>
-                  <BlogNavLink name={name} slug={slug} />
+                  <BlogNavLink name={name} slug={slug} routeConfig={routeConfig} />
                 </li>
               ))}
             </ul>
@@ -39,4 +40,10 @@ Sidebar.propTypes = {
       slug: PropTypes.string,
     })
   ).isRequired,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };

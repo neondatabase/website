@@ -1,22 +1,28 @@
 ---
-title: 'PL/pgSQL CASE Statement'
-page_title: 'PL/pgSQL CASE Statements'
-page_description: 'In this tutorial, you will learn about the PL/pgSQL CASE statement that executes a command based on a certain condition.'
+title: PL/pgSQL CASE Statement
+page_title: PL/pgSQL CASE Statements
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL CASE statement that
+  executes a command based on a certain condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-case-statement/'
-ogImage: '/postgresqltutorial/plpgsql-simple-case-statement.png'
-updatedOn: '2024-02-07T04:18:40+00:00'
+ogImage: /postgresqltutorial/plpgsql-simple-case-statement.png
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL IF Statement'
-  slug: 'postgresql-plpgsql/plpgsql-if-else-statements'
+  title: PL/pgSQL IF Statement
+  slug: postgresql-plpgsql/plpgsql-if-else-statements
 nextLink:
-  title: 'PL/pgSQL Loop Statements'
-  slug: 'postgresql-plpgsql/plpgsql-loop-statements'
+  title: PL/pgSQL Loop Statements
+  slug: postgresql-plpgsql/plpgsql-loop-statements
 ---
+
+<Admonition type="info" id="CTA">
+The PL/pgSQL CASE statement works the same way on any PostgreSQL deployment, so what you learn here applies whether you're running Postgres yourself, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL `case` that executes statements based on a certain condition.
 
-## Introduction to PL/pgSQL CASE Statment
+## Introduction to PL/pgSQL CASE Statement
 
 Besides the [if statement](plpgsql-if-else-statements), PostgreSQL provides the `case` statements that allow you to execute a block of code based on conditions.
 
@@ -83,7 +89,7 @@ begin
 	else
 		raise notice 'film not found';
     end if;
-end; $$
+end; $$;
 ```
 
 Output:
@@ -128,7 +134,7 @@ If no expression evaluates to true, the `case` statement will execute the `else`
 
 The `else` section is optional. If you omit the `else` section and there is no expression evaluated to `true`, the `case` statement will raise the `case_not_found` exception.
 
-The following example illustrates how to use a simple `case` statement:
+The following example illustrates how to use a searched `case` statement:
 
 ```plsql
 do $$
@@ -153,7 +159,7 @@ begin
      else
 	    raise notice 'Customer not found';
 	 end if;
-end; $$
+end; $$;
 
 ```
 

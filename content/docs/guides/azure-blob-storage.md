@@ -2,13 +2,25 @@
 title: File storage with Azure Blob Storage
 subtitle: Store files via Azure Blob Storage and track metadata in Neon
 summary: >-
-  Step-by-step guide for integrating Azure Blob Storage with Neon to store files
-  and track their metadata in the Neon database.
+  Azure Blob Storage integration with Neon keeps binary file objects in Azure
+  while storing metadata (blob name, URL, user ID, upload timestamp) in a Neon
+  Postgres table, giving apps structured querying over unstructured files. Use
+  this page when you need client-side uploads via short-lived SAS tokens and
+  want Neon to index what was uploaded without making blobs publicly accessible.
+  The guide covers private-container setup with CORS, backend endpoints
+  (generate-upload-sas and save-metadata) in JavaScript (Hono) and Python
+  (Flask), and generating read-only SAS tokens for secure file retrieval.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.008Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate Azure Blob Storage with Neon by storing file metadata (like the blob name and URL) in your Neon database, while using Azure Blob Storage for file storage.
 

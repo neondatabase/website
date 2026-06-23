@@ -13,7 +13,8 @@ import Tag from '../../tag';
 
 const Item = ({
   basePath,
-  title,
+  title = null,
+  section = null,
   slug = null,
   tag = null,
   ariaLabel = null,
@@ -28,6 +29,31 @@ const Item = ({
   const isActive = slug === currentSlug;
   const isActiveMenu = isActive || items?.some((item) => item.slug === currentSlug);
   const [isCollapsed, setIsCollapsed] = useState(!isActiveMenu);
+
+  // Nested `section:` entries render as non-collapsible group labels with
+  // their children inline — the same construct Menu supports at the top
+  // level (the CLI commands list uses this for its editorial groups).
+  if (section) {
+    return (
+      <li className="mt-3 flex flex-col first:mt-0">
+        <span className="py-1.5 text-[11px] leading-tight font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+          {section}
+        </span>
+        <ul className="flex flex-col">
+          {items?.map((item, index) => (
+            <Item
+              {...item}
+              key={index}
+              basePath={basePath}
+              closeMobileMenu={closeMobileMenu}
+              isHidden={isHidden}
+              isSubmenu={isSubmenu}
+            />
+          ))}
+        </ul>
+      </li>
+    );
+  }
 
   const externalSlug = slug?.startsWith('http') ? slug : null;
   const websiteSlug = slug?.startsWith('/') ? slug : null;
@@ -107,13 +133,15 @@ const Item = ({
 
 Item.propTypes = {
   basePath: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  section: PropTypes.string,
   slug: PropTypes.string,
   tag: PropTypes.string,
   ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.exact({
-      title: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      section: PropTypes.string,
       slug: PropTypes.string,
       tag: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),

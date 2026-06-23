@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL GRANT'
-page_title: 'PostgreSQL GRANT Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL GRANT statement to grant privileges on database objects to a role.'
+title: PostgreSQL GRANT
+page_title: PostgreSQL GRANT Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL GRANT statement to
+  grant privileges on database objects to a role.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-grant/'
 ogImage: ''
-updatedOn: '2024-02-22T00:47:34+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE ROLE Statement'
-  slug: 'postgresql-administration/postgresql-roles'
+  title: PostgreSQL CREATE ROLE Statement
+  slug: postgresql-administration/postgresql-roles
 nextLink:
-  title: 'PostgreSQL REVOKE Statement'
-  slug: 'postgresql-administration/postgresql-revoke'
+  title: PostgreSQL REVOKE Statement
+  slug: postgresql-administration/postgresql-revoke
 ---
+
+<Admonition type="info" id="CTA">
+The GRANT statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse so your operational data and analytics live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `GRANT` statement to grant privileges on database objects to a role.
 

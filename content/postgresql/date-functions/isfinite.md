@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ISFINITE() Function'
-page_title: 'PostgreSQL ISFINITE() Function'
-page_description: 'You will learn how to use the PostgreSQL ISFINITE() function to determine if a date, a timestamp, or an interval is finite or not.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-isfinite/'
+title: PostgreSQL ISFINITE() Function
+page_title: PostgreSQL ISFINITE() Function
+page_description: >-
+  You will learn how to use the PostgreSQL ISFINITE() function to determine if a
+  date, a timestamp, or an interval is finite or not.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-isfinite/
 ogImage: ''
-updatedOn: '2024-03-20T09:23:01+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DATE_BIN() Function'
-  slug: 'postgresql-date-functions/postgresql-date_bin'
+  title: PostgreSQL DATE_BIN() Function
+  slug: postgresql-date-functions/postgresql-date_bin
 nextLink:
-  title: 'PostgreSQL TIMEOFDAY() Function'
-  slug: 'postgresql-date-functions/postgresql-timeofday'
+  title: PostgreSQL TIMEOFDAY() Function
+  slug: postgresql-date-functions/postgresql-timeofday
 ---
+
+<Admonition type="info" id="CTA">
+The `ISFINITE()` function works the same way in any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ISFINITE()` function to determine if a date, a timestamp, or an interval is finite or not.
 

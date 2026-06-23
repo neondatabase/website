@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use pgvector for vector search 
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-04T13:24:36.612Z'
-updatedOn: '2025-02-04T13:24:36.612Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Vector search enables you to perform similarity searches on vectors stored in Postgres.
@@ -64,7 +64,7 @@ SELECT * FROM embeddings;
 Vector search typically means finding the closest vectors in the database to a given vector.
 There are different distance metrics to calculate which vector is closest, like Euclidean distance (`<->`), cosine distance (`<=>`), and inner product (`<#>`).
 
-- `<->`: Euclidean distance (L2). Measues straight-line distance between two vectors. Good for general similarity tasks when magnitude matters.
+- `<->`: Euclidean distance (L2). Measures straight-line distance between two vectors. Good for general similarity tasks when magnitude matters.
 - `<=>`: Cosine distance. Compares the angle between two vectors. Common for text embeddings, where direction matters more than magnitude.
 - `<#>`: Negative inner product. Used for maximizing similarity. Often used in ranking or recommendation systems.
 

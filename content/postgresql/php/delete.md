@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Delete Data From a Table'
 page_title: 'PostgreSQL PHP: Delete Data In a Table'
-page_description: 'In this tutorial, you will learn how to delete data from a PostgreSQL table in PHP application using PDO API.'
+page_description: >-
+  In this tutorial, you will learn how to delete data from a PostgreSQL table in
+  PHP application using PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/delete/'
 ogImage: ''
-updatedOn: '2024-01-30T00:55:55+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Working with Binary Data'
-  slug: 'postgresql-php/postgresql-blob'
+  slug: postgresql-php/postgresql-blob
 nextLink:
-  title: 'PostgreSQL Python'
-  slug: 'postgresql-php/../postgresql-python'
+  title: PostgreSQL Python
+  slug: postgresql-php/../postgresql-python
 ---
+
+<Admonition type="info" id="CTA">
+Deleting rows from a PostgreSQL table with PHP PDO works the same on any standard Postgres deployment, so you can apply these techniques wherever your database runs. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: This tutorial shows you how to delete data from a PostgreSQL table using the PHP PDO.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ANY Operator'
-page_title: 'PostgreSQL ANY Operator'
-page_description: 'This tutorial shows you how to use the PostgreSQL ANY operator to compare a value to a set of values returned by a subquery.'
+title: PostgreSQL ANY Operator
+page_title: PostgreSQL ANY Operator
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL ANY operator to compare a
+  value to a set of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-any/'
 ogImage: ''
-updatedOn: '2024-04-24T06:18:58+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Correlated Subquery'
-  slug: 'postgresql-tutorial/postgresql-correlated-subquery'
+  title: PostgreSQL Correlated Subquery
+  slug: postgresql-tutorial/postgresql-correlated-subquery
 nextLink:
-  title: 'PostgreSQL ALL Operator'
-  slug: 'postgresql-tutorial/postgresql-all'
+  title: PostgreSQL ALL Operator
+  slug: postgresql-tutorial/postgresql-all
 ---
+
+<Admonition type="info" id="CTA">
+The ANY operator works the same across every PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse so your operational and analytical data live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ANY` operator to compare a scalar value with a set of values returned by a subquery.
 
@@ -20,7 +26,7 @@ nextLink:
 
 The PostgreSQL `ANY` operator compares a value with a set of values returned by a [subquery](postgresql-subquery). It is commonly used in combination with comparison operators such as \=, \<, \>, \<\=, \>\=, and \<\>.
 
-Here’s the basic syntax of  the `ANY` operator:
+Here’s the basic syntax of the `ANY` operator:
 
 ```sql
 expression operator ANY(subquery)
@@ -243,12 +249,13 @@ Output:
   8 | Ivy        | Moore     | 47000.00
   9 | Jack       | Anderson  | 56000.00
  10 | Kate       | Hill      | 44000.00
+ 11 | Liam       | Clark     | 59000.00
  12 | Mia        | Parker    | 42000.00
-(11 rows)
+(12 rows)
 
 ```
 
-It returns all the rows with the `employee` type because they have a value in the `salary` column less than any value in the set (55K, 58K, and 60K).
+It returns rows from the `employees` table whose `salary` is less than at least one value in the set (55K, 58K, and 60K). In this example, that means salaries less than 60K, which matches the 12 rows shown in the output.
 
 ## Summary
 

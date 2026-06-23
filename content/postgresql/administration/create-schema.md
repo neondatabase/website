@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL CREATE SCHEMA'
-page_title: 'PostgreSQL CREATE SCHEMA Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE SCHEMA statement to create a new schema in a database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/'
-ogImage: '/postgresqltutorial/postgresql-create-schema-example.png'
-updatedOn: '2024-02-12T12:34:40+00:00'
+title: PostgreSQL CREATE SCHEMA
+page_title: PostgreSQL CREATE SCHEMA Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CREATE SCHEMA
+  statement to create a new schema in a database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-schema/
+ogImage: /postgresqltutorial/postgresql-create-schema-example.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Schema'
-  slug: 'postgresql-administration/postgresql-schema'
+  title: PostgreSQL Schema
+  slug: postgresql-administration/postgresql-schema
 nextLink:
-  title: 'PostgreSQL ALTER SCHEMA'
-  slug: 'postgresql-administration/postgresql-alter-schema'
+  title: PostgreSQL ALTER SCHEMA
+  slug: postgresql-administration/postgresql-alter-schema
 ---
+
+<Admonition type="info" id="CTA">
+The CREATE SCHEMA statement works the same way on any PostgreSQL database, so what you learn here applies whether you run Postgres on your laptop or in production. If you're an enterprise organizing schemas across analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE SCHEMA` statement to create a new schema in a database.
 

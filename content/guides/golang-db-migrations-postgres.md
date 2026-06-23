@@ -4,7 +4,7 @@ subtitle: Learn how to manage database schema changes in Go applications using N
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2025-02-22T00:00:00.000Z'
+updatedOn: '2025-06-26T22:22:29.000Z'
 ---
 
 Database migrations are essential for managing schema evolution in applications as they grow and change over time. When working with Go applications and Neon's serverless Postgres, implementing a good migration strategy allows you to have smooth deployments and database changes without disruption.

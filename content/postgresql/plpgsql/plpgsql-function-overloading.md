@@ -1,18 +1,25 @@
 ---
-title: 'PL/pgSQL Function Overloading'
-page_title: 'PL/pgSQL Function Overloading'
-page_description: 'In this tutorial, you will learn about the PL/pgSQL function overloading feature that helps you develop flexible functions.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/'
+title: PL/pgSQL Function Overloading
+page_title: PL/pgSQL Function Overloading
+page_description: >-
+  In this tutorial, you will learn about the PL/pgSQL function overloading
+  feature that helps you develop flexible functions.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ''
-updatedOn: '2024-02-07T13:59:52+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
-  slug: 'postgresql-plpgsql/plpgsql-function-parameters'
+  slug: postgresql-plpgsql/plpgsql-function-parameters
 nextLink:
-  title: 'How to Develop a PL/pgSQL Function That Returns a Table'
-  slug: 'postgresql-plpgsql/plpgsql-function-returns-a-table'
+  title: How to Develop a PL/pgSQL Function That Returns a Table
+  slug: postgresql-plpgsql/plpgsql-function-returns-a-table
 ---
+
+<Admonition type="info" id="CTA">
+Function overloading works the same across every PostgreSQL deployment, so the patterns and pitfalls here apply whether you run Postgres yourself or through a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that plugs directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about function overloading in PostgreSQL.
 
@@ -47,7 +54,7 @@ end; $$
 
 ```
 
-The `get_rental_function` function has the `p_customer_id` as an `in` parameter.
+The `get_rental_duration` function has the `p_customer_id` as an `in` parameter.
 
 The following returns the number of rental days of customer id 232:
 

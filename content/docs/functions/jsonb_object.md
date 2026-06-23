@@ -2,14 +2,18 @@
 title: Postgres jsonb_object() function
 subtitle: Creates a JSONB object from key-value pairs
 summary: >-
-  Covers the usage of the `jsonb_object` function in Postgres to create a JSONB
-  object from key-value pairs, enabling dynamic generation of JSONB data from
-  table data or input parameters.
+  The `jsonb_object` function in Postgres constructs a JSONB object from two
+  parallel text arrays (keys and values) or a single interleaved text array,
+  returning binary JSONB rather than text JSON. Use it when you need to build a
+  JSONB object row-by-row from column data or query parameters, as opposed to
+  `json_object` (returns JSON) or `jsonb_object_agg` (aggregates across rows).
+  Both input arrays must be the same length and contain text values; non-text
+  columns require an explicit cast to TEXT.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.875Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The `jsonb_object` function in Postgres is used to create a `JSONB` object from a set of key-value pairs. It is particularly useful when you need to generate `JSONB` data dynamically from existing table data or input parameters.
+The `jsonb_object` function in Postgres is used to create a `JSONB` object from a set of key-value pairs. Use it when you need to generate `JSONB` data dynamically from existing table data or input parameters.
 
 <CTA />
 

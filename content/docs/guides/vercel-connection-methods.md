@@ -3,11 +3,17 @@ title: Connecting to Neon from Vercel
 subtitle: Learn how Vercel Fluid compute optimizes database connections and why standard
   TCP is the recommended method.
 summary: >-
-  Covers the setup of standard Postgres TCP connections and connection pooling
-  for optimizing database interactions between Vercel's Fluid compute model and
-  Neon, highlighting performance improvements over traditional methods.
+  Vercel Fluid compute connection methods for Neon compares TCP, HTTP, and
+  WebSocket protocols by setup roundtrip cost to explain why Fluid compute
+  makes standard Postgres TCP with connection pooling the recommended approach.
+  Classic serverless could not safely pool connections, requiring the
+  @neondatabase/serverless HTTP driver; Vercel Fluid solves this by closing
+  idle connections before function suspension, making TCP pooling
+  (node-postgres, Drizzle ORM with attachDatabasePool) the lowest-latency
+  option. Use this page instead of the integration guides when deciding which
+  connection method to use based on your Vercel compute model.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.202Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

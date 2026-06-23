@@ -2,11 +2,15 @@
 title: Migrate from Neon Auth SDK v0.1 to v0.2
 subtitle: Upgrade guide for breaking changes in the Neon Auth SDK
 summary: >-
-  Covers the migration process from Neon Auth SDK v0.1.x to v0.2.x, detailing
-  changes such as a unified API, session caching, and explicit configuration
-  requirements.
+  The Neon Auth SDK v0.2 replaces multiple server imports with a single
+  `createNeonAuth()` function, adds signed-cookie session caching that
+  significantly reduces Auth Server API calls, and requires an explicit
+  `NEON_AUTH_COOKIE_SECRET` passed at configuration time. Use this guide when
+  upgrading from v0.1: it covers the package update, new environment variables,
+  API route and middleware changes, the updated `getSession()` return format,
+  and a complete migration checklist.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.908Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide helps you migrate from Neon Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.
@@ -112,6 +116,8 @@ export const { GET, POST } = auth.handler();
 ```
 
 ### 5. Update middleware
+
+<NextjsProxyNote/>
 
 **Before (v0.1):**
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL MAKE_INTERVAL() Function'
-page_title: 'PostgreSQL MAKE_INTERVAL() Function'
-page_description: "In this tutorial, you will learn how to use the PostgreSQL MAKE_INTERVAL() function to create an interval from the interval's components"
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/'
+title: PostgreSQL MAKE_INTERVAL() Function
+page_title: PostgreSQL MAKE_INTERVAL() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL MAKE_INTERVAL()
+  function to create an interval from the interval's components
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-make_interval/
 ogImage: ''
-updatedOn: '2024-03-25T05:04:35+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
-  slug: 'postgresql-date-functions/postgresql-justify_interval'
+  title: PostgreSQL JUSTIFY_INTERVAL() Function
+  slug: postgresql-date-functions/postgresql-justify_interval
 nextLink:
-  title: 'PostgreSQL AT TIME ZONE Operator'
-  slug: 'postgresql-date-functions/postgresql-at-time-zone'
+  title: PostgreSQL AT TIME ZONE Operator
+  slug: postgresql-date-functions/postgresql-at-time-zone
 ---
+
+<Admonition type="info" id="CTA">
+The MAKE_INTERVAL() function works the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `MAKE_INTERVAL()` function to create an interval from the interval’s components
 
@@ -56,7 +63,7 @@ Let’s explore some examples of using the `MAKE_INTERVAL()` function.
 
 ### 1\) Basic MAKE_INTERVAL() function example
 
-The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 1 year, 2 months, 3 days, and 4 hours:
+The following example uses the `MAKE_INTERVAL()` function to create an interval that represents 3 years, 6 months, 15 days, and 4 hours:
 
 ```sql
 SELECT

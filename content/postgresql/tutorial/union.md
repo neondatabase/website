@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL UNION'
-page_title: 'PostgreSQL UNION Operator'
-page_description: 'This tutorial shows you how to use the PostgreSQL UNION operator to combine the result sets of multiple queries into a single result set.'
+title: PostgreSQL UNION
+page_title: PostgreSQL UNION Operator
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL UNION operator to combine
+  the result sets of multiple queries into a single result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-union/'
-ogImage: '/postgresqltutorial/PostgresQL-UNION.png'
-updatedOn: '2024-02-06T01:38:07+00:00'
+ogImage: /postgresqltutorial/PostgresQL-UNION.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL HAVING'
-  slug: 'postgresql-tutorial/postgresql-having'
+  title: PostgreSQL HAVING
+  slug: postgresql-tutorial/postgresql-having
 nextLink:
-  title: 'PostgreSQL INTERSECT Operator'
-  slug: 'postgresql-tutorial/postgresql-intersect'
+  title: PostgreSQL INTERSECT Operator
+  slug: postgresql-tutorial/postgresql-intersect
 ---
+
+<Admonition type="info" id="CTA">
+The UNION and UNION ALL operators work the same way across any PostgreSQL deployment, so everything you learn here applies whether you run Postgres yourself or on a managed service. For enterprises standardizing on an AI-ready data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UNION` operator to combine result sets of multiple queries into a single result set.
 

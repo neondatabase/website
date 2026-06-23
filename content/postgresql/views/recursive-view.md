@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Recursive View'
-page_title: 'How To Create a PostgreSQL Recursive View'
-page_description: 'This tutorial shows you step by step how to create a PostgreSQL recursive view using the CREATE RECURSIVE VIEW statement.'
+title: PostgreSQL Recursive View
+page_title: How To Create a PostgreSQL Recursive View
+page_description: >-
+  This tutorial shows you step by step how to create a PostgreSQL recursive view
+  using the CREATE RECURSIVE VIEW statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-recursive-view/'
 ogImage: ''
-updatedOn: '2024-03-16T04:42:50+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Materialized Views'
-  slug: 'postgresql-views/postgresql-materialized-views'
+  title: PostgreSQL Materialized Views
+  slug: postgresql-views/postgresql-materialized-views
 nextLink:
-  title: 'PostgreSQL List Views'
-  slug: 'postgresql-views/postgresql-list-views'
+  title: PostgreSQL List Views
+  slug: postgresql-views/postgresql-list-views
 ---
+
+<Admonition type="info" id="CTA">
+Recursive views work the same on any PostgreSQL deployment, so everything you learn here about CREATE RECURSIVE VIEW applies whether you run Postgres yourself or on a managed service. If you need enterprise-grade managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL recursive view using the `CREATE RECURSIVE VIEW` statement.
 

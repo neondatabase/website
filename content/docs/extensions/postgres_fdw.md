@@ -2,14 +2,20 @@
 title: The postgres_fdw extension
 subtitle: Access data in remote Postgres databases from Neon using postgres_fdw
 summary: >-
-  Covers the setup of the `postgres_fdw` extension in Neon to access and query
-  data from remote Postgres databases, enabling seamless integration and
-  compliance with data residency requirements.
+  The `postgres_fdw` Foreign Data Wrapper extension lets Neon databases query
+  tables in external Postgres servers in place, using foreign servers, user
+  mappings, and foreign tables that translate SQL queries transparently across
+  the network. Use it when you need to join or read remote Postgres data without
+  migrating it, such as for data residency compliance or cross-database
+  reporting, and prefer it over `dblink` for DML support and better query
+  planning. The extension supports SELECT, INSERT, UPDATE, and DELETE on foreign
+  tables, but does not support `ON CONFLICT DO UPDATE`; unpooled connection
+  strings are required when the foreign server is also a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.847Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
+The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This lets you use Neon's features while adhering to data storage policies, simplifying data integration and enabling cross-database querying across different Postgres deployments.
 
 This guide will walk you through the essentials of using the `postgres_fdw` extension in Neon. You'll learn how to enable the extension, establish connections to remote Postgres servers, define foreign tables that map to tables on those servers, and execute queries that span across your Neon database and remote instances. We will also cover important considerations for performance and security when working with `postgres_fdw`.
 
@@ -311,7 +317,7 @@ While both `postgres_fdw` and `dblink` allow you to connect to remote Postgres d
 
 ## Conclusion
 
-The `postgres_fdw` extension is a valuable tool for Neon users who need to access and integrate data from remote Postgres databases. By establishing connections to foreign servers, defining foreign tables, and executing queries that span across local and remote databases, you can build powerful applications that leverage data from multiple sources seamlessly.
+The `postgres_fdw` extension is a valuable tool for Neon users who need to access and integrate data from remote Postgres databases. By establishing connections to foreign servers, defining foreign tables, and executing queries that span across local and remote databases, you can build applications that query data from multiple sources.
 
 ## Reference
 

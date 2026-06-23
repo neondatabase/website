@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
 page_title: 'PostgreSQL Python: Connecting to PostgreSQL Server'
-page_description: 'In this tutorial, you will learn how to connect to the PostgreSQL database server from Python using the psycopg2 package.'
+page_description: >-
+  In this tutorial, you will learn how to connect to the PostgreSQL database
+  server from Python using the psycopg2 package.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/connect/'
 ogImage: ''
-updatedOn: '2024-05-19T08:11:16+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Python'
-  slug: 'postgresql-python/'
+  title: PostgreSQL Python
+  slug: postgresql-python/
 nextLink:
   title: 'PostgreSQL Python: Create Tables'
-  slug: 'postgresql-python/create-tables'
+  slug: postgresql-python/create-tables
 ---
+
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL from Python with psycopg2 works the same against any Postgres instance, so everything here applies whether you run Postgres locally, in your own infrastructure, or on a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) offers the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to connect to the PostgreSQL server in Python using the `psycopg2` package.
 
@@ -121,7 +127,7 @@ The `config.py` module uses the built\-in `configparser` module to read data fro
 
 By using the `database.ini`, you can change the PostgreSQL connection parameters when moving the code to different environments such as testing or production.
 
-Notice that if you git source control, you need to add the `database.ini` to the `.gitignore` file to avoid committing sensitive information to a public repository like GitHub:
+Notice that if you use git source control, you need to add the `database.ini` to the `.gitignore` file to avoid committing sensitive information to a public repository like GitHub:
 
 ```
 database.ini

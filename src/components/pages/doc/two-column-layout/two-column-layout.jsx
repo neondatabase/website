@@ -112,7 +112,7 @@ const TwoColumnBlock = ({ label, children }) => (
         {label}
       </div>
     )}
-    <div className="size-full [&_img]:m-0! [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+    <div className="size-full [&_img]:m-0! [&>*:first-child]:mt-0 md:[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
       {children}
     </div>
   </div>

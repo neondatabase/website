@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL INITCAP() Function'
-page_title: 'PostgreSQL INITCAP() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL INITCAP() function to convert a string to the proper case.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-letter-case-functions/'
+title: PostgreSQL INITCAP() Function
+page_title: PostgreSQL INITCAP() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL INITCAP() function
+  to convert a string to the proper case.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-letter-case-functions/
 ogImage: ''
-updatedOn: '2024-01-29T01:36:51+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FORMAT() Function'
-  slug: 'postgresql-string-functions/postgresql-format'
+  title: PostgreSQL FORMAT() Function
+  slug: postgresql-string-functions/postgresql-format
 nextLink:
-  title: 'PostgreSQL LEFT() Function'
-  slug: 'postgresql-string-functions/postgresql-left'
+  title: PostgreSQL LEFT() Function
+  slug: postgresql-string-functions/postgresql-left
 ---
+
+<Admonition type="info" id="CTA">
+The INITCAP() function works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INITCAP()` function to convert a string to a proper case.
 

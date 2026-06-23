@@ -2,11 +2,13 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 summary: >-
-  Covers the setup and integration of Neon's branching feature into development
-  workflows, including automation with APIs, CLI, and CI/CD tools for efficient
-  branch management and preview deployments.
+  Neon branching lets you instantly create copy-on-write database branches for
+  development, testing, preview deployments, and point-in-time data recovery.
+  Use this hub to find guides for automating branches with the Neon API, CLI,
+  GitHub Actions, or Githooks, and for connecting branches to Vercel preview
+  deployments or restoring data with Time Travel.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.926Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -25,6 +27,8 @@ Learn about branching and how you can apply it in your development workflows.
 
 <a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
 
+<a href="/docs/auth/branching-authentication" description="Test sign-in, OAuth, and permissions in isolated branches without touching production" icon="lock-landscape">Branching authentication</a>
+
 </DetailIconCards>
 
 ## Automate branching
@@ -39,7 +43,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="filter">Branching with GitHub Actions</a>
 
-<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automating branch creation with Githooks" icon="hook">Branching with Githooks</a>
+<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automate branch creation with Githooks" icon="hook">Branching with Githooks</a>
 
 </DetailIconCards>
 
@@ -73,7 +77,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your [restore window](/docs/introduction/restore-window)" icon="invert">Instant restore with Time Travel Assist</a>
+<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your [history window](/docs/introduction/history-window)" icon="invert">Instant restore with Time Travel Assist</a>
 
 <a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 
@@ -87,6 +91,5 @@ Explore example applications that use Neon's branching feature.
 
 <DetailIconCards>
 <a href="https://github.com/kelvich/branching_demo_bisect" description="Use Neon branching, the Neon API, and a bisect script to recover lost data" icon="hourglass">Time Travel Demo</a>
-<a href="https://github.com/neondatabase/neon_twitter" description="Use GitHub Actions to create and delete a branch with each pull request" icon="x">Neon Twitter app</a>
 <a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="calendar-day">Preview branches app</a>
 </DetailIconCards>

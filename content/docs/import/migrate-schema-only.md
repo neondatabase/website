@@ -2,11 +2,15 @@
 title: Migrate a database schema
 subtitle: Perform a schema-only migration with pg_dump and pg_restore
 summary: >-
-  Covers the setup of a schema-only migration using `pg_dump` and `pg_restore`,
-  detailing how to dump and modify a database schema for compatibility with
-  Neon.
+  Schema-only migration with `pg_dump --schema-only` and `psql` copies table
+  definitions, indexes, and constraints to Neon without transferring row data.
+  This is required before starting logical replication so source and destination
+  schemas match. Use this page when copying a schema from AlloyDB, RDS, or
+  another Postgres provider and needing to strip provider-specific settings or
+  defer index creation. Requires an unpooled Neon connection string; pooled
+  connections are not supported for `pg_dump`.
 enableTableOfContents: true
-updatedOn: '2026-04-01T22:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.

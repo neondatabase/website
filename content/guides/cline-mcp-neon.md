@@ -4,42 +4,20 @@ subtitle: 'Make schema changes with natural language using Cline and Neon MCP Se
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2025-02-22T00:00:00.000Z'
+updatedOn: '2026-06-19T23:17:10.824Z'
 ---
 
-Imagine adjusting your database schema simply by describing the change in plain English. This is possible by combining [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon).
+This guide shows how to use [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
 
-This guide demonstrates how to use [Cline](https://docs.cline.bot/mcp-servers/mcp) and Neon's MCP server to perform database migrations in your Neon project.
-
-<Admonition type="important" title="Neon MCP Server Security Considerations">
-The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
-
-The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
-
-For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+<Admonition type="important" title="Security">
+The Neon MCP Server grants broad database management capabilities. Always review and authorize actions requested by the LLM before execution. See [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance).
 </Admonition>
-
-## Key components
-
-Let's break down the key components in this setup:
-
-- **Cline**: Cline is an autonomous coding agent streamlining your development process within your IDE. It offers powerful features for creating, editing, executing, and even browsing, all under your guidance. Cline has support for the Model Context Protocol (MCP), facilitating seamless interaction with external tools.
-
-- **Neon MCP Server**: Neon's MCP server acts as a bridge between MCP clients like Cline and [Neon's API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), letting you work with Neon databases using natural language commands.
-
-- **Model Context Protocol (MCP)**: MCP is a lightweight communication standard that allows Cline and Neon MCP Server to work together.
 
 ## Setting up Neon MCP Server in Cline
 
-You have two options for connecting Cline to the Neon MCP Server:
-
-1. **Remote MCP Server:** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cline. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
-
-2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
-
 ### Prerequisites
 
-Before you begin, ensure you have the following:
+Make sure you have:
 
 1.  **Cline extension and Setup:**
     - Download and install the Cline VS Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev).
@@ -53,12 +31,8 @@ Before you begin, ensure you have the following:
 
 ### Option 1: Setting up the remote hosted Neon MCP Server
 
-This method uses Neon's managed server and OAuth authentication.
-
-### Installation and configuration
-
 <Admonition type="note">
-By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#config-generator).
 </Admonition>
 
 1. Open Cline by clicking the **Cline** icon in the VS Code sidebar.
@@ -87,9 +61,8 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
    ![Cline MCP Servers Icon](/docs/guides/cline-mcp-servers-icon.png)
 3. Click **Configure** to open the MCP server settings.
    ![Cline MCP Server Configure](/docs/guides/cline-mcp-server-configure.png)
-4. This will open the `cline_mcp_settings.json` file.
-5. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
-6. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
+4. This opens `cline_mcp_settings.json`.
+5. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your Neon API key:
    <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
 
    ```json
@@ -134,34 +107,22 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 
    </CodeTabs>
 
-7. **Save** the `cline_mcp_settings.json` file.
-8. You should see a notification in VS Code that says: "MCP servers updated".
+6. **Save** the `cline_mcp_settings.json` file.
+7. You should see a notification in VS Code that says: "MCP servers updated".
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-9. Cline is now configured to use the local Neon MCP server. You should see **neon** listed under available MCP servers.
+8. Cline is now configured to use the local Neon MCP server. You should see **neon** listed under available MCP servers.
 
 ### Verifying the Integration
 
-Now that you have the Neon MCP server set up either remotely or locally, you can verify the connection and test the available tools. If the integration is successful, you should see the Neon MCP server listed in the Cline MCP Servers Installed section.
+The Neon MCP server will appear in the Cline MCP Servers Installed section.
 
 ![Cline Available MCP Tools](/docs/guides/cline-available-mcp-tools.png)
 
-You've now configured Neon MCP Server in Cline and can manage your Neon Postgres databases using AI.
-
-<MCPTools />
-
-These actions enable any MCP client like Cline to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon's branching for safe preview and commit.
+For a full list of available tools, see [available tools](/docs/ai/neon-mcp-server#available-tools) in the Neon MCP Server overview.
 
 ## Development Workflow: Adding a Column with Cline and Neon MCP
 
-Let's walk through a typical development scenario: Quickly adding a column for prototyping using natural language within Cline. The following chat log demonstrates a real interaction with Cline and the Neon MCP server.
-
-**Scenario:** During development, you decide to track timestamps for entries in your `playing_with_neon` table. You want to quickly add a `created_at` column.
-
-<Admonition type="tip" title="Security Reminder">
-For your security, review the tool's purpose before permitting the operation to proceed. Remember that LLMs can sometimes produce unexpected results, so careful monitoring is always recommended.
-</Admonition>
-
-Following is a sample interaction with Cline where you can see how it uses the Neon MCP server to add a column to your table:
+Here's an example interaction adding a `created_at` column to a table:
 
 ```text shouldWrap
 User: in my neon project id: fancy-bush-59303206, list all my tables
@@ -199,66 +160,13 @@ Cline: I'll use the prepare_database_migration tool to add a created_at column t
 > The migration has been successfully completed. The created_at column has been added to the table and is populated with timestamps.
 ```
 
-**Key takeaways:**
-
-- **Natural language interaction:** You can use simple, conversational English to interact with your database through Cline.
-- **Step-by-step guidance:** Cline confirms each step and provides details like branch names and migration IDs.
-- **MCP Tools in Action:** The underlying MCP tools (`get_database_tables`, `run_sql`, `prepare_database_migration`, `complete_database_migration`) illustrate the automated process.
-- **Branching for safety:** The agent automatically creates a temporary branch for schema changes. The user will be prompted to confirm the migration before applying it to the production branch.
-
 You can verify the changes in your Neon Console or by querying the database directly.
 
 ![Neon Console with added column](/docs/guides/neon-cursor-mcp-added-column.png)
 
 <Admonition type="note">
-While the Neon MCP server allows you to utilize all of Neon's functionalities, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+While the Neon MCP server allows you to use all of Neon's functionalities, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
 </Admonition>
-
-## Bonus: Creating a project and branch
-
-Beyond schema changes, you can also manage your Neon projects and branches directly within Cline using natural language commands. This can be useful for quickly setting up a new development or test environment.
-
-### Creating a new project
-
-Let's say you want to create a new Neon project named "my-new-project". You can simply tell Cline:
-
-```text shouldWrap
-User: Create a Neon project named "my-new-project"
-Cline: I see that I have access to the Neon MCP server which provides tools for interacting with Neon's API. Looking at the available tools, I can use the create_project tool to create a new Neon project with the specified name "my-new-project".
-> Cline wants to use a tool on the neon MCP server:
-> create_project ARGUMENTS: { "name": "my-new-project" }
-> I've created a new Neon project named "my-new-project". Here are the project details:
-> Project ID: muddy-bar-98083629
-> Default branch: main
-> Default database: neondb
-```
-
-![Cline creating a new Neon project](/docs/guides/cline-mcp-create-new-project.png)
-
-Cline will then use the `create_project` MCP tool to initiate the project creation. It will provide you with a project ID and name.
-
-### Creating a New Branch
-
-Once you have a project, you can easily create new branches for development or experimentation. For example, to create a branch named "feature-x" in your "my-new-project" project:
-
-```text shouldWrap
-User: Create a branch named "feature-x"
-Cline: I'll use the create_branch tool from the Neon MCP server to create a new branch named "feature-x" in the project we just created (project ID: muddy-bar-98083629).
-> Cline wants to use a tool on the neon MCP server:
-> create_branch ARGUMENTS: { "project_id": "muddy-bar-98083629", branchName": "feature-x" }
-> I've created a new branch named "feature-x" in your Neon project. Here are the branch details:
-> Branch ID: br-broad-base-a5kh7wyi
-> Branch name: feature-x
-> Parent branch: br-lively-cherry-a5kz48n6
-```
-
-![Cline creating a new Neon branch](/docs/guides/cline-mcp-create-new-branch.png)
-
-Cline will use the `create_branch` MCP tool to create the branch and provide you with the branch name and ID. Notice how we don't need to specify the project ID, as Cline remembers the active project context.
-
-## Conclusion
-
-Cline with Neon MCP Server lets you use natural language to interact with your database and take advantage of Neon's branching capabilities for fast iteration. This approach is ideal for quickly testing database ideas and making schema changes during development.
 
 ## Resources
 

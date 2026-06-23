@@ -2,11 +2,15 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 summary: >-
-  How to connect a TypeScript/Node.js application to a Neon Postgres database
-  using Drizzle ORM, including configuration for migrations and driver
-  connections.
+  Drizzle ORM connection guide for Neon Postgres walks through initializing a
+  TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
+  WebSocket, node-postgres, and postgres.js. Use this page when you need
+  type-safe queries plus Drizzle Kit migrations against a Neon database and want
+  to pick the right driver for serverless or long-running environments. The
+  guide also shows how to point Drizzle at different Neon branches per
+  environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.148Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -21,10 +25,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 <DocsList title="Related resources" theme="docs">
   <a href="https://orm.drizzle.team/docs/tutorials/drizzle-with-neon">Drizzle with Neon Postgres (Drizzle Docs)</a>
   <a href="/docs/guides/drizzle-migrations">Schema migration with Drizzle ORM</a>
-</DocsList>
-
-<DocsList title="Source code" theme="repo">
-  <a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-edge">Next.js Edge Functions with Drizzle</a>
+  <a href="/docs/guides/nextjs#video-walkthrough">Getting started with Neon (Next.js and Drizzle video)</a>
 </DocsList>
 
 </InfoBlock>
@@ -356,7 +357,7 @@ const sql = neon(getBranchUrl()!);
 export const db = drizzle({ client: sql });
 ```
 
-Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string --branch-id <branch-id>`).
+Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string <branch-id-or-name> --project-id <project-id>`).
 
 ## Resources
 

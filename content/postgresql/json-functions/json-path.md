@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL JSON Path'
-page_title: 'PostgreSQL JSON Path'
-page_description: 'In this tutorial, you will learn about the PostgreSQL JSON path and how to use it to locate an element within a JSON document.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/'
+title: PostgreSQL JSON Path
+page_title: PostgreSQL JSON Path
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL JSON path and how to use
+  it to locate an element within a JSON document.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/
 ogImage: ''
-updatedOn: '2024-03-16T02:17:02+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_object_keys() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_object_keys'
+  title: PostgreSQL jsonb_object_keys() Function
+  slug: postgresql-json-functions/postgresql-jsonb_object_keys
 nextLink:
-  title: 'PostgreSQL jsonb_path_exists() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_exists'
+  title: PostgreSQL jsonb_path_exists() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_exists
 ---
+
+<Admonition type="info" id="CTA">
+JSON path expressions and the jsonb_path_query function work the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on a lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and deep Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL JSON path and how to use it to locate an element within a JSON document.
 
@@ -31,7 +38,7 @@ To construct JSON path expressions, you can use the combination of the following
 - `[start: end]` – Array slice operator.
 - `[?(expression)]` – Filter expression that evaluates to a boolean value.
 
-To extract specific elements from a JSON path `jsonb_path_query()` function:
+To extract specific elements from a JSON path, use the `jsonb_path_query()` function:
 
 ```sql
 jsonb_path_query(jsonb_data, json_path)

@@ -2,7 +2,7 @@
 
 The Neon website implements the [llms.txt standard](https://llmstxt.org/) to provide LLM-friendly documentation. Content is generated at build time from source MDX in `content/docs/` (and other content routes).
 
-We used to keep `.txt` files in `public/llms/`; we don't anymore. Don't add entries to `llms-redirect-map.json`; that map is frozen. New content is served at its `.md` URL from the build.
+Content is served at its `.md` URL from the build; the older `public/llms/*.txt` URLs are no longer supported.
 
 **How it works**
 

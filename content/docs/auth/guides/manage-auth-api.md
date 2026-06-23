@@ -2,18 +2,25 @@
 title: Manage Neon Auth via the API
 subtitle: 'Enable, configure, and disable Neon Auth using the Neon API'
 summary: >-
-  How to enable, retrieve, and disable Neon Auth on a branch using the Neon REST
-  API, including curl examples and response reference.
+  Neon Auth REST API operations for enabling (POST), retrieving (GET),
+  updating (PATCH), and disabling (DELETE) auth on a per-branch basis, with
+  curl examples and a full response field reference. Use this page when
+  automating auth provisioning or teardown: the enable response is the only
+  call that returns `pub_client_key` and `secret_server_key`, and the
+  `delete_data` flag on DELETE controls whether the `neon_auth` schema is
+  permanently removed. Also covers related branch-scoped endpoints for OAuth
+  providers, email configuration, domains, users, plugins, and webhooks, plus
+  equivalent MCP tools for AI-editor workflows.
 enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-03-20T21:22:58.806Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-You can manage Neon Auth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started).
+You can manage Neon Auth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started). You can also enable and configure Neon Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
 
 <Admonition type="note">
 Neon Auth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.
@@ -95,9 +102,35 @@ Response (200 OK):
   "created_at": "2026-02-26T04:29:05Z",
   "owned_by": "neon",
   "jwks_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/.well-known/jwks.json",
-  "base_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth"
+  "base_url": "https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth",
+  "name": "My App"
 }
 ```
+
+## Update auth configuration
+
+Update auth settings for a branch. Currently supports changing the application name shown in user-facing auth messages. Applies to Neon Auth (Better Auth) integrations only. Defaults to the Neon project name.
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/config' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"name": "My App"}'
+```
+
+Response (200 OK):
+
+```json
+{
+  "name": "My App"
+}
+```
+
+| Field  | Description                                                    |
+| ------ | -------------------------------------------------------------- |
+| `name` | The name shown in user-facing auth messages (1-256 characters) |
+
+Each branch manages its own application name independently. You can also update this from the **Auth** page > **Configuration** tab > **Project Info** panel in the Neon Console.
 
 ## Disable Neon Auth
 
@@ -125,17 +158,20 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
 
-| Endpoint              | Methods                  | Description                                                  |
-| --------------------- | ------------------------ | ------------------------------------------------------------ |
-| `/domains`            | GET, POST, DELETE        | Manage trusted redirect domains                              |
-| `/oauth_providers`    | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)             |
-| `/email_provider`     | GET, PATCH               | Configure the email provider                                 |
-| `/email_and_password` | GET, PATCH               | Configure email/password authentication                      |
-| `/users`              | POST, DELETE, PUT        | Create, delete, and manage user roles                        |
-| `/plugins`            | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins) |
-| `/webhooks`           | GET, PUT                 | Configure webhook notifications                              |
-| `/allow_localhost`    | GET, PATCH               | Toggle localhost access for development                      |
-| `/send_test_email`    | POST                     | Send a test email to verify email configuration              |
+| Endpoint                | Methods                  | Description                                                                 |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------------- |
+| `/domains`              | GET, POST, DELETE        | Manage trusted redirect domains                                             |
+| `/oauth_providers`      | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                            |
+| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
+| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
+| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
+| `/plugins`              | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                |
+| `/plugins/magic-link`   | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)     |
+| `/plugins/phone-number` | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number) |
+| `/webhooks`             | GET, PUT                 | Configure webhook notifications                                             |
+| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
+| `/config`               | PATCH                    | Update auth configuration (application name)                                |
+| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
 
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 

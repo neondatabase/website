@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL hstore'
-page_title: 'PostgreSQL hstore Tutorial'
-page_description: 'We introduce you to PostgreSQL hstore data type. You will learn know how to perform practical and useful operations on PostgreSQL hstore columns.'
+title: PostgreSQL hstore
+page_title: PostgreSQL hstore Tutorial
+page_description: >-
+  We introduce you to PostgreSQL hstore data type. You will learn know how to
+  perform practical and useful operations on PostgreSQL hstore columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore/'
-ogImage: '/postgresqltutorial/postgresql-hstore-query.jpg'
-updatedOn: '2024-02-01T12:53:20+00:00'
+ogImage: /postgresqltutorial/postgresql-hstore-query.jpg
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON'
-  slug: 'postgresql-tutorial/postgresql-json'
+  title: PostgreSQL JSON
+  slug: postgresql-tutorial/postgresql-json
 nextLink:
-  title: 'PostgreSQL Array'
-  slug: 'postgresql-tutorial/postgresql-array'
+  title: PostgreSQL Array
+  slug: postgresql-tutorial/postgresql-array
 ---
+
+<Admonition type="info" id="CTA">
+Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to work with **PostgreSQL hstore** data type.
 
@@ -35,7 +41,7 @@ CREATE EXTENSION hstore;
 We create a table named `books` that has three columns:
 
 - `id` is the primary key that identifies the book.
-- `title` is the title of the products
+- `title` is the title of the book
 - `attr` stores attributes of the book such as ISBN, weight, and paperback. The data type of the `attr` column is hstore.
 
 We use the [CREATE TABLE statement](postgresql-create-table) to create the `books` table as follows:
@@ -221,7 +227,7 @@ FROM
 ```
 
 ![postgresql hstore akeys function](/postgresqltutorial/postgresql-hstore-akeys-function.jpg)
-Or you can use the `skey()` function if you want PostgreSQL to return the result as a set.
+Or you can use the `skeys()` function if you want PostgreSQL to return the result as a set.
 
 ```sql
 SELECT

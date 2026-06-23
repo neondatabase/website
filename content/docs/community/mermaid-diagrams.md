@@ -2,11 +2,15 @@
 title: Using Mermaid diagrams
 subtitle: Guide for creating visual diagrams in Neon documentation
 summary: >-
-  Step-by-step guide for creating visual diagrams in Neon documentation using
-  Mermaid, a markdown-like syntax that generates styled diagrams and flowcharts,
-  supporting both light and dark modes.
+  Authoring guide for Mermaid diagrams in Neon documentation. Shows how to
+  embed flowcharts, sequence diagrams, ER diagrams, state diagrams, gitGraph,
+  class diagrams, Gantt charts, and pie charts using a fenced mermaid code
+  block. Diagrams auto-render with Neon brand colors in both light and dark
+  modes, with no manual color configuration required. Also covers AI prompt
+  templates for Cursor and Claude, syntax error fixes, and a Mermaid Live
+  Editor validation workflow.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.783Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide shows Neon documentation writers and contributors how to create visual diagrams using Mermaid, a markdown-like syntax for generating diagrams and flowcharts. Mermaid diagrams are automatically styled with Neon's brand colors and support both light and dark modes.
@@ -51,7 +55,7 @@ flowchart TD
 
 ## Using AI to generate diagrams
 
-At Neon, we use **Cursor** and **Claude** (or ChatGPT) extensively to generate Mermaid diagrams. Here's how to leverage AI for creating diagrams:
+At Neon, we use **Cursor** and **Claude** (or ChatGPT) extensively to generate Mermaid diagrams. Here's how to use AI to create diagrams:
 
 ### Using Cursor AI
 

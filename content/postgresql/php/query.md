@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Querying Data'
-page_title: 'PostgreSQL PHP: Queying Data From PostgreSQL Tables'
-page_description: 'In this tutorial, you will step by step learn how to query data from the tables in the PostgreSQL database using PHP PDO.'
+page_title: 'PostgreSQL PHP: Querying Data From PostgreSQL Tables'
+page_description: >-
+  In this tutorial, you will step by step learn how to query data from the
+  tables in the PostgreSQL database using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/query/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Query-Example.png'
-updatedOn: '2022-02-09T14:55:54+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Query-Example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Updating Data In a Table'
-  slug: 'postgresql-php/update'
+  slug: postgresql-php/update
 nextLink:
   title: 'PostgreSQL PHP: Transaction'
-  slug: 'postgresql-php/transaction'
+  slug: postgresql-php/transaction
 ---
+
+<Admonition type="info" id="CTA">
+Querying PostgreSQL from PHP with PDO works the same wherever your database runs, so the patterns here apply to any Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to query data from the PostgreSQL database in PHP using PDO.
 
@@ -22,7 +28,7 @@ To query all rows from a table in the PostgreSQL database, you use the following
 
 1. First, [connect to the PostgreSQL database](connect) by creating a new PDO object.
 2. Second, call the `query()` method of the PDO object. The query() method accepts a [SELECT](../postgresql-tutorial/postgresql-select) statement as the argument. The query method returns a `PDOStatement` object.
-3. Third, fetch the next rows from the result by calling the fetch() method of the PDOstatement object. The fetch_style argument of the `fetch()` method controls how the result returned. For example, the `PDO::FETCH_ASSOC` instructs the `fetch()` method to return the result set as an array indexed by column name.
+3. Third, fetch the next rows from the result by calling the fetch() method of the PDOstatement object. The fetch_style argument of the `fetch()` method controls how the result is returned. For example, the `PDO::FETCH_ASSOC` instructs the `fetch()` method to return the result set as an array indexed by column name.
 
 We will use the `stocks` table created in the [creating table tutorial](create-tables) for the demonstration. Let’s create a new class `StockDB` for storing all the methods that select data from the `stocks` table.
 

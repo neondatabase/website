@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL WHERE'
+title: PostgreSQL WHERE
 page_title: 'PostgreSQL WHERE: Filtering Rows of a Query'
-page_description: 'In this tutorial, you’ll learn how to use PostgreSQL WHERE clause to filter rows returned from the SELECT statement.'
+page_description: >-
+  In this tutorial, you’ll learn how to use PostgreSQL WHERE clause to filter
+  rows returned from the SELECT statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/'
-ogImage: '/postgresqltutorial/PostgreSQL-WHERE.png'
-updatedOn: '2024-01-16T10:02:38+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-WHERE.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DISTINCT ON'
-  slug: 'postgresql-tutorial/postgresql-distinct-on'
+  title: PostgreSQL DISTINCT ON
+  slug: postgresql-tutorial/postgresql-distinct-on
 nextLink:
-  title: 'PostgreSQL AND Operator'
-  slug: 'postgresql-tutorial/postgresql-and'
+  title: PostgreSQL AND Operator
+  slug: postgresql-tutorial/postgresql-and
 ---
+
+<Admonition type="info" id="CTA">
+The WHERE clause works the same across any standard PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `WHERE` clause to filter rows returned by a `SELECT` statement.
 

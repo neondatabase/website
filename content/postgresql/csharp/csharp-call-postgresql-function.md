@@ -1,18 +1,25 @@
 ---
 title: 'PostgreSQL C#: Call a PostgreSQL Function'
 page_title: 'PostgreSQL C#: Call a PostgreSQL Function'
-page_description: 'In this tutorial, you will learn to call a PostgreSQL function with parameters from a C# program using ADO.NET'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/'
+page_description: >-
+  In this tutorial, you will learn to call a PostgreSQL function with parameters
+  from a C# program using ADO.NET
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/
 ogImage: ''
-updatedOn: '2024-05-21T07:40:03+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Transaction'
-  slug: 'postgresql-csharp/postgresql-csharp-transaction'
+  slug: postgresql-csharp/postgresql-csharp-transaction
 nextLink:
   title: 'PostgreSQL C#: Call a Stored Procedure'
-  slug: 'postgresql-csharp/postgresql-csharp-call-a-stored-procedure'
+  slug: postgresql-csharp/postgresql-csharp-call-a-stored-procedure
 ---
+
+<Admonition type="info" id="CTA">
+Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres, so you can apply these ADO.NET patterns wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to call a PostgreSQL function from a C\# program using ADO.NET
 
@@ -69,7 +76,7 @@ psql -U ed -d elearning
 
 It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL server.
 
-Second, create a stored procedure in PostgreSQL, which enrolls a student in a course and creates a corresponding invoice:
+Second, create a function in PostgreSQL that returns the count of students who registered within a date range:
 
 ```sql
 create function get_student_count(begin_date date, end_date date)

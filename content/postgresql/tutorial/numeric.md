@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL NUMERIC Type'
-page_title: 'PostgreSQL NUMERIC Data Type'
-page_description: 'You will learn about the PostgreSQL NUMERIC data type and how to use the NUMERIC column for storing values that precision is required.'
+title: PostgreSQL NUMERIC Type
+page_title: PostgreSQL NUMERIC Data Type
+page_description: >-
+  You will learn about the PostgreSQL NUMERIC data type and how to use the
+  NUMERIC column for storing values that precision is required.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/'
 ogImage: ''
-updatedOn: '2024-04-18T12:27:09+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
-  slug: 'postgresql-tutorial/postgresql-char-varchar-text'
+  slug: postgresql-tutorial/postgresql-char-varchar-text
 nextLink:
-  title: 'PostgreSQL DOUBLE PRECISION Data Type'
-  slug: 'postgresql-tutorial/postgresql-double-precision-type'
+  title: PostgreSQL DOUBLE PRECISION Data Type
+  slug: postgresql-tutorial/postgresql-double-precision-type
 ---
+
+<Admonition type="info" id="CTA">
+The NUMERIC type works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, in [Neon](https://neon.com), or anywhere else. For enterprises that need exact numeric precision for financial data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `NUMERIC` type for storing numeric data.
 
@@ -39,7 +45,7 @@ The scale of the `NUMERIC` type can be zero, positive, or negative.
 
 PostgreSQL 15 or later allows you to declare a numeric column with a negative scale.
 
-The following declares the price column with the numeric type that can store total numbers with 7 digits, 5 before the decimal point and 2 digits after the decimal point:
+The following declares the price column with the numeric type that can store numbers with 7 digits in total, 5 before the decimal point and 2 digits after the decimal point:
 
 ```sql
 price NUMERIC(7,2)

@@ -4,7 +4,7 @@ subtitle: Learn how to build a secure user authentication system in FastAPI usin
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2024-08-17T00:00:00.000Z'
+updatedOn: '2026-02-02T08:37:16.000Z'
 ---
 
 In this guide, we'll walk through the process of implementing secure user authentication in a FastAPI application using JSON Web Tokens (JWT) and Neon Postgres.

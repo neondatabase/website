@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Aggregate Functions'
-page_title: 'PostgreSQL Aggregate Functions'
-page_description: 'This tutorial shows you how to use the PostgreSQL aggregate functions such as AVG(), COUNT(), MIN(), MAX(), and SUM() to summarize data.'
+title: PostgreSQL Aggregate Functions
+page_title: PostgreSQL Aggregate Functions
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL aggregate functions such as
+  AVG(), COUNT(), MIN(), MAX(), and SUM() to summarize data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/aggregate-functions.png'
-updatedOn: '2024-03-20T01:48:16+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Functions'
-  slug: 'postgresql-functions'
+  title: PostgreSQL Functions
+  slug: postgresql-functions
 nextLink:
-  title: 'PostgreSQL AVG Function'
-  slug: 'postgresql-aggregate-functions/postgresql-avg-function'
+  title: PostgreSQL AVG Function
+  slug: postgresql-aggregate-functions/postgresql-avg-function
 ---
+
+<Admonition type="info" id="CTA">
+Aggregate functions like AVG, COUNT, MIN, MAX, and SUM are core PostgreSQL features, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL aggregate functions such as `AVG()`, `COUNT()`, `MIN()`, `MAX()`, and `SUM()`.
 

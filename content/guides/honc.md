@@ -4,10 +4,10 @@ subtitle: Building a serverless Task API with Hono, Drizzle, Neon, and Cloudflar
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-14T00:00:00.000Z'
-updatedOn: '2025-05-14T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
-The [HONC stack](https://honc.dev/) - an acronym for **H**ono, **O**RM (Drizzle), **N**eon, and **C**loudflare - is a modern toolkit for building lightweight, type-safe, and edge-enabled data APIs. It's designed for developers seeking to build fast, serverless applications with a strong emphasis on scalability and a great developer experience.
+The [HONC stack](https://honc.dev/) (Hono + ORM/Drizzle + Neon + Cloudflare) is a modern toolkit for building lightweight, type-safe, and edge-enabled data APIs. It's designed for developers seeking to build fast, serverless applications with a strong emphasis on scalability and a great developer experience.
 
 This guide will walk you through building a simple Task management API using the HONC stack. You'll learn how to:
 
@@ -151,7 +151,7 @@ The easiest way to start a HONC project is by using the [`create-honc-app`](http
 
 ## Confirm Neon connection
 
-If you chose to let `create-honc-app` set up the connection string, your Neon `DATABASE_URL` should already be in the `.dev.vars` file in your project root. This file is used by [Wrangler](https://developers.cloudflare.com/workers/wrangler/) (Cloudflare's CLI) for local development and is gitignored by default.
+If you chose to let `create-honc-app` set up the connection string, your Neon `DATABASE_URL` should already be in the `.dev.vars` file in your project root. This file is used by [Wrangler](https://developers.cloudflare.com/workers/wrangler/) (Cloudflare's CLI) for local development and is added to `.gitignore` by default.
 
 Verify its content:
 

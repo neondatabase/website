@@ -3,11 +3,16 @@ title: Simplify RLS with Drizzle
 subtitle: Use Drizzle ORM to declaratively manage Row-Level Security policies in your
   schema
 summary: >-
-  Covers the setup of Row-Level Security (RLS) using Drizzle ORM, including how
-  to implement `crudPolicy`, utilize custom Postgres roles, and integrate RLS
-  with the Data API and serverless driver.
+  Drizzle ORM's `crudPolicy` and `pgPolicy` helpers let you declare Row-Level
+  Security policies directly in your TypeScript schema, replacing repetitive
+  per-table SQL with a single migration step that enforces access rules at the
+  Postgres level. Use this page when you want to define, version, and migrate
+  RLS policies through Drizzle rather than write raw SQL. Patterns covered
+  include user-owned data, role-based access, and relationship-based rules. For
+  running queries that respect those policies at runtime, see the companion page
+  on RLS query execution with Drizzle.
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:27:00.723Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle

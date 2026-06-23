@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL JUSTIFY_HOURS() Function'
-page_title: 'PostgreSQL JUSTIFY_HOURS() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL JUSTIFY_HOURS() function to adjust 24-hour intervals as days.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/'
+title: PostgreSQL JUSTIFY_HOURS() Function
+page_title: PostgreSQL JUSTIFY_HOURS() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL JUSTIFY_HOURS()
+  function to adjust 24-hour intervals as days.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-justify_hours/
 ogImage: ''
-updatedOn: '2024-03-21T03:42:38+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JUSTIFY_DAYS() Function'
-  slug: 'postgresql-date-functions/postgresql-justify_days'
+  title: PostgreSQL JUSTIFY_DAYS() Function
+  slug: postgresql-date-functions/postgresql-justify_days
 nextLink:
-  title: 'PostgreSQL JUSTIFY_INTERVAL() Function'
-  slug: 'postgresql-date-functions/postgresql-justify_interval'
+  title: PostgreSQL JUSTIFY_INTERVAL() Function
+  slug: postgresql-date-functions/postgresql-justify_interval
 ---
+
+<Admonition type="info" id="CTA">
+The `JUSTIFY_HOURS()` function works the same way across every PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance database fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `JUSTIFY_HOURS()` function to adjust 24\-hour intervals as days.
 
@@ -93,9 +100,9 @@ SELECT JUSTIFY_HOURS(INTERVAL '15 days 2 hours'),
 Output:
 
 ```text
-   justify_days   |      justify_days      |      justify_days
+   justify_hours   |      justify_hours      |      justify_hours
 ------------------+------------------------+-------------------------
- 15 days 02:00:00 | 1 mon 25 days 00:30:00 | 2 mons 15 days 00:00:45
+ 15 days 02:00:00 | 55 days 00:30:00        | 75 days 00:00:45
 (1 row)
 ```
 

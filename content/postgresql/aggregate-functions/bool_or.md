@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL BOOL_OR() Function'
-page_title: 'PostgreSQL BOOL_OR() Function'
-page_description: 'In this tutorial, you will learn about the PostgreSQL BOOL_OR() function to aggregate boolean values across rows within a group.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_or/'
+title: PostgreSQL BOOL_OR() Function
+page_title: PostgreSQL BOOL_OR() Function
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL BOOL_OR() function to
+  aggregate boolean values across rows within a group.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_or/
 ogImage: ''
-updatedOn: '2024-03-22T02:28:16+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL STRING_AGG Function'
-  slug: 'postgresql-aggregate-functions/postgresql-string_agg-function'
+  title: PostgreSQL STRING_AGG Function
+  slug: postgresql-aggregate-functions/postgresql-string_agg-function
 nextLink:
-  title: 'PostgreSQL Date Functions'
-  slug: 'postgresql-aggregate-functions/../postgresql-date-functions'
+  title: PostgreSQL Date Functions
+  slug: postgresql-aggregate-functions/../postgresql-date-functions
 ---
+
+<Admonition type="info" id="CTA">
+The `BOOL_OR()` aggregate works the same on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `BOOL_OR()` function to aggregate boolean values across rows within a group.
 
@@ -122,7 +129,7 @@ Output:
 
 The `BOOL_OR()` function returns true indicating that the `members` table has active members.
 
-### 2\) Using BOOL_OR() function with GROUP BY clause
+### 3\) Using BOOL_OR() function with GROUP BY clause
 
 The following example uses the `BOOL_OR()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to check if there are any active members in each team:
 

@@ -2,15 +2,20 @@
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 summary: >-
-  How to set consumption limits for projects using the Neon API, including
-  configuring quotas for various metrics like active time, compute time, and
-  data transfer to manage resource usage effectively.
+  Per-project consumption quotas in Neon let you cap active_time_seconds,
+  compute_time_seconds, written_data_bytes, data_transfer_bytes, and
+  logical_size_bytes via the quota object in the Create or Update Project API
+  endpoints. When any quota threshold is met, all active computes for that
+  project are suspended and remain suspended until the next billing period
+  starts, unlike scale-to-zero which restarts on the next connection. Use this
+  page to configure, query, and reset quota limits for multi-tenant billing
+  integrations where different plan tiers need different resource ceilings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -48,14 +53,18 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 - `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an idle state due to [scale to zero](/docs/reference/glossary#scale-to-zero).
 - `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's computes. This includes any computes deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 CU costs .25 compute seconds, while 1 second at 4 CU costs 4 compute seconds.
-  | CU | active_time_seconds | compute_time_seconds |
-  |:-----|:----------------------|:-----------------------|
-  | 0.25 | 1 | 0.25 |
-  | 4 | 1 | 4 |
+
+  | CU   | active_time_seconds | compute_time_seconds |
+  | :--- | :------------------ | :------------------- |
+  | 0.25 | 1                   | 0.25                 |
+  | 4    | 1                   | 4                    |
+
 - `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 - `data_transfer_bytes` &#8212; Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 
 There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Once this threshold is met, the compute for that particular branch (and _only_ that particular branch) is suspended. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
+
+Unlike the platform 16 TB storage limit on paid plans, which slows writes when reached, customer-set `logical_size_bytes` quotas remain hard limits.
 
 ### Sample quotas
 
@@ -160,14 +169,7 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve consumption metrics for your organization and projects using these endpoints:
-
-| Endpoint                                                                                             | Description                                                                                                                     | Plan Availability | Docs                                                                                                                 |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                          | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics-legacy#get-account-level-aggregated-metrics-legacy-plans) |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (for example, hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics](consumption-metrics-legacy#get-project-level-metrics-legacy-plans)              |
+You can use the Neon API to retrieve consumption metrics for your organization and projects using the [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, which provides detailed metrics for each project at hourly, daily, or monthly granularity. See [Get granular project-level metrics](/docs/guides/consumption-metrics-legacy#project-level-endpoint) for details.
 
 ## Resetting a project after suspend
 
@@ -183,7 +185,7 @@ If you want to suspend a user for any reason &#8212; for example, suspicious act
 
 In addition to setting quota limits against the project as a whole, there are other sizing-related settings you might want to use to control the amount of resources any particular endpoint is able to consume:
 
-- `autoscaling_limit_min_cu` &#8212; Sets the minimium compute size for the endpoint. The default minimum is .25 CU but can be increased if your user's project could benefit from a larger compute start size.
+- `autoscaling_limit_min_cu` &#8212; Sets the minimum compute size for the endpoint. The default minimum is .25 CU but can be increased if your user's project could benefit from a larger compute start size.
 - `autoscaling_limit_max_cu` &#8212; Sets a hard limit on how much compute an endpoint can consume in response to increased demand. For more info on min and max cpu limits, see [Autoscaling](/docs/guides/autoscaling-guide).
 - `suspend_timeout_seconds` &#8212; Sets how long an endpoint's allotted compute will remain active with no current demand. After the timeout period, the endpoint is suspended until demand picks up. For more info, see [Scale to Zero](/docs/guides/scale-to-zero-guide).
 
@@ -194,7 +196,7 @@ See these sample CURL requests for each method.
 <Tabs labels={["Project", "Branch","Endpoint"]}>
 
 <TabItem>
-In this sample, we are setting defaults for all new endpoints created in the project as a whole. The minimum compute size is at **1 CU**, the max size at **3 CU**, and a 10 minute (**600 seconds**) inactivty period before the endpoint is suspended.
+In this sample, we are setting defaults for all new endpoints created in the project as a whole. The minimum compute size is at **1 CU**, the max size at **3 CU**, and a 10 minute (**600 seconds**) inactivity period before the endpoint is suspended.
 
 These default values are set in the
 `default_endpoint_settings` object.

@@ -1,24 +1,31 @@
 ---
-title: 'PostgreSQL TRUNCATE TABLE'
-page_title: 'PostgreSQL TRUNCATE TABLE'
-page_description: 'This tutorial shows you how to use the PostgreSQL TRUNCATE TABLE statement to delete data from large tables quickly and more efficiently.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/'
+title: PostgreSQL TRUNCATE TABLE
+page_title: PostgreSQL TRUNCATE TABLE
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TRUNCATE TABLE statement to
+  delete data from large tables quickly and more efficiently.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-truncate-table/
 ogImage: ''
-updatedOn: '2024-01-25T02:04:03+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP TABLE'
-  slug: 'postgresql-tutorial/postgresql-drop-table'
+  title: PostgreSQL DROP TABLE
+  slug: postgresql-tutorial/postgresql-drop-table
 nextLink:
   title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
-  slug: 'postgresql-tutorial/postgresql-copy-table'
+  slug: postgresql-tutorial/postgresql-copy-table
 ---
+
+<Admonition type="info" id="CTA">
+TRUNCATE TABLE is standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for you: fast, secure, and fully integrated into the Lakehouse so your operational data and analytics live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `TRUNCATE TABLE` statement to quickly delete all data from large tables.
 
 ## Introduction to PostgreSQL TRUNCATE TABLE statement
 
-To remove all data from a table, you use the [`DELETE`](postgresql-delete) statement without a [WHERE](postgresql-where) clause. However, when the table has numerous data, the `DELETE` statement is not efficient. In this case, you can use the `TRUNCATE TABLE` statement.
+To remove all data from a table, you use the [`DELETE`](postgresql-delete) statement without a [WHERE](postgresql-where) clause. However, when the table has a large amount of data, the `DELETE` statement is not efficient. In this case, you can use the `TRUNCATE TABLE` statement.
 
 The `TRUNCATE TABLE` statement deletes all data from a table very fast. Here’s the basic syntax of the `TRUNCATE TABLE` statement:
 
@@ -47,7 +54,7 @@ In practice, the table you want to delete all data often has [foreign key](postg
 
 By default, the `TRUNCATE TABLE` statement does not remove any data from the table that has foreign key references.
 
-To remove data from a table and other tables that have foreign key references the table, you use `CASCADE` option in the `TRUNCATE TABLE` statement as follows :
+To remove data from a table and other tables that have foreign key references to the table, you use `CASCADE` option in the `TRUNCATE TABLE` statement as follows:
 
 ```sql
 TRUNCATE TABLE table_name
@@ -150,7 +157,7 @@ TRUNCATE TABLE customers, vendors;
 
 ### 3\) Using PostgreSQL TRUNCATE TABLE statement to delete data from a table referenced by a foreign key
 
-First, create tables `orders` and `order_details`:
+First, create tables `orders` and `order_items`:
 
 ```sql
 CREATE TABLE orders(

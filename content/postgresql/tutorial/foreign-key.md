@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Foreign Key'
-page_title: 'PostgreSQL Foreign Key'
-page_description: 'In this tutorial, you will learn about PostgreSQL foreign key and how to add foreign keys to tables using foreign key constraints.'
+title: PostgreSQL Foreign Key
+page_title: PostgreSQL Foreign Key
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL foreign key and how to add
+  foreign keys to tables using foreign key constraints.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/'
 ogImage: ''
-updatedOn: '2024-01-25T08:23:10+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Primary Key'
-  slug: 'postgresql-tutorial/postgresql-primary-key'
+  title: PostgreSQL Primary Key
+  slug: postgresql-tutorial/postgresql-primary-key
 nextLink:
-  title: 'PostgreSQL DELETE CASCADE'
-  slug: 'postgresql-tutorial/postgresql-delete-cascade'
+  title: PostgreSQL CHECK Constraints
+  slug: postgresql-tutorial/postgresql-check-constraint
 ---
+
+<Admonition type="info" id="CTA">
+Foreign keys work the same way across any standard PostgreSQL database, so the syntax and behaviors covered here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers strong performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL foreign key and how to add foreign keys to tables using foreign key constraints.
 
@@ -215,7 +221,7 @@ The output indicates that the values of customer id 1 changed to `NULL`.
 
 The `ON DELETE CASCADE` automatically deletes all the referencing rows in the child table when the referenced rows in the parent table are deleted. In practice, the `ON DELETE CASCADE` is the most commonly used option.
 
-The following statements recreate the sample tables with the delete action of the `fk_customer` changes to `CASCADE`:
+The following statements recreate the sample tables with the delete action of the `fk_customer` changed to `CASCADE`:
 
 ```sql
 DROP TABLE IF EXISTS contacts;

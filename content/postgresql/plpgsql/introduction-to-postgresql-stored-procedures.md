@@ -1,18 +1,25 @@
 ---
-title: 'Introduction to PostgreSQL PL/pgSQL'
-page_title: 'Introduction to PostgreSQL PL/pgSQL Procedural Language'
-page_description: 'This tutorial introduces you to PostgreSQL PL/pgSQL for developing user-defined functions and stored procedures.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/'
+title: Introduction to PostgreSQL PL/pgSQL
+page_title: Introduction to PostgreSQL PL/pgSQL Procedural Language
+page_description: >-
+  This tutorial introduces you to PostgreSQL PL/pgSQL for developing
+  user-defined functions and stored procedures.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/
 ogImage: ''
-updatedOn: '2024-02-07T02:29:23+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PL/pgSQL'
-  slug: 'postgresql-plpgsql/'
+  title: PostgreSQL PL/pgSQL
+  slug: postgresql-plpgsql/
 nextLink:
-  title: 'Dollar-Quoted String Constants'
-  slug: 'postgresql-plpgsql/dollar-quoted-string-constants'
+  title: Dollar-Quoted String Constants
+  slug: postgresql-plpgsql/dollar-quoted-string-constants
 ---
+
+<Admonition type="info" id="CTA">
+PL/pgSQL is a core part of PostgreSQL, so everything here applies to any Postgres database you run. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about **PostgreSQL PL/pgSQL** procedural language.
 
@@ -22,7 +29,7 @@ PL/pgSQL is a procedural programming language for the PostgreSQL database system
 
 PL/pgSQL allows you to extend the functionality of the PostgreSQL database server by creating server objects with complex logic.
 
-PL/pgSQL is designed to :
+PL/pgSQL is designed to:
 
 - Create user\-defined [functions](postgresql-create-function), [stored procedures](postgresql-create-procedure), and [triggers](../postgresql-triggers).
 - Extend standard SQL by adding control structures such as [if\-else](plpgsql-if-else-statements), [case](../postgresql-tutorial/postgresql-case), and [loop](plpgsql-loop-statements) statements.
@@ -34,7 +41,7 @@ Since PostgreSQL 9\.0, PL/pgSQL is installed by default.
 
 SQL is a query language that allows you to effectively manage data in the database. However, PostgreSQL only can execute SQL statements individually.
 
-It means that you have multiple statements, and you need to execute them one by one like this:
+It means that if you have multiple statements, and you need to execute them one by one like this:
 
 - First, send a query to the PostgreSQL database server.
 - Next, wait for it to process.

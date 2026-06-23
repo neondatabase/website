@@ -1,29 +1,35 @@
 ---
-title: 'Getting Started with PostgreSQL'
-page_title: 'Getting Started with PostgreSQL'
-page_description: 'This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS.'
+title: Getting Started with PostgreSQL
+page_title: Getting Started with PostgreSQL
+page_description: >-
+  This section helps you get started with PostgreSQL by showing you how to
+  install PostgreSQL on Windows, Linux, and macOS.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/'
 ogImage: ''
-updatedOn: '2021-04-27T02:23:23+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: ''
   slug: ''
 nextLink:
-  title: 'PostgreSQL Cheat Sheet'
-  slug: 'postgresql-cheat-sheet'
+  title: PostgreSQL Cheat Sheet
+  slug: postgresql-cheat-sheet
 ---
+
+<Admonition type="info" id="CTA">
+Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.
 
 ## Getting Started
 
 - [What is PostgreSQL](postgresql-getting-started/what-is-postgresql) – introduce you to PostgreSQL and its applications in today’s software stack.
-- [Introduction to PostgreSQL sample database](postgresql-getting-started/postgresql-sample-database) – to learn the PostgreSQL fast, you need to have a good sample database to practice with. This tutorial introduces you to a PostgreSQL sample database called `dvdrental`.
+- [Introduction to PostgreSQL sample database](postgresql-getting-started/postgresql-sample-database) – to learn PostgreSQL quickly, you need to have a good sample database to practice with. This tutorial introduces you to a PostgreSQL sample database called `dvdrental`.
 
 ## PostgreSQL on Windows
 
-If you’re using windows, you can follow these tutorials to install PostgreSQL, connect to it, and load the sample database into the PostgreSQL database server:
+If you’re using Windows, you can follow these tutorials to install PostgreSQL, connect to it, and load the sample database into the PostgreSQL database server:
 
 - [Install PostgreSQL on Windows](postgresql-getting-started/install-postgresql 'Install PostgreSQL') – walk you through the steps of how to install PostgreSQL on Windows.
 - [Connect to PostgreSQL database server](postgresql-getting-started/connect-to-postgresql-database 'Connect to PostgreSQL Database') – show you how to connect to the PostgreSQL using psql tool and pgAdmin 4 GUI tool.

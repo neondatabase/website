@@ -2,16 +2,20 @@
 title: Postgres current_timestamp() function
 subtitle: Get the current date and time
 summary: >-
-  Covers the usage of the Postgres `current_timestamp()` function to retrieve
-  the current date and time with timezone, including its syntax, examples, and
-  applications for timestamping database entries.
+  The Postgres `current_timestamp` function returns the current date and time
+  as a `timestamp with time zone`, captured at transaction start, with an
+  optional precision argument (0-6 fractional digits) and `now()` as an alias.
+  Use it to auto-populate audit columns, filter recent rows with interval
+  arithmetic, or drive update triggers that keep `created_at` and `updated_at`
+  in sync. Unlike `clock_timestamp()`, `current_timestamp` stays fixed for the
+  life of the transaction, which matters for consistent multi-row inserts.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.856Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `current_timestamp()` function returns the current date and time with timezone. The `now()` function is an alias.
 
-This function is particularly useful for timestamping database entries, calculating time differences, or implementing time-based business logic. For example, you can use it to record the time a user logs in, or when the status of a purchase order changes. Fetching the current time information can also be used to calculate time-based metrics and schedule periodic tasks.
+Use it for timestamping database entries, calculating time differences, or implementing time-based business logic. For example, you can use it to record the time a user logs in, or when the status of a purchase order changes. Fetching the current time information can also be used to calculate time-based metrics and schedule periodic tasks.
 
 <CTA />
 

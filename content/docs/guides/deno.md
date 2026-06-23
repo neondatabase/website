@@ -2,11 +2,15 @@
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
 summary: >-
-  How to connect a Neon Postgres database to a Deno application, covering local
-  deployment with Deno Runtime and deployment on the Deno Deploy serverless
-  platform.
+  Guide to connecting a Neon Postgres database to a Deno application using the
+  Neon serverless driver (@neon/serverless on JSR) for both local Deno Runtime
+  and production edge deployment on Deno Deploy via deployctl. Use this page
+  when building a TypeScript or JavaScript app on Deno's serverless platform
+  and need to query Postgres over HTTP without a persistent connection. Covers
+  DATABASE_URL setup, the deployctl deploy command, and optional GitHub
+  integration for automated deployments.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.946Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -262,14 +266,6 @@ To delete the example application on Deno Deploy, follow these steps:
 1. In the **Danger Zone** section, click **Delete** and follow the instructions.
 
 To delete your Neon project, refer to [Delete a project](/docs/manage/projects#delete-a-project).
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-deno" description="Connect a Neon Postgres database to your Deno Deploy application" icon="github">Use Neon with Deno Deploy</a>
-</DetailIconCards>
 
 ## Resources
 

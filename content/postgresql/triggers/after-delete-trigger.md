@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL AFTER DELETE Trigger'
-page_title: 'PostgreSQL AFTER DELETE Trigger'
-page_description: 'In this tutorial, you will learn how to define a PostgreSQL AFTER DELETE trigger that is fired after a row is deleted from a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/'
+title: PostgreSQL AFTER DELETE Trigger
+page_title: PostgreSQL AFTER DELETE Trigger
+page_description: >-
+  In this tutorial, you will learn how to define a PostgreSQL AFTER DELETE
+  trigger that is fired after a row is deleted from a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/
 ogImage: ''
-updatedOn: '2024-03-28T09:39:21+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL BEFORE DELETE Trigger'
-  slug: 'postgresql-triggers/postgresql-before-delete-trigger'
+  title: PostgreSQL BEFORE DELETE Trigger
+  slug: postgresql-triggers/postgresql-before-delete-trigger
 nextLink:
-  title: 'PostgreSQL INSTEAD OF Triggers'
-  slug: 'postgresql-triggers/postgresql-instead-of-triggers'
+  title: PostgreSQL INSTEAD OF Triggers
+  slug: postgresql-triggers/postgresql-instead-of-triggers
 ---
+
+<Admonition type="info" id="CTA">
+AFTER DELETE triggers work the same on any PostgreSQL database, so you can apply these patterns wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse so your triggers, audit logs, and downstream analytics live in one place. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `AFTER DELETE` trigger that is fired after a row is deleted from a table.
 
@@ -146,7 +153,7 @@ Output:
 (1 row)
 ```
 
-The `AFTER INSERT` trigger will be activated that calls the `archive_deleted_employee()` function to insert the deleted row into the `employee_archives` table.
+The `AFTER DELETE` trigger will be activated that calls the `archive_deleted_employee()` function to insert the deleted row into the `employee_archives` table.
 
 Seventh, retrieve data from the `employee_archives` table:
 
@@ -167,4 +174,4 @@ The output indicates that the `AFTER DELETE` trigger has successfully archived t
 
 ## Summary
 
-- Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
+- Use an `AFTER DELETE` trigger to automatically call a function after a row is deleted from a table.

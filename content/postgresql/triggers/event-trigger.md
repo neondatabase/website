@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Event Trigger'
-page_title: 'PostgreSQL Event Trigger'
-page_description: 'You will learn about PostgreSQL event triggers and how to use the CREATE EVENT TRIGGER statement to define a new event trigger.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/'
+title: PostgreSQL Event Trigger
+page_title: PostgreSQL Event Trigger
+page_description: >-
+  You will learn about PostgreSQL event triggers and how to use the CREATE EVENT
+  TRIGGER statement to define a new event trigger.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-event-trigger/
 ogImage: ''
-updatedOn: '2024-03-29T06:08:37+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'How to List All Triggers in PostgreSQL'
-  slug: 'postgresql-triggers/how-to-list-all-triggers-in-postgresql'
+  title: How to List All Triggers in PostgreSQL
+  slug: postgresql-triggers/how-to-list-all-triggers-in-postgresql
 nextLink:
-  title: 'Creating a PostgreSQL Trigger with a When Condition'
-  slug: 'postgresql-triggers/postgresql-trigger-when-condition'
+  title: Creating a PostgreSQL Trigger with a When Condition
+  slug: postgresql-triggers/postgresql-trigger-when-condition
 ---
+
+<Admonition type="info" id="CTA">
+Event triggers are a standard PostgreSQL feature, so everything here works on any Postgres database, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale and want DDL auditing, security policies, and AI workloads tightly integrated with your data platform, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, fully unified with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
 
@@ -31,7 +38,7 @@ PostgreSQL supports the following events:
 - `table_rewrite`
 - `sql_drop`
 
-The `ddl_command_start` events before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For additional information, see the [overview of event trigger behavior](https://www.postgresql.org/docs/current/event-trigger-definition.html).
+The `ddl_command_start` event fires before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For additional information, see the [overview of event trigger behavior](https://www.postgresql.org/docs/current/event-trigger-definition.html).
 
 Please note that the `ddl_command_start` does not occur for shared objects like databases, tablespaces, and roles.
 

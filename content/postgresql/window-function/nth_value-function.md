@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL NTH_VALUE Function'
-page_title: 'PostgreSQL NTH_VALUE() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL NTH_VALUE() function to get a value from the nth row in a result set.'
-prev_url: 'index.html'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png'
-updatedOn: '2020-04-11T10:53:01+00:00'
+title: PostgreSQL NTH_VALUE Function
+page_title: PostgreSQL NTH_VALUE() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL NTH_VALUE()
+  function to get a value from the nth row in a result set.
+prev_url: index.html
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/products-table-sample-data.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NTILE Function'
-  slug: 'postgresql-window-function/postgresql-ntile-function'
+  title: PostgreSQL NTILE Function
+  slug: postgresql-window-function/postgresql-ntile-function
 nextLink:
-  title: 'PostgreSQL PERCENT_RANK Function'
-  slug: 'postgresql-window-function/postgresql-percent_rank-function'
+  title: PostgreSQL PERCENT_RANK Function
+  slug: postgresql-window-function/postgresql-percent_rank-function
 ---
+
+<Admonition type="info" id="CTA">
+The NTH_VALUE() window function works the same way on any PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance and security with full Lakehouse integration. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row in a result set.
 
@@ -118,9 +125,9 @@ The following picture illustrates the output:
 ![PostgreSQL NTH_VALUE function over a partition example](/postgresqltutorial/PostgreSQL-NTH_VALUE-function-over-a-partition-example.png)
 In this example,
 
-- The `PARTITION BY` clause to distributed products into product groups (or partitions) specified by the values in the `group_id` column.
+- The `PARTITION BY` clause distributed products into product groups (or partitions) specified by the values in the `group_id` column.
 - The `ORDER BY` clause sorted the products in each product group from high to low.
 - The frame clause defined the whole partition as a frame.
 - And the `NTH_VALUE()` function returns the product name of the 2nd row of each product group.
 
-Now, you should how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.
+Now, you should know how to use the PostgreSQL `NTH_VALUE()` function to get a value from the nth row of a result set.

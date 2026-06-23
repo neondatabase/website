@@ -2,11 +2,14 @@
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
 summary: >-
-  Covers the current support status and future roadmap for Neon Auth, including
-  frameworks, authentication methods, Better Auth plugins, platform features,
-  SDK references, and migration guides.
+  Neon Auth roadmap showing supported frameworks (Next.js, Vite+React, TanStack
+  Router) and Better Auth plugins (email OTP, magic link, JWT, organization)
+  alongside features still in progress. Check here to confirm whether MFA, admin
+  plugin customization, or standalone frontend/backend architectures are available
+  yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
+  for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
-updatedOn: '2026-03-23T15:16:28.134Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -55,7 +58,9 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported                                    |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial (JWT token claims under development) |
 | [JWT](/docs/auth/guides/plugins/jwt)                                               | ✅ Supported                                    |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)                                 | ✅ Supported                                    |
 | [Open API](/docs/auth/guides/plugins/openapi)                                      | ✅ Supported                                    |
+| [Phone Number](/docs/auth/guides/plugins/phone-number)                             | ✅ Supported                                    |
 
 See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth configuration (including Vercel). Email flows such as verification and password reset are covered in [Email verification](/docs/auth/guides/email-verification), [Password reset](/docs/auth/guides/password-reset), and [User management](/docs/auth/guides/user-management).
 
@@ -63,23 +68,22 @@ See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth config
 
 These capabilities are documented in Neon Auth guides but are not Better Auth plugins you enable through the SDK.
 
-| Capability                           | Status    | Documentation                                                    |
-| ------------------------------------ | --------- | ---------------------------------------------------------------- |
-| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains) |
-| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                           |
-| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api) |
+| Capability                           | Status    | Documentation                                                                |
+| ------------------------------------ | --------- | ---------------------------------------------------------------------------- |
+| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains)             |
+| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                                       |
+| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api)             |
+| Manage Auth via Neon MCP (AI editor) | Supported | [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor) |
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
 
 ### On the roadmap
 
-| Plugin                                                            | Status          |
-| ----------------------------------------------------------------- | --------------- |
-| [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon  |
-| Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
-| MFA support                                                       | 🔜 Coming soon  |
-| [Admin](/docs/auth/guides/plugins/admin) plugin customization     | 🔜 Coming soon  |
-| Other plugins                                                     | Based on demand |
+| Plugin                                                        | Status          |
+| ------------------------------------------------------------- | --------------- |
+| MFA support                                                   | 🔜 Coming soon  |
+| [Admin](/docs/auth/guides/plugins/admin) plugin customization | 🔜 Coming soon  |
+| Other plugins                                                 | Based on demand |
 
 ## SDK and UI references
 
@@ -101,6 +105,6 @@ For launch readiness, see the [production checklist](/docs/auth/production-check
 
 ## Let us know
 
-We prioritize based on demand. If you need a specific framework or plugin, let us know through our [Discord](https://discord.com/invite/92vNTzKDGp) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
+We prioritize based on demand. If you need a specific framework or plugin, let us know on our [Discord](https://discord.com/invite/92vNTzKDGp).
 
 <NeedHelp/>

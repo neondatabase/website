@@ -30,6 +30,18 @@ const defaultConfig = {
     ],
   },
   async headers() {
+    // Serve top-level index URLs (e.g. /faqs.md, /programs.md, /docs.md) as inline markdown.
+    // Only non-nested routes have an index file; /docs.md is aliased to /docs/llms.txt via rewrite.
+    const mdIndexHeaders = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+        ],
+      }));
+
     return [
       {
         source: '/',
@@ -37,6 +49,15 @@ const defaultConfig = {
           {
             key: 'Cache-Control',
             value: 'max-age=0, s-maxage=31536000',
+          },
+          {
+            key: 'Link',
+            value: [
+              '</.well-known/api-catalog>; rel="api-catalog"',
+              '</docs/llms.txt>; rel="llms-txt"',
+              '</.well-known/agent-skills/index.json>; rel="profile"',
+              '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+            ].join(', '),
           },
         ],
       },
@@ -46,6 +67,15 @@ const defaultConfig = {
           {
             key: 'Cache-Control',
             value: 'max-age=0, s-maxage=31536000',
+          },
+          {
+            key: 'Link',
+            value: [
+              '</.well-known/api-catalog>; rel="api-catalog"',
+              '</docs/llms.txt>; rel="llms-txt"',
+              '</.well-known/agent-skills/index.json>; rel="profile"',
+              '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+            ].join(', '),
           },
         ],
       },
@@ -118,7 +148,9 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases)/:path*.md',
+        source: `/(${Object.keys(CONTENT_ROUTES)
+          .filter((r) => !r.includes('/'))
+          .join('|')})/:path*.md`,
         headers: [
           {
             key: 'Content-Disposition',
@@ -130,6 +162,7 @@ const defaultConfig = {
           },
         ],
       },
+      ...mdIndexHeaders,
     ];
   },
   async redirects() {
@@ -165,6 +198,16 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/backend',
+        destination: '/docs/introduction#products',
+        permanent: false,
+      },
+      {
+        source: '/cookie-policy',
+        destination: 'https://www.databricks.com/legal/cookienotice',
+        permanent: true,
+      },
       {
         source: '/docs/use-cases/:path*',
         destination: '/use-cases',
@@ -2035,11 +2078,10 @@ const defaultConfig = {
         destination: '/docs/connect/connection-errors',
         permanent: true,
       },
-      {
-        source: '/docs',
-        destination: '/docs/introduction',
-        permanent: true,
-      },
+      // NOTE: bare `/docs` is intentionally NOT redirected here. The middleware
+      // (src/proxy.js) owns it: agents / Accept: markdown get /docs/llms.txt, and
+      // browsers are redirected to /docs/introduction. A next.config redirect would
+      // run before middleware and intercept the markdown case.
       {
         source: '/docs/postgres',
         destination: '/docs/postgres/index',
@@ -2048,6 +2090,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/early-access',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2111,11 +2158,6 @@ const defaultConfig = {
         permanent: false,
       },
       {
-        source: '/developer-days',
-        destination: 'https://devdays.neon.tech',
-        permanent: true,
-      },
-      {
         source: '/ping-thing',
         destination: '/demos/ping-thing',
         permanent: true,
@@ -2163,7 +2205,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2459,8 +2501,10 @@ const defaultConfig = {
 
     // /:path*.md above requires at least one segment after the route name,
     // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    // /docs.md is excluded here: it's aliased to the canonical /docs/llms.txt index
+    // below rather than a generated page-listing (see process-md-for-llms.js).
     const indexRewrites = Object.keys(CONTENT_ROUTES)
-      .filter((route) => !route.includes('/'))
+      .filter((route) => !route.includes('/') && route !== 'docs')
       .map((route) => ({
         source: `/${route}.md`,
         destination: `/md/${route}.md`,
@@ -2472,6 +2516,26 @@ const defaultConfig = {
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
+        // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
+        // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
+        { source: '/docs/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
+        {
+          source: '/docs/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        {
+          source: '/docs/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        // /docs.md serves the canonical, curated docs index (llms.txt) instead of a
+        // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
+        { source: '/docs.md', destination: '/docs/llms.txt' },
+        { source: '/blog.md', destination: '/blog/llms.txt' },
+        // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
+        // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
+        ...indexRewrites,
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -2479,8 +2543,19 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
+        // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
+        {
+          source: '/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        {
+          source: '/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
-        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services
@@ -2496,10 +2571,6 @@ const defaultConfig = {
         {
           source: '/demos/ping-thing/:path*',
           destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
-        },
-        {
-          source: '/developer-days/:path*',
-          destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
         },
         {
           source: '/demos/regional-latency',

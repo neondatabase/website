@@ -2,16 +2,21 @@
 title: Postgres array_agg() function
 subtitle: Aggregate values into an array
 summary: >-
-  Covers the usage of the Postgres `array_agg()` function to aggregate multiple
-  row values into a single array, including syntax, ordering options, and
-  practical examples for data denormalization.
+  `array_agg()` is a PostgreSQL aggregate function that collects values from
+  multiple rows into a single array, supporting ORDER BY, DISTINCT, and FILTER
+  clauses within the aggregation. Use it to denormalize one-to-many
+  relationships into a single row, build comma-separated or JSON-ready lists,
+  or group related values without a separate join table. The function holds all
+  aggregated values in memory before producing the array, so large datasets may
+  need pagination; alternatives include `string_agg()` for delimited strings
+  and `json_agg()` for JSON arrays.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.853Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The Postges `array_agg()` function collects values from multiple rows into a single array.
+The Postgres `array_agg()` function collects values from multiple rows into a single array.
 
-It's particularly useful for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, you can use it to list all products in a category from a products catalog table or all orders for a customer from an orders table.
+Use it for denormalizing data, creating comma-separated lists, or preparing data for JSON output. For example, you can use it to list all products in a category from a products catalog table or all orders for a customer from an orders table.
 
 <CTA />
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_array_length() Function'
-page_title: 'PostgreSQL jsonb_array_length() Function'
-page_description: 'You will learn how to use the PostgreSQL jsonb_array_length() function to get the number of elements in the top-level JSON array.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_length/'
+title: PostgreSQL jsonb_array_length() Function
+page_title: PostgreSQL jsonb_array_length() Function
+page_description: >-
+  You will learn how to use the PostgreSQL jsonb_array_length() function to get
+  the number of elements in the top-level JSON array.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_length/
 ogImage: ''
-updatedOn: '2024-02-24T03:50:01+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_strip_nulls() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_strip_nulls'
+  title: PostgreSQL jsonb_strip_nulls() Function
+  slug: postgresql-json-functions/postgresql-jsonb_strip_nulls
 nextLink:
-  title: 'PostgreSQL jsonb_array_elements() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_array_elements'
+  title: PostgreSQL jsonb_array_elements() Function
+  slug: postgresql-json-functions/postgresql-jsonb_array_elements
 ---
+
+<Admonition type="info" id="CTA">
+The jsonb_array_length() function is part of standard PostgreSQL and works the same way on any Postgres deployment, so everything here applies beyond [Neon](https://neon.com). If you're an enterprise running JSON-heavy workloads alongside analytics and AI, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_array_length()` function to get the number of elements in the top\-level JSON array.
 

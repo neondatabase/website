@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL JDBC: Creating Tables'
 page_title: 'PostgreSQL JDBC: Creating Tables'
-page_description: 'In this tutorial, you will learn how to create tables in a PostgreSQL database from a Java program using JDBC.'
+page_description: >-
+  In this tutorial, you will learn how to create tables in a PostgreSQL database
+  from a Java program using JDBC.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/create-tables/'
 ogImage: ''
-updatedOn: '2024-02-02T04:56:46+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Connecting to PostgreSQL Databases'
-  slug: 'postgresql-jdbc/connecting-to-postgresql-database'
+  slug: postgresql-jdbc/connecting-to-postgresql-database
 nextLink:
   title: 'PostgreSQL JDBC: Insert Data into a Table'
-  slug: 'postgresql-jdbc/insert'
+  slug: postgresql-jdbc/insert
 ---
+
+<Admonition type="info" id="CTA">
+Creating tables with JDBC works the same against any PostgreSQL database, so the techniques here apply wherever you run Postgres. For enterprises standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and Lakehouse integration you need to build for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create tables in a PostgreSQL database from a Java program using JDBC.
 

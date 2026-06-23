@@ -2,14 +2,17 @@
 title: Postgres JSON_EXISTS() Function
 subtitle: Check for Values in JSON Data Using SQL/JSON Path Expressions
 summary: >-
-  Covers the usage of the `JSON_EXISTS()` function in PostgreSQL 17 for checking
-  the existence of values in JSON data using SQL/JSON path expressions, enabling
-  validation and conditional logic based on JSON content.
+  `JSON_EXISTS()` is a PostgreSQL 17 SQL/JSON function that returns a boolean
+  indicating whether a SQL/JSON path expression matches any value in a JSON or
+  JSONB input. Use it to validate required JSON fields, filter rows by JSON
+  content, or enforce structure in CHECK constraints without extracting values.
+  Supports a `PASSING` clause for dynamic path variables and an `ON ERROR`
+  clause with `TRUE`, `FALSE`, `UNKNOWN`, or `ERROR` options.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.864Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The `JSON_EXISTS()` function introduced in PostgreSQL 17 provides a powerful way to check for the existence of values within `JSON` data using `SQL/JSON` path expressions. This function is particularly useful for validating `JSON` structure and implementing conditional logic based on the presence of specific `JSON` elements.
+The `JSON_EXISTS()` function introduced in PostgreSQL 17 provides a powerful way to check for the existence of values within `JSON` data using `SQL/JSON` path expressions. Use it for validating `JSON` structure and implementing conditional logic based on the presence of specific `JSON` elements.
 
 Use `JSON_EXISTS()` when you need to:
 

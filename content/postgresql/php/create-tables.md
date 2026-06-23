@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Create New Tables'
 page_title: 'PostgreSQL PHP: Create New Tables'
-page_description: 'In this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.'
+page_description: >-
+  In this tutorial, you will learn how to create new tables in the PostgreSQL
+  database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/create-tables/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Create-Tables.png'
-updatedOn: '2022-02-09T14:58:21+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Create-Tables.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
-  slug: 'postgresql-php/connect'
+  slug: postgresql-php/connect
 nextLink:
   title: 'PostgreSQL PHP: Insert Data Into Tables'
-  slug: 'postgresql-php/insert'
+  slug: postgresql-php/insert
 ---
+
+<Admonition type="info" id="CTA">
+Creating tables from PHP with PDO and CREATE TABLE works the same against any PostgreSQL server, so you can apply this tutorial wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create new tables in the PostgreSQL database using PHP PDO API.
 
@@ -172,4 +178,4 @@ The output shows that the script has created two tables successfully.
 ## Summary
 
 - Use the `CREATE TABLE` statement to create a new table.
-- Use the PDO `exec()` method to to execute a `CREATE TABLE` statement to create a new table in the datatabase.
+- Use the PDO `exec()` method to execute a `CREATE TABLE` statement to create a new table in the database.

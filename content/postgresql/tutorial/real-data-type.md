@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL REAL Data Type'
-page_title: 'PostgreSQL REAL Data Type'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL REAL data type to store single-precision floating-point numbers in the database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-real-data-type/'
+title: PostgreSQL REAL Data Type
+page_title: PostgreSQL REAL Data Type
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL REAL data type to
+  store single-precision floating-point numbers in the database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-real-data-type/
 ogImage: ''
-updatedOn: '2024-04-19T03:13:41+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DOUBLE PRECISION Data Type'
-  slug: 'postgresql-tutorial/postgresql-double-precision-type'
+  title: PostgreSQL DOUBLE PRECISION Data Type
+  slug: postgresql-tutorial/postgresql-double-precision-type
 nextLink:
-  title: 'PostgreSQL Integer Data Types'
-  slug: 'postgresql-tutorial/postgresql-integer'
+  title: PostgreSQL Integer Data Types
+  slug: postgresql-tutorial/postgresql-integer
 ---
+
+<Admonition type="info" id="CTA">
+The REAL data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed platform. For enterprises, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration that serious data workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REAL` data type to store single\-precision floating\-point numbers in the database.
 

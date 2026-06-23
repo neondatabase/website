@@ -3,18 +3,22 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 summary: >-
-  Step-by-step guide for adding user authentication to a Neon Postgres
-  application using Okta, including project setup, database connection, schema
-  definition, and user data management.
+  Okta Workforce Identity Cloud SSO integration for a Next.js app backed by Neon
+  Postgres, wiring Auth.js (next-auth v5) with the built-in Okta OIDC provider
+  and Drizzle ORM migrations to store per-user data keyed by the Okta sub claim.
+  Choose this guide for organization-internal SSO login rather than Auth0 or
+  Neon Auth. The tutorial covers creating an Okta OIDC web application, setting
+  issuer URI and client credentials, defining a user_messages schema, and
+  running drizzle-kit push:pg migrations against a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.120Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-<Admonition type="note">
-Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+<Admonition type="tip" title="Building on Neon?">
+Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
-User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Indentity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
+User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Identity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
 
 In this guide, we'll walk through building a simple Next.js application using [Neon's](https://neon.tech) Postgres database, and add user authentication to it using [Okta](https://www.okta.com/). We will cover how to:
 
@@ -161,7 +165,7 @@ export const UserMessages = pgTable('user_messages', {
 });
 ```
 
-This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Auth0 as the primary key.
+This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Okta as the primary key.
 
 ### Generate and run migrations
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_path_query_array() Function'
-page_title: 'PostgreSQL jsonb_path_query_array() Function'
-page_description: 'Use the PostgreSQL jsonb_path_query_array() function to query JSONB data using a JSON path and return matched elements as a JSON array.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_array/'
+title: PostgreSQL jsonb_path_query_array() Function
+page_title: PostgreSQL jsonb_path_query_array() Function
+page_description: >-
+  Use the PostgreSQL jsonb_path_query_array() function to query JSONB data using
+  a JSON path and return matched elements as a JSON array.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_array/
 ogImage: ''
-updatedOn: '2024-02-24T02:02:31+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_path_query() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query'
+  title: PostgreSQL jsonb_path_query() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_query
 nextLink:
-  title: 'PostgreSQL jsonb_path_query_first() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query_first'
+  title: PostgreSQL jsonb_path_query_first() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_query_first
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_path_query_array()` function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_path_query_array()` function to query JSONB data using a JSON path and return matched elements as a JSON array.
 

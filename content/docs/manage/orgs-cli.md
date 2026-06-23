@@ -1,11 +1,13 @@
 ---
 title: Manage Organizations using the Neon CLI
 summary: >-
-  Covers the management of organizations using the Neon CLI, including
-  authentication, listing organizations, and managing projects within specified
-  organizations.
+  The Neon CLI supports organization-scoped commands using the `--org-id` flag
+  or a saved context file. Run `neon orgs list` to look up an org ID, and use
+  `neon projects list` or `neon projects create` scoped to an org. To avoid
+  repeating `--org-id` on every command, set a persistent org context with
+  `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.119Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -14,9 +16,9 @@ Neon's CLI provides an expanding set of commands to manage your organizations.
 
 Use the `auth` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neonctl/credentials.json`.
 
-Authentication is tied to your Neon user account. Once authenticated, you can access and manage any organization you belong to. When running commands, you'll need to specify which organization to use via `--org-id`, a [context file](/docs/reference/cli-set-context), or by responding to the interactive prompt.
+Authentication is tied to your Neon user account. Once authenticated, you can access and manage any organization you belong to. When running commands, you'll need to specify which organization to use via `--org-id`, a [context file](/docs/cli/set-context), or by responding to the interactive prompt.
 
-See [Auth - CLI](/docs/reference/cli-auth) to learn more.
+See [Auth - CLI](/docs/cli/auth) to learn more.
 
 ## List Organizations
 
@@ -34,7 +36,7 @@ Organizations
 └────────────────────────┴──────────────────┘
 ```
 
-See [Orgs - CLI](/docs/reference/cli-orgs) to learn more.
+See [Orgs - CLI](/docs/cli/orgs) to learn more.
 
 ## Manage projects within an Organization
 
@@ -58,13 +60,13 @@ Projects
 
 You can include the `org-id` to apply the following subcommands specifically to your organization:
 
-- [List projects](/docs/reference/cli-projects#list)
-- [Create projects](/docs/reference/cli-projects#create)
+- [List projects](/docs/cli/projects#list)
+- [Create projects](/docs/cli/projects#create)
 
-See [Projects - CLI](/docs/reference/cli-projects) to learn more.
+See [Projects - CLI](/docs/cli/projects) to learn more.
 
 ## Setting Organization Context
 
 To simplify your workflow, the Neon CLI `set-context` command supports setting an organization context. This means you don't have to specify an organization ID every time you run a CLI command.
 
-Sees [set-context - CLI](/docs/reference/cli-set-context) to learn more.
+Sees [set-context - CLI](/docs/cli/set-context) to learn more.

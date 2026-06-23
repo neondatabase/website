@@ -4,7 +4,7 @@ subtitle: Learn how to implement and optimize soft deletes in Laravel for improv
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-20T00:00:00.000Z'
-updatedOn: '2024-07-20T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Laravel is a PHP framework that offers a lot of features to simplify database operations. One such feature is soft deletes, which allows you to "delete" records without actually removing them from your database.
@@ -214,7 +214,7 @@ Here's what happens when you run this code:
 2. `find(1)` retrieves the post, even if it's soft-deleted.
 3. `restore()` sets the `deleted_at` column back to `NULL`.
 
-This process effectively "undeletes" the record, making it visible in normal queries again.
+This process restores the record, making it visible in normal queries again.
 
 #### Permanently Deleting a Record
 

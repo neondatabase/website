@@ -1,4 +1,3 @@
-import Branching from 'components/pages/multi-tb/branching';
 import Hero from 'components/pages/multi-tb/hero';
 import HighAvailability from 'components/pages/multi-tb/high-availability';
 import PeakDemand from 'components/pages/multi-tb/peak-demand';
@@ -15,7 +14,6 @@ const MultiTBPage = () => (
   <Layout>
     <Hero />
     <SubHero />
-    <Branching />
     <PeakDemand />
     <TestReliably />
     <HighAvailability />

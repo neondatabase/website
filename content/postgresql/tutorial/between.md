@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL BETWEEN'
-page_title: 'PostgreSQL BETWEEN'
-page_description: 'This tutorial shows you how to use the PostgreSQL BETWEEN operator to check if a value is in a range of values.'
+title: PostgreSQL BETWEEN
+page_title: PostgreSQL BETWEEN
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL BETWEEN operator to check if
+  a value is in a range of values.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-between/'
-ogImage: '/postgresqltutorial/payment-table.png'
-updatedOn: '2024-04-19T07:33:19+00:00'
+ogImage: /postgresqltutorial/payment-table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL IN'
-  slug: 'postgresql-tutorial/postgresql-in'
+  title: PostgreSQL IN
+  slug: postgresql-tutorial/postgresql-in
 nextLink:
-  title: 'PostgreSQL LIKE'
-  slug: 'postgresql-tutorial/postgresql-like'
+  title: PostgreSQL LIKE
+  slug: postgresql-tutorial/postgresql-like
 ---
+
+<Admonition type="info" id="CTA">
+The BETWEEN operator works the same way in any PostgreSQL database, so everything you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL BETWEEN** operator to check if a value falls in a particular range of values.
 

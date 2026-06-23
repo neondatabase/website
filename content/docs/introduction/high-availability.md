@@ -2,11 +2,17 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 summary: >-
-  Covers the setup of high availability in Neon by detailing its unique
-  architecture that separates storage and compute, ensuring data redundancy and
-  compute resiliency across multiple Availability Zones.
+  Neon high availability separates storage and compute. WAL is replicated
+  across Availability Zones by Safekeepers, and Pageservers fail over to
+  secondaries in seconds, without idle standby compute replicas. Object storage
+  provides 99.999999999% durability. Recovery times vary by failure type:
+  Postgres crash and VM failure resolve in seconds, node failure in 1-2
+  minutes, AZ failure in 1-10 minutes, and unresponsive endpoints after 5
+  minutes. Neon HA does not support cross-region replication. Session data such
+  as temporary tables and the Local File Cache does not persist across a
+  failover.
 enableTableOfContents: true
-updatedOn: '2026-03-13T18:10:11.940Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 At Neon, our lakebase architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.

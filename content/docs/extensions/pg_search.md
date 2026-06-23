@@ -2,11 +2,16 @@
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 summary: >-
-  How to enable the `pg_search` extension on Neon for efficient full-text search
-  and analytics in Postgres, utilizing BM25 indexing for high-relevance results
-  and advanced text search capabilities.
+  The `pg_search` extension by ParadeDB adds BM25 full-text search to Postgres
+  using inverted indexes, supporting keyword, phrase, fuzzy, hybrid
+  BM25+pgvector, and faceted search via standard SQL and a JSON query DSL.
+  As of March 19, 2026, `pg_search` is deprecated for new Neon projects;
+  existing projects retain access. Recommended alternatives include tsvector,
+  pg_trgm, and pgvector. The page covers enabling the extension, BM25 scoring
+  and inverted index concepts, and examples for creating indexes, sorting by
+  relevance, highlighting matches, and tuning performance.
 enableTableOfContents: true
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-06-09T00:05:06.030Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -25,7 +30,7 @@ Depending on your use case, consider these alternatives:
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
 - **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
 - **Semantic/vector search**: [`pgvector`](/docs/extensions/pgvector) for embedding-based search
-- **BM25 search**: [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
+- **BM25 search**: [`lakebase_text`](/docs/extensions/lakebase-text) — a BM25 index for Neon, fully compatible with `tsvector` (Early Access); or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
 
 </Admonition>
 
@@ -33,7 +38,7 @@ The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds function
 
 `pg_search` eliminates the need to integrate external search engines, simplifying your architecture and providing real-time search functionality that's tightly coupled with your transactional data.
 
-In this guide, you'll learn how to enable `pg_search` on Neon, understand the fundamentals of BM25 scoring and inverted indexes, and explore hands-on examples to create indexes and perform full-text searches on your Postgres database.
+This guide covers how to enable `pg_search` on Neon, how BM25 scoring and inverted indexes work, and hands-on examples for creating indexes and running full-text searches.
 
 <Admonition type="note" title="pg_search on Neon">
 
@@ -79,7 +84,7 @@ By leveraging these features, `pg_search` enhances both performance and flexibil
 
 ### BM25: The Relevance scoring algorithm
 
-`pg_search` utilizes the [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm, a widely adopted ranking function by modern search engines, to calculate relevance scores for full-text search results. BM25 considers several factors to determine relevance:
+`pg_search` uses the [**BM25 (Best Matching 25)**](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm, a widely adopted ranking function by modern search engines, to calculate relevance scores for full-text search results. BM25 considers several factors to determine relevance:
 
 - **Term Frequency (TF):** How often a search term appears in a row's text. More occurrences suggest higher relevance.
 - **Inverse Document Frequency (IDF):** How common or rare your search term is across all rows. Less common words often indicate more specific results.
@@ -112,7 +117,7 @@ CALL paradedb.create_bm25_test_table(
 );
 ```
 
-It will generate a table named `mock_items`, which include the columns: `id`, `description`, `rating`, and `category`, which we will utilize in our search examples.
+It will generate a table named `mock_items`, which include the columns: `id`, `description`, `rating`, and `category`, which we'll use in our search examples.
 
 Let's examine the initial items within our newly created `mock_items` table. Run the following SQL query:
 
@@ -245,7 +250,7 @@ WHERE id @@@ '{"match": {"field": "description", "value": "running shoes"}}'::js
 
 To retrieve results even with minor errors in the search term, you can use `paradedb.match` with the `distance` option.
 
-Suppose you mistyped **'running'** as **'runing'**. You can still find relevant results using fuzzy matching:
+Suppose you mistyped **`running`** as **`runing`**. You can still find relevant results using fuzzy matching:
 
 ```sql
 SELECT description, category
@@ -253,7 +258,7 @@ FROM mock_items
 WHERE id @@@ paradedb.match('description', 'runing', distance => 1);
 ```
 
-This will find items where the `description` is similar to **'runing'** within a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of 1.
+This will find items where the `description` is similar to **`runing`** within a [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of 1.
 
 ```text
   description              | category
@@ -519,11 +524,11 @@ To optimize your search functionality and ensure efficient performance, consider
 
 - **Analyze query plans:** Use `EXPLAIN` to analyze query plans and identify potential bottlenecks.
 - **Index all relevant columns:** Include all columns used in search queries, sorting, or filtering for optimal performance.
-- **Utilize query builder functions:** Leverage query builder functions or JSON syntax for complex queries like fuzzy matching and phrase matching.
+- **Use query builder functions:** Use query builder functions or JSON syntax for complex queries like fuzzy matching and phrase matching.
 
 ## Conclusion
 
-You have successfully learned how to enable and utilize the `pg_search` extension on Neon for full-text search. By leveraging BM25 scoring and inverted indexes, `pg_search` provides powerful search capabilities directly within your Postgres database, eliminating the need for external search engines and ensuring real-time, ACID-compliant search functionality.
+`pg_search` brings full-text search directly into your Postgres database using BM25 scoring and inverted indexes, with no external search engine required and full ACID compliance.
 
 While this guide provides a comprehensive introduction to `pg_search` on Neon, it is not exhaustive. We haven't covered topics like:
 

@@ -2,16 +2,21 @@
 title: Postgres JSON data types
 subtitle: Model JSON data in Postgres
 summary: >-
-  Covers the storage and manipulation of JSON and JSONB data types in Postgres,
-  highlighting their differences, use cases, and how to create and query JSON
-  data effectively.
+  Postgres JSON and JSONB data types store semi-structured, document-like data
+  without schema changes. JSONB uses a binary format that supports GIN indexing,
+  containment queries with @>, and in-place field updates via jsonb_set; JSON
+  preserves exact input whitespace and key order. Choose JSONB for most
+  workloads where query and index performance matter; use JSON only when
+  preserving exact input format is required. Topics include storage differences,
+  the ->, ->>, and @> operators, nested field extraction, and GIN index
+  creation.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.821Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance.
 
-`JSON` and `JSONB` are ideal for storing data that doesn't fit neatly into a traditional relational model, since new fields can be added without altering the database schema. Additionally, they can also be used to model document-like data typically stored in NoSQL databases.
+`JSON` and `JSONB` are ideal for storing data that doesn't fit neatly into a traditional relational model, since new fields can be added without altering the database schema. They also work well for modeling document-like data typically stored in NoSQL databases.
 
 <CTA />
 
@@ -47,7 +52,7 @@ This query returns the following:
 
 ## Example usage
 
-Consider the case of managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case.
+Say you're managing user profiles for a social media application. Profile data is semi-structured, with a set of fields common to all users, while other fields are optional and may vary across users. `JSONB` is a good fit for this use case.
 
 Using the query below, we can create a table to store user profiles:
 
@@ -167,7 +172,7 @@ Postgres supports GIN (Generalized Inverted Index) indexes for `JSONB` data, whi
 CREATE INDEX idxgin ON user_profiles USING GIN (profile);
 ```
 
-This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient. For example, the query to fetch all users who have music as an interest can leverage this index.
+This makes evaluation of `key-exists (?)` and `containment (@>)` operators efficient. For example, the query to fetch all users who have music as an interest can use this index.
 
 ```sql
 SELECT *

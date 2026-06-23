@@ -22,8 +22,6 @@ This is an **isolated post-build script** -- no changes to React components. A m
 - `generate-llms-index.js` - Generates `llms.txt` Table of Contents (output: `public/docs/llms.txt`)
 - `copy-md-content.js` - Postbuild entry point that calls the processor
 - `compare-md-conversion.js` - Dev tool for comparing single file conversions
-- `generate-legacy-llms-output.js` - Dev tool: generates `public/llms/` in old flat `.txt` format for comparison
-- `../utils/llms-redirect-map.json` - Static redirect map (committed, maps 493 old `.txt` filenames to canonical `.md` URLs). Generated once by a now-deleted one-time script
 
 To add or change LLM docs, edit source in `content/docs/`; see `docs/internal/llms-directory-guide.md` for the current approach.
 
@@ -63,7 +61,6 @@ All paths serve from the same source: `public/md/`.
 
 - **Explicit `.md` URL**: `GET /docs/guides/prisma.md` -> `next.config.js` rewrite (`afterFiles`) -> `public/md/docs/guides/prisma.md`
 - **User-Agent detection**: `GET /docs/guides/prisma` with AI User-Agent -> `middleware.js` -> `isAIAgentRequest()` -> fetch from `/md/docs/guides/prisma.md`
-- **Legacy redirect**: `GET /llms/guides-prisma.txt` -> middleware -> `llms-redirect-map.json` lookup -> 301 to `/docs/guides/prisma.md`
 - **Discoverability**: HTML pages include `<link rel="alternate" type="text/markdown" href="...">` via `markdownPath` in `getMetadata()` (`src/utils/get-metadata.js`)
 - **llms.txt**: The docs index is generated at build time and written to `public/docs/llms.txt`. We serve it at both `https://neon.com/docs/llms.txt` (canonical) and `https://neon.com/llms.txt` for backwards compatibility; they may diverge in the future, and we may add other indexes (e.g. `llms-full.txt`) later.
 
@@ -114,30 +111,30 @@ See existing handlers in the code for examples of each pattern.
 
 **Transform components** (MDX -> markdown):
 
-| Component                                                          | Output                                                                                           |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| Admonition                                                         | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
-| CodeTabs                                                           | `Tab: label` + code blocks                                                                       |
-| Tabs/TabItem                                                       | `Tab: label` + content (labels from parent Tabs)                                                 |
+| Component                                                                              | Output                                                                                           |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Admonition                                                                             | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
+| CodeTabs                                                                               | `Tab: label` + code blocks                                                                       |
+| Tabs/TabItem                                                                           | `Tab: label` + content (labels from parent Tabs)                                                 |
 | Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |
-| DetailIconCards                                                    | Bullet list with links and descriptions                                                          |
-| TechCards                                                          | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
-| DocsList                                                           | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
-| CheckList/CheckItem                                                | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
-| ExternalCode                                                       | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
-| TwoColumnLayout.\*                                                 | Section headings with method signatures                                                          |
-| LinkPreview                                                        | Link with optional preview text                                                                  |
-| MegaLink                                                           | `**tag** title [Learn more](url)`                                                                |
-| QuoteBlock                                                         | Blockquote with attribution (object or slug author), optional case-study link                    |
-| Testimonial                                                        | Blockquote with author name/company                                                              |
-| YoutubeIframe                                                      | `Watch on YouTube: url`                                                                          |
-| CommunityBanner                                                    | Text + link                                                                                      |
-| PromptCards                                                        | List of AI coding prompt links                                                                   |
-| CTA                                                                | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
-| ProgramForm                                                        | Hardcoded text for form types                                                                    |
+| DetailIconCards                                                                        | Bullet list with links and descriptions                                                          |
+| TechCards                                                                              | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
+| DocsList                                                                               | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
+| CheckList/CheckItem                                                                    | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
+| ExternalCode                                                                           | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
+| TwoColumnLayout.\*                                                                     | Section headings with method signatures                                                          |
+| LinkPreview                                                                            | Link with optional preview text                                                                  |
+| MegaLink                                                                               | `**tag** title [Learn more](url)`                                                                |
+| QuoteBlock                                                                             | Blockquote with attribution (object or slug author), optional case-study link                    |
+| Testimonial                                                                            | Blockquote with author name/company                                                              |
+| YoutubeIframe                                                                          | `Watch on YouTube: url`                                                                          |
+| CommunityBanner                                                                        | Text + link                                                                                      |
+| CompactCards                                                                           | List of compact card links, including prompt links via `promptSrc`                                |
+| CTA                                                                                    | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
+| ProgramForm                                                                            | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 
@@ -160,10 +157,6 @@ Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown
 `src/utils/ai-agent-detection.js` detects AI agents by Accept header (`text/markdown`) and User-Agent patterns (`chatgpt`, `openai`, `claude`, `anthropic`, `cursor`, `windsurf`, `perplexity`, `copilot`, `axios`, `got`). The middleware has layered error handling (outer try-catch, inner try-catch for fetch, 404 fallback to HTML).
 
 Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not. `docs/changelog` is handled via `CUSTOM_MARKDOWN_PATHS` and serves the full generated changelog markdown.
-
-## Legacy /llms/\*.txt Redirects
-
-The old system used `public/llms/` for hand-maintained `.txt` files; that's deprecated and the dir is no longer used. `src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. Do not add new entries to the map; it is static and will be removed in the future. New docs get their `.md` URLs from the build. The map was generated once by a now-deleted one-time script.
 
 ## Build & Verification
 
@@ -190,7 +183,7 @@ Output goes to `public/md/` (gitignored), served via rewrites (`/docs/x.md` -> `
 13. **Navigation YAML has two patterns**: Both `navGroup.items` and `navGroup.subnav` exist in different sections.
 14. **Handler results are recursively transformed**: This enables nested components (like `<DocsList>` inside `<InfoBlock>`) to work, and allows handlers to access original JSX elements (like `<a>` attributes) before transformation.
 15. **Flow vs phrasing content**: Handlers that return inline nodes (like `link`) must wrap them in a `paragraph` when the source was a block-level element (`mdxJsxFlowElement`). Otherwise `toMarkdown` merges the content with surrounding nodes onto one line. Check `node.type === 'mdxJsxFlowElement'` to decide.
-16. **Generated lists need `spread: false`**: Lists created by handlers (DetailIconCards, TechCards, DocsList, PromptCards) should set `spread: false` to avoid blank lines between items.
+16. **Generated lists need `spread: false`**: Lists created by handlers (DetailIconCards, TechCards, DocsList, CompactCards) should set `spread: false` to avoid blank lines between items.
 17. **GFM tables**: `remark-gfm` is needed so tables are parsed into proper AST nodes. Without it, tables are plain text and `\|` escapes are consumed by the parser as backslash escapes, breaking table columns.
 
 ## Testing & CLI
@@ -208,9 +201,6 @@ node src/scripts/process-md-for-llms.js --all
 
 # Compare single file conversion
 node src/scripts/compare-md-conversion.js prisma
-
-# Generate legacy format for bulk diff
-node src/scripts/generate-legacy-llms-output.js && git diff public/llms/
 
 # Verify after build (dev server on port 3001)
 curl -I -s http://localhost:3001/docs/get-started/connect-neon.md | grep "200 OK"

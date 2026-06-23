@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL EXP() Function'
-page_title: 'PostgreSQL EXP() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL EXP() function to calculate the exponential of a number.'
+title: PostgreSQL EXP() Function
+page_title: PostgreSQL EXP() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL EXP() function to
+  calculate the exponential of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-exp/'
 ogImage: ''
-updatedOn: '2024-04-18T03:00:18+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DEGREES() Function'
-  slug: 'postgresql-math-functions/postgresql-degrees'
+  title: PostgreSQL DEGREES() Function
+  slug: postgresql-math-functions/postgresql-degrees
 nextLink:
-  title: 'PostgreSQL FACTORIAL() Function'
-  slug: 'postgresql-math-functions/postgresql-factorial'
+  title: PostgreSQL FACTORIAL() Function
+  slug: postgresql-math-functions/postgresql-factorial
 ---
+
+<Admonition type="info" id="CTA">
+The EXP() function works the same across any standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXP()` function to calculate the exponential of a number.
 

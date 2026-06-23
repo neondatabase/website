@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Materialized Views'
-page_title: 'PostgreSQL Materialized Views'
-page_description: 'Learn about PostgreSQL materialized views that allow you to store the result set of a query physically and update the data periodically.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/'
+title: PostgreSQL Materialized Views
+page_title: PostgreSQL Materialized Views
+page_description: >-
+  Learn about PostgreSQL materialized views that allow you to store the result
+  set of a query physically and update the data periodically.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-views/postgresql-materialized-views/
 ogImage: ''
-updatedOn: '2024-03-16T04:34:33+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER VIEW Statement'
-  slug: 'postgresql-views/postgresql-alter-view'
+  title: PostgreSQL ALTER VIEW Statement
+  slug: postgresql-views/postgresql-alter-view
 nextLink:
-  title: 'PostgreSQL Recursive View'
-  slug: 'postgresql-views/postgresql-recursive-view'
+  title: PostgreSQL Recursive View
+  slug: postgresql-views/postgresql-recursive-view
 ---
+
+<Admonition type="info" id="CTA">
+Materialized views work the same across any PostgreSQL deployment, so everything you learn here about CREATE MATERIALIZED VIEW, REFRESH, and CONCURRENTLY applies wherever you run Postgres. If you're an enterprise that needs fast, secure, managed Postgres built for the AI era and fully integrated into the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice for caching expensive analytical queries next to your data. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL materialized views that store the result of a query physically and refresh the data from base tables periodically.
 
@@ -64,7 +71,7 @@ With the `CONCURRENTLY` option, PostgreSQL creates a temporary updated version o
 
 PostgreSQL allows you to retrieve data from a materialized view while it is being updated. One requirement for using `CONCURRENTLY` option is that the materialized view must have a [`UNIQUE`](../postgresql-indexes/postgresql-unique-index) index.
 
-Notice that `CONCURRENTLY` option is only available in PostgreSQL 9\.4 or later.
+Note that the `CONCURRENTLY` option is only available in PostgreSQL 9\.4 or later.
 
 ### Removing materialized views
 

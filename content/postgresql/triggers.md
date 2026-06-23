@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Triggers'
-page_title: 'PostgreSQL Triggers'
-page_description: 'Show how to work with PostgreSQL triggers, which are the functions invoked automatically when an event occurs in the associated tables.'
+title: PostgreSQL Triggers
+page_title: PostgreSQL Triggers
+page_description: >-
+  Show how to work with PostgreSQL triggers, which are the functions invoked
+  automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2024-04-10T15:08:37+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Cursor'
-  slug: 'postgresql-plpgsql/plpgsql-cursor'
+  title: PL/pgSQL Cursor
+  slug: postgresql-plpgsql/plpgsql-cursor
 nextLink:
-  title: 'Introduction to PostgreSQL Trigger'
-  slug: 'postgresql-triggers/introduction-postgresql-trigger'
+  title: Introduction to PostgreSQL Trigger
+  slug: postgresql-triggers/introduction-postgresql-trigger
 ---
+
+<Admonition type="info" id="CTA">
+Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Trigger.png?alignright)
 A PostgreSQL trigger is a database object that automatically executes a [function](postgresql-plpgsql/postgresql-create-function) in response to an event such as [insert](postgresql-tutorial/postgresql-insert), [update](postgresql-tutorial/postgresql-update), [delete](postgresql-tutorial/postgresql-delete), or [truncate](postgresql-tutorial/postgresql-truncate-table). In this section, you will learn about triggers and how to use them effectively.
@@ -37,7 +43,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 ## Section 4\. DELETE triggers
 
 - [BEFORE DELETE triggers](postgresql-triggers/postgresql-before-delete-trigger) – Define a BEFORE DELETE trigger that fires before a delete event occurs.
-- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-update-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
+- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-delete-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
 
 ## Section 5\. INSTEAD OF triggers
 
@@ -45,7 +51,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 
 ## Section 6\. TRUNCATE triggers
 
-- [BEFORE TRUNDCATE Trigger](postgresql-triggers/postgresql-before-truncate-trigger) –  Create a trigger to response before a TRUNCATE event occurs.
+- [BEFORE TRUNCATE Trigger](postgresql-triggers/postgresql-before-truncate-trigger) –  Create a trigger to respond before a TRUNCATE event occurs.
 
 ## Section 7\. Enabling \& Disabling triggers
 

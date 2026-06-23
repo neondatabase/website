@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL NOW() Function'
+title: PostgreSQL NOW() Function
 page_title: 'PostgreSQL NOW() Function: Getting the Current Date and Time'
-page_description: 'This tutorial shows you how to use the PostgreSQL NOW() function to get the current date and time with the timezone.'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL NOW() function to get the
+  current date and time with the timezone.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-now/'
 ogImage: ''
-updatedOn: '2024-01-27T02:24:06+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL STATEMENT_TIMESTAMP() Function'
-  slug: 'postgresql-date-functions/postgresql-statement_timestamp'
+  title: PostgreSQL STATEMENT_TIMESTAMP() Function
+  slug: postgresql-date-functions/postgresql-statement_timestamp
 nextLink:
-  title: 'PostgreSQL LOCALTIME Function'
-  slug: 'postgresql-date-functions/postgresql-localtime'
+  title: PostgreSQL LOCALTIME Function
+  slug: postgresql-date-functions/postgresql-localtime
 ---
+
+<Admonition type="info" id="CTA">
+The NOW() function works the same across every PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NOW()` function to get the current date and time with the time zone.
 
@@ -96,6 +102,12 @@ Output:
 
 You can use the common date and time operators for the `NOW()` function. For example, to get 1 hour from now:
 
+```sql
+SELECT (NOW() + interval '1 hour') AS an_hour_later;
+```
+
+Output:
+
 ```text
         an_hour_later
 ------------------------------
@@ -122,13 +134,13 @@ Output:
 To get 2 hours 30 minutes ago, you use the minus (\-) operator as follows:
 
 ```sql
-SELECT now() - interval '2 hours 30 minutes' AS two_hour_30_min_go;
+SELECT now() - interval '2 hours 30 minutes' AS two_hour_30_min_ago;
 ```
 
 Output:
 
 ```
-      two_hour_30_min_go
+      two_hour_30_min_ago
 -------------------------------
  2024-01-27 01:47:18.246763+02
 (1 row)
@@ -202,7 +214,7 @@ COMMIT
 
 In this example, we called the `NOW()` function within a transaction and its return values do not change through the transaction.
 
-Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified of seconds.
+Note that the `pg_sleep()` function pauses the current session’s process sleep for a specified number of seconds.
 
 If you want to get the current date and time that does advance during the transaction, you can use the `TIMEOFDAY()` function. Consider the following example:
 

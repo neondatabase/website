@@ -2,11 +2,15 @@
 title: Component specialized guide
 subtitle: Specialized and less common components for specific use cases
 summary: >-
-  Covers the use of specialized MDX components in Neon for specific scenarios,
-  detailing when to select them, their technical requirements, and best
-  practices for implementation.
+  Reference for infrequently used Neon docs MDX components. Covers ExternalCode,
+  YoutubeIframe, Video, feature status indicators (PrivatePreview,
+  PublicPreview, FeatureBeta), auto-generated SDK components, RequestForm,
+  AgentSkillsTip, MCPTools, and CommunityBanner. Use this page when the main
+  Component Guide does not cover the component you need. Each entry includes
+  copy-paste MDX syntax, live rendering, dependency requirements, and guidance
+  on when to choose a simpler alternative.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.004Z'
+updatedOn: '2026-06-18T21:04:52.651Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.
@@ -127,10 +131,8 @@ Status indicators for features in different stages of development and release.
 Status indicators for features in different stages:
 
 ```mdx
-<ComingSoon />
 <PrivatePreview />
 <PrivatePreviewEnquire />
-<EarlyAccess />
 <PublicPreview />
 <FeatureBeta />
 <LRBeta />
@@ -141,10 +143,8 @@ Status indicators for features in different stages:
 
 **Live preview:**
 
-<ComingSoon />
 <PrivatePreview />
 <PrivatePreviewEnquire />
-<EarlyAccess />
 <PublicPreview />
 <FeatureBeta />
 <LRBeta />

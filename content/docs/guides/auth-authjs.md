@@ -3,19 +3,19 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 summary: >-
-  Step-by-step guide for implementing passwordless authentication in a Next.js
-  application using Auth.js with Neon Postgres as the database backend and
-  Resend for sending magic link emails.
+  Auth.js (NextAuth.js v5) with the Neon Postgres adapter stores users,
+  sessions, and magic-link verification tokens directly in a Neon database,
+  enabling passwordless email authentication in Next.js without a separate auth
+  service. Use this guide when you want self-hosted auth with full database
+  control, as an alternative to the managed Neon Auth option. The setup uses
+  @auth/pg-adapter, @neondatabase/serverless, and Resend as the email provider
+  for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.119Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-<Admonition type="note">
-Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
-</Admonition>
-
-<Admonition type="tip" title="Did you know?">
-We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).
+<Admonition type="tip" title="Authentication on Neon">
+This guide uses the [Neon Adapter](https://authjs.dev/getting-started/adapters/neon) for Auth.js to store users and sessions in your database. If you prefer a managed option with no separate auth infrastructure, see [Neon Auth](/docs/auth/overview). Auth state branches with your database for preview and CI environments.
 </Admonition>
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (for example, Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
@@ -422,7 +422,7 @@ To start the application, run:
 npm run dev
 ```
 
-This will start the Next.js development server. Open your browser and navigate to `http://localhost:3000` to see the application in action. When running for the first time, you'll be see a `Sign In` link which will redirect you to the `Auth.js` widget, prompting you to input your email address. Enter your email to receive a magic link. Once authenticated, you'll be able to add and manage your todos.
+This will start the Next.js development server. Open your browser and navigate to `http://localhost:3000` to see the application in action. When running for the first time, you'll see a `Sign In` link which will redirect you to the `Auth.js` widget, prompting you to input your email address. Enter your email to receive a magic link. Once authenticated, you'll be able to add and manage your todos.
 
 Note that if you are using the test email address (`onboarding@resend.dev`) to send emails, you won't be able to sign in from other email accounts.
 

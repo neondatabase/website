@@ -1,24 +1,31 @@
 ---
-title: 'PostgreSQL Date Functions'
-page_title: 'PostgreSQL Date Functions'
-page_description: 'This page provides you with the PostgreSQL date functions that allow you to handle date and time data effectively.'
+title: PostgreSQL Date Functions
+page_title: PostgreSQL Date Functions
+page_description: >-
+  This page provides you with the PostgreSQL date functions that allow you to
+  handle date and time data effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png'
-updatedOn: '2024-03-25T05:06:59+00:00'
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/postgresql-date-functions.png
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL BOOL_OR() Function'
-  slug: 'postgresql-aggregate-functions/postgresql-bool_or'
+  title: PostgreSQL BOOL_OR() Function
+  slug: postgresql-aggregate-functions/postgresql-bool_or
 nextLink:
-  title: 'PostgreSQL CURRENT_DATE Function'
-  slug: 'postgresql-date-functions/postgresql-current_date'
+  title: PostgreSQL CURRENT_DATE Function
+  slug: postgresql-date-functions/postgresql-current_date
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL's date and time functions work the same on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The following page shows the most commonly used PostgreSQL date functions that allow you to effectively manipulate date and time values.
 
 ## Section 1\. Getting the current date and time
 
-This section shows you various functions for getting the current date, current date and time, current timestamp, without or without timezone.
+This section shows you various functions for getting the current date, current date and time, current timestamp, with or without timezone.
 
 - [CURRENT_DATE](postgresql-date-functions/postgresql-current_date) – Return the current date.
 - [CURRENT_TIME](postgresql-date-functions/postgresql-current_time) – Return the current time without date parts.

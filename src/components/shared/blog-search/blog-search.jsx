@@ -2,19 +2,107 @@
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useState, useMemo, useRef } from 'react';
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 
+import { DEFAULT_BLOG_ROUTE_CONFIG, EXTRA_CATEGORIES } from 'constants/blog';
 import debounce from 'utils/debounce';
 
 import SearchInput from './search-input';
 import SearchResults from './search-results';
 
-const BlogSearch = ({ children, posts, searchInputClassName }) => {
+const extraCategoryNameBySlug = new Map(
+  EXTRA_CATEGORIES.map((category) => [category.slug, category.name])
+);
+
+const normalizeSearchText = (value = '') =>
+  String(value)
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/gu, '')
+    .replace(/```[\s\S]*?```/gu, ' ')
+    .replace(/`([^`]*)`/gu, ' $1 ')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/gu, ' $1 ')
+    .replace(/\[([^\]]+)\]\([^)]+\)/gu, ' $1 ')
+    .replace(/<[^>]+>/gu, ' ')
+    .replace(/[_*#>~|[\]{}()]+/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim()
+    .toLowerCase();
+
+const getAuthorNames = (post) => {
+  const postAuthors = post.pageBlogPost?.authors || [];
+  const authorNames = postAuthors.map((item) => item?.author?.title).filter(Boolean);
+
+  if (post.author?.name) {
+    authorNames.push(post.author.name);
+  }
+
+  if (post.author?.title) {
+    authorNames.push(post.author.title);
+  }
+
+  return authorNames.join(' ');
+};
+
+const getCategorySearchText = (post) => {
+  const categories = (post.categories?.nodes || [])
+    .map((category) => category?.name || category?.slug)
+    .filter(Boolean);
+
+  if (post.category) {
+    categories.push(extraCategoryNameBySlug.get(post.category) || post.category);
+  }
+
+  return categories.join(' ');
+};
+
+const getSearchableFields = (post) => ({
+  title: normalizeSearchText(post.title),
+  subtitle: normalizeSearchText(post.subtitle),
+  excerpt: normalizeSearchText(post.excerpt),
+  description: normalizeSearchText(post.pageBlogPost?.description),
+  category: normalizeSearchText(getCategorySearchText(post)),
+  author: normalizeSearchText(getAuthorNames(post)),
+  content: normalizeSearchText(post.content),
+});
+
+const getFieldScore = (fieldValue, query, tokens, weight) => {
+  if (!fieldValue) {
+    return 0;
+  }
+
+  const includesWholeQuery = fieldValue.includes(query);
+  const includesAllTokens =
+    tokens.length > 1 && tokens.every((token) => fieldValue.includes(token));
+
+  if (!includesWholeQuery && !includesAllTokens) {
+    return 0;
+  }
+
+  let score = weight;
+
+  if (fieldValue === query) {
+    score += weight * 2;
+  } else if (fieldValue.startsWith(query)) {
+    score += weight;
+  }
+
+  score += tokens.filter((token) => fieldValue.includes(token)).length;
+
+  return score;
+};
+
+const BlogSearch = ({
+  children,
+  posts,
+  searchInputClassName,
+  routeConfig = DEFAULT_BLOG_ROUTE_CONFIG,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const urlQuery = searchParams.get('query') || '';
   const [query, setQuery] = useState(urlQuery);
+  const deferredQuery = useDeferredValue(query);
   const isInternalUpdateRef = useRef(false);
 
   useEffect(() => {
@@ -56,21 +144,42 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
     [debouncedUpdateURL]
   );
 
+  const searchablePosts = useMemo(
+    () =>
+      posts.map((post, index) => ({
+        index,
+        post,
+        fields: getSearchableFields(post),
+      })),
+    [posts]
+  );
+
   // Filter posts based on query
   const filteredPosts = useMemo(() => {
-    if (!query.trim()) return null;
+    if (!deferredQuery.trim()) {
+      return null;
+    }
 
-    const searchTerm = query.toLowerCase();
-    return posts.filter((post) => {
-      const title = post.title?.toLowerCase() || '';
-      const subtitle = post.subtitle?.toLowerCase() || '';
-      const excerpt = post.excerpt?.toLowerCase() || '';
+    const searchTerm = normalizeSearchText(deferredQuery);
+    const tokens = searchTerm.split(' ').filter(Boolean);
 
-      return (
-        title.includes(searchTerm) || subtitle.includes(searchTerm) || excerpt.includes(searchTerm)
-      );
-    });
-  }, [posts, query]);
+    return searchablePosts
+      .map(({ index, post, fields }) => {
+        const score =
+          getFieldScore(fields.title, searchTerm, tokens, 100) +
+          getFieldScore(fields.subtitle, searchTerm, tokens, 70) +
+          getFieldScore(fields.excerpt, searchTerm, tokens, 55) +
+          getFieldScore(fields.description, searchTerm, tokens, 45) +
+          getFieldScore(fields.category, searchTerm, tokens, 30) +
+          getFieldScore(fields.author, searchTerm, tokens, 25) +
+          getFieldScore(fields.content, searchTerm, tokens, 10);
+
+        return { index, post, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((left, right) => right.score - left.score || left.index - right.index)
+      .map((item) => item.post);
+  }, [deferredQuery, searchablePosts]);
 
   const handleSearchChange = (value) => {
     setQuery(value);
@@ -90,7 +199,9 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   return (
     <>
       <SearchInput className={searchInputClassName} value={query} onChange={handleSearchChange} />
-      <SearchResults posts={filteredPosts}>{children}</SearchResults>
+      <SearchResults posts={filteredPosts} routeConfig={routeConfig}>
+        {children}
+      </SearchResults>
     </>
   );
 };
@@ -100,12 +211,19 @@ BlogSearch.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      subtitle: PropTypes.string.isRequired,
-      excerpt: PropTypes.string.isRequired,
+      subtitle: PropTypes.string,
+      excerpt: PropTypes.string,
+      content: PropTypes.string,
       slug: PropTypes.string.isRequired,
     })
   ).isRequired,
   searchInputClassName: PropTypes.string,
+  routeConfig: PropTypes.shape({
+    basePath: PropTypes.string.isRequired,
+    categoryBasePath: PropTypes.string.isRequired,
+    isPreview: PropTypes.bool,
+    previewParams: PropTypes.object,
+  }),
 };
 
 export default BlogSearch;

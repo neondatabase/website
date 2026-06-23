@@ -3,11 +3,14 @@ title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
 summary: >-
-  Covers the setup and usage of the Neon TypeScript SDK to programmatically
-  manage projects, branches, databases, and other resources within the Neon
-  platform, simplifying API interactions and resource management.
+  The Neon TypeScript SDK (`@neondatabase/api-client` on npm) is a typed
+  wrapper around the Neon REST API. It lets you programmatically create,
+  update, and delete projects, branches, databases, endpoints, roles,
+  organizations, and consumption metrics. It provides TypeScript type safety,
+  IDE autocompletion, and structured Axios error handling. Install via npm,
+  yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 <InfoBlock>
@@ -366,9 +369,9 @@ createNeonRole('your-project-id', 'your-branch-id', 'new_user_role').catch((erro
 The Neon TypeScript SDK provides comprehensive type definitions for all request and response objects, enums, and interfaces. Leveraging these types enhances your development experience by enabling:
 
 - **Type Safety**: TypeScript types ensure that you are using the SDK methods and data structures correctly, catching type-related errors during development rather than at runtime.
-- **Improved Code Completion**: Modern IDEs and code editors utilize TypeScript types to provide intelligent code completion and suggestions, making it easier to discover and use SDK features.
+- **Improved Code Completion**: Modern IDEs and code editors use TypeScript types to provide intelligent code completion and suggestions, making it easier to discover and use SDK features.
 
-### Utilizing SDK Types
+### Using SDK Types
 
 The `@neondatabase/api-client` package exports all the TypeScript types you need to interact with the Neon API in a type-safe manner. You can import these types directly into your TypeScript files.
 
@@ -405,7 +408,7 @@ In this example:
 
 Similarly, when creating a project, you can use types like `ProjectCreateRequest` for the request body and `ProjectResponse` for the expected response:
 
-By using TypeScript types, you ensure that your code interacts with the Neon API in a predictable and type-safe manner, reducing potential errors and improving code quality. You can explore all available types in the `@neondatabase/api-client` package to fully leverage the benefits of TypeScript in your Neon SDK integrations.
+By using TypeScript types, you ensure that your code interacts with the Neon API in a predictable and type-safe manner, reducing potential errors and improving code quality. You can explore all available types in the `@neondatabase/api-client` package to get the full benefits of TypeScript in your Neon SDK integrations.
 
 ## Key SDK Method Signatures
 
@@ -472,9 +475,6 @@ To give you a better overview of the SDK, here are some of the key methods avail
 
 ### Retrieve Consumption Metrics
 
-<ConsumptionAccountApiDeprecation/>
-
-- `getConsumptionHistoryPerAccount(query: GetConsumptionHistoryPerAccountParams)`: Retrieves account consumption metrics.
 - `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.
 
 ### Manage Organizations

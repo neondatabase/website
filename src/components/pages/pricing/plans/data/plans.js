@@ -115,19 +115,37 @@ export default {
       },
       free: 'Free<span>with limited window/size</span>',
       launch:
-        '$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>',
+        '$0.20 per GB-month <span>based on volume of data changes during your selected history window</span>',
       scale:
-        '$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>',
+        '$0.20 per GB-month <span>based on volume of data changes during your selected history window</span>',
     },
     {
       rows: '3',
       feature: {
-        title: 'Restore window',
-        subtitle: 'Controls history (configurable)',
+        title: 'History window',
+        subtitle: 'For instant restore (configurable)',
       },
       free: 'Up to 6 hours<span>or 1 GB of data changes</span>',
       launch: 'Up to 7 days',
       scale: 'Up to 30 days',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Snapshots',
+      },
+      free: '1 snapshot',
+      launch: '100 snapshots  <span>$0.09/GB-month</span>',
+      scale: '100 snapshots  <span>$0.09/GB-month</span>',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Scheduled Backups',
+      },
+      free: false,
+      launch: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
+      scale: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
     },
     {
       rows: '1',
@@ -185,8 +203,8 @@ export default {
         subtitle: 'Egress',
       },
       free: '5 GB included',
-      launch: '100 GB included<span>then $0.10 per GB</span>',
-      scale: '100 GB included<span>then $0.10 per GB</span>',
+      launch: '500 GB included<span>then $0.10 per GB</span>',
+      scale: '500 GB included<span>then $0.10 per GB</span>',
     },
     {
       rows: '2',
@@ -221,6 +239,16 @@ export default {
       free: false,
       launch: false,
       scale: 'Included',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Spending limits',
+        subtitle: 'Control your monthly spend',
+      },
+      free: false,
+      launch: true,
+      scale: true,
     },
     {
       rows: '1',

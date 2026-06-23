@@ -13,7 +13,7 @@ vi.mock('next/server', () => ({
     }
 
     static redirect(url) {
-      return { type: 'redirect', url };
+      return { type: 'redirect', url, headers: new Headers() };
     }
   },
 }));
@@ -76,6 +76,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Branching', path: '/branching/introduction' },
       { name: 'Programs', path: '/programs/agents' },
       { name: 'Use Cases', path: '/use-cases/ai-agents' },
+      { name: 'Pricing', path: '/pricing' },
+      { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
     testCases.forEach(({ name, path }) => {
@@ -120,10 +122,51 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
   });
 
+  describe('Bare /docs root', () => {
+    it('serves llms.txt markdown for AI User-Agent', async () => {
+      const req = createMockRequest('/docs', 'Claude/1.0', 'text/html');
+      mockMarkdownFetch('# Neon Postgres');
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      const text = await response.text();
+      expect(text).toContain('# Neon Postgres');
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+    });
+
+    it('serves llms.txt markdown for Accept: text/markdown', async () => {
+      const req = createMockRequest('/docs', 'Mozilla/5.0', 'text/markdown');
+      mockMarkdownFetch('# Neon Postgres');
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/llms.txt');
+      const text = await response.text();
+      expect(text).toContain('# Neon Postgres');
+    });
+
+    it('redirects browsers to /docs/introduction without fetching markdown', async () => {
+      const req = createMockRequest(
+        '/docs',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toContain('/docs/introduction');
+      expect(response.headers.get('Vary')).toBe('Accept');
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+  });
+
   describe('Excluded routes - no index markdown available, return HTML', () => {
     const excludedCases = [
       { name: 'Index /guides', path: '/guides', reason: 'index page without markdown' },
       { name: 'Index /branching', path: '/branching', reason: 'index page without markdown' },
+      { name: 'Index /faqs', path: '/faqs', reason: 'index page without markdown' },
       {
         name: 'Use case multi-tb',
         path: '/use-cases/multi-tb',
@@ -177,6 +220,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(global.fetch).toHaveBeenCalled();
       expect(response).toBeInstanceOf(Response);
+      expect(response.status).toBe(404);
       expect(response.headers.get('X-Content-Source')).toBe('agent-404');
       const text = await response.text();
       expect(text).toContain('/docs/non-existent');
@@ -193,17 +237,20 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
+      expect(response.status).toBe(404);
       expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
     });
 
     it('should fallback to next() when markdown fetch throws error', async () => {
       const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       global.fetch
         .mockRejectedValueOnce(new Error('Network error')) // markdown fetch throws
         .mockResolvedValueOnce({ ok: true }); // analytics (still fires after catch)
 
       const response = await middleware(req);
+      spy.mockRestore();
 
       expect(global.fetch).toHaveBeenCalled();
       expect(response.type).toBe('next');

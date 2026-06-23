@@ -2,11 +2,13 @@
 title: Password reset
 subtitle: Allow users to reset forgotten passwords
 summary: >-
-  Covers the setup of password reset functionality in Neon Auth, including
-  enabling email authentication and using pre-built UI components for user
-  password recovery.
+  Neon Auth password reset sends a verification link to the user's email and
+  requires email authentication to be enabled in project Settings. The pre-built
+  `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
+  forgot-password flow; reset links expire after 15 minutes, and the SDK
+  `resetPasswordForEmail` method is not yet supported.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.740Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -26,8 +28,7 @@ The easiest way to add password reset is using the pre-built UI components `<For
 If you're using `<AuthView>`, enable the forgot password flow:
 
 ```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 export default function App() {
@@ -47,7 +48,7 @@ For more control, use `<ForgotPasswordForm>` and `<ResetPasswordForm>` separatel
 
 ```tsx filename="src/App.tsx"
 import { useState } from 'react';
-import { ForgotPasswordForm, ResetPasswordForm } from '@neondatabase/neon-js/auth/react/ui';
+import { ForgotPasswordForm, ResetPasswordForm } from '@neondatabase/auth-ui';
 import { authClient } from './auth';
 
 export default function App() {
@@ -101,4 +102,5 @@ Password reset links expire after **15 minutes**. If a link expires, users need 
 ## Next steps
 
 - [Add email verification](/docs/auth/guides/email-verification) to ensure users own their email addresses
+- [Customize the application name](/docs/auth/production-checklist#application-name) shown in password reset emails
 - [Learn how to branch your auth](/docs/auth/branching-authentication) to use database branches with isolated auth environments

@@ -1,18 +1,25 @@
 ---
-title: 'Introduction to PostgreSQL Trigger'
-page_title: 'Introduction to PostgreSQL Trigger'
-page_description: 'In this tutorial, you will learn what a PostgreSQL trigger is, why you use should use it, and when you use it.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/'
+title: Introduction to PostgreSQL Trigger
+page_title: Introduction to PostgreSQL Trigger
+page_description: >-
+  In this tutorial, you will learn what a PostgreSQL trigger is, why you use
+  should use it, and when you use it.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/
 ogImage: ''
-updatedOn: '2023-01-28T01:15:34+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Triggers'
-  slug: 'postgresql-triggers/'
+  title: PostgreSQL Triggers
+  slug: postgresql-triggers/
 nextLink:
-  title: 'PostgreSQL CREATE TRIGGER Statement'
-  slug: 'postgresql-triggers/creating-first-trigger-postgresql'
+  title: PostgreSQL CREATE TRIGGER Statement
+  slug: postgresql-triggers/creating-first-trigger-postgresql
 ---
+
+<Admonition type="info" id="CTA">
+Triggers are a core PostgreSQL feature, and everything covered here works the same on any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL triggers, why you should use the triggers, and when to use them.
 
@@ -47,7 +54,7 @@ The main drawback of using a trigger is that you must know the trigger exists an
 
 ## PostgreSQL triggers vs SQL standard triggers
 
-Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some specific features:
+Even though PostgreSQL implements SQL standard, triggers in PostgreSQL have some specific features:
 
 - PostgreSQL fires trigger for the [`TRUNCATE`](../postgresql-tutorial/postgresql-truncate-table) event.
 - PostgreSQL allows you to define the statement\-level trigger on [views](../postgresql-views).

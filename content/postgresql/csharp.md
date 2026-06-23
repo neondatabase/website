@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL C#'
-page_title: 'PostgreSQL C#'
-page_description: 'This page shows how to manipulate data in a PostgreSQL database from C# applications using ADO.NET.'
+title: PostgreSQL C#
+page_title: PostgreSQL C#
+page_description: >-
+  This page shows how to manipulate data in a PostgreSQL database from C#
+  applications using ADO.NET.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/'
 ogImage: ''
-updatedOn: '2024-05-21T12:42:32+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Managing Transactions'
-  slug: 'postgresql-jdbc/transaction'
+  slug: postgresql-jdbc/transaction
 nextLink:
   title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
-  slug: 'postgresql-csharp/postgresql-csharp-connect'
+  slug: postgresql-csharp/postgresql-csharp-connect
 ---
+
+<Admonition type="info" id="CTA">
+Working with PostgreSQL from C# through ADO.NET and Npgsql works the same against any Postgres database, so everything here applies wherever you run Postgres. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed cloud Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 This page shows how to manipulate data in a PostgreSQL database from C\# applications using ADO.NET.
 

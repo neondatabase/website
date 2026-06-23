@@ -1,15 +1,16 @@
 ---
 title: Migrate from Heroku to Neon Postgres
 summary: >-
-  Covers the steps to migrate data from Heroku Postgres to Neon, including
-  project creation, connection string retrieval, and data import using the
-  Heroku CLI.
+  Heroku to Neon migration using the Heroku CLI command `heroku pg:pull`, which
+  runs pg_dump and pg_restore under the hood. Walks through creating a Neon
+  project, obtaining the required unpooled connection string, and verifying the
+  imported data in the Neon Console.
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2026-04-01T22:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.

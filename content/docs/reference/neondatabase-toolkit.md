@@ -3,11 +3,17 @@ title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
 summary: >-
-  Covers the setup of the @neondatabase/toolkit, a client that enables rapid
-  creation of Postgres databases and execution of SQL queries, tailored for AI
-  agents and testing environments.
+  @neondatabase/toolkit is an experimental TypeScript/JavaScript client that
+  bundles the Neon API SDK and Neon Serverless Driver to collapse project
+  creation, connection-string retrieval, and SQL execution into three methods:
+  createProject, sql, and deleteProject. It solves the multi-step provisioning
+  problem for AI agents, integration tests, and prototypes that need a fresh,
+  isolated Postgres instance spun up and torn down programmatically. Available
+  as @neondatabase/toolkit on npm and @neon/toolkit on JSR; the apiClient
+  property exposes the full Neon API SDK for operations beyond the toolkit's
+  core methods.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.146Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

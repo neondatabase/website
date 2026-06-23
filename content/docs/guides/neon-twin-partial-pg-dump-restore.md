@@ -2,12 +2,16 @@
 title: pg_dump / pg_restore — Partial Twin
 subtitle: Create a partial Twin of your production database
 summary: >-
-  Covers the setup of a workflow to create a partial Neon Twin of a production
-  database using `pg_dump`, `pg_restore`, and `psql`, including necessary
-  directory structure and code configuration.
+  A GitHub Actions workflow that mirrors a production PostgreSQL schema and a
+  row-limited data subset into a Neon development database using `pg_dump
+  --schema-only`, `psql \copy`, and `pg_restore`. Use this approach when you
+  need a lightweight dev environment that reflects production structure without
+  copying the full dataset. The workflow runs on a daily cron schedule, supports
+  multi-table foreign key relationships, requires unpooled connection strings,
+  and is subject to GitHub Actions' 6-hour job limit.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-01T22:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.
@@ -179,13 +183,13 @@ Before running the Action, ensure that both `PROD_DATABASE_URL` and `DEV_DATABAS
 
 In your repository, go to **Settings** > **Secrets and variables** > **Actions** to add them.
 
-![github repository secrects](/docs/guides/twin_diagram_github_secrets.png)
+![GitHub repository secrets](/docs/guides/twin_diagram_github_secrets.png)
 
 ## Testing the workflow
 
 To manually trigger your workflow go to **Actions** > **Create Neon Twin** then click **Run workflow**. From the dropdown, click the **Run workflow** button.
 
-![github actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
+![GitHub Actions run workflow](/docs/guides/twin_diagram_test_workflow.png)
 
 ## Syncing with migration changes
 

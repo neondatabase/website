@@ -1,18 +1,25 @@
 ---
-title: 'A Look at PostgreSQL User-defined Data Types'
-page_title: 'A Look at PostgreSQL User-defined Data Types'
-page_description: 'This tutorial shows you how to create PostgreSQL user-defined data type using CREATE DOMAIN and CREATE TYPE statements.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-user-defined-data-types/'
-ogImage: '/postgresqltutorial/PostgreSQL-User-defined-Type-Example.png'
-updatedOn: '2020-07-10T01:18:36+00:00'
+title: A Look at PostgreSQL User-defined Data Types
+page_title: A Look at PostgreSQL User-defined Data Types
+page_description: >-
+  This tutorial shows you how to create PostgreSQL user-defined data type using
+  CREATE DOMAIN and CREATE TYPE statements.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-user-defined-data-types/
+ogImage: /postgresqltutorial/PostgreSQL-User-defined-Type-Example.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Array'
-  slug: 'postgresql-tutorial/postgresql-array'
+  title: PostgreSQL Array
+  slug: postgresql-tutorial/postgresql-array
 nextLink:
-  title: 'PostgreSQL Enum'
-  slug: 'postgresql-tutorial/postgresql-enum'
+  title: PostgreSQL Enum
+  slug: postgresql-tutorial/postgresql-enum
 ---
+
+<Admonition type="info" id="CTA">
+User-defined data types with CREATE DOMAIN and CREATE TYPE work the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure managed database that's fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create PostgreSQL user\-defined data type using `CREATE DOMAIN` and `CREATE TYPE` statements.
 

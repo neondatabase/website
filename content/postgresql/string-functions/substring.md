@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL SUBSTRING() Function'
-page_title: 'PostgreSQL SUBSTRING() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL SUBSTRING() function to extract A substring from a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/'
-ogImage: '/postgresqltutorial/PostgreSQL-substring-function-example.jpg'
-updatedOn: '2024-01-29T01:37:47+00:00'
+title: PostgreSQL SUBSTRING() Function
+page_title: PostgreSQL SUBSTRING() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL SUBSTRING() function to
+  extract A substring from a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/
+ogImage: /postgresqltutorial/PostgreSQL-substring-function-example.jpg
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL POSITION() Function'
-  slug: 'postgresql-string-functions/postgresql-position'
+  title: PostgreSQL POSITION() Function
+  slug: postgresql-string-functions/postgresql-position
 nextLink:
-  title: 'PostgreSQL SPLIT_PART() Function'
-  slug: 'postgresql-string-functions/postgresql-split_part'
+  title: PostgreSQL SPLIT_PART() Function
+  slug: postgresql-string-functions/postgresql-split_part
 ---
+
+<Admonition type="info" id="CTA">
+The SUBSTRING() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a VM, or in a managed service. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SUBSTRING()` function to extract a substring from a string.
 
@@ -62,7 +69,7 @@ Output:
 (1 row)
 ```
 
-In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is et `PostgreS` as illustrated in the following picture:
+In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is `PostgreS` as illustrated in the following picture:
 
 ![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the first 8 characters from the PostgreSQL string:
 

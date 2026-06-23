@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DROP INDEX'
-page_title: 'PostgreSQL DROP INDEX Statement'
-page_description: 'This tutorial shows you step by step how to use the PostgreSQL DROP INDEX statement to remove an existing index.'
+title: PostgreSQL DROP INDEX
+page_title: PostgreSQL DROP INDEX Statement
+page_description: >-
+  This tutorial shows you step by step how to use the PostgreSQL DROP INDEX
+  statement to remove an existing index.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-drop-index/'
-ogImage: '/postgresqltutorial/actor.png'
-updatedOn: '2024-02-28T10:30:19+00:00'
+ogImage: /postgresqltutorial/actor.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REINDEX'
-  slug: 'postgresql-indexes/postgresql-reindex'
+  title: PostgreSQL REINDEX
+  slug: postgresql-indexes/postgresql-reindex
 nextLink:
-  title: 'PostgreSQL List Indexes'
-  slug: 'postgresql-indexes/postgresql-list-indexes'
+  title: PostgreSQL List Indexes
+  slug: postgresql-indexes/postgresql-list-indexes
 ---
+
+<Admonition type="info" id="CTA">
+The DROP INDEX syntax covered here works on any PostgreSQL deployment, so you can apply the same patterns whether you're cleaning up unused indexes locally or in production. For enterprises running Postgres at scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high-performance, secure database integrated directly into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP INDEX` statement to remove an existing index.
 

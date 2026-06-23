@@ -2,11 +2,16 @@
 title: Neon agents for GitHub Copilot
 subtitle: Custom agents for safe database migrations and query optimization in VS Code
 summary: >-
-  Covers the setup of custom agents for GitHub Copilot that facilitate safe
-  database migrations and query optimization in VS Code, utilizing Neon's
-  branching workflow for efficient development.
+  Neon Migration Specialist and Neon Performance Analyzer are two GitHub
+  Copilot custom agents for VS Code that run schema migrations and query
+  optimizations on temporary Neon branches, keeping production untouched until
+  changes are validated. Use these agents when you want zero-downtime Postgres
+  migrations or automated slow-query fixes without switching out of your IDE.
+  Both agents support ORMs including Prisma, Drizzle, SQLAlchemy, Django, and
+  Rails, and clean up temporary branches automatically after a default 4-hour
+  TTL.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.032Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 GitHub Copilot now supports custom agents, and we've built two specialized agents that bring Neon's branching workflow directly into your IDE. These agents help you run safe database migrations and identify slow queries, all without leaving VS Code.
@@ -110,7 +115,7 @@ Once installed, invoke the agents in GitHub Copilot Chat by mentioning their nam
 
 ## How branching keeps your data safe
 
-Both agents leverage Neon's instant branching to create isolated environments for testing. This means:
+Both agents use Neon's instant branching to create isolated environments for testing. This means:
 
 - **No changes to production**: All migrations and optimizations are tested on temporary branches first
 - **Full data copy**: Test branches include a complete copy of your schema and data

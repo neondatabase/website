@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL DROP DATABASE'
-page_title: 'PostgreSQL DROP DATABASE Statement'
-page_description: 'In this tutorial, you will learn how to use the DROP DATABASE statement to drop a database from a PostgreSQL server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/'
+title: PostgreSQL DROP DATABASE
+page_title: PostgreSQL DROP DATABASE Statement
+page_description: >-
+  In this tutorial, you will learn how to use the DROP DATABASE statement to
+  drop a database from a PostgreSQL server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-database/
 ogImage: ''
-updatedOn: '2024-02-19T00:53:42+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER DATABASE'
-  slug: 'postgresql-administration/postgresql-alter-database'
+  title: PostgreSQL ALTER DATABASE
+  slug: postgresql-administration/postgresql-alter-database
 nextLink:
-  title: 'PostgreSQL Rename Database'
-  slug: 'postgresql-administration/postgresql-rename-database'
+  title: PostgreSQL Rename Database
+  slug: postgresql-administration/postgresql-rename-database
 ---
+
+<Admonition type="info" id="CTA">
+The DROP DATABASE statement works the same way on any PostgreSQL server, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises running mission critical workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP DATABASE` statement to drop a database.
 

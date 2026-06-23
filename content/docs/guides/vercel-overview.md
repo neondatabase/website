@@ -2,14 +2,19 @@
 title: Integrating Neon with Vercel
 subtitle: Choose the right connection path in seconds
 summary: >-
-  Step-by-step guide for selecting the appropriate Neon-Vercel integration based
-  on your project needs, whether starting new or utilizing existing
-  infrastructure.
+  Neon-Vercel integration decision guide covering three connection paths:
+  Vercel-Managed (new users, billing through Vercel), Neon-Managed (existing
+  Neon account, billing through Neon), and Manual (custom CI/CD via env vars).
+  Both managed integrations auto-provision Neon database branches for Vercel
+  preview deployments and support Neon Auth; they differ in branch cleanup
+  timing, where Vercel-Managed follows deployment retention policy and
+  Neon-Managed triggers on Git branch deletion. Choose this page to select the
+  right integration before following the path-specific setup guide.
 redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2026-03-20T16:01:10.991Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Overview

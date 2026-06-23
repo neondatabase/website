@@ -1,18 +1,25 @@
 ---
-title: 'How to List All Triggers in PostgreSQL'
-page_title: 'How to List All Triggers in PostgreSQL'
-page_description: 'In this tutorial, you will learn how to list all triggers in the current database or triggers associated with a specific table in PostgreSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/'
+title: How to List All Triggers in PostgreSQL
+page_title: How to List All Triggers in PostgreSQL
+page_description: >-
+  In this tutorial, you will learn how to list all triggers in the current
+  database or triggers associated with a specific table in PostgreSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/how-to-list-all-triggers-in-postgresql/
 ogImage: ''
-updatedOn: '2024-03-28T13:52:14+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'Enable Triggers'
-  slug: 'postgresql-triggers/enable-triggers'
+  title: Enable Triggers
+  slug: postgresql-triggers/enable-triggers
 nextLink:
-  title: 'PostgreSQL Event Trigger'
-  slug: 'postgresql-triggers/postgresql-event-trigger'
+  title: PostgreSQL Event Trigger
+  slug: postgresql-triggers/postgresql-event-trigger
 ---
+
+<Admonition type="info" id="CTA">
+Listing triggers with information_schema.triggers, pg_trigger, and psql works the same on any PostgreSQL database, so you can apply these techniques wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to list all triggers in the current database or triggers associated with a specific table in PostgreSQL.
 
@@ -158,7 +165,7 @@ SELECT * FROM get_triggers('employees');
 | -------------- | -------------------------------------------------------------------------------------------------------------- |
 | `tgname`       | The name of the trigger.                                                                                       |
 | `tgrelid`      | The object ID of the table or view to which the trigger belongs.                                               |
-| `tgfoid`       | The object ID of the function is called when the trigger fires.                                                |
+| `tgfoid`       | The object ID of the function that is called when the trigger fires.                                           |
 | `tgtype`       | The type of the trigger, such as `BEFORE`, `AFTER`, or [`INSTEAD OF`](postgresql-instead-of-triggers).         |
 | `tgenabled`    | The status of the trigger, either enabled or disabled.                                                         |
 | `tgisinternal` | The boolean indicator indicates whether the trigger is a system\-generated trigger or a user\-defined trigger. |

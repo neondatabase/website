@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Column Alias'
-page_title: 'PostgreSQL Column Alias'
-page_description: 'In this tutorial, you will learn about PostgreSQL column aliases and how to use them to assign temporary names to columns in a query.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-column-alias/'
-ogImage: '/postgresqltutorial/customer-table.png'
-updatedOn: '2024-01-16T08:47:13+00:00'
+title: PostgreSQL Column Alias
+page_title: PostgreSQL Column Alias
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL column aliases and how to
+  use them to assign temporary names to columns in a query.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-column-alias/
+ogImage: /postgresqltutorial/customer-table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SELECT'
-  slug: 'postgresql-tutorial/postgresql-select'
+  title: PostgreSQL SELECT
+  slug: postgresql-tutorial/postgresql-select
 nextLink:
-  title: 'PostgreSQL ORDER BY'
-  slug: 'postgresql-tutorial/postgresql-order-by'
+  title: PostgreSQL ORDER BY
+  slug: postgresql-tutorial/postgresql-order-by
 ---
+
+<Admonition type="info" id="CTA">
+Column aliases work the same way on any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL column aliases and how to use them to assign temporary names to columns in a query.
 

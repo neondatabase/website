@@ -1,11 +1,14 @@
 ---
 title: Manage organizations using the Neon API
 summary: >-
-  Covers managing Neon Organizations through the Neon API, including handling
-  organization API keys, member management, and invitations, with distinctions
-  between personal and organization API key usage.
+  Neon Organization API endpoints for managing org API keys, members,
+  invitations, and project transfers. Organization API keys are auto-scoped to
+  the org; personal API keys require an explicit org_id parameter. Some
+  operations, including creating invitations, removing members, and transferring
+  projects, require a personal admin key and reject organization API keys. A
+  permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-03-13T19:35:31.433Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -160,7 +163,10 @@ Example response:
 
 ## List members
 
-Retrieves a paginated list of members for the specified organization. Each entry includes the member ID, user ID, organization role, join date, and the user's email. Member objects may include an optional `has_mfa` field indicating whether the member has TOTP (2FA) enabled.
+Retrieves a paginated list of members for the specified organization. Each entry includes the member ID, user ID, organization role, join date, and the user's email. Member objects may include optional `has_mfa` and `deactivated_at` fields.
+
+- `has_mfa`: Whether the member has TOTP (2FA) enabled.
+- `deactivated_at`: Timestamp indicating the member account is deactivated.
 
 You can sort by `email`, `role`, or `joined_at` (default), set `sort_order` to `asc` or `desc`, and use `limit` (1–500) to control page size. Use the `cursor` from the response `pagination.next` to fetch the next page.
 
@@ -197,7 +203,8 @@ Example response:
       },
       "user": {
         "email": "user@example.com",
-        "has_mfa": true
+        "has_mfa": true,
+        "deactivated_at": "2026-05-01T12:00:00Z"
       }
     }
   ],

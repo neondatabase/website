@@ -1,22 +1,28 @@
 ---
-title: 'PostgreSQL Data Types'
-page_title: 'Getting Started with PostgreSQL Data Types'
-page_description: 'In this tutorial, you will learn about PostgreSQL data types including Boolean, character, number, temporal, special types, and array.'
+title: PostgreSQL Data Types
+page_title: Getting Started with PostgreSQL Data Types
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL data types including
+  Boolean, character, number, temporal, special types, and array.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/'
-ogImage: '/postgresqltutorial/PostgreSQL-Data-Types-300x254.png'
-updatedOn: '2024-05-08T22:50:24+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-Data-Types-300x254.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'Export PostgreSQL Table to CSV File'
-  slug: 'postgresql-tutorial/export-postgresql-table-to-csv-file'
+  title: Export PostgreSQL Table to CSV File
+  slug: postgresql-tutorial/export-postgresql-table-to-csv-file
 nextLink:
-  title: 'PostgreSQL CREATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-create-table'
+  title: PostgreSQL CREATE TABLE
+  slug: postgresql-tutorial/postgresql-create-table
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL data types like Boolean, character, numeric, temporal, array, JSON, and UUID work the same way across every Postgres deployment, so what you learn here applies anywhere you run Postgres. For enterprises modernizing on the data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about **PostgreSQL data types** including Boolean, character, numeric, temporal, array, json, UUID, and special types.
 
-## PostgreSQL Data TypesOverview of PostgreSQL data types
+## Overview of PostgreSQL data types
 
 PostgreSQL supports the following data types:
 
@@ -107,7 +113,7 @@ Besides the primitive data types, PostgreSQL also provides several special data 
 - `point` – a geometric pair of numbers.
 - `lseg` – a line segment.
 - `polygon` – a closed geometric.
-- `inet` – an IP4 address.
+- `inet` – an IPv4 address.
 - `macaddr`– a MAC address.
 
 In this tutorial, we have introduced you to the PostgreSQL data types so that you can use them to create tables in the next tutorial.

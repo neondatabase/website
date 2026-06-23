@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to build your own Reverse Image Search engine in 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2024-06-11T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 Have you ever searched for an image using an... image? [Google Images](https://images.google.com/) is a widely used example of such reverse image search engine. Do you wonder how it's able to show highly similar images in the search results? Well, in this guide you will learn how to create such an image engine on your own. You will learn how to create a system that's able to index images into a collection, and return images that are highly similar to the uploaded one.
@@ -90,7 +90,7 @@ npm install dotenv llamaindex@0.3.4 uuid
 The above command installs the following packages:
 
 - [dotenv](https://npmjs.com/package/dotenv): A library for handling environment variables.
-- [llamaindex](https://npmjs.com/package/llamaindex): A data framework for creating LLM applications.
+- [LlamaIndex](https://npmjs.com/package/llamaindex): A data framework for creating LLM applications.
 - [uuid](https://npmjs.com/package/uuid): A library to generate RFC-compliant UUIDs in JavaScript.
 
 Then, make the following additions in your `tsconfig.json` file to make relative imports within the project easier:
@@ -146,7 +146,7 @@ Now, let's move on to using Postgres as the vector store to power your image sea
 
 ### Initialize Postgres Vector Store in LlamaIndex
 
-To index and query images (via their vector embeddings), you will use the Postgres-compatible `PGVectorStore` class by llamaindex. It enables you to write minimal code by extracting image features and creating vector embeddings under the hood. Inside `src` directory, create a `neon.ts` file with the following code:
+To index and query images (via their vector embeddings), you will use the Postgres-compatible `PGVectorStore` class by LlamaIndex. It enables you to write minimal code by extracting image features and creating vector embeddings under the hood. Inside `src` directory, create a `neon.ts` file with the following code:
 
 ```tsx
 // File: src/neon.ts
@@ -168,7 +168,7 @@ Now, let's move on to writing an API endpoint in the Astro application with whic
 
 ## Build the Image Indexing API Endpoint
 
-LlamaIndex in combination with ClipEmbedding, internally retrieves the remote images, extracts their features using the CLIP model, and generates their vector embeddings. This process involves analyzing various visual and semantic aspects of the image to create a numerical representation that captures its essence. By handling feature extraction and embedding generation, llamaindex enables you to focus on building the rest of your application.
+LlamaIndex in combination with ClipEmbedding, internally retrieves the remote images, extracts their features using the CLIP model, and generates their vector embeddings. This process involves analyzing various visual and semantic aspects of the image to create a numerical representation that captures its essence. By handling feature extraction and embedding generation, LlamaIndex enables you to focus on building the rest of your application.
 
 To index images via an API endpoint, create a file `src/pages/api/upsert.ts` with the following code:
 
@@ -321,7 +321,7 @@ Update the `index.astro` file in your `src/pages` directory with the following c
 
 The HTML above contains a form element with the id `fileUploadForm`, which allows users to upload image files. It consists of an input field of type file and a submit button labeled "Query". **The form is set to handle multipart/form-data encoding**.
 
-To programtically render the search results, you would need to fetch the response from `/api/query` endpoint and then create `img` HTML elements on the webpage. Add the following JavaScript to your index route.
+To programmatically render the search results, you would need to fetch the response from `/api/query` endpoint and then create `img` HTML elements on the webpage. Add the following JavaScript to your index route.
 
 ```html
 ---

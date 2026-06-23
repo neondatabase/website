@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Advanced'
-page_title: 'PostgreSQL Advanced'
-page_description: 'Learn advanced PostgreSQL features including stored procedures, triggers, views, indexing strategies, window functions, and JSON data manipulation'
+title: PostgreSQL Advanced
+page_title: PostgreSQL Advanced
+page_description: >-
+  Learn advanced PostgreSQL features including stored procedures, triggers,
+  views, indexing strategies, window functions, and JSON data manipulation
 prev_url: 'https://www.postgresqltutorial.com/postgresql-advanced/'
 ogImage: ''
-updatedOn: '2025-09-06T10:00:00+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL API'
-  slug: 'postgresql-api'
+  title: PostgreSQL API
+  slug: postgresql-api
 nextLink:
-  title: 'PostgreSQL PL/pgSQL Block Structure'
-  slug: 'postgresql-plpgsql/plpgsql-block-structure'
+  title: PostgreSQL PL/pgSQL Block Structure
+  slug: postgresql-plpgsql/plpgsql-block-structure
 ---
+
+<Admonition type="info" id="CTA">
+Advanced PostgreSQL features like PL/pgSQL, triggers, views, indexing, JSON functions, and window functions work the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The **PostgreSQL Advanced** section covers sophisticated PostgreSQL features and techniques for building enterprise-level applications. These advanced topics will help you optimize performance, implement complex business logic, and leverage PostgreSQL's powerful capabilities for modern application development.
 

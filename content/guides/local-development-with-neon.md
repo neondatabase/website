@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2024-11-05T00:00:00.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
@@ -38,7 +38,7 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 ### Quickstart
 
-1. Install the [**Neon CLI**](/docs/reference/neon-cli) by following the guide [here](/docs/reference/neon-cli#install).
+1. Install the [**Neon CLI**](/docs/cli) by following the guide [here](/docs/cli/install).
 
 2. **Connect your account**
 
@@ -181,7 +181,7 @@ docker-compose up -d
 ```
 
 <Admonition type="tip" title="Working offline?">
-The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entires to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
+The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entries to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
 
 However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
 
@@ -191,7 +191,7 @@ However, this solution requires an internet connection. To work offline, you'll 
 
 For instructions on editing your hosts file on different operating systems, see [this guide](https://www.hostinger.in/tutorials/how-to-edit-hosts-file).
 
-[dnsmask](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
+[dnsmasq](https://help.ubuntu.com/community/Dnsmasq) is another option [suggested by a Neon user](https://github.com/neondatabase/website/issues/2690) for resolving domain names when there is no internet connection.
 </Admonition>
 
 ### Connect your app

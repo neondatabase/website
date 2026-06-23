@@ -2,13 +2,16 @@
 title: Connect a Go application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
 summary: >-
-  How to connect a Go application to a Neon Postgres database using the pgx
-  library, including project setup and performing basic CRUD operations.
+  Connecting a Go application to Neon Postgres with pgx/v5 requires Go 1.21 or
+  later and a DATABASE_URL connection string passed via environment variable.
+  Use this page for raw SQL access with parameterized queries, not an ORM: it
+  walks through CREATE, SELECT, UPDATE, DELETE, bulk inserts via CopyFrom, and
+  multi-statement transactions with conn.Begin and defer tx.Rollback.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-02-15T20:51:54.157Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -557,14 +560,6 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/examples/tree/main/with-golang" description="Get started with Go and Neon using pgx" icon="github">Get started with Go and Neon using pgx</a>
-</DetailIconCards>
 
 ## Resources
 

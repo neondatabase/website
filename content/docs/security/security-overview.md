@@ -1,15 +1,17 @@
 ---
 title: Security overview
 summary: >-
-  Covers the security measures implemented by Neon, including SSL/TLS encryption
-  for secure connections, password enforcement with 60-bit entropy, abuse of
-  resources and unauthorized modifications policy, and the use of a proxy to
-  protect against unauthorized access.
+  Neon enforces SSL/TLS encryption (verify-full mode), 60-bit entropy
+  passwords, AES-256 data-at-rest encryption, IP allowlists (Scale plan),
+  and AWS PrivateLink private networking. A connection proxy blocks
+  unauthorized login attempts. The page also covers GitHub secret scanning,
+  protected branches, vulnerability management, and the HackerOne bug
+  bounty program.
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-04-09T18:00:00.000Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -98,7 +100,7 @@ All systems are hosted on AWS and Azure, where we have implemented specific secu
 
 - **Vulnerability Management with Orca and Oligo**
 
-  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS and Azure environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We leverage tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
+  Our vulnerability management program, integrated with Orca and Oligo, continuously scans all AWS and Azure environments for security issues, including misconfigurations, unpatched software, and exposed credentials. We use tagging to classify certain data types, enabling focused monitoring and scanning based on the sensitivity of the data. Automated alerts allow us to address vulnerabilities before they pose a risk to PII or other sensitive information. The vulnerabilities are remediated according to the defined SLAs to reduce the risk.
 
 - **Annual Audits and Continuous Penetration Testing**
 
@@ -120,6 +122,28 @@ To avoid leaking secrets, follow these security best practices:
 
 If you have questions about this integration or need help securing your credentials, contact us at `security@neon.tech`.
 
+## Rotate credentials
+
+Rotate your database credentials regularly, and immediately if one is exposed. A Neon connection string is built from a role and its password, so you rotate it by resetting the role's password. See [Reset a password](/docs/manage/roles#reset-a-password) for the Console, API, and SQL methods.
+
+After you reset a password, the old one stops working on the next connection. Copy the new connection string from the **Connect** modal on the Project Dashboard and roll it out everywhere it is stored, including deployment platform environment variables, CI/CD secrets, secret managers, and local `.env` files, before clients reconnect.
+
+### Rotate after a leak or breach
+
+If a credential is exposed, for example through a leaked `.env` file, a compromised deployment target, or a stolen device, rotate every affected credential rather than just one:
+
+1. Reset the password for every role that can log in, starting with the default role (often `neondb_owner`). Roles are branch-scoped, so reset the role on every branch where it can log in.
+2. Roll the new connection strings out to every secret store, then watch your application logs for `password authentication failed` errors, which flag a location you missed.
+3. Revoke any exposed Neon API keys and create new ones. See [Manage API keys](/docs/manage/api-keys).
+4. Tighten your [IP allowlist](#ip-allowlist-support) to limit which addresses can connect.
+5. Audit your roles and remove any you do not recognize.
+
+Neon has no single command to rotate everything at once. To rotate many roles, list every project, branch, and role, then loop the [reset-password API](/docs/manage/roles#reset-a-password-with-the-api).
+
+### Rotate without downtime
+
+Resetting a password cuts over all consumers at once. To rotate gradually, create a parallel role, grant it the access the old role had, and migrate consumers one service at a time, since both connection strings keep working during the migration. Reset the old role's password at the end to invalidate it. In most projects the original role owns database objects and cannot be dropped while it does, so resetting its password is what closes the leak. To remove the role later, [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of its objects, then [delete the role](/docs/manage/roles#delete-a-role).
+
 ## Abuse of resources
 
 Users must not engage in activities that result in unintended or non-permitted use of Neon resources, or that disrupt or degrade the service for other users. Prohibited activities include, but are not limited to, intentional or unintentional denial-of-service attacks, exceeding [rate limits](/docs/reference/api-reference#rate-limiting), using Neon for distributed computing projects, using Neon as general-purpose file storage, or other usage that falls outside the intended resource usage and limits of the applicable [Neon plan](/docs/introduction/plans).
@@ -131,6 +155,8 @@ Tampering with Neon's infrastructure, configurations, or any restricted settings
 ## Security reporting
 
 Neon adheres to the [securitytxt.org](https://securitytxt.org/) standard for transparent and efficient security reporting. For details on how to report potential vulnerabilities, please visit our [Security reporting](/docs/security/security-reporting) page or refer to our [security.txt](/security.txt) file.
+
+Neon also has a [public bug bounty program with HackerOne](/docs/security/security-reporting#bug-bounty-program-with-hackerone).
 
 ## Questions about our security measures?
 

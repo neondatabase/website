@@ -22,7 +22,7 @@ const styles = {
     1100: 'max-w-[1100px]',
     1088: 'max-w-[1088px]',
     960: 'max-w-[960px] md:px-5',
-    832: 'max-w-[832px]',
+    832: 'max-w-208',
     768: 'max-w-3xl',
     640: 'max-w-[640px]',
     576: 'max-w-[576px]',

@@ -2,20 +2,24 @@
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
 summary: >-
-  Covers the use, generation, and storage of embeddings in Postgres for AI
-  applications, detailing how to transform unstructured data into structured
-  formats and measure text similarity through vector distance calculations.
+  Embeddings are floating-point vectors that encode semantic meaning from
+  unstructured data, enabling similarity search by computing vector distance in
+  Postgres. Read this page to understand how embeddings work before building AI
+  features such as semantic search, recommendations, or anomaly detection on
+  Neon. Topics include distance metrics (Euclidean, Manhattan, cosine),
+  generating embeddings with OpenAI models, and storing vectors in Postgres
+  using the pgvector extension.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.030Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
 
 ## What are embeddings?
 
-When working with unstructured data, a common objective is to transform it into a more structured format that is easier to analyze and retrieve. This transformation can be achieved through the use of 'embeddings', which are vectors containing an array of floating-point numbers that represent the features or dimensions of your data. For example, a sentence like "The cow jumped over the moon" might be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
+Embeddings transform unstructured data into a structured format that's easier to analyze and retrieve. They're vectors containing an array of floating-point numbers that represent the features or dimensions of your data. For example, a sentence like "The cow jumped over the moon" might be represented by an embedding that looks like this: [0.5, 0.3, 0.1].
 
-The advantage of embeddings is that they allow us to measure the similarity between different pieces of text. By calculating the distance between two embeddings, we can assess their relatedness - the smaller the distance, the greater the similarity, and vice versa. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
+Embeddings let you measure similarity between pieces of text. By calculating the distance between two embeddings, you can assess how related they are — the smaller the distance, the greater the similarity. This quality is particularly useful as it enables embeddings to capture the underlying meaning of the text.
 
 Take the following three sentences, for example:
 
@@ -34,11 +38,11 @@ You can determine the most similar sentences by following these steps:
 
 3. Identify the pair of embeddings with the shortest distance between them.
 
-When we apply this process, it is likely that sentences 1 and 2, both of which involve jumping cattle, will emerge as the most related according to a distance calculation.
+Applying this process, sentences 1 and 2 should come out as most similar (both involve jumping cattle).
 
 ## Vector similarity search
 
-Transforming data into embeddings and computing similarities between one or more items is referred to as vector search or similarity search. This process has a wide range of applications, including:
+Transforming data into embeddings and computing similarities between items is called vector search or similarity search. This process has a wide range of applications, including:
 
 - **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
 - **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
@@ -77,7 +81,7 @@ curl https://api.openai.com/v1/embeddings \
 Running the command above requires an OpenAI API key, which must be obtained from [OpenAI](https://platform.openai.com/).
 </Admonition>
 
-Upon successful execution, you'll receive a response similar to the following:
+If it works, you'll get a response like this:
 
 ```json
 {
@@ -105,7 +109,7 @@ Upon successful execution, you'll receive a response similar to the following:
 
 To learn more about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings). Here, you'll find an example of obtaining embeddings from an [Amazon fine-food reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews) dataset supplied as a CSV file. See [Obtaining the embeddings](https://platform.openai.com/docs/guides/embeddings/use-cases).
 
-There are many embedding models you can use, such as those provided by Mistral AI, Cohere, Hugging Face, etc. AI tools like [LanngChain](https://www.langchain.com/) provide interfaces and integrations for working with a variety of models. See [LangChain: Text embedding models](https://js.langchain.com/v0.1/docs/integrations/text_embedding/). You'll also find a [Neon Postgres guide](https://js.langchain.com/v0.1/docs/integrations/vectorstores/neon/) on the LangChain site and [Class NeonPostgres](https://v02.api.js.langchain.com/classes/langchain_community_vectorstores_neon.NeonPostgres.html), which provides an interface for working with a Neon Postgres database.
+There are many embedding models you can use, such as those provided by Mistral AI, Cohere, Hugging Face, etc. AI tools like [LangChain](https://www.langchain.com/) provide interfaces and integrations for working with a variety of models. See [LangChain: Text embedding models](https://js.langchain.com/v0.1/docs/integrations/text_embedding/). You'll also find a [Neon Postgres guide](https://js.langchain.com/v0.1/docs/integrations/vectorstores/neon/) on the LangChain site and [Class NeonPostgres](https://v02.api.js.langchain.com/classes/langchain_community_vectorstores_neon.NeonPostgres.html), which provides an interface for working with a Neon Postgres database.
 
 ## Storing vector embeddings in Postgres
 
@@ -115,7 +119,7 @@ Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, whic
 CREATE EXTENSION vector;
 ```
 
-After installing the `pgvector` extension, you can create a table to store your embeddings. For example, you might define a table similar to the following to store your embeddings:
+After installing `pgvector`, you can create a table to store your embeddings. For example:
 
 ```sql
 CREATE TABLE items(id BIGSERIAL PRIMARY KEY, embedding VECTOR(1536));

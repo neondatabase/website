@@ -1,46 +1,68 @@
 ---
 title: AI tools for documentation
-subtitle: Claude and Cursor rules and commands used when working on Neon docs
+subtitle: Claude commands available when working on Neon docs
 summary: >-
-  Lists the AI tools (Claude agents/commands and Cursor rules) available in the
-  website repo for documentation work, so you can use the same standards in
-  either environment.
+  Claude slash commands in the Neon website repo automate common documentation
+  tasks. Includes writing and rewriting pages, quality checks, MDX validation,
+  PR descriptions, changelog generation, and glossary audits. Use this reference
+  to choose the right command for each task. Commands are stored in
+  .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.061Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The Neon website repo includes rules and commands for **Claude** and **Cursor** so that documentation work follows the same standards no matter which tool you use. All changes are reviewed by humans via pull requests.
+The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.
 
-## Cursor (`.cursor/`)
+Run `/list-doc-tools` in Claude to see the full list with descriptions, or browse the files under `.claude/commands/` in the [website repository](https://github.com/neondatabase/website).
 
-| Tool                      | Description                                                                                                                                                                                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Neon changelog**        | Generate next Friday's changelog draft or a changelog for a specific date; template with titled dropdown sections. Rule: `neon-changelog.mdc`.                                                                                             |
-| **Docs editing**          | When editing docs/guides/changelog: apply Neon voice (see [contribution guide](/docs/community/contribution-guide)), use shared content, keep cross-doc consistency, link to glossary, follow redirect workflow. Rule: `docs-editing.mdc`. |
-| **Docs use Claude**       | Points to `.claude/` agents and commands so Cursor can load them for style and workflows. Rule: `docs-use-claude.mdc`.                                                                                                                     |
-| **Docs PR report**        | Weekly doc review: report of merged PRs across monitored repos (default: since last Friday), grouped by category with docs-impact indicators. Reports to ~/docs-reviews/. Rule: `docs-pr-report.mdc`.                                      |
-| **Consistency check**     | Find other places that say the same thing; suggest a single source or aligned wording. Skill: `.cursor/skills/consistency-check.md`.                                                                                                       |
-| **Docs glossary updater** | Compare a doc to the glossary; list missing or review terms. Skill: `.cursor/skills/docs-glossary-updater.md`.                                                                                                                             |
-| **Redirect and links**    | After moving a file, ensure redirectFrom and suggest link/nav updates. Skill: `.cursor/skills/redirect-and-links.md`.                                                                                                                      |
-| **Docs Roadmap updater**  | Review changelog (default: past 1 month) and sync the introduction roadmap with "What we've shipped recently." Skill: `.cursor/skills/docs-roadmap-updater.md`.                                                                            |
+## Writing content
 
-## Claude (`.claude/`)
+| Command           | Description                                                                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `/write-content`  | Full orchestrated workflow for new pages or substantial rewrites: IA specialist → drafter → refiner → syntax validator.                   |
+| `/simple-content` | Lighter single-thread workflow with confirmation at each step. Use for edits to existing pages or smaller additions.                      |
+| `/review-content` | Review a page for terminology, voice, structure, and MDX compliance. Produces a structured findings report with an option to apply fixes. |
+| `/humanize`       | Remove AI writing patterns and apply Neon voice: contractions, active voice, direct address, concise sentences.                           |
+| `/improve-intro`  | Rewrite just the first paragraph of a page to match Neon style.                                                                           |
+| `/golden-corpus`  | Load exemplary doc files by type for style and structure reference.                                                                       |
 
-| Tool                      | Description                                                                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **golden-corpus**         | Exemplary doc files by type; use for style, tone, and structure.                                                                            |
-| **write-content**         | Full workflow: IA → drafter → refiner → syntax-validator, then git/PR.                                                                      |
-| **simple-content**        | Lighter workflow with user confirmation at each step.                                                                                       |
-| **review-content**        | One-off review for style, standards, and technical accuracy.                                                                                |
-| **redirect-update**       | Step-by-step for moves/renames: redirectFrom, links, navigation. (Same workflow as Cursor **Redirect and links**.)                          |
-| **triage-changelog**      | Extract PRs from Console/CLI/MCP/Storage/Compute and draft changelog.                                                                       |
-| **docs-prime**            | Project structure and key paths for the doc ecosystem.                                                                                      |
-| **improve-intro**         | Improve the first paragraph of a doc page.                                                                                                  |
-| **navigation-principles** | How `navigation.yaml` works (nav, subnav, items).                                                                                           |
-| **doc-context-bridge**    | Points to `.cursor/` rules and skills so Claude can use Consistency check, Docs glossary updater, Redirect and links, Docs Roadmap updater. |
-| **list-doc-ai-tools**     | Prints the list of doc AI tools when run or when asked (for example "what doc AI tools are available?").                                    |
-| **Agents**                | content-drafter, content-planner, content-refiner, ia-specialist, syntax-validator, supervisor; extract-analyze-\* for changelog.           |
+## Docs quality
 
-For full details and when to use each tool, see the files under `.cursor/` and `.claude/commands/` or `.claude/agents/` in the [website repository](https://github.com/neondatabase/website).
+| Command              | Description                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| `/validate`          | Pre-commit check: frontmatter, stray h1 headings, navigation entry, image paths, em dashes, lint. |
+| `/check-consistency` | Find other pages that say the same thing; surface duplication and drift.                          |
+| `/update-glossary`   | Find glossary gaps in a doc file (Mode A), or audit the glossary itself (Mode B).                 |
+| `/redirect-update`   | After moving or renaming a file: add `redirectFrom`, update links and navigation.                 |
+
+## Pull requests
+
+| Command              | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `/update-pr`         | Draft or update a PR title and description from changed files and commits.   |
+| `/add-preview-links` | Add Vercel preview links to a PR description for every changed content file. |
+
+## Changelog and roadmap
+
+| Command             | Description                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `/create-pr-report` | Weekly report of merged PRs across monitored repos. Supports PR deep dives and follow-on changelog or docs PR workflows. |
+| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content and titled dropdown sections.       |
+| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries.                                                             |
+
+## Reference and navigation
+
+| Command                  | Description                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `/navigation-principles` | Reference for `navigation.yaml` structure and how to add pages and sections. |
+| `/docs-prime`            | Load project structure and key paths into context.                           |
+| `/list-doc-tools`        | Print the full list of available commands with descriptions.                 |
+
+## Agents
+
+The `.claude/agents/` directory contains specialized sub-agents used by the writing workflow commands:
+
+- **content-drafter**, **content-planner**, **content-refiner**, **ia-specialist**, **syntax-validator**, **supervisor** — write, plan, review, structure, validate, and orchestrate multi-step workflows
+- **extract-analyze-console**, **-cli**, **-mcp**, **-storage**, **-compute** — changelog extraction by repo, used by `/create-pr-report`
 
 <NeedHelp/>

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ROW_NUMBER Function'
-page_title: 'PostgreSQL ROW_NUMBER() Explained with Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ROW_NUMBER function to assign a unique integer value to each row in a result set.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-window-function/postgresql-row_number/'
-ogImage: '/postgresqltutorial/products_product_groups_tables.png'
-updatedOn: '2024-02-01T15:58:59+00:00'
+title: PostgreSQL ROW_NUMBER Function
+page_title: PostgreSQL ROW_NUMBER() Explained with Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ROW_NUMBER function
+  to assign a unique integer value to each row in a result set.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-window-function/postgresql-row_number/
+ogImage: /postgresqltutorial/products_product_groups_tables.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RANK Function'
-  slug: 'postgresql-window-function/postgresql-rank-function'
+  title: PostgreSQL RANK Function
+  slug: postgresql-window-function/postgresql-rank-function
 nextLink:
-  title: 'PostgreSQL JSON Functions'
-  slug: 'postgresql-window-function/../postgresql-json-functions'
+  title: PostgreSQL JSON Functions
+  slug: postgresql-window-function/../postgresql-json-functions
 ---
+
+<Admonition type="info" id="CTA">
+The ROW_NUMBER() function works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROW_NUMBER()` function to assign a unique integer value to each row in a result set.
 

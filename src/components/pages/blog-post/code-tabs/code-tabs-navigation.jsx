@@ -2,13 +2,28 @@
 
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
+import { CodeTabsContext } from 'contexts/code-tabs-context';
 import { cn } from 'utils/cn';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const CodeTabsNavigation = ({ items, highlightedItems }) => {
+  const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const activeIndex = items.findIndex(({ label }) => label === activeTab);
+    if (activeIndex !== -1) setCurrentIndex(activeIndex);
+  }, [activeTab, items]);
+
+  const handleTabClick = (index) => {
+    const label = items[index]?.label;
+    setCurrentIndex(index);
+    setActiveTab(label);
+    sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'CodeTab' });
+  };
 
   return (
     <>
@@ -23,7 +38,8 @@ const CodeTabsNavigation = ({ items, highlightedItems }) => {
             )}
             key={`lb-${index}`}
             type="button"
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => handleTabClick(index)}
+            onKeyDown={() => handleTabClick(index)}
           >
             {label}
           </button>

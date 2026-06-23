@@ -4,13 +4,6 @@
 
 **Purpose:** To guide the user through getting an API key and making their first successful API call.
 
-**When to use this prompt:** Copy and paste this into your AI assistant when you want to:
-- Get set up with a Neon API key for the first time
-- Make your first API call to verify everything works
-- Understand the basics of Neon API authentication
-
----
-
 ## Step 1: Get Your Neon API Key
 
 Before you can use the Neon API, you need an API key. Here's how to create one:
@@ -112,47 +105,11 @@ All three options return your projects:
 
 ---
 
-## Next Steps
-
-Once your first API call works, here are common operations:
-
-### Create a Branch
-
-Use the `project_id` from the list projects response:
-
-**curl:**
-```bash
-curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{"branch": {"name": "dev-branch"}}'
-```
-
-**TypeScript SDK:**
-```typescript
-const response = await apiClient.createProjectBranch('project-id-here', {
-  branch: { name: 'dev-branch' },
-});
-console.log(response.data.branch);
-```
-
-**Python SDK:**
-```python
-branch = neon.branch_create(
-    project_id="project-id-here",
-    branch={"name": "dev-branch"}
-)
-print(branch)
-```
-
----
-
 ## Key Resources
 
 - **Interactive API Reference:** https://api-docs.neon.tech/reference/getting-started-with-neon-api (try endpoints directly)
-- **Full API Documentation:** https://neon.tech/docs/reference/api-reference
-- **SDKs:** https://neon.tech/docs/reference/sdk
-- **Comprehensive AI Rules:** https://neon.tech/docs/ai/ai-rules-neon-api (for deeper AI integration)
+- **Full API Documentation:** https://neon.com/docs/reference/api-reference
+- **SDKs:** https://neon.com/docs/reference/sdk
 
 ---
 

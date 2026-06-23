@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL C#: Selecting Data'
 page_title: 'PostgreSQL C#: Selecting Data'
-page_description: 'In this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C# program.'
+page_description: >-
+  In this tutorial, you will learn how to retrieve data from a PostgreSQL table
+  from the C# program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-select/'
 ogImage: ''
-updatedOn: '2024-05-21T03:40:01+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Deleting Data'
-  slug: 'postgresql-csharp/postgresql-csharp-delete'
+  slug: postgresql-csharp/postgresql-csharp-delete
 nextLink:
   title: 'PostgreSQL C#: Transaction'
-  slug: 'postgresql-csharp/postgresql-csharp-transaction'
+  slug: postgresql-csharp/postgresql-csharp-transaction
 ---
+
+<Admonition type="info" id="CTA">
+Selecting data from PostgreSQL with C# and Npgsql works the same way against any Postgres database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed cloud Postgres that's fast, secure, and natively integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C\# program.
 

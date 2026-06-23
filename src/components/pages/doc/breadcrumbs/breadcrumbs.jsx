@@ -23,7 +23,14 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
 
     {breadcrumbs.map(({ title, slug }, index) => {
       const isLast = index === breadcrumbs.length - 1;
-      const href = slug === 'guides' ? LINKS.guides : `${baseUrl}${slug}`;
+      let href;
+      if (slug === 'guides') {
+        href = LINKS.guides;
+      } else if (slug === 'faqs') {
+        href = LINKS.faqs;
+      } else {
+        href = `${baseUrl}${slug}`;
+      }
 
       return (
         <Fragment key={index}>

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_path_query() Function'
-page_title: 'PostgreSQL jsonb_path_query() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_path_query() function to query JSONB data using JSON path expressions.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query/'
+title: PostgreSQL jsonb_path_query() Function
+page_title: PostgreSQL jsonb_path_query() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_path_query()
+  function to query JSONB data using JSON path expressions.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query/
 ogImage: ''
-updatedOn: '2024-02-23T13:41:27+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON Path'
-  slug: 'postgresql-json-functions/postgresql-json-path'
+  title: PostgreSQL JSON Path
+  slug: postgresql-json-functions/postgresql-json-path
 nextLink:
-  title: 'PostgreSQL jsonb_path_query_array() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query_array'
+  title: PostgreSQL jsonb_path_query_array() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_query_array
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_path_query()` function works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_path_query()` function to query `JSONB` data using JSON path expressions.
 
@@ -41,7 +48,7 @@ Let’s take some examples of using the `jsonb_path_query()` function.
 
 ### Setting up a sample table
 
-First, [create a table](../postgresql-tutorial/postgresql-create-table) named `products`with a JSONB column names `attributes` to store product attributes:
+First, [create a table](../postgresql-tutorial/postgresql-create-table) named `products` with a JSONB column names `attributes` to store product attributes:
 
 ```sql
 CREATE TABLE products (

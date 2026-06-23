@@ -2,14 +2,26 @@
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
 summary: >-
-  Step-by-step guide for integrating Backblaze B2 with Neon to store files and
-  track metadata in your Neon database, enabling efficient management of
-  unstructured data.
+  Backblaze B2 and Neon integration guide that splits file storage from
+  structured data: B2 holds the objects (images, videos, backups) via
+  S3-compatible presigned upload URLs, while Neon stores file metadata (object
+  key, public URL, user ID, timestamp) in a Postgres table. Use this page when
+  you need affordable object storage paired with relational metadata queries and
+  want to avoid storing files in Postgres itself. Covers CORS setup for
+  browser-direct uploads, bucket and application-key creation, and backend
+  implementations in JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask,
+  boto3).
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.009Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate Backblaze B2 with Neon by storing file metadata (like the file id, name and URL) in your Neon database, while using B2 for file storage.
 

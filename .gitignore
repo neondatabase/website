@@ -44,6 +44,7 @@ jspm_packages/
 
 # Optional eslint cache
 .stylelintcache
+.prettiercache
 
 # Optional REPL history
 .node_repl_history
@@ -69,7 +70,7 @@ public/robots.txt
 public/md
 public/docs/**/llms.txt
 public/docs/llms-full.txt
-public/pricing.md
+src/utils/data/github-stars.generated.json
 
 # Mac files
 .DS_Store
@@ -92,3 +93,7 @@ package-lock.json
 
 # Evals directory (test validation for documentation)
 .evals/
+
+# Blog content gets imported automatically
+content/blog
+scripts/docs-checks/neonctl/fragments/

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL LTRIM() Function'
-page_title: 'PostgreSQL LTRIM() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL LTRIM() function to remove specified characters from the beginning of a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ltrim/'
+title: PostgreSQL LTRIM() Function
+page_title: PostgreSQL LTRIM() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL LTRIM() function to
+  remove specified characters from the beginning of a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ltrim/
 ogImage: ''
-updatedOn: '2024-01-27T13:51:25+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-trim-function'
+  title: PostgreSQL TRIM() Function
+  slug: postgresql-string-functions/postgresql-trim-function
 nextLink:
-  title: 'PostgreSQL LOWER() Function'
-  slug: 'postgresql-string-functions/postgresql-lower'
+  title: PostgreSQL LOWER() Function
+  slug: postgresql-string-functions/postgresql-lower
 ---
+
+<Admonition type="info" id="CTA">
+The LTRIM() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or on [Neon](https://neon.com). If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers top-tier performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LTRIM()` function to remove specified characters from the beginning of a string.
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL AVG Function'
-page_title: 'PostgreSQL AVG function'
-page_description: 'In this tutorial, you will learn how to use PostgreSQL AVG function to calculate average value of a numeric column.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/'
-ogImage: '/postgresqltutorial/payment-table.png'
-updatedOn: '2024-01-25T13:26:11+00:00'
+title: PostgreSQL AVG Function
+page_title: PostgreSQL AVG function
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL AVG function to
+  calculate average value of a numeric column.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-avg-function/
+ogImage: /postgresqltutorial/payment-table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Aggregate Functions'
-  slug: 'postgresql-aggregate-functions/'
+  title: PostgreSQL Aggregate Functions
+  slug: postgresql-aggregate-functions/
 nextLink:
-  title: 'PostgreSQL COUNT Function'
-  slug: 'postgresql-aggregate-functions/postgresql-count-function'
+  title: PostgreSQL COUNT Function
+  slug: postgresql-aggregate-functions/postgresql-count-function
 ---
+
+<Admonition type="info" id="CTA">
+The AVG() function works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise looking for managed Postgres built for the AI era, Lakebase delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `AVG()` function to calculate the average value of a set.
 

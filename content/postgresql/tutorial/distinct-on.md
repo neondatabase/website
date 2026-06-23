@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL DISTINCT ON'
-page_title: 'PostgreSQL DISTINCT ON'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DISTINCT ON clause to retrieve distinct rows based on a specific column.'
+title: PostgreSQL DISTINCT ON
+page_title: PostgreSQL DISTINCT ON
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DISTINCT ON clause
+  to retrieve distinct rows based on a specific column.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-distinct-on/'
 ogImage: ''
-updatedOn: '2024-01-16T09:44:44+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SELECT DISTINCT'
-  slug: 'postgresql-tutorial/postgresql-select-distinct'
+  title: PostgreSQL SELECT DISTINCT
+  slug: postgresql-tutorial/postgresql-select-distinct
 nextLink:
-  title: 'PostgreSQL WHERE'
-  slug: 'postgresql-tutorial/postgresql-where'
+  title: PostgreSQL WHERE
+  slug: postgresql-tutorial/postgresql-where
 ---
+
+<Admonition type="info" id="CTA">
+DISTINCT ON is standard PostgreSQL behavior, so the techniques here work on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DISTINCT ON` clause to retrieve distinct rows based on a specific column.
 

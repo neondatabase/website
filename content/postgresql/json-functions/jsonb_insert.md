@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_insert() Function'
-page_title: 'PostgreSQL jsonb_insert() Function'
-page_description: 'How to use the PostgreSQL jsonb_insert() function to insert a new element into a JSON array or a key/value pair into a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/'
+title: PostgreSQL jsonb_insert() Function
+page_title: PostgreSQL jsonb_insert() Function
+page_description: >-
+  How to use the PostgreSQL jsonb_insert() function to insert a new element into
+  a JSON array or a key/value pair into a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/
 ogImage: ''
-updatedOn: '2024-02-25T01:22:46+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL JSON Extract'
-  slug: 'postgresql-json-functions/postgresql-json-extract'
+  title: PostgreSQL JSON Extract
+  slug: postgresql-json-functions/postgresql-json-extract
 nextLink:
-  title: 'PostgreSQL jsonb_set() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_set'
+  title: PostgreSQL jsonb_set() Function
+  slug: postgresql-json-functions/postgresql-jsonb_set
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_insert()` function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres on your laptop, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with strong performance, enterprise-grade security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_insert()` function to insert a new element into a JSON array or a key/value pair into a JSON object.
 
@@ -108,8 +115,8 @@ Output:
 
 In this example:
 
-- The original array is `\[1,2,\[3,4],6]`.
-- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[3,4]`, and `0` specifies the first element of the nested array.
+- The original array is `\[1,2,\[4,5],6]`.
+- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[4,5]`, and `0` specifies the first element of the nested array.
 - `3` is the new value.
 
 Therefore the `jsonb_insert()` function inserts the new value 3 before the first element of the nested array.

@@ -2,11 +2,14 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 summary: >-
-  Step-by-step guide for connecting a NestJS application to a Neon project,
-  including project setup, dependency installation, and configuration of
-  database credentials for secure access.
+  NestJS-to-Neon integration uses a DatabaseModule that provisions a connection
+  pool via node-postgres, postgres.js, or the Neon serverless driver and injects
+  it as a NestJS provider. Choose this guide when adding a Neon serverless
+  Postgres backend to a TypeScript NestJS project without an ORM. The steps
+  cover Neon project creation, DATABASE_URL configuration in .env, and wiring
+  a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.026Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
@@ -140,7 +143,7 @@ export class DatabaseModule {}
 
 ### 2. Create a Service for Database Interaction
 
-Next, implement a service to facilitate interaction with your Postgres database. This service will use the database connection defined in the DatabaseModule.
+Next, implement a service to handle interaction with your Postgres database. This service will use the database connection defined in the DatabaseModule.
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
@@ -233,15 +236,5 @@ When you run `npm run start` you can expect to see output similar to the followi
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nestjs" description="Get started with NestJS and Neon" icon="github">Get started with NestJS and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

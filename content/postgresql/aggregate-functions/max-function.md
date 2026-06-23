@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL MAX Function'
-page_title: 'PostgreSQL MAX() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL MAX() function to get the maximum value of a set of values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/'
-ogImage: '/postgresqltutorial/payment-table.png'
-updatedOn: '2024-01-26T03:03:53+00:00'
+title: PostgreSQL MAX Function
+page_title: PostgreSQL MAX() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL MAX() function to get the
+  maximum value of a set of values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-max-function/
+ogImage: /postgresqltutorial/payment-table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL COUNT Function'
-  slug: 'postgresql-aggregate-functions/postgresql-count-function'
+  title: PostgreSQL COUNT Function
+  slug: postgresql-aggregate-functions/postgresql-count-function
 nextLink:
-  title: 'PostgreSQL MIN() Function'
-  slug: 'postgresql-aggregate-functions/postgresql-min-function'
+  title: PostgreSQL MIN() Function
+  slug: postgresql-aggregate-functions/postgresql-min-function
 ---
+
+<Admonition type="info" id="CTA">
+The MAX() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, in [Neon](https://neon.com), or anywhere else. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `MAX()` function to get the maximum value of a set of values.
 

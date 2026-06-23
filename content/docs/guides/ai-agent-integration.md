@@ -2,12 +2,16 @@
 title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 summary: >-
-  Covers the technical implementation of database provisioning, versioning, user
-  upgrades, and usage monitoring for AI agent platforms using the Neon agent
-  plan.
+  The Neon Agent Plan integration guide explains how to provision per-tenant
+  Postgres databases, transfer projects between free and paid organizations, and
+  implement snapshot-based database versioning using the Neon API. AI agent
+  platform builders use this guide when embedding Neon as database
+  infrastructure for their users, covering the full lifecycle from free-tier
+  project creation through paid upgrades and PITR/snapshot undo workflows.
+  Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-03T12:00:00.000Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -69,15 +73,15 @@ Each organization has different limits that apply to all projects created within
 
 | Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
 | ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Max branches**         | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 10 per project    | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
+| **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
+| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
 | **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **Restore window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min autosuspend**      | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
+| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 
-- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 10. On paid projects, scheduled backup snapshots do not count toward this limit. This significantly impacts versioning strategies.
+- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 100. On paid projects, scheduled backup snapshots do not count toward this limit. This significantly impacts versioning strategies.
 - **Branch limits**: Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots.
 - **Compute limits**: Free projects can autoscale up to 2 CU, while paid projects can scale up to 16 CU for more demanding workloads.
 
@@ -324,13 +328,13 @@ AI agents and codegen platforms need robust database versioning to manage schema
 
 ### Point-in-time recovery (PITR)
 
-Use PITR for recent history. The [restore window](/docs/introduction/restore-window) differs between your two organizations:
+Use PITR for recent history. The [history window](/docs/introduction/history-window) differs between your two organizations:
 
 - **Free organization (sponsored by Neon)**: 1 day of point-in-time history (included at no charge)
 - **Paid organization**: Up to 7 days of point-in-time history (billed at $0.20/GB-month for change history)
-- **Instant restore**: Restore databases to any point within the restore window in seconds
+- **Instant restore**: Restore a database to any point in time that still falls within the **history window** (typically seconds using Neon's instant restore).
 
-The Free organization provides 1 day of restore window, while the Paid organization provides up to 7 days. Factor these restore windows into your platform's feature offerings and set appropriate user expectations for each tier.
+The Free organization provides 1 day of history for **instant restore**, while the Paid organization provides up to 7 days. Factor these limits into your platform's feature offerings and set appropriate user expectations for each tier.
 
 Example creating a branch from 2 hours ago using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
 
@@ -351,17 +355,17 @@ curl --request POST \
 
 ### Snapshots for longer retention
 
-Use snapshots (branches) for versions you want to keep beyond the [restore window](/docs/introduction/restore-window):
+Use snapshots (branches) for versions you want to keep beyond the [history window](/docs/introduction/history-window):
 
 - **Persistent versions**: Keep snapshots as long as needed
 - **Named versions**: Give meaningful names to important database states
 - **Storage cost**: Snapshots count toward storage usage
-- **Manual snapshot limits**: Free projects: 1 manual snapshot max; Paid projects: 10 manual snapshots max (on paid plans, scheduled backup snapshots do not count)
+- **Manual snapshot limits**: Free projects: 1 manual snapshot max; Paid projects: 100 manual snapshots max (on paid plans, scheduled backup snapshots do not count)
 
 <Admonition type="important">
-**Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
+**Manual snapshot limits:** Free organization projects can only maintain **1 manual snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **100 manual snapshots** simultaneously. On paid plans, snapshots created by backup schedules do not count toward this limit. Design your versioning UI accordingly.
 
-**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month.
 </Admonition>
 
 Example creating a snapshot:
@@ -400,7 +404,7 @@ Combine both methods for the best user experience:
 
 1. **Use PITR for recent history**: Fast, automatic undo/redo (1 day for Free tier, up to 7 days for Paid tier)
 2. **Create snapshots for milestones**: Preserve important versions (releases, working states) as branches
-3. **Manage manual snapshot limits**: Free tier users can only keep 1 manual snapshot; implement a "replace snapshot" workflow. Paid tier users get 10 manual snapshots (on paid plans, scheduled backup snapshots do not count toward this limit).
+3. **Manage manual snapshot limits**: Free tier users can only keep 1 manual snapshot; implement a "replace snapshot" workflow. Paid tier users get 100 manual snapshots (on paid plans, scheduled backup snapshots do not count toward this limit).
 4. **Set user expectations**: Explain that recent history restores instantly, older versions may take longer
 5. **Automate cleanup**: Delete old snapshots that are no longer needed to control storage costs and stay within limits
 
@@ -425,7 +429,7 @@ Development branches are:
 - **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
-**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **1,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
+**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects have **custom limits available** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
 Example creating a development branch using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
@@ -466,14 +470,7 @@ This workflow prevents common issues like development data contaminating product
 
 ### Track usage per project
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve consumption metrics for your organizations and projects using these endpoints:
-
-| Endpoint                                                                                                         | Description                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                |
-| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) |
+You can use the Neon API to retrieve consumption metrics for your organizations and projects using the [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, which provides detailed metrics per project at hourly, daily, or monthly granularity.
 
 Available metrics:
 
@@ -481,6 +478,10 @@ Available metrics:
 - `compute_time_seconds`: CPU seconds consumed
 - `written_data_bytes`: Data written to all branches
 - `synthetic_storage_size_bytes`: Total storage used
+
+<Admonition type="tip">
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+</Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 

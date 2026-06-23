@@ -1,17 +1,24 @@
 ---
 title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
 page_title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
-page_description: 'Learn about PostgreSQL 18 psql improvements including pipeline query commands, prepared statement support, improved prompt options, and improved workflow capabilities that make database development more efficient.'
+page_description: >-
+  Learn about PostgreSQL 18 psql improvements including pipeline query commands,
+  prepared statement support, improved prompt options, and improved workflow
+  capabilities that make database development more efficient.
 ogImage: ''
-updatedOn: '2025-08-02T10:30:00+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 pg_stat_io Improvements'
-  slug: 'postgresql-18/pg-stat-io'
+  title: PostgreSQL 18 pg_stat_io Improvements
+  slug: postgresql-18/pg-stat-io
 nextLink:
-  title: 'PostgreSQL 18 Autovacuum Maintenance Configuration'
-  slug: 'postgresql-18/autovacuum-maintenance-configuration'
+  title: PostgreSQL 18 Autovacuum Maintenance Configuration
+  slug: postgresql-18/autovacuum-maintenance-configuration
 ---
+
+<Admonition type="info" id="CTA">
+The psql improvements covered here ship with PostgreSQL 18 itself, so pipeline queries, prepared statement commands, and the new prompt options work against any Postgres deployment. If you're an enterprise running AI workloads on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated so your operational and analytical data live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.
 
@@ -49,7 +56,7 @@ PostgreSQL 18 introduces seven new pipeline-related commands:
 
 - `\getresults` - Retrieves and displays results from previously sent pipeline queries.
 
-All these commands work together to allow you to manage complex query sequences efficiently. For this you need to make sure that you have `psql` 18 beta or later installed, as these commands are not available in earlier versions.
+All these commands work together to allow you to manage complex query sequences efficiently. For this, you need to make sure that you have `psql` 18 beta or later installed, as these commands are not available in earlier versions.
 
 ### Basic Pipeline Example
 

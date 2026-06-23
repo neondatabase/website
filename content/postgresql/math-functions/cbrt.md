@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CBRT() Function'
-page_title: 'PostgreSQL CBRT() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CBRT() function to calculate the cube root of a number.'
+title: PostgreSQL CBRT() Function
+page_title: PostgreSQL CBRT() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CBRT() function to
+  calculate the cube root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-cbrt/'
 ogImage: ''
-updatedOn: '2024-04-18T02:16:40+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CEIL() Function'
-  slug: 'postgresql-math-functions/postgresql-ceil'
+  title: PostgreSQL CEIL() Function
+  slug: postgresql-math-functions/postgresql-ceil
 nextLink:
-  title: 'PostgreSQL DIV() Function'
-  slug: 'postgresql-math-functions/postgresql-div'
+  title: PostgreSQL DIV() Function
+  slug: postgresql-math-functions/postgresql-div
 ---
+
+<Admonition type="info" id="CTA">
+The CBRT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CBRT()` function to calculate the cube root of a number.
 

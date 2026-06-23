@@ -3,13 +3,18 @@ title: Postgres query reference
 subtitle: Find examples of commonly-used Postgres queries for basic to advanced
   operations
 summary: >-
-  Covers examples of commonly-used Postgres queries for creating tables,
-  modifying columns, and performing data operations such as inserting, updating,
-  deleting, and selecting data.
+  A ready-to-copy Postgres SQL reference covering DDL, DML, SELECT, JOINs,
+  transactions, indexes, views, stored procedures, functions, and performance
+  analysis. Use this page when you need a working SQL snippet without reading
+  full reference docs. Includes performance diagnostics using
+  pg_stat_statements, EXPLAIN, EXPLAIN ANALYZE, pg_stat_user_tables,
+  pg_locks, and connection management with pg_cancel_backend and
+  pg_terminate_backend, plus Neon-specific notes on max_connections and
+  data size.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
-updatedOn: '2026-02-06T22:07:33.128Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CTA />
@@ -956,7 +961,6 @@ ORDER BY duration DESC;
 ```
 
 </Admonition>
-
 
 ## Postgres version
 

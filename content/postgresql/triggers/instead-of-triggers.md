@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL INSTEAD OF Triggers'
-page_title: 'PostgreSQL INSTEAD OF Triggers'
-page_description: 'In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to insert, update, or delete data of base tables through a view.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/'
+title: PostgreSQL INSTEAD OF Triggers
+page_title: PostgreSQL INSTEAD OF Triggers
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL INSTEAD OF a trigger to
+  insert, update, or delete data of base tables through a view.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-instead-of-triggers/
 ogImage: ''
-updatedOn: '2024-03-28T13:58:28+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL AFTER DELETE Trigger'
-  slug: 'postgresql-triggers/postgresql-after-delete-trigger'
+  title: PostgreSQL AFTER DELETE Trigger
+  slug: postgresql-triggers/postgresql-after-delete-trigger
 nextLink:
-  title: 'PostgreSQL BEFORE TRUNCATE Trigger'
-  slug: 'postgresql-triggers/postgresql-before-truncate-trigger'
+  title: PostgreSQL BEFORE TRUNCATE Trigger
+  slug: postgresql-triggers/postgresql-before-truncate-trigger
 ---
+
+<Admonition type="info" id="CTA">
+INSTEAD OF triggers work the same way on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers fast, secure Postgres fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL `INSTEAD OF` a trigger to insert, update, or delete data of base tables through a view.
 
@@ -145,7 +152,7 @@ FOR EACH ROW
 EXECUTE FUNCTION update_employee_salaries();
 ```
 
-### 1\) Inserting data into tables via the view
+### 2\) Inserting data into tables via the view
 
 First, insert a new employee with a salary via the view:
 
@@ -248,10 +255,10 @@ SELECT * FROM employees;
 Output:
 
 ```text
- employee_id | effective_date |  salary
--------------+----------------+----------
-           1 | 2024-03-01     | 60000.00
-           2 | 2024-03-01     | 70000.00
+ employee_id |  name
+-------------+-------
+           1 | Alice
+           2 | Bob
 (2 rows)
 ```
 

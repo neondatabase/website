@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL LOWER() Function'
-page_title: 'PostgreSQL LOWER() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL LOWER() function to convert the string to all lower case.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lower/'
-ogImage: '/postgresqltutorial/customer.png'
-updatedOn: '2024-01-28T09:51:45+00:00'
+title: PostgreSQL LOWER() Function
+page_title: PostgreSQL LOWER() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL LOWER() function to
+  convert the string to all lower case.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lower/
+ogImage: /postgresqltutorial/customer.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LTRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-ltrim'
+  title: PostgreSQL LTRIM() Function
+  slug: postgresql-string-functions/postgresql-ltrim
 nextLink:
-  title: 'PostgreSQL UPPER() Function'
-  slug: 'postgresql-string-functions/postgresql-upper'
+  title: PostgreSQL UPPER() Function
+  slug: postgresql-string-functions/postgresql-upper
 ---
+
+<Admonition type="info" id="CTA">
+The LOWER() function works the same way across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises modernizing on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that production analytics and applications demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LOWER()` function to convert the string to all lowercase.
 

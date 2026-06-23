@@ -2,14 +2,17 @@
 title: Run ad-hoc queries with Read Replicas
 subtitle: Leverage read replicas for running ad-hoc queries
 summary: >-
-  Covers the setup of Neon Read Replicas for executing ad-hoc queries, enabling
-  quick data retrieval without affecting the performance of the primary
-  database.
+  Neon Read Replicas provide dedicated read-only compute for running ad-hoc
+  queries, one-off analytics, and exploratory SQL without loading the primary
+  database. Use this page when you need to offload impromptu aggregations,
+  troubleshooting queries, or custom reports to an isolated replica rather than
+  running them against production. Replicas share primary storage at no extra
+  cost and automatically suspend after 5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.037Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
-In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries are particularly useful for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
+In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries work well for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
 
 This is where **Neon Read Replicas** come in handy. With read replicas, you can quickly create a replica that runs on dedicated read-only compute, allowing you to run ad-hoc queries without impacting your primary database’s performance. Once you're done, the read replica can automatically scale to zero, or you can delete it. The key advantages of using Neon Read Replicas for ad-hoc queries include the following:
 
@@ -48,7 +51,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 1. In the Neon Console, select **Branches**.
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
-4. On the **Add new copmpute** dialog, select **Read replica** as the **Compute type**.
+4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings**. You can configure a fixed-size compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. On paid plans, you can adjust the **Scale to zero time** setting, which controls whether a compute suspends due to inactivity after 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
@@ -57,7 +60,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+Alternatively, you can create read replicas using the [Neon CLI](/docs/cli/branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
 
 <CodeTabs labels={["CLI", "API"]}>
 

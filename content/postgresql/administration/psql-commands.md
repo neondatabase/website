@@ -1,18 +1,24 @@
 ---
-title: '17 Practical psql Commands You Don’t Want to Miss'
-page_title: "17 Practical psql Commands That You Don't Want To Miss"
-page_description: 'You will learn how to use practical psql commands to interact with the PostgreSQL database server effectively.'
+title: 17 Practical psql Commands You Don’t Want to Miss
+page_title: 17 Practical psql Commands That You Don't Want To Miss
+page_description: >-
+  You will learn how to use practical psql commands to interact with the
+  PostgreSQL database server effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/psql-commands/'
-ogImage: '/postgresqltutorial/psql-commands.jpg'
-updatedOn: '2024-01-16T06:44:49+00:00'
+ogImage: /postgresqltutorial/psql-commands.jpg
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Describe Table'
-  slug: 'postgresql-administration/postgresql-describe-table'
+  title: PostgreSQL Describe Table
+  slug: postgresql-administration/postgresql-describe-table
 nextLink:
-  title: 'How to Uninstall PostgreSQL from Ubuntu'
-  slug: 'postgresql-administration/uninstall-postgresql-ubuntu'
+  title: How to Uninstall PostgreSQL from Ubuntu
+  slug: postgresql-administration/uninstall-postgresql-ubuntu
 ---
+
+<Admonition type="info" id="CTA">
+These psql commands work with any PostgreSQL installation, so you can use them whether you're connecting to a local database, a self-managed cluster, or a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: In this tutorial, you will learn how to use practical psql commands to interact with the PostgreSQL database server effectively.
 
@@ -199,7 +205,7 @@ dvdrental=#
 
 ## 15\) Edit command in your editor
 
-It is very handy if you can type the command in your favorite editor. To do this in psql, you `\e` command. After issuing the command, psql will open the text editor defined by your EDITOR environment variable and place the most recent command that you entered in psql into the editor.
+It is very handy if you can type the command in your favorite editor. To do this in psql, you use the `\e` command. After issuing the command, psql will open the text editor defined by your EDITOR environment variable and place the most recent command that you entered in psql into the editor.
 
 ![psql commands](/postgresqltutorial/psql-commands.jpg)After you type the command in the editor, save it, and close the editor, psql will execute the command and return the result.
 

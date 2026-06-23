@@ -2,11 +2,15 @@
 title: Monitor query performance
 subtitle: View and analyze query performance for your Neon database
 summary: >-
-  Covers the monitoring of query performance in a Neon database, detailing how
-  to access and analyze query history through the Neon Console's Monitoring
-  page.
+  The Query performance tab in the Neon Console Monitoring page displays the
+  top previously run queries for a branch, compute, and database, grouped by
+  normalized form and sortable by frequency or average execution time. Use it
+  to identify slow or high-frequency queries without installing any extensions,
+  since the view is built on the `pg_stat_statements` extension installed on a
+  system-managed database. Query history resets whenever the Neon compute
+  suspends or restarts, including after scaling to zero due to inactivity.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.093Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---
@@ -23,7 +27,7 @@ The **Query performance** view shows the top 100 previously run queries for the 
 
 The **Query performance** view is powered by the `pg_stat_statements` Postgres extension, installed on a system managed database in your Postgres instance. Query history includes all queries run against your database, regardless of where they were issued from (Neon SQL Editor, external clients, or applications).
 
-<Admonition type="note" title="query restore window">
+<Admonition type="note" title="Query history when compute restarts">
 In Neon, data collected by the `pg_stat_statements` extension is not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, your query history is lost. New data will be gathered once your compute restarts.
 </Admonition>
 

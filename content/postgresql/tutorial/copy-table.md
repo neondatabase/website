@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
 page_title: 'PostgreSQL Copy Table: A Step-by-Step Guide'
-page_description: 'In this tutorial, you will learn how to copy an existing table to a new one using various PostgreSQL copy table statements.'
+page_description: >-
+  In this tutorial, you will learn how to copy an existing table to a new one
+  using various PostgreSQL copy table statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-copy-table/'
-ogImage: '/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png'
-updatedOn: '2024-02-18T08:28:51+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-Copy-Table-300x260.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRUNCATE TABLE'
-  slug: 'postgresql-tutorial/postgresql-truncate-table'
+  title: PostgreSQL TRUNCATE TABLE
+  slug: postgresql-tutorial/postgresql-truncate-table
 nextLink:
-  title: 'PostgreSQL Primary Key'
-  slug: 'postgresql-tutorial/postgresql-primary-key'
+  title: PostgreSQL Primary Key
+  slug: postgresql-tutorial/postgresql-primary-key
 ---
+
+<Admonition type="info" id="CTA">
+Copying tables with CREATE TABLE AS works on any PostgreSQL database, so the patterns shown here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytical and transactional workloads in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 ![PostgreSQL Copy Table](/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png?alignright)**Summary**: in this tutorial, we will show you step by step how to copy an existing table including table structure and data by using the various forms of PostgreSQL copy table statement.
 
@@ -84,7 +90,7 @@ Output:
 (2 rows)
 ```
 
-Third, create a copy the `contacts` to a new table such as `contacts_backup` table using the following statement:
+Third, create a copy of `contacts` to a new table such as `contacts_backup` table using the following statement:
 
 ```sql
 CREATE TABLE contact_backup

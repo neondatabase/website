@@ -1,18 +1,25 @@
 ---
-title: 'PL/pgSQL IF Statement'
-page_title: 'PL/pgSQL IF Statement'
-page_description: 'Show you how to use three forms of the PL/pgSQL IF statement that executes a command based on a certain condition.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/'
-ogImage: '/postgresqltutorial/plpgsql-if-statement.png'
-updatedOn: '2024-03-19T03:39:48+00:00'
+title: PL/pgSQL IF Statement
+page_title: PL/pgSQL IF Statement
+page_description: >-
+  Show you how to use three forms of the PL/pgSQL IF statement that executes a
+  command based on a certain condition.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-if-else-statements/
+ogImage: /postgresqltutorial/plpgsql-if-statement.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Assert Statement'
-  slug: 'postgresql-plpgsql/pl-pgsql-assert'
+  title: PL/pgSQL Assert Statement
+  slug: postgresql-plpgsql/pl-pgsql-assert
 nextLink:
-  title: 'PL/pgSQL CASE Statement'
-  slug: 'postgresql-plpgsql/plpgsql-case-statement'
+  title: PL/pgSQL CASE Statement
+  slug: postgresql-plpgsql/plpgsql-case-statement
 ---
+
+<Admonition type="info" id="CTA">
+PL/pgSQL's `if`, `if...then...else`, and `if...then...elsif` statements work the same way on any standard PostgreSQL deployment, so the patterns shown here apply broadly. If you're an enterprise looking to run procedural Postgres workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PL/pgSQL `if` statements to execute a command based on a specific condition.
 
@@ -40,7 +47,7 @@ The `condition` is a boolean expression that evaluates to `true` or `false`.
 
 The `statements` can be one or more statements that you want to execute when the `condition` is true. It may contain other `if` statements.
 
-When you place an `if` statement is within another `if` statement, you’ll have a nested\-if statement.
+When you place an `if` statement within another `if` statement, you’ll have a nested\-if statement.
 
 The following flowchart illustrates the simple `if` statement.
 

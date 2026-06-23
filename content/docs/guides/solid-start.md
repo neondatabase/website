@@ -2,11 +2,12 @@
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
 summary: >-
-  Step-by-step guide for connecting a SolidStart application to a Neon project,
-  including project creation, dependency installation, and configuration of
-  connection settings for secure server-side requests.
+  SolidStart integration with Neon walks through creating a Neon project and
+  querying a serverless Postgres database from a SolidJS meta-framework app.
+  Covers server-side data loading and API routes using node-postgres,
+  postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.053Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/solidstart-prompt.md"
@@ -205,15 +206,5 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 ```
 
 </Steps>
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-solid-start" description="Get started with SolidStart and Neon" icon="github">Get started with SolidStart and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

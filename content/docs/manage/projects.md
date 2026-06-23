@@ -4,11 +4,16 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  How to manage Neon projects using the Neon Console or API, including creating
-  branches, databases, roles, and computes within each project workspace.
+  A Neon project is the top-level workspace that groups branches, databases,
+  roles, and computes. This page covers the full project lifecycle: create,
+  configure, and delete, via the Console or API. Use it when you need to set
+  project-level defaults such as compute autoscaling, history window for
+  instant restore and Time Travel, IP Allow rules, logical replication, or
+  collaborator access. Deleted projects can be recovered within a 7-day
+  window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-03-04T15:52:43.562Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -21,13 +26,17 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 ## Create a project
 
 The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
-To create a Neon project:
+You can create a project from the Console or the Neon CLI. To create one with the API, see [Create a project with the API](#create-a-project-with-the-api).
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
@@ -35,6 +44,22 @@ To create a Neon project:
 4. Click **Create Project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
+
+</TabItem>
+
+<TabItem>
+
+Install the CLI with `npm i -g neonctl` and run `neon auth` to log in. Then create a project with `neon projects create`:
+
+```bash
+neon projects create --name myproject --region-id aws-us-east-2
+```
+
+The output includes the new project ID and the default connection string. For all options, see [Neon CLI — projects](/docs/cli/projects).
+
+</TabItem>
+
+</Tabs>
 
 ## View projects
 
@@ -54,7 +79,7 @@ The **Settings** page includes these sub-pages:
 
 - **General**: Change the name of your project or copy the project ID.
 - **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore**: Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
+- **Instant restore**: Under **Settings → Instant restore**, set the **history window** to control how far back **instant restore**, Time Travel queries, and branching from past states can reach.
 - **Updates**: Schedule a time for Postgres and Neon updates.
 - **Collaborators**: Invite external collaborators to join your Neon project.
 - **Network security**: Configure Neon's IP and Private Networking features for secure access.
@@ -88,26 +113,26 @@ Neon supports two compute configurations:
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
 - **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (for example, if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
-### Configure your restore window
+### Configure the history window for instant restore
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
 - [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
-For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](/docs/introduction/restore-window).
+For plan limits, billing, and how retention works, see [History window](/docs/introduction/history-window).
 
-If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
+If you extend the history window, you expand how far back **instant restore** and Time Travel can go, but you also increase **History** usage (change history billed for instant restore) on your project.
 
-Also note that adjusting the restore window affects _all_ branches in your project.
+Also note that adjusting the history window affects _all_ branches in your project.
 
-To configure the restore window for a project:
+To configure the history window:
 
 1. Select a project in the Neon Console.
 2. On your **Project Dashboard**, select **Settings**.
-3. Select **Restore window**.
-   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
-4. Use the slider to select the restore window.
+3. Select **Instant restore**.
+4. Under **History window**, use the slider to choose how long to keep change history.
+   ![History window configuration](/docs/manage/instant_restore_setting.png)
 5. Click **Save**.
 
 ### Schedule updates for your project
@@ -175,7 +200,7 @@ To configure an allowlist:
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
@@ -277,7 +302,7 @@ This list combines individual IP addresses, a range of IP addresses, a CIDR bloc
 
 You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.0.2.1`, and you want to extend access to IP address `192.0.2.2`, specify both addresses in your new configuration: `192.0.2.1, 192.0.2.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
-The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/cli/ip-allow).
 
 #### Remove an IP Allow configuration
 
@@ -298,7 +323,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
 neon ip-allow reset
@@ -345,15 +370,41 @@ For setup instructions and examples, see the [Data API documentation](/docs/data
 Logical replication lets you replicate data changes from Neon to external data services and platforms, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-To enable logical replication in Neon:
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
 
 1. Select your project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Logical replication**.
 4. Click **Enable** to enable logical replication.
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "project": {
+    "settings": {
+      "enable_logical_replication": true
+    }
+  }
+}'
+```
+
+</TabItem>
+
+</Tabs>
 
 You can verify that logical replication is enabled by running the following query:
 
@@ -377,12 +428,16 @@ To delete a project:
 3. Select **Settings**.
 4. Select **Delete**.
 
+<Admonition type="note">
+For HIPAA-compliant projects, see [HIPAA Compliance](/docs/security/hipaa#delete-a-hipaa-compliant-project) before deleting a project—for example, to export audit logs you may need.
+</Admonition>
+
 <Admonition type="important">
 If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
 <Admonition type="note">
-**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
 </Admonition>
 
 ## Manage projects with the Neon API
@@ -871,7 +926,7 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
-The deletion recovery period is different from the [restore window](/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
 </Admonition>
 
 ### What's recovered
@@ -929,7 +984,7 @@ neon projects recover crimson-voice-12345678
 └────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
-For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/cli/projects).
 
 </TabItem>
 

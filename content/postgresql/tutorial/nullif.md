@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL NULLIF'
-page_title: 'PostgreSQL NULLIF function'
-page_description: 'Show you how to apply the PostgreSQL NULLIF function to substitute the null values for displaying data and preventing division by zero error.'
+title: PostgreSQL NULLIF
+page_title: PostgreSQL NULLIF function
+page_description: >-
+  Show you how to apply the PostgreSQL NULLIF function to substitute the null
+  values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2024-02-01T04:37:20+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ISNULL'
-  slug: 'postgresql-tutorial/postgresql-isnull'
+  title: PostgreSQL ISNULL
+  slug: postgresql-tutorial/postgresql-isnull
 nextLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'
-  slug: 'postgresql-tutorial/postgresql-cast'
+  slug: postgresql-tutorial/postgresql-cast
 ---
+
+<Admonition type="info" id="CTA">
+The NULLIF function is a standard PostgreSQL conditional expression, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NULLIF()` function to handle null values.
 
@@ -26,7 +32,7 @@ Here’s the basic syntax of the `NULLIF` function:
 NULLIF(argument_1,argument_2);
 ```
 
-The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
+The `NULLIF` function returns a null value if `argument_1` equals `argument_2`, otherwise, it returns `argument_1`.
 
 ## PostgreSQL NULLIF function examples
 
@@ -175,7 +181,7 @@ Output:
 In this statement:
 
 - First, the `NULLIF` function returns a null value if the excerpt is empty or the excerpt otherwise. The result of the `NULLIF` function is used by the `COALESCE` function.
-- Second, the `COALESCE` function checks if the first argument, which is provided by the `NULLIF` function, if it is null, then it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
+- Second, the `COALESCE` function checks whether the first argument, which is provided by the `NULLIF` function, is null. If it is, it returns the first 40 characters of the body; otherwise, it returns the excerpt in case the excerpt is not null.
 
 ## Using NULLIF() function to prevent division\-by\-zero
 

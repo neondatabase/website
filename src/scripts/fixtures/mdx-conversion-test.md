@@ -185,12 +185,12 @@ Values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc333
 
 <CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/neon">Share your feedback</CommunityBanner>
 
-## PromptCards
+## CompactCards
 
-<PromptCards>
-<a title="Next.js" promptSrc="/prompts/nextjs-prompt.md"></a>
-<a title="Django" promptSrc="/prompts/django-prompt.md"></a>
-</PromptCards>
+<CompactCards cols={2}>
+<a title="Next.js" description="Copy a Next.js setup prompt" icon="next-js" promptSrc="/prompts/nextjs-prompt.md"></a>
+<a title="Django" description="Open the Django guide" icon="django" href="/docs/guides/django"></a>
+</CompactCards>
 
 ## MegaLink
 
@@ -199,19 +199,19 @@ Values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc333
 ## QuoteBlock
 
 <QuoteBlock
-  quote="Neon's branching feature transformed our development workflow."
-  author={{
+quote="Neon's branching feature transformed our development workflow."
+author={{
     name: 'Jane Smith',
     company: 'Acme Corp',
   }}
-  link="/blog/acme-case-study"
+link="/blog/acme-case-study"
 />
 
 ## Testimonial
 
 <Testimonial
-  text="The serverless scaling is exactly what we needed."
-  author={{
+text="The serverless scaling is exactly what we needed."
+author={{
     name: 'John Doe',
     company: 'StartupCo',
   }}
@@ -241,10 +241,6 @@ Scale compute up and down based on demand.
 
 <FeatureBeta />
 
-### EarlyAccess (parameterless)
-
-<EarlyAccess />
-
 ### FeatureBetaProps (with prop)
 
 <FeatureBetaProps feature_name="Autoscaling" />
@@ -268,10 +264,6 @@ Scale compute up and down based on demand.
 ### LRNotice
 
 <LRNotice />
-
-### ComingSoon
-
-<ComingSoon />
 
 ### PrivatePreview
 
@@ -304,10 +296,6 @@ Scale compute up and down based on demand.
 ### AzureRegionsDeprecation
 
 <AzureRegionsDeprecation />
-
-### ConsumptionAccountApiDeprecation
-
-<ConsumptionAccountApiDeprecation />
 
 ## Ignored components
 
@@ -349,8 +337,8 @@ Inline link with description: <a href="https://example.com" description="An exam
 
 Line break in a table:
 
-| Feature | Status |
-|---------|--------|
+| Feature   | Status               |
+| --------- | -------------------- |
 | Branching | GA<br/>Available now |
 
 ## Nested components (known edge case)
@@ -373,7 +361,7 @@ conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
 ## Markdown fundamentals
 
-Regular paragraph with **bold**, *italic*, `inline code`, and a [link](/docs/introduction).
+Regular paragraph with **bold**, _italic_, `inline code`, and a [link](/docs/introduction).
 
 > A standard blockquote.
 
@@ -387,7 +375,7 @@ Regular paragraph with **bold**, *italic*, `inline code`, and a [link](/docs/int
 SELECT * FROM users WHERE active = true;
 ```
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | serial | Primary key |
-| name | text | User's name |
+| Column | Type   | Description |
+| ------ | ------ | ----------- |
+| id     | serial | Primary key |
+| name   | text   | User's name |

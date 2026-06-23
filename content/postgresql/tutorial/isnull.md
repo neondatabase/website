@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ISNULL'
-page_title: 'Looking for PostgreSQL ISNULL? Use COALESCE or CASE'
-page_description: 'PostgreSQL does not support the ISNULL function. But you can use the COALESCE() function or CASE expression to achieve the same functionality.'
+title: PostgreSQL ISNULL
+page_title: Looking for PostgreSQL ISNULL? Use COALESCE or CASE
+page_description: >-
+  PostgreSQL does not support the ISNULL function. But you can use the
+  COALESCE() function or CASE expression to achieve the same functionality.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-isnull/'
 ogImage: ''
-updatedOn: '2024-02-01T04:01:35+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL COALESCE'
-  slug: 'postgresql-tutorial/postgresql-coalesce'
+  title: PostgreSQL COALESCE
+  slug: postgresql-tutorial/postgresql-coalesce
 nextLink:
-  title: 'PostgreSQL NULLIF'
-  slug: 'postgresql-tutorial/postgresql-nullif'
+  title: PostgreSQL NULLIF
+  slug: postgresql-tutorial/postgresql-nullif
 ---
+
+<Admonition type="info" id="CTA">
+Handling NULL values with COALESCE or CASE works the same way in any PostgreSQL database, so what you learn here carries over wherever you run Postgres. For enterprises standardizing on a modern data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 SQL Server supports [`ISNULL`](http://www.sqlservertutorial.net/sql-server-system-functions/sql-server-isnull-function/) function that replaces `NULL` with a specified replacement value:
 

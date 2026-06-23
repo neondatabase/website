@@ -1,14 +1,22 @@
 ---
-title: 'PostgreSQL 18 New Features'
-page_title: "PostgreSQL 18 New Features: What's New and Why It Matters"
-page_description: 'In this tutorial, you will learn about PostgreSQL 18 new features, including asynchronous I/O, UUIDv7 support, virtual generated columns, and more. Discover how these changes will impact performance, development, and operations.'
+title: PostgreSQL 18 New Features
+page_title: 'PostgreSQL 18 New Features: What''s New and Why It Matters'
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL 18 new features, including
+  asynchronous I/O, UUIDv7 support, virtual generated columns, and more.
+  Discover how these changes will impact performance, development, and
+  operations.
 ogImage: ''
-updatedOn: '2025-07-05T07:20:00+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 nextLink:
-  title: 'PostgreSQL 18 Asynchronous I/O'
-  slug: 'postgresql-18/asynchronous-io'
+  title: PostgreSQL 18 Asynchronous I/O
+  slug: postgresql-18/asynchronous-io
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL 18's new features apply to any Postgres deployment, not just [Neon](https://neon.com), so you can use this guide wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and deep Lakehouse integration that modern data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O providing significant I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that impact developers and DBAs.
 
@@ -120,7 +128,7 @@ SELECT uuid_extract_timestamp(uuidv7());
 - Reduced page splits and improved caching
 - Ideal for distributed systems requiring sortable IDs
 
-It is worth noting that `uuidv4()` in this release is now an alias for `gen_rand_uuid`.
+It is worth noting that `uuidv4()` in this release is now an alias for `gen_random_uuid`.
 
 ### [Enhanced RETURNING Clause](/postgresql/postgresql-18/enhanced-returning)
 
@@ -163,7 +171,7 @@ You configure it in `pg_hba.conf` like other auth methods, and load token valida
 
 ### MD5 Deprecation Warning
 
-MD5 password authentication is now deprecated in favor of the more secure SCRAM-SHA-256 method. The MD5 method will still work, but you will be removed in the next major release.
+MD5 password authentication is now deprecated in favor of the more secure SCRAM-SHA-256 method. The MD5 method will still work, but it will be removed in the next major release.
 
 ### Enhanced TLS Support
 

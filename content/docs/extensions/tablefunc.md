@@ -3,11 +3,17 @@ title: The tablefunc extension
 subtitle: Reshape data with pivot tables and navigate hierarchical structures in
   Postgres
 summary: >-
-  Covers the setup and usage of the `tablefunc` extension in Postgres for
-  creating pivot tables, generating random numbers, and navigating hierarchical
-  data structures within a Neon database.
+  The `tablefunc` PostgreSQL extension provides three functions for reshaping
+  and traversing data: `crosstab()` pivots long-format rows into wide columns
+  (cross-tabulation / pivot table), `normal_rand()` generates
+  Gaussian-distributed random numbers, and `connectby()` walks parent-child
+  hierarchies such as org charts or category trees. Use this page when you need
+  to convert row-per-category data into a columnar summary, populate test
+  datasets with normally distributed values, or traverse a self-referencing
+  table without recursive CTEs. Enable the extension with `CREATE EXTENSION
+  tablefunc` on any Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.096Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `tablefunc` extension for Postgres provides a powerful set of functions for transforming data directly within your database. Its primary capabilities include creating pivot tables (also known as cross-tabulations) to reshape data, generating sets of normally distributed random numbers, and querying hierarchical or tree-like data structures.
@@ -73,7 +79,7 @@ SELECT * FROM normal_rand(5, 10.0, 2.0);
 (5 rows)
 ```
 
-> Ouput will vary each time you run the function due to the random nature of the data.
+> Output will vary each time you run the function due to the random nature of the data.
 
 **Use case:** Populating tables with realistic-looking sample data for testing or analysis.
 
@@ -385,7 +391,7 @@ FROM connectby(
 
 ## Conclusion
 
-The `tablefunc` extension in Postgres is a powerful tool for reshaping and analyzing data. It provides essential functions like `normal_rand()` for generating random numbers, `crosstab()` for creating pivot tables, and `connectby()` for traversing hierarchical data structures.
+The `tablefunc` extension gives you functions for reshaping and analyzing data in Postgres: `normal_rand()` for generating random numbers, `crosstab()` for pivot tables, and `connectby()` for traversing hierarchical data.
 
 ## Resources
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL DELETE CASCADE'
-page_title: 'PostgreSQL DELETE CASCADE'
-page_description: 'How to use the PostgreSQL DELETE CASCADE to delete related rows in child tables when a parent row is deleted from the parent table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete-cascade/'
+title: PostgreSQL DELETE CASCADE
+page_title: PostgreSQL DELETE CASCADE
+page_description: >-
+  How to use the PostgreSQL DELETE CASCADE to delete related rows in child
+  tables when a parent row is deleted from the parent table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete-cascade/
 ogImage: ''
-updatedOn: '2024-02-23T01:14:02+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DELETE JOIN'
-  slug: 'postgresql-tutorial/postgresql-delete-join'
+  title: PostgreSQL DELETE JOIN
+  slug: postgresql-tutorial/postgresql-delete-join
 nextLink:
-  title: 'How To Delete Duplicate Rows in PostgreSQL'
-  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
+  title: How To Delete Duplicate Rows in PostgreSQL
+  slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
 ---
+
+<Admonition type="info" id="CTA">
+DELETE CASCADE is a standard PostgreSQL referential action, and everything covered here works on any Postgres database, including [Lakebase](https://www.databricks.com/product/lakebase) and [Neon](https://neon.com). Lakebase is the best managed cloud Postgres for enterprises, built for the AI era with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DELETE CASCADE` to delete related rows in child tables when a parent row is deleted from the parent table.
 

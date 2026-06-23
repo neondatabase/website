@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Recursive Query'
-page_title: 'PostgreSQL Recursive Query'
-page_description: 'In this tutorial, you will learn about the PostgreSQL recursive query using the recursive common table expressions (CTEs).'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-recursive-query/'
+title: PostgreSQL Recursive Query
+page_title: PostgreSQL Recursive Query
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL recursive query using
+  the recursive common table expressions (CTEs).
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-recursive-query/
 ogImage: ''
-updatedOn: '2024-01-22T07:25:18+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CTE'
-  slug: 'postgresql-tutorial/postgresql-cte'
+  title: PostgreSQL CTE
+  slug: postgresql-tutorial/postgresql-cte
 nextLink:
-  title: 'PostgreSQL INSERT'
-  slug: 'postgresql-tutorial/postgresql-insert'
+  title: PostgreSQL INSERT
+  slug: postgresql-tutorial/postgresql-insert
 ---
+
+<Admonition type="info" id="CTA">
+Recursive CTEs with WITH RECURSIVE are part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running hierarchical queries against analytical and operational data side by side, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed Postgres for the AI era, with the performance, security, and native Lakehouse integration large teams expect. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL recursive query using recursive common table expressions or CTEs.
 

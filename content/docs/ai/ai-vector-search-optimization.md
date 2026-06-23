@@ -3,14 +3,19 @@ title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
 summary: >-
-  Step-by-step guide for optimizing `pgvector` searches in Postgres, focusing on
-  profiling queries, indexing strategies, and parameter tuning to enhance
-  performance and accuracy in AI applications.
+  pgvector similarity search optimization in Postgres covers profiling with
+  EXPLAIN ANALYZE, choosing between sequential scans and approximate nearest
+  neighbor indexes (HNSW or IVFFlat), and tuning build and query-time
+  parameters to balance speed and recall. Use this page when query latency is
+  too high and you need to select an index type, set build parameters, or tune
+  query-time settings like ef_search or probes. HNSW delivers better query
+  speed than IVFFlat at the cost of higher build time and memory; IVFFlat
+  requires existing data before the index can be created.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.728Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
+This guide covers how to use `pgvector` for vector similarity searches. We'll address the following key questions:
 
 1. How to profile your vector search queries, when using `pgvector`?
 2. When to use indexes and tradeoffs between the available options?
@@ -160,7 +165,7 @@ We've experimented with `lists` equal to 1000, 2000, and 4000, and `probes` equa
 
 Although there is a substantial gain in recall for increasing the number of `probes`, you will reach a point of diminishing returns when recall plateaus and execution time increases.
 
-Therefore, we encourage experimenting with different values for `probes` and `lists` to achieve optimal search performance for your queries. Good places to start are:
+Try different values for `probes` and `lists` to find the right balance for your dataset. Good places to start:
 
 - Using a `lists` size equal to rows / 1000 for tables with up to 1 million rows, and `sqrt(rows)` for larger datasets.
 - Start with a `probes` value equal to lists / 10 for tables up to 1 million rows, and `sqrt(lists)` for larger datasets.

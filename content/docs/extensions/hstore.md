@@ -2,14 +2,17 @@
 title: The hstore extension
 subtitle: Manage key-value pairs in Postgres using hstore
 summary: >-
-  Covers the setup and usage of the `hstore` extension in Postgres for managing
-  key-value pairs, including enabling the extension, storing, querying, and
-  performing operations on hstore data.
+  The `hstore` extension stores schema-less key-value pairs inside a single
+  Postgres column, with operators like `->`, `?`, `@>`, and `||` for querying,
+  filtering, and updating individual keys. Use it instead of `jsonb` when all
+  keys and values are strings and the data model is flat. It avoids JSON
+  overhead and supports GIN and GiST indexes for key-level filtering on large
+  datasets.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.077Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It is particularly useful for semi-structured data or data that does not have a rigid schema.
+The `hstore` extension is a flexible way to store and manipulate sets of key-value pairs within a single Postgres value. It works well for semi-structured data or data without a rigid schema.
 
 <CTA />
 
@@ -233,7 +236,7 @@ This query returns the following:
 
 The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model; both keys and values must be strings. This makes it more efficient for simple key-value data.
 
-In constrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
+In contrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
 
 ## Indexing and performance
 
@@ -253,7 +256,7 @@ CREATE INDEX gin_idx_attributes ON product USING gin (attributes);
 
 ## Conclusion
 
-The `hstore` extension offers a powerful and flexible way to handle semi-structured data in Postgres. This guide provides an overview of using `hstore`, including creating records and querying on its attributes. It also covers some of the common operators and functions available for `hstore` data.
+The `hstore` extension is a flexible option for semi-structured data in Postgres. This guide covers creating records, querying on attributes, and the common operators and functions available for `hstore` data.
 
 ## Resources
 

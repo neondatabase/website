@@ -2,20 +2,31 @@
 title: Connect a Next.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Next.js application
 summary: >-
-  Covers the setup of a Neon project and the connection process from a Next.js
-  application, including project creation, dependency installation, and
-  credential management.
+  Connection guide for wiring a Next.js application to Neon serverless Postgres
+  using node-postgres, postgres.js, or the Neon serverless driver
+  (@neondatabase/serverless). Choose this page when you need working
+  DATABASE_URL setup and driver code for App Router (Server Components, Server
+  Actions), Pages Router (getServerSideProps, getStaticProps), Serverless
+  Functions, or Edge Functions. The guide also explains Next.js static render
+  caching and the force-dynamic workaround for fetching fresh data on each
+  request.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-02-06T22:07:33.027Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
 description="Pre-built prompt for connecting Next.js applications to Neon"/>
 
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
+
+## Video walkthrough
+
+Watch **Getting started with Neon** for an end-to-end setup with Next.js and Drizzle.
+
+<YoutubeIframe embedId="XtMiMnX0hDg" />
 
 To create a Neon project and access it from a Next.js application:
 
@@ -426,26 +437,10 @@ PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+
 
 ### Where to upload and serve files?
 
-Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend a pattern that leverages dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
+Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend using dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
 
-## Source code
+## Next steps
 
-You can find the source code for the applications described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-edge-functions" description="Get started with Next.js Edge Functions and Neon" icon="github">Get started with Next.js Edge Functions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-serverless-functions" description="Get started with Next.js Serverless Functions and Neon" icon="github">Get started with Next.js Serverless Functions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-server-side-props" description="Get started with Next.js getServerSideProps and Neon" icon="github">Get started with Next.js getServerSideProps and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-get-static-props" description="Get started with Next.js getStaticProps and Neon" icon="github">Get started with Next.js getStaticProps and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-actions" description="Get started with Next.js Server Actions and Neon" icon="github">Get started with Next.js Server Actions and Neon</a>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-server-components" description="Get started with Next.js Server Components and Neon" icon="github">Get started with Next.js Server Components and Neon</a>
-
-</DetailIconCards>
+- [Set up Neon Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
 
 <NeedHelp/>

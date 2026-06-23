@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL BEFORE INSERT Trigger'
-page_title: 'PostgreSQL BEFORE INSERT Trigger'
-page_description: 'In this tutorial, you will learn how to create a PostgreSQL BEFORE INSERT trigger associated with a table.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-insert-trigger/'
+title: PostgreSQL BEFORE INSERT Trigger
+page_title: PostgreSQL BEFORE INSERT Trigger
+page_description: >-
+  In this tutorial, you will learn how to create a PostgreSQL BEFORE INSERT
+  trigger associated with a table.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-insert-trigger/
 ogImage: ''
-updatedOn: '2024-03-28T10:24:52+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER TRIGGER Statement'
-  slug: 'postgresql-triggers/postgresql-alter-trigger'
+  title: PostgreSQL ALTER TRIGGER Statement
+  slug: postgresql-triggers/postgresql-alter-trigger
 nextLink:
-  title: 'PostgreSQL AFTER INSERT Trigger'
-  slug: 'postgresql-triggers/postgresql-after-insert-trigger'
+  title: PostgreSQL AFTER INSERT Trigger
+  slug: postgresql-triggers/postgresql-after-insert-trigger
 ---
+
+<Admonition type="info" id="CTA">
+BEFORE INSERT triggers work the same in any PostgreSQL database, so what you learn here applies wherever you run Postgres. If you're an enterprise looking for a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL `BEFORE INSERT` trigger associated with a table.
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL JSON Extract'
+title: PostgreSQL JSON Extract
 page_title: 'PostgreSQL JSON Extract Operators: -> And ->>'
-page_description: 'You will learn how to use the operators -> and ->> to extract an element from a JSON array or a value of a key from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/'
+page_description: >-
+  You will learn how to use the operators -> and ->> to extract an element from
+  a JSON array or a value of a key from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
-updatedOn: '2024-02-23T10:18:42+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_extract_path_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_extract_path_text'
+  title: PostgreSQL jsonb_extract_path_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_extract_path_text
 nextLink:
-  title: 'PostgreSQL jsonb_insert() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_insert'
+  title: PostgreSQL jsonb_insert() Function
+  slug: postgresql-json-functions/postgresql-jsonb_insert
 ---
+
+<Admonition type="info" id="CTA">
+The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the operator `->` and `->>` to extract an element from a JSON array or a value of a key from a JSON object.
 
@@ -120,7 +127,7 @@ Output:
 
 ### 3\) Extracting the last array element example
 
-The following example uses the `->` operator to retrieve the first phone number of an employee with the name `Jane Smith`:
+The following example uses the `->` operator to retrieve the last phone number of an employee with the name `Jane Smith`:
 
 ```sql
 SELECT
@@ -284,7 +291,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extract a key that does not exist
+### 3\) Extract a key that does not exist
 
 The following example attempts to extract a value of a non\-existing key from a JSON object:
 

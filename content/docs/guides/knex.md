@@ -2,11 +2,13 @@
 title: Connect from Knex to Neon
 subtitle: Learn how to connect to Neon from Knex
 summary: >-
-  How to connect Knex to Neon, including steps for establishing a connection,
-  configuring environment variables, and utilizing connection pooling for
-  optimal performance in serverless applications.
+  Connect Knex to Neon Postgres by passing the Neon connection string to the
+  `connectionString` option with `sslmode=require`. Serverless deployments
+  should use Neon's pooled endpoint to prevent connection exhaustion. You can
+  also improve performance by switching to `pg-native` via the
+  `NODE_PG_FORCE_NATIVE` environment variable.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.995Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
@@ -85,15 +87,5 @@ await client.raw(text, values);
 // Do this to get better performance
 await client.raw(replaceQueryParams(text, values));
 ```
-
-You can try this optimization yourself by downloading our [Get started with Knex example](#examples) and running `npm run test`.
-
-## Examples
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-knex" description="Get started with Knex and Neon" icon="github">Get started with Knex and Neon</a>
-
-</DetailIconCards>
 
 <NeedHelp/>

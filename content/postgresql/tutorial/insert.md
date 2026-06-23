@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL INSERT'
-page_title: 'PostgreSQL INSERT'
-page_description: 'This tutorial shows you how to use the PostgreSQL INSERT statement to insert a new row into a table and return the last inserted id.'
+title: PostgreSQL INSERT
+page_title: PostgreSQL INSERT
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL INSERT statement to insert a
+  new row into a table and return the last inserted id.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/'
 ogImage: ''
-updatedOn: '2024-07-01T01:09:33+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Recursive Query'
-  slug: 'postgresql-tutorial/postgresql-recursive-query'
+  title: PostgreSQL Recursive Query
+  slug: postgresql-tutorial/postgresql-recursive-query
 nextLink:
-  title: 'PostgreSQL INSERT Multiple Rows'
-  slug: 'postgresql-tutorial/postgresql-insert-multiple-rows'
+  title: PostgreSQL INSERT Multiple Rows
+  slug: postgresql-tutorial/postgresql-insert-multiple-rows
 ---
+
+<Admonition type="info" id="CTA">
+The INSERT statement works the same across any PostgreSQL database, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your team needs. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INSERT` statement to insert a new row into a table.
 

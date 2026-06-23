@@ -2,16 +2,21 @@
 title: Connect from Prisma to Neon
 subtitle: Learn how to connect to Neon from Prisma
 summary: >-
-  Step-by-step guide for connecting a Prisma application to Neon using the
-  serverless driver adapter, including installation of dependencies, obtaining
-  connection strings, and configuring the Prisma schema.
+  Prisma ORM (Node.js/TypeScript) connects to Neon using the
+  `@prisma/adapter-neon` serverless driver adapter, which routes queries over
+  WebSockets for compatibility with serverless environments. The setup requires
+  two connection strings: a pooled URL (`DATABASE_URL`) for application queries
+  and a direct URL (`DIRECT_URL`) for Prisma CLI commands such as migrations and
+  `db push`. Newer Prisma versions configure the direct connection in
+  `prisma.config.ts`; older versions use the `directUrl` property in
+  `schema.prisma`.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-02-15T20:51:54.189Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

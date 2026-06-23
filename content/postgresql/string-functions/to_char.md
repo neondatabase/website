@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL TO_CHAR() Function'
-page_title: 'PostgreSQL TO_CHAR Function By Practical Examples'
-page_description: 'This tutorial shows you how to use the PostgreSQL TO_CHAR() function to convert a timestamp or a numeric value to a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/'
-ogImage: '/postgresqltutorial/payment-table.png'
-updatedOn: '2024-01-29T02:05:27+00:00'
+title: PostgreSQL TO_CHAR() Function
+page_title: PostgreSQL TO_CHAR Function By Practical Examples
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL TO_CHAR() function to
+  convert a timestamp or a numeric value to a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-to_char/
+ogImage: /postgresqltutorial/payment-table.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL TRANSLATE() Function'
-  slug: 'postgresql-string-functions/postgresql-translate'
+  title: PostgreSQL TRANSLATE() Function
+  slug: postgresql-string-functions/postgresql-translate
 nextLink:
-  title: 'PostgreSQL TO_NUMBER() Function'
-  slug: 'postgresql-string-functions/postgresql-to_number'
+  title: PostgreSQL TO_NUMBER() Function
+  slug: postgresql-string-functions/postgresql-to_number
 ---
+
+<Admonition type="info" id="CTA">
+The TO_CHAR() function works the same way on any PostgreSQL database, so the formatting patterns and examples here apply wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The PostgreSQL `TO_CHAR()` function converts a [timestamp](../postgresql-tutorial/postgresql-timestamp), an [interval](../postgresql-tutorial/postgresql-interval), an [integer](../postgresql-tutorial/postgresql-integer), a double\-precision, or a [numeric](../postgresql-tutorial/postgresql-numeric) value to a [string](../postgresql-tutorial/postgresql-char-varchar-text).
 
@@ -63,8 +70,8 @@ The following table shows the valid timestamp format strings:
 | Y,YYY                    | year in 4 digits with comma                                                                         |
 | YYYY                     | year in 4 digits                                                                                    |
 | YYY                      | The last 3 digits of ISO 8601 week\-numbering year                                                  |
-| YY                       | last 3 digits of the year                                                                           |
-| Y                        | last 2 digits of the year                                                                           |
+| YY                       | last 2 digits of the year                                                                           |
+| Y                        | last digit of the year                                                                              |
 | IYYY                     | ISO 8601 week\-numbering year (4 or more digits)                                                    |
 | IYY                      | The last 2 digits of ISO 8601 week\-numbering year                                                  |
 | IY                       | The last digit of ISO 8601 week\-numbering year                                                     |
@@ -75,7 +82,7 @@ The following table shows the valid timestamp format strings:
 | Month                    | Full capitalized English month name                                                                 |
 | month                    | Full lowercase English month name                                                                   |
 | MON                      | Abbreviated uppercase month name e.g., JAN, FEB, etc.                                               |
-| Mon                      | Week number of the year (1\-53\) (the first week starts on the first day of the year)               |
+| Mon                      | Abbreviated capitalized month name e.g., Jan, Feb, etc.                                             |
 | mon                      | Abbreviated capitalized month name e.g., Jan, Feb,  etc.                                            |
 | MM                       | month number from 01 to 12                                                                          |
 | DAY                      | Full uppercase day name                                                                             |
@@ -90,7 +97,7 @@ The following table shows the valid timestamp format strings:
 | D                        | Day of the week, Sunday (1\) to Saturday (7\)                                                       |
 | ID                       | ISO 8601 day of the week, Monday (1\) to Sunday (7\)                                                |
 | W                        | Week of month (1\-5\) (the first week starts on the first day of the month)                         |
-| WW                       | Century e.g., 21, 22, etc.                                                                          |
+| WW                       | Week number of the year (1-53) (the first week starts on the first day of the year)                 |
 | IW                       | Week number of ISO 8601 week\-numbering year (01\-53; the first Thursday of the year is in week 1\) |
 | CC                       | Century e.g, 21, 22, etc.                                                                           |
 | J                        | Julian Day (integer days since November 24, 4714 BC at midnight UTC)                                |

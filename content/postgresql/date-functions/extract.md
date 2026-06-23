@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL EXTRACT() Function'
-page_title: 'PostgreSQL EXTRACT() Function'
-page_description: 'This tutorial shows you how to use the PostgreSQL EXTRACT() function to extract a field from a date, a timestamp, or an interval value.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/'
+title: PostgreSQL EXTRACT() Function
+page_title: PostgreSQL EXTRACT() Function
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL EXTRACT() function to
+  extract a field from a date, a timestamp, or an interval value.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/
 ogImage: ''
-updatedOn: '2024-03-22T01:01:47+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DATE_PART() Function'
-  slug: 'postgresql-date-functions/postgresql-date_part'
+  title: PostgreSQL DATE_PART() Function
+  slug: postgresql-date-functions/postgresql-date_part
 nextLink:
-  title: 'PostgreSQL TO_DATE() Function'
-  slug: 'postgresql-date-functions/postgresql-to_date'
+  title: PostgreSQL TO_DATE() Function
+  slug: postgresql-date-functions/postgresql-to_date
 ---
+
+<Admonition type="info" id="CTA">
+The `EXTRACT()` function works the same way on any standard PostgreSQL deployment, so everything here applies whether you're pulling years from a timestamp or seconds from an interval. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXTRACT()` function to extract a field such as a year, month, and day from a date/time value.
 
@@ -43,9 +50,9 @@ The following table illustrates the valid field values:
 | HOUR            | The hour (0\-23\)                                                   | The number of hours                         |
 | ISODOW          | The day of the week, Monday (1\) to Sunday (7\)                     | N/A                                         |
 | ISOYEAR         | The ISO 8601 week number of year                                    | N/A                                         |
-| MICROSECONDS    | The second field, including fractional parts, multiplied by 1000000 | Sames as TIMESTAMP                          |
+| MICROSECONDS    | The second field, including fractional parts, multiplied by 1000000 | Same as TIMESTAMP                          |
 | MILLENNIUM      | The millennium                                                      | The number of millennium                    |
-| MILLISECONDS    | The second field, including fractional parts, multiplied by 1000    | Sames as TIMESTAMP                          |
+| MILLISECONDS    | The second field, including fractional parts, multiplied by 1000    | Same as TIMESTAMP                          |
 | MINUTE          | The minute (0\-59\)                                                 | The number of minutes                       |
 | MONTH           | The month 1\-12                                                     | The number of months, modulo (0\-11\)       |
 | QUARTER         | The quarter of the year (1 – 4\)                                    | The number of quarters                      |
@@ -54,7 +61,7 @@ The following table illustrates the valid field values:
 | TIMEZONE_HOUR   | The hour component of the time zone offset                          | N/A                                         |
 | TIMEZONE_MINUTE | The minute component of the time zone offset                        | N/A                                         |
 | WEEK            | The number of the ISO 8601 week\-numbering week of the year         | N/A                                         |
-| YEAR            | The year                                                            | Sames as TIMESTAMP                          |
+| YEAR            | The year                                                            | Same as TIMESTAMP                          |
 
 **2\)** `source`
 

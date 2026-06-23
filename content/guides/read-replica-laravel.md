@@ -4,7 +4,7 @@ subtitle: Learn how to scale Laravel applications with Neon Postgres Read Replic
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2024-10-20T00:00:00.000Z'
+updatedOn: '2025-12-03T12:37:52.000Z'
 ---
 
 ## Introduction

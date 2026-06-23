@@ -4,7 +4,7 @@ subtitle: A comprehensive guide on how to manage your Postgres database using Db
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-26T00:00:00.000Z'
-updatedOn: '2025-09-26T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 DbVisualizer is a universal SQL client and database‑management tool that provides an intuitive interface for connecting to, querying, visualizing, and managing data across more than 50 databases including PostgreSQL, Oracle, SQL Server, MySQL, and others. This guide walks you through setting up and using DbVisualizer with Neon Postgres.
@@ -57,7 +57,7 @@ Save the connection details as you will need them in the next steps.
    - **Database Server**: The endpoint of your hosted Postgres database. Enter the value of `PGHOST` you saved earlier from Neon.
    - **Database Port**: The port number. Enter 5432 (default for Postgres).
    - **Database**: The database name. Enter the value of `PGDATABASE`.
-   - **Database Userid**: Your database username. Enter the value of `PGUSER`.
+   - **Database UserID**: Your database username. Enter the value of `PGUSER`.
    - **Database Password**: Your database password. Enter the value of `PGPASSWORD`.
 
 4. **Test the Connection**:

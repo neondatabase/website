@@ -1,9 +1,20 @@
 ---
 name: neon-postgres
-description: Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/auth), PostgREST-style data API (@neondatabase/neon-js), Neon CLI, and Neon's Platform API/SDKs. Use for any Neon-related questions.
+description: >-
+  Guides and best practices for working with Neon Serverless Postgres.
+  Covers setup, connection methods, branching, autoscaling, scale-to-zero,
+  read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server,
+  REST API, TypeScript SDK, and Python SDK.
+  Use when users ask about "Neon setup", "connect to Neon", "Neon project",
+  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neonctl", "Neon MCP",
+  "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
+  "scale to zero", "Neon autoscaling", "Neon read replica", or
+  "Neon connection pooling".
 ---
 
 # Neon Serverless Postgres
+
+Guide the user through any Neon-related task: setup, connections, branching, and advanced features. Deliver a working Neon connection, a completed feature configuration, or a specific answer from the official Neon docs.
 
 Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
 
@@ -110,6 +121,48 @@ Use this when you need to pick the correct transport and driver based on runtime
 
 Link: https://neon.com/docs/connect/choose-connection.md
 
+### Recommended: Drizzle + the right driver for your runtime
+
+Always pair Neon with an ORM such as **Drizzle** for easy schema management and migrations. Pick the driver based on how the runtime treats your code:
+
+- **Long-running or shared-runtime environments → node-postgres (`pg`).** Neon Functions, and any host where the function runtime is shared across requests / runs on fluid compute (e.g. **Vercel** with Fluid compute), keep a module-scope process alive across many requests. Open a `pg` pool **once at module scope** and reuse it across requests.
+- **Fully isolated serverless (Lambda-style) → Neon's serverless driver (`@neondatabase/serverless`).** Hosts like **Netlify** spin up a fresh, isolated instance per request, so a persistent TCP pool can't be reused; the serverless driver queries over HTTP and is built for this.
+
+**Neon Functions / Vercel / fluid compute — Drizzle + node-postgres:**
+
+```typescript
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import * as schema from "./schema";
+
+// Created once at module scope; reused by every request the instance handles.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+const db = drizzle({ client: pool, schema });
+```
+
+On **Vercel** (Fluid compute) also attach the pool with `attachDatabasePool` from `@vercel/functions`, so the function runtime drains idle connections before an instance suspends:
+
+```typescript
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import { attachDatabasePool } from "@vercel/functions";
+import * as schema from "./schema";
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+attachDatabasePool(pool); // let the Vercel runtime manage the pooled connections
+const db = drizzle({ client: pool, schema });
+```
+
+**Netlify and other fully-isolated serverless — Drizzle + Neon serverless driver:**
+
+```typescript
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle({ client: sql });
+```
+
 ### Serverless Driver
 
 Use this for `@neondatabase/serverless` patterns, including HTTP queries, WebSocket transactions, and runtime-specific optimizations.
@@ -169,6 +222,64 @@ Link: https://neon.com/docs/auth/overview.md
 
 Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth alone. See https://neon.com/docs/connect/choose-connection.md for more details.
 
+## Neon Infrastructure as Code (`neon.ts`)
+
+`neon.ts` is Neon's branch config and infrastructure-as-code file: declare which services your branches have, get type-safe env vars, and program per-branch compute — all in TypeScript (see the `neon` skill for the full reference). Postgres always exists on every branch, so you never declare the database itself; what you codify here is the Postgres-adjacent surface — Neon Auth, the Data API, and per-branch compute settings (autoscaling and scale-to-zero).
+
+Add it with `@neondatabase/config`:
+
+```bash
+npm i @neondatabase/config
+```
+
+```typescript
+// neon.ts
+import { defineConfig } from "@neondatabase/config/v1";
+
+export default defineConfig({
+  auth: true, // Neon Auth (adds NEON_AUTH_* env vars)
+  dataApi: true, // Data API (adds NEON_DATA_API_URL); requires auth: true (or an external IdP)
+  // Postgres exists on every branch; tune its compute per branch:
+  branch: (branch) => {
+    if (branch.exists) return {}; // leave existing branches untouched
+    if (branch.isDefault) return { protected: true }; // prod keeps default compute
+    return {
+      ttl: "7d", // non-prod branches auto-expire (max 30d)
+      postgres: {
+        computeSettings: {
+          autoscalingLimitMinCu: 0.25, // scale to zero
+          autoscalingLimitMaxCu: 1, // keep dev/preview cheap
+          suspendTimeout: "5m",
+        },
+      },
+    };
+  },
+});
+```
+
+Reconcile the declaration from the CLI — the Neon equivalent of `terraform plan` / `apply`:
+
+```bash
+neonctl config status   # print the branch's live config
+neonctl config plan     # dry-run diff of what apply would change
+neonctl config apply    # provision the declared services / settings
+neonctl deploy          # alias for `neonctl config apply`
+```
+
+Because `neonctl checkout` applies the policy as it **creates** a branch, a fresh branch comes up with these compute settings (and Auth / Data API) already in place. Checking out an _existing_ branch never reconciles it — run `neonctl deploy` to apply changes.
+
+Since `neon.ts` is TypeScript, invalid combinations fail to compile with an actionable message: the Data API verifies requests with Neon Auth by default, so `dataApi: true` without `auth: true` is a type error (the fix — `auth: true`, or `authProvider: 'external'` with a `jwksUrl` — is in the message). See the `neon` skill's type-safe config note.
+
+Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neondatabase/env`:
+
+```typescript
+import { parseEnv } from "@neondatabase/env/v1";
+import config from "./neon";
+
+const env = parseEnv(config);
+env.postgres.databaseUrl; // typed; enabling auth / dataApi above surfaces env.auth / env.dataApi
+```
+
 ## Branching
 
 Use this when the user is planning isolated environments, schema migration testing, preview deployments, or branch lifecycle automation.
@@ -180,6 +291,18 @@ Key points:
 - Use the neonctl CLI or MCP server to create, inspect, and compare branches.
 
 Link: https://neon.com/docs/introduction/branching.md
+
+For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill if available
+
+Or fetch the full branching skill from the following URL:
+
+https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md
+
+If this skill is not installed you can use the following command to install it:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon-postgres-branches
+```
 
 ## Autoscaling
 
@@ -205,7 +328,7 @@ Use this when the user needs point-in-time recovery or wants to restore data sta
 
 Key points:
 
-- Restore windows depend on plan limits.
+- History windows for instant restore depend on plan limits.
 - Users can create branches from historical points-in-time.
 - Time Travel queries can be used for historical inspection workflows.
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Backup'
-page_title: 'PostgreSQL Backup - pg_dump & pg_dumpall'
-page_description: 'This tutorial shows you how to use PostgreSQL backup tools including pg_dump and pg_dumpall to backup databases in PostgreSQL.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/'
+title: PostgreSQL Backup
+page_title: PostgreSQL Backup - pg_dump & pg_dumpall
+page_description: >-
+  This tutorial shows you how to use PostgreSQL backup tools including pg_dump
+  and pg_dumpall to backup databases in PostgreSQL.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/
 ogImage: ''
-updatedOn: '2024-02-20T02:00:57+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DROP TABLESPACE Statement'
-  slug: 'postgresql-administration/postgresql-drop-tablespace'
+  title: PostgreSQL DROP TABLESPACE Statement
+  slug: postgresql-administration/postgresql-drop-tablespace
 nextLink:
-  title: 'PostgreSQL Restore Database'
-  slug: 'postgresql-administration/postgresql-restore-database'
+  title: PostgreSQL Restore Database
+  slug: postgresql-administration/postgresql-restore-database
 ---
+
+<Admonition type="info" id="CTA">
+Backing up PostgreSQL with pg_dump and pg_dumpall works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to backup the PostgreSQL databases using the `pg_dump` and `pg_dumpall` tools.
 
@@ -183,7 +190,7 @@ pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 
 The following backup script assumes that you have [a password file](postgresql-password-file-pgpass) setup properly.
 
-First, open a text editor such a Notepad.
+First, open a text editor such as Notepad.
 
 Second, write a batch script to generate backup file with a date and timestamp:
 

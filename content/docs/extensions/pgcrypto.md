@@ -2,18 +2,24 @@
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
 summary: >-
-  Covers the setup and usage of the `pgcrypto` extension in Neon, detailing how
-  to enable it and utilize its cryptographic functions for encryption,
-  decryption, and hashing within Postgres.
+  The pgcrypto extension adds SQL-callable functions for encryption, decryption,
+  password hashing, and HMAC generation directly inside Postgres, removing the
+  need for an external cryptographic library. Use it to store passwords with
+  salted Blowfish hashing via crypt() and gen_salt(), encrypt sensitive columns
+  with OpenPGP symmetric or public-key functions (pgp_sym_encrypt,
+  pgp_pub_encrypt), or produce SHA-256 digests and secure random bytes in
+  standard SQL queries. The page covers enabling pgcrypto on Neon, all major
+  function groups, and security best practices for key management and algorithm
+  selection.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.093Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
 
 <CTA />
 
-In this guide, you'll learn how to enable the `pgcrypto` extension on Neon, use its core cryptographic functions, explore practical applications for data security, and follow best practices for managing security considerations.
+This guide covers how to enable `pgcrypto` on Neon, use its core cryptographic functions, and follow best practices for data security.
 
 ## Enable the `pgcrypto` extension
 
@@ -213,7 +219,7 @@ By following these steps, you can securely store and verify user passwords using
 
 ## Performance Implications
 
-While `pgcrypto` provides robust security features, it's important to consider the performance implications of cryptographic operations:
+While `pgcrypto` provides strong security features, consider the performance implications of cryptographic operations:
 
 - **Computational overhead**: Encryption, decryption, and hashing operations inherently require computational resources. The extent of the overhead depends on the chosen algorithms, data size, and frequency of operations.
 - **Password hashing**: Password hashing algorithms, like those used in `crypt()`, are intentionally designed to be slow to resist brute-force attacks. This can introduce a slight delay during user authentication processes.
@@ -223,11 +229,11 @@ While `pgcrypto` provides robust security features, it's important to consider t
 When using `pgcrypto`, it's crucial to adhere to security best practices:
 
 - **Key management**: Securely manage encryption keys. Store them outside the database if possible, and implement key rotation policies. Never store keys in plaintext within the database as that would defeat the purpose of encryption.
-- **Algorithm selection**: Choose appropriate cryptographic algorithms based on your security requirements. For password hashing, use strong algorithms like Blowfish with sufficient iteration counts. For data encryption, select robust and widely-vetted algorithms like AES.
+- **Algorithm selection**: Choose appropriate cryptographic algorithms based on your security requirements. For password hashing, use strong algorithms like Blowfish with sufficient iteration counts. For data encryption, select well-vetted algorithms like AES.
 
 ## Conclusion
 
-The `pgcrypto` extension is a powerful and versatile tool for enhancing data security in Postgres. By providing a rich set of cryptographic functions, it enables you to implement robust security measures directly within your database environment. From secure password storage to data encryption and hashing, `pgcrypto` offers a wide range of applications to protect your data.
+`pgcrypto` brings a broad set of cryptographic functions into Postgres, covering password hashing, data encryption, and general-purpose hashing, all available through standard SQL queries.
 
 ## Resources
 

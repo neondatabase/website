@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CHR() Function'
+title: PostgreSQL CHR() Function
 page_title: 'PostgreSQL CHR: Get Character Based on ASCII or Unicode Code Point'
-page_description: 'This tutorial shows you how to use the PostgreSQL CHR() function to get the character based on its ASCII value or Unicode code point.'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL CHR() function to get the
+  character based on its ASCII value or Unicode code point.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-chr/'
-ogImage: '/postgresqltutorial/PostgreSQL-CHR-ASCII-example.png'
-updatedOn: '2024-01-29T01:38:05+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-CHR-ASCII-example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ASCII() Function'
-  slug: 'postgresql-string-functions/postgresql-ascii'
+  title: PostgreSQL ASCII() Function
+  slug: postgresql-string-functions/postgresql-ascii
 nextLink:
-  title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-initcap'
+  title: PostgreSQL INITCAP() Function
+  slug: postgresql-string-functions/postgresql-initcap
 ---
+
+<Admonition type="info" id="CTA">
+The `CHR()` function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: high performance, secure by default, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The PostgreSQL `CHR()` function converts an integer ASCII code to a character or a Unicode code point to a UTF8 character.
 
@@ -36,7 +42,7 @@ It could be a Unicode code point which is converted to a UTF8 character.
 
 ## Return Value
 
-The `CHR()` function returns a character that corresponds the ASCII code value or Unicode code point.
+The `CHR()` function returns a character that corresponds to the ASCII code value or Unicode code point.
 
 ## Examples
 

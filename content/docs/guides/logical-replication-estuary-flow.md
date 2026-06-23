@@ -2,12 +2,16 @@
 title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 summary: >-
-  How to replicate data from a Neon Postgres database to external destinations
-  using Estuary Flow by configuring a Postgres source connector for real-time
-  data streaming and optional transformations.
+  Estuary Flow's Neon PostgreSQL source connector streams CDC events from a
+  Neon Postgres database to any Estuary materialization destination at
+  sub-100ms latency. Use this guide when you need continuous, low-latency
+  replication of inserts, updates, and deletes from Neon to an external system.
+  Setup requires enabling logical replication (permanently sets wal_level to
+  logical project-wide), a direct non-pooled connection string, and IP
+  allowlisting for Estuary's egress addresses.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.102Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -81,10 +85,10 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -94,6 +98,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
   }
 }' | jq
 ```
+
+> Replace `{project_id}` and `{branch_id}` with your actual Neon project and branch IDs, and set the `NEON_API_KEY` environment variable with your Neon API key.
 
 </TabItem>
 

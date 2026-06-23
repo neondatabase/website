@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL LEFT() Function'
+title: PostgreSQL LEFT() Function
 page_title: 'PostgreSQL LEFT: Get First N Characters in a String'
-page_description: 'This tutorial shows you how to use the PostgreSQL LEFT() function to get the first n characters in a string.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/'
-ogImage: '/postgresqltutorial/PostgreSQL-LEFT-example.png'
-updatedOn: '2024-01-29T02:05:23+00:00'
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL LEFT() function to get the
+  first n characters in a string.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
+ogImage: /postgresqltutorial/PostgreSQL-LEFT-example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-initcap'
+  title: PostgreSQL INITCAP() Function
+  slug: postgresql-string-functions/postgresql-initcap
 nextLink:
-  title: 'PostgreSQL RIGHT() Function'
-  slug: 'postgresql-string-functions/postgresql-right'
+  title: PostgreSQL RIGHT() Function
+  slug: postgresql-string-functions/postgresql-right
 ---
+
+<Admonition type="info" id="CTA">
+The LEFT() function works the same across any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your data teams expect. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 The PostgreSQL `LEFT()` function returns the first `n` characters in the string.
 
@@ -82,7 +89,7 @@ The following statement demonstrates how to use a negative integer:
 SELECT LEFT('ABC',-2);
 ```
 
-In this example, n is \-2, therefore, the `LEFT()` function return all character except the last 2 characters, which results in:
+In this example, n is \-2, therefore, the `LEFT()` function returns all characters except the last 2 characters, which results in:
 
 ```
  left

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL IN'
-page_title: 'PostgreSQL IN - Matching Against a List of Values'
-page_description: 'This tutorial shows you how to use the PostgreSQL IN operator to match against a list of values. It also shows you how to use the IN operator in a subquery.'
+title: PostgreSQL IN
+page_title: PostgreSQL IN - Matching Against a List of Values
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL IN operator to match against
+  a list of values. It also shows you how to use the IN operator in a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/'
-ogImage: '/postgresqltutorial/film.png'
-updatedOn: '2024-01-17T02:52:11+00:00'
+ogImage: /postgresqltutorial/film.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FETCH'
-  slug: 'postgresql-tutorial/postgresql-fetch'
+  title: PostgreSQL FETCH
+  slug: postgresql-tutorial/postgresql-fetch
 nextLink:
-  title: 'PostgreSQL BETWEEN'
-  slug: 'postgresql-tutorial/postgresql-between'
+  title: PostgreSQL BETWEEN
+  slug: postgresql-tutorial/postgresql-between
 ---
+
+<Admonition type="info" id="CTA">
+The IN operator works the same way across every PostgreSQL deployment, so the syntax and examples here apply whether you're running Postgres locally, on another provider, or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you high-performance, secure Postgres that's fully integrated into the Lakehouse and managed end to end. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL IN** operator to check if a value matches any value in a list.
 

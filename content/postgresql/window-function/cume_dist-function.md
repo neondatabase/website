@@ -1,18 +1,26 @@
 ---
-title: 'PostgreSQL CUME_DIST Function'
-page_title: 'PostgreSQL CUME_DIST Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CUME_DIST() function to calculate the cumulative distribution of a value within a set of values.'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png'
-updatedOn: '2020-04-11T10:53:00+00:00'
+title: PostgreSQL CUME_DIST Function
+page_title: PostgreSQL CUME_DIST Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CUME_DIST()
+  function to calculate the cumulative distribution of a value within a set of
+  values.
+prev_url: index.html
+ogImage: >-
+  /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Window Functions'
-  slug: 'postgresql-window-function/'
+  title: PostgreSQL Window Functions
+  slug: postgresql-window-function/
 nextLink:
-  title: 'PostgreSQL DENSE_RANK Function'
-  slug: 'postgresql-window-function/postgresql-dense_rank-function'
+  title: PostgreSQL DENSE_RANK Function
+  slug: postgresql-window-function/postgresql-dense_rank-function
 ---
+
+<Admonition type="info" id="CTA">
+The CUME_DIST() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUME_DIST()` function to calculate the cumulative distribution of a value within a set of values.
 
@@ -46,7 +54,7 @@ The `ORDER BY` clause sorts rows in each partition to which the `CUME_DIST()` fu
 
 ### Return value
 
-The `CUME_DIST()` a double precision value which is greater than 0 and less than or equal to 1:
+The `CUME_DIST()` returns a double precision value which is greater than 0 and less than or equal to 1:
 
 ```sql
 0 < CUME_DIST() <= 1

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL POWER() Function'
-page_title: 'PostgreSQL POWER() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL POWER() function to raise a number to a specific power.'
+title: PostgreSQL POWER() Function
+page_title: PostgreSQL POWER() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL POWER() function to
+  raise a number to a specific power.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-power/'
 ogImage: ''
-updatedOn: '2024-02-17T15:07:31+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PI() Function'
-  slug: 'postgresql-math-functions/postgresql-pi-function'
+  title: PostgreSQL PI() Function
+  slug: postgresql-math-functions/postgresql-pi-function
 nextLink:
-  title: 'PostgreSQL RADIANS() Function'
-  slug: 'postgresql-math-functions/postgresql-radians'
+  title: PostgreSQL RADIANS() Function
+  slug: postgresql-math-functions/postgresql-radians
 ---
+
+<Admonition type="info" id="CTA">
+The POWER() function works the same on any standard PostgreSQL deployment, so what you learn here carries over wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `POWER()` function to raise a number to a specific power.
 

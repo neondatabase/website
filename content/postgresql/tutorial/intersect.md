@@ -1,24 +1,30 @@
 ---
-title: 'PostgreSQL INTERSECT Operator'
-page_title: 'PostgreSQL INTERSECT Operator'
-page_description: 'Show you how to use the PostgreSQL INTERSECT operator to combine two result sets and return the rows that appear in both result sets.'
+title: PostgreSQL INTERSECT Operator
+page_title: PostgreSQL INTERSECT Operator
+page_description: >-
+  Show you how to use the PostgreSQL INTERSECT operator to combine two result
+  sets and return the rows that appear in both result sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-intersect/'
-ogImage: '/postgresqltutorial/PostgreSQL-INTERSECT-Operator-300x206.png'
-updatedOn: '2024-07-01T01:03:14+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-INTERSECT-Operator-300x206.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL UNION'
-  slug: 'postgresql-tutorial/postgresql-union'
+  title: PostgreSQL UNION
+  slug: postgresql-tutorial/postgresql-union
 nextLink:
-  title: 'PostgreSQL EXCEPT'
-  slug: 'postgresql-tutorial/postgresql-except'
+  title: PostgreSQL EXCEPT
+  slug: postgresql-tutorial/postgresql-except
 ---
+
+<Admonition type="info" id="CTA">
+The INTERSECT operator works the same way in any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INTERSECT` operator to combine result sets of two or more queries.
 
 ## Introduction to PostgreSQL INTERSECT operator
 
-Like the [UNION](postgresql-union) and [EXCEPT](postgresql-except) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both results sets.
+Like the [UNION](postgresql-union) and [EXCEPT](postgresql-except) operators, the PostgreSQL `INTERSECT` operator combines result sets of two [SELECT](postgresql-except) statements into a single result set. The `INTERSECT` operator returns a result set containing rows available in both result sets.
 
 Here is the basic syntax of the `INTERSECT` operator:
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_object_keys() Function'
-page_title: 'PostgreSQL jsonb_object_keys() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL jsonb_object_keys() function to extract the keys from a JSON object.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/'
+title: PostgreSQL jsonb_object_keys() Function
+page_title: PostgreSQL jsonb_object_keys() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL jsonb_object_keys()
+  function to extract the keys from a JSON object.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/
 ogImage: ''
-updatedOn: '2024-02-24T09:28:45+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_each_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_each_text'
+  title: PostgreSQL jsonb_each_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_each_text
 nextLink:
-  title: 'PostgreSQL JSON Path'
-  slug: 'postgresql-json-functions/postgresql-json-path'
+  title: PostgreSQL JSON Path
+  slug: postgresql-json-functions/postgresql-json-path
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_object_keys()` function is part of standard PostgreSQL and works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to run JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration that large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_keys()` function to extract the keys from a JSON object.
 
@@ -40,7 +47,7 @@ If the `json_object` is `NULL`, the function will return an empty set.
 
 Let’s take some examples of using the `jsonb_object_keys()` function.
 
-### 1\) Basic the jsonb_object_keys() function examples
+### 1\) Basic jsonb_object_keys() function examples
 
 The following example uses the `jsonb_object_keys()` function to extract the keys of a JSON object as a set of text values:
 

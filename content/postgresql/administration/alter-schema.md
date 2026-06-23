@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ALTER SCHEMA'
-page_title: 'PostgreSQL ALTER SCHEMA Statement'
-page_description: 'You will learn how to use the PostgreSQL ALTER SCHEMA statement to rename a schema or change the owner of a schema to a new one.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/'
-ogImage: '/postgresqltutorial/PostgreSQL-ALTER-SCHEMA-change-owner-example.png'
-updatedOn: '2024-02-12T13:22:23+00:00'
+title: PostgreSQL ALTER SCHEMA
+page_title: PostgreSQL ALTER SCHEMA Statement
+page_description: >-
+  You will learn how to use the PostgreSQL ALTER SCHEMA statement to rename a
+  schema or change the owner of a schema to a new one.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-schema/
+ogImage: /postgresqltutorial/PostgreSQL-ALTER-SCHEMA-change-owner-example.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE SCHEMA'
-  slug: 'postgresql-administration/postgresql-create-schema'
+  title: PostgreSQL CREATE SCHEMA
+  slug: postgresql-administration/postgresql-create-schema
 nextLink:
-  title: 'PostgreSQL DROP SCHEMA Statement'
-  slug: 'postgresql-administration/postgresql-drop-schema'
+  title: PostgreSQL DROP SCHEMA Statement
+  slug: postgresql-administration/postgresql-drop-schema
 ---
+
+<Admonition type="info" id="CTA">
+Renaming a schema or reassigning its owner with ALTER SCHEMA works the same way on any PostgreSQL database, so what you learn here carries over to every Postgres deployment. If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need from a fully managed cloud database. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER SCHEMA` statement to modify the definition of a schema.
 

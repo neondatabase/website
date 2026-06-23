@@ -1,11 +1,13 @@
 ---
 title: HIPAA Compliance
 summary: >-
-  Covers the setup of HIPAA compliance for organizations using Neon, detailing
-  the self-serve process to enable features and accept the Business Associate
-  Agreement (BAA) for handling Protected Health Information (PHI).
+  HIPAA compliance on Neon is a self-serve feature on the Scale plan.
+  Customers can accept a Business Associate Agreement (BAA) and enable PHI
+  protection at the organization and project level via the Console, API, or
+  CLI. Enabling HIPAA on a project is irreversible and triggers a compute
+  restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.267Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -44,10 +46,6 @@ Once HIPAA is enabled for your organization, you can proceed to enable HIPAA com
 
 <Admonition type="important">
 Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling HIPAA will also restart all computes, temporarily interrupting database connections.
-</Admonition>
-
-<Admonition type="note">
-HIPAA support for Postgres 18 is currently available in AWS regions only. You cannot create a Postgres 18 HIPAA-compliant project in Azure regions.
 </Admonition>
 
 <Tabs labels={["New project", "Existing project", "API", "CLI"]}>
@@ -94,7 +92,7 @@ curl --request POST \
 '
 ```
 
-To enable HIPAA for an existing project, set `hippa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
 
 ```bash
 curl --request PATCH \
@@ -121,7 +119,7 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 
 <TabItem>
 
-To create a new HIPAA-compliant Neon project via the [Neon CLI](/docs/reference/neon-cli), use the `--hipaa` option with the `neon projects create` command, as shown below.
+To create a new HIPAA-compliant Neon project via the [Neon CLI](/docs/cli), use the `--hipaa` option with the `neon projects create` command, as shown below.
 
 ```bash
 neon projects create --hipaa
@@ -214,7 +212,7 @@ Neon logs operations performed via the Neon Console interface and the Neon API. 
 
 To protect sensitive information, Neon filters data in audit logs using the following approach:
 
-- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs whereever possible.
+- Sensitive fields (such as `connection_uri` and `password`) are excluded from logs wherever possible.
 - `GET` requests: Only query parameters are logged; response payloads are not recorded.
 - Mutation requests (`PATCH`, `PUT`, `POST`, `DELETE`): Request and response bodies are logged with sensitive fields redacted.
 
@@ -361,9 +359,19 @@ If a security breach occurs, Neon will:
 
 Once HIPAA compliance is enabled for a Neon project, it cannot be disabled.
 
-If you want to disable HIPAA for your Neon organization entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
+### Delete a HIPAA-compliant project
 
-To delete a HIPAA-compliant project, submit a [support request](https://console.neon.tech/app/projects?modal=support). Before deleting a HIPAA project, make sure to export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+You can delete a HIPAA-compliant project using the same self-serve flow as any other Neon project—in the Console (**Settings** → **Delete**), via the [Neon API](/docs/manage/projects#delete-a-project-with-the-api), or with the [Neon CLI](/docs/cli/projects#delete). Deleting a project is permanent and removes all computes, branches, databases, and roles in that project.
+
+<Admonition type="important">
+Before deleting a HIPAA project, export any audit logs or data you may need. Neon retains audit logs for the duration specified in your Business Associate Agreement (BAA).
+</Admonition>
+
+For step-by-step instructions, see [Delete a project](/docs/manage/projects#delete-a-project).
+
+### Disable HIPAA for your organization
+
+If you want to disable HIPAA for your Neon organization entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
 
 ## Frequently Asked Questions
 

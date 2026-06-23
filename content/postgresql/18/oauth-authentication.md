@@ -1,17 +1,24 @@
 ---
-title: 'PostgreSQL 18 OAuth Support'
-page_title: 'PostgreSQL 18 OAuth Support'
-page_description: 'PostgreSQL 18 introduces native OAuth 2.0 authentication, enabling secure token-based database connections with your existing identity providers like Google, Auth0, or enterprise SSO systems.'
+title: PostgreSQL 18 OAuth Support
+page_title: PostgreSQL 18 OAuth Support
+page_description: >-
+  PostgreSQL 18 introduces native OAuth 2.0 authentication, enabling secure
+  token-based database connections with your existing identity providers like
+  Google, Auth0, or enterprise SSO systems.
 ogImage: ''
-updatedOn: '2025-06-28T01:40:00+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 Logical Replication Improvements'
-  slug: 'postgresql-18/logical-replication-improvements'
+  title: PostgreSQL 18 Logical Replication Improvements
+  slug: postgresql-18/logical-replication-improvements
 nextLink:
-  title: 'PostgreSQL 18 NOT NULL as NOT VALID'
-  slug: 'postgresql-18/not-null-as-not-valid'
+  title: PostgreSQL 18 NOT NULL as NOT VALID
+  slug: postgresql-18/not-null-as-not-valid
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL 18's native OAuth 2.0 support works the same on any Postgres deployment, so the configuration patterns covered here apply wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: PostgreSQL 18 adds native OAuth 2.0 authentication, letting you connect to your database using tokens from identity providers like Google, Auth0, or your company's SSO system instead of managing database passwords.
 
@@ -38,7 +45,7 @@ PostgreSQL validates tokens but doesn't issue them, that's handled by your OAuth
 
 OAuth support must be enabled when PostgreSQL is compiled.
 
-As of the latest beta, most distributions do not include this by default, but if you're building from source, you can `--with-libcurl` to enable OAuth client features.
+As of the latest beta, most distributions do not include this by default, but if you're building from source, you can pass `--with-libcurl` to enable OAuth client features.
 
 Note that you will also need a compatible PostgreSQL client which supports OAuth connections, in the case of `psql`, this is available in PostgreSQL 18 and later.
 

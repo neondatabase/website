@@ -3,9 +3,15 @@ title: Instant restore
 subtitle: Learn how to revert changes or recover lost data using Neon's instant restore
   with Time Travel Assist
 summary: >-
-  Covers the process of using Neon's instant restore feature to revert root
-  branches to previous states, allowing recovery of lost data and querying
-  historical data through Time Travel Assist.
+  Instant restore (point-in-time restore, PITR) lets you revert a Neon root
+  branch to any earlier state within your plan's history window using a
+  timestamp or Log Sequence Number (LSN). It overwrites all data and schema on
+  all databases in that branch. Use it to recover from accidental data loss or
+  schema changes on production or main branches; child branches do not support
+  PITR. Before restoring, Time Travel Assist lets you run read-only queries
+  against any historical point to confirm the exact restore target. After
+  restoring, a backup branch is automatically created so you can roll back if
+  needed.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
@@ -13,7 +19,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2026-02-06T22:07:33.086Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -23,21 +29,23 @@ updatedOn: '2026-02-06T22:07:33.086Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/introduction/restore-window">Configure restore window</a>
+  <a href="/docs/introduction/history-window">History window for instant restore</a>
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in your [restore window](/docs/introduction/restore-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/introduction/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
 ### Restore from history
 
+In the Neon Console, open a branch's **Backup & Restore** page and use **Restore from history** to start this flow.
+
 Instant restore is only supported for root branches. You can revert a root branch to an earlier point in time in its own or another root branch's history, using time and date or Log Sequence Number (LSN). For example, you can revert to a state just before a data loss occurred.
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default restore window for a Neon project differs by plan. You can revert a root branch to any time within your configured [restore window](/docs/introduction/restore-window), down to the millisecond.
+The default **history window** for a Neon project differs by plan. You can revert a root branch to any time within that window using **instant restore**, down to the millisecond. See [History window](/docs/introduction/history-window).
 
 A few key points to keep in mind about the restore operation:
 
@@ -186,7 +194,7 @@ neon branches restore development production@0/12345
 
 This command will restore the target branch `development` to an earlier point in time from the source branch `main`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `main`.
 
-For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 </TabItem>
 
 <TabItem>

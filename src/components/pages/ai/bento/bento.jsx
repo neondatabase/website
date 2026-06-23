@@ -55,13 +55,14 @@ const ITEMS = [
 const Bento = () => (
   <section className="bento mt-[200px] safe-paddings xl:mt-[192px] lg:mt-40 md:mt-[105px]">
     <Container className="lg:max-w-3xl! md:px-5" size="960">
-      <div className="mx-auto flex max-w-[832px] flex-col text-pretty lg:max-w-xl">
+      <div className="mx-auto flex max-w-208 flex-col text-pretty lg:max-w-xl">
         <h2 className="max-w-2xl font-title text-5xl leading-none font-medium tracking-extra-tight xl:max-w-xl xl:text-[44px] lg:mr-10 lg:text-4xl md:mr-0 md:text-[32px]">
-          The database AI-native apps were waiting for
+          The backend primitives AI-native apps need, all in one place.
         </h2>
         <p className="mt-4 max-w-[740px] text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:text-balance lg:text-base lg:text-pretty md:mt-3">
-          Neon is a serverless Postgres platform built for modern AI workflows. It separates storage
-          and compute, autoscales to zero, and lets agents create databases without friction.
+          Neon is the backend for AI apps and agents: Postgres, Auth, Functions, Storage, and an AI
+          Gateway. It separates storage and compute, autoscales to zero, and lets agents provision
+          backends without friction.
         </p>
       </div>
       <ul className="mt-14 flex flex-wrap gap-5 lg:mt-12 lg:gap-4 md:mt-8 md:flex-col md:items-center">

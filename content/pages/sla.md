@@ -21,12 +21,12 @@ Neon will use commercially reasonable efforts to maximize the availability of Co
 
 If Neon does not achieve and maintain the Monthly Uptime Percentages set forth in the table below, then the Customer may be eligible for a Service Credit as described in this SLA.
 
-| Monthly Uptime Percentage | Service Credit |
-| --- | --- |
-| Less than 99.95% but greater than or equal to 99.0% | 10% |
-| Less than 99.0% but greater than or equal to 98.0% | 15% |
-| Less than 98.0% but greater than or equal to 96.0% | 20% |
-| Less that 96.0% | 80% |
+| Monthly Uptime Percentage                           | Service Credit |
+| --------------------------------------------------- | -------------- |
+| Less than 99.95% but greater than or equal to 99.0% | 10%            |
+| Less than 99.0% but greater than or equal to 98.0%  | 15%            |
+| Less than 98.0% but greater than or equal to 96.0%  | 20%            |
+| Less that 96.0%                                     | 80%            |
 
 2\. **SERVICE CREDITS AND PROCESS** 
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_path_query_first() Function'
-page_title: 'PostgreSQL jsonb_path_query_first() Function'
-page_description: 'Use the PostgreSQL jsonb_path_query_first() function to extract the first JSON value that matches a JSON path from a JSON document.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_first/'
+title: PostgreSQL jsonb_path_query_first() Function
+page_title: PostgreSQL jsonb_path_query_first() Function
+page_description: >-
+  Use the PostgreSQL jsonb_path_query_first() function to extract the first JSON
+  value that matches a JSON path from a JSON document.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_path_query_first/
 ogImage: ''
-updatedOn: '2024-02-24T02:56:19+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_path_query_array() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query_array'
+  title: PostgreSQL jsonb_path_query_array() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_query_array
 nextLink:
-  title: 'PostgreSQL jsonb_path_exists() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_exists'
+  title: PostgreSQL jsonb_path_exists() Function
+  slug: postgresql-json-functions/postgresql-jsonb_path_exists
 ---
+
+<Admonition type="info" id="CTA">
+The `jsonb_path_query_first()` function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_path_query_first()` function to extract the first JSON value that matches a JSON path expression from a JSON document.
 

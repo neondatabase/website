@@ -1,18 +1,25 @@
 ---
 title: 'PostgreSQL C#: Connecting the PostgreSQL Database'
 page_title: 'PostgreSQL C#: Connecting to the PostgreSQL database'
-page_description: 'Learn how to create a sample database in PostgreSQL and how to connect to the database from a C# program using ADO.NET'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/'
-ogImage: '/postgresqltutorial/PostgreSQL-C-Connect.png'
-updatedOn: '2024-05-21T00:35:17+00:00'
+page_description: >-
+  Learn how to create a sample database in PostgreSQL and how to connect to the
+  database from a C# program using ADO.NET
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-connect/
+ogImage: /postgresqltutorial/PostgreSQL-C-Connect.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL C#'
-  slug: 'postgresql-csharp/'
+  title: PostgreSQL C#
+  slug: postgresql-csharp/
 nextLink:
   title: 'PostgreSQL C#: Creating Tables'
-  slug: 'postgresql-csharp/postgresql-csharp-create-table'
+  slug: postgresql-csharp/postgresql-csharp-create-table
 ---
+
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL from C# with Npgsql and ADO.NET works the same against any Postgres database, so the techniques here apply wherever your server runs. If you're an enterprise standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your data and analytics teams expect. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a sample database in PostgreSQL and how to connect to the database from a C\# program using ADO.NET
 
@@ -76,7 +83,7 @@ dotnet add package Npgsql
 - The `Npgsql` is a .NET data provider for PostgreSQL.
 - The `Microsoft.Extensions`.Configuration and `Microsoft.Extensions`.`Configuration.Json` are packages that manage configurations.
 
-Fourth, create `appsettings.json` file in the project and add the `ConnnectionStrings` setting as follows:
+Fourth, create `appsettings.json` file in the project and add the `ConnectionStrings` setting as follows:
 
 ```json
 {

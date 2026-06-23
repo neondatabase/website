@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Create Function Statement'
-page_title: 'PostgreSQL CREATE FUNCTION Statement'
-page_description: 'In this tutorial, you will learn how to develop user-defined functions using the PostgreSQL CREATE FUNCTION statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/'
-ogImage: '/postgresqltutorial/film.png'
-updatedOn: '2024-03-22T06:51:44+00:00'
+title: PostgreSQL Create Function Statement
+page_title: PostgreSQL CREATE FUNCTION Statement
+page_description: >-
+  In this tutorial, you will learn how to develop user-defined functions using
+  the PostgreSQL CREATE FUNCTION statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-create-function/
+ogImage: /postgresqltutorial/film.png
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Exception'
-  slug: 'postgresql-plpgsql/postgresql-exception'
+  title: PostgreSQL Exception
+  slug: postgresql-plpgsql/postgresql-exception
 nextLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
-  slug: 'postgresql-plpgsql/plpgsql-function-parameters'
+  slug: postgresql-plpgsql/plpgsql-function-parameters
 ---
+
+<Admonition type="info" id="CTA">
+The CREATE FUNCTION statement works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on-premises, or in the cloud. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres, delivering the performance, security, and native Lakehouse integration your data and AI workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE FUNCTION` statement to develop user\-defined functions.
 
@@ -48,7 +55,7 @@ In this syntax:
 
 We’ll use the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
-![](/postgresqltutorial/film.png)The following statement creates a function that returns the number films whose length between the `len_from` and `len_to` parameters:
+![](/postgresqltutorial/film.png)The following statement creates a function that returns the number of films whose length between the `len_from` and `len_to` parameters:
 
 ```plsql
 create function get_film_count(len_from int, len_to int)

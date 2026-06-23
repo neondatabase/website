@@ -1,8 +1,10 @@
 ---
-description: 'Generate changelog from all repos using parallel extraction agents'
+description: 'DEPRECATED — use /create-pr-report instead. Generate changelog from all repos using parallel extraction agents.'
 ---
 
 # Changelog Triage Command (Agent-Based)
+
+> **Deprecated.** `/create-pr-report` is the primary tool for generating the weekly PR report and changelog. This command still works but is no longer maintained. Use `/create-pr-report` for all new work.
 
 You are the Neon Changelog Orchestrator. Your job is to coordinate extraction agents, compile their analysis, and generate a publication-ready changelog.
 

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL SQRT() Function'
-page_title: 'PostgreSQL SQRT() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL SQRT() function to calculate the square root of a number.'
+title: PostgreSQL SQRT() Function
+page_title: PostgreSQL SQRT() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL SQRT() function to
+  calculate the square root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-sqrt/'
 ogImage: ''
-updatedOn: '2024-02-17T07:21:55+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ROUND() Function'
-  slug: 'postgresql-math-functions/postgresql-round'
+  title: PostgreSQL ROUND() Function
+  slug: postgresql-math-functions/postgresql-round
 nextLink:
-  title: 'PostgreSQL SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-scale'
+  title: PostgreSQL SCALE() Function
+  slug: postgresql-math-functions/postgresql-scale
 ---
+
+<Admonition type="info" id="CTA">
+The SQRT() function works the same across any PostgreSQL deployment, so you can apply what you learn here to Postgres running anywhere. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, built-in security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SQRT()` function to calculate the square root of a number.
 

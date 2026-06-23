@@ -2,11 +2,13 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 summary: >-
-  Step-by-step guide for creating a Neon project and configuring a Laravel
-  application to connect to Neon Postgres, including troubleshooting connection
-  issues with older Postgres clients.
+  Connect a Laravel application to Neon Postgres by setting the DB_CONNECTION,
+  DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, and DB_PASSWORD variables in
+  your .env file. Also covers the "endpoint ID is not specified" SNI error
+  that affects older PDO_PGSQL or libpq drivers, with workarounds for passing
+  the endpoint ID as a URL option or in the password field.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 

@@ -2,16 +2,20 @@
 title: Postgres regexp_replace() function
 subtitle: Replace substrings matching a regular expression pattern
 summary: >-
-  Covers the usage of the Postgres `regexp_replace()` function for replacing
-  substrings that match a regular expression pattern, including syntax,
-  parameters, and practical examples for data manipulation and formatting.
+  The Postgres `regexp_replace()` function replaces substrings matching a
+  regular expression pattern, with support for backreferences and flags such as
+  `g` (global) and `i` (case-insensitive). Use it instead of `replace()` when
+  you need pattern-based substitutions for tasks like stripping HTML tags,
+  standardizing phone numbers, or anonymizing sensitive data. An extended form
+  accepts `start` and `N` integer parameters to control the search position and
+  which occurrence to replace.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.882Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `regexp_replace()` function replaces substrings that match a regular expression pattern with the specified replacement string.
 
-This function is particularly useful for complex string manipulations, and data cleaning/formatting tasks. Consider scenarios where you'd want to remove or replace specific patterns in text or transform data to meet certain requirements. For instance, you might use it to format phone numbers consistently, remove HTML tags from text, or anonymize sensitive information in logs.
+Use it for complex string manipulations and data cleaning/formatting tasks. Consider scenarios where you'd want to remove or replace specific patterns in text or transform data to meet certain requirements. For instance, you might use it to format phone numbers consistently, remove HTML tags from text, or anonymize sensitive information in logs.
 
 <CTA />
 

@@ -1,37 +1,37 @@
 import LINKS from './links';
 
-export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-01-15';
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-05-27';
 
 export default {
   index: {
-    title: 'Neon Serverless Postgres — Ship faster',
+    title: 'Neon — Postgres backends for apps and agents',
     description:
-      'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
+      'The backend for apps and agents. Build with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
     pathname: '',
   },
   about: {
     title: 'About Us - Neon',
     description:
-      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
     pathname: '',
   },
   ai: {
-    title: 'Postgres for AI — Neon',
+    title: 'Postgres and backend platform for AI — Neon',
     description:
-      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+      'Build AI agents faster with Neon: serverless Postgres, Auth, Functions, Storage, and an AI Gateway, built for operation by agents.',
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
   aboutUs: {
     title: 'About Us — Neon',
     description:
-      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to build the backend for apps and agents, for every developer.',
     pathname: LINKS.aboutUs,
   },
   blog: {
     title: 'Our Blog — Neon',
     description:
-      'Learn about Neon and how it can help you build better with Serverless Postgres by reading our blog posts.',
+      'Learn about Neon and how it can help you build better backends for apps and agents by reading our blog posts.',
     imagePath: '/images/social-previews/blog.jpg',
     pathname: LINKS.blog,
   },
@@ -39,6 +39,11 @@ export default {
     title: 'Guides — Neon',
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
+  },
+  faqs: {
+    title: 'FAQs — Neon',
+    description: 'Frequently asked questions about Neon.',
+    pathname: LINKS.faqs,
   },
   caseStudies: {
     title: 'Case Studies — Neon',
@@ -48,7 +53,7 @@ export default {
   },
   cli: {
     title: 'Your Neon workflow lives in the terminal',
-    description: 'The Neon CLI brings serverless Postgres to your terminal.',
+    description: 'The Neon CLI brings the Neon backend platform to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
@@ -89,9 +94,9 @@ export default {
     pathname: LINKS.useCases,
   },
   serverlessApps: {
-    title: 'Postgres for serverless apps — Neon',
+    title: 'Postgres and backend platform for serverless apps — Neon',
     description:
-      'Scale your app effortlessly with Neon’s serverless Postgres. With automatic scaling, pooler built on pgBouncer, and usage-based pricing.',
+      'Scale your app effortlessly on Neon’s serverless backend: Postgres, Auth, Functions, Storage, and an AI Gateway, with automatic scaling and usage-based pricing.',
     pathname: `${LINKS.useCases}/serverless-apps`,
     imagePath: '/images/social-previews/serverless-apps.jpg',
   },

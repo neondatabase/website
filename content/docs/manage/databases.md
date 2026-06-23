@@ -1,12 +1,15 @@
 ---
 title: Manage databases
 summary: >-
-  Covers the management of databases within Neon's project branches, including
-  creation, schema details, and privileges, as well as interfaces for database
-  operations like the Neon Console, CLI, API, and SQL.
+  Neon databases are Postgres containers for schemas, tables, and indexes that
+  exist within a project branch. Use this page to create, rename, or delete
+  databases via the Neon Console, CLI, API, or SQL. Note that the TABLESPACE
+  parameter is not supported. Because Neon roles are not full Postgres
+  superusers, ownership transfers require a group-role workaround using
+  ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.116Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -76,7 +79,7 @@ To delete a database:
 
 ## Manage databases with the Neon CLI
 
-The Neon CLI supports creating and deleting databases. For instructions, see [Neon CLI commands — databases](/docs/reference/cli-databases).
+The Neon CLI supports creating and deleting databases with `neon databases create --name <database_name>` and `neon databases delete <database_name>`. If you omit `--branch`, the CLI uses the project's default branch. For full instructions and options, see [Neon CLI commands — databases](/docs/cli/databases).
 
 ## Manage databases with the Neon API
 
@@ -328,6 +331,116 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 </Admonition>
 
 For more information about database object privileges in Postgres, see [Privileges](https://www.postgresql.org/docs/current/ddl-priv.html).
+
+### Rename a database with SQL
+
+To rename a database, use `ALTER DATABASE`. Postgres won't let you rename a database while you're connected to it, so connect to a different database on the same branch first (for example, the default `neondb`), then run:
+
+```sql
+ALTER DATABASE old_db_name RENAME TO new_db_name;
+```
+
+If open connections to the database block the rename, terminate them first:
+
+```sql
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'old_db_name'
+  AND pid <> pg_backend_pid();
+```
+
+The rename is instant, and data, schemas, tables, roles, and grants are unaffected. The database name is part of every connection string for the database, so update any application, script, or stored secret that references the old name. You can also rename a database with the [Neon API](#update-a-database-with-the-api).
+
+### Delete a database with SQL
+
+To delete a database, use `DROP DATABASE`. As with renaming, connect to a different database on the same branch first, since Postgres won't drop the database you're connected to:
+
+```sql
+DROP DATABASE old_db_name;
+```
+
+Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. You can also delete a database from the [Neon Console](#delete-a-database), the [Neon CLI](#manage-databases-with-the-neon-cli), or the [Neon API](#delete-a-database-with-the-api).
+
+## Transfer database table ownership between roles
+
+In Neon, roles created via the Console, CLI, or API are members of `neon_superuser` but are not full Postgres superusers. This means you can't directly transfer ownership of a database table from one role to another using `ALTER TABLE ... OWNER TO`.
+
+The workaround is to introduce a shared group role that both roles belong to. You transfer ownership to the group, then the destination role can claim ownership for itself.
+
+<Admonition type="note">
+In the example below, `current_owner`, `new_owner`, and `table_owners` are placeholder role and group names. Replace them with names from your own environment.
+</Admonition>
+
+1. Connect as the database owner role and run:
+
+   ```sql
+   -- Create a group role with no login
+   CREATE ROLE table_owners NOLOGIN;
+
+   -- Grant schema access to the group
+   GRANT USAGE, CREATE ON SCHEMA public TO table_owners;
+
+   -- Add both roles to the group
+   GRANT table_owners TO current_owner;
+   GRANT table_owners TO new_owner;
+   ```
+
+   Replace `current_owner` and `new_owner` with the actual role names.
+
+2. Still connected as `current_owner`, transfer the table to the group:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO table_owners;
+   ```
+
+3. Connect as `new_owner`. Transfer ownership from the group to yourself:
+
+   ```sql
+   ALTER TABLE your_table OWNER TO new_owner;
+   ```
+
+4. Verify ownership:
+
+   ```sql
+   \dt your_table
+   ```
+
+   The **Owner** column should now show `new_owner`.
+
+5. Leave the `table_owners` group role in place if you need to transfer other tables later, or drop it when you're done:
+
+   ```sql
+   DROP ROLE table_owners;
+   ```
+
+   `DROP ROLE table_owners` works only after that role no longer owns any objects and has no blocking dependencies.
+
+### Transfer ownership for multiple objects
+
+The numbered steps above show how to transfer one table with `ALTER TABLE ... OWNER TO`.
+
+If you need to transfer ownership for everything a role owns in a database, use `REASSIGN OWNED` instead of running `ALTER ... OWNER TO` for each table.
+
+`REASSIGN OWNED` includes tables and other object types owned by the role, such as views, materialized views, sequences, functions, schemas, and types.
+
+Connect as `current_owner` and move all owned objects to the shared group:
+
+```sql
+REASSIGN OWNED BY current_owner TO table_owners;
+```
+
+Then connect as `new_owner` and move those objects from the group to the destination role:
+
+```sql
+REASSIGN OWNED BY table_owners TO new_owner;
+```
+
+`REASSIGN OWNED` applies within the current database context. Run it in each database where you need to transfer ownership.
+
+<Admonition type="note">
+- `REASSIGN OWNED` runs in the current database context, so run it in each database where you need to transfer ownership.
+- `REASSIGN OWNED` reassigns ownership only. It does not change existing `GRANT` permissions or default privileges.
+</Admonition>
 
 ## Reserved database names
 

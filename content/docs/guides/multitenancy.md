@@ -2,13 +2,18 @@
 title: Multitenancy with Neon
 subtitle: How to configure Neon for multitenancy - plus a few design tips
 summary: >-
-  How to configure Neon for a multitenant architecture using a database-per-user
-  approach, ensuring data isolation and security while managing multiple users
-  efficiently.
+  Neon's project-per-user model gives each tenant a dedicated Neon project with
+  independent compute, per-customer point-in-time recovery, and near-instant
+  provisioning through the Neon API. This provides instance-level isolation
+  without the DevOps overhead of managing individual RDS instances. Choose this
+  approach over shared-schema or schema-per-user designs when complete data
+  isolation, regional compliance, or independent PITR per tenant is required.
+  Also covers catalog database design, automated cross-project schema migrations
+  with Drizzle ORM and GitHub Actions, and scheduled pg_dump backups to AWS S3.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-03-09T15:00:58.539Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -100,7 +105,7 @@ As you scale, following a project-per-user design means eventually managing thou
 
 ### Dev/test environments
 
-In Neon, [database branching](/docs/introduction/branching) is a powerful feature that enables you to create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
+In Neon, [database branching](/docs/introduction/branching) lets you create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
 
 To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS.
 
@@ -266,7 +271,7 @@ if (options.name) {
 }
 ```
 
-This script utilizes the `commander` library to create a simple command-line interface (CLI) and the Neon API's `createProject` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
+This script uses the `commander` library to create a simple command-line interface (CLI) and the Neon API's `createProject` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
 
 To execute the script and create a new Neon project named "ACME Corp" with PostgreSQL version 16 in the aws-us-east-1 region, run:
 

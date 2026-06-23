@@ -2,11 +2,14 @@
 title: Postgres sample data
 subtitle: 'Import sample data for learning, testing, and exploring Neon'
 summary: >-
-  Covers the process of downloading and installing sample data for Neon,
-  including prerequisites and instructions for various datasets to facilitate
-  learning, testing, and exploration.
+  Curated Postgres sample datasets with load instructions using psql,
+  pg_restore, or the Neon CLI for learning, testing, and exploration. Choose
+  this page when you need real data in a Neon database fast; larger datasets
+  require a paid plan because the Free plan caps storage per branch. Includes
+  Pagila, Chinook, Employees, Wikipedia vector embeddings (pgvector), and
+  Postgres Air.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.067Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -519,10 +522,10 @@ You can load data with the Neon CLI by passing the `--psql` option, which calls 
 
 The Neon CLI and `psql` must be installed on your system. For installation instructions, see:
 
-- [Neon CLI — Install and connect](/docs/reference/cli-install)
+- [Neon CLI — Install and connect](/docs/cli/install)
 - [PostgreSQL Downloads](https://www.postgresql.org/download/) for `psql`
 
-If you have multiple Neon projects or branches, we recommend setting your Neon CLI project and branch context so that you don't have to specify them explicitly when running a Neon CLI command. See [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+If you have multiple Neon projects or branches, we recommend setting your Neon CLI project and branch context so that you don't have to specify them explicitly when running a Neon CLI command. See [Neon CLI commands — set-context](/docs/cli/set-context).
 
 To load sample data:
 
@@ -534,14 +537,14 @@ To load sample data:
 
    Alternatively, supply your own data file.
 
-2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
+2. Load the data using one of the following Neon CLI commands ([projects](/docs/cli/projects), [branches](/docs/cli/branches), or [connection-string](/docs/cli/connection-string)):
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash
      neon projects create --psql -- -f periodic_table.sql
      ```
 
-   - Create a branch, connect to it with `psql`, and run the an `.sql` file.
+   - Create a branch, connect to it with `psql`, and run the `.sql` file.
 
      ```bash
      neon branches create --psql -- -f periodic_table.sql

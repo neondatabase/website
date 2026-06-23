@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Change Column Type'
-page_title: 'PostgreSQL Change Column Type'
-page_description: 'This tutorial shows you step by step how to change the data type of a column by using the ALTER TABLE ALTER COLUMN SET DATA TYPE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-change-column-type/'
+title: PostgreSQL Change Column Type
+page_title: PostgreSQL Change Column Type
+page_description: >-
+  This tutorial shows you step by step how to change the data type of a column
+  by using the ALTER TABLE ALTER COLUMN SET DATA TYPE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-change-column-type/
 ogImage: ''
-updatedOn: '2024-01-25T05:13:35+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL DROP COLUMN: Remove One or More Columns of a Table'
-  slug: 'postgresql-tutorial/postgresql-drop-column'
+  slug: postgresql-tutorial/postgresql-drop-column
 nextLink:
   title: 'PostgreSQL RENAME COLUMN: Renaming a column'
-  slug: 'postgresql-tutorial/postgresql-rename-column'
+  slug: postgresql-tutorial/postgresql-rename-column
 ---
+
+<Admonition type="info" id="CTA">
+Changing a column's data type with ALTER TABLE works the same way on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: this tutorial shows you step\-by\-step how to change the data type of a column by using the `ALTER TABLE... ALTER COLUMN` statement.
 

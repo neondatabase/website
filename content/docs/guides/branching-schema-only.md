@@ -2,11 +2,16 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 summary: >-
-  Covers the creation of schema-only branches in Neon, allowing users to
-  replicate only the database schema from a source branch without copying
-  sensitive data, ensuring a secure environment for development and testing.
+  Schema-only branches in Neon copy only the database structure from a source
+  branch, leaving all row data behind, so teams can develop and test against
+  production schemas without exposing confidential records. Use this feature
+  when you need a compliant development or CI/CD environment with realistic
+  table structure but no sensitive data, distinct from standard Neon branches
+  that copy both schema and data via copy-on-write. Schema-only branches are
+  independent root branches with plan-specific storage limits; reset-from-parent
+  is not supported.
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:26:17.513Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <FeatureBeta />
@@ -43,7 +48,7 @@ To create a schema-only branch using the Neon CLI:
 neon branch create --schema-only
 ```
 
-If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/cli/branches#create).
 
 </TabItem>
 
@@ -163,6 +168,6 @@ There are certain allowances associated with schema-only branches:
 | :----- | :-------------------------------- | :----------------------------------------------- |
 | Free   | 3                                 | 0.5 GB                                           |
 | Launch | 5                                 | 3 GB                                             |
-| Scale  | 25                                | 5 GB                                             |
+| Scale  | 25                                | 20 GB                                            |
 
 Once you use up your root branch allowance, you will not be able to create additional schema-only branches. You will be required to remove existing root branches first.

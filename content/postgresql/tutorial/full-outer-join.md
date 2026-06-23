@@ -1,24 +1,31 @@
 ---
-title: 'PostgreSQL FULL OUTER JOIN'
-page_title: 'PostgreSQL FULL OUTER JOIN'
-page_description: 'This tutorial shows you how to use the PostgreSQL FULL OUTER JOIN to join two tables.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/'
-ogImage: '/postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png'
-updatedOn: '2024-01-18T05:31:07+00:00'
+title: PostgreSQL FULL OUTER JOIN
+page_title: PostgreSQL FULL OUTER JOIN
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL FULL OUTER JOIN to join two
+  tables.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
+ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Self-Join'
-  slug: 'postgresql-tutorial/postgresql-self-join'
+  title: PostgreSQL Self-Join
+  slug: postgresql-tutorial/postgresql-self-join
 nextLink:
-  title: 'PostgreSQL Cross Join'
-  slug: 'postgresql-tutorial/postgresql-cross-join'
+  title: PostgreSQL Cross Join
+  slug: postgresql-tutorial/postgresql-cross-join
 ---
+
+<Admonition type="info" id="CTA">
+FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deployment, so you can apply these patterns wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FULL OUTER JOIN` to query data from two tables.
 
 ## Introduction to the PostgreSQL FULL OUTER JOIN clause
 
-The `FULL OUTER JOIN` combine data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
+The `FULL OUTER JOIN` combines data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
 
 In other words, the `FULL OUTER JOIN` combines the results of both the [left join](postgresql-left-join) and the [right join](postgresql-right-join).
 
@@ -181,7 +188,7 @@ Additionally, it includes every employee who does not belong to a department and
 
 ### 2\) Using FULL OUTER JOIN with WHERE clause example
 
-The following example use the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
+The following example uses the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
 
 ```sql
 SELECT
@@ -207,7 +214,7 @@ Output:
 
 The result shows that the `Production` department does not have any employees.
 
-The following example use the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
+The following example uses the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
 
 ```sql
 SELECT

@@ -2,18 +2,24 @@
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 summary: >-
-  Covers the process of using the Backup & Restore feature in Neon to instantly
-  restore branches to previous states, create and manage snapshots, and schedule
-  automated backups for data recovery.
+  Neon's Backup & Restore feature combines instant point-in-time restore (PITR)
+  and snapshots to recover a branch from accidental changes, schema issues, or
+  data loss. Use it when you need to roll back a root branch to a specific
+  timestamp or LSN, create manual snapshots before risky changes, or schedule
+  automated daily, weekly, or monthly backups. Snapshot storage is billed at
+  $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
+  limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-02-27T19:55:46.377Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
-<Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is now in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+<Admonition type="note" title="Snapshots">
+The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
-**Pricing:** Snapshots are free during the Beta period. Snapshot storage will be billed at $0.09/GB-month, starting May 1, 2026.
+**Pricing:** Snapshot storage is billed at $0.09/GB-month.
+
+Billing behavior: manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first scheduled snapshot, then as incremental (delta) storage for subsequent scheduled snapshots.
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -44,7 +50,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [restore window](/docs/introduction/restore-window).
+You can restore from any time that falls within your project's [history window](/docs/introduction/history-window).
 
 1. **Select a time**
 
@@ -91,7 +97,7 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
-For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 
 </TabItem>
 
@@ -151,7 +157,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -169,6 +175,25 @@ The parameters used in the example above:
 - `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
+
+### Snapshot size fields in API responses
+
+Responses from the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot), [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots), and [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoints include a `snapshot` object that may contain optional **`full_size`** and **`diff_size`** (both **`int64`**, size in bytes).
+
+#### Manual and scheduled snapshots
+
+- **Manual** snapshots report **`full_size`**: the full logical size at the time of the snapshot.
+- **Scheduled** snapshots: the **first** scheduled snapshot reports **`full_size`** (full logical size). **Subsequent** scheduled snapshots report **`diff_size`**, which is incremental storage since the **previous scheduled** snapshot, when the snapshot is billed on **incremental (diff)** usage.
+
+#### The `full_size` field
+
+Full logical size of the snapshot in bytes at the time it was taken. When the field is **absent**, the logical size has not been calculated yet and the snapshot is **not** being charged. When **present**, a value of **`0`** means the snapshot is **not** being charged.
+
+#### The `diff_size` field
+
+Incremental storage size in bytes since the **previous scheduled snapshot**, when the snapshot is billed on **incremental (diff)** usage. When **absent**, either the incremental size has not been calculated yet and the snapshot is **not** being charged, or the snapshot is charged at **full logical size** (in that case **`full_size`** is set).
+
+Depending on billing mode and whether sizes have finished calculating, either field may be omitted. For parameter-level definitions, see each endpoint in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 **Related API references:**
 
@@ -380,7 +405,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/sna
 Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application.
+- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data (it is not left on both branches).
 - `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
 
 <Admonition type="note">
@@ -474,6 +499,8 @@ Use this option if you need to inspect the restored data before you switch over 
     - Moves your original branch's computes to the new branch and restarts the computes.
     - Renames the new branch to original branch's name.
     - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.
+    - Moves any backup schedule from the original branch to the branch that now has the restored data, so scheduled snapshots continue on the active branch after finalize.
+    - If the original branch was **protected**, that protection is **moved** to the branch that ends up with your restored data (the renamed branch that keeps your connection string). The previous branch is no longer protected, so your [protected branch](/docs/guides/protected-branches) count stays correct.
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \

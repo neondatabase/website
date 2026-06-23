@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use ltree and pgRouting for ana
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-28T13:24:36.612Z'
-updatedOn: '2025-02-28T13:24:36.612Z'
+updatedOn: '2025-03-01T16:53:32.000Z'
 ---
 
 Graph databases are used to store and analyze data that is connected in a network-like structure.

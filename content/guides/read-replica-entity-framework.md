@@ -4,7 +4,7 @@ subtitle: Learn how to scale .NET applications with Entity Framework's DbContext
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2024-10-13T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
@@ -15,8 +15,8 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 - A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started/signing-up).
 - Basic knowledge of .NET Core
-- Dotnet SDK installed on your local machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download).
-- Dotnet Entity Framework Core CLI tools installed. You can install them by running the following command:
+- .NET SDK installed on your local machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download).
+- .NET Entity Framework Core CLI tools installed. You can install them by running the following command:
 
   ```bash
   dotnet tool install --global dotnet-ef

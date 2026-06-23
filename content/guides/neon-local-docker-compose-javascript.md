@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-04-30T00:00:00.000Z'
-updatedOn: '2025-04-30T00:00:00.000Z'
+updatedOn: '2025-05-30T16:53:05.000Z'
 title: How to set up Neon Local with Docker Compose and JavaScript Postgres clients
 subtitle: A practical guide to Neon Local with JavaScript and Docker Compose for local and production setups
 ---

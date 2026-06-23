@@ -18,20 +18,33 @@
  * - Tabs/TabItem -> **Tab: label** + content
  * - Steps -> extracts children
  * - DetailIconCards -> bullet list with links
+ * - CompactCards -> bullet list with links or prompt links
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
- * - CopyPrompt, NeedHelp, Comment -> removed (UI-only)
+ * - CopyPrompt -> description text (buttons/icons omitted)
+ * - RequestForm -> title + description (form controls omitted)
+ * - NeedHelp, Comment -> removed (UI-only)
  *
  * Dependencies: unified, remark-parse, remark-gfm, unist-util-visit, gray-matter, js-yaml (direct); remark-mdx and mdast-util-* (transitive). We pin the direct ones so version conflicts (e.g. remark-gfm v4 needing unified v11 while another dep had v10) don’t break the build.
  */
 
 const fs = require('fs').promises;
 const fsSync = require('fs');
+const { fork } = require('child_process');
+const os = require('os');
 const path = require('path');
 
 const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
+
+// CLI reference components (<CliOptions command="..."/> etc.) render
+// generated content from the committed neonctl schema. These are the SAME
+// renderer functions used by src/components/pages/doc/cli-reference, so the
+// web page and this llms mirror can never disagree on the generated tables.
+const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
+const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+const { isUnusedOrSharedContent } = require('../constants/content');
 
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
@@ -47,6 +60,33 @@ const unknownComponents = [];
 const fetchFailures = [];
 const processingErrors = [];
 
+const isVerboseLogging = () => process.env.LLMS_PROCESSOR_VERBOSE === '1';
+
+const logFileProcessed = (message) => {
+  if (isVerboseLogging()) {
+    console.log(message);
+  }
+};
+
+const createProcessingStats = () => ({
+  createdDirs: new Set(),
+  filesWritten: 0,
+});
+
+const ensureOutputDirectory = async (dirPath, stats) => {
+  if (stats?.createdDirs?.has(dirPath)) return;
+
+  await fs.mkdir(dirPath, { recursive: true });
+  stats?.createdDirs?.add(dirPath);
+};
+
+const getRouteConcurrency = () => {
+  const configured = Number.parseInt(process.env.LLMS_PROCESSOR_ROUTE_CONCURRENCY || '', 10);
+  if (Number.isInteger(configured) && configured > 0) return configured;
+
+  return Math.max(1, Math.min(4, os.cpus().length));
+};
+
 /**
  * Parameterless shared content components - map of ComponentName -> template-name
  * These load a template from content/docs/shared-content/ with no props.
@@ -57,7 +97,6 @@ const SHARED_CONTENT_COMPONENTS = {
   MCPTools: 'mcp-tools',
   LinkAPIKey: 'manage-api-keys',
   LRNotice: 'lr-notice',
-  ComingSoon: 'coming-soon',
   PrivatePreview: 'private-preview',
   PrivatePreviewEnquire: 'private-preview-enquire',
   PublicPreview: 'public-preview',
@@ -65,9 +104,11 @@ const SHARED_CONTENT_COMPONENTS = {
   MigrationAssistant: 'migration-assistant',
   NextSteps: 'next-steps',
   NewPricing: 'new-pricing',
-  EarlyAccess: 'early-access',
   AzureRegionsDeprecation: 'azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'consumption-account-api-deprecation',
+  NextjsProxyNote: 'nextjs-proxy-note',
+  AuthAISetup: 'auth-ai-setup',
+  AuthAISetupTip: 'auth-ai-setup-tip',
 };
 
 /**
@@ -76,17 +117,16 @@ const SHARED_CONTENT_COMPONENTS = {
  * To add a new one, just add an entry here.
  */
 const IGNORED_COMPONENTS = [
-  'CopyPrompt', // UI copy button
   'NeedHelp', // UI help widget
   'Comment', // MDX comments
   'Video', // HTML5 video (no text content)
   'UserButton', // Auth UI element
-  'RequestForm', // Interactive form
   'Suspense', // React utility
   'SqlToRestConverter', // Interactive app
   'LogosSection', // Decorative logos
   'ComputeCalculator', // Interactive widget
   'UseCaseContext', // Repetitive boilerplate
+  'McpSetupConfigurator', // Interactive MCP setup widget
 ];
 
 // ESM modules loaded dynamically
@@ -337,6 +377,48 @@ function findJsxElements(node, names) {
   return found;
 }
 
+function compactCardsToList(node) {
+  const anchors = findJsxElements(node, 'a');
+  const cardItems = anchors
+    .map((a) => {
+      const href = getAttr(a, 'href');
+      const promptSrc = getAttr(a, 'promptSrc');
+      const title =
+        getAttr(a, 'title') ||
+        (a.children?.length > 0 ? childrenToMarkdown(a.children) : href || promptSrc);
+      const description = getAttr(a, 'description');
+
+      if (!title || (!href && !promptSrc)) return null;
+
+      const isPrompt = Boolean(promptSrc);
+      const linkChildren = [
+        {
+          type: 'link',
+          url: isPrompt ? `${BASE_URL}${promptSrc}` : toAbsoluteUrl(href),
+          children: [{ type: 'text', value: isPrompt ? `${title} prompt` : title }],
+        },
+      ];
+
+      if (description) {
+        linkChildren.push({ type: 'text', value: `: ${description}` });
+      }
+
+      return { type: 'listItem', children: [{ type: 'paragraph', children: linkChildren }] };
+    })
+    .filter(Boolean);
+
+  if (cardItems.length === 0) return null;
+
+  const list = {
+    type: 'list',
+    ordered: false,
+    spread: false,
+    children: cardItems,
+  };
+
+  return list;
+}
+
 /**
  * Shared content template cache
  */
@@ -377,15 +459,20 @@ function loadSharedContent(templateName, props = {}) {
     processed = processed.replace(new RegExp(`\\{${key}\\}`, 'g'), value);
   }
 
-  // Parse the content as MDX
+  return parseMarkdownToNodes(processed);
+}
+
+/**
+ * Parse a markdown string into transformed MDAST nodes ready for splicing
+ * into the output tree. Nested MDX components inside the string are
+ * transformed too.
+ * @param {string} markdown
+ * @returns {Array} - Array of AST nodes
+ */
+function parseMarkdownToNodes(markdown) {
   const processor = unified().use(remarkParse).use(remarkGfm).use(remarkMdx);
-
-  const tree = processor.parse(processed);
-
-  // Transform the parsed content (this will handle nested MDX components)
-  const transformedChildren = transformChildren(tree.children);
-
-  return transformedChildren;
+  const tree = processor.parse(markdown);
+  return transformChildren(tree.children);
 }
 
 /**
@@ -417,7 +504,57 @@ function buildCheckItem(node) {
 /**
  * Component handlers - transform MDX JSX nodes into markdown nodes
  */
+/**
+ * Resolve the `command` attribute of a CLI reference component to its
+ * schema node + path parts. Returns null (with a warning) when unknown, so
+ * a stale page degrades visibly instead of crashing the postbuild.
+ */
+function resolveCliCommand(node, componentName) {
+  const command = getAttr(node, 'command') || '';
+  const parts = command.trim().split(/\s+/).filter(Boolean);
+  const target = cliDocs.resolveCommand(cliSchema, parts);
+  if (!target) {
+    console.warn(`${componentName}: unknown neonctl command "${command}" in ${currentFile}`);
+    processingErrors.push({ file: currentFile, error: `unknown neonctl command "${command}"` });
+    return null;
+  }
+  return { target, parts };
+}
+
 const componentHandlers = {
+  /**
+   * CLI reference components -> generated markdown from the neonctl schema
+   * (same renderers as the web components in components/pages/doc/cli-reference).
+   */
+  CliUsage(node) {
+    const resolved = resolveCliCommand(node, 'CliUsage');
+    return resolved
+      ? parseMarkdownToNodes(cliDocs.renderUsage(resolved.target, resolved.parts))
+      : null;
+  },
+  CliOptions(node) {
+    const resolved = resolveCliCommand(node, 'CliOptions');
+    if (!resolved) return null;
+    // Same inherited-options merge as the web component; '' (only global
+    // options apply) renders nothing in the mirror too.
+    const table = cliDocs.renderOptionsForPath(cliSchema, resolved.parts);
+    return table ? parseMarkdownToNodes(table) : null;
+  },
+  CliSubcommands(node) {
+    const resolved = resolveCliCommand(node, 'CliSubcommands');
+    if (!resolved) return null;
+    const anchorParts = (getAttr(node, 'anchorParts') || '').trim().split(/\s+/).filter(Boolean);
+    return parseMarkdownToNodes(cliDocs.renderSubcommands(resolved.target, anchorParts));
+  },
+  CliGlobalOptions() {
+    return parseMarkdownToNodes(cliDocs.renderGlobalOptions(cliSchema));
+  },
+  CliCommandIndex() {
+    // The interactive index on the web page degrades to the full static
+    // command tree for agents reading the .md mirror.
+    return parseMarkdownToNodes(cliDocs.renderCommandIndex(cliSchema));
+  },
+
   /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
@@ -1074,7 +1211,7 @@ const componentHandlers = {
     };
   },
 
-  // CopyPrompt, NeedHelp -> registered via IGNORED_COMPONENTS below
+  // NeedHelp -> registered via IGNORED_COMPONENTS below
   /**
    * YoutubeIframe -> YouTube link
    */
@@ -1148,43 +1285,11 @@ const componentHandlers = {
   },
 
   /**
-   * PromptCards -> list of prompt links (useful for AI agents)
-   * Children are <a> elements with title and promptSrc attributes
+   * CompactCards -> list of card links, including optional descriptions.
+   * Children are <a> elements with href or promptSrc attributes.
    */
-  PromptCards(node) {
-    const anchors = findJsxElements(node, 'a');
-    const items = anchors
-      .map((a) => {
-        const title = getAttr(a, 'title');
-        const promptSrc = getAttr(a, 'promptSrc');
-        if (!title || !promptSrc) return null;
-        return {
-          type: 'listItem',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'link',
-                  url: `${BASE_URL}${promptSrc}`,
-                  children: [{ type: 'text', value: `${title} prompt` }],
-                },
-              ],
-            },
-          ],
-        };
-      })
-      .filter(Boolean);
-
-    if (items.length === 0) return null;
-
-    return [
-      {
-        type: 'paragraph',
-        children: [{ type: 'strong', children: [{ type: 'text', value: 'AI Coding Prompts:' }] }],
-      },
-      { type: 'list', ordered: false, spread: false, children: items },
-    ];
+  CompactCards(node) {
+    return compactCardsToList(node);
   },
 
   /**
@@ -1331,9 +1436,214 @@ const componentHandlers = {
       });
     }
 
-    if (paragraphs.length === 0) return null;
+    // Bare <CTA /> with no props falls back to the same defaults the React
+    // component renders (src/components/shared/doc-cta/doc-cta.jsx DEFAULT_DATA),
+    // so markdown and HTML stay in parity.
+    if (paragraphs.length === 0) {
+      const defaultTitle = 'Try it on Neon!';
+      const defaultDescription =
+        'Neon is Serverless Postgres built for the cloud. Explore Postgres features and functions in our user-friendly SQL editor. Sign up for a free account to get started.';
+      const defaultButtonText = 'Sign Up';
+      const defaultButtonUrl = 'https://console.neon.tech/signup';
+      return {
+        type: 'blockquote',
+        children: [
+          {
+            type: 'paragraph',
+            children: [{ type: 'strong', children: [{ type: 'text', value: defaultTitle }] }],
+          },
+          {
+            type: 'paragraph',
+            children: [{ type: 'text', value: defaultDescription }],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'link',
+                url: defaultButtonUrl,
+                children: [{ type: 'text', value: defaultButtonText }],
+              },
+            ],
+          },
+        ],
+      };
+    }
 
     return { type: 'blockquote', children: paragraphs };
+  },
+
+  /**
+   * CopyPrompt -> emit the description text and a link to the prompt source.
+   * The copy button and icon are UI-only and are intentionally omitted.
+   */
+  CopyPrompt(node) {
+    const description = getAttr(node, 'description');
+    const src = getAttr(node, 'src');
+    const children = [];
+    if (description) {
+      children.push({ type: 'text', value: description });
+    }
+    if (src) {
+      if (description) children.push({ type: 'text', value: ' ' });
+      const absoluteSrc = src.startsWith('http') ? src : `${BASE_URL}${src}`;
+      children.push({
+        type: 'link',
+        url: absoluteSrc,
+        children: [{ type: 'text', value: 'View prompt' }],
+      });
+    }
+    if (children.length === 0) return null;
+    return { type: 'paragraph', children };
+  },
+
+  /**
+   * RequestForm -> emit actionable text so markdown stays in parity with HTML.
+   * Descriptions are rewritten to remove "select below" phrasing (no form exists
+   * in markdown) and replaced with links to support and Discord.
+   * The combobox / submit button are UI-only and are omitted.
+   */
+  RequestForm(node) {
+    const type = getAttr(node, 'type');
+    const FORM_INTROS = {
+      region: 'Looking for Neon in a different cloud provider or region?',
+      extension: 'Looking for a specific Postgres extension in Neon?',
+    };
+    const intro = type && FORM_INTROS[type];
+    if (!intro) return null;
+
+    const FORM_TITLES = {
+      region: 'Request a new Provider / Region',
+      extension: 'Request a new extension',
+    };
+
+    return {
+      type: 'blockquote',
+      children: [
+        {
+          type: 'paragraph',
+          children: [{ type: 'strong', children: [{ type: 'text', value: FORM_TITLES[type] }] }],
+        },
+        {
+          type: 'paragraph',
+          children: [
+            { type: 'text', value: `${intro} Submit a request through ` },
+            {
+              type: 'link',
+              url: `${BASE_URL}/docs/introduction/support`,
+              children: [{ type: 'text', value: 'Neon support' }],
+            },
+            { type: 'text', value: ' or let us know in the ' },
+            {
+              type: 'link',
+              url: 'https://discord.gg/92vNTzKDGp',
+              children: [{ type: 'text', value: 'Neon Discord' }],
+            },
+            { type: 'text', value: '.' },
+          ],
+        },
+      ],
+    };
+  },
+
+  /**
+   * Callout -> bold title + content (neutral "good to know" callout)
+   * <Callout title="Before you start">content</Callout>
+   */
+  Callout(node) {
+    const title = getAttr(node, 'title') || 'Good to know';
+    const hasBlockContent = node.children?.some(
+      (c) =>
+        c.type === 'list' ||
+        c.type === 'code' ||
+        c.type === 'heading' ||
+        c.type === 'blockquote' ||
+        c.type === 'mdxJsxFlowElement' ||
+        c.type === 'mdxJsxTextElement'
+    );
+
+    if (hasBlockContent || title) {
+      return [
+        {
+          type: 'paragraph',
+          children: [{ type: 'strong', children: [{ type: 'text', value: `${title}:` }] }],
+        },
+        ...(node.children || []),
+      ];
+    }
+
+    const content = childrenToMarkdown(node.children);
+    return {
+      type: 'paragraph',
+      children: [
+        { type: 'strong', children: [{ type: 'text', value: `${title}:` }] },
+        { type: 'text', value: content ? ` ${content}` : '' },
+      ],
+    };
+  },
+
+  /**
+   * StickyTable -> container with sticky header (table wrapper), extract children
+   */
+  StickyTable(node) {
+    return node.children || null;
+  },
+
+  /**
+   * Tag -> inline badge, emit the label text
+   * <Tag label="beta" size="sm" />
+   */
+  Tag(node) {
+    const label = getAttr(node, 'label');
+    if (!label) return null;
+    return { type: 'inlineCode', value: label };
+  },
+
+  /**
+   * TwinPaths -> two-option chooser, render QuickPath and GuidedPath as a list
+   */
+  TwinPaths(node) {
+    const items = [];
+
+    for (const child of node.children || []) {
+      const isJsx = child.type === 'mdxJsxFlowElement' || child.type === 'mdxJsxTextElement';
+      if (!isJsx) continue;
+
+      const title = getAttr(child, 'title') || child.name;
+      const description = getAttr(child, 'description') || '';
+      const command = getAttr(child, 'command') || '';
+      const href = getAttr(child, 'href') || '';
+
+      const paraChildren = [];
+
+      if (href) {
+        paraChildren.push({
+          type: 'link',
+          url: toAbsoluteUrl(href),
+          children: [{ type: 'text', value: title }],
+        });
+      } else {
+        paraChildren.push({ type: 'strong', children: [{ type: 'text', value: title }] });
+      }
+
+      if (description) {
+        paraChildren.push({ type: 'text', value: `: ${description}` });
+      }
+
+      if (command) {
+        paraChildren.push({ type: 'text', value: '. Run: ' });
+        paraChildren.push({ type: 'inlineCode', value: command });
+      }
+
+      items.push({
+        type: 'listItem',
+        children: [{ type: 'paragraph', children: paraChildren }],
+      });
+    }
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
+      : null;
   },
 };
 
@@ -1518,6 +1828,15 @@ function remarkAbsoluteUrls(pageUrl) {
     // Convert images
     visit(tree, 'image', (node) => {
       node.url = toAbsoluteUrl(node.url, pageUrl);
+    });
+    // Strip custom anchor IDs from heading text: "### create (#create)" is
+    // an authoring convention for short anchors; the "(#create)" suffix is
+    // noise in the rendered markdown the mirror serves to agents.
+    visit(tree, 'heading', (node) => {
+      const last = node.children?.[node.children.length - 1];
+      if (last?.type === 'text') {
+        last.value = last.value.replace(/\s*(?:\(#[^)]+\)|\{#[^}]+\})\s*$/, '');
+      }
     });
   };
 }
@@ -1709,17 +2028,15 @@ async function processFile(inputPath, pageUrl, rootDir) {
 
   // Build output with frontmatter-based header
   let output = '';
+  if (frontmatter.summary) {
+    output += `> Summary: ${frontmatter.summary}\n\n`;
+  }
   if (frontmatter.title) {
     output += `# ${frontmatter.title}\n\n`;
   }
   if (frontmatter.subtitle) {
     output += `${frontmatter.subtitle}\n\n`;
   }
-  // TODO: Enable when summary frontmatter is added consistently across all content routes
-  // if (frontmatter.summary) {
-  //   output += `> ${frontmatter.summary}\n\n`;
-  // }
-
   output += `${markdown.trim()}\n`;
 
   // docs/changelog.md is a dynamic page in the app router. To provide useful
@@ -1734,7 +2051,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
 
-  return output;
+  return { content: output, title: frontmatter.title || null };
 }
 
 /**
@@ -1920,15 +2237,15 @@ function buildNavigationFooter(slug, navMap) {
 
 /**
  * Build the page header block prepended to every generated markdown file.
- * Always includes the documentation index line and feedback instruction.
+ * Always includes the documentation index line.
  * Includes the location line only if the page is in the navigation map with breadcrumbs.
  *
  * @param {string|null} slug - Navigation slug, or null for pages outside nav
  * @param {Map|null} navMap - Navigation map from buildNavigationMap()
- * @param {string} [relativePath] - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @param {string} [_relativePath] - Path relative to content/ (currently unused; kept for API stability)
  * @returns {string} Header block (blockquote lines, followed by blank line)
  */
-function buildPageHeader(slug, navMap, relativePath) {
+function buildPageHeader(slug, navMap, _relativePath) {
   const lines = [];
 
   // Location line (only for pages in the nav map)
@@ -1947,15 +2264,6 @@ function buildPageHeader(slug, navMap, relativePath) {
 
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
-
-  // Feedback instruction (always, with page path baked in when available)
-  const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
-  const feedbackBody = pagePath
-    ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
-    : `{"feedback": "describe the issue"}`;
-  lines.push(
-    `> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to ${BASE_URL}/api/docs-feedback with ${feedbackBody}`
-  );
 
   return `${lines.join('\n')}\n\n`;
 }
@@ -2021,38 +2329,136 @@ function stripNavigationContext(content) {
 }
 
 /**
- * Process a directory recursively
+ * Process a directory recursively.
+ * Returns an array of { title, url } for every page written (used to build route indexes).
  */
-async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
+async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats = null) {
   const entries = await fs.readdir(inputDir, { withFileTypes: true });
+  const pages = [];
 
   for (const entry of entries) {
     const inputPath = path.join(inputDir, entry.name);
 
     if (entry.isDirectory()) {
-      await processDirectory(inputPath, outputDir, baseContentDir, rootDir);
+      const dirRelPath = path.relative(baseContentDir, inputPath) + '/';
+      if (isUnusedOrSharedContent(dirRelPath)) continue;
+      const subPages = await processDirectory(inputPath, outputDir, baseContentDir, rootDir, stats);
+      pages.push(...subPages);
     } else if (entry.name.endsWith('.md')) {
       const relativePath = path.relative(baseContentDir, inputPath);
+      if (isUnusedOrSharedContent(relativePath)) continue;
       const outputPath = path.join(outputDir, relativePath);
       const pageUrl = getPageUrl(inputPath, baseContentDir);
 
-      await fs.mkdir(path.dirname(outputPath), { recursive: true });
+      await ensureOutputDirectory(path.dirname(outputPath), stats);
 
       try {
-        let result = await processFile(inputPath, pageUrl, rootDir);
-        result = addNavigationContext(result, relativePath, navigationMap);
-        await fs.writeFile(outputPath, result);
-        console.log(`✓ ${relativePath}`);
+        const { content, title } = await processFile(inputPath, pageUrl, rootDir);
+        const withNav = addNavigationContext(content, relativePath, navigationMap);
+        await fs.writeFile(outputPath, withNav);
+        stats && (stats.filesWritten += 1);
+        logFileProcessed(`✓ ${relativePath}`);
+        if (pageUrl) {
+          pages.push({ title: title || path.basename(entry.name, '.md'), url: `${pageUrl}.md` });
+        }
       } catch (error) {
         console.error(`✗ ${relativePath}: ${error.message}`);
         processingErrors.push({ file: inputPath, error: error.message });
       }
     }
   }
+
+  return pages;
+}
+
+const ROUTE_LABELS = {
+  faqs: 'FAQs',
+  postgresql: 'PostgreSQL',
+  'use-cases': 'Use Cases',
+};
+
+// Routes that should NOT get a generated page-listing index. Instead, their
+// /${route}.md URL is aliased to the canonical, curated index at /docs/llms.txt
+// (see next.config.js beforeFiles rewrite and ai-agent-detection CUSTOM_MARKDOWN_PATHS).
+// llms.txt is written later in postbuild (generate-llms-index.js), so we can't copy
+// its content here; we alias at the routing layer instead.
+// Routes whose /${route}.md URL is aliased to /docs/llms.txt at the routing layer
+// rather than getting a generated page-listing. Three places enforce this alias —
+// keep them in sync if this set changes:
+//   1. Here (skips generating public/md/${route}.md at postbuild)
+//   2. next.config.js beforeFiles rewrite: /${route}.md → /docs/llms.txt
+//   3. ai-agent-detection.js CUSTOM_MARKDOWN_PATHS (middleware serving for agents)
+const ROUTES_ALIASED_TO_LLMS = new Set(['docs']);
+
+/**
+ * Generate a /${route}.md index file listing all pages in that route.
+ * Called by processAllContent for every non-nested route after its files are written.
+ */
+async function generateRouteIndex(route, pages, outputDir, stats = null) {
+  const label = ROUTE_LABELS[route] || route.charAt(0).toUpperCase() + route.slice(1);
+  // Writes to public/md/${route}.md — must match the destination in the
+  // next.config.js beforeFiles rewrite: /${route}.md → /md/${route}.md.
+  const outputPath = path.join(outputDir, `${route}.md`);
+
+  const lines = [
+    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    '',
+    `# Neon ${label}`,
+    '',
+    '## All pages',
+    '',
+    ...pages.map(({ title, url }) => `- [${title}](${url})`),
+    '',
+  ];
+
+  await fs.writeFile(outputPath, lines.join('\n'));
+  stats && (stats.filesWritten += 1);
+  logFileProcessed(`✓ ${route}.md (index, ${pages.length} pages)`);
 }
 
 /**
- * Process all content routes (for postbuild integration)
+ * Process one content route. Used by both sequential processing and route workers.
+ */
+async function processContentRoute(route, srcPath, rootDir, options = {}) {
+  if (!navigationMap) {
+    navigationMap = buildNavigationMap(rootDir);
+  }
+
+  const outputDir = path.join(rootDir, 'public/md');
+  const inputDir = path.join(rootDir, srcPath);
+  // Use parent of inputDir as base so relative paths start with the dir name,
+  // not any intermediate segments (e.g. content/pages/programs → programs/...).
+  const baseContentDir = path.dirname(inputDir);
+  const stats = options.stats || createProcessingStats();
+  const startingFileCount = stats.filesWritten;
+
+  console.log(`Processing ${srcPath} -> public/md/${route}`);
+  const pages = await processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats);
+
+  if (!route.includes('/') && !ROUTES_ALIASED_TO_LLMS.has(route) && pages.length > 0) {
+    await generateRouteIndex(route, pages, outputDir, stats);
+  }
+
+  const filesWritten = stats.filesWritten - startingFileCount;
+  console.log(`Finished ${route}: ${filesWritten} markdown files`);
+
+  return {
+    route,
+    pages: pages.length,
+    filesWritten,
+  };
+}
+
+const throwIfProcessingErrors = () => {
+  if (processingErrors.length > 0) {
+    throw new Error(
+      `BUILD FAILED: ${processingErrors.length} file(s) failed to process. See errors above.`
+    );
+  }
+};
+
+/**
+ * Process all content routes (sequential mode)
  */
 async function processAllContent(contentRoutes, rootDir) {
   clearState();
@@ -2061,37 +2467,88 @@ async function processAllContent(contentRoutes, rootDir) {
   navigationMap = buildNavigationMap(rootDir);
   console.log(`Navigation map: ${navigationMap.size} pages with sibling links\n`);
 
-  const baseContentDir = path.join(rootDir, 'content');
-  const outputDir = path.join(rootDir, 'public/md');
+  const stats = createProcessingStats();
 
   for (const [route, srcPath] of Object.entries(contentRoutes)) {
-    const inputDir = path.join(rootDir, srcPath);
-    console.log(`Processing ${srcPath} -> public/md/${route}`);
-    await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
+    await processContentRoute(route, srcPath, rootDir, { stats });
   }
 
-  // Build-time verification: fail if no markdown files were generated
-  try {
-    const allFiles = await fs.readdir(outputDir, { recursive: true });
-    const mdFiles = allFiles.filter((f) => f.endsWith('.md'));
-    if (mdFiles.length === 0) {
-      throw new Error('BUILD FAILED: No agent markdown files were generated!');
-    }
-    console.log(`\nGenerated ${mdFiles.length} markdown files for AI agents.`);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      throw new Error('BUILD FAILED: Output directory public/md/ does not exist!');
-    }
-    throw err;
+  if (stats.filesWritten === 0) {
+    throw new Error('BUILD FAILED: No agent markdown files were generated!');
   }
 
+  console.log(`\nGenerated ${stats.filesWritten} markdown files for AI agents.`);
   printBuildSummary(rootDir);
+  throwIfProcessingErrors();
+}
 
-  if (processingErrors.length > 0) {
-    throw new Error(
-      `BUILD FAILED: ${processingErrors.length} file(s) failed to process. See errors above.`
-    );
+const runWithConcurrency = async (items, concurrency, mapper) => {
+  const results = [];
+  let nextIndex = 0;
+
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  });
+
+  await Promise.all(workers);
+
+  return results;
+};
+
+const runRouteWorker = async ([route, srcPath], rootDir) =>
+  new Promise((resolve, reject) => {
+    const child = fork(__filename, ['--route', route, srcPath], {
+      cwd: rootDir,
+      env: {
+        ...process.env,
+        LLMS_PROCESSOR_VERBOSE: process.env.LLMS_PROCESSOR_VERBOSE || '0',
+      },
+      stdio: ['ignore', 'pipe', 'pipe', 'ipc'],
+    });
+
+    let result = null;
+
+    child.stdout.on('data', (chunk) => process.stdout.write(chunk));
+    child.stderr.on('data', (chunk) => process.stderr.write(chunk));
+    child.on('message', (message) => {
+      if (message?.type === 'route-result') {
+        result = message.result;
+      }
+    });
+    child.on('error', reject);
+    child.on('exit', (code, signal) => {
+      if (code === 0 && result) {
+        resolve(result);
+        return;
+      }
+
+      reject(new Error(`Route worker ${route} failed${signal ? ` (${signal})` : ''}`));
+    });
+  });
+
+/**
+ * Process all content routes in separate Node workers.
+ */
+async function processAllContentParallel(contentRoutes, rootDir, options = {}) {
+  const entries = Object.entries(contentRoutes);
+  const concurrency = options.concurrency || getRouteConcurrency();
+
+  console.log(`Processing ${entries.length} content routes with ${concurrency} workers...`);
+
+  const results = await runWithConcurrency(entries, concurrency, (entry) =>
+    runRouteWorker(entry, rootDir)
+  );
+  const filesWritten = results.reduce((sum, result) => sum + result.filesWritten, 0);
+
+  if (filesWritten === 0) {
+    throw new Error('BUILD FAILED: No agent markdown files were generated!');
   }
+
+  console.log(`\nGenerated ${filesWritten} markdown files for AI agents.`);
 }
 
 // Export for use by other scripts
@@ -2099,6 +2556,9 @@ module.exports = {
   processFile,
   processDirectory,
   processAllContent,
+  processAllContentParallel,
+  processContentRoute,
+  generateRouteIndex,
   loadDependencies,
   clearState,
   printBuildSummary,
@@ -2121,8 +2581,8 @@ async function main() {
     const inputPath = path.resolve(args[1]);
     const baseContentDir = path.join(rootDir, 'content');
     const pageUrl = getPageUrl(inputPath, baseContentDir);
-    const result = await processFile(inputPath, pageUrl, rootDir);
-    console.log(result);
+    const { content } = await processFile(inputPath, pageUrl, rootDir);
+    console.log(content);
   } else if (args[0] === '--dir') {
     // Process specific directory
     const dir = args[1] || 'docs/guides';
@@ -2133,6 +2593,23 @@ async function main() {
     console.log(`Processing content/${dir} -> public/md/${dir}\n`);
     await processDirectory(inputDir, outputDir, baseContentDir, rootDir);
     console.log('\nDone!');
+  } else if (args[0] === '--route') {
+    const route = args[1];
+    const srcPath = args[2];
+
+    if (!route || !srcPath) {
+      throw new Error('Usage: node process-md-for-llms.js --route <route> <srcPath>');
+    }
+
+    clearState();
+    navigationMap = buildNavigationMap(rootDir);
+    const result = await processContentRoute(route, srcPath, rootDir);
+    printBuildSummary(rootDir);
+    throwIfProcessingErrors();
+
+    if (process.send) {
+      process.send({ type: 'route-result', result });
+    }
   } else if (args[0] === '--all') {
     // Process all content routes
     const { CONTENT_ROUTES } = require('../constants/content');
@@ -2145,12 +2622,8 @@ async function main() {
     console.log(
       '  node process-md-for-llms.js --dir <dir>     Process directory (e.g., docs/guides)'
     );
+    console.log('  node process-md-for-llms.js --route <route> <srcPath>  Process one route');
     console.log('  node process-md-for-llms.js --all           Process all content routes');
-    console.log('');
-    console.log('For comparison with Python output:');
-    console.log(
-      '  node generate-legacy-llms-output.js          Process to public/llms/ for git diff'
-    );
   }
 }
 

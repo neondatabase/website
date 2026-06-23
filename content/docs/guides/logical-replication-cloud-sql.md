@@ -2,12 +2,16 @@
 title: Replicate data from Cloud SQL Postgres
 subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
 summary: >-
-  How to replicate data from Google Cloud SQL Postgres to Neon using native
-  Postgres logical replication, including preparation steps for the source
-  database and enabling necessary settings.
+  Replicate data from Google Cloud SQL Postgres to Neon using logical
+  replication. Setup involves enabling the `cloudsql.logical_decoding` flag,
+  allowlisting Neon's NAT gateway IPs, and creating a publication on the
+  source with a matching `CREATE SUBSCRIPTION` on the Neon destination. Use
+  this guide when migrating or continuously syncing from Cloud SQL to Neon
+  rather than a one-time pg_dump import. Covers replication role creation,
+  schema preparation, subscription verification, and application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.005Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
@@ -89,7 +93,7 @@ Record the public IP address of your Cloud SQL Postgres instance. You'll need th
 If you do not use a public IP address, you'll need to configure access via a private IP. Refer to the [Cloud SQL documentation](https://cloud.google.com/sql/docs/mysql/private-ip).
 </Admonition>
 
-![Clould SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
+![Cloud SQL public IP address](/docs/guides/cloud_sql_public_ip.png)
 
 ### Create a Postgres role for replication
 

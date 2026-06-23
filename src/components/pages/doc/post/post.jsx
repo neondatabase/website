@@ -2,25 +2,26 @@ import PropTypes from 'prop-types';
 
 import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
+import SubscribeForm from 'components/pages/changelog/subscribe-form';
 import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
-import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
 
-import Tag from '../tag';
 import DropdownMenu from '../dropdown-menu';
+import Tag from '../tag';
 
 const Changelog = ({ posts }) => (
   <>
     <Hero />
-    <ChangelogForm className="mb-5 hidden xl:flex" />
-    <ChangelogList className="mt-16" posts={posts} />
+    {/* <SubscribeForm className="mt-3.5" /> */}
+    <SubscribeForm />
+    <ChangelogList className="mt-14" posts={posts} />
   </>
 );
 
@@ -32,6 +33,7 @@ const Post = ({
   data: {
     title,
     subtitle,
+    eyebrow = null,
     enableTableOfContents = false,
     tag = null,
     layout = null,
@@ -50,7 +52,9 @@ const Post = ({
   gitHubPath,
   tableOfContents,
   author,
-  className = 'max-w-[704px] lg:max-w-none',
+  aboveContent = null,
+  isFaq = false,
+  className = 'max-w-208 lg:max-w-none',
 }) => {
   const modal = MODALS.find(
     (modal) =>
@@ -68,7 +72,8 @@ const Post = ({
     <>
       <div
         className={cn(
-          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          'min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isChangelog && 'mx-auto',
           className,
           isWideLayout && 'max-w-none'
         )}
@@ -85,25 +90,69 @@ const Post = ({
           <Changelog currentSlug={currentSlug} posts={changelogPosts} />
         ) : (
           <article>
-            <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
-              <div className={cn(!isChangelog && 'max-w-[520px]')}>
-                <h1
+            {isFaq ? (
+              <>
+                <div className="mb-5 flex justify-end sm:mb-3">
+                  <DropdownMenu gitHubPath={gitHubPath} />
+                </div>
+                <div>
+                  <h1
+                    className={cn(
+                      'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                      tag && 'inline'
+                    )}
+                  >
+                    {title}
+                  </h1>
+                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {subtitle && (
+                    <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
+                      {subtitle}
+                    </p>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
+                <div
                   className={cn(
-                    'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                    tag && 'inline'
+                    !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
+                    !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
                   )}
                 >
-                  {title}
-                </h1>
-                {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-                {subtitle && (
-                  <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
-                    {subtitle}
-                  </p>
-                )}
+                  {eyebrow && (
+                    <div className="mb-3.5 text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
+                      {eyebrow}
+                    </div>
+                  )}
+                  <h1
+                    className={cn(
+                      eyebrow
+                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                      tag && 'inline'
+                    )}
+                  >
+                    {title}
+                  </h1>
+                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {subtitle && (
+                    <p
+                      className={cn(
+                        eyebrow
+                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
+                          : 'mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg'
+                      )}
+                    >
+                      {subtitle}
+                    </p>
+                  )}
+                </div>
+                {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
               </div>
-              {!isChangelog && <DropdownMenu gitHubPath={gitHubPath} />}
-            </div>
+            )}
+            {aboveContent}
             <Content
               className={cn('mt-10 lg:mt-7 md:mt-5', isSplitLayout && 'split-layout')}
               content={content}
@@ -123,10 +172,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
-      {!isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
+      {!isDocsIndex && !isWideLayout && !isChangelog && (
         <Aside
-          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+          className="ml-0! w-78 shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
@@ -144,6 +193,7 @@ Post.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,
+    eyebrow: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
     updatedOn: PropTypes.string,
@@ -181,6 +231,8 @@ Post.propTypes = {
     }),
     photo: PropTypes.string,
   }),
+  aboveContent: PropTypes.node,
+  isFaq: PropTypes.bool,
   className: PropTypes.string,
 };
 

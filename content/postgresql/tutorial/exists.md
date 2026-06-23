@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL EXISTS Operator'
-page_title: 'PostgreSQL EXISTS Operator'
-page_description: 'This tutorial shows you how to use the PostgreSQL EXISTS operator to check the existence of rows in the subquery.'
+title: PostgreSQL EXISTS Operator
+page_title: PostgreSQL EXISTS Operator
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL EXISTS operator to check the
+  existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
-ogImage: '/postgresqltutorial/customer-and-payment-tables.png'
-updatedOn: '2024-07-01T01:05:42+00:00'
+ogImage: /postgresqltutorial/customer-and-payment-tables.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALL Operator'
-  slug: 'postgresql-tutorial/postgresql-all'
+  title: PostgreSQL ALL Operator
+  slug: postgresql-tutorial/postgresql-all
 nextLink:
-  title: 'PostgreSQL CTE'
-  slug: 'postgresql-tutorial/postgresql-cte'
+  title: PostgreSQL Data Types
+  slug: postgresql-tutorial/postgresql-data-types
 ---
+
+<Admonition type="info" id="CTA">
+The EXISTS operator works the same way in any PostgreSQL deployment, so everything you learn here carries over to Postgres running anywhere. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXISTS` operator to test for the existence of rows in a subquery.
 
@@ -86,7 +92,7 @@ We will use the following `customer` and `payment` tables in the [sample databas
 
 ### 1\) Basic EXISTS operator example
 
-The following example uses the `EXISTS` operator to check if the payment value is zero exists in the `payment` table:
+The following example uses the `EXISTS` operator to check if a payment value of zero exists in the `payment` table:
 
 ```sql
 SELECT
@@ -152,7 +158,7 @@ The query returns the following output:
 
 In this example, for each customer in the `customer` table, the subquery checks the `payment` table to find if that customer made at least one payment (`p.customer_id = c.customer_id`) and the amount is greater than 11 ( `amount > 11`)
 
-### 2\) NOT EXISTS example
+### 3\) NOT EXISTS example
 
 The following example uses the `NOT EXISTS` operator to find customers who have not made any payment more than 11\.
 
@@ -192,7 +198,7 @@ first_name  |  last_name
 
 ### 3\) EXISTS and NULL example
 
-The following example returns all rows from the `customers` table because the subquery in the `EXISTS` operator returns `NULL`:
+The following example returns all rows from the `customer` table because the subquery in the `EXISTS` operator returns `NULL`:
 
 ```sql
 SELECT

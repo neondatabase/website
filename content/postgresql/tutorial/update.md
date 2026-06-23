@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL UPDATE'
-page_title: 'PostgreSQL UPDATE Statement'
-page_description: 'This tutorial shows you how to use the PostgreSQL UPDATE statement to update data of one or more columns of a table.'
+title: PostgreSQL UPDATE
+page_title: PostgreSQL UPDATE Statement
+page_description: >-
+  This tutorial shows you how to use the PostgreSQL UPDATE statement to update
+  data of one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/'
 ogImage: ''
-updatedOn: '2024-01-22T13:47:38+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL INSERT Multiple Rows'
-  slug: 'postgresql-tutorial/postgresql-insert-multiple-rows'
+  title: PostgreSQL INSERT Multiple Rows
+  slug: postgresql-tutorial/postgresql-insert-multiple-rows
 nextLink:
-  title: 'PostgreSQL UPDATE Join'
-  slug: 'postgresql-tutorial/postgresql-update-join'
+  title: PostgreSQL UPDATE Join
+  slug: postgresql-tutorial/postgresql-update-join
 ---
+
+<Admonition type="info" id="CTA">
+The UPDATE statement works the same way on any PostgreSQL database, so everything here applies whether you're running Postgres locally, on [Neon](https://neon.com), on [Lakebase](https://www.databricks.com/product/lakebase), or anywhere else. If you're an enterprise building for the AI era, Lakebase gives you a fully managed Postgres that's fast, secure, and tightly integrated with the Lakehouse, so your transactional data sits next to your analytics and AI workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `UPDATE` statement to update existing data in a table.
 
@@ -137,7 +143,7 @@ Output:
 
 ### 2\) Updating a row and returning the updated row
 
-The following statement uses the `UPDATE` statement update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
+The following statement uses the `UPDATE` statement to update `published_date` of the course id 2 to `2020-07-01` and returns the updated course.
 
 ```sql
 UPDATE courses
@@ -173,12 +179,6 @@ UPDATE 5
 ```
 
 The following statement retrieves data from the `courses` table to verify the update:
-
-```sql
-SELECT * FROM courses;
-```
-
-Output:
 
 ```sql
 SELECT

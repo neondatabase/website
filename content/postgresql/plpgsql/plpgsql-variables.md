@@ -1,18 +1,24 @@
 ---
-title: 'PL/pgSQL Variables'
-page_title: 'PL/pgSQL Variables'
-page_description: 'In this tutorial, you will learn how to declare PL/pgSQL variables in blocks and how to use variables effectively.'
+title: PL/pgSQL Variables
+page_title: PL/pgSQL Variables
+page_description: >-
+  In this tutorial, you will learn how to declare PL/pgSQL variables in blocks
+  and how to use variables effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-variables/'
-ogImage: '/postgresqltutorial/film.png'
-updatedOn: '2024-03-19T03:19:49+00:00'
+ogImage: /postgresqltutorial/film.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Block Structure'
-  slug: 'postgresql-plpgsql/plpgsql-block-structure'
+  title: PL/pgSQL Block Structure
+  slug: postgresql-plpgsql/plpgsql-block-structure
 nextLink:
-  title: 'PL/pgSQL Select Into'
-  slug: 'postgresql-plpgsql/pl-pgsql-select-into'
+  title: PL/pgSQL Select Into
+  slug: postgresql-plpgsql/pl-pgsql-select-into
 ---
+
+<Admonition type="info" id="CTA">
+PL/pgSQL variables work the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PL/pgSQL variables and various ways to declare them
 
@@ -213,7 +219,7 @@ In this example, we declare two variables:
 - The `film_title` variable has the same data type as the `title` column in the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 - The `featured_title` has the same data type as the data type of the `film_title` variable.
 
-We use the [select into](pl-pgsql-select-into) statement to retrieve from the `film_title` column of the `film` table and assign it to the `film_title` variable.
+We use the [select into](pl-pgsql-select-into) statement to retrieve from the `title` column of the `film` table and assign it to the `film_title` variable.
 
 Using the type\-copying feature offers the following advantages:
 
@@ -268,4 +274,4 @@ In this example:
 
 - A variable is a named storage location with a data type that can hold a value.
 - PostgreSQL evaluates the default value of a variable and assigns it to the variable when it enters the block.
-- Declare variables and optionally an initial value to it in the declaration section of the block.
+- Declare variables and optionally assign an initial value to them in the declaration section of the block.

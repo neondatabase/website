@@ -1,17 +1,25 @@
 ---
 title: 'PostgreSQL 18 Virtual Generated Columns: Compute On-Demand'
 page_title: 'PostgreSQL 18 Virtual Generated Columns: Compute On-Demand'
-page_description: 'In this tutorial, you will learn about PostgreSQL 18 virtual generated columns, which are now the default option. These columns compute their values on-demand during query execution, saving storage space and providing automatic calculations without the overhead of stored values.'
+page_description: >-
+  In this tutorial, you will learn about PostgreSQL 18 virtual generated
+  columns, which are now the default option. These columns compute their values
+  on-demand during query execution, saving storage space and providing automatic
+  calculations without the overhead of stored values.
 ogImage: ''
-updatedOn: '2025-06-29T05:50:00+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 Enhanced EXPLAIN'
-  slug: 'postgresql-18/enhanced-explain'
+  title: PostgreSQL 18 Enhanced EXPLAIN
+  slug: postgresql-18/enhanced-explain
 nextLink:
-  title: 'PostgreSQL 18 UUIDv7 Support'
-  slug: 'postgresql-18/uuidv7-support'
+  title: PostgreSQL 18 UUIDv7 Support
+  slug: postgresql-18/uuidv7-support
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL 18's virtual generated columns work the same way on any Postgres deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: Learn how PostgreSQL 18 makes virtual generated columns the default, enabling compute-on-demand columns that save storage space while providing automatic calculations without the overhead of stored values.
 

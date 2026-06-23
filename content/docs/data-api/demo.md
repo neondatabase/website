@@ -2,14 +2,18 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 summary: >-
-  Step-by-step guide for setting up a note-taking app using Neon's Data API with
-  Row-Level Security (RLS) and authentication, demonstrating how to write
-  queries from frontend code securely.
+  Neon Data API tutorial using a React/Vite note-taking app. The app runs
+  PostgREST-compatible SELECT, INSERT, UPDATE, and DELETE queries from the
+  frontend via the @neondatabase/neon-js client. Row-Level Security policies
+  written with Drizzle ORM enforce per-user data isolation, with
+  `auth.user_id()` extracting the caller's identity from JWTs. Use this page
+  for a working end-to-end example of Data API query patterns, RLS setup, and
+  ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:27:00.720Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
+This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 
 <Admonition type="tip" title="Data API works with any auth provider">
 This tutorial uses [Neon Auth](/docs/auth/overview) for convenience, but the Data API works with any authentication provider that issues JWTs. The query patterns, RLS policies, and `auth.user_id()` function shown here apply regardless of your auth provider. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup details with Auth0, Clerk, Firebase, and others.

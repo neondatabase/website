@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL HAVING'
-page_title: 'PostgreSQL HAVING'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL HAVING clause to filter groups of rows based on a specified condition.'
+title: PostgreSQL HAVING
+page_title: PostgreSQL HAVING
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL HAVING clause to
+  filter groups of rows based on a specified condition.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-having/'
-ogImage: '/postgresqltutorial/postgresql-having.svg'
-updatedOn: '2024-01-17T08:04:37+00:00'
+ogImage: /postgresqltutorial/postgresql-having.svg
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL GROUP BY'
-  slug: 'postgresql-tutorial/postgresql-group-by'
+  title: PostgreSQL GROUP BY
+  slug: postgresql-tutorial/postgresql-group-by
 nextLink:
-  title: 'PostgreSQL GROUPING SETS'
-  slug: 'postgresql-tutorial/postgresql-grouping-sets'
+  title: PostgreSQL GROUPING SETS
+  slug: postgresql-tutorial/postgresql-grouping-sets
 ---
+
+<Admonition type="info" id="CTA">
+The HAVING clause works the same across every PostgreSQL deployment, so everything you learn here carries over no matter where you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL HAVING** clause to specify a search condition for a group or an aggregate.
 
@@ -52,7 +58,7 @@ This restriction arises from the fact that, at the point of `HAVING` clause eval
 
 ### HAVING vs. WHERE
 
-The [`WHERE`](postgresql-where) clause filters the rows based on a specified condition whereas the `HAVING` clause filter groups of rows according to a specified condition.
+The [`WHERE`](postgresql-where) clause filters the rows based on a specified condition whereas the `HAVING` clause filters groups of rows according to a specified condition.
 
 In other words, you apply the condition in the `WHERE` clause to the rows while you apply the condition in the `HAVING` clause to the groups of rows.
 
@@ -90,7 +96,7 @@ Output:
 ...
 ```
 
-The following statement adds the `HAVING`clause to select the only customers who have been spending more than `200`:
+The following statement adds the `HAVING` clause to select only the customers who have been spending more than `200`:
 
 ```sql
 SELECT

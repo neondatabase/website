@@ -2,13 +2,16 @@
 title: Query with Neon's SQL Editor
 subtitle: Query your database from the Neon Console using the Neon SQL Editor
 summary: >-
-  Covers the use of Neon's SQL Editor for executing queries on databases within
-  the Neon Console, including features like query history, saving queries, and
-  utilizing Explain and Analyze functions.
+  The Neon SQL Editor is a browser-based query interface built into the Neon
+  Console that runs SQL against any database branch without installing a client.
+  Use it to run EXPLAIN and EXPLAIN ANALYZE, query historical data with Time
+  Travel, and generate SQL from natural language. Query history entries are
+  capped at 9 KB. AI features are rate-limited, and results export as CSV,
+  JSON, or XLSX.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-02-15T20:51:54.110Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -25,7 +28,9 @@ To use the SQL Editor:
 
 ![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
-You can use the following query to try the SQL Editor. The query creates a table, adds data, and retrieves the data from the table.
+## Create a table with SQL
+
+Neon runs standard Postgres, so you create tables from the SQL Editor with standard `CREATE TABLE` syntax. Enter the statement and click **Run**. The following query creates a table, adds data, and retrieves the data from the table, so you can try the editor end to end:
 
 ```sql
 CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -35,6 +40,8 @@ SELECT * FROM playing_with_neon;
 ```
 
 Running multiple query statements at once returns a separate result set for each statement. The result sets are displayed in separate tabs, numbered in order of execution, as shown above.
+
+For schema design and repeatable migrations in real projects, use an ORM or migration tool rather than ad hoc SQL. See the [ORM guides](/docs/get-started/orms).
 
 To clear the editor, click **New Query**.
 
@@ -75,7 +82,7 @@ Understanding the information provided by the **Explain** and **Analyze** featur
 
 ## Time Travel
 
-You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [restore window](/docs/introduction/restore-window).
+You can toggle Time Travel in the SQL Editor to switch from querying your current data to querying against a selected point within your [history window](/docs/introduction/history-window).
 
 ![time travel in SQL Editor](/docs/get-started/time_travel_sql_editor.png)
 
@@ -196,7 +203,7 @@ The Neon SQL Editor offers three AI-driven features:
 - **SQL generation**: Easily convert natural language requests to SQL. Press the ✨ button or **Cmd/Ctrl+Shift+M**, type your request, and the AI assistant will generate the corresponding SQL for you. It’s schema-aware, meaning you can reference any table names, functions, or other objects in your schema.
   ![SQL generation](/docs/get-started/sql_editor_ai.png)
 - **Fix with AI**: If your query returns an error, simply click **Fix with AI** next to the error message. The AI assistant will analyze the error, suggest a fix, and update the SQL Editor so you can run the query again.
-  ![Fix withn AI](/docs/get-started/fix_with_ai.png)
+  ![Fix with AI](/docs/get-started/fix_with_ai.png)
 - **AI-generated query names**: Descriptive names are automatically assigned to your queries in the Neon SQL Editor's **History**. This feature helps you quickly identify and reuse previously executed queries.
   ![AI-generated query names](/docs/get-started/query_names.png)
 

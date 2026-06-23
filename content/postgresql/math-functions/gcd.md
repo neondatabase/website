@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL GCD() Function'
-page_title: 'PostgreSQL GCD() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL GCD() function to find the greatest common divisor of two numbers.'
+title: PostgreSQL GCD() Function
+page_title: PostgreSQL GCD() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL GCD() function to
+  find the greatest common divisor of two numbers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-gcd/'
 ogImage: ''
-updatedOn: '2024-05-19T03:19:27+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL FLOOR() Function'
-  slug: 'postgresql-math-functions/postgresql-floor'
+  title: PostgreSQL FLOOR() Function
+  slug: postgresql-math-functions/postgresql-floor
 nextLink:
-  title: 'PostgreSQL LCM() Function'
-  slug: 'postgresql-math-functions/postgresql-lcm'
+  title: PostgreSQL LCM() Function
+  slug: postgresql-math-functions/postgresql-lcm
 ---
+
+<Admonition type="info" id="CTA">
+The `gcd()` function works on any PostgreSQL 13 or later deployment, so everything you learn here carries over to Postgres wherever you run it. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `gcd()` function to find the greatest common divisor of two numbers.
 

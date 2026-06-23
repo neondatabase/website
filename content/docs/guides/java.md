@@ -3,14 +3,16 @@ title: Connect a Java application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC
   driver
 summary: >-
-  Covers the setup of a Neon project and the connection process for a Java
-  application using JDBC, including performing basic CRUD operations on a Neon
-  Postgres database.
+  Connect a Java application to Neon Postgres using the PostgreSQL JDBC driver
+  with Apache Maven. Covers complete CRUD examples including PreparedStatement
+  inserts, batch operations, and transaction control with setAutoCommit,
+  commit, and rollback. Also covers dotenv-java for credential management.
+  Focuses on raw JDBC without an ORM, unlike Spring Boot or Hibernate guides.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-02-15T20:51:54.165Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
@@ -497,16 +499,6 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
-
-## Source code
-
-You can find the source code for the application described in this guide on GitHub.
-
-<DetailIconCards>
-
-<a href="https://github.com/neondatabase/examples/tree/main/with-java-jdbc" description="Get started with Java and Neon using standard JDBC." icon="github">Get started with Java and Neon using JDBC</a>
-
-</DetailIconCards>
 
 ## Resources
 

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL REPLACE() Function'
-page_title: 'PostgreSQL REPLACE() Function'
-page_description: 'This tutorial shows how to use the PostgreSQL REPLACE() function to replace all occurrences of a substring in a string with a new substring.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/'
+title: PostgreSQL REPLACE() Function
+page_title: PostgreSQL REPLACE() Function
+page_description: >-
+  This tutorial shows how to use the PostgreSQL REPLACE() function to replace
+  all occurrences of a substring in a string with a new substring.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/
 ogImage: ''
-updatedOn: '2024-01-29T01:38:44+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REVERSE() Function'
-  slug: 'postgresql-string-functions/postgresql-reverse'
+  title: PostgreSQL REVERSE() Function
+  slug: postgresql-string-functions/postgresql-reverse
 nextLink:
-  title: 'PostgreSQL RIGHT() Function'
-  slug: 'postgresql-string-functions/postgresql-right'
+  title: PostgreSQL RIGHT() Function
+  slug: postgresql-string-functions/postgresql-right
 ---
+
+<Admonition type="info" id="CTA">
+The REPLACE() function works the same in any PostgreSQL database, so everything here carries over whether you run Postgres on your laptop, on a managed service, or in the cloud. If you're an enterprise standardizing on a Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres for the AI era, with the performance, security, and deep Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REPLACE()` function to replace a substring with a new one.
 
@@ -140,4 +147,4 @@ The output indicates that the `http` in the `url` column were replaced by the `h
 
 ## Summary
 
-- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with another a new substring.
+- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with a new substring.

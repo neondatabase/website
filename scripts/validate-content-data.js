@@ -128,13 +128,54 @@ function validateCaseStudies(caseStudies, categorySlugs) {
       }
     }
 
+    if (item.caseStudiesPage !== undefined) {
+      if (expectObject(errors, `${base}.caseStudiesPage`, item.caseStudiesPage)) {
+        expectNumber(
+          errors,
+          `${base}.caseStudiesPage.testimonialOrder`,
+          item.caseStudiesPage.testimonialOrder
+        );
+
+        if (item.caseStudiesPage.testimonialLogo !== undefined) {
+          if (
+            expectObject(
+              errors,
+              `${base}.caseStudiesPage.testimonialLogo`,
+              item.caseStudiesPage.testimonialLogo
+            )
+          ) {
+            expectString(
+              errors,
+              `${base}.caseStudiesPage.testimonialLogo.mediaItemUrl`,
+              item.caseStudiesPage.testimonialLogo.mediaItemUrl
+            );
+            if (
+              expectObject(
+                errors,
+                `${base}.caseStudiesPage.testimonialLogo.mediaDetails`,
+                item.caseStudiesPage.testimonialLogo.mediaDetails
+              )
+            ) {
+              expectNumber(
+                errors,
+                `${base}.caseStudiesPage.testimonialLogo.mediaDetails.width`,
+                item.caseStudiesPage.testimonialLogo.mediaDetails.width
+              );
+              expectNumber(
+                errors,
+                `${base}.caseStudiesPage.testimonialLogo.mediaDetails.height`,
+                item.caseStudiesPage.testimonialLogo.mediaDetails.height
+              );
+            }
+          }
+        }
+      }
+    }
+
     const isInternalOk = expectBoolean(errors, `${base}.isInternal`, item.isInternal);
-    const internalSlugOk = expectString(
-      errors,
-      `${base}.internalPostSlug`,
-      item.internalPostSlug,
-      { allowEmpty: true }
-    );
+    const internalSlugOk = expectString(errors, `${base}.internalPostSlug`, item.internalPostSlug, {
+      allowEmpty: true,
+    });
     const externalUrlOk = expectString(errors, `${base}.externalUrl`, item.externalUrl, {
       allowEmpty: true,
     });
@@ -219,11 +260,7 @@ function validateContentData() {
   const caseStudiesResult = validateCaseStudies(caseStudies, categoriesResult.categorySlugs);
   const useCasesErrors = validateUseCases(useCases, caseStudiesResult.caseStudyIds);
 
-  return [
-    ...categoriesResult.errors,
-    ...caseStudiesResult.errors,
-    ...useCasesErrors,
-  ];
+  return [...categoriesResult.errors, ...caseStudiesResult.errors, ...useCasesErrors];
 }
 
 function run() {

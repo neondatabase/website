@@ -4,11 +4,11 @@ subtitle: A step-by-step guide describing how to use Postgres as a document stor
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-12-17T13:24:36.612Z'
-updatedOn: '2024-12-17T13:24:36.612Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.
-With JSONB, you can to store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
+With JSONB, you can store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
 You can even use GIN indexes to index nested properties within JSONB objects.
 
 ## Steps
@@ -179,7 +179,7 @@ FROM documents
 WHERE (data -> 'author' ->> 'age')::int > 29;
 ```
 
-Depending on your data, you may need to add extra checks to avoid throwing an error if a document has an `age` property that can't be casted to an int.
+Depending on your data, you may need to add extra checks to avoid throwing an error if a document has an `age` property that can't be cast to an int.
 The following query explicitly checks if `age` is a numeric string before attempting to cast to an `int`.
 
 ```sql

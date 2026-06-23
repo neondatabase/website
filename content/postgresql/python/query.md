@@ -1,18 +1,25 @@
 ---
 title: 'PostgreSQL Python: Querying Data'
 page_title: 'PostgreSQL Python: Querying Data'
-page_description: 'This tutorial shows you how to query data from the PostgreSQL tables in Python using the fetchone, fetchall, and fetchmany methods.'
+page_description: >-
+  This tutorial shows you how to query data from the PostgreSQL tables in Python
+  using the fetchone, fetchall, and fetchmany methods.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/query/'
-ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png'
-updatedOn: '2024-05-19T08:32:12+00:00'
+ogImage: >-
+  https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python-Sample-Database-Diagram.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Update Data in a Table'
-  slug: 'postgresql-python/update'
+  slug: postgresql-python/update
 nextLink:
   title: 'PostgreSQL Python: Transactions'
-  slug: 'postgresql-python/transaction'
+  slug: postgresql-python/transaction
 ---
+
+<Admonition type="info" id="CTA">
+Querying PostgreSQL tables from Python with psycopg2 works the same against any Postgres database, so the fetchone, fetchall, and fetchmany patterns here apply wherever you run Postgres. If you're an enterprise building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to query data from the PostgreSQL tables in Python.
 

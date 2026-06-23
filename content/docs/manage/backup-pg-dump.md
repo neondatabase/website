@@ -2,11 +2,12 @@
 title: Backups with pg_dump
 subtitle: Learn how to create a backup of your Neon database using pg_dump
 summary: >-
-  How to create a backup of your Neon database using the Postgres `pg_dump`
-  utility and restore it with `pg_restore`, including installation instructions
-  and connection string recommendations.
+  Use pg_dump to back up a Neon Postgres database to a local custom-format
+  archive, and pg_restore to restore it to any Neon project, including across
+  regions. Always use a direct (unpooled) connection string for both
+  operations; pooled connections are not supported and will cause errors.
 enableTableOfContents: true
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
@@ -84,6 +85,8 @@ Following this procedure will create a database backup locally, where you're run
    - `-f <dump_file_name>`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
    For more command options, see [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+
+For most accidental-delete recoveries you don't need a local file. Neon keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window), which is usually faster. Reach for a local `pg_dump` backup when you need off-platform redundancy, archival beyond your history window, an external copy for compliance, or a copy to move into a different Postgres instance.
 
 ## Restoring a backup with `pg_restore`
 

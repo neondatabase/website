@@ -2,11 +2,15 @@
 title: Postgres Boolean data type
 subtitle: Represent truth values in Postgres
 summary: >-
-  Covers the representation and usage of the Boolean data type in Postgres,
-  including storage, syntax, and practical examples for filtering data based on
-  truth values.
+  The Postgres Boolean data type stores three-value logic (TRUE, FALSE, NULL)
+  in a single byte. It accepts multiple text aliases such as t/f, yes/no,
+  on/off, and 1/0. Use this type when columns represent binary states like
+  active/inactive or paid/unpaid, and when filtering with WHERE, branching with
+  CASE, combining with AND/OR/NOT, or aggregating with bool_and() and
+  bool_or(). NULL indicates an unknown state and does not evaluate as FALSE in
+  conditional expressions.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.818Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 In Postgres, the Boolean datatype is designed to store truth values. A Boolean column can hold one of three states: `true`, `false`, or `NULL` representing unknown or missing values.
@@ -26,7 +30,7 @@ A boolean value is stored as a single byte.
 
 ## Example usage
 
-Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active or not.
+Consider a table of users for a web application. We can add a Boolean column to represent whether a user is active.
 
 The query below creates a `users` table and inserts some sample data:
 

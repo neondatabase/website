@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
 page_title: 'PostgreSQL PHP: Connect to PostgreSQL Database Using PDO'
-page_description: 'In this tutorial, you will learn how to set up a simple project structure and connect to the PostgreSQL database using PHP PDO API.'
+page_description: >-
+  In this tutorial, you will learn how to set up a simple project structure and
+  connect to the PostgreSQL database using PHP PDO API.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/connect/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Connect.png'
-updatedOn: '2024-01-30T00:49:02+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Connect.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL PHP'
-  slug: 'postgresql-php/'
+  title: PostgreSQL PHP
+  slug: postgresql-php/
 nextLink:
   title: 'PostgreSQL PHP: Create New Tables'
-  slug: 'postgresql-php/create-tables'
+  slug: postgresql-php/create-tables
 ---
+
+<Admonition type="info" id="CTA">
+Connecting to PostgreSQL with PHP PDO works the same way on any standard Postgres deployment, so the patterns shown here apply wherever you run your database. If you're an enterprise that wants the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to set up a simple project structure and connect to the PostgreSQL database using PHP PDO API.
 
@@ -184,13 +190,13 @@ use PostgreSQLTutorial\Connection as Connection;
 
 try {
     Connection::get()->connect();
-    echo 'A connection to the PostgreSQL database sever has been established successfully.';
+    echo 'A connection to the PostgreSQL database server has been established successfully.';
 } catch (\PDOException $e) {
     echo $e->getMessage();
 }
 ```
 
-PHP throws a `\PDOException` if there is an exception occurs when connecting to the PostgreSQL database server, therefore, you need to place the code to create a new `PDO` object inside the  `try...catch` block to handle the exception.
+PHP throws a `\PDOException` if an exception occurs when connecting to the PostgreSQL database server, therefore, you need to place the code to create a new `PDO` object inside the  `try...catch` block to handle the exception.
 
 Run the following composer command to update the autoload files:
 
@@ -207,7 +213,7 @@ Generating optimized autoload files
 Finally, launch the `index.php` file from the web browser to test it.
 
 ```
-A connection to the PostgreSQL database sever has been established successfully.
+A connection to the PostgreSQL database server has been established successfully.
 ```
 
 If you want to see the exception that may occur, you can change the parameters in the `database.ini` file to an invalid one and test it.

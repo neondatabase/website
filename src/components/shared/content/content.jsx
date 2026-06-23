@@ -7,8 +7,16 @@ import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
+import {
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
+} from 'components/pages/doc/cli-reference';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
+import { CompactCards } from 'components/pages/doc/compact-cards';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
@@ -16,11 +24,14 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
-import PromptCards from 'components/pages/doc/prompt-cards';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import Steps from 'components/pages/doc/steps';
+import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
+import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
+import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -37,7 +48,6 @@ import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
-import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
@@ -170,7 +180,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CodeTabs,
   DetailIconCards,
   TechCards,
-  PromptCards,
+  CompactCards,
+  Tag,
+  TwinPaths,
+  QuickPath,
+  GuidedPath,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -194,13 +208,19 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Steps,
   TwoColumnLayout,
   LogosSection,
-  DeployPostgresButton,
   ChatOptions,
+  StickyTable,
   CheckList,
   CheckItem,
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  McpSetupConfigurator,
   SqlToRestConverter,
   ...sharedComponents,
 });

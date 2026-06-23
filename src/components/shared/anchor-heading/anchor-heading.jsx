@@ -5,6 +5,8 @@ import { cn } from 'utils/cn';
 
 import HashIcon from './images/hash.inline.svg';
 
+const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
+
 const extractText = (children) => {
   if (typeof children === 'string') {
     return children;
@@ -27,22 +29,25 @@ const extractText = (children) => {
 };
 
 const extractCustomId = (text) => {
-  const match = text.match(/\(#([^)]+)\)$/);
+  const match = text.match(CUSTOM_ID_PATTERN);
   if (match) {
-    return match[1];
+    return match[1] || match[2];
   }
   return null;
 };
+
+const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
 
 const AnchorHeading = (Tag) => {
   // eslint-disable-next-line react/prop-types
   const Component = ({ children, className = null }) => {
     const text = extractText(children);
     const customId = extractCustomId(text);
+    const cleanText = stripCustomId(text);
 
     const id =
       customId ||
-      slugify(text.replace(/\(#[^)]+\)$/, ''), {
+      slugify(cleanText, {
         lower: true,
         strict: true,
         remove: /[*+~.()'"!:@]/g,
@@ -51,7 +56,7 @@ const AnchorHeading = (Tag) => {
     // Remove the custom ID from children if it exists
     const cleanedChildren = React.Children.map(children, (child) => {
       if (typeof child === 'string') {
-        return child.replace(/\(#[^)]+\)$/, '');
+        return stripCustomId(child);
       }
       return child;
     });

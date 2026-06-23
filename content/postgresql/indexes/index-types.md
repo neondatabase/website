@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Index Types'
-page_title: 'PostgreSQL Index Types'
-page_description: 'In this tutorial, you will learn about various PostgreSQL index types and how to use them properly.'
+title: PostgreSQL Index Types
+page_title: PostgreSQL Index Types
+page_description: >-
+  In this tutorial, you will learn about various PostgreSQL index types and how
+  to use them properly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/'
 ogImage: ''
-updatedOn: '2024-02-01T08:10:12+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL List Indexes'
-  slug: 'postgresql-indexes/postgresql-list-indexes'
+  title: PostgreSQL List Indexes
+  slug: postgresql-indexes/postgresql-list-indexes
 nextLink:
-  title: 'PostgreSQL Full Text Search'
-  slug: 'postgresql-indexes/postgresql-full-text-search'
+  title: PostgreSQL Full Text Search
+  slug: postgresql-indexes/postgresql-full-text-search
 ---
+
+<Admonition type="info" id="CTA">
+PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. If you're an enterprise standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that AI-era workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about various PostgreSQL index types and how to use them appropriately.
 
@@ -37,7 +43,7 @@ IS NULL
 IS NOT NULL
 ```
 
-In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchor at the beginning of the pattern, for example:
+In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchored at the beginning of the pattern, for example:
 
 ```sql
 column_name LIKE 'foo%'

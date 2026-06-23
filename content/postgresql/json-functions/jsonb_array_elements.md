@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL jsonb_array_elements() Function'
-page_title: 'PostgreSQL jsonb_array_elements() Function'
-page_description: 'How to use the PostgreSQL jsonb_array_elements() function to expand the top-level JSON array into a set of JSON values.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements/'
+title: PostgreSQL jsonb_array_elements() Function
+page_title: PostgreSQL jsonb_array_elements() Function
+page_description: >-
+  How to use the PostgreSQL jsonb_array_elements() function to expand the
+  top-level JSON array into a set of JSON values.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements/
 ogImage: ''
-updatedOn: '2024-02-24T04:18:19+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_array_length() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_array_length'
+  title: PostgreSQL jsonb_array_length() Function
+  slug: postgresql-json-functions/postgresql-jsonb_array_length
 nextLink:
-  title: 'PostgreSQL jsonb_array_elements_text() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_array_elements_text'
+  title: PostgreSQL jsonb_array_elements_text() Function
+  slug: postgresql-json-functions/postgresql-jsonb_array_elements_text
 ---
+
+<Admonition type="info" id="CTA">
+The jsonb_array_elements() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and tight integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_array_elements()` function to expand the top\-level JSON array into a set of JSON values.
 

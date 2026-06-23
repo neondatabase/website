@@ -1,18 +1,26 @@
 ---
-title: 'Install PostgreSQL Linux'
-page_title: 'Install PostgreSQL on Linux (Ubuntu)'
-page_description: 'In this tutorial, you will learn how to download and install PostgreSQL on Linux. You also learn how to load the sample database to the PostgreSQL Database Server.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/'
+title: Install PostgreSQL Linux
+page_title: Install PostgreSQL on Linux (Ubuntu)
+page_description: >-
+  In this tutorial, you will learn how to download and install PostgreSQL on
+  Linux. You also learn how to load the sample database to the PostgreSQL
+  Database Server.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/
 ogImage: ''
-updatedOn: '2024-02-19T07:35:09+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'Install PostgreSQL macOS'
-  slug: 'postgresql-getting-started/install-postgresql-macos'
+  title: Install PostgreSQL macOS
+  slug: postgresql-getting-started/install-postgresql-macos
 nextLink:
-  title: 'PostgreSQL Tutorial'
-  slug: 'postgresql-getting-started/..'
+  title: PostgreSQL Tutorial
+  slug: postgresql-getting-started/..
 ---
+
+<Admonition type="info" id="CTA">
+Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and Lakehouse integration that enterprises expect. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to download and install PostgreSQL on Linux.
 
@@ -173,7 +181,7 @@ Seventh, access the PostgreSQL database server again using `psql`:
 psql
 ```
 
-Eighth, switch to the `dvdental` database:
+Eighth, switch to the `dvdrental` database:
 
 ```
 \c dvdrental

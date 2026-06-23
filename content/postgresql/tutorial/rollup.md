@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ROLLUP'
-page_title: 'PostgreSQL ROLLUP'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate multiple grouping sets.'
+title: PostgreSQL ROLLUP
+page_title: PostgreSQL ROLLUP
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ROLLUP to generate
+  multiple grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-rollup/'
-ogImage: '/postgresqltutorial/PostgreSQL-ROLLUP-example.png'
-updatedOn: '2024-07-01T01:04:08+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-ROLLUP-example.png
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CUBE'
-  slug: 'postgresql-tutorial/postgresql-cube'
+  title: PostgreSQL CUBE
+  slug: postgresql-tutorial/postgresql-cube
 nextLink:
-  title: 'PostgreSQL UNION'
-  slug: 'postgresql-tutorial/postgresql-union'
+  title: PostgreSQL UNION
+  slug: postgresql-tutorial/postgresql-union
 ---
+
+<Admonition type="info" id="CTA">
+ROLLUP is a standard PostgreSQL feature for generating hierarchical subtotals and grand totals, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running reporting and analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
 
@@ -165,7 +171,7 @@ ORDER BY
 See the following `rental` table from the [sample database](../postgresql-getting-started/postgresql-sample-database).
 
 ![Rental Table](/postgresqltutorial/rental.png)
-The following statement finds the number of rental per day, month, and year by using the `ROLLUP`:
+The following statement finds the number of rentals per day, month, and year by using the `ROLLUP`:
 
 ```sql
 SELECT

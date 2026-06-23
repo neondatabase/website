@@ -1,18 +1,25 @@
 ---
 title: 'PostgreSQL Python: Call PostgreSQL Functions'
 page_title: 'PostgreSQL Python: Call PostgreSQL Functions'
-page_description: 'In this tutorial, you will learn how to call PostgreSQL functions from a Python program.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/'
+page_description: >-
+  In this tutorial, you will learn how to call PostgreSQL functions from a
+  Python program.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/
 ogImage: ''
-updatedOn: '2024-01-29T13:45:56+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Transactions'
-  slug: 'postgresql-python/transaction'
+  slug: postgresql-python/transaction
 nextLink:
   title: 'PostgreSQL Python: Call Stored Procedures'
-  slug: 'postgresql-python/call-stored-procedures'
+  slug: postgresql-python/call-stored-procedures
 ---
+
+<Admonition type="info" id="CTA">
+Calling PostgreSQL functions with psycopg2 works the same against any Postgres database, so everything here carries over whether you're running Postgres locally, on another cloud, or through a managed service. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with high performance, strong security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL functions from a Python program.
 
@@ -102,7 +109,7 @@ Notice that you can use any PostgreSQL client tools to create a function such as
 
 First, create a new module in the project directory called `call_function.py`:
 
-Second, define a new function called `get_parts()` that calls the `get_parts_by_vendors()` function in PostgreSQL:
+Second, define a new function called `get_parts()` that calls the `get_parts_by_vendor()` function in PostgreSQL:
 
 ```python
 import psycopg2

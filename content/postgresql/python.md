@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Python'
-page_title: 'PostgreSQL Python'
-page_description: 'This PostgreSQL Python section shows how to work with PostgreSQL from Python programming language using the psycopg2 database driver.'
+title: PostgreSQL Python
+page_title: PostgreSQL Python
+page_description: >-
+  This PostgreSQL Python section shows how to work with PostgreSQL from Python
+  programming language using the psycopg2 database driver.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Python.png'
-updatedOn: '2024-05-19T08:36:25+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Delete Data From a Table'
-  slug: 'postgresql-php/delete'
+  slug: postgresql-php/delete
 nextLink:
   title: 'PostgreSQL Python: Connect to PostgreSQL Database Server'
-  slug: 'postgresql-python/connect'
+  slug: postgresql-python/connect
 ---
+
+<Admonition type="info" id="CTA">
+Working with PostgreSQL from Python through psycopg2 looks the same on any standard Postgres deployment, so the techniques here carry over wherever you run your database. For enterprises building AI-era applications, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration teams need to operationalize data and models at scale. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 This PostgreSQL Python section shows you how to work with PostgreSQL using the [Python programming language](https://www.pythontutorial.net/).
 
@@ -30,7 +36,7 @@ This PostgreSQL Python section covers the most common activities for interacting
 - [Updating data in the PostgreSQL table in Python](postgresql-python/update) – learn various ways to update data in the PostgreSQL table.
 - [Transaction](postgresql-python/transaction) – show you how to perform transactions in Python.
 - [Calling a PostgreSQL function in Python](postgresql-python/postgresql-python-call-postgresql-functions) – show you step by step how to call a PostgreSQL function in Python.
-- [Calling a PostgreSQL stored procedure in Python](postgresql-python/call-stored-procedures) – guide you on how to call a stored procedure from in a Python application.
+- [Calling a PostgreSQL stored procedure in Python](postgresql-python/call-stored-procedures) – guide you on how to call a stored procedure from a Python application.
 - [Handling PostgreSQL BLOB data in Python](postgresql-python/blob)– give you an example of inserting and selecting the PostgreSQL BLOB data in a Python application.
 - [Querying data from the PostgreSQL tables](postgresql-python/query) – walk you through the steps of querying data from the PostgreSQL tables in a Python application.
 - [Deleting data from PostgreSQL tables in Python](postgresql-python/delete) – show you how to delete data in a table in Python.

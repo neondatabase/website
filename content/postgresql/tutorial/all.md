@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL ALL Operator'
-page_title: 'PostgreSQL ALL Operator'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ALL operator to compare a value with a list of values returned by a subquery.'
+title: PostgreSQL ALL Operator
+page_title: PostgreSQL ALL Operator
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ALL operator to
+  compare a value with a list of values returned by a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-all/'
 ogImage: ''
-updatedOn: '2024-07-01T01:08:50+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ANY Operator'
-  slug: 'postgresql-tutorial/postgresql-any'
+  title: PostgreSQL ANY Operator
+  slug: postgresql-tutorial/postgresql-any
 nextLink:
-  title: 'PostgreSQL EXISTS Operator'
-  slug: 'postgresql-tutorial/postgresql-exists'
+  title: PostgreSQL EXISTS Operator
+  slug: postgresql-tutorial/postgresql-exists
 ---
+
+<Admonition type="info" id="CTA">
+The ALL operator works the same across any PostgreSQL deployment, so the techniques shown here for comparing a value against a subquery's full result set apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALL` operator to compare a value with a list of values returned by a subquery.
 

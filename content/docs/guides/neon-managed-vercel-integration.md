@@ -2,13 +2,20 @@
 title: Connecting with the Neon-Managed Integration
 subtitle: Link an existing Neon project to Vercel and keep billing in Neon
 summary: >-
-  How to connect an existing Neon project to Vercel, enabling isolated database
-  branches for each preview deployment while managing billing directly through
-  Neon.
+  The Neon-Managed Vercel Integration connects an existing Neon project to a
+  Vercel project via Connectable Accounts, keeping billing in Neon and
+  automatically creating an isolated database branch named
+  `preview/<git-branch>` for each Vercel preview deployment. Use this
+  integration instead of the Vercel-Managed Integration when you already have a
+  Neon account or need direct billing control. The two integrations cannot
+  coexist in the same Vercel project, and each Neon project maps to exactly one
+  Vercel project. The integration injects `DATABASE_URL`, `DATABASE_URL_UNPOOLED`,
+  and legacy `PG*` variables per deployment, with optional automatic branch
+  cleanup when Git branches are deleted.
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-03-20T16:01:10.986Z'
+updatedOn: '2026-06-18T20:28:42.244Z'
 ---
 
 <InfoBlock>
@@ -188,6 +195,12 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
+
+### Password rotation behavior
+
+When you rotate the selected role password in Neon, the integration automatically syncs updated credentials to Vercel environment variables for connected projects.
+
+If deployments still use older credentials, open **Neon Console → Integrations → Manage → Settings** and click **Save changes** to force a resync.
 
 ### Branch cleanup
 

@@ -1,18 +1,24 @@
 ---
-title: 'PL/pgSQL Constants'
-page_title: 'PL/pgSQL Constants'
-page_description: 'In this tutorial, you will learn how to declare and PL/pgSQL constants in a block.'
+title: PL/pgSQL Constants
+page_title: PL/pgSQL Constants
+page_description: >-
+  In this tutorial, you will learn how to declare PL/pgSQL constants in a
+  block.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-constants/'
 ogImage: ''
-updatedOn: '2024-03-19T02:45:18+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Record Types'
-  slug: 'postgresql-plpgsql/plpgsql-record-types'
+  title: PL/pgSQL Record Types
+  slug: postgresql-plpgsql/plpgsql-record-types
 nextLink:
-  title: 'PL/pgSQL Errors and Messages'
-  slug: 'postgresql-plpgsql/plpgsql-errors-messages'
+  title: PL/pgSQL Errors and Messages
+  slug: postgresql-plpgsql/plpgsql-errors-messages
 ---
+
+<Admonition type="info" id="CTA">
+PL/pgSQL constants work the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for production-grade Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PL/pgSQL constants whose values cannot be changed.
 

@@ -2,11 +2,14 @@
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
 summary: >-
-  Covers the setup and usage of the `pg_stat_statements` extension in Postgres
-  to track SQL statement execution statistics, enabling performance analysis and
-  optimization for Neon projects.
+  The `pg_stat_statements` extension records per-query execution counts, total
+  and mean execution times, and row counts in a queryable view. Use it to
+  identify slow queries, high-frequency queries, and cache inefficiency without
+  external tooling. On Neon, statistics reset whenever the compute suspends or
+  scales to zero. Only `neon_superuser` roles can call
+  `pg_stat_statements_reset()` to clear accumulated stats manually.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.840Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
@@ -226,7 +229,7 @@ LIMIT 10;
 
 ## Reset statistics
 
-When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. It's particularly useful in scenarios where you want to start fresh with collecting performance statistics.
+When executed, the `pg_stat_statements_reset()` function resets the accumulated statistical data, such as execution times and counts for SQL statements, to zero. Use it when you want to start fresh with performance statistics collection.
 
 <Admonition type="note">
 In Neon, only [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) roles have the privilege required to execute this function. The default role created with a Neon project and roles created in the Neon Console, CLI, and API are granted membership in the `neon_superuser` role.

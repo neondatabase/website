@@ -3,11 +3,16 @@ title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 summary: >-
-  How to configure OpenTelemetry exports from Neon to send metrics and Postgres
-  logs to any OTEL-compatible observability platform, including setup with
-  Grafana OSS, Tempo, and integration with New Relic.
+  Neon's OpenTelemetry integration exports Postgres metrics and logs to any
+  OTLP-compatible platform, including Grafana OSS, Grafana Cloud, New Relic,
+  and Honeycomb, using HTTP or gRPC transport. Use this page when you need to
+  forward connection counts, CPU, memory, replication lag, or Postgres log
+  events to an external observability backend. Configuration requires only a
+  base OTLP endpoint URL and auth credentials. Neon automatically appends
+  signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
+  computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.183Z'
+updatedOn: '2026-06-16T14:29:15.394Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />

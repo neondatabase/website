@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL REVOKE Statement'
-page_title: 'PostgreSQL REVOKE Statement'
-page_description: 'In this tutorial, you will learn about the PostgreSQL REVOKE statement to remove privileges from a role.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-revoke/'
+title: PostgreSQL REVOKE Statement
+page_title: PostgreSQL REVOKE Statement
+page_description: >-
+  In this tutorial, you will learn about the PostgreSQL REVOKE statement to
+  remove privileges from a role.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-revoke/
 ogImage: ''
-updatedOn: '2024-02-22T00:49:28+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL GRANT'
-  slug: 'postgresql-administration/postgresql-grant'
+  title: PostgreSQL GRANT
+  slug: postgresql-administration/postgresql-grant
 nextLink:
-  title: 'PostgreSQL Role Membership'
-  slug: 'postgresql-administration/postgresql-role-membership'
+  title: PostgreSQL Role Membership
+  slug: postgresql-administration/postgresql-role-membership
 ---
+
+<Admonition type="info" id="CTA">
+The REVOKE statement works the same way on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high-performance managed database fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `REVOKE` statement to remove privileges from a role.
 

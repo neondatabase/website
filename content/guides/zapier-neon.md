@@ -4,7 +4,7 @@ subtitle: Automate workflows by connecting Neon Postgres to hundreds of apps wit
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-29T00:00:00.000Z'
-updatedOn: '2025-05-29T00:00:00.000Z'
+updatedOn: '2026-04-24T22:05:15.000Z'
 ---
 
 Zapier is a powerful no-code automation platform that allows you to connect Neon Postgres to thousands of other web services. By linking your Neon database with apps like Slack, Google Sheets, Gmail, Stripe, or Typeform, you can automate actions based on database events (e.g., a new row is added) or push data into Neon from these external systems.
@@ -22,8 +22,8 @@ Before you begin, ensure you have the following:
 
 - **Zapier Account:** A Zapier account is required to create and manage Zaps. Please note that the PostgreSQL integration is a Pro feature on Zapier and requires a [paid plan](https://zapier.com/pricing).
 
-* **Neon Account and Project:** A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
-* **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
+- **Neon Account and Project:** A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
+- **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.
 

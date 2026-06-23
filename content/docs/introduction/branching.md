@@ -2,21 +2,25 @@
 title: Branching
 subtitle: Branch your data the same way you branch your code
 summary: >-
-  Covers the creation and management of data branches in Neon, allowing for
-  isolated development, testing, and historical analysis without impacting the
-  performance of the production database.
+  Neon branching creates copy-on-write clones of your database instantly, with
+  writes saved as deltas so parent branches see zero load or performance impact.
+  Use branching to spin up isolated development or test environments pre-loaded
+  with production data, or run parallel CI/CD pipelines. You can also recover
+  from data loss by rolling back to any point within your history window.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-02-15T20:51:54.213Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
 
 You can also rewind your data or create branches from the past to recover from mistakes or analyze historical states.
+
+<YoutubeIframe embedId="UuHnFlg66Io" />
 
 ## What is a branch?
 
@@ -32,9 +36,13 @@ Creating a branch does not increase load on the parent branch or affect it in an
 
 Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch) called `main`. The first branch that you create is branched from the project's root branch. Subsequent branches can be branched from the root branch or from a previously created branch.
 
+<Admonition type="tip" title="Using Neon Auth?">
+Users, sessions, and auth configuration in the `neon_auth` schema branch with your data, so preview and test environments get isolated authentication state. See [Neon Auth](/docs/auth/overview) and [Branching authentication](/docs/auth/branching-authentication).
+</Admonition>
+
 ## Branching workflows
 
-You can use Neon's branching feature in variety workflows.
+You can use Neon's branching feature in a variety of workflows.
 
 ### Development
 
@@ -82,7 +90,7 @@ Refer to the following guide for instructions.
 
 Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
 
-Branches with expiration are particularly useful for:
+Branches with expiration work well for:
 
 - CI/CD pipeline testing environments
 - Feature development with known lifespans
@@ -91,17 +99,17 @@ Branches with expiration are particularly useful for:
 
 ## Restore and recover data
 
-If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
+If you lose data due to an unintended deletion or some other event, you can use **[instant restore](/docs/introduction/branch-restore)** to recover: roll the branch back to any point in time that still falls within your project's **history window** (the retention you configure under **Settings → Instant restore**). You can also create a new restore branch for historical analysis or any other reason.
 
 ![Recover from data loss using restore branching](/docs/introduction/branching_data_loss.png)
 
-### Restore window
+### History window
 
-Neon retains a history of changes for your branches, enabling data recovery features. The restore window determines how far back you can restore data, with defaults of 6 hours on Free plan and 1 day on paid plans.
+**Instant restore** (and Time Travel, branching from the past, and snapshots) need Neon to keep a log of data changes. The **history window** is the project-wide setting—on **Settings → Instant restore** in the Console—that controls how long that change history is retained, which sets how far back **instant restore** and the other features can reach.
 
-Increasing your restore window expands your data recovery options but also increases storage costs, as more history is retained. You can configure it up to 7 days on Launch or 30 days on Scale plans.
+Neon retains a history of changes for your branches, with defaults of 6 hours on Free plan and 1 day on paid plans. Increasing the history window expands recovery options but also increases storage costs, as more history is kept. You can configure it up to 7 days on Launch or 30 days on Scale plans.
 
-For complete information about the restore window, including how to configure it, plan limits, storage implications, and how it works, see [Restore window](/docs/introduction/restore-window).
+For limits, billing, and how to change the setting, see [History window](/docs/introduction/history-window).
 
 Learn how to use these data recovery features:
 

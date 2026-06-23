@@ -2,11 +2,14 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 summary: >-
-  Step-by-step guide for installing and configuring Liquibase to manage database
-  schema changes in a Neon environment, including deployment and rollback
-  procedures.
+  Connect Liquibase to a Neon Postgres database over JDBC to track, deploy,
+  and roll back versioned schema changes defined in XML changelog files. Use
+  this guide when you need to version-control DDL changes against Neon with a
+  repeatable deploy-and-rollback workflow. Covers the liquibase.properties
+  JDBC URL format for Neon and demonstrates the update and rollbackCount
+  commands.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.002Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -195,7 +198,7 @@ Now, you can start making database schema changes by creating [changesets](https
    touch dbchangelog.xml
    ```
 
-2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your auther name and id, which you can retrieve from your changelog file, described in the previous step.
+2. Add the following changeset, which adds a `comments` table to your database. Replace `author="alex" id="myIDNumber1234"` with your author name and id, which you can retrieve from your changelog file, described in the previous step.
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>

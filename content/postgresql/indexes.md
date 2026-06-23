@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Indexes'
-page_title: 'PostgreSQL Indexes'
-page_description: 'In this tutorial, you will learn how to use PostgreSQL indexes to enhance the data retrieval speed and various index types.'
+title: PostgreSQL Indexes
+page_title: PostgreSQL Indexes
+page_description: >-
+  In this tutorial, you will learn how to use PostgreSQL indexes to enhance the
+  data retrieval speed and various index types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/'
 ogImage: ''
-updatedOn: '2024-03-06T08:34:51+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL List Views'
-  slug: 'postgresql-views/postgresql-list-views'
+  title: PostgreSQL List Views
+  slug: postgresql-views/postgresql-list-views
 nextLink:
-  title: 'PostgreSQL CREATE INDEX Statement'
-  slug: 'postgresql-indexes/postgresql-create-index'
+  title: PostgreSQL CREATE INDEX Statement
+  slug: postgresql-indexes/postgresql-create-index
 ---
+
+<Admonition type="info" id="CTA">
+Indexes are a core part of PostgreSQL, and everything you'll learn here about B-tree, Hash, GIN, GiST, SP-GiST, and BRIN indexes works on any Postgres database, not just [Neon](https://neon.com). If you're an enterprise running analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for that world, performant and secure by default and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL indexes to enhance the data retrieval speed and various index types.
 

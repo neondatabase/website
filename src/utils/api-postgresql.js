@@ -10,8 +10,8 @@ const getAllPosts = async () => {
   const slugs = await getPostSlugs(POSTGRESQL_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, POSTGRESQL_DIR_PATH)) return;
       const data = getPostBySlug(slug, POSTGRESQL_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -20,6 +20,7 @@ const getAllPosts = async () => {
       } = data;
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
@@ -30,8 +31,8 @@ const getAllPostgresTutorials = async () => {
   const slugs = await getPostSlugs(POSTGRESQL_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, POSTGRESQL_DIR_PATH)) return;
       const data = getPostBySlug(slug, POSTGRESQL_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -40,6 +41,7 @@ const getAllPostgresTutorials = async () => {
       } = data;
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 

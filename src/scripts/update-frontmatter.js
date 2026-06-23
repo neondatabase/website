@@ -1,68 +1,29 @@
-const fs = require('fs').promises;
+const { execSync } = require('child_process');
+const fs = require('fs');
 
-// const { Octokit } = require('@octokit/core');
-// const { glob } = require('glob');
-const matter = require('gray-matter');
+// Skip updatedOn stamping during a merge commit. Files staged by the incoming
+// merge were not authored in this branch; any genuinely edited files will be
+// stamped on the next regular commit.
+try {
+  execSync('git rev-parse --verify MERGE_HEAD', { stdio: 'pipe' });
+  process.exit(0);
+} catch {
+  // Not a merge; proceed.
+}
 
-// The function below is for getting the last update date from GitHub,
-// as GitHub has the rate limit for unauthenticated requests (60 requests per hour),
-// the script was run manually and the date was hardcoded in the frontmatter of the docs.
+const filePaths = process.argv.slice(2).filter(Boolean);
+const updatedOn = new Date().toISOString();
 
-// const octokit = new Octokit({
-//   auth: process.env.GITHUB_TOKEN,
-// });
-// async function getLastUpdateDate(filePath) {
-//   const repoOwner = 'neondatabase';
-//   const repoName = 'website';
-//   const res = await octokit.request('GET /repos/{owner}/{repo}/commits', {
-//     owner: repoOwner,
-//     repo: repoName,
-//     path: filePath,
-//   });
+for (const filePath of filePaths) {
+  const content = fs.readFileSync(filePath, 'utf-8');
 
-//   return res.data[0].commit.author.date;
-// }
+  // Find the closing --- of the frontmatter block
+  const fmEnd = content.indexOf('\n---', 3);
+  if (fmEnd === -1) continue;
 
-const updateFrontmatter = async () => {
-  // const files = await glob.sync(`content/docs/**/*.md`, {
-  //   ignore: ['**/README.md', '**/unused/**'],
-  // });
+  const frontmatter = content.slice(0, fmEnd);
+  if (!/^updatedOn:/m.test(frontmatter)) continue;
 
-  // NOTE: to fetch the last update date from GitHub, uncomment the code above,
-  // and slice the files array to 60 items
-
-  const mdFilePaths = process.argv.slice(2).filter(Boolean);
-
-  const docsMdFilePaths = mdFilePaths.filter(
-    (path) =>
-      (path.includes('content/docs') || path.includes('content/use-cases')) &&
-      (!path.includes('README.md') || !path.includes('unused'))
-  );
-
-  docsMdFilePaths.forEach(async (path) => {
-    const file = matter.read(path);
-    const { data: currentFrontmatter } = file;
-
-    // const date = await getLastUpdateDate(path);
-
-    const updatedFrontmatter = {
-      ...currentFrontmatter,
-      // updatedOn: date,
-      updatedOn: new Date().toISOString(),
-    };
-
-    file.data = updatedFrontmatter;
-
-    const updatedFileContentRaw = matter.stringify(file);
-    const updatedFileContent = updatedFileContentRaw.replace(
-      /\nsubtitle: >-\n\s+/g,
-      '\nsubtitle: '
-    );
-
-    await fs.writeFile(path, updatedFileContent);
-  });
-};
-
-updateFrontmatter();
-
-console.log('Frontmatter updated');
+  const updatedFrontmatter = frontmatter.replace(/^updatedOn:.*$/m, `updatedOn: '${updatedOn}'`);
+  fs.writeFileSync(filePath, updatedFrontmatter + content.slice(fmEnd));
+}

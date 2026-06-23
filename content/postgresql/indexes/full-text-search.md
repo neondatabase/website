@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Full Text Search'
-page_title: 'PostgreSQL Full-text Search'
-page_description: 'Learn about PostgreSQL full-text search and how to use it to perform complex searches on text stored in the database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/'
+title: PostgreSQL Full Text Search
+page_title: PostgreSQL Full-text Search
+page_description: >-
+  Learn about PostgreSQL full-text search and how to use it to perform complex
+  searches on text stored in the database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/
 ogImage: ''
-updatedOn: '2024-03-29T02:51:11+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Index Types'
-  slug: 'postgresql-indexes/postgresql-index-types'
+  title: PostgreSQL Index Types
+  slug: postgresql-indexes/postgresql-index-types
 nextLink:
-  title: 'PostgreSQL JSON Index'
-  slug: 'postgresql-indexes/postgresql-json-index'
+  title: PostgreSQL JSON Index
+  slug: postgresql-indexes/postgresql-json-index
 ---
+
+<Admonition type="info" id="CTA">
+Full text search is a core PostgreSQL feature, and everything covered here works on any standard Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL full text search and how to use it to perform complex searches on text stored in the database.
 

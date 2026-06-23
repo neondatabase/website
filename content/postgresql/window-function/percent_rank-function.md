@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL PERCENT_RANK Function'
-page_title: 'PostgreSQL PERCENT_RANK() Function By Practical Examples'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL PERCENT_RANK() function to calculate the relative rank of a value within a set of values.'
-prev_url: 'index.html'
-ogImage: '/postgresqltutorial/sales_stats-table.png'
-updatedOn: '2020-04-11T10:53:00+00:00'
+title: PostgreSQL PERCENT_RANK Function
+page_title: PostgreSQL PERCENT_RANK() Function By Practical Examples
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL PERCENT_RANK()
+  function to calculate the relative rank of a value within a set of values.
+prev_url: index.html
+ogImage: /postgresqltutorial/sales_stats-table.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NTH_VALUE Function'
-  slug: 'postgresql-window-function/postgresql-nth_value-function'
+  title: PostgreSQL NTH_VALUE Function
+  slug: postgresql-window-function/postgresql-nth_value-function
 nextLink:
-  title: 'PostgreSQL RANK Function'
-  slug: 'postgresql-window-function/postgresql-rank-function'
+  title: PostgreSQL RANK Function
+  slug: postgresql-window-function/postgresql-rank-function
 ---
+
+<Admonition type="info" id="CTA">
+The PERCENT_RANK() function works the same way across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `PERCENT_RANK()` function to calculate the relative rank of a value within a set of values.
 

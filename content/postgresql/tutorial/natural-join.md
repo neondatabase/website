@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL NATURAL JOIN'
-page_title: 'PostgreSQL NATURAL JOIN Explained By Example'
-page_description: 'This tutorial explains to you how the PostgreSQL NATURAL JOIN works and shows you how to use the NATURAL JOIN to query data from two or more tables.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join/'
-ogImage: '/postgresqltutorial/city.png'
-updatedOn: '2024-02-02T02:29:26+00:00'
+title: PostgreSQL NATURAL JOIN
+page_title: PostgreSQL NATURAL JOIN Explained By Example
+page_description: >-
+  This tutorial explains to you how the PostgreSQL NATURAL JOIN works and shows
+  you how to use the NATURAL JOIN to query data from two or more tables.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-natural-join/
+ogImage: /postgresqltutorial/city.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Cross Join'
-  slug: 'postgresql-tutorial/postgresql-cross-join'
+  title: PostgreSQL Cross Join
+  slug: postgresql-tutorial/postgresql-cross-join
 nextLink:
-  title: 'PostgreSQL GROUP BY'
-  slug: 'postgresql-tutorial/postgresql-group-by'
+  title: PostgreSQL GROUP BY
+  slug: postgresql-tutorial/postgresql-group-by
 ---
+
+<Admonition type="info" id="CTA">
+NATURAL JOIN is part of standard PostgreSQL, and everything you learn here works on any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres on the market, fully integrated into the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NATURAL JOIN` to query data from two tables.
 

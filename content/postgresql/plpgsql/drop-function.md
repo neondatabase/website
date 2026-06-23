@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Drop Function'
-page_title: 'PostgreSQL DROP FUNCTION Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL DROP FUNCTION statement to delete one or more functions from a database.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/'
+title: PostgreSQL Drop Function
+page_title: PostgreSQL DROP FUNCTION Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL DROP FUNCTION
+  statement to delete one or more functions from a database.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-plpgsql/postgresql-drop-function/
 ogImage: ''
-updatedOn: '2024-02-07T14:14:09+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PL/pgSQL Returns SetOf'
-  slug: 'postgresql-plpgsql/plpgsql-returns-setof'
+  title: PL/pgSQL Returns SetOf
+  slug: postgresql-plpgsql/plpgsql-returns-setof
 nextLink:
-  title: 'PostgreSQL CREATE PROCEDURE'
-  slug: 'postgresql-plpgsql/postgresql-create-procedure'
+  title: PostgreSQL CREATE PROCEDURE
+  slug: postgresql-plpgsql/postgresql-create-procedure
 ---
+
+<Admonition type="info" id="CTA">
+The DROP FUNCTION statement works the same across every standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or through a managed service. For enterprises operating in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `drop function` statement to remove a function.
 
@@ -116,7 +123,7 @@ HINT:  Specify the argument list to select the function unambiguously.
 SQL state: 42725
 ```
 
-Since the `get_film_actors` stored procedure is not unique, you need to specify which function you want to drop.
+Since the `get_film_actors` function is not unique, you need to specify which function you want to drop.
 
 The following statement drops the `get_film_actors` function that has zero parameters:
 

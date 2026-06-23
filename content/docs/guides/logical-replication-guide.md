@@ -2,16 +2,18 @@
 title: Get started with logical replication
 subtitle: Learn how to replicate data to and from your Neon Postgres database
 summary: >-
-  Covers the setup of logical replication in Neon Postgres, enabling data
-  streaming to and from external sources, live migrations, and inter-project
-  data replication using a publisher-subscriber model.
+  Neon logical replication streams data between Neon Postgres and external
+  systems using Postgres's native publisher-subscriber model. Find guides for
+  CDC to data warehouses, live migrations from AWS RDS, Google Cloud SQL,
+  AlloyDB, or Supabase, and cross-region Neon-to-Neon replication. Logical
+  replication must be explicitly enabled per project, cannot be reverted, and
+  Neon can act as either publisher or subscriber.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
-  - /docs/guides/logical-replication-clickhouse
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2026-03-30T12:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
@@ -46,13 +48,17 @@ To get started, jump into one of our step-by-step logical replication guides.
 
 ## Replicate data from Neon
 
+<Admonition type="note">
+To replicate data from Neon, you must first enable logical replication on your project. This setting cannot be reverted once enabled. See [Enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication) for Console and API instructions.
+</Admonition>
+
 <TechCards>
 
 <a href="/docs/guides/logical-replication-airbyte" title="Airbyte" description="Replicate data from Neon with Airbyte" icon="airbyte"></a>
 
 <a href="/docs/guides/bemi" title="Bemi" description="Create an automatic audit trail with Bemi" icon="bemi"></a>
 
-<a href="https://docs.peerdb.io/mirror/cdc-neon-clickhouse" title="ClickHouse" description="Change Data Capture from Neon to ClickHouse with PeerDB (PeerDB docs)" icon="clickhouse"></a>
+<a href="/docs/guides/logical-replication-clickhouse" title="ClickHouse" description="Replicate data from Neon to ClickHouse using ClickPipes" icon="clickhouse"></a>
 
 <a href="/docs/guides/logical-replication-kafka-confluent" title="Confluent (Kafka)" description="Replicate data from Neon with Confluent (Kafka)" icon="confluent"></a>
 

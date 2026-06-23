@@ -1,26 +1,33 @@
 ---
-title: 'PostgreSQL DROP TABLESPACE Statement'
-page_title: 'PostgreSQL DROP TABLESPACE Statement'
-page_description: 'In this tutorial, you will learn how to remove a tablespace by using the PostgreSQL DROP TABLESPACE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/'
+title: PostgreSQL DROP TABLESPACE Statement
+page_title: PostgreSQL DROP TABLESPACE Statement
+page_description: >-
+  In this tutorial, you will learn how to remove a tablespace by using the
+  PostgreSQL DROP TABLESPACE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/
 ogImage: ''
-updatedOn: '2024-02-15T01:34:04+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL ALTER TABLESPACE'
-  slug: 'postgresql-administration/postgresql-alter-tablespace'
+  title: PostgreSQL ALTER TABLESPACE
+  slug: postgresql-administration/postgresql-alter-tablespace
 nextLink:
-  title: 'PostgreSQL Backup'
-  slug: 'postgresql-administration/postgresql-backup-database'
+  title: PostgreSQL Backup
+  slug: postgresql-administration/postgresql-backup-database
 ---
+
+<Admonition type="info" id="CTA">
+The DROP TABLESPACE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're managing your own cluster or running on a managed service. If you're an enterprise looking for the best managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers production-grade performance, strong security, and native integration with the Lakehouse for AI-era workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL DROP TABLESPACE** statement to remove a tablespace.
 
 ## Introduction to PostgreSQL DROP TABLESPACE statement
 
-The `DROP TABLESPACE` statement delete a tablespace from a database:
+The `DROP TABLESPACE` statement deletes a tablespace from a database:
 
-Here’s the syntax of the `DROP TABLE` statement:
+Here’s the syntax of the `DROP TABLESPACE` statement:
 
 ```sql
 DROP TABLESPACE [IF EXISTS] tablespace_name;
@@ -127,7 +134,7 @@ Seventh, connect to the `postgres` database:
 \c postgres
 ```
 
-Eight, drop the `demodb` database:
+Eighth, drop the `demodb` database:
 
 ```sql
 DROP DATABASE demodb;

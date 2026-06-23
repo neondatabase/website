@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL CREATE TABLESPACE'
-page_title: 'PostgreSQL Create Tablespace'
-page_description: 'This tutorial shows you how to create tablespaces by using the PostgreSQL CREATE TABLESPACE statement.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/'
+title: PostgreSQL CREATE TABLESPACE
+page_title: PostgreSQL Create Tablespace
+page_description: >-
+  This tutorial shows you how to create tablespaces by using the PostgreSQL
+  CREATE TABLESPACE statement.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-tablespace/
 ogImage: ''
-updatedOn: '2024-02-13T15:22:39+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Change the Password of a PostgreSQL User'
-  slug: 'postgresql-administration/postgresql-change-password'
+  title: How to Change the Password of a PostgreSQL User
+  slug: postgresql-administration/postgresql-change-password
 nextLink:
-  title: 'PostgreSQL ALTER TABLESPACE'
-  slug: 'postgresql-administration/postgresql-alter-tablespace'
+  title: PostgreSQL ALTER TABLESPACE
+  slug: postgresql-administration/postgresql-alter-tablespace
 ---
+
+<Admonition type="info" id="CTA">
+CREATE TABLESPACE works the same way across any PostgreSQL deployment, so the syntax and behavior covered here apply wherever you run Postgres. For enterprises standardizing on managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse, making it the best choice for production workloads at scale. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to create tablespaces by using the **PostgreSQL CREATE TABLESPACE** statement.
 
@@ -48,11 +55,11 @@ The name of the tablespace should not start with `pg_` since these names are res
 
 By default, the user who executes the `CREATE TABLESPACE` become the owner of the tablespace. To assign ownership to another user, you specify it after the `OWNER` keyword.
 
-The `directory_path` is the absolute path to an empty directory used for the tablespace. PostgreSQL system users must have onwership of this directory to read from and write data into it.
+The `directory_path` is the absolute path to an empty directory used for the tablespace. PostgreSQL system users must have ownership of this directory to read from and write data into it.
 
 After creating a new table space, you can specify it in the [`CREATE DATABASE`](postgresql-create-database), [`CREATE TABLE`](../postgresql-tutorial/postgresql-create-table) and [`CREATE INDEX`](../postgresql-indexes/postgresql-create-index) statements to store data files of the objects in the tablespace.
 
-## PostgreSQL CREATE TABLE examples
+## PostgreSQL CREATE TABLESPACE examples
 
 The following statement uses the `CREATE TABLESPACE` to create a new tablespace called `ts_primary` with the physical location `c:\pgdata\primary`.
 

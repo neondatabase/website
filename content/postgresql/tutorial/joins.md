@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL Joins'
+title: PostgreSQL Joins
 page_title: 'PostgreSQL Joins: A Visual Explanation of PostgreSQL Joins'
-page_description: 'You will learn visually how to use various kinds of PostgreSQL joins including inner join, left join, right join, and outer join.'
+page_description: >-
+  You will learn visually how to use various kinds of PostgreSQL joins including
+  inner join, left join, right join, and outer join.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-joins/'
-ogImage: '/postgresqltutorial/PostgreSQL-Join-Inner-Join.png'
-updatedOn: '2024-01-17T05:01:10+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-Join-Inner-Join.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL IS NULL'
-  slug: 'postgresql-tutorial/postgresql-is-null'
+  title: PostgreSQL IS NULL
+  slug: postgresql-tutorial/postgresql-is-null
 nextLink:
-  title: 'PostgreSQL Table Aliases'
-  slug: 'postgresql-tutorial/postgresql-alias'
+  title: PostgreSQL Table Aliases
+  slug: postgresql-tutorial/postgresql-alias
 ---
+
+<Admonition type="info" id="CTA">
+Joins are core SQL and work the same on any PostgreSQL database, so the inner, left, right, and full outer join patterns covered here apply wherever you run Postgres. If you're an enterprise building analytical or AI workloads on top of relational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience in the cloud, with the performance, security, and native Lakehouse integration demanding workloads require. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about various kinds of PostgreSQL joins including inner join, left join, right join, and full outer join.
 

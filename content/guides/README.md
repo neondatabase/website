@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-05-13T13:24:36.612Z'
+updatedOn: '2026-05-13T19:04:49.209Z'
 ---
 
 # Guides
@@ -25,6 +25,7 @@ Right now Markdown files accept the following fields:
 5. `isDraft`: flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents`: flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
+8. `excludeFromBlog`: flag that hides the guide from the blog's guides listing and the "All posts" feed. The guide page itself is still published at its `/guides/...` URL — use this for guides that should remain accessible but not be surfaced alongside blog content.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 

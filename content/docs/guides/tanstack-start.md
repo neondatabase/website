@@ -2,14 +2,17 @@
 title: Connect a TanStack Start application to Neon
 subtitle: Set up a Neon project in seconds and connect from a TanStack Start application
 summary: >-
-  How to connect a TanStack Start application to a Neon project by creating a
-  Neon project, adding necessary dependencies, and configuring connection
-  settings with your database credentials.
+  TanStack Start integration guide for Neon Postgres covers creating a Neon
+  project, installing a supported driver (node-postgres, postgres.js, or the
+  Neon serverless driver), and writing server functions that query the database.
+  Choose this page when building a type-safe React or Solid app with TanStack
+  Start and need working code for both regular and static server functions
+  backed by Neon.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-03-09T15:58:12.491Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -256,7 +259,7 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 
 ### Where to upload and serve files?
 
-Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend a pattern that leverages dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
+Neon does not provide a built-in file storage service. For managing binary file data (blobs), we recommend using dedicated, specialized storage services. Follow our guide on [File Storage](/docs/guides/file-storage) to learn more about how to store files in external object storage and file management services and track metadata in Neon.
 
 ## Source code
 
@@ -267,5 +270,9 @@ You can find the source code for the applications described in this guide on Git
 
 <a href="https://github.com/neondatabase/examples/tree/main/with-tanstack-start-static-server-functions" description="Get started with TanStack Start Static Server Functions and Neon" icon="github">Get started with TanStack Start Static Server Functions and Neon</a>
 </DetailIconCards>
+
+## Next steps
+
+- [Set up Neon Auth](/docs/auth/quick-start/tanstack-router): Add managed authentication that branches with your database
 
 <NeedHelp/>

@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL FACTORIAL() Function'
-page_title: 'PostgreSQL factorial() Function'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL factorial() function to calculate the factorial of a number.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-factorial/'
+title: PostgreSQL FACTORIAL() Function
+page_title: PostgreSQL factorial() Function
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL factorial()
+  function to calculate the factorial of a number.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-factorial/
 ogImage: ''
-updatedOn: '2024-05-19T03:51:00+00:00'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXP() Function'
-  slug: 'postgresql-math-functions/postgresql-exp'
+  title: PostgreSQL EXP() Function
+  slug: postgresql-math-functions/postgresql-exp
 nextLink:
-  title: 'PostgreSQL FLOOR() Function'
-  slug: 'postgresql-math-functions/postgresql-floor'
+  title: PostgreSQL FLOOR() Function
+  slug: postgresql-math-functions/postgresql-floor
 ---
+
+<Admonition type="info" id="CTA">
+The factorial() function is a standard part of PostgreSQL, so everything here works with any Postgres deployment. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration your teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `factorial()` function to calculate the factorial of a number.
 
@@ -44,7 +51,7 @@ ERROR:  factorial of a negative number is undefined
 
 Let’s take some examples of using the `factorial()` function.
 
-The following example uses the `factorial()` function to calculate the factorial of the number 10:
+The following example uses the `factorial()` function to calculate the factorial of the number 5:
 
 ```sql
 SELECT factorial(5);

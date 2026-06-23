@@ -2,11 +2,14 @@
 title: Accounts
 subtitle: Manage your Neon account
 summary: >-
-  Covers the management of your Neon account, including updating personal
-  information, changing your email and password, two-factor authentication, and
-  switching login methods.
+  Neon account settings let you update your profile, change your password, and
+  configure two-factor authentication (2FA). Use this page to switch login
+  methods, enable or remove TOTP-based 2FA, manage personal API keys, or
+  permanently delete your account. 2FA removal has a 24-hour security delay.
+  Deleted accounts can be reactivated within 30 days, after which all data is
+  permanently removed.
 enableTableOfContents: true
-updatedOn: '2026-03-02T20:53:06.220Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
@@ -54,6 +57,8 @@ No surprises here: just enter your current password, then your new one (twice). 
 ## Two-factor authentication
 
 Protect your account with two-factor authentication (2FA). Once enabled, you'll enter a 6-digit code from your authenticator app each time you log in.
+
+If your organization admin requires 2FA for the organization, you must enroll in 2FA to continue accessing that organization.
 
 ### Enable 2FA
 

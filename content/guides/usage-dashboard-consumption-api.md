@@ -4,7 +4,7 @@ subtitle: Learn how to track and visualize your Neon usage programmatically usin
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-15T00:00:00.000Z'
-updatedOn: '2026-02-15T00:00:00.000Z'
+updatedOn: '2026-05-29T10:41:30.007Z'
 ---
 
 Neon's usage-based pricing plans (**Launch, Scale, Agent, and Enterprise**) ensure you only pay for the resources you actually consume. To help you monitor these costs programmatically, Neon provides the [Project Consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2). This API allows you to query detailed usage data for your projects, including compute time, storage, and data transfer.
@@ -706,7 +706,9 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)
+- [Neon API Reference: project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)
+- [Neon API Reference: branch consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) — extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
+- [Query consumption metrics](/docs/guides/consumption-metrics)
 - [Recharts Documentation](https://recharts.org/)
 - [Shadcn/ui Components](https://ui.shadcn.com/)
 - [Autoscaling in Neon](/docs/introduction/autoscaling)

@@ -1,18 +1,24 @@
 ---
-title: 'PostgreSQL CREATE INDEX Statement'
-page_title: 'PostgreSQL CREATE INDEX Statement'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL CREATE INDEX statement to create a new index for a table.'
+title: PostgreSQL CREATE INDEX Statement
+page_title: PostgreSQL CREATE INDEX Statement
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL CREATE INDEX
+  statement to create a new index for a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/'
-ogImage: '/postgresqltutorial/address.png'
-updatedOn: '2024-02-28T13:06:03+00:00'
+ogImage: /postgresqltutorial/address.png
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Indexes'
-  slug: 'postgresql-indexes/'
+  title: PostgreSQL Indexes
+  slug: postgresql-indexes/
 nextLink:
-  title: 'PostgreSQL UNIQUE Index'
-  slug: 'postgresql-indexes/postgresql-unique-index'
+  title: PostgreSQL UNIQUE Index
+  slug: postgresql-indexes/postgresql-unique-index
 ---
+
+<Admonition type="info" id="CTA">
+CREATE INDEX works the same across any PostgreSQL deployment, so everything here carries over whether you're running Postgres on your laptop, in your own data center, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres available, natively integrated into the Lakehouse so your operational and analytical data live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE INDEX` statement to define a new index for a table.
 
@@ -78,7 +84,7 @@ Output:
 
 To find the row whose value in the `phone` column is `223664661973`, PostgreSQL must scan the entire `address` table.
 
-Third, show the query plan using the following `EXPLAIN` statement::
+Third, show the query plan using the following `EXPLAIN` statement:
 
 ```sql
 EXPLAIN SELECT
@@ -144,7 +150,7 @@ Two other indexes `address_pkey` and `idx_fk_city_id` were created implicitly wh
 
 More specifically, the `address_pkey` index was created for the [primary key](../postgresql-tutorial/postgresql-primary-key) column `address_id` and `idx_fk_city_id` was created for the [foreign key](../postgresql-tutorial/postgresql-foreign-key) city_id column.
 
-Fifth, execute the following query again:
+Sixth, execute the following query again:
 
 ```sql
 EXPLAIN SELECT

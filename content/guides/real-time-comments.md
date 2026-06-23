@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
-updatedOn: '2025-01-07T00:00:00.000Z'
+updatedOn: '2026-05-09T19:22:21.118Z'
 title: Building Real-Time Comments with a Serverless Postgres
 subtitle: A guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
@@ -116,7 +116,7 @@ async function prepare() {
   ]);
   await sql`CREATE OR REPLACE FUNCTION public.outbox_notify() RETURNS trigger AS $$ BEGIN PERFORM pg_notify('ably_adbc'::text, ''::text); RETURN NULL; EXCEPTION WHEN others THEN RAISE WARNING 'unexpected error in %s: %%', SQLERRM; RETURN NULL; END; $$ LANGUAGE plpgsql;`;
   await sql`CREATE OR REPLACE TRIGGER public_outbox_trigger AFTER INSERT ON public.outbox FOR EACH STATEMENT EXECUTE PROCEDURE public.outbox_notify();`;
-  console.log('Database schema set up succesfully.');
+  console.log('Database schema set up successfully.');
 }
 
 prepare();
@@ -130,7 +130,7 @@ To run the schema against your Neon Postgres, execute the following command:
 npm run db
 ```
 
-If it runs succesfully, you should see `Database schema set up succesfully.` in the terminal.
+If it runs successfully, you should see `Database schema set up successfully.` in the terminal.
 
 ## Set up Prisma for Neon Postgres
 

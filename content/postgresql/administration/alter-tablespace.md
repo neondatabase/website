@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL ALTER TABLESPACE'
-page_title: 'PostgreSQL ALTER TABLESPACE'
-page_description: 'In this tutorial, you will learn how to use the PostgreSQL ALTER TABLESPACE statement to rename, change the owner, or set parameters for a tablespace.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-tablespace/'
+title: PostgreSQL ALTER TABLESPACE
+page_title: PostgreSQL ALTER TABLESPACE
+page_description: >-
+  In this tutorial, you will learn how to use the PostgreSQL ALTER TABLESPACE
+  statement to rename, change the owner, or set parameters for a tablespace.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-tablespace/
 ogImage: ''
-updatedOn: '2023-12-30T10:24:23+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CREATE TABLESPACE'
-  slug: 'postgresql-administration/postgresql-create-tablespace'
+  title: PostgreSQL CREATE TABLESPACE
+  slug: postgresql-administration/postgresql-create-tablespace
 nextLink:
-  title: 'PostgreSQL DROP TABLESPACE Statement'
-  slug: 'postgresql-administration/postgresql-drop-tablespace'
+  title: PostgreSQL DROP TABLESPACE Statement
+  slug: postgresql-administration/postgresql-drop-tablespace
 ---
+
+<Admonition type="info" id="CTA">
+The ALTER TABLESPACE syntax covered here is standard PostgreSQL and works the same way on any Postgres deployment that exposes tablespace management. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL ALTER TABLESPACE** statement to rename, change the owner, or set parameters for a tablespace.
 

@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 import {
   processFile,
@@ -17,7 +17,7 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/prisma.md';
       const pageUrl = 'https://neon.com/docs/guides/prisma';
 
-      const result = await processFile(inputPath, pageUrl);
+      const { content: result } = await processFile(inputPath, pageUrl);
 
       // Should have title from frontmatter
       expect(result).toContain('# Connect from Prisma to Neon');
@@ -44,7 +44,7 @@ describe('MDX to Markdown Conversion', () => {
       const inputPath = 'content/docs/guides/nextjs.md';
       const pageUrl = 'https://neon.com/docs/guides/nextjs';
 
-      const result = await processFile(inputPath, pageUrl);
+      const { content: result } = await processFile(inputPath, pageUrl);
 
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
@@ -61,7 +61,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/workflows/data-anonymization';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
@@ -74,23 +74,11 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/introduction/regions';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).toContain('Azure regions');
-      expect(result).toContain('April 7, 2026');
+      expect(result).toContain('You can no longer create new projects in Azure regions');
       expect(result).not.toContain('<AzureRegionsDeprecation');
-    });
-
-    it('should expand ConsumptionAccountApiDeprecation shared content', async () => {
-      const inputPath = 'content/docs/guides/consumption-limits.md';
-      const pageUrl = 'https://neon.com/docs/guides/consumption-limits';
-      const projectRoot = process.cwd();
-
-      const result = await processFile(inputPath, pageUrl, projectRoot);
-
-      expect(result).toContain('consumption_history/account');
-      expect(result).toContain('deprecated');
-      expect(result).not.toContain('<ConsumptionAccountApiDeprecation');
     });
 
     it('should unwrap QuoteBlocksWrapper and preserve all quotes', async () => {
@@ -98,7 +86,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/use-cases/dev-test';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       expect(result).not.toContain('<QuoteBlocksWrapper');
       expect(result).not.toContain('</QuoteBlocksWrapper>');
@@ -112,7 +100,7 @@ describe('MDX to Markdown Conversion', () => {
       const pageUrl = 'https://neon.com/docs/auth/reference/nextjs-server';
       const projectRoot = process.cwd();
 
-      const result = await processFile(inputPath, pageUrl, projectRoot);
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
 
       // TwoColumnLayout.Item should become headings
       expect(result).toContain('## Installation');
@@ -138,7 +126,7 @@ title: Test
 
 ${mdxContent}`;
       await fs.writeFile(tempPath, fullContent);
-      return processFile(tempPath, pageUrl, rootDir);
+      return (await processFile(tempPath, pageUrl, rootDir)).content;
     }
 
     it('should convert Admonition to bold label', async () => {
@@ -299,7 +287,7 @@ Install the package using npm.
     async function processInlineMdx(mdxContent, pageUrl = 'https://neon.com/docs/test') {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test\n---\n${mdxContent}`);
-      return processFile(tempPath, pageUrl);
+      return (await processFile(tempPath, pageUrl)).content;
     }
 
     it('should convert relative URLs to absolute', async () => {
@@ -351,7 +339,7 @@ title: Test
 
 ${mdxContent}`;
       await fs.writeFile(tempPath, fullContent);
-      return processFile(tempPath, pageUrl);
+      return (await processFile(tempPath, pageUrl)).content;
     }
 
     it('should convert MegaLink to descriptive link', async () => {
@@ -406,7 +394,7 @@ ${mdxContent}`;
     it('should handle QuoteBlock with object author and link in real file', async () => {
       const inputPath = 'content/pages/use-cases/dev-test.md';
       const pageUrl = 'https://neon.com/use-cases/dev-test';
-      const result = await processFile(inputPath, pageUrl, process.cwd());
+      const { content: result } = await processFile(inputPath, pageUrl, process.cwd());
 
       expect(result).toContain('— Jonathan Reyes, Principal Engineer at Dispatch');
       expect(result).not.toContain("name: 'Jonathan Reyes'");
@@ -468,17 +456,32 @@ Join our community!
       expect(result).not.toContain('<CommunityBanner');
     });
 
-    it('should convert PromptCards to list of links', async () => {
+    it('should convert CompactCards prompt links to list of links', async () => {
       const result = await processInlineMdx(`
-<PromptCards>
+<CompactCards cols={4}>
 <a title="Next.js" promptSrc="/prompts/nextjs.md" />
 <a title="Django" promptSrc="/prompts/django.md" />
-</PromptCards>
+</CompactCards>
 `);
-      expect(result).toContain('**AI Coding Prompts:**');
       expect(result).toContain('[Next.js prompt](https://neon.com/prompts/nextjs.md)');
       expect(result).toContain('[Django prompt](https://neon.com/prompts/django.md)');
-      expect(result).not.toContain('<PromptCards');
+      expect(result).not.toContain('<CompactCards');
+    });
+
+    it('should convert CompactCards to list of links with descriptions', async () => {
+      const result = await processInlineMdx(`
+<CompactCards>
+<a title="Cursor" description="Connect Neon to Cursor." href="/docs/ai/ai-cursor-plugin" icon="cli-cursor" />
+<a title="Claude Code" description="Connect Neon to Claude Code." href="/docs/ai/ai-claude-code-plugin" icon="cli" />
+</CompactCards>
+`);
+      expect(result).toContain(
+        '- [Cursor](https://neon.com/docs/ai/ai-cursor-plugin): Connect Neon to Cursor.'
+      );
+      expect(result).toContain(
+        '- [Claude Code](https://neon.com/docs/ai/ai-claude-code-plugin): Connect Neon to Claude Code.'
+      );
+      expect(result).not.toContain('<CompactCards');
     });
 
     it('should convert Tabs with labels', async () => {
@@ -531,9 +534,11 @@ Content after.
     });
 
     it('should handle unknown components with attributes', async () => {
+      const spy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       const result = await processInlineMdx(`
 <UnknownWidget foo="bar" baz="qux" />
 `);
+      spy.mockRestore();
       // Should show component name and attributes
       expect(result).toContain('[UnknownWidget]');
       expect(result).toContain('foo: bar');
@@ -579,7 +584,7 @@ Below the line.
     async function processInlineMdx(mdxContent) {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test\n---\n${mdxContent}`);
-      return processFile(tempPath);
+      return (await processFile(tempPath)).content;
     }
 
     it('should not escape backticks in text', async () => {
@@ -604,7 +609,7 @@ See [CONN_MAX_AGE](https://example.com).
     it('should not include index pointer in processFile output (moved to page header)', async () => {
       const tempPath = '/tmp/test-mdx-conversion.md';
       await fs.writeFile(tempPath, `---\ntitle: Test Page\n---\nSome content here.`);
-      const result = await processFile(tempPath);
+      const { content: result } = await processFile(tempPath);
 
       // Index pointer is no longer in processFile -- it's added by addNavigationContext
       expect(result).not.toContain('llms.txt');
@@ -623,7 +628,7 @@ See [CONN_MAX_AGE](https://example.com).
       expect(navMap.size).toBeGreaterThan(0);
 
       // Check a known page from docs navigation
-      const connectEntry = navMap.get('get-started/connect-neon');
+      const connectEntry = navMap.get('get-started/signing-up');
       expect(connectEntry).toBeDefined();
       expect(connectEntry.sectionName).toBeTruthy();
       expect(connectEntry.siblings.length).toBeGreaterThan(0);
@@ -635,7 +640,7 @@ See [CONN_MAX_AGE](https://example.com).
       const navMap = buildNavigationMap(rootDir);
 
       // Check a known postgresql page
-      const selectEntry = navMap.get('postgresql-tutorial/postgresql-select');
+      const selectEntry = navMap.get('tutorial/select');
       expect(selectEntry).toBeDefined();
       expect(selectEntry.urlPrefix).toBe('postgresql');
       expect(selectEntry.siblings.length).toBeGreaterThan(0);
@@ -714,7 +719,7 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      const connectEntry = navMap.get('get-started/connect-neon');
+      const connectEntry = navMap.get('get-started/signing-up');
       expect(connectEntry).toBeDefined();
       expect(connectEntry.breadcrumbs).toBeDefined();
       expect(Array.isArray(connectEntry.breadcrumbs)).toBe(true);
@@ -783,18 +788,14 @@ See [CONN_MAX_AGE](https://example.com).
       );
       expect(header).toBe(
         '> This page location: Neon Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue", "path": "/docs/auth/guides/password-reset"}\n\n'
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
 
     it('should include only index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line for pages with empty breadcrumbs', () => {
@@ -807,27 +808,18 @@ See [CONN_MAX_AGE](https://example.com).
       });
 
       const header = buildPageHeader('top-level/page', navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should include only index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
-      expect(header).toBe(
-        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
-      );
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
     it('should deduplicate consecutive identical ancestors', () => {
@@ -868,8 +860,7 @@ See [CONN_MAX_AGE](https://example.com).
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toBe(
         '> This page location: Backend > Neon Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
-          '> IMPORTANT: If this page contains inaccurate or outdated information, report it: POST to https://neon.com/api/docs-feedback with {"feedback": "describe the issue"}\n\n'
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
 
@@ -890,10 +881,18 @@ See [CONN_MAX_AGE](https://example.com).
   });
 
   describe('Component conversion test page (snapshot)', () => {
+    // This test renders src/scripts/fixtures/mdx-conversion-test.md through the
+    // LLM processor and snapshots the output section by section.
+    //
+    // If you added, removed, or changed a component and this test fails:
+    //   1. Check the diff — the failing snapshot name tells you which section changed.
+    //   2. If the change is intentional, update the fixture and run:
+    //        npx vitest run src/scripts/process-md-for-llms.test.js -u
+    //   3. Commit the updated snapshot file alongside your change.
     it('should convert every component without raw MDX leaks', async () => {
       const fixturePath = 'src/scripts/fixtures/mdx-conversion-test.md';
       const pageUrl = 'https://neon.com/docs/test/mdx-conversion-test';
-      const result = await processFile(fixturePath, pageUrl, process.cwd());
+      const { content: result } = await processFile(fixturePath, pageUrl, process.cwd());
 
       // No raw MDX component tags should survive conversion
       const componentNames = [
@@ -914,21 +913,19 @@ See [CONN_MAX_AGE](https://example.com).
         'LinkPreview',
         'YoutubeIframe',
         'CommunityBanner',
-        'PromptCards',
+        'CompactCards',
         'MegaLink',
         'QuoteBlock',
         'Testimonial',
         'FeatureList',
         'ProgramForm',
         'FeatureBeta',
-        'EarlyAccess',
         'FeatureBetaProps',
         'EarlyAccessProps',
         'AgentSkillsTip',
         'MCPTools',
         'LinkAPIKey',
         'LRNotice',
-        'ComingSoon',
         'PrivatePreview',
         'PrivatePreviewEnquire',
         'PublicPreview',
@@ -937,7 +934,6 @@ See [CONN_MAX_AGE](https://example.com).
         'NextSteps',
         'NewPricing',
         'AzureRegionsDeprecation',
-        'ConsumptionAccountApiDeprecation',
         'CopyPrompt',
         'NeedHelp',
         'Comment',
@@ -955,7 +951,86 @@ See [CONN_MAX_AGE](https://example.com).
         expect(result).not.toContain(`<${name}`);
       }
 
-      expect(result).toMatchSnapshot();
+      // Split by top-level sections (## headings) so each component gets its own
+      // named snapshot — changes show as a scoped diff instead of a full-file diff.
+      const sections = result.split(/\n(?=## )/);
+      for (const section of sections) {
+        const heading = section.match(/^## (.+)/)?.[1]?.trim() ?? 'preamble';
+        expect(section).toMatchSnapshot(heading);
+      }
     });
+  });
+});
+
+// CLI reference components expand to generated markdown from the neonctl
+// schema via the same renderers the web components use.
+describe('CLI reference components', () => {
+  const writeFixture = async (content) => {
+    const os = await import('os');
+    const pathMod = await import('path');
+    const dir = await fs.mkdtemp(pathMod.join(os.tmpdir(), 'cli-llms-'));
+    const file = pathMod.join(dir, 'fixture.md');
+    await fs.writeFile(file, content);
+    return file;
+  };
+
+  it('expands CliUsage, CliOptions, CliSubcommands, and CliGlobalOptions', async () => {
+    const file = await writeFixture(
+      [
+        '---',
+        'title: CLI fixture',
+        '---',
+        '',
+        '## Subcommands',
+        '',
+        '<CliSubcommands command="projects" />',
+        '',
+        '### neonctl projects create (#create)',
+        '',
+        '<CliUsage command="projects create" />',
+        '',
+        '<CliOptions command="projects create" />',
+        '',
+        '<CliGlobalOptions />',
+        '',
+      ].join('\n')
+    );
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli/projects');
+
+    // Options table with the settled column contract (toMarkdown pads cells)
+    expect(result).toMatch(/\| Option\s+\| Description\s+\| Type\s+\| Default\s+\| Required\s+\|/);
+    expect(result).toContain('`--name`');
+    expect(result).toMatch(/\|\s+No\s+\|/);
+    // Custom anchor IDs are stripped from heading text in the mirror
+    expect(result).toContain('### neonctl projects create');
+    expect(result).not.toContain('(#create)');
+    // Synopsis
+    expect(result).toContain('neonctl projects create [options]');
+    // Subcommand table links
+    expect(result).toContain('#create');
+    // Inherited options appear in leaf tables; only-global commands render nothing
+    expect(result).not.toContain('No options beyond the');
+    // Global options include --output
+    expect(result).toContain('`--output`');
+    // No raw component tags survive
+    expect(result).not.toContain('<CliUsage');
+    expect(result).not.toContain('<CliOptions');
+    expect(result).not.toContain('<CliSubcommands');
+    expect(result).not.toContain('<CliGlobalOptions');
+  });
+
+  it('expands CliCommandIndex to the full static command tree', async () => {
+    const file = await writeFixture(
+      ['---', 'title: Overview fixture', '---', '', '<CliCommandIndex />', ''].join('\n')
+    );
+    const { content: result } = await processFile(file, 'https://neon.com/docs/cli');
+
+    // Every top-level command appears as a heading in the tree
+    for (const name of ['projects', 'branches', 'functions', 'bucket', 'neon-auth']) {
+      expect(result).toContain(`### ${name}`);
+    }
+    // Nested subtrees flatten to full invocations
+    expect(result).toContain('neonctl bucket object list');
+    expect(result).not.toContain('<CliCommandIndex');
   });
 });

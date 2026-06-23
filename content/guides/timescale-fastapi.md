@@ -4,7 +4,7 @@ subtitle: Create an  API for streaming, storing, and querying sensor data using 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-12T00:00:00.000Z'
-updatedOn: '2024-10-12T00:00:00.000Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage.
@@ -42,7 +42,7 @@ Follow these steps to set up your project and virtual environment:
 
 2.  Set up the virtual environment.
 
-        You will now create and activate a virtual environment in which your project's dependencies will beinstalled.
+        You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
         <CodeTabs labels={["Linux/macOS", "Windows"]}>
 

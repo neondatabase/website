@@ -2,12 +2,16 @@
 title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
 summary: >-
-  Covers commands for managing publications, subscriptions, and replication
-  slots in logical replication setups, including creating, modifying, and
-  removing publications and subscriptions.
+  SQL command reference for managing PostgreSQL logical replication objects on
+  Neon: publications, subscriptions, and replication slots. Covers CREATE,
+  ALTER, and DROP syntax, pg_create_logical_replication_slot and
+  pg_drop_replication_slot, and monitoring lag with pg_stat_replication and
+  pg_replication_slots. Use this page after initial setup to reconfigure or
+  remove replication objects. Also explains why DDL changes such as ALTER TABLE
+  require manual intervention on the subscriber.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.012Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -109,7 +113,7 @@ A single subscriber can maintain multiple subscriptions, including multiple subs
 
 ### Create a subscription to be enabled later
 
-This command creates a subscription with `enabled = false` so that you can enable the scription at a later time:
+This command creates a subscription with `enabled = false` so that you can enable the subscription at a later time:
 
 ```sql
 CREATE SUBSCRIPTION my_subscription

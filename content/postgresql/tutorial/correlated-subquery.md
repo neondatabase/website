@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL Correlated Subquery'
-page_title: 'PostgreSQL Correlated Subquery'
-page_description: 'How to use the PostgreSQL correlated subquery to perform a query that depends on the values of the current row being processed.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-correlated-subquery/'
-ogImage: '/postgresqltutorial/film.png'
-updatedOn: '2024-01-22T03:48:45+00:00'
+title: PostgreSQL Correlated Subquery
+page_title: PostgreSQL Correlated Subquery
+page_description: >-
+  How to use the PostgreSQL correlated subquery to perform a query that depends
+  on the values of the current row being processed.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-correlated-subquery/
+ogImage: /postgresqltutorial/film.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Subquery'
-  slug: 'postgresql-tutorial/postgresql-subquery'
+  title: PostgreSQL Subquery
+  slug: postgresql-tutorial/postgresql-subquery
 nextLink:
-  title: 'PostgreSQL ANY Operator'
-  slug: 'postgresql-tutorial/postgresql-any'
+  title: PostgreSQL ANY Operator
+  slug: postgresql-tutorial/postgresql-any
 ---
+
+<Admonition type="info" id="CTA">
+Correlated subqueries work the same way across any PostgreSQL deployment, so the patterns shown here apply whether you're running Postgres locally, on-prem, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL correlated subquery to perform a query that depends on the values of the current row being processed.
 

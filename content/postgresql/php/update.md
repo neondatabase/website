@@ -1,18 +1,24 @@
 ---
 title: 'PostgreSQL PHP: Updating Data In a Table'
 page_title: 'PostgreSQL PHP: Updating Data in a Table Using PDO API'
-page_description: 'This tutorial shows you how to use the prepared statement in PHP PDO to update data in a PostgreSQL database table.'
+page_description: >-
+  This tutorial shows you how to use the prepared statement in PHP PDO to update
+  data in a PostgreSQL database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/update/'
-ogImage: '/postgresqltutorial/PostgreSQL-PHP-Update.png'
-updatedOn: '2022-02-09T15:06:27+00:00'
+ogImage: /postgresqltutorial/PostgreSQL-PHP-Update.png
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Insert Data Into Tables'
-  slug: 'postgresql-php/insert'
+  slug: postgresql-php/insert
 nextLink:
   title: 'PostgreSQL PHP: Querying Data'
-  slug: 'postgresql-php/query'
+  slug: postgresql-php/query
 ---
+
+<Admonition type="info" id="CTA">
+Updating rows from PHP with PDO works the same against any PostgreSQL database, so the prepared UPDATE pattern shown here carries over to Postgres wherever you run it. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn to update data in a PostgreSQL database table using PHP PDO.
 

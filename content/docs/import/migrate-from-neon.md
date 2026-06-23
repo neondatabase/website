@@ -1,13 +1,16 @@
 ---
 title: Migrate data from another Neon project
 summary: >-
-  Migrate between Neon projects by piping `pg_dump` to `pg_restore`, a compact
-  option for smaller databases and CLI workflows. Also covers alternatives
-  (Import Data Assistant, separate dump and restore, logical replication).
+  Neon-to-Neon database migration using a single piped `pg_dump | pg_restore`
+  command moves data between projects without writing an intermediate dump file
+  to disk. Best for smaller databases or CLI workflows where a one-step transfer
+  is acceptable. For large or complex datasets, use a separate dump and restore
+  instead. Requires an unpooled connection string for both source and
+  destination.
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon
-updatedOn: '2026-04-01T20:00:00.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate a database from one Neon project to another by **piping** output from **`pg_dump`** straight into **`pg_restore`** (`pg_dump ... | pg_restore ...`). That runs the dump and restore in one step without writing an intermediate dump file on disk.

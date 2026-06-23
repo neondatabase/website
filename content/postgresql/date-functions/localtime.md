@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL LOCALTIME Function'
-page_title: 'PostgreSQL LOCALTIME Function'
-page_description: 'You will learn how to use the PostgreSQL LOCALTIME function to return the current time at which the current transaction starts.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/'
+title: PostgreSQL LOCALTIME Function
+page_title: PostgreSQL LOCALTIME Function
+page_description: >-
+  You will learn how to use the PostgreSQL LOCALTIME function to return the
+  current time at which the current transaction starts.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-localtime/
 ogImage: ''
-updatedOn: '2024-01-26T09:40:37+00:00'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL NOW() Function'
-  slug: 'postgresql-date-functions/postgresql-now'
+  title: PostgreSQL NOW() Function
+  slug: postgresql-date-functions/postgresql-now
 nextLink:
-  title: 'PostgreSQL LOCALTIMESTAMP Function'
-  slug: 'postgresql-date-functions/postgresql-localtimestamp'
+  title: PostgreSQL LOCALTIMESTAMP Function
+  slug: postgresql-date-functions/postgresql-localtimestamp
 ---
+
+<Admonition type="info" id="CTA">
+The LOCALTIME function behavior covered here is standard PostgreSQL and works the same whether you're running Postgres yourself or on any managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LOCALTIME` function to return the current time at which the current transaction starts.
 
@@ -36,7 +43,7 @@ If you omit the `precision` argument, it defaults to 6\.
 
 The `LOCALTIME` function returns a [`TIME`](../postgresql-tutorial/postgresql-time) value that represents the time at which the current transaction starts.
 
-Note that the `LOCATIME` function returns a `TIME` without time zone whereas the [`CURRENT_TIME`](postgresql-current_time) function returns a `TIME` with the timezone.
+Note that the `LOCALTIME` function returns a `TIME` without time zone whereas the [`CURRENT_TIME`](postgresql-current_time) function returns a `TIME` with the timezone.
 
 ## PostgreSQL LOCALTIME function examples
 

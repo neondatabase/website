@@ -1,12 +1,16 @@
 ---
 title: Migrate from SQLite to Neon Postgres
 summary: >-
-  Covers the migration of an SQLite database to Neon Postgres using pgloader,
-  detailing prerequisites, data type differences, and the process for efficient
-  data transfer and transformation.
+  SQLite-to-Neon Postgres migration using pgloader transfers schemas and data
+  while mapping SQLite type affinities to strict Postgres types. Use this page
+  when moving an existing SQLite or Turso database to Neon and needing control
+  over type casting via pgloader CAST clauses, as distinct from guides covering
+  MySQL, CSV, or logical replication imports. Neon's Free plan supports up to
+  0.5 GB; the guide also covers sequence verification after import and a Docker
+  SSL workaround.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.211Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
@@ -112,7 +116,11 @@ Now that you have your Neon database and SQLite database ready, you can use `pgl
 
 ## Retrieve your Neon database connection string
 
-Log in to the Neon Console. Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled:
+
+![Connection details modal with connection pooling disabled](/docs/connect/connection_details_without_connection_pooling.png)
+
+Your connection string should look similar to this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require

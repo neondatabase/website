@@ -1,130 +1,148 @@
 ---
 title: Neon documentation
+subtitle: Neon is the backend for apps and agents.
 summary: >-
-  How to set up Neon, a serverless Postgres solution, with commands for
-  launching, signing up, connecting to tech stacks, and integrating branching
-  into workflows.
+  Neon documentation root covers the full Neon backend platform: serverless
+  Postgres with branching and autoscaling, Neon Auth, Data API, and upcoming
+  Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
+  editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 redirectFrom:
   - /guides/neon-azure-integration
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-03-14T03:21:15.122Z'
+updatedOn: '2026-06-22T13:48:28.109Z'
 ---
 
-Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
+## Getting started
 
-<CTA
-  title="Set up Neon in one command"
-  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more<svg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg' style='display:inline-block;vertical-align:middle;margin-left:8px' aria-hidden='true'><path d='M11.1084 10.9211L14.9999 7.02965L11.1084 3.13816' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/><path d='M0.938093 7.03198L13.666 7.03198' stroke='currentColor' stroke-width='1.4' stroke-linecap='square'/></svg></a>"
-  command="npx neonctl@latest init"
-  trackingLabel="Copy neonctl init - docs intro"
-/>
+Start with a quick setup prompt, or follow a guided tutorial to build the full Neon stack step by step.
 
-## Get started
+<TwinPaths>
+  <QuickPath
+    title="One-command setup"
+    command="npx neonctl@latest init"
+    description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step. Copy the prompt below and get started."
+  />
+  <GuidedPath
+    title="Build a full backend"
+    description="Next.js + Postgres + Neon Auth + Drizzle. The full Neon stack, end-to-end, from create-next-app to deployed."
+    href="/docs/get-started/full-backend-quickstart"
+  />
+</TwinPaths>
 
-<DetailIconCards withNumbers compact>
+## Products
 
-<a href="/docs/get-started/signing-up" description="Sign up and learn database branching basics">Learn the basics</a>
+Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. <br />
+Every service is agent-ready: instant, branchable, and serverless.
 
-<a href="/docs/get-started/connect-neon" description="Connect to your tech stack">Connect your stack</a>
+<DetailIconCards className="my-7!" cols={3} theme="green-flat">
 
-<a href="/docs/get-started/workflow-primer" description="Integrate branching into your workflow">Learn about branching</a>
+<a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Set up managed auth that branches with your database" icon="lock-landscape">Set up Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
 
-</DetailIconCards>
+<a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-## Quickstart prompts
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
 
-Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides.
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
 
-<PromptCards withToggler>
-
-<a title="Next.js" icon="next-js" promptSrc="/prompts/nextjs-prompt.md"></a>
-
-<a title="Django" icon="django" promptSrc="/prompts/django-prompt.md"></a>
-
-<a title="Drizzle" icon="drizzle" promptSrc="/prompts/drizzle-prompt.md"></a>
-
-<a title="React Router" icon="react" promptSrc="/prompts/react-router-prompt.md"></a>
-
-<a title="TanStack Start" icon="tanstack" promptSrc="/prompts/tanstack-start-prompt.md"></a>
-
-<a title="Express" icon="express" promptSrc="/prompts/express-prompt.md"></a>
-
-<a title="NestJS" icon="nest-js" promptSrc="/prompts/nestjs-prompt.md"></a>
-
-<a title="Astro" icon="astro" promptSrc="/prompts/astro-serverless-prompt.md"></a>
-
-<a title="SvelteKit" icon="svelte" promptSrc="/prompts/sveltekit-prompt.md"></a>
-
-<a title="Nuxt" icon="nuxt" promptSrc="/prompts/nuxt-neon-prompt.md"></a>
-
-<a title="Laravel" icon="laravel" promptSrc="/prompts/laravel-prompt.md"></a>
-
-<a title="Rails" icon="rails" promptSrc="/prompts/ruby-on-rails-prompt.md"></a>
-
-<a title="Python" icon="python" promptSrc="/prompts/python-prompt.md"></a>
-
-<a title="Go" icon="go" promptSrc="/prompts/golang-prompt.md"></a>
-
-<a title="Java" icon="java" promptSrc="/prompts/java-prompt.md"></a>
-
-<a title="Rust" icon="rust" promptSrc="/prompts/rust-prompt.md"></a>
-
-<a title=".NET" icon="dotnet" promptSrc="/prompts/dotnet-prompt.md"></a>
-
-<a title="Elixir" icon="elixir" promptSrc="/prompts/elixir-prompt.md"></a>
-
-<a title="Phoenix" icon="phoenix" promptSrc="/prompts/phoenix-prompt.md"></a>
-
-<a title="Prisma" icon="prisma" promptSrc="/prompts/prisma-prompt.md"></a>
-
-<a title="Kysely" icon="kysely" promptSrc="/prompts/kysely-prompt.md"></a>
-
-<a title="TypeORM" icon="typeorm" promptSrc="/prompts/typeorm-prompt.md"></a>
-
-<a title="SQLAlchemy" icon="sqlalchemy" promptSrc="/prompts/sqlalchemy-prompt.md"></a>
-
-<a title="Hono" icon="hono" promptSrc="/prompts/hono-prompt.md"></a>
-
-<a title="SolidStart" icon="solidstart" promptSrc="/prompts/solidstart-prompt.md"></a>
-
-<a title="Reflex" icon="reflex" promptSrc="/prompts/reflex-prompt.md"></a>
-
-<a title="JavaScript" icon="javascript" promptSrc="/prompts/javascript-prompt.md"></a>
-
-<a title="Symfony" icon="symfony" promptSrc="/prompts/symfony-prompt.md"></a>
-
-<a title="Quarkus" icon="quarkus" promptSrc="/prompts/quarkus-jdbc-prompt.md"></a>
-
-<a title="Micronaut" icon="micronaut" promptSrc="/prompts/micronaut-kotlin-prompt.md"></a>
-
-<a title="Redwood" icon="redwoodsdk" promptSrc="/prompts/redwood-sdk-prompt.md"></a>
-
-</PromptCards>
-
-## Explore the docs
-
-<DetailIconCards compact>
-
-<a href="/docs/connect/connect-intro" description="Connect from any application" icon="audio-jack">Connect</a>
-
-<a href="/docs/import/import-intro" description="Migrate your data to Neon" icon="import">Import data</a>
-
-<a href="/docs/ai/ai-intro" description="Build AI apps with pgvector" icon="openai">AI & embeddings</a>
-
-<a href="/docs/guides/branching-intro" description="Optimize development workflows" icon="split-branch">Branching</a>
-
-<a href="/docs/extensions/pg-extensions" description="Extend Postgres capabilities" icon="app-store">Extensions</a>
-
-<a href="/docs/reference/neon-cli" description="Manage from the terminal" icon="transactions">Neon CLI</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview">AI Gateway</a>
 
 </DetailIconCards>
 
-## Join the community
+## Early access to the Neon backend platform
 
-Questions about Neon or Postgres? Join our [Discord Server](https://discord.com/invite/92vNTzKDGp)
+<RequestForm type="backend-platform" title="Join the waitlist" buttonText="Notify me" />
 
-<CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
+## Connect your framework
+
+Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides for full connection details.
+
+<CompactCards className="mt-8" cols={4} withToggler>
+
+<a href="/docs/guides/nextjs" title="Next.js" icon="next-js"></a>
+
+<a href="/docs/guides/django" title="Django" icon="django"></a>
+
+<a href="/docs/guides/drizzle" title="Drizzle" icon="drizzle"></a>
+
+<a href="/docs/guides/react-router" title="React Router" icon="react"></a>
+
+<a href="/docs/guides/tanstack-start" title="TanStack Start" icon="tanstack"></a>
+
+<a href="/docs/guides/express" title="Express" icon="express"></a>
+
+<a href="/docs/guides/nestjs" title="NestJS" icon="nest-js"></a>
+
+<a href="/docs/guides/astro" title="Astro" icon="astro"></a>
+
+<a href="/docs/guides/sveltekit" title="SvelteKit" icon="svelte"></a>
+
+<a href="/docs/guides/nuxt" title="Nuxt" icon="nuxt"></a>
+
+<a href="/docs/guides/laravel" title="Laravel" icon="laravel"></a>
+
+<a href="/docs/guides/ruby-on-rails" title="Rails" icon="rails"></a>
+
+<a href="/docs/guides/python" title="Python" icon="python"></a>
+
+<a href="/docs/guides/go" title="Go" icon="go"></a>
+
+<a href="/docs/guides/java" title="Java" icon="java"></a>
+
+<a href="/docs/guides/rust" title="Rust" icon="rust"></a>
+
+<a href="/docs/guides/dotnet-npgsql" title=".NET" icon="dotnet"></a>
+
+<a href="/docs/guides/elixir" title="Elixir" icon="elixir"></a>
+
+<a href="/docs/guides/phoenix" title="Phoenix" icon="phoenix"></a>
+
+<a href="/docs/guides/prisma" title="Prisma" icon="prisma"></a>
+
+<a href="/docs/guides/kysely" title="Kysely" icon="kysely"></a>
+
+<a href="/docs/guides/tortoise-orm" title="Tortoise ORM" icon="tortoise-orm"></a>
+
+<a href="/docs/guides/typeorm" title="TypeORM" icon="typeorm"></a>
+
+<a href="/docs/guides/sqlalchemy" title="SQLAlchemy" icon="sqlalchemy"></a>
+
+<a href="/docs/guides/hono" title="Hono" icon="hono"></a>
+
+<a href="/docs/guides/solid-start" title="SolidStart" icon="solidstart"></a>
+
+<a href="/docs/guides/reflex" title="Reflex" icon="reflex"></a>
+
+<a href="/docs/guides/javascript" title="JavaScript" icon="javascript"></a>
+
+<a href="/docs/guides/symfony" title="Symfony" icon="symfony"></a>
+
+<a href="/docs/guides/quarkus-jdbc" title="Quarkus" icon="quarkus"></a>
+
+<a href="/docs/guides/micronaut-kotlin" title="Micronaut" icon="micronaut"></a>
+
+<a href="/docs/guides/redwoodsdk" title="Redwood" icon="redwoodsdk"></a>
+
+</CompactCards>
+
+## AI tools and agents
+
+Neon integrates with AI coding tools and agents through MCP. Pick your editor for setup and integration details.
+
+<CompactCards cols={2}>
+
+<a href="/docs/ai/ai-cursor-plugin" title="Cursor" description="Connect Neon to Cursor" icon="cursor"></a>
+
+<a href="/docs/ai/ai-claude-code-plugin" title="Claude Code" description="Connect Neon to Claude Code" icon="claude-code"></a>
+
+<a href="/docs/ai/ai-codex-plugin" title="Codex" description="Connect Neon to OpenAI Codex" icon="codex"></a>
+
+<a href="/docs/ai/ai-github-copilot-agents" title="GitHub Copilot" description="Connect Neon to GitHub Copilot" icon="copilot"></a>
+
+</CompactCards>
+
+<CommunityBanner className="mt-14" buttonText="Join the server" buttonUrl="https://discord.gg/92vNTzKDGp">Questions about Neon or Postgres? Join our Discord</CommunityBanner>

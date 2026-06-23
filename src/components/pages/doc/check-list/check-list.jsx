@@ -2,52 +2,94 @@
 
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import slugify from 'slugify';
 
 import useLocalStorage from 'hooks/use-local-storage';
 import { cn } from 'utils/cn';
 
+const slugifyOptions = {
+  lower: true,
+  strict: true,
+  remove: /[*+~.()'"!:@]/g,
+};
+
+const getChecklistItemId = (title) => slugify(title, slugifyOptions).replace(/_/g, '');
+
+const getCurrentChecklist = (items, validItemIds) => {
+  if (!Array.isArray(items)) {
+    return [];
+  }
+
+  const validItemIdSet = new Set(validItemIds);
+  const seenItemIds = new Set();
+
+  return items.filter((itemId) => {
+    if (!validItemIdSet.has(itemId) || seenItemIds.has(itemId)) {
+      return false;
+    }
+
+    seenItemIds.add(itemId);
+    return true;
+  });
+};
+
 const CheckList = ({ title, children }) => {
-  const id =
-    title &&
-    slugify(title, {
-      lower: true,
-      strict: true,
-      remove: /[*+~.()'"!:@]/g,
-    }).replace(/_/g, '');
+  const id = title && getChecklistItemId(title);
 
   const pathname = usePathname();
   const slug = pathname.split('/').pop();
   const checkListId = id || slug;
   const [mounted, setMounted] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [checklist, setChecklist] = useLocalStorage(`checklist-${checkListId}`, []);
+  const checklistItemIds = useMemo(
+    () =>
+      React.Children.toArray(children).reduce((itemIds, child) => {
+        if (React.isValidElement(child) && typeof child.props?.title === 'string') {
+          itemIds.push(getChecklistItemId(child.props.title));
+        }
+
+        return itemIds;
+      }, []),
+    [children]
+  );
+  const currentChecklist = useMemo(
+    () => getCurrentChecklist(checklist, checklistItemIds),
+    [checklist, checklistItemIds]
+  );
+  const visibleChecklist = mounted ? currentChecklist : [];
+  const progress =
+    checklistItemIds.length > 0
+      ? Math.round((visibleChecklist.length / checklistItemIds.length) * 100)
+      : 0;
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    setProgress(Math.round((checklist.length / children.length) * 100));
-  }, [checklist, children]);
-
   const handleToggle = useCallback(
     (id) => {
+      if (!checklistItemIds.includes(id)) {
+        return;
+      }
+
       setChecklist((prev = []) => {
-        if (prev.includes(id)) {
-          return prev.filter((itemId) => itemId !== id);
+        const currentPrev = getCurrentChecklist(prev, checklistItemIds);
+
+        if (currentPrev.includes(id)) {
+          return currentPrev.filter((itemId) => itemId !== id);
         }
-        return [...prev, id];
+
+        return [...currentPrev, id];
       });
     },
-    [setChecklist]
+    [checklistItemIds, setChecklist]
   );
 
   const childrenWithProps = React.Children.map(children, (child) => {
     if (React.isValidElement(child) && typeof child.type === 'object') {
       return React.cloneElement(child, {
-        checklist: mounted ? checklist : [],
+        checklist: visibleChecklist,
         onToggle: handleToggle,
       });
     }
@@ -57,10 +99,10 @@ const CheckList = ({ title, children }) => {
   return (
     <div
       className={cn(
-        'checklist doc-cta !mt-9 flex flex-col bg-white px-8 pt-6 pb-8',
+        'checklist doc-cta my-9! flex flex-col bg-white px-8 pt-6 pb-8',
         'border border-gray-new-80',
         'dark:border-gray-new-20 dark:bg-black-pure',
-        'xl:!mt-8 lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
+        'xl:my-8! lg:px-6 lg:py-5 md:p-5 md:px-5 md:py-[18px]'
       )}
     >
       <div className="flex items-start gap-4">

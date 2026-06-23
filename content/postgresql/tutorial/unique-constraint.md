@@ -1,18 +1,25 @@
 ---
-title: 'PostgreSQL UNIQUE Constraint'
-page_title: 'PostgreSQL UNIQUE Constraint'
-page_description: 'Learn how to use a PostgreSQL UNIQUE constraint to ensure values stored in a column or a group of columns are unique across rows.'
-prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/'
+title: PostgreSQL UNIQUE Constraint
+page_title: PostgreSQL UNIQUE Constraint
+page_description: >-
+  Learn how to use a PostgreSQL UNIQUE constraint to ensure values stored in a
+  column or a group of columns are unique across rows.
+prev_url: >-
+  https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-unique-constraint/
 ogImage: ''
-updatedOn: '2024-01-25T09:57:33+00:00'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CHECK Constraints'
-  slug: 'postgresql-tutorial/postgresql-check-constraint'
+  title: PostgreSQL CHECK Constraints
+  slug: postgresql-tutorial/postgresql-check-constraint
 nextLink:
-  title: 'PostgreSQL Not-Null Constraint'
-  slug: 'postgresql-tutorial/postgresql-not-null-constraint'
+  title: PostgreSQL Not-Null Constraint
+  slug: postgresql-tutorial/postgresql-not-null-constraint
 ---
+
+<Admonition type="info" id="CTA">
+UNIQUE constraints work the same in any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+</Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL `UNIQUE` constraint to make sure that values stored in a column or a group of columns are unique across rows in a table.
 
@@ -74,7 +81,7 @@ DETAIL:  Key (email)=(john.doe@example.com) already exists.
 
 ## Creating a UNIQUE constraint on multiple columns
 
-PostgreSQL allows you to create a `UNIQUE` constraint to a group of columns using the following syntax:
+PostgreSQL allows you to create a `UNIQUE` constraint on a group of columns using the following syntax:
 
 ```sql
 CREATE TABLE table (
@@ -132,4 +139,4 @@ You should look at the result to find the `state` column with the value `idle in
 
 ## Summary
 
-- Use the `UNIQUE` constraints to enforce values stored in a column or a group of columns unique across rows within the same table.
+- Use the `UNIQUE` constraints to enforce values stored in a column or a group of columns are unique across rows within the same table.

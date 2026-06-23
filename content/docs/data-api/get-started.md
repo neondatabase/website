@@ -2,14 +2,18 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 summary: >-
-  How to enable the Neon Data API for your database, create a table with
-  Row-Level Security (RLS), and execute your first query, including optional
-  authentication and schema access configurations.
+  The Neon Data API exposes your Postgres database as a REST endpoint secured
+  by JWT authentication and Row-Level Security. Applications can query tables
+  without a connection pool or SQL driver. Use this page to enable the API,
+  create an RLS-protected table, and run your first queries via the
+  @neondatabase/neon-js client or direct HTTP requests. The API is enabled per
+  branch for a single database and does not support projects with IP Allow or
+  Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.810Z'
+updatedOn: '2026-06-18T22:47:28.438Z'
 ---
 
-In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
+This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
 
 ## Before you begin
 
@@ -32,7 +36,7 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 ### 2. Configure authentication
 
-All requests to the Data API require a valid JWT token, so you need an authentication provider. You can configure one now or add it later from the Data API **Settings** tab. The Data API works with any provider that issues JWTs.
+The Data API uses JWTs for access control. Configure a provider now or later from the **Settings** tab. For public data that doesn't require login, use the [`anonymous` role](/docs/data-api/access-control#2-the-anonymous-role) instead.
 
 - **Neon Auth**: Check the **Use Neon Auth** checkbox to enable [Neon Auth](/docs/auth/overview) as your provider. Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 - **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.
@@ -194,7 +198,7 @@ export const posts = pgTable(
 </CodeTabs>
 
 <Admonition type="info" title="What is auth.user_id() and authUid()?">
-`auth.user_id()` is a Data API helper that extracts the User ID from the JWT token for secure database permission enforcement. `authUid()` is a Drizzle ORM helper that simplifies using `auth.user_id()` in policies.
+`auth.user_id()` returns the JWT `sub` claim as `text`. Use `auth.uid()` instead if your `user_id` column is `uuid`; it parses `sub` as a UUID and returns `NULL` if it's not valid. `authUid()` is a Drizzle helper for `auth.user_id()`.
 </Admonition>
 
 ## Refresh schema cache
@@ -489,6 +493,7 @@ For the complete list of methods and detailed examples, see the [Neon TypeScript
 
 ## Next steps
 
+- [Set up Neon Auth](/docs/auth/overview): Managed authentication with JWTs that work natively with the Data API and Row Level Security
 - [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
 - [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
