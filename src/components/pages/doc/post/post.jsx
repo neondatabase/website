@@ -175,7 +175,7 @@ const Post = ({
       {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
       {!isDocsIndex && !isWideLayout && !isChangelog && (
         <Aside
-          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+          className="ml-0! w-78 shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
