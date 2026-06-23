@@ -73,7 +73,6 @@ Alternatively, use our official SDKs for easier integration:
 
 - [TypeScript SDK](/docs/reference/typescript-sdk)
 - [Python SDK](/docs/reference/python-sdk)
-- [@neondatabase/toolkit](/docs/reference/neondatabase-toolkit) (supports the Neon API for platform operations and the [Neon serverless driver](/docs/serverless/serverless-driver) for connecting and running SQL queries)
 
 ## Create projects for your users
 
