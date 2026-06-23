@@ -6,8 +6,8 @@ const getAllFaqs = async () => {
   const slugs = await getPostSlugs(FAQS_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, FAQS_DIR_PATH)) return;
       const data = getPostBySlug(slug, FAQS_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -28,6 +28,7 @@ const getAllFaqs = async () => {
         redirectFrom,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
     .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };
