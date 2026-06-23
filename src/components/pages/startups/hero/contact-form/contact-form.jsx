@@ -142,7 +142,7 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className="text-xl leading-snug font-medium tracking-tighter text-white">
-        Apply to the Neon Startups Program
+        Apply to the Databricks Startup Program
       </h2>
       <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">
         <Field
@@ -151,7 +151,6 @@ const ContactForm = () => {
           name="firstname"
           label="First Name*"
           autoComplete="given-name"
-          placeholder="Jane"
           theme="transparent"
           labelClassName={labelClassName}
           inputClassName={inputClassName}
@@ -165,7 +164,6 @@ const ContactForm = () => {
           name="lastname"
           label="Last Name*"
           autoComplete="family-name"
-          placeholder="Doe"
           theme="transparent"
           labelClassName={labelClassName}
           inputClassName={inputClassName}
@@ -181,7 +179,6 @@ const ContactForm = () => {
         label="Company Email Address*"
         type="email"
         autoComplete="email"
-        placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
         inputClassName={inputClassName}
@@ -194,7 +191,6 @@ const ContactForm = () => {
         errorTheme="tooltip"
         name="companyWebsite"
         label="Company Website*"
-        placeholder="your.company.com"
         theme="transparent"
         labelClassName={labelClassName}
         inputClassName={inputClassName}
@@ -206,8 +202,7 @@ const ContactForm = () => {
         className="gap-y-2"
         errorTheme="tooltip"
         name="investor"
-        label="Major Investor, Accelerator, etc.*"
-        placeholder="Y Combinator, Techstars, etc."
+        label="Primary Investor, Accelerator, etc.*"
         theme="transparent"
         labelClassName={labelClassName}
         inputClassName={inputClassName}

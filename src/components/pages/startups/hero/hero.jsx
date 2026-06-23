@@ -15,7 +15,7 @@ const Hero = ({ logos, quotes }) => (
         <div className="flex max-w-xl flex-1 flex-col gap-10 xl:max-w-[48%] lg:max-w-full md:gap-8">
           <div className="flex flex-col lg:max-w-[448px]">
             <SectionLabel className="mb-5 lg:mb-[18px] md:mb-4" theme="white">
-              Startups Program
+              Startup Program
             </SectionLabel>
             <Heading
               className="text-pretty lg:max-w-2xl md:text-[36px]! xs:text-[32px]!"
@@ -23,11 +23,11 @@ const Hero = ({ logos, quotes }) => (
               size="md-new"
               theme="white"
             >
-              Launch faster with <br /> $100K in Neon Credits
+              Launch faster with <br /> up to $200K in credits
             </Heading>
             <p className="mt-7 text-lg leading-snug tracking-extra-tight text-gray-new-70 xl:text-base lg:mt-3.5 md:mt-3 md:text-[15px]">
-              Join our Startup Program and get the Postgres platform built for developers: fast,
-              scalable, and serverless.
+              Qualifying startups can receive up to $200k in credits for Databricks and Neon. Not
+              sure if you qualify? Apply or ask your investor.
             </p>
           </div>
         </div>

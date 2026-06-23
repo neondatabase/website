@@ -3,7 +3,6 @@ import Info from 'components/pages/startups/info';
 import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq';
 import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -54,61 +53,41 @@ const quotes = [
 
 const faqItems = [
   {
-    question: 'What is a project?',
-    id: 'what-is-a-project',
+    question: 'Who can apply to the Databricks Startup Program?',
+    id: 'who-can-apply',
     initialState: 'open',
     answer: `
-      <p>A project in Neon is the top-level container for your database environment. Each project includes your primary database, its branches, and compute resources. You can think of it like a GitHub repo: one project, many branches. <a href="${LINKS.docs}/manage/overview">Learn more about Neon's object hierarchy.</a></p>
+      <p>The Databricks Startup Program supports both self-funded and VC-backed startups. Self-funded startups should have less than $1M in funding and be in early-stage product development. VC-backed startups should have raised at least $1M or be participating in a recognized startup accelerator.</p>
     `,
   },
   {
-    question: 'What is a CU?',
+    question: 'What can the credits be used towards?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing compute size. It defines how much CPU and memory your database is using at any moment. Each CU allocates approximately 1 vCPU and 4 GB of RAM. <a href="${LINKS.docs}/manage/computes#compute-size-and-autoscaling-configuration">Learn more about compute sizing on Neon.</a></p>
+      <p>The program provides credits for both Databricks and Neon. The exact amount you receive depends on your stage and funding.</p>
     `,
   },
   {
-    question: 'What is a CU-hour?',
-    id: 'compute-usage',
+    question: 'How does the application process work?',
     answer: `
-      <p>A CU-hour is Neon's unit for measuring compute usage.</p>
-      <p>Because Neon is a serverless database, you're billed only for the compute resources you actually use. In other words, your monthly compute usage depends on:</p>
-      <ul>
-        <li>How many compute endpoints are you running</li>
-        <li>How large your compute endpoints are (in CUs)</li>
-        <li>How long they run (in hours)</li>
-      </ul>
-      <p>For a single compute, the calculation works similar to this:</p>
-      <code>Monthly CU-hours = [average CU size] × [number of hours the compute runs in the month]</code>
-      <code>Monthly compute cost = [monthly CU-hours] × [CU-hour price]</code>
-      <p>The CU-hour price depends on your pricing plan:</p>
-      <ul>
-        <li>Launch plan: $0.106 per CU-hour</li>
-        <li>Scale plan: $0.222 per CU-hour</li>
-      </ul>
-      <p>Remember that when your database is idle, compute can scale down to zero, so you don't consume CU-hours while it's not running. <a href="${LINKS.docs}/introduction/about-billing">Learn more about Neon's billing.</a></p>
+      <p>Apply using the form on this page. Our team reviews each application and typically responds within a few business days. If you qualify, we'll confirm and apply your credits to your account.</p>
     `,
   },
   {
-    question: 'How is Neon Auth billed?',
+    question: 'How long are the credits valid?',
     answer: `
-      <p>Neon Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
-      <p>On the Free plan, Neon Auth is included for up to 60,000 MAU.</p>
+      <p>Credits are valid for 12 months from the date of acceptance.</p>
     `,
   },
   {
-    question: 'How can I control my costs?',
+    question: 'Can I apply if I’m already using Neon or Databricks?',
     answer: `
-      <p>Compute is often the most variable part of a monthly bill. The most effective way to control compute costs in Neon is to configure maximum autoscaling limits and scale-to-zero.</p>
-      <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
-      <p>Another effective way to control compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
-      <p>To manage storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining large restore windows if not required by your use case. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
+      <p>Yes. Existing users can apply, and if you're approved, credits are added to your current account. You don't need to create a new account or migrate anything.</p>
     `,
   },
   {
-    question: 'Do you offer credit programs for startups?',
+    question: 'What happens when my credits run out or expire?',
     answer: `
-      <p>Early startups that have received venture funding are eligible to apply to our Startup Program. <a href="${LINKS.startups}">Learn more and apply here.</a></p>
+      <p>When your credits are used up or reach their 12-month expiration, your account continues on your selected plan and you're billed normally for usage beyond the credit. There's no commitment to stay, and no surprise charges while credits are active.</p>
     `,
   },
 ];
@@ -121,7 +100,7 @@ const ContactSales = () => (
       className="mt-[157px] text-center"
       copyWrapperClassName="mx-auto text-center md:text-balance mt-0 max-w-[820px] [&_h2]:inline [&_p]:inline"
       title="Building something ambitious?"
-      description="Fill out a short form and we’ll get back to you within a few business days."
+      description="Fill out an application and we’ll get back to you within a few business days."
       buttonText="Apply Now"
       buttonUrl="#startups-form"
     />
