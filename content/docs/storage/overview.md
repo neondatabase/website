@@ -7,14 +7,14 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:07:32.151Z'
+updatedOn: '2026-06-24T13:43:35.494Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Storage" description="Neon Storage is in private preview. Drop your email and we'll reach out with access." />
 
 Neon Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 
-During the private preview, Storage is available for **new projects** in the **AWS us-east-2** region only.
+> During the private preview, Storage is available for **new projects** in the **AWS us-east-2** region only.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, and any other S3-compatible tool works out of the box.
