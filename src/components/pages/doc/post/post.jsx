@@ -7,6 +7,7 @@ import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
+import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -56,11 +57,8 @@ const Post = ({
   isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
-  const modal = MODALS.find(
-    (modal) =>
-      breadcrumbs?.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
-      (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
-  );
+  const pagePath = `${navigationLinksBasePath}${currentSlug ?? ''}`;
+  const modal = selectModal(MODALS, pagePath);
 
   // Check if wide layout is enabled (hides right sidebar/TOC)
   const isWideLayout = layout === 'wide';
