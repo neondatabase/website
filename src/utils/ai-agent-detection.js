@@ -45,6 +45,16 @@ export function isAIAgentRequest(request) {
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
+  // Docs root aliases to the curated llms.txt rather than a generated page-listing.
+  // Three places enforce this alias — keep them in sync if this changes:
+  //   1. Here (getMarkdownPath — middleware serving for /docs and /docs.md agent requests)
+  //   2. next.config.js beforeFiles rewrite: /docs.md → /docs/llms.txt (static/browser)
+  //   3. process-md-for-llms.js ROUTES_ALIASED_TO_LLMS (skips generating public/md/docs.md)
+  docs: '/docs/llms.txt',
+  // Blog root aliases to the blog index. Two places enforce this alias — keep in sync:
+  //   1. Here (getMarkdownPath — agent requests to /blog and /blog.md)
+  //   2. next.config.js beforeFiles rewrite: /blog.md → /blog/llms.txt (static/browser)
+  blog: '/blog/llms.txt',
   'docs/changelog': '/md/docs/changelog.md',
   'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
@@ -86,7 +96,7 @@ export function getMarkdownPath(pathname) {
   // Get the content directory path from CONTENT_ROUTES and convert to public path
   // Example: content/docs -> /md/docs
   const contentPath = CONTENT_ROUTES[matchedRoute];
-  const publicPath = contentPath.replace('content/', '/md/');
+  const publicPath = contentPath.replace(/^content(?:\/pages)?\//, '/md/');
 
   // Extract slug after the matched route
   const slug = normalized === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
@@ -96,15 +106,37 @@ export function getMarkdownPath(pathname) {
   return slug ? `${publicPath}/${mdSlug}` : `${publicPath}.md`;
 }
 
-export function buildAgent404Response(pathname) {
+const DEFAULT_404_LINKS = [
+  {
+    label: 'All Neon documentation',
+    href: '/docs/llms.txt',
+    description: 'Table of contents for all Neon docs',
+  },
+  {
+    label: 'Full documentation text',
+    href: '/docs/llms-full.txt',
+    description: 'Complete Neon docs in one file',
+  },
+  {
+    label: 'Neon API reference',
+    href: '/docs/reference/api-reference.md',
+    description: 'API endpoints and usage',
+  },
+];
+
+export function buildAgent404Response(
+  pathname,
+  { extraLinks = [], context = 'Neon documentation' } = {}
+) {
+  const linkLines = [...extraLinks, ...DEFAULT_404_LINKS]
+    .map(({ label, href, description }) => `- [${label}](${href}): ${description}`)
+    .join('\n');
   return `# Page Not Found
 
-\`${pathname}\` does not exist in Neon documentation.
+\`${pathname}\` does not exist in ${context}.
 
 Find what you need:
 
-- [All Neon documentation](/docs/llms.txt): Table of contents for all Neon docs
-- [Full documentation text](/docs/llms-full.txt): Complete Neon docs in one file
-- [Neon API reference](/docs/reference/api-reference.md): API endpoints and usage
+${linkLines}
 `;
 }

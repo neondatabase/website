@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table-as/
 ogImage: /postgresqltutorial/film_and_film_category_tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SELECT INTO
@@ -23,7 +23,7 @@ The `CREATE TABLE AS` statement works the same across any PostgreSQL deployment,
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE TABLE AS` statement to create a new table from the result set of a query.
 
-## Introduction to the PostgreSQL CREATE TABLE statement
+## Introduction to the PostgreSQL CREATE TABLE AS statement
 
 The `CREATE TABLE AS` statement [creates a new table](postgresql-create-table) and fills it with the data returned by a query. The following shows the syntax of the `CREATE TABLE AS` statement:
 

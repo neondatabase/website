@@ -8,7 +8,7 @@ summary: >-
   cost-tracking tooling. Plan-specific rates, transfer allowances, and
   granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -33,8 +33,8 @@ Calling this endpoint does not wake suspended computes, so it is safe to poll wi
 
 Required parameters: `org_id`, `from`, `to`, `granularity`, `metrics`. Optional: `project_ids`, `limit`, `cursor`. For the complete API reference including pagination, polling, rate limits, and error handling, see [Querying consumption metrics](/docs/guides/consumption-metrics).
 
-<Admonition type="note" title="Legacy endpoints">
-Older endpoints (`/consumption_history/account` and `/consumption_history/projects`) return different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
+<Admonition type="note" title="Legacy endpoint">
+The older `/consumption_history/projects` endpoint returns different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
 </Admonition>
 
 ## Billable metrics
@@ -81,7 +81,7 @@ Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs
 | Private transfer | GB x rate                         | n/a          | $0.01/GB     |
 | Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
 
-Agent and Enterprise rates match Scale. Enterprise plans may include custom negotiated pricing.
+Agent plan rates match Scale except compute, which is billed at $0.106/CU-hr (the Launch rate). Enterprise rates match Scale, and Enterprise plans may include custom negotiated pricing.
 
 ### Example: compute
 

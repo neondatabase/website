@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-path/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_object_keys() Function
@@ -38,7 +38,7 @@ To construct JSON path expressions, you can use the combination of the following
 - `[start: end]` – Array slice operator.
 - `[?(expression)]` – Filter expression that evaluates to a boolean value.
 
-To extract specific elements from a JSON path `jsonb_path_query()` function:
+To extract specific elements from a JSON path, use the `jsonb_path_query()` function:
 
 ```sql
 jsonb_path_query(jsonb_data, json_path)

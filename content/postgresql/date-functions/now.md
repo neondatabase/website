@@ -102,6 +102,12 @@ Output:
 
 You can use the common date and time operators for the `NOW()` function. For example, to get 1 hour from now:
 
+```sql
+SELECT (NOW() + interval '1 hour') AS an_hour_later;
+```
+
+Output:
+
 ```text
         an_hour_later
 ------------------------------
@@ -128,13 +134,13 @@ Output:
 To get 2 hours 30 minutes ago, you use the minus (\-) operator as follows:
 
 ```sql
-SELECT now() - interval '2 hours 30 minutes' AS two_hour_30_min_go;
+SELECT now() - interval '2 hours 30 minutes' AS two_hour_30_min_ago;
 ```
 
 Output:
 
 ```
-      two_hour_30_min_go
+      two_hour_30_min_ago
 -------------------------------
  2024-01-27 01:47:18.246763+02
 (1 row)

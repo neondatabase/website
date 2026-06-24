@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-drop-tablespace/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALTER TABLESPACE
@@ -25,9 +25,9 @@ The DROP TABLESPACE statement works the same way across any PostgreSQL deploymen
 
 ## Introduction to PostgreSQL DROP TABLESPACE statement
 
-The `DROP TABLESPACE` statement delete a tablespace from a database:
+The `DROP TABLESPACE` statement deletes a tablespace from a database:
 
-Here’s the syntax of the `DROP TABLE` statement:
+Here’s the syntax of the `DROP TABLESPACE` statement:
 
 ```sql
 DROP TABLESPACE [IF EXISTS] tablespace_name;

@@ -13,7 +13,7 @@ summary: >-
   `neon-postgres-branches`, `neon-postgres-egress-optimizer`, and
   `claimable-postgres`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -85,7 +85,7 @@ The `neonctl init` command sets up your project to use Neon with your AI coding 
 npx neonctl@latest init
 ```
 
-After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/reference/cli-init) for details.
+After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/cli/init) for details.
 
 ## Project-level vs. global install
 

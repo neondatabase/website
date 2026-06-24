@@ -29,7 +29,7 @@ neon connection-string alice-add-user-role
 neon branches delete alice-add-user-role
 ```
 
-See the [CLI reference](/docs/reference/neon-cli) for the full command set.
+See the [CLI reference](/docs/cli) for the full command set.
 
 ## Plan limits
 

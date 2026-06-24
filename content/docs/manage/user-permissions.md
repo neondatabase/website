@@ -9,7 +9,7 @@ summary: >-
   or Neon Auth. Collaborators have no organization-level access and are limited
   to the specific projects they have been invited to.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
@@ -28,14 +28,13 @@ For an overview of organizations, see the [Organizations](/docs/manage/organizat
 
 The following table shows what each role can do at the organization level:
 
-| Action                                   | Admin | Member | Collaborator |
-| ---------------------------------------- | :---: | :----: | :----------: |
-| Invite organization members              |  ✅   |   ❌   |      ❌      |
-| Set organization permissions             |  ✅   |   ❌   |      ❌      |
-| Manage organization billing              |  ✅   |   ❌   |      ❌      |
-| Rename organization                      |  ✅   |   ❌   |      ❌      |
-| Delete organization                      |  ✅   |   ❌   |      ❌      |
-| Enable organization Early Access Program |  ✅   |   ❌   |      ❌      |
+| Action                       | Admin | Member | Collaborator |
+| ---------------------------- | :---: | :----: | :----------: |
+| Invite organization members  |  ✅   |   ❌   |      ❌      |
+| Set organization permissions |  ✅   |   ❌   |      ❌      |
+| Manage organization billing  |  ✅   |   ❌   |      ❌      |
+| Rename organization          |  ✅   |   ❌   |      ❌      |
+| Delete organization          |  ✅   |   ❌   |      ❌      |
 
 ## Project management
 

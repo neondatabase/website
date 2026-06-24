@@ -70,7 +70,8 @@ const Post = ({
     <>
       <div
         className={cn(
-          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          'min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isChangelog && 'mx-auto',
           className,
           isWideLayout && 'max-w-none'
         )}
@@ -169,10 +170,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
-      {!isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
+      {!isDocsIndex && !isWideLayout && !isChangelog && (
         <Aside
-          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+          className="ml-0! w-78 shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}

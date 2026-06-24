@@ -1,16 +1,15 @@
-const { execFileSync } = require('child_process');
+const { execSync } = require('child_process');
 const fs = require('fs');
 
-let isMergeCommit = false;
-
+// Skip updatedOn stamping during a merge commit. Files staged by the incoming
+// merge were not authored in this branch; any genuinely edited files will be
+// stamped on the next regular commit.
 try {
-  execFileSync('git', ['rev-parse', '--verify', '--quiet', 'MERGE_HEAD'], { stdio: 'ignore' });
-  isMergeCommit = true;
+  execSync('git rev-parse --verify MERGE_HEAD', { stdio: 'pipe' });
+  process.exit(0);
 } catch {
-  // MERGE_HEAD is only available while Git is creating a merge commit.
+  // Not a merge; proceed.
 }
-
-if (isMergeCommit) process.exit(0);
 
 const filePaths = process.argv.slice(2).filter(Boolean);
 const updatedOn = new Date().toISOString();

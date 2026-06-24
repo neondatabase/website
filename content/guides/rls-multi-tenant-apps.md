@@ -4,7 +4,7 @@ subtitle: How to use row-level security for multi-tenant apps, understand its ch
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-02T00:00:00.000Z'
-updatedOn: '2026-05-02T00:00:00.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 If you are building a multi-tenant app on Postgres, [row level security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) sounds like a clean promise, i.e. define access rules once in the database, and every query becomes safe by default. It is a compelling idea, especially when you have many tables, many endpoints, and many ways the same data can be accessed. But RLS is not "turn it on and forget it". It changes how your application authenticates, how your queries are shaped, how you debug production issues, and how confident you can be that a new feature did not pass through your data boundary.
@@ -105,7 +105,7 @@ Now, every read on `project_members` does a subquery join and function call per 
 
 RLS also means extra steps whenever you make changes to your database. When you add a new table, you’re not done until you’ve set up RLS policies and checked that the right roles and permissions are in place. Here’s a quick before and after to show what that looks like:
 
-**Before RLS:**  
+**Before RLS:**
 
 ```sql
 CREATE TABLE invoices (
@@ -116,7 +116,7 @@ CREATE TABLE invoices (
 -- Application is responsible for all access checks
 ```
 
-**After RLS:**  
+**After RLS:**
 
 ```sql
 ALTER TABLE invoices ENABLE ROW LEVEL SECURITY;
@@ -127,10 +127,10 @@ CREATE POLICY tenant_isolation ON invoices
 GRANT SELECT, INSERT, UPDATE, DELETE ON invoices TO app_user;
 ```
 
-Now, every schema addition requires not just the table, but also:  
+Now, every schema addition requires not just the table, but also:
 
-- Defining and validating policies  
-- Setting correct roles and grants  
+- Defining and validating policies
+- Setting correct roles and grants
 - Testing read/write flows in your app
 
 Because policy changes are difficult to test safely in production, these decisions must be handled in staging environments (that are production-like) to avoid deploying insecure or misconfigured RLS setups.
@@ -177,7 +177,7 @@ Here’s how you can use branching and auth to safely test RLS before pushing ch
 
 ### Step 1: Create a branch from production
 
-Use the [Neon CLI](/docs/reference/neon-cli) so you get an isolated copy of schema and data at a point in time. Name it so you know it is for RLS testing.
+Use the [Neon CLI](/docs/cli) so you get an isolated copy of schema and data at a point in time. Name it so you know it is for RLS testing.
 
 ```bash filename="Terminal"
 neon branches create --name preview-rls

@@ -24,6 +24,20 @@
     }
   }
 
+  .logos-static-desktop {
+    @media (min-width: 1280px) {
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      .logos-content {
+        animation: none;
+        will-change: auto;
+      }
+    }
+  }
+
   .logos-central-mask {
     mask-image: radial-gradient(350px at 50% -200px, black 25%, transparent 100%);
   }

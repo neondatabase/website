@@ -6,7 +6,7 @@ page_description: >-
   manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Timestamp Data Types
@@ -246,7 +246,7 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 
 ### Adjusting interval values
 
-PostgreSQL provides two functions `justifydays` and `justifyhours` that allow you to adjust the interval of 30 days as one month and the interval of 24 hours as one day:
+PostgreSQL provides two functions `justify_days` and `justify_hours` that allow you to adjust the interval of 30 days as one month and the interval of 24 hours as one day:
 
 ```sql
 SELECT
@@ -261,7 +261,7 @@ SELECT
 (1 row)
 ```
 
-In addition, the `justify_interval` function adjusts interval using `justifydays` and  `justifyhours` with additional sign adjustments:
+In addition, the `justify_interval` function adjusts interval using `justify_days` and `justify_hours` with additional sign adjustments:
 
 ```sql
 SELECT

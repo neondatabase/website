@@ -20,7 +20,7 @@ neon projects create --name my-app
 neon connection-string
 ```
 
-The last command prints a Postgres connection string you can pass to any driver. The whole flow runs in well under a minute on a new account. See the [Neon CLI quickstart](https://neon.com/docs/reference/cli-quickstart).
+The last command prints a Postgres connection string you can pass to any driver. The whole flow runs in well under a minute on a new account. See the [Neon CLI quickstart](https://neon.com/docs/cli/quickstart).
 
 ## Or call the API directly
 

@@ -1,7 +1,7 @@
 ---
-updatedOn: '2025-09-25T10:33:00.978Z'
+updatedOn: '2026-06-15T14:47:36.989Z'
 ---
 
-<Admonition type="comingSoon" title="Early Access">
-This feature is currently available in Early Access for invited users. Want to try it out? Message us from the [Console](https://console.neon.tech/app/projects?modal=feedback) or on [Discord](https://discord.gg/92vNTzKDGp) and we'll send you an invite.
+<Admonition type="comingSoon" title="Private Preview">
+This feature is in private preview: it's not ready for production use, and it may be briefly unavailable as we deploy updates. To get access, [sign up here](https://neon.com/blog/were-building-backends#access).
 </Admonition>

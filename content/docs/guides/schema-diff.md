@@ -11,7 +11,7 @@ summary: >-
   A Schema Diff GitHub Action is available to post diff comments on pull
   requests.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -97,7 +97,7 @@ Here is the same command using aliases, with `production` included in `set-conte
 neon branch sd development@0/123456 --db people
 ```
 
-To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/reference/cli-branches#schema-diff) for full documentation of the command.
+To find out what other comparisons you can make, see [Neon CLI commands — branches](/docs/cli/branches#schema-diff) for full documentation of the command.
 
 ### Using the Neon API
 

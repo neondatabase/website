@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -42,7 +42,7 @@ The **Specific date and time** option does not include data changes that occurre
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
 <Admonition type="tip">
-You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
+You can also create point-in-time branches using the [Neon CLI](/docs/cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
 neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z

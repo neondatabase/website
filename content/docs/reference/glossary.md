@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-12T01:28:52.381Z'
 ---
 
 ## access token
@@ -193,7 +193,7 @@ Example context file contents:
 }
 ```
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## copy-on-write
 
@@ -377,7 +377,7 @@ A feature in Neon that enables teams to collaborate on projects under a shared a
 
 Admins oversee all aspects of the organization, including managing members, permissions, billing, and projects. Members have access to all organizational projects but cannot manage billing or members. Collaborators have limited access to specific projects shared with them and do not have access to the organization dashboard.
 
-You get one Org with a Free plan account. Additional organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
+Neon organizations can be free or paid. You can create new organizations at any time. For more, see [Organizations](/docs/manage/organizations).
 
 ## Page
 
@@ -451,7 +451,7 @@ When you run a Neon CLI command without specifying an organization (via `--org-i
 
 Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## Project
 

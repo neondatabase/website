@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API"
@@ -257,8 +257,7 @@ Instead of using curl, you can use our official SDKs:
 
 - **[TypeScript SDK](/docs/reference/typescript-sdk)**: Full-featured SDK for Node.js and browser
 - **[Python SDK](/docs/reference/python-sdk)**: Pythonic wrapper for the Neon API
-- **[@neondatabase/toolkit](/docs/reference/neondatabase-toolkit)**: Combined SDK for AI agents (includes API SDK + Serverless Driver)
-- **[Neon CLI](/docs/reference/neon-cli)**: Command-line interface for Neon
+- **[Neon CLI](/docs/cli)**: Command-line interface for Neon
 
 See [Neon SDKs](/docs/reference/sdk) for the full list, including community SDKs.
 

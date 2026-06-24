@@ -9,7 +9,7 @@ status: draft
 
 ## Short answer
 
-Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/reference/neon-cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
+Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
 
 ## How the hierarchy works
 

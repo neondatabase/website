@@ -206,6 +206,41 @@ After applying fixes:
 2. **Check the responses** — make sure the API still returns the same data shape. Column selection and pagination changes can break clients that depend on specific fields or full result sets.
 3. **Measure the improvement** — if pg_stat_statements data is available, reset it (`SELECT pg_stat_statements_reset();`), let traffic run, then re-run the diagnostic queries to compare before and after.
 
+## Neon Infrastructure as Code (`neon.ts`)
+
+The fixes above cut **egress** (data transferred out of Postgres). The other big non-prod cost lever is **compute**, and you can codify it durably in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference) — so dev, preview, and CI branches stay cheap by default instead of relying on per-branch flags:
+
+```bash
+npm i @neondatabase/config
+```
+
+```typescript
+// neon.ts
+import { defineConfig } from "@neondatabase/config/v1";
+
+export default defineConfig({
+  branch: (branch) => {
+    if (branch.exists || branch.isDefault) return {}; // don't touch prod
+    return {
+      ttl: "7d", // ephemeral branches auto-expire instead of accruing storage
+      postgres: {
+        computeSettings: {
+          autoscalingLimitMinCu: 0.25, // scale to zero when idle
+          autoscalingLimitMaxCu: 1, // cap autoscaling on throwaway branches
+          suspendTimeout: "5m",
+        },
+      },
+    };
+  },
+});
+```
+
+```bash
+neonctl config apply   # apply to the current branch (neonctl deploy is an alias)
+```
+
+This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neonctl checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
+
 ## Further reading
 
 - https://neon.com/docs/introduction/network-transfer.md

@@ -5,6 +5,12 @@
     }
   }
 
+  .callout-content {
+    a {
+      @apply text-black-pure underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-[3px] hover:decoration-black-pure dark:text-white dark:decoration-white/40 dark:hover:decoration-white sm:break-words;
+    }
+  }
+
   .admonition-text {
     @apply text-base leading-normal font-normal tracking-tight dark:text-gray-new-85;
 
@@ -249,6 +255,21 @@
         tr {
           @apply border-b border-gray-new-80 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
         }
+      }
+    }
+
+    /* Generated CLI options tables (CliOptions / CliGlobalOptions): code
+       chips are short atomic tokens (--project-name, read_write). The
+       global inline-code rule's `overflow-wrap: anywhere` lets the table's
+       auto layout shrink the Option column to one character and break
+       flags mid-word; forbid internal breaks inside these tables only.
+       The surrounding .table-wrapper scrolls horizontally if ever needed. */
+    .cli-options-table {
+      td code,
+      th code {
+        overflow-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
       }
     }
 

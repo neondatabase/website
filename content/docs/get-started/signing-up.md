@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -230,7 +230,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
    This command shows your existing branches, including the `production` branch and the `development` branch you just created.
 
    <Admonition type="tip">
-   To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+   To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/cli/set-context) for details.
    </Admonition>
 
 ## Make some sample schema changes

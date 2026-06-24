@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -222,7 +222,7 @@ This removes database environment variables from your Vercel project but keeps t
 
 ### Manage branches created by the integration
 
-You can manually delete preview branches at any time via the [Neon Console](/docs/manage/branches#delete-a-branch), [Neon CLI](/docs/reference/cli-branches#delete), or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). For automated cleanup options, including GitHub Actions, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
+You can manually delete preview branches at any time via the [Neon Console](/docs/manage/branches#delete-a-branch), [Neon CLI](/docs/cli/branches#delete), or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). For automated cleanup options, including GitHub Actions, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 <Admonition type="note" title="Unused branches are archived">
 Branches you don't delete are eventually [archived](/docs/guides/branch-archiving), reducing storage costs but still consuming archive storage space.

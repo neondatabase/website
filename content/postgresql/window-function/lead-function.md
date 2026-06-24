@@ -6,7 +6,7 @@ page_description: >-
   access a row that follows the current row, at a specific physical offset.
 prev_url: index.html
 ogImage: /postgresqltutorial/Sales-sample-table.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAST_VALUE Function
@@ -28,7 +28,7 @@ PostgreSQL `LEAD()` function provides access to a row that follows the current r
 
 It means that from the current row, the `LEAD()` function can access data of the next row, the row after the next row, and so on.
 
-The `LEAD()` function is very useful for comparing the value of the current row with the value of the row that following the current row.
+The `LEAD()` function is very useful for comparing the value of the current row with the value of the row that follows the current row.
 
 The following illustrates the syntax of `LEAD()` function:
 

@@ -34,8 +34,8 @@ const getAllGuides = async () => {
   const slugs = await getPostSlugs(GUIDES_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, GUIDES_DIR_PATH)) return;
       const data = getPostBySlug(slug, GUIDES_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -68,6 +68,7 @@ const getAllGuides = async () => {
         excludeFromBlog,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
     .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };

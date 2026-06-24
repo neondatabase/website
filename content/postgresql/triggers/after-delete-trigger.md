@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-delete-trigger/
 ogImage: ''
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE DELETE Trigger
@@ -174,4 +174,4 @@ The output indicates that the `AFTER DELETE` trigger has successfully archived t
 
 ## Summary
 
-- Use a `BEFORE DELETE` trigger to automatically call a function before a row is deleted from a table.
+- Use an `AFTER DELETE` trigger to automatically call a function after a row is deleted from a table.

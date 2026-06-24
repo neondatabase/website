@@ -3,7 +3,7 @@ title: 'How do I check which PostgreSQL version my Neon database is running?'
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
 ---
@@ -42,7 +42,7 @@ The first number is the major version. The second is the minor version, which Ne
 
 <TabItem>
 
-With [neonctl](/docs/reference/neon-cli) installed and authenticated:
+With [neonctl](/docs/cli) installed and authenticated:
 
 ```bash
 neon projects get <project_id>

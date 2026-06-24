@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-parameters/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Create Function Statement
@@ -148,7 +148,7 @@ Output:
 
 ## The INOUT mode
 
-The `inout` mode is the combination `in` and `out` modes.
+The `inout` mode is the combination of `in` and `out` modes.
 
 It means that the caller can pass an argument to a function. The function changes the argument and returns the updated value.
 
