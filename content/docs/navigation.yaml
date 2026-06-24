@@ -555,7 +555,11 @@
               slug: compute/functions/deploy
             - title: Environment variables
               slug: compute/functions/environment-variables
-            - title: WebSocket servers
+            - title: Authentication
+              slug: compute/functions/authentication
+            - title: AI agents
+              slug: compute/functions/agents
+            - title: WebSockets and SSE
               slug: compute/functions/websockets
             - section: Reference
               items:

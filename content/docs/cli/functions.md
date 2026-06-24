@@ -64,7 +64,7 @@ neonctl functions list
 ┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
 │ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
 ├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
-│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
+│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/ │ 2026-06-12T00:14:57.942988Z │
 └───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
 ```
 
@@ -83,7 +83,7 @@ neonctl functions list --output json
     "id": "hello",
     "slug": "hello",
     "name": "hello",
-    "invocation_url": "https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/",
+    "invocation_url": "https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/",
     "current_deployment": {
       "id": 1,
       "status": "completed",
@@ -122,7 +122,7 @@ function
 ┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
 │ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
 ├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
-│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.build/ │ 2026-06-12T00:14:57.942988Z │
+│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/ │ 2026-06-12T00:14:57.942988Z │
 └───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
 active deployment
 ┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
