@@ -6,19 +6,19 @@ summary: >-
   region. Learn how to request access, what's included, and the current
   limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 ## Request access
 
-Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends#access). The team will reach out with access details. Functions are available on new projects only.
+Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends#access). The team will reach out with access details. Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
 
 ## What's included
 
 - Deploy Node.js 24 HTTP handlers to Neon branches
-- Workers-compatible handler interface (`fetch(request)` export)
+- Web Fetch API handler interface (`fetch(request)` export)
 - Long-running compute: WebSocket servers, SSE endpoints, AI agents
-- Zero-config access to Postgres, the [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview): credentials are injected automatically when the service is enabled
+- Postgres, [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview) credentials injected automatically when the service is enabled
 - `neonctl dev` for local development with hot reload
 - `neon.ts` config with `neonctl deploy` for declarative branch setup
 - `neonctl functions deploy` for direct CLI deployment
@@ -27,11 +27,11 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 
 ## What's not included
 
-**Memory is fixed at 2048 MiB.** Memory configuration isn't available during the preview.
+**Memory is fixed at 2048 MiB** and can't be configured during the preview.
 
-**Background jobs are not supported.** Functions are request/response: every invocation starts from an incoming request and returns a response. `waitUntil` runs post-response work for up to 15 minutes, for short cleanup tasks (analytics writes, audit logs), not long-running jobs. Use a dedicated queue or scheduler (a separate, upcoming Neon offering) for work that needs its own lifecycle. See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for details.
+**No native job queue.** Functions are request/response: each invocation handles an incoming request and returns a response, a natural fit for REST APIs, webhooks, AI agents, and backend control planes. `waitUntil` runs short post-response work for up to 15 minutes (analytics writes, audit logs, webhook fan-outs, agent callbacks), not long-running jobs. For queued, retryable work, pair a function with a third-party queue or scheduler like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com); a native Neon queue and workflow engine is a separate, upcoming offering. See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for details.
 
-**Billing isn't active yet.** Functions usage isn't billed during the private preview.
+**Billing isn't active during the private preview.** Functions usage isn't billed yet.
 
 **Available in AWS us-east-2 only.** Other regions aren't available during the preview.
 

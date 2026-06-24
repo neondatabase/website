@@ -6,28 +6,28 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
 
 What makes Neon Functions different from lambda-style serverless?
 
-- **Next to your data.** Same region as the branch, with `DATABASE_URL` (plus [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) credentials) injected automatically. No cross-region hops, nothing to configure.
-- **Long-running.** Start responding within 15 minutes, then stream for as long as data flows, so agents and WebSocket/SSE servers don't time out.
+- **Next to your data.** Same region as the branch, with `DATABASE_URL` (plus [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) credentials) injected automatically. No cross-region hops, and no credentials to wire up.
+- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
 - **Branches with your data.** Each branch runs its own function at its own URL against its own database state.
 
-This is Neon's own serverless runtime, the same one we run Postgres on, not a wrapper around a third-party platform.
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
 
 ## Request/response, not background jobs
 
 A function is always requested (by a `fetch`, a browser, an agent) and always returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade.
 
-That makes functions a fit for request/response work, and not for background jobs. Background jobs and workflows are the other kind of compute: queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup. Those need a job queue or workflow engine (a separate, upcoming Neon offering), not a function.
+That makes functions a fit for request/response work, and not for background jobs. Background jobs and workflows are the other kind of compute: queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup. Those need a job queue or workflow engine to own that lifecycle. Today you can pair a function with a third-party queue or scheduler like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com): the service owns the queue, retries, and scheduling, and invokes your function over HTTP to run each job. A native Neon job queue and workflow engine is a separate, upcoming offering.
 
-Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It's the web-standard handler interface (Cloudflare Workers use the same shape), standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
+Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
 
 ```ts
 export default {
@@ -48,11 +48,11 @@ A [Hono](https://hono.dev) app exports the object shape, so `export default app`
 ## When to use Neon Functions
 
 - **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Get started](/docs/compute/functions/get-started).
-- **AI agents**: stream tokens back across multiple model calls and tool invocations without a host timeout. See [AI agents](/docs/compute/functions/agents).
+- **AI agents**: stream tokens back across multiple model calls and tool invocations without a short execution limit cutting the run off. See [AI agents](/docs/compute/functions/agents).
 - **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
 - **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
 - **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
-- **Webhook handlers and bots**: receive events and run multiple database queries without cross-region latency.
+- **Webhook handlers and bots**: receive events and query Postgres in the same region.
 
 ## How Functions fit with your app
 

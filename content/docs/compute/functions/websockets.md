@@ -6,12 +6,12 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend without a separate state store like Redis, on the same branch as your Postgres database.
+Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend on the same branch as your Postgres database, with Postgres `LISTEN/NOTIFY` handling cross-isolate messaging instead of a separate broker like Redis.
 
 Two options, depending on direction:
 
@@ -54,7 +54,7 @@ const wss = new WebSocketServer({ noServer: true });
 
 export default {
   fetch(request: Request) {
-    return new Response('This endpoint speaks WebSocket — send an Upgrade request.', {
+    return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', {
       headers: { 'content-type': 'text/plain' },
     });
   },
@@ -100,7 +100,7 @@ import { WebSocketServer } from 'ws';
 const app = new Hono();
 const wss = new WebSocketServer({ noServer: true });
 
-app.get('/', (c) => c.text('WebSocket server — connect via wss://'));
+app.get('/', (c) => c.text('WebSocket server. Connect via wss://'));
 
 export default {
   fetch: (request: Request) => app.fetch(request),
@@ -155,7 +155,7 @@ listener.on('notification', (msg) => {
 const wss = new WebSocketServer({ noServer: true });
 const app = new Hono();
 
-app.get('/', (c) => c.text('Realtime chat — connect over WebSocket'));
+app.get('/', (c) => c.text('Realtime chat. Connect over WebSocket'));
 
 export default {
   fetch: (request: Request) => app.fetch(request),
@@ -173,6 +173,7 @@ export default {
   },
 };
 
+// Optional: drain the pool and listener on shutdown (the platform sends SIGINT).
 process.on('SIGINT', () => {
   Promise.allSettled([pool.end(), listener.end()]).then(() => process.exit(0));
 });
@@ -184,7 +185,7 @@ Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` r
 
 ## Heartbeat
 
-The connection only lives while data moves across it. Neon's ceiling is 15 minutes, but the proxies and load balancers in between usually drop an idle socket much sooner, sometimes within tens of seconds. Rather than rely on steady app traffic, ping the client on a timer. Calling `ws.ping()` sends a ping frame that the browser pongs back automatically, so nothing is needed on the client:
+The connection only lives while data moves across it. Neon's idle timeout is 15 minutes, but the proxies and load balancers in between usually drop an idle socket much sooner, sometimes within tens of seconds. Rather than rely on steady app traffic, ping the client on a timer. Calling `ws.ping()` sends a ping frame. Browsers reply with a pong automatically; other clients (Node `ws`, `wscat`) may need to handle it themselves:
 
 ```ts
 const HEARTBEAT_MS = 25_000; // under typical proxy idle timeouts
@@ -214,20 +215,22 @@ export default {
     if (url.pathname !== '/events') return new Response('ok');
 
     let count = 0;
+    let tick: ReturnType<typeof setInterval>;
+    let beat: ReturnType<typeof setInterval>;
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         controller.enqueue(encoder.encode('data: connected\n\n'));
-        const tick = setInterval(() => {
+        tick = setInterval(() => {
           controller.enqueue(encoder.encode(`data: ${++count}\n\n`));
         }, 1000);
         // A line starting with `:` is a comment. Use it as a heartbeat so the
         // stream never goes idle (proxies drop quiet connections quickly).
-        const beat = setInterval(() => controller.enqueue(encoder.encode(': ping\n\n')), 25_000);
-        // Returned from start(); fires when the client disconnects.
-        return () => {
-          clearInterval(tick);
-          clearInterval(beat);
-        };
+        beat = setInterval(() => controller.enqueue(encoder.encode(': ping\n\n')), 25_000);
+      },
+      cancel() {
+        // Fires when the client disconnects.
+        clearInterval(tick);
+        clearInterval(beat);
       },
     });
 
@@ -271,7 +274,7 @@ async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
   }
 
   wss.handleUpgrade(req, socket, head, (ws) => {
-    // authenticated — identity is in scope
+    // authenticated; identity is in scope
   });
 },
 ```
@@ -280,8 +283,8 @@ For a complete example with JWT verification, Neon Auth integration, and client-
 
 ## Eviction and shutdown
 
-The platform sends `SIGINT` before evicting an isolate. Without a handler, open database connections are abandoned and stay open until they time out. The LISTEN/NOTIFY example above includes one: `Promise.allSettled([pool.end(), listener.end()])` drains the pool and listener before the process exits. Add equivalent cleanup for any other resources your function holds.
+On shutdown the platform sends `SIGINT`, then forcibly stops the function 5 seconds later. Cleanup is optional: when the process exits, the OS closes its sockets, so dropped connections are usually detected without it. To shut down more gracefully, drain open resources in a `SIGINT` handler, as the LISTEN/NOTIFY example above does with `Promise.allSettled([pool.end(), listener.end()])`.
 
-See [Runtime limits](/docs/compute/functions/reference/runtime-limits#lifecycle) for eviction behavior and the heartbeat timeout.
+See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for eviction and timeout behavior.
 
 <NeedHelp/>

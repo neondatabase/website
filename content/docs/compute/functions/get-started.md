@@ -7,7 +7,7 @@ summary: >-
   neonctl deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -24,10 +24,10 @@ A function takes a request and returns a web response, running on long-lived Nod
 
 Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
 
-`neonctl init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install skills separately:
+`neonctl init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-functions -y
+npx skills add neondatabase/agent-skills -s neon -s neon-functions
 ```
 
 ## Set up your project
@@ -85,7 +85,7 @@ A function is any module whose default export has a `fetch(request)` method that
 
 ```ts
 export default {
-  fetch: (request: Request) => new Response('Hello World!'),
+  fetch: (request: Request) => new Response('Hello world'),
 };
 ```
 
@@ -93,7 +93,7 @@ Or a bare async function:
 
 ```ts
 export default async function handler(request: Request) {
-  return new Response('Hello World!');
+  return new Response('Hello world');
 }
 ```
 
@@ -114,7 +114,7 @@ app.get('/', async (c) => {
 
 export default app;
 
-// Close the pool cleanly when the isolate shuts down.
+// Optional: drain the pool on shutdown (the platform sends SIGINT).
 process.on('SIGINT', () => {
   pool.end().then(() => process.exit(0));
 });

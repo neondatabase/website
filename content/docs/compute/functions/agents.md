@@ -6,14 +6,14 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 AI agents make several model and tool calls to answer a single request, then stream the result back. That work can run for minutes, but lambda-style serverless caps execution at roughly 10 to 60 seconds, so a multi-step tool loop or an image-generation run gets cut off mid-stream.
 
-A Neon Function doesn't have that cap. The handler just has to begin responding within 15 minutes, and once a stream is open it stays up for as long as it keeps sending data. That's enough time for an agent that makes many model and tool calls before it finishes responding. The function also runs next to your Postgres database, and the [Neon AI Gateway](/docs/ai-gateway/overview) is injected automatically, so one credential reaches the whole model catalog with nothing to configure.
+Neon Functions use different limits: begin responding within 15 minutes, then keep an active stream open while data flows (send at least one byte every 15 minutes on a quiet stream). That's enough for an agent that makes many model and tool calls before it finishes responding. The function runs next to your Postgres database, and once you enable the [Neon AI Gateway](/docs/ai-gateway/overview) on the branch, its credentials are injected automatically, so one credential reaches the whole model catalog. See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for details.
 
 ## Stream a tool-calling agent
 
@@ -73,7 +73,8 @@ export default {
         }),
       },
       // Let the model call tools and then summarize, instead of stopping after
-      // the first tool call. The loop runs in-process, with no host timeout.
+      // the first tool call. The loop runs in-process on Neon compute, not
+      // behind a short proxy limit.
       stopWhen: stepCountIs(5),
       onError({ error }) {
         console.error('[streamText]', error);
@@ -86,6 +87,7 @@ export default {
   },
 };
 
+// Optional: drain the pool on shutdown (the platform sends SIGINT).
 process.on('SIGINT', () => {
   pool.end().then(() => process.exit(0));
 });

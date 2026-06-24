@@ -6,7 +6,7 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -16,8 +16,8 @@ A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. The
 How you authenticate depends on who calls the function:
 
 - A browser or another service holding a **JWT**: verify the token (see [Verify a JWT](#verify-a-jwt)).
-- Your own scripts, agents, or a personal tool: check an **API key** (see [Check an API key](#check-an-api-key)).
-- A WebSocket or SSE client: the browser can't set headers, so pass the token as a query parameter (see [WebSocket and SSE clients](#websocket-and-sse-clients)).
+- Your own scripts, cron jobs, or internal tools: check an **API key** (see [Check an API key](#check-an-api-key)).
+- A WebSocket or SSE client: the browser can't set headers, so pass the token as a query parameter or cookie (see [WebSocket and SSE clients](#websocket-and-sse-clients)).
 
 ## Verify a JWT
 
@@ -58,7 +58,7 @@ Two things make the direct call work:
 - **A short-lived token.** With Neon Auth, the signed-in client gets one from the Neon Auth SDK (`authClient.token()`). With a custom signer, mint it on your app backend (a fast call, well within host limits). Either way, the client sends it as `Authorization: Bearer <token>`.
 - **CORS.** The browser calls the function cross-origin, so handle the preflight and set the headers:
 
-```ts filename="functions/secure.ts"
+```ts filename="functions/cors.ts"
 function cors(request: Request) {
   return {
     'Access-Control-Allow-Origin': request.headers.get('origin') ?? '*',
@@ -93,7 +93,7 @@ new DefaultChatTransport({
 
 ## Check an API key
 
-When the callers are your own agents, scripts, or a personal tool, you don't need full user auth. Check a shared secret instead. Set it on the deployment with `--env` (see [Environment variables](/docs/compute/functions/environment-variables)), then compare it on every request:
+When the callers are your own scripts, cron jobs, or internal tools, you don't need full user auth. Check a shared secret instead. Set it on the deployment with `--env` (see [Environment variables](/docs/compute/functions/environment-variables)), then compare it on every request:
 
 ```ts
 export default {
@@ -115,11 +115,11 @@ The secret stays server-side, and rotating it is a redeploy with a new value. It
 
 ## WebSocket and SSE clients
 
-Browsers can't set request headers on a WebSocket or an `EventSource`, so the `Authorization` header isn't available. Pass the token as a query parameter and verify it before accepting the connection. See [WebSockets and SSE](/docs/compute/functions/websockets#authentication) for the pattern.
+Browsers can't set request headers on a WebSocket or an `EventSource`, so the `Authorization` header isn't available. Pass the token as a query parameter (or a cookie for SSE) and verify it before accepting the connection. See [WebSockets and SSE](/docs/compute/functions/websockets#authentication) for the pattern.
 
 ## OAuth and MCP clients
 
-Neon Auth handles user sign-in, including Google, GitHub, and Vercel OAuth, and issues JWTs you verify as above. A different case is third-party clients like an MCP client (Cursor or Claude) self-authorizing against your server through the OAuth flow in the MCP spec. For that, run your own OAuth provider such as [Better Auth](https://better-auth.com) alongside your app and have the function verify the tokens it issues. Better Auth's MCP support is moving between packages, so check its current docs for import paths before wiring it up.
+Neon Auth handles user sign-in and issues JWTs you verify as above. A different case is a third-party client like an MCP client (Cursor or Claude) self-authorizing against your server through the OAuth flow in the MCP spec. That's a larger setup: run your own OAuth provider (such as [Better Auth](https://better-auth.com)) alongside your app and have the function verify the access tokens it issues. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp) for a working server.
 
 ## Example
 

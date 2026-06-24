@@ -6,14 +6,14 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neonctl env pull.
 enableTableOfContents: true
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 ## Neon-injected variables
 
-Neon injects connection strings, credentials, and service URLs automatically at runtime. You don't declare these in `neon.ts` or pass them at deploy time. They're resolved from the branch the function is deployed to. This is what makes Postgres, the AI Gateway, and Object Storage zero-config from inside a function: enable the service, and its credentials are there in `process.env`.
+Neon injects connection strings, credentials, and service URLs automatically at runtime. You don't declare these in `neon.ts` or pass them at deploy time. They're resolved from the branch the function is deployed to. This is why a function doesn't configure Postgres, the AI Gateway, or Object Storage itself: enable the service, and its credentials are there in `process.env`.
 
 Each variable is present only when its service is enabled on the branch. `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, for example, are undefined on a functions-only branch with no Postgres database.
 
@@ -35,7 +35,7 @@ Each variable is present only when its service is enabled on the branch. `DATABA
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
 <Admonition type="note" title="Two AI Gateway endpoints">
-`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`), so an OpenAI SDK that reads `OPENAI_BASE_URL` and `OPENAI_API_KEY` from the environment works with `responses.create()` and no setup. The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neondatabase/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
+`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`). The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neondatabase/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
 </Admonition>
 
 <Admonition type="note" title="Local pull vs. deployed runtime">
@@ -105,7 +105,7 @@ Load a `.env` file before running `neonctl deploy` to make secrets available dur
 neonctl deploy --env .env.production
 ```
 
-The file isn't forwarded to the function directly. Only variables declared in the `env` field are deployed; `--env` just controls what `process.env` contains when `neon.ts` is evaluated.
+The file isn't forwarded to the function directly. Only variables declared in the `env` field are deployed; `--env` only controls what `process.env` contains when `neon.ts` is evaluated.
 
 ## Pull variables locally
 
@@ -123,7 +123,7 @@ neonctl env pull --file .env.preview
 
 To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Neon Auth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Neon Auth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names, so the OpenAI SDKs pick it up from the environment.
 
 ## Constraints
 

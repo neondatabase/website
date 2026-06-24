@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-24T15:13:00.240Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -15,28 +15,17 @@ Neon Functions run on Node.js 24.
 
 ## Lifecycle
 
-Neon Functions are long-running. You can host WebSocket servers, SSE endpoints, and agents that stream responses over HTTP without hitting a short execution timeout. They're still serverless: if your function has no active connections, the platform shuts it down.
+Neon Functions are long-running: you can host WebSocket servers, SSE endpoints, and agents that stream over HTTP without hitting a short execution timeout. They're still serverless. The platform shuts a function down when it's idle, with no open connections or pending `waitUntil` work, and can also evict and restart it for operational reasons. Treat eviction like a process restart: clients should reconnect when a connection drops.
 
-The platform may also evict and restart your function for operational reasons. Active functions can run for hours before eviction occurs. Treat eviction like a process restart: WebSocket and SSE clients need to reconnect when the connection drops.
-
-The platform sends `SIGINT` before evicting to allow graceful shutdown. Register a handler to close open connections and flush in-flight work before the process exits:
-
-```ts
-// pool is your module-scope pg.Pool
-process.on('SIGINT', () => {
-  pool.end().then(() => process.exit(0));
-});
-```
-
-Without it, open connections are abandoned on eviction and remain open until they time out.
+When the platform stops a function, it sends `SIGINT`. If the process is still running 5 seconds later, the platform forcibly stops the function. Handle `SIGINT` with `process.on('SIGINT', ...)` to close connections and flush in-flight work within that window. When the process exits, the OS closes its sockets, so dropped connections are usually detected without extra handling.
 
 ## Timeouts
 
-**Time to first byte: 15 minutes.** Your handler must begin returning a response within 15 minutes of receiving a request. This is a request-response runtime, not a background task runner. The limit prevents runaway functions that hold resources indefinitely with no way to cancel them. In practice most handlers complete in seconds. The 15-minute limit gives agent workloads like image or video generation enough time to finish.
+**Time to first byte: 15 minutes.** Your handler must begin returning a response within 15 minutes of receiving a request. The limit prevents runaway functions that hold resources indefinitely with no way to cancel them. In practice most handlers complete in seconds. The 15-minute limit gives agent workloads like image or video generation enough time to finish.
 
 **Heartbeat: 15 minutes.** Active WebSocket connections and HTTP streams stay open as long as data flows. The timeout only fires when the connection goes silent. Send at least one byte every 15 minutes to keep a quiet stream alive.
 
-**`waitUntil`: 15 minutes.** Work registered with `waitUntil` continues after the response is sent. It's for cleanup: analytics writes, audit logs, short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
+**`waitUntil`: 15 minutes.** Work registered with `waitUntil` continues after the response is sent. It's for short post-response work: analytics writes, audit logs, webhook fan-outs, agent callbacks, and other short follow-up calls. It's not a background job runner. Use a dedicated system for work that needs its own lifecycle or cancellation.
 
 ```ts
 import { Hono } from 'hono';
@@ -52,7 +41,7 @@ app.post('/event', async (c) => {
 export default app;
 ```
 
-Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs, it just isn't tracked, so the same code is safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neonctl dev`.
 
 ## Concurrency
 
