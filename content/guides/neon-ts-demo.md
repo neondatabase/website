@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-06-24T18:12:13.618Z'
+updatedOn: '2026-06-24T18:18:14.891Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neonctl`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -164,7 +164,7 @@ $ neonctl config plan
   │ create │ service │ dataApi    │
   └────────┴─────────┴────────────┘
 
-  Used services: Postgres, Neon Auth, Data API
+  Utilized services: Postgres, Neon Auth, Data API
 ```
 
 When you are ready, apply the changes:
@@ -324,7 +324,7 @@ git merge dev-user-profiles
 # npx drizzle-kit migrate
 
 git branch -d dev-user-profiles
-neonctl delete-branch dev-user-profiles
+neonctl branches delete dev-user-profiles
 ```
 
 To confirm the state of your current branch at any time you can run `neonctl config status` (similar to `git status`), which shows the current branch, its `expiresAt` date, and the services provisioned for it.
@@ -341,7 +341,7 @@ You can declare these under a `preview` block in your `neon.ts`:
 preview: {
   aiGateway: true,
   buckets: {
-    dev-assets: {},                          // private (default)
+    dev_assets: {},                          // private (default)
     blog_posts: { access: "public_read" },   // public
   },
   functions: {
