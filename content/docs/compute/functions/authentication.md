@@ -1,12 +1,12 @@
 ---
-title: Function authentication
+title: Neon Functions authentication
 subtitle: Verify callers before a Neon Function does any work.
 summary: >-
   A Neon Function has a public URL, so authenticate it yourself. Verify a Neon
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -115,7 +115,7 @@ The secret stays server-side, and rotating it is a redeploy with a new value. It
 
 ## WebSocket and SSE clients
 
-Browsers can't set request headers on a WebSocket or an `EventSource`, so the `Authorization` header isn't available. Pass the token as a query parameter and verify it before accepting the connection. See [Realtime: WebSockets and SSE](/docs/compute/functions/websockets#authentication) for the pattern.
+Browsers can't set request headers on a WebSocket or an `EventSource`, so the `Authorization` header isn't available. Pass the token as a query parameter and verify it before accepting the connection. See [WebSockets and SSE](/docs/compute/functions/websockets#authentication) for the pattern.
 
 ## OAuth and MCP clients
 

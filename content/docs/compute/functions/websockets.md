@@ -1,17 +1,17 @@
 ---
-title: 'Realtime: WebSockets and SSE'
-subtitle: Hold long-lived connections open on Neon Functions.
+title: WebSockets and SSE on Neon Functions
+subtitle: Hold long-lived connections open for real-time apps.
 summary: >-
-  Neon Functions stay alive while data flows, so they can host realtime
+  Neon Functions stay alive while data flows, so they can host real-time
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Realtime on Neon Functions is still the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a realtime backend without a separate state store like Redis, on the same branch as your Postgres database.
+Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend without a separate state store like Redis, on the same branch as your Postgres database.
 
 Two options, depending on direction:
 

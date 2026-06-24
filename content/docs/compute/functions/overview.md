@@ -3,13 +3,13 @@ title: Neon Functions
 subtitle: Deploy a backend onto your Neon branch, next to your data.
 summary: >-
   Neon Functions are serverless compute you deploy onto a Neon branch. Host an
-  API, AI agent, realtime server, or webhook handler that runs next to your
+  API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
-Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a realtime server, or a webhook handler without standing up separate infrastructure.
+Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
 
 What makes Neon Functions different from lambda-style serverless?
 
@@ -49,7 +49,7 @@ A [Hono](https://hono.dev) app exports the object shape, so `export default app`
 
 - **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Get started](/docs/compute/functions/get-started).
 - **AI agents**: stream tokens back across multiple model calls and tool invocations without a host timeout. See [AI agents](/docs/compute/functions/agents).
-- **Realtime apps**: WebSocket servers for chat and presence, or SSE for live updates. See [Realtime: WebSockets and SSE](/docs/compute/functions/websockets).
+- **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
 - **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
 - **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
 - **Webhook handlers and bots**: receive events and run multiple database queries without cross-region latency.
@@ -71,7 +71,7 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 <a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
 
-<a href="/docs/compute/functions/websockets" description="Hold long-lived connections open with WebSockets or SSE." icon="globe">Realtime: WebSockets and SSE</a>
+<a href="/docs/compute/functions/websockets" description="Hold long-lived connections open with WebSockets or SSE." icon="globe">WebSockets and SSE</a>
 
 <a href="/docs/compute/functions/authentication" description="Verify callers before a function does any work." icon="lock-landscape">Authentication</a>
 

@@ -1,12 +1,12 @@
 ---
-title: Function runtime limits
+title: Neon Functions runtime limits
 subtitle: Hard constraints for Neon Functions.
 summary: >-
   Hard limits for Neon Functions: lifecycle and eviction behavior, 15-minute
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
 <PrivatePreviewEnquire/>

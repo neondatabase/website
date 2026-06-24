@@ -1,12 +1,12 @@
 ---
-title: Function preview access
+title: Neon Functions preview access
 subtitle: What's included in the Neon Functions private preview.
 summary: >-
   Neon Functions is in private preview for new projects in the AWS us-east-2
-  region. This page covers how to request access, what's included, and the
-  current limitations.
+  region. Learn how to request access, what's included, and the current
+  limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
 ## Request access

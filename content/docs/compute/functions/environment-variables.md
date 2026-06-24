@@ -1,12 +1,12 @@
 ---
-title: Function environment variables
+title: Neon Functions environment variables
 subtitle: Neon-injected variables and how to set your own secrets.
 summary: >-
   Neon injects branch-scoped variables like DATABASE_URL into deployed
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neonctl env pull.
 enableTableOfContents: true
-updatedOn: '2026-06-24T14:40:50.063Z'
+updatedOn: '2026-06-24T15:13:00.240Z'
 ---
 
 <PrivatePreviewEnquire/>
