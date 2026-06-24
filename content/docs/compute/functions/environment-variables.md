@@ -1,30 +1,46 @@
 ---
-title: Environment variables
+title: Function environment variables
 subtitle: Neon-injected variables and how to set your own secrets.
 summary: >-
   Neon injects branch-scoped variables like DATABASE_URL into deployed
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neonctl env pull.
 enableTableOfContents: true
+updatedOn: '2026-06-24T14:40:50.063Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 ## Neon-injected variables
 
-Neon injects connection strings and service URLs automatically at runtime. You don't declare these in `neon.ts` or pass them at deploy time. They're resolved from the branch the function is deployed to.
+Neon injects connection strings, credentials, and service URLs automatically at runtime. You don't declare these in `neon.ts` or pass them at deploy time. They're resolved from the branch the function is deployed to. This is what makes Postgres, the AI Gateway, and Object Storage zero-config from inside a function: enable the service, and its credentials are there in `process.env`.
 
-`DATABASE_URL` and `DATABASE_URL_UNPOOLED` are only present when the branch has a Postgres database. On a functions-only branch, they're undefined.
+Each variable is present only when its service is enabled on the branch. `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, for example, are undefined on a functions-only branch with no Postgres database.
 
-| Variable                | Description                                                                                                                  |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`          | Pooled Postgres connection string. Use this for most queries.                                                                |
-| `DATABASE_URL_UNPOOLED` | Direct (unpooled) connection string. Use for migrations, `LISTEN`/`NOTIFY`, and transactions that span multiple round-trips. |
-| `NEON_AUTH_BASE_URL`    | Base URL for Neon Auth. Present only when Neon Auth is enabled on the branch.                                                |
-| `NEON_DATA_API_URL`     | URL for the Neon Data API. Present only when the Data API is enabled on the branch.                                          |
-| `NEON_BRANCH`           | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                           |
+| Variable                                     | Service        | Description                                                                                                                                        |
+| -------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                               | Postgres       | Pooled connection string. Use this for most queries.                                                                                               |
+| `DATABASE_URL_UNPOOLED`                      | Postgres       | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                                                |
+| `NEON_BRANCH`                                | Core           | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                                                 |
+| `NEON_AUTH_BASE_URL`                         | Neon Auth      | Base URL for Neon Auth.                                                                                                                            |
+| `NEON_AUTH_JWKS_URL`                         | Neon Auth      | JWKS endpoint for verifying Neon Auth JWTs. See [Authentication](/docs/compute/functions/authentication).                                          |
+| `NEON_DATA_API_URL`                          | Data API       | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                                                |
+| `OPENAI_API_KEY`                             | AI Gateway     | Gateway key, under the OpenAI-standard name so the OpenAI SDKs pick it up automatically.                                                           |
+| `OPENAI_BASE_URL`                            | AI Gateway     | OpenAI **Responses API** endpoint (`/ai-gateway/openai/v1`). An OpenAI SDK reading these two variables reaches `responses.create()` with no setup. |
+| `NEON_AI_GATEWAY_TOKEN`                      | AI Gateway     | Gateway token. Same value as `OPENAI_API_KEY`.                                                                                                     |
+| `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway     | Gateway host root. Append a dialect route, e.g. `/ai-gateway/mlflow/v1` for Chat Completions.                                                      |
+| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage | S3-compatible credentials for the branch's buckets.                                                                                                |
+| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                                                    |
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
+
+<Admonition type="note" title="Two AI Gateway endpoints">
+`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`), so an OpenAI SDK that reads `OPENAI_BASE_URL` and `OPENAI_API_KEY` from the environment works with `responses.create()` and no setup. The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neondatabase/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
+</Admonition>
+
+<Admonition type="note" title="Local pull vs. deployed runtime">
+A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neonctl env pull` writes credentials for the services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access.
+</Admonition>
 
 For type-safe access, the [`@neondatabase/env`](https://www.npmjs.com/package/@neondatabase/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
 
@@ -107,7 +123,7 @@ neonctl env pull --file .env.preview
 
 To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH` (the branch name), plus the variables for every service enabled on the branch: the Neon Auth and Data API URLs, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the object storage credentials (`AWS_*`, `NEON_STORAGE_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Neon Auth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names so the OpenAI SDKs work from the environment without configuration.
 
 ## Constraints
 

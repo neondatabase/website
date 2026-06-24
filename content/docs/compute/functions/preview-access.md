@@ -1,11 +1,12 @@
 ---
-title: Preview access
+title: Function preview access
 subtitle: What's included in the Neon Functions private preview.
 summary: >-
   Neon Functions is in private preview for new projects in the AWS us-east-2
   region. This page covers how to request access, what's included, and the
   current limitations.
 enableTableOfContents: true
+updatedOn: '2026-06-24T14:40:50.063Z'
 ---
 
 ## Request access
@@ -17,7 +18,7 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 - Deploy Node.js 24 HTTP handlers to Neon branches
 - Workers-compatible handler interface (`fetch(request)` export)
 - Long-running compute: WebSocket servers, SSE endpoints, AI agents
-- `DATABASE_URL` auto-injected from the branch's Postgres database
+- Zero-config access to Postgres, the [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview): credentials are injected automatically when the service is enabled
 - `neonctl dev` for local development with hot reload
 - `neon.ts` config with `neonctl deploy` for declarative branch setup
 - `neonctl functions deploy` for direct CLI deployment
@@ -28,7 +29,7 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 
 **Memory is fixed at 2048 MiB.** Memory configuration isn't available during the preview.
 
-**Background jobs are not supported.** `waitUntil` runs post-response work for up to 15 minutes. It's for short cleanup tasks (analytics writes, audit logs), not long-running jobs. Use a dedicated queue or scheduler for work that needs its own lifecycle. `waitUntil` is currently a stub; see [Runtime limits](/docs/compute/functions/reference/runtime-limits) for details.
+**Background jobs are not supported.** Functions are request/response: every invocation starts from an incoming request and returns a response. `waitUntil` runs post-response work for up to 15 minutes, for short cleanup tasks (analytics writes, audit logs), not long-running jobs. Use a dedicated queue or scheduler (a separate, upcoming Neon offering) for work that needs its own lifecycle. See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for details.
 
 **Billing isn't active yet.** Functions usage isn't billed during the private preview.
 

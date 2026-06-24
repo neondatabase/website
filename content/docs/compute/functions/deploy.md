@@ -1,11 +1,12 @@
 ---
-title: Deploy and manage functions
+title: Deploy and manage Neon Functions
 subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
   Reference for deploying Neon Functions with neonctl deploy, neonctl functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
+updatedOn: '2026-06-24T14:40:50.063Z'
 ---
 
 <PrivatePreviewEnquire/>

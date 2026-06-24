@@ -1,16 +1,22 @@
 ---
-title: WebSocket servers
-subtitle: Host persistent WebSocket connections on Neon Functions.
+title: 'Realtime: WebSockets and SSE'
+subtitle: Hold long-lived connections open on Neon Functions.
 summary: >-
-  Neon Functions support long-lived WebSocket connections via an upgrade export.
-  Use the ws package alongside your fetch handler to accept WebSocket clients,
-  and Postgres LISTEN/NOTIFY to broadcast across isolates.
-updatedOn: '2026-06-15T14:47:36.989Z'
+  Neon Functions stay alive while data flows, so they can host realtime
+  backends. Use WebSockets for two-way connections via an upgrade export, or
+  server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
+  broadcast across isolates.
+updatedOn: '2026-06-24T14:40:50.063Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Neon Functions stay alive as long as they have active connections, so a WebSocket server is a first-class use case. Your handler runs on the same branch as your Postgres database.
+Realtime on Neon Functions is still the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a realtime backend without a separate state store like Redis, on the same branch as your Postgres database.
+
+Two options, depending on direction:
+
+- **[WebSockets](#how-it-works)**: two-way, low-latency frames. Reach for these when the client also sends messages (chat, presence, collaborative editing).
+- **[Server-sent events (SSE)](#server-sent-events-sse)**: one-way, server to client. Simpler to run (plain HTTP, no upgrade, no library), and the browser's `EventSource` reconnects automatically. Reach for these for live counters, notifications, progress, and token streams.
 
 ## How it works
 
@@ -176,9 +182,81 @@ process.on('SIGINT', () => {
 Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` routes through PgBouncer, which doesn't support `LISTEN/NOTIFY`.
 </Admonition>
 
+## Heartbeat
+
+The connection only lives while data moves across it. Neon's ceiling is 15 minutes, but the proxies and load balancers in between usually drop an idle socket much sooner, sometimes within tens of seconds. Rather than rely on steady app traffic, ping the client on a timer. Calling `ws.ping()` sends a ping frame that the browser pongs back automatically, so nothing is needed on the client:
+
+```ts
+const HEARTBEAT_MS = 25_000; // under typical proxy idle timeouts
+
+const beat = setInterval(() => {
+  for (const ws of clients) {
+    if (ws.readyState === ws.OPEN) ws.ping();
+  }
+}, HEARTBEAT_MS);
+beat.unref?.();
+
+process.on('SIGINT', () => clearInterval(beat));
+```
+
+`clients` is the `Set` from the chat example above. `beat.unref()` keeps the interval from holding the process open on its own.
+
+## Server-sent events (SSE)
+
+When you only need server-to-client updates, SSE is simpler than a WebSocket. There's no `upgrade` method and no library to install. A plain `fetch` handler returns a `Response` whose body is a `ReadableStream`, with the `Content-Type` set to `text/event-stream`. The runtime keeps that response open while the stream keeps writing.
+
+```ts filename="functions/sse.ts"
+const encoder = new TextEncoder();
+
+export default {
+  fetch(request: Request) {
+    const url = new URL(request.url);
+    if (url.pathname !== '/events') return new Response('ok');
+
+    let count = 0;
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(encoder.encode('data: connected\n\n'));
+        const tick = setInterval(() => {
+          controller.enqueue(encoder.encode(`data: ${++count}\n\n`));
+        }, 1000);
+        // A line starting with `:` is a comment. Use it as a heartbeat so the
+        // stream never goes idle (proxies drop quiet connections quickly).
+        const beat = setInterval(() => controller.enqueue(encoder.encode(': ping\n\n')), 25_000);
+        // Returned from start(); fires when the client disconnects.
+        return () => {
+          clearInterval(tick);
+          clearInterval(beat);
+        };
+      },
+    });
+
+    return new Response(stream, {
+      headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform' },
+    });
+  },
+};
+```
+
+An SSE frame is `data: <payload>\n\n`. Send a `: ping\n\n` comment every 25 to 30 seconds, the SSE equivalent of the WebSocket [heartbeat](#heartbeat), so idle streams stay alive, and set `Cache-Control: no-transform` so proxies don't buffer the stream.
+
+On the client, `EventSource` reads the stream and handles reconnection for you, so there's no backoff logic to write:
+
+```ts
+const source = new EventSource(`${FUNCTION_URL}/events`); // GET only
+source.onmessage = (e) => console.log('update', e.data);
+source.onerror = () => {}; // EventSource auto-reconnects
+```
+
+To push to every client, fan out across isolates exactly as with WebSockets: hold a `Set` of stream controllers and `enqueue` to each when a `NOTIFY` arrives (see [Cross-isolate messaging](#cross-isolate-messaging-with-listennotify)). `EventSource` is GET-only and can't set headers, so authenticate it with a query parameter or cookie, the same as a WebSocket (see [Authentication](#authentication)).
+
+For a complete SSE backend (Hono endpoint, `LISTEN`/`NOTIFY` fan-out, a counter persisted in Postgres, and a client-only SPA), see the [realtime SSE example](https://github.com/neondatabase/examples/tree/main/with-realtime-sse).
+
 ## Authentication
 
-Browsers can't set custom headers on a WebSocket connection, so you can't use `Authorization`. Pass the token as a query parameter and verify it in `upgrade` before calling `wss.handleUpgrade`:
+A function has a public URL, so authenticate the caller before accepting a connection. See [Authentication](/docs/compute/functions/authentication) for the full picture (JWT verification, API keys, CORS).
+
+Browsers can't set custom headers on a WebSocket or an `EventSource`, so you can't use `Authorization`. Pass the token as a query parameter and verify it before accepting the connection. For a WebSocket, verify it in `upgrade` before calling `wss.handleUpgrade`:
 
 ```ts
 async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {

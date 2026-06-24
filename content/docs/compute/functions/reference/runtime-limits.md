@@ -1,17 +1,17 @@
 ---
-title: Runtime limits
+title: Function runtime limits
 subtitle: Hard constraints for Neon Functions.
 summary: >-
   Hard limits for Neon Functions: lifecycle and eviction behavior, 15-minute
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-15T17:47:53.882Z'
+updatedOn: '2026-06-24T14:40:50.063Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Neon Functions run on Node.js 24 in isolated microVMs.
+Neon Functions run on Node.js 24.
 
 ## Lifecycle
 
@@ -52,16 +52,16 @@ app.post('/event', async (c) => {
 export default app;
 ```
 
-Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers, and it's safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API is the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and Cloudflare Workers. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs, it just isn't tracked, so the same code is safe to call in `neonctl dev`.
 
 ## Concurrency
 
-Each isolate is a Node.js process. Requests are interleaved on the event loop, so multiple requests can be in flight on the same isolate concurrently. The platform adds isolates on demand under load: requests that can't be placed on an existing isolate are routed to a newly booted one or queued briefly.
+Each isolate is a Node.js process. Because work runs on the event loop, a single isolate can handle several requests at once, interleaving them. Under load the platform starts more isolates on demand: a request that doesn't fit on an existing isolate goes to a freshly booted one or waits briefly in a queue.
 
 Because each isolate is its own process and handles concurrent requests, module-scope state behaves as follows:
 
 - **Shared within an isolate**: module-scope objects (a `pg` pool, an in-memory cache) are shared across all requests on the same isolate. Create connection pools once at module scope and reuse them.
-- **Not shared across isolates**: each isolate has its own copy of module state. Keep `max` small on `pg` pools (for example, 5) — effective connection count is `max` × the number of live isolates. Module-scope initialization (seeding, migrations) runs once per isolate; make it idempotent or serialize with a Postgres advisory lock.
+- **Not shared across isolates**: every isolate holds its own module state. Keep `max` small on `pg` pools (for example, 5). The effective connection count is `max` × the number of live isolates. Any module-scope setup (seeding, migrations) runs once per isolate, so make it safe to repeat or guard it with a Postgres advisory lock.
 - **Lost on eviction**: in-memory state disappears when an isolate is evicted. Persist anything that matters in Postgres.
 
 ## Slug constraints
