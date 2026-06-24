@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-06-24T17:14:05.124Z'
+updatedOn: '2026-06-24T18:12:13.618Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neonctl`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -20,14 +20,14 @@ In this guide, you will build a simple application that uses `neon.ts` to provis
 
 - Define Neon services in code.
 - Enforce branch-level compute limits for feature branches.
-- Use `@neondatabase/env` to access type-safe environment variables in React components.
+- Use `@neondatabase/env` to access type-safe environment variables.
 - Automatically provision isolated database environments for each branch.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-1. **Node.js**: Version 22 or later.
+1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Neon CLI**: Installed globally (`npm i -g neonctl`) and authenticated (`neonctl auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following:
 
 ## Initialize the project
 
-Create a new Next.js project by running the following commands:
+Create a new Next.js project by running the following command:
 
 ```bash
 npx create-next-app@latest neon-ts-demo --yes
@@ -73,7 +73,7 @@ export default defineConfig({
 
   // Define branch-level policies for your Neon project
   branch: (branch) => {
-    // For the main branch, enforce high-performance defaults
+    // For the main branch use a more generous compute profile
     if (branch.isDefault) {
       return {
         // protected: true,
@@ -121,7 +121,7 @@ export default defineConfig({
 The `neon.ts` file defines the Neon services and branch policies for your project:
 
 - **Services**: Enables Postgres, Neon Auth and the Neon Data API for your project.
-- **Production**: Allows scaling up to 2 Compute Units (CU). You can additionally mark the main branch as `protected` to prevent accidental deletion or force-pushes by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
+- **Production**: Allows scaling up to 2 Compute Units (CU). You can additionally mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
 - **Development branches** (`dev*`): Applies strict resource controls to new branches whose name starts with `dev`: capped at 1 CU, and scheduled for deletion after 7 days to prevent unnecessary costs.
 - **Other new branches**: Gets an even more minimal profile with a 2-day TTL and a fixed 0.25 CU compute ceiling.
 - **Existing branches**: Left untouched. Returning `{}` for branches that already exist avoids overwriting settings on branches already in use. This is important: `neonctl checkout` only applies policy when _creating_ a new branch, never when checking out an existing one.
@@ -290,7 +290,7 @@ The keys autocomplete from your `neon.ts` config, so you can only select variabl
 
 ## The branch-first dev loop
 
-The **branch-first dev loop** is where `neon.ts` becomes most useful. Because the configuration is checked into your Git repository, your infrastructure automatically adapts to your git branches.
+The **branch-first dev loop** is where `neon.ts` becomes most useful.
 
 Imagine you are tasked with building a new feature called "User Profiles". You would initialize a new git branch for the feature:
 
@@ -304,15 +304,28 @@ Then, run the Neon CLI to create a new isolated database branch for this feature
 neonctl checkout dev-user-profiles
 ```
 
-You can also run `neonctl checkout` without a name to get an interactive branch picker with a create option.
+> You can also run `neonctl checkout` without a name to get an interactive branch picker with a create option.
 
 Neon will automatically provision a new isolated database branch for your feature. The following happens automatically:
 
 1. **Database branch creation:** Neon creates an isolated clone of your database using Copy-on-Write.
 2. **Apply Policy:** Because of your `neon.ts` file, `neonctl` recognizes this is a new branch. Since the branch name starts with `dev`, it automatically applies the `7d` TTL and restricts compute limits to `0.25 - 1 CU`.
-3. **Sync Environment:** `neonctl` automatically updates your `.env.local` file with the connection string and Auth URLs for this _specific_ branch.
+3. **Sync environment:** `neonctl` automatically updates your `.env.local` file with the connection string and Auth URLs for this _specific_ branch.
 
-You can immediately start coding. Your app is now talking to your isolated preview database, detached from production, and configured with the correct Auth and Data API endpoints, all without touching a single `.env` file or manually copying connection strings from the Neon Console.
+Now you have a completely isolated environment for your feature: a git branch, a database branch, and the correct environment variables. You can immediately start coding. Your app is now talking to your isolated database branch, and any changes you make will not affect the main branch or other developers.
+
+When you are done with the feature development, you can merge your git branch back into `main` and apply the schema changes to the main database branch. After merging, you can delete the feature branch and its associated Neon database branch:
+
+```bash
+git checkout main
+git merge dev-user-profiles
+
+# Apply schema changes to the main database branch
+# npx drizzle-kit migrate
+
+git branch -d dev-user-profiles
+neonctl delete-branch dev-user-profiles
+```
 
 To confirm the state of your current branch at any time you can run `neonctl config status` (similar to `git status`), which shows the current branch, its `expiresAt` date, and the services provisioned for it.
 
@@ -320,9 +333,9 @@ To confirm the state of your current branch at any time you can run `neonctl con
 
 ## Preview services
 
-Neon is expanding into a broader serverless platform. If you are part of the platform private preview, you can use `neon.ts` to provision additional primitives, such as long-running Node.js **Functions**, S3-compatible **Storage**, and an **AI Gateway**.
+Neon is expanding into a broader serverless platform. If you are part of the platform private preview, you can use `neon.ts` to provision additional primitives, such as running Node.js **Functions**, S3-compatible **Storage**, and an **AI Gateway**.
 
-You declare these under a `preview` block in your `neon.ts`:
+You can declare these under a `preview` block in your `neon.ts`:
 
 ```typescript
 preview: {
