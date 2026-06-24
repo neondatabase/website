@@ -19,7 +19,7 @@ What makes Neon Functions different from lambda-style serverless?
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+> During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
 
 ## Request/response, not background jobs
 

@@ -329,6 +329,53 @@
       @apply before:hidden after:hidden;
     }
 
+    a:has(> code) {
+      > code {
+        @apply relative underline decoration-black-pure/40 decoration-dashed decoration-1 underline-offset-2 transition-colors duration-200;
+      }
+
+      &:hover > code {
+        @apply bg-gray-new-94;
+      }
+
+      .dark & > code {
+        @apply decoration-white/40;
+      }
+
+      .dark &:hover > code {
+        @apply bg-gray-new-10;
+      }
+
+      > code::after {
+        content: '';
+        display: inline-block;
+        @apply ml-1 size-3.5 shrink-0 bg-gray-new-85 transition-colors duration-200;
+      }
+
+      .dark & > code::after {
+        @apply bg-gray-new-15;
+      }
+
+      > code::before {
+        content: '';
+        display: inline-block;
+        mask: url('/images/external-arrow.svg') center / contain no-repeat;
+        @apply pointer-events-none absolute top-1/2 right-1 size-3.5 -translate-y-1/2 bg-gray-new-30 transition-colors duration-200;
+      }
+
+      .dark & > code::before {
+        @apply bg-gray-new-70;
+      }
+
+      &:hover > code::before {
+        @apply bg-black-new;
+      }
+
+      .dark &:hover > code::before {
+        background-color: white;
+      }
+    }
+
     & h2 code,
     & h3 code,
     & h4 code {
