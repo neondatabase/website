@@ -1,11 +1,12 @@
 ---
-title: Deploy and manage functions
+title: Deploy and manage Neon Functions
 subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
   Reference for deploying Neon Functions with neonctl deploy, neonctl functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -105,17 +106,17 @@ curl -X POST \
   -F 'environment={"MY_SECRET":"value"}'
 ```
 
-| Field         | Type   | Required          | Description                                                |
-| ------------- | ------ | ----------------- | ---------------------------------------------------------- |
-| `zip`         | binary | First deploy only | ZIP of the bundled function. Omit to reuse existing bundle |
-| `runtime`     | string | No                | `nodejs24` is the only valid value                         |
-| `environment` | string | No                | JSON-encoded string-to-string map                          |
+| Field         | Type   | Required          | Description                                                                                           |
+| ------------- | ------ | ----------------- | ----------------------------------------------------------------------------------------------------- |
+| `zip`         | binary | When code changes | ZIP of the bundled function. Omit only to update `environment` or `runtime` on an existing deployment |
+| `runtime`     | string | No                | `nodejs24` is the only valid value                                                                    |
+| `environment` | string | No                | JSON-encoded string-to-string map                                                                     |
 
 The API returns immediately. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes.
 
 ## Slugs
 
-The slug is the permanent identifier assigned at first deploy: either the key in `neon.ts` or the positional argument to `neonctl functions deploy`. It becomes part of the invocation URL and can't be changed. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
+The slug is assigned at first deploy: either the key in `neon.ts` or the positional argument to `neonctl functions deploy`. It becomes part of the invocation URL and can't be changed afterward. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
 
 ## Deployment states
 
@@ -140,7 +141,7 @@ neonctl functions get hello
 </TabItem>
 <TabItem>
 
-```bash shouldWrap
+```text shouldWrap
 GET /projects/{project_id}/branches/{branch_id}/functions/{slug}
 ```
 
@@ -165,7 +166,7 @@ neonctl functions list
 </TabItem>
 <TabItem>
 
-```bash shouldWrap
+```text shouldWrap
 GET /projects/{project_id}/branches/{branch_id}/functions
 ```
 
@@ -184,7 +185,7 @@ neonctl functions delete hello
 </TabItem>
 <TabItem>
 
-```bash shouldWrap
+```text shouldWrap
 DELETE /projects/{project_id}/branches/{branch_id}/functions/{slug}
 ```
 

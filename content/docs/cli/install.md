@@ -45,7 +45,7 @@ bun install -g neonctl
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-macos-x64 -o neonctl
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-macos-x64 -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -77,7 +77,7 @@ bun install -g neonctl
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL -O https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-win-x64.exe
+curl -sL -O https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-win-x64.exe
 ```
 
 Run the CLI from the download directory:
@@ -109,13 +109,13 @@ Download the x64 or ARM64 binary, depending on your processor type. No installat
 x64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o neonctl
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-x64 -o neonctl
 ```
 
 ARM64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-arm64 -o neonctl
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-arm64 -o neonctl
 ```
 
 Run the CLI from the download directory:
@@ -143,7 +143,7 @@ bunx neonctl <command>
 
 ### Upgrade
 
-Upgrade using the method that matches how you installed the CLI. To check for the latest version, see the **Releases** page on the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl). To check your installed version, run:
+Upgrade using the method that matches how you installed the CLI. To check for the latest version, see the [Neon CLI **Releases** page](https://github.com/neondatabase/neon-pkgs/releases). To check your installed version, run:
 
 ```bash
 neonctl --version
@@ -169,7 +169,7 @@ brew upgrade neonctl
 
 <TabItem>
 
-To upgrade a [binary](https://github.com/neondatabase/neonctl/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
+To upgrade a [binary](https://github.com/neondatabase/neon-pkgs/releases) version, download the `latest` binary as described in the install instructions above, and replace your old binary with the new one.
 
 </TabItem>
 
@@ -203,12 +203,12 @@ Homebrew automatically fetches the latest version when running the `install` or 
 
 <TabItem>
 
-If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/neondatabase/neonctl/releases) using `curl` or `wget` in your workflow:
+If you're downloading a binary, reference the latest release from the [Releases page](https://github.com/neondatabase/neon-pkgs/releases) using `curl` or `wget` in your workflow:
 
 ```yaml
 - name: Install Neon CLI
   run: |
-    curl -L https://github.com/neondatabase/neonctl/releases/latest/download/neonctl-linux-x64 -o /usr/local/bin/neonctl
+    curl -L https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-x64 -o /usr/local/bin/neonctl
     chmod +x /usr/local/bin/neonctl
 ```
 
