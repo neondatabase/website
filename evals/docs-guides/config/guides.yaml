@@ -1,0 +1,15 @@
+guides:
+  express:
+    doc_url: "https://neon.com/docs/guides/express.md"
+  prisma:
+    doc_url: "https://neon.com/docs/guides/prisma.md"
+  django:
+    doc_url: "https://neon.com/docs/guides/django.md"
+  rust:
+    doc_url: "https://neon.com/docs/guides/rust.md"
+  elixir:
+    doc_url: "https://neon.com/docs/guides/elixir.md"
+  go:
+    doc_url: "https://neon.com/docs/guides/go.md"
+  java:
+    doc_url: "https://neon.com/docs/guides/java.md"
