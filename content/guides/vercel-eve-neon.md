@@ -1,10 +1,10 @@
 ---
-title: "Running Eve agents and evals on disposable Neon branches"
+title: "Running Vercel Eve agents and evals on disposable Neon branches"
 subtitle: "Learn how to build a Slack-based database assistant with Eve that provisions an isolated, disposable Neon database branch for every session, safe for migrations, exploration, and evals."
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-06-24T07:31:56.813Z'
+updatedOn: '2026-06-25T09:43:55.873Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
