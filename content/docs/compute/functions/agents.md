@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-06-25T15:31:37.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -109,7 +109,16 @@ Call the function directly from the browser, not through your web app's backend.
 
 ## Persist what matters
 
-Module memory is wiped when an isolate is evicted, and several isolates can run in parallel, so keep anything that must last in Postgres: conversation history, run metadata, results. For generated assets like images, declare a bucket in `neon.ts` (`buckets: { images: {} }`) and write them to [Object Storage](/docs/storage/overview), which branches with your database. The storage credentials are injected the same way the gateway's are.
+Module memory is wiped when an isolate is evicted, and several isolates can run in parallel, so keep anything that must last in Postgres: conversation history, run metadata, results. For generated assets like images, declare a bucket in `neon.ts` (`buckets: { images: {} }`) and write them to [Object Storage](/docs/storage/objects), which branches with your database. When a bucket is declared, `neon deploy` injects `AWS_*` credentials automatically. For example, using the [Files SDK](https://files-sdk.dev):
+
+```typescript
+import { Files } from 'files-sdk';
+import { neon as neonStorage } from 'files-sdk/neon';
+
+const files = new Files({ adapter: neonStorage({ bucket: 'images' }) });
+await files.upload('outputs/result.png', imageBuffer, { contentType: 'image/png' });
+const url = await files.url('outputs/result.png', { expiresIn: 3600 });
+```
 
 ## Examples
 

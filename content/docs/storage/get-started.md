@@ -3,10 +3,10 @@ title: Get started with Neon Storage
 subtitle: Upload your first file in minutes
 summary: >-
   This quickstart walks you through creating a storage credential, configuring
-  your S3 client, creating a bucket, and uploading and downloading your first
-  file. Any AWS S3-compatible SDK works. Just point it at your branch endpoint.
+  a client, creating a bucket, and uploading and downloading your first file.
+  Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:45:19.947Z'
+updatedOn: '2026-06-25T15:31:37.545Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -34,7 +34,7 @@ export default defineConfig({
 neonctl deploy          # provisions buckets and writes AWS_* vars to .env.local
 ```
 
-After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`, and `NEON_STORAGE_FORCE_PATH_STYLE`. Skip to [Configure your S3 client](#configure-your-s3-client) below.
+After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`, and `NEON_STORAGE_FORCE_PATH_STYLE`. Skip to [Configure your client](#configure-your-client) below.
 
 ---
 
@@ -101,18 +101,15 @@ A `404` response means Storage is not yet enabled for that branch. Make sure you
 
 ## Install dependencies
 
-<CodeTabs labels={["npm", "yarn", "pnpm", "pip"]}>
+<CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>
+
+```bash shouldWrap
+# files-sdk uses @aws-sdk/* packages as peer dependencies; install them alongside it
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post dotenv
+```
 
 ```bash
 npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner dotenv
-```
-
-```bash
-yarn add @aws-sdk/client-s3 @aws-sdk/s3-request-presigner dotenv
-```
-
-```bash
-pnpm add @aws-sdk/client-s3 @aws-sdk/s3-request-presigner dotenv
 ```
 
 ```bash
@@ -121,9 +118,18 @@ pip install boto3 python-dotenv
 
 </CodeTabs>
 
-## Configure your S3 client
+## Configure your client
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+The `neon` adapter is a subpath export (`files-sdk/neon`) that reads `AWS_*` environment variables and configures the Files SDK for Neon's S3-compatible endpoint automatically.
+
+<CodeTabs labels={["Files SDK", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { Files } from 'files-sdk';
+import { neon } from 'files-sdk/neon';
+
+export const files = new Files({ adapter: neon({ bucket: 'my-bucket' }) });
+```
 
 ```typescript shouldWrap
 import { S3Client } from '@aws-sdk/client-s3';
@@ -164,18 +170,30 @@ aws configure set endpoint_url "$AWS_ENDPOINT_URL_S3"
 
 </CodeTabs>
 
-## Create a bucket and upload a file
+<Admonition type="note">
+If you're using [Neon Functions](/docs/compute/functions/overview), the `AWS_*` credentials are injected automatically when a bucket is declared in `neon.ts`. No `.env` setup is needed inside a function.
+</Admonition>
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+## Upload a file
+
+You need an existing bucket before uploading. [Create one](/docs/storage/buckets#create-a-bucket), or declare it in `neon.ts` and run `neonctl deploy`.
+
+<CodeTabs labels={["Files SDK", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
-import { CreateBucketCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { files } from './client';
+
+await files.upload('hello.txt', 'Hello from Neon Storage!', {
+  contentType: 'text/plain',
+});
+
+console.log('Uploaded!');
+```
+
+```typescript shouldWrap
+import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { client } from './client';
 
-// Create a bucket
-await client.send(new CreateBucketCommand({ Bucket: 'my-bucket' }));
-
-// Upload a file
 await client.send(new PutObjectCommand({
   Bucket: 'my-bucket',
   Key: 'hello.txt',
@@ -187,10 +205,6 @@ console.log('Uploaded!');
 ```
 
 ```python shouldWrap
-# Create a bucket
-client.create_bucket(Bucket='my-bucket')
-
-# Upload a file
 client.put_object(
     Bucket='my-bucket',
     Key='hello.txt',
@@ -202,12 +216,6 @@ print('Uploaded!')
 ```
 
 ```bash shouldWrap
-# Create a bucket
-aws s3api create-bucket \
-  --bucket my-bucket \
-  --endpoint-url "$AWS_ENDPOINT_URL_S3"
-
-# Upload a file
 aws s3 cp hello.txt s3://my-bucket/hello.txt \
   --endpoint-url "$AWS_ENDPOINT_URL_S3"
 ```
@@ -216,7 +224,15 @@ aws s3 cp hello.txt s3://my-bucket/hello.txt \
 
 ## Download a file
 
-<CodeTabs labels={["TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+const result = await files.download('hello.txt');
+const text = await result.text();
+console.log(text); // Hello from Neon Storage!
+```
 
 ```typescript shouldWrap
 import { GetObjectCommand } from '@aws-sdk/client-s3';
@@ -250,5 +266,6 @@ aws s3 cp s3://my-bucket/hello.txt ./downloaded.txt \
 - [Buckets](/docs/storage/buckets): access levels, bucket branching, and the Console UI
 - [Objects](/docs/storage/objects): list, delete, multipart uploads, and presigned URLs
 - [Authentication](/docs/storage/authentication): credential scopes, branch binding, and rotation
+- [with-files-sdk](https://github.com/neondatabase/examples/tree/main/with-files-sdk): working example showing how to upload files to a branch-scoped bucket using the Files SDK and its `neon` adapter
 
 <NeedHelp/>
