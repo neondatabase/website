@@ -7,21 +7,85 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-17T09:53:50.753Z'
+updatedOn: '2026-06-25T13:27:16.439Z'
 ---
 
-<EarlyAccessProps feature_name="Lakebase Search" />
+<FeatureBetaProps feature_name="Lakebase Search" />
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
 
 ## Prerequisites
 
-- A Neon project with Lakebase Search enabled. See [Lakebase Search](/docs/ai/lakebase-search) to request access.
+- A Neon project. You enable Lakebase Search on it in the first step below.
 - Postgres 16 or later (Lakebase Search requires PG16+)
 - Node.js 18 or later
 - An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings
 
 <Steps>
+
+## Enable the preload libraries
+
+`lakebase_vector` and `lakebase_text` rely on preloaded libraries that aren't enabled by default. Check your project's current state in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
+
+```sql
+SHOW shared_preload_libraries;
+```
+
+If the list already includes `lakebase_vector` and `lakebase_text`, skip to [Install the extensions](#install-the-extensions). If not, you'll add them with the Neon API, using a [Neon API key](/docs/manage/api-keys) and your project ID.
+
+First, confirm the libraries are available to your project:
+
+```bash
+export NEON_API_KEY=...
+export PROJECT_ID=...
+
+curl -sS \
+  -H "authorization: Bearer $NEON_API_KEY" \
+  -H "accept: application/json" \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries" \
+| jq '.libraries[] | select(.library_name | test("lakebase"))'
+```
+
+If that returns the two libraries, enable them while keeping your project's existing preloads:
+
+```bash
+AVAILABLE="$(curl -sS \
+  -H "authorization: Bearer $NEON_API_KEY" \
+  -H "accept: application/json" \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries")"
+
+BODY="$(jq -n --argjson available "$AVAILABLE" '
+  { project: { settings: { preload_libraries: { enabled_libraries: (
+    $available.libraries
+    | map(select(.is_default == true or (.library_name | test("lakebase"; "i"))) | .library_name)
+    | unique
+  ) } } } }
+')"
+
+curl -sS -X PATCH \
+  -H "authorization: Bearer $NEON_API_KEY" \
+  -H "accept: application/json" \
+  -H "content-type: application/json" \
+  --data "$BODY" \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID"
+```
+
+<Admonition type="warning">
+This call replaces the `enabled_libraries` list rather than appending to it. The command above includes your existing defaults so they aren't dropped. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
+</Admonition>
+
+## Restart the compute
+
+The new `shared_preload_libraries` setting applies after the compute restarts, which drops current connections. Restart it with your `endpoint_id`, or let an idle compute pick up the change when it next wakes:
+
+```bash
+export ENDPOINT_ID=...
+
+curl -sS -X POST \
+  -H "authorization: Bearer $NEON_API_KEY" \
+  -H "accept: application/json" \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID/restart"
+```
 
 ## Enable the extensions
 
@@ -33,6 +97,10 @@ CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
 ```
 
 `CASCADE` automatically installs `pgvector` if it is not already present, since `lakebase_vector` depends on it.
+
+<Admonition type="note">
+If you get `ERROR: lakebase_vector must be loaded via shared_preload_libraries`, the preload step hasn't taken effect on the running compute yet. Confirm the libraries are enabled (the step above) and that the compute has restarted or woken since, then try again.
+</Admonition>
 
 ## Create a table
 
@@ -170,6 +238,49 @@ Run it:
 ```bash
 npx tsx search.ts
 ```
+
+## Combine results with hybrid search
+
+Vector and keyword search each catch matches the other misses, so most real-world search combines them. There's no built-in hybrid function; you write one query that runs both searches and merges their results. The technique here is Reciprocal Rank Fusion (RRF): take the top candidates from each search, rank each list, then score every row by `1 / (60 + rank)` summed across both lists, so rows that rank well in either or both come out on top.
+
+Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `textSearch`. It reuses the `documents` table and indexes from above:
+
+```typescript filename="search.ts"
+async function hybridSearch(query: string, limit = 5) {
+  const { data } = await openai.embeddings.create({
+    model: 'text-embedding-3-small',
+    input: query,
+  });
+  const queryVector = JSON.stringify(data[0].embedding);
+
+  return sql`
+    WITH vector_ranked AS (
+      SELECT id, RANK() OVER (ORDER BY dist) AS rank
+      FROM (
+        SELECT id, embedding <=> ${queryVector}::vector AS dist
+        FROM documents ORDER BY dist LIMIT 40
+      ) v
+    ),
+    keyword_ranked AS (
+      SELECT id, RANK() OVER (ORDER BY score) AS rank
+      FROM (
+        SELECT id, body_tsv <@> to_bm25query(to_tsvector('english', ${query}), 'documents_bm25') AS score
+        FROM documents ORDER BY score LIMIT 40
+      ) k
+    )
+    SELECT d.id, d.title,
+      COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS rrf_score
+    FROM documents d
+    LEFT JOIN vector_ranked v ON d.id = v.id
+    LEFT JOIN keyword_ranked k ON d.id = k.id
+    WHERE v.id IS NOT NULL OR k.id IS NOT NULL
+    ORDER BY rrf_score DESC, d.id
+    LIMIT ${limit}
+  `;
+}
+```
+
+Each search contributes its top 40 candidates. `RANK()` gives tied scores the same rank, the constant `60` keeps low-ranked results from dominating, and `d.id` breaks ties for stable ordering. Tune the per-search `LIMIT` and the RRF constant for your data; weighted scoring is another common approach.
 
 </Steps>
 

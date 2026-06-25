@@ -4,10 +4,10 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-19T10:53:44.178Z'
+updatedOn: '2026-06-25T13:27:16.439Z'
 ---
 
-<RequestForm type="lakebase-search" />
+<FeatureBetaProps feature_name="Lakebase Search" />
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
 

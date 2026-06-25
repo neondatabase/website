@@ -9,14 +9,14 @@ summary: >-
   index, configure build_mode, tune search with the lakebase_ann.probes and
   lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-06-16T18:44:07.041Z'
+updatedOn: '2026-06-25T13:27:16.439Z'
 ---
 
-<EarlyAccessProps feature_name="lakebase_vector" />
+<FeatureBetaProps feature_name="Lakebase Search" />
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
 
-Lakebase Search is in private preview. To request access or learn about its architecture advantages, see [Lakebase Search](/docs/ai/lakebase-search).
+See [Lakebase Search](/docs/ai/lakebase-search) for the architecture and the companion `lakebase_text` extension.
 
 ## Why lakebase_vector?
 
@@ -117,6 +117,14 @@ REINDEX INDEX CONCURRENTLY items_embedding_ann;
 | `rabitq4_cosine_ops` | `<=>(rabitq4, rabitq4)` | `<<=>>(rabitq4, rabitq4)` |
 
 The `rabitq8` and `rabitq4` types are quantization types defined by `lakebase_vector`. They offer reduced memory footprint at the cost of some precision.
+
+Pick the operator class that matches how your embeddings were trained, and use the same metric for the index and your queries:
+
+- **Cosine** (`vector_cosine_ops`, `<=>`) suits most text embeddings and is the common default.
+- **L2 / Euclidean** (`vector_l2_ops`, `<->`) fits cases where absolute distance matters and vectors aren't normalized.
+- **Inner product** (`vector_ip_ops`, `<#>`) is for vectors pre-normalized to unit length; for unit vectors it matches cosine and is typically faster.
+
+The `halfvec`, `rabitq8`, and `rabitq4` families provide the same three metrics with smaller, quantized storage.
 
 ### Index options
 
