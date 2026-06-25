@@ -2,22 +2,31 @@
 title: Objects
 subtitle: Upload, download, list, and delete files
 summary: >-
-  Work with objects in Neon Storage using any S3-compatible SDK or the AWS CLI.
-  Supports single-part and multipart uploads, range requests, batch deletes,
-  and presigned URLs for browser-side access.
+  Work with objects in Neon Storage using the Files SDK, any S3-compatible SDK,
+  or the AWS CLI. Supports single-part and multipart uploads, range requests,
+  batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:35:44.700Z'
+updatedOn: '2026-06-25T15:31:37.545Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
 
-The examples below use an S3 client configured with your branch endpoint and credentials. See [Get started](/docs/storage/get-started) to set that up, or [Authentication](/docs/storage/authentication) if you need to create a credential.
+The examples below show both the [Files SDK](https://files-sdk.dev) and the AWS S3 client. See [Get started](/docs/storage/get-started) to configure either client, or [Authentication](/docs/storage/authentication) if you need to create a credential.
 
 ## Upload
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+await files.upload('images/photo.jpg', fileBuffer, {
+  contentType: 'image/jpeg',
+  metadata: { 'uploaded-by': 'user-123' },
+});
+```
 
 ```bash
 neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
@@ -104,7 +113,14 @@ client.upload_file(
 
 ## Download
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+const result = await files.download('images/photo.jpg');
+const buffer = await result.arrayBuffer();
+```
 
 ```bash
 # Downloads to ./photo.jpg by default; use --file to specify a different path
@@ -151,9 +167,18 @@ const response = await client.send(new GetObjectCommand({
 
 ## List objects
 
-Use a prefix and delimiter to simulate a folder structure.
+Use a prefix to filter results. The Files SDK returns a flat array of items; the S3 client supports a delimiter to simulate folder structure.
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+const { items } = await files.list({ prefix: 'images/' });
+for (const item of items) {
+  console.log(item.key, item.size);
+}
+```
 
 ```bash
 # Folder-collapsed view by default (same as aws s3 ls)
@@ -224,7 +249,13 @@ do {
 
 **Single object:**
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+await files.delete('images/photo.jpg');
+```
 
 ```bash
 neonctl bucket object delete my-bucket/images/photo.jpg
@@ -252,7 +283,13 @@ aws s3 rm s3://my-bucket/images/photo.jpg \
 
 **Batch delete (up to 1,000 objects per request):**
 
-<CodeTabs labels={["TypeScript", "Python"]}>
+<CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+await files.delete(['images/photo1.jpg', 'images/photo2.jpg']);
+```
 
 ```typescript shouldWrap
 import { DeleteObjectsCommand } from '@aws-sdk/client-s3';
@@ -305,7 +342,14 @@ Generate a time-limited URL that allows a browser or unauthenticated client to u
 
 **Presigned GET (download):**
 
-<CodeTabs labels={["TypeScript", "Python"]}>
+<CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+const url = await files.url('report.pdf', { expiresIn: 3600 }); // 1 hour
+console.log(url); // share this URL — no credentials needed
+```
 
 ```typescript shouldWrap
 import { GetObjectCommand } from '@aws-sdk/client-s3';
@@ -334,7 +378,20 @@ print(url)
 
 **Presigned PUT (upload from browser):**
 
-<CodeTabs labels={["TypeScript", "Python"]}>
+<CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>
+
+```typescript shouldWrap
+import { files } from './client';
+
+// Returns { url, method, headers } — pass all three to fetch on the client side
+const { url, method, headers } = await files.signedUploadUrl('uploads/user-avatar.png', {
+  contentType: 'image/png',
+  expiresIn: 300, // 5 minutes
+});
+
+// On the client side:
+// await fetch(url, { method, headers, body: file });
+```
 
 ```typescript shouldWrap
 import { PutObjectCommand } from '@aws-sdk/client-s3';
