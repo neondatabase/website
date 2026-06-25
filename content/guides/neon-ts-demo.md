@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-06-24T18:18:14.891Z'
+updatedOn: '2026-06-25T04:44:21.969Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neonctl`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -272,6 +272,10 @@ npm run dev
 ```
 
 Visit `http://localhost:3000`. You will see your actual Neon configuration loaded. If you were to remove `auth: true` from `neon.ts`, your Next.js build would instantly fail, alerting you that `env.auth.jwksUrl` no longer exists.
+
+<Admonition type="note" title="Demo purposes only">
+The example above renders connection strings directly on the frontend for demonstration. In a real application, never expose database URLs or credentials to the client. Use `env.postgres.databaseUrl` in server-rendered pages, API routes, or server actions, and return only the query results to the frontend.
+</Admonition>
 
 ### Validating a subset of variables
 
