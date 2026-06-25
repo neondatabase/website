@@ -21,9 +21,9 @@ Store the key securely. If you lose it, you'll need to create a new one.
 
 | Key Type | Scope | Best For |
 |----------|-------|----------|
-| **Personal API Key** | All projects you own or have access to | Getting started, personal scripts |
+| **Personal API Key** | All organization projects where the user is a member | Personal development, scripts |
 | **Organization API Key** | All projects in an organization | Team automation, CI/CD |
-| **Project-scoped API Key** | Single project only | Limited-access integrations |
+| **Project-scoped API Key** | Single project only | Limited access integrations |
 
 For getting started, a **Personal API Key** is what you need.
 

@@ -420,6 +420,7 @@
       "slug": "auth-legacy",
       "specName": "auth-legacy",
       "display": "Legacy Auth",
+      "description": null,
       "groups": [
         {
           "label": "Integrations",
