@@ -8,6 +8,8 @@ redirectFrom:
   - /docs/reference/api/getting-started
 ---
 
+<CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API" description="Copy into your AI assistant to get an API key and make your first API call."/>
+
 The Neon API uses API keys and Bearer authentication. This page shows the shortest REST API path: create a key, set it as an environment variable, and call the `/projects` endpoint.
 
 ## Get an API key

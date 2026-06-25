@@ -37,9 +37,7 @@ First, set your API key as an environment variable:
 export NEON_API_KEY="neon_api_key_your_key_here"
 ```
 
-Then choose your preferred method:
-
-### Option A: Using curl
+Then make your first call with curl:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
@@ -47,42 +45,9 @@ curl 'https://console.neon.tech/api/v2/projects' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-### Option B: Using the TypeScript SDK
-
-```bash
-npm install @neondatabase/api-client
-```
-
-```typescript
-import { createApiClient } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
-
-const response = await apiClient.listProjects({});
-console.log(response.data.projects);
-```
-
-### Option C: Using the Python SDK
-
-```bash
-pip install neon-api
-```
-
-```python
-import os
-from neon_api import NeonAPI
-
-neon = NeonAPI(api_key=os.environ["NEON_API_KEY"])
-
-projects = neon.projects()
-print(projects)
-```
-
 ### Expected Result
 
-All three options return your projects:
+The request returns your projects:
 
 ```json
 {
@@ -101,15 +66,14 @@ All three options return your projects:
 
 - `401 Unauthorized` — Check that your API key is correct
 - `403 Forbidden` — Your API key doesn't have access to the requested resource
-- `Connection error` (SDK) — Verify the package is installed and your API key environment variable is set
+- `Connection error` — Verify your API key environment variable is set
 
 ---
 
 ## Key Resources
 
-- **Interactive API Reference:** https://api-docs.neon.tech/reference/getting-started-with-neon-api (try endpoints directly)
-- **Full API Documentation:** https://neon.com/docs/reference/api
-- **SDKs:** https://neon.com/docs/reference/sdk
+- **API Reference:** https://neon.com/docs/reference/api
+- **OpenAPI Spec:** https://neon.com/api_spec/release/v2.json
 
 ---
 
