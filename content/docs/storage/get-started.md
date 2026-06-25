@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-25T15:31:37.545Z'
+updatedOn: '2026-06-25T15:54:38.441Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -34,7 +34,7 @@ export default defineConfig({
 neonctl deploy          # provisions buckets and writes AWS_* vars to .env.local
 ```
 
-After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`, and `NEON_STORAGE_FORCE_PATH_STYLE`. Skip to [Configure your client](#configure-your-client) below.
+After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`. Skip to [Configure your client](#configure-your-client) below.
 
 ---
 

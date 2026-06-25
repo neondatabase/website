@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-06-25T15:31:37.545Z'
+updatedOn: '2026-06-25T15:54:38.441Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -113,9 +113,9 @@ Module memory is wiped when an isolate is evicted, and several isolates can run 
 
 ```typescript
 import { Files } from 'files-sdk';
-import { neon as neonStorage } from 'files-sdk/neon';
+import { neon } from 'files-sdk/neon';
 
-const files = new Files({ adapter: neonStorage({ bucket: 'images' }) });
+const files = new Files({ adapter: neon({ bucket: 'images' }) });
 await files.upload('outputs/result.png', imageBuffer, { contentType: 'image/png' });
 const url = await files.url('outputs/result.png', { expiresIn: 3600 });
 ```
