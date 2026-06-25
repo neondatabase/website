@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-25T13:27:16.439Z'
+updatedOn: '2026-06-25T14:48:42.027Z'
 ---
 
 <FeatureBetaProps feature_name="Lakebase Search" />
@@ -46,7 +46,7 @@ curl -sS \
 | jq '.libraries[] | select(.library_name | test("lakebase"))'
 ```
 
-If that returns the two libraries, enable them while keeping your project's existing preloads:
+If that returns the two libraries, enable them. The Neon API replaces the preload list rather than appending to it, so this command reads your project's current libraries (plus the defaults), then sends them back with the Lakebase Search libraries added, leaving your existing preloads in place:
 
 ```bash
 AVAILABLE="$(curl -sS \
@@ -54,10 +54,16 @@ AVAILABLE="$(curl -sS \
   -H "accept: application/json" \
   "https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries")"
 
-BODY="$(jq -n --argjson available "$AVAILABLE" '
+CURRENT="$(curl -sS \
+  -H "authorization: Bearer $NEON_API_KEY" \
+  -H "accept: application/json" \
+  "https://console.neon.tech/api/v2/projects/$PROJECT_ID")"
+
+BODY="$(jq -n --argjson avail "$AVAILABLE" --argjson cur "$CURRENT" '
   { project: { settings: { preload_libraries: { enabled_libraries: (
-    $available.libraries
-    | map(select(.is_default == true or (.library_name | test("lakebase"; "i"))) | .library_name)
+    [$avail.libraries[] | select(.is_default == true) | .library_name]
+    + ($cur.project.settings.preload_libraries.enabled_libraries // [])
+    + ["lakebase_vector", "lakebase_text"]
     | unique
   ) } } } }
 ')"
@@ -70,9 +76,7 @@ curl -sS -X PATCH \
   "https://console.neon.tech/api/v2/projects/$PROJECT_ID"
 ```
 
-<Admonition type="warning">
-This call replaces the `enabled_libraries` list rather than appending to it. The command above includes your existing defaults so they aren't dropped. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
-</Admonition>
+For more on how Neon handles preloaded libraries, see [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
 
 ## Restart the compute
 
