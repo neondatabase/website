@@ -425,6 +425,13 @@ For more details, including workflow examples and troubleshooting, see [Get star
 3. Click **Connect** on the Neon server and paste your API key when prompted.
 4. Run a task invoking the Neon MCP server to verify the connection.
 
+## Gamut
+
+1. In your [Gamut](https://www.gamut.so/mcp/developer-tools/neon) agent, go to **Connections** and click **Add Connection**.
+2. Search for **Neon** and click **+** to add it.
+3. When the OAuth window opens, sign in to Neon and authorize the connection.
+4. Ask your agent to query or manage your Neon database to verify the connection.
+
 ## Other MCP clients
 
 Prefer **`npx neonctl@latest init`** for the full flow (see [Quick setup](#quick-setup-neonctl-init) above). If you **only** want MCP config lines, or you are re-running wiring for one tool, use **add-mcp**:
