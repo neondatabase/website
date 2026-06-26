@@ -10,10 +10,12 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-25T13:27:16.439Z'
+updatedOn: '2026-06-26T12:58:36.951Z'
 ---
 
-<FeatureBetaProps feature_name="Lakebase Search" />
+<Admonition type="note" title="Beta">
+Lakebase Search is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+</Admonition>
 
 The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to PostgreSQL's built-in full-text search: standard `tsvector` type and query operators work unchanged; only the index type changes.
 
