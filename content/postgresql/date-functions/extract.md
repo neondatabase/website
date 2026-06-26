@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-extract/
 ogImage: ''
-updatedOn: '2026-06-26T10:18:57.624Z'
+updatedOn: '2026-06-26T13:04:31.464Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE_PART() Function
