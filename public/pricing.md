@@ -104,4 +104,3 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 - Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
 - Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
 - More plan details: https://neon.com/docs/introduction/plans.md
-
