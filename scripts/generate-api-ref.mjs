@@ -665,7 +665,7 @@ function generateApiMd(tagOps) {
     const tagUrl = `${NEON_BASE}/docs/reference/api/${tag}.md`;
     lines.push(`## ${displayName}`);
     lines.push('');
-    lines.push(`Full reference: [${tag}.md](${tagUrl})`);
+    lines.push(`[All ${tag} endpoints](${tagUrl})`);
     lines.push('');
     for (const op of tagOps[tag]) {
       lines.push(`- [${op.summary}](${opMdUrl(op)}) \`${op.method} ${op.path}\``);
