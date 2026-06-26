@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:45:19.947Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -124,7 +124,7 @@ export AWS_REGION=us-east-2
 
 ## Pull credentials with neonctl
 
-For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically — no manual copy-paste from the API response:
+For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically. No manual copy-paste from the API response:
 
 ```bash
 neonctl env pull --file .env.local
@@ -152,14 +152,12 @@ The S3 data plane enforces scope on every request. A credential without a storag
 
 When your code runs inside Neon Functions, Neon injects storage credentials automatically. You don't need to create a credential:
 
-| Variable                        | Value                                                     |
-| ------------------------------- | --------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`             | S3 Access Key ID                                          |
-| `AWS_SECRET_ACCESS_KEY`         | S3 Secret Access Key                                      |
-| `AWS_ENDPOINT_URL_S3`           | Branch S3 endpoint URL                                    |
-| `AWS_REGION`                    | Storage region (e.g. `us-east-2`)                         |
-| `NEON_STORAGE_REGION`           | Region, e.g. `us-east-2` (also available as `AWS_REGION`) |
-| `NEON_STORAGE_FORCE_PATH_STYLE` | Always `"true"` — path-style addressing is required       |
+| Variable                | Value                             |
+| ----------------------- | --------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | S3 Access Key ID                  |
+| `AWS_SECRET_ACCESS_KEY` | S3 Secret Access Key              |
+| `AWS_ENDPOINT_URL_S3`   | Branch S3 endpoint URL            |
+| `AWS_REGION`            | Storage region (e.g. `us-east-2`) |
 
 Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically. Only `forcePathStyle` needs explicit configuration:
 
@@ -195,7 +193,7 @@ staging  ──── credential NOT valid here (different lineage)
 
 ## Listing credentials
 
-The **Credentials** page in the Console shows all credentials for the current branch — name, key ID, creation date, and last used time. To list via the API:
+The **Credentials** page in the Console shows all credentials for the current branch: name, key ID, creation date, and last used time. To list via the API:
 
 ```bash shouldWrap
 curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \

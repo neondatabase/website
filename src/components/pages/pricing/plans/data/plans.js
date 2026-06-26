@@ -169,9 +169,9 @@ export default {
         title: 'MFA',
         subtitle: 'Multi-Factor Authentication',
       },
-      free: false,
-      launch: 'Coming soon',
-      scale: 'Coming soon',
+      free: true,
+      launch: true,
+      scale: true,
     },
     {
       rows: '1',

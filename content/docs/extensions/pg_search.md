@@ -30,7 +30,7 @@ Depending on your use case, consider these alternatives:
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
 - **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
 - **Semantic/vector search**: [`pgvector`](/docs/extensions/pgvector) for embedding-based search
-- **BM25 search**: [`lakebase_text`](/docs/extensions/lakebase-text) — a BM25 index for Neon, fully compatible with `tsvector` (Early Access); or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
+- **BM25 search**: [`lakebase_text`](/docs/extensions/lakebase-text), a BM25 index for Neon, fully compatible with `tsvector`; or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
 
 </Admonition>
 
