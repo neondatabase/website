@@ -10,7 +10,7 @@ export const metadata = getMetadata({
 });
 
 const TemplatesPage = () => (
-  <Layout headerWithBorder isHeaderSticky>
+  <Layout isHeaderSticky>
     <section className="flex flex-1 flex-col bg-black-pure safe-paddings text-white lg:block">
       <Container
         className="grid w-full flex-1 grid-cols-5 pt-12 pb-[104px] xl:gap-x-7 xl:pb-24 lg:block lg:gap-x-5 lg:pt-9 lg:pb-20 md:pb-[72px] sm:pt-6"

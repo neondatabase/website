@@ -72,7 +72,6 @@ const DocPost = async (props) => {
 
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = currentSlug === 'changelog' || currentSlug.startsWith('changelog/');
-  const allChangelogPosts = await getAllChangelogs();
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
@@ -82,6 +81,8 @@ const DocPost = async (props) => {
   if (!isChangelogIndex && !post) return notFound();
 
   if (isChangelogIndex) {
+    const allChangelogPosts = await getAllChangelogs();
+
     return (
       <Post
         data={{}}

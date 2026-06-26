@@ -170,7 +170,7 @@ const AiPage = () => (
       link={LINKS.docsAi}
       linkText="Learn more"
     />
-    <CTANew title="The Postgres of tomorrow,<br /> available today" />
+    <CTANew title="The Postgres of tomorrow,<br /> available today" label="Get started" />
   </Layout>
 );
 

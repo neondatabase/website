@@ -1,32 +1,65 @@
 ---
 title: Neon Functions
-subtitle: Long-running Node.js compute, deployed on Neon.
+subtitle: Deploy a backend onto your Neon branch, next to your data.
 summary: >-
-  Neon Functions are long-running Node.js HTTP handlers deployed to Neon
-  branches, with DATABASE_URL injected from the branch's Postgres database.
-  Use them for AI agents, WebSocket servers, and webhook handlers that need
-  compute next to their data.
+  Neon Functions are serverless compute you deploy onto a Neon branch. Host an
+  API, AI agent, real-time server, or webhook handler that runs next to your
+  Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-16T19:09:47.023Z'
+updatedOn: '2026-06-24T23:12:20.545Z'
 ---
 
-<RequestForm type="backend-platform" title="Get early access to Neon Functions" description="Neon Functions are in private preview. Drop your email and we'll reach out with access." />
+Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
 
-Neon Functions give you long-running Node.js compute in the same AWS region as your database. Each function deploys to a Neon branch and gets a public HTTPS URL. If the branch has a Postgres database, `DATABASE_URL` is injected automatically. No configuration needed, no cross-region round trips.
+What makes Neon Functions different from lambda-style serverless?
 
-During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+- **Next to your data.** Same region as the branch, with `DATABASE_URL` (plus [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) credentials) injected automatically. No cross-region hops, and no credentials to wire up.
+- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
+- **Branches with your data.** Each branch runs its own function at its own URL against its own database state.
 
-Functions are branch-scoped. When you branch a project, the function branches with it: the child branch inherits the function as it was at the branch point, and runs it at its own URL against its own isolated database state. Deploying to the child doesn't affect the parent.
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-Functions use the Workers-style handler interface standardized by [WinterTC](https://wintertc.org/): a `fetch(request)` export that receives a standard `Request` and returns a `Response`. Hono is the recommended framework.
+> During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+
+## Request/response, not background jobs
+
+A function is always requested (by a `fetch`, a browser, an agent) and always returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade.
+
+That makes functions a fit for request/response work, and not for background jobs. Background jobs and workflows are the other kind of compute: queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup. Those need a job queue or workflow engine to own that lifecycle. Today you can pair a function with a third-party queue or scheduler like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com): the service owns the queue, retries, and scheduling, and invokes your function over HTTP to run each job. A native Neon job queue and workflow engine is a separate, upcoming offering.
+
+Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
+
+```ts
+export default {
+  fetch: (request: Request) => new Response('Hello world'),
+};
+```
+
+Or a bare async function:
+
+```ts
+export default async function handler(request: Request) {
+  return new Response('Hello world');
+}
+```
+
+A [Hono](https://hono.dev) app exports the object shape, so `export default app` works directly. Hono is the recommended framework.
 
 ## When to use Neon Functions
 
-- **AI agents**: hold connections open across multiple LLM calls and tool invocations, write results to Postgres
-- **Discord bots and WebSocket servers**: maintain long-lived bidirectional connections without a dedicated server
-- **Webhook handlers**: receive events and run multiple database queries without cross-region latency
-- **Post-response work**: use `waitUntil` to run follow-up tasks after the response is sent, such as logging, analytics writes, or triggering additional model calls
-- **Branch your backend**: each branch runs its own function version at its own URL, against its own isolated database state if the branch has one
+- **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Get started](/docs/compute/functions/get-started).
+- **AI agents**: stream tokens back across multiple model calls and tool invocations without a short execution limit cutting the run off. See [AI agents](/docs/compute/functions/agents).
+- **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
+- **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
+- **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
+- **Webhook handlers and bots**: receive events and query Postgres in the same region.
+
+## How Functions fit with your app
+
+Functions are backend primitives, not full-stack app hosting. Host your app on Vercel, Netlify, or another frontend host; reach for a function for the long-running, stateful slice of your backend that belongs next to your data. Two common shapes:
+
+- **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
+- **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
 
 ## Get started
 
@@ -36,34 +69,31 @@ Functions use the Workers-style handler interface standardized by [WinterTC](htt
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Get started</a>
 
+<a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
+
+<a href="/docs/compute/functions/websockets" description="Hold long-lived connections open with WebSockets or SSE." icon="globe">WebSockets and SSE</a>
+
+<a href="/docs/compute/functions/authentication" description="Verify callers before a function does any work." icon="lock-landscape">Authentication</a>
+
 <a href="/docs/compute/functions/environment-variables" description="Neon-injected variables and how to add your own secrets." icon="gear">Environment variables</a>
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
-
-<a href="/docs/reference/neon-ts" description="Infrastructure-as-code config for Neon projects and branch policy." icon="setup">neon.ts reference</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 
 </DetailIconCards>
 
-## Starter templates
+## Examples and templates
 
-Browse templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/), or scaffold one directly with `neonctl bootstrap`:
+Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neonctl bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 
-```bash
-neonctl bootstrap
-```
-
-Use `--template` to skip the interactive picker:
-
-| Template        | What it builds                                                                         |
-| --------------- | -------------------------------------------------------------------------------------- |
-| `hono`          | REST API with Drizzle and Postgres on Neon Functions                                   |
-| `ai-sdk`        | Image-generation agent with AI Gateway, Object Storage, and Postgres on Neon Functions |
-| `mastra`        | Personal assistant with AI Gateway and Postgres-backed memory on Neon Functions        |
-| `realtime-chat` | Realtime chat with Next.js, Neon Auth, and WebSockets on Neon Functions                |
-| `realtime-sse`  | Realtime counter with TanStack Router and SSE on Neon Functions                        |
-
-`neonctl bootstrap` scaffolds files, links to a Neon project, and pulls env vars. Then follow the README to set up and deploy.
+| Example                  | `--template`    | Source                                                                                      | Neon services                                   | Stack                 |
+| ------------------------ | --------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
+| REST API                 | `hono`          | [with-hono](https://github.com/neondatabase/examples/tree/main/with-hono)                   | Functions, Postgres                             | Hono, Drizzle         |
+| Image-generation agent   | `ai-sdk`        | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)               | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
+| Personal-assistant agent | `mastra`        | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)               | Functions, Postgres, AI Gateway                 | Mastra                |
+| MCP server               | `mcp`           | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                     | Functions, Postgres                             | Hono, Drizzle         |
+| Realtime chat            | `realtime-chat` | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) | Functions, Postgres, Neon Auth                  | Next.js, Hono         |
+| Realtime counter         | `realtime-sse`  | [with-realtime-sse](https://github.com/neondatabase/examples/tree/main/with-realtime-sse)   | Functions, Postgres                             | TanStack Router, Hono |
 
 <NeedHelp/>

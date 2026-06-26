@@ -11,8 +11,8 @@ const getAllPosts = async () => {
   const slugs = await getPostSlugs(DOCS_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, DOCS_DIR_PATH)) return;
       const data = getPostBySlug(slug, DOCS_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -51,11 +51,14 @@ const getAllChangelogs = async () => {
 
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
+      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      if (!post) return;
+
       const {
         data: { title, isDraft, redirectFrom },
         content,
-      } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      } = post;
+
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
 

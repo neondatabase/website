@@ -19,10 +19,10 @@
 }
 
 .startups-quotes .swiper-pagination-bullet {
-  @apply relative m-0! h-[3px] w-[59px] rounded-sm bg-gray-new-10 opacity-100 sm:w-12 xs:w-10;
-  @apply transition-colors duration-300 hover:bg-gray-new-15;
+  @apply relative m-0! h-[3px] w-[77px] rounded-none bg-gray-new-15 opacity-100 xl:w-16 lg:w-18 sm:w-14 xs:w-10;
+  @apply transition-colors duration-300 hover:bg-gray-new-20;
   @apply before:absolute before:inset-x-0 before:-inset-y-2;
-  @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-20;
+  @apply after:absolute after:inset-y-0 after:left-0 after:w-0 after:rounded-[inherit] after:bg-gray-new-50;
 }
 
 .startups-quotes .swiper-pagination-bullet-active {

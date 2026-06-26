@@ -6,6 +6,7 @@ import { cn } from 'utils/cn';
 import AdobeLogo from './images/adobe.inline.svg';
 import AKQALogo from './images/akqa.inline.svg';
 import AlbertsonsLogo from './images/albertsons.inline.svg';
+import AndreessenHorowitzLogo from './images/andreessen-horowitz.inline.svg';
 import AnythingLogo from './images/anything.inline.svg';
 import BasehubLogo from './images/basehub.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
@@ -25,10 +26,14 @@ import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
 import FramerLogo from './images/framer.inline.svg';
+import GeneralCatalystLogo from './images/general-catalyst.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
+import KhoslaVenturesLogo from './images/khosla-ventures.inline.svg';
+import MenloLogo from './images/menlo.inline.svg';
 import MetaLogo from './images/meta.inline.svg';
+import NotableLogo from './images/notable.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
 import OpenAILogo from './images/openai.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
@@ -38,6 +43,7 @@ import ReplitLogo from './images/replit.inline.svg';
 import RetoolLogo from './images/retool.inline.svg';
 import RubricLogo from './images/rubric.inline.svg';
 import SameLogo from './images/same.inline.svg';
+import SequoiaLogo from './images/sequoia.inline.svg';
 import ShakudoLogo from './images/shakudo.inline.svg';
 import SnapletLogo from './images/snaplet.inline.svg';
 import SolarLogo from './images/solar.inline.svg';
@@ -48,12 +54,14 @@ import VscodeLogo from './images/vscode.inline.svg';
 import WindsurfLogo from './images/windsurf.inline.svg';
 import WordwareLogo from './images/wordware.inline.svg';
 import WundergraphLogo from './images/wundergraph.inline.svg';
+import YLogo from './images/y.inline.svg';
 import ZedLogo from './images/zed.inline.svg';
 
 const allLogos = {
   adobe: AdobeLogo,
   akqa: AKQALogo,
   albertsons: AlbertsonsLogo,
+  'andreessen-horowitz': AndreessenHorowitzLogo,
   anything: AnythingLogo,
   basehub: BasehubLogo,
   bcg: BCGLogo,
@@ -74,9 +82,13 @@ const allLogos = {
   'fabric-io': FabricIoLogo,
   fl0: Fl0Logo,
   framer: FramerLogo,
+  'general-catalyst': GeneralCatalystLogo,
   genomics: GenomicsLogo,
   hasura: HasuraLogo,
   illa: IllaLogo,
+  'khosla-ventures': KhoslaVenturesLogo,
+  menlo: MenloLogo,
+  notable: NotableLogo,
   octolis: OctolisLogo,
   openai: OpenAILogo,
   opus: OpusLogo,
@@ -85,6 +97,7 @@ const allLogos = {
   retool: RetoolLogo,
   rubric: RubricLogo,
   same: SameLogo,
+  sequoia: SequoiaLogo,
   shakudo: ShakudoLogo,
   snaplet: SnapletLogo,
   solar: SolarLogo,
@@ -94,6 +107,7 @@ const allLogos = {
   windsurf: WindsurfLogo,
   wordware: WordwareLogo,
   wundergraph: WundergraphLogo,
+  y: YLogo,
   zed: ZedLogo,
   meta: MetaLogo,
   pepsi: PepsiLogo,
@@ -108,8 +122,8 @@ const sizes = {
 const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop }) => (
   <div
     className={cn(
-      'logos flex w-full overflow-hidden',
-      staticDesktop ? 'xl:logos-animated' : 'logos-animated',
+      'logos logos-animated flex w-full overflow-hidden',
+      staticDesktop && 'logos-static-desktop',
       className
     )}
   >

@@ -159,9 +159,9 @@ export default {
     pathname: LINKS.security,
   },
   startups: {
-    title: 'Neon Startup Program',
+    title: 'Neon Credits for Startups',
     description:
-      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
+      'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
   autoscalingReport: {

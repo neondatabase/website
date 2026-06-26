@@ -199,6 +199,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/guides/neondatabase-toolkit',
+        destination: '/docs/reference/sdk',
+        permanent: true,
+      },
+      {
         source: '/backend',
         destination: '/docs/introduction#products',
         permanent: false,

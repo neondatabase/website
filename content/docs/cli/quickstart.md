@@ -88,7 +88,7 @@ Verify the installation by checking the CLI version:
 neonctl --version
 ```
 
-For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/neondatabase/neon-pkgs).
+For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/neondatabase/neon-pkgs/tree/main/packages/cli).
 
 ## Authenticate
 

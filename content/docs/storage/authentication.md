@@ -152,14 +152,12 @@ The S3 data plane enforces scope on every request. A credential without a storag
 
 When your code runs inside Neon Functions, Neon injects storage credentials automatically. You don't need to create a credential:
 
-| Variable                        | Value                                                     |
-| ------------------------------- | --------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`             | S3 Access Key ID                                          |
-| `AWS_SECRET_ACCESS_KEY`         | S3 Secret Access Key                                      |
-| `AWS_ENDPOINT_URL_S3`           | Branch S3 endpoint URL                                    |
-| `AWS_REGION`                    | Storage region (e.g. `us-east-2`)                         |
-| `NEON_STORAGE_REGION`           | Region, e.g. `us-east-2` (also available as `AWS_REGION`) |
-| `NEON_STORAGE_FORCE_PATH_STYLE` | Always `"true"` — path-style addressing is required       |
+| Variable                | Value                             |
+| ----------------------- | --------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | S3 Access Key ID                  |
+| `AWS_SECRET_ACCESS_KEY` | S3 Secret Access Key              |
+| `AWS_ENDPOINT_URL_S3`   | Branch S3 endpoint URL            |
+| `AWS_REGION`            | Storage region (e.g. `us-east-2`) |
 
 Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically. Only `forcePathStyle` needs explicit configuration:
 

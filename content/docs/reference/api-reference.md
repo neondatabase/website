@@ -257,7 +257,6 @@ Instead of using curl, you can use our official SDKs:
 
 - **[TypeScript SDK](/docs/reference/typescript-sdk)**: Full-featured SDK for Node.js and browser
 - **[Python SDK](/docs/reference/python-sdk)**: Pythonic wrapper for the Neon API
-- **[@neondatabase/toolkit](/docs/reference/neondatabase-toolkit)**: Combined SDK for AI agents (includes API SDK + Serverless Driver)
 - **[Neon CLI](/docs/cli)**: Command-line interface for Neon
 
 See [Neon SDKs](/docs/reference/sdk) for the full list, including community SDKs.

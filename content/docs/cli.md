@@ -47,4 +47,4 @@ More about global options:
 
 ## GitHub repository
 
-The Neon CLI is open source. See the [neondatabase/neon-pkgs](https://github.com/neondatabase/neon-pkgs) repository.
+The Neon CLI is open source. See the [neondatabase/neon-pkgs](https://github.com/neondatabase/neon-pkgs/tree/main/packages/cli) repository.

@@ -1,16 +1,22 @@
 ---
-title: WebSocket servers
-subtitle: Host persistent WebSocket connections on Neon Functions.
+title: WebSockets and SSE on Neon Functions
+subtitle: Hold long-lived connections open for real-time apps.
 summary: >-
-  Neon Functions support long-lived WebSocket connections via an upgrade export.
-  Use the ws package alongside your fetch handler to accept WebSocket clients,
-  and Postgres LISTEN/NOTIFY to broadcast across isolates.
+  Neon Functions stay alive while data flows, so they can host real-time
+  backends. Use WebSockets for two-way connections via an upgrade export, or
+  server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
+  broadcast across isolates.
 updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Neon Functions stay alive as long as they have active connections, so a WebSocket server is a first-class use case. Your handler runs on the same branch as your Postgres database.
+Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend on the same branch as your Postgres database, with Postgres `LISTEN/NOTIFY` handling cross-isolate messaging instead of a separate broker like Redis.
+
+Two options, depending on direction:
+
+- **[WebSockets](#how-it-works)**: two-way, low-latency frames. Reach for these when the client also sends messages (chat, presence, collaborative editing).
+- **[Server-sent events (SSE)](#server-sent-events-sse)**: one-way, server to client. Simpler to run (plain HTTP, no upgrade, no library), and the browser's `EventSource` reconnects automatically. Reach for these for live counters, notifications, progress, and token streams.
 
 ## How it works
 
@@ -167,6 +173,7 @@ export default {
   },
 };
 
+// Optional: drain the pool and listener on shutdown (the platform sends SIGINT).
 process.on('SIGINT', () => {
   Promise.allSettled([pool.end(), listener.end()]).then(() => process.exit(0));
 });
@@ -176,9 +183,83 @@ process.on('SIGINT', () => {
 Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` routes through PgBouncer, which doesn't support `LISTEN/NOTIFY`.
 </Admonition>
 
+## Heartbeat
+
+The connection only lives while data moves across it. Neon's idle timeout is 15 minutes, but the proxies and load balancers in between usually drop an idle socket much sooner, sometimes within tens of seconds. Rather than rely on steady app traffic, ping the client on a timer. Calling `ws.ping()` sends a ping frame. Browsers reply with a pong automatically; other clients (Node `ws`, `wscat`) may need to handle it themselves:
+
+```ts
+const HEARTBEAT_MS = 25_000; // under typical proxy idle timeouts
+
+const beat = setInterval(() => {
+  for (const ws of clients) {
+    if (ws.readyState === ws.OPEN) ws.ping();
+  }
+}, HEARTBEAT_MS);
+beat.unref?.();
+
+process.on('SIGINT', () => clearInterval(beat));
+```
+
+`clients` is the `Set` from the chat example above. `beat.unref()` keeps the interval from holding the process open on its own.
+
+## Server-sent events (SSE)
+
+When you only need server-to-client updates, SSE is simpler than a WebSocket. There's no `upgrade` method and no library to install. A plain `fetch` handler returns a `Response` whose body is a `ReadableStream`, with the `Content-Type` set to `text/event-stream`. The runtime keeps that response open while the stream keeps writing.
+
+```ts filename="functions/sse.ts"
+const encoder = new TextEncoder();
+
+export default {
+  fetch(request: Request) {
+    const url = new URL(request.url);
+    if (url.pathname !== '/events') return new Response('ok');
+
+    let count = 0;
+    let tick: ReturnType<typeof setInterval>;
+    let beat: ReturnType<typeof setInterval>;
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(encoder.encode('data: connected\n\n'));
+        tick = setInterval(() => {
+          controller.enqueue(encoder.encode(`data: ${++count}\n\n`));
+        }, 1000);
+        // A line starting with `:` is a comment. Use it as a heartbeat so the
+        // stream never goes idle (proxies drop quiet connections quickly).
+        beat = setInterval(() => controller.enqueue(encoder.encode(': ping\n\n')), 25_000);
+      },
+      cancel() {
+        // Fires when the client disconnects.
+        clearInterval(tick);
+        clearInterval(beat);
+      },
+    });
+
+    return new Response(stream, {
+      headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform' },
+    });
+  },
+};
+```
+
+An SSE frame is `data: <payload>\n\n`. Send a `: ping\n\n` comment every 25 to 30 seconds, the SSE equivalent of the WebSocket [heartbeat](#heartbeat), so idle streams stay alive, and set `Cache-Control: no-transform` so proxies don't buffer the stream.
+
+On the client, `EventSource` reads the stream and handles reconnection for you, so there's no backoff logic to write:
+
+```ts
+const source = new EventSource(`${FUNCTION_URL}/events`); // GET only
+source.onmessage = (e) => console.log('update', e.data);
+source.onerror = () => {}; // EventSource auto-reconnects
+```
+
+To push to every client, fan out across isolates exactly as with WebSockets: hold a `Set` of stream controllers and `enqueue` to each when a `NOTIFY` arrives (see [Cross-isolate messaging](#cross-isolate-messaging-with-listennotify)). `EventSource` is GET-only and can't set headers, so authenticate it with a query parameter or cookie, the same as a WebSocket (see [Authentication](#authentication)).
+
+For a complete SSE backend (Hono endpoint, `LISTEN`/`NOTIFY` fan-out, a counter persisted in Postgres, and a client-only SPA), see the [realtime SSE example](https://github.com/neondatabase/examples/tree/main/with-realtime-sse).
+
 ## Authentication
 
-Browsers can't set custom headers on a WebSocket connection, so you can't use `Authorization`. Pass the token as a query parameter and verify it in `upgrade` before calling `wss.handleUpgrade`:
+A function has a public URL, so authenticate the caller before accepting a connection. See [Authentication](/docs/compute/functions/authentication) for the full picture (JWT verification, API keys, CORS).
+
+Browsers can't set custom headers on a WebSocket or an `EventSource`, so you can't use `Authorization`. Pass the token as a query parameter and verify it before accepting the connection. For a WebSocket, verify it in `upgrade` before calling `wss.handleUpgrade`:
 
 ```ts
 async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
@@ -193,7 +274,7 @@ async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
   }
 
   wss.handleUpgrade(req, socket, head, (ws) => {
-    // authenticated: identity is in scope
+    // authenticated; identity is in scope
   });
 },
 ```
@@ -202,8 +283,8 @@ For a complete example with JWT verification, Neon Auth integration, and client-
 
 ## Eviction and shutdown
 
-The platform sends `SIGINT` before evicting an isolate. Without a handler, open database connections are abandoned and stay open until they time out. The LISTEN/NOTIFY example above includes one: `Promise.allSettled([pool.end(), listener.end()])` drains the pool and listener before the process exits. Add equivalent cleanup for any other resources your function holds.
+On shutdown the platform sends `SIGINT`, then forcibly stops the function 5 seconds later. Cleanup is optional: when the process exits, the OS closes its sockets, so dropped connections are usually detected without it. To shut down more gracefully, drain open resources in a `SIGINT` handler, as the LISTEN/NOTIFY example above does with `Promise.allSettled([pool.end(), listener.end()])`.
 
-See [Runtime limits](/docs/compute/functions/reference/runtime-limits#lifecycle) for eviction behavior and the heartbeat timeout.
+See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for eviction and timeout behavior.
 
 <NeedHelp/>

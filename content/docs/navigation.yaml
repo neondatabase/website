@@ -555,7 +555,11 @@
               slug: compute/functions/deploy
             - title: Environment variables
               slug: compute/functions/environment-variables
-            - title: WebSocket servers
+            - title: Authentication
+              slug: compute/functions/authentication
+            - title: AI agents
+              slug: compute/functions/agents
+            - title: WebSockets and SSE
               slug: compute/functions/websockets
             - section: Reference
               items:
@@ -662,8 +666,6 @@
                   slug: https://neon.com/use-cases/ai-agents
                 - title: Database versioning
                   slug: ai/ai-database-versioning
-                - title: Neon Toolkit
-                  slug: https://github.com/neondatabase/toolkit
                 - title: Neon API reference
                   slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: Agent frameworks
@@ -814,8 +816,6 @@
                   slug: reference/typescript-sdk
                 - title: Python SDK (Neon API)
                   slug: reference/python-sdk
-                - title: The @neondatabase/toolkit
-                  slug: reference/neondatabase-toolkit
                 - title: Go SDK (Neon API)
                   slug: https://github.com/kislerdm/neon-sdk-go
                   tag: community
