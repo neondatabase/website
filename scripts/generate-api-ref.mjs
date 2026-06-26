@@ -560,7 +560,7 @@ let TAG_CONFIG = loadTagConfig();
 const NEON_BASE = 'https://neon.com';
 
 function opMdUrl(op) {
-  return `${NEON_BASE}/md/docs/reference/api/${op.tag}/${op.id}.md`;
+  return `${NEON_BASE}/docs/reference/api/${op.tag}/${op.id}.md`;
 }
 
 function orderedTagList(tagOps) {
@@ -575,36 +575,13 @@ function generateLlmsTxt(tagOps) {
     '# Neon Management API',
     '',
     'Base URL: https://console.neon.tech/api/v2',
-    'Auth: Bearer token — `Authorization: Bearer $NEON_API_KEY`',
-    '',
-    'Neon interface-specific LLMS files:',
-    `- [Full reference](${NEON_BASE}/docs/reference/api/llms-full.txt)`,
-    `- [REST](${NEON_BASE}/docs/reference/api/llms-api.txt)`,
-    `- [CLI](${NEON_BASE}/docs/reference/api/llms-cli.txt)`,
-    `- [SDK](${NEON_BASE}/docs/reference/api/llms-sdk.txt)`,
-    `- [MCP](${NEON_BASE}/docs/reference/api/llms-mcp.txt)`,
-    '',
-  ];
-
-  for (const tag of orderedTagList(tagOps)) {
-    lines.push(`## ${TAG_CONFIG.display[tag] || tag}`);
-    lines.push('');
-    for (const op of tagOps[tag]) {
-      lines.push(`- [${op.summary}](${opMdUrl(op)}) \`${op.method} ${op.path}\``);
-    }
-    lines.push('');
-  }
-
-  return lines.join('\n').trimEnd() + '\n';
-}
-
-function generateApiTxt(tagOps) {
-  const lines = [
-    '# Neon REST API',
-    '',
-    'Base URL: https://console.neon.tech/api/v2',
     'Auth: `Authorization: Bearer $NEON_API_KEY`',
     '',
+    'Neon interface-specific indexes:',
+    `- [API endpoint index](${NEON_BASE}/docs/reference/api.md): all endpoints grouped by resource, each with curl and SDK examples`,
+    `- [Neon CLI](${NEON_BASE}/docs/cli.md): Neon CLI commands, options, and usage`,
+    `- [OpenAPI spec](${NEON_BASE}/api_spec/release/v2.json): machine-readable schemas for request/response validation and codegen`,
+    '',
   ];
 
   for (const tag of orderedTagList(tagOps)) {
@@ -618,6 +595,7 @@ function generateApiTxt(tagOps) {
 
   return lines.join('\n').trimEnd() + '\n';
 }
+
 
 function generateCliTxt(tagOps) {
   const lines = [
@@ -673,14 +651,12 @@ function generateApiMd(tagOps) {
     '# Neon API Reference',
     '',
     'Base URL: https://console.neon.tech/api/v2',
-    'Auth: Bearer token — `Authorization: Bearer $NEON_API_KEY`',
+    'Auth: `Authorization: Bearer $NEON_API_KEY`',
     '',
     'Interface-specific indexes:',
-    `- [Full reference](${NEON_BASE}/docs/reference/api/llms-full.txt)`,
-    `- [REST](${NEON_BASE}/docs/reference/api/llms-api.txt)`,
-    `- [CLI](${NEON_BASE}/docs/reference/api/llms-cli.txt)`,
-    `- [SDK](${NEON_BASE}/docs/reference/api/llms-sdk.txt)`,
-    `- [MCP](${NEON_BASE}/docs/reference/api/llms-mcp.txt)`,
+    `- [API endpoint index](${NEON_BASE}/docs/reference/api.md): all endpoints grouped by resource, each with curl and SDK examples`,
+    `- [Neon CLI](${NEON_BASE}/docs/cli.md): Neon CLI commands, options, and usage`,
+    `- [OpenAPI spec](${NEON_BASE}/api_spec/release/v2.json): machine-readable schemas for request/response validation and codegen`,
     '',
   ];
 
@@ -1437,10 +1413,6 @@ async function main() {
   mkdirSync(LLMS_ROOT, { recursive: true });
   const LLMS_GENERATORS = [
     ['llms.txt', generateLlmsTxt],
-    ['llms-api.txt', generateApiTxt],
-    ['llms-cli.txt', generateCliTxt],
-    ['llms-mcp.txt', generateMcpTxt],
-    ['llms-sdk.txt', generateSdkTxt],
   ];
   for (const [file, gen] of LLMS_GENERATORS) {
     writeFileSync(resolve(LLMS_ROOT, file), gen(tagOps));
@@ -1448,19 +1420,6 @@ async function main() {
 
   // api.md — top-level index served at /docs/reference/api.md
   writeFileSync(resolve(ROOT, 'public/md/docs/reference/api.md'), generateApiMd(tagOps));
-
-  // llms-full.txt — complete reference, no frontmatter, one H2 per operation
-  const llmsFullHeader = [
-    '# Neon Management API — Full Reference',
-    '',
-    'Base URL: https://console.neon.tech/api/v2',
-    'Auth: Bearer token — `Authorization: Bearer $NEON_API_KEY`',
-    '',
-  ].join('\n');
-  writeFileSync(
-    resolve(LLMS_ROOT, 'llms-full.txt'),
-    llmsFullHeader + '\n---\n\n' + allOps.map(toFullMarkdownEntry).join('\n\n---\n\n') + '\n'
-  );
 
   // Per-tag {tag}.md (served via /docs/reference/api/{tag}.md → rewrite → /md/...)
   for (const [tag, ops] of Object.entries(tagOps)) {
@@ -1515,8 +1474,6 @@ async function main() {
   process.stderr.write(`  ${MD_ROOT}/{tag}/{slug}.md (${opCount} files)\n`);
   process.stderr.write(`  public/md/docs/reference/api.md\n`);
   process.stderr.write(`  ${LLMS_ROOT}/llms.txt\n`);
-  process.stderr.write(`  ${LLMS_ROOT}/llms-{api,cli,mcp,sdk}.txt\n`);
-  process.stderr.write(`  ${LLMS_ROOT}/llms-full.txt\n`);
   process.stderr.write(`  ${MD_ROOT}/{tag}.md (${Object.keys(tagOps).length} files)\n`);
   if (extraDocCount > 0) process.stderr.write(`  ${MD_ROOT}/[extra docs] (${extraDocCount} files)\n`);
   process.stderr.write(`  ${NAV_YAML_PATH}\n`);

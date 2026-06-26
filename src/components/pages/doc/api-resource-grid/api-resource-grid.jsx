@@ -47,16 +47,10 @@ const ApiResourceGrid = () => {
   return (
     <div className="not-prose">
       <div className="mb-5 rounded-xl border border-gray-new-90 bg-gray-new-98 p-5 dark:border-gray-new-20 dark:bg-gray-new-10">
-        <div className="flex items-start justify-between gap-4 sm:flex-col">
-          <div>
-            <p className="text-[15px] font-semibold tracking-tight text-black-pure dark:text-white">
-              Search and browse all endpoints
-            </p>
-            <p className="mt-1 max-w-2xl text-[14px] leading-relaxed text-gray-new-40 dark:text-gray-new-60">
-              Browse API resources below, or open the endpoint index to search all generated
-              endpoint pages.
-            </p>
-          </div>
+        <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-start">
+          <p className="font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
+            {total} endpoints across {resources.length} resources
+          </p>
           <a
             href={`${DOCS_BASE_PATH}reference/api/reference`}
             className="shrink-0 rounded-full border border-green-45/35 px-3 py-1.5 text-[13px] font-medium text-green-45 transition-colors hover:border-green-45/70 hover:bg-green-45/[0.06]"
@@ -64,9 +58,6 @@ const ApiResourceGrid = () => {
             Search endpoint index
           </a>
         </div>
-        <p className="mt-3 font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
-          {total} endpoints across {resources.length} resources
-        </p>
       </div>
 
       <div className="grid grid-cols-3 gap-x-4 gap-y-4 md:grid-cols-2 sm:grid-cols-1">

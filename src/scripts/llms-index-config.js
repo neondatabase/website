@@ -37,12 +37,12 @@ module.exports = {
       url: 'https://neon.com/docs/connect/connection-errors.md',
     },
     {
-      label: 'pgvector extension for vector search and embeddings',
-      url: 'https://neon.com/docs/extensions/pgvector.md',
-    },
-    {
       label: 'Neon API reference (projects, branches, databases, endpoints)',
       url: 'https://neon.com/docs/reference/api.md',
+    },
+    {
+      label: 'Neon CLI reference (neonctl commands, options, and usage)',
+      url: 'https://neon.com/docs/cli.md',
     },
   ],
 

@@ -108,19 +108,19 @@ export function getMarkdownPath(pathname) {
 
 const DEFAULT_404_LINKS = [
   {
-    label: 'All Neon documentation',
+    label: 'Neon docs index',
     href: '/docs/llms.txt',
-    description: 'Table of contents for all Neon docs',
+    description: 'full table of contents, start here to find the right page',
   },
   {
-    label: 'Full documentation text',
-    href: '/docs/llms-full.txt',
-    description: 'Complete Neon docs in one file',
-  },
-  {
-    label: 'Neon API reference',
+    label: 'Neon REST API',
     href: '/docs/reference/api.md',
-    description: 'API endpoints and usage',
+    description: 'all REST endpoints grouped by resource',
+  },
+  {
+    label: 'Neon CLI',
+    href: '/docs/cli.md',
+    description: 'neonctl commands, options, and usage',
   },
 ];
 
@@ -135,7 +135,7 @@ export function buildAgent404Response(
 
 \`${pathname}\` does not exist in ${context}.
 
-Find what you need:
+Try the docs index to locate the correct URL, or use one of these references:
 
 ${linkLines}
 `;
