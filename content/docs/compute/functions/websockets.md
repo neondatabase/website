@@ -6,7 +6,7 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>

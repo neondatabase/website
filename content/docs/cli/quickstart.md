@@ -11,7 +11,7 @@ summary: >-
   like `neonctl projects list`, `neonctl branches create`, and
   `neonctl connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-26T10:18:57.624Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---

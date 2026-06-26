@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-06-25T15:54:38.441Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -124,7 +124,7 @@ export AWS_REGION=us-east-2
 
 ## Pull credentials with neonctl
 
-For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically — no manual copy-paste from the API response:
+For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically. No manual copy-paste from the API response:
 
 ```bash
 neonctl env pull --file .env.local
@@ -193,7 +193,7 @@ staging  ──── credential NOT valid here (different lineage)
 
 ## Listing credentials
 
-The **Credentials** page in the Console shows all credentials for the current branch — name, key ID, creation date, and last used time. To list via the API:
+The **Credentials** page in the Console shows all credentials for the current branch: name, key ID, creation date, and last used time. To list via the API:
 
 ```bash shouldWrap
 curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
