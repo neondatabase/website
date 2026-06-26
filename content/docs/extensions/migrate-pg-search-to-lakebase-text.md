@@ -17,7 +17,7 @@ This guide migrates your BM25 full-text search from `pg_search` to `lakebase_tex
 |                  | `pg_search` (ParadeDB)                                                                     | `lakebase_text`                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | Index            | `USING bm25 (col1, col2) WITH (key_field='id')`: indexes raw columns, tokenizes internally | `USING lakebase_bm25 (body_tsv)`: indexes a `tsvector` column you build with `to_tsvector` |
-| Query operator   | `col @@@ 'query'`                                                                          | `body_tsv <@> to_bm25query(to_tsvector('english','query'), 'index_name')`                  |
+| Query operator   | `col @@@ 'query'` (filters and ranks at once)                                              | `@@ to_tsquery('query')` to filter, `<@> to_bm25query(…, 'index_name')` to rank            |
 | Ranking          | `paradedb.score(id)` with `ORDER BY score DESC` (higher = better)                          | `<@>` returns a negative score with `ORDER BY score ASC` (lower = better)                  |
 | Multiple columns | one index over several columns                                                             | combine the columns into one `tsvector`                                                    |
 | Tokenization     | internal (ICU, Lindera, language stemmers)                                                 | Postgres text-search configurations (`'english'`, and others)                              |
@@ -81,29 +81,32 @@ ORDER BY score DESC;
 ```
  id |         description          |   score
 ----+------------------------------+-----------
-  2 | Blue metal keyboard          | 0.6682933
-  3 | Wireless ergonomic keyboard  | 0.6682933
+  2 | Blue metal keyboard          | 0.8236319
+  3 | Wireless ergonomic keyboard  | 0.8236319
 ```
 
-`lakebase_text` queries the `tsvector` with `to_bm25query` (passing the index name) and the `<@>` operator. Scores are negative, so order ascending to put the best matches first:
+`lakebase_text` splits the two jobs `@@@` did at once: filter the matching rows with the standard `@@` operator, and rank them with `<@>` and `to_bm25query` (which takes the index name). Scores are negative, so order ascending to put the best matches first:
 
 ```sql
 -- lakebase_text
 SELECT id, description,
   search_tsv <@> to_bm25query(to_tsvector('english', 'keyboard'), 'mock_items_bm25') AS score
 FROM mock_items
+WHERE search_tsv @@ to_tsquery('english', 'keyboard')
 ORDER BY score
 LIMIT 10;
 ```
 
 ```
- id |         description          |       score
-----+------------------------------+--------------------
-  3 | Wireless ergonomic keyboard  | -0.674745043022955
-  2 | Blue metal keyboard          | -0.674745043022955
+ id |         description          |        score
+----+------------------------------+---------------------
+  2 | Blue metal keyboard          | -0.8374048792080783
+  3 | Wireless ergonomic keyboard  | -0.8374048792080783
 ```
 
-Two differences to carry across every query. First, pass the **index name** to `to_bm25query` (BM25 scoring reads corpus statistics from the index). Second, **reverse the sort**: `pg_search` uses `ORDER BY score DESC`, while `lakebase_text` uses `ORDER BY score` (ascending), because a lower, more negative score means a better match.
+Three things to carry across every query. First, **filter with `@@`**: `<@>` only scores, it doesn't filter, so without the `@@ to_tsquery(...)` clause every row comes back (non-matches at score 0). Second, pass the **index name** to `to_bm25query` (BM25 scoring reads corpus statistics from the index). Third, **reverse the sort**: `pg_search` uses `ORDER BY score DESC`, while `lakebase_text` uses `ORDER BY score` (ascending), because a lower, more negative score means a better match.
+
+For multi-word or user-supplied input, use `websearch_to_tsquery('english', 'your query')` in place of `to_tsquery` in both the filter and the rank. `to_tsquery` expects pre-formatted query syntax and errors on plain phrases with spaces.
 
 ## Check for feature gaps
 
