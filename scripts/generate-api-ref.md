@@ -53,6 +53,8 @@ Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetc
 
 If the spec fetch fails, the generator throws and the build fails fast. The last good `content/docs/api-navigation.yaml` stays in the repo so a transient outage doesn't ship broken navigation — but the JSON/Markdown data for operations is missing on that build until the next successful run.
 
+**Recovery:** check the Vercel build log for the HTTP error code, verify `https://neon.com/api_spec/release/v2.json` is reachable (open in a browser or `curl -I`), then trigger a redeploy. No code changes are needed for a transient outage.
+
 ## How it works
 
 ```text
@@ -89,7 +91,7 @@ These files are read by the generator and must be in the repo. Some are hand-cur
 | `tag-config.json`          | Humans                         | Tag order, display names, descriptions, groupings, overrides   |
 | `console-breadcrumbs.json` | Humans                         | `operationId` → Neon Console UI path (e.g. "Project > Branches") |
 | `response-examples.json`   | Humans                         | Per-op response example overrides when the spec example is poor |
-| `cli-table-output.json`    | Humans                         | Captured `neonctl ... list` table snippets for the CLI tab     |
+| `cli-table-output.json`    | Humans                         | Captured `neonctl ... list` table snippets for the CLI tab. **Entirely manual — no automated capture.** Re-run the relevant `neonctl ... list` commands after each neonctl release and update this file by hand. Each entry should include a comment noting the neonctl version it was captured from so staleness is detectable. |
 | `cli-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → `neonctl` command (parsed from neonctl source) |
 | `mcp-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → MCP tool name (parsed from mcp-server-neon)    |
 | `mcp-tool-definitions.json`| `build-coverage-data.mjs`      | MCP tool descriptions + argument schemas                       |
@@ -156,7 +158,13 @@ git diff content/docs/api-navigation.yaml
 
 Review generated `content/docs/api-navigation.yaml` separately from UI changes.
 It is the only committed generator output and can drift when the upstream spec
-changes. For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
+changes. **There is no automated CI check for nav drift** — before merging any PR
+that touches the API reference, run `npm run generate:api-ref` and check
+`git diff content/docs/api-navigation.yaml`. If the diff is non-empty, commit the
+updated nav. A stale nav ships silently (the build does not fail; only the sidebar
+is wrong).
+
+For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
 
 ### Representative examples and SDK shape
 

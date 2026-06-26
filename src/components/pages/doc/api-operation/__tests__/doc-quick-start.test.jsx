@@ -54,6 +54,9 @@ describe('DocQuickStart', () => {
 
     expect(screen.getByRole('button', { name: 'CLI' })).toBeInTheDocument();
     expect(screen.getAllByText('CLI').length).toBeGreaterThan(0);
+
+    fireEvent.click(screen.getByRole('button', { name: 'CLI' }));
+
     expect(screen.getByText(/neon projects create/)).toBeInTheDocument();
     expect(screen.getByText(/--region-id aws-us-east-2/)).toBeInTheDocument();
 
@@ -106,6 +109,8 @@ describe('DocQuickStart', () => {
         }}
       />
     );
+
+    fireEvent.click(screen.getByRole('button', { name: 'CLI' }));
 
     expect(screen.getByText(/# enable/)).toBeInTheDocument();
     expect(screen.getByText(/neon neon-auth domain allow-localhost enable/)).toBeInTheDocument();

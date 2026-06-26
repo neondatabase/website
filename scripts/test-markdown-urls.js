@@ -232,6 +232,10 @@ function buildTests() {
     { path: '/branching/introduction', spotWord: null },
     { path: '/programs/agents', spotWord: null },
     { path: '/use-cases/ai-agents', spotWord: null },
+    // API reference — static MDX pages (no generator required)
+    { path: '/docs/reference/api', spotWord: 'Neon API' },
+    { path: '/docs/reference/api/get-started', spotWord: 'API key' },
+    { path: '/docs/reference/api/key-concepts', spotWord: 'asynchronous' },
   ];
 
   for (const { path, spotWord } of contentRoutes) {
@@ -1022,6 +1026,42 @@ function buildTests() {
     (r) => expectContentType(r.contentType, 'text/markdown'),
     (r) => expectMarkdownBody(r.body),
   ]);
+
+  // ── 9f. API reference generated pages (require npm run generate:api-ref first) ──
+  // Tag overview and operation pages are generated at build/dev time and are not committed.
+  // These tests will 404 locally unless the generator has run (npm run generate:api-ref or npm run dev).
+
+  add(
+    'API ref tag page',
+    '/docs/reference/api/branches',
+    'accept-md',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, 'branch', true),
+      note: 'requires npm run generate:api-ref',
+    }
+  );
+
+  add(
+    'API ref operation page',
+    '/docs/reference/api/branches/list-project-branches',
+    'accept-md',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, 'project_id', true),
+      note: 'requires npm run generate:api-ref',
+    }
+  );
 
   // ── 10. Content route doc headers on HTML responses ───────────────────
 

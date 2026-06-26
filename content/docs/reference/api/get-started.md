@@ -18,11 +18,11 @@ Create an API key in the Neon Console under **Account settings** > **API keys**.
 
 Neon supports three API key types:
 
-| Key type                   | Scope                                  | Best for                      |
-| -------------------------- | -------------------------------------- | ----------------------------- |
-| **Personal API key**       | All projects you own or have access to | Personal development, scripts |
-| **Organization API key**   | All projects within an organization    | Team automation, CI/CD        |
-| **Project-scoped API key** | Single project only                    | Limited access integrations   |
+| Key type                   | Scope                                                | Best for                      |
+| -------------------------- | ---------------------------------------------------- | ----------------------------- |
+| **Personal API key**       | All organization projects where the user is a member | Personal development, scripts |
+| **Organization API key**   | All projects within an organization                  | Team automation, CI/CD        |
+| **Project-scoped API key** | Single project only                                  | Limited access integrations   |
 
 <Admonition type="important">
 API key tokens are shown only once at creation. Store them securely because you can't retrieve them later.
