@@ -77,7 +77,7 @@ describe('buildCurl', () => {
       parameters: [{ in: 'query', name: 'q', required: true }],
     });
     const result = buildCurl(op, {}, new Set(), {});
-    expect(result).toContain('q=q');
+    expect(result).toContain('q=$Q');
   });
 
   it('adds -X flag for non-GET methods', () => {

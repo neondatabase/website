@@ -1,11 +1,8 @@
 ---
 title: Neon API
 summary: >-
-  Use the Neon REST API to create and manage projects, branches, databases,
-  roles, compute endpoints, API keys, and other Neon resources
-  programmatically. Learn how to create an API key, authenticate requests,
-  make your first API call, browse all endpoints, and handle common API
-  patterns such as pagination, rate limits, and asynchronous operations.
+  Browse all Neon API endpoints by resource, or get started with authentication
+  and your first request.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference
