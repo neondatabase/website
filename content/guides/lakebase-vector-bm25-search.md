@@ -7,10 +7,6 @@ createdAt: '2026-06-15T00:00:00.000Z'
 updatedOn: '2026-06-26T12:58:36.951Z'
 ---
 
-<Admonition type="note" title="Beta">
-Lakebase Search is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
-</Admonition>
-
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
 
 1. **Semantic (vector) search:** To find documents based on meaning and context using AI embeddings.
