@@ -22,7 +22,7 @@ This guide migrates your BM25 full-text search from `pg_search` to `lakebase_tex
 | Multiple columns | one index over several columns                                                             | combine the columns into one `tsvector`                                                    |
 | Tokenization     | internal (ICU, Lindera, language stemmers)                                                 | Postgres text-search configurations (`'english'`, and others)                              |
 
-The core shift: `pg_search` indexes your columns directly, while `lakebase_text` indexes a `tsvector` that you build (usually a generated column). You tokenize with `to_tsvector` and query with `to_bm25query` and the `<@>` operator.
+The main difference: `pg_search` indexes your columns directly, while `lakebase_text` indexes a `tsvector` that you build (usually a generated column).
 
 <Steps>
 
@@ -40,7 +40,7 @@ If `lakebase_text` is in the list, create the extension and you're ready:
 CREATE EXTENSION IF NOT EXISTS lakebase_text;
 ```
 
-If it isn't, enabling it is a one-time setup: add `lakebase_text` to your project's preloaded libraries with the Neon API, restart the compute, then create the extension. The [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) guide has the full steps; for this migration you only need `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
+If `lakebase_text` isn't listed, enabling it is a one-time setup: add it to your project's preloaded libraries with the Neon API, restart the compute, then create the extension. The [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) guide has the full steps. For this migration you need only `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
 
 ## Migrate the index
 
@@ -85,7 +85,7 @@ ORDER BY score DESC;
   3 | Wireless ergonomic keyboard  | 0.8236319
 ```
 
-`lakebase_text` splits the two jobs `@@@` did at once: filter the matching rows with the standard `@@` operator, and rank them with `<@>` and `to_bm25query` (which takes the index name). Scores are negative, so order ascending to put the best matches first:
+`lakebase_text` does the same work with two operators instead of one: `@@` filters the matching rows, and `<@>` with `to_bm25query` ranks them. Scores are negative, so order ascending to put the best matches first:
 
 ```sql
 -- lakebase_text
@@ -104,7 +104,11 @@ LIMIT 10;
   3 | Wireless ergonomic keyboard  | -0.8374048792080783
 ```
 
-Three things to carry across every query. First, **filter with `@@`**: `<@>` only scores, it doesn't filter, so without the `@@ to_tsquery(...)` clause every row comes back (non-matches at score 0). Second, pass the **index name** to `to_bm25query` (BM25 scoring reads corpus statistics from the index). Third, **reverse the sort**: `pg_search` uses `ORDER BY score DESC`, while `lakebase_text` uses `ORDER BY score` (ascending), because a lower, more negative score means a better match.
+When you rewrite a query, three things change:
+
+- **Filter with `@@`.** `<@>` only scores, it doesn't filter. Add a `WHERE search_tsv @@ to_tsquery('english', 'query')` clause, or every row comes back (non-matches at score 0).
+- **Pass the index name to `to_bm25query`.** BM25 scoring reads corpus statistics from the index.
+- **Reverse the sort.** `pg_search` orders `DESC`; `lakebase_text` orders ascending, because its scores are negative and a lower score is a better match.
 
 For multi-word or user-supplied input, use `websearch_to_tsquery('english', 'your query')` in place of `to_tsquery` in both the filter and the rank. `to_tsquery` expects pre-formatted query syntax and errors on plain phrases with spaces.
 
@@ -124,15 +128,13 @@ Once your queries run on `lakebase_text` and return the results you expect, drop
 DROP EXTENSION pg_search CASCADE;
 ```
 
-`CASCADE` also drops the `bm25` indexes that depend on the extension. Confirm the extension is gone:
+`CASCADE` also drops the `bm25` indexes that depend on the extension. The change takes effect immediately. Confirm it's gone:
 
 ```sql
 SELECT extname FROM pg_extension WHERE extname = 'pg_search';   -- returns no rows
 ```
 
-Then restart the compute to finalize the change. In the [Neon Console](https://console.neon.tech), open the compute's **⋯** menu and select **Restart compute** (available while the compute is active; a suspended compute picks up the change on its next wake), or call the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API.
-
-`pg_search` stays in `shared_preload_libraries` (still preloaded at startup), but with the extension dropped it's inert. Neon removes it from the preload list when `pg_search` reaches end-of-life in September 2026.
+Your search now runs entirely on `lakebase_text`.
 
 </Steps>
 
