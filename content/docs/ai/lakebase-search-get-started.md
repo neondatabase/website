@@ -10,10 +10,6 @@ enableTableOfContents: true
 updatedOn: '2026-06-26T12:58:36.951Z'
 ---
 
-<Admonition type="note" title="Beta">
-Lakebase Search is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
-</Admonition>
-
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
 
 ## Prerequisites

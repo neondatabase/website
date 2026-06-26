@@ -10,10 +10,6 @@ enableTableOfContents: true
 updatedOn: '2026-06-26T12:58:36.951Z'
 ---
 
-<Admonition type="note" title="Beta">
-Lakebase Search is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
-</Admonition>
-
 <Callout title="About Lakebase">
 Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
 </Callout>
