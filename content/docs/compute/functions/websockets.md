@@ -5,7 +5,7 @@ summary: >-
   Neon Functions support long-lived WebSocket connections via an upgrade export.
   Use the ws package alongside your fetch handler to accept WebSocket clients,
   and Postgres LISTEN/NOTIFY to broadcast across isolates.
-updatedOn: '2026-06-15T14:47:36.989Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -48,7 +48,7 @@ const wss = new WebSocketServer({ noServer: true });
 
 export default {
   fetch(request: Request) {
-    return new Response('This endpoint speaks WebSocket — send an Upgrade request.', {
+    return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', {
       headers: { 'content-type': 'text/plain' },
     });
   },
@@ -94,7 +94,7 @@ import { WebSocketServer } from 'ws';
 const app = new Hono();
 const wss = new WebSocketServer({ noServer: true });
 
-app.get('/', (c) => c.text('WebSocket server — connect via wss://'));
+app.get('/', (c) => c.text('WebSocket server. Connect via wss://'));
 
 export default {
   fetch: (request: Request) => app.fetch(request),
@@ -149,7 +149,7 @@ listener.on('notification', (msg) => {
 const wss = new WebSocketServer({ noServer: true });
 const app = new Hono();
 
-app.get('/', (c) => c.text('Realtime chat — connect over WebSocket'));
+app.get('/', (c) => c.text('Realtime chat. Connect over WebSocket'));
 
 export default {
   fetch: (request: Request) => app.fetch(request),
@@ -193,7 +193,7 @@ async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
   }
 
   wss.handleUpgrade(req, socket, head, (ws) => {
-    // authenticated — identity is in scope
+    // authenticated: identity is in scope
   });
 },
 ```

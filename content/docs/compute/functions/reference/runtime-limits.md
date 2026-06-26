@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-15T17:47:53.882Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -61,7 +61,7 @@ Each isolate is a Node.js process. Requests are interleaved on the event loop, s
 Because each isolate is its own process and handles concurrent requests, module-scope state behaves as follows:
 
 - **Shared within an isolate**: module-scope objects (a `pg` pool, an in-memory cache) are shared across all requests on the same isolate. Create connection pools once at module scope and reuse them.
-- **Not shared across isolates**: each isolate has its own copy of module state. Keep `max` small on `pg` pools (for example, 5) — effective connection count is `max` × the number of live isolates. Module-scope initialization (seeding, migrations) runs once per isolate; make it idempotent or serialize with a Postgres advisory lock.
+- **Not shared across isolates**: each isolate has its own copy of module state. Keep `max` small on `pg` pools (for example, 5); the effective connection count is `max` × the number of live isolates. Module-scope initialization (seeding, migrations) runs once per isolate; make it idempotent or serialize with a Postgres advisory lock.
 - **Lost on eviction**: in-memory state disappears when an isolate is evicted. Persist anything that matters in Postgres.
 
 ## Slug constraints

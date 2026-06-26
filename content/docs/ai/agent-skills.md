@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neonctl init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:18:57.624Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/ai/ai-rules-neon-api
 ---
 
-Agent Skills provide your AI coding assistant with structured context about Neon's platform, APIs, and best practices. With skills installed, your assistant produces more accurate code and avoids common mistakes when working with Neon — from Postgres and Auth to [Neon Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), and the [AI Gateway](/docs/ai-gateway/overview).
+Agent Skills provide your AI coding assistant with structured context about Neon's platform, APIs, and best practices. With skills installed, your assistant produces more accurate code and avoids common mistakes when working with Neon, from Postgres and Auth to [Neon Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), and the [AI Gateway](/docs/ai-gateway/overview).
 
 <YoutubeIframe embedId="NN251KTjAo8" />
 
@@ -103,10 +103,10 @@ Skills are grouped by area. Each skill is a `SKILL.md` entry point that your age
 
 Start here for platform overview and Postgres development.
 
-| Skill                                                                        | Description                                                                                                                   |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents — Postgres, Auth, Data API, Functions, Storage, and AI Gateway — and how to get started |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Comprehensive index of Neon Serverless Postgres documentation and best practices                                              |
+| Skill                                                                        | Description                                                                                                                 |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, and how to get started |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Comprehensive index of Neon Serverless Postgres documentation and best practices                                            |
 
 ### Database workflows
 
@@ -120,7 +120,7 @@ Provision, branch, and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in private preview — see [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in private preview. See [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -164,9 +164,9 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 **Platform services (private preview)**
 
-- **Neon Functions** — declare, deploy, and connect long-running compute next to your database
-- **Object Storage** — S3-compatible storage that branches with your data
-- **AI Gateway** — model routing, logging, and cost controls with a single Neon credential
+- **Neon Functions**: declare, deploy, and connect long-running compute next to your database
+- **Object Storage**: S3-compatible storage that branches with your data
+- **AI Gateway**: model routing, logging, and cost controls with a single Neon credential
 
 For example, ask your assistant to "set up Neon Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow platform preview constraints and the right SDK patterns.
 
