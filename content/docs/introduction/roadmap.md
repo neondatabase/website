@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-22T16:36:18.455Z'
+updatedOn: '2026-06-27T13:07:31.581Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -79,6 +79,10 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Lakebase Search**: Vector and BM25 full-text search are now available to all users on Postgres 16+ through the `lakebase_vector` and `lakebase_text` extensions, so you can run semantic, keyword, and hybrid search in Postgres without a separate search stack. [Learn more](/docs/ai/lakebase-search)
+- **neon.ts**: A TypeScript config file you commit to your repo to declare branch policies, compute settings, and Neon services as code. Apply changes with `neonctl deploy` and preview them with `neonctl config plan`. [Learn more](/docs/reference/neon-ts)
+- **Branch-first development workflow**: New CLI commands (`neon link`, `neon checkout`, `neon env pull`, `neon psql`, `neon data-api`) bring project linking and branch switching to the terminal. Your `DATABASE_URL` updates automatically when you check out a branch. [Learn more](/docs/cli)
+- **More network transfer on paid plans**: The public network transfer allowance on all paid plans increased from 100 GB to 500 GB per month. [Learn more](/docs/introduction/network-transfer)
 - **Schema Diff for larger schemas**: The schema comparison line limit has been raised from 8,000 to 20,000 lines, unblocking diffs on larger production schemas. [Learn more](/docs/guides/schema-diff).
 - **Per-branch consumption metrics**: A new API endpoint returns compute, storage, and transfer usage broken down by branch, making it easier to attribute costs in multi-branch workflows. [Learn more](/docs/guides/consumption-metrics).
 - **Neon MCP Server branch forking**: The `create_branch` MCP tool now accepts a `parentId` parameter so agents can fork any branch, not only the project default. [Learn more](/docs/ai/neon-mcp-server).
