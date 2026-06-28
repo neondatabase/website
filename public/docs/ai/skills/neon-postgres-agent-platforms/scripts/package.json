@@ -1,0 +1,44 @@
+{
+  "name": "neon-for-agent-platforms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Neon Agent Program examples and companion Agent Skill",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neondatabase/neon-for-agent-platforms"
+  },
+  "keywords": ["neon", "postgres", "agent-skills", "ai-agents"],
+  "type": "module",
+  "scripts": {
+    "fmt": "prettier --write \"**/*.ts\"",
+    "fmt:check": "prettier --check \"**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "neon:list-projects": "npm run build && node dist/scripts/list-projects.js",
+    "create-project": "npm run build && node dist/scripts/create-project.js",
+    "create-project-with-auth": "npm run build && node dist/scripts/create-project-with-auth.js",
+    "delete-project": "npm run build && node dist/scripts/delete-project.js",
+    "branch": "npm run build && node dist/scripts/branch.js",
+    "snapshot": "npm run build && node dist/scripts/snapshot.js",
+    "list-snapshots": "npm run build && node dist/scripts/list-snapshots.js",
+    "delete-snapshot": "npm run build && node dist/scripts/delete-snapshot.js",
+    "rename-snapshot": "npm run build && node dist/scripts/rename-snapshot.js",
+    "delete-branch": "npm run build && node dist/scripts/delete-branch.js",
+    "promote-safe": "npm run build && node dist/scripts/promote-safe-production.js",
+    "versioning-flow": "npm run build && node dist/scripts/versioning-flow.js",
+    "restore-snapshot": "npm run build && node dist/scripts/restore-snapshot.js",
+    "transfer": "npm run build && node dist/scripts/transfer-project.js",
+    "consumption": "npm run build && node dist/scripts/consumption-query.js",
+    "auth-users": "npm run build && node dist/scripts/auth-users.js"
+  },
+  "dependencies": {
+    "@neondatabase/api-client": "^2.7.1",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "prettier": "^3.4.2",
+    "typescript": "^6.0.3"
+  }
+}

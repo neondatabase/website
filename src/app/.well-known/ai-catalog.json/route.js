@@ -38,12 +38,12 @@ const catalog = {
       tags: ['neon', 'postgres', 'serverless', 'agent-skill'],
     },
     {
-      identifier: 'urn:air:neon.com:skill:claimable-postgres',
+      identifier: 'urn:air:neon.com:skill:neon-postgres-agent-platforms',
       type: 'application/agent-skills+md',
-      url: 'https://neon.com/.well-known/agent-skills/claimable-postgres/SKILL.md',
+      url: 'https://neon.com/.well-known/agent-skills/neon-postgres-agent-platforms/SKILL.md',
       description:
-        'Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK.',
-      tags: ['neon', 'postgres', 'instant', 'agent-skill'],
+        'Build and operate multi-tenant AI agent platforms on Neon: project-per-tenant provisioning, the Neon Agent Plan, fleet consumption tracking, and snapshot/restore workflows for generated apps.',
+      tags: ['neon', 'postgres', 'agent-platforms', 'agent-plan', 'agent-skill'],
     },
     {
       identifier: 'urn:air:neon.com:skill:neon-postgres-branches',
@@ -54,12 +54,44 @@ const catalog = {
       tags: ['neon', 'postgres', 'branching', 'agent-skill'],
     },
     {
+      identifier: 'urn:air:neon.com:skill:claimable-postgres',
+      type: 'application/agent-skills+md',
+      url: 'https://neon.com/.well-known/agent-skills/claimable-postgres/SKILL.md',
+      description:
+        'Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK.',
+      tags: ['neon', 'postgres', 'instant', 'agent-skill'],
+    },
+    {
       identifier: 'urn:air:neon.com:skill:neon-postgres-egress-optimizer',
       type: 'application/agent-skills+md',
       url: 'https://neon.com/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md',
       description:
         'Diagnose and fix excessive Postgres egress (network data transfer) in a codebase to reduce data transfer costs and optimize query patterns.',
       tags: ['neon', 'postgres', 'cost-optimization', 'agent-skill'],
+    },
+    {
+      identifier: 'urn:air:neon.com:skill:neon-object-storage',
+      type: 'application/agent-skills+md',
+      url: 'https://neon.com/.well-known/agent-skills/neon-object-storage/SKILL.md',
+      description:
+        'S3-compatible object storage that branches with your Neon project, so files and database rows stay in sync across dev, preview, and production environments.',
+      tags: ['neon', 'object-storage', 's3', 'agent-skill'],
+    },
+    {
+      identifier: 'urn:air:neon.com:skill:neon-ai-gateway',
+      type: 'application/agent-skills+md',
+      url: 'https://neon.com/.well-known/agent-skills/neon-ai-gateway/SKILL.md',
+      description:
+        'One API and one Neon credential for frontier and open-source LLMs from multiple providers, compatible with the OpenAI, Anthropic, and Vercel AI SDKs.',
+      tags: ['neon', 'ai-gateway', 'llm', 'agent-skill'],
+    },
+    {
+      identifier: 'urn:air:neon.com:skill:neon-functions',
+      type: 'application/agent-skills+md',
+      url: 'https://neon.com/.well-known/agent-skills/neon-functions/SKILL.md',
+      description:
+        'Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data.',
+      tags: ['neon', 'functions', 'serverless', 'agent-skill'],
     },
   ],
 };
