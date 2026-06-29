@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-06-26T12:58:36.951Z'
+updatedOn: '2026-06-29T20:34:27.614Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -30,6 +30,10 @@ SHOW shared_preload_libraries;
 ```
 
 If the list already includes `lakebase_vector` and `lakebase_text`, skip to [Install the extensions](#install-the-extensions). If not, you'll add them with the Neon API, using a [Neon API key](/docs/manage/api-keys) and your project ID.
+
+<Admonition type="note">
+The Neon CLI does not support enabling preloaded libraries. You must use the API steps below.
+</Admonition>
 
 First, confirm the libraries are available to your project:
 
