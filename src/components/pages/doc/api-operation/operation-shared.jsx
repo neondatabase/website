@@ -28,7 +28,7 @@ export const SectionHeader = ({ title, badge, right, id }) => (
       {title}
     </h2>
     {badge && (
-      <span className="text-red-600 border-red-600/40 border bg-transparent px-1.5 py-0.5 font-mono text-sm font-semibold dark:border-[#FF5645]/40 dark:text-[#FF5645]">
+      <span className="rounded border border-green-44/40 bg-transparent px-1.5 py-0.5 font-mono text-sm font-semibold text-green-44 dark:border-green-44/40">
         {badge}
       </span>
     )}
@@ -63,6 +63,8 @@ LiveCodeBlock.propTypes = {
 };
 
 // ── CLI positional row ──────────────────────────────────────────────────────
+const codeClassName =
+  'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white';
 
 export const CliPositionalRow = ({
   pos,
@@ -133,9 +135,7 @@ export const CliPositionalRow = ({
             {currentVal || '(string)'}
           </span>
         )}
-        <span className="border border-[#E2301D]/40 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]">
-          required
-        </span>
+        <span className={codeClassName}>required</span>
       </div>
 
       <div>
@@ -240,18 +240,7 @@ export const CliFlagRow = ({
           {flag.alias}
         </span>
       )}
-      <span
-        className={cn(
-          'px-1.5 py-0.5 font-mono text-sm leading-normal font-medium',
-          flag.type === 'string'
-            ? 'border border-[#426CE0]/40 bg-transparent text-[#426CE0] dark:border-blue-70/40 dark:text-blue-70'
-            : flag.type === 'boolean'
-              ? 'border border-[#BE8A3C]/40 bg-transparent text-[#BE8A3C] dark:border-brown-70/40 dark:text-brown-70'
-              : 'border border-[#8458D0]/40 bg-transparent text-[#8458D0] dark:border-purple-70/40 dark:text-purple-70'
-        )}
-      >
-        {flag.type}
-      </span>
+      <span className={codeClassName}>{flag.type}</span>
 
       {flag.enum ? (
         <span className="flex gap-0.5">
@@ -321,11 +310,7 @@ export const CliFlagRow = ({
         </span>
       )}
 
-      {flag.required && (
-        <span className="border border-[#E2301D]/40 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]">
-          required
-        </span>
-      )}
+      {flag.required && <span className={codeClassName}>required</span>}
       {flag.default !== undefined && !flag.enum && (
         <span className="font-mono text-sm text-gray-new-60 dark:text-gray-new-50">
           default: {String(flag.default)}

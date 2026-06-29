@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import ApiEndpointsTable from 'components/pages/doc/api-endpoints-table/api-endpoints-table';
@@ -94,19 +95,27 @@ const ApiTagPage = async ({
               </div>
               <div className="flex flex-col gap-2">
                 {group.ops.map((op) => (
-                  <a
+                  <Link
                     key={op.id}
                     href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                     className={cn(
-                      'flex items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
+                      'inline-flex w-fit items-center gap-2 text-sm leading-tight text-balance transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
                       op.deprecated
                         ? 'text-gray-new-60 dark:text-gray-new-50'
                         : 'text-gray-new-40 dark:text-gray-new-60'
                     )}
                   >
-                    {op.summary}
-                    {op.deprecated && <Tag label="deprecated" size="sm" />}
-                  </a>
+                    <span className="text-balance">
+                      {op.summary}
+                      {op.deprecated && (
+                        <Tag
+                          className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                          label="deprecated"
+                          size="sm"
+                        />
+                      )}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -116,19 +125,27 @@ const ApiTagPage = async ({
         <div className="mt-7 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
           <div className="flex flex-col gap-2">
             {operations.map((op) => (
-              <a
+              <Link
                 key={op.id}
                 href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                 className={cn(
-                  'flex items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
+                  'inline-flex w-fit items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
                   op.deprecated
                     ? 'text-gray-new-60 dark:text-gray-new-50'
                     : 'text-gray-new-40 dark:text-gray-new-60'
                 )}
               >
-                {op.summary}
-                {op.deprecated && <Tag label="deprecated" size="sm" />}
-              </a>
+                <span className="text-balance">
+                  {op.summary}
+                  {op.deprecated && (
+                    <Tag
+                      className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                      label="deprecated"
+                      size="sm"
+                    />
+                  )}
+                </span>
+              </Link>
             ))}
           </div>
         </div>

@@ -88,7 +88,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
         ) : (
           <p className="text-sm text-gray-new-50 dark:text-gray-new-60">
             Run{' '}
-            <code className="border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm dark:border-gray-new-30">
+            <code className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-black-pure dark:border-gray-new-30 dark:text-white">
               neon --help
             </code>{' '}
             to see output format.
@@ -96,7 +96,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
         )}
         <p className="mt-3 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
           For the full response, use{' '}
-          <code className="border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm dark:border-gray-new-30">
+          <code className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-black-pure dark:border-gray-new-30 dark:text-white">
             --output json
           </code>
           . The JSON output matches the REST API response.

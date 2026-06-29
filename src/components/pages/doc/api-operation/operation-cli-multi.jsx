@@ -81,7 +81,7 @@ const MultiCmdSection = ({ operation, state, paramValues, copy, copiedId }) => {
               {cmd.covers.map((c) => (
                 <code
                   key={c}
-                  className="border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-gray-new-20 dark:border-gray-new-30 dark:text-gray-new-80"
+                  className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-gray-new-20 dark:border-gray-new-30 dark:text-gray-new-80"
                 >
                   {c}
                 </code>

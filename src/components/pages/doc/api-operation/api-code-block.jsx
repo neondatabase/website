@@ -27,6 +27,7 @@ const ApiCodeBlock = ({
   preClassName = '',
   copyCode = null,
   wrap = true,
+  showFilename = true,
 }) => {
   const filename = descriptor ? `${label} - ${descriptor}` : label;
   const language =
@@ -58,7 +59,7 @@ const ApiCodeBlock = ({
         'rounded-none border border-gray-new-80 dark:border-gray-new-20 [&_.line]:text-sm [&_code]:text-sm [&_pre]:text-sm [&_pre]:leading-relaxed [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!',
         className
       )}
-      filename={filename}
+      filename={showFilename ? filename : null}
       language={language}
       copyCode={copyCode ?? code}
     >
@@ -90,6 +91,7 @@ ApiCodeBlock.propTypes = {
   preClassName: PropTypes.string,
   copyCode: PropTypes.string,
   wrap: PropTypes.bool,
+  showFilename: PropTypes.bool,
 };
 
 export default ApiCodeBlock;

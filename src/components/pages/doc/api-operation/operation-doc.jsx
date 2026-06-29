@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ApiResponse from 'components/pages/doc/api-response';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import cn from 'utils/cn';
 
 import { DocBodySection, DocField, getRequiredLeafPaths } from './doc-body';
 import DocQuickStart from './doc-quick-start';
@@ -51,12 +52,13 @@ function isGeneralError(err) {
   );
 }
 
+const codeClassName =
+  'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white';
+
 const GeneralErrorCard = () => (
   <div className="api-response my-4 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
     <div className="mb-3 flex items-start gap-3">
-      <span className="mt-0.5 shrink-0 border border-gray-new-70 bg-transparent px-2 py-0.5 font-mono text-sm leading-normal font-semibold text-gray-new-40 dark:border-gray-new-30 dark:text-gray-new-70">
-        default
-      </span>
+      <span className={cn('mt-0.5 shrink-0', codeClassName)}>default</span>
       <div>
         <p className="text-sm font-semibold text-black-pure dark:text-white">General error</p>
         <p className="mt-1 text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
@@ -70,26 +72,15 @@ const GeneralErrorCard = () => (
         <p className="font-semibold text-black-pure dark:text-white">Response fields</p>
         <ul className="mt-1 list-disc space-y-1 pl-4">
           <li>
-            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
-              message
-            </code>{' '}
-            Required. Human-readable error message.
+            <code className={codeClassName}>message</code> Required. Human-readable error message.
           </li>
           <li>
-            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
-              code
-            </code>{' '}
-            Required. Machine-readable error code.
+            <code className={codeClassName}>code</code> Required. Machine-readable error code.
           </li>
           <li>
-            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
-              request_id
-            </code>{' '}
-            Optional. Request identifier for debugging. You can provide one with the{' '}
-            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
-              X-Request-ID
-            </code>{' '}
-            header.
+            <code className={codeClassName}>request_id</code> Optional. Request identifier for
+            debugging. You can provide one with the{' '}
+            <code className={codeClassName}>X-Request-ID</code> header.
           </li>
         </ul>
       </div>

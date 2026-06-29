@@ -152,13 +152,23 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
         )}
 
         <article>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
             <ApiMethodBadge method={operation.method} />
-            <code className="font-mono text-sm font-medium text-gray-new-20 dark:text-gray-new-80">
-              {operation.path}
-            </code>
-            {operation.stability && <Tag label={operation.stability} size="sm" className="ml-1" />}
-            {operation.deprecated && <Tag label="deprecated" size="sm" className="ml-1" />}
+            <span className="text-pretty">
+              <code className="max-w-full min-w-0 font-mono text-sm font-medium text-wrap wrap-anywhere text-gray-new-20 dark:text-gray-new-80">
+                {operation.path}
+              </code>
+              {operation.stability && (
+                <Tag
+                  label={operation.stability}
+                  size="sm"
+                  className="ml-1 inline-flex tabular-nums"
+                />
+              )}
+              {operation.deprecated && (
+                <Tag label="deprecated" size="sm" className="ml-1 inline-flex tabular-nums" />
+              )}
+            </span>
           </div>
 
           {operation.deprecated && (
@@ -168,7 +178,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
             </p>
           )}
 
-          <div className="mt-4 flex items-start justify-between gap-4">
+          <div className="mt-4 mb-8 flex items-start justify-between gap-x-4 gap-y-3 sm:flex-col">
             <h1 className="text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]">
               {operation.summary}
             </h1>

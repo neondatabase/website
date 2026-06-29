@@ -1,10 +1,10 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
+import CodeTabs from 'components/pages/doc/code-tabs';
 import { buildCliCommand } from 'utils/api-ref.mjs';
-import { cn } from 'utils/cn';
 
 import ApiCodeBlock from './api-code-block';
 
@@ -105,20 +105,13 @@ function availableExamples(operation) {
 
 const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
   const examples = useMemo(() => availableExamples(operation), [operation]);
-  const [selectedId, setSelectedId] = useState(null);
-
-  useEffect(() => {
-    if (examples.length === 0) {
-      setSelectedId(null);
-      return;
-    }
-    if (selectedId && !examples.some((example) => example.id === selectedId)) {
-      setSelectedId(null);
-    }
-  }, [examples, selectedId]);
+  const exampleLabels = examples.map((example) =>
+    example.descriptor
+      ? `${LABELS[example.id] ?? example.label} ${example.descriptor}`
+      : (LABELS[example.id] ?? example.label)
+  );
 
   const restCode = operation.examples?.representative?.curl ?? operation.examples?.curl ?? '';
-  const selected = examples.find((example) => example.id === selectedId) ?? null;
   const noRequired =
     requiredLeafCount === null
       ? (operation.requestBody?.requiredFields ?? []).length === 0
@@ -142,47 +135,20 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
 
       {examples.length > 0 && (
         <div className="mt-6">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="mr-1 text-sm text-gray-new-50 dark:text-gray-new-60">
-              Also available in
-            </span>
-            {examples.map((example) => {
-              const selectedPill = selected?.id === example.id;
-              return (
-                <button
-                  key={example.id}
-                  type="button"
-                  onClick={() =>
-                    setSelectedId((currentId) => (currentId === example.id ? null : example.id))
-                  }
-                  aria-pressed={selectedPill}
-                  aria-label={
-                    example.descriptor ? `${example.label} ${example.descriptor}` : example.label
-                  }
-                  className={cn(
-                    'flex items-center gap-1 rounded-sm border px-3 py-1.5 text-sm font-medium transition-colors',
-                    selectedPill
-                      ? 'border-[#00B87B]/30 bg-[#00B87B]/10 text-[#00B87B] dark:text-white'
-                      : 'border-gray-new-90 text-gray-new-40 hover:border-gray-new-70 dark:border-gray-new-20 dark:text-gray-new-70'
-                  )}
-                >
-                  <span>{LABELS[example.id] ?? example.label}</span>
-                  {example.descriptor && (
-                    <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-                      {example.descriptor}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          {selected && (
-            <ApiCodeBlock
-              label={selected.label}
-              descriptor={selected.descriptor}
-              code={selected.code}
-            />
-          )}
+          <span className="mb-4 block scroll-mt-20 text-base leading-tight font-semibold tracking-tight">
+            Also available in
+          </span>
+          <CodeTabs labels={exampleLabels}>
+            {examples.map((example) => (
+              <ApiCodeBlock
+                key={example.id}
+                label={LABELS[example.id] ?? example.label}
+                descriptor={example.descriptor}
+                code={example.code}
+                showFilename={false}
+              />
+            ))}
+          </CodeTabs>
         </div>
       )}
     </section>

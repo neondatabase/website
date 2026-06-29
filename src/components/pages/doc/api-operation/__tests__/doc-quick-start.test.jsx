@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
+
+import { CodeTabsProvider } from 'contexts/code-tabs-context';
 
 import DocQuickStart from '../doc-quick-start';
 
@@ -44,18 +46,28 @@ const operation = {
   console: { breadcrumb: 'Projects > New project' },
 };
 
+const renderQuickStart = (props) =>
+  render(
+    <CodeTabsProvider>
+      <DocQuickStart {...props} />
+    </CodeTabsProvider>
+  );
+
 describe('DocQuickStart', () => {
-  it('keeps REST curl in Quick start and swaps a separate non-REST example card', () => {
-    render(<DocQuickStart operation={operation} />);
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  it('keeps REST curl in Quick start and renders non-REST examples as code tabs', () => {
+    renderQuickStart({ operation });
 
     expect(screen.getByRole('heading', { name: 'Quick start' })).toHaveClass('sr-only');
     expect(screen.getByText(/REST API/)).toBeInTheDocument();
     expect(screen.getAllByText(/my-production-db/).length).toBeGreaterThan(0);
+    expect(screen.getByText('Also available in')).toBeInTheDocument();
 
     expect(screen.getByRole('button', { name: 'CLI' })).toBeInTheDocument();
     expect(screen.getAllByText('CLI').length).toBeGreaterThan(0);
-
-    fireEvent.click(screen.getByRole('button', { name: 'CLI' }));
 
     expect(screen.getByText(/neon projects create/)).toBeInTheDocument();
     expect(screen.getByText(/--region-id aws-us-east-2/)).toBeInTheDocument();
@@ -73,44 +85,42 @@ describe('DocQuickStart', () => {
   });
 
   it('only says an empty body works when the request body itself is optional', () => {
-    const { rerender } = render(<DocQuickStart operation={operation} requiredLeafCount={0} />);
+    const { rerender } = renderQuickStart({ operation, requiredLeafCount: 0 });
 
     expect(screen.queryByText(/An empty body works/)).not.toBeInTheDocument();
 
     rerender(
-      <DocQuickStart
-        operation={{ ...operation, requestBody: { ...operation.requestBody, required: false } }}
-        requiredLeafCount={0}
-      />
+      <CodeTabsProvider>
+        <DocQuickStart
+          operation={{ ...operation, requestBody: { ...operation.requestBody, required: false } }}
+          requiredLeafCount={0}
+        />
+      </CodeTabsProvider>
     );
 
     expect(screen.getByText(/An empty body works/)).toBeInTheDocument();
   });
 
   it('renders every CLI command for multi-command coverage entries', () => {
-    render(
-      <DocQuickStart
-        operation={{
-          ...operation,
-          cli: {
-            commands: [
-              {
-                command: 'neon neon-auth domain allow-localhost enable',
-                flags: [],
-                positionals: [],
-              },
-              {
-                command: 'neon neon-auth domain allow-localhost disable',
-                flags: [],
-                positionals: [],
-              },
-            ],
-          },
-        }}
-      />
-    );
-
-    fireEvent.click(screen.getByRole('button', { name: 'CLI' }));
+    renderQuickStart({
+      operation: {
+        ...operation,
+        cli: {
+          commands: [
+            {
+              command: 'neon neon-auth domain allow-localhost enable',
+              flags: [],
+              positionals: [],
+            },
+            {
+              command: 'neon neon-auth domain allow-localhost disable',
+              flags: [],
+              positionals: [],
+            },
+          ],
+        },
+      },
+    });
 
     expect(screen.getByText(/# enable/)).toBeInTheDocument();
     expect(screen.getByText(/neon neon-auth domain allow-localhost enable/)).toBeInTheDocument();

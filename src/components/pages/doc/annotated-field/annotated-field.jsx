@@ -45,7 +45,7 @@ const TypeBadge = ({ type }) => {
   return (
     <span
       className={cn(
-        'px-1.5 py-0.5 font-mono text-sm leading-normal font-medium',
+        'rounded px-1.5 py-0.5 font-mono text-sm leading-normal font-medium',
         TYPE_STYLES[type] ?? TYPE_STYLES.string
       )}
     >
@@ -62,7 +62,7 @@ const DetailCard = ({ node, onClose }) => {
   const d = node.details;
   if (!d) return null;
   return (
-    <div className="relative my-1 mr-5 ml-8 border border-gray-new-80 bg-white p-5 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-8">
+    <div className="relative my-1 mr-5 ml-8 border border-gray-new-80 bg-white p-5 dark:border-gray-new-20 dark:bg-gray-new-8">
       <button
         type="button"
         onClick={onClose}
@@ -71,7 +71,7 @@ const DetailCard = ({ node, onClose }) => {
       >
         ×
       </button>
-      <div className="mb-3 flex flex-wrap items-baseline gap-2 pr-8">
+      <div className="flex flex-wrap items-baseline gap-2 pr-8">
         <code className="font-mono text-sm leading-relaxed font-semibold text-[var(--shiki-token-string-expression)]">
           {node.key}
         </code>
@@ -86,7 +86,7 @@ const DetailCard = ({ node, onClose }) => {
       {(d.descriptionHtml || d.description) &&
         (() => {
           const descClass =
-            'mb-3 text-base leading-relaxed text-gray-new-20 dark:text-gray-new-80 [&_a]:underline';
+            'mt-3 text-sm leading-normal text-gray-new-20 dark:text-gray-new-80 [&_a]:underline';
           return d.descriptionHtml ? (
             <p
               className={cn(descClass, INLINE_CODE_STYLES)}
@@ -97,7 +97,7 @@ const DetailCard = ({ node, onClose }) => {
           );
         })()}
       {d.example && (
-        <div className="mb-3">
+        <div className="mt-3">
           <span className="mb-1 block text-sm font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
             Example
           </span>
@@ -107,7 +107,7 @@ const DetailCard = ({ node, onClose }) => {
         </div>
       )}
       {d.values && d.values.length > 0 && (
-        <div className="mb-3">
+        <div className="mt-3">
           <span className="mb-1 block text-sm font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
             Valid values
           </span>
@@ -174,7 +174,7 @@ const FieldRow = ({
       'flex items-baseline justify-between gap-4 border-l-2 px-5 py-1.5 transition-all duration-100',
       isInteractive && 'cursor-pointer',
       isHovered
-        ? 'border-l-green-45/50 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
+        ? 'border-l-green-45/70 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
         : 'border-l-transparent'
     )}
     style={{ paddingLeft: `${20 + indent * 18}px` }}
@@ -363,7 +363,7 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
             </span>
           )}
           {node.deprecated && (
-            <span className="ml-1.5 border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
+            <span className="ml-1.5 rounded border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
               deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
             </span>
           )}
@@ -389,7 +389,7 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
             aria-hidden="true"
             className={cn(
               'ml-auto shrink-0 text-sm leading-none transition-colors',
-              pinned ? 'text-green-45' : 'text-gray-new-50 dark:text-gray-new-60',
+              pinned ? 'text-green-44' : 'text-gray-new-50 dark:text-gray-new-60',
               hovered && !pinned && 'text-gray-new-30 dark:text-gray-new-80'
             )}
           >

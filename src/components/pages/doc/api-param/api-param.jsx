@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { TYPE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 const ApiParam = ({
@@ -13,8 +12,6 @@ const ApiParam = ({
   children,
   className,
 }) => {
-  const typeStyle = TYPE_STYLES[type] ?? TYPE_STYLES.string;
-
   return (
     <div
       className={cn(
@@ -39,9 +36,7 @@ const ApiParam = ({
           </span>
         )}
         {type && (
-          <span
-            className={cn('px-1.5 py-0.5 font-mono text-sm leading-normal font-medium', typeStyle)}
-          >
+          <span className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white">
             {type}
           </span>
         )}
