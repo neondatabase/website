@@ -128,11 +128,13 @@ Once your queries run on `lakebase_text` and return the results you expect, drop
 DROP EXTENSION pg_search CASCADE;
 ```
 
-`CASCADE` also drops the `bm25` indexes that depend on the extension. The change takes effect immediately. Confirm it's gone:
+`CASCADE` also drops the `bm25` indexes that depend on the extension. Confirm it's gone:
 
 ```sql
 SELECT extname FROM pg_extension WHERE extname = 'pg_search';   -- returns no rows
 ```
+
+Finally, restart the compute to complete the migration. In the [Neon Console](https://console.neon.tech), open the compute's **⋯** menu and select **Restart compute**, or call the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API.
 
 Your search now runs entirely on `lakebase_text`.
 
