@@ -24,7 +24,7 @@ The CBRT() function is part of standard PostgreSQL, so everything here works on 
 
 ## Introduction to the PostgreSQL CBRT() function
 
-A cube root number is a number that when you multiply itself twice, you’ll get the cube number. For example, 2 is a cube root number of 8 because when you multiply the number 2 by itself three times, you’ll get the number 8:
+A cube root number is a number that when you multiply itself twice, you’ll get the cube number. For example, 2 is a cube root number of 8 because when you multiply the number 2 by itself two times, you’ll get the number 8:
 
 ```sql
 2 * 2 * 2 = 8
