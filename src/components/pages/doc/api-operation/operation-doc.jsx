@@ -35,7 +35,7 @@ const ParametersSection = ({ parameters }) => (
     >
       Parameters
     </h2>
-    <div className="rounded-xl border border-gray-new-90 px-4 dark:border-gray-new-20">
+    <div className="border border-gray-new-90 px-4 dark:border-gray-new-20">
       {parameters.map((param) => (
         <DocField key={param.name} node={parameterToNode(param)} path={param.name} />
       ))}
@@ -52,9 +52,9 @@ function isGeneralError(err) {
 }
 
 const GeneralErrorCard = () => (
-  <div className="api-response my-4 rounded-xl border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
+  <div className="api-response my-4 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
     <div className="mb-3 flex items-start gap-3">
-      <span className="mt-0.5 shrink-0 rounded border border-gray-new-80 bg-gray-new-95 px-2 py-0.5 font-mono text-[11px] leading-normal font-semibold text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-70">
+      <span className="mt-0.5 shrink-0 border border-gray-new-70 bg-transparent px-2 py-0.5 font-mono text-sm leading-normal font-semibold text-gray-new-40 dark:border-gray-new-30 dark:text-gray-new-70">
         default
       </span>
       <div>
@@ -65,28 +65,28 @@ const GeneralErrorCard = () => (
       </div>
     </div>
 
-    <div className="grid gap-3 text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-70">
+    <div className="grid gap-3 text-sm leading-relaxed text-gray-new-40 dark:text-gray-new-70">
       <div>
         <p className="font-semibold text-black-pure dark:text-white">Response fields</p>
         <ul className="mt-1 list-disc space-y-1 pl-4">
           <li>
-            <code className="rounded bg-gray-new-90 px-1 py-0.5 font-mono text-[11px] dark:bg-gray-new-20">
+            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
               message
             </code>{' '}
             Required. Human-readable error message.
           </li>
           <li>
-            <code className="rounded bg-gray-new-90 px-1 py-0.5 font-mono text-[11px] dark:bg-gray-new-20">
+            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
               code
             </code>{' '}
             Required. Machine-readable error code.
           </li>
           <li>
-            <code className="rounded bg-gray-new-90 px-1 py-0.5 font-mono text-[11px] dark:bg-gray-new-20">
+            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
               request_id
             </code>{' '}
             Optional. Request identifier for debugging. You can provide one with the{' '}
-            <code className="rounded bg-gray-new-90 px-1 py-0.5 font-mono text-[11px] dark:bg-gray-new-20">
+            <code className="border border-gray-new-70 bg-transparent px-1 py-0.5 font-mono text-sm dark:border-gray-new-30">
               X-Request-ID
             </code>{' '}
             header.

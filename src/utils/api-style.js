@@ -3,45 +3,63 @@
 // color tweaks live in one place and tests catch unintended changes.
 
 export const METHOD_STYLES = {
-  GET: 'text-[#00B87B] dark:text-green-45 bg-[#00B87B]/10 dark:bg-green-45/10 border-[#00B87B]/20 dark:border-green-45/20',
-  POST: 'text-[#426CE0] dark:text-blue-70 bg-[#426CE0]/10 dark:bg-blue-70/10 border-[#426CE0]/20 dark:border-blue-70/20',
-  PUT: 'text-[#BE8A3C] dark:text-brown-70 bg-[#BE8A3C]/10 dark:bg-brown-70/10 border-[#BE8A3C]/20 dark:border-brown-70/20',
+  GET: 'text-[#00B87B] dark:text-green-45 bg-transparent border-[#00B87B]/40 dark:border-green-45/40',
+  POST: 'text-[#426CE0] dark:text-blue-70 bg-transparent border-[#426CE0]/40 dark:border-blue-70/40',
+  PUT: 'text-[#BE8A3C] dark:text-brown-70 bg-transparent border-[#BE8A3C]/40 dark:border-brown-70/40',
   PATCH:
-    'text-[#E9943E] dark:text-yellow-70 bg-[#E9943E]/10 dark:bg-yellow-70/10 border-[#E9943E]/20 dark:border-yellow-70/20',
+    'text-[#E9943E] dark:text-yellow-70 bg-transparent border-[#E9943E]/40 dark:border-yellow-70/40',
   DELETE:
-    'text-[#E2301D] dark:text-[#FF5645] bg-[#E2301D]/10 dark:bg-[#FF5645]/10 border-[#E2301D]/20 dark:border-[#FF5645]/20',
+    'text-[#E2301D] dark:text-[#FF5645] bg-transparent border-[#E2301D]/40 dark:border-[#FF5645]/40',
 };
 
 export const METHOD_FALLBACK_STYLE =
-  'text-gray-new-50 dark:text-gray-new-80 bg-gray-new-50/10 dark:bg-gray-new-80/10 border-gray-new-50/20 dark:border-gray-new-80/20';
+  'text-gray-new-50 dark:text-gray-new-80 bg-transparent border-gray-new-70 dark:border-gray-new-30';
+
+export const METHOD_TEXT_STYLES = {
+  GET: 'text-[#00B87B] dark:text-green-45',
+  POST: 'text-[#426CE0] dark:text-blue-70',
+  PUT: 'text-[#BE8A3C] dark:text-brown-70',
+  PATCH: 'text-[#E9943E] dark:text-yellow-70',
+  DELETE: 'text-[#E2301D] dark:text-[#FF5645]',
+};
+
+export const METHOD_TEXT_FALLBACK_STYLE = 'text-gray-new-50 dark:text-gray-new-60';
+
+export const INLINE_CODE_STYLES =
+  '[&_code]:my-px [&_code]:inline-flex [&_code]:items-center [&_code]:justify-center [&_code]:rounded [&_code]:border [&_code]:border-gray-new-70 [&_code]:bg-transparent [&_code]:px-1! [&_code]:py-px! [&_code]:font-mono! [&_code]:text-sm [&_code]:leading-[1.2] [&_code]:font-normal! [&_code]:tracking-extra-tight [&_code]:break-words [&_code]:text-black-pure! dark:[&_code]:border-gray-new-30 dark:[&_code]:bg-transparent dark:[&_code]:text-white!';
 
 export const TYPE_STYLES = {
-  string: 'text-[#426CE0] dark:text-blue-70 bg-[#426CE0]/10 dark:bg-blue-70/10',
-  integer: 'text-[#8458D0] dark:text-purple-70 bg-[#8458D0]/10 dark:bg-purple-70/10',
-  number: 'text-[#8458D0] dark:text-purple-70 bg-[#8458D0]/10 dark:bg-purple-70/10',
-  boolean: 'text-[#BE8A3C] dark:text-brown-70 bg-[#BE8A3C]/10 dark:bg-brown-70/10',
-  object: 'text-gray-new-40 dark:text-gray-new-70 bg-gray-new-40/10 dark:bg-gray-new-70/10',
-  array: 'text-gray-new-40 dark:text-gray-new-70 bg-gray-new-40/10 dark:bg-gray-new-70/10',
+  string:
+    'border border-[#426CE0]/40 text-[#426CE0] dark:border-blue-70/40 dark:text-blue-70 bg-transparent',
+  integer:
+    'border border-[#8458D0]/40 text-[#8458D0] dark:border-purple-70/40 dark:text-purple-70 bg-transparent',
+  number:
+    'border border-[#8458D0]/40 text-[#8458D0] dark:border-purple-70/40 dark:text-purple-70 bg-transparent',
+  boolean:
+    'border border-[#BE8A3C]/40 text-[#BE8A3C] dark:border-brown-70/40 dark:text-brown-70 bg-transparent',
+  object:
+    'border border-gray-new-70 text-gray-new-40 dark:border-gray-new-30 dark:text-gray-new-70 bg-transparent',
+  array:
+    'border border-gray-new-70 text-gray-new-40 dark:border-gray-new-30 dark:text-gray-new-70 bg-transparent',
 };
 
 // Text-color class for a JSON-ish type, used in inline schema renderings
 // where the type isn't shown as a badge (e.g. body field value previews).
 export const getTypeColor = (type) => {
   if (!type) return 'text-gray-new-40 dark:text-gray-new-70';
-  if (type === 'string') return 'text-[#EC6F09]';
-  if (type === 'integer' || type === 'number') return 'text-[#2D8665]';
-  if (type === 'boolean') return 'text-[#8458D0]';
+  if (type === 'string') return 'text-[var(--shiki-token-string)]';
+  if (type === 'integer' || type === 'number') return 'text-[var(--shiki-token-constant)]';
+  if (type === 'boolean') return 'text-[var(--shiki-token-keyword)]';
   return 'text-gray-new-40 dark:text-gray-new-70';
 };
 
-// VS Code-style palette for the client-side JSON syntax highlighter
-// (see JsonHighlightValue in operation-shared.jsx). Used as inline `style`
-// values, NOT Tailwind class arbitrary values, so it's safe to interpolate.
+// Client-side JSON/schema highlighter colors. These point at the same CSS
+// variables used by Shiki so light and dark docs themes share one palette.
 export const JSON_SYNTAX_COLORS = {
-  keyword: '#8458D0', // null, true, false
-  number: '#2D8665',
-  string: '#EC6F09',
-  key: '#426CE0',
+  keyword: 'var(--shiki-token-keyword)', // null, true, false
+  number: 'var(--shiki-token-constant)',
+  string: 'var(--shiki-token-string)',
+  key: 'var(--shiki-token-string-expression)',
 };
 
 // Status code colors are intentionally aliased to the corresponding HTTP

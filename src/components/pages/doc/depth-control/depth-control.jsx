@@ -13,17 +13,15 @@ const OPTIONS = [
 
 const DepthControl = ({ value, onChange, label = 'Depth' }) => (
   <div className="flex items-center gap-1.5">
-    <span className="text-[10px] tracking-wider text-gray-new-50 dark:text-gray-new-60">
-      {label}
-    </span>
-    <div className="flex gap-px rounded-md border border-gray-new-90 bg-gray-new-98 p-0.5 dark:border-gray-new-20 dark:bg-gray-new-10">
+    <span className="text-sm tracking-wide text-gray-new-50 dark:text-gray-new-60">{label}</span>
+    <div className="flex gap-px border border-gray-new-80 bg-white p-0.5 dark:border-gray-new-20 dark:bg-black-pure">
       {OPTIONS.map((opt) => (
         <button
           key={opt.value}
           type="button"
           onClick={() => onChange(opt.value)}
           className={cn(
-            'rounded px-2 py-0.5 font-mono text-[11px] font-semibold transition-all duration-100',
+            'px-2 py-0.5 font-mono text-sm font-semibold transition-all duration-100',
             value === opt.value
               ? 'bg-gray-new-90 text-black-pure dark:bg-gray-new-20 dark:text-white'
               : 'text-gray-new-50 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80'

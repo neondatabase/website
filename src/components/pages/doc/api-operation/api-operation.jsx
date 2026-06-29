@@ -8,6 +8,8 @@ import Tag from 'components/pages/doc/tag';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import { INLINE_CODE_STYLES } from 'utils/api-style';
+import { cn } from 'utils/cn';
 
 import OperationDoc from './operation-doc';
 import { buildOperationToc } from './operation-toc';
@@ -144,7 +146,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
 
   return (
     <>
-      <div className="min-w-0 flex-1 pb-32 lg:pb-24 md:pb-20">
+      <div className="max-w-208 min-w-0 flex-1 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
         )}
@@ -152,7 +154,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
         <article>
           <div className="flex flex-wrap items-center gap-2">
             <ApiMethodBadge method={operation.method} />
-            <code className="font-mono text-base font-medium text-gray-new-20 dark:text-gray-new-80">
+            <code className="font-mono text-sm font-medium text-gray-new-20 dark:text-gray-new-80">
               {operation.path}
             </code>
             {operation.stability && <Tag label={operation.stability} size="sm" className="ml-1" />}
@@ -175,7 +177,10 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
 
           {operation.descriptionHtml && (
             <div
-              className="mt-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_code]:rounded [&_code]:bg-gray-new-95 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:dark:bg-gray-new-15 [&_p+p]:mt-3"
+              className={cn(
+                'mt-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
+                INLINE_CODE_STYLES
+              )}
               dangerouslySetInnerHTML={{ __html: operation.descriptionHtml }}
             />
           )}
@@ -197,7 +202,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
         />
       </div>
       <Aside
-        className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+        className="ml-0! w-78 shrink-0 xl:hidden"
         enableTableOfContents
         tableOfContents={tableOfContents}
         gitHubPath={gitHubPath}

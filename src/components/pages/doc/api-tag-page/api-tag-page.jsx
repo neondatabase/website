@@ -54,7 +54,7 @@ const ApiTagPage = async ({
   const groups = buildGroupedOps(operations, tag ? tagGroupsBySlug[tag] : null);
 
   return (
-    <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
+    <div className="max-w-208 min-w-0 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       {breadcrumbs?.length > 0 && (
         <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
       )}
@@ -78,27 +78,27 @@ const ApiTagPage = async ({
       )}
 
       {groups ? (
-        <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-1">
+        <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-1">
           {groups.map((group) => (
             <div
               key={group.label}
-              className="rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10"
+              className="border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10"
             >
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="text-[13px] font-semibold text-black-pure dark:text-white">
+                <h3 className="text-sm font-semibold text-black-pure dark:text-white">
                   {group.label}
                 </h3>
-                <span className="font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
+                <span className="font-mono text-xs text-gray-new-50 dark:text-gray-new-60">
                   {group.ops.length}
                 </span>
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-2">
                 {group.ops.map((op) => (
                   <a
                     key={op.id}
                     href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                     className={cn(
-                      'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                      'flex items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
                       op.deprecated
                         ? 'text-gray-new-60 dark:text-gray-new-50'
                         : 'text-gray-new-40 dark:text-gray-new-60'
@@ -113,14 +113,14 @@ const ApiTagPage = async ({
           ))}
         </div>
       ) : (
-        <div className="mt-7 rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
-          <div className="flex flex-col gap-1.5">
+        <div className="mt-7 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
+          <div className="flex flex-col gap-2">
             {operations.map((op) => (
               <a
                 key={op.id}
                 href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                 className={cn(
-                  'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                  'flex items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
                   op.deprecated
                     ? 'text-gray-new-60 dark:text-gray-new-50'
                     : 'text-gray-new-40 dark:text-gray-new-60'

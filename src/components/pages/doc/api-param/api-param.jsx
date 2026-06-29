@@ -25,7 +25,7 @@ const ApiParam = ({
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1.5">
         <code
           className={cn(
-            'font-mono text-[13px] font-semibold',
+            'font-mono text-sm font-semibold',
             deprecated
               ? 'text-gray-new-50 line-through dark:text-gray-new-50'
               : 'text-black-pure dark:text-white'
@@ -34,31 +34,28 @@ const ApiParam = ({
           {name}
         </code>
         {deprecated && (
-          <span className="bg-yellow-400/15 text-yellow-700 dark:bg-yellow-400/10 dark:text-yellow-400 rounded px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium">
+          <span className="border-yellow-700/40 text-yellow-700 dark:border-yellow-400/40 dark:text-yellow-400 border bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium">
             deprecated
           </span>
         )}
         {type && (
           <span
-            className={cn(
-              'rounded px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium',
-              typeStyle
-            )}
+            className={cn('px-1.5 py-0.5 font-mono text-sm leading-normal font-medium', typeStyle)}
           >
             {type}
           </span>
         )}
         {location && (
-          <span className="text-[11px] leading-normal font-medium text-gray-new-50 dark:text-gray-new-60">
+          <span className="text-sm leading-normal font-medium text-gray-new-50 dark:text-gray-new-60">
             {location}
           </span>
         )}
         <span
           className={cn(
-            'ml-auto rounded px-1.5 py-0.5 text-[10px] leading-normal font-semibold uppercase',
+            'ml-auto border bg-transparent px-1.5 py-0.5 text-sm leading-normal font-semibold uppercase',
             required
-              ? 'bg-[#E2301D]/10 text-[#E2301D] dark:bg-[#FF5645]/10 dark:text-[#FF5645]'
-              : 'bg-gray-new-50/10 text-gray-new-50 dark:bg-gray-new-60/10 dark:text-gray-new-60'
+              ? 'border-[#E2301D]/40 text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]'
+              : 'border-gray-new-70 text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60'
           )}
         >
           {required ? 'required' : 'optional'}
@@ -70,7 +67,7 @@ const ApiParam = ({
         </div>
       )}
       {defaultValue !== undefined && defaultValue !== null && (
-        <p className="mt-1.5 font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+        <p className="mt-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
           Default:{' '}
           <span className="text-gray-new-30 dark:text-gray-new-80">{String(defaultValue)}</span>
         </p>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { getStatusStyle } from 'utils/api-style';
+import { getStatusStyle, INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 const ApiResponse = ({ status, description, descriptionHtml, children, className }) => (
@@ -8,7 +8,7 @@ const ApiResponse = ({ status, description, descriptionHtml, children, className
     <div className="mb-3 flex items-start gap-3">
       <span
         className={cn(
-          'mt-0.5 shrink-0 rounded border px-2 py-0.5 font-mono text-[11px] leading-normal font-semibold',
+          'mt-0.5 shrink-0 rounded border px-2 py-0.5 font-mono text-sm leading-normal font-semibold',
           getStatusStyle(status)
         )}
       >
@@ -16,7 +16,10 @@ const ApiResponse = ({ status, description, descriptionHtml, children, className
       </span>
       {descriptionHtml ? (
         <div
-          className="text-sm text-gray-new-30 dark:text-gray-new-70 [&_code]:rounded [&_code]:bg-gray-new-95 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs [&_code]:dark:bg-gray-new-15 [&_li]:mt-1 [&_p+p]:mt-2 [&_strong]:font-semibold [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:pl-4"
+          className={cn(
+            'text-sm text-gray-new-30 dark:text-gray-new-70 [&_li]:mt-1 [&_p+p]:mt-2 [&_strong]:font-semibold [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:pl-4',
+            INLINE_CODE_STYLES
+          )}
           dangerouslySetInnerHTML={{ __html: descriptionHtml }}
         />
       ) : (
