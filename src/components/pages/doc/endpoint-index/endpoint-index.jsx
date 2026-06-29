@@ -8,8 +8,10 @@ import { useEffect, useMemo, useState } from 'react';
 
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/shared/doc-footer';
+import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import ExternalIcon from 'icons/external.inline.svg';
 import { cn } from 'utils/cn';
 
 const NEVER_AUTO_EXPAND = new Set(['auth-legacy']);
@@ -231,6 +233,17 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
       <h1 className="text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]">
         Endpoint index
       </h1>
+
+      <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+        <Link
+          className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+          to="/docs/reference/api.md"
+        >
+          Markdown for AI context
+          <ExternalIcon className="size-3" />
+        </Link>
+        : API overview and all endpoints.
+      </p>
 
       <div className="relative mt-4">
         <input

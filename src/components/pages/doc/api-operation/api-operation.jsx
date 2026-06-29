@@ -6,8 +6,10 @@ import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DropdownMenu from 'components/pages/doc/dropdown-menu';
 import Tag from 'components/pages/doc/tag';
 import DocFooter from 'components/shared/doc-footer';
+import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import ExternalIcon from 'icons/external.inline.svg';
 
 import OperationDoc from './operation-doc';
 import { buildOperationToc } from './operation-toc';
@@ -180,8 +182,19 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
             />
           )}
 
-          <p className="mt-3 text-sm text-gray-new-50 dark:text-gray-new-60">
-            <strong>Auth:</strong> Bearer token required
+          <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+            <Link
+              className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+              to={`/docs/${currentSlug}.md`}
+            >
+              Markdown for AI context
+              <ExternalIcon className="size-3" />
+            </Link>
+            {` (`}
+            <code className="text-[11px]">
+              {operation.method.toUpperCase()} {operation.path}
+            </code>
+            {`): parameters, examples, and available interfaces.`}
           </p>
 
           <OperationDoc operation={operation} bodyTree={bodyTree} respTree={respTree} />

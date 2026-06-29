@@ -105,7 +105,6 @@ describe('DocBodySection', () => {
     expect(screen.getByText('0 required')).toBeInTheDocument();
     expect(screen.getByText(/No field is required/)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Basics' })).toBeInTheDocument();
-    expect(screen.getByText('commonly set')).toBeInTheDocument();
     expect(screen.getByText('Project name')).toBeInTheDocument();
     expect(screen.getByText('default auto-generated')).toBeInTheDocument();
     expect(screen.getByText('17')).toHaveClass('text-[#00B87B]');

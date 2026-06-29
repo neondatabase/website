@@ -194,10 +194,9 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
         onCopy={() => copy('rest', restCode)}
       />
 
-      {operation.examples?.representative && (
+      {emptyBodyAllowed && (
         <p className="mt-3 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
-          A representative request with common fields prefilled.
-          {emptyBodyAllowed ? ' An empty body works too; every field below is optional.' : ''}
+          Every field below is optional. An empty body works too.
         </p>
       )}
 

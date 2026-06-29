@@ -43,11 +43,6 @@ TypeBadge.propTypes = {
 function MetadataBadges({ node, row }) {
   return (
     <>
-      {row?.common && (
-        <span className="rounded bg-[#00B87B]/10 px-1.5 py-0.5 text-[10px] font-semibold text-[#00B87B] dark:text-green-45">
-          common
-        </span>
-      )}
       {row?.outOfObject && (
         <span className="rounded bg-gray-new-90 px-1.5 py-0.5 text-[10px] font-medium text-gray-new-50 dark:bg-gray-new-20 dark:text-gray-new-60">
           top-level field
@@ -65,7 +60,6 @@ function MetadataBadges({ node, row }) {
 MetadataBadges.propTypes = {
   node: PropTypes.object,
   row: PropTypes.shape({
-    common: PropTypes.bool,
     outOfObject: PropTypes.bool,
   }),
 };
@@ -223,7 +217,6 @@ DocField.propTypes = {
   path: PropTypes.string.isRequired,
   labels: PropTypes.object,
   row: PropTypes.shape({
-    common: PropTypes.bool,
     outOfObject: PropTypes.bool,
   }),
   depth: PropTypes.number,
@@ -262,11 +255,6 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
             >
               {section.label}
             </h3>
-            {section.common && (
-              <span className="rounded bg-[#00B87B]/10 px-1.5 py-0.5 text-[10px] font-semibold text-[#00B87B] dark:text-green-45">
-                commonly set
-              </span>
-            )}
             {section.schemaPath && (
               <code className="font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
                 {section.schemaPath}
@@ -285,14 +273,8 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
       </div>
       {open && (
         <div id={fieldsId} className="border-t border-gray-new-90 px-4 dark:border-gray-new-20">
-          {rows.map(({ path, node, common, outOfObject }) => (
-            <DocField
-              key={path}
-              node={node}
-              path={path}
-              labels={labels}
-              row={{ common, outOfObject }}
-            />
+          {rows.map(({ path, node, outOfObject }) => (
+            <DocField key={path} node={node} path={path} labels={labels} row={{ outOfObject }} />
           ))}
         </div>
       )}
@@ -304,14 +286,12 @@ SectionCard.propTypes = {
   section: PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    common: PropTypes.bool,
     blurb: PropTypes.string,
     collapsed: PropTypes.bool,
     schemaPath: PropTypes.string,
     rows: PropTypes.arrayOf(
       PropTypes.shape({
         path: PropTypes.string.isRequired,
-        common: PropTypes.bool,
         outOfObject: PropTypes.bool,
       })
     ).isRequired,

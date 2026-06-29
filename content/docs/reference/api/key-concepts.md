@@ -57,9 +57,9 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10&cursor=...' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-## Important constraints
+## API constraints and limits
 
-Keep these constraints in mind when building automation with the Neon API:
+These constraints apply when building automation with the Neon API:
 
 - You can't delete a project's root or default branch.
 - You can't delete a branch that has child branches. Delete all children first.

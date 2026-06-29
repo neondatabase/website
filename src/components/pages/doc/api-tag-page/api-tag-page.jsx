@@ -6,8 +6,10 @@ import DropdownMenu from 'components/pages/doc/dropdown-menu';
 import Tag from 'components/pages/doc/tag';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
+import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import ExternalIcon from 'icons/external.inline.svg';
 import { cn } from 'utils/cn';
 
 import tagConfig from '../../../../../scripts/data/tag-config.json';
@@ -70,6 +72,17 @@ const ApiTagPage = async ({
         </div>
         <DropdownMenu className="shrink-0" gitHubPath={gitHubPath} />
       </div>
+
+      <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+        <Link
+          className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+          to={`/docs/${currentSlug}.md`}
+        >
+          Markdown for AI context
+          <ExternalIcon className="size-3" />
+        </Link>
+        {` (${tagDisplay}): all ${operations.length} endpoints with parameters and examples.`}
+      </p>
 
       {intro && (
         <div className="mt-6">
