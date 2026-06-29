@@ -6,12 +6,12 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:08:12.470Z'
+updatedOn: '2026-06-29T11:52:45.649Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
+The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). This means you can switch between Claude, GPT, Gemini, and open-weight models by changing a single field, with no SDK changes, no new provider accounts, and no refactored error handling.
 
 **Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
 

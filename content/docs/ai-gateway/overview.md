@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-24T13:43:35.494Z'
+updatedOn: '2026-06-29T11:52:45.649Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
@@ -27,6 +27,8 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 ## Quickstart
 
 <DetailIconCards>
+
+<a href="/docs/ai-gateway/why-ai-gateway" description="Understand the problems Neon AI Gateway solves: vendor lock-in, credential sprawl, and more." icon="app-store">Why AI Gateway</a>
 
 <a href="/docs/ai-gateway/get-started" description="Get a credential and make your first inference request in minutes." icon="todo">Quickstart</a>
 
