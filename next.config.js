@@ -235,6 +235,62 @@ const defaultConfig = {
         destination: '/?ref=tbm-p',
         permanent: true,
       },
+      // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
+      {
+        source: '/branching/identifying-use-case',
+        destination: '/branching/introduction',
+        permanent: true,
+      },
+      {
+        source: '/branching/production-on-neon',
+        destination: '/branching/production-staging-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-developer',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-preview',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-test-run',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branches',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/hierarchies',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/projects',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/ephemeral-environments',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/neon-for-dev-test',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/resources-and-next-steps',
+        destination: '/branching/introduction',
+        permanent: true,
+      },
       {
         source: '/yc-startups',
         destination: '/startups',
