@@ -236,10 +236,10 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl config apply   # apply to the current branch (neonctl deploy is an alias)
+neon config apply   # apply to the current branch (neon deploy is an alias)
 ```
 
-This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neonctl checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
+This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neon checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
 
 ## Further reading
 

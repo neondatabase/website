@@ -41,7 +41,7 @@ app.post('/event', async (c) => {
 export default app;
 ```
 
-Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neon dev`.
 
 ## Concurrency
 

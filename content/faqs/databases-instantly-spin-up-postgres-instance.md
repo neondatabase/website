@@ -14,7 +14,7 @@ Neon provisions a Postgres database in a few seconds. There's no hardware to wai
 Install the CLI and create a project:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 neon auth
 neon projects create --name my-app
 neon connection-string

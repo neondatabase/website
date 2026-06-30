@@ -7,7 +7,7 @@ summary: >-
   plugin, Cursor plugin, GitHub Copilot agents, and Agent Skills. Use this page
   to find the right integration for natural-language database control, safe
   migrations, or autonomous agent backends. A one-command setup (`npx
-  neonctl@latest init`) configures OAuth, installs Agent Skills, and connects
+  neon@latest init`) configures OAuth, installs Agent Skills, and connects
   your editor in a single step.
 enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
@@ -20,7 +20,7 @@ Neon is the backend for apps and agents. This page covers Neon's integrations wi
 The fastest way to get started with Neon and AI:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This authenticates via OAuth, creates an API key, configures your editor or CLI, and installs [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.

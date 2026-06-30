@@ -35,7 +35,7 @@ Before you begin, ensure you have the following:
 
 - **Claude Code:** Anthropic's official CLI tool installed. Visit [Claude code docs](https://code.claude.com/docs/en/quickstart#step-1-install-claude-code) for installation instructions.
 - **Neon account and project:** A Neon account with an active project. Sign up at [neon.new](https://neon.new).
-- The [Neon CLI](/docs/cli) installed (`npm i -g neonctl` or `brew install neonctl`).
+- The [Neon CLI](/docs/cli) installed (`npm i -g neon` or `brew install neon`).
 - **Example application with Git repository**: Any application with a Git repository. This guide uses a Next.js app with Drizzle ORM (a simple social media app) as an example, but you can follow along with your own codebase. The emphasis here is on demonstrating the parallel workflow rather than the specifics of the application.
 
 <Steps>
@@ -114,7 +114,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 if ! command -v neon &>/dev/null; then
-  echo "❌ Neon CLI not found. Install it with: brew install neonctl  OR  npm i -g neonctl"
+  echo "❌ Neon CLI not found. Install it with: brew install neon  OR  npm i -g neon"
   exit 1
 fi
 

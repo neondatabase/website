@@ -2,7 +2,7 @@
 title: Deploy and manage Neon Functions
 subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
-  Reference for deploying Neon Functions with neonctl deploy, neonctl functions
+  Reference for deploying Neon Functions with neon deploy, neon functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
@@ -13,10 +13,10 @@ updatedOn: '2026-06-24T23:12:20.545Z'
 
 ## Deploy with `neon.ts`
 
-If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the recommended way to deploy. `neonctl deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
+If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the recommended way to deploy. `neon deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
 
 ```bash
-neonctl deploy
+neon deploy
 ```
 
 | Flag                | Default           | Description                                                                                          |
@@ -28,24 +28,24 @@ neonctl deploy
 | `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
 | `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
 
-`neonctl deploy` is an alias for `neonctl config apply`. To preview what a deploy would change without applying it, run `neonctl config plan`.
+`neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
-Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neonctl functions deploy` below takes `KEY=VALUE` pairs instead.
+Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
 
-## Deploy with `neonctl functions deploy`
+## Deploy with `neon functions deploy`
 
 To deploy one function directly, without a `neon.ts` config:
 
 ```bash shouldWrap
-neonctl functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
+neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neonctl functions reference](/docs/cli/functions) for the full command surface.
+The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
 | Flag              | Default       | Description                                                                                                                                      |
 | ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                      |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neonctl deploy --env` |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
 | `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
 | `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
 | `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                             |
@@ -53,15 +53,15 @@ The CLI bundles with esbuild, zips the output, and uploads it. The first deploy 
 **Examples:**
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts
+neon functions deploy hello --src functions/hello.ts
 ```
 
 ```bash
-neonctl functions deploy hello --src . --env RESEND_API_KEY=re_...
+neon functions deploy hello --src . --env RESEND_API_KEY=re_...
 ```
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts --branch feat/my-feature
+neon functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
 
 ## Deploy with the API
@@ -116,7 +116,7 @@ The API returns immediately. Poll the get endpoint (see [Check status](#check-st
 
 ## Slugs
 
-The slug is assigned at first deploy: either the key in `neon.ts` or the positional argument to `neonctl functions deploy`. It becomes part of the invocation URL and can't be changed afterward. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
+The slug is assigned at first deploy: either the key in `neon.ts` or the positional argument to `neon functions deploy`. It becomes part of the invocation URL and can't be changed afterward. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
 
 ## Deployment states
 
@@ -135,7 +135,7 @@ The slug is assigned at first deploy: either the key in `neon.ts` or the positio
 <TabItem>
 
 ```bash
-neonctl functions get hello
+neon functions get hello
 ```
 
 </TabItem>
@@ -160,7 +160,7 @@ https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
 <TabItem>
 
 ```bash
-neonctl functions list
+neon functions list
 ```
 
 </TabItem>
@@ -179,7 +179,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions
 <TabItem>
 
 ```bash
-neonctl functions delete hello
+neon functions delete hello
 ```
 
 </TabItem>

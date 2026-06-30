@@ -14,9 +14,9 @@ For a local Postgres instance, `createdb mydb` does the job. For a remote manage
 Install once:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 # or
-brew install neonctl
+brew install neon
 ```
 
 Authenticate with `neon auth` (opens a browser once), or set `NEON_API_KEY` for headless use.

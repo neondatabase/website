@@ -4,7 +4,7 @@ subtitle: Neon-injected variables and how to set your own secrets.
 summary: >-
   Neon injects branch-scoped variables like DATABASE_URL into deployed
   functions automatically. Set your own variables with --env at deploy time or
-  in neon.ts, and pull branch variables locally with neonctl env pull.
+  in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
 updatedOn: '2026-06-24T23:12:20.545Z'
 ---
@@ -39,7 +39,7 @@ These variables are branch-scoped: each branch injects its own values. A functio
 </Admonition>
 
 <Admonition type="note" title="Local pull vs. deployed runtime">
-A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neonctl env pull` writes credentials for the services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access.
+A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neon env pull` writes credentials for the services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access.
 </Admonition>
 
 For type-safe access, the [`@neon/env`](https://www.npmjs.com/package/@neon/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
@@ -63,10 +63,10 @@ Each deployment carries its own snapshot of user-defined variables. To change on
 
 ### At deploy time
 
-Pass `--env KEY=VALUE` to `neonctl functions deploy`. The flag is repeatable:
+Pass `--env KEY=VALUE` to `neon functions deploy`. The flag is repeatable:
 
 ```bash shouldWrap
-neonctl functions deploy hello --src functions/hello.ts --env RESEND_API_KEY=re_...
+neon functions deploy hello --src functions/hello.ts --env RESEND_API_KEY=re_...
 ```
 
 Don't define variables under the names Neon injects (`DATABASE_URL`, `OPENAI_*`, `AWS_*`). Those are provided by the platform when the matching service is enabled on the branch, and setting your own collides with the injected values. The `NEON_` prefix is reserved (see [Constraints](#constraints)).
@@ -79,7 +79,7 @@ A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pa
 
 ### In neon.ts
 
-Declare variables under the function's `env` field. Values are resolved when `neonctl deploy` runs, so you can read from `process.env` to avoid hardcoding secrets:
+Declare variables under the function's `env` field. Values are resolved when `neon deploy` runs, so you can read from `process.env` to avoid hardcoding secrets:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -99,29 +99,29 @@ export default defineConfig({
 });
 ```
 
-Load a `.env` file before running `neonctl deploy` to make secrets available during config evaluation:
+Load a `.env` file before running `neon deploy` to make secrets available during config evaluation:
 
 ```bash
-neonctl deploy --env .env.production
+neon deploy --env .env.production
 ```
 
 The file isn't forwarded to the function directly. Only variables declared in the `env` field are deployed; `--env` only controls what `process.env` contains when `neon.ts` is evaluated.
 
 ## Pull variables locally
 
-`neonctl link` and `neonctl checkout` pull the branch's Neon-injected variables into a local `.env` file automatically (pass `--no-env-pull` to skip). To re-pull at any time:
+`neon link` and `neon checkout` pull the branch's Neon-injected variables into a local `.env` file automatically (pass `--no-env-pull` to skip). To re-pull at any time:
 
 ```bash
-neonctl env pull
+neon env pull
 ```
 
 By default this writes to `.env` if it exists, otherwise `.env.local`. Use `--file` to write to any file:
 
 ```bash
-neonctl env pull --file .env.preview
+neon env pull --file .env.preview
 ```
 
-To pull from a different branch, switch with `neonctl checkout`; it pulls the new branch's variables as part of the switch.
+To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
 `env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Neon Auth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names, so the OpenAI SDKs pick it up from the environment.
 

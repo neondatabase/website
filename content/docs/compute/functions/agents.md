@@ -17,7 +17,7 @@ Neon Functions use different limits: begin responding within 15 minutes, then ke
 
 ## Stream a tool-calling agent
 
-Declare the AI Gateway and the function in `neon.ts`. `neonctl deploy` provisions the gateway and injects its credentials at runtime:
+Declare the AI Gateway and the function in `neon.ts`. `neon deploy` provisions the gateway and injects its credentials at runtime:
 
 ```ts filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
@@ -98,7 +98,7 @@ process.on('SIGINT', () => {
 Deploy and call it. `toUIMessageStreamResponse()` returns a stream the AI SDK's `useChat` hook consumes directly:
 
 ```bash shouldWrap
-curl -N -X POST "$(neonctl functions get agent -o json | jq -r .invocation_url)" \
+curl -N -X POST "$(neon functions get agent -o json | jq -r .invocation_url)" \
   -H 'content-type: application/json' \
   -d '{"messages":[{"role":"user","content":"What time is it in the database?"}]}'
 ```

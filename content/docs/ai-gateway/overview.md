@@ -45,13 +45,13 @@ Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.verc
 **`ai-sdk`**: An image-generation agent that routes model calls through AI Gateway, stores results in Neon Storage, and writes metadata to Postgres on a Neon Function.
 
 ```bash
-neonctl bootstrap --template ai-sdk
+neon bootstrap --template ai-sdk
 ```
 
 **`mastra`**: A personal assistant that uses AI Gateway for LLM calls with Postgres-backed memory on a Neon Function.
 
 ```bash
-neonctl bootstrap --template mastra
+neon bootstrap --template mastra
 ```
 
 <NeedHelp/>

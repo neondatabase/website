@@ -17,7 +17,7 @@ description: >-
 
 This is a preview feature and only available in `us-east-2`. Neon Functions are long-running Node.js HTTP handlers deployed onto a Neon branch. Each function gets a public HTTPS URL, runs in the same region as your database, and — if the branch has Postgres — gets `DATABASE_URL` injected automatically. You deploy and manage them through the same Neon CLI, `neon.ts`, and API you already use.
 
-Use this skill to help the user define, run locally, deploy, and manage functions next to their database. Deliver a deployed function with its invocation URL, a working local `neonctl dev` loop, or a precise answer from the official Neon docs.
+Use this skill to help the user define, run locally, deploy, and manage functions next to their database. Deliver a deployed function with its invocation URL, a working local `neon dev` loop, or a precise answer from the official Neon docs.
 
 ## When to Use
 
@@ -37,7 +37,7 @@ If the workload is a pure static site, a cron/background job that needs its own 
 - **Web-standard handler** — A function is any default export with a `fetch(request)` method returning a `Response` (Workers/WinterTC-compatible). A Hono app exports exactly that shape, so `export default app` just works. Runs on Node.js 24, so all Node APIs are available.
 - **Close to your database** — Runs in the branch's region; `DATABASE_URL` injected automatically when the branch has Postgres.
 - **Branchable** — Each branch runs its own function version at its own URL against its own isolated state.
-- **Same CLI/API** — Deploy and manage via `neonctl`, `neon.ts`, or the Neon API.
+- **Same CLI/API** — Deploy and manage via `neon`, `neon.ts`, or the Neon API.
 
 ## Architecture: where Functions fit
 
@@ -110,25 +110,25 @@ const pool = new Pool({ connectionString: postgres.databaseUrl, max: 5 });
 ## Develop locally and deploy
 
 ```bash
-neonctl dev      # serves every function in neon.ts with hot reload; injects DATABASE_URL & friends
-neonctl deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
+neon dev      # serves every function in neon.ts with hot reload; injects DATABASE_URL & friends
+neon deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
 ```
 
-To deploy a single function without `neon.ts`: `neonctl functions deploy <slug> --path . --entry src/index.ts`. Retrieve the public URL with `neonctl functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech`). Manage with `neonctl functions list|get|delete`.
+To deploy a single function without `neon.ts`: `neon functions deploy <slug> --path . --entry src/index.ts`. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
 
-When `neonctl checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neonctl deploy` explicitly.
+When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neon deploy` explicitly.
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
 The `preview.functions` block from [Setup](#setup) is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares every function (its `source`, display `name`, and `env`) alongside any other branch services, in version control (see the `neon` skill for the full reference). Treat it like Terraform for your branch:
 
 ```bash
-neonctl config status   # print the branch's live config (deployed functions)
-neonctl config plan     # dry-run diff of what apply would change
-neonctl config apply    # bundle + deploy the declared functions  (neonctl deploy is an alias)
+neon config status   # print the branch's live config (deployed functions)
+neon config plan     # dry-run diff of what apply would change
+neon config apply    # bundle + deploy the declared functions  (neon deploy is an alias)
 ```
 
-Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neonctl checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the function already deployed. Checking out an _existing_ branch doesn't redeploy — run `neonctl deploy` to apply changes.
+Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the function already deployed. Checking out an _existing_ branch doesn't redeploy — run `neon deploy` to apply changes.
 
 Per-branch deploy tuning (e.g. `runtime`) lives in the `branch` closure, keyed by slug, so it can vary by branch without changing which functions exist:
 
@@ -157,9 +157,9 @@ Neon injects branch-scoped connection strings and service URLs at runtime — yo
 
 Object storage (`AWS_*`) and AI Gateway (`OPENAI_*`, `NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
 
-`neonctl env pull` / `neon-env run` / `neonctl dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
+`neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
 
-**Your own secrets** are per-deployment. Set them with `--env KEY=VALUE` on `neonctl functions deploy` (repeatable; `--env KEY=` deletes a key, unmentioned keys carry over), or declare them in `neon.ts` under the function's `env` (resolved at deploy time, so read from `process.env` to avoid hardcoding):
+**Your own secrets** are per-deployment. Set them with `--env KEY=VALUE` on `neon functions deploy` (repeatable; `--env KEY=` deletes a key, unmentioned keys carry over), or declare them in `neon.ts` under the function's `env` (resolved at deploy time, so read from `process.env` to avoid hardcoding):
 
 ```typescript
 functions: {
@@ -171,7 +171,7 @@ functions: {
 }
 ```
 
-Load a `.env` before deploy with `neonctl deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neonctl env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
+Load a `.env` before deploy with `neon deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
 
 ## Connecting to Postgres
 

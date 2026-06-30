@@ -7,13 +7,13 @@ The Neon CLI is a command-line interface for managing Neon Serverless Postgres d
 **macOS (Homebrew):**
 
 ```bash
-brew install neonctl
+brew install neon
 ```
 
 **npm (cross-platform):**
 
 ```bash
-npm install -g neonctl
+npm install -g neon
 ```
 
 ## Authentication
@@ -21,7 +21,7 @@ npm install -g neonctl
 Authenticate with your Neon account:
 
 ```bash
-neonctl auth
+neon auth
 ```
 
 This opens a browser for OAuth authentication and stores credentials locally.
@@ -40,65 +40,65 @@ Get your API key from: https://console.neon.tech/app/settings/api-keys
 
 ```bash
 # List all projects (org-scoped)
-neonctl projects list --org-id <org-id>
+neon projects list --org-id <org-id>
 
 # Create a new project
-neonctl projects create --name my-project --org-id <org-id>
+neon projects create --name my-project --org-id <org-id>
 
 # Get project details
-neonctl projects get <project-id>
+neon projects get <project-id>
 
 # Delete a project
-neonctl projects delete <project-id>
+neon projects delete <project-id>
 ```
 
 ### Branch Operations
 
 ```bash
 # List branches
-neonctl branches list --project-id <project-id>
+neon branches list --project-id <project-id>
 
 # Create a branch
-neonctl branches create --project-id <project-id> --name dev
+neon branches create --project-id <project-id> --name dev
 
 # Delete a branch
-neonctl branches delete <branch-id> --project-id <project-id>
+neon branches delete <branch-id> --project-id <project-id>
 ```
 
 ### Connection Strings
 
 ```bash
 # Get connection string
-neonctl connection-string --project-id <project-id>
+neon connection-string --project-id <project-id>
 
 # Get connection string for specific branch
-neonctl connection-string <branch-id-or-name> --project-id <project-id>
+neon connection-string <branch-id-or-name> --project-id <project-id>
 
 # Get pooled connection string
-neonctl connection-string --project-id <project-id> --pooled
+neon connection-string --project-id <project-id> --pooled
 ```
 
 ### SQL Execution
 
 ```bash
 # Run SQL query
-neonctl sql "SELECT * FROM users LIMIT 10" --project-id <project-id>
+neon sql "SELECT * FROM users LIMIT 10" --project-id <project-id>
 
 # Run SQL from file
-neonctl sql --file schema.sql --project-id <project-id>
+neon sql --file schema.sql --project-id <project-id>
 ```
 
 ### Database Management
 
 ```bash
 # List databases
-neonctl databases list --project-id <project-id> --branch <branch-id-or-name>
+neon databases list --project-id <project-id> --branch <branch-id-or-name>
 
 # Create database
-neonctl databases create --project-id <project-id> --name mydb
+neon databases create --project-id <project-id> --name mydb
 
 # List roles
-neonctl roles list --project-id <project-id> --branch <branch-id-or-name>
+neon roles list --project-id <project-id> --branch <branch-id-or-name>
 ```
 
 ## Output Formats
@@ -107,13 +107,13 @@ The CLI supports multiple output formats:
 
 ```bash
 # JSON output (default for scripting)
-neonctl projects list --output json
+neon projects list --output json
 
 # Table output (human-readable)
-neonctl projects list --output table
+neon projects list --output table
 
 # YAML output
-neonctl projects list --output yaml
+neon projects list --output yaml
 ```
 
 ## CI/CD Integration
@@ -125,7 +125,7 @@ Example GitHub Actions workflow:
   env:
     NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
   run: |
-    neonctl branches create \
+    neon branches create \
       --project-id ${{ vars.NEON_PROJECT_ID }} \
       --name preview-${{ github.event.pull_request.number }}
 ```

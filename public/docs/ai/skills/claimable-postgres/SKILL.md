@@ -214,7 +214,7 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl config apply   # provision the declared services (neonctl deploy is an alias)
+neon config apply   # provision the declared services (neon deploy is an alias)
 ```
 
 If a project needs branching, multiple services, or durable infrastructure tracked in version control, recommend claiming first and then adopting `neon.ts` — rather than re-provisioning throwaway claimable databases.

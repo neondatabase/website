@@ -7,14 +7,14 @@ createdAt: '2026-06-24T00:00:00.000Z'
 updatedOn: '2026-06-25T04:44:21.969Z'
 ---
 
-[`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neonctl`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
+[`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
 
 With `neon.ts`, you can:
 
 - **Provision Neon services** like Postgres, [Neon Auth](/docs/auth/overview), and the [Data API](/docs/data-api/overview) directly from your codebase.
 - **Configure branch policies** programmatically, for example, auto-suspending preview branches or applying cost-saving TTLs.
 - **Generate type-safe environment variables** so your application knows exactly which services are available, complete with IDE autocomplete.
-- **Skip state files entirely**, since `neonctl` reads live state directly from your Neon project.
+- **Skip state files entirely**, since `neon` reads live state directly from your Neon project.
 
 In this guide, you will build a simple application that uses `neon.ts` to provision Neon services, enforce branch-level compute limits, and generate type-safe environment variables. You will learn how to:
 
@@ -29,7 +29,7 @@ Before you begin, ensure you have the following:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neonctl`) and authenticated (`neonctl auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
@@ -51,7 +51,7 @@ npm install @neon/config @neon/env
 Link your local project to a Neon project using the Neon CLI:
 
 ```bash
-neonctl link
+neon link
 ```
 
 Follow the prompts to select an existing Neon project or create a new one. This command establishes the connection between your local environment and your Neon Project.
@@ -124,7 +124,7 @@ The `neon.ts` file defines the Neon services and branch policies for your projec
 - **Production**: Allows scaling up to 2 Compute Units (CU). You can additionally mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
 - **Development branches** (`dev*`): Applies strict resource controls to new branches whose name starts with `dev`: capped at 1 CU, and scheduled for deletion after 7 days to prevent unnecessary costs.
 - **Other new branches**: Gets an even more minimal profile with a 2-day TTL and a fixed 0.25 CU compute ceiling.
-- **Existing branches**: Left untouched. Returning `{}` for branches that already exist avoids overwriting settings on branches already in use. This is important: `neonctl checkout` only applies policy when _creating_ a new branch, never when checking out an existing one.
+- **Existing branches**: Left untouched. Returning `{}` for branches that already exist avoids overwriting settings on branches already in use. This is important: `neon checkout` only applies policy when _creating_ a new branch, never when checking out an existing one.
 
 The config above is just a starting point. Every field shown is configurable: compute limits (`autoscalingLimitMinCu`, `autoscalingLimitMaxCu`), idle suspend behavior (`suspendTimeout`), branch lifetime (`ttl`), protected status, and more. You can also set a `parent` branch for new branches to clone from. See the [`neon.ts` reference](/docs/reference/neon-ts) for the full list of available fields and their valid values.
 
@@ -148,13 +148,13 @@ Now that your infrastructure is defined, apply it using the Neon CLI.
 Preview what would change with a dry run:
 
 ```bash
-neonctl config plan
+neon config plan
 ```
 
 This shows a table of pending changes without applying them:
 
 ```bash
-$ neonctl config plan
+$ neon config plan
   Planned changes
   ┌────────┬─────────┬────────────┐
   │ Action │ Kind    │ Identifier │
@@ -170,15 +170,15 @@ $ neonctl config plan
 When you are ready, apply the changes:
 
 ```bash
-neonctl deploy
+neon deploy
 ```
 
 <Admonition type="tip">
-`neonctl deploy` is an alias for `neonctl config apply`. Use `neonctl config plan` first if you want to preview changes before applying.
+`neon deploy` is an alias for `neon config apply`. Use `neon config plan` first if you want to preview changes before applying.
 </Admonition>
 
 <Admonition type="note" title="Conflicting remote state">
-If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), `neonctl deploy` may fail with:
+If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), `neon deploy` may fail with:
 
 ```text
 ERROR: pushConfig refused to apply: local config conflicts with remote state.
@@ -187,16 +187,16 @@ ERROR: pushConfig refused to apply: local config conflicts with remote state.
 This happens because the CLI will not silently overwrite existing remote settings. To override and apply your `neon.ts` configuration, pass the `--update-existing` flag:
 
 ```bash
-neonctl deploy --update-existing
+neon deploy --update-existing
 ```
 
-For a full list of available flags, see the [neonctl config reference](/docs/cli/config).
+For a full list of available flags, see the [neon config reference](/docs/cli/config).
 </Admonition>
 
 You will see output indicating that the services are being provisioned:
 
 ```bash
-$ neonctl deploy
+$ neon deploy
   INFO: → Applying to branch main (br-polished-rain-ajh9uwwj)
   Applied changes
   ┌────────┬─────────┬────────────┐
@@ -211,7 +211,7 @@ $ neonctl deploy
   INFO: Pulled 6 Neon variables into /home/neon-ts-demo/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL, NEON_DATA_API_URL
 ```
 
-After the deploy completes, `neonctl` automatically updates your `.env.local` file with the connection strings and URLs for the services you just provisioned. This ensures that your application can securely access the Neon services without manual configuration.
+After the deploy completes, `neon` automatically updates your `.env.local` file with the connection strings and URLs for the services you just provisioned. This ensures that your application can securely access the Neon services without manual configuration.
 
 ## Use type-safe environment variables
 
@@ -305,16 +305,16 @@ git checkout -b dev-user-profiles
 Then, run the Neon CLI to create a new isolated database branch for this feature:
 
 ```bash
-neonctl checkout dev-user-profiles
+neon checkout dev-user-profiles
 ```
 
-> You can also run `neonctl checkout` without a name to get an interactive branch picker with a create option.
+> You can also run `neon checkout` without a name to get an interactive branch picker with a create option.
 
 Neon will automatically provision a new isolated database branch for your feature. The following happens automatically:
 
 1. **Database branch creation:** Neon creates an isolated clone of your database using Copy-on-Write.
-2. **Apply Policy:** Because of your `neon.ts` file, `neonctl` recognizes this is a new branch. Since the branch name starts with `dev`, it automatically applies the `7d` TTL and restricts compute limits to `0.25 - 1 CU`.
-3. **Sync environment:** `neonctl` automatically updates your `.env.local` file with the connection string and Auth URLs for this _specific_ branch.
+2. **Apply Policy:** Because of your `neon.ts` file, `neon` recognizes this is a new branch. Since the branch name starts with `dev`, it automatically applies the `7d` TTL and restricts compute limits to `0.25 - 1 CU`.
+3. **Sync environment:** `neon` automatically updates your `.env.local` file with the connection string and Auth URLs for this _specific_ branch.
 
 Now you have a completely isolated environment for your feature: a git branch, a database branch, and the correct environment variables. You can immediately start coding. Your app is now talking to your isolated database branch, and any changes you make will not affect the main branch or other developers.
 
@@ -328,10 +328,10 @@ git merge dev-user-profiles
 # npx drizzle-kit migrate
 
 git branch -d dev-user-profiles
-neonctl branches delete dev-user-profiles
+neon branches delete dev-user-profiles
 ```
 
-To confirm the state of your current branch at any time you can run `neonctl config status` (similar to `git status`), which shows the current branch, its `expiresAt` date, and the services provisioned for it.
+To confirm the state of your current branch at any time you can run `neon config status` (similar to `git status`), which shows the current branch, its `expiresAt` date, and the services provisioned for it.
 
 </Steps>
 
@@ -357,7 +357,7 @@ preview: {
 }
 ```
 
-Running `neonctl deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neonctl dev` to hot-reload your functions against your linked branch.
+Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
 
 _To request access to Neon Functions and Storage, see [Preview access](/docs/compute/functions/preview-access)._
 
@@ -372,8 +372,8 @@ By using `neon.ts`, you bridge the gap between infrastructure and application co
 ## Resources
 
 - [`neon.ts` Reference](/docs/reference/neon-ts)
-- [neonctl CLI Reference](/docs/cli)
-- [neonctl config/deploy Reference](/docs/cli/config)
+- [neon CLI Reference](/docs/cli)
+- [neon config/deploy Reference](/docs/cli/config)
 - [Branching Overview](/docs/manage/branches)
 - [Neon Auth](/docs/auth/overview)
 

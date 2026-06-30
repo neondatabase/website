@@ -85,7 +85,7 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 ## Examples and templates
 
-Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neonctl bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
+Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 
 | Example                  | `--template`    | Source                                                                                      | Neon services                                   | Stack                 |
 | ------------------------ | --------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |

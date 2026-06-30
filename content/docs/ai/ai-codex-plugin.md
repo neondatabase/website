@@ -8,7 +8,7 @@ summary: >-
   Codex to create and manage Neon projects, run SQL, validate connection
   strings, or reduce data transfer costs through natural-language prompts in
   the Codex CLI or app. Install via the Codex CLI (`npm install -g
-  @openai/codex`) or Codex app, or run `npx neonctl@latest init` to configure
+  @openai/codex`) or Codex app, or run `npx neon@latest init` to configure
   MCP and skills across supported AI tools.
 description: >-
   Install the Neon Postgres plugin in OpenAI Codex for MCP-backed database
@@ -109,10 +109,10 @@ Start a new thread and describe what you want in natural language, or type `@` t
 To configure Neon MCP and agent skills across supported tools from the command line, you can run:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
-That flow can set up OAuth, API keys, MCP configuration, and project-level skills where applicable. See the [`neonctl init` reference](/docs/cli/init) for details.
+That flow can set up OAuth, API keys, MCP configuration, and project-level skills where applicable. See the [`neon init` reference](/docs/cli/init) for details.
 
 ## Use skills outside the Codex plugin
 

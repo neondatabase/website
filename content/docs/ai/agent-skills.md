@@ -8,7 +8,7 @@ summary: >-
   Agent Skills-compatible tool. Skills cover Postgres, Auth, Neon Functions,
   Object Storage, AI Gateway, branching workflows, and more. Install all skills
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
-  `neonctl init`, or editor plugins at project level or globally.
+  `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
 updatedOn: '2026-06-26T10:41:58.102Z'
 redirectFrom:
@@ -83,17 +83,17 @@ If you're using OpenAI Codex, install the **Neon Postgres** plugin from the [Cod
 
 See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
-### neonctl init
+### neon init
 
-The `neonctl init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
+The `neon init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
-If you're in the **platform private preview** (Functions, Storage, AI Gateway), use `neonctl init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for access and setup.
+If you're in the **platform private preview** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for access and setup.
 
-After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/cli/init) for details.
+After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neon init` reference](/docs/cli/init) for details.
 
 ## Available skills
 
@@ -136,7 +136,7 @@ For codegen tools and multi-tenant products that provision Neon for their users,
 
 Skills can be installed at two levels:
 
-- **Project level** (default): Skills are installed in your project directory, for example via `neonctl init` or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
+- **Project level** (default): Skills are installed in your project directory, for example via `neon init` or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
 - **Global**: Skills are installed at the user or system level and available across all projects. Useful for personal development environments where you want Neon context everywhere. Pass the `-g` flag to install globally:
 
   ```bash
