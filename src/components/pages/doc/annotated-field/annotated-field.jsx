@@ -148,31 +148,12 @@ DetailCard.propTypes = {
 
 // ── Shared row wrapper ──────────────────────────────────────────────────────
 
-const FieldRow = ({
-  indent,
-  isHovered,
-  isInteractive,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-  children,
-}) => (
+const FieldRow = ({ indent, isHovered, onMouseEnter, onMouseLeave, children }) => (
   <div
-    role={isInteractive ? 'button' : undefined}
-    tabIndex={isInteractive ? 0 : undefined}
-    onClick={onClick}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
-    onKeyDown={(e) => {
-      if (!isInteractive) return;
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        onClick?.(e);
-      }
-    }}
     className={cn(
       'flex items-baseline justify-between gap-4 border-l-2 px-5 py-1.5 transition-all duration-100',
-      isInteractive && 'cursor-pointer',
       isHovered
         ? 'border-l-green-45/70 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
         : 'border-l-transparent'
@@ -186,8 +167,6 @@ const FieldRow = ({
 FieldRow.propTypes = {
   indent: PropTypes.number.isRequired,
   isHovered: PropTypes.bool,
-  isInteractive: PropTypes.bool,
-  onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   children: PropTypes.node.isRequired,
@@ -297,104 +276,113 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
   const bracket = hasKids ? (node.type === 'array' ? '[' : '{') : null;
   const closeBracket = node.type === 'array' ? ']' : '}';
   const hasDetails = Boolean(node.details);
+  const leftContentClassName = cn(
+    'flex min-w-0 flex-wrap items-baseline gap-0 text-left',
+    hasKids && 'cursor-pointer',
+    node.deprecated && 'opacity-50'
+  );
+  const fieldContent = (
+    <>
+      {hasKids && (
+        <span
+          className="mr-1 p-0 text-sm text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
+          style={{ transform: open ? 'rotate(90deg)' : 'none' }}
+          aria-hidden="true"
+        >
+          ▶
+        </span>
+      )}
+      <span
+        className={cn(
+          'font-mono text-sm',
+          node.deprecated
+            ? 'text-gray-new-50 line-through dark:text-gray-new-60'
+            : 'text-[var(--shiki-token-string-expression)]'
+        )}
+      >
+        &quot;{node.key}&quot;
+      </span>
+      <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">: </span>
+      {bracket && !open ? (
+        <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {bracket}…{closeBracket}
+          <span className="ml-1.5 text-sm">
+            {node.children.length} {node.type === 'array' ? 'items' : 'fields'}
+          </span>
+        </span>
+      ) : bracket ? (
+        <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">{bracket}</span>
+      ) : (
+        <>
+          <span className={cn('font-mono text-sm', getTypeColor(node.type))}>
+            {node.value ?? `(${node.type})`}
+          </span>
+          <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">,</span>
+        </>
+      )}
+      {node.required && (
+        <span className="text-red-600 ml-1.5 font-mono text-sm font-semibold tracking-wider dark:text-[#FF5645]">
+          req
+        </span>
+      )}
+      {node.deprecated && (
+        <span className="ml-1.5 rounded border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
+          deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
+        </span>
+      )}
+      {node.enum && (
+        <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.enum.join(' | ')}
+        </span>
+      )}
+      {node.format && (
+        <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.format}
+        </span>
+      )}
+      {node.constraints && (
+        <span className="ml-1.5 text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.constraints}
+        </span>
+      )}
+    </>
+  );
 
   return (
     <>
       <FieldRow
         indent={indent}
         isHovered={hovered || pinned}
-        isInteractive={hasDetails}
-        onClick={() => hasDetails && setPinned((p) => !p)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div
-          className={cn(
-            'flex min-w-0 flex-wrap items-baseline gap-0',
-            node.deprecated && 'opacity-50'
-          )}
-        >
-          {hasKids && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggle(path);
-              }}
-              className="mr-1 p-0 text-sm text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
-              style={{ transform: open ? 'rotate(90deg)' : 'none' }}
-            >
-              ▶
-            </button>
-          )}
-          <span
-            className={cn(
-              'font-mono text-sm',
-              node.deprecated
-                ? 'text-gray-new-50 line-through dark:text-gray-new-60'
-                : 'text-[var(--shiki-token-string-expression)]'
-            )}
+        {hasKids ? (
+          <button
+            type="button"
+            onClick={() => onToggle(path)}
+            aria-expanded={open}
+            aria-label={`${open ? 'Collapse' : 'Expand'} ${node.key}`}
+            className={leftContentClassName}
           >
-            &quot;{node.key}&quot;
-          </span>
-          <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">: </span>
-          {bracket && !open ? (
-            <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-              {bracket}…{closeBracket}
-              <span className="ml-1.5 text-sm">
-                {node.children.length} {node.type === 'array' ? 'items' : 'fields'}
-              </span>
-            </span>
-          ) : bracket ? (
-            <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-              {bracket}
-            </span>
-          ) : (
-            <>
-              <span className={cn('font-mono text-sm', getTypeColor(node.type))}>
-                {node.value ?? `(${node.type})`}
-              </span>
-              <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">,</span>
-            </>
-          )}
-          {node.required && (
-            <span className="text-red-600 ml-1.5 font-mono text-sm font-semibold tracking-wider dark:text-[#FF5645]">
-              req
-            </span>
-          )}
-          {node.deprecated && (
-            <span className="ml-1.5 rounded border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
-              deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
-            </span>
-          )}
-          {node.enum && (
-            <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-              {node.enum.join(' | ')}
-            </span>
-          )}
-          {node.format && (
-            <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-              {node.format}
-            </span>
-          )}
-          {node.constraints && (
-            <span className="ml-1.5 text-sm text-gray-new-50 dark:text-gray-new-60">
-              {node.constraints}
-            </span>
-          )}
-        </div>
+            {fieldContent}
+          </button>
+        ) : (
+          <div className={leftContentClassName}>{fieldContent}</div>
+        )}
 
         {hasDetails && (
-          <span
-            aria-hidden="true"
+          <button
+            type="button"
+            onClick={() => setPinned((p) => !p)}
+            aria-label={`${pinned ? 'Hide' : 'Show'} ${node.key} details`}
             className={cn(
-              'ml-auto shrink-0 text-sm leading-none transition-colors',
+              'ml-auto shrink-0 cursor-pointer text-sm leading-none transition-colors',
               pinned ? 'text-green-44' : 'text-gray-new-50 dark:text-gray-new-60',
               hovered && !pinned && 'text-gray-new-30 dark:text-gray-new-80'
             )}
           >
             ⓘ
-          </span>
+          </button>
         )}
       </FieldRow>
 

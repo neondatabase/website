@@ -119,10 +119,10 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
         {respTree.length === 0 && operation.response?.example == null ? (
           <p className="text-sm text-gray-new-50 dark:text-gray-new-60">No example available.</p>
         ) : (
-          <div className="overflow-hidden border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+          <div className="max-w-full overflow-hidden border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
             {/* Header bar: tabs left, controls right */}
-            <div className="flex min-h-11 items-stretch justify-between border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
-              <div className="flex">
+            <div className="relative flex min-h-11 w-full items-stretch justify-between bg-gray-new-98 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
+              <div className="relative z-10 no-scrollbars flex flex-nowrap gap-5 overflow-auto pl-5">
                 {['schema', ...(operation.response?.example != null ? ['example'] : [])].map(
                   (v) => (
                     <button
@@ -130,10 +130,10 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                       type="button"
                       onClick={() => state.setView(v)}
                       className={cn(
-                        'px-4 text-sm leading-none font-medium capitalize transition-colors',
+                        'relative z-10 cursor-pointer border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-extra-tight whitespace-nowrap capitalize transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                         state.view === v
-                          ? 'border-b-2 border-b-[#00B87B] bg-[rgba(0,229,153,0.04)] text-[#00B87B] dark:bg-[rgba(0,229,153,0.05)] dark:text-green-45'
-                          : 'border-b-2 border-b-transparent text-gray-new-50 hover:bg-gray-new-95 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:bg-gray-new-10'
+                          ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
+                          : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
                       )}
                     >
                       {v}
@@ -141,33 +141,33 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                   )
                 )}
               </div>
-              <div className="flex items-center gap-2.5 px-3.5">
+              <div className="relative z-10 flex items-center gap-2.5 px-3.5">
                 {state.view === 'schema' && (
-                  <>
-                    <DepthControl value={state.depth} onChange={state.setDepth} />
-                    <span className="h-4 w-px bg-gray-new-90 dark:bg-gray-new-20" />
-                  </>
+                  <DepthControl value={state.depth} onChange={state.setDepth} />
                 )}
                 {operation.response?.example != null && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      copy('resp', JSON.stringify(operation.response.example, null, 2))
-                    }
-                    className={cn(
-                      'border border-gray-new-80 bg-white p-1.5 text-gray-new-40 transition-[background-color,color] duration-200 hover:bg-gray-new-90 hover:text-gray-new-30 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 dark:hover:text-gray-new-80',
-                      copiedId === 'resp'
-                        ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
-                        : ''
-                    )}
-                    aria-label={copiedId === 'resp' ? 'Copied JSON' : 'Copy JSON'}
-                  >
-                    {copiedId === 'resp' ? (
-                      <CheckIcon className="h-3.5 w-3.5 text-current" />
-                    ) : (
-                      <CopyIcon className="h-3.5 w-3.5 text-current" />
-                    )}
-                  </button>
+                  <>
+                    <span className="h-4 w-px bg-gray-new-90 dark:bg-gray-new-20" />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        copy('resp', JSON.stringify(operation.response.example, null, 2))
+                      }
+                      className={cn(
+                        'border border-gray-new-80 bg-white p-1.5 text-gray-new-40 transition-[background-color,color] duration-200 hover:bg-gray-new-90 hover:text-gray-new-30 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 dark:hover:text-gray-new-80',
+                        copiedId === 'resp'
+                          ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
+                          : ''
+                      )}
+                      aria-label={copiedId === 'resp' ? 'Copied JSON' : 'Copy JSON'}
+                    >
+                      {copiedId === 'resp' ? (
+                        <CheckIcon className="h-3.5 w-3.5 text-current" />
+                      ) : (
+                        <CopyIcon className="h-3.5 w-3.5 text-current" />
+                      )}
+                    </button>
+                  </>
                 )}
               </div>
             </div>

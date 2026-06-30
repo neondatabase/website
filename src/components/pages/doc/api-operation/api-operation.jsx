@@ -162,11 +162,15 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
                 <Tag
                   label={operation.stability}
                   size="sm"
-                  className="ml-1 inline-flex tabular-nums"
+                  className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
                 />
               )}
               {operation.deprecated && (
-                <Tag label="deprecated" size="sm" className="ml-1 inline-flex tabular-nums" />
+                <Tag
+                  label="deprecated"
+                  size="sm"
+                  className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
+                />
               )}
             </span>
           </div>

@@ -99,7 +99,7 @@ const ApiTagPage = async ({
                     key={op.id}
                     href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                     className={cn(
-                      'inline-flex w-fit items-center gap-2 text-sm leading-tight text-balance transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
+                      'inline-flex w-fit items-center gap-2 text-sm leading-tight text-balance transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                       op.deprecated
                         ? 'text-gray-new-60 dark:text-gray-new-50'
                         : 'text-gray-new-40 dark:text-gray-new-60'
@@ -109,7 +109,7 @@ const ApiTagPage = async ({
                       {op.summary}
                       {op.deprecated && (
                         <Tag
-                          className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                          className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                           label="deprecated"
                           size="sm"
                         />
@@ -129,7 +129,7 @@ const ApiTagPage = async ({
                 key={op.id}
                 href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                 className={cn(
-                  'inline-flex w-fit items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-green-45 dark:hover:text-green-45',
+                  'inline-flex w-fit items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                   op.deprecated
                     ? 'text-gray-new-60 dark:text-gray-new-50'
                     : 'text-gray-new-40 dark:text-gray-new-60'
@@ -139,7 +139,7 @@ const ApiTagPage = async ({
                   {op.summary}
                   {op.deprecated && (
                     <Tag
-                      className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                      className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                       label="deprecated"
                       size="sm"
                     />

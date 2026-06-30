@@ -138,7 +138,7 @@ const Item = ({
               {title}
               {tag && (
                 <Tag
-                  className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                  className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                   label={tag}
                   size="sm"
                 />
@@ -179,7 +179,7 @@ const Item = ({
             {title}
             {tag && (
               <Tag
-                className="ml-2 inline-flex text-[0.6875rem] tracking-tight tabular-nums"
+                className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                 label={tag}
                 size="sm"
               />

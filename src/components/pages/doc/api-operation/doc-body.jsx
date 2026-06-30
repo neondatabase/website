@@ -29,17 +29,24 @@ function descriptionText(node) {
   return node?.details?.description ?? node?.description ?? '';
 }
 
-function TypeBadge({ type }) {
-  if (!type) return null;
+function TypeBadge({ label, variant }) {
+  if (!label) return null;
   return (
-    <span className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white">
-      {type}
+    <span
+      className={cn(
+        'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white',
+        variant === 'value' &&
+          'bg-gray-new-98 px-1.5 py-0.5 text-gray-new-40 dark:border-gray-new-20 dark:bg-white/10 dark:text-gray-new-70'
+      )}
+    >
+      {label}
     </span>
   );
 }
 
 TypeBadge.propTypes = {
-  type: PropTypes.string,
+  label: PropTypes.string,
+  variant: PropTypes.oneOf(['type', 'value']),
 };
 
 function MetadataBadges({ node, row }) {
@@ -155,8 +162,8 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
             {node.key}
           </code>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <TypeBadge type={node.type} />
-            {defaultLabel && <TypeBadge type={`default ${defaultLabel}`} />}
+            <TypeBadge label={node.type} />
+            {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
           </div>
         </div>
         <div>
@@ -337,7 +344,6 @@ function RequiredSummary({ requiredFields, bodyRequired }) {
   return (
     <div className="mb-4 border-l-2 border-[#00B87B] bg-[#00B87B]/5 px-4 py-3 dark:bg-green-45/5">
       <p className="text-sm leading-relaxed text-gray-new-40 dark:text-gray-new-70">
-        <strong className="font-semibold text-black-pure dark:text-white">{count} required</strong>{' '}
         {count === 0 ? (
           <>
             No field is required.
@@ -345,6 +351,9 @@ function RequiredSummary({ requiredFields, bodyRequired }) {
           </>
         ) : (
           <>
+            <strong className="font-semibold text-black-pure dark:text-white">
+              {count} required
+            </strong>{' '}
             Required:{' '}
             {requiredFields.map((field, index) => (
               <span key={field}>

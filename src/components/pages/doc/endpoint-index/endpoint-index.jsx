@@ -228,7 +228,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search endpoints, fields, parameters..."
-          className="w-full rounded-sm border border-gray-new-90 bg-white px-4 py-2.5 font-mono text-sm text-gray-new-20 placeholder-gray-new-50 transition-colors duration-200 outline-none focus:border-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-80 dark:placeholder-gray-new-60 dark:focus:border-gray-new-50"
+          className="h-9 w-full border border-gray-new-90 bg-white px-4 text-sm text-gray-new-20 placeholder-gray-new-50 transition-colors duration-200 outline-none focus:border-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-80 dark:placeholder-gray-new-60 dark:focus:border-gray-new-50 md:text-base"
         />
         {query && (
           <button
@@ -244,7 +244,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
 
       {results !== null ? (
         <div className="mt-4">
-          <p className="mb-3 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          <p className="mb-3 text-sm text-gray-new-50 dark:text-gray-new-60">
             {results.length === 0
               ? `No results for "${trimmed}"`
               : `${results.length} result${results.length === 1 ? '' : 's'} for "${trimmed}"`}
@@ -263,16 +263,16 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
                   <div className="flex items-center gap-3">
                     <span
                       className={cn(
-                        'w-12 shrink-0 font-mono text-xs font-semibold uppercase',
+                        'w-12 shrink-0 text-sm font-semibold uppercase',
                         METHOD_TEXT_STYLES[method] ?? METHOD_TEXT_FALLBACK_STYLE
                       )}
                     >
                       {method}
                     </span>
-                    <code className="flex-1 overflow-hidden font-mono text-xs text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
+                    <code className="flex-1 overflow-hidden text-sm text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
                       {item.path}
                     </code>
-                    <span className="shrink-0 rounded-sm bg-gray-new-95 px-1.5 py-0.5 font-mono text-xs text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
+                    <span className="shrink-0 rounded-sm bg-gray-new-95 px-1.5 py-0.5 text-sm text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
                       {item.tagDisplay}
                     </span>
                   </div>
@@ -292,14 +292,14 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
         </div>
       ) : (
         <>
-          <div className="mt-1 flex items-center justify-between">
-            <p className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          <div className="mt-3 flex items-center justify-between">
+            <p className="text-sm text-gray-new-50 dark:text-gray-new-60">
               All {total} Neon API endpoints
             </p>
             <button
               type="button"
               onClick={toggleAll}
-              className="text-xs text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-50"
+              className="text-sm text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-50"
             >
               {allExpanded ? 'Collapse all' : 'Expand all'}
             </button>

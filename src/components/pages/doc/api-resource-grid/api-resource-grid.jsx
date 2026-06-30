@@ -1,6 +1,9 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+import Link from 'next/link';
+
+import Button from 'components/shared/button';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import tagConfig from '../../../../../scripts/data/tag-config.json';
@@ -48,27 +51,28 @@ const ApiResourceGrid = () => {
     <div className="not-prose">
       <div className="mb-5 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
         <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-start">
-          <p className="font-mono text-xs text-gray-new-50 dark:text-gray-new-60">
+          <p className="text-[0.9375rem] text-gray-new-50 dark:text-gray-new-60">
             {total} endpoints across {resources.length} resources
           </p>
-          <a
+          <Button
             href={`${DOCS_BASE_PATH}reference/api/reference`}
-            className="shrink-0 rounded-sm border border-green-45/35 px-3 py-1.5 text-sm font-medium text-green-45 transition-colors duration-200 hover:border-green-45/70 hover:bg-green-45/[0.06]"
+            theme="outlined-new"
+            className="shrink-0 px-3 py-1.5 text-sm font-medium"
           >
             Search endpoint index
-          </a>
+          </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-x-4 gap-y-4 md:grid-cols-2 sm:grid-cols-1">
         {resources.map(({ tag, display, count, description, href }) => (
-          <a
+          <Link
+            className="group flex flex-col gap-1 border border-gray-new-90 p-4 transition-colors duration-200 hover:border-gray-new-70 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10"
             key={tag}
             href={href}
-            className="group flex flex-col gap-1 border border-gray-new-90 p-4 transition-colors duration-200 hover:border-green-45/40 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:border-green-45/30 dark:hover:bg-gray-new-10"
           >
             <div className="flex items-baseline gap-2">
-              <span className="text-[15px] font-semibold text-black-pure transition-colors group-hover:text-green-45 dark:text-white dark:group-hover:text-green-45">
+              <span className="text-[15px] font-semibold text-black-pure transition-colors dark:text-white">
                 {display}
               </span>
               <span className="font-mono text-xs text-gray-new-50 dark:text-gray-new-60">
@@ -78,7 +82,7 @@ const ApiResourceGrid = () => {
             <p className="text-sm leading-snug text-gray-new-40 dark:text-gray-new-60">
               {description}
             </p>
-          </a>
+          </Link>
         ))}
       </div>
     </div>
