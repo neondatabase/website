@@ -33,6 +33,7 @@ const Modal = ({ id, title, description, destination, embedId }) => {
   }, []);
 
   const handleClose = () => {
+    sendGtagEvent('dismiss_docs_modal', { modal: id, destination: destination.url });
     setClosedModals((prevClosedModals) => [...prevClosedModals, id]);
   };
 
@@ -47,6 +48,14 @@ const Modal = ({ id, title, description, destination, embedId }) => {
       destination: destination.url,
     });
   };
+
+  // Fire an impression once the modal is eligible to show (mounted and not previously dismissed).
+  // Pairs with click_docs_modal_link as the denominator for click-through rate.
+  useEffect(() => {
+    if (isMounted && !isClosed) {
+      sendGtagEvent('view_docs_modal', { modal: id, destination: destination.url });
+    }
+  }, [isMounted, isClosed, id, destination.url]);
 
   return (
     <LazyMotion features={domAnimation}>
