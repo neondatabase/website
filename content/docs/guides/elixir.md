@@ -356,7 +356,57 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 
 > You can see that the book '1984' has been successfully deleted from the `books` table.
 
+### Using transactions
+
+The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction using `Postgrex.transaction/2`. If any operation inside the function fails, the entire transaction is rolled back automatically.
+
+```elixir title="transaction_example.exs"
+defmodule TransactionExample do
+  def run do
+    config = Application.get_all_env(:neon_elixir_quickstart)
+    {:ok, pid} = Postgrex.start_link(config)
+    IO.puts("Connection established")
+
+    try do
+      Postgrex.transaction(pid, fn conn ->
+        # Insert
+        Postgrex.query!(conn, "INSERT INTO books (title, author, publication_year) VALUES ($1, $2, $3)", ["Brave New World", "Aldous Huxley", 1932])
+        IO.puts("Inserted book.")
+
+        # Update
+        Postgrex.query!(conn, "UPDATE books SET in_stock = $1 WHERE title = $2", [false, "Brave New World"])
+        IO.puts("Updated stock status.")
+
+        IO.puts("Transaction committed successfully.")
+      end)
+    rescue
+      e in Postgrex.Error ->
+        IO.puts("Transaction failed and was rolled back.")
+        IO.inspect(e)
+    end
+  end
+end
+
+TransactionExample.run()
+```
+
+Run with:
+
+```bash
+mix run transaction_example.exs
+```
+
 </Steps>
+
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- The `ssl: [cacerts: :public_key.cacerts_get()]` option in the Postgrex configuration is mandatory. The connection to Neon will fail without it.
+- Use `Postgrex.transaction/2` to wrap related database operations. If any operation inside the transaction function fails, the entire transaction is rolled back automatically.
+- Always use parameterized queries (`$1`, `$2`, etc.) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings.
+- Do not hardcode credentials in `.ex` or `.exs` files. Store connection parameters in `config/config.exs` and keep that file out of version control. For more information, see [Security overview](/docs/security/security-overview).
+
+</details>
 
 ## Next steps: Using an ORM or framework
 

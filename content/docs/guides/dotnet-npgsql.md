@@ -423,6 +423,43 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 
 > You can see that the book '1984' has been successfully removed from the table.
 
+### Using transactions
+
+The examples above execute each operation independently. For production code where multiple operations must succeed or fail together, wrap them in a transaction using `BeginTransactionAsync`. If any operation fails, call `RollbackAsync` to undo all changes.
+
+```csharp
+await using var conn = new NpgsqlConnection(connectionString);
+await conn.OpenAsync();
+
+await using var transaction = await conn.BeginTransactionAsync();
+try
+{
+    await using (var cmd = new NpgsqlCommand("INSERT INTO books (title, author, publication_year) VALUES (@title, @author, @year)", conn, transaction))
+    {
+        cmd.Parameters.AddWithValue("title", "Brave New World");
+        cmd.Parameters.AddWithValue("author", "Aldous Huxley");
+        cmd.Parameters.AddWithValue("year", 1932);
+        await cmd.ExecuteNonQueryAsync();
+    }
+
+    await using (var cmd = new NpgsqlCommand("UPDATE books SET in_stock = @in_stock WHERE title = @title", conn, transaction))
+    {
+        cmd.Parameters.AddWithValue("in_stock", false);
+        cmd.Parameters.AddWithValue("title", "Brave New World");
+        await cmd.ExecuteNonQueryAsync();
+    }
+
+    await transaction.CommitAsync();
+    Console.WriteLine("Transaction committed successfully.");
+}
+catch (Exception e)
+{
+    await transaction.RollbackAsync();
+    Console.WriteLine($"Transaction rolled back: {e.Message}");
+    throw; // Re-throw to avoid silently swallowing errors
+}
+```
+
 ## Run the application
 
 To run the entire script, execute the following command from your project directory:
@@ -448,5 +485,16 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 - [Npgsql Documentation](https://www.npgsql.org/doc/index.html)
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)
 - [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
+
+<details>
+<summary>**Notes for AI-assisted setup**</summary>
+
+- Always use parameterized queries (`@param` placeholders) for INSERT, UPDATE, and DELETE operations. Never concatenate user input into SQL strings. This prevents SQL injection.
+- Wrap related database operations in a transaction (`BeginTransactionAsync` / `CommitAsync` / `RollbackAsync`). Always call `RollbackAsync` in the catch block and re-throw the exception with `throw;` to avoid silently swallowing errors.
+- Use `await using` for `NpgsqlConnection`, `NpgsqlCommand`, and `NpgsqlDataReader` to ensure resources are properly disposed.
+- This application uses `appsettings.json` for configuration, not a `.env` file. Do not create a `.env` file — it is not read by the application.
+- Do not hardcode credentials in `.cs` files or commit `appsettings.json` with real credentials to version control. In production, use environment variables or a secure secrets manager. For more information, see [Security overview](/docs/security/security-overview).
+
+</details>
 
 <NeedHelp/>
